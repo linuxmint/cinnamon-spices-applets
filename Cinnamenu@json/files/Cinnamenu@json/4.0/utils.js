@@ -15,23 +15,12 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-// Work around Cinnamon#8201
-const tryFn = function(callback, errCallback) {
-    try {
-        return callback();
-    } catch (e) {
-        if (typeof errCallback === 'function') {
-            return errCallback(e);
-        }
-    }
-};
-
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
 
 //===========================================================
 
 let onlyOneTooltip = null;
-var showTooltip = (actor, xpos, ypos, center_x, text) => {
+const showTooltip = (actor, xpos, ypos, center_x, text) => {
     if (onlyOneTooltip) {
         global.log("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
@@ -40,7 +29,7 @@ var showTooltip = (actor, xpos, ypos, center_x, text) => {
     onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
 };
 
-var hideTooltipIfVisible = () => {
+const hideTooltipIfVisible = () => {
     if (onlyOneTooltip) {
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
@@ -162,4 +151,4 @@ const searchStr = (q, str, quick = false) => {
     }
 };
 
-module.exports = {_, tryFn, wordWrap, showTooltip, hideTooltipIfVisible, searchStr};
+module.exports = {_, wordWrap, showTooltip, hideTooltipIfVisible, searchStr};
