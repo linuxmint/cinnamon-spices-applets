@@ -20,13 +20,13 @@ class IpApi {
         try {
             json = await this.app.LoadJsonAsync(this.query);
         }
-        catch(e) {
+        catch (e) {
             this.app.HandleHTTPError("ipapi", e, this.app);
             return null;
         }
 
         if (!json) {                         // Bad response
-            this.app.HandleError({type: "soft", detail: "no api response"});
+            this.app.HandleError({ type: "soft", detail: "no api response" });
             return null;
         }
 
@@ -36,7 +36,7 @@ class IpApi {
         }
 
         return this.ParseInformation(json);
-        
+
     };
 
     private ParseInformation(json: IpApiPayload): LocationData {
@@ -47,22 +47,23 @@ class IpApi {
                 city: json.city,
                 country: json.country,
                 timeZone: json.timezone,
-                mobile: json.mobile
+                mobile: json.mobile,
+                entryText: json.lat + "," + json.lon,
+                locationSource: "ip-api"
             }
             this.app.log.Debug("Location obtained:" + json.lat + "," + json.lon);
-            this.app.log.Debug("Location setting is now: " + this.app.config._location);
             return result;
         }
-        catch(e) {
+        catch (e) {
             this.app.log.Error("ip-api parsing error: " + e);
-            this.app.HandleError({type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location")});
+            this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return null;
         }
     };
 
     HandleErrorResponse(json: any): void {
-        this.app.HandleError({type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi"})
-        this.app.log.Error("ip-api responds with Error: " + json.reason);       
+        this.app.HandleError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
+        this.app.log.Error("ip-api responds with Error: " + json.reason);
     };
 };
 
@@ -81,10 +82,10 @@ interface IpApiPayload {
     org?: string;
     as?: string;
     query?: string;
-    mobile:boolean;
+    mobile: boolean;
     /** exists on error */
     message?: ipapiMessage;
 }
 
 type ipapiStatus = "success" | "fail";
-type ipapiMessage = "private ranger" | "resevered range" | "invalid query";
+type ipapiMessage = "private ranger" | "reserved range" | "invalid query";

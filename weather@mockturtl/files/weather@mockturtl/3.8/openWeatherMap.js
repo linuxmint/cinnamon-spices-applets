@@ -8,31 +8,29 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var isID = utils.isID;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var get = utils.get;
 class OpenWeatherMap {
     constructor(_app) {
+        this.prettyName = "OpenWeatherMap";
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+        ];
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
-    async GetWeather() {
-        let query = this.ConstructQuery(this.base_url);
+    async GetWeather(loc) {
+        let query = this.ConstructQuery(this.base_url, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }
@@ -41,7 +39,11 @@ class OpenWeatherMap {
                 return null;
             }
             if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
+                this.app.HandleError({
+                    type: "soft",
+                    detail: "no api response",
+                    service: "openweathermap"
+                });
                 return null;
             }
             return this.ParseWeather(json, this);
@@ -59,7 +61,7 @@ class OpenWeatherMap {
                     lon: json.lon
                 },
                 location: {
-                    url: null,
+                    url: "https://openweathermap.org/city/",
                     timeZone: json.timezone
                 },
                 date: new Date((json.current.dt) * 1000),
@@ -79,14 +81,14 @@ class OpenWeatherMap {
                     customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness"),
-                    value: json.current.clouds,
-                    type: "percent"
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
                 },
                 forecasts: []
             };
             let forecasts = [];
-            for (let i = 0; i < self.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.length; i++) {
                 let day = json.daily[i];
                 let forecast = {
                     date: new Date(day.dt * 1000),
@@ -102,43 +104,59 @@ class OpenWeatherMap {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
+            let hourly = [];
+            for (let index = 0; index < json.hourly.length; index++) {
+                const hour = json.hourly[index];
+                let forecast = {
+                    date: new Date(hour.dt * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather[0].main,
+                        description: hour.weather[0].description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+                    },
+                };
+                if (!!hour.rain) {
+                    forecast.precipitation = {
+                        volume: hour.rain["1h"],
+                        type: "rain"
+                    };
+                }
+                if (!!hour.snow) {
+                    forecast.precipitation = {
+                        volume: hour.snow["1h"],
+                        type: "snow"
+                    };
+                }
+                if (!!hour.pop && forecast.precipitation)
+                    forecast.precipitation.chance = hour.pop * 100;
+                hourly.push(forecast);
+            }
+            weather.hourlyForecasts = hourly;
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.HandleError({
+                type: "soft",
+                service: "openweathermap",
+                detail: "unusual payload",
+                message: _("Failed to Process Current Weather Info")
+            });
             return null;
         }
     }
     ;
-    ConstructQuery(baseUrl) {
+    ConstructQuery(baseUrl, loc) {
         let query = baseUrl;
-        let locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+        query += "1c73f8259a86c6fd43c7163b543c8640";
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            query = query + "&lang=" + locale;
         }
-        this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
-        this.app.log.Error("OpenWeatherMap: No Location was provided");
-        return null;
-    }
-    ;
-    ParseLocation() {
-        let loc = this.app.config._location.replace(/ /g, "");
-        if (isCoordinate(loc)) {
-            let locArr = loc.split(',');
-            return "lat=" + locArr[0] + "&lon=" + locArr[1];
-        }
-        else if (isID(loc)) {
-            return "id=" + loc;
-        }
-        else
-            return "q=" + loc;
+        return query;
     }
     ;
     ConvertToAPILocale(systemLocale) {
@@ -164,7 +182,7 @@ class OpenWeatherMap {
         return lang;
     }
     HandleResponseErrors(json) {
-        let errorMsg = "OpenWeathermap Response: ";
+        let errorMsg = "OpenWeatherMap Response: ";
         let error = {
             service: "openweathermap",
             type: "hard",
@@ -209,43 +227,43 @@ class OpenWeatherMap {
     ResolveIcon(icon) {
         switch (icon) {
             case "10d":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "10n":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "09n":
-                return [icons.showers];
+                return ["weather-showers"];
             case "09d":
-                return [icons.showers];
+                return ["weather-showers"];
             case "13d":
-                return [icons.snow];
+                return ["weather-snow"];
             case "13n":
-                return [icons.snow];
+                return ["weather-snow"];
             case "50d":
-                return [icons.fog];
+                return ["weather-fog"];
             case "50n":
-                return [icons.fog];
+                return ["weather-fog"];
             case "04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "03n":
-                return ['weather-clouds-night', icons.few_clouds_night];
+                return ['weather-clouds-night', "weather-few-clouds-night"];
             case "03d":
-                return [icons.clouds, icons.overcast, icons.few_clouds_day];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "02n":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "02d":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "01n":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "01d":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "11d":
-                return [icons.storm];
+                return ["weather-storm"];
             case "11n":
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;

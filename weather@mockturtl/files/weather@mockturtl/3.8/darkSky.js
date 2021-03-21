@@ -8,21 +8,22 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
-var icons = utils.icons;
+var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 class DarkSky {
     constructor(_app) {
+        this.prettyName = "DarkSky";
+        this.name = "DarkSky";
+        this.maxForecastSupport = 8;
+        this.website = "https://darksky.net/poweredby/";
+        this.maxHourlyForecastSupport = 168;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -31,20 +32,19 @@ class DarkSky {
             'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
         ];
         this.query = "https://api.darksky.net/forecast/";
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = null;
         this.app = _app;
     }
-    async GetWeather() {
-        let query = this.ConstructQuery();
+    async GetWeather(loc) {
+        let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
-            this.app.log.Debug("DarkSky API query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
-                this.app.HandleHTTPError("darksky", e, this.app, this.HandleHTTPError);
+                this.app.HandleHTTPError("darksky", e, this.app);
                 return null;
             }
             if (!json) {
@@ -96,9 +96,10 @@ class DarkSky {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             };
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
                 let forecast = {
                     date: new Date(day.time * 1000),
@@ -114,11 +115,30 @@ class DarkSky {
                 forecast.date.setHours(forecast.date.getHours() + 12);
                 result.forecasts.push(forecast);
             }
+            for (let i = 0; i < json.hourly.data.length; i++) {
+                let hour = json.hourly.data[i];
+                let forecast = {
+                    date: new Date(hour.time * 1000),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipitation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
+            }
             return result;
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -130,11 +150,10 @@ class DarkSky {
         let lang = systemLocale.split("-")[0];
         return lang;
     }
-    ConstructQuery() {
+    ConstructQuery(loc) {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -145,22 +164,34 @@ class DarkSky {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     }
-    ;
+    OnObtainingData(message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
     HandleResponseErrors(json) {
         let code = json.code;
         let error = json.error;
@@ -176,15 +207,6 @@ class DarkSky {
         }
     }
     ;
-    HandleHTTPError(error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    }
     ProcessSummary(summary) {
         let processed = summary.split(" ");
         let result = "";
@@ -202,13 +224,17 @@ class DarkSky {
     ;
     GetShortSummary(summary) {
         let processed = summary.split(" ");
-        let result = "";
-        for (let i = 0; i < 2; i++) {
+        if (processed.length == 1)
+            return processed[0];
+        let result = [];
+        for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result = result + processed[i] + " ";
+                result.push(processed[i]) + " ";
             }
+            if (result.length == 2)
+                break;
         }
-        return result;
+        return result.join(" ");
     }
     ;
     GetShortCurrentSummary(summary) {
@@ -226,42 +252,34 @@ class DarkSky {
     WordBanned(word) {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
-    IsNight(sunTimes) {
-        if (!sunTimes)
-            return false;
-        let now = new Date();
-        if (now < sunTimes.sunrise || now > sunTimes.sunset)
-            return true;
-        return false;
-    }
-    ResolveIcon(icon, sunTimes) {
+    ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "snow":
-                return [icons.snow];
+                return ["weather-snow"];
             case "sleet":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case "fog":
-                return [icons.fog];
+                return ["weather-fog"];
             case "wind":
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case "cloudy":
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "partly-cloudy-night":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "partly-cloudy-day":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "clear-night":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "clear-day":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "storm":
-                return [icons.storm];
+                return ["weather-storm"];
             case "showers":
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;
@@ -294,8 +312,8 @@ class DarkSky {
         }
     }
     SetQueryUnit() {
-        if (this.app.config._temperatureUnit == "celsius") {
-            if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
+        if (this.app.config.TemperatureUnit() == "celsius") {
+            if (this.app.config.WindSpeedUnit() == "kph" || this.app.config.WindSpeedUnit() == "m/s") {
                 this.unit = 'si';
             }
             else {

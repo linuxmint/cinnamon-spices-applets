@@ -158,8 +158,8 @@
         "keys": [
           "diskread_enable_graph",
           "diskread_size",
+          "diskread_device_name",
           "diskread_use_custom_label",
-          "diskread_mount_dir",
           "diskread_custom_label",
           "diskread_show_detail_label"
         ]
@@ -170,8 +170,8 @@
         "keys": [
           "diskwrite_enable_graph",
           "diskwrite_size",
+          "diskwrite_device_name",
           "diskwrite_use_custom_label",
-          "diskwrite_mount_dir",
           "diskwrite_custom_label",
           "diskwrite_show_detail_label"
         ]
@@ -563,19 +563,20 @@
         "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "diskread_enable_graph"
     },
+    "diskread_device_name": {
+      "type": "combobox",
+      "default": "none",
+      "options": {"Select a device": "none"},
+      "description": "Set the device to monitor for the DISK (read) graph.",
+      "tooltip": "Set the device to monitor for the DISK (read) graph.",
+      "dependency": "diskread_enable_graph"
+    },
     "diskread_use_custom_label": {
         "type": "checkbox",
         "default": false,
         "description": "Use custom graph label.",
         "tooltip": "Choose your own label for the DISK (read) graph.",
         "dependency": "diskread_enable_graph"
-    },
-    "diskread_mount_dir": {
-      "type": "entry",
-      "default": "/",
-      "description": "Set the mount dir to monitor for the DISK (read) graph.",
-      "tooltip": "Set the mount dir to monitor for the DISK (read) graph. By default it monitors the root drive (/), but you could change it to monitor another drive by setting it to for example /mnt/another_drive.",
-      "dependency": "diskread_enable_graph"
     },
     "diskread_custom_label": {
         "type": "entry",
@@ -607,11 +608,12 @@
         "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "diskwrite_enable_graph"
     },
-    "diskwrite_mount_dir": {
-      "type": "entry",
-      "default": "/",
-      "description": "Set the mount dir to monitor for the DISK (write) graph.",
-      "tooltip": "Set the mount dir to monitor for the DISK (write) graph. By default it monitors the root drive (/), but you could change it to monitor another drive by setting it to for example /mnt/another_drive.",
+    "diskwrite_device_name": {
+      "type": "combobox",
+      "default": "none",
+      "options": {"Select a device": "none"},
+      "description": "Set the device to monitor for the DISK (write) graph.",
+      "tooltip": "Set the device to monitor for the DISK (write) graph.",
       "dependency": "diskwrite_enable_graph"
     },
     "diskwrite_use_custom_label": {

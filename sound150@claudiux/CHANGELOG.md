@@ -1,7 +1,13 @@
 ## CHANGELOG
+
+### v2.0.0~20200731
+  * New code for Cinnamon 4.4 (Mint 19.3) and Cinnamon 4.6 (Mint 20).
+  * During volume slider dragging, a tooltip containing the value of the volume percentage is shown.
+  * Now use Cinnamon Settings to set amplification (ie change the value of maximum volume).
+  * The @Rodrigo-Barros patch to show Spotify-Player album art is now included! Many thanks to him!
+
 ### v1.5.1
  * Fixes a typo.
-
 ### v1.5.0
  * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
 

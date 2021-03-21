@@ -44,19 +44,19 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
+var GetFuncName = utils.GetFuncName;
+var _ = utils._;
 var Weatherbit = (function () {
     function Weatherbit(_app) {
-        this.descriptionLinelength = 25;
+        this.prettyName = "WeatherBit";
+        this.name = "Weatherbit";
+        this.maxForecastSupport = 16;
+        this.website = "https://www.weatherbit.io/";
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -65,48 +65,57 @@ var Weatherbit = (function () {
         ];
         this.current_url = "https://api.weatherbit.io/v2.0/current?";
         this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.unit = null;
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.hourlyAccess = true;
         this.app = _app;
     }
-    Weatherbit.prototype.GetWeather = function () {
+    Weatherbit.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
-            var currentResult, forecastResult;
+            var forecastPromise, hourlyPromise, currentResult, forecastResult, hourlyResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.GetData(this.current_url, this.ParseCurrent)];
+                    case 0:
+                        forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+                        hourlyPromise = null;
+                        if (!!this.hourlyAccess)
+                            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
+                        return [4, this.GetData(this.current_url, loc, this.ParseCurrent)];
                     case 1:
                         currentResult = _a.sent();
                         if (!currentResult)
                             return [2, null];
-                        return [4, this.GetData(this.daily_url, this.ParseForecast)];
+                        return [4, forecastPromise];
                     case 2:
                         forecastResult = _a.sent();
-                        currentResult.forecasts = forecastResult;
+                        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+                        return [4, hourlyPromise];
+                    case 3:
+                        hourlyResult = _a.sent();
+                        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
                         return [2, currentResult];
                 }
             });
         });
     };
     ;
-    Weatherbit.prototype.GetData = function (baseUrl, ParseFunction) {
+    Weatherbit.prototype.GetData = function (baseUrl, loc, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(baseUrl);
+                        query = this.ConstructQuery(baseUrl, loc);
                         if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
-                        this.app.HandleHTTPError("weatherbit", e_1, this.app, this.HandleHTTPError);
+                        this.app.HandleHTTPError("weatherbit", e_1, this.app);
                         return [2, null];
                     case 4:
                         if (json == null) {
@@ -120,8 +129,47 @@ var Weatherbit = (function () {
         });
     };
     ;
+    Weatherbit.prototype.GetHourlyData = function (baseUrl, loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, json, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = this.ConstructQuery(baseUrl, loc);
+                        if (!(query != null)) return [3, 5];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.app.LoadJsonAsync(query, null, false)];
+                    case 2:
+                        json = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_2 = _a.sent();
+                        if (e_2.code == 403) {
+                            this.app.log.Print("Hourly forecast is inaccessible, skipping");
+                            this.hourlyAccess = false;
+                            return [2, null];
+                        }
+                        this.app.HandleHTTPError("weatherbit", e_2, this.app);
+                        return [2, null];
+                    case 4:
+                        if (json == null) {
+                            this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
+                            return [2, null];
+                        }
+                        return [2, this.ParseHourlyForecast(json, this)];
+                    case 5: return [2, null];
+                }
+            });
+        });
+    };
+    ;
     Weatherbit.prototype.ParseCurrent = function (json, self) {
         json = json.data[0];
+        var hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
+        if (hourDiff != 0)
+            self.app.log.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
         try {
             var weather = {
                 coord: {
@@ -135,8 +183,8 @@ var Weatherbit = (function () {
                     timeZone: json.timezone
                 },
                 date: new Date(json.ts * 1000),
-                sunrise: self.TimeToDate(json.sunrise),
-                sunset: self.TimeToDate(json.sunset),
+                sunrise: self.TimeToDate(json.sunrise, hourDiff),
+                sunset: self.TimeToDate(json.sunset, hourDiff),
                 wind: {
                     speed: json.wind_spd,
                     degree: json.wind_dir
@@ -161,7 +209,7 @@ var Weatherbit = (function () {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
@@ -169,7 +217,7 @@ var Weatherbit = (function () {
     Weatherbit.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
-            for (var i = 0; i < self.app.config._forecastDays; i++) {
+            for (var i = 0; i < json.data.length; i++) {
                 var day = json.data[i];
                 var forecast = {
                     date: new Date(day.ts * 1000),
@@ -188,17 +236,60 @@ var Weatherbit = (function () {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     };
     ;
-    Weatherbit.prototype.TimeToDate = function (time) {
+    Weatherbit.prototype.ParseHourlyForecast = function (json, self) {
+        var forecasts = [];
+        try {
+            for (var i = 0; i < json.data.length; i++) {
+                var hour = json.data[i];
+                var forecast = {
+                    date: new Date(hour.ts * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather.description,
+                        description: hour.weather.description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather.icon)
+                    },
+                    precipitation: {
+                        type: "rain",
+                        volume: hour.precip,
+                        chance: hour.pop
+                    }
+                };
+                if (hour.snow != 0) {
+                    forecast.precipitation.type = "snow";
+                    forecast.precipitation.volume = hour.snow;
+                }
+                forecasts.push(forecast);
+            }
+            return forecasts;
+        }
+        catch (e) {
+            self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+            return null;
+        }
+    };
+    Weatherbit.prototype.TimeToDate = function (time, hourDiff) {
         var hoursMinutes = time.split(":");
         var date = new Date();
-        date.setHours(parseInt(hoursMinutes[0]));
+        date.setHours(parseInt(hoursMinutes[0]) - hourDiff);
         date.setMinutes(parseInt(hoursMinutes[1]));
         return date;
+    };
+    Weatherbit.prototype.HourDifference = function (correctTime, incorrectTime) {
+        return Math.round((incorrectTime.getTime() - correctTime.getTime()) / (1000 * 60 * 60));
+    };
+    Weatherbit.prototype.ParseStringTime = function (last_ob_time) {
+        var split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5)
+            return null;
+        return new Date(parseInt(split[0]), parseInt(split[1]) - 1, parseInt(split[2]), parseInt(split[3]), parseInt(split[4]));
     };
     Weatherbit.prototype.ConvertToAPILocale = function (systemLocale) {
         if (systemLocale == "zh-tw") {
@@ -210,9 +301,8 @@ var Weatherbit = (function () {
         }
         return lang;
     };
-    Weatherbit.prototype.ConstructQuery = function (query) {
+    Weatherbit.prototype.ConstructQuery = function (query, loc) {
         var key = this.app.config._apiKey.replace(" ", "");
-        var location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -223,30 +313,25 @@ var Weatherbit = (function () {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            var latLong = location.split(",");
-            query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
-            var lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + lang;
-            }
-            return query;
+        query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+        var lang = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + lang;
         }
-        else {
-            this.app.log.Error("Weatherbit: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "weatherbit", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     };
     ;
-    Weatherbit.prototype.HandleHTTPError = function (error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
+    Weatherbit.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
         }
-        return uiError;
+        return null;
     };
     Weatherbit.prototype.ResolveIcon = function (icon) {
         switch (icon) {
@@ -260,14 +345,14 @@ var Weatherbit = (function () {
             case "t04d":
             case "t05n":
             case "t05d":
-                return [icons.storm];
+                return ["weather-storm"];
             case "d01d":
             case "d01n":
             case "d02d":
             case "d02n":
             case "d03d":
             case "d03n":
-                return [icons.showers_scattered, icons.rain, icons.rain_freezing];
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
             case "r01d":
             case "r01n":
             case "r02d":
@@ -280,7 +365,7 @@ var Weatherbit = (function () {
             case "r05n":
             case "r06d":
             case "r06n":
-                return [icons.rain, icons.rain_freezing, icons.showers_scattered];
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
             case "s01d":
             case "s01n":
             case "s02d":
@@ -291,10 +376,10 @@ var Weatherbit = (function () {
             case "s04n":
             case "s06d":
             case "s06n":
-                return [icons.snow];
+                return ["weather-snow"];
             case "s05d":
             case "s05n":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case "a01d":
             case "a01n":
             case "a02d":
@@ -307,28 +392,28 @@ var Weatherbit = (function () {
             case "a05n":
             case "a06d":
             case "a06n":
-                return [icons.fog];
+                return ["weather-fog"];
             case "c02d":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "c02n":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "c01n":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "c01d":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "c03d":
-                return [icons.clouds, icons.few_clouds_day, icons.overcast];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "c03n":
-                return [icons.clouds, icons.few_clouds_night, icons.overcast];
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
             case "c04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_night];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "c04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "u00d":
             case "u00n":
-                return [icons.alert];
+                return ["weather-severe-alert"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     };
     ;

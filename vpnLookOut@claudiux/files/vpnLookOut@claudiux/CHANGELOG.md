@@ -1,5 +1,9 @@
 ## Changelog
 
+### 3.5.1~20200810
+  * Fixes a minor bug.
+  * Now can detect usage of Wireguard (but not manage it).
+
 ### 3.5.0~20191218
   * Some bug fixes and code cleanup. See [issue 8914](https://github.com/linuxmint/cinnamon/issues/8914) - Many thanks to @Odyseus and @collinss !
 

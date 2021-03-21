@@ -1,5 +1,5 @@
 {
-    "multiversion": true, 
+    "multiversion": true,
     "cinnamon-version": [
         "3.2", 
         "3.4", 
@@ -7,11 +7,12 @@
         "3.8", 
         "4.0", 
         "4.2", 
-        "4.4"
-    ], 
-    "max-instances": "-1", 
-    "description": "Displaying realtime system information (CPU, memory, network and disk load).", 
-    "uuid": "hwmonitor@sylfurd", 
-    "version": "1.2.1", 
+        "4.4",
+        "4.6"
+    ],
+    "max-instances": "-1",
+    "description": "Displaying realtime system information (CPU, memory, network and disk load).",
+    "uuid": "hwmonitor@sylfurd",
+    "version": "1.3.1",
     "name": "Graphical hardware monitor"
 }

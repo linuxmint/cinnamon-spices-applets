@@ -1,0 +1,508 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "General",
+      "Applets",
+      "Desklets",
+      "Extensions",
+      "Themes"
+    ],
+    "Applets": {
+      "type": "page",
+      "title": "Applets",
+      "sections": [
+        "section_applets1",
+        "section_applets2"
+      ]
+    },
+    "Desklets": {
+      "type": "page",
+      "title": "Desklets",
+      "sections": [
+        "section_desklets1",
+        "section_desklets2"
+      ]
+    },
+    "Extensions": {
+      "type": "page",
+      "title": "Extensions",
+      "sections": [
+        "section_extensions1",
+        "section_extensions2"
+      ]
+    },
+    "Themes": {
+      "type": "page",
+      "title": "Themes",
+      "sections": [
+        "section_themes1",
+        "section_themes2"
+      ]
+    },
+    "General": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "section_general1",
+        "section_general2",
+        "section_general3",
+        "section_general4"
+      ]
+    },
+    "section_applets1": {
+      "type": "section",
+      "title": "Checking",
+      "keys": [
+        "check_applets",
+        "check_new_applets"
+      ]
+    },
+    "section_applets2": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "exp_applets",
+        "unprotected_applets",
+        "btn_refresh_applets",
+        "btn_cs_applets"
+      ]
+    },
+    "section_desklets1": {
+      "type": "section",
+      "title": "Checking",
+      "keys": [
+        "check_desklets",
+        "check_new_desklets"
+      ]
+    },
+    "section_desklets2": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "exp_desklets",
+        "unprotected_desklets",
+        "btn_refresh_desklets",
+        "btn_cs_desklets"
+      ]
+    },
+    "section_extensions1": {
+      "type": "section",
+      "title": "Checking",
+      "keys": [
+        "check_extensions",
+        "check_new_extensions"
+      ]
+    },
+    "section_extensions2": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "exp_extensions",
+        "unprotected_extensions",
+        "btn_refresh_extensions",
+        "btn_cs_extensions"
+      ]
+    },
+    "section_themes1": {
+      "type": "section",
+      "title": "Checking",
+      "keys": [
+        "check_themes",
+        "check_new_themes"
+      ]
+    },
+    "section_themes2": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "exp_themes",
+        "unprotected_themes",
+        "btn_refresh_themes",
+        "btn_cs_themes"
+      ]
+    },
+    "section_general1": {
+      "type": "section",
+      "title": "Frequency",
+      "keys": [
+        "general_frequency",
+        "general_first_check"
+      ]
+    },
+    "section_general2": {
+      "type": "section",
+      "title": "Notifications",
+      "keys": [
+        "general_warning",
+        "events_color",
+        "general_notifications"
+      ]
+    },
+
+    "section_general3": {
+      "type": "section",
+      "title": "Notification contents",
+      "dependency": "general_notifications",
+      "keys": [
+        "general_details_requested",
+        "general_type_notif",
+        "general_show_updateall_button",
+        "general_test_notif"
+      ]
+    },
+    "section_general4": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "general_hide",
+        "tooltip_max_width_screen_percentage"
+      ]
+    }
+  },
+  "check_applets": {
+    "type": "switch",
+    "default": true,
+    "description": "Check regularly whether your applets are up to date",
+    "tooltip": "If applets updates do not concern you, uncheck this box."
+  },
+  "check_new_applets": {
+    "type": "switch",
+    "default": false,
+    "dependency": "check_applets",
+    "description": "Check regularly whether new applets are available",
+    "tooltip": "If new applets do not concern you, uncheck this box."
+  },
+  "exp_applets": {
+    "type": "textview",
+    "default": "",
+    "description": "",
+    "height": 60
+  },
+  "btn_refresh_applets": {
+    "type": "button",
+    "description": "Refresh",
+    "callback": "on_btn_refresh_applets_pressed"
+  },
+  "unprotected_applets": {
+    "type": "list",
+    "description": "Update these applets:",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Your Applets",
+        "type": "string"
+      },
+      {
+        "id": "isunprotected",
+        "title": "Check for updates?",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "requestnewdownload",
+        "title": "Get the latest version now",
+        "align": 0.5,
+        "type": "boolean"
+      }
+    ],
+    "default": [
+
+    ],
+    "show-buttons": false
+  },
+  "btn_cs_applets": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Applets",
+    "callback": "on_btn_cs_applets_pressed"
+  },
+  "was_empty_applets":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "check_desklets": {
+    "type": "switch",
+    "default": false,
+    "description": "Check regularly whether your desklets are up to date",
+    "tooltip": "If desklets updates do not concern you, uncheck this box."
+  },
+  "check_new_desklets": {
+    "type": "switch",
+    "default": false,
+    "dependency": "check_desklets",
+    "description": "Check regularly whether new desklets are available",
+    "tooltip": "If new desklets do not concern you, uncheck this box."
+  },
+  "exp_desklets": {
+    "type": "textview",
+    "default": "",
+    "description": "",
+    "height": 60
+  },
+  "btn_refresh_desklets": {
+    "type": "button",
+    "description": "Refresh",
+    "callback": "on_btn_refresh_desklets_pressed"
+  },
+  "unprotected_desklets": {
+    "type": "list",
+    "description": "Update these desklets:",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Your Desklets",
+        "type": "string"
+      },
+      {
+        "id": "isunprotected",
+        "title": "Check for updates?",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "requestnewdownload",
+        "title": "Get the latest version now",
+        "align": 0.5,
+        "type": "boolean"
+      }
+    ],
+    "default": [
+
+    ],
+    "show-buttons": false
+  },
+  "btn_cs_desklets": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Desklets",
+    "callback": "on_btn_cs_desklets_pressed"
+  },
+  "was_empty_desklets":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "check_extensions": {
+    "type": "switch",
+    "default": false,
+    "description": "Check regularly whether your extensions are up to date",
+    "tooltip": "If extensions updates do not concern you, uncheck this box."
+  },
+  "check_new_extensions": {
+    "type": "switch",
+    "default": false,
+    "dependency": "check_extensions",
+    "description": "Check regularly whether new extensions are available",
+    "tooltip": "If new extensions do not concern you, uncheck this box."
+  },
+  "exp_extensions": {
+    "type": "textview",
+    "default": "",
+    "description": "",
+    "height": 60
+  },
+  "btn_refresh_extensions": {
+    "type": "button",
+    "description": "Refresh",
+    "callback": "on_btn_refresh_extensions_pressed"
+  },
+  "unprotected_extensions": {
+    "type": "list",
+    "description": "Update these extensions:",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Your Extensions",
+        "type": "string"
+      },
+      {
+        "id": "isunprotected",
+        "title": "Check for updates?",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "requestnewdownload",
+        "title": "Get the latest version now",
+        "align": 0.5,
+        "type": "boolean"
+      }
+    ],
+    "default": [
+
+    ],
+    "show-buttons": false
+  },
+  "btn_cs_extensions": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Extensions",
+    "callback": "on_btn_cs_extensions_pressed"
+  },
+  "was_empty_extensions":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "check_themes": {
+    "type": "switch",
+    "default": false,
+    "description": "Check regularly whether your themes are up to date",
+    "tooltip": "If themes updates do not concern you, uncheck this box."
+  },
+  "check_new_themes": {
+    "type": "switch",
+    "default": false,
+    "dependency": "check_themes",
+    "description": "Check regularly whether new themes are available",
+    "tooltip": "If new themes do not concern you, uncheck this box."
+  },
+  "exp_themes": {
+    "type": "textview",
+    "default": "",
+    "description": "",
+    "height": 60
+  },
+  "btn_refresh_themes": {
+    "type": "button",
+    "description": "Refresh",
+    "callback": "on_btn_refresh_themes_pressed"
+  },
+  "unprotected_themes": {
+    "type": "list",
+    "description": "Update these themes:",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Your Themes",
+        "type": "string"
+      },
+      {
+        "id": "isunprotected",
+        "title": "Check for updates?",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "requestnewdownload",
+        "title": "Get the latest version now",
+        "align": 0.5,
+        "type": "boolean"
+      }
+    ],
+    "default": [
+
+    ],
+    "show-buttons": false
+  },
+  "btn_cs_themes": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Themes",
+    "callback": "on_btn_cs_themes_pressed"
+  },
+  "was_empty_themes":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "general_frequency": {
+    "type": "scale",
+    "default": 1,
+    "min": 1,
+    "max": 720,
+    "step": 1,
+    "units": "hours",
+    "description": "Time interval between two checks",
+    "tooltip": "Min value: 1 hour. Max value: 720 hours (30 days)."
+  },
+  "general_first_check": {
+    "type": "switch",
+    "default": true,
+    "description": "Make a first check one minute after starting",
+    "tooltip": "By checking this box, the first check will take place one minute after starting this applet."
+  },
+  "general_next_check_date": {
+    "type": "generic",
+    "value": 0,
+    "default": 0
+  },
+  "general_warning": {
+    "type": "switch",
+    "default": true,
+    "description": "Notify me by changing the icon when Spices need an update",
+    "tooltip": "By checking this box, you allow this applet to modify its icon to warn you when at least one of the Spices requires an update."
+  },
+  "events_color": {
+    "type": "colorchooser",
+    "default": "#eb9122",
+    "dependency": "general_warning",
+    "description": "The icon color when Spices need an update",
+    "tooltip": "Click the button to select another color."
+  },
+  "general_notifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Show notification messages about Spices updates",
+    "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
+  },
+  "general_details_requested": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the description of each update or new Spice",
+    "tooltip": "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
+  },
+  "general_force_notifications": {
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "general_type_notif": {
+    "type": "combobox",
+    "default": "minimal",
+    "options": {
+      "Minimal (text only)": "minimal",
+      "With action buttons": "button",
+      "With action buttons as icons": "iconic"
+    },
+    "description": "Notification style",
+    "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith action buttons:\n\tNotifications also contain some buttons which have these roles:\n\t\tThe leftmost button opens the Download tab in System Settings for the concerned Spices, which are sorted by date (most recent first). So you can update the Spices you want.\n\t\tThe rightmost button refreshes the cache and notifications, if necessary.\n\t\tOptionally, a central button allows you to forget new spices or update the installed ones, depending on the case."
+  },
+  "general_show_updateall_button": {
+    "type": "switch",
+    "default": false,
+    "dependency": "general_type_notif!=minimal",
+    "description": "Show the 'Update Now' button in notifications",
+    "tooltip": "By checking this box, a button 'Update All' appears in notifications.\nBy pressing this button:\n 1. The Download tab of the System Settings concerning this type of Spices appears.\n 2. The cache is updated.\n 3. Your Spices are updated.\n 4. When all updates are made, just close the window."
+  },
+  "general_test_notif": {
+    "type": "button",
+    "dependency": "general_notifications",
+    "description": "Send a fake notification to test the style",
+    "callback": "on_btn_test_notif_pressed"
+  },
+  "displayType": {
+    "type": "generic",
+    "default": "compact",
+    "value": "compact"
+  },
+  "general_hide": {
+    "type": "switch",
+    "default": false,
+    "description": "Hide the icon as long as nothing is to report",
+    "tooltip": "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+  },
+  "tooltip_max_width_screen_percentage": {
+    "type": "scale",
+    "default": 25,
+    "min": 20,
+    "max": 80,
+    "step": 1,
+    "units": "% of screen width",
+    "description": "Tooltip: Maximum width",
+    "tooltip": "What is the maximum percentage of your screen width that the tooltip can occupy?"
+  },
+  "first_time": {
+    "type": "generic",
+    "value": true,
+    "default": true
+  }
+}

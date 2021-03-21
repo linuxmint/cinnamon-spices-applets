@@ -1,0 +1,17 @@
+.SU-number-label {
+    z-index: 99;
+    /*text-shadow: black 1px 1px 2px;
+    font-size: 11px;
+    color:#fff;
+    background-color: #000000;*/
+    padding: 0px;
+    /*border-radius: 256px;*/
+}
+.SU-badge {
+    /*border-radius: 256px;
+    background-color: #000000;*/
+    margin: 0px;
+}
+.SU-notification-applet-container {
+    max-height: 500px;
+}

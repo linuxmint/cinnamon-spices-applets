@@ -1,17 +1,14 @@
 # &#65279; ![CinnVIIStarkMenu Logo](https://git.io/vDWaq) CinnVIIStarkMenu
 
-#### Compatible Cinnamon Versions:
-&#10004; Cinnamon-Version 4.2 (Linux Mint 19.2) <br />
-&#10004; Cinnamon-Version 4.0 (Linux Mint 19.1) <br />
-&#10004; Cinnamon-Version 3.8 (Linux Mint 19)   <br />
-&#10004; Cinnamon-Version 3.6 (Linux Mint 18.3) <br />
-&#10004; Cinnamon-Version 3.4 (Linux Mint 18.2) <br />
-&#10004; Cinnamon-Version 3.2 (Linux Mint 18.1) <br />
-&#10004; Cinnamon-Version 3.0 (Linux Mint 18)   <br />
-&#10004; Cinnamon-Version 2.8 (Linux Mint 17.3) <br />
-&#10004; Cinnamon-Version 2.6 (Linux Mint 17.2) <br />
+#### Compatibility:
+
+Tested             |&#10060;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|
+:-----------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Cinnamon-Version   | 4.6    | 4.4    | 4.2    | 4.0    | 3.8    | 3.6    | 3.4    | 3.2    | 3.0    | 2.8    | 2.6    |
+Linux Mint-Version | 20     | 19.3   | 19.2   | 19.1   | 19     | 18.3   | 18.2   | 18.1   | 18     | 17.3   | 17.2   |
 
 #### Preview:
+
 Click on the image below to see a review video of CinnVIIStarkMenu (previous: CinnXPStarkMenu) by [Big Daddy](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg):
 
 [![Review of CinnXPStarkMenu by Big Daddy](https://cloud.githubusercontent.com/assets/8415124/20908908/6d108a24-bb58-11e6-8d88-112f7250d630.png)](https://www.youtube.com/watch?v=OmUpLNsWgC4)

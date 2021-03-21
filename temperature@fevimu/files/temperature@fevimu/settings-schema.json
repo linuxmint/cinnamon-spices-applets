@@ -22,6 +22,19 @@
     "tooltip": "Whether or not show the unit letter (C or F).",
     "dependency": "show-unit"
   },
+  "show-label-prefix": {
+    "type": "switch",
+    "default": false,
+    "description": "Show label prefix",
+    "tooltip": "Whether or not to add a label before the temperature value."
+  },
+  "label-prefix": {
+    "type": "entry",
+    "default": "🌡",
+    "description": "Label prefix",
+    "tooltip": "The label to be shown before the temperature value.",
+    "dependency": "show-label-prefix"
+  },
   "interval": {
     "type": "spinbutton",
     "default": 5000,

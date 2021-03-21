@@ -1,66 +1,50 @@
-.cinnamenu-menu-top-pane {
-    spacing: 15px;
-}
+/*css nodes used by Cinnamenu
+-----------------------------
+---session/favorites box--------------------
+.menu-favorites-box (or none dependant on user options)
+.menu-favorites-scrollbox and vfade
+.menu-favorites-button
+.menu-favorites-button:hover
+---search box-----------------------------
+.menu-search-entry-icon
+.menu-search-box
+.menu-search-entry
+---categories box-------------------------
+.menu-categories-box
+.menu-categories-scrollbox and .vfade
+.menu-category-button
+.menu-category-button-label
+.menu-category-button-selected
+.menu-category-button-greyed
+.menu-category-button-hover (or .menu-category-button-selected
+   if .menu-category-button-hover is not defined or defined earlier
+   in the css file. .menu-category-button-hover is used when "activate
+   categories on click" option is set.)
+---applications box-----------------------
+.menu-applications-scrollbox or .vfade
+.menu-applications-inner-box (and .menu-applications-box for compatability with old themes)
+.menu-application-button
+.menu-application-button-label
+.menu-application-button-selected
+.menu-application-button:highlighted (used to highlight newly installed apps in list or grid view)
+.menu-application-button-selected:highlighted
+---context menu---------------------------
+.menu-context-menu (or .menu)
+---whole menu-----------------------------
+.cinnamenu (or menu-background)
+.menu-applications-outer-box (and .menu-applications-box for compatability with old themes)
+*/
 
-/* Needed to prevent bookmarks from being invisible. */
-.cinnamenu-categories-workspaces-scrollbox {
-    border-radius: 0 4px 0 0;
-    border-width: 1px;
-    border-left: 0;
-    padding: 0
-}
-
-/* List box */
-.cinnamenu-applications-list-box {
-}
-.cinnamenu-application-list-button {
-    border-radius: 3px;
-    border-width: 1px;
-    padding: 0 8px
-}
-.cinnamenu-application-list-button-label {
-    padding-left: 16px
-}
-.cinnamenu-application-list-button-icon {
-    padding-top: 3px
-}
-
-/* Grid box */
-.cinnamenu-applications-grid-box {
-    padding-right: 0;
-    padding-left: 15px
-}
-.cinnamenu-application-grid-button {
-    border-radius: 3px;
-    border-width: 1px
-}
-.cinnamenu-application-grid-button.col2 {
-    padding: 5px 5px 5px;
-    min-width: 250px;
-}
-.cinnamenu-application-grid-button.col3 {
-    padding: 5px 5px 5px;
-    min-width: 170px;
-}
-.cinnamenu-application-grid-button.col4 {
-    padding: 5px 5px 5px;
-    min-width: 125px;
-}
-.cinnamenu-application-grid-button.col5 {
-    padding: 5px 5px 5px;
-    min-width: 98px;
-}
-.cinnamenu-application-grid-button.col6 {
-    padding: 5px 5px 5px;
-    min-width: 80px;
-}
-.cinnamenu-application-grid-button.col7 {
-    padding: 5px 5px 5px;
-    min-width: 67px;
-}
-.cinnamenu-application-grid-button-label {
-    font-size: 7.5pt;
+.menu-application-button:highlighted {
     font-weight: bold;
-    padding: 0;
-    text-align: center;
+}
+.menu-application-button-selected:highlighted {
+    font-weight: bold;
+}
+
+.menu-category-button:highlighted {
+    font-weight: bold;
+}
+.menu-category-button-selected:highlighted {
+    font-weight: bold;
 }

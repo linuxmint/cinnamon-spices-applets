@@ -31,10 +31,11 @@ class IpApi {
                 city: json.city,
                 country: json.country,
                 timeZone: json.timezone,
-                mobile: json.mobile
+                mobile: json.mobile,
+                entryText: json.lat + "," + json.lon,
+                locationSource: "ip-api"
             };
             this.app.log.Debug("Location obtained:" + json.lat + "," + json.lon);
-            this.app.log.Debug("Location setting is now: " + this.app.config._location);
             return result;
         }
         catch (e) {

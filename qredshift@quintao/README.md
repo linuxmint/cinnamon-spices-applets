@@ -4,14 +4,16 @@ A Cinnamon applet that sets brightness, gamma levels and color temperature with 
 
 Original Repository: [https://github.com/raphaelquintao/QRedshift](https://github.com/raphaelquintao/QRedshift)
 
-
+## Buy me a coffee
+ - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZLHQD3GQ5YNR6&source=url)
+ - Bitcoin: 1NaiaFcVGrrMs9amjyb4aVV1dJoLfdKe3Q
 
 ## Features
 * Powerfull Interface.
 * Scroll actions on panel icon.
 * Keyboard Shortcuts.
 * Temperature from 1000k to 9000k.
-* Gamma from 1 to 5.
+* Gamma from 0.5 to 5.
 * Custom location option.
 * Ready to Redshift 1.12
 
@@ -25,6 +27,21 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
 5. Make sure you remove redshift-gtk `sudo apt-get remove redshift-gtk`
 
 ## Changelog
+* 1.5.2
+  - Added keyboard shortcut to increase brightness `<Control>Page_Up`
+  - Added keyboard shortcut to decrease brightness `<Control>Page_Down`
+  - Added keyboard shortcut to increase temperature `<Control><Shift>Page_Up`
+  - Added keyboard shortcut to decrease temperature `<Control><Shift>Page_Down`
+  - Added support to lower gamma.
+  - Added option to use a symbolic icon.
+* 1.5.1
+  - Update night brightness on scrolling.
+  - Added support to version 4.6.
+  - Added translations:
+    - Bulgarian by [@spacy01](https://github.com/spacy01 "@spacy01 on Github")
+    - German by [@OzzieIsaacs](https://github.com/OzzieIsaacs "@OzzieIsaacs on Github")
+    - Romanian by [@AndreiMiculita](https://github.com/AndreiMiculita "@AndreiMiculita on Github")
+    
 * 1.5
   - Added keyboard shortcut to toggle On/Off `<Control>End`
   - Added localization support.

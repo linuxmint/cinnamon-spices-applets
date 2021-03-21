@@ -12734,10 +12734,10 @@ declare namespace imports.gi.Gtk {
     
     
     enum PolicyType {
-        always = 0,
-        automatic = 1,
-        never = 2,
-        external = 3
+        ALWAYS = 0,
+        AUTOMATIC = 1,
+        NEVER = 2,
+        EXTERNAL = 3
     }
     
     

@@ -1,0 +1,13 @@
+{
+    "Settings": {
+        "type": "header",
+        "description": "Notifications"
+    },
+    
+    "Notifications" : {
+        "type" : "switch",
+        "description" : "Send a notification when the background is changed",
+        "default" : false,
+        "tooltip" : "Activate to see a notification when the background rolls"
+    }
+}

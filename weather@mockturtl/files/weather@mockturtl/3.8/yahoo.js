@@ -8,27 +8,26 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var KPHtoMPS = utils.MPHtoMPS;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 class Yahoo {
     constructor(_app) {
+        this.prettyName = "Yahoo";
+        this.name = "Yahoo";
+        this.maxForecastSupport = 10;
+        this.website = "https://www.yahoo.com/news/weather/";
+        this.maxHourlyForecastSupport = 0;
         this.app = _app;
     }
-    async GetWeather() {
-        let loc = this.ConstructLoc();
+    async GetWeather(loc) {
         let json;
         if (loc != null) {
             try {
-                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc[0].toString(), lon: loc[1].toString() })]);
+                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
             catch (e) {
                 this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
@@ -97,7 +96,7 @@ class Yahoo {
                 },
                 forecasts: []
             };
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.forecasts.length; i++) {
                 let day = json.forecasts[i];
                 let forecast = {
                     date: new Date(day.date * 1000),
@@ -115,20 +114,8 @@ class Yahoo {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
-            return null;
-        }
-    }
-    ;
-    ConstructLoc() {
-        let location = this.app.config._location.replace(" ", "");
-        if (isCoordinate(location)) {
-            return location.split(",");
-        }
-        else {
-            this.app.log.Error("Yahoo: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
+            this.app.log.Error("Yahoo payload parsing error: " + e);
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -139,16 +126,16 @@ class Yahoo {
         this.app.log.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                this.app.sendNotification("Missing package", "Please install '" + this.GetMissingPackage(json) + "', then refresh manually.");
+                this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."));
                 this.app.log.Error(errorMsg + json.error.message);
-                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: "Failed to import " + this.GetMissingPackage(json) + ", please install it first." });
+                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") });
                 break;
             case "network":
-                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: "Could not connect to Yahoo API." });
+                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") });
                 this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: "Unknown error happened while obtaining weather, see Looking Glass logs for more information" });
+                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
                 this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break;
             default:
@@ -175,103 +162,103 @@ class Yahoo {
     ResolveIcon(icon, sunTimes) {
         switch (icon) {
             case 0:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 1:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 2:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 3:
-                return [icons.storm];
+                return ["weather-storm"];
             case 4:
-                return [icons.storm];
+                return ["weather-storm"];
             case 5:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 6:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 7:
-                return [icons.snow];
+                return ["weather-snow"];
             case 8:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 9:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 10:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 11:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 12:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 13:
-                return [icons.snow];
+                return ["weather-snow"];
             case 14:
-                return [icons.snow];
+                return ["weather-snow"];
             case 15:
-                return [icons.snow];
+                return ["weather-snow"];
             case 16:
-                return [icons.snow];
+                return ["weather-snow"];
             case 17:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 18:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 19:
-                return [icons.fog];
+                return ["weather-fog"];
             case 20:
-                return [icons.fog];
+                return ["weather-fog"];
             case 21:
-                return [icons.fog];
+                return ["weather-fog"];
             case 22:
-                return [icons.fog];
+                return ["weather-fog"];
             case 23:
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 24:
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 25:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 26:
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case 27:
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 28:
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 29:
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 30:
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 31:
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 32:
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 33:
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 34:
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 35:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 36:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 37:
-                return [icons.storm];
+                return ["weather-storm"];
             case 38:
-                return [icons.storm];
+                return ["weather-storm"];
             case 39:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 40:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 41:
-                return [icons.snow];
+                return ["weather-snow"];
             case 42:
-                return [icons.snow];
+                return ["weather-snow"];
             case 43:
-                return [icons.snow];
+                return ["weather-snow"];
             case 44:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 45:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 46:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 47:
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;
@@ -428,6 +415,7 @@ const YahooConditionLibrary = [
     _("Partly Cloudy"),
     _("Clear"),
     _("Sunny"),
+    _("Mostly Sunny"),
     _("Fair"),
     _("Mixed Rain and Hail"),
     _("Hot"),

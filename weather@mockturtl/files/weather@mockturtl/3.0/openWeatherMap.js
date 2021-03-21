@@ -44,35 +44,33 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var isID = utils.isID;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var get = utils.get;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
+        this.prettyName = "OpenWeatherMap";
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+        ];
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
-    OpenWeatherMap.prototype.GetWeather = function () {
+    OpenWeatherMap.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(this.base_url);
+                        query = this.ConstructQuery(this.base_url, loc);
                         if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -86,7 +84,11 @@ var OpenWeatherMap = (function () {
                         return [2, null];
                     case 4:
                         if (json == null) {
-                            this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
+                            this.app.HandleError({
+                                type: "soft",
+                                detail: "no api response",
+                                service: "openweathermap"
+                            });
                             return [2, null];
                         }
                         return [2, this.ParseWeather(json, this)];
@@ -104,7 +106,7 @@ var OpenWeatherMap = (function () {
                     lon: json.lon
                 },
                 location: {
-                    url: null,
+                    url: "https://openweathermap.org/city/",
                     timeZone: json.timezone
                 },
                 date: new Date((json.current.dt) * 1000),
@@ -124,14 +126,14 @@ var OpenWeatherMap = (function () {
                     customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness"),
-                    value: json.current.clouds,
-                    type: "percent"
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
                 },
                 forecasts: []
             };
             var forecasts = [];
-            for (var i = 0; i < self.app.config._forecastDays; i++) {
+            for (var i = 0; i < json.daily.length; i++) {
                 var day = json.daily[i];
                 var forecast = {
                     date: new Date(day.dt * 1000),
@@ -147,43 +149,59 @@ var OpenWeatherMap = (function () {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
+            var hourly = [];
+            for (var index = 0; index < json.hourly.length; index++) {
+                var hour = json.hourly[index];
+                var forecast = {
+                    date: new Date(hour.dt * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather[0].main,
+                        description: hour.weather[0].description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+                    },
+                };
+                if (!!hour.rain) {
+                    forecast.precipitation = {
+                        volume: hour.rain["1h"],
+                        type: "rain"
+                    };
+                }
+                if (!!hour.snow) {
+                    forecast.precipitation = {
+                        volume: hour.snow["1h"],
+                        type: "snow"
+                    };
+                }
+                if (!!hour.pop && forecast.precipitation)
+                    forecast.precipitation.chance = hour.pop * 100;
+                hourly.push(forecast);
+            }
+            weather.hourlyForecasts = hourly;
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.HandleError({
+                type: "soft",
+                service: "openweathermap",
+                detail: "unusual payload",
+                message: _("Failed to Process Current Weather Info")
+            });
             return null;
         }
     };
     ;
-    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl) {
+    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl, loc) {
         var query = baseUrl;
-        var locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            var locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+        query += "1c73f8259a86c6fd43c7163b543c8640";
+        var locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            query = query + "&lang=" + locale;
         }
-        this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
-        this.app.log.Error("OpenWeatherMap: No Location was provided");
-        return null;
-    };
-    ;
-    OpenWeatherMap.prototype.ParseLocation = function () {
-        var loc = this.app.config._location.replace(/ /g, "");
-        if (isCoordinate(loc)) {
-            var locArr = loc.split(',');
-            return "lat=" + locArr[0] + "&lon=" + locArr[1];
-        }
-        else if (isID(loc)) {
-            return "id=" + loc;
-        }
-        else
-            return "q=" + loc;
+        return query;
     };
     ;
     OpenWeatherMap.prototype.ConvertToAPILocale = function (systemLocale) {
@@ -209,7 +227,7 @@ var OpenWeatherMap = (function () {
         return lang;
     };
     OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
-        var errorMsg = "OpenWeathermap Response: ";
+        var errorMsg = "OpenWeatherMap Response: ";
         var error = {
             service: "openweathermap",
             type: "hard",
@@ -254,43 +272,43 @@ var OpenWeatherMap = (function () {
     OpenWeatherMap.prototype.ResolveIcon = function (icon) {
         switch (icon) {
             case "10d":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "10n":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "09n":
-                return [icons.showers];
+                return ["weather-showers"];
             case "09d":
-                return [icons.showers];
+                return ["weather-showers"];
             case "13d":
-                return [icons.snow];
+                return ["weather-snow"];
             case "13n":
-                return [icons.snow];
+                return ["weather-snow"];
             case "50d":
-                return [icons.fog];
+                return ["weather-fog"];
             case "50n":
-                return [icons.fog];
+                return ["weather-fog"];
             case "04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "03n":
-                return ['weather-clouds-night', icons.few_clouds_night];
+                return ['weather-clouds-night', "weather-few-clouds-night"];
             case "03d":
-                return [icons.clouds, icons.overcast, icons.few_clouds_day];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "02n":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "02d":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "01n":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "01d":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "11d":
-                return [icons.storm];
+                return ["weather-storm"];
             case "11n":
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     };
     ;

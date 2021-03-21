@@ -46,7 +46,8 @@
       "sections": [
         "section_general1",
         "section_general2",
-        "section_general3"
+        "section_general3",
+        "section_general4"
       ]
     },
     "section_applets1": {
@@ -135,14 +136,22 @@
       "keys": [
         "general_warning",
         "events_color",
-        "general_notifications",
+        "general_notifications"
+      ]
+    },
+
+    "section_general3": {
+      "type": "section",
+      "title": "Notification contents",
+      "dependency": "general_notifications",
+      "keys": [
         "general_details_requested",
-        "general_force_notifications",
         "general_type_notif",
+        "general_show_updateall_button",
         "general_test_notif"
       ]
     },
-    "section_general3": {
+    "section_general4": {
       "type": "section",
       "title": "Display type",
       "keys": [
@@ -159,7 +168,7 @@
   },
   "check_new_applets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_applets",
     "description": "Check regularly whether new applets are available",
     "tooltip": "If new applets do not concern you, uncheck this box."
@@ -206,15 +215,20 @@
     "description": "Open Cinnamon Settings to manage all the Applets",
     "callback": "on_btn_cs_applets_pressed"
   },
+  "was_empty_applets":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
   "check_desklets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Check regularly whether your desklets are up to date",
     "tooltip": "If desklets updates do not concern you, uncheck this box."
   },
   "check_new_desklets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_desklets",
     "description": "Check regularly whether new desklets are available",
     "tooltip": "If new desklets do not concern you, uncheck this box."
@@ -261,15 +275,20 @@
     "description": "Open Cinnamon Settings to manage all the Desklets",
     "callback": "on_btn_cs_desklets_pressed"
   },
+  "was_empty_desklets":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
   "check_extensions": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Check regularly whether your extensions are up to date",
     "tooltip": "If extensions updates do not concern you, uncheck this box."
   },
   "check_new_extensions": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_extensions",
     "description": "Check regularly whether new extensions are available",
     "tooltip": "If new extensions do not concern you, uncheck this box."
@@ -315,6 +334,11 @@
     "type": "button",
     "description": "Open Cinnamon Settings to manage all the Extensions",
     "callback": "on_btn_cs_extensions_pressed"
+  },
+  "was_empty_extensions":{
+    "type": "generic",
+    "value": false,
+    "default": false
   },
   "check_themes": {
     "type": "switch",
@@ -371,6 +395,11 @@
     "description": "Open Cinnamon Settings to manage all the Themes",
     "callback": "on_btn_cs_themes_pressed"
   },
+  "was_empty_themes":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
   "general_frequency": {
     "type": "scale",
     "default": 1,
@@ -414,27 +443,31 @@
   "general_details_requested": {
     "type": "switch",
     "default": false,
-    "dependency": "general_notifications",
     "description": "Display the description of each update or new Spice",
     "tooltip": "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
   },
   "general_force_notifications": {
-    "type": "switch",
-    "default": false,
-    "dependency": "general_notifications",
-    "description": "Show notification messages even if they are unchanged",
-    "tooltip": "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
+    "type": "generic",
+    "value": false,
+    "default": false
   },
   "general_type_notif": {
     "type": "combobox",
     "default": "minimal",
     "options": {
       "Minimal (text only)": "minimal",
-      "With button opening the System Settings": "button"
+      "With action buttons": "button",
+      "With action buttons as icons": "iconic"
     },
-    "dependency": "general_notifications",
     "description": "Notification style",
-    "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith button opening the System Settings:\n\tNotifications also contain a button which has the same role of the menu one:\n\tOpen the Download tab in System Settings for the concerned type of Spices, with the Spices sorted by date."
+    "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith action buttons:\n\tNotifications also contain some buttons which have these roles:\n\t\tThe leftmost button opens the Download tab in System Settings for the concerned Spices, which are sorted by date (most recent first). So you can update the Spices you want.\n\t\tThe rightmost button refreshes the cache and notifications, if necessary.\n\t\tOptionally, a central button allows you to forget new spices or update the installed ones, depending on the case."
+  },
+  "general_show_updateall_button": {
+    "type": "switch",
+    "default": false,
+    "dependency": "general_type_notif!=minimal",
+    "description": "Show the 'Update Now' button in notifications",
+    "tooltip": "By checking this box, a button 'Update All' appears in notifications.\nBy pressing this button:\n 1. The Download tab of the System Settings concerning this type of Spices appears.\n 2. The cache is updated.\n 3. Your Spices are updated.\n 4. When all updates are made, just close the window."
   },
   "general_test_notif": {
     "type": "button",
@@ -457,5 +490,10 @@
     "default": false,
     "description": "Hide the icon as long as nothing is to report",
     "tooltip": "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+  },
+  "first_time": {
+    "type": "generic",
+    "value": true,
+    "default": true
   }
 }
