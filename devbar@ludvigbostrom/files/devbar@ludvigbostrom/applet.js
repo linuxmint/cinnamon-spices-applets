@@ -94,8 +94,7 @@ MyApplet.prototype = {
     on_settings_changed() {
         this.url = this.setUpUrl(this.inputUrl);
     },
-
-    update: function update() {
+    update() {
         if (this.stop) {
             Mainloop.source_remove(this._timeout);
             this._timeout = null;
@@ -114,7 +113,6 @@ MyApplet.prototype = {
     on_applet_clicked() {
         this.menu.toggle();
     },
-
     onWorkflowCallback(json) {
         this.updateLabel(json);
         this.updateMenu(json);
