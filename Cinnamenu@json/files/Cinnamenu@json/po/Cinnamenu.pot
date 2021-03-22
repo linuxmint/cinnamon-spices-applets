@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-15 15:40+0000\n"
+"POT-Creation-Date: 2021-03-21 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,6 +446,12 @@ msgstr ""
 msgid "Autoscroll the application list on mouse hover"
 msgstr ""
 
+msgid "Enable emoji search"
+msgstr ""
+
+msgid "Show emojis in search results"
+msgstr ""
+
 msgid "Web search option"
 msgstr ""
 
@@ -464,10 +470,10 @@ msgstr ""
 msgid "Show an internet search option in search results"
 msgstr ""
 
-msgid "Enable emoji search"
+msgid "Search home folder"
 msgstr ""
 
-msgid "Show emojis in search results"
+msgid "When searching, also search home folder for files"
 msgstr ""
 
 msgid "Show hidden files"

@@ -71,6 +71,7 @@
                 "enable-autoscroll",
                 "enable-emoji-search",
                 "web-search-option",
+                "search-home-folder",
                 "show-hidden-files"
             ]
         },
@@ -200,7 +201,6 @@
         "tooltip":"Open the menu when I move my mouse over the panel icon"
     },
     "hover-delay":{
-        "indent":true,
         "dependency":"activate-on-hover",
         "type":"spinbutton",
         "default":50,
@@ -243,6 +243,12 @@
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
     },
+    "enable-emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Enable emoji search",
+        "tooltip":"Show emojis in search results"
+    },
     "web-search-option":{
         "type":"combobox",
         "default":0,
@@ -256,11 +262,11 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
-    "enable-emoji-search":{
+    "search-home-folder":{
         "type":"checkbox",
         "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
+        "description":"Search home folder",
+        "tooltip":"When searching, also search home folder for files"
     },
     "show-hidden-files":{
         "type":"checkbox",
@@ -280,7 +286,6 @@
         "default":"cinnamon-symbolic",
         "description":"Panel icon",
         "dependency":"menu-icon-custom",
-        "indent":"true",
         "tooltip":"Panel icon"
     },
     "menu-icon-size-custom":{
@@ -298,7 +303,6 @@
         "units":"pixels",
         "description":"Panel icon size",
         "dependency":"menu-icon-size-custom",
-        "indent":"true",
         "tooltip":"Choose a custom size for the panel icon"
     },
     "menu-label":{
@@ -309,7 +313,6 @@
     },
 
     "category-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
@@ -320,7 +323,6 @@
         "tooltip":"Category icon size"
     },
     "apps-list-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
@@ -331,7 +333,6 @@
         "tooltip":"Applications list icon size"
     },
     "apps-grid-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":64,
         "min":0,
@@ -342,7 +343,6 @@
         "tooltip":"Applications grid icon size"
     },
     "sidebar-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":32,
         "min":6,
