@@ -23,7 +23,7 @@ MyApplet.prototype = {
         try {
             this.stop = false;
             this.settings = this.setUpSettings(instanceId);
-            this.username =  this.getUserName();
+            this.username =  GLib.get_user_name();
             this.url = this.setUpUrl();
             this.on_settings_changed();
             this.set_applet_label('dev-bar');
@@ -167,7 +167,7 @@ MyApplet.prototype = {
         this.menu.addSettingsAction('Settings', 'applets devbar@ludvigbostrom');
         this.menu.addAction('Refresh', () => this.loadWorkflowAsync(this.onWorkflowCallback));
     },
-    loadWorkflowAsync: function loadWorkflowAsync(callback) {
+    loadWorkflowAsync(callback) {
         if (!this.httpSession) {
             this.httpSession = new Soup.SessionAsync();
             Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
@@ -175,28 +175,17 @@ MyApplet.prototype = {
 
         let message = Soup.Message.new('GET', this.url);
         this.httpSession.queue_message(message, function soupQueue(_, msg) {
-            if (msg.response_body.data) {
+            if (msg && msg.response_body.data) {
                 try {
                     callback.call(this, JSON.parse(msg.response_body.data));
                 } catch (err) {
                     this.set_applet_label('!');
                 }
-            } else if (msg.status_code !== 503) {
+            } else if ((msg && msg.status_code !== 503) || !msg) {
                 this.set_applet_label('!');
             }
         }.bind(this));
     },
-
-    getUserName: function getUserName() {
-        try {
-            let [_, stdout] = GLib.spawn_command_line_sync('whoami');
-            if (stdout !== null)
-                return stdout.toString();
-        } catch (e) {
-        }
-        return 'NO_USER';
-    },
-
 };
 
 // eslint-disable-next-line no-unused-vars
