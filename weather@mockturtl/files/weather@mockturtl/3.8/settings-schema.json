@@ -243,7 +243,7 @@
 		"type": "spinbutton",
 		"default": 12,
 		"min": 3,
-		"max": 48,
+		"max": 168,
 		"units": "hours",
 		"step": 1,
 		"description": "Hourly Forecast length"
