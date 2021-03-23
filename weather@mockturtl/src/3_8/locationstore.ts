@@ -200,6 +200,7 @@ export class LocationStore {
 			NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
+		loc.timeZone = this.app.config.Timezone;
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
 		this.InvokeStorageChanged();

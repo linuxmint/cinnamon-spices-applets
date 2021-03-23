@@ -46,7 +46,6 @@
             "title":"Content",
             "keys":[
                 "show-places-category",
-                "show-recents-category",
                 "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
@@ -70,8 +69,9 @@
                 "category-click",
                 "open-on-category",
                 "enable-autoscroll",
-                "web-search-option",
                 "enable-emoji-search",
+                "web-search-option",
+                "search-home-folder",
                 "show-hidden-files"
             ]
         },
@@ -110,6 +110,10 @@
     "custom-menu-height":{
         "type":"generic",
         "default":530
+    },
+    "recent-apps":{
+        "type":"generic",
+        "default":[]
     },
 
     "applications-view-mode":{
@@ -161,12 +165,6 @@
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
-    "show-recents-category":{
-        "type":"switch",
-        "default":true,
-        "description":"Show recent files",
-        "tooltip":"Show recent files category in the menu"
-    },
     "show-web-bookmarks-category":{
         "type":"checkbox",
         "default":false,
@@ -203,7 +201,6 @@
         "tooltip":"Open the menu when I move my mouse over the panel icon"
     },
     "hover-delay":{
-        "indent":true,
         "dependency":"activate-on-hover",
         "type":"spinbutton",
         "default":50,
@@ -222,7 +219,7 @@
 
     "category-click":{
         "type":"checkbox",
-        "default":false,
+        "default":true,
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
@@ -234,7 +231,7 @@
         "options":{
             "Last used category":0,
             "Favorite apps":1,
-            "Recent files":2,
+            "Recent":2,
             "Places":3,
             "All applications":4,
             "Home folder":5
@@ -245,6 +242,12 @@
         "default":true,
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
+    },
+    "enable-emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Enable emoji search",
+        "tooltip":"Show emojis in search results"
     },
     "web-search-option":{
         "type":"combobox",
@@ -259,11 +262,11 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
-    "enable-emoji-search":{
+    "search-home-folder":{
         "type":"checkbox",
         "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
+        "description":"Search home folder",
+        "tooltip":"When searching, also search home folder for files"
     },
     "show-hidden-files":{
         "type":"checkbox",
@@ -283,7 +286,6 @@
         "default":"cinnamon-symbolic",
         "description":"Panel icon",
         "dependency":"menu-icon-custom",
-        "indent":"true",
         "tooltip":"Panel icon"
     },
     "menu-icon-size-custom":{
@@ -301,7 +303,6 @@
         "units":"pixels",
         "description":"Panel icon size",
         "dependency":"menu-icon-size-custom",
-        "indent":"true",
         "tooltip":"Choose a custom size for the panel icon"
     },
     "menu-label":{
@@ -312,7 +313,6 @@
     },
 
     "category-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
@@ -323,7 +323,6 @@
         "tooltip":"Category icon size"
     },
     "apps-list-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
@@ -334,7 +333,6 @@
         "tooltip":"Applications list icon size"
     },
     "apps-grid-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":64,
         "min":0,
@@ -345,7 +343,6 @@
         "tooltip":"Applications grid icon size"
     },
     "sidebar-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":32,
         "min":6,

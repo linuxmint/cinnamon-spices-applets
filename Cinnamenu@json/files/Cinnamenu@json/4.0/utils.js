@@ -1,6 +1,10 @@
-const SEARCH_DEBUG = false;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const Mainloop = imports.mainloop;
+const Lang = imports.lang;
+const St = imports.gi.St;
+const Main = imports.ui.main;
+const {latinise, escapeRegExp} = imports.misc.util;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
@@ -11,67 +15,12 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const APPTYPE = {
-    application: 0,
-    place: 1,
-    file: 2,
-    provider: 3,
-    clearlist_button: 4
-};
-
-// Work around Cinnamon#8201
-const tryFn = function(callback, errCallback) {
-    try {
-        return callback();
-    } catch (e) {
-        if (typeof errCallback === 'function') {
-            return errCallback(e);
-        }
-    }
-};
-
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
-//=========================================
-
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-
-const readFileAsync = function(file, opts = {utf8: true}) {
-    const {utf8} = opts;
-    return new Promise(function(resolve, reject) {
-        if (typeof file === 'string' || file instanceof String) {
-            file = Gio.File.new_for_path(file);
-        }
-        if (!file.query_exists(null)) reject(new Error('File does not exist.'));
-        file.load_contents_async(null, function(object, result) {
-            tryFn(() => {
-                let [success, data] = file.load_contents_finish(result);
-                if (!success) return reject(new Error('File cannot be read.'));
-                if (utf8) {
-                    if (data instanceof Uint8Array) data = ByteArray.toString(data);
-                    else data = data.toString();
-                }
-                resolve(data);
-            }, (e) => reject(e));
-        });
-    });
-};
-
-const readJSONAsync = function(file) {
-    return readFileAsync(file).then(function(json) {
-        return JSON.parse(json);
-    });
-};
 
 //===========================================================
 
-const Mainloop = imports.mainloop;
-const Lang = imports.lang;
-const St = imports.gi.St;
-const Main = imports.ui.main;
-
 let onlyOneTooltip = null;
-var showTooltip = (actor, xpos, ypos, center_x, text) => {
+const showTooltip = (actor, xpos, ypos, center_x, text) => {
     if (onlyOneTooltip) {
         global.log("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
@@ -80,12 +29,10 @@ var showTooltip = (actor, xpos, ypos, center_x, text) => {
     onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
 };
 
-var hideTooltip = () => {
+const hideTooltipIfVisible = () => {
     if (onlyOneTooltip) {
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
-    } else {
-        global.log("Cinnamenu: Tooltip already removed.");
     }
 };
 
@@ -141,32 +88,28 @@ class NewTooltip {
 
 //===================================================
 
-const {latinise} = imports.misc.util;
-
 const searchStr = (q, str, quick = false) => {
-    const HIGHTLIGHT_MATCH = true;
-    if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
+    if (!str) {
         return { score: 0, result: str };
     }
+    const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
     const str2 = latinise(str.toLowerCase());
-    const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
-    if (qletters.length == 0){
-        return { score: 0, result: str };
-    }
+    //q is already latinise() & toLowerCase() in _doSearch()
     let score = 0, bigrams_score = 0;
-    if (new RegExp('\\b'+qletters).test(str2)) { //match substring from beginning of words
-        foundPosition = str2.indexOf(qletters);
+
+    if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
+        foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
-        foundLength = qletters.length;
+        foundLength = q.length;
     } else if (str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
         foundPosition = str2.indexOf(q);
         foundLength = q.length;
     } else if (!quick){ //else fuzzy match
-        //find longest substring of str2 made up of letters from qletters
-        const found = str2.match(new RegExp('[' + qletters + ']+','g'));
+        //find longest substring of str2 made up of letters from q
+        const found = str2.match(new RegExp('[' + q + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -179,11 +122,11 @@ const searchStr = (q, str, quick = false) => {
         }
         if (longest) {
             //get a score for similarity by counting 2 letter pairs (bigrams) that match
-            if (qletters.length >= 2) {
-                const max_bigrams = qletters.length -1;
+            if (q.length >= 2) {
+                const max_bigrams = q.length -1;
                 let found_bigrams = 0;
                 for (let qi = 0; qi < max_bigrams; qi++ ) {
-                    if (longest.indexOf(qletters[qi] + qletters[qi + 1]) >= 0) {
+                    if (longest.indexOf(q[qi] + q[qi + 1]) >= 0) {
                         found_bigrams++;
                     }
                 }
@@ -194,10 +137,7 @@ const searchStr = (q, str, quick = false) => {
 
             foundPosition = str2.indexOf(longest);
             foundLength = longest.length;
-            score = Math.min(longest.length / qletters.length, 1.0) * bigrams_score;
-            /*if (score>=0.4){
-                global.log(qletters+">"+longest+" "+score+":"+bigrams_score);
-            }*/
+            score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
     //return result of match
@@ -205,14 +145,10 @@ const searchStr = (q, str, quick = false) => {
         let markup = str.slice(0, foundPosition) + '<b>' +
                                     str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
                                                     str.slice(foundPosition + foundLength, str.length);
-        if (SEARCH_DEBUG) {
-            markup += ':' + score + ':' + bigrams_score;
-        }
         return {score: score, result: markup};
     } else {
         return {score: score, result: str};
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync, wordWrap,
-                                                            showTooltip, hideTooltip, searchStr};
+module.exports = {_, wordWrap, showTooltip, hideTooltipIfVisible, searchStr};

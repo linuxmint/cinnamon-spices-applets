@@ -26,6 +26,7 @@ global.DEBUG = true;
 const QUtils = require('./js/QUtils.js');
 
 const qLOG = QUtils.qLOG;
+const lerp = QUtils.lerp;
 
 const QIcon = QUtils.QIcon;
 const QPopupHeader = QUtils.QPopupHeader;
@@ -76,6 +77,15 @@ class QRedshift extends Applet.TextIconApplet {
             gammaMix: 1,
             
             enabledNight: false,
+            manualNightTime: false,
+            nightStart: {
+                h: 0,
+                m: 0
+            },
+            nightEnd: {
+                h: 0,
+                m: 0
+            },
             nightTemp: 6500,
             nightBrightness: 1,
             
@@ -84,6 +94,16 @@ class QRedshift extends Applet.TextIconApplet {
             period: '-'
         };
         
+        this.time = {
+            nightStart: {
+                h: 0,
+                m: 0
+            },
+            nightEnd: {
+                h: 0,
+                m: 0
+            },
+        }
         
         // Bind Settings
         this.settings = new Settings.AppletSettings(this.opt, metadata.uuid, instance_id);
@@ -104,7 +124,7 @@ class QRedshift extends Applet.TextIconApplet {
             if (!this.opt.enabled && !this.opt.iconLabelAlways) this.hideLabel();
         });
         this.settings.bind('symbolicIcon', 'symbolicIcon', (value) => {
-            this.opt.symbolicIcon = value;
+            // this.opt.symbolicIcon = value;
             this.setIcon();
         });
         
@@ -114,8 +134,29 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind('gammaMix', 'gammaMix', this.onSettChange.bind(this));
         
         this.settings.bind('enabledNight', 'enabledNight', this.onSettChange.bind(this));
+        this.settings.bind('manualNightTime', 'manualNightTime', this.onSettChange.bind(this));
         this.settings.bind('nightTemp', 'nightTemp', this.onSettChange.bind(this));
         this.settings.bind('nightBrightness', 'nightBrightness', this.onSettChange.bind(this));
+        
+        this.settings.bind('nightTimeStart', 'nightStart', (value) => {
+            if (this.opt.nightStart.h !== this.time.nightStart.h || this.opt.nightStart.m !== this.time.nightStart.m) {
+                this.time.nightStart.h = this.opt.nightStart.h;
+                this.time.nightStart.m = this.opt.nightStart.m;
+                
+                // qLOG("NIGHT START", this.opt.nightStart);
+                this.doUpdate();
+            }
+        });
+        this.settings.bind('nightTimeEnd', 'nightEnd', (value) => {
+            if (this.opt.nightEnd.h !== this.time.nightEnd.h || this.opt.nightEnd.m !== this.time.nightEnd.m) {
+                this.time.nightEnd.h = this.opt.nightEnd.h;
+                this.time.nightEnd.m = this.opt.nightEnd.m;
+                
+                // qLOG("NIGHT END", this.opt.nightEnd);
+                this.doUpdate();
+            }
+        });
+        
         
         this.settings.bind('locationLatitude', 'locationLatitude', this.onSettChange.bind(this));
         this.settings.bind('locationLongitude', 'locationLongitude', this.onSettChange.bind(this));
@@ -129,6 +170,10 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind("keyGammaDown", "keyGammaDown", this.onKeyChanged.bind(this));
         
         
+        this.time.nightStart.h = this.opt.nightStart.h;
+        this.time.nightStart.m = this.opt.nightStart.m;
+        this.time.nightEnd.h = this.opt.nightEnd.h;
+        this.time.nightEnd.m = this.opt.nightEnd.m;
         
         
         
@@ -211,15 +256,16 @@ class QRedshift extends Applet.TextIconApplet {
         // --- Async Loading ---
         this.verifyVersion(() => {
             this.menu = this._applet_context_menu;
-            this.timeout_info = setTimeout(() => {
+            
+            this.timeout_info = Mainloop.timeout_add_seconds(1, () => {
                 qLOG('Redshift required!');
                 this.setIcon();
                 this.set_applet_label(_("REDSHIFT NOT INSTALLED!"));
                 this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
-            }, 500);
+            }, null);
             
         }, (success) => {
-            clearTimeout(this.timeout_info);
+            Mainloop.source_remove(this.timeout_info)
             // Set Menu
             this.menu = this.appMenu;
             
@@ -236,17 +282,43 @@ class QRedshift extends Applet.TextIconApplet {
         
     }
     
+    check_period() {
+        let date = new Date();
+        let d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), 0);
+        
+        let date_s = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.time.nightStart.h, this.time.nightStart.m, 0);
+        let date_e = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.time.nightEnd.h, this.time.nightEnd.m, 0);
+        
+        let night = false;
+        let percent = 1;
+        
+        if (date_s <= date_e) {
+            night = d >= date_s && d <= date_e;
+        } else if (date_s > date_e && d >= date_s) {
+            night = d >= date_s;
+        } else {
+            night = d < date_e;
+        }
+        if (d.getTime() == date_s.getTime()) {
+            percent = date.getSeconds() / 60;
+        } else if (d.getTime() == date_e.getTime()) {
+            percent = date.getSeconds() / 60;
+        }
+        
+        return {'period': night ? 'night' : 'day', 'is_night': night, 'percent': percent};
+    }
     
     setIcon() {
         // qLOG('ICON', this.opt.symbolicIcon);
         
         if (this.opt.symbolicIcon) {
-            this.set_applet_icon_symbolic_path('');
+            // this.set_applet_icon_symbolic_path('');
             if (this.opt.enabled)
                 this.set_applet_icon_symbolic_name(S_ICON_ON);
             else
                 this.set_applet_icon_symbolic_name(S_ICON_OFF);
         } else {
+            this.set_applet_icon_symbolic_path('');
             if (this.opt.enabled)
                 this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
             else
@@ -291,8 +363,8 @@ class QRedshift extends Applet.TextIconApplet {
     
     checkLocalConfig() {
         try {
-            let home = this.metadata.path.split('.local')[0];
-            let exists = GLib.file_test(home + '.config/redshift.conf', 16);
+            let home = GLib.get_home_dir();
+            let exists = GLib.file_test(home + '/.config/redshift.conf', 16);
             return exists;
         } catch (e) {
             return true;
@@ -668,12 +740,13 @@ class QRedshift extends Applet.TextIconApplet {
                 }
                 // qLOG('QRedshift Command', command);
                 // qLOG('QRedshift Period', this.opt.period);
-                this.setIcon();
+                // this.setIcon();
                 this.updateTooltip();
                 this.setInfo();
                 this.running = false;
             });
         }
+        this.setIcon();
     }
     
     
@@ -693,8 +766,21 @@ class QRedshift extends Applet.TextIconApplet {
             }
             
             if (this.opt.enabledNight) {
-                cmd += `-t ${this.opt.dayTemp}:${this.opt.nightTemp} `;
-                cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.nightBrightness / 100} `;
+                if (this.opt.manualNightTime) {
+                    let prd = this.check_period();
+                    if (prd.is_night) {
+                        let temp = lerp(this.opt.dayTemp, this.opt.nightTemp, prd.percent);
+                        cmd += `-t ${temp}:${temp} `;
+                        cmd += `-b ${this.opt.nightBrightness / 100}:${this.opt.nightBrightness / 100} `;
+                    } else {
+                        let temp = lerp(this.opt.nightTemp, this.opt.dayTemp, prd.percent);
+                        cmd += `-t ${temp}:${temp} `;
+                        cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.dayBrightness / 100} `;
+                    }
+                } else {
+                    cmd += `-t ${this.opt.dayTemp}:${this.opt.nightTemp} `;
+                    cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.nightBrightness / 100} `;
+                }
             } else {
                 cmd += `-t ${this.opt.dayTemp}:${this.opt.dayTemp} `;
                 cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.dayBrightness / 100} `;
@@ -721,8 +807,14 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     setInfo() {
-        this.headerIcon.setStatus(this.opt.period + "");
+        let period = this.opt.period + "";
         
+        if (this.opt.manualNightTime) {
+            if (this.check_period().is_night) period = _("Night");
+            else period = _("Day");
+        }
+        
+        this.headerIcon.setStatus(period + "");
     }
     
     updateTooltip() {
@@ -732,7 +824,13 @@ class QRedshift extends Applet.TextIconApplet {
         
         if (this.opt.enabled) {
             tooltiptext += '\n';
-            tooltiptext += `${this.opt.period}\n\n`;
+            let period = this.opt.period;
+            if (this.opt.manualNightTime) {
+                if (this.check_period().is_night) period = _("Night");
+                else period = _("Day");
+            }
+            tooltiptext += `${period}\n\n`;
+            
             if (this.opt.enabledNight) {
                 tooltiptext += _("Day Temperature") + ": " + `${this.opt.dayTemp}K\n`;
                 tooltiptext += _("Day Brightness") + ": " + `${this.opt.dayBrightness}%\n`;
@@ -748,7 +846,9 @@ class QRedshift extends Applet.TextIconApplet {
             // Label text
             
         }
-        if (this.opt.enabledNight && this.opt.period.toLowerCase().startsWith("n")) {
+        if (this.opt.enabledNight && this.opt.manualNightTime && this.check_period().is_night) {
+            labeltext = `${this.opt.nightTemp}k - ${this.opt.nightBrightness}% - `;
+        } else if (this.opt.enabledNight && !this.opt.manualNightTime && this.opt.period.toLowerCase().startsWith("n")) {
             labeltext = `${this.opt.nightTemp}k - ${this.opt.nightBrightness}% - `;
         } else {
             labeltext = `${this.opt.dayTemp}k - ${this.opt.dayBrightness}% - `;
@@ -761,9 +861,9 @@ class QRedshift extends Applet.TextIconApplet {
         this.hide_applet_label(!this.opt.iconLabel);
         if (!this.opt.enabled && !this.opt.iconLabelAlways) this.hideLabel();
     }
-
-
-// Cinnamon should be restarted after this.
+    
+    
+    // Cinnamon should be restarted after this.
     recompileTranslations() {
         let cmd = `cinnamon-xlet-makepot -r ${this.metadata.path}`;
         Util.spawnCommandLine(cmd);
@@ -780,6 +880,7 @@ class QRedshift extends Applet.TextIconApplet {
     openSettings() {
         Util.spawnCommandLine("xlet-settings applet " + this._uuid + " " + this.instance_id);
     }
+    
 }
 
 

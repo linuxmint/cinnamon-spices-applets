@@ -2,7 +2,7 @@
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 const { AppletSettings } = imports.ui.settings;
-const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLine } = imports.misc.util;
 const { ScrollDirection } = imports.gi.Clutter;
 const Gettext = imports.gettext; // l10n support
 const { get_home_dir } = imports.gi.GLib;
@@ -11,7 +11,6 @@ const { Clipboard, ClipboardType } = imports.gi.St;
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
 const { notifySend, checkInstallMprisPlugin, checkInstallMpv, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
-
 
 // for i18n
 let UUID;
@@ -36,9 +35,11 @@ class CinnamonRadioApplet extends TextIconApplet {
     Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
     this.settings = new AppletSettings(this, __meta.uuid, instance_id);
+
   }
 
   async init(orientation) {
+
     this._initSettings()
     this._trimChannelList()
     await this._initMpvPlayer()
@@ -70,6 +71,7 @@ class CinnamonRadioApplet extends TextIconApplet {
       _getInitialVolume: () => this._getInitialVolume(),
       _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args),
       _handleVolumeChanged: (...args) => this.set_applet_tooltip(false, ...args)
+
     })
 
     await this.mpvPlayer.init()
@@ -153,13 +155,12 @@ class CinnamonRadioApplet extends TextIconApplet {
   _getChannelName({ channelUrl }) {
     let channel = this.channel_list.find(cnl => cnl.url === channelUrl)
     if (!channel || channel.inc === false) channel = false
-
     return channel.name
   }
 
   _getInitialVolume() {
     let initialVolume = this.keep_volume_between_sessions ? this.last_volume : this.custom_initial_volume
-    if (!initialVolume) global.logError(`couldn't get valid initalVolume from settings. Have a look at  ~/.cinnamon/configs.json`)
+    if (!initialVolume) global.logError(`couldn'T get valid initalVolume from settings. Have a look at  ~/.cinnamon/configs.json`)
     return initialVolume
   }
 
@@ -225,7 +226,7 @@ class CinnamonRadioApplet extends TextIconApplet {
       Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong);
     } catch (e) {
       notifySend(_("Can't copy current Song. Is the Radio playing?"))
-      //global.logError(e)
+      global.logError(e)
     }
   }
 
@@ -330,9 +331,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   _on_mouse_scroll(event) {
     const direction = event.get_scroll_direction();
     const volumeChange = direction === ScrollDirection.UP ? 5 : -5
-    const volumeChanged = this.mpvPlayer.increaseDecreaseVolume(volumeChange)
-
-    if (!volumeChanged && volumeChange > 0) notifySend(_("Can't increase Volume. Volume already at maximum."))
+    this.mpvPlayer.increaseDecreaseVolume(volumeChange)
   }
 };
 

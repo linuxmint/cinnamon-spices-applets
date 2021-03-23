@@ -1,0 +1,21 @@
+{
+    "url": {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Url to fetch information from"
+    },
+    "appendUsername": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Append your username to url"
+    },
+    "interval": {
+        "type" : "spinbutton",
+        "default" : 10,
+        "min" : 5,
+        "max" : 400,
+        "step" : 1,
+        "description" : "Update interval in seconds"
+    }
+    
+}

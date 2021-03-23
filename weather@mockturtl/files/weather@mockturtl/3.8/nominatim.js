@@ -35,7 +35,7 @@ class GeoLocation {
             let result = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
-                city: locationData[0].address.city || locationData[0].address.town,
+                city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
                 timeZone: null,
                 entryText: this.BuildEntryText(locationData[0]),

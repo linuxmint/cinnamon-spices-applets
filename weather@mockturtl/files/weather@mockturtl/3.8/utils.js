@@ -132,7 +132,7 @@ function AddHours(date, hours) {
     return result;
 }
 exports.AddHours = AddHours;
-function OnSameDay(date1, date2) {
+function OnSameDay(date1, date2, config) {
     return date1.toDateString() == date2.toDateString();
 }
 exports.OnSameDay = OnSameDay;
