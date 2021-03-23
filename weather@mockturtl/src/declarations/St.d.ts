@@ -32,6 +32,13 @@ declare namespace imports.gi.St {
 		get_child(): Widget;
 		set_child(widget: Widget): void;
 	}
+
+	export class Clipboard {
+		static get_default(): Clipboard;
+		set_text(type: ClipboardType, text: string): void
+	}
+
+
 	export class DrawingArea extends Widget {
 		constructor(options?: any)
 		queue_repaint(): void;
@@ -180,6 +187,11 @@ declare namespace imports.gi.St {
 		lookup_url(property_name, inherit)
 		paint_equal(other)*/
 		to_string(): string;
+	}
+
+	export enum ClipboardType {
+		CLIPBOARD,
+		PRIMARY
 	}
 
 	export enum Side {
