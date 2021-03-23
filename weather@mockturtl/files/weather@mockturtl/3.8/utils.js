@@ -133,10 +133,7 @@ function AddHours(date, hours) {
 }
 exports.AddHours = AddHours;
 function OnSameDay(date1, date2, config) {
-    if (!config.Timezone)
-        return date1.toDateString() == date2.toDateString();
-    else
-        return date1.toLocaleDateString(config.currentLocale, { timeZone: config.Timezone }) == date2.toLocaleDateString(config.currentLocale, { timeZone: config.Timezone });
+    return date1.toDateString() == date2.toDateString();
 }
 exports.OnSameDay = OnSameDay;
 function ProcessCondition(condition, shouldTranslate) {
