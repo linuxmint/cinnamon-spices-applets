@@ -8,10 +8,12 @@ class ChannelStore {
         });
     }
     getActivatedChannelUrls() {
-        return this.channelList.flatMap(channel => channel.inc ? channel.url : []);
+        const filteredChannelList = this.channelList.filter(channel => channel.inc);
+        return filteredChannelList.map(channel => channel.url);
     }
     getActivatedChannelNames() {
-        return this.channelList.flatMap(channel => channel.inc ? channel.name : []);
+        const filteredChannelList = this.channelList.filter(channel => channel.inc);
+        return filteredChannelList.map(channel => channel.name);
     }
     getChannelName(channelUrl) {
         const channel = this.channelList.find(cnl => cnl.url === channelUrl);
