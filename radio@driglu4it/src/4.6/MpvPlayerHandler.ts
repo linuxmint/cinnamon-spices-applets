@@ -17,7 +17,7 @@ const MPV_MPRIS_BUS_NAME = `${MEDIA_PLAYER_2_NAME}.mpv`
 const MAX_VOLUME = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
 
 
-type UpdateTarget = "cvcStream" | "mpris"
+type VolumeUpdateTarget = "cvcStream" | "mpris" | "both"
 
 
 interface MprisMediaPlayer {
@@ -97,12 +97,10 @@ export class MpvPlayerHandler {
             this.playbackStatus = "Stopped"
         }
 
-
         this.listenToDBus()
         this.listenToCvcStream()
 
     }
-
 
     private listenToCvcStream() {
 
@@ -115,6 +113,8 @@ export class MpvPlayerHandler {
 
             if (stream?.name === "mpv Media Player") {
                 this.stream = stream
+                this.updateCvcVolume(this.normalizeMprisVolume(this.mediaServerPlayer.Volume))
+
                 this.stream.connect("notify::volume", () => {
                     this.handleCvcVolumeChanged()
                 })
@@ -123,8 +123,9 @@ export class MpvPlayerHandler {
     }
 
     private handleCvcVolumeChanged() {
-        const newVolume = this.normalizeCvcStreamVolume(this.stream.volume)
-        this.updateVolume('mpris', newVolume)
+
+        const normalizedVolume = this.normalizeCvcStreamVolume(this.stream.volume)
+        this.updateVolume('mpris', normalizedVolume)
     }
 
     private initMediaPropsChangeListener() {
@@ -145,7 +146,6 @@ export class MpvPlayerHandler {
             playbackStatus && this.handlePlaybackStatusChanged(playbackStatus);
 
         })
-
     }
 
     // theoretically it should also be possible to listen to props.PlaybackStatus but this doesn't work. 
@@ -176,7 +176,6 @@ export class MpvPlayerHandler {
         }
     }
 
-
     private handleMetadataChange(metadata: any) {
 
         const url = metadata["xesam:url"].unpack()
@@ -189,9 +188,7 @@ export class MpvPlayerHandler {
         this.currentUrl = url
 
         this.playbackStatus = this.mediaServerPlayer.PlaybackStatus
-
     }
-
 
     private handlePlaybackStatusChanged(playbackStatus: PlaybackStatus) {
 
@@ -206,6 +203,7 @@ export class MpvPlayerHandler {
 
 
     private handleMprisVolumeChanged(newMprisVolume: number) {
+
         const normalizedVolume = this.normalizeMprisVolume(newMprisVolume)
         this.updateVolume('cvcStream', normalizedVolume)
     }
@@ -249,7 +247,6 @@ export class MpvPlayerHandler {
 
             const mediaServerPlayer = await getDBusProxyWithOwnerPromise(MEDIA_PLAYER_2_PLAYER_NAME, busName)
             mediaServerPlayer.PauseRemote()
-
         })
     }
 
@@ -257,6 +254,8 @@ export class MpvPlayerHandler {
     public start(channelUrl: string) {
 
         this.pauseAllOtherMediaPlayer()
+        this.volume = this.initialVolume
+
         const command = `mpv --script=${MPRIS_PLUGIN_PATH} ${channelUrl} --volume=${this.initialVolume}`
         spawnCommandLine(command)
     }
@@ -285,42 +284,39 @@ export class MpvPlayerHandler {
 
     public increaseDecreaseVolume(volumeChange: number) {
         if (this.playbackStatus === "Stopped") return
-
-        // as cvc is updated in mpris event listener, both are acutally updated 
-        this.updateVolume('mpris', this.volume + volumeChange)
-
+        this.updateVolume('both', this.volume + volumeChange)
     }
 
-
-    private updateCvcVolume(newVolume: number) {
-        if (this.normalizeCvcStreamVolume(this.stream.volume) === newVolume) return
-
+    private updateCvcVolume(newNormalizedVolume: number) {
         this.stream.is_muted && this.stream.change_is_muted(false)
-        this.stream.volume = this.normalizedVolumeToCvcStreamVolume(newVolume)
+        this.stream.volume = this.normalizedVolumeToCvcStreamVolume(newNormalizedVolume)
         this.stream.push_volume()
+    }
+
+    private updateMprisVolume(newNormalizedVolume: number) {
+        this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newNormalizedVolume)
+    }
+
+
+    private updateVolume(target: VolumeUpdateTarget, newVolume: number) {
+
+        newVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume))
+
+        if (newVolume === this.volume) return
+
+        if (target === "cvcStream" || target === "both") {
+            if (!this.stream || this.normalizeCvcStreamVolume(this.stream.volume) === newVolume) return
+            this.updateCvcVolume(newVolume)
+        }
+
+        if (target === "mpris" || target === "both") {
+            if (this.normalizeMprisVolume(this.mediaServerPlayer.Volume) === newVolume) return
+            this.updateMprisVolume(newVolume)
+        }
 
         this.volume = newVolume
-        this.onVolumeChanged(this.volume)
+        this.onVolumeChanged(newVolume)
     }
-
-    private updateMprisVolume(newVolume: number) {
-        if (this.normalizeMprisVolume(this.mediaServerPlayer.Volume) === newVolume) return
-
-        this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newVolume)
-        // As both targets are synced, it doesn't matter where to set this.volume and calling the cb function 
-        this.volume = newVolume
-        this.onVolumeChanged(this.volume)
-    }
-
-
-    private updateVolume(target: UpdateTarget, newVolume: number) {
-
-        const realNewVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume));
-
-        (target === "cvcStream") ?
-            this.updateCvcVolume(realNewVolume) : this.updateMprisVolume(realNewVolume)
-    }
-
 
 
     public get currentSong() {

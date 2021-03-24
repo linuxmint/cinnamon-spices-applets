@@ -2,55 +2,46 @@ import { PlayMausMenuItem } from "./PlayPauseMenuItem";
 import { PlaybackStatus } from "./types";
 
 const { AppletPopupMenu } = imports.ui.applet;
+const { PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
-
+interface Arguments {
+    launcher: any,
+    orientation: imports.gi.St.Side,
+    stations: string[],
+    onChannelClicked: { (name: string): void },
+    onStopClick: { (): void },
+    initialChannel: string | null,
+    initialPlaybackstatus: PlaybackStatus
+}
 
 export class PopupMenu extends AppletPopupMenu {
 
-    // private menuItems: imports.ui.popupMenu.PopupMenuItem[] 
-
     private stopItem: imports.ui.popupMenu.PopupMenuItem
     private myStationsSubMenu: imports.ui.popupMenu.PopupSubMenu
-
     private channelMap: Map<string, PlayMausMenuItem>
-
     private onChannelCb: { (name: string): void }
 
 
-    /**
-     * 
-     * @param launcher: The applet that contains the context menu 
-     * @param orinentation: The orientation of the applet 
-     * @param stations: array of names shown on the popup menu
-     */
-    public constructor(
-        launcher: any,
-        orinentation: imports.gi.St.Side,
-        stations: string[],
-        onChannelClicked: { (name: string): void },
-        onStopClick: { (): void },
-        initialChannel: string | null,
-        initialPlaybackstatus: PlaybackStatus
-    ) {
-        super(launcher, orinentation)
+    public constructor(args: Arguments) {
+
+        super(args.launcher, args.orientation)
         this.channelMap = new Map<string, PlayMausMenuItem>()
-        this.onChannelCb = onChannelClicked
+        this.onChannelCb = args.onChannelClicked
 
 
         const myStationsSubMenuWrapper = new PopupSubMenuMenuItem("My Stations")
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu
         this.addMenuItem(myStationsSubMenuWrapper)
 
-        this.addStationsToMenu(stations);
-        this.initStopItem(onStopClick)
+        this.addStationsToMenu(args.stations);
+        this.initStopItem(args.onStopClick)
 
 
-        if (initialPlaybackstatus === "Stopped") {
+        if (args.initialPlaybackstatus === "Stopped") {
             this.stopItem.setShowDot(true)
         } else {
-            const channelItem = this.channelMap.get(initialChannel)
-            channelItem.changePlayPauseOffStatus(initialPlaybackstatus)
+            const channelItem = this.channelMap.get(args.initialChannel)
+            channelItem.changePlayPauseOffStatus(args.initialPlaybackstatus)
         }
     }
 
@@ -77,7 +68,6 @@ export class PopupMenu extends AppletPopupMenu {
         const deactivatedChannelItem = this.channelMap.get(deactivatedChannel)
         deactivatedChannelItem?.changePlayPauseOffStatus("Stopped")
     }
-
 
     public changeChannelItem(activatedChannel: string, deactivatedChannel: string) {
         const activatedChannelItem = this.channelMap.get(activatedChannel)

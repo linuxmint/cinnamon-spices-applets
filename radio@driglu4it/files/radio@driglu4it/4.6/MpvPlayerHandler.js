@@ -38,6 +38,7 @@ class MpvPlayerHandler {
             const stream = this.control.lookup_stream_id(id);
             if ((stream === null || stream === void 0 ? void 0 : stream.name) === "mpv Media Player") {
                 this.stream = stream;
+                this.updateCvcVolume(this.normalizeMprisVolume(this.mediaServerPlayer.Volume));
                 this.stream.connect("notify::volume", () => {
                     this.handleCvcVolumeChanged();
                 });
@@ -45,8 +46,8 @@ class MpvPlayerHandler {
         });
     }
     handleCvcVolumeChanged() {
-        const newVolume = this.normalizeCvcStreamVolume(this.stream.volume);
-        this.updateVolume('mpris', newVolume);
+        const normalizedVolume = this.normalizeCvcStreamVolume(this.stream.volume);
+        this.updateVolume('mpris', normalizedVolume);
     }
     initMediaPropsChangeListener() {
         return this.mediaProps.connectSignal('PropertiesChanged', (...args) => {
@@ -136,6 +137,7 @@ class MpvPlayerHandler {
     }
     start(channelUrl) {
         this.pauseAllOtherMediaPlayer();
+        this.volume = this.initialVolume;
         const command = `mpv --script=${constants_1.MPRIS_PLUGIN_PATH} ${channelUrl} --volume=${this.initialVolume}`;
         spawnCommandLine(command);
     }
@@ -158,28 +160,32 @@ class MpvPlayerHandler {
     increaseDecreaseVolume(volumeChange) {
         if (this.playbackStatus === "Stopped")
             return;
-        this.updateVolume('mpris', this.volume + volumeChange);
+        this.updateVolume('both', this.volume + volumeChange);
     }
-    updateCvcVolume(newVolume) {
-        if (this.normalizeCvcStreamVolume(this.stream.volume) === newVolume)
-            return;
+    updateCvcVolume(newNormalizedVolume) {
         this.stream.is_muted && this.stream.change_is_muted(false);
-        this.stream.volume = this.normalizedVolumeToCvcStreamVolume(newVolume);
+        this.stream.volume = this.normalizedVolumeToCvcStreamVolume(newNormalizedVolume);
         this.stream.push_volume();
-        this.volume = newVolume;
-        this.onVolumeChanged(this.volume);
     }
-    updateMprisVolume(newVolume) {
-        if (this.normalizeMprisVolume(this.mediaServerPlayer.Volume) === newVolume)
-            return;
-        this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newVolume);
-        this.volume = newVolume;
-        this.onVolumeChanged(this.volume);
+    updateMprisVolume(newNormalizedVolume) {
+        this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newNormalizedVolume);
     }
     updateVolume(target, newVolume) {
-        const realNewVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume));
-        (target === "cvcStream") ?
-            this.updateCvcVolume(realNewVolume) : this.updateMprisVolume(realNewVolume);
+        newVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume));
+        if (newVolume === this.volume)
+            return;
+        if (target === "cvcStream" || target === "both") {
+            if (!this.stream || this.normalizeCvcStreamVolume(this.stream.volume) === newVolume)
+                return;
+            this.updateCvcVolume(newVolume);
+        }
+        if (target === "mpris" || target === "both") {
+            if (this.normalizeMprisVolume(this.mediaServerPlayer.Volume) === newVolume)
+                return;
+            this.updateMprisVolume(newVolume);
+        }
+        this.volume = newVolume;
+        this.onVolumeChanged(newVolume);
     }
     get currentSong() {
         if (this.playbackStatus === "Stopped")

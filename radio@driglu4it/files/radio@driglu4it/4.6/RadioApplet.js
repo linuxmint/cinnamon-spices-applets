@@ -2,13 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RadioApplet = void 0;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
 const { Clipboard, ClipboardType } = imports.gi.St;
 const MpvPlayerHandler_1 = require("./MpvPlayerHandler");
 const PopupMenu_1 = require("./PopupMenu");
 const ChannelStore_1 = require("./ChannelStore");
 const utils_1 = require("./utils");
-const { get_home_dir } = imports.gi.GLib;
 const { ScrollDirection } = imports.gi.Clutter;
 const { AppletSettings } = imports.ui.settings;
 class RadioApplet extends TextIconApplet {
@@ -38,13 +37,14 @@ class RadioApplet extends TextIconApplet {
         this.settings.bind("music-download-dir-select", "music_dir");
     }
     initGui() {
+        var _a;
         this.setIcon();
         const playbackStatus = this.mpvPlayer.playbackStatus;
         const channelName = this.mpvPlayer.currentUrl ?
             this.channelStore.getChannelName(this.mpvPlayer.currentUrl) : null;
         this.setIconColor(playbackStatus);
         this.setAppletLabel(playbackStatus, channelName);
-        this.setAppletTooltip(this.mpvPlayer.volume);
+        this.setAppletTooltip(playbackStatus, (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume);
         this.createMenu(channelName, playbackStatus);
         this.createContextMenu();
     }
@@ -66,10 +66,17 @@ class RadioApplet extends TextIconApplet {
         await this.mpvPlayer.init();
     }
     createMenu(channelName, playbackStatus) {
-        const stationNames = this.channelStore.getActivatedChannelNames();
         if (!this.menuManager)
             this.menuManager = new PopupMenuManager(this);
-        this.mainMenu = new PopupMenu_1.PopupMenu(this, this.orientation, stationNames, (...args) => this.handleChannelClicked(...args), () => this.mpvPlayer.stop(), channelName, playbackStatus);
+        this.mainMenu = new PopupMenu_1.PopupMenu({
+            launcher: this,
+            orientation: this.orientation,
+            stations: this.channelStore.getActivatedChannelNames(),
+            onChannelClicked: (...args) => this.handleChannelClicked(...args),
+            onStopClick: () => this.mpvPlayer.stop(),
+            initialChannel: channelName,
+            initialPlaybackstatus: playbackStatus
+        });
         this.menuManager.addMenu(this.mainMenu);
     }
     createContextMenu() {
@@ -107,8 +114,8 @@ class RadioApplet extends TextIconApplet {
             ? ' ' + currentChannelName : '';
         this.set_applet_label(label);
     }
-    setAppletTooltip(volume) {
-        const tooltipTxt = volume ? `Volume: ${volume.toString()}%` : "Radio++";
+    setAppletTooltip(playbackStatus, volume) {
+        const tooltipTxt = playbackStatus === "Stopped" ? "Radio++" : `Volume: ${volume.toString()}%`;
         this.set_applet_tooltip(tooltipTxt);
     }
     handleRadioStopped(previousChannelUrl) {
@@ -116,8 +123,10 @@ class RadioApplet extends TextIconApplet {
         const previousChannelName = this.channelStore.getChannelName(previousChannelUrl);
         this.setAppletLabel('Stopped');
         this.setIconColor('Stopped');
-        this.setAppletTooltip(null);
+        this.setAppletTooltip('Stopped');
         this.mainMenu.activateStopItem(previousChannelName);
+        this.lastVolume = this.mpvPlayer.volume;
+        this.updateMpvInitialVolume();
     }
     handleRadioPaused(channelUrl) {
         const channelName = this.channelStore.getChannelName(channelUrl);
@@ -135,6 +144,7 @@ class RadioApplet extends TextIconApplet {
         this.currentUrl = channelUrl;
         const channelName = this.channelStore.getChannelName(channelUrl);
         this.mainMenu.activateChannelItem(channelName);
+        this.setAppletTooltip('Playing', this.mpvPlayer.volume);
         this.setIconColor('Playing');
         this.setAppletLabel('Playing', channelName);
     }
@@ -166,17 +176,17 @@ class RadioApplet extends TextIconApplet {
             this.mpvPlayer.togglePlayPause();
     }
     handleVolumeChanged(volume) {
-        this.setAppletTooltip(volume);
-        if (volume)
-            this.lastVolume = volume;
+        this.setAppletTooltip('Playing', volume);
     }
     get initialVolume() {
-        return this.keepVolume ? this.lastVolume : this.customInitVolume;
+        const initvolume = this.keepVolume ? this.lastVolume : this.customInitVolume;
+        return initvolume;
     }
     updateMpvInitialVolume() {
         this.mpvPlayer.initialVolume = this.initialVolume;
     }
-    on_applet_removed_from_panel(deleteConfig) {
+    on_applet_removed_from_panel() {
+        this.mpvPlayer.stop();
     }
     async on_applet_clicked(event) {
         try {
@@ -185,7 +195,6 @@ class RadioApplet extends TextIconApplet {
             this.mainMenu.toggle();
         }
         catch (error) {
-            global.log(`error occured: ${error}`);
             utils_1.notifySend("couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.");
         }
     }

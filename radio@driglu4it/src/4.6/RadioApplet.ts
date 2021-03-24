@@ -120,17 +120,18 @@ export class RadioApplet extends TextIconApplet {
 
 	private createMenu(channelName: string | null, playbackStatus: PlaybackStatus) {
 
-		const stationNames = this.channelStore.getActivatedChannelNames()
-
 		if (!this.menuManager) this.menuManager = new PopupMenuManager(this)
-		// TODO: WTF?
-		this.mainMenu = new PopupMenu(
-			this, this.orientation, stationNames,
-			(...args) => this.handleChannelClicked(...args),
-			() => this.mpvPlayer.stop(),
-			channelName,
-			playbackStatus
-		)
+
+		this.mainMenu = new PopupMenu({
+			launcher: this,
+			orientation: this.orientation,
+			stations: this.channelStore.getActivatedChannelNames(),
+			onChannelClicked: (...args) => this.handleChannelClicked(...args),
+			onStopClick: () => this.mpvPlayer.stop(),
+			initialChannel: channelName,
+			initialPlaybackstatus: playbackStatus
+		})
+
 		this.menuManager.addMenu(this.mainMenu)
 
 	}
@@ -212,7 +213,12 @@ export class RadioApplet extends TextIconApplet {
 		this.setAppletLabel('Stopped')
 		this.setIconColor('Stopped')
 		this.setAppletTooltip('Stopped')
+
 		this.mainMenu.activateStopItem(previousChannelName)
+
+		// theoretically it would make sense to save the last volume when the volume changes (as it is not guranteed that this method is called when cinnamon crashes) but this has hugh performance issues when changing the volume by scrolling
+		this.lastVolume = this.mpvPlayer.volume
+		this.updateMpvInitialVolume()
 	}
 
 	private handleRadioPaused(channelUrl: string) {
@@ -288,22 +294,21 @@ export class RadioApplet extends TextIconApplet {
 
 	private handleVolumeChanged(volume: number) {
 		this.setAppletTooltip('Playing', volume)
-		if (volume) this.lastVolume = volume
 	}
-
 
 	private get initialVolume() {
-		return this.keepVolume ? this.lastVolume : this.customInitVolume
+		const initvolume = this.keepVolume ? this.lastVolume : this.customInitVolume
+		return initvolume
 	}
-
 
 	private updateMpvInitialVolume() {
 		this.mpvPlayer.initialVolume = this.initialVolume
 	}
 
-	/** Override function */
-	public on_applet_removed_from_panel(deleteConfig: any) {
-		// TODO!!
+	public on_applet_removed_from_panel() {
+		this.mpvPlayer.stop()
+		// TODO: add method to types
+		//this.settings.finalize();
 	}
 
 	public async on_applet_clicked(event: any): Promise<void> {
@@ -313,7 +318,6 @@ export class RadioApplet extends TextIconApplet {
 			await checkInstallMpv()
 			this.mainMenu.toggle()
 		} catch (error) {
-			global.log(`error occured: ${error}`)
 			notifySend("couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.")
 		}
 	}
