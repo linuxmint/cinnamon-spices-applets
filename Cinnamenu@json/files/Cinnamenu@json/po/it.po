@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:10+0100\n"
+"PO-Revision-Date: 2021-03-24 21:22+0000\n"
 "Last-Translator: Livedevelop Live User <mortaromarcello@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Project-Style: gnome\n"
 
 #. 3.2 4.0
@@ -217,8 +217,6 @@ msgid "Use a custom icon"
 msgstr "Usa un'icona personalizzata"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Usa un'icona personalizzata"
 
@@ -293,10 +291,8 @@ msgid "Activate categories on click instead of on hover"
 msgstr "Attiva le categorie al clic"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:15+0100\n"
+"PO-Revision-Date: 2021-03-22 17:41+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: nl\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -218,8 +218,6 @@ msgid "Use a custom icon"
 msgstr "Een aangepast pictogram gebruiken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Een aangepast pictogram gebruiken"
 
@@ -260,8 +258,6 @@ msgid "Open menu on hover"
 msgstr "Menu openen bij zweven"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
 
@@ -278,8 +274,6 @@ msgid "Use menu animations"
 msgstr "Menu-animaties gebruiken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Menu-animaties inschakelen voor openen en sluiten"
 
@@ -288,8 +282,6 @@ msgid "Activate categories on click"
 msgstr "CategorieÃ«n activeren bij klikken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "CategorieÃ«n activeren bij klikken"
 
@@ -350,10 +342,8 @@ msgid "Show bookmarks and places"
 msgstr "Bladwijzers en locaties tonen"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Bladwijzers en locaties tonen"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Show application icons"

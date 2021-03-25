@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -214,8 +214,6 @@ msgid "Use a custom icon"
 msgstr "Naudoti pasirinktinę piktogramą"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Naudoti pasirinktinę piktogramą"
 
@@ -256,8 +254,6 @@ msgid "Open menu on hover"
 msgstr "Atidarykite meniu užveskite pelės žymeklį"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Atidarykite meniu perkeldami pelę virš jo"
 
@@ -274,8 +270,6 @@ msgid "Use menu animations"
 msgstr "Naudoti meniu animaciją"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Leisti meniu animuoti atidarant ir uždarant"
 
@@ -284,16 +278,12 @@ msgid "Activate categories on click"
 msgstr "Suaktyvinkite kategorijas spustelėdami"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "Suaktyvinkite kategorijas spustelėdami"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Įgalinti automatinį slinktį programų sąraše"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -316,13 +306,9 @@ msgid "Enable search providers"
 msgstr "Įgalinti paieškos teikėjus"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not search provider results are indexed in menu "
-#| "searches."
 msgid "Include search provider results in searches"
 msgstr ""
-"Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu."
+"Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu"
 
 #. 3.2 4.0
 msgid "Example Search Providers"
@@ -353,10 +339,8 @@ msgid "Show bookmarks and places"
 msgstr "Rodyti žymas ir vietas"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Rodyti žymas ir vietas"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Show application icons"
