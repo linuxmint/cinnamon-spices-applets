@@ -299,10 +299,10 @@ msgid "Animate the menu on open and close"
 msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
 
 msgid "Activate categories on click"
-msgstr "Kategorileri tıklatarak açın"
+msgstr "Kategorileri tıklayarak açın"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "Kategorileri tıklatarak açın"
+msgstr "Kategorileri tıklayarak açın"
 
 msgid "Enable autoscrolling"
 msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
