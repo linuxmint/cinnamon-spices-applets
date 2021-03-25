@@ -26,6 +26,7 @@ class MpvPlayerHandler {
         }
         else {
             this.playbackStatus = "Stopped";
+            this.currentUrl = null;
         }
         this.listenToDBus();
         this.listenToCvcStream();

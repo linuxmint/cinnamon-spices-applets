@@ -95,6 +95,7 @@ export class MpvPlayerHandler {
             this.volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume)
         } else {
             this.playbackStatus = "Stopped"
+            this.currentUrl = null
         }
 
         this.listenToDBus()
