@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"POT-Creation-Date: 2021-03-21 21:19+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "Type to search..."
 msgstr "Aramak için yaz..."
@@ -112,7 +112,7 @@ msgid "Please wait..."
 msgstr "Lütfen bekleyin..."
 
 msgid "No recent Items"
-msgstr "Yeni Öğe yok"
+msgstr "Son dosya yok"
 
 msgid "Solution:"
 msgstr "Çözüm:"
@@ -127,7 +127,7 @@ msgid "Favorites"
 msgstr "Favoriler"
 
 msgid "Recent"
-msgstr "Son"
+msgstr "Son dosyalar"
 
 msgid "Home folder"
 msgstr "Ev dizini"
@@ -156,11 +156,8 @@ msgstr "Çöpe taşı"
 msgid "Error while moving file to trash:"
 msgstr "Dosya çöpe taşınırken hata:"
 
-msgid "Error while opening file:"
-msgstr ""
-
 msgid "Open"
-msgstr "Açık"
+msgstr "Aç"
 
 msgid "Search"
 msgstr "Ara"
@@ -302,10 +299,10 @@ msgid "Animate the menu on open and close"
 msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
 
 msgid "Activate categories on click"
-msgstr "Kategorileri tıklatarak açın"
+msgstr "Kategorileri tıklayarak açın"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "Kategorileri tıklatarak açın"
+msgstr "Kategorileri tıklayarak açın"
 
 msgid "Enable autoscrolling"
 msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
@@ -477,10 +474,10 @@ msgid "Show an internet search option in search results"
 msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
 
 msgid "Search home folder"
-msgstr "Ana klasör ara"
+msgstr "Ev dizinini ara"
 
 msgid "When searching, also search home folder for files"
-msgstr "Arama yaparken, dosyaları için ana klasörde de arayın"
+msgstr "Arama yaparken, ev dizininde de arama yap"
 
 msgid "Show hidden files"
 msgstr "Gizli dosyaları göster"
@@ -506,4 +503,127 @@ msgstr "Oturum düğmelerinin simge boyutu"
 msgid "Use session buttons box style"
 msgstr "Oturum düğmelerini kutu stilinde kullan"
 
+#~ msgid "All Applications"
+#~ msgstr "Tüm Uygulamalar"
 
+#~ msgid "Recent Files"
+#~ msgstr "Son Dosyalar"
+
+#~ msgid "Favorite Apps"
+#~ msgstr "Favorilerim"
+
+#~ msgid "Lock Screen"
+#~ msgstr "Ekranı Kilitle"
+
+#~ msgid "Open Containing Folder..."
+#~ msgstr "İçeren Dizin Açılıyor..."
+
+#~ msgid "Show recent files"
+#~ msgstr "Son dosyları göster"
+
+#~ msgid "Show recent files category in the menu"
+#~ msgstr "Son dosyalar kategorisini menüden göster"
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Tarayıcınızın web yer işaretlerini menüde gösterin"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Başlangıç uygulamaları görünüm kipi"
+
+#~ msgid "px"
+#~ msgstr "piksel"
+
+#~ msgid "No recent documents"
+#~ msgstr "Yakın tarihli belge yok"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Favorilerden kaldır"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Başlatılamadı \"%s\""
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Gizlilik ayarlarınızı özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Seçeneğin işaretini kaldırmak, temanın simgeyi ayarlamasını sağlar"
+
+#~ msgid "Icon"
+#~ msgstr "Simge"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Menü simge ismini ayarla"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr ""
+#~ "Fare menü uygulamacığının üstüne geldiğinde menü açılmasını etkinleştir"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Kategoriler arası geçişlerdeki gecikme"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr "Kategoriler içindeki uygulama listelerine tıklayarak ulaşırsınız."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Uygulamada sorunsuz otomatik gezinmeyi etkinleştirip etkinleştirmemesini "
+#~ "seçin."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Bilgisayar menüsünde bulunan yer imlerini göster."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Açık pencerelerin menü aramalarına dahil edilip edilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Menüde yer imlerinin ve yerlerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Uygulamalardaki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Etkinleştirildiğinde, uygulamaların açıklamasını içeren araç ipuçları "
+#~ "gösterilir."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr "Araç ipuçları için milisaniye cinsinden gecikme süresi."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi girin"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Arama kutusuna dosya sistemi yolu girişini etkinleştir"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Menü arama kutusuna yol girişini sağlar."
+
+#~ msgid ""
+#~ "Choose where application descriptions will be placed, or select \"None\" "
+#~ "to disable."
+#~ msgstr ""
+#~ "Uygulama açıklamalarının nereye yerleştirileceğini veya devre dışı "
+#~ "bırakmak için \"Yok\" u seç."
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Kategori ilk menü açıldığında görülür"
