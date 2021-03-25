@@ -438,6 +438,4 @@ msgstr ""
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Toggle recent files"
-#~ msgstr "Ficheiros recentes"
+

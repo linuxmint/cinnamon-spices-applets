@@ -510,25 +510,4 @@ msgstr "Tamaño del icono de los botones de sesión"
 msgid "Use session buttons box style"
 msgstr "Usar estilo de cuadro de botones de sesión"
 
-#~ msgid ""
-#~ "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-#~ "Gnomenu, and the contributors to projects they derived from."
-#~ msgstr ""
-#~ "Hecho posible gracias a los esfuerzos de los contribuyentes al menú "
-#~ "Cinnamon, Gnomenu, y los contribuyentes a los proyectos de los que "
-#~ "derivaron."
 
-#~ msgid "Show your browser's web bookmarks in the menu"
-#~ msgstr "Muestra los marcadores web de tu navegador en el menú"
-
-#~ msgid "Startup applications view mode"
-#~ msgstr "Modo de vista de las aplicaciones al iniciar"
-
-#~ msgid "px"
-#~ msgstr "px"
-
-#~ msgid "Always open menu on favorite apps"
-#~ msgstr "Siempre abra el menú en aplicaciones favoritas"
-
-#~ msgid "No recent documents"
-#~ msgstr "No hay documentos recientes"

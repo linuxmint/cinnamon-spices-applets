@@ -432,8 +432,4 @@ msgstr "Pridajte k tlačidlám relácie obľúbené položky"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#~ msgid "Toggle recent files"
-#~ msgstr "Prepnúť posledné súbory"
 
-#~ msgid "Icon"
-#~ msgstr "Ikona"

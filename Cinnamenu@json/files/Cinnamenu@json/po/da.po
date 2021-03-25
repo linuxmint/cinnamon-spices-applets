@@ -510,30 +510,3 @@ msgstr "Sessionsknappernes ikonstørrelse"
 msgid "Use session buttons box style"
 msgstr "Brug kassestil til sessionsknapper"
 
-#~ msgid "All Applications"
-#~ msgstr "Alle programmer"
-
-#~ msgid "Favorite Apps"
-#~ msgstr "Favoritprogrammer"
-
-#~ msgid ""
-#~ "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-#~ "Gnomenu, and the contributors to projects they derived from."
-#~ msgstr ""
-#~ "Gjort mulig takket være bidragyderne til Cinnamon-menu, Gnomenu og "
-#~ "bidragyderne til de projekter, de stammer fra."
-
-#~ msgid "Show your browser's web bookmarks in the menu"
-#~ msgstr "Vis din browsers bogmærker i menuen"
-
-#~ msgid "Startup applications view mode"
-#~ msgstr "Visningstilstand for opstartsprogrammer"
-
-#~ msgid "px"
-#~ msgstr "px"
-
-#~ msgid "Show recent files category in the menu"
-#~ msgstr "Vis kategorien seneste filer i menuen"
-
-#~ msgid "Always open menu on favorite apps"
-#~ msgstr "Åbn altid menuen med favoritprogrammer"

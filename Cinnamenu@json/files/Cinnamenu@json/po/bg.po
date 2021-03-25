@@ -503,5 +503,4 @@ msgstr ""
 msgid "Use session buttons box style"
 msgstr ""
 
-#~ msgid "Startup applications view mode"
-#~ msgstr "Режим на преглед на приложения за стартиране"
+

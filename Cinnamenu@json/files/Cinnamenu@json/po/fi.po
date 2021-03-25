@@ -511,44 +511,4 @@ msgstr "Istunnon painikkeiden kuvakekoko"
 msgid "Use session buttons box style"
 msgstr "Lokeroidut painikkeet istunnon tyylissä"
 
-#~ msgid "All Applications"
-#~ msgstr "Kaikki sovellukset"
 
-#~ msgid "Favorite Apps"
-#~ msgstr "Suosikkisovellukset"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Lukitusnäyttö"
-
-#~ msgid "Clear list"
-#~ msgstr "Tyhjennä luettelo"
-
-#~ msgid "Clear all recent documents"
-#~ msgstr "Tyhjennä viimeaikaiset asiakirjat"
-
-#~ msgid "No recent documents"
-#~ msgstr "Ei viimeaikaisia asiakirjoja"
-
-#~ msgid "Shut down the computer"
-#~ msgstr "Sammuta tietokone"
-
-#~ msgid "Open Containing Folder..."
-#~ msgstr "Avaa sisällön kansio..."
-
-#~ msgid "Show your browser's web bookmarks in the menu"
-#~ msgstr "Näytä selaimesi kirjanmerkit valikossa"
-
-#~ msgid "Startup applications view mode"
-#~ msgstr "Käynnistyvien sovellusten katselu"
-
-#~ msgid "px"
-#~ msgstr "px"
-
-#~ msgid "Show recent files"
-#~ msgstr "Näytä käyttämäsi viimeisimmät tiedostot"
-
-#~ msgid "Show recent files category in the menu"
-#~ msgstr "Näytä käyttämäsi viimeisimmät tiedostot valikossa"
-
-#~ msgid "Always open menu on favorite apps"
-#~ msgstr "Avaa aina suositut sovellukset valikkoon"
