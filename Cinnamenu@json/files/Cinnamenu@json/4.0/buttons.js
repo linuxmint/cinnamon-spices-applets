@@ -105,10 +105,50 @@ class CategoryButton {
         }
     }
 
+    setButtonStyleNormal() {
+        this.actor.set_style_class_name('menu-category-button');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
+    setButtonStyleSelected() {
+        this.actor.set_style_class_name('menu-category-button-selected');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
+    _setButtonStyleHover() {
+        this.actor.set_style_class_name('menu-category-button-hover');
+        //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
+        this.actor.add_style_class_name('menu-category-button-selected');
+
+        //-----some style tweaks for menu-category-button-hover class.-----
+        let themePath = Main.getThemeStylesheet();
+        if (!themePath) themePath = 'Cinnamon default';
+        [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
+        ['/Mint-Y-Dark/',       'background-color: #404040;'],
+        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
+        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
+        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
+        ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
+        ].forEach(fix => {
+            if (themePath.includes(fix[0])) {
+                this.actor.set_style(fix[1]);
+            }
+        });
+    }
+
+    _setButtonStyleGreyed() {
+        this.actor.set_style_class_name('menu-category-button-greyed');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
     selectCategory() {
-        if (this.appThis.settings.categoryClick) {
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
-        }
         this.appThis.setActiveCategory(this.id);
     }
 
@@ -129,35 +169,11 @@ class CategoryButton {
             return Clutter.EVENT_STOP;
         }
         if (this.appThis.settings.categoryClick) {
-            this.actor.set_style_class_name('menu-category-button-hover');
-            //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
-            this.actor.add_style_class_name('menu-category-button-selected');
-            //-----some style tweaks for menu-category-button-hover class.-----
-            let themePath = Main.getThemeStylesheet();
-            if (!themePath) themePath = 'Cinnamon default';
-            [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
-            ['/Mint-Y-Dark/',       'background-color: #404040;'],
-            ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-            ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
-            ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-            ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
-            ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-            ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-            ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-            ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-            ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-            ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-            ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
-            ].forEach(fix => {
-                if (themePath.includes(fix[0])) {
-                    this.actor.set_style(fix[1]);
-                }
-            });
-            return Clutter.EVENT_STOP;
+            this._setButtonStyleHover();
         } else {
             this.selectCategory();
-            return Clutter.EVENT_STOP;
         }
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, event) {
@@ -167,11 +183,10 @@ class CategoryButton {
         this.entered = false;
         if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
             if (this.id !== this.appThis.currentCategory) {
-                this.actor.set_style_class_name('menu-category-button');
+                this.setButtonStyleNormal();
             } else {
-                this.actor.set_style_class_name('menu-category-button-selected');
+                this.setButtonStyleSelected();
             }
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
         }
     }
 
@@ -201,13 +216,13 @@ class CategoryButton {
     }
 
     disable() {
-        this.actor.set_style_class_name('menu-category-button-greyed');
+        this._setButtonStyleGreyed();
         this.disabled = true;
         this.entered = false;
     }
 
     enable() {
-        this.actor.set_style_class_name('menu-category-button');
+        this.setButtonStyleNormal();
         this.disabled = false;
     }
 
@@ -507,7 +522,7 @@ class ContextMenu {
                                 try {
                                     file.trash(null);
                                 } catch (e) {
-                                    Main.notify(_("Error while moving file to trash:"),e.message);
+                                    Main.notify(_("Error while moving file to trash:"), e.message);
                                 }
                                 this.appThis.sidebar.populate();
                                 this.appThis.updateMenuSize();
@@ -538,7 +553,7 @@ class AppButton {
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.signals = new SignalManager(null);
         //----------ICON---------------------------------------------
-        if (this.app.icon) { //isSearchResult(excl. emoji)
+        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
             this.icon = this.app.icon;
         } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
             this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
@@ -556,9 +571,6 @@ class AppButton {
             }
         } else if (this.app.isBackButton) {
             this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.isClearRecentsButton) {
-            this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
-                                        icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
@@ -775,12 +787,13 @@ class AppButton {
             this.appThis.closeMenu();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
+            //don't closeMenu
         } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
+                Main.notify(_("Error while opening file:"), e.message);
                 //don't closeMenu
             }
         } else if (this.app.isClearRecentsButton) {
@@ -930,7 +943,7 @@ class SidebarButton {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
+                Main.notify(_("Error while opening file:"), e.message);
             }
         }
     }
