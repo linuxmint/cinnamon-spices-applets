@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"es2017"
+		],
+		"module": "CommonJS",
+		"target": "es2017",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": false,
+		"sourceMap": false,
+		"noImplicitThis": true,
+		"outDir": "../../files/radio@driglu4it/4.6/"
+	},
+	"include": [
+		"./**/*",
+		"../../../weather@mockturtl/src/declarations/**/*",
+	],
+}
