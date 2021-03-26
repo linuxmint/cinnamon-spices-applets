@@ -1,98 +1,97 @@
 import { PlayMausMenuItem } from "./PlayPauseMenuItem";
 import { PlaybackStatus } from "./types";
+import { VolumeSlider } from "./VolumeSlider"
 
 const { AppletPopupMenu } = imports.ui.applet;
 const { PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
+
 
 interface Arguments {
     launcher: any,
     orientation: imports.gi.St.Side,
     stations: string[],
     onChannelClicked: { (name: string): void },
-    onStopClick: { (): void },
+    onStopClicked: { (): void },
     initialChannel: string | null,
     initialPlaybackstatus: PlaybackStatus
-}
+};
 
 export class PopupMenu extends AppletPopupMenu {
 
     private stopItem: imports.ui.popupMenu.PopupMenuItem
     private myStationsSubMenu: imports.ui.popupMenu.PopupSubMenu
     private channelMap: Map<string, PlayMausMenuItem>
-    private onChannelCb: { (name: string): void }
+    private onChannelClicked: { (name: string): void }
+
+    private currentChannelMenuItem: PlayMausMenuItem | null;
+
+    private volumeSlider: VolumeSlider
 
 
-    public constructor(args: Arguments) {
+    public constructor({
+        launcher,
+        orientation,
+        stations,
+        onChannelClicked,
+        onStopClicked,
+        initialChannel,
+        initialPlaybackstatus
+    }: Arguments) {
 
-        super(args.launcher, args.orientation)
+        super(launcher, orientation)
+
         this.channelMap = new Map<string, PlayMausMenuItem>()
-        this.onChannelCb = args.onChannelClicked
-
+        this.onChannelClicked = onChannelClicked
 
         const myStationsSubMenuWrapper = new PopupSubMenuMenuItem("My Stations")
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu
+
         this.addMenuItem(myStationsSubMenuWrapper)
 
-        this.addStationsToMenu(args.stations);
-        this.initStopItem(args.onStopClick)
+        this.volumeSlider = new VolumeSlider(50)
+        this.addMenuItem(this.volumeSlider)
 
+        this.addStationsToMenu(stations);
+        this.initStopItem(onStopClicked, initialPlaybackstatus === "Stopped")
+        initialChannel && this.setChannelName(initialChannel, initialPlaybackstatus)
 
-        if (args.initialPlaybackstatus === "Stopped") {
-            this.stopItem.setShowDot(true)
-        } else {
-            const channelItem = this.channelMap.get(args.initialChannel)
-            channelItem.changePlayPauseOffStatus(args.initialPlaybackstatus)
-        }
     }
 
-    private initStopItem(onStopClick: { (): void }) {
+
+    public set volume(newVolume: number) {
+        this.volumeSlider.setValue(newVolume)
+    }
+
+    private initStopItem(onClick: { (): void }, stopped: boolean) {
         this.stopItem = new PopupMenuItem("Stop");
         this.addMenuItem(this.stopItem)
-        this.stopItem.connect('activate', () => onStopClick())
+        this.stopItem.connect('activate', () => onClick())
+
+        if (stopped) this.playbackStatus = "Stopped"
     }
 
     public addStationsToMenu(stations: string[]) {
         stations.forEach(name => {
             const channelItem = new PlayMausMenuItem(name)
             this.myStationsSubMenu.addMenuItem(channelItem)
-            channelItem.connect('activate', () => this.onChannelCb(name))
+            channelItem.connect('activate', () => this.onChannelClicked(name))
             this.channelMap.set(name, channelItem)
         })
-
-
     }
 
-    public activateStopItem(deactivatedChannel: string) {
-        this.stopItem.setShowDot(true)
 
-        const deactivatedChannelItem = this.channelMap.get(deactivatedChannel)
-        deactivatedChannelItem?.changePlayPauseOffStatus("Stopped")
-    }
 
-    public changeChannelItem(activatedChannel: string, deactivatedChannel: string) {
-        const activatedChannelItem = this.channelMap.get(activatedChannel)
-        activatedChannelItem?.changePlayPauseOffStatus("Playing")
+    public set stationsList(stations: string[]) {
+        const currentChannelName = stations.find(station => station === this.currentChannelMenuItem?.label.text)
 
-        const deactivatedChannelItem = this.channelMap.get(deactivatedChannel)
-        deactivatedChannelItem?.changePlayPauseOffStatus("Stopped")
-    }
+        const playbackStatus = this.currentChannelMenuItem?.playbackStatus ?? 'Stopped'
 
-    public activateChannelItem(activatedChannel: string) {
-        const activatedChannelItem = this.channelMap.get(activatedChannel)
-        activatedChannelItem?.changePlayPauseOffStatus("Playing")
+        this.channelMap.forEach(channelItem => channelItem.destroy())
+        this.channelMap.clear()
 
-        this.stopItem.setShowDot(false)
+        this.addStationsToMenu(stations)
 
-    }
-
-    public pauseChannelItem(pausedChannel: string) {
-        const pausedChannelItem = this.channelMap.get(pausedChannel)
-        pausedChannelItem?.changePlayPauseOffStatus("Paused")
-    }
-
-    public resumeChannelItem(resumedChannel: string) {
-        const resumedChannelItem = this.channelMap.get(resumedChannel)
-        resumedChannelItem?.changePlayPauseOffStatus("Playing")
+        currentChannelName ? this.setChannelName(currentChannelName, playbackStatus) : this.playbackStatus = "Stopped"
     }
 
 
@@ -101,21 +100,27 @@ export class PopupMenu extends AppletPopupMenu {
         this.myStationsSubMenu.open(animate)
     }
 
-    public updateStationList(stationList: string[], playbackStatus: PlaybackStatus,
-        channel: string | null) {
-        this.myStationsSubMenu.removeAll
-        for (let channelItem of this.channelMap.values()) {
-            channelItem.destroy()
-        }
-        this.channelMap.clear()
-        this.addStationsToMenu(stationList)
+    public setChannelName(name: string, playbackStatus: PlaybackStatus = "Playing") {
+        if (this.currentChannelMenuItem) this.currentChannelMenuItem.playbackStatus = "Stopped"
 
-        if (!stationList.includes(channel) || playbackStatus === "Stopped") {
-            this.stopItem.setShowDot(true)
-        } else {
-            const channelItem = this.channelMap.get(channel)
-            channelItem.changePlayPauseOffStatus(playbackStatus)
+        this.currentChannelMenuItem = this.channelMap.get(name)
+        this.currentChannelMenuItem.playbackStatus = playbackStatus
+
+        this.stopItem.setShowDot(false)
+    }
+
+    public set playbackStatus(playbackStatus: PlaybackStatus) {
+
+        if (!this.currentChannelMenuItem && playbackStatus !== "Stopped") {
+            global.logError(`can't change playbackStatus to ${playbackStatus} as no channel is defined`)
         }
+
+        if (this.currentChannelMenuItem) this.currentChannelMenuItem.playbackStatus = playbackStatus
+        this.stopItem.setShowDot(playbackStatus === 'Stopped')
+
+        if (playbackStatus === 'Stopped') this.currentChannelMenuItem = null
+
+
     }
 
 }

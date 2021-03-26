@@ -7,11 +7,10 @@ export class ChannelStore {
         this.channelList = channelList.map(channel => {
             return { ...channel, url: channel.url.trim() }
         })
-
     }
 
-    public getActivatedChannelUrls() {
 
+    public get activatedChannelUrls() {
         const filteredChannelList = this.channelList.filter(channel => channel.inc)
 
         return filteredChannelList.map(channel => channel.url)
@@ -22,8 +21,8 @@ export class ChannelStore {
         // )
     }
 
-    public getActivatedChannelNames() {
 
+    public get activatedChannelNames() {
         const filteredChannelList = this.channelList.filter(channel => channel.inc)
         return filteredChannelList.map(channel => channel.name)
 
@@ -32,6 +31,8 @@ export class ChannelStore {
         //     channel.inc ? channel.name : []
         // )
     }
+
+
 
     // TODO: what is when two Channels have the same Name or Url? :O
     public getChannelName(channelUrl: string) {
@@ -44,5 +45,6 @@ export class ChannelStore {
         const channel = this.channelList.find(cnl => cnl.name === channelName)
         return channel ? channel.url : null
     }
+
 
 }

@@ -1,4 +1,15 @@
 "use strict";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MpvPlayerHandler = void 0;
 const { spawnCommandLine } = imports.misc.util;
@@ -12,7 +23,9 @@ const MPV_MPRIS_BUS_NAME = `${MEDIA_PLAYER_2_NAME}.mpv`;
 const MAX_VOLUME = 100;
 class MpvPlayerHandler {
     constructor(args) {
-        Object.assign(this, args);
+        const { validUrls } = args, others = __rest(args, ["validUrls"]);
+        this._validUrls = validUrls;
+        Object.assign(this, others);
     }
     async init() {
         this.dbus = await utils_1.getDBusPromise();
@@ -20,12 +33,12 @@ class MpvPlayerHandler {
         this.mediaProps = await utils_1.getDBusPropertiesPromise(MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PATH);
         const mpvRunning = (await this.getAllMrisPlayerBusNames()).includes(MPV_MPRIS_BUS_NAME);
         if (mpvRunning) {
-            this.playbackStatus = this.mediaServerPlayer.PlaybackStatus;
+            this._playbackStatus = this.mediaServerPlayer.PlaybackStatus;
             this.propsChangeListener = this.initMediaPropsChangeListener();
             this.volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume);
         }
         else {
-            this.playbackStatus = "Stopped";
+            this._playbackStatus = "Stopped";
             this.currentUrl = null;
         }
         this.listenToDBus();
@@ -74,32 +87,32 @@ class MpvPlayerHandler {
             else {
                 this.onStopped(this.currentUrl);
                 this.currentUrl = null;
-                this.playbackStatus = "Stopped";
+                this._playbackStatus = "Stopped";
                 this.mediaProps.disconnectSignal(this.propsChangeListener);
             }
         });
     }
-    updateValidUrls(urls) {
-        this.validUrls = urls;
-        if (!this.validUrls.includes(this.currentUrl)) {
+    set validUrls(urls) {
+        this._validUrls = urls;
+        if (!this._validUrls.includes(this.currentUrl)) {
             this.stop();
         }
     }
     handleMetadataChange(metadata) {
         const url = metadata["xesam:url"].unpack();
-        if (url === this.currentUrl || !this.validUrls.includes(url)) {
+        if (url === this.currentUrl || !this._validUrls.includes(url)) {
             return;
         }
-        this.currentUrl ? this.onChannelChanged(this.currentUrl, url) : this.onStarted(url);
+        this.currentUrl ? this.onChannelChanged(url, this.currentUrl) : this.onStarted(url);
         this.currentUrl = url;
-        this.playbackStatus = this.mediaServerPlayer.PlaybackStatus;
+        this._playbackStatus = this.mediaServerPlayer.PlaybackStatus;
     }
     handlePlaybackStatusChanged(playbackStatus) {
-        if (this.playbackStatus === playbackStatus)
+        if (this._playbackStatus === playbackStatus)
             return;
         playbackStatus === "Paused" && this.onPaused(this.currentUrl);
         playbackStatus === "Playing" && this.onResumed(this.currentUrl);
-        this.playbackStatus = playbackStatus;
+        this._playbackStatus = playbackStatus;
     }
     handleMprisVolumeChanged(newMprisVolume) {
         const normalizedVolume = this.normalizeMprisVolume(newMprisVolume);
@@ -149,17 +162,17 @@ class MpvPlayerHandler {
         this.mediaServerPlayer.OpenUriRemote(channelUrl);
     }
     togglePlayPause() {
-        if (this.playbackStatus === "Stopped")
+        if (this._playbackStatus === "Stopped")
             return;
         this.mediaServerPlayer.PlayPauseRemote();
     }
     stop() {
-        if (this.playbackStatus === "Stopped")
+        if (this._playbackStatus === "Stopped")
             return;
         this.mediaServerPlayer.StopRemote();
     }
     increaseDecreaseVolume(volumeChange) {
-        if (this.playbackStatus === "Stopped")
+        if (this._playbackStatus === "Stopped")
             return;
         this.updateVolume('both', this.volume + volumeChange);
     }
@@ -189,9 +202,12 @@ class MpvPlayerHandler {
         this.onVolumeChanged(newVolume);
     }
     get currentSong() {
-        if (this.playbackStatus === "Stopped")
+        if (this._playbackStatus === "Stopped")
             return;
         return this.mediaServerPlayer.Metadata["xesam:title"].unpack();
+    }
+    get playbackStatus() {
+        return this._playbackStatus;
     }
 }
 exports.MpvPlayerHandler = MpvPlayerHandler;

@@ -20,9 +20,21 @@ const MAX_VOLUME = 100 // see https://github.com/linuxmint/cinnamon-spices-apple
 type VolumeUpdateTarget = "cvcStream" | "mpris" | "both"
 
 
+interface MetaValue {
+    unpack: { (): string }
+}
+
+// these are the values which playerctl returns (not mandatory complete)
+interface Metadata {
+    ["xesam:title"]: MetaValue,
+    ["mpris:trackid"]: MetaValue,
+    ["xesam:url"]: MetaValue,
+    ["mpris:length"]: MetaValue
+}
+
 interface MprisMediaPlayer {
     Volume: number
-    Metadata: any //TODO: add type
+    Metadata: Metadata
     PlaybackStatus: PlaybackStatus
     LoopStatus: any
     Shuffle: any
@@ -46,7 +58,7 @@ interface Arguments {
     onStopped: { (stoppedUrl: string): void },
     onVolumeChanged: { (newVolume: number): void }
     onStarted: { (startedUrl: string): void },
-    onChannelChanged: { (oldUrl: string, newUrl: string): void },
+    onChannelChanged: { (newUrl: string, oldUrl?: string): void },
     onPaused: { (pausedUrl: string): void },
     onResumed: { (resumedUrl: string): void },
 }
@@ -65,7 +77,7 @@ export class MpvPlayerHandler {
     public initialVolume: number
     private _playbackStatus: PlaybackStatus
 
-    private validUrls: string[]
+    private _validUrls: string[]
     public currentUrl: string
 
     private onVolumeChanged: { (newVolume: number): void }
@@ -78,7 +90,11 @@ export class MpvPlayerHandler {
     private propsChangeListener: Function
 
     public constructor(args: Arguments) {
-        Object.assign(this, args)
+
+        const { validUrls, ...others } = args
+
+        this._validUrls = validUrls
+        Object.assign(this, others)
     }
 
     public async init() {
@@ -170,9 +186,9 @@ export class MpvPlayerHandler {
         })
     }
 
-    public updateValidUrls(urls: string[]) {
-        this.validUrls = urls
-        if (!this.validUrls.includes(this.currentUrl)) {
+    public set validUrls(urls: string[]) {
+        this._validUrls = urls
+        if (!this._validUrls.includes(this.currentUrl)) {
             this.stop()
         }
     }
@@ -181,11 +197,11 @@ export class MpvPlayerHandler {
 
         const url = metadata["xesam:url"].unpack()
 
-        if (url === this.currentUrl || !this.validUrls.includes(url)) {
+        if (url === this.currentUrl || !this._validUrls.includes(url)) {
             return
         }
 
-        this.currentUrl ? this.onChannelChanged(this.currentUrl, url,) : this.onStarted(url)
+        this.currentUrl ? this.onChannelChanged(url, this.currentUrl) : this.onStarted(url)
         this.currentUrl = url
 
         this._playbackStatus = this.mediaServerPlayer.PlaybackStatus
