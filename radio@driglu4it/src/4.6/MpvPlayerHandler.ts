@@ -63,7 +63,7 @@ export class MpvPlayerHandler {
     private stream: imports.gi.Cvc.MixerStream
     public volume: number
     public initialVolume: number
-    public playbackStatus: PlaybackStatus
+    private _playbackStatus: PlaybackStatus
 
     private validUrls: string[]
     public currentUrl: string
@@ -90,11 +90,11 @@ export class MpvPlayerHandler {
         const mpvRunning = (await this.getAllMrisPlayerBusNames()).includes(MPV_MPRIS_BUS_NAME)
 
         if (mpvRunning) {
-            this.playbackStatus = this.mediaServerPlayer.PlaybackStatus
+            this._playbackStatus = this.mediaServerPlayer.PlaybackStatus
             this.propsChangeListener = this.initMediaPropsChangeListener()
             this.volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume)
         } else {
-            this.playbackStatus = "Stopped"
+            this._playbackStatus = "Stopped"
             this.currentUrl = null
         }
 
@@ -164,7 +164,7 @@ export class MpvPlayerHandler {
             } else {
                 this.onStopped(this.currentUrl)
                 this.currentUrl = null
-                this.playbackStatus = "Stopped"
+                this._playbackStatus = "Stopped"
                 this.mediaProps.disconnectSignal(this.propsChangeListener)
             }
         })
@@ -188,17 +188,17 @@ export class MpvPlayerHandler {
         this.currentUrl ? this.onChannelChanged(this.currentUrl, url,) : this.onStarted(url)
         this.currentUrl = url
 
-        this.playbackStatus = this.mediaServerPlayer.PlaybackStatus
+        this._playbackStatus = this.mediaServerPlayer.PlaybackStatus
     }
 
     private handlePlaybackStatusChanged(playbackStatus: PlaybackStatus) {
 
-        if (this.playbackStatus === playbackStatus) return
+        if (this._playbackStatus === playbackStatus) return
 
         playbackStatus === "Paused" && this.onPaused(this.currentUrl)
         playbackStatus === "Playing" && this.onResumed(this.currentUrl)
 
-        this.playbackStatus = playbackStatus
+        this._playbackStatus = playbackStatus
 
     }
 
@@ -274,17 +274,17 @@ export class MpvPlayerHandler {
 
 
     public togglePlayPause() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
         this.mediaServerPlayer.PlayPauseRemote()
     }
 
     public stop() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
         this.mediaServerPlayer.StopRemote()
     }
 
     public increaseDecreaseVolume(volumeChange: number) {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
         this.updateVolume('both', this.volume + volumeChange)
     }
 
@@ -321,10 +321,14 @@ export class MpvPlayerHandler {
 
 
     public get currentSong() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
 
         return this.mediaServerPlayer.Metadata["xesam:title"].unpack()
-
-
     }
+
+    public get playbackStatus() {
+        return this._playbackStatus
+    }
+
+
 }
