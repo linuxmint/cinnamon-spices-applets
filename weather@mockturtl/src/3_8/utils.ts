@@ -301,11 +301,13 @@ export function TempRangeToUserConfig(min: number, max: number, config: Config):
 	let second_temperature = config._temperatureHighFirst ? t_low : t_high;
 
 	let result = "";
-	result = first_temperature;
+	if (first_temperature != null)
+		result = first_temperature;
 	// As Russian Tradition, -temp...+temp
 	// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
 	result += ((config._tempRussianStyle) ? ELLIPSIS : ` ${FORWARD_SLASH} `);
-	result += `${second_temperature} `;
+	if (second_temperature != null)
+		result += `${second_temperature} `;
 	result += `${UnitToUnicode(config.TemperatureUnit)}`;
 	return result;
 }

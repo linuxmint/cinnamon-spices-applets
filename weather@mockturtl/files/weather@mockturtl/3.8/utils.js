@@ -245,9 +245,11 @@ function TempRangeToUserConfig(min, max, config) {
     let first_temperature = config._temperatureHighFirst ? t_high : t_low;
     let second_temperature = config._temperatureHighFirst ? t_low : t_high;
     let result = "";
-    result = first_temperature;
+    if (first_temperature != null)
+        result = first_temperature;
     result += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : ` ${consts_1.FORWARD_SLASH} `);
-    result += `${second_temperature} `;
+    if (second_temperature != null)
+        result += `${second_temperature} `;
     result += `${UnitToUnicode(config.TemperatureUnit)}`;
     return result;
 }
