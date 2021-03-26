@@ -18,7 +18,7 @@ export class OpenWeatherMap implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "OpenWeatherMap";
+	public readonly prettyName = _("OpenWeatherMap");
 	public readonly name = "OpenWeatherMap";
 	public readonly maxForecastSupport = 8;
 	public readonly website = "https://openweathermap.org/";

@@ -7,7 +7,7 @@ import { CelsiusToKelvin, _ } from "./utils";
 
 export class ClimacellV4 implements WeatherProvider {
 	needsApiKey: boolean = true;
-	prettyName: string = "Climacell";
+	prettyName: string = _("Climacell");
 	name: Services = "ClimacellV4";
 	maxForecastSupport: number = 15;
 	maxHourlyForecastSupport: number = 108;

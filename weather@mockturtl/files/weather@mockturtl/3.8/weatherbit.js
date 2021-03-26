@@ -6,7 +6,7 @@ const utils_1 = require("./utils");
 const Lang = imports.lang;
 class Weatherbit {
     constructor(_app) {
-        this.prettyName = "WeatherBit";
+        this.prettyName = utils_1._("WeatherBit");
         this.name = "Weatherbit";
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";

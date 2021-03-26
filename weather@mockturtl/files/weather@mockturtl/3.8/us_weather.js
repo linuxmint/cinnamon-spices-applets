@@ -6,7 +6,7 @@ const sunCalc_1 = require("./sunCalc");
 const utils_1 = require("./utils");
 class USWeather {
     constructor(_app) {
-        this.prettyName = "US Weather";
+        this.prettyName = utils_1._("US Weather");
         this.name = "US Weather";
         this.maxForecastSupport = 7;
         this.website = "https://www.weather.gov/";

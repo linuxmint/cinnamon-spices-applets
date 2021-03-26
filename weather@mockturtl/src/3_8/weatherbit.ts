@@ -19,7 +19,7 @@ export class Weatherbit implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "WeatherBit";
+	public readonly prettyName = _("WeatherBit");
 	public readonly name = "Weatherbit";
 	public readonly maxForecastSupport = 16;
 	public readonly website = "https://www.weatherbit.io/";

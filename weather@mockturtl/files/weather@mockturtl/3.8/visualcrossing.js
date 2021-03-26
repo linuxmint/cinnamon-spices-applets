@@ -4,7 +4,7 @@ exports.VisualCrossing = void 0;
 const utils_1 = require("./utils");
 class VisualCrossing {
     constructor(app) {
-        this.prettyName = "Visual Crossing";
+        this.prettyName = utils_1._("Visual Crossing");
         this.name = "Visual Crossing";
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 336;

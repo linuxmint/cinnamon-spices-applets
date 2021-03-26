@@ -6,7 +6,7 @@ const utils_1 = require("./utils");
 const Lang = imports.lang;
 class DarkSky {
     constructor(_app) {
-        this.prettyName = "DarkSky";
+        this.prettyName = utils_1._("DarkSky");
         this.name = "DarkSky";
         this.maxForecastSupport = 8;
         this.website = "https://darksky.net/poweredby/";

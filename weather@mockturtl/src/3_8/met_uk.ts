@@ -18,7 +18,7 @@ export class MetUk implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "Met Office UK";
+	public readonly prettyName = _("Met Office UK");
 	public readonly name = "Met Office UK";
 	public readonly maxForecastSupport = 5;
 	public readonly website = "https://www.metoffice.gov.uk/";

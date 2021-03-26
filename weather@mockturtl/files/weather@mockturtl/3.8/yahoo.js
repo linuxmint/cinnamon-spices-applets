@@ -7,7 +7,7 @@ const notification_service_1 = require("./notification_service");
 const utils_1 = require("./utils");
 class Yahoo {
     constructor(_app) {
-        this.prettyName = "Yahoo";
+        this.prettyName = utils_1._("Yahoo");
         this.name = "Yahoo";
         this.maxForecastSupport = 10;
         this.website = "https://www.yahoo.com/news/weather/";

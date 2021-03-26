@@ -6,7 +6,7 @@ const utils_1 = require("./utils");
 const Lang = imports.lang;
 class Climacell {
     constructor(_app) {
-        this.prettyName = "Climacell";
+        this.prettyName = utils_1._("Climacell");
         this.name = "Climacell";
         this.maxForecastSupport = 16;
         this.website = "https://www.climacell.co/";

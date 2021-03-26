@@ -5,7 +5,7 @@ const utils_1 = require("./utils");
 class ClimacellV4 {
     constructor(app) {
         this.needsApiKey = true;
-        this.prettyName = "Climacell";
+        this.prettyName = utils_1._("Climacell");
         this.name = "ClimacellV4";
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;

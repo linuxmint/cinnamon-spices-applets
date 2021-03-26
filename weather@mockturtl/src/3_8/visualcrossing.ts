@@ -7,7 +7,7 @@ import { CelsiusToKelvin, IsLangSupported, WeatherIconSafely, _ } from "./utils"
 
 
 export class VisualCrossing implements WeatherProvider {
-	readonly prettyName: string = "Visual Crossing";
+	readonly prettyName: string = _("Visual Crossing");
 	readonly name: Services = "Visual Crossing";
 	readonly maxForecastSupport: number = 15;
 	readonly maxHourlyForecastSupport: number = 336;

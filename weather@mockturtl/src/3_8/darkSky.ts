@@ -20,7 +20,7 @@ export class DarkSky implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "DarkSky";
+	public readonly prettyName = _("DarkSky");
 	public readonly name = "DarkSky";
 	public readonly maxForecastSupport = 8;
 	public readonly website = "https://darksky.net/poweredby/";

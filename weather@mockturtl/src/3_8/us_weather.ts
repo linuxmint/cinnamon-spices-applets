@@ -18,7 +18,7 @@ export class USWeather implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "US Weather";
+	public readonly prettyName = _("US Weather");
 	public readonly name = "US Weather";
 	public readonly maxForecastSupport = 7;
 	public readonly website = "https://www.weather.gov/";

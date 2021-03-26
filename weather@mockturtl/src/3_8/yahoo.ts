@@ -19,7 +19,7 @@ export class Yahoo implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "Yahoo";
+	public readonly prettyName = _("Yahoo");
 	public readonly name = "Yahoo";
 	public readonly maxForecastSupport = 10;
 	public readonly website = "https://www.yahoo.com/news/weather/";

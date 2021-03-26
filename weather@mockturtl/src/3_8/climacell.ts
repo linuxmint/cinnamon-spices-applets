@@ -20,7 +20,7 @@ export class Climacell implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
-	public readonly prettyName = "Climacell";
+	public readonly prettyName = _("Climacell");
 	public readonly name = "Climacell";
 	public readonly maxForecastSupport = 16;
 	public readonly website = "https://www.climacell.co/";

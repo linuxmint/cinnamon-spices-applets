@@ -6,7 +6,7 @@ const utils_1 = require("./utils");
 const Lang = imports.lang;
 class OpenWeatherMap {
     constructor(_app) {
-        this.prettyName = "OpenWeatherMap";
+        this.prettyName = utils_1._("OpenWeatherMap");
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 8;
         this.website = "https://openweathermap.org/";

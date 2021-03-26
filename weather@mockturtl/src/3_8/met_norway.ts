@@ -5,7 +5,7 @@ import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Conditi
 import { CelsiusToKelvin, IsNight, _, WeatherIconSafely } from "./utils";
 
 export class MetNorway implements WeatherProvider {
-	public readonly prettyName = "MET Norway";
+	public readonly prettyName = _("MET Norway");
 	public readonly name = "MetNorway";
 	public readonly maxForecastSupport = 10;
 	public readonly website = "https://www.met.no/en";
