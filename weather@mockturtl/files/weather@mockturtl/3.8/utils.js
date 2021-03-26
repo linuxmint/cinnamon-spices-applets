@@ -218,13 +218,17 @@ function TempToUserConfig(kelvin, config, withUnit = true) {
         return null;
     let temp = (config.TemperatureUnit == "celsius") ? KelvinToCelsius(kelvin) : KelvinToFahrenheit(kelvin);
     temp = RussianTransform(temp, config._tempRussianStyle);
-    if (config._showBothTempUnits) {
-        let secondTemp = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
-        secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
-        temp += ` (${secondTemp.toString()})`;
-    }
     if (withUnit)
         temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
+    if (config._showBothTempUnits) {
+        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        let secondTemp = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
+        secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
+        if (withUnit)
+            temp += ` (${secondTemp.toString()} ${UnitToUnicode(secondUnit)})`;
+        else
+            temp += ` (${secondTemp.toString()})`;
+    }
     return temp.toString();
 }
 exports.TempToUserConfig = TempToUserConfig;
@@ -251,6 +255,10 @@ function TempRangeToUserConfig(min, max, config) {
     if (second_temperature != null)
         result += `${second_temperature} `;
     result += `${UnitToUnicode(config.TemperatureUnit)}`;
+    if (config._showBothTempUnits) {
+        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        result += ` (${UnitToUnicode(secondUnit)})`;
+    }
     return result;
 }
 exports.TempRangeToUserConfig = TempRangeToUserConfig;
