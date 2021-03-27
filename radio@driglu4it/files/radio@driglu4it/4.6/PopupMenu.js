@@ -15,6 +15,7 @@ class PopupMenu extends AppletPopupMenu {
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu;
         this.addMenuItem(myStationsSubMenuWrapper);
         this.volumeSlider = new VolumeSlider_1.VolumeSlider(50, onVolumeSliderChanged);
+        this.volumeSlider.connect('value-changed', (value) => global.log(`slider value changed to ${value}`));
         this.addMenuItem(this.volumeSlider);
         this.addStationsToMenu(stations);
         this.initStopItem(onStopClicked, initialPlaybackstatus === "Stopped");
@@ -55,8 +56,7 @@ class PopupMenu extends AppletPopupMenu {
         if (this.currentChannelMenuItem)
             this.currentChannelMenuItem.playbackStatus = "Stopped";
         this.currentChannelMenuItem = this.channelMap.get(name);
-        this.currentChannelMenuItem.playbackStatus = playbackStatus;
-        this.stopItem.setShowDot(false);
+        this.playbackStatus = playbackStatus;
     }
     set playbackStatus(playbackStatus) {
         if (!this.currentChannelMenuItem && playbackStatus !== "Stopped") {

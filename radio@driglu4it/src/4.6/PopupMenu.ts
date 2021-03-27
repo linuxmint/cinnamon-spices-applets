@@ -51,6 +51,9 @@ export class PopupMenu extends AppletPopupMenu {
         this.addMenuItem(myStationsSubMenuWrapper)
 
         this.volumeSlider = new VolumeSlider(50, onVolumeSliderChanged)
+
+        this.volumeSlider.connect('value-changed', (value: number) => global.log(`slider value changed to ${value}`))
+
         this.addMenuItem(this.volumeSlider)
 
         this.addStationsToMenu(stations);
@@ -104,9 +107,7 @@ export class PopupMenu extends AppletPopupMenu {
         if (this.currentChannelMenuItem) this.currentChannelMenuItem.playbackStatus = "Stopped"
 
         this.currentChannelMenuItem = this.channelMap.get(name)
-        this.currentChannelMenuItem.playbackStatus = playbackStatus
-
-        this.playbackStatus = "Stopped"
+        this.playbackStatus = playbackStatus
     }
 
     public set playbackStatus(playbackStatus: PlaybackStatus) {
