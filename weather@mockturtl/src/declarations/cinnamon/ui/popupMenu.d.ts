@@ -150,12 +150,10 @@ declare namespace imports.ui.popupMenu {
 	}
 
 	export class PopupSliderMenuItem extends PopupBaseMenuItem {
+		_slider: gi.St.DrawingArea
 		constructor(value: number);
 
 		setValue(value: number): void;
-
-
-		public _slider: gi.St.DrawingArea
 
 		private _sliderRepaint(area: any): void;
 
@@ -505,7 +503,7 @@ declare namespace imports.ui.popupMenu {
 		 * Removes menu from the current menu if it is a child.
 		 * @param menu the menu of interest
 		 */
-		removeChildMenu(menu: any): void;
+		removeChildMenu(menu: PopupMenuBase): void;
 
 		private _connectSubMenuSignals(object: any, menu: PopupMenuBase): void;
 

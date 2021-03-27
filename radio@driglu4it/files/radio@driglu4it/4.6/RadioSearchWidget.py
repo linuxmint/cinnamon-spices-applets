@@ -82,7 +82,7 @@ class RadioSearchWidget(SettingsWidget):
         if (self.current_filter_text is None):
             return True  # meaning no filter
         else:
-            return self.current_filter_text.strip() in model[iter][0].lower()
+            return self.current_filter_text.strip().lower() in model[iter][0].lower()
 
     def search_entry_changed(self, *args):
         self.current_filter_text = self.search_entry.props.text

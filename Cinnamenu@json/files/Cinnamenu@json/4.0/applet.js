@@ -1293,6 +1293,9 @@ class CinnamenuApplet extends TextIconApplet {
             if (!this.clearRecentsButton) {
                 this.clearRecentsButton = { name: _('Clear List'),
                                             description: '',
+                                            icon: new St.Icon({ icon_name: 'edit-clear',
+                                                                icon_type: St.IconType.SYMBOLIC,
+                                                                icon_size: this.getAppIconSize()}),
                                             isClearRecentsButton: true };
             }
             res.push(this.clearRecentsButton);
@@ -1720,9 +1723,9 @@ class CategoriesView {
     setSelectedCategoryStyle(categoryId) {
         this.buttons.forEach(categoryButton => {
                     if (categoryButton.id === categoryId) {
-                        categoryButton.actor.set_style_class_name('menu-category-button-selected');
+                        categoryButton.setButtonStyleSelected();
                     } else {
-                        categoryButton.actor.set_style_class_name('menu-category-button');
+                        categoryButton.setButtonStyleNormal();
                     } });
     }
 

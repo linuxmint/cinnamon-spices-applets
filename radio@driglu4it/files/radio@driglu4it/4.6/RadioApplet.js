@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RadioApplet = void 0;
 const { TextIconApplet, AllowedLayout } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { Clipboard, ClipboardType } = imports.gi.St;
 const MpvPlayerHandler_1 = require("./MpvPlayerHandler");
 const PopupMenu_1 = require("./PopupMenu");

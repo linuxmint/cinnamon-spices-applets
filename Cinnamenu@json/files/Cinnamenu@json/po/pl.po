@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:14+0100\n"
+"PO-Revision-Date: 2021-03-22 17:42+0000\n"
 "Last-Translator: Piotr Komur <pkomur@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -212,10 +212,8 @@ msgid "Use a custom icon"
 msgstr "Użyj niestandardowej ikony"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
-msgstr "Użyj niestandardowej ikony"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Panel icon"
@@ -254,8 +252,6 @@ msgid "Open menu on hover"
 msgstr "Otwórz menu po najechaniu kursorem"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Otwórz menu po najechaniu na niego myszką"
 
@@ -272,8 +268,6 @@ msgid "Use menu animations"
 msgstr "Użyj animacji menu"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Zezwól menu na animację przy otwieraniu i zamykaniu"
 
@@ -282,16 +276,12 @@ msgid "Activate categories on click"
 msgstr "Aktywuj kategorie po kliknięciu"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "Aktywuj kategorie po kliknięciu"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Włącz automatyczne przewijanie na liście aplikacji"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -314,10 +304,6 @@ msgid "Enable search providers"
 msgstr "Włącz dostawców wyszukiwania"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not search provider results are indexed in menu "
-#| "searches."
 msgid "Include search provider results in searches"
 msgstr ""
 "Wybierz, czy wyniki wyszukiwania są indeksowane podczas wyszukiwania w menu."
@@ -351,8 +337,6 @@ msgid "Show bookmarks and places"
 msgstr "Pokaż zakładki i miejsca"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
 msgstr "Pokaż zakładki i miejsca"
 
@@ -443,57 +427,11 @@ msgstr ""
 "itp.)"
 
 #. 4.0
-#, fuzzy
-#| msgid "Add favorites to session buttons."
 msgid "Add favorites to session buttons"
-msgstr "Dodaj ulubione do przycisków sesji."
+msgstr "Dodaj ulubione do przycisków sesji"
 
 #. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Pokaż ulubione ikony aplikacji obok przycisków sesji"
 
-#, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Nie udało się uruchomić \"%s\""
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Usuń z ulubionych"
-
-#~ msgid "Toggle recent files"
-#~ msgstr "Przełącz ostatnie pliki"
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Odznaczenie tej opcji pozwala na ustawienie ikony"
-
-#~ msgid "Icon"
-#~ msgstr "Ikona"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Ustaw nazwę ikony przycisku niestandardowego menu"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Włącz otwieranie menu, gdy mysz wejdzie w aplet"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Po włączeniu widoki kategorii są aktywowane po kliknięciu zamiast po "
-#~ "najechaniu myszą."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Wybierz, czy włączyć płynne automatyczne przewijanie na liście aplikacji."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Wybierz, czy zakładki mają być indeksowane w menu."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Wybierz, czy zakładki i miejsca mają być wyświetlane w menu."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Wybierz, czy ikony mają być wyświetlane w aplikacjach."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Wybierz, czy ikony mają być wyświetlane w kategoriach."

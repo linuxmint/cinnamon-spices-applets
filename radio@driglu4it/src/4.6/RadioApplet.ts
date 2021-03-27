@@ -1,5 +1,5 @@
 const { TextIconApplet, AllowedLayout } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { Clipboard, ClipboardType } = imports.gi.St
 import { MpvPlayerHandler } from "./MpvPlayerHandler";
 import { PlaybackStatus, Channel } from './types'
