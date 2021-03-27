@@ -51,6 +51,17 @@ export class DarkSky implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+		let now = new Date(Date.now());
+		if (now.getUTCFullYear() >= 2022) {
+			this.app.ShowError(
+				{
+					type: "hard",
+					detail: "no api response",
+					message: _("This API has ceased to function, please use another one.")
+				}
+			)
+			return null;
+		}
 		let query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 

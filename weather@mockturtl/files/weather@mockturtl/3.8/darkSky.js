@@ -25,6 +25,15 @@ class DarkSky {
         this.app = _app;
     }
     async GetWeather(loc) {
+        let now = new Date(Date.now());
+        if (now.getUTCFullYear() >= 2022) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no api response",
+                message: utils_1._("This API has ceased to function, please use another one.")
+            });
+            return null;
+        }
         let query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;

@@ -31,6 +31,15 @@ class Climacell {
         this.app = _app;
     }
     async GetWeather(loc) {
+        let now = new Date(Date.now());
+        if (now >= new Date(2021, 7, 1)) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no api response",
+                message: utils_1._("This API has ceased to function, please use another one.")
+            });
+            return null;
+        }
         let hourly = this.GetData("hourly", loc, Lang.bind(this, this.ParseHourly));
         let daily = this.GetData("daily", loc, Lang.bind(this, this.ParseDaily));
         let current = await this.GetData("current", loc, Lang.bind(this, this.ParseWeather));

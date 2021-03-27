@@ -17,6 +17,15 @@ class Yahoo {
     }
     async GetWeather(loc) {
         var _a;
+        let now = new Date(Date.now());
+        if (now >= new Date(2021, 5, 1)) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no api response",
+                message: utils_1._("This API has ceased to function, please use another one.")
+            });
+            return null;
+        }
         if (loc == null)
             return null;
         let response = await commandRunner_1.SpawnProcessJson(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);

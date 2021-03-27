@@ -36,6 +36,18 @@ export class Yahoo implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+		let now = new Date(Date.now());
+		if (now >= new Date(2021, 5, 1)) {
+			this.app.ShowError(
+				{
+					type: "hard",
+					detail: "no api response",
+					message: _("This API has ceased to function, please use another one.")
+				}
+			)
+			return null;
+		}
+
 		if (loc == null)
 			return null;
 		let response = await SpawnProcessJson<YahooPayload>(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);

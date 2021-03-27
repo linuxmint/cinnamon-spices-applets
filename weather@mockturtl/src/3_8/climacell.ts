@@ -54,6 +54,18 @@ export class Climacell implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+		let now = new Date(Date.now());
+		if (now >= new Date(2021, 7, 1)) {
+			this.app.ShowError(
+				{
+					type: "hard",
+					detail: "no api response",
+					message: _("This API has ceased to function, please use another one.")
+				}
+			)
+			return null;
+		}
+
 		let hourly = this.GetData("hourly", loc, Lang.bind(this, this.ParseHourly)) as Promise<HourlyForecastData[]>;
 		let daily = this.GetData("daily", loc, Lang.bind(this, this.ParseDaily)) as Promise<ForecastData[]>;
 		let current = await this.GetData("current", loc, Lang.bind(this, this.ParseWeather)) as WeatherData;

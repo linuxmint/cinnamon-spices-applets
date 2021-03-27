@@ -47,6 +47,8 @@ Free meteorological data and forecasts from the Norwegian Meteorological Institu
 
 ### Yahoo
 
+**On approximately May 1, 2021, the free Yahoo Weather API will be retired and will cease to function.**
+
 The Weather Forecast provider that this applet once started with. [Link](https://www.yahoo.com/news/weather)
 
 * Current weather refreshes every 2 hours.
@@ -99,7 +101,7 @@ Weather service from Visual Crossing Corporation founded in 2003 with headquarte
 
 Meteorological data from American weather technology company with headquarters in Boston since 2016. [Link](https://www.climacell.co/)
 
-* V3: Doesn't accept new registrations anymore, will be closed down later this year (2021)
+* **V3: ClimaCell API and [announced](https://developer.climacell.co/v3/docs/deprecation-notice) that version 3 will be sunset on July 1, 2021** It doesn't accept new signups.
 
 * V4: API key can be obtained [here](https://app.climacell.co/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the Overview section. Free plan comes with 1000 free calls per day.
 
@@ -107,7 +109,7 @@ Meteorological data from American weather technology company with headquarters i
 
 Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [Link](https://darksky.net/)
 
-***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
+***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups, and it will cease to function at the end of 2021.**
 
 ## Versions
 
