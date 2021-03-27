@@ -44,6 +44,9 @@ export class RadioApplet extends TextIconApplet {
 	public async init(orientation: imports.gi.St.Side) {
 		this.initSettings()
 
+		//  must be called before init of mpv player. Therefore called outside of initGui... 
+		this.createContextMenu()
+
 		this.channelStore = new ChannelStore(this.channelList)
 		await this.initMpvPlayer()
 
@@ -74,7 +77,6 @@ export class RadioApplet extends TextIconApplet {
 		this.setAppletTooltip()
 
 		this.createMenu(this.playbackStatus)
-		this.createContextMenu()
 	}
 
 
@@ -109,24 +111,22 @@ export class RadioApplet extends TextIconApplet {
 			onStopClicked: () => this.mpvPlayer.stop(),
 			onVolumeSliderChanged: (volume: number) => this.volume = volume,
 			initialChannel: this.currentChannelName,
-			initialPlaybackstatus: playbackStatus
+			initialPlaybackstatus: playbackStatus,
+			volume: this.volume
 		})
 
 		this.menuManager.addMenu(this.mainMenu)
 	}
 
 	private createContextMenu() {
-		const copyTitleItem = new PopupMenuItem("Copy current song title")
-		copyTitleItem.connect("activate", () => this.handleCopySong())
-
-		const youtubeDownloadItem = new PopupMenuItem("Download from Youtube")
-		youtubeDownloadItem.connect('activate', () =>
-			downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir)
+		this._applet_context_menu.addAction(
+			"Copy current song title",
+			() => this.handleCopySong()
 		)
-
-		this._applet_context_menu.addMenuItem(copyTitleItem, 0)
-		this._applet_context_menu.addMenuItem(youtubeDownloadItem, 1)
-		this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+		this._applet_context_menu.addAction(
+			"Download from Youtube",
+			() => downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir)
+		)
 	}
 
 	private handleCopySong() {
@@ -194,7 +194,7 @@ export class RadioApplet extends TextIconApplet {
 		this.setAppletLabel()
 		this.setIconColor()
 		this.setAppletTooltip()
-		this.mainMenu.setChannelName(this.currentChannelName)
+		this.mainMenu.setChannel(this.currentChannelName)
 	}
 
 	private handleChannelChanged(newUrl: string) {
@@ -203,7 +203,7 @@ export class RadioApplet extends TextIconApplet {
 		this.setAppletLabel()
 		this.setIconColor() // needed when paused before!		
 
-		this.mainMenu.setChannelName(this.currentChannelName)
+		this.mainMenu.setChannel(this.currentChannelName)
 	}
 
 	private handleChannelListChanged(channelList: Channel[]) {
@@ -284,7 +284,7 @@ export class RadioApplet extends TextIconApplet {
 	}
 
 	private get volume() {
-		return this.mpvPlayer.volume
+		return this.mpvPlayer?.volume
 	}
 
 	private set volume(newVolume: number) {

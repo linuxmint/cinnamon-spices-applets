@@ -14,6 +14,7 @@ interface Arguments {
     onStopClicked: { (): void },
     initialChannel: string | null,
     initialPlaybackstatus: PlaybackStatus,
+    volume: number,
     onVolumeSliderChanged: { (volume: number): void }
 };
 
@@ -23,10 +24,12 @@ export class PopupMenu extends AppletPopupMenu {
     private myStationsSubMenu: imports.ui.popupMenu.PopupSubMenu
     private channelMap: Map<string, PlayMausMenuItem>
     private onChannelClicked: { (name: string): void }
-
+    private onVolumeSliderChanged: { (volume: number): void }
     private currentChannelMenuItem: PlayMausMenuItem | null;
+    private onStopClicked: { (): void }
 
     private volumeSlider: VolumeSlider
+    private _volume: number
 
 
     public constructor({
@@ -37,6 +40,7 @@ export class PopupMenu extends AppletPopupMenu {
         onStopClicked,
         initialChannel,
         initialPlaybackstatus,
+        volume,
         onVolumeSliderChanged
     }: Arguments) {
 
@@ -44,35 +48,43 @@ export class PopupMenu extends AppletPopupMenu {
 
         this.channelMap = new Map<string, PlayMausMenuItem>()
         this.onChannelClicked = onChannelClicked
+        this.onVolumeSliderChanged = onVolumeSliderChanged
+        this._volume = volume
+        this.onStopClicked = onStopClicked
 
         const myStationsSubMenuWrapper = new PopupSubMenuMenuItem("My Stations")
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu
 
         this.addMenuItem(myStationsSubMenuWrapper)
 
-        this.volumeSlider = new VolumeSlider(50, onVolumeSliderChanged)
+        this.addStationsToMenu(stations);
+        initialChannel && this.setChannel(initialChannel, initialPlaybackstatus)
 
-        this.volumeSlider.connect('value-changed', (value: number) => global.log(`slider value changed to ${value}`))
+    }
+
+    private initVolumeSlider() {
+        this.volumeSlider = new VolumeSlider(this._volume, (volume: number) =>
+            this.handleSliderChanged(volume, this.onVolumeSliderChanged))
 
         this.addMenuItem(this.volumeSlider)
-
-        this.addStationsToMenu(stations);
-        this.initStopItem(onStopClicked, initialPlaybackstatus === "Stopped")
-        initialChannel && this.setChannelName(initialChannel, initialPlaybackstatus)
-
     }
 
+    private handleSliderChanged(volume: number, cb: { (volume: number): void }) {
+        this._volume = volume
+        cb(volume)
+    }
 
     public set volume(newVolume: number) {
-        this.volumeSlider.setValue(newVolume)
+
+        if (this._volume === newVolume) return
+        this.volumeSlider?.setValue(newVolume)
+        this._volume = newVolume
     }
 
-    private initStopItem(onClick: { (): void }, stopped: boolean) {
+    private initStopItem() {
         this.stopItem = new PopupMenuItem("Stop");
         this.addMenuItem(this.stopItem)
-        this.stopItem.connect('activate', () => onClick())
-
-        if (stopped) this.playbackStatus = "Stopped"
+        this.stopItem.connect('activate', () => this.onStopClicked())
     }
 
     public addStationsToMenu(stations: string[]) {
@@ -94,7 +106,7 @@ export class PopupMenu extends AppletPopupMenu {
 
         this.addStationsToMenu(stations)
 
-        currentChannelName ? this.setChannelName(currentChannelName, playbackStatus) : this.playbackStatus = "Stopped"
+        currentChannelName ? this.setChannel(currentChannelName, playbackStatus) : this.playbackStatus = "Stopped"
     }
 
 
@@ -103,7 +115,7 @@ export class PopupMenu extends AppletPopupMenu {
         this.myStationsSubMenu.open(animate)
     }
 
-    public setChannelName(name: string, playbackStatus: PlaybackStatus = "Playing") {
+    public setChannel(name: string, playbackStatus: PlaybackStatus = "Playing") {
         if (this.currentChannelMenuItem) this.currentChannelMenuItem.playbackStatus = "Stopped"
 
         this.currentChannelMenuItem = this.channelMap.get(name)
@@ -117,9 +129,18 @@ export class PopupMenu extends AppletPopupMenu {
         }
 
         if (this.currentChannelMenuItem) this.currentChannelMenuItem.playbackStatus = playbackStatus
-        this.stopItem.setShowDot(playbackStatus === 'Stopped')
 
-        if (playbackStatus === 'Stopped') this.currentChannelMenuItem = null
+        if (playbackStatus === 'Stopped') {
+            this.currentChannelMenuItem = null
+            this.volumeSlider?.destroy()
+            this.volumeSlider = null
+            this.stopItem?.destroy()
+            this.stopItem = null
+            return
+        }
+
+        !this.volumeSlider && this.initVolumeSlider()
+        !this.stopItem && this.initStopItem()
     }
 
 }

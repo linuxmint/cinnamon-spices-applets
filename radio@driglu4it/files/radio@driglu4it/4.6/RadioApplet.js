@@ -19,6 +19,7 @@ class RadioApplet extends TextIconApplet {
     }
     async init(orientation) {
         this.initSettings();
+        this.createContextMenu();
         this.channelStore = new ChannelStore_1.ChannelStore(this.channelList);
         await this.initMpvPlayer();
         this.currentUrl = this.mpvPlayer.currentUrl;
@@ -42,7 +43,6 @@ class RadioApplet extends TextIconApplet {
         this.setAppletLabel();
         this.setAppletTooltip();
         this.createMenu(this.playbackStatus);
-        this.createContextMenu();
     }
     async initMpvPlayer() {
         this.mpvPlayer = new MpvPlayerHandler_1.MpvPlayerHandler({
@@ -69,18 +69,14 @@ class RadioApplet extends TextIconApplet {
             onStopClicked: () => this.mpvPlayer.stop(),
             onVolumeSliderChanged: (volume) => this.volume = volume,
             initialChannel: this.currentChannelName,
-            initialPlaybackstatus: playbackStatus
+            initialPlaybackstatus: playbackStatus,
+            volume: this.volume
         });
         this.menuManager.addMenu(this.mainMenu);
     }
     createContextMenu() {
-        const copyTitleItem = new PopupMenuItem("Copy current song title");
-        copyTitleItem.connect("activate", () => this.handleCopySong());
-        const youtubeDownloadItem = new PopupMenuItem("Download from Youtube");
-        youtubeDownloadItem.connect('activate', () => utils_1.downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir));
-        this._applet_context_menu.addMenuItem(copyTitleItem, 0);
-        this._applet_context_menu.addMenuItem(youtubeDownloadItem, 1);
-        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+        this._applet_context_menu.addAction("Copy current song title", () => this.handleCopySong());
+        this._applet_context_menu.addAction("Download from Youtube", () => utils_1.downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir));
     }
     handleCopySong() {
         const currentSong = this.mpvPlayer.currentSong;
@@ -131,13 +127,13 @@ class RadioApplet extends TextIconApplet {
         this.setAppletLabel();
         this.setIconColor();
         this.setAppletTooltip();
-        this.mainMenu.setChannelName(this.currentChannelName);
+        this.mainMenu.setChannel(this.currentChannelName);
     }
     handleChannelChanged(newUrl) {
         this.currentUrl = newUrl;
         this.setAppletLabel();
         this.setIconColor();
-        this.mainMenu.setChannelName(this.currentChannelName);
+        this.mainMenu.setChannel(this.currentChannelName);
     }
     handleChannelListChanged(channelList) {
         this.channelStore = new ChannelStore_1.ChannelStore(channelList);
@@ -200,7 +196,8 @@ class RadioApplet extends TextIconApplet {
         return this.mpvPlayer.playbackStatus;
     }
     get volume() {
-        return this.mpvPlayer.volume;
+        var _a;
+        return (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume;
     }
     set volume(newVolume) {
         this.mpvPlayer.volume = newVolume;

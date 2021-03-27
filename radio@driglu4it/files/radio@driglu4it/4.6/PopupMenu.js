@@ -7,29 +7,38 @@ const { AppletPopupMenu } = imports.ui.applet;
 const { PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 ;
 class PopupMenu extends AppletPopupMenu {
-    constructor({ launcher, orientation, stations, onChannelClicked, onStopClicked, initialChannel, initialPlaybackstatus, onVolumeSliderChanged }) {
+    constructor({ launcher, orientation, stations, onChannelClicked, onStopClicked, initialChannel, initialPlaybackstatus, volume, onVolumeSliderChanged }) {
         super(launcher, orientation);
         this.channelMap = new Map();
         this.onChannelClicked = onChannelClicked;
+        this.onVolumeSliderChanged = onVolumeSliderChanged;
+        this._volume = volume;
+        this.onStopClicked = onStopClicked;
         const myStationsSubMenuWrapper = new PopupSubMenuMenuItem("My Stations");
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu;
         this.addMenuItem(myStationsSubMenuWrapper);
-        this.volumeSlider = new VolumeSlider_1.VolumeSlider(50, onVolumeSliderChanged);
-        this.volumeSlider.connect('value-changed', (value) => global.log(`slider value changed to ${value}`));
-        this.addMenuItem(this.volumeSlider);
         this.addStationsToMenu(stations);
-        this.initStopItem(onStopClicked, initialPlaybackstatus === "Stopped");
-        initialChannel && this.setChannelName(initialChannel, initialPlaybackstatus);
+        initialChannel && this.setChannel(initialChannel, initialPlaybackstatus);
+    }
+    initVolumeSlider() {
+        this.volumeSlider = new VolumeSlider_1.VolumeSlider(this._volume, (volume) => this.handleSliderChanged(volume, this.onVolumeSliderChanged));
+        this.addMenuItem(this.volumeSlider);
+    }
+    handleSliderChanged(volume, cb) {
+        this._volume = volume;
+        cb(volume);
     }
     set volume(newVolume) {
-        this.volumeSlider.setValue(newVolume);
+        var _a;
+        if (this._volume === newVolume)
+            return;
+        (_a = this.volumeSlider) === null || _a === void 0 ? void 0 : _a.setValue(newVolume);
+        this._volume = newVolume;
     }
-    initStopItem(onClick, stopped) {
+    initStopItem() {
         this.stopItem = new PopupMenuItem("Stop");
         this.addMenuItem(this.stopItem);
-        this.stopItem.connect('activate', () => onClick());
-        if (stopped)
-            this.playbackStatus = "Stopped";
+        this.stopItem.connect('activate', () => this.onStopClicked());
     }
     addStationsToMenu(stations) {
         stations.forEach(name => {
@@ -46,27 +55,35 @@ class PopupMenu extends AppletPopupMenu {
         this.channelMap.forEach(channelItem => channelItem.destroy());
         this.channelMap.clear();
         this.addStationsToMenu(stations);
-        currentChannelName ? this.setChannelName(currentChannelName, playbackStatus) : this.playbackStatus = "Stopped";
+        currentChannelName ? this.setChannel(currentChannelName, playbackStatus) : this.playbackStatus = "Stopped";
     }
     open(animate) {
         super.open(animate);
         this.myStationsSubMenu.open(animate);
     }
-    setChannelName(name, playbackStatus = "Playing") {
+    setChannel(name, playbackStatus = "Playing") {
         if (this.currentChannelMenuItem)
             this.currentChannelMenuItem.playbackStatus = "Stopped";
         this.currentChannelMenuItem = this.channelMap.get(name);
         this.playbackStatus = playbackStatus;
     }
     set playbackStatus(playbackStatus) {
+        var _a, _b;
         if (!this.currentChannelMenuItem && playbackStatus !== "Stopped") {
             global.logError(`can't change playbackStatus to ${playbackStatus} as no channel is defined`);
         }
         if (this.currentChannelMenuItem)
             this.currentChannelMenuItem.playbackStatus = playbackStatus;
-        this.stopItem.setShowDot(playbackStatus === 'Stopped');
-        if (playbackStatus === 'Stopped')
+        if (playbackStatus === 'Stopped') {
             this.currentChannelMenuItem = null;
+            (_a = this.volumeSlider) === null || _a === void 0 ? void 0 : _a.destroy();
+            this.volumeSlider = null;
+            (_b = this.stopItem) === null || _b === void 0 ? void 0 : _b.destroy();
+            this.stopItem = null;
+            return;
+        }
+        !this.volumeSlider && this.initVolumeSlider();
+        !this.stopItem && this.initStopItem();
     }
 }
 exports.PopupMenu = PopupMenu;
