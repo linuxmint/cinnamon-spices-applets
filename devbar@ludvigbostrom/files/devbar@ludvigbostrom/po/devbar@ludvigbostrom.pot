@@ -1,0 +1,23 @@
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+msgid "DevBar"
+msgstr ""
+
+#. metadata.json->description
+msgid "This applet helps you keep track of your development workflow."
+msgstr ""
+
+#. settings-schema.json->url->description
+msgid "Url to fetch information from"
+msgstr ""
+
+#. settings-schema.json->appendUsername->description
+msgid "Append your username to url"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Update interval in seconds"
+msgstr ""

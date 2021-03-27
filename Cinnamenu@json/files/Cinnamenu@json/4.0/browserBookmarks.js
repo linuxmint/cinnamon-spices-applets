@@ -24,7 +24,6 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
-const {tryFn} = require('./utils');
 
 let Gda = null;
 try {
@@ -39,7 +38,7 @@ const readFileAsync = function(file, opts = {utf8: true}) {
         }
         if (!file.query_exists(null)) reject(new Error('File does not exist.'));
         file.load_contents_async(null, function(object, result) {
-            tryFn(() => {
+            try {
                 let [success, data] = file.load_contents_finish(result);
                 if (!success) return reject(new Error('File cannot be read.'));
                 if (utf8) {
@@ -47,7 +46,9 @@ const readFileAsync = function(file, opts = {utf8: true}) {
                     else data = data.toString();
                 }
                 resolve(data);
-            }, (e) => reject(e));
+            } catch(e) {
+                reject(e);
+            }
         });
     });
 };

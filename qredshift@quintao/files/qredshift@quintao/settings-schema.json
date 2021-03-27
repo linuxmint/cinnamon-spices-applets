@@ -68,7 +68,7 @@
       "type": "section",
       "title": "Night Settings",
       "keys": [
-        "enabledNight", "nightTemp", "nightBrightness"
+        "enabledNight", "manualNightTime", "nightTimeStart", "nightTimeEnd", "nightTemp", "nightBrightness"
       ]
     },
     
@@ -109,7 +109,7 @@
   "autoUpdateInterval": {
     "type": "spinbutton",
     "dependency": "autoUpdate=true",
-    "default": 30,
+    "default": 20,
     "min": 5,
     "max": 1800,
     "units": "Sec.",
@@ -225,6 +225,32 @@
     "type": "checkbox",
     "default": false,
     "description": "Night Enabled"
+  },
+  "manualNightTime": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": false,
+    "description": "Use Manual Night Time"
+  },
+  "nightTimeStart" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose Start Time",
+    "default" : {
+      "h" : 20,
+      "m" : 0,
+      "s" : 0
+    }
+  },
+  "nightTimeEnd" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose End Time",
+    "default" : {
+      "h" : 6,
+      "m" : 0,
+      "s" : 0
+    }
   },
   "nightTemp": {
     "type": "spinbutton",

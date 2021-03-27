@@ -7,154 +7,216 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:01+0100\n"
+"POT-Creation-Date: 2021-03-21 21:19+0000\n"
+"PO-Revision-Date: 2021-03-22 17:30+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Upišite za pretragu..."
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr ""
 
-#. 3.2 4.0
 msgid "No description available"
 msgstr ""
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "Sve aplikacije"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Lokacije"
 
-#. 3.2 4.0
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Nedavne datoteke"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Zabilješke"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Omiljene aplikacije"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "Paket gir1.2-gda-5.0 potreban za oznake Firefox i Midori."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Obriši Popis"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr "Nema nedavnih dokumenata"
+msgid "No recent files"
+msgstr ""
 
-#. 3.2
 msgid "Account details"
 msgstr ""
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "Pogled mreže"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "Pogled popisa"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Prebaci na pogled mreže"
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Prebaci na pogled popisa"
 
-#. 3.2 4.0
-msgid "Lock Screen"
+msgid "Lock screen"
 msgstr "Zaključaj zaslon"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Zaključajte zaslon"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Odjava"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Odjavite sesiju"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Isključi"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Isključite računalo"
 
-#. 3.2 4.0
 msgid "Home"
 msgstr "Osobna mapa"
 
-#. 3.2 4.0
 msgid "Computer"
 msgstr "Računalo"
 
-#. 3.2 4.0
 msgid "Browse network"
 msgstr "Pregledaj mrežu"
 
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Dodaj na panel"
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Dodaj na radnu površinu"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
+msgid "Remove from favorites"
 msgstr "Ukloni sa omiljenih"
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Dodaj u omiljeno"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Deinstaliraj"
 
-#. 4.0 4.0
+msgid "Find files..."
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
-#. metadata.json->name
-#. 3.2
+msgid "No recent Items"
+msgstr "Nema nedavnih dokumenata"
+
+msgid "Solution:"
+msgstr ""
+
+msgid "Click to copy"
+msgstr ""
+
+msgid "Search web for"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Recent"
+msgstr ""
+
+msgid "Home folder"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+msgid "Reset category order"
+msgstr "Poništi redoslijed kategorije"
+
+msgid "This file is no longer available"
+msgstr ""
+
+msgid "Open with"
+msgstr ""
+
+msgid "Other application..."
+msgstr ""
+
+msgid "Open containing folder"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
 msgid "Cinnamenu"
 msgstr "Cinna izbornik"
 
-#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
@@ -162,377 +224,284 @@ msgstr ""
 "Fleksibilan izbornik koji nudi mogućnosti formatiranja, web oznake, podršku "
 "pružatelja usluga pretraživanja i brzo pretraživanje."
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
 msgstr "Ponašanje"
 
-#. 3.2 4.0
 msgid "Appearance"
 msgstr "Izgled"
 
-#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Izgled i sadržaj"
 
-#. 3.2
 msgid "Search Providers"
 msgstr ""
 
-#. 3.2
 msgid "No search provider extensions found"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Panel"
 msgstr "Ploča"
 
-#. 3.2 4.0
 msgid "Menu"
 msgstr "izbornik"
 
-#. 3.2 4.0
 msgid "Layout"
 msgstr "tlocrt"
 
-#. 3.2 4.0
 msgid "Content"
 msgstr "Sadržaj"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Recent Files"
 msgid "Recent files settings"
-msgstr "Nedavne datoteke"
+msgstr ""
 
-#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Otvori uređivač izbornika"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr "Poništi redoslijed kategorije"
-
-#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Koristi prilagođenu ikonu"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Koristi prilagođenu ikonu"
 
-#. 3.2 4.0
 msgid "Panel icon"
 msgstr "Ikona ploče"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Tekst na ploči"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Tekst za prikaz pored ikone na ploči"
 
-#. 3.2 4.0
 msgid "pixels"
 msgstr "pikseli"
 
-#. 3.2 4.0
 msgid "Category icon size"
 msgstr "Veličina kategorija ikone"
 
-#. 3.2 4.0
 msgid "Applications list icon size"
 msgstr "Veličina ikona popisa aplikacija"
 
-#. 3.2 4.0
 msgid "Applications grid icon size"
 msgstr "Veličina ikone mreže aplikacija"
 
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Prečaci tipkovnice za otvaranje i zatvaranje izbornika"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
 msgstr "Otvorite izbornik miša iznad kursa"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
 
-#. 3.2 4.0
 msgid "milliseconds"
 msgstr "milisekunde"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
 msgstr "Odgoda prijelaza izbornikom"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Koristi animacije izbornika"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Dopusti izborniku animirano otvaranje i zatvaranje"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Aktivirajte kategorije klikom"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Prikaži web oznake"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 
-#. 3.2
 msgid "Enable searching of open windows"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Enable search providers"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
 msgstr "Uključite rezultate davatelja usluga pretraživanja"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr ""
 
-#. 3.2
-msgid "Startup applications view mode"
-msgstr "Način pogleda pokretanja aplikacija"
+msgid "Open menu on category:"
+msgstr ""
 
-#. 3.2 4.0
 msgid "List"
 msgstr "Popis"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "Mreža"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr ""
+
 msgid "columns"
 msgstr "stupci"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Broj stupaca u mreži aplikacija"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Prikaži zabilješke i lokacije"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Prikaži zabilješke i lokacije"
+msgstr ""
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Prikaži ikone aplikacija"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Prikaži ikone kategorija"
 
-#. 3.2
-#, fuzzy
 msgid "Show application descriptions under titles"
-msgstr "Prikaži opis aplikacija ispod njihovih naziva"
+msgstr ""
 
-#. 3.2
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2
 msgid "Tooltip delay"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Koristite prilagođenu visinu izbornika"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Custom menu height"
 msgstr ""
 
-#. 4.0
 msgid "Applications view mode"
 msgstr "Način prikaza aplikacija"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "Pogledajte aplikacije kao popis ili mrežu"
 
-#. 4.0
 msgid "Application description placement"
 msgstr "Položaj opisa aplikacije"
 
-#. 4.0
 msgid "Tooltips"
 msgstr ""
 
-#. 4.0
 msgid "Under titles"
 msgstr ""
 
-#. 4.0
 msgid "None"
 msgstr ""
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr "Odaberite mjesto za prikazivanje opisa aplikacija"
 
-#. 4.0
 msgid "Session buttons location"
 msgstr ""
 
-#. 4.0
 msgid "Top"
 msgstr ""
 
-#. 4.0
 msgid "Bottom"
 msgstr ""
 
-#. 4.0
 msgid "Left"
 msgstr ""
 
-#. 4.0
 msgid "Right"
 msgstr ""
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
-#. 4.0
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
 msgid "Add favorites to session buttons"
 msgstr ""
 
-#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#, fuzzy, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Neuspjelo pokretanje '%s'"
+msgid "Show favorite apps category"
+msgstr ""
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Ukloni sa omiljenih"
+msgid "Show your favorite apps category in the menu"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Toggle recent files"
-#~ msgstr "Nedavne datoteke"
+msgid "Show home folder"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
+msgid "Show home folder category in the menu"
+msgstr ""
 
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
+msgid "Last used category"
+msgstr ""
 
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Uklanjanjem ovog odabira omogućuje temi prilagodbu ikona"
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
-#~ msgid "Icon"
-#~ msgstr "Ikona"
+msgid "Enable emoji search"
+msgstr ""
 
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Postavi prilagođeni naziv ikone tipke izbornika"
+msgid "Show emojis in search results"
+msgstr ""
 
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
+msgid "Web search option"
+msgstr ""
 
-#~ msgid "Delay between switching categories"
-#~ msgstr "Odgoda između promjena kategorija"
+msgid "Google"
+msgstr ""
 
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Odaberite omogućavanje ili onemogućavanje glatkog automatskog pomicanja u "
-#~ "popisu aplikacija."
+msgid "Bing"
+msgstr ""
 
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr ""
-#~ "Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
+msgid "Yahoo"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr ""
-#~ "Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
+msgid "DuckDuckGo"
+msgstr ""
 
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr ""
-#~ "Odaberite želite li ili ne imati prikazane zabilješke i lokacije u "
-#~ "izborniku."
+msgid "Show an internet search option in search results"
+msgstr ""
 
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Odaberite treba li ili ne prikazati ikone na aplikacijama."
+msgid "Search home folder"
+msgstr ""
 
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Odaberite treba li ili ne prikazati ikone u kategorijama."
+msgid "When searching, also search home folder for files"
+msgstr ""
 
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
+msgid "Show hidden files"
+msgstr ""
 
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Upišite vašu lozinku za deinstalaciju ove aplikacije"
+msgid "Show hidden files in folder view"
+msgstr ""
 
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Omogući putanju unosa datotečnih sustava u okviru pretraživanja"
+msgid "Use a custom icon size"
+msgstr ""
 
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Omogućuje unos putanje u izborniku okvira pretrage."
+msgid "Use a custom size for the panel icon"
+msgstr ""
 
-#~ msgid "Cinnamenu Settings"
-#~ msgstr "Cinnamenu postavke"
+msgid "Panel icon size"
+msgstr ""
 
-#~ msgid "Applications grid label width"
-#~ msgstr "Širina naslova mreže aplikacija"
+msgid "Choose a custom size for the panel icon"
+msgstr ""
 
-#~ msgid "Menu Entries"
-#~ msgstr "Stavke izbornika"
+msgid "Session buttons icon size"
+msgstr ""
+
+msgid "Use session buttons box style"
+msgstr ""
+
+

@@ -32,6 +32,11 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
     - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.6.0
+    - Added manual night-time option.
+    - Fixed some issues with Debian.
+* 1.5.5
+    - Fixed icon blinking when using symbolic icon.
 * 1.5.4
     - Fixed: "This applet contains function calls that could potentially cause Cinnamon to crash or freeze."
 * 1.5.3
