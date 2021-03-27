@@ -196,8 +196,8 @@ class RadioApplet extends TextIconApplet {
         return this.mpvPlayer.playbackStatus;
     }
     get volume() {
-        var _a;
-        return (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume;
+        var _a, _b;
+        return (_b = (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : this.initialVolume;
     }
     set volume(newVolume) {
         this.mpvPlayer.volume = newVolume;

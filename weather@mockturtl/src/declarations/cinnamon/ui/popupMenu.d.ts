@@ -109,7 +109,7 @@ declare namespace imports.ui.popupMenu {
 
 		setColumnWidths(widths: number[]): void;
 
-        public connect(event: string, callback: Function): void
+		public connect(event: string, callback: Function): void
 
 	}
 
@@ -153,6 +153,9 @@ declare namespace imports.ui.popupMenu {
 		constructor(value: number);
 
 		setValue(value: number): void;
+
+
+		public _slider: gi.St.DrawingArea
 
 		private _sliderRepaint(area: any): void;
 
@@ -502,7 +505,7 @@ declare namespace imports.ui.popupMenu {
 		 * Removes menu from the current menu if it is a child.
 		 * @param menu the menu of interest
 		 */
-		removeChildMenu(menu: PopupMenuBase): void;
+		removeChildMenu(menu: any): void;
 
 		private _connectSubMenuSignals(object: any, menu: PopupMenuBase): void;
 

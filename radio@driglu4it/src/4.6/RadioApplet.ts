@@ -284,7 +284,7 @@ export class RadioApplet extends TextIconApplet {
 	}
 
 	private get volume() {
-		return this.mpvPlayer?.volume
+		return this.mpvPlayer?.volume ?? this.initialVolume
 	}
 
 	private set volume(newVolume: number) {
