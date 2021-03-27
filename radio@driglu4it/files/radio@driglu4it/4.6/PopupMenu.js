@@ -7,14 +7,14 @@ const { AppletPopupMenu } = imports.ui.applet;
 const { PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 ;
 class PopupMenu extends AppletPopupMenu {
-    constructor({ launcher, orientation, stations, onChannelClicked, onStopClicked, initialChannel, initialPlaybackstatus }) {
+    constructor({ launcher, orientation, stations, onChannelClicked, onStopClicked, initialChannel, initialPlaybackstatus, onVolumeSliderChanged }) {
         super(launcher, orientation);
         this.channelMap = new Map();
         this.onChannelClicked = onChannelClicked;
         const myStationsSubMenuWrapper = new PopupSubMenuMenuItem("My Stations");
         this.myStationsSubMenu = myStationsSubMenuWrapper.menu;
         this.addMenuItem(myStationsSubMenuWrapper);
-        this.volumeSlider = new VolumeSlider_1.VolumeSlider(50);
+        this.volumeSlider = new VolumeSlider_1.VolumeSlider(50, onVolumeSliderChanged);
         this.addMenuItem(this.volumeSlider);
         this.addStationsToMenu(stations);
         this.initStopItem(onStopClicked, initialPlaybackstatus === "Stopped");

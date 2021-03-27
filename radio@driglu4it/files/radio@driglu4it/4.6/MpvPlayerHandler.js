@@ -35,7 +35,7 @@ class MpvPlayerHandler {
         if (mpvRunning) {
             this._playbackStatus = this.mediaServerPlayer.PlaybackStatus;
             this.propsChangeListener = this.initMediaPropsChangeListener();
-            this.volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume);
+            this._volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume);
         }
         else {
             this._playbackStatus = "Stopped";
@@ -85,9 +85,9 @@ class MpvPlayerHandler {
                 this.propsChangeListener = this.initMediaPropsChangeListener();
             }
             else {
+                this._playbackStatus = "Stopped";
                 this.onStopped(this.currentUrl);
                 this.currentUrl = null;
-                this._playbackStatus = "Stopped";
                 this.mediaProps.disconnectSignal(this.propsChangeListener);
             }
         });
@@ -103,16 +103,16 @@ class MpvPlayerHandler {
         if (url === this.currentUrl || !this._validUrls.includes(url)) {
             return;
         }
+        this._playbackStatus = this.mediaServerPlayer.PlaybackStatus;
         this.currentUrl ? this.onChannelChanged(url, this.currentUrl) : this.onStarted(url);
         this.currentUrl = url;
-        this._playbackStatus = this.mediaServerPlayer.PlaybackStatus;
     }
     handlePlaybackStatusChanged(playbackStatus) {
         if (this._playbackStatus === playbackStatus)
             return;
+        this._playbackStatus = playbackStatus;
         playbackStatus === "Paused" && this.onPaused(this.currentUrl);
         playbackStatus === "Playing" && this.onResumed(this.currentUrl);
-        this._playbackStatus = playbackStatus;
     }
     handleMprisVolumeChanged(newMprisVolume) {
         const normalizedVolume = this.normalizeMprisVolume(newMprisVolume);
@@ -151,7 +151,7 @@ class MpvPlayerHandler {
     }
     start(channelUrl) {
         this.pauseAllOtherMediaPlayer();
-        this.volume = this.initialVolume;
+        this._volume = this.initialVolume;
         const command = `mpv --script=${constants_1.MPRIS_PLUGIN_PATH} ${channelUrl} --volume=${this.initialVolume}`;
         spawnCommandLine(command);
     }
@@ -171,11 +171,6 @@ class MpvPlayerHandler {
             return;
         this.mediaServerPlayer.StopRemote();
     }
-    increaseDecreaseVolume(volumeChange) {
-        if (this._playbackStatus === "Stopped")
-            return;
-        this.updateVolume('both', this.volume + volumeChange);
-    }
     updateCvcVolume(newNormalizedVolume) {
         this.stream.is_muted && this.stream.change_is_muted(false);
         this.stream.volume = this.normalizedVolumeToCvcStreamVolume(newNormalizedVolume);
@@ -184,9 +179,15 @@ class MpvPlayerHandler {
     updateMprisVolume(newNormalizedVolume) {
         this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newNormalizedVolume);
     }
+    set volume(newVolume) {
+        this.updateVolume('both', newVolume);
+    }
+    get volume() {
+        return this._volume;
+    }
     updateVolume(target, newVolume) {
         newVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume));
-        if (newVolume === this.volume)
+        if (newVolume === this._volume || this.playbackStatus === "Stopped")
             return;
         if (target === "cvcStream" || target === "both") {
             if (!this.stream || this.normalizeCvcStreamVolume(this.stream.volume) === newVolume)
@@ -198,7 +199,7 @@ class MpvPlayerHandler {
                 return;
             this.updateMprisVolume(newVolume);
         }
-        this.volume = newVolume;
+        this._volume = newVolume;
         this.onVolumeChanged(newVolume);
     }
     get currentSong() {

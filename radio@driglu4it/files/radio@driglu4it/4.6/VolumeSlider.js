@@ -5,7 +5,7 @@ const { PopupSliderMenuItem } = imports.ui.popupMenu;
 const St = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 class VolumeSlider extends PopupSliderMenuItem {
-    constructor(volume) {
+    constructor(volume, onValueChanged) {
         super(volume / 100);
         this.volume = volume;
         this.tooltip = new Tooltip(this.actor, `Volume: ${this.volume}`);

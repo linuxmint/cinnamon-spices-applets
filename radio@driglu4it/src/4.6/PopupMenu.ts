@@ -13,7 +13,8 @@ interface Arguments {
     onChannelClicked: { (name: string): void },
     onStopClicked: { (): void },
     initialChannel: string | null,
-    initialPlaybackstatus: PlaybackStatus
+    initialPlaybackstatus: PlaybackStatus,
+    onVolumeSliderChanged: { (volume: number): void }
 };
 
 export class PopupMenu extends AppletPopupMenu {
@@ -35,7 +36,8 @@ export class PopupMenu extends AppletPopupMenu {
         onChannelClicked,
         onStopClicked,
         initialChannel,
-        initialPlaybackstatus
+        initialPlaybackstatus,
+        onVolumeSliderChanged
     }: Arguments) {
 
         super(launcher, orientation)
@@ -48,7 +50,7 @@ export class PopupMenu extends AppletPopupMenu {
 
         this.addMenuItem(myStationsSubMenuWrapper)
 
-        this.volumeSlider = new VolumeSlider(50)
+        this.volumeSlider = new VolumeSlider(50, onVolumeSliderChanged)
         this.addMenuItem(this.volumeSlider)
 
         this.addStationsToMenu(stations);
@@ -79,8 +81,6 @@ export class PopupMenu extends AppletPopupMenu {
         })
     }
 
-
-
     public set stationsList(stations: string[]) {
         const currentChannelName = stations.find(station => station === this.currentChannelMenuItem?.label.text)
 
@@ -106,7 +106,7 @@ export class PopupMenu extends AppletPopupMenu {
         this.currentChannelMenuItem = this.channelMap.get(name)
         this.currentChannelMenuItem.playbackStatus = playbackStatus
 
-        this.stopItem.setShowDot(false)
+        this.playbackStatus = "Stopped"
     }
 
     public set playbackStatus(playbackStatus: PlaybackStatus) {
@@ -119,8 +119,6 @@ export class PopupMenu extends AppletPopupMenu {
         this.stopItem.setShowDot(playbackStatus === 'Stopped')
 
         if (playbackStatus === 'Stopped') this.currentChannelMenuItem = null
-
-
     }
 
 }

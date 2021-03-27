@@ -11,7 +11,7 @@ function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: numbe
 	imports.gettext.bindtextdomain(metadata.uuid, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 
 
-	const radioApplet = new RadioApplet(metadata, orientation, panelHeight, instanceId)
+	const radioApplet = new RadioApplet(orientation, panelHeight, instanceId)
 	radioApplet.init(orientation)
 
 	return radioApplet;
