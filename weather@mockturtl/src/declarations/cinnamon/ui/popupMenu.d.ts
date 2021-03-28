@@ -150,8 +150,12 @@ declare namespace imports.ui.popupMenu {
 	}
 
 	export class PopupSliderMenuItem extends PopupBaseMenuItem {
-		protected _slider: gi.St.DrawingArea
 		constructor(value: number);
+
+		protected _slider: gi.St.DrawingArea;
+		protected _releaseId: number;
+		protected _dragging: boolean;
+		protected _mark_position: boolean;
 
 		setValue(value: number): void;
 
