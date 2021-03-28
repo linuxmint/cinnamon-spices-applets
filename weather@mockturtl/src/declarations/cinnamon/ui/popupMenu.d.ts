@@ -109,7 +109,7 @@ declare namespace imports.ui.popupMenu {
 
 		setColumnWidths(widths: number[]): void;
 
-        public connect(event: string, callback: Function): void
+		public connect(event: string, callback: Function): void
 
 	}
 
@@ -151,6 +151,11 @@ declare namespace imports.ui.popupMenu {
 
 	export class PopupSliderMenuItem extends PopupBaseMenuItem {
 		constructor(value: number);
+
+		protected _slider: gi.St.DrawingArea;
+		protected _releaseId: number;
+		protected _dragging: boolean;
+		protected _mark_position: boolean;
 
 		setValue(value: number): void;
 

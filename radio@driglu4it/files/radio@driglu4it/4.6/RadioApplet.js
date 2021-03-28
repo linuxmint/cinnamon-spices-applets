@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RadioApplet = void 0;
-const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
+const { TextIconApplet, AllowedLayout } = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { Clipboard, ClipboardType } = imports.gi.St;
 const MpvPlayerHandler_1 = require("./MpvPlayerHandler");
 const PopupMenu_1 = require("./PopupMenu");
@@ -11,17 +11,18 @@ const utils_1 = require("./utils");
 const { ScrollDirection } = imports.gi.Clutter;
 const { AppletSettings } = imports.ui.settings;
 class RadioApplet extends TextIconApplet {
-    constructor(metadata, orientation, panelHeight, instanceId) {
+    constructor(orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.uuid = metadata.uuid;
         this.orientation = orientation;
         this.setAllowedLayout(AllowedLayout.BOTH);
-        this.settings = new AppletSettings(this, this.uuid, instanceId);
+        this.settings = new AppletSettings(this, __meta.uuid, instanceId);
     }
     async init(orientation) {
         this.initSettings();
-        this.initChannelStore(this.channelList);
+        this.createContextMenu();
+        this.channelStore = new ChannelStore_1.ChannelStore(this.channelList);
         await this.initMpvPlayer();
+        this.currentUrl = this.mpvPlayer.currentUrl;
         this.initGui();
         this.actor.connect('scroll-event', (actor, event) => this.handleMouseScroll(event));
     }
@@ -37,56 +38,45 @@ class RadioApplet extends TextIconApplet {
         this.settings.bind("music-download-dir-select", "music_dir");
     }
     initGui() {
-        var _a;
         this.setIcon();
-        const playbackStatus = this.mpvPlayer.playbackStatus;
-        const channelName = this.mpvPlayer.currentUrl ?
-            this.channelStore.getChannelName(this.mpvPlayer.currentUrl) : null;
-        this.setIconColor(playbackStatus);
-        this.setAppletLabel(playbackStatus, channelName);
-        this.setAppletTooltip(playbackStatus, (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume);
-        this.createMenu(channelName, playbackStatus);
-        this.createContextMenu();
-    }
-    initChannelStore(channelList) {
-        this.channelStore = new ChannelStore_1.ChannelStore(channelList);
+        this.setIconColor();
+        this.setAppletLabel();
+        this.setAppletTooltip();
+        this.createMenu(this.playbackStatus);
     }
     async initMpvPlayer() {
         this.mpvPlayer = new MpvPlayerHandler_1.MpvPlayerHandler({
-            validUrls: this.channelStore.getActivatedChannelUrls(),
+            validUrls: this.activatedChannelUrls,
             currentUrl: this.currentUrl,
             initialVolume: this.initialVolume,
-            onStopped: (...args) => this.handleRadioStopped(...args),
+            onStopped: (...args) => this.handleRadioStopped(),
             onVolumeChanged: (...args) => this.handleVolumeChanged(...args),
             onStarted: (...args) => this.handleRadioStarted(...args),
-            onChannelChanged: (...args) => this.handleChannelChanged(...args),
-            onPaused: (...args) => this.handleRadioPaused(...args),
-            onResumed: (...args) => this.handleRadioResumed(...args),
+            onChannelChanged: (...args) => this.handleChannelChanged(args[0]),
+            onPaused: (...args) => this.handleRadioPaused(),
+            onResumed: (...args) => this.handleRadioResumed(),
         });
         await this.mpvPlayer.init();
     }
-    createMenu(channelName, playbackStatus) {
-        if (!this.menuManager)
-            this.menuManager = new PopupMenuManager(this);
+    createMenu(playbackStatus) {
+        var _a;
+        (_a = this.menuManager) !== null && _a !== void 0 ? _a : (this.menuManager = new PopupMenuManager(this));
         this.mainMenu = new PopupMenu_1.PopupMenu({
             launcher: this,
             orientation: this.orientation,
-            stations: this.channelStore.getActivatedChannelNames(),
+            stations: this.activatedChannelNames,
             onChannelClicked: (...args) => this.handleChannelClicked(...args),
-            onStopClick: () => this.mpvPlayer.stop(),
-            initialChannel: channelName,
-            initialPlaybackstatus: playbackStatus
+            onStopClicked: () => this.mpvPlayer.stop(),
+            onVolumeSliderChanged: (volume) => this.volume = volume,
+            initialChannel: this.currentChannelName,
+            initialPlaybackstatus: playbackStatus,
+            volume: this.volume
         });
         this.menuManager.addMenu(this.mainMenu);
     }
     createContextMenu() {
-        const copyTitleItem = new PopupMenuItem("Copy current song title");
-        copyTitleItem.connect("activate", () => this.handleCopySong());
-        const youtubeDownloadItem = new PopupMenuItem("Download from Youtube");
-        youtubeDownloadItem.connect('activate', () => utils_1.downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir));
-        this._applet_context_menu.addMenuItem(copyTitleItem, 0);
-        this._applet_context_menu.addMenuItem(youtubeDownloadItem, 1);
-        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+        this._applet_context_menu.addAction("Copy current song title", () => this.handleCopySong());
+        this._applet_context_menu.addAction("Download from Youtube", () => utils_1.downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir));
     }
     handleCopySong() {
         const currentSong = this.mpvPlayer.currentSong;
@@ -100,66 +90,55 @@ class RadioApplet extends TextIconApplet {
         else
             this.set_applet_icon_name(`radioapplet-${this.iconType.toLowerCase()}`);
     }
-    setIconColor(playbackStatus) {
-        playbackStatus !== null && playbackStatus !== void 0 ? playbackStatus : (playbackStatus = this.mpvPlayer.playbackStatus);
-        const color = playbackStatus === "Playing" ? this.symbolicIconColorWhenPlaying : true;
+    setIconColor() {
+        const color = this.playbackStatus === "Playing" ? this.symbolicIconColorWhenPlaying : true;
         this.actor.style = `color: ${color}`;
     }
-    setAppletLabel(playbackStatus, currentChannelName) {
-        playbackStatus !== null && playbackStatus !== void 0 ? playbackStatus : (playbackStatus = this.mpvPlayer.playbackStatus);
-        if (playbackStatus === "Playing") {
-            currentChannelName !== null && currentChannelName !== void 0 ? currentChannelName : (currentChannelName = this.channelStore.getChannelName(this.currentUrl));
-        }
-        const label = (this.channelNameOnPanel && playbackStatus === "Playing")
-            ? ' ' + currentChannelName : '';
+    setAppletLabel() {
+        const label = (this.channelNameOnPanel && this.playbackStatus === "Playing")
+            ? ' ' + this.currentChannelName : '';
         this.set_applet_label(label);
     }
-    setAppletTooltip(playbackStatus, volume) {
-        const tooltipTxt = playbackStatus === "Stopped" ? "Radio++" : `Volume: ${volume.toString()}%`;
+    setAppletTooltip() {
+        const tooltipTxt = this.playbackStatus === "Stopped" ? "Radio++" : `Volume: ${this.volume.toString()}%`;
         this.set_applet_tooltip(tooltipTxt);
     }
-    handleRadioStopped(previousChannelUrl) {
+    handleRadioStopped() {
         this.currentUrl = null;
-        const previousChannelName = this.channelStore.getChannelName(previousChannelUrl);
-        this.setAppletLabel('Stopped');
-        this.setIconColor('Stopped');
-        this.setAppletTooltip('Stopped');
-        this.mainMenu.activateStopItem(previousChannelName);
+        this.setAppletLabel();
+        this.setIconColor();
+        this.setAppletTooltip();
+        this.mainMenu.playbackStatus = "Stopped";
         this.lastVolume = this.mpvPlayer.volume;
         this.updateMpvInitialVolume();
     }
-    handleRadioPaused(channelUrl) {
-        const channelName = this.channelStore.getChannelName(channelUrl);
-        this.mainMenu.pauseChannelItem(channelName);
-        this.setIconColor('Paused');
-        this.setAppletLabel('Paused');
+    handleRadioPaused() {
+        this.setAppletLabel();
+        this.setIconColor();
+        this.mainMenu.playbackStatus = 'Paused';
     }
-    handleRadioResumed(channelUrl) {
-        const channelName = this.channelStore.getChannelName(channelUrl);
-        this.mainMenu.resumeChannelItem(channelName);
-        this.setIconColor('Playing');
-        this.setAppletLabel('Playing');
+    handleRadioResumed() {
+        this.setAppletLabel();
+        this.setIconColor();
+        this.mainMenu.playbackStatus = 'Playing';
     }
     handleRadioStarted(channelUrl) {
         this.currentUrl = channelUrl;
-        const channelName = this.channelStore.getChannelName(channelUrl);
-        this.mainMenu.activateChannelItem(channelName);
-        this.setAppletTooltip('Playing', this.mpvPlayer.volume);
-        this.setIconColor('Playing');
-        this.setAppletLabel('Playing', channelName);
+        this.setAppletLabel();
+        this.setIconColor();
+        this.setAppletTooltip();
+        this.mainMenu.setChannel(this.currentChannelName);
     }
-    handleChannelChanged(oldUrl, newUrl) {
+    handleChannelChanged(newUrl) {
         this.currentUrl = newUrl;
-        const newChannelName = this.channelStore.getChannelName(newUrl);
-        const oldChannelName = this.channelStore.getChannelName(oldUrl);
-        this.mainMenu.changeChannelItem(newChannelName, oldChannelName);
-        this.setIconColor('Playing');
-        this.setAppletLabel('Playing', newChannelName);
+        this.setAppletLabel();
+        this.setIconColor();
+        this.mainMenu.setChannel(this.currentChannelName);
     }
     handleChannelListChanged(channelList) {
-        this.initChannelStore(channelList);
-        this.mainMenu.updateStationList(this.channelStore.getActivatedChannelNames(), this.mpvPlayer.playbackStatus, this.channelStore.getChannelName(this.currentUrl));
-        this.mpvPlayer.updateValidUrls(this.channelStore.getActivatedChannelUrls());
+        this.channelStore = new ChannelStore_1.ChannelStore(channelList);
+        this.mainMenu.stationsList = this.activatedChannelNames;
+        this.mpvPlayer.validUrls = this.activatedChannelUrls;
     }
     handleChannelClicked(channelName) {
         const url = this.channelStore.getChannelUrl(channelName);
@@ -176,7 +155,8 @@ class RadioApplet extends TextIconApplet {
             this.mpvPlayer.togglePlayPause();
     }
     handleVolumeChanged(volume) {
-        this.setAppletTooltip('Playing', volume);
+        this.setAppletTooltip();
+        this.mainMenu.volume = volume;
     }
     get initialVolume() {
         const initvolume = this.keepVolume ? this.lastVolume : this.customInitVolume;
@@ -201,7 +181,26 @@ class RadioApplet extends TextIconApplet {
     handleMouseScroll(event) {
         const direction = event.get_scroll_direction();
         const volumeChange = (direction === ScrollDirection.UP) ? 5 : -5;
-        this.mpvPlayer.increaseDecreaseVolume(volumeChange);
+        this.volume += volumeChange;
+    }
+    get currentChannelName() {
+        return this.channelStore.getChannelName(this.currentUrl);
+    }
+    get activatedChannelNames() {
+        return this.channelStore.activatedChannelNames;
+    }
+    get activatedChannelUrls() {
+        return this.channelStore.activatedChannelUrls;
+    }
+    get playbackStatus() {
+        return this.mpvPlayer.playbackStatus;
+    }
+    get volume() {
+        var _a, _b;
+        return (_b = (_a = this.mpvPlayer) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : this.initialVolume;
+    }
+    set volume(newVolume) {
+        this.mpvPlayer.volume = newVolume;
     }
     on_applet_middle_clicked(event) {
         this.mpvPlayer.togglePlayPause();

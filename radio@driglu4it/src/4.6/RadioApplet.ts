@@ -1,18 +1,12 @@
-// see: https://projects.linuxmint.com/reference/git/cinnamon-tutorials/importer.html
-const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
-
+const { TextIconApplet, AllowedLayout } = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { Clipboard, ClipboardType } = imports.gi.St
-
 import { MpvPlayerHandler } from "./MpvPlayerHandler";
 import { PlaybackStatus, Channel } from './types'
 import { PopupMenu } from './PopupMenu'
 import { ChannelStore } from "./ChannelStore";
 import { checkInstallMpv, checkInstallMrisPlugin, notifySend, downloadSongFromYoutube } from './utils'
-
 const { ScrollDirection } = imports.gi.Clutter;
-
-
 const { AppletSettings } = imports.ui.settings;
 
 
@@ -22,51 +16,45 @@ export class RadioApplet extends TextIconApplet {
 	private settings: imports.ui.settings.AppletSettings;
 	private iconType: string
 	private symbolicIconColorWhenPlaying: string
-	private channelList: Channel[]
-
-	private channelStore: ChannelStore
-
 	private channelNameOnPanel: boolean
-	private keepVolume: string
-	private lastVolume: number
 	private customInitVolume: number
-
-	private menuManager: imports.ui.popupMenu.PopupMenuManager
-	private orientation: imports.gi.St.Side
-
-	// TODO: uuid can be received from meta
-	private uuid: string
-	private mpvPlayer: MpvPlayerHandler
+	private keepVolume: boolean
+	private lastVolume: number
+	private channelList: Channel[]
 	private mainMenu: PopupMenu
 	// currentUrl must be saved to settings to load it on cinnamon restart
 	private currentUrl: string
-
 	private music_dir: string
 
+	private channelStore: ChannelStore
+	private menuManager: imports.ui.popupMenu.PopupMenuManager
+	private orientation: imports.gi.St.Side
+	private mpvPlayer: MpvPlayerHandler
 
-	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	public constructor(orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 
-		this.uuid = metadata.uuid
 		this.orientation = orientation
 
 		// Allow Applet to be used on vertical and horizontal panels. By default only horizontal panels are allowed
 		this.setAllowedLayout(AllowedLayout.BOTH);
-
-		this.settings = new AppletSettings(this, this.uuid, instanceId);
-
+		this.settings = new AppletSettings(this, __meta.uuid, instanceId);
 	}
 
 	public async init(orientation: imports.gi.St.Side) {
 		this.initSettings()
 
-		this.initChannelStore(this.channelList)
+		//  must be called before init of mpv player. Therefore called outside of initGui... 
+		this.createContextMenu()
+
+		this.channelStore = new ChannelStore(this.channelList)
 		await this.initMpvPlayer()
+
+		this.currentUrl = this.mpvPlayer.currentUrl
 
 		this.initGui()
 
 		this.actor.connect('scroll-event', (actor: any, event: any) => this.handleMouseScroll(event))
-
 	}
 
 	private initSettings() {
@@ -84,71 +72,61 @@ export class RadioApplet extends TextIconApplet {
 	private initGui() {
 		this.setIcon()
 
-		const playbackStatus = this.mpvPlayer.playbackStatus
-		const channelName = this.mpvPlayer.currentUrl ?
-			this.channelStore.getChannelName(this.mpvPlayer.currentUrl) : null
+		this.setIconColor()
+		this.setAppletLabel()
+		this.setAppletTooltip()
 
-		this.setIconColor(playbackStatus)
-		this.setAppletLabel(playbackStatus, channelName)
-		this.setAppletTooltip(playbackStatus, this.mpvPlayer?.volume)
-		this.createMenu(channelName, playbackStatus)
-		this.createContextMenu()
+		this.createMenu(this.playbackStatus)
 	}
 
-	private initChannelStore(channelList: Channel[]) {
-		this.channelStore = new ChannelStore(channelList)
-	}
 
 	private async initMpvPlayer() {
 
 		this.mpvPlayer = new MpvPlayerHandler({
-			validUrls: this.channelStore.getActivatedChannelUrls(),
+			validUrls: this.activatedChannelUrls,
 			currentUrl: this.currentUrl,
 			initialVolume: this.initialVolume,
 
-			onStopped: (...args) => this.handleRadioStopped(...args),
+			onStopped: (...args) => this.handleRadioStopped(),
 			onVolumeChanged: (...args) => this.handleVolumeChanged(...args),
 			onStarted: (...args) => this.handleRadioStarted(...args),
-			onChannelChanged: (...args) => this.handleChannelChanged(...args),
-			onPaused: (...args) => this.handleRadioPaused(...args),
-			onResumed: (...args) => this.handleRadioResumed(...args),
+			onChannelChanged: (...args) => this.handleChannelChanged(args[0]),
+			onPaused: (...args) => this.handleRadioPaused(),
+			onResumed: (...args) => this.handleRadioResumed(),
 		})
 
 		await this.mpvPlayer.init()
 
 	}
 
-	private createMenu(channelName: string | null, playbackStatus: PlaybackStatus) {
+	private createMenu(playbackStatus: PlaybackStatus) {
 
-		if (!this.menuManager) this.menuManager = new PopupMenuManager(this)
+		this.menuManager ??= new PopupMenuManager(this)
 
 		this.mainMenu = new PopupMenu({
 			launcher: this,
 			orientation: this.orientation,
-			stations: this.channelStore.getActivatedChannelNames(),
+			stations: this.activatedChannelNames,
 			onChannelClicked: (...args) => this.handleChannelClicked(...args),
-			onStopClick: () => this.mpvPlayer.stop(),
-			initialChannel: channelName,
-			initialPlaybackstatus: playbackStatus
+			onStopClicked: () => this.mpvPlayer.stop(),
+			onVolumeSliderChanged: (volume: number) => this.volume = volume,
+			initialChannel: this.currentChannelName,
+			initialPlaybackstatus: playbackStatus,
+			volume: this.volume
 		})
 
 		this.menuManager.addMenu(this.mainMenu)
-
 	}
 
 	private createContextMenu() {
-		const copyTitleItem = new PopupMenuItem("Copy current song title")
-		copyTitleItem.connect("activate", () => this.handleCopySong())
-
-		const youtubeDownloadItem = new PopupMenuItem("Download from Youtube")
-		youtubeDownloadItem.connect('activate', () =>
-			downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir)
+		this._applet_context_menu.addAction(
+			"Copy current song title",
+			() => this.handleCopySong()
 		)
-
-		this._applet_context_menu.addMenuItem(copyTitleItem, 0)
-		this._applet_context_menu.addMenuItem(youtubeDownloadItem, 1)
-		this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-
+		this._applet_context_menu.addAction(
+			"Download from Youtube",
+			() => downloadSongFromYoutube(this.mpvPlayer.currentSong, this.music_dir)
+		)
 	}
 
 	private handleCopySong() {
@@ -164,117 +142,77 @@ export class RadioApplet extends TextIconApplet {
 		else this.set_applet_icon_name(`radioapplet-${this.iconType.toLowerCase()}`)
 	}
 
-	/**
-	 * 
-	 * @param playbackStatus should always be passed (except when setting changes)
-	 * @returns 
-	 */
-	private setIconColor(playbackStatus?: PlaybackStatus) {
-		playbackStatus ??= this.mpvPlayer.playbackStatus
-		const color = playbackStatus === "Playing" ? this.symbolicIconColorWhenPlaying : true
+
+	private setIconColor() {
+		const color = this.playbackStatus === "Playing" ? this.symbolicIconColorWhenPlaying : true
 		this.actor.style = `color: ${color}`
 	}
 
 
-	/**
-	 * 
-	 * @param playbackStatus should always be passed (except when setting changes)
-	 * @param currentChannelName only needed when radio ist not stopped
-	 * @returns 
-	 */
-
-	private setAppletLabel(playbackStatus?: PlaybackStatus, currentChannelName?: string) {
-
-		playbackStatus ??= this.mpvPlayer.playbackStatus
-
-
-		if (playbackStatus === "Playing") {
-			currentChannelName ??= this.channelStore.getChannelName(this.currentUrl)
-		}
-
-		const label = (this.channelNameOnPanel && playbackStatus === "Playing")
-			? ' ' + currentChannelName : ''
+	private setAppletLabel() {
+		const label = (this.channelNameOnPanel && this.playbackStatus === "Playing")
+			? ' ' + this.currentChannelName : ''
 
 		this.set_applet_label(label)
 	}
 
-	private setAppletTooltip(playbackStatus: PlaybackStatus, volume?: number) {
-
-		const tooltipTxt = playbackStatus === "Stopped" ? "Radio++" : `Volume: ${volume.toString()}%`
+	private setAppletTooltip() {
+		const tooltipTxt = this.playbackStatus === "Stopped" ? "Radio++" : `Volume: ${this.volume.toString()}%`
 		this.set_applet_tooltip(tooltipTxt)
 	}
 
-
-	private handleRadioStopped(previousChannelUrl: string) {
+	private handleRadioStopped() {
 
 		this.currentUrl = null
-		const previousChannelName = this.channelStore.getChannelName(previousChannelUrl)
 
-		this.setAppletLabel('Stopped')
-		this.setIconColor('Stopped')
-		this.setAppletTooltip('Stopped')
-
-		this.mainMenu.activateStopItem(previousChannelName)
+		this.setAppletLabel()
+		this.setIconColor()
+		this.setAppletTooltip()
+		this.mainMenu.playbackStatus = "Stopped"
 
 		// theoretically it would make sense to save the last volume when the volume changes (as it is not guranteed that this method is called when cinnamon crashes) but this has hugh performance issues when changing the volume by scrolling
 		this.lastVolume = this.mpvPlayer.volume
 		this.updateMpvInitialVolume()
 	}
 
-	private handleRadioPaused(channelUrl: string) {
-
-		const channelName = this.channelStore.getChannelName(channelUrl)
-
-		this.mainMenu.pauseChannelItem(channelName)
-		this.setIconColor('Paused')
-		this.setAppletLabel('Paused')
+	private handleRadioPaused() {
+		this.setAppletLabel()
+		this.setIconColor()
+		this.mainMenu.playbackStatus = 'Paused'
 	}
 
-	private handleRadioResumed(channelUrl: string) {
+	private handleRadioResumed() {
+		this.setAppletLabel()
+		this.setIconColor()
 
-		const channelName = this.channelStore.getChannelName(channelUrl)
-		this.mainMenu.resumeChannelItem(channelName)
-		this.setIconColor('Playing')
-		this.setAppletLabel('Playing')
-
+		this.mainMenu.playbackStatus = 'Playing'
 	}
 
 	private handleRadioStarted(channelUrl: string) {
 		this.currentUrl = channelUrl
-		const channelName = this.channelStore.getChannelName(channelUrl)
 
-		this.mainMenu.activateChannelItem(channelName)
-
-		this.setAppletTooltip('Playing', this.mpvPlayer.volume)
-		this.setIconColor('Playing')
-		this.setAppletLabel('Playing', channelName)
-
+		this.setAppletLabel()
+		this.setIconColor()
+		this.setAppletTooltip()
+		this.mainMenu.setChannel(this.currentChannelName)
 	}
 
-	private handleChannelChanged(oldUrl: string, newUrl: string) {
+	private handleChannelChanged(newUrl: string) {
 		this.currentUrl = newUrl
 
-		const newChannelName = this.channelStore.getChannelName(newUrl)
-		const oldChannelName = this.channelStore.getChannelName(oldUrl)
+		this.setAppletLabel()
+		this.setIconColor() // needed when paused before!		
 
-		this.mainMenu.changeChannelItem(newChannelName, oldChannelName)
-
-		this.setIconColor('Playing') // can happen when paused before!		
-		this.setAppletLabel('Playing', newChannelName)
+		this.mainMenu.setChannel(this.currentChannelName)
 	}
 
 	private handleChannelListChanged(channelList: Channel[]) {
-
-		this.initChannelStore(channelList)
-		this.mainMenu.updateStationList(this.channelStore.getActivatedChannelNames(),
-			this.mpvPlayer.playbackStatus, this.channelStore.getChannelName(this.currentUrl))
-
-
-		this.mpvPlayer.updateValidUrls(this.channelStore.getActivatedChannelUrls())
+		this.channelStore = new ChannelStore(channelList)
+		this.mainMenu.stationsList = this.activatedChannelNames
+		this.mpvPlayer.validUrls = this.activatedChannelUrls
 	}
 
 	private handleChannelClicked(channelName: string) {
-
 		const url = this.channelStore.getChannelUrl(channelName)
 		const playbackStatus = this.mpvPlayer.playbackStatus;
 
@@ -289,11 +227,11 @@ export class RadioApplet extends TextIconApplet {
 		}
 
 		if (playbackStatus === "Paused") this.mpvPlayer.togglePlayPause()
-
 	}
 
 	private handleVolumeChanged(volume: number) {
-		this.setAppletTooltip('Playing', volume)
+		this.setAppletTooltip()
+		this.mainMenu.volume = volume
 	}
 
 	private get initialVolume() {
@@ -312,7 +250,6 @@ export class RadioApplet extends TextIconApplet {
 	}
 
 	public async on_applet_clicked(event: any): Promise<void> {
-
 		try {
 			await checkInstallMrisPlugin()
 			await checkInstallMpv()
@@ -326,12 +263,35 @@ export class RadioApplet extends TextIconApplet {
 	private handleMouseScroll(event: any) {
 		const direction = event.get_scroll_direction();
 		const volumeChange = (direction === ScrollDirection.UP) ? 5 : -5
-		this.mpvPlayer.increaseDecreaseVolume(volumeChange)
+
+		this.volume += volumeChange
+	}
+
+	private get currentChannelName() {
+		return this.channelStore.getChannelName(this.currentUrl)
+	}
+
+	private get activatedChannelNames() {
+		return this.channelStore.activatedChannelNames
+	}
+
+	private get activatedChannelUrls() {
+		return this.channelStore.activatedChannelUrls
+	}
+
+	private get playbackStatus() {
+		return this.mpvPlayer.playbackStatus
+	}
+
+	private get volume() {
+		return this.mpvPlayer?.volume ?? this.initialVolume
+	}
+
+	private set volume(newVolume: number) {
+		this.mpvPlayer.volume = newVolume
 	}
 
 	public on_applet_middle_clicked(event: any) {
 		this.mpvPlayer.togglePlayPause()
 	}
-
-
 }

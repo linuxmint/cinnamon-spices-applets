@@ -7,11 +7,11 @@ class ChannelStore {
             return Object.assign(Object.assign({}, channel), { url: channel.url.trim() });
         });
     }
-    getActivatedChannelUrls() {
+    get activatedChannelUrls() {
         const filteredChannelList = this.channelList.filter(channel => channel.inc);
         return filteredChannelList.map(channel => channel.url);
     }
-    getActivatedChannelNames() {
+    get activatedChannelNames() {
         const filteredChannelList = this.channelList.filter(channel => channel.inc);
         return filteredChannelList.map(channel => channel.name);
     }

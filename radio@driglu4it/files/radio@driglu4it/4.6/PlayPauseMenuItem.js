@@ -9,12 +9,12 @@ class PlayMausMenuItem extends PopupBaseMenuItem {
         this.label = new St.Label({ text });
         this.addActor(this.label);
     }
-    addIcon(status) {
-        this.status = status;
+    addIcon(playbackStatus) {
+        this._playbackStatus = playbackStatus;
         let iconName;
-        if (status === "Playing")
+        if (playbackStatus === "Playing")
             iconName = "media-playback-start";
-        if (status === "Paused")
+        if (playbackStatus === "Paused")
             iconName = "media-playback-pause";
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -24,21 +24,24 @@ class PlayMausMenuItem extends PopupBaseMenuItem {
         this.addActor(this.icon, { span: 0 });
     }
     removeIcon() {
-        if (this.status === "Stopped")
+        if (this._playbackStatus === "Stopped")
             return;
         if (this.icon) {
             this.removeActor(this.icon);
             this.icon.destroy();
         }
     }
-    changePlayPauseOffStatus(newStatus) {
+    set playbackStatus(newStatus) {
         this.removeIcon();
         if (newStatus !== "Stopped") {
             this.removeActor(this.label);
             this.addIcon(newStatus);
             this.addActor(this.label);
         }
-        this.status = newStatus;
+        this._playbackStatus = newStatus;
+    }
+    get playbackStatus() {
+        return this._playbackStatus;
     }
 }
 exports.PlayMausMenuItem = PlayMausMenuItem;
