@@ -22,7 +22,7 @@ const {AppletSettings} = imports.ui.settings;
 const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
-const {_, searchStr} = require('./utils');
+const {_, getThumbnail_gicon, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
@@ -1365,6 +1365,8 @@ class CinnamenuApplet extends TextIconApplet {
                       });
         });
 
+        res.sort( (a, b) => a.name.toLowerCase() > b.name.toLowerCase() );
+
         if (pattern) {
             const _res = [];
             res.forEach(item => {
@@ -2024,8 +2026,9 @@ class Sidebar {//Creates and populates the sidebar (session buttons, fav apps an
                                         fav, fav.name, fav.description, null));
             });
             this.appThis.listFavoriteFiles().forEach(fav => {
+                let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
                 this.items.push(new SidebarButton( this.appThis,
-                                new St.Icon({ gicon: fav.gicon, icon_size: this.appThis.settings.sidebarIconSize}),
+                                new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
                                 fav, fav.name, fav.description, null));
             });
         }

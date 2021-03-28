@@ -1,6 +1,5 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const GLib = imports.gi.GLib;
 const Atk = imports.gi.Atk;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -16,7 +15,7 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const {_, wordWrap, showTooltip, hideTooltipIfVisible} = require('./utils');
+const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
@@ -455,7 +454,7 @@ class ContextMenu {
         };
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
         const file = Gio.File.new_for_uri(app.uri);
-        const fileExists = GLib.file_test(file.get_path(), GLib.FileTest.EXISTS);
+        const fileExists = file.query_exists(null);
         if (!fileExists && !app.isFavoriteFile) {
             Main.notify(_("This file is no longer available"),'');
             return false; //no context menu
@@ -556,7 +555,11 @@ class AppButton {
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
             this.icon = this.app.icon;
         } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
-            this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
+            let gicon = this.app.gicon;
+            if (!this.app.isWebBookmark) {
+                gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
+            }
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {//emoji search result
             const iconLabel = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
