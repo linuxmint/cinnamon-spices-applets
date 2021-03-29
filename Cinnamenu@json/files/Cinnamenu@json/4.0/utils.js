@@ -23,27 +23,40 @@ const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g )
 
 const getThumbnail_gicon = (uri, mimeType) => {
     //Note: this function doesn't check if thumbnail is up to date.
-    const ba = ByteArray.fromString(uri, 'UTF-8');
-    const md5 = GLib.Checksum.new(GLib.ChecksumType.MD5);
-    md5.update(ba);
-    const thumbDir = GLib.get_user_cache_dir() + "/thumbnails/";
-    const thumbName = md5.get_string() + ".png";
-    const thumbPathNormal = thumbDir + "normal/" + thumbName;
-    const thumbPathLarge = thumbDir + "large/" + thumbName;
-    if (GLib.file_test(thumbPathNormal, GLib.FileTest.EXISTS)) {
-        return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathNormal) });
-    } else if (GLib.file_test(thumbPathLarge, GLib.FileTest.EXISTS)) {
-        return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathLarge) });
-    } else if (mimeType === 'image/jpeg' || mimeType === 'image/png' || mimeType === 'image/svg+xml' ||
-                mimeType === 'image/tiff' || mimeType === 'image/bmp' || mimeType === 'image/gif') {
-        const file = Gio.File.new_for_uri(uri);
-        if (file.query_exists(null)) {//check because it's possible for isFavoriteFile's to not exist.
-            const fileInfo = file.query_info("standard::size", Gio.FileQueryInfoFlags.NONE, null);
-            if (fileInfo.get_size() < 30000000) {//don't read files > 30MB
-                return new Gio.FileIcon({ file: file });
-            }
+    const file = Gio.File.new_for_uri(uri);
+    if (!file.query_exists(null)) {//check because it's possible for isFavoriteFile's to not exist.
+        return null;
+    }
+    //
+    const isImage = mimeType === 'image/jpeg' || mimeType === 'image/png' || mimeType === 'image/svg+xml' ||
+                            mimeType === 'image/tiff' || mimeType === 'image/bmp' || mimeType === 'image/gif';
+    const fileSize = file.query_info("standard::size", Gio.FileQueryInfoFlags.NONE, null).get_size();
+
+    //----Get thumbnail from cache
+    if (!(isImage && fileSize < 50000)) {//Don't bother with thumbnail cache if file is a
+                            //small image, quicker to just create icon from file itself and avoids
+                            //possible out of date cached thumbnail.
+        const ba = ByteArray.fromString(uri, 'UTF-8');
+        const md5 = GLib.Checksum.new(GLib.ChecksumType.MD5);
+        md5.update(ba);
+        const thumbDir = GLib.get_user_cache_dir() + "/thumbnails/";
+        const thumbName = md5.get_string() + ".png";
+        const thumbPathNormal = thumbDir + "normal/" + thumbName;
+        const thumbPathLarge = thumbDir + "large/" + thumbName;
+        if (GLib.file_test(thumbPathNormal, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathNormal) });
+        }
+        if (GLib.file_test(thumbPathLarge, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathLarge) });
         }
     }
+
+    //----No cached thumbnail available so make icon from image.
+    if (isImage && fileSize < 30000000) {//don't read image files > 30MB
+        return new Gio.FileIcon({ file: file });
+    }
+
+    //----No thumbnail
     return null;
 };
 

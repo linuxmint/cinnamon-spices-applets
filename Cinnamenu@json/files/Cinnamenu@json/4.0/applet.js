@@ -1086,7 +1086,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.filesSearched++;
             const filename = next.get_name();
             const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-            //global.log(this.bugcount++,folder,filename, depth);
             const filePath = folder + (folder === '/' ? '' : '/') + filename;
             if (filename.toLowerCase().startsWith(pattern)) {
                 const file = Gio.file_new_for_path(filePath);
@@ -1263,9 +1262,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (!pattern) {
             this.recentApps.getApps().forEach(recentId => {
                 const app = this.apps.listApplications('all').find(app => app.id === recentId);
-                res.push(app);
+                if (app) {//Check because app may have been uninstalled
+                    res.push(app);
+                }
             });
         }
+
         //-----add recent files
         let {_infosByTimestamp} = this.recentManager;
         //_infosByTimestamp doesn't update synchronously so _infosByTimestamp may not be cleared even
@@ -1300,7 +1302,6 @@ class CinnamenuApplet extends TextIconApplet {
             }
             res.push(this.clearRecentsButton);
         }
-
         if (pattern) {
             const _res = [];
             res.forEach(recentItem => {
