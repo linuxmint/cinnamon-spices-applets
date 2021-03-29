@@ -41,8 +41,10 @@ export class Log {
 		}
 	}
 
-	Error(error: string): void {
-		global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString() + "\n" + "On Line: " + this.GetErrorLine());
+	Error(error: string, e?: Error): void {
+		global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+		if (e != null)
+			global.logError(e.stack);
 	};
 
 	Debug(message: string): void {

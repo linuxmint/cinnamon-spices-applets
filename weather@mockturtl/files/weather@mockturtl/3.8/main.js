@@ -132,7 +132,7 @@ class WeatherApplet extends TextIconApplet {
             return "success";
         }
         catch (e) {
-            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
+            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "fail";

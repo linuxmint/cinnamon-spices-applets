@@ -35,8 +35,10 @@ class Log {
             global.log(msg);
         }
     }
-    Error(error) {
-        global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString() + "\n" + "On Line: " + this.GetErrorLine());
+    Error(error, e) {
+        global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString());
+        if (e != null)
+            global.logError(e.stack);
     }
     ;
     Debug(message) {
