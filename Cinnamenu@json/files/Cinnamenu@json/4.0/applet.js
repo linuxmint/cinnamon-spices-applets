@@ -22,7 +22,7 @@ const {AppletSettings} = imports.ui.settings;
 const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
-const {_, searchStr} = require('./utils');
+const {_, getThumbnail_gicon, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
@@ -1086,7 +1086,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.filesSearched++;
             const filename = next.get_name();
             const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-            //global.log(this.bugcount++,folder,filename, depth);
             const filePath = folder + (folder === '/' ? '' : '/') + filename;
             if (filename.toLowerCase().startsWith(pattern)) {
                 const file = Gio.file_new_for_path(filePath);
@@ -1263,9 +1262,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (!pattern) {
             this.recentApps.getApps().forEach(recentId => {
                 const app = this.apps.listApplications('all').find(app => app.id === recentId);
-                res.push(app);
+                if (app) {//Check because app may have been uninstalled
+                    res.push(app);
+                }
             });
         }
+
         //-----add recent files
         let {_infosByTimestamp} = this.recentManager;
         //_infosByTimestamp doesn't update synchronously so _infosByTimestamp may not be cleared even
@@ -1300,7 +1302,6 @@ class CinnamenuApplet extends TextIconApplet {
             }
             res.push(this.clearRecentsButton);
         }
-
         if (pattern) {
             const _res = [];
             res.forEach(recentItem => {
@@ -1364,6 +1365,8 @@ class CinnamenuApplet extends TextIconApplet {
                                             //time so buttons cannot be reused.
                       });
         });
+
+        res.sort( (a, b) => a.name.toLowerCase() > b.name.toLowerCase() );
 
         if (pattern) {
             const _res = [];
@@ -2024,8 +2027,9 @@ class Sidebar {//Creates and populates the sidebar (session buttons, fav apps an
                                         fav, fav.name, fav.description, null));
             });
             this.appThis.listFavoriteFiles().forEach(fav => {
+                let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
                 this.items.push(new SidebarButton( this.appThis,
-                                new St.Icon({ gicon: fav.gicon, icon_size: this.appThis.settings.sidebarIconSize}),
+                                new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
                                 fav, fav.name, fav.description, null));
             });
         }

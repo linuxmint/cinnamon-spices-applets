@@ -6,7 +6,7 @@ import { PlaybackStatus } from './types'
 export class PlayMausMenuItem extends PopupBaseMenuItem {
 
     readonly label: imports.gi.St.Label
-    private status: PlaybackStatus
+    private _playbackStatus: PlaybackStatus
     private icon: imports.gi.St.Icon
 
     public constructor(text: string) {
@@ -15,14 +15,14 @@ export class PlayMausMenuItem extends PopupBaseMenuItem {
         this.addActor(this.label)
     }
 
-    private addIcon(status: PlaybackStatus) {
+    private addIcon(playbackStatus: PlaybackStatus) {
 
-        this.status = status
+        this._playbackStatus = playbackStatus
 
         let iconName: string
 
-        if (status === "Playing") iconName = "media-playback-start"
-        if (status === "Paused") iconName = "media-playback-pause"
+        if (playbackStatus === "Playing") iconName = "media-playback-start"
+        if (playbackStatus === "Paused") iconName = "media-playback-pause"
 
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -35,7 +35,7 @@ export class PlayMausMenuItem extends PopupBaseMenuItem {
 
     private removeIcon() {
         // Only access "this._icon" when it exists to prevent "Object St.Icon (0x55a3f21c9810), has been already deallocated — impossible to access it ..." in logs. 
-        if (this.status === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
 
         if (this.icon) {
             this.removeActor(this.icon)
@@ -43,7 +43,8 @@ export class PlayMausMenuItem extends PopupBaseMenuItem {
         }
     }
 
-    public changePlayPauseOffStatus(newStatus: PlaybackStatus) {
+
+    public set playbackStatus(newStatus: PlaybackStatus) {
         this.removeIcon()
 
         if (newStatus !== "Stopped") {
@@ -52,9 +53,11 @@ export class PlayMausMenuItem extends PopupBaseMenuItem {
             this.addActor(this.label)
         }
 
-        this.status = newStatus
-
+        this._playbackStatus = newStatus
     }
 
+    public get playbackStatus() {
+        return this._playbackStatus
+    }
 
 }

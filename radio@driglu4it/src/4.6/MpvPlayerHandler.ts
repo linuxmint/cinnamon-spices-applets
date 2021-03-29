@@ -20,9 +20,21 @@ const MAX_VOLUME = 100 // see https://github.com/linuxmint/cinnamon-spices-apple
 type VolumeUpdateTarget = "cvcStream" | "mpris" | "both"
 
 
+interface MetaValue {
+    unpack: { (): string }
+}
+
+// these are the values which playerctl returns (not mandatory complete)
+interface Metadata {
+    ["xesam:title"]: MetaValue,
+    ["mpris:trackid"]: MetaValue,
+    ["xesam:url"]: MetaValue,
+    ["mpris:length"]: MetaValue
+}
+
 interface MprisMediaPlayer {
     Volume: number
-    Metadata: any //TODO: add type
+    Metadata: Metadata
     PlaybackStatus: PlaybackStatus
     LoopStatus: any
     Shuffle: any
@@ -46,7 +58,7 @@ interface Arguments {
     onStopped: { (stoppedUrl: string): void },
     onVolumeChanged: { (newVolume: number): void }
     onStarted: { (startedUrl: string): void },
-    onChannelChanged: { (oldUrl: string, newUrl: string): void },
+    onChannelChanged: { (newUrl: string, oldUrl?: string): void },
     onPaused: { (pausedUrl: string): void },
     onResumed: { (resumedUrl: string): void },
 }
@@ -61,11 +73,11 @@ export class MpvPlayerHandler {
     private control: imports.gi.Cvc.MixerControl
 
     private stream: imports.gi.Cvc.MixerStream
-    public volume: number
+    private _volume: number
     public initialVolume: number
-    public playbackStatus: PlaybackStatus
+    private _playbackStatus: PlaybackStatus
 
-    private validUrls: string[]
+    private _validUrls: string[]
     public currentUrl: string
 
     private onVolumeChanged: { (newVolume: number): void }
@@ -78,7 +90,11 @@ export class MpvPlayerHandler {
     private propsChangeListener: Function
 
     public constructor(args: Arguments) {
-        Object.assign(this, args)
+
+        const { validUrls, ...others } = args
+
+        this._validUrls = validUrls
+        Object.assign(this, others)
     }
 
     public async init() {
@@ -90,11 +106,11 @@ export class MpvPlayerHandler {
         const mpvRunning = (await this.getAllMrisPlayerBusNames()).includes(MPV_MPRIS_BUS_NAME)
 
         if (mpvRunning) {
-            this.playbackStatus = this.mediaServerPlayer.PlaybackStatus
+            this._playbackStatus = this.mediaServerPlayer.PlaybackStatus
             this.propsChangeListener = this.initMediaPropsChangeListener()
-            this.volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume)
+            this._volume = this.normalizeMprisVolume(this.mediaServerPlayer.Volume)
         } else {
-            this.playbackStatus = "Stopped"
+            this._playbackStatus = "Stopped"
             this.currentUrl = null
         }
 
@@ -162,17 +178,17 @@ export class MpvPlayerHandler {
             if (newOwner) {
                 this.propsChangeListener = this.initMediaPropsChangeListener()
             } else {
+                this._playbackStatus = "Stopped"
                 this.onStopped(this.currentUrl)
                 this.currentUrl = null
-                this.playbackStatus = "Stopped"
                 this.mediaProps.disconnectSignal(this.propsChangeListener)
             }
         })
     }
 
-    public updateValidUrls(urls: string[]) {
-        this.validUrls = urls
-        if (!this.validUrls.includes(this.currentUrl)) {
+    public set validUrls(urls: string[]) {
+        this._validUrls = urls
+        if (!this._validUrls.includes(this.currentUrl)) {
             this.stop()
         }
     }
@@ -181,27 +197,24 @@ export class MpvPlayerHandler {
 
         const url = metadata["xesam:url"].unpack()
 
-        if (url === this.currentUrl || !this.validUrls.includes(url)) {
+        if (url === this.currentUrl || !this._validUrls.includes(url)) {
             return
         }
 
-        this.currentUrl ? this.onChannelChanged(this.currentUrl, url,) : this.onStarted(url)
+        this._playbackStatus = this.mediaServerPlayer.PlaybackStatus
+        this.currentUrl ? this.onChannelChanged(url, this.currentUrl) : this.onStarted(url)
         this.currentUrl = url
 
-        this.playbackStatus = this.mediaServerPlayer.PlaybackStatus
     }
 
     private handlePlaybackStatusChanged(playbackStatus: PlaybackStatus) {
 
-        if (this.playbackStatus === playbackStatus) return
+        if (this._playbackStatus === playbackStatus) return
+        this._playbackStatus = playbackStatus
 
         playbackStatus === "Paused" && this.onPaused(this.currentUrl)
         playbackStatus === "Playing" && this.onResumed(this.currentUrl)
-
-        this.playbackStatus = playbackStatus
-
     }
-
 
     private handleMprisVolumeChanged(newMprisVolume: number) {
 
@@ -255,12 +268,11 @@ export class MpvPlayerHandler {
     public start(channelUrl: string) {
 
         this.pauseAllOtherMediaPlayer()
-        this.volume = this.initialVolume
+        this._volume = this.initialVolume
 
         const command = `mpv --script=${MPRIS_PLUGIN_PATH} ${channelUrl} --volume=${this.initialVolume}`
         spawnCommandLine(command)
     }
-
 
     // theoritcally this should also work for starting but it doesn't (probably due to --script). 
     // works also when radio is paused
@@ -272,20 +284,14 @@ export class MpvPlayerHandler {
         this.mediaServerPlayer.OpenUriRemote(channelUrl)
     }
 
-
     public togglePlayPause() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
         this.mediaServerPlayer.PlayPauseRemote()
     }
 
     public stop() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
         this.mediaServerPlayer.StopRemote()
-    }
-
-    public increaseDecreaseVolume(volumeChange: number) {
-        if (this.playbackStatus === "Stopped") return
-        this.updateVolume('both', this.volume + volumeChange)
     }
 
     private updateCvcVolume(newNormalizedVolume: number) {
@@ -298,12 +304,22 @@ export class MpvPlayerHandler {
         this.mediaServerPlayer.Volume = this.normalizedVolumeToMprisVolume(newNormalizedVolume)
     }
 
+    /**
+     * @param newVolume: a value between 0 - 100
+     */
+    public set volume(newVolume: number) {
+        this.updateVolume('both', newVolume)
+    }
+
+    public get volume() {
+        return this._volume
+    }
 
     private updateVolume(target: VolumeUpdateTarget, newVolume: number) {
 
         newVolume = Math.min(MAX_VOLUME, Math.max(0, newVolume))
 
-        if (newVolume === this.volume) return
+        if (newVolume === this._volume || this.playbackStatus === "Stopped") return
 
         if (target === "cvcStream" || target === "both") {
             if (!this.stream || this.normalizeCvcStreamVolume(this.stream.volume) === newVolume) return
@@ -315,16 +331,20 @@ export class MpvPlayerHandler {
             this.updateMprisVolume(newVolume)
         }
 
-        this.volume = newVolume
+        this._volume = newVolume
         this.onVolumeChanged(newVolume)
     }
 
 
     public get currentSong() {
-        if (this.playbackStatus === "Stopped") return
+        if (this._playbackStatus === "Stopped") return
 
         return this.mediaServerPlayer.Metadata["xesam:title"].unpack()
-
-
     }
+
+    public get playbackStatus() {
+        return this._playbackStatus
+    }
+
+
 }
