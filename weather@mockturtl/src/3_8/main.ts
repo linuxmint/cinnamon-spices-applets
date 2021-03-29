@@ -158,7 +158,7 @@ export class WeatherApplet extends TextIconApplet {
 			this.Unlock();
 			return RefreshState.Failure;
 		}
-	};
+	}
 
 	// ---------------------------------------------------------------------------
 	// Panel Set helpers helpers

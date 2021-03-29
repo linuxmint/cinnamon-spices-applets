@@ -138,7 +138,6 @@ class WeatherApplet extends TextIconApplet {
             return "fail";
         }
     }
-    ;
     DisplayWeather(weather) {
         let location = utils_1.GenerateLocationText(weather, this.config);
         let lastUpdatedTime = utils_1.AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours);
