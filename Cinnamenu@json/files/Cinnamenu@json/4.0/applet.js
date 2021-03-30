@@ -1292,16 +1292,19 @@ class CinnamenuApplet extends TextIconApplet {
         });
         //----add "Clear list" button
         if (res.length > 0  && !pattern) {
-            if (!this.clearRecentsButton) {
-                this.clearRecentsButton = { name: _('Clear List'),
-                                            description: '',
-                                            icon: new St.Icon({ icon_name: 'edit-clear',
-                                                                icon_type: St.IconType.SYMBOLIC,
-                                                                icon_size: this.getAppIconSize()}),
-                                            isClearRecentsButton: true };
+            const clearRecentsButton = this.appsView.buttonStore.find(button => button.app.isClearRecentsButton);
+            if (clearRecentsButton) {
+                res.push(clearRecentsButton.app);
+            } else {
+                res.push( { name: _('Clear List'),
+                            description: '',
+                            icon: new St.Icon({ icon_name: 'edit-clear',
+                                                icon_type: St.IconType.SYMBOLIC,
+                                                icon_size: this.getAppIconSize()}),
+                            isClearRecentsButton: true });
             }
-            res.push(this.clearRecentsButton);
         }
+
         if (pattern) {
             const _res = [];
             res.forEach(recentItem => {
