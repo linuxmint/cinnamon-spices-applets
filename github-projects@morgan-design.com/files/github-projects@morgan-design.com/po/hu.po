@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-19 17:00+0200\n"
-"PO-Revision-Date: 2021-03-29 21:33+0200\n"
+"PO-Revision-Date: 2021-03-30 08:24+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +28,7 @@ msgstr "Kísérlet az ön GitHub tárolóinak betöltésére"
 #: applet.js:46
 #, c-format
 msgid "Successfully Loaded GitHub Repos for user %s"
-msgstr "%s felhasználó Github tárolói betöltődtek"
+msgstr "%s felhasználó GitHub tárolói betöltődtek"
 
 #: applet.js:47
 msgid "ERROR:: GitHub Explorer ::ERROR"
@@ -37,7 +37,7 @@ msgstr "HIBA:: GitHub Explorer ::HIBA"
 #: applet.js:47
 msgid "Failed to load GitHub Repositories! Check applet Configuration"
 msgstr ""
-"Nem sikerült betölteni a GitHub-tárakat! Ellenőrizze az applet "
+"Nem sikerült betölteni a GitHub tárolókat! Ellenőrizze a kisalkalmazás "
 "konfigurációját"
 
 #: applet.js:166
@@ -50,7 +50,7 @@ msgstr "Kisalkalmazás konfigurációjának megtekintése"
 
 #: applet.js:266
 msgid "API Rate Exceeded will try again once we are allowed"
-msgstr "API ráta túllépve, megpróbálja újra, amint engedélyt kapunk"
+msgstr "API ráta túllépve, amint lehetséges újra megpróbáljuk"
 
 #: applet.js:281
 msgid "Click here to open GitHub"
@@ -140,7 +140,7 @@ msgstr "Ennek bejelölésével további értesítési üzeneteket engedélyez"
 #. github-projects@morgan-design.com->settings-schema.json->open-developer-
 #. homepage-button->description
 msgid "Open Developer Home"
-msgstr "A fejlesztő oldalának megnyitása"
+msgstr "Fejlesztő honlapjának megnyitása"
 
 #. github-projects@morgan-design.com->settings-schema.json->open-developer-
 #. homepage-button->tooltip
@@ -158,7 +158,7 @@ msgid ""
 "Change the amount of time between checking GitHub for changes to your "
 "Repositories"
 msgstr ""
-"Állítsa be az ön Gtihub tárolóiban történt változások ellenőrzésének "
+"Állítsa be az ön GitHub tárolóiban történő változások ellenőrzésének "
 "gyakoriságát"
 
 #. github-projects@morgan-design.com->settings-schema.json->enable-auto-
@@ -172,8 +172,8 @@ msgid ""
 "Checking this will mean the applet will update itself according to your "
 "refresh interval"
 msgstr ""
-"Ennek bejelölése azt jelenti, hogy a kisalkalmazás frissíteni fogja "
-"magát az ön frissítési gyakoriságának megfelelően"
+"Ennek bejelölésével a kisalkalmazás az ön frissítési gyakoriságának "
+"megfelelően fog frissülni"
 
 #. github-projects@morgan-design.com->settings-schema.json->open-cinnamon-
 #. homepage-button->description
@@ -216,8 +216,8 @@ msgstr "GitHub.com megnyitása - kód elágaztatása vagy funkció hozzáadása"
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
 msgstr ""
-"Kattintson a kisalkalmazásra, hogy felfedezze nyilvános Github-tárolóit"
+"Kattintson a kisalkalmazásra, hogy elérje nyilvános Github tárolóit"
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr "Github Explorer"
+msgstr "GitHub Explorer"
