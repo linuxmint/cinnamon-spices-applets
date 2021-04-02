@@ -240,7 +240,7 @@ class CategoryButton {
 }
 
 class ContextMenuItem extends PopupBaseMenuItem {
-    constructor(appThis, label, iconName, action) {
+    constructor(appThis, label, iconName, action, insensitive = false) {
         super({focusOnHover: false});
         this.appThis = appThis;
         if (iconName) {
@@ -252,8 +252,10 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.action = action;
-        if (this.action === null) {
-            this.actor.style = "font-weight: bold;";
+        if (this.action === null && !insensitive) {//"Open with" item
+            this.actor.style = 'font-weight: bold;';
+        } else if (insensitive) {//greyed out item
+            this.actor.add_style_pseudo_class('insensitive');
         }
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
@@ -264,9 +266,9 @@ class ContextMenuItem extends PopupBaseMenuItem {
             return Clutter.EVENT_STOP;
         }
         this.entered = true;
-        this.actor.add_style_pseudo_class('hover');// Should be 'hover' only, add 'active' for
-        this.actor.add_style_pseudo_class('active');//compatability with existing themes
-        return Clutter.EVENT_STOP;//true;
+        this.actor.add_style_pseudo_class('hover');
+        this.actor.add_style_pseudo_class('active');
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, e) {
@@ -277,11 +279,12 @@ class ContextMenuItem extends PopupBaseMenuItem {
     }
 
     activate(event) {
+        global.log('event');
         if (!this.action || event && event.get_button() !== 1) {
-            return false;
+            return Clutter.EVENT_STOP;
         }
         this.action();
-        return false;
+        return Clutter.EVENT_STOP;
     }
 
     destroy() {
@@ -456,12 +459,13 @@ class ContextMenu {
         const file = Gio.File.new_for_uri(app.uri);
         const fileExists = file.query_exists(null);
         if (!fileExists && !app.isFavoriteFile) {
-            Main.notify(_("This file is no longer available"),'');
+            Main.notify(_('This file is no longer available'),'');
             return false; //no context menu
         }
-        //
+        //Note: a file can be an isFavoriteFile and also not exist so continue below and add option to
+        //remove from favorites.
         if (fileExists) {
-            addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null ));
             const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
             if (defaultInfo) {
                 addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
@@ -477,7 +481,7 @@ class ContextMenu {
                                                             this.appThis.closeMenu(); } ));
             });
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
+                                                () => { spawnCommandLine('nemo-open-with ' + app.uri);
                                                         this.appThis.closeMenu(); } ));
         }
 
@@ -516,17 +520,23 @@ class ContextMenu {
         }
         if (!app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
-                        () => { const file = Gio.File.new_for_uri(app.uri);
-                                try {
-                                    file.trash(null);
-                                } catch (e) {
-                                    Main.notify(_("Error while moving file to trash:"), e.message);
-                                }
-                                this.appThis.sidebar.populate();
-                                this.appThis.updateMenuSize();
-                                this.appThis.setActiveCategory(this.appThis.currentCategory);
-                                this.close(); } ));
+
+            const fileInfo = file.query_info('access::can-trash', Gio.FileQueryInfoFlags.NONE, null);
+            const canTrash = fileInfo.get_attribute_boolean('access::can-trash');
+            if (canTrash) {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                            () => { const file = Gio.File.new_for_uri(app.uri);
+                                    try {
+                                        file.trash(null);
+                                    } catch (e) {
+                                        Main.notify(_('Error while moving file to trash:'), e.message);
+                                    }
+                                    this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                    this.close(); } ));
+            } else {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                                                                            null, true /*insensitive*/));
+            }
         }
         return true; //success.
     }
@@ -796,7 +806,7 @@ class AppButton {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("Error while opening file:"), e.message);
+                Main.notify(_('Error while opening file:'), e.message);
                 //don't closeMenu
             }
         } else if (this.app.isClearRecentsButton) {
@@ -946,7 +956,7 @@ class SidebarButton {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("Error while opening file:"), e.message);
+                Main.notify(_('Error while opening file:'), e.message);
             }
         }
     }
