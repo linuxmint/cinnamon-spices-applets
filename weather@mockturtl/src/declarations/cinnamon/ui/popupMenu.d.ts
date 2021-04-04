@@ -85,7 +85,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param child 
 		 * @param params 
 		 */
-		addActor(child: gi.Clutter.Actor, params: AddActorParams): void;
+		addActor(child: gi.Clutter.Actor, params?: Partial<AddActorParams>): void;
 
 		private _removeChild(child: gi.Clutter.Actor): void;
 
@@ -109,10 +109,12 @@ declare namespace imports.ui.popupMenu {
 
 		setColumnWidths(widths: number[]): void;
 
+		public connect(event: string, callback: Function): void
+
 	}
 
 	export class PopupMenuItem extends PopupBaseMenuItem {
-		constructor(text: string, params: PopupBaseMenuItemParams);
+		constructor(text: string, params?: PopupBaseMenuItemParams);
 
 		setLabel(label: string): void;
 		private _onRepaint(area: any): void;
@@ -149,6 +151,11 @@ declare namespace imports.ui.popupMenu {
 
 	export class PopupSliderMenuItem extends PopupBaseMenuItem {
 		constructor(value: number);
+
+		protected _slider: gi.St.DrawingArea;
+		protected _releaseId: number;
+		protected _dragging: boolean;
+		protected _mark_position: boolean;
 
 		setValue(value: number): void;
 
@@ -739,6 +746,7 @@ declare namespace imports.ui.popupMenu {
 
 		destroy(): void;
 		activate(event: any): void;
+		menu: PopupSubMenu;
 	}
 
 	export class PopupComboMenu extends PopupMenuBase {

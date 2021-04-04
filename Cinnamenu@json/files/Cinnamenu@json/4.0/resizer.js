@@ -19,9 +19,9 @@ class PopupResizeHandler {
 
         this._signals = new SignalManager.SignalManager(null);
 
-        this._signals.connect(this.actor, "motion-event", (...args) => this._motion_event(...args));
-        this._signals.connect(this.actor, "leave-event", (...args) => this._leave_event(...args));
-        this._signals.connect(this.actor, "button-press-event", (...args) => this._onButtonPress(...args));
+        this._signals.connect(this.actor, 'motion-event', (...args) => this._motion_event(...args));
+        this._signals.connect(this.actor, 'leave-event', (...args) => this._leave_event(...args));
+        this._signals.connect(this.actor, 'button-press-event', (...args) => this._onButtonPress(...args));
 
         this.no_edges_draggable = true;
         this.inhibit_resizing = false;

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-04 14:57+0000\n"
-"PO-Revision-Date: 2021-02-14 21:40+0200\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:16+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Type to search..."
@@ -27,20 +27,20 @@ msgstr "Alustetaan"
 msgid "No description available"
 msgstr "Ei kuvausta saatavilla"
 
-msgid "All Applications"
-msgstr "Kaikki sovellukset"
+msgid "All applications"
+msgstr "Kaikki ohjelmat"
 
 msgid "Places"
 msgstr "Sijainnit"
 
-msgid "Recent Files"
-msgstr "Viimeisimmät tiedostot"
+msgid "Recent files"
+msgstr "Viimeaikaiset"
 
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-msgid "Favorite Apps"
-msgstr "Suosikkisovellukset"
+msgid "Favorite apps"
+msgstr "Suosikki sovellukset"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
@@ -66,7 +66,7 @@ msgstr "Vaihda kuvakkeisiin"
 msgid "Switch to list view"
 msgstr "Vaihda luetteloon"
 
-msgid "Lock Screen"
+msgid "Lock screen"
 msgstr "Lukitusnäyttö"
 
 msgid "Lock the screen"
@@ -111,53 +111,14 @@ msgstr "Lisää suosikkeihin"
 msgid "Uninstall"
 msgstr "Asennuksen poisto"
 
-msgid "This file is no longer available"
-msgstr "Tämä tiedosto ei ole enää saatavilla"
-
-msgid "Open with"
-msgstr "Avaa"
-
-msgid "Other application..."
-msgstr "Muu sovellus..."
-
-msgid "Menu"
-msgstr "Valikko"
-
-msgid "Clear list"
-msgstr "Tyhjennä luettelo"
-
-msgid "Clear all recent documents"
-msgstr "Tyhjennä viimeaikaiset asiakirjat"
-
-msgid "No recent documents"
-msgstr "Ei viimeaikaisia asiakirjoja"
-
-msgid "Favorites"
-msgstr "Suosikit"
-
-msgid "Lock screen"
-msgstr "Lukitusnäyttö"
-
-msgid "Shut down the computer"
-msgstr "Sammuta tietokone"
-
-msgid "Reset category order"
-msgstr "Nollaa järjestys"
-
-msgid "Open containing folder"
-msgstr "Avaa sisällön kansio"
-
-msgid "Move to trash"
-msgstr "Siirrä roskakoriin"
-
-msgid "Error while moving file to trash:"
-msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
-
 msgid "Find files..."
 msgstr "Hae tiedostoja..."
 
 msgid "Please wait..."
 msgstr "Odota hetki..."
+
+msgid "No recent Items"
+msgstr "Ei viimeaikaisia tuotteita"
 
 msgid "Solution:"
 msgstr "Ratkaisu:"
@@ -168,26 +129,44 @@ msgstr "Kopioi napsauttamalla"
 msgid "Search web for"
 msgstr "Hae verkosta"
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
+msgid "Favorites"
+msgstr "Suosikit"
 
-msgid "All applications"
-msgstr "Kaikki ohjelmat"
-
-msgid "Recent files"
+msgid "Recent"
 msgstr "Viimeaikaiset"
-
-msgid "Favorite apps"
-msgstr "Suosikki sovellukset"
 
 msgid "Home folder"
 msgstr "Koti"
 
-msgid "Open..."
-msgstr "Avaa..."
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
 
-msgid "Open Containing Folder..."
-msgstr "Avaa sisällön kansio..."
+msgid "Reset category order"
+msgstr "Nollaa järjestys"
+
+msgid "This file is no longer available"
+msgstr "Tämä tiedosto ei ole enää saatavilla"
+
+msgid "Open with"
+msgstr "Avaa"
+
+msgid "Other application..."
+msgstr "Muu sovellus..."
+
+msgid "Open containing folder"
+msgstr "Avaa sisällön kansio"
+
+msgid "Move to trash"
+msgstr "Siirrä roskakoriin"
+
+msgid "Error while moving file to trash:"
+msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Avaa"
 
 msgid "Search"
 msgstr "Haku"
@@ -234,7 +213,7 @@ msgstr "Haku valmis"
 msgid "Skipping"
 msgstr "Ohitus"
 
-msgid " - direcotry already searched"
+msgid " - directory already searched"
 msgstr " - hakemisto jo haettu"
 
 msgid "Cinnamenu"
@@ -244,8 +223,8 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"Valikko, joka tarjoaa joustavat asetukset, kirjanmerkit, hakupalvelun ja sumeaa "
-"tiedotojen hakua."
+"Valikko, joka tarjoaa joustavat asetukset, kirjanmerkit, hakupalvelun ja "
+"sumeaa tiedotojen hakua."
 
 msgid "Behavior"
 msgstr "Käyttäytyminen"
@@ -264,6 +243,9 @@ msgstr "Hakupalvelun laajennuksia ei löytynyt"
 
 msgid "Panel"
 msgstr "Paneeli"
+
+msgid "Menu"
+msgstr "Valikko"
 
 msgid "Layout"
 msgstr "Ulkoasu"
@@ -340,8 +322,12 @@ msgstr "Ota automaattinen vieritys käyttöön ohjelmien luettelossa"
 msgid "Show web bookmarks"
 msgstr "Näytä selaimen kirjanmerkit"
 
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Näytä selaimesi kirjanmerkit valikossa"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Näytä selaimesi web-kirjanmerkit valikossa.\n"
+"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox suosikkeja."
 
 msgid "Enable searching of open windows"
 msgstr "Ota avoimien ikkunoiden haku käyttöön"
@@ -355,14 +341,17 @@ msgstr "Valitse, indeksoidaanko hakupalvelun tulokset hakuihin"
 msgid "Example Search Providers"
 msgstr "Esimerkkejä hakupalvelun tarjoajista"
 
-msgid "Startup applications view mode"
-msgstr "Käynnistyvien sovellusten katselu"
+msgid "Open menu on category:"
+msgstr "Avaa valikko kategoriassa:"
 
 msgid "List"
 msgstr "Luettelo"
 
 msgid "Grid"
 msgstr "Ruudukko"
+
+msgid "Always open the menu with this category selected"
+msgstr "Avaa aina valikko tämän luokan ollessa valittuna"
 
 msgid "columns"
 msgstr "sarakkeet"
@@ -393,9 +382,6 @@ msgstr "Työkaluvinkin viive"
 
 msgid "Use a custom menu height"
 msgstr "Käytä mukautettua valikon korkeutta"
-
-msgid "px"
-msgstr "px"
 
 msgid "Custom menu height"
 msgstr "Muokatun valikon korkeus"
@@ -437,26 +423,21 @@ msgid "Right"
 msgstr "Oikea"
 
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr "Valitse missä näytetään istunnon painikkeet (lopeta, kirjaudu ulos, jne.)"
+msgstr ""
+"Valitse missä näytetään istunnon painikkeet (lopeta, kirjaudu ulos, jne.)"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+" Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa.\n"
 
 msgid "Add favorites to session buttons"
 msgstr "Lisää suosikit istunnon painikkeisiin"
 
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Näytä suositut sovellukset kuvake istunnon painikkeiden vieressä"
-
-msgid "Show recent files"
-msgstr "Näytä käyttämäsi viimeisimmät tiedostot"
-
-msgid "Show recent files category in the menu"
-msgstr "Näytä käyttämäsi viimeisimmät tiedostot valikossa"
-
-msgid ""
-"Show your browser's web bookmarks in the menu.\n"
-" Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
-msgstr ""
-"Näytä selaimesi suosikit valikossa.\n"
-"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox suosikkeja."
 
 msgid "Show favorite apps category"
 msgstr "Näytä suositut sovellukset"
@@ -470,14 +451,17 @@ msgstr "Näytä kansio Koti"
 msgid "Show home folder category in the menu"
 msgstr "Näytä kansion Koti sisältö valikossa"
 
-msgid "Always open menu on favorite apps"
-msgstr "Avaa aina suositut sovellukset valikkoon"
-
-msgid "Always open the menu with favorite apps category selected"
-msgstr "Avaa aina valikko tilaan, jossa suositut sovellukset näkyvät"
+msgid "Last used category"
+msgstr "Viimeksi käytetty luokka"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Vieritä sovelluslistaa automaattisesti hiiren osoittimen kohdalla"
+
+msgid "Enable emoji search"
+msgstr "Emojien haku"
+
+msgid "Show emojis in search results"
+msgstr "Näytä emojit hakutuloksissa"
 
 msgid "Web search option"
 msgstr "Hakupalvelun vaihtoehdot"
@@ -497,11 +481,11 @@ msgstr "DuckDuckGo"
 msgid "Show an internet search option in search results"
 msgstr "Näytä hakupalvelun vaihtoehdot hakutuloksissa"
 
-msgid "Enable emoji search"
-msgstr "Emojien haku"
+msgid "Search home folder"
+msgstr "Hae kotikansiosta"
 
-msgid "Show emojis in search results"
-msgstr "Näytä emojit hakutuloksissa"
+msgid "When searching, also search home folder for files"
+msgstr "Haettaessa etsi myös tiedostoja kotikansiosta"
 
 msgid "Show hidden files"
 msgstr "Näytä piilotiedostot"
@@ -527,5 +511,4 @@ msgstr "Istunnon painikkeiden kuvakekoko"
 msgid "Use session buttons box style"
 msgstr "Lokeroidut painikkeet istunnon tyylissä"
 
-msgid "Info/tip: Drag on the menu edge to change the menu size."
-msgstr "Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa."
+

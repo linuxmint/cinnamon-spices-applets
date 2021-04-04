@@ -1,11 +1,13 @@
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
+const ByteArray = imports.byteArray;
 const {latinise, escapeRegExp} = imports.misc.util;
-Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);
@@ -18,6 +20,47 @@ function _(str) {
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
 
 //===========================================================
+
+const getThumbnail_gicon = (uri, mimeType) => {
+    //Note: this function doesn't check if thumbnail is up to date.
+    const file = Gio.File.new_for_uri(uri);
+    if (!file.query_exists(null)) {//check because it's possible for isFavoriteFile's to not exist.
+        return null;
+    }
+    //
+    const isImage = mimeType === 'image/jpeg' || mimeType === 'image/png' || mimeType === 'image/svg+xml' ||
+                            mimeType === 'image/tiff' || mimeType === 'image/bmp' || mimeType === 'image/gif';
+    const fileSize = file.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null).get_size();
+
+    //----Get thumbnail from cache
+    if (!(isImage && fileSize < 50000)) {//Don't bother with thumbnail cache if file is a
+                            //small image, quicker to just create icon from file itself and avoids
+                            //possible out of date cached thumbnail.
+        const ba = ByteArray.fromString(uri, 'UTF-8');
+        const md5 = GLib.Checksum.new(GLib.ChecksumType.MD5);
+        md5.update(ba);
+        const thumbDir = GLib.get_user_cache_dir() + '/thumbnails/';
+        const thumbName = md5.get_string() + '.png';
+        const thumbPathNormal = thumbDir + 'normal/' + thumbName;
+        const thumbPathLarge = thumbDir + 'large/' + thumbName;
+        if (GLib.file_test(thumbPathNormal, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathNormal) });
+        }
+        if (GLib.file_test(thumbPathLarge, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathLarge) });
+        }
+    }
+
+    //----No cached thumbnail available so make icon from image.
+    if (isImage && fileSize < 30000000) {//don't read image files > 30MB
+        return new Gio.FileIcon({ file: file });
+    }
+
+    //----No thumbnail
+    return null;
+};
+
+//============================================================
 
 let onlyOneTooltip = null;
 const showTooltip = (actor, xpos, ypos, center_x, text) => {
@@ -151,4 +194,6 @@ const searchStr = (q, str, quick = false) => {
     }
 };
 
-module.exports = {_, wordWrap, showTooltip, hideTooltipIfVisible, searchStr};
+
+
+module.exports = {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible, searchStr};

@@ -7268,9 +7268,9 @@ const EMOJI = [];
 "flag: Wales",
 "flag"
 ]
-].forEach(emoji => { EMOJI.push({ "code": emoji[0],
-                                  "name": emoji[1],
-                                  "keywords": emoji[2]
+].forEach(emoji => { EMOJI.push({ 'code': emoji[0],
+                                  'name': emoji[1],
+                                  'keywords': emoji[2]
                                 });
                     });
 
