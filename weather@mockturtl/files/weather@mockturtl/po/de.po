@@ -4,20 +4,21 @@
 # Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
 # Kghbln <kgh@kgh.info>, 2015, 2017, 2019.
 # michi <michi.schweitzer@gmail.com>, 2020.
+# Kim <kipuka@eclipso.eu>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl 2.6.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 11:07+0000\n"
-"PO-Revision-Date: 2021-02-27 17:50+0100\n"
-"Last-Translator: michi\n"
-"Language-Team: German - Germany <michi.schweitzer@gmail.com>\n"
+"PO-Revision-Date: 2021-04-02 09:38+0200\n"
+"Last-Translator: Kim <kipuka@eclipso.eu>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.0.6\n"
+"Language-Team: \n"
 
 #: 3.0/applet.js:167 3.0/applet.js:427 3.0/applet.js:2132 3.8/main.js:32
 msgid "Error"
@@ -119,7 +120,7 @@ msgstr "Netzwerkfehler, bitte überprüfen Sie die Protokolle in Looking Glass"
 
 #: 3.0/applet.js:970 3.0/applet.js:1111
 msgid "As of"
-msgstr "Von"
+msgstr "Stand"
 
 #: 3.0/applet.js:1109 3.8/uiBar.js:32
 msgid "Powered by"
@@ -1407,7 +1408,7 @@ msgstr "Dieser Anbieter benötigt einen API-Schlüssel um zu funktionieren"
 
 #: 3.8/main.js:138 3.8/uiBar.js:35
 msgid "As of {lastUpdatedTime}"
-msgstr "Ab {lastUpdatedTime}"
+msgstr "Stand {lastUpdatedTime}"
 
 #: 3.8/met_uk.js:250
 msgid "Very poor"
@@ -1710,7 +1711,7 @@ msgstr "Stunden"
 #. 3.0->settings-schema.json->forecastHours->description
 #. 3.8->settings-schema.json->forecastHours->description
 msgid "Hourly Forecast length"
-msgstr "Länge der stündlichen Vorhersage"
+msgstr "Vorhersagezeitraum"
 
 #. 3.0->settings-schema.json->unitSettings->description
 #. 3.8->settings-schema.json->units-section->title
@@ -1785,7 +1786,7 @@ msgstr "Beaufort"
 #. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr "Einheit für den Luftdruck"
+msgstr "Einheit Luftdruck"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -1849,7 +1850,7 @@ msgstr "Aktuelle Temperatur in der Leiste anzeigen"
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Zeige die Wetterbedingungen (z.B. \"Windig\", \"Klar\") im Tray"
+msgstr "Wetterbedingungen (z.B. \"Windig\", \"Klar\") in der Leiste anzeigen"
 
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
 #. 3.8->settings-schema.json->showCommentInPanel->tooltip
@@ -1859,7 +1860,7 @@ msgstr "Funktioniert nur bei vertikalen Panels"
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
 msgid "Override label on panel"
-msgstr "Label überschreiben mit"
+msgstr "Label im Panel überschreiben"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
@@ -1883,7 +1884,7 @@ msgstr "Iconset: Wetter Icons von Erik Flowers"
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr "Symbolische Icons verwenden"
+msgstr "In der Leiste benutzerdefinierte Icons verwenden"
 
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
@@ -1912,12 +1913,12 @@ msgstr "Max. Anzahl der Spalten für die Vorhersage"
 #. 3.0->settings-schema.json->forecastRows->units
 #. 3.8->settings-schema.json->forecastRows->units
 msgid "rows"
-msgstr "Reihen"
+msgstr "Zeilen"
 
 #. 3.0->settings-schema.json->forecastRows->description
 #. 3.8->settings-schema.json->forecastRows->description
 msgid "Maximum number of rows for forecast"
-msgstr "Max. Anzahl der Reihen für die Vorhersage"
+msgstr "Max. Anzahl der Zeilen für die Vorhersage"
 
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
@@ -1932,7 +1933,7 @@ msgstr "Zeit im 24-Stunden-Format anzeigen"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr "Nur Stunden für stündliche Vorhersagezeit anzeigen"
+msgstr "Bei der stündlichen Vorhersage nur Stunden anzeigen"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
@@ -1941,7 +1942,7 @@ msgstr "Anstelle von 15:00 oder 3:00 pm wird 15 oder 3 pm angezeigt"
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
 msgid "Display date for daily forecasts"
-msgstr "Datum für Tagesprognosen anzeigen"
+msgstr "Datum für Tagesvorhersagen anzeigen"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
@@ -1951,17 +1952,17 @@ msgstr "Wie »Freitag 15«"
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr "Vorhersagehöchsttemperatur zuerst anzeigen"
+msgstr "Tageshöchsttemperatur zuerst anzeigen"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
 msgid "Show temperature Russian style"
-msgstr "Temperaturen „Russian Style“"
+msgstr "Vor der Temperaturangabe + bzw. - anzeigen"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Den Ort überschreiben mit"
+msgstr "Den Vorhersageort überschreiben mit"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->weather-conditions->title
@@ -1976,7 +1977,7 @@ msgstr "Wetterbedingunen übersetzen"
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
-msgstr "Weniger detailierte Wetterbedingungen"
+msgstr "Wetterbedingungen in Kurzfassung"
 
 #. 3.0->settings-schema.json->shortConditions->tooltip
 #. 3.8->settings-schema.json->shortConditions->tooltip
@@ -1995,7 +1996,7 @@ msgstr "Symbolische Symbole im Applet verwenden"
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
 msgid "Use custom icons in the popup menu"
-msgstr "Benutzerdefinierte Symbole im Popup-Menü verwenden"
+msgstr "Im Popup-Menü benutzerdefinierte Icons verwenden"
 
 #. 3.8->settings-schema.json->locations-page->title
 #. 3.8->settings-schema.json->location->description
@@ -2095,7 +2096,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
-msgstr "Aktuelle Ort speichern"
+msgstr "Aktuellen Ort speichern"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
@@ -2108,7 +2109,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Wetter-Applet auf der Cinnamon Spices Website"
+msgstr "Wetter-Applet auf der Cinnamon Spices-Website"
 
 #. 3.8->settings-schema.json->refreshInterval->tooltip
 msgid ""
@@ -2130,7 +2131,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr "Minütliche Niederschlagsprognose aktivieren"
+msgstr "Detaillierte Niederschlagsvorhersage aktivieren"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2195,7 +2196,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr "Verwendung symbolischer Symbole im gesamten Applet"
+msgstr "Im gesamten Applet symbolische Icons verwenden"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -2205,10 +2206,10 @@ msgid ""
 "section by logging in with your Github account."
 msgstr ""
 "Für detaillierte Informationen über das Applet gehen Sie bitte auf die "
-"Spices-Website, um Informationen über bekannte Probleme, Fehlerbehebungen, "
-"Änderungsprotokolle und mehr zu finden, indem Sie auf die Schaltfläche unten "
-"klicken. Hier können Sie im Kommentarbereich Fragen etc. stellen, indem Sie "
-"sich mit Ihrem GitHub-Konto anmelden."
+"Spices-Website. Dort finden Sie Angaben zu bekannten Problemen, "
+"Fehlerbehebungen, Änderungsprotokollen und mehr. Klicken Sie hierfür auf die "
+"Schaltfläche unter diesem Text. Im Kommentarbereich der Website können Sie z."
+"B. Fragen stellen, nachdem Sie sich mit Ihrem GitHub-Konto angemeldet haben."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2242,8 +2243,8 @@ msgstr ""
 "GitHub-Konto anmelden. Bevor Sie mit dem Schreiben beginnen, vergewissern "
 "Sie sich bitte, dass das Problem nicht bereits gemeldet worden ist. "
 "Vergessen Sie nicht, »weather@mockturtl« in den Betreff zu schreiben, damit "
-"es für jeden direkt ersichtlich ist, dass es in diesem Ticket um das Wetter-"
-"Applet geht (das Formular ist für alle Cinnamon-Applets)."
+"für jeden sofort ersichtlich ist, dass es in diesem Ticket um das Wetter-"
+"Applet geht. Das Formular ist für alle Cinnamon-Applets gleich."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
