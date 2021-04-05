@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 23:34+0100\n"
-"PO-Revision-Date: 2021-03-23 07:57+0100\n"
+"PO-Revision-Date: 2021-04-05 08:14+0200\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "Rádió állomások"
 
 #: applet.js:49
 msgid "Bg Radio"
-msgstr ""
+msgstr "Bg Radio"
 
 #: applet.js:53 applet.js:61 applet.js:69 applet.js:77 applet.js:85
 #: applet.js:93 applet.js:101 applet.js:109 applet.js:117 applet.js:125
@@ -36,142 +36,142 @@ msgstr ""
 #: applet.js:173 applet.js:181 applet.js:189
 #, javascript-format
 msgid "Listening %s"
-msgstr ""
+msgstr "%s hallgatása"
 
 #: applet.js:57
 msgid "bTV Radio"
-msgstr ""
+msgstr "bTV Radio"
 
 #: applet.js:65
 msgid "City Radio"
-msgstr ""
+msgstr "City Radio"
 
 #: applet.js:73
 msgid "Classic FM"
-msgstr ""
+msgstr "Classic FM"
 
 #: applet.js:81
 msgid "Darik"
-msgstr ""
+msgstr "Darik"
 
 #: applet.js:89
 msgid "Darik Nostalgie"
-msgstr ""
+msgstr "Darik Nostalgie"
 
 #: applet.js:97
 msgid "Energy"
-msgstr ""
+msgstr "Energy"
 
 #: applet.js:105
 msgid "FM+"
-msgstr ""
+msgstr "FM+"
 
 #: applet.js:113
 msgid "Fresh"
-msgstr ""
+msgstr "Fresh"
 
 #: applet.js:121
 msgid "Jazz FM"
-msgstr ""
+msgstr "Jazz FM"
 
 #: applet.js:129
 msgid "K2"
-msgstr ""
+msgstr "K2"
 
 #: applet.js:137
 msgid "Melody"
-msgstr ""
+msgstr "Melody"
 
 #: applet.js:145
 msgid "N-Joy"
-msgstr ""
+msgstr "N-Joy"
 
 #: applet.js:153
 msgid "Nova Radio"
-msgstr ""
+msgstr "Nova Radio"
 
 #: applet.js:161
 msgid "Radio 1"
-msgstr ""
+msgstr "Radio 1"
 
 #: applet.js:169
 msgid "Radio 1 Rock"
-msgstr ""
+msgstr "Radio 1 Rock"
 
 #: applet.js:177
 msgid "The Voice Radio"
-msgstr ""
+msgstr "The Voice Radio"
 
 #: applet.js:185
 msgid "Z-Rock"
-msgstr ""
+msgstr "Z-Rock"
 
 #: applet.js:197
 msgid "TV stations"
-msgstr ""
+msgstr "TV adók"
 
 #: applet.js:201
 msgid "BNT"
-msgstr ""
+msgstr "BNT"
 
 #: applet.js:205 applet.js:213 applet.js:221 applet.js:229 applet.js:237
 #: applet.js:245 applet.js:253 applet.js:261 applet.js:269 applet.js:277
 #: applet.js:285 applet.js:293
 #, javascript-format
 msgid "Watching %s"
-msgstr ""
+msgstr "%s nézése"
 
 #: applet.js:209
 msgid "BNT 2"
-msgstr ""
+msgstr "BNT 2"
 
 #: applet.js:217
 msgid "BNT HD"
-msgstr ""
+msgstr "BNT HD"
 
 #: applet.js:225
 msgid "BNT World"
-msgstr ""
+msgstr "BNT World"
 
 #: applet.js:233
 msgid "bTV"
-msgstr ""
+msgstr "bTV"
 
 #: applet.js:241
 msgid "BIT"
-msgstr ""
+msgstr "BIT"
 
 #: applet.js:249
 msgid "City"
-msgstr ""
+msgstr "City"
 
 #: applet.js:257
 msgid "Kanal 3"
-msgstr ""
+msgstr "Kanal 3"
 
 #: applet.js:265
 msgid "Nova"
-msgstr ""
+msgstr "Kanal 3"
 
 #: applet.js:273
 msgid "On Air"
-msgstr ""
+msgstr "On Air"
 
 #: applet.js:281
 msgid "The Voice"
-msgstr ""
+msgstr "The Voice"
 
 #: applet.js:289
 msgid "Magic TV"
-msgstr ""
+msgstr "Magic TV"
 
 #: applet.js:300
 msgid "Stop"
-msgstr ""
+msgstr "Leállítás"
 
 #: applet.js:303
 msgid "All Stop"
-msgstr ""
+msgstr "Mindet leállít"
 
 #. metadata.json->description
 msgid ""
