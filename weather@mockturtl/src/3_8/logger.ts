@@ -32,13 +32,7 @@ export class Log {
 
 	Print(message: string): void {
 		let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
-		let debug = "";
-		if (this.debug) {
-			debug = this.GetErrorLine();
-			global.log(msg, '\n', "On Line:", debug);
-		} else {
-			global.log(msg);
-		}
+		global.log(msg);
 	}
 
 	Error(error: string, e?: Error): void {
@@ -61,11 +55,5 @@ export class Log {
 
 	public UpdateInstanceID(instanceID: number): void {
 		this.ID = instanceID;
-	}
-
-	private GetErrorLine(): string {
-		// Couldn't be more ugly, but it returns the file and line number
-		let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
-		return arr;
 	}
 }

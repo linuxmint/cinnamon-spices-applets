@@ -26,14 +26,7 @@ class Log {
     ;
     Print(message) {
         let msg = "[" + consts_1.UUID + "#" + this.ID + "]: " + message.toString();
-        let debug = "";
-        if (this.debug) {
-            debug = this.GetErrorLine();
-            global.log(msg, '\n', "On Line:", debug);
-        }
-        else {
-            global.log(msg);
-        }
+        global.log(msg);
     }
     Error(error, e) {
         global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString());
@@ -53,10 +46,6 @@ class Log {
     }
     UpdateInstanceID(instanceID) {
         this.ID = instanceID;
-    }
-    GetErrorLine() {
-        let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
-        return arr;
     }
 }
 exports.Log = Log;
