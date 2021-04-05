@@ -24,7 +24,7 @@ TODO: add these
 
 * only above 3.8
 
-* folder structure
+* folder structure, no subfolders
 
 * look out for circular imports and recommended code structure
 
