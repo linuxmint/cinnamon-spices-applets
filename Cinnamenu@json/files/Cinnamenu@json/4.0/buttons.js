@@ -122,12 +122,13 @@ class CategoryButton {
         //-----some style tweaks for menu-category-button-hover class.-----
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = 'Cinnamon default';
-        [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
-        ['/Mint-Y-Dark/',       'background-color: #404040;'],
-        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        [['/Mint-Y',            'background-color: #d8d8d8; color: black;'],
+        ['/Mint-Y-Dark',        'background-color: #404040;'],
+        ['/Mint-X',             'background-color: #d4d4d4; color: black; border-image: none;'],
         ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
         ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
+                                                        'background-gradient-end: rgba(255,255,255,0.03);'],
         ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
         ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
         ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
@@ -279,7 +280,6 @@ class ContextMenuItem extends PopupBaseMenuItem {
     }
 
     activate(event) {
-        global.log('event');
         if (!this.action || event && event.get_button() !== 1) {
             return Clutter.EVENT_STOP;
         }
@@ -533,7 +533,7 @@ class ContextMenu {
                                     }
                                     this.appThis.setActiveCategory(this.appThis.currentCategory);
                                     this.close(); } ));
-            } else {
+            } else {//show insensitive item
                 addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
                                                                             null, true /*insensitive*/));
             }
