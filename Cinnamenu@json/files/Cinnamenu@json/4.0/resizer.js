@@ -49,8 +49,8 @@ class PopupResizeHandler {
         //Due to an intermittent bug causing cinnamon to crash while resizing, ensure no settings callbacks
         //are called during resizing.
         //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
-        this.applet.settingsObj.finalize();
-        this.applet.initSettings();
+        //this.applet.settingsObj.finalize();
+        //this.applet.initSettings();
 
         this._grabEvents();
         this.resizingInProgress = true;
