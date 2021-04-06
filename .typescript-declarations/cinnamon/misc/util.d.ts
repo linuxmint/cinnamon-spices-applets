@@ -83,9 +83,9 @@ declare namespace imports.misc.util {
 	 *
 	 * Returns (object): a Gio.Subprocess instance
 	 */
-	export function spawnCommandLineAsyncIO(command: string, callback: (stdout: string, stderr: string, exitCode: number) => any, opts?: CommanLineAsyncIOOptions): imports.gi.Gio.Subprocess;
+	export function spawnCommandLineAsyncIO(command: string, callback: (stdout: string, stderr: string, exitCode: number) => any, opts?: CommandLineAsyncIOOptions): imports.gi.Gio.Subprocess;
 
-	interface CommanLineAsyncIOOptions {
+	interface CommandLineAsyncIOOptions {
 		argv: string[],
 		flags: string[],
 		input: any
