@@ -18,7 +18,7 @@ const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popup
 const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
-const {AppletSettings} = imports.ui.settings;
+const {AppletSettings} = require('./settings');
 const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
@@ -502,6 +502,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.resizer.resizingInProgress) {
             //due to a intermittent bug causing cinnamon to crash, don't update settings while resizing
             //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
+            //It also avoids excessive disk writes.
             this.settings.customMenuHeight = newHeight;
         }
         //------------width-------------
