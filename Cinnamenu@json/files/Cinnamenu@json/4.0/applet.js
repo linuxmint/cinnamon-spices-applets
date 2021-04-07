@@ -18,7 +18,7 @@ const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popup
 const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
-const {AppletSettings} = imports.ui.settings;
+const {AppletSettings} = require('./settings');
 const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
@@ -502,6 +502,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.resizer.resizingInProgress) {
             //due to a intermittent bug causing cinnamon to crash, don't update settings while resizing
             //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
+            //It also avoids excessive disk writes.
             this.settings.customMenuHeight = newHeight;
         }
         //------------width-------------
@@ -540,9 +541,11 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.resizer.resizingInProgress) {
             return Clutter.EVENT_STOP;
         }
+
         const symbol = event.get_key_symbol();
         const keyCode = event.get_key_code();
         const modifierState = Cinnamon.get_event_state(event);
+
         /* check for a keybinding and quit early, otherwise we get a double hit
            of the keybinding callback */
         const action = global.display.get_keybinding_action(keyCode, modifierState);
@@ -578,6 +581,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (currentlyActiveCategoryIndex < 0) {
             currentlyActiveCategoryIndex = 0;
         }
+        //When "activate categories on click" option is set, currentlyActiveCategoryIndex and
+        //enteredCategoryIndex may not be the same.
         let enteredCategoryIndex = categoryButtons.findIndex(button => button.entered);
         if (enteredCategoryIndex < 0) {
             enteredCategoryIndex = currentlyActiveCategoryIndex;
@@ -928,29 +933,51 @@ class CinnamenuApplet extends TextIconApplet {
     _doSearch(text) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (text !== this.currentSearchStr) return;
+        if (text !== this.currentSearchStr) {
+            return;
+        }
         //if (!text || !text.trim()) return;
-        const pattern = Util.latinise(text.toLowerCase());
+
+        const pattern = Util.latinise(text.toUpperCase());
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern === this.previousSearchPattern) {
-            return false;
+            return;
         }
         this.previousSearchPattern = pattern;
+
         let results = this.apps.listApplications('all', pattern)
-                            .concat(this.settings.showPlaces ? this.listPlaces(pattern) : [])
-                            .concat(this.settings.enableWebBookmarks ? this.listWebBookmarks(pattern) : [])
-                            .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
-                            .concat(this.listFavoriteFiles(pattern));
+                        .concat(this.listFavoriteFiles(pattern))
+                        .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
+                        .concat(this.settings.showPlaces ? this.listPlaces(pattern) : [])
+                        .concat(this.settings.enableWebBookmarks ? this.listWebBookmarks(pattern) : []);
         //---file search-------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
             this.filesSearched = 0;
             results = results.concat(this._searchDir(GLib.get_home_dir(), pattern, 0));
         }
 
-        results.sort( (a, b) =>  a.score < b.score );
+        //sort results
+        results.sort((a, b) =>  b.score - a.score );//items with equal score are left in existing order
         if (results.length > 10) {
             results.length = 10;
+        }
+
+        //Remove duplicate results. eg. a fav file, a recent file and a folderfile might all
+        //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile, isPlace,
+        //isFolderviewFile which is easy because results should already be in this order.
+        for (let i = 0; i < results.length -1; i++) {
+            const app = results[i];
+            if (app.isFavoriteFile || app.isRecentFile || app.isPlace) {
+                for (let r = i + 1; r < results.length; r++) {
+                    const compareApp = results[r];
+                    if ((compareApp.isRecentFile || compareApp.isFolderviewFile || compareApp.isPlace) &&
+                                                                compareApp.uri === app.uri) {
+                        results.splice(r, 1);
+                        r--;
+                    }
+                }
+            }
         }
         //=======search providers==========
         //---calculator---
@@ -1095,7 +1122,7 @@ class CinnamenuApplet extends TextIconApplet {
             const filename = next.get_name();
             const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
             const filePath = folder + (folder === '/' ? '' : '/') + filename;
-            if (filename.toLowerCase().startsWith(pattern)) {
+            if (filename.toUpperCase().startsWith(pattern)) {
                 const file = Gio.file_new_for_path(filePath);
                 //if file then treat as isFolderviewFile and if directory then treat as isPlace
                 const foundFile = { name: filename,
@@ -1267,7 +1294,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     listRecent(pattern) {
         let res = [];
-        //------add recent apps
+        //------add recent apps (but not when searching)
         if (!pattern) {
             this.recentApps.getApps().forEach(recentId => {
                 const app = this.apps.listApplications('all').find(app => app.id === recentId);
@@ -1286,9 +1313,9 @@ class CinnamenuApplet extends TextIconApplet {
             this.recentsJustCleared = false;
         }
         _infosByTimestamp.forEach(recentInfo => {
-            /*if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
-                continue;
-            }*/
+            //if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
+            //    return;
+            //}
             const found = this.appsView.buttonStore.find(button =>
                                             button.app.isRecentFile && button.app.uri === recentInfo.uri);
             if (found) {
@@ -1342,6 +1369,9 @@ class CinnamenuApplet extends TextIconApplet {
             }
             place.isPlace = true;
             place.description = selectedAppId;
+            if (place.id.startsWith('bookmark:')) {
+                place.uri = place.id.substr(9);
+            }
             res.push(place);
         });
 
@@ -1367,18 +1397,21 @@ class CinnamenuApplet extends TextIconApplet {
         let res = [];
         const favorite_infos = XApp.Favorites.get_default().get_favorites(null);
         favorite_infos.forEach(info => {
-            res.push({  name: info.display_name,
-                        description: Gio.File.new_for_uri(info.uri).get_path(),
-                        gicon: Gio.content_type_get_icon(info.cached_mimetype),
-                        isFavoriteFile: true,
-                        mimeType: info.cached_mimetype,
-                        uri: info.uri,
-                        deleteAfterUse: true // favorite_infos returns new .app objs each
-                                            //time so buttons cannot be reused.
-                      });
+            const found = this.appsView.buttonStore.find(button =>
+                                        button.app.isFavoriteFile && button.app.uri === info.uri);
+            if (found) {
+                res.push(found.app);
+            } else {
+                res.push({  name: info.display_name,
+                            description: Gio.File.new_for_uri(info.uri).get_path(),
+                            gicon: Gio.content_type_get_icon(info.cached_mimetype),
+                            isFavoriteFile: true,
+                            mimeType: info.cached_mimetype,
+                            uri: info.uri });
+            }
         });
 
-        res.sort( (a, b) => a.name.toLowerCase() > b.name.toLowerCase() );
+        res.sort( (a, b) => a.name.toUpperCase() > b.name.toUpperCase() );
 
         if (pattern) {
             const _res = [];
@@ -1458,8 +1491,8 @@ class CinnamenuApplet extends TextIconApplet {
                                 else if (a.isFolderviewDirectory && b.isFolderviewDirectory &&
                                             !a.name.startsWith('.') && b.name.startsWith('.')) return -1;
                                 else {
-                                    const nameA = a.name.toLowerCase();
-                                    const nameB = b.name.toLowerCase();
+                                    const nameA = a.name.toUpperCase();
+                                    const nameB = b.name.toUpperCase();
                                     return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );
                                 } });
         const parent = dir.get_parent();
@@ -1493,8 +1526,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
     _initAppCategories() {
         const apps_sort = arr => arr.sort( (a, b) => {
                         if (!a.name || !b.name) return -1;
-                        return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
+                        return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1674,12 +1707,12 @@ class CategoriesView {
         }
         dirs.sort((a, b) => {
                         const prefCats = ['administration', 'preferences'];
-                        const prefIdA = prefCats.indexOf(a.get_menu_id().toLowerCase());
-                        const prefIdB = prefCats.indexOf(b.get_menu_id().toLowerCase());
+                        const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
+                        const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
                         if (prefIdA < 0 && prefIdB >= 0) return -1;
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        const nameA = a.get_name().toLowerCase();
-                        const nameB = b.get_name().toLowerCase();
+                        const nameA = a.get_name().toUpperCase();
+                        const nameB = b.get_name().toUpperCase();
                         return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {

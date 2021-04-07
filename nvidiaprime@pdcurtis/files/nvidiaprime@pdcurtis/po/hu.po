@@ -119,9 +119,11 @@ msgid ""
 "Displays which Graphics processor is active and nVidia GPU Temperature when "
 "active and in a horizontal panel"
 msgstr ""
+
 "Megjeleníti, hogy melyik grafikus processzor aktív, továbbá az nVidia GPU "
 "hőmérsékletét, ha az aktív és vízszintes panelen van"
 
 #. nvidiaprime@pdcurtis->metadata.json->name
 msgid "nVidia Prime GPU Display"
 msgstr "nVidia Prime GPU Megjelenítése"
+

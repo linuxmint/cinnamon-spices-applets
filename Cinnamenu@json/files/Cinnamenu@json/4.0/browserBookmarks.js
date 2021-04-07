@@ -248,8 +248,8 @@ class BookmarksManager {
                     this.state.push(bm[bmKeys[i]]);
                 }
             }
-            this.state.sort( (a, b) => { return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
+            this.state.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+                                            1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
         }).catch((e) => global.log(e.message, e.stack));
     }
 }

@@ -135,11 +135,12 @@ const searchStr = (q, str, quick = false) => {
     if (!str) {
         return { score: 0, result: str };
     }
+    
     const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
-    const str2 = latinise(str.toLowerCase());
-    //q is already latinise() & toLowerCase() in _doSearch()
+    const str2 = latinise(str.toUpperCase());
+    //q is already latinise() & toUpperCase() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
