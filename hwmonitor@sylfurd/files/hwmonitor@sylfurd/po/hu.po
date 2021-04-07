@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-03 14:53+0300\n"
-"PO-Revision-Date: 2021-04-05 10:50+0200\n"
+"PO-Revision-Date: 2021-04-07 21:47+0200\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,7 +224,7 @@ msgstr "Négyzetrács a grafikon felett legyen"
 #. 3.2->settings-schema.json->graph_line_mode->description
 #. 3.8->settings-schema.json->graph_line_mode->description
 msgid "Grid lines"
-msgstr "Néhyzetrács"
+msgstr "Négyzetrács"
 
 #. 3.2->settings-schema.json->graph_line_mode->tooltip
 #. 3.8->settings-schema.json->graph_line_mode->tooltip
