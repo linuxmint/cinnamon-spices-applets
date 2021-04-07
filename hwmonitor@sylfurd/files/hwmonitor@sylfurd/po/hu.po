@@ -186,7 +186,7 @@ msgstr "3,0"
 msgid "4.0"
 msgstr "4,0"
 
-#. 3.2->settings-schema.json->frequency->options
+#. 3.2->settings-schema.json->frequency->op"ntions
 #. 3.8->settings-schema.json->frequency->options
 msgid "5.0"
 msgstr "5,0"
