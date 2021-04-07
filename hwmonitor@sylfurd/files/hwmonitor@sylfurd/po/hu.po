@@ -224,7 +224,7 @@ msgstr "Négyzetrács a grafikon felett legyen"
 #. 3.2->settings-schema.json->graph_line_mode->description
 #. 3.8->settings-schema.json->graph_line_mode->description
 msgid "Grid lines"
-msgstr "Néhyzetrács"
+msgstr "Négyzetrács"
 
 #. 3.2->settings-schema.json->graph_line_mode->tooltip
 #. 3.8->settings-schema.json->graph_line_mode->tooltip
