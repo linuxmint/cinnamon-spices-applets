@@ -112,6 +112,7 @@ MyApplet.prototype = {
             this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
             this.wait4cmd = false;
+            this.batteryPath = "";
             this.battery100 = metadata.path + "/icons/battery-100.png";
             this.battery080 = metadata.path + "/icons/battery-080.png";
             this.battery060 = metadata.path + "/icons/battery-060.png";
@@ -154,15 +155,29 @@ MyApplet.prototype = {
             }
 
             // Check that all Dependencies Met by presence of upower, sox and zenity
-            if (GLib.find_program_in_path("apcupsd") && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") ) {
+            if (GLib.find_program_in_path("upower") && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") ) {
                  this.dependenciesMet = true;
             } else {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
-                 Main.criticalNotify(_("Some Dependencies not Installed"), _("'apcupsd', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
+                 Main.criticalNotify(_("Some Dependencies not Installed"), _("'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
                  this.dependenciesMet = false;
             }
+
+            // Determine upower's path to battery
+            this.wait4cmd = true;
+            Util.spawn_async(["upower", "--enumerate"], Lang.bind(this, function(out) {
+                out = out.split("\n");
+                for(var n = 0; n < out.length - 1; n++) {
+                    let line = out[n].trim();
+                    if (line.indexOf("BAT") !== -1) {
+                        this.batteryPath = line;
+                        this.wait4cmd = false;
+                        break;
+                    }
+                }
+            }));
 
 /*
             // Set sound file locations as used in versions < 3.2
@@ -364,11 +379,11 @@ MyApplet.prototype = {
             for (var n = 0; n < out.length - 1; n++) {
                 let tokens = out[n].split(":");
                 switch (tokens[0].trim()) {
-                    case "BCHARGE":
+                    case "percentage":
                         this.batteryPercentage = tokens[1].trim(); //.trimRight("%");
-                        this.batteryPercentage = this.batteryPercentage.substring(0, this.batteryPercentage.length - 10)
+                        this.batteryPercentage = this.batteryPercentage.substring(0, this.batteryPercentage.length - 1)
                         break;
-                    case "STATUS":
+                    case "state":
                         this.batteryState = tokens[1].trim();
                         break;
                 }
@@ -380,7 +395,7 @@ MyApplet.prototype = {
             }
 //          Comment out following line when tests are complete
 //          this.batteryPercentage = this.batteryPercentage / 5 ;
-             if ( this.batteryState.length > 3 ) {
+             if ( this.batteryState.length > 6 ) {
 // TODO: Why substr()?
 //                 this.batteryState = this.batteryState.substr(0, 5);
                  this.batteryStateOld = this.batteryState;
@@ -391,7 +406,7 @@ MyApplet.prototype = {
             this.batteryMessage = " "
             if (Math.floor(this.batteryPercentage)  >= Math.floor(this.alertPercentage)) {
                 this.actor.style_class = 'bam-normal';
-                 if (this.batteryState.indexOf("ONBATT") > -1) {
+                 if (this.batteryState.indexOf("discharg") > -1) {
                      this.actor.style_class = 'bam-discharging';
                     }
                 this.alertFlag = false;
@@ -402,13 +417,13 @@ MyApplet.prototype = {
                     this.actor.style_class = 'bam-alert';
                     this.flashFlag = false;
                 } else {
-                 if (this.batteryState.indexOf("ONBATT") > -1) {
+                 if (this.batteryState.indexOf("discharg") > -1) {
                     this.actor.style_class = 'bam-alert-discharging';
                     this.flashFlag = true; // Corrected placement
                     }
                 }
 
-                if (this.batteryState.indexOf("ONBATT") > -1) {
+                if (this.batteryState.indexOf("discharg") > -1) {
                     this.batteryMessage = _("Battery Low - turn off or connect to mains") + " ";
                     if ( !this.alertFlag) {
                        this.alertFlag = true;  // Reset above when out of warning range
@@ -434,7 +449,7 @@ MyApplet.prototype = {
                     this.flashFlag2 = true;
                 }
 
-                if (this.batteryState.indexOf("ONBATT") > -1) {
+                if (this.batteryState.indexOf("discharg") > -1) {
                     this.batteryMessage = _("Battery Critical will Suspend unless connected to mains") + " "
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
                        // Audible alert moved from suspendScript in v32_1.0.0
@@ -453,22 +468,22 @@ May be implemented in future version
              this.set_applet_tooltip(_("Charge:") + " " + this.batteryPercentage + "% (" + this.batteryState + ")\n" + _("Alert:") + " " + Math.floor(this.alertPercentage) + "%\n"  + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%" );
              // Now select icon to display
              if (this.batteryPercentage == 100) {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.battery100;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery100;
                   else                                            this.batteryIcon = this.batteryCharging100;
              } else if (this.batteryPercentage >= 80) {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.battery080;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery080;
                   else                                            this.batteryIcon = this.batteryCharging080;
              } else if (this.batteryPercentage >= 60) {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.battery060;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery060;
                   else                                            this.batteryIcon = this.batteryCharging060;
              } else if (this.batteryPercentage >= Math.floor(this.alertPercentage)) {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.battery040;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery040;
                   else                                            this.batteryIcon = this.batteryCharging040;
              } else if (this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5)) {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.batteryCaution;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryCaution;
                   else                                            this.batteryIcon = this.batteryChargingCaution;
              } else {
-                  if (this.batteryState.indexOf("ONBATT") > -1) this.batteryIcon = this.batteryLow;
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryLow;
                   else                                            this.batteryIcon = this.batteryChargingLow;
              }
 
@@ -514,7 +529,7 @@ May be implemented in future version
         if (this.applet_running == true) {
             if (!this.wait4cmd) {
                 this.wait4cmd = true;
-                Util.spawn_async(["apcaccess"], Lang.bind(this, this.updateUI));
+                Util.spawn_async(["upower", "--show-info", this.batteryPath], Lang.bind(this, this.updateUI));
             }
             Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.updateLoop));
         }
