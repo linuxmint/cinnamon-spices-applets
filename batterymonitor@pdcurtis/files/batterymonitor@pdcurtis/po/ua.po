@@ -8,69 +8,69 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-27 18:22+0300\n"
-"PO-Revision-Date: 2017-05-28 11:42+0300\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2021-04-09 11:42+0300\n"
+"Language-Team: Nicholas Fox <nicholaslisovenko@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.4.2\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: ru\n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: uk\n"
 
 #: applet.js:52
 msgid "Ok"
-msgstr "Ok"
+msgstr "Так"
 
 #: applet.js:100
 msgid "invalid"
-msgstr "недействительный"
+msgstr "недійсний"
 
 #: applet.js:132
 msgid "Wait"
-msgstr "Ждать"
+msgstr "Чекати"
 
 #: applet.js:144
 msgid "Waiting"
-msgstr "Ожидание"
+msgstr "Очікування"
 
 #: applet.js:195
 msgid "Open Power Statistics"
-msgstr "Открыть статистику питания"
+msgstr "Відкрити статистику живлення"
 
 #: applet.js:201
 msgid "Open System Monitor"
-msgstr "Открыть системный монитор"
+msgstr "Відкрити систему моніторінгу"
 
 #: applet.js:210
 msgid "Housekeeping and System Sub Menu"
-msgstr "Подменю «Уборка» и «Система»"
+msgstr "Підменю «Прибирання» і «Система»"
 
 #: applet.js:213
 msgid "View the Changelog"
-msgstr "Просмотр списка изменений"
+msgstr "Перегляд списку змін"
 
 #: applet.js:219
 msgid "Open the Help file"
-msgstr "Открыть файл справки"
+msgstr "Відкрити файл довідки"
 
 #: applet.js:225
 msgid "Open stylesheet.css  (Advanced Function)"
-msgstr "Открыть файл stylesheet.css (расширенная функция)"
+msgstr "Відкрити файл stylesheet.css (розширена функція)"
 
 #. batterymonitor@pdcurtis->metadata.json->name
 #: applet.js:241
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr "Апплет батареи с контролем и выключением (BAMS)"
+msgstr "Аплет батареї з контролем і вимиканням (BAMS)"
 
 #: applet.js:246
 msgid "Note: Alerts not enabled in Settings"
-msgstr "Примечание. Предупреждения не включены в настройках"
+msgstr "Примітка. Попередження не включені в налаштуваннях"
 
 #: applet.js:310
 msgid "Battery Low - turn off or connect to mains"
-msgstr "Батарея разряжена - выключите или подключите к сети"
+msgstr "Батарея розряджена - вимкнітся або підключіть до мережі"
 
 #: applet.js:315
 msgid ""
@@ -79,16 +79,15 @@ msgid ""
 " either reconnect to a power source\n"
 "or close down your work and suspend or shutdown the machine"
 msgstr ""
-"Уровень заряда батареи упал до Вашего уровня предупреждений\n"
+"Рівень заряду батареї впав до Вашого рівня попереджень\n"
 "\n"
-"либо подключите к источнику питания\n"
-"или прекратите вашу работу и приостановите или выключите машину"
+"або підключіть до джерела живлення\n"
+"або припиніть вашу роботу і на паузу або вимкніть машину"
 
 #: applet.js:333
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
-"Критический уровень заряда, работа будет приостановлена, если не подлючить к "
-"сети"
+"Критичний рівень заряду, робота буде припинена, якщо не подлючен до мережі"
 
 #: applet.js:356
 msgid "Charge:"
@@ -96,32 +95,33 @@ msgstr "Заряд:"
 
 #: applet.js:356
 msgid "Alert:"
-msgstr "Предупреждение:"
+msgstr "Попередження:"
 
 #: applet.js:356
 msgid "Suspend:"
-msgstr "Приостановить:"
+msgstr "Призупинити:"
 
 #: applet.js:358
 msgid "Percentage Charge:"
-msgstr "Процент заряда:"
+msgstr "Відсоток заряду:"
 
 #: applet.js:358
 msgid "Alert at:"
-msgstr "Оповещение по:"
+msgstr "Оповіщення по:"
 
 #: applet.js:358
 msgid "Suspend at:"
-msgstr "Приостановить на:"
+msgstr "Призупинити на:"
 
 #. batterymonitor@pdcurtis->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
-msgstr "Общие настройки для апплета аккумулятора с мониторингом и выключением"
+msgstr ""
+"Загальні налаштування для аплету акумулятора з моніторингом і вимиканням"
 
 #. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->description
 msgid "Refresh Interval for Display:"
-msgstr "Интервал обновления для отображения:"
+msgstr "Частота оновлення для відображення:"
 
 #. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->tooltip
@@ -129,8 +129,8 @@ msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
 "a slow refresh if you have a slow machine"
 msgstr ""
-"Увеличьте или уменьшите это значение счетчика, чтобы изменить интервал "
-"обновления - используйте медленное обновление, если у вас медленная машина"
+"Збільште або зменшіть це значення лічильника, щоб змінити інтервал оновлення "
+"- використовуйте повільне оновлення, якщо у вас повільна машина"
 
 #. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->units
@@ -139,17 +139,16 @@ msgstr "секунд"
 
 #. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
-msgstr "Процент заряда батареи, при котором отображается предупреждение"
+msgstr "Відсоток заряду батареї, при якому відображається попередження"
 
 #. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
 msgid ""
 "Percentage of Battery Charge at which Orange Warning Background is displayed "
 "- It is also shown and can be adjusted in the Applet left click menu"
 msgstr ""
-"Процент заряда батареи, при котором отображается предупреждение оранжевый "
-"фон - это также показано и может быть скорректирована в Апплета, левый клик "
-"меню"
+"Відсоток заряду батареї, при якому відображається попередження помаранчевого "
+"фону - це також відображено і може бути скориговано в аплеті, лівий клік меню"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
-msgstr "Показывает заряд в процентах и разрешенные предупреждения и действия"
+msgstr "Показує заряд у відсотках і дозволені попередження і дії"
