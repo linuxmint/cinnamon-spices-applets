@@ -480,61 +480,68 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    updateMenuSize(newWidth, newHeight) {
-        //----------height--------
-        //the stored menu height value is middlePane + bottomPane which is smaller than the menu's actual height.
-
-        if (!newHeight) {//newHeight is only supplied when risizing because settings have been finalised.
+    updateMenuSize(newWidth = null, newHeight = null) {
+        if (!newHeight) {//newHeight is only supplied when risizing
             newHeight = this.settings.customMenuHeight;
         }
+        if (!newWidth) {//newWidth is only supplied when risizing
+            newWidth = this.settings.customMenuWidth;
+        }
+
+        //----------height--------
+        //Note: the stored menu height value is middlePane + bottomPane which is smaller than the
+        //menu's actual height.
         const appsHeight = newHeight - this.bottomPane.height;
-        //---make middlePane actors the same height
+
+        //---set middlePane actors to appsHeight
         this.appsView.applicationsScrollBox.height = appsHeight;
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
+
         //find sidebarOuterBox vertical padding
         const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
         const topAndBottomPadding = themeNode.lookup_length('padding-top', true)[1] +
                                             themeNode.lookup_length('padding-bottom', true)[1];
         let padding = Math.max(themeNode.lookup_length('padding', true)[1] * 2, topAndBottomPadding);
+
+        //set sidebarScrollBox height
         this.sidebar.sidebarScrollBox.set_height(-1);
         this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - padding, this.sidebar.sidebarScrollBox.height));
-        //-----
-        if (!this.resizer.resizingInProgress) {
-            //due to a intermittent bug causing cinnamon to crash, don't update settings while resizing
-            //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
-            //It also avoids excessive disk writes.
-            this.settings.customMenuHeight = newHeight;
-        }
+
         //------------width-------------
-        //the stored menu width value is less than the menu's actual width because it doesn't
+        //Note: the stored menu width value is less than the menu's actual width because it doesn't
         //include the outer menuBox padding, margin, etc.
 
-        if (!newWidth) {
+        if (!newWidth) {//newWidth is only supplied when risizing
             newWidth = this.settings.customMenuWidth;
         }
-        //---find minimum posible width for menu
+        //find minimum width for categoriesView + sidebar (if present)
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
         if (this.settings.sidebarPlacement === PlacementLEFT ||
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
             leftSideWidth += this.sidebar.sidebarOuterBox.width;
         }
-        this.searchView.searchEntry.width = 5;//don't know why this works.
+        //find minimum width of bottomPane
+        this.searchView.searchEntry.width = 5;  //Set to something small so that it gets set to its
+                                                //minimum value.
         let bottomPaneMinWidth = 0;
         if (this.settings.sidebarPlacement === PlacementTOP ||
                                                 this.settings.sidebarPlacement === PlacementBOTTOM) {
             bottomPaneMinWidth = this.bottomPane.width;
         }
+        //find minimum menu width
         const minWidthForAppsView = 200;
         let minMenuWidth = Math.max(leftSideWidth + minWidthForAppsView, bottomPaneMinWidth);
-        //---set menu to newWidth or minimum width
+
+        //---set applicationsListBox and applicationsGridBox width.
         let menuWidth = Math.max(minMenuWidth, newWidth);
-        if (!this.resizer.resizingInProgress) {
-            //due to a intermittent bug causing cinnamon to crash, don't update settings while resizing
-            //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
-            this.settings.customMenuWidth = menuWidth;
-        }
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
+
+        //Don't change settings while resizing to avoid excessive disk writes.
+        if (!this.resizer.resizingInProgress) {
+            this.settings.customMenuHeight = newHeight;
+            this.settings.customMenuWidth = menuWidth;
+        }
     }
 
     _onMenuKeyPress(actor, event) {
@@ -1002,13 +1009,14 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
-            const calcIcon = Gio.file_new_for_path(__meta.path + '/calc.png');
+            if (!this.calcGIcon) {
+                this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
+            }
             results.push({  isSearchResult: true,
                             name: _('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
-                            icon: new St.Icon({ gicon: new Gio.FileIcon({ file: calcIcon }),
-                                                                        icon_size: this.getAppIconSize() }),
+                            icon: new St.Icon({ gicon: this.calcGIcon, icon_size: this.getAppIconSize() }),
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
@@ -1280,8 +1288,36 @@ class CinnamenuApplet extends TextIconApplet {
         this.middlePane.destroy();
         this.mainBox.destroy();
     }
-//-----below are all functions creating app objects excluding _doSearch(), _searchDir() and
-//-----listApplications() which is in Apps class.
+
+/*-----below are all functions creating app objects excluding _doSearch(), _searchDir() and
+ *-----listApplications() which is in Apps class.
+ *app obj properties used:
+ *  .name
+ *  .description
+ *  .id
+ *  .uri
+ *  .mimeType
+ *  .icon
+ *  .gicon
+ *  .score
+ *  .nameWithSearchMarkup
+ *  .descriptionWithSearchMarkup
+ *  .isApplication
+ *  .isPlace
+ *  .isRecentFile
+ *  .isClearRecentsButton
+ *  .isFavoriteFile
+ *  .isFolderviewFile
+ *  .isFolderviewDirectory
+ *  .isBackButton
+ *  .isSearchResult
+ *  .deleteAfterUse
+ *  .emoji
+ *  .launch()
+ *  .activate()
+ *  .iconFactory()
+ */
+
     listFavoriteApps() {
         let res = this.appFavorites.getFavorites();
         res.forEach(favApp => {
@@ -1374,6 +1410,16 @@ class CinnamenuApplet extends TextIconApplet {
             }
             res.push(place);
         });
+        res.splice(2, 0, {
+                id: 'special:trash',
+                name: _('Trash'),
+                description: _('Trash'),
+                isPlace: true,
+                launch: () => Util.spawnCommandLine('xdg-open trash:'),
+                iconFactory: (size) => new St.Icon({icon_name: 'user-trash',
+                                                    icon_type: St.IconType.FULLCOLOR,
+                                                    icon_size: size })
+                        });
 
         if (pattern) {
             const _res = [];
@@ -1787,7 +1833,7 @@ class CategoriesView {
 }
 
 /*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
- *.app as a property. this.buttonStore[] array is used to store AppButton objs for performance only
+ *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
  *otherwise new AppButton's would need to created each time a category is clicked on.*/
 class AppsView {
     constructor(appThis) {
