@@ -1349,9 +1349,9 @@ class CinnamenuApplet extends TextIconApplet {
             this.recentsJustCleared = false;
         }
         _infosByTimestamp.forEach(recentInfo => {
-            if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
-                return;
-            }
+            //if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
+            //    return;
+            //}
             const found = this.appsView.buttonStore.find(button =>
                                             button.app.isRecentFile && button.app.uri === recentInfo.uri);
             if (found) {
