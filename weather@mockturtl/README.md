@@ -85,7 +85,7 @@ Historical and Forecast Weather data service provided by Weatherbit LLC in the U
 
 * To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
-* At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota.
+* At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota, the Free API subscription is limited to 500 calls per day.
 
 * **Hourly Weather forecast requires a non-free account
 
@@ -129,6 +129,17 @@ http://groups.google.com/group/cinnamon-weather
 ## Future Plans
 
 * None at the moment, I can take requests for provider integrations or for new features
+
+## Working with Language Translations
+
+If you want to update or change the translation in your language other than English, here are some  steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated, 
+by making a PR (pull request) on Github or contact the current maintainer of the applet.
+
+1. Install the translation editor **poedit** with your package manager and download your language PO file e. g. *xx.po* where xx is your ISO language code, and the template POT file *weather<span>@</span>mockturtl.pot* from the *files/weather@mockturtl/po/* sub directory on the [Github website](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/)
+
+2. Start **poedit** and open your downloaded PO file *xx.po*, then go to menu *Catalogue*, choose *Update from POT file…* and open the POT file *weather<span>@</span>mockturtl.pot*. Start your editing and try to use previously contributed translations as much as possible and get familiar with the correct technical weather terms for things in your language.
+
+3. When done translating, click on *Validate* and *Save*. This creates a new MO file that you can use locally in your system by overwriting the file *~/.local/share/locale/xx/LC_MESSAGES/weather@mockturtl.mo* and restart your system to check how your translation works.
 
 ## Known Issues
 
