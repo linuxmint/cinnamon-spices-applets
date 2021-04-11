@@ -107,6 +107,7 @@
 				"showForecastDates",
 				"shortHourlyTime",
 				"temperatureHighFirst",
+				"displayWindAsText",
 				"locationLabelOverride"
 			]
 		},
@@ -415,6 +416,12 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Show high temperature first in forecast"
+	},
+	"displayWindAsText": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display wind direction as text",
+		"tooltip": "Like SE, N instead of direction icons."
 	},
 	"shortHourlyTime": {
 		"type": "checkbox",

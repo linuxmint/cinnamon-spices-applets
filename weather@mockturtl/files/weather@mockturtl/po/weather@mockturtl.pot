@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 21:30+0100\n"
+"POT-Creation-Date: 2021-04-11 21:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgid "Click to open"
 msgstr ""
 
 #: 3.0/applet.js:235 3.0/applet.js:1247 3.8/main.js:275
-#: 3.8/uiCurrentWeather.js:133
+#: 3.8/uiCurrentWeather.js:134
 msgid "Refresh"
 msgstr ""
 
@@ -169,7 +169,7 @@ msgstr ""
 msgid "Wind"
 msgstr ""
 
-#: 3.0/applet.js:1642 3.8/config.js:173
+#: 3.0/applet.js:1642 3.8/config.js:174
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
@@ -1133,35 +1133,35 @@ msgstr ""
 msgid "Violent storm"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "N"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "NE"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "E"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "SE"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "S"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "SW"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "W"
 msgstr ""
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/utils.js:377
 msgid "NW"
 msgstr ""
 
@@ -1443,15 +1443,15 @@ msgstr ""
 msgid "{distance}{distanceUnit} from you"
 msgstr ""
 
-#: 3.8/uiCurrentWeather.js:221
+#: 3.8/uiCurrentWeather.js:222
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr ""
 
-#: 3.8/uiCurrentWeather.js:223
+#: 3.8/uiCurrentWeather.js:224
 msgid "Precipitation won't end in within an hour"
 msgstr ""
 
-#: 3.8/uiCurrentWeather.js:226
+#: 3.8/uiCurrentWeather.js:227
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr ""
 
@@ -2134,6 +2134,14 @@ msgstr ""
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Search entry"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
 msgstr ""
 
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip

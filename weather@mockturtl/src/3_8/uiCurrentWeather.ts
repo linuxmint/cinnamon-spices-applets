@@ -5,7 +5,7 @@ import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale } from "./utils";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -46,6 +46,7 @@ export class CurrentWeather {
 	private pressureLabel: imports.gi.St.Label;
 	private windLabel: imports.gi.St.Label;
 	private windDirectionIcon: imports.gi.St.Icon;
+	private windDirectionLabel: imports.gi.St.Label;
 	private apiUniqueLabel: imports.gi.St.Label;
 	private apiUniqueCaptionLabel: imports.gi.St.Label;
 
@@ -188,7 +189,8 @@ export class CurrentWeather {
 			icon_size: iconSize,
 			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
 		});
-		windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+		if (!config._displayWindAsText)
+			windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
 		windBox.add(this.windLabel);
 
 		return windBox;
@@ -370,14 +372,15 @@ export class CurrentWeather {
 
 	private async SetWind(windSpeed: number, windDegree: number) {
 		let wind_direction = CompassDirection(windDegree);
-		/*let arrows: ArrowIcons[] = ["north-arrow-weather-symbolic", "north-west-arrow-weather-symbolic", "west-arrow-weather-symbolic", "south-west-arrow-weather-symbolic", "south-arrow-weather-symbolic", "south-east-arrow-weather-symbolic", "east-arrow-weather-symbolic", "north-east-arrow-weather-symbolic"]
-		for (let index = 0; index < arrows.length; index++) {
-			const element = arrows[index];
-			this.windDirectionIcon.icon_name = element;
-			await delay(1000)
-		}*/
 		this.windDirectionIcon.icon_name = wind_direction;
-		this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+		if (this.app.config._displayWindAsText) {
+			let dirText = CompassDirectionText(windDegree);
+			this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
+		}
+		else {
+			this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+		}
+
 		// No need to display unit to Beaufort scale
 		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
 	}

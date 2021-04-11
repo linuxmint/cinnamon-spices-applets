@@ -428,6 +428,14 @@ export function CompassDirection(deg: number): ArrowIcons {
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
+export function CompassDirectionText(deg: number): string {
+	if (!deg)
+		return null;
+    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+    return directions[Math.round(deg / 45) % directions.length]
+}
+
+
 // -----------------------------------------------------------------
 // Testers
 

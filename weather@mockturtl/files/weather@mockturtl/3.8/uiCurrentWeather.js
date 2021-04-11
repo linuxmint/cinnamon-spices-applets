@@ -125,7 +125,8 @@ class CurrentWeather {
             icon_size: iconSize,
             style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
         });
-        windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+        if (!config._displayWindAsText)
+            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
         windBox.add(this.windLabel);
         return windBox;
     }
@@ -284,7 +285,13 @@ class CurrentWeather {
     async SetWind(windSpeed, windDegree) {
         let wind_direction = utils_1.CompassDirection(windDegree);
         this.windDirectionIcon.icon_name = wind_direction;
-        this.windLabel.text = utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+        if (this.app.config._displayWindAsText) {
+            let dirText = utils_1.CompassDirectionText(windDegree);
+            this.windLabel.text = `${(dirText != null ? utils_1._(dirText) + " " : "")}${utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
+        }
+        else {
+            this.windLabel.text = utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+        }
         if (this.app.config.WindSpeedUnit != "Beaufort")
             this.windLabel.text += " " + utils_1._(this.app.config.WindSpeedUnit);
     }

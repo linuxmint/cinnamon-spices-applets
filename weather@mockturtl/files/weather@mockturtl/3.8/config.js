@@ -43,7 +43,8 @@ const Keys = {
     SHOW_FORECAST_DATES: "showForecastDates",
     WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
     IMMEDIATE_PRECIP: "immediatePrecip",
-    SHOW_BOTH_TEMP: "showBothTempUnits"
+    SHOW_BOTH_TEMP: "showBothTempUnits",
+    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
 };
 class Config {
     constructor(app, instanceID) {
