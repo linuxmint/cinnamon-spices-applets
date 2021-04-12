@@ -159,7 +159,7 @@ class Climacell {
                 userError: true,
                 detail: "no key",
                 service: "climacell",
-                message: utils_1._("Please Make sure you\nentered the API key what you have from Climacell")
+                message: utils_1._("Please Make sure you\nentered the API key that you have from Climacell")
             });
             return false;
         }

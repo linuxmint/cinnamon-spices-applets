@@ -211,7 +211,7 @@
 		"indent": true,
 		"description": "Save current location to storage",
 		"callback": "saveCurrentLocation",
-		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
+		"tooltip": "Saves location information to file so you can switch between them with buttons in the applet, which will appear if you have more than one."
 	},
 	"getLocation": {
 		"type": "button",
@@ -238,7 +238,7 @@
 		"units": "days",
 		"step": 1,
 		"description": "Forecast length",
-		"tooltip": "Maximum number of days what can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
+		"tooltip": "Maximum number of days that can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
 	},
 	"forecastHours": {
 		"type": "spinbutton",

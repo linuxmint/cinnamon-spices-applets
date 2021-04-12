@@ -204,7 +204,7 @@ export class Climacell implements WeatherProvider {
 				userError: true,
 				detail: "no key",
 				service: "climacell",
-				message: _("Please Make sure you\nentered the API key what you have from Climacell")
+				message: _("Please Make sure you\nentered the API key that you have from Climacell")
 			});
 			return false;
 		}
