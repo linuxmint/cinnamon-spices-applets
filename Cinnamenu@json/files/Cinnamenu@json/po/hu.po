@@ -514,5 +514,3 @@ msgstr "Munkamenet gombok ikonjainak mérete"
 
 msgid "Use session buttons box style"
 msgstr "Munkamenet gombok stílusa"
-
-
