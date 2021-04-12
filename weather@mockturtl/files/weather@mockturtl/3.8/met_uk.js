@@ -122,21 +122,38 @@ class MetUk {
         if (!observation) {
             return null;
         }
-        let times = this.sunCalc.getTimes(new Date(), parseFloat(json[0].SiteRep.DV.Location.lat), parseFloat(json[0].SiteRep.DV.Location.lon), parseFloat(json[0].SiteRep.DV.Location.elevation));
+        let dataIndex;
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            if (element.SiteRep.DV.Location == null)
+                continue;
+            dataIndex = index;
+            break;
+        }
+        if (dataIndex == null) {
+            this.app.ShowError({
+                detail: "no api response",
+                type: "hard",
+                message: utils_1._("Data was not found for location"),
+                service: "met-uk",
+            });
+            return null;
+        }
+        let times = this.sunCalc.getTimes(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
         try {
             let weather = {
                 coord: {
-                    lat: parseFloat(json[0].SiteRep.DV.Location.lat),
-                    lon: parseFloat(json[0].SiteRep.DV.Location.lon)
+                    lat: parseFloat(json[dataIndex].SiteRep.DV.Location.lat),
+                    lon: parseFloat(json[dataIndex].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: null,
                     country: null,
                     url: null,
                     timeZone: null,
-                    distanceFrom: this.observationSites[0].dist
+                    distanceFrom: this.observationSites[dataIndex].dist
                 },
-                date: new Date(json[0].SiteRep.DV.dataDate),
+                date: new Date(json[dataIndex].SiteRep.DV.dataDate),
                 sunrise: times.sunrise,
                 sunset: times.sunset,
                 wind: {
