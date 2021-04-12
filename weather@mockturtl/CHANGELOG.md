@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.6
+
+* Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
+* Move Typescript declarations out of the weather applet folder to prevent update triggers from other applets making declaration changes. Please review this now if it's ok, should be in a folder with a different name or have a more thorough README etc.
+* Update de.po with contribution from kipuka@eclipso.eu
+* Add deprecation notices for relevant providers and their EOL date
+* Make provider names translatable
+* Add stack trace to errors (even if they do not seem to be correct)
+* Add option to switch between textual and icon representation of wind direction
+* Fixes [#3738](https://github.com/linuxmint/cinnamon-spices-applets/issues/3738)
+* Fixes [#3733](https://github.com/linuxmint/cinnamon-spices-applets/issues/3733)
+
 ## 3.0.5
 
 * Fixes [#3654](https://github.com/linuxmint/cinnamon-spices-applets/issues/3654)
