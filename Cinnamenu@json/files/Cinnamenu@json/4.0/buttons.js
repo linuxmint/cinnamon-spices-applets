@@ -125,17 +125,21 @@ class CategoryButton {
         [['/Mint-Y',            'background-color: #d8d8d8; color: black;'],
         ['/Mint-Y-Dark',        'background-color: #404040;'],
         ['/Mint-X',             'background-color: #d4d4d4; color: black; border-image: none;'],
-        ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
         ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
         ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
-                                                        'background-gradient-end: rgba(255,255,255,0.03);'],
-        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+                                                    'background-gradient-end: rgba(255,255,255,0.03);'],
         ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
         ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
         ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-        ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
+        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],
+        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/iOS-X/',             'color: rgb(70, 70, 70); background-color: #C9CCEE; ' +
+                                                    'border-image: none; border-radius: 3px;' ],
+        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],
+        ['/Yaru-Cinnamon-Light/', 'background-color: #d8d8d8; color: black;'],
+        ['/Yaru-Cinnamon-Dark/', 'background-color: #404040;']
         ].forEach(fix => {
             if (themePath.includes(fix[0])) {
                 this.actor.set_style(fix[1]);
@@ -686,11 +690,46 @@ class AppButton {
     _setButtonNormal() {
         this.entered = false;
         this.actor.set_style_class_name('menu-application-button');
+        this._addTileStyle();
     }
 
     _setButtonSelected() {
         this.entered = true;
         this.actor.set_style_class_name('menu-application-button-selected');
+        this._addTileStyle();
+    }
+
+    _addTileStyle() {
+        if (!this.appThis.settings.useTileStyle) {
+            return;
+        }
+        const toRgbaString = (col) => {
+                const decPlaces2 = (n) => Math.round(n * 100) / 100;
+                return `rgba(${col.red},${col.green},${col.blue},${decPlaces2(col.alpha / 255)})`; };
+        const lightenOrDarkenColor = (col) => { //lighten dark color or darken light color
+                    const isLightTheme = (col.red + col.green + col.blue) > 364;
+                    const amt = isLightTheme ? -15 : 15;
+                    col.red += amt;
+                    col.green += amt;
+                    col.blue += amt;
+                    return col; };
+        const opaqueify = (col) => { //make color 1/3 more opaque
+                    col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
+                    return col; };
+        const bgColor = this.appThis.getThemeBackgroundColor();
+        if (bgColor.to_string().startsWith('#000000')) {
+            bgColor.red = 20;
+            bgColor.green = 20;
+            bgColor.blue = 20;
+        }
+        let addedStyle = '';
+        if (this.entered) {
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) + ';';
+        } else {
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) +
+                        '; background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
+        }
+        this.actor.set_style(addedStyle);
     }
 
     _setAppHighlightClass() {

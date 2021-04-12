@@ -94,7 +94,8 @@
                 "apps-list-icon-size",
                 "apps-grid-icon-size",
                 "sidebar-icon-size",
-                "use-box-style"
+                "use-box-style",
+                "use-tile-style"
             ]
         }
     },
@@ -357,5 +358,11 @@
         "default":false,
         "description":"Use session buttons box style",
         "tooltip":"Use session buttons box style"
+    },
+    "use-tile-style":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Use tile style",
+        "tooltip":"Use a tile style for the application buttons (Note: may not work on some themes)"
     }
 }
