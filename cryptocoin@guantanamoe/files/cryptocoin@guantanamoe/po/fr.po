@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-12 12:09+0800\n"
-"PO-Revision-Date: 2021-02-24 08:55+0100\n"
+"PO-Revision-Date: 2021-04-11 17:42+0200\n"
 "Last-Translator: David VANTYGHEM <david.vantyghem@laposte.net>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -228,7 +228,7 @@ msgstr "Période de mise à jour des taux (en secondes)"
 
 #. settings-schema.json->rates-update-interval->tooltip
 msgid "Set the delay between each rates update."
-msgstr "Définit le délais entre chaque mise à jour du taux."
+msgstr "Définit le délai entre chaque mise à jour du taux."
 
 #. settings-schema.json->graph-type->description
 msgid "Graph Type"
