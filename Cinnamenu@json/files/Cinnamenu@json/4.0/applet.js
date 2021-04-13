@@ -145,7 +145,8 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'apps-list-icon-size',       value: 'appsListIconSize',      cb: this._refresh },
         { key: 'apps-grid-icon-size',       value: 'appsGridIconSize',      cb: this._refresh },
         { key: 'sidebar-icon-size',         value: 'sidebarIconSize',       cb: this._refresh },
-        { key: 'use-box-style',             value: 'useBoxStyle',           cb: this._refresh }
+        { key: 'use-box-style',             value: 'useBoxStyle',           cb: this._refresh },
+        { key: 'use-tile-style',            value: 'useTileStyle',          cb: this._refresh }
         ].forEach(setting => this.settingsObj.bind(
                           setting.key,
                           setting.value,
@@ -162,6 +163,10 @@ class CinnamenuApplet extends TextIconApplet {
 
     getThemeForegroundColor() {
         return this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+    }
+
+    getThemeBackgroundColor() {
+        return this.menu.actor.get_theme_node().get_background_color();
     }
 
     _getScreenWorkArea() {
@@ -1349,7 +1354,8 @@ class CinnamenuApplet extends TextIconApplet {
             this.recentsJustCleared = false;
         }
         _infosByTimestamp.forEach(recentInfo => {
-            //if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
+            //const file = Gio.File.new_for_uri(recentInfo.uri);
+            //if (!file || !file.query_exists(null)) {
             //    return;
             //}
             const found = this.appsView.buttonStore.find(button =>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"POT-Creation-Date: 2021-04-12 19:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,6 +126,9 @@ msgid "Click to copy"
 msgstr ""
 
 msgid "Search web for"
+msgstr ""
+
+msgid "Trash"
 msgstr ""
 
 msgid "Favorites"
@@ -501,4 +504,12 @@ msgid "Session buttons icon size"
 msgstr ""
 
 msgid "Use session buttons box style"
+msgstr ""
+
+msgid "Use tile style"
+msgstr ""
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
 msgstr ""
