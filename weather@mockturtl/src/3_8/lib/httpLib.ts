@@ -2,7 +2,7 @@ import { Log } from "lib/logger";
 import { ErrorDetail } from "types";
 import { _ } from "utils";
 
-const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
 export class HttpLib {
 	private static instance: HttpLib = null;
