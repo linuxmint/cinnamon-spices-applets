@@ -1,4 +1,4 @@
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
 import { RefreshState } from "types";
 import { delay, Guid } from "utils";

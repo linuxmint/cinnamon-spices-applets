@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HttpLib = void 0;
-const logger_1 = require("logger");
+const logger_1 = require("lib/logger");
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 class HttpLib {
     constructor() {

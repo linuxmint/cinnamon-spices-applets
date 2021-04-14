@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenWeatherMap = void 0;
-const logger_1 = require("logger");
+const logger_1 = require("lib/logger");
 const utils_1 = require("utils");
 const Lang = imports.lang;
 class OpenWeatherMap {

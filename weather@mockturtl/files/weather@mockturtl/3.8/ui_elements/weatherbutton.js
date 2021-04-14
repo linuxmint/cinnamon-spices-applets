@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherButton = void 0;
-const events_1 = require("events");
+const events_1 = require("lib/events");
 const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {

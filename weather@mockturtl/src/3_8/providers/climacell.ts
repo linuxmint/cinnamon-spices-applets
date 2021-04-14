@@ -6,10 +6,10 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "httpLib";
-import { Log } from "logger";
+import { HttpError } from "lib/httpLib";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
-import { SunTimes } from "sunCalc";
+import { SunTimes } from "lib/sunCalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "types";
 import { CelsiusToKelvin, _, IsNight } from "utils";
 

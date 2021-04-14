@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CloseStream = exports.WriteAsync = exports.OverwriteAndGetIOStream = exports.DeleteFile = exports.LoadContents = exports.FileExists = exports.GetFileInfo = void 0;
-const logger_1 = require("logger");
+const logger_1 = require("lib/logger");
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 async function GetFileInfo(file) {

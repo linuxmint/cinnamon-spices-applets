@@ -1,5 +1,5 @@
 import { Services } from "config";
-import { HttpError, HTTPParams } from "httpLib";
+import { HttpError, HTTPParams } from "lib/httpLib";
 import { WeatherApplet } from "main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
 import { CelsiusToKelvin, _ } from "utils";

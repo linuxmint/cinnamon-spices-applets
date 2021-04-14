@@ -1,4 +1,4 @@
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
 import { LocationData } from "types";
 import { _ } from "utils";

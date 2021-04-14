@@ -1,4 +1,4 @@
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { ErrorDetail } from "types";
 import { _ } from "utils";
 

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIBar = void 0;
-const commandRunner_1 = require("commandRunner");
+const commandRunner_1 = require("lib/commandRunner");
 const consts_1 = require("consts");
-const events_1 = require("events");
+const events_1 = require("lib/events");
 const utils_1 = require("utils");
-const weatherbutton_1 = require("weatherbutton");
+const weatherbutton_1 = require("ui_elements/weatherbutton");
 const { BoxLayout, IconType, Label, Icon, Align, } = imports.gi.St;
 const STYLE_BAR = 'bottombar';
 class UIBar {

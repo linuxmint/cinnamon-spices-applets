@@ -6,11 +6,11 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { SpawnProcessJson } from "commandRunner";
-import { Log } from "logger";
+import { SpawnProcessJson } from "lib/commandRunner";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
-import { NotificationService } from "notification_service";
-import { SunTimes } from "sunCalc";
+import { NotificationService } from "lib/notification_service";
+import { SunTimes } from "lib/sunCalc";
 import { WeatherProvider, WeatherData, ForecastData, BuiltinIcons, CustomIcons, LocationData } from "types";
 import { _, CelsiusToKelvin, KPHtoMPS } from "utils";
 

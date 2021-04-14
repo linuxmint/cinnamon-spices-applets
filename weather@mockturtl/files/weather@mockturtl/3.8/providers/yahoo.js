@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Yahoo = void 0;
-const commandRunner_1 = require("commandRunner");
-const logger_1 = require("logger");
-const notification_service_1 = require("notification_service");
+const commandRunner_1 = require("lib/commandRunner");
+const logger_1 = require("lib/logger");
+const notification_service_1 = require("lib/notification_service");
 const utils_1 = require("utils");
 class Yahoo {
     constructor(_app) {

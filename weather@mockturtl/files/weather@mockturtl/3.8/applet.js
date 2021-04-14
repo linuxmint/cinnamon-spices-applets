@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const consts_1 = require("consts");
-const logger_1 = require("logger");
+const logger_1 = require("lib/logger");
 const main_1 = require("main");
 function main(metadata, orientation, panelHeight, instanceId) {
     imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");

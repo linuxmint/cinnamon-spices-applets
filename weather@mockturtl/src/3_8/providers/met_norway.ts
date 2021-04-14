@@ -1,6 +1,6 @@
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
-import { SunCalc } from "sunCalc";
+import { SunCalc } from "lib/sunCalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "types";
 import { CelsiusToKelvin, IsNight, _ } from "utils";
 

@@ -1,5 +1,5 @@
 import { UUID } from "consts";
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
 
 //----------------------------------------------------------------------

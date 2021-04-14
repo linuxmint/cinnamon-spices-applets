@@ -6,8 +6,8 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "httpLib";
-import { Log } from "logger";
+import { HttpError } from "lib/httpLib";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "types";
 import { _, IsLangSupported } from "utils";

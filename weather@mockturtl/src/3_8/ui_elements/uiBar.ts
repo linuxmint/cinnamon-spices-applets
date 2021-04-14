@@ -1,11 +1,11 @@
-import { OpenUrl } from "commandRunner";
+import { OpenUrl } from "lib/commandRunner";
 import { Config, DistanceUnits } from "config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "consts";
-import { Event } from "events";
+import { Event } from "lib/events";
 import { WeatherApplet } from "main";
 import { CustomIcons, WeatherData, WeatherProvider } from "types";
 import { _, AwareDateString, MetreToUserUnits } from "utils";
-import { WeatherButton } from "weatherbutton";
+import { WeatherButton } from "ui_elements/weatherbutton";
 
 const { BoxLayout, IconType, Label, Icon, Align, } = imports.gi.St;
 

@@ -1,6 +1,6 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "consts";
-import { SunTimes } from "sunCalc";
+import { SunTimes } from "lib/sunCalc";
 import { ArrowIcons, BuiltinIcons, WeatherData } from "types";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;

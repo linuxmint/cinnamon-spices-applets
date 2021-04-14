@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationStore = void 0;
-const events_1 = require("events");
-const logger_1 = require("logger");
-const notification_service_1 = require("notification_service");
+const events_1 = require("lib/events");
+const logger_1 = require("lib/logger");
+const notification_service_1 = require("lib/notification_service");
 const utils_1 = require("utils");
 class LocationStore {
     constructor(app, config) {

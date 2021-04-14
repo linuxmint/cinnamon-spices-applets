@@ -1,6 +1,6 @@
 import { Config } from "config";
 import { APPLET_ICON, ELLIPSIS } from "consts";
-import { Log } from "logger";
+import { Log } from "lib/logger";
 import { WeatherApplet } from "main";
 import { HourlyForecastData, Precipitation } from "types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "utils";
