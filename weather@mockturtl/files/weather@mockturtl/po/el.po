@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # George Pantsis <gpantsis@gmail.com>, 2012.
 # George Boumis <developer.george.boumis@gmail.com>, 2014.
+# Vasilis Kosmidis <skyhirules@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.1\n"
+"Project-Id-Version: 3.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2014-08-30 17:21+0100\n"
-"Last-Translator: George Boumis <developer.george.boumis@gmail.com>\n"
+"PO-Revision-Date: 2021-04-14 15:52+0200\n"
+"Last-Translator: Vasilis Kosmidis <skyhirules@gmail.com>\n"
 "Language-Team: Ελληνικά <>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +54,7 @@ msgstr "Φόρτωση ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Ανανέωση"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -77,7 +78,7 @@ msgstr "Αισθητή θερμοκρασία:"
 
 #: applet.js:953
 msgid "Tornado"
-msgstr "Σίφωνας / Νεφοστρόβιλος"
+msgstr "Ανεμοστρόβιλος"
 
 #: applet.js:955
 msgid "Tropical storm"
@@ -89,7 +90,7 @@ msgstr "Τυφώνας"
 
 #: applet.js:959
 msgid "Severe thunderstorms"
-msgstr "Σοβαρές καταιγίδες"
+msgstr "Ισχυρές καταιγίδες"
 
 #: applet.js:961
 msgid "Thunderstorms"
@@ -97,15 +98,15 @@ msgstr "Καταιγίδες"
 
 #: applet.js:963
 msgid "Mixed rain and snow"
-msgstr "Μικτή βροχή και χιόνι"
+msgstr "Βροχή και χιόνι"
 
 #: applet.js:965
 msgid "Mixed rain and sleet"
-msgstr "Μικτή βροχή και χιονόνερο"
+msgstr "Βροχή και χιονόνερο"
 
 #: applet.js:967
 msgid "Mixed snow and sleet"
-msgstr "Μικτό χιόνι και χιονόνερο"
+msgstr "Χιόνι και χιονόνερο"
 
 #: applet.js:969
 msgid "Freezing drizzle"
@@ -113,7 +114,7 @@ msgstr "Παγωμένο ψιλόβροχο"
 
 #: applet.js:971
 msgid "Drizzle"
-msgstr "Ψεκάδες / Ψιλόβροχο"
+msgstr "Ψιλόβροχο"
 
 #: applet.js:973
 msgid "Freezing rain"
@@ -121,7 +122,7 @@ msgstr "Παγωμένη βροχή"
 
 #: applet.js:975 applet.js:977
 msgid "Showers"
-msgstr "Όμβροι / Βροχοπτώσεις"
+msgstr "Ισχυρές βροχοπτώσεις"
 
 #: applet.js:979
 msgid "Snow flurries"
@@ -185,7 +186,7 @@ msgstr "Κυρίως νεφελώδης"
 
 #: applet.js:1011 applet.js:1037
 msgid "Partly cloudy"
-msgstr "Πυκνή συννεφιά"
+msgstr "Μερικώς νεφελώδης"
 
 #: applet.js:1013
 msgid "Clear"
@@ -201,7 +202,7 @@ msgstr "Αίθριος"
 
 #: applet.js:1020
 msgid "Mixed rain and hail"
-msgstr "Μικτή βροχή και χαλάζι"
+msgstr "Βροχή και χαλάζι"
 
 #: applet.js:1022
 msgid "Hot"
@@ -309,7 +310,7 @@ msgstr "Εύρεση WOEID"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Κάθετος προσανατολισμός"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
@@ -330,11 +331,11 @@ msgstr "Μονάδα θερμοκρασίας:"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
-msgstr "κλίμακα Φαρενάιτ"
+msgstr "Φαρενάιτ"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "celsius"
-msgstr "κλίμακα Κελσίου"
+msgstr "Κελσίου"
 
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
@@ -346,15 +347,15 @@ msgstr "Παράκαμψη ετικέτας τοποθεσίας"
 
 #. cinnamon-weather->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr ""
+msgstr "Εμφάνιση ώρας σε 24ωρη μορφή"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Εύρος πρόβλεψης"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "ημέρες"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
@@ -387,7 +388,7 @@ msgstr ""
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr ""
+msgstr "Μονάδα ατμοσφαιρικής πίεσης"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
@@ -428,7 +429,7 @@ msgstr "Διάστημα ενημέρωσης (λεπτά)"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->units
 msgid "minutes"
-msgstr ""
+msgstr "λεπτά"
 
 #. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
@@ -436,11 +437,11 @@ msgstr "Συμβολικά εικονίδια"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Εμφάνιση της τοπικής πρόβλεψης"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Καιρός"
 
 #~ msgid "Show 5-day forecast"
 #~ msgstr "Εμφάνιση 5-ήμερης πρόβλεψης"
