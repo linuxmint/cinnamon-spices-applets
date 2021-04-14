@@ -51,33 +51,32 @@ The structure is mostly identical to a regular applet, except for the `src` fold
 
 The `src` folder should contain the typescript files with a numbered folder matching the version on the files folder for multiversion support.
 
-**Every `.ts` file used must be in a flat folder structure (singe folder)! Imports traversing up in the folder structure doesn't work!**
-
 ### tsconfig.json
 
 The contents of `tsconfig.json` contents should be identical to the code snippet below. It contains reasoning for every line.
 
 ```json
 {
-	"compilerOptions": {
-		"lib": ["es2017"],           // ES2017 is supported starting from Cinnamon 3.8
-		"module": "CommonJS",        // CommonJS module resolution is the only one that works with GJS
-		"target": "es2017",          // Again, Cinnamon 3.8+ supports ES2017, no need to transpile further down.
-		"noImplicitAny": true,       // Optional, just forces you to declare types.
-		"removeComments": true,      // Optional
-		"preserveConstEnums": false, // Const enums will be substituted to its values in transpiled code, in some cases nurmal enums doesn't work properly in GJS
-		"sourceMap": false,          // SourceMaps break the JS engine, never include them
-		"noImplicitThis": true,      // This warns you for callbacks using this which might be not bound to the correct context.
-		"outDir": "../../files/test@user/3.8/" // Should match the folder path in your files folder, transpiled files will be placed there
-	},
-	"include": [
-		"./**/*",                    // include every file in the current folder, even from subfolders
-		"../../../.typescript-declarations/**/*",  // include every file in the declarations folder, even from subfolders.
-	],
+    "compilerOptions": {
+        "lib": ["es2017"],           // ES2017 is supported starting from Cinnamon 3.8
+        "module": "CommonJS",        // CommonJS module resolution is the only one that works with GJS
+        "target": "es2017",          // Again, Cinnamon 3.8+ supports ES2017, no need to transpile further down.
+        "noImplicitAny": true,       // Optional, just forces you to declare types.
+        "removeComments": true,      // Optional
+        "preserveConstEnums": false, // Const enums will be substituted to its values in transpiled code, in some cases nurmal enums doesn't work properly in GJS
+        "sourceMap": false,          // SourceMaps break the JS engine, never include them
+        "noImplicitThis": true,      // This warns you for callbacks using this which might be not bound to the correct context.
+        "baseUrl": "./",             // specifies that absolute module resolution happens from the current folder (where applet.js will reside)
+        "outDir": "../../files/test@user/3.8/" // Should match the folder path in your files folder, transpiled files will be placed there
+    },
+    "include": [
+        "./**/*",                    // include every file in the current folder, even from subfolders
+        "../../../.typescript-declarations/**/*",  // include every file in the declarations folder, even from subfolders.
+    ],
 }
 ```
 
-With this config file the files will be transpiled correctly and imports will be resolved properly, **as long as files remain in a single folder.**
+With this config file the files will be transpiled correctly and imports will be resolved properly,.
 
 ### Imports
 
@@ -85,11 +84,11 @@ With this config file the files will be transpiled correctly and imports will be
 
 * Exports will be appended to the `exports` variable which isn't actually used by the JS engine in Cinnamon.
 
+* **You must use absolute imports `subfolder/file` instead of relative imports `./subfolder/file`, because relative imports can't traverse up the folder structure!** *For example using `../utils` from a subfolder will **break** your applet.*
+
 #### Avoiding Circular imports
 
 Because the files are only transpiled and not bundled, you have to make sure you don't introduce circular imports into the code. My recommendations on how to avoid them:
-
-* Put minimal code into your entry point (`applet.ts`)
 
 * Keep in mind that virtual implementations (classes, interfaces, types) can be imported from anywhere, but actual implementations (functions, variables, instantiated classes) must not refer back to it's importer's actual implementations.
 
