@@ -1,8 +1,8 @@
-import { Services } from "./config";
-import { HTTPParams } from "./httpLib";
-import { WeatherApplet } from "./main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "./types";
-import { CelsiusToKelvin, GetDistance, mode, _ } from "./utils";
+import { Services } from "config";
+import { HTTPParams } from "httpLib";
+import { WeatherApplet } from "main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
+import { CelsiusToKelvin, GetDistance, mode, _ } from "utils";
 
 export class DanishMI implements WeatherProvider {
 	needsApiKey: boolean = false;

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VisualCrossing = void 0;
-const utils_1 = require("./utils");
+const utils_1 = require("utils");
 class VisualCrossing {
     constructor(app) {
         this.prettyName = utils_1._("Visual Crossing");

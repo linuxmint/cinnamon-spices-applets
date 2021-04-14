@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IpApi = void 0;
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
+const logger_1 = require("logger");
+const utils_1 = require("utils");
 class IpApi {
     constructor(_app) {
         this.query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";

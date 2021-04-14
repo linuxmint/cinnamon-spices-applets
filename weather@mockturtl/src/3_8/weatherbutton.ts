@@ -1,4 +1,4 @@
-import { Event } from "./events";
+import { Event } from "events";
 
 const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;

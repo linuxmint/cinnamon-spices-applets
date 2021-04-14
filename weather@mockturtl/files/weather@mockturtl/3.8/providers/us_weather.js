@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.USWeather = void 0;
-const logger_1 = require("./logger");
-const sunCalc_1 = require("./sunCalc");
-const utils_1 = require("./utils");
+const logger_1 = require("logger");
+const sunCalc_1 = require("sunCalc");
+const utils_1 = require("utils");
 class USWeather {
     constructor(_app) {
         this.prettyName = utils_1._("US Weather");

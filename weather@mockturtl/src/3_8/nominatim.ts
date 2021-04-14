@@ -1,7 +1,7 @@
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { LocationData } from "./types";
-import { _ } from "./utils";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { LocationData } from "types";
+import { _ } from "utils";
 
 /**
  * Nominatim communication interface

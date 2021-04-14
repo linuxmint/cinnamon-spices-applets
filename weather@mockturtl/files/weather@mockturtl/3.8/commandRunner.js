@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenUrl = exports.SpawnProcess = exports.SpawnProcessJson = void 0;
-const logger_1 = require("./logger");
+const logger_1 = require("logger");
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 async function SpawnProcessJson(command) {
     let response = await SpawnProcess(command);

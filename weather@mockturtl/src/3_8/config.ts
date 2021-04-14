@@ -1,11 +1,11 @@
-import { WeatherApplet } from "./main";
-import { IpApi } from "./ipApi";
-import { LocationData } from "./types";
-import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Log } from "./logger";
-import { UUID, SIGNAL_CHANGED } from "./consts";
-import { LocationStore } from "./locationstore";
-import { GeoLocation } from "./nominatim";
+import { WeatherApplet } from "main";
+import { IpApi } from "ipApi";
+import { LocationData } from "types";
+import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "utils";
+import { Log } from "logger";
+import { UUID } from "consts";
+import { LocationStore } from "locationstore";
+import { GeoLocation } from "nominatim";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;

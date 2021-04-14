@@ -1,11 +1,11 @@
-import { Config } from "./config";
-import { APPLET_ICON, ELLIPSIS, FORWARD_SLASH } from "./consts";
-import { Event } from "./events";
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { WeatherData } from "./types";
-import { TempToUserConfig, _, GetDayName, UnitToUnicode, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "./utils";
-import { WeatherButton } from "./weatherbutton";
+import { Config } from "config";
+import { APPLET_ICON } from "consts";
+import { Event } from "events";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { WeatherData } from "types";
+import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "utils";
+import { WeatherButton } from "weatherbutton";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;

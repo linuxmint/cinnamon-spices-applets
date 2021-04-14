@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrentWeather = void 0;
-const commandRunner_1 = require("./commandRunner");
-const consts_1 = require("./consts");
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
-const weatherbutton_1 = require("./weatherbutton");
+const commandRunner_1 = require("commandRunner");
+const consts_1 = require("consts");
+const logger_1 = require("logger");
+const utils_1 = require("utils");
+const weatherbutton_1 = require("weatherbutton");
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang = imports.lang;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';

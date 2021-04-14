@@ -6,12 +6,12 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "./httpLib";
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { SunTimes } from "./sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData } from "./types";
-import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
+import { HttpError } from "httpLib";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { SunTimes } from "sunCalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData } from "types";
+import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "utils";
 
 const Lang: typeof imports.lang = imports.lang;
 

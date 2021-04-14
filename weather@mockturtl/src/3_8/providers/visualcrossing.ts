@@ -1,8 +1,8 @@
-import { Services } from "./config";
-import { HttpError, HTTPParams } from "./httpLib";
-import { WeatherApplet } from "./main";
-import { BuiltinIcons, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "./types";
-import { CelsiusToKelvin, IsLangSupported, WeatherIconSafely, _ } from "./utils";
+import { Services } from "config";
+import { HttpError, HTTPParams } from "httpLib";
+import { WeatherApplet } from "main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
+import { CelsiusToKelvin, IsLangSupported, _ } from "utils";
 
 
 

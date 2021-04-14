@@ -1,4 +1,4 @@
-import { Log } from "./logger";
+import { Log } from "logger";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 

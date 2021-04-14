@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIForecasts = void 0;
-const consts_1 = require("./consts");
-const events_1 = require("./events");
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
-const weatherbutton_1 = require("./weatherbutton");
+const consts_1 = require("consts");
+const events_1 = require("events");
+const logger_1 = require("logger");
+const utils_1 = require("utils");
+const weatherbutton_1 = require("weatherbutton");
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';

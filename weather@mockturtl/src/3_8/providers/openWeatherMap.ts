@@ -6,11 +6,11 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "./httpLib";
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "./types";
-import { _, IsLangSupported } from "./utils";
+import { HttpError } from "httpLib";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "types";
+import { _, IsLangSupported } from "utils";
 
 const Lang: typeof imports.lang = imports.lang;
 

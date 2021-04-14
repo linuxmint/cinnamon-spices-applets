@@ -1,4 +1,4 @@
-import { _ } from "./utils";
+import { _ } from "utils";
 
 const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;

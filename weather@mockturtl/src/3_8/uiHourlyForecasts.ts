@@ -1,9 +1,9 @@
-import { Config } from "./config";
-import { APPLET_ICON, ELLIPSIS } from "./consts";
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { HourlyForecastData, Precipitation } from "./types";
-import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "./utils";
+import { Config } from "config";
+import { APPLET_ICON, ELLIPSIS } from "consts";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { HourlyForecastData, Precipitation } from "types";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;

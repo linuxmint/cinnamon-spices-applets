@@ -1,4 +1,4 @@
-import { UUID } from "./consts";
+import { UUID } from "consts";
 
 export class Log {
 	// Static properties

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Log = void 0;
-const consts_1 = require("./consts");
+const consts_1 = require("consts");
 class Log {
     constructor(_instanceId) {
         this.debug = false;

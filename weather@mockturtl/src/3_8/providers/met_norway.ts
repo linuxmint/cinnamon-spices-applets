@@ -1,8 +1,8 @@
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { SunCalc } from "./sunCalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
-import { CelsiusToKelvin, IsNight, _, WeatherIconSafely } from "./utils";
+import { Log } from "logger";
+import { WeatherApplet } from "main";
+import { SunCalc } from "sunCalc";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "types";
+import { CelsiusToKelvin, IsNight, _ } from "utils";
 
 export class MetNorway implements WeatherProvider {
 	public readonly prettyName = _("MET Norway");

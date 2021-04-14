@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GeoLocation = void 0;
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
+const logger_1 = require("logger");
+const utils_1 = require("utils");
 class GeoLocation {
     constructor(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
