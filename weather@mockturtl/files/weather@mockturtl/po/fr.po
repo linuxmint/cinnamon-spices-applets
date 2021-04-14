@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 11:07+0000\n"
-"PO-Revision-Date: 2021-04-11 17:31+0200\n"
+"PO-Revision-Date: 2021-04-14 00:54+0200\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1985,7 +1985,7 @@ msgstr "Conditions météorologiques abrégées"
 #. 3.0->settings-schema.json->shortConditions->tooltip
 #. 3.8->settings-schema.json->shortConditions->tooltip
 msgid "Currently only used with DarkSky."
-msgstr "Actuellement uniquement utilisé avec DarkSky."
+msgstr "Actuellement uniquement disponible avec DarkSky."
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -2128,7 +2128,7 @@ msgid ""
 "setting in the Presentation tab will affect the final number."
 msgstr ""
 "Nombre maximal de jours qui peuvent être affichés. Le maximum de lignes et "
-"de colonnes défini dans l'onglet Presentation affectera le nombre final de "
+"de colonnes défini dans l'onglet Affichage affectera le nombre final de "
 "jours."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
@@ -2143,7 +2143,7 @@ msgid ""
 msgstr ""
 "Si vous souhaitez l'utiliser, assurez-vous d'utiliser vos coordonnées/"
 "adresse exactes comme emplacement pour aider à sa précision. Actuellement "
-"uniquement implémenté avec OpenWeatherMap."
+"uniquement disponible avec OpenWeatherMap."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
