@@ -163,7 +163,7 @@ class DarkSky {
                 userError: true,
                 detail: "no key",
                 service: "darksky",
-                message: utils_1._("Please Make sure you\nentered the API key what you have from DarkSky")
+                message: utils_1._("Please Make sure you\nentered the API key that you have from DarkSky")
             });
             return false;
         }
