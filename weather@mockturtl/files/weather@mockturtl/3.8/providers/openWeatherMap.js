@@ -66,22 +66,24 @@ class OpenWeatherMap {
                 },
                 forecasts: []
             };
-            let immediate = {
-                start: -1,
-                end: -1
-            };
-            for (let index = 0; index < (json === null || json === void 0 ? void 0 : json.minutely.length); index++) {
-                const element = json === null || json === void 0 ? void 0 : json.minutely[index];
-                if (element.precipitation > 0 && immediate.start == -1) {
-                    immediate.start = index;
-                    continue;
+            if (json.minutely != null) {
+                let immediate = {
+                    start: -1,
+                    end: -1
+                };
+                for (let index = 0; index < json.minutely.length; index++) {
+                    const element = json.minutely[index];
+                    if (element.precipitation > 0 && immediate.start == -1) {
+                        immediate.start = index;
+                        continue;
+                    }
+                    else if (element.precipitation == 0 && immediate.start != -1) {
+                        immediate.end = index;
+                        break;
+                    }
                 }
-                else if (element.precipitation == 0 && immediate.start != -1) {
-                    immediate.end = index;
-                    break;
-                }
+                weather.immediatePrecipitation = immediate;
             }
-            weather.immediatePrecipitation = immediate;
             let forecasts = [];
             for (let i = 0; i < json.daily.length; i++) {
                 let day = json.daily[i];
