@@ -98,8 +98,8 @@
 				"inc": true
 			},
 			{
-				"name": "Mint",
-				"url": "http://audiostream.rtl.be/mint",
+				"name": "Austrian Rock Radio",
+				"url": "http://live.antenne.at/arr",
 				"inc": true
 			}
 		]
@@ -157,7 +157,7 @@
 		"value": 0,
 		"default": 80
 	},
-	"current-url": {
+	"last-url": {
 		"type": "generic",
 		"value": null,
 		"dfault": null
