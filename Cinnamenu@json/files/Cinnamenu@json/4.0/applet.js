@@ -958,7 +958,6 @@ class CinnamenuApplet extends TextIconApplet {
         //======Begin search===========
         this.previousSearchPattern = pattern;
         this.currentSearchId = Math.floor(Math.random() * 100000000);
-        global.log('New Id', this.currentSearchId);
 
         let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
