@@ -72,7 +72,7 @@ class CinnamenuApplet extends TextIconApplet {
                                     this.currentCategory = 'all';
                                 } });
         this.signals.connect(Main.themeManager, 'theme-set', () => {this._updateIconAndLabel();
-                                                                    setTimeout(() => this._refresh(), 0); });
+                                                                    setTimeout(() => this._refresh()); });
         this.iconTheme = Gtk.IconTheme.get_default();
         this.signals.connect(this.iconTheme, 'changed', () => this._updateIconAndLabel());
         this.signals.connect(this.appSystem, 'installed-changed', () => {   this.apps.installedChanged();
@@ -197,7 +197,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.settingsObj.finalize();
         this.signals.disconnectAllSignals();
-        this.apps.destroy();
         this._destroyDisplayed();
         this.menu.destroy();
     }
@@ -312,7 +311,7 @@ class CinnamenuApplet extends TextIconApplet {
                 /*let iconName = global.settings.get_string('app-menu-icon-name');*/
             }
         } catch(e) {
-            global.logWarning('Could not load icon file ' + this.settings.menuIcon + ' for menu button');
+            global.logWarning('Cinnamenu: Could not load icon file ' + this.settings.menuIcon + ' for menu button');
         }
         if (this.settings.menuIconCustom && this.settings.menuIcon === '' ||
                                 this.settings.menuIconSizeCustom && this.settings.menuIconSize === 0) {
@@ -930,7 +929,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
             this.categoriesView.buttons.forEach(button => button.disable());
         }
-        setTimeout(() => this._doSearch(searchText), 0);
+        setTimeout(() => this._doSearch(searchText));
     }
 
     _endSearchMode() {
@@ -956,42 +955,19 @@ class CinnamenuApplet extends TextIconApplet {
         if (pattern === this.previousSearchPattern) {
             return;
         }
+        //======Begin search===========
         this.previousSearchPattern = pattern;
+        this.currentSearchId = Math.floor(Math.random() * 100000000);
 
-        let results = this.apps.listApplications('all', pattern)
+        let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
                         .concat(this.settings.showPlaces ? this.listPlaces(pattern) : [])
                         .concat(this.settings.enableWebBookmarks ? this.listWebBookmarks(pattern) : []);
-        //---file search-------
-        if (pattern.length > 1 && this.settings.searchHomeFolder) {
-            this.filesSearched = 0;
-            results = results.concat(this._searchDir(GLib.get_home_dir(), pattern, 0));
-        }
 
-        //sort results
-        results.sort((a, b) =>  b.score - a.score );//items with equal score are left in existing order
-        if (results.length > 10) {
-            results.length = 10;
-        }
-
-        //Remove duplicate results. eg. a fav file, a recent file and a folderfile might all
-        //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile, isPlace,
-        //isFolderviewFile which is easy because results should already be in this order.
-        for (let i = 0; i < results.length -1; i++) {
-            const app = results[i];
-            if (app.isFavoriteFile || app.isRecentFile || app.isPlace) {
-                for (let r = i + 1; r < results.length; r++) {
-                    const compareApp = results[r];
-                    if ((compareApp.isRecentFile || compareApp.isFolderviewFile || compareApp.isPlace) &&
-                                                                compareApp.uri === app.uri) {
-                        results.splice(r, 1);
-                        r--;
-                    }
-                }
-            }
-        }
         //=======search providers==========
+        let otherResults = [];
+
         //---calculator---
         const replacefn = (match) => {
             if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
@@ -1010,32 +986,35 @@ class CinnamenuApplet extends TextIconApplet {
             try {
                 ans = eval(exp);
             } catch(e) {
-                global.log(e.message);
+                global.logWarning('Cinnamenu: Error evaluating expression',e.message);
             }
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
             }
-            results.push({  isSearchResult: true,
+            otherResults.push({  isSearchResult: true,
                             name: _('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
+                            score: 0.3,
                             icon: new St.Icon({ gicon: this.calcGIcon, icon_size: this.getAppIconSize() }),
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
         }
+
         //---web search option---
         if (this.settings.webSearchOption != 4) {//4=none
             const iconName = ['google_icon.png','bing_icon.png','yahoo_icon.png',
                                                 'duckgo_icon.png'][this.settings.webSearchOption];
             const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
                                                     'duckduckgo.com/?q='][this.settings.webSearchOption];
-            results.push(   {   isSearchResult: true,
+            otherResults.push(   {   isSearchResult: true,
                                 name: _('Search web for') + ' "' + text + '"',
                                 description: '',
                                 deleteAfterUse: true,
+                                score: 0.25,
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
                                             file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
                                             icon_size: this.getAppIconSize() }),
@@ -1043,6 +1022,7 @@ class CinnamenuApplet extends TextIconApplet {
                                         '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
                             } );
         }
+
         //---emoji search------
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
             let emojiResults = [];
@@ -1054,7 +1034,8 @@ class CinnamenuApplet extends TextIconApplet {
                         if (bestMatchScore > SEARCH_THRESHOLD) {
                             emojiResults.push({
                                     name: emoji.name,
-                                    score: bestMatchScore,
+                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
+                                                                  //emoji results come last.
                                     description: _('Click to copy'),
                                     nameWithSearchMarkup: match1.result,
                                     isSearchResult: true,
@@ -1062,22 +1043,124 @@ class CinnamenuApplet extends TextIconApplet {
                                     emoji: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
                                         clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
-                                        });
+                                            });
                         } });
-            //
-            emojiResults.sort( (a, b) =>  a.score < b.score );
-            results = results.concat(emojiResults);
+            otherResults = otherResults.concat(emojiResults);
         }
-        //---search providers---
+        otherResults.sort((a, b) =>  a.score < b.score);
+
+        //---------------------------
         const finish = () => {
-            this.appsView.populate(results, null);
-            const buttons = this.appsView.getActiveButtons();
+            //Limit primaryResults to 10
+            primaryResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
+            if (primaryResults.length > 10) {
+                primaryResults.length = 10;
+            }
+
+            //Remove duplicate primaryResults. eg. a fav file, a recent file and a folderfile might all
+            //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile, isPlace,
+            //isFolderviewFile which is easy because primaryResults should already be in this order.
+            for (let i = 0; i < primaryResults.length -1; i++) {
+                const app = primaryResults[i];
+                if (app.isFavoriteFile || app.isRecentFile || app.isPlace) {
+                    for (let r = i + 1; r < primaryResults.length; r++) {
+                        const compareApp = primaryResults[r];
+                        if ((compareApp.isRecentFile || compareApp.isFolderviewFile || compareApp.isPlace) &&
+                                                                    compareApp.uri === app.uri) {
+                            primaryResults.splice(r, 1);
+                            r--;
+                        }
+                    }
+                }
+            }
+
+            //sort otherResults
+            otherResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
+
+            this.appsView.populate(primaryResults.concat(otherResults), null);
+            const buttons = this.appsView.getActiveButtons();//todo
             if (buttons.length > 0) {
                 buttons[0].handleEnter();
             }
         };
+
+        //----home folder search--------
+        if (pattern.length > 1 && this.settings.searchHomeFolder) {
+            let filesSearched = 0;
+            let thisSearchId = this.currentSearchId;
+            let results = [];
+            let recursionCount = 1;
+
+            const searchDir = (folder, pattern, depth, thisSearchId) => {
+                if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                    return;
+                }
+                const dir = Gio.file_new_for_path(folder);
+                let enumerator;
+                dir.enumerate_children_async(
+                    'standard::name,standard::type,standard::icon,standard::content-type,standard::is-hidden',
+                            Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (source, result) => {
+                    enumerator = source.enumerate_children_finish(result);
+
+                    let next;
+                    if (enumerator) {
+                        next = enumerator.next_file(null);
+                    } else {
+                        global.logWarning(`Cinnamenu: Error reading folder ${folder} during file search.`);
+                    }
+                    while (next) {
+                        filesSearched++;
+                        const filename = next.get_name();
+                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
+                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                        if (filename.toUpperCase().startsWith(pattern)) {
+                            const file = Gio.file_new_for_path(filePath);
+                            //if file then treat as isFolderviewFile and if directory then treat as isPlace
+                            const foundFile = { name: filename,
+                                                score: pattern.length > 2 ? 1.2 : 1.1,
+                                                nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
+                                                                            '</b>' + filename.substr(pattern.length),
+                                                gicon: next.get_icon(),
+                                                uri: file.get_uri(),
+                                                mimeType: next.get_content_type(),
+                                                description: filePath,
+                                                isPlace: isDirectory,
+                                                isFolderviewFile: !isDirectory,
+                                                deleteAfterUse: true };
+                            if (isDirectory) {
+                                const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
+                                if (defaultInfo) {
+                                    foundFile.launch = () => { defaultInfo.launch([file], null); };
+                                }
+                            }
+                            results.push(foundFile);
+                        }
+                        if (isDirectory && depth < 4 && !next.get_is_hidden() && filesSearched < 10000) {
+                            recursionCount++;
+                            setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
+                        }
+                        next = enumerator.next_file(null);
+                    }
+                    if (enumerator) {
+                        enumerator.close(null);
+                    }
+                    recursionCount--;
+                    if (recursionCount === 0 && results.length > 0 && this.searchActive &&
+                                                            thisSearchId === this.currentSearchId) {
+                        primaryResults = primaryResults.concat(results);
+                        finish();
+                    }
+                });
+            };
+
+            setTimeout(() => searchDir(GLib.get_home_dir(), pattern, 0, thisSearchId));
+        }
+
+        ///----search providers--------
         if (pattern.length > 2) {
-            launch_all(pattern, (provider, providerResults) => {
+            let thisSearchId = this.currentSearchId;
+            setTimeout(() => {
+                launch_all(pattern, (provider, providerResults) => {
                         providerResults.forEach(providerResult => {
                             if (!providerResult) {
                                 return;
@@ -1086,87 +1169,32 @@ class CinnamenuApplet extends TextIconApplet {
                             providerResult.name = providerResult.label.replace(/ : /g, ': ');
                             providerResult.activate = provider.on_result_selected;
                             providerResult.deleteAfterUse = true;
-                            providerResult.score = 0.1;
+                            providerResult.score = 0.2;
                             if (providerResult.icon) {
                                 providerResult.icon.icon_size = this.getAppIconSize();
                             } else if (providerResult.icon_app){
                                 providerResult.icon = providerResult.icon_app.create_icon_texture(
-                                                                                            this.getAppIconSize());
+                                                                                    this.getAppIconSize());
                             } else if (providerResult.icon_filename){
                                 providerResult.icon = new St.Icon({
                                       gicon: new Gio.FileIcon({
-                                                file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
-                                                icon_size: this.getAppIconSize() });
+                                            file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
+                                            icon_size: this.getAppIconSize() });
                             }
                         });
-                        if (!this.searchActive) {
+                        if (!this.searchActive || thisSearchId !== this.currentSearchId ||
+                                                !providerResults || providerResults.length <= 0) {
                             return;
                         }
-                        if (providerResults && providerResults.length > 0) {
-                            results = results.concat(providerResults);
-                        }
-                        finish(); } );
-            finish();
-        } else {
-            finish();
+                        otherResults = otherResults.concat(providerResults);
+                        finish();
+                    });
+                });
         }
-        //----------------------------------
-        return false;
+        finish();
+        return;
     }
 
-    _searchDir(folder, pattern, depth) {
-        let res = [];
-        const dir = Gio.file_new_for_path(folder);
-        let enumerator;
-        try {
-            enumerator = dir.enumerate_children(
-                'standard::name,standard::type,standard::icon,standard::content-type,standard::is-hidden',
-                                                                            Gio.FileQueryInfoFlags.NONE, null);
-        } catch(e) {
-            global.log('enumerator:', e.message);
-        }
-
-        let next;
-        if (enumerator) {
-            next = enumerator.next_file(null);
-        }
-        while (next) {
-            this.filesSearched++;
-            const filename = next.get_name();
-            const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-            const filePath = folder + (folder === '/' ? '' : '/') + filename;
-            if (filename.toUpperCase().startsWith(pattern)) {
-                const file = Gio.file_new_for_path(filePath);
-                //if file then treat as isFolderviewFile and if directory then treat as isPlace
-                const foundFile = { name: filename,
-                                    score: pattern.length > 2 ? 1.2 : 1.1,
-                                    nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
-                                                                '</b>' + filename.substr(pattern.length),
-                                    gicon: next.get_icon(),
-                                    uri: file.get_uri(),
-                                    mimeType: next.get_content_type(),
-                                    description: filePath,
-                                    isPlace: isDirectory,
-                                    isFolderviewFile: !isDirectory,
-                                    deleteAfterUse: true };
-                if (isDirectory) {
-                    const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
-                    if (defaultInfo) {
-                        foundFile.launch = () => { defaultInfo.launch([file], null); };
-                    }
-                }
-                res.push(foundFile);
-            }
-            if (isDirectory && depth < 4 && !next.get_is_hidden() && this.filesSearched < 10000) {
-                res = res.concat(this._searchDir(filePath, pattern, depth + 1));
-            }
-            next = enumerator.next_file(null);
-        }
-        if (enumerator) {
-            enumerator.close(null);
-        }
-        return res;
-    }
 //-----Create display----
     _initDisplay() {
         this.displaySignals = new SignalManager(null);
@@ -1304,6 +1332,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .mimeType
  *  .icon
  *  .gicon
+ *  .iconFactory()
  *  .score
  *  .nameWithSearchMarkup
  *  .descriptionWithSearchMarkup
@@ -1320,7 +1349,6 @@ class CinnamenuApplet extends TextIconApplet {
  *  .emoji
  *  .launch()
  *  .activate()
- *  .iconFactory()
  */
 
     listFavoriteApps() {
@@ -1354,10 +1382,10 @@ class CinnamenuApplet extends TextIconApplet {
             this.recentsJustCleared = false;
         }
         _infosByTimestamp.forEach(recentInfo => {
-            //const file = Gio.File.new_for_uri(recentInfo.uri);
-            //if (!file || !file.query_exists(null)) {
-            //    return;
-            //}
+            const file = Gio.File.new_for_uri(recentInfo.uri);
+            if (!file || !file.query_exists(null)) {
+                return;
+            }
             const found = this.appsView.buttonStore.find(button =>
                                             button.app.isRecentFile && button.app.uri === recentInfo.uri);
             if (found) {
@@ -1671,9 +1699,9 @@ class Apps {//This obj provides the .app objects for all the applications catego
                 const match2 = searchStr(pattern, app.description);
                 match2.score *= 0.95; //slightly lower priority for description match
                 const match3 = searchStr(pattern, keywords);
-                match3.score *= 0.6; //low priority for keyword match
+                match3.score *= 0.8; //lower priority for keyword match
                 const match4 = searchStr(pattern, id);
-                match4.score *= 0.6; //low priority for id match
+                match4.score *= 0.7; //lower priority for id match
                 const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
                 if (bestMatchScore > SEARCH_THRESHOLD) {
                     app.score = bestMatchScore;
@@ -2058,7 +2086,7 @@ class SearchView {
 
 }
 
-class Sidebar {//Creates the sidebar and populates it with SidebarButtons
+class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the sidebar.
     constructor (appThis, sidebarPlacement) {
         this.appThis = appThis;
         this.items = [];

@@ -221,7 +221,6 @@ class AppletSettings {
 
         Main.settingsManager.register(this.uuid, this.instanceId, this);
 
-        this.checkSettingsRecursionCount = 0;
         this.isReady = true;
     }
 
@@ -570,6 +569,6 @@ class AppletSettings {
         for (let key in this.bindings) {
             this.unbindAll(key);
         }
-        this.disconnectAll();
+        //this.disconnectAll();
     }
 }

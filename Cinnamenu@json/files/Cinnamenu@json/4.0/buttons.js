@@ -439,7 +439,7 @@ class ContextMenu {
                             file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
                         } catch(e) {
-                            global.log(e);
+                            global.logError('Cinnamenu: Error creating desktop file', e);
                         }
                         this.close(); } ));
         }
@@ -713,9 +713,9 @@ class AppButton {
                     col.green += amt;
                     col.blue += amt;
                     return col; };
-        const opaqueify = (col) => { //make color 1/3 more opaque
-                    col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
-                    return col; };
+        //const opaqueify = (col) => { //make color 1/3 more opaque
+        //            col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
+        //            return col; };
         const bgColor = this.appThis.getThemeBackgroundColor();
         if (bgColor.to_string().startsWith('#000000')) {
             bgColor.red = 20;
