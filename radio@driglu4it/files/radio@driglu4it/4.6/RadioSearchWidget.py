@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 
+import os
+import json
+import gi.repository.GLib as GLib
+from gi.repository import Gio, Gtk
 import random
 from JsonSettingsWidgets import *
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gio, Gtk
-
-import gi.repository.GLib as GLib
-import json
-import os
 
 
 class RadioSearchWidget(SettingsWidget):
@@ -53,10 +52,11 @@ class RadioSearchWidget(SettingsWidget):
     def initAddButton(self):
         self.add_button = Gtk.Button(label=_("Add to My Stations"))
         self.add_button.connect('clicked', self.add_button_pressed)
+        self.add_button.set_sensitive(False)
         self.pack_end(self.add_button, False, True, 0)
 
-
     # creates an infobar and adds the infobar to a holder (based on the implementation of cinnamon ExtensionCore.py). But the infobar is not shown immediately (as the infobar only shall be shown after specific user actions)
+
     def initInfoBar(self):
         self.infobar = Gtk.InfoBar()
         self.infobar_icon = Gtk.Image()
@@ -68,22 +68,23 @@ class RadioSearchWidget(SettingsWidget):
         self.infobar_holder = Gtk.Box()
 
         self.pack_end(self.infobar_holder, False, False, 0)
-  
-    
+
     def showInfobar(self, label, msg_type):
         self.infobar_holder.add(self.infobar)
         self.infobar_label.set_property("label", label)
 
-        if (msg_type=="info"):
+        if (msg_type == "info"):
             self.infobar.set_message_type(Gtk.MessageType.INFO)
-            self.infobar_icon.set_from_icon_name("dialog-information-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.infobar_icon.set_from_icon_name(
+                "dialog-information-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
             timeout = 3
 
-        if (msg_type=="error"):
+        if (msg_type == "error"):
             self.infobar.set_message_type(Gtk.MessageType.ERROR)
-            self.infobar_icon.set_from_icon_name("dialog-error-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            self.infobar_icon.set_from_icon_name(
+                "dialog-error-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
             timeout = 10
-    
+
         self.infobar_holder.show_all()
 
         def hideInfobar():
@@ -108,6 +109,13 @@ class RadioSearchWidget(SettingsWidget):
                              Gtk.PolicyType.AUTOMATIC)
         scrollbox.add(self.treeview)
         self.pack_end(scrollbox, False, False, 0)
+        self.treeview.get_selection().connect("changed", self.on_tree_selection_changed)
+
+
+
+
+    def on_tree_selection_changed(self, *args):
+        self.add_button.set_sensitive(True)
 
     def initStore(self):
         self.search_result_store = Gtk.ListStore(str, str)
@@ -136,29 +144,31 @@ class RadioSearchWidget(SettingsWidget):
             "url": row[1],
             "inc": True
         }
-       
-        try: 
+
+        try:
             self.addStation(selectedStation)
-            self.showInfobar('Station ' + selectedStation["name"] + ' sucessfully added to "My Stations"!', "info")
-        except Exception as err: 
+            self.showInfobar(
+                'Station ' + selectedStation["name"] + ' sucessfully added to "My Stations"!', "info")
+        except Exception as err:
             self.showInfobar(format(err), "error")
 
-
+        self.treeview.get_selection().connect("changed", self.on_tree_selection_changed)
+        # selection.connect('changed' self.on_tree_selection_changed)
 
     # saves passed station to settings
+
     def addStation(self, station):
         userStationList = []
         settings_key = "tree"
         for saved_station in self.settings.get_value(settings_key):
             if saved_station["url"] == station["url"]:
-                raise Exception("Can't add station as each station must have a different url. The station " + saved_station["name"] + " has already the provided url")
+                raise Exception("Can't add station as each station must have a different url. The station " +
+                                saved_station["name"] + " has already the provided url")
 
             if saved_station["name"] == station["name"]:
-                raise Exception("Can't add station as each station must have a different name. There is already a station with name: " + station["name"] + ". Rename the station and try to add the station again.")
+                raise Exception("Can't add station as each station must have a different name. There is already a station with name: " +
+                                station["name"] + ". Rename the station and try to add the station again.")
             # each entry returned from get_value is a OrderedDict but must be for some reasons a normal Dict as arg for set_value.
             userStationList.append(dict(saved_station))
         userStationList.append(station)
         self.settings.set_value(settings_key, userStationList)
-
-
-
