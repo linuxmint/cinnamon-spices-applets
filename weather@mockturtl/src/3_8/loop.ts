@@ -1,7 +1,7 @@
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { RefreshState } from "./types";
-import { delay, Guid } from "./utils";
+import { Log } from "lib/logger";
+import { WeatherApplet } from "main";
+import { RefreshState } from "types";
+import { delay, Guid } from "utils";
 
 /** Stores applet instance's ID's globally,
  * Checked to make sure that instance is 

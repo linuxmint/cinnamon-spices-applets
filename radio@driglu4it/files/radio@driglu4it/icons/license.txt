@@ -1,0 +1,1 @@
+The "south-arrow-weather-symbolic" icon is copied from the weather-applet. The Icon is made by Attila Greguss (floyd0122@gmail.com), licence MIT. 

@@ -1,6 +1,5 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const GLib = imports.gi.GLib;
 const Atk = imports.gi.Atk;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -16,7 +15,7 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const {_, wordWrap, showTooltip, hideTooltipIfVisible} = require('./utils');
+const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
@@ -105,10 +104,55 @@ class CategoryButton {
         }
     }
 
+    setButtonStyleNormal() {
+        this.actor.set_style_class_name('menu-category-button');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
+    setButtonStyleSelected() {
+        this.actor.set_style_class_name('menu-category-button-selected');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
+    _setButtonStyleHover() {
+        this.actor.set_style_class_name('menu-category-button-hover');
+        //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
+        this.actor.add_style_class_name('menu-category-button-selected');
+
+        //-----some style tweaks for menu-category-button-hover class.-----
+        let themePath = Main.getThemeStylesheet();
+        if (!themePath) themePath = 'Cinnamon default';
+        [['/Mint-Y',            'background-color: #d8d8d8; color: black;'],
+        ['/Mint-Y-Dark',        'background-color: #404040;'],
+        ['/Mint-X',             'background-color: #d4d4d4; color: black; border-image: none;'],
+        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
+                                                    'background-gradient-end: rgba(255,255,255,0.03);'],
+        ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
+        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],
+        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/iOS-X/',             'color: rgb(70, 70, 70); background-color: #C9CCEE; ' +
+                                                    'border-image: none; border-radius: 3px;' ],
+        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],
+        ['/Yaru-Cinnamon-Light/', 'background-color: #d8d8d8; color: black;'],
+        ['/Yaru-Cinnamon-Dark/', 'background-color: #404040;']
+        ].forEach(fix => {
+            if (themePath.includes(fix[0])) {
+                this.actor.set_style(fix[1]);
+            }
+        });
+    }
+
+    _setButtonStyleGreyed() {
+        this.actor.set_style_class_name('menu-category-button-greyed');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+    }
+
     selectCategory() {
-        if (this.appThis.settings.categoryClick) {
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
-        }
         this.appThis.setActiveCategory(this.id);
     }
 
@@ -129,35 +173,11 @@ class CategoryButton {
             return Clutter.EVENT_STOP;
         }
         if (this.appThis.settings.categoryClick) {
-            this.actor.set_style_class_name('menu-category-button-hover');
-            //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
-            this.actor.add_style_class_name('menu-category-button-selected');
-            //-----some style tweaks for menu-category-button-hover class.-----
-            let themePath = Main.getThemeStylesheet();
-            if (!themePath) themePath = 'Cinnamon default';
-            [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
-            ['/Mint-Y-Dark/',       'background-color: #404040;'],
-            ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-            ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
-            ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-            ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
-            ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-            ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-            ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-            ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-            ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-            ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-            ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
-            ].forEach(fix => {
-                if (themePath.includes(fix[0])) {
-                    this.actor.set_style(fix[1]);
-                }
-            });
-            return Clutter.EVENT_STOP;
+            this._setButtonStyleHover();
         } else {
             this.selectCategory();
-            return Clutter.EVENT_STOP;
         }
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, event) {
@@ -167,11 +187,10 @@ class CategoryButton {
         this.entered = false;
         if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
             if (this.id !== this.appThis.currentCategory) {
-                this.actor.set_style_class_name('menu-category-button');
+                this.setButtonStyleNormal();
             } else {
-                this.actor.set_style_class_name('menu-category-button-selected');
+                this.setButtonStyleSelected();
             }
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
         }
     }
 
@@ -201,13 +220,13 @@ class CategoryButton {
     }
 
     disable() {
-        this.actor.set_style_class_name('menu-category-button-greyed');
+        this._setButtonStyleGreyed();
         this.disabled = true;
         this.entered = false;
     }
 
     enable() {
-        this.actor.set_style_class_name('menu-category-button');
+        this.setButtonStyleNormal();
         this.disabled = false;
     }
 
@@ -226,7 +245,7 @@ class CategoryButton {
 }
 
 class ContextMenuItem extends PopupBaseMenuItem {
-    constructor(appThis, label, iconName, action) {
+    constructor(appThis, label, iconName, action, insensitive = false) {
         super({focusOnHover: false});
         this.appThis = appThis;
         if (iconName) {
@@ -238,8 +257,10 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.action = action;
-        if (this.action === null) {
-            this.actor.style = "font-weight: bold;";
+        if (this.action === null && !insensitive) {//"Open with" item
+            this.actor.style = 'font-weight: bold;';
+        } else if (insensitive) {//greyed out item
+            this.actor.add_style_pseudo_class('insensitive');
         }
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
@@ -250,9 +271,9 @@ class ContextMenuItem extends PopupBaseMenuItem {
             return Clutter.EVENT_STOP;
         }
         this.entered = true;
-        this.actor.add_style_pseudo_class('hover');// Should be 'hover' only, add 'active' for
-        this.actor.add_style_pseudo_class('active');//compatability with existing themes
-        return Clutter.EVENT_STOP;//true;
+        this.actor.add_style_pseudo_class('hover');
+        this.actor.add_style_pseudo_class('active');
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, e) {
@@ -264,10 +285,10 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
     activate(event) {
         if (!this.action || event && event.get_button() !== 1) {
-            return false;
+            return Clutter.EVENT_STOP;
         }
         this.action();
-        return false;
+        return Clutter.EVENT_STOP;
     }
 
     destroy() {
@@ -418,7 +439,7 @@ class ContextMenu {
                             file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
                         } catch(e) {
-                            global.log(e);
+                            global.logError('Cinnamenu: Error creating desktop file', e);
                         }
                         this.close(); } ));
         }
@@ -440,14 +461,15 @@ class ContextMenu {
         };
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
         const file = Gio.File.new_for_uri(app.uri);
-        const fileExists = GLib.file_test(file.get_path(), GLib.FileTest.EXISTS);
+        const fileExists = file.query_exists(null);
         if (!fileExists && !app.isFavoriteFile) {
-            Main.notify(_("This file is no longer available"),'');
+            Main.notify(_('This file is no longer available'),'');
             return false; //no context menu
         }
-        //
+        //Note: a file can be an isFavoriteFile and also not exist so continue below and add option to
+        //remove from favorites.
         if (fileExists) {
-            addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null ));
             const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
             if (defaultInfo) {
                 addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
@@ -463,7 +485,7 @@ class ContextMenu {
                                                             this.appThis.closeMenu(); } ));
             });
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
+                                                () => { spawnCommandLine('nemo-open-with ' + app.uri);
                                                         this.appThis.closeMenu(); } ));
         }
 
@@ -502,17 +524,23 @@ class ContextMenu {
         }
         if (!app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
-                        () => { const file = Gio.File.new_for_uri(app.uri);
-                                try {
-                                    file.trash(null);
-                                } catch (e) {
-                                    Main.notify(_("Error while moving file to trash:"),e.message);
-                                }
-                                this.appThis.sidebar.populate();
-                                this.appThis.updateMenuSize();
-                                this.appThis.setActiveCategory(this.appThis.currentCategory);
-                                this.close(); } ));
+
+            const fileInfo = file.query_info('access::can-trash', Gio.FileQueryInfoFlags.NONE, null);
+            const canTrash = fileInfo.get_attribute_boolean('access::can-trash');
+            if (canTrash) {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                            () => { const file = Gio.File.new_for_uri(app.uri);
+                                    try {
+                                        file.trash(null);
+                                    } catch (e) {
+                                        Main.notify(_('Error while moving file to trash:'), e.message);
+                                    }
+                                    this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                    this.close(); } ));
+            } else {//show insensitive item
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                                                                            null, true /*insensitive*/));
+            }
         }
         return true; //success.
     }
@@ -538,10 +566,14 @@ class AppButton {
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.signals = new SignalManager(null);
         //----------ICON---------------------------------------------
-        if (this.app.icon) { //isSearchResult(excl. emoji)
+        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
             this.icon = this.app.icon;
         } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
-            this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
+            let gicon = this.app.gicon;
+            if (!this.app.isWebBookmark) {
+                gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
+            }
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {//emoji search result
             const iconLabel = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
@@ -556,9 +588,6 @@ class AppButton {
             }
         } else if (this.app.isBackButton) {
             this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.isClearRecentsButton) {
-            this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
-                                        icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
@@ -661,11 +690,46 @@ class AppButton {
     _setButtonNormal() {
         this.entered = false;
         this.actor.set_style_class_name('menu-application-button');
+        this._addTileStyle();
     }
 
     _setButtonSelected() {
         this.entered = true;
         this.actor.set_style_class_name('menu-application-button-selected');
+        this._addTileStyle();
+    }
+
+    _addTileStyle() {
+        if (!this.appThis.settings.useTileStyle) {
+            return;
+        }
+        const toRgbaString = (col) => {
+                const decPlaces2 = (n) => Math.round(n * 100) / 100;
+                return `rgba(${col.red},${col.green},${col.blue},${decPlaces2(col.alpha / 255)})`; };
+        const lightenOrDarkenColor = (col) => { //lighten dark color or darken light color
+                    const isLightTheme = (col.red + col.green + col.blue) > 364;
+                    const amt = isLightTheme ? -15 : 15;
+                    col.red += amt;
+                    col.green += amt;
+                    col.blue += amt;
+                    return col; };
+        //const opaqueify = (col) => { //make color 1/3 more opaque
+        //            col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
+        //            return col; };
+        const bgColor = this.appThis.getThemeBackgroundColor();
+        if (bgColor.to_string().startsWith('#000000')) {
+            bgColor.red = 20;
+            bgColor.green = 20;
+            bgColor.blue = 20;
+        }
+        let addedStyle = '';
+        if (this.entered) {
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) + ';';
+        } else {
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) +
+                        '; background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
+        }
+        this.actor.set_style(addedStyle);
     }
 
     _setAppHighlightClass() {
@@ -775,12 +839,13 @@ class AppButton {
             this.appThis.closeMenu();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
+            //don't closeMenu
         } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
+                Main.notify(_('Error while opening file:'), e.message);
                 //don't closeMenu
             }
         } else if (this.app.isClearRecentsButton) {
@@ -930,7 +995,7 @@ class SidebarButton {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
+                Main.notify(_('Error while opening file:'), e.message);
             }
         }
     }

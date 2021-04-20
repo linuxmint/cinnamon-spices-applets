@@ -247,8 +247,7 @@
 	"shortConditions": {
 		"type": "checkbox",
 		"default": false,
-		"description": "Less verbose conditions",
-		"tooltip": "Currently only used with DarkSky."
+		"description": "Less verbose conditions"
 	},
 	"iconSettings": {
 		"type": "header",

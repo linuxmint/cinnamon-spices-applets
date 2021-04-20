@@ -92,7 +92,7 @@ msgstr ""
 
 #: applet.js:356
 msgid "Charge:"
-msgstr "Обязанности:"
+msgstr "Заряд:"
 
 #: applet.js:356
 msgid "Alert:"

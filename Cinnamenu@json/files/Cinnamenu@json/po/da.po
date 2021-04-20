@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 12:44+0000\n"
-"PO-Revision-Date: 2020-12-13 16:16+0100\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:15+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Type to search..."
@@ -27,19 +27,19 @@ msgstr "Initialiserer"
 msgid "No description available"
 msgstr "Ingen beskrivelse tilgængelig"
 
-msgid "All Applications"
+msgid "All applications"
 msgstr "Alle programmer"
 
 msgid "Places"
 msgstr "Steder"
 
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Seneste filer"
 
 msgid "Bookmarks"
 msgstr "Bogmærker"
 
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Favoritprogrammer"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
@@ -66,8 +66,8 @@ msgstr "Skift til gittervisning"
 msgid "Switch to list view"
 msgstr "Skift til listevisning"
 
-msgid "Lock Screen"
-msgstr "Låseskærm"
+msgid "Lock screen"
+msgstr "Låse skærm"
 
 msgid "Lock the screen"
 msgstr "Lås skærmen"
@@ -111,8 +111,14 @@ msgstr "Tilføj til favoritter"
 msgid "Uninstall"
 msgstr "Fjern"
 
+msgid "Find files..."
+msgstr "Find filer ..."
+
 msgid "Please wait..."
 msgstr "Vent venligst …"
+
+msgid "No recent Items"
+msgstr "Ingen seneste varer"
 
 msgid "Solution:"
 msgstr "Løsning:"
@@ -123,23 +129,17 @@ msgstr "Klik for at kopiere"
 msgid "Search web for"
 msgstr "Søg på nettet efter"
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "For mange poster - viser kun de 1000 første poster"
-
 msgid "Favorites"
 msgstr "Favoritter"
+
+msgid "Recent"
+msgstr "Seneste"
 
 msgid "Home folder"
 msgstr "Hjem"
 
-msgid "All applications"
-msgstr "Alle programmer"
-
-msgid "Recent files"
-msgstr "Seneste filer"
-
-msgid "Favorite apps"
-msgstr "Favoritprogrammer"
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange poster - viser kun de 1000 første poster"
 
 msgid "Reset category order"
 msgstr "Nulstil rækkefølgen af kategorier"
@@ -162,6 +162,60 @@ msgstr "Smid i papirkurven"
 msgid "Error while moving file to trash:"
 msgstr "Fejl ved flytning af filen til papirkurven:"
 
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Åben"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid "Start in"
+msgstr "Start om"
+
+msgid "Select a folder"
+msgstr "Vælg en mappe"
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr "Søgning skjult"
+
+msgid "Use regular expressions"
+msgstr "Brug regulære udtryk"
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr "Søger..."
+
+msgid "Search Stopped"
+msgstr "Søgning stoppet"
+
+msgid "Searching: "
+msgstr "Søger: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
@@ -171,13 +225,6 @@ msgid ""
 msgstr ""
 "En fleksibel menu med mulighed for formatering, webbogmærker, understøttelse "
 "af søgemaskineudbydere og fuzzy søgning."
-
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-"Gjort mulig takket være bidragyderne til Cinnamon-menu, Gnomenu og "
-"bidragyderne til de projekter, de stammer fra."
 
 msgid "Behavior"
 msgstr "Opførsel"
@@ -225,7 +272,7 @@ msgid "Panel text"
 msgstr "Paneltekst"
 
 msgid "Text to show beside the panel icon"
-msgstr "Tekst som vises ved siden af panelikonet."
+msgstr "Tekst som vises ved siden af panelikonet"
 
 msgid "pixels"
 msgstr "pixler"
@@ -275,8 +322,12 @@ msgstr "Aktivér automatisk rulning i programlisten"
 msgid "Show web bookmarks"
 msgstr "Vis webbogmærker"
 
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Vis din browsers bogmærker i menuen"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Vis din browsers bogmærker i menuen.\n"
+"Bemærk: Installér pakken gir1.2-gda-5.0 for at læse firefox' bogmærker."
 
 msgid "Enable searching of open windows"
 msgstr "Aktivér søgning i åbne vinduer"
@@ -285,19 +336,22 @@ msgid "Enable search providers"
 msgstr "Aktivér søgemaskineudbydere"
 
 msgid "Include search provider results in searches"
-msgstr "Medtag søgemaskineudbyderes resultater i søgninger."
+msgstr "Medtag søgemaskineudbyderes resultater i søgninger"
 
 msgid "Example Search Providers"
 msgstr "Eksempel på søgemaskineudbydere"
 
-msgid "Startup applications view mode"
-msgstr "Visningstilstand for opstartsprogrammer"
+msgid "Open menu on category:"
+msgstr "Åbn menu på kategori:"
 
 msgid "List"
 msgstr "Liste"
 
 msgid "Grid"
 msgstr "Gitter"
+
+msgid "Always open the menu with this category selected"
+msgstr "Åbn altid menuen med denne kategori valgt"
 
 msgid "columns"
 msgstr "kolonner"
@@ -328,9 +382,6 @@ msgstr "Forsinkelse af værktøjstip"
 
 msgid "Use a custom menu height"
 msgstr "Anvend en selvvalgt menuhøjde"
-
-msgid "px"
-msgstr "px"
 
 msgid "Custom menu height"
 msgstr "Selvvalgt menuhøjde"
@@ -374,24 +425,18 @@ msgstr "Højre"
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr "Vælg, hvor sessionsknapper (afslut, log ud osv.) skal vises"
 
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+" Info / tip: Træk i menukanten for at ændre menustørrelsen.\n"
+
 msgid "Add favorites to session buttons"
 msgstr "Tilføj favoritter til sessionsknapper"
 
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Vis dine favoritprogrammers ikoner ved siden af sessionsknapperne"
-
-msgid "Show recent files"
-msgstr "Vis seneste filer"
-
-msgid "Show recent files category in the menu"
-msgstr "Vis kategorien seneste filer i menuen"
-
-msgid ""
-"Show your browser's web bookmarks in the menu.\n"
-"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
-msgstr ""
-"Vis din browsers bogmærker i menuen.\n"
-"Bemærk: Installér pakken gir1.2-gda-5.0 for at læse firefox' bogmærker."
 
 msgid "Show favorite apps category"
 msgstr "Vis kategorien favoritprogrammer"
@@ -405,14 +450,17 @@ msgstr "Vis Hjem-mappen"
 msgid "Show home folder category in the menu"
 msgstr "Vis kategorien Hjem-mappe i menuen"
 
-msgid "Always open menu on favorite apps"
-msgstr "Åbn altid menuen med favoritprogrammer"
-
-msgid "Always open the menu with favorite apps category selected"
-msgstr "Åbn altid menuen med kategorien favoritprogrammer valgt"
+msgid "Last used category"
+msgstr "Sidst anvendt kategori"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatisk rulning i programlisten, når markøren føres hen over"
+
+msgid "Enable emoji search"
+msgstr "Aktivér søgning efter emojis"
+
+msgid "Show emojis in search results"
+msgstr "Vis emojis i søgeresultater"
 
 msgid "Web search option"
 msgstr "Indstillinger for websøgning"
@@ -432,14 +480,33 @@ msgstr "DuckDuckGo"
 msgid "Show an internet search option in search results"
 msgstr "Vis en internetsøgemulighed i søgeresultaterne"
 
-msgid "Enable emoji search"
-msgstr "Aktivér søgning efter emojis"
+msgid "Search home folder"
+msgstr "Søg i hjemmemappen"
 
-msgid "Show emojis in search results"
-msgstr "Vis emojis i søgeresultater"
+msgid "When searching, also search home folder for files"
+msgstr "Når du søger, skal du også søge i hjemmemappen efter filer"
+
+msgid "Show hidden files"
+msgstr "Vis skjulte filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Vis skjulte filer i mappevisning"
+
+msgid "Use a custom icon size"
+msgstr "Brug en brugerdefineret ikonstørrelse"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Brug en brugerdefineret størrelse til panelikonet"
+
+msgid "Panel icon size"
+msgstr "Panelikonstørrelse"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Vælg en brugerdefineret størrelse til panelikonet"
 
 msgid "Session buttons icon size"
 msgstr "Sessionsknappernes ikonstørrelse"
 
 msgid "Use session buttons box style"
 msgstr "Brug kassestil til sessionsknapper"
+

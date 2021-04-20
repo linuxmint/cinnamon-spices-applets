@@ -3,7 +3,6 @@
         "type": "header",
         "description": "Calculations"
     },
-
     "calculation_method": {
         "type": "combobox",
         "default": "MWL",
@@ -12,19 +11,19 @@
             "Muslim World League": "MWL",
             "Islamic Society of North America (ISNA)": "ISNA",
             "Egyptian General Authority of Survey": "Egypt",
-            "Umm Al-Qura University, Makkah": "Makkah"
+            "Umm Al-Qura University, Makkah": "Makkah",
+            "University of Islamic Sciences, Karachi": "Karachi",
+            "Institute of Geophysics, University of Tehran": "Tehran",
+            "Shia Ithna-Ashari, Leva Institute, Qum": "Jafari"
         }
     },
-
     "separator": {
         "type": "separator"
     },
-
     "head_location": {
         "type": "header",
         "description": "Your Location"
     },
-
     "latitude": {
         "type": "spinbutton",
         "default": -6.3292,
@@ -34,7 +33,6 @@
         "units": "",
         "description": "Latitude"
     },
-
     "longitude": {
         "type": "spinbutton",
         "default": 106.8567,
@@ -44,7 +42,6 @@
         "units": "",
         "description": "Longitude"
     },
-
     "timezone": {
         "type": "combobox",
         "default": "auto",
@@ -77,6 +74,19 @@
             "GMT +11:00": "11",
             "GMT +12:00": "12",
             "GMT +13:00": "13"
+        }
+    },
+    "head_juristic": {
+        "type": "header",
+        "description": "Juristic Settings"
+    },
+    "juristic":{
+        "type": "combobox",
+        "description": "Method",
+        "default": "Standard",
+        "options": {
+            "Shafi`i, Maliki, Ja`fari, Hanbali": "Standard",
+            "Hanafi": "Hanafi"
         }
     }
 }

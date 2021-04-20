@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherLoop = void 0;
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
+const logger_1 = require("lib/logger");
+const utils_1 = require("utils");
 var weatherAppletGUIDs = {};
 class WeatherLoop {
     constructor(app, instanceID) {

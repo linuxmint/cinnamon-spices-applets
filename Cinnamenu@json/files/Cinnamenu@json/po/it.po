@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:10+0100\n"
+"PO-Revision-Date: 2021-03-24 21:22+0000\n"
 "Last-Translator: Livedevelop Live User <mortaromarcello@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Project-Style: gnome\n"
 
 #. 3.2 4.0
@@ -217,8 +217,6 @@ msgid "Use a custom icon"
 msgstr "Usa un'icona personalizzata"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Usa un'icona personalizzata"
 
@@ -293,10 +291,8 @@ msgid "Activate categories on click instead of on hover"
 msgstr "Attiva le categorie al clic"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -454,98 +450,4 @@ msgstr ""
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Impossibile avviare \"%s\""
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Rimuovi dai preferiti"
-
-#~ msgid "Toggle recent files"
-#~ msgstr "Attiva/Disattiva i file recenti"
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr ""
-#~ "Premi questo pulsante per personalizzare le tue impostazioni sulla "
-#~ "privacy."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Premere questo pulsante per personalizzare le voci del menù."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr ""
-#~ "Deselezionando questa opzione si consente al tema di impostare l'icona"
-
-#~ msgid "Icon"
-#~ msgstr "Icona"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Imposta il nome dell'icona sul pulsante del menù personalizzato"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Abilita l'apertura del menù quando il mouse entra nell'applet"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Ritardo tra il cambio di categorie"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Se abilitato, le viste delle categorie vengono attivate al clic anziché "
-#~ "al passaggio del mouse."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Scegli se abilitare o meno lo scorrimento automatico nell'elenco delle "
-#~ "applicazioni."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Scegli se i segnalibri devono essere indicizzati nel menù."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr ""
-#~ "Scegli se le finestre aperte vengono indicizzate o meno nelle ricerche "
-#~ "nei menù."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Scegli se mostrare o meno i segnalibri e i luoghi nel menù."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Scegli se mostrare o meno le icone sulle applicazioni."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Scegli se mostrare o meno le icone sulle categorie."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Scegliere se mostrare o meno la descrizione dell'applicazione sui "
-#~ "pulsanti dell'applicazione."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Se abilitato, vengono visualizzati i suggerimenti contenenti il nome o la "
-#~ "descrizione dell'oggetto quando si passa il mouse sopra."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "Il tempo di ritardo in millisecondi per i suggerimenti quando si passa "
-#~ "con il mouse su una voce di menù."
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Digita la password per disinstallare questa applicazione"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr ""
-#~ "Abilita l'immissione del percorso del filesystem nella casella di ricerca"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr ""
-#~ "Consente l'inserimento del percorso nella casella di ricerca del menù."

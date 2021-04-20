@@ -1,24 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherApplet = void 0;
-const climacell_1 = require("./climacell");
-const config_1 = require("./config");
-const loop_1 = require("./loop");
-const met_uk_1 = require("./met_uk");
-const ui_1 = require("./ui");
-const utils_1 = require("./utils");
-const darkSky_1 = require("./darkSky");
-const openWeatherMap_1 = require("./openWeatherMap");
-const us_weather_1 = require("./us_weather");
-const weatherbit_1 = require("./weatherbit");
-const yahoo_1 = require("./yahoo");
-const met_norway_1 = require("./met_norway");
-const httpLib_1 = require("./httpLib");
-const logger_1 = require("./logger");
-const consts_1 = require("./consts");
-const visualcrossing_1 = require("./visualcrossing");
-const climacellV4_1 = require("./climacellV4");
-const danishMI_1 = require("./danishMI");
+const climacell_1 = require("providers/climacell");
+const config_1 = require("config");
+const loop_1 = require("loop");
+const met_uk_1 = require("providers/met_uk");
+const ui_1 = require("ui");
+const utils_1 = require("utils");
+const darkSky_1 = require("providers/darkSky");
+const openWeatherMap_1 = require("providers/openWeatherMap");
+const us_weather_1 = require("providers/us_weather");
+const weatherbit_1 = require("providers/weatherbit");
+const yahoo_1 = require("providers/yahoo");
+const met_norway_1 = require("providers/met_norway");
+const httpLib_1 = require("lib/httpLib");
+const logger_1 = require("lib/logger");
+const consts_1 = require("consts");
+const visualcrossing_1 = require("providers/visualcrossing");
+const climacellV4_1 = require("providers/climacellV4");
+const danishMI_1 = require("providers/danishMI");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
@@ -109,6 +109,12 @@ class WeatherApplet extends TextIconApplet {
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
                 this.Unlock();
+                logger_1.Log.Instance.Error("Could not refresh weather, data could not be obtained.");
+                this.ShowError({
+                    type: "hard",
+                    detail: "no api response",
+                    message: "API did not return data"
+                });
                 return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
@@ -126,13 +132,12 @@ class WeatherApplet extends TextIconApplet {
             return "success";
         }
         catch (e) {
-            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
+            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "fail";
         }
     }
-    ;
     DisplayWeather(weather) {
         let location = utils_1.GenerateLocationText(weather, this.config);
         let lastUpdatedTime = utils_1.AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours);
@@ -153,7 +158,7 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += `${temp} ${utils_1.UnitToUnicode(this.config.TemperatureUnit)}`;
+                label += temp;
             }
         }
         else {
@@ -166,7 +171,7 @@ class WeatherApplet extends TextIconApplet {
         }
         if (utils_1.NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
-                .replace("{t}", temp)
+                .replace("{t}", utils_1.TempToUserConfig(temperature, this.config, false))
                 .replace("{u}", utils_1.UnitToUnicode(this.config.TemperatureUnit))
                 .replace("{c}", mainCondition);
         }
@@ -204,6 +209,18 @@ class WeatherApplet extends TextIconApplet {
     }
     async LoadJsonAsync(url, params, HandleError, method = "GET") {
         let response = await httpLib_1.HttpLib.Instance.LoadJsonAsync(url, params, method);
+        if (!response.Success) {
+            if (!!HandleError && !HandleError(response.ErrorData))
+                return null;
+            else {
+                this.HandleHTTPError(response.ErrorData);
+                return null;
+            }
+        }
+        return response.Data;
+    }
+    async LoadAsync(url, params, HandleError, method = "GET") {
+        let response = await httpLib_1.HttpLib.Instance.LoadAsync(url, params, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;

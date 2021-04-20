@@ -5,6 +5,7 @@
 		],
 		"module": "CommonJS",
 		"target": "es2017",
+		"baseUrl": "./",
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": false,
@@ -14,6 +15,6 @@
 	},
 	"include": [
 		"./**/*",
-		"../declarations/**/*",
+		"../../../.typescript-declarations/**/*",
 	],
 }

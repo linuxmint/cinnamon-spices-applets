@@ -1,173 +1,178 @@
 {
-  "layout1": {
-    "type": "layout",
-    "height": 600,
-    "width": 800,
-    "pages": [
-      "search-page",
-      "radio-stations-page",
-      "preferences-page"
-    ],
-    "radio-stations-page": {
-      "type": "page",
-      "title": "My Stations",
-      "sections": [
-        "station-list-section"
-      ]
-    },
-    "preferences-page": {
-      "type": "page",
-      "title": "Preferences",
-      "sections": [
-        "appearance-section",
-        "volume-section",
-        "youtube-section"
-      ]
-    },
-    "search-page": {
-      "type": "page",
-      "title": "Find Station",
-      "sections": [
-        "find-station-section"
-      ]
-    },
-    "station-list-section": {
-      "type": "section",
-      "title": "List of stations",
-      "keys": [
-        "tree"
-      ]
-    },
-    "find-station-section": {
-      "type": "section",
-      "title": "Search Radio station",
-      "keys": [
-        "radio-search-widget"
-      ]
-    },
-    "appearance-section": {
-      "type": "section",
-      "title": "Appearance",
-      "keys": [
-        "icon-type",
-        "color-on",
-        "channel-on-panel"
-      ]
-    },
-    "volume-section": {
-      "type": "section",
-      "title": "Volume",
-      "keys": [
-        "keep-volume-between-sessions",
-        "initial-volume"
-      ]
-    },
-    "youtube-section": {
-      "type": "section",
-      "title": "Youtube Download",
-      "keys": [
-        "music-download-dir-select"
-      ]
-    }
-  },
-  "tree": {
-    "type": "list",
-    "height": 400,
-    "columns": [
-      {
-        "id": "inc",
-        "title": "Show in list",
-        "type": "boolean",
-        "default": true
-      },
-      {
-        "id": "name",
-        "title": "Title",
-        "type": "string"
-      },
-      {
-        "id": "url",
-        "title": "URL",
-        "type": "string"
-      }
-    ],
-    "default": [
-      {
-        "name": "Chillout",
-        "url": "http://ic7.101.ru:8000/c15_3",
-        "inc": true
-      },
-      {
-        "name": "Mint",
-        "url": "http://audiostream.rtl.be/mint",
-        "inc": true
-      }
-    ]
-  },
-  "streamurl-button": {
-    "type": "button",
-    "description": "Open radio stream URL search engine",
-    "callback": "on_streamurl_button_pressed",
-    "tooltip": "Opens a website, which helps you to determine radio stream URLs."
-  },
-  "radiolist-button": {
-    "type": "button",
-    "description": "Show URL-list of radio stations",
-    "callback": "on_radiolist_button_pressed",
-    "tooltip": "Opens a website, which lists URLs of radio stations."
-  },
-  "icon-type": {
-    "type": "combobox",
-    "description": "Icon type",
-    "default": "SYMBOLIC",
-    "options": {
-      "Symbolic": "SYMBOLIC",
-      "Full Color": "FULLCOLOR",
-      "Bicolor": "BICOLOR"
-    }
-  },
-  "color-on": {
-    "type": "colorchooser",
-    "default": "#73d216",
-    "dependency": "icon-type=SYMBOLIC",
-    "description": "Color of symbolic icon when playing a radio station"
-  },
-  "channel-on-panel": {
-    "type": "checkbox",
-    "description": "Show current radio station on the panel",
-    "default": false
-  },
-  "keep-volume-between-sessions": {
-    "type": "checkbox",
-    "description": "Remember volume after stopping the radio",
-    "default": true
-  },
-  "initial-volume": {
-    "type": "spinbutton",
-    "default": 50,
-    "min": 5,
-    "max": 100,
-    "step": 5,
-    "description": "Initial volume",
-    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running",
-    "dependency": "keep-volume-between-sessions!=true"
-  },
-  "last-volume": {
-    "type": "generic",
-    "value": 0,
-    "default": 80
-  },
-  "music-download-dir-select": {
-    "type": "filechooser",
-    "description": "Download directory",
-    "tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
-    "default": "~/Music/Radio",
-    "select-dir": true
-  },
-  "radio-search-widget": {
-    "type": "custom",
-    "file": "RadioSearchWidget.py",
-    "widget": "RadioSearchWidget",
-    "description": "Try out this custom widget!"
-  }
+	"layout1": {
+		"type": "layout",
+		"height": 600,
+		"width": 800,
+		"pages": [
+			"search-page",
+			"my-stations-page",
+			"preferences-page"
+		],
+		"search-page": {
+			"type": "page",
+			"title": "Find Station",
+			"sections": [
+				"find-station-section"
+			]
+		},
+		"my-stations-page": {
+			"type": "page",
+			"title": "My Stations",
+			"sections": [
+				"station-list-section"
+			]
+		},
+		"preferences-page": {
+			"type": "page",
+			"title": "Preferences",
+			"sections": [
+				"appearance-section",
+				"volume-section",
+				"youtube-section"
+			]
+		},
+		"station-list-section": {
+			"type": "section",
+			"title": "List of stations",
+			"keys": [
+				"tree"
+			]
+		},
+		"find-station-section": {
+			"type": "section",
+			"title": "Search Radio station",
+			"keys": [
+				"radio-search-widget"
+			]
+		},
+		"appearance-section": {
+			"type": "section",
+			"title": "Appearance",
+			"keys": [
+				"icon-type",
+				"color-on",
+				"channel-on-panel"
+			]
+		},
+		"volume-section": {
+			"type": "section",
+			"title": "Volume",
+			"keys": [
+				"keep-volume-between-sessions",
+				"initial-volume"
+			]
+		},
+		"youtube-section": {
+			"type": "section",
+			"title": "Youtube Download",
+			"keys": [
+				"music-download-dir-select"
+			]
+		}
+	},
+	"tree": {
+		"type": "list",
+		"height": 400,
+		"columns": [
+			{
+				"id": "inc",
+				"title": "Show in list",
+				"type": "boolean",
+				"default": true
+			},
+			{
+				"id": "name",
+				"title": "Title",
+				"type": "string"
+			},
+			{
+				"id": "url",
+				"title": "URL",
+				"type": "string"
+			}
+		],
+		"default": [
+			{
+				"name": "Chillout",
+				"url": "http://ic7.101.ru:8000/c15_3",
+				"inc": true
+			},
+			{
+				"name": "Austrian Rock Radio",
+				"url": "http://live.antenne.at/arr",
+				"inc": true
+			}
+		]
+	},
+	"streamurl-button": {
+		"type": "button",
+		"description": "Open radio stream URL search engine",
+		"callback": "on_streamurl_button_pressed",
+		"tooltip": "Opens a website, which helps you to determine radio stream URLs."
+	},
+	"radiolist-button": {
+		"type": "button",
+		"description": "Show URL-list of radio stations",
+		"callback": "on_radiolist_button_pressed",
+		"tooltip": "Opens a website, which lists URLs of radio stations."
+	},
+	"icon-type": {
+		"type": "combobox",
+		"description": "Icon type",
+		"default": "SYMBOLIC",
+		"options": {
+			"Symbolic": "SYMBOLIC",
+			"Full Color": "FULLCOLOR",
+			"Bicolor": "BICOLOR"
+		}
+	},
+	"color-on": {
+		"type": "colorchooser",
+		"default": "#73d216",
+		"dependency": "icon-type=SYMBOLIC",
+		"description": "Color of symbolic icon when playing a radio station"
+	},
+	"channel-on-panel": {
+		"type": "checkbox",
+		"description": "Show current radio station on the panel",
+		"default": false
+	},
+	"keep-volume-between-sessions": {
+		"type": "checkbox",
+		"description": "Remember volume after stopping the radio",
+		"default": true
+	},
+	"initial-volume": {
+		"type": "spinbutton",
+		"default": 50,
+		"min": 5,
+		"max": 100,
+		"step": 5,
+		"description": "Initial volume",
+		"tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running",
+		"dependency": "keep-volume-between-sessions!=true"
+	},
+	"last-volume": {
+		"type": "generic",
+		"value": 0,
+		"default": 80
+	},
+	"last-url": {
+		"type": "generic",
+		"value": null,
+		"dfault": null
+	},
+	"music-download-dir-select": {
+		"type": "filechooser",
+		"description": "Download directory",
+		"tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
+		"default": "~/Music/Radio",
+		"select-dir": true
+	},
+	"radio-search-widget": {
+		"type": "custom",
+		"file": "RadioSearchWidget.py",
+		"widget": "RadioSearchWidget",
+		"description": "Try out this custom widget!"
+	}
 }
