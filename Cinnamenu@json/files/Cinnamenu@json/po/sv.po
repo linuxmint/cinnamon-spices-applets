@@ -1,21 +1,21 @@
 # Swedish translation for Cinnamenu@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2020.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-25 21:11+0000\n"
+"POT-Creation-Date: 2021-04-12 19:45+0100\n"
+"PO-Revision-Date: 2021-04-20 07:36+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Type to search..."
@@ -129,6 +129,9 @@ msgstr "Klicka för att kopiera"
 msgid "Search web for"
 msgstr "SökmotorerSök på nätet efter"
 
+msgid "Trash"
+msgstr "Skräp"
+
 msgid "Favorites"
 msgstr "Favoriter"
 
@@ -163,58 +166,58 @@ msgid "Error while moving file to trash:"
 msgstr "Kunde inte flytta filen till papperskorgen:"
 
 msgid "Error while opening file:"
-msgstr ""
+msgstr "Ett fel inträffade vid öppning av filen:"
 
 msgid "Open"
 msgstr "Öppen"
 
 msgid "Search"
-msgstr ""
+msgstr "Sök"
 
 msgid "Start in"
-msgstr ""
+msgstr "Starta i"
 
 msgid "Select a folder"
 msgstr "Välj en mapp"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Följ symboliska länkar"
 
 msgid "Search hidden"
 msgstr "Sök dold"
 
 msgid "Use regular expressions"
-msgstr ""
+msgstr "Använd Regular Expression"
 
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Path"
-msgstr ""
+msgstr "Sökväg"
 
 msgid "Searching..."
 msgstr "Forskande..."
 
 msgid "Search Stopped"
-msgstr ""
+msgstr "Sökning stoppad"
 
 msgid "Searching: "
 msgstr "Forskande: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
 
 msgid "Search Completed"
-msgstr ""
+msgstr "Sökning slutförd"
 
 msgid "Skipping"
-msgstr ""
+msgstr "Hoppar över"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr " - mappen redan genomsökt"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -430,7 +433,7 @@ msgid ""
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-"Info / tips: Dra i menykanten för att ändra menystorlek.\n"
+"Info / Tips: Dra i menykanten för att ändra menystorlek.\n"
 
 msgid "Add favorites to session buttons"
 msgstr "Lägg till favoriter till sessionsknapparna"
@@ -487,7 +490,7 @@ msgid "When searching, also search home folder for files"
 msgstr "När du söker, även söka hemkatalog efter filer"
 
 msgid "Show hidden files"
-msgstr "Visa gömda filer"
+msgstr "Visa dolda filer"
 
 msgid "Show hidden files in folder view"
 msgstr "Visa dolda filer i mappvyn"
@@ -509,3 +512,13 @@ msgstr "Sessionsknappars ikonstorlek"
 
 msgid "Use session buttons box style"
 msgstr "Använd boxstil för sessionsknappar"
+
+msgid "Use tile style"
+msgstr "Använd panelstil"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
+"vissa teman)"
