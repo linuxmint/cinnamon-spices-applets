@@ -30,7 +30,6 @@ const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
-var time;
 
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -384,7 +383,7 @@ class CinnamenuApplet extends TextIconApplet {
         while (!(scrollBox instanceof St.ScrollView)) {
             i++;
             if (i > 10) {
-                global.logWarning('Cinnamenu: Unable to find scrollbox for', button.actor.toString());
+                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
                 return false;
             }
             scrollBox = scrollBox.get_parent();
@@ -955,8 +954,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (pattern === this.previousSearchPattern) {
             return;
         }
-        //======Begin search===========
         this.previousSearchPattern = pattern;
+        //======Begin search===========
         this.currentSearchId = Math.floor(Math.random() * 100000000);
 
         let primaryResults = this.apps.listApplications('all', pattern)
@@ -986,7 +985,7 @@ class CinnamenuApplet extends TextIconApplet {
             try {
                 ans = eval(exp);
             } catch(e) {
-                global.logWarning('Cinnamenu: Error evaluating expression',e.message);
+                global.logWarning('Cinnamenu: Error evaluating expression' + e.message);
             }
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
@@ -1050,16 +1049,17 @@ class CinnamenuApplet extends TextIconApplet {
         otherResults.sort((a, b) =>  a.score < b.score);
 
         //---------------------------
-        const finish = () => {
-            //Limit primaryResults to 10
+        const finish = () => {//sort and display primaryResults[] and otherResults[]
+            //sort primaryResults[]
             primaryResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
+            //Limit primaryResults to 10
             if (primaryResults.length > 10) {
                 primaryResults.length = 10;
             }
 
-            //Remove duplicate primaryResults. eg. a fav file, a recent file and a folderfile might all
+            //Remove duplicate primaryResults[]. eg. a fav file, a recent file and a folderfile might all
             //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile, isPlace,
-            //isFolderviewFile which is easy because primaryResults should already be in this order.
+            //isFolderviewFile which is easy because primaryResults[] should already be in this order.
             for (let i = 0; i < primaryResults.length -1; i++) {
                 const app = primaryResults[i];
                 if (app.isFavoriteFile || app.isRecentFile || app.isPlace) {
@@ -1074,9 +1074,10 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
 
-            //sort otherResults
+            //sort otherResults[]
             otherResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
 
+            //Display results
             this.appsView.populate(primaryResults.concat(otherResults), null);
             const buttons = this.appsView.getActiveButtons();//todo
             if (buttons.length > 0) {
@@ -1100,13 +1101,15 @@ class CinnamenuApplet extends TextIconApplet {
                 dir.enumerate_children_async(
                     'standard::name,standard::type,standard::icon,standard::content-type,standard::is-hidden',
                             Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (source, result) => {
-                    enumerator = source.enumerate_children_finish(result);
+                    try {
+                        enumerator = source.enumerate_children_finish(result);
+                    } catch(e) {
+                        global.logWarning('Cinnamenu file search:' + e.message);
+                    }
 
                     let next;
                     if (enumerator) {
                         next = enumerator.next_file(null);
-                    } else {
-                        global.logWarning(`Cinnamenu: Error reading folder ${folder} during file search.`);
                     }
                     while (next) {
                         filesSearched++;
@@ -1135,6 +1138,8 @@ class CinnamenuApplet extends TextIconApplet {
                             }
                             results.push(foundFile);
                         }
+
+                        //Enter subdirectories
                         if (isDirectory && depth < 4 && !next.get_is_hidden() && filesSearched < 10000) {
                             recursionCount++;
                             setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
@@ -1144,6 +1149,9 @@ class CinnamenuApplet extends TextIconApplet {
                     if (enumerator) {
                         enumerator.close(null);
                     }
+
+                    //When recursionCount gets back down to 0, all recursions of searchDir() have finished
+                    //and thus file search is completed. Detect this here and add results to appsView.
                     recursionCount--;
                     if (recursionCount === 0 && results.length > 0 && this.searchActive &&
                                                             thisSearchId === this.currentSearchId) {
@@ -1183,7 +1191,7 @@ class CinnamenuApplet extends TextIconApplet {
                             }
                         });
                         if (!this.searchActive || thisSearchId !== this.currentSearchId ||
-                                                !providerResults || providerResults.length <= 0) {
+                                                    !providerResults || providerResults.length <= 0) {
                             return;
                         }
                         otherResults = otherResults.concat(providerResults);
@@ -1191,6 +1199,7 @@ class CinnamenuApplet extends TextIconApplet {
                     });
                 });
         }
+
         finish();
         return;
     }
@@ -1322,7 +1331,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.mainBox.destroy();
     }
 
-/*-----below are all functions creating app objects excluding _doSearch(), _searchDir() and
+/*-----below are all functions creating app objects excluding _doSearch() and
  *-----listApplications() which is in Apps class.
  *app obj properties used:
  *  .name
@@ -1786,7 +1795,7 @@ class CategoriesView {
             }
         }
         dirs.sort((a, b) => {
-                        const prefCats = ['administration', 'preferences'];
+                        const prefCats = ['ADMINISTRATION', 'PREFERENCES'];
                         const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
                         const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
                         if (prefIdA < 0 && prefIdB >= 0) return -1;
