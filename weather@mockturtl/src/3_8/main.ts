@@ -5,25 +5,25 @@
 //
 //----------------------------------------------------------------------
 
-import { Climacell } from "./climacell";
-import { Config } from "./config";
-import { WeatherLoop } from "./loop";
-import { MetUk } from "./met_uk";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
-import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { DarkSky } from "./darkSky";
-import { OpenWeatherMap } from "./openWeatherMap";
-import { USWeather } from "./us_weather";
-import { Weatherbit } from "./weatherbit";
-import { Yahoo } from "./yahoo";
-import { MetNorway } from "./met_norway";
-import { HttpLib, HttpError, Method, HTTPParams } from "./httpLib";
-import { Log } from "./logger";
-import { APPLET_ICON, REFRESH_ICON } from "./consts";
-import { VisualCrossing } from "./visualcrossing";
-import { ClimacellV4 } from "./climacellV4";
-import { DanishMI } from "./danishMI";
+import { Climacell } from "providers/climacell";
+import { Config } from "config";
+import { WeatherLoop } from "loop";
+import { MetUk } from "providers/met_uk";
+import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "types";
+import { UI } from "ui";
+import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "utils";
+import { DarkSky } from "providers/darkSky";
+import { OpenWeatherMap } from "providers/openWeatherMap";
+import { USWeather } from "providers/us_weather";
+import { Weatherbit } from "providers/weatherbit";
+import { Yahoo } from "providers/yahoo";
+import { MetNorway } from "providers/met_norway";
+import { HttpLib, HttpError, Method, HTTPParams } from "lib/httpLib";
+import { Log } from "lib/logger";
+import { APPLET_ICON, REFRESH_ICON } from "consts";
+import { VisualCrossing } from "providers/visualcrossing";
+import { ClimacellV4 } from "providers/climacellV4";
+import { DanishMI } from "providers/danishMI";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -128,6 +128,12 @@ export class WeatherApplet extends TextIconApplet {
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
 				this.Unlock();
+				Log.Instance.Error("Could not refresh weather, data could not be obtained.");
+				this.ShowError({
+					type: "hard",
+					detail: "no api response",
+					message: "API did not return data"
+				})
 				return RefreshState.Failure;
 			}
 
@@ -147,12 +153,12 @@ export class WeatherApplet extends TextIconApplet {
 			return RefreshState.Success;
 		}
 		catch (e) {
-			Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
+			Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
 			return RefreshState.Failure;
 		}
-	};
+	}
 
 	// ---------------------------------------------------------------------------
 	// Panel Set helpers helpers
@@ -182,7 +188,7 @@ export class WeatherApplet extends TextIconApplet {
 				if (label != "") {
 					label += " ";
 				}
-				label += `${temp} ${UnitToUnicode(this.config.TemperatureUnit)}`;
+				label += temp;
 			}
 		}
 		// Vertical panels
@@ -200,7 +206,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Overriding temperature panel label
 		if (NotEmpty(this.config._tempTextOverride)) {
 			label = this.config._tempTextOverride
-				.replace("{t}", temp)
+				.replace("{t}", TempToUserConfig(temperature, this.config, false))
 				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
 				.replace("{c}", mainCondition);
 		}
@@ -271,6 +277,29 @@ export class WeatherApplet extends TextIconApplet {
 		return response.Data;
 	}
 
+	/**
+	 * Loads response from specified URLs
+	 * @param url URL without params
+	 * @param params param object
+	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param method default is GET
+	 */
+		 public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string> {
+			let response = await HttpLib.Instance.LoadAsync(url, params, method);
+	
+			if (!response.Success) {
+				// check if caller wants
+				if (!!HandleError && !HandleError(response.ErrorData))
+					return null;
+				else {
+					this.HandleHTTPError(response.ErrorData);
+					return null;
+				}
+			}
+	
+			return response.Data;
+		}
+
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete
 
@@ -299,12 +328,6 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Override function */
 	public on_applet_removed_from_panel(deleteConfig: any) {
-		// TODO: Proper unload
-		//this.unloadStylesheet();
-		//Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
-		//this.sigMan.disconnectAllSignals();
-		//this.settings && this.settings.finalize();
-		//$.Debugger.destroy();
 		Log.Instance.Print("Removing applet instance...")
 		this.loop.Stop();
 	}

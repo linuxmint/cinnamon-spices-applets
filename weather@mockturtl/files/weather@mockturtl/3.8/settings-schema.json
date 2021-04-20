@@ -36,6 +36,7 @@
 			"type": "page",
 			"title": "Other options",
 			"sections": [
+				"temp-unit-section",
 				"units-section",
 				"icons",
 				"keybindings"
@@ -106,18 +107,26 @@
 				"showForecastDates",
 				"shortHourlyTime",
 				"temperatureHighFirst",
-				"tempRussianStyle",
+				"displayWindAsText",
 				"locationLabelOverride"
 			]
 		},
 		"units-section": {
 			"type": "section",
-			"title": "Units",
+			"title": "Other Units",
 			"keys": [
-				"temperatureUnit",
 				"windSpeedUnit",
 				"pressureUnit",
 				"distanceUnit"
+			]
+		},
+		"temp-unit-section": {
+			"type": "section",
+			"title": "Temperature Unit",
+			"keys": [
+				"temperatureUnit",
+				"showBothTempUnits",
+				"tempRussianStyle"
 			]
 		},
 		"icons": {
@@ -202,7 +211,7 @@
 		"indent": true,
 		"description": "Save current location to storage",
 		"callback": "saveCurrentLocation",
-		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
+		"tooltip": "Saves location information to file so you can switch between them with buttons in the applet, which will appear if you have more than one."
 	},
 	"getLocation": {
 		"type": "button",
@@ -229,13 +238,13 @@
 		"units": "days",
 		"step": 1,
 		"description": "Forecast length",
-		"tooltip": "Maximum number of days what can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
+		"tooltip": "Maximum number of days that can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
 	},
 	"forecastHours": {
 		"type": "spinbutton",
-		"default": 12,
+		"default": 48,
 		"min": 3,
-		"max": 48,
+		"max": 168,
 		"units": "hours",
 		"step": 1,
 		"description": "Hourly Forecast length"
@@ -256,6 +265,11 @@
 			"Fahrenheit": "fahrenheit"
 		},
 		"tooltip": "Automatic will try to guess your preference based your current display language."
+	},
+	"showBothTempUnits": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Show both temperature units at the same time"
 	},
 	"windSpeedUnit": {
 		"type": "combobox",
@@ -403,6 +417,12 @@
 		"default": false,
 		"description": "Show high temperature first in forecast"
 	},
+	"displayWindAsText": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display wind direction as text",
+		"tooltip": "Like SE, N instead of direction icons."
+	},
 	"shortHourlyTime": {
 		"type": "checkbox",
 		"default": false,
@@ -433,8 +453,7 @@
 	"shortConditions": {
 		"type": "checkbox",
 		"default": false,
-		"description": "Less verbose conditions",
-		"tooltip": "Currently only used with DarkSky."
+		"description": "Less verbose conditions"
 	},
 	"useSymbolicIcons": {
 		"type": "checkbox",

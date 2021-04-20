@@ -1,14 +1,14 @@
-import { Config } from "./config";
-import { CurrentWeather as UICurrentWeather } from "./uiCurrentWeather";
-import { Log } from "./logger";
-import { WeatherApplet } from "./main";
-import { ErrorSeverity, WeatherData, WeatherProvider } from "./types";
-import { ShadeHexColor, delay, _ } from "./utils";
-import { UIForecasts } from "./uiForecasts";
-import { UIHourlyForecasts } from "./uiHourlyForecasts";
-import { UIBar } from "./uiBar";
-import { UISeparator } from "./uiSeparator";
-import { WeatherButton } from "./weatherbutton";
+import { Config } from "config";
+import { CurrentWeather as UICurrentWeather } from "ui_elements/uiCurrentWeather";
+import { Log } from "lib/logger";
+import { WeatherApplet } from "main";
+import { ErrorSeverity, WeatherData, WeatherProvider } from "types";
+import { ShadeHexColor, delay, _ } from "utils";
+import { UIForecasts } from "ui_elements/uiForecasts";
+import { UIHourlyForecasts } from "ui_elements/uiHourlyForecasts";
+import { UIBar } from "ui_elements/uiBar";
+import { UISeparator } from "ui_elements/uiSeparator";
+import { WeatherButton } from "ui_elements/weatherbutton";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label } = imports.gi.St;

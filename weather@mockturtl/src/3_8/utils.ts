@@ -1,7 +1,7 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
-import { UUID } from "./consts";
-import { SunTimes } from "./sunCalc";
-import { ArrowIcons, BuiltinIcons, WeatherData } from "./types";
+import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "config";
+import { ELLIPSIS, FORWARD_SLASH, UUID } from "consts";
+import { SunTimes } from "lib/sunCalc";
+import { ArrowIcons, BuiltinIcons, WeatherData } from "types";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -266,21 +266,66 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 }
 
 // Conversion from Kelvin
-export function TempToUserConfig(kelvin: number, config: Config): string {
+export function TempToUserConfig(kelvin: number, config: Config, withUnit: boolean = true): string {
 	if (kelvin == null) return null;
-	let temp;
-	if (config.TemperatureUnit == "celsius") {
-		temp = Math.round((kelvin - 273.15));
-	}
-	if (config.TemperatureUnit == "fahrenheit") {
-		temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
+
+	let temp: number | string = (config.TemperatureUnit == "celsius") ? KelvinToCelsius(kelvin) : KelvinToFahrenheit(kelvin);
+	temp = RussianTransform(temp, config._tempRussianStyle);
+
+	if (withUnit)
+		temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
+
+	if (config._showBothTempUnits) {
+		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		let secondTemp: number | string = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
+		secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
+		if (withUnit)
+			temp += ` (${secondTemp.toString()} ${UnitToUnicode(secondUnit)})`;
+		else
+			temp += ` (${secondTemp.toString()})`;
 	}
 
-	if (!config._tempRussianStyle) return temp.toString();
-
-	if (temp < 0) temp = "−" + Math.abs(temp).toString();
-	else if (temp > 0) temp = "+" + temp.toString();
 	return temp.toString();
+}
+
+export function RussianTransform(temp: number, russianStyle: boolean): string {
+	if (russianStyle) {
+		if (temp < 0) return `−${Math.abs(temp).toString()}`;
+		else if (temp > 0) return `+${temp.toString()}`;
+	}
+	else
+		return temp.toString();
+}
+
+export function TempRangeToUserConfig(min: number, max: number, config: Config): string {
+	let t_low = TempToUserConfig(min, config, false);
+	let t_high = TempToUserConfig(max, config, false);
+
+	let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+	let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+
+	let result = "";
+	if (first_temperature != null)
+		result = first_temperature;
+	// As Russian Tradition, -temp...+temp
+	// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
+	result += ((config._tempRussianStyle) ? ELLIPSIS : ` ${FORWARD_SLASH} `);
+	if (second_temperature != null)
+		result += `${second_temperature} `;
+	result += `${UnitToUnicode(config.TemperatureUnit)}`;
+	if (config._showBothTempUnits) {
+		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		result += ` (${UnitToUnicode(secondUnit)})`;
+	}
+	return result;
+}
+
+function KelvinToCelsius(k: number): number {
+	return Math.round((k - 273.15));
+}
+
+function KelvinToFahrenheit(k: number): number {
+	return Math.round((9 / 5 * (k - 273.15) + 32));
 }
 
 /**
@@ -382,6 +427,14 @@ export function CompassDirection(deg: number): ArrowIcons {
 	];
 	return directions[Math.round(deg / 45) % directions.length]
 }
+
+export function CompassDirectionText(deg: number): string {
+	if (!deg)
+		return null;
+    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+    return directions[Math.round(deg / 45) % directions.length]
+}
+
 
 // -----------------------------------------------------------------
 // Testers

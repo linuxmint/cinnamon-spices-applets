@@ -1,11 +1,11 @@
-import { WeatherApplet } from "./main";
-import { IpApi } from "./ipApi";
-import { LocationData } from "./types";
-import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Log } from "./logger";
-import { UUID, SIGNAL_CHANGED } from "./consts";
-import { LocationStore } from "./locationstore";
-import { GeoLocation } from "./nominatim";
+import { WeatherApplet } from "main";
+import { IpApi } from "location_services/ipApi";
+import { LocationData } from "types";
+import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "utils";
+import { Log } from "lib/logger";
+import { UUID } from "consts";
+import { LocationStore } from "location_services/locationstore";
+import { GeoLocation } from "location_services/nominatim";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -69,7 +69,9 @@ const Keys = {
 	SHORT_HOURLY_TIME: "shortHourlyTime",
 	SHOW_FORECAST_DATES: "showForecastDates",
 	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-	IMMEDIATE_PRECIP: "immediatePrecip"
+	IMMEDIATE_PRECIP: "immediatePrecip",
+	SHOW_BOTH_TEMP: "showBothTempUnits",
+	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
 }
 
 export class Config {
@@ -125,6 +127,8 @@ export class Config {
 	public readonly _showForecastDates: boolean;
 	public readonly _locationList: LocationData[];
 	public readonly _immediatePrecip: boolean;
+	public readonly _showBothTempUnits: boolean;
+	public readonly _displayWindAsText: boolean;
 
 	/** Timeout */
 	private doneTypingLocation: number = null;

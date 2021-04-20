@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Config = void 0;
-const ipApi_1 = require("./ipApi");
-const utils_1 = require("./utils");
-const logger_1 = require("./logger");
-const consts_1 = require("./consts");
-const locationstore_1 = require("./locationstore");
-const nominatim_1 = require("./nominatim");
+const ipApi_1 = require("location_services/ipApi");
+const utils_1 = require("utils");
+const logger_1 = require("lib/logger");
+const consts_1 = require("consts");
+const locationstore_1 = require("location_services/locationstore");
+const nominatim_1 = require("location_services/nominatim");
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -42,7 +42,9 @@ const Keys = {
     SHORT_HOURLY_TIME: "shortHourlyTime",
     SHOW_FORECAST_DATES: "showForecastDates",
     WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-    IMMEDIATE_PRECIP: "immediatePrecip"
+    IMMEDIATE_PRECIP: "immediatePrecip",
+    SHOW_BOTH_TEMP: "showBothTempUnits",
+    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
 };
 class Config {
     constructor(app, instanceID) {
