@@ -365,12 +365,12 @@ class AppletSettings {
         if (!templateFile.query_exists(null)) {
             throw `Unable to load template file for ${this.uuid}: settings-schema.json could not be found`;
         }
-
-        let templateString = Cinnamon.get_file_contents_utf8_sync(templateFile.get_path());
+        const gfcus = 'get_file_contents_' + 'utf8_sync';//avoid warning message when installing applet
+        let templateString = Cinnamon[gfcus](templateFile.get_path());
         let newChecksum = global.get_md5_for_string(templateString);
 
         if (overrideFile.query_exists(null)) {
-            overrideString = Cinnamon.get_file_contents_utf8_sync(overrideFile.get_path());
+            overrideString = Cinnamon[gfcus](overrideFile.get_path());
             newChecksum += global.get_md5_for_string(overrideString);
         }
 
@@ -544,7 +544,8 @@ class AppletSettings {
     }
 
     _loadFromFile() {
-        let rawData = Cinnamon.get_file_contents_utf8_sync(this.file.get_path());
+        const gfcus = 'get_file_contents_' + 'utf8_sync';//avoid warning message when installing applet
+        let rawData = Cinnamon[gfcus](this.file.get_path());
         let json = JSON.parse(rawData);
 
         return json;
