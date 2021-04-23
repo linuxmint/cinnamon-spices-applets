@@ -222,10 +222,6 @@ declare namespace imports.ui.settings {
         OUT = 3
     }
 }
-declare namespace imports.ui.appletManager {
-    export var applets: any;
-    export var appletMeta: any;
-}
 
 declare namespace imports.mainloop {
     /**
