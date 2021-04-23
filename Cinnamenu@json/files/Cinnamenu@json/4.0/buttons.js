@@ -19,6 +19,15 @@ const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = req
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
+function lightenOrDarkenColor(col) { //lighten a dark color or darken a light color
+    const isLightTheme = (col.red + col.green + col.blue) > 364;
+    const amt = isLightTheme ? -15 : 15;
+    col.red += amt;
+    col.green += amt;
+    col.blue += amt;
+    return col;
+}
+
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
         this.appThis = appThis;
@@ -706,13 +715,6 @@ class AppButton {
         const toRgbaString = (col) => {
                 const decPlaces2 = (n) => Math.round(n * 100) / 100;
                 return `rgba(${col.red},${col.green},${col.blue},${decPlaces2(col.alpha / 255)})`; };
-        const lightenOrDarkenColor = (col) => { //lighten dark color or darken light color
-                    const isLightTheme = (col.red + col.green + col.blue) > 364;
-                    const amt = isLightTheme ? -15 : 15;
-                    col.red += amt;
-                    col.green += amt;
-                    col.blue += amt;
-                    return col; };
         //const opaqueify = (col) => { //make color 1/3 more opaque
         //            col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
         //            return col; };

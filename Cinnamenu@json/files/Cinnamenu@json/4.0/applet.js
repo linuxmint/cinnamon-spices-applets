@@ -54,7 +54,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals = new SignalManager(null);
         this.appSystem = Cinnamon.AppSystem.get_default();
         const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
-                                                                            St.IconType.SYMBOLIC, false);
+                                                                        St.IconType.SYMBOLIC, false);
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
         searchFilesMenuItem.connect('activate', () => {
                             Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
@@ -65,11 +65,11 @@ class CinnamenuApplet extends TextIconApplet {
                                                 () => this.settings.customMenuWidth,
                                                 () => this.settings.customMenuHeight);
         this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => {
-                                this.recentsEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
-                                this.categoriesView.update();
-                                if (this.currentCategory === 'recents' && !this.recentsEnabled) {
-                                    this.currentCategory = 'all';
-                                } });
+                        this.recentsEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
+                        this.categoriesView.update();
+                        if (this.currentCategory === 'recents' && !this.recentsEnabled) {
+                            this.currentCategory = 'all';
+                        } });
         this.signals.connect(Main.themeManager, 'theme-set', () => {this._updateIconAndLabel();
                                                                     setTimeout(() => this._refresh()); });
         this.iconTheme = Gtk.IconTheme.get_default();
@@ -77,13 +77,13 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.appSystem, 'installed-changed', () => {   this.apps.installedChanged();
                                                                             this._refresh(); });
         this.signals.connect(this.appFavorites, 'changed', () => {
-                                if (this.appsView) {// Check if the menu has been rendered at least once
-                                    this.sidebar.populate();
-                                    this.updateMenuSize();
-                                    if (this.currentCategory === 'favorite_apps' && !this.searchActive) {
-                                        this.setActiveCategory(this.currentCategory);
-                                    }
-                                } });
+                        if (this.appsView) {// Check if the menu has been rendered at least once
+                            this.sidebar.populate();
+                            this.updateMenuSize();
+                            if (this.currentCategory === 'favorite_apps' && !this.searchActive) {
+                                this.setActiveCategory(this.currentCategory);
+                            }
+                        } });
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this._onOpenStateToggled(...args));
         //this.signals.connect(global, 'scale-changed', () => this._refresh() );
         this.apps = new Apps(this);
@@ -1140,7 +1140,7 @@ class CinnamenuApplet extends TextIconApplet {
                         }
 
                         //Enter subdirectories
-                        if (isDirectory && depth < 4 && !next.get_is_hidden() && filesSearched < 10000) {
+                        if (isDirectory && depth < 4 && !next.get_is_hidden() && recursionCount < 50) {
                             recursionCount++;
                             setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
                         }
