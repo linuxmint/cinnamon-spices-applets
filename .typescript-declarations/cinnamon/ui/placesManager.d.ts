@@ -28,7 +28,7 @@ declare namespace imports.ui.placesmanager {
 		timestamp: number;
 	}
 	/**
-	 * Helper function to translate launch parameters into a GAppLaunchContext */ 
+	 * Helper function to translate launch parameters into a GAppLaunchContext */
 	function _makeLaunchContext(params: Partial<LauchContextParams>): imports.gi.Gio.AppLaunchContext;
 
 	class PlaceDeviceInfo extends PlaceInfo {
@@ -70,8 +70,8 @@ declare namespace imports.ui.placesmanager {
 
 	class PlacesManager {
 		protected _defaultPlaces: PlaceInfo[];
-        protected _mounts: PlaceDeviceInfo[];
-        protected _bookmarks: PlaceInfo[];
+		protected _mounts: PlaceDeviceInfo[];
+		protected _bookmarks: PlaceInfo[];
 		protected _home: PlaceInfo;
 		protected _desktopMenu: PlaceInfo;
 		protected _connect: PlaceInfo;

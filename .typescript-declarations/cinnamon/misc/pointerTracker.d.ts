@@ -7,8 +7,8 @@ declare namespace imports.misc.pointerTracker {
 		/**
 		 * @returns lastpointerX, lastPointerY, lastScreen
 		 */
-        public getPosition(): number[];
+		public getPosition(): number[];
 
-        public setPosition(x: number, y: number, screenOpt?: number): void;
-    }
+		public setPosition(x: number, y: number, screenOpt?: number): void;
+	}
 }
