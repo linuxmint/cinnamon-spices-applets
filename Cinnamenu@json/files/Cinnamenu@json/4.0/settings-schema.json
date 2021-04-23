@@ -265,9 +265,9 @@
     },
     "search-home-folder":{
         "type":"checkbox",
-        "default":true,
+        "default":false,
         "description":"Search home folder",
-        "tooltip":"When searching, also search home folder for files"
+        "tooltip":"When searching, also search home folder for files (Note: Recommended only if you have an SSD, otherwise this may slow down the search function)"
     },
     "show-hidden-files":{
         "type":"checkbox",
