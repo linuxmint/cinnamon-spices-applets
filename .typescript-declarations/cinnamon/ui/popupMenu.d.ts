@@ -460,7 +460,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param sourceActor the actor that owns the popup menu
 		 * @param styleClass the style class of the popup menu
 		 */
-		constructor(sourceActor: gi.St.Widget, styleClass?: string);
+		constructor(sourceActor?: gi.St.Widget, styleClass?: string);
 
 		/**
 		 * Adds a #PopupMenuItem with label title to the menu. When the item is

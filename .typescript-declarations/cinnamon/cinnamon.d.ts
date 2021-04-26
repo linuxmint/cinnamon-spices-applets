@@ -1,5 +1,10 @@
 declare function require(path: string): any;
 
+declare function setInterval(callback: { (): void }, delay: number): number;
+declare function clearInterval(intervalID: number): void;
+declare function setTimeout(callback: { (): void }, delay: number): number;
+declare function clearTimeout(timouetId: number): void;
+
 declare class global {
     static log(...any: Array < any > ): void;
     static logError(...text: Array < string > ): void;
