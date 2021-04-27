@@ -6,7 +6,7 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
 
 ## Buy me a coffee
  - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZLHQD3GQ5YNR6&source=url)
- - Bitcoin: 1NaiaFcVGrrMs9amjyb4aVV1dJoLfdKe3Q
+ - Bitcoin: `1NaiaFcVGrrMs9amjyb4aVV1dJoLfdKe3Q`
 
 ## Features
 * Powerfull Interface.
@@ -32,13 +32,19 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
     - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.7.0
+    - Fixed issues with asynchronous command calls.
+        - Main redshift call reverted to synchronous, so the cinnamon will show the annoying message again: ***This applet contains function calls that could potentially cause Cinnamon to crash or freeze***.
+        - I noticed that on some (slow?) computers many asynchronous calls cause the application to freeze.
+    - Added translations:
+        - Spanish by [RichLuna](https://github.com/RichLuna "@RichLuna on Github")
 * 1.6.0
     - Added manual night-time option.
     - Fixed some issues with Debian.
 * 1.5.5
     - Fixed icon blinking when using symbolic icon.
 * 1.5.4
-    - Fixed: "This applet contains function calls that could potentially cause Cinnamon to crash or freeze."
+    - ~~Fixed: "This applet contains function calls that could potentially cause Cinnamon to crash or freeze."~~
 * 1.5.3
     - Fixed some issues with Debian.
         - Automatically disable redshift default service.
