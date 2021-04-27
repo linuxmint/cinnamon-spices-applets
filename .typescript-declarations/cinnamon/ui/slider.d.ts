@@ -23,6 +23,6 @@ declare namespace imports.ui.slider {
 
         setValue(value: number): void
 
-        public connect(event: SliderEvents, callback: { (slider?: Slider): void }): void
+        public connect(event: SliderEvents, callback: (slider?: Slider) => void): void
     }
 }
