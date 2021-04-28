@@ -56,11 +56,6 @@ declare namespace imports.ui.appletManager {
 		applet?: imports.ui.applet.Applet;
 	}
 
-	interface AppletDef {
-		actor: imports.gi.Clutter.Actor;
-		_allowedLayout: string;
-	}
-
 
 	function initEnabledApplets(): Promise<void>;
 
