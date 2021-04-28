@@ -1,10 +1,26 @@
 declare namespace imports.ui.appletManager {
 
+	interface AppletImports {
+		[key: string]: any;
+	}
+
+	interface AppletObject {
+
+	}
+
+	interface AppletMeta {
+		/** Path to the current applet instance */
+		path: string;
+	}
+
+	interface AppletMetaLibrary {
+		[key: string]: AppletMeta;
+	}
 
 	/** Maps uuid -> importer object (applet directory tree) **/
-	var applets: any;
-	/** Kept for compatibility */
-	var appletMeta: any;
+	var applets: AppletImports;
+	/** Maps UUID -> Applet Meta information. Kept for compatibility. */
+	var appletMeta: AppletMetaLibrary;
 	/** Maps applet_id -> applet objects */
 	var appletObj: any[];
 	var appletsLoaded: boolean;
@@ -28,20 +44,6 @@ declare namespace imports.ui.appletManager {
 	var clipboard: any[];
 	var promises: any;
 
-	interface Metadata {
-		uuid: string;
-		name: string;
-		description: string;
-    	"max-instances"?: number;
-    	version?: string;
-    	multiversion?: boolean;
-    	"cinnamon-version"?: string[];
-    	state?: number;
-    	path: string;
-		error?: string;
-    	force_loaded: boolean;
-	}
-
 	interface AppletDefinition {
 		panelId: number;
 		orientation: imports.gi.St.Side;
@@ -52,6 +54,11 @@ declare namespace imports.ui.appletManager {
 		real_uuid: string;
 		applet_id: number;
 		applet?: imports.ui.applet.Applet;
+	}
+
+	interface AppletDef {
+		actor: imports.gi.Clutter.Actor;
+		_allowedLayout: string;
 	}
 
 
@@ -120,15 +127,15 @@ declare namespace imports.ui.appletManager {
 
 	function moveApplet(appletDefinition: AppletDefinition, allowedLayout: imports.ui.applet.AllowedLayout): void;
 
-	function get_role_provider(role: any): any;
+	function get_role_provider(role: Roles): any;
 
-	function get_role_provider_exists(role: any): boolean;
+	function get_role_provider_exists(role: Roles): boolean;
 
 	function createApplet(extension: any, appletDefinition: AppletDefinition, panel?: imports.ui.panel.Panel): boolean | any;
 
-	function _addAppletStyleClassUuid(applet: any, metadata: any): boolean;
+	function _addAppletStyleClassUuid(applet: any, metadata: ui.applet.AppletMetadata): boolean;
 
-	function _generateAppletStyleClassUuid(metadata: any): string;
+	function _generateAppletStyleClassUuid(metadata: ui.applet.AppletMetadata): string;
 
 	function _removeAppletFromPanel(uuid: string, applet_id: number): void;
 
@@ -140,9 +147,9 @@ declare namespace imports.ui.appletManager {
 	 */
 	function _find_applet(uuid: string): imports.ui.applet.Applet;
 
-	function get_object_for_instance(appletId: number): any;
+	function get_object_for_instance(appletId: number): imports.ui.applet.Applet;
 
-	function get_object_for_uuid(uuid: string, instanceId: number): any;
+	function get_object_for_uuid(uuid: string, instanceId: number): imports.ui.applet.Applet;
 
 
 	/**
