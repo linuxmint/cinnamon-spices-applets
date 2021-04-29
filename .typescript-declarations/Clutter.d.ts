@@ -8,7 +8,7 @@ declare namespace imports.gi.Clutter {
 		attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
 	}
 
-	export class Actor {
+	interface Actor {
 		add_child(child: any): void;
 		add_actor(element: any): void;
 		hide(): void;
@@ -27,13 +27,22 @@ declare namespace imports.gi.Clutter {
 		remove_clip(): void;
 		set_size(width: number, height: number): void;
 		opacity: number;
-		allocation: Clutter.ActorBox;
+		allocation: ActorBox;
 		//clip_to_allocation: boolean;
 		set_x_align(x_align: ActorAlign): void;
 		set_y_align(y_align: ActorAlign): void;
 		set_x_expand(expand: boolean): void;
 		set_y_expand(expand: boolean): void;
+		connect(signal: 'button-press-event' | 'button-release-event' | 'captured-event' | 'enter-event' | 'event' | 'key-press-event' | 'key-release-event' | 'leave-event' | 'motion-event' | 'scroll-event' | 'touch-event', callback: (actor: this, event: Event) => boolean | void): number;
+		connect(signal: 'destroy' | 'hide' | 'key-focus-in' | 'key-focus-out' | 'queue-relayout' | 'realize' | 'resource-scale-changed' | 'show' | 'stage-views-changed' | 'transitions-completed' | 'unrealize', callback: (actor: this) => void): number;
+		connect(signal: 'paint', callback: (actor: this, paint_context: PaintContext) => void): number;
+		connect(signal: 'parent-set', callback: (actor: this, old_parent: Actor) => void): number;
+		connect(signal: 'pick', callback: (actor: this, pick_context: PickContext) => void): number;
+		connect(signal: 'queue-redraw', callback: (actor: this, origin: Actor, volume: PaintVolume) => void): number;
+		connect(event: 'transition-stopped', callback: (name: string, is_finished: Boolean) => void): number;
 	}
+
+	export class Actor { }
 
 	export class ActorBox {
 		get_width(): number;
@@ -108,12 +117,19 @@ declare namespace imports.gi.Clutter {
 	export class Event {
 		public get_button(): number;
 		public get_coords(): number[];
+		public get_scroll_direction(): ScrollDirection;
 		public type(): EventType;
 	}
 
 	export class Color {
 
 	}
+
+	export class PickContext { }
+
+	export class PaintContext { }
+
+	export class PaintVolume { }
 
 	interface Coords {
 		x: number;

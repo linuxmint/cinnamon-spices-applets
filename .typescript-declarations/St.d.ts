@@ -1,9 +1,8 @@
 declare namespace imports.gi.St {
-	export class Widget extends Clutter.Actor {
-		constructor(options?: any);
+
+	interface WidgetWithoutParent {
 		destroy(): void;
 		style_class: string;
-		connect(id: string, binding: (...args: any) => any): void;
 		add_style_class_name(style_class: string): void;
 		add_style_pseudo_class(style_class: string): void;
 		remove_style_pseudo_class(pseudo_class: string): void;
@@ -16,6 +15,14 @@ declare namespace imports.gi.St {
 		show(): void;
 		hide(): void;
 		style: string;
+		connect(signal: 'style-changed' | 'popup-menu', callback: (actor: this) => boolean | void): number;
+	}
+
+	type WidgetType = WidgetWithoutParent & Clutter.Actor;
+	interface Widget extends WidgetType { }
+
+	export class Widget {
+		constructor(options?: any);
 	}
 
 	export class BoxLayout extends Widget {
@@ -68,11 +75,18 @@ declare namespace imports.gi.St {
 		style?: string;
 	}
 
-	export class Button extends Widget {
+	interface ButtonWithoutParent {
 		reactive: boolean;
 		label: string;
 		url: string;
 		child: any;
+		connect(signal: 'clicked', callback: (actor: this, clicked_button: number) => void): number
+	}
+
+	type ButtonType = ButtonWithoutParent & Widget
+	interface Button extends ButtonType { }
+
+	export class Button {
 		constructor(options?: ButtonOptions);
 	}
 
@@ -100,7 +114,16 @@ declare namespace imports.gi.St {
 		constructor(options?: any);
 	}
 
-	export class ScrollBar extends Widget {
+	interface ScrollBarWithoutParent {
+		get_adjustment(): Adjustment;
+		set_adjustment(adjustment: Adjustment): void;
+		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
+	}
+
+	type ScrollBarType = ScrollBarWithoutParent & Widget
+	interface ScrollBar extends ScrollBarType { }
+
+	export class ScrollBar {
 		get_adjustment(): Adjustment;
 		set_adjustment(adjustment: Adjustment): void;
 	}
