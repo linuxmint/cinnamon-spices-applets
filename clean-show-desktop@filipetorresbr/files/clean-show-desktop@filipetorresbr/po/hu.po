@@ -23,7 +23,7 @@ msgid "Clean Show Desktop"
 msgstr "Üres asztal megjelenítése"
 
 #. metadata.json->description
-msgid "An Applet to show the Desktop in the style of Windows 10 but completely customizable"
+msgid "An Applet to show the Desktop just like in Windows 10, but completely customizable"
 msgstr "Egy kisalkalmazás az Asztal Windows 10 stílusában való megjelenítéséhez, amely teljesen testreszabható"
 
 #. settings-schema.json->head->description
@@ -118,3 +118,11 @@ msgstr "Szegély szélessége"
 #. settings-schema.json->border-width->tooltip
 msgid "Select the border width"
 msgstr "Szegély szélességének kiválasztása"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr ""
+
+#. settings-schema.json->custom-color->tooltip
+msgid "When this option is disabled, the applet will try to find the accent color color of the theme"
+msgstr ""

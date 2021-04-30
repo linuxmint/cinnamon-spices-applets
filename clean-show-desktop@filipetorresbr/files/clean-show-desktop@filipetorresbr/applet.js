@@ -1,6 +1,5 @@
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const Settings = imports.ui.settings;
 const St = imports.gi.St;
 const { AppletSettings } = imports.ui.settings; 
 const PopupMenu = imports.ui.popupMenu;
@@ -12,9 +11,9 @@ const Tweener = imports.ui.tweener;
 const Clutter = imports.gi.Clutter;
 const Mainloop = imports.mainloop;
 const UUID = "clean-show-desktop@filipetorresbr";
+const AppletPath = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -33,36 +32,57 @@ class CleanShowDesktop extends Applet.IconApplet {
         this.settings.bind("on-hover-background", "hoverbackground");
         this.settings.bind("on-hover-border", "hoverborder");
         this.settings.bind("border-width", "borderwidth");
+        this.settings.bind("custom-color", "custom_color");
         this.actor.track_hover = true;
         this.signals = new SignalManager.SignalManager(null);
         this.actor.connect('enter-event', Lang.bind(this, this._on_enter));
         this.actor.connect('leave-event', Lang.bind(this, this._on_leave));
         this.signals.connect(global.stage, 'notify::key-focus', this._on_leave, this);
-        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-        this.bin = new St.Bin();
-        this.actor.add(this.bin);
         this._did_peek = true;
         this._peek_timeout_id = 0;
 
-        const STYLE = "padding: " + this.width + "px;background: " + this.background + ";border-color: " + this.border +  ";border-width: " + this.borderwidth + "px;"
-        this.actor.set_style(STYLE);
-
+		GLib.spawn_command_line_sync("bash -c " + AppletPath + "/themecolor.sh");
+	   	let [ok, out, err, exit] = GLib.spawn_command_line_sync("cat " + AppletPath + "/themecolor.txt");
+		this.color = out; 
+        this.fillcolor("leave");
+        
+        global.log(AppletPath);
         let showDeskletsOption = new PopupMenu.PopupIconMenuItem(
             _('Show Desklets'),
             'cs-desklets',
             St.IconType.SYMBOLIC
         );
-        
         showDeskletsOption.connect('activate', () => this.toggleShowDesklets());
-        this._applet_context_menu.addMenuItem(showDeskletsOption);
+        this._applet_context_menu.addMenuItem(showDeskletsOption);     
     }
-
+    
     on_applet_removed_from_panel() {
         this.signals.disconnectAllSignals();
     }
 
+    fillcolor(state){
+	  	if (this.custom_color == true) {
+	  		if (state == "hover") {
+        		const STYLE = "padding: " + this.width + "px;background: " + this.hoverbackground + ";border-color: " + this.hoverborder +  ";border-width: " + this.borderwidth + "px;";
+        		this.actor.set_style(STYLE);
+
+	  		}else{
+        	   	const STYLE = "padding: " + this.width + "px;background: " + this.background + ";border-color: " + this.border +  ";border-width: " + this.borderwidth + "px;";
+	        	this.actor.set_style(STYLE);		
+	  		}	
+    	}else{
+	  		if (state == "hover") {
+        		const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 1);border-color: " + this.color +  ", 1);border-width: " + this.borderwidth + "px;";
+        		this.actor.set_style(STYLE);
+
+	  		}else{
+        	   	const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 0.5);border-color: " + this.color +  ", 1);border-width: " + this.borderwidth + "px;";
+	        	this.actor.set_style(STYLE);
+	  		}	
+    	}
+    }
     show_all_windows(time) {
-        let windows = global.get_window_actors();
+         let windows = global.get_window_actors();
         for(let i = 0; i < windows.length; i++){
             let window = windows[i].meta_window;
             let compositor = windows[i];
@@ -81,15 +101,12 @@ class CleanShowDesktop extends Applet.IconApplet {
         this._appletEnterEventId = this.actor.connect('enter-event', () => {
             if (this.hover_delay_ms > 0) {
                 this._appletHoverDelayId = Mainloop.timeout_add(this.hover_delay_ms, () => {
-                    const STYLE = "padding: " + this.width + "px;background: " + this.hoverbackground + ";border-color: " + this.hoverborder +  ";border-width: " + this.borderwidth + "px;"
-                    this.actor.set_style(STYLE);
+                	this.fillcolor("hover");
                 });
             }else{
-                const STYLE = "padding: " + this.width + "px;background: " + this.hoverbackground + ";border-color: " + this.hoverborder +  ";border-width: " + this.borderwidth + "px;"
-                this.actor.set_style(STYLE);
+                this.fillcolor("hover");
             }
         });
-
         if (this.peek_at_desktop) {
             if (this._peek_timeout_id > 0) {
                 Mainloop.source_remove(this._peek_timeout_id);
@@ -118,9 +135,7 @@ class CleanShowDesktop extends Applet.IconApplet {
 
     _on_leave(event) {
         this._appletLeaveEventId = this.actor.connect('leave-event', () => { 
-
-            const STYLE = "padding: " + this.width + "px;background: " + this.background + ";border-color: " + this.border +  ";border-width: " + this.borderwidth + "px;"
-            this.actor.set_style(STYLE);
+            this.fillcolor("leave");
         });
 
         if (this._did_peek) {
