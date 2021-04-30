@@ -193,19 +193,6 @@ declare namespace imports.ui.main {
      */
     export function _logInfo(msg: Error | string): void;
 }
-
-declare namespace imports.ui.messageTray {
-    export class Notification {
-        constructor(source: SystemNotificationSource, title: string, message: string);
-        setTransient(value: boolean): void;
-    }
-
-    export class SystemNotificationSource {
-        constructor(name: string)
-
-        notify(notification: Notification): void;
-    }
-}
 declare namespace imports.ui.settings {
     export class AppletSettings {
         constructor(context: any, UUID: string, instanceID: number);
