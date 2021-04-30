@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.6\n"
+"Project-Id-Version: 3.0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-14 21:45+0100\n"
-"PO-Revision-Date: 2021-04-21 18:44+0200\n"
+"PO-Revision-Date: 2021-04-26 14:28+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -1435,11 +1435,11 @@ msgstr "Poskytovatel předpovědi k činnosti vyžaduje API klíč"
 
 #: 3.8/main.js:144 3.8/ui_elements/uiBar.js:35
 msgid "As of {lastUpdatedTime}"
-msgstr "K {lastUpdatedTime}"
+msgstr "Aktualizováno {lastUpdatedTime}"
 
 #: 3.8/ui_elements/uiBar.js:41
 msgid "{distance}{distanceUnit} from you"
-msgstr "{distance}{distanceUnit} od tebe"
+msgstr "{distance}{distanceUnit} od vás"
 
 #: 3.8/ui_elements/uiCurrentWeather.js:222
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -1480,8 +1480,6 @@ msgid "DMI Denmark"
 msgstr "DMI Denmark"
 
 #: 3.8/providers/danishMI.js:173
-#, fuzzy
-#| msgid "Blowing Snow"
 msgid "Blowing snow"
 msgstr "Přízemní sníh"
 
@@ -1490,8 +1488,6 @@ msgid "Heavy rain and snow"
 msgstr "Silný déšť a sněžení"
 
 #: 3.8/providers/danishMI.js:214 3.8/providers/danishMI.js:215
-#, fuzzy
-#| msgid "Light snow"
 msgid "Slight snow"
 msgstr "Lehké sněžení"
 
@@ -1504,14 +1500,10 @@ msgid "Moderate rain showers"
 msgstr "Mírné dešťové přeháňky"
 
 #: 3.8/providers/danishMI.js:243
-#, fuzzy
-#| msgid "Mixed Rain and Snow"
 msgid "Mixed rain and snow"
 msgstr "Déšť se sněhem"
 
 #: 3.8/providers/danishMI.js:250
-#, fuzzy
-#| msgid "Heavy rain and snow"
 msgid "Heavy mixed rain and snow"
 msgstr "Silný déšť a sněžení"
 
@@ -1535,10 +1527,8 @@ msgid "Met Office UK"
 msgstr "Met Office Velká Británie"
 
 #: 3.8/providers/met_uk.js:137
-#, fuzzy
-#| msgid "Can't find location"
 msgid "Data was not found for location"
-msgstr "Místo se nedaří najít"
+msgstr "Data pro lokalitu se nedaří najít"
 
 #: 3.8/providers/met_uk.js:267
 msgid "Very poor"
@@ -1851,15 +1841,11 @@ msgstr "Automaticky"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
-#| msgid "celsius"
 msgid "Celsius"
 msgstr "º Celsia"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
-#| msgid "fahrenheit"
 msgid "Fahrenheit"
 msgstr "Fahrenheity"
 
@@ -2008,7 +1994,7 @@ msgstr "Použít volitelné ikony na panelu"
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
-msgstr "Podání"
+msgstr "Prezentace"
 
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
@@ -2315,11 +2301,11 @@ msgstr "Místo 15:00 nebo 3:00 pm bude čas zobrazovat jako 15 či 3 pm"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr "Není aplikováno na volitelný set ikon, ten je symbolický v základu"
+msgstr "Není aplikováno na volitelný set ikon, ten je zjednodušený v základu"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr "Použít symbolické ikony všude v appletu"
+msgstr "Použít zjednodušené symboly všude v appletu"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -2380,54 +2366,3 @@ msgstr ""
 "lze i zadání {House number} {Street} {City/Town} {Postcode} {Country}. "
 "Formát je velmi flexibilní co se týče formátování. 3 s po té co přestanete "
 "psát by měla být adresa doplněna automaticky a očekává potvrzení."
-
-#~ msgid "Currently only used with DarkSky."
-#~ msgstr "V současné době funguje jen s DarkSky."
-
-#~ msgid "Units, Icons and Keys"
-#~ msgstr "Jednotky, Ikony a Klíče"
-
-#~ msgid "Few Clouds"
-#~ msgstr "Skoro jasno"
-
-#~ msgid "Clear Sky"
-#~ msgstr "Jasno"
-
-#~ msgid "Rain Showers"
-#~ msgstr "Dešťové přeháňky"
-
-#~ msgid "Snow Showers"
-#~ msgstr "Sněhové přeháňky"
-
-#~ msgid "Substantial Rain"
-#~ msgstr "Vydatný déšť"
-
-#~ msgid "Substantial Freezing Rain"
-#~ msgstr "Vydatný mrznoucí déšť"
-
-#~ msgid "Substantial Ice Pellets"
-#~ msgstr "Vydané srážky ledových krupek"
-
-#~ msgid "Substantial Snow"
-#~ msgstr "Vydatné sněžení"
-
-#~ msgid "Wind:"
-#~ msgstr "Vítr:"
-
-#~ msgid "Acceptable inputs is Latitude,Longitude"
-#~ msgstr "Akceptovány jsou: zeměpisná šířka, zeměpisná výška"
-
-#~ msgid "How to choose a weather provider"
-#~ msgstr "Jak vybrat poskytovatele počasí"
-
-#~ msgid "Allowed location formats"
-#~ msgstr "Povolené lokační formáty"
-
-#~ msgid "View additional information"
-#~ msgstr "Zobrazit dodatečné informace"
-
-#~ msgid "Delete current location from storage"
-#~ msgstr "Smazat současnou lokaci z úložiště"
-
-#~ msgid "Removes location information from storage file."
-#~ msgstr "Odstraní informaci o současné lokaci ze souboru."
