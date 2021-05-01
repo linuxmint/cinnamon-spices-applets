@@ -1,6 +1,6 @@
 declare namespace imports.gi.St {
 
-	interface WidgetWithoutParent {
+	interface IWidget {
 		destroy(): void;
 		style_class: string;
 		add_style_class_name(style_class: string): void;
@@ -18,7 +18,9 @@ declare namespace imports.gi.St {
 		connect(signal: 'style-changed' | 'popup-menu', callback: (actor: this) => boolean | void): number;
 	}
 
-	type WidgetType = WidgetWithoutParent & Clutter.Actor;
+	// This is the only way we can extend a class when its bases has different signatures. 
+	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
+	type WidgetType = IWidget & Clutter.Actor;
 	interface Widget extends WidgetType { }
 
 	export class Widget {
@@ -75,7 +77,7 @@ declare namespace imports.gi.St {
 		style?: string;
 	}
 
-	interface ButtonWithoutParent {
+	interface IButton {
 		reactive: boolean;
 		label: string;
 		url: string;
@@ -83,7 +85,7 @@ declare namespace imports.gi.St {
 		connect(signal: 'clicked', callback: (actor: this, clicked_button: number) => void): number
 	}
 
-	type ButtonType = ButtonWithoutParent & Widget
+	type ButtonType = IButton & Widget
 	interface Button extends ButtonType { }
 
 	export class Button {
@@ -114,13 +116,13 @@ declare namespace imports.gi.St {
 		constructor(options?: any);
 	}
 
-	interface ScrollBarWithoutParent {
+	interface IScrollBar {
 		get_adjustment(): Adjustment;
 		set_adjustment(adjustment: Adjustment): void;
 		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
 	}
 
-	type ScrollBarType = ScrollBarWithoutParent & Widget
+	type ScrollBarType = IScrollBar & Widget
 	interface ScrollBar extends ScrollBarType { }
 
 	export class ScrollBar {
