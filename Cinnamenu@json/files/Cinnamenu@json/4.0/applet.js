@@ -38,9 +38,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (orientation === St.Side.BOTTOM || orientation === St.Side.TOP) {
             this.set_applet_label(_('Initializing'));
         }
-        this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
+        //this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
         this.appFavorites = getAppFavorites();
-        this.recentsEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
         this.currentCategory = 'all';
         this.gpu_offload_supported = Main.gpu_offload_supported;
         this.isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
@@ -64,12 +63,8 @@ class CinnamenuApplet extends TextIconApplet {
                                                 (w,h) => this.onBoxResized(w,h),
                                                 () => this.settings.customMenuWidth,
                                                 () => this.settings.customMenuHeight);
-        this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => {
-                        this.recentsEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
-                        this.categoriesView.update();
-                        if (this.currentCategory === 'recents' && !this.recentsEnabled) {
-                            this.currentCategory = 'all';
-                        } });
+        //this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY,
+        //                                                            () => this._onEnableRecentsChange());
         this.signals.connect(Main.themeManager, 'theme-set', () => {this._updateIconAndLabel();
                                                                     setTimeout(() => this._refresh()); });
         this.iconTheme = Gtk.IconTheme.get_default();
@@ -77,7 +72,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.appSystem, 'installed-changed', () => {   this.apps.installedChanged();
                                                                             this._refresh(); });
         this.signals.connect(this.appFavorites, 'changed', () => {
-                        if (this.appsView) {// Check if the menu has been rendered at least once
+                        if (this.appsView) {// Check if display is initialised
                             this.sidebar.populate();
                             this.updateMenuSize();
                             if (this.currentCategory === 'favorite_apps' && !this.searchActive) {
@@ -94,6 +89,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.bookmarksManager = new BookmarksManager(this.appSystem);
         }
         this.recentApps = new RecentApps(this);
+        this._onEnableRecentsChange();
         this._updateActivateOnHover();
         this._updateKeybinding();
         this._initDisplay();
@@ -117,6 +113,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'add-favorites',             value: 'addFavorites',          cb: this._refresh },
 
         { key: 'show-places-category',      value: 'showPlaces',            cb: this._onEnablePlacesChange },
+        { key: 'show-recents-category',     value: 'showRecents',           cb: this._onEnableRecentsChange },
         { key: 'show-web-bookmarks-category', value: 'enableWebBookmarks',  cb: this._onEnableWebBookmarksChange },
         { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: this._onEnableFavAppsCategory },
         { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: () => this.categoriesView.update()},
@@ -243,6 +240,14 @@ class CinnamenuApplet extends TextIconApplet {
     _onEnablePlacesChange() {
         this.categoriesView.update();
         if (this.currentCategory === 'places' && !this.settings.showPlaces) {
+            this.currentCategory = 'all';
+        }
+    }
+
+    _onEnableRecentsChange() {
+        //const recentFilesEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
+        this.recentsEnabled = this.settings.showRecents; // && recentFilesEnabled;
+        if (this.currentCategory === 'recents' && !this.recentsEnabled) {
             this.currentCategory = 'all';
         }
     }
@@ -1087,15 +1092,14 @@ class CinnamenuApplet extends TextIconApplet {
 
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
+            const MAX_SEARCH_TIME = 100;
             let filesSearched = 0;
             let thisSearchId = this.currentSearchId;
             let results = [];
             let recursionCount = 1;
+            const searchStartTime = Date.now();
 
             const searchDir = (folder, pattern, depth, thisSearchId) => {
-                if (!this.searchActive || thisSearchId !== this.currentSearchId) {
-                    return;
-                }
                 const dir = Gio.file_new_for_path(folder);
                 let enumerator;
                 dir.enumerate_children_async(
@@ -1106,53 +1110,64 @@ class CinnamenuApplet extends TextIconApplet {
                     } catch(e) {
                         global.logWarning('Cinnamenu file search:' + e.message);
                     }
-
-                    let next;
-                    if (enumerator) {
-                        next = enumerator.next_file(null);
+                    if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                        if (enumerator) {
+                            enumerator.close(null);
+                        }
+                        return;
                     }
-                    while (next) {
-                        filesSearched++;
-                        const filename = next.get_name();
-                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                        if (filename.toUpperCase().startsWith(pattern)) {
-                            const file = Gio.file_new_for_path(filePath);
-                            //if file then treat as isFolderviewFile and if directory then treat as isPlace
-                            const foundFile = { name: filename,
-                                                score: pattern.length > 2 ? 1.2 : 1.1,
-                                                nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
-                                                                            '</b>' + filename.substr(pattern.length),
-                                                gicon: next.get_icon(),
-                                                uri: file.get_uri(),
-                                                mimeType: next.get_content_type(),
-                                                description: filePath,
-                                                isPlace: isDirectory,
-                                                isFolderviewFile: !isDirectory,
-                                                deleteAfterUse: true };
-                            if (isDirectory) {
-                                const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
-                                if (defaultInfo) {
-                                    foundFile.launch = () => { defaultInfo.launch([file], null); };
+                    if (Date.now() - searchStartTime < MAX_SEARCH_TIME) {
+                        let next;
+                        if (enumerator) {
+                            next = enumerator.next_file(null);
+                        }
+                        while (next) {
+                            filesSearched++;
+                            const filename = next.get_name();
+                            const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
+                            const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                            if (filename.toUpperCase().startsWith(pattern)) {
+                                const file = Gio.file_new_for_path(filePath);
+                                //if file then treat as isFolderviewFile and if directory then treat as isPlace
+                                const foundFile = { name: filename,
+                                                    score: pattern.length > 2 ? 1.2 : 1.1,
+                                                    nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
+                                                                                '</b>' + filename.substr(pattern.length),
+                                                    gicon: next.get_icon(),
+                                                    uri: file.get_uri(),
+                                                    mimeType: next.get_content_type(),
+                                                    description: filePath,
+                                                    isPlace: isDirectory,
+                                                    isFolderviewFile: !isDirectory,
+                                                    deleteAfterUse: true };
+                                if (isDirectory) {
+                                    const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
+                                    if (defaultInfo) {
+                                        foundFile.launch = () => { defaultInfo.launch([file], null); };
+                                    }
                                 }
+                                results.push(foundFile);
                             }
-                            results.push(foundFile);
-                        }
 
-                        //Enter subdirectories
-                        if (isDirectory && depth < 4 && !next.get_is_hidden() && recursionCount < 50) {
-                            recursionCount++;
-                            setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
+                            //Enter subdirectories
+                            if (isDirectory && depth < 4 && !next.get_is_hidden() &&
+                                        filesSearched < 10000 && //prevent "Too many open files" error
+                                        recursionCount < 100 && //prevent "Too many open files" error
+                                        Date.now() - searchStartTime < MAX_SEARCH_TIME) {//prevent blocking of UI
+                                recursionCount++;
+                                searchDir(filePath, pattern, depth + 1, thisSearchId);
+                                //setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
+                            }
+                            next = enumerator.next_file(null);
                         }
-                        next = enumerator.next_file(null);
                     }
                     if (enumerator) {
                         enumerator.close(null);
                     }
-
                     //When recursionCount gets back down to 0, all recursions of searchDir() have finished
                     //and thus file search is completed. Detect this here and add results to appsView.
                     recursionCount--;
+                    //global.log(recursionCount);
                     if (recursionCount === 0 && results.length > 0 && this.searchActive &&
                                                             thisSearchId === this.currentSearchId) {
                         primaryResults = primaryResults.concat(results);
@@ -1161,7 +1176,7 @@ class CinnamenuApplet extends TextIconApplet {
                 });
             };
 
-            setTimeout(() => searchDir(GLib.get_home_dir(), pattern, 0, thisSearchId));
+            searchDir(GLib.get_home_dir(), pattern, 0, thisSearchId);
         }
 
         ///----search providers--------

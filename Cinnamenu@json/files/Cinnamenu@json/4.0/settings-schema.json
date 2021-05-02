@@ -46,6 +46,7 @@
             "title":"Content",
             "keys":[
                 "show-places-category",
+                "show-recents-category",
                 "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
@@ -166,6 +167,12 @@
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
+    "show-recents-category":{
+        "type":"switch",
+        "default":true,
+        "description":"Show recent items",
+        "tooltip":"Show recent items category in the menu"
+    },
     "show-web-bookmarks-category":{
         "type":"checkbox",
         "default":false,
@@ -265,9 +272,9 @@
     },
     "search-home-folder":{
         "type":"checkbox",
-        "default":false,
+        "default":true,
         "description":"Search home folder",
-        "tooltip":"When searching, also search home folder for files (Note: Recommended only if you have an SSD, otherwise this may slow down the search function)"
+        "tooltip":"When searching, also search home folder for files"
     },
     "show-hidden-files":{
         "type":"checkbox",
