@@ -119,4 +119,57 @@ declare namespace imports.gi.Clutter {
 		x: number;
 		y: number;
 	}
+
+	export enum PickMode {
+
+	}
+
+	export enum PaintFlag {
+		
+	}
+
+	export interface Perspective {
+		fovy: number;
+		aspect: number;
+		z_near: number;
+		z_far: number;
+	}
+
+	export class Stage extends Actor {
+		capture_into(paint: boolean, rect: cairo.RectangleInt, data: number): void;
+		clear_stage_views(): void;
+		ensure_viewport(): void;
+		event(event: Event): void;
+		get_actor_at_pos(pick_mode: PickMode, x: number, y: number): Actor;
+		get_capture_final_size(rect: cairo.RectangleInt, width: number, height: number, scale: number): boolean;
+		get_frame_counter(): number;
+		get_key_focus(): Actor;
+		/**
+		 * 
+		Returns:
+
+        width (Number) — return location for the minimum width, in pixels,
+        or null
+        height (Number) — return location for the minimum height, in pixels,
+        or null
+
+
+		 */
+		get_minimum_size(): number[];
+		get_motion_events_enabled(): boolean;
+		get_perspective(): Perspective;
+		get_throttle_motion_events(): boolean;
+		get_title(): string;
+		get_use_alpha(): boolean;
+		paint_to_buffer(rect: cairo.RectangleInt, scale: number, data: number, stride: number, format: any, paint_flags: PaintFlag): boolean;
+		paint_to_framebuffer(framebuffer: any, rect: cairo.RectangleInt, scale: number, paint_flags: PaintFlag): void;
+		read_pixels(x: number, y: number, width: number, height: number): ByteArray
+		schedule_update(): void;
+		set_key_focus(actor: Actor): void;
+		set_minimum_size(width: number, height: number): void;
+		set_motion_events_enabled(enabled: boolean): void;
+		set_throttle_motion_events(throttle: boolean): void;
+		set_title(title: string): void;
+		set_use_alpha(use_alpha: boolean): void;
+	}
 }
