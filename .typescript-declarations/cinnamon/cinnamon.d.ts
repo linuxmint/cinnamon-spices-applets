@@ -193,22 +193,6 @@ declare namespace imports.ui.main {
      */
     export function _logInfo(msg: Error | string): void;
 }
-declare namespace imports.ui.settings {
-    export class AppletSettings {
-        constructor(context: any, UUID: string, instanceID: number);
-        setValue(key: string, value: any): void;
-        getValue(key: string): any;
-        connect(key: string, callback: Function): void;
-        bindProperty(direction: BindingDirection, key: string, keyProp: string, callback: Function, something: any): void;
-        bind(key: string, applet_prop: string | boolean | number, callback?: Function, user_data?: any): void
-    }
-
-    export enum BindingDirection {
-        IN = 1,
-        BIDIRECTIONAL = 2,
-        OUT = 3
-    }
-}
 
 declare namespace imports.mainloop {
     /**
@@ -219,21 +203,6 @@ declare namespace imports.mainloop {
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
     export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): number;
     export function source_remove(id: any): void;
-}
-
-declare namespace imports.gi.Cinnamon {
-	function util_format_date(format: string, milliseconds: number): string;
-	enum Cursor {
-		//INCOMPLETE
-		DND_UNSUPPORTED_TARGET,
-		DND_COPY,
-		DND_MOVE,
-		POINTING_HAND,
-	}
-
-	export class GenericContainer extends gi.St.Widget {
-
-	}
 }
 
 declare namespace imports.gettext {
