@@ -36,20 +36,6 @@ declare class GJSError {
     matches(domain: number, code: imports.gi.Gio.IOErrorEnum): boolean;
 }
 
-declare namespace imports {
-   export const byteArray: ByteArray;
-   class ByteArray {
-       toString(array: Uint8Array): string;
-       /**
-        * Unknown what it does
-        * @param text 
-        */
-       fromGBytes(text: any): any;
-       fromString(text: string): gi.GLib.Bytes;
-       fromArray(array: Uint8Array): any;
-   }
-}
-
 declare namespace imports.cairo {
     export class LinearGradient {
         constructor(margin: number, gradientOffset: number, width: number, height: number);
@@ -217,4 +203,16 @@ declare namespace imports {
     class Lang {
         bind<T, CTX>(ctx: CTX, func: T): T;
     }
+
+	export const byteArray: ByteArray;
+	class ByteArray {
+		toString(array: Uint8Array): string;
+		/**
+		 * Unknown what it does
+		 * @param text 
+		 */
+		fromGBytes(text: any): any;
+		fromString(text: string): gi.GLib.Bytes;
+		fromArray(array: Uint8Array): any;
+	}
 }
