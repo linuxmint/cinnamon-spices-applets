@@ -262,8 +262,7 @@ IpIndicatorApplet.prototype = {
 
         this._infoBox = new St.BoxLayout();
         this._infoBox.set_vertical(true);
-        this._infoBox.set_margin_left(22);
-        this._infoBox.set_margin_right(22);
+        this._infoBox.set_style("margin-left: 22px; margin-right: 22px");
 
         this._ip = new St.Label();
         this._infoBox.add(this._ip);
