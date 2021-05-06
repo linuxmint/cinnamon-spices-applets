@@ -990,7 +990,7 @@ class CinnamenuApplet extends TextIconApplet {
             try {
                 ans = eval(exp);
             } catch(e) {
-                global.logWarning('Cinnamenu: Error evaluating expression' + e.message);
+                global.logWarning('Cinnamenu: Error evaluating expression: ' + e.message);
             }
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
@@ -1092,14 +1092,15 @@ class CinnamenuApplet extends TextIconApplet {
 
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
-            const MAX_SEARCH_TIME = 100;
-            let filesSearched = 0;
-            let thisSearchId = this.currentSearchId;
-            let results = [];
-            let recursionCount = 1;
-            const searchStartTime = Date.now();
+            let updateInterval = 100;
+            const MAX_FOLDERS_TODO = 100;
+            const results = [];
+            const foldersToDo = [];
+            foldersToDo.push(GLib.get_home_dir());
+            let lastUpdateTime = Date.now();
 
-            const searchDir = (folder, pattern, depth, thisSearchId) => {
+            const searchNextDir = (depth, thisSearchId) => {
+                const folder = foldersToDo.shift();
                 const dir = Gio.file_new_for_path(folder);
                 let enumerator;
                 dir.enumerate_children_async(
@@ -1116,67 +1117,70 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                         return;
                     }
-                    if (Date.now() - searchStartTime < MAX_SEARCH_TIME) {
-                        let next;
-                        if (enumerator) {
-                            next = enumerator.next_file(null);
-                        }
-                        while (next) {
-                            filesSearched++;
-                            const filename = next.get_name();
-                            const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-                            const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                            if (filename.toUpperCase().startsWith(pattern)) {
-                                const file = Gio.file_new_for_path(filePath);
-                                //if file then treat as isFolderviewFile and if directory then treat as isPlace
-                                const foundFile = { name: filename,
-                                                    score: pattern.length > 2 ? 1.2 : 1.1,
-                                                    nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
-                                                                                '</b>' + filename.substr(pattern.length),
-                                                    gicon: next.get_icon(),
-                                                    uri: file.get_uri(),
-                                                    mimeType: next.get_content_type(),
-                                                    description: filePath,
-                                                    isPlace: isDirectory,
-                                                    isFolderviewFile: !isDirectory,
-                                                    deleteAfterUse: true };
-                                if (isDirectory) {
-                                    const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
-                                    if (defaultInfo) {
-                                        foundFile.launch = () => { defaultInfo.launch([file], null); };
-                                    }
-                                }
-                                results.push(foundFile);
-                            }
-
-                            //Enter subdirectories
-                            if (isDirectory && depth < 4 && !next.get_is_hidden() &&
-                                        filesSearched < 10000 && //prevent "Too many open files" error
-                                        recursionCount < 100 && //prevent "Too many open files" error
-                                        Date.now() - searchStartTime < MAX_SEARCH_TIME) {//prevent blocking of UI
-                                recursionCount++;
-                                searchDir(filePath, pattern, depth + 1, thisSearchId);
-                                //setTimeout(() => searchDir(filePath, pattern, depth + 1, thisSearchId));
-                            }
-                            next = enumerator.next_file(null);
-                        }
+                    let next;
+                    if (enumerator) {
+                        next = enumerator.next_file(null);
                     }
+                    while (next) {
+                        const filename = next.get_name();
+                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
+                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                        if (filename.toUpperCase().startsWith(pattern)) {
+                            const file = Gio.file_new_for_path(filePath);
+                            //if file then treat as isFolderviewFile and if directory then treat as isPlace
+                            const foundFile = {
+                                        name: filename,
+                                        score: pattern.length > 2 ? 1.2 : 1.1,
+                                        nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
+                                                                '</b>' + filename.substr(pattern.length),
+                                        gicon: next.get_icon(),
+                                        uri: file.get_uri(),
+                                        mimeType: next.get_content_type(),
+                                        description: filePath,
+                                        isPlace: isDirectory,
+                                        isFolderviewFile: !isDirectory,
+                                        deleteAfterUse: true };
+                            if (isDirectory) {
+                                const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
+                                if (defaultInfo) {
+                                    foundFile.launch = () => { defaultInfo.launch([file], null); };
+                                }
+                            }
+                            results.push(foundFile);
+                        }
+
+                        //Add subdirectories to foldersToDo[]
+                        if (isDirectory && depth < 4 && !next.get_is_hidden() &&
+                                                            foldersToDo.length < MAX_FOLDERS_TODO) {
+                            foldersToDo.push(filePath);
+                        }
+                        next = enumerator.next_file(null);
+                    }
+
                     if (enumerator) {
                         enumerator.close(null);
                     }
-                    //When recursionCount gets back down to 0, all recursions of searchDir() have finished
-                    //and thus file search is completed. Detect this here and add results to appsView.
-                    recursionCount--;
-                    //global.log(recursionCount);
-                    if (recursionCount === 0 && results.length > 0 && this.searchActive &&
-                                                            thisSearchId === this.currentSearchId) {
-                        primaryResults = primaryResults.concat(results);
-                        finish();
+
+                    //update display of results at intervals or when search completed
+                    if (foldersToDo.length === 0 || Date.now() - lastUpdateTime > updateInterval) {
+                        if (results.length > 0 && this.searchActive &&
+                                                                thisSearchId === this.currentSearchId) {
+                            primaryResults = primaryResults.concat(results);
+                            finish();
+                            results.length = 0;
+                        }
+                        lastUpdateTime = Date.now();
+                        updateInterval *= 3;//progressively longer update delays
+                    }
+
+                    //continue search if not completed
+                    if (foldersToDo.length > 0) {
+                        searchNextDir(depth, thisSearchId);
                     }
                 });
             };
 
-            searchDir(GLib.get_home_dir(), pattern, 0, thisSearchId);
+            searchNextDir(0, this.currentSearchId);
         }
 
         ///----search providers--------
