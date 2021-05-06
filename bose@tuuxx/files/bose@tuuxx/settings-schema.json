@@ -1,0 +1,24 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Settings for bose@tuuxx"
+    },
+    "address": {
+        "type": "entry",
+        "default": "28:11:A5:DA:EF:04",
+        "description": "Address of the Bluethooth BOSE device:",
+        "tooltip": "Format: xx:xx:xx:xx:xx:xx"
+    },
+    "mute": {
+        "type": "switch",
+        "default": "false",
+        "description": "Mute sound if device is disconnected: [in development]",
+        "tooltip": "Mute sound if device is disconnected:"
+    },
+    "audioMode": {
+        "type": "switch",
+        "default": "false",
+        "description": "Switch back to Audio Mode: [in development]",
+        "tooltip": "Switch back to Audio Mode if tools change to headset mode"
+    }
+}
