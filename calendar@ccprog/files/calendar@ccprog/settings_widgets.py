@@ -4,6 +4,11 @@ from JsonSettingsWidgets import JSONSettingsList
 from xapp.SettingsWidgets import ComboBox, Entry
 import pytz
 from gi.repository import Gtk
+import gettext
+from pathlib import Path
+
+# i18n
+gettext.install("calendar@ccprog", str(Path.home()) + "/.local/share/locale")
 
 TZ_NO_REGION = 'Etc'
 
@@ -114,8 +119,8 @@ class ClocksList(JSONSettingsList):
 
         columns = [
             self.settings.get_property('worldclocks', 'columns')[0],
-            {"id": "region", "title": "Region", "options": self.region_list},
-            {"id": "city", "title": "City", "options": self.region_map[data['region']]}
+            {"id": "region", "title": _("Region"), "options": self.region_list},
+            {"id": "city", "title": _("City"), "options": self.region_map[data['region']]}
         ]
 
         widgets = {}

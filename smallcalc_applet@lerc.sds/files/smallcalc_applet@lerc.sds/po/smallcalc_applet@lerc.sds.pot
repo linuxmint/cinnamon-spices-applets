@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-22 12:55+0800\n"
+"POT-Creation-Date: 2021-02-27 00:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:45
+#: applet.js:37 applet.js:96
 msgid "Show calculator"
 msgstr ""
 
-#: applet.js:238
-msgid "  C  "
+#: applet.js:99
+msgid "Hide calculator"
 msgstr ""
 
-#: applet.js:239
-msgid " AC "
-msgstr ""
-
-#. smallcalc_applet@lerc.sds->metadata.json->description
-msgid "A nice compact popup calculator"
-msgstr ""
-
-#. smallcalc_applet@lerc.sds->metadata.json->name
+#. metadata.json->name
 msgid "SmallCalc"
 msgstr ""
 
-#. smallcalc_applet@lerc.sds->settings-
-#. schema.json->definitionsheader->description
+#. metadata.json->description
+msgid "A nice compact popup calculator"
+msgstr ""
+
+#. settings-schema.json->definitionsheader->description
 msgid "Initial definitions"
+msgstr ""
+
+#. settings-schema.json->definitions->description
+msgid "Define constants and functions to use in calculator"
 msgstr ""

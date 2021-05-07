@@ -19,9 +19,9 @@ class PopupResizeHandler {
 
         this._signals = new SignalManager.SignalManager(null);
 
-        this._signals.connect(this.actor, "motion-event", (...args) => this._motion_event(...args));
-        this._signals.connect(this.actor, "leave-event", (...args) => this._leave_event(...args));
-        this._signals.connect(this.actor, "button-press-event", (...args) => this._onButtonPress(...args));
+        this._signals.connect(this.actor, 'motion-event', (...args) => this._motion_event(...args));
+        this._signals.connect(this.actor, 'leave-event', (...args) => this._leave_event(...args));
+        this._signals.connect(this.actor, 'button-press-event', (...args) => this._onButtonPress(...args));
 
         this.no_edges_draggable = true;
         this.inhibit_resizing = false;
@@ -45,10 +45,7 @@ class PopupResizeHandler {
         if (event.get_button() != 1)
             return false;
 
-        //---Start drag---
-        //intermittent bug causing cinnamon to crash so ensure no settings callbacks during resizing
-        this.applet.settingsObj.finalize();
-        this.applet.initSettings();
+        //---Start drag------
 
         this._grabEvents();
         this.resizingInProgress = true;
@@ -92,7 +89,7 @@ class PopupResizeHandler {
         this.drag_start_position = null;
         this.drag_start_size = null;
         this.resizingInProgress = false;
-        //update position again while this.resizingInProgress == false so that applet can update settings
+        //update position again while this.resizingInProgress === false so that applet can update settings
         this.callback(this.last_new_user_width, this.last_new_user_height);
     }
 

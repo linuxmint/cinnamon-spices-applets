@@ -1,5 +1,82 @@
 # Changelog
 
+## 3.0.6
+
+* Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
+* Move Typescript declarations out of the weather applet folder to prevent update triggers from other applets making declaration changes. Please review this now if it's ok, should be in a folder with a different name or have a more thorough README etc.
+* Update de.po with contribution from kipuka@eclipso.eu
+* Add deprecation notices for relevant providers and their EOL date
+* Make provider names translatable
+* Add stack trace to errors (even if they do not seem to be correct)
+* Add option to switch between textual and icon representation of wind direction
+* Fixes [#3738](https://github.com/linuxmint/cinnamon-spices-applets/issues/3738)
+* Fixes [#3733](https://github.com/linuxmint/cinnamon-spices-applets/issues/3733)
+
+## 3.0.5
+
+* Fixes [#3654](https://github.com/linuxmint/cinnamon-spices-applets/issues/3654)
+* Fixes [#3659](https://github.com/linuxmint/cinnamon-spices-applets/issues/3659)
+
+## 3.0.4
+
+* Add declarations for some of the cinnamon js files an organizing declarations better (and add more when I feel up to it again). Technically anyone can use it if want to use Typescript by including the declarations folder into their tsconfig.json file, but whatever.
+* Resolves [#3603](https://github.com/linuxmint/cinnamon-spices-applets/issues/3603)
+* Add minutely precipitation under current condition, when there is any (and the setting is on)
+* Add more tooltips to settings
+* OpenWeatherMap can also display Precipitation chance if there is no volume specified
+* Autoformat 3.8 and new declaration files
+* Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
+
+## 3.0.3
+
+* Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming
+
+* Fixes [#3539](https://github.com/linuxmint/cinnamon-spices-applets/issues/3539) - Revert capitalization of every word in the applet label.
+
+* Fix some text in the settings-schema, they didn't make much sense or were missing some explanations
+
+* Change Temperature units to be capitalized
+
+* Fixes [#3556](https://github.com/linuxmint/cinnamon-spices-applets/issues/3556)
+
+* Fixes [#3554](https://github.com/linuxmint/cinnamon-spices-applets/issues/3554)
+
+* Fixes [#3567](https://github.com/linuxmint/cinnamon-spices-applets/issues/3567)
+
+## 3.0.2
+
+* Fix icons for Met Norway, some are missing
+
+* Fixes [#3507](https://github.com/linuxmint/cinnamon-spices-applets/issues/3507) - Reorganize settings, Add help text where it belongs, to the tooltips
+
+* Add Danish Meteorologist Institute as a Weather Provider
+
+* Fixes [#3538](https://github.com/linuxmint/cinnamon-spices-applets/issues/3538) - Make sure French days are capitalized and Use Locale formatting for percent (humidity)
+
+## 3.0.1
+
+* Fix issue where Symbolic icons setting was not reflected in the app when changed
+
+* Fix [#3486](https://github.com/linuxmint/cinnamon-spices-applets/issues/3486), now wind icons point to the right direction
+
+* Fix wind icon color when non-symbolic icons used in the applet
+
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
+
+* Make network and DNS related errors soft errors again
+
+## 3.0.0
+
+* Deprecating 3.0 in favor of refactoring 3.8 codebase to use in-build module resolution in TS
+* Fix issue in 3.0 where locations were not deleted from locationstore
+* Inline icons now respect the current font size
+* Buttons should remain highlighted after clicked as long as the cursor is still in their area
+* Change location storage to config based instead of file based
+* Add Visual Crossing as an API choice
+* Allow saving automatic locations
+* Saved locations will be prioritized based on the search entry when getting locations for refresh
+* Wind directions are now represented by icons
+
 ## 2.7.0
 
 * Fix [#3334](https://github.com/linuxmint/cinnamon-spices-applets/issues/3334), Add missing Weather conditions localization for Yahoo
@@ -11,7 +88,7 @@
 * Add option to short display Hourly weather times
 * Minor refactor
 * Fix typos
-* OpenWeatherMap now shows Feels Like temerature instead of Cloudiness
+* OpenWeatherMap now shows Feels Like temperature instead of Cloudiness
 
 ## 2.6.9
 
@@ -116,7 +193,7 @@ Fixes:
 ## 2.4.6
 
 * Fixes [#2907](https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
-* Update Hungraian translation
+* Update Hungarian translation
 
 ## 2.4.5
 
@@ -194,7 +271,7 @@ Fixes:
 
 ## 2.3.0
 
-* Fixed Issues with Debian, now Polyfilling Promises when needed
+* Fixed Issues with Debian, now polyfilled Promises when needed
 * Reworked on how to import from other files, now in line with other applets
 * Utility functions moved to other file.
 * Typescript declarations reorganized now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*

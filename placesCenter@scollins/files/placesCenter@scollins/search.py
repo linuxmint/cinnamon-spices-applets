@@ -256,7 +256,7 @@ class SearchWindow(Gtk.Window):
             return False
         else:
             if os.path.realpath(path) in self.dirs:
-                GObject.idle_add(self.setStatusText, _("Skipping") + ' ' + path + (_(" - direcotry already searched")))
+                GObject.idle_add(self.setStatusText, _("Skipping") + ' ' + path + (_(" - directory already searched")))
                 return True
 
     def isMatch(self, key, child):

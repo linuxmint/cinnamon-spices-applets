@@ -153,6 +153,7 @@ BackgroundProcess.prototype = {
         this.standard_error_data_stream = new Gio.DataInputStream({ base_stream: this.standard_error_unix_stream });
         this.standard_error_cancellable = new Gio.Cancellable();
         this.standard_output_cancellable = new Gio.Cancellable();
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
     },
 
     set_callback_process_finished: function(callback_object, callback_function) {
@@ -265,7 +266,7 @@ BackgroundProcess.prototype = {
    },
 
    _read_standard_output_buffer: function(stream) {
-       this.standard_output_content = stream.peek_buffer().toString();
+       this.standard_output_content = this.cinnamon_version_adapter.byte_array_to_string(stream.peek_buffer());
    },
 
    increase_buffer_size: function(stream) {
@@ -305,7 +306,7 @@ BackgroundProcess.prototype = {
     },
 
     _read_standard_error_buffer: function(stream) {
-       this.standard_error_content = stream.peek_buffer().toString();
+       this.standard_error_content = this.cinnamon_version_adapter.byte_array_to_string(stream.peek_buffer());
     },
 
     _close_streams: function(){

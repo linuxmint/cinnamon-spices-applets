@@ -13,7 +13,7 @@
    version="1.1"
    id="svg65"
    sodipodi:docname="bing-wallpaper-symbolic.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <metadata
      id="metadata71">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,27 +37,23 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2560"
-     inkscape:window-height="1383"
+     inkscape:window-width="1600"
+     inkscape:window-height="842"
      id="namedview67"
      showgrid="false"
-     inkscape:zoom="9.8333333"
-     inkscape:cx="12"
-     inkscape:cy="12"
+     inkscape:zoom="19.666667"
+     inkscape:cx="14.14577"
+     inkscape:cy="11.897278"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg65" />
+     inkscape:current-layer="svg65"
+     inkscape:document-rotation="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-page="true" />
   <path
-     d="M0 0h24v24H0z"
-     fill="none"
-     id="path61" />
-  <path
-     d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+     style="fill:#cccccc;fill-opacity:1;stroke-width:0.11094"
+     d="M 14.181818,5.4545456 10.090909,10.90909 13.2,15.054545 11.454545,16.363636 C 9.6109091,13.90909 6.5454545,9.8181818 6.5454545,9.8181818 L 0,18.545454 h 24 z"
      id="path63" />
-  <path
-     style="fill:#cccccc;fill-opacity:1;stroke-width:0.10169491"
-     d="m 1.1389831,17.94829 c 0,-0.02844 1.3189078,-1.809704 2.9309064,-3.958363 l 2.9309065,-3.906654 2.179263,2.905226 c 1.198595,1.597875 2.208505,2.950316 2.244247,3.005424 0.0948,0.146171 1.73642,-1.129846 1.646488,-1.279799 -0.03988,-0.0665 -0.679049,-0.928617 -1.420372,-1.915822 l -1.347861,-1.794918 1.840552,-2.4556226 c 1.012303,-1.3505923 1.873312,-2.4191502 1.913351,-2.3745732 0.04004,0.044577 2.007328,2.6666423 4.37175,5.8268118 2.364422,3.160169 4.343822,5.802966 4.398667,5.872881 C 22.906521,17.974405 20.733224,18 12.032791,18 6.0411966,18 1.1389831,17.97673 1.1389831,17.94829 Z"
-     id="path73"
-     inkscape:connector-curvature="0" />
 </svg>

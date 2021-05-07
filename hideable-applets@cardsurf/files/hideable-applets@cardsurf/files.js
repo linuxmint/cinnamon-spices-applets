@@ -1,7 +1,18 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Gettext = imports.gettext;
 
+let Compatibility;
+if (typeof require !== 'undefined') {
+    Compatibility = require('./compatibility');
+} else {
+    Compatibility = AppletDirectory.compatibility;
+}
+
+function _(str) {
+    return Gettext.dgettext(uuid, str);
+}
 
 
 
@@ -15,6 +26,8 @@ File.prototype = {
     _init: function(path) {
         this.newline = "\n";
         this.regex_newline = /(?:[\n\r]+)/;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
+
         this.path = path;
         this.file = Gio.file_new_for_path(this.path);
     },
@@ -25,7 +38,7 @@ File.prototype = {
 
     read: function() {
         let array_chars = this.read_chars();
-        let string = array_chars.toString().trim();
+        let string = this.cinnamon_version_adapter.byte_array_to_string(array_chars).trim();
         let array_strings = string.length == 0 ? [] : string.split(this.regex_newline);
         return array_strings;
     },

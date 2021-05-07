@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-19 00:25+0100\n"
+"PO-Revision-Date: 2021-03-22 17:38+0000\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. 3.2 4.0
@@ -213,8 +213,6 @@ msgid "Use a custom icon"
 msgstr "Použite vlastnú ikonu"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Použite vlastnú ikonu"
 
@@ -255,8 +253,6 @@ msgid "Open menu on hover"
 msgstr "Otvorte ponuku na hover"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Keď prejdem myšou, otvorte ponuku"
 
@@ -281,16 +277,12 @@ msgid "Activate categories on click"
 msgstr "Aktivujte kategórie kliknutím"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "Aktivujte kategórie kliknutím"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Povoliť automatické posúvanie v zozname aplikácií"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -313,10 +305,8 @@ msgid "Enable search providers"
 msgstr "Povoliť poskytovateľov vyhľadávania"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable search providers"
 msgid "Include search provider results in searches"
-msgstr "Povoliť poskytovateľov vyhľadávania"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Example Search Providers"
@@ -347,8 +337,6 @@ msgid "Show bookmarks and places"
 msgstr "Zobraziť záložky a miesta"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
 msgstr "Zobraziť záložky a miesta"
 
@@ -409,10 +397,8 @@ msgid "None"
 msgstr "nikto"
 
 #. 4.0
-#, fuzzy
-#| msgid "Show application descriptions under titles"
 msgid "Choose where to show application descriptions"
-msgstr "Zobraziť popisy aplikácií pod názvami"
+msgstr ""
 
 #. 4.0
 msgid "Session buttons location"
@@ -439,19 +425,11 @@ msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
 #. 4.0
-#, fuzzy
-#| msgid "Add favorites to session buttons."
 msgid "Add favorites to session buttons"
-msgstr "Pridajte k tlačidlám relácie obľúbené položky."
+msgstr "Pridajte k tlačidlám relácie obľúbené položky"
 
 #. 4.0
-#, fuzzy
-#| msgid "Add favorites to session buttons."
 msgid "Show your favorite app icons next to the session buttons"
-msgstr "Pridajte k tlačidlám relácie obľúbené položky."
+msgstr ""
 
-#~ msgid "Toggle recent files"
-#~ msgstr "Prepnúť posledné súbory"
 
-#~ msgid "Icon"
-#~ msgstr "Ikona"

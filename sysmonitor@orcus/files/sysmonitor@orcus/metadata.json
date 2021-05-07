@@ -3,7 +3,6 @@
     "uuid": "sysmonitor@orcus", 
     "name": "System Monitor", 
     "version": "1.6.5",
-    "icon": "utilities-system-monitor",
     "max-instances": -1,
     "multiversion": true
 }

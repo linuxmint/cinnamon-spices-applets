@@ -1,7 +1,7 @@
 {
     "show-notifications": {
         "type": "switch",
-        "default": true,
+        "default": false,
         "description" : "Show notifications"
     },
    "indicator-type" : {

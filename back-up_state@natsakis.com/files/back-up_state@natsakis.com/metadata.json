@@ -1,6 +1,0 @@
-{
-    "last-edited": "1398934610", 
-    "description": "Probes for the state of a certain rsync back-up by checking the exit status of the log file", 
-    "uuid": "back-up_state@natsakis.com", 
-    "name": "Back-up State"
-}

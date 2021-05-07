@@ -7,29 +7,85 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 18:21+0200\n"
-"PO-Revision-Date: 2020-12-15 16:25+0100\n"
+"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"PO-Revision-Date: 2021-02-27 16:16+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+
+#: applet.js:65
+msgid "Date and Time Settings"
+msgstr ""
+
+#: settings_widgets.py:95
+msgid "Add new entry"
+msgstr ""
+
+#: settings_widgets.py:99
+msgid "Edit entry"
+msgstr ""
+
+#. settings-schema.json->region_aus->description
+#. settings-schema.json->region_can->description
+#. settings-schema.json->region_deu->description
+#. settings-schema.json->region_nzl->description
+#. settings-schema.json->region_svk->description
+#. settings-schema.json->region_che->description
+#. settings-schema.json->region_gbr->description
+#. settings-schema.json->region_usa->description
+#: settings_widgets.py:122
+msgid "Region"
+msgstr "Region"
+
+#: settings_widgets.py:123
+msgid "City"
+msgstr ""
+
+#. metadata.json->name
+msgid "Calendar with public Holidays"
+msgstr "Kalender med offentlige helligdage"
+
+#. metadata.json->description
+msgid "Calendar applet with public holiday data provided by Enrico service"
+msgstr "Kalender med offentlige helligdage leveret af Enrico"
+
+#. settings-schema.json->page1->title
+msgid "Calendar"
+msgstr ""
 
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
 msgid "World Clocks"
 msgstr "Verdensure"
 
+#. settings-schema.json->section1->title
+msgid "Display"
+msgstr ""
+
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
 msgstr "Hent offentlige helligdage for"
 
+#. settings-schema.json->section3->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Vis verdenstid"
+
+#. settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr ""
+
+#. settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr ""
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -46,6 +102,30 @@ msgstr "En dag"
 #. settings-schema.json->weekend-length->options
 msgid "Two days"
 msgstr "To dage"
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr ""
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid "Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+
+#. settings-schema.json->custom-format->description
+msgid "Date format"
+msgstr ""
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr ""
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr ""
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -244,6 +324,10 @@ msgid "Switzerland"
 msgstr "Schweiz"
 
 #. settings-schema.json->country->options
+msgid "Turkey"
+msgstr ""
+
+#. settings-schema.json->country->options
 msgid "Ukraine"
 msgstr "Ukraine"
 
@@ -254,17 +338,6 @@ msgstr "Storbritannien"
 #. settings-schema.json->country->options
 msgid "United States of America"
 msgstr "USA"
-
-#. settings-schema.json->region_aus->description
-#. settings-schema.json->region_can->description
-#. settings-schema.json->region_deu->description
-#. settings-schema.json->region_nzl->description
-#. settings-schema.json->region_svk->description
-#. settings-schema.json->region_che->description
-#. settings-schema.json->region_gbr->description
-#. settings-schema.json->region_usa->description
-msgid "Region"
-msgstr "Region"
 
 #. settings-schema.json->region_aus->options
 msgid "Australian Capital Territory"
@@ -351,7 +424,7 @@ msgid "Yukon"
 msgstr "Yukon"
 
 #. settings-schema.json->region_deu->options
-msgid "Baden-WÃ¼rttemberg"
+msgid "Baden-Württemberg"
 msgstr "Baden-Württemberg"
 
 #. settings-schema.json->region_deu->options
@@ -387,8 +460,8 @@ msgid "Mecklenburg-Vorpommern"
 msgstr "Mecklenburg-Vorpommern"
 
 #. settings-schema.json->region_deu->options
-msgid "Nordrhein-Westphalen"
-msgstr "Nordrhein-Westphalen"
+msgid "Nordrhein-Westfalen"
+msgstr "Nordrhein-Westfalen"
 
 #. settings-schema.json->region_deu->options
 msgid "Rheinland-Pfalz"
@@ -411,7 +484,7 @@ msgid "Schleswig-Holstein"
 msgstr "Slesvig-holsten"
 
 #. settings-schema.json->region_deu->options
-msgid "ThÃ¼ringen"
+msgid "Thüringen"
 msgstr "Thüringen"
 
 #. settings-schema.json->region_nzl->options
@@ -483,15 +556,15 @@ msgid "Chatham Islands Territory"
 msgstr "Chatham Islands Territory"
 
 #. settings-schema.json->region_svk->options
-msgid "BanskobystrickÃ½ kraj"
+msgid "Banskobystrický kraj"
 msgstr "Banskobystrický kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "BratislavskÃ½ kraj"
+msgid "Bratislavský kraj"
 msgstr "Bratislavský kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "KoÅ¡ickÃ½ kraj"
+msgid "Košický kraj"
 msgstr "Košický kraj"
 
 #. settings-schema.json->region_svk->options
@@ -499,19 +572,19 @@ msgid "Nitriansky kraj"
 msgstr "Nitriansky kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "PreÅ¡ovskÃ½ kraj"
+msgid "Prešovský kraj"
 msgstr "Prešovský kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "TrnavskÃ½ kraj"
+msgid "Trnavský kraj"
 msgstr "Trnavský kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "TrenÄiansky kraj"
+msgid "Trenčiansky kraj"
 msgstr "Trenčiansky kraj"
 
 #. settings-schema.json->region_svk->options
-msgid "Å½ilinskÃ½ kraj"
+msgid "Žilinský kraj"
 msgstr "Žilinský kraj"
 
 #. settings-schema.json->region_che->options
@@ -563,7 +636,7 @@ msgid "Luzern"
 msgstr "Luzern"
 
 #. settings-schema.json->region_che->options
-msgid "NeuchÃ¢tel"
+msgid "Neuchâtel"
 msgstr "Neuchâtel"
 
 #. settings-schema.json->region_che->options
@@ -615,7 +688,7 @@ msgid "Zug"
 msgstr "Zug"
 
 #. settings-schema.json->region_che->options
-msgid "ZÃ¼rich"
+msgid "Zürich"
 msgstr "Zürich"
 
 #. settings-schema.json->region_gbr->options
@@ -838,6 +911,14 @@ msgstr "Wisconsin"
 msgid "Wyoming"
 msgstr "Wyoming"
 
+#. settings-schema.json->keyOpen->description
+msgid "Show calendar"
+msgstr ""
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the calendar."
+msgstr ""
+
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"
 msgstr "Vist navn"
@@ -845,11 +926,3 @@ msgstr "Vist navn"
 #. settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
 msgstr "Tidszone"
-
-#. metadata.json->name
-msgid "Calendar with public Holidays"
-msgstr "Kalender med offentlige helligdage"
-
-#. metadata.json->description
-msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Kalender med offentlige helligdage leveret af Enrico"

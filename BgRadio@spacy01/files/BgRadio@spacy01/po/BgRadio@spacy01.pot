@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 12:16+0800\n"
+"POT-Creation-Date: 2021-02-27 23:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,273 +17,165 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js
-msgid "Radio"
+#. metadata.json->name
+#: applet.js:29
+msgid "Bulgarian Radio and TV Streams"
 msgstr ""
 
-#: applet.js
-msgid "TV"
+#: applet.js:45
+msgid "Radio stations"
 msgstr ""
 
-#: applet.js
-msgid "Stop"
-msgstr ""
-
-#: applet.js
+#: applet.js:49
 msgid "Bg Radio"
 msgstr ""
 
-#: applet.js
-msgid "Listening Bg Radio"
+#: applet.js:53 applet.js:61 applet.js:69 applet.js:77 applet.js:85
+#: applet.js:93 applet.js:101 applet.js:109 applet.js:117 applet.js:125
+#: applet.js:133 applet.js:141 applet.js:149 applet.js:157 applet.js:165
+#: applet.js:173 applet.js:181 applet.js:189
+#, javascript-format
+msgid "Listening %s"
 msgstr ""
 
-#: applet.js
+#: applet.js:57
 msgid "bTV Radio"
 msgstr ""
 
-#: applet.js
-msgid "Listening bTV Radio"
-msgstr ""
-
-
-#: applet.js
+#: applet.js:65
 msgid "City Radio"
 msgstr ""
 
-#: applet.js
-msgid "Listening City Radio"
-msgstr ""
-
-#: applet.js
+#: applet.js:73
 msgid "Classic FM"
 msgstr ""
 
-#: applet.js
-msgid "Listening Clasic FM"
-msgstr ""
-
-#: applet.js
+#: applet.js:81
 msgid "Darik"
 msgstr ""
 
-#: applet.js
-msgid "Listening Darik"
-msgstr ""
-
-#: applet.js
+#: applet.js:89
 msgid "Darik Nostalgie"
 msgstr ""
 
-#: applet.js
-msgid "Listening Darik Nostalgie"
-msgstr ""
-
-#: applet.js
+#: applet.js:97
 msgid "Energy"
 msgstr ""
 
-#: applet.js
-msgid "Listening Energy"
-msgstr ""
-
-
-#: applet.js
+#: applet.js:105
 msgid "FM+"
 msgstr ""
 
-#: applet.js
-msgid "Listening FM+"
-msgstr ""
-
-#: applet.js
+#: applet.js:113
 msgid "Fresh"
 msgstr ""
 
-#: applet.js
-msgid "Listening Fresh"
-msgstr ""
-
-#: applet.js
+#: applet.js:121
 msgid "Jazz FM"
 msgstr ""
 
-#: applet.js
-msgid "Listening Jazz FM"
-msgstr ""
-
-#: applet.js
+#: applet.js:129
 msgid "K2"
 msgstr ""
 
-#: applet.js
-msgid "Listening K2"
-msgstr ""
-
-#: applet.js
+#: applet.js:137
 msgid "Melody"
 msgstr ""
 
-#: applet.js
-msgid "Listening Melody"
-msgstr ""
-
-
-#: applet.js
+#: applet.js:145
 msgid "N-Joy"
 msgstr ""
 
-#: applet.js
-msgid "Listening N-joy"
-msgstr ""
-
-
-#: applet.js
+#: applet.js:153
 msgid "Nova Radio"
 msgstr ""
 
-#: applet.js
-msgid "Listening Nova Radio"
-msgstr ""
-
-#: applet.js
+#: applet.js:161
 msgid "Radio 1"
 msgstr ""
 
-#: applet.js
-msgid "Listening Radio 1"
-msgstr ""
-
-#: applet.js
+#: applet.js:169
 msgid "Radio 1 Rock"
 msgstr ""
-#: applet.js
-msgid "Listening Radio 1 Rock"
-msgstr ""
 
-#: applet.js
+#: applet.js:177
 msgid "The Voice Radio"
 msgstr ""
 
-#: applet.js
-msgid "Listening The Voice Radio"
-msgstr ""
-
-#: applet.js
+#: applet.js:185
 msgid "Z-Rock"
 msgstr ""
 
-#: applet.js
-msgid "Listening Z-Rock"
+#: applet.js:197
+msgid "TV stations"
 msgstr ""
 
-#: applet.js
+#: applet.js:201
 msgid "BNT"
 msgstr ""
 
-#: applet.js
-msgid "Watching BNT"
+#: applet.js:205 applet.js:213 applet.js:221 applet.js:229 applet.js:237
+#: applet.js:245 applet.js:253 applet.js:261 applet.js:269 applet.js:277
+#: applet.js:285 applet.js:293
+#, javascript-format
+msgid "Watching %s"
 msgstr ""
 
-#: applet.js
+#: applet.js:209
 msgid "BNT 2"
 msgstr ""
 
-#: applet.js
-msgid "Watching BNT 2"
-msgstr ""
-
-#: applet.js
+#: applet.js:217
 msgid "BNT HD"
 msgstr ""
 
-#: applet.js
-msgid "Watching BNT HD"
-msgstr ""
-
-#: applet.js
+#: applet.js:225
 msgid "BNT World"
 msgstr ""
 
-#: applet.js
-msgid "Watching BNT World"
-msgstr ""
-
-#: applet.js
+#: applet.js:233
 msgid "bTV"
 msgstr ""
 
-#: applet.js
-msgid "Watching bTV"
-msgstr ""
-
-#: applet.js
+#: applet.js:241
 msgid "BIT"
 msgstr ""
 
-#: applet.js
-msgid "Watching BIT"
-msgstr ""
-
-#: applet.js
+#: applet.js:249
 msgid "City"
 msgstr ""
 
-#: applet.js
-msgid "Watching City"
-msgstr ""
-
-#: applet.js
-msgid "Nova"
-msgstr ""
-
-#: applet.js
-msgid "Watching Nova"
-msgstr ""
-
-#: applet.js
+#: applet.js:257
 msgid "Kanal 3"
 msgstr ""
 
-#: applet.js
-msgid "Watching Kanal 3"
+#: applet.js:265
+msgid "Nova"
 msgstr ""
 
-#: applet.js
+#: applet.js:273
 msgid "On Air"
 msgstr ""
 
-#: applet.js
-msgid "Watching On Air"
-msgstr ""
-
-#: applet.js
+#: applet.js:281
 msgid "The Voice"
 msgstr ""
 
-#: applet.js
-msgid "Watching The Voice"
-msgstr ""
-
-#: applet.js
+#: applet.js:289
 msgid "Magic TV"
 msgstr ""
 
-#: applet.js
-msgid "Watching Magic TV"
+#: applet.js:300
+msgid "Stop"
 msgstr ""
 
-#: applet.js
+#: applet.js:303
 msgid "All Stop"
 msgstr ""
 
-#. BgRadio@spacy01->metadata.json->description
+#. metadata.json->description
 msgid ""
-"The most famous bulgarian radio and TV streams. Some of the streams are available "
-"only from bulgaria. To watch a TVs, you'll need to install rtmpdump and mpv packages."
-msgstr ""
-""
-""
-
-#. BgRadio@spacy01->metadata.json->name
-msgid "Bulgarian Radio and TV Streams"
+"The most famous bulgarian radio and TV streams. Some of the streams are "
+"available only from bulgaria. To watch a TVs, you'll need to install "
+"rtmpdump and mpv packages."
 msgstr ""

@@ -15,7 +15,7 @@
 .weather-current-summary {
     font-size: 35px;
     padding-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 
 .weather-current-databox {
@@ -47,7 +47,12 @@
 }
 
 .weather-current-astronomy {
+	padding-top: 10px;
     color: #AAAAAA;
+}
+
+.weather-immediate-precipitation {
+	color: #AAAAAA;
 }
 
 .weather-forecast-icon {

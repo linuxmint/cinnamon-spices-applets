@@ -8,6 +8,6 @@
     AppIconType : "starred-symbolic",
     DebugMode: false,
     OpenFileCmd: "xdg-open",
-    OpenFTPCmd: "nautilus"
+    OpenFTPCmd: "nemo"
 }
 

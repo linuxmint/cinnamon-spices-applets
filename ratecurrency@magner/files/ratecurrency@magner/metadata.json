@@ -1,9 +1,9 @@
 {
-	"uuid": "ratecurrency@magner",
-	"name": "Fiat and cryptocurrency quote rates",
-	"prevent-decorations": true,
-  "description": "Displays the current price and trends of cryptocurrencies (TOP 150 coins with CoinMarketCap) and popular fiat currencies (Dollar, Euro, Ruble etc.). Monitoring daily percentage changes.",
-	"version": 1.3,
-	"max-instances": "5",
-	"author": "Aleksi Magner"
+    "uuid": "ratecurrency@magner",
+    "name": "Fiat and cryptocurrency quote rates",
+    "prevent-decorations": true,
+    "description": "Displays the current price and trends of cryptocurrencies (TOP 150 coins with CoinMarketCap) and popular fiat currencies (Dollar, Euro, Ruble etc.). Monitoring daily percentage changes.",
+    "version": 1.4,
+    "max-instances": "5",
+    "author": "Aleksi Magner"
 }

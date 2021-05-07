@@ -28,7 +28,7 @@ BingWallpaperApplet.prototype = {
 
         // Generic Setup
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-        this.set_applet_icon_name("bing-wallpaper-symbolic");
+        this.set_applet_icon_symbolic_name("bing-wallpaper");
         this.set_applet_tooltip('Bing Desktop Wallpaper');
 
         // Path to store data in
