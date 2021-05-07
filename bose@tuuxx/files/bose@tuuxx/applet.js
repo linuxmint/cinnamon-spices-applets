@@ -41,8 +41,8 @@ MyApplet.prototype = {
     menuSettings: PopupMenu.PopupSubMenuMenuItem,
     menuSwitch: PopupMenu.PopupMenuItem,
     menuConnect: PopupMenu.PopupMenuItem,
-    path: "./.local/share/cinnamon/applets/bose@tuuxx/based-connect/based-connect",
-    //address: "28:11:A5:DA:EF:04", //Address of the device
+    //path: "./.local/share/cinnamon/applets/bose@tuuxx/based-connect/based-connect",
+    //address: "xx:xx:xx:xx:xx:xx", //Address of the device
     refreshTime: 3000, //time until refresh in seconds
     connection: false, //true if device is connected
     audioMode: "unknown", //audioMode
@@ -51,11 +51,17 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         this.settings = new Settings.AppletSettings(this, "bose@tuuxx", instance_id);
 
-
+        //Settings
         this.settings.bind("address", // The setting key, from the setting schema file
             "address", // The property to bind the setting to - in this case it will initialize this.icon_name to the setting value
             this.on_settings_changed, // The method to call when this.icon_name has changed, so you can update your applet
             null); // Any extra information you want to pass to the callback (optional - pass null or just leave out this last argument)
+
+        this.settings.bind("path",
+            "path",
+            this.on_settings_changed,
+            null);
+
 
         //Stats
         this.set_applet_icon_symbolic_name("headphone"); //Icon when ending -symbolic
@@ -215,7 +221,6 @@ MyApplet.prototype = {
         this.checkAudioOutput();
     },
 
-
     //Update something
     _UpdateData: function() {
         if (this._timeout) {
@@ -227,13 +232,20 @@ MyApplet.prototype = {
     },
 
     on_settings_changed: function() {
-        //TODO
+        updateData();
     },
 
     on_applet_clicked: function() {
         this.menu.toggle();
         //Util.spawn('xkill');
-    }
+    },
+
+    basedconnectLookup: async function() {
+        log("xxconnect");
+        let command = "xdg-open ";
+        Main.Util.spawnCommandLine(command + "https://github.com/Denton-L/based-connect");
+    },
+
 };
 
 function log(message) {
@@ -246,7 +258,6 @@ function main(metadata, orientation, panel_height, instance_id) {
 
 function disable() {
     Mainloop.source_remove(timeout);
-    Mainloop.source_remove(timeout2);
 }
 
 function batteryToIcon(battery) {

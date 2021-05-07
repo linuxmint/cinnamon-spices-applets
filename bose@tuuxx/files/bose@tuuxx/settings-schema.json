@@ -3,22 +3,26 @@
         "type": "header",
         "description": "Settings for bose@tuuxx"
     },
+
     "address": {
         "type": "entry",
-        "default": "28:11:A5:DA:EF:04",
+        "default": "XX:XX:XX:XX:XX:XX",
         "description": "Address of the Bluethooth BOSE device:",
         "tooltip": "Format: xx:xx:xx:xx:xx:xx"
     },
-    "mute": {
-        "type": "switch",
-        "default": "false",
-        "description": "Mute sound if device is disconnected: [in development]",
-        "tooltip": "Mute sound if device is disconnected:"
+
+    "path": {
+    "type": "entry",
+    "default": ".local/share/cinnamon/applets/bose@tuuxx/based-connect/based-connect",
+    "description": "Path of based-connect:",
+    "tooltip": "Path to the based-connect tool"
     },
-    "audioMode": {
-        "type": "switch",
-        "default": "false",
-        "description": "Switch back to Audio Mode: [in development]",
-        "tooltip": "Switch back to Audio Mode if tools change to headset mode"
+
+    "basedconnectLookup": {
+    "type": "button",
+    "indent": true,
+    "description": "Get based-connect tool",
+    "callback": "basedconnectLookup",
+    "tooltip": "Opens git webpage of the based-connect tool"
     }
 }
