@@ -11,4 +11,12 @@ declare namespace imports.gi.Cinnamon {
 	export class GenericContainer extends gi.St.Widget {
 
 	}
+
+	class Recorder {
+
+	}
+
+	class WindowTracker {
+		
+	}
 }

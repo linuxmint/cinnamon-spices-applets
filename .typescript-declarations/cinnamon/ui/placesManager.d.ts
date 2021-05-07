@@ -1,4 +1,4 @@
-declare namespace imports.ui.placesmanager {
+declare namespace imports.ui.placesManager {
 	// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 
 	/**

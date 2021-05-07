@@ -36,6 +36,10 @@ declare class GJSError {
     matches(domain: number, code: imports.gi.Gio.IOErrorEnum): boolean;
 }
 
+declare namespace imports.signals {
+	
+}
+
 declare namespace imports.cairo {
     export class LinearGradient {
         constructor(margin: number, gradientOffset: number, width: number, height: number);
@@ -192,10 +196,10 @@ declare namespace imports.mainloop {
 }
 
 declare namespace imports.gettext {
-    function bindtextdomain(UUID: string, homeDir: string): void;
+    export function bindtextdomain(UUID: string, homeDir: string): void;
 
-    function dgettext(UUID: string, text: string): string;
-    function gettext(text: string): string;
+    export function dgettext(UUID: string, text: string): string;
+    export function gettext(text: string): string;
 }
 
 declare namespace imports {
