@@ -1,0 +1,7 @@
+{
+    "uuid": "clipboard-eraser@Techcrafter",
+    "name": "Clipboard Eraser",
+    "description": "Click on the applet to erase your clipboard contents",
+    "icon": "edit-bomb",
+    "max-instances": "-1"
+}
