@@ -48,6 +48,7 @@ declare namespace imports.cairo {
     }
 }
 
+/** DEPRECATED. Mainloop is simply a layer of convenience and backwards-compatibility over some GLib functions (such as `GLib.timeout_add()` which in GJS is mapped to `g_timeout_add_full()`). It's use is not generally recommended anymore */
 declare namespace imports.mainloop {
     /**
      * Calls callback function after given seconds
@@ -70,17 +71,5 @@ declare namespace imports {
     export const lang: Lang;
     class Lang {
         bind<T, CTX>(ctx: CTX, func: T): T;
-    }
-
-    export const byteArray: ByteArray;
-    class ByteArray {
-        toString(array: Uint8Array): string;
-        /**
-         * Unknown what it does
-         * @param text 
-         */
-        fromGBytes(text: any): any;
-        fromString(text: string): gi.GLib.Bytes;
-        fromArray(array: Uint8Array): any;
     }
 }
