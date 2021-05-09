@@ -44,6 +44,20 @@ declare namespace imports.ui.applet {
 		private _onOpenStateChanged(menu: popupMenu.PopupMenuBase, open: boolean, sourceActor: gi.St.Widget): void;
 	}
 
+	interface AppletMetadata {
+		uuid: string;
+		name: string;
+		description: string;
+    	"max-instances"?: number;
+    	version?: string;
+    	multiversion?: boolean;
+    	"cinnamon-version"?: string[];
+    	state?: number;
+    	path: string;
+		error?: string;
+    	force_loaded: boolean;
+	}
+
 	/**
 	 Base applet class
 	*
@@ -66,7 +80,7 @@ declare namespace imports.ui.applet {
 		private _panelLocation: gi.St.BoxLayout;
 		/** The metadata of the applet. This is set by appletManager
 		* *after* the applet is loaded. */
-		private _meta: any;
+		private _meta: AppletMetadata;
 		/** The order of the applet within a panel location This is set
 		* by appletManager *after* the applet is loaded. */
 		private _order: number;

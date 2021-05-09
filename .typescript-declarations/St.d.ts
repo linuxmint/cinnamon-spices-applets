@@ -266,4 +266,36 @@ declare namespace imports.gi.St {
 		y_fill?: boolean;
 		expand?: boolean;
 	}
+
+	export class FocusManager extends gi.GObject.Object {
+		public static get_for_stage(stage: gi.Clutter.Stage): FocusManager;
+		public add_group(root: Widget): void;
+		public get_group(widget: Widget): Widget;
+		public navigate_from_event(event: Clutter.Event): boolean;
+		public remove_group(root: Widget): void;
+	}
+
+	export enum TextDirection {
+
+	}
+
+	export class Table extends Widget {
+
+	}
+
+	export class Content {
+		get_preferred_size(): any[];
+		invalidate(): void;
+		invalidate_size(): void;
+	}
+
+	interface IImage {
+		get_texture(): any;
+	}
+
+	type ImageExtends = Content & gi.GObject.Object;
+	interface Image extends ImageExtends { }
+	export class Image {
+		static new(): Image;
+	}
 }
