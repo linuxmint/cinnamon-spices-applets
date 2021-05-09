@@ -1,5 +1,4 @@
 declare namespace imports.ui.placesManager {
-	// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 
 	/**
 	 * Represents a place object, which is most normally a bookmark entry,

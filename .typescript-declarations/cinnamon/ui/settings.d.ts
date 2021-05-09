@@ -1,11 +1,9 @@
+/**
+ * @short_description File providing settings objects for xlets.
+ *
+ * This file provides the settings API for applets, desklets and extensions.
+ */
 declare namespace imports.ui.settings {
-
-	/**
-	 * FILE:settings.js
-	 * @short_description: File providing settings objects for xlets.
-	 *
-	 * This file provides the settings API for applets, desklets and extensions.
-	 */
 
 	/**
 	 * ENUM:BindingDirection
