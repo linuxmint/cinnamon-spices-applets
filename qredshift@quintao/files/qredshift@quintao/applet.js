@@ -139,6 +139,7 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind('nightBrightness', 'nightBrightness', this.onSettChange.bind(this));
         
         this.settings.bind('nightTimeStart', 'nightStart', (value) => {
+            // For some reason this callback for timechoorser is called on every setting update so this workaround is required.
             if (this.opt.nightStart.h !== this.time.nightStart.h || this.opt.nightStart.m !== this.time.nightStart.m) {
                 this.time.nightStart.h = this.opt.nightStart.h;
                 this.time.nightStart.m = this.opt.nightStart.m;
@@ -148,6 +149,7 @@ class QRedshift extends Applet.TextIconApplet {
             }
         });
         this.settings.bind('nightTimeEnd', 'nightEnd', (value) => {
+            // For some reason this callback for timechoorser is called on every setting update so this workaround is required.
             if (this.opt.nightEnd.h !== this.time.nightEnd.h || this.opt.nightEnd.m !== this.time.nightEnd.m) {
                 this.time.nightEnd.h = this.opt.nightEnd.h;
                 this.time.nightEnd.m = this.opt.nightEnd.m;
@@ -270,7 +272,7 @@ class QRedshift extends Applet.TextIconApplet {
             this.menu = this.appMenu;
             
             // Disable Redshift
-            this.disableRedshiftService()
+            this.disableRedshiftService();
             
             // Load Informations
             this.setAdjustmentMethods(false);
@@ -749,6 +751,21 @@ class QRedshift extends Applet.TextIconApplet {
         this.setIcon();
     }
     
+    doCommandSync(command) {
+        // qLOG('QRedshift CMD',  command);
+        
+        let [success, out] = GLib.spawn_command_line_sync(command);
+        if (!success || out == null) return;
+        let resp = out.toString();
+        
+        let period = resp.match(/Period:.+/g);
+        if (period && period[0]) {
+            this.opt.period = period[0].split(':')[1].trim();
+        }
+        this.updateTooltip();
+        this.setInfo();
+        this.setIcon();
+    }
     
     redShiftUpdate() {
         Util.killall('redshift');
@@ -790,7 +807,7 @@ class QRedshift extends Applet.TextIconApplet {
             
             // Util.spawnCommandLine(cmd);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
-            this.doCommand(cmd);
+            this.doCommandSync(cmd);
             
         } else {
             // if(this.opt.period !== '' ){
@@ -799,9 +816,9 @@ class QRedshift extends Applet.TextIconApplet {
             this.opt.period = '-';
             
             // }
-            this.setIcon();
             this.updateTooltip();
             this.setInfo();
+            this.setIcon();
         }
         
     }
@@ -809,7 +826,7 @@ class QRedshift extends Applet.TextIconApplet {
     setInfo() {
         let period = this.opt.period + "";
         
-        if (this.opt.manualNightTime) {
+        if (this.opt.enabled && this.opt.manualNightTime) {
             if (this.check_period().is_night) period = _("Night");
             else period = _("Day");
         }

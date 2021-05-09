@@ -229,7 +229,7 @@
   "manualNightTime": {
     "type": "checkbox",
     "dependency": "enabledNight=true",
-    "default": false,
+    "default": true,
     "description": "Use Manual Night Time"
   },
   "nightTimeStart" : {

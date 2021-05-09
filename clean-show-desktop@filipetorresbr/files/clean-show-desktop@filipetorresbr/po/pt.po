@@ -23,7 +23,7 @@ msgid "Clean Show Desktop"
 msgstr "Clean Show Desktop"
 
 #. metadata.json->description
-msgid "An Applet to show the Desktop in the style of Windows 10 but completely customizable"
+msgid "An Applet to show the Desktop just like in Windows 10, but completely customizable"
 msgstr "Um Applet para mostrar a Área de Trabalho no estilo do Windows 10 só que completamente customizável"
 
 #. settings-schema.json->head->description
@@ -118,3 +118,11 @@ msgstr "Espessura da borda"
 #. settings-schema.json->border-width->tooltip
 msgid "Select the border width"
 msgstr "Alterar espessura da borda"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr "Customizar as cores do Applet"
+
+#. settings-schema.json->custom-color->tooltip
+msgid "When this option is disabled, the applet will try to find the accent color color of the theme"
+msgstr "Quando esta opção está desativada, o applet irá tentar descobrir a cor de destaque do tema"

@@ -16,6 +16,6 @@
 	},
 	"include": [
 		"./src/**/*",
-		"../weather@mockturtl/src/declarations/**/*",
+		"../.typescript-declarations/**/*",
 	],
 }
