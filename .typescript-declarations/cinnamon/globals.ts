@@ -1,5 +1,10 @@
 declare function require(path: string): any;
 
+declare function setInterval(callback: { (): void }, delay: number): number;
+declare function clearInterval(intervalID: number): void;
+declare function setTimeout(callback: { (): void }, delay: number): number;
+declare function clearTimeout(timouetId: number): void;
+
 declare class global {
     static log(...any: Array < any > ): void;
     static logError(...text: Array < string > ): void;
@@ -36,10 +41,6 @@ declare class GJSError {
     matches(domain: number, code: imports.gi.Gio.IOErrorEnum): boolean;
 }
 
-declare namespace imports.signals {
-	
-}
-
 declare namespace imports.cairo {
     export class LinearGradient {
         constructor(margin: number, gradientOffset: number, width: number, height: number);
@@ -59,10 +60,10 @@ declare namespace imports.mainloop {
 }
 
 declare namespace imports.gettext {
-    export function bindtextdomain(UUID: string, homeDir: string): void;
+    function bindtextdomain(UUID: string, homeDir: string): void;
 
-    export function dgettext(UUID: string, text: string): string;
-    export function gettext(text: string): string;
+    function dgettext(UUID: string, text: string): string;
+    function gettext(text: string): string;
 }
 
 declare namespace imports {
@@ -71,15 +72,15 @@ declare namespace imports {
         bind<T, CTX>(ctx: CTX, func: T): T;
     }
 
-	export const byteArray: ByteArray;
-	class ByteArray {
-		toString(array: Uint8Array): string;
-		/**
-		 * Unknown what it does
-		 * @param text 
-		 */
-		fromGBytes(text: any): any;
-		fromString(text: string): gi.GLib.Bytes;
-		fromArray(array: Uint8Array): any;
-	}
+    export const byteArray: ByteArray;
+    class ByteArray {
+        toString(array: Uint8Array): string;
+        /**
+         * Unknown what it does
+         * @param text 
+         */
+        fromGBytes(text: any): any;
+        fromString(text: string): gi.GLib.Bytes;
+        fromArray(array: Uint8Array): any;
+    }
 }
