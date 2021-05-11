@@ -1103,7 +1103,6 @@ class CinnamenuApplet extends TextIconApplet {
             const searchNextDir = (thisSearchId) => {
                 const folder = foldersToDo[currentFolderIndex];
                 const dir = Gio.file_new_for_path(folder);
-                global.log(currentFolderIndex, folder);
                 let enumerator;
                 dir.enumerate_children_async(
                             'standard::name,standard::type,standard::icon,standard::content-type,' +
@@ -1178,7 +1177,7 @@ class CinnamenuApplet extends TextIconApplet {
                     }
 
                     //continue search if not completed
-                    if (currentFolderIndex < MAX_FOLDERS_TODO - 1) {
+                    if (currentFolderIndex < foldersToDo.length - 1) {
                         currentFolderIndex++;
                         searchNextDir(thisSearchId);
                     }
