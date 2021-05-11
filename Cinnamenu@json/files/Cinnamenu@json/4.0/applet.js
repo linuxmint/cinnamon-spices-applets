@@ -1093,18 +1093,21 @@ class CinnamenuApplet extends TextIconApplet {
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
             let updateInterval = 100;
-            const MAX_FOLDERS_TODO = 100;
+            const MAX_FOLDERS_TODO = 200;
             const results = [];
             const foldersToDo = [];
             foldersToDo.push(GLib.get_home_dir());
+            let currentFolderIndex = 0;
             let lastUpdateTime = Date.now();
 
-            const searchNextDir = (depth, thisSearchId) => {
-                const folder = foldersToDo.shift();
+            const searchNextDir = (thisSearchId) => {
+                const folder = foldersToDo[currentFolderIndex];
                 const dir = Gio.file_new_for_path(folder);
+                global.log(currentFolderIndex, folder);
                 let enumerator;
                 dir.enumerate_children_async(
-                    'standard::name,standard::type,standard::icon,standard::content-type,standard::is-hidden',
+                            'standard::name,standard::type,standard::icon,standard::content-type,' +
+                            'standard::is-hidden,standard::is-symlink',
                             Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null, (source, result) => {
                     try {
                         enumerator = source.enumerate_children_finish(result);
@@ -1125,14 +1128,15 @@ class CinnamenuApplet extends TextIconApplet {
                         const filename = next.get_name();
                         const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
                         const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                        if (filename.toUpperCase().startsWith(pattern)) {
+                        const match = searchStr(pattern, filename, true, true);
+                        if (match.score > 1) { //any word boundary match
                             const file = Gio.file_new_for_path(filePath);
+                            match.score -= 0.01;
                             //if file then treat as isFolderviewFile and if directory then treat as isPlace
                             const foundFile = {
                                         name: filename,
-                                        score: pattern.length > 2 ? 1.2 : 1.1,
-                                        nameWithSearchMarkup: '<b>' + filename.substr(0, pattern.length) +
-                                                                '</b>' + filename.substr(pattern.length),
+                                        score: match.score * (pattern.length > 2 ? 1 : 0.9),
+                                        nameWithSearchMarkup: match.result,
                                         gicon: next.get_icon(),
                                         uri: file.get_uri(),
                                         mimeType: next.get_content_type(),
@@ -1150,8 +1154,8 @@ class CinnamenuApplet extends TextIconApplet {
                         }
 
                         //Add subdirectories to foldersToDo[]
-                        if (isDirectory && depth < 4 && !next.get_is_hidden() &&
-                                                            foldersToDo.length < MAX_FOLDERS_TODO) {
+                        if (isDirectory && !next.get_is_hidden() && !next.get_is_symlink() &&
+                                                                foldersToDo.length < MAX_FOLDERS_TODO) {
                             foldersToDo.push(filePath);
                         }
                         next = enumerator.next_file(null);
@@ -1174,13 +1178,14 @@ class CinnamenuApplet extends TextIconApplet {
                     }
 
                     //continue search if not completed
-                    if (foldersToDo.length > 0) {
-                        searchNextDir(depth, thisSearchId);
+                    if (currentFolderIndex < MAX_FOLDERS_TODO - 1) {
+                        currentFolderIndex++;
+                        searchNextDir(thisSearchId);
                     }
                 });
             };
 
-            searchNextDir(0, this.currentSearchId);
+            searchNextDir(this.currentSearchId);
         }
 
         ///----search providers--------
@@ -1722,14 +1727,19 @@ class Apps {//This obj provides the .app objects for all the applications catego
             const _res = [];
             res.forEach(app => {
                 const keywords = app.get_keywords() || '';
-                const id = app.id.replace(/\.desktop$/, '');
+                let id = app.id.replace('.desktop', '');
+                const idLastDot = id.lastIndexOf('.');
+                if (idLastDot >= 0) {
+                    id = id.substring(idLastDot + 1);
+                }
+                id = id.replace('cinnamon-settings-', '');
+
                 const match1 = searchStr(pattern, app.name);
                 const match2 = searchStr(pattern, app.description);
                 match2.score *= 0.95; //slightly lower priority for description match
                 const match3 = searchStr(pattern, keywords);
                 match3.score *= 0.8; //lower priority for keyword match
                 const match4 = searchStr(pattern, id);
-                match4.score *= 0.7; //lower priority for id match
                 const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
                 if (bestMatchScore > SEARCH_THRESHOLD) {
                     app.score = bestMatchScore;

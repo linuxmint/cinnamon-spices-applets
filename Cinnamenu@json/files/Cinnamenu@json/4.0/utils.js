@@ -131,11 +131,11 @@ class NewTooltip {
 
 //===================================================
 
-const searchStr = (q, str, quick = false) => {
+const searchStr = (q, str, quick = false, quicker = false) => {
     if (!str) {
         return { score: 0, result: str };
     }
-    
+
     const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
@@ -147,7 +147,7 @@ const searchStr = (q, str, quick = false) => {
         foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
         foundLength = q.length;
-    } else if (str2.indexOf(q) !== -1) { //else match substring
+    } else if (!quicker && str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
         foundPosition = str2.indexOf(q);
         foundLength = q.length;

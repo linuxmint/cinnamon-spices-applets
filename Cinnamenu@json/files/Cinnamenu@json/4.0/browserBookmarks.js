@@ -102,8 +102,7 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
         bookmarks.push({
             app: appInfo,
             name: name.replace(/\//g, '|'),
-            score: 0,
-            uri
+            uri: uri
         });
     }
     return bookmarks;
@@ -195,7 +194,6 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
                         bookmarks.push({
                             app: appInfo,
                             name: children[i].name,
-                            score: 0,
                             uri: children[i].url
                         });
                     } else if (children[i].hasOwnProperty('children')) {

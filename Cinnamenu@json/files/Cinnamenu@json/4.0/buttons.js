@@ -333,6 +333,7 @@ class ContextMenu {
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
+        
         //------populate menu
         if (isACategoryButton) {
             const addMenuItem = (item) => {
