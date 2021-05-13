@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.7
+
+* Resolves [#3783](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
+* Fixes wrong filename for declaration file (global.ts -> global.d.ts) causing all kinds of issues
+
 ## 3.0.6
 
 * Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
