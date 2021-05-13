@@ -176,7 +176,6 @@ export class WeatherApplet extends TextIconApplet {
 
 	private DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
 		mainCondition = CapitalizeFirstLetter(mainCondition)
-		let temp = TempToUserConfig(temperature, this.config);
 		// Applet panel label
 		let label = "";
 		// Horizontal panels
@@ -188,13 +187,13 @@ export class WeatherApplet extends TextIconApplet {
 				if (label != "") {
 					label += " ";
 				}
-				label += temp;
+				label += TempToUserConfig(temperature, this.config);
 			}
 		}
 		// Vertical panels
 		else {
 			if (this.config._showTextInPanel) {
-				label = temp;
+				label = TempToUserConfig(temperature, this.config, false);
 				// Vertical panel width is more than this value then we has space
 				// to show units
 				if (this.GetPanelHeight() >= 35) {

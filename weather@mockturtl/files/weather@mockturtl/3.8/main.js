@@ -148,7 +148,6 @@ class WeatherApplet extends TextIconApplet {
     }
     DisplayWeatherOnLabel(temperature, mainCondition) {
         mainCondition = utils_1.CapitalizeFirstLetter(mainCondition);
-        let temp = utils_1.TempToUserConfig(temperature, this.config);
         let label = "";
         if (this.Orientation != Side.LEFT && this.Orientation != Side.RIGHT) {
             if (this.config._showCommentInPanel) {
@@ -158,12 +157,12 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += temp;
+                label += utils_1.TempToUserConfig(temperature, this.config);
             }
         }
         else {
             if (this.config._showTextInPanel) {
-                label = temp;
+                label = utils_1.TempToUserConfig(temperature, this.config, false);
                 if (this.GetPanelHeight() >= 35) {
                     label += utils_1.UnitToUnicode(this.config.TemperatureUnit);
                 }
