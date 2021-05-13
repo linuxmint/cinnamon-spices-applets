@@ -245,6 +245,8 @@ declare namespace imports.ui.settings {
 		 * to deleting the object.
 		 */
 		public finalize(): void;
+
+		public connect(emitter: string, callback: Function): void;
 	}
 
 

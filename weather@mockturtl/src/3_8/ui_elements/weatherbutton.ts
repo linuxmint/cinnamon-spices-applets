@@ -25,7 +25,7 @@ export class WeatherButton {
 		this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
 		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
 		this.actor.connect("clicked", () => this.clicked());
-		this.actor.connect("enter-event", (ev) => this.hovered(ev));
+		this.actor.connect("enter-event", (actor, event) => this.hovered(event));
 	}
 
 	handleEnter(actor?: WeatherButton) {
