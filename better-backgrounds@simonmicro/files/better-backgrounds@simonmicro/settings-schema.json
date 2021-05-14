@@ -25,7 +25,7 @@
         "applet": {
             "type": "section",
             "title": "Applet",
-            "keys": ["applet-icon-animation", "applet-show-notification", "applet-info-issues"]
+            "keys": ["applet-icon-animation", "applet-show-notification", "applet-save-location", "applet-info-issues"]
         },
         "effects": {
             "type": "section",
@@ -101,6 +101,13 @@
         "default" : true,
         "description": "Show notifications on problems",
         "tooltip": "Bad network? Faulty setup? The applet will notify you. Every time."
+    },
+    "applet-save-location" : {
+        "type" : "filechooser",
+        "description": "Picture save location",
+        "default" : "/home/simon",
+        "select-dir" : true,
+        "tooltip": "When you choose to save the current background, where do you want to put it?"
     },
     "applet-info-issues" : {
         "type" : "label",

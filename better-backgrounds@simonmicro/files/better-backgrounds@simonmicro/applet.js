@@ -32,6 +32,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 
         this.settings.bind("applet-icon-animation", "applet_icon_animation", this.on_settings_changed);
         this.settings.bind("applet-show-notification", "applet_show_notification", this.on_settings_changed);
+        this.settings.bind("applet-save-location", "applet_save_location", this.on_settings_changed);
         this.settings.bind("change-onstart", "change_onstart", this.on_settings_changed);
         this.settings.bind("change-onclick", "change_onclick", this.on_settings_changed);
         this.settings.bind("change-ontime", "change_ontime", this.on_settings_changed);
@@ -51,6 +52,16 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.httpAsyncSession = new Soup.SessionAsync();
         Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
         this.swapChainSwapped = false;
+        
+        const defaultSavePath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/';
+        if(this.applet_save_location == '')
+            //Default path is the users picture dir
+            this.applet_save_location = defaultSavePath;
+        else if(!this.applet_save_location.startsWith('file://')) {
+            //I have no idea, why this should happen... Consider these lines as unreachable?
+            log('Selected save path does not look right - please file a bug report: ' + this.applet_save_location)
+            this.applet_save_location = defaultSavePath;
+        }
 
         this.on_settings_changed();
 
@@ -241,8 +252,14 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _store_background() {
+        let targetPath = Math.floor(Math.random() * 899999 + 100000) + '.png'; //Random int between 100000 and 999999
+        if(this.applet_save_location.startsWith('file://'))
+            //Strip the "file://" prefix
+            targetPath = this.applet_save_location.substr(7) + '/' + targetPath
+        else 
+            targetPath = this.applet_save_location + '/' + targetPath
+    
         //Copy the background to users picture folder with random name and show the stored notification
-        let targetPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' + Math.floor(Math.random() * 2048) + '.png';
         var that = this;
         this._run_cmd(['convert', this._get_swap_chain_image_current(), '-write', targetPath]).then(function() {
             that._show_notification('Image stored to: ' + targetPath);
