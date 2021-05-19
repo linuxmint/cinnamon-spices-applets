@@ -1,7 +1,7 @@
 import { notifySend } from "functions/notify";
 import { spawnCommandLinePromise } from "functions/promiseHelpers";
 
-import { MPRIS_PLUGIN_PATH, MPRIS_PLUGIN_URL } from 'CONSTANTS'
+import { MPRIS_PLUGIN_PATH, MPRIS_PLUGIN_URL } from 'consts'
 
 const { file_new_for_path } = imports.gi.Gio;
 const { find_program_in_path } = imports.gi.GLib;

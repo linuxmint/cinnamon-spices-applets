@@ -1,7 +1,7 @@
 const { spawnCommandLine } = imports.misc.util;
 
-import { MPRIS_PLUGIN_PATH, MAX_VOLUME } from 'CONSTANTS'
-import { createMpvMprisBase, MpvMprisBase } from 'mpv/MpvMprisBase';
+import { MPRIS_PLUGIN_PATH, MAX_VOLUME } from 'consts'
+import { MpvMprisBase } from 'mpv/MpvMprisBase';
 
 export interface MprisControllerArguments {
     mprisBase: MpvMprisBase,
@@ -9,7 +9,7 @@ export interface MprisControllerArguments {
 
 }
 
-export async function createMpvMprisController(args: MprisControllerArguments) {
+export function createMpvMprisController(args: MprisControllerArguments) {
 
     let {
         getInitialVolume,
@@ -64,6 +64,7 @@ export async function createMpvMprisController(args: MprisControllerArguments) {
         }
 
         mediaServerPlayer.OpenUriRemote(url)
+        mediaServerPlayer.PlayRemote()
 
     }
 
@@ -79,11 +80,11 @@ export async function createMpvMprisController(args: MprisControllerArguments) {
         mediaServerPlayer.StopRemote()
     }
 
-    function getCurrentTitle() {
+    function getCurrentTitle(): string {
         if (getPlaybackStatus() === "Stopped") return
 
-        return mediaServerPlayer
-            .Metadata["xesam:title"].unpack()
+        // @ts-ignore
+        return mediaServerPlayer.Metadata["xesam:title"].unpack()
     }
 
     const mpvMprisController = {

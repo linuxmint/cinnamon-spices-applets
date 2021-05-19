@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.listenToDbus = void 0;
-const promiseHelpers_1 = require("functions/promiseHelpers");
-const CONSTANTS_1 = require("CONSTANTS");
-async function listenToDbus(args) {
+const consts_1 = require("consts");
+const { getDBus, getDBusProxyWithOwner } = imports.misc.interfaces;
+function listenToDbus(args) {
     const { onMpvRegistered, onMpvStopped } = args;
-    const dbus = await promiseHelpers_1.getDBusPromise();
+    const dbus = getDBus();
     dbus.connectSignal('NameOwnerChanged', (...args) => {
         const name = args[2][0];
         const oldOwner = args[2][1];
         const newOwner = args[2][2];
-        if (name !== CONSTANTS_1.MPV_MPRIS_BUS_NAME)
+        if (name !== consts_1.MPV_MPRIS_BUS_NAME)
             return;
         if (newOwner) {
             onMpvRegistered();
@@ -21,9 +21,9 @@ async function listenToDbus(args) {
     async function pauseAllOtherMediaPlayer() {
         const allMprisPlayerBusNames = await getAllMrisPlayerBusNames();
         allMprisPlayerBusNames.forEach(async (busName) => {
-            if (busName === CONSTANTS_1.MPV_MPRIS_BUS_NAME)
+            if (busName === consts_1.MPV_MPRIS_BUS_NAME)
                 return;
-            const mediaServerPlayer = await promiseHelpers_1.getDBusProxyWithOwnerPromise(CONSTANTS_1.MEDIA_PLAYER_2_PLAYER_NAME, busName);
+            const mediaServerPlayer = await getDBusProxyWithOwner(consts_1.MEDIA_PLAYER_2_PLAYER_NAME, busName);
             mediaServerPlayer.PauseRemote();
         });
     }
@@ -38,7 +38,7 @@ async function listenToDbus(args) {
         });
     }
     const checkMpvRunning = async function () {
-        return (await getAllMrisPlayerBusNames()).includes(CONSTANTS_1.MPV_MPRIS_BUS_NAME);
+        return (await getAllMrisPlayerBusNames()).includes(consts_1.MPV_MPRIS_BUS_NAME);
     };
     return {
         checkMpvRunning

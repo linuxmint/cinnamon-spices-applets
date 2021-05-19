@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkInstallMrisPlugin = exports.checkInstallMpv = void 0;
 const notify_1 = require("functions/notify");
 const promiseHelpers_1 = require("functions/promiseHelpers");
-const CONSTANTS_1 = require("CONSTANTS");
+const consts_1 = require("consts");
 const { file_new_for_path } = imports.gi.Gio;
 const { find_program_in_path } = imports.gi.GLib;
 function checkInstallMpv() {
@@ -21,7 +21,7 @@ function checkInstallMpv() {
 exports.checkInstallMpv = checkInstallMpv;
 function checkInstallMrisPlugin() {
     return new Promise(async (resolve, reject) => {
-        if (file_new_for_path(CONSTANTS_1.MPRIS_PLUGIN_PATH).query_exists(null)) {
+        if (file_new_for_path(consts_1.MPRIS_PLUGIN_PATH).query_exists(null)) {
             return resolve();
         }
         let [stderr, stdout, exitCode] = await promiseHelpers_1.spawnCommandLinePromise(`python3  ${__meta.path}/download-dialog-mpris.py`);
@@ -29,7 +29,7 @@ function checkInstallMrisPlugin() {
             return reject();
         }
         [stderr, stdout, exitCode] = await promiseHelpers_1.spawnCommandLinePromise(`
-            wget ${CONSTANTS_1.MPRIS_PLUGIN_URL} -O ${CONSTANTS_1.MPRIS_PLUGIN_PATH}`);
+            wget ${consts_1.MPRIS_PLUGIN_URL} -O ${consts_1.MPRIS_PLUGIN_PATH}`);
         return (exitCode === 0) ? resolve() : reject(stderr);
     });
 }
