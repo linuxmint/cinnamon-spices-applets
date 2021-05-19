@@ -498,8 +498,324 @@ declare namespace imports.gi.Meta {
 	}
 
 	export class Screen {}
-	export class Display {}
+
+	export class Display extends GObject.Object {
+		public readonly focus_window: Window;
+
+		/**
+		 * Save the specified serial and ignore crossing events with that
+		 * serial for the purpose of focus-follows-mouse. This can be used
+		 * for certain changes to the window hierarchy that we don't want
+		 * to change the focus window, even if they cause the pointer to
+		 * end up in a new window.
+		 * @param serial the serial to ignore
+		 */
+		public add_ignored_crossing_serial(serial: number): void;
+
+		/**
+		 * Add a keybinding at runtime. The key name in @schema needs to be of
+		 * type %G_VARIANT_TYPE_STRING_ARRAY, with each string describing a
+		 * keybinding in the form of "&lt;Control&gt;a" or "&lt;Shift&gt;&lt;Alt&gt;F1". The parser
+		 * is fairly liberal and allows lower or upper case, and also abbreviations
+		 * such as "&lt;Ctl&gt;" and "&lt;Ctrl&gt;". If the key is set to the empty list or a
+		 * list with a single element of either "" or "disabled", the keybinding is
+		 * disabled.
+		 * 
+		 * Use Meta.Display.remove_keybinding to remove the binding.
+		 * @param name the binding's name
+		 * @param settings the Gio.Settings object where name is stored
+		 * @param flags flags to specify binding details
+		 * @param handler function to run when the keybinding is invoked
+		 * @returns the corresponding keybinding action if the keybinding was
+		 * added successfully, otherwise Meta.KeyBindingAction.NONE
+		 */
+		public add_keybinding(name: string, settings: Gio.Settings, flags: KeyBindingFlags, handler: Function): number;
+		
+		public begin_grab_op(window: Window, op: GrabOp, pointer_already_grabbed: boolean, frame_action: boolean, button: number, modmask: number, timestamp: number, root_x: number, root_y: number): boolean;
+		
+		/**
+		 * Sets the mouse-mode flag to false, which means that motion events are
+		 * no longer ignored in mouse or sloppy focus.
+		 * This is an internal function. It should be used only for reimplementing
+		 * keybindings, and only in a manner compatible with core code.
+		 */
+		public clear_mouse_mode(): void;
+
+		public close(timestamp: number): void;
+		public end_grab_op(timestamp: number): void;
+		public focus_default_window(timestamp: number): void;
+		public freeze_keyboard(timestamp: number): void;
+
+		/**
+		 * Gets the index of the monitor that currently has the mouse pointer.
+		 * @returns a monitor index
+		 */
+		public get_current_monitor(): number;
+		public get_current_time(): number;
+		public get_current_time_roundtrip(): number;
+
+		/**
+		 * Get our best guess as to the "currently" focused window (that is,
+		 * the window that we expect will be focused at the point when the X
+		 * server processes our next request).
+		 * @returns The current focus window
+		 */
+		public get_focus_window(): Window;
+
+		/**
+		 * Gets the current grab operation, if any.
+		 * @returns he current grab operation, or Meta.GrabOp.NONE if
+		 * Mutter doesn't currently have a grab. Meta.GrabOp.COMPOSITOR will
+		 * be returned if a compositor-plugin modal operation is in effect
+		 * (See mutter_begin_modal_for_plugin())
+		 */
+		public get_grab_op(): GrabOp;
+
+		/**
+		 * Get the keybinding action bound to keycode. Builtin keybindings
+		 * have a fixed associated Meta.KeyBindingAction, for bindings added
+		 * dynamically the function will return the keybinding action
+		 * Meta.Display.add_keybinding returns on registration.
+		 * @param keycode Raw keycode
+		 * @param mask Event mask
+		 * @returns The action that should be taken for the given key, or
+		 * Meta.KeyBindingAction.NONE.
+		 */
+		public get_keybinding_action(keycode: number, mask: number): KeyBindingAction;
+
+		/**
+		 * @returns Timestamp of the last user interaction event with a window
+		 */
+		public get_last_user_time(): number;
+
+		/**
+		 * Stores the location and size of the indicated monitor in @geometry.
+		 * @param monitor the monitor number
+		 * @returns location to store the monitor geometry
+		 */
+		public get_monitor_geometry(monitor: number): Rectangle;
+
+		/**
+		 * Determines whether there is a fullscreen window obscuring the specified
+		 * monitor. If there is a fullscreen window, the desktop environment will
+		 * typically hide any controls that might obscure the fullscreen window.
+		 * 
+		 * You can get notification when this changes by connecting to
+		 * MetaDisplay::in-fullscreen-changed.
+		 * @param monitor  the monitor number
+		 * @returns true if there is a fullscreen window covering the specified monitor.
+		 */
+		public get_monitor_in_fullscreen(monitor: number): boolean;
+		public get_monitor_index_for_rect(rect: Rectangle): number;
+		public get_monitor_neighbor_index(which_monitor: number, dir: DisplayDirection): number;
+
+		/**
+		 * Gets the monitor scaling value for the given monitor.
+		 * @param monitor the monitor number
+		 * @returns the monitor scaling value
+		 */
+		public get_monitor_scale(monitor: number): number;
+
+		/**
+		 * Gets the number of monitors that are joined together to form this.
+		 * @returns  the number of monitors
+		 */
+		public get_n_monitors(): number;
+		public get_pad_action_label(pad: Clutter.InputDevice, action_type: PadActionType, action_number: number): string;
+
+		/**
+		 * Gets the index of the primary monitor on this this.
+		 * @returns a monitor index
+		 */
+		public get_primary_monitor():  number;
+
+		/**
+		 * @returns The selection manager of the display
+		 */
+		public get_selection(): Selection;
+
+		/**
+		 * Retrieve the size of the display.
+		 * @returns - width (Number) — The width of the screen
+        - height (Number) — The height of the screen
+		 */
+		public get_size(): number[];
+
+		/**
+		 * @returns The sound player of the display
+		 */
+		public get_sound_player(): SoundPlayer;
+
+		/**
+		 * Determine the active window that should be displayed for Alt-TAB.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @returns Current window
+		 */
+		public get_tab_current(type: TabList, workspace: Workspace): Window;
+
+		/**
+		 * Determine the list of windows that should be displayed for Alt-TAB
+		 * functionality. The windows are returned in most recently used order.
+		 * If workspace is not null, the list only contains windows that are on
+		 * workspace or have the demands-attention hint set; otherwise it contains
+		 * all windows.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @returns List of windows
+		 */
+		public get_tab_list(type: TabList, workspace: Workspace): Window[];
+
+		/**
+		 * Determine the next window that should be displayed for Alt-TAB
+		 * functionality.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @param window  starting window
+		 * @param backward If true, look for the previous window
+		 * @returns Next window
+		 */
+		public get_tab_next(type: TabList, workspace: Workspace, window: Window, backward: boolean): Window;
+
+		/**
+		 * @returns The workspace manager of the display
+		 */
+		public get_workspace_manager(): WorkspaceManager;
+		public grab_accelerator(accelerator: string, flags: KeyBindingFlags): number;
+
+		/**
+		 * Tells whether the event sequence is the used for pointer emulation
+		 * and single-touch interaction.
+		 * @param sequence a Clutter.EventSequence
+		 * @returns TRUE if the sequence emulates pointer behavior
+		 */
+		public is_pointer_emulating_sequence(sequence: Clutter.EventSequence): boolean;
+
+		/**
+		 * Remove keybinding name; the function will fail if name is not a known
+		 * keybinding or has not been added with Meta.Display.add_keybinding.
+		 * @param name name of the keybinding to remove
+		 * @returns true if the binding has been removed successfully,
+		 * otherwise false
+		 */
+		public remove_keybinding(name: string): boolean;
+		public request_pad_osd(pad: Clutter.InputDevice, edition_mode: boolean): void;
+		public set_cursor(cursor: Cursor): void;
+		public set_input_focus(window: Window, focus_frame: boolean, timestamp: number): void;
+
+		/**
+		 * Sorts a set of windows according to their current stacking order. If windows
+		 * from multiple screens are present in the set of input windows, then all the
+		 * windows on screen 0 are sorted below all the windows on screen 1, and so forth.
+		 * Since the stacking order of override-redirect windows isn't controlled by
+		 * Metacity, if override-redirect windows are in the input, the result may not
+		 * correspond to the actual stacking order in the X server.
+		 * 
+		 * An example of using this would be to sort the list of transient dialogs for a
+		 * window into their current stacking order.
+		 * @param windows Set of windows
+		 * @returns Input windows sorted by stacking order, from lowest to highest
+		 */
+		public sort_windows_by_stacking(windows: Window[]): Window[];
+
+		/**
+		 * @returns whether pointer barriers can be supported.
+		 *
+		 * When running as an X compositor the X server needs XInput 2
+		 * version 2.3. When running as a display server it is supported
+		 * when running on the native backend.
+		 * 
+		 * Clients should use this method to determine whether their
+		 * interfaces should depend on new barrier features.
+		 */
+		public supports_extended_barriers(): boolean;
+		public unfreeze_keyboard(timestamp: number): void;
+		public ungrab_accelerator(action_id: number): void;
+		public ungrab_keyboard(timestamp: number): void;
+		public unset_input_focus(timestamp: number): void;
+
+		/**
+		 * Xserver time can wraparound, thus comparing two timestamps needs to take
+		 * this into account. If no wraparound has occurred, this is equivalent to
+		 * time1 < time2
+		 * Otherwise, we need to account for the fact that wraparound can occur
+		 * and the fact that a timestamp of 0 must be special-cased since it
+		 * means "older than anything else".
+		 * 
+		 * Note that this is NOT an equivalent for time1 <= time2; if that's what
+		 * you need then you'll need to swap the order of the arguments and negate
+		 * the result.
+		 * @param time1 An event timestamp
+		 * @param time2 An event timestamp
+		 */
+		public xserver_time_is_before(time1: number, time2: number): boolean; 
+	}
+
+	export class SoundPlayer {
+
+	}
+
+	export class Cursor {
+
+	}
+
 	export class StackLayer {}
+
+	export class WorkspaceManager {
+
+	}
+
+	export class Selection extends GObject.Object {
+		public static new(display: Display): Selection;
+		public connect(signal: "owner-changed", callback: (object: number, p0: SelectionSource) => void): void;
+
+		/**
+		 * Returns the list of supported mimetypes for the given selection type.
+		 * @param selection_type Selection to query
+		 * @returns  The supported mimetypes
+		 */
+		public get_mimetypes(selection_type: SelectionType): string[];
+
+		/**
+		 * Sets owner as the owner of the selection given by selection_type,
+		 * unsets any previous owner there was.
+		 * @param selection_type Selection type
+		 * @param owner New selection owner
+		 */
+		public set_owner(selection_type: SelectionType, owner: SelectionSource): void;
+
+		/**
+		 * Requests a transfer of mimetype on the selection given by
+		 * selection_type.
+		 * @param selection_type Selection type
+		 * @param mimetype Mimetype to transfer
+		 * @param size Maximum size to transfer, -1 for unlimited
+		 * @param output Output stream to write contents to
+		 * @param cancellable Cancellable
+		 * @param callback User callback
+		 */
+		public transfer_async(selection_type: SelectionType, mimetype: string, size: number, output: Gio.OutputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+
+		/**
+		 * Finishes the transfer of a queried mimetype.
+		 * @param result The async result
+		 * @returns true if the transfer was successful
+		 * @throws Error
+		 */
+		public transfer_finish(result: Gio.AsyncResult): boolean;
+
+		/**
+		 * Unsets owner as the owner the selection given by selection_type. If
+		 * owner does not own the selection, nothing is done.
+		 * @param selection_type Selection type
+		 * @param owner  Owner to unset
+		 */
+		public unset_owner(selection_type: SelectionType, owner: SelectionSource): void; 
+	}
+
+	export class SelectionSource {
+
+	}
 
 	export class Strut {
 		rect: Rectangle;
@@ -509,11 +825,142 @@ declare namespace imports.gi.Meta {
 
 	}
 
+	export interface KeyBindingFlags {
+
+	}
+
+	export enum TabList {
+		/** Normal windows */
+		NORMAL = 0,
+		/** Dock windows */
+		DOCKS = 1,
+		/** Groups */
+		GROUP = 2,
+		/** All windows */
+		NORMAL_ALL = 3
+	}
+
+	export enum SelectionType {
+		SELECTION_PRIMARY = 0,
+		SELECTION_CLIPBOARD = 1,
+		SELECTION_DND = 2,
+		N_SELECTION_TYPES = 3
+	}
+
 	export enum Side {
 		LEFT = 1,
 		RIGHT = 2,
 		TOP = 4,
 		BOTTOM = 8
+	}
+
+	export enum DisplayDirection {
+		UP = 0,
+		DOWN = 1,
+		LEFT = 2,
+		RIGHT = 3
+	}
+
+	export enum PadActionType {
+		BUTTON = 0,
+		RING = 1,
+		STRIP = 2
+	}
+
+	export enum KeyBindingAction {
+		NONE = 0,
+		WORKSPACE_1 = 1,
+		WORKSPACE_2 = 2,
+		WORKSPACE_3 = 3,
+		WORKSPACE_4 = 4,
+		WORKSPACE_5 = 5,
+		WORKSPACE_6 = 6,
+		WORKSPACE_7 = 7,
+		WORKSPACE_8 = 8,
+		WORKSPACE_9 = 9,
+		WORKSPACE_10 = 10,
+		WORKSPACE_11 = 11,
+		WORKSPACE_12 = 12,
+		WORKSPACE_LEFT = 13,
+		WORKSPACE_RIGHT = 14,
+		WORKSPACE_UP = 15,
+		WORKSPACE_DOWN = 16,
+		WORKSPACE_LAST = 17,
+		SWITCH_APPLICATIONS = 18,
+		SWITCH_APPLICATIONS_BACKWARD,
+		SWITCH_GROUP = 20,
+		SWITCH_GROUP_BACKWARD,
+		SWITCH_WINDOWS = 22,
+		SWITCH_WINDOWS_BACKWARD = 23,
+		SWITCH_PANELS = 24,
+		SWITCH_PANELS_BACKWARD = 25,
+		CYCLE_GROUP = 26,
+		CYCLE_GROUP_BACKWARD = 27,
+		CYCLE_WINDOWS = 28,
+		CYCLE_WINDOWS_BACKWARD = 29,
+		CYCLE_PANELS = 30,
+		CYCLE_PANELS_BACKWARD = 31,
+		SHOW_DESKTOP = 32,
+		PANEL_MAIN_MENU = 33,
+		PANEL_RUN_DIALOG = 34,
+		TOGGLE_RECORDING = 35,
+		SET_SPEW_MARK = 36,
+		ACTIVATE_WINDOW_MENU = 37,
+		TOGGLE_FULLSCREEN = 38,
+		TOGGLE_MAXIMIZED = 39,
+		TOGGLE_TILED_LEFT = 40,
+		TOGGLE_TILED_RIGHT = 41,
+		TOGGLE_ABOVE = 42,
+		MAXIMIZE = 43,
+		UNMAXIMIZE = 44,
+		TOGGLE_SHADED = 45,
+		MINIMIZE = 46,
+		CLOSE = 47,
+		BEGIN_MOVE = 48,
+		BEGIN_RESIZE = 49,
+		TOGGLE_ON_ALL_WORKSPACES = 50,
+		MOVE_TO_WORKSPACE_1 = 51,
+		MOVE_TO_WORKSPACE_2 = 52,
+		MOVE_TO_WORKSPACE_3 = 53,
+		MOVE_TO_WORKSPACE_4 = 54,
+		MOVE_TO_WORKSPACE_5 = 55,
+		MOVE_TO_WORKSPACE_6 = 56,
+		MOVE_TO_WORKSPACE_7 = 57,
+		MOVE_TO_WORKSPACE_8 = 58,
+		MOVE_TO_WORKSPACE_9 = 59,
+		MOVE_TO_WORKSPACE_10 = 60,
+		MOVE_TO_WORKSPACE_11 = 61,
+		MOVE_TO_WORKSPACE_12 = 62,
+		MOVE_TO_WORKSPACE_LEFT = 63,
+		MOVE_TO_WORKSPACE_RIGHT = 64,
+		MOVE_TO_WORKSPACE_UP = 65,
+		MOVE_TO_WORKSPACE_DOWN = 66,
+		MOVE_TO_WORKSPACE_LAST = 67,
+		MOVE_TO_MONITOR_LEFT = 68,
+		MOVE_TO_MONITOR_RIGHT = 69,
+		MOVE_TO_MONITOR_UP = 70,
+		MOVE_TO_MONITOR_DOWN = 71,
+		RAISE_OR_LOWER = 72,
+		RAISE = 73,
+		LOWER = 74,
+		MAXIMIZE_VERTICALLY = 75,
+		MAXIMIZE_HORIZONTALLY = 76,
+		MOVE_TO_CORNER_NW = 77,
+		MOVE_TO_CORNER_NE = 78,
+		MOVE_TO_CORNER_SW = 79,
+		MOVE_TO_CORNER_SE = 80,
+		MOVE_TO_SIDE_N = 81,
+		MOVE_TO_SIDE_S = 82,
+		MOVE_TO_SIDE_E = 83,
+		MOVE_TO_SIDE_W = 84,
+		MOVE_TO_CENTER = 85,
+		OVERLAY_KEY = 86,
+		LOCATE_POINTER_KEY = 87,
+		ISO_NEXT_GROUP = 88,
+		ALWAYS_ON_TOP = 89,
+		SWITCH_MONITOR = 90,
+		ROTATE_MONITOR = 91,
+		LAST = 92,
 	}
 
 	export enum MotionDirection {

@@ -1,4 +1,13 @@
 declare namespace imports.gi.Clutter {
+
+	export class EventSequence {
+
+	}
+
+	export class InputDevice extends GObject.Object {
+
+	}
+
 	export class GridLayout {
 		constructor(options: any);
 		set_column_homogeneous(homogeneous: boolean): void;
