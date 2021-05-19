@@ -423,13 +423,116 @@ declare namespace imports.gi.Meta {
 		public unstick(): void;
 	}
 
+	export class Workspace extends GObject.Object {
+		public readonly active: boolean;
+		public readonly n_windows: number;
+		public readonly workspace_index: number;
 
-	export class Workspace {}
+		public connect(signal: "window-added" | "window-removed", callback: (object: Window) => void): void;
+
+		public activate(timestamp: number): void;
+
+		/**
+		 * Switches to this and possibly activates the window focus_this.
+
+		 * The window focus_this is activated by calling Meta.Window.activate
+		 * which will unminimize it and transient parents, raise it and give it
+		 * the focus.
+		 * 
+		 * If a window is currently being moved by the user, it will be
+		 * moved to this.
+		 * 
+		 * The advantage of calling this function instead of Meta.Workspace.activate
+		 * followed by Meta.Window.activate is that it happens as a unit, so
+		 * no other window gets focused first before focus_this.
+		 * @param focus_this the Meta.Window to be focused, or null
+		 * @param timestamp timestamp for focus_this
+		 */
+		public activate_with_focus(focus_this: Window, timestamp: number): void;
+		
+		/**
+		 * Gets the Meta.Display that the workspace is part of.
+		 * @returns the Meta.Display for the workspace
+		 */
+		public get_display(): Display;
+
+		/**
+		 * Calculate and retrieve the workspace that is next to this,
+		 * according to direction and the current workspace layout, as set
+		 * by meta_screen_override_workspace_layout().
+		 * @param direction a Meta.MotionDirection, relative to this
+		 * @returns the workspace next to this, or this itself if the neighbor would be outside the layout
+		 */
+		public get_neighbor(direction: MotionDirection): Workspace;
+
+		/**
+		 * Stores the work area in @area.
+		 * @returns location to store the work area
+		 */
+		public get_work_area_all_monitors(): Rectangle;
+
+		/**
+		 * Stores the work area for which_monitor on this
+		 * in @area.
+		 * @param which_monitor a monitor index
+		 * @returns  location to store the work area
+		 */
+		public get_work_area_for_monitor(which_monitor: number): Rectangle;
+		
+		public index(): number;
+
+		/**
+		 * Gets windows contained on the workspace, including workspace->windows
+		 * and also sticky windows. Override-redirect windows are not included.
+		 * @returns the list of windows.
+		 */
+		public list_windows(): Window[];
+
+		/**
+		 * Sets a list of struts that will be used in addition to the struts
+		 * of the windows in the workspace when computing the work area of
+		 * the workspace.
+		 * @param struts list of Meta.Strut
+		 */
+		public set_builtin_struts(struts: Strut[]): void;
+	}
+
 	export class Screen {}
 	export class Display {}
 	export class StackLayer {}
+
+	export class Strut {
+		rect: Rectangle;
+		side: Side;
+	}
 	export interface ModalOptions {
 
+	}
+
+	export enum Side {
+		LEFT = 1,
+		RIGHT = 2,
+		TOP = 4,
+		BOTTOM = 8
+	}
+
+	export enum MotionDirection {
+		/** Upwards motion */
+		UP = -1,
+		/** Downwards motion */
+		DOWN = -2,
+		/** Motion to the left */
+		LEFT = -3,
+		/** Motion to the right */
+		RIGHT = -4,
+		/** Motion up and to the left */
+		UP_LEFT = -5,
+		/** Motion up and to the right */
+		UP_RIGHT = -6,
+		/** Motion down and to the left */
+		DOWN_LEFT = -7,
+		/** Motion down and to the right */
+		DOWN_RIGHT = -8
 	}
 
 	export enum GrabOp {
