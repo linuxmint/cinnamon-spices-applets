@@ -12,6 +12,7 @@ function listenToMpvMpris(args) {
     let currentUrl = initialPlaybackStatus !== "Stopped" ? initialUrl : null;
     let currentTitle = null;
     let currentLength = getLength();
+    let lastVolume = initialVolume || null;
     let propsChangeListener;
     const mediaProps = getDBusProperties(consts_1.MPV_MPRIS_BUS_NAME, consts_1.MEDIA_PLAYER_2_PATH);
     if (initialPlaybackStatus !== "Stopped")
@@ -32,11 +33,11 @@ function listenToMpvMpris(args) {
                 return;
             if (length != null)
                 handleLengthChanged(length);
+            if (volume != null)
+                handleVolumeChanged(volume);
             playbackStatus && handleMprisPlaybackStatusChanged(playbackStatus);
             url && newUrlValid && url !== currentUrl && handleUrlChanged(url);
             title && handleTitleSet(title);
-            if (volume != null)
-                onVolumeChanged(normalizeVolume(volume));
         });
     }
     function handleLengthChanged(length) {
@@ -50,7 +51,6 @@ function listenToMpvMpris(args) {
     function handleMprisPlaybackStatusChanged(playbackStatus) {
         if (currentLength === 0) {
             onPlaybackstatusChanged('Loading');
-            global.log(`actually loading`);
         }
         else {
             onPlaybackstatusChanged(playbackStatus);
@@ -61,9 +61,10 @@ function listenToMpvMpris(args) {
         handleLengthChanged(0);
         onUrlChanged(newUrl);
     }
-    function normalizeVolume(mprisVolume) {
+    function handleVolumeChanged(mprisVolume) {
         const normalizedVolume = Math.round(mprisVolume * 100);
-        return normalizedVolume;
+        lastVolume = normalizedVolume;
+        onVolumeChanged(normalizedVolume);
     }
     function handleTitleSet(title) {
         if (title === currentTitle)
@@ -83,6 +84,7 @@ function listenToMpvMpris(args) {
         return length;
     }
     return {
+        getLastVolume: () => lastVolume,
         activateListener,
         deactivateListener
     };

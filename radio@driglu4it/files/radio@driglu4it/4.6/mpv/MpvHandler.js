@@ -24,6 +24,7 @@ function createMpvHandler(args) {
         initialUrl
     });
     function handlePlaybackStatusChanged(playbackStatus) {
+        let lastVolume = null;
         if (playbackStatus === 'Playing') {
             mprisBase.setStop(false);
             cvcHandler.setVolume(mprisController.getVolume());
@@ -31,8 +32,9 @@ function createMpvHandler(args) {
         if (playbackStatus === 'Stopped') {
             mprisListener.deactivateListener();
             mprisBase.setStop(true);
+            lastVolume = mprisListener.getLastVolume();
         }
-        onPlaybackstatusChanged(playbackStatus);
+        onPlaybackstatusChanged(playbackStatus, lastVolume);
     }
     const mprisController = MpvMprisController_1.createMpvMprisController({
         getInitialVolume,

@@ -46,6 +46,8 @@ export function listenToMpvMpris(args: MprisListenerArguments) {
     let currentTitle: string = null
     let currentLength: number = getLength()
 
+    let lastVolume: number = initialVolume || null
+
     let propsChangeListener: Function
 
     const mediaProps = getDBusProperties(
@@ -76,16 +78,15 @@ export function listenToMpvMpris(args: MprisListenerArguments) {
                 const newUrlValid = checkUrlValid(url)
                 const relevantEvent = newUrlValid || currentUrl
 
-                // global.log(JSON.stringify(metadata))
-
                 if (!relevantEvent) return // happens when mpv is running with a file/stream not managed by the applet
 
                 if (length != null) handleLengthChanged(length)
 
+                if (volume != null) handleVolumeChanged(volume)
+
                 playbackStatus && handleMprisPlaybackStatusChanged(playbackStatus)
                 url && newUrlValid && url !== currentUrl && handleUrlChanged(url)
                 title && handleTitleSet(title)
-                if (volume != null) onVolumeChanged(normalizeVolume(volume))
 
             }
         )
@@ -108,7 +109,6 @@ export function listenToMpvMpris(args: MprisListenerArguments) {
 
         if (currentLength === 0) {
             onPlaybackstatusChanged('Loading')
-            global.log(`actually loading`)
         } else {
             onPlaybackstatusChanged(playbackStatus)
         }
@@ -122,9 +122,10 @@ export function listenToMpvMpris(args: MprisListenerArguments) {
         onUrlChanged(newUrl)
     }
 
-    function normalizeVolume(mprisVolume: number) {
+    function handleVolumeChanged(mprisVolume: number) {
         const normalizedVolume = Math.round(mprisVolume * 100)
-        return normalizedVolume
+        lastVolume = normalizedVolume
+        onVolumeChanged(normalizedVolume)
     }
 
     function handleTitleSet(title: string) {
@@ -149,6 +150,7 @@ export function listenToMpvMpris(args: MprisListenerArguments) {
     }
 
     return {
+        getLastVolume: () => lastVolume,
         activateListener,
         deactivateListener
     }

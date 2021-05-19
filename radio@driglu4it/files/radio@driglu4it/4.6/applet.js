@@ -58,7 +58,6 @@ function main(metadata, orientation, panelHeight, instanceId) {
             appletIcon.setColorWhenPlaying(color);
         },
         onIconColorPausedChanged: (color) => {
-            global.log(`on Icon color pause changed to: ${color}`);
             appletIcon.setColorWhenPaused(color);
         },
         onChannelOnPanelChanged: (channelOnPanel) => {
@@ -139,9 +138,7 @@ function main(metadata, orientation, panelHeight, instanceId) {
         appletIcon.setIconType(iconType);
     }
     function handleStationsUpdated(stations) {
-        global.log('handleStationsUpated executed');
         const stationsChanged = channelStore.checkListChanged(stations);
-        global.log(`stationsChanged: ${stationsChanged}`);
         if (!stationsChanged)
             return;
         channelStore.channelList = stations;
@@ -150,7 +147,7 @@ function main(metadata, orientation, panelHeight, instanceId) {
         if (!lastUrlValid)
             mpvHandler.stop();
     }
-    function handlePlaybackstatusChanged(playbackstatus) {
+    function handlePlaybackstatusChanged(playbackstatus, lastVolume) {
         if (playbackstatus === 'Stopped')
             handleVolumeChanged(null);
         if (playbackstatus === 'Stopped')
@@ -161,6 +158,8 @@ function main(metadata, orientation, panelHeight, instanceId) {
         if (playbackstatus === 'Playing' || playbackstatus === 'Paused') {
             playPauseBtn.setPlaybackStatus(playbackstatus);
         }
+        if (lastVolume != null)
+            configs.lastVolume = lastVolume;
     }
     function handleUrlChanged(url) {
         const channelName = url ? channelStore.getChannelName(url) : null;

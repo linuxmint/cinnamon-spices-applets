@@ -10,7 +10,7 @@ import { AdvancedPlaybackStatus, PlaybackStatus } from 'types'
 
 interface Arguments extends MprisListenerArguments,
     MprisControllerArguments {
-    onPlaybackstatusChanged: { (playbackStatus: AdvancedPlaybackStatus): void },
+    onPlaybackstatusChanged: (playbackStatus: AdvancedPlaybackStatus, lastVolume?: number) => void,
 }
 
 export function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
@@ -49,6 +49,9 @@ export function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
     })
 
     function handlePlaybackStatusChanged(playbackStatus: PlaybackStatus) {
+
+        let lastVolume = null
+
         if (playbackStatus === 'Playing') {
             mprisBase.setStop(false)
             cvcHandler.setVolume(mprisController.getVolume())
@@ -57,9 +60,10 @@ export function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
         if (playbackStatus === 'Stopped') {
             mprisListener.deactivateListener()
             mprisBase.setStop(true)
+            lastVolume = mprisListener.getLastVolume()
         }
 
-        onPlaybackstatusChanged(playbackStatus)
+        onPlaybackstatusChanged(playbackStatus, lastVolume)
     }
 
     const mprisController = createMpvMprisController({

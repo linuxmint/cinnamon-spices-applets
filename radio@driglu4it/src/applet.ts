@@ -83,7 +83,6 @@ function main(
 			appletIcon.setColorWhenPlaying(color)
 		},
 		onIconColorPausedChanged: (color) => {
-			global.log(`on Icon color pause changed to: ${color}`)
 			appletIcon.setColorWhenPaused(color)
 		},
 		onChannelOnPanelChanged: (channelOnPanel) => {
@@ -192,11 +191,7 @@ function main(
 
 	function handleStationsUpdated(stations: Channel[]) {
 
-		global.log('handleStationsUpated executed')
-
 		const stationsChanged = channelStore.checkListChanged(stations)
-
-		global.log(`stationsChanged: ${stationsChanged}`)
 
 		if (!stationsChanged) return
 
@@ -207,9 +202,9 @@ function main(
 		if (!lastUrlValid) mpvHandler.stop()
 	}
 
-	function handlePlaybackstatusChanged(playbackstatus: AdvancedPlaybackStatus) {
+	function handlePlaybackstatusChanged(playbackstatus: AdvancedPlaybackStatus, lastVolume?: number) {
 
-		// TODO: this should be done by mpvHandler and before playbackstatus set 
+		// TODO: this should be done by mpvHandler
 		if (playbackstatus === 'Stopped') handleVolumeChanged(null)
 		if (playbackstatus === 'Stopped') handleUrlChanged(null)
 
@@ -222,6 +217,8 @@ function main(
 		if (playbackstatus === 'Playing' || playbackstatus === 'Paused') {
 			playPauseBtn.setPlaybackStatus(playbackstatus)
 		}
+
+		if (lastVolume != null) configs.lastVolume = lastVolume
 	}
 
 	function handleUrlChanged(url: string) {
