@@ -1,11 +1,16 @@
 import { spawnCommandLinePromise } from "functions/promiseHelpers";
 import { notifySend } from "functions/notify";
 
+// @ts-ignore
+const { MAX_LENGTH } = imports.misc.util
 const { get_home_dir } = imports.gi.GLib;
+
 
 export async function downloadSongFromYoutube(song: string, downloadDir: string) {
 
     if (!song) return
+
+
 
     // when using the default value of the settings, the dir starts with ~ what can't be understand when executing command. Else it starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
     const music_dir_absolut =
@@ -13,12 +18,13 @@ export async function downloadSongFromYoutube(song: string, downloadDir: string)
 
 
     const downloadCommand = `
-        youtube-dl -o "${music_dir_absolut}/%(title)s.%(ext)s"          --extract-audio --audio-format mp3 ytsearch1:"${song.replace('"', '\"')}" --add-metadata --embed-thumbnail`
+        youtube-dl --output "${music_dir_absolut}/%(title)s.%(ext)s"  --extract-audio --audio-format mp3 ytsearch1:"${song.replace('"', '\"')}" --add-metadata --embed-thumbnail`
 
     try {
         notifySend(`Downloading ${song} ...`)
 
         const [error, stdout] = await spawnCommandLinePromise(downloadCommand)
+
 
         if (error) throw new Error(error)
 
@@ -31,11 +37,14 @@ export async function downloadSongFromYoutube(song: string, downloadDir: string)
 
         if (!filePath) throw new Error("couldn't download song")
 
-        notifySend(`download finished. File saved to ${filePath}`)
+        notifySend(`Download finished. File saved to ${filePath}`)
+
+
+        global.log(`used downloadCommand: ${downloadCommand}`)
 
 
     } catch (error) {
-        const notifyMsg = ("Couldn't download song from Youtube due to an Error. Make Sure you have the newest version installed. Visit the Radio Applet Site in the Cinnamon Store for installation instruction")
+        const notifyMsg = ("Couldn't download song from Youtube due to an Error. Make Sure you have the newest version of youtube-dl installed. Visit the Radio Applet Site in the Cinnamon Store for installation instruction")
         notifySend(notifyMsg)
         global.logError(`${notifyMsg} The following error occured: ${error}. The used download Command was: ${downloadCommand}`)
     }

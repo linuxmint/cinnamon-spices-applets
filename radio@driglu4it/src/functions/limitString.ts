@@ -1,9 +1,10 @@
-export function limitString(text: string) {
 
-    const MAX_LENGTH = 40
+export function limitString(text: string, maxCharNumber: number) {
 
-    if (text.length <= MAX_LENGTH) return text
+    if (!text) return
 
-    return [...text].slice(0, MAX_LENGTH - 3).join('') + '...'
+    if (text.length <= maxCharNumber) return text
+
+    return [...text].slice(0, maxCharNumber - 3).join('') + '...'
 
 }

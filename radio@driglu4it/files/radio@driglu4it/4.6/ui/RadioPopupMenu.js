@@ -28,7 +28,7 @@ function createRadioPopupMenu(args) {
         });
     }
     Object.defineProperties(popupMenu, {
-        running: {
+        radioActive: {
             set(running) {
                 setRunning(running);
             }
