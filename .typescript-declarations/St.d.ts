@@ -21,10 +21,10 @@ declare namespace imports.gi.St {
 		get_child(): Widget;
 		set_child(widget: Widget): void;
 	}
-    export class BorderImage {
+	export class BorderImage {
 
 	}
-    
+
 	export class BoxLayout extends Widget {
 		constructor(options?: any)
 		/** Deprecated, use add_child instead */
@@ -67,7 +67,7 @@ declare namespace imports.gi.St {
 		get_surface_size(): number[];
 		width: number;
 	}
-    export class Entry {
+	export class Entry {
 
 	}
 	export class FocusManager extends gi.GObject.Object {
@@ -77,7 +77,7 @@ declare namespace imports.gi.St {
 		public navigate_from_event(event: Clutter.Event): boolean;
 		public remove_group(root: Widget): void;
 	}
-    export class GenericAccessible {
+	export class GenericAccessible {
 
 	}
 	export class Icon extends Widget {
@@ -94,7 +94,7 @@ declare namespace imports.gi.St {
 		/** css string */
 		style?: string;
 	}
-    export class ImageContent {
+	export class ImageContent {
 
 	}
 	export class Label extends Widget {
@@ -103,7 +103,7 @@ declare namespace imports.gi.St {
 		clutter_text: gi.Clutter.Text;
 		constructor(options?: any);
 	}
-    export class PasswordEntry {
+	export class PasswordEntry {
 
 	}
 	interface IScrollBar {
@@ -133,23 +133,23 @@ declare namespace imports.gi.St {
 		clip_to_allocation: boolean;
 		constructor(options?: any);
 	}
-    export class ScrollViewFade {
+	export class ScrollViewFade {
 
 	}
-    export class Scrollable {
+	export class Scrollable {
 
 	}
-    export class Settings {
+	export class Settings {
 
 	}
-    export class TextureCache {
+	export class TextureCache {
 
 	}
 	export class Theme {
 		constructor();
 		get_custom_stylesheets(): imports.gi.Gio.File[];
 	}
-    export class ThemeContext {
+	export class ThemeContext {
 
 	}
 	export class ThemeNode {
@@ -214,7 +214,7 @@ declare namespace imports.gi.St {
 		paint_equal(other)*/
 		to_string(): string;
 	}
-    export class Viewport {
+	export class Viewport {
 
 	}
 	interface IWidget {
@@ -243,7 +243,7 @@ declare namespace imports.gi.St {
 	export class Widget {
 		constructor(options?: any);
 	}
-    export class WidgetAccessible {
+	export class WidgetAccessible {
 
 	}
 
