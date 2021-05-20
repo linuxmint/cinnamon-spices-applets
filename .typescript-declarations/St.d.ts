@@ -1,32 +1,30 @@
 declare namespace imports.gi.St {
 
-	interface IWidget {
-		destroy(): void;
-		style_class: string;
-		add_style_class_name(style_class: string): void;
-		add_style_pseudo_class(style_class: string): void;
-		remove_style_pseudo_class(pseudo_class: string): void;
-		get_style_class_name(): string;
-		remove_style_class_name(style_class: string): void;
-		get_style(): string;
-		set_style(style: string): string;
-		get_theme(): imports.gi.St.Theme;
-		get_theme_node(): ThemeNode;
-		show(): void;
-		hide(): void;
-		style: string;
-		connect(signal: 'style-changed' | 'popup-menu', callback: (actor: this) => boolean | void): number;
+	// CLASSES
+
+	export class Adjustment {
+		set_value(value: number): void;
+		/**
+		 * @returns :
+		 - value (Number) — the current value
+		 - lower (Number) — the lower bound
+		 - upper (Number) — the upper bound
+		 - step_increment (Number) — the step increment
+		 - page_increment (Number) — the page increment
+		 - page_size (Number) — the page size
+		 */
+		get_values(): number[];
+		get_value(): number;
 	}
-
-	// This is the only way we can extend a class when its bases has different signatures. 
-	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
-	type WidgetType = IWidget & Clutter.Actor;
-	interface Widget extends WidgetType { }
-
-	export class Widget {
-		constructor(options?: any);
+	export class Bin extends Widget {
+		constructor(options?: any)
+		get_child(): Widget;
+		set_child(widget: Widget): void;
 	}
+    export class BorderImage {
 
+	}
+    
 	export class BoxLayout extends Widget {
 		constructor(options?: any)
 		/** Deprecated, use add_child instead */
@@ -36,47 +34,6 @@ declare namespace imports.gi.St {
 		add(element: Widget, options?: AddOptions): void;
 		/** private function by default? */
 	}
-	export class Bin extends Widget {
-		constructor(options?: any)
-		get_child(): Widget;
-		set_child(widget: Widget): void;
-	}
-
-	export class Clipboard {
-		static get_default(): Clipboard;
-		set_text(type: ClipboardType, text: string): void
-	}
-
-
-	export class DrawingArea extends Widget {
-		constructor(options?: any)
-		queue_repaint(): void;
-		get_context(): any;
-		get_surface_size(): number[];
-		width: number;
-	}
-	export class Label extends Widget {
-		text: string;
-		get_clutter_text(): gi.Clutter.Text;
-		clutter_text: gi.Clutter.Text;
-		constructor(options?: any);
-	}
-	export class Icon extends Widget {
-		icon_type: IconType;
-		icon_size: number;
-		icon_name: string;
-		constructor(options?: IconOptions);
-	}
-
-	interface IconOptions {
-		icon_type?: IconType;
-		icon_name?: string;
-		icon_size?: number;
-		style_class?: string;
-		/** css string */
-		style?: string;
-	}
-
 	interface IButton {
 		reactive: boolean;
 		label: string;
@@ -91,7 +48,6 @@ declare namespace imports.gi.St {
 	export class Button {
 		constructor(options?: ButtonOptions);
 	}
-
 	export interface ButtonOptions {
 		style?: string;
 		reactive?: boolean;
@@ -100,7 +56,69 @@ declare namespace imports.gi.St {
 		label?: string;
 		child?: Widget;
 	}
+	export class Clipboard {
+		static get_default(): Clipboard;
+		set_text(type: ClipboardType, text: string): void
+	}
+	export class DrawingArea extends Widget {
+		constructor(options?: any)
+		queue_repaint(): void;
+		get_context(): any;
+		get_surface_size(): number[];
+		width: number;
+	}
+    export class Entry {
 
+	}
+	export class FocusManager extends gi.GObject.Object {
+		public static get_for_stage(stage: gi.Clutter.Stage): FocusManager;
+		public add_group(root: Widget): void;
+		public get_group(widget: Widget): Widget;
+		public navigate_from_event(event: Clutter.Event): boolean;
+		public remove_group(root: Widget): void;
+	}
+    export class GenericAccessible {
+
+	}
+	export class Icon extends Widget {
+		icon_type: IconType;
+		icon_size: number;
+		icon_name: string;
+		constructor(options?: IconOptions);
+	}
+	interface IconOptions {
+		icon_type?: IconType;
+		icon_name?: string;
+		icon_size?: number;
+		style_class?: string;
+		/** css string */
+		style?: string;
+	}
+    export class ImageContent {
+
+	}
+	export class Label extends Widget {
+		text: string;
+		get_clutter_text(): gi.Clutter.Text;
+		clutter_text: gi.Clutter.Text;
+		constructor(options?: any);
+	}
+    export class PasswordEntry {
+
+	}
+	interface IScrollBar {
+		get_adjustment(): Adjustment;
+		set_adjustment(adjustment: Adjustment): void;
+		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
+	}
+
+	type ScrollBarType = IScrollBar & Widget
+	interface ScrollBar extends ScrollBarType { }
+
+	export class ScrollBar {
+		get_adjustment(): Adjustment;
+		set_adjustment(adjustment: Adjustment): void;
+	}
 	export class ScrollView extends Widget {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
@@ -115,42 +133,25 @@ declare namespace imports.gi.St {
 		clip_to_allocation: boolean;
 		constructor(options?: any);
 	}
+    export class ScrollViewFade {
 
-	interface IScrollBar {
-		get_adjustment(): Adjustment;
-		set_adjustment(adjustment: Adjustment): void;
-		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
 	}
+    export class Scrollable {
 
-	type ScrollBarType = IScrollBar & Widget
-	interface ScrollBar extends ScrollBarType { }
-
-	export class ScrollBar {
-		get_adjustment(): Adjustment;
-		set_adjustment(adjustment: Adjustment): void;
 	}
+    export class Settings {
 
-	export class Adjustment {
-		set_value(value: number): void;
-		/**
-		 * @returns 
-
-		value (Number) — the current value
-		lower (Number) — the lower bound
-		upper (Number) — the upper bound
-		step_increment (Number) — the step increment
-		page_increment (Number) — the page increment
-		page_size (Number) — the page size
-		 */
-		get_values(): number[];
-		get_value(): number;
 	}
+    export class TextureCache {
 
+	}
 	export class Theme {
 		constructor();
 		get_custom_stylesheets(): imports.gi.Gio.File[];
 	}
+    export class ThemeContext {
 
+	}
 	export class ThemeNode {
 		constructor();
 		get_length(property: string): number;
@@ -213,36 +214,136 @@ declare namespace imports.gi.St {
 		paint_equal(other)*/
 		to_string(): string;
 	}
+    export class Viewport {
 
-	export enum ClipboardType {
-		CLIPBOARD,
-		PRIMARY
+	}
+	interface IWidget {
+		destroy(): void;
+		style_class: string;
+		add_style_class_name(style_class: string): void;
+		add_style_pseudo_class(style_class: string): void;
+		remove_style_pseudo_class(pseudo_class: string): void;
+		get_style_class_name(): string;
+		remove_style_class_name(style_class: string): void;
+		get_style(): string;
+		set_style(style: string): string;
+		get_theme(): imports.gi.St.Theme;
+		get_theme_node(): ThemeNode;
+		show(): void;
+		hide(): void;
+		style: string;
+		connect(signal: 'style-changed' | 'popup-menu', callback: (actor: this) => boolean | void): number;
 	}
 
-	export enum Side {
-		TOP,
-		RIGHT,
-		BOTTOM,
-		LEFT
+	// This is the only way we can extend a class when its bases has different signatures. 
+	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
+	type WidgetType = IWidget & Clutter.Actor & Clutter.Container & Clutter.Scriptable & Clutter.Animatable;
+	interface Widget extends WidgetType { }
+
+	export class Widget {
+		constructor(options?: any);
+	}
+    export class WidgetAccessible {
+
 	}
 
-	export enum IconType {
-		SYMBOLIC,
-		FULLCOLOR
+	export class Table extends Widget {
+
 	}
+
+	export class Content {
+		get_preferred_size(): any[];
+		invalidate(): void;
+		invalidate_size(): void;
+	}
+
+	interface IImage {
+		get_texture(): any;
+	}
+
+	type ImageExtends = Content & gi.GObject.Object;
+	interface Image extends ImageExtends { }
+	export class Image {
+		static new(): Image;
+	}
+
+	// ENUMS
+
 
 	export enum Align {
 		START,
 		MIDDLE,
 		END
 	}
+	export enum BackgroundSize {
 
-	/*export enum PolicyType {
-		ALWAYS,
-		AUTOMATIC,
-		EXTERNAL,
-		NEVER
-	}*/
+	}
+	export enum ClipboardType {
+		CLIPBOARD,
+		PRIMARY
+	}
+	export enum Corner {
+
+	}
+	/** Enumeration for focus direction. */
+	export enum DirectionType {
+		/** Move forward. */
+		TAB_FORWARD = 0,
+		/** Move backward. */
+		TAB_BACKWARD = 1,
+		/** Move up. */
+		UP = 2,
+		/** Move down. */
+		DOWN = 3,
+		/** Move left. */
+		LEFT = 4,
+		/** Move right. */
+		RIGHT = 5
+	}
+	export enum GradientType {
+
+	}
+	export enum IconStyle {
+		/** Lookup the style requested in the icon name. */
+		REQUESTED = 0,
+		/** Try to always load regular icons, even when symbolic
+		icon names are given. */
+		REGULAR = 1,
+		/** Try to always load symbolic icons, even when regular
+		icon names are given. */
+		SYMBOLIC = 2
+	}
+	export enum IconType {
+		SYMBOLIC,
+		FULLCOLOR
+	}
+	export enum PolicyType {
+		ALWAYS = 0,
+		AUTOMATIC = 1,
+		NEVER = 2,
+		EXTERNAL = 3
+	}
+	export enum Side {
+		TOP = 0,
+		RIGHT = 1,
+		BOTTOM = 2,
+		LEFT = 3
+	}
+	/** Used to align text in a label. */
+	export enum TextAlign {
+		LEFT = 0,
+		CENTER = 1,
+		RIGHT = 2,
+		JUSTIFY = 3
+	}
+	export enum TextureCachePolicy {
+
+	}
+	export enum TextDirection {
+
+	}
+
+	// INTERFACES
 
 	/**
 	 * Colors are represented by a number from 0 to 255
@@ -267,35 +368,13 @@ declare namespace imports.gi.St {
 		expand?: boolean;
 	}
 
-	export class FocusManager extends gi.GObject.Object {
-		public static get_for_stage(stage: gi.Clutter.Stage): FocusManager;
-		public add_group(root: Widget): void;
-		public get_group(widget: Widget): Widget;
-		public navigate_from_event(event: Clutter.Event): boolean;
-		public remove_group(root: Widget): void;
-	}
-
-	export enum TextDirection {
-
-	}
-
-	export class Table extends Widget {
-
-	}
-
-	export class Content {
-		get_preferred_size(): any[];
-		invalidate(): void;
-		invalidate_size(): void;
-	}
-
-	interface IImage {
-		get_texture(): any;
-	}
-
-	type ImageExtends = Content & gi.GObject.Object;
-	interface Image extends ImageExtends { }
-	export class Image {
-		static new(): Image;
-	}
+	// FUNCTIONS
+	/**
+	 * Creates a string describing actor, for use in debugging. This
+	 * includes the class name and actor name (if any), plus if actor
+	 * is an St.Widget, its style class and pseudo class names.
+	 * @param actor  a Clutter.Actor
+	 * @returns the debug name.
+	 */
+	export function describe_actor(actor: Clutter.Actor): string;
 }
