@@ -155,19 +155,19 @@ declare namespace imports.gi.St {
 	export class ThemeNode {
 		constructor();
 		get_length(property: string): number;
-		get_foreground_color(): Color;
-		get_background_color(): Color;
+		get_foreground_color(): Clutter.Color;
+		get_background_color(): Clutter.Color;
 		geometry_equal(other: ThemeNode): boolean;
 		get_background_gradient(): any;
 		get_background_image(): imports.gi.Gio.File;
 		get_background_image_shadow(): any //shadow;
 		get_background_paint_box(allocation: any): any; //clutter.ActorBox
-		get_border_color(side: Side): Color;
+		get_border_color(side: Side): Clutter.Color;
 		get_border_image(): any; //BorderImage
 		get_border_radius(corner: any): number;
 		get_border_width(side: Side): number;
 		get_box_shadow(): any; //shadow
-		get_color(property_name: string): Color;
+		get_color(property_name: string): Clutter.Color;
 		/*get_content_box(allocation)
 		get_double(property_name)
 		get_element_classes()
@@ -344,17 +344,6 @@ declare namespace imports.gi.St {
 	}
 
 	// INTERFACES
-
-	/**
-	 * Colors are represented by a number from 0 to 255
-	 */
-	export interface Color {
-		red: number;
-		green: number;
-		blue: number;
-		alpha: number;
-		to_string(): string;
-	}
 
 	export interface Shadow {
 
