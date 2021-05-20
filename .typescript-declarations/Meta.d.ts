@@ -1,8 +1,389 @@
 
 
 declare namespace imports.gi.Meta {
-	export class Rectangle {}
 
+	export class Backend {
+
+	}
+
+	export class Background {
+
+	}
+
+	export class BackgroundActor {
+
+	}
+
+	export class BackgroundGroup {
+
+	}
+	export class BackgroundImage {
+
+	}
+	export class BackgroundImageCache {
+
+	}
+	export class Barrier {
+
+	}
+	export class ButtonLayout {
+
+	}
+	export class CloseDialog {
+
+	}
+	export class CursorTracker {
+
+	}
+	export class Display extends GObject.Object {
+		public readonly focus_window: Window;
+
+		/**
+		 * Save the specified serial and ignore crossing events with that
+		 * serial for the purpose of focus-follows-mouse. This can be used
+		 * for certain changes to the window hierarchy that we don't want
+		 * to change the focus window, even if they cause the pointer to
+		 * end up in a new window.
+		 * @param serial the serial to ignore
+		 */
+		public add_ignored_crossing_serial(serial: number): void;
+
+		/**
+		 * Add a keybinding at runtime. The key name in @schema needs to be of
+		 * type %G_VARIANT_TYPE_STRING_ARRAY, with each string describing a
+		 * keybinding in the form of "&lt;Control&gt;a" or "&lt;Shift&gt;&lt;Alt&gt;F1". The parser
+		 * is fairly liberal and allows lower or upper case, and also abbreviations
+		 * such as "&lt;Ctl&gt;" and "&lt;Ctrl&gt;". If the key is set to the empty list or a
+		 * list with a single element of either "" or "disabled", the keybinding is
+		 * disabled.
+		 * 
+		 * Use Meta.Display.remove_keybinding to remove the binding.
+		 * @param name the binding's name
+		 * @param settings the Gio.Settings object where name is stored
+		 * @param flags flags to specify binding details
+		 * @param handler function to run when the keybinding is invoked
+		 * @returns the corresponding keybinding action if the keybinding was
+		 * added successfully, otherwise Meta.KeyBindingAction.NONE
+		 */
+		public add_keybinding(name: string, settings: Gio.Settings, flags: KeyBindingFlags, handler: Function): number;
+
+		public begin_grab_op(window: Window, op: GrabOp, pointer_already_grabbed: boolean, frame_action: boolean, button: number, modmask: number, timestamp: number, root_x: number, root_y: number): boolean;
+
+		/**
+		 * Sets the mouse-mode flag to false, which means that motion events are
+		 * no longer ignored in mouse or sloppy focus.
+		 * This is an internal function. It should be used only for reimplementing
+		 * keybindings, and only in a manner compatible with core code.
+		 */
+		public clear_mouse_mode(): void;
+
+		public close(timestamp: number): void;
+		public end_grab_op(timestamp: number): void;
+		public focus_default_window(timestamp: number): void;
+		public freeze_keyboard(timestamp: number): void;
+
+		/**
+		 * Gets the index of the monitor that currently has the mouse pointer.
+		 * @returns a monitor index
+		 */
+		public get_current_monitor(): number;
+		public get_current_time(): number;
+		public get_current_time_roundtrip(): number;
+
+		/**
+		 * Get our best guess as to the "currently" focused window (that is,
+		 * the window that we expect will be focused at the point when the X
+		 * server processes our next request).
+		 * @returns The current focus window
+		 */
+		public get_focus_window(): Window;
+
+		/**
+		 * Gets the current grab operation, if any.
+		 * @returns he current grab operation, or Meta.GrabOp.NONE if
+		 * Mutter doesn't currently have a grab. Meta.GrabOp.COMPOSITOR will
+		 * be returned if a compositor-plugin modal operation is in effect
+		 * (See mutter_begin_modal_for_plugin())
+		 */
+		public get_grab_op(): GrabOp;
+
+		/**
+		 * Get the keybinding action bound to keycode. Builtin keybindings
+		 * have a fixed associated Meta.KeyBindingAction, for bindings added
+		 * dynamically the function will return the keybinding action
+		 * Meta.Display.add_keybinding returns on registration.
+		 * @param keycode Raw keycode
+		 * @param mask Event mask
+		 * @returns The action that should be taken for the given key, or
+		 * Meta.KeyBindingAction.NONE.
+		 */
+		public get_keybinding_action(keycode: number, mask: number): KeyBindingAction;
+
+		/**
+		 * @returns Timestamp of the last user interaction event with a window
+		 */
+		public get_last_user_time(): number;
+
+		/**
+		 * Stores the location and size of the indicated monitor in @geometry.
+		 * @param monitor the monitor number
+		 * @returns location to store the monitor geometry
+		 */
+		public get_monitor_geometry(monitor: number): Rectangle;
+
+		/**
+		 * Determines whether there is a fullscreen window obscuring the specified
+		 * monitor. If there is a fullscreen window, the desktop environment will
+		 * typically hide any controls that might obscure the fullscreen window.
+		 * 
+		 * You can get notification when this changes by connecting to
+		 * MetaDisplay::in-fullscreen-changed.
+		 * @param monitor  the monitor number
+		 * @returns true if there is a fullscreen window covering the specified monitor.
+		 */
+		public get_monitor_in_fullscreen(monitor: number): boolean;
+		public get_monitor_index_for_rect(rect: Rectangle): number;
+		public get_monitor_neighbor_index(which_monitor: number, dir: DisplayDirection): number;
+
+		/**
+		 * Gets the monitor scaling value for the given monitor.
+		 * @param monitor the monitor number
+		 * @returns the monitor scaling value
+		 */
+		public get_monitor_scale(monitor: number): number;
+
+		/**
+		 * Gets the number of monitors that are joined together to form this.
+		 * @returns  the number of monitors
+		 */
+		public get_n_monitors(): number;
+		public get_pad_action_label(pad: Clutter.InputDevice, action_type: PadActionType, action_number: number): string;
+
+		/**
+		 * Gets the index of the primary monitor on this this.
+		 * @returns a monitor index
+		 */
+		public get_primary_monitor(): number;
+
+		/**
+		 * @returns The selection manager of the display
+		 */
+		public get_selection(): Selection;
+
+		/**
+		 * Retrieve the size of the display.
+		 * @returns - width (Number) — The width of the screen
+		- height (Number) — The height of the screen
+		 */
+		public get_size(): number[];
+
+		/**
+		 * @returns The sound player of the display
+		 */
+		public get_sound_player(): SoundPlayer;
+
+		/**
+		 * Determine the active window that should be displayed for Alt-TAB.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @returns Current window
+		 */
+		public get_tab_current(type: TabList, workspace: Workspace): Window;
+
+		/**
+		 * Determine the list of windows that should be displayed for Alt-TAB
+		 * functionality. The windows are returned in most recently used order.
+		 * If workspace is not null, the list only contains windows that are on
+		 * workspace or have the demands-attention hint set; otherwise it contains
+		 * all windows.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @returns List of windows
+		 */
+		public get_tab_list(type: TabList, workspace: Workspace): Window[];
+
+		/**
+		 * Determine the next window that should be displayed for Alt-TAB
+		 * functionality.
+		 * @param type type of tab list
+		 * @param workspace origin workspace
+		 * @param window  starting window
+		 * @param backward If true, look for the previous window
+		 * @returns Next window
+		 */
+		public get_tab_next(type: TabList, workspace: Workspace, window: Window, backward: boolean): Window;
+
+		/**
+		 * @returns The workspace manager of the display
+		 */
+		public get_workspace_manager(): WorkspaceManager;
+		public grab_accelerator(accelerator: string, flags: KeyBindingFlags): number;
+
+		/**
+		 * Tells whether the event sequence is the used for pointer emulation
+		 * and single-touch interaction.
+		 * @param sequence a Clutter.EventSequence
+		 * @returns TRUE if the sequence emulates pointer behavior
+		 */
+		public is_pointer_emulating_sequence(sequence: Clutter.EventSequence): boolean;
+
+		/**
+		 * Remove keybinding name; the function will fail if name is not a known
+		 * keybinding or has not been added with Meta.Display.add_keybinding.
+		 * @param name name of the keybinding to remove
+		 * @returns true if the binding has been removed successfully,
+		 * otherwise false
+		 */
+		public remove_keybinding(name: string): boolean;
+		public request_pad_osd(pad: Clutter.InputDevice, edition_mode: boolean): void;
+		public set_cursor(cursor: Cursor): void;
+		public set_input_focus(window: Window, focus_frame: boolean, timestamp: number): void;
+
+		/**
+		 * Sorts a set of windows according to their current stacking order. If windows
+		 * from multiple screens are present in the set of input windows, then all the
+		 * windows on screen 0 are sorted below all the windows on screen 1, and so forth.
+		 * Since the stacking order of override-redirect windows isn't controlled by
+		 * Metacity, if override-redirect windows are in the input, the result may not
+		 * correspond to the actual stacking order in the X server.
+		 * 
+		 * An example of using this would be to sort the list of transient dialogs for a
+		 * window into their current stacking order.
+		 * @param windows Set of windows
+		 * @returns Input windows sorted by stacking order, from lowest to highest
+		 */
+		public sort_windows_by_stacking(windows: Window[]): Window[];
+
+		/**
+		 * @returns whether pointer barriers can be supported.
+		 *
+		 * When running as an X compositor the X server needs XInput 2
+		 * version 2.3. When running as a display server it is supported
+		 * when running on the native backend.
+		 * 
+		 * Clients should use this method to determine whether their
+		 * interfaces should depend on new barrier features.
+		 */
+		public supports_extended_barriers(): boolean;
+		public unfreeze_keyboard(timestamp: number): void;
+		public ungrab_accelerator(action_id: number): void;
+		public ungrab_keyboard(timestamp: number): void;
+		public unset_input_focus(timestamp: number): void;
+
+		/**
+		 * Xserver time can wraparound, thus comparing two timestamps needs to take
+		 * this into account. If no wraparound has occurred, this is equivalent to
+		 * time1 < time2
+		 * Otherwise, we need to account for the fact that wraparound can occur
+		 * and the fact that a timestamp of 0 must be special-cased since it
+		 * means "older than anything else".
+		 * 
+		 * Note that this is NOT an equivalent for time1 <= time2; if that's what
+		 * you need then you'll need to swap the order of the arguments and negate
+		 * the result.
+		 * @param time1 An event timestamp
+		 * @param time2 An event timestamp
+		 */
+		public xserver_time_is_before(time1: number, time2: number): boolean;
+	}
+	export class Dnd {
+
+	}
+	export class IdleMonitor {
+
+	}
+	export class InhibitShortcutsDialog {
+
+	}
+	export class LaunchContext {
+
+	}
+	export class MonitorManager {
+
+	}
+	export class Plugin {
+
+	}
+	export class RemoteAccessController {
+
+	}
+	export class RemoteAccessHandle {
+
+	}
+	export class Selection extends GObject.Object {
+		public static new(display: Display): Selection;
+		public connect(signal: "owner-changed", callback: (object: number, p0: SelectionSource) => void): void;
+
+		/**
+		 * Returns the list of supported mimetypes for the given selection type.
+		 * @param selection_type Selection to query
+		 * @returns  The supported mimetypes
+		 */
+		public get_mimetypes(selection_type: SelectionType): string[];
+
+		/**
+		 * Sets owner as the owner of the selection given by selection_type,
+		 * unsets any previous owner there was.
+		 * @param selection_type Selection type
+		 * @param owner New selection owner
+		 */
+		public set_owner(selection_type: SelectionType, owner: SelectionSource): void;
+
+		/**
+		 * Requests a transfer of mimetype on the selection given by
+		 * selection_type.
+		 * @param selection_type Selection type
+		 * @param mimetype Mimetype to transfer
+		 * @param size Maximum size to transfer, -1 for unlimited
+		 * @param output Output stream to write contents to
+		 * @param cancellable Cancellable
+		 * @param callback User callback
+		 */
+		public transfer_async(selection_type: SelectionType, mimetype: string, size: number, output: Gio.OutputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+
+		/**
+		 * Finishes the transfer of a queried mimetype.
+		 * @param result The async result
+		 * @returns true if the transfer was successful
+		 * @throws Error
+		 */
+		public transfer_finish(result: Gio.AsyncResult): boolean;
+
+		/**
+		 * Unsets owner as the owner the selection given by selection_type. If
+		 * owner does not own the selection, nothing is done.
+		 * @param selection_type Selection type
+		 * @param owner  Owner to unset
+		 */
+		public unset_owner(selection_type: SelectionType, owner: SelectionSource): void;
+	}
+	export class SelectionSource {
+
+	}
+	export class SelectionSourceMemory {
+
+	}
+	export class ShadowFactory {
+
+	}
+	export class ShapedTexture {
+
+	}
+	export class SoundPlayer {
+
+	}
+	export class Stage {
+
+	}
+	export class StartupNotification {
+
+	}
+	export class StartupSequence {
+
+	}
+	export class WaylandClient {
+
+	}
 	export type WindowSignals = "focus" | "position-changed" | "raised" | "shown" | "size-changed" | "unmanaged" | "unmanaging" | "workspace-changed";
 	export class Window extends GObject.Object {
 		public readonly above: boolean;
@@ -32,7 +413,7 @@ declare namespace imports.gi.Meta {
 		public readonly wm_class: string;
 
 
-		public activate(current_time: number) : void;
+		public activate(current_time: number): void;
 		public activate_with_workspace(current_time: number, workspace: Workspace): void;
 		public allows_move(): boolean;
 		public allows_resize(): boolean;
@@ -241,10 +622,10 @@ declare namespace imports.gi.Meta {
 			the topmost tiled window in a complementary tile mode that is:
 
 		- on the same monitor;
-    	- on the same workspace;
-    	- spanning the remaining monitor width;
-    	- there is no 3rd window stacked between both tiled windows that's
-    		partially visible in the common edge.
+		- on the same workspace;
+		- spanning the remaining monitor width;
+		- there is no 3rd window stacked between both tiled windows that's
+			partially visible in the common edge.
 
 		 * @returns the matching tiled window or
 			null if it doesn't exist.
@@ -422,7 +803,12 @@ declare namespace imports.gi.Meta {
 		public unshade(timestamp: number): void;
 		public unstick(): void;
 	}
+	export class WindowActor {
 
+	}
+	export class WindowGroup {
+
+	}
 	export class Workspace extends GObject.Object {
 		public readonly active: boolean;
 		public readonly n_windows: number;
@@ -449,7 +835,7 @@ declare namespace imports.gi.Meta {
 		 * @param timestamp timestamp for focus_this
 		 */
 		public activate_with_focus(focus_this: Window, timestamp: number): void;
-		
+
 		/**
 		 * Gets the Meta.Display that the workspace is part of.
 		 * @returns the Meta.Display for the workspace
@@ -478,7 +864,7 @@ declare namespace imports.gi.Meta {
 		 * @returns  location to store the work area
 		 */
 		public get_work_area_for_monitor(which_monitor: number): Rectangle;
-		
+
 		public index(): number;
 
 		/**
@@ -496,324 +882,19 @@ declare namespace imports.gi.Meta {
 		 */
 		public set_builtin_struts(struts: Strut[]): void;
 	}
-
-	export class Screen {}
-
-	export class Display extends GObject.Object {
-		public readonly focus_window: Window;
-
-		/**
-		 * Save the specified serial and ignore crossing events with that
-		 * serial for the purpose of focus-follows-mouse. This can be used
-		 * for certain changes to the window hierarchy that we don't want
-		 * to change the focus window, even if they cause the pointer to
-		 * end up in a new window.
-		 * @param serial the serial to ignore
-		 */
-		public add_ignored_crossing_serial(serial: number): void;
-
-		/**
-		 * Add a keybinding at runtime. The key name in @schema needs to be of
-		 * type %G_VARIANT_TYPE_STRING_ARRAY, with each string describing a
-		 * keybinding in the form of "&lt;Control&gt;a" or "&lt;Shift&gt;&lt;Alt&gt;F1". The parser
-		 * is fairly liberal and allows lower or upper case, and also abbreviations
-		 * such as "&lt;Ctl&gt;" and "&lt;Ctrl&gt;". If the key is set to the empty list or a
-		 * list with a single element of either "" or "disabled", the keybinding is
-		 * disabled.
-		 * 
-		 * Use Meta.Display.remove_keybinding to remove the binding.
-		 * @param name the binding's name
-		 * @param settings the Gio.Settings object where name is stored
-		 * @param flags flags to specify binding details
-		 * @param handler function to run when the keybinding is invoked
-		 * @returns the corresponding keybinding action if the keybinding was
-		 * added successfully, otherwise Meta.KeyBindingAction.NONE
-		 */
-		public add_keybinding(name: string, settings: Gio.Settings, flags: KeyBindingFlags, handler: Function): number;
-		
-		public begin_grab_op(window: Window, op: GrabOp, pointer_already_grabbed: boolean, frame_action: boolean, button: number, modmask: number, timestamp: number, root_x: number, root_y: number): boolean;
-		
-		/**
-		 * Sets the mouse-mode flag to false, which means that motion events are
-		 * no longer ignored in mouse or sloppy focus.
-		 * This is an internal function. It should be used only for reimplementing
-		 * keybindings, and only in a manner compatible with core code.
-		 */
-		public clear_mouse_mode(): void;
-
-		public close(timestamp: number): void;
-		public end_grab_op(timestamp: number): void;
-		public focus_default_window(timestamp: number): void;
-		public freeze_keyboard(timestamp: number): void;
-
-		/**
-		 * Gets the index of the monitor that currently has the mouse pointer.
-		 * @returns a monitor index
-		 */
-		public get_current_monitor(): number;
-		public get_current_time(): number;
-		public get_current_time_roundtrip(): number;
-
-		/**
-		 * Get our best guess as to the "currently" focused window (that is,
-		 * the window that we expect will be focused at the point when the X
-		 * server processes our next request).
-		 * @returns The current focus window
-		 */
-		public get_focus_window(): Window;
-
-		/**
-		 * Gets the current grab operation, if any.
-		 * @returns he current grab operation, or Meta.GrabOp.NONE if
-		 * Mutter doesn't currently have a grab. Meta.GrabOp.COMPOSITOR will
-		 * be returned if a compositor-plugin modal operation is in effect
-		 * (See mutter_begin_modal_for_plugin())
-		 */
-		public get_grab_op(): GrabOp;
-
-		/**
-		 * Get the keybinding action bound to keycode. Builtin keybindings
-		 * have a fixed associated Meta.KeyBindingAction, for bindings added
-		 * dynamically the function will return the keybinding action
-		 * Meta.Display.add_keybinding returns on registration.
-		 * @param keycode Raw keycode
-		 * @param mask Event mask
-		 * @returns The action that should be taken for the given key, or
-		 * Meta.KeyBindingAction.NONE.
-		 */
-		public get_keybinding_action(keycode: number, mask: number): KeyBindingAction;
-
-		/**
-		 * @returns Timestamp of the last user interaction event with a window
-		 */
-		public get_last_user_time(): number;
-
-		/**
-		 * Stores the location and size of the indicated monitor in @geometry.
-		 * @param monitor the monitor number
-		 * @returns location to store the monitor geometry
-		 */
-		public get_monitor_geometry(monitor: number): Rectangle;
-
-		/**
-		 * Determines whether there is a fullscreen window obscuring the specified
-		 * monitor. If there is a fullscreen window, the desktop environment will
-		 * typically hide any controls that might obscure the fullscreen window.
-		 * 
-		 * You can get notification when this changes by connecting to
-		 * MetaDisplay::in-fullscreen-changed.
-		 * @param monitor  the monitor number
-		 * @returns true if there is a fullscreen window covering the specified monitor.
-		 */
-		public get_monitor_in_fullscreen(monitor: number): boolean;
-		public get_monitor_index_for_rect(rect: Rectangle): number;
-		public get_monitor_neighbor_index(which_monitor: number, dir: DisplayDirection): number;
-
-		/**
-		 * Gets the monitor scaling value for the given monitor.
-		 * @param monitor the monitor number
-		 * @returns the monitor scaling value
-		 */
-		public get_monitor_scale(monitor: number): number;
-
-		/**
-		 * Gets the number of monitors that are joined together to form this.
-		 * @returns  the number of monitors
-		 */
-		public get_n_monitors(): number;
-		public get_pad_action_label(pad: Clutter.InputDevice, action_type: PadActionType, action_number: number): string;
-
-		/**
-		 * Gets the index of the primary monitor on this this.
-		 * @returns a monitor index
-		 */
-		public get_primary_monitor():  number;
-
-		/**
-		 * @returns The selection manager of the display
-		 */
-		public get_selection(): Selection;
-
-		/**
-		 * Retrieve the size of the display.
-		 * @returns - width (Number) — The width of the screen
-        - height (Number) — The height of the screen
-		 */
-		public get_size(): number[];
-
-		/**
-		 * @returns The sound player of the display
-		 */
-		public get_sound_player(): SoundPlayer;
-
-		/**
-		 * Determine the active window that should be displayed for Alt-TAB.
-		 * @param type type of tab list
-		 * @param workspace origin workspace
-		 * @returns Current window
-		 */
-		public get_tab_current(type: TabList, workspace: Workspace): Window;
-
-		/**
-		 * Determine the list of windows that should be displayed for Alt-TAB
-		 * functionality. The windows are returned in most recently used order.
-		 * If workspace is not null, the list only contains windows that are on
-		 * workspace or have the demands-attention hint set; otherwise it contains
-		 * all windows.
-		 * @param type type of tab list
-		 * @param workspace origin workspace
-		 * @returns List of windows
-		 */
-		public get_tab_list(type: TabList, workspace: Workspace): Window[];
-
-		/**
-		 * Determine the next window that should be displayed for Alt-TAB
-		 * functionality.
-		 * @param type type of tab list
-		 * @param workspace origin workspace
-		 * @param window  starting window
-		 * @param backward If true, look for the previous window
-		 * @returns Next window
-		 */
-		public get_tab_next(type: TabList, workspace: Workspace, window: Window, backward: boolean): Window;
-
-		/**
-		 * @returns The workspace manager of the display
-		 */
-		public get_workspace_manager(): WorkspaceManager;
-		public grab_accelerator(accelerator: string, flags: KeyBindingFlags): number;
-
-		/**
-		 * Tells whether the event sequence is the used for pointer emulation
-		 * and single-touch interaction.
-		 * @param sequence a Clutter.EventSequence
-		 * @returns TRUE if the sequence emulates pointer behavior
-		 */
-		public is_pointer_emulating_sequence(sequence: Clutter.EventSequence): boolean;
-
-		/**
-		 * Remove keybinding name; the function will fail if name is not a known
-		 * keybinding or has not been added with Meta.Display.add_keybinding.
-		 * @param name name of the keybinding to remove
-		 * @returns true if the binding has been removed successfully,
-		 * otherwise false
-		 */
-		public remove_keybinding(name: string): boolean;
-		public request_pad_osd(pad: Clutter.InputDevice, edition_mode: boolean): void;
-		public set_cursor(cursor: Cursor): void;
-		public set_input_focus(window: Window, focus_frame: boolean, timestamp: number): void;
-
-		/**
-		 * Sorts a set of windows according to their current stacking order. If windows
-		 * from multiple screens are present in the set of input windows, then all the
-		 * windows on screen 0 are sorted below all the windows on screen 1, and so forth.
-		 * Since the stacking order of override-redirect windows isn't controlled by
-		 * Metacity, if override-redirect windows are in the input, the result may not
-		 * correspond to the actual stacking order in the X server.
-		 * 
-		 * An example of using this would be to sort the list of transient dialogs for a
-		 * window into their current stacking order.
-		 * @param windows Set of windows
-		 * @returns Input windows sorted by stacking order, from lowest to highest
-		 */
-		public sort_windows_by_stacking(windows: Window[]): Window[];
-
-		/**
-		 * @returns whether pointer barriers can be supported.
-		 *
-		 * When running as an X compositor the X server needs XInput 2
-		 * version 2.3. When running as a display server it is supported
-		 * when running on the native backend.
-		 * 
-		 * Clients should use this method to determine whether their
-		 * interfaces should depend on new barrier features.
-		 */
-		public supports_extended_barriers(): boolean;
-		public unfreeze_keyboard(timestamp: number): void;
-		public ungrab_accelerator(action_id: number): void;
-		public ungrab_keyboard(timestamp: number): void;
-		public unset_input_focus(timestamp: number): void;
-
-		/**
-		 * Xserver time can wraparound, thus comparing two timestamps needs to take
-		 * this into account. If no wraparound has occurred, this is equivalent to
-		 * time1 < time2
-		 * Otherwise, we need to account for the fact that wraparound can occur
-		 * and the fact that a timestamp of 0 must be special-cased since it
-		 * means "older than anything else".
-		 * 
-		 * Note that this is NOT an equivalent for time1 <= time2; if that's what
-		 * you need then you'll need to swap the order of the arguments and negate
-		 * the result.
-		 * @param time1 An event timestamp
-		 * @param time2 An event timestamp
-		 */
-		public xserver_time_is_before(time1: number, time2: number): boolean; 
-	}
-
-	export class SoundPlayer {
-
-	}
-
-	export class Cursor {
-
-	}
-
-	export class StackLayer {}
-
 	export class WorkspaceManager {
 
 	}
+	export class X11Display {
 
-	export class Selection extends GObject.Object {
-		public static new(display: Display): Selection;
-		public connect(signal: "owner-changed", callback: (object: number, p0: SelectionSource) => void): void;
-
-		/**
-		 * Returns the list of supported mimetypes for the given selection type.
-		 * @param selection_type Selection to query
-		 * @returns  The supported mimetypes
-		 */
-		public get_mimetypes(selection_type: SelectionType): string[];
-
-		/**
-		 * Sets owner as the owner of the selection given by selection_type,
-		 * unsets any previous owner there was.
-		 * @param selection_type Selection type
-		 * @param owner New selection owner
-		 */
-		public set_owner(selection_type: SelectionType, owner: SelectionSource): void;
-
-		/**
-		 * Requests a transfer of mimetype on the selection given by
-		 * selection_type.
-		 * @param selection_type Selection type
-		 * @param mimetype Mimetype to transfer
-		 * @param size Maximum size to transfer, -1 for unlimited
-		 * @param output Output stream to write contents to
-		 * @param cancellable Cancellable
-		 * @param callback User callback
-		 */
-		public transfer_async(selection_type: SelectionType, mimetype: string, size: number, output: Gio.OutputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
-
-		/**
-		 * Finishes the transfer of a queried mimetype.
-		 * @param result The async result
-		 * @returns true if the transfer was successful
-		 * @throws Error
-		 */
-		public transfer_finish(result: Gio.AsyncResult): boolean;
-
-		/**
-		 * Unsets owner as the owner the selection given by selection_type. If
-		 * owner does not own the selection, nothing is done.
-		 * @param selection_type Selection type
-		 * @param owner  Owner to unset
-		 */
-		public unset_owner(selection_type: SelectionType, owner: SelectionSource): void; 
 	}
 
-	export class SelectionSource {
+	// Legacy? Classes
+	export class Rectangle {
+
+	}
+
+	export class Screen {
 
 	}
 
@@ -821,6 +902,13 @@ declare namespace imports.gi.Meta {
 		rect: Rectangle;
 		side: Side;
 	}
+
+
+	// INTERFACES
+
+	export type WindowForeachFunc = () => boolean;
+	export type KeyHandlerFunc = Function;
+
 	export interface ModalOptions {
 
 	}
@@ -829,44 +917,96 @@ declare namespace imports.gi.Meta {
 
 	}
 
-	export enum TabList {
-		/** Normal windows */
-		NORMAL = 0,
-		/** Dock windows */
-		DOCKS = 1,
-		/** Groups */
-		GROUP = 2,
-		/** All windows */
-		NORMAL_ALL = 3
+	export interface VirtualModifier {
+
 	}
 
-	export enum SelectionType {
-		SELECTION_PRIMARY = 0,
-		SELECTION_CLIPBOARD = 1,
-		SELECTION_DND = 2,
-		N_SELECTION_TYPES = 3
-	}
+	// ENUMS
 
-	export enum Side {
-		LEFT = 1,
-		RIGHT = 2,
-		TOP = 4,
-		BOTTOM = 8
-	}
 
+	export enum ButtonFunction {
+
+	}
+	export enum CloseDialogResponse {
+
+	}
+	export enum CompEffect {
+
+	}
+	export enum Cursor {
+
+	}
+	export enum DebugPaintFlag {
+
+	}
+	export enum DebugTopic {
+
+	}
+	export enum DisplayCorner {
+
+	}
 	export enum DisplayDirection {
 		UP = 0,
 		DOWN = 1,
 		LEFT = 2,
 		RIGHT = 3
 	}
+	export enum EdgeType {
 
-	export enum PadActionType {
-		BUTTON = 0,
-		RING = 1,
-		STRIP = 2
 	}
+	export enum ExitCode {
 
+	}
+	export enum FrameType {
+		/** Normal Frame */
+		NORMAL = 0,
+		/** Dialog Frame */
+		DIALOG = 1,
+		/** Modal dialog frame */
+		MODAL_DIALOG = 2,
+		/** Utility frame */
+		UTILITY = 3,
+		/** Menu Frame */
+		MENU = 4,
+		/** border Frame */
+		BORDER = 5,
+		/** Attached frame */
+		ATTACHED = 6,
+		/** Marks the end of the Meta.FrameType enumerations */
+		LAST = 7
+	}
+	export enum GrabOp {
+		NONE = 0,
+		WINDOW_BASE = 1,
+		COMPOSITOR = 2,
+		WAYLAND_POPUP = 3,
+		FRAME_BUTTON = 4,
+		MOVING = 1,
+		RESIZING_NW = 36865,
+		RESIZING_N = 32769,
+		RESIZING_NE = 40961,
+		RESIZING_E = 8193,
+		RESIZING_SW = 20481,
+		RESIZING_S = 16385,
+		RESIZING_SE = 24577,
+		RESIZING_W = 4097,
+		KEYBOARD_MOVING = 257,
+		KEYBOARD_RESIZING_UNKNOWN = 769,
+		KEYBOARD_RESIZING_NW = 37121,
+		KEYBOARD_RESIZING_N = 33025,
+		KEYBOARD_RESIZING_NE = 41217,
+		KEYBOARD_RESIZING_E = 8449,
+		KEYBOARD_RESIZING_SW = 20737,
+		KEYBOARD_RESIZING_S = 16641,
+		KEYBOARD_RESIZING_SE = 24833,
+		KEYBOARD_RESIZING_W = 4353
+	}
+	export enum Gravity {
+
+	}
+	export enum InhibitShortcutsDialogResponse {
+
+	}
 	export enum KeyBindingAction {
 		NONE = 0,
 		WORKSPACE_1 = 1,
@@ -962,7 +1102,20 @@ declare namespace imports.gi.Meta {
 		ROTATE_MONITOR = 91,
 		LAST = 92,
 	}
+	export enum LaterType {
 
+	}
+	export enum LocaleDirection {
+
+	}
+	export enum MaximizeFlags {
+		HORIZONTAL = 1,
+		VERTICAL = 2,
+		BOTH = 3
+	}
+	export enum MonitorSwitchConfigType {
+
+	}
 	export enum MotionDirection {
 		/** Upwards motion */
 		UP = -1,
@@ -981,34 +1134,55 @@ declare namespace imports.gi.Meta {
 		/** Motion down and to the right */
 		DOWN_RIGHT = -8
 	}
-
-	export enum GrabOp {
-		NONE = 0,
-		WINDOW_BASE = 1,
-		COMPOSITOR = 2,
-		WAYLAND_POPUP = 3,
-		FRAME_BUTTON = 4,
-		MOVING = 1,
-		RESIZING_NW = 36865,
-		RESIZING_N = 32769,
-		RESIZING_NE = 40961,
-		RESIZING_E = 8193,
-		RESIZING_SW = 20481,
-		RESIZING_S = 16385,
-		RESIZING_SE = 24577,
-		RESIZING_W = 4097,
-		KEYBOARD_MOVING = 257,
-		KEYBOARD_RESIZING_UNKNOWN = 769,
-		KEYBOARD_RESIZING_NW = 37121,
-		KEYBOARD_RESIZING_N = 33025,
-		KEYBOARD_RESIZING_NE = 41217,
-		KEYBOARD_RESIZING_E = 8449,
-		KEYBOARD_RESIZING_SW = 20737,
-		KEYBOARD_RESIZING_S = 16641,
-		KEYBOARD_RESIZING_SE = 24833,
-		KEYBOARD_RESIZING_W = 4353
+	export enum PadActionType {
+		BUTTON = 0,
+		RING = 1,
+		STRIP = 2
 	}
+	export enum Preference {
 
+	}
+	export enum SelectionType {
+		SELECTION_PRIMARY = 0,
+		SELECTION_CLIPBOARD = 1,
+		SELECTION_DND = 2,
+		N_SELECTION_TYPES = 3
+	}
+	export enum ShadowMode {
+
+	}
+	export enum Side {
+		LEFT = 1,
+		RIGHT = 2,
+		TOP = 4,
+		BOTTOM = 8
+	}
+	export enum SizeChange {
+
+	}
+	export enum StackLayer {
+
+	}
+	export enum TabList {
+		/** Normal windows */
+		NORMAL = 0,
+		/** Dock windows */
+		DOCKS = 1,
+		/** Groups */
+		GROUP = 2,
+		/** All windows */
+		NORMAL_ALL = 3
+	}
+	export enum TabShowType {
+
+	}
+	export enum WindowClientType {
+		WAYLAND = 0,
+		X11 = 1
+	}
+	export enum WindowMenuType {
+
+	}
 	export enum WindowType {
 		NORMAL = 0,
 		DESKTOP = 1,
@@ -1028,35 +1202,252 @@ declare namespace imports.gi.Meta {
 		OVERRIDE_OTHER = 15
 	}
 
-	export enum WindowClientType {
-		WAYLAND = 0,
-		X11 = 1
-	}
+	// FUNCTIONS
 
-	export enum FrameType {
-		/** Normal Frame */
-		NORMAL = 0,
-		/** Dialog Frame */
-		DIALOG = 1,
-		/** Modal dialog frame */
-		MODAL_DIALOG = 2,
-		/** Utility frame */
-		UTILITY = 3,
-		/** Menu Frame */
-		MENU = 4,
-		/** border Frame */
-		BORDER = 5,
-		/** Attached frame */
-		ATTACHED = 6,
-		/** Marks the end of the Meta.FrameType enumerations */
-		LAST = 7
-	}
 
-	export enum MaximizeFlags {
-		HORIZONTAL = 1,
-		VERTICAL = 2,
-		BOTH = 3
-	}
+	/**
+	 * Tells mutter to activate the session. When mutter is a
+	 * display server, this tells logind to switch over to
+	 * the new session.
+	 */
+	export function activate_session(): boolean;
+	export function add_clutter_debug_flags(debug_flags: Clutter.DebugFlag, draw_flags: Clutter.DrawDebugFlag, pick_flags: Clutter.PickDebugFlag): void;
+	export function add_debug_paint_flag(flag: DebugPaintFlag): void;
+	/**
+	 * Ensure log messages for the given topic topic
+	 * will be printed.
+	 * @param topic Topic for which logging will be started
+	 */
+	export function add_verbose_topic(topic: DebugTopic): void;
+	export function clutter_init(): void;
+	/**
+	 * Disables unredirection, can be useful in situations where having
+	 * unredirected windows is undesirable like when recording a video.
+	 * @param display a Meta.Display
+	 */
+	export function disable_unredirect_for_display(display: Display): void;
+	/**
+	 * Enables unredirection which reduces the overhead for apps like games.
+	 * @param display a Meta.Display
+	 */
+	export function enable_unredirect_for_display(display: Display): void;
+	export function exit(code: ExitCode): void;
+	export function external_binding_name_for_action(keybinding_action: number): string;
+	export function focus_stage_window(display: Display, timestamp: number): void;
+	export function frame_type_to_string(): any;
+	export function g_utf8_strndup(): any;
 
-	export type WindowForeachFunc = () => boolean;
+	/**
+	 * Accessor for the singleton MetaBackend.
+	 * @returns The only Meta.Backend there is.
+	 */
+	export function get_backend(): Backend;
+	export function get_debug_paint_flags(): DebugPaintFlag;
+	/**
+	 * 
+	 * @param display a Meta.Display
+	 * @returns The feedback group corresponding to display
+	 */
+	export function get_feedback_group_for_display(display: Display): Clutter.Actor;
+	export function get_locale_direction(): LocaleDirection;
+	export function get_replace_current_wm(): boolean;
+	/**
+	 * 
+	 * @param display a Meta.Display
+	 * @returns The top window group corresponding to display
+	 */
+	export function get_stage_for_display(display: Display): Clutter.Actor;
+	/**
+	 * 
+	 * @param display a  Meta.Display
+	 * @returns The top window group corresponding to display
+	 */
+	export function get_top_window_group_for_display(display: Display): Clutter.Actor;
+	/**
+	 * 
+	 * @param display a Meta.Display
+	 * @returns The set of Meta.WindowActor on display
+	 */
+	export function get_window_actors(display: Display): Clutter.Actor[];
+	/**
+	 * 
+	 * @param display a Meta.Display
+	 * @returns The window group corresponding to display
+	 */
+	export function get_window_group_for_display(display: Display): Clutter.Actor;
+	export function gravity_to_string(): any;
+	export function is_debugging(): boolean;
+	/**
+	 * Returns true if this instance of Mutter comes from Mutter
+	 * restarting itself (for example to enable/disable stereo.)
+	 * See Meta.restart. If this is the case, any startup visuals
+	 * or animations should be suppressed.
+	 */
+	export function is_restart(): boolean;
+	/**
+	 * Returns whether X synchronisation is currently enabled.
+
+	 * FIXME: This is only called by meta_display_open(), but by that time
+	 * we have already turned syncing on or off on startup, and we don't
+	 * have any way to do so while Mutter is running, so it's rather
+	 * pointless.
+	 * @returns true if we must wait for events whenever we send X requests;
+	 * false otherwise.
+	 */
+	export function is_syncing(): boolean;
+	export function is_verbose(): boolean;
+	export function is_wayland_compositor(): boolean;
+	/**
+	 * Allows users to register a custom handler for a
+	 * builtin key binding.
+	 * @param name The name of the keybinding to set
+	 * @param handler The new handler function
+	 * @returns true if the binding known as name was found,
+	 * false otherwise.
+	 */
+	export function keybindings_set_custom_handler(name: string, handler: KeyHandlerFunc): boolean;
+	/**
+	 * Sets up a callback to be called at some later time. when determines the
+	 * particular later occasion at which it is called. This is much like GLib,
+	 * except that the functions interact properly with clutter event handling.
+	 * If a "later" function is added from a clutter event handler, and is supposed
+	 * to be run before the stage is redrawn, it will be run before that redraw
+	 * of the stage, not the next one.
+	 * @param when  enumeration value determining the phase at which to run the callback
+	 * @param func callback to run later
+	 * @returns an integer ID (guaranteed to be non-zero) that can be used
+	 * to cancel the callback and prevent it from being run.
+	 */
+	export function later_add(when: LaterType, func: GLib.SourceFunc): number;
+	/**
+	 * Removes a callback added with Meta.later_add
+	 * @param later_id the integer ID returned from Meta.later_add
+	 */
+	export function later_remove(later_id: number): void;
+	export function pop_no_msg_prefix(): void;
+	export function preference_to_string(): any;
+	export function prefs_bell_is_audible(): boolean;
+	export function prefs_change_workspace_name(i: number, name: string): void;
+	/**
+	 * @returns GDesktopEnums.TitlebarAction
+	 */
+	export function prefs_get_action_double_click_titlebar(): any;
+	/**
+	 * @returns GDesktopEnums.TitlebarAction
+	 */
+	export function prefs_get_action_middle_click_titlebar(): any;
+	/**
+	 * @returns GDesktopEnums.TitlebarAction
+	 */
+	export function prefs_get_action_right_click_titlebar(): any;
+	export function prefs_get_attach_modal_dialogs(): boolean;
+	export function prefs_get_auto_maximize(): boolean;
+	export function prefs_get_auto_raise(): boolean;
+	export function prefs_get_auto_raise_delay(): number;
+	export function prefs_get_button_layout(): ButtonLayout;
+	export function prefs_get_center_new_windows(): boolean;
+	export function prefs_get_check_alive_timeout(): number;
+	export function prefs_get_compositing_manager(): boolean;
+	export function prefs_get_cursor_size(): number;
+	export function prefs_get_cursor_theme(): string;
+	export function prefs_get_disable_workarounds(): boolean;
+	export function prefs_get_drag_threshold(): number;
+	export function prefs_get_draggable_border_width(): number;
+	export function prefs_get_dynamic_workspaces(): boolean;
+	export function prefs_get_edge_tiling(): boolean;
+	export function prefs_get_focus_change_on_pointer_rest(): boolean;
+	/**
+	 * @returns GDesktopEnums.FocusMode
+	 */
+	export function prefs_get_focus_mode(): any;
+	/**
+	 * @returns GDesktopEnums.FocusNewWindows
+	 */
+	export function prefs_get_focus_new_windows(): any;
+	export function prefs_get_force_fullscreen(): boolean;
+	export function prefs_get_gnome_accessibility(): boolean;
+	export function prefs_get_gnome_animations(): boolean;
+	export function prefs_get_keybinding_action(name: string): KeyBindingAction;
+	export function prefs_get_mouse_button_menu(): number;
+	export function prefs_get_mouse_button_mods(): VirtualModifier;
+	export function prefs_get_mouse_button_resize(): number;
+	export function prefs_get_num_workspaces(): number;
+	export function prefs_get_raise_on_click(): boolean;
+	export function prefs_get_show_fallback_app_menu(): boolean;
+	export function prefs_get_titlebar_font(): Pango.FontDescription;
+	export function prefs_get_visual_bell(): boolean;
+	/**
+	 * @returns GDesktopEnums.VisualBellType
+	 */
+	export function prefs_get_visual_bell_type(): any;
+	export function prefs_get_workspace_name(i: number): string;
+	export function prefs_get_workspaces_only_on_primary(): boolean;
+	export function prefs_init(): void;
+	export function prefs_set_force_fullscreen(whether: boolean): void;
+	export function prefs_set_num_workspaces(n_workspaces: number): void;
+	export function prefs_set_show_fallback_app_menu(whether: boolean): void;
+	export function push_no_msg_prefix(): void;
+
+	/**
+	 * Stops Mutter. This tells the event loop to stop processing; it is
+	 * rather dangerous to use this because this will leave the user with
+	 * no window manager. We generally do this only if, for example, the
+	 * session manager asks us to; we assume the session manager knows
+	 * what it's talking about.
+	 * @param code The success or failure code to return to the calling process.
+	 */
+	export function quit(code: ExitCode): void;
+	export function rect(x: number, y: number, width: number, height: number): Rectangle;
+	/**
+	 * Registers mutter with the session manager. Call this after completing your own
+	 * initialization.
+	 * 
+	 * This should be called when the session manager can safely continue to the
+	 * next phase of startup and potentially display windows.
+	 */
+	export function register_with_session(): void;
+	export function remove_clutter_debug_flags(debug_flags: Clutter.DebugFlag, draw_flags: Clutter.DrawDebugFlag, pick_flags: Clutter.PickDebugFlag): void;
+	export function remove_debug_paint_flag(flag: DebugPaintFlag): void;
+	/**
+	 * Stop printing log messages for the given topic topic. Note
+	 * that this method does not stack with Meta.add_verbose_topic;
+	 * i.e. if two calls to Meta.add_verbose_topic for the same
+	 * topic are made, one call to Meta.remove_verbose_topic will
+	 * remove it.
+	 * @param topic Topic for which logging will be stopped
+	 */
+	export function remove_verbose_topic(topic: DebugTopic): void;
+	/**
+	 * 
+	 * @param message message to display to the user, or null
+	 */
+	export function restart(message: string): void;
+	export function test_init(): void;
+	export function unsigned_long_equal(v1: void, v2: void): number;
+	export function unsigned_long_hash(v: void): number;
+	export function x11_error_trap_pop(x11_display: X11Display): void;
+	export function x11_error_trap_pop_with_return(x11_display: X11Display): number;
+	export function x11_error_trap_push(x11_display: X11Display): void;
+	export function x11_init_gdk_display(): boolean;
+
+
+	// CONSTANTS
+
+	export const CURRENT_TIME: number;
+	export const DEFAULT_ICON_NAME: string;
+	export const ICON_HEIGHT: number;
+	export const ICON_WIDTH: number;
+	export const MAJOR_VERSION: number;
+	export const MICRO_VERSION: number;
+	export const MINI_ICON_HEIGHT: number;
+	export const MINI_ICON_WIDTH: number;
+	export const MINOR_VERSION: number;
+	export const PLUGIN_API_VERSION: number;
+	export const PRIORITY_BEFORE_REDRAW: number;
+	export const PRIORITY_PREFS_NOTIFY: number;
+	export const PRIORITY_REDRAW: number;
+	export const PRIORITY_RESIZE: number;
+	export const VIRTUAL_CORE_KEYBOARD_ID: number;
+	export const VIRTUAL_CORE_POINTER_ID: number;
+
 }
