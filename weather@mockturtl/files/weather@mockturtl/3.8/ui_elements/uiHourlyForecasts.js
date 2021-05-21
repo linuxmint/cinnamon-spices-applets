@@ -102,6 +102,7 @@ class UIHourlyForecasts {
                 });
             }
             else {
+                this.actor.set_height(naturalHeight);
                 resolve();
             }
         });
@@ -117,6 +118,7 @@ class UIHourlyForecasts {
                     onUpdate: () => { },
                     onComplete: () => {
                         this.actor.set_height(-1);
+                        this.actor.style = null;
                         this.actor.hide();
                         hscroll.get_adjustment().set_value(0);
                         resolve();
@@ -124,6 +126,7 @@ class UIHourlyForecasts {
                 });
             }
             else {
+                this.actor.style = null;
                 this.actor.set_height(-1);
                 this.actor.hide();
                 resolve();
