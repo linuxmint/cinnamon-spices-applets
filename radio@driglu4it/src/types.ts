@@ -1,5 +1,6 @@
 export type PlayPause = "Playing" | "Paused"
 export type PlaybackStatus = PlayPause | "Stopped"
+export type AdvancedPlaybackStatus = PlaybackStatus | 'Loading'
 
 export interface Channel {
     name: string,
@@ -31,10 +32,10 @@ interface MetaValue {
 
 // these are the values which playerctl returns (not mandatory complete)
 export interface Metadata {
-    ["xesam:title"]: MetaValue,
-    ["mpris:trackid"]: MetaValue,
-    ["xesam:url"]: MetaValue,
-    ["mpris:length"]: MetaValue
+    ["xesam:title"]: string,
+    ["mpris:trackid"]: string,
+    ["xesam:url"]: string,
+    ["mpris:length"]: number
 }
 
 export interface MediaProps<
@@ -51,7 +52,8 @@ export interface MediaProps<
 }
 
 interface MediaPropChange<T> {
-    deep_unpack: { (): T }
+    deep_unpack: { (): T },
+    recursiveUnpack: { (): Metadata }
 }
 
 export type MediaPropChanges = MediaProps<
@@ -62,6 +64,7 @@ export type MediaPropChanges = MediaProps<
 
 export interface MprisMediaPlayer extends MediaProps {
     PlayRemote: { (): void }
+    PauseRemote: { (): void }
     OpenUriRemote: { (uri: string): void }
     StopRemote: { (): void }
     PlayPauseRemote: { (): void }

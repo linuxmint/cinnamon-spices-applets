@@ -1,0 +1,22 @@
+{
+  "name": "radio-driglu4it",
+  "version": "1.0.0",
+  "description": "A simple radio applet for Cinnamon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "author": "Jonathan Heard",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^15.0.3",
+    "jest": "^26.6.3",
+    "lodash": "^4.17.21",
+    "ts-jest": "^26.5.5"
+  },
+  "dependencies": {
+    "md5": "^2.3.0"
+  }
+}

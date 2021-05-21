@@ -23,8 +23,6 @@ tsc -p tsconfig.json
 # when typescript succeeded. Must be directly behind the command
 if [ $? -eq 0 ]; then 
 
-  rm -r ${BUILD_DIR}/__tests__ ${BUILD_DIR}/__mocks__ ${BUILD_DIR}/test_utils
-
   rm -r ${LOCAL_TESTING_DIR}
   cp -r ${BUILD_DIR} ${LOCAL_TESTING_DIR}
 

@@ -6,35 +6,37 @@ const MpvMprisController_1 = require("mpv/MpvMprisController");
 const dbus_1 = require("mpv/dbus");
 const CvcHandler_1 = require("mpv/CvcHandler");
 const MpvMprisBase_1 = require("mpv/MpvMprisBase");
-async function createMpvHandler(args) {
-    const { ckeckUrlValid, getInitialVolume, onChannelChanged, onInitialized, onStarted, onVolumeChanged, onStopped, onPaused, onResumed, onTitleChanged } = args;
-    const dbus = await dbus_1.listenToDbus({
+function createMpvHandler(args) {
+    const { checkUrlValid, getInitialVolume, onUrlChanged, onInitialized, onVolumeChanged, onTitleChanged, onPlaybackstatusChanged, initialUrl } = args;
+    const dbus = dbus_1.listenToDbus({
         onMpvRegistered: () => mprisListener.activateListener(),
-        onMpvStopped: handleMpvStopped
+        onMpvStopped: () => handlePlaybackStatusChanged('Stopped')
     });
-    function handleMpvStopped() {
-        mprisListener.deactivateListener();
-        mprisBase.setStop(true);
-        onStopped(mprisController.getVolume());
-    }
-    const mprisBase = await MpvMprisBase_1.createMpvMprisBase();
-    const mprisListener = await MpvMprisListener_1.listenToMpvMpris({
-        onChannelChanged,
+    const mprisBase = MpvMprisBase_1.createMpvMprisBase();
+    const mprisListener = MpvMprisListener_1.listenToMpvMpris({
         onInitialized,
-        onStarted: handleStarted,
         onVolumeChanged: handleMprisVolumeChanged,
-        ckeckUrlValid,
-        onPaused,
-        onResumed,
+        checkUrlValid,
         onTitleChanged,
-        mprisBase
+        onUrlChanged,
+        onPlaybackstatusChanged: handlePlaybackStatusChanged,
+        mprisBase,
+        initialUrl
     });
-    function handleStarted(volume, url) {
-        onStarted(volume, url);
-        cvcHandler.setVolume(volume);
-        mprisBase.setStop(false);
+    function handlePlaybackStatusChanged(playbackStatus) {
+        let lastVolume = null;
+        if (playbackStatus === 'Playing') {
+            mprisBase.setStop(false);
+            cvcHandler.setVolume(mprisController.getVolume());
+        }
+        if (playbackStatus === 'Stopped') {
+            mprisListener.deactivateListener();
+            mprisBase.setStop(true);
+            lastVolume = mprisListener.getLastVolume();
+        }
+        onPlaybackstatusChanged(playbackStatus, lastVolume);
     }
-    const mprisController = await MpvMprisController_1.createMpvMprisController({
+    const mprisController = MpvMprisController_1.createMpvMprisController({
         getInitialVolume,
         mprisBase
     });
@@ -45,21 +47,14 @@ async function createMpvHandler(args) {
         cvcHandler.setVolume(newVolume);
         onVolumeChanged(newVolume);
     }
-    const mpvHandler = {
-        set channelUrl(url) {
-            mprisController.setChannel(url);
-        },
-        set volume(newVolume) {
-            mprisController.setVolume(newVolume);
-        },
-        get currentTitle() {
-            return mprisController.getCurrentTitle();
-        },
+    return {
+        setChannelUrl: mprisController.setChannel,
+        setVolume: mprisController.setVolume,
+        getCurrentTitle: mprisController.getCurrentTitle,
         togglePlayPause: mprisController.togglePlayPause,
         increaseDecreaseVolume: mprisController.increaseDecreaseVolume,
-        dbus,
-        stop: mprisController.stop
+        stop: mprisController.stop,
+        dbus
     };
-    return mpvHandler;
 }
 exports.createMpvHandler = createMpvHandler;

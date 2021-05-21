@@ -5,74 +5,68 @@ import { createMpvMprisController, MprisControllerArguments } from 'mpv/MpvMpris
 import { listenToDbus } from 'mpv/dbus'
 import { createCvcHandler } from 'mpv/CvcHandler'
 import { createMpvMprisBase } from 'mpv/MpvMprisBase'
+import { AdvancedPlaybackStatus, PlaybackStatus } from 'types'
 
 
 interface Arguments extends MprisListenerArguments,
     MprisControllerArguments {
-    onStopped: { (volume: number): void }
+    onPlaybackstatusChanged: (playbackStatus: AdvancedPlaybackStatus, lastVolume?: number) => void,
 }
 
-export interface MpvHandler {
-    togglePlayPause: { (): void },
-    increaseDecreaseVolume: { (volumeChange: number): void },
-    channelUrl: string,
-    dbus: any,
-    volume: number,
-    stop: { (): void },
-    currentTitle: string
-}
-
-export async function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
+export function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
 
     const {
-        ckeckUrlValid,
+        checkUrlValid,
         getInitialVolume,
-
-        onChannelChanged,
+        onUrlChanged,
         onInitialized,
-        onStarted,
         onVolumeChanged,
-        onStopped,
-        onPaused,
-        onResumed,
-        onTitleChanged
+        onTitleChanged,
+        onPlaybackstatusChanged,
+        initialUrl
     } = args
 
 
-    const dbus = await listenToDbus({
+    const dbus = listenToDbus({
         onMpvRegistered: () => mprisListener.activateListener(),
-        onMpvStopped: handleMpvStopped
+        onMpvStopped: () => handlePlaybackStatusChanged('Stopped')
     })
 
-    function handleMpvStopped() {
-        mprisListener.deactivateListener()
-        mprisBase.setStop(true)
-        onStopped(mprisController.getVolume())
-    }
 
-    const mprisBase = await createMpvMprisBase()
+    const mprisBase = createMpvMprisBase()
 
 
-    const mprisListener = await listenToMpvMpris({
-        onChannelChanged,
+    const mprisListener = listenToMpvMpris({
+
         onInitialized,
-        onStarted: handleStarted,
         onVolumeChanged: handleMprisVolumeChanged,
-        ckeckUrlValid,
-        onPaused,
-        onResumed,
+        checkUrlValid,
         onTitleChanged,
-        mprisBase
+        onUrlChanged,
+        onPlaybackstatusChanged: handlePlaybackStatusChanged,
+        mprisBase,
+        initialUrl
     })
 
+    function handlePlaybackStatusChanged(playbackStatus: PlaybackStatus) {
 
-    function handleStarted(volume: number, url: string) {
-        onStarted(volume, url)
-        cvcHandler.setVolume(volume)
-        mprisBase.setStop(false)
+        let lastVolume = null
+
+        if (playbackStatus === 'Playing') {
+            mprisBase.setStop(false)
+            cvcHandler.setVolume(mprisController.getVolume())
+        }
+
+        if (playbackStatus === 'Stopped') {
+            mprisListener.deactivateListener()
+            mprisBase.setStop(true)
+            lastVolume = mprisListener.getLastVolume()
+        }
+
+        onPlaybackstatusChanged(playbackStatus, lastVolume)
     }
 
-    const mprisController = await createMpvMprisController({
+    const mprisController = createMpvMprisController({
         getInitialVolume,
         mprisBase
     })
@@ -86,21 +80,15 @@ export async function createMpvHandler(args: Omit<Arguments, "mprisBase">) {
         onVolumeChanged(newVolume)
     }
 
-    const mpvHandler: MpvHandler = {
-        set channelUrl(url: string) {
-            mprisController.setChannel(url)
-        },
-        set volume(newVolume: number) {
-            mprisController.setVolume(newVolume)
-        },
-        get currentTitle() {
-            return mprisController.getCurrentTitle()
-        },
+    return {
+        setChannelUrl: mprisController.setChannel,
+        setVolume: mprisController.setVolume,
+        getCurrentTitle: mprisController.getCurrentTitle,
         togglePlayPause: mprisController.togglePlayPause,
         increaseDecreaseVolume: mprisController.increaseDecreaseVolume,
-        dbus,
-        stop: mprisController.stop
+        stop: mprisController.stop,
+        // it is very confusing but dbus must be returned!
+        // Otherwilse all listeners stop working after about 20 seconds which is fucking difficult to debug
+        dbus
     }
-
-    return mpvHandler
 }

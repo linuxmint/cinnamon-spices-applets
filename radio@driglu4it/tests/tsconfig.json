@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "baseUrl": "../src",
+        "esModuleInterop": true
+    },
+    "include": [
+        "../src/**/*",
+        "../**/*",
+        "../../.typescript-declarations/**/*",
+    ]
+}

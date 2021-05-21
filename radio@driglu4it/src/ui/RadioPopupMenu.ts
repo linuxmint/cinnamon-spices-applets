@@ -12,7 +12,7 @@ interface Arguments {
 }
 
 export interface RadioPopupMenu extends imports.ui.applet.AppletPopupMenu {
-    running: boolean
+    radioActive: boolean
 }
 
 export function createRadioPopupMenu(args: Arguments) {
@@ -42,6 +42,7 @@ export function createRadioPopupMenu(args: Arguments) {
         volumeSlider,
     ]
 
+    // TODO change to radioActive
     setRunning(false)
 
     function setRunning(running: boolean) {
@@ -58,7 +59,7 @@ export function createRadioPopupMenu(args: Arguments) {
 
 
     Object.defineProperties(popupMenu, {
-        running: {
+        radioActive: {
             set(running: boolean) {
                 setRunning(running)
             }
