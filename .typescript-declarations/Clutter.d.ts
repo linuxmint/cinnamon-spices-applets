@@ -3552,67 +3552,67 @@ declare namespace imports.gi.Clutter {
 	 * it will call @function while holding the Clutter lock. It is logically
 	 * equivalent to the following implementation:
 
-```
-static gboolean
-idle_safe_callback (gpointer data)
-{
-   SafeClosure *closure = data;
-   gboolean res = FALSE;
+		```
+		static gboolean
+		idle_safe_callback (gpointer data)
+		{
+		SafeClosure *closure = data;
+		gboolean res = FALSE;
 
-   // the callback does not need to acquire the Clutter
-	/ lock itself, as it is held by the this proxy handler
-	//
-   res = closure->callback (closure->data);
+		// the callback does not need to acquire the Clutter
+			/ lock itself, as it is held by the this proxy handler
+			//
+		res = closure->callback (closure->data);
 
-   return res;
-}
-static gulong
-add_safe_idle (GSourceFunc callback,
-			   gpointer    data)
-{
-  SafeClosure *closure = g_new0 (SafeClosure, 1);
+		return res;
+		}
+		static gulong
+		add_safe_idle (GSourceFunc callback,
+					gpointer    data)
+		{
+		SafeClosure *closure = g_new0 (SafeClosure, 1);
 
-  closure->callback = callback;
-  closure->data = data;
+		closure->callback = callback;
+		closure->data = data;
 
-  return g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
-						  idle_safe_callback,
-						  closure,
-						  g_free)
-}
-```
-	 * This function should be used by threaded applications to make sure that func is emitted under the Clutter threads lock and invoked from the same thread that started the Clutter main loop. For instance, it can be used to update the UI using the results from a worker thread:
+		return g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+								idle_safe_callback,
+								closure,
+								g_free)
+		}
+		```
+			* This function should be used by threaded applications to make sure that func is emitted under the Clutter threads lock and invoked from the same thread that started the Clutter main loop. For instance, it can be used to update the UI using the results from a worker thread:
 
-```
-static gboolean
-update_ui (gpointer data)
-{
-  SomeClosure *closure = data;
+		```
+		static gboolean
+		update_ui (gpointer data)
+		{
+		SomeClosure *closure = data;
 
-  // it is safe to call Clutter API from this function because
-   / it is invoked from the same thread that started the main
-   / loop and under the Clutter thread lock
-   //
-  clutter_label_set_text (CLUTTER_LABEL (closure->label),
-						  closure->text);
+		// it is safe to call Clutter API from this function because
+		/ it is invoked from the same thread that started the main
+		/ loop and under the Clutter thread lock
+		//
+		clutter_label_set_text (CLUTTER_LABEL (closure->label),
+								closure->text);
 
-  g_object_unref (closure->label);
-  g_free (closure);
+		g_object_unref (closure->label);
+		g_free (closure);
 
-  return FALSE;
-}
+		return FALSE;
+		}
 
-  // within another thread //
-  closure = g_new0 (SomeClosure, 1);
-  // always take a reference on GObject instances //
-  closure->label = g_object_ref (my_application->label);
-  closure->text = g_strdup (processed_text_to_update_the_label);
+		// within another thread //
+		closure = g_new0 (SomeClosure, 1);
+		// always take a reference on GObject instances //
+		closure->label = g_object_ref (my_application->label);
+		closure->text = g_strdup (processed_text_to_update_the_label);
 
-  clutter_threads_add_idle_full (G_PRIORITY_HIGH_IDLE,
-								 update_ui,
-								 closure,
-								 NULL);
-								 ```
+		clutter_threads_add_idle_full (G_PRIORITY_HIGH_IDLE,
+										update_ui,
+										closure,
+										NULL);
+										```
 	 * @param priority the priority of the timeout source. Typically this will be in the
 	 * range between #G_PRIORITY_DEFAULT_IDLE and #G_PRIORITY_HIGH_IDLE
 	 * @param func function to call
