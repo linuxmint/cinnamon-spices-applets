@@ -1,7 +1,6 @@
 import { PlaybackStatus, MediaPropChanges, PlayPause, AdvancedPlaybackStatus } from 'types'
 import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PATH } from 'consts'
 import { MpvMprisBase } from 'mpv/MpvMprisBase';
-// @ts-ignore
 const { getDBusProperties } = imports.misc.interfaces
 
 

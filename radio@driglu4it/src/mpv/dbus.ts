@@ -1,7 +1,5 @@
 import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PLAYER_NAME } from 'consts'
-import { Dbus } from 'types'
 
-// @ts-ignore
 const { getDBus, getDBusProxyWithOwner } = imports.misc.interfaces
 
 interface Arguments {
@@ -20,7 +18,7 @@ export function listenToDbus(args: Arguments) {
         onMpvStopped
     } = args
 
-    const dbus: Dbus = getDBus()
+    const dbus = getDBus()
 
     dbus.connectSignal('NameOwnerChanged', (...args) => {
         const name = args[2][0]

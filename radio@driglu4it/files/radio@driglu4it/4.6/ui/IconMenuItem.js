@@ -51,7 +51,7 @@ function createIconMenuItem(args) {
         label.text = limitedTextString;
     }
     function _addActor(actor, params, position) {
-        const children = baseMenuItem._children;
+        const children = baseMenuItem["_children"];
         if (position == null)
             position = children.length + 1;
         if (position >= children.length) {

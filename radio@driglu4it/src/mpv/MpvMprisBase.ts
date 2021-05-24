@@ -1,7 +1,6 @@
 import { MprisMediaPlayer, PlaybackStatus } from 'types'
 import { MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME, MAX_VOLUME } from 'consts'
 
-// @ts-ignore
 const { getDBusProxyWithOwner } = imports.misc.interfaces
 
 export type MpvMprisBase = {
