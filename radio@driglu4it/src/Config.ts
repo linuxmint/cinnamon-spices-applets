@@ -57,19 +57,15 @@ export const createConfig = (args: Arguments) => {
     appletSettings.bind('channel-on-panel', 'channelNameOnPanel',
         (channelOnPanel: boolean) => onChannelOnPanelChanged(channelOnPanel))
 
-    // @ts-ignore    
     appletSettings.bind('keep-volume-between-sessions', "keepVolume")
 
-    // @ts-ignore    
     appletSettings.bind('initial-volume', 'customInitVolume')
 
-    // @ts-ignore    
     appletSettings.bind('last-volume', 'lastVolume')
 
     appletSettings.bind('tree', "userStations",
         onMyStationsChanged)
 
-    // @ts-ignore    
     appletSettings.bind('last-url', 'lastUrl')
 
     appletSettings.bind('music-download-dir-select', 'musicDownloadDir',

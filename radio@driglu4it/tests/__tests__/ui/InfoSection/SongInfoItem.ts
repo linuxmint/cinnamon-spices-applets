@@ -13,8 +13,7 @@ jest.mock('consts', () => ({
 }))
 
 function getChildren(songInfoItem: ReturnType<typeof createSongInfoItem>) {
-    //@ts-ignore
-    return songInfoItem.actor._children
+    return songInfoItem.actor["_children"]
 }
 
 function limitStringToMaxLength(text: string) {

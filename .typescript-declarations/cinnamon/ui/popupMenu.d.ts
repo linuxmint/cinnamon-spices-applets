@@ -52,11 +52,17 @@ declare namespace imports.ui.popupMenu {
 		align: gi.St.Align
 	}
 
+	interface PopupBaseMenuItemChild extends AddActorParams {
+		actor: gi.Cinnamon.GenericContainer
+	}
+
 	export class PopupBaseMenuItem {
 		public readonly actor: gi.Cinnamon.GenericContainer;
 		public readonly active: boolean;
 		public readonly sensitive: boolean;
 		public readonly focusOnHover: boolean;
+		protected _children: PopupBaseMenuItemChild[]
+		protected _signals: misc.signalManager.SignalManager
 
 		constructor(params?: PopupBaseMenuItemParams)
 

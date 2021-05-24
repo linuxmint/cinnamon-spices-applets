@@ -52,7 +52,7 @@ declare namespace imports.gi.Clutter {
 		offscreen_redirect: OffscreenRedirect;
 		opacity: number;
 		/** Graphene.Point */
-		pivot_point: any;
+		pivot_point: Point;
 		pivot_point_z: number;
 		/** Graphene.Point */
 		position: any;
@@ -2640,6 +2640,16 @@ declare namespace imports.gi.Clutter {
 	export class PipelineNode {
 
 	}
+
+	interface PointOptions {
+		x: number;
+		y: number
+	}
+
+	export class Point {
+		constructor(options?: PointOptions)
+	}
+
 	export class PropertyTransition {
 
 	}
@@ -2773,6 +2783,7 @@ declare namespace imports.gi.Clutter {
 		public get_button(): number;
 		public get_coords(): number[];
 		public get_scroll_direction(): ScrollDirection;
+		public get_key_symbol(): number;
 		public type(): EventType;
 	}
 

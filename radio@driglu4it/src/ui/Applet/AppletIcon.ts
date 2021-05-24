@@ -9,7 +9,7 @@ const { IconType: IconTypeEnum } = imports.gi.St
 interface Arguments {
     // panel and location label are needed to calc the icon size
     panel: imports.ui.panel.Panel,
-    locationLabel: 'left' | 'center' | 'right'
+    locationLabel: imports.ui.appletManager.LocationLabel
 }
 
 

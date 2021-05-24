@@ -78,8 +78,7 @@ export function createIconMenuItem(args: Arguments) {
         params?: Partial<imports.ui.popupMenu.AddActorParams>,
         position?: number
     ) {
-        // @ts-ignore
-        const children = baseMenuItem._children
+        const children = baseMenuItem["_children"]
 
         if (position == null) position = children.length + 1
 
@@ -88,7 +87,6 @@ export function createIconMenuItem(args: Arguments) {
             return
         }
 
-        // @ts-ignore
         children.forEach((child, index) => {
             const { actor: childActor, ...childParams } = child
             baseMenuItem.removeActor(childActor)
