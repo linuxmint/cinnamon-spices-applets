@@ -891,7 +891,10 @@ declare namespace imports.gi.Meta {
 
 	// Legacy? Classes
 	export class Rectangle {
-
+		x: number;
+		y: number;
+		width: number;
+		height: number;
 	}
 
 	export class Screen {

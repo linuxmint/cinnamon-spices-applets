@@ -160,6 +160,9 @@ export class UIHourlyForecasts {
 					});
 			}
 			else {
+				// We must set naturalHeight here as well because integer
+				// scaling doesn't work properly.
+				this.actor.set_height(naturalHeight);
 				resolve();
 			}
 		});
@@ -178,6 +181,11 @@ export class UIHourlyForecasts {
 						onUpdate: () => { },
 						onComplete: () => {
 							this.actor.set_height(-1);
+							// We must unset min-height style else
+							// we get issues with integer scaling
+							// when we request preferred height again
+							// See Issue : https://github.com/linuxmint/cinnamon-spices-applets/issues/3787
+							this.actor.style = null;
 							this.actor.hide();
 							// Scroll back to the start
 							hscroll.get_adjustment().set_value(0);
@@ -187,6 +195,7 @@ export class UIHourlyForecasts {
 				);
 			}
 			else {
+				this.actor.style = null;
 				this.actor.set_height(-1);
 				this.actor.hide();
 				resolve();

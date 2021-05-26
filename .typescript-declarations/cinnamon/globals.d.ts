@@ -9,9 +9,14 @@ declare class global {
     static log(...any: Array < any > ): void;
     static logError(...text: Array < string > ): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
-	static settings: any;
+	/** Main Cinnamon settings */
+    static settings: imports.gi.Gio.Settings;
 	static set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
 	static unset_cursor(): void;
+    /** equivalent to imports.gi.Meta */
+    static screen: any;
+    static display: imports.gi.Meta.Display;
+    static stage: imports.gi.Clutter.Stage;
 }
 
 declare class __meta {

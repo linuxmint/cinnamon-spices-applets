@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.8
+
+* Fixes [#3787](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
+
 ## 3.0.7
 
 * Resolves [#3783](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)

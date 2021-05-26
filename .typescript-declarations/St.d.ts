@@ -150,7 +150,71 @@ declare namespace imports.gi.St {
 		get_custom_stylesheets(): imports.gi.Gio.File[];
 	}
 	export class ThemeContext {
+		/**
+		 * Gets a singleton theme context associated with the stage.
+		 * @param stage  a Clutter.Stage
+		 * @returns the singleton theme context for the stage
+		 */
+		static get_for_stage(stage: gi.Clutter.Stage): ThemeContext;
+		/**
+		 * Create a new theme context not associated with any Clutter.Stage.
+		 * This can be useful in testing scenarios, or if using StThemeContext
+		 * with something other than Clutter.Actor objects, but you generally
+		 * should use St.ThemeContext.get_for_stage instead.
+		 * @returns  a new St.ThemeContext
+		 */
+		static new(): ThemeContext;
 
+		/** The scaling factor used for HiDPI scaling. */
+		scale_factor: number;
+		/**
+		 * Gets the default font for the theme context. See St.ThemeContext.set_font.
+		 * @returns the default font for the theme context.
+		 */
+		get_font(): Pango.FontDescription;
+		/**
+		 * Gets the root node of the tree of theme style nodes that associated with this
+		 * context. For the node tree associated with a stage, this node represents
+		 * styles applied to the stage itself.
+		 * @returns the root node of the context's style tree
+		 */
+		get_root_node(): ThemeNode;
+		/**
+		 * Return the current scale factor of this.
+		 * @returns an integer scale factor
+		 */
+		//get_scale_factor(): number;
+		/**
+		 * Gets the default theme for the context. See St.ThemeContext.set_theme
+		 * @returns the default theme for the context
+		 */
+		get_theme(): Theme;
+		/**
+		 * Return an existing node matching node, or if that isn't possible,
+		 * node itself.	
+		 * @param node 
+		 * @returns a node with the same properties as node
+		 */
+		intern_node(node: ThemeNode): ThemeNode;
+		/**
+		 * 
+		 * Sets the default font for the theme context. This is the font that
+		 * is inherited by the root node of the tree of theme nodes. If the
+		 * font is not overridden, then this font will be used. If the font is
+		 * partially modified (for example, with 'font-size: 110%'), then that
+		 * modification is based on this font.
+		 * @param font the default font for theme context
+		 */
+		set_font(font: Pango.FontDescription): void;
+		/**
+		 * Sets the default set of theme stylesheets for the context. This theme will
+		 * be used for the root node and for nodes descending from it, unless some other
+		 * style is explicitly specified.
+		 * @param theme 
+		 */
+		set_theme(theme: Theme): void;
+
+		connect(signal: "changed" | "changed::scale_factor", callback: () => void): void;
 	}
 	export class ThemeNode {
 		constructor();
