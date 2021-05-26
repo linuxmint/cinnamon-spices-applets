@@ -44,10 +44,12 @@ declare namespace imports.ui.appletManager {
 	var clipboard: any[];
 	var promises: any;
 
+	type LocationLabel = 'left' | 'center' | 'right'
+
 	interface AppletDefinition {
 		panelId: number;
 		orientation: imports.gi.St.Side;
-		location_label: string;
+		location_label: LocationLabel;
 		center: boolean;
 		order: number;
 		uuid: string;
@@ -63,7 +65,7 @@ declare namespace imports.ui.appletManager {
 
 	function init(): Promise<void>;
 
-	function getAppletDefinition(definition: string): AppletDefinition;
+	function getAppletDefinition(definition: Partial<AppletDefinition>): AppletDefinition;
 
 	function filterDefinitionsByUUID(uuid: string): AppletDefinition[];
 

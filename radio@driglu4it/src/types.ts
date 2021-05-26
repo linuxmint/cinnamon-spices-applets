@@ -10,22 +10,6 @@ export interface Channel {
 
 export type IconType = 'SYMBOLIC' | 'FULLCOLOR' | 'BICOLOR'
 
-// not complety - only based on own experience 
-type dbusEvents = "NameOwnerChanged"
-
-export interface Dbus {
-    connectSignal: {
-        (
-            event: dbusEvents,
-            callback: { (proxy: any, sender: any, info: [string, string, string]): void }): void
-    },
-    ListNamesRemote: {
-        (
-            cb: { (name: string[][]): void }
-        ): void
-    }
-}
-
 interface MetaValue {
     unpack: { (): string }
 }

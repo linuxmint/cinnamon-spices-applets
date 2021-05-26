@@ -17,6 +17,8 @@ declare namespace imports.gi.Cinnamon {
 	}
 
 	class WindowTracker {
-		
+
 	}
+
+	export function util_get_transformed_allocation(actor: imports.gi.Clutter.Actor): gi.Clutter.ActorBox
 }

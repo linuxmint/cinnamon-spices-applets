@@ -23,7 +23,6 @@ async function downloadSongFromYoutube(song, downloadDir) {
         if (!filePath)
             throw new Error("couldn't download song");
         notify_1.notifySend(`Download finished. File saved to ${filePath}`);
-        global.log(`used downloadCommand: ${downloadCommand}`);
     }
     catch (error) {
         const notifyMsg = ("Couldn't download song from Youtube due to an Error. Make Sure you have the newest version of youtube-dl installed. Visit the Radio Applet Site in the Cinnamon Store for installation instruction");

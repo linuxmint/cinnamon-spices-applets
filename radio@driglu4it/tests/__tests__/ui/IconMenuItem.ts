@@ -14,8 +14,7 @@ afterEach(() => {
 })
 
 function getChildren(iconMenuItem: ReturnType<typeof createIconMenuItem>) {
-    //@ts-ignore
-    return iconMenuItem.actor._children
+    return iconMenuItem.actor["_children"]
 }
 
 describe('correctly initialized', () => {

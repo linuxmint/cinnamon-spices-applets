@@ -39,7 +39,6 @@ function main(
 ): imports.ui.applet.Applet {
 
 
-	// @ts-ignore
 	const appletDefinition = AppletManager.getAppletDefinition({
 		applet_id: instanceId
 	})
@@ -49,7 +48,6 @@ function main(
 	panel.connect('icon-size-changed', () => appletIcon.updateIconSize())
 
 	const appletIcon = createAppletIcon({
-		// @ts-ignore
 		locationLabel: appletDefinition.location_label,
 		panel
 	})
