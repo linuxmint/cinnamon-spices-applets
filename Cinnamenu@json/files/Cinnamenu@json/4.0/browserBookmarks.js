@@ -24,6 +24,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
+const Cinnamon = imports.gi.Cinnamon;
 
 let Gda = null;
 try {
@@ -80,7 +81,7 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
             'NULL AND moz_bookmarks.type = 1'
         );
     } catch(e) {}
-
+    
     // Gda binding seems buggy on Ubuntu 18.04 with error:
     // "Unsupported type void, deriving from fundamental void"
     if (!result) return [];
@@ -217,7 +218,9 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
 //=====================
 
 class BookmarksManager {
-    constructor(appSystem) {
+    constructor() {
+        const appSystem = Cinnamon.AppSystem.get_default();
+
         let bookmarks = [];
         Promise.all([
             readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),

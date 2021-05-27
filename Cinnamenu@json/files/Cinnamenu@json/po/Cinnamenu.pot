@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-12 19:45+0100\n"
+"POT-Creation-Date: 2021-05-27 15:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -405,7 +405,7 @@ msgstr ""
 msgid "Choose where to show application descriptions"
 msgstr ""
 
-msgid "Session buttons location"
+msgid "Sidebar location"
 msgstr ""
 
 msgid "Top"
@@ -420,7 +420,7 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgid "Choose where to show the sidebar"
 msgstr ""
 
 msgid ""
@@ -428,10 +428,16 @@ msgid ""
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
-msgid "Add favorites to session buttons"
+msgid "Show favorites on sidebar"
 msgstr ""
 
-msgid "Show your favorite app icons next to the session buttons"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+
+msgid "Show recent items"
+msgstr ""
+
+msgid "Show recent items category in the menu"
 msgstr ""
 
 msgid "Show favorite apps category"
@@ -476,6 +482,14 @@ msgstr ""
 msgid "Show an internet search option in search results"
 msgstr ""
 
+msgid "Enable web bookmarks search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Chrome, Chromium & Firefox.)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+
 msgid "Search home folder"
 msgstr ""
 
@@ -500,10 +514,13 @@ msgstr ""
 msgid "Choose a custom size for the panel icon"
 msgstr ""
 
-msgid "Session buttons icon size"
+msgid "Sidebar icon size"
 msgstr ""
 
-msgid "Use session buttons box style"
+msgid "Use sidebar box style"
+msgstr ""
+
+msgid "Use a sidebar box style"
 msgstr ""
 
 msgid "Use tile style"

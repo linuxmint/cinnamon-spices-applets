@@ -47,7 +47,6 @@
             "keys":[
                 "show-places-category",
                 "show-recents-category",
-                "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
                 "menu-editor-button"
@@ -72,6 +71,7 @@
                 "enable-autoscroll",
                 "enable-emoji-search",
                 "web-search-option",
+                "enable-web-bookmarks-search",
                 "search-home-folder",
                 "show-hidden-files"
             ]
@@ -142,14 +142,14 @@
     "sidebar-placement":{
         "type":"combobox",
         "default":1,
-        "description":"Session buttons location",
+        "description":"Sidebar location",
         "options":{
             "Top":0,
             "Bottom":1,
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
+        "tooltip":"Choose where to show the sidebar"
     },
     "info-box":{
         "type":"label",
@@ -158,8 +158,8 @@
     "add-favorites":{
         "type":"switch",
         "default":true,
-        "description":"Add favorites to session buttons",
-        "tooltip":"Show your favorite app icons next to the session buttons"
+        "description":"Show favorites on sidebar",
+        "tooltip":"Show your favorite app and file icons on the sidebar"
     },
     "show-places-category":{
         "type":"switch",
@@ -172,12 +172,6 @@
         "default":true,
         "description":"Show recent items",
         "tooltip":"Show recent items category in the menu"
-    },
-    "show-web-bookmarks-category":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Show web bookmarks",
-        "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
     },
     "show-favorite-apps-category":{
         "type":"switch",
@@ -270,6 +264,12 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
+    "enable-web-bookmarks-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Enable web bookmarks search",
+        "tooltip":"When searching, also search my browser's web bookmarks (Chrome, Chromium & Firefox.)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+    },
     "search-home-folder":{
         "type":"checkbox",
         "default":true,
@@ -357,14 +357,14 @@
         "max":64,
         "step":1,
         "units":"pixels",
-        "description":"Session buttons icon size",
-        "tooltip":"Session buttons icon size"
+        "description":"Sidebar icon size",
+        "tooltip":"Sidebar icon size"
     },
     "use-box-style":{
         "type":"checkbox",
         "default":false,
-        "description":"Use session buttons box style",
-        "tooltip":"Use session buttons box style"
+        "description":"Use sidebar box style",
+        "tooltip":"Use a sidebar box style"
     },
     "use-tile-style":{
         "type":"checkbox",
