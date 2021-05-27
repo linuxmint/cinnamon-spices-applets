@@ -85,8 +85,8 @@ class CinnamenuApplet extends TextIconApplet {
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
         this.initSettings();
-        if (this.settings.enableWebBookmarks) {
-            this.bookmarksManager = new BookmarksManager(this.appSystem);
+        if (this.settings.enableWebBookmarksSearch) {
+            this.bookmarksManager = new BookmarksManager();
         }
         this.recentApps = new RecentApps(this);
         this._onEnableRecentsChange();
@@ -114,7 +114,6 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'show-places-category',      value: 'showPlaces',            cb: this._onEnablePlacesChange },
         { key: 'show-recents-category',     value: 'showRecents',           cb: this._onEnableRecentsChange },
-        { key: 'show-web-bookmarks-category', value: 'enableWebBookmarks',  cb: this._onEnableWebBookmarksChange },
         { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: this._onEnableFavAppsCategory },
         { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: () => this.categoriesView.update()},
 
@@ -128,6 +127,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this._refresh },
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+        { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
         { key: 'search-home-folder',        value: 'searchHomeFolder',      cb: null },
         { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
 
@@ -253,15 +253,11 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     _onEnableWebBookmarksChange() { //web bookmarks
-        if (this.settings.enableWebBookmarks) {
+        if (this.settings.enableWebBookmarksSearch) {
             this.bookmarksManager = new BookmarksManager(this.appSystem);
         } else if (this.bookmarksManager) {
             this.bookmarksManager = null;
-            if (this.currentCategory === 'bookmarks') {
-                this.currentCategory = 'all';
-            }
         }
-        this.categoriesView.update();
     }
 
     _onEnableFavAppsCategory() {
@@ -362,7 +358,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.removeAll();
         this._destroyDisplayed();
         if (this.currentCategory === 'places' && !this.settings.showPlaces ||
-                        this.currentCategory === 'bookmarks' && !this.settings.enableWebBookmarks ||
                         this.currentCategory === 'recents' && !this.recentsEnabled ||
                         this.currentCategory === 'favorite_apps' && !this.settings.showFavAppsCategory) {
             this.currentCategory = 'all';
@@ -897,9 +892,6 @@ class CinnamenuApplet extends TextIconApplet {
         case 'favorite_files':
             this.appsView.populate(this.listFavoriteFiles());
             break;
-        case 'bookmarks':
-            this.appsView.populate(this.listWebBookmarks());
-            break;
         case 'favorite_apps':
             this.appsView.populate(this.listFavoriteApps());
             break;
@@ -966,8 +958,7 @@ class CinnamenuApplet extends TextIconApplet {
         let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
-                        .concat(this.settings.showPlaces ? this.listPlaces(pattern) : [])
-                        .concat(this.settings.enableWebBookmarks ? this.listWebBookmarks(pattern) : []);
+                        .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
 
         //=======search providers==========
         let otherResults = [];
@@ -989,9 +980,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (validExp) {
             try {
                 ans = eval(exp);
-            } catch(e) {
-                global.logWarning('Cinnamenu: Error evaluating expression: ' + e.message);
-            }
+            } catch(e) {}
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
             if (!this.calcGIcon) {
@@ -1001,7 +990,6 @@ class CinnamenuApplet extends TextIconApplet {
                             name: _('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
-                            score: 0.3,
                             icon: new St.Icon({ gicon: this.calcGIcon, icon_size: this.getAppIconSize() }),
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
@@ -1018,13 +1006,19 @@ class CinnamenuApplet extends TextIconApplet {
                                 name: _('Search web for') + ' "' + text + '"',
                                 description: '',
                                 deleteAfterUse: true,
-                                score: 0.25,
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
                                             file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
                                             icon_size: this.getAppIconSize() }),
                                 activate: () => {Util.spawnCommandLineAsync(
                                         '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
                             } );
+        }
+
+        //---web bookmarks-----
+        if (this.settings.enableWebBookmarksSearch) {
+            const webBookmarksResults = this.listWebBookmarks(pattern);
+            webBookmarksResults.sort((a, b) =>  a.score < b.score);
+            otherResults = otherResults.concat(webBookmarksResults);
         }
 
         //---emoji search------
@@ -1049,9 +1043,10 @@ class CinnamenuApplet extends TextIconApplet {
                                         clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
                                             });
                         } });
+
+            emojiResults.sort((a, b) =>  a.score < b.score);
             otherResults = otherResults.concat(emojiResults);
         }
-        otherResults.sort((a, b) =>  a.score < b.score);
 
         //---------------------------
         const finish = () => {//sort and display primaryResults[] and otherResults[]
@@ -1079,9 +1074,6 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
 
-            //sort otherResults[]
-            otherResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
-
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), null);
             const buttons = this.appsView.getActiveButtons();//todo
@@ -1096,7 +1088,7 @@ class CinnamenuApplet extends TextIconApplet {
             const MAX_FOLDERS_TODO = 200;
             const results = [];
             const foldersToDo = [];
-            foldersToDo.push(GLib.get_home_dir());
+            foldersToDo.push(GLib.get_home_dir());//start search in home directory
             let currentFolderIndex = 0;
             let lastUpdateTime = Date.now();
 
@@ -1173,7 +1165,7 @@ class CinnamenuApplet extends TextIconApplet {
                             results.length = 0;
                         }
                         lastUpdateTime = Date.now();
-                        updateInterval *= 3;//progressively longer update delays
+                        updateInterval *= 3;//progressively longer update intervals
                     }
 
                     //continue search if not completed
@@ -1188,40 +1180,38 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         ///----search providers--------
-        if (pattern.length > 2) {
-            let thisSearchId = this.currentSearchId;
-            setTimeout(() => {
-                launch_all(pattern, (provider, providerResults) => {
-                        providerResults.forEach(providerResult => {
-                            if (!providerResult) {
-                                return;
-                            }
-                            providerResult.isSearchResult = true;
-                            providerResult.name = providerResult.label.replace(/ : /g, ': ');
-                            providerResult.activate = provider.on_result_selected;
-                            providerResult.deleteAfterUse = true;
-                            providerResult.score = 0.2;
-                            if (providerResult.icon) {
-                                providerResult.icon.icon_size = this.getAppIconSize();
-                            } else if (providerResult.icon_app){
-                                providerResult.icon = providerResult.icon_app.create_icon_texture(
-                                                                                    this.getAppIconSize());
-                            } else if (providerResult.icon_filename){
-                                providerResult.icon = new St.Icon({
-                                      gicon: new Gio.FileIcon({
-                                            file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
-                                            icon_size: this.getAppIconSize() });
-                            }
-                        });
-                        if (!this.searchActive || thisSearchId !== this.currentSearchId ||
-                                                    !providerResults || providerResults.length <= 0) {
+        let thisSearchId = this.currentSearchId;
+        setTimeout(() => {
+            launch_all(pattern, (provider, providerResults) => {
+                    providerResults.forEach(providerResult => {
+                        if (!providerResult) {
                             return;
                         }
-                        otherResults = otherResults.concat(providerResults);
-                        finish();
+                        providerResult.isSearchResult = true;
+                        providerResult.name = providerResult.label.replace(/ : /g, ': ');
+                        providerResult.activate = provider.on_result_selected;
+                        providerResult.deleteAfterUse = true;
+                        //providerResult.score = 0.2;
+                        if (providerResult.icon) {
+                            providerResult.icon.icon_size = this.getAppIconSize();
+                        } else if (providerResult.icon_app){
+                            providerResult.icon = providerResult.icon_app.create_icon_texture(
+                                                                                this.getAppIconSize());
+                        } else if (providerResult.icon_filename){
+                            providerResult.icon = new St.Icon({
+                                  gicon: new Gio.FileIcon({
+                                        file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
+                                        icon_size: this.getAppIconSize() });
+                        }
                     });
+                    if (!this.searchActive || thisSearchId !== this.currentSearchId ||
+                                                !providerResults || providerResults.length <= 0) {
+                        return;
+                    }
+                    otherResults = otherResults.concat(providerResults);
+                    finish();
                 });
-        }
+            });
 
         finish();
         return;
@@ -1840,7 +1830,7 @@ class CategoriesView {
                         if (!button) {
                             button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
                         }
-                        const newAppIndex = categoryApps.findIndex(app => app.newAppShouldHighlight);
+                        const newAppIndex = categoryApps.findIndex(app => !!app.newAppShouldHighlight);
                         button.setHighlight(newAppIndex >= 0);//highlight category if it contains a new app
                         newButtons.push(button);
                     }
@@ -1851,7 +1841,6 @@ class CategoriesView {
         [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
             [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
             [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
-            [this.appThis.settings.enableWebBookmarks, 'bookmarks', _('Bookmarks'), 'user-bookmarks'],
             [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
             [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home']
         ].forEach(param => {
@@ -2152,19 +2141,19 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
         this.innerBox.remove_all_children();
         this.items.forEach(item => item.destroy());
         this.items = [];
-        //----add session buttons to this.items[]
-        const newSessionIcon = (iconName) => {
+        //----add sidebar buttons to this.items[]
+        const newSidebarIcon = (iconName) => {
             return new St.Icon( { icon_name: iconName, icon_size: this.appThis.settings.sidebarIconSize,
                           icon_type: this.appThis.settings.sidebarIconSize <= 24 ? St.IconType.SYMBOLIC :
                                                                                     St.IconType.FULLCOLOR });
         };
-        this.items.push(new SidebarButton( this.appThis, newSessionIcon('system-shutdown'), null, _('Quit'),
+        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-shutdown'), null, _('Quit'),
                     _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
                                                                 this.appThis.closeMenu(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSessionIcon('system-log-out'), null, _('Logout'),
+        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-log-out'), null, _('Logout'),
                                     _('Leave the session'), () => { Util.spawnCommandLine('cinnamon-session-quit');
                                                                         this.appThis.closeMenu(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSessionIcon('system-lock-screen'), null, _('Lock screen'),
+        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-lock-screen'), null, _('Lock screen'),
                     _('Lock the screen'), () => {
                         const screensaver_settings = new Gio.Settings({
                                                     schema_id: 'org.cinnamon.desktop.screensaver' });
