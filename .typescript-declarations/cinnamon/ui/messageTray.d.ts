@@ -151,12 +151,12 @@ declare namespace imports.ui.messageTray {
 
 		public setIconVisible(visible: boolean): void;
 
-	/**
-		 * scrollTo:
-		 * @side (St.Side): St.Side.TOP or St.Side.BOTTOM
-		 * 
-		 * Scrolls the content area (if scrollable) to the indicated edge
-		 */
+		/**
+			 * scrollTo:
+			 * @side (St.Side): St.Side.TOP or St.Side.BOTTOM
+			 * 
+			 * Scrolls the content area (if scrollable) to the indicated edge
+			 */
 		public scrollTo(side: gi.St.Side): void;
 
 		protected _updateLayout(): void;
@@ -177,7 +177,7 @@ declare namespace imports.ui.messageTray {
 		 * If the button is clicked, the notification will emit the
 		 * %action-invoked signal with @id as a parameter.
 		 */
-		public addButton(id: number, label: string): void;
+		public addButton(id: string, label: string): void;
 
 		/**
 		 * clearButtons:
@@ -193,7 +193,8 @@ declare namespace imports.ui.messageTray {
 		public setTransient(isTransient: boolean): void;
 
 		public setUseActionIcons(useIcons: boolean): void;
-		protected _onActionInvoked(actor: gi.Clutter.Actor, mouseButtonClicked: boolean, id: number): void;
+
+		protected _onActionInvoked(actor: gi.Clutter.Actor, mouseButtonClicked: number, id: string): void;
 
 		protected _onClicked(): void;
 

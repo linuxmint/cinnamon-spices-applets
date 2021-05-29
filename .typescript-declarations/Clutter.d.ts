@@ -2741,6 +2741,9 @@ declare namespace imports.gi.Clutter {
 	}
 
 	export class Text extends Actor {
+		ellipsize: gi.Pango.EllipsizeMode
+		line_wrap: boolean
+		line_wrap_mode: gi.Pango.WrapMode
 		set_line_wrap(line_wrap: boolean): void;
 		set_ellipsize(mode: gi.Pango.EllipsizeMode): void;
 		set_line_alignment(alignment: gi.Pango.Alignment): void;

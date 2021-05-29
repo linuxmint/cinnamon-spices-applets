@@ -93,6 +93,7 @@ declare namespace imports.gi.St {
 		style_class?: string;
 		/** css string */
 		style?: string;
+		gicon?: Gio.Icon
 	}
 	export class ImageContent {
 
@@ -318,8 +319,21 @@ declare namespace imports.gi.St {
 
 	}
 
-	export class Table extends Widget {
+	interface TableAddOptions {
+		row: number,
+		col: number,
+		col_span: number,
+		x_expand: boolean,
+		y_expand: boolean,
+		x_fill: boolean,
+		y_fill: boolean,
+		x_align: Align,
+	}
 
+	export class Table extends Widget {
+		row_count: number
+
+		add(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
 	}
 
 	export class Content {
