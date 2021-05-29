@@ -98,9 +98,11 @@ declare namespace imports.gi.St {
 
 	}
 	export class Label extends Widget {
-		text: string;
-		get_clutter_text(): gi.Clutter.Text;
 		clutter_text: gi.Clutter.Text;
+		text: string;
+		get_text(): string;
+		set_text(text:string): void
+		get_clutter_text(): gi.Clutter.Text;
 		constructor(options?: any);
 	}
 	export class PasswordEntry {
@@ -282,21 +284,26 @@ declare namespace imports.gi.St {
 
 	}
 	interface IWidget {
-		destroy(): void;
+		style: string;
 		style_class: string;
+		can_focus: boolean;
+		hover: boolean;
+		label_actor: Clutter.Actor;
 		add_style_class_name(style_class: string): void;
 		add_style_pseudo_class(style_class: string): void;
+		change_style_pseudo_class(style_class: string, active: boolean): void;
+		destroy(): void;
 		remove_style_pseudo_class(pseudo_class: string): void;
 		get_style_class_name(): string;
 		remove_style_class_name(style_class: string): void;
+		get_direction(): TextDirection;
 		get_style(): string;
 		set_style(style: string): string;
 		get_theme(): imports.gi.St.Theme;
 		get_theme_node(): ThemeNode;
 		show(): void;
 		hide(): void;
-		style: string;
-		connect(signal: 'style-changed' | 'popup-menu', callback: (actor: this) => boolean | void): number;
+		connect(signal: 'style-changed' | 'popup-menu' | 'notify::hover', callback: (actor: this) => boolean | void): number;
 	}
 
 	// This is the only way we can extend a class when its bases has different signatures. 
@@ -404,7 +411,13 @@ declare namespace imports.gi.St {
 
 	}
 	export enum TextDirection {
-
+		/** Use the default setting, as returned
+		by Clutter.get_default_text_direction */
+		DEFAULT = 0,
+		/** Use left-to-right text direction */
+		LTR = 1,
+		/** Use right-to-left text direction */
+		RTL = 2
 	}
 
 	// INTERFACES

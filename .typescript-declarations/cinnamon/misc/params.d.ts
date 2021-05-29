@@ -10,5 +10,5 @@ declare namespace imports.misc.params {
      * @returns a new object, containing the merged parameters from
      * `params` and `default`
      */
-    export function parse<T, TT>(params: TT, defaults: T, allowExtras: boolean): T & TT;
+    export function parse<T, TT>(params: TT, defaults: T, allowExtras?: boolean): T & TT;
 }
