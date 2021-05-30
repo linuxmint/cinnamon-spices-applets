@@ -210,7 +210,7 @@ declare namespace imports.gi.Clutter {
 		 * a grandparent's origin has moved.
 		 * @param box new allocation of the actor, in parent-relative coordinates
 		 */
-		allocate(box: ActorBox): void;
+		allocate(box: ActorBox, flags?: AllocationFlags): void;
 		/**
 		 * Allocates this by taking into consideration the available allocation
 		 * area; an alignment factor on either axis; and whether the actor should
@@ -2515,8 +2515,9 @@ declare namespace imports.gi.Clutter {
 	 * accessed
 	 */
 	export class Container {
-
+		remove_actor(actor: Actor): void
 	}
+
 	export class Content {
 
 	}
@@ -2740,6 +2741,9 @@ declare namespace imports.gi.Clutter {
 	}
 
 	export class Text extends Actor {
+		ellipsize: gi.Pango.EllipsizeMode
+		line_wrap: boolean
+		line_wrap_mode: gi.Pango.WrapMode
 		set_line_wrap(line_wrap: boolean): void;
 		set_ellipsize(mode: gi.Pango.EllipsizeMode): void;
 		set_line_alignment(alignment: gi.Pango.Alignment): void;
@@ -2783,6 +2787,7 @@ declare namespace imports.gi.Clutter {
 		public get_button(): number;
 		public get_coords(): number[];
 		public get_scroll_direction(): ScrollDirection;
+		public get_source(): Clutter.Actor;
 		public get_key_symbol(): number;
 		public type(): EventType;
 	}
@@ -3032,6 +3037,26 @@ declare namespace imports.gi.Clutter {
 	export enum AlignAxis {
 
 	}
+
+	/**
+	  * Flags passed to the index.ActorClass.allocate() virtual function
+	  * and to the Clutter.Actor.allocate function.
+	  */
+	export enum AllocationFlags {
+		/** No flag set */
+		ALLOCATION_NONE = 0,
+		/** Whether the absolute origin of the actor has changed; this implies that any 
+		ancestor of the actor has been moved. */
+		ABSOLUTE_ORIGIN_CHANGED = 2,
+		/** Whether the allocation should be delegated to the Clutter.LayoutManager 
+		instance stored inside the Clutter.Actor.layout-manager property of Clutter.
+		Actor. This flag should only be used if you are subclassing Clutter.Actor and
+		overriding the index.ActorClass.allocate() virtual function, but you wish to 
+		use the default implementation of the virtual function inside Clutter.Actor.
+		Added in Clutter 1.10. */
+		DELEGATE_LAYOUT = 4
+	}
+
 	export enum AnimationMode {
 
 	}

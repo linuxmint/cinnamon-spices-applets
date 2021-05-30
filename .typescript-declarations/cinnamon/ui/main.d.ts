@@ -444,7 +444,7 @@ declare namespace imports.ui.main {
      *
      * Returns (boolean): true iff we successfully acquired a grab or already had one
      */
-    export function pushModal(actor: gi.Clutter.Actor, timestamp: number, options?: gi.Meta.ModalOptions): boolean;
+    export function pushModal(actor: gi.Clutter.Actor, timestamp?: number, options?: gi.Meta.ModalOptions): boolean;
 
     /**
      * popModal:
@@ -459,7 +459,7 @@ declare namespace imports.ui.main {
      * initiated event.  If not provided then the value of
      * global.get_current_time() is assumed.
      */
-    export function popModal(actor: gi.Clutter.Actor, timestamp: number): void;
+    export function popModal(actor: gi.Clutter.Actor, timestamp?: number): void;
 
     /**
      * createLookingGlass:
