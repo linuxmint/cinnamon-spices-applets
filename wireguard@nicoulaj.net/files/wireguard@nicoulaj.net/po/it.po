@@ -61,11 +61,11 @@ msgstr "Lettura delle interfacce di rete non riuscita"
 msgid ""
 "Failed accessing WireGuard configs directory, please make sure it is "
 "accessible\n"
-"sudo chmod o+r /etc/wireguard"
+"sudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"
 msgstr ""
 "Impossibile accedere alla directory di configurazione di WireGuard, "
 "assicurarsi che sia accessibile\n"
-"sudo chmod o+r /etc/wireguard"
+"sudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"
 
 #: applet.js:219
 msgid "Error details"

@@ -57,8 +57,8 @@ var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hour
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
-const clearTimeout = utils.clearTimeout as (id: any) => void;
+//var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
+//const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
@@ -69,7 +69,7 @@ var _ = utils._ as (str: string) => string;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
-    var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => any;
+    //var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => any;
     var setTimeoutFunc = promisePoly.setTimeoutFunc;
     var isArray = promisePoly.isArray;
     var noop = promisePoly.noop;
@@ -406,7 +406,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     public GetPanelHeight(): number {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
     }
 
     private async locationLookup(): Promise<void> {
@@ -450,7 +450,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** override function */
-    private on_orientation_changed(orientation: imports.gi.St.Side) {
+    public on_orientation_changed(orientation: imports.gi.St.Side) {
         this.orientation = orientation;
         this.refreshWeather(true);
     };
@@ -466,7 +466,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** Override function */
-    private on_applet_removed_from_panel(deleteConfig: any) {
+    public on_applet_removed_from_panel(deleteConfig: any) {
         // TODO: Proper unload
         //this.unloadStylesheet();
         //Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
@@ -483,12 +483,12 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** Override function */
-    private on_applet_middle_clicked(event: any) {
+    public on_applet_middle_clicked(event: any) {
 
     }
 
     /** Override function */
-    private on_panel_height_changed() {
+    public on_panel_height_changed() {
         // Implemented byApplets
     }
 

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-23 07:34+0100\n"
+"PO-Revision-Date: 2021-03-24 21:19+0000\n"
 "Last-Translator: Caldas Lopes <joao.caldas.lopes@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. 3.2 4.0
@@ -60,7 +60,6 @@ msgid "Clear List"
 msgstr "Limpar lista"
 
 #. 3.2 4.0
-#, fuzzy
 msgid "No recent files"
 msgstr "Alterna ficheiros recentes"
 
@@ -444,91 +443,4 @@ msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 "Mostre seus ícones de aplicativos favoritos ao lado dos botões da sessão"
 
-#~ msgid "No recent documents"
-#~ msgstr "Sem documentos recentes"
 
-#, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Falha ao arrancar \"%s\""
-
-#~ msgid "Remove from favorites"
-#~ msgstr "Remover dos favoritos"
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr ""
-#~ "Pressione este botão para personalizar as definições de privacidade."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Pressione este botão para personalizar as entradas do menu."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Ao desmarcar permite que o ícone seja definido pelo tema"
-
-#~ msgid "Icon"
-#~ msgstr "Ícone"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Definir o nome do ícone do botão de menu personalizado"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Permite abrir o menu quando o rato passa sobre o applet"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Atraso na mudança ao mover o rato sobre categorias"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "QUando ativo, vista de categorias é ativada ao clicar em vês de ao mover "
-#~ "sobre ele."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Escolher ativar ou não o deslocamento automático na lista de aplicações."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Escolher se os marcadores são ou não indexados no menu."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr "Escolher se janelas abertas são indexadas ou não nas pesquisas"
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Mostrar ou não marcadores e locais no menu."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Escolher mostrar ícones das aplicações ou não."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Escolher mostrar ou não ícones em categorias."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Escolher mostrar ou não a descrição das aplicações nos botões das "
-#~ "aplicações."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Quando ativo, tooltips com o nome ou descrição do ítem são mostradas "
-#~ "quando o rato se move sobre ele."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "O atraso em milisegundos para tooltips quando o rato se move sobre um "
-#~ "ítem."
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Forneça a sua senha para desinstalar esta aplicação"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Ativar entrada de caminho na caixa de pesquisa"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Permite a entrada de caminho de ficheiro na caixa de pesquisa"

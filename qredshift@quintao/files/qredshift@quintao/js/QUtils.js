@@ -21,7 +21,11 @@ const Util = imports.misc.util;
 
 const PopupMenu = imports.ui.popupMenu;
 
-
+/** @exports QUtils.lerp */
+function lerp(nvalue, target, t){
+    nvalue = (nvalue + (target - nvalue) * t);
+    return parseInt(nvalue);
+}
 
 
 /** @exports QUtils.qLOG */

@@ -15,4 +15,4 @@ Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid
  * Built in calculator: (including constants and functions: E, PI, abs, acos, acosh, asin, asinh, atan, atanh, cbrt, ceil, cos, cosh, exp, floor, log, max, min, pow, random, round, sign, sin, sinh, sqrt, tan, tanh and trunc. All angles are in radians.)
  * Emoji search.
  * Browse filesystem in the menu.
- * ***New:*** File search function in context menu.
+ * File search function in context menu.

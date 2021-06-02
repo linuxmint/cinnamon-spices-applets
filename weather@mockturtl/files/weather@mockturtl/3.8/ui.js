@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UI = void 0;
-const uiCurrentWeather_1 = require("./uiCurrentWeather");
-const logger_1 = require("./logger");
-const utils_1 = require("./utils");
-const uiForecasts_1 = require("./uiForecasts");
-const uiHourlyForecasts_1 = require("./uiHourlyForecasts");
-const uiBar_1 = require("./uiBar");
-const uiSeparator_1 = require("./uiSeparator");
+const uiCurrentWeather_1 = require("ui_elements/uiCurrentWeather");
+const logger_1 = require("lib/logger");
+const utils_1 = require("utils");
+const uiForecasts_1 = require("ui_elements/uiForecasts");
+const uiHourlyForecasts_1 = require("ui_elements/uiHourlyForecasts");
+const uiBar_1 = require("ui_elements/uiBar");
+const uiSeparator_1 = require("ui_elements/uiSeparator");
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label } = imports.gi.St;
 const Lang = imports.lang;
@@ -18,6 +18,7 @@ const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
+        this.lastDateToggled = null;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
         this.menu = new AppletPopupMenu(this.App, orientation);
@@ -33,12 +34,12 @@ class UI {
     Toggle() {
         this.menu.toggle();
     }
-    ToggleHourlyWeather() {
+    async ToggleHourlyWeather() {
         if (this.HourlyWeather.Toggled) {
-            this.HideHourlyWeather();
+            await this.HideHourlyWeather();
         }
         else {
-            this.ShowHourlyWeather();
+            await this.ShowHourlyWeather();
         }
     }
     Rebuild(config) {
@@ -102,6 +103,7 @@ class UI {
         this.CurrentWeather = new uiCurrentWeather_1.CurrentWeather(this.App);
         this.FutureWeather = new uiForecasts_1.UIForecasts(this.App);
         this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
+        this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
         this.Bar = new uiBar_1.UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
         this.ForecastSeparator = new uiSeparator_1.UISeparator();
@@ -129,15 +131,26 @@ class UI {
             text: utils_1._('Loading future weather ...')
         }));
     }
-    ShowHourlyWeather() {
-        this.HourlyWeather.Show();
+    async OnDayClicked(sender, date) {
+        if (!this.HourlyWeather.Toggled)
+            await this.ShowHourlyWeather();
+        else if (this.lastDateToggled == date) {
+            await this.HideHourlyWeather();
+            return;
+        }
+        this.HourlyWeather.ScrollTo(date);
+        this.lastDateToggled = date;
+    }
+    async ShowHourlyWeather() {
         this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
+        await this.HourlyWeather.Show();
     }
-    HideHourlyWeather() {
-        this.HourlyWeather.Hide();
+    async HideHourlyWeather() {
+        this.lastDateToggled = null;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
+        await this.HourlyWeather.Hide();
     }
 }
 exports.UI = UI;

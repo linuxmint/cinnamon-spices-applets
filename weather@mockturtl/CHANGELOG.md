@@ -1,5 +1,41 @@
 # Changelog
 
+## 3.0.8
+
+* Fixes [#3787](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
+
+## 3.0.7
+
+* Resolves [#3783](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
+* Fixes wrong filename for declaration file (global.ts -> global.d.ts) causing all kinds of issues
+
+## 3.0.6
+
+* Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
+* Move Typescript declarations out of the weather applet folder to prevent update triggers from other applets making declaration changes. Please review this now if it's ok, should be in a folder with a different name or have a more thorough README etc.
+* Update de.po with contribution from kipuka@eclipso.eu
+* Add deprecation notices for relevant providers and their EOL date
+* Make provider names translatable
+* Add stack trace to errors (even if they do not seem to be correct)
+* Add option to switch between textual and icon representation of wind direction
+* Fixes [#3738](https://github.com/linuxmint/cinnamon-spices-applets/issues/3738)
+* Fixes [#3733](https://github.com/linuxmint/cinnamon-spices-applets/issues/3733)
+
+## 3.0.5
+
+* Fixes [#3654](https://github.com/linuxmint/cinnamon-spices-applets/issues/3654)
+* Fixes [#3659](https://github.com/linuxmint/cinnamon-spices-applets/issues/3659)
+
+## 3.0.4
+
+* Add declarations for some of the cinnamon js files an organizing declarations better (and add more when I feel up to it again). Technically anyone can use it if want to use Typescript by including the declarations folder into their tsconfig.json file, but whatever.
+* Resolves [#3603](https://github.com/linuxmint/cinnamon-spices-applets/issues/3603)
+* Add minutely precipitation under current condition, when there is any (and the setting is on)
+* Add more tooltips to settings
+* OpenWeatherMap can also display Precipitation chance if there is no volume specified
+* Autoformat 3.8 and new declaration files
+* Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
+
 ## 3.0.3
 
 * Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming

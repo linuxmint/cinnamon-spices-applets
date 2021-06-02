@@ -6,6 +6,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -91,8 +93,6 @@ var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 var delay = utils.delay;
 var isCoordinate = utils.isCoordinate;
-var setTimeout = utils.setTimeout;
-var clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
 var MetreToUserUnits = utils.MetreToUserUnits;
@@ -101,7 +101,6 @@ var _ = utils._;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
-    var setTimeout = promisePoly.setTimeout;
     var setTimeoutFunc = promisePoly.setTimeoutFunc;
     var isArray = promisePoly.isArray;
     var noop = promisePoly.noop;
@@ -398,7 +397,7 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(label);
     };
     WeatherApplet.prototype.GetPanelHeight = function () {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
     };
     WeatherApplet.prototype.locationLookup = function () {
         return __awaiter(this, void 0, void 0, function () {

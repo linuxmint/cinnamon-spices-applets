@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 12:25+0100\n"
-"PO-Revision-Date: 2020-08-12 21:07+0200\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:25+0000\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Type to search..."
@@ -27,19 +27,19 @@ msgstr "Initialisation"
 msgid "No description available"
 msgstr "Aucune description"
 
-msgid "All Applications"
+msgid "All applications"
 msgstr "Toutes les applications"
 
 msgid "Places"
 msgstr "Emplacements"
 
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Documents récents"
 
 msgid "Bookmarks"
 msgstr "Signets web"
 
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Applis favorites"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
@@ -68,7 +68,7 @@ msgstr "Passer à une vue en grille"
 msgid "Switch to list view"
 msgstr "Passer à une vue en liste"
 
-msgid "Lock Screen"
+msgid "Lock screen"
 msgstr "Verrouiller l'écran"
 
 msgid "Lock the screen"
@@ -113,17 +113,110 @@ msgstr "Ajouter aux Favoris"
 msgid "Uninstall"
 msgstr "Désinstaller"
 
+msgid "Find files..."
+msgstr "Rechercher des fichiers..."
+
 msgid "Please wait..."
 msgstr "Veuillez patienter..."
 
-msgid "Search google for"
-msgstr "Rechercher sur Google"
+msgid "No recent Items"
+msgstr "Aucun document récent"
 
 msgid "Solution:"
 msgstr "Résultat :"
 
 msgid "Click to copy"
 msgstr "Cliquer pour copier"
+
+msgid "Search web for"
+msgstr "Rechercher sur le Web"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+msgid "Recent"
+msgstr "Récents"
+
+msgid "Home folder"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Trop d'entrées - affiche uniquement les 1000 premières entrées"
+
+msgid "Reset category order"
+msgstr "Restaurer l'ordre initial des catégories"
+
+msgid "This file is no longer available"
+msgstr "Ce fichier n'est plus disponible"
+
+msgid "Open with"
+msgstr "Ouvrir avec"
+
+msgid "Other application..."
+msgstr "Autre application ..."
+
+msgid "Open containing folder"
+msgstr "Ouvrir dossier contenant"
+
+msgid "Move to trash"
+msgstr "Mettre à la corbeille"
+
+msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Ouverte"
+
+msgid "Search"
+msgstr ""
+
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -135,13 +228,6 @@ msgstr ""
 "Un menu flexible offrant des options de formatage, des signets Web, une "
 "recherche parmi vos fichiers et applications, et un support de moteurs de "
 "recherche sur le web."
-
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-"Rendu possible grâce aux efforts des contributeurs au menu Cinnamon, "
-"Gnomenu, et des contributeurs aux projets dont ils sont issus."
 
 msgid "Behavior"
 msgstr "Comportement"
@@ -175,9 +261,6 @@ msgstr "Paramètres des Documents récents"
 
 msgid "Open the menu editor"
 msgstr "Ouvrir l'éditeur de menu"
-
-msgid "Reset category order"
-msgstr "Restaurer l'ordre initial des catégories"
 
 msgid "Use a custom icon"
 msgstr "Personnaliser l'icône"
@@ -244,8 +327,10 @@ msgstr "Active le défilement automatique dans la liste des applications"
 msgid "Show web bookmarks"
 msgstr "Afficher les signets Web"
 
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Affiche dans le menu les signets Web de votre navigateur"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
 
 msgid "Enable searching of open windows"
 msgstr "Activer la recherche des fenêtres ouvertes"
@@ -261,14 +346,17 @@ msgstr ""
 msgid "Example Search Providers"
 msgstr "Exemples de moteurs de recherche"
 
-msgid "Startup applications view mode"
-msgstr "Mode de vue par défaut des applications"
+msgid "Open menu on category:"
+msgstr "Ouvrir le menu sur la catégorie:"
 
 msgid "List"
 msgstr "Liste"
 
 msgid "Grid"
 msgstr "Grille"
+
+msgid "Always open the menu with this category selected"
+msgstr ""
 
 msgid "columns"
 msgstr "colonnes"
@@ -299,9 +387,6 @@ msgstr "Délai avant l'affichage de l'infobulle"
 
 msgid "Use a custom menu height"
 msgstr "Utiliser une hauteur de menu personnalisée"
-
-msgid "px"
-msgstr "px"
 
 msgid "Custom menu height"
 msgstr "Hauteur de menu personnalisée"
@@ -344,10 +429,15 @@ msgstr "Gauche"
 msgid "Right"
 msgstr "Droite"
 
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 "Vous permet de choisir où, dans le menu, seront affichés les boutons : "
 "Éteindre l'ordinateur, Fermer la session, Verrouiller l'écran"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
 
 msgid "Add favorites to session buttons"
 msgstr "Accoler vos applis favorites aux boutons de session"
@@ -357,11 +447,73 @@ msgstr ""
 "Affiche les icônes de vos applications favorites à côté des boutons de "
 "session"
 
-msgid "Always open menu on favorite apps"
-msgstr "Toujours ouvrir le menu sur les Applis favorites"
+msgid "Show favorite apps category"
+msgstr ""
 
-msgid "Always open the menu with favorite apps category selected"
-msgstr "Ouvre toujours le menu avec la catégorie Applis favorites sélectionnée"
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+msgid "Show home folder"
+msgstr "Afficher le dossier de départ"
+
+msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Last used category"
+msgstr "Dernière catégorie utilisée"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+msgid "Enable emoji search"
+msgstr "Activer la recherche d'emojis"
+
+msgid "Show emojis in search results"
+msgstr ""
+
+msgid "Web search option"
+msgstr "Option de recherche sur le Web"
+
+msgid "Google"
+msgstr ""
+
+msgid "Bing"
+msgstr ""
+
+msgid "Yahoo"
+msgstr ""
+
+msgid "DuckDuckGo"
+msgstr ""
+
+msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Search home folder"
+msgstr "Rechercher dans le dossier de départ"
+
+msgid "When searching, also search home folder for files"
+msgstr ""
+"Lors de la recherche, recherchez également les fichiers dans le dossier de "
+"départ"
+
+msgid "Show hidden files"
+msgstr "Montrer les fichiers cachés"
+
+msgid "Show hidden files in folder view"
+msgstr ""
+
+msgid "Use a custom icon size"
+msgstr "Utiliser une taille d'icône personnalisée"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Utilisez une taille personnalisée pour l'icône du panneau"
+
+msgid "Panel icon size"
+msgstr "Taille de l'icône du panneau"
+
+msgid "Choose a custom size for the panel icon"
+msgstr ""
 
 msgid "Session buttons icon size"
 msgstr "Taille des icônes des boutons de session"
@@ -369,107 +521,4 @@ msgstr "Taille des icônes des boutons de session"
 msgid "Use session buttons box style"
 msgstr "Afficher un cadre autour des boutons de session"
 
-#~ msgid "Remove favorite"
-#~ msgstr "Supprimer des Favoris"
 
-#~ msgid "No recent documents"
-#~ msgstr "Aucun document récent"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Échec au lancement de \"%s\""
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr "Pressez ce bouton pour accéder à vos paramètres de confidentialité."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Pressez ce bouton pour adapter les entrées de menu à vos besoins."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Décochez cette case pour utiliser l'icône définie par le thème"
-
-#~ msgid "Icon"
-#~ msgstr "Icône"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Définir le nom de l'icône sur le bouton du menu"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Permet l'ouverture du menu au survol de la souris"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Délai entre les changements de catégorie"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Ouvrir les catégories en cliquant dessus plutôt qu'en les survolant avec "
-#~ "la souris."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Choisissez d'activer ou non le défilement automatique dans la liste des "
-#~ "applications."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Choisissez si les signets sont indexés ou non dans le menu."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr ""
-#~ "Choisissez si les fenêtres ouvertes sont indexées ou non dans le menu."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr ""
-#~ "Choisissez d'afficher ou non les favoris et les emplacements dans le menu."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Choisissez d'afficher ou non les icônes sur les applications."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Choisissez d'afficher ou non les icônes sur les catégories."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Choisissez d'afficher ou non la description de l'application sous son "
-#~ "bouton."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Lorsque cette option est activée, les infobulles contenant le nom ou la "
-#~ "description de l'élément s'affichent lorsqu'il est survolé."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "Le temps de retard en millisecondes avant d'afficher son infobulle en "
-#~ "survolant un élément de menu."
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr ""
-#~ "Activer l'entrée d'un chemin du système de fichiers dans la zone de "
-#~ "recherche"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Permet l'entrée d'un chemin dans la boîte de recherche du menu."
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr ""
-#~ "Veuillez renseigner votre mot de passe pour désinstaller cette application"
-
-#~ msgid "Startup category"
-#~ msgstr "Catégorie en première position"
-
-#~ msgid "Category first seen when the menu is opened"
-#~ msgstr "Première catégorie vue à l'ouverture du menu"
-
-#~ msgid ""
-#~ "Choose where application descriptions will be placed, or select \"None\" "
-#~ "to disable."
-#~ msgstr ""
-#~ "Choisir où la description de l'application sera placée, ou bien \"Aucun\"."

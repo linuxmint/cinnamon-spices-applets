@@ -7268,9 +7268,9 @@ const EMOJI = [];
 "flag: Wales",
 "flag"
 ]
-].forEach(emoji => { EMOJI.push({ "code": emoji[0],
-                                  "name": emoji[1],
-                                  "keywords": emoji[2]
+].forEach(emoji => { EMOJI.push({ 'code': emoji[0],
+                                  'name': emoji[1],
+                                  'keywords': emoji[2]
                                 });
                     });
 
@@ -7570,8 +7570,9 @@ const MODED = [
 '👩🏻‍❤️‍👩🏻'
 
 ];
-
-const MODABLE = []; //MODABLE is the same as MODED but with skin tone modifiers removed.
+// MODED is the emojis with the skin tone modifier \u{1F3FB} included
+// create MODABLE[], the same emoji but with the skin tone modifiers removed.
+const MODABLE = [];
 for (let i = 0; i < MODED.length; i++) {
     MODABLE[i] = MODED[i].replace('\u{1F3FB}', '');
     MODABLE[i] = MODABLE[i].replace('\u{1F3FB}', '');

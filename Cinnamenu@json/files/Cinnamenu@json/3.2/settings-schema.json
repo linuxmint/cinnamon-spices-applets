@@ -211,7 +211,7 @@
     "type": "checkbox",
     "default": false,
     "description": "Show web bookmarks",
-    "tooltip": "Show your browser's web bookmarks in the menu"
+    "tooltip": "Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
   },
   "enable-windows": {
     "type": "checkbox",
@@ -232,12 +232,12 @@
   "startup-view-mode": {
     "type": "combobox",
     "default": 1,
-    "description": "Startup applications view mode",
+    "description": "Open menu on category:",
     "options": {
       "List": 0,
       "Grid": 1
     },
-    "tooltip": "Startup applications view mode"
+    "tooltip": "Always open the menu with this category selected"
   },
   "apps-grid-column-count": {
     "type": "spinbutton",
@@ -303,7 +303,7 @@
     "min": 360,
     "max": 9999,
     "step": 1,
-    "units": "px",
+    "units": "pixels",
     "description": "Custom menu height",
     "tooltip": "Custom menu height",
     "dependency": "enable-custom-menu-height"

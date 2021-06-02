@@ -1,6 +1,6 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const GLib = imports.gi.GLib;
+const Atk = imports.gi.Atk;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
@@ -12,70 +12,52 @@ const {PopupBaseMenuItem, PopupMenu, PopupSeparatorMenuItem} = imports.ui.popupM
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
-const {spawnCommandLine, spawn, unref} = imports.misc.util;
+const {spawnCommandLine} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const {SEARCH_DEBUG, _, APPTYPE, tryFn, wordWrap, showTooltip, hideTooltip} = require('./utils');
+const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
-const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-const USER_DESKTOP_PATH = getUserDesktopDir();
 
-class CategoryButton extends PopupBaseMenuItem {
-    constructor(appThis, dir, altNameText, altIconName) {
-        super({ hover: false, activate: false });
+class CategoryButton {
+    constructor(appThis, category_id, category_name, icon_name, gicon) {
         this.appThis = appThis;
         this.signals = new SignalManager(null);
-        this.actor.set_style_class_name('menu-category-button');
         this.disabled = false;
-        this.entered = null;
-        let iconName;
-        let isStrDir = typeof dir === 'string';
-        if (isStrDir) {
-            this.id = dir;
-            this.categoryNameText = altNameText;
-            iconName = altIconName;
+        //Note: When option "Activate categories on click" is on, this.entered category is the one that
+        //has keyboard focus or mouse hover and is not necessarily the same as the currently selected
+        //category (this.appThis.currentCategory)
+        this.entered = false;
+        this.id = category_id;
+        this.actor = new St.BoxLayout({ style_class: 'menu-category-button', reactive: true,
+                                                                accessible_role: Atk.Role.MENU_ITEM});
+        //----icon
+        if (icon_name) {
+            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
+                                        icon_size: this.appThis.settings.categoryIconSize});
         } else {
-            this.id = altNameText;
-            const dirName = dir.get_name();
-            this.categoryNameText = dirName ? dirName : '';
-            //
-            let icon = dir.get_icon();
-            if (icon) {
-                if (icon.names) {
-                    iconName = icon.names[0];
-                }
-                if (!iconName && icon.get_names) {
-                    iconName = icon.get_names()[0];
-                }
-            }
-            if (!iconName) {
-                iconName = 'folder';
-            }
+            this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
+                                        icon_size: this.appThis.settings.categoryIconSize});
         }
-        this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
-                                    icon_size: this.appThis.settings.categoryIconSize});
         if (this.appThis.settings.categoryIconSize > 0) {
-            this.addActor(this.icon);
+            this.actor.add(this.icon, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
         }
-
-        this.label = new St.Label({ text: this.categoryNameText,
-                                    style_class: 'menu-category-button-label' });
-        this.addActor(this.label);
-        this.label.realize();
-
-        //?undo
+        //---label
+        category_name = category_name ? category_name : '';//is this needed?
+        this.label = new St.Label({ text: category_name, style_class: 'menu-category-button-label' });
+        this.actor.add(this.label, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
+        //---dnd
         this.actor._delegate = {
-                handleDragOver: (source /*, actor, x, y, time */) => {
-                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                handleDragOver: (source) => {
+                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
                             return DragMotionResult.NO_DROP;
                         }
-                        this.resetAllCategoriesOpacity();
+                        this._resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
-                acceptDrop: (source /*, actor, x, y, time */) => {
-                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
-                            this.resetAllCategoriesOpacity();
+                acceptDrop: (source) => {
+                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
+                            this._resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
                         //move category to new position
@@ -83,33 +65,31 @@ class CategoryButton extends PopupBaseMenuItem {
                         const oldIndex = categories.indexOf(source.id);
                         const newIndex = categories.indexOf(this.id);
                         categories.splice(oldIndex, 1);
-                        this.appThis.settings.categories = categories.slice(0, newIndex).concat(
-                                                            [source.id]).concat(categories.slice(newIndex));
-                        this.resetAllCategoriesOpacity();
-                        this.appThis.categories.update();
-                        this.appThis.categoriesView.populate();
+                        categories.splice(newIndex, 0, source.id);
+                        this.appThis.settings.categories = categories;
+                        this._resetAllCategoriesOpacity();
+                        this.appThis.categoriesView.update();
                         this.appThis.setActiveCategory(this.appThis.currentCategory);
                         return true; },
                 getDragActorSource: () => this.actor,
                 _getDragActor: () => new Clutter.Clone({source: this.actor}),
                 getDragActor: () => new Clutter.Clone({source: this.icon}),
-                isDraggableApp: false,
-                categoryNameText: this.categoryNameText,
+                isDraggableCategory: true,
                 id: this.id };
 
         this.draggable = makeDraggable(this.actor);
 
         // Connect signals
-        this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-        this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
-        //?undo
+        this.signals.connect(this.draggable, 'drag-begin', () => this.actor.set_opacity(51));
+        this.signals.connect(this.draggable, 'drag-cancelled', () => this.actor.set_opacity(255));
+        this.signals.connect(this.draggable, 'drag-end', () => this._resetAllCategoriesOpacity());
+
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         //Allow motion-event to trigger handleEnter because previous enter-event may have been
         //invalidated by this.appThis.badAngle === true when this is no longer the case.
         this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
     }
 
     setHighlight(on) {
@@ -124,22 +104,68 @@ class CategoryButton extends PopupBaseMenuItem {
         }
     }
 
-    onDragBegin() {
-        this.actor.set_opacity(51);
+    setButtonStyleNormal() {
+        this.actor.set_style_class_name('menu-category-button');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
     }
 
-    onDragCancelled() {
-        this.actor.set_opacity(255);
+    setButtonStyleSelected() {
+        this.actor.set_style_class_name('menu-category-button-selected');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
     }
 
-    onDragEnd() {
-        this.resetAllCategoriesOpacity();
+    _setButtonStyleHover() {
+        this.actor.set_style_class_name('menu-category-button-hover');
+        //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
+        this.actor.add_style_class_name('menu-category-button-selected');
+
+        //-----some style tweaks for menu-category-button-hover class.-----
+        let themePath = Main.getThemeStylesheet();
+        if (!themePath) themePath = 'Cinnamon default';
+        [//Mint-Y & Mint-Y-<color>
+        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],
+        //Mint-Y-Dark & Mint-Y-Dark-<color>
+        ['/Mint-Y-Dark',        'background-color: #404040;'],
+        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        //Mint-X-<color>
+        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark'
+        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
+                                                    'background-gradient-end: rgba(255,255,255,0.03);'],
+        ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
+        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+        //Cinnamox-<color>
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],
+        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Monternos/',         'color: rgb(70, 70, 70); background-color: rgb(201, 204, 238); ' +
+                                                                                'border-image: none;'],
+        ['/Sweet/',             'background-color: #222e32;'],
+        //Sweet-Ambar & Sweet-Ambar-blue
+        ['/Sweet-Ambar',        'background-color: #25262d;'],
+        ['/Sweet-Dark/',        'background-color: #1c1f2e;'],
+        ['/Sweet-mars/',        'background-color: #23282c;'],
+        //Vivaldi & Vivaldi-ZorinOS
+        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],
+        //Ubuntu cinnamon
+        ['/Yaru-Cinnamon-Light/', 'background-color: #d8d8d8; color: black;'],
+        ['/Yaru-Cinnamon-Dark/', 'background-color: #404040;']
+        ].forEach(fix => {
+            if (themePath.includes(fix[0])) {
+                this.actor.set_style(fix[1]);
+            }
+        });
+    }
+
+    _setButtonStyleGreyed() {
+        this.actor.set_style_class_name('menu-category-button-greyed');
+        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
     }
 
     selectCategory() {
-        if (this.appThis.settings.categoryClick) {
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
-        }
         this.appThis.setActiveCategory(this.id);
     }
 
@@ -156,63 +182,37 @@ class CategoryButton extends PopupBaseMenuItem {
         }
 
         this.entered = true;
-        if (this.appThis.settings.categoryClick) {
-            if (this.id != this.appThis.currentCategory) {
-                this.actor.set_style_class_name('menu-category-button-hover');
-                //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
-                this.actor.add_style_class_name('menu-category-button-selected');
-                //some style tweaks for menu-category-button-hover class.
-                let themePath = Main.getThemeStylesheet();
-                if (!themePath) themePath = 'Cinnamon default';
-                [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
-                ['/Mint-Y-Dark/',       'background-color: #404040;'],
-                ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-                ['/Pragmatic-Darker-Blue/','background-color: #383838;'],
-                ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
-                ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-                ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
-                ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-                ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-                ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-                ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-                ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-                ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-                ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
-                ].forEach(fix => {
-                    if (themePath.includes(fix[0])) {
-                        this.actor.set_style(fix[1]);
-                    }
-                });
-            }
-            return Clutter.EVENT_STOP;
-        } else {
-            global.log('selectCategory');
-            this.selectCategory();
+        if (this.id === this.appThis.currentCategory) {//No need to select category as already selected
             return Clutter.EVENT_STOP;
         }
+        if (this.appThis.settings.categoryClick) {
+            this._setButtonStyleHover();
+        } else {
+            this.selectCategory();
+        }
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, event) {
         if (this.disabled || this.appThis.contextMenu.isOpen) {
             return false;
         }
-        this.entered = null;
+        this.entered = false;
         if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
-            if (this.id != this.appThis.currentCategory) {
-                this.actor.set_style_class_name('menu-category-button');
+            if (this.id !== this.appThis.currentCategory) {
+                this.setButtonStyleNormal();
             } else {
-                this.actor.set_style_class_name('menu-category-button-selected');
+                this.setButtonStyleSelected();
             }
-            this.actor.set_style(null);//undo fixes applied in handleEnter();
         }
     }
 
-    handleButtonRelease(actor, event) {
-        if (this.disabled) {
-            return;
-        }
+    _handleButtonRelease(actor, event) {
         if (this.appThis.contextMenu.isOpen) {
             this.appThis.contextMenu.close();
+            return Clutter.EVENT_STOP;
+        }
+        if (this.disabled) {
             return Clutter.EVENT_STOP;
         }
         const button = event.get_button();
@@ -233,22 +233,18 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     disable() {
-        if (this.actor.has_style_class_name('menu-category-button-greyed')) {
-            return false;
-        }
-
-        this.actor.set_style_class_name('menu-category-button-greyed');
+        this._setButtonStyleGreyed();
         this.disabled = true;
-        this.entered = null;
+        this.entered = false;
     }
 
     enable() {
-        this.actor.set_style_class_name('menu-category-button');
+        this.setButtonStyleNormal();
         this.disabled = false;
     }
 
-    resetAllCategoriesOpacity() {
-        this.appThis.categories.buttons.forEach( (button) => button.actor.set_opacity(255) );
+    _resetAllCategoriesOpacity() {
+        this.appThis.categoriesView.buttons.forEach(button => button.actor.set_opacity(255));
     }
 
     destroy() {
@@ -257,13 +253,12 @@ class CategoryButton extends PopupBaseMenuItem {
         if (this.icon) {
             this.icon.destroy();
         }
-        PopupBaseMenuItem.prototype.destroy.call(this);
-        unref(this);
+        this.actor.destroy();
     }
 }
 
 class ContextMenuItem extends PopupBaseMenuItem {
-    constructor(appThis, label, iconName, action) {
+    constructor(appThis, label, iconName, action, insensitive = false) {
         super({focusOnHover: false});
         this.appThis = appThis;
         if (iconName) {
@@ -275,8 +270,10 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.action = action;
-        if (this.action === null) {
-            this.actor.style = "font-weight: bold;";
+        if (this.action === null && !insensitive) {//"Open with" item
+            this.actor.style = 'font-weight: bold;';
+        } else if (insensitive) {//greyed out item
+            this.actor.add_style_pseudo_class('insensitive');
         }
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
@@ -287,13 +284,13 @@ class ContextMenuItem extends PopupBaseMenuItem {
             return Clutter.EVENT_STOP;
         }
         this.entered = true;
-        this.actor.add_style_pseudo_class('hover');// Should be 'hover' only, add 'active' for
-        this.actor.add_style_pseudo_class('active');//compatability with existing themes
-        return Clutter.EVENT_STOP;//true;
+        this.actor.add_style_pseudo_class('hover');
+        this.actor.add_style_pseudo_class('active');
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, e) {
-        this.entered = null;
+        this.entered = false;
         this.actor.remove_style_pseudo_class('hover');
         this.actor.remove_style_pseudo_class('active');
         return Clutter.EVENT_STOP;
@@ -301,16 +298,15 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
     activate(event) {
         if (!this.action || event && event.get_button() !== 1) {
-            return false;
+            return Clutter.EVENT_STOP;
         }
         this.action();
-        return false;
+        return Clutter.EVENT_STOP;
     }
 
     destroy() {
         this.signals.disconnectAllSignals();
         PopupBaseMenuItem.prototype.destroy.call(this);
-        unref(this);
     }
 }
 
@@ -337,7 +333,8 @@ class ContextMenu {
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
-
+        
+        //------populate menu
         if (isACategoryButton) {
             const addMenuItem = (item) => {
                 this.menu.addMenuItem(item);
@@ -345,16 +342,15 @@ class ContextMenu {
             };
             addMenuItem( new ContextMenuItem(this.appThis, _('Reset category order'), null,
                                 () => { this.appThis.settings.categories = [];
-                                        this.appThis.categories.update();
-                                        this.appThis.categoriesView.populate();
+                                        this.appThis.categoriesView.update();
                                         this.close(); } ));
-        } else if (app.type === APPTYPE.application) {
-            this.populateContextMenu_apps(app);
-        } else if (app.type === APPTYPE.file && !app.isBackButton) {
-            if (!this.populateContextMenu_files(app)) {
+        } else if (app.isApplication) {
+            this._populateContextMenu_apps(app);
+        } else if (app.isFolderviewFile || app.isFolderviewDirectory || app.isRecentFile || app.isFavoriteFile) {
+            if (!this._populateContextMenu_files(app)) {
                 return;
             }
-        } else if (app.type == APPTYPE.provider && app.emoji) {
+        } else if (app.isSearchResult && app.emoji) {
             if (!MODABLE.includes(app.emoji)) {
                 return;
             }
@@ -363,7 +359,7 @@ class ContextMenu {
                                                      //skin tone modifiers.
                 let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
                                                                     // MODED[i] with skin tone chosen by user.
-                newEmoji = newEmoji.replace('\u{1F3FB}', char);
+                newEmoji = newEmoji.replace('\u{1F3FB}', char);//repeat in case a second modifier
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
@@ -382,7 +378,7 @@ class ContextMenu {
 
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
-
+        //----Position and open menu----
         const contextMenuWidth = this.menu.actor.width;
         const contextMenuHeight = this.menu.actor.height;
 
@@ -409,11 +405,14 @@ class ContextMenu {
         this.menu.actor.anchor_x = -cx;
         this.menu.actor.anchor_y = -cy;
 
-        this.menu.toggle_with_options(this.appThis.settings.enableAnimation);
+        //This context menu doesn't have an St.Side and so produces errors in .xsession-errors
+        //enable animation for the sole reason that it spams .xsession-errors less. Can't add an
+        //St.Side because in some themes it looks like it should be attached to a panel but isn't.
+        this.menu.open(true);
         return;
     }
 
-    populateContextMenu_apps(app) { //add items to context menu of type: application
+    _populateContextMenu_apps(app) {
         const addMenuItem = (item) => {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
@@ -428,7 +427,7 @@ class ContextMenu {
                                         this.appThis.closeMenu(); } ));
         } else if (this.appThis.isBumblebeeInstalled) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
-                                () => { spawnCommandLine('optirun gtk-launch ' + app.get_id());
+                                () => { spawnCommandLine('optirun gtk-launch ' + app.id);
                                         this.appThis.closeMenu(); } ));
         }
         addMenuItem( new ContextMenuItem(this.appThis, _('Add to panel'), 'list-add',
@@ -442,47 +441,49 @@ class ContextMenu {
                 }
                 const launcherApplet = Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
                 if (launcherApplet) {
-                    launcherApplet.acceptNewLauncher(app.get_id());
+                    launcherApplet.acceptNewLauncher(app.id);
                 }
                 this.close(); } ));
-        if (USER_DESKTOP_PATH) {
+        const userDesktopPath = getUserDesktopDir();
+        if (userDesktopPath) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
                 () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
-                        const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
-                        tryFn(() => {
+                        const destFile = Gio.file_new_for_path(userDesktopPath + '/' + file.get_basename());
+                        try {
                             file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
-                        }, (e) => {
-                            global.log(e);
-                        });
+                        } catch(e) {
+                            global.logError('Cinnamenu: Error creating desktop file', e);
+                        }
                         this.close(); } ));
         }
-        if (this.appThis.appFavorites.isFavorite(app.get_id())) {
+        if (this.appThis.appFavorites.isFavorite(app.id)) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                            () => { this.appThis.appFavorites.removeFavorite(app.get_id());
+                                            () => { this.appThis.appFavorites.removeFavorite(app.id);
                                                     this.close(); } ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                                        () => { this.appThis.appFavorites.addFavorite(app.get_id());
+                                        () => { this.appThis.appFavorites.addFavorite(app.id);
                                                 this.close(); } ));
         }
     }
 
-    populateContextMenu_files(app) {
+    _populateContextMenu_files(app) {
         const addMenuItem = (item) => {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
         };
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
         const file = Gio.File.new_for_uri(app.uri);
-        const fileExists = GLib.file_test(file.get_path(), GLib.FileTest.EXISTS);
+        const fileExists = file.query_exists(null);
         if (!fileExists && !app.isFavoriteFile) {
-            Main.notify(_("This file is no longer available"),'');
+            Main.notify(_('This file is no longer available'),'');
             return false; //no context menu
         }
-        //
+        //Note: a file can be an isFavoriteFile and also not exist so continue below and add option to
+        //remove from favorites.
         if (fileExists) {
-            addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null ));
             const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
             if (defaultInfo) {
                 addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
@@ -498,24 +499,31 @@ class ContextMenu {
                                                             this.appThis.closeMenu(); } ));
             });
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
+                                                () => { spawnCommandLine('nemo-open-with ' + app.uri);
                                                         this.appThis.closeMenu(); } ));
         }
 
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            const updateAfterFavFileChange = () => {
+                    this.appThis.sidebar.populate();
+                    this.appThis.categoriesView.update();//in case fav files category needs adding/removing
+                    this.appThis.updateMenuSize();
+                    if (this.appThis.currentCategory === 'favorite_files') {
+                        this.appThis.setActiveCategory(this.appThis.currentCategory);
+                    } };
             if (favs.find_by_uri(app.uri)) { //favorite
                 addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                                         () => { favs.remove(app.uri);
-                                                                this.appThis.updateAfterFavFileChange();
+                                                                updateAfterFavFileChange();
                                                                 this.close(); } ));
             } else {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
                         () =>   {   favs.add(app.uri);
                                     //favs list doesn't update synchronously after adding fav so add small
                                     //delay before updating menu
-                                    Mainloop.timeout_add(100, () => { this.appThis.updateAfterFavFileChange(); });
+                                    Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
                                     this.close();
                                 } ));
             }
@@ -530,18 +538,23 @@ class ContextMenu {
         }
         if (!app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
-                        () => { const file = Gio.File.new_for_uri(app.uri);
-                                try {
-                                    file.trash(null);
-                                } catch (e) {
-                                    Main.notify(_("Error while moving file to trash:"),e.message);
-                                }
-                                this.appThis.sidebar.populate();
-                                this.appThis.updateMenuWidth();
-                                this.appThis.updateMenuHeight();
-                                this.appThis.setActiveCategory(this.appThis.currentCategory);
-                                this.close(); } ));
+
+            const fileInfo = file.query_info('access::can-trash', Gio.FileQueryInfoFlags.NONE, null);
+            const canTrash = fileInfo.get_attribute_boolean('access::can-trash');
+            if (canTrash) {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                            () => { const file = Gio.File.new_for_uri(app.uri);
+                                    try {
+                                        file.trash(null);
+                                    } catch (e) {
+                                        Main.notify(_('Error while moving file to trash:'), e.message);
+                                    }
+                                    this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                    this.close(); } ));
+            } else {//show insensitive item
+                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                                                                            null, true /*insensitive*/));
+            }
         }
         return true; //success.
     }
@@ -560,101 +573,104 @@ class ContextMenu {
     }
 }
 
-class AppButton extends PopupBaseMenuItem {
+class AppButton {
     constructor(appThis, app) {
-        super({ hover: false, activate: false });
         this.appThis = appThis;
         this.app = app;
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
-        this.setButtonStyle(false);//normal style (not slected)
-        this.actor.x_align = isListView ? St.Align.START : St.Align.MIDDLE;
-        this.actor.y_align = St.Align.MIDDLE;
-        if (!isListView) {
-            //remove l/r padding in grid view to allow maximum space for label
-            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
-            this.setButtonWidth();
-        }
         this.signals = new SignalManager(null);
-        this.entered = null;
         //----------ICON---------------------------------------------
-        //create icon even if iconSize is 0 so dnd has something to drag
-        if (this.app.icon) { //APPTYPE.place or APPTYPE.provider //instanceof St.Icon
+        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //APPTYPE.file or APPTYPE.place
-            this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.emoji) {
-            const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
+            let gicon = this.app.gicon;
+            if (!this.app.isWebBookmark) {
+                gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
+            }
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.emoji) {//emoji search result
+            const iconLabel = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
             iconLabel.get_clutter_text().set_markup(this.app.emoji);
             this.icon = iconLabel;
-        } else if (this.app.type === APPTYPE.application) {
+        } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
+        } else if (this.app.isPlace) {//isPlace
+            this.icon = this.app.iconFactory(this.appThis.getAppIconSize());
+            if (!this.icon) {
+                this.icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
+            }
         } else if (this.app.isBackButton) {
             this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.type === APPTYPE.clearlist_button) {
-            this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
-                                        icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
-        this.label = new St.Label({ style_class: 'menu-application-button-label',
-                                    style: 'padding-right: 2px; padding-left: 2px;'});
-        if (!isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
-            this.label.set_style('text-align: center;');
+        this.label = new St.Label({ style_class: 'menu-application-button-label' });
+        //menu-application-button-label in themes are designed for list view and may have uneven
+        //padding, so in grid view make padding symmetrical and center text
+        if (!isListView) {
+            this.label.style = 'padding-right: 2px; padding-left: 2px; text-align: center;';
         }
-        this.formatLabel();
-        this.iconContainer = new St.BoxLayout();
-        if (this.icon && this.appThis.getAppIconSize() > 0) {
-            this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
-                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
+        //set label text
+        let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        let description = this.app.description ?
+                            this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
+        let markup = '<span>' + name + '</span>';
+        if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
+            markup += '\n<span size="small">' + description + '</span>';
         }
-        this.dot = new St.Widget({ //app running indicator
+        const clutterText = this.label.get_clutter_text();
+        clutterText.set_markup(markup);
+        clutterText.ellipsize = EllipsizeMode.END;
+        //--------app running indicator--------------
+        this.appRunningIndicator = new St.Widget({
                 style: isListView ?
                 'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
                 'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;',
-                layout_manager: new Clutter.BinLayout(),
                 x_expand: false,
                 y_expand: false});
-        //-------------------buttonBox-------------------------
-        this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
+        //-------------actor---------------------
+        this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
+                                            accessible_role: Atk.Role.MENU_ITEM});
+        //remove l/r padding in grid view to allow maximum space for label
         if (!isListView) {
-            this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
+            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
+            this.setGridButtonWidth();
         }
-        this.buttonBox.add(this.iconContainer, {
-                                x_fill: false, y_fill: false,
-                                x_align: isListView ? St.Align.START : St.Align.MIDDLE,
-                                y_align: St.Align.MIDDLE});
-        this.buttonBox.add(this.dot, {  x_fill: false, y_fill: false,
+        if (this.icon && this.appThis.getAppIconSize() > 0) {
+            this.actor.add(this.icon, { x_fill: false, y_fill: false,
+                                        x_align: isListView ? St.Align.START : St.Align.MIDDLE,
+                                        y_align: St.Align.MIDDLE});
+        }
+        this.actor.add(this.appRunningIndicator, {  x_fill: false, y_fill: false,
                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
-        this.buttonBox.add(this.label, {
+        this.actor.add(this.label, {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
-        this.addActor(this.buttonBox);
-        if (this.icon) {
-            this.icon.realize();
-        }
+        this._setButtonNormal();
+        this._setAppHighlightClass();
         //----------dnd--------------
-        if (this.app.type === APPTYPE.application) {
+        if (this.app.isApplication) {
             this.actor._delegate = {
                     handleDragOver: (source) => {
-                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
+                            if (source.isDraggableApp && source.id !== this.app.id &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
-                                this.resetAllAppsOpacity();
+                                this._resetAllAppsOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
                             return DragMotionResult.NO_DROP; },
                     handleDragOut: () => {  this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
-                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
+                            if (source.isDraggableApp && source.id !== this.app.id &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
                                 this.actor.set_opacity(255);
-                                this.appThis.addFavoriteAppToPos(source.get_app_id(), this.app.get_id());
+                                this.appThis.addFavoriteAppToPos(source.id, this.app.id);
                                 return true;
                             } else {
                                 this.actor.set_opacity(255);
@@ -663,56 +679,75 @@ class AppButton extends PopupBaseMenuItem {
                     getDragActorSource: () => this.actor,
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
-                    get_app_id: () => this.app.get_id(),
-                    isDraggableApp: this.app.type === APPTYPE.application
+                    id: this.app.id,
+                    isDraggableApp: true
             };
 
             this.draggable = makeDraggable(this.actor);
-            this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-            this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-            this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+            this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
+            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+            this.signals.connect(this.draggable, 'drag-end', () => this._resetAllAppsOpacity());
         }
 
         //----running state
-        this.dot.opacity = 0;
-        if (this.app.type === APPTYPE.application) {
-            this.signals.connect(this.app, 'notify::state', (...args) => this.onStateChanged(...args));
-            this.onStateChanged();
+        this._onRunningStateChanged();
+        if (this.app.isApplication) {
+            this.signals.connect(this.app, 'notify::state', (...args) => this._onRunningStateChanged(...args));
         }
 
-        this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        //this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     }
 
-    setButtonStyle(selected) {
-        if (selected) {
-            this.actor.set_style_class_name('menu-application-button-selected');
+    _setButtonNormal() {
+        this.entered = false;
+        this.actor.set_style_class_name('menu-application-button');
+        this._addTileStyle();
+    }
+
+    _setButtonSelected() {
+        this.entered = true;
+        this.actor.set_style_class_name('menu-application-button-selected');
+        this._addTileStyle();
+    }
+
+    _addTileStyle() {
+        if (!this.appThis.settings.useTileStyle) {
+            return;
+        }
+
+        const toRgbaString = (col) => {
+                const decPlaces2 = (n) => Math.round(n * 100) / 100;
+                return `rgba(${col.red},${col.green},${col.blue},${decPlaces2(col.alpha / 255)})`; };
+        const lightenOrDarkenColor = (col) => { //lighten a dark color or darken a light color
+                    const isLightTheme = (col.red + col.green + col.blue) > 364;
+                    const amt = isLightTheme ? -15 : 15;
+                    col.red += amt;
+                    col.green += amt;
+                    col.blue += amt;
+                    return col; };
+        //const opaqueify = (col) => { //make color 1/3 more opaque
+        //            col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
+        //            return col; };
+        const bgColor = this.appThis.getThemeBackgroundColor();
+        if (bgColor.to_string().startsWith('#000000')) {
+            bgColor.red = 20;
+            bgColor.green = 20;
+            bgColor.blue = 20;
+        }
+        let addedStyle = '';
+        if (this.entered) {
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) + ';';
         } else {
-            this.actor.set_style_class_name('menu-application-button');
+            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) +
+                        '; background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
         }
+        this.actor.set_style(addedStyle);
     }
 
-    onDragBegin() {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
-    }
-
-    onDragCancelled() {
-    }
-
-    onDragEnd() {
-        this.resetAllAppsOpacity();
-    }
-
-    formatLabel() {
-        let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-        let description = this.app.description ?
-                            this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
-
+    _setAppHighlightClass() {
         if (this.app.newAppShouldHighlight) {
             if (!this.actor.has_style_pseudo_class('highlighted')) {
                 this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
@@ -722,25 +757,10 @@ class AppButton extends PopupBaseMenuItem {
                 this.actor.remove_style_pseudo_class('highlighted');
             }
         }
-        let markup = '<span>' + name + '</span>';
-        if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
-            markup += '\n<span size="small">' + description + '</span>';
-        }
-        const clutterText = this.label.get_clutter_text();
-        clutterText.set_markup(markup);
-        /*if (this.app.type === APPTYPE.file && !description) {
-            clutterText.set_line_wrap(true);
-            clutterText.set_line_wrap_mode(2);//WORD_CHAR
-            const lines = clutterText.get_layout().get_lines();
-            global.log(clutterText.get_text());
-        } else {*/
-            clutterText.ellipsize = EllipsizeMode.END;
-        //}
     }
 
-    setButtonWidth() {
-        //set width of grid button
-        this.actor.width = this.appThis.getGridValues().columnWidth;
+    setGridButtonWidth() {
+        this.actor.width = this.appThis.appsView.getGridValues().columnWidth;
     }
 
     handleEnter(actor, event) {
@@ -748,16 +768,16 @@ class AppButton extends PopupBaseMenuItem {
             return false;
         }
 
-        if (event) {
+        if (event) {//mouse
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//keyboard navigation
             this.appThis.scrollToButton(this);
         }
+        this._setButtonSelected();
 
-        this.entered = true;
-        this.setButtonStyle(true);//selected style
-
+        //------show tooltip
         if (this.appThis.settings.descriptionPlacement === PlacementTOOLTIP) {
+            const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
             let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
                                             SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
                                             this.app.nameWithSearchMarkup : this.app.name) + '</span>';
@@ -765,16 +785,6 @@ class AppButton extends PopupBaseMenuItem {
                 tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
                                     SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
                                     this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
-            }
-            if (SEARCH_DEBUG) {
-                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.app.keywordsWithSearchMarkup &&
-                                                                                this.appThis.searchActive) {
-                    tooltipMarkup += '\n<span size="small">' +
-                                                wordWrap(this.app.keywordsWithSearchMarkup) + '</span>';
-                }
-                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.app.idWithSearchMarkup && this.appThis.searchActive) {
-                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.app.idWithSearchMarkup) + '</span>';
-                }
             }
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
             let [x, y] = this.actor.get_transformed_position();
@@ -788,11 +798,7 @@ class AppButton extends PopupBaseMenuItem {
                 y += height + 8 * global.ui_scale;
                 center_x = true;
             }
-            if (!this.tooltipVisible) { //handleEnter may have been called twice, once with key nav and again
-                                        //with mouse. in which case, don't create new tooltip
-                showTooltip(this.actor, x, y, center_x, tooltipMarkup);
-                this.tooltipVisible = true;
-            }
+            showTooltip(this.actor, x, y, center_x, tooltipMarkup);
         }
         return false;
     }
@@ -801,19 +807,11 @@ class AppButton extends PopupBaseMenuItem {
         if (this.appThis.contextMenu.isOpen) {
             return false;
         }
-
-        this.entered = null;
-        this.setButtonStyle(false);//normal style (not selected)
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        this._setButtonNormal();
+        hideTooltipIfVisible();
     }
 
-    handleButtonPress() {
-    }
-
-    handleButtonRelease(actor, e) {
+    _handleButtonRelease(actor, e) {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
@@ -829,7 +827,8 @@ class AppButton extends PopupBaseMenuItem {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file || this.app.emoji ){
+                if (this.app.isApplication || this.app.isFolderviewFile || this.app.isFolderviewDirectory ||
+                                            this.app.isFavoriteFile || this.app.emoji || this.app.isRecentFile){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -839,119 +838,115 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     activate() {
-        if (this.app.type === APPTYPE.application) {
+        if (this.app.isApplication) {
             if (this.app.newAppShouldHighlight) {
                 this.app.newAppShouldHighlight = false;
-                this.formatLabel();
+                this._setAppHighlightClass();
             }
+            this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.place) {
-            if (this.app.uri) {
-                this.app.app.launch_uris([this.app.uri], null);
-            } else {
-                this.app.launch();
-            }
+        } else if (this.app.isPlace) {
+            this.app.launch();
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.file) {
-            if (this.app.isDirectory) {//broswer view
-                this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-            } else {
-                try {
-                    Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                    this.appThis.closeMenu();
-                } catch (e) {
-                    Main.notify(_("This file is no longer available"),e.message);
-                    //don't closeMenu
-                }
+        } else if (this.app.isWebBookmark) {
+            this.app.app.launch_uris([this.app.uri], null);
+            this.appThis.closeMenu();
+        } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
+            this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
+            //don't closeMenu
+        } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
+            try {
+                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                this.appThis.closeMenu();
+            } catch (e) {
+                Main.notify(_('Error while opening file:'), e.message);
+                //don't closeMenu
             }
-        } else if (this.app.type === APPTYPE.clearlist_button) {
+        } else if (this.app.isClearRecentsButton) {
+            this.appThis.recentApps.clear();
             Gtk.RecentManager.get_default().purge_items();
             this.appThis.recentsJustCleared = true;
             this.appThis.setActiveCategory('recents');
             //don't closeMenu
-        } else if (this.app.type === APPTYPE.provider) {
+        } else if (this.app.isSearchResult) {
             this.app.activate(this.app);
             this.appThis.closeMenu();
         }
     }
 
-    onStateChanged() {
-        if (!this.app || this.dot.is_finalized()) {
-            return false;
-        }
-        if (this.app.type === APPTYPE.application) {
-            this.dot.opacity = this.app.state !== AppState.STOPPED ? 255 : 0;
+    _onRunningStateChanged() {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
+                this.appRunningIndicator.show();
+            } else {
+                this.appRunningIndicator.hide();
+            }
+        } else {
+            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
+                this.appRunningIndicator.opacity = 255;
+            } else {
+                this.appRunningIndicator.opacity = 0;
+            }
         }
         return true;
     }
 
     openContextMenu(e) {
-        this.setButtonStyle(true);//selected style
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        this._setButtonSelected();
+        hideTooltipIfVisible();
         this.appThis.contextMenu.open(this.app, e, this);
     }
 
-    resetAllAppsOpacity() {
+    _resetAllAppsOpacity() {
         this.appThis.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
     }
 
-    destroy(skipDestroy) {
+    destroy() {
         this.signals.disconnectAllSignals();
+        hideTooltipIfVisible();
 
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
+        this.appRunningIndicator.destroy();
+        this.label.destroy();
+        if (this.icon) {
+            this.icon.destroy();
         }
-        if (!skipDestroy) {
-            this.dot.destroy();
-            this.label.destroy();
-            if (this.icon) {
-                this.icon.destroy();
-            }
-            if (this.iconContainer) {
-                this.iconContainer.destroy();
-            }
-            this.buttonBox.destroy();
-        }
-        PopupBaseMenuItem.prototype.destroy.call(this);
-        //unref(this);
+        this.actor.destroy();
     }
 }
 
-class SidebarButton extends PopupBaseMenuItem {
+class SidebarButton {
     constructor(appThis, icon, app, name, description, callback) {
-        super({ hover: false, activate: false });
+        //super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
         this.app = app;
         this.name = name;
         this.description = description;
         this.callback = callback;
-        this.actor.set_style_class_name('menu-favorites-button');
-        this.entered = null;
+        this.actor = new St.BoxLayout({ style_class: 'menu-favorites-button',
+                                        reactive: true,
+                                        accessible_role: Atk.Role.MENU_ITEM });
+        //this.actor.set_style_class_name('menu-favorites-button');
+        this.entered = false;
         if (icon) {
             this.icon = icon;
-            this.addActor(this.icon);
-            this.icon.realize();
+            this.actor.add_actor(this.icon);
         }
 
-        if (this.app && this.app.type === APPTYPE.application) { //----------dnd--------------
+        if (this.app && this.app.isApplication) { //----------dnd--------------
             this.actor._delegate = {
                     handleDragOver: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
+                            if (source.isDraggableApp === true && source.id !== this.app.id) {
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
                             return DragMotionResult.NO_DROP; },
                     handleDragOut: () => { this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
+                            if (source.isDraggableApp === true && source.id !== this.app.id) {
                                 this.actor.set_opacity(255);
-                                this.appThis.addFavoriteAppToPos(source.get_app_id(), this.app.get_id());
+                                this.appThis.addFavoriteAppToPos(source.id, this.app.id);
                                 return true;
                             } else {
                                 this.actor.set_opacity(255);
@@ -960,29 +955,22 @@ class SidebarButton extends PopupBaseMenuItem {
                     getDragActorSource: () => this.actor,
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
-                    get_app_id: () => this.app.get_id(),
+                    id: this.app.id,
                     isDraggableApp: true
             };
 
             this.draggable = makeDraggable(this.actor);
-            this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-            //this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+            this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
+            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+            //this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         }
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
     }
 
-    onDragBegin() {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
-    }
-
-    handleButtonRelease(actor, e) {
+    _handleButtonRelease(actor, e) {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
@@ -1013,25 +1001,22 @@ class SidebarButton extends PopupBaseMenuItem {
     activate() {
         if (this.callback) {
             this.callback();
-        } else if (this.app.type === APPTYPE.application) {
-            this.app.newAppShouldHighlight = false;
+        } else if (this.app.isApplication) {
+            this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.file) {
+        } else if (this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
             } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
+                Main.notify(_('Error while opening file:'), e.message);
             }
         }
     }
 
     openContextMenu(e) {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        hideTooltipIfVisible();
         this.appThis.contextMenu.open(this.app, e, this);
     }
 
@@ -1042,12 +1027,11 @@ class SidebarButton extends PopupBaseMenuItem {
 
         if (event) {
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//key nav
             this.appThis.scrollToButton(this);
         }
 
         this.entered = true;
-        if (!this.actor) return;
         this.actor.add_style_pseudo_class('hover');
 
         //show tooltip
@@ -1059,8 +1043,7 @@ class SidebarButton extends PopupBaseMenuItem {
             text += '\n<span size="small">' + wordWrap(this.description) + '</span>';
         }
         text = text.replace(/&/g, '&amp;');
-        showTooltip(this.actor, x, y, false /*don't center x*/, text);
-        this.tooltipVisible = true;
+        showTooltip(this.actor, x, y, false /*don't center tooltip on x*/, text);
         return true;
     }
 
@@ -1068,12 +1051,9 @@ class SidebarButton extends PopupBaseMenuItem {
         if (this.appThis.contextMenu.isOpen) {
             return true;
         }
-        this.entered = null;
+        this.entered = false;
         this.actor.remove_style_pseudo_class('hover');
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        hideTooltipIfVisible();
         return true;
     }
 
@@ -1083,9 +1063,7 @@ class SidebarButton extends PopupBaseMenuItem {
         if (this.icon) {
             this.icon.destroy();
         }
-
-        super.destroy();
-        unref(this);
+        this.actor.destroy();
     }
 }
 

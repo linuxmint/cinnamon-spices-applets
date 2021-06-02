@@ -24,8 +24,7 @@ msgstr "Clean Show Desktop"
 
 #. metadata.json->description
 msgid ""
-"An Applet to show the Desktop in the style of Windows 10 but completely "
-"customizable"
+"An Applet to show the Desktop just like in Windows 10, but completely customizable"
 msgstr ""
 "Viser skrivebordet i stil med Windows 10, men fuldt konfigurerbart"
 
@@ -121,3 +120,11 @@ msgstr "Kantbredde"
 #. settings-schema.json->border-width->tooltip
 msgid "Select the border width"
 msgstr "Vælg kantbredden"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr ""
+
+#. settings-schema.json->custom-color->tooltip
+msgid "When this option is disabled, the applet will try to find the accent color color of the theme"
+msgstr ""
