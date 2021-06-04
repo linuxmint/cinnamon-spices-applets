@@ -333,7 +333,7 @@ class ContextMenu {
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
-        
+
         //------populate menu
         if (isACategoryButton) {
             const addMenuItem = (item) => {
@@ -582,9 +582,10 @@ class AppButton {
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
+                                    //isFolderviewFile/Directory, isSearchResult(wikipedia)
             let gicon = this.app.gicon;
-            if (!this.app.isWebBookmark) {
+            if (!this.app.isWebBookmark && !this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
