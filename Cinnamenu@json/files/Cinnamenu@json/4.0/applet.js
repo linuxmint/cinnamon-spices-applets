@@ -28,6 +28,7 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
+const {wikiSearch} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
 
@@ -125,11 +126,13 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'category-click',            value: 'categoryClick',         cb: null },
         { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this._refresh },
+        { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
+
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+        { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
-        { key: 'search-home-folder',        value: 'searchHomeFolder',      cb: null },
-        { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
+        { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
 
         { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this._updateIconAndLabel },
         { key: 'menu-icon',                 value: 'menuIcon',              cb: this._updateIconAndLabel },
@@ -470,7 +473,6 @@ class CinnamenuApplet extends TextIconApplet {
             }
             this.clearEnteredActors();
             this.appsView.clearApps();//for quicker opening of menu
-            this.categoriesView.categoriesBox.remove_all_children();
         }
         return true;
     }
@@ -874,6 +876,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     setActiveCategory(categoryId) {
+        //categoryId is one of 3 things: a special category ('places', 'recents', etc), an application
+        //category id, or an absolute path used in folderview (must begin with a /)
         this.currentCategory = categoryId;
         this.categoriesView.setSelectedCategoryStyle(categoryId);
         this.appsView.buttonStoreCleanup();
@@ -937,15 +941,15 @@ class CinnamenuApplet extends TextIconApplet {
         this.previousSearchPattern = '';
     }
 
-    _doSearch(text) {
+    _doSearch(pattern_raw) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (text !== this.currentSearchStr) {
+        if (pattern_raw !== this.currentSearchStr) {
             return;
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = Util.latinise(text.toUpperCase());
+        const pattern = Util.latinise(pattern_raw.toUpperCase());
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern === this.previousSearchPattern) {
@@ -976,13 +980,13 @@ class CinnamenuApplet extends TextIconApplet {
         };
         let validExp = true;
         let ans = null;
-        const exp = text.replace(/([a-zA-Z]+)/g, replacefn);
+        const exp = pattern_raw.replace(/([a-zA-Z]+)/g, replacefn);
         if (validExp) {
             try {
                 ans = eval(exp);
             } catch(e) {}
         }
-        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
+        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != pattern_raw ) {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
             }
@@ -1002,50 +1006,37 @@ class CinnamenuApplet extends TextIconApplet {
                                                 'duckgo_icon.png'][this.settings.webSearchOption];
             const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
                                                     'duckduckgo.com/?q='][this.settings.webSearchOption];
+            const engine = ["Google","Bing","Yahoo","DuckDuckGo"][this.settings.webSearchOption];
+
             otherResults.push(   {   isSearchResult: true,
-                                name: _('Search web for') + ' "' + text + '"',
+                                name: pattern_raw + ' – '+ engine,
                                 description: '',
                                 deleteAfterUse: true,
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
                                             file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
                                             icon_size: this.getAppIconSize() }),
                                 activate: () => {Util.spawnCommandLineAsync(
-                                        '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
+                                    '/usr/bin/xdg-open https://' + url + encodeURIComponent(pattern_raw));}
                             } );
         }
 
-        //---web bookmarks-----
-        if (this.settings.enableWebBookmarksSearch) {
-            const webBookmarksResults = this.listWebBookmarks(pattern);
-            webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(webBookmarksResults);
-        }
+        //---web bookmarks search-----
+        if (this.settings.enableWebBookmarksSearch && pattern.length > 1) {
+            const bookmarks = this.bookmarksManager.state;
 
-        //---emoji search------
-        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
-            let emojiResults = [];
-            EMOJI.forEach(emoji => {
-                        const match1 = searchStr(pattern, emoji.name, true);
-                        const match2 = searchStr(pattern, emoji.keywords, true);
-                        match2.score *= 0.95; //slightly lower priority for keyword match
-                        const bestMatchScore = Math.max(match1.score, match2.score);
-                        if (bestMatchScore > SEARCH_THRESHOLD) {
-                            emojiResults.push({
-                                    name: emoji.name,
-                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
-                                                                  //emoji results come last.
-                                    description: _('Click to copy'),
-                                    nameWithSearchMarkup: match1.result,
-                                    isSearchResult: true,
-                                    deleteAfterUse: true,
-                                    emoji: emoji.code,
-                                    activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
-                                            });
+            const webBookmarksResults = [];
+            bookmarks.forEach(bookmark => {
+                        if (bookmark.name) {
+                            const match = searchStr(pattern, bookmark.name);
+                            if (match.score > SEARCH_THRESHOLD) {
+                                bookmark.score = match.score;
+                                bookmark.nameWithSearchMarkup = match.result;
+                                webBookmarksResults.push(bookmark);
+                            }
                         } });
 
-            emojiResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(emojiResults);
+            webBookmarksResults.sort((a, b) =>  a.score < b.score);
+            otherResults = otherResults.concat(webBookmarksResults);
         }
 
         //---------------------------
@@ -1081,6 +1072,40 @@ class CinnamenuApplet extends TextIconApplet {
                 buttons[0].handleEnter();
             }
         };
+
+        //---Wikipedia search----
+        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
+            wikiSearch(pattern_raw, (wikiResults) => {
+                            otherResults = otherResults.concat(wikiResults);
+                            finish(); });
+        }
+
+        //---emoji search------
+        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
+            let emojiResults = [];
+            EMOJI.forEach(emoji => {
+                        const match1 = searchStr(pattern, emoji.name, true);
+                        const match2 = searchStr(pattern, emoji.keywords, true);
+                        match2.score *= 0.95; //slightly lower priority for keyword match
+                        const bestMatchScore = Math.max(match1.score, match2.score);
+                        if (bestMatchScore > SEARCH_THRESHOLD) {
+                            emojiResults.push({
+                                    name: emoji.name,
+                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
+                                                                  //emoji results come last.
+                                    description: _('Click to copy'),
+                                    nameWithSearchMarkup: match1.result,
+                                    isSearchResult: true,
+                                    deleteAfterUse: true,
+                                    emoji: emoji.code,
+                                    activate: () => { const clipboard = St.Clipboard.get_default();
+                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
+                                            });
+                        } });
+
+            emojiResults.sort((a, b) =>  a.score < b.score);
+            otherResults = otherResults.concat(emojiResults);
+        }
 
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
@@ -1525,25 +1550,6 @@ class CinnamenuApplet extends TextIconApplet {
                     _res.push(item);
                 }
             });
-            res = _res;
-        }
-        return res;
-    }
-
-    listWebBookmarks(pattern) {
-        let res = this.bookmarksManager.state;
-
-        if (pattern) {
-            const _res = [];
-            res.forEach(bookmark => {
-                        if (bookmark.name) {
-                            const match = searchStr(pattern, bookmark.name);
-                            if (match.score > SEARCH_THRESHOLD) {
-                                bookmark.score = match.score;
-                                bookmark.nameWithSearchMarkup = match.result;
-                                _res.push(bookmark);
-                            }
-                        } });
             res = _res;
         }
         return res;

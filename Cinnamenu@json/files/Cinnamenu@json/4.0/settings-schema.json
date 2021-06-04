@@ -4,6 +4,7 @@
         "pages":[
             "layout",
             "behaviour",
+            "search",
             "appearance"
         ],
         "layout":{
@@ -20,6 +21,13 @@
             "sections":[
                 "panel-behave",
                 "menu-behave"
+            ]
+        },
+        "search":{
+            "type":"page",
+            "title":"Search",
+            "sections":[
+                "search-search"
             ]
         },
         "appearance":{
@@ -69,11 +77,18 @@
                 "category-click",
                 "open-on-category",
                 "enable-autoscroll",
+                "show-hidden-files"
+            ]
+        },
+        "search-search":{
+            "type":"section",
+            "title":"Search",
+            "keys":[
                 "enable-emoji-search",
                 "web-search-option",
+                "enable-home-folder-search",
                 "enable-web-bookmarks-search",
-                "search-home-folder",
-                "show-hidden-files"
+                "enable-wikipedia-search"
             ]
         },
         "panel-appear":{
@@ -245,10 +260,17 @@
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
     },
+    "show-hidden-files":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Show hidden files",
+        "tooltip":"Show hidden files in folder view"
+    },
+
     "enable-emoji-search":{
         "type":"checkbox",
         "default":true,
-        "description":"Enable emoji search",
+        "description":"Emoji search",
         "tooltip":"Show emojis in search results"
     },
     "web-search-option":{
@@ -264,23 +286,23 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
-    "enable-web-bookmarks-search":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Enable web bookmarks search",
-        "tooltip":"When searching, also search my browser's web bookmarks (Chrome, Chromium & Firefox.)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
-    },
-    "search-home-folder":{
+    "enable-home-folder-search":{
         "type":"checkbox",
         "default":true,
         "description":"Search home folder",
-        "tooltip":"When searching, also search home folder for files"
+        "tooltip":"When searching, also search my home folder for files"
     },
-    "show-hidden-files":{
+    "enable-web-bookmarks-search":{
         "type":"checkbox",
         "default":false,
-        "description":"Show hidden files",
-        "tooltip":"Show hidden files in folder view"
+        "description":"Web bookmarks search",
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+    },
+    "enable-wikipedia-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Wikipedia search",
+        "tooltip":"Show some Wikipedia results"
     },
 
     "menu-icon-custom":{
