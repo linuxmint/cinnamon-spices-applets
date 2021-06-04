@@ -941,15 +941,15 @@ class CinnamenuApplet extends TextIconApplet {
         this.previousSearchPattern = '';
     }
 
-    _doSearch(text) {
+    _doSearch(pattern_raw) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (text !== this.currentSearchStr) {
+        if (pattern_raw !== this.currentSearchStr) {
             return;
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = Util.latinise(text.toUpperCase());
+        const pattern = Util.latinise(pattern_raw.toUpperCase());
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern === this.previousSearchPattern) {
@@ -980,13 +980,13 @@ class CinnamenuApplet extends TextIconApplet {
         };
         let validExp = true;
         let ans = null;
-        const exp = text.replace(/([a-zA-Z]+)/g, replacefn);
+        const exp = pattern_raw.replace(/([a-zA-Z]+)/g, replacefn);
         if (validExp) {
             try {
                 ans = eval(exp);
             } catch(e) {}
         }
-        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
+        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != pattern_raw ) {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
             }
@@ -1006,15 +1006,17 @@ class CinnamenuApplet extends TextIconApplet {
                                                 'duckgo_icon.png'][this.settings.webSearchOption];
             const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
                                                     'duckduckgo.com/?q='][this.settings.webSearchOption];
+            const engine = ["Google","Bing","Yahoo","DuckDuckGo"][this.settings.webSearchOption];
+
             otherResults.push(   {   isSearchResult: true,
-                                name: _('Search web for') + ' "' + text + '"',
+                                name: pattern_raw + ' – '+ engine,
                                 description: '',
                                 deleteAfterUse: true,
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
                                             file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
                                             icon_size: this.getAppIconSize() }),
                                 activate: () => {Util.spawnCommandLineAsync(
-                                        '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
+                                    '/usr/bin/xdg-open https://' + url + encodeURIComponent(pattern_raw));}
                             } );
         }
 
@@ -1072,8 +1074,8 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         //---Wikipedia search----
-        if (this.settings.enableWikipediaSearch && pattern.length > 1 ) {
-            wikiSearch(pattern, (wikiResults) => {
+        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
+            wikiSearch(pattern_raw, (wikiResults) => {
                             otherResults = otherResults.concat(wikiResults);
                             finish(); });
         }
