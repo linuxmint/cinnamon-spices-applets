@@ -6,6 +6,7 @@ const { IconType: IconTypeEnum } = imports.gi.St
 
 
 // TODO the AppletIcon shouldn't have access to this!
+// Better to just pass the iconType size for both fullcolor and symbolic icon
 interface Arguments {
     // panel and location label are needed to calc the icon size
     panel: imports.ui.panel.Panel,

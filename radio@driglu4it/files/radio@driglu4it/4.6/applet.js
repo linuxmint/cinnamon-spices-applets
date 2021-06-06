@@ -14,21 +14,25 @@ const ChannelInfoItem_1 = require("ui/InfoSection/ChannelInfoItem");
 const DownloadButton_1 = require("ui/Toolbar/DownloadButton");
 const CopyButton_1 = require("ui/Toolbar/CopyButton");
 const downloadFromYoutube_1 = require("functions/downloadFromYoutube");
-const notify_1 = require("functions/notify");
 const CheckInstallation_1 = require("mpv/CheckInstallation");
 const copyText_1 = require("functions/copyText");
 const Applet_1 = require("ui/Applet/Applet");
 const AppletIcon_1 = require("ui/Applet/AppletIcon");
 const AppletLabel_1 = require("ui/Applet/AppletLabel");
 const AppletTooltip_1 = require("ui/Applet/AppletTooltip");
+const YoutubeDownloadFinishedNotification_1 = require("ui/Notifications/YoutubeDownloadFinishedNotification");
+const YoutubeDownloadStartedNotification_1 = require("ui/Notifications/YoutubeDownloadStartedNotification");
+const YoutubeDownloadFailedNotification_1 = require("ui/Notifications/YoutubeDownloadFailedNotification");
+const GenericNotification_1 = require("ui/Notifications/GenericNotification");
 const { ScrollDirection } = imports.gi.Clutter;
-const Main = imports.ui.main;
-const AppletManager = imports.ui.appletManager;
+const { getAppletDefinition } = imports.ui.appletManager;
+const { panelManager } = imports.ui.main;
+const { IconType } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
-    const appletDefinition = AppletManager.getAppletDefinition({
+    const appletDefinition = getAppletDefinition({
         applet_id: instanceId
     });
-    const panel = Main.panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
+    const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
     panel.connect('icon-size-changed', () => appletIcon.updateIconSize());
     const appletIcon = AppletIcon_1.createAppletIcon({
         locationLabel: appletDefinition.location_label,
@@ -82,7 +86,7 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onClick: () => mpvHandler.stop()
     });
     const downloadBtn = DownloadButton_1.createDownloadButton({
-        onClick: () => downloadFromYoutube_1.downloadSongFromYoutube(mpvHandler.getCurrentTitle(), configs.musicDownloadDir)
+        onClick: handleDownloadBtnClicked
     });
     const copyBtn = CopyButton_1.createCopyButton({
         onClick: () => copyText_1.copyText(mpvHandler.getCurrentTitle())
@@ -101,13 +105,13 @@ function main(metadata, orientation, panelHeight, instanceId) {
     });
     async function handleAppletClicked() {
         try {
-            await CheckInstallation_1.checkInstallMrisPlugin();
-            await CheckInstallation_1.checkInstallMpv();
+            await CheckInstallation_1.installMpvWithMpris();
             popupMenu.toggle();
             channelList.open();
         }
         catch (error) {
-            notify_1.notifySend("Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.");
+            const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
+            GenericNotification_1.notify({ text: notificationText });
         }
     }
     function handleScroll(scrollDirection) {
@@ -167,6 +171,21 @@ function main(metadata, orientation, panelHeight, instanceId) {
         channelList.setCurrentChannel(channelName);
         channelInfoItem.setChannel(channelName);
         configs.lastUrl = url;
+    }
+    function handleDownloadBtnClicked() {
+        const title = mpvHandler.getCurrentTitle();
+        const downloadProcess = downloadFromYoutube_1.downloadSongFromYoutube({
+            downloadDir: configs.musicDownloadDir,
+            title,
+            onDownloadFinished: (path) => YoutubeDownloadFinishedNotification_1.notifyYoutubeDownloadFinished({
+                downloadPath: path
+            }),
+            onDownloadFailed: YoutubeDownloadFailedNotification_1.notifyYoutubeDownloadFailed
+        });
+        YoutubeDownloadStartedNotification_1.notifyYoutubeDownloadStarted({
+            title,
+            onCancelClicked: () => downloadProcess.cancel()
+        });
     }
     const mpvHandler = MpvHandler_1.createMpvHandler({
         getInitialVolume: () => { return configs.initialVolume; },
