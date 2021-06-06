@@ -343,10 +343,20 @@ class CinnamenuApplet extends TextIconApplet {
         };
         if (this.signals.isConnected('enter-event', this.actor)) {
             this.signals.disconnect('enter-event', this.actor);
+            this.signals.disconnect('leave-event', this.actor);
         }
         if (this.settings.activateOnHover) {
             this.signals.connect(this.actor, 'enter-event', () => {
-                                        setTimeout(() => openMenu(), this.settings.hoverDelayMs); });
+                    if (!this.menu.isOpen && !this.openMenuTimeoutId) {
+                        this.openMenuTimeoutId = setTimeout(() => openMenu(), this.settings.hoverDelayMs);
+                    }
+            });
+            this.signals.connect(this.actor, 'leave-event', () => {
+                            if (this.openMenuTimeoutId) {
+                                clearTimeout(this.openMenuTimeoutId);
+                                this.openMenuTimeoutId = null;
+                            }
+            });
         }
     }
 
@@ -447,6 +457,10 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         if (open) {
+            if (this.openMenuTimeoutId) {
+                clearTimeout(this.openMenuTimeoutId);
+                this.openMenuTimeoutId = null;
+            }
             this.searchView.tweakTheme();
             this.categoriesView.update();//in case menu editor updates
             this.sidebar.populate();//in case fav files changed
@@ -1001,23 +1015,32 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---web search option---
-        if (this.settings.webSearchOption != 4) {//4=none
-            const iconName = ['google_icon.png','bing_icon.png','yahoo_icon.png',
-                                                'duckgo_icon.png'][this.settings.webSearchOption];
-            const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
-                                                    'duckduckgo.com/?q='][this.settings.webSearchOption];
-            const engine = ["Google","Bing","Yahoo","DuckDuckGo"][this.settings.webSearchOption];
+        if (this.settings.webSearchOption != 0) {//0==none
+            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
+                            'search.png', 'duckgo_icon.png', 'ask.png', 'search.png', 'search.png',
+                            'search.png'][this.settings.webSearchOption - 1];
+            const url = [   'https://google.com/search?q=',
+                            'https://www.bing.com/search?q=',
+                            'https://www.baidu.com/s?wd=',
+                            'https://search.yahoo.com/search?p=',
+                            'https://yandex.com/search/?text=',
+                            'https://duckduckgo.com/?q=',
+                            'https://www.ask.com/web?q=',
+                            'https://www.ecosia.org/search?q=',
+                            'https://search.aol.co.uk/aol/search?q=',
+                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
+            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
+                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
 
-            otherResults.push(   {   isSearchResult: true,
-                                name: pattern_raw + ' – '+ engine,
-                                description: '',
-                                deleteAfterUse: true,
-                                icon: new St.Icon({ gicon: new Gio.FileIcon({
-                                            file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
-                                            icon_size: this.getAppIconSize() }),
-                                activate: () => {Util.spawnCommandLineAsync(
-                                    '/usr/bin/xdg-open https://' + url + encodeURIComponent(pattern_raw));}
-                            } );
+            otherResults.push({
+                        isSearchResult: true,
+                        name: pattern_raw + ' – '+ engine,
+                        description: '',
+                        deleteAfterUse: true,
+                        icon: new St.Icon({ gicon: new Gio.FileIcon({
+                                    file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
+                                    icon_size: this.getAppIconSize() }),
+                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
         }
 
         //---web bookmarks search-----
@@ -1072,12 +1095,18 @@ class CinnamenuApplet extends TextIconApplet {
                 buttons[0].handleEnter();
             }
         };
+        //-------
+
+        let thisSearchId = this.currentSearchId;
 
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
-            wikiSearch(pattern_raw, (wikiResults) => {
-                            otherResults = otherResults.concat(wikiResults);
-                            finish(); });
+            wikiSearch(true, pattern_raw, (wikiResults) => {
+                            if (this.searchActive && thisSearchId === this.currentSearchId &&
+                                                                            wikiResults.length > 0) {
+                                otherResults = otherResults.concat(wikiResults);
+                                finish();
+                            } });
         }
 
         //---emoji search------
@@ -1205,7 +1234,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         ///----search providers--------
-        let thisSearchId = this.currentSearchId;
         setTimeout(() => {
             launch_all(pattern, (provider, providerResults) => {
                     providerResults.forEach(providerResult => {
@@ -1230,7 +1258,7 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                     });
                     if (!this.searchActive || thisSearchId !== this.currentSearchId ||
-                                                !providerResults || providerResults.length <= 0) {
+                                                !providerResults || providerResults.length === 0) {
                         return;
                     }
                     otherResults = otherResults.concat(providerResults);
