@@ -34,7 +34,7 @@ class Cache {
 
 const cache = new Cache();
 
-function wikiSearch(pattern, callback) {
+function wikiSearch(wikipedia/*false === wiktionary*/, pattern, callback) {
     function returnResults(results){
         results.forEach(result => result.gicon = wikipedia_gicon);
         callback(results);
@@ -45,13 +45,20 @@ function wikiSearch(pattern, callback) {
             return;
         }
         if( resultPages.status_code == 200) {
-            const message = Soup.Message.new('GET',
-                    "https://en.wikipedia.org/w/api.php?action=query&generator=prefixsearch&gpssearch=" +
-                        pattern + "&prop=extracts&exintro=1&explaintext=1&redirects=1&gpslimit=4&format=json");
+            let message;
+            if (wikipedia) {
+                message = Soup.Message.new('GET',
+                    'https://en.wikipedia.org/w/api.php?action=query&generator=prefixsearch&gpssearch=' +
+                    pattern + '&prop=extracts&exintro=1&exchars=1000&explaintext=1&redirects=1&gpslimit=4&format=json');
+            } else {//wiktionary
+                message = Soup.Message.new('GET',
+                    'https://en.wiktionary.org/w/api.php?action=query&generator=prefixsearch&gpssearch=' +
+                    pattern + '&prop=extracts&explaintext=1&redirects=1&gpslimit=1&format=json');
+            }
             _httpSession.queue_message(message, (...args) => processContent(...args, resultPages, p));
         } else {
-            global.logWarning("Error retrieving address " + url + ". Status: " +
-                                        resultPages.status_code + ": " + resultPages.reason_phrase);
+            global.logWarning('Error retrieving address ' + url + '. Status: ' +
+                                        resultPages.status_code + ': ' + resultPages.reason_phrase);
         }
     }
 
@@ -71,7 +78,7 @@ function wikiSearch(pattern, callback) {
                     cacheEntry.results.push({
                         name: result_titles[i],
                         url: result_urls[i],
-                        description: _getDescription(i + 1, extracts),
+                        description: _getDescription(i + 1, extracts, wikipedia),
                         activate: () => Util.spawn(['xdg-open', result_urls[i]]),
                         isSearchResult: true
                     });
@@ -80,8 +87,8 @@ function wikiSearch(pattern, callback) {
                 cache.add(cacheEntry);
                 returnResults(cacheEntry.results);
             } else {
-                global.logWarning("Error retrieving address " + url + ". Status: " +
-                                        resultContent.status_code + ": " + resultContent.reason_phrase);
+                global.logWarning('Error retrieving address ' + url + '. Status: ' +
+                                        resultContent.status_code + ': ' + resultContent.reason_phrase);
             }
         } catch(e) {
             global.logError(e);
@@ -95,9 +102,16 @@ function wikiSearch(pattern, callback) {
             returnResults(results);
         } else {
             last_search = pattern;
-            const message = Soup.Message.new('GET',
+            let message;
+            if (wikipedia) {
+                message = Soup.Message.new('GET',
                         'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + pattern +
                                                                                 '&format=json&limit=4');
+            } else {
+                message = Soup.Message.new('GET',
+                            'https://en.wiktionary.org/w/api.php?action=opensearch&search=' + pattern +
+                                                                                '&format=json&limit=1');
+            }
             _httpSession.queue_message(message, (...args) => processPages(...args, pattern));
         }
     } catch(e) {
@@ -105,13 +119,17 @@ function wikiSearch(pattern, callback) {
     }
 }
 
-function _getDescription(index, descriptions) {
+function _getDescription(index, descriptions, wikipedia) {
     try {
-        const items = descriptions.query.pages;
-        for (const item in items) {
-            if (items[item].index === index) {
-                return items[item].extract;
+        if (wikipedia) {
+            const items = descriptions.query.pages;
+            for (const item in items) {
+                if (items[item].index === index) {
+                    return items[item].extract;
+                }
             }
+        } else {
+            let descrip = object.keys(descriptions.query.pages)[0].extract;
         }
     } catch(e) {
         global.logError(e);

@@ -275,14 +275,20 @@
     },
     "web-search-option":{
         "type":"combobox",
-        "default":0,
+        "default":1,
         "description":"Web search option",
         "options":{
-            "Google":0,
-            "Bing":1,
-            "Yahoo":2,
-            "DuckDuckGo":3,
-            "None":4
+            "None":0,
+            "Google":1,
+            "Bing":2,
+            "Baidu":3,
+            "Yahoo":4,
+            "Yandex":5,
+            "DuckDuckGo":6,
+            "Ask":7,
+            "Ecosia":8,
+            "AOL":9,
+            "Startpage":10
         },
         "tooltip":"Show an internet search option in search results"
     },
