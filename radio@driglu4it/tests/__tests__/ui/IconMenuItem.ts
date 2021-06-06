@@ -24,7 +24,8 @@ describe('correctly initialized', () => {
             text: text1, maxCharNumber
         })
 
-        const [{ actor: label }] = getChildren(iconMenuItem)
+        const children = getChildren(iconMenuItem)
+        const label = children[0].actor as imports.gi.St.Label
 
         const limitedTextString = limitString(text1, maxCharNumber)
         expect(label.text).toBe(limitedTextString)
@@ -35,7 +36,9 @@ describe('correctly initialized', () => {
             text: '', maxCharNumber
         })
 
-        const [{ actor: label }] = getChildren(iconMenuItem)
+        const children = getChildren(iconMenuItem)
+        const label = children[0].actor as imports.gi.St.Label
+
         expect(label.text).toBe(' ')
     })
 
@@ -48,15 +51,17 @@ describe('correctly initialized', () => {
             maxCharNumber
         })
 
-        const [
-            { actor: icon, ...iconParams },
-            { actor: label }
-        ] = getChildren(iconMenuItem)
+        const children = getChildren(iconMenuItem)
+
+        const label = children[1].actor as imports.gi.St.Label
+        const iconWithParams = children[0] as imports.ui.popupMenu.PopupBaseMenuItemChild
+
+        const icon = iconWithParams.actor as imports.gi.St.Icon
 
         const limitedTextString = limitString(text1, maxCharNumber)
 
         expect(icon.icon_name).toBe(iconName1)
-        expect(iconParams.span).toBe(0)
+        expect(iconWithParams.span).toBe(0)
         expect(label.text).toBe(limitedTextString)
     })
 
@@ -88,15 +93,17 @@ describe('changing iconName is working', () => {
 
         iconMenuItem.setIconName(iconName1)
 
-        const [
-            { actor: icon, ...iconParams },
-            { actor: label }
-        ] = getChildren(iconMenuItem)
+        const children = getChildren(iconMenuItem)
+
+        const label = children[1].actor as imports.gi.St.Label
+        const iconWithParams = children[0] as imports.ui.popupMenu.PopupBaseMenuItemChild
+
+        const icon = iconWithParams.actor as imports.gi.St.Icon
 
         const limitedTextString = limitString(text1, maxCharNumber)
 
         expect(icon.icon_name).toBe(iconName1)
-        expect(iconParams.span).toBe(0)
+        expect(iconWithParams.span).toBe(0)
         expect(label.text).toBe(limitedTextString)
     })
 
@@ -107,9 +114,9 @@ describe('changing iconName is working', () => {
             maxCharNumber
         })
 
-        const [
-            { actor: icon, },
-        ] = getChildren(iconMenuItem)
+        const iconWithParams = getChildren(iconMenuItem)[0] as imports.ui.popupMenu.PopupBaseMenuItemChild
+
+        const icon = iconWithParams.actor as imports.gi.St.Icon
 
         iconMenuItem.setIconName(iconName2)
         expect(icon.icon_name).toBe(iconName2)
@@ -123,9 +130,7 @@ describe('changing iconName is working', () => {
         })
         iconMenuItem.setIconName(null)
 
-        const [
-            { actor: label }
-        ] = getChildren(iconMenuItem)
+        const label = getChildren(iconMenuItem)[0].actor as imports.gi.St.Label
 
         const limitedTextString = limitString(text1, maxCharNumber)
 
@@ -141,12 +146,12 @@ describe('changing iconName is working', () => {
         iconMenuItem.setIconName(null)
         iconMenuItem.setIconName(iconName2)
 
-        const [
-            { actor: icon, ...iconParams },
-        ] = getChildren(iconMenuItem)
+        const iconWithParams = getChildren(iconMenuItem)[0] as imports.ui.popupMenu.PopupBaseMenuItemChild
+
+        const icon = iconWithParams.actor as imports.gi.St.Icon
 
         expect(icon.icon_name).toBe(iconName2)
-        expect(iconParams.span).toBe(0)
+        expect(iconWithParams.span).toBe(0)
     })
 })
 
@@ -158,9 +163,7 @@ describe('changing text is working', () => {
         })
         iconMenuItem.setText(text2)
 
-        const [
-            { actor: label }
-        ] = getChildren(iconMenuItem)
+        const label = getChildren(iconMenuItem)[0].actor as imports.gi.St.Label
 
         const limitedTextString = limitString(text2, maxCharNumber)
         expect(label.text).toBe(limitedTextString)
@@ -172,9 +175,9 @@ describe('changing text is working', () => {
             maxCharNumber
         })
         iconMenuItem.setText('')
-        const [
-            { actor: label }
-        ] = getChildren(iconMenuItem)
+
+        const label = getChildren(iconMenuItem)[0].actor as imports.gi.St.Label
+
         expect(label.text).toBe(' ')
     })
 

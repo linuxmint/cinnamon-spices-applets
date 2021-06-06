@@ -11,8 +11,8 @@ const createMediaControlToolbar = (args) => {
     controlBtns.forEach(btn => controls.add_actor(btn));
     const container = new Bin({
         x_align: Align.MIDDLE,
+        child: controls
     });
-    container.set_child(controls);
     const menuSection = new PopupMenuSection();
     menuSection.addActor(container);
     return menuSection;

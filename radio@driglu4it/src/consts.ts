@@ -1,4 +1,5 @@
 const { get_home_dir } = imports.gi.GLib;
+export const APPLET_SITE = 'https://cinnamon-spices.linuxmint.com/applets/view/297'
 
 export const DEFAULT_TOOLTIP_TXT = 'Radio++'
 export const CONFIG_DIR = `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;

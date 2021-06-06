@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MAX_STRING_LENGTH = exports.LOADING_ICON_NAME = exports.DOWNLOAD_ICON_NAME = exports.COPY_ICON_NAME = exports.SONG_INFO_ICON_NAME = exports.STOP_ICON_NAME = exports.PAUSE_ICON_NAME = exports.PLAY_ICON_NAME = exports.RADIO_SYMBOLIC_ICON_NAME = exports.MAX_VOLUME = exports.MPV_MPRIS_BUS_NAME = exports.MEDIA_PLAYER_2_PATH = exports.MEDIA_PLAYER_2_PLAYER_NAME = exports.MEDIA_PLAYER_2_NAME = exports.MPRIS_PLUGIN_URL = exports.MPRIS_PLUGIN_PATH = exports.CONFIG_DIR = exports.DEFAULT_TOOLTIP_TXT = void 0;
+exports.MAX_STRING_LENGTH = exports.LOADING_ICON_NAME = exports.DOWNLOAD_ICON_NAME = exports.COPY_ICON_NAME = exports.SONG_INFO_ICON_NAME = exports.STOP_ICON_NAME = exports.PAUSE_ICON_NAME = exports.PLAY_ICON_NAME = exports.RADIO_SYMBOLIC_ICON_NAME = exports.MAX_VOLUME = exports.MPV_MPRIS_BUS_NAME = exports.MEDIA_PLAYER_2_PATH = exports.MEDIA_PLAYER_2_PLAYER_NAME = exports.MEDIA_PLAYER_2_NAME = exports.MPRIS_PLUGIN_URL = exports.MPRIS_PLUGIN_PATH = exports.CONFIG_DIR = exports.DEFAULT_TOOLTIP_TXT = exports.APPLET_SITE = void 0;
 const { get_home_dir } = imports.gi.GLib;
+exports.APPLET_SITE = 'https://cinnamon-spices.linuxmint.com/applets/view/297';
 exports.DEFAULT_TOOLTIP_TXT = 'Radio++';
 exports.CONFIG_DIR = `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;
 exports.MPRIS_PLUGIN_PATH = exports.CONFIG_DIR + '/.mpris.so';

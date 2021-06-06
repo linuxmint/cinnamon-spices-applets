@@ -13,18 +13,25 @@ import { createChannelInfoItem } from "ui/InfoSection/ChannelInfoItem";
 import { createDownloadButton } from "ui/Toolbar/DownloadButton";
 import { createCopyButton } from "ui/Toolbar/CopyButton";
 import { downloadSongFromYoutube } from "functions/downloadFromYoutube";
-import { notifySend } from "functions/notify";
-import { checkInstallMpv, checkInstallMrisPlugin } from "mpv/CheckInstallation";
+import { installMpvWithMpris } from "mpv/CheckInstallation";
 import { copyText } from "functions/copyText";
 import { createApplet } from "ui/Applet/Applet";
 import { createAppletIcon } from "ui/Applet/AppletIcon";
 import { createAppletLabel } from "ui/Applet/AppletLabel";
 import { createAppletTooltip } from "ui/Applet/AppletTooltip";
+import { notifyYoutubeDownloadFinished } from "ui/Notifications/YoutubeDownloadFinishedNotification";
+import { notifyYoutubeDownloadStarted } from "ui/Notifications/YoutubeDownloadStartedNotification";
+import { notifyYoutubeDownloadFailed } from "ui/Notifications/YoutubeDownloadFailedNotification";
+import { notify } from "ui/Notifications/GenericNotification";
 
 const { ScrollDirection } = imports.gi.Clutter;
 
-const Main = imports.ui.main
-const AppletManager = imports.ui.appletManager;
+const { getAppletDefinition } = imports.ui.appletManager;
+
+const { panelManager } = imports.ui.main;
+
+const { IconType } = imports.gi.St
+
 
 /** 
  * 
@@ -38,13 +45,14 @@ function main(
 	instanceId: number
 ): imports.ui.applet.Applet {
 
-
-	const appletDefinition = AppletManager.getAppletDefinition({
+	const appletDefinition = getAppletDefinition({
 		applet_id: instanceId
 	})
 
-	const panel = Main.panelManager.panels.find(panel => panel?.panelId === appletDefinition.panelId)
-	// @ts-ignore
+	const panel = panelManager.panels.find(panel =>
+		panel?.panelId === appletDefinition.panelId
+	)
+
 	panel.connect('icon-size-changed', () => appletIcon.updateIconSize())
 
 	const appletIcon = createAppletIcon({
@@ -114,7 +122,7 @@ function main(
 	})
 
 	const downloadBtn = createDownloadButton({
-		onClick: () => downloadSongFromYoutube(mpvHandler.getCurrentTitle(), configs.musicDownloadDir)
+		onClick: handleDownloadBtnClicked
 	})
 
 	const copyBtn = createCopyButton({
@@ -138,13 +146,14 @@ function main(
 	async function handleAppletClicked() {
 
 		try {
-			// TODO combine both functions two one
-			await checkInstallMrisPlugin()
-			await checkInstallMpv()
+			await installMpvWithMpris()
 			popupMenu.toggle()
 			channelList.open()
 		} catch (error) {
-			notifySend("Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.")
+
+			const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."
+
+			notify({ text: notificationText })
 		}
 	}
 
@@ -178,7 +187,7 @@ function main(
 		songInfoItem.setSongTitle(title)
 	}
 
-	function handleVolumeChanged(volume: number) {
+	function handleVolumeChanged(volume: number | null) {
 		volumeSlider.value = volume
 		appletTooltip.setVolume(volume)
 	}
@@ -230,6 +239,25 @@ function main(
 		configs.lastUrl = url
 	}
 
+	function handleDownloadBtnClicked() {
+
+		const title = mpvHandler.getCurrentTitle()
+
+		const downloadProcess = downloadSongFromYoutube({
+			downloadDir: configs.musicDownloadDir,
+			title,
+			onDownloadFinished: (path) => notifyYoutubeDownloadFinished({
+				downloadPath: path
+			}),
+			onDownloadFailed: notifyYoutubeDownloadFailed
+		})
+
+		notifyYoutubeDownloadStarted({
+			title,
+			onCancelClicked: () => downloadProcess.cancel()
+		})
+	}
+
 	const mpvHandler = createMpvHandler({
 		getInitialVolume: () => { return configs.initialVolume },
 		onInitialized: handleRadioInitialized,
@@ -240,8 +268,6 @@ function main(
 		initialUrl: configs.lastUrl,
 		onUrlChanged: handleUrlChanged
 	})
-
-
 
 	return applet
 }

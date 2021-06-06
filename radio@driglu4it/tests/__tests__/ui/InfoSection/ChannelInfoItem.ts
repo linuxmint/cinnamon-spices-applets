@@ -13,8 +13,7 @@ jest.mock('consts', () => ({
 }))
 
 function getChildren(ChannelInfoItem: ReturnType<typeof createChannelInfoItem>) {
-    //@ts-ignore
-    return ChannelInfoItem.actor._children
+    return ChannelInfoItem.actor["_children"]
 }
 
 function limitStringToMaxLength(text: string) {
@@ -26,10 +25,10 @@ describe('initialization is working', () => {
     it('icon and label set correctly', () => {
         const channelInfoItem = createChannelInfoItem()
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(channelInfoItem)
+        const children = getChildren(channelInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(consts.RADIO_SYMBOLIC_ICON_NAME)
         expect(label.text).toBe(' ')
@@ -50,10 +49,10 @@ describe('channel can be set/chaned', () => {
 
         channelInfoItem.setChannel(channel1)
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(channelInfoItem)
+        const children = getChildren(channelInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(consts.RADIO_SYMBOLIC_ICON_NAME)
         expect(label.text).toBe(limitStringToMaxLength(channel1))
@@ -65,10 +64,10 @@ describe('channel can be set/chaned', () => {
         channelInfoItem.setChannel(channel1)
         channelInfoItem.setChannel(channel2)
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(channelInfoItem)
+        const children = getChildren(channelInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(consts.RADIO_SYMBOLIC_ICON_NAME)
         expect(label.text).toBe(limitStringToMaxLength(channel2))

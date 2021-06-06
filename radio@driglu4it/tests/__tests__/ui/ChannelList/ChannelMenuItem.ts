@@ -15,8 +15,7 @@ function limitStringToMaxLength(text: string) {
 }
 
 function getChildren(channelMenuItem: ReturnType<typeof createChannelMenuItem>) {
-    //@ts-ignore
-    return channelMenuItem.actor._children
+    return channelMenuItem.actor["_children"]
 }
 
 describe('initialization is working', () => {
@@ -26,7 +25,9 @@ describe('initialization is working', () => {
             channelName
         })
 
-        const [{ actor: label }] = getChildren(channelMenuItem)
+        const children = getChildren(channelMenuItem)
+        const label = children[0].actor as imports.gi.St.Label
+
         expect(label.text).toBe(channelNameShortened)
     })
 })
@@ -39,10 +40,10 @@ describe('setting playbackstatus is working', () => {
 
         channelMenuItem.setPlaybackStatus('Playing')
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(channelMenuItem)
+        const children = getChildren(channelMenuItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(consts.PLAY_ICON_NAME)
         expect(label.text).toBe(channelNameShortened)
@@ -57,10 +58,10 @@ describe('setting playbackstatus is working', () => {
         channelMenuItem.setPlaybackStatus('Stopped')
         channelMenuItem.setPlaybackStatus('Paused')
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(channelMenuItem)
+        const children = getChildren(channelMenuItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(consts.PAUSE_ICON_NAME)
         expect(label.text).toBe(channelNameShortened)
@@ -74,10 +75,9 @@ describe('setting playbackstatus is working', () => {
 
         channelMenuItem.setPlaybackStatus('Paused')
         channelMenuItem.setPlaybackStatus('Stopped')
+        const children = getChildren(channelMenuItem)
 
-        const [
-            { actor: label }
-        ] = getChildren(channelMenuItem)
+        const label = children[0].actor as imports.gi.St.Label
 
         expect(label.text).toBe(channelNameShortened)
     })

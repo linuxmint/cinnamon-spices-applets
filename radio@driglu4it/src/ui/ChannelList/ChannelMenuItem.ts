@@ -27,6 +27,7 @@ export function createChannelMenuItem(args: Arguments) {
     function setPlaybackStatus(playbackStatus: AdvancedPlaybackStatus) {
         const iconName = playbackIconMap.get(playbackStatus)
         iconMenuItem.setIconName(iconName)
+
     }
 
     return {

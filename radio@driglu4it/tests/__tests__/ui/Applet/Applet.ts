@@ -11,7 +11,7 @@ const instanceId = 96
 const onClick = () => { }
 const onMiddleClick = () => { }
 const onAppletRemovedFromPanel = () => { }
-const onScroll = jest.fn((scrollDirection: imports.gi.Clutter.ScrollDirection) => { })
+const onScroll = jest.fn(() => { })
 
 const icon = new Icon()
 const label = new Label()

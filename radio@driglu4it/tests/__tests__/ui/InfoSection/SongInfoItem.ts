@@ -24,10 +24,10 @@ describe('initialization is working', () => {
     it('icon and label set correctly', () => {
         const songInfoItem = createSongInfoItem()
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(songInfoItem)
+        const children = getChildren(songInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(SONG_INFO_ICON_NAME)
         expect(label.text).toBe(' ')
@@ -49,10 +49,10 @@ describe('title can be set/changed', () => {
 
         songInfoItem.setSongTitle(songTitle1)
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(songInfoItem)
+        const children = getChildren(songInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(SONG_INFO_ICON_NAME)
         expect(label.text).toBe(limitStringToMaxLength(songTitle1))
@@ -64,10 +64,10 @@ describe('title can be set/changed', () => {
         songInfoItem.setSongTitle(songTitle1)
         songInfoItem.setSongTitle(songTitle2)
 
-        const [
-            { actor: icon },
-            { actor: label }
-        ] = getChildren(songInfoItem)
+        const children = getChildren(songInfoItem)
+
+        const icon = children[0].actor as imports.gi.St.Icon
+        const label = children[1].actor as imports.gi.St.Label
 
         expect(icon.icon_name).toBe(SONG_INFO_ICON_NAME)
         expect(label.text).toBe(limitStringToMaxLength(songTitle2))
