@@ -148,9 +148,6 @@ MyApplet.prototype = {
                 if (output == "ImportError Xlib") {
                     Util.spawnCommandLine("apturl apt://python3-xlib");
                     this.notify_installation('python3-xlib');
-                } else if (output == "ImportError numpy") {
-                    this.notify_installation('python3-numpy');
-                    Util.spawnCommandLine("apturl apt://python3-numpy");
                 } else {
                     if (this.pick_notification) {
                         this.createColorCircleSVG(output);
