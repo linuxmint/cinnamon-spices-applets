@@ -16,57 +16,74 @@ declare namespace imports.gi.St {
 		get_values(): number[];
 		get_value(): number;
 	}
-	export class Bin extends Widget {
-		constructor(options?: any)
+
+	interface BinOptions extends WidgetOptions {
+		child: Clutter.Actor
+	}
+
+	interface Bin extends BinOptions, Widget {
 		get_child(): Widget;
 		set_child(widget: Widget): void;
 	}
+
+	export class Bin {
+		constructor(options?: Partial<BinOptions>)
+	}
+
 	export class BorderImage {
 
 	}
 
-	export class BoxLayout extends Widget {
-		constructor(options?: any)
-		/** Deprecated, use add_child instead */
-		add_actor(element: Widget): void;
-		add_child(element: Widget): void;
+	interface BoxLayoutOptions extends WidgetOptions {
+		vertical: boolean,
+		pack_start: boolean
+	}
+
+	interface BoxLayout extends BoxLayoutOptions, Widget {
 		/** Works but I can't find where it comes from */
 		add(element: Widget, options?: AddOptions): void;
 		/** private function by default? */
 	}
-	interface IButton {
-		reactive: boolean;
+
+	export class BoxLayout {
+		constructor(options?: Partial<BoxLayoutOptions>)
+	}
+
+	interface ButtonOptions extends BinOptions {
 		label: string;
-		url: string;
-		child: any;
+		url: string
+	}
+
+	interface IButton {
 		connect(signal: 'clicked', callback: (actor: this, clicked_button: number) => void): number
 	}
 
-	type ButtonType = IButton & Widget
+	type ButtonType = IButton & ButtonOptions & Widget & Bin
 	interface Button extends ButtonType { }
 
 	export class Button {
-		constructor(options?: ButtonOptions);
+		constructor(options?: Partial<ButtonOptions>);
 	}
-	export interface ButtonOptions {
-		style?: string;
-		reactive?: boolean;
-		style_class?: string;
-		can_focus?: boolean;
-		label?: string;
-		child?: Widget;
-	}
+
 	export class Clipboard {
 		static get_default(): Clipboard;
 		set_text(type: ClipboardType, text: string): void
 	}
-	export class DrawingArea extends Widget {
-		constructor(options?: any)
+
+	interface IDrawingArea {
 		queue_repaint(): void;
-		get_context(): any;
+		get_context(): gi.cairo.Context;
 		get_surface_size(): number[];
-		width: number;
+		connect(signal: 'repaint', callback: (actor: this) => void): number
 	}
+
+	type DrawingAreaType = IDrawingArea & Widget
+	interface DrawingArea extends DrawingAreaType { }
+
+	export class DrawingArea {
+		constructor(options?: Partial<WidgetOptions>)
+	}
+
 	export class Entry {
 
 	}
@@ -80,32 +97,137 @@ declare namespace imports.gi.St {
 	export class GenericAccessible {
 
 	}
-	export class Icon extends Widget {
-		icon_type: IconType;
-		icon_size: number;
+
+	interface IconOptions extends WidgetOptions {
+
+		/** The fallback Gio.Icon to display if St.Icon.gicon fails to load. */
+		fallback_gicon: Gio.Icon
+		/** The fallback icon name of the St.Icon. See St.Icon.set_fallback_icon_name 
+		 * for details. */
+		fallback_icon_name: string
+		/** The Gio.Icon being displayed by this St.Icon. */
+		gicon: Gio.Icon
+		/** The name of the icon if the icon being displayed is a Gio.ThemedIcon. */
 		icon_name: string;
-		constructor(options?: IconOptions);
+		/** The size of the icon, if greater than 0. Other the icon size is derived 
+		 * from the current style. */
+		icon_size: number;
+		icon_type: IconType;
 	}
-	interface IconOptions {
-		icon_type?: IconType;
-		icon_name?: string;
-		icon_size?: number;
-		style_class?: string;
-		/** css string */
-		style?: string;
-		gicon?: Gio.Icon
+
+	interface Icon extends IconOptions, Widget {
+		/**
+		 * Gets the currently set fallback Gio.Icon
+		 * 
+		 * @returns The fallback Gio.Icon, if set, otherwise null
+		 */
+		get_fallback_gicon(): Gio.Icon
+
+
+		/**
+		 * This is a convenience method to get the icon name of the fallback 
+		 * Gio.ThemedIcon that is currently set.
+		 * 
+		 * @returns The name of the icon or null if no icon is set
+		 */
+		get_fallback_icon_name(): string
+
+		/**
+		 * Gets the current Gio.Icon in use.
+		 * 
+		 * @returns The current Gio.Icon, if set, otherwise null
+		 */
+		get_gicon(): Gio.Icon
+
+		/**
+		 * This is a convenience method to get the icon name of the current icon, if it
+		 * is currenyly a Gio.ThemedIcon, or null otherwise.
+		 * 
+		 * @returns The name of the icon or null
+		 */
+		get_icon_name(): string
+
+		/**
+		 * Gets the explicit size set using St.Icon.set_icon_size for the icon. 
+		 * This is not necessarily the size that the icon will be displayed at.
+		 * 
+		 * @returns The explicitly set size, or -1 if no size has been set
+		 */
+		get_icon_size(): number
+
+		/**
+		 * Sets a fallback Gio.Icon to show if the normal icon fails to load.
+		 * If fallback_gicon is null or fails to load, the icon is unset and no
+		 * texture will be visible for the fallback icon.
+		 * 
+		 * @param fallback_gicon the fallback Gio.Icon
+		 */
+		set_fallback_gicon(fallback_gicon: Gio.Icon): void
+
+		/**
+		 * This is a convenience method to set the fallback Gio.Icon to a Gio.ThemedIcon
+		 * created using the given icon name. If fallback_icon_name is an empty
+		 * string, null or fails to load, the icon is unset and no texture will
+		 * be visible for the fallback icon.
+		 * 
+		 * @param fallback_icon_name the name of the fallback icon
+		 */
+		set_fallback_icon_name(fallback_icon_name: string): void
+
+		/**
+		 * Sets a Gio.Icon to show for the icon. If gicon is null or fails to load,
+		 * the fallback icon set using st_icon_set_fallback_icon() will be shown.
+		 * 
+		 * @param gicon 
+		 */
+		set_gicon(gicon: Gio.Icon): void
+
+		/**
+		 * This is a convenience method to set the Gio.Icon to a Gio.ThemedIcon created
+		 * using the given icon name. If icon_name is an empty string, null or
+		 * fails to load, the fallback icon will be shown.
+		 * 
+		 * @param icon_name the name of the icon
+		 */
+		set_icon_name(icon_name: string): void
+
+
+		/**
+		 * Sets an explicit size for the icon. Setting size to -1 will use the size
+		 * defined by the current style or the default icon size.
+		 * 
+		 * @param size if positive, the new size, otherwise the size will be
+		 * derived from the current style
+		 */
+		set_icon_size(size: number): void
+
+		set_icon_type(icon_type: IconType): void
 	}
+
+	export class Icon {
+		constructor(options?: Partial<IconOptions>);
+	}
+
 	export class ImageContent {
 
 	}
-	export class Label extends Widget {
+
+	interface LabelOptions extends WidgetOptions {
 		clutter_text: gi.Clutter.Text;
 		text: string;
-		get_text(): string;
-		set_text(text:string): void
-		get_clutter_text(): gi.Clutter.Text;
-		constructor(options?: any);
 	}
+
+	interface Label extends LabelOptions, Widget {
+		get_text(): string;
+		set_text(text: string): void
+		get_clutter_text(): gi.Clutter.Text;
+	}
+
+	export class Label {
+		constructor(options?: Partial<LabelOptions>);
+	}
+
+
 	export class PasswordEntry {
 
 	}
@@ -122,19 +244,26 @@ declare namespace imports.gi.St {
 		get_adjustment(): Adjustment;
 		set_adjustment(adjustment: Adjustment): void;
 	}
-	export class ScrollView extends Widget {
+
+	interface ScrollViewOptions extends WidgetOptions {
+		overlay_scrollbars: boolean;
+		hscrollbar_policy: Gtk.PolicyType;
+		vscrollbar_policy: Gtk.PolicyType;
+		hscrollbar_visible: boolean;
+		vscrollbar_visible: boolean;
+	}
+
+	interface ScrollView extends ScrollViewOptions, Widget {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
 		set_policy(hscroll: any, vscroll: any): void;
 		get_vscroll_bar(): ScrollBar;
 		get_hscroll_bar(): ScrollBar;
-		overlay_scrollbars: boolean;
-		"hscrollbar-policy": Gtk.PolicyType;
-		"vscrollbar-policy": Gtk.PolicyType;
-		"hscrollbar-visible": boolean;
-		"vscrollbar-visible": boolean;
-		clip_to_allocation: boolean;
-		constructor(options?: any);
+	}
+
+	export class ScrollView extends Widget {
+
+		constructor(options?: Partial<ScrollViewOptions>);
 	}
 	export class ScrollViewFade {
 
@@ -284,36 +413,69 @@ declare namespace imports.gi.St {
 	export class Viewport {
 
 	}
-	interface IWidget {
-		style: string;
-		style_class: string;
+
+	interface WidgetOptions extends Clutter.ActorOptions {
+		/** Object instance's name for assistive technology access */
+		accessible_name: string;
+		/** The accessible role of this object */
+		accessible_role: Atk.Role;
+		/** Whether or not the widget can be focused via keyboard navigation */
 		can_focus: boolean;
+		/** Whether or not the pointer is currently hovering over the widget. This is
+		 * only tracked automatically if St.Widget.track-hover is true, but you can
+		 * adjust it manually in any case. */
 		hover: boolean;
-		label_actor: Clutter.Actor;
+		/** An actor that labels this widget. */
+		label_actor: gi.Clutter.Actor;
+		/** The pseudo-class of the actor. Typical values include "hover", "active", "focus". */
+		pseudo_class: string;
+		/** Inline style information for the actor as a ';'-separated list of CSS properties. */
+		style: string;
+		/** The style-class of the actor for use in styling. */
+		style_class: string;
+		/** Determines whether the widget tracks pointer hover state. If 
+		 * true (and the widget is visible and reactive), the 
+		 * St.Widget.hover property and "hover" style pseudo class will be 
+		 * adjusted automatically as the pointer moves in and out of the 
+		 * widget.
+		 */
+		track_hover: boolean;
+
+		// no idea where it comes from but it exists
+		important: boolean
+	}
+
+	interface IWidget {
+		add_accessible_state(state: Atk.StateType): void
 		add_style_class_name(style_class: string): void;
 		add_style_pseudo_class(style_class: string): void;
 		change_style_pseudo_class(style_class: string, active: boolean): void;
 		destroy(): void;
 		remove_style_pseudo_class(pseudo_class: string): void;
 		get_style_class_name(): string;
+		set_style_class_name(style_class_list: string): void;
 		remove_style_class_name(style_class: string): void;
 		get_direction(): TextDirection;
 		get_style(): string;
 		set_style(style: string): string;
 		get_theme(): imports.gi.St.Theme;
 		get_theme_node(): ThemeNode;
+		peek_theme_node(): ThemeNode;
 		show(): void;
 		hide(): void;
+		ensure_style(): void;
+		navigate_focus(from: Clutter.Actor, direction: St.DirectionType, wrap_around: boolean): boolean
+		remove_accessible_state(state: Atk.StateType): void
 		connect(signal: 'style-changed' | 'popup-menu' | 'notify::hover', callback: (actor: this) => boolean | void): number;
 	}
 
 	// This is the only way we can extend a class when its bases has different signatures. 
 	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
-	type WidgetType = IWidget & Clutter.Actor & Clutter.Container & Clutter.Scriptable & Clutter.Animatable;
+	type WidgetType = IWidget & WidgetOptions & Clutter.Actor & Clutter.Container & Clutter.Scriptable & Clutter.Animatable;
 	interface Widget extends WidgetType { }
 
 	export class Widget {
-		constructor(options?: any);
+		constructor(options?: Partial<WidgetOptions>);
 	}
 	export class WidgetAccessible {
 

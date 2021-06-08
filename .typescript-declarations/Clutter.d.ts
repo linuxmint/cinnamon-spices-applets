@@ -6,35 +6,27 @@ declare namespace imports.gi.Clutter {
 	export class Action {
 
 	}
-	interface Actor extends GObject.Object, Clutter.Animatable, Clutter.Container, Clutter.Scriptable {
+
+	interface ActorOptions {
 		/** Write only */
 		actions: Action;
-		readonly allocation: ActorBox;
 		background_color: Color;
-		readonly background_color_set: boolean;
-		readonly child_transform_set: boolean;
 		/** Graphene.Rect */
 		clip_rect: any;
 		clip_to_allocation: boolean;
 		/** Write only */
 		constraints: Constraint;
 		content: Content;
-		readonly content_box: ActorBox;
 		content_gravity: ContentGravity;
 		content_repeat: ContentRepeat;
 		/** Write only */
 		effect: Effect;
-		readonly first_child: Actor;
 		fixed_position_set: boolean;
 		fixed_x: boolean;
 		fixed_y: boolean;
-		//readonly has_clip: boolean;
-		//readonly has_pointer: boolean;
 		height: number;
-		readonly last_child: Actor;
 		layout_manager: LayoutManager;
 		magnification_filter: ScalingFilter;
-		readonly mapped: boolean;
 		margin_bottom: number;
 		margin_left: number;
 		margin_right: number;
@@ -57,7 +49,6 @@ declare namespace imports.gi.Clutter {
 		/** Graphene.Point */
 		position: any;
 		reactive: boolean;
-		readonly realized: boolean;
 		request_mode: RequestMode;
 		rotation_angle_x: number;
 		rotation_angle_y: number;
@@ -69,7 +60,6 @@ declare namespace imports.gi.Clutter {
 		/** Graphene.Size */
 		size: any;
 		text_direction: TextDirection;
-		readonly transform_set: boolean;
 		translation_x: number;
 		translation_y: number;
 		translation_z: number;
@@ -82,6 +72,21 @@ declare namespace imports.gi.Clutter {
 		y_align: ActorAlign;
 		y_expand: boolean;
 		z_position: number;
+	}
+
+	interface Actor extends ActorOptions, GObject.Object, Clutter.Animatable, Clutter.Container, Clutter.Scriptable {
+		readonly allocation: ActorBox;
+		readonly background_color_set: boolean;
+		readonly child_transform_set: boolean;
+		readonly content_box: ActorBox;
+		readonly first_child: Actor;
+		//readonly has_clip: boolean;
+		//readonly has_pointer: boolean;
+		readonly last_child: Actor;
+		readonly mapped: boolean;
+		readonly realized: boolean;
+		readonly transform_set: boolean;
+
 		/** Clutter.ActorFlags */
 		readonly fields: number;
 
@@ -2268,8 +2273,8 @@ declare namespace imports.gi.Clutter {
 		 * @param flags the flags to unset
 		 */
 		unset_flags(flags: ActorFlags): void;
-
-		add_actor(element: any): void;
+		/** Deprecated, use add_child instead */
+		add_actor(actor: Actor): void;
 		connect(signal: 'button-press-event' | 'button-release-event' | 'captured-event' | 'enter-event' | 'event' | 'key-press-event' | 'key-release-event' | 'leave-event' | 'motion-event' | 'scroll-event' | 'touch-event', callback: (actor: this, event: Event) => boolean | void): number;
 		connect(signal: 'destroy' | 'hide' | 'key-focus-in' | 'key-focus-out' | 'queue-relayout' | 'realize' | 'resource-scale-changed' | 'show' | 'stage-views-changed' | 'transitions-completed' | 'unrealize', callback: (actor: this) => void): number;
 		connect(signal: 'paint', callback: (actor: this, paint_context: PaintContext) => void): number;
@@ -2281,7 +2286,7 @@ declare namespace imports.gi.Clutter {
 
 	/** Base class for actors. */
 	export class Actor {
-		public static new(): Actor;
+		constructor(options?: Partial<ActorOptions>)
 	}
 
 	/**
@@ -2691,6 +2696,7 @@ declare namespace imports.gi.Clutter {
 
 	}
 	export class Stage extends Actor {
+		key_focus: Actor;
 		capture_into(paint: boolean, rect: cairo.RectangleInt, data: number): void;
 		clear_stage_views(): void;
 		ensure_viewport(): void;
@@ -3176,6 +3182,43 @@ declare namespace imports.gi.Clutter {
 	export enum LongPressState {
 
 	}
+
+	/** Masks applied to a ClutterEvent by modifiers */
+	export enum ModifierType {
+		SHIFT_MASK = 1,
+		LOCK_MASK = 2,
+		CONTROL_MASK = 4,
+		MOD1_MASK = 8,
+		MOD2_MASK = 16,
+		MOD3_MASK = 32,
+		MOD4_MASK = 64,
+		MOD5_MASK = 128,
+		BUTTON1_MASK = 256,
+		BUTTON2_MASK = 512,
+		BUTTON3_MASK = 1024,
+		BUTTON4_MASK = 2048,
+		BUTTON5_MASK = 4096,
+		MODIFIER_RESERVED_13_MASK = 8192,
+		MODIFIER_RESERVED_14_MASK = 16384,
+		MODIFIER_RESERVED_15_MASK = 32768,
+		MODIFIER_RESERVED_16_MASK = 65536,
+		MODIFIER_RESERVED_17_MASK = 131072,
+		MODIFIER_RESERVED_18_MASK = 262144,
+		MODIFIER_RESERVED_19_MASK = 524288,
+		MODIFIER_RESERVED_20_MASK = 1048576,
+		MODIFIER_RESERVED_21_MASK = 2097152,
+		MODIFIER_RESERVED_22_MASK = 4194304,
+		MODIFIER_RESERVED_23_MASK = 8388608,
+		MODIFIER_RESERVED_24_MASK = 16777216,
+		MODIFIER_RESERVED_25_MASK = 33554432,
+		SUPER_MASK = 67108864,
+		HYPER_MASK = 134217728,
+		META_MASK = 268435456,
+		MODIFIER_RESERVED_29_MASK = 536870912,
+		RELEASE_MASK = 1073741824,
+		MODIFIER_MASK = 1543512063,
+	}
+
 	export enum Orientation {
 		HORIZONTAL,
 		VERTICAL
@@ -3251,6 +3294,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 	export enum TextDirection {
+		/** Use the default setting, as returned 
+		 * by Clutter.get_default_text_direction  */
+		DEFAULT = 0,
+		/** Use left-to-right text direction */
+		LTR = 1,
+		/** Use right-to-left text direction */
+		RTL = 2
 
 	}
 	export enum TextureQuality {
@@ -3469,6 +3519,28 @@ declare namespace imports.gi.Clutter {
 	 * should never be modified or freed.
 	 */
 	export function get_script_id(gobject: GObject.Object): string;
+
+	/**
+	 * Grabs pointer events, after the grab is done all pointer related events
+	 * (press, motion, release, enter, leave and scroll) are delivered to this
+	 * actor directly without passing through both capture and bubble phases of
+	 * the event delivery chain. The source set in the event will be the actor
+	 * that would have received the event if the pointer grab was not in effect.
+	 * 
+	 * Grabs completely override the entire event delivery chain
+	 * done by Clutter. Pointer grabs should only be used as a last resource;
+	 * using the Clutter.Actor.captured-event signal should always be the
+	 * preferred way to intercept event delivery to reactive actors.
+	 * 
+	 * This function should rarely be used.
+	 * 
+	 * If a grab is required, you are strongly encouraged to use a specific
+	 * input device by calling Clutter.InputDevice.grab.
+	 * 
+	 * @param actor a Clutter.Actor
+	 */
+	export function grab_pointer(actor: Actor): void
+
 	export function image_error_quark(): any;
 	/**
 	 * Initialises everything needed to operate with Clutter and parses some
@@ -3742,6 +3814,10 @@ declare namespace imports.gi.Clutter {
 	 * @param handle_id an unsigned integer greater than zero
 	 */
 	export function threads_remove_repaint_func(handle_id: number): void;
+	/**
+	 * Removes an existing grab of the pointer.
+	 */
+	export function ungrab_pointer(): void
 	/**
 	 * Convert from a ISO10646 character to a key symbol.
 	 * @param wc a ISO10646 encoded character

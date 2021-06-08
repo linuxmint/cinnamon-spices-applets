@@ -75,6 +75,8 @@ declare namespace imports.gi.GObject {
 		weak_unref (notify: WeakNotify, data: any) : void;
 		
 		static new (...params: any) : Object;
+        // added to the Prototype in ui/environment.js!
+        is_finalized(): boolean
         static new_valist (object_type: GObject.Type, first_property_name: string, var_args: any[]) : Object;
         static new_with_properties (object_type: GObject.Type, n_properties: number, names: string[], values: Value[]) : Object;
         static newv (object_type: GObject.Type, n_parameters: number, parameters: Parameter[]) : Object;

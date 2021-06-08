@@ -24,7 +24,6 @@ export const createMediaControlToolbar = (args: Arguments) => {
     )
 
     const container = new Bin({
-        x_align: Align.MIDDLE,
         child: controls
     })
 
