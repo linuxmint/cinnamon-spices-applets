@@ -40,7 +40,7 @@ Following IP Services are called:
 # Screenshots
 IP: 
 
-![ip](screenshot.png)
+![ip](screenshot-ip.png)
 
 Icon: 
 
@@ -48,7 +48,7 @@ Icon:
 
 Icon and IP:
 
-![iconIp](screenshot-icon-ip.png)
+![iconIp](screenshot.png)
 
 Tooltip:
 
