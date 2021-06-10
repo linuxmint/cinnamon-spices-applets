@@ -40,27 +40,27 @@ Following IP Services are called:
 # Screenshots
 IP: 
 
-![ip](ip.png)
+![ip](screenshot.png)
 
 Icon: 
 
-![icon](icon.png)
+![icon](screenshot-icon.png)
 
 Icon and IP:
 
-![iconIp](icon-ip.png)
+![iconIp](screenshot-icon-ip.png)
 
 Tooltip:
 
-![tooltip](tooltip.png)
+![tooltip](screenshot-tooltip.png)
 
 Settings:
 
-![settings](settings.png)
+![settings](screenshot-settings.png)
 
 Custom ISP icon:
 
-![isp](isp.png)
+![isp](screenshot-isp.png)
 
 # Kudos
 
