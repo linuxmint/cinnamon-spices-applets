@@ -1,4 +1,4 @@
-# ip-indicator_mint
+# IP Indicator
 IP indicator applet for Cinnamon desktop environment
 
 Useful in case when often switching VPNs. It shows flag of country of your public IP or customized icon when matching ISP (Internet Service Provider) is found. After opening menu additionally IP, ISP and the country name are displayed. 
@@ -47,6 +47,7 @@ Icon:
 ![icon](icon.png)
 
 Icon and IP:
+
 ![iconIp](icon-ip.png)
 
 Tooltip:
@@ -61,3 +62,8 @@ Custom ISP icon:
 
 ![isp](isp.png)
 
+# Kudos
+
+- Simon Brown - maintenance
+- Erik Zetterberg - IP and icon mode suggestion
+- Mirko Hanker - help with the flags
