@@ -38,7 +38,7 @@ Following IP Services are called:
 - http://ip-api.com/json - chosen service resolving ISP 
 
 # Screenshots
-Ip: 
+IP: 
 
 ![ip](ip.png)
 
