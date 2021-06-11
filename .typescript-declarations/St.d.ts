@@ -17,11 +17,16 @@ declare namespace imports.gi.St {
 		get_value(): number;
 	}
 
-	interface BinOptions extends WidgetOptions {
+	interface IBinOptions  {
+		x_align: Align,
 		child: Clutter.Actor
 	}
 
-	interface Bin extends BinOptions, Widget {
+	type BinOptionsType = IBinOptions & WidgetOptions
+	
+	interface BinOptions extends BinOptionsType {}
+
+	interface Bin extends BinOptions, IWidget {
 		get_child(): Widget;
 		set_child(widget: Widget): void;
 	}
