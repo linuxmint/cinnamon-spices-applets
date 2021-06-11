@@ -66,15 +66,28 @@ declare namespace imports.gi.Clutter {
 		visible: boolean;
 		width: number;
 		x: number;
-		x_align: ActorAlign;
+		/**
+		 * According to the GJS docs (https://gjs-docs.gnome.org), the Clutter 
+		 * Actor properties 'x_align' and 'y_align' have the type Clutter.ActorAlign. 
+		 * However according to the gnome docs (https://developer.gnome.org/st/stable/StBin.html) 
+		 * and own observations, the St.Bin properties 'x_align' and 'y_align' are 
+		 * actually of the type St.Align. This means in order to allow St.Bin as well 
+		 * as  other St classes to implement Clutter.Actor the Clutter.Actor 
+		 * x_align and y_align props have to be either of type Clutter.
+		 * ActorAlign or St.Align and each class inheriting from Clutter.Actor 
+		 * must be speficy the type by it's own. 
+		* 
+		*/
+		x_align: ActorAlign | St.Align;
 		x_expand: boolean;
 		y: number;
-		y_align: ActorAlign;
+		/** See x_align */
+		y_align: ActorAlign | St.Align;
 		y_expand: boolean;
 		z_position: number;
 	}
 
-	interface Actor extends ActorOptions, GObject.Object, Clutter.Animatable, Clutter.Container, Clutter.Scriptable {
+	interface IActorMethodsReadableProps {
 		readonly allocation: ActorBox;
 		readonly background_color_set: boolean;
 		readonly child_transform_set: boolean;
@@ -2283,6 +2296,11 @@ declare namespace imports.gi.Clutter {
 		connect(signal: 'queue-redraw', callback: (actor: this, origin: Actor, volume: PaintVolume) => void): number;
 		connect(event: 'transition-stopped', callback: (name: string, is_finished: Boolean) => void): number;
 	}
+
+	type ActorMethodsReadableProps = IActorMethodsReadableProps & GObject.Object & Animatable & Container & Scriptable
+
+
+	interface Actor extends ActorOptions, ActorMethodsReadableProps { }
 
 	/** Base class for actors. */
 	export class Actor {

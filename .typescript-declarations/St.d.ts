@@ -1,5 +1,14 @@
 declare namespace imports.gi.St {
 
+	/**
+	 * This should be implemented by all classes inheriting from Clutter.Actor except St.Widget and classes inheriting from St.Bin. See Cluter.Actor x_align for an explanation
+	 */
+	interface DefaultAlignProps {
+		x_align: Clutter.ActorAlign;
+		y_align: Clutter.ActorAlign
+	}
+
+
 	// CLASSES
 
 	export class Adjustment {
@@ -17,18 +26,19 @@ declare namespace imports.gi.St {
 		get_value(): number;
 	}
 
-	interface IBinOptions  {
+
+	interface BinOptions extends WidgetOptions {
+		child: Clutter.Actor,
 		x_align: Align,
-		child: Clutter.Actor
+		y_align: Align,
+		x_fill: boolean,
+		y_fill: boolean
 	}
 
-	type BinOptionsType = IBinOptions & WidgetOptions
-	
-	interface BinOptions extends BinOptionsType {}
 
-	interface Bin extends BinOptions, IWidget {
+	interface Bin extends BinOptions, WidgetMethodsReadableProps {
 		get_child(): Widget;
-		set_child(widget: Widget): void;
+		set_child(widget: Widget): void
 	}
 
 	export class Bin {
@@ -39,16 +49,18 @@ declare namespace imports.gi.St {
 
 	}
 
-	interface BoxLayoutOptions extends WidgetOptions {
-		vertical: boolean,
-		pack_start: boolean
+	type BoxLayoutOptionsType = WidgetOptions & DefaultAlignProps
+
+	interface BoxLayoutOptions extends BoxLayoutOptionsType {
+		vertical: boolean;
+		pack_start: boolean;
 	}
 
-	interface BoxLayout extends BoxLayoutOptions, Widget {
-		/** Works but I can't find where it comes from */
+	interface BoxLayoutMethodsReadableProps extends WidgetMethodsReadableProps {
 		add(element: Widget, options?: AddOptions): void;
-		/** private function by default? */
 	}
+
+	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps { }
 
 	export class BoxLayout {
 		constructor(options?: Partial<BoxLayoutOptions>)
@@ -59,11 +71,12 @@ declare namespace imports.gi.St {
 		url: string
 	}
 
-	interface IButton {
+	interface IButtonMethodsReadableProps {
 		connect(signal: 'clicked', callback: (actor: this, clicked_button: number) => void): number
 	}
 
-	type ButtonType = IButton & ButtonOptions & Widget & Bin
+	type ButtonType = ButtonOptions & IButtonMethodsReadableProps & Bin
+
 	interface Button extends ButtonType { }
 
 	export class Button {
@@ -82,7 +95,7 @@ declare namespace imports.gi.St {
 		connect(signal: 'repaint', callback: (actor: this) => void): number
 	}
 
-	type DrawingAreaType = IDrawingArea & Widget
+	type DrawingAreaType = IDrawingArea & Widget & DefaultAlignProps
 	interface DrawingArea extends DrawingAreaType { }
 
 	export class DrawingArea {
@@ -92,6 +105,7 @@ declare namespace imports.gi.St {
 	export class Entry {
 
 	}
+
 	export class FocusManager extends gi.GObject.Object {
 		public static get_for_stage(stage: gi.Clutter.Stage): FocusManager;
 		public add_group(root: Widget): void;
@@ -99,11 +113,14 @@ declare namespace imports.gi.St {
 		public navigate_from_event(event: Clutter.Event): boolean;
 		public remove_group(root: Widget): void;
 	}
+
 	export class GenericAccessible {
 
 	}
 
-	interface IconOptions extends WidgetOptions {
+	type IconOptionsType = WidgetOptions & DefaultAlignProps
+
+	interface IconOptions extends IconOptionsType {
 
 		/** The fallback Gio.Icon to display if St.Icon.gicon fails to load. */
 		fallback_gicon: Gio.Icon
@@ -120,7 +137,7 @@ declare namespace imports.gi.St {
 		icon_type: IconType;
 	}
 
-	interface Icon extends IconOptions, Widget {
+	interface Icon extends IconOptions, WidgetMethodsReadableProps {
 		/**
 		 * Gets the currently set fallback Gio.Icon
 		 * 
@@ -217,12 +234,14 @@ declare namespace imports.gi.St {
 
 	}
 
-	interface LabelOptions extends WidgetOptions {
+	type LabelOptionsType = WidgetOptions & DefaultAlignProps
+
+	interface LabelOptions extends LabelOptionsType {
 		clutter_text: gi.Clutter.Text;
 		text: string;
 	}
 
-	interface Label extends LabelOptions, Widget {
+	interface Label extends LabelOptions, WidgetMethodsReadableProps {
 		get_text(): string;
 		set_text(text: string): void
 		get_clutter_text(): gi.Clutter.Text;
@@ -242,7 +261,7 @@ declare namespace imports.gi.St {
 		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
 	}
 
-	type ScrollBarType = IScrollBar & Widget
+	type ScrollBarType = IScrollBar & Widget & DefaultAlignProps
 	interface ScrollBar extends ScrollBarType { }
 
 	export class ScrollBar {
@@ -250,7 +269,7 @@ declare namespace imports.gi.St {
 		set_adjustment(adjustment: Adjustment): void;
 	}
 
-	interface ScrollViewOptions extends WidgetOptions {
+	interface ScrollViewOptions extends BinOptions {
 		overlay_scrollbars: boolean;
 		hscrollbar_policy: Gtk.PolicyType;
 		vscrollbar_policy: Gtk.PolicyType;
@@ -258,7 +277,7 @@ declare namespace imports.gi.St {
 		vscrollbar_visible: boolean;
 	}
 
-	interface ScrollView extends ScrollViewOptions, Widget {
+	interface ScrollView extends ScrollViewOptions, Bin {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
 		set_policy(hscroll: any, vscroll: any): void;
@@ -266,7 +285,7 @@ declare namespace imports.gi.St {
 		get_hscroll_bar(): ScrollBar;
 	}
 
-	export class ScrollView extends Widget {
+	export class ScrollView {
 
 		constructor(options?: Partial<ScrollViewOptions>);
 	}
@@ -450,7 +469,7 @@ declare namespace imports.gi.St {
 		important: boolean
 	}
 
-	interface IWidget {
+	interface IWidgetMethodsReadableProps {
 		add_accessible_state(state: Atk.StateType): void
 		add_style_class_name(style_class: string): void;
 		add_style_pseudo_class(style_class: string): void;
@@ -476,8 +495,9 @@ declare namespace imports.gi.St {
 
 	// This is the only way we can extend a class when its bases has different signatures. 
 	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
-	type WidgetType = IWidget & WidgetOptions & Clutter.Actor & Clutter.Container & Clutter.Scriptable & Clutter.Animatable;
-	interface Widget extends WidgetType { }
+	type WidgetMethodsReadableProps = IWidgetMethodsReadableProps & Clutter.ActorMethodsReadableProps
+
+	interface Widget extends WidgetOptions, WidgetMethodsReadableProps { }
 
 	export class Widget {
 		constructor(options?: Partial<WidgetOptions>);
