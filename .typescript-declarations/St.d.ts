@@ -68,7 +68,6 @@ declare namespace imports.gi.St {
 
 	interface ButtonOptions extends BinOptions {
 		label: string;
-		url: string
 	}
 
 	interface IButtonMethodsReadableProps {
