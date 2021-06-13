@@ -6,8 +6,8 @@ declare function setTimeout(callback: { (): void }, delay: number): number;
 declare function clearTimeout(timouetId: number): void;
 
 declare class global {
-    static log(...any: Array < any > ): void;
-    static logError(...text: Array < string > ): void;
+    static log(...any: Array<any>): void;
+    static logError(...text: Array<string>): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     /** Main Cinnamon settings */
     static settings: imports.gi.Gio.Settings;
@@ -17,6 +17,22 @@ declare class global {
     static screen: any;
     static display: imports.gi.Meta.Display;
     static stage: imports.gi.Clutter.Stage;
+    /** Gets the pointer coordinates and current modifier key state */
+    static get_pointer(): [number, number, imports.gi.Clutter.ModifierType]
+    /**
+     * Sets the pointer coordinates
+     * 
+     * @param x the X coordinate of the pointer, in global coordinates
+     * @param y the Y coordinate of the pointer, in global coordinates
+     */
+    static set_pointer(x: number, y: number): void
+    static focus_manager: imports.gi.St.FocusManager
+
+    static ui_scale: number
+
+    static stage_input_mode: imports.gi.Cinnamon.StageInputMode
+
+
 }
 
 interface String {
@@ -80,5 +96,11 @@ declare namespace imports {
     export const lang: Lang;
     class Lang {
         bind<T, CTX>(ctx: CTX, func: T): T;
+    }
+
+    export const signals: Signals
+
+    class Signals {
+        addSignalMethods(protoype: any): void
     }
 }

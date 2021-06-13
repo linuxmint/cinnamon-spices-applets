@@ -13,7 +13,7 @@ export class WeatherButton {
 	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
 	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
 
-	constructor(options: imports.gi.St.ButtonOptions, doNotAddPadding: boolean = false) {
+	constructor(options: Partial<imports.gi.St.ButtonOptions>, doNotAddPadding: boolean = false) {
 		this.actor = new Button(options);
 		this.actor.add_style_class_name("popup-menu-item");
 
