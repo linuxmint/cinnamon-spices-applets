@@ -1,4 +1,5 @@
 import { Log } from "lib/logger";
+import { WeatherButton } from "ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
@@ -59,7 +60,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	return response as GenericResponse;
 }
 
-export function OpenUrl(element: imports.gi.St.Button) {
+export function OpenUrl(element: WeatherButton) {
 	if (!element.url) return;
 	imports.gi.Gio.app_info_launch_default_for_uri(
 		element.url,

@@ -18,19 +18,19 @@ class UIBar {
         return this.actor;
     }
     SwitchButtonToShow() {
-        if (!!this._hourlyButton.child)
-            this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (!!this.hourlyButton.actor.child)
+            this.hourlyButton.actor.child.icon_name = "custom-down-arrow-symbolic";
     }
     SwitchButtonToHide() {
-        if (!!this._hourlyButton.child)
-            this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+        if (!!this.hourlyButton.actor.child)
+            this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
     }
     DisplayErrorMessage(msg) {
         this._timestamp.text = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
-        this._providerCredit.url = provider.website;
+        this.providerCreditButton.actor.label = utils_1._("Powered by") + " " + provider.prettyName;
+        this.providerCreditButton.url = provider.website;
         let lastUpdatedTime = utils_1.AwareDateString(weather.date, config.currentLocale, config._show24Hours);
         this._timestamp.text = utils_1._("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (weather.location.distanceFrom != null) {
@@ -57,7 +57,7 @@ class UIBar {
             y_fill: false,
             expand: true
         });
-        this._hourlyButton = new weatherbutton_1.WeatherButton({
+        this.hourlyButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -66,9 +66,9 @@ class UIBar {
                 icon_name: "custom-down-arrow-symbolic",
                 style: "margin: 2px 5px;"
             }),
-        }).actor;
-        this._hourlyButton.connect(consts_1.SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
-        this.actor.add(this._hourlyButton, {
+        });
+        this.hourlyButton.actor.connect(consts_1.SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
+        this.actor.add(this.hourlyButton.actor, {
             x_fill: false,
             x_align: Align.MIDDLE,
             y_align: Align.MIDDLE,
@@ -78,9 +78,9 @@ class UIBar {
         if (this.app.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
-        this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(consts_1.ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, commandRunner_1.OpenUrl);
-        this.actor.add(this._providerCredit, {
+        this.providerCreditButton = new weatherbutton_1.WeatherButton({ label: utils_1._(consts_1.ELLIPSIS), reactive: true });
+        this.providerCreditButton.actor.connect(consts_1.SIGNAL_CLICKED, () => commandRunner_1.OpenUrl(this.providerCreditButton));
+        this.actor.add(this.providerCreditButton.actor, {
             x_fill: false,
             x_align: Align.END,
             y_align: Align.MIDDLE,
@@ -94,7 +94,7 @@ class UIBar {
         return utils_1._("km");
     }
     HideHourlyToggle() {
-        this._hourlyButton.child = null;
+        this.hourlyButton.actor.child = null;
     }
 }
 exports.UIBar = UIBar;

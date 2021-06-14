@@ -46,7 +46,6 @@ export class CurrentWeather {
 	private pressureLabel: imports.gi.St.Label;
 	private windLabel: imports.gi.St.Label;
 	private windDirectionIcon: imports.gi.St.Icon;
-	private windDirectionLabel: imports.gi.St.Label;
 	private apiUniqueLabel: imports.gi.St.Label;
 	private apiUniqueCaptionLabel: imports.gi.St.Label;
 
@@ -201,8 +200,8 @@ export class CurrentWeather {
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
 			if (this.app.encounteredError) this.app.RefreshWeather(true);
-			else if (this.location.url == null) return;
-			else OpenUrl(this.location);
+			else if (this.locationButton.url == null) return;
+			else OpenUrl(this.locationButton);
 		});
 
 		this.nextLocationButton = new WeatherButton({
@@ -393,7 +392,7 @@ export class CurrentWeather {
 
 	private SetLocation(locationString: string, url: string) {
 		this.location.label = locationString;
-		this.location.url = url;
+		this.locationButton.url = url;
 		if (!url) this.locationButton.disable();
 	}
 
