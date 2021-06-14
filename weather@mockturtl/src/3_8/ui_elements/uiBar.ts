@@ -20,9 +20,9 @@ export class UIBar {
 
 	public ToggleClicked: Event<UIBar, boolean> = new Event();
 
-	private providerCreditButton: WeatherButton;
-	private hourlyButton: WeatherButton;
-	private _timestamp: imports.gi.St.Label;
+	private providerCreditButton: WeatherButton = null;
+	private hourlyButton: WeatherButton = null;
+	private _timestamp: imports.gi.St.Label = null;
 
 	private app: WeatherApplet;
 
@@ -32,11 +32,11 @@ export class UIBar {
 	}
 
 	public SwitchButtonToShow() {
-		if (!!this.hourlyButton.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
 	}
 
 	public SwitchButtonToHide() {
-		if (!!this.hourlyButton.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
 	}
 
 	public DisplayErrorMessage(msg: string) {
@@ -125,7 +125,8 @@ export class UIBar {
 	}
 
 	private HideHourlyToggle() {
-		this.hourlyButton.actor.child = null;
+		if (this.hourlyButton != null)
+			this.hourlyButton.actor.child = null;
 	}
 
 }

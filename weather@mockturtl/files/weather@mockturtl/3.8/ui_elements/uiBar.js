@@ -11,6 +11,9 @@ const STYLE_BAR = 'bottombar';
 class UIBar {
     constructor(app) {
         this.ToggleClicked = new events_1.Event();
+        this.providerCreditButton = null;
+        this.hourlyButton = null;
+        this._timestamp = null;
         this.app = app;
         this.actor = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -18,11 +21,13 @@ class UIBar {
         return this.actor;
     }
     SwitchButtonToShow() {
-        if (!!this.hourlyButton.actor.child)
+        var _a;
+        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
             this.hourlyButton.actor.child.icon_name = "custom-down-arrow-symbolic";
     }
     SwitchButtonToHide() {
-        if (!!this.hourlyButton.actor.child)
+        var _a;
+        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
             this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
     }
     DisplayErrorMessage(msg) {
@@ -94,7 +99,8 @@ class UIBar {
         return utils_1._("km");
     }
     HideHourlyToggle() {
-        this.hourlyButton.actor.child = null;
+        if (this.hourlyButton != null)
+            this.hourlyButton.actor.child = null;
     }
 }
 exports.UIBar = UIBar;
