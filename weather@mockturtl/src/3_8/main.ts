@@ -16,7 +16,6 @@ import { DarkSky } from "providers/darkSky";
 import { OpenWeatherMap } from "providers/openWeatherMap";
 import { USWeather } from "providers/us_weather";
 import { Weatherbit } from "providers/weatherbit";
-import { Yahoo } from "providers/yahoo";
 import { MetNorway } from "providers/met_norway";
 import { HttpLib, HttpError, Method, HTTPParams } from "lib/httpLib";
 import { Log } from "lib/logger";
@@ -418,9 +417,6 @@ export class WeatherApplet extends TextIconApplet {
 				break;
 			case "Weatherbit":
 				if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
-				break;
-			case "Yahoo":
-				if (currentName != "Yahoo" || force) this.provider = new Yahoo(this);
 				break;
 			case "ClimacellV4":
 				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);

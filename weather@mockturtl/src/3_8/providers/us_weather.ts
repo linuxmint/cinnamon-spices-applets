@@ -276,7 +276,7 @@ export class USWeather implements WeatherProvider {
 	private ParseForecast(json: ForecastsPayload): ForecastData[] {
 		let forecasts: ForecastData[] = [];
 		try {
-
+			// TODO: Add check based on tz and dat to skip parsing days in the past
 			let startIndex = 0;
 			// array starts with night, handling today separately
 			if (json.properties.periods[0].isDaytime == false) {
