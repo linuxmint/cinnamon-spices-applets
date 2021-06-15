@@ -201,12 +201,42 @@ class USWeather {
         }
     }
     ;
+    CheckIfHasThreeElementsForDay(json) {
+        if (json.properties.periods.length < 3)
+            return false;
+        let counter = 0;
+        for (let index = 1; index < 3; index++) {
+            const element = json.properties.periods[index];
+            const prevElement = json.properties.periods[index - 1];
+            let prevDate = new Date(prevElement.startTime).toLocaleDateString(undefined, { timeZone: this.observationStations[0].properties.timeZone });
+            let curDate = new Date(element.startTime).toLocaleDateString(undefined, { timeZone: this.observationStations[0].properties.timeZone });
+            if (prevDate == curDate)
+                counter++;
+            else
+                counter = 0;
+            if (counter > 1)
+                return true;
+            return false;
+        }
+    }
+    FindTodayIndex(json, startIndex = 0) {
+        let today = new Date();
+        for (let index = startIndex; index < json.properties.periods.length; index++) {
+            const element = json.properties.periods[index];
+            let todayDate = today.toLocaleDateString(undefined, { timeZone: this.observationStations[0].properties.timeZone });
+            let curDate = new Date(element.startTime).toLocaleDateString(undefined, { timeZone: this.observationStations[0].properties.timeZone });
+            if (todayDate != curDate)
+                continue;
+            return index;
+        }
+    }
     ParseForecast(json) {
         let forecasts = [];
         try {
-            let startIndex = 0;
-            if (json.properties.periods[0].isDaytime == false) {
-                startIndex = 1;
+            let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
+            startIndex = this.FindTodayIndex(json, startIndex);
+            if (json.properties.periods[startIndex].isDaytime == false) {
+                startIndex++;
                 let today = json.properties.periods[0];
                 let forecast = {
                     date: new Date(today.startTime),
