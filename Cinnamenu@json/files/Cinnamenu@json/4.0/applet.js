@@ -937,13 +937,15 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //---start search---
         this.currentSearchStr = searchText;
+        this.currentSearchId = Math.floor(Math.random() * 100000000);
+
         this.clearEnteredActors();
         if (!this.searchActive) {//set search mode
             this.searchActive = true;
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
             this.categoriesView.buttons.forEach(button => button.disable());
         }
-        setTimeout(() => this._doSearch(searchText));
+        setTimeout(() => this._doSearch(searchText, this.currentSearchId));
     }
 
     _endSearchMode() {
@@ -955,10 +957,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.previousSearchPattern = '';
     }
 
-    _doSearch(pattern_raw) {
+    _doSearch(pattern_raw, thisSearchId) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (pattern_raw !== this.currentSearchStr) {
+        if (thisSearchId !== this.currentSearchId) {
             return;
         }
         //if (!text || !text.trim()) return;
@@ -971,16 +973,14 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.previousSearchPattern = pattern;
         //======Begin search===========
-        this.currentSearchId = Math.floor(Math.random() * 100000000);
 
         let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
                         .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
-
-        //=======search providers==========
         let otherResults = [];
 
+        //=======search providers==========
         //---calculator---
         const replacefn = (match) => {
             if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
@@ -1012,35 +1012,6 @@ class CinnamenuApplet extends TextIconApplet {
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
-        }
-
-        //---web search option---
-        if (this.settings.webSearchOption != 0) {//0==none
-            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
-                            'search.png', 'duckgo_icon.png', 'ask.png', 'search.png', 'search.png',
-                            'search.png'][this.settings.webSearchOption - 1];
-            const url = [   'https://google.com/search?q=',
-                            'https://www.bing.com/search?q=',
-                            'https://www.baidu.com/s?wd=',
-                            'https://search.yahoo.com/search?p=',
-                            'https://yandex.com/search/?text=',
-                            'https://duckduckgo.com/?q=',
-                            'https://www.ask.com/web?q=',
-                            'https://www.ecosia.org/search?q=',
-                            'https://search.aol.co.uk/aol/search?q=',
-                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
-            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
-                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
-
-            otherResults.push({
-                        isSearchResult: true,
-                        name: pattern_raw + ' – '+ engine,
-                        description: '',
-                        deleteAfterUse: true,
-                        icon: new St.Icon({ gicon: new Gio.FileIcon({
-                                    file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
-                                    icon_size: this.getAppIconSize() }),
-                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
         }
 
         //---web bookmarks search-----
@@ -1095,18 +1066,44 @@ class CinnamenuApplet extends TextIconApplet {
                 buttons[0].handleEnter();
             }
         };
-        //-------
-
-        let thisSearchId = this.currentSearchId;
 
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
-            wikiSearch(true, pattern_raw, (wikiResults) => {
+            wikiSearch(pattern_raw, (wikiResults) => {
                             if (this.searchActive && thisSearchId === this.currentSearchId &&
                                                                             wikiResults.length > 0) {
                                 otherResults = otherResults.concat(wikiResults);
                                 finish();
                             } });
+        }
+
+        //---web search option---
+        if (this.settings.webSearchOption != 0) {//0==none
+            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
+                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
+                            'startpage.png'][this.settings.webSearchOption - 1];
+            const url = [   'https://google.com/search?q=',
+                            'https://www.bing.com/search?q=',
+                            'https://www.baidu.com/s?wd=',
+                            'https://search.yahoo.com/search?p=',
+                            'https://yandex.com/search/?text=',
+                            'https://duckduckgo.com/?q=',
+                            'https://www.ask.com/web?q=',
+                            'https://www.ecosia.org/search?q=',
+                            'https://search.aol.co.uk/aol/search?q=',
+                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
+            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
+                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
+
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/' + iconName)});
+
+            otherResults.push({
+                        isSearchResult: true,
+                        name: pattern_raw + ' – '+ engine,
+                        description: '',
+                        deleteAfterUse: true,
+                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
         }
 
         //---emoji search------
