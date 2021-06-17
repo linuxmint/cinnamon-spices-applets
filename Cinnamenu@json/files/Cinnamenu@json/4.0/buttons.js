@@ -620,6 +620,7 @@ class AppButton {
                             this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
         let markup = '<span>' + name + '</span>';
         if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
+            description = description.replace(/\n/g, ' ');//remove formatting intended for tooltip
             markup += '\n<span size="small">' + description + '</span>';
         }
         const clutterText = this.label.get_clutter_text();
