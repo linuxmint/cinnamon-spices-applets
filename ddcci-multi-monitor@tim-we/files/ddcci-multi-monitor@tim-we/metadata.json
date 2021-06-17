@@ -5,6 +5,5 @@
     "description": "Adjust monitor brightness via DDC/CI",
     "author": "tim-we",
     "hide-configuration": true,
-    "max-instances": "1",
-    "icon": "display-brightness"
+    "max-instances": "1"
 }
