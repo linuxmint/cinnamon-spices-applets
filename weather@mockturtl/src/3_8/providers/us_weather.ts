@@ -309,7 +309,7 @@ export class USWeather implements WeatherProvider {
 	private ParseForecast(json: ForecastsPayload): ForecastData[] {
 		let forecasts: ForecastData[] = [];
 		try {
-			// Check if start has more than 2 elements, then skip
+			// Check if beginning of the array has more than 2 elements for a single day (should be 2 day/night), then skip
 			let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
 			// Find today if doesn't start with that
 			startIndex = this.FindTodayIndex(json, startIndex);
