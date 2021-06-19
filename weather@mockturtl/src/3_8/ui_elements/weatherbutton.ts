@@ -9,6 +9,7 @@ export class WeatherButton {
 	private disabled = false;
 
 	public ID: any;
+	public url: string;
 
 	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
 	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();

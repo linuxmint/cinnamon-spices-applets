@@ -136,10 +136,10 @@ class CurrentWeather {
         this.location.connect(consts_1.SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
                 this.app.RefreshWeather(true);
-            else if (this.location.url == null)
+            else if (this.locationButton.url == null)
                 return;
             else
-                commandRunner_1.OpenUrl(this.location);
+                commandRunner_1.OpenUrl(this.locationButton);
         });
         this.nextLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
@@ -302,7 +302,7 @@ class CurrentWeather {
     }
     SetLocation(locationString, url) {
         this.location.label = locationString;
-        this.location.url = url;
+        this.locationButton.url = url;
         if (!url)
             this.locationButton.disable();
     }

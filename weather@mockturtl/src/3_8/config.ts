@@ -29,7 +29,6 @@ export type Services =
 	"DarkSky" |
 	"MetNorway" |
 	"Weatherbit" |
-	"Yahoo" |
 	"ClimacellV4" |
 	"Climacell" |
 	"Met Office UK" |

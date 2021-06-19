@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.9
+
+* Fixes [#3806](https://github.com/linuxmint/cinnamon-spices-applets/issues/3806)
+* Update applet to new declarations
+* Remove yahoo weather
+
 ## 3.0.8
 
 * Fixes [#3787](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
