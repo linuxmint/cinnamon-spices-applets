@@ -3,11 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAppletLabel = void 0;
 const { Label } = imports.gi.St;
 const { EllipsizeMode } = imports.gi.Pango;
+const { ActorAlign } = imports.gi.Clutter;
 function createAppletLabel() {
     const label = new Label({
         reactive: true,
         track_hover: true,
         style_class: 'applet-label',
+        y_align: ActorAlign.CENTER,
+        y_expand: false,
+        visible: false
     });
     label.clutter_text.ellipsize = EllipsizeMode.NONE;
     let visible;

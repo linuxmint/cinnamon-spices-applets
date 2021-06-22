@@ -1,6 +1,5 @@
-
-const { PopupMenuSection } = imports.ui.popupMenu
-const { Bin, Align, BoxLayout } = imports.gi.St
+const { BoxLayout } = imports.gi.St
+const { ActorAlign } = imports.gi.Clutter
 
 interface Arguments {
     /**
@@ -15,21 +14,14 @@ export const createMediaControlToolbar = (args: Arguments) => {
         controlBtns
     } = args
 
-    const controls = new BoxLayout({
-        style_class: "radio-applet-media-control-toolbar"
+    const toolbar = new BoxLayout({
+        style_class: "radio-applet-media-control-toolbar",
+        x_align: ActorAlign.CENTER
     });
 
     controlBtns.forEach(btn =>
-        controls.add_actor(btn)
+        toolbar.add_child(btn)
     )
 
-    const container = new Bin({
-        child: controls
-    })
-
-    const menuSection = new PopupMenuSection()
-    menuSection.addActor(container)
-
-    return menuSection
+    return toolbar
 }
-

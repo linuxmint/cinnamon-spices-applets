@@ -502,6 +502,7 @@ declare namespace imports.gi.Gio {
         call_with_unix_fd_list (method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         call_with_unix_fd_list_finish (out_fd_list: UnixFDList, res: AsyncResult) : GLib.Variant;
         call_with_unix_fd_list_sync (method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, out_fd_list: UnixFDList, cancellable: Cancellable) : GLib.Variant;
+        disconnectSignal(id: number): void; 
         get_cached_property (property_name: string) : GLib.Variant;
         get_cached_property_names () : string[];
         get_connection () : DBusConnection;
@@ -5246,7 +5247,7 @@ declare namespace imports.gi.Gio {
         read_finish (res: AsyncResult) : FileInputStream;
         replace (etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable) : FileOutputStream;
         replace_async (etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
-        replace_contents (contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, new_etag: string, cancellable: Cancellable) : boolean;
+        replace_contents(contents: string, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable): [ok: boolean, new_etag: string];
         replace_contents_async (contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         replace_contents_bytes_async (contents: GLib.Bytes, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         replace_contents_finish (res: AsyncResult, new_etag: string) : boolean;

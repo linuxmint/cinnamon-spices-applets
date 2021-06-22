@@ -3,13 +3,13 @@ import { ChannelStore } from "ChannelStore";
 import { createChannelList } from "ui/ChannelList/ChannelList";
 import { AdvancedPlaybackStatus, Channel, IconType, PlaybackStatus } from "types";
 import { createMpvHandler } from "mpv/MpvHandler";
-import { VolumeSlider } from "ui/VolumeSlider";
-import { createRadioPopupMenu } from "ui/RadioPopupMenu";
+import { createVolumeSlider } from "ui/VolumeSlider";
+import { createPopupMenu } from 'lib/PopupMenu'
+import { createSeparatorMenuItem } from 'lib/PopupSeperator'
 import { createMediaControlToolbar } from "ui/Toolbar/MediaControlToolbar";
 import { createPlayPauseButton } from "ui/Toolbar/PlayPauseButton";
 import { createStopBtn } from "ui/Toolbar/StopButton";
-import { createSongInfoItem } from "ui/InfoSection/SongInfoItem";
-import { createChannelInfoItem } from "ui/InfoSection/ChannelInfoItem";
+import { createInfoSection } from "ui/InfoSection";
 import { createDownloadButton } from "ui/Toolbar/DownloadButton";
 import { createCopyButton } from "ui/Toolbar/CopyButton";
 import { downloadSongFromYoutube } from "functions/downloadFromYoutube";
@@ -23,15 +23,13 @@ import { notifyYoutubeDownloadFinished } from "ui/Notifications/YoutubeDownloadF
 import { notifyYoutubeDownloadStarted } from "ui/Notifications/YoutubeDownloadStartedNotification";
 import { notifyYoutubeDownloadFailed } from "ui/Notifications/YoutubeDownloadFailedNotification";
 import { notify } from "ui/Notifications/GenericNotification";
+import { createSeeker } from "ui/Seeker";
+import { VOLUME_DELTA } from "consts";
 
 const { ScrollDirection } = imports.gi.Clutter;
-
 const { getAppletDefinition } = imports.ui.appletManager;
-
-const { panelManager } = imports.ui.main;
-
-const { IconType } = imports.gi.St
-
+const { panelManager } = imports.ui.main
+const { IconType, BoxLayout } = imports.gi.St
 
 /** 
  * 
@@ -45,8 +43,14 @@ function main(
 	instanceId: number
 ): imports.ui.applet.Applet {
 
+	// this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
+	let lastVolume: number
+
+	let mpvHandler: ReturnType<typeof createMpvHandler>
+
+
 	const appletDefinition = getAppletDefinition({
-		applet_id: instanceId
+		applet_id: instanceId,
 	})
 
 	const panel = panelManager.panels.find(panel =>
@@ -62,7 +66,6 @@ function main(
 
 	const appletLabel = createAppletLabel()
 
-
 	const applet = createApplet({
 		icon: appletIcon.actor,
 		label: appletLabel.actor,
@@ -71,8 +74,9 @@ function main(
 		panelHeight,
 		onClick: handleAppletClicked,
 		onScroll: handleScroll,
-		onMiddleClick: () => mpvHandler.togglePlayPause(),
-		onAppletRemovedFromPanel: () => mpvHandler.stop()
+		onMiddleClick: () => mpvHandler?.togglePlayPause(),
+		onAppletRemovedFromPanel: () => mpvHandler?.stop(),
+		onRightClick: () => popupMenu?.close()
 	})
 
 	const appletTooltip = createAppletTooltip({
@@ -104,15 +108,14 @@ function main(
 		onChannelClicked: handleChannelClicked
 	})
 
-	const volumeSlider = new VolumeSlider({
-		onValueChanged: (volume: number) => mpvHandler.setVolume(volume)
+	const volumeSlider = createVolumeSlider({
+		onVolumeChanged: (volume) => mpvHandler?.setVolume(volume)
 	})
 
-	// infoSection
-	const songInfoItem = createSongInfoItem()
-	const channelInfoItem = createChannelInfoItem()
+	const popupMenu = createPopupMenu({ launcher: applet.actor })
+	const infoSection = createInfoSection()
 
-	// toolbar
+	//toolbar
 	const playPauseBtn = createPlayPauseButton({
 		onClick: () => mpvHandler.togglePlayPause()
 	})
@@ -133,63 +136,73 @@ function main(
 		controlBtns: [playPauseBtn.actor, downloadBtn.actor, copyBtn.actor, stopBtn.actor]
 	})
 
-	const popupMenu = createRadioPopupMenu({
-		radioApplet: applet,
-		orientation,
-		channelList: channelList.actor,
-		volumeSlider,
-		songInfoItem: songInfoItem.actor,
-		channelInfoItem: channelInfoItem.actor,
-		mediaControlToolbar
+	const seeker = createSeeker({
+		onPositionChanged: (value) => mpvHandler?.setPosition(value)
 	})
 
-	async function handleAppletClicked() {
+	const radioActiveSection = new BoxLayout({
+		vertical: true,
+		visible: false
+	});
 
+	[
+		infoSection.actor,
+		mediaControlToolbar,
+		volumeSlider.actor,
+		seeker.actor
+	].forEach(widget => {
+		radioActiveSection.add_child(createSeparatorMenuItem())
+		radioActiveSection.add_child(widget)
+	})
+
+	popupMenu.add_child(channelList.actor)
+	popupMenu.add_child(radioActiveSection)
+
+	mpvHandler = createMpvHandler({
+		getInitialVolume: () => { return configs.initialVolume },
+		onVolumeChanged: handleVolumeChanged,
+		onLengthChanged: hanldeLengthChanged,
+		onPositionChanged: handlePositionChanged,
+		checkUrlValid: (url) => channelStore.checkUrlValid(url),
+		onTitleChanged: handleTitleChanged,
+		onPlaybackstatusChanged: handlePlaybackstatusChanged,
+		lastUrl: configs.lastUrl,
+		onUrlChanged: handleUrlChanged
+	})
+
+
+	// CALLBACKS
+
+	async function handleAppletClicked() {
 		try {
 			await installMpvWithMpris()
 			popupMenu.toggle()
-			channelList.open()
 		} catch (error) {
-
 			const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."
-
 			notify({ text: notificationText })
 		}
 	}
 
 	function handleScroll(scrollDirection: imports.gi.Clutter.ScrollDirection) {
 		const volumeChange =
-			scrollDirection === ScrollDirection.UP ? 5 : -5
+			scrollDirection === ScrollDirection.UP ? VOLUME_DELTA : -VOLUME_DELTA
 		mpvHandler.increaseDecreaseVolume(volumeChange)
-	}
-
-	function handleRadioInitialized(
-		playbackStatus: PlaybackStatus,
-		volume: number
-	) {
-
-		if (playbackStatus === 'Stopped') {
-			return
-		}
-		popupMenu.radioActive = true
-
-		handlePlaybackstatusChanged(playbackStatus)
-		handleVolumeChanged(volume)
-		handleUrlChanged(configs.lastUrl)
 	}
 
 	function handleChannelClicked(name: string) {
 		const channelUrl = channelStore.getChannelUrl(name)
-		mpvHandler.setChannelUrl(channelUrl)
+		mpvHandler.setUrl(channelUrl)
 	}
 
 	function handleTitleChanged(title: string) {
-		songInfoItem.setSongTitle(title)
+		infoSection.setSongTitle(title)
 	}
 
 	function handleVolumeChanged(volume: number | null) {
-		volumeSlider.value = volume
+		volumeSlider.setVolume(volume)
 		appletTooltip.setVolume(volume)
+
+		lastVolume = volume
 	}
 
 	function handleIconTypeChanged(iconType: IconType) {
@@ -209,23 +222,27 @@ function main(
 		if (!lastUrlValid) mpvHandler.stop()
 	}
 
-	function handlePlaybackstatusChanged(playbackstatus: AdvancedPlaybackStatus, lastVolume?: number) {
+	function handlePlaybackstatusChanged(playbackstatus: AdvancedPlaybackStatus) {
 
-		// TODO: this should be done by mpvHandler
-		if (playbackstatus === 'Stopped') handleVolumeChanged(null)
-		if (playbackstatus === 'Stopped') handleUrlChanged(null)
+		if (playbackstatus === 'Stopped') {
+			radioActiveSection.hide()
+			configs.lastVolume = lastVolume
+			configs.lastUrl = null
+			appletLabel.setText(null)
+			handleVolumeChanged(null)
+			popupMenu.close()
+		}
 
-		channelList.setPlaybackstatus(playbackstatus)
+		if (playbackstatus !== 'Stopped' && !radioActiveSection.visible)
+			radioActiveSection.show()
 
+		channelList.setPlaybackStatus(playbackstatus)
 		appletIcon.setPlaybackStatus(playbackstatus)
-
-		popupMenu.radioActive = (playbackstatus !== 'Stopped')
 
 		if (playbackstatus === 'Playing' || playbackstatus === 'Paused') {
 			playPauseBtn.setPlaybackStatus(playbackstatus)
 		}
 
-		if (lastVolume != null) configs.lastVolume = lastVolume
 	}
 
 	function handleUrlChanged(url: string) {
@@ -235,8 +252,16 @@ function main(
 		appletLabel.setText(channelName)
 
 		channelList.setCurrentChannel(channelName)
-		channelInfoItem.setChannel(channelName)
+		infoSection.setChannel(channelName)
 		configs.lastUrl = url
+	}
+
+	function hanldeLengthChanged(length: number) {
+		seeker.setLength(length)
+	}
+
+	function handlePositionChanged(position: number) {
+		seeker?.setPosition(position)
 	}
 
 	function handleDownloadBtnClicked() {
@@ -257,17 +282,6 @@ function main(
 			onCancelClicked: () => downloadProcess.cancel()
 		})
 	}
-
-	const mpvHandler = createMpvHandler({
-		getInitialVolume: () => { return configs.initialVolume },
-		onInitialized: handleRadioInitialized,
-		onVolumeChanged: handleVolumeChanged,
-		checkUrlValid: (url) => channelStore.checkUrlValid(url),
-		onTitleChanged: handleTitleChanged,
-		onPlaybackstatusChanged: handlePlaybackstatusChanged,
-		initialUrl: configs.lastUrl,
-		onUrlChanged: handleUrlChanged
-	})
 
 	return applet
 }

@@ -1,78 +1,124 @@
-const { PopupSliderMenuItem } = imports.ui.popupMenu;
-const St = imports.gi.St;
-const { Tooltip } = imports.ui.tooltips;
+import { createActivWidget } from "lib/ActivWidget";
+import { createSlider } from "lib/Slider";
+import { getVolumeIcon, POPUP_ICON_CLASS, POPUP_MENU_ITEM_CLASS, VOLUME_DELTA } from 'consts'
+
+const { BoxLayout, Icon, IconType } = imports.gi.St
+const { Tooltip } = imports.ui.tooltips
+const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter
 
 interface Arguments {
-    onValueChanged: { (volume: number): void }
+    onVolumeChanged: (value: number) => void
 }
 
+export function createVolumeSlider(args: Arguments) {
 
-export class VolumeSlider extends PopupSliderMenuItem {
+    const {
+        onVolumeChanged
+    } = args
 
-    private tooltip: imports.ui.tooltips.Tooltip
-    private onValueChanged: { (volume: number): void }
-    private volumeIcon: imports.gi.St.Icon
+    let tooltip: imports.ui.tooltips.Tooltip
 
-    private volumeIcons = [
-        { max: 0, iconSuffix: "muted" },
-        { max: 33, iconSuffix: "low" },
-        { max: 66, iconSuffix: "medium" },
-        { max: 100, iconSuffix: "high" },
-    ]
+    const container = new BoxLayout({
+        style_class: POPUP_MENU_ITEM_CLASS,
+    })
+
+    createActivWidget({
+        widget: container
+    })
+
+    /** in Percent and rounded! */
+    let volume: number
+
+    const slider = createSlider({
+        onValueChanged: handleSliderValueChanged
+    })
+
+    const icon = new Icon({
+        icon_type: IconType.SYMBOLIC,
+        style_class: POPUP_ICON_CLASS,
+        reactive: true
+    });
+
+    [icon, slider.actor].forEach(widget => {
+        container.add_child(widget)
+    })
 
 
-    constructor(args: Arguments) {
-        super(0);
+    container.connect('key-press-event', (actor, event) => {
+        const key = event.get_key_symbol();
 
-        const {
-            onValueChanged
-        } = args
+        if (key === KEY_Right || key === KEY_Left) {
+            const direction = (key === KEY_Right) ? 'increase' : 'decrease'
+            deltaChange(direction)
+        }
+    })
 
-        this.onValueChanged = onValueChanged
-        this.tooltip = new Tooltip(this.actor, `Volume: ${this.value} %`)
+    container.connect('scroll-event', (actor, event) => {
+        const scrollDirection = event.get_scroll_direction()
+        const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease'
+        deltaChange(direction)
+    })
 
-        this.volumeIcon = new St.Icon({ icon_name: this.volumeIconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+    icon.connect('button-press-event', () => {
+        slider.setValue(0)
+    })
 
-
-        this.removeActor(this._slider);
-        this.addActor(this.volumeIcon, { span: 0 })
-        this.addActor(this._slider, { span: -1, expand: true });
-        this.connect('value-changed', () => this.handleValueChanged())
-
+    /**
+     * 
+     * @param newValue between 0 and 1
+     */
+    function handleSliderValueChanged(newValue: number) {
+        updateVolume(newValue * 100, true)
     }
 
-    public handleValueChanged() {
-        this.onValueChanged(this.value)
-
-        // strictly speaking this is wrong as it is not listened to the volume interface (i.e. the mpvHandler) but who cares?
-        this.refreshSlider()
-        this.tooltip.show()
+    function deltaChange(direction: 'increase' | 'decrease') {
+        const delta = (direction === 'increase') ? VOLUME_DELTA : -VOLUME_DELTA
+        const newValue = slider.getValue() + delta / 100
+        slider.setValue(newValue)
     }
 
-    public get value() {
-        return Math.round(super.value * 100)
+    /**
+     * 
+     * @param newVolume in percent but doesn't need to be rounded
+     * @param showTooltip
+     */
+    function updateVolume(newVolume: number, showTooltip: boolean) {
+        const newVolumeRounded = Math.round(newVolume)
+
+        if (newVolumeRounded === volume) return
+
+        volume = newVolumeRounded
+
+        slider.setValue(volume / 100)
+        icon.set_icon_name(getVolumeIcon({ volume }))
+        setTooltip(volume)
+
+        showTooltip && tooltip.show()
+        onVolumeChanged?.(volume)
     }
 
-    public set value(newVolume: number) {
-        super.setValue(newVolume / 100)
-        this.refreshSlider()
+    /**
+     * 
+     * @param volume in Percent and rounded!
+     */
+    function setTooltip(volume: number) {
+
+        if (!tooltip)
+            tooltip = new Tooltip(slider.actor, ' ')
+
+        tooltip.set_text(`Volume: ${volume.toString()} %`)
     }
 
-    private refreshSlider() {
-        this.volumeIcon.icon_name = this.volumeIconName
-        this.tooltip.set_text(`Volume: ${this.value} %`)
+    /**
+     * 
+     * @param newVolume in percent (0-100)
+     */
+    function setVolume(newVolume: number) {
+        updateVolume(newVolume, false)
     }
 
-    private get volumeIconName() {
-        const index = this.volumeIcons.findIndex(({ max, ...rest }, index) =>
-            this.value <= max
-        )
-
-        return `audio-volume-${this.volumeIcons[index].iconSuffix}`
-    }
-
-    public destroy() {
-        super.destroy()
-        this.tooltip.hide()
+    return {
+        actor: container,
+        setVolume
     }
 }

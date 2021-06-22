@@ -1306,9 +1306,13 @@ declare namespace imports.gi.GLib {
     
     
     
-    class Variant {
-    
-    
+    class Variant<
+        UnpackType = any,
+        DeepUnpackType = UnpackType,
+        RecursiveUnpackType = UnpackType
+        > {
+
+        public constructor(type: string, value: UnpackType)
         public byteswap () : Variant;
         public check_format_string (format_string: string, copy_only: boolean) : boolean;
         public classify () : VariantClass;
@@ -1356,6 +1360,8 @@ declare namespace imports.gi.GLib {
         public lookup (key: string, format_string: string) : boolean;
         public lookup_value (key: string, expected_type: VariantType) : Variant;
         public n_children () : number;
+        public static new_string(str: string): Variant;
+        public static new_double(value: number): Variant;
         public print (type_annotate: boolean) : string;
         public print_string (string: String, type_annotate: boolean) : String;
         public ref () : Variant;
@@ -1363,6 +1369,10 @@ declare namespace imports.gi.GLib {
         public store (data: any) : void;
         public take_ref () : Variant;
         public unref () : void;
+        public unpack(): UnpackType;
+        public deep_unpack(): DeepUnpackType;
+        public deepUnpack(): DeepUnpackType;
+        public recursiveUnpack(): RecursiveUnpackType
     }
     
     

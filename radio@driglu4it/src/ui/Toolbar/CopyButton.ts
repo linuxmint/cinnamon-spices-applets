@@ -20,10 +20,12 @@ export function createCopyButton(args: Arguments) {
     })
 
     function handleClick() {
+        controlBtn.tooltip.show()
         onClick()
-        showCopyInTooltip()
+        // showCopyInTooltip()
     }
 
+    // For some reasons I don't understand, this function has stopped working after refactoring the popup Menu. No idea how to debug this. Therefore deactivating this for now :-(. It is thrown an  warning when clicking on the button but this has nothing to do with the tooltip
     function showCopyInTooltip() {
         const tooltip = controlBtn.tooltip
         tooltip.set_text("Copied")

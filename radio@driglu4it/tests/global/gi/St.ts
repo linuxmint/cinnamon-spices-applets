@@ -19,8 +19,6 @@ export enum Align {
     END
 }
 
-
-// TODO add this to declarations
 export interface WidgetOptions extends ActorOptions {
     accessible_name?: string,
     accessible_role?: Role,

@@ -1,5 +1,6 @@
 import * as Atk from './global/gi/Atk'
 import * as Cinnamon from './global/gi/Cinnamon'
+import * as Cvc from './global/gi/Cvc'
 import * as Clutter from './global/gi/Clutter'
 import * as Gio from './global/gi/Gio'
 import * as GLib from './global/gi/GLib'
@@ -42,6 +43,7 @@ global.logError = function (error: string) {
     gi: {
         Atk,
         Cinnamon,
+        Cvc,
         Clutter,
         Gio,
         GLib,
