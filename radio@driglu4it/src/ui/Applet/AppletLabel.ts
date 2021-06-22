@@ -1,5 +1,6 @@
 const { Label } = imports.gi.St
 const { EllipsizeMode } = imports.gi.Pango
+const { ActorAlign } = imports.gi.Clutter
 
 export function createAppletLabel() {
 
@@ -7,6 +8,9 @@ export function createAppletLabel() {
         reactive: true,
         track_hover: true,
         style_class: 'applet-label',
+        y_align: ActorAlign.CENTER,
+        y_expand: false,
+        visible: false
     })
 
     // No idea why needed but without the label is not shown 
@@ -36,7 +40,6 @@ export function createAppletLabel() {
 
         visible = newValue
 
-        // @ts-ignore
         if (text) label.visible = newValue
         if (visible && text) setText(text)
     }

@@ -1,53 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createChannelList = void 0;
-const { PopupSubMenuMenuItem } = imports.ui.popupMenu;
+const PopupSubMenu_1 = require("lib/PopupSubMenu");
 const ChannelMenuItem_1 = require("ui/ChannelList/ChannelMenuItem");
 function createChannelList(args) {
     const { stationNames, onChannelClicked } = args;
-    const container = new PopupSubMenuMenuItem('My Stations');
-    let currentChannel;
+    const subMenu = PopupSubMenu_1.createSubMenu({ text: 'My Stations' });
+    let currentChannelName;
     let playbackStatus = 'Stopped';
     const channelItems = new Map();
-    function open() {
-        container.menu.open(true);
-    }
-    function setStationNames(stationNames) {
+    function setStationNames(names) {
         channelItems.clear();
-        container.menu.removeAll();
-        stationNames.forEach(name => {
-            const channelPlaybackstatus = (name === currentChannel) ? playbackStatus : 'Stopped';
+        subMenu.box.remove_all_children();
+        names.forEach(name => {
+            const channelPlaybackstatus = (name === currentChannelName) ? playbackStatus : 'Stopped';
             const channelItem = ChannelMenuItem_1.createChannelMenuItem({
-                channelName: name
+                channelName: name,
+                onActivated: onChannelClicked,
+                playbackStatus: channelPlaybackstatus
             });
-            channelItem.setPlaybackStatus(channelPlaybackstatus);
             channelItems.set(name, channelItem);
-            channelItem.actor.connect('activate', () => onChannelClicked(name));
-            container.menu.addMenuItem(channelItem.actor);
+            subMenu.box.add_child(channelItem.actor);
         });
     }
-    function setPlaybackstatus(plStatus) {
-        playbackStatus = plStatus;
-        if (!currentChannel)
+    function setPlaybackStatus(newStatus) {
+        playbackStatus = newStatus;
+        if (!currentChannelName)
             return;
-        const channelMenuItem = channelItems.get(currentChannel);
-        channelMenuItem.setPlaybackStatus(plStatus);
-        if (plStatus === "Stopped") {
-            currentChannel = null;
-        }
+        const channelMenuItem = channelItems.get(currentChannelName);
+        channelMenuItem === null || channelMenuItem === void 0 ? void 0 : channelMenuItem.setPlaybackStatus(playbackStatus);
+        if (playbackStatus === 'Stopped')
+            currentChannelName = null;
     }
     function setCurrentChannel(name) {
-        var _a, _b;
-        (_a = channelItems.get(currentChannel)) === null || _a === void 0 ? void 0 : _a.setPlaybackStatus('Stopped');
-        (_b = channelItems.get(name)) === null || _b === void 0 ? void 0 : _b.setPlaybackStatus(playbackStatus);
-        currentChannel = name;
+        const currentChannelItem = channelItems.get(currentChannelName);
+        currentChannelItem === null || currentChannelItem === void 0 ? void 0 : currentChannelItem.setPlaybackStatus('Stopped');
+        if (name) {
+            const newChannelItem = channelItems.get(name);
+            if (!newChannelItem)
+                throw new Error(`No channelItem exist for ${name}`);
+            newChannelItem.setPlaybackStatus(playbackStatus);
+        }
+        currentChannelName = name;
     }
     setStationNames(stationNames);
     return {
-        actor: container,
-        open,
+        actor: subMenu.actor,
+        setPlaybackStatus,
         setStationNames,
-        setPlaybackstatus,
         setCurrentChannel
     };
 }

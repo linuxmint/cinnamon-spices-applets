@@ -67,7 +67,6 @@ export class Actor implements Container {
         this.#name = name
     }
 
-
     // not existing in GJS!
     _check_destroyed() {
         if (this.#destroyed) {
@@ -75,15 +74,44 @@ export class Actor implements Container {
         }
     }
 
+    _checkIfActor(actor: Actor) {
+        if (!(actor instanceof Actor)) {
+            throw new TypeError('argument must be of type Actor')
+        }
+    }
+
+
     add_actor(actor: Actor) {
-        this._check_destroyed()
+        this.add_child(actor)
         this.#children.push(actor)
+    }
+
+    add_child(child: Actor) {
+
+        this._checkIfActor(child)
+
+        this._check_destroyed()
+        this.#children.push(child)
+    }
+
+
+    insert_child_at_index(child: Actor, index: number) {
+        this._checkIfActor(child)
+        this._check_destroyed()
+
+        this.#children.splice(index, 0, child)
+
     }
 
     remove_actor(actor: Actor) {
         this._check_destroyed()
-        if (!actor) throw new Error('Expected an object of type ClutterActor for argument but got type undefined')
+        this._checkIfActor(actor)
+
         this.#children = this.#children.filter(act => act !== actor)
+    }
+
+    remove_child(actor: Actor) {
+        this.remove_actor(actor)
     }
 
     connect(signal: any, cb: any) {
@@ -114,6 +142,11 @@ export class Actor implements Container {
     get_child_at_index(index: number) {
         this._check_destroyed()
         return this.#children[index]
+    }
+
+    remove_all_children() {
+        this._check_destroyed()
+        this.#children = []
     }
 }
 

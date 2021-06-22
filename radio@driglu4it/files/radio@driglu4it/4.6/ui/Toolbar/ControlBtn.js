@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createControlBtn = void 0;
+const ActivWidget_1 = require("lib/ActivWidget");
 const { Button, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 function createControlBtn(args) {
@@ -17,13 +18,10 @@ function createControlBtn(args) {
         style: "width:20px; padding:10px!important",
         child: icon
     });
-    btn.connect("enter-event", () => {
-        btn.add_style_pseudo_class('active');
+    ActivWidget_1.createActivWidget({
+        widget: btn,
+        onActivated: onClick
     });
-    btn.connect("leave-event", () => {
-        btn.remove_style_pseudo_class('active');
-    });
-    btn.connect("clicked", onClick);
     const tooltip = new Tooltip(btn, tooltipTxt);
     return {
         actor: btn,
