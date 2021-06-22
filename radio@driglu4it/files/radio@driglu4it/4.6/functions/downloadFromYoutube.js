@@ -1,32 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadSongFromYoutube = void 0;
-const promiseHelpers_1 = require("functions/promiseHelpers");
-const notify_1 = require("functions/notify");
+const { spawnCommandLineAsyncIO } = imports.misc.util;
 const { get_home_dir } = imports.gi.GLib;
-async function downloadSongFromYoutube(song, downloadDir) {
-    if (!song)
-        return;
+function downloadSongFromYoutube(args) {
+    const { title, downloadDir, onDownloadFinished, onDownloadFailed } = args;
+    let hasBeenCancelled = false;
     const music_dir_absolut = downloadDir.replace('~', get_home_dir()).replace('file://', '');
     const downloadCommand = `
-        youtube-dl -o "${music_dir_absolut}/%(title)s.%(ext)s"          --extract-audio --audio-format mp3 ytsearch1:"${song.replace('"', '\"')}" --add-metadata --embed-thumbnail`;
-    try {
-        notify_1.notifySend(`Downloading ${song} ...`);
-        const [error, stdout] = await promiseHelpers_1.spawnCommandLinePromise(downloadCommand);
-        if (error)
-            throw new Error(error);
-        const arrayOfLines = stdout.match(/[^\r\n]+/g);
-        const searchString = '[ffmpeg] Destination: ';
-        const filePath = (arrayOfLines.find(line => line.includes(searchString))
-            .split(searchString))[1];
-        if (!filePath)
-            throw new Error("couldn't download song");
-        notify_1.notifySend(`download finished. File saved to ${filePath}`);
+        youtube-dl --output "${music_dir_absolut}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replace('"', '\"')}" --add-metadata --embed-thumbnail`;
+    const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
+        try {
+            if (hasBeenCancelled) {
+                hasBeenCancelled = false;
+                return;
+            }
+            if (stderr)
+                throw new Error(stderr);
+            if (stdout) {
+                const downloadPath = getDownloadPath(stdout);
+                if (!downloadPath)
+                    throw new Error('File not saved');
+                onDownloadFinished(downloadPath);
+            }
+        }
+        catch (error) {
+            global.logError(`The following error occured at youtube download attempt: ${error}. The used download Command was: ${downloadCommand}`);
+            onDownloadFailed();
+        }
+    });
+    function cancel() {
+        hasBeenCancelled = true;
+        process.force_exit();
     }
-    catch (error) {
-        const notifyMsg = ("Couldn't download song from Youtube due to an Error. Make Sure you have the newest version installed. Visit the Radio Applet Site in the Cinnamon Store for installation instruction");
-        notify_1.notifySend(notifyMsg);
-        global.logError(`${notifyMsg} The following error occured: ${error}. The used download Command was: ${downloadCommand}`);
-    }
+    return { cancel };
 }
 exports.downloadSongFromYoutube = downloadSongFromYoutube;
+function getDownloadPath(stdout) {
+    const arrayOfLines = stdout.match(/[^\r\n]+/g);
+    const searchString = '[ffmpeg] Destination: ';
+    return arrayOfLines.find(line => line.includes(searchString))
+        .split(searchString)[1];
+}

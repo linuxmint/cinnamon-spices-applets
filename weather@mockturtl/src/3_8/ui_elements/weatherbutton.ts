@@ -9,11 +9,12 @@ export class WeatherButton {
 	private disabled = false;
 
 	public ID: any;
+	public url: string;
 
 	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
 	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
 
-	constructor(options: imports.gi.St.ButtonOptions, doNotAddPadding: boolean = false) {
+	constructor(options: Partial<imports.gi.St.ButtonOptions>, doNotAddPadding: boolean = false) {
 		this.actor = new Button(options);
 		this.actor.add_style_class_name("popup-menu-item");
 
@@ -25,7 +26,7 @@ export class WeatherButton {
 		this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
 		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
 		this.actor.connect("clicked", () => this.clicked());
-		this.actor.connect("enter-event", (ev) => this.hovered(ev));
+		this.actor.connect("enter-event", (actor, event) => this.hovered(event));
 	}
 
 	handleEnter(actor?: WeatherButton) {

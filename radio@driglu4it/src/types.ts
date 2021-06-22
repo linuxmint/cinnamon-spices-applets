@@ -1,5 +1,6 @@
 export type PlayPause = "Playing" | "Paused"
 export type PlaybackStatus = PlayPause | "Stopped"
+export type AdvancedPlaybackStatus = PlaybackStatus | 'Loading'
 
 export interface Channel {
     name: string,
@@ -9,32 +10,16 @@ export interface Channel {
 
 export type IconType = 'SYMBOLIC' | 'FULLCOLOR' | 'BICOLOR'
 
-// not complety - only based on own experience 
-type dbusEvents = "NameOwnerChanged"
-
-export interface Dbus {
-    connectSignal: {
-        (
-            event: dbusEvents,
-            callback: { (proxy: any, sender: any, info: [string, string, string]): void }): void
-    },
-    ListNamesRemote: {
-        (
-            cb: { (name: string[][]): void }
-        ): void
-    }
-}
-
 interface MetaValue {
     unpack: { (): string }
 }
 
 // these are the values which playerctl returns (not mandatory complete)
 export interface Metadata {
-    ["xesam:title"]: MetaValue,
-    ["mpris:trackid"]: MetaValue,
-    ["xesam:url"]: MetaValue,
-    ["mpris:length"]: MetaValue
+    ["xesam:title"]: string,
+    ["mpris:trackid"]: string,
+    ["xesam:url"]: string,
+    ["mpris:length"]: number
 }
 
 export interface MediaProps<
@@ -51,7 +36,8 @@ export interface MediaProps<
 }
 
 interface MediaPropChange<T> {
-    deep_unpack: { (): T }
+    deep_unpack: { (): T },
+    recursiveUnpack: { (): Metadata }
 }
 
 export type MediaPropChanges = MediaProps<
@@ -62,6 +48,7 @@ export type MediaPropChanges = MediaProps<
 
 export interface MprisMediaPlayer extends MediaProps {
     PlayRemote: { (): void }
+    PauseRemote: { (): void }
     OpenUriRemote: { (uri: string): void }
     StopRemote: { (): void }
     PlayPauseRemote: { (): void }

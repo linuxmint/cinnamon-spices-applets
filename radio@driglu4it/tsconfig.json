@@ -11,11 +11,11 @@
 		"preserveConstEnums": false,
 		"sourceMap": false,
 		"noImplicitThis": true,
-		"skipLibCheck": true, //see: https://stackoverflow.com/a/63241999/11603006
-		"outDir": "./files/radio@driglu4it/4.6/"
+		"outDir": "./files/radio@driglu4it/4.6/",
+		"types": [] // ignore types from node_modules https://stackoverflow.com/a/54277766/11603006
 	},
 	"include": [
 		"./src/**/*",
-		"../weather@mockturtl/src/declarations/**/*",
+		"../.typescript-declarations/**/*",
 	],
 }

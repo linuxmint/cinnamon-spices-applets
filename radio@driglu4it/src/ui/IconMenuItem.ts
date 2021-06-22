@@ -1,96 +1,106 @@
+import { limitString } from "functions/limitString"
+
 const { Label, Icon, IconType } = imports.gi.St
 const { PopupBaseMenuItem } = imports.ui.popupMenu
 
-export class IconMenuItem extends PopupBaseMenuItem {
+interface Arguments {
+    text: string,
+    maxCharNumber: number,
+    iconName?: string,
+    params?: imports.ui.popupMenu.PopupBaseMenuItemParams,
+}
 
-    public label: imports.gi.St.Label
-    private icon: imports.gi.St.Icon
+export function createIconMenuItem(args: Arguments) {
 
-    /**
-     * a Menu Item with a left aligned Icon (optional) and a Label. 
-     * 
-     * The Icons and Labels can be easily changed dynamically or removed (currently
-     * only the icon can be removed but it is easily possible to extend for the label as well)
-     * 
-     * TODO: hide the parent properties somehow (without violating the Liskow Substitution Principle ...). classes Implementing the iconMenuItem shouldn't see "label" in the intelsense ... 
-     * 
-     * @param text the text shown on the menu item
-     * @param params the parameter from the base class
-     * @param iconName (optional) the name of the icon shown on the menu item
-     */
-    constructor(
-        text: string,
-        iconName?: string,
-        params?: imports.ui.popupMenu.PopupBaseMenuItemParams,
-    ) {
-        super(params)
+    const {
+        text,
+        maxCharNumber,
+        iconName: initialIconName,
+        params // not changeable at the moment
+    } = args
 
-        this.iconName = iconName
-        this.text = text
-    }
+    const baseMenuItem = new PopupBaseMenuItem(params)
+
+    let icon: imports.gi.St.Icon
+    let label: imports.gi.St.Label
 
     /**
      * @param newName: the iconName. If null no Icon is shown
      */
-    public set iconName(newName: string | null) {
-        if (this.icon && !newName) {
-            this.removeActor(this.icon);
-            this.icon.destroy()
-            this.icon = null
-        }
+    function setIconName(name: string | null) {
 
-        if (this.icon && newName) this.icon.icon_name = newName
-
-        if (!this.icon && newName) {
-            this.icon = new Icon({
-                icon_type: IconType.SYMBOLIC,
-                icon_name: newName,
-                style_class: 'popup-menu-icon' // this ensure the icon has a good height
-            })
-            this.addActor(this.icon, { span: 0 }, 0)
-        }
-    };
-
-
-    public set text(newText: string) {
-
-        if (!newText) return
-
-        if (!this.label) {
-            this.label = new Label({ text: newText })
-            this.addActor(this.label)
+        if (icon && !name) {
+            baseMenuItem.removeActor(icon)
+            icon = null
             return
         }
-        this.label.text = newText
+
+        if (!name) return
+
+        if (icon && name) {
+            icon.icon_name = name
+            return
+        }
+
+        icon = new Icon({
+            icon_type: IconType.SYMBOLIC,
+            icon_name: name,
+            style_class: 'popup-menu-icon' // this ensure the icon has a good height
+        })
+
+        _addActor(icon, { span: 0 }, 0)
     }
 
+    function setText(text: string) {
+        // this happens for example when passing text:''. In that case the text is undefined leading to the applet not starting. For some reason typescript doesn't complain in that case
+        if (!text) text = ' '
+
+        const limitedTextString = limitString(text, maxCharNumber)
+
+        if (!label) {
+            label = new Label({ text: limitedTextString })
+            _addActor(label)
+            return
+        }
+        label.text = limitedTextString
+    }
 
     /**
      * 
+     * allows to specify an actor add a position. If no position given, the actor is added to the end (and if position is greater than the children of the popupMenuItem, is also added to the end)
+     * 
      * @param actor 
      * @param params 
-     * @param position position to add the actor beginning with 0   
-     * @returns 
+     * @param position 
      */
-    public addActor(
+    function _addActor(
         actor: imports.gi.Clutter.Actor,
         params?: Partial<imports.ui.popupMenu.AddActorParams>,
         position?: number
     ) {
-        // @ts-ignore
-        const children = this._children
+        const children = baseMenuItem["_children"]
 
-        if (position > children.length || children.length === 0 || position == null) {
-            super.addActor(actor, params)
+        if (position == null) position = children.length + 1
+
+        if (position >= children.length) {
+            baseMenuItem.addActor(actor, params)
             return
         }
-        // @ts-ignore
+
         children.forEach((child, index) => {
             const { actor: childActor, ...childParams } = child
-            this.removeActor(childActor)
-            if (index === position) super.addActor(actor, params)
-            super.addActor(childActor, childParams)
+            baseMenuItem.removeActor(childActor)
+            if (index === position) baseMenuItem.addActor(actor, params)
+            baseMenuItem.addActor(childActor, childParams)
         })
     }
 
+    setIconName(initialIconName)
+    setText(text)
+
+    return {
+        actor: baseMenuItem,
+        setIconName,
+        setText
+    }
 }

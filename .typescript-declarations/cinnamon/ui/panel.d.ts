@@ -1,14 +1,13 @@
+
+/**
+ * @short_description The file responsible for managing panels
+ *
+ * This file is where everything about panels happens. #Main will create a
+ * #PanelManager object, which is responsible for creating and moving panels.
+ * There is also a %checkPanelUpgrade function used as a transition between the
+ * old panel settings and the new panel settings.
+ */
 declare namespace imports.ui.panel {
-
-	/**
-	 * @short_description: The file responsible for managing panels
-	 *
-	 * This file is where everything about panels happens. #Main will create a
-	 * #PanelManager object, which is responsible for creating and moving panels.
-	 * There is also a %checkPanelUpgrade function used as a transition between the
-	 * old panel settings and the new panel settings.
-	 */
-
 
 	export enum Direction {
 		LEFT = 0,
@@ -650,5 +649,8 @@ declare namespace imports.ui.panel {
 		public getIsVisible(): boolean;
 
 		public resetDNDZones(): void;
+
+		public connect(event: 'size-changed', cb: (actor: this, height: number) => void): number
+		public connect(event: 'icon-size-changed', cb: (actor: this) => void): number
 	}
 }

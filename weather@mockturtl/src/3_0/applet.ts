@@ -57,8 +57,8 @@ var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hour
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
-const clearTimeout = utils.clearTimeout as (id: any) => void;
+//var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
+//const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
@@ -69,7 +69,7 @@ var _ = utils._ as (str: string) => string;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
-    var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => any;
+    //var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => any;
     var setTimeoutFunc = promisePoly.setTimeoutFunc;
     var isArray = promisePoly.isArray;
     var noop = promisePoly.noop;

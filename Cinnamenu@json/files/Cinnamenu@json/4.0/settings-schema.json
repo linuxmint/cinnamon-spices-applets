@@ -4,6 +4,7 @@
         "pages":[
             "layout",
             "behaviour",
+            "search",
             "appearance"
         ],
         "layout":{
@@ -20,6 +21,13 @@
             "sections":[
                 "panel-behave",
                 "menu-behave"
+            ]
+        },
+        "search":{
+            "type":"page",
+            "title":"Search",
+            "sections":[
+                "search-search"
             ]
         },
         "appearance":{
@@ -46,7 +54,7 @@
             "title":"Content",
             "keys":[
                 "show-places-category",
-                "show-web-bookmarks-category",
+                "show-recents-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
                 "menu-editor-button"
@@ -69,10 +77,18 @@
                 "category-click",
                 "open-on-category",
                 "enable-autoscroll",
+                "show-hidden-files"
+            ]
+        },
+        "search-search":{
+            "type":"section",
+            "title":"Search",
+            "keys":[
                 "enable-emoji-search",
                 "web-search-option",
-                "search-home-folder",
-                "show-hidden-files"
+                "enable-home-folder-search",
+                "enable-web-bookmarks-search",
+                "enable-wikipedia-search"
             ]
         },
         "panel-appear":{
@@ -141,14 +157,14 @@
     "sidebar-placement":{
         "type":"combobox",
         "default":1,
-        "description":"Session buttons location",
+        "description":"Sidebar location",
         "options":{
             "Top":0,
             "Bottom":1,
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
+        "tooltip":"Choose where to show the sidebar"
     },
     "info-box":{
         "type":"label",
@@ -157,8 +173,8 @@
     "add-favorites":{
         "type":"switch",
         "default":true,
-        "description":"Add favorites to session buttons",
-        "tooltip":"Show your favorite app icons next to the session buttons"
+        "description":"Show favorites on sidebar",
+        "tooltip":"Show your favorite app and file icons on the sidebar"
     },
     "show-places-category":{
         "type":"switch",
@@ -166,11 +182,11 @@
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
-    "show-web-bookmarks-category":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Show web bookmarks",
-        "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+    "show-recents-category":{
+        "type":"switch",
+        "default":true,
+        "description":"Show recent items",
+        "tooltip":"Show recent items category in the menu"
     },
     "show-favorite-apps-category":{
         "type":"switch",
@@ -244,36 +260,55 @@
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
     },
-    "enable-emoji-search":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
-    },
-    "web-search-option":{
-        "type":"combobox",
-        "default":0,
-        "description":"Web search option",
-        "options":{
-            "Google":0,
-            "Bing":1,
-            "Yahoo":2,
-            "DuckDuckGo":3,
-            "None":4
-        },
-        "tooltip":"Show an internet search option in search results"
-    },
-    "search-home-folder":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Search home folder",
-        "tooltip":"When searching, also search home folder for files"
-    },
     "show-hidden-files":{
         "type":"checkbox",
         "default":false,
         "description":"Show hidden files",
         "tooltip":"Show hidden files in folder view"
+    },
+
+    "enable-emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Emoji search",
+        "tooltip":"Show emojis in search results"
+    },
+    "web-search-option":{
+        "type":"combobox",
+        "default":1,
+        "description":"Web search option",
+        "options":{
+            "None":0,
+            "Google":1,
+            "Bing":2,
+            "Baidu":3,
+            "Yahoo":4,
+            "Yandex":5,
+            "DuckDuckGo":6,
+            "Ask":7,
+            "Ecosia":8,
+            "AOL":9,
+            "Startpage":10
+        },
+        "tooltip":"Show an internet search option in search results"
+    },
+    "enable-home-folder-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Search home folder",
+        "tooltip":"When searching, also search my home folder for files"
+    },
+    "enable-web-bookmarks-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web bookmarks search",
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+    },
+    "enable-wikipedia-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Wikipedia search",
+        "tooltip":"Show some Wikipedia results"
     },
 
     "menu-icon-custom":{
@@ -350,14 +385,14 @@
         "max":64,
         "step":1,
         "units":"pixels",
-        "description":"Session buttons icon size",
-        "tooltip":"Session buttons icon size"
+        "description":"Sidebar icon size",
+        "tooltip":"Sidebar icon size"
     },
     "use-box-style":{
         "type":"checkbox",
         "default":false,
-        "description":"Use session buttons box style",
-        "tooltip":"Use session buttons box style"
+        "description":"Use sidebar box style",
+        "tooltip":"Use a sidebar box style"
     },
     "use-tile-style":{
         "type":"checkbox",

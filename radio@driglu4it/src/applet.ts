@@ -1,26 +1,36 @@
 import { createConfig } from "Config";
 import { ChannelStore } from "ChannelStore";
-import { createChannelList } from "ui/ChannelList";
-import { Channel, PlaybackStatus } from "types";
-import { createRadioApplet } from "ui/RadioApplet";
-import { createMpvHandler, MpvHandler } from "mpv/MpvHandler";
+import { createChannelList } from "ui/ChannelList/ChannelList";
+import { AdvancedPlaybackStatus, Channel, IconType, PlaybackStatus } from "types";
+import { createMpvHandler } from "mpv/MpvHandler";
 import { VolumeSlider } from "ui/VolumeSlider";
 import { createRadioPopupMenu } from "ui/RadioPopupMenu";
-import { createMediaControlToolbar } from "ui/MediaControlToolbar";
-import { createPlayPauseButton, PlayPauseButton } from "ui/PlayPauseButton";
-import { createStopBtn } from "ui/StopButton";
-import { createSongInfoItem, SongInfoItem } from "ui/SongInfoItem";
-import { ChannelInfoItem, createChannelInfoItem } from "ui/ChannelInfoItem";
-import { createDownloadButton } from "ui/DownloadButton";
-import { createCopyButton } from "ui/CopyButton";
+import { createMediaControlToolbar } from "ui/Toolbar/MediaControlToolbar";
+import { createPlayPauseButton } from "ui/Toolbar/PlayPauseButton";
+import { createStopBtn } from "ui/Toolbar/StopButton";
+import { createSongInfoItem } from "ui/InfoSection/SongInfoItem";
+import { createChannelInfoItem } from "ui/InfoSection/ChannelInfoItem";
+import { createDownloadButton } from "ui/Toolbar/DownloadButton";
+import { createCopyButton } from "ui/Toolbar/CopyButton";
 import { downloadSongFromYoutube } from "functions/downloadFromYoutube";
-import { notifySend } from "functions/notify";
-import { checkInstallMpv, checkInstallMrisPlugin } from "mpv/CheckInstallation";
+import { installMpvWithMpris } from "mpv/CheckInstallation";
 import { copyText } from "functions/copyText";
+import { createApplet } from "ui/Applet/Applet";
+import { createAppletIcon } from "ui/Applet/AppletIcon";
+import { createAppletLabel } from "ui/Applet/AppletLabel";
+import { createAppletTooltip } from "ui/Applet/AppletTooltip";
+import { notifyYoutubeDownloadFinished } from "ui/Notifications/YoutubeDownloadFinishedNotification";
+import { notifyYoutubeDownloadStarted } from "ui/Notifications/YoutubeDownloadStartedNotification";
+import { notifyYoutubeDownloadFailed } from "ui/Notifications/YoutubeDownloadFailedNotification";
+import { notify } from "ui/Notifications/GenericNotification";
 
 const { ScrollDirection } = imports.gi.Clutter;
 
-let mpvHandler: MpvHandler
+const { getAppletDefinition } = imports.ui.appletManager;
+
+const { panelManager } = imports.ui.main;
+
+const { IconType } = imports.gi.St
 
 
 /** 
@@ -33,35 +43,58 @@ function main(
 	orientation: imports.gi.St.Side,
 	panelHeight: number,
 	instanceId: number
-) {
+): imports.ui.applet.Applet {
+
+	const appletDefinition = getAppletDefinition({
+		applet_id: instanceId
+	})
+
+	const panel = panelManager.panels.find(panel =>
+		panel?.panelId === appletDefinition.panelId
+	)
+
+	panel.connect('icon-size-changed', () => appletIcon.updateIconSize())
+
+	const appletIcon = createAppletIcon({
+		locationLabel: appletDefinition.location_label,
+		panel
+	})
+
+	const appletLabel = createAppletLabel()
+
+
+	const applet = createApplet({
+		icon: appletIcon.actor,
+		label: appletLabel.actor,
+		instanceId,
+		orientation,
+		panelHeight,
+		onClick: handleAppletClicked,
+		onScroll: handleScroll,
+		onMiddleClick: () => mpvHandler.togglePlayPause(),
+		onAppletRemovedFromPanel: () => mpvHandler.stop()
+	})
+
+	const appletTooltip = createAppletTooltip({
+		applet,
+		orientation
+	})
 
 	const configs = createConfig({
 		uuid: __meta.uuid,
 		instanceId,
 
-		onIconChanged: (iconType) => {
-			radioApplet.updateState({ iconType })
+		onIconChanged: handleIconTypeChanged,
+		onIconColorPlayingChanged: (color) => {
+			appletIcon.setColorWhenPlaying(color)
 		},
-		onIconColorChanged: (color) => {
-			radioApplet.updateState({ colorWhenPlaying: color })
+		onIconColorPausedChanged: (color) => {
+			appletIcon.setColorWhenPaused(color)
 		},
 		onChannelOnPanelChanged: (channelOnPanel) => {
-			radioApplet.updateState({ channelOnPanel })
+			appletLabel.setVisibility(channelOnPanel)
 		},
 		onMyStationsChanged: handleStationsUpdated,
-	})
-
-	const radioApplet = createRadioApplet({
-		iconType: configs.iconType,
-		colorWhenPlaying: configs.symbolicIconColorWhenPlaying,
-		channelOnPanel: configs.channelNameOnPanel,
-		orientation,
-		panelHeight,
-		instanceId,
-		onAppletClick: handleAppletClicked,
-		onScroll: handleScroll,
-		onAppletMiddleClick: () => mpvHandler.togglePlayPause(),
-		onAppletRemovedFromPanel: () => mpvHandler.stop()
 	})
 
 	const channelStore = new ChannelStore(configs.userStations)
@@ -72,54 +105,55 @@ function main(
 	})
 
 	const volumeSlider = new VolumeSlider({
-		onValueChanged: (volume: number) => mpvHandler.volume = volume
+		onValueChanged: (volume: number) => mpvHandler.setVolume(volume)
 	})
 
+	// infoSection
+	const songInfoItem = createSongInfoItem()
+	const channelInfoItem = createChannelInfoItem()
+
 	// toolbar
-	const songInfoItem = createSongInfoItem() as SongInfoItem
-
-	const channelInfoItem = createChannelInfoItem() as ChannelInfoItem
-
 	const playPauseBtn = createPlayPauseButton({
 		onClick: () => mpvHandler.togglePlayPause()
-	}) as PlayPauseButton
+	})
 
 	const stopBtn = createStopBtn({
 		onClick: () => mpvHandler.stop()
 	})
 
 	const downloadBtn = createDownloadButton({
-		onClick: () => downloadSongFromYoutube(mpvHandler.currentTitle, configs.musicDownloadDir)
+		onClick: handleDownloadBtnClicked
 	})
 
 	const copyBtn = createCopyButton({
-		onClick: () => copyText(mpvHandler.currentTitle)
+		onClick: () => copyText(mpvHandler.getCurrentTitle())
 	})
 
 	const mediaControlToolbar = createMediaControlToolbar({
-		controlBtns: [playPauseBtn, downloadBtn, copyBtn, stopBtn]
+		controlBtns: [playPauseBtn.actor, downloadBtn.actor, copyBtn.actor, stopBtn.actor]
 	})
 
 	const popupMenu = createRadioPopupMenu({
-		radioApplet,
+		radioApplet: applet,
 		orientation,
-		channelList,
+		channelList: channelList.actor,
 		volumeSlider,
-		songInfoItem,
-		channelInfoItem,
+		songInfoItem: songInfoItem.actor,
+		channelInfoItem: channelInfoItem.actor,
 		mediaControlToolbar
 	})
 
 	async function handleAppletClicked() {
 
 		try {
-			// TODO combine both functions two one
-			await checkInstallMrisPlugin()
-			await checkInstallMpv()
+			await installMpvWithMpris()
 			popupMenu.toggle()
 			channelList.open()
 		} catch (error) {
-			notifySend("couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.")
+
+			const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."
+
+			notify({ text: notificationText })
 		}
 	}
 
@@ -133,80 +167,33 @@ function main(
 		playbackStatus: PlaybackStatus,
 		volume: number
 	) {
-		// it is assumed that when the
-		const url = configs.lastUrl
 
-		if (playbackStatus === 'Stopped' || !url) {
+		if (playbackStatus === 'Stopped') {
 			return
 		}
-		popupMenu.running = true
-		const channelName = channelStore.getChannelName(url)
+		popupMenu.radioActive = true
 
-		playPauseBtn.playPause = playbackStatus
-
-		volumeSlider.value = volume
-
-		radioApplet.updateState({ playbackStatus, channelName, volume })
-		channelList.updateState({ channelName, playbackStatus })
-		channelInfoItem.channel = channelName
-
-		return url // returning url to ensure that not also onStarted is called
-	}
-
-	function handleRadioStarted(volume: number, url: string,) {
-
-		popupMenu.running = true
-
-		const channelName = channelStore.getChannelName(url)
-		const playbackStatus: PlaybackStatus = "Playing"
-
-		volumeSlider.value = volume
-		configs.lastUrl = url
-		radioApplet.updateState({ channelName, playbackStatus, volume })
-		channelList.updateState({ channelName, playbackStatus })
-		channelInfoItem.channel = channelName
+		handlePlaybackstatusChanged(playbackStatus)
+		handleVolumeChanged(volume)
+		handleUrlChanged(configs.lastUrl)
 	}
 
 	function handleChannelClicked(name: string) {
-		mpvHandler.channelUrl = channelStore.getChannelUrl(name)
-	}
-
-	function handleRadioPaused() {
-		playPauseBtn.playPause = "Paused"
-		radioApplet.updateState({ playbackStatus: "Paused" })
-		channelList.updateState({ playbackStatus: "Paused" })
-	}
-
-	function handleRadioResumed() {
-		playPauseBtn.playPause = "Playing"
-		radioApplet.updateState({ playbackStatus: "Playing" })
-		channelList.updateState({ playbackStatus: "Playing" })
-	}
-
-	function handleChannelChanged(url: string) {
-		const channelName = channelStore.getChannelName(url)
-		configs.lastUrl = url
-		radioApplet.updateState({ channelName })
-		channelList.updateState({ channelName })
-		channelInfoItem.channel = channelName
-	}
-
-	async function handleRadioStopped(volume: number) {
-		radioApplet.updateState({ playbackStatus: "Stopped" });
-		channelList.updateState({ playbackStatus: "Stopped" });
-
-		popupMenu.running = false
-
-		configs.lastVolume = volume
+		const channelUrl = channelStore.getChannelUrl(name)
+		mpvHandler.setChannelUrl(channelUrl)
 	}
 
 	function handleTitleChanged(title: string) {
-		songInfoItem.title = title
+		songInfoItem.setSongTitle(title)
 	}
 
-	function handleVolumeChanged(volume: number) {
+	function handleVolumeChanged(volume: number | null) {
 		volumeSlider.value = volume
-		radioApplet.updateState({ volume })
+		appletTooltip.setVolume(volume)
+	}
+
+	function handleIconTypeChanged(iconType: IconType) {
+		appletIcon.setIconType(iconType)
 	}
 
 	function handleStationsUpdated(stations: Channel[]) {
@@ -214,32 +201,73 @@ function main(
 		const stationsChanged = channelStore.checkListChanged(stations)
 
 		if (!stationsChanged) return
+
 		channelStore.channelList = stations
-		channelList.updateState(
-			{ stationNames: channelStore.activatedChannelNames }
-		)
+		channelList.setStationNames(channelStore.activatedChannelNames)
 
 		const lastUrlValid = channelStore.checkUrlValid(configs.lastUrl)
 		if (!lastUrlValid) mpvHandler.stop()
-
 	}
 
-	async function initMpvHandler() {
-		mpvHandler = await createMpvHandler({
-			getInitialVolume: () => { return configs.initialVolume },
-			onChannelChanged: handleChannelChanged,
-			onInitialized: handleRadioInitialized,
-			onStarted: handleRadioStarted,
-			onStopped: handleRadioStopped,
-			onVolumeChanged: handleVolumeChanged,
-			ckeckUrlValid: (url) => channelStore.checkUrlValid(url),
-			onPaused: handleRadioPaused,
-			onResumed: handleRadioResumed,
-			onTitleChanged: handleTitleChanged,
+	function handlePlaybackstatusChanged(playbackstatus: AdvancedPlaybackStatus, lastVolume?: number) {
+
+		// TODO: this should be done by mpvHandler
+		if (playbackstatus === 'Stopped') handleVolumeChanged(null)
+		if (playbackstatus === 'Stopped') handleUrlChanged(null)
+
+		channelList.setPlaybackstatus(playbackstatus)
+
+		appletIcon.setPlaybackStatus(playbackstatus)
+
+		popupMenu.radioActive = (playbackstatus !== 'Stopped')
+
+		if (playbackstatus === 'Playing' || playbackstatus === 'Paused') {
+			playPauseBtn.setPlaybackStatus(playbackstatus)
+		}
+
+		if (lastVolume != null) configs.lastVolume = lastVolume
+	}
+
+	function handleUrlChanged(url: string) {
+
+		const channelName = url ? channelStore.getChannelName(url) : null
+
+		appletLabel.setText(channelName)
+
+		channelList.setCurrentChannel(channelName)
+		channelInfoItem.setChannel(channelName)
+		configs.lastUrl = url
+	}
+
+	function handleDownloadBtnClicked() {
+
+		const title = mpvHandler.getCurrentTitle()
+
+		const downloadProcess = downloadSongFromYoutube({
+			downloadDir: configs.musicDownloadDir,
+			title,
+			onDownloadFinished: (path) => notifyYoutubeDownloadFinished({
+				downloadPath: path
+			}),
+			onDownloadFailed: notifyYoutubeDownloadFailed
+		})
+
+		notifyYoutubeDownloadStarted({
+			title,
+			onCancelClicked: () => downloadProcess.cancel()
 		})
 	}
 
-	initMpvHandler()
+	const mpvHandler = createMpvHandler({
+		getInitialVolume: () => { return configs.initialVolume },
+		onInitialized: handleRadioInitialized,
+		onVolumeChanged: handleVolumeChanged,
+		checkUrlValid: (url) => channelStore.checkUrlValid(url),
+		onTitleChanged: handleTitleChanged,
+		onPlaybackstatusChanged: handlePlaybackstatusChanged,
+		initialUrl: configs.lastUrl,
+		onUrlChanged: handleUrlChanged
+	})
 
-	return radioApplet
+	return applet
 }

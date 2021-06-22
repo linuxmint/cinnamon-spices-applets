@@ -12422,12 +12422,12 @@ declare namespace imports.gi.Gtk {
     
     
     enum DirectionType {
-        tab_forward = 0,
-        tab_backward = 1,
-        up = 2,
-        down = 3,
-        left = 4,
-        right = 5
+        TAB_FORWARD = 0,
+        TAB_BACKWARD = 1,
+        UP = 2,
+        DOWN = 3,
+        LEFT = 4,
+        RIGHT = 5
     }
     
     

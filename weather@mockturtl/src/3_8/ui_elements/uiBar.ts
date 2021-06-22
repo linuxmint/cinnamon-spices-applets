@@ -20,9 +20,9 @@ export class UIBar {
 
 	public ToggleClicked: Event<UIBar, boolean> = new Event();
 
-	private _providerCredit: imports.gi.St.Button;
-	private _hourlyButton: imports.gi.St.Button;
-	private _timestamp: imports.gi.St.Label;
+	private providerCreditButton: WeatherButton = null;
+	private hourlyButton: WeatherButton = null;
+	private _timestamp: imports.gi.St.Label = null;
 
 	private app: WeatherApplet;
 
@@ -32,11 +32,11 @@ export class UIBar {
 	}
 
 	public SwitchButtonToShow() {
-		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
 	}
 
 	public SwitchButtonToHide() {
-		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
 	}
 
 	public DisplayErrorMessage(msg: string) {
@@ -44,8 +44,8 @@ export class UIBar {
 	}
 
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
-		this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
-		this._providerCredit.url = provider.website;
+		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
+		this.providerCreditButton.url = provider.website;
 		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours);
 		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
@@ -77,7 +77,7 @@ export class UIBar {
 			expand: true
 		})
 
-		this._hourlyButton = new WeatherButton({
+		this.hourlyButton = new WeatherButton({
 			reactive: true,
 			can_focus: true,
 			child: new Icon({
@@ -87,9 +87,9 @@ export class UIBar {
 				icon_name: "custom-down-arrow-symbolic" as CustomIcons,
 				style: "margin: 2px 5px;"
 			}),
-		}).actor;
-		this._hourlyButton.connect(SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
-		this.actor.add(this._hourlyButton, {
+		});
+		this.hourlyButton.actor.connect(SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
+		this.actor.add(this.hourlyButton.actor, {
 			x_fill: false,
 			x_align: Align.MIDDLE,
 			y_align: Align.MIDDLE,
@@ -102,10 +102,10 @@ export class UIBar {
 			this.HideHourlyToggle();
 		}
 
-		this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
-		this._providerCredit.connect(SIGNAL_CLICKED, OpenUrl);
+		this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
+		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
 
-		this.actor.add(this._providerCredit, {
+		this.actor.add(this.providerCreditButton.actor, {
 			x_fill: false,
 			x_align: Align.END,
 			y_align: Align.MIDDLE,
@@ -125,7 +125,8 @@ export class UIBar {
 	}
 
 	private HideHourlyToggle() {
-		this._hourlyButton.child = null;
+		if (this.hourlyButton != null)
+			this.hourlyButton.actor.child = null;
 	}
 
 }

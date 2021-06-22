@@ -258,8 +258,12 @@ export class MetUk implements WeatherProvider {
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
 				let element = json.SiteRep.DV.Location.Period[i];
+				if (!Array.isArray(element.Rep))
+					continue;
+
 				let day = element.Rep[0] as ForecastPayload;
 				let night = element.Rep[1] as ForecastPayload;
+
 				let forecast: ForecastData = {
 					date: new Date(self.PartialToISOString(element.value)),
 					temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
@@ -283,6 +287,9 @@ export class MetUk implements WeatherProvider {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
 				let day = json.SiteRep.DV.Location.Period[i];
 				let date = new Date(self.PartialToISOString(day.value));
+				if (!Array.isArray(day.Rep))
+					continue;
+					
 				for (let index = 0; index < day.Rep.length; index++) {
 					const hour = day.Rep[index] as ThreeHourPayload;
 					let timestamp = new Date(date.getTime());
@@ -438,9 +445,12 @@ export class MetUk implements WeatherProvider {
 			const element = observations[index];
 			let date = new Date(this.PartialToISOString(element.value));
 			if (date.toLocaleDateString() != day.toLocaleDateString()) continue;
-			return element.Rep[element.Rep.length - 1] as ObservationPayload;
+			if (Array.isArray(element.Rep))
+				return element.Rep[element.Rep.length - 1] as ObservationPayload;
+			else
+				return element.Rep;
 		}
-		return null;
+		return null;		
 	}
 
 	/**
@@ -741,7 +751,7 @@ interface Period {
 	type: string;
 	/** Date as ISO string */
 	value: string;
-	Rep: ObservationPayload[] | ForecastPayload[] | ThreeHourPayload[]
+	Rep: ObservationPayload[] | ObservationPayload | ForecastPayload[] | ThreeHourPayload[]
 }
 
 interface ObservationPayload {

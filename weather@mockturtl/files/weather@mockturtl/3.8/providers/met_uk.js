@@ -202,6 +202,8 @@ class MetUk {
         try {
             for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
                 let element = json.SiteRep.DV.Location.Period[i];
+                if (!Array.isArray(element.Rep))
+                    continue;
                 let day = element.Rep[0];
                 let night = element.Rep[1];
                 let forecast = {
@@ -227,6 +229,8 @@ class MetUk {
             for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
                 let day = json.SiteRep.DV.Location.Period[i];
                 let date = new Date(self.PartialToISOString(day.value));
+                if (!Array.isArray(day.Rep))
+                    continue;
                 for (let index = 0; index < day.Rep.length; index++) {
                     const hour = day.Rep[index];
                     let timestamp = new Date(date.getTime());
@@ -367,7 +371,10 @@ class MetUk {
             let date = new Date(this.PartialToISOString(element.value));
             if (date.toLocaleDateString() != day.toLocaleDateString())
                 continue;
-            return element.Rep[element.Rep.length - 1];
+            if (Array.isArray(element.Rep))
+                return element.Rep[element.Rep.length - 1];
+            else
+                return element.Rep;
         }
         return null;
     }

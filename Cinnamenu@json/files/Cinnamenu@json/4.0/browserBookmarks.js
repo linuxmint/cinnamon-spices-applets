@@ -24,6 +24,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
+const Cinnamon = imports.gi.Cinnamon;
 
 let Gda = null;
 try {
@@ -102,18 +103,17 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
         bookmarks.push({
             app: appInfo,
             name: name.replace(/\//g, '|'),
-            score: 0,
-            uri
+            uri: uri
         });
     }
     return bookmarks;
 };
 
-function readFirefoxProfiles(appSystem) {
+function readFirefoxProfiles() {
     if (!Gda) return [];
 
     let profilesFile, profileDir, bookmarksFile;
-    let foundApps = appSystem.lookup_desktop_wmclass('firefox');
+    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass('firefox');
     let appInfo = foundApps.get_app_info();
     let firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
     if (!foundApps || foundApps.length === 0 || !Gda) {
@@ -164,11 +164,12 @@ function readFirefoxProfiles(appSystem) {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
-    let appInfo, bookmarksFile;
+const readChromiumBookmarks = function(bookmarks, path, wmClass) {
 
-    let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
     return new Promise(function(resolve, reject) {
+        let appSystem = Cinnamon.AppSystem.get_default();
+
+        let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
         if (!foundApps || foundApps.length === 0) {
             foundApps = appSystem.lookup_desktop_wmclass(wmClass);
             if (!foundApps || foundApps.length === 0) {
@@ -176,9 +177,8 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
             }
         }
 
-        appInfo = foundApps.get_app_info();
-
-        bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
+        let appInfo = foundApps.get_app_info();
+        let bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
 
         if (!bookmarksFile.query_exists(null)) {
             resolve(bookmarks);
@@ -195,7 +195,6 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
                         bookmarks.push({
                             app: appInfo,
                             name: children[i].name,
-                            score: 0,
                             uri: children[i].url
                         });
                     } else if (children[i].hasOwnProperty('children')) {
@@ -219,15 +218,17 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
 //=====================
 
 class BookmarksManager {
-    constructor(appSystem) {
+    constructor() {
         let bookmarks = [];
+
         Promise.all([
-            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
-            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem)
-            //reading opera bookmarks seems to no longer work
-            //readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
+            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser'),
+            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome'),
+            readChromiumBookmarks(bookmarks, ['opera', 'Bookmarks'], 'opera'),
+            readChromiumBookmarks(bookmarks, ['BraveSoftware', 'Brave-Browser', 'Default', 'Bookmarks'],
+                                                                                            'brave-browser')
         ]).then(() => {
-            bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
+            bookmarks = bookmarks.concat(readFirefoxProfiles());
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
                 bookmarks[i].gicon = bookmarks[i].app.get_icon();

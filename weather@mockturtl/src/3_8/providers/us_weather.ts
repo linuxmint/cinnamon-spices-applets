@@ -273,14 +273,49 @@ export class USWeather implements WeatherProvider {
 		}
 	};
 
+	private CheckIfHasThreeElementsForDay(json: ForecastsPayload): boolean {
+		if (json.properties.periods.length < 3) return false;
+
+		let counter = 0;
+		for (let index = 1; index < 3; index++) {
+			const element = json.properties.periods[index];
+			const prevElement = json.properties.periods[index - 1];
+			let prevDate = new Date(prevElement.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
+			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
+			if (prevDate == curDate)
+				counter++;
+			else
+				counter = 0;
+
+			if (counter > 1)
+				return true;
+
+			return  false;
+		}
+	}
+
+	private FindTodayIndex(json: ForecastsPayload, startIndex: number = 0): number {
+		let today = new Date();
+		for (let index = startIndex; index < json.properties.periods.length; index++) {
+			const element = json.properties.periods[index];
+			let todayDate = today.toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
+			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
+			if (todayDate != curDate)
+				continue;
+			return index;
+		}
+	}
+
 	private ParseForecast(json: ForecastsPayload): ForecastData[] {
 		let forecasts: ForecastData[] = [];
 		try {
-
-			let startIndex = 0;
-			// array starts with night, handling today separately
-			if (json.properties.periods[0].isDaytime == false) {
-				startIndex = 1;
+			// Check if beginning of the array has more than 2 elements for a single day (should be 2 day/night), then skip
+			let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
+			// Find today if doesn't start with that
+			startIndex = this.FindTodayIndex(json, startIndex);
+			// if starts with night, handling today separately
+			if (json.properties.periods[startIndex].isDaytime == false) {
+				startIndex++;
 				let today = json.properties.periods[0]
 				let forecast: ForecastData = {
 					date: new Date(today.startTime),
@@ -296,7 +331,6 @@ export class USWeather implements WeatherProvider {
 				let day = json.properties.periods[i];
 				let night = json.properties.periods[i + 1]; // this can be undefined
 				if (!night) night = day;
-
 				let forecast: ForecastData = {
 					date: new Date(day.startTime),
 					temp_min: FahrenheitToKelvin(night.temperature),

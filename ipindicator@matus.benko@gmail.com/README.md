@@ -1,17 +1,16 @@
-# ip-indicator_mint
+# IP Indicator
 IP indicator applet for Cinnamon desktop environment
 
-Useful in case when often switching VPNs. It shows flag of country of your public IP or customized icon when matching ISP (Internet Service Provider) is found. After opening menu additionally IP, ISP and the country name are visible. 
+Useful in case when often switching VPNs. It shows flag of country of your public IP or customized icon when matching ISP (Internet Service Provider) is found. After opening menu additionally IP, ISP and the country name are displayed. 
 
 Some ISPs have not very human friendly name, therefore there is options to set ISP nickname, which will be shown instead.
 
 # How it works
-After the reading about the reasons why previous IP service has shut down, I realized that spamming GET requests every few seconds to get the GEO IP, is not the most network traffic friendly solution. Therefore in this new version I introduced 2 layers of recognizing, when the public IP gets changed:
 
-1. periodically checking network interfaces via ifconfig command. When creating new VPN connection, usually new tun0 interface is created. This options generates no network traffic, therefore it can be repeated after X seconds.
-2. periodically calling free IP Services. More IP services are defined, through which the applet cycles and figures out only public IP. As this method generates load on the servers, it should not be used as frequent, therefore interval could be set in minutes.
+1. periodically check network interfaces with `ifconfig` command. When new VPN connection is established, usually new `tun0` interface is created. This options generates no network traffic, therefore it can be executed often.
+2. periodically call free IP Services. Several IP services are defined, through which the applet cycles and figures out only public IP. As this method generates load on these services, it should not be used very frequent, therefore the interval is possible be set in minute interval.
 
-After any of these layers recognized, that something has changed, another request is fired to http://ip-api.com/json. In the answer is provided full information that we need: IP, ISP, Country and CountryCode.
+When any technique recognizes that something has changed, then another request is sent to chosen IP service. Response provides detailed  information that is shown in the tooltip.
 
 # Installation
 Clone this repository to `.local/share/cinnamon/applets/`
@@ -36,9 +35,35 @@ Following IP Services are called:
 - https://myexternalip.com/json
 - https://icanhazip.com
 - http://ipinfo.io/json
-- http://ip-api.com/json
+- http://ip-api.com/json - chosen service resolving ISP 
 
 # Screenshots
-![screenshot](http://i.imgur.com/2wXSV1v.png)
-![settings](http://i.imgur.com/a3MlXg7.png)
+IP: 
 
+![ip](screenshot-ip.png)
+
+Icon: 
+
+![icon](screenshot-icon.png)
+
+Icon and IP:
+
+![iconIp](screenshot.png)
+
+Tooltip:
+
+![tooltip](screenshot-tooltip.png)
+
+Settings:
+
+![settings](screenshot-settings.png)
+
+Custom ISP icon:
+
+![isp](screenshot-isp.png)
+
+# Kudos
+
+- Simon Brown - maintenance
+- Erik Zetterberg - IP and icon mode suggestion
+- Mirko Hanker - help with the flags

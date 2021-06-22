@@ -1,17 +1,38 @@
-import { notifySend } from "functions/notify";
 import { spawnCommandLinePromise } from "functions/promiseHelpers";
 
-import { MPRIS_PLUGIN_PATH, MPRIS_PLUGIN_URL } from 'CONSTANTS'
+import { MPRIS_PLUGIN_PATH, MPRIS_PLUGIN_URL } from 'consts'
+import { notify } from "ui/Notifications/GenericNotification";
 
-const { file_new_for_path } = imports.gi.Gio;
-const { find_program_in_path } = imports.gi.GLib;
+const { find_program_in_path, file_test, FileTest } = imports.gi.GLib;
 
-export function checkInstallMpv() {
+export async function installMpvWithMpris() {
+
+    const mprisPluginDownloaded = checkMprisPluginDownloaded()
+    const mpvInstalled = checkMpvInstalled()
+
+    !mprisPluginDownloaded && await downloadMrisPluginInteractive()
+
+    if (!mpvInstalled) {
+        const notificationText = `Please ${mprisPluginDownloaded ? '' : 'also'} install the mpv package.`
+        notify({ text: notificationText })
+        await installMpvInteractive()
+    }
+}
+
+function checkMpvInstalled() {
+    return find_program_in_path('mpv')
+}
+
+function checkMprisPluginDownloaded() {
+    return file_test(MPRIS_PLUGIN_PATH, FileTest.IS_REGULAR)
+}
+
+function installMpvInteractive() {
     return new Promise<void>(async (resolve, reject) => {
-        if (find_program_in_path("mpv")) return resolve()
-        if (!find_program_in_path("apturl")) return reject()
 
-        notifySend("Please also install the mpv package.")
+        if (checkMpvInstalled()) return resolve()
+
+        if (!find_program_in_path("apturl")) return reject()
 
         const [stderr, stdout, exitCode] = await spawnCommandLinePromise(`
             apturl apt://mpv`
@@ -19,15 +40,13 @@ export function checkInstallMpv() {
 
         // exitCode 0 means sucessfully. See: man apturl
         return (exitCode === 0) ? resolve() : reject(stderr)
-
     })
 }
 
-export function checkInstallMrisPlugin() {
+function downloadMrisPluginInteractive() {
     return new Promise<void>(async (resolve, reject) => {
 
-
-        if (file_new_for_path(MPRIS_PLUGIN_PATH).query_exists(null)) {
+        if (checkMprisPluginDownloaded()) {
             return resolve()
         }
 

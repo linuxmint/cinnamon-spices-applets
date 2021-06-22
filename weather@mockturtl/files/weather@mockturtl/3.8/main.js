@@ -11,7 +11,6 @@ const darkSky_1 = require("providers/darkSky");
 const openWeatherMap_1 = require("providers/openWeatherMap");
 const us_weather_1 = require("providers/us_weather");
 const weatherbit_1 = require("providers/weatherbit");
-const yahoo_1 = require("providers/yahoo");
 const met_norway_1 = require("providers/met_norway");
 const httpLib_1 = require("lib/httpLib");
 const logger_1 = require("lib/logger");
@@ -148,7 +147,6 @@ class WeatherApplet extends TextIconApplet {
     }
     DisplayWeatherOnLabel(temperature, mainCondition) {
         mainCondition = utils_1.CapitalizeFirstLetter(mainCondition);
-        let temp = utils_1.TempToUserConfig(temperature, this.config);
         let label = "";
         if (this.Orientation != Side.LEFT && this.Orientation != Side.RIGHT) {
             if (this.config._showCommentInPanel) {
@@ -158,12 +156,12 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += temp;
+                label += utils_1.TempToUserConfig(temperature, this.config);
             }
         }
         else {
             if (this.config._showTextInPanel) {
-                label = temp;
+                label = utils_1.TempToUserConfig(temperature, this.config, false);
                 if (this.GetPanelHeight() >= 35) {
                     label += utils_1.UnitToUnicode(this.config.TemperatureUnit);
                 }
@@ -313,10 +311,6 @@ class WeatherApplet extends TextIconApplet {
             case "Weatherbit":
                 if (currentName != "Weatherbit" || force)
                     this.provider = new weatherbit_1.Weatherbit(this);
-                break;
-            case "Yahoo":
-                if (currentName != "Yahoo" || force)
-                    this.provider = new yahoo_1.Yahoo(this);
                 break;
             case "ClimacellV4":
                 if (currentName != "ClimacellV4" || force)

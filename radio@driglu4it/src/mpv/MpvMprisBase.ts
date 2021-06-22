@@ -1,7 +1,7 @@
-import { getDBusProxyWithOwnerPromise } from 'functions/promiseHelpers'
 import { MprisMediaPlayer, PlaybackStatus } from 'types'
-import { MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME, MAX_VOLUME } from 'CONSTANTS'
+import { MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME, MAX_VOLUME } from 'consts'
 
+const { getDBusProxyWithOwner } = imports.misc.interfaces
 
 export type MpvMprisBase = {
     mediaServerPlayer: MprisMediaPlayer,
@@ -11,12 +11,13 @@ export type MpvMprisBase = {
 }
 
 // functions shared by MpvMprisListener and MpvMprisContoller
-export async function createMpvMprisBase() {
+export function createMpvMprisBase() {
 
 
-    const mediaServerPlayer = await getDBusProxyWithOwnerPromise(
+    const mediaServerPlayer = getDBusProxyWithOwner(
         MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME) as MprisMediaPlayer
 
+    // this variable is necessary because when a user stops mpv and afterwards start vlc (or maybe also other media player), mediaServerPlayer.PlaybackStatus wrongly returns "Playing"   
     let stopped: boolean;
 
     if (!mediaServerPlayer.PlaybackStatus) stopped = true

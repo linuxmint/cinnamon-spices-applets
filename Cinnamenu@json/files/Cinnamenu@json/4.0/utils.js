@@ -131,11 +131,11 @@ class NewTooltip {
 
 //===================================================
 
-const searchStr = (q, str, quick = false) => {
+const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
     if (!str) {
         return { score: 0, result: str };
     }
-    
+
     const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
@@ -147,11 +147,11 @@ const searchStr = (q, str, quick = false) => {
         foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
         foundLength = q.length;
-    } else if (str2.indexOf(q) !== -1) { //else match substring
+    } else if (!noSubStringSearch && str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
         foundPosition = str2.indexOf(q);
         foundLength = q.length;
-    } else if (!quick){ //else fuzzy match
+    } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
         const found = str2.match(new RegExp('[' + q + ']+','g'));
         let length = 0;
@@ -181,6 +181,7 @@ const searchStr = (q, str, quick = false) => {
 
             foundPosition = str2.indexOf(longest);
             foundLength = longest.length;
+            //return a fuzzy match score of between 0 and 1.
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }

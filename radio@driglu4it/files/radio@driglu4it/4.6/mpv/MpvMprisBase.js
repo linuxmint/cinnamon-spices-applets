@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMpvMprisBase = void 0;
-const promiseHelpers_1 = require("functions/promiseHelpers");
-const CONSTANTS_1 = require("CONSTANTS");
-async function createMpvMprisBase() {
-    const mediaServerPlayer = await promiseHelpers_1.getDBusProxyWithOwnerPromise(CONSTANTS_1.MEDIA_PLAYER_2_PLAYER_NAME, CONSTANTS_1.MPV_MPRIS_BUS_NAME);
+const consts_1 = require("consts");
+const { getDBusProxyWithOwner } = imports.misc.interfaces;
+function createMpvMprisBase() {
+    const mediaServerPlayer = getDBusProxyWithOwner(consts_1.MEDIA_PLAYER_2_PLAYER_NAME, consts_1.MPV_MPRIS_BUS_NAME);
     let stopped;
     if (!mediaServerPlayer.PlaybackStatus)
         stopped = true;
@@ -16,9 +16,9 @@ async function createMpvMprisBase() {
         if (mediaServerPlayer.Volume == null)
             return null;
         let currentVolume = Math.round(mediaServerPlayer.Volume * 100);
-        if (currentVolume > CONSTANTS_1.MAX_VOLUME) {
-            mediaServerPlayer.Volume = CONSTANTS_1.MAX_VOLUME / 100;
-            currentVolume = CONSTANTS_1.MAX_VOLUME;
+        if (currentVolume > consts_1.MAX_VOLUME) {
+            mediaServerPlayer.Volume = consts_1.MAX_VOLUME / 100;
+            currentVolume = consts_1.MAX_VOLUME;
         }
         return currentVolume;
     }

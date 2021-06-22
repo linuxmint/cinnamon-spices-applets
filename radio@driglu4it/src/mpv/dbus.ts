@@ -1,8 +1,6 @@
-import { getDBusPromise, getDBusProxyWithOwnerPromise } from 'functions/promiseHelpers'
+import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PLAYER_NAME } from 'consts'
 
-import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PLAYER_NAME } from 'CONSTANTS'
-
-
+const { getDBus, getDBusProxyWithOwner } = imports.misc.interfaces
 
 interface Arguments {
     /**
@@ -13,14 +11,14 @@ interface Arguments {
 
 
 // mpvStarted
-export async function listenToDbus(args: Arguments) {
+export function listenToDbus(args: Arguments) {
 
     const {
         onMpvRegistered,
         onMpvStopped
     } = args
 
-    const dbus = await getDBusPromise()
+    const dbus = getDBus()
 
     dbus.connectSignal('NameOwnerChanged', (...args) => {
         const name = args[2][0]
@@ -46,7 +44,7 @@ export async function listenToDbus(args: Arguments) {
             if (busName === MPV_MPRIS_BUS_NAME) return
 
             const mediaServerPlayer = await
-                getDBusProxyWithOwnerPromise(MEDIA_PLAYER_2_PLAYER_NAME, busName)
+                getDBusProxyWithOwner(MEDIA_PLAYER_2_PLAYER_NAME, busName)
             mediaServerPlayer.PauseRemote()
         })
 
