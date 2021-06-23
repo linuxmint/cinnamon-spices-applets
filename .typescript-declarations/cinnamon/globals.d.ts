@@ -7,6 +7,7 @@ declare function clearTimeout(timouetId: number): void;
 
 declare class global {
     static log(...any: Array<any>): void;
+    static logWarning(...any: Array<any>): void;
     static logError(...text: Array<string>): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     /** Main Cinnamon settings */

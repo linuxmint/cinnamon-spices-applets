@@ -40,6 +40,7 @@ export function createPopupMenu(args: Arguments) {
     const bin = new Bin({
         style_class: 'menu',
         child: box,
+        visible: false
     })
 
 
@@ -148,7 +149,7 @@ export function createPopupMenu(args: Arguments) {
     function open() {
 
         setLayout()
-
+        bin.show()
         box.show()
 
         launcher.add_style_pseudo_class('checked')
@@ -164,6 +165,7 @@ export function createPopupMenu(args: Arguments) {
 
         if (!box.visible) return
 
+        bin.hide()
         box.hide()
         launcher.remove_style_pseudo_class('checked')
         popModal(box)

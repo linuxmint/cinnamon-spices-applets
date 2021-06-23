@@ -16,6 +16,7 @@ function createPopupMenu(args) {
     const bin = new Bin({
         style_class: 'menu',
         child: box,
+        visible: false
     });
     uiGroup.add_child(bin);
     box.connect('key-press-event', (actor, event) => {
@@ -89,6 +90,7 @@ function createPopupMenu(args) {
     }
     function open() {
         setLayout();
+        bin.show();
         box.show();
         launcher.add_style_pseudo_class('checked');
         pushModal(box);
@@ -98,6 +100,7 @@ function createPopupMenu(args) {
     function close() {
         if (!box.visible)
             return;
+        bin.hide();
         box.hide();
         launcher.remove_style_pseudo_class('checked');
         popModal(box);

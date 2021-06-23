@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSubMenu = void 0;
-const ActivWidget_1 = require("lib//ActivWidget");
+const ActivWidget_1 = require("lib/ActivWidget");
 const { BoxLayout, Label, Icon, ScrollView } = imports.gi.St;
 const { ActorAlign, Point } = imports.gi.Clutter;
 const { PolicyType } = imports.gi.Gtk;
