@@ -17,7 +17,6 @@ function createAppletLabel() {
     let visible;
     let text;
     function setText(newValue) {
-        global.log('setText called');
         text = newValue;
         if (!visible)
             return;

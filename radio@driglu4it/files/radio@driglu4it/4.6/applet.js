@@ -31,7 +31,6 @@ const { getAppletDefinition } = imports.ui.appletManager;
 const { panelManager } = imports.ui.main;
 const { IconType, BoxLayout } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
-    global.log('this line is executed');
     let lastVolume;
     let mpvHandler;
     const appletDefinition = getAppletDefinition({
@@ -53,7 +52,8 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onClick: handleAppletClicked,
         onScroll: handleScroll,
         onMiddleClick: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.togglePlayPause(),
-        onAppletRemovedFromPanel: handleAppletRemovedFromPanel,
+        onAppletMoved: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener(),
+        onAppletRemoved: handleAppletRemoved,
         onRightClick: () => popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close()
     });
     const appletTooltip = AppletTooltip_1.createAppletTooltip({
@@ -139,8 +139,9 @@ function main(metadata, orientation, panelHeight, instanceId) {
             GenericNotification_1.notify({ text: notificationText });
         }
     }
-    function handleAppletRemovedFromPanel() {
-        mpvHandler.deactivateAllListener();
+    function handleAppletRemoved() {
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
     }
     function handleScroll(scrollDirection) {
         const volumeChange = scrollDirection === ScrollDirection.UP ? consts_1.VOLUME_DELTA : -consts_1.VOLUME_DELTA;

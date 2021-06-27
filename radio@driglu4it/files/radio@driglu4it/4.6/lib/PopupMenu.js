@@ -25,7 +25,6 @@ function createPopupMenu(args) {
     launcher.connect('queue-relayout', () => {
         if (!box.visible)
             return;
-        global.log('queue-relayout called');
         setTimeout(() => {
             setLayout();
         }, 0);
@@ -110,9 +109,6 @@ function createPopupMenu(args) {
         const appletClicked = launcher.contains(clickedActor);
         (!binClicked && !appletClicked) && close();
     }
-    box.connect('destroy', () => {
-        global.log('this has been called');
-    });
     box.toggle = toggle;
     box.close = close;
     return box;

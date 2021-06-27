@@ -260,7 +260,7 @@ function createMpvHandler(args) {
         getCurrentTitle,
         setPosition,
         deactivateAllListener,
-        dbus,
+        dbus
     };
 }
 exports.createMpvHandler = createMpvHandler;

@@ -75,9 +75,8 @@ function main(
 		onClick: handleAppletClicked,
 		onScroll: handleScroll,
 		onMiddleClick: () => mpvHandler?.togglePlayPause(),
-		// onAppletRemovedFromPanel: () => mpvHandler?.stop(),
-		onAppletRemovedFromPanel: handleAppletRemovedFromPanel,
-
+		onAppletMoved: () => mpvHandler?.deactivateAllListener(),
+		onAppletRemoved: handleAppletRemoved,
 		onRightClick: () => popupMenu?.close()
 	})
 
@@ -185,8 +184,9 @@ function main(
 		}
 	}
 
-	function handleAppletRemovedFromPanel() {
-		mpvHandler.deactivateAllListener()
+	function handleAppletRemoved() {
+		mpvHandler?.deactivateAllListener()
+		mpvHandler?.stop()
 	}
 
 
