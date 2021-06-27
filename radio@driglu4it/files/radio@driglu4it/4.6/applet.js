@@ -33,6 +33,7 @@ const { IconType, BoxLayout } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
     let lastVolume;
     let mpvHandler;
+    let installationInProgress = false;
     const appletDefinition = getAppletDefinition({
         applet_id: instanceId,
     });
@@ -130,13 +131,19 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onUrlChanged: handleUrlChanged
     });
     async function handleAppletClicked() {
+        if (installationInProgress)
+            return;
         try {
+            installationInProgress = true;
             await CheckInstallation_1.installMpvWithMpris();
             popupMenu.toggle();
         }
         catch (error) {
             const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
             GenericNotification_1.notify({ text: notificationText });
+        }
+        finally {
+            installationInProgress = false;
         }
     }
     function handleAppletRemoved() {

@@ -45,9 +45,9 @@ function main(
 
 	// this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
 	let lastVolume: number
-
 	let mpvHandler: ReturnType<typeof createMpvHandler>
 
+	let installationInProgress = false
 
 	const appletDefinition = getAppletDefinition({
 		applet_id: instanceId,
@@ -175,12 +175,18 @@ function main(
 	// CALLBACKS
 
 	async function handleAppletClicked() {
+
+		if (installationInProgress) return
+
 		try {
+			installationInProgress = true
 			await installMpvWithMpris()
 			popupMenu.toggle()
 		} catch (error) {
 			const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."
 			notify({ text: notificationText })
+		} finally {
+			installationInProgress = false
 		}
 	}
 
