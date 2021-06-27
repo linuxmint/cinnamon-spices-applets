@@ -75,7 +75,9 @@ function main(
 		onClick: handleAppletClicked,
 		onScroll: handleScroll,
 		onMiddleClick: () => mpvHandler?.togglePlayPause(),
-		onAppletRemovedFromPanel: () => mpvHandler?.stop(),
+		// onAppletRemovedFromPanel: () => mpvHandler?.stop(),
+		onAppletRemovedFromPanel: handleAppletRemovedFromPanel,
+
 		onRightClick: () => popupMenu?.close()
 	})
 
@@ -182,6 +184,11 @@ function main(
 			notify({ text: notificationText })
 		}
 	}
+
+	function handleAppletRemovedFromPanel() {
+		mpvHandler.deactivateAllListener()
+	}
+
 
 	function handleScroll(scrollDirection: imports.gi.Clutter.ScrollDirection) {
 		const volumeChange =

@@ -43,7 +43,6 @@ export function createPopupMenu(args: Arguments) {
         visible: false
     })
 
-
     uiGroup.add_child(bin)
 
     box.connect('key-press-event', (actor, event) => {
@@ -53,12 +52,7 @@ export function createPopupMenu(args: Arguments) {
     launcher.connect('queue-relayout', () => {
         if (!box.visible) return
 
-        setTimeout(() => {
-            setLayout()
-        }, 0);
-    })
 
-    bin.connect('queue-relayout', () => {
         setTimeout(() => {
             setLayout()
         }, 0);
@@ -138,8 +132,6 @@ export function createPopupMenu(args: Arguments) {
 
         return [xLeft, yTop];
     }
-
-
 
     function toggle() {
         box.visible ? close() : open()

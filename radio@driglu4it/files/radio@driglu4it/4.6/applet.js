@@ -31,6 +31,7 @@ const { getAppletDefinition } = imports.ui.appletManager;
 const { panelManager } = imports.ui.main;
 const { IconType, BoxLayout } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
+    global.log('this line is executed');
     let lastVolume;
     let mpvHandler;
     const appletDefinition = getAppletDefinition({
@@ -52,7 +53,7 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onClick: handleAppletClicked,
         onScroll: handleScroll,
         onMiddleClick: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.togglePlayPause(),
-        onAppletRemovedFromPanel: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop(),
+        onAppletRemovedFromPanel: handleAppletRemovedFromPanel,
         onRightClick: () => popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close()
     });
     const appletTooltip = AppletTooltip_1.createAppletTooltip({
@@ -137,6 +138,9 @@ function main(metadata, orientation, panelHeight, instanceId) {
             const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
             GenericNotification_1.notify({ text: notificationText });
         }
+    }
+    function handleAppletRemovedFromPanel() {
+        mpvHandler.deactivateAllListener();
     }
     function handleScroll(scrollDirection) {
         const volumeChange = scrollDirection === ScrollDirection.UP ? consts_1.VOLUME_DELTA : -consts_1.VOLUME_DELTA;

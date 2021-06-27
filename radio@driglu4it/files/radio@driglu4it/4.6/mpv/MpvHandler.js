@@ -40,7 +40,7 @@ function createMpvHandler(args) {
         onPositionChanged(getPosition());
         startPositionTimer();
     }
-    dbus.connectSignal('NameOwnerChanged', (...args) => {
+    const nameOwnerSignalId = dbus.connectSignal('NameOwnerChanged', (...args) => {
         const name = args[2][0];
         const oldOwner = args[2][1];
         const newOwner = args[2][2];
@@ -53,13 +53,20 @@ function createMpvHandler(args) {
         }
         if (oldOwner) {
             currentLength = 0;
-            currentUrl = null;
             stopPositionTimer();
             mediaProps.disconnectSignal(mediaPropsListenerId);
             mediaServerPlayer.disconnectSignal(seekListenerId);
+            mediaPropsListenerId = seekListenerId = currentUrl = null;
             onPlaybackstatusChanged('Stopped');
         }
     });
+    function deactivateAllListener() {
+        dbus.disconnectSignal(nameOwnerSignalId);
+        if (mediaPropsListenerId)
+            mediaProps === null || mediaProps === void 0 ? void 0 : mediaProps.disconnectSignal(mediaPropsListenerId);
+        if (seekListenerId)
+            mediaServerPlayer === null || mediaServerPlayer === void 0 ? void 0 : mediaServerPlayer.disconnectSignal(seekListenerId);
+    }
     function activateMprisPropsListener() {
         mediaPropsListenerId = mediaProps.connectSignal('PropertiesChanged', (proxy, nameOwner, [interfaceName, props]) => {
             var _a, _b, _c, _d, _e, _f;
@@ -252,7 +259,8 @@ function createMpvHandler(args) {
         stop,
         getCurrentTitle,
         setPosition,
-        dbus
+        deactivateAllListener,
+        dbus,
     };
 }
 exports.createMpvHandler = createMpvHandler;
