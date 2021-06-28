@@ -29,11 +29,6 @@ function createPopupMenu(args) {
             setLayout();
         }, 0);
     });
-    bin.connect('queue-relayout', () => {
-        setTimeout(() => {
-            setLayout();
-        }, 0);
-    });
     function setLayout() {
         const freeSpace = calculateFreeSpace();
         const maxHeight = calculateMaxHeight(freeSpace);

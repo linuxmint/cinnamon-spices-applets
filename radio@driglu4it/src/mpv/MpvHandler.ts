@@ -90,7 +90,7 @@ export function createMpvHandler(args: Arguments) {
         startPositionTimer()
     }
 
-    dbus.connectSignal('NameOwnerChanged', (...args) => {
+    const nameOwnerSignalId = dbus.connectSignal('NameOwnerChanged', (...args) => {
 
         const name = args[2][0]
         const oldOwner = args[2][1]
@@ -106,13 +106,19 @@ export function createMpvHandler(args: Arguments) {
 
         if (oldOwner) {
             currentLength = 0
-            currentUrl = null
             stopPositionTimer()
             mediaProps.disconnectSignal(mediaPropsListenerId)
             mediaServerPlayer.disconnectSignal(seekListenerId)
+            mediaPropsListenerId = seekListenerId = currentUrl = null
             onPlaybackstatusChanged('Stopped')
         }
     })
+
+    function deactivateAllListener() {
+        dbus.disconnectSignal(nameOwnerSignalId)
+        if (mediaPropsListenerId) mediaProps?.disconnectSignal(mediaPropsListenerId)
+        if (seekListenerId) mediaServerPlayer?.disconnectSignal(seekListenerId)
+    }
 
     function activateMprisPropsListener() {
         mediaPropsListenerId = mediaProps.connectSignal('PropertiesChanged',
@@ -399,9 +405,9 @@ export function createMpvHandler(args: Arguments) {
         stop,
         getCurrentTitle,
         setPosition,
+        deactivateAllListener,
         // it is very confusing but dbus must be returned!
         // Otherwilse all listeners stop working after about 20 seconds which is fucking difficult to debug
         dbus
-
     }
 }

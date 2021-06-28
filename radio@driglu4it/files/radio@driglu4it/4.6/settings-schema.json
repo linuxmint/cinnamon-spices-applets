@@ -102,6 +102,11 @@
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
 				"inc": true
+			},
+			{
+				"name": "Deep House",
+				"url": "http://yp.shoutcast.com/sbin/tunein-station.pls?id=499023",
+				"inc": true
 			}
 		]
 	},

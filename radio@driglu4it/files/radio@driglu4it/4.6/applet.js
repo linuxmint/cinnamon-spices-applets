@@ -33,6 +33,7 @@ const { IconType, BoxLayout } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
     let lastVolume;
     let mpvHandler;
+    let installationInProgress = false;
     const appletDefinition = getAppletDefinition({
         applet_id: instanceId,
     });
@@ -52,7 +53,8 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onClick: handleAppletClicked,
         onScroll: handleScroll,
         onMiddleClick: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.togglePlayPause(),
-        onAppletRemovedFromPanel: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop(),
+        onAppletMoved: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener(),
+        onAppletRemoved: handleAppletRemoved,
         onRightClick: () => popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close()
     });
     const appletTooltip = AppletTooltip_1.createAppletTooltip({
@@ -129,7 +131,10 @@ function main(metadata, orientation, panelHeight, instanceId) {
         onUrlChanged: handleUrlChanged
     });
     async function handleAppletClicked() {
+        if (installationInProgress)
+            return;
         try {
+            installationInProgress = true;
             await CheckInstallation_1.installMpvWithMpris();
             popupMenu.toggle();
         }
@@ -137,6 +142,13 @@ function main(metadata, orientation, panelHeight, instanceId) {
             const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
             GenericNotification_1.notify({ text: notificationText });
         }
+        finally {
+            installationInProgress = false;
+        }
+    }
+    function handleAppletRemoved() {
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
     }
     function handleScroll(scrollDirection) {
         const volumeChange = scrollDirection === ScrollDirection.UP ? consts_1.VOLUME_DELTA : -consts_1.VOLUME_DELTA;

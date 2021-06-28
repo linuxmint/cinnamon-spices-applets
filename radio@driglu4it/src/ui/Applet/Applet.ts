@@ -11,8 +11,9 @@ interface Arguments {
     onClick: () => void,
     onScroll: (scrollDirection: imports.gi.Clutter.ScrollDirection) => void,
     onMiddleClick: () => void,
-    onAppletRemovedFromPanel: () => void,
-    onRightClick: () => void
+    onRightClick: () => void,
+    onAppletMoved: () => void,
+    onAppletRemoved: () => void
 }
 
 export function createApplet(args: Arguments) {
@@ -26,11 +27,14 @@ export function createApplet(args: Arguments) {
         onClick,
         onScroll,
         onMiddleClick,
-        onAppletRemovedFromPanel,
+        onAppletMoved,
+        onAppletRemoved,
         onRightClick
     } = args
 
     const applet = new Applet(orientation, panelHeight, instanceId);
+
+    let appletReloaded = false;
 
     [icon, label].forEach(widget => {
         applet.actor.add_child(widget)
@@ -38,8 +42,16 @@ export function createApplet(args: Arguments) {
 
     applet.on_applet_clicked = onClick
     applet.on_applet_middle_clicked = onMiddleClick
-    applet.on_applet_removed_from_panel = onAppletRemovedFromPanel
     applet.setAllowedLayout(AllowedLayout.BOTH)
+
+    applet.on_applet_reloaded = function () {
+        appletReloaded = true
+    }
+
+    applet.on_applet_removed_from_panel = function () {
+        appletReloaded ? onAppletMoved() : onAppletRemoved()
+        appletReloaded = false
+    }
 
     applet.actor.connect('event', (actor, event) => {
         if (event.type() !== EventType.BUTTON_PRESS) return
