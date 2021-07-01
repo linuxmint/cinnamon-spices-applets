@@ -1,15 +1,19 @@
 import * as consts from 'consts'
-import { AdvancedPlaybackStatus, PlaybackStatus } from 'types';
-import { createIconMenuItem } from 'ui/IconMenuItem';
+import { createIconMenuItem } from 'lib/IconMenuItem';
+import { AdvancedPlaybackStatus } from 'types';
 
-interface Arguments {
+export interface Arguments {
     channelName: string,
+    onActivated: (channelName: string) => void,
+    playbackStatus?: AdvancedPlaybackStatus
 }
 
 export function createChannelMenuItem(args: Arguments) {
 
     const {
-        channelName
+        channelName,
+        onActivated,
+        playbackStatus
     } = args
 
     const playbackIconMap: Map<AdvancedPlaybackStatus, string | null> = new Map([
@@ -20,15 +24,17 @@ export function createChannelMenuItem(args: Arguments) {
     ])
 
     const iconMenuItem = createIconMenuItem({
+        maxCharNumber: consts.MAX_STRING_LENGTH,
         text: channelName,
-        maxCharNumber: consts.MAX_STRING_LENGTH
+        onActivated: () => onActivated(channelName)
     })
 
     function setPlaybackStatus(playbackStatus: AdvancedPlaybackStatus) {
         const iconName = playbackIconMap.get(playbackStatus)
         iconMenuItem.setIconName(iconName)
-
     }
+
+    playbackStatus && setPlaybackStatus(playbackStatus)
 
     return {
         setPlaybackStatus,

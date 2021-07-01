@@ -4,6 +4,7 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
+const ModalDialog = imports.ui.modalDialog;
 
 const UUID = "ddcci-multi-monitor@tim-we";
 
@@ -124,6 +125,12 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menu.toggle();
     }
 
+    on_applet_added_to_panel() {
+        if(!this.detecting) {
+            this.updateMonitors();
+        }
+    }
+
     updateMenu() {
         this.menu.removeAll();
 
@@ -146,8 +153,13 @@ class DDCMultiMonitor extends Applet.IconApplet {
 
         reload.connect("activate", () => {
             if (!this.detecting) {
+                const infoOSD = new ModalDialog.InfoOSD("Detecting displays...");
+                infoOSD.show();
                 reload.destroy();
-                this.updateMonitors();
+                this.updateMonitors().then(
+                    () => this.menu.open(true),
+                    e  => log("Error: "  + e)
+                ).then(() => infoOSD.destroy());
             }
         });
     }
@@ -189,6 +201,12 @@ async function getDisplays() {
                     resolve(stdout);
                 } else {
                     log("Failed to detect displays: " + stderr, "error");
+                    const dialog = new ModalDialog.NotifyDialog([
+                        "Failed to detect displays.",
+                        "Make sure you have ddcutil installed and the correct permissions.",
+                        "Error: " + stderr
+                    ].join("\n"));
+                    dialog.open();
                     reject(stderr);
                 }
             }

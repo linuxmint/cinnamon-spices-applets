@@ -611,9 +611,14 @@ class AppButton {
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
         //menu-application-button-label in themes are designed for list view and may have uneven
         //padding, so in grid view make padding symmetrical and center text
+        let labelStyle = '';
         if (!isListView) {
-            this.label.style = 'padding-right: 2px; padding-left: 2px; text-align: center;';
+            labelStyle = 'padding-right: 2px; padding-left: 2px; text-align: center; ';
         }
+        if (this.app.isClearRecentsButton) {
+            labelStyle += 'font-weight: bold;';
+        }
+        this.label.style = labelStyle;
         //set label text
         let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
         let description = this.app.description ?

@@ -12,8 +12,8 @@ function createCopyButton(args) {
         onClick: handleClick
     });
     function handleClick() {
+        controlBtn.tooltip.show();
         onClick();
-        showCopyInTooltip();
     }
     function showCopyInTooltip() {
         const tooltip = controlBtn.tooltip;

@@ -5,12 +5,12 @@ const ChannelStore_1 = require("ChannelStore");
 const ChannelList_1 = require("ui/ChannelList/ChannelList");
 const MpvHandler_1 = require("mpv/MpvHandler");
 const VolumeSlider_1 = require("ui/VolumeSlider");
-const RadioPopupMenu_1 = require("ui/RadioPopupMenu");
+const PopupMenu_1 = require("lib/PopupMenu");
+const PopupSeperator_1 = require("lib/PopupSeperator");
 const MediaControlToolbar_1 = require("ui/Toolbar/MediaControlToolbar");
 const PlayPauseButton_1 = require("ui/Toolbar/PlayPauseButton");
 const StopButton_1 = require("ui/Toolbar/StopButton");
-const SongInfoItem_1 = require("ui/InfoSection/SongInfoItem");
-const ChannelInfoItem_1 = require("ui/InfoSection/ChannelInfoItem");
+const InfoSection_1 = require("ui/InfoSection");
 const DownloadButton_1 = require("ui/Toolbar/DownloadButton");
 const CopyButton_1 = require("ui/Toolbar/CopyButton");
 const downloadFromYoutube_1 = require("functions/downloadFromYoutube");
@@ -24,13 +24,18 @@ const YoutubeDownloadFinishedNotification_1 = require("ui/Notifications/YoutubeD
 const YoutubeDownloadStartedNotification_1 = require("ui/Notifications/YoutubeDownloadStartedNotification");
 const YoutubeDownloadFailedNotification_1 = require("ui/Notifications/YoutubeDownloadFailedNotification");
 const GenericNotification_1 = require("ui/Notifications/GenericNotification");
+const Seeker_1 = require("ui/Seeker");
+const consts_1 = require("consts");
 const { ScrollDirection } = imports.gi.Clutter;
 const { getAppletDefinition } = imports.ui.appletManager;
 const { panelManager } = imports.ui.main;
-const { IconType } = imports.gi.St;
+const { IconType, BoxLayout } = imports.gi.St;
 function main(metadata, orientation, panelHeight, instanceId) {
+    let lastVolume;
+    let mpvHandler;
+    let installationInProgress = false;
     const appletDefinition = getAppletDefinition({
-        applet_id: instanceId
+        applet_id: instanceId,
     });
     const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
     panel.connect('icon-size-changed', () => appletIcon.updateIconSize());
@@ -47,8 +52,10 @@ function main(metadata, orientation, panelHeight, instanceId) {
         panelHeight,
         onClick: handleAppletClicked,
         onScroll: handleScroll,
-        onMiddleClick: () => mpvHandler.togglePlayPause(),
-        onAppletRemovedFromPanel: () => mpvHandler.stop()
+        onMiddleClick: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.togglePlayPause(),
+        onAppletMoved: () => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener(),
+        onAppletRemoved: handleAppletRemoved,
+        onRightClick: () => popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close()
     });
     const appletTooltip = AppletTooltip_1.createAppletTooltip({
         applet,
@@ -74,11 +81,11 @@ function main(metadata, orientation, panelHeight, instanceId) {
         stationNames: channelStore.activatedChannelNames,
         onChannelClicked: handleChannelClicked
     });
-    const volumeSlider = new VolumeSlider_1.VolumeSlider({
-        onValueChanged: (volume) => mpvHandler.setVolume(volume)
+    const volumeSlider = VolumeSlider_1.createVolumeSlider({
+        onVolumeChanged: (volume) => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.setVolume(volume)
     });
-    const songInfoItem = SongInfoItem_1.createSongInfoItem();
-    const channelInfoItem = ChannelInfoItem_1.createChannelInfoItem();
+    const popupMenu = PopupMenu_1.createPopupMenu({ launcher: applet.actor });
+    const infoSection = InfoSection_1.createInfoSection();
     const playPauseBtn = PlayPauseButton_1.createPlayPauseButton({
         onClick: () => mpvHandler.togglePlayPause()
     });
@@ -94,49 +101,70 @@ function main(metadata, orientation, panelHeight, instanceId) {
     const mediaControlToolbar = MediaControlToolbar_1.createMediaControlToolbar({
         controlBtns: [playPauseBtn.actor, downloadBtn.actor, copyBtn.actor, stopBtn.actor]
     });
-    const popupMenu = RadioPopupMenu_1.createRadioPopupMenu({
-        radioApplet: applet,
-        orientation,
-        channelList: channelList.actor,
-        volumeSlider,
-        songInfoItem: songInfoItem.actor,
-        channelInfoItem: channelInfoItem.actor,
-        mediaControlToolbar
+    const seeker = Seeker_1.createSeeker({
+        onPositionChanged: (value) => mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.setPosition(value)
+    });
+    const radioActiveSection = new BoxLayout({
+        vertical: true,
+        visible: false
+    });
+    [
+        infoSection.actor,
+        mediaControlToolbar,
+        volumeSlider.actor,
+        seeker.actor
+    ].forEach(widget => {
+        radioActiveSection.add_child(PopupSeperator_1.createSeparatorMenuItem());
+        radioActiveSection.add_child(widget);
+    });
+    popupMenu.add_child(channelList.actor);
+    popupMenu.add_child(radioActiveSection);
+    mpvHandler = MpvHandler_1.createMpvHandler({
+        getInitialVolume: () => { return configs.initialVolume; },
+        onVolumeChanged: handleVolumeChanged,
+        onLengthChanged: hanldeLengthChanged,
+        onPositionChanged: handlePositionChanged,
+        checkUrlValid: (url) => channelStore.checkUrlValid(url),
+        onTitleChanged: handleTitleChanged,
+        onPlaybackstatusChanged: handlePlaybackstatusChanged,
+        lastUrl: configs.lastUrl,
+        onUrlChanged: handleUrlChanged
     });
     async function handleAppletClicked() {
+        if (installationInProgress)
+            return;
         try {
+            installationInProgress = true;
             await CheckInstallation_1.installMpvWithMpris();
             popupMenu.toggle();
-            channelList.open();
         }
         catch (error) {
             const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
             GenericNotification_1.notify({ text: notificationText });
         }
+        finally {
+            installationInProgress = false;
+        }
+    }
+    function handleAppletRemoved() {
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
+        mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
     }
     function handleScroll(scrollDirection) {
-        const volumeChange = scrollDirection === ScrollDirection.UP ? 5 : -5;
+        const volumeChange = scrollDirection === ScrollDirection.UP ? consts_1.VOLUME_DELTA : -consts_1.VOLUME_DELTA;
         mpvHandler.increaseDecreaseVolume(volumeChange);
-    }
-    function handleRadioInitialized(playbackStatus, volume) {
-        if (playbackStatus === 'Stopped') {
-            return;
-        }
-        popupMenu.radioActive = true;
-        handlePlaybackstatusChanged(playbackStatus);
-        handleVolumeChanged(volume);
-        handleUrlChanged(configs.lastUrl);
     }
     function handleChannelClicked(name) {
         const channelUrl = channelStore.getChannelUrl(name);
-        mpvHandler.setChannelUrl(channelUrl);
+        mpvHandler.setUrl(channelUrl);
     }
     function handleTitleChanged(title) {
-        songInfoItem.setSongTitle(title);
+        infoSection.setSongTitle(title);
     }
     function handleVolumeChanged(volume) {
-        volumeSlider.value = volume;
+        volumeSlider.setVolume(volume);
         appletTooltip.setVolume(volume);
+        lastVolume = volume;
     }
     function handleIconTypeChanged(iconType) {
         appletIcon.setIconType(iconType);
@@ -151,26 +179,35 @@ function main(metadata, orientation, panelHeight, instanceId) {
         if (!lastUrlValid)
             mpvHandler.stop();
     }
-    function handlePlaybackstatusChanged(playbackstatus, lastVolume) {
-        if (playbackstatus === 'Stopped')
+    function handlePlaybackstatusChanged(playbackstatus) {
+        if (playbackstatus === 'Stopped') {
+            radioActiveSection.hide();
+            configs.lastVolume = lastVolume;
+            configs.lastUrl = null;
+            appletLabel.setText(null);
             handleVolumeChanged(null);
-        if (playbackstatus === 'Stopped')
-            handleUrlChanged(null);
-        channelList.setPlaybackstatus(playbackstatus);
+            popupMenu.close();
+        }
+        if (playbackstatus !== 'Stopped' && !radioActiveSection.visible)
+            radioActiveSection.show();
+        channelList.setPlaybackStatus(playbackstatus);
         appletIcon.setPlaybackStatus(playbackstatus);
-        popupMenu.radioActive = (playbackstatus !== 'Stopped');
         if (playbackstatus === 'Playing' || playbackstatus === 'Paused') {
             playPauseBtn.setPlaybackStatus(playbackstatus);
         }
-        if (lastVolume != null)
-            configs.lastVolume = lastVolume;
     }
     function handleUrlChanged(url) {
         const channelName = url ? channelStore.getChannelName(url) : null;
         appletLabel.setText(channelName);
         channelList.setCurrentChannel(channelName);
-        channelInfoItem.setChannel(channelName);
+        infoSection.setChannel(channelName);
         configs.lastUrl = url;
+    }
+    function hanldeLengthChanged(length) {
+        seeker.setLength(length);
+    }
+    function handlePositionChanged(position) {
+        seeker === null || seeker === void 0 ? void 0 : seeker.setPosition(position);
     }
     function handleDownloadBtnClicked() {
         const title = mpvHandler.getCurrentTitle();
@@ -187,15 +224,5 @@ function main(metadata, orientation, panelHeight, instanceId) {
             onCancelClicked: () => downloadProcess.cancel()
         });
     }
-    const mpvHandler = MpvHandler_1.createMpvHandler({
-        getInitialVolume: () => { return configs.initialVolume; },
-        onInitialized: handleRadioInitialized,
-        onVolumeChanged: handleVolumeChanged,
-        checkUrlValid: (url) => channelStore.checkUrlValid(url),
-        onTitleChanged: handleTitleChanged,
-        onPlaybackstatusChanged: handlePlaybackstatusChanged,
-        initialUrl: configs.lastUrl,
-        onUrlChanged: handleUrlChanged
-    });
     return applet;
 }

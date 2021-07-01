@@ -1,3 +1,5 @@
+import { createActivWidget } from "lib/ActivWidget";
+
 const { Button, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
@@ -30,17 +32,10 @@ export function createControlBtn(args: Arguments) {
         child: icon
     })
 
-    // in cinnamon themes are no hover pseudo classes (at least at the moment). 
-    // Therefore it is toggled the active pseudo class when cursor enters/leaves the btn
-    btn.connect("enter-event", () => {
-        btn.add_style_pseudo_class('active')
+    createActivWidget({
+        widget: btn,
+        onActivated: onClick
     })
-
-    btn.connect("leave-event", () => {
-        btn.remove_style_pseudo_class('active')
-    })
-
-    btn.connect("clicked", onClick)
 
     const tooltip = new Tooltip(btn, tooltipTxt)
 

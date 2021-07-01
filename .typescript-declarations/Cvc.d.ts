@@ -7,8 +7,11 @@ declare namespace imports.gi.Cvc {
         constructor(name: Name);
 
         open(): void
+        close(): void
         lookup_stream_id(id: number): MixerStream
         get_vol_max_norm(): number
+
+        connect(signal: 'stream-added', callback: (actor: this, streamId: number) => void): number
     }
 
     export class MixerStream extends GObject.Object {
@@ -20,5 +23,7 @@ declare namespace imports.gi.Cvc {
         // methods
         change_is_muted(is_muted: boolean): boolean
         push_volume(): void
+
+        connect(signal: 'notify::volume', callback: (...args: any) => void): number
     }
-} 
+}

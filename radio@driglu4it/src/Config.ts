@@ -78,7 +78,14 @@ export const createConfig = (args: Arguments) => {
             customInitVolume
         } = settingsObject
 
-        const initialVolume = keepVolume ? lastVolume : customInitVolume
+        let initialVolume = keepVolume ? lastVolume : customInitVolume
+
+        if (initialVolume == null){
+            global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working')
+            initialVolume = 50
+        }
+
+
         return initialVolume
     }
 

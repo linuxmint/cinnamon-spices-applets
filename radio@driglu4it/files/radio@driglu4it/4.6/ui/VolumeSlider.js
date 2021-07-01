@@ -1,64 +1,78 @@
 "use strict";
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VolumeSlider = void 0;
-const { PopupSliderMenuItem } = imports.ui.popupMenu;
-const St = imports.gi.St;
+exports.createVolumeSlider = void 0;
+const ActivWidget_1 = require("lib/ActivWidget");
+const Slider_1 = require("lib/Slider");
+const consts_1 = require("consts");
+const { BoxLayout, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
-class VolumeSlider extends PopupSliderMenuItem {
-    constructor(args) {
-        super(0);
-        this.volumeIcons = [
-            { max: 0, iconSuffix: "muted" },
-            { max: 33, iconSuffix: "low" },
-            { max: 66, iconSuffix: "medium" },
-            { max: 100, iconSuffix: "high" },
-        ];
-        const { onValueChanged } = args;
-        this.onValueChanged = onValueChanged;
-        this.tooltip = new Tooltip(this.actor, `Volume: ${this.value} %`);
-        this.volumeIcon = new St.Icon({ icon_name: this.volumeIconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
-        this.removeActor(this._slider);
-        this.addActor(this.volumeIcon, { span: 0 });
-        this.addActor(this._slider, { span: -1, expand: true });
-        this.connect('value-changed', () => this.handleValueChanged());
+const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter;
+function createVolumeSlider(args) {
+    const { onVolumeChanged } = args;
+    let tooltip;
+    const container = new BoxLayout({
+        style_class: consts_1.POPUP_MENU_ITEM_CLASS,
+    });
+    ActivWidget_1.createActivWidget({
+        widget: container
+    });
+    let volume;
+    const slider = Slider_1.createSlider({
+        onValueChanged: handleSliderValueChanged
+    });
+    const icon = new Icon({
+        icon_type: IconType.SYMBOLIC,
+        style_class: consts_1.POPUP_ICON_CLASS,
+        reactive: true
+    });
+    [icon, slider.actor].forEach(widget => {
+        container.add_child(widget);
+    });
+    container.connect('key-press-event', (actor, event) => {
+        const key = event.get_key_symbol();
+        if (key === KEY_Right || key === KEY_Left) {
+            const direction = (key === KEY_Right) ? 'increase' : 'decrease';
+            deltaChange(direction);
+        }
+    });
+    container.connect('scroll-event', (actor, event) => {
+        const scrollDirection = event.get_scroll_direction();
+        const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease';
+        deltaChange(direction);
+    });
+    icon.connect('button-press-event', () => {
+        slider.setValue(0);
+    });
+    function handleSliderValueChanged(newValue) {
+        updateVolume(newValue * 100, true);
     }
-    handleValueChanged() {
-        this.onValueChanged(this.value);
-        this.refreshSlider();
-        this.tooltip.show();
+    function deltaChange(direction) {
+        const delta = (direction === 'increase') ? consts_1.VOLUME_DELTA : -consts_1.VOLUME_DELTA;
+        const newValue = slider.getValue() + delta / 100;
+        slider.setValue(newValue);
     }
-    get value() {
-        return Math.round(super.value * 100);
+    function updateVolume(newVolume, showTooltip) {
+        const newVolumeRounded = Math.round(newVolume);
+        if (newVolumeRounded === volume)
+            return;
+        volume = newVolumeRounded;
+        slider.setValue(volume / 100);
+        icon.set_icon_name(consts_1.getVolumeIcon({ volume }));
+        setTooltip(volume);
+        showTooltip && tooltip.show();
+        onVolumeChanged === null || onVolumeChanged === void 0 ? void 0 : onVolumeChanged(volume);
     }
-    set value(newVolume) {
-        super.setValue(newVolume / 100);
-        this.refreshSlider();
+    function setTooltip(volume) {
+        if (!tooltip)
+            tooltip = new Tooltip(slider.actor, ' ');
+        tooltip.set_text(`Volume: ${volume.toString()} %`);
     }
-    refreshSlider() {
-        this.volumeIcon.icon_name = this.volumeIconName;
-        this.tooltip.set_text(`Volume: ${this.value} %`);
+    function setVolume(newVolume) {
+        updateVolume(newVolume, false);
     }
-    get volumeIconName() {
-        const index = this.volumeIcons.findIndex((_a, index) => {
-            var { max } = _a, rest = __rest(_a, ["max"]);
-            return this.value <= max;
-        });
-        return `audio-volume-${this.volumeIcons[index].iconSuffix}`;
-    }
-    destroy() {
-        super.destroy();
-        this.tooltip.hide();
-    }
+    return {
+        actor: container,
+        setVolume
+    };
 }
-exports.VolumeSlider = VolumeSlider;
+exports.createVolumeSlider = createVolumeSlider;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-04 04:21+0100\n"
+"POT-Creation-Date: 2021-07-01 00:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,13 +119,7 @@ msgstr ""
 msgid "No recent Items"
 msgstr ""
 
-msgid "Solution:"
-msgstr ""
-
 msgid "Click to copy"
-msgstr ""
-
-msgid "Search web for"
 msgstr ""
 
 msgid "Trash"
@@ -222,8 +216,8 @@ msgid "Cinnamenu"
 msgstr ""
 
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider"
-" support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
 
 msgid "Behavior"
@@ -479,10 +473,28 @@ msgstr ""
 msgid "Bing"
 msgstr ""
 
+msgid "Baidu"
+msgstr ""
+
 msgid "Yahoo"
 msgstr ""
 
+msgid "Yandex"
+msgstr ""
+
 msgid "DuckDuckGo"
+msgstr ""
+
+msgid "Ask"
+msgstr ""
+
+msgid "Ecosia"
+msgstr ""
+
+msgid "AOL"
+msgstr ""
+
+msgid "Startpage"
 msgstr ""
 
 msgid "Show an internet search option in search results"

@@ -6,7 +6,7 @@ declare namespace imports.misc.interfaces {
         ListNamesSync(): string[][],
         GetNameOwnerRemote(name: string, callback: (ownerArr: [owner: string]) => void): void,
         GetNameOwnerSync(name: string): [owner: string]
-        connectSignal(signal: 'NameOwnerChanged', callback: (proxy: this, nameOwner: string, signals: [name: string, old_owner: string, new_owner: string]) => void): number
+        connectSignal(signal: 'NameOwnerChanged', callback: (proxy: this, nameOwner: string, args: [name: string, old_owner: string, new_owner: string]) => void): number
     }
 
     export function getDBus(): DBus
