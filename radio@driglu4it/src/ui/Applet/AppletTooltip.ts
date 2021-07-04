@@ -1,4 +1,4 @@
-import { DEFAULT_TOOLTIP_TXT } from "consts"
+import { DEFAULT_TOOLTIP_TXT } from "../../consts"
 
 const { PanelItemTooltip } = imports.ui.tooltips
 

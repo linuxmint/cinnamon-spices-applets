@@ -58,6 +58,15 @@ export function createPopupMenu(args: Arguments) {
         }, 0);
     })
 
+    bin.connect('queue-relayout', () => {
+        if (!box.visible) return
+
+
+        setTimeout(() => {
+            setLayout()
+        }, 0);
+    })
+
     function setLayout() {
 
         const freeSpace = calculateFreeSpace()

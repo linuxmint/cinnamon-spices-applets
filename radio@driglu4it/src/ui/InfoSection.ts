@@ -1,5 +1,5 @@
-import * as consts from "consts";
-import { createIconMenuItem } from "lib/IconMenuItem";
+import * as consts from "../consts";
+import { createIconMenuItem } from "../lib/IconMenuItem";
 const { BoxLayout } = imports.gi.St
 
 export function createInfoSection() {

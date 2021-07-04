@@ -104,8 +104,8 @@
 				"inc": true
 			},
 			{
-				"name": "Deep House",
-				"url": "http://yp.shoutcast.com/sbin/tunein-station.pls?id=499023",
+				"name": "Deep House Radio",
+				"url": "http://62.210.105.16:7000/stream",
 				"inc": true
 			}
 		]

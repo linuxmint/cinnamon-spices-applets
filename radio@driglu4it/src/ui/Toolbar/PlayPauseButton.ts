@@ -1,6 +1,6 @@
-import { PAUSE_ICON_NAME, PLAY_ICON_NAME } from "consts"
-import { PlayPause } from "types"
-import { createControlBtn } from "ui/Toolbar/ControlBtn"
+import { PAUSE_ICON_NAME, PLAY_ICON_NAME } from "../../consts"
+import { PlayPause } from "../../types"
+import { createControlBtn } from "./ControlBtn"
 
 interface Arguments {
     onClick: { (): void }

@@ -1,5 +1,5 @@
-import { APPLET_SITE } from "consts";
-import { createBasicNotification } from "ui/Notifications/NotificationBase";
+import { APPLET_SITE } from "../../consts";
+import { createBasicNotification } from "./NotificationBase";
 const { spawnCommandLine } = imports.misc.util
 const { get_home_dir } = imports.gi.GLib;
 

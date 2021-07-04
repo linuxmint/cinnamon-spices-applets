@@ -1,5 +1,5 @@
-import { createActivWidget } from "lib/ActivWidget";
-import { limitString } from "functions/limitString"
+import { createActivWidget } from "./ActivWidget";
+import { limitString } from "../functions/limitString"
 
 const { Icon, IconType, Label, BoxLayout } = imports.gi.St
 

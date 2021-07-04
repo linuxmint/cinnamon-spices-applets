@@ -1,6 +1,6 @@
-import { createSubMenu } from "lib/PopupSubMenu";
-import { createChannelMenuItem } from "ui/ChannelList/ChannelMenuItem";
-import { AdvancedPlaybackStatus } from "types";
+import { createSubMenu } from "../../lib/PopupSubMenu";
+import { createChannelMenuItem } from "./ChannelMenuItem";
+import { AdvancedPlaybackStatus } from "../../types";
 
 interface Arguments {
     stationNames: string[],
