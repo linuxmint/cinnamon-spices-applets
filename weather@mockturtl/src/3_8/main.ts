@@ -5,24 +5,24 @@
 //
 //----------------------------------------------------------------------
 
-import { Climacell } from "providers/climacell";
-import { Config } from "config";
-import { WeatherLoop } from "loop";
-import { MetUk } from "providers/met_uk";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "types";
-import { UI } from "ui";
-import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "utils";
-import { DarkSky } from "providers/darkSky";
-import { OpenWeatherMap } from "providers/openWeatherMap";
-import { USWeather } from "providers/us_weather";
-import { Weatherbit } from "providers/weatherbit";
-import { MetNorway } from "providers/met_norway";
-import { HttpLib, HttpError, Method, HTTPParams } from "lib/httpLib";
-import { Log } from "lib/logger";
-import { APPLET_ICON, REFRESH_ICON } from "consts";
-import { VisualCrossing } from "providers/visualcrossing";
-import { ClimacellV4 } from "providers/climacellV4";
-import { DanishMI } from "providers/danishMI";
+import { Climacell } from "./providers/climacell";
+import { Config } from "./config";
+import { WeatherLoop } from "./loop";
+import { MetUk } from "./providers/met_uk";
+import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
+import { UI } from "./ui";
+import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { DarkSky } from "./providers/darkSky";
+import { OpenWeatherMap } from "./providers/openWeatherMap";
+import { USWeather } from "./providers/us_weather";
+import { Weatherbit } from "./providers/weatherbit";
+import { MetNorway } from "./providers/met_norway";
+import { HttpLib, HttpError, Method, HTTPParams } from "./lib/httpLib";
+import { Log } from "./lib/logger";
+import { APPLET_ICON, REFRESH_ICON } from "./consts";
+import { VisualCrossing } from "./providers/visualcrossing";
+import { ClimacellV4 } from "./providers/climacellV4";
+import { DanishMI } from "./providers/danishMI";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;

@@ -6,12 +6,12 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "lib/httpLib";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { SunCalc } from "lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "types";
-import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "utils";
+import { HttpError } from "../lib/httpLib";
+import { Log } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { SunCalc } from "../lib/sunCalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "../types";
+import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "../utils";
 
 export class USWeather implements WeatherProvider {
 

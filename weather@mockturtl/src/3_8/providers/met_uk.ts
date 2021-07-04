@@ -6,12 +6,12 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { DistanceUnits } from "config";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { SunCalc } from "lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "types";
-import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "utils";
+import { DistanceUnits } from "../config";
+import { Log } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { SunCalc } from "../lib/sunCalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "../types";
+import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "../utils";
 
 export class MetUk implements WeatherProvider {
 

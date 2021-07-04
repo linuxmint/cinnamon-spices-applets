@@ -2,7 +2,7 @@
 // IO
 // --------------------------
 
-import { Log } from "lib/logger";
+import { Log } from "./logger";
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 

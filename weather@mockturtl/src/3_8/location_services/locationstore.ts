@@ -1,10 +1,10 @@
-import { Config } from "config";
-import { Event } from "lib/events";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { NotificationService } from "lib/notification_service";
-import { LocationData } from "types";
-import { _ } from "utils";
+import { Config } from "../config";
+import { Event } from "../lib/events";
+import { Log } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { NotificationService } from "../lib/notification_service";
+import { LocationData } from "../types";
+import { _ } from "../utils";
 export class LocationStore {
 	private locations: LocationData[] = [];
 	private app: WeatherApplet = null;

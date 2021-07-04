@@ -1,12 +1,12 @@
-import { OpenUrl } from "lib/commandRunner";
-import { Config } from "config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "consts";
-import { LocationStore } from "location_services/locationstore";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "types";
-import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "utils";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { OpenUrl } from "../lib/commandRunner";
+import { Config } from "../config";
+import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "../consts";
+import { LocationStore } from "../location_services/locationstore";
+import { Log } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
+import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
+import { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;

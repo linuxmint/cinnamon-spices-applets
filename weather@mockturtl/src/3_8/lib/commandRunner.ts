@@ -1,5 +1,5 @@
-import { Log } from "lib/logger";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { Log } from "./logger";
+import { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 

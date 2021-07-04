@@ -1,6 +1,6 @@
-import { Log } from "lib/logger";
-import { ErrorDetail } from "types";
-import { _ } from "utils";
+import { Log } from "./logger";
+import { ErrorDetail } from "../types";
+import { _ } from "../utils";
 
 const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
