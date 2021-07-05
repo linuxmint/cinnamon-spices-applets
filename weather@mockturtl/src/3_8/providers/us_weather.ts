@@ -10,7 +10,7 @@ import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "../utils";
 import { DateTime } from "luxon";
 
@@ -225,6 +225,10 @@ export class USWeather implements WeatherProvider {
 		let observation = this.MeshObservationData(json);
 		let timestamp = DateTime.fromJSDate(new Date(observation.properties.timestamp));
 		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+		let suntimes: SunTime = {
+			sunrise: DateTime.fromJSDate(times.sunrise),
+			sunset: DateTime.fromJSDate(times.sunset)
+		}
 		try {
 			let weather: WeatherData = {
 				coord: {
@@ -248,7 +252,7 @@ export class USWeather implements WeatherProvider {
 				temperature: CelsiusToKelvin(observation.properties.temperature.value),
 				pressure: observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
-				condition: this.ResolveCondition(observation.properties.icon, IsNight(times)),
+				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};
 

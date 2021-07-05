@@ -10,7 +10,7 @@ import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { GetTimesResult } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData } from "../types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
 import { DateTime } from "luxon";
 
@@ -105,7 +105,7 @@ export class DarkSky implements WeatherProvider {
 				condition: {
 					main: this.GetShortCurrentSummary(json.currently.summary),
 					description: json.currently.summary,
-					icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise.toJSDate(), sunset: sunset.toJSDate() }),
+					icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
 					customIcon: this.ResolveCustomIcon(json.currently.icon)
 				},
 				extra_field: {
@@ -120,7 +120,7 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.daily.data.length; i++) {
 				let day = json.daily.data[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.time),
+					date: DateTime.fromSeconds(day.time, {zone: json.timezone}),
 					temp_min: this.ToKelvin(day.temperatureLow),
 					temp_max: this.ToKelvin(day.temperatureHigh),
 					condition: {
@@ -142,12 +142,12 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.hourly.data.length; i++) {
 				let hour = json.hourly.data[i];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.time),
+					date: DateTime.fromSeconds(hour.time, {zone: json.timezone}),
 					temp: this.ToKelvin(hour.temperature),
 					condition: {
 						main: this.GetShortSummary(hour.summary),
 						description: this.ProcessSummary(hour.summary),
-						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise.toJSDate(), sunset: sunset.toJSDate() }, new Date(hour.time * 1000)),
+						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, {zone: json.timezone})),
 						customIcon: this.ResolveCustomIcon(hour.icon)
 					},
 					precipitation: {
@@ -275,7 +275,7 @@ export class DarkSky implements WeatherProvider {
 		return this.DarkSkyFilterWords.includes(word);
 	}
 
-	private ResolveIcon(icon: string, sunTimes?: Partial<GetTimesResult>, date?: Date): BuiltinIcons[] {
+	private ResolveIcon(icon: string, sunTimes?: SunTime, date?: DateTime): BuiltinIcons[] {
 		switch (icon) {
 			case "rain":
 				return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]

@@ -1,7 +1,8 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
 import { GetTimesResult } from "suncalc";
-import { ArrowIcons, BuiltinIcons, WeatherData } from "./types";
+import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -444,11 +445,11 @@ export function CompassDirectionText(deg: number): string {
  * @param sunTimes sunrise and sunset is used
  * @param date 
  */
-export function IsNight(sunTimes: Partial<GetTimesResult>, date?: Date): boolean {
+export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
-	let sunrise = MilitaryTime(sunTimes.sunrise);
-	let sunset = MilitaryTime(sunTimes.sunset);
+	let time = (!!date) ? MilitaryTime(date.toJSDate()) : MilitaryTime(new Date());
+	let sunrise = MilitaryTime(sunTimes.sunrise.toJSDate());
+	let sunset = MilitaryTime(sunTimes.sunset.toJSDate());
 	if (time >= sunrise && time < sunset) return false;
 	return true;
 }

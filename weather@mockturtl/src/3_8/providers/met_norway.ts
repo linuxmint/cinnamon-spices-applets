@@ -1,7 +1,7 @@
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes } from "../types";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
 import { CelsiusToKelvin, IsNight, _ } from "../utils";
 import { DateTime } from "luxon";
 
@@ -60,6 +60,10 @@ export class MetNorway implements WeatherProvider {
 	private ParseWeather(json: MetNorwayPayload): WeatherData {
 		json = this.RemoveEarlierElements(json);
 		let times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+		let suntimes: SunTime = {
+			sunrise: DateTime.fromJSDate(times.sunrise),
+			sunset: DateTime.fromJSDate(times.sunset)
+		}
 		// Current Weather
 		let current = json.properties.timeseries[0];
 		let result: WeatherData = {
@@ -68,8 +72,8 @@ export class MetNorway implements WeatherProvider {
 				lat: json.geometry.coordinates[1],
 				lon: json.geometry.coordinates[0]
 			},
-			date: DateTime.fromJSDate(new Date(current.time)),
-			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(times)),
+			date: DateTime.fromISO(current.time, {zone: "UTC"}),
+			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
 			extra_field: {
@@ -77,8 +81,8 @@ export class MetNorway implements WeatherProvider {
 				type: "percent",
 				value: current.data.instant.details.cloud_area_fraction
 			},
-			sunrise: DateTime.fromJSDate(times.sunrise),
-			sunset: DateTime.fromJSDate(times.sunset),
+			sunrise: suntimes.sunrise,
+			sunset: suntimes.sunset,
 			wind: {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
@@ -96,13 +100,13 @@ export class MetNorway implements WeatherProvider {
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
 				hourlyForecasts.push({
-					date: DateTime.fromJSDate(new Date(element.time)),
+					date: DateTime.fromISO(element.time, {zone: "UTC"}),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
 					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
-					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(times, new Date(element.time)))
+					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, {zone: "UTC"})))
 				});
 			}
 		}

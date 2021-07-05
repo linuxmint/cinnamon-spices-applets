@@ -3,6 +3,10 @@ import { GetTimesResult } from "suncalc";
 import { Services } from "./config";
 
 export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
+export interface SunTime {
+	sunrise: DateTime;
+	sunset: DateTime;
+}
 
 /**
  * A WeatherProvider must implement this interface.
