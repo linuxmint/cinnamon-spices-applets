@@ -69,9 +69,9 @@ export class OpenWeatherMap implements WeatherProvider {
 					url: "https://openweathermap.org/city/",
 					timeZone: json.timezone
 				},
-				date: DateTime.fromSeconds(json.current.dt),
-				sunrise: DateTime.fromSeconds(json.current.sunrise),
-				sunset: DateTime.fromSeconds(json.current.sunset),
+				date: DateTime.fromSeconds(json.current.dt, {zone: "UTC"}),
+				sunrise: DateTime.fromSeconds(json.current.sunrise, {zone: "UTC"}),
+				sunset: DateTime.fromSeconds(json.current.sunset, {zone: "UTC"}),
 				wind: {
 					speed: json.current.wind_speed,
 					degree: json.current.wind_deg
@@ -117,7 +117,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let i = 0; i < json.daily.length; i++) {
 				let day = json.daily[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.dt),
+					date: DateTime.fromSeconds(day.dt, {zone: "UTC"}),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
 					condition: {
@@ -135,7 +135,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.dt),
+					date: DateTime.fromSeconds(hour.dt, {zone: "UTC"}),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather[0].main,

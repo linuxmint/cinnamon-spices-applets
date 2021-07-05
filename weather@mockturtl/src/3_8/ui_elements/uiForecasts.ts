@@ -6,6 +6,7 @@ import { WeatherApplet } from "../main";
 import { WeatherData } from "../types";
 import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
@@ -27,8 +28,8 @@ export class UIForecasts {
 
 	private app: WeatherApplet;
 
-	public DayClicked: Event<WeatherButton, Date> = new Event();
-	public DayHovered: Event<WeatherButton, Date> = new Event();
+	public DayClicked: Event<WeatherButton, DateTime> = new Event();
+	public DayHovered: Event<WeatherButton, DateTime> = new Event();
 
 	// Callbacks with bound context, which has constant signature for event subsciption/unsubscription
 	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
@@ -218,13 +219,13 @@ export class UIForecasts {
 	}
 
 	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Hovered: " + (sender.ID as Date).toDateString());
-		this.DayHovered.Invoke(sender, sender.ID as Date);
+		Log.Instance.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
+		this.DayHovered.Invoke(sender, sender.ID as DateTime);
 	}
 
 	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Clicked: " + (sender.ID as Date).toDateString());
-		this.DayClicked.Invoke(sender, sender.ID as Date);
+		Log.Instance.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
+		this.DayClicked.Invoke(sender, sender.ID as DateTime);
 	}
 }
 

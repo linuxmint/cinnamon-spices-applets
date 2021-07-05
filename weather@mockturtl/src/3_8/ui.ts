@@ -9,6 +9,7 @@ import { UIHourlyForecasts } from "./ui_elements/uiHourlyForecasts";
 import { UIBar } from "./ui_elements/uiBar";
 import { UISeparator } from "./ui_elements/uiSeparator";
 import { WeatherButton } from "./ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label } = imports.gi.St;
@@ -42,7 +43,7 @@ export class UI {
 	private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
 	private readonly signals: imports.misc.signalManager.SignalManager;
 
-	private lastDateToggled: Date = null;
+	private lastDateToggled: DateTime = null;
 
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.App = app;
@@ -216,12 +217,12 @@ export class UI {
 		}))
 	}
 
-	private async OnDayClicked(sender: WeatherButton, date: Date): Promise<void> {
+	private async OnDayClicked(sender: WeatherButton, date: DateTime): Promise<void> {
 		// Open hourly weather if collapsed
 		if (!this.HourlyWeather.Toggled)
 			await this.ShowHourlyWeather();
 		// If the same day was toggle the second time, collapse
-		else if (this.lastDateToggled == date) {
+		else if (this.lastDateToggled.equals(date)) {
 			await this.HideHourlyWeather();
 			return;
 		}
