@@ -1,4 +1,4 @@
-import { createActivWidget } from "lib/ActivWidget";
+import { createActivWidget } from "../../lib/ActivWidget";
 
 const { Button, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;

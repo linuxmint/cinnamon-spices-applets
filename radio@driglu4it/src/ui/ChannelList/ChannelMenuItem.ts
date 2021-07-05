@@ -1,6 +1,6 @@
-import * as consts from 'consts'
-import { createIconMenuItem } from 'lib/IconMenuItem';
-import { AdvancedPlaybackStatus } from 'types';
+import * as consts from '../../consts'
+import { createIconMenuItem } from '../../lib/IconMenuItem';
+import { AdvancedPlaybackStatus } from '../../types';
 
 export interface Arguments {
     channelName: string,

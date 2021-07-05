@@ -1,6 +1,6 @@
-import { POPUP_MENU_ITEM_CLASS } from "consts"
-import { createActivWidget } from "lib/ActivWidget";
-import { createSlider } from "lib/Slider";
+import { POPUP_MENU_ITEM_CLASS } from "../consts"
+import { createActivWidget } from "../lib/ActivWidget";
+import { createSlider } from "../lib/Slider";
 
 const { BoxLayout, Label } = imports.gi.St
 

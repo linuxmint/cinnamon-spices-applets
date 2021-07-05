@@ -14,7 +14,6 @@ export function createAppletLabel() {
     })
 
     // No idea why needed but without the label is not shown 
-    // @ts-ignore
     label.clutter_text.ellipsize = EllipsizeMode.NONE
 
     let visible: boolean

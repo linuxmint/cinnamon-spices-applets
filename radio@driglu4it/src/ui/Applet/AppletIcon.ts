@@ -1,5 +1,5 @@
-import { RADIO_SYMBOLIC_ICON_NAME, LOADING_ICON_NAME } from "consts"
-import { AdvancedPlaybackStatus, IconType } from "types"
+import { RADIO_SYMBOLIC_ICON_NAME, LOADING_ICON_NAME } from "../../consts"
+import { AdvancedPlaybackStatus, IconType } from "../../types"
 
 const { Icon, IconType } = imports.gi.St
 const { IconType: IconTypeEnum } = imports.gi.St

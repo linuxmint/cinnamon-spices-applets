@@ -1,4 +1,4 @@
-import { createBasicNotification } from "ui/Notifications/NotificationBase"
+import { createBasicNotification } from "./NotificationBase"
 
 interface Arguments {
     text: string
