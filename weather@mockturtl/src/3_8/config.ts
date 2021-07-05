@@ -30,7 +30,6 @@ export type Services =
 	"MetNorway" |
 	"Weatherbit" |
 	"ClimacellV4" |
-	"Climacell" |
 	"Met Office UK" |
 	"US Weather" |
 	"Visual Crossing" |

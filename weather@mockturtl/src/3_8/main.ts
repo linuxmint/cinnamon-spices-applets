@@ -5,7 +5,6 @@
 //
 //----------------------------------------------------------------------
 
-import { Climacell } from "./providers/climacell";
 import { Config } from "./config";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./providers/met_uk";
@@ -420,9 +419,6 @@ export class WeatherApplet extends TextIconApplet {
 				break;
 			case "ClimacellV4":
 				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);
-				break;
-			case "Climacell":
-				if (currentName != "Climacell" || force) this.provider = new Climacell(this);
 				break;
 			case "Met Office UK":
 				if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);
