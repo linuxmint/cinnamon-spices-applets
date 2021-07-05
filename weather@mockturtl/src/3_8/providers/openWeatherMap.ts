@@ -53,11 +53,12 @@ export class OpenWeatherMap implements WeatherProvider {
 
 		if (this.HadErrors(json)) return null;
 
-		return this.ParseWeather(json, this);
+		return this.ParseWeather(json, loc);
 	};
 
-	private ParseWeather(json: any, self: OpenWeatherMap): WeatherData {
+	private ParseWeather(json: any, loc: LocationData): WeatherData {
 		try {
+			let tz = loc.timeZone ?? "UTC";
 			let weather: WeatherData = {
 				coord: {
 					lat: json.lat,
@@ -69,9 +70,9 @@ export class OpenWeatherMap implements WeatherProvider {
 					url: "https://openweathermap.org/city/",
 					timeZone: json.timezone
 				},
-				date: DateTime.fromSeconds(json.current.dt, {zone: "UTC"}),
-				sunrise: DateTime.fromSeconds(json.current.sunrise, {zone: "UTC"}),
-				sunset: DateTime.fromSeconds(json.current.sunset, {zone: "UTC"}),
+				date: DateTime.fromSeconds(json.current.dt, {zone: tz}),
+				sunrise: DateTime.fromSeconds(json.current.sunrise, {zone: tz}),
+				sunset: DateTime.fromSeconds(json.current.sunset, {zone: tz}),
 				wind: {
 					speed: json.current.wind_speed,
 					degree: json.current.wind_deg
@@ -82,8 +83,8 @@ export class OpenWeatherMap implements WeatherProvider {
 				condition: {
 					main: json?.current?.weather?.[0]?.main,
 					description: json?.current?.weather?.[0]?.description,
-					icons: self.ResolveIcon(json?.current?.weather?.[0]?.icon),
-					customIcon: self.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
+					icons: this.ResolveIcon(json?.current?.weather?.[0]?.icon),
+					customIcon: this.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
 				},
 				extra_field: {
 					name: _("Feels Like"),
@@ -117,14 +118,14 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let i = 0; i < json.daily.length; i++) {
 				let day = json.daily[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.dt, {zone: "UTC"}),
+					date: DateTime.fromSeconds(day.dt, {zone: tz}),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
 					condition: {
 						main: day.weather[0].main,
 						description: day.weather[0].description,
-						icons: self.ResolveIcon(day.weather[0].icon),
-						customIcon: self.ResolveCustomIcon(day.weather[0].icon)
+						icons: this.ResolveIcon(day.weather[0].icon),
+						customIcon: this.ResolveCustomIcon(day.weather[0].icon)
 					},
 				};
 				forecasts.push(forecast);
@@ -135,13 +136,13 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.dt, {zone: "UTC"}),
+					date: DateTime.fromSeconds(hour.dt, {zone: tz}),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather[0].main,
 						description: hour.weather[0].description,
-						icons: self.ResolveIcon(hour.weather[0].icon),
-						customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+						icons: this.ResolveIcon(hour.weather[0].icon),
+						customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
 					},
 				}
 
@@ -171,7 +172,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			return weather;
 		} catch (e) {
 			Log.Instance.Error("OpenWeatherMap Weather Parsing error: " + e);
-			self.app.ShowError({
+			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",
 				detail: "unusual payload",

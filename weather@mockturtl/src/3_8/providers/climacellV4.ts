@@ -63,13 +63,14 @@ export class ClimacellV4 implements WeatherProvider {
 		let current = data.data.timelines.find(x => x.timestep == "current")?.intervals?.[0];
 		let hourly = data.data.timelines.find(x => x.timestep == "1h").intervals;
 		let daily = data.data.timelines.find(x => x.timestep == "1d").intervals;
+		let tz = loc.timeZone ?? "UTC";
 
 		let result: WeatherData = {
 			coord: {
 				lat: loc.lat,
 				lon: loc.lon
 			},
-			date: DateTime.fromISO(current.startTime, {zone: "UTC"}),
+			date: DateTime.fromISO(current.startTime, {zone: tz}),
 			condition: this.ResolveCondition(current.values.weatherCode),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
@@ -78,8 +79,8 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, {zone: "UTC"}),
-			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, {zone: "UTC"}),
+			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, {zone: tz}),
+			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, {zone: tz}),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
@@ -98,7 +99,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = daily[index];
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, {zone: "UTC"}),
+				date: DateTime.fromISO(element.startTime, {zone: tz}),
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
@@ -108,7 +109,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = hourly[index];
 			let hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, {zone: "UTC"}),
+				date: DateTime.fromISO(element.startTime, {zone: tz}),
 				temp: CelsiusToKelvin(element.values.temperature)
 			};
 

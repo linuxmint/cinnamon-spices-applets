@@ -46,11 +46,12 @@ export class DanishMI implements WeatherProvider {
 		this.forecastParams.lon = loc.lon;
 
 		let forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
-		return this.ParseWeather(observations, forecasts);
+		return this.ParseWeather(observations, forecasts, loc);
 	}
 
-	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload): WeatherData {
+	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload, loc: LocationData): WeatherData {
 		let observation = this.MergeObservations(observations);
+		let tz = loc.timeZone ?? "UTC";
 		let result = {
 			temperature: CelsiusToKelvin(observation.Temperature2m),
 			condition: this.ResolveCondition(observation.symbol),
@@ -72,14 +73,14 @@ export class DanishMI implements WeatherProvider {
 			lon: forecasts.longitude,
 			lat: forecasts.latitude
 		};
-		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), {zone: "UTC"});
+		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), {zone: tz});
 		result.humidity = result.humidity ?? forecasts.timeserie[0].humidity;
 		result.pressure = result.pressure ?? forecasts.timeserie[0].pressure;
 		result.temperature = result.temperature ?? CelsiusToKelvin(forecasts.timeserie[0].temp);
 		result.wind.degree = result.wind.degree ?? forecasts.timeserie[0].windDegree;
 		result.wind.speed = result.wind.speed ?? forecasts.timeserie[0].windSpeed;
-		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), {zone: "UTC"});
-		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), {zone: "UTC"});
+		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), {zone: tz});
+		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), {zone: tz});
 
 		if (result.condition.customIcon == "alien-symbolic") {
 			result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
@@ -90,7 +91,7 @@ export class DanishMI implements WeatherProvider {
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
 			forecastData.push({
-				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: "UTC"}),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: tz}),
 				temp_max: CelsiusToKelvin(element.maxTemp),
 				temp_min: CelsiusToKelvin(element.minTemp),
 				condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
@@ -105,7 +106,7 @@ export class DanishMI implements WeatherProvider {
 				continue
 
 			let hour: HourlyForecastData = {
-				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: "UTC"}),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: tz}),
 				temp: CelsiusToKelvin(element.temp),
 				condition: this.ResolveCondition(element.symbol)
 			};
