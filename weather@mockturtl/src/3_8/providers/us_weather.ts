@@ -9,8 +9,8 @@
 import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { SunCalc } from "../lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "../types";
+import { getTimes } from "suncalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "../utils";
 
 export class USWeather implements WeatherProvider {
@@ -25,8 +25,6 @@ export class USWeather implements WeatherProvider {
 	public readonly maxHourlyForecastSupport = 156;
 	public readonly needsApiKey = false;
 
-	private sunCalc: SunCalc;
-
 	private sitesUrl = "https://api.weather.gov/points/";
 
 	private app: WeatherApplet;
@@ -39,7 +37,6 @@ export class USWeather implements WeatherProvider {
 
 	constructor(_app: WeatherApplet) {
 		this.app = _app;
-		this.sunCalc = new SunCalc();
 	}
 
 	//--------------------------------------------------------
@@ -226,7 +223,7 @@ export class USWeather implements WeatherProvider {
 		}
 		let observation = this.MeshObservationData(json);
 		let timestamp = new Date(observation.properties.timestamp);
-		let times = this.sunCalc.getTimes(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
 		try {
 			let weather: WeatherData = {
 				coord: {

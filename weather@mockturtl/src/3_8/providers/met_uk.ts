@@ -9,8 +9,8 @@
 import { DistanceUnits } from "../config";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { SunCalc } from "../lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "../types";
+import { getTimes } from "suncalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "../utils";
 
 export class MetUk implements WeatherProvider {
@@ -24,8 +24,6 @@ export class MetUk implements WeatherProvider {
 	public readonly website = "https://www.metoffice.gov.uk/";
 	public readonly maxHourlyForecastSupport = 36;
 	public readonly needsApiKey = false;
-
-	private sunCalc: SunCalc;
 
 	private baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
 
@@ -47,7 +45,6 @@ export class MetUk implements WeatherProvider {
 
 	constructor(_app: WeatherApplet) {
 		this.app = _app;
-		this.sunCalc = new SunCalc();
 	}
 
 	//--------------------------------------------------------
@@ -192,7 +189,7 @@ export class MetUk implements WeatherProvider {
 			return null;
 		}
 
-		let times = this.sunCalc.getTimes(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
+		let times = (getTimes as correctGetTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
 		try {
 			let weather: WeatherData = {
 				coord: {

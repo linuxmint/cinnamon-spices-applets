@@ -9,7 +9,7 @@
 import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { SunTimes } from "../lib/sunCalc";
+import { GetTimesResult } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData } from "../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
 
@@ -274,7 +274,7 @@ export class DarkSky implements WeatherProvider {
 		return this.DarkSkyFilterWords.includes(word);
 	}
 
-	private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): BuiltinIcons[] {
+	private ResolveIcon(icon: string, sunTimes?: Partial<GetTimesResult>, date?: Date): BuiltinIcons[] {
 		switch (icon) {
 			case "rain":
 				return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]

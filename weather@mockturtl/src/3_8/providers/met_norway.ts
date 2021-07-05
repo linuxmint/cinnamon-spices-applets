@@ -1,7 +1,7 @@
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { SunCalc } from "../lib/sunCalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "../types";
+import { getTimes } from "suncalc";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { CelsiusToKelvin, IsNight, _ } from "../utils";
 
 export class MetNorway implements WeatherProvider {
@@ -14,11 +14,9 @@ export class MetNorway implements WeatherProvider {
 
 	private app: WeatherApplet
 	private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
-	private sunCalc: SunCalc;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
-		this.sunCalc = new SunCalc();
 	}
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData> {
@@ -60,7 +58,7 @@ export class MetNorway implements WeatherProvider {
 
 	private ParseWeather(json: MetNorwayPayload): WeatherData {
 		json = this.RemoveEarlierElements(json);
-		let times = this.sunCalc.getTimes(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+		let times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
 		// Current Weather
 		let current = json.properties.timeseries[0];
 		let result: WeatherData = {
