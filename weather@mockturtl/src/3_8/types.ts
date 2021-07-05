@@ -120,6 +120,7 @@ export interface LocationData {
 	lon: number;
 	city: string;
 	country: string;
+	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
 }

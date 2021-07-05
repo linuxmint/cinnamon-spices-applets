@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { LocationData } from "../types";
@@ -47,7 +48,7 @@ export class GeoLocation {
 				lon: parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
 				country: locationData[0].address.country,
-				timeZone: null,
+				timeZone: DateTime.now().zoneName,
 				entryText: this.BuildEntryText(locationData[0]),
 			}
 			this.cache[searchText] = result;

@@ -6,6 +6,7 @@ import { Log } from "./lib/logger";
 import { UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
+import { DateTime } from "luxon";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -317,6 +318,10 @@ export class Config {
 		// Find location in storage
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
+			// TODO: Validate Timezone
+			if (!location.timeZone)
+				location.timeZone = DateTime.now().zoneName;
+
 			Log.Instance.Debug("location exist in locationstore, retrieve");
 			this.LocStore.SwitchToLocation(location);
 			this.InjectLocationToConfig(location, true);
@@ -332,7 +337,7 @@ export class Config {
 				lon: parseFloat(latLong[1]),
 				city: null,
 				country: null,
-				timeZone: null,
+				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
 			this.InjectLocationToConfig(location);
@@ -350,6 +355,9 @@ export class Config {
 		// Maybe location is in locationStore, first search
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
+			// TODO: Validate timezone
+			if (!location.timeZone)
+				location.timeZone = DateTime.now().zoneName;
 			Log.Instance.Debug("Found location was found in locationStore, return that instead");
 			this.InjectLocationToConfig(location);
 			this.LocStore.SwitchToLocation(location);

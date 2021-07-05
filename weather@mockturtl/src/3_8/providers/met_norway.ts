@@ -32,16 +32,16 @@ export class MetNorway implements WeatherProvider {
 			return null;
 		}
 
-		return this.ParseWeather(json);
+		return this.ParseWeather(json, loc);
 	}
 
-	private RemoveEarlierElements(json: MetNorwayPayload): MetNorwayPayload {
-		let now = new Date();
+	private RemoveEarlierElements(json: MetNorwayPayload, loc: LocationData): MetNorwayPayload {
+		let now = DateTime.now().setZone(loc.timeZone);
 		let startIndex = -1;
 		for (let i = 0; i < json.properties.timeseries.length; i++) {
 			const element = json.properties.timeseries[i];
-			let timestamp = new Date(element.time);
-			if (timestamp < now && now.getHours() != timestamp.getHours()) {
+			let timestamp = DateTime.fromISO(element.time, {zone: loc.timeZone});
+			if (timestamp < now && now.hour != timestamp.hour) {
 				startIndex = i;
 			}
 			else {
@@ -57,8 +57,9 @@ export class MetNorway implements WeatherProvider {
 		return json;
 	}
 
-	private ParseWeather(json: MetNorwayPayload): WeatherData {
-		json = this.RemoveEarlierElements(json);
+	private ParseWeather(json: MetNorwayPayload, loc: LocationData): WeatherData {
+		json = this.RemoveEarlierElements(json, loc);
+
 		let times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
 		let suntimes: SunTime = {
 			sunrise: DateTime.fromJSDate(times.sunrise),
@@ -72,7 +73,7 @@ export class MetNorway implements WeatherProvider {
 				lat: json.geometry.coordinates[1],
 				lon: json.geometry.coordinates[0]
 			},
-			date: DateTime.fromISO(current.time, {zone: "UTC"}),
+			date: DateTime.fromISO(current.time, {zone: loc.timeZone}),
 			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
@@ -100,13 +101,13 @@ export class MetNorway implements WeatherProvider {
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
 				hourlyForecasts.push({
-					date: DateTime.fromISO(element.time, {zone: "UTC"}),
+					date: DateTime.fromISO(element.time, {zone: loc.timeZone}),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
 					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
-					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, {zone: "UTC"})))
+					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, {zone: loc.timeZone})))
 				});
 			}
 		}
