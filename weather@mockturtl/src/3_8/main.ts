@@ -166,7 +166,7 @@ export class WeatherApplet extends TextIconApplet {
 	private DisplayWeather(weather: WeatherData): boolean {
 		let location = GenerateLocationText(weather, this.config);
 
-		let lastUpdatedTime = AwareDateString(weather.date.toJSDate(), this.config.currentLocale, this.config._show24Hours);
+		let lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, weather.location.timeZone);
 		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
 		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
 		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);

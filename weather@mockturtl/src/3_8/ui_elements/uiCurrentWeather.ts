@@ -7,6 +7,7 @@ import { WeatherApplet } from "../main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
 import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
@@ -78,7 +79,7 @@ export class CurrentWeather {
 			this.SetPressure(weather.pressure);
 			this.SetAPIUniqueField(weather.extra_field);
 			if (config._showSunrise)
-				this.SetSunriseAndSunset(weather.sunrise.toJSDate(), weather.sunset.toJSDate(), weather.location.timeZone);
+				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
 
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
@@ -307,7 +308,7 @@ export class CurrentWeather {
 		}
 	}
 
-	private SetSunriseAndSunset(sunrise: Date, sunset: Date, tz: string): void {
+	private SetSunriseAndSunset(sunrise: DateTime, sunset: DateTime, tz: string): void {
 		let sunriseText = "";
 		let sunsetText = "";
 		if (sunrise != null && sunset != null && this.app.config._showSunrise) {

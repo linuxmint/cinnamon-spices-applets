@@ -84,7 +84,7 @@ function NormalizeTimezone(tz: string) {
 	return tz;
 }
 
-export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
+export function GetDayName(date: DateTime, locale: string, showDate: boolean = false, tz: string): string {
 	let params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
 		timeZone: tz
@@ -97,26 +97,25 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
 	}
 
 
-	let now = new Date();
-	let tomorrow = new Date();
-	tomorrow.setDate(now.getDate() + 1);
+	let now = DateTime.utc().setZone(tz);
+	let tomorrow = DateTime.utc().setZone(tz).plus({days: 1});
 	// today or tomorrow, no need to include date
-	if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
+	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
 		delete params.weekday;
 
-	let dateString = date.toLocaleString(locale, params);
+	let dateString = date.setLocale(locale).toLocaleString(params);
 
 	// Make sure French days are caapitalised (they are not by default)
 	if (locale.startsWith("fr"))
 		dateString = CapitalizeFirstLetter(dateString);
 
-	if (date.getDate() == now.getDate()) dateString = _("Today");
-	if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");
+	if (date.hasSame(now, "day")) dateString = _("Today");
+	if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");
 
 	return dateString;
 }
 
-export function GetHoursMinutes(date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
+export function GetHoursMinutes(date: DateTime, locale: string, hours24Format: boolean, tz: string, onlyHours: boolean = false): string {
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
@@ -128,11 +127,11 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
 	if (!onlyHours)
 		params.minute = "2-digit";
 
-	return date.toLocaleString(locale, params);
+	return date.setLocale(locale).toLocaleString(params);
 }
 
-export function AwareDateString(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
-	let now = new Date();
+export function AwareDateString(date: DateTime, locale: string, hours24Format: boolean, tz: string): string {
+	let now = DateTime.utc().setZone(tz);
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		minute: "2-digit",
@@ -140,18 +139,18 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
 		timeZone: tz
 	};
 
-	if (date.toDateString() != now.toDateString()) {
+	if (date.hasSame(now, "day")) {
 		params.month = "short";
 		params.day = "numeric";
 	}
 
-	if (date.getFullYear() != now.getFullYear()) {
+	if (date.hasSame(now, "year")) {
 		params.year = "numeric";
 	}
 
 	params.timeZone = NormalizeTimezone(tz);
 
-	return date.toLocaleString(locale, params);
+	return date.setLocale(locale).toLocaleString(params);
 }
 /**
  * 
