@@ -80,7 +80,7 @@ export class UIForecasts {
 					const element = weather.hourlyForecasts[index];
 					if (!element)
 						break;
-					if (OnSameDay(element.date.toJSDate(), forecastData.date.toJSDate(), config)) {
+					if (OnSameDay(element.date, forecastData.date)) {
 						hasHourlyWeather = true;
 						break;
 					}
