@@ -89,12 +89,12 @@ export class MetUk implements WeatherProvider {
 		}
 
 		// Start getting forecast data
-		let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast) as Promise<ForecastData[]>;
-		let hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
+		let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc) as Promise<ForecastData[]>;
+		let hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc) as Promise<HourlyForecastData[]>;
 
 		// Get and Parse Observation data
 		let observations = await this.GetObservationData(this.observationSites);
-		let currentResult = this.ParseCurrent(observations);
+		let currentResult = this.ParseCurrent(observations, newLoc);
 		if (!currentResult) return null;
 
 		// await for forecasts if not finished
@@ -155,7 +155,7 @@ export class MetUk implements WeatherProvider {
 	 * @param baseUrl 
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(query: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+	private async GetData(query: string, ParseFunction: (json: any, context: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[], loc: LocationData) {
 		if (query == null)
 			return null;
 
@@ -165,11 +165,11 @@ export class MetUk implements WeatherProvider {
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, this);
+		return ParseFunction(json, this, loc);
 	};
 
-	private ParseCurrent(json: METPayload[]): WeatherData {
-		let observation = this.MeshObservations(json);
+	private ParseCurrent(json: METPayload[], loc: LocationData): WeatherData {
+		let observation = this.MeshObservations(json, loc);
 		if (!observation) {
 			return null;
 		}
@@ -204,7 +204,7 @@ export class MetUk implements WeatherProvider {
 					timeZone: null,
 					distanceFrom: this.observationSites[dataIndex].dist
 				},
-				date: DateTime.fromJSDate(new Date(json[dataIndex].SiteRep.DV.dataDate)),
+				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, {zone: loc.timeZone}),
 				sunrise: DateTime.fromJSDate(times.sunrise),
 				sunset: DateTime.fromJSDate(times.sunset),
 				wind: {
@@ -251,7 +251,7 @@ export class MetUk implements WeatherProvider {
 		}
 	};
 
-	private ParseForecast(json: METPayload, self: MetUk): ForecastData[] {
+	private ParseForecast(json: METPayload, self: MetUk, loc: LocationData): ForecastData[] {
 		let forecasts: ForecastData[] = [];
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
@@ -263,7 +263,7 @@ export class MetUk implements WeatherProvider {
 				let night = element.Rep[1] as ForecastPayload;
 
 				let forecast: ForecastData = {
-					date: DateTime.fromJSDate(new Date(self.PartialToISOString(element.value))),
+					date: DateTime.fromISO(self.PartialToISOString(element.value), {zone: loc.timeZone}),
 					temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
 					temp_max: CelsiusToKelvin(parseFloat(day.Dm)),
 					condition: self.ResolveCondition(day.W),
@@ -279,11 +279,12 @@ export class MetUk implements WeatherProvider {
 		}
 	};
 
-	private ParseHourlyForecast(json: METPayload, self: MetUk): HourlyForecastData[] {
+	private ParseHourlyForecast(json: METPayload, self: MetUk, loc: LocationData): HourlyForecastData[] {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
 				let day = json.SiteRep.DV.Location.Period[i];
+				// TODO: Convert to DateTime
 				let date = new Date(self.PartialToISOString(day.value));
 				if (!Array.isArray(day.Rep))
 					continue;
@@ -356,7 +357,7 @@ export class MetUk implements WeatherProvider {
 		else if (distance < 40000) {
 			stringFormat.smallerDistance = MetreToUserUnits(20000, unit).toString();
 			stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
-			return `${_("Very good")} ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
+			return `${_("Very good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
 	}
 
@@ -379,15 +380,15 @@ export class MetUk implements WeatherProvider {
 	 * Mesh observation data if some values are missing
 	 * @param observations sorted by distance of location, ascending
 	 */
-	private MeshObservations(observations: METPayload[]): ObservationPayload {
+	private MeshObservations(observations: METPayload[], loc: LocationData): ObservationPayload {
 		if (!observations) return null;
 		if (observations.length == 0) return null;
 		// Sometimes Location property is missing
-		let result: ObservationPayload = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, new Date());
+		let result: ObservationPayload = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, new Date(), loc);
 		if (observations.length == 1) return result;
 		for (let index = 0; index < observations.length; index++) {
 			if (observations[index]?.SiteRep?.DV?.Location?.Period == null) continue;
-			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date(), loc);
 			if (result == null) result = nextObservation;
 			let debugText =
 				" Observation data missing, plugged in from ID " +
@@ -437,10 +438,11 @@ export class MetUk implements WeatherProvider {
 	 * @param observations 
 	 * @param day 
 	 */
-	private GetLatestObservation(observations: Period[], day: Date): ObservationPayload {
+	private GetLatestObservation(observations: Period[], day: Date, loc: LocationData): ObservationPayload {
 		if (observations == null) return null;
 		for (let index = 0; index < observations.length; index++) {
 			const element = observations[index];
+			// TODO: Convert to datetime
 			let date = new Date(this.PartialToISOString(element.value));
 			if (date.toLocaleDateString() != day.toLocaleDateString()) continue;
 			if (Array.isArray(element.Rep))
