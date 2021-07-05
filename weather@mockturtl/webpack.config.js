@@ -13,7 +13,8 @@ module.exports = {
     devtool: "eval-source-map",
     target: 'node', // without webpack renames 'global'
 	optimization: {
-        minimize: true
+        minimize: true,
+		usedExports: true,
     },
     module: {
         rules: [

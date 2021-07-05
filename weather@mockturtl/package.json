@@ -6,18 +6,20 @@
   "scripts": {
     "start": "webpack --config webpack.config.js"
   },
+  "sideEffects": false,
   "license": "MIT",
   "author": "Attila Greguss",
   "dependencies": {
-    "@types/suncalc": "^1.8.0",
     "luxon": "^1.27.0",
     "suncalc": "^1.8.0"
   },
   "devDependencies": {
     "@types/luxon": "^1.27.0",
+    "@types/suncalc": "^1.8.0",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",
     "webpack": "^5.42.0",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2"
   }
 }
