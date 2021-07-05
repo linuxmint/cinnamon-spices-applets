@@ -6,7 +6,7 @@ import { Condition, ForecastData, HourlyForecastData, LocationData, Precipitatio
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
 
 
-
+// TODO: Convert to DateTime
 export class VisualCrossing implements WeatherProvider {
 	readonly prettyName: string = _("Visual Crossing");
 	readonly name: Services = "Visual Crossing";

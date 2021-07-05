@@ -82,7 +82,7 @@ export class USWeather implements WeatherProvider {
 		}
 
 		// Parsing data
-		let weather = this.ParseCurrent(observations, hourly);
+		let weather = this.ParseCurrent(observations, hourly, loc);
 		weather.forecasts = this.ParseForecast(forecast);
 		weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
 
@@ -217,13 +217,13 @@ export class USWeather implements WeatherProvider {
 	 * @param json 
 	 * @param hourly can be null
 	 */
-	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload): WeatherData {
+	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData {
 		if (json.length == 0) {
 			Log.Instance.Error("No observation stations/data are available");
 			return null;
 		}
 		let observation = this.MeshObservationData(json);
-		let timestamp = DateTime.fromJSDate(new Date(observation.properties.timestamp));
+		let timestamp = DateTime.fromISO(observation.properties.timestamp, {zone: this.observationStations[0].properties.timeZone});
 		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
 		let suntimes: SunTime = {
 			sunrise: DateTime.fromJSDate(times.sunrise),
@@ -243,8 +243,8 @@ export class USWeather implements WeatherProvider {
 					distanceFrom: this.observationStations[0].dist
 				},
 				date: timestamp,
-				sunrise: DateTime.fromJSDate(times.sunrise),
-				sunset: DateTime.fromJSDate(times.sunset),
+				sunrise: DateTime.fromJSDate(times.sunrise, {zone: this.observationStations[0].properties.timeZone}),
+				sunset: DateTime.fromJSDate(times.sunset, {zone: this.observationStations[0].properties.timeZone}),
 				wind: {
 					speed: KPHtoMPS(observation.properties.windSpeed.value),
 					degree: observation.properties.windDirection.value
@@ -320,7 +320,7 @@ export class USWeather implements WeatherProvider {
 				startIndex++;
 				let today = json.properties.periods[0]
 				let forecast: ForecastData = {
-					date: DateTime.fromJSDate(new Date(today.startTime)),
+					date: DateTime.fromISO(today.startTime, {zone: this.observationStations[0].properties.timeZone}),
 					temp_min: FahrenheitToKelvin(today.temperature),
 					temp_max: FahrenheitToKelvin(today.temperature),
 					condition: this.ResolveCondition(today.icon),
@@ -334,7 +334,7 @@ export class USWeather implements WeatherProvider {
 				let night = json.properties.periods[i + 1]; // this can be undefined
 				if (!night) night = day;
 				let forecast: ForecastData = {
-					date: DateTime.fromJSDate(new Date(day.startTime)),
+					date: DateTime.fromISO(day.startTime, {zone: this.observationStations[0].properties.timeZone}),
 					temp_min: FahrenheitToKelvin(night.temperature),
 					temp_max: FahrenheitToKelvin(day.temperature),
 					condition: this.ResolveCondition(day.icon),
@@ -355,10 +355,10 @@ export class USWeather implements WeatherProvider {
 		try {
 			for (let i = 0; i < json.properties.periods.length; i++) {
 				let hour = json.properties.periods[i];
-				let timestamp = new Date(hour.startTime);
+				let timestamp = DateTime.fromISO(hour.startTime, {zone: this.observationStations[0].properties.timeZone});
 
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromJSDate(timestamp),
+					date: timestamp,
 					temp: CelsiusToKelvin(hour.temperature),
 					condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
 					precipitation: null
@@ -382,7 +382,6 @@ export class USWeather implements WeatherProvider {
 	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
 		if (icon == null) return null;
 		let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
-		let iconType = this.app.config.IconType;
 		switch (code[0]) {
 			case "skc": // Fair/clear
 				return {
