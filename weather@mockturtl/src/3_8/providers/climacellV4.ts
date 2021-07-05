@@ -69,7 +69,7 @@ export class ClimacellV4 implements WeatherProvider {
 				lat: loc.lat,
 				lon: loc.lon
 			},
-			date: DateTime.fromJSDate(new Date(current.startTime)),
+			date: DateTime.fromISO(current.startTime, {zone: "UTC"}),
 			condition: this.ResolveCondition(current.values.weatherCode),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
@@ -78,8 +78,8 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: DateTime.fromJSDate(new Date(daily?.[0].values.sunriseTime)),
-			sunset: DateTime.fromJSDate(new Date(daily?.[0].values.sunsetTime)),
+			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, {zone: "UTC"}),
+			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, {zone: "UTC"}),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
@@ -98,7 +98,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = daily[index];
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromJSDate(new Date(element.startTime)),
+				date: DateTime.fromISO(element.startTime, {zone: "UTC"}),
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
@@ -108,13 +108,13 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = hourly[index];
 			let hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromJSDate(new Date(element.startTime)),
+				date: DateTime.fromISO(element.startTime, {zone: "UTC"}),
 				temp: CelsiusToKelvin(element.values.temperature)
 			};
 
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
-			hour.date = hour.date.set({hour: 0, second: 0, millisecond: 0});
+			hour.date = hour.date.set({minute: 0, second: 0, millisecond: 0});
 
 			if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
 				hour.precipitation = {

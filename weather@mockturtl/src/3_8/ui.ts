@@ -43,7 +43,7 @@ export class UI {
 	private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
 	private readonly signals: imports.misc.signalManager.SignalManager;
 
-	private lastDateToggled: DateTime = null;
+	private lastDateToggled?: DateTime = null;
 
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.App = app;
@@ -222,7 +222,7 @@ export class UI {
 		if (!this.HourlyWeather.Toggled)
 			await this.ShowHourlyWeather();
 		// If the same day was toggle the second time, collapse
-		else if (this.lastDateToggled.equals(date)) {
+		else if (this.lastDateToggled?.equals(date)) {
 			await this.HideHourlyWeather();
 			return;
 		}
