@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { Services } from "../config";
 import { HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
@@ -71,14 +72,14 @@ export class DanishMI implements WeatherProvider {
 			lon: forecasts.longitude,
 			lat: forecasts.latitude
 		};
-		result.date = this.DateStringToDate(forecasts.lastupdate);
+		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate));
 		result.humidity = result.humidity ?? forecasts.timeserie[0].humidity;
 		result.pressure = result.pressure ?? forecasts.timeserie[0].pressure;
 		result.temperature = result.temperature ?? CelsiusToKelvin(forecasts.timeserie[0].temp);
 		result.wind.degree = result.wind.degree ?? forecasts.timeserie[0].windDegree;
 		result.wind.speed = result.wind.speed ?? forecasts.timeserie[0].windSpeed;
-		result.sunrise = this.DateStringToDate(forecasts.sunrise);
-		result.sunset = this.DateStringToDate(forecasts.sunset);
+		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise));
+		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset));
 
 		if (result.condition.customIcon == "alien-symbolic") {
 			result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
@@ -89,7 +90,7 @@ export class DanishMI implements WeatherProvider {
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
 			forecastData.push({
-				date: this.DateStringToDate(element.time),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time)),
 				temp_max: CelsiusToKelvin(element.maxTemp),
 				temp_min: CelsiusToKelvin(element.minTemp),
 				condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
@@ -104,7 +105,7 @@ export class DanishMI implements WeatherProvider {
 				continue
 
 			let hour: HourlyForecastData = {
-				date: this.DateStringToDate(element.time),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time)),
 				temp: CelsiusToKelvin(element.temp),
 				condition: this.ResolveCondition(element.symbol)
 			};

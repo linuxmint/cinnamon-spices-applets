@@ -3,6 +3,7 @@ import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { CelsiusToKelvin, IsNight, _ } from "../utils";
+import { DateTime } from "luxon";
 
 export class MetNorway implements WeatherProvider {
 	public readonly prettyName = _("MET Norway");
@@ -67,7 +68,7 @@ export class MetNorway implements WeatherProvider {
 				lat: json.geometry.coordinates[1],
 				lon: json.geometry.coordinates[0]
 			},
-			date: new Date(current.time),
+			date: DateTime.fromJSDate(new Date(current.time)),
 			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(times)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
@@ -76,8 +77,8 @@ export class MetNorway implements WeatherProvider {
 				type: "percent",
 				value: current.data.instant.details.cloud_area_fraction
 			},
-			sunrise: times.sunrise,
-			sunset: times.sunset,
+			sunrise: DateTime.fromJSDate(times.sunrise),
+			sunset: DateTime.fromJSDate(times.sunset),
 			wind: {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
@@ -95,7 +96,7 @@ export class MetNorway implements WeatherProvider {
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
 				hourlyForecasts.push({
-					date: new Date(element.time),
+					date: DateTime.fromJSDate(new Date(element.time)),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
 					precipitation: {
 						type: "rain",
@@ -133,7 +134,7 @@ export class MetNorway implements WeatherProvider {
 			for (let j = 0; j < days[i].length; j++) {
 				const element = days[i][j];
 				if (!element.data.next_6_hours) continue;
-				forecast.date = new Date(element.time);
+				forecast.date = DateTime.fromJSDate(new Date(element.time));
 				if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
 				if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
 

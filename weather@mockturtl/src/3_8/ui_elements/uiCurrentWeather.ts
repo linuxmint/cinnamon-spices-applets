@@ -78,7 +78,7 @@ export class CurrentWeather {
 			this.SetPressure(weather.pressure);
 			this.SetAPIUniqueField(weather.extra_field);
 			if (config._showSunrise)
-				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+				this.SetSunriseAndSunset(weather.sunrise.toJSDate(), weather.sunset.toJSDate(), weather.location.timeZone);
 
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;

@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { DateTime } from "luxon";
 import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
@@ -68,9 +69,9 @@ export class OpenWeatherMap implements WeatherProvider {
 					url: "https://openweathermap.org/city/",
 					timeZone: json.timezone
 				},
-				date: new Date((json.current.dt) * 1000),
-				sunrise: new Date((json.current.sunrise) * 1000),
-				sunset: new Date((json.current.sunset) * 1000),
+				date: DateTime.fromSeconds(json.current.dt),
+				sunrise: DateTime.fromSeconds(json.current.sunrise),
+				sunset: DateTime.fromSeconds(json.current.sunset),
 				wind: {
 					speed: json.current.wind_speed,
 					degree: json.current.wind_deg
@@ -116,7 +117,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let i = 0; i < json.daily.length; i++) {
 				let day = json.daily[i];
 				let forecast: ForecastData = {
-					date: new Date(day.dt * 1000),
+					date: DateTime.fromSeconds(day.dt),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
 					condition: {
@@ -134,7 +135,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
 				let forecast: HourlyForecastData = {
-					date: new Date(hour.dt * 1000),
+					date: DateTime.fromSeconds(hour.dt),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather[0].main,

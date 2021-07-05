@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { Services } from "../config";
 import { HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
@@ -68,7 +69,7 @@ export class ClimacellV4 implements WeatherProvider {
 				lat: loc.lat,
 				lon: loc.lon
 			},
-			date: new Date(current.startTime),
+			date: DateTime.fromJSDate(new Date(current.startTime)),
 			condition: this.ResolveCondition(current.values.weatherCode),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
@@ -77,8 +78,8 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: new Date(daily?.[0].values.sunriseTime),
-			sunset: new Date(daily?.[0].values.sunsetTime),
+			sunrise: DateTime.fromJSDate(new Date(daily?.[0].values.sunriseTime)),
+			sunset: DateTime.fromJSDate(new Date(daily?.[0].values.sunsetTime)),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
@@ -97,7 +98,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = daily[index];
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: new Date(element.startTime),
+				date: DateTime.fromJSDate(new Date(element.startTime)),
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
@@ -107,13 +108,13 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = hourly[index];
 			let hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: new Date(element.startTime),
+				date: DateTime.fromJSDate(new Date(element.startTime)),
 				temp: CelsiusToKelvin(element.values.temperature)
 			};
 
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
-			hour.date.setMinutes(0, 0, 0);
+			hour.date = hour.date.set({hour: 0, second: 0, millisecond: 0});
 
 			if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
 				hour.precipitation = {

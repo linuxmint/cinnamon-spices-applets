@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Log } from "../lib/logger";
@@ -21,7 +22,7 @@ export class UIHourlyForecasts {
 	 * Stores the dates for each displayed hour, so we can scroll to them later.
 	 * Populated in the Display function.
 	 */
-	private hourlyForecastDates: Date[];
+	private hourlyForecastDates: DateTime[];
 
 	private hourlyToggled: boolean = false;
 
@@ -74,11 +75,11 @@ export class UIHourlyForecasts {
 		let itemWidth = this.GetHourlyBoxItemWidth();
 		let midnightIndex = null;
 		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
-			if (OnSameDay(this.hourlyForecastDates[index], date, this.app.config))
+			if (OnSameDay(this.hourlyForecastDates[index].toJSDate(), date, this.app.config))
 				midnightIndex = index;
 			
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
-			const element = AddHours(this.hourlyForecastDates[index], -6);
+			const element = AddHours(this.hourlyForecastDates[index].toJSDate(), -6);
 			if (OnSameDay(element, date, this.app.config)) {
 				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
 				break;
@@ -113,7 +114,7 @@ export class UIHourlyForecasts {
 
 			this.hourlyForecastDates.push(hour.date);
 
-			ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+			ui.Hour.text = GetHoursMinutes(hour.date.toJSDate(), config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
 			ui.Temperature.text = TempToUserConfig(hour.temp, config);
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			ui.Summary.text = hour.condition.main;

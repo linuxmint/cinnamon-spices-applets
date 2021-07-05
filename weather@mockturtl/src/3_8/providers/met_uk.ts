@@ -12,6 +12,7 @@ import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "../utils";
+import { DateTime } from "luxon";
 
 export class MetUk implements WeatherProvider {
 
@@ -203,9 +204,9 @@ export class MetUk implements WeatherProvider {
 					timeZone: null,
 					distanceFrom: this.observationSites[dataIndex].dist
 				},
-				date: new Date(json[dataIndex].SiteRep.DV.dataDate),
-				sunrise: times.sunrise,
-				sunset: times.sunset,
+				date: DateTime.fromJSDate(new Date(json[dataIndex].SiteRep.DV.dataDate)),
+				sunrise: DateTime.fromJSDate(times.sunrise),
+				sunset: DateTime.fromJSDate(times.sunset),
 				wind: {
 					speed: null,
 					degree: null
@@ -262,7 +263,7 @@ export class MetUk implements WeatherProvider {
 				let night = element.Rep[1] as ForecastPayload;
 
 				let forecast: ForecastData = {
-					date: new Date(self.PartialToISOString(element.value)),
+					date: DateTime.fromJSDate(new Date(self.PartialToISOString(element.value))),
 					temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
 					temp_max: CelsiusToKelvin(parseFloat(day.Dm)),
 					condition: self.ResolveCondition(day.W),
@@ -297,7 +298,7 @@ export class MetUk implements WeatherProvider {
 					if (timestamp < threshold) continue;
 
 					let forecast: HourlyForecastData = {
-						date: timestamp,
+						date: DateTime.fromJSDate(timestamp),
 						temp: CelsiusToKelvin(parseFloat(hour.T)),
 						condition: self.ResolveCondition(hour.W),
 						precipitation: {

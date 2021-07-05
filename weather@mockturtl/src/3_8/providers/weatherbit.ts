@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { DateTime } from "luxon";
 import { HttpError } from "../lib/httpLib";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
@@ -113,9 +114,9 @@ export class Weatherbit implements WeatherProvider {
 					url: null,
 					timeZone: json.timezone
 				},
-				date: new Date(json.ts * 1000),
-				sunrise: self.TimeToDate(json.sunrise, hourDiff),
-				sunset: self.TimeToDate(json.sunset, hourDiff),
+				date: DateTime.fromSeconds(json.ts),
+				sunrise: DateTime.fromJSDate(self.TimeToDate(json.sunrise, hourDiff)),
+				sunset: DateTime.fromJSDate(self.TimeToDate(json.sunset, hourDiff)),
 				wind: {
 					speed: json.wind_spd,
 					degree: json.wind_dir
@@ -152,7 +153,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let day = json.data[i];
 				let forecast: ForecastData = {
-					date: new Date(day.ts * 1000),
+					date: DateTime.fromSeconds(day.ts),
 					temp_min: day.min_temp,
 					temp_max: day.max_temp,
 					condition: {
@@ -179,7 +180,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let hour = json.data[i];
 				let forecast: HourlyForecastData = {
-					date: new Date(hour.ts * 1000),
+					date: DateTime.fromSeconds(hour.ts),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather.description,
@@ -490,11 +491,3 @@ export class Weatherbit implements WeatherProvider {
 	I - Fahrenheit (F, mph, in)
  */
 type queryUnits = 'M' | 'S' | 'I';
-interface DateTime {
-	year: number;
-	month: number;
-	day: number;
-	hours: number;
-	minutes: number;
-	seconds: number;
-}

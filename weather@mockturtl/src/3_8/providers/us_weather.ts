@@ -12,6 +12,7 @@ import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "../utils";
+import { DateTime } from "luxon";
 
 export class USWeather implements WeatherProvider {
 
@@ -222,7 +223,7 @@ export class USWeather implements WeatherProvider {
 			return null;
 		}
 		let observation = this.MeshObservationData(json);
-		let timestamp = new Date(observation.properties.timestamp);
+		let timestamp = DateTime.fromJSDate(new Date(observation.properties.timestamp));
 		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
 		try {
 			let weather: WeatherData = {
@@ -238,8 +239,8 @@ export class USWeather implements WeatherProvider {
 					distanceFrom: this.observationStations[0].dist
 				},
 				date: timestamp,
-				sunrise: times.sunrise,
-				sunset: times.sunset,
+				sunrise: DateTime.fromJSDate(times.sunrise),
+				sunset: DateTime.fromJSDate(times.sunset),
 				wind: {
 					speed: KPHtoMPS(observation.properties.windSpeed.value),
 					degree: observation.properties.windDirection.value
@@ -315,7 +316,7 @@ export class USWeather implements WeatherProvider {
 				startIndex++;
 				let today = json.properties.periods[0]
 				let forecast: ForecastData = {
-					date: new Date(today.startTime),
+					date: DateTime.fromJSDate(new Date(today.startTime)),
 					temp_min: FahrenheitToKelvin(today.temperature),
 					temp_max: FahrenheitToKelvin(today.temperature),
 					condition: this.ResolveCondition(today.icon),
@@ -329,7 +330,7 @@ export class USWeather implements WeatherProvider {
 				let night = json.properties.periods[i + 1]; // this can be undefined
 				if (!night) night = day;
 				let forecast: ForecastData = {
-					date: new Date(day.startTime),
+					date: DateTime.fromJSDate(new Date(day.startTime)),
 					temp_min: FahrenheitToKelvin(night.temperature),
 					temp_max: FahrenheitToKelvin(day.temperature),
 					condition: this.ResolveCondition(day.icon),
@@ -353,7 +354,7 @@ export class USWeather implements WeatherProvider {
 				let timestamp = new Date(hour.startTime);
 
 				let forecast: HourlyForecastData = {
-					date: timestamp,
+					date: DateTime.fromJSDate(timestamp),
 					temp: CelsiusToKelvin(hour.temperature),
 					condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
 					precipitation: null
