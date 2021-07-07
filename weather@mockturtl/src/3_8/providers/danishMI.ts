@@ -90,10 +90,10 @@ export class DanishMI implements WeatherProvider {
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
 			forecastData.push({
-				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: loc.timeZone}),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, {keepLocalTime: true}),
 				temp_max: CelsiusToKelvin(element.maxTemp),
 				temp_min: CelsiusToKelvin(element.minTemp),
-				condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
+				condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, {keepLocalTime: true}))
 			})
 		}
 		result.forecasts = forecastData;
@@ -146,16 +146,15 @@ export class DanishMI implements WeatherProvider {
 		return result;
 	}
 
-	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: Date) {
-		let target = new Date(date);
+	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: DateTime) {
 		// change it to 6 in the morning so a day makes more sense
-		target.setHours(target.getHours() + 6);
+		let target = date.set({hour: 6});
+		
 		// next day boundary
-		let upto = new Date(target);
-		upto.setDate(upto.getDate() + 1);
+		let upto = target.plus({days: 1});
 
 		let relevantHours = hourlyData.filter(x => {
-			let hour = this.DateStringToDate(x.time);
+			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), {zone: target.zoneName});
 			if (hour >= target && hour < upto)
 				return hour;
 		});

@@ -6,6 +6,7 @@ import { WeatherApplet } from "../main";
 import { CustomIcons, WeatherData, WeatherProvider } from "../types";
 import { _, AwareDateString, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { BoxLayout, IconType, Label, Icon, Align, } = imports.gi.St;
 
@@ -46,7 +47,7 @@ export class UIBar {
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
 		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
 		this.providerCreditButton.url = provider.website;
-		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, weather.location.timeZone);
+		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName );
 		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
 		if (weather.location.distanceFrom != null) {

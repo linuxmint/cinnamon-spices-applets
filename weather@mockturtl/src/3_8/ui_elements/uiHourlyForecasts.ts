@@ -4,7 +4,7 @@ import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { HourlyForecastData, Precipitation } from "../types";
-import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "../utils";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;

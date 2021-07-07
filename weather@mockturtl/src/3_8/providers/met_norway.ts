@@ -2,7 +2,7 @@ import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
-import { CelsiusToKelvin, IsNight, _ } from "../utils";
+import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../utils";
 import { DateTime } from "luxon";
 
 export class MetNorway implements WeatherProvider {
@@ -112,13 +112,13 @@ export class MetNorway implements WeatherProvider {
 			}
 		}
 		result.hourlyForecasts = hourlyForecasts;
-		result.forecasts = this.BuildForecasts(json.properties.timeseries);
+		result.forecasts = this.BuildForecasts(json.properties.timeseries, loc);
 		return result;
 	}
 
-	private BuildForecasts(forecastsData: MetNorwayData[]): ForecastData[] {
+	private BuildForecasts(forecastsData: MetNorwayData[], loc: LocationData): ForecastData[] {
 		let forecasts: ForecastData[] = [];
-		let days = this.SortDataByDay(forecastsData);
+		let days = this.SortDataByDay(forecastsData, loc);
 
 		for (let i = 0; i < days.length; i++) {
 			let forecast: ForecastData = {
@@ -139,7 +139,7 @@ export class MetNorway implements WeatherProvider {
 			for (let j = 0; j < days[i].length; j++) {
 				const element = days[i][j];
 				if (!element.data.next_6_hours) continue;
-				forecast.date = DateTime.fromJSDate(new Date(element.time));
+				forecast.date = DateTime.fromISO(element.time, {zone: loc.timeZone});
 				if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
 				if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
 
@@ -165,13 +165,14 @@ export class MetNorway implements WeatherProvider {
 	//
 	// -----------------------------------------------
 
-	private GetEarliestDataForToday(events: MetNorwayData[]): MetNorwayData {
+	private GetEarliestDataForToday(events: MetNorwayData[], loc: LocationData): MetNorwayData {
 		let earliest: number = 0;
 		for (let i = 0; i < events.length; i++) {
-			const earliestElementTime = new Date(events[earliest].time);
-			let timestamp = new Date(events[i].time);
+			const earliestElementTime = DateTime.fromISO(events[earliest].time, {zone: loc.timeZone});
+			let timestamp = DateTime.fromISO(events[i].time, {zone: loc.timeZone});
 
-			if (timestamp.toDateString() != new Date().toDateString()) continue;
+			// not same date
+			if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day")) continue;
 			if (earliestElementTime < timestamp) continue;
 
 			earliest = i;
@@ -179,19 +180,19 @@ export class MetNorway implements WeatherProvider {
 		return events[earliest];
 	}
 
-	private SortDataByDay(data: MetNorwayData[]): MetNorwayData[][] {
-		let days: Array<any> = []
+	private SortDataByDay(data: MetNorwayData[], loc: LocationData): MetNorwayData[][] {
+		let days: MetNorwayData[][] = []
 		// Sort and containerize forecasts by date
-		let currentDay = new Date(this.GetEarliestDataForToday(data).time);
+		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, {zone: loc.timeZone});
 		let dayIndex = 0;
 		days.push([]);
 		for (let i = 0; i < data.length; i++) {
 			const element = data[i];
-			const timestamp = new Date(element.time);
-			if (timestamp.toDateString() == currentDay.toDateString()) {
+			const timestamp = DateTime.fromISO(element.time, {zone: loc.timeZone});
+			if (OnSameDay(timestamp, currentDay)) {
 				days[dayIndex].push(element);
 			}
-			else if (timestamp.toDateString() != currentDay.toDateString()) {
+			else if (!OnSameDay(timestamp, currentDay)) {
 				dayIndex++;
 				currentDay = timestamp;
 				days.push([]);

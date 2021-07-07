@@ -99,6 +99,8 @@ export function GetDayName(date: DateTime, locale: string, showDate: boolean = f
 
 	let now = DateTime.utc().setZone(tz);
 	let tomorrow = DateTime.utc().setZone(tz).plus({days: 1});
+	date = date.setZone(tz);
+
 	// today or tomorrow, no need to include date
 	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
 		delete params.weekday;
@@ -127,11 +129,12 @@ export function GetHoursMinutes(date: DateTime, locale: string, hours24Format: b
 	if (!onlyHours)
 		params.minute = "2-digit";
 
-	return date.setLocale(locale).toLocaleString(params);
+	return date.setZone(tz).setLocale(locale).toLocaleString(params);
 }
 
 export function AwareDateString(date: DateTime, locale: string, hours24Format: boolean, tz: string): string {
 	let now = DateTime.utc().setZone(tz);
+	date = date.setZone(tz)
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		minute: "2-digit",
@@ -139,12 +142,12 @@ export function AwareDateString(date: DateTime, locale: string, hours24Format: b
 		timeZone: tz
 	};
 
-	if (date.hasSame(now, "day")) {
+	if (!date.hasSame(now, "day")) {
 		params.month = "short";
 		params.day = "numeric";
 	}
 
-	if (date.hasSame(now, "year")) {
+	if (!date.hasSame(now, "year")) {
 		params.year = "numeric";
 	}
 
@@ -157,14 +160,8 @@ export function AwareDateString(date: DateTime, locale: string, hours24Format: b
  * @param date 
  * @returns number in format HHMM, can be compared directly
  */
-export function MilitaryTime(date: Date): number {
-	return date.getHours() * 100 + date.getMinutes();
-}
-
-export function AddHours(date: Date, hours: number): Date {
-	let result = new Date(date);
-	result.setHours(result.getHours() + hours);
-	return result;
+export function MilitaryTime(date: DateTime): number {
+	return date.hour * 100 + date.minute;
 }
 
 export function OnSameDay(date1: DateTime, date2: DateTime): boolean {
@@ -442,9 +439,9 @@ export function CompassDirectionText(deg: number): string {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	let time = (!!date) ? MilitaryTime(date.toJSDate()) : MilitaryTime(new Date());
-	let sunrise = MilitaryTime(sunTimes.sunrise.toJSDate());
-	let sunset = MilitaryTime(sunTimes.sunset.toJSDate());
+	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	let sunrise = MilitaryTime(sunTimes.sunrise);
+	let sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
 	return true;
 }
