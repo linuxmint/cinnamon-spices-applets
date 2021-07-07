@@ -6,7 +6,6 @@ import { Condition, ForecastData, HourlyForecastData, LocationData, Precipitatio
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
 
 
-// TODO: Convert to DateTime
 export class VisualCrossing implements WeatherProvider {
 	readonly prettyName: string = _("Visual Crossing");
 	readonly name: Services = "Visual Crossing";
@@ -49,9 +48,9 @@ export class VisualCrossing implements WeatherProvider {
 	}
 
 	private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {
-		let currentHour = this.GetCurrentHour(weather.days);
+		let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
 		let result: WeatherData = {
-			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch),
+			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, {zone: weather.timezone}),
 			location: {
 				url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
 				timeZone: weather.timezone,
@@ -68,8 +67,8 @@ export class VisualCrossing implements WeatherProvider {
 				speed: weather.currentConditions.windspeed ?? currentHour.windspeed,
 			},
 			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour.temp),
-			sunrise:  DateTime.fromSeconds(weather.currentConditions.sunriseEpoch),
-			sunset:  DateTime.fromSeconds(weather.currentConditions.sunsetEpoch),
+			sunrise:  DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, {zone: weather.timezone}),
+			sunset:  DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, {zone: weather.timezone}),
 			condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
 			extra_field: {
 				name: _("Feels Like"),
@@ -77,19 +76,19 @@ export class VisualCrossing implements WeatherProvider {
 				// use current hour instead, observations feels like doesn't seem to differ at all
 				value: CelsiusToKelvin(currentHour.feelslike ?? weather.currentConditions.feelslike)
 			},
-			forecasts: this.ParseForecasts(weather.days, translate),
-			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate)
+			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
+			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
 		}
 
 		return result;
 	}
 
-	private ParseForecasts(forecasts: DayForecast[], translate: boolean): ForecastData[] {
+	private ParseForecasts(forecasts: DayForecast[], translate: boolean, tz: string): ForecastData[] {
 		let result: ForecastData[] = [];
 		for (let index = 0; index < forecasts.length; index++) {
 			const element = forecasts[index];
 			result.push({
-				date: DateTime.fromSeconds(element.datetimeEpoch),
+				date: DateTime.fromSeconds(element.datetimeEpoch, {zone: tz}),
 				condition: this.GenerateCondition(element.icon, element.conditions, translate),
 				temp_max: CelsiusToKelvin(element.tempmax),
 				temp_min: CelsiusToKelvin(element.tempmin)
@@ -99,19 +98,18 @@ export class VisualCrossing implements WeatherProvider {
 		return result;
 	}
 
-	private ParseHourlyForecasts(forecasts: DayForecast[], translate: boolean): HourlyForecastData[] {
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+	private ParseHourlyForecasts(forecasts: DayForecast[], translate: boolean, tz: string): HourlyForecastData[] {
+		let currentHour = DateTime.utc().setZone(tz).set({minute: 0, second: 0, millisecond: 0});
 
 		let result: HourlyForecastData[] = [];
 		for (let index = 0; index < forecasts.length; index++) {
 			const element = forecasts[index];
 			for (let index = 0; index < element.hours.length; index++) {
 				const hour = element.hours[index];
-				let time = new Date(hour.datetimeEpoch * 1000);
+				let time = DateTime.fromSeconds(hour.datetimeEpoch, {zone: tz});
 				if (time < currentHour) continue;
 				let item: HourlyForecastData = {
-					date: DateTime.fromJSDate(time),
+					date: time,
 					temp: CelsiusToKelvin(hour.temp),
 					condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
 				}
@@ -133,17 +131,16 @@ export class VisualCrossing implements WeatherProvider {
 		return result;
 	}
 
-	private GetCurrentHour(forecasts: DayForecast[]): HourForecast {
+	private GetCurrentHour(forecasts: DayForecast[], tz: string): HourForecast {
 		if (forecasts?.length < 1)
 			return null;
 
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+		let currentHour = DateTime.utc().setZone(tz).set({minute: 0, second: 0, millisecond: 0});
 
 		const element = forecasts[0];
 		for (let index = 0; index < element.hours.length; index++) {
 			const hour = element.hours[index];
-			let time = new Date(hour.datetimeEpoch * 1000);
+			let time = DateTime.fromSeconds(hour.datetimeEpoch, {zone: tz});
 			if (time < currentHour) continue;
 			return hour;
 		}
