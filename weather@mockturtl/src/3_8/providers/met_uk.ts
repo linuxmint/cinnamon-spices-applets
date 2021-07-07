@@ -11,7 +11,7 @@ import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
-import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "../utils";
+import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 
 export class MetUk implements WeatherProvider {
@@ -205,8 +205,8 @@ export class MetUk implements WeatherProvider {
 					distanceFrom: this.observationSites[dataIndex].dist
 				},
 				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, {zone: loc.timeZone}),
-				sunrise: DateTime.fromJSDate(times.sunrise),
-				sunset: DateTime.fromJSDate(times.sunset),
+				sunrise: DateTime.fromJSDate(times.sunrise, {zone: loc.timeZone}),
+				sunset: DateTime.fromJSDate(times.sunset, {zone: loc.timeZone}),
 				wind: {
 					speed: null,
 					degree: null
@@ -284,22 +284,21 @@ export class MetUk implements WeatherProvider {
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
 				let day = json.SiteRep.DV.Location.Period[i];
-				// TODO: Convert to DateTime
-				let date = new Date(self.PartialToISOString(day.value));
+				let date = DateTime.fromISO(self.PartialToISOString(day.value), {zone: loc.timeZone});
 				if (!Array.isArray(day.Rep))
 					continue;
 					
 				for (let index = 0; index < day.Rep.length; index++) {
 					const hour = day.Rep[index] as ThreeHourPayload;
-					let timestamp = new Date(date.getTime());
-					timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
-					let threshold = new Date();
+					let timestamp = date.plus({hours: parseInt(hour.$) / 60})
+
 					// Show the previous 3-hour forecast until it reaches the next one
-					threshold.setHours(threshold.getHours() - 3);
+					let threshold = DateTime.utc().setZone(loc.timeZone).minus({hours: 3});
+
 					if (timestamp < threshold) continue;
 
 					let forecast: HourlyForecastData = {
-						date: DateTime.fromJSDate(timestamp),
+						date: timestamp,
 						temp: CelsiusToKelvin(parseFloat(hour.T)),
 						condition: self.ResolveCondition(hour.W),
 						precipitation: {
@@ -384,11 +383,11 @@ export class MetUk implements WeatherProvider {
 		if (!observations) return null;
 		if (observations.length == 0) return null;
 		// Sometimes Location property is missing
-		let result: ObservationPayload = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, new Date(), loc);
+		let result: ObservationPayload = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, DateTime.utc().setZone(loc.timeZone), loc);
 		if (observations.length == 1) return result;
 		for (let index = 0; index < observations.length; index++) {
 			if (observations[index]?.SiteRep?.DV?.Location?.Period == null) continue;
-			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date(), loc);
+			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
 			if (result == null) result = nextObservation;
 			let debugText =
 				" Observation data missing, plugged in from ID " +
@@ -438,13 +437,12 @@ export class MetUk implements WeatherProvider {
 	 * @param observations 
 	 * @param day 
 	 */
-	private GetLatestObservation(observations: Period[], day: Date, loc: LocationData): ObservationPayload {
+	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload {
 		if (observations == null) return null;
 		for (let index = 0; index < observations.length; index++) {
 			const element = observations[index];
-			// TODO: Convert to datetime
-			let date = new Date(this.PartialToISOString(element.value));
-			if (date.toLocaleDateString() != day.toLocaleDateString()) continue;
+			let date = DateTime.fromISO(this.PartialToISOString(element.value), {zone: loc.timeZone});
+			if (!OnSameDay(date, day)) continue;
 			if (Array.isArray(element.Rep))
 				return element.Rep[element.Rep.length - 1] as ObservationPayload;
 			else
