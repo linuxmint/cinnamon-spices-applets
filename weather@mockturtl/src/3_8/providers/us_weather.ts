@@ -11,7 +11,7 @@ import { Log } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
-import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "../utils";
+import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 
 export class USWeather implements WeatherProvider {
@@ -282,9 +282,9 @@ export class USWeather implements WeatherProvider {
 		for (let index = 1; index < 3; index++) {
 			const element = json.properties.periods[index];
 			const prevElement = json.properties.periods[index - 1];
-			let prevDate = new Date(prevElement.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			if (prevDate == curDate)
+			let prevDate = DateTime.fromISO(prevElement.startTime, {zone: this.observationStations[0].properties.timeZone});
+			let curDate = DateTime.fromISO(element.startTime, {zone: this.observationStations[0].properties.timeZone});
+			if (OnSameDay(prevDate, curDate))
 				counter++;
 			else
 				counter = 0;
@@ -297,12 +297,11 @@ export class USWeather implements WeatherProvider {
 	}
 
 	private FindTodayIndex(json: ForecastsPayload, startIndex: number = 0): number {
-		let today = new Date();
+		let today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
 		for (let index = startIndex; index < json.properties.periods.length; index++) {
 			const element = json.properties.periods[index];
-			let todayDate = today.toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			if (todayDate != curDate)
+			let curDate = DateTime.fromISO(element.startTime, {zone: this.observationStations[0].properties.timeZone});
+			if (!OnSameDay(today, curDate))
 				continue;
 			return index;
 		}
