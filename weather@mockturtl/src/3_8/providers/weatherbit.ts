@@ -15,7 +15,6 @@ import { _, IsLangSupported } from "../utils";
 
 const Lang: typeof imports.lang = imports.lang;
 
-// TODO:  Convert to DateTime
 export class Weatherbit implements WeatherProvider {
 
 	//--------------------------------------------------------
@@ -87,7 +86,7 @@ export class Weatherbit implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleHourlyError));
+		let json = await this.app.LoadJsonAsync<any>(query, null, (e) => this.HandleHourlyError(e));
 
 		if (!!json?.error) {
 			return null;
@@ -101,7 +100,7 @@ export class Weatherbit implements WeatherProvider {
 
 	private ParseCurrent(json: any, self: Weatherbit): WeatherData {
 		json = json.data[0];
-		let hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
+		let hourDiff = self.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), self.ParseStringTime(json.ob_time, json.timezone));
 		if (hourDiff != 0) Log.Instance.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
 		try {
 			let weather: WeatherData = {
@@ -115,9 +114,9 @@ export class Weatherbit implements WeatherProvider {
 					url: null,
 					timeZone: json.timezone
 				},
-				date: DateTime.fromSeconds(json.ts),
-				sunrise: DateTime.fromJSDate(self.TimeToDate(json.sunrise, hourDiff)),
-				sunset: DateTime.fromJSDate(self.TimeToDate(json.sunset, hourDiff)),
+				date: DateTime.fromSeconds(json.ts, {zone: json.timezone}),
+				sunrise: self.TimeToDate(json.sunrise, hourDiff, json.timezone),
+				sunset: self.TimeToDate(json.sunset, hourDiff, json.timezone),
 				wind: {
 					speed: json.wind_spd,
 					degree: json.wind_dir
@@ -154,7 +153,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let day = json.data[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.ts),
+					date: DateTime.fromSeconds(day.ts, {zone: json.timezone}),
 					temp_min: day.min_temp,
 					temp_max: day.max_temp,
 					condition: {
@@ -181,7 +180,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let hour = json.data[i];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.ts),
+					date: DateTime.fromSeconds(hour.ts, {zone: json.timezone}),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather.description,
@@ -211,11 +210,13 @@ export class Weatherbit implements WeatherProvider {
 	}
 
 
-	private TimeToDate(time: string, hourDiff: number): Date {
+	private TimeToDate(time: string, hourDiff: number, tz: string): DateTime {
 		let hoursMinutes = time.split(":");
-		let date = new Date();
-		date.setHours(parseInt(hoursMinutes[0]) - hourDiff)
-		date.setMinutes(parseInt(hoursMinutes[1]))
+		let date = DateTime.utc().set(
+			{
+				hour: parseInt(hoursMinutes[0]) - hourDiff,
+				minute: parseInt(hoursMinutes[1]),
+			}).setZone(tz);
 		return date;
 	}
 
@@ -229,14 +230,20 @@ export class Weatherbit implements WeatherProvider {
 	 * @param last_ob_time last refresh time in string format
 	 * @returns the hour difference of incorrect time from correct time
 	 */
-	private HourDifference(correctTime: Date, incorrectTime: Date): number {
-		return Math.round((incorrectTime.getTime() - correctTime.getTime()) / (1000 * 60 * 60));
+	private HourDifference(correctTime: DateTime, incorrectTime: DateTime): number {
+		return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
 	}
 
-	private ParseStringTime(last_ob_time: string): Date {
+	private ParseStringTime(last_ob_time: string, tz: string): DateTime {
 		let split = last_ob_time.split(/[T\-\s:]/);
 		if (split.length != 5) return null;
-		return new Date(parseInt(split[0]), parseInt(split[1]) - 1, parseInt(split[2]), parseInt(split[3]), parseInt(split[4]));
+		return DateTime.fromObject({
+			year: parseInt(split[0]),
+			month: parseInt(split[1]) - 1,
+			day: parseInt(split[2]),
+			hour: parseInt(split[3]),
+			minute: parseInt(split[4])
+		}).setZone(tz)
 	}
 
 	private ConvertToAPILocale(systemLocale: string) {
@@ -290,6 +297,7 @@ export class Weatherbit implements WeatherProvider {
 				service: "weatherbit",
 				message: _("API key doesn't provide access to Hourly Weather, skipping")
 			});
+			return false;
 		}
 		return true;
 	}
