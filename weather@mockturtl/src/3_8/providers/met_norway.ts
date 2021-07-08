@@ -62,8 +62,8 @@ export class MetNorway implements WeatherProvider {
 
 		let times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
 		let suntimes: SunTime = {
-			sunrise: DateTime.fromJSDate(times.sunrise),
-			sunset: DateTime.fromJSDate(times.sunset)
+			sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
+			sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
 		}
 		// Current Weather
 		let current = json.properties.timeseries[0];

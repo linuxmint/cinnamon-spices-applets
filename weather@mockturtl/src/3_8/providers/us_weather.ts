@@ -223,11 +223,11 @@ export class USWeather implements WeatherProvider {
 			return null;
 		}
 		let observation = this.MeshObservationData(json);
-		let timestamp = DateTime.fromISO(observation.properties.timestamp, {zone: this.observationStations[0].properties.timeZone});
+		let timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
 		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
 		let suntimes: SunTime = {
-			sunrise: DateTime.fromJSDate(times.sunrise),
-			sunset: DateTime.fromJSDate(times.sunset)
+			sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
+			sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
 		}
 		try {
 			let weather: WeatherData = {
@@ -243,8 +243,8 @@ export class USWeather implements WeatherProvider {
 					distanceFrom: this.observationStations[0].dist
 				},
 				date: timestamp,
-				sunrise: DateTime.fromJSDate(times.sunrise, {zone: this.observationStations[0].properties.timeZone}),
-				sunset: DateTime.fromJSDate(times.sunset, {zone: this.observationStations[0].properties.timeZone}),
+				sunrise: suntimes.sunrise,
+				sunset: suntimes.sunset,
 				wind: {
 					speed: KPHtoMPS(observation.properties.windSpeed.value),
 					degree: observation.properties.windDirection.value
@@ -282,27 +282,30 @@ export class USWeather implements WeatherProvider {
 		for (let index = 1; index < 3; index++) {
 			const element = json.properties.periods[index];
 			const prevElement = json.properties.periods[index - 1];
-			let prevDate = DateTime.fromISO(prevElement.startTime, {zone: this.observationStations[0].properties.timeZone});
-			let curDate = DateTime.fromISO(element.startTime, {zone: this.observationStations[0].properties.timeZone});
+			let prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
+			let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
 			if (OnSameDay(prevDate, curDate))
 				counter++;
 			else
 				counter = 0;
 
-			if (counter > 1)
+			if (counter > 1) {
+				global.log("3 elements")
 				return true;
-
-			return  false;
+			}
 		}
+
+		return false;
 	}
 
 	private FindTodayIndex(json: ForecastsPayload, startIndex: number = 0): number {
 		let today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
 		for (let index = startIndex; index < json.properties.periods.length; index++) {
 			const element = json.properties.periods[index];
-			let curDate = DateTime.fromISO(element.startTime, {zone: this.observationStations[0].properties.timeZone});
+			let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
 			if (!OnSameDay(today, curDate))
 				continue;
+			global.log(index)
 			return index;
 		}
 	}
@@ -319,7 +322,7 @@ export class USWeather implements WeatherProvider {
 				startIndex++;
 				let today = json.properties.periods[0]
 				let forecast: ForecastData = {
-					date: DateTime.fromISO(today.startTime, {zone: this.observationStations[0].properties.timeZone}),
+					date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
 					temp_min: FahrenheitToKelvin(today.temperature),
 					temp_max: FahrenheitToKelvin(today.temperature),
 					condition: this.ResolveCondition(today.icon),
@@ -333,7 +336,7 @@ export class USWeather implements WeatherProvider {
 				let night = json.properties.periods[i + 1]; // this can be undefined
 				if (!night) night = day;
 				let forecast: ForecastData = {
-					date: DateTime.fromISO(day.startTime, {zone: this.observationStations[0].properties.timeZone}),
+					date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
 					temp_min: FahrenheitToKelvin(night.temperature),
 					temp_max: FahrenheitToKelvin(day.temperature),
 					condition: this.ResolveCondition(day.icon),
@@ -354,7 +357,7 @@ export class USWeather implements WeatherProvider {
 		try {
 			for (let i = 0; i < json.properties.periods.length; i++) {
 				let hour = json.properties.periods[i];
-				let timestamp = DateTime.fromISO(hour.startTime, {zone: this.observationStations[0].properties.timeZone});
+				let timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
 
 				let forecast: HourlyForecastData = {
 					date: timestamp,
