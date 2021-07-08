@@ -168,7 +168,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			weather.hourlyForecasts = hourly;
 			return weather;
 		} catch (e) {
-			Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
+			Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
 			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",

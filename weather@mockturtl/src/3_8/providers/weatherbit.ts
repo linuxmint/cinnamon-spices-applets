@@ -139,7 +139,7 @@ export class Weatherbit implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Logger.Error("Weatherbit Weather Parsing error: " + e);
+			Logger.Error("Weatherbit Weather Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -166,7 +166,7 @@ export class Weatherbit implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("Weatherbit Forecast Parsing error: " + e);
+			Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -201,7 +201,7 @@ export class Weatherbit implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("Weatherbit Forecast Parsing error: " + e);
+			Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}

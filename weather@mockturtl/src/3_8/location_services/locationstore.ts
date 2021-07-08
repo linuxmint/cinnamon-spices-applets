@@ -109,7 +109,8 @@ export class LocationStore {
 
 	private NormalizeTZ(tz: string): string {
 		let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
-		Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
+		if (!valid)
+			Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
 		return valid;
 	}
 

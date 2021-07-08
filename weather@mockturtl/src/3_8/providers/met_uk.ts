@@ -245,7 +245,7 @@ export class MetUk implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Logger.Error("Met UK Weather Parsing error: " + e);
+			Logger.Error("Met UK Weather Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -273,7 +273,7 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("MET UK Forecast Parsing error: " + e);
+			Logger.Error("MET UK Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -313,7 +313,7 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("MET UK Forecast Parsing error: " + e);
+			Logger.Error("MET UK Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}

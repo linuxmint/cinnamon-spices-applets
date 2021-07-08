@@ -15,7 +15,7 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 		response.Data = JSON.parse(response.Data);
 	}
 	catch (e) {
-		Logger.Error("Error: Command response is not JSON. The response: " + response.Data);
+		Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
 		response.Success = false;
 		response.ErrorData = {
 			Code: -1,

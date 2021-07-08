@@ -84,7 +84,7 @@ export class CurrentWeather {
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
 		} catch (e) {
-			Logger.Error("DisplayWeatherError: " + e);
+			Logger.Error("DisplayWeatherError: " + e, e);
 			return false;
 		}
 	};

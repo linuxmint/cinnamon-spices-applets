@@ -37,7 +37,7 @@ export class HttpLib {
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			Logger.Error("Error: API response is not JSON. The response: " + response.Data);
+			Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 			response.Success = false;
 			response.ErrorData = {
 				code: -1,

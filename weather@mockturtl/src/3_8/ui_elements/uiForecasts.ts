@@ -110,7 +110,7 @@ export class UIForecasts {
 				message: "Forecast parsing failed: " + e.toString(),
 				userError: false
 			})
-			Logger.Error("DisplayForecastError " + e);
+			Logger.Error("DisplayForecastError " + e, e);
 			return false;
 		}
 	};

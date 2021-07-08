@@ -1,7 +1,7 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./location_services/ipApi";
 import { LocationData } from "./types";
-import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale, ValidTimezone } from "./utils";
+import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
 import { UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
