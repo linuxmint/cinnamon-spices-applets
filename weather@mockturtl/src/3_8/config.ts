@@ -1,8 +1,8 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./location_services/ipApi";
 import { LocationData } from "./types";
-import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Log } from "./lib/logger";
+import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale, ValidTimezone } from "./utils";
+import { Logger } from "./lib/logger";
 import { UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
@@ -162,7 +162,7 @@ export class Config {
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Log.Instance.Debug("System locale is " + this.currentLocale);
+		Logger.Debug("System locale is " + this.currentLocale);
 
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
@@ -318,11 +318,7 @@ export class Config {
 		// Find location in storage
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
-			// TODO: Validate Timezone
-			if (!location.timeZone)
-				location.timeZone = DateTime.now().zoneName;
-
-			Log.Instance.Debug("location exist in locationstore, retrieve");
+			Logger.Debug("location exist in locationstore, retrieve");
 			this.LocStore.SwitchToLocation(location);
 			this.InjectLocationToConfig(location, true);
 			return location;
@@ -344,21 +340,18 @@ export class Config {
 			return location;
 		}
 
-		Log.Instance.Debug("Location is text, geolocating...")
+		Logger.Debug("Location is text, geolocating...")
 		let locationData = await this.geoLocationService.GetLocation(loc);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (!!locationData?.entryText) {
-			Log.Instance.Debug("Address found via address search");
+			Logger.Debug("Address found via address search");
 		}
 
 		// Maybe location is in locationStore, first search
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
-			// TODO: Validate timezone
-			if (!location.timeZone)
-				location.timeZone = DateTime.now().zoneName;
-			Log.Instance.Debug("Found location was found in locationStore, return that instead");
+			Logger.Debug("Found location was found in locationStore, return that instead");
 			this.InjectLocationToConfig(location);
 			this.LocStore.SwitchToLocation(location);
 			return location;
@@ -372,7 +365,7 @@ export class Config {
 	// UTILS
 
 	private InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
-		Log.Instance.Debug("Location setting is now: " + loc.entryText);
+		Logger.Debug("Location setting is now: " + loc.entryText);
 		let text = (loc.entryText + ""); // Only values can be injected into settings and not references, so we add empty string to it.
 		this.SetLocation(text);
 		this.currentLocation = loc;
@@ -391,7 +384,7 @@ export class Config {
 
 	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
 	private OnLocationChanged() {
-		Log.Instance.Debug("User changed location, waiting 3 seconds...");
+		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
 		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
 	}
@@ -407,7 +400,7 @@ export class Config {
 
 	/** Called when 3 seconds is up with no change in location */
 	private DoneTypingLocation() {
-		Log.Instance.Debug("User has finished typing, beginning refresh");
+		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
 		this.app.RefreshAndRebuild();
 	}
@@ -466,7 +459,7 @@ export class Config {
 		let nameString = this.InterfaceSettings.get_string("font-name");
 		let elements = nameString.split(" ");
 		let size = parseFloat(elements[elements.length - 1]);
-		Log.Instance.Debug("Font size changed to " + size.toString());
+		Logger.Debug("Font size changed to " + size.toString());
 		return size;
 	}
 }

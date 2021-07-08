@@ -1,5 +1,5 @@
 import { UUID } from "./consts";
-import { Log } from "./lib/logger";
+import { Logger } from "./lib/logger";
 import { WeatherApplet } from "./main";
 
 //----------------------------------------------------------------------
@@ -15,7 +15,7 @@ export function main(metadata: any, orientation: imports.gi.St.Side, panelHeight
 	imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../icons");
 	imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../arrow-icons");
 
-	Log.Instance.UpdateInstanceID(instanceId);
+	Logger.UpdateInstanceID(instanceId);
 
 	return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }

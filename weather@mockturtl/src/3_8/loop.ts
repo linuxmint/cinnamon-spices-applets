@@ -1,4 +1,4 @@
-import { Log } from "./lib/logger";
+import { Logger } from "./lib/logger";
 import { WeatherApplet } from "./main";
 import { RefreshState } from "./types";
 import { delay, Guid } from "./utils";
@@ -53,26 +53,26 @@ export class WeatherLoop {
 				this.ValidateLastUpdate();
 
 				if (this.pauseRefresh) {
-					Log.Instance.Debug("Configuration error, updating paused")
+					Logger.Debug("Configuration error, updating paused")
 					await delay(this.LoopInterval());
 					continue;
 				}
 
 				if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-					Log.Instance.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+					Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 						+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 						+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 					// loop can skip 1 cycle if needed 
 					let state = await this.app.RefreshWeather(false);
-					if (state == RefreshState.Error) Log.Instance.Print("App is currently refreshing, refresh skipped in main loop");
+					if (state == RefreshState.Error) Logger.Info("App is currently refreshing, refresh skipped in main loop");
 					if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
 				}
 				else {
-					Log.Instance.Debug("No need to update yet, skipping")
+					Logger.Debug("No need to update yet, skipping")
 				}
 
 			} catch (e) {
-				Log.Instance.Error("Error in Main loop: " + e);
+				Logger.Error("Error in Main loop: " + e);
 				global.logError(e)
 				this.app.encounteredError = true;
 			}
@@ -109,9 +109,9 @@ export class WeatherLoop {
 	private IsStray(): boolean {
 		if (this.appletRemoved == true) return true;
 		if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-			Log.Instance.Debug("Applet GUID: " + this.GUID);
-			Log.Instance.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-			Log.Instance.Print("GUID mismatch, terminating applet")
+			Logger.Debug("Applet GUID: " + this.GUID);
+			Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+			Logger.Info("GUID mismatch, terminating applet")
 			return true;
 		}
 		return false;
@@ -120,7 +120,7 @@ export class WeatherLoop {
 	private IncrementErrorCount(): void {
 		this.app.encounteredError = false;
 		this.errorCount++;
-		Log.Instance.Debug("Encountered error in previous loop");
+		Logger.Debug("Encountered error in previous loop");
 		// Limiting count so timeout does not expand forever
 		if (this.errorCount > 60) this.errorCount = 60;
 	}

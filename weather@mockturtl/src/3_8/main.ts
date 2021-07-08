@@ -18,7 +18,7 @@ import { USWeather } from "./providers/us_weather";
 import { Weatherbit } from "./providers/weatherbit";
 import { MetNorway } from "./providers/met_norway";
 import { HttpLib, HttpError, Method, HTTPParams } from "./lib/httpLib";
-import { Log } from "./lib/logger";
+import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { ClimacellV4 } from "./providers/climacellV4";
@@ -54,8 +54,8 @@ export class WeatherApplet extends TextIconApplet {
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.AppletDir = metadata.path;
-		Log.Instance.Debug("Applet created with instanceID " + instanceId);
-		Log.Instance.Debug("AppletDir is: " + this.AppletDir);
+		Logger.Debug("Applet created with instanceID " + instanceId);
+		Logger.Debug("AppletDir is: " + this.AppletDir);
 
 		this.SetAppletOnPanel();
 		this.config = new Config(this, instanceId);
@@ -97,7 +97,7 @@ export class WeatherApplet extends TextIconApplet {
 	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData): Promise<RefreshState> {
 		try {
 			if (this.lock) {
-				Log.Instance.Print("Refreshing in progress, refresh skipped.");
+				Logger.Info("Refreshing in progress, refresh skipped.");
 				return RefreshState.Locked;
 			}
 
@@ -115,7 +115,7 @@ export class WeatherApplet extends TextIconApplet {
 			this.EnsureProvider();
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
-				Log.Instance.Error("No API Key given");
+				Logger.Error("No API Key given");
 				this.ShowError({
 					type: "hard",
 					userError: true,
@@ -127,7 +127,7 @@ export class WeatherApplet extends TextIconApplet {
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
 				this.Unlock();
-				Log.Instance.Error("Could not refresh weather, data could not be obtained.");
+				Logger.Error("Could not refresh weather, data could not be obtained.");
 				this.ShowError({
 					type: "hard",
 					detail: "no api response",
@@ -146,13 +146,13 @@ export class WeatherApplet extends TextIconApplet {
 				return RefreshState.Failure;
 			}
 
-			Log.Instance.Print("Weather Information refreshed");
+			Logger.Info("Weather Information refreshed");
 			this.loop.ResetErrorCount();
 			this.Unlock();
 			return RefreshState.Success;
 		}
 		catch (e) {
-			Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+			Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
 			return RefreshState.Failure;
@@ -326,7 +326,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Override function */
 	public on_applet_removed_from_panel(deleteConfig: any) {
-		Log.Instance.Print("Removing applet instance...")
+		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 	}
 
@@ -358,7 +358,7 @@ export class WeatherApplet extends TextIconApplet {
 	private Unlock(): void {
 		this.lock = false;
 		if (this.refreshTriggeredWhileLocked) {
-			Log.Instance.Print("Refreshing triggered by config change while refreshing, starting now...");
+			Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
 			this.refreshTriggeredWhileLocked = false;
 			this.RefreshAndRebuild();
 		}
@@ -506,10 +506,10 @@ export class WeatherApplet extends TextIconApplet {
 		if (this.encounteredError == true) return;
 
 		this.encounteredError = true;
-		Log.Instance.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+		Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
 
 		if (error.type == "hard") {
-			Log.Instance.Debug("Displaying hard error");
+			Logger.Debug("Displaying hard error");
 			this.ui.Rebuild(this.config);
 			this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
 		}
@@ -530,7 +530,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-		Log.Instance.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
+		Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
 	}
 
 	//----------------------------------------------------------------------------------

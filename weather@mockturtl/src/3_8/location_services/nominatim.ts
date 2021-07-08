@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { LocationData } from "../types";
 import { _ } from "../utils";
@@ -26,7 +26,7 @@ export class GeoLocation {
 			searchText = searchText.trim();
 			let cached = this.cache?.searchText;
 			if (cached != null) {
-				Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
+				Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
 				return cached;
 			}
 
@@ -42,7 +42,7 @@ export class GeoLocation {
 				})
 				return null;
 			}
-			Log.Instance.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+			Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
 			let result: LocationData = {
 				lat: parseFloat(locationData[0].lat),
 				lon: parseFloat(locationData[0].lon),
@@ -55,7 +55,7 @@ export class GeoLocation {
 			return result;
 		}
 		catch (e) {
-			Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
+			Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
 			this.App.ShowError({
 				type: "soft",
 				detail: "bad api response",

@@ -168,6 +168,10 @@ export function OnSameDay(date1: DateTime, date2: DateTime): boolean {
 	return date1.hasSame(date2, "day");
 }
 
+export function ValidTimezone(tz: string): boolean {
+	return DateTime.utc().setZone(tz).isValid;
+}
+
 // ------------------------------------------------------------------------------
 // To UserConfig converters
 

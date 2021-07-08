@@ -8,7 +8,7 @@
 
 import { DateTime } from "luxon";
 import { HttpError } from "../lib/httpLib";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
 import { _, IsLangSupported } from "../utils";
@@ -101,7 +101,7 @@ export class Weatherbit implements WeatherProvider {
 	private ParseCurrent(json: any, self: Weatherbit): WeatherData {
 		json = json.data[0];
 		let hourDiff = self.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), self.ParseStringTime(json.ob_time, json.timezone));
-		if (hourDiff != 0) Log.Instance.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+		if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
 		try {
 			let weather: WeatherData = {
 				coord: {
@@ -141,7 +141,7 @@ export class Weatherbit implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Log.Instance.Error("Weatherbit Weather Parsing error: " + e);
+			Logger.Error("Weatherbit Weather Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -168,7 +168,7 @@ export class Weatherbit implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("Weatherbit Forecast Parsing error: " + e);
+			Logger.Error("Weatherbit Forecast Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -203,7 +203,7 @@ export class Weatherbit implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("Weatherbit Forecast Parsing error: " + e);
+			Logger.Error("Weatherbit Forecast Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -289,7 +289,7 @@ export class Weatherbit implements WeatherProvider {
 		/// Skip Hourly forecast if it is forbidden (403)            
 		if (message.code == 403) { // bad key
 			this.hourlyAccess = false;
-			Log.Instance.Print("Hourly forecast is inaccessible, skipping")
+			Logger.Info("Hourly forecast is inaccessible, skipping")
 			this.app.ShowError({
 				type: "silent",
 				userError: false,

@@ -8,7 +8,7 @@
 
 import { DateTime } from "luxon";
 import { HttpError } from "../lib/httpLib";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
 import { _, IsLangSupported } from "../utils";
@@ -170,7 +170,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			weather.hourlyForecasts = hourly;
 			return weather;
 		} catch (e) {
-			Log.Instance.Error("OpenWeatherMap Weather Parsing error: " + e);
+			Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
 			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",
@@ -246,8 +246,8 @@ export class OpenWeatherMap implements WeatherProvider {
 				break;
 		};
 		this.app.ShowError(error);
-		Log.Instance.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
-		Log.Instance.Error(errorMsg + errorPayload.message);
+		Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
+		Logger.Error(errorMsg + errorPayload.message);
 		return true;
 	};
 

@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DistanceUnits } from "../config";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
@@ -57,7 +57,7 @@ export class MetUk implements WeatherProvider {
 		let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
 		// Get closest sites
 		if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-			Log.Instance.Print("Downloading new site data");
+			Logger.Info("Downloading new site data");
 			this.currentLoc = newLoc;
 			this.currentLocID = loc;
 
@@ -71,13 +71,13 @@ export class MetUk implements WeatherProvider {
 			this.observationSites = observationSites;
 		}
 		else {
-			Log.Instance.Debug("Site data downloading skipped");
+			Logger.Debug("Site data downloading skipped");
 		}
 
 		// Check if in country
 		if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
 			// TODO: Validate that this does not happen with uk locations
-			Log.Instance.Error("User is probably not in UK, aborting");
+			Logger.Error("User is probably not in UK, aborting");
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -129,7 +129,7 @@ export class MetUk implements WeatherProvider {
 
 		// ascending by distance
 		observationSites = this.SortObservationSites(observationSites);
-		Log.Instance.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
+		Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
 		return observationSites;
 	}
 
@@ -137,12 +137,12 @@ export class MetUk implements WeatherProvider {
 		let observations: METPayload[] = [];
 		for (let index = 0; index < observationSites.length; index++) {
 			const element = observationSites[index];
-			Log.Instance.Debug("Getting observation data from station: " + element.id);
+			Logger.Debug("Getting observation data from station: " + element.id);
 			let payload = await this.app.LoadJsonAsync<METPayload>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
 			if (!!payload)
 				observations.push(payload);
 			else {
-				Log.Instance.Debug("Failed to get observations from " + element.id);
+				Logger.Debug("Failed to get observations from " + element.id);
 			}
 		}
 		return observations;
@@ -159,7 +159,7 @@ export class MetUk implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		Log.Instance.Debug("Query: " + query);
+		Logger.Debug("Query: " + query);
 		let json = await this.app.LoadJsonAsync(query);
 
 		if (json == null)
@@ -245,7 +245,7 @@ export class MetUk implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Log.Instance.Error("Met UK Weather Parsing error: " + e);
+			Logger.Error("Met UK Weather Parsing error: " + e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -273,7 +273,7 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("MET UK Forecast Parsing error: " + e);
+			Logger.Error("MET UK Forecast Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -313,7 +313,7 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("MET UK Forecast Parsing error: " + e);
+			Logger.Error("MET UK Forecast Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -402,31 +402,31 @@ export class MetUk implements WeatherProvider {
 				+ " metres";
 			if (result?.V == null) {
 				result.V = nextObservation?.V;
-				Log.Instance.Debug("Visibility" + debugText);
+				Logger.Debug("Visibility" + debugText);
 			}
 			if (result?.W == null) {
 				result.W = nextObservation?.W;
-				Log.Instance.Debug("Weather condition" + debugText);
+				Logger.Debug("Weather condition" + debugText);
 			}
 			if (result?.S == null) {
 				result.S = nextObservation?.S;
-				Log.Instance.Debug("Wind Speed" + debugText);
+				Logger.Debug("Wind Speed" + debugText);
 			}
 			if (result?.D == null) {
 				result.D = nextObservation?.D;
-				Log.Instance.Debug("Wind degree" + debugText);
+				Logger.Debug("Wind degree" + debugText);
 			}
 			if (result?.T == null) {
 				result.T = nextObservation?.T;
-				Log.Instance.Debug("Temperature" + debugText);
+				Logger.Debug("Temperature" + debugText);
 			}
 			if (result?.P == null) {
 				result.P = nextObservation?.P;
-				Log.Instance.Debug("Pressure" + debugText);
+				Logger.Debug("Pressure" + debugText);
 			}
 			if (result?.H == null) {
 				result.H = nextObservation?.H;
-				Log.Instance.Debug("Humidity" + debugText);
+				Logger.Debug("Humidity" + debugText);
 			}
 		}
 		return result;

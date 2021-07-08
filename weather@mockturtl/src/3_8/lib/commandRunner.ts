@@ -1,4 +1,4 @@
-import { Log } from "./logger";
+import { Logger } from "./logger";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
@@ -15,7 +15,7 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 		response.Data = JSON.parse(response.Data);
 	}
 	catch (e) {
-		Log.Instance.Error("Error: Command response is not JSON. The response: " + response.Data);
+		Logger.Error("Error: Command response is not JSON. The response: " + response.Data);
 		response.Success = false;
 		response.ErrorData = {
 			Code: -1,

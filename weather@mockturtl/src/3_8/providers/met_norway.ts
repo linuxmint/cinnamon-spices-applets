@@ -1,4 +1,4 @@
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
@@ -28,7 +28,7 @@ export class MetNorway implements WeatherProvider {
 		let json = await this.app.LoadJsonAsync<MetNorwayPayload>(query);
 
 		if (!json) {
-			Log.Instance.Error("MET Norway: Empty response from API");
+			Logger.Error("MET Norway: Empty response from API");
 			return null;
 		}
 
@@ -50,7 +50,7 @@ export class MetNorway implements WeatherProvider {
 		}
 
 		if (startIndex != -1) {
-			Log.Instance.Debug("Removing outdated weather information...")
+			Logger.Debug("Removing outdated weather information...")
 			json.properties.timeseries.splice(0, startIndex + 1);
 		}
 
@@ -550,7 +550,7 @@ export class MetNorway implements WeatherProvider {
 					icons: ["weather-snow-scattered", "weather-snow"]
 				}
 			default:
-				Log.Instance.Error("condition code not found: " + weather.condition);
+				Logger.Error("condition code not found: " + weather.condition);
 				return {
 					customIcon: "cloud-refresh-symbolic",
 					main: _("Unknown"),

@@ -1,7 +1,7 @@
 import { Config } from "../config";
 import { APPLET_ICON } from "../consts";
 import { Event } from "../lib/events";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherData } from "../types";
 import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
@@ -110,7 +110,7 @@ export class UIForecasts {
 				message: "Forecast parsing failed: " + e.toString(),
 				userError: false
 			})
-			Log.Instance.Error("DisplayForecastError " + e);
+			Logger.Error("DisplayForecastError " + e);
 			return false;
 		}
 	};
@@ -219,12 +219,12 @@ export class UIForecasts {
 	}
 
 	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
+		Logger.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
 		this.DayHovered.Invoke(sender, sender.ID as DateTime);
 	}
 
 	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
+		Logger.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
 		this.DayClicked.Invoke(sender, sender.ID as DateTime);
 	}
 }

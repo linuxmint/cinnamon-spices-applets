@@ -7,9 +7,8 @@
 //////////////////////////////////////////////////////////////
 
 import { HttpError } from "../lib/httpLib";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { GetTimesResult } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
 import { DateTime } from "luxon";
@@ -162,7 +161,7 @@ export class DarkSky implements WeatherProvider {
 			return result;
 		}
 		catch (e) {
-			Log.Instance.Error("DarkSky payload parsing error: " + e)
+			Logger.Error("DarkSky payload parsing error: " + e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
 			return null;
 		}
@@ -219,13 +218,13 @@ export class DarkSky implements WeatherProvider {
 		let code = json.code;
 		let error = json.error;
 		let errorMsg = "DarkSky API: "
-		Log.Instance.Debug("DarksSky API error payload: " + json);
+		Logger.Debug("DarksSky API error payload: " + json);
 		switch (code) {
 			case "400":
-				Log.Instance.Error(errorMsg + error);
+				Logger.Error(errorMsg + error);
 				break;
 			default:
-				Log.Instance.Error(errorMsg + error);
+				Logger.Error(errorMsg + error);
 				break
 		}
 	};

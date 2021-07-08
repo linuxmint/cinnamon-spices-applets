@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { HourlyForecastData, Precipitation } from "../types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
@@ -135,7 +135,7 @@ export class UIHourlyForecasts {
 
 		let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
 		let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
-		Log.Instance.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
 		this.actor.set_width(minWidth);
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
@@ -317,7 +317,7 @@ export class UIHourlyForecasts {
 		for (let index = 0; index < this.hourlyContainers.length; index++) {
 			const ui = this.hourlyForecasts[index];
 
-			Log.Instance.Debug("Height requests of Hourly box Items: " + index);
+			Logger.Debug("Height requests of Hourly box Items: " + index);
 			let hourHeight = ui.Hour.get_preferred_height(-1)[1];
 			let iconHeight = ui.Icon.get_preferred_height(-1)[1];
 			let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
@@ -326,12 +326,12 @@ export class UIHourlyForecasts {
 			let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
 			if (boxItemHeight < itemHeight) boxItemHeight = itemHeight;
 		}
-		Log.Instance.Debug("Final Hourly box item height is: " + boxItemHeight)
+		Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
 		let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
-		Log.Instance.Debug("Scrollbar height is " + scrollBarHeight);
+		Logger.Debug("Scrollbar height is " + scrollBarHeight);
 		let theme = this.container.get_theme_node();
 		let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-		Log.Instance.Debug("ScollbarBox vertical padding and margin is: " + styling);
+		Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
 
 		return (boxItemHeight + scrollBarHeight + styling);
 	}

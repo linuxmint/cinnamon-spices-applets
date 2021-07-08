@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { HttpError } from "../lib/httpLib";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
@@ -49,13 +49,13 @@ export class USWeather implements WeatherProvider {
 		// getting grid and station data first time or location changed
 		let locID = loc.lat.toString() + "," + loc.lon.toString();
 		if (!this.grid || !this.observationStations || this.currentLocID != locID) {
-			Log.Instance.Print("Downloading new site data")
+			Logger.Info("Downloading new site data")
 			this.currentLoc = loc;
 			this.currentLocID = locID;
 
 			let grid = await this.GetGridData(loc);
 			if (grid == null) return null;
-			Log.Instance.Debug("Grid found: " + JSON.stringify(grid, null, 2));
+			Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
 
 			let observationStations = await this.GetStationData(grid.properties.observationStations);
 			if (observationStations == null) return null;
@@ -65,7 +65,7 @@ export class USWeather implements WeatherProvider {
 			this.observationStations = observationStations;
 		}
 		else {
-			Log.Instance.Debug("Site data downloading skipped")
+			Logger.Debug("Site data downloading skipped")
 		}
 
 		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
@@ -77,7 +77,7 @@ export class USWeather implements WeatherProvider {
 		let forecast = await forecastPromise;
 
 		if (!hourly || !forecast) {
-			Log.Instance.Error("Failed to obtain forecast Data");
+			Logger.Error("Failed to obtain forecast Data");
 			return null;
 		}
 
@@ -122,7 +122,7 @@ export class USWeather implements WeatherProvider {
 			// do not show errors here, we call multiple observation sites
 			let observation = await this.app.LoadJsonAsync<ObservationPayload>(stations[index].id + "/observations/latest", null, (msg) => false);
 			if (observation == null) {
-				Log.Instance.Debug("Failed to get observations from " + stations[index].id);
+				Logger.Debug("Failed to get observations from " + stations[index].id);
 			}
 			else {
 				observations.push(observation);
@@ -178,35 +178,35 @@ export class USWeather implements WeatherProvider {
 			if (result.properties.icon == null) {
 				result.properties.icon = element.properties.icon;
 				result.properties.textDescription = element.properties.textDescription;
-				Log.Instance.Debug("Weather condition" + debugText);
+				Logger.Debug("Weather condition" + debugText);
 			}
 			if (result.properties.temperature.value == null) {
 				result.properties.temperature.value = element.properties.temperature.value;
-				Log.Instance.Debug("Temperature" + debugText);
+				Logger.Debug("Temperature" + debugText);
 			}
 			if (result.properties.windSpeed.value == null) {
 				result.properties.windSpeed.value = element.properties.windSpeed.value;
-				Log.Instance.Debug("Wind Speed" + debugText);
+				Logger.Debug("Wind Speed" + debugText);
 			}
 			if (result.properties.windDirection.value == null) {
 				result.properties.windDirection.value = element.properties.windDirection.value;
-				Log.Instance.Debug("Wind degree" + debugText);
+				Logger.Debug("Wind degree" + debugText);
 			}
 			if (result.properties.barometricPressure.value == null) {
 				result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-				Log.Instance.Debug("Pressure" + debugText);
+				Logger.Debug("Pressure" + debugText);
 			}
 			if (result.properties.relativeHumidity.value == null) {
 				result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-				Log.Instance.Debug("Humidity" + debugText);
+				Logger.Debug("Humidity" + debugText);
 			}
 			if (result.properties.windChill.value == null) {
 				result.properties.windChill.value = element.properties.windChill.value;
-				Log.Instance.Debug("WindChill" + debugText);
+				Logger.Debug("WindChill" + debugText);
 			}
 			if (result.properties.visibility.value == null) {
 				result.properties.visibility.value = element.properties.visibility.value;
-				Log.Instance.Debug("Visibility" + debugText);
+				Logger.Debug("Visibility" + debugText);
 			}
 		}
 		return result;
@@ -219,7 +219,7 @@ export class USWeather implements WeatherProvider {
 	 */
 	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData {
 		if (json.length == 0) {
-			Log.Instance.Error("No observation stations/data are available");
+			Logger.Error("No observation stations/data are available");
 			return null;
 		}
 		let observation = this.MeshObservationData(json);
@@ -269,7 +269,7 @@ export class USWeather implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather Parsing error: " + e);
+			Logger.Error("US Weather Parsing error: " + e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -343,7 +343,7 @@ export class USWeather implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather Forecast Parsing error: " + e);
+			Logger.Error("US Weather Forecast Parsing error: " + e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -367,7 +367,7 @@ export class USWeather implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather service Forecast Parsing error: " + e);
+			Logger.Error("US Weather service Forecast Parsing error: " + e);
 			self.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}

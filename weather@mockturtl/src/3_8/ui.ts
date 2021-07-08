@@ -1,6 +1,6 @@
 import { Config } from "./config";
 import { CurrentWeather as UICurrentWeather } from "./ui_elements/uiCurrentWeather";
-import { Log } from "./lib/logger";
+import { Logger } from "./lib/logger";
 import { WeatherApplet } from "./main";
 import { ErrorSeverity, WeatherData, WeatherProvider } from "./types";
 import { ShadeHexColor, delay, _ } from "./utils";
@@ -53,7 +53,7 @@ export class UI {
 		//this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
 		// Doesn't do shit, setting class on the box instead.
 		this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
-		Log.Instance.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+		Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
 		this.menuManager.addMenu(this.menu);
 		this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
 		this.signals = new SignalManager();
@@ -155,7 +155,7 @@ export class UI {
 		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
 		// Inverse, we assume the background color here
 		luminance = Math.abs(1 - luminance);
-		Log.Instance.Debug("Theme is Light: " + (luminance > 0.5));
+		Logger.Debug("Theme is Light: " + (luminance > 0.5));
 		return (luminance > 0.5);
 	}
 

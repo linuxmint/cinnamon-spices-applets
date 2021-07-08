@@ -2,7 +2,7 @@ import { OpenUrl } from "../lib/commandRunner";
 import { Config } from "../config";
 import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "../consts";
 import { LocationStore } from "../location_services/locationstore";
-import { Log } from "../lib/logger";
+import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
 import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
@@ -84,7 +84,7 @@ export class CurrentWeather {
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
 		} catch (e) {
-			Log.Instance.Error("DisplayWeatherError: " + e);
+			Logger.Error("DisplayWeatherError: " + e);
 			return false;
 		}
 	};
@@ -410,7 +410,7 @@ export class CurrentWeather {
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
-		Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+		Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
 		// Hide/show location selectors based on how many items are in storage
 		if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
 			this.ShowLocationSelectors();
