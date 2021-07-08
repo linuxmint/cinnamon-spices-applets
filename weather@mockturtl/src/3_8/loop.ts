@@ -70,8 +70,10 @@ export class WeatherLoop {
 				else {
 					Log.Instance.Debug("No need to update yet, skipping")
 				}
+
 			} catch (e) {
 				Log.Instance.Error("Error in Main loop: " + e);
+				global.logError(e)
 				this.app.encounteredError = true;
 			}
 
