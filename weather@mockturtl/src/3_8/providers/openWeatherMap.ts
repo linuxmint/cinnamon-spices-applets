@@ -13,8 +13,6 @@ import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
 import { _, IsLangSupported } from "../utils";
 
-const Lang: typeof imports.lang = imports.lang;
-
 export class OpenWeatherMap implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Properties
@@ -47,7 +45,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleError));
+		let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
 		if (!json)
 			return null;
 
@@ -255,7 +253,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		return (!!json?.cod);
 	}
 
-	public HandleError(error: HttpError): boolean {
+	public HandleError = (error: HttpError): boolean => {
 		if (error.code == 404) {
 			this.app.ShowError({
 				detail: "location not found",

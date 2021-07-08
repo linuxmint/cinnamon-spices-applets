@@ -40,7 +40,7 @@ export class MetNorway implements WeatherProvider {
 		let startIndex = -1;
 		for (let i = 0; i < json.properties.timeseries.length; i++) {
 			const element = json.properties.timeseries[i];
-			let timestamp = DateTime.fromISO(element.time, {zone: loc.timeZone});
+			let timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
 			if (timestamp < now && now.hour != timestamp.hour) {
 				startIndex = i;
 			}
@@ -73,7 +73,7 @@ export class MetNorway implements WeatherProvider {
 				lat: json.geometry.coordinates[1],
 				lon: json.geometry.coordinates[0]
 			},
-			date: DateTime.fromISO(current.time, {zone: loc.timeZone}),
+			date: DateTime.fromISO(current.time, { zone: loc.timeZone }),
 			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
@@ -101,13 +101,13 @@ export class MetNorway implements WeatherProvider {
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
 				hourlyForecasts.push({
-					date: DateTime.fromISO(element.time, {zone: loc.timeZone}),
+					date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
 					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
-					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, {zone: loc.timeZone})))
+					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, { zone: loc.timeZone })))
 				});
 			}
 		}
@@ -139,7 +139,7 @@ export class MetNorway implements WeatherProvider {
 			for (let j = 0; j < days[i].length; j++) {
 				const element = days[i][j];
 				if (!element.data.next_6_hours) continue;
-				forecast.date = DateTime.fromISO(element.time, {zone: loc.timeZone});
+				forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
 				if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
 				if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
 
@@ -168,8 +168,8 @@ export class MetNorway implements WeatherProvider {
 	private GetEarliestDataForToday(events: MetNorwayData[], loc: LocationData): MetNorwayData {
 		let earliest: number = 0;
 		for (let i = 0; i < events.length; i++) {
-			const earliestElementTime = DateTime.fromISO(events[earliest].time, {zone: loc.timeZone});
-			let timestamp = DateTime.fromISO(events[i].time, {zone: loc.timeZone});
+			const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
+			let timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
 
 			// not same date
 			if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day")) continue;
@@ -183,12 +183,12 @@ export class MetNorway implements WeatherProvider {
 	private SortDataByDay(data: MetNorwayData[], loc: LocationData): MetNorwayData[][] {
 		let days: MetNorwayData[][] = []
 		// Sort and containerize forecasts by date
-		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, {zone: loc.timeZone});
+		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
 		let dayIndex = 0;
 		days.push([]);
 		for (let i = 0; i < data.length; i++) {
 			const element = data[i];
-			const timestamp = DateTime.fromISO(element.time, {zone: loc.timeZone});
+			const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
 			if (OnSameDay(timestamp, currentDay)) {
 				days[dayIndex].push(element);
 			}

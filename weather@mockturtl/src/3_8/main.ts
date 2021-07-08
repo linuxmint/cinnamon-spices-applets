@@ -282,21 +282,21 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-		 public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string> {
-			let response = await HttpLib.Instance.LoadAsync(url, params, method);
-	
-			if (!response.Success) {
-				// check if caller wants
-				if (!!HandleError && !HandleError(response.ErrorData))
-					return null;
-				else {
-					this.HandleHTTPError(response.ErrorData);
-					return null;
-				}
+	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string> {
+		let response = await HttpLib.Instance.LoadAsync(url, params, method);
+
+		if (!response.Success) {
+			// check if caller wants
+			if (!!HandleError && !HandleError(response.ErrorData))
+				return null;
+			else {
+				this.HandleHTTPError(response.ErrorData);
+				return null;
 			}
-	
-			return response.Data;
 		}
+
+		return response.Data;
+	}
 
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete

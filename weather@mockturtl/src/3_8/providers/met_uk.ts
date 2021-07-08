@@ -155,7 +155,7 @@ export class MetUk implements WeatherProvider {
 	 * @param baseUrl 
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(query: string, ParseFunction: (json: any, context: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[], loc: LocationData) {
+	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[], loc: LocationData) {
 		if (query == null)
 			return null;
 
@@ -165,7 +165,7 @@ export class MetUk implements WeatherProvider {
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, this, loc);
+		return ParseFunction(json, loc);
 	};
 
 	private ParseCurrent(json: METPayload[], loc: LocationData): WeatherData {
@@ -204,9 +204,9 @@ export class MetUk implements WeatherProvider {
 					timeZone: null,
 					distanceFrom: this.observationSites[dataIndex].dist
 				},
-				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, {zone: loc.timeZone}),
-				sunrise: DateTime.fromJSDate(times.sunrise, {zone: loc.timeZone}),
-				sunset: DateTime.fromJSDate(times.sunset, {zone: loc.timeZone}),
+				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
+				sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
+				sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone }),
 				wind: {
 					speed: null,
 					degree: null
@@ -251,7 +251,7 @@ export class MetUk implements WeatherProvider {
 		}
 	};
 
-	private ParseForecast(json: METPayload, self: MetUk, loc: LocationData): ForecastData[] {
+	private ParseForecast = (json: METPayload, loc: LocationData): ForecastData[] => {
 		let forecasts: ForecastData[] = [];
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
@@ -263,10 +263,10 @@ export class MetUk implements WeatherProvider {
 				let night = element.Rep[1] as ForecastPayload;
 
 				let forecast: ForecastData = {
-					date: DateTime.fromISO(self.PartialToISOString(element.value), {zone: loc.timeZone}),
+					date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
 					temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
 					temp_max: CelsiusToKelvin(parseFloat(day.Dm)),
-					condition: self.ResolveCondition(day.W),
+					condition: this.ResolveCondition(day.W),
 				};
 				forecasts.push(forecast);
 			}
@@ -274,33 +274,33 @@ export class MetUk implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("MET UK Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
 
-	private ParseHourlyForecast(json: METPayload, self: MetUk, loc: LocationData): HourlyForecastData[] {
+	private ParseHourlyForecast = (json: METPayload, loc: LocationData): HourlyForecastData[] => {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
 				let day = json.SiteRep.DV.Location.Period[i];
-				let date = DateTime.fromISO(self.PartialToISOString(day.value), {zone: loc.timeZone});
+				let date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
 				if (!Array.isArray(day.Rep))
 					continue;
-					
+
 				for (let index = 0; index < day.Rep.length; index++) {
 					const hour = day.Rep[index] as ThreeHourPayload;
-					let timestamp = date.plus({hours: parseInt(hour.$) / 60})
+					let timestamp = date.plus({ hours: parseInt(hour.$) / 60 })
 
 					// Show the previous 3-hour forecast until it reaches the next one
-					let threshold = DateTime.utc().setZone(loc.timeZone).minus({hours: 3});
+					let threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
 
 					if (timestamp < threshold) continue;
 
 					let forecast: HourlyForecastData = {
 						date: timestamp,
 						temp: CelsiusToKelvin(parseFloat(hour.T)),
-						condition: self.ResolveCondition(hour.W),
+						condition: this.ResolveCondition(hour.W),
 						precipitation: {
 							type: "rain",
 							volume: null,
@@ -314,7 +314,7 @@ export class MetUk implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("MET UK Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	}
@@ -441,14 +441,14 @@ export class MetUk implements WeatherProvider {
 		if (observations == null) return null;
 		for (let index = 0; index < observations.length; index++) {
 			const element = observations[index];
-			let date = DateTime.fromISO(this.PartialToISOString(element.value), {zone: loc.timeZone});
+			let date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
 			if (!OnSameDay(date, day)) continue;
 			if (Array.isArray(element.Rep))
 				return element.Rep[element.Rep.length - 1] as ObservationPayload;
 			else
 				return element.Rep;
 		}
-		return null;		
+		return null;
 	}
 
 	/**

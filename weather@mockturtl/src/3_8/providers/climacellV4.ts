@@ -5,7 +5,6 @@ import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, _ } from "../utils";
 
-
 export class ClimacellV4 implements WeatherProvider {
 	needsApiKey: boolean = true;
 	prettyName: string = _("Climacell");
@@ -69,7 +68,7 @@ export class ClimacellV4 implements WeatherProvider {
 				lat: loc.lat,
 				lon: loc.lon
 			},
-			date: DateTime.fromISO(current.startTime, {zone: loc.timeZone}),
+			date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
 			condition: this.ResolveCondition(current.values.weatherCode),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
@@ -78,8 +77,8 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, {zone: loc.timeZone}),
-			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, {zone: loc.timeZone}),
+			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, { zone: loc.timeZone }),
+			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, { zone: loc.timeZone }),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
@@ -98,7 +97,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = daily[index];
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, {zone: loc.timeZone}),
+				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
@@ -108,13 +107,13 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = hourly[index];
 			let hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, {zone: loc.timeZone}),
+				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.values.temperature)
 			};
 
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
-			hour.date = hour.date.set({minute: 0, second: 0, millisecond: 0});
+			hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
 
 			if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
 				hour.precipitation = {

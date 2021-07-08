@@ -13,8 +13,6 @@ import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
 import { _, IsLangSupported } from "../utils";
 
-const Lang: typeof imports.lang = imports.lang;
-
 export class Weatherbit implements WeatherProvider {
 
 	//--------------------------------------------------------
@@ -68,17 +66,17 @@ export class Weatherbit implements WeatherProvider {
 	 * @param baseUrl 
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
+		let json = await this.app.LoadJsonAsync(query, null, (e) => this.HandleError(e));
 
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, this);
+		return ParseFunction(json);
 	}
 
 	private async GetHourlyData(baseUrl: string, loc: LocationData) {
@@ -95,12 +93,12 @@ export class Weatherbit implements WeatherProvider {
 		if (json == null)
 			return null;
 
-		return this.ParseHourlyForecast(json, this);
+		return this.ParseHourlyForecast(json);
 	};
 
-	private ParseCurrent(json: any, self: Weatherbit): WeatherData {
+	private ParseCurrent = (json: any): WeatherData => {
 		json = json.data[0];
-		let hourDiff = self.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), self.ParseStringTime(json.ob_time, json.timezone));
+		let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), this.ParseStringTime(json.ob_time, json.timezone));
 		if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
 		try {
 			let weather: WeatherData = {
@@ -115,8 +113,8 @@ export class Weatherbit implements WeatherProvider {
 					timeZone: json.timezone
 				},
 				date: DateTime.fromSeconds(json.ts, {zone: json.timezone}),
-				sunrise: self.TimeToDate(json.sunrise, hourDiff, json.timezone),
-				sunset: self.TimeToDate(json.sunset, hourDiff, json.timezone),
+				sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
+				sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
 				wind: {
 					speed: json.wind_spd,
 					degree: json.wind_dir
@@ -127,8 +125,8 @@ export class Weatherbit implements WeatherProvider {
 				condition: {
 					main: json.weather.description,
 					description: json.weather.description,
-					icons: self.ResolveIcon(json.weather.icon),
-					customIcon: self.ResolveCustomIcon(json.weather.icon)
+					icons: this.ResolveIcon(json.weather.icon),
+					customIcon: this.ResolveCustomIcon(json.weather.icon)
 				},
 				extra_field: {
 					name: _("Feels Like"),
@@ -142,12 +140,12 @@ export class Weatherbit implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("Weatherbit Weather Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
+			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
 
-	private ParseForecast(json: any, self: Weatherbit): ForecastData[] {
+	private ParseForecast = (json: any): ForecastData[] => {
 		let forecasts: ForecastData[] = [];
 		try {
 			for (let i = 0; i < json.data.length; i++) {
@@ -159,8 +157,8 @@ export class Weatherbit implements WeatherProvider {
 					condition: {
 						main: day.weather.description,
 						description: day.weather.description,
-						icons: self.ResolveIcon(day.weather.icon),
-						customIcon: self.ResolveCustomIcon(day.weather.icon)
+						icons: this.ResolveIcon(day.weather.icon),
+						customIcon: this.ResolveCustomIcon(day.weather.icon)
 					},
 				};
 				forecasts.push(forecast);
@@ -169,12 +167,12 @@ export class Weatherbit implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("Weatherbit Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
 
-	private ParseHourlyForecast(json: any, self: Weatherbit): HourlyForecastData[] {
+	private ParseHourlyForecast = (json: any): HourlyForecastData[] => {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.data.length; i++) {
@@ -185,8 +183,8 @@ export class Weatherbit implements WeatherProvider {
 					condition: {
 						main: hour.weather.description,
 						description: hour.weather.description,
-						icons: self.ResolveIcon(hour.weather.icon),
-						customIcon: self.ResolveCustomIcon(hour.weather.icon)
+						icons: this.ResolveIcon(hour.weather.icon),
+						customIcon: this.ResolveCustomIcon(hour.weather.icon)
 					},
 					precipitation: {
 						type: "rain",
@@ -204,7 +202,7 @@ export class Weatherbit implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("Weatherbit Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	}

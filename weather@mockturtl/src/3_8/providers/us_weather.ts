@@ -84,7 +84,7 @@ export class USWeather implements WeatherProvider {
 		// Parsing data
 		let weather = this.ParseCurrent(observations, hourly, loc);
 		weather.forecasts = this.ParseForecast(forecast);
-		weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
+		weather.hourlyForecasts = this.ParseHourlyForecast(hourly);
 
 		return weather;
 	};
@@ -95,7 +95,7 @@ export class USWeather implements WeatherProvider {
 	 */
 	private async GetGridData(loc: LocationData): Promise<GridPayload> {
 		// Handling out of country errors in callback
-		let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), null, (msg) => this.OnObtainingGridData(msg));
+		let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), null, this.OnObtainingGridData);
 		return siteData;
 	}
 
@@ -135,7 +135,7 @@ export class USWeather implements WeatherProvider {
 	 * 
 	 * @param message Soup Message object
 	 */
-	private OnObtainingGridData(this: USWeather, message: HttpError): boolean {
+	private OnObtainingGridData = (message: HttpError): boolean => {
 		if (message.code == 404) {
 			let data = JSON.parse(message?.response?.response_body?.data);
 			if (data.title == "Data Unavailable For Requested Point") {
@@ -307,7 +307,7 @@ export class USWeather implements WeatherProvider {
 		}
 	}
 
-	private ParseForecast(json: ForecastsPayload): ForecastData[] {
+	private ParseForecast = (json: ForecastsPayload): ForecastData[] => {
 		let forecasts: ForecastData[] = [];
 		try {
 			// Check if beginning of the array has more than 2 elements for a single day (should be 2 day/night), then skip
@@ -349,7 +349,7 @@ export class USWeather implements WeatherProvider {
 		}
 	};
 
-	private ParseHourlyForecast(json: ForecastsPayload, self: USWeather): HourlyForecastData[] {
+	private ParseHourlyForecast = (json: ForecastsPayload): HourlyForecastData[] => {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.properties.periods.length; i++) {
@@ -359,7 +359,7 @@ export class USWeather implements WeatherProvider {
 				let forecast: HourlyForecastData = {
 					date: timestamp,
 					temp: CelsiusToKelvin(hour.temperature),
-					condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
+					condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
 					precipitation: null
 				}
 				forecasts.push(forecast);
@@ -368,7 +368,7 @@ export class USWeather implements WeatherProvider {
 		}
 		catch (e) {
 			Logger.Error("US Weather service Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
+			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}
 	}

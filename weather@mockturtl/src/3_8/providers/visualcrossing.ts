@@ -50,7 +50,7 @@ export class VisualCrossing implements WeatherProvider {
 	private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {
 		let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
 		let result: WeatherData = {
-			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, {zone: weather.timezone}),
+			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
 			location: {
 				url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
 				timeZone: weather.timezone,
@@ -67,8 +67,8 @@ export class VisualCrossing implements WeatherProvider {
 				speed: weather.currentConditions.windspeed ?? currentHour.windspeed,
 			},
 			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour.temp),
-			sunrise:  DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, {zone: weather.timezone}),
-			sunset:  DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, {zone: weather.timezone}),
+			sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
+			sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
 			condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
 			extra_field: {
 				name: _("Feels Like"),
@@ -88,7 +88,7 @@ export class VisualCrossing implements WeatherProvider {
 		for (let index = 0; index < forecasts.length; index++) {
 			const element = forecasts[index];
 			result.push({
-				date: DateTime.fromSeconds(element.datetimeEpoch, {zone: tz}),
+				date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
 				condition: this.GenerateCondition(element.icon, element.conditions, translate),
 				temp_max: CelsiusToKelvin(element.tempmax),
 				temp_min: CelsiusToKelvin(element.tempmin)
@@ -99,14 +99,14 @@ export class VisualCrossing implements WeatherProvider {
 	}
 
 	private ParseHourlyForecasts(forecasts: DayForecast[], translate: boolean, tz: string): HourlyForecastData[] {
-		let currentHour = DateTime.utc().setZone(tz).set({minute: 0, second: 0, millisecond: 0});
+		let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
 		let result: HourlyForecastData[] = [];
 		for (let index = 0; index < forecasts.length; index++) {
 			const element = forecasts[index];
 			for (let index = 0; index < element.hours.length; index++) {
 				const hour = element.hours[index];
-				let time = DateTime.fromSeconds(hour.datetimeEpoch, {zone: tz});
+				let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 				if (time < currentHour) continue;
 				let item: HourlyForecastData = {
 					date: time,
@@ -135,12 +135,12 @@ export class VisualCrossing implements WeatherProvider {
 		if (forecasts?.length < 1)
 			return null;
 
-		let currentHour = DateTime.utc().setZone(tz).set({minute: 0, second: 0, millisecond: 0});
+		let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
 		const element = forecasts[0];
 		for (let index = 0; index < element.hours.length; index++) {
 			const hour = element.hours[index];
-			let time = DateTime.fromSeconds(hour.datetimeEpoch, {zone: tz});
+			let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 			if (time < currentHour) continue;
 			return hour;
 		}

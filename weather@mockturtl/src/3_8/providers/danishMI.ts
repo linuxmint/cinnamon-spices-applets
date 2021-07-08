@@ -72,14 +72,14 @@ export class DanishMI implements WeatherProvider {
 			lon: forecasts.longitude,
 			lat: forecasts.latitude
 		};
-		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), {zone: loc.timeZone});
+		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), { zone: loc.timeZone });
 		result.humidity = result.humidity ?? forecasts.timeserie[0].humidity;
 		result.pressure = result.pressure ?? forecasts.timeserie[0].pressure;
 		result.temperature = result.temperature ?? CelsiusToKelvin(forecasts.timeserie[0].temp);
 		result.wind.degree = result.wind.degree ?? forecasts.timeserie[0].windDegree;
 		result.wind.speed = result.wind.speed ?? forecasts.timeserie[0].windSpeed;
-		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), {zone: loc.timeZone});
-		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), {zone: loc.timeZone});
+		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), { zone: loc.timeZone });
+		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), { zone: loc.timeZone });
 
 		if (result.condition.customIcon == "alien-symbolic") {
 			result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
@@ -90,10 +90,10 @@ export class DanishMI implements WeatherProvider {
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
 			forecastData.push({
-				date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, {keepLocalTime: true}),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }),
 				temp_max: CelsiusToKelvin(element.maxTemp),
 				temp_min: CelsiusToKelvin(element.minTemp),
-				condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, {keepLocalTime: true}))
+				condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }))
 			})
 		}
 		result.forecasts = forecastData;
@@ -105,7 +105,7 @@ export class DanishMI implements WeatherProvider {
 				continue
 
 			let hour: HourlyForecastData = {
-				date: DateTime.fromJSDate(this.DateStringToDate(element.time), {zone: loc.timeZone}),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.temp),
 				condition: this.ResolveCondition(element.symbol)
 			};
@@ -148,13 +148,13 @@ export class DanishMI implements WeatherProvider {
 
 	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: DateTime) {
 		// change it to 6 in the morning so a day makes more sense
-		let target = date.set({hour: 6});
-		
+		let target = date.set({ hour: 6 });
+
 		// next day boundary
-		let upto = target.plus({days: 1});
+		let upto = target.plus({ days: 1 });
 
 		let relevantHours = hourlyData.filter(x => {
-			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), {zone: target.zoneName});
+			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
 			if (hour >= target && hour < upto)
 				return hour;
 		});

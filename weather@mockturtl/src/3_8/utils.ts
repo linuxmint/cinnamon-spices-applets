@@ -98,7 +98,7 @@ export function GetDayName(date: DateTime, locale: string, showDate: boolean = f
 
 
 	let now = DateTime.utc().setZone(tz);
-	let tomorrow = DateTime.utc().setZone(tz).plus({days: 1});
+	let tomorrow = DateTime.utc().setZone(tz).plus({ days: 1 });
 	date = date.setZone(tz);
 
 	// today or tomorrow, no need to include date
@@ -428,8 +428,8 @@ export function CompassDirection(deg: number): ArrowIcons {
 export function CompassDirectionText(deg: number): string {
 	if (!deg)
 		return null;
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
-    return directions[Math.round(deg / 45) % directions.length]
+	let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+	return directions[Math.round(deg / 45) % directions.length]
 }
 
 

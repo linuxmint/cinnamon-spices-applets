@@ -80,10 +80,10 @@ export class DarkSky implements WeatherProvider {
 
 	private ParseWeather(json: DarkSkyPayload): WeatherData {
 		try {
-			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, {zone: json.timezone});
-			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, {zone: json.timezone});
+			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
 			let result: WeatherData = {
-				date: DateTime.fromSeconds(json.currently.time, {zone: json.timezone}),
+				date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
 				coord: {
 					lat: json.latitude,
 					lon: json.longitude
@@ -119,7 +119,7 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.daily.data.length; i++) {
 				let day = json.daily.data[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.time, {zone: json.timezone}),
+					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
 					temp_min: this.ToKelvin(day.temperatureLow),
 					temp_max: this.ToKelvin(day.temperatureHigh),
 					condition: {
@@ -133,7 +133,7 @@ export class DarkSky implements WeatherProvider {
 				// JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
 				// but when using the date when daylight saving is active, it DOES NOT apply the DST back,
 				// So we offset the date to make it Noon
-				forecast.date = forecast.date.set({hour: 12});
+				forecast.date = forecast.date.set({ hour: 12 });
 
 				result.forecasts.push(forecast);
 			}
@@ -141,12 +141,12 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.hourly.data.length; i++) {
 				let hour = json.hourly.data[i];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.time, {zone: json.timezone}),
+					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature),
 					condition: {
 						main: this.GetShortSummary(hour.summary),
 						description: this.ProcessSummary(hour.summary),
-						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, {zone: json.timezone})),
+						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
 						customIcon: this.ResolveCustomIcon(hour.icon)
 					},
 					precipitation: {
