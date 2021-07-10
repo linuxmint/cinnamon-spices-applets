@@ -122,13 +122,11 @@ class CategoryButton {
         //-----some style tweaks for menu-category-button-hover class.-----
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = 'Cinnamon default';
-        [//Mint-Y & Mint-Y-<color>
-        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],
-        //Mint-Y-Dark & Mint-Y-Dark-<color>
-        ['/Mint-Y-Dark',        'background-color: #404040;'],
+        [
+        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],//Mint-Y & Mint-Y-<color>
+        ['/Mint-Y-Dark',        'background-color: #404040;'],//Mint-Y-Dark & Mint-Y-Dark-<color>
         ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-        //Mint-X-<color>
-        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],//Mint-X-<color>
         ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark'
         ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
         ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
@@ -137,22 +135,20 @@ class CategoryButton {
         ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
         ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
         ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-        //Cinnamox-<color>
-        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],//Cinnamox- themes
         ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
         ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
         ['/Monternos/',         'color: rgb(70, 70, 70); background-color: rgb(201, 204, 238); ' +
                                                                                 'border-image: none;'],
-        ['/Sweet/',             'background-color: #222e32;'],
-        //Sweet-Ambar & Sweet-Ambar-blue
-        ['/Sweet-Ambar',        'background-color: #25262d;'],
-        ['/Sweet-Dark/',        'background-color: #1c1f2e;'],
-        ['/Sweet-mars/',        'background-color: #23282c;'],
-        //Vivaldi & Vivaldi-ZorinOS
-        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],
-        //Ubuntu cinnamon
-        ['/Yaru-Cinnamon-Light/', 'background-color: #d8d8d8; color: black;'],
-        ['/Yaru-Cinnamon-Dark/', 'background-color: #404040;']
+        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],//Vivaldi & Vivaldi-ZorinOS
+        //Yaru are ubuntu cinnamon themes:
+        ['/Yaru-Cinnamon-Light/','background-color: #d8d8d8; color: black;'],
+        ['/Yaru-Cinnamon-Dark/','background-color: #404040;'],
+        ['/Matcha-',            'background-color: white'],//other Matcha- and Matcha-light- themes
+        ['/Matcha-dark-aliz',   'background-color: #2d2d2d'],
+        ['/Matcha-dark-azul',   'background-color: #2a2d36'],
+        ['/Matcha-dark-sea',    'background-color: #273136'],
+        ['/Matcha-dark-cold',   'background-color: #282b33']
         ].forEach(fix => {
             if (themePath.includes(fix[0])) {
                 this.actor.set_style(fix[1]);
