@@ -1,6 +1,6 @@
-import { Log } from "lib/logger";
-import { ErrorDetail } from "types";
-import { _ } from "utils";
+import { Logger } from "./logger";
+import { ErrorDetail } from "../types";
+import { _ } from "../utils";
 
 const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
@@ -37,7 +37,7 @@ export class HttpLib {
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			Log.Instance.Error("Error: API response is not JSON. The response: " + response.Data);
+			Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 			response.Success = false;
 			response.ErrorData = {
 				code: -1,
@@ -102,12 +102,12 @@ export class HttpLib {
 		}
 
 		if (message?.status_code > 200 && message?.status_code < 300) {
-			Log.Instance.Print("Wrning: API returned non-OK status code '" + message?.status_code + "'");
+			Logger.Info("Wrning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
-		Log.Instance.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
-			Log.Instance.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
+			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
 		return {
 			Success: (error == null),
 			Data: message?.response_body?.data,
@@ -133,7 +133,7 @@ export class HttpLib {
 		}
 
 		let query = encodeURI(url);
-		Log.Instance.Debug("URL called: " + query);
+		Logger.Debug("URL called: " + query);
 		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
 			let message = Message.new(method, query);
 			this._httpSession.queue_message(message, (session, message) => {

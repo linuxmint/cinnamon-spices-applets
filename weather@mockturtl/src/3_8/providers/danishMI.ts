@@ -1,8 +1,9 @@
-import { Services } from "config";
-import { HTTPParams } from "lib/httpLib";
-import { WeatherApplet } from "main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
-import { CelsiusToKelvin, GetDistance, mode, _ } from "utils";
+import { DateTime } from "luxon";
+import { Services } from "../config";
+import { HTTPParams } from "../lib/httpLib";
+import { WeatherApplet } from "../main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 
 export class DanishMI implements WeatherProvider {
 	needsApiKey: boolean = false;
@@ -45,10 +46,10 @@ export class DanishMI implements WeatherProvider {
 		this.forecastParams.lon = loc.lon;
 
 		let forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
-		return this.ParseWeather(observations, forecasts);
+		return this.ParseWeather(observations, forecasts, loc);
 	}
 
-	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload): WeatherData {
+	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload, loc: LocationData): WeatherData {
 		let observation = this.MergeObservations(observations);
 		let result = {
 			temperature: CelsiusToKelvin(observation.Temperature2m),
@@ -71,14 +72,14 @@ export class DanishMI implements WeatherProvider {
 			lon: forecasts.longitude,
 			lat: forecasts.latitude
 		};
-		result.date = this.DateStringToDate(forecasts.lastupdate);
+		result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), { zone: loc.timeZone });
 		result.humidity = result.humidity ?? forecasts.timeserie[0].humidity;
 		result.pressure = result.pressure ?? forecasts.timeserie[0].pressure;
 		result.temperature = result.temperature ?? CelsiusToKelvin(forecasts.timeserie[0].temp);
 		result.wind.degree = result.wind.degree ?? forecasts.timeserie[0].windDegree;
 		result.wind.speed = result.wind.speed ?? forecasts.timeserie[0].windSpeed;
-		result.sunrise = this.DateStringToDate(forecasts.sunrise);
-		result.sunset = this.DateStringToDate(forecasts.sunset);
+		result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), { zone: loc.timeZone });
+		result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), { zone: loc.timeZone });
 
 		if (result.condition.customIcon == "alien-symbolic") {
 			result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
@@ -89,10 +90,10 @@ export class DanishMI implements WeatherProvider {
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
 			forecastData.push({
-				date: this.DateStringToDate(element.time),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }),
 				temp_max: CelsiusToKelvin(element.maxTemp),
 				temp_min: CelsiusToKelvin(element.minTemp),
-				condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
+				condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }))
 			})
 		}
 		result.forecasts = forecastData;
@@ -104,7 +105,7 @@ export class DanishMI implements WeatherProvider {
 				continue
 
 			let hour: HourlyForecastData = {
-				date: this.DateStringToDate(element.time),
+				date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.temp),
 				condition: this.ResolveCondition(element.symbol)
 			};
@@ -145,16 +146,15 @@ export class DanishMI implements WeatherProvider {
 		return result;
 	}
 
-	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: Date) {
-		let target = new Date(date);
+	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: DateTime) {
 		// change it to 6 in the morning so a day makes more sense
-		target.setHours(target.getHours() + 6);
+		let target = date.set({ hour: 6 });
+
 		// next day boundary
-		let upto = new Date(target);
-		upto.setDate(upto.getDate() + 1);
+		let upto = target.plus({ days: 1 });
 
 		let relevantHours = hourlyData.filter(x => {
-			let hour = this.DateStringToDate(x.time);
+			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
 			if (hour >= target && hour < upto)
 				return hour;
 		});

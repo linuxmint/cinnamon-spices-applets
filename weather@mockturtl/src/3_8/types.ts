@@ -1,4 +1,12 @@
+import { DateTime } from "luxon";
+import { GetTimesResult } from "suncalc";
 import { Services } from "./config";
+
+export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
+export interface SunTime {
+	sunrise: DateTime;
+	sunset: DateTime;
+}
 
 /**
  * A WeatherProvider must implement this interface.
@@ -22,7 +30,7 @@ export const enum RefreshState {
 }
 
 export interface WeatherData {
-	date: Date;
+	date: DateTime;
 	coord: {
 		lat: number,
 		lon: number,
@@ -37,9 +45,9 @@ export interface WeatherData {
 		tzOffset?: number
 	},
 	/** preferably in UTC */
-	sunrise: Date,
+	sunrise: DateTime,
 	/** preferably in UTC */
-	sunset: Date,
+	sunset: DateTime,
 	wind: {
 		/** Meter/sec */
 		speed: number,
@@ -80,7 +88,7 @@ type ExtraField = "percent" | "temperature" | "string";
 
 export interface ForecastData {
 	/** Set to 12:00 if possible */
-	date: Date,
+	date: DateTime,
 	/** Kelvin */
 	temp_min: number,
 	/** Kelvin */
@@ -91,7 +99,7 @@ export interface ForecastData {
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
 	/** Set to 12:00 if possible */
-	date: Date;
+	date: DateTime;
 	/** Kelvin */
 	temp: number;
 	condition: Condition;
@@ -112,6 +120,7 @@ export interface LocationData {
 	lon: number;
 	city: string;
 	country: string;
+	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
 }

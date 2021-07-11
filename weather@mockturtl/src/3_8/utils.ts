@@ -1,7 +1,8 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "config";
-import { ELLIPSIS, FORWARD_SLASH, UUID } from "consts";
-import { SunTimes } from "lib/sunCalc";
-import { ArrowIcons, BuiltinIcons, WeatherData } from "types";
+import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
+import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
+import { GetTimesResult } from "suncalc";
+import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -83,7 +84,7 @@ function NormalizeTimezone(tz: string) {
 	return tz;
 }
 
-export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
+export function GetDayName(date: DateTime, locale: string, showDate: boolean = false, tz: string): string {
 	let params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
 		timeZone: tz
@@ -96,26 +97,27 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
 	}
 
 
-	let now = new Date();
-	let tomorrow = new Date();
-	tomorrow.setDate(now.getDate() + 1);
+	let now = DateTime.utc().setZone(tz);
+	let tomorrow = DateTime.utc().setZone(tz).plus({ days: 1 });
+	date = date.setZone(tz);
+
 	// today or tomorrow, no need to include date
-	if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
+	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
 		delete params.weekday;
 
-	let dateString = date.toLocaleString(locale, params);
+	let dateString = date.setLocale(locale).toLocaleString(params);
 
 	// Make sure French days are caapitalised (they are not by default)
 	if (locale.startsWith("fr"))
 		dateString = CapitalizeFirstLetter(dateString);
 
-	if (date.getDate() == now.getDate()) dateString = _("Today");
-	if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");
+	if (date.hasSame(now, "day")) dateString = _("Today");
+	if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");
 
 	return dateString;
 }
 
-export function GetHoursMinutes(date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
+export function GetHoursMinutes(date: DateTime, locale: string, hours24Format: boolean, tz: string, onlyHours: boolean = false): string {
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
@@ -127,11 +129,12 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
 	if (!onlyHours)
 		params.minute = "2-digit";
 
-	return date.toLocaleString(locale, params);
+	return date.setZone(tz).setLocale(locale).toLocaleString(params);
 }
 
-export function AwareDateString(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
-	let now = new Date();
+export function AwareDateString(date: DateTime, locale: string, hours24Format: boolean, tz: string): string {
+	let now = DateTime.utc().setZone(tz);
+	date = date.setZone(tz)
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		minute: "2-digit",
@@ -139,40 +142,34 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
 		timeZone: tz
 	};
 
-	if (date.toDateString() != now.toDateString()) {
+	if (!date.hasSame(now, "day")) {
 		params.month = "short";
 		params.day = "numeric";
 	}
 
-	if (date.getFullYear() != now.getFullYear()) {
+	if (!date.hasSame(now, "year")) {
 		params.year = "numeric";
 	}
 
 	params.timeZone = NormalizeTimezone(tz);
 
-	return date.toLocaleString(locale, params);
+	return date.setLocale(locale).toLocaleString(params);
 }
 /**
  * 
  * @param date 
  * @returns number in format HHMM, can be compared directly
  */
-export function MilitaryTime(date: Date): number {
-	return date.getHours() * 100 + date.getMinutes();
+export function MilitaryTime(date: DateTime): number {
+	return date.hour * 100 + date.minute;
 }
 
-export function AddHours(date: Date, hours: number): Date {
-	let result = new Date(date);
-	result.setHours(result.getHours() + hours);
-	return result;
+export function OnSameDay(date1: DateTime, date2: DateTime): boolean {
+	return date1.hasSame(date2, "day");
 }
 
-export function OnSameDay(date1: Date, date2: Date, config: Config): boolean {
-	//if (!config.Timezone)
-		return date1.toDateString() == date2.toDateString();
-	//else
-		//TODO: This breaks cinnamon for some reason, investigate why.
-		//return date1.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone}) == date2.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone});
+export function ValidTimezone(tz: string): boolean {
+	return DateTime.utc().setZone(tz).isValid;
 }
 
 // ------------------------------------------------------------------------------
@@ -431,8 +428,8 @@ export function CompassDirection(deg: number): ArrowIcons {
 export function CompassDirectionText(deg: number): string {
 	if (!deg)
 		return null;
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
-    return directions[Math.round(deg / 45) % directions.length]
+	let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+	return directions[Math.round(deg / 45) % directions.length]
 }
 
 
@@ -444,9 +441,9 @@ export function CompassDirectionText(deg: number): string {
  * @param sunTimes sunrise and sunset is used
  * @param date 
  */
-export function IsNight(sunTimes: SunTimes, date?: Date): boolean {
+export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
+	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
 	let sunrise = MilitaryTime(sunTimes.sunrise);
 	let sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;

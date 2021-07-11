@@ -1,10 +1,11 @@
-import { Config } from "config";
-import { Event } from "lib/events";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { NotificationService } from "lib/notification_service";
-import { LocationData } from "types";
-import { _ } from "utils";
+import { Config } from "../config";
+import { Event } from "../lib/events";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { NotificationService } from "../lib/notification_service";
+import { LocationData } from "../types";
+import { ValidTimezone, _ } from "../utils";
+import { DateTime } from "luxon";
 export class LocationStore {
 	private locations: LocationData[] = [];
 	private app: WeatherApplet = null;
@@ -67,7 +68,7 @@ export class LocationStore {
 		this.locations = locs.concat(tmp);
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
-			Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
+			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
 			this.app.RefreshAndRebuild()
 		}
 		this.InvokeStorageChanged();
@@ -100,10 +101,17 @@ export class LocationStore {
 					entryText: element.entryText,
 					lat: element.lat,
 					lon: element.lon,
-					timeZone: element.timeZone,
+					timeZone: this.NormalizeTZ(element.timeZone),
 				};
 		}
 		return null;
+	}
+
+	private NormalizeTZ(tz: string): string {
+		let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+		if (!valid)
+			Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
+		return valid;
 	}
 
 	private EnsureSearchEntry(loc: LocationData): LocationData {
@@ -117,12 +125,12 @@ export class LocationStore {
 	 * Config.SwitchToNextLocation function
 	 */
 	public GetNextLocation(currentLoc: LocationData): LocationData {
-		Log.Instance.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+		Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
 		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
 		let nextIndex = null;
 		if (this.InStorage(currentLoc)) { // if location is stored move to the one next to it
 			nextIndex = this.FindIndex(currentLoc) + 1;
-			Log.Instance.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index")
+			Logger.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index")
 		}
 		else { // move to the location next to the last used location
 			nextIndex = this.currentIndex++;
@@ -131,10 +139,10 @@ export class LocationStore {
 		// Rotate if reached end of array
 		if (nextIndex > this.locations.length - 1) {
 			nextIndex = 0;
-			Log.Instance.Debug("Reached end of storage, move to the beginning")
+			Logger.Debug("Reached end of storage, move to the beginning")
 		}
 
-		Log.Instance.Debug("Switching to index " + nextIndex.toString() + "...");
+		Logger.Debug("Switching to index " + nextIndex.toString() + "...");
 		this.currentIndex = nextIndex;
 		// Return copy, not original so nothing interferes with fileStore
 		return {
@@ -155,7 +163,7 @@ export class LocationStore {
 		let previousIndex = null;
 		if (this.InStorage(currentLoc)) { // if location is stored move to the previous one
 			previousIndex = this.FindIndex(currentLoc) - 1;
-			Log.Instance.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index")
+			Logger.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index")
 		}
 		else { // move to the location previous to the last used location
 			previousIndex = this.currentIndex--;
@@ -164,10 +172,10 @@ export class LocationStore {
 		// Rotate if reached end of array
 		if (previousIndex < 0) {
 			previousIndex = this.locations.length - 1;
-			Log.Instance.Debug("Reached start of storage, move to the end")
+			Logger.Debug("Reached start of storage, move to the end")
 		}
 
-		Log.Instance.Debug("Switching to index " + previousIndex.toString() + "...");
+		Logger.Debug("Switching to index " + previousIndex.toString() + "...");
 		this.currentIndex = previousIndex;
 		return {
 			country: this.locations[previousIndex].country,

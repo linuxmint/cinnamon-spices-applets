@@ -6,12 +6,12 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "lib/httpLib";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { SunTimes } from "lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData } from "types";
-import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "utils";
+import { HttpError } from "../lib/httpLib";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
+import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
+import { DateTime } from "luxon";
 
 const Lang: typeof imports.lang = imports.lang;
 
@@ -80,10 +80,10 @@ export class DarkSky implements WeatherProvider {
 
 	private ParseWeather(json: DarkSkyPayload): WeatherData {
 		try {
-			let sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
-			let sunset = new Date(json.daily.data[0].sunsetTime * 1000)
+			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
 			let result: WeatherData = {
-				date: new Date(json.currently.time * 1000),
+				date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
 				coord: {
 					lat: json.latitude,
 					lon: json.longitude
@@ -119,7 +119,7 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.daily.data.length; i++) {
 				let day = json.daily.data[i];
 				let forecast: ForecastData = {
-					date: new Date(day.time * 1000),
+					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
 					temp_min: this.ToKelvin(day.temperatureLow),
 					temp_max: this.ToKelvin(day.temperatureHigh),
 					condition: {
@@ -133,7 +133,7 @@ export class DarkSky implements WeatherProvider {
 				// JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
 				// but when using the date when daylight saving is active, it DOES NOT apply the DST back,
 				// So we offset the date to make it Noon
-				forecast.date.setHours(forecast.date.getHours() + 12);
+				forecast.date = forecast.date.set({ hour: 12 });
 
 				result.forecasts.push(forecast);
 			}
@@ -141,12 +141,12 @@ export class DarkSky implements WeatherProvider {
 			for (let i = 0; i < json.hourly.data.length; i++) {
 				let hour = json.hourly.data[i];
 				let forecast: HourlyForecastData = {
-					date: new Date(hour.time * 1000),
+					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature),
 					condition: {
 						main: this.GetShortSummary(hour.summary),
 						description: this.ProcessSummary(hour.summary),
-						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)),
+						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
 						customIcon: this.ResolveCustomIcon(hour.icon)
 					},
 					precipitation: {
@@ -161,7 +161,7 @@ export class DarkSky implements WeatherProvider {
 			return result;
 		}
 		catch (e) {
-			Log.Instance.Error("DarkSky payload parsing error: " + e)
+			Logger.Error("DarkSky payload parsing error: " + e, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
 			return null;
 		}
@@ -218,13 +218,13 @@ export class DarkSky implements WeatherProvider {
 		let code = json.code;
 		let error = json.error;
 		let errorMsg = "DarkSky API: "
-		Log.Instance.Debug("DarksSky API error payload: " + json);
+		Logger.Debug("DarksSky API error payload: " + json);
 		switch (code) {
 			case "400":
-				Log.Instance.Error(errorMsg + error);
+				Logger.Error(errorMsg + error);
 				break;
 			default:
-				Log.Instance.Error(errorMsg + error);
+				Logger.Error(errorMsg + error);
 				break
 		}
 	};
@@ -274,7 +274,7 @@ export class DarkSky implements WeatherProvider {
 		return this.DarkSkyFilterWords.includes(word);
 	}
 
-	private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): BuiltinIcons[] {
+	private ResolveIcon(icon: string, sunTimes?: SunTime, date?: DateTime): BuiltinIcons[] {
 		switch (icon) {
 			case "rain":
 				return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
