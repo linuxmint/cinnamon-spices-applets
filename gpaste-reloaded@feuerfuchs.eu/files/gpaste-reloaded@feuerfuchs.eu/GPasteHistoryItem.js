@@ -96,6 +96,7 @@ GPasteHistoryItem.prototype = {
     refresh: function() {
             this._applet.client.get_element_at_index(this._index, Lang.bind(this, function(client, result) {
                 let item = client.get_element_at_index_finish(result);
+                this._uuid = item.get_uuid();
                 this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             }));
         },
