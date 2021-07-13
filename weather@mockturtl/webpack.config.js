@@ -23,14 +23,11 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
-			{
+			{	// Some imported libraries are higher than
+				// es2017 (like Luxon) so we transpile them.
+				// Ensures compatibility to libjs52 package (Mint 19-19.3)
 				test: /\.js$/,
 				include: /node_modules/,
-				/*exclude: function(modulePath) {
-				  return /node_modules/.test(modulePath) &&
-					  // Must transpile Luxon
-					  !/node_modules\/luxon/.test(modulePath);
-				},*/
 				use: {
 					loader: "babel-loader",
 					options: {
