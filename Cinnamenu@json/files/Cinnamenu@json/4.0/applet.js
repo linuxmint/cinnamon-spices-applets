@@ -1131,10 +1131,10 @@ class CinnamenuApplet extends TextIconApplet {
                                     nameWithSearchMarkup: match1.result,
                                     isSearchResult: true,
                                     deleteAfterUse: true,
-                                    emoji: emoji.tone ?? emoji.code,
+                                    emoji: emoji.tone || emoji.code,
                                     emojiDefault: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.tone ?? emoji.code);}
+                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.tone || emoji.code);}
                                             });
                         } });
 
@@ -1429,6 +1429,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .isSearchResult
  *  .deleteAfterUse
  *  .emoji
+ *  .emojiDefault
  *  .launch()
  *  .activate()
  */
