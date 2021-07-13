@@ -27,7 +27,7 @@ const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
-const {EMOJI} = require('./emoji');
+const {EMOJI, MODED, MODABLE} = require('./emoji');
 const {wikiSearch} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
@@ -129,6 +129,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
 
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
+        { key: 'emoji-default-skin',        value: 'emojiDefaultSkin',      cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
@@ -1117,6 +1118,11 @@ class CinnamenuApplet extends TextIconApplet {
                         match2.score *= 0.95; //slightly lower priority for keyword match
                         const bestMatchScore = Math.max(match1.score, match2.score);
                         if (bestMatchScore > SEARCH_THRESHOLD) {
+                            if (MODABLE.includes(emoji.code)) {
+                              const i = MODABLE.indexOf(emoji.code);
+                              const skinTone = ['', '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}'][this.settings.emojiDefaultSkin];
+                              emoji.tone = MODED[i].replace('\u{1F3FB}', skinTone);
+                            }
                             emojiResults.push({
                                     name: emoji.name,
                                     score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
@@ -1125,9 +1131,10 @@ class CinnamenuApplet extends TextIconApplet {
                                     nameWithSearchMarkup: match1.result,
                                     isSearchResult: true,
                                     deleteAfterUse: true,
-                                    emoji: emoji.code,
+                                    emoji: emoji.tone ?? emoji.code,
+                                    emojiDefault: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
+                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.tone ?? emoji.code);}
                                             });
                         } });
 
