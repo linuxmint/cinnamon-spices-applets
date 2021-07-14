@@ -1,8 +1,17 @@
 
+interface YoutbeDlOption {
+    command: string,
+    value?: string
+}
+
 // @ts-ignore
 imports.misc.util.spawnCommandLineAsyncIO = mockCommandLineAsyncIo
 
+import { initPolyfills } from 'polyfill';
 import { downloadSongFromYoutube } from "functions/downloadFromYoutube";
+
+// replaceAll not working in node 14.17.3
+initPolyfills()
 
 const workingExample = {
     title: 'Lady Gaga - Stupid Love',
@@ -37,11 +46,36 @@ function downloadWithValidValues() {
 }
 
 let youtubeInstalled: boolean = false
+let youtubeDlOptions: YoutbeDlOption[] = []
+
 
 const mockedDownloadtime = 1 // in ms
 
 function mockCommandLineAsyncIo(command: string, cb: (stdout: string, stderr: string, exitCode: number) =>
     void) {
+
+    const subStrings = createSubstrings()
+
+    subStrings.forEach((subString, index) => {
+
+        const isCommandOption = subString.startsWith('--') || !subStrings[index - 1]?.startsWith('--')
+
+        if (isCommandOption) {
+
+            let option: YoutbeDlOption = { command: subString }
+
+            let potentialCommandValue = subStrings[index + 1]
+            const commandHasValue = !potentialCommandValue?.startsWith('--') && potentialCommandValue
+
+            if (commandHasValue)
+                option.value = potentialCommandValue
+
+            youtubeDlOptions.push(option)
+        }
+    })
+
+    if (youtubeDlOptions[0].command !== 'youtube-dl')
+        throw new RangeError('spawnCommandLineAsyncIo not called with youtube-dl')
 
     const timer = setTimeout(() => {
         youtubeInstalled ? cb(workingExample.stdOut, null, 0) : cb(null, 'line 1: youtube-dl: command not found', 127)
@@ -53,11 +87,33 @@ function mockCommandLineAsyncIo(command: string, cb: (stdout: string, stderr: st
             cb(null, null, 1)
         }
     }
+
+    function createSubstrings() {
+        let spaceIndex = -1
+        let isInsideDoubleQuote = false
+        const subStrings = [];
+        const chars = [...command]
+
+        chars.forEach((char, index) => {
+
+            if (char === " " && !isInsideDoubleQuote || index + 1 === chars.length) {
+                subStrings.push(command.substring(spaceIndex + 1, index + 1).trim())
+                spaceIndex = index
+            }
+
+            if (char === "\"" && command[index - 1] !== "\\") {
+                isInsideDoubleQuote = !isInsideDoubleQuote
+            }
+        })
+
+        return subStrings
+    }
 }
 
 afterEach(() => {
     jest.clearAllMocks()
     youtubeInstalled = false
+    youtubeDlOptions = []
 })
 
 it('sucessful download handled correctly', done => {
@@ -68,6 +124,25 @@ it('sucessful download handled correctly', done => {
 
     setTimeout(() => {
         expect(onDownloadFinished).toHaveBeenCalledWith(workingExample.filePath)
+        done()
+    }, mockedDownloadtime);
+
+})
+
+// skipping output as already handled in previous test
+it('youtubeDl called with correct arguments', done => {
+    youtubeInstalled = true
+
+    downloadWithValidValues()
+
+    setTimeout(() => {
+
+        ['--extract-audio', '--add-metadata', '--embed-thumbnail'].forEach(command => {
+            expect(youtubeDlOptions.find(option => option.command === command)).toBeTruthy()
+        })
+
+        const audioFormat = youtubeDlOptions.find(option => option.command === '--audio-format').value
+        expect(audioFormat).toBe('mp3')
         done()
     }, mockedDownloadtime);
 
@@ -109,4 +184,26 @@ describe('canceling download is working', () => {
 
         }, mockedDownloadtime);
     })
+})
+
+it('double quotes are correctly escaped', () => {
+    youtubeInstalled = true
+
+    const title = `"Good 4 U" von Olivia Rodrigo`
+
+    downloadSongFromYoutube({
+        title: `"Good 4 U" von Olivia Rodrigo`,
+        downloadDir: workingExample.downloadDir,
+        onDownloadFinished,
+        onDownloadFailed
+    })
+
+    const searchPrefix = 'ytsearch1:'
+
+    const searchTerm = youtubeDlOptions.find(
+        option => option.command.startsWith(searchPrefix)
+    ).command.split(searchPrefix)[1].substr(1).slice(0, -1)
+
+    expect(title.replaceAll('"', '\\"')).toBe(searchTerm)
+
 })
