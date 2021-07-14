@@ -85,7 +85,6 @@
             "title":"Search",
             "keys":[
                 "enable-emoji-search",
-                "emoji-default-skin",
                 "web-search-option",
                 "enable-home-folder-search",
                 "enable-web-bookmarks-search",
@@ -267,25 +266,12 @@
         "description":"Show hidden files",
         "tooltip":"Show hidden files in folder view"
     },
+
     "enable-emoji-search":{
         "type":"checkbox",
         "default":true,
         "description":"Emoji search",
         "tooltip":"Show emojis in search results"
-    },
-    "emoji-default-skin":{
-        "type":"combobox",
-        "default":0,
-        "dependency":"enable-emoji-search",
-        "description":"Default skin tone",
-        "options":{
-            "🟨":0,
-            "🏻":1,
-            "🏼":2,
-            "🏽":3,
-            "🏾":4,
-            "🏿":5
-        }
     },
     "web-search-option":{
         "type":"combobox",
