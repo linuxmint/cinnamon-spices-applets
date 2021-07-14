@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1
+
+* Fix issue where applet wouldn't run on Linux Mint 19-19.3, where libraries targeting higher than es2017 would be included.
+* Remove Climacell V3 from Readme
+
 ## 3.1.0
 
 * Migrate to Webpack
