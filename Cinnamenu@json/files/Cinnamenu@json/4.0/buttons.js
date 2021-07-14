@@ -347,11 +347,11 @@ class ContextMenu {
                 return;
             }
         } else if (app.isSearchResult && app.emoji) {
-            if (!MODABLE.includes(app.emoji)) {
+            if (!MODABLE.includes(app.emojiDefault)) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.emoji);//Find if emoji is in list of emoji that can have
+                const i = MODABLE.indexOf(app.emojiDefault);//Find if emoji is in list of emoji that can have
                                                      //skin tone modifiers.
                 let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
                                                                     // MODED[i] with skin tone chosen by user.
@@ -363,6 +363,7 @@ class ContextMenu {
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
+            addMenuItem('', 'no skin tone');
             addMenuItem('\u{1F3FB}', 'light skin tone');
             addMenuItem('\u{1F3FC}', 'medium-light skin tone');
             addMenuItem('\u{1F3FD}', 'medium skin tone');
