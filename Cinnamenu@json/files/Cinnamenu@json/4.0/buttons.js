@@ -13,11 +13,68 @@ const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
+const {addTween} = imports.ui.tweener;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
+
+function scrollToButton(button, fullyScrollFirstAndLast, enableAnimation) {
+    const container = button.actor.get_parent();
+    let scrollBox = container;
+    let children;
+    let i = 0;
+    while (!(scrollBox instanceof St.ScrollView)) {
+        i++;
+        if (i > 10) {
+            global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
+            return false;
+        }
+        scrollBox = scrollBox.get_parent();
+    }
+
+    let adjustment = scrollBox.vscroll.adjustment;
+    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+
+    if (fullyScrollFirstAndLast) children = container.get_children();
+    if (fullyScrollFirstAndLast && button.actor === children[0]) {
+        value = 0;
+    } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
+        value = scrollBox.height;
+    } else {
+        let offset = 0;
+        const vfade = scrollBox.get_effect('fade');
+        if (vfade) {
+            offset = vfade.vfade_offset;
+        }
+        const box = button.actor.get_allocation_box();
+        let y1 = box.y1, y2 = box.y2;
+        let parent = button.actor.get_parent();
+        while (parent !== scrollBox) {
+            if (!parent) {
+                return false;
+            }
+            const box = parent.get_allocation_box();
+            y1 += box.y1;
+            y2 += box.y1;
+            parent = parent.get_parent();
+        }
+        if (y1 < value + offset) {
+            value = Math.max(0, y1 - offset);
+        } else if (y2 > value + pageSize - offset) {
+            value = Math.min(upper, y2 + offset - pageSize);
+        } else {
+            return false;
+        }
+    }
+
+    if (enableAnimation) {
+        addTween(adjustment, { value: value, time: 0.1, transition: 'easeOutQuad' });
+    } else {
+        adjustment.set_value(value);
+    }
+}
 
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
@@ -131,24 +188,23 @@ class CategoryButton {
         ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
         ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
                                                     'background-gradient-end: rgba(255,255,255,0.03);'],
-        ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],//Manjaro
+        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],//Manjaro default
         ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],//Cinnamox- themes
+        ['/Dracula',            'background-color: #2d2f3d'],
         ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
         ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+        ['/Matcha-',            'background-color: white;'],//other Matcha- and Matcha-light- themes
+        ['/Matcha-dark-aliz',   'background-color: #2d2d2d;'],
+        ['/Matcha-dark-azul',   'background-color: #2a2d36;'],
+        ['/Matcha-dark-sea',    'background-color: #273136;'],
+        ['/Matcha-dark-cold',   'background-color: #282b33;'],
         ['/Monternos/',         'color: rgb(70, 70, 70); background-color: rgb(201, 204, 238); ' +
                                                                                 'border-image: none;'],
         ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],//Vivaldi & Vivaldi-ZorinOS
         //Yaru are ubuntu cinnamon themes:
         ['/Yaru-Cinnamon-Light/','background-color: #d8d8d8; color: black;'],
-        ['/Yaru-Cinnamon-Dark/','background-color: #404040;'],
-        ['/Matcha-',            'background-color: white'],//other Matcha- and Matcha-light- themes
-        ['/Matcha-dark-aliz',   'background-color: #2d2d2d'],
-        ['/Matcha-dark-azul',   'background-color: #2a2d36'],
-        ['/Matcha-dark-sea',    'background-color: #273136'],
-        ['/Matcha-dark-cold',   'background-color: #282b33']
+        ['/Yaru-Cinnamon-Dark/','background-color: #404040;']
         ].forEach(fix => {
             if (themePath.includes(fix[0])) {
                 this.actor.set_style(fix[1]);
@@ -174,7 +230,7 @@ class CategoryButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keypress
-            this.appThis.scrollToButton(this, true);
+            scrollToButton(this, true, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;
@@ -347,15 +403,14 @@ class ContextMenu {
                 return;
             }
         } else if (app.isSearchResult && app.emoji) {
-            if (!MODABLE.includes(app.emojiDefault)) {
+            const i = MODABLE.indexOf(app.emoji);//Find if emoji is in list of emoji that can have
+                                                 //skin tone modifiers.
+            if (i < 0) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.emojiDefault);//Find if emoji is in list of emoji that can have
-                                                     //skin tone modifiers.
-                let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
-                                                                    // MODED[i] with skin tone chosen by user.
-                newEmoji = newEmoji.replace('\u{1F3FB}', char);//repeat in case a second modifier
+                const newEmoji = MODED[i].replaceAll('\u{1F3FB}', char); //replace light skin tone character in
+                                                                       // MODED[i] with skin tone option.
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
@@ -363,12 +418,11 @@ class ContextMenu {
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
-            addMenuItem('', 'no skin tone');
-            addMenuItem('\u{1F3FB}', 'light skin tone');
-            addMenuItem('\u{1F3FC}', 'medium-light skin tone');
-            addMenuItem('\u{1F3FD}', 'medium skin tone');
-            addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
-            addMenuItem('\u{1F3FF}', 'dark skin tone');
+            addMenuItem('\u{1F3FB}', _('light skin tone'));
+            addMenuItem('\u{1F3FC}', _('medium-light skin tone'));
+            addMenuItem('\u{1F3FD}', _('medium skin tone'));
+            addMenuItem('\u{1F3FE}', _('medium-dark skin tone'));
+            addMenuItem('\u{1F3FF}', _('dark skin tone'));
         } else {
             return;
         }
@@ -775,7 +829,7 @@ class AppButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keyboard navigation
-            this.appThis.scrollToButton(this);
+            scrollToButton(this, false, this.appThis.settings.enableAnimation);
         }
         this._setButtonSelected();
 
@@ -1032,7 +1086,7 @@ class SidebarButton {
         if (event) {
             this.appThis.clearEnteredActors();
         } else {//key nav
-            this.appThis.scrollToButton(this);
+            scrollToButton(this, false, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;

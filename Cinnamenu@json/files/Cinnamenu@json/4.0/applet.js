@@ -19,7 +19,6 @@ const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {_, getThumbnail_gicon, searchStr} = require('./utils');
@@ -27,7 +26,7 @@ const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
-const {EMOJI, MODED, MODABLE} = require('./emoji');
+const {EMOJI} = require('./emoji');
 const {wikiSearch} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
@@ -129,7 +128,6 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
 
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
-        { key: 'emoji-default-skin',        value: 'emojiDefaultSkin',      cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
@@ -386,62 +384,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.appFavorites.moveFavoriteToPos(add_id, pos);
         } else {
             this.appFavorites.addFavoriteAtPos(add_id, pos);
-        }
-    }
-
-    scrollToButton(button, fullyScrollFirstAndLast = false) {
-        const container = button.actor.get_parent();
-        let scrollBox = container;
-        let children;
-        let i = 0;
-        while (!(scrollBox instanceof St.ScrollView)) {
-            i++;
-            if (i > 10) {
-                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
-                return false;
-            }
-            scrollBox = scrollBox.get_parent();
-        }
-
-        let adjustment = scrollBox.vscroll.adjustment;
-        let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
-
-        if (fullyScrollFirstAndLast) children = container.get_children();
-        if (fullyScrollFirstAndLast && button.actor === children[0]) {
-            value = 0;
-        } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
-            value = scrollBox.height;
-        } else {
-            let offset = 0;
-            const vfade = scrollBox.get_effect('fade');
-            if (vfade) {
-                offset = vfade.vfade_offset;
-            }
-            const box = button.actor.get_allocation_box();
-            let y1 = box.y1, y2 = box.y2;
-            let parent = button.actor.get_parent();
-            while (parent !== scrollBox) {
-                if (!parent) {
-                    return false;
-                }
-                const box = parent.get_allocation_box();
-                y1 += box.y1;
-                y2 += box.y1;
-                parent = parent.get_parent();
-            }
-            if (y1 < value + offset) {
-                value = Math.max(0, y1 - offset);
-            } else if (y2 > value + pageSize - offset) {
-                value = Math.min(upper, y2 + offset - pageSize);
-            } else {
-                return false;
-            }
-        }
-
-        if (this.settings.enableAnimation) {
-            addTween(adjustment, { value: value, time: 0.1, transition: 'easeOutQuad' });
-        } else {
-            adjustment.set_value(value);
         }
     }
 
@@ -1118,11 +1060,6 @@ class CinnamenuApplet extends TextIconApplet {
                         match2.score *= 0.95; //slightly lower priority for keyword match
                         const bestMatchScore = Math.max(match1.score, match2.score);
                         if (bestMatchScore > SEARCH_THRESHOLD) {
-                            if (MODABLE.includes(emoji.code)) {
-                              const i = MODABLE.indexOf(emoji.code);
-                              const skinTone = ['', '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}'][this.settings.emojiDefaultSkin];
-                              emoji.tone = MODED[i].replace('\u{1F3FB}', skinTone);
-                            }
                             emojiResults.push({
                                     name: emoji.name,
                                     score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
@@ -1131,10 +1068,9 @@ class CinnamenuApplet extends TextIconApplet {
                                     nameWithSearchMarkup: match1.result,
                                     isSearchResult: true,
                                     deleteAfterUse: true,
-                                    emoji: emoji.tone || emoji.code,
-                                    emojiDefault: emoji.code,
+                                    emoji: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.tone || emoji.code);}
+                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
                                             });
                         } });
 
@@ -1429,7 +1365,6 @@ class CinnamenuApplet extends TextIconApplet {
  *  .isSearchResult
  *  .deleteAfterUse
  *  .emoji
- *  .emojiDefault
  *  .launch()
  *  .activate()
  */
