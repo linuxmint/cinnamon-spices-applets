@@ -1,11 +1,11 @@
-import { Channel, IconType } from "./types";
+import { Channel, AppletIcon } from "./types";
 
 const { AppletSettings } = imports.ui.settings;
 
 interface Arguments {
     uuid: string,
     instanceId: number,
-    onIconChanged: (iconType: IconType) => void,
+    onIconChanged: (iconType: AppletIcon) => void,
     onIconColorPlayingChanged: (color: string) => void,
     onIconColorPausedChanged: (color: string) => void,
     onChannelOnPanelChanged: (channelOnPanel: boolean) => void,
@@ -13,7 +13,7 @@ interface Arguments {
 }
 
 interface Settings {
-    iconType: IconType,
+    iconType: AppletIcon,
     symbolicIconColorWhenPlaying: string,
     symbolicIconColorWhenPaused: string,
     channelNameOnPanel: boolean,
@@ -46,7 +46,7 @@ export const createConfig = (args: Arguments) => {
     const appletSettings = new AppletSettings(settingsObject, uuid, instanceId)
 
     appletSettings.bind('icon-type', 'iconType',
-        (iconType: IconType) => onIconChanged(iconType))
+        (iconType: AppletIcon) => onIconChanged(iconType))
 
     appletSettings.bind('color-on', 'symbolicIconColorWhenPlaying',
         (newColor: string) => onIconColorPlayingChanged(newColor))

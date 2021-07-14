@@ -1,6 +1,6 @@
 import { PlayPause, AdvancedPlaybackStatus } from '../types'
 import { MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PATH, MPRIS_PLUGIN_PATH, MAX_VOLUME, MEDIA_PLAYER_2_NAME, MEDIA_PLAYER_2_PLAYER_NAME, MPV_CVC_NAME } from '../consts'
-import { MprisMediaPlayerDbus, MprisPropsDbus, PlaybackStatus } from '../MprisTypes';
+import { MprisMediaPlayerDbus, MprisPropsDbus, PlaybackStatus } from '../types';
 const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.interfaces
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
