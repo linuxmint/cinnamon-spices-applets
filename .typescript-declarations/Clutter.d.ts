@@ -453,8 +453,6 @@ declare namespace imports.gi.Clutter {
 		 */
 		destroy_all_children(): void;
 
-		disconnect(signalId: number): void;
-
 		/**
 		 * This function is used to emit an event on the main stage.
 		 * You should rarely need to use this function, except for
