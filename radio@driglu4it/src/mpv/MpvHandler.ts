@@ -124,33 +124,26 @@ export function createMpvHandler(args: Arguments) {
         mediaPropsListenerId = mediaProps.connectSignal('PropertiesChanged',
             (proxy, nameOwner, [interfaceName, props]) => {
 
-                // theoretically it could be used recursiveUnpack but this doesn't work on cinnamon 20 yet (but on 20.1)
-                const metadata = props.Metadata?.deep_unpack()
+                const metadata = props.Metadata?.recursiveUnpack()
                 const volume = props.Volume?.unpack()
 
                 const playbackStatus = props.PlaybackStatus?.unpack() as PlayPause
 
-                //global.log(`metadata: ${JSON.stringify(props.Metadata?.recursiveUnpack())}, playbackStatus: ${playbackStatus}, volume: ${volume}`)
+                const url = metadata?.['xesam:url']
+                const title = metadata?.['xesam:title']
 
-                const url = metadata?.['xesam:url']?.unpack()
-                const title = metadata?.['xesam:title']?.unpack()
-
-                const length = metadata?.["mpris:length"]?.unpack()
-
+                const length = metadata?.["mpris:length"]
                 const newUrlValid = checkUrlValid(url)
                 const relevantEvent = newUrlValid || currentUrl
 
                 if (!relevantEvent) return // happens when mpv is running with a file/stream not managed by the applet
 
-
                 if (length != null) handleLengthChanged(length)
-
                 if (volume != null) handleMprisVolumeChanged(volume)
 
                 playbackStatus && handleMprisPlaybackStatusChanged(playbackStatus)
                 url && newUrlValid && url !== currentUrl && handleUrlChanged(url)
                 title && handleTitleSet(title)
-
             }
         )
     }
@@ -272,7 +265,7 @@ export function createMpvHandler(args: Arguments) {
 
         // for some reason, this only return the right value the first time it is called. When calling this multiple times, it returns always the same value which however is wrong when radio is playing
         // const positionMicroSeconds = mediaServerPlayer.Position
-        const positionMicroSeconds = mediaProps.GetSync('org.mpris.MediaPlayer2.Player', 'Position')[0].deep_unpack()
+        const positionMicroSeconds = mediaProps.GetSync('org.mpris.MediaPlayer2.Player', 'Position')[0].deepUnpack()
 
         return microSecondsToRoundedSeconds(positionMicroSeconds)
     }
@@ -282,10 +275,11 @@ export function createMpvHandler(args: Arguments) {
 
         if (getPlaybackStatus() === 'Stopped') {
 
-            const initialVolume = getInitialVolume()
+            let initialVolume = getInitialVolume()
 
             if (initialVolume == null) {
-                throw new Error('initial Volume must not be undefined or null')
+                global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working')
+                initialVolume = 50
             }
 
             const command = `mpv --script=${MPRIS_PLUGIN_PATH} ${url} 
