@@ -248,7 +248,7 @@ export function main(args: Arguments): imports.ui.applet.Applet {
             configs.lastVolume = lastVolume
             configs.lastUrl = null
             appletLabel.setText(null)
-            handleVolumeChanged(null)
+            appletTooltip.setDefaultTooltip()
             popupMenu.close()
         }
 
