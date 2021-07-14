@@ -10,29 +10,20 @@ export class ChannelStore {
 
     public set channelList(channelList: Channel[]) {
 
-        const filteredChannelList = channelList.filter(channel => channel.inc)
-
-        this._channelList = filteredChannelList.map(channel => {
-            return { ...channel, url: channel.url.trim() }
+        this._channelList = channelList.flatMap(channel => {
+            return channel.inc ? { ...channel, url: channel.url.trim() } : []
         })
-        // TODO: add babel to allow the usage of flatMap!
-        // return this.channelList.flatMap(channel =>
-        //     channel.inc ? channel.url : []
-        // )
+
     }
 
     public get activatedChannelUrls() {
         return this._channelList.map(channel => channel.url)
-
-
     }
 
 
     public get activatedChannelNames() {
         return this._channelList.map(channel => channel.name)
     }
-
-
 
     // TODO: what is when two Channels have the same Name or Url? :O
     public getChannelName(channelUrl: string) {
