@@ -26,11 +26,12 @@ import { notifyYoutubeDownloadFailed } from './ui/Notifications/YoutubeDownloadF
 import { notify } from './ui/Notifications/GenericNotification';
 import { createSeeker } from './ui/Seeker';
 import { VOLUME_DELTA } from './consts';
+import { initPolyfills } from './polyfill';
 
 const { ScrollDirection } = imports.gi.Clutter;
 const { getAppletDefinition } = imports.ui.appletManager;
 const { panelManager } = imports.ui.main
-const { IconType, BoxLayout } = imports.gi.St
+const { BoxLayout } = imports.gi.St
 
 interface Arguments {
     orientation: imports.gi.St.Side,
@@ -45,6 +46,8 @@ export function main(args: Arguments): imports.ui.applet.Applet {
         panelHeight,
         instanceId
     } = args
+
+    initPolyfills()
 
     // this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
     let lastVolume: number
