@@ -409,8 +409,8 @@ class ContextMenu {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const newEmoji = MODED[i].replaceAll('\u{1F3FB}', char); //replace light skin tone character in
-                                                                       // MODED[i] with skin tone option.
+                const newEmoji = MODED[i].replace(/\u{1F3FB}/ug, char); //replace light skin tone character in
+                                                                        // MODED[i] with skin tone option.
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
