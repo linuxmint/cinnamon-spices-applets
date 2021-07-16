@@ -24,9 +24,20 @@ declare namespace imports.gi.Cinnamon {
 		public manage_stage(state: any, themeWidget: any): void;
 	}
 
+	class CinnamonTrayIcon extends St.Icon {
+		obsolete?: boolean;
+		window: CinnamonEmbeddedWindow;
+		click(e: gi.Clutter.Event): void;
+	}
+
 	class GenericContainerAllocation {
 		public min_size: number
 		public natural_size: number
+	}
+
+	class CinnamonEmbeddedWindow {
+		show(): void;
+		hide(): void;
 	}
 
 	class Recorder {

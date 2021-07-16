@@ -807,7 +807,6 @@ declare namespace imports.ui.popupMenu {
 		menu: PopupSubMenu;
 		protected _triangleBin: gi.St.Bin
 
-
 		constructor(text: string)
 
 		private _subMenuOpenStateChanged(menu: PopupSubMenu, open: boolean): void;
