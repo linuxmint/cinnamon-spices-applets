@@ -39,7 +39,7 @@ export class DarkSky implements WeatherProvider {
 	// DarkSky Filter words for short conditions, won't work on every language
 	private DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
 
-	private unit: queryUnits = null;
+	private unit: queryUnits = "si";
 
 	private app: WeatherApplet
 
@@ -50,7 +50,7 @@ export class DarkSky implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let now = new Date(Date.now());
 		if (now.getUTCFullYear() >= 2022) {
 			this.app.ShowError(
@@ -65,7 +65,7 @@ export class DarkSky implements WeatherProvider {
 		let query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		let json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, null, Lang.bind(this, this.HandleError));
+		let json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
 		if (!json) return null;
 
 		if (!(json as any).code) {                   // No code, Request Success
@@ -78,7 +78,7 @@ export class DarkSky implements WeatherProvider {
 	};
 
 
-	private ParseWeather(json: DarkSkyPayload): WeatherData {
+	private ParseWeather(json: DarkSkyPayload): WeatherData | null {
 		try {
 			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
 			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
@@ -115,6 +115,7 @@ export class DarkSky implements WeatherProvider {
 				forecasts: [],
 				hourlyForecasts: []
 			}
+
 			// Forecast
 			for (let i = 0; i < json.daily.data.length; i++) {
 				let day = json.daily.data[i];
@@ -156,7 +157,8 @@ export class DarkSky implements WeatherProvider {
 					}
 				};
 
-				result.hourlyForecasts.push(forecast);
+				// never null here
+				(<HourlyForecastData[]>result.hourlyForecasts).push(forecast);
 			}
 			return result;
 		}
@@ -167,7 +169,10 @@ export class DarkSky implements WeatherProvider {
 		}
 	};
 
-	private ConvertToAPILocale(systemLocale: string) {
+	private ConvertToAPILocale(systemLocale: string | null) {
+		if (systemLocale == null)
+			return "en";
+
 		if (systemLocale == "zh-tw") {
 			return systemLocale;
 		}
@@ -352,7 +357,7 @@ export class DarkSky implements WeatherProvider {
 		}
 	};
 
-	private ToKelvin(temp: number): number {
+	private ToKelvin(temp: number): number | null {
 		if (this.unit == 'us') {
 			return FahrenheitToKelvin(temp);
 		}
@@ -362,7 +367,7 @@ export class DarkSky implements WeatherProvider {
 
 	};
 
-	private ToMPS(speed: number): number {
+	private ToMPS(speed: number): number | null {
 		if (this.unit == 'si') {
 			return speed;
 		}

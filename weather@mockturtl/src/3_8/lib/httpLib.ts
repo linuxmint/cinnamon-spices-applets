@@ -5,7 +5,7 @@ import { _ } from "../utils";
 const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
 export class HttpLib {
-	private static instance: HttpLib = null;
+	private static instance: HttpLib;
 	/** Single instance of log */
 	public static get Instance() {
 		if (this.instance == null)
@@ -42,7 +42,7 @@ export class HttpLib {
 			response.ErrorData = {
 				code: -1,
 				message: "bad api response - non json",
-				reason_phrase: null,
+				reason_phrase: "",
 			}
 		}
 		finally {
@@ -56,7 +56,7 @@ export class HttpLib {
 	public async LoadAsync(url: string, params?: HTTPParams, method: Method = "GET"): Promise<GenericResponse> {
 		let message = await this.Send(url, params, method);
 
-		let error: HttpError = null;
+		let error: HttpError | undefined = undefined;
 
 		// Error generation
 		if (!message) {
@@ -64,7 +64,7 @@ export class HttpLib {
 				code: 0,
 				message: "no network response",
 				reason_phrase: "no network response",
-				response: null
+				response: undefined
 			}
 		}
 		// network or DNS error
@@ -121,7 +121,7 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: HTTPParams, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams | null, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
 		// Add params to url
 		if (params != null) {
 			let items = Object.keys(params);
@@ -156,11 +156,11 @@ export interface Response<T> extends GenericResponse {
 interface GenericResponse {
 	Success: boolean;
 	Data: any;
-	ErrorData: HttpError;
+	ErrorData?: HttpError;
 }
 
 export interface HTTPParams {
-	[key: string]: boolean | string | number;
+	[key: string]: boolean | string | number | null;
 }
 
 export interface HttpError {

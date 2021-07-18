@@ -21,9 +21,10 @@ export class UIBar {
 
 	public ToggleClicked: Event<UIBar, boolean> = new Event();
 
-	private providerCreditButton: WeatherButton = null;
-	private hourlyButton: WeatherButton = null;
-	private _timestamp: imports.gi.St.Label = null;
+	// TODO: assert these properly
+	private providerCreditButton!: WeatherButton;
+	private hourlyButton!: WeatherButton;
+	private _timestamp!: imports.gi.St.Label;
 
 	private app: WeatherApplet;
 

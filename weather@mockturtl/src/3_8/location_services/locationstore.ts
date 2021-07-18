@@ -8,8 +8,8 @@ import { ValidTimezone, _ } from "../utils";
 import { DateTime } from "luxon";
 export class LocationStore {
 	private locations: LocationData[] = [];
-	private app: WeatherApplet = null;
-	private config: Config = null;
+	private app: WeatherApplet;
+	private config: Config;
 
 	/**
 	 * Current head on locationStore array.
@@ -92,7 +92,7 @@ export class LocationStore {
 	 * Tries to find a location in storage based on the entryText
 	 * @param entryText 
 	 */
-	public FindLocation(entryText: string): LocationData {
+	public FindLocation(entryText: string): LocationData | null {
 		for (let index = 0; index < this.locations.length; index++) {
 			const element = this.locations[index];
 			if (element.entryText == entryText)
@@ -125,7 +125,10 @@ export class LocationStore {
 	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToNextLocation function
 	 */
-	public GetNextLocation(currentLoc: LocationData): LocationData {
+	public GetNextLocation(currentLoc: LocationData | null): LocationData | null {
+		if (currentLoc == null)
+			return null;
+
 		Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
 		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
 		let nextIndex = null;
@@ -159,7 +162,10 @@ export class LocationStore {
 	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToPreviousLocation function
 	 */
-	public GetPreviousLocation(currentLoc: LocationData): LocationData {
+	public GetPreviousLocation(currentLoc: LocationData | null): LocationData | null {
+		if (currentLoc == null)
+			return null;
+
 		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
 		let previousIndex = null;
 		if (this.InStorage(currentLoc)) { // if location is stored move to the previous one
@@ -188,7 +194,10 @@ export class LocationStore {
 		};
 	}
 
-	public ShouldShowLocationSelectors(currentLoc: LocationData): boolean {
+	public ShouldShowLocationSelectors(currentLoc: LocationData | null): boolean {
+		if (currentLoc == null)
+			return false;
+			
 		let threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;
@@ -196,7 +205,7 @@ export class LocationStore {
 			return false;
 	}
 
-	public async SaveCurrentLocation(loc: LocationData) {
+	public async SaveCurrentLocation(loc: LocationData | null) {
 		if (this.app.Locked()) {
 			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
 			return;
@@ -209,7 +218,10 @@ export class LocationStore {
 			NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
-		loc.timeZone = this.app.config.Timezone;
+		// Save tz if it exists
+		if (this.app.config.Timezone)
+			loc.timeZone = this.app.config.Timezone;
+
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
 		this.InvokeStorageChanged();
@@ -228,7 +240,7 @@ export class LocationStore {
 		return this.FindIndex(loc) != -1;
 	}
 
-	private FindIndex(loc: LocationData, locations: LocationData[] = null): number {
+	private FindIndex(loc: LocationData | null, locations: LocationData[] | null = null): number {
 		if (loc == null) return -1;
 		if (locations == null) locations = this.locations
 		for (let index = 0; index < locations.length; index++) {

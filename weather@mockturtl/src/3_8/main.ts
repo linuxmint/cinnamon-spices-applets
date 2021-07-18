@@ -34,7 +34,7 @@ export class WeatherApplet extends TextIconApplet {
 	private refreshTriggeredWhileLocked = false;
 
 	/** Chosen API */
-	private provider: WeatherProvider;
+	private provider?: WeatherProvider;
 
 	private orientation: imports.gi.St.Side;
 	public get Orientation() {
@@ -81,7 +81,7 @@ export class WeatherApplet extends TextIconApplet {
 	/**
 	 * @returns Queues a refresh if if refresh was triggered while locked.
 	 */
-	public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData): void {
+	public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData | null): void {
 		this.loop.Resume();
 		if (this.Locked()) {
 			this.refreshTriggeredWhileLocked = true;
@@ -94,7 +94,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
-	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData): Promise<RefreshState> {
+	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData | null): Promise<RefreshState> {
 		try {
 			if (this.lock) {
 				Logger.Info("Refreshing in progress, refresh skipped.");
@@ -113,6 +113,9 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.EnsureProvider();
+			if (this.provider == null)
+				return RefreshState.Failure;
+
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
 				Logger.Error("No API Key given");
@@ -122,7 +125,7 @@ export class WeatherApplet extends TextIconApplet {
 					detail: "no key",
 					message: _("This provider requires an API key to operate")
 				});
-				return null;
+				return RefreshState.Failure;
 			}
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
@@ -173,7 +176,7 @@ export class WeatherApplet extends TextIconApplet {
 		return true;
 	}
 
-	private DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
+	private DisplayWeatherOnLabel(temperature: number | null, mainCondition: string) {
 		mainCondition = CapitalizeFirstLetter(mainCondition)
 		// Applet panel label
 		let label = "";
@@ -192,7 +195,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Vertical panels
 		else {
 			if (this.config._showTextInPanel) {
-				label = TempToUserConfig(temperature, this.config, false);
+				label = TempToUserConfig(temperature, this.config, false) ?? "";
 				// Vertical panel width is more than this value then we has space
 				// to show units
 				if (this.GetPanelHeight() >= 35) {
@@ -204,7 +207,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Overriding temperature panel label
 		if (NotEmpty(this.config._tempTextOverride)) {
 			label = this.config._tempTextOverride
-				.replace("{t}", TempToUserConfig(temperature, this.config, false))
+				.replace("{t}", TempToUserConfig(temperature, this.config, false) ?? "")
 				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
 				.replace("{c}", mainCondition);
 		}
@@ -259,15 +262,16 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
+	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T | null> {
 		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, method);
 
+		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(response.ErrorData))
+			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
 				return null;
 			else {
-				this.HandleHTTPError(response.ErrorData);
+				this.HandleHTTPError(<HttpError>response.ErrorData);
 				return null;
 			}
 		}
@@ -282,15 +286,16 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string> {
+	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string | null> {
 		let response = await HttpLib.Instance.LoadAsync(url, params, method);
 
+		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(response.ErrorData))
+			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
 				return null;
 			else {
-				this.HandleHTTPError(response.ErrorData);
+				this.HandleHTTPError(<HttpError>response.ErrorData);
 				return null;
 			}
 		}
@@ -429,7 +434,8 @@ export class WeatherApplet extends TextIconApplet {
 				if (currentName != "DanishMI" || force) this.provider = new DanishMI(this);
 				break;
 			default:
-				return null;
+				Logger.Error(`Provider string "${currentName}" from settings doesn't exist, please contact the developer!`);
+				this.DisplayHardError("Critical Error", "Please see logs and contact developer");
 		}
 	}
 

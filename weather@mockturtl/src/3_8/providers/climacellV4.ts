@@ -29,7 +29,7 @@ export class ClimacellV4 implements WeatherProvider {
 		this.app = app;
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
@@ -58,10 +58,13 @@ export class ClimacellV4 implements WeatherProvider {
 		return true;
 	}
 
-	private ParseWeather(loc: LocationData, data: ClimacellV4Payload): WeatherData {
+	private ParseWeather(loc: LocationData, data: ClimacellV4Payload): WeatherData | null {
 		let current = data.data.timelines.find(x => x.timestep == "current")?.intervals?.[0];
-		let hourly = data.data.timelines.find(x => x.timestep == "1h").intervals;
-		let daily = data.data.timelines.find(x => x.timestep == "1d").intervals;
+		let hourly = data.data.timelines.find(x => x.timestep == "1h")?.intervals;
+		let daily = data.data.timelines.find(x => x.timestep == "1d")?.intervals;
+
+		if (!current || !daily || !hourly || !daily[0]?.values)
+			return null;
 
 		let result: WeatherData = {
 			coord: {
@@ -77,8 +80,9 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: DateTime.fromISO(daily?.[0].values.sunriseTime, { zone: loc.timeZone }),
-			sunset: DateTime.fromISO(daily?.[0].values.sunsetTime, { zone: loc.timeZone }),
+			// Cast to string, we always get sunrise/sunset from daily
+			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
+			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
