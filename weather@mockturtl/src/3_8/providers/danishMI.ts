@@ -153,10 +153,11 @@ export class DanishMI implements WeatherProvider {
 		// next day boundary
 		let upto = target.plus({ days: 1 });
 
-		let relevantHours = hourlyData.filter(x => {
+		let relevantHours = hourlyData.filter((x) => {
 			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
 			if (hour >= target && hour < upto)
-				return hour;
+				return true;
+			return false;
 		});
 
 		// convert night symbols to day symbols for daily

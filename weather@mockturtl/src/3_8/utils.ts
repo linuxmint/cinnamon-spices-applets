@@ -259,6 +259,8 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 				return "11 (" + _("Violent storm") + ")";
 			}
 			return "12 (" + _("Hurricane") + ")";
+		default:
+			return (Math.round(mps * 10) / 10).toString();
 	}
 }
 
@@ -290,8 +292,8 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 		if (temp < 0) return `−${Math.abs(temp).toString()}`;
 		else if (temp > 0) return `+${temp.toString()}`;
 	}
-	else
-		return temp.toString();
+	
+	return temp.toString();
 }
 
 export function TempRangeToUserConfig(min: number, max: number, config: Config): string {

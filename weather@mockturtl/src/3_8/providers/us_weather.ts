@@ -308,6 +308,7 @@ export class USWeather implements WeatherProvider {
 			global.log(index)
 			return index;
 		}
+		return null;
 	}
 
 	private ParseForecast = (json: ForecastsPayload): ForecastData[] => {

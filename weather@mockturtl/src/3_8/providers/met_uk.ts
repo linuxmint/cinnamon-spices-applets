@@ -358,6 +358,9 @@ export class MetUk implements WeatherProvider {
 			stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
 			return `${_("Very good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
+		else {
+			return null;
+		}
 	}
 
 	private DistanceUnitFor(unit: DistanceUnits) {

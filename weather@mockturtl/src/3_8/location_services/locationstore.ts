@@ -85,6 +85,7 @@ export class LocationStore {
 		if (index == -1) return false;
 
 		this.currentIndex = index;
+		return true;
 	}
 
 	/**

@@ -318,30 +318,25 @@ export class WeatherApplet extends TextIconApplet {
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
-	/** override function */
-	public on_orientation_changed(orientation: imports.gi.St.Side) {
+	public override on_orientation_changed(orientation: imports.gi.St.Side) {
 		this.orientation = orientation;
 		this.RefreshWeather(true);
 	};
 
-	/** Override function */
-	public on_applet_removed_from_panel(deleteConfig: any) {
+	public override on_applet_removed_from_panel(deleteConfig: any) {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 	}
 
-	/** Override function */
-	public on_applet_clicked(event: any): void {
+	public override on_applet_clicked(event: any): void {
 		this.ui.Toggle();
 	}
 
-	/** Override function */
-	public on_applet_middle_clicked(event: any) {
+	public override on_applet_middle_clicked(event: any) {
 
 	}
 
-	/** Override function */
-	public on_panel_height_changed() {
+	public override on_panel_height_changed() {
 		// Implemented byApplets
 	}
 
@@ -525,6 +520,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		if (error.userError) {
+			Logger.Error("Error received cused by User, Pausing main loop.");
 			this.loop.Pause();
 			return;
 		}
