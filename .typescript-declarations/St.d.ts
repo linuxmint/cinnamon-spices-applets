@@ -28,7 +28,7 @@ declare namespace imports.gi.St {
 
 
 	interface BinOptions extends WidgetOptions {
-		child: Clutter.Actor,
+		child: Clutter.Actor | null,
 		x_align: Align,
 		y_align: Align,
 		x_fill: boolean,

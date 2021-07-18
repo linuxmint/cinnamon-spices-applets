@@ -888,7 +888,7 @@ declare namespace imports.gi.Gio {
     class IOStream extends GObject.Object {
         clear_pending () : void;
         close (cancellable: Cancellable) : boolean;
-        close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        close_async (io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         close_finish (result: AsyncResult) : boolean;
         get_input_stream () : InputStream;
         get_output_stream () : OutputStream;
@@ -967,7 +967,7 @@ declare namespace imports.gi.Gio {
     interface InputStream extends GObject.Object {
         clear_pending () : void;
         close (cancellable: Cancellable) : boolean;
-        close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        close_async (io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         close_finish (result: AsyncResult) : boolean;
         has_pending () : boolean;
         is_closed () : boolean;
@@ -1245,7 +1245,7 @@ declare namespace imports.gi.Gio {
     interface OutputStream extends GObject.Object {
         clear_pending () : void;
         close (cancellable: Cancellable) : boolean;
-        close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        close_async (io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         close_finish (result: AsyncResult) : boolean;
         flush (cancellable: Cancellable) : boolean;
         flush_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
@@ -1265,7 +1265,7 @@ declare namespace imports.gi.Gio {
         write_all_finish (result: AsyncResult, bytes_written: number) : boolean;
         write_async (buffer: number[], io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         write_bytes (bytes: GLib.Bytes, cancellable: Cancellable) : number;
-        write_bytes_async (bytes: GLib.Bytes, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        write_bytes_async (bytes: GLib.Bytes, io_priority: number | null, cancellable: Cancellable | null, callback?: AsyncReadyCallback) : void;
         write_bytes_finish (result: AsyncResult) : number;
         write_finish (result: AsyncResult) : number;
         writev (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;
@@ -5147,7 +5147,7 @@ declare namespace imports.gi.Gio {
         create_readwrite_async (flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         create_readwrite_finish (res: AsyncResult) : FileIOStream;
         delete (cancellable: Cancellable) : boolean;
-        delete_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        delete_async (io_priority?: number, cancellable?: Cancellable, callback?: AsyncReadyCallback) : void;
         delete_finish (result: AsyncResult) : boolean;
         dup () : File;
         eject_mountable (flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
@@ -5191,7 +5191,7 @@ declare namespace imports.gi.Gio {
             or null if the entity tag is not needed
          */
         load_contents(cancellable: Cancellable): [success: boolean, contents: string];
-        load_contents_async (cancellable: Cancellable, callback: AsyncReadyCallback): void;
+        load_contents_async (cancellable?: Cancellable, callback?: AsyncReadyCallback): void;
         /**
          * 
          * @param res 
@@ -5210,7 +5210,7 @@ declare namespace imports.gi.Gio {
         make_directory (cancellable: Cancellable) : boolean;
         make_directory_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         make_directory_finish (result: AsyncResult) : boolean;
-        make_directory_with_parents (cancellable: Cancellable) : boolean;
+        make_directory_with_parents (cancellable: Cancellable | null) : boolean;
         make_symbolic_link (symlink_value: string, cancellable: Cancellable) : boolean;
         measure_disk_usage (flags: FileMeasureFlags, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, disk_usage: number, num_dirs: number, num_files: number) : boolean;
         measure_disk_usage_async (flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, callback: AsyncReadyCallback, user_data: any) : void;
@@ -5232,13 +5232,13 @@ declare namespace imports.gi.Gio {
         query_default_handler (cancellable: Cancellable) : AppInfo;
         query_default_handler_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         query_default_handler_finish (result: AsyncResult) : AppInfo;
-        query_exists (cancellable: Cancellable) : boolean;
+        query_exists (cancellable: Cancellable | null) : boolean;
         query_file_type (flags: FileQueryInfoFlags, cancellable: Cancellable) : FileType;
         query_filesystem_info (attributes: string, cancellable: Cancellable) : FileInfo;
         query_filesystem_info_async (attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         query_filesystem_info_finish (res: AsyncResult) : FileInfo;
         query_info (attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable) : FileInfo;
-        query_info_async (attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        query_info_async (attributes: string, flags: FileQueryInfoFlags, io_priority?: number, cancellable?: Cancellable, callback?: AsyncReadyCallback) : void;
         query_info_finish (res: AsyncResult) : FileInfo;
         query_settable_attributes (cancellable: Cancellable) : FileAttributeInfoList;
         query_writable_namespaces (cancellable: Cancellable) : FileAttributeInfoList;
@@ -5253,7 +5253,7 @@ declare namespace imports.gi.Gio {
         replace_contents_finish (res: AsyncResult, new_etag: string) : boolean;
         replace_finish (res: AsyncResult) : FileOutputStream;
         replace_readwrite (etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable) : FileIOStream;
-        replace_readwrite_async (etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
+        replace_readwrite_async (etag: string | null, make_backup: boolean | null, flags: FileCreateFlags | null, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         replace_readwrite_finish (res: AsyncResult) : FileIOStream;
         resolve_relative_path (relative_path: string) : File;
         set_attribute (attribute: string, _type: FileAttributeType, value_p: any, flags: FileQueryInfoFlags, cancellable: Cancellable) : boolean;

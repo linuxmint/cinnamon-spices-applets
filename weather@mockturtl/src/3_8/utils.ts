@@ -78,13 +78,13 @@ export function CapitalizeEveryWord(description: string): string {
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
-function NormalizeTimezone(tz: string) {
+function NormalizeTimezone(tz?: string) {
 	if (!tz || tz == "" || tz == "UTC")
 		tz = undefined;
 	return tz;
 }
 
-export function GetDayName(date: DateTime, locale: string, showDate: boolean = false, tz: string): string {
+export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string): string {
 	let params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
 		timeZone: tz
@@ -96,19 +96,26 @@ export function GetDayName(date: DateTime, locale: string, showDate: boolean = f
 		params.day = 'numeric';
 	}
 
+	let now = DateTime.utc();
+	let tomorrow = DateTime.utc().plus({ days: 1 });
 
-	let now = DateTime.utc().setZone(tz);
-	let tomorrow = DateTime.utc().setZone(tz).plus({ days: 1 });
-	date = date.setZone(tz);
+	if (!!tz) {
+		now = now.setZone(tz);
+		tomorrow = tomorrow.setZone(tz);
+		date = date.setZone(tz);
+	}
 
 	// today or tomorrow, no need to include date
 	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
 		delete params.weekday;
 
-	let dateString = date.setLocale(locale).toLocaleString(params);
+	if (!!locale)
+		date = date.setLocale(locale);
+
+	let dateString = date.toLocaleString(params);
 
 	// Make sure French days are caapitalised (they are not by default)
-	if (locale.startsWith("fr"))
+	if (locale?.startsWith("fr"))
 		dateString = CapitalizeFirstLetter(dateString);
 
 	if (date.hasSame(now, "day")) dateString = _("Today");
@@ -117,7 +124,7 @@ export function GetDayName(date: DateTime, locale: string, showDate: boolean = f
 	return dateString;
 }
 
-export function GetHoursMinutes(date: DateTime, locale: string, hours24Format: boolean, tz: string, onlyHours: boolean = false): string {
+export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
@@ -128,11 +135,14 @@ export function GetHoursMinutes(date: DateTime, locale: string, hours24Format: b
 
 	if (!onlyHours)
 		params.minute = "2-digit";
-
-	return date.setZone(tz).setLocale(locale).toLocaleString(params);
+	if (!!tz)
+		date = date.setZone(tz);
+	if (!!locale)
+		date = date.setLocale(locale);
+	return date.toLocaleString(params);
 }
 
-export function AwareDateString(date: DateTime, locale: string, hours24Format: boolean, tz: string): string {
+export function AwareDateString(date: DateTime, locale: string | null, hours24Format: boolean, tz: string): string {
 	let now = DateTime.utc().setZone(tz);
 	date = date.setZone(tz)
 	let params: Intl.DateTimeFormatOptions = {
@@ -153,7 +163,10 @@ export function AwareDateString(date: DateTime, locale: string, hours24Format: b
 
 	params.timeZone = NormalizeTimezone(tz);
 
-	return date.setLocale(locale).toLocaleString(params);
+	if (!!locale)
+		date = date.setLocale(locale);
+
+	return date.toLocaleString(params);
 }
 /**
  * 
@@ -177,15 +190,13 @@ export function ValidTimezone(tz: string): boolean {
 
 /** Capitalizes first letter and translates if needed */
 export function ProcessCondition(condition: string, shouldTranslate: boolean) {
-	if (condition == null) return null;
-
 	condition = CapitalizeFirstLetter(condition);
 	if (shouldTranslate)
 		condition = _(condition);
 	return condition;
 }
 
-export function LocalizedColon(locale: string): string {
+export function LocalizedColon(locale: string | null): string {
 	if (locale == null)
 		return ":"
 
@@ -195,8 +206,8 @@ export function LocalizedColon(locale: string): string {
 	return ":"
 }
 
-export function PrecentToLocale(humidity: number, locale: string): string {
-	return (humidity / 100).toLocaleString(locale, { style: "percent" });
+export function PrecentToLocale(humidity: number, locale: string | null): string {
+	return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
 }
 
 // Conversion Factors
@@ -205,7 +216,6 @@ const WEATHER_CONV_KPH_IN_MPS = 3.6
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
 
 export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): string {
-	if (mps == null) return null;
 	// Override wind units with our preference, takes Meter/Second wind speed
 	switch (units) {
 		case "mph":
@@ -265,8 +275,9 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 }
 
 // Conversion from Kelvin
-export function TempToUserConfig(kelvin: number, config: Config, withUnit: boolean = true): string {
-	if (kelvin == null) return null;
+export function TempToUserConfig(kelvin: number | null, config: Config, withUnit: boolean = true): string | null {
+	if (kelvin == null)
+		return null;
 
 	let temp: number | string = (config.TemperatureUnit == "celsius") ? KelvinToCelsius(kelvin) : KelvinToFahrenheit(kelvin);
 	temp = RussianTransform(temp, config._tempRussianStyle);
@@ -296,7 +307,7 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 	return temp.toString();
 }
 
-export function TempRangeToUserConfig(min: number, max: number, config: Config): string {
+export function TempRangeToUserConfig(min: number | null, max: number | null, config: Config): string {
 	let t_low = TempToUserConfig(min, config, false);
 	let t_high = TempToUserConfig(max, config, false);
 
@@ -364,32 +375,31 @@ export function MillimeterToUserUnits(mm: number, distanceUnit: DistanceUnits): 
 // --------------------------------------------------------------
 // Converters
 
-export function KPHtoMPS(speed: number): number {
-	if (speed == null) return null;
+export function KPHtoMPS(speed: number | null): number {
+	if (speed == null) return 0;
 	return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 
-export function CelsiusToKelvin(celsius: number): number {
+export function CelsiusToKelvin(celsius: number | null): number | null {
 	if (celsius == null) return null;
 	return (celsius + 273.15);
 }
 
-export function FahrenheitToKelvin(fahrenheit: number): number {
+export function FahrenheitToKelvin(fahrenheit: number | null): number | null {
 	if (fahrenheit == null) return null;
 	return ((fahrenheit - 32) / 1.8 + 273.15);
 };
 
-export function MPHtoMPS(speed: number): number {
+export function MPHtoMPS(speed: number): number | null {
 	if (speed == null || speed == undefined) return null;
 	return speed * 0.44704;
 }
 
 export function KmToM(km: number): number {
-	if (km == null) return null;
 	return km * 0.6213712;
 }
 
-export function CompassToDeg(compass: string): number {
+export function CompassToDeg(compass: string): number | null {
 	if (!compass) return null;
 	compass = compass.toUpperCase();
 	switch (compass) {
@@ -427,7 +437,7 @@ export function CompassDirection(deg: number): ArrowIcons {
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
-export function CompassDirectionText(deg: number): string {
+export function CompassDirectionText(deg: number): string | null {
 	if (!deg)
 		return null;
 	let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
@@ -464,7 +474,10 @@ export function NotEmpty(str: string): boolean {
 	return (str != null && str.length > 0 && str != undefined)
 }
 
-export function IsLangSupported(lang: string, languages: Array<string>): boolean {
+export function IsLangSupported(lang: string | null, languages: Array<string>): boolean {
+	if (lang == null)
+		return false;
+
 	return (languages.includes(lang))
 };
 
@@ -475,7 +488,7 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 // --------------------------------------------------------
 // ETC
 
-export function mode<T>(arr: T[]): T {
+export function mode<T>(arr: T[]): T | null {
 	return arr.reduce(function (current, item) {
 		var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
 		if (val > current.greatestFreq) {
@@ -483,7 +496,7 @@ export function mode<T>(arr: T[]): T {
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any }).mode;
+	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any} as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -509,8 +522,8 @@ export function ShadeHexColor(color: string, percent: number): string {
  * Convert Linux locale to JS locale format
  * @param locale Linux locale string
  */
-export function ConstructJsLocale(locale: string): string {
-	let jsLocale = locale.split(".")[0];
+export function ConstructJsLocale(locale: string): string | null {
+	let jsLocale: string | null = locale.split(".")[0];
 	let tmp: string[] = jsLocale.split("_");
 	jsLocale = "";
 	for (let i = 0; i < tmp.length; i++) {
@@ -518,7 +531,7 @@ export function ConstructJsLocale(locale: string): string {
 		jsLocale += tmp[i].toLowerCase();
 	}
 
-	if (locale == "c" || locale == null) jsLocale = undefined;
+	if (locale == "c" || locale == null) jsLocale = null;
 	return jsLocale;
 }
 
@@ -573,7 +586,7 @@ export function setTimeout(func: Function, ms: number) {
 	let id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return false; // Stop repeating
-	}, null);
+	});
 
 	return id;
 };
@@ -599,7 +612,7 @@ export function setInterval(func: Function, ms: number) {
 	let id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return true; // Repeat
-	}, null);
+	});
 
 	return id;
 };

@@ -82,7 +82,7 @@ declare namespace imports.mainloop {
      * @param binding 
      */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
-    export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): number;
+    export function timeout_add(milliseconds: number, binding: () => any, errorCallback?: () => null): number;
     export function source_remove(id: any): void;
 }
 
