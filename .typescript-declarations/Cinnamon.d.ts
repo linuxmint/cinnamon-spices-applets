@@ -24,9 +24,9 @@ declare namespace imports.gi.Cinnamon {
 		public manage_stage(state: any, themeWidget: any): void;
 	}
 
-	class CinnamonTrayIcon extends St.Icon {
+	class TrayIcon extends St.Icon {
 		obsolete?: boolean;
-		window: CinnamonEmbeddedWindow;
+		window: EmbeddedWindow;
 		click(e: gi.Clutter.Event): void;
 	}
 
@@ -35,7 +35,7 @@ declare namespace imports.gi.Cinnamon {
 		public natural_size: number
 	}
 
-	class CinnamonEmbeddedWindow {
+	class EmbeddedWindow extends Gtk.Window {
 		show(): void;
 		hide(): void;
 	}
