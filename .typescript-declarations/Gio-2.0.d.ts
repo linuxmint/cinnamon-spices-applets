@@ -5147,7 +5147,7 @@ declare namespace imports.gi.Gio {
         create_readwrite_async (flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         create_readwrite_finish (res: AsyncResult) : FileIOStream;
         delete (cancellable: Cancellable) : boolean;
-        delete_async (io_priority?: number, cancellable?: Cancellable, callback?: AsyncReadyCallback) : void;
+        delete_async (io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         delete_finish (result: AsyncResult) : boolean;
         dup () : File;
         eject_mountable (flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
@@ -5191,7 +5191,7 @@ declare namespace imports.gi.Gio {
             or null if the entity tag is not needed
          */
         load_contents(cancellable: Cancellable): [success: boolean, contents: string];
-        load_contents_async (cancellable?: Cancellable, callback?: AsyncReadyCallback): void;
+        load_contents_async (cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
         /**
          * 
          * @param res 
@@ -5238,7 +5238,7 @@ declare namespace imports.gi.Gio {
         query_filesystem_info_async (attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         query_filesystem_info_finish (res: AsyncResult) : FileInfo;
         query_info (attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable) : FileInfo;
-        query_info_async (attributes: string, flags: FileQueryInfoFlags, io_priority?: number, cancellable?: Cancellable, callback?: AsyncReadyCallback) : void;
+        query_info_async (attributes: string, flags: FileQueryInfoFlags, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null) : void;
         query_info_finish (res: AsyncResult) : FileInfo;
         query_settable_attributes (cancellable: Cancellable) : FileAttributeInfoList;
         query_writable_namespaces (cancellable: Cancellable) : FileAttributeInfoList;
