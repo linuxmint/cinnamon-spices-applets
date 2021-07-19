@@ -526,7 +526,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		if (error.userError) {
-			Logger.Error("Error received cused by User, Pausing main loop.");
+			Logger.Error("Error received caused by User, Pausing main loop.");
 			this.loop.Pause();
 			return;
 		}
