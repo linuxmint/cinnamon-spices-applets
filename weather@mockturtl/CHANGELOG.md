@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.2
+
+* Do not minify code so .pot files can be generated without missing strings.
+* Add strict Typescript typechecking
+
 ## 3.1.1
 
 * Fix issue where applet wouldn't run on Linux Mint 19-19.3, where libraries targeting higher than es2017 would be included.
