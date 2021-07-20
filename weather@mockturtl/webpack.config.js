@@ -10,10 +10,10 @@ const appletName = __dirname.split('/').slice(-1)[0]
 module.exports = {
     mode: 'production',
     entry: './src/3_8/applet.ts',
-    devtool: "eval-source-map",
+    //devtool: "eval-source-map",
     target: 'node', // without webpack renames 'global'
     optimization: {
-        minimize: true,
+        minimize: false,
         usedExports: true,
     },
     module: {

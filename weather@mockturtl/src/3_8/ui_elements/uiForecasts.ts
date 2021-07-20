@@ -23,8 +23,9 @@ const STYLE_FORECAST = 'forecast'
 
 export class UIForecasts {
 	public actor: imports.gi.St.Bin;
-	private forecasts: ForecastUI[];
-	private grid: imports.gi.Clutter.GridLayout;
+	// TODO: Assert these properly
+	private forecasts!: ForecastUI[];
+	private grid!: imports.gi.Clutter.GridLayout;
 
 	private app: WeatherApplet;
 
@@ -32,7 +33,7 @@ export class UIForecasts {
 	public DayHovered: Event<WeatherButton, DateTime> = new Event();
 
 	// Callbacks with bound context, which has constant signature for event subsciption/unsubscription
-	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
+	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event | null) => void;
 	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
 
 	constructor(app: WeatherApplet) {
@@ -76,13 +77,16 @@ export class UIForecasts {
 
 				// Enable and subscribe to buttons what has hourly weathers
 				let hasHourlyWeather: boolean = false;
-				for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
-					const element = weather.hourlyForecasts[index];
-					if (!element)
-						break;
-					if (OnSameDay(element.date, forecastData.date)) {
-						hasHourlyWeather = true;
-						break;
+
+				if (weather.hourlyForecasts != null) {
+					for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
+						const element = weather.hourlyForecasts[index];
+						if (!element)
+							break;
+						if (OnSameDay(element.date, forecastData.date)) {
+							hasHourlyWeather = true;
+							break;
+						}
 					}
 				}
 
@@ -223,7 +227,7 @@ export class UIForecasts {
 		this.DayHovered.Invoke(sender, sender.ID as DateTime);
 	}
 
-	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event | null): void {
 		Logger.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
 		this.DayClicked.Invoke(sender, sender.ID as DateTime);
 	}

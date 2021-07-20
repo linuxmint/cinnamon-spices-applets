@@ -1,7 +1,7 @@
 import { UUID } from "../consts";
 
 class Log {
-	private ID: number;
+	private ID?: number;
 	private debug: boolean = false;
 	private level = 1;
 	private appletDir: string;
@@ -27,7 +27,7 @@ class Log {
 
 	Error(error: string, e?: Error): void {
 		global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
-		if (e != null)
+		if (!!e?.stack)
 			global.logError(e.stack);
 	};
 

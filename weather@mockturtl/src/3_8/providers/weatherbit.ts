@@ -45,7 +45,7 @@ export class Weatherbit implements WeatherProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
 		let hourlyPromise = null;
 		if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
@@ -66,12 +66,12 @@ export class Weatherbit implements WeatherProvider {
 	 * @param baseUrl 
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[] | null) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync(query, null, (e) => this.HandleError(e));
+		let json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
 
 		if (json == null)
 			return null;
@@ -84,7 +84,7 @@ export class Weatherbit implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, (e) => this.HandleHourlyError(e));
+		let json = await this.app.LoadJsonAsync<any>(query, undefined, (e) => this.HandleHourlyError(e));
 
 		if (!!json?.error) {
 			return null;
@@ -96,7 +96,7 @@ export class Weatherbit implements WeatherProvider {
 		return this.ParseHourlyForecast(json);
 	};
 
-	private ParseCurrent = (json: any): WeatherData => {
+	private ParseCurrent = (json: any): WeatherData | null => {
 		json = json.data[0];
 		let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), this.ParseStringTime(json.ob_time, json.timezone));
 		if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
@@ -109,7 +109,7 @@ export class Weatherbit implements WeatherProvider {
 				location: {
 					city: json.city_name,
 					country: json.country_code,
-					url: null,
+					url: undefined,
 					timeZone: json.timezone
 				},
 				date: DateTime.fromSeconds(json.ts, {zone: json.timezone}),
@@ -145,7 +145,7 @@ export class Weatherbit implements WeatherProvider {
 		}
 	};
 
-	private ParseForecast = (json: any): ForecastData[] => {
+	private ParseForecast = (json: any): ForecastData[] | null => {
 		let forecasts: ForecastData[] = [];
 		try {
 			for (let i = 0; i < json.data.length; i++) {
@@ -172,7 +172,7 @@ export class Weatherbit implements WeatherProvider {
 		}
 	};
 
-	private ParseHourlyForecast = (json: any): HourlyForecastData[] => {
+	private ParseHourlyForecast = (json: any): HourlyForecastData[] | null => {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.data.length; i++) {
@@ -192,7 +192,7 @@ export class Weatherbit implements WeatherProvider {
 						chance: hour.pop
 					}
 				};
-				if (hour.snow != 0) {
+				if (!!forecast.precipitation && hour.snow != 0) {
 					forecast.precipitation.type = "snow";
 					forecast.precipitation.volume = hour.snow;
 				}
@@ -228,11 +228,14 @@ export class Weatherbit implements WeatherProvider {
 	 * @param last_ob_time last refresh time in string format
 	 * @returns the hour difference of incorrect time from correct time
 	 */
-	private HourDifference(correctTime: DateTime, incorrectTime: DateTime): number {
+	private HourDifference(correctTime: DateTime, incorrectTime: DateTime | null): number {
+		if (incorrectTime == null)
+			return 0;
+
 		return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
 	}
 
-	private ParseStringTime(last_ob_time: string, tz: string): DateTime {
+	private ParseStringTime(last_ob_time: string, tz: string): DateTime | null {
 		let split = last_ob_time.split(/[T\-\s:]/);
 		if (split.length != 5) return null;
 		return DateTime.fromObject({
@@ -244,7 +247,10 @@ export class Weatherbit implements WeatherProvider {
 		}).setZone(tz)
 	}
 
-	private ConvertToAPILocale(systemLocale: string) {
+	private ConvertToAPILocale(systemLocale: string | null) {
+		if (!systemLocale)
+			return null;
+
 		if (systemLocale == "zh-tw") {
 			return systemLocale;
 		}
@@ -288,13 +294,13 @@ export class Weatherbit implements WeatherProvider {
 		if (message.code == 403) { // bad key
 			this.hourlyAccess = false;
 			Logger.Info("Hourly forecast is inaccessible, skipping")
-			this.app.ShowError({
+			/*this.app.ShowError({
 				type: "silent",
 				userError: false,
 				detail: "bad key",
 				service: "weatherbit",
 				message: _("API key doesn't provide access to Hourly Weather, skipping")
-			});
+			});*/
 			return false;
 		}
 		return true;

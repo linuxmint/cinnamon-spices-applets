@@ -24,14 +24,14 @@ const STYLE_WEATHER_MENU = 'weather-menu'
 /** Roll-down Popup Menu */
 export class UI {
 	// Separators
-	private ForecastSeparator: UISeparator;
-	private BarSeparator: UISeparator;
-	private HourlySeparator: UISeparator;
+	private ForecastSeparator!: UISeparator;
+	private BarSeparator!: UISeparator;
+	private HourlySeparator!: UISeparator;
 
-	private CurrentWeather: UICurrentWeather;
-	private FutureWeather: UIForecasts;
-	private HourlyWeather: UIHourlyForecasts;
-	private Bar: UIBar;
+	private CurrentWeather!: UICurrentWeather;
+	private FutureWeather!: UIForecasts;
+	private HourlyWeather!: UIHourlyForecasts;
+	private Bar!: UIBar;
 
 	// State variables
 	private lightTheme: boolean = false;
@@ -43,7 +43,7 @@ export class UI {
 	private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
 	private readonly signals: imports.misc.signalManager.SignalManager;
 
-	private lastDateToggled?: DateTime = null;
+	private lastDateToggled?: DateTime = undefined;
 
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.App = app;
@@ -238,7 +238,7 @@ export class UI {
 	}
 
 	private async HideHourlyWeather(): Promise<void> {
-		this.lastDateToggled = null;
+		this.lastDateToggled = undefined;
 		this.HourlySeparator.Hide();
 		this.Bar.SwitchButtonToShow();
 		await this.HourlyWeather.Hide();

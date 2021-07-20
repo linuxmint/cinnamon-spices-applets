@@ -91,61 +91,61 @@ export class Config {
 	private readonly WEATHER_LOCATION_LIST = "locationList";
 	// Settings variables to bind to
 	// complex variables, using getters instead to access
-	private readonly _location: string;
-	private readonly _temperatureUnit: WeatherUnits;
-	private readonly _windSpeedUnit: WeatherWindSpeedUnits;
-	private readonly _distanceUnit: DistanceUnits;
-	private readonly _apiKey: string;
-	private readonly _useSymbolicIcons: boolean;
+	private readonly _location!: string;
+	private readonly _temperatureUnit!: WeatherUnits;
+	private readonly _windSpeedUnit!: WeatherWindSpeedUnits;
+	private readonly _distanceUnit!: DistanceUnits;
+	private readonly _apiKey!: string;
+	private readonly _useSymbolicIcons!: boolean;
 	// No need to access this from the outside
-	private readonly keybinding: string;
+	private readonly keybinding!: string;
 
 	// simple variables
-	public readonly _refreshInterval: number;
-	public readonly _manualLocation: boolean;
-	public readonly _dataService: Services;
-	public readonly _translateCondition: boolean;
-	public readonly _pressureUnit: WeatherPressureUnits;
-	public readonly _show24Hours: boolean;
-	public readonly _forecastDays: number;
-	public readonly _forecastHours: number;
-	public readonly _forecastColumns: number;
-	public readonly _forecastRows: number;
-	public readonly _verticalOrientation: boolean;
-	public readonly _temperatureHighFirst: boolean;
-	public readonly _shortConditions: boolean;
-	public readonly _showSunrise: boolean;
-	public readonly _showCommentInPanel: boolean;
-	public readonly _showTextInPanel: boolean;
-	public readonly _locationLabelOverride: string;
-	public readonly _useCustomAppletIcons: boolean;
-	public readonly _useCustomMenuIcons: boolean;
-	public readonly _tempTextOverride: string;
-	public readonly _tempRussianStyle: boolean;
-	public readonly _shortHourlyTime: boolean;
-	public readonly _showForecastDates: boolean;
-	public readonly _locationList: LocationData[];
-	public readonly _immediatePrecip: boolean;
-	public readonly _showBothTempUnits: boolean;
-	public readonly _displayWindAsText: boolean;
+	public readonly _refreshInterval!: number;
+	public readonly _manualLocation!: boolean;
+	public readonly _dataService!: Services;
+	public readonly _translateCondition!: boolean;
+	public readonly _pressureUnit!: WeatherPressureUnits;
+	public readonly _show24Hours!: boolean;
+	public readonly _forecastDays!: number;
+	public readonly _forecastHours!: number;
+	public readonly _forecastColumns!: number;
+	public readonly _forecastRows!: number;
+	public readonly _verticalOrientation!: boolean;
+	public readonly _temperatureHighFirst!: boolean;
+	public readonly _shortConditions!: boolean;
+	public readonly _showSunrise!: boolean;
+	public readonly _showCommentInPanel!: boolean;
+	public readonly _showTextInPanel!: boolean;
+	public readonly _locationLabelOverride!: string;
+	public readonly _useCustomAppletIcons!: boolean;
+	public readonly _useCustomMenuIcons!: boolean;
+	public readonly _tempTextOverride!: string;
+	public readonly _tempRussianStyle!: boolean;
+	public readonly _shortHourlyTime!: boolean;
+	public readonly _showForecastDates!: boolean;
+	public readonly _locationList!: LocationData[];
+	public readonly _immediatePrecip!: boolean;
+	public readonly _showBothTempUnits!: boolean;
+	public readonly _displayWindAsText!: boolean;
 
 	/** Timeout */
-	private doneTypingLocation: number = null;
-	private currentLocation: LocationData = null;
+	private doneTypingLocation: number | null = null;
+	private currentLocation: LocationData | null = null;
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
-	private countryCode: string;
+	private countryCode: string | null;
 
-	private timezone: string = null;
+	private timezone?: string = undefined;
 
 	public get Timezone() {
 		return this.timezone;
 	}
 
-	public set Timezone(value: string) {
+	public set Timezone(value: string | undefined) {
 		if (!value || value == "")
-			value = null;
+			value = undefined;
 		this.timezone = value;
 	}
 
@@ -154,7 +154,7 @@ export class Config {
 
 	/** Stores and retrieves manual locations */
 	public readonly LocStore: LocationStore;
-	public currentLocale: string;
+	public currentLocale: string | null;
 
 	private readonly InterfaceSettings: imports.gi.Gio.Settings;
 	private currentFontSize: number;
@@ -263,7 +263,7 @@ export class Config {
 	}
 
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
-	public SwitchToNextLocation(): LocationData {
+	public SwitchToNextLocation(): LocationData | null {
 		let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
 		if (nextLoc == null) return null;
 		this.InjectLocationToConfig(nextLoc, true);
@@ -271,7 +271,7 @@ export class Config {
 	}
 
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
-	public SwitchToPreviousLocation(): LocationData {
+	public SwitchToPreviousLocation(): LocationData | null {
 		let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
 		if (previousLoc == null) return null;
 		this.InjectLocationToConfig(previousLoc, true);
@@ -289,7 +289,7 @@ export class Config {
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(): Promise<LocationData> {
+	public async EnsureLocation(): Promise<LocationData | null> {
 		this.currentLocation = null;
 
 		// Automatic location
@@ -331,8 +331,6 @@ export class Config {
 			let location: LocationData = {
 				lat: parseFloat(latLong[0]),
 				lon: parseFloat(latLong[1]),
-				city: null,
-				country: null,
 				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
@@ -417,12 +415,12 @@ export class Config {
 		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
-	private GetLocaleTemperateUnit(code: string): WeatherUnits {
+	private GetLocaleTemperateUnit(code: string | null): WeatherUnits {
 		if (code == null || !this.fahrenheitCountries.includes(code)) return "celsius";
 		return "fahrenheit";
 	}
 
-	private GetLocaleWindSpeedUnit(code: string): WeatherWindSpeedUnits {
+	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
 		if (code == null) return "kph";
 
 		for (const key in this.windSpeedUnitLocales) {
@@ -431,7 +429,7 @@ export class Config {
 		return "kph";
 	}
 
-	private GetLocaleDistanceUnit(code: string): DistanceUnits {
+	private GetLocaleDistanceUnit(code: string | null): DistanceUnits {
 		if (code == null) return "metric";
 
 		for (const key in this.distanceUnitLocales) {
@@ -440,7 +438,10 @@ export class Config {
 		return "metric";
 	}
 
-	private GetCountryCode(locale: string) {
+	private GetCountryCode(locale: string | null) {
+		if (locale == null)
+			return null;
+
 		let split = locale.split("-");
 		// There is no country code
 		if (split.length < 2) return null;
@@ -448,7 +449,9 @@ export class Config {
 		return split[1];
 	}
 
-	private GetLanguage(locale: string) {
+	private GetLanguage(locale: string | null) {
+		if (locale == null)
+			return null;
 		let split = locale.split("-");
 		if (split.length < 1) return null;
 

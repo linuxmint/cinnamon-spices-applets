@@ -10,7 +10,7 @@ import { _ } from "../utils";
 export class GeoLocation {
 	private url = "https://nominatim.openstreetmap.org/search/";
 	private params = "?format=json&addressdetails=1&limit=1";
-	private App: WeatherApplet = null;
+	private App: WeatherApplet;
 	private cache: LocationCache = {};
 
 	constructor(app: WeatherApplet) {
@@ -21,7 +21,7 @@ export class GeoLocation {
 	 * Finds location and rebuilds entryText so it can be looked up again
 	 * @param searchText 
 	 */
-	public async GetLocation(searchText: string): Promise<LocationData> {
+	public async GetLocation(searchText: string): Promise<LocationData | null> {
 		try {
 			searchText = searchText.trim();
 			let cached = this.cache?.searchText;

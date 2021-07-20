@@ -19,7 +19,7 @@ export interface WeatherProvider {
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 
-	GetWeather(loc: LocationData): Promise<WeatherData>;
+	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -39,27 +39,27 @@ export interface WeatherData {
 		city?: string,
 		country?: string,
 		timeZone?: string,
-		url: string,
+		url?: string,
 		/** in metres */
 		distanceFrom?: number,
 		tzOffset?: number
 	},
 	/** preferably in UTC */
-	sunrise: DateTime,
+	sunrise: DateTime | null,
 	/** preferably in UTC */
-	sunset: DateTime,
+	sunset: DateTime | null,
 	wind: {
 		/** Meter/sec */
-		speed: number,
+		speed: number | null,
 		/** Meteorological Degrees */
-		degree: number,
+		degree: number | null,
 	};
 	/** In Kelvin */
-	temperature: number;
+	temperature: number | null;
 	/** In hPa */
-	pressure: number;
+	pressure: number | null;
 	/** In percent */
-	humidity: number;
+	humidity: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[]
@@ -90,9 +90,9 @@ export interface ForecastData {
 	/** Set to 12:00 if possible */
 	date: DateTime,
 	/** Kelvin */
-	temp_min: number,
+	temp_min: number | null,
 	/** Kelvin */
-	temp_max: number,
+	temp_max: number | null,
 	condition: Condition
 }
 
@@ -101,7 +101,7 @@ export interface HourlyForecastData {
 	/** Set to 12:00 if possible */
 	date: DateTime;
 	/** Kelvin */
-	temp: number;
+	temp: number | null;
 	condition: Condition;
 	precipitation?: Precipitation;
 }
@@ -118,8 +118,8 @@ type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city: string;
-	country: string;
+	city?: string;
+	country?: string;
 	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;

@@ -20,7 +20,7 @@ export class MetNorway implements WeatherProvider {
 		this.app = app;
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let query = this.GetUrl(loc);
 		if (query == null)
 			return null;
@@ -74,7 +74,7 @@ export class MetNorway implements WeatherProvider {
 				lon: json.geometry.coordinates[0]
 			},
 			date: DateTime.fromISO(current.time, { zone: loc.timeZone }),
-			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(suntimes)),
+			condition: this.ResolveCondition(current.data.next_1_hours?.summary?.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
 			extra_field: {
@@ -89,7 +89,7 @@ export class MetNorway implements WeatherProvider {
 				speed: current.data.instant.details.wind_speed
 			},
 			location: {
-				url: null,
+				url: undefined,
 			},
 			forecasts: []
 		};
@@ -128,7 +128,7 @@ export class MetNorway implements WeatherProvider {
 					icons: [],
 					main: ""
 				},
-				date: null,
+				date: <any>null, // we will build it below
 				temp_max: Number.NEGATIVE_INFINITY,
 				temp_min: Number.POSITIVE_INFINITY
 			}
@@ -140,8 +140,8 @@ export class MetNorway implements WeatherProvider {
 				const element = days[i][j];
 				if (!element.data.next_6_hours) continue;
 				forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
-				if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
-				if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
+				if (element.data.next_6_hours.details.air_temperature_max > <number>forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
+				if (element.data.next_6_hours.details.air_temperature_min < <number>forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
 
 				let [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
 				let severity = conditionSeverity[symbol as Conditions];
@@ -204,9 +204,9 @@ export class MetNorway implements WeatherProvider {
 	}
 
 	private GetMostCommonCondition(count: ConditionCount): string {
-		let result: number = null;
+		let result: number = -1;
 		for (let key in count) {
-			if (result == null) result = parseInt(key);
+			if (result == -1) result = parseInt(key);
 			if (count[result].count < count[key].count) result = parseInt(key);
 		}
 		return count[result].name;
@@ -217,7 +217,7 @@ export class MetNorway implements WeatherProvider {
 		//this.app.log.Debug(JSON.stringify(conditions));
 
 		// We want to know the worst condition
-		let result: number = null;
+		let result: number = -1;
 		for (let key in conditions) {
 			let conditionID = parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
@@ -248,7 +248,17 @@ export class MetNorway implements WeatherProvider {
 		}
 	}
 
-	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
+	private ResolveCondition(icon: string | undefined, isNight: boolean = false): Condition {
+		if (icon == null) {
+			Logger.Error("Icon was not found");
+			return {
+				customIcon: "cloud-refresh-symbolic",
+				main: _("Unknown"),
+				description: _("Unknown"),
+				icons: ["weather-severe-alert"]
+			}
+		}
+			
 		let weather = this.DeconstructCondition(icon);
 		switch (weather.condition) {
 			case "clearsky":

@@ -40,12 +40,12 @@ export class OpenWeatherMap implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let query = this.ConstructQuery(this.base_url, loc);
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
+		let json = await this.app.LoadJsonAsync<any>(query, {}, this.HandleError);
 		if (!json)
 			return null;
 
@@ -54,7 +54,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		return this.ParseWeather(json, loc);
 	};
 
-	private ParseWeather(json: any, loc: LocationData): WeatherData {
+	private ParseWeather(json: any, loc: LocationData): WeatherData | null {
 		try {
 			let weather: WeatherData = {
 				coord: {
@@ -147,7 +147,7 @@ export class OpenWeatherMap implements WeatherProvider {
 					forecast.precipitation = {
 						chance: hour.pop * 100,
 						type: "none",
-						volume: null
+						volume: undefined
 					}
 				}
 
@@ -192,7 +192,10 @@ export class OpenWeatherMap implements WeatherProvider {
 		return query;
 	};
 
-	private ConvertToAPILocale(systemLocale: string) {
+	private ConvertToAPILocale(systemLocale: string | null) {
+		if (systemLocale == null)
+			return "en";
+			
 		// Dialect? support by OWM
 		if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
 			return systemLocale;

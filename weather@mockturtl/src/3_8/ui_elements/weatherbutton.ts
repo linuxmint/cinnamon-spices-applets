@@ -9,10 +9,10 @@ export class WeatherButton {
 	private disabled = false;
 
 	public ID: any;
-	public url: string;
+	public url?: string;
 
 	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
-	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
+	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event | null> = new Event();
 
 	constructor(options: Partial<imports.gi.St.ButtonOptions>, doNotAddPadding: boolean = false) {
 		this.actor = new Button(options);

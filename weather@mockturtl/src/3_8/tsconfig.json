@@ -13,6 +13,11 @@
 		"strictBindCallApply": true,
 		"strictFunctionTypes": true,
 		"alwaysStrict": true,
+		"noImplicitReturns": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
 		//"outDir": "../../files/weather@mockturtl/3.8/"
 		"types": []
 	},
