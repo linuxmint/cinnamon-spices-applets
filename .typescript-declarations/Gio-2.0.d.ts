@@ -705,8 +705,9 @@ declare namespace imports.gi.Gio {
         get_file () : File;
     }
     
-    var FileIcon: {
-        new (file: File) : FileIcon;
+    class FileIcon {
+        static new (file: File) : FileIcon;
+		constructor(options?: {file?: File});
         
     }
     

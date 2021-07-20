@@ -74,30 +74,30 @@ declare namespace imports.ui.applet {
 
 		/** UUID of the applet. This is set by appletManager *after*
 		* the applet is loaded. */
-		private _uuid: string;
+		protected _uuid: string;
 		/** Panel sector containing the applet. This is
 		* set by appletManager *after* the applet is loaded. */
-		private _panelLocation: gi.St.BoxLayout;
+		protected _panelLocation: gi.St.BoxLayout;
 		/** The metadata of the applet. This is set by appletManager
 		* *after* the applet is loaded. */
-		private _meta: AppletMetadata;
+		protected _meta: AppletMetadata;
 		/** The order of the applet within a panel location This is set
 		* by appletManager *after* the applet is loaded. */
-		private _order: number;
+		protected _order: number;
 		/** The draggable object of the applet */
-		private _draggable: dnd.Draggable;
+		protected _draggable: dnd.Draggable;
 		/** The tooltip of the applet */
-		private _applet_tooltip: tooltips.PanelItemTooltip;
+		protected _applet_tooltip: tooltips.PanelItemTooltip;
 		/** The menu manager of the applet */
-		public readonly _menuManager: popupMenu.PopupMenuManager;
+		protected readonly _menuManager: popupMenu.PopupMenuManager;
 		/** The context menu of the applet */
-		public readonly _applet_context_menu: AppletContextMenu;
+		protected readonly _applet_context_menu: AppletContextMenu;
 		/** Text of the tooltip */
-		private _applet_tooltip_text: string;
+		protected _applet_tooltip_text: string;
 		/** The allowed layout of the applet. This
 		 * determines the type of panel an applet is allowed in. By default this is set
 		 * to Applet.AllowedLayout.HORIZONTAL */
-		private _allowedLayout: AllowedLayout;
+		 protected _allowedLayout: AllowedLayout;
 
 		/**
 		 * 
@@ -115,19 +115,19 @@ declare namespace imports.ui.applet {
 		public getDragActorSource(): gi.St.BoxLayout;
 
 
-		private _addStyleClass(className: string): void;
+		protected _addStyleClass(className: string): void;
 
-		private _getPanelInfo(instance_id: number): void;
+		protected _getPanelInfo(instance_id: number): void;
 
-		private _setAppletReactivity(): void;
+		protected _setAppletReactivity(): void;
 
-		private _onDragBegin(): void;
+		protected _onDragBegin(): void;
 
-		private _onDragEnd();
+		protected _onDragEnd(): void;
 
-		private _onDragCancelled(): void;
+		protected _onDragCancelled(): void;
 
-		private _onButtonPressEvent(actor: gi.St.Widget, event: any): boolean;
+		protected _onButtonPressEvent(actor: gi.St.Widget, event: any): boolean;
 
 		/**
 		 * Sets the tooltip of the applet
