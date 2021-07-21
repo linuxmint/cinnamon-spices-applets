@@ -1578,6 +1578,9 @@ class CinnamenuApplet extends TextIconApplet {
         if (parent) {// Add back button
             res.unshift({   name: 'Back',
                             uri: parent.get_uri(),
+                            icon: new St.Icon({ icon_name: 'edit-undo-symbolic',
+                                                icon_type: St.IconType.SYMBOLIC,
+                                                icon_size: this.getAppIconSize() }),
                             mimeType: 'inode/directory',
                             isBackButton: true,
                             description: '',
@@ -1606,7 +1609,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
         const apps_sort = arr => arr.sort( (a, b) => {
                         if (!a.name || !b.name) return -1;
                         return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;
+                    });
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1763,7 +1767,7 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false,
                                     y_align: St.Align.START, style_class: 'vfade menu-categories-scrollbox' });
 
-        const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
+        //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
@@ -1797,7 +1801,7 @@ class CategoriesView {
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
                         const nameA = a.get_name().toUpperCase();
                         const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
+                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {
                     const dirId = dir.get_menu_id();
@@ -2040,6 +2044,7 @@ class SearchView {
         this.appThis = appThis;
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
+
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', track_hover: true, can_focus: true});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);

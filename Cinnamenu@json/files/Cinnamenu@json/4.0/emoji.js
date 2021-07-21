@@ -1,5 +1,6 @@
 
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
+//Emoji List, v13.1
 
 const EMOJI = [];
 
@@ -7275,6 +7276,8 @@ const EMOJI = [];
                     });
 
 //this list is taken from https://unicode.org/emoji/charts/full-emoji-modifiers.html
+//Full Emoji Modifier Sequences, v13.1
+
 const MODED = [
 '👋🏻',
 '🤚🏻',
