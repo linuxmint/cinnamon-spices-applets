@@ -20,57 +20,45 @@ const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = req
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
-function scrollToButton(button, fullyScrollFirstAndLast, enableAnimation) {
-    const container = button.actor.get_parent();
-    let scrollBox = container;
-    let children;
+function scrollToButton(button, enableAnimation) {
+    let scrollBox = button.actor.get_parent();
     let i = 0;
     while (!(scrollBox instanceof St.ScrollView)) {
         i++;
-        if (i > 10) {
-            global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
-            return false;
-        }
         scrollBox = scrollBox.get_parent();
     }
 
-    let adjustment = scrollBox.vscroll.adjustment;
+    const adjustment = scrollBox.vscroll.adjustment;
     let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
 
-    if (fullyScrollFirstAndLast) children = container.get_children();
-    if (fullyScrollFirstAndLast && button.actor === children[0]) {
-        value = 0;
-    } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
-        value = scrollBox.height;
-    } else {
-        let offset = 0;
-        const vfade = scrollBox.get_effect('fade');
-        if (vfade) {
-            offset = vfade.vfade_offset;
-        }
-        const box = button.actor.get_allocation_box();
-        let y1 = box.y1, y2 = box.y2;
-        let parent = button.actor.get_parent();
-        while (parent !== scrollBox) {
-            if (!parent) {
-                return false;
-            }
-            const box = parent.get_allocation_box();
-            y1 += box.y1;
-            y2 += box.y1;
-            parent = parent.get_parent();
-        }
-        if (y1 < value + offset) {
-            value = Math.max(0, y1 - offset);
-        } else if (y2 > value + pageSize - offset) {
-            value = Math.min(upper, y2 + offset - pageSize);
+    let offset = 0;
+    const vfade = scrollBox.get_effect('fade');//this always seems to return null?
+    if (vfade) {
+        offset = vfade.vfade_offset;
+    }
+
+    const box = button.actor.get_allocation_box();
+    const y1 = box.y1, y2 = box.y2;
+    //global.log('value', value,' y1:',y1,' y2:',y2);
+    const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
+    if (y1 < value + offset) {
+        if (y1 < PADDING_ALLOWANCE) {
+            value = 0;
         } else {
-            return false;
+            value = Math.max(0, y1 - offset);
         }
+    } else if (y2 > value + pageSize - offset) {
+        if (y2 > upper - offset - PADDING_ALLOWANCE) {
+            value = upper - pageSize;
+        } else {
+            value = Math.min(upper, y2 + offset - pageSize);
+        }
+    } else {
+        return false;
     }
 
     if (enableAnimation) {
-        addTween(adjustment, { value: value, time: 0.1, transition: 'easeOutQuad' });
+        addTween(adjustment, {value: value, time: 0.1, transition: 'easeOutQuad'});
     } else {
         adjustment.set_value(value);
     }
@@ -230,7 +218,7 @@ class CategoryButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keypress
-            scrollToButton(this, true, this.appThis.settings.enableAnimation);
+            scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;
@@ -410,7 +398,7 @@ class ContextMenu {
             }
             const addMenuItem = (char, text) => {
                 const newEmoji = MODED[i].replace(/\u{1F3FB}/ug, char); //replace light skin tone character in
-                                                                        // MODED[i] with skin tone option.
+                                                                       // MODED[i] with skin tone option.
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
@@ -631,7 +619,7 @@ class AppButton {
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.signals = new SignalManager(null);
         //----------ICON---------------------------------------------
-        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
+        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
         } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
                                     //isFolderviewFile/Directory, isSearchResult(wikipedia)
@@ -647,20 +635,18 @@ class AppButton {
             this.icon = iconLabel;
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
-        } else if (this.app.isPlace) {//isPlace
+        } else if (this.app.iconFactory) {//isPlace
             this.icon = this.app.iconFactory(this.appThis.getAppIconSize());
             if (!this.icon) {
                 this.icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
             }
-        } else if (this.app.isBackButton) {
-            this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
-        //menu-application-button-label in themes are designed for list view and may have uneven
+        //.menu-application-button-label{} in themes are designed for list view and may have uneven
         //padding, so in grid view make padding symmetrical and center text
         let labelStyle = '';
         if (!isListView) {
@@ -829,7 +815,7 @@ class AppButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keyboard navigation
-            scrollToButton(this, false, this.appThis.settings.enableAnimation);
+            scrollToButton(this, this.appThis.settings.enableAnimation);
         }
         this._setButtonSelected();
 
@@ -1086,7 +1072,7 @@ class SidebarButton {
         if (event) {
             this.appThis.clearEnteredActors();
         } else {//key nav
-            scrollToButton(this, false, this.appThis.settings.enableAnimation);
+            scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;

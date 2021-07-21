@@ -28,8 +28,8 @@ const getThumbnail_gicon = (uri, mimeType) => {
         return null;
     }
     //
-    const isImage = mimeType === 'image/jpeg' || mimeType === 'image/png' || mimeType === 'image/svg+xml' ||
-                            mimeType === 'image/tiff' || mimeType === 'image/bmp' || mimeType === 'image/gif';
+    const isImage = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'image/bmp',
+                                                                'image/gif'].includes(mimeType);
     const fileSize = file.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null).get_size();
 
     //----Get thumbnail from cache
