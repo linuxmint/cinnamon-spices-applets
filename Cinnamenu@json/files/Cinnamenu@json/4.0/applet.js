@@ -27,6 +27,7 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
+const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
 const {wikiSearch} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
@@ -1055,24 +1056,26 @@ class CinnamenuApplet extends TextIconApplet {
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
             let emojiResults = [];
             EMOJI.forEach(emoji => {
-                        const match1 = searchStr(pattern, emoji.name, true);
-                        const match2 = searchStr(pattern, emoji.keywords, true);
-                        match2.score *= 0.95; //slightly lower priority for keyword match
-                        const bestMatchScore = Math.max(match1.score, match2.score);
-                        if (bestMatchScore > SEARCH_THRESHOLD) {
-                            emojiResults.push({
-                                    name: emoji.name,
-                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
-                                                                  //emoji results come last.
-                                    description: _('Click to copy'),
-                                    nameWithSearchMarkup: match1.result,
-                                    isSearchResult: true,
-                                    deleteAfterUse: true,
-                                    emoji: emoji.code,
-                                    activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
-                                            });
-                        } });
+                const match1 = searchStr(pattern, emoji[EMOJI_NAME], true);
+                const match2 = searchStr(pattern, emoji[EMOJI_KEYWORDS], true);
+                match2.score *= 0.95; //slightly lower priority for keyword match
+                const bestMatchScore = Math.max(match1.score, match2.score);
+                if (bestMatchScore > SEARCH_THRESHOLD) {
+                    emojiResults.push({
+                        name: emoji[EMOJI_NAME],
+                        score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
+                                                      //emoji results come last.
+                        description: _('Click to copy'),
+                        nameWithSearchMarkup: match1.result,
+                        isSearchResult: true,
+                        deleteAfterUse: true,
+                        emoji: emoji[EMOJI_CODE],
+                        activate: () => {
+                                const clipboard = St.Clipboard.get_default();
+                                clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji[EMOJI_CODE]); }
+                    });
+                }
+            });
 
             emojiResults.sort((a, b) =>  a.score < b.score);
             otherResults = otherResults.concat(emojiResults);
@@ -2042,9 +2045,10 @@ class AppsView {
 class SearchView {
     constructor(appThis) {
         this.appThis = appThis;
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
-
+        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-find' });
+        this.searchActiveIcon = new St.Icon({   style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', track_hover: true, can_focus: true});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);
