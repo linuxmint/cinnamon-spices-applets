@@ -2,29 +2,15 @@
 
 #### Compatibility:
 
-Tested             |&#10060;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|
-:-----------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Cinnamon-Version   | 4.6    | 4.4    | 4.2    | 4.0    | 3.8    | 3.6    | 3.4    | 3.2    | 3.0    | 2.8    | 2.6    |
-Linux Mint-Version | 20     | 19.3   | 19.2   | 19.1   | 19     | 18.3   | 18.2   | 18.1   | 18     | 17.3   | 17.2   |
-
-#### Preview:
-
-Click on the image below to see a review video of CinnVIIStarkMenu (previous: CinnXPStarkMenu) by [Big Daddy](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg):
-
-[![Review of CinnXPStarkMenu by Big Daddy](https://cloud.githubusercontent.com/assets/8415124/20908908/6d108a24-bb58-11e6-8d88-112f7250d630.png)](https://www.youtube.com/watch?v=OmUpLNsWgC4)
-<br /> _Published on Nov 11, 2016_
-
-#### Mentions:
-
-[Rocco (aka. Big Daddy)](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg) gave some air time (22:22--24:01) to CinnVIIStarkMenu on the [Destination Linux Podcast](https://www.youtube.com/channel/UCWJUSpXVHTaHErtGWC5qPlQ). | CinnVIIStarkMenu is mentioned at the end of the Article _Linux – Desktop Environment Hopping_ by MorningStarGG on [Think Critic](https://thinkcritic.com/linux-desktop-environment-hopping)
-:---:|:---:
-[![Airtime of CinnVIIStarkMenu on Destination Linux Podcast](https://cloud.githubusercontent.com/assets/8415124/26260338/1a73280c-3ccd-11e7-8e1b-5d09ca0cc124.png)](https://www.youtube.com/watch?v=iEfbYj9Cl8o#t=22m22s) | [![Article on Think Critic](https://user-images.githubusercontent.com/8415124/32778106-efe8e092-c938-11e7-91c5-01d8b6da9258.jpg)](https://thinkcritic.com/linux-desktop-environment-hopping)
-_Published on May 15, 2017_ |  _Published on September 17, 2017_
+Tested             |&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|&#10004;|
+:-----------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Cinnamon-Version   | 5.0    | 4.8    | 4.6    | 4.4    | 4.2    | 4.0    | 3.8    | 3.6    | 3.4    | 3.2    | 3.0    | 2.8    | 2.6    |
+Linux Mint-Version | 20.2   | 20.1   | 20     | 19.3   | 19.2   | 19.1   | 19     | 18.3   | 18.2   | 18.1   | 18     | 17.3   | 17.2   |
 
 #### Translation status:
 
-View the [translation status tables](https://github.com/NikoKrause/cinnamon-spices-applets/blob/applets-translation-status/.translation-status/applets-status/CinnVIIStarkMenu@NikoKrause/README.md) of CinnVIIStarkMenu.
-Feel free to contribute to the translations of CinnVIIStarkMenu on [Launchpad](https://translations.launchpad.net/cinnviistarkmenu) or on [GitHub](https://github.com/linuxmint/cinnamon-spices-applets).
+View the [translation status tables](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/CinnVIIStarkMenu@NikoKrause.md) of CinnVIIStarkMenu.
+Feel free to contribute to the translations of CinnVIIStarkMenu on [GitHub](https://github.com/linuxmint/cinnamon-spices-applets).
 
 ------------
 #### License
