@@ -248,9 +248,13 @@ class MyApplet extends Applet.TextIconApplet {
         source.notify(notification);
     }
 
+    _replaceAll(string, search, replace) {
+        return string.split(search).join(replace);
+    }
+
     run(name, icon, cmd) {
         if (this.notificationEnabled) {
-            let text = this.notificationText.replaceAll('%s', name);
+            let text = this._replaceAll(this.notificationText, '%s', name);
             this.showNotification(APPNAME, text, icon);
         }
         Util.spawnCommandLine(cmd);
