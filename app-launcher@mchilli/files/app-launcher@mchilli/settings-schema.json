@@ -123,7 +123,7 @@
     "use-symbolic-icons": {
         "type": "switch",
         "description": "Use Symbolic Application Icons",
-        "default": true,
+        "default": false,
         "tooltip": "Use Symbolic Application Icons, where it's possible",
         "dependency": "visible-app-icons"
     },
