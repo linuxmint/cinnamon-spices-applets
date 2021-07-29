@@ -100,7 +100,7 @@ MyApplet.prototype = {
             this._contentSection = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(this._contentSection);
 
-            tools = eval(Cinnamon.get_file_contents_utf8_sync(f));
+            let tools = eval(Cinnamon.get_file_contents_utf8_sync(f));
 
             for (let i = 0; i < tools.length; i++) {
                 let tool = tools[i];

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-11 17:07+0800\n"
-"PO-Revision-Date: 2019-04-01 10:54+0200\n"
+"PO-Revision-Date: 2021-04-05 08:49+0200\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: applet.js:345
 msgid "Network interface"
@@ -112,18 +112,16 @@ msgid "Total upload:"
 msgstr "Összes feltöltés:"
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
-#, fuzzy
 msgid "Download and upload speed"
-msgstr "_Feltöltés"
+msgstr "Le- és feltöltési sebesség"
 
 #. download-and-upload-speed@cardsurf->metadata.json->description
-#, fuzzy
 msgid "Shows usage of a network interface"
-msgstr "Hálózati csatoló hozzáadása"
+msgstr "A hálózati csatoló használatát mutatja"
 
 #. download-and-upload-speed@cardsurf->settings-schema.json->head->description
 msgid "Settings for download-and-upload-speed@cardsurf"
-msgstr ""
+msgstr "Download-and-upload-speed@cardsurf beállításai"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->configuration->description
@@ -137,9 +135,8 @@ msgstr "Megjelenítés"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->display_mode->tooltip
-#, fuzzy
 msgid "Values shown in the panel"
-msgstr "Értékek"
+msgstr "Panelen megjelenített értékek"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->display_mode->options
@@ -159,7 +156,7 @@ msgstr "Egység"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
-msgstr ""
+msgstr "A panelen látható alapadat-egység"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->unit_type->options
@@ -179,7 +176,7 @@ msgstr "Számítás elvégzése"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->update_every->tooltip
 msgid "How often to calculate download and upload speed"
-msgstr ""
+msgstr "Milyen gyakran számolja a letöltési és feltöltési sebességet"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->update_every->units
@@ -206,7 +203,7 @@ msgstr "Tizedesjegyek száma"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->decimal_places->tooltip
 msgid "Decimal places of download and upload speed shown in the panel"
-msgstr ""
+msgstr "A panelen látható tizedesjegyű le- és feltöltési sebesség"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->decimal_places->options
@@ -241,7 +238,7 @@ msgstr "Szöveg CSS"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
-msgstr ""
+msgstr "A panel szövegére alkalmazott CSS-stílus"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_received_icon_filename->description
@@ -251,7 +248,7 @@ msgstr "Letöltés ikon"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_received_icon_filename->tooltip
 msgid "An icon displayed next to download speed in the panel"
-msgstr ""
+msgstr "Egy ikon jelenik meg a panelen a letöltési sebesség mellett"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_sent_icon_filename->description
@@ -261,29 +258,27 @@ msgstr "Feltöltés ikon"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_sent_icon_filename->tooltip
 msgid "An icon displayed next to upload speed in the panel"
-msgstr ""
+msgstr "A panelen megjelenik egy ikon a feltöltési sebesség mellett"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->hover_popup_text_css->description
-#, fuzzy
 msgid "Popup text CSS"
-msgstr "Szöveg CSS"
+msgstr "Felugró szöveg CSS"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->hover_popup_text_css->tooltip
 msgid "A CSS style applied to the description text in the hover popup"
-msgstr ""
+msgstr "Az egérmutatóra előugró leírás szövegére alkalmazott CSS-stílus"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->hover_popup_numbers_css->description
-#, fuzzy
 msgid "Popup numbers CSS"
-msgstr "Felbukkanó menüje"
+msgstr "Felugró számok CSS-je"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->hover_popup_numbers_css->tooltip
 msgid "A CSS style applied to numbers in the hover popup"
-msgstr ""
+msgstr "Az egérmutatóra előugró számokra alkalmazott CSS-stílus"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->total_data_start->description
@@ -293,12 +288,14 @@ msgstr "Összes adat"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->show_hover->description
 msgid "Show total download and upload on hover"
-msgstr ""
+msgstr "Teljes le- és feltöltés megjelenítése, ha az egér rámutat"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->show_hover->tooltip
 msgid "Show the hover popup with total amount of data downloaded and uploaded"
 msgstr ""
+"Teljes le- és feltöltött adatmennyiség megjelenítése felguró értesítésben, "
+"ha az egér rámutat"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->description
@@ -309,6 +306,8 @@ msgstr "Indítás"
 #. schema.json->bytes_start_time->tooltip
 msgid "Start time to count total amount of data downloaded and uploaded"
 msgstr ""
+"A le- és feltöltött adatok összmennyiségének számlálásához használt "
+"indítási idő"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->custom_start_date->description
@@ -321,12 +320,14 @@ msgid ""
 "A custom date in YYYY-MM-DD format used as start time. The option is used "
 "if \"Custom date\" is selected in \"Start\" combobox."
 msgstr ""
+"Egyéni dátum ÉÉÉÉ-HH-NN formátumban, kezdési időpontként használva. Az "
+"opció akkor használható, ha az \"Egyéni dátum\" van kiválasztva a \"Start\" "
+"kombinációs mezőben."
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->write_every->description
-#, fuzzy
 msgid "Save every"
-msgstr "Minden"
+msgstr "Összes mentése"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->write_every->tooltip
@@ -334,11 +335,13 @@ msgid ""
 "How often to save total amount of data downloaded and uploaded to the file. "
 "0 means no saving to the file."
 msgstr ""
+"Milyen gyakran mentse a fájlba letöltött és feltöltött összes "
+"adatmennyiséget. A 0 azt jelenti, hogy nem kell menteni fájlba."
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit_start->description
 msgid "Data limits"
-msgstr ""
+msgstr "Adatkorlátok"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit->description
@@ -349,6 +352,8 @@ msgstr "Adatkorlát"
 #. schema.json->data_limit->tooltip
 msgid "The maximum amount of data to download and upload. 0 means no limits."
 msgstr ""
+"A le- és feltölthető adatok maximális mennyisége. 0 azt jelenti, hogy "
+"nincsenek határok."
 
 #. download-and-upload-speed@cardsurf->settings-schema.json->data_limit->units
 msgid "MB"
@@ -356,14 +361,13 @@ msgstr "MB"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_data_limit_type->description
-#, fuzzy
 msgid "Show data limit usage"
-msgstr "Háttérbeli adathasználat korlátozása"
+msgstr "Adatkorlát használatának megjelenítése"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_data_limit_type->tooltip
 msgid "Show the percentage of data limit used in the panel"
-msgstr ""
+msgstr "Jelenítse meg százalékosan az elhasznált adatkorlátot a panelen"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_data_limit_type->options
@@ -383,7 +387,7 @@ msgstr "Kör"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit_command_enabled->description
 msgid "Invoke command when data limit exceeded"
-msgstr ""
+msgstr "Parancsot indítása, ha túllépte az adatkorlátot"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit_command_enabled->tooltip
@@ -391,6 +395,8 @@ msgid ""
 "Invoke a command when amount of data downloaded and uploaded exceeded the "
 "limit"
 msgstr ""
+"Parancsot indítása, ha a le- és feltöltött adatok mennyisége meghaladja a "
+"korlátot"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit_command->description
@@ -410,7 +416,7 @@ msgstr "Kapcsolatok"
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->launch_terminal->description
 msgid "List current Internet connections on left mouse click"
-msgstr ""
+msgstr "Sorolja fel az aktuális internetkapcsolatokat bal egérgombbal"
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->launch_terminal->tooltip
@@ -418,6 +424,8 @@ msgid ""
 "Open a terminal with a list of current connections on a left mouse click. "
 "The next click closes the terminal."
 msgstr ""
+"Nyisson meg egy terminált az aktuális kapcsolatok listájával, bal "
+"egérgombbal. A következő kattintás bezárja a terminált."
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->list_connections_command->description
@@ -427,4 +435,4 @@ msgstr "Parancs "
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
-msgstr ""
+msgstr "Az aktuális internetkapcsolatok felsorolására használt parancs"

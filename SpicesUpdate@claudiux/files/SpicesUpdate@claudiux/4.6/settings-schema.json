@@ -55,8 +55,7 @@
       "title": "Checking",
       "keys": [
         "check_applets",
-        "check_new_applets",
-        "btn_refresh_applets"
+        "check_new_applets"
       ]
     },
     "section_applets2": {
@@ -65,6 +64,7 @@
       "keys": [
         "exp_applets",
         "unprotected_applets",
+        "btn_refresh_applets",
         "btn_cs_applets"
       ]
     },
@@ -73,8 +73,7 @@
       "title": "Checking",
       "keys": [
         "check_desklets",
-        "check_new_desklets",
-        "btn_refresh_desklets"
+        "check_new_desklets"
       ]
     },
     "section_desklets2": {
@@ -83,6 +82,7 @@
       "keys": [
         "exp_desklets",
         "unprotected_desklets",
+        "btn_refresh_desklets",
         "btn_cs_desklets"
       ]
     },
@@ -91,8 +91,7 @@
       "title": "Checking",
       "keys": [
         "check_extensions",
-        "check_new_extensions",
-        "btn_refresh_extensions"
+        "check_new_extensions"
       ]
     },
     "section_extensions2": {
@@ -101,6 +100,7 @@
       "keys": [
         "exp_extensions",
         "unprotected_extensions",
+        "btn_refresh_extensions",
         "btn_cs_extensions"
       ]
     },
@@ -109,8 +109,7 @@
       "title": "Checking",
       "keys": [
         "check_themes",
-        "check_new_themes",
-        "btn_refresh_themes"
+        "check_new_themes"
       ]
     },
     "section_themes2": {
@@ -119,6 +118,7 @@
       "keys": [
         "exp_themes",
         "unprotected_themes",
+        "btn_refresh_themes",
         "btn_cs_themes"
       ]
     },
@@ -153,10 +153,10 @@
     },
     "section_general4": {
       "type": "section",
-      "title": "Display type",
+      "title": "Display",
       "keys": [
-        "displayType",
-        "general_hide"
+        "general_hide",
+        "tooltip_max_width_screen_percentage"
       ]
     }
   },
@@ -208,7 +208,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_applets": {
     "type": "button",
@@ -268,7 +269,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_desklets": {
     "type": "button",
@@ -328,7 +330,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_extensions": {
     "type": "button",
@@ -388,7 +391,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_themes": {
     "type": "button",
@@ -476,20 +480,25 @@
     "callback": "on_btn_test_notif_pressed"
   },
   "displayType": {
-    "type": "combobox",
-    "default": "classic",
-    "options": {
-      "Classic - Icon and Text": "classic",
-      "Compact - Icon Only": "compact"
-    },
-    "description": "Type of Display",
-    "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+    "type": "generic",
+    "default": "compact",
+    "value": "compact"
   },
   "general_hide": {
     "type": "switch",
     "default": false,
     "description": "Hide the icon as long as nothing is to report",
     "tooltip": "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+  },
+  "tooltip_max_width_screen_percentage": {
+    "type": "scale",
+    "default": 25,
+    "min": 20,
+    "max": 80,
+    "step": 1,
+    "units": "% of screen width",
+    "description": "Tooltip: Maximum width",
+    "tooltip": "What is the maximum percentage of your screen width that the tooltip can occupy?"
   },
   "first_time": {
     "type": "generic",

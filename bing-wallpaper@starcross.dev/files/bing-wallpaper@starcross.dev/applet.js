@@ -28,7 +28,7 @@ BingWallpaperApplet.prototype = {
 
         // Generic Setup
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-        this.set_applet_icon_name("bing-wallpaper-symbolic");
+        this.set_applet_icon_symbolic_name("bing-wallpaper");
         this.set_applet_tooltip('Bing Desktop Wallpaper');
 
         // Path to store data in
@@ -164,13 +164,15 @@ BingWallpaperApplet.prototype = {
 
         log('downloading new image');
         const url = `${bingHost}${this.imageData.url}`;
+        const regex = /_\d+x\d+./gm;
+        const urlUHD = url.replace(regex, `_UHD.`);
         let gFile = Gio.file_new_for_path(this.wallpaperPath);
 
         // open the file
         let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
 
         // create an http message
-        let request = Soup.Message.new('GET', url);
+        let request = Soup.Message.new('GET', urlUHD);
 
         // got_chunk event
         request.connect('got_chunk', function (message, chunk) {
@@ -187,7 +189,7 @@ BingWallpaperApplet.prototype = {
                 log('Download successful');
                 this._setBackground();
             } else {
-                log("Couldn't fetch image from " + url);
+                log("Couldn't fetch image from " + urlUHD);
                 this._setTimeout(60)  // Try again
             }
         });

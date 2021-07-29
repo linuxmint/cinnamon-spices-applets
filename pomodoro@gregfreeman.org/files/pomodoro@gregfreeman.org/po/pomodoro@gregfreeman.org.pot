@@ -8,229 +8,237 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 23:30+0100\n"
+"POT-Creation-Date: 2020-11-25 22:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: applet.js:375
+#: applet.js:394
 msgid "Pomodoro started"
 msgstr ""
 
-#: applet.js:418 applet.js:705
+#: applet.js:437 applet.js:737
 msgid "Waiting to start"
 msgstr ""
 
-#: applet.js:435
-#, c-format
+#: applet.js:455
+#, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr ""
 
-#: applet.js:442
-msgid "Let's go to work !"
+#: applet.js:462
+msgid "Let's go to work!"
 msgstr ""
 
-#: applet.js:456
+#: applet.js:477
 msgid "Take a short break"
 msgstr ""
 
-#: applet.js:457
+#: applet.js:478
 msgid "Short break running"
 msgstr ""
 
-#: applet.js:468
+#: applet.js:497
 msgid "Take a long break"
 msgstr ""
 
-#: applet.js:470
+#: applet.js:499
 msgid "Long break running"
 msgstr ""
 
-#: applet.js:496
+#: applet.js:533
 msgid "Pomodoro ended"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->metadata.json->name
-#: applet.js:790
+#: applet.js:665
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr ""
+
+#. metadata.json->name
+#: applet.js:837
 msgid "Pomodoro Timer"
 msgstr ""
 
-#: applet.js:801
+#: applet.js:848
 msgid "Completed"
 msgstr ""
 
-#: applet.js:814
+#: applet.js:861
 msgid "Reset Timer"
 msgstr ""
 
-#: applet.js:826
+#: applet.js:873
 msgid "Reset Counts and Timer"
 msgstr ""
 
-#: applet.js:839
-msgid "Settings"
-msgstr ""
-
-#: applet.js:849
+#: applet.js:886
 msgid "What is this?"
 msgstr ""
 
-#: applet.js:906
+#: applet.js:943
 msgid "None"
 msgstr ""
 
-#: applet.js:936
+#: applet.js:973
 msgid "Switch Off Pomodoro"
 msgstr ""
 
-#: applet.js:942
+#: applet.js:979
 msgid "Start a new Pomodoro"
 msgstr ""
 
-#: applet.js:948
+#: applet.js:985
 msgid "Hide"
 msgstr ""
 
-#: applet.js:960
+#: applet.js:997
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr ""
 
-#: applet.js:968
+#: applet.js:1005
 msgid "Your break is over, start another pomodoro!"
 msgstr ""
 
-#: applet.js:973
-msgid "A new pomodoro begins in "
+#: applet.js:1010
+#, javascript-format
+msgid "A new pomodoro begins in %s."
 msgstr ""
 
-#: applet.js:984
-#, c-format
-msgid "%d minutes and %d seconds"
+#: applet.js:1021
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:1022
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:1024
+#, javascript-format
+msgid "%s and %s"
 msgstr ""
 
-#: applet.js:1008
+#: applet.js:1048
 msgid "Continue Current Pomodoro"
 msgstr ""
 
-#: applet.js:1014
+#: applet.js:1054
 msgid "Pause Pomodoro"
 msgstr ""
 
-#: applet.js:1025
+#: applet.js:1065
 msgid "Short break finished, ready to continue?"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-schema.json->start_sound->description
-msgid "Play Start Sound"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->short_break_duration->description
-msgid "Short Break Duration:  "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->auto_start_after_break_ends->description
-msgid "Auto start a new pomodoro after a break ends"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-schema.json->head_sounds->description
-msgid "Sounds"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->start_sound_file->description
-msgid "Start Sound File "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-schema.json->head_options->description
-msgid "Options"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->start_sound_volume->description
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->break_sound_volume->description
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->warn_sound_volume->description
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->timer_sound_volume->description
-msgid "Sound volume:  "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->pomodoro_duration->description
-msgid "Pomodoro Duration:  "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->long_break_duration->description
-msgid "Long Break Duration:  "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->break_sound_file->description
-msgid "Break Sound File "
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->auto_start_after_short_break_ends->description
-msgid "Auto start after a short break ends"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-schema.json->display_icon->description
-msgid "Display the pomodoro icon in the applet panel"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-schema.json->show_timer->description
-msgid "Show the pomodoro timer in the applet panel"
-msgstr ""
-
-#. pomodoro@gregfreeman.org->settings-schema.json->head_durations->description
+#. settings-schema.json->head_durations->description
 msgid "Durations (minutes)"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->pomodori_number->description
-msgid "Number of pomodori before long break:  "
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-schema.json->break_sound->description
-msgid "Play Break Sound"
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->warn_sound_delay->description
-msgid "Warn Delay (in secs):  "
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->show_dialog_messages->description
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr ""
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->warn_sound_file->description
-msgid "Warn Sound File "
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-schema.json->warn_sound->description
-msgid "Play Warn Sound"
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-schema.json->timer_sound->description
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr ""
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr ""
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr ""
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr ""
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr ""
+
+#. settings-schema.json->timer_sound->description
 msgid "Play Timer Sound"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->settings-
-#. schema.json->timer_sound_file->description
-msgid "Timer Sound File "
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
 msgstr ""
 
-#. pomodoro@gregfreeman.org->metadata.json->description
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr ""
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr ""
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr ""
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr ""
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr ""
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr ""
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr ""
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr ""
+
+#. metadata.json->description
 msgid "Great tool for boosted productivity!"
 msgstr ""

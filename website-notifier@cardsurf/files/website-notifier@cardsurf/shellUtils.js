@@ -3,7 +3,12 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 
-
+let Compatibility;
+if (typeof require !== 'undefined') {
+    Compatibility = require('./compatibility');
+} else {
+    Compatibility = AppletDirectory.compatibility;
+}
 
 const SignalType = {
     SIGHUP:    1,
@@ -51,6 +56,7 @@ ShellOutputProcess.prototype = {
         this.standard_input_file_descriptor = -1;
         this.standard_output_file_descriptor = -1;
         this.standard_error_file_descriptor = -1;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
     },
 
     spawn_sync_and_get_output: function() {
@@ -72,7 +78,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_output_content: function() {
-        return this.standard_output_content.toString();
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_output_content);
     },
 
     spawn_sync_and_get_error: function() {
@@ -82,7 +88,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_error_content: function() {
-        return this.standard_error_content.toString();
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_error_content);
     },
 
     spawn_async: function() {
@@ -147,6 +153,7 @@ BackgroundProcess.prototype = {
         this.standard_error_data_stream = new Gio.DataInputStream({ base_stream: this.standard_error_unix_stream });
         this.standard_error_cancellable = new Gio.Cancellable();
         this.standard_output_cancellable = new Gio.Cancellable();
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
     },
 
     set_callback_process_finished: function(callback_object, callback_function) {
@@ -203,8 +210,8 @@ BackgroundProcess.prototype = {
 
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
-                        	 this.pid,
-                        	 Lang.bind(this, this._on_exit));
+                             this.pid,
+                             Lang.bind(this, this._on_exit));
     },
 
     _on_exit: function(pid, status) {
@@ -259,7 +266,7 @@ BackgroundProcess.prototype = {
    },
 
    _read_standard_output_buffer: function(stream) {
-       this.standard_output_content = stream.peek_buffer().toString();
+       this.standard_output_content = this.cinnamon_version_adapter.byte_array_to_string(stream.peek_buffer());
    },
 
    increase_buffer_size: function(stream) {
@@ -299,7 +306,7 @@ BackgroundProcess.prototype = {
     },
 
     _read_standard_error_buffer: function(stream) {
-       this.standard_error_content = stream.peek_buffer().toString();
+       this.standard_error_content = this.cinnamon_version_adapter.byte_array_to_string(stream.peek_buffer());
     },
 
     _close_streams: function(){

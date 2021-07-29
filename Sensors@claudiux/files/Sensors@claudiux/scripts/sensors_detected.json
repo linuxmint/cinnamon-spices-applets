@@ -1,0 +1,86 @@
+{
+  "acpitz": {
+    "temp1": {
+      "path": "/sys/class/hwmon/hwmon0",
+      "input": 27800,
+      "crit": 80000,
+      "label": ""
+    },
+    "temp2": {
+      "path": "/sys/class/hwmon/hwmon0",
+      "input": 29800,
+      "crit": 80000,
+      "label": ""
+    }
+  },
+  "coretemp": {
+    "temp1": {
+      "path": "/sys/class/hwmon/hwmon1",
+      "input": 42000,
+      "crit": 75000,
+      "max": 69000,
+      "label": "Package id 0"
+    },
+    "temp2": {
+      "path": "/sys/class/hwmon/hwmon1",
+      "input": 41000,
+      "crit": 75000,
+      "max": 69000,
+      "label": "Core 0"
+    },
+    "temp3": {
+      "path": "/sys/class/hwmon/hwmon1",
+      "input": 38000,
+      "crit": 75000,
+      "max": 69000,
+      "label": "Core 1"
+    },
+    "temp4": {
+      "path": "/sys/class/hwmon/hwmon1",
+      "input": 40000,
+      "crit": 75000,
+      "max": 69000,
+      "label": "Core 2"
+    },
+    "temp5": {
+      "path": "/sys/class/hwmon/hwmon1",
+      "input": 39000,
+      "crit": 75000,
+      "max": 69000,
+      "label": "Core 3"
+    }
+  },
+  "nct6106": {
+    "temp1": {
+      "path": "/sys/class/hwmon/hwmon2",
+      "input": 106000,
+      "crit": 127000,
+      "max": 80000,
+      "type": 3,
+      "label": "SYSTIN"
+    },
+    "temp2": {
+      "path": "/sys/class/hwmon/hwmon2",
+      "input": 48000,
+      "crit": 127000,
+      "max": 80000,
+      "type": 4,
+      "label": "CPUTIN"
+    },
+    "temp3": {
+      "path": "/sys/class/hwmon/hwmon2",
+      "input": 48000,
+      "crit": 127000,
+      "max": 80000,
+      "type": 3,
+      "label": "AUXTIN"
+    },
+    "temp7": {
+      "path": "/sys/class/hwmon/hwmon2",
+      "input": 42000,
+      "crit": 127000,
+      "max": 0,
+      "label": "PECI Agent 0"
+    }
+  }
+}

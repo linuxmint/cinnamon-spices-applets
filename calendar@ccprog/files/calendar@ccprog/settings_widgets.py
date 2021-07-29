@@ -4,6 +4,13 @@ from JsonSettingsWidgets import JSONSettingsList
 from xapp.SettingsWidgets import ComboBox, Entry
 import pytz
 from gi.repository import Gtk
+import gettext
+from pathlib import Path
+
+# i18n
+gettext.install("calendar@ccprog", str(Path.home()) + "/.local/share/locale")
+
+TZ_NO_REGION = 'Etc'
 
 def list_edit_factory(params):
     is_combo = 'options' in params
@@ -53,10 +60,7 @@ class ClocksList(JSONSettingsList):
         self.region_map = {}
         self.region_list = []
         for tz in pytz.common_timezones:
-            try:
-                region, city = tz.split('/', maxsplit=1)
-            except ValueError:
-                continue
+            region, city = self.split_tz(tz)
 
             if region not in self.region_map:
                 self.region_map[region] = []
@@ -68,14 +72,29 @@ class ClocksList(JSONSettingsList):
         self.last_region = 'Europe'
         self.last_city = None
         if len(info['value']):
-            self.last_region, self.last_city = info['value'][0]['timezone'].split('/', maxsplit=1)
+            self.last_region, self.last_city = self.split_tz(info['value'][0]['timezone'])
+
+    def split_tz(self, tz):
+        try:
+            region, city = tz.split('/', maxsplit=1)
+        except ValueError:
+            region = TZ_NO_REGION
+            city = tz
+        return region, city
+
+    def join_tz(self, region, city):
+        if region == TZ_NO_REGION:
+            tz = city
+        else:
+            tz = '/'.join([region, city])
+        return tz
 
     def open_add_edit_dialog(self, info=None):
         if info is None:
             data = { "label": None, "region": self.last_region, "city": self.last_city }
             title = _("Add new entry")
         else:
-            r, c = info[1].split('/', maxsplit=1)
+            r, c = self.split_tz(info[1])
             data = { "label": info[0], "region": r, "city": c }
             title = _("Edit entry")
 
@@ -100,8 +119,8 @@ class ClocksList(JSONSettingsList):
 
         columns = [
             self.settings.get_property('worldclocks', 'columns')[0],
-            {"id": "region", "title": "Region", "options": self.region_list},
-            {"id": "city", "title": "City", "options": self.region_map[data['region']]}
+            {"id": "region", "title": _("Region"), "options": self.region_list},
+            {"id": "city", "title": _("City"), "options": self.region_map[data['region']]}
         ]
 
         widgets = {}
@@ -143,7 +162,7 @@ class ClocksList(JSONSettingsList):
             self.last_region = widgets['region'].get_widget_value()
             self.last_city = widgets['city'].get_widget_value()
 
-            timezone = '/'.join([self.last_region, self.last_city])
+            timezone = self.join_tz(self.last_region, self.last_city)
 
             dialog.destroy()
             return [label, timezone]

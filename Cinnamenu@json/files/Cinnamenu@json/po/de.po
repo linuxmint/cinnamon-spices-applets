@@ -2,18 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 13:11+0100\n"
-"PO-Revision-Date: 2020-08-22 11:28+0200\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:14+0000\n"
 "Last-Translator: Kim <kipuka@eclipso.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.1\n"
 
 msgid "Type to search..."
-msgstr "Suchbegriff eingeben …"
+msgstr "Suchbegriff eingeben…"
 
 msgid "Initializing"
 msgstr "Initialisiere"
@@ -21,20 +21,20 @@ msgstr "Initialisiere"
 msgid "No description available"
 msgstr "Keine Beschreibung verfügbar"
 
-msgid "All Applications"
+msgid "All applications"
 msgstr "Alle Anwendungen"
 
 msgid "Places"
 msgstr "Orte"
 
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Kürzlich verwendete Dateien"
 
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-msgid "Favorite Apps"
-msgstr "Favoriten"
+msgid "Favorite apps"
+msgstr "Bevorzugte Anwendungen"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich."
@@ -60,8 +60,8 @@ msgstr "Zur Rasteransicht wechseln"
 msgid "Switch to list view"
 msgstr "Zur Listenansicht wechseln"
 
-msgid "Lock Screen"
-msgstr "Sperrbildschirm"
+msgid "Lock screen"
+msgstr "Bildschirm sperren"
 
 msgid "Lock the screen"
 msgstr "Bildschirm sperren"
@@ -105,17 +105,110 @@ msgstr "Zu den Favoriten hinzufügen"
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
+msgid "Find files..."
+msgstr "Dateien finden…"
+
 msgid "Please wait..."
 msgstr "Bitte warten ..."
 
-msgid "Search web for"
-msgstr "Online suchen: "
+msgid "No recent Items"
+msgstr "Keine aktuellen Artikel"
 
 msgid "Solution:"
 msgstr "Ergenis:"
 
 msgid "Click to copy"
 msgstr "Linksklick zum Kopieren"
+
+msgid "Search web for"
+msgstr "Online suchen nach"
+
+msgid "Favorites"
+msgstr "Favoriten"
+
+msgid "Recent"
+msgstr "Kürzlich"
+
+msgid "Home folder"
+msgstr "Persönlicher Ordner"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Zu viele Einträge - nur die ersten 1000 Einträge werden angezeigt"
+
+msgid "Reset category order"
+msgstr "Kategorie-Reihenfolge zurücksetzen"
+
+msgid "This file is no longer available"
+msgstr "Diese Datei ist nicht mehr verfügbar"
+
+msgid "Open with"
+msgstr "Öffnen mit"
+
+msgid "Other application..."
+msgstr "Andere Anwendung…"
+
+msgid "Open containing folder"
+msgstr "Übergeordneten Ordner öffnen"
+
+msgid "Move to trash"
+msgstr "In den Papierkorb verschieben"
+
+msgid "Error while moving file to trash:"
+msgstr "Fehler beim Verschieben der Datei in den Papierkorb:"
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Öffnen"
+
+msgid "Search"
+msgstr "Suche"
+
+msgid "Start in"
+msgstr "Starten in"
+
+msgid "Select a folder"
+msgstr "Einen Ordner auswählen"
+
+msgid "Follow symlinks"
+msgstr "Symbolischen Verknüpfungen folgen"
+
+msgid "Search hidden"
+msgstr "Verborgene Dateien durchsuchen"
+
+msgid "Use regular expressions"
+msgstr "Reguläre Ausdrücke verwenden"
+
+msgid "Stop"
+msgstr "Anhalten"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Path"
+msgstr "Pfad"
+
+msgid "Searching..."
+msgstr "Suche…"
+
+msgid "Search Stopped"
+msgstr "Suche angehalten"
+
+msgid "Searching: "
+msgstr "Suchen: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Fehler: unzureichende Berechtigungen zum Lesen des Ordners "
+
+msgid "Search Completed"
+msgstr "Suche beendet"
+
+msgid "Skipping"
+msgstr "Überspringen"
+
+msgid " - directory already searched"
+msgstr " - Verzeichnis bereits durchsucht"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -126,14 +219,6 @@ msgid ""
 msgstr ""
 "Ein flexibles Menü mit Formatierungsoptionen, Web-Lesezeichen, direktem "
 "Zugang zu Suchmaschinen sowie unscharfer Suche."
-
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-"Ermöglicht durch die Arbeit derjenigen, die zum Cinnamon Menu und zum "
-"Gnomenu sowie zu Projekten, aus denen diese Menüs hervorgegangen sind, "
-"beigetragen haben."
 
 msgid "Behavior"
 msgstr "Verhalten"
@@ -157,7 +242,7 @@ msgid "Menu"
 msgstr "Menü"
 
 msgid "Layout"
-msgstr "Layout "
+msgstr "Layout"
 
 msgid "Content"
 msgstr "Inhalte"
@@ -167,9 +252,6 @@ msgstr "Einstellungen für kürzlich verwendete Dateien"
 
 msgid "Open the menu editor"
 msgstr "Menüeditor öffnen"
-
-msgid "Reset category order"
-msgstr "Kategorie-Reihenfolge zurücksetzen"
 
 msgid "Use a custom icon"
 msgstr "Ein benutzerdefiniertes Symbol verwenden"
@@ -236,8 +318,13 @@ msgstr "Automatischen Bildlauf in der Liste bzw. im Raster aktivieren"
 msgid "Show web bookmarks"
 msgstr "Web-Lesezeichen als Kategorie anzeigen"
 
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Lesezeichen aus dem Browser als Kategorie anzeigen"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Die Web-Lesezeichen des Browsers im Menü anzeigen.\n"
+"Hinweis: Das Paket »gir1.2-gda-5.0« installieren, um Firefox-Lesezeichen "
+"anzuzeigen."
 
 msgid "Enable searching of open windows"
 msgstr "Suche in offenen Fenstern ermöglichen"
@@ -251,14 +338,17 @@ msgstr "Ergebnisse der Internetsuche zu den Suchergebnissen hinzufügen"
 msgid "Example Search Providers"
 msgstr "Beispiel für eine Suchmaschine"
 
-msgid "Startup applications view mode"
-msgstr "Ansichtsmodus der Anwendungen beim Start"
+msgid "Open menu on category:"
+msgstr "Menü öffnen bei Kategorie:"
 
 msgid "List"
 msgstr "Liste"
 
 msgid "Grid"
 msgstr "Raster"
+
+msgid "Always open the menu with this category selected"
+msgstr "Beim Öffnen des Menüs immer dieser Kategorie auswählen"
 
 msgid "columns"
 msgstr "Spalten"
@@ -290,9 +380,6 @@ msgstr "Verzögerung der Anzeige eines Tipps"
 msgid "Use a custom menu height"
 msgstr "Benutzerdefinierte Menü-Höhe einstellen"
 
-msgid "px"
-msgstr "Pixel"
-
 msgid "Custom menu height"
 msgstr "Benutzerdefinierte Menü-Höhe"
 
@@ -306,13 +393,13 @@ msgid "Application description placement"
 msgstr "Anzeige der Anwendungsbeschreibungen"
 
 msgid "Tooltips"
-msgstr "als Tool-Tipp"
+msgstr "Tooltips"
 
 msgid "Under titles"
-msgstr "unter den Namen"
+msgstr "Unterm Anwendungsnamen"
 
 msgid "None"
-msgstr "keine Anzeige"
+msgstr "–"
 
 msgid "Choose where to show application descriptions"
 msgstr ""
@@ -322,21 +409,28 @@ msgid "Session buttons location"
 msgstr "Position der Sitzungsschaltflächen"
 
 msgid "Top"
-msgstr "oben"
+msgstr "Oben"
 
 msgid "Bottom"
-msgstr "unten"
+msgstr "Unten"
 
 msgid "Left"
-msgstr "links"
+msgstr "Links"
 
 msgid "Right"
-msgstr "rechts"
+msgstr "Rechts"
 
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 "Position, an der die Sitzungsschaltflächen (Bildschirm sperren; Abmelden; "
 "Beenden) angezeigt werden"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Info/Tipp: Am Rand des Menüs ziehen, um die Größe des Menüs zu ändern.\n"
 
 msgid "Add favorites to session buttons"
 msgstr "Favoriten zu Sitzungsschaltflächen hinzufügen"
@@ -346,11 +440,29 @@ msgstr ""
 "Zusätzlich zu den Sitzungsschaltflächen auch die Symbole der Favoriten "
 "anzeigen"
 
-msgid "Always open menu on favorite apps"
-msgstr "Beim Öffnen des Menüs immer die Favoriten anzeigen"
+msgid "Show favorite apps category"
+msgstr "»Bevorzugte Anwendungen«-Kategorie anzeigen"
 
-msgid "Always open the menu with favorite apps category selected"
-msgstr "Beim Öffnen des Menüs immer die Kategorie »Favoriten« markieren"
+msgid "Show your favorite apps category in the menu"
+msgstr "»Bevorzugte Anwendungen«-Kategorie im Menü anzeigen"
+
+msgid "Show home folder"
+msgstr "Persönlichen Ordner anzeigen"
+
+msgid "Show home folder category in the menu"
+msgstr "»Persönlicher Ordner«-Kategorie im Menü anzeigen"
+
+msgid "Last used category"
+msgstr "Vorherige Kategorie"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automatischen Bildlauf in der Anwendungsliste aktivieren"
+
+msgid "Enable emoji search"
+msgstr "Emoji-Suche aktivieren"
+
+msgid "Show emojis in search results"
+msgstr "Emojis in Suchergebnissen anzeigen"
 
 msgid "Web search option"
 msgstr "Suchmaschinen"
@@ -370,92 +482,33 @@ msgstr "DuckDuckGo"
 msgid "Show an internet search option in search results"
 msgstr "Die Option »Online suchen« zu Suchergebnissen hinzufügen"
 
+msgid "Search home folder"
+msgstr "Suchen Sie den Home-Ordner"
+
+msgid "When searching, also search home folder for files"
+msgstr "Durchsuchen Sie bei der Suche auch den Home-Ordner nach Dateien"
+
+msgid "Show hidden files"
+msgstr "Versteckte Dateien anzeigen"
+
+msgid "Show hidden files in folder view"
+msgstr "Verborgene Dateien in der Ordneransicht anzeigen"
+
+msgid "Use a custom icon size"
+msgstr "Eine benutzerdefinierte Symbolgröße verwenden"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Eine benutzerdefinierte Größe für das Leistensymbol verwenden"
+
+msgid "Panel icon size"
+msgstr "Größe des Leistensymbols"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Eine benutzerdefinierte Größe für das Leistensymbol auswählen"
+
 msgid "Session buttons icon size"
 msgstr "Symbolgröße für die Sitzungsschaltflächen"
 
 msgid "Use session buttons box style"
 msgstr "Sitzungsschaltflächen in eine Box einbetten"
 
-#~ msgid "Remove favorite"
-#~ msgstr "Favorit entfernen"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "\"%s\" konnte nicht gestartet werden"
-
-#~ msgid "Toggle recent files"
-#~ msgstr "Letzte Dateien umschalten"
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr ""
-#~ "Drücken Sie diese Taste, um Ihre Datenschutzeinstellungen anzupassen."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Diesen Knopf drücken um die Menüeinträge anzupassen."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Durch Abwählen wird es dem Thema erlaubt, das Symbol einzustellen"
-
-#~ msgid "Icon"
-#~ msgstr "Symbol"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Den benutzerdefinierten Symbolnamen der Menütaste eingeben"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr ""
-#~ "Öffnen des Menüs aktivieren, wenn sich die Maus auf das Applet bewegt"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Verzögerung beim Wechsel der Kategorien"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Wenn diese Option aktiviert ist, werden Kategorieansichten beim Klicken "
-#~ "anstelle des Hovers aktiviert."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Legt fest, ob weicher automatischer Bildlauf in der Anwendungsliste "
-#~ "aktiviert wird."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Auswählen, ob Lesezeichen im Menü indiziert werden sollen."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr ""
-#~ "Wählen Sie aus, ob geöffnete Fenster bei der Menüsuche indiziert werden "
-#~ "sollen."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Legt fest, ob Lesezeichen und Orte im Menü angezeigt werden."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Legt fest, ob Symbole an Anwendungen angezeigt werden."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Legt fest, ob Symbole an Kategorien angezeigt werden."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Legt fest, ob die Anwendungsbeschreibung auf den Anwendungsknöpfen "
-#~ "angezeigt wird."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Wenn diese Option aktiviert ist, werden QuickInfos mit dem Namen oder der "
-#~ "Beschreibung des Elements angezeigt, wenn Sie den Mauszeiger darüber "
-#~ "halten."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "Die Verzögerungszeit in Millisekunden für QuickInfos beim Bewegen des "
-#~ "Mauszeigers über einen Menüpunkt."

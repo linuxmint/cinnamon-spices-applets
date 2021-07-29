@@ -3,7 +3,7 @@
 		"type": "header",
 		"description": "Settings - Bash Sensors (write commands in Bash!)"
 	},
-	"title": {
+	"title1": {
 		"type": "entry",
 		"default": "Bash sensors",
 		"description": "Title",
@@ -32,7 +32,7 @@
 		"type": "entry",
 		"default": "echo 'hello, cinnamon!'",
 		"description": "Command 1",
-		"tooltip": "first line of output (use \f for more lines)"
+		"tooltip": "first line of output (use \\f for more lines)"
 	},
 	"enableScript2": {
 		"type": "checkbox",

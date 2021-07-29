@@ -6,6 +6,8 @@ const Gio = imports.gi.Gio;
 const Utils = require("./utils");
 const AppletDir = imports.ui.appletManager.appletMeta["calendar@ccprog"].path;
 
+const MSECS_IN_DAY = 24 * 60 * 60 * 1000;
+
 const Langinfo = Utils.getInfo("LC_ADDRESS");
 const LC_LANG = Langinfo.lang_ab;
 
@@ -65,6 +67,17 @@ class Enrico extends Provider {
         this.data = [];
     }
 
+    addUnique (single) {
+        const known = this.data.find((d) => d.year === single.year && 
+                d.month === single.month && d.day === single.day && d.region === this.region);
+
+        if (known) {
+            known.name += '\n' + name;
+        } else {
+            this.data.push(single);
+        }
+    }
+
     update (holiday) {
         const {year, month, day} = holiday.date;
 
@@ -73,12 +86,26 @@ class Enrico extends Provider {
             .sort((a, b) => a.lang === "en" ? 1 : b.lang === "en" ? -1 : 0)[0]
             .text;
 
-        const known = this.data.find((d) => d.year === year && d.month === month && d.day === day && d.region === this.region);
+        const flags = holiday.flags;
 
-        if (known) {
-            known.name = name;
-        } else {
-            this.data.push({year, month, day, name, region: this.region});
+        this.addUnique({year, month, day, name, flags, region: this.region});
+
+        if (holiday.dateTo) {
+            const {year: yearTo, month: monthTo, day: dayTo} = holiday.dateTo;
+
+            let iter = new Date(year, month, day, 12);
+            let limit = new Date(yearTo, monthTo, dayTo, 12);
+            do {
+                iter.setTime(iter.getTime() + MSECS_IN_DAY);
+                this.addUnique({
+                    year: iter.getFullYear(),
+                    month: iter.getMonth(),
+                    day: iter.getDate(),
+                    name,
+                    flags,
+                    region: this.region
+                });
+            } while (iter < limit);
         }
     }
 
@@ -144,8 +171,8 @@ class Enrico extends Provider {
     }
 
     matchMonth (year, month) {
-        const holidays = this.data.filter((d) => d.year === year && d.month === month && d.region === this.region);
-        return new Map(holidays.map((d) => [d.day, d.name]));
+        const holidays = this.data.filter((d) => d.year == year && d.month == month && d.region == this.region);
+        return new Map(holidays.map((d) => [`${d.month}/${d.day}`, [d.name, d.flags]]));
     }
 
     getHolidays (year, month, callback) {

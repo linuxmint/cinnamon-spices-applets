@@ -64,7 +64,7 @@ ClipboardReader.prototype = {
     },
 
     _execute_script_and_get_output: function(script) {
-        let process = new ShellUtils.ShellOutputProcess(['python', script]);
+        let process = new ShellUtils.ShellOutputProcess(['python3', script]);
         let output = process.spawn_sync_and_get_output();
         return output;
     },

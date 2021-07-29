@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:15+0100\n"
+"PO-Revision-Date: 2021-03-22 17:41+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: nl\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -218,8 +218,6 @@ msgid "Use a custom icon"
 msgstr "Een aangepast pictogram gebruiken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Een aangepast pictogram gebruiken"
 
@@ -260,8 +258,6 @@ msgid "Open menu on hover"
 msgstr "Menu openen bij zweven"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
 
@@ -278,8 +274,6 @@ msgid "Use menu animations"
 msgstr "Menu-animaties gebruiken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Menu-animaties inschakelen voor openen en sluiten"
 
@@ -288,8 +282,6 @@ msgid "Activate categories on click"
 msgstr "CategorieÃ«n activeren bij klikken"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "CategorieÃ«n activeren bij klikken"
 
@@ -350,10 +342,8 @@ msgid "Show bookmarks and places"
 msgstr "Bladwijzers en locaties tonen"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Bladwijzers en locaties tonen"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Show application icons"
@@ -447,98 +437,4 @@ msgstr "Voeg favorieten toe aan sessieknoppen"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Toon uw favoriete app-pictogrammen naast de sessieknoppen"
 
-#, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Kon '%s' niet starten"
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Verwijderen uit favorieten"
-
-#~ msgid "Toggle recent files"
-#~ msgstr "Recente bestanden omschakelen"
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr "Klik op deze knop om uw privÃ©leven-instellingen aan te passen."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Klik op deze knop om uw menu-onderdelen aan te passen."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Als u dit uitvinkt zal het thema het pictogram instellen"
-
-#~ msgid "Icon"
-#~ msgstr "Pictogram"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Stel de naam in van het aangepaste menuknoppictogram"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr ""
-#~ "Schakel openen van het menu in wanneer de muispijl de hulptoepassing "
-#~ "binnengaat"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Vertraging tussen het wisselen van categorieÃ«n"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Indien ingeschakeld worden categorieweergaven geactiveerd bij klikken in "
-#~ "plaats van bij zweven."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Kies of soepel automatisch schuiven moet worden ingeschakeld in de "
-#~ "toepassingenlijst."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Kies of webbladwijzers al dan niet worden opgenomen in het menu."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr ""
-#~ "Kies of open vensters al dan niet worden opgenomen in menu-zoekresultaten."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr ""
-#~ "Kies of bladwijzers en locaties al dan niet worden weergegeven in het "
-#~ "menu."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr ""
-#~ "Kies of toepassingspictogrammen al dan niet worden weergegeven in het "
-#~ "menu."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Kies of categoriepictogrammen al dan niet worden getoond."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
-#~ "toepassing."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Indien ingeschakeld zullen er zweeftips worden getoond met de naam of "
-#~ "beschrijving van het menu-onderdeel."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "De vertraging in milliseconden voor het verschijnen van zweeftips bij "
-#~ "menu-onderdelen."
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Voer a.u.b. uw wachtwoord in om deze toepassing te deÃ¯nstalleren"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Bestandssysteempad in zoekveld inschakelen"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Maakt bestandspad mogelijk in het menuzoekveld."

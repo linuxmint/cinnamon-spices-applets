@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: it\n"
 
-#. ratecurrency@magner->metadata.json->name
+#. metadata.json->name
 msgid "Fiat and cryptocurrency quote rates"
 msgstr "Tassi di quotazione di Fiat e criptovaluta"
 
-#. ratecurrency@magner->metadata.json->description
+#. metadata.json->description
 msgid ""
 "Displays the current price and trends of cryptocurrencies (TOP 150 coins "
 "with CoinMarketCap) and popular fiat currencies (Dollar, Euro, Ruble etc.). "
@@ -32,39 +32,39 @@ msgstr ""
 "monete con CoinMarketCap) e delle valute popolari (Dollaro, Euro, Rublo "
 "ecc.). Monitoraggio delle variazioni percentuali giornaliere."
 
-#. ratecurrency@magner->settings-schema.json->layout->general->title
+#. settings-schema.json->layout->general->title
 msgid "General"
 msgstr "Generale"
 
-#. ratecurrency@magner->settings-schema.json->country->description
+#. settings-schema.json->country->description
 msgid "Choosing a server for fiat currency"
 msgstr "Scelta di un server per valuta fiat"
 
-#. ratecurrency@magner->settings-schema.json->country->tooltip
+#. settings-schema.json->country->tooltip
 msgid "Affects the load data fiat currency quotes"
 msgstr "Influisce sulle quotazioni della valuta fiat dei dati di carico"
 
-#. ratecurrency@magner->settings-schema.json->country->options
+#. settings-schema.json->country->options
 msgid "European Union"
 msgstr "Unione Europea"
 
-#. ratecurrency@magner->settings-schema.json->country->options
+#. settings-schema.json->country->options
 msgid "Russian Federation"
 msgstr "Federazione Russa"
 
-#. ratecurrency@magner->settings-schema.json->select-coin->description
+#. settings-schema.json->select-coin->description
 msgid "Display cryptocurrency quotes instead of fiat currency"
 msgstr "Mostra le quotazioni di criptovaluta anziché la valuta legale"
 
-#. ratecurrency@magner->settings-schema.json->layout->cfgCoin->title
+#. settings-schema.json->layout->cfgCoin->title
 msgid "Cryptocurrency options"
 msgstr "Opzioni di criptovaluta"
 
-#. ratecurrency@magner->settings-schema.json->apiKey->description
+#. settings-schema.json->apiKey->description
 msgid "Your CoinMarketCap API Key"
 msgstr "La tua chiave API CoinMarketCap"
 
-#. ratecurrency@magner->settings-schema.json->apiKey->tooltip
+#. settings-schema.json->apiKey->tooltip
 msgid ""
 "If you don`t have one you can get it for free at https://pro.coinmarketcap."
 "com"
@@ -72,27 +72,27 @@ msgstr ""
 "Se non ne hai una puoi ottenerla gratuitamente su https://pro.coinmarketcap."
 "com"
 
-#. ratecurrency@magner->settings-schema.json->website->description
+#. settings-schema.json->website->description
 msgid "Go to CoinMarketCap website"
 msgstr "Vai al sito Web CoinMarketCap"
 
-#. ratecurrency@magner->settings-schema.json->website->tooltip
+#. settings-schema.json->website->tooltip
 msgid "Click this button to visit the website"
 msgstr "Fare clic su questo pulsante per visitare il sito Web"
 
-#. ratecurrency@magner->settings-schema.json->coin->description
+#. settings-schema.json->coin->description
 msgid "Select base currency (coin)"
 msgstr "Seleziona la valuta di base (moneta)"
 
-#. ratecurrency@magner->settings-schema.json->coin->tooltip
+#. settings-schema.json->coin->tooltip
 msgid "For which coin to display a quote?"
 msgstr "Per quale moneta visualizzare un preventivo?"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->description
+#. settings-schema.json->ApiInterval->description
 msgid "Select update interval (using API credits)"
 msgstr "Seleziona intervallo di aggiornamento (usando i crediti API)"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->tooltip
+#. settings-schema.json->ApiInterval->tooltip
 msgid ""
 "Determines how often to receive new data. Each update is one credit. For a "
 "free basic plan, an interval of 30+ minutes is recommended"
@@ -101,394 +101,394 @@ msgstr ""
 "credito. Per un piano di base gratuito, si consiglia un intervallo di oltre "
 "30 minuti"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "5 minutes"
 msgstr "5 minuti"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "15 minutes"
 msgstr "15 minuti"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "30 minutes"
 msgstr "30 minuti"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "45 minutes"
 msgstr "45 minuti"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "1 hour"
 msgstr "1 ora"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "2 hours"
 msgstr "2 ore"
 
-#. ratecurrency@magner->settings-schema.json->ApiInterval->options
+#. settings-schema.json->ApiInterval->options
 msgid "4 hours"
 msgstr "4 ore"
 
-#. ratecurrency@magner->settings-schema.json->layout->cfgDisplay->title
+#. settings-schema.json->layout->cfgDisplay->title
 msgid "Display options"
 msgstr "Opzioni di Visualizzazione"
 
-#. ratecurrency@magner->settings-schema.json->currency->description
+#. settings-schema.json->currency->description
 msgid "Select quote currency"
 msgstr "Seleziona la valuta del preventivo"
 
-#. ratecurrency@magner->settings-schema.json->currency->tooltip
+#. settings-schema.json->currency->tooltip
 msgid "In which currency to show quote information"
 msgstr "In quale valuta mostrare le informazioni sul preventivo"
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Australian dollar (AUD)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Brazilian real (BRL)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Bulgarian lev (BGN)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Canadian dollar (CAD)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Chinese yuan renminbi (CNY)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Czech koruna (CZK)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Danish krone (DKK)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Euro (EUR)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Hong Kong dollar (HKD)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Hungarian forint (HUF)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Indian rupee (INR)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Japanese yen (JPY)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Norwegian krone (NOK)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Polish zloty (PLN)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Pound sterling (GBP)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Romanian leu (RON)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Russian rouble (RUB)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Singapore dollar (SGD)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "South African rand (ZAR)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "South Korean won (KRW)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Swedish krona (SEK)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Swiss franc (CHF)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "Turkish lira (TRY)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->currency->options
+#. settings-schema.json->currency->options
 msgid "US dollar (USD)"
 msgstr ""
 
-#. ratecurrency@magner->settings-schema.json->display->description
+#. settings-schema.json->display->description
 msgid "Display type quotes"
 msgstr "Tipologia visualizzazione preventivo"
 
-#. ratecurrency@magner->settings-schema.json->display->options
+#. settings-schema.json->display->options
 msgid "Money (e.g. 8,261.20 $)"
 msgstr "Denaro (ad es. 8.261,20 $)"
 
-#. ratecurrency@magner->settings-schema.json->display->options
+#. settings-schema.json->display->options
 msgid "Delta (e.g. -0.426 $)"
 msgstr "Delta (ad es. -0,426 $)"
 
-#. ratecurrency@magner->settings-schema.json->display->options
+#. settings-schema.json->display->options
 msgid "Percent (e.g. 0.26%)"
 msgstr "Percentuale (ad es. 0,26%)"
 
-#. ratecurrency@magner->settings-schema.json->show-icon->description
+#. settings-schema.json->show-icon->description
 msgid "Show icon"
 msgstr "Mostra icona"
 
-#. ratecurrency@magner->settings-schema.json->show-name->description
+#. settings-schema.json->show-name->description
 msgid "Show currency name"
 msgstr "Mostra nome valuta"
 
-#. ratecurrency@magner->settings-schema.json->layout->graph->title
+#. settings-schema.json->layout->graph->title
 msgid "Graph"
 msgstr "Grafico"
 
-#. ratecurrency@magner->settings-schema.json->graph-On->description
+#. settings-schema.json->graph-On->description
 msgid "Show currency history on graph"
 msgstr "Mostra cronologia valuta sul grafico"
 
-#. ratecurrency@magner->settings-schema.json->layout->graphOption->title
+#. settings-schema.json->layout->graphOption->title
 msgid "Graph options"
 msgstr "Opzioni grafico"
 
-#. ratecurrency@magner->settings-schema.json->graphDuration->description
+#. settings-schema.json->graphDuration->description
 msgid "Duration history (in days)"
 msgstr "Durata cronologia (in giorni)"
 
-#. ratecurrency@magner->settings-schema.json->graphColor->description
+#. settings-schema.json->graphColor->description
 msgid "Color"
 msgstr "Colore"
 
-#. ratecurrency@magner->settings-schema.json->layout->alert->title
+#. settings-schema.json->layout->alert->title
 msgid "Alerts"
 msgstr "Avvisi"
 
-#. ratecurrency@magner->settings-schema.json->alert-On->description
+#. settings-schema.json->alert-On->description
 msgid "Enable alerts"
 msgstr "Abilita avvisi"
 
-#. ratecurrency@magner->settings-schema.json->layout->alertOption->title
+#. settings-schema.json->layout->alertOption->title
 msgid "Alerts options"
 msgstr "Opzioni di avviso"
 
-#. ratecurrency@magner->settings-schema.json->alertAbove->description
+#. settings-schema.json->alertAbove->description
 msgid "Maximum value"
 msgstr "Valore massimo"
 
-#. ratecurrency@magner->settings-schema.json->alertAbove->tooltip
+#. settings-schema.json->alertAbove->tooltip
 msgid "Alert is triggered when the current value is higher than this value"
 msgstr ""
 "L'allarme viene attivato quando il valore corrente è superiore a questo "
 "valore"
 
-#. ratecurrency@magner->settings-schema.json->alertBelow->description
+#. settings-schema.json->alertBelow->description
 msgid "Minimum value"
 msgstr "Valore minimo"
 
-#. ratecurrency@magner->settings-schema.json->alertBelow->tooltip
+#. settings-schema.json->alertBelow->tooltip
 msgid "Alert is triggered when the current value is lower than this value"
 msgstr ""
 "L'allarme viene attivato quando il valore corrente è inferiore a questo "
 "valore"
 
-#. ratecurrency@magner->settings-schema.json->alertType->description
+#. settings-schema.json->alertType->description
 msgid "Unit"
 msgstr "Unità"
 
-#. ratecurrency@magner->settings-schema.json->alertType->options
+#. settings-schema.json->alertType->options
 msgid "Percentages"
 msgstr "Percentuali"
 
-#. ratecurrency@magner->settings-schema.json->alertType->options
+#. settings-schema.json->alertType->options
 msgid "Money"
 msgstr "Moneta"
 
-#. applet.js:46
+#. modules/stringsForTranslation.js:17
 msgid "Australian dollar"
 msgstr ""
 
-#. applet.js:47
+#. modules/stringsForTranslation.js:18
 msgid "Brazilian real"
 msgstr ""
 
-#. applet.js:48
+#. modules/stringsForTranslation.js:19
 msgid "Bulgarian lev"
 msgstr ""
 
-#. applet.js:49
+#. modules/stringsForTranslation.js:20
 msgid "Canadian dollar"
 msgstr ""
 
-#. applet.js:50
+#. modules/stringsForTranslation.js:21
 msgid "Chinese yuan renminbi"
 msgstr ""
 
-#. applet.js:51
+#. modules/stringsForTranslation.js:22
 msgid "Czech koruna"
 msgstr ""
 
-#. applet.js:52
+#. modules/stringsForTranslation.js:23
 msgid "Danish krone"
 msgstr ""
 
-#. applet.js:53
+#. modules/stringsForTranslation.js:24
 msgid "Euro"
 msgstr ""
 
-#. applet.js:54
+#. modules/stringsForTranslation.js:25
 msgid "Hong Kong dollar"
 msgstr ""
 
-#. applet.js:55
+#. modules/stringsForTranslation.js:26
 msgid "Hungarian forint"
 msgstr ""
 
-#. applet.js:56
+#. modules/stringsForTranslation.js:27
 msgid "Indian rupee"
 msgstr ""
 
-#. applet.js:57
+#. modules/stringsForTranslation.js:28
 msgid "Japanese yen"
 msgstr ""
 
-#. applet.js:58
+#. modules/stringsForTranslation.js:29
 msgid "Norwegian krone"
 msgstr ""
 
-#. applet.js:59
+#. modules/stringsForTranslation.js:30
 msgid "Polish zloty"
 msgstr ""
 
-#. applet.js:60
+#. modules/stringsForTranslation.js:31
 msgid "Pound sterling"
 msgstr ""
 
-#. applet.js:61
+#. modules/stringsForTranslation.js:32
 msgid "Romanian leu"
 msgstr ""
 
-#. applet.js:62
+#. modules/stringsForTranslation.js:33
 msgid "Russian rouble"
 msgstr ""
 
-#. applet.js:63
+#. modules/stringsForTranslation.js:34
 msgid "Singapore dollar"
 msgstr ""
 
-#. applet.js:64
+#. modules/stringsForTranslation.js:35
 msgid "South African rand"
 msgstr ""
 
-#. applet.js:65
+#. modules/stringsForTranslation.js:36
 msgid "South Korean won"
 msgstr ""
 
-#. applet.js:66
+#. modules/stringsForTranslation.js:37
 msgid "Swedish krona"
 msgstr ""
 
-#. applet.js:67
+#. modules/stringsForTranslation.js:38
 msgid "Swiss franc"
 msgstr ""
 
-#. applet.js:68
+#. modules/stringsForTranslation.js:39
 msgid "Turkish lira"
 msgstr ""
 
-#. applet.js:69
+#. modules/stringsForTranslation.js:40
 msgid "US dollar"
 msgstr ""
 
-#. applet.js:72
+#. modules/stringsForTranslation.js:43
 msgid "Set API key..."
 msgstr "Imposta chiave API..."
 
-#. applet.js:73
+#. modules/stringsForTranslation.js:44
 msgid "Error"
 msgstr "Errore"
 
-#. applet.js:74
+#. modules/stringsForTranslation.js:45
 msgid "Reconnect"
 msgstr "Riconetti"
 
-#. applet.js:75
+#. modules/stringsForTranslation.js:46
 msgid "Update: "
 msgstr "Aggiorna: "
 
-#. applet.js:76
+#. modules/stringsForTranslation.js:47
 msgid "Rank: #"
 msgstr ""
 
-#. applet.js:77
+#. modules/stringsForTranslation.js:48
 msgid "1H:"
 msgstr ""
 
-#. applet.js:78
+#. modules/stringsForTranslation.js:49
 msgid "24H:"
 msgstr ""
 
-#. applet.js:79
+#. modules/stringsForTranslation.js:50
 msgid "7D:"
 msgstr ""
 
-#. applet.js:80
+#. modules/stringsForTranslation.js:51
 msgid "Max.: "
 msgstr ""
 
-#. applet.js:81
+#. modules/stringsForTranslation.js:52
 msgid "Min.: "
 msgstr ""
 
-#. applet.js:82
+#. modules/stringsForTranslation.js:53
 msgid "For the Russian server, try again in 15 seconds."
 msgstr "Per il server russo, riprovare tra 15 secondi."
 
-#. applet.js:83
+#. modules/stringsForTranslation.js:54
 msgid "History for "
 msgstr "Cronologia di "
 
-#. applet.js:84
+#. modules/stringsForTranslation.js:55
 msgid " day"
 msgstr " giorno"
 
-#. applet.js:85
+#. modules/stringsForTranslation.js:56
 msgid " days"
 msgstr " giorni"
 
-#. applet.js:86
-msgid " _days\" #for some countries the third declension of the wor"
-msgstr "_giorni\" #per alcuni paesi la terza declinazione del mondo"
+#. modules/stringsForTranslation.js:57
+msgid " _days"
+msgstr " giorni"
 
-#. applet.js:87
+#. modules/stringsForTranslation.js:58
 msgid "Average:"
 msgstr "Media:"
 
-#. applet.js:88
+#. modules/stringsForTranslation.js:59
 msgid "Click to open graph"
 msgstr "Clicca per aprire il grafico"
 
-#. applet.js:89
+#. modules/stringsForTranslation.js:60
 msgid "Update quote"
 msgstr "Aggiorna preventivo"

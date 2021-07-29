@@ -1,12 +1,11 @@
 {
     "uuid": "Cinnamenu@json",
     "name": "Cinnamenu",
-    "description": "A flexible menu providing formatting options, web bookmarks, search provider support and fuzzy searching.",
+    "description": "A flexible menu with grid or list layout options, file browser and emoji search.",
     "max-instances": 2,
-    "version": "4.4",
+    "version": "4.14.10",
     "multiversion": true,
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
-    "comments": "Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and the contributors to projects they derived from.",
     "cinnamon-version": [
         "3.2",
         "3.4",
@@ -15,6 +14,7 @@
         "4.0",
         "4.2",
         "4.4",
-        "4.6"
+        "4.6",
+        "4.8"
     ]
 }

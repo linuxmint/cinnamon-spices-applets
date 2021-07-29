@@ -44,18 +44,11 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var isID = utils.isID;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var get = utils.get;
-var nonempty = utils.nonempty;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
         this.prettyName = "OpenWeatherMap";
@@ -65,7 +58,8 @@ var OpenWeatherMap = (function () {
         this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+        ];
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
@@ -90,7 +84,11 @@ var OpenWeatherMap = (function () {
                         return [2, null];
                     case 4:
                         if (json == null) {
-                            this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
+                            this.app.HandleError({
+                                type: "soft",
+                                detail: "no api response",
+                                service: "openweathermap"
+                            });
                             return [2, null];
                         }
                         return [2, this.ParseWeather(json, this)];
@@ -128,9 +126,9 @@ var OpenWeatherMap = (function () {
                     customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness"),
-                    value: json.current.clouds,
-                    type: "percent"
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
                 },
                 forecasts: []
             };
@@ -176,6 +174,8 @@ var OpenWeatherMap = (function () {
                         type: "snow"
                     };
                 }
+                if (!!hour.pop && forecast.precipitation)
+                    forecast.precipitation.chance = hour.pop * 100;
                 hourly.push(forecast);
             }
             weather.hourlyForecasts = hourly;
@@ -183,7 +183,12 @@ var OpenWeatherMap = (function () {
         }
         catch (e) {
             self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            self.app.HandleError({
+                type: "soft",
+                service: "openweathermap",
+                detail: "unusual payload",
+                message: _("Failed to Process Current Weather Info")
+            });
             return null;
         }
     };

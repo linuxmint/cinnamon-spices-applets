@@ -37,10 +37,10 @@ class Worldclocks {
 
         settings.clocks.forEach((item, i) => {
             let label = new St.Label({text: item.label});
-            this.actor.add(label, { row: i,  col: 0, x_expand: false, x_align: St.Align.START });
+            this.actor.add(label, { row: i,  col: 0, x_expand: true, x_align: St.Align.START });
 
             let tz = GLib.TimeZone.new(item.timezone);
-            let display = new St.Label({ x_align: St.Align.END });
+            let display = new St.Label({ x_align: St.Align.END, style_class: "calendar-world-time" });
             this.clocks.push({ display, tz });
             this.actor.add(display, { row: i,  col: 1, x_align: St.Align.END });
         });

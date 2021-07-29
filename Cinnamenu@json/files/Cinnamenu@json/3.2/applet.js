@@ -926,7 +926,8 @@ CinnamenuApplet.prototype = {
     while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
       if (nextType === CMenu.TreeItemType.ENTRY) {
         let entry = iter.get_entry();
-        if (!entry.get_app_info().get_nodisplay()) {
+        let appInfo = entry.get_app_info();
+        if (appInfo && !appInfo.get_nodisplay()) {
           let id = entry.get_desktop_file_id();
           let app = this.appSystem.lookup_app(id);
           if (rootDir && typeof rootDir.get_menu_id === 'function') {
@@ -974,7 +975,7 @@ CinnamenuApplet.prototype = {
       this.categoriesBox.remove_all_children();
       buttons.push(find(this.categoryButtons, button => button.id === 'all'));
     } else {
-      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
+      buttons = [new CategoryListButton(this.state, 'all', _('All applications'), 'computer')];
     }
 
     let trees = [this.appSystem.get_tree()];
@@ -1013,9 +1014,9 @@ CinnamenuApplet.prototype = {
     }
     let params = [
       [this.state.settings.showPlaces, 'places', _('Places'), 'folder', '_selectAllPlaces'],
-      [this.state.recentEnabled, 'recent', _('Recent Files'), 'folder-recent', '_selectRecent'],
+      [this.state.recentEnabled, 'recent', _('Recent files'), 'folder-recent', '_selectRecent'],
       [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'],
-      [true, 'favorites', _('Favorite Apps'), 'address-book-new', '_selectCategory']
+      [true, 'favorites', _('Favorite apps'), 'address-book-new', '_selectCategory']
     ];
     for (let i = 0; i < params.length; i++) {
       if (!params[i][0]) {
@@ -1985,12 +1986,12 @@ CinnamenuApplet.prototype = {
       && pattern.length > 2) {
       this.listSearchProviders(pattern, (providerResults) => {
         // Since the provider results are asynchronous, the search state may have ended by the time they return.
-        if (!this.state.searchActive
-          || !providerResults
-          || providerResults.length === 0) {
+        if (!this.state.searchActive) {
           return;
         }
-        results = results.concat(providerResults);
+        if ( providerResults && providerResults.length > 0) {
+            results = results.concat(providerResults);
+        }
         finish();
       });
     } else {
@@ -2289,7 +2290,7 @@ CinnamenuApplet.prototype = {
       this.state,
       'system-lock-screen',
       16,
-      _('Lock Screen'),
+      _('Lock screen'),
       _('Lock the screen'),
       () => {
         let screensaver_settings = new Gio.Settings({

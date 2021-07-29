@@ -32,6 +32,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 
         this.settings.bind("applet-icon-animation", "applet_icon_animation", this.on_settings_changed);
         this.settings.bind("applet-show-notification", "applet_show_notification", this.on_settings_changed);
+        this.settings.bind("applet-save-location", "applet_save_location", this.on_settings_changed);
         this.settings.bind("change-onstart", "change_onstart", this.on_settings_changed);
         this.settings.bind("change-onclick", "change_onclick", this.on_settings_changed);
         this.settings.bind("change-ontime", "change_ontime", this.on_settings_changed);
@@ -47,9 +48,20 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.settings.bind("image-tag-data", "image_tag_data", this.on_settings_changed);
 
         this.set_applet_icon_name("applet");
+        this._applet_icon.set_pivot_point(0.5, 0.5);
         this.httpAsyncSession = new Soup.SessionAsync();
         Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
         this.swapChainSwapped = false;
+        
+        const defaultSavePath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/';
+        if(this.applet_save_location == '')
+            //Default path is the users picture dir
+            this.applet_save_location = defaultSavePath;
+        else if(!this.applet_save_location.startsWith('file://')) {
+            //I have no idea, why this should happen... Consider these lines as unreachable?
+            log('Selected save path does not look right - please file a bug report: ' + this.applet_save_location)
+            this.applet_save_location = defaultSavePath;
+        }
 
         this.on_settings_changed();
 
@@ -75,25 +87,28 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._auto_change_background));
     }
 
-    _set_icon_opacity(newValue) {
+    _set_icon_rotation(newValue, seconds) {
         if(this.applet_icon_animation)
             Tweener.addTween(this._applet_icon, {
-                opacity: newValue,
-                time: 0.8
+                'rotation-angle-z': newValue,
+//                skipUpdates: 4, //Only render every 4th frame - this does sadly not improve the cpu usage...
+                time: seconds,
+                transition: 'easeInOutQuad'
             });
     }
 
     _icon_animate() {
-        this._icon_opacity = this._icon_opacity == 0 ? 255 : 0;
-        this._set_icon_opacity(this._icon_opacity);
+        this._set_icon_rotation(0, 0);
+        this._set_icon_rotation(360, 2);
+
         //And queue next step...
-        this._animator = imports.mainloop.timeout_add_seconds(1, imports.lang.bind(this, this._icon_animate));
+        this._animator = imports.mainloop.timeout_add_seconds(2.5, imports.lang.bind(this, this._icon_animate));
     }
 
     _icon_start() {
         //Start animation and ensure no other is running (anymore)...
         this._icon_stop();
-        this._animator = imports.mainloop.timeout_add_seconds(1, imports.lang.bind(this, this._icon_animate));
+        this._icon_animate();
     }
 
     _icon_stop() {
@@ -101,8 +116,6 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         if(this._animator)
             imports.mainloop.source_remove(this._animator);
         this._animator = null;
-        //And fade back to normal
-        this._set_icon_opacity(255);
     }
 
     _auto_change_background() {
@@ -115,6 +128,10 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this._icon_start();
         this._update_tooltip();
         let that = this;
+        function errorEnd(msg = 'Something went horrible wrong!') {
+            that._show_notification(msg);
+            that._icon_stop();
+        };
         function defaultEnd() {
             that._apply_image().then(function() {
                 that._icon_stop();
@@ -135,9 +152,9 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                 if (msg.status_code === 200) {
                     let jsonData = JSON.parse(msg.response_body.data).images[0];
                     that._update_tooltip(jsonData.title + ' - ' + jsonData.copyright);
-                    that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd);
+                    that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd).catch(errorEnd);
                 } else
-                    that._show_notification('Could not download bing metadata!');
+                    errorEnd('Could not download bing metadata (' + msg.status_code + ')!');
             });
         } else if(this.image_source == 'himawari') {
             log('Downloading himawari metadata');
@@ -145,7 +162,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
             let request = Soup.Message.new('GET', 'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json');
             this.httpAsyncSession.queue_message(request, function(http, msg) {
                 if (msg.status_code !== 200)
-                    that._show_notification('Could not download himawari metadata!');
+                    errorEnd('Could not download himawari metadata (' + msg.status_code + ')!');
                 else {
                     let latestDate = new Date(JSON.parse(request.response_body.data).date);
                     let zoomLvl = that.image_res_himawari;
@@ -161,7 +178,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                         tileId++;
                         that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
                         that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
-                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + latestDate.getMonth()).slice(-2) + 
+                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) + 
                             '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
                             ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
                             y + '_' + x + '.png', tileName)
@@ -193,7 +210,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                                 //Not? Recall!
                                 downloadTiles();
                             }
-                        });
+                        }).catch(errorEnd);
                     }
                     downloadTiles();
                 }
@@ -205,17 +222,17 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
             let tagStr = '';
             if(this.image_tag)
                 tagStr = '?' + this.image_tag_data;
-            this._download_image('https://source.unsplash.com/' + resStr + '/' + tagStr).then(defaultEnd);
+            this._download_image('https://source.unsplash.com/' + resStr + '/' + tagStr).then(defaultEnd).catch(errorEnd);
         } else if(this.image_source == 'placekitten') {
             let resStr = '1920/1080';
             if(this.image_res_manual)
                 resStr = this.image_res_width + '/' + this.image_res_height;
-            this._download_image('http://placekitten.com/' + resStr).then(defaultEnd);
+            this._download_image('http://placekitten.com/' + resStr).then(defaultEnd).catch(errorEnd);
         } else if(this.image_source == 'picsum') {
             let resStr = '1920/1080';
             if(this.image_res_manual)
                 resStr = this.image_res_width + '/' + this.image_res_height;
-            this._download_image('https://picsum.photos/' + resStr).then(defaultEnd);
+            this._download_image('https://picsum.photos/' + resStr).then(defaultEnd).catch(errorEnd);
         }
     }
 
@@ -235,8 +252,14 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _store_background() {
+        let targetPath = Math.floor(Math.random() * 899999 + 100000) + '.png'; //Random int between 100000 and 999999
+        if(this.applet_save_location.startsWith('file://'))
+            //Strip the "file://" prefix
+            targetPath = this.applet_save_location.substr(7) + '/' + targetPath
+        else 
+            targetPath = this.applet_save_location + '/' + targetPath
+    
         //Copy the background to users picture folder with random name and show the stored notification
-        let targetPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' + Math.floor(Math.random() * 2048) + '.png';
         var that = this;
         this._run_cmd(['convert', this._get_swap_chain_image_current(), '-write', targetPath]).then(function() {
             that._show_notification('Image stored to: ' + targetPath);
@@ -299,10 +322,8 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         return new Promise(function(resolve, reject) {
             that.httpAsyncSession.queue_message(request, function(http, msg) {
                 fStream.close(null);
-                if (msg.status_code !== 200) {
-                    that._show_notification('Could not download image!');
-                    reject();
-                }
+                if (msg.status_code !== 200)
+                    reject('Could not download image (' + msg.status_code + ')!');
                 resolve();
             });
         });

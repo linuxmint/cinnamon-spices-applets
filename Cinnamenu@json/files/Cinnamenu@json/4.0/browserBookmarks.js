@@ -23,69 +23,97 @@
  */
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const {ApplicationType, readJSONAsync, tryFn} = require('./utils');
+const ByteArray = imports.byteArray;
+const Cinnamon = imports.gi.Cinnamon;
 
 let Gda = null;
-tryFn(function() {
+try {
     Gda = imports.gi.Gda;
-});
+} catch(e) {}
 
-const readFirefoxBookmarks = function(appInfo, profileDir) {
-  let connection, bookmarks = [];
-
-  let result;
-
-  if (!connection) {
-    tryFn(function() {
-      connection = Gda.Connection.open_from_string(
-        'SQLite', 'DB_DIR=' + profileDir + ';DB_NAME=places.sqlite',
-        null, Gda.ConnectionOptions.READ_ONLY
-      );
+const readFileAsync = function(file, opts = {utf8: true}) {
+    const {utf8} = opts;
+    return new Promise(function(resolve, reject) {
+        if (typeof file === 'string' || file instanceof String) {
+            file = Gio.File.new_for_path(file);
+        }
+        if (!file.query_exists(null)) reject(new Error('File does not exist.'));
+        file.load_contents_async(null, function(object, result) {
+            try {
+                let [success, data] = file.load_contents_finish(result);
+                if (!success) return reject(new Error('File cannot be read.'));
+                if (utf8) {
+                    if (data instanceof Uint8Array) data = ByteArray.toString(data);
+                    else data = data.toString();
+                }
+                resolve(data);
+            } catch(e) {
+                reject(e);
+            }
+        });
     });
-  }
-
-  tryFn(function() {
-    result = connection.execute_select_command(
-      'SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks ' +
-      'INNER JOIN moz_places ON (moz_bookmarks.fk = moz_places.id) ' +
-      'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
-      'NULL AND moz_bookmarks.type = 1'
-    );
-  });
-
-  // Gda binding seems buggy on Ubuntu 18.04 with error:
-  // "Unsupported type void, deriving from fundamental void"
-  if (!result) return [];
-
-  let nRows = result.get_n_rows();
-
-  const handleMeta = function(result, row) {
-    return tryFn(function() {
-      return [
-        result.get_value_at(0, row),
-        result.get_value_at(1, row)
-      ];
-    }, () => [null, null]);
-  };
-
-  for (let row = 0; row < nRows; row++) {
-    let [name, uri] = handleMeta(result, row);
-
-    bookmarks.push({
-      app: appInfo,
-      name: name.replace(/\//g, '|'),
-      score: 0,
-      uri
-    });
-  }
-  return bookmarks;
 };
 
-function readFirefoxProfiles(appSystem) {
+const readJSONAsync = function(file) {
+    return readFileAsync(file).then(function(json) {
+        return JSON.parse(json);
+    });
+};
+
+const readFirefoxBookmarks = function(appInfo, profileDir) {
+    let connection, bookmarks = [];
+
+    let result;
+
+    if (!connection) {
+        try {
+            connection = Gda.Connection.open_from_string(
+                            'SQLite', 'DB_DIR=' + profileDir + ';DB_NAME=places.sqlite',
+                            null, Gda.ConnectionOptions.READ_ONLY);
+        } catch(e) {}
+    }
+
+    try {
+        result = connection.execute_select_command(
+            'SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks ' +
+            'INNER JOIN moz_places ON (moz_bookmarks.fk = moz_places.id) ' +
+            'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
+            'NULL AND moz_bookmarks.type = 1'
+        );
+    } catch(e) {}
+
+    // Gda binding seems buggy on Ubuntu 18.04 with error:
+    // "Unsupported type void, deriving from fundamental void"
+    if (!result) return [];
+
+    let nRows = result.get_n_rows();
+
+    const handleMeta = function(result, row) {
+        try {
+            return [result.get_value_at(0, row),
+                    result.get_value_at(1, row)];
+        } catch(e) {
+            return [null, null];
+        }
+    };
+
+    for (let row = 0; row < nRows; row++) {
+        let [name, uri] = handleMeta(result, row);
+
+        bookmarks.push({
+            app: appInfo,
+            name: name.replace(/\//g, '|'),
+            uri: uri
+        });
+    }
+    return bookmarks;
+};
+
+function readFirefoxProfiles() {
     if (!Gda) return [];
 
     let profilesFile, profileDir, bookmarksFile;
-    let foundApps = appSystem.lookup_desktop_wmclass('firefox');
+    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass('firefox');
     let appInfo = foundApps.get_app_info();
     let firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
     if (!foundApps || foundApps.length === 0 || !Gda) {
@@ -119,7 +147,7 @@ function readFirefoxProfiles(appSystem) {
             continue;
         }
 
-        if (profileName === 'default') {
+        if (profileName === 'default' || profileName === 'default-release') {
             if (relative) {
                 profileDir = GLib.build_filenamev([firefoxDir, path]);
             } else {
@@ -136,12 +164,12 @@ function readFirefoxProfiles(appSystem) {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default', 'Bookmarks'],
-                                                                wmClass = 'chromium-browser', appSystem) {
-    let appInfo, bookmarksFile;
+const readChromiumBookmarks = function(bookmarks, path, wmClass) {
 
-    let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
     return new Promise(function(resolve, reject) {
+        let appSystem = Cinnamon.AppSystem.get_default();
+
+        let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
         if (!foundApps || foundApps.length === 0) {
             foundApps = appSystem.lookup_desktop_wmclass(wmClass);
             if (!foundApps || foundApps.length === 0) {
@@ -149,9 +177,8 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
             }
         }
 
-        appInfo = foundApps.get_app_info();
-
-        bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
+        let appInfo = foundApps.get_app_info();
+        let bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
 
         if (!bookmarksFile.query_exists(null)) {
             resolve(bookmarks);
@@ -168,7 +195,6 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
                         bookmarks.push({
                             app: appInfo,
                             name: children[i].name,
-                            score: 0,
                             uri: children[i].url
                         });
                     } else if (children[i].hasOwnProperty('children')) {
@@ -192,20 +218,23 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
 //=====================
 
 class BookmarksManager {
-    constructor(appSystem) {
+    constructor() {
         let bookmarks = [];
+
         Promise.all([
-            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
-            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem),
-            readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
+            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser'),
+            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome'),
+            readChromiumBookmarks(bookmarks, ['opera', 'Bookmarks'], 'opera'),
+            readChromiumBookmarks(bookmarks, ['BraveSoftware', 'Brave-Browser', 'Default', 'Bookmarks'],
+                                                                                            'brave-browser')
         ]).then(() => {
-            bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
+            bookmarks = bookmarks.concat(readFirefoxProfiles());
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
-                bookmarks[i].icon = bookmarks[i].app.get_icon();
-                bookmarks[i].mime = null;
+                bookmarks[i].gicon = bookmarks[i].app.get_icon();
+                //bookmarks[i].mime = null;
                 bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].type = ApplicationType._places;
+                bookmarks[i].isWebBookmark = true;
             }
 
             // Create a unique list of bookmarks across all browsers.
@@ -220,11 +249,10 @@ class BookmarksManager {
                     this.state.push(bm[bmKeys[i]]);
                 }
             }
-            this.state.sort( (a, b) => { return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
+            this.state.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+                                            1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
         }).catch((e) => global.log(e.message, e.stack));
     }
 }
 
-
-module.exports = {Gda, BookmarksManager};
+module.exports = {BookmarksManager};

@@ -1,0 +1,77 @@
+/*css nodes used by Cinnamenu
+┌──.menu-applications-outer-box .menu-applications-box──────────────────────────────────────────────────────────────────────────
+│┌──.menu-favorites-box─────────────────┐┌──.menu-categories-scrollbox .vfade──┐┌──.menu-applications-scrollbox or .vfade───────────
+││┌──.menu-favorites-scrollbox .vfade──┐││┌──.menu-categories-box─────────────┐││┌──.menu-applications-inner-box .menu-applications-box──
+│││                                    ││││                                   ││││┌──.menu-applications-header-text────────────────────────
+│
+│┌──.menu-search-box─────────
+││┌──#menu-search-entry──────────
+*/
+/*---session/favorites box--------------------*/
+.menu-favorites-box {} /*(or none dependant on user options.)*/
+
+.menu-favorites-scrollbox {} /*and vfade*/
+
+.menu-favorites-button {}
+
+.menu-favorites-button:hover {}
+
+/*---search box-----------------------------*/
+.menu-search-box {} /*When the searchBox is the full width of the menu (i.e. when session button placement
+is left or right) the left menu-search-box padding will be set to equal the right padding and l&r
+menu-search-box margins will be adjusted to ensure l/r symmetry.*/
+
+#menu-search-entry {}
+
+.menu-search-entry-icon {}
+
+/*---categories box-------------------------*/
+.menu-categories-scrollbox {} /*and .vfade*/
+
+.menu-categories-box {} /*Note: for compatibility with older themes, when the favorites box is not on the
+left of the menu, menu-categories-box left padding will be reduced so that menu-categories-box left
+padding + menu-applications-outer-box left padding does not exceed 20px. Use menu-categories-box left
+margin to override*/
+
+.menu-category-button {}
+
+.menu-category-button-label {}
+
+.menu-category-button-selected {}
+
+.menu-category-button-greyed {}
+
+.menu-category-button-hover {} /*and .menu-category-button-selected. Used when
+"activate categories on click" option is set.*/
+
+.menu-category-button:highlighted, /*Used to highlight category containing newly installed apps.*/
+.menu-category-button-selected:highlighted {
+    font-weight: bold;
+}
+
+/*---applications box-----------------------*/
+.menu-applications-scrollbox {} /*and .vfade*/
+
+.menu-applications-inner-box {} /*and .menu-applications-box for compatability with old themes.*/
+
+.menu-applications-header-text { /*(shows folder name, "no recent files", error messages etc)*/
+    font-weight: bold;
+}
+
+.menu-application-button {} /*(Note: in grid view, .menu-application-button l&r padding are set to 0px)*/
+
+.menu-application-button-label {}
+
+.menu-application-button-selected {}
+
+.menu-application-button:highlighted, /*Used to highlight newly installed apps in list or grid view.*/
+.menu-application-button-selected:highlighted {
+    font-weight: bold;
+}
+
+/*---context menu---------------------------
+(.menu)*/
+
+/*---whole menu-----------------------------
+.cinnamenu (and .menu-background)
+(.menu)*/

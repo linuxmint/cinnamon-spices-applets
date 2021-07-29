@@ -21,7 +21,11 @@ const Util = imports.misc.util;
 
 const PopupMenu = imports.ui.popupMenu;
 
-
+/** @exports QUtils.lerp */
+function lerp(nvalue, target, t){
+    nvalue = (nvalue + (target - nvalue) * t);
+    return parseInt(nvalue);
+}
 
 
 /** @exports QUtils.qLOG */
@@ -228,10 +232,14 @@ class QPopupItem extends PopupMenu.PopupBaseMenuItem {
 
 /** @exports QUtils.QPopupHeader */
 class QPopupHeader extends QPopupItem {
-    constructor({label = '', sub_label = '', status = '', iconPath, iconSize = 32}) {
+    constructor({label = '', sub_label = '', status = '', iconPath, iconName = 'quintao',  iconSize = 32}) {
         super({reactive: false});
         
-        this._icon = new QIcon({icon_size: iconSize, icon_path: iconPath, icon_name: 'quintao'});
+        if(iconPath){
+            this._icon = new QIcon({icon_size: iconSize, icon_path: iconPath});
+        } else {
+            this._icon = new QIcon({icon_size: iconSize, icon_name: iconName});
+        }
         
         this.addActor(this._icon.stIcon, {span: 0, expand: false});
         

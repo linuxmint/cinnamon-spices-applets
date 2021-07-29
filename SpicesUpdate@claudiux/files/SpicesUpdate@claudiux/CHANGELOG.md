@@ -1,3 +1,29 @@
+### v6.3.1~20201026
+  * Adapting SpicesUpdate@claudiux to [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
+
+### v6.3.0~20201022
+  * Tooltip content: Now filtered and formatted. Some information is displayed in bold, others in italics.
+  * Settings (General tab): Possibility to define a maximum width for the content of the tooltip (in % of the screen width).
+  * Badge: Size and location changed. Now the size of this applet remains constant, with or without its badge.
+  * Network monitoring: Now continue to check for updates even if network has changed (VPN).
+  * Some optimizations.
+
+### v6.2.0~20201012
+  * Improvements (for Cinnamon 4.6 only):
+    * Settings: Changing the position of the Refresh button. Remove the buttons below the lists (for future Cinnamon).
+    * Tooltip: Some information is displayed in bold.
+    * Notifications: Some information is displayed in bold.
+    * Animation: Adding linear effect.
+
+### v6.1.0~20201011
+  * Fix issue #3253
+
+### v6.1.0~20201010
+  * For Cinnamon 4.6 only:
+    * Now detects when the Cinnamon server is down.
+    * Bug fixes.
+    * No longer displays "Spices Update" or "SpU" next to or below the icon.
+
 ### v6.0.2~20200811
   * Remove all notifications when reloading this applet.
   * Menu shows the "reload this applet" option when a RELOAD file exists at the root of this applet.

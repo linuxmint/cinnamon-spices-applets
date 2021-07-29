@@ -1,0 +1,140 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page-applications", "page-settings"],
+        "page-applications": {
+            "type": "page",
+            "title": "Applications",
+            "sections": ["section-applications", "section-groups"]
+        },
+        "page-settings": {
+            "type": "page",
+            "title": "Settings",
+            "sections": ["section-settings-global", "section-settings-applications"]
+        },
+
+        "section-applications": {
+            "type": "section",
+            "title": "Applications",
+            "keys": ["list-applications", "info-applications"]
+        },
+        "section-groups": {
+            "type": "section",
+            "title": "Groups",
+            "keys": ["list-groups", "force-update-groups", "info-force-update"]
+        },
+        "section-settings-global": {
+            "type": "section",
+            "title": "Global Settings",
+            "keys": [
+                "visible-launcher-label",
+                "launcher-label",
+                "custom-launcher-icon",
+                "launcher-icon",
+                "notification-enabled",
+                "notification-text"
+            ]
+        },
+        "section-settings-applications": {
+            "type": "section",
+            "title": "Application Settings",
+            "keys": ["visible-app-icons", "use-symbolic-icons", "app-icon-size"]
+        }
+    },
+    "list-applications": {
+        "type": "list",
+        "columns": [
+            { "id": "name", "title": "Name", "type": "string" },
+            { "id": "group", "title": "Group", "type": "string" },
+            {
+                "id": "icon",
+                "title": "Icon",
+                "type": "icon",
+                "default": "application-x-executable"
+            },
+            { "id": "command", "title": "Command", "type": "string" }
+        ],
+        "default": []
+    },
+    "info-applications": {
+        "type": "label",
+        "description": "If you don't type in a group, the application will be displayed without a submenu."
+    },
+    "list-groups": {
+        "type": "list",
+        "columns": [
+            { "id": "name", "title": "Name", "type": "string" },
+            { "id": "icon", "title": "Icon", "type": "icon", "default": "folder" }
+        ],
+        "default": [],
+        "show-buttons": false
+    },
+    "force-update-groups": {
+        "type": "button",
+        "description": "Update Groups",
+        "callback": "forceUpdateGroups"
+    },
+    "info-force-update": {
+        "type": "label",
+        "description": "Unfortunately you must be force update the group list. It updates internally\nbut it will not be shown in the list without a restart of this dialog."
+    },
+
+    "visible-launcher-label": {
+        "type": "switch",
+        "description": "Show Label",
+        "default": true
+    },
+    "launcher-label": {
+        "type": "entry",
+        "description": "Label",
+        "default": "Launcher",
+        "dependency": "visible-launcher-label"
+    },
+    "custom-launcher-icon": {
+        "type": "switch",
+        "description": "Custom Icon",
+        "default": false
+    },
+    "launcher-icon": {
+        "type": "iconfilechooser",
+        "description": "Icon",
+        "default": "folder",
+        "dependency": "custom-launcher-icon"
+    },
+    "notification-enabled": {
+        "type": "switch",
+        "description": "Show Notifications",
+        "default": true,
+        "tooltip": "Show notification on application launch"
+    },
+    "notification-text": {
+        "type": "entry",
+        "description": "Notification Text",
+        "default": "Launch '%s'.",
+        "dependency": "notification-enabled",
+        "tooltip": "%s will be your application name"
+    },
+    "visible-app-icons": {
+        "type": "switch",
+        "description": "Show Application Icons",
+        "default": true,
+        "tooltip": "Show Application Icons in Popup-Menu"
+    },
+    "use-symbolic-icons": {
+        "type": "switch",
+        "description": "Use Symbolic Application Icons",
+        "default": false,
+        "tooltip": "Use Symbolic Application Icons, where it's possible",
+        "dependency": "visible-app-icons"
+    },
+    "app-icon-size": {
+        "type": "spinbutton",
+        "description": "Application Icon Size",
+        "default": 24,
+        "min": 12,
+        "max": 94,
+        "step": 1,
+        "dependency": "visible-app-icons",
+        "tooltip": "Set Icon size"
+    }
+}

@@ -36,7 +36,7 @@ MyApplet.prototype = {
 
     _init: function(orientation){
         Applet.IconApplet.prototype._init.call(this, orientation);
-        this.set_applet_icon_path( AppletDir + "/" + "xampp.png");
+        this.set_applet_icon_path( AppletDir + "/" + "icon.png");
         this.set_applet_tooltip(_("Xampp Panel"));
 
         //setup a new menuManager and add the main context main to the manager

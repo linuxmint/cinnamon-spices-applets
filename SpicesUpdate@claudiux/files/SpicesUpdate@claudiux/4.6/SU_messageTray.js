@@ -184,7 +184,7 @@ URLHighlighter.prototype = {
         let urls = Util.findUrls(this._text);
         let markup = '';
         let pos = 0;
-        for (let i = 0; i < urls.length; i++) {
+        for (let i = 0, _url_length = urls.length; i < _url_length; i++) {
             let url = urls[i];
             let str = this._text.substr(pos, url.pos - pos);
             markup += str + '<span foreground="' + this._linkColor + '"><u>' + url.url + '</u></span>';
@@ -205,7 +205,7 @@ URLHighlighter.prototype = {
         if (success && x >= 0 && x <= ct.width
                     && y >= 0 && y <= ct.height) {
             let pos = ct.coords_to_position(x, y);
-            for (let i = 0; i < this._urls.length; i++) {
+            for (let i = 0, _urls_length = this._urls.length; i < _urls_length; i++) {
                 let url = this._urls[i]
                 if (pos >= url.pos && pos <= url.pos + url.url.length)
                     return i;
@@ -1325,13 +1325,13 @@ SummaryItem.prototype = {
         if (this.notificationStack.get_n_children() > 0)
             return;
 
-        for (let i = 0; i < this.source.notifications.length; i++) {
+        for (let i = 0, _length = this.source.notifications.length; i < _length; i++) {
             this._appendNotificationToStack(this.source.notifications[i]);
         }
     },
 
     doneShowingNotificationStack: function() {
-        for (let i = 0; i < this._stackedNotifications.length; i++) {
+        for (let i = 0, _length = this._stackedNotifications.length; i < _length; i++) {
             let stackedNotification = this._stackedNotifications[i];
             let notification = stackedNotification.notification;
             notification.collapseCompleted();
@@ -1384,7 +1384,7 @@ SummaryItem.prototype = {
     },
 
     _notificationDestroyed: function(notification) {
-        for (let i = 0; i < this._stackedNotifications.length; i++) {
+        for (let i = 0, _length = this._stackedNotifications.length; i < _length; i++) {
             if (this._stackedNotifications[i].notification == notification) {
                 let stackedNotification = this._stackedNotifications[i];
                 notification.disconnect(stackedNotification.notificationExpandedId);
@@ -1452,14 +1452,14 @@ MessageTray.prototype = {
 
         Main.layoutManager.connect('monitors-changed', Lang.bind(this, this._setSizePosition));
 
-		// Settings
+        // Settings
         this.settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" })
-		function setting(self, source, camelCase, dashed) {
-			function updater() { self[camelCase] = source.get_boolean(dashed); }
-			source.connect('changed::'+dashed, updater);
-			updater();
-		}
-		setting(this, this.settings, "_notificationsEnabled", "display-notifications");
+        function setting(self, source, camelCase, dashed) {
+            function updater() { self[camelCase] = source.get_boolean(dashed); }
+            source.connect('changed::'+dashed, updater);
+            updater();
+        }
+        setting(this, this.settings, "_notificationsEnabled", "display-notifications");
         this.bottomPosition = this.settings.get_boolean("bottom-notifications");
         this.settings.connect("changed::bottom-notifications", () => {
             this.bottomPosition = this.settings.get_boolean("bottom-notifications");

@@ -132,10 +132,10 @@ function IpIndicatorApplet(metadata, orientation, panel_height, instance_id) {
 }
 
 IpIndicatorApplet.prototype = {
-    __proto__: Applet.IconApplet.prototype,
+    __proto__: Applet.TextIconApplet.prototype,
 
     _init: function (metadata, orientation, panel_height, instance_id) {
-        Applet.IconApplet.prototype._init.call(this, orientation, panel_height,
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height,
             instance_id);
         try {
             this.icon_theme = Gtk.IconTheme.get_default();
@@ -222,6 +222,9 @@ IpIndicatorApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "debug_level", "debuggerLogLevel", this._updateLogLevel, null);
         this._prepareIspsSettings();
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "appearance", "appearance", this._updateSettings, null);
     },
 
     _updateLogLevel: function () {
@@ -259,8 +262,7 @@ IpIndicatorApplet.prototype = {
 
         this._infoBox = new St.BoxLayout();
         this._infoBox.set_vertical(true);
-        this._infoBox.set_margin_left(22);
-        this._infoBox.set_margin_right(22);
+        this._infoBox.set_style("margin-left: 22px; margin-right: 22px");
 
         this._ip = new St.Label();
         this._infoBox.add(this._ip);
@@ -320,6 +322,7 @@ IpIndicatorApplet.prototype = {
         this.set_applet_tooltip(defaultTooltip);
         this.set_applet_icon_symbolic_name(noConnectionIcon);
         this.set_applet_icon_name(noConnectionIcon);
+        this.set_applet_label("");
     },
 
     _updateInfo: function (ip, isp, country, countryCode) {
@@ -334,7 +337,6 @@ IpIndicatorApplet.prototype = {
         this._ip.set_text(ip);
         this._country.set_text(country);
 
-        let tooltip = ip;
         let ispName = isp;
         let iconName;
         let isIspSettingFound = false;
@@ -359,11 +361,30 @@ IpIndicatorApplet.prototype = {
                 break;
             }
         }
-
+        
         if (!isIspSettingFound) {
             iconName = countryCode;
         }
 
+        this.set_applet_label(ip);
+
+        Debugger.log("Appearance is " + this.appearance);
+        if (this.appearance === "icon") {
+            this.hideLabel();
+            this._showIcon(iconName);
+        } else if (this.appearance === "ip") {
+            this.showLabel();
+            this.hide_applet_icon();
+        } else {
+            this.showLabel();
+            this._showIcon(iconName);
+        }
+
+        this.set_applet_tooltip(ip);
+        this._isp.set_text(ispName);
+    },
+
+    _showIcon: function (iconName) {
         const icon_file = Gio.File.new_for_path(iconName);
         if (icon_file.query_exists(null)) {
             this.set_applet_icon_path(iconName);
@@ -371,9 +392,6 @@ IpIndicatorApplet.prototype = {
             this.set_applet_icon_symbolic_name(iconName);
             this.set_applet_icon_name(iconName);
         }
-
-        this.set_applet_tooltip(tooltip);
-        this._isp.set_text(ispName);
     },
 
     _isPublicIpChanged: function (actionIfYes) {

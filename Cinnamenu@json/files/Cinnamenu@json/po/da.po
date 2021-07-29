@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 13:11+0100\n"
-"PO-Revision-Date: 2020-08-15 16:55+0200\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:15+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Type to search..."
-msgstr "Skriv for at søge…"
+msgstr "Skriv for at søge …"
 
 msgid "Initializing"
 msgstr "Initialiserer"
@@ -27,23 +27,23 @@ msgstr "Initialiserer"
 msgid "No description available"
 msgstr "Ingen beskrivelse tilgængelig"
 
-msgid "All Applications"
+msgid "All applications"
 msgstr "Alle programmer"
 
 msgid "Places"
 msgstr "Steder"
 
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Seneste filer"
 
 msgid "Bookmarks"
 msgstr "Bogmærker"
 
-msgid "Favorite Apps"
-msgstr "Favorit programmer"
+msgid "Favorite apps"
+msgstr "Favoritprogrammer"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "gir1.2-gda-5.0 pakken er nødvendig til bogmærker i Firefox og Midori."
+msgstr "Pakken gir1.2-gda-5.0 er nødvendig til bogmærker i Firefox og Midori."
 
 msgid "Clear List"
 msgstr "Ryd listen"
@@ -66,8 +66,8 @@ msgstr "Skift til gittervisning"
 msgid "Switch to list view"
 msgstr "Skift til listevisning"
 
-msgid "Lock Screen"
-msgstr "Låseskærm"
+msgid "Lock screen"
+msgstr "Låse skærm"
 
 msgid "Lock the screen"
 msgstr "Lås skærmen"
@@ -111,17 +111,110 @@ msgstr "Tilføj til favoritter"
 msgid "Uninstall"
 msgstr "Fjern"
 
-msgid "Please wait..."
-msgstr "Vent venligst..."
+msgid "Find files..."
+msgstr "Find filer ..."
 
-msgid "Search web for"
-msgstr "Søgemaskine udbydere"
+msgid "Please wait..."
+msgstr "Vent venligst …"
+
+msgid "No recent Items"
+msgstr "Ingen seneste varer"
 
 msgid "Solution:"
 msgstr "Løsning:"
 
 msgid "Click to copy"
 msgstr "Klik for at kopiere"
+
+msgid "Search web for"
+msgstr "Søg på nettet efter"
+
+msgid "Favorites"
+msgstr "Favoritter"
+
+msgid "Recent"
+msgstr "Seneste"
+
+msgid "Home folder"
+msgstr "Hjem"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange poster - viser kun de 1000 første poster"
+
+msgid "Reset category order"
+msgstr "Nulstil rækkefølgen af kategorier"
+
+msgid "This file is no longer available"
+msgstr "Filen er ikke længere tilgængelig"
+
+msgid "Open with"
+msgstr "Åbn med"
+
+msgid "Other application..."
+msgstr "Andet program …"
+
+msgid "Open containing folder"
+msgstr "Åbn indeholdende mappe"
+
+msgid "Move to trash"
+msgstr "Smid i papirkurven"
+
+msgid "Error while moving file to trash:"
+msgstr "Fejl ved flytning af filen til papirkurven:"
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Åben"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid "Start in"
+msgstr "Start om"
+
+msgid "Select a folder"
+msgstr "Vælg en mappe"
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr "Søgning skjult"
+
+msgid "Use regular expressions"
+msgstr "Brug regulære udtryk"
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr "Søger..."
+
+msgid "Search Stopped"
+msgstr "Søgning stoppet"
+
+msgid "Searching: "
+msgstr "Søger: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -130,16 +223,8 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"En fleksibel menu med mulighed for formatering, webbogmærker, opslag i åbne\n"
-"vinduer og understøttelse af søgemaskine udbydere med fuzzy søgning."
-
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-"Er muliggjort takket være indsats fra bidragsydere til Cinnamon Menu, "
-"Gnomenu,\n"
-"og bidragsydere til projekterne som de er videreudviklet af."
+"En fleksibel menu med mulighed for formatering, webbogmærker, understøttelse "
+"af søgemaskineudbydere og fuzzy søgning."
 
 msgid "Behavior"
 msgstr "Opførsel"
@@ -151,10 +236,10 @@ msgid "Layout and Content"
 msgstr "Layout og indhold"
 
 msgid "Search Providers"
-msgstr "Søgemaskine udbydere"
+msgstr "Søgemaskineudbydere"
 
 msgid "No search provider extensions found"
-msgstr "Fandt ingen udvidelser til søgemaskine udbydere"
+msgstr "Fandt ingen udvidelser til søgemaskineudbydere"
 
 msgid "Panel"
 msgstr "Panel"
@@ -174,14 +259,11 @@ msgstr "Indstillinger for seneste filer"
 msgid "Open the menu editor"
 msgstr "Åbn redigering af menuen"
 
-msgid "Reset category order"
-msgstr "Nulstil rækkefølgen af kategorier"
-
 msgid "Use a custom icon"
 msgstr "Anvend et selvvalgt ikon"
 
 msgid "Use a custom icon in the panel"
-msgstr "Brug et tilpasset ikon i panelet"
+msgstr "Anvend et selvvalgt ikon i panelet"
 
 msgid "Panel icon"
 msgstr "Panelikon"
@@ -190,7 +272,7 @@ msgid "Panel text"
 msgstr "Paneltekst"
 
 msgid "Text to show beside the panel icon"
-msgstr "Tekst der skal vises ved siden af panelikonet"
+msgstr "Tekst som vises ved siden af panelikonet"
 
 msgid "pixels"
 msgstr "pixler"
@@ -208,61 +290,68 @@ msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tastaturgenvej til åbning og lukning af menuen"
 
 msgid "Open menu on hover"
-msgstr "Åbn menu på hover"
+msgstr "Åbn menuen, når markøren føres hen over"
 
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Åbn menuen, når jeg flytter markøren hen over den"
+msgstr "Åbn menuen, når jeg flytter markøren hen over panelikonet"
 
 msgid "milliseconds"
 msgstr "millisekunder"
 
 msgid "Menu hover delay"
-msgstr "Forsinkelse når markøren føres hen over"
+msgstr "Forsinkelse når markøren føres hen over menuen"
 
 msgid "Use menu animations"
 msgstr "Anvend menuanimationer"
 
 msgid "Animate the menu on open and close"
-msgstr "Tillad animation af menuen, når den åbnes og lukkes"
+msgstr "Animér menuen, når den åbnes og lukkes"
 
 msgid "Activate categories on click"
-msgstr "Aktiver kategorier ved klik"
+msgstr "Aktivér kategorier ved klik"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "Aktiver kategorier ved klik i stedet for på hover"
+msgstr "Aktivér kategorier ved klik i stedet for når markøren føres hen over"
 
 msgid "Enable autoscrolling"
-msgstr "Aktiver automatisk rulning"
+msgstr "Aktivér automatisk rulning"
 
 msgid "Enable autoscrolling in application list"
-msgstr "Aktiver automatisk rulning i programlisten"
+msgstr "Aktivér automatisk rulning i programlisten"
 
 msgid "Show web bookmarks"
 msgstr "Vis webbogmærker"
 
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Vis din browsers webbogmærker i menuen"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Vis din browsers bogmærker i menuen.\n"
+"Bemærk: Installér pakken gir1.2-gda-5.0 for at læse firefox' bogmærker."
 
 msgid "Enable searching of open windows"
-msgstr "Aktiver søgning i åbne vinduer"
+msgstr "Aktivér søgning i åbne vinduer"
 
 msgid "Enable search providers"
-msgstr "Aktiver søgemaskine udbydere"
+msgstr "Aktivér søgemaskineudbydere"
 
 msgid "Include search provider results in searches"
-msgstr "Inkluder søgeudbyder resultater i søgninger"
+msgstr "Medtag søgemaskineudbyderes resultater i søgninger"
 
 msgid "Example Search Providers"
-msgstr "Eksempel på søgemaskine udbydere"
+msgstr "Eksempel på søgemaskineudbydere"
 
-msgid "Startup applications view mode"
-msgstr "Visningstilstand for opstartsprogrammer"
+msgid "Open menu on category:"
+msgstr "Åbn menu på kategori:"
 
 msgid "List"
 msgstr "Liste"
 
 msgid "Grid"
 msgstr "Gitter"
+
+msgid "Always open the menu with this category selected"
+msgstr "Åbn altid menuen med denne kategori valgt"
 
 msgid "columns"
 msgstr "kolonner"
@@ -274,7 +363,7 @@ msgid "Show bookmarks and places"
 msgstr "Vis bogmærker og steder"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr "Vis bogmærker og steder i menuen"
+msgstr "Vis kategorierne bogmærker og steder i menuen"
 
 msgid "Show application icons"
 msgstr "Vis programikoner"
@@ -283,7 +372,7 @@ msgid "Show category icons"
 msgstr "Vis kategoriikoner"
 
 msgid "Show application descriptions under titles"
-msgstr "Vis programbeskrivelser under titler"
+msgstr "Show application descriptions under titles"
 
 msgid "Show tooltips"
 msgstr "Vis værktøjstip"
@@ -294,9 +383,6 @@ msgstr "Forsinkelse af værktøjstip"
 msgid "Use a custom menu height"
 msgstr "Anvend en selvvalgt menuhøjde"
 
-msgid "px"
-msgstr "px"
-
 msgid "Custom menu height"
 msgstr "Selvvalgt menuhøjde"
 
@@ -304,13 +390,13 @@ msgid "Applications view mode"
 msgstr "Visningstilstand for programmer"
 
 msgid "View applications as list or grid"
-msgstr "Vis programmer som liste eller gitter"
+msgstr "Vis programmer som en liste eller i et gitter"
 
 msgid "Application description placement"
-msgstr "Placering af programbeskrivelse"
+msgstr "Placering af programmers beskrivelse"
 
 msgid "Tooltips"
-msgstr "Tooltips"
+msgstr "Værktøjstip"
 
 msgid "Under titles"
 msgstr "Under titler"
@@ -319,16 +405,16 @@ msgid "None"
 msgstr "Ingen"
 
 msgid "Choose where to show application descriptions"
-msgstr "Vælg hvor der skal vises applikationsbeskrivelser"
+msgstr "Vælg hvor beskrivelse af programmet skal vises"
 
 msgid "Session buttons location"
-msgstr "Placering af sessionsknapper"
+msgstr "Sessionsknappers placering"
 
 msgid "Top"
-msgstr "Top"
+msgstr "Øverst"
 
 msgid "Bottom"
-msgstr "Bund"
+msgstr "Nederst"
 
 msgid "Left"
 msgstr "Venstre"
@@ -337,125 +423,90 @@ msgid "Right"
 msgstr "Højre"
 
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr "Vælg hvor sessionens (afslutte, logge af osv.) knapper skal vises"
+msgstr "Vælg, hvor sessionsknapper (afslut, log ud osv.) skal vises"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+" Info / tip: Træk i menukanten for at ændre menustørrelsen.\n"
 
 msgid "Add favorites to session buttons"
-msgstr "Føj favoritter til sessionsknapper"
+msgstr "Tilføj favoritter til sessionsknapper"
 
 msgid "Show your favorite app icons next to the session buttons"
-msgstr "Vis dine foretrukne appikoner ved siden af sessionsknapperne"
+msgstr "Vis dine favoritprogrammers ikoner ved siden af sessionsknapperne"
 
-msgid "Always open menu on favorite apps"
-msgstr "Altid åbne menu med favoritter"
+msgid "Show favorite apps category"
+msgstr "Vis kategorien favoritprogrammer"
 
-msgid "Always open the menu with favorite apps category selected"
-msgstr "Menuen åbner altid med favorit kategorien"
+msgid "Show your favorite apps category in the menu"
+msgstr "Vis kategorien favoritprogrammer i menuen"
+
+msgid "Show home folder"
+msgstr "Vis Hjem-mappen"
+
+msgid "Show home folder category in the menu"
+msgstr "Vis kategorien Hjem-mappe i menuen"
+
+msgid "Last used category"
+msgstr "Sidst anvendt kategori"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automatisk rulning i programlisten, når markøren føres hen over"
+
+msgid "Enable emoji search"
+msgstr "Aktivér søgning efter emojis"
+
+msgid "Show emojis in search results"
+msgstr "Vis emojis i søgeresultater"
 
 msgid "Web search option"
-msgstr "Valg af søgemaskine"
+msgstr "Indstillinger for websøgning"
 
 msgid "Google"
-msgstr ""
+msgstr "Google"
 
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 msgid "Yahoo"
-msgstr ""
+msgstr "Yahoo"
 
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 msgid "Show an internet search option in search results"
-msgstr "Vis valg af internet søgning i søge resultater "
+msgstr "Vis en internetsøgemulighed i søgeresultaterne"
+
+msgid "Search home folder"
+msgstr "Søg i hjemmemappen"
+
+msgid "When searching, also search home folder for files"
+msgstr "Når du søger, skal du også søge i hjemmemappen efter filer"
+
+msgid "Show hidden files"
+msgstr "Vis skjulte filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Vis skjulte filer i mappevisning"
+
+msgid "Use a custom icon size"
+msgstr "Brug en brugerdefineret ikonstørrelse"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Brug en brugerdefineret størrelse til panelikonet"
+
+msgid "Panel icon size"
+msgstr "Panelikonstørrelse"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Vælg en brugerdefineret størrelse til panelikonet"
 
 msgid "Session buttons icon size"
-msgstr "Ikonstørrelse for sessionsknapper"
+msgstr "Sessionsknappernes ikonstørrelse"
 
 msgid "Use session buttons box style"
-msgstr "Vis sessionsknapper i ramme"
+msgstr "Brug kassestil til sessionsknapper"
 
-#~ msgid "Remove favorite"
-#~ msgstr "Fjern favorit"
-
-#~ msgid "No recent documents"
-#~ msgstr "Ingen seneste dokumenter"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Kunne ikke starte \"%s\""
-
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr "Tryk på denne knap for at tilpasse dine privatlivsindstillinger."
-
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Tryk på denne knap for at tilpasse menupunkterne."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Hvis umarkeret vælger temaet ikonet"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Angiv ikonnavn for den tilpassede menuknap"
-
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr ""
-#~ "Aktivér åbning af menuen, når markøren føres hen over panelprogrammet"
-
-#~ msgid "Delay between switching categories"
-#~ msgstr "Forsinkelse ved skift mellem kategorier"
-
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr ""
-#~ "Når aktiveret, aktiveres kategorivisninger ved klik i stedet for, når "
-#~ "markøren føres hen over."
-
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr "Vælg om glidende automatisk rulning i programlisten skal aktiveres."
-
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Vælg om bogmærker er indekserede i menuen."
-
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr "Vælg om åbne vinduer indekseres i menuen."
-
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Vælg om bogmærker og steder skal vises i menuen."
-
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Vælg om programmer skal vises med ikoner."
-
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Vælg om kategorier skal vises med ikoner."
-
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr "Vælg om beskrivelse af programmet skal vises på programmets knap."
-
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Når aktiveret, vises værktøjstip med elementets navn og beskrivelse, når "
-#~ "markøren føres hen over."
-
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "Forsinkelsen i millisekunder for visning af værktøjstip når markøren "
-#~ "føres hen over."
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Indtast din adgangskode for at fjerne dette program"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Aktivér indtastning af filsystemstien i søgefeltet"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Tillader indtastning af stien i menuens søgefelt."

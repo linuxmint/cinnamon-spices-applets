@@ -123,6 +123,7 @@ class NetDataProvider {
             this.devices = [];
             let d = Gio.File.new_for_path("/sys/class/net");
             let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let info;
             while ((info = en.next_file(null)))
                 this.devices.push(info.get_name())
         }
