@@ -156,7 +156,7 @@ const EMOJI = [
 ],[
 '😶‍🌫️',
 'face in clouds',
-'absentminded | face in clouds | face in the fog | head in clouds'
+'absentminded face in the fog head in clouds'
 ],[
 '😏',
 'smirking face',
@@ -176,7 +176,7 @@ const EMOJI = [
 ],[
 '😮‍💨',
 'face exhaling',
-'exhale | face exhaling | gasp | groan | relief | whisper | whistle'
+'exhale gasp groan relief whisper whistle'
 ],[
 '🤥',
 'lying face',
@@ -244,7 +244,7 @@ const EMOJI = [
 ],[
 '😵‍💫',
 'face with spiral eyes',
-'dizzy | face with spiral eyes | hypnotized | spiral | trouble | whoa'
+'dizzy hypnotized spiral trouble whoa'
 ],[
 '🤯',
 'exploding head',
@@ -532,11 +532,11 @@ const EMOJI = [
 ],[
 '❤️‍🔥',
 'heart on fire',
-'burn | heart | heart on fire | love | lust | sacred heart'
+'burn love lust sacred heart'
 ],[
 '❤️‍🩹',
 'mending heart',
-'healthier | improving | mending | mending heart | recovering | recuperating | well'
+'healthier improving mending recovering recuperating well'
 ],[
 '❤',
 'red heart',
@@ -868,11 +868,11 @@ const EMOJI = [
 ],[
 '🧔‍♂️',
 'man: beard',
-'beard | man | man: beard'
+'beard man'
 ],[
 '🧔‍♀️',
 'woman: beard',
-'beard | woman | woman: beard'
+'beard woman'
 ],[
 '👨‍🦰',
 'man: red hair',
@@ -2028,19 +2028,19 @@ const EMOJI = [
 ],[
 '🦰',
 'red hair',
-'ginger | red hair | redhead'
+'ginger redhead'
 ],[
 '🦱',
 'curly hair',
-'afro | curly | curly hair | ringlets'
+'afro curly ringlets'
 ],[
 '🦳',
 'white hair',
-'gray | hair | old | white'
+'gray hair old white'
 ],[
 '🦲',
 'bald',
-'bald | chemotherapy | hairless | no hair | shaven'
+'chemotherapy hairless no hair shaven'
 ],[
 '🐵',
 'monkey face',
@@ -7574,8 +7574,7 @@ const MODED = [
 // create MODABLE[], the same emoji but with the skin tone modifiers removed.
 const MODABLE = [];
 for (let i = 0; i < MODED.length; i++) {
-    MODABLE[i] = MODED[i].replace('\u{1F3FB}', '');
-    MODABLE[i] = MODABLE[i].replace('\u{1F3FB}', '');
+    MODABLE[i] = MODED[i].replace(/\u{1F3FB}/ug, '');
 }
 
 module.exports = {EMOJI, MODED, MODABLE};

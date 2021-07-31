@@ -152,11 +152,13 @@ class CategoryButton {
     setButtonStyleNormal() {
         this.actor.set_style_class_name('menu-category-button');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+        this.icon.set_opacity(255);
     }
 
     setButtonStyleSelected() {
         this.actor.set_style_class_name('menu-category-button-selected');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+
     }
 
     _setButtonStyleHover() {
@@ -203,6 +205,12 @@ class CategoryButton {
     _setButtonStyleGreyed() {
         this.actor.set_style_class_name('menu-category-button-greyed');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+
+        let icon_opacity = this.icon.get_theme_node().get_double('opacity');
+        icon_opacity = Math.min(Math.max(0, icon_opacity), 1);
+        if (icon_opacity) { // Don't set opacity to 0 if not defined
+            this.icon.set_opacity(icon_opacity * 255);
+        }
     }
 
     selectCategory() {
