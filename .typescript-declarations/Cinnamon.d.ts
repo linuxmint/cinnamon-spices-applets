@@ -18,9 +18,26 @@ declare namespace imports.gi.Cinnamon {
 		constructor(options?: any)
 	}
 
+	class TrayManager {
+		public redisplay(): void;
+		public set_orientation(orientation: St.Side): void;
+		public manage_stage(state: any, themeWidget: any): void;
+	}
+
+	class TrayIcon extends St.Icon {
+		obsolete?: boolean;
+		window: EmbeddedWindow;
+		click(e: gi.Clutter.Event): void;
+	}
+
 	class GenericContainerAllocation {
 		public min_size: number
 		public natural_size: number
+	}
+
+	class EmbeddedWindow extends Gtk.Window {
+		show(): void;
+		hide(): void;
 	}
 
 	class Recorder {

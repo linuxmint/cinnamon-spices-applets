@@ -453,8 +453,6 @@ declare namespace imports.gi.Clutter {
 		 */
 		destroy_all_children(): void;
 
-		disconnect(signalId: number): void;
-
 		/**
 		 * This function is used to emit an event on the main stage.
 		 * You should rarely need to use this function, except for
@@ -2506,8 +2504,56 @@ declare namespace imports.gi.Clutter {
 	export class BlurEffect {
 
 	}
-	export class BoxLayout {
 
+	interface BoxLayout extends LayoutManager, GObject.Object {}
+	export class BoxLayout {
+		static new(): BoxLayout;
+		constructor(initObj?: any);
+		/**
+		 * Retrieves if the children sizes are allocated homogeneously.
+		 * @returns true if the Clutter.BoxLayout is arranging its children
+		 * homogeneously, and false otherwise
+		 */
+		get_homogeneous(): boolean;
+		/**
+		 * Retrieves the orientation of the this.
+		 * @returns  the orientation of the layout
+		 */
+		get_orientation(): Orientation;
+		/**
+		 * Retrieves the value set using Clutter.BoxLayout.set_pack_start
+		 * @returns true if the Clutter.BoxLayout should pack children
+		 * at the beginning of the layout, and false otherwise
+		 */
+		get_pack_start(): boolean;
+		/**
+		 * Retrieves the spacing set using Clutter.BoxLayout.set_spacing
+		 * @returns the spacing between children of the Clutter.BoxLayout
+		 */
+		get_spacing(): number;
+		/**
+		 * Sets whether the size of this children should be
+		 * homogeneous
+		 * @param homogeneous true if the layout should be homogeneous
+		 */
+		set_homogeneous(homogeneous: boolean): void;
+		/**
+		 * Sets the orientation of the Clutter.BoxLayout layout manager.
+		 * @param orientation the orientation of the Clutter.BoxLayout
+		 */
+		set_orientation(orientation: Orientation): void;
+		/**
+		 * Sets whether children of this should be laid out by appending
+		 * them or by prepending them
+		 * @param pack_start true if the this should pack children at the
+ 		 * beginning of the layout
+		 */
+		set_pack_start(pack_start: boolean): void;
+		/**
+		 * Sets the spacing between children of this
+		 * @param spacing the spacing between children of the layout, in pixels
+		 */
+		set_spacing(spacing: number): void; 
 	}
 	export class BrightnessContrastEffect {
 
@@ -2601,6 +2647,10 @@ declare namespace imports.gi.Clutter {
 
 	}
 	export class LayerNode {
+
+	}
+
+	export interface LayoutManager {
 
 	}
 	export class LayoutManager {

@@ -1,11 +1,11 @@
-import { Log } from "lib/logger";
-import { ErrorDetail } from "types";
-import { _ } from "utils";
+import { Logger } from "./logger";
+import { ErrorDetail } from "../types";
+import { _ } from "../utils";
 
 const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
 export class HttpLib {
-	private static instance: HttpLib = null;
+	private static instance: HttpLib;
 	/** Single instance of log */
 	public static get Instance() {
 		if (this.instance == null)
@@ -37,12 +37,12 @@ export class HttpLib {
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			Log.Instance.Error("Error: API response is not JSON. The response: " + response.Data);
+			Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 			response.Success = false;
 			response.ErrorData = {
 				code: -1,
 				message: "bad api response - non json",
-				reason_phrase: null,
+				reason_phrase: "",
 			}
 		}
 		finally {
@@ -56,7 +56,7 @@ export class HttpLib {
 	public async LoadAsync(url: string, params?: HTTPParams, method: Method = "GET"): Promise<GenericResponse> {
 		let message = await this.Send(url, params, method);
 
-		let error: HttpError = null;
+		let error: HttpError | undefined = undefined;
 
 		// Error generation
 		if (!message) {
@@ -64,7 +64,7 @@ export class HttpLib {
 				code: 0,
 				message: "no network response",
 				reason_phrase: "no network response",
-				response: null
+				response: undefined
 			}
 		}
 		// network or DNS error
@@ -102,12 +102,12 @@ export class HttpLib {
 		}
 
 		if (message?.status_code > 200 && message?.status_code < 300) {
-			Log.Instance.Print("Wrning: API returned non-OK status code '" + message?.status_code + "'");
+			Logger.Info("Wrning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
-		Log.Instance.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
-			Log.Instance.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
+			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
 		return {
 			Success: (error == null),
 			Data: message?.response_body?.data,
@@ -121,7 +121,7 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: HTTPParams, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams | null, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
 		// Add params to url
 		if (params != null) {
 			let items = Object.keys(params);
@@ -133,7 +133,7 @@ export class HttpLib {
 		}
 
 		let query = encodeURI(url);
-		Log.Instance.Debug("URL called: " + query);
+		Logger.Debug("URL called: " + query);
 		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
 			let message = Message.new(method, query);
 			this._httpSession.queue_message(message, (session, message) => {
@@ -156,11 +156,11 @@ export interface Response<T> extends GenericResponse {
 interface GenericResponse {
 	Success: boolean;
 	Data: any;
-	ErrorData: HttpError;
+	ErrorData?: HttpError;
 }
 
 export interface HTTPParams {
-	[key: string]: boolean | string | number;
+	[key: string]: boolean | string | number | null;
 }
 
 export interface HttpError {

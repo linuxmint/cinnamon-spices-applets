@@ -17,15 +17,16 @@ export function downloadSongFromYoutube(args: Arguments) {
         onDownloadFailed
     } = args
 
+
     let hasBeenCancelled = false
 
-    // when using the default value of the settings, the dir starts with ~ what can't be understand when executing command. Else it starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
-    // TODO: Shouldn't this be done in configs(at least replacing ~)? 
+    // When using the default value of the settings, the dir starts with ~ what can't be understand when executing command. 
+    // After changing the value in the configs dialogue, the value starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
     const music_dir_absolut =
         downloadDir.replace('~', get_home_dir()).replace('file://', '')
 
-    const downloadCommand = `
-        youtube-dl --output "${music_dir_absolut}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replace('"', '\"')}" --add-metadata --embed-thumbnail`
+    // ytsearch option found here https://askubuntu.com/a/731511/1013434 (not given in the youtube-dl docs ...)
+    const downloadCommand = `youtube-dl --output "${music_dir_absolut}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`
 
     const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
 
@@ -52,7 +53,7 @@ export function downloadSongFromYoutube(args: Arguments) {
 
     function cancel() {
         hasBeenCancelled = true
-        // it seems to be no problem to call this after the process has already finished
+        // it seems to be no problem to call this even after the process has already finished
         process.force_exit()
     }
 

@@ -2,7 +2,7 @@ const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { messageTray } = imports.ui.main;
 const { Icon, IconType } = imports.gi.St
 
-import { RADIO_SYMBOLIC_ICON_NAME } from "consts";
+import { RADIO_SYMBOLIC_ICON_NAME } from "../../consts";
 
 const messageSource = new SystemNotificationSource('Radio Applet')
 messageTray.add(messageSource)

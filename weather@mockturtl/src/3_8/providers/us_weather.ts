@@ -6,12 +6,13 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "lib/httpLib";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { SunCalc } from "lib/sunCalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "types";
-import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin } from "utils";
+import { HttpError } from "../lib/httpLib";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { getTimes } from "suncalc";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
+import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../utils";
+import { DateTime } from "luxon";
 
 export class USWeather implements WeatherProvider {
 
@@ -25,49 +26,46 @@ export class USWeather implements WeatherProvider {
 	public readonly maxHourlyForecastSupport = 156;
 	public readonly needsApiKey = false;
 
-	private sunCalc: SunCalc;
-
 	private sitesUrl = "https://api.weather.gov/points/";
 
 	private app: WeatherApplet;
-	private grid: GridPayload = null;
+	private grid?: GridPayload;
 	/** In metres */
 	private readonly MAX_STATION_DIST = 50000;
-	private observationStations: StationPayload[] = null;
-	private currentLoc: LocationData = null;
-	private currentLocID: string = null;
+	private observationStations: StationPayload[] = [];
+	// First time called this is set
+	private currentLoc!: LocationData;
+	private currentLocID!: string;
 
 	constructor(_app: WeatherApplet) {
 		this.app = _app;
-		this.sunCalc = new SunCalc();
 	}
 
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
-		if (loc == null) return null;
-
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		// getting grid and station data first time or location changed
 		let locID = loc.lat.toString() + "," + loc.lon.toString();
 		if (!this.grid || !this.observationStations || this.currentLocID != locID) {
-			Log.Instance.Print("Downloading new site data")
+			Logger.Info("Downloading new site data")
 			this.currentLoc = loc;
 			this.currentLocID = locID;
 
 			let grid = await this.GetGridData(loc);
 			if (grid == null) return null;
-			Log.Instance.Debug("Grid found: " + JSON.stringify(grid, null, 2));
+			Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
 
 			let observationStations = await this.GetStationData(grid.properties.observationStations);
-			if (observationStations == null) return null;
+			if (observationStations == null) 
+				return null;
 
 			// Caching
 			this.grid = grid;
 			this.observationStations = observationStations;
 		}
 		else {
-			Log.Instance.Debug("Site data downloading skipped")
+			Logger.Debug("Site data downloading skipped")
 		}
 
 		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
@@ -79,14 +77,16 @@ export class USWeather implements WeatherProvider {
 		let forecast = await forecastPromise;
 
 		if (!hourly || !forecast) {
-			Log.Instance.Error("Failed to obtain forecast Data");
+			Logger.Error("Failed to obtain forecast Data");
 			return null;
 		}
 
 		// Parsing data
-		let weather = this.ParseCurrent(observations, hourly);
-		weather.forecasts = this.ParseForecast(forecast);
-		weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
+		let weather = this.ParseCurrent(observations, hourly, loc);
+		if (!!weather) {
+			weather.forecasts = this.ParseForecast(forecast) ?? [];
+			weather.hourlyForecasts = this.ParseHourlyForecast(hourly) ?? undefined;
+		}
 
 		return weather;
 	};
@@ -95,9 +95,9 @@ export class USWeather implements WeatherProvider {
 	 * Handles App errors internally
 	 * @param loc 
 	 */
-	private async GetGridData(loc: LocationData): Promise<GridPayload> {
+	private async GetGridData(loc: LocationData): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
-		let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), null, (msg) => this.OnObtainingGridData(msg));
+		let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
 		return siteData;
 	}
 
@@ -105,7 +105,7 @@ export class USWeather implements WeatherProvider {
 	 * Handles app errors internally
 	 * @param stationListUrl 
 	 */
-	private async GetStationData(stationListUrl: string): Promise<StationPayload[]> {
+	private async GetStationData(stationListUrl: string): Promise<StationPayload[] | undefined> {
 		let stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl);
 		return stations?.features;
 	}
@@ -122,9 +122,9 @@ export class USWeather implements WeatherProvider {
 			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
 			if (element.dist > range) break;
 			// do not show errors here, we call multiple observation sites
-			let observation = await this.app.LoadJsonAsync<ObservationPayload>(stations[index].id + "/observations/latest", null, (msg) => false);
+			let observation = await this.app.LoadJsonAsync<ObservationPayload>(stations[index].id + "/observations/latest", {}, (msg) => false);
 			if (observation == null) {
-				Log.Instance.Debug("Failed to get observations from " + stations[index].id);
+				Logger.Debug("Failed to get observations from " + stations[index].id);
 			}
 			else {
 				observations.push(observation);
@@ -137,8 +137,8 @@ export class USWeather implements WeatherProvider {
 	 * 
 	 * @param message Soup Message object
 	 */
-	private OnObtainingGridData(this: USWeather, message: HttpError): boolean {
-		if (message.code == 404) {
+	private OnObtainingGridData = (message: HttpError): boolean => {
+		if (message.code == 404 && message?.response?.response_body?.data != null) {
 			let data = JSON.parse(message?.response?.response_body?.data);
 			if (data.title == "Data Unavailable For Requested Point") {
 				this.app.ShowError({
@@ -159,7 +159,7 @@ export class USWeather implements WeatherProvider {
 	 * station data
 	 * @param observations 
 	 */
-	private MeshObservationData(observations: ObservationPayload[]): ObservationPayload {
+	private MeshObservationData(observations: ObservationPayload[]): ObservationPayload | null {
 		if (observations.length < 1) return null;
 		let result = observations[0];
 		if (observations.length == 1) return result;
@@ -180,35 +180,35 @@ export class USWeather implements WeatherProvider {
 			if (result.properties.icon == null) {
 				result.properties.icon = element.properties.icon;
 				result.properties.textDescription = element.properties.textDescription;
-				Log.Instance.Debug("Weather condition" + debugText);
+				Logger.Debug("Weather condition" + debugText);
 			}
 			if (result.properties.temperature.value == null) {
 				result.properties.temperature.value = element.properties.temperature.value;
-				Log.Instance.Debug("Temperature" + debugText);
+				Logger.Debug("Temperature" + debugText);
 			}
 			if (result.properties.windSpeed.value == null) {
 				result.properties.windSpeed.value = element.properties.windSpeed.value;
-				Log.Instance.Debug("Wind Speed" + debugText);
+				Logger.Debug("Wind Speed" + debugText);
 			}
 			if (result.properties.windDirection.value == null) {
 				result.properties.windDirection.value = element.properties.windDirection.value;
-				Log.Instance.Debug("Wind degree" + debugText);
+				Logger.Debug("Wind degree" + debugText);
 			}
 			if (result.properties.barometricPressure.value == null) {
 				result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-				Log.Instance.Debug("Pressure" + debugText);
+				Logger.Debug("Pressure" + debugText);
 			}
 			if (result.properties.relativeHumidity.value == null) {
 				result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-				Log.Instance.Debug("Humidity" + debugText);
+				Logger.Debug("Humidity" + debugText);
 			}
 			if (result.properties.windChill.value == null) {
 				result.properties.windChill.value = element.properties.windChill.value;
-				Log.Instance.Debug("WindChill" + debugText);
+				Logger.Debug("WindChill" + debugText);
 			}
 			if (result.properties.visibility.value == null) {
 				result.properties.visibility.value = element.properties.visibility.value;
-				Log.Instance.Debug("Visibility" + debugText);
+				Logger.Debug("Visibility" + debugText);
 			}
 		}
 		return result;
@@ -219,38 +219,43 @@ export class USWeather implements WeatherProvider {
 	 * @param json 
 	 * @param hourly can be null
 	 */
-	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload): WeatherData {
-		if (json.length == 0) {
-			Log.Instance.Error("No observation stations/data are available");
+	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData | null {
+		let observation = this.MeshObservationData(json);
+		if (observation == null || !this.observationStations[0]) {
+			Logger.Error("No observation stations/data are available");
 			return null;
 		}
-		let observation = this.MeshObservationData(json);
-		let timestamp = new Date(observation.properties.timestamp);
-		let times = this.sunCalc.getTimes(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+
+		let timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
+		let times = (getTimes as correctGetTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+		let suntimes: SunTime = {
+			sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
+			sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
+		}
 		try {
 			let weather: WeatherData = {
 				coord: {
-					lat: observation.geometry.coordinates[1],
-					lon: observation.geometry.coordinates[0]
+					lat: observation?.geometry?.coordinates[1],
+					lon: observation?.geometry?.coordinates[0]
 				},
 				location: {
-					city: /*this.stations[0].properties.name*/ null,
-					country: /*"USA"*/null,
+					city: /*this.stations[0].properties.name*/ undefined,
+					country: /*"USA"*/undefined,
 					url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
 					timeZone: this.observationStations[0].properties.timeZone,
 					distanceFrom: this.observationStations[0].dist
 				},
 				date: timestamp,
-				sunrise: times.sunrise,
-				sunset: times.sunset,
+				sunrise: suntimes.sunrise,
+				sunset: suntimes.sunset,
 				wind: {
 					speed: KPHtoMPS(observation.properties.windSpeed.value),
 					degree: observation.properties.windDirection.value
 				},
 				temperature: CelsiusToKelvin(observation.properties.temperature.value),
-				pressure: observation.properties.barometricPressure.value / 100, // from Pa to hPa
+				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
-				condition: this.ResolveCondition(observation.properties.icon, IsNight(times)),
+				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};
 
@@ -267,58 +272,70 @@ export class USWeather implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather Parsing error: " + e);
+			Logger.Error("US Weather Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
 
 	private CheckIfHasThreeElementsForDay(json: ForecastsPayload): boolean {
-		if (json.properties.periods.length < 3) return false;
+		if (json?.properties?.periods?.length < 3 || this.observationStations[0]?.properties)
+			return false;
 
 		let counter = 0;
 		for (let index = 1; index < 3; index++) {
 			const element = json.properties.periods[index];
 			const prevElement = json.properties.periods[index - 1];
-			let prevDate = new Date(prevElement.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			if (prevDate == curDate)
+			let prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
+			let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+			if (OnSameDay(prevDate, curDate))
 				counter++;
 			else
 				counter = 0;
 
-			if (counter > 1)
+			if (counter > 1) {
+				global.log("3 elements")
 				return true;
-
-			return  false;
+			}
 		}
+
+		return false;
 	}
 
 	private FindTodayIndex(json: ForecastsPayload, startIndex: number = 0): number {
-		let today = new Date();
+		if (!this.observationStations[0] || !json?.properties?.periods) {
+			return -1;
+		}
+
+		let today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
 		for (let index = startIndex; index < json.properties.periods.length; index++) {
 			const element = json.properties.periods[index];
-			let todayDate = today.toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			let curDate = new Date(element.startTime).toLocaleDateString(undefined, {timeZone: this.observationStations[0].properties.timeZone});
-			if (todayDate != curDate)
+			let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+			if (!OnSameDay(today, curDate))
 				continue;
+			global.log(index)
 			return index;
 		}
+
+		return -1;
 	}
 
-	private ParseForecast(json: ForecastsPayload): ForecastData[] {
+	private ParseForecast = (json: ForecastsPayload): ForecastData[] | null => {
 		let forecasts: ForecastData[] = [];
 		try {
 			// Check if beginning of the array has more than 2 elements for a single day (should be 2 day/night), then skip
 			let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
 			// Find today if doesn't start with that
 			startIndex = this.FindTodayIndex(json, startIndex);
+			if (startIndex == -1)
+				return null;
+
 			// if starts with night, handling today separately
 			if (json.properties.periods[startIndex].isDaytime == false) {
 				startIndex++;
 				let today = json.properties.periods[0]
 				let forecast: ForecastData = {
-					date: new Date(today.startTime),
+					date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
 					temp_min: FahrenheitToKelvin(today.temperature),
 					temp_max: FahrenheitToKelvin(today.temperature),
 					condition: this.ResolveCondition(today.icon),
@@ -332,7 +349,7 @@ export class USWeather implements WeatherProvider {
 				let night = json.properties.periods[i + 1]; // this can be undefined
 				if (!night) night = day;
 				let forecast: ForecastData = {
-					date: new Date(day.startTime),
+					date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
 					temp_min: FahrenheitToKelvin(night.temperature),
 					temp_max: FahrenheitToKelvin(day.temperature),
 					condition: this.ResolveCondition(day.icon),
@@ -342,32 +359,32 @@ export class USWeather implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather Forecast Parsing error: " + e);
+			Logger.Error("US Weather Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
 
-	private ParseHourlyForecast(json: ForecastsPayload, self: USWeather): HourlyForecastData[] {
+	private ParseHourlyForecast = (json: ForecastsPayload): HourlyForecastData[] | null => {
 		let forecasts: HourlyForecastData[] = [];
 		try {
 			for (let i = 0; i < json.properties.periods.length; i++) {
 				let hour = json.properties.periods[i];
-				let timestamp = new Date(hour.startTime);
+				let timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
 
 				let forecast: HourlyForecastData = {
 					date: timestamp,
 					temp: CelsiusToKelvin(hour.temperature),
-					condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
-					precipitation: null
+					condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
+					precipitation: undefined
 				}
 				forecasts.push(forecast);
 			}
 			return forecasts;
 		}
 		catch (e) {
-			Log.Instance.Error("US Weather service Forecast Parsing error: " + e);
-			self.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
+			Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}
 	}
@@ -378,10 +395,15 @@ export class USWeather implements WeatherProvider {
 	 * @param isNight 
 	 */
 	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
-		if (icon == null) return null;
+		if (icon == null) 
+			return {
+				main: _("Unknown"),
+				description: _("Unknown"),
+				customIcon: "cloud-refresh-symbolic",
+				icons: ["weather-severe-alert"]
+			};
 		let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
-		let iconType = this.app.config.IconType;
-		switch (code[0]) {
+		switch (code?.[0]) {
 			case "skc": // Fair/clear
 				return {
 					main: _("Clear"),

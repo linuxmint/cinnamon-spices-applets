@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-21 21:19+0000\n"
+"POT-Creation-Date: 2021-07-01 00:50+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -78,15 +78,6 @@ msgstr "Çık"
 msgid "Shutdown the computer"
 msgstr "Bilgisayarı kapat"
 
-msgid "Home"
-msgstr "Başlangıç"
-
-msgid "Computer"
-msgstr "Bilgisayar"
-
-msgid "Browse network"
-msgstr "Ağa göz at"
-
 msgid "Run with NVIDIA GPU"
 msgstr "NVIDIA GPU ile çalıştır"
 
@@ -105,6 +96,15 @@ msgstr "Favorilere ekle"
 msgid "Uninstall"
 msgstr "Kaldır"
 
+msgid "Home"
+msgstr "Ev Dizini"
+
+msgid "Computer"
+msgstr "Bilgisayar"
+
+msgid "Browse network"
+msgstr "Ağa göz at"
+
 msgid "Find files..."
 msgstr "Dosyaları bul..."
 
@@ -114,14 +114,11 @@ msgstr "Lütfen bekleyin..."
 msgid "No recent Items"
 msgstr "Son dosya yok"
 
-msgid "Solution:"
-msgstr "Çözüm:"
-
 msgid "Click to copy"
 msgstr "Kopyalamak için tıkla"
 
-msgid "Search web for"
-msgstr "İnternette arama seçeneği için"
+msgid "Trash"
+msgstr "Çöp"
 
 msgid "Favorites"
 msgstr "Favoriler"
@@ -155,6 +152,9 @@ msgstr "Çöpe taşı"
 
 msgid "Error while moving file to trash:"
 msgstr "Dosya çöpe taşınırken hata:"
+
+msgid "Error while opening file:"
+msgstr "Dosya açılırken hata:"
 
 msgid "Open"
 msgstr "Aç"
@@ -211,11 +211,11 @@ msgid "Cinnamenu"
 msgstr "Cinnamenü"
 
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"Biçimlendirme seçenekleri, web yer imleri, arama sağlayıcı desteği ve "
-"eşleşik arama sağlayan esnek bir menü."
+"Izgara veya liste düzeni seçenekleri, dosya tarayıcısı ve imoji araması "
+"içeren esnek bir menü."
 
 msgid "Behavior"
 msgstr "Davranış"
@@ -400,23 +400,23 @@ msgstr "Yok"
 msgid "Choose where to show application descriptions"
 msgstr "Uygulama açıklamalarının nerede gösterileceğini seçin"
 
-msgid "Session buttons location"
-msgstr "Oturum düğmelerinin konumu"
+msgid "Sidebar location"
+msgstr "Kenar çubuğu konumu"
 
 msgid "Top"
-msgstr "Tepede"
+msgstr "Üstte"
 
 msgid "Bottom"
-msgstr "Alt bölme"
+msgstr "Altta"
 
 msgid "Left"
-msgstr "Sola"
+msgstr "Solda"
 
 msgid "Right"
-msgstr "Sağa"
+msgstr "Sağda"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr "Oturum düğmelerinin (kapat, çıkış vb.) nerede gösterileceğini seç"
+msgid "Choose where to show the sidebar"
+msgstr "Kenar çubuğunun nerede gösterileceğini seçin"
 
 msgid ""
 "\n"
@@ -425,11 +425,18 @@ msgstr ""
 "\n"
 "Bilgi/ipucu: Menü boyutunu köşeden tutarak değiştirebilirsiniz.\n"
 
-msgid "Add favorites to session buttons"
-msgstr "Oturum düğmelerinin yanına sık kullanılanları ekle"
+msgid "Show favorites on sidebar"
+msgstr "Kenar çubuğunda sık kullanılanları göster"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Oturum düğmelerinin yanında favori uygulama simgelerinizi gösterin"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+"Kenar çubuğunda sık kullanılan uygulamaları ve dosya simgelerini gösterir"
+
+msgid "Show recent items"
+msgstr "Son kullanılan ögeleri göster"
+
+msgid "Show recent items category in the menu"
+msgstr "Menüde son kullanılan ögeler kategorisini gösterir"
 
 msgid "Show favorite apps category"
 msgstr "Favori uygulamalar kategorisini göster"
@@ -449,11 +456,17 @@ msgstr "Son kullanılan kategori"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Uygulama listesi üstünde fare ile otomatik kaydır"
 
-msgid "Enable emoji search"
-msgstr "Emoji aramayı etkinleştir"
+msgid "Show hidden files"
+msgstr "Gizli dosyaları göster"
+
+msgid "Show hidden files in folder view"
+msgstr "Gizli dosyaları dizin görünümünde göster"
+
+msgid "Emoji search"
+msgstr "İmoji araması"
 
 msgid "Show emojis in search results"
-msgstr "Emojileri arama seçeneklerinde gösterir"
+msgstr "Arama sonuçlarında imojileri gösterir"
 
 msgid "Web search option"
 msgstr "Web arama seçenekleri"
@@ -464,26 +477,61 @@ msgstr "Google"
 msgid "Bing"
 msgstr "Bing"
 
+msgid "Baidu"
+msgstr "Baidu"
+
 msgid "Yahoo"
 msgstr "Yahoo"
 
+msgid "Yandex"
+msgstr "Yandex"
+
 msgid "DuckDuckGo"
 msgstr "DuckDuckGo"
+
+msgid "Ask"
+msgstr "Ask"
+
+msgid "Ecosia"
+msgstr "Ecosia"
+
+msgid "AOL"
+msgstr "AOL"
+
+msgid "Startpage"
+msgstr "Startpage"
 
 msgid "Show an internet search option in search results"
 msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
 
 msgid "Search home folder"
-msgstr "Ev dizinini ara"
+msgstr "Ev dizininde ara"
 
-msgid "When searching, also search home folder for files"
-msgstr "Arama yaparken, ev dizininde de arama yap"
+msgid "When searching, also search my home folder for files"
+msgstr "Arama yaparken, ev dizininde de dosya araması yapar"
 
-msgid "Show hidden files"
-msgstr "Gizli dosyaları göster"
+msgid "Web bookmarks search"
+msgstr "Web sık kullanılanlarında ara"
 
-msgid "Show hidden files in folder view"
-msgstr "Gizli dosyaları dizin görünümünde göster"
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Arama yaparken tarayıcının web yer imlerinde de arama yapar (Google Chrome, "
+"Firefox, Chromium, Opera, Brave)\n"
+"Not: Firefox yer imlerinde arama yapmak için (Ubuntu ve Linux Mint dahil "
+"Debian tabanlı dağıtımlarda) gir1.2-gda-5.0 paketini ya da (Arch tabanlı "
+"dağıtımlarda) libgda paketini yüklemeniz ve bilgisayarınızı yeniden "
+"başlatmanız gerekir."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia araması"
+
+msgid "Show some Wikipedia results"
+msgstr "Bazı Wikipedia sonuçlarını gösterir"
 
 msgid "Use a custom icon size"
 msgstr "Özel simge boyutu kullan"
@@ -497,8 +545,21 @@ msgstr "Panel simge boyutu"
 msgid "Choose a custom size for the panel icon"
 msgstr "Panel simgesi için özel boyut seçin"
 
-msgid "Session buttons icon size"
-msgstr "Oturum düğmelerinin simge boyutu"
+msgid "Sidebar icon size"
+msgstr "Kenar çubuğu simge boyutu"
 
-msgid "Use session buttons box style"
-msgstr "Oturum düğmelerini kutu stilinde kullan"
+msgid "Use sidebar box style"
+msgstr "Kenar çubuğu kutusu stilini kullan"
+
+msgid "Use a sidebar box style"
+msgstr "Kenar çubuğunda bir kutu stili gösterir"
+
+msgid "Use tile style"
+msgstr "Döşeme stilini kullan"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Uygulama düğmelerinde bir kutu stili gösterir (Not: bazı temalarda "
+"çalışmayabilir)"

@@ -1,4 +1,4 @@
-import { createBasicNotification } from "ui/Notifications/NotificationBase";
+import { createBasicNotification } from "./NotificationBase";
 
 const { spawnCommandLine } = imports.misc.util
 

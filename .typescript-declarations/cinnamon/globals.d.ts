@@ -5,36 +5,42 @@ declare function clearInterval(intervalID: number): void;
 declare function setTimeout(callback: { (): void }, delay: number): number;
 declare function clearTimeout(timouetId: number): void;
 
-declare class global {
-    static log(...any: Array<any>): void;
-    static logWarning(...any: Array<any>): void;
-    static logError(...text: Array<string>): void;
-    static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
+/** Interface typing for the global variable.
+ * Extendable, for example overloading in a d.ts file:
+ * @example declare interface GlobalExtensions {
+		trayReloading?: boolean;
+	}
+ */
+declare interface Global {
+    log(...any: Array<any>): void;
+    logWarning(...any: Array<any>): void;
+    logError(...text: Array<string>): void;
+    create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     /** Main Cinnamon settings */
-    static settings: imports.gi.Gio.Settings;
-    static set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
-    static unset_cursor(): void;
+    settings: imports.gi.Gio.Settings;
+    set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
+    unset_cursor(): void;
     /** equivalent to imports.gi.Meta */
-    static screen: any;
-    static display: imports.gi.Meta.Display;
-    static stage: imports.gi.Clutter.Stage;
+    screen: any;
+    display: imports.gi.Meta.Display;
+    stage: imports.gi.Clutter.Stage;
     /** Gets the pointer coordinates and current modifier key state */
-    static get_pointer(): [number, number, imports.gi.Clutter.ModifierType]
+    get_pointer(): [number, number, imports.gi.Clutter.ModifierType]
     /**
      * Sets the pointer coordinates
      * 
      * @param x the X coordinate of the pointer, in global coordinates
      * @param y the Y coordinate of the pointer, in global coordinates
      */
-    static set_pointer(x: number, y: number): void
-    static focus_manager: imports.gi.St.FocusManager
+    set_pointer(x: number, y: number): void
+    focus_manager: imports.gi.St.FocusManager
 
-    static ui_scale: number
+    ui_scale: number;
 
-    static stage_input_mode: imports.gi.Cinnamon.StageInputMode
-
-
+    stage_input_mode: imports.gi.Cinnamon.StageInputMode;
 }
+
+declare const global: Global;
 
 interface String {
     format(...args: string[]): string
@@ -82,7 +88,7 @@ declare namespace imports.mainloop {
      * @param binding 
      */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
-    export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): number;
+    export function timeout_add(milliseconds: number, binding: () => any, errorCallback?: () => null): number;
     export function source_remove(id: any): void;
 }
 

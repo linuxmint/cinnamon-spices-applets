@@ -57,8 +57,6 @@ afterEach(() => {
     const serverPlayer = createMpvDbusServerPlayer()
     serverPlayer.StopSync()
     resetInterfaces()
-
-    jest.clearAllMocks();
 })
 
 describe('Starting mpv with valid url is working', () => {

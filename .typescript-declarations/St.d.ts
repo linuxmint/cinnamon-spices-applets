@@ -1,17 +1,16 @@
 declare namespace imports.gi.St {
 
-	/**
-	 * This should be implemented by all classes inheriting from Clutter.Actor except St.Widget and classes inheriting from St.Bin. See Cluter.Actor x_align for an explanation
-	 */
-	interface DefaultAlignProps {
-		x_align: Clutter.ActorAlign;
-		y_align: Clutter.ActorAlign
-	}
-
 
 	// CLASSES
 
 	export class Adjustment {
+		actor: Clutter.Actor;
+		lower: number;
+		page_increment: number;
+		page_size: number;
+		step_increment: number;
+		upper: number;
+		value: number;
 		set_value(value: number): void;
 		/**
 		 * @returns :
@@ -28,7 +27,7 @@ declare namespace imports.gi.St {
 
 
 	interface BinOptions extends WidgetOptions {
-		child: Clutter.Actor,
+		child: Clutter.Actor | null,
 		x_align: Align,
 		y_align: Align,
 		x_fill: boolean,
@@ -49,7 +48,7 @@ declare namespace imports.gi.St {
 
 	}
 
-	type BoxLayoutOptionsType = WidgetOptions & DefaultAlignProps
+	type BoxLayoutOptionsType = WidgetOptions
 
 	interface BoxLayoutOptions extends BoxLayoutOptionsType {
 		vertical: boolean;
@@ -58,9 +57,29 @@ declare namespace imports.gi.St {
 
 	interface BoxLayoutMethodsReadableProps extends WidgetMethodsReadableProps {
 		add(element: Widget, options?: AddOptions): void;
+		/**
+		 * Get the value of the St.BoxLayout.pack-start property.
+		 * @returns true if pack-start is enabled
+		 */
+		get_pack_start(): boolean;
+		/**
+		 * Get the value of the St.BoxLayout.vertical property.
+		 * @returns true if the layout is vertical
+		 */
+		get_vertical(): boolean;
+		/**
+		 * Set the value of the St.BoxLayout.pack-start property.
+		 * @param pack_start true if the layout should use pack-start
+		 */
+		set_pack_start(pack_start: boolean): void;
+		/**
+		 * Set the value of the St.BoxLayout.vertical property
+		 * @param vertical true if the layout should be vertical
+		 */
+		set_vertical(vertical: boolean): void; 
 	}
 
-	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps { }
+	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps, Scrollable { }
 
 	export class BoxLayout {
 		constructor(options?: Partial<BoxLayoutOptions>)
@@ -94,7 +113,7 @@ declare namespace imports.gi.St {
 		connect(signal: 'repaint', callback: (actor: this) => void): number
 	}
 
-	type DrawingAreaType = IDrawingArea & Widget & DefaultAlignProps
+	type DrawingAreaType = IDrawingArea & Widget
 	interface DrawingArea extends DrawingAreaType { }
 
 	export class DrawingArea {
@@ -117,7 +136,7 @@ declare namespace imports.gi.St {
 
 	}
 
-	type IconOptionsType = WidgetOptions & DefaultAlignProps
+	type IconOptionsType = WidgetOptions
 
 	interface IconOptions extends IconOptionsType {
 
@@ -233,7 +252,7 @@ declare namespace imports.gi.St {
 
 	}
 
-	type LabelOptionsType = WidgetOptions & DefaultAlignProps
+	type LabelOptionsType = WidgetOptions
 
 	interface LabelOptions extends LabelOptionsType {
 		clutter_text: gi.Clutter.Text;
@@ -260,7 +279,7 @@ declare namespace imports.gi.St {
 		connect(signal: 'scroll-start' | 'scroll-stop', callback: (actor: this) => void): number
 	}
 
-	type ScrollBarType = IScrollBar & Widget & DefaultAlignProps
+	type ScrollBarType = IScrollBar & Widget
 	interface ScrollBar extends ScrollBarType { }
 
 	export class ScrollBar {
@@ -291,8 +310,12 @@ declare namespace imports.gi.St {
 	export class ScrollViewFade {
 
 	}
-	export class Scrollable {
 
+	interface Scrollable {
+		hadjustment: Adjustment;
+		vadjustment: Adjustment;
+		get_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): [hadjustment: Adjustment, vadjustment: Adjustment];
+		set_adjustments(hadjustment: Adjustment, vadjustment: Adjustment): void;
 	}
 	export class Settings {
 

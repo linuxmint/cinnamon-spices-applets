@@ -37,7 +37,7 @@ declare namespace imports.gi.GObject {
         bind_property_with_closures (source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: Closure, transform_from: Closure) : Binding;
 		/** signal+property: string, callback: Function */
 		connect (...params: any) : any;
-        // disconnect (signal_spec: string) : void;
+        disconnect (signal_id: any) : void;
         dup_data (key: string, dup_func: GLib.DuplicateFunc, user_data: any) : any;
         dup_qdata (quark: GLib.Quark, dup_func: GLib.DuplicateFunc, user_data: any) : any;
         force_floating () : void;

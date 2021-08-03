@@ -1,0 +1,6 @@
+{
+    "uuid": "app-launcher@mchilli",
+    "name": "App Launcher",
+    "description": "A simple App Launcher",
+    "max-instances": -1
+}

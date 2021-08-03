@@ -1,12 +1,13 @@
-import { OpenUrl } from "lib/commandRunner";
-import { Config } from "config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "consts";
-import { LocationStore } from "location_services/locationstore";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "types";
-import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "utils";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { OpenUrl } from "../lib/commandRunner";
+import { Config } from "../config";
+import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "../consts";
+import { LocationStore } from "../location_services/locationstore";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
+import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
+import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
@@ -26,31 +27,31 @@ const STYLE_LOCATION_SELECTOR = 'location-selector'
 export class CurrentWeather {
 	public readonly actor: imports.gi.St.Bin;
 
+	// TODO: assert these properly
+	private weatherIcon!: imports.gi.St.Icon;
+	private weatherSummary!: imports.gi.St.Label;
 
-	private weatherIcon: imports.gi.St.Icon;
-	private weatherSummary: imports.gi.St.Label;
-
-	private locationButton: WeatherButton;
+	private locationButton!: WeatherButton;
 	/** Actor inside locationButton */
-	private location: imports.gi.St.Button;
+	private location!: imports.gi.St.Button;
 
-	private previousLocationButton: WeatherButton;
-	private nextLocationButton: WeatherButton;
+	private previousLocationButton!: WeatherButton;
+	private nextLocationButton!: WeatherButton;
 
 	/** If config._showSunrise is not true this can be null|deallocated */
-	private sunriseLabel: imports.gi.St.Label;
+	private sunriseLabel!: imports.gi.St.Label;
 	/** If config._showSunrise is not true this can be null|deallocated */
-	private sunsetLabel: imports.gi.St.Label;
-	private temperatureLabel: imports.gi.St.Label;
-	private humidityLabel: imports.gi.St.Label;
-	private pressureLabel: imports.gi.St.Label;
-	private windLabel: imports.gi.St.Label;
-	private windDirectionIcon: imports.gi.St.Icon;
-	private apiUniqueLabel: imports.gi.St.Label;
-	private apiUniqueCaptionLabel: imports.gi.St.Label;
+	private sunsetLabel!: imports.gi.St.Label;
+	private temperatureLabel!: imports.gi.St.Label;
+	private humidityLabel!: imports.gi.St.Label;
+	private pressureLabel!: imports.gi.St.Label;
+	private windLabel!: imports.gi.St.Label;
+	private windDirectionIcon!: imports.gi.St.Icon;
+	private apiUniqueLabel!: imports.gi.St.Label;
+	private apiUniqueCaptionLabel!: imports.gi.St.Label;
 
-	private immediatePrecipitationBox: imports.gi.St.Bin;
-	private immediatePrecipitationLabel: imports.gi.St.Label;
+	private immediatePrecipitationBox!: imports.gi.St.Bin;
+	private immediatePrecipitationLabel!: imports.gi.St.Label;
 
 	private app: WeatherApplet;
 
@@ -83,7 +84,7 @@ export class CurrentWeather {
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
 		} catch (e) {
-			Log.Instance.Error("DisplayWeatherError: " + e);
+			Logger.Error("DisplayWeatherError: " + e, e);
 			return false;
 		}
 	};
@@ -286,7 +287,7 @@ export class CurrentWeather {
 
 	// Data display helpers
 
-	private SetImmediatePrecipitation(precip: ImmediatePrecipitation, config: Config): void {
+	private SetImmediatePrecipitation(precip: ImmediatePrecipitation | undefined, config: Config): void {
 		if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
 			this.immediatePrecipitationBox.hide();
 			return;
@@ -307,7 +308,7 @@ export class CurrentWeather {
 		}
 	}
 
-	private SetSunriseAndSunset(sunrise: Date, sunset: Date, tz: string): void {
+	private SetSunriseAndSunset(sunrise: DateTime | null, sunset: DateTime | null, tz?: string): void {
 		let sunriseText = "";
 		let sunsetText = "";
 		if (sunrise != null && sunset != null && this.app.config._showSunrise) {
@@ -319,7 +320,7 @@ export class CurrentWeather {
 		this.sunsetLabel.text = sunsetText;
 	}
 
-	private SetAPIUniqueField(extra_field: APIUniqueField) {
+	private SetAPIUniqueField(extra_field?: APIUniqueField) {
 		// API Unique display
 		this.apiUniqueLabel.text = "";
 		this.apiUniqueCaptionLabel.text = "";
@@ -337,7 +338,7 @@ export class CurrentWeather {
 					value = _(extra_field.value);
 					break;
 			}
-			this.apiUniqueLabel.text = value;
+			this.apiUniqueLabel.text = value ?? "";
 		}
 	}
 
@@ -357,19 +358,22 @@ export class CurrentWeather {
 		this.weatherSummary.text = condition;
 	}
 
-	private SetTemperature(temperature: number) {
+	private SetTemperature(temperature: number | null) {
 		let temp = TempToUserConfig(temperature, this.app.config);
 		if (temp == null) return;
 		this.temperatureLabel.text = temp;
 	}
 
-	private SetHumidity(humidity: number) {
+	private SetHumidity(humidity: number | null) {
 		if (humidity != null) {
 			this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
 		}
 	}
 
-	private async SetWind(windSpeed: number, windDegree: number) {
+	private async SetWind(windSpeed: number | null, windDegree: number | null) {
+		if (windSpeed == null || windDegree == null)
+			return;
+
 		let wind_direction = CompassDirection(windDegree);
 		this.windDirectionIcon.icon_name = wind_direction;
 		if (this.app.config._displayWindAsText) {
@@ -384,16 +388,18 @@ export class CurrentWeather {
 		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
 	}
 
-	private SetPressure(pressure: number) {
+	private SetPressure(pressure: number | null) {
 		if (pressure != null) {
 			this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
 		}
 	}
 
-	private SetLocation(locationString: string, url: string) {
-		this.location.label = locationString;
-		this.locationButton.url = url;
-		if (!url) this.locationButton.disable();
+	private SetLocation(locationString: string, url?: string) {
+		this.location.label = locationString;			
+		if (!url) 
+			this.locationButton.disable();
+		else
+			this.locationButton.url = url;
 	}
 
 	// Callbacks
@@ -409,7 +415,7 @@ export class CurrentWeather {
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
-		Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+		Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
 		// Hide/show location selectors based on how many items are in storage
 		if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
 			this.ShowLocationSelectors();

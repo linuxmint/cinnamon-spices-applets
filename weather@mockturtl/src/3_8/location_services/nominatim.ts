@@ -1,7 +1,8 @@
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { LocationData } from "types";
-import { _ } from "utils";
+import { DateTime } from "luxon";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { LocationData } from "../types";
+import { _ } from "../utils";
 
 /**
  * Nominatim communication interface
@@ -9,7 +10,7 @@ import { _ } from "utils";
 export class GeoLocation {
 	private url = "https://nominatim.openstreetmap.org/search/";
 	private params = "?format=json&addressdetails=1&limit=1";
-	private App: WeatherApplet = null;
+	private App: WeatherApplet;
 	private cache: LocationCache = {};
 
 	constructor(app: WeatherApplet) {
@@ -20,12 +21,12 @@ export class GeoLocation {
 	 * Finds location and rebuilds entryText so it can be looked up again
 	 * @param searchText 
 	 */
-	public async GetLocation(searchText: string): Promise<LocationData> {
+	public async GetLocation(searchText: string): Promise<LocationData | null> {
 		try {
 			searchText = searchText.trim();
 			let cached = this.cache?.searchText;
 			if (cached != null) {
-				Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
+				Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
 				return cached;
 			}
 
@@ -41,20 +42,20 @@ export class GeoLocation {
 				})
 				return null;
 			}
-			Log.Instance.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+			Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
 			let result: LocationData = {
 				lat: parseFloat(locationData[0].lat),
 				lon: parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
 				country: locationData[0].address.country,
-				timeZone: null,
+				timeZone: DateTime.now().zoneName,
 				entryText: this.BuildEntryText(locationData[0]),
 			}
 			this.cache[searchText] = result;
 			return result;
 		}
 		catch (e) {
-			Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
+			Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
 			this.App.ShowError({
 				type: "soft",
 				detail: "bad api response",

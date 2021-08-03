@@ -30,7 +30,6 @@ You can also save locations what you entered manually and switch between them in
 | **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
 | **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
 | **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
-| **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
 
 ### OpenWeatherMap
 

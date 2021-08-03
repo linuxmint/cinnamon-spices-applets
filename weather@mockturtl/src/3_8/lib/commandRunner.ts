@@ -1,5 +1,5 @@
-import { Log } from "lib/logger";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { Logger } from "./logger";
+import { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
@@ -15,11 +15,11 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 		response.Data = JSON.parse(response.Data);
 	}
 	catch (e) {
-		Log.Instance.Error("Error: Command response is not JSON. The response: " + response.Data);
+		Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
 		response.Success = false;
 		response.ErrorData = {
 			Code: -1,
-			Message: null,
+			Message: "Failed to parse JSON",
 			Type: "jsonParse",
 		}
 	}
@@ -42,7 +42,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
 			let result: GenericResponse = {
 				Success: exitCode == 0,
-				ErrorData: null,
+				ErrorData: undefined,
 				Data: aStdout ?? null
 			}
 
@@ -71,7 +71,7 @@ export function OpenUrl(element: WeatherButton) {
 interface GenericResponse {
 	Success: boolean;
 	Data: any;
-	ErrorData: ErrorData;
+	ErrorData?: ErrorData;
 }
 
 interface TypedResponse<TData> extends GenericResponse {

@@ -1,10 +1,10 @@
-import { _ } from "utils";
+import { _ } from "../utils";
 
 const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 
 export class NotificationService {
-	private static instance: NotificationService = null;
+	private static instance: NotificationService;
 	/** Single instance of log */
 	public static get Instance() {
 		if (this.instance == null)

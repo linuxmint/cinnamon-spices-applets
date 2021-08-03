@@ -1,6 +1,6 @@
-import { createActivWidget } from "lib/ActivWidget";
-import { createSlider } from "lib/Slider";
-import { getVolumeIcon, POPUP_ICON_CLASS, POPUP_MENU_ITEM_CLASS, VOLUME_DELTA } from 'consts'
+import { createActivWidget } from "../lib/ActivWidget";
+import { createSlider } from "../lib/Slider";
+import { getVolumeIcon, POPUP_ICON_CLASS, POPUP_MENU_ITEM_CLASS, VOLUME_DELTA } from '../consts'
 
 const { BoxLayout, Icon, IconType } = imports.gi.St
 const { Tooltip } = imports.ui.tooltips

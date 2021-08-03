@@ -1,9 +1,10 @@
-import { Config } from "config";
-import { APPLET_ICON, ELLIPSIS } from "consts";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { HourlyForecastData, Precipitation } from "types";
-import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "utils";
+import { DateTime } from "luxon";
+import { Config } from "../config";
+import { APPLET_ICON, ELLIPSIS } from "../consts";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { HourlyForecastData, Precipitation } from "../types";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -14,14 +15,14 @@ export class UIHourlyForecasts {
 	// Hourly Weather
 	public actor: imports.gi.St.ScrollView;
 	private container: imports.gi.St.BoxLayout;
-	private hourlyForecasts: HourlyForecastUI[];
-	private hourlyContainers: imports.gi.St.BoxLayout[];
+	private hourlyForecasts: HourlyForecastUI[] = [];
+	private hourlyContainers: imports.gi.St.BoxLayout[] = [];
 
 	/** 
 	 * Stores the dates for each displayed hour, so we can scroll to them later.
 	 * Populated in the Display function.
 	 */
-	private hourlyForecastDates: Date[];
+	private hourlyForecastDates?: DateTime[];
 
 	private hourlyToggled: boolean = false;
 
@@ -67,19 +68,18 @@ export class UIHourlyForecasts {
 	 *
 	 * @param date 
 	 */
-	public ScrollTo(date: Date) {
+	public ScrollTo(date: DateTime) {
 		if (this.hourlyForecastDates == null)
 			return;
 
 		let itemWidth = this.GetHourlyBoxItemWidth();
 		let midnightIndex = null;
 		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
-			if (OnSameDay(this.hourlyForecastDates[index], date, this.app.config))
+			if (OnSameDay(this.hourlyForecastDates[index], date))
 				midnightIndex = index;
-			
+
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
-			const element = AddHours(this.hourlyForecastDates[index], -6);
-			if (OnSameDay(element, date, this.app.config)) {
+			if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
 				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
 				break;
 			}
@@ -104,7 +104,10 @@ export class UIHourlyForecasts {
 		}
 	}
 
-	public Display(forecasts: HourlyForecastData[], config: Config, tz: string): boolean {
+	public Display(forecasts: HourlyForecastData[] | undefined, config: Config, tz?: string): boolean {
+		if (!forecasts || !this.hourlyForecasts)
+			return true;
+
 		this.hourlyForecastDates = [];
 		let max = Math.min(forecasts.length, this.hourlyForecasts.length);
 		for (let index = 0; index < max; index++) {
@@ -114,7 +117,7 @@ export class UIHourlyForecasts {
 			this.hourlyForecastDates.push(hour.date);
 
 			ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
-			ui.Temperature.text = TempToUserConfig(hour.temp, config);
+			ui.Temperature.text = TempToUserConfig(hour.temp, config) ?? "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			ui.Summary.text = hour.condition.main;
 			ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
@@ -135,7 +138,7 @@ export class UIHourlyForecasts {
 
 		let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
 		let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
-		Log.Instance.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
 		this.actor.set_width(minWidth);
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
@@ -185,7 +188,7 @@ export class UIHourlyForecasts {
 							// we get issues with integer scaling
 							// when we request preferred height again
 							// See Issue : https://github.com/linuxmint/cinnamon-spices-applets/issues/3787
-							this.actor.style = null;
+							this.actor.style = "";
 							this.actor.hide();
 							// Scroll back to the start
 							hscroll.get_adjustment().set_value(0);
@@ -195,7 +198,7 @@ export class UIHourlyForecasts {
 				);
 			}
 			else {
-				this.actor.style = null;
+				this.actor.style = "";
 				this.actor.set_height(-1);
 				this.actor.hide();
 				resolve();
@@ -220,6 +223,9 @@ export class UIHourlyForecasts {
 	 */
 	private GetHourlyBoxItemWidth(): number {
 		let requiredWidth = 0;
+		if (!this.hourlyForecasts)
+			return requiredWidth;
+
 		for (let index = 0; index < this.hourlyContainers.length; index++) {
 			const ui = this.hourlyForecasts[index];
 			let hourWidth = ui.Hour.get_preferred_width(-1)[1];
@@ -297,7 +303,7 @@ export class UIHourlyForecasts {
 	 * @param precip 
 	 * @returns Always returns text 
 	 */
-	private GeneratePrecipitationText(precip: Precipitation, config: Config): string {
+	private GeneratePrecipitationText(precip: Precipitation | undefined, config: Config): string {
 		if (!precip) return "";
 
 		let precipitationText = "";
@@ -314,10 +320,13 @@ export class UIHourlyForecasts {
 	/** Helper function for debugging, currently not used */
 	private GetScrollViewHeight(): number {
 		let boxItemHeight = 0;
+		if (!this.hourlyForecasts)
+			return boxItemHeight;
+
 		for (let index = 0; index < this.hourlyContainers.length; index++) {
 			const ui = this.hourlyForecasts[index];
 
-			Log.Instance.Debug("Height requests of Hourly box Items: " + index);
+			Logger.Debug("Height requests of Hourly box Items: " + index);
 			let hourHeight = ui.Hour.get_preferred_height(-1)[1];
 			let iconHeight = ui.Icon.get_preferred_height(-1)[1];
 			let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
@@ -326,12 +335,12 @@ export class UIHourlyForecasts {
 			let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
 			if (boxItemHeight < itemHeight) boxItemHeight = itemHeight;
 		}
-		Log.Instance.Debug("Final Hourly box item height is: " + boxItemHeight)
+		Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
 		let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
-		Log.Instance.Debug("Scrollbar height is " + scrollBarHeight);
+		Logger.Debug("Scrollbar height is " + scrollBarHeight);
 		let theme = this.container.get_theme_node();
 		let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-		Log.Instance.Debug("ScollbarBox vertical padding and margin is: " + styling);
+		Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
 
 		return (boxItemHeight + scrollBarHeight + styling);
 	}

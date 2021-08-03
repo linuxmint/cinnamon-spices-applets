@@ -1,19 +1,19 @@
-import { Channel, IconType } from "types";
+import { Channel, AppletIcon } from "./types";
 
 const { AppletSettings } = imports.ui.settings;
 
 interface Arguments {
     uuid: string,
     instanceId: number,
-    onIconChanged: (iconType: IconType) => void,
+    onIconChanged: (iconType: AppletIcon) => void,
     onIconColorPlayingChanged: (color: string) => void,
     onIconColorPausedChanged: (color: string) => void,
     onChannelOnPanelChanged: (channelOnPanel: boolean) => void,
     onMyStationsChanged: (stations: Channel[]) => void,
 }
 
-export interface Settings {
-    iconType: IconType,
+interface Settings {
+    iconType: AppletIcon,
     symbolicIconColorWhenPlaying: string,
     symbolicIconColorWhenPaused: string,
     channelNameOnPanel: boolean,
@@ -46,7 +46,7 @@ export const createConfig = (args: Arguments) => {
     const appletSettings = new AppletSettings(settingsObject, uuid, instanceId)
 
     appletSettings.bind('icon-type', 'iconType',
-        (iconType: IconType) => onIconChanged(iconType))
+        (iconType: AppletIcon) => onIconChanged(iconType))
 
     appletSettings.bind('color-on', 'symbolicIconColorWhenPlaying',
         (newColor: string) => onIconColorPlayingChanged(newColor))
@@ -79,12 +79,6 @@ export const createConfig = (args: Arguments) => {
         } = settingsObject
 
         let initialVolume = keepVolume ? lastVolume : customInitVolume
-
-        if (initialVolume == null){
-            global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working')
-            initialVolume = 50
-        }
-
 
         return initialVolume
     }

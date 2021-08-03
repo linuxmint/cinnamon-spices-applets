@@ -1,5 +1,5 @@
-import { RADIO_SYMBOLIC_ICON_NAME, LOADING_ICON_NAME } from "consts"
-import { AdvancedPlaybackStatus, IconType } from "types"
+import { RADIO_SYMBOLIC_ICON_NAME, LOADING_ICON_NAME } from "../../consts"
+import { AdvancedPlaybackStatus, AppletIcon } from "../../types"
 
 const { Icon, IconType } = imports.gi.St
 const { IconType: IconTypeEnum } = imports.gi.St
@@ -30,7 +30,7 @@ export function createAppletIcon(args: Arguments) {
 
     const icon = new Icon({})
 
-    let normalIconType: IconType
+    let normalIconType: AppletIcon
 
 
     // the icon type passed from outside is overriten when the playbackstatus is 'loading' 
@@ -44,7 +44,7 @@ export function createAppletIcon(args: Arguments) {
     }
 
 
-    function setIconType(iconType: IconType) {
+    function setIconType(iconType: AppletIcon) {
 
         if (!iconType) return
 

@@ -19,7 +19,6 @@ const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {_, getThumbnail_gicon, searchStr} = require('./utils');
@@ -28,6 +27,7 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
+const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
 const {wikiSearch} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
@@ -385,62 +385,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.appFavorites.moveFavoriteToPos(add_id, pos);
         } else {
             this.appFavorites.addFavoriteAtPos(add_id, pos);
-        }
-    }
-
-    scrollToButton(button, fullyScrollFirstAndLast = false) {
-        const container = button.actor.get_parent();
-        let scrollBox = container;
-        let children;
-        let i = 0;
-        while (!(scrollBox instanceof St.ScrollView)) {
-            i++;
-            if (i > 10) {
-                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
-                return false;
-            }
-            scrollBox = scrollBox.get_parent();
-        }
-
-        let adjustment = scrollBox.vscroll.adjustment;
-        let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
-
-        if (fullyScrollFirstAndLast) children = container.get_children();
-        if (fullyScrollFirstAndLast && button.actor === children[0]) {
-            value = 0;
-        } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
-            value = scrollBox.height;
-        } else {
-            let offset = 0;
-            const vfade = scrollBox.get_effect('fade');
-            if (vfade) {
-                offset = vfade.vfade_offset;
-            }
-            const box = button.actor.get_allocation_box();
-            let y1 = box.y1, y2 = box.y2;
-            let parent = button.actor.get_parent();
-            while (parent !== scrollBox) {
-                if (!parent) {
-                    return false;
-                }
-                const box = parent.get_allocation_box();
-                y1 += box.y1;
-                y2 += box.y1;
-                parent = parent.get_parent();
-            }
-            if (y1 < value + offset) {
-                value = Math.max(0, y1 - offset);
-            } else if (y2 > value + pageSize - offset) {
-                value = Math.min(upper, y2 + offset - pageSize);
-            } else {
-                return false;
-            }
-        }
-
-        if (this.settings.enableAnimation) {
-            addTween(adjustment, { value: value, time: 0.1, transition: 'easeOutQuad' });
-        } else {
-            adjustment.set_value(value);
         }
     }
 
@@ -1112,24 +1056,26 @@ class CinnamenuApplet extends TextIconApplet {
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
             let emojiResults = [];
             EMOJI.forEach(emoji => {
-                        const match1 = searchStr(pattern, emoji.name, true);
-                        const match2 = searchStr(pattern, emoji.keywords, true);
-                        match2.score *= 0.95; //slightly lower priority for keyword match
-                        const bestMatchScore = Math.max(match1.score, match2.score);
-                        if (bestMatchScore > SEARCH_THRESHOLD) {
-                            emojiResults.push({
-                                    name: emoji.name,
-                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
-                                                                  //emoji results come last.
-                                    description: _('Click to copy'),
-                                    nameWithSearchMarkup: match1.result,
-                                    isSearchResult: true,
-                                    deleteAfterUse: true,
-                                    emoji: emoji.code,
-                                    activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
-                                            });
-                        } });
+                const match1 = searchStr(pattern, emoji[EMOJI_NAME], true);
+                const match2 = searchStr(pattern, emoji[EMOJI_KEYWORDS], true);
+                match2.score *= 0.95; //slightly lower priority for keyword match
+                const bestMatchScore = Math.max(match1.score, match2.score);
+                if (bestMatchScore > SEARCH_THRESHOLD) {
+                    emojiResults.push({
+                        name: emoji[EMOJI_NAME],
+                        score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
+                                                      //emoji results come last.
+                        description: _('Click to copy'),
+                        nameWithSearchMarkup: match1.result,
+                        isSearchResult: true,
+                        deleteAfterUse: true,
+                        emoji: emoji[EMOJI_CODE],
+                        activate: () => {
+                                const clipboard = St.Clipboard.get_default();
+                                clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji[EMOJI_CODE]); }
+                    });
+                }
+            });
 
             emojiResults.sort((a, b) =>  a.score < b.score);
             otherResults = otherResults.concat(emojiResults);
@@ -1635,6 +1581,9 @@ class CinnamenuApplet extends TextIconApplet {
         if (parent) {// Add back button
             res.unshift({   name: 'Back',
                             uri: parent.get_uri(),
+                            icon: new St.Icon({ icon_name: 'edit-undo-symbolic',
+                                                icon_type: St.IconType.SYMBOLIC,
+                                                icon_size: this.getAppIconSize() }),
                             mimeType: 'inode/directory',
                             isBackButton: true,
                             description: '',
@@ -1663,7 +1612,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
         const apps_sort = arr => arr.sort( (a, b) => {
                         if (!a.name || !b.name) return -1;
                         return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;
+                    });
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1820,7 +1770,7 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false,
                                     y_align: St.Align.START, style_class: 'vfade menu-categories-scrollbox' });
 
-        const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
+        //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
@@ -1854,7 +1804,7 @@ class CategoriesView {
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
                         const nameA = a.get_name().toUpperCase();
                         const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
+                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {
                     const dirId = dir.get_menu_id();
@@ -2095,8 +2045,10 @@ class AppsView {
 class SearchView {
     constructor(appThis) {
         this.appThis = appThis;
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
+        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-find' });
+        this.searchActiveIcon = new St.Icon({   style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', track_hover: true, can_focus: true});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);
