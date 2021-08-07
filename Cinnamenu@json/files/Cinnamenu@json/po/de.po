@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 00:50+0100\n"
-"PO-Revision-Date: 2021-08-05 23:18+0100\n"
+"POT-Creation-Date: 2021-08-06 19:45+0100\n"
+"PO-Revision-Date: 2021-08-06 19:50+0100\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -219,8 +219,8 @@ msgid ""
 "A flexible menu with grid or list layout options, file browser and emoji "
 "search."
 msgstr ""
-"Ein flexibles Menü mit Formatierungsoptionen, Web-Lesezeichen, direktem "
-"Zugang zu Suchmaschinen sowie unscharfer Suche."
+"Ein flexibles Menü mit zahlreichen Formatierungsoptionen, Datei-Browser, "
+"Zugang zu Suchmaschinen sowie Suche unter ähnlichen Begriffen."
 
 msgid "Behavior"
 msgstr "Verhalten"
@@ -259,13 +259,13 @@ msgid "Use a custom icon"
 msgstr "Ein benutzerdefiniertes Symbol verwenden"
 
 msgid "Use a custom icon in the panel"
-msgstr "Ein benutzerdefiniertes Symbol für den Menü-Button verwenden"
+msgstr "Ein benutzerdefiniertes Symbol für die Menü-Schaltfläche verwenden"
 
 msgid "Panel icon"
-msgstr "Symbol für den Menü-Button"
+msgstr "Symbol für die Menü-Schaltfläche"
 
 msgid "Panel text"
-msgstr "Text für die Menü-Schaltfläche"
+msgstr "Text neben der Menü-Schaltfläche"
 
 msgid "Text to show beside the panel icon"
 msgstr "Text neben der Menü-Schaltfläche"
@@ -277,7 +277,7 @@ msgid "Category icon size"
 msgstr "Symbolgröße für die Kategorien"
 
 msgid "Applications list icon size"
-msgstr "Symbolgröße bei Anzeige der Anwendungen als Liste"
+msgstr "Symbolgröße bei Anzeige der Anwendungen in einer Liste"
 
 msgid "Applications grid icon size"
 msgstr "Symbolgröße bei Anzeige der Anwendungen in einem Raster"
@@ -341,7 +341,7 @@ msgid "Example Search Providers"
 msgstr "Beispiel für eine Suchmaschine"
 
 msgid "Open menu on category:"
-msgstr "Menü öffnen bei Kategorie:"
+msgstr "Menü öffnen bei Kategorie"
 
 msgid "List"
 msgstr "Liste"
@@ -350,19 +350,19 @@ msgid "Grid"
 msgstr "Raster"
 
 msgid "Always open the menu with this category selected"
-msgstr "Beim Öffnen des Menüs immer dieser Kategorie auswählen"
+msgstr "Beim Öffnen des Menüs immer diese Kategorie auswählen"
 
 msgid "columns"
 msgstr "Spalten"
 
 msgid "Number of columns in apps grid"
-msgstr "Anzahl Spalten bei Anzeige der Anwendungen in einem Raster"
+msgstr "Anzahl an Spalten bei Anzeige der Anwendungen in einem Raster"
 
 msgid "Show bookmarks and places"
-msgstr "Lesezeichen und Orte anzeigen"
+msgstr "Orte anzeigen"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr "Lesezeichen und Orte als Kategorie anzeigen"
+msgstr "Orte als Kategorie anzeigen"
 
 msgid "Show application icons"
 msgstr "Anwendungssymbole anzeigen"
@@ -389,7 +389,7 @@ msgid "Applications view mode"
 msgstr "Art der Anzeige für die Anwendungen"
 
 msgid "View applications as list or grid"
-msgstr "Anwendungen als Liste oder in einem Raster anzeigen"
+msgstr "Anwendungen in einer Liste oder einem Raster anzeigen"
 
 msgid "Application description placement"
 msgstr "Anzeige der Anwendungsbeschreibungen"
@@ -424,7 +424,7 @@ msgstr "Rechts"
 
 msgid "Choose where to show the sidebar"
 msgstr ""
-"Position, an der die Sitzungsschaltflächen (Bildschirm sperren; Abmelden; "
+"Position, an der die Sitzungsschaltflächen (Bildschirm sperren/Abmelden/"
 "Beenden) angezeigt werden"
 
 msgid ""
@@ -432,33 +432,33 @@ msgid ""
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-"Info/Tipp: Am Rand des Menüs ziehen, um die Größe des Menüs zu ändern.\n"
+"Info/Tipp: Am Menürand ziehen, um die Größe des Menüs zu ändern.\n"
 
 msgid "Show favorites on sidebar"
-msgstr "Favoriten zur Leiste hinzufügen"
+msgstr "Favoriten zur Seitenleiste hinzufügen"
 
 msgid "Show your favorite app and file icons on the sidebar"
 msgstr ""
 "Zusätzlich zu den Sitzungsschaltflächen auch die Symbole der Favoriten "
-"anzeigen"
+"in der Seitenleiste anzeigen"
 
 msgid "Show recent items"
-msgstr "Kürzlich verwendete Dateien und Anwendungen anzeigen"
-
-msgid "Show recent items category in the menu"
 msgstr "Kategorie »Kürzlich« anzeigen"
 
+msgid "Show recent items category in the menu"
+msgstr "Kürzlich verwendete Dateien und Anwendungen anzeigen"
+
 msgid "Show favorite apps category"
-msgstr "»Bevorzugte Anwendungen«-Kategorie anzeigen"
+msgstr "Kategorie »Bevorzugte Anwendungen« anzeigen"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "»Bevorzugte Anwendungen«-Kategorie im Menü anzeigen"
+msgstr "Kategorie »Bevorzugte Anwendungen« im Menü anzeigen"
 
 msgid "Show home folder"
-msgstr "Persönlichen Ordner anzeigen"
+msgstr "Kategorie »Persönlicher Ordner« anzeigen"
 
 msgid "Show home folder category in the menu"
-msgstr "»Persönlicher Ordner«-Kategorie im Menü anzeigen"
+msgstr "Kategorie »Persönlicher Ordner« im Menü anzeigen"
 
 msgid "Last used category"
 msgstr "Vorherige Kategorie"
@@ -467,10 +467,10 @@ msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatischen Bildlauf in der Anwendungsliste aktivieren"
 
 msgid "Show hidden files"
-msgstr "Versteckte Dateien im persönlichen Ordner anzeigen"
+msgstr "Verborgene Dateien im persönlichen Ordner anzeigen"
 
 msgid "Show hidden files in folder view"
-msgstr "Versteckte Dateien im persönlichen Ordner anzeigen"
+msgstr "Verborgene Dateien im persönlichen Ordner anzeigen"
 
 msgid "Emoji search"
 msgstr "Emoji-Suche"
@@ -518,7 +518,7 @@ msgid "When searching, also search my home folder for files"
 msgstr "Bei der Suche auch im persönlichen Ordner suchen"
 
 msgid "Web bookmarks search"
-msgstr "Suche in den Web-Lesezeichen"
+msgstr "In den Web-Lesezeichen des Browsers suchen"
 
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, "
@@ -527,7 +527,7 @@ msgid ""
 "gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
 "libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Lesezeichen des Web-Browser in die Suche einschließen (Google Chrome, "
+"Lesezeichen des Web-Browsers in die Suche einschließen (Google Chrome, "
 "Firefox, Chromium, Opera, Brave)\n"
 "Hinweis: Um in den Lesezeichen des Firefox zu suchen, muss zuerst das Paket "
 "gir1.2-gda-5.0 (Debian basierte Distributionen inkl. Ubuntu und Linux Mint) "
@@ -556,7 +556,16 @@ msgid "Session buttons icon size"
 msgstr "Symbolgröße für die Sitzungsschaltflächen"
 
 msgid "Use session buttons box style"
-msgstr "Sitzungsschaltflächen in eine Box einbetten"
+msgstr "Sitzungsschaltflächen in einen viereckigen Bereich einbetten"
+
+msgid "Sidebar icon size (Pixels)"
+msgstr "Größe der Icons in der Seitenleiste (Pixel)"
+
+msgid "Sidebar icon size"
+msgstr "Größe der Icons in der Seitenleiste einstellen"
+
+msgid "Use sidebar box style"
+msgstr "Seitenleiste in viereckigem Bereich anzeigen"
 
 msgid "Use a sidebar box style"
 msgstr "Seitenleiste in viereckigem Bereich anzeigen"
