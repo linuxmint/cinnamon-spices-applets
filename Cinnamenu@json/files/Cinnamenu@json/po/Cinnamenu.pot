@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 00:50+0100\n"
+"POT-Creation-Date: 2021-08-07 10:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,6 +140,21 @@ msgstr ""
 msgid "Reset category order"
 msgstr ""
 
+msgid "light skin tone"
+msgstr ""
+
+msgid "medium-light skin tone"
+msgstr ""
+
+msgid "medium skin tone"
+msgstr ""
+
+msgid "medium-dark skin tone"
+msgstr ""
+
+msgid "dark skin tone"
+msgstr ""
+
 msgid "This file is no longer available"
 msgstr ""
 
@@ -268,16 +283,13 @@ msgstr ""
 msgid "Text to show beside the panel icon"
 msgstr ""
 
-msgid "pixels"
+msgid "Category icon size (pixels)"
 msgstr ""
 
-msgid "Category icon size"
+msgid "Applications list icon size (pixels)"
 msgstr ""
 
-msgid "Applications list icon size"
-msgstr ""
-
-msgid "Applications grid icon size"
+msgid "Applications grid icon size (pixels)"
 msgstr ""
 
 msgid "Keyboard shortcut to open and close the menu"
@@ -375,7 +387,7 @@ msgstr ""
 msgid "Use a custom menu height"
 msgstr ""
 
-msgid "Custom menu height"
+msgid "Custom menu height (pixels)"
 msgstr ""
 
 msgid "Applications view mode"
@@ -526,13 +538,13 @@ msgstr ""
 msgid "Use a custom size for the panel icon"
 msgstr ""
 
-msgid "Panel icon size"
+msgid "Panel icon size (pixels)"
 msgstr ""
 
 msgid "Choose a custom size for the panel icon"
 msgstr ""
 
-msgid "Sidebar icon size"
+msgid "Sidebar icon size (pixels)"
 msgstr ""
 
 msgid "Use sidebar box style"
