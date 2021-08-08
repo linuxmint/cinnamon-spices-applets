@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 00:50+0100\n"
-"PO-Revision-Date: 2021-07-14 14:47+0200\n"
+"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"PO-Revision-Date: 2021-08-08 14:43+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -141,6 +141,21 @@ msgstr "För många poster - Visar endast de 1000 första posterna"
 msgid "Reset category order"
 msgstr "Återställ kategoriordningen"
 
+msgid "light skin tone"
+msgstr "ljus toning"
+
+msgid "medium-light skin tone"
+msgstr "medelljus toning"
+
+msgid "medium skin tone"
+msgstr "medium toning"
+
+msgid "medium-dark skin tone"
+msgstr "medelmörk toning"
+
+msgid "dark skin tone"
+msgstr "mörk toning"
+
 msgid "This file is no longer available"
 msgstr "Filen är inte längre tillgänglig"
 
@@ -271,17 +286,14 @@ msgstr "Paneltext"
 msgid "Text to show beside the panel icon"
 msgstr "Text att visa vid panelikonen"
 
-msgid "pixels"
-msgstr "pixlar"
+msgid "Category icon size (pixels)"
+msgstr "Storlek på kategoriikoner (pixlar)"
 
-msgid "Category icon size"
-msgstr "Storlek på kategoriikoner"
+msgid "Applications list icon size (pixels)"
+msgstr "Listvyns ikonstorlek (pixlar)"
 
-msgid "Applications list icon size"
-msgstr "Listvyns ikonstorlek"
-
-msgid "Applications grid icon size"
-msgstr "Ikonvyns ikonstorlek"
+msgid "Applications grid icon size (pixels)"
+msgstr "Ikonvyns ikonstorlek (pixlar)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
@@ -380,8 +392,8 @@ msgstr "Fördröjning för knappbeskrivningar"
 msgid "Use a custom menu height"
 msgstr "Använd anpassad menyhöjd"
 
-msgid "Custom menu height"
-msgstr "Anpassad menyhöjd"
+msgid "Custom menu height (pixels)"
+msgstr "Anpassad menyhöjd (pixlar)"
 
 msgid "Applications view mode"
 msgstr "Programmens visningsläge"
@@ -541,14 +553,14 @@ msgstr "Använd en anpassad ikonstorlek"
 msgid "Use a custom size for the panel icon"
 msgstr "Använd en anpassad storlek för panelikonen"
 
-msgid "Panel icon size"
-msgstr "Panelikons storlek"
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstorlek (pixlar)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Välj en anpassad storlek för panelikonen"
 
-msgid "Sidebar icon size"
-msgstr "Sidofältets ikonstorlek"
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidofältets ikonstorlek (pixlar)"
 
 msgid "Use sidebar box style"
 msgstr "Använd boxstil för sidofält"
@@ -565,6 +577,9 @@ msgid ""
 msgstr ""
 "Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
 "vissa teman)"
+
+#~ msgid "pixels"
+#~ msgstr "pixlar"
 
 #~ msgid "Solution:"
 #~ msgstr "Lösning:"
