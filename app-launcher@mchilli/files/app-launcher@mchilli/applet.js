@@ -5,7 +5,9 @@ const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
+const DND = imports.ui.dnd;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -31,7 +33,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.panelHeight = panelHeight;
             this.instanceId = instanceId;
 
-            if (this.orientation == 3 || this.orientation == 1) {
+            this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+            if (this.orientation == St.Side.RIGHT || this.orientation == St.Side.LEFT) {
                 this.hide_applet_label(true);
             }
 
@@ -74,7 +77,7 @@ class MyApplet extends Applet.TextIconApplet {
 
     initMenu() {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+        this.menu = new MyPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
         this.updateMenu();
     }
@@ -97,17 +100,7 @@ class MyApplet extends Applet.TextIconApplet {
                 let icon = application.icon;
                 let command = application.command;
 
-                let item;
-                if (this.visibleAppIcons) {
-                    item = new PopupMenu.PopupIconMenuItem(
-                        name,
-                        icon,
-                        this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
-                    );
-                    item._icon.set_icon_size(this.appIconSize);
-                } else {
-                    item = new PopupMenu.PopupMenuItem(name);
-                }
+                let item = this.createMenuItem(name, icon);
                 item.connect('activate', () => {
                     this.run(name, icon, command);
                 });
@@ -166,6 +159,23 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.setValue('list-groups', this.listGroups);
     }
 
+    createMenuItem(name, icon) {
+        let item;
+        if (this.visibleAppIcons) {
+            item = new PopupMenu.PopupIconMenuItem(
+                name,
+                null,
+                this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
+            );
+
+            item._icon.set_gicon(this._createAppIcon(icon));
+            item._icon.set_icon_size(this.appIconSize);
+        } else {
+            item = new PopupMenu.PopupMenuItem(name);
+        }
+        return item;
+    }
+
     _addSubMenuIcon(subMenu, groupName) {
         let existGroupIcons = {};
         this.listGroups.map((e) => (existGroupIcons[e.name] = e.icon));
@@ -175,7 +185,8 @@ class MyApplet extends Applet.TextIconApplet {
                 : this.settings.settingsData['list-groups'].columns[1].default;
 
         let _icon = new St.Icon({
-            icon_name: icon,
+            gicon: this._createAppIcon(icon),
+            icon_name: null,
             icon_type: this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR,
             icon_size: this.appIconSize,
         });
@@ -224,32 +235,54 @@ class MyApplet extends Applet.TextIconApplet {
         }
     }
 
+    _createAppIcon(icon) {
+        let iconFile = Gio.file_new_for_path(icon);
+
+        if (iconFile.query_exists(null)) {
+            return new Gio.FileIcon({ file: iconFile });
+        } else {
+            return new Gio.ThemedIcon({ name: icon });
+        }
+    }
+
     initLabel() {
         this.set_applet_tooltip(this.launcherLabel);
-        if (this.orientation == 3 || this.orientation == 1) {
+        if (this.orientation == St.Side.RIGHT || this.orientation == St.Side.LEFT) {
             return;
         }
         this.set_applet_label(this.launcherLabel);
         this.hide_applet_label(!this.visibleLauncherLabel);
     }
 
-    showNotification(title, body, appIcon) {
+    showNotification(title, body, icon) {
         let source = new MessageTray.SystemNotificationSource();
         Main.messageTray.add(source);
 
-        let icon = new St.Icon({
-            icon_name: appIcon,
+        let _icon = new St.Icon({
+            gicon: this._createAppIcon(icon),
+            icon_name: null,
             icon_type: St.IconType.FULLCOLOR,
             icon_size: 30,
         });
 
-        let notification = new MessageTray.Notification(source, title, body, { icon: icon });
+        let notification = new MessageTray.Notification(source, title, body, { icon: _icon });
         notification.setTransient(true);
         source.notify(notification);
     }
 
     _replaceAll(string, search, replace) {
         return string.split(search).join(replace);
+    }
+
+    addDropApp(name, icon, id, index = 0) {
+        let newList = this.listApplications;
+        newList.splice(index, 0, {
+            name: name,
+            group: '',
+            icon: icon,
+            command: `gtk-launch ${id}`,
+        });
+        this.settings.setValue('list-applications', newList);
     }
 
     run(name, icon, cmd) {
@@ -260,13 +293,139 @@ class MyApplet extends Applet.TextIconApplet {
         Util.spawnCommandLine(cmd);
     }
 
+    handleDragOver(source, actor, x, y, time) {
+        if (!source.isDraggableApp) {
+            return DND.DragMotionResult.NO_DROP;
+        }
+
+        if (!this.menu.isOpen) {
+            this.menu.open();
+            this.menu.beginDrag();
+        }
+
+        return DND.DragMotionResult.MOVE_DROP;
+    }
+
     on_applet_clicked(event) {
+        if (this.menu.activeDrag()) {
+            this.menu.endDrag(true);
+        }
         this.menu.toggle();
     }
 
     on_applet_reloaded() {
         this.settings.finalize();
         this.signalManager.disconnectAllSignals();
+    }
+}
+
+class MyPopupMenu extends Applet.AppletPopupMenu {
+    _init(applet, orientation) {
+        super._init(applet, orientation);
+        this.applet = applet;
+        this._dragging = false;
+        this._draggable = DND.makeDraggable(this.applet.actor);
+        this._dragPlaceholder = null;
+        this._dragIndex = null;
+    }
+
+    beginDrag() {
+        // this delete all hidden items(in groups), so the drag is more presice
+        this._dragging = true;
+        let children = this.box.get_children();
+        children.forEach((element) => {
+            if (!element.is_visible()) {
+                element.destroy();
+            }
+        });
+    }
+
+    endDrag(updateMenu = false) {
+        // if (updateMenu = true) this updates the menu to bring back the deleted items
+        this._clearPlaceholder();
+
+        if (updateMenu) {
+            this.applet.updateMenu();
+        }
+
+        this._dragging = false;
+    }
+
+    activeDrag() {
+        return this._dragging;
+    }
+
+    _createPlaceholder(name, icon, index) {
+        if (this._dragPlaceholder) {
+            return;
+        }
+
+        this._dragPlaceholder = this.applet.createMenuItem(name, icon);
+        this.box.insert_child_at_index(this._dragPlaceholder.actor, index);
+    }
+
+    _clearPlaceholder() {
+        if (this._dragPlaceholder) {
+            this.box.remove_child(this._dragPlaceholder.actor);
+        }
+
+        this._dragPlaceholder = null;
+        this._dragIndex = null;
+    }
+
+    handleDragOver(source, actor, x, y, time) {
+        let children = this.box.get_children();
+        let boxSize = this.box.height;
+        let mousePos = y;
+
+        let dropIndex = Math.floor((mousePos / boxSize) * children.length);
+
+        if (dropIndex >= children.length) {
+            dropIndex = -1;
+        } else if (dropIndex < -1) {
+            dropIndex = 0;
+        }
+
+        if (this._dragIndex != dropIndex) {
+            if (!this._dragPlaceholder) {
+                let name = source.name;
+                let icon = source.icon.get_gicon().to_string();
+                this._createPlaceholder(name, icon, dropIndex);
+            } else {
+                this.box.set_child_at_index(this._dragPlaceholder.actor, dropIndex);
+            }
+            this._dragIndex = dropIndex;
+        }
+
+        return DND.DragMotionResult.COPY_DROP;
+    }
+
+    handleDragOut() {
+        if (this.isOpen) {
+            this.close();
+        }
+
+        this.endDrag(true);
+    }
+
+    acceptDrop(source, actor, x, y, time) {
+        if (!source.isDraggableApp) {
+            return DND.DragMotionResult.NO_DROP;
+        }
+
+        try {
+            let name = source.name;
+            let icon = source.icon.get_gicon().to_string();
+            let id = source.get_app_id();
+            this.applet.addDropApp(name, icon, id, this._dragIndex);
+        } catch (error) {
+            global.log(error);
+        }
+
+        if (this.isOpen) {
+            this.close();
+        }
+        this.endDrag();
     }
 }
 
