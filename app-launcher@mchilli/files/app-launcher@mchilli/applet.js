@@ -241,7 +241,13 @@ class MyApplet extends Applet.TextIconApplet {
         if (iconFile.query_exists(null)) {
             return new Gio.FileIcon({ file: iconFile });
         } else {
-            return new Gio.ThemedIcon({ name: icon });
+            let params = {
+                names: [icon],
+            };
+            if (this.useSymbolicIcons) {
+                params.names.unshift(`${icon}-symbolic`);
+            }
+            return new Gio.ThemedIcon(params);
         }
     }
 
