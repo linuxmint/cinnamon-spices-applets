@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-19 07:23+0100\n"
-"PO-Revision-Date: 2021-08-02 11:24+0300\n"
+"PO-Revision-Date: 2021-08-09 13:51+0300\n"
 "Last-Translator: Avi Markovitz <avi.markovitz@gmail.com>\n"
 "Language-Team: he\n"
 "Language: he\n"
@@ -104,7 +104,7 @@ msgstr "לא ניתן לאחזר נתוני מזג־אויר"
 #: 3.0/applet.js:624 3.8/weather-applet.js:15017
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
-msgstr "שגיאה בלתי צפויה בעת רענון מזג־אויר, נא לעיין ביון בלוקינג־גלאס"
+msgstr "שגיאה בלתי צפויה בעת רענון מזג־אויר, נא לעיין ביומן בלוקינג־גלאס"
 
 #: 3.0/applet.js:670 3.8/weather-applet.js:15273
 msgid ""
@@ -189,7 +189,7 @@ msgstr "לא ניתן למצוא מיקום המבוסס על כתובת, נא �
 
 #: 3.0/applet.js:1901 3.8/weather-applet.js:9379
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
-msgstr ""
+msgstr "קריאה ל־API Geolocation כשלה, לשגיאות נא לעיין בלוקינג־גלאס."
 
 #: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9278
 #: 3.8/weather-applet.js:9282
@@ -241,7 +241,7 @@ msgstr "המיקום נמחק מהסיפריה"
 msgid ""
 "Failed to load in data from location storage, please see the logs for more "
 "information"
-msgstr ""
+msgstr "טעינת נתונים מאחסון המיקום כשלה, נא לעיין ביומנים למידע נוסף"
 
 #: 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
 #: 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
@@ -317,7 +317,7 @@ msgstr "גשם קל"
 
 #: 3.0/climacell.js:280 3.8/weather-applet.js:14126 3.8/weather-applet.js:14484
 msgid "Heavy freezing rain"
-msgstr "גשם מקפיא כבד"
+msgstr "גשם קופא כבד"
 
 #: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
 #: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
@@ -327,11 +327,11 @@ msgstr "גשם מקפיא כבד"
 #: 3.8/weather-applet.js:12702 3.8/weather-applet.js:12703
 #: 3.8/weather-applet.js:12709 3.8/weather-applet.js:14470
 msgid "Freezing rain"
-msgstr "גשם מקפיא"
+msgstr "גשם קופא"
 
 #: 3.0/climacell.js:294 3.8/weather-applet.js:14128 3.8/weather-applet.js:14477
 msgid "Light freezing rain"
-msgstr "גשם מקפיא קל"
+msgstr "גשם קופא קל"
 
 #: 3.0/climacell.js:301
 msgid "Light freezing drizzle"
@@ -527,7 +527,7 @@ msgstr "לא ניתן להשיג מיקום"
 #: 3.0/ipApi.js:95 3.8/weather-applet.js:9068
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
-msgstr ""
+msgstr "שירות המיקום הגיב עם שגיאות, נא לעיין ביומנים בלוקניג־גלאס"
 
 #: 3.0/met_norway.js:131 3.8/weather-applet.js:13310
 msgid "Cloudiness"
@@ -750,7 +750,7 @@ msgstr "ערפילים"
 #: 3.8/weather-applet.js:12626 3.8/weather-applet.js:12660
 #: 3.8/weather-applet.js:14182
 msgid "Overcast"
-msgstr "כסות־עננים"
+msgstr "מוּעָב"
 
 #: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10276
 #: 3.8/weather-applet.js:10283
@@ -829,7 +829,7 @@ msgstr ""
 
 #: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:12122
 msgid "Unknown Error, please see the logs in Looking Glass"
-msgstr ""
+msgstr "שגיאה לא ידועה, נא לעיין ביומנים בלוקניג־גלאס"
 
 #: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:12224
 msgid "Thunderstorm with light rain"
@@ -973,7 +973,7 @@ msgstr "אובך"
 
 #: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:12266
 msgid "Sand, dust whirls"
-msgstr ""
+msgstr "חול, מערבולת אבק"
 
 #: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:12268
 msgid "Sand"
@@ -1021,15 +1021,15 @@ msgstr "עננים פזורים"
 
 #: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:12279
 msgid "Broken clouds"
-msgstr ""
+msgstr "עננים שבורים"
 
 #: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:12280
 msgid "Overcast clouds"
-msgstr "כסות־עננים"
+msgstr "מוּעָב"
 
 #: 3.0/us_weather.js:120
 msgid "Could not get forecast for your area"
-msgstr ""
+msgstr "לא ניתן לאחזר תחזית למיקום שלכם"
 
 #: 3.0/us_weather.js:231 3.8/weather-applet.js:12309
 msgid "Location is outside US, please use a different provider."
@@ -1037,27 +1037,27 @@ msgstr ""
 
 #: 3.0/us_weather.js:394 3.8/weather-applet.js:12373
 msgid "Failed to Process Hourly Forecast Info"
-msgstr ""
+msgstr "כשל בעיבוד נתוני תחזית שעתית"
 
 #: 3.0/us_weather.js:443 3.8/weather-applet.js:12633
 msgid "Clear and windy"
-msgstr ""
+msgstr "בהיר ומשבי־רוח"
 
 #: 3.0/us_weather.js:450 3.8/weather-applet.js:12640
 msgid "Few clouds and windy"
-msgstr "עננים מעטים עם רוחות"
+msgstr "עננים מעטים ומשבי־רוח"
 
 #: 3.0/us_weather.js:457 3.8/weather-applet.js:12647
 msgid "Partly cloudy and windy"
-msgstr ""
+msgstr "מעונן חלקית ומשבי־רוח"
 
 #: 3.0/us_weather.js:464 3.8/weather-applet.js:12654
 msgid "Mostly cloudy and windy"
-msgstr ""
+msgstr "מעונן לרוב ומשבי־רוח"
 
 #: 3.0/us_weather.js:471 3.8/weather-applet.js:12661
 msgid "Overcast and windy"
-msgstr ""
+msgstr "מוּעָב ומשבי־רוח"
 
 #: 3.0/us_weather.js:485 3.8/weather-applet.js:12675
 msgid "Snowy rain"
@@ -1065,7 +1065,7 @@ msgstr "גשם מושלג"
 
 #: 3.0/us_weather.js:520 3.8/weather-applet.js:12710
 msgid "Freezing rain and snow"
-msgstr "גשם מקפיא ושלג"
+msgstr "גשם קופא ושלג"
 
 #: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
 #: 3.0/yahoo.js:438 3.8/weather-applet.js:8750 3.8/weather-applet.js:12754
@@ -1095,7 +1095,7 @@ msgstr "קר"
 #: 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
 #: 3.8/weather-applet.js:12803 3.8/weather-applet.js:12804
 msgid "Blizzard"
-msgstr ""
+msgstr "סוּפַת שֶׁלֶג"
 
 #: 3.0/utils.js:146 3.8/weather-applet.js:8634
 msgid "Today"
@@ -1195,7 +1195,7 @@ msgstr "דמז'"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "S"
-msgstr "דר'"
+msgstr "ד'"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "SW"
@@ -1220,12 +1220,16 @@ msgid ""
 "Unknown Error happened while calling Yahoo bridge,\n"
 " see Looking Glass log for errors"
 msgstr ""
+"אירעה שגיאה לא ידועה בעת קריאה לגשר יאהו,\n"
+"לשגיאות נא לעיין ביומנים בלוקניג־גלאס"
 
 #: 3.0/yahoo.js:91
 msgid ""
 "Yahoo bridge responded in bad format,\n"
 " see Looking Glass log for errors"
 msgstr ""
+"גשר יאהו הגיב בתבנית שגויה,\n"
+"לשגיאות נא לעיין ביומנים בלוקניג־גלאס"
 
 #: 3.0/yahoo.js:177
 msgid "Missing package"
@@ -1248,6 +1252,8 @@ msgid ""
 "Unknown error happened while obtaining weather, see Looking Glass logs for "
 "more information"
 msgstr ""
+"אירעה שגיאה לא ידועה בעת אחזור מזג־אויר,\n"
+"למידע נוסף, נא לעיין ביומנים בלוקניג־גלאס"
 
 #: 3.0/yahoo.js:437
 msgid "Tropical Storm"
@@ -1275,11 +1281,11 @@ msgstr "שלג מעורב בברד"
 
 #: 3.0/yahoo.js:444
 msgid "Freezing Drizzle"
-msgstr "רסס מקפיא"
+msgstr "רסס קופא"
 
 #: 3.0/yahoo.js:446
 msgid "Freezing Rain"
-msgstr "גשם מקפיא"
+msgstr "גשם קופא"
 
 #: 3.0/yahoo.js:447
 msgid "Showers"
@@ -1311,7 +1317,7 @@ msgstr "רוחות עזות"
 
 #: 3.0/yahoo.js:460
 msgid "Windy"
-msgstr "רוחות ערות"
+msgstr "משבי־רוח"
 
 #: 3.0/yahoo.js:463
 msgid "Mostly Cloudy"
@@ -1376,7 +1382,7 @@ msgstr "חלש מאוד"
 
 #: 3.8/weather-applet.js:10070
 msgid "Less than {distance} {distanceUnit}"
-msgstr ""
+msgstr "פחות מ־{distance} {distanceUnit}"
 
 #: 3.8/weather-applet.js:10074
 msgid "Excellent"
@@ -1384,7 +1390,7 @@ msgstr "מצוין"
 
 #: 3.8/weather-applet.js:10074
 msgid "More than {distance} {distanceUnit}"
-msgstr ""
+msgstr "יותר מ־{distance} {distanceUnit}"
 
 #: 3.8/weather-applet.js:10079
 msgid "Poor"
@@ -1394,7 +1400,7 @@ msgstr "חלש"
 #: 3.8/weather-applet.js:10089 3.8/weather-applet.js:10094
 #: 3.8/weather-applet.js:10099
 msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
-msgstr ""
+msgstr "בין {smallerDistance}-{biggerDistance} {distanceUnit}"
 
 #: 3.8/weather-applet.js:10084
 msgid "Moderate"
@@ -1482,23 +1488,23 @@ msgstr "סופת אבק"
 
 #: 3.8/weather-applet.js:14118
 msgid "Freezing drizzle/freezing rain"
-msgstr ""
+msgstr "רסס קופא/גשם קופא"
 
 #: 3.8/weather-applet.js:14120
 msgid "Heavy freezing drizzle/freezing rain"
-msgstr ""
+msgstr "רסס קופא/גשם קופא כבד"
 
 #: 3.8/weather-applet.js:14122
 msgid "Light freezing drizzle/freezing rain"
-msgstr ""
+msgstr "רסס קופא/גשם קופא קל"
 
 #: 3.8/weather-applet.js:14124
 msgid "Freezing fog"
-msgstr "ערפל מקפיא"
+msgstr "ערפל קופא"
 
 #: 3.8/weather-applet.js:14130
 msgid "Funnel cloud/tornado"
-msgstr ""
+msgstr "ענן משפך/טורנדו"
 
 #: 3.8/weather-applet.js:14132
 msgid "Hail showers"
@@ -1700,6 +1706,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
+"קלטים מקובלים הם קו רוחב, אורך, לדוגמה: 68.1932,17.1426 או, כתובת.\n"
+"רענן את מזג האוויר יתבצע בהשהיה של 3 שניות לאחר הפסקת ההקלדה."
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
@@ -1770,7 +1778,7 @@ msgstr "פרנהייט"
 msgid ""
 "Automatic will try to guess your preference based your current display "
 "language."
-msgstr ""
+msgstr "אוטומטי, ניסיון נחוש ההעדפות בהתבסס על שפת המצג הנוכחית."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
@@ -1785,7 +1793,7 @@ msgstr "קמ/ש"
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "mph"
-msgstr "מיל לשעה"
+msgstr "מיל/שעה"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1810,7 +1818,7 @@ msgstr "יחית מידת לחץ־אויר"
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "hPa"
-msgstr ""
+msgstr "הקטו־פסקל"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -1864,12 +1872,12 @@ msgstr "אפשרויות לוחית"
 #. 3.0->settings-schema.json->showTextInPanel->description
 #. 3.8->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
-msgstr "הצגת טמפרטורה נוכחית על הלוחית"
+msgstr "הצגת מידות־חום נוכחית בלוחית"
 
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
+msgstr "הצגת תנאי מזג־אויר (לדוגמה, 'משבי־רוח', 'בהיר') בלוחית"
 
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
 #. 3.8->settings-schema.json->showCommentInPanel->tooltip
@@ -1879,7 +1887,7 @@ msgstr ""
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
 msgid "Override label on panel"
-msgstr ""
+msgstr "עקיפת תווית בלוחית"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
@@ -1888,6 +1896,8 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
+"ערכים זמינים: {c} תנאים, {t} מידת־חום ו־{u} יחידה.\n"
+"ניתן לשימוש אם התווית אינה מתאימה ללוח אנכי, בין יתר הדברים החכמים."
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
@@ -1909,11 +1919,11 @@ msgstr "מצג"
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
-msgstr ""
+msgstr "הצגת תחזית אנכית"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
-msgstr ""
+msgstr "הצגת תחזיות מלמעלה למטה במקום משמאל לימין"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
@@ -1923,7 +1933,7 @@ msgstr "עמודות"
 #. 3.0->settings-schema.json->forecastColumns->description
 #. 3.8->settings-schema.json->forecastColumns->description
 msgid "Maximum number of columns for forecast"
-msgstr ""
+msgstr "מספר עמודות מרבי לתחזית"
 
 #. 3.0->settings-schema.json->forecastRows->units
 #. 3.8->settings-schema.json->forecastRows->units
@@ -1933,22 +1943,22 @@ msgstr "שורות"
 #. 3.0->settings-schema.json->forecastRows->description
 #. 3.8->settings-schema.json->forecastRows->description
 msgid "Maximum number of rows for forecast"
-msgstr ""
+msgstr "מספר שורות מרבי לתחזית"
 
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr ""
+msgstr "הצגת זריחה/שקיעה"
 
 #. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr ""
+msgstr "הצגת זמן בתבנית בת 24 שעות"
 
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr ""
+msgstr "הצגת שעות בתחזית שעתית בלבד"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
@@ -1957,27 +1967,27 @@ msgstr ""
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
 msgid "Display date for daily forecasts"
-msgstr ""
+msgstr "תאריך יומי לתחזית יומית"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
 msgid "Like \"Friday 15\""
-msgstr ""
+msgstr "כמו 'יום שישי ה־15'"
 
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr ""
+msgstr "הצגת מידת־חום גבוהה, ראשונה בתחזית"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
 msgid "Show temperature Russian style"
-msgstr ""
+msgstr "הצגת מידת־חום בסגנון רוסי"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr ""
+msgstr "עקיפת תווית מיקום"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->weather-conditions->title
@@ -2068,19 +2078,19 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
-msgstr ""
+msgstr "Met Office UK (הממלכה הבריטית בלבד)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
-msgstr ""
+msgstr "US National Weather (ארה\"ב בלבד)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
-msgstr ""
+msgstr "Visual Crossing (נדרש מפתח)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "ClimacellV4 (key needed)"
-msgstr ""
+msgstr "ClimacellV4 (נדרש מפתח)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2093,7 +2103,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
-msgstr ""
+msgstr "שמירת המיקום הנוכחי לאחסון"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
@@ -2116,10 +2126,12 @@ msgid ""
 "Maximum number of days that can be displayed, maximum rows and columns "
 "setting in the Presentation tab will affect the final number."
 msgstr ""
+"מספר ימים מרבי הניתנים להצגה, הגדרות השורות והעמודות המרביות בלשונית המצג "
+"ישפיעו על המספר הסופי."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr ""
+msgstr "אפשור תחזית משקעים דקתית"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2130,11 +2142,11 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
-msgstr ""
+msgstr "הצגת שני סוגי יחידות מידת־חום בו זמנית"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
-msgstr ""
+msgstr "הצגת תחזיות מלמעלה למטה במקום משמאל לימין."
 
 #. 3.8->settings-schema.json->locationList->description
 msgid "Your saved locations"
@@ -2172,11 +2184,11 @@ msgstr "חיפוש רשומה"
 
 #. 3.8->settings-schema.json->displayWindAsText->description
 msgid "Display wind direction as text"
-msgstr ""
+msgstr "הצג כיוון רוח כמלל"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
-msgstr ""
+msgstr "כמו צמ', צ' במקום סמלי כיוון."
 
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
@@ -2184,7 +2196,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr ""
+msgstr "לא חל על ערכת סמלים מותאמת אישית, שהיא סמלית כברירת מחדל"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -2197,6 +2209,9 @@ msgid ""
 "clicking the button below. Here you can ask questions etc in the comment "
 "section by logging in with your Github account."
 msgstr ""
+"למידע מפורט על אודות היישומון נא להתחבר לאתר תבליני־סינמון למציאת מידע על "
+"סוגיות ידועות, פתרון בעיות, יומן שינויים ועוד, על ידי הקשה על הלחצן מטה. "
+"בקטע ההערות, ניתן לשאול שאלות ועוד, על ידי התחברות לחשבון Github שלכם."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2211,7 +2226,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: Gr3q"
-msgstr ""
+msgstr "מתחזק נוכחי: Gr3q"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
