@@ -1055,9 +1055,14 @@ class CinnamenuApplet extends TextIconApplet {
 
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+
             const buttons = this.appsView.getActiveButtons();//todo
             if (buttons.length > 0) {
-                buttons[0].handleEnter();
+                Meta.later_add(Meta.LaterType.IDLE, () => {
+                                          if (!buttons[0].entered) {
+                                              this.clearEnteredActors();
+                                              buttons[0].handleEnter();
+                                          } });
             }
         };
 
