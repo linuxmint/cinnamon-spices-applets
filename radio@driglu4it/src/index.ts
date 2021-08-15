@@ -5,7 +5,7 @@ import { createChannelList } from './ui/ChannelList/ChannelList';
 import { AdvancedPlaybackStatus, Channel, AppletIcon } from './types';
 import { createMpvHandler } from './mpv/MpvHandler';
 import { createVolumeSlider } from './ui/VolumeSlider';
-import { createPopupMenu } from './lib/PopupMenu';
+import { createPopupMenu } from 'cinnamonpopup';
 import { createSeparatorMenuItem } from './lib/PopupSeperator';
 import { createMediaControlToolbar } from './ui/Toolbar/MediaControlToolbar';
 import { createPlayPauseButton } from './ui/Toolbar/PlayPauseButton';
