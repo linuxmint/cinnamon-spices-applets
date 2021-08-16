@@ -168,7 +168,7 @@ class MyApplet extends Applet.TextIconApplet {
                 this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
             );
 
-            item._icon.set_gicon(this._createAppIcon(icon));
+            item._icon.set_gicon(this.createGIcon(icon, this.useSymbolicIcons));
             item._icon.set_icon_size(this.appIconSize);
         } else {
             item = new PopupMenu.PopupMenuItem(name);
@@ -185,7 +185,7 @@ class MyApplet extends Applet.TextIconApplet {
                 : this.settings.settingsData['list-groups'].columns[1].default;
 
         let _icon = new St.Icon({
-            gicon: this._createAppIcon(icon),
+            gicon: this.createGIcon(icon, this.useSymbolicIcons),
             icon_name: null,
             icon_type: this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR,
             icon_size: this.appIconSize,
@@ -227,21 +227,29 @@ class MyApplet extends Applet.TextIconApplet {
         if (this.menu.isOpen && !this.customLauncherIcon) {
             this.set_applet_icon_symbolic_name(this.icons[1]);
         } else {
-            if (this.icons[0].endsWith('symbolic')) {
-                this.set_applet_icon_symbolic_name(this.icons[0]);
-            } else {
-                this.set_applet_icon_name(this.icons[0]);
-            }
+            let _isSymbolicIcon = this.icons[0].endsWith('symbolic');
+            this._ensureIcon();
+            this._applet_icon.set_gicon(this.createGIcon(this.icons[0]));
+            this._applet_icon.set_icon_type(
+                _isSymbolicIcon ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
+            );
+            this._setStyle();
         }
     }
 
-    _createAppIcon(icon) {
+    createGIcon(icon, useSymbolicIcons = false) {
         let iconFile = Gio.file_new_for_path(icon);
 
         if (iconFile.query_exists(null)) {
             return new Gio.FileIcon({ file: iconFile });
         } else {
-            return new Gio.ThemedIcon({ name: icon });
+            let params;
+            if (useSymbolicIcons) {
+                params = { names: [`${icon}-symbolic`, `${icon}-symbolic.symbolic`, icon] };
+            } else {
+                params = { name: icon };
+            }
+            return new Gio.ThemedIcon(params);
         }
     }
 
@@ -259,7 +267,7 @@ class MyApplet extends Applet.TextIconApplet {
         Main.messageTray.add(source);
 
         let _icon = new St.Icon({
-            gicon: this._createAppIcon(icon),
+            gicon: this.createGIcon(icon),
             icon_name: null,
             icon_type: St.IconType.FULLCOLOR,
             icon_size: 30,
