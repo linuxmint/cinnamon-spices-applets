@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2015, 2016.
+# Fábio Nogueira <fnogueira@gnome.org>, 2015, 2016.
 #
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
 "PO-Revision-Date: 2021-03-22 17:39+0000\n"
-"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"Last-Translator: Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr "Digite para pesquisar..."
 
 #. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Iniciando"
 
 #. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "descrição não disponível"
 
 #. 3.2 4.0
 msgid "All Applications"
@@ -40,15 +40,15 @@ msgstr "Locais"
 
 #. 3.2 4.0
 msgid "Recent Files"
-msgstr "Ficheiros recentes"
+msgstr "Arquivos recentes"
 
 #. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "Marcadores"
 
 #. 3.2 4.0
 msgid "Favorite Apps"
-msgstr ""
+msgstr "Apps Favoritos"
 
 #. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
@@ -65,7 +65,7 @@ msgstr "Sem documentos recentes"
 
 #. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Detalhes da conta"
 
 #. 3.2 3.2
 msgid "Grid View"
@@ -77,35 +77,35 @@ msgstr "Visão em lista"
 
 #. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Trocar para visão em ícones"
 
 #. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Trocar para visão em lista"
 
 #. 3.2 4.0
 msgid "Lock Screen"
-msgstr "Travar a tela"
+msgstr "Tela de bloqueio"
 
 #. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Bloquear a tela"
 
 #. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Sair"
 
 #. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Encerrar sessão"
 
 #. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "Sair"
 
 #. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Desligar o computador"
 
 #. 3.2 4.0
 msgid "Home"
@@ -121,36 +121,36 @@ msgstr "Nevagar na rede"
 
 #. 3.2 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Executar com GPU NVIDIA"
 
 #. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "Adicionar ao painel"
 
 #. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "Adicionar para a área de trabalho"
 
 #. 3.2 4.0
 msgid "Remove favorite"
-msgstr ""
+msgstr "Remover favorito"
 
 #. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "Adicionar para os favoritos"
 
 #. 3.2 4.0
 msgid "Uninstall"
-msgstr ""
+msgstr "Desistalar"
 
 #. 4.0 4.0
 msgid "Please wait..."
-msgstr ""
+msgstr "Por favor aguarde"
 
 #. metadata.json->name
 #. 3.2
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #. metadata.json->description
 msgid ""
@@ -165,162 +165,164 @@ msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
+"Tornado possível graças aos esforços dos colaboradores do Cinnamon menu, "
+"Gnomenu e os contribuintes para os projetos dos quais derivaram."
 
 #. 3.2 4.0
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #. 3.2 4.0
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #. 3.2 4.0
 msgid "Layout and Content"
-msgstr ""
+msgstr "Leiaute e Conteúdo"
 
 #. 3.2
 msgid "Search Providers"
-msgstr ""
+msgstr "Provedores de Pesquisa"
 
 #. 3.2
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Nenhuma extensão do provedor de pesquisa encontrada"
 
 #. 3.2 4.0
 msgid "Panel"
-msgstr ""
+msgstr "Painel"
 
 #. 3.2 4.0
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #. 3.2 4.0
 msgid "Layout"
-msgstr ""
+msgstr "Leiaute"
 
 #. 3.2 4.0
 msgid "Content"
-msgstr ""
+msgstr "Conteúdo"
 
 #. 3.2 4.0
 msgid "Recent files settings"
-msgstr ""
+msgstr "Configurações de arquivos recentes"
 
 #. 3.2 4.0
 msgid "Open the menu editor"
-msgstr ""
+msgstr "Abrir o editor de menu"
 
 #. 3.2 4.0
 msgid "Reset category order"
-msgstr ""
+msgstr "Redefinir a ordem da categoria"
 
 #. 3.2 4.0
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Usar um ícone customizado"
 
 #. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Usar um ícone customizado no painel"
 
 #. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "Icone do painel"
 
 #. 3.2 4.0
 msgid "Panel text"
-msgstr ""
+msgstr "Texto do painel"
 
 #. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Texto para mostrar ao lado do ícone do painel"
 
 #. 3.2 4.0
 msgid "pixels"
-msgstr ""
+msgstr "pixels"
 
 #. 3.2 4.0
 msgid "Category icon size"
-msgstr ""
+msgstr "Tamanho do ícone de categoria"
 
 #. 3.2 4.0
 msgid "Applications list icon size"
-msgstr ""
+msgstr "Tamanho do ícone da lista de aplicativos"
 
 #. 3.2 4.0
 msgid "Applications grid icon size"
-msgstr ""
+msgstr "Tamanho do ícone da grade de aplicativos"
 
 #. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Atalho do teclado para abrir e fechar o menu"
 
 #. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Abrir o menu ao passar o mouse"
 
 #. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Abrir o menu quando eu mover meu mouse no ícone do painel"
 
 #. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "milisegundos"
 
 #. 3.2 4.0
 msgid "Menu hover delay"
-msgstr ""
+msgstr "Atraso ao passar o mouse sobre o menu"
 
 #. 3.2 4.0
 msgid "Use menu animations"
-msgstr ""
+msgstr "Usar animações do menu"
 
 #. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Animar o menu ao abrir e fechar"
 
 #. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Ativar categorias ao clicar"
 
 #. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Ativar categorias ao clicar em vez de passar o mouse"
 
 #. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Habilitar auto rolagem"
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Habilitar auto rolagem na lista de aplicativos"
 
 #. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Mostrar favoritos da web"
 
 #. 3.2 4.0
 msgid "Show your browser's web bookmarks in the menu"
-msgstr ""
+msgstr "Mostra os favoritos do seu navegador no menu"
 
 #. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Permitir pesquisa de janelas abertas"
 
 #. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Habilitar provedores de pesquisa"
 
 #. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Incluir resultados dos provedores de pesquisas nas buscas"
 
 #. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Exemplo de Provedor de pesquisa"
 
 #. 3.2
 msgid "Startup applications view mode"
-msgstr ""
+msgstr "Modo de visualização de aplicativos de inicialização"
 
 #. 3.2 4.0
 msgid "List"
@@ -332,51 +334,51 @@ msgstr "Ícones"
 
 #. 3.2 4.0
 msgid "columns"
-msgstr ""
+msgstr "colunas"
 
 #. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Número de colunas na grade de aplicativos"
 
 #. 3.2 4.0
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "Mostrar marcadores e locais"
 
 #. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Mostrar marcadores e categorias de locais no menu"
 
 #. 3.2 4.0
 msgid "Show application icons"
-msgstr ""
+msgstr "Mostrar ícones de aplicativos"
 
 #. 3.2 4.0
 msgid "Show category icons"
-msgstr ""
+msgstr "Mostrar ícones de categorias"
 
 #. 3.2
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Mostrar descrições do aplicativo sob títulos"
 
 #. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Mostrar dicas"
 
 #. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Atraso na dica"
 
 #. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Use uma altura de menu personalizada"
 
 #. 3.2 4.0
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. 3.2 4.0
 msgid "Custom menu height"
-msgstr ""
+msgstr "altura de menu personalizada"
 
 #. 4.0
 msgid "Applications view mode"
@@ -384,58 +386,120 @@ msgstr "Modo de visualização de aplicativos"
 
 #. 4.0
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "Ver aplicativos em lista ou grade"
 
 #. 4.0
 msgid "Application description placement"
-msgstr ""
+msgstr "Localização da descrição do aplicativo"
 
 #. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "Dicas"
 
 #. 4.0
 msgid "Under titles"
-msgstr ""
+msgstr "Sob títulos"
 
 #. 4.0
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Escolha onde mostrar as descrições do aplicativo"
 
 #. 4.0
 msgid "Session buttons location"
-msgstr ""
+msgstr "Localização dos botões de sessão"
+
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Escolha onde mostrar os botões de sessão"
+
+#. 4.0
+msgid "Sidebar location"
+msgstr "Localização da barra de sessão"
 
 #. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Superior"
 
 #. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "Inferior"
 
 #. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Esquerda"
 
 #. 4.0
 msgid "Right"
-msgstr ""
+msgstr "Direita"
+
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Mostrar favoritos na barra de sessão"
+
+#. 4.0
+msgid "Show your favorites app and file icons on the sidebar"
+msgstr "Mostrar seus apps favoritos e pastas na barra de sessão"
 
 #. 4.0
 msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
+msgstr "Escolha onde mostrar os botões de sessão (desligar, sair, etc.)"
 
 #. 4.0
 msgid "Add favorites to session buttons"
-msgstr ""
+msgstr "Adicionar favoritos aos botões de sessão"
+
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Mostar categoria de apps favoritos"
+
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Mostar categoria de apps favoritos no menu"
+
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Mostar categoria de itens recentes no menu"
+
+#. 4.0
+msgid "Show home folder"
+msgstr "Mostrar pasta pessoal"
+
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Mostar categoria de pasta pessoal no menu"
 
 #. 4.0
 msgid "Show your favorite app icons next to the session buttons"
-msgstr ""
+msgstr "Mostre seus ícones de aplicativos favoritos ao lado dos botões de sessão"
 
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Abra menu na categoria:"
 
+#. 4.0
+msgid "Last used category"
+msgstr "Última categoria usada"
+
+#. 4.0
+msgid "Favorite apps"
+msgstr "Apps favoritos"
+
+#. 4.0
+msgid "All applications"
+msgstr "Todos os aplicativos"
+
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Sempre abra o menu com esta categoria selecionada"
+
+#. 4.0
+msgid "Show hidden files"
+msgstr "Mostrar arquivos ocultos"
+
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Mostrar arquivos ocultos na visualização da pasta"
