@@ -18,6 +18,7 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
 msgid "Type to search..."
 msgstr "Digite para pesquisar..."
 
@@ -26,10 +27,25 @@ msgstr "Iniciando"
 
 msgid "No description available"
 msgstr "Descrição não disponível"
+=======
+
+msgid "Type to search..."
+msgstr "Digite para pesquisar..."
+
+
+msgid "Initializing"
+msgstr "Iniciando"
+
+
+msgid "No description available"
+msgstr "Descrição não disponível"
+
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 
 msgid "All Applications"
 msgstr "Todos os aplicativos"
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
 msgid "Places"
 msgstr "Locais"
 
@@ -44,10 +60,33 @@ msgstr "Apps Favoritos"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "o pacote gir1.2-gda-5.0 é necessário para os favoritos do Firefox e Midori."
+=======
+
+msgid "Places"
+msgstr "Locais"
+
+
+msgid "Recent Files"
+msgstr "Arquivos recentes"
+
+
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+
+msgid "Favorite Apps"
+msgstr "Apps Favoritos"
+
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "o pacote gir1.2-gda-5.0 é necessário para os favoritos do Firefox e Midori."
+
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 
 msgid "Clear List"
 msgstr "Limpar lista"
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
 msgid "No recent documents"
 msgstr "Sem documentos recentes"
 
@@ -90,12 +129,72 @@ msgstr "Executar com GPU NVIDIA"
 msgid "Add to panel"
 msgstr "Adicionar ao painel"
 
+=======
+
+msgid "No recent documents"
+msgstr "Sem documentos recentes"
+
+
+msgid "Account details"
+msgstr "Detalhes da conta"
+
+ 3.2
+msgid "Grid View"
+msgstr "Visão em ícones"
+
+ 3.2
+msgid "List View"
+msgstr "Visão em lista"
+
+ 3.2
+msgid "Switch to grid view"
+msgstr "Trocar para visão em ícones"
+
+ 3.2
+msgid "Switch to list view"
+msgstr "Trocar para visão em lista"
+
+
+msgid "Lock Screen"
+msgstr "Tela de bloqueio"
+
+
+msgid "Lock the screen"
+msgstr "Bloquear a tela"
+
+
+msgid "Logout"
+msgstr "Sair"
+
+
+msgid "Leave the session"
+msgstr "Encerrar sessão"
+
+
+msgid "Quit"
+msgstr "Sair"
+
+
+msgid "Shutdown the computer"
+msgstr "Desligar o computador"
+
+
+msgid "Run with NVIDIA GPU"
+msgstr "Executar com GPU NVIDIA"
+
+
+msgid "Add to panel"
+msgstr "Adicionar ao painel"
+
+
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 msgid "Add to desktop"
 msgstr "Adicionar para a área de trabalho"
 
 msgid "Remove from favorites"
 msgstr "Remover dos favoritos"
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
 msgid "Add to favorites"
 msgstr "Adicionar para os favoritos"
 
@@ -108,12 +207,35 @@ msgstr "Início"
 msgid "Computer"
 msgstr "Computador"
 
+=======
+
+msgid "Add to favorites"
+msgstr "Adicionar para os favoritos"
+
+
+msgid "Uninstall"
+msgstr "Desistalar"
+
+
+msgid "Home"
+msgstr "Início"
+
+
+msgid "Computer"
+msgstr "Computador"
+
+
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 msgid "Browse network"
 msgstr "Nevagar na rede"
 
 msgid "Find files..."
 msgstr "Procurar Arquivos..."
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
+=======
+ 4.0
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
 
@@ -138,6 +260,10 @@ msgstr "Pasta pessoal"
 msgid "Too many entries - showing first 1000 entries only"
 msgstr "Muitas entradas - mostrando apenas as primeiras 1000 entradas"
 
+<<<<<<< HEAD:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR .po
+=======
+
+>>>>>>> 369c9f5f2b16894382a88a6023eeef22b8ced31f:Cinnamenu@json/files/Cinnamenu@json/po/pt_BR.po
 msgid "Reset category order"
 msgstr "Redefinir ordem da categoria"
 
