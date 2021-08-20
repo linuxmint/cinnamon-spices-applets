@@ -326,7 +326,7 @@ msgstr "Usar um ícone customizado no painel"
 
 #. 3.2 4.0
 msgid "Panel icon"
-msgstr "Icone do painel"
+msgstr "Ícone do painel"
 
 #. 3.2 4.0
 msgid "Panel text"
@@ -537,7 +537,7 @@ msgid "Show favorites on sidebar"
 msgstr "Mostrar favoritos na barra lateral"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Mostrar seu app favorito e icone de arquivo na barra lateral"
+msgstr "Mostrar seu app favorito e ícone de arquivo na barra lateral"
 
 msgid "Show recent items"
 msgstr "Mostrar itens recentes"
@@ -631,7 +631,9 @@ msgstr "Pesquisa de favoritos da web"
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
-msgstr ""
+msgid ""
+"Ao pesquisar, também pesquise os favoritos do meu navegador (Google Chrome, Firefox, Chromium, Opera, Brave) \ n"
+"Nota: Para pesquisar os favoritos do Firefox, você precisará instalar o pacote gir1.2-gda-5.0 (distribuições baseadas em Debian, incluindo Ubuntu e Linux Mint) ou o pacote libgda (distribuições baseadas em Arch) e reiniciar seu computador."
 
 msgid "Wikipedia search"
 msgstr "Pesquisa na Wikipédia"
@@ -643,7 +645,7 @@ msgid "Use a custom icon size"
 msgstr "Usar um tamanho de ícone pesonalizado"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Usar um tamanho personalizado para o icone do painel"
+msgstr "Usar um tamanho personalizado para o ícone do painel"
 
 msgid "Panel icon size (pixels)"
 msgstr "Tamanho do ícone do painel (pixels)"
@@ -655,10 +657,10 @@ msgid "Sidebar icon size (pixels)"
 msgstr "Tamanho do ícone da barra lateral"
 
 msgid "Use sidebar box style"
-msgstr "Usar o estilo da caixa da barra lateral"
+msgstr "Usar o estilo da caixa na barra lateral"
 
 msgid "Use a sidebar box style"
-msgstr "Usar um estilo da caixa da barra lateral"
+msgstr "Usar um estilo da caixa na barra lateral"
 
 msgid "Use tile style"
 msgstr "Usar estilo de bloco"
