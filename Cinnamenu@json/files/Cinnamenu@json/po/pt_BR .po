@@ -8,145 +8,114 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2021-03-22 17:39+0000\n"
+"PO-Revision-Date: 2021-08-20 12:02-0300\n"
 "Last-Translator: Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Digite para pesquisar..."
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr "Iniciando"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr "descrição não disponível"
+msgstr "Descrição não disponível"
 
-#. 3.2 4.0
 msgid "All Applications"
 msgstr "Todos os aplicativos"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Locais"
 
-#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Arquivos recentes"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Apps Favoritos"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Pacote gir1.2-gda-5.0 necessário para os favoritos do Firefox e Midori."
+msgstr "o pacote gir1.2-gda-5.0 é necessário para os favoritos do Firefox e Midori."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Limpar lista"
 
-#. 3.2 4.0
 msgid "No recent documents"
 msgstr "Sem documentos recentes"
 
-#. 3.2
 msgid "Account details"
 msgstr "Detalhes da conta"
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "Visão em ícones"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "Visão em lista"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Trocar para visão em ícones"
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Trocar para visão em lista"
 
-#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Tela de bloqueio"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Bloquear a tela"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Sair"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Encerrar sessão"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Sair"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Desligar o computador"
 
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Executar com GPU NVIDIA"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Adicionar ao painel"
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Adicionar para a área de trabalho"
 
 msgid "Remove from favorites"
 msgstr "Remover dos favoritos"
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Adicionar para os favoritos"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Desistalar"
 
-#. 3.2 4.0
 msgid "Home"
 msgstr "Início"
 
-#. 3.2 4.0
 msgid "Computer"
 msgstr "Computador"
 
-#. 3.2 4.0
 msgid "Browse network"
 msgstr "Nevagar na rede"
 
 msgid "Find files..."
 msgstr "Procurar Arquivos..."
 
-#. 4.0 4.0
 msgid "Please wait..."
-msgstr "Por favor aguarde"
+msgstr "Por favor aguarde..."
 
 msgid "No recent Items"
 msgstr "Sem itens recentes"
@@ -169,7 +138,6 @@ msgstr "Pasta pessoal"
 msgid "Too many entries - showing first 1000 entries only"
 msgstr "Muitas entradas - mostrando apenas as primeiras 1000 entradas"
 
-#. 3.2 4.0
 msgid "Reset category order"
 msgstr "Redefinir ordem da categoria"
 
@@ -258,81 +226,59 @@ msgid "Skipping"
 msgstr "Pulando"
 
 msgid " - directory already searched"
-msgstr "- diretório já pesquisado"
+msgstr " - diretório já pesquisado"
 
-#. metadata.json->name
-#. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
-"Um menu flexível com opções de layout de grade ou lista, navegador de"
-"arquivos e buscador de emoji."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Um menu flexível com opções de layout de grade ou lista, navegador dearquivos e buscador de emoji."
 
-#. 3.2 4.0
 msgid "Behavior"
 msgstr "Comportamento"
 
-#. 3.2 4.0
 msgid "Appearance"
 msgstr "Aparência"
 
-#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Leiaute e Conteúdo"
 
-#. 3.2
 msgid "Search Providers"
 msgstr "Provedores de Pesquisa"
 
-#. 3.2
 msgid "No search provider extensions found"
 msgstr "Nenhuma extensão do provedor de pesquisa encontrada"
 
-#. 3.2 4.0
 msgid "Panel"
 msgstr "Painel"
 
-#. 3.2 4.0
 msgid "Menu"
 msgstr "Menu"
 
-#. 3.2 4.0
 msgid "Layout"
 msgstr "Leiaute"
 
-#. 3.2 4.0
 msgid "Content"
 msgstr "Conteúdo"
 
-#. 3.2 4.0
 msgid "Recent files settings"
 msgstr "Configurações de arquivos recentes"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Abrir o editor de menu"
 
-#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Usar um ícone customizado"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Usar um ícone customizado no painel"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr "Icone do painel"
+msgstr "Ícone do painel"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Texto do painel"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Texto para mostrar ao lado do ícone do painel"
 
@@ -348,47 +294,36 @@ msgstr "Tamanho do ícone da grade de aplicativos (pixels)"
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Atalho do teclado para abrir e fechar o menu"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
 msgstr "Abrir o menu ao passar o mouse"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Abrir o menu quando eu mover meu mouse no ícone do painel"
 
-#. 3.2 4.0
 msgid "milliseconds"
 msgstr "milissegundos"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
 msgstr "Atraso ao passar o mouse sobre o menu"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Usar animações do menu"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
 msgstr "Animar o menu ao abrir e fechar"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Ativar categorias ao clicar"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr "Ativar categorias ao clicar em vez de passar o mouse"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
 msgstr "Habilitar auto rolagem"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Habilitar auto rolagem na lista de aplicativos"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Mostrar favoritos da web"
 
@@ -399,129 +334,99 @@ msgstr ""
 "Mostra os favoritos do seu navegador no menu.\n"
 "Nota: Instale o pacote gir1.2-gda-5.0 para ler os favoritos do firefox."
 
-#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Permitir pesquisa de janelas abertas"
 
-#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Habilitar provedores de pesquisa"
 
 msgid "Include search provider results in searches"
 msgstr "Incluir resultados dos provedores de pesquisas nas buscas"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr "Exemplo de Provedor de pesquisa"
 
-#. 4.0
 msgid "Open menu on category:"
 msgstr "Abrir o menu na categoria:"
 
-#. 3.2 4.0
 msgid "List"
 msgstr "Lista"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "Ícones"
 
-#. 4.0
 msgid "Always open the menu with this category selected"
 msgstr "Sempre abra o menu com esta categoria selecionada"
 
-#. 3.2 4.0
 msgid "columns"
 msgstr "colunas"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Número de colunas na grade de aplicativos"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Mostrar marcadores e locais"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Mostrar marcadores e categorias de locais no menu"
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Mostrar ícones de aplicativos"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Mostrar ícones de categorias"
 
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Mostrar descrições do aplicativo sob títulos"
 
-#. 3.2
 msgid "Show tooltips"
 msgstr "Mostrar dicas"
 
-#. 3.2
 msgid "Tooltip delay"
 msgstr "Atraso na dica"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Use uma altura de menu personalizada"
 
 msgid "Custom menu height (pixels)"
 msgstr "Altura personalizada do menu (pixels)"
 
-#. 4.0
 msgid "Applications view mode"
 msgstr "Modo de visualização de aplicativos"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "Ver aplicativos em lista ou grade"
 
-#. 4.0
 msgid "Application description placement"
 msgstr "Localização da descrição do aplicativo"
 
-#. 4.0
 msgid "Tooltips"
 msgstr "Dicas"
 
-#. 4.0
 msgid "Under titles"
 msgstr "Sob títulos"
 
-#. 4.0
 msgid "None"
 msgstr "Nenhum"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr "Escolha onde mostrar as descrições do aplicativo"
 
-#. 4.0
 msgid "Sidebar location"
 msgstr "Localização da barra lateral"
 
-#. 4.0
 msgid "Top"
 msgstr "Superior"
 
-#. 4.0
 msgid "Bottom"
 msgstr "Inferior"
 
-#. 4.0
 msgid "Left"
 msgstr "Esquerda"
 
-#. 4.0
 msgid "Right"
 msgstr "Direita"
 
-#. 4.0
 msgid "Choose where to show the sidebar"
 msgstr "Escolha onde mostrar a barra lateral"
 
@@ -532,48 +437,39 @@ msgstr ""
 "\n"
 "Informação/Dica: Arraste na borda do menu para alterar seu tamanho.\n"
 
-#. 4.0
 msgid "Show favorites on sidebar"
 msgstr "Mostrar favoritos na barra lateral"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Mostrar seu app favorito e icone de arquivo na barra lateral"
+msgstr "Mostrar seu app favorito e ícone de arquivo na barra lateral"
 
 msgid "Show recent items"
 msgstr "Mostrar itens recentes"
 
-#. 4.0
 msgid "Show recent items category in the menu"
 msgstr "Mostrar categoria de itens recentes no menu"
 
-#. 4.0
 msgid "Show favorite apps category"
 msgstr "Mostrar categoria de apps favoritos"
 
-#. 4.0
 msgid "Show your favorite apps category in the menu"
 msgstr "Mostrar categoria de apps favoritos no menu"
 
-#. 4.0
 msgid "Show home folder"
 msgstr "Mostrar pasta pessoal"
 
-#. 4.0
 msgid "Show home folder category in the menu"
 msgstr "Mostrar categoria de pasta pessoal no menu"
 
-#. 4.0
 msgid "Last used category"
 msgstr "Última categoria usada"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Rolar automaticamente a lista de aplicativos ao passar o mouse"
 
-#. 4.0
 msgid "Show hidden files"
 msgstr "Mostrar arquivos ocultos"
 
-#. 4.0
 msgid "Show hidden files in folder view"
 msgstr "Mostrar arquivos ocultos na visualização da pasta"
 
@@ -632,6 +528,8 @@ msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
+"Ao pesquisar, também pesquise os favoritos do meu navegador (Google Chrome, Firefox, Chromium, Opera, Brave) \n"
+"Nota: Para pesquisar os favoritos do Firefox, você precisará instalar o pacote gir1.2-gda-5.0 (distribuições baseadas em Debian, incluindo Ubuntu e Linux Mint) ou o pacote libgda (distribuições baseadas em Arch) e reiniciar seu computador."
 
 msgid "Wikipedia search"
 msgstr "Pesquisa na Wikipédia"
@@ -643,7 +541,7 @@ msgid "Use a custom icon size"
 msgstr "Usar um tamanho de ícone pesonalizado"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Usar um tamanho personalizado para o icone do painel"
+msgstr "Usar um tamanho personalizado para o ícone do painel"
 
 msgid "Panel icon size (pixels)"
 msgstr "Tamanho do ícone do painel (pixels)"
@@ -655,17 +553,13 @@ msgid "Sidebar icon size (pixels)"
 msgstr "Tamanho do ícone da barra lateral"
 
 msgid "Use sidebar box style"
-msgstr "Usar o estilo da caixa da barra lateral"
+msgstr "Usar o estilo da caixa na barra lateral"
 
 msgid "Use a sidebar box style"
-msgstr "Usar um estilo da caixa da barra lateral"
+msgstr "Usar um estilo da caixa na barra lateral"
 
 msgid "Use tile style"
 msgstr "Usar estilo de bloco"
 
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
-"Use um estilo de bloco para os botões do aplicativo (Nota: pode não funcionar em alguns"
-"temas)"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Use um estilo de bloco para os botões do aplicativo (Nota: pode não funcionar em alguns temas)"
