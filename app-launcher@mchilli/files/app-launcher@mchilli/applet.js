@@ -389,8 +389,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         } else if (source.hasOwnProperty('id')) {
             return appSystem.lookup_app(source.id).get_app_info();
         }
-        global.logError(`${UUID}: cant get app info`);
-        return false;
+        throw new Error(`${UUID}: cant get app info`);
     }
 
     handleDragOver(source, actor, x, y, time) {
@@ -408,10 +407,14 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
 
         if (this._dragIndex != dropIndex) {
             if (!this._dragPlaceholder) {
-                let app = this._getAppInfo(source);
-                let name = app.get_display_name();
-                let icon = app.get_icon().to_string();
-                this._createPlaceholder(name, icon, dropIndex);
+                try {
+                    let app = this._getAppInfo(source);
+                    let name = app.get_display_name();
+                    let icon = app.get_icon().to_string();
+                    this._createPlaceholder(name, icon, dropIndex);
+                } catch (error) {
+                    global.logError(error);
+                }
             } else {
                 this.box.set_child_at_index(this._dragPlaceholder.actor, dropIndex);
             }
@@ -441,7 +444,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             let cmd = app.get_commandline();
             this.applet.addDropApp(name, icon, cmd, this._dragIndex);
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
 
         if (this.isOpen) {
