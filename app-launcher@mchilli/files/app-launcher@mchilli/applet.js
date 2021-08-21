@@ -6,6 +6,7 @@ const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const DND = imports.ui.dnd;
+const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 
@@ -13,6 +14,7 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
 const APPNAME = 'App Launcher';
+let appSystem = Cinnamon.AppSystem.get_default();
 
 // l10n/translation support
 const UUID = 'app-launcher@mchilli';
@@ -282,13 +284,13 @@ class MyApplet extends Applet.TextIconApplet {
         return string.split(search).join(replace);
     }
 
-    addDropApp(name, icon, id, index = 0) {
+    addDropApp(name, icon, cmd, index = 0) {
         let newList = this.listApplications;
         newList.splice(index, 0, {
             name: name,
             group: '',
             icon: icon,
-            command: `gtk-launch ${id}`,
+            command: cmd,
         });
         this.settings.setValue('list-applications', newList);
     }
@@ -381,6 +383,16 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         this._dragIndex = null;
     }
 
+    _getAppInfo(source) {
+        if (source.hasOwnProperty('app')) {
+            return source.app.get_app_info();
+        } else if (source.hasOwnProperty('id')) {
+            return appSystem.lookup_app(source.id).get_app_info();
+        }
+        global.logError(`${UUID}: cant get app info`);
+        return false;
+    }
+
     handleDragOver(source, actor, x, y, time) {
         let children = this.box.get_children();
         let boxSize = this.box.height;
@@ -396,8 +408,9 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
 
         if (this._dragIndex != dropIndex) {
             if (!this._dragPlaceholder) {
-                let name = source.name;
-                let icon = source.icon.get_gicon().to_string();
+                let app = this._getAppInfo(source);
+                let name = app.get_display_name();
+                let icon = app.get_icon().to_string();
                 this._createPlaceholder(name, icon, dropIndex);
             } else {
                 this.box.set_child_at_index(this._dragPlaceholder.actor, dropIndex);
@@ -418,14 +431,15 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
 
     acceptDrop(source, actor, x, y, time) {
         if (!source.isDraggableApp) {
-            return DND.DragMotionResult.NO_DROP;
+            return false;
         }
 
         try {
-            let name = source.name;
-            let icon = source.icon.get_gicon().to_string();
-            let id = source.get_app_id();
-            this.applet.addDropApp(name, icon, id, this._dragIndex);
+            let app = this._getAppInfo(source);
+            let name = app.get_display_name();
+            let icon = app.get_icon().to_string();
+            let cmd = app.get_commandline();
+            this.applet.addDropApp(name, icon, cmd, this._dragIndex);
         } catch (error) {
             global.log(error);
         }
@@ -434,6 +448,8 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this.close();
         }
         this.endDrag();
+
+        return true;
     }
 }
 
