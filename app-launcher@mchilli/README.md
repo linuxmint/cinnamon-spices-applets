@@ -14,3 +14,7 @@ A simple App Launcher for your panels
     -   enable/disable notification
     -   show/hide application icons
     -   set application icon size
+
+#### Drag'n'Drop
+
+<img src="https://raw.githubusercontent.com/mchilli/cinnamon-spices/master/applets/app-launcher%40mchilli/drag'n'drop%20demo.gif" width="480" alt="Drag'n'Drop Demo"/>
