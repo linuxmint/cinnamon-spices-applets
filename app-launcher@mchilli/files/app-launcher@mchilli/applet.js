@@ -51,9 +51,6 @@ class MyApplet extends Applet.TextIconApplet {
     bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId);
 
-        this.settings.bind('list-applications', 'listApplications', () => {
-            this.updateMenu(true);
-        });
         this.settings.bind('list-applications', 'listApplications', this.updateGroups);
         this.settings.bind('list-groups', 'listGroups', this.updateMenu);
 
