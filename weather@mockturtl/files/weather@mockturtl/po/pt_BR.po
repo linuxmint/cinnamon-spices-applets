@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 2.6.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-15 22:54+0100\n"
-"PO-Revision-Date: 2021-07-13 20:05-0300\n"
+"PO-Revision-Date: 2021-08-21 21:11-0300\n"
 "Last-Translator: Jorge B. Adad\n"
 "Language-Team: Português <jorgebadad@gmail.com>\n"
 "Language: pt_BR\n"
@@ -238,7 +238,7 @@ msgstr "Você não pode remover um local incorreto"
 
 #: 3.0/applet.js:2070
 msgid "Location is not in storage, can't delete"
-msgstr "Local não está armazenad, não pode deletar"
+msgstr "Local não está armazenado, não pode deletar"
 
 #: 3.0/applet.js:2083
 msgid "Location is deleted from library"
@@ -1985,7 +1985,7 @@ msgstr "Usar ícones personalizados no painel"
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
-msgstr "Presentação"
+msgstr "Apresentação"
 
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
@@ -2463,6 +2463,3 @@ msgstr ""
 
 #~ msgid "Removes location information from storage file."
 #~ msgstr "Remove as informações de local do arquivo de armazenamento."
-
-
-
