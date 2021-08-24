@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 00:50+0100\n"
+"POT-Creation-Date: 2021-08-07 10:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -135,6 +135,21 @@ msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
 msgid "Reset category order"
 msgstr "Kategori sırasını sıfırla"
 
+msgid "light skin tone"
+msgstr "açık ten tonu"
+
+msgid "medium-light skin tone"
+msgstr "orta-açık ten tonu"
+
+msgid "medium skin tone"
+msgstr "orta ten tonu"
+
+msgid "medium-dark skin tone"
+msgstr "orta-koyu ten tonu"
+
+msgid "dark skin tone"
+msgstr "koyu ten tonu"
+
 msgid "This file is no longer available"
 msgstr "Bu dosya artık mevcut değil"
 
@@ -265,17 +280,14 @@ msgstr "Panel metni"
 msgid "Text to show beside the panel icon"
 msgstr "Panel simgesinin yanında gösterilecek metin"
 
-msgid "pixels"
-msgstr "piksel"
+msgid "Category icon size (pixels)"
+msgstr "Kategori simge boyutu (piksel)"
 
-msgid "Category icon size"
-msgstr "Kategori simge boyutu"
+msgid "Applications list icon size (pixels)"
+msgstr "Uygulama listesi simge boyutu (piksel)"
 
-msgid "Applications list icon size"
-msgstr "Uygulama listesi simge boyutu"
-
-msgid "Applications grid icon size"
-msgstr "Uygulama listesi ızgara simge boyutu"
+msgid "Applications grid icon size (pixels)"
+msgstr "Uygulama listesi ızgara simge boyutu (piksel)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Menüyü açıp kapatmak için klavye kısayolu"
@@ -376,8 +388,8 @@ msgstr "Araç ipucu gecikmesi"
 msgid "Use a custom menu height"
 msgstr "Özel bir menü yüksekliği kullanın"
 
-msgid "Custom menu height"
-msgstr "Özel menü yüksekliği"
+msgid "Custom menu height (pixels)"
+msgstr "Özel menü yüksekliği (piksel)"
 
 msgid "Applications view mode"
 msgstr "Uygulama görüntüleme modu"
@@ -539,14 +551,14 @@ msgstr "Özel simge boyutu kullan"
 msgid "Use a custom size for the panel icon"
 msgstr "Panel simgesi için özel boyut kullan"
 
-msgid "Panel icon size"
-msgstr "Panel simge boyutu"
+msgid "Panel icon size (pixels)"
+msgstr "Panel simge boyutu (piksel)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Panel simgesi için özel boyut seçin"
 
-msgid "Sidebar icon size"
-msgstr "Kenar çubuğu simge boyutu"
+msgid "Sidebar icon size (pixels)"
+msgstr "Kenar çubuğu simge boyutu (piksel)"
 
 msgid "Use sidebar box style"
 msgstr "Kenar çubuğu kutusu stilini kullan"

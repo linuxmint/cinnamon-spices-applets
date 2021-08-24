@@ -21,6 +21,7 @@ const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
+const {addTween} = imports.ui.tweener;
 const {_, getThumbnail_gicon, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
@@ -28,7 +29,7 @@ const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./butto
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
-const {wikiSearch} = require('./wikipediaSearch');
+const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
 
@@ -133,6 +134,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
         { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
+        { key: 'wikipedia-language',        value: 'wikipediaLanguage',     cb: clearWikiSearchCache },
 
         { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this._updateIconAndLabel },
         { key: 'menu-icon',                 value: 'menuIcon',              cb: this._updateIconAndLabel },
@@ -166,6 +168,54 @@ class CinnamenuApplet extends TextIconApplet {
 
     getThemeBackgroundColor() {
         return this.menu.actor.get_theme_node().get_background_color();
+    }
+
+    scrollToButton(button, enableAnimation) {
+        let scrollBox = button.actor.get_parent();
+        let i = 0;
+        while (!(scrollBox instanceof St.ScrollView)) {
+            i++;
+            if (i > 10 || !scrollBox) {
+                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
+                return false;
+            }
+            scrollBox = scrollBox.get_parent();
+        }
+
+        const adjustment = scrollBox.vscroll.adjustment;
+        let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+
+        let offset = 0;
+        const vfade = scrollBox.get_effect('fade');//this always seems to return null?
+        if (vfade) {
+            offset = vfade.vfade_offset;
+        }
+
+        const box = button.actor.get_allocation_box();
+        const y1 = box.y1, y2 = box.y2;
+        //global.log('value', value,' y1:',y1,' y2:',y2);
+        const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
+        if (y1 < value + offset) {
+            if (y1 < PADDING_ALLOWANCE) {
+                value = 0;
+            } else {
+                value = Math.max(0, y1 - offset);
+            }
+        } else if (y2 > value + pageSize - offset) {
+            if (y2 > upper - offset - PADDING_ALLOWANCE) {
+                value = upper - pageSize;
+            } else {
+                value = Math.min(upper, y2 + offset - pageSize);
+            }
+        } else {
+            return false;
+        }
+
+        if (enableAnimation) {
+            addTween(adjustment, {value: value, time: 0.1, transition: 'easeOutQuad'});
+        } else {
+            adjustment.set_value(value);
+        }
     }
 
     _getScreenWorkArea() {
@@ -408,6 +458,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchView.tweakTheme();
             this.categoriesView.update();//in case menu editor updates
             this.sidebar.populate();//in case fav files changed
+            this.sidebar.scrollToQuitButton();//ensure quit button is visible
             global.stage.set_key_focus(this.searchView.searchEntry);
             let openOnCategory = this.currentCategory;
             if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
@@ -422,7 +473,6 @@ class CinnamenuApplet extends TextIconApplet {
                 openOnCategory = GLib.get_home_dir();
             }
             this.updateMenuSize();
-            //Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
             this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
         } else {
@@ -881,6 +931,9 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //---start search---
         this.currentSearchStr = searchText;
+
+        //Set a new search ID so that async search functions
+        //from a previous search can be aborted.
         this.currentSearchId = Math.floor(Math.random() * 100000000);
 
         this.clearEnteredActors();
@@ -1007,15 +1060,20 @@ class CinnamenuApplet extends TextIconApplet {
 
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+
             const buttons = this.appsView.getActiveButtons();//todo
             if (buttons.length > 0) {
-                buttons[0].handleEnter();
+                Meta.later_add(Meta.LaterType.IDLE, () => {
+                                          if (!buttons[0].entered) {
+                                              this.clearEnteredActors();
+                                              buttons[0].handleEnter();
+                                          } });
             }
         };
 
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
-            wikiSearch(pattern_raw, (wikiResults) => {
+            wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
                             if (this.searchActive && thisSearchId === this.currentSearchId &&
                                                                             wikiResults.length > 0) {
                                 otherResults = otherResults.concat(wikiResults);
@@ -2185,7 +2243,13 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
             this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
                                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         }
+
         return;
+    }
+
+    scrollToQuitButton() {
+        //Scroll to quit button so that it's visible when the menu is opened.
+        this.appThis.scrollToButton(this.items[this.items.length - 1], false);
     }
 
     _addSeparator() {

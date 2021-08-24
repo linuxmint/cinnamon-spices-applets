@@ -9,91 +9,103 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-08-17 13:12+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:115
-msgid "REDSHIFT NOT INSTALLED!"
-msgstr ""
-
-#: applet.js:116
-msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr ""
-
-#: applet.js:119 applet.js:159
+#: applet.js:207
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:164
+#: applet.js:212
 msgid "Recompile Translations"
 msgstr ""
 
+#: applet.js:265
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr ""
+
+#: applet.js:266
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr ""
+
+#: applet.js:510
+msgid "may conflict with this applet, it is highly recommended removing it."
+msgstr ""
+
 #. settings-schema.json->enabled->description
-#: applet.js:356
+#: applet.js:528
 msgid "Enabled"
 msgstr ""
 
-#: applet.js:364 applet.js:410
+#: applet.js:536 applet.js:582
 msgid "Temp:"
 msgstr ""
 
-#: applet.js:375 applet.js:421
+#: applet.js:547 applet.js:593
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:387 applet.js:635
+#: applet.js:559 applet.js:861
 msgid "Gamma:"
 msgstr ""
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:402
+#: applet.js:574
 msgid "Night Enabled"
 msgstr ""
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:464
+#: applet.js:636
 msgid "Show Label"
 msgstr ""
 
-#: applet.js:618
+#: applet.js:830 applet.js:846
+msgid "Night"
+msgstr ""
+
+#: applet.js:831 applet.js:847
+msgid "Day"
+msgstr ""
+
+#: applet.js:838
 msgid "On"
 msgstr ""
 
-#: applet.js:618 applet.js:620
+#: applet.js:838 applet.js:840
 msgid "Off"
 msgstr ""
 
-#: applet.js:626
+#: applet.js:852
 msgid "Day Temperature"
 msgstr ""
 
-#: applet.js:627
+#: applet.js:853
 msgid "Day Brightness"
 msgstr ""
 
-#: applet.js:629
+#: applet.js:855
 msgid "Night Temperature"
 msgstr ""
 
-#: applet.js:630
+#: applet.js:856
 msgid "Night Brightness"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:632
+#: applet.js:858
 msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:633
+#: applet.js:859
 msgid "Brightness"
 msgstr ""
 
@@ -103,8 +115,8 @@ msgstr ""
 
 #. metadata.json->description
 msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift. "
-"This applet conflicts with redshift-gtk, make sure you remove it."
+"Sets brightness, gamma levels and color temperature with Redshift. This "
+"applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
 
 #. settings-schema.json->panel-options->title
@@ -192,6 +204,23 @@ msgstr ""
 msgid "On/Off"
 msgstr ""
 
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr ""
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr ""
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr ""
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr ""
+
 #. settings-schema.json->keyBrightnessUp->description
 msgid "Increase brightness level"
 msgstr ""
@@ -216,19 +245,6 @@ msgstr ""
 msgid "Decrease gamma level"
 msgstr ""
 
-#. settings-schema.json->labelScrollAction->options
-msgid "Bright"
-msgstr ""
-
-#. settings-schema.json->labelScrollAction->options
-#. settings-schema.json->gammaMix->description
-msgid "Gamma"
-msgstr ""
-
-#. settings-schema.json->labelScrollAction->tooltip
-msgid "Action when scroll on applet icon."
-msgstr ""
-
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
 msgid "K"
@@ -237,6 +253,18 @@ msgstr ""
 #. settings-schema.json->dayBrightness->units
 #. settings-schema.json->nightBrightness->units
 msgid "%"
+msgstr ""
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr ""
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr ""
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
 msgstr ""
 
 #. settings-schema.json->locationRemote->description
@@ -268,6 +296,12 @@ msgstr ""
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+" You will lost all your configs."
 msgstr ""
 
 #. settings-schema.json->textInfo->description

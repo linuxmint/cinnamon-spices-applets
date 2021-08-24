@@ -13,56 +13,11 @@ const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
-const {addTween} = imports.ui.tweener;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
-
-function scrollToButton(button, enableAnimation) {
-    let scrollBox = button.actor.get_parent();
-    let i = 0;
-    while (!(scrollBox instanceof St.ScrollView)) {
-        i++;
-        scrollBox = scrollBox.get_parent();
-    }
-
-    const adjustment = scrollBox.vscroll.adjustment;
-    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
-
-    let offset = 0;
-    const vfade = scrollBox.get_effect('fade');//this always seems to return null?
-    if (vfade) {
-        offset = vfade.vfade_offset;
-    }
-
-    const box = button.actor.get_allocation_box();
-    const y1 = box.y1, y2 = box.y2;
-    //global.log('value', value,' y1:',y1,' y2:',y2);
-    const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
-    if (y1 < value + offset) {
-        if (y1 < PADDING_ALLOWANCE) {
-            value = 0;
-        } else {
-            value = Math.max(0, y1 - offset);
-        }
-    } else if (y2 > value + pageSize - offset) {
-        if (y2 > upper - offset - PADDING_ALLOWANCE) {
-            value = upper - pageSize;
-        } else {
-            value = Math.min(upper, y2 + offset - pageSize);
-        }
-    } else {
-        return false;
-    }
-
-    if (enableAnimation) {
-        addTween(adjustment, {value: value, time: 0.1, transition: 'easeOutQuad'});
-    } else {
-        adjustment.set_value(value);
-    }
-}
 
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
@@ -158,7 +113,6 @@ class CategoryButton {
     setButtonStyleSelected() {
         this.actor.set_style_class_name('menu-category-button-selected');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
-
     }
 
     _setButtonStyleHover() {
@@ -170,28 +124,23 @@ class CategoryButton {
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = 'Cinnamon default';
         [
-        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],//Mint-Y & Mint-Y-<color>
-        ['/Mint-Y-Dark',        'background-color: #404040;'],//Mint-Y-Dark & Mint-Y-Dark-<color>
-        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],//Mint-Y & Mint-Y-<color> (red)
+        ['/Mint-Y-Dark',        'background-color: #404040;'],//Mint-Y-Dark & Mint-Y-Dark-<color> (light grey)
+        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],//(normal)
         ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],//Mint-X-<color>
-        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark'
-        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
+        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark' //(light grey)
+        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],//normal
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +   //normal
                                                     'background-gradient-end: rgba(255,255,255,0.03);'],
-        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],//Manjaro
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],//Manjaro (normal)
         ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],//Manjaro default
-        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],//Cinnamox- themes
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],//Cinnamox- themes (normal)
         ['/Dracula',            'background-color: #2d2f3d'],
-        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
         ['/Matcha-',            'background-color: white;'],//other Matcha- and Matcha-light- themes
         ['/Matcha-dark-aliz',   'background-color: #2d2d2d;'],
         ['/Matcha-dark-azul',   'background-color: #2a2d36;'],
         ['/Matcha-dark-sea',    'background-color: #273136;'],
         ['/Matcha-dark-cold',   'background-color: #282b33;'],
-        ['/Monternos/',         'color: rgb(70, 70, 70); background-color: rgb(201, 204, 238); ' +
-                                                                                'border-image: none;'],
-        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],//Vivaldi & Vivaldi-ZorinOS
         //Yaru are ubuntu cinnamon themes:
         ['/Yaru-Cinnamon-Light/','background-color: #d8d8d8; color: black;'],
         ['/Yaru-Cinnamon-Dark/','background-color: #404040;']
@@ -226,7 +175,7 @@ class CategoryButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keypress
-            scrollToButton(this, this.appThis.settings.enableAnimation);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;
@@ -823,7 +772,7 @@ class AppButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keyboard navigation
-            scrollToButton(this, this.appThis.settings.enableAnimation);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
         this._setButtonSelected();
 
@@ -1080,7 +1029,7 @@ class SidebarButton {
         if (event) {
             this.appThis.clearEnteredActors();
         } else {//key nav
-            scrollToButton(this, this.appThis.settings.enableAnimation);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;
