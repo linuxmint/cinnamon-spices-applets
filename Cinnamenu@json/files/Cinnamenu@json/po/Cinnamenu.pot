@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"POT-Creation-Date: 2021-08-22 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -479,36 +479,6 @@ msgstr ""
 msgid "Web search option"
 msgstr ""
 
-msgid "Google"
-msgstr ""
-
-msgid "Bing"
-msgstr ""
-
-msgid "Baidu"
-msgstr ""
-
-msgid "Yahoo"
-msgstr ""
-
-msgid "Yandex"
-msgstr ""
-
-msgid "DuckDuckGo"
-msgstr ""
-
-msgid "Ask"
-msgstr ""
-
-msgid "Ecosia"
-msgstr ""
-
-msgid "AOL"
-msgstr ""
-
-msgid "Startpage"
-msgstr ""
-
 msgid "Show an internet search option in search results"
 msgstr ""
 
@@ -530,6 +500,9 @@ msgid "Wikipedia search"
 msgstr ""
 
 msgid "Show some Wikipedia results"
+msgstr ""
+
+msgid "Wikipedia language"
 msgstr ""
 
 msgid "Use a custom icon size"
