@@ -1,5 +1,5 @@
-const { radioApplet } = require('./radio-applet');
-
+const {radioApplet} = require('./radio-applet');
+    
 function main(metadata, orientation, panel_height, instance_id) {
     return new radioApplet.main({
         orientation,
@@ -7,4 +7,3 @@ function main(metadata, orientation, panel_height, instance_id) {
         instanceId: instance_id
     });
 }
-
