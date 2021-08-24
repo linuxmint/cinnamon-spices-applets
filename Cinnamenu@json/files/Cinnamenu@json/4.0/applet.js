@@ -29,7 +29,7 @@ const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./butto
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
-const {wikiSearch} = require('./wikipediaSearch');
+const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
 
@@ -134,6 +134,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
         { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
+        { key: 'wikipedia-language',        value: 'wikipediaLanguage',     cb: clearWikiSearchCache },
 
         { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this._updateIconAndLabel },
         { key: 'menu-icon',                 value: 'menuIcon',              cb: this._updateIconAndLabel },
@@ -174,6 +175,10 @@ class CinnamenuApplet extends TextIconApplet {
         let i = 0;
         while (!(scrollBox instanceof St.ScrollView)) {
             i++;
+            if (i > 10 || !scrollBox) {
+                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
+                return false;
+            }
             scrollBox = scrollBox.get_parent();
         }
 
@@ -1068,7 +1073,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
-            wikiSearch(pattern_raw, (wikiResults) => {
+            wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
                             if (this.searchActive && thisSearchId === this.currentSearchId &&
                                                                             wikiResults.length > 0) {
                                 otherResults = otherResults.concat(wikiResults);

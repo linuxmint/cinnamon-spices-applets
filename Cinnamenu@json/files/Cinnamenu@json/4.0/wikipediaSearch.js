@@ -30,11 +30,15 @@ class Cache {
         }
         return null;
     }
+
+    clear() {
+        this.results_cache = [];
+    }
 }
 
 const cache = new Cache();
 
-function wikiSearch(pattern, callback) {
+function wikiSearch(pattern, langCode, callback) {
     function returnResults(results){
         results.forEach(result => result.gicon = wikipedia_gicon);
         callback(results);
@@ -46,7 +50,7 @@ function wikiSearch(pattern, callback) {
         }
         if( resultPages.status_code == 200) {
             const message = Soup.Message.new('GET',
-                'https://en.wikipedia.org/w/api.php?action=query&generator=prefixsearch&gpssearch=' +
+                'https://'+langCode+'.wikipedia.org/w/api.php?action=query&generator=prefixsearch&gpssearch=' +
                 encodeURIComponent(pattern) +
                 '&prop=extracts&exintro=1&exchars=1000&explaintext=1&redirects=1&gpslimit=4&format=json');
 
@@ -67,7 +71,7 @@ function wikiSearch(pattern, callback) {
                 const result_titles = pageResults[1];
                 const result_urls = pageResults[3];
                 const extracts = JSON.parse(resultContent.response_body.data.toString());
-                
+
                 const cacheEntry = {pattern: p, results: []};
                 for (let i = 0; i < result_urls.length; i++) {
                     cacheEntry.results.push({
@@ -98,8 +102,8 @@ function wikiSearch(pattern, callback) {
         } else {
             last_search = pattern;
             const message = Soup.Message.new('GET',
-                                    'https://en.wikipedia.org/w/api.php?action=opensearch&search=' +
-                                                encodeURIComponent(pattern) + '&format=json&limit=4');
+                                    'https://'+langCode+'.wikipedia.org/w/api.php?action=opensearch&search=' +
+                                    encodeURIComponent(pattern) + '&format=json&limit=4');
             _httpSession.queue_message(message, (...args) => processPages(...args, pattern));
         }
     } catch(e) {
@@ -121,4 +125,8 @@ function _getDescription(index, descriptions) {
     return 'No description available';
 }
 
-module.exports = {wikiSearch};
+function clearWikiSearchCache() {
+    cache.clear();
+}
+
+module.exports = {wikiSearch, clearWikiSearchCache};
