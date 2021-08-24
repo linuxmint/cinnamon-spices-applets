@@ -27,7 +27,7 @@ msgstr "Iniciando"
 msgid "No description available"
 msgstr "Descrição não disponível"
 
-msgid "All Applications"
+msgid "All applications"
 msgstr "Todos os aplicativos"
 
 msgid "Places"
