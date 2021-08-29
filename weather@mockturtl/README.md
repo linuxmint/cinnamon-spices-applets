@@ -99,7 +99,7 @@ Meteorological data from American weather technology company with headquarters i
 
 Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [Link](https://darksky.net/)
 
-***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups, and it will cease to function at the end of 2021.**
+***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups, and it will cease to function at the end of 2022.**
 
 ## Versions
 
