@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.3
+* Update DarkSky API cutoff date
+* Update TS declarations
+
 ## 3.1.2
 
 * Do not minify code so .pot files can be generated without missing strings.
