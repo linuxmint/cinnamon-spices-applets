@@ -1,7 +1,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: calendar@ccprog 1.1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 15:40+0100\n"
 "PO-Revision-Date: \n"
@@ -16,15 +16,15 @@ msgstr ""
 
 #: applet.js:65
 msgid "Date and Time Settings"
-msgstr ""
+msgstr "Paramètres date et heure"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
-msgstr ""
+msgstr "Ajouter une nouvelle entrée"
 
 #: settings_widgets.py:99
 msgid "Edit entry"
-msgstr ""
+msgstr "Modifier l'entrée sélectionnée"
 
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
@@ -40,7 +40,7 @@ msgstr "Région"
 
 #: settings_widgets.py:123
 msgid "City"
-msgstr ""
+msgstr "Ville"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"
@@ -54,7 +54,7 @@ msgstr ""
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
@@ -63,7 +63,7 @@ msgstr "Horloges mondiales"
 
 #. settings-schema.json->section1->title
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
@@ -71,7 +71,7 @@ msgstr "Obtenez les jours fériés pour"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Raccourcis clavier"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
@@ -79,11 +79,12 @@ msgstr "Afficher les heures mondiales"
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
-msgstr ""
+msgstr "Afficher les numéros de semaine dans le calendrier"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
 msgstr ""
+"Cochez cette case pour afficher les numéros de semaine dans le calendrier."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -104,28 +105,32 @@ msgstr "Deux jours"
 
 #. settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
-msgstr ""
+msgstr "Utiliser un format de date personnalisé"
 
 #. settings-schema.json->use-custom-format->tooltip
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
 msgstr ""
+"Cochez cette case pour définir votre propre format de date dans la barre "
+"des tâches."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr ""
+msgstr "Format de date"
 
 #. settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
-msgstr ""
+msgstr "Spécifiez votre format ici."
 
 #. settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr ""
+msgstr "Afficher des indications sur la syntaxe du format de date"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
 msgstr ""
+"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de "
+"date."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -325,7 +330,7 @@ msgstr "Suisse"
 
 #. settings-schema.json->country->options
 msgid "Turkey"
-msgstr ""
+msgstr "Turquie"
 
 #. settings-schema.json->country->options
 msgid "Ukraine"
@@ -913,11 +918,11 @@ msgstr "Wyoming"
 
 #. settings-schema.json->keyOpen->description
 msgid "Show calendar"
-msgstr ""
+msgstr "Afficher l'agenda"
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the calendar."
-msgstr ""
+msgstr "Définir les raccourcis clavier pour afficher l'agenda."
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"
