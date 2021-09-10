@@ -87,8 +87,7 @@
     "launcher-label": {
         "type": "entry",
         "description": "Label",
-        "default": "Launcher",
-        "dependency": "visible-launcher-label"
+        "default": "Launcher"
     },
     "custom-launcher-icon": {
         "type": "switch",
