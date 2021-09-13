@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-27 15:27+0100\n"
-"PO-Revision-Date: 2021-05-28 08:08+0200\n"
+"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"PO-Revision-Date: 2021-08-09 14:42+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Type to search..."
@@ -84,15 +84,6 @@ msgstr "Stäng av"
 msgid "Shutdown the computer"
 msgstr "Stäng av datorn"
 
-msgid "Home"
-msgstr "Hem"
-
-msgid "Computer"
-msgstr "Dator"
-
-msgid "Browse network"
-msgstr "Navigera nätverket"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Kör med NVIDIA GPU"
 
@@ -111,6 +102,15 @@ msgstr "Lägg till i Favoriter"
 msgid "Uninstall"
 msgstr "Avinstallera"
 
+msgid "Home"
+msgstr "Hem"
+
+msgid "Computer"
+msgstr "Dator"
+
+msgid "Browse network"
+msgstr "Navigera nätverket"
+
 msgid "Find files..."
 msgstr "Hitta filer..."
 
@@ -120,14 +120,8 @@ msgstr "Vänta..."
 msgid "No recent Items"
 msgstr "Inga nya artiklar"
 
-msgid "Solution:"
-msgstr "Lösning:"
-
 msgid "Click to copy"
 msgstr "Klicka för att kopiera"
-
-msgid "Search web for"
-msgstr "SökmotorerSök på nätet efter"
 
 msgid "Trash"
 msgstr "Skräp"
@@ -146,6 +140,21 @@ msgstr "För många poster - Visar endast de 1000 första posterna"
 
 msgid "Reset category order"
 msgstr "Återställ kategoriordningen"
+
+msgid "light skin tone"
+msgstr "ljus toning"
+
+msgid "medium-light skin tone"
+msgstr "medelljus toning"
+
+msgid "medium skin tone"
+msgstr "medium toning"
+
+msgid "medium-dark skin tone"
+msgstr "medelmörk toning"
+
+msgid "dark skin tone"
+msgstr "mörk toning"
 
 msgid "This file is no longer available"
 msgstr "Filen är inte längre tillgänglig"
@@ -223,11 +232,11 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"En flexibel meny som tillhandahåller formateringsalternativ, webbokmärken, "
-"sökmotorstöd och luddig sökning."
+"En flexibel meny med ikon- eller listlayoutalternativ, filhanterare och "
+"emoji-sökning."
 
 msgid "Behavior"
 msgstr "Beteende"
@@ -277,17 +286,14 @@ msgstr "Paneltext"
 msgid "Text to show beside the panel icon"
 msgstr "Text att visa vid panelikonen"
 
-msgid "pixels"
-msgstr "pixlar"
+msgid "Category icon size (pixels)"
+msgstr "Storlek på kategoriikoner (pixlar)"
 
-msgid "Category icon size"
-msgstr "Storlek på kategoriikoner"
+msgid "Applications list icon size (pixels)"
+msgstr "Listvyns ikonstorlek (pixlar)"
 
-msgid "Applications list icon size"
-msgstr "Listvyns ikonstorlek"
-
-msgid "Applications grid icon size"
-msgstr "Ikonvyns ikonstorlek"
+msgid "Applications grid icon size (pixels)"
+msgstr "Ikonvyns ikonstorlek (pixlar)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
@@ -386,8 +392,8 @@ msgstr "Fördröjning för knappbeskrivningar"
 msgid "Use a custom menu height"
 msgstr "Använd anpassad menyhöjd"
 
-msgid "Custom menu height"
-msgstr "Anpassad menyhöjd"
+msgid "Custom menu height (pixels)"
+msgstr "Anpassad menyhöjd (pixlar)"
 
 msgid "Applications view mode"
 msgstr "Programmens visningsläge"
@@ -465,8 +471,14 @@ msgstr "Senast använda kategori"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Skrolla programlistan automatiskt vid mus över"
 
-msgid "Enable emoji search"
-msgstr "Aktivera emoji-sök"
+msgid "Show hidden files"
+msgstr "Visa dolda filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Visa dolda filer i mappvyn"
+
+msgid "Emoji search"
+msgstr "Emoji-sök"
 
 msgid "Show emojis in search results"
 msgstr "Visa emojis i sökresultat"
@@ -480,42 +492,60 @@ msgstr "Google"
 msgid "Bing"
 msgstr "Bing"
 
+msgid "Baidu"
+msgstr "Baidu"
+
 msgid "Yahoo"
 msgstr "Yahoo"
+
+msgid "Yandex"
+msgstr "Yandex"
 
 msgid "DuckDuckGo"
 msgstr "DuckDuckGo"
 
+msgid "Ask"
+msgstr "Fråga"
+
+msgid "Ecosia"
+msgstr "Ekosien"
+
+msgid "AOL"
+msgstr "AOL"
+
+msgid "Startpage"
+msgstr "Startpage"
+
 msgid "Show an internet search option in search results"
 msgstr "Visa ett internetsökalternativ i sökresultat"
-
-msgid "Enable web bookmarks search"
-msgstr "Aktivera webbokmärkessök"
-
-msgid ""
-"When searching, also search my browser's web bookmarks (Chrome, Chromium & "
-"Firefox.)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
-msgstr ""
-"Genomsök också min webbläsares bokmärken, vid sökning (Chrome, Chromium & "
-"Firefox).\n"
-"OBS! För att söka i Firefox bokmärken, måste du installera paketet, gir1.2-"
-"gda-5.0 (Debian-baserade distributioner inkl. Ubuntu & Linux Mint) eller "
-"paketet libgda (Arch-baserade distributioner) och starta om din dator."
 
 msgid "Search home folder"
 msgstr "Sök i hemmappen"
 
-msgid "When searching, also search home folder for files"
-msgstr "När du söker, även söka hemkatalog efter filer"
+msgid "When searching, also search my home folder for files"
+msgstr "Vid sökning, sök även i min hemkatalog efter filer"
 
-msgid "Show hidden files"
-msgstr "Visa dolda filer"
+msgid "Web bookmarks search"
+msgstr "Webbokmärkessök"
 
-msgid "Show hidden files in folder view"
-msgstr "Visa dolda filer i mappvyn"
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Genomsök också min webbläsares bokmärken vid sökning (Google Chrome, "
+"Chromium, Opera, Brave & Firefox).\n"
+"OBS! För att söka i Firefox bokmärken, måste du installera paketet, gir1.2-"
+"gda-5.0 (Debian-baserade distributioner inkl. Ubuntu & Linux Mint) eller "
+"paketet libgda (Arch-baserade distributioner) och starta om din dator."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia-sök"
+
+msgid "Show some Wikipedia results"
+msgstr "Visa några Wikipedia-resultat"
 
 msgid "Use a custom icon size"
 msgstr "Använd en anpassad ikonstorlek"
@@ -523,14 +553,14 @@ msgstr "Använd en anpassad ikonstorlek"
 msgid "Use a custom size for the panel icon"
 msgstr "Använd en anpassad storlek för panelikonen"
 
-msgid "Panel icon size"
-msgstr "Panelikons storlek"
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstorlek (pixlar)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Välj en anpassad storlek för panelikonen"
 
-msgid "Sidebar icon size"
-msgstr "Sidofältets ikonstorlek"
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidofältets ikonstorlek (pixlar)"
 
 msgid "Use sidebar box style"
 msgstr "Använd boxstil för sidofält"
@@ -547,6 +577,22 @@ msgid ""
 msgstr ""
 "Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
 "vissa teman)"
+
+#~ msgid "pixels"
+#~ msgstr "pixlar"
+
+#~ msgid "Solution:"
+#~ msgstr "Lösning:"
+
+#~ msgid "Search web for"
+#~ msgstr "SökmotorerSök på nätet efter"
+
+#~ msgid ""
+#~ "A flexible menu providing formatting options, web bookmarks, search "
+#~ "provider support and fuzzy searching."
+#~ msgstr ""
+#~ "En flexibel meny som tillhandahåller formateringsalternativ, "
+#~ "webbokmärken, sökmotorstöd och luddig sökning."
 
 #~ msgid "Session buttons location"
 #~ msgstr "Placering av sessionsknappar"

@@ -19,15 +19,17 @@ const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
+const {addTween} = imports.ui.tweener;
 const {_, getThumbnail_gicon, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
+const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
+const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const SEARCH_THRESHOLD = 0.45;
 const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
 
@@ -125,11 +127,14 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'category-click',            value: 'categoryClick',         cb: null },
         { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this._refresh },
+        { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
+
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+        { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
-        { key: 'search-home-folder',        value: 'searchHomeFolder',      cb: null },
-        { key: 'show-hidden-files',         value: 'showHiddenFiles',       cb: null },
+        { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
+        { key: 'wikipedia-language',        value: 'wikipediaLanguage',     cb: clearWikiSearchCache },
 
         { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this._updateIconAndLabel },
         { key: 'menu-icon',                 value: 'menuIcon',              cb: this._updateIconAndLabel },
@@ -163,6 +168,54 @@ class CinnamenuApplet extends TextIconApplet {
 
     getThemeBackgroundColor() {
         return this.menu.actor.get_theme_node().get_background_color();
+    }
+
+    scrollToButton(button, enableAnimation) {
+        let scrollBox = button.actor.get_parent();
+        let i = 0;
+        while (!(scrollBox instanceof St.ScrollView)) {
+            i++;
+            if (i > 10 || !scrollBox) {
+                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
+                return false;
+            }
+            scrollBox = scrollBox.get_parent();
+        }
+
+        const adjustment = scrollBox.vscroll.adjustment;
+        let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+
+        let offset = 0;
+        const vfade = scrollBox.get_effect('fade');//this always seems to return null?
+        if (vfade) {
+            offset = vfade.vfade_offset;
+        }
+
+        const box = button.actor.get_allocation_box();
+        const y1 = box.y1, y2 = box.y2;
+        //global.log('value', value,' y1:',y1,' y2:',y2);
+        const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
+        if (y1 < value + offset) {
+            if (y1 < PADDING_ALLOWANCE) {
+                value = 0;
+            } else {
+                value = Math.max(0, y1 - offset);
+            }
+        } else if (y2 > value + pageSize - offset) {
+            if (y2 > upper - offset - PADDING_ALLOWANCE) {
+                value = upper - pageSize;
+            } else {
+                value = Math.min(upper, y2 + offset - pageSize);
+            }
+        } else {
+            return false;
+        }
+
+        if (enableAnimation) {
+            addTween(adjustment, {value: value, time: 0.1, transition: 'easeOutQuad'});
+        } else {
+            adjustment.set_value(value);
+        }
     }
 
     _getScreenWorkArea() {
@@ -340,10 +393,20 @@ class CinnamenuApplet extends TextIconApplet {
         };
         if (this.signals.isConnected('enter-event', this.actor)) {
             this.signals.disconnect('enter-event', this.actor);
+            this.signals.disconnect('leave-event', this.actor);
         }
         if (this.settings.activateOnHover) {
             this.signals.connect(this.actor, 'enter-event', () => {
-                                        setTimeout(() => openMenu(), this.settings.hoverDelayMs); });
+                    if (!this.menu.isOpen && !this.openMenuTimeoutId) {
+                        this.openMenuTimeoutId = setTimeout(() => openMenu(), this.settings.hoverDelayMs);
+                    }
+            });
+            this.signals.connect(this.actor, 'leave-event', () => {
+                            if (this.openMenuTimeoutId) {
+                                clearTimeout(this.openMenuTimeoutId);
+                                this.openMenuTimeoutId = null;
+                            }
+            });
         }
     }
 
@@ -375,62 +438,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    scrollToButton(button, fullyScrollFirstAndLast = false) {
-        const container = button.actor.get_parent();
-        let scrollBox = container;
-        let children;
-        let i = 0;
-        while (!(scrollBox instanceof St.ScrollView)) {
-            i++;
-            if (i > 10) {
-                global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
-                return false;
-            }
-            scrollBox = scrollBox.get_parent();
-        }
-
-        let adjustment = scrollBox.vscroll.adjustment;
-        let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
-
-        if (fullyScrollFirstAndLast) children = container.get_children();
-        if (fullyScrollFirstAndLast && button.actor === children[0]) {
-            value = 0;
-        } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
-            value = scrollBox.height;
-        } else {
-            let offset = 0;
-            const vfade = scrollBox.get_effect('fade');
-            if (vfade) {
-                offset = vfade.vfade_offset;
-            }
-            const box = button.actor.get_allocation_box();
-            let y1 = box.y1, y2 = box.y2;
-            let parent = button.actor.get_parent();
-            while (parent !== scrollBox) {
-                if (!parent) {
-                    return false;
-                }
-                const box = parent.get_allocation_box();
-                y1 += box.y1;
-                y2 += box.y1;
-                parent = parent.get_parent();
-            }
-            if (y1 < value + offset) {
-                value = Math.max(0, y1 - offset);
-            } else if (y2 > value + pageSize - offset) {
-                value = Math.min(upper, y2 + offset - pageSize);
-            } else {
-                return false;
-            }
-        }
-
-        if (this.settings.enableAnimation) {
-            addTween(adjustment, { value: value, time: 0.1, transition: 'easeOutQuad' });
-        } else {
-            adjustment.set_value(value);
-        }
-    }
-
     clearEnteredActors() {
         if (this.contextMenu.isOpen) {
             this.contextMenu.close();
@@ -444,9 +451,14 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         if (open) {
+            if (this.openMenuTimeoutId) {
+                clearTimeout(this.openMenuTimeoutId);
+                this.openMenuTimeoutId = null;
+            }
             this.searchView.tweakTheme();
             this.categoriesView.update();//in case menu editor updates
             this.sidebar.populate();//in case fav files changed
+            this.sidebar.scrollToQuitButton();//ensure quit button is visible
             global.stage.set_key_focus(this.searchView.searchEntry);
             let openOnCategory = this.currentCategory;
             if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
@@ -461,7 +473,6 @@ class CinnamenuApplet extends TextIconApplet {
                 openOnCategory = GLib.get_home_dir();
             }
             this.updateMenuSize();
-            //Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
             this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
         } else {
@@ -470,7 +481,6 @@ class CinnamenuApplet extends TextIconApplet {
             }
             this.clearEnteredActors();
             this.appsView.clearApps();//for quicker opening of menu
-            this.categoriesView.categoriesBox.remove_all_children();
         }
         return true;
     }
@@ -874,6 +884,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     setActiveCategory(categoryId) {
+        //categoryId is one of 3 things: a special category ('places', 'recents', etc), an application
+        //category id, or an absolute path used in folderview (must begin with a /)
         this.currentCategory = categoryId;
         this.categoriesView.setSelectedCategoryStyle(categoryId);
         this.appsView.buttonStoreCleanup();
@@ -919,13 +931,18 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //---start search---
         this.currentSearchStr = searchText;
+
+        //Set a new search ID so that async search functions
+        //from a previous search can be aborted.
+        this.currentSearchId = Math.floor(Math.random() * 100000000);
+
         this.clearEnteredActors();
         if (!this.searchActive) {//set search mode
             this.searchActive = true;
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
             this.categoriesView.buttons.forEach(button => button.disable());
         }
-        setTimeout(() => this._doSearch(searchText));
+        setTimeout(() => this._doSearch(searchText, this.currentSearchId));
     }
 
     _endSearchMode() {
@@ -937,15 +954,15 @@ class CinnamenuApplet extends TextIconApplet {
         this.previousSearchPattern = '';
     }
 
-    _doSearch(text) {
+    _doSearch(pattern_raw, thisSearchId) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (text !== this.currentSearchStr) {
+        if (thisSearchId !== this.currentSearchId) {
             return;
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = Util.latinise(text.toUpperCase());
+        const pattern = Util.latinise(pattern_raw.toUpperCase());
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern === this.previousSearchPattern) {
@@ -953,17 +970,16 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.previousSearchPattern = pattern;
         //======Begin search===========
-        this.currentSearchId = Math.floor(Math.random() * 100000000);
 
         let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
                         .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
-
-        //=======search providers==========
         let otherResults = [];
 
+        //=======search providers==========
         //---calculator---
+        let calculatorResult = null;
         const replacefn = (match) => {
             if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
             'cosh','exp','floor','fround','log','max','min','pow','random','round','sign','sin',
@@ -976,76 +992,44 @@ class CinnamenuApplet extends TextIconApplet {
         };
         let validExp = true;
         let ans = null;
-        const exp = text.replace(/([a-zA-Z]+)/g, replacefn);
+        const exp = pattern_raw.replace(/([a-zA-Z]+)/g, replacefn);
         if (validExp) {
             try {
                 ans = eval(exp);
             } catch(e) {}
         }
-        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != text ) {
+        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != pattern_raw ) {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
             }
             otherResults.push({  isSearchResult: true,
-                            name: _('Solution:') + ' ' + ans,
+                            name: ans.toString(),//('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
                             icon: new St.Icon({ gicon: this.calcGIcon, icon_size: this.getAppIconSize() }),
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
+            calculatorResult = pattern_raw + " = " + ans;
         }
 
-        //---web search option---
-        if (this.settings.webSearchOption != 4) {//4=none
-            const iconName = ['google_icon.png','bing_icon.png','yahoo_icon.png',
-                                                'duckgo_icon.png'][this.settings.webSearchOption];
-            const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
-                                                    'duckduckgo.com/?q='][this.settings.webSearchOption];
-            otherResults.push(   {   isSearchResult: true,
-                                name: _('Search web for') + ' "' + text + '"',
-                                description: '',
-                                deleteAfterUse: true,
-                                icon: new St.Icon({ gicon: new Gio.FileIcon({
-                                            file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
-                                            icon_size: this.getAppIconSize() }),
-                                activate: () => {Util.spawnCommandLineAsync(
-                                        '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
-                            } );
-        }
+        //---web bookmarks search-----
+        if (this.settings.enableWebBookmarksSearch && pattern.length > 1) {
+            const bookmarks = this.bookmarksManager.state;
 
-        //---web bookmarks-----
-        if (this.settings.enableWebBookmarksSearch) {
-            const webBookmarksResults = this.listWebBookmarks(pattern);
-            webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(webBookmarksResults);
-        }
-
-        //---emoji search------
-        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
-            let emojiResults = [];
-            EMOJI.forEach(emoji => {
-                        const match1 = searchStr(pattern, emoji.name, true);
-                        const match2 = searchStr(pattern, emoji.keywords, true);
-                        match2.score *= 0.95; //slightly lower priority for keyword match
-                        const bestMatchScore = Math.max(match1.score, match2.score);
-                        if (bestMatchScore > SEARCH_THRESHOLD) {
-                            emojiResults.push({
-                                    name: emoji.name,
-                                    score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
-                                                                  //emoji results come last.
-                                    description: _('Click to copy'),
-                                    nameWithSearchMarkup: match1.result,
-                                    isSearchResult: true,
-                                    deleteAfterUse: true,
-                                    emoji: emoji.code,
-                                    activate: () => { const clipboard = St.Clipboard.get_default();
-                                        clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
-                                            });
+            const webBookmarksResults = [];
+            bookmarks.forEach(bookmark => {
+                        if (bookmark.name) {
+                            const match = searchStr(pattern, bookmark.name);
+                            if (match.score > SEARCH_THRESHOLD) {
+                                bookmark.score = match.score;
+                                bookmark.nameWithSearchMarkup = match.result;
+                                webBookmarksResults.push(bookmark);
+                            }
                         } });
 
-            emojiResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(emojiResults);
+            webBookmarksResults.sort((a, b) =>  a.score < b.score);
+            otherResults = otherResults.concat(webBookmarksResults);
         }
 
         //---------------------------
@@ -1075,12 +1059,85 @@ class CinnamenuApplet extends TextIconApplet {
             }
 
             //Display results
-            this.appsView.populate(primaryResults.concat(otherResults), null);
+            this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+
             const buttons = this.appsView.getActiveButtons();//todo
             if (buttons.length > 0) {
-                buttons[0].handleEnter();
+                Meta.later_add(Meta.LaterType.IDLE, () => {
+                                          if (!buttons[0].entered) {
+                                              this.clearEnteredActors();
+                                              buttons[0].handleEnter();
+                                          } });
             }
         };
+
+        //---Wikipedia search----
+        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
+            wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
+                            if (this.searchActive && thisSearchId === this.currentSearchId &&
+                                                                            wikiResults.length > 0) {
+                                otherResults = otherResults.concat(wikiResults);
+                                finish();
+                            } });
+        }
+
+        //---web search option---
+        if (this.settings.webSearchOption != 0) {//0==none
+            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
+                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
+                            'startpage.png'][this.settings.webSearchOption - 1];
+            const url = [   'https://google.com/search?q=',
+                            'https://www.bing.com/search?q=',
+                            'https://www.baidu.com/s?wd=',
+                            'https://search.yahoo.com/search?p=',
+                            'https://yandex.com/search/?text=',
+                            'https://duckduckgo.com/?q=',
+                            'https://www.ask.com/web?q=',
+                            'https://www.ecosia.org/search?q=',
+                            'https://search.aol.co.uk/aol/search?q=',
+                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
+            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
+                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
+
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/' + iconName)});
+
+            otherResults.push({
+                        isSearchResult: true,
+                        name: pattern_raw + ' – '+ engine,
+                        description: '',
+                        deleteAfterUse: true,
+                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
+        }
+
+        //---emoji search------
+        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
+            let emojiResults = [];
+            EMOJI.forEach(emoji => {
+                const match1 = searchStr(pattern, emoji[EMOJI_NAME], true);
+                const match2 = searchStr(pattern, emoji[EMOJI_KEYWORDS], true);
+                match2.score *= 0.95; //slightly lower priority for keyword match
+                const bestMatchScore = Math.max(match1.score, match2.score);
+                if (bestMatchScore > SEARCH_THRESHOLD) {
+                    emojiResults.push({
+                        name: emoji[EMOJI_NAME],
+                        score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
+                                                      //emoji results come last.
+                        description: _('Click to copy'),
+                        nameWithSearchMarkup: match1.result,
+                        isSearchResult: true,
+                        deleteAfterUse: true,
+                        emoji: emoji[EMOJI_CODE],
+                        activate: () => {
+                                const clipboard = St.Clipboard.get_default();
+                                clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji[EMOJI_CODE]); }
+                    });
+                }
+            });
+
+            emojiResults.sort((a, b) =>  a.score < b.score);
+            otherResults = otherResults.concat(emojiResults);
+        }
 
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
@@ -1157,7 +1214,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
 
                     //update display of results at intervals or when search completed
-                    if (foldersToDo.length === 0 || Date.now() - lastUpdateTime > updateInterval) {
+                    if (currentFolderIndex === foldersToDo.length - 1 ||
+                                                    Date.now() - lastUpdateTime > updateInterval) {
                         if (results.length > 0 && this.searchActive &&
                                                                 thisSearchId === this.currentSearchId) {
                             primaryResults = primaryResults.concat(results);
@@ -1173,14 +1231,13 @@ class CinnamenuApplet extends TextIconApplet {
                         currentFolderIndex++;
                         searchNextDir(thisSearchId);
                     }
+
                 });
             };
-
             searchNextDir(this.currentSearchId);
         }
 
         ///----search providers--------
-        let thisSearchId = this.currentSearchId;
         setTimeout(() => {
             launch_all(pattern, (provider, providerResults) => {
                     providerResults.forEach(providerResult => {
@@ -1205,7 +1262,7 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                     });
                     if (!this.searchActive || thisSearchId !== this.currentSearchId ||
-                                                !providerResults || providerResults.length <= 0) {
+                                                !providerResults || providerResults.length === 0) {
                         return;
                     }
                     otherResults = otherResults.concat(providerResults);
@@ -1530,25 +1587,6 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listWebBookmarks(pattern) {
-        let res = this.bookmarksManager.state;
-
-        if (pattern) {
-            const _res = [];
-            res.forEach(bookmark => {
-                        if (bookmark.name) {
-                            const match = searchStr(pattern, bookmark.name);
-                            if (match.score > SEARCH_THRESHOLD) {
-                                bookmark.score = match.score;
-                                bookmark.nameWithSearchMarkup = match.result;
-                                _res.push(bookmark);
-                            }
-                        } });
-            res = _res;
-        }
-        return res;
-    }
-
     listFolder(folder) {
         const res = [];
         const dir = Gio.file_new_for_path(folder);
@@ -1601,6 +1639,9 @@ class CinnamenuApplet extends TextIconApplet {
         if (parent) {// Add back button
             res.unshift({   name: 'Back',
                             uri: parent.get_uri(),
+                            icon: new St.Icon({ icon_name: 'edit-undo-symbolic',
+                                                icon_type: St.IconType.SYMBOLIC,
+                                                icon_size: this.getAppIconSize() }),
                             mimeType: 'inode/directory',
                             isBackButton: true,
                             description: '',
@@ -1629,7 +1670,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
         const apps_sort = arr => arr.sort( (a, b) => {
                         if (!a.name || !b.name) return -1;
                         return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;
+                    });
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1786,7 +1828,7 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false,
                                     y_align: St.Align.START, style_class: 'vfade menu-categories-scrollbox' });
 
-        const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
+        //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
@@ -1820,7 +1862,7 @@ class CategoriesView {
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
                         const nameA = a.get_name().toUpperCase();
                         const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
+                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {
                     const dirId = dir.get_menu_id();
@@ -2061,8 +2103,10 @@ class AppsView {
 class SearchView {
     constructor(appThis) {
         this.appThis = appThis;
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
+        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-find' });
+        this.searchActiveIcon = new St.Icon({   style_class: 'menu-search-entry-icon',
+                                                icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', track_hover: true, can_focus: true});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);
@@ -2118,6 +2162,7 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
         this.items = [];
         this.innerBox = new St.BoxLayout({
                         vertical: (sidebarPlacement === PlacementLEFT || sidebarPlacement === PlacementRIGHT) });
+
         //Cinnamox themes draw a border at the bottom of sidebarScrollBox so remove menu-favorites-scrollbox class.
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = '';
@@ -2125,7 +2170,7 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
         this.sidebarScrollBox = new St.ScrollView({x_fill: true, y_fill: false, x_align: St.Align.MIDDLE,
                                                         y_align: St.Align.MIDDLE, style_class: scroll_style });
 
-        const vscroll_bar = this.sidebarScrollBox.get_vscroll_bar();
+        //const vscroll_bar = this.sidebarScrollBox.get_vscroll_bar();
         this.sidebarScrollBox.add_actor(this.innerBox);
         this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
@@ -2134,6 +2179,7 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
         this.sidebarOuterBox.add(this.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+
         this.separator = new St.BoxLayout({x_expand: false, y_expand: false});
     }
 
@@ -2197,7 +2243,13 @@ class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the s
             this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
                                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         }
+
         return;
+    }
+
+    scrollToQuitButton() {
+        //Scroll to quit button so that it's visible when the menu is opened.
+        this.appThis.scrollToButton(this.items[this.items.length - 1], false);
     }
 
     _addSeparator() {

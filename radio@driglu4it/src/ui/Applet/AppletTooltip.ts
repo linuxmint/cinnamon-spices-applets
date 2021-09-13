@@ -1,4 +1,4 @@
-import { DEFAULT_TOOLTIP_TXT } from "consts"
+import { DEFAULT_TOOLTIP_TXT } from "../../consts"
 
 const { PanelItemTooltip } = imports.ui.tooltips
 
@@ -16,16 +16,18 @@ export function createAppletTooltip(args: Arguments) {
 
     const tooltip = new PanelItemTooltip(applet, null, orientation)
 
-    function setVolume(volume: number | null) {
-        if (volume == null) {
-            tooltip.set_text(DEFAULT_TOOLTIP_TXT)
-            return
-        }
+    setDefaultTooltip()
 
+    function setVolume(volume: number) {
         tooltip.set_text(`Volume: ${volume.toString()} %`)
     }
 
+    function setDefaultTooltip() {
+        tooltip.set_text(DEFAULT_TOOLTIP_TXT)
+    }
+
     return {
-        setVolume
+        setVolume,
+        setDefaultTooltip
     }
 }

@@ -1,7 +1,6 @@
-const { PopupSubMenuMenuItem } = imports.ui.popupMenu;
-
-import { AdvancedPlaybackStatus, PlaybackStatus } from "types";
-import { createChannelMenuItem } from "ui/ChannelList/ChannelMenuItem";
+import { createSubMenu } from "../../lib/PopupSubMenu";
+import { createChannelMenuItem } from "./ChannelMenuItem";
+import { AdvancedPlaybackStatus } from "../../types";
 
 interface Arguments {
     stationNames: string[],
@@ -9,73 +8,72 @@ interface Arguments {
 }
 
 export function createChannelList(args: Arguments) {
+
     const {
         stationNames,
         onChannelClicked
     } = args
 
-    const container = new PopupSubMenuMenuItem('My Stations')
+    const subMenu = createSubMenu({ text: 'My Stations' })
 
-    let currentChannel: string
+    let currentChannelName: string
     let playbackStatus: AdvancedPlaybackStatus = 'Stopped'
 
     // the channelItems are saved here to the map and to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     const channelItems = new Map<string, ReturnType<typeof createChannelMenuItem>>()
 
-    function open() {
-        container.menu.open(true)
-    }
-
-    function setStationNames(stationNames: string[]) {
+    function setStationNames(names: string[]) {
         channelItems.clear()
-        container.menu.removeAll()
+        subMenu.box.remove_all_children()
 
-        stationNames.forEach(name => {
+        names.forEach(name => {
             const channelPlaybackstatus =
-                (name === currentChannel) ? playbackStatus : 'Stopped'
+                (name === currentChannelName) ? playbackStatus : 'Stopped'
 
             const channelItem = createChannelMenuItem({
-                channelName: name
+                channelName: name,
+                onActivated: onChannelClicked,
+                playbackStatus: channelPlaybackstatus
             })
 
-            channelItem.setPlaybackStatus(channelPlaybackstatus)
             channelItems.set(name, channelItem)
-            channelItem.actor.connect('activate', () => onChannelClicked(name))
-            container.menu.addMenuItem(channelItem.actor)
+            subMenu.box.add_child(channelItem.actor)
         })
     }
 
+    function setPlaybackStatus(newStatus: AdvancedPlaybackStatus) {
+        playbackStatus = newStatus
 
-    function setPlaybackstatus(plStatus: AdvancedPlaybackStatus) {
+        if (!currentChannelName) return
 
-        playbackStatus = plStatus
+        const channelMenuItem = channelItems.get(currentChannelName)
+        channelMenuItem?.setPlaybackStatus(playbackStatus)
 
-        if (!currentChannel) return
+        if (playbackStatus === 'Stopped')
+            currentChannelName = null
 
-        const channelMenuItem = channelItems.get(currentChannel)
-        channelMenuItem.setPlaybackStatus(plStatus)
-
-        if (plStatus === "Stopped") {
-            currentChannel = null
-        }
     }
 
     function setCurrentChannel(name: string) {
 
-        channelItems.get(currentChannel)?.setPlaybackStatus('Stopped')
-        channelItems.get(name)?.setPlaybackStatus(playbackStatus)
+        const currentChannelItem = channelItems.get(currentChannelName)
+        currentChannelItem?.setPlaybackStatus('Stopped')
 
-        currentChannel = name
+        if (name) {
+            const newChannelItem = channelItems.get(name)
+            if (!newChannelItem) throw new Error(`No channelItem exist for ${name}`)
+            newChannelItem.setPlaybackStatus(playbackStatus)
+        }
+
+        currentChannelName = name
     }
 
     setStationNames(stationNames)
 
     return {
-        actor: container,
-        open,
+        actor: subMenu.actor,
+        setPlaybackStatus,
         setStationNames,
-        setPlaybackstatus,
         setCurrentChannel
     }
-
 }

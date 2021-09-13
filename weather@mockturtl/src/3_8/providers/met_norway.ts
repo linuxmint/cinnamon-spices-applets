@@ -1,8 +1,9 @@
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { SunCalc } from "lib/sunCalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "types";
-import { CelsiusToKelvin, IsNight, _ } from "utils";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { getTimes } from "suncalc";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
+import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../utils";
+import { DateTime } from "luxon";
 
 export class MetNorway implements WeatherProvider {
 	public readonly prettyName = _("MET Norway");
@@ -14,14 +15,12 @@ export class MetNorway implements WeatherProvider {
 
 	private app: WeatherApplet
 	private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
-	private sunCalc: SunCalc;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
-		this.sunCalc = new SunCalc();
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let query = this.GetUrl(loc);
 		if (query == null)
 			return null;
@@ -29,20 +28,20 @@ export class MetNorway implements WeatherProvider {
 		let json = await this.app.LoadJsonAsync<MetNorwayPayload>(query);
 
 		if (!json) {
-			Log.Instance.Error("MET Norway: Empty response from API");
+			Logger.Error("MET Norway: Empty response from API");
 			return null;
 		}
 
-		return this.ParseWeather(json);
+		return this.ParseWeather(json, loc);
 	}
 
-	private RemoveEarlierElements(json: MetNorwayPayload): MetNorwayPayload {
-		let now = new Date();
+	private RemoveEarlierElements(json: MetNorwayPayload, loc: LocationData): MetNorwayPayload {
+		let now = DateTime.now().setZone(loc.timeZone);
 		let startIndex = -1;
 		for (let i = 0; i < json.properties.timeseries.length; i++) {
 			const element = json.properties.timeseries[i];
-			let timestamp = new Date(element.time);
-			if (timestamp < now && now.getHours() != timestamp.getHours()) {
+			let timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+			if (timestamp < now && now.hour != timestamp.hour) {
 				startIndex = i;
 			}
 			else {
@@ -51,16 +50,21 @@ export class MetNorway implements WeatherProvider {
 		}
 
 		if (startIndex != -1) {
-			Log.Instance.Debug("Removing outdated weather information...")
+			Logger.Debug("Removing outdated weather information...")
 			json.properties.timeseries.splice(0, startIndex + 1);
 		}
 
 		return json;
 	}
 
-	private ParseWeather(json: MetNorwayPayload): WeatherData {
-		json = this.RemoveEarlierElements(json);
-		let times = this.sunCalc.getTimes(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+	private ParseWeather(json: MetNorwayPayload, loc: LocationData): WeatherData {
+		json = this.RemoveEarlierElements(json, loc);
+
+		let times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+		let suntimes: SunTime = {
+			sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
+			sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
+		}
 		// Current Weather
 		let current = json.properties.timeseries[0];
 		let result: WeatherData = {
@@ -69,8 +73,8 @@ export class MetNorway implements WeatherProvider {
 				lat: json.geometry.coordinates[1],
 				lon: json.geometry.coordinates[0]
 			},
-			date: new Date(current.time),
-			condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(times)),
+			date: DateTime.fromISO(current.time, { zone: loc.timeZone }),
+			condition: this.ResolveCondition(current.data.next_1_hours?.summary?.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
 			extra_field: {
@@ -78,14 +82,14 @@ export class MetNorway implements WeatherProvider {
 				type: "percent",
 				value: current.data.instant.details.cloud_area_fraction
 			},
-			sunrise: times.sunrise,
-			sunset: times.sunset,
+			sunrise: suntimes.sunrise,
+			sunset: suntimes.sunset,
 			wind: {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
 			},
 			location: {
-				url: null,
+				url: undefined,
 			},
 			forecasts: []
 		};
@@ -97,24 +101,24 @@ export class MetNorway implements WeatherProvider {
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
 				hourlyForecasts.push({
-					date: new Date(element.time),
+					date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
 					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
-					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(times, new Date(element.time)))
+					condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, { zone: loc.timeZone })))
 				});
 			}
 		}
 		result.hourlyForecasts = hourlyForecasts;
-		result.forecasts = this.BuildForecasts(json.properties.timeseries);
+		result.forecasts = this.BuildForecasts(json.properties.timeseries, loc);
 		return result;
 	}
 
-	private BuildForecasts(forecastsData: MetNorwayData[]): ForecastData[] {
+	private BuildForecasts(forecastsData: MetNorwayData[], loc: LocationData): ForecastData[] {
 		let forecasts: ForecastData[] = [];
-		let days = this.SortDataByDay(forecastsData);
+		let days = this.SortDataByDay(forecastsData, loc);
 
 		for (let i = 0; i < days.length; i++) {
 			let forecast: ForecastData = {
@@ -124,7 +128,7 @@ export class MetNorway implements WeatherProvider {
 					icons: [],
 					main: ""
 				},
-				date: null,
+				date: <any>null, // we will build it below
 				temp_max: Number.NEGATIVE_INFINITY,
 				temp_min: Number.POSITIVE_INFINITY
 			}
@@ -135,9 +139,9 @@ export class MetNorway implements WeatherProvider {
 			for (let j = 0; j < days[i].length; j++) {
 				const element = days[i][j];
 				if (!element.data.next_6_hours) continue;
-				forecast.date = new Date(element.time);
-				if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
-				if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
+				forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
+				if (element.data.next_6_hours.details.air_temperature_max > <number>forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
+				if (element.data.next_6_hours.details.air_temperature_min < <number>forecast.temp_min) forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
 
 				let [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
 				let severity = conditionSeverity[symbol as Conditions];
@@ -161,13 +165,14 @@ export class MetNorway implements WeatherProvider {
 	//
 	// -----------------------------------------------
 
-	private GetEarliestDataForToday(events: MetNorwayData[]): MetNorwayData {
+	private GetEarliestDataForToday(events: MetNorwayData[], loc: LocationData): MetNorwayData {
 		let earliest: number = 0;
 		for (let i = 0; i < events.length; i++) {
-			const earliestElementTime = new Date(events[earliest].time);
-			let timestamp = new Date(events[i].time);
+			const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
+			let timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
 
-			if (timestamp.toDateString() != new Date().toDateString()) continue;
+			// not same date
+			if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day")) continue;
 			if (earliestElementTime < timestamp) continue;
 
 			earliest = i;
@@ -175,19 +180,19 @@ export class MetNorway implements WeatherProvider {
 		return events[earliest];
 	}
 
-	private SortDataByDay(data: MetNorwayData[]): MetNorwayData[][] {
-		let days: Array<any> = []
+	private SortDataByDay(data: MetNorwayData[], loc: LocationData): MetNorwayData[][] {
+		let days: MetNorwayData[][] = []
 		// Sort and containerize forecasts by date
-		let currentDay = new Date(this.GetEarliestDataForToday(data).time);
+		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
 		let dayIndex = 0;
 		days.push([]);
 		for (let i = 0; i < data.length; i++) {
 			const element = data[i];
-			const timestamp = new Date(element.time);
-			if (timestamp.toDateString() == currentDay.toDateString()) {
+			const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+			if (OnSameDay(timestamp, currentDay)) {
 				days[dayIndex].push(element);
 			}
-			else if (timestamp.toDateString() != currentDay.toDateString()) {
+			else if (!OnSameDay(timestamp, currentDay)) {
 				dayIndex++;
 				currentDay = timestamp;
 				days.push([]);
@@ -199,9 +204,9 @@ export class MetNorway implements WeatherProvider {
 	}
 
 	private GetMostCommonCondition(count: ConditionCount): string {
-		let result: number = null;
+		let result: number = -1;
 		for (let key in count) {
-			if (result == null) result = parseInt(key);
+			if (result == -1) result = parseInt(key);
 			if (count[result].count < count[key].count) result = parseInt(key);
 		}
 		return count[result].name;
@@ -212,7 +217,7 @@ export class MetNorway implements WeatherProvider {
 		//this.app.log.Debug(JSON.stringify(conditions));
 
 		// We want to know the worst condition
-		let result: number = null;
+		let result: number = -1;
 		for (let key in conditions) {
 			let conditionID = parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
@@ -243,7 +248,17 @@ export class MetNorway implements WeatherProvider {
 		}
 	}
 
-	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
+	private ResolveCondition(icon: string | undefined, isNight: boolean = false): Condition {
+		if (icon == null) {
+			Logger.Error("Icon was not found");
+			return {
+				customIcon: "cloud-refresh-symbolic",
+				main: _("Unknown"),
+				description: _("Unknown"),
+				icons: ["weather-severe-alert"]
+			}
+		}
+			
 		let weather = this.DeconstructCondition(icon);
 		switch (weather.condition) {
 			case "clearsky":
@@ -545,7 +560,7 @@ export class MetNorway implements WeatherProvider {
 					icons: ["weather-snow-scattered", "weather-snow"]
 				}
 			default:
-				Log.Instance.Error("condition code not found: " + weather.condition);
+				Logger.Error("condition code not found: " + weather.condition);
 				return {
 					customIcon: "cloud-refresh-symbolic",
 					main: _("Unknown"),

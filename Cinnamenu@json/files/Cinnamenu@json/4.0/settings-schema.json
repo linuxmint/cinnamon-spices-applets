@@ -4,6 +4,7 @@
         "pages":[
             "layout",
             "behaviour",
+            "search",
             "appearance"
         ],
         "layout":{
@@ -20,6 +21,13 @@
             "sections":[
                 "panel-behave",
                 "menu-behave"
+            ]
+        },
+        "search":{
+            "type":"page",
+            "title":"Search",
+            "sections":[
+                "search-search"
             ]
         },
         "appearance":{
@@ -69,11 +77,19 @@
                 "category-click",
                 "open-on-category",
                 "enable-autoscroll",
+                "show-hidden-files"
+            ]
+        },
+        "search-search":{
+            "type":"section",
+            "title":"Search",
+            "keys":[
                 "enable-emoji-search",
                 "web-search-option",
+                "enable-home-folder-search",
                 "enable-web-bookmarks-search",
-                "search-home-folder",
-                "show-hidden-files"
+                "enable-wikipedia-search",
+                "wikipedia-language"
             ]
         },
         "panel-appear":{
@@ -245,42 +261,134 @@
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
     },
-    "enable-emoji-search":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
-    },
-    "web-search-option":{
-        "type":"combobox",
-        "default":0,
-        "description":"Web search option",
-        "options":{
-            "Google":0,
-            "Bing":1,
-            "Yahoo":2,
-            "DuckDuckGo":3,
-            "None":4
-        },
-        "tooltip":"Show an internet search option in search results"
-    },
-    "enable-web-bookmarks-search":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Enable web bookmarks search",
-        "tooltip":"When searching, also search my browser's web bookmarks (Chrome, Chromium & Firefox.)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
-    },
-    "search-home-folder":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Search home folder",
-        "tooltip":"When searching, also search home folder for files"
-    },
     "show-hidden-files":{
         "type":"checkbox",
         "default":false,
         "description":"Show hidden files",
         "tooltip":"Show hidden files in folder view"
+    },
+
+    "enable-emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Emoji search",
+        "tooltip":"Show emojis in search results"
+    },
+    "web-search-option":{
+        "type":"combobox",
+        "default":1,
+        "description":"Web search option",
+        "options":{
+            "None":0,
+            "Google":1,
+            "Bing":2,
+            "Baidu":3,
+            "Yahoo":4,
+            "Yandex":5,
+            "DuckDuckGo":6,
+            "Ask":7,
+            "Ecosia":8,
+            "AOL":9,
+            "Startpage":10
+        },
+        "tooltip":"Show an internet search option in search results"
+    },
+    "enable-home-folder-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Search home folder",
+        "tooltip":"When searching, also search my home folder for files"
+    },
+    "enable-web-bookmarks-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web bookmarks search",
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+    },
+    "enable-wikipedia-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Wikipedia search",
+        "tooltip":"Show some Wikipedia results"
+    },
+    "wikipedia-language":{
+        "type":"combobox",
+        "default":"en",
+        "description":"Wikipedia language",
+        "dependency":"enable-wikipedia-search",
+        "options":{
+            "English":"en",
+            "Sinugboanong Binisaya":"ceb",
+            "Svenska":"sv",
+            "Deutsch":"de",
+            "Français":"fr",
+            "Nederlands":"nl",
+            "Русский":"ru",
+            "Italiano":"it",
+            "Español":"es",
+            "Polski":"pl",
+            "مصرى (Maṣri)":"arz",
+            "日本語":"ja",
+            "Tiếng Việt":"vi",
+            "Winaray":"war",
+            "中文":"zh",
+            "العربية":"ar",
+            "Українська":"uk",
+            "Português":"pt",
+            "فارسی":"fa",
+            "Català":"ca",
+            "Српски / Srpski":"sr",
+            "Bahasa Indonesia":"id",
+            "Norsk (Bokmål)":"no",
+            "한국어":"ko",
+            "Suomi":"fi",
+            "Magyar":"hu",
+            "Čeština":"cs",
+            "Srpskohrvatski / Српскохрватски":"sh",
+            "Bân-lâm-gú":"zh-min-nan",
+            "Türkçe":"tr",
+            "Română":"ro",
+            "Нохчийн":"ce",
+            "Euskara":"eu",
+            "Bahasa Melayu":"ms",
+            "Tatarça / Татарча":"tt",
+            "Esperanto":"eo",
+            "עברית":"he",
+            "Հայերեն":"hy",
+            "Български":"bg",
+            "Dansk":"da",
+            "تۆرکجه":"azb",
+            "Slovenčina":"sk",
+            "Қазақша":"kk",
+            "Minangkabau":"min",
+            "Eesti":"et",
+            "Hrvatski":"hr",
+            "Беларуская":"be",
+            "Lietuvių":"lt",
+            "Ελληνικά":"el",
+            "Simple English":"simple",
+            "Azərbaycanca":"az",
+            "Galego":"gl",
+            "Slovenščina":"sl",
+            "اردو":"ur",
+            "Nynorsk":"nn",
+            "ქართული":"ka",
+            "हिन्दी":"hi",
+            "தமிழ்":"ta",
+            "ไทย":"th",
+            "O‘zbek":"uz",
+            "Latina":"la",
+            "Cymraeg":"cy",
+            "Asturianu":"ast",
+            "Volapük":"vo",
+            "粵語":"zh-yue",
+            "Македонски":"mk",
+            "বাংলা":"bn",
+            "Latviešu":"lv",
+            "Тоҷикӣ":"tg",
+            "မြန်မာဘာသာ":"my"
+        },
+        "tooltip":"Wikipedia language"
     },
 
     "menu-icon-custom":{
@@ -308,8 +416,8 @@
         "min":0,
         "max":60,
         "step":1,
-        "units":"pixels",
-        "description":"Panel icon size",
+        "units":"",
+        "description":"Panel icon size (pixels)",
         "dependency":"menu-icon-size-custom",
         "tooltip":"Choose a custom size for the panel icon"
     },
@@ -326,9 +434,9 @@
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Category icon size",
-        "tooltip":"Category icon size"
+        "units":"",
+        "description":"Category icon size (pixels)",
+        "tooltip":"Category icon size (pixels)"
     },
     "apps-list-icon-size":{
         "type":"spinbutton",
@@ -336,9 +444,9 @@
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Applications list icon size",
-        "tooltip":"Applications list icon size"
+        "units":"",
+        "description":"Applications list icon size (pixels)",
+        "tooltip":"Applications list icon size (pixels)"
     },
     "apps-grid-icon-size":{
         "type":"spinbutton",
@@ -346,9 +454,9 @@
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Applications grid icon size",
-        "tooltip":"Applications grid icon size"
+        "units":"",
+        "description":"Applications grid icon size (pixels)",
+        "tooltip":"Applications grid icon size (pixels)"
     },
     "sidebar-icon-size":{
         "type":"spinbutton",
@@ -356,9 +464,9 @@
         "min":6,
         "max":64,
         "step":1,
-        "units":"pixels",
-        "description":"Sidebar icon size",
-        "tooltip":"Sidebar icon size"
+        "units":"",
+        "description":"Sidebar icon size (pixels)",
+        "tooltip":"Sidebar icon size (pixels)"
     },
     "use-box-style":{
         "type":"checkbox",

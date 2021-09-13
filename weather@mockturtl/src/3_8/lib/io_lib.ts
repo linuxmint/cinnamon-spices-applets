@@ -2,7 +2,7 @@
 // IO
 // --------------------------
 
-import { Log } from "lib/logger";
+import { Logger } from "./logger";
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
@@ -29,8 +29,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
 		return true;*/
 	}
 	catch (e) {
-		Log.Instance.Error("Cannot get file info for '" + file.get_path() + "', error: ");
-		global.log(e)
+		Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
 		return false;
 	}
 }
@@ -39,7 +38,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
  * Loads contents of a file. Can throw Gio.IOErrorEnum exception. (e.g file does not exist)
  * @param file 
  */
-export async function LoadContents(file: imports.gi.Gio.File): Promise<string> {
+export async function LoadContents(file: imports.gi.Gio.File): Promise<string | null> {
 	return new Promise((resolve, reject) => {
 		file.load_contents_async(null, (obj, res) => {
 			let result, contents = null;
@@ -77,8 +76,7 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
 					return true;
 				}
 
-				Log.Instance.Error("Can't delete file, reason: ");
-				global.log(e);
+				Logger.Error("Can't delete file, reason: ", e);
 				resolve(false);
 				return false;
 			}

@@ -1,7280 +1,7280 @@
 
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
+//Emoji List, v13.1
 
-const EMOJI = [];
+//Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
+const EMOJI = [
 [
-["😀",
-"grinning face",
-"face | grin | grinning face"
-],
-["😃",
-"grinning face with big eyes",
-"face | grinning face with big eyes | mouth | open | smile"
-],
-["😄",
-"grinning face with smiling eyes",
-"eye | face | grinning face with smiling eyes | mouth | open | smile"
-],
-["😁",
-"beaming face with smiling eyes",
-"beaming face with smiling eyes | eye | face | grin | smile"
-],
-["😆",
-"grinning squinting face",
-"face | grinning squinting face | laugh | mouth | satisfied | smile"
-],
-["😅",
-"grinning face with sweat",
-"cold | face | grinning face with sweat | open | smile | sweat"
-],
-["🤣",
-"rolling on the floor laughing",
-"face | floor | laugh | rofl | rolling | rolling on the floor laughing | rotfl"
-],
-["😂",
-"face with tears of joy",
-"face | face with tears of joy | joy | laugh | tear"
-],
-["🙂",
-"slightly smiling face",
-"face | slightly smiling face | smile"
-],
-["🙃",
-"upside-down face",
-"face | upside-down"
-],
-["😉",
-"winking face",
-"face | wink | winking face"
-],
-["😊",
-"smiling face with smiling eyes",
-"blush | eye | face | smile | smiling face with smiling eyes"
-],
-["😇",
-"smiling face with halo",
-"angel | face | fantasy | halo | innocent | smiling face with halo"
-],
-["🥰",
-"smiling face with hearts",
-"adore | crush | hearts | in love | smiling face with hearts"
-],
-["😍",
-"smiling face with heart-eyes",
-"eye | face | love | smile | smiling face with heart-eyes"
-],
-["🤩",
-"star-struck",
-"eyes | face | grinning | star | star-struck | starry-eyed"
-],
-["😘",
-"face blowing a kiss",
-"face | face blowing a kiss | kiss"
-],
-["😗",
-"kissing face",
-"face | kiss | kissing face"
-],
-["☺",
-"smiling face",
-"face | outlined | relaxed | smile | smiling face"
-],
-["😚",
-"kissing face with closed eyes",
-"closed | eye | face | kiss | kissing face with closed eyes"
-],
-["😙",
-"kissing face with smiling eyes",
-"eye | face | kiss | kissing face with smiling eyes | smile"
-],
-["🥲",
-"smiling face with tear",
-"grateful | proud | relieved | smiling | smiling face with tear | tear | touched"
-],
-["😋",
-"face savoring food",
-"delicious | face | face savoring food | savouring | smile | yum"
-],
-["😛",
-"face with tongue",
-"face | face with tongue | tongue"
-],
-["😜",
-"winking face with tongue",
-"eye | face | joke | tongue | wink | winking face with tongue"
-],
-["🤪",
-"zany face",
-"eye | goofy | large | small | zany face"
-],
-["😝",
-"squinting face with tongue",
-"eye | face | horrible | squinting face with tongue | taste | tongue"
-],
-["🤑",
-"money-mouth face",
-"face | money | money-mouth face | mouth"
-],
-["🤗",
-"hugging face",
-"face | hug | hugging"
-],
-["🤭",
-"face with hand over mouth",
-"face with hand over mouth | whoops | shock | sudden realization | surprise"
-],
-["🤫",
-"shushing face",
-"quiet | shush | shushing face"
-],
-["🤔",
-"thinking face",
-"face | thinking"
-],
-["🤐",
-"zipper-mouth face",
-"face | mouth | zipper | zipper-mouth face"
-],
-["🤨",
-"face with raised eyebrow",
-"distrust | face with raised eyebrow | skeptic | disapproval | disbelief | mild surprise | scepticism"
-],
-["😐",
-"neutral face",
-"deadpan | face | meh | neutral"
-],
-["😑",
-"expressionless face",
-"expressionless | face | inexpressive | meh | unexpressive"
-],
-["😶",
-"face without mouth",
-"face | face without mouth | mouth | quiet | silent"
-],
-["😶‍🌫️",
-"face in clouds",
-"absentminded | face in clouds | face in the fog | head in clouds"
-],
-["😏",
-"smirking face",
-"face | smirk | smirking face"
-],
-["😒",
-"unamused face",
-"face | unamused | unhappy"
-],
-["🙄",
-"face with rolling eyes",
-"eyeroll | eyes | face | face with rolling eyes | rolling"
-],
-["😬",
-"grimacing face",
-"face | grimace | grimacing face"
-],
-["😮‍💨",
-"face exhaling",
-"exhale | face exhaling | gasp | groan | relief | whisper | whistle"
-],
-["🤥",
-"lying face",
-"face | lie | lying face | pinocchio"
-],
-["😌",
-"relieved face",
-"face | relieved"
-],
-["😔",
-"pensive face",
-"dejected | face | pensive"
-],
-["😪",
-"sleepy face",
-"face | sleep | sleepy face"
-],
-["🤤",
-"drooling face",
-"drooling | face"
-],
-["😴",
-"sleeping face",
-"face | sleep | sleeping face | zzz"
-],
-["😷",
-"face with medical mask",
-"cold | doctor | face | face with medical mask | mask | sick"
-],
-["🤒",
-"face with thermometer",
-"face | face with thermometer | ill | sick | thermometer"
-],
-["🤕",
-"face with head-bandage",
-"bandage | face | face with head-bandage | hurt | injury"
-],
-["🤢",
-"nauseated face",
-"face | nauseated | vomit"
-],
-["🤮",
-"face vomiting",
-"face vomiting | sick | vomit"
-],
-["🤧",
-"sneezing face",
-"face | gesundheit | sneeze | sneezing face"
-],
-["🥵",
-"hot face",
-"feverish | heat stroke | hot | hot face | red-faced | sweating"
-],
-["🥶",
-"cold face",
-"blue-faced | cold | cold face | freezing | frostbite | icicles"
-],
-["🥴",
-"woozy face",
-"dizzy | intoxicated | tipsy | uneven eyes | wavy mouth | woozy face"
-],
-["😵",
-"knocked-out face",
-"dead | face | knocked out | knocked-out face"
-],
-["😵‍💫",
-"face with spiral eyes",
-"dizzy | face with spiral eyes | hypnotized | spiral | trouble | whoa"
-],
-["🤯",
-"exploding head",
-"exploding head | mind blown | shocked"
-],
-["🤠",
-"cowboy hat face",
-"cowboy | cowgirl | face | hat"
-],
-["🥳",
-"partying face",
-"celebration | hat | horn | party | partying face"
-],
-["🥸",
-"disguised face",
-"disguise | disguised face | face | glasses | incognito | nose"
-],
-["😎",
-"smiling face with sunglasses",
-"bright | cool | face | smiling face with sunglasses | sun | sunglasses"
-],
-["🤓",
-"nerd face",
-"face | geek | nerd"
-],
-["🧐",
-"face with monocle",
-"face with monocle | stuffy | wealthy"
-],
-["😕",
-"confused face",
-"confused | face | meh"
-],
-["😟",
-"worried face",
-"face | worried"
-],
-["🙁",
-"slightly frowning face",
-"face | frown | slightly frowning face"
-],
-["☹",
-"frowning face",
-"face | frown | frowning face"
-],
-["😮",
-"face with open mouth",
-"face | face with open mouth | mouth | open | sympathy"
-],
-["😯",
-"hushed face",
-"face | hushed | stunned | surprised"
-],
-["😲",
-"astonished face",
-"astonished | face | shocked | totally"
-],
-["😳",
-"flushed face",
-"dazed | face | flushed"
-],
-["🥺",
-"pleading face",
-"begging | mercy | pleading face | puppy eyes"
-],
-["😦",
-"frowning face with open mouth",
-"face | frown | frowning face with open mouth | mouth | open"
-],
-["😧",
-"anguished face",
-"anguished | face"
-],
-["😨",
-"fearful face",
-"face | fear | fearful | scared"
-],
-["😰",
-"anxious face with sweat",
-"anxious face with sweat | blue | cold | face | rushed | sweat"
-],
-["😥",
-"sad but relieved face",
-"disappointed | face | relieved | sad but relieved face | whew"
-],
-["😢",
-"crying face",
-"cry | crying face | face | sad | tear"
-],
-["😭",
-"loudly crying face",
-"cry | face | loudly crying face | sad | sob | tear"
-],
-["😱",
-"face screaming in fear",
-"face | face screaming in fear | fear | munch | scared | scream"
-],
-["😖",
-"confounded face",
-"confounded | face"
-],
-["😣",
-"persevering face",
-"face | persevere | persevering face"
-],
-["😞",
-"disappointed face",
-"disappointed | face"
-],
-["😓",
-"downcast face with sweat",
-"cold | downcast face with sweat | face | sweat"
-],
-["😩",
-"weary face",
-"face | tired | weary"
-],
-["😫",
-"tired face",
-"face | tired"
-],
-["🥱",
-"yawning face",
-"bored | tired | yawn | yawning face"
-],
-["😤",
-"face with steam from nose",
-"face | face with steam from nose | triumph | won"
-],
-["😡",
-"pouting face",
-"angry | face | mad | pouting | rage | red"
-],
-["😠",
-"angry face",
-"angry | face | mad"
-],
-["🤬",
-"face with symbols on mouth",
-"face with symbols on mouth | swearing | cursing"
-],
-["😈",
-"smiling face with horns",
-"face | fairy tale | fantasy | horns | smile | smiling face with horns"
-],
-["👿",
-"angry face with horns",
-"angry face with horns | demon | devil | face | fantasy | imp"
-],
-["💀",
-"skull",
-"death | face | fairy tale | monster | skull"
-],
-["☠",
-"skull and crossbones",
-"crossbones | death | face | monster | skull | skull and crossbones"
-],
-["💩",
-"pile of poo",
-"dung | face | monster | pile of poo | poo | poop"
-],
-["🤡",
-"clown face",
-"clown | face"
-],
-["👹",
-"ogre",
-"creature | face | fairy tale | fantasy | monster | ogre | troll"
-],
-["👺",
-"goblin",
-"creature | face | fairy tale | fantasy | goblin | monster"
-],
-["👻",
-"ghost",
-"creature | face | fairy tale | fantasy | ghost | monster"
-],
-["👽",
-"alien",
-"alien | creature | extraterrestrial | face | fantasy | ufo"
-],
-["👾",
-"alien monster",
-"alien | creature | extraterrestrial | face | monster | ufo"
-],
-["🤖",
-"robot",
-"face | monster | robot"
-],
-["😺",
-"grinning cat",
-"cat | face | grinning | mouth | open | smile"
-],
-["😸",
-"grinning cat with smiling eyes",
-"cat | eye | face | grin | grinning cat with smiling eyes | smile"
-],
-["😹",
-"cat with tears of joy",
-"cat | cat with tears of joy | face | joy | tear"
-],
-["😻",
-"smiling cat with heart-eyes",
-"cat | eye | face | heart | love | smile | smiling cat with heart-eyes"
-],
-["😼",
-"cat with wry smile",
-"cat | cat with wry smile | face | ironic | smile | wry"
-],
-["😽",
-"kissing cat",
-"cat | eye | face | kiss | kissing cat"
-],
-["🙀",
-"weary cat",
-"cat | face | oh | surprised | weary"
-],
-["😿",
-"crying cat",
-"cat | cry | crying cat | face | sad | tear"
-],
-["😾",
-"pouting cat",
-"cat | face | pouting"
-],
-["🙈",
-"see-no-evil monkey",
-"evil | face | forbidden | monkey | see | see-no-evil monkey"
-],
-["🙉",
-"hear-no-evil monkey",
-"evil | face | forbidden | hear | hear-no-evil monkey | monkey"
-],
-["🙊",
-"speak-no-evil monkey",
-"evil | face | forbidden | monkey | speak | speak-no-evil monkey"
-],
-["💋",
-"kiss mark",
-"kiss | kiss mark | lips"
-],
-["💌",
-"love letter",
-"heart | letter | love | mail"
-],
-["💘",
-"heart with arrow",
-"arrow | cupid | heart with arrow"
-],
-["💝",
-"heart with ribbon",
-"heart with ribbon | ribbon | valentine"
-],
-["💖",
-"sparkling heart",
-"excited | sparkle | sparkling heart"
-],
-["💗",
-"growing heart",
-"excited | growing | growing heart | nervous | pulse"
-],
-["💓",
-"beating heart",
-"beating | beating heart | heartbeat | pulsating"
-],
-["💞",
-"revolving hearts",
-"revolving | revolving hearts"
-],
-["💕",
-"two hearts",
-"love | two hearts"
-],
-["💟",
-"heart decoration",
-"heart | heart decoration"
-],
-["❣",
-"heart exclamation",
-"exclamation | heart exclamation | mark | punctuation"
-],
-["💔",
-"broken heart",
-"break | broken | broken heart"
-],
-["❤️‍🔥",
-"heart on fire",
-"burn | heart | heart on fire | love | lust | sacred heart"
-],
-["❤️‍🩹",
-"mending heart",
-"healthier | improving | mending | mending heart | recovering | recuperating | well"
-],
-["❤",
-"red heart",
-"heart | red heart"
-],
-["🧡",
-"orange heart",
-"orange | orange heart"
-],
-["💛",
-"yellow heart",
-"yellow | yellow heart"
-],
-["💚",
-"green heart",
-"green | green heart"
-],
-["💙",
-"blue heart",
-"blue | blue heart"
-],
-["💜",
-"purple heart",
-"purple | purple heart"
-],
-["🤎",
-"brown heart",
-"brown | heart"
-],
-["🖤",
-"black heart",
-"black | black heart | evil | wicked"
-],
-["🤍",
-"white heart",
-"heart | white"
-],
-["💯",
-"hundred points",
-"100 | full | hundred | hundred points | score"
-],
-["💢",
-"anger symbol",
-"anger symbol | angry | comic | mad"
-],
-["💥",
-"collision",
-"boom | collision | comic"
-],
-["💫",
-"dizzy",
-"comic | dizzy | star"
-],
-["💦",
-"sweat droplets",
-"comic | splashing | sweat | sweat droplets"
-],
-["💨",
-"dashing away",
-"comic | dash | dashing away | running"
-],
-["🕳",
-"hole",
-"hole"
-],
-["💣",
-"bomb",
-"bomb | comic"
-],
-["💬",
-"speech balloon",
-"balloon | bubble | comic | dialog | speech"
-],
-["👁️‍🗨️",
-"eye in speech bubble",
-"eye | eye in speech bubble | speech bubble | witness"
-],
-["🗨",
-"left speech bubble",
-"dialog | left speech bubble | speech"
-],
-["🗯",
-"right anger bubble",
-"angry | balloon | bubble | mad | right anger bubble"
-],
-["💭",
-"thought balloon",
-"balloon | bubble | comic | thought"
-],
-["💤",
-"zzz",
-"comic | sleep | zzz"
-],
-["👋",
-"waving hand",
-"hand | wave | waving"
-],
-["🤚",
-"raised back of hand",
-"backhand | raised | raised back of hand"
-],
-["🖐",
-"hand with fingers splayed",
-"finger | hand | hand with fingers splayed | splayed"
-],
-["✋",
-"raised hand",
-"hand | high 5 | high five | raised hand"
-],
-["🖖",
-"vulcan salute",
-"finger | hand | spock | vulcan | vulcan salute"
-],
-["👌",
-"OK hand",
-"hand | OK"
-],
-["🤌",
-"pinched fingers",
-"fingers | hand gesture | interrogation | pinched | sarcastic"
-],
-["🤏",
-"pinching hand",
-"pinching hand | small amount"
-],
-["✌",
-"victory hand",
-"hand | v | victory"
-],
-["🤞",
-"crossed fingers",
-"cross | crossed fingers | finger | hand | luck"
-],
-["🤟",
-"love-you gesture",
-"hand | ILY | love-you gesture"
-],
-["🤘",
-"sign of the horns",
-"finger | hand | horns | rock-on | sign of the horns"
-],
-["🤙",
-"call me hand",
-"call | call me hand | hand"
-],
-["👈",
-"backhand index pointing left",
-"backhand | backhand index pointing left | finger | hand | index | point"
-],
-["👉",
-"backhand index pointing right",
-"backhand | backhand index pointing right | finger | hand | index | point"
-],
-["👆",
-"backhand index pointing up",
-"backhand | backhand index pointing up | finger | hand | point | up"
-],
-["🖕",
-"middle finger",
-"finger | hand | middle finger"
-],
-["👇",
-"backhand index pointing down",
-"backhand | backhand index pointing down | down | finger | hand | point"
-],
-["☝",
-"index pointing up",
-"finger | hand | index | index pointing up | point | up"
-],
-["👍",
-"thumbs up",
-"+1 | hand | thumb | thumbs up | up"
-],
-["👎",
-"thumbs down",
-"-1 | down | hand | thumb | thumbs down"
-],
-["✊",
-"raised fist",
-"clenched | fist | hand | punch | raised fist"
-],
-["👊",
-"oncoming fist",
-"clenched | fist | hand | oncoming fist | punch"
-],
-["🤛",
-"left-facing fist",
-"fist | left-facing fist | leftwards"
-],
-["🤜",
-"right-facing fist",
-"fist | right-facing fist | rightwards"
-],
-["👏",
-"clapping hands",
-"clap | clapping hands | hand"
-],
-["🙌",
-"raising hands",
-"celebration | gesture | hand | hooray | raised | raising hands"
-],
-["👐",
-"open hands",
-"hand | open | open hands"
-],
-["🤲",
-"palms up together",
-"palms up together | prayer | cupped hands"
-],
-["🤝",
-"handshake",
-"agreement | hand | handshake | meeting | shake"
-],
-["🙏",
-"folded hands",
-"ask | folded hands | hand | high 5 | high five | please | pray | thanks"
-],
-["✍",
-"writing hand",
-"hand | write | writing hand"
-],
-["💅",
-"nail polish",
-"care | cosmetics | manicure | nail | polish"
-],
-["🤳",
-"selfie",
-"camera | phone | selfie"
-],
-["💪",
-"flexed biceps",
-"biceps | comic | flex | flexed biceps | muscle"
-],
-["🦾",
-"mechanical arm",
-"accessibility | mechanical arm | prosthetic"
-],
-["🦿",
-"mechanical leg",
-"accessibility | mechanical leg | prosthetic"
-],
-["🦵",
-"leg",
-"kick | leg | limb"
-],
-["🦶",
-"foot",
-"foot | kick | stomp"
-],
-["👂",
-"ear",
-"body | ear"
-],
-["🦻",
-"ear with hearing aid",
-"accessibility | ear with hearing aid | hard of hearing"
-],
-["👃",
-"nose",
-"body | nose"
-],
-["🧠",
-"brain",
-"brain | intelligent"
-],
-["🫀",
-"anatomical heart",
-"anatomical | cardiology | heart | organ | pulse"
-],
-["🫁",
-"lungs",
-"breath | exhalation | inhalation | lungs | organ | respiration"
-],
-["🦷",
-"tooth",
-"dentist | tooth"
-],
-["🦴",
-"bone",
-"bone | skeleton"
-],
-["👀",
-"eyes",
-"eye | eyes | face"
-],
-["👁",
-"eye",
-"body | eye"
-],
-["👅",
-"tongue",
-"body | tongue"
-],
-["👄",
-"mouth",
-"lips | mouth"
-],
-["👶",
-"baby",
-"baby | young"
-],
-["🧒",
-"child",
-"child | gender-neutral | unspecified gender | young"
-],
-["👦",
-"boy",
-"boy | young"
-],
-["👧",
-"girl",
-"girl | Virgo | young | zodiac"
-],
-["🧑",
-"person",
-"adult | gender-neutral | person | unspecified gender"
-],
-["👱",
-"person: blond hair",
-"blond | blond-haired person | hair | person: blond hair"
-],
-["👨",
-"man",
-"adult | man"
-],
-["🧔",
-"person: beard",
-"beard | person | person: beard | bewhiskered"
-],
-["🧔‍♂️",
-"man: beard",
-"beard | man | man: beard"
-],
-["🧔‍♀️",
-"woman: beard",
-"beard | woman | woman: beard"
-],
-["👨‍🦰",
-"man: red hair",
-"adult | man | red hair"
-],
-["👨‍🦱",
-"man: curly hair",
-"adult | curly hair | man"
-],
-["👨‍🦳",
-"man: white hair",
-"adult | man | white hair"
-],
-["👨‍🦲",
-"man: bald",
-"adult | bald | man"
-],
-["👩",
-"woman",
-"adult | woman"
-],
-["👩‍🦰",
-"woman: red hair",
-"adult | red hair | woman"
-],
-["🧑‍🦰",
-"person: red hair",
-"adult | gender-neutral | person | red hair | unspecified gender"
-],
-["👩‍🦱",
-"woman: curly hair",
-"adult | curly hair | woman"
-],
-["🧑‍🦱",
-"person: curly hair",
-"adult | curly hair | gender-neutral | person | unspecified gender"
-],
-["👩‍🦳",
-"woman: white hair",
-"adult | white hair | woman"
-],
-["🧑‍🦳",
-"person: white hair",
-"adult | gender-neutral | person | unspecified gender | white hair"
-],
-["👩‍🦲",
-"woman: bald",
-"adult | bald | woman"
-],
-["🧑‍🦲",
-"person: bald",
-"adult | bald | gender-neutral | person | unspecified gender"
-],
-["👱‍♀️",
-"woman: blond hair",
-"blond-haired woman | blonde | hair | woman | woman: blond hair"
-],
-["👱‍♂️",
-"man: blond hair",
-"blond | blond-haired man | hair | man | man: blond hair"
-],
-["🧓",
-"older person",
-"adult | gender-neutral | old | older person | unspecified gender"
-],
-["👴",
-"old man",
-"adult | man | old"
-],
-["👵",
-"old woman",
-"adult | old | woman"
-],
-["🙍",
-"person frowning",
-"frown | gesture | person frowning"
-],
-["🙍‍♂️",
-"man frowning",
-"frowning | gesture | man"
-],
-["🙍‍♀️",
-"woman frowning",
-"frowning | gesture | woman"
-],
-["🙎",
-"person pouting",
-"gesture | person pouting | pouting"
-],
-["🙎‍♂️",
-"man pouting",
-"gesture | man | pouting"
-],
-["🙎‍♀️",
-"woman pouting",
-"gesture | pouting | woman"
-],
-["🙅",
-"person gesturing NO",
-"forbidden | gesture | hand | person gesturing NO | prohibited"
-],
-["🙅‍♂️",
-"man gesturing NO",
-"forbidden | gesture | hand | man | man gesturing NO | prohibited"
-],
-["🙅‍♀️",
-"woman gesturing NO",
-"forbidden | gesture | hand | prohibited | woman | woman gesturing NO"
-],
-["🙆",
-"person gesturing OK",
-"gesture | hand | OK | person gesturing OK"
-],
-["🙆‍♂️",
-"man gesturing OK",
-"gesture | hand | man | man gesturing OK | OK"
-],
-["🙆‍♀️",
-"woman gesturing OK",
-"gesture | hand | OK | woman | woman gesturing OK"
-],
-["💁",
-"person tipping hand",
-"hand | help | information | person tipping hand | sassy | tipping"
-],
-["💁‍♂️",
-"man tipping hand",
-"man | man tipping hand | sassy | tipping hand"
-],
-["💁‍♀️",
-"woman tipping hand",
-"sassy | tipping hand | woman | woman tipping hand"
-],
-["🙋",
-"person raising hand",
-"gesture | hand | happy | person raising hand | raised"
-],
-["🙋‍♂️",
-"man raising hand",
-"gesture | man | man raising hand | raising hand"
-],
-["🙋‍♀️",
-"woman raising hand",
-"gesture | raising hand | woman | woman raising hand"
-],
-["🧏",
-"deaf person",
-"accessibility | deaf | deaf person | ear | hear"
-],
-["🧏‍♂️",
-"deaf man",
-"deaf | man"
-],
-["🧏‍♀️",
-"deaf woman",
-"deaf | woman"
-],
-["🙇",
-"person bowing",
-"apology | bow | gesture | person bowing | sorry"
-],
-["🙇‍♂️",
-"man bowing",
-"apology | bowing | favor | gesture | man | sorry"
-],
-["🙇‍♀️",
-"woman bowing",
-"apology | bowing | favor | gesture | sorry | woman"
-],
-["🤦",
-"person facepalming",
-"disbelief | exasperation | face | palm | person facepalming"
-],
-["🤦‍♂️",
-"man facepalming",
-"disbelief | exasperation | facepalm | man | man facepalming"
-],
-["🤦‍♀️",
-"woman facepalming",
-"disbelief | exasperation | facepalm | woman | woman facepalming"
-],
-["🤷",
-"person shrugging",
-"doubt | ignorance | indifference | person shrugging | shrug"
-],
-["🤷‍♂️",
-"man shrugging",
-"doubt | ignorance | indifference | man | man shrugging | shrug"
-],
-["🤷‍♀️",
-"woman shrugging",
-"doubt | ignorance | indifference | shrug | woman | woman shrugging"
-],
-["🧑‍⚕️",
-"health worker",
-"doctor | health worker | healthcare | nurse | therapist"
-],
-["👨‍⚕️",
-"man health worker",
-"doctor | healthcare | man | man health worker | nurse | therapist"
-],
-["👩‍⚕️",
-"woman health worker",
-"doctor | healthcare | nurse | therapist | woman | woman health worker"
-],
-["🧑‍🎓",
-"student",
-"graduate | student"
-],
-["👨‍🎓",
-"man student",
-"graduate | man | student"
-],
-["👩‍🎓",
-"woman student",
-"graduate | student | woman"
-],
-["🧑‍🏫",
-"teacher",
-"instructor | professor | teacher"
-],
-["👨‍🏫",
-"man teacher",
-"instructor | man | professor | teacher"
-],
-["👩‍🏫",
-"woman teacher",
-"instructor | professor | teacher | woman"
-],
-["🧑‍⚖️",
-"judge",
-"judge | justice | scales"
-],
-["👨‍⚖️",
-"man judge",
-"judge | justice | man | scales"
-],
-["👩‍⚖️",
-"woman judge",
-"judge | justice | scales | woman"
-],
-["🧑‍🌾",
-"farmer",
-"farmer | gardener | rancher"
-],
-["👨‍🌾",
-"man farmer",
-"farmer | gardener | man | rancher"
-],
-["👩‍🌾",
-"woman farmer",
-"farmer | gardener | rancher | woman"
-],
-["🧑‍🍳",
-"cook",
-"chef | cook"
-],
-["👨‍🍳",
-"man cook",
-"chef | cook | man"
-],
-["👩‍🍳",
-"woman cook",
-"chef | cook | woman"
-],
-["🧑‍🔧",
-"mechanic",
-"electrician | mechanic | plumber | tradesperson"
-],
-["👨‍🔧",
-"man mechanic",
-"electrician | man | mechanic | plumber | tradesperson"
-],
-["👩‍🔧",
-"woman mechanic",
-"electrician | mechanic | plumber | tradesperson | woman"
-],
-["🧑‍🏭",
-"factory worker",
-"assembly | factory | industrial | worker"
-],
-["👨‍🏭",
-"man factory worker",
-"assembly | factory | industrial | man | worker"
-],
-["👩‍🏭",
-"woman factory worker",
-"assembly | factory | industrial | woman | worker"
-],
-["🧑‍💼",
-"office worker",
-"architect | business | manager | office worker | white-collar"
-],
-["👨‍💼",
-"man office worker",
-"architect | business | man | man office worker | manager | white-collar"
-],
-["👩‍💼",
-"woman office worker",
-"architect | business | manager | white-collar | woman | woman office worker"
-],
-["🧑‍🔬",
-"scientist",
-"biologist | chemist | engineer | physicist | scientist"
-],
-["👨‍🔬",
-"man scientist",
-"biologist | chemist | engineer | man | physicist | scientist"
-],
-["👩‍🔬",
-"woman scientist",
-"biologist | chemist | engineer | physicist | scientist | woman"
-],
-["🧑‍💻",
-"technologist",
-"coder | developer | inventor | software | technologist"
-],
-["👨‍💻",
-"man technologist",
-"coder | developer | inventor | man | software | technologist"
-],
-["👩‍💻",
-"woman technologist",
-"coder | developer | inventor | software | technologist | woman"
-],
-["🧑‍🎤",
-"singer",
-"actor | entertainer | rock | singer | star"
-],
-["👨‍🎤",
-"man singer",
-"actor | entertainer | man | rock | singer | star"
-],
-["👩‍🎤",
-"woman singer",
-"actor | entertainer | rock | singer | star | woman"
-],
-["🧑‍🎨",
-"artist",
-"artist | palette"
-],
-["👨‍🎨",
-"man artist",
-"artist | man | palette"
-],
-["👩‍🎨",
-"woman artist",
-"artist | palette | woman"
-],
-["🧑‍✈️",
-"pilot",
-"pilot | plane"
-],
-["👨‍✈️",
-"man pilot",
-"man | pilot | plane"
-],
-["👩‍✈️",
-"woman pilot",
-"pilot | plane | woman"
-],
-["🧑‍🚀",
-"astronaut",
-"astronaut | rocket"
-],
-["👨‍🚀",
-"man astronaut",
-"astronaut | man | rocket"
-],
-["👩‍🚀",
-"woman astronaut",
-"astronaut | rocket | woman"
-],
-["🧑‍🚒",
-"firefighter",
-"firefighter | firetruck"
-],
-["👨‍🚒",
-"man firefighter",
-"firefighter | firetruck | man"
-],
-["👩‍🚒",
-"woman firefighter",
-"firefighter | firetruck | woman"
-],
-["👮",
-"police officer",
-"cop | officer | police"
-],
-["👮‍♂️",
-"man police officer",
-"cop | man | officer | police"
-],
-["👮‍♀️",
-"woman police officer",
-"cop | officer | police | woman"
-],
-["🕵",
-"detective",
-"detective | sleuth | spy"
-],
-["🕵️‍♂️",
-"man detective",
-"detective | man | sleuth | spy"
-],
-["🕵️‍♀️",
-"woman detective",
-"detective | sleuth | spy | woman"
-],
-["💂",
-"guard",
-"guard"
-],
-["💂‍♂️",
-"man guard",
-"guard | man"
-],
-["💂‍♀️",
-"woman guard",
-"guard | woman"
-],
-["🥷",
-"ninja",
-"fighter | hidden | ninja | stealth"
-],
-["👷",
-"construction worker",
-"construction | hat | worker"
-],
-["👷‍♂️",
-"man construction worker",
-"construction | man | worker"
-],
-["👷‍♀️",
-"woman construction worker",
-"construction | woman | worker"
-],
-["🤴",
-"prince",
-"prince"
-],
-["👸",
-"princess",
-"fairy tale | fantasy | princess"
-],
-["👳",
-"person wearing turban",
-"person wearing turban | turban"
-],
-["👳‍♂️",
-"man wearing turban",
-"man | man wearing turban | turban"
-],
-["👳‍♀️",
-"woman wearing turban",
-"turban | woman | woman wearing turban"
-],
-["👲",
-"person with skullcap",
-"cap | gua pi mao | hat | person | person with skullcap | skullcap"
-],
-["🧕",
-"woman with headscarf",
-"headscarf | hijab | mantilla | tichel | woman with headscarf | bandana | head kerchief"
-],
-["🤵",
-"person in tuxedo",
-"groom | person | person in tuxedo | tuxedo"
-],
-["🤵‍♂️",
-"man in tuxedo",
-"man | man in tuxedo | tuxedo"
-],
-["🤵‍♀️",
-"woman in tuxedo",
-"tuxedo | woman | woman in tuxedo"
-],
-["👰",
-"person with veil",
-"bride | person | person with veil | veil | wedding"
-],
-["👰‍♂️",
-"man with veil",
-"man | man with veil | veil"
-],
-["👰‍♀️",
-"woman with veil",
-"veil | woman | woman with veil"
-],
-["🤰",
-"pregnant woman",
-"pregnant | woman"
-],
-["🤱",
-"breast-feeding",
-"baby | breast | breast-feeding | nursing"
-],
-["👩‍🍼",
-"woman feeding baby",
-"baby | feeding | nursing | woman"
-],
-["👨‍🍼",
-"man feeding baby",
-"baby | feeding | man | nursing"
-],
-["🧑‍🍼",
-"person feeding baby",
-"baby | feeding | nursing | person"
-],
-["👼",
-"baby angel",
-"angel | baby | face | fairy tale | fantasy"
-],
-["🎅",
-"Santa Claus",
-"celebration | Christmas | claus | father | santa | Santa Claus"
-],
-["🤶",
-"Mrs. Claus",
-"celebration | Christmas | claus | mother | Mrs. | Mrs. Claus"
-],
-["🧑‍🎄",
-"mx claus",
-"Claus, christmas | mx claus"
-],
-["🦸",
-"superhero",
-"good | hero | heroine | superhero | superpower"
-],
-["🦸‍♂️",
-"man superhero",
-"good | hero | man | man superhero | superpower"
-],
-["🦸‍♀️",
-"woman superhero",
-"good | hero | heroine | superpower | woman | woman superhero"
-],
-["🦹",
-"supervillain",
-"criminal | evil | superpower | supervillain | villain"
-],
-["🦹‍♂️",
-"man supervillain",
-"criminal | evil | man | man supervillain | superpower | villain"
-],
-["🦹‍♀️",
-"woman supervillain",
-"criminal | evil | superpower | villain | woman | woman supervillain"
-],
-["🧙",
-"mage",
-"mage | sorcerer | sorceress | witch | wizard"
-],
-["🧙‍♂️",
-"man mage",
-"man mage | sorcerer | wizard"
-],
-["🧙‍♀️",
-"woman mage",
-"sorceress | witch | woman mage"
-],
-["🧚",
-"fairy",
-"fairy | Oberon | Puck | Titania"
-],
-["🧚‍♂️",
-"man fairy",
-"man fairy | Oberon | Puck"
-],
-["🧚‍♀️",
-"woman fairy",
-"Titania | woman fairy"
-],
-["🧛",
-"vampire",
-"Dracula | undead | vampire"
-],
-["🧛‍♂️",
-"man vampire",
-"Dracula | man vampire | undead"
-],
-["🧛‍♀️",
-"woman vampire",
-"undead | woman vampire"
-],
-["🧜",
-"merperson",
-"mermaid | merman | merperson | merwoman"
-],
-["🧜‍♂️",
-"merman",
-"merman | Triton"
-],
-["🧜‍♀️",
-"mermaid",
-"mermaid | merwoman"
-],
-["🧝",
-"elf",
-"elf | magical | LOTR style"
-],
-["🧝‍♂️",
-"man elf",
-"magical | man elf"
-],
-["🧝‍♀️",
-"woman elf",
-"magical | woman elf"
-],
-["🧞",
-"genie",
-"djinn | genie | (non-human color)"
-],
-["🧞‍♂️",
-"man genie",
-"djinn | man genie"
-],
-["🧞‍♀️",
-"woman genie",
-"djinn | woman genie"
-],
-["🧟",
-"zombie",
-"undead | walking dead | zombie | (non-human color)"
-],
-["🧟‍♂️",
-"man zombie",
-"man zombie | undead | walking dead"
-],
-["🧟‍♀️",
-"woman zombie",
-"undead | walking dead | woman zombie"
-],
-["💆",
-"person getting massage",
-"face | massage | person getting massage | salon"
-],
-["💆‍♂️",
-"man getting massage",
-"face | man | man getting massage | massage"
-],
-["💆‍♀️",
-"woman getting massage",
-"face | massage | woman | woman getting massage"
-],
-["💇",
-"person getting haircut",
-"barber | beauty | haircut | parlor | person getting haircut"
-],
-["💇‍♂️",
-"man getting haircut",
-"haircut | man | man getting haircut"
-],
-["💇‍♀️",
-"woman getting haircut",
-"haircut | woman | woman getting haircut"
-],
-["🚶",
-"person walking",
-"hike | person walking | walk | walking"
-],
-["🚶‍♂️",
-"man walking",
-"hike | man | man walking | walk"
-],
-["🚶‍♀️",
-"woman walking",
-"hike | walk | woman | woman walking"
-],
-["🧍",
-"person standing",
-"person standing | stand | standing"
-],
-["🧍‍♂️",
-"man standing",
-"man | standing"
-],
-["🧍‍♀️",
-"woman standing",
-"standing | woman"
-],
-["🧎",
-"person kneeling",
-"kneel | kneeling | person kneeling"
-],
-["🧎‍♂️",
-"man kneeling",
-"kneeling | man"
-],
-["🧎‍♀️",
-"woman kneeling",
-"kneeling | woman"
-],
-["🧑‍🦯",
-"person with white cane",
-"accessibility | blind | person with white cane"
-],
-["👨‍🦯",
-"man with white cane",
-"accessibility | blind | man | man with white cane"
-],
-["👩‍🦯",
-"woman with white cane",
-"accessibility | blind | woman | woman with white cane"
-],
-["🧑‍🦼",
-"person in motorized wheelchair",
-"accessibility | person in motorized wheelchair | wheelchair"
-],
-["👨‍🦼",
-"man in motorized wheelchair",
-"accessibility | man | man in motorized wheelchair | wheelchair"
-],
-["👩‍🦼",
-"woman in motorized wheelchair",
-"accessibility | wheelchair | woman | woman in motorized wheelchair"
-],
-["🧑‍🦽",
-"person in manual wheelchair",
-"accessibility | person in manual wheelchair | wheelchair"
-],
-["👨‍🦽",
-"man in manual wheelchair",
-"accessibility | man | man in manual wheelchair | wheelchair"
-],
-["👩‍🦽",
-"woman in manual wheelchair",
-"accessibility | wheelchair | woman | woman in manual wheelchair"
-],
-["🏃",
-"person running",
-"marathon | person running | running"
-],
-["🏃‍♂️",
-"man running",
-"man | marathon | racing | running"
-],
-["🏃‍♀️",
-"woman running",
-"marathon | racing | running | woman"
-],
-["💃",
-"woman dancing",
-"dance | dancing | woman"
-],
-["🕺",
-"man dancing",
-"dance | dancing | man"
-],
-["🕴",
-"person in suit levitating",
-"business | person | person in suit levitating | suit"
-],
-["👯",
-"people with bunny ears",
-"bunny ear | dancer | partying | people with bunny ears"
-],
-["👯‍♂️",
-"men with bunny ears",
-"bunny ear | dancer | men | men with bunny ears | partying"
-],
-["👯‍♀️",
-"women with bunny ears",
-"bunny ear | dancer | partying | women | women with bunny ears"
-],
-["🧖",
-"person in steamy room",
-"person in steamy room | sauna | steam room | hamam | steambath"
-],
-["🧖‍♂️",
-"man in steamy room",
-"man in steamy room | sauna | steam room"
-],
-["🧖‍♀️",
-"woman in steamy room",
-"sauna | steam room | woman in steamy room"
-],
-["🧗",
-"person climbing",
-"climber | person climbing"
-],
-["🧗‍♂️",
-"man climbing",
-"climber | man climbing"
-],
-["🧗‍♀️",
-"woman climbing",
-"climber | woman climbing"
-],
-["🤺",
-"person fencing",
-"fencer | fencing | person fencing | sword"
-],
-["🏇",
-"horse racing",
-"horse | jockey | racehorse | racing"
-],
-["⛷",
-"skier",
-"ski | skier | snow"
-],
-["🏂",
-"snowboarder",
-"ski | snow | snowboard | snowboarder"
-],
-["🏌",
-"person golfing",
-"ball | golf | person golfing"
-],
-["🏌️‍♂️",
-"man golfing",
-"golf | man | man golfing"
-],
-["🏌️‍♀️",
-"woman golfing",
-"golf | woman | woman golfing"
-],
-["🏄",
-"person surfing",
-"person surfing | surfing"
-],
-["🏄‍♂️",
-"man surfing",
-"man | surfing"
-],
-["🏄‍♀️",
-"woman surfing",
-"surfing | woman"
-],
-["🚣",
-"person rowing boat",
-"boat | person rowing boat | rowboat"
-],
-["🚣‍♂️",
-"man rowing boat",
-"boat | man | man rowing boat | rowboat"
-],
-["🚣‍♀️",
-"woman rowing boat",
-"boat | rowboat | woman | woman rowing boat"
-],
-["🏊",
-"person swimming",
-"person swimming | swim"
-],
-["🏊‍♂️",
-"man swimming",
-"man | man swimming | swim"
-],
-["🏊‍♀️",
-"woman swimming",
-"swim | woman | woman swimming"
-],
-["⛹",
-"person bouncing ball",
-"ball | person bouncing ball"
-],
-["⛹️‍♂️",
-"man bouncing ball",
-"ball | man | man bouncing ball"
-],
-["⛹️‍♀️",
-"woman bouncing ball",
-"ball | woman | woman bouncing ball"
-],
-["🏋",
-"person lifting weights",
-"lifter | person lifting weights | weight"
-],
-["🏋️‍♂️",
-"man lifting weights",
-"man | man lifting weights | weight lifter"
-],
-["🏋️‍♀️",
-"woman lifting weights",
-"weight lifter | woman | woman lifting weights"
-],
-["🚴",
-"person biking",
-"bicycle | biking | cyclist | person biking"
-],
-["🚴‍♂️",
-"man biking",
-"bicycle | biking | cyclist | man"
-],
-["🚴‍♀️",
-"woman biking",
-"bicycle | biking | cyclist | woman"
-],
-["🚵",
-"person mountain biking",
-"bicycle | bicyclist | bike | cyclist | mountain | person mountain biking"
-],
-["🚵‍♂️",
-"man mountain biking",
-"bicycle | bike | cyclist | man | man mountain biking | mountain"
-],
-["🚵‍♀️",
-"woman mountain biking",
-"bicycle | bike | biking | cyclist | mountain | woman"
-],
-["🤸",
-"person cartwheeling",
-"cartwheel | gymnastics | person cartwheeling"
-],
-["🤸‍♂️",
-"man cartwheeling",
-"cartwheel | gymnastics | man | man cartwheeling"
-],
-["🤸‍♀️",
-"woman cartwheeling",
-"cartwheel | gymnastics | woman | woman cartwheeling"
-],
-["🤼",
-"people wrestling",
-"people wrestling | wrestle | wrestler"
-],
-["🤼‍♂️",
-"men wrestling",
-"men | men wrestling | wrestle"
-],
-["🤼‍♀️",
-"women wrestling",
-"women | women wrestling | wrestle"
-],
-["🤽",
-"person playing water polo",
-"person playing water polo | polo | water"
-],
-["🤽‍♂️",
-"man playing water polo",
-"man | man playing water polo | water polo"
-],
-["🤽‍♀️",
-"woman playing water polo",
-"water polo | woman | woman playing water polo"
-],
-["🤾",
-"person playing handball",
-"ball | handball | person playing handball"
-],
-["🤾‍♂️",
-"man playing handball",
-"handball | man | man playing handball"
-],
-["🤾‍♀️",
-"woman playing handball",
-"handball | woman | woman playing handball"
-],
-["🤹",
-"person juggling",
-"balance | juggle | multitask | person juggling | skill"
-],
-["🤹‍♂️",
-"man juggling",
-"juggling | man | multitask"
-],
-["🤹‍♀️",
-"woman juggling",
-"juggling | multitask | woman"
-],
-["🧘",
-"person in lotus position",
-"meditation | person in lotus position | yoga | serenity"
-],
-["🧘‍♂️",
-"man in lotus position",
-"man in lotus position | meditation | yoga"
-],
-["🧘‍♀️",
-"woman in lotus position",
-"meditation | woman in lotus position | yoga"
-],
-["🛀",
-"person taking bath",
-"bath | bathtub | person taking bath"
-],
-["🛌",
-"person in bed",
-"hotel | person in bed | sleep"
-],
-["🧑‍🤝‍🧑",
-"people holding hands",
-"couple | hand | hold | holding hands | people holding hands | person"
-],
-["👭",
-"women holding hands",
-"couple | hand | holding hands | women | women holding hands"
-],
-["👫",
-"woman and man holding hands",
-"couple | hand | hold | holding hands | man | woman | woman and man holding hands"
-],
-["👬",
-"men holding hands",
-"couple | Gemini | holding hands | man | men | men holding hands | twins | zodiac"
-],
-["💏",
-"kiss",
-"couple | kiss"
-],
-["👩‍❤️‍💋‍👨",
-"kiss: woman, man",
-"couple | kiss | man | woman"
-],
-["👨‍❤️‍💋‍👨",
-"kiss: man, man",
-"couple | kiss | man"
-],
-["👩‍❤️‍💋‍👩",
-"kiss: woman, woman",
-"couple | kiss | woman"
-],
-["💑",
-"couple with heart",
-"couple | couple with heart | love"
-],
-["👩‍❤️‍👨",
-"couple with heart: woman, man",
-"couple | couple with heart | love | man | woman"
-],
-["👨‍❤️‍👨",
-"couple with heart: man, man",
-"couple | couple with heart | love | man"
-],
-["👩‍❤️‍👩",
-"couple with heart: woman, woman",
-"couple | couple with heart | love | woman"
-],
-["👪",
-"family",
-"family"
-],
-["👨‍👩‍👦",
-"family: man, woman, boy",
-"boy | family | man | woman"
-],
-["👨‍👩‍👧",
-"family: man, woman, girl",
-"family | girl | man | woman"
-],
-["👨‍👩‍👧‍👦",
-"family: man, woman, girl, boy",
-"boy | family | girl | man | woman"
-],
-["👨‍👩‍👦‍👦",
-"family: man, woman, boy, boy",
-"boy | family | man | woman"
-],
-["👨‍👩‍👧‍👧",
-"family: man, woman, girl, girl",
-"family | girl | man | woman"
-],
-["👨‍👨‍👦",
-"family: man, man, boy",
-"boy | family | man"
-],
-["👨‍👨‍👧",
-"family: man, man, girl",
-"family | girl | man"
-],
-["👨‍👨‍👧‍👦",
-"family: man, man, girl, boy",
-"boy | family | girl | man"
-],
-["👨‍👨‍👦‍👦",
-"family: man, man, boy, boy",
-"boy | family | man"
-],
-["👨‍👨‍👧‍👧",
-"family: man, man, girl, girl",
-"family | girl | man"
-],
-["👩‍👩‍👦",
-"family: woman, woman, boy",
-"boy | family | woman"
-],
-["👩‍👩‍👧",
-"family: woman, woman, girl",
-"family | girl | woman"
-],
-["👩‍👩‍👧‍👦",
-"family: woman, woman, girl, boy",
-"boy | family | girl | woman"
-],
-["👩‍👩‍👦‍👦",
-"family: woman, woman, boy, boy",
-"boy | family | woman"
-],
-["👩‍👩‍👧‍👧",
-"family: woman, woman, girl, girl",
-"family | girl | woman"
-],
-["👨‍👦",
-"family: man, boy",
-"boy | family | man"
-],
-["👨‍👦‍👦",
-"family: man, boy, boy",
-"boy | family | man"
-],
-["👨‍👧",
-"family: man, girl",
-"family | girl | man"
-],
-["👨‍👧‍👦",
-"family: man, girl, boy",
-"boy | family | girl | man"
-],
-["👨‍👧‍👧",
-"family: man, girl, girl",
-"family | girl | man"
-],
-["👩‍👦",
-"family: woman, boy",
-"boy | family | woman"
-],
-["👩‍👦‍👦",
-"family: woman, boy, boy",
-"boy | family | woman"
-],
-["👩‍👧",
-"family: woman, girl",
-"family | girl | woman"
-],
-["👩‍👧‍👦",
-"family: woman, girl, boy",
-"boy | family | girl | woman"
-],
-["👩‍👧‍👧",
-"family: woman, girl, girl",
-"family | girl | woman"
-],
-["🗣",
-"speaking head",
-"face | head | silhouette | speak | speaking"
-],
-["👤",
-"bust in silhouette",
-"bust | bust in silhouette | silhouette"
-],
-["👥",
-"busts in silhouette",
-"bust | busts in silhouette | silhouette"
-],
-["🫂",
-"people hugging",
-"goodbye | hello | hug | people hugging | thanks"
-],
-["👣",
-"footprints",
-"clothing | footprint | footprints | print"
-],
-["🦰",
-"red hair",
-"ginger | red hair | redhead"
-],
-["🦱",
-"curly hair",
-"afro | curly | curly hair | ringlets"
-],
-["🦳",
-"white hair",
-"gray | hair | old | white"
-],
-["🦲",
-"bald",
-"bald | chemotherapy | hairless | no hair | shaven"
-],
-["🐵",
-"monkey face",
-"face | monkey"
-],
-["🐒",
-"monkey",
-"monkey"
-],
-["🦍",
-"gorilla",
-"gorilla"
-],
-["🦧",
-"orangutan",
-"ape | orangutan"
-],
-["🐶",
-"dog face",
-"dog | face | pet"
-],
-["🐕",
-"dog",
-"dog | pet"
-],
-["🦮",
-"guide dog",
-"accessibility | blind | guide | guide dog"
-],
-["🐕‍🦺",
-"service dog",
-"accessibility | assistance | dog | service"
-],
-["🐩",
-"poodle",
-"dog | poodle"
-],
-["🐺",
-"wolf",
-"face | wolf"
-],
-["🦊",
-"fox",
-"face | fox"
-],
-["🦝",
-"raccoon",
-"curious | raccoon | sly"
-],
-["🐱",
-"cat face",
-"cat | face | pet"
-],
-["🐈",
-"cat",
-"cat | pet"
-],
-["🐈‍⬛",
-"black cat",
-"black | cat | unlucky"
-],
-["🦁",
-"lion",
-"face | Leo | lion | zodiac"
-],
-["🐯",
-"tiger face",
-"face | tiger"
-],
-["🐅",
-"tiger",
-"tiger"
-],
-["🐆",
-"leopard",
-"leopard"
-],
-["🐴",
-"horse face",
-"face | horse"
-],
-["🐎",
-"horse",
-"equestrian | horse | racehorse | racing"
-],
-["🦄",
-"unicorn",
-"face | unicorn"
-],
-["🦓",
-"zebra",
-"stripe | zebra"
-],
-["🦌",
-"deer",
-"deer"
-],
-["🦬",
-"bison",
-"bison | buffalo | herd | wisent"
-],
-["🐮",
-"cow face",
-"cow | face"
-],
-["🐂",
-"ox",
-"bull | ox | Taurus | zodiac"
-],
-["🐃",
-"water buffalo",
-"buffalo | water"
-],
-["🐄",
-"cow",
-"cow"
-],
-["🐷",
-"pig face",
-"face | pig"
-],
-["🐖",
-"pig",
-"pig | sow"
-],
-["🐗",
-"boar",
-"boar | pig"
-],
-["🐽",
-"pig nose",
-"face | nose | pig"
-],
-["🐏",
-"ram",
-"Aries | male | ram | sheep | zodiac"
-],
-["🐑",
-"ewe",
-"ewe | female | sheep"
-],
-["🐐",
-"goat",
-"Capricorn | goat | zodiac"
-],
-["🐪",
-"camel",
-"camel | dromedary | hump"
-],
-["🐫",
-"two-hump camel",
-"bactrian | camel | hump | two-hump camel"
-],
-["🦙",
-"llama",
-"alpaca | guanaco | llama | vicuña | wool"
-],
-["🦒",
-"giraffe",
-"giraffe | spots"
-],
-["🐘",
-"elephant",
-"elephant"
-],
-["🦣",
-"mammoth",
-"extinction | large | mammoth | tusk | woolly"
-],
-["🦏",
-"rhinoceros",
-"rhinoceros"
-],
-["🦛",
-"hippopotamus",
-"hippo | hippopotamus"
-],
-["🐭",
-"mouse face",
-"face | mouse"
-],
-["🐁",
-"mouse",
-"mouse"
-],
-["🐀",
-"rat",
-"rat"
-],
-["🐹",
-"hamster",
-"face | hamster | pet"
-],
-["🐰",
-"rabbit face",
-"bunny | face | pet | rabbit"
-],
-["🐇",
-"rabbit",
-"bunny | pet | rabbit"
-],
-["🐿",
-"chipmunk",
-"chipmunk | squirrel"
-],
-["🦫",
-"beaver",
-"beaver | dam"
-],
-["🦔",
-"hedgehog",
-"hedgehog | spiny"
-],
-["🦇",
-"bat",
-"bat | vampire"
-],
-["🐻",
-"bear",
-"bear | face"
-],
-["🐻‍❄️",
-"polar bear",
-"arctic | bear | polar bear | white"
-],
-["🐨",
-"koala",
-"bear | koala"
-],
-["🐼",
-"panda",
-"face | panda"
-],
-["🦥",
-"sloth",
-"lazy | sloth | slow"
-],
-["🦦",
-"otter",
-"fishing | otter | playful"
-],
-["🦨",
-"skunk",
-"skunk | stink"
-],
-["🦘",
-"kangaroo",
-"Australia | joey | jump | kangaroo | marsupial"
-],
-["🦡",
-"badger",
-"badger | honey badger | pester"
-],
-["🐾",
-"paw prints",
-"feet | paw | paw prints | print"
-],
-["🦃",
-"turkey",
-"bird | turkey"
-],
-["🐔",
-"chicken",
-"bird | chicken"
-],
-["🐓",
-"rooster",
-"bird | rooster"
-],
-["🐣",
-"hatching chick",
-"baby | bird | chick | hatching"
-],
-["🐤",
-"baby chick",
-"baby | bird | chick"
-],
-["🐥",
-"front-facing baby chick",
-"baby | bird | chick | front-facing baby chick"
-],
-["🐦",
-"bird",
-"bird"
-],
-["🐧",
-"penguin",
-"bird | penguin"
-],
-["🕊",
-"dove",
-"bird | dove | fly | peace"
-],
-["🦅",
-"eagle",
-"bird | eagle"
-],
-["🦆",
-"duck",
-"bird | duck"
-],
-["🦢",
-"swan",
-"bird | cygnet | swan | ugly duckling"
-],
-["🦉",
-"owl",
-"bird | owl | wise"
-],
-["🦤",
-"dodo",
-"dodo | extinction | large | Mauritius"
-],
-["🪶",
-"feather",
-"bird | feather | flight | light | plumage"
-],
-["🦩",
-"flamingo",
-"flamboyant | flamingo | tropical"
-],
-["🦚",
-"peacock",
-"bird | ostentatious | peacock | peahen | proud"
-],
-["🦜",
-"parrot",
-"bird | parrot | pirate | talk"
-],
-["🐸",
-"frog",
-"face | frog"
-],
-["🐊",
-"crocodile",
-"crocodile"
-],
-["🐢",
-"turtle",
-"terrapin | tortoise | turtle"
-],
-["🦎",
-"lizard",
-"lizard | reptile"
-],
-["🐍",
-"snake",
-"bearer | Ophiuchus | serpent | snake | zodiac"
-],
-["🐲",
-"dragon face",
-"dragon | face | fairy tale"
-],
-["🐉",
-"dragon",
-"dragon | fairy tale"
-],
-["🦕",
-"sauropod",
-"brachiosaurus | brontosaurus | diplodocus | sauropod"
-],
-["🦖",
-"T-Rex",
-"T-Rex | Tyrannosaurus Rex"
-],
-["🐳",
-"spouting whale",
-"face | spouting | whale"
-],
-["🐋",
-"whale",
-"whale"
-],
-["🐬",
-"dolphin",
-"dolphin | flipper"
-],
-["🦭",
-"seal",
-"sea Lion | seal"
-],
-["🐟",
-"fish",
-"fish | Pisces | zodiac"
-],
-["🐠",
-"tropical fish",
-"fish | tropical"
-],
-["🐡",
-"blowfish",
-"blowfish | fish"
-],
-["🦈",
-"shark",
-"fish | shark"
-],
-["🐙",
-"octopus",
-"octopus"
-],
-["🐚",
-"spiral shell",
-"shell | spiral"
-],
-["🐌",
-"snail",
-"snail"
-],
-["🦋",
-"butterfly",
-"butterfly | insect | pretty"
-],
-["🐛",
-"bug",
-"bug | insect"
-],
-["🐜",
-"ant",
-"ant | insect"
-],
-["🐝",
-"honeybee",
-"bee | honeybee | insect"
-],
-["🪲",
-"beetle",
-"beetle | bug | insect"
-],
-["🐞",
-"lady beetle",
-"beetle | insect | lady beetle | ladybird | ladybug"
-],
-["🦗",
-"cricket",
-"cricket | grasshopper | Orthoptera"
-],
-["🪳",
-"cockroach",
-"cockroach | insect | pest | roach"
-],
-["🕷",
-"spider",
-"insect | spider"
-],
-["🕸",
-"spider web",
-"spider | web"
-],
-["🦂",
-"scorpion",
-"scorpio | Scorpio | scorpion | zodiac"
-],
-["🦟",
-"mosquito",
-"disease | fever | malaria | mosquito | pest | virus"
-],
-["🪰",
-"fly",
-"disease | fly | maggot | pest | rotting"
-],
-["🪱",
-"worm",
-"annelid | earthworm | parasite | worm"
-],
-["🦠",
-"microbe",
-"amoeba | bacteria | microbe | virus"
-],
-["💐",
-"bouquet",
-"bouquet | flower"
-],
-["🌸",
-"cherry blossom",
-"blossom | cherry | flower"
-],
-["💮",
-"white flower",
-"flower | white flower"
-],
-["🏵",
-"rosette",
-"plant | rosette"
-],
-["🌹",
-"rose",
-"flower | rose"
-],
-["🥀",
-"wilted flower",
-"flower | wilted"
-],
-["🌺",
-"hibiscus",
-"flower | hibiscus"
-],
-["🌻",
-"sunflower",
-"flower | sun | sunflower"
-],
-["🌼",
-"blossom",
-"blossom | flower"
-],
-["🌷",
-"tulip",
-"flower | tulip"
-],
-["🌱",
-"seedling",
-"seedling | young"
-],
-["🪴",
-"potted plant",
-"boring | grow | house | nurturing | plant | potted plant | useless"
-],
-["🌲",
-"evergreen tree",
-"evergreen tree | tree"
-],
-["🌳",
-"deciduous tree",
-"deciduous | shedding | tree"
-],
-["🌴",
-"palm tree",
-"palm | tree"
-],
-["🌵",
-"cactus",
-"cactus | plant"
-],
-["🌾",
-"sheaf of rice",
-"ear | grain | rice | sheaf of rice"
-],
-["🌿",
-"herb",
-"herb | leaf"
-],
-["☘",
-"shamrock",
-"plant | shamrock"
-],
-["🍀",
-"four leaf clover",
-"4 | clover | four | four-leaf clover | leaf"
-],
-["🍁",
-"maple leaf",
-"falling | leaf | maple"
-],
-["🍂",
-"fallen leaf",
-"fallen leaf | falling | leaf"
-],
-["🍃",
-"leaf fluttering in wind",
-"blow | flutter | leaf | leaf fluttering in wind | wind"
-],
-["🍇",
-"grapes",
-"fruit | grape | grapes"
-],
-["🍈",
-"melon",
-"fruit | melon"
-],
-["🍉",
-"watermelon",
-"fruit | watermelon"
-],
-["🍊",
-"tangerine",
-"fruit | orange | tangerine"
-],
-["🍋",
-"lemon",
-"citrus | fruit | lemon"
-],
-["🍌",
-"banana",
-"banana | fruit"
-],
-["🍍",
-"pineapple",
-"fruit | pineapple"
-],
-["🥭",
-"mango",
-"fruit | mango | tropical"
-],
-["🍎",
-"red apple",
-"apple | fruit | red"
-],
-["🍏",
-"green apple",
-"apple | fruit | green"
-],
-["🍐",
-"pear",
-"fruit | pear"
-],
-["🍑",
-"peach",
-"fruit | peach"
-],
-["🍒",
-"cherries",
-"berries | cherries | cherry | fruit | red"
-],
-["🍓",
-"strawberry",
-"berry | fruit | strawberry"
-],
-["🫐",
-"blueberries",
-"berry | bilberry | blue | blueberries | blueberry"
-],
-["🥝",
-"kiwi fruit",
-"food | fruit | kiwi"
-],
-["🍅",
-"tomato",
-"fruit | tomato | vegetable"
-],
-["🫒",
-"olive",
-"food | olive"
-],
-["🥥",
-"coconut",
-"coconut | palm | piña colada"
-],
-["🥑",
-"avocado",
-"avocado | food | fruit"
-],
-["🍆",
-"eggplant",
-"aubergine | eggplant | vegetable"
-],
-["🥔",
-"potato",
-"food | potato | vegetable"
-],
-["🥕",
-"carrot",
-"carrot | food | vegetable"
-],
-["🌽",
-"ear of corn",
-"corn | ear | ear of corn | maize | maze"
-],
-["🌶",
-"hot pepper",
-"hot | pepper"
-],
-["🫑",
-"bell pepper",
-"bell pepper | capsicum | pepper | vegetable"
-],
-["🥒",
-"cucumber",
-"cucumber | food | pickle | vegetable"
-],
-["🥬",
-"leafy green",
-"bok choy | cabbage | kale | leafy green | lettuce"
-],
-["🥦",
-"broccoli",
-"broccoli | wild cabbage"
-],
-["🧄",
-"garlic",
-"flavoring | garlic"
-],
-["🧅",
-"onion",
-"flavoring | onion"
-],
-["🍄",
-"mushroom",
-"mushroom | toadstool"
-],
-["🥜",
-"peanuts",
-"food | nut | peanut | peanuts | vegetable"
-],
-["🌰",
-"chestnut",
-"chestnut | plant"
-],
-["🍞",
-"bread",
-"bread | loaf"
-],
-["🥐",
-"croissant",
-"bread | breakfast | croissant | food | french | roll"
-],
-["🥖",
-"baguette bread",
-"baguette | bread | food | french"
-],
-["🫓",
-"flatbread",
-"arepa | flatbread | lavash | naan | pita"
-],
-["🥨",
-"pretzel",
-"pretzel | twisted | convoluted"
-],
-["🥯",
-"bagel",
-"bagel | bakery | breakfast | schmear"
-],
-["🥞",
-"pancakes",
-"breakfast | crêpe | food | hotcake | pancake | pancakes"
-],
-["🧇",
-"waffle",
-"breakfast | indecisive | iron | waffle"
-],
-["🧀",
-"cheese wedge",
-"cheese | cheese wedge"
-],
-["🍖",
-"meat on bone",
-"bone | meat | meat on bone"
-],
-["🍗",
-"poultry leg",
-"bone | chicken | drumstick | leg | poultry"
-],
-["🥩",
-"cut of meat",
-"chop | cut of meat | lambchop | porkchop | steak"
-],
-["🥓",
-"bacon",
-"bacon | breakfast | food | meat"
-],
-["🍔",
-"hamburger",
-"burger | hamburger"
-],
-["🍟",
-"french fries",
-"french | fries"
-],
-["🍕",
-"pizza",
-"cheese | pizza | slice"
-],
-["🌭",
-"hot dog",
-"frankfurter | hot dog | hotdog | sausage"
-],
-["🥪",
-"sandwich",
-"bread | sandwich"
-],
-["🌮",
-"taco",
-"mexican | taco"
-],
-["🌯",
-"burrito",
-"burrito | mexican | wrap"
-],
-["🫔",
-"tamale",
-"mexican | tamale | wrapped"
-],
-["🥙",
-"stuffed flatbread",
-"falafel | flatbread | food | gyro | kebab | stuffed"
-],
-["🧆",
-"falafel",
-"chickpea | falafel | meatball"
-],
-["🥚",
-"egg",
-"breakfast | egg | food"
-],
-["🍳",
-"cooking",
-"breakfast | cooking | egg | frying | pan"
-],
-["🥘",
-"shallow pan of food",
-"casserole | food | paella | pan | shallow | shallow pan of food"
-],
-["🍲",
-"pot of food",
-"pot | pot of food | stew"
-],
-["🫕",
-"fondue",
-"cheese | chocolate | fondue | melted | pot | Swiss"
-],
-["🥣",
-"bowl with spoon",
-"bowl with spoon | breakfast | cereal | congee | oatmeal | porridge"
-],
-["🥗",
-"green salad",
-"food | green | salad"
-],
-["🍿",
-"popcorn",
-"popcorn"
-],
-["🧈",
-"butter",
-"butter | dairy"
-],
-["🧂",
-"salt",
-"condiment | salt | shaker"
-],
-["🥫",
-"canned food",
-"can | canned food"
-],
-["🍱",
-"bento box",
-"bento | box"
-],
-["🍘",
-"rice cracker",
-"cracker | rice"
-],
-["🍙",
-"rice ball",
-"ball | Japanese | rice"
-],
-["🍚",
-"cooked rice",
-"cooked | rice"
-],
-["🍛",
-"curry rice",
-"curry | rice"
-],
-["🍜",
-"steaming bowl",
-"bowl | noodle | ramen | steaming"
-],
-["🍝",
-"spaghetti",
-"pasta | spaghetti"
-],
-["🍠",
-"roasted sweet potato",
-"potato | roasted | sweet"
-],
-["🍢",
-"oden",
-"kebab | oden | seafood | skewer | stick"
-],
-["🍣",
-"sushi",
-"sushi"
-],
-["🍤",
-"fried shrimp",
-"fried | prawn | shrimp | tempura"
-],
-["🍥",
-"fish cake with swirl",
-"cake | fish | fish cake with swirl | pastry | swirl"
-],
-["🥮",
-"moon cake",
-"autumn | festival | moon cake | yuèbǐng"
-],
-["🍡",
-"dango",
-"dango | dessert | Japanese | skewer | stick | sweet"
-],
-["🥟",
-"dumpling",
-"dumpling | empanada | gyōza | jiaozi | pierogi | potsticker"
-],
-["🥠",
-"fortune cookie",
-"fortune cookie | prophecy"
-],
-["🥡",
-"takeout box",
-"oyster pail | takeout box"
-],
-["🦀",
-"crab",
-"Cancer | crab | zodiac"
-],
-["🦞",
-"lobster",
-"bisque | claws | lobster | seafood"
-],
-["🦐",
-"shrimp",
-"food | shellfish | shrimp | small"
-],
-["🦑",
-"squid",
-"food | molusc | squid"
-],
-["🦪",
-"oyster",
-"diving | oyster | pearl"
-],
-["🍦",
-"soft ice cream",
-"cream | dessert | ice | icecream | soft | sweet"
-],
-["🍧",
-"shaved ice",
-"dessert | ice | shaved | sweet"
-],
-["🍨",
-"ice cream",
-"cream | dessert | ice | sweet"
-],
-["🍩",
-"doughnut",
-"breakfast | dessert | donut | doughnut | sweet"
-],
-["🍪",
-"cookie",
-"cookie | dessert | sweet"
-],
-["🎂",
-"birthday cake",
-"birthday | cake | celebration | dessert | pastry | sweet"
-],
-["🍰",
-"shortcake",
-"cake | dessert | pastry | shortcake | slice | sweet"
-],
-["🧁",
-"cupcake",
-"bakery | cupcake | sweet"
-],
-["🥧",
-"pie",
-"filling | pastry | pie | fruit | meat"
-],
-["🍫",
-"chocolate bar",
-"bar | chocolate | dessert | sweet"
-],
-["🍬",
-"candy",
-"candy | dessert | sweet"
-],
-["🍭",
-"lollipop",
-"candy | dessert | lollipop | sweet"
-],
-["🍮",
-"custard",
-"custard | dessert | pudding | sweet"
-],
-["🍯",
-"honey pot",
-"honey | honeypot | pot | sweet"
-],
-["🍼",
-"baby bottle",
-"baby | bottle | drink | milk"
-],
-["🥛",
-"glass of milk",
-"drink | glass | glass of milk | milk"
-],
-["☕",
-"hot beverage",
-"beverage | coffee | drink | hot | steaming | tea"
-],
-["🫖",
-"teapot",
-"drink | pot | tea | teapot"
-],
-["🍵",
-"teacup without handle",
-"beverage | cup | drink | tea | teacup | teacup without handle"
-],
-["🍶",
-"sake",
-"bar | beverage | bottle | cup | drink | sake"
-],
-["🍾",
-"bottle with popping cork",
-"bar | bottle | bottle with popping cork | cork | drink | popping"
-],
-["🍷",
-"wine glass",
-"bar | beverage | drink | glass | wine"
-],
-["🍸",
-"cocktail glass",
-"bar | cocktail | drink | glass"
-],
-["🍹",
-"tropical drink",
-"bar | drink | tropical"
-],
-["🍺",
-"beer mug",
-"bar | beer | drink | mug"
-],
-["🍻",
-"clinking beer mugs",
-"bar | beer | clink | clinking beer mugs | drink | mug"
-],
-["🥂",
-"clinking glasses",
-"celebrate | clink | clinking glasses | drink | glass"
-],
-["🥃",
-"tumbler glass",
-"glass | liquor | shot | tumbler | whisky"
-],
-["🥤",
-"cup with straw",
-"cup with straw | juice | soda | malt | soft drink | water"
-],
-["🧋",
-"bubble tea",
-"bubble | milk | pearl | tea"
-],
-["🧃",
-"beverage box",
-"beverage | box | juice | straw | sweet"
-],
-["🧉",
-"mate",
-"drink | mate"
-],
-["🧊",
-"ice",
-"cold | ice | ice cube | iceberg"
-],
-["🥢",
-"chopsticks",
-"chopsticks | hashi | jeotgarak | kuaizi"
-],
-["🍽",
-"fork and knife with plate",
-"cooking | fork | fork and knife with plate | knife | plate"
-],
-["🍴",
-"fork and knife",
-"cooking | cutlery | fork | fork and knife | knife"
-],
-["🥄",
-"spoon",
-"spoon | tableware"
-],
-["🔪",
-"kitchen knife",
-"cooking | hocho | kitchen knife | knife | tool | weapon"
-],
-["🏺",
-"amphora",
-"amphora | Aquarius | cooking | drink | jug | zodiac"
-],
-["🌍",
-"globe showing Europe-Africa",
-"Africa | earth | Europe | globe | globe showing Europe-Africa | world"
-],
-["🌎",
-"globe showing Americas",
-"Americas | earth | globe | globe showing Americas | world"
-],
-["🌏",
-"globe showing Asia-Australia",
-"Asia | Australia | earth | globe | globe showing Asia-Australia | world"
-],
-["🌐",
-"globe with meridians",
-"earth | globe | globe with meridians | meridians | world"
-],
-["🗺",
-"world map",
-"map | world"
-],
-["🗾",
-"map of Japan",
-"Japan | map | map of Japan"
-],
-["🧭",
-"compass",
-"compass | magnetic | navigation | orienteering"
-],
-["🏔",
-"snow-capped mountain",
-"cold | mountain | snow | snow-capped mountain"
-],
-["⛰",
-"mountain",
-"mountain"
-],
-["🌋",
-"volcano",
-"eruption | mountain | volcano"
-],
-["🗻",
-"mount fuji",
-"fuji | mount fuji | mountain"
-],
-["🏕",
-"camping",
-"camping"
-],
-["🏖",
-"beach with umbrella",
-"beach | beach with umbrella | umbrella"
-],
-["🏜",
-"desert",
-"desert"
-],
-["🏝",
-"desert island",
-"desert | island"
-],
-["🏞",
-"national park",
-"national park | park"
-],
-["🏟",
-"stadium",
-"stadium"
-],
-["🏛",
-"classical building",
-"classical | classical building"
-],
-["🏗",
-"building construction",
-"building construction | construction"
-],
-["🧱",
-"brick",
-"brick | bricks | clay | mortar | wall"
-],
-["🪨",
-"rock",
-"boulder | heavy | rock | solid | stone"
-],
-["🪵",
-"wood",
-"log | lumber | timber | wood"
-],
-["🛖",
-"hut",
-"house | hut | roundhouse | yurt"
-],
-["🏘",
-"houses",
-"houses"
-],
-["🏚",
-"derelict house",
-"derelict | house"
-],
-["🏠",
-"house",
-"home | house"
-],
-["🏡",
-"house with garden",
-"garden | home | house | house with garden"
-],
-["🏢",
-"office building",
-"building | office building"
-],
-["🏣",
-"Japanese post office",
-"Japanese | Japanese post office | post"
-],
-["🏤",
-"post office",
-"European | post | post office"
-],
-["🏥",
-"hospital",
-"doctor | hospital | medicine"
-],
-["🏦",
-"bank",
-"bank | building"
-],
-["🏨",
-"hotel",
-"building | hotel"
-],
-["🏩",
-"love hotel",
-"hotel | love"
-],
-["🏪",
-"convenience store",
-"convenience | store"
-],
-["🏫",
-"school",
-"building | school"
-],
-["🏬",
-"department store",
-"department | store"
-],
-["🏭",
-"factory",
-"building | factory"
-],
-["🏯",
-"Japanese castle",
-"castle | Japanese"
-],
-["🏰",
-"castle",
-"castle | European"
-],
-["💒",
-"wedding",
-"chapel | romance | wedding"
-],
-["🗼",
-"Tokyo tower",
-"Tokyo | tower"
-],
-["🗽",
-"Statue of Liberty",
-"liberty | statue | Statue of Liberty"
-],
-["⛪",
-"church",
-"Christian | church | cross | religion"
-],
-["🕌",
-"mosque",
-"islam | mosque | Muslim | religion"
-],
-["🛕",
-"hindu temple",
-"hindu | temple"
-],
-["🕍",
-"synagogue",
-"Jew | Jewish | religion | synagogue | temple"
-],
-["⛩",
-"shinto shrine",
-"religion | shinto | shrine"
-],
-["🕋",
-"kaaba",
-"islam | kaaba | Muslim | religion"
-],
-["⛲",
-"fountain",
-"fountain"
-],
-["⛺",
-"tent",
-"camping | tent"
-],
-["🌁",
-"foggy",
-"fog | foggy"
-],
-["🌃",
-"night with stars",
-"night | night with stars | star"
-],
-["🏙",
-"cityscape",
-"city | cityscape"
-],
-["🌄",
-"sunrise over mountains",
-"morning | mountain | sun | sunrise | sunrise over mountains"
-],
-["🌅",
-"sunrise",
-"morning | sun | sunrise"
-],
-["🌆",
-"cityscape at dusk",
-"city | cityscape at dusk | dusk | evening | landscape | sunset"
-],
-["🌇",
-"sunset",
-"dusk | sun | sunset"
-],
-["🌉",
-"bridge at night",
-"bridge | bridge at night | night"
-],
-["♨",
-"hot springs",
-"hot | hotsprings | springs | steaming"
-],
-["🎠",
-"carousel horse",
-"carousel | horse"
-],
-["🎡",
-"ferris wheel",
-"amusement park | ferris | wheel"
-],
-["🎢",
-"roller coaster",
-"amusement park | coaster | roller"
-],
-["💈",
-"barber pole",
-"barber | haircut | pole"
-],
-["🎪",
-"circus tent",
-"circus | tent"
-],
-["🚂",
-"locomotive",
-"engine | locomotive | railway | steam | train"
-],
-["🚃",
-"railway car",
-"car | electric | railway | train | tram | trolleybus"
-],
-["🚄",
-"high-speed train",
-"high-speed train | railway | shinkansen | speed | train"
-],
-["🚅",
-"bullet train",
-"bullet | railway | shinkansen | speed | train"
-],
-["🚆",
-"train",
-"railway | train"
-],
-["🚇",
-"metro",
-"metro | subway"
-],
-["🚈",
-"light rail",
-"light rail | railway"
-],
-["🚉",
-"station",
-"railway | station | train"
-],
-["🚊",
-"tram",
-"tram | trolleybus"
-],
-["🚝",
-"monorail",
-"monorail | vehicle"
-],
-["🚞",
-"mountain railway",
-"car | mountain | railway"
-],
-["🚋",
-"tram car",
-"car | tram | trolleybus"
-],
-["🚌",
-"bus",
-"bus | vehicle"
-],
-["🚍",
-"oncoming bus",
-"bus | oncoming"
-],
-["🚎",
-"trolleybus",
-"bus | tram | trolley | trolleybus"
-],
-["🚐",
-"minibus",
-"bus | minibus"
-],
-["🚑",
-"ambulance",
-"ambulance | vehicle"
-],
-["🚒",
-"fire engine",
-"engine | fire | truck"
-],
-["🚓",
-"police car",
-"car | patrol | police"
-],
-["🚔",
-"oncoming police car",
-"car | oncoming | police"
-],
-["🚕",
-"taxi",
-"taxi | vehicle"
-],
-["🚖",
-"oncoming taxi",
-"oncoming | taxi"
-],
-["🚗",
-"automobile",
-"automobile | car"
-],
-["🚘",
-"oncoming automobile",
-"automobile | car | oncoming"
-],
-["🚙",
-"sport utility vehicle",
-"recreational | sport utility | sport utility vehicle"
-],
-["🛻",
-"pickup truck",
-"pick-up | pickup | truck"
-],
-["🚚",
-"delivery truck",
-"delivery | truck"
-],
-["🚛",
-"articulated lorry",
-"articulated lorry | lorry | semi | truck"
-],
-["🚜",
-"tractor",
-"tractor | vehicle"
-],
-["🏎",
-"racing car",
-"car | racing"
-],
-["🏍",
-"motorcycle",
-"motorcycle | racing"
-],
-["🛵",
-"motor scooter",
-"motor | scooter"
-],
-["🦽",
-"manual wheelchair",
-"accessibility | manual wheelchair"
-],
-["🦼",
-"motorized wheelchair",
-"accessibility | motorized wheelchair"
-],
-["🛺",
-"auto rickshaw",
-"auto rickshaw | tuk tuk"
-],
-["🚲",
-"bicycle",
-"bicycle | bike"
-],
-["🛴",
-"kick scooter",
-"kick | scooter"
-],
-["🛹",
-"skateboard",
-"board | skateboard"
-],
-["🛼",
-"roller skate",
-"roller | skate"
-],
-["🚏",
-"bus stop",
-"bus | busstop | stop"
-],
-["🛣",
-"motorway",
-"highway | motorway | road"
-],
-["🛤",
-"railway track",
-"railway | railway track | train"
-],
-["🛢",
-"oil drum",
-"drum | oil"
-],
-["⛽",
-"fuel pump",
-"diesel | fuel | fuelpump | gas | pump | station"
-],
-["🚨",
-"police car light",
-"beacon | car | light | police | revolving"
-],
-["🚥",
-"horizontal traffic light",
-"horizontal traffic light | light | signal | traffic"
-],
-["🚦",
-"vertical traffic light",
-"light | signal | traffic | vertical traffic light"
-],
-["🛑",
-"stop sign",
-"octagonal | sign | stop"
-],
-["🚧",
-"construction",
-"barrier | construction"
-],
-["⚓",
-"anchor",
-"anchor | ship | tool"
-],
-["⛵",
-"sailboat",
-"boat | resort | sailboat | sea | yacht"
-],
-["🛶",
-"canoe",
-"boat | canoe"
-],
-["🚤",
-"speedboat",
-"boat | speedboat"
-],
-["🛳",
-"passenger ship",
-"passenger | ship"
-],
-["⛴",
-"ferry",
-"boat | ferry | passenger"
-],
-["🛥",
-"motor boat",
-"boat | motor boat | motorboat"
-],
-["🚢",
-"ship",
-"boat | passenger | ship"
-],
-["✈",
-"airplane",
-"aeroplane | airplane"
-],
-["🛩",
-"small airplane",
-"aeroplane | airplane | small airplane"
-],
-["🛫",
-"airplane departure",
-"aeroplane | airplane | check-in | departure | departures"
-],
-["🛬",
-"airplane arrival",
-"aeroplane | airplane | airplane arrival | arrivals | arriving | landing"
-],
-["🪂",
-"parachute",
-"hang-glide | parachute | parasail | skydive"
-],
-["💺",
-"seat",
-"chair | seat"
-],
-["🚁",
-"helicopter",
-"helicopter | vehicle"
-],
-["🚟",
-"suspension railway",
-"railway | suspension"
-],
-["🚠",
-"mountain cableway",
-"cable | gondola | mountain | mountain cableway"
-],
-["🚡",
-"aerial tramway",
-"aerial | cable | car | gondola | tramway"
-],
-["🛰",
-"satellite",
-"satellite | space"
-],
-["🚀",
-"rocket",
-"rocket | space"
-],
-["🛸",
-"flying saucer",
-"flying saucer | UFO"
-],
-["🛎",
-"bellhop bell",
-"bell | bellhop | hotel"
-],
-["🧳",
-"luggage",
-"luggage | packing | travel"
-],
-["⌛",
-"hourglass done",
-"hourglass done | sand | timer"
-],
-["⏳",
-"hourglass not done",
-"hourglass | hourglass not done | sand | timer"
-],
-["⌚",
-"watch",
-"clock | watch"
-],
-["⏰",
-"alarm clock",
-"alarm | clock"
-],
-["⏱",
-"stopwatch",
-"clock | stopwatch"
-],
-["⏲",
-"timer clock",
-"clock | timer"
-],
-["🕰",
-"mantelpiece clock",
-"clock | mantelpiece clock"
-],
-["🕛",
-"twelve o’clock",
-"00 | 12 | 12:00 | clock | o’clock | twelve"
-],
-["🕧",
-"twelve-thirty",
-"12 | 12:30 | clock | thirty | twelve | twelve-thirty"
-],
-["🕐",
-"one o’clock",
-"00 | 1 | 1:00 | clock | o’clock | one"
-],
-["🕜",
-"one-thirty",
-"1 | 1:30 | clock | one | one-thirty | thirty"
-],
-["🕑",
-"two o’clock",
-"00 | 2 | 2:00 | clock | o’clock | two"
-],
-["🕝",
-"two-thirty",
-"2 | 2:30 | clock | thirty | two | two-thirty"
-],
-["🕒",
-"three o’clock",
-"00 | 3 | 3:00 | clock | o’clock | three"
-],
-["🕞",
-"three-thirty",
-"3 | 3:30 | clock | thirty | three | three-thirty"
-],
-["🕓",
-"four o’clock",
-"00 | 4 | 4:00 | clock | four | o’clock"
-],
-["🕟",
-"four-thirty",
-"4 | 4:30 | clock | four | four-thirty | thirty"
-],
-["🕔",
-"five o’clock",
-"00 | 5 | 5:00 | clock | five | o’clock"
-],
-["🕠",
-"five-thirty",
-"5 | 5:30 | clock | five | five-thirty | thirty"
-],
-["🕕",
-"six o’clock",
-"00 | 6 | 6:00 | clock | o’clock | six"
-],
-["🕡",
-"six-thirty",
-"6 | 6:30 | clock | six | six-thirty | thirty"
-],
-["🕖",
-"seven o’clock",
-"00 | 7 | 7:00 | clock | o’clock | seven"
-],
-["🕢",
-"seven-thirty",
-"7 | 7:30 | clock | seven | seven-thirty | thirty"
-],
-["🕗",
-"eight o’clock",
-"00 | 8 | 8:00 | clock | eight | o’clock"
-],
-["🕣",
-"eight-thirty",
-"8 | 8:30 | clock | eight | eight-thirty | thirty"
-],
-["🕘",
-"nine o’clock",
-"00 | 9 | 9:00 | clock | nine | o’clock"
-],
-["🕤",
-"nine-thirty",
-"9 | 9:30 | clock | nine | nine-thirty | thirty"
-],
-["🕙",
-"ten o’clock",
-"00 | 10 | 10:00 | clock | o’clock | ten"
-],
-["🕥",
-"ten-thirty",
-"10 | 10:30 | clock | ten | ten-thirty | thirty"
-],
-["🕚",
-"eleven o’clock",
-"00 | 11 | 11:00 | clock | eleven | o’clock"
-],
-["🕦",
-"eleven-thirty",
-"11 | 11:30 | clock | eleven | eleven-thirty | thirty"
-],
-["🌑",
-"new moon",
-"dark | moon | new moon"
-],
-["🌒",
-"waxing crescent moon",
-"crescent | moon | waxing"
-],
-["🌓",
-"first quarter moon",
-"first quarter moon | moon | quarter"
-],
-["🌔",
-"waxing gibbous moon",
-"gibbous | moon | waxing"
-],
-["🌕",
-"full moon",
-"full | moon"
-],
-["🌖",
-"waning gibbous moon",
-"gibbous | moon | waning"
-],
-["🌗",
-"last quarter moon",
-"last quarter moon | moon | quarter"
-],
-["🌘",
-"waning crescent moon",
-"crescent | moon | waning"
-],
-["🌙",
-"crescent moon",
-"crescent | moon"
-],
-["🌚",
-"new moon face",
-"face | moon | new moon face"
-],
-["🌛",
-"first quarter moon face",
-"face | first quarter moon face | moon | quarter"
-],
-["🌜",
-"last quarter moon face",
-"face | last quarter moon face | moon | quarter"
-],
-["🌡",
-"thermometer",
-"thermometer | weather"
-],
-["☀",
-"sun",
-"bright | rays | sun | sunny"
-],
-["🌝",
-"full moon face",
-"bright | face | full | moon"
-],
-["🌞",
-"sun with face",
-"bright | face | sun | sun with face"
-],
-["🪐",
-"ringed planet",
-"ringed planet | saturn | saturnine"
-],
-["⭐",
-"star",
-"star"
-],
-["🌟",
-"glowing star",
-"glittery | glow | glowing star | shining | sparkle | star"
-],
-["🌠",
-"shooting star",
-"falling | shooting | star"
-],
-["🌌",
-"milky way",
-"milky way | space"
-],
-["☁",
-"cloud",
-"cloud | weather"
-],
-["⛅",
-"sun behind cloud",
-"cloud | sun | sun behind cloud"
-],
-["⛈",
-"cloud with lightning and rain",
-"cloud | cloud with lightning and rain | rain | thunder"
-],
-["🌤",
-"sun behind small cloud",
-"cloud | sun | sun behind small cloud"
-],
-["🌥",
-"sun behind large cloud",
-"cloud | sun | sun behind large cloud"
-],
-["🌦",
-"sun behind rain cloud",
-"cloud | rain | sun | sun behind rain cloud"
-],
-["🌧",
-"cloud with rain",
-"cloud | cloud with rain | rain"
-],
-["🌨",
-"cloud with snow",
-"cloud | cloud with snow | cold | snow"
-],
-["🌩",
-"cloud with lightning",
-"cloud | cloud with lightning | lightning"
-],
-["🌪",
-"tornado",
-"cloud | tornado | whirlwind"
-],
-["🌫",
-"fog",
-"cloud | fog"
-],
-["🌬",
-"wind face",
-"blow | cloud | face | wind"
-],
-["🌀",
-"cyclone",
-"cyclone | dizzy | hurricane | twister | typhoon"
-],
-["🌈",
-"rainbow",
-"rain | rainbow"
-],
-["🌂",
-"closed umbrella",
-"closed umbrella | clothing | rain | umbrella"
-],
-["☂",
-"umbrella",
-"clothing | rain | umbrella"
-],
-["☔",
-"umbrella with rain drops",
-"clothing | drop | rain | umbrella | umbrella with rain drops"
-],
-["⛱",
-"umbrella on ground",
-"rain | sun | umbrella | umbrella on ground"
-],
-["⚡",
-"high voltage",
-"danger | electric | high voltage | lightning | voltage | zap"
-],
-["❄",
-"snowflake",
-"cold | snow | snowflake"
-],
-["☃",
-"snowman",
-"cold | snow | snowman"
-],
-["⛄",
-"snowman without snow",
-"cold | snow | snowman | snowman without snow"
-],
-["☄",
-"comet",
-"comet | space"
-],
-["🔥",
-"fire",
-"fire | flame | tool"
-],
-["💧",
-"droplet",
-"cold | comic | drop | droplet | sweat"
-],
-["🌊",
-"water wave",
-"ocean | water | wave"
-],
-["🎃",
-"jack-o-lantern",
-"celebration | halloween | jack | jack-o-lantern | lantern"
-],
-["🎄",
-"Christmas tree",
-"celebration | Christmas | tree"
-],
-["🎆",
-"fireworks",
-"celebration | fireworks"
-],
-["🎇",
-"sparkler",
-"celebration | fireworks | sparkle | sparkler"
-],
-["🧨",
-"firecracker",
-"dynamite | explosive | firecracker | fireworks"
-],
-["✨",
-"sparkles",
-"* | sparkle | sparkles | star"
-],
-["🎈",
-"balloon",
-"balloon | celebration"
-],
-["🎉",
-"party popper",
-"celebration | party | popper | tada"
-],
-["🎊",
-"confetti ball",
-"ball | celebration | confetti"
-],
-["🎋",
-"tanabata tree",
-"banner | celebration | Japanese | tanabata tree | tree"
-],
-["🎍",
-"pine decoration",
-"bamboo | celebration | Japanese | pine | pine decoration"
-],
-["🎎",
-"Japanese dolls",
-"celebration | doll | festival | Japanese | Japanese dolls"
-],
-["🎏",
-"carp streamer",
-"carp | celebration | streamer"
-],
-["🎐",
-"wind chime",
-"bell | celebration | chime | wind"
-],
-["🎑",
-"moon viewing ceremony",
-"celebration | ceremony | moon | moon viewing ceremony"
-],
-["🧧",
-"red envelope",
-"gift | good luck | hóngbāo | lai see | money | red envelope"
-],
-["🎀",
-"ribbon",
-"celebration | ribbon"
-],
-["🎁",
-"wrapped gift",
-"box | celebration | gift | present | wrapped"
-],
-["🎗",
-"reminder ribbon",
-"celebration | reminder | ribbon"
-],
-["🎟",
-"admission tickets",
-"admission | admission tickets | ticket"
-],
-["🎫",
-"ticket",
-"admission | ticket"
-],
-["🎖",
-"military medal",
-"celebration | medal | military"
-],
-["🏆",
-"trophy",
-"prize | trophy"
-],
-["🏅",
-"sports medal",
-"medal | sports medal"
-],
-["🥇",
-"1st place medal",
-"1st place medal | first | gold | medal"
-],
-["🥈",
-"2nd place medal",
-"2nd place medal | medal | second | silver"
-],
-["🥉",
-"3rd place medal",
-"3rd place medal | bronze | medal | third"
-],
-["⚽",
-"soccer ball",
-"ball | football | soccer"
-],
-["⚾",
-"baseball",
-"ball | baseball"
-],
-["🥎",
-"softball",
-"ball | glove | softball | underarm"
-],
-["🏀",
-"basketball",
-"ball | basketball | hoop"
-],
-["🏐",
-"volleyball",
-"ball | game | volleyball"
-],
-["🏈",
-"american football",
-"american | ball | football"
-],
-["🏉",
-"rugby football",
-"ball | football | rugby"
-],
-["🎾",
-"tennis",
-"ball | racquet | tennis"
-],
-["🥏",
-"flying disc",
-"flying disc | ultimate"
-],
-["🎳",
-"bowling",
-"ball | bowling | game"
-],
-["🏏",
-"cricket game",
-"ball | bat | cricket game | game"
-],
-["🏑",
-"field hockey",
-"ball | field | game | hockey | stick"
-],
-["🏒",
-"ice hockey",
-"game | hockey | ice | puck | stick"
-],
-["🥍",
-"lacrosse",
-"ball | goal | lacrosse | stick"
-],
-["🏓",
-"ping pong",
-"ball | bat | game | paddle | ping pong | table tennis"
-],
-["🏸",
-"badminton",
-"badminton | birdie | game | racquet | shuttlecock"
-],
-["🥊",
-"boxing glove",
-"boxing | glove"
-],
-["🥋",
-"martial arts uniform",
-"judo | karate | martial arts | martial arts uniform | taekwondo | uniform"
-],
-["🥅",
-"goal net",
-"goal | net"
-],
-["⛳",
-"flag in hole",
-"flag in hole | golf | hole"
-],
-["⛸",
-"ice skate",
-"ice | skate"
-],
-["🎣",
-"fishing pole",
-"fish | fishing pole | pole"
-],
-["🤿",
-"diving mask",
-"diving | diving mask | scuba | snorkeling"
-],
-["🎽",
-"running shirt",
-"athletics | running | sash | shirt"
-],
-["🎿",
-"skis",
-"ski | skis | snow"
-],
-["🛷",
-"sled",
-"sled | sledge | sleigh | luge | toboggan"
-],
-["🥌",
-"curling stone",
-"curling stone | game | rock"
-],
-["🎯",
-"bullseye",
-"bullseye | dart | direct hit | game | hit | target"
-],
-["🪀",
-"yo-yo",
-"fluctuate | toy | yo-yo"
-],
-["🪁",
-"kite",
-"fly | kite | soar"
-],
-["🎱",
-"pool 8 ball",
-"8 | ball | billiard | eight | game | pool 8 ball"
-],
-["🔮",
-"crystal ball",
-"ball | crystal | fairy tale | fantasy | fortune | tool"
-],
-["🪄",
-"magic wand",
-"magic | magic wand | witch | wizard"
-],
-["🧿",
-"nazar amulet",
-"bead | charm | evil-eye | nazar | nazar amulet | talisman"
-],
-["🎮",
-"video game",
-"controller | game | video game"
-],
-["🕹",
-"joystick",
-"game | joystick | video game"
-],
-["🎰",
-"slot machine",
-"game | slot | slot machine"
-],
-["🎲",
-"game die",
-"dice | die | game"
-],
-["🧩",
-"puzzle piece",
-"clue | interlocking | jigsaw | piece | puzzle"
-],
-["🧸",
-"teddy bear",
-"plaything | plush | stuffed | teddy bear | toy"
-],
-["🪅",
-"piñata",
-"celebration | party | piñata"
-],
-["🪆",
-"nesting dolls",
-"doll | nesting | nesting dolls | russia"
-],
-["♠",
-"spade suit",
-"card | game | spade suit"
-],
-["♥",
-"heart suit",
-"card | game | heart suit"
-],
-["♦",
-"diamond suit",
-"card | diamond suit | game"
-],
-["♣",
-"club suit",
-"card | club suit | game"
-],
-["♟",
-"chess pawn",
-"chess | chess pawn | dupe | expendable"
-],
-["🃏",
-"joker",
-"card | game | joker | wildcard"
-],
-["🀄",
-"mahjong red dragon",
-"game | mahjong | mahjong red dragon | red"
-],
-["🎴",
-"flower playing cards",
-"card | flower | flower playing cards | game | Japanese | playing"
-],
-["🎭",
-"performing arts",
-"art | mask | performing | performing arts | theater | theatre"
-],
-["🖼",
-"framed picture",
-"art | frame | framed picture | museum | painting | picture"
-],
-["🎨",
-"artist palette",
-"art | artist palette | museum | painting | palette"
-],
-["🧵",
-"thread",
-"needle | sewing | spool | string | thread"
-],
-["🪡",
-"sewing needle",
-"embroidery | needle | sewing | stitches | sutures | tailoring"
-],
-["🧶",
-"yarn",
-"ball | crochet | knit | yarn"
-],
-["🪢",
-"knot",
-"knot | rope | tangled | tie | twine | twist"
-],
-["👓",
-"glasses",
-"clothing | eye | eyeglasses | eyewear | glasses"
-],
-["🕶",
-"sunglasses",
-"dark | eye | eyewear | glasses | sunglasses"
-],
-["🥽",
-"goggles",
-"eye protection | goggles | swimming | welding"
-],
-["🥼",
-"lab coat",
-"doctor | experiment | lab coat | scientist"
-],
-["🦺",
-"safety vest",
-"emergency | safety | vest"
-],
-["👔",
-"necktie",
-"clothing | necktie | tie"
-],
-["👕",
-"t-shirt",
-"clothing | shirt | t-shirt | tshirt"
-],
-["👖",
-"jeans",
-"clothing | jeans | pants | trousers"
-],
-["🧣",
-"scarf",
-"neck | scarf"
-],
-["🧤",
-"gloves",
-"gloves | hand"
-],
-["🧥",
-"coat",
-"coat | jacket"
-],
-["🧦",
-"socks",
-"socks | stocking"
-],
-["👗",
-"dress",
-"clothing | dress"
-],
-["👘",
-"kimono",
-"clothing | kimono"
-],
-["🥻",
-"sari",
-"clothing | dress | sari"
-],
-["🩱",
-"one-piece swimsuit",
-"bathing suit | one-piece swimsuit"
-],
-["🩲",
-"briefs",
-"bathing suit | briefs | one-piece | swimsuit | underwear"
-],
-["🩳",
-"shorts",
-"bathing suit | pants | shorts | underwear"
-],
-["👙",
-"bikini",
-"bikini | clothing | swim"
-],
-["👚",
-"woman’s clothes",
-"clothing | woman | woman’s clothes"
-],
-["👛",
-"purse",
-"clothing | coin | purse"
-],
-["👜",
-"handbag",
-"bag | clothing | handbag | purse"
-],
-["👝",
-"clutch bag",
-"bag | clothing | clutch bag | pouch"
-],
-["🛍",
-"shopping bags",
-"bag | hotel | shopping | shopping bags"
-],
-["🎒",
-"backpack",
-"backpack | bag | rucksack | satchel | school"
-],
-["🩴",
-"thong sandal",
-"beach sandals | sandals | thong sandal | thong sandals | thongs | zōri"
-],
-["👞",
-"man’s shoe",
-"clothing | man | man’s shoe | shoe"
-],
-["👟",
-"running shoe",
-"athletic | clothing | running shoe | shoe | sneaker"
-],
-["🥾",
-"hiking boot",
-"backpacking | boot | camping | hiking"
-],
-["🥿",
-"flat shoe",
-"ballet flat | flat shoe | slip-on | slipper"
-],
-["👠",
-"high-heeled shoe",
-"clothing | heel | high-heeled shoe | shoe | woman"
-],
-["👡",
-"woman’s sandal",
-"clothing | sandal | shoe | woman | woman’s sandal"
-],
-["🩰",
-"ballet shoes",
-"ballet | ballet shoes | dance"
-],
-["👢",
-"woman’s boot",
-"boot | clothing | shoe | woman | woman’s boot"
-],
-["👑",
-"crown",
-"clothing | crown | king | queen"
-],
-["👒",
-"woman’s hat",
-"clothing | hat | woman | woman’s hat"
-],
-["🎩",
-"top hat",
-"clothing | hat | top | tophat"
-],
-["🎓",
-"graduation cap",
-"cap | celebration | clothing | graduation | hat"
-],
-["🧢",
-"billed cap",
-"baseball cap | billed cap"
-],
-["🪖",
-"military helmet",
-"army | helmet | military | soldier | warrior"
-],
-["⛑",
-"rescue worker’s helmet",
-"aid | cross | face | hat | helmet | rescue worker’s helmet"
-],
-["📿",
-"prayer beads",
-"beads | clothing | necklace | prayer | religion"
-],
-["💄",
-"lipstick",
-"cosmetics | lipstick | makeup"
-],
-["💍",
-"ring",
-"diamond | ring"
-],
-["💎",
-"gem stone",
-"diamond | gem | gem stone | jewel"
-],
-["🔇",
-"muted speaker",
-"mute | muted speaker | quiet | silent | speaker"
-],
-["🔈",
-"speaker low volume",
-"soft | speaker low volume"
-],
-["🔉",
-"speaker medium volume",
-"medium | speaker medium volume"
-],
-["🔊",
-"speaker high volume",
-"loud | speaker high volume"
-],
-["📢",
-"loudspeaker",
-"loud | loudspeaker | public address"
-],
-["📣",
-"megaphone",
-"cheering | megaphone"
-],
-["📯",
-"postal horn",
-"horn | post | postal"
-],
-["🔔",
-"bell",
-"bell"
-],
-["🔕",
-"bell with slash",
-"bell | bell with slash | forbidden | mute | quiet | silent"
-],
-["🎼",
-"musical score",
-"music | musical score | score"
-],
-["🎵",
-"musical note",
-"music | musical note | note"
-],
-["🎶",
-"musical notes",
-"music | musical notes | note | notes"
-],
-["🎙",
-"studio microphone",
-"mic | microphone | music | studio"
-],
-["🎚",
-"level slider",
-"level | music | slider"
-],
-["🎛",
-"control knobs",
-"control | knobs | music"
-],
-["🎤",
-"microphone",
-"karaoke | mic | microphone"
-],
-["🎧",
-"headphone",
-"earbud | headphone"
-],
-["📻",
-"radio",
-"radio | video"
-],
-["🎷",
-"saxophone",
-"instrument | music | sax | saxophone"
-],
-["🪗",
-"accordion",
-"accordian | accordion | concertina | squeeze box"
-],
-["🎸",
-"guitar",
-"guitar | instrument | music"
-],
-["🎹",
-"musical keyboard",
-"instrument | keyboard | music | musical keyboard | piano"
-],
-["🎺",
-"trumpet",
-"instrument | music | trumpet"
-],
-["🎻",
-"violin",
-"instrument | music | violin"
-],
-["🪕",
-"banjo",
-"banjo | music | stringed"
-],
-["🥁",
-"drum",
-"drum | drumsticks | music"
-],
-["🪘",
-"long drum",
-"beat | conga | drum | long drum | rhythm"
-],
-["📱",
-"mobile phone",
-"cell | mobile | phone | telephone"
-],
-["📲",
-"mobile phone with arrow",
-"arrow | cell | mobile | mobile phone with arrow | phone | receive"
-],
-["☎",
-"telephone",
-"phone | telephone"
-],
-["📞",
-"telephone receiver",
-"phone | receiver | telephone"
-],
-["📟",
-"pager",
-"pager"
-],
-["📠",
-"fax machine",
-"fax | fax machine"
-],
-["🔋",
-"battery",
-"battery"
-],
-["🔌",
-"electric plug",
-"electric | electricity | plug"
-],
-["💻",
-"laptop",
-"computer | laptop | pc | personal"
-],
-["🖥",
-"desktop computer",
-"computer | desktop"
-],
-["🖨",
-"printer",
-"computer | printer"
-],
-["⌨",
-"keyboard",
-"computer | keyboard"
-],
-["🖱",
-"computer mouse",
-"computer | computer mouse"
-],
-["🖲",
-"trackball",
-"computer | trackball"
-],
-["💽",
-"computer disk",
-"computer | disk | minidisk | optical"
-],
-["💾",
-"floppy disk",
-"computer | disk | floppy"
-],
-["💿",
-"optical disk",
-"cd | computer | disk | optical"
-],
-["📀",
-"dvd",
-"blu-ray | computer | disk | dvd | optical"
-],
-["🧮",
-"abacus",
-"abacus | calculation"
-],
-["🎥",
-"movie camera",
-"camera | cinema | movie"
-],
-["🎞",
-"film frames",
-"cinema | film | frames | movie"
-],
-["📽",
-"film projector",
-"cinema | film | movie | projector | video"
-],
-["🎬",
-"clapper board",
-"clapper | clapper board | movie"
-],
-["📺",
-"television",
-"television | tv | video"
-],
-["📷",
-"camera",
-"camera | video"
-],
-["📸",
-"camera with flash",
-"camera | camera with flash | flash | video"
-],
-["📹",
-"video camera",
-"camera | video"
-],
-["📼",
-"videocassette",
-"tape | vhs | video | videocassette"
-],
-["🔍",
-"magnifying glass tilted left",
-"glass | magnifying | magnifying glass tilted left | search | tool"
-],
-["🔎",
-"magnifying glass tilted right",
-"glass | magnifying | magnifying glass tilted right | search | tool"
-],
-["🕯",
-"candle",
-"candle | light"
-],
-["💡",
-"light bulb",
-"bulb | comic | electric | idea | light"
-],
-["🔦",
-"flashlight",
-"electric | flashlight | light | tool | torch"
-],
-["🏮",
-"red paper lantern",
-"bar | lantern | light | red | red paper lantern"
-],
-["🪔",
-"diya lamp",
-"diya | lamp | oil"
-],
-["📔",
-"notebook with decorative cover",
-"book | cover | decorated | notebook | notebook with decorative cover"
-],
-["📕",
-"closed book",
-"book | closed"
-],
-["📖",
-"open book",
-"book | open"
-],
-["📗",
-"green book",
-"book | green"
-],
-["📘",
-"blue book",
-"blue | book"
-],
-["📙",
-"orange book",
-"book | orange"
-],
-["📚",
-"books",
-"book | books"
-],
-["📓",
-"notebook",
-"notebook"
-],
-["📒",
-"ledger",
-"ledger | notebook"
-],
-["📃",
-"page with curl",
-"curl | document | page | page with curl"
-],
-["📜",
-"scroll",
-"paper | scroll"
-],
-["📄",
-"page facing up",
-"document | page | page facing up"
-],
-["📰",
-"newspaper",
-"news | newspaper | paper"
-],
-["🗞",
-"rolled-up newspaper",
-"news | newspaper | paper | rolled | rolled-up newspaper"
-],
-["📑",
-"bookmark tabs",
-"bookmark | mark | marker | tabs"
-],
-["🔖",
-"bookmark",
-"bookmark | mark"
-],
-["🏷",
-"label",
-"label"
-],
-["💰",
-"money bag",
-"bag | dollar | money | moneybag"
-],
-["🪙",
-"coin",
-"coin | gold | metal | money | silver | treasure"
-],
-["💴",
-"yen banknote",
-"banknote | bill | currency | money | note | yen"
-],
-["💵",
-"dollar banknote",
-"banknote | bill | currency | dollar | money | note"
-],
-["💶",
-"euro banknote",
-"banknote | bill | currency | euro | money | note"
-],
-["💷",
-"pound banknote",
-"banknote | bill | currency | money | note | pound"
-],
-["💸",
-"money with wings",
-"banknote | bill | fly | money | money with wings | wings"
-],
-["💳",
-"credit card",
-"card | credit | money"
-],
-["🧾",
-"receipt",
-"accounting | bookkeeping | evidence | proof | receipt"
-],
-["💹",
-"chart increasing with yen",
-"chart | chart increasing with yen | graph | growth | money | yen"
-],
-["✉",
-"envelope",
-"email | envelope | letter"
-],
-["📧",
-"e-mail",
-"e-mail | email | letter | mail"
-],
-["📨",
-"incoming envelope",
-"e-mail | email | envelope | incoming | letter | receive"
-],
-["📩",
-"envelope with arrow",
-"arrow | e-mail | email | envelope | envelope with arrow | outgoing"
-],
-["📤",
-"outbox tray",
-"box | letter | mail | outbox | sent | tray"
-],
-["📥",
-"inbox tray",
-"box | inbox | letter | mail | receive | tray"
-],
-["📦",
-"package",
-"box | package | parcel"
-],
-["📫",
-"closed mailbox with raised flag",
-"closed | closed mailbox with raised flag | mail | mailbox | postbox"
-],
-["📪",
-"closed mailbox with lowered flag",
-"closed | closed mailbox with lowered flag | lowered | mail | mailbox | postbox"
-],
-["📬",
-"open mailbox with raised flag",
-"mail | mailbox | open | open mailbox with raised flag | postbox"
-],
-["📭",
-"open mailbox with lowered flag",
-"lowered | mail | mailbox | open | open mailbox with lowered flag | postbox"
-],
-["📮",
-"postbox",
-"mail | mailbox | postbox"
-],
-["🗳",
-"ballot box with ballot",
-"ballot | ballot box with ballot | box"
-],
-["✏",
-"pencil",
-"pencil"
-],
-["✒",
-"black nib",
-"black nib | nib | pen"
-],
-["🖋",
-"fountain pen",
-"fountain | pen"
-],
-["🖊",
-"pen",
-"ballpoint | pen"
-],
-["🖌",
-"paintbrush",
-"paintbrush | painting"
-],
-["🖍",
-"crayon",
-"crayon"
-],
-["📝",
-"memo",
-"memo | pencil"
-],
-["💼",
-"briefcase",
-"briefcase"
-],
-["📁",
-"file folder",
-"file | folder"
-],
-["📂",
-"open file folder",
-"file | folder | open"
-],
-["🗂",
-"card index dividers",
-"card | dividers | index"
-],
-["📅",
-"calendar",
-"calendar | date"
-],
-["📆",
-"tear-off calendar",
-"calendar | tear-off calendar"
-],
-["🗒",
-"spiral notepad",
-"note | pad | spiral | spiral notepad"
-],
-["🗓",
-"spiral calendar",
-"calendar | pad | spiral"
-],
-["📇",
-"card index",
-"card | index | rolodex"
-],
-["📈",
-"chart increasing",
-"chart | chart increasing | graph | growth | trend | upward"
-],
-["📉",
-"chart decreasing",
-"chart | chart decreasing | down | graph | trend"
-],
-["📊",
-"bar chart",
-"bar | chart | graph"
-],
-["📋",
-"clipboard",
-"clipboard"
-],
-["📌",
-"pushpin",
-"pin | pushpin"
-],
-["📍",
-"round pushpin",
-"pin | pushpin | round pushpin"
-],
-["📎",
-"paperclip",
-"paperclip"
-],
-["🖇",
-"linked paperclips",
-"link | linked paperclips | paperclip"
-],
-["📏",
-"straight ruler",
-"ruler | straight edge | straight ruler"
-],
-["📐",
-"triangular ruler",
-"ruler | set | triangle | triangular ruler"
-],
-["✂",
-"scissors",
-"cutting | scissors | tool"
-],
-["🗃",
-"card file box",
-"box | card | file"
-],
-["🗄",
-"file cabinet",
-"cabinet | file | filing"
-],
-["🗑",
-"wastebasket",
-"wastebasket"
-],
-["🔒",
-"locked",
-"closed | locked"
-],
-["🔓",
-"unlocked",
-"lock | open | unlock | unlocked"
-],
-["🔏",
-"locked with pen",
-"ink | lock | locked with pen | nib | pen | privacy"
-],
-["🔐",
-"locked with key",
-"closed | key | lock | locked with key | secure"
-],
-["🔑",
-"key",
-"key | lock | password"
-],
-["🗝",
-"old key",
-"clue | key | lock | old"
-],
-["🔨",
-"hammer",
-"hammer | tool"
-],
-["🪓",
-"axe",
-"axe | chop | hatchet | split | wood"
-],
-["⛏",
-"pick",
-"mining | pick | tool"
-],
-["⚒",
-"hammer and pick",
-"hammer | hammer and pick | pick | tool"
-],
-["🛠",
-"hammer and wrench",
-"hammer | hammer and wrench | spanner | tool | wrench"
-],
-["🗡",
-"dagger",
-"dagger | knife | weapon"
-],
-["⚔",
-"crossed swords",
-"crossed | swords | weapon"
-],
-["🔫",
-"water pistol",
-"gun | handgun | pistol | revolver | tool | water | weapon"
-],
-["🪃",
-"boomerang",
-"australia | boomerang | rebound | repercussion"
-],
-["🏹",
-"bow and arrow",
-"archer | arrow | bow | bow and arrow | Sagittarius | zodiac"
-],
-["🛡",
-"shield",
-"shield | weapon"
-],
-["🪚",
-"carpentry saw",
-"carpenter | carpentry saw | lumber | saw | tool"
-],
-["🔧",
-"wrench",
-"spanner | tool | wrench"
-],
-["🪛",
-"screwdriver",
-"screw | screwdriver | tool"
-],
-["🔩",
-"nut and bolt",
-"bolt | nut | nut and bolt | tool"
-],
-["⚙",
-"gear",
-"cog | cogwheel | gear | tool"
-],
-["🗜",
-"clamp",
-"clamp | compress | tool | vice"
-],
-["⚖",
-"balance scale",
-"balance | justice | Libra | scale | zodiac"
-],
-["🦯",
-"white cane",
-"accessibility | blind | white cane"
-],
-["🔗",
-"link",
-"link"
-],
-["⛓",
-"chains",
-"chain | chains"
-],
-["🪝",
-"hook",
-"catch | crook | curve | ensnare | hook | selling point"
-],
-["🧰",
-"toolbox",
-"chest | mechanic | tool | toolbox"
-],
-["🧲",
-"magnet",
-"attraction | horseshoe | magnet | magnetic"
-],
-["🪜",
-"ladder",
-"climb | ladder | rung | step"
-],
-["⚗",
-"alembic",
-"alembic | chemistry | tool"
-],
-["🧪",
-"test tube",
-"chemist | chemistry | experiment | lab | science | test tube"
-],
-["🧫",
-"petri dish",
-"bacteria | biologist | biology | culture | lab | petri dish"
-],
-["🧬",
-"dna",
-"biologist | dna | evolution | gene | genetics | life"
-],
-["🔬",
-"microscope",
-"microscope | science | tool"
-],
-["🔭",
-"telescope",
-"science | telescope | tool"
-],
-["📡",
-"satellite antenna",
-"antenna | dish | satellite"
-],
-["💉",
-"syringe",
-"medicine | needle | shot | sick | syringe"
-],
-["🩸",
-"drop of blood",
-"bleed | blood donation | drop of blood | injury | medicine | menstruation"
-],
-["💊",
-"pill",
-"doctor | medicine | pill | sick"
-],
-["🩹",
-"adhesive bandage",
-"adhesive bandage | bandage"
-],
-["🩺",
-"stethoscope",
-"doctor | heart | medicine | stethoscope"
-],
-["🚪",
-"door",
-"door"
-],
-["🛗",
-"elevator",
-"accessibility | elevator | hoist | lift"
-],
-["🪞",
-"mirror",
-"mirror | reflection | reflector | speculum"
-],
-["🪟",
-"window",
-"frame | fresh air | opening | transparent | view | window"
-],
-["🛏",
-"bed",
-"bed | hotel | sleep"
-],
-["🛋",
-"couch and lamp",
-"couch | couch and lamp | hotel | lamp"
-],
-["🪑",
-"chair",
-"chair | seat | sit"
-],
-["🚽",
-"toilet",
-"toilet"
-],
-["🪠",
-"plunger",
-"force cup | plumber | plunger | suction | toilet"
-],
-["🚿",
-"shower",
-"shower | water"
-],
-["🛁",
-"bathtub",
-"bath | bathtub"
-],
-["🪤",
-"mouse trap",
-"bait | mouse trap | mousetrap | snare | trap"
-],
-["🪒",
-"razor",
-"razor | sharp | shave"
-],
-["🧴",
-"lotion bottle",
-"lotion | lotion bottle | moisturizer | shampoo | sunscreen"
-],
-["🧷",
-"safety pin",
-"diaper | punk rock | safety pin"
-],
-["🧹",
-"broom",
-"broom | cleaning | sweeping | witch"
-],
-["🧺",
-"basket",
-"basket | farming | laundry | picnic"
-],
-["🧻",
-"roll of paper",
-"paper towels | roll of paper | toilet paper"
-],
-["🪣",
-"bucket",
-"bucket | cask | pail | vat"
-],
-["🧼",
-"soap",
-"bar | bathing | cleaning | lather | soap | soapdish"
-],
-["🪥",
-"toothbrush",
-"bathroom | brush | clean | dental | hygiene | teeth | toothbrush"
-],
-["🧽",
-"sponge",
-"absorbing | cleaning | porous | sponge"
-],
-["🧯",
-"fire extinguisher",
-"extinguish | fire | fire extinguisher | quench"
-],
-["🛒",
-"shopping cart",
-"cart | shopping | trolley"
-],
-["🚬",
-"cigarette",
-"cigarette | smoking"
-],
-["⚰",
-"coffin",
-"coffin | death"
-],
-["🪦",
-"headstone",
-"cemetery | grave | graveyard | headstone | tombstone"
-],
-["⚱",
-"funeral urn",
-"ashes | death | funeral | urn"
-],
-["🗿",
-"moai",
-"face | moai | moyai | statue"
-],
-["🪧",
-"placard",
-"demonstration | picket | placard | protest | sign"
-],
-["🏧",
-"ATM sign",
-"atm | ATM sign | automated | bank | teller"
-],
-["🚮",
-"litter in bin sign",
-"litter | litter bin | litter in bin sign"
-],
-["🚰",
-"potable water",
-"drinking | potable | water"
-],
-["♿",
-"wheelchair symbol",
-"access | wheelchair symbol"
-],
-["🚹",
-"men’s room",
-"lavatory | man | men’s room | restroom | wc"
-],
-["🚺",
-"women’s room",
-"lavatory | restroom | wc | woman | women’s room"
-],
-["🚻",
-"restroom",
-"lavatory | restroom | WC"
-],
-["🚼",
-"baby symbol",
-"baby | baby symbol | changing"
-],
-["🚾",
-"water closet",
-"closet | lavatory | restroom | water | wc"
-],
-["🛂",
-"passport control",
-"control | passport"
-],
-["🛃",
-"customs",
-"customs"
-],
-["🛄",
-"baggage claim",
-"baggage | claim"
-],
-["🛅",
-"left luggage",
-"baggage | left luggage | locker | luggage"
-],
-["⚠",
-"warning",
-"warning"
-],
-["🚸",
-"children crossing",
-"child | children crossing | crossing | pedestrian | traffic"
-],
-["⛔",
-"no entry",
-"entry | forbidden | no | not | prohibited | traffic"
-],
-["🚫",
-"prohibited",
-"entry | forbidden | no | not | prohibited"
-],
-["🚳",
-"no bicycles",
-"bicycle | bike | forbidden | no | no bicycles | prohibited"
-],
-["🚭",
-"no smoking",
-"forbidden | no | not | prohibited | smoking"
-],
-["🚯",
-"no littering",
-"forbidden | litter | no | no littering | not | prohibited"
-],
-["🚱",
-"non-potable water",
-"non-drinking | non-potable | water"
-],
-["🚷",
-"no pedestrians",
-"forbidden | no | no pedestrians | not | pedestrian | prohibited"
-],
-["📵",
-"no mobile phones",
-"cell | forbidden | mobile | no | no mobile phones | phone"
-],
-["🔞",
-"no one under eighteen",
-"18 | age restriction | eighteen | no one under eighteen | prohibited | underage"
-],
-["☢",
-"radioactive",
-"radioactive | sign"
-],
-["☣",
-"biohazard",
-"biohazard | sign"
-],
-["⬆",
-"up arrow",
-"arrow | cardinal | direction | north | up arrow"
-],
-["↗",
-"up-right arrow",
-"arrow | direction | intercardinal | northeast | up-right arrow"
-],
-["➡",
-"right arrow",
-"arrow | cardinal | direction | east | right arrow"
-],
-["↘",
-"down-right arrow",
-"arrow | direction | down-right arrow | intercardinal | southeast"
-],
-["⬇",
-"down arrow",
-"arrow | cardinal | direction | down | south"
-],
-["↙",
-"down-left arrow",
-"arrow | direction | down-left arrow | intercardinal | southwest"
-],
-["⬅",
-"left arrow",
-"arrow | cardinal | direction | left arrow | west"
-],
-["↖",
-"up-left arrow",
-"arrow | direction | intercardinal | northwest | up-left arrow"
-],
-["↕",
-"up-down arrow",
-"arrow | up-down arrow"
-],
-["↔",
-"left-right arrow",
-"arrow | left-right arrow"
-],
-["↩",
-"right arrow curving left",
-"arrow | right arrow curving left"
-],
-["↪",
-"left arrow curving right",
-"arrow | left arrow curving right"
-],
-["⤴",
-"right arrow curving up",
-"arrow | right arrow curving up"
-],
-["⤵",
-"right arrow curving down",
-"arrow | down | right arrow curving down"
-],
-["🔃",
-"clockwise vertical arrows",
-"arrow | clockwise | clockwise vertical arrows | reload"
-],
-["🔄",
-"counterclockwise arrows button",
-"anticlockwise | arrow | counterclockwise | counterclockwise arrows button | withershins"
-],
-["🔙",
-"BACK arrow",
-"arrow | back | BACK arrow"
-],
-["🔚",
-"END arrow",
-"arrow | end | END arrow"
-],
-["🔛",
-"ON! arrow",
-"arrow | mark | on | ON! arrow"
-],
-["🔜",
-"SOON arrow",
-"arrow | soon | SOON arrow"
-],
-["🔝",
-"TOP arrow",
-"arrow | top | TOP arrow | up"
-],
-["🛐",
-"place of worship",
-"place of worship | religion | worship"
-],
-["⚛",
-"atom symbol",
-"atheist | atom | atom symbol"
-],
-["🕉",
-"om",
-"Hindu | om | religion"
-],
-["✡",
-"star of David",
-"David | Jew | Jewish | religion | star | star of David"
-],
-["☸",
-"wheel of dharma",
-"Buddhist | dharma | religion | wheel | wheel of dharma"
-],
-["☯",
-"yin yang",
-"religion | tao | taoist | yang | yin"
-],
-["✝",
-"latin cross",
-"Christian | cross | latin cross | religion"
-],
-["☦",
-"orthodox cross",
-"Christian | cross | orthodox cross | religion"
-],
-["☪",
-"star and crescent",
-"islam | Muslim | religion | star and crescent"
-],
-["☮",
-"peace symbol",
-"peace | peace symbol"
-],
-["🕎",
-"menorah",
-"candelabrum | candlestick | menorah | religion"
-],
-["🔯",
-"dotted six-pointed star",
-"dotted six-pointed star | fortune | star"
-],
-["♈",
-"Aries",
-"Aries | ram | zodiac"
-],
-["♉",
-"Taurus",
-"bull | ox | Taurus | zodiac"
-],
-["♊",
-"Gemini",
-"Gemini | twins | zodiac"
-],
-["♋",
-"Cancer",
-"Cancer | crab | zodiac"
-],
-["♌",
-"Leo",
-"Leo | lion | zodiac"
-],
-["♍",
-"Virgo",
-"Virgo | zodiac"
-],
-["♎",
-"Libra",
-"balance | justice | Libra | scales | zodiac"
-],
-["♏",
-"Scorpio",
-"Scorpio | scorpion | scorpius | zodiac"
-],
-["♐",
-"Sagittarius",
-"archer | Sagittarius | zodiac"
-],
-["♑",
-"Capricorn",
-"Capricorn | goat | zodiac"
-],
-["♒",
-"Aquarius",
-"Aquarius | bearer | water | zodiac"
-],
-["♓",
-"Pisces",
-"fish | Pisces | zodiac"
-],
-["⛎",
-"Ophiuchus",
-"bearer | Ophiuchus | serpent | snake | zodiac"
-],
-["🔀",
-"shuffle tracks button",
-"arrow | crossed | shuffle tracks button"
-],
-["🔁",
-"repeat button",
-"arrow | clockwise | repeat | repeat button"
-],
-["🔂",
-"repeat single button",
-"arrow | clockwise | once | repeat single button"
-],
-["▶",
-"play button",
-"arrow | play | play button | right | triangle"
-],
-["⏩",
-"fast-forward button",
-"arrow | double | fast | fast-forward button | forward"
-],
-["⏭",
-"next track button",
-"arrow | next scene | next track | next track button | triangle"
-],
-["⏯",
-"play or pause button",
-"arrow | pause | play | play or pause button | right | triangle"
-],
-["◀",
-"reverse button",
-"arrow | left | reverse | reverse button | triangle"
-],
-["⏪",
-"fast reverse button",
-"arrow | double | fast reverse button | rewind"
-],
-["⏮",
-"last track button",
-"arrow | last track button | previous scene | previous track | triangle"
-],
-["🔼",
-"upwards button",
-"arrow | button | red | upwards button"
-],
-["⏫",
-"fast up button",
-"arrow | double | fast up button"
-],
-["🔽",
-"downwards button",
-"arrow | button | down | downwards button | red"
-],
-["⏬",
-"fast down button",
-"arrow | double | down | fast down button"
-],
-["⏸",
-"pause button",
-"bar | double | pause | pause button | vertical"
-],
-["⏹",
-"stop button",
-"square | stop | stop button"
-],
-["⏺",
-"record button",
-"circle | record | record button"
-],
-["⏏",
-"eject button",
-"eject | eject button"
-],
-["🎦",
-"cinema",
-"camera | cinema | film | movie"
-],
-["🔅",
-"dim button",
-"brightness | dim | dim button | low"
-],
-["🔆",
-"bright button",
-"bright | bright button | brightness"
-],
-["📶",
-"antenna bars",
-"antenna | antenna bars | bar | cell | mobile | phone"
-],
-["📳",
-"vibration mode",
-"cell | mobile | mode | phone | telephone | vibration"
-],
-["📴",
-"mobile phone off",
-"cell | mobile | off | phone | telephone"
-],
-["♀",
-"female sign",
-"female sign | woman"
-],
-["♂",
-"male sign",
-"male sign | man"
-],
-["⚧",
-"transgender symbol",
-"transgender | transgender symbol"
-],
-["✖",
-"multiply",
-"× | cancel | multiplication | multiply | sign | x"
-],
-["➕",
-"plus",
-"+ | math | plus | sign"
-],
-["➖",
-"minus",
-"- | − | math | minus | sign"
-],
-["➗",
-"divide",
-"÷ | divide | division | math | sign"
-],
-["♾",
-"infinity",
-"forever | infinity | unbounded | universal"
-],
-["‼",
-"double exclamation mark",
-"! | !! | bangbang | double exclamation mark | exclamation | mark"
-],
-["⁉",
-"exclamation question mark",
-"! | !? | ? | exclamation | interrobang | mark | punctuation | question"
-],
-["❓",
-"red question mark",
-"? | mark | punctuation | question | red question mark"
-],
-["❔",
-"white question mark",
-"? | mark | outlined | punctuation | question | white question mark"
-],
-["❕",
-"white exclamation mark",
-"! | exclamation | mark | outlined | punctuation | white exclamation mark"
-],
-["❗",
-"red exclamation mark",
-"! | exclamation | mark | punctuation | red exclamation mark"
-],
-["〰",
-"wavy dash",
-"dash | punctuation | wavy"
-],
-["💱",
-"currency exchange",
-"bank | currency | exchange | money"
-],
-["💲",
-"heavy dollar sign",
-"currency | dollar | heavy dollar sign | money"
-],
-["⚕",
-"medical symbol",
-"aesculapius | medical symbol | medicine | staff"
-],
-["♻",
-"recycling symbol",
-"recycle | recycling symbol"
-],
-["⚜",
-"fleur-de-lis",
-"fleur-de-lis"
-],
-["🔱",
-"trident emblem",
-"anchor | emblem | ship | tool | trident"
-],
-["📛",
-"name badge",
-"badge | name"
-],
-["🔰",
-"Japanese symbol for beginner",
-"beginner | chevron | Japanese | Japanese symbol for beginner | leaf"
-],
-["⭕",
-"hollow red circle",
-"circle | hollow red circle | large | o | red"
-],
-["✅",
-"check mark button",
-"✓ | button | check | mark"
-],
-["☑",
-"check box with check",
-"✓ | box | check | check box with check"
-],
-["✔",
-"check mark",
-"✓ | check | mark"
-],
-["❌",
-"cross mark",
-"× | cancel | cross | mark | multiplication | multiply | x"
-],
-["❎",
-"cross mark button",
-"× | cross mark button | mark | square | x"
-],
-["➰",
-"curly loop",
-"curl | curly loop | loop"
-],
-["➿",
-"double curly loop",
-"curl | double | double curly loop | loop"
-],
-["〽",
-"part alternation mark",
-"mark | part | part alternation mark"
-],
-["✳",
-"eight-spoked asterisk",
-"* | asterisk | eight-spoked asterisk"
-],
-["✴",
-"eight-pointed star",
-"* | eight-pointed star | star"
-],
-["❇",
-"sparkle",
-"* | sparkle"
-],
-["©",
-"copyright",
-"c | copyright"
-],
-["®",
-"registered",
-"r | registered"
-],
-["™",
-"trade mark",
-"mark | tm | trade mark | trademark"
-],
-["#️⃣",
-"keycap: #",
-"keycap"
-],
-["*️⃣",
-"keycap: *",
-"keycap"
-],
-["0️⃣",
-"keycap: 0",
-"keycap"
-],
-["1️⃣",
-"keycap: 1",
-"keycap"
-],
-["2️⃣",
-"keycap: 2",
-"keycap"
-],
-["3️⃣",
-"keycap: 3",
-"keycap"
-],
-["4️⃣",
-"keycap: 4",
-"keycap"
-],
-["5️⃣",
-"keycap: 5",
-"keycap"
-],
-["6️⃣",
-"keycap: 6",
-"keycap"
-],
-["7️⃣",
-"keycap: 7",
-"keycap"
-],
-["8️⃣",
-"keycap: 8",
-"keycap"
-],
-["9️⃣",
-"keycap: 9",
-"keycap"
-],
-["🔟",
-"keycap: 10",
-"keycap"
-],
-["🔠",
-"input latin uppercase",
-"ABCD | input | latin | letters | uppercase"
-],
-["🔡",
-"input latin lowercase",
-"abcd | input | latin | letters | lowercase"
-],
-["🔢",
-"input numbers",
-"1234 | input | numbers"
-],
-["🔣",
-"input symbols",
-"〒♪&% | input | input symbols"
-],
-["🔤",
-"input latin letters",
-"abc | alphabet | input | latin | letters"
-],
-["🅰",
-"A button (blood type)",
-"a | A button (blood type) | blood type"
-],
-["🆎",
-"AB button (blood type)",
-"ab | AB button (blood type) | blood type"
-],
-["🅱",
-"B button (blood type)",
-"b | B button (blood type) | blood type"
-],
-["🆑",
-"CL button",
-"cl | CL button"
-],
-["🆒",
-"COOL button",
-"cool | COOL button"
-],
-["🆓",
-"FREE button",
-"free | FREE button"
-],
-["ℹ",
-"information",
-"i | information"
-],
-["🆔",
-"ID button",
-"id | ID button | identity"
-],
-["Ⓜ",
-"circled M",
-"circle | circled M | m"
-],
-["🆕",
-"NEW button",
-"new | NEW button"
-],
-["🆖",
-"NG button",
-"ng | NG button"
-],
-["🅾",
-"O button (blood type)",
-"blood type | o | O button (blood type)"
-],
-["🆗",
-"OK button",
-"OK | OK button"
-],
-["🅿",
-"P button",
-"P button | parking"
-],
-["🆘",
-"SOS button",
-"help | sos | SOS button"
-],
-["🆙",
-"UP! button",
-"mark | up | UP! button"
-],
-["🆚",
-"VS button",
-"versus | vs | VS button"
-],
-["🈁",
-"Japanese “here” button",
-"“here” | Japanese | Japanese “here” button | katakana | ココ"
-],
-["🈂",
-"Japanese “service charge” button",
-"“service charge” | Japanese | Japanese “service charge” button | katakana | サ"
-],
-["🈷",
-"Japanese “monthly amount” button",
-"“monthly amount” | ideograph | Japanese | Japanese “monthly amount” button | 月"
-],
-["🈶",
-"Japanese “not free of charge” button",
-"“not free of charge” | ideograph | Japanese | Japanese “not free of charge” button | 有"
-],
-["🈯",
-"Japanese “reserved” button",
-"“reserved” | ideograph | Japanese | Japanese “reserved” button | 指"
-],
-["🉐",
-"Japanese “bargain” button",
-"“bargain” | ideograph | Japanese | Japanese “bargain” button | 得"
-],
-["🈹",
-"Japanese “discount” button",
-"“discount” | ideograph | Japanese | Japanese “discount” button | 割"
-],
-["🈚",
-"Japanese “free of charge” button",
-"“free of charge” | ideograph | Japanese | Japanese “free of charge” button | 無"
-],
-["🈲",
-"Japanese “prohibited” button",
-"“prohibited” | ideograph | Japanese | Japanese “prohibited” button | 禁"
-],
-["🉑",
-"Japanese “acceptable” button",
-"“acceptable” | ideograph | Japanese | Japanese “acceptable” button | 可"
-],
-["🈸",
-"Japanese “application” button",
-"“application” | ideograph | Japanese | Japanese “application” button | 申"
-],
-["🈴",
-"Japanese “passing grade” button",
-"“passing grade” | ideograph | Japanese | Japanese “passing grade” button | 合"
-],
-["🈳",
-"Japanese “vacancy” button",
-"“vacancy” | ideograph | Japanese | Japanese “vacancy” button | 空"
-],
-["㊗",
-"Japanese “congratulations” button",
-"“congratulations” | ideograph | Japanese | Japanese “congratulations” button | 祝"
-],
-["㊙",
-"Japanese “secret” button",
-"“secret” | ideograph | Japanese | Japanese “secret” button | 秘"
-],
-["🈺",
-"Japanese “open for business” button",
-"“open for business” | ideograph | Japanese | Japanese “open for business” button | 営"
-],
-["🈵",
-"Japanese “no vacancy” button",
-"“no vacancy” | ideograph | Japanese | Japanese “no vacancy” button | 満"
-],
-["🔴",
-"red circle",
-"circle | geometric | red"
-],
-["🟠",
-"orange circle",
-"circle | orange"
-],
-["🟡",
-"yellow circle",
-"circle | yellow"
-],
-["🟢",
-"green circle",
-"circle | green"
-],
-["🔵",
-"blue circle",
-"blue | circle | geometric"
-],
-["🟣",
-"purple circle",
-"circle | purple"
-],
-["🟤",
-"brown circle",
-"brown | circle"
-],
-["⚫",
-"black circle",
-"black circle | circle | geometric"
-],
-["⚪",
-"white circle",
-"circle | geometric | white circle"
-],
-["🟥",
-"red square",
-"red | square"
-],
-["🟧",
-"orange square",
-"orange | square"
-],
-["🟨",
-"yellow square",
-"square | yellow"
-],
-["🟩",
-"green square",
-"green | square"
-],
-["🟦",
-"blue square",
-"blue | square"
-],
-["🟪",
-"purple square",
-"purple | square"
-],
-["🟫",
-"brown square",
-"brown | square"
-],
-["⬛",
-"black large square",
-"black large square | geometric | square"
-],
-["⬜",
-"white large square",
-"geometric | square | white large square"
-],
-["◼",
-"black medium square",
-"black medium square | geometric | square"
-],
-["◻",
-"white medium square",
-"geometric | square | white medium square"
-],
-["◾",
-"black medium-small square",
-"black medium-small square | geometric | square"
-],
-["◽",
-"white medium-small square",
-"geometric | square | white medium-small square"
-],
-["▪",
-"black small square",
-"black small square | geometric | square"
-],
-["▫",
-"white small square",
-"geometric | square | white small square"
-],
-["🔶",
-"large orange diamond",
-"diamond | geometric | large orange diamond | orange"
-],
-["🔷",
-"large blue diamond",
-"blue | diamond | geometric | large blue diamond"
-],
-["🔸",
-"small orange diamond",
-"diamond | geometric | orange | small orange diamond"
-],
-["🔹",
-"small blue diamond",
-"blue | diamond | geometric | small blue diamond"
-],
-["🔺",
-"red triangle pointed up",
-"geometric | red | red triangle pointed up"
-],
-["🔻",
-"red triangle pointed down",
-"down | geometric | red | red triangle pointed down"
-],
-["💠",
-"diamond with a dot",
-"comic | diamond | diamond with a dot | geometric | inside"
-],
-["🔘",
-"radio button",
-"button | geometric | radio"
-],
-["🔳",
-"white square button",
-"button | geometric | outlined | square | white square button"
-],
-["🔲",
-"black square button",
-"black square button | button | geometric | square"
-],
-["🏁",
-"chequered flag",
-"checkered | chequered | chequered flag | racing"
-],
-["🚩",
-"triangular flag",
-"post | triangular flag"
-],
-["🎌",
-"crossed flags",
-"celebration | cross | crossed | crossed flags | Japanese"
-],
-["🏴",
-"black flag",
-"black flag | waving"
-],
-["🏳",
-"white flag",
-"waving | white flag"
-],
-["🏳️‍🌈",
-"rainbow flag",
-"pride | rainbow | rainbow flag"
-],
-["🏳️‍⚧️",
-"transgender flag",
-"flag | light blue | pink | transgender | white"
-],
-["🏴‍☠️",
-"pirate flag",
-"Jolly Roger | pirate | pirate flag | plunder | treasure"
-],
-["🇦🇨",
-"flag: Ascension Island",
-"flag"
-],
-["🇦🇩",
-"flag: Andorra",
-"flag"
-],
-["🇦🇪",
-"flag: United Arab Emirates",
-"flag"
-],
-["🇦🇫",
-"flag: Afghanistan",
-"flag"
-],
-["🇦🇬",
-"flag: Antigua & Barbuda",
-"flag"
-],
-["🇦🇮",
-"flag: Anguilla",
-"flag"
-],
-["🇦🇱",
-"flag: Albania",
-"flag"
-],
-["🇦🇲",
-"flag: Armenia",
-"flag"
-],
-["🇦🇴",
-"flag: Angola",
-"flag"
-],
-["🇦🇶",
-"flag: Antarctica",
-"flag"
-],
-["🇦🇷",
-"flag: Argentina",
-"flag"
-],
-["🇦🇸",
-"flag: American Samoa",
-"flag"
-],
-["🇦🇹",
-"flag: Austria",
-"flag"
-],
-["🇦🇺",
-"flag: Australia",
-"flag"
-],
-["🇦🇼",
-"flag: Aruba",
-"flag"
-],
-["🇦🇽",
-"flag: Åland Islands",
-"flag"
-],
-["🇦🇿",
-"flag: Azerbaijan",
-"flag"
-],
-["🇧🇦",
-"flag: Bosnia & Herzegovina",
-"flag"
-],
-["🇧🇧",
-"flag: Barbados",
-"flag"
-],
-["🇧🇩",
-"flag: Bangladesh",
-"flag"
-],
-["🇧🇪",
-"flag: Belgium",
-"flag"
-],
-["🇧🇫",
-"flag: Burkina Faso",
-"flag"
-],
-["🇧🇬",
-"flag: Bulgaria",
-"flag"
-],
-["🇧🇭",
-"flag: Bahrain",
-"flag"
-],
-["🇧🇮",
-"flag: Burundi",
-"flag"
-],
-["🇧🇯",
-"flag: Benin",
-"flag"
-],
-["🇧🇱",
-"flag: St. Barthélemy",
-"flag"
-],
-["🇧🇲",
-"flag: Bermuda",
-"flag"
-],
-["🇧🇳",
-"flag: Brunei",
-"flag"
-],
-["🇧🇴",
-"flag: Bolivia",
-"flag"
-],
-["🇧🇶",
-"flag: Caribbean Netherlands",
-"flag"
-],
-["🇧🇷",
-"flag: Brazil",
-"flag"
-],
-["🇧🇸",
-"flag: Bahamas",
-"flag"
-],
-["🇧🇹",
-"flag: Bhutan",
-"flag"
-],
-["🇧🇻",
-"flag: Bouvet Island",
-"flag"
-],
-["🇧🇼",
-"flag: Botswana",
-"flag"
-],
-["🇧🇾",
-"flag: Belarus",
-"flag"
-],
-["🇧🇿",
-"flag: Belize",
-"flag"
-],
-["🇨🇦",
-"flag: Canada",
-"flag"
-],
-["🇨🇨",
-"flag: Cocos (Keeling) Islands",
-"flag"
-],
-["🇨🇩",
-"flag: Congo - Kinshasa",
-"flag"
-],
-["🇨🇫",
-"flag: Central African Republic",
-"flag"
-],
-["🇨🇬",
-"flag: Congo - Brazzaville",
-"flag"
-],
-["🇨🇭",
-"flag: Switzerland",
-"flag"
-],
-["🇨🇮",
-"flag: Côte d’Ivoire",
-"flag"
-],
-["🇨🇰",
-"flag: Cook Islands",
-"flag"
-],
-["🇨🇱",
-"flag: Chile",
-"flag"
-],
-["🇨🇲",
-"flag: Cameroon",
-"flag"
-],
-["🇨🇳",
-"flag: China",
-"flag"
-],
-["🇨🇴",
-"flag: Colombia",
-"flag"
-],
-["🇨🇵",
-"flag: Clipperton Island",
-"flag"
-],
-["🇨🇷",
-"flag: Costa Rica",
-"flag"
-],
-["🇨🇺",
-"flag: Cuba",
-"flag"
-],
-["🇨🇻",
-"flag: Cape Verde",
-"flag"
-],
-["🇨🇼",
-"flag: Curaçao",
-"flag"
-],
-["🇨🇽",
-"flag: Christmas Island",
-"flag"
-],
-["🇨🇾",
-"flag: Cyprus",
-"flag"
-],
-["🇨🇿",
-"flag: Czechia",
-"flag"
-],
-["🇩🇪",
-"flag: Germany",
-"flag"
-],
-["🇩🇬",
-"flag: Diego Garcia",
-"flag"
-],
-["🇩🇯",
-"flag: Djibouti",
-"flag"
-],
-["🇩🇰",
-"flag: Denmark",
-"flag"
-],
-["🇩🇲",
-"flag: Dominica",
-"flag"
-],
-["🇩🇴",
-"flag: Dominican Republic",
-"flag"
-],
-["🇩🇿",
-"flag: Algeria",
-"flag"
-],
-["🇪🇦",
-"flag: Ceuta & Melilla",
-"flag"
-],
-["🇪🇨",
-"flag: Ecuador",
-"flag"
-],
-["🇪🇪",
-"flag: Estonia",
-"flag"
-],
-["🇪🇬",
-"flag: Egypt",
-"flag"
-],
-["🇪🇭",
-"flag: Western Sahara",
-"flag"
-],
-["🇪🇷",
-"flag: Eritrea",
-"flag"
-],
-["🇪🇸",
-"flag: Spain",
-"flag"
-],
-["🇪🇹",
-"flag: Ethiopia",
-"flag"
-],
-["🇪🇺",
-"flag: European Union",
-"flag"
-],
-["🇫🇮",
-"flag: Finland",
-"flag"
-],
-["🇫🇯",
-"flag: Fiji",
-"flag"
-],
-["🇫🇰",
-"flag: Falkland Islands",
-"flag"
-],
-["🇫🇲",
-"flag: Micronesia",
-"flag"
-],
-["🇫🇴",
-"flag: Faroe Islands",
-"flag"
-],
-["🇫🇷",
-"flag: France",
-"flag"
-],
-["🇬🇦",
-"flag: Gabon",
-"flag"
-],
-["🇬🇧",
-"flag: United Kingdom",
-"flag"
-],
-["🇬🇩",
-"flag: Grenada",
-"flag"
-],
-["🇬🇪",
-"flag: Georgia",
-"flag"
-],
-["🇬🇫",
-"flag: French Guiana",
-"flag"
-],
-["🇬🇬",
-"flag: Guernsey",
-"flag"
-],
-["🇬🇭",
-"flag: Ghana",
-"flag"
-],
-["🇬🇮",
-"flag: Gibraltar",
-"flag"
-],
-["🇬🇱",
-"flag: Greenland",
-"flag"
-],
-["🇬🇲",
-"flag: Gambia",
-"flag"
-],
-["🇬🇳",
-"flag: Guinea",
-"flag"
-],
-["🇬🇵",
-"flag: Guadeloupe",
-"flag"
-],
-["🇬🇶",
-"flag: Equatorial Guinea",
-"flag"
-],
-["🇬🇷",
-"flag: Greece",
-"flag"
-],
-["🇬🇸",
-"flag: South Georgia & South Sandwich Islands",
-"flag"
-],
-["🇬🇹",
-"flag: Guatemala",
-"flag"
-],
-["🇬🇺",
-"flag: Guam",
-"flag"
-],
-["🇬🇼",
-"flag: Guinea-Bissau",
-"flag"
-],
-["🇬🇾",
-"flag: Guyana",
-"flag"
-],
-["🇭🇰",
-"flag: Hong Kong SAR China",
-"flag"
-],
-["🇭🇲",
-"flag: Heard & McDonald Islands",
-"flag"
-],
-["🇭🇳",
-"flag: Honduras",
-"flag"
-],
-["🇭🇷",
-"flag: Croatia",
-"flag"
-],
-["🇭🇹",
-"flag: Haiti",
-"flag"
-],
-["🇭🇺",
-"flag: Hungary",
-"flag"
-],
-["🇮🇨",
-"flag: Canary Islands",
-"flag"
-],
-["🇮🇩",
-"flag: Indonesia",
-"flag"
-],
-["🇮🇪",
-"flag: Ireland",
-"flag"
-],
-["🇮🇱",
-"flag: Israel",
-"flag"
-],
-["🇮🇲",
-"flag: Isle of Man",
-"flag"
-],
-["🇮🇳",
-"flag: India",
-"flag"
-],
-["🇮🇴",
-"flag: British Indian Ocean Territory",
-"flag"
-],
-["🇮🇶",
-"flag: Iraq",
-"flag"
-],
-["🇮🇷",
-"flag: Iran",
-"flag"
-],
-["🇮🇸",
-"flag: Iceland",
-"flag"
-],
-["🇮🇹",
-"flag: Italy",
-"flag"
-],
-["🇯🇪",
-"flag: Jersey",
-"flag"
-],
-["🇯🇲",
-"flag: Jamaica",
-"flag"
-],
-["🇯🇴",
-"flag: Jordan",
-"flag"
-],
-["🇯🇵",
-"flag: Japan",
-"flag"
-],
-["🇰🇪",
-"flag: Kenya",
-"flag"
-],
-["🇰🇬",
-"flag: Kyrgyzstan",
-"flag"
-],
-["🇰🇭",
-"flag: Cambodia",
-"flag"
-],
-["🇰🇮",
-"flag: Kiribati",
-"flag"
-],
-["🇰🇲",
-"flag: Comoros",
-"flag"
-],
-["🇰🇳",
-"flag: St. Kitts & Nevis",
-"flag"
-],
-["🇰🇵",
-"flag: North Korea",
-"flag"
-],
-["🇰🇷",
-"flag: South Korea",
-"flag"
-],
-["🇰🇼",
-"flag: Kuwait",
-"flag"
-],
-["🇰🇾",
-"flag: Cayman Islands",
-"flag"
-],
-["🇰🇿",
-"flag: Kazakhstan",
-"flag"
-],
-["🇱🇦",
-"flag: Laos",
-"flag"
-],
-["🇱🇧",
-"flag: Lebanon",
-"flag"
-],
-["🇱🇨",
-"flag: St. Lucia",
-"flag"
-],
-["🇱🇮",
-"flag: Liechtenstein",
-"flag"
-],
-["🇱🇰",
-"flag: Sri Lanka",
-"flag"
-],
-["🇱🇷",
-"flag: Liberia",
-"flag"
-],
-["🇱🇸",
-"flag: Lesotho",
-"flag"
-],
-["🇱🇹",
-"flag: Lithuania",
-"flag"
-],
-["🇱🇺",
-"flag: Luxembourg",
-"flag"
-],
-["🇱🇻",
-"flag: Latvia",
-"flag"
-],
-["🇱🇾",
-"flag: Libya",
-"flag"
-],
-["🇲🇦",
-"flag: Morocco",
-"flag"
-],
-["🇲🇨",
-"flag: Monaco",
-"flag"
-],
-["🇲🇩",
-"flag: Moldova",
-"flag"
-],
-["🇲🇪",
-"flag: Montenegro",
-"flag"
-],
-["🇲🇫",
-"flag: St. Martin",
-"flag"
-],
-["🇲🇬",
-"flag: Madagascar",
-"flag"
-],
-["🇲🇭",
-"flag: Marshall Islands",
-"flag"
-],
-["🇲🇰",
-"flag: North Macedonia",
-"flag"
-],
-["🇲🇱",
-"flag: Mali",
-"flag"
-],
-["🇲🇲",
-"flag: Myanmar (Burma)",
-"flag"
-],
-["🇲🇳",
-"flag: Mongolia",
-"flag"
-],
-["🇲🇴",
-"flag: Macao SAR China",
-"flag"
-],
-["🇲🇵",
-"flag: Northern Mariana Islands",
-"flag"
-],
-["🇲🇶",
-"flag: Martinique",
-"flag"
-],
-["🇲🇷",
-"flag: Mauritania",
-"flag"
-],
-["🇲🇸",
-"flag: Montserrat",
-"flag"
-],
-["🇲🇹",
-"flag: Malta",
-"flag"
-],
-["🇲🇺",
-"flag: Mauritius",
-"flag"
-],
-["🇲🇻",
-"flag: Maldives",
-"flag"
-],
-["🇲🇼",
-"flag: Malawi",
-"flag"
-],
-["🇲🇽",
-"flag: Mexico",
-"flag"
-],
-["🇲🇾",
-"flag: Malaysia",
-"flag"
-],
-["🇲🇿",
-"flag: Mozambique",
-"flag"
-],
-["🇳🇦",
-"flag: Namibia",
-"flag"
-],
-["🇳🇨",
-"flag: New Caledonia",
-"flag"
-],
-["🇳🇪",
-"flag: Niger",
-"flag"
-],
-["🇳🇫",
-"flag: Norfolk Island",
-"flag"
-],
-["🇳🇬",
-"flag: Nigeria",
-"flag"
-],
-["🇳🇮",
-"flag: Nicaragua",
-"flag"
-],
-["🇳🇱",
-"flag: Netherlands",
-"flag"
-],
-["🇳🇴",
-"flag: Norway",
-"flag"
-],
-["🇳🇵",
-"flag: Nepal",
-"flag"
-],
-["🇳🇷",
-"flag: Nauru",
-"flag"
-],
-["🇳🇺",
-"flag: Niue",
-"flag"
-],
-["🇳🇿",
-"flag: New Zealand",
-"flag"
-],
-["🇴🇲",
-"flag: Oman",
-"flag"
-],
-["🇵🇦",
-"flag: Panama",
-"flag"
-],
-["🇵🇪",
-"flag: Peru",
-"flag"
-],
-["🇵🇫",
-"flag: French Polynesia",
-"flag"
-],
-["🇵🇬",
-"flag: Papua New Guinea",
-"flag"
-],
-["🇵🇭",
-"flag: Philippines",
-"flag"
-],
-["🇵🇰",
-"flag: Pakistan",
-"flag"
-],
-["🇵🇱",
-"flag: Poland",
-"flag"
-],
-["🇵🇲",
-"flag: St. Pierre & Miquelon",
-"flag"
-],
-["🇵🇳",
-"flag: Pitcairn Islands",
-"flag"
-],
-["🇵🇷",
-"flag: Puerto Rico",
-"flag"
-],
-["🇵🇸",
-"flag: Palestinian Territories",
-"flag"
-],
-["🇵🇹",
-"flag: Portugal",
-"flag"
-],
-["🇵🇼",
-"flag: Palau",
-"flag"
-],
-["🇵🇾",
-"flag: Paraguay",
-"flag"
-],
-["🇶🇦",
-"flag: Qatar",
-"flag"
-],
-["🇷🇪",
-"flag: Réunion",
-"flag"
-],
-["🇷🇴",
-"flag: Romania",
-"flag"
-],
-["🇷🇸",
-"flag: Serbia",
-"flag"
-],
-["🇷🇺",
-"flag: Russia",
-"flag"
-],
-["🇷🇼",
-"flag: Rwanda",
-"flag"
-],
-["🇸🇦",
-"flag: Saudi Arabia",
-"flag"
-],
-["🇸🇧",
-"flag: Solomon Islands",
-"flag"
-],
-["🇸🇨",
-"flag: Seychelles",
-"flag"
-],
-["🇸🇩",
-"flag: Sudan",
-"flag"
-],
-["🇸🇪",
-"flag: Sweden",
-"flag"
-],
-["🇸🇬",
-"flag: Singapore",
-"flag"
-],
-["🇸🇭",
-"flag: St. Helena",
-"flag"
-],
-["🇸🇮",
-"flag: Slovenia",
-"flag"
-],
-["🇸🇯",
-"flag: Svalbard & Jan Mayen",
-"flag"
-],
-["🇸🇰",
-"flag: Slovakia",
-"flag"
-],
-["🇸🇱",
-"flag: Sierra Leone",
-"flag"
-],
-["🇸🇲",
-"flag: San Marino",
-"flag"
-],
-["🇸🇳",
-"flag: Senegal",
-"flag"
-],
-["🇸🇴",
-"flag: Somalia",
-"flag"
-],
-["🇸🇷",
-"flag: Suriname",
-"flag"
-],
-["🇸🇸",
-"flag: South Sudan",
-"flag"
-],
-["🇸🇹",
-"flag: São Tomé & Príncipe",
-"flag"
-],
-["🇸🇻",
-"flag: El Salvador",
-"flag"
-],
-["🇸🇽",
-"flag: Sint Maarten",
-"flag"
-],
-["🇸🇾",
-"flag: Syria",
-"flag"
-],
-["🇸🇿",
-"flag: Eswatini",
-"flag"
-],
-["🇹🇦",
-"flag: Tristan da Cunha",
-"flag"
-],
-["🇹🇨",
-"flag: Turks & Caicos Islands",
-"flag"
-],
-["🇹🇩",
-"flag: Chad",
-"flag"
-],
-["🇹🇫",
-"flag: French Southern Territories",
-"flag"
-],
-["🇹🇬",
-"flag: Togo",
-"flag"
-],
-["🇹🇭",
-"flag: Thailand",
-"flag"
-],
-["🇹🇯",
-"flag: Tajikistan",
-"flag"
-],
-["🇹🇰",
-"flag: Tokelau",
-"flag"
-],
-["🇹🇱",
-"flag: Timor-Leste",
-"flag"
-],
-["🇹🇲",
-"flag: Turkmenistan",
-"flag"
-],
-["🇹🇳",
-"flag: Tunisia",
-"flag"
-],
-["🇹🇴",
-"flag: Tonga",
-"flag"
-],
-["🇹🇷",
-"flag: Turkey",
-"flag"
-],
-["🇹🇹",
-"flag: Trinidad & Tobago",
-"flag"
-],
-["🇹🇻",
-"flag: Tuvalu",
-"flag"
-],
-["🇹🇼",
-"flag: Taiwan",
-"flag"
-],
-["🇹🇿",
-"flag: Tanzania",
-"flag"
-],
-["🇺🇦",
-"flag: Ukraine",
-"flag"
-],
-["🇺🇬",
-"flag: Uganda",
-"flag"
-],
-["🇺🇲",
-"flag: U.S. Outlying Islands",
-"flag"
-],
-["🇺🇳",
-"flag: United Nations",
-"flag"
-],
-["🇺🇸",
-"flag: United States",
-"flag"
-],
-["🇺🇾",
-"flag: Uruguay",
-"flag"
-],
-["🇺🇿",
-"flag: Uzbekistan",
-"flag"
-],
-["🇻🇦",
-"flag: Vatican City",
-"flag"
-],
-["🇻🇨",
-"flag: St. Vincent & Grenadines",
-"flag"
-],
-["🇻🇪",
-"flag: Venezuela",
-"flag"
-],
-["🇻🇬",
-"flag: British Virgin Islands",
-"flag"
-],
-["🇻🇮",
-"flag: U.S. Virgin Islands",
-"flag"
-],
-["🇻🇳",
-"flag: Vietnam",
-"flag"
-],
-["🇻🇺",
-"flag: Vanuatu",
-"flag"
-],
-["🇼🇫",
-"flag: Wallis & Futuna",
-"flag"
-],
-["🇼🇸",
-"flag: Samoa",
-"flag"
-],
-["🇽🇰",
-"flag: Kosovo",
-"flag"
-],
-["🇾🇪",
-"flag: Yemen",
-"flag"
-],
-["🇾🇹",
-"flag: Mayotte",
-"flag"
-],
-["🇿🇦",
-"flag: South Africa",
-"flag"
-],
-["🇿🇲",
-"flag: Zambia",
-"flag"
-],
-["🇿🇼",
-"flag: Zimbabwe",
-"flag"
-],
-["🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-"flag: England",
-"flag"
-],
-["🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-"flag: Scotland",
-"flag"
-],
-["🏴󠁧󠁢󠁷󠁬󠁳󠁿",
-"flag: Wales",
-"flag"
+'😀',
+'grinning face',
+'face grin smile happy joy :D'
+],[
+'😃',
+'grinning face with big eyes',
+'face mouth open smile happy joy haha :D :) funny'
+],[
+'😄',
+'grinning face with smiling eyes',
+'eye face mouth open smile happy joy funny haha laugh like :D :)'
+],[
+'😁',
+'beaming face with smiling eyes',
+'eye face grin smile happy joy kawaii'
+],[
+'😆',
+'grinning squinting face',
+'face laugh mouth satisfied smile happy joy lol haha glad XD'
+],[
+'😅',
+'grinning face with sweat',
+'cold face open smile sweat hot happy laugh relief'
+],[
+'🤣',
+'rolling on the floor laughing',
+'face floor laugh rofl rolling rotfl laughing lol haha'
+],[
+'😂',
+'face with tears of joy',
+'face joy laugh tear cry tears weep happy happytears haha'
+],[
+'🙂',
+'slightly smiling face',
+'face smile'
+],[
+'🙃',
+'upside-down face',
+'face upside-down upside down face flipped silly smile'
+],[
+'😉',
+'winking face',
+'face wink happy mischievous secret ;) smile eye'
+],[
+'😊',
+'smiling face with smiling eyes',
+'blush eye face smile happy flushed crush embarrassed shy joy'
+],[
+'😇',
+'smiling face with halo',
+'angel face fantasy halo innocent heaven'
+],[
+'🥰',
+'smiling face with hearts',
+'adore crush hearts in love face love like affection valentines infatuation'
+],[
+'😍',
+'smiling face with heart-eyes',
+'eye face love smile smiling face with heart eyes like affection valentines infatuation crush heart'
+],[
+'🤩',
+'star-struck',
+'eyes face grinning star starry-eyed star struck smile starry'
+],[
+'😘',
+'face blowing a kiss',
+'face kiss love like affection valentines infatuation'
+],[
+'😗',
+'kissing face',
+'face kiss love like 3 valentines infatuation'
+],[
+'☺',
+'smiling face',
+'face outlined relaxed smile blush massage happiness'
+],[
+'😚',
+'kissing face with closed eyes',
+'closed eye face kiss love like affection valentines infatuation'
+],[
+'😙',
+'kissing face with smiling eyes',
+'eye face kiss smile affection valentines infatuation'
+],[
+'🥲',
+'smiling face with tear',
+'grateful proud relieved smiling tear touched sad cry pretend'
+],[
+'😋',
+'face savoring food',
+'delicious face savouring smile yum happy joy tongue silly yummy nom'
+],[
+'😛',
+'face with tongue',
+'face tongue prank childish playful mischievous smile'
+],[
+'😜',
+'winking face with tongue',
+'eye face joke tongue wink prank childish playful mischievous smile'
+],[
+'🤪',
+'zany face',
+'eye goofy large small face crazy'
+],[
+'😝',
+'squinting face with tongue',
+'eye face horrible taste tongue prank playful mischievous smile'
+],[
+'🤑',
+'money-mouth face',
+'face money mouth money mouth face rich dollar'
+],[
+'🤗',
+'hugging face',
+'face hug hugging smile'
+],[
+'🤭',
+'face with hand over mouth',
+'whoops shock sudden realization surprise face'
+],[
+'🤫',
+'shushing face',
+'quiet shush face shhh'
+],[
+'🤔',
+'thinking face',
+'face thinking hmmm think consider'
+],[
+'🤐',
+'zipper-mouth face',
+'face mouth zipper zipper mouth face sealed secret'
+],[
+'🤨',
+'face with raised eyebrow',
+'distrust skeptic disapproval disbelief mild surprise scepticism face surprise'
+],[
+'😐',
+'neutral face',
+'deadpan face meh neutral indifference :|'
+],[
+'😑',
+'expressionless face',
+'expressionless face inexpressive meh unexpressive indifferent - - deadpan'
+],[
+'😶',
+'face without mouth',
+'face mouth quiet silent hellokitty'
+],[
+'😶‍🌫️',
+'face in clouds',
+'absentminded face in the fog head in clouds'
+],[
+'😏',
+'smirking face',
+'face smirk smile mean prank smug sarcasm'
+],[
+'😒',
+'unamused face',
+'face unamused unhappy indifference bored straight face serious sarcasm unimpressed skeptical dubious side eye'
+],[
+'🙄',
+'face with rolling eyes',
+'eyeroll eyes face rolling frustrated'
+],[
+'😬',
+'grimacing face',
+'face grimace teeth'
+],[
+'😮‍💨',
+'face exhaling',
+'exhale gasp groan relief whisper whistle'
+],[
+'🤥',
+'lying face',
+'face lie pinocchio'
+],[
+'😌',
+'relieved face',
+'face relieved relaxed phew massage happiness'
+],[
+'😔',
+'pensive face',
+'dejected face pensive sad depressed upset'
+],[
+'😪',
+'sleepy face',
+'face sleep tired rest nap'
+],[
+'🤤',
+'drooling face',
+'drooling face'
+],[
+'😴',
+'sleeping face',
+'face sleep zzz tired sleepy night'
+],[
+'😷',
+'face with medical mask',
+'cold doctor face mask sick ill disease'
+],[
+'🤒',
+'face with thermometer',
+'face ill sick thermometer temperature cold fever'
+],[
+'🤕',
+'face with head-bandage',
+'bandage face hurt injury face with head bandage injured clumsy'
+],[
+'🤢',
+'nauseated face',
+'face nauseated vomit gross green sick throw up ill'
+],[
+'🤮',
+'face vomiting',
+'sick vomit face'
+],[
+'🤧',
+'sneezing face',
+'face gesundheit sneeze sick allergy'
+],[
+'🥵',
+'hot face',
+'feverish heat stroke hot red-faced sweating face heat red'
+],[
+'🥶',
+'cold face',
+'blue-faced cold freezing frostbite icicles face blue frozen'
+],[
+'🥴',
+'woozy face',
+'dizzy intoxicated tipsy uneven eyes wavy mouth face wavy'
+],[
+'😵',
+'knocked-out face',
+'dead face knocked out dizzy face spent unconscious xox dizzy'
+],[
+'😵‍💫',
+'face with spiral eyes',
+'dizzy hypnotized spiral trouble whoa'
+],[
+'🤯',
+'exploding head',
+'mind blown shocked face mind blown'
+],[
+'🤠',
+'cowboy hat face',
+'cowboy cowgirl face hat'
+],[
+'🥳',
+'partying face',
+'celebration hat horn party face woohoo'
+],[
+'🥸',
+'disguised face',
+'disguise face glasses incognito nose pretent brows moustache'
+],[
+'😎',
+'smiling face with sunglasses',
+'bright cool face sun sunglasses smile summer beach sunglass'
+],[
+'🤓',
+'nerd face',
+'face geek nerd nerdy dork'
+],[
+'🧐',
+'face with monocle',
+'stuffy wealthy face'
+],[
+'😕',
+'confused face',
+'confused face meh indifference huh weird hmmm :/'
+],[
+'😟',
+'worried face',
+'face worried concern nervous :('
+],[
+'🙁',
+'slightly frowning face',
+'face frown frowning disappointed sad upset'
+],[
+'☹',
+'frowning face',
+'face frown sad upset'
+],[
+'😮',
+'face with open mouth',
+'face mouth open sympathy surprise impressed wow whoa :O'
+],[
+'😯',
+'hushed face',
+'face hushed stunned surprised woo shh'
+],[
+'😲',
+'astonished face',
+'astonished face shocked totally xox surprised poisoned'
+],[
+'😳',
+'flushed face',
+'dazed face flushed blush shy flattered'
+],[
+'🥺',
+'pleading face',
+'begging mercy puppy eyes face'
+],[
+'😦',
+'frowning face with open mouth',
+'face frown mouth open aw what'
+],[
+'😧',
+'anguished face',
+'anguished face stunned nervous'
+],[
+'😨',
+'fearful face',
+'face fear fearful scared terrified nervous oops huh'
+],[
+'😰',
+'anxious face with sweat',
+'blue cold face rushed sweat nervous'
+],[
+'😥',
+'sad but relieved face',
+'disappointed face relieved whew phew sweat nervous'
+],[
+'😢',
+'crying face',
+'cry face sad tear tears depressed upset'
+],[
+'😭',
+'loudly crying face',
+'cry face sad sob tear tears upset depressed'
+],[
+'😱',
+'face screaming in fear',
+'face fear munch scared scream omg'
+],[
+'😖',
+'confounded face',
+'confounded face confused sick unwell oops :S'
+],[
+'😣',
+'persevering face',
+'face persevere sick no upset oops'
+],[
+'😞',
+'disappointed face',
+'disappointed face sad upset depressed :('
+],[
+'😓',
+'downcast face with sweat',
+'cold face sweat hot sad tired exercise'
+],[
+'😩',
+'weary face',
+'face tired weary sleepy sad frustrated upset'
+],[
+'😫',
+'tired face',
+'face tired sick whine upset frustrated'
+],[
+'🥱',
+'yawning face',
+'bored tired yawn sleepy'
+],[
+'😤',
+'face with steam from nose',
+'face triumph won gas phew proud pride'
+],[
+'😡',
+'pouting face',
+'angry face mad pouting rage red hate despise'
+],[
+'😠',
+'angry face',
+'angry face mad annoyed frustrated'
+],[
+'🤬',
+'face with symbols on mouth',
+'swearing cursing face cussing profanity expletive'
+],[
+'😈',
+'smiling face with horns',
+'face fairy tale fantasy horns smile devil'
+],[
+'👿',
+'angry face with horns',
+'demon devil face fantasy imp angry horns'
+],[
+'💀',
+'skull',
+'death face fairy tale monster dead skeleton creepy'
+],[
+'☠',
+'skull and crossbones',
+'crossbones death face monster skull poison danger deadly scary pirate evil'
+],[
+'💩',
+'pile of poo',
+'dung face monster poo poop hankey shitface fail turd shit'
+],[
+'🤡',
+'clown face',
+'clown face'
+],[
+'👹',
+'ogre',
+'creature face fairy tale fantasy monster troll red mask halloween scary creepy devil demon japanese'
+],[
+'👺',
+'goblin',
+'creature face fairy tale fantasy monster red evil mask scary creepy japanese'
+],[
+'👻',
+'ghost',
+'creature face fairy tale fantasy monster halloween spooky scary'
+],[
+'👽',
+'alien',
+'creature extraterrestrial face fantasy ufo UFO paul weird outer space'
+],[
+'👾',
+'alien monster',
+'alien creature extraterrestrial face monster ufo game arcade play'
+],[
+'🤖',
+'robot',
+'face monster computer machine bot'
+],[
+'😺',
+'grinning cat',
+'cat face grinning mouth open smile animal cats happy'
+],[
+'😸',
+'grinning cat with smiling eyes',
+'cat eye face grin smile animal cats'
+],[
+'😹',
+'cat with tears of joy',
+'cat face joy tear animal cats haha happy tears'
+],[
+'😻',
+'smiling cat with heart-eyes',
+'cat eye face heart love smile smiling cat with heart eyes animal like affection cats valentines'
+],[
+'😼',
+'cat with wry smile',
+'cat face ironic smile wry animal cats smirk'
+],[
+'😽',
+'kissing cat',
+'cat eye face kiss animal cats'
+],[
+'🙀',
+'weary cat',
+'cat face oh surprised weary animal cats munch scared scream'
+],[
+'😿',
+'crying cat',
+'cat cry face sad tear animal tears weep cats upset'
+],[
+'😾',
+'pouting cat',
+'cat face pouting animal cats'
+],[
+'🙈',
+'see-no-evil monkey',
+'evil face forbidden monkey see see no evil monkey animal nature haha'
+],[
+'🙉',
+'hear-no-evil monkey',
+'evil face forbidden hear monkey hear no evil monkey animal nature'
+],[
+'🙊',
+'speak-no-evil monkey',
+'evil face forbidden monkey speak speak no evil monkey animal nature omg'
+],[
+'💋',
+'kiss mark',
+'kiss lips face love like affection valentines'
+],[
+'💌',
+'love letter',
+'heart letter love mail email like affection envelope valentines'
+],[
+'💘',
+'heart with arrow',
+'arrow cupid love like heart affection valentines'
+],[
+'💝',
+'heart with ribbon',
+'ribbon valentine love valentines'
+],[
+'💖',
+'sparkling heart',
+'excited sparkle love like affection valentines'
+],[
+'💗',
+'growing heart',
+'excited growing nervous pulse like love affection valentines pink'
+],[
+'💓',
+'beating heart',
+'beating heartbeat pulsating love like affection valentines pink heart'
+],[
+'💞',
+'revolving hearts',
+'revolving love like affection valentines'
+],[
+'💕',
+'two hearts',
+'love like affection valentines heart'
+],[
+'💟',
+'heart decoration',
+'heart purple-square love like'
+],[
+'❣',
+'heart exclamation',
+'exclamation mark punctuation decoration love'
+],[
+'💔',
+'broken heart',
+'break broken sad sorry heart heartbreak'
+],[
+'❤️‍🔥',
+'heart on fire',
+'burn love lust sacred heart'
+],[
+'❤️‍🩹',
+'mending heart',
+'healthier improving mending recovering recuperating well'
+],[
+'❤',
+'red heart',
+'heart love like valentines'
+],[
+'🧡',
+'orange heart',
+'orange love like affection valentines'
+],[
+'💛',
+'yellow heart',
+'yellow love like affection valentines'
+],[
+'💚',
+'green heart',
+'green love like affection valentines'
+],[
+'💙',
+'blue heart',
+'blue love like affection valentines'
+],[
+'💜',
+'purple heart',
+'purple love like affection valentines'
+],[
+'🤎',
+'brown heart',
+'brown heart coffee'
+],[
+'🖤',
+'black heart',
+'black evil wicked'
+],[
+'🤍',
+'white heart',
+'heart white pure'
+],[
+'💯',
+'hundred points',
+'100 full hundred score perfect numbers century exam quiz test pass'
+],[
+'💢',
+'anger symbol',
+'angry comic mad'
+],[
+'💥',
+'collision',
+'boom comic bomb explode explosion blown'
+],[
+'💫',
+'dizzy',
+'comic star sparkle shoot magic'
+],[
+'💦',
+'sweat droplets',
+'comic splashing sweat water drip oops'
+],[
+'💨',
+'dashing away',
+'comic dash running wind air fast shoo fart smoke puff'
+],[
+'🕳',
+'hole',
+'embarrassing'
+],[
+'💣',
+'bomb',
+'comic boom explode explosion terrorism'
+],[
+'💬',
+'speech balloon',
+'balloon bubble comic dialog speech words message talk chatting'
+],[
+'👁️‍🗨️',
+'eye in speech bubble',
+'eye speech bubble witness info'
+],[
+'🗨',
+'left speech bubble',
+'dialog speech words message talk chatting'
+],[
+'🗯',
+'right anger bubble',
+'angry balloon bubble mad caption speech thinking'
+],[
+'💭',
+'thought balloon',
+'balloon bubble comic thought cloud speech thinking dream'
+],[
+'💤',
+'zzz',
+'comic sleep sleepy tired dream'
+],[
+'👋',
+'waving hand',
+'hand wave waving hands gesture goodbye solong farewell hello hi palm'
+],[
+'🤚',
+'raised back of hand',
+'backhand raised fingers'
+],[
+'🖐',
+'hand with fingers splayed',
+'finger hand splayed fingers palm'
+],[
+'✋',
+'raised hand',
+'hand high 5 high five fingers stop highfive palm ban'
+],[
+'🖖',
+'vulcan salute',
+'finger hand spock vulcan fingers star trek'
+],[
+'👌',
+'OK hand',
+'hand OK ok hand fingers limbs perfect ok okay'
+],[
+'🤌',
+'pinched fingers',
+'fingers hand gesture interrogation pinched sarcastic size tiny small'
+],[
+'🤏',
+'pinching hand',
+'small amount tiny small size'
+],[
+'✌',
+'victory hand',
+'hand v victory fingers ohyeah peace two'
+],[
+'🤞',
+'crossed fingers',
+'cross finger hand luck good lucky'
+],[
+'🤟',
+'love-you gesture',
+'hand ILY love you gesture fingers gesture'
+],[
+'🤘',
+'sign of the horns',
+'finger hand horns rock-on fingers evil eye sign of horns rock on'
+],[
+'🤙',
+'call me hand',
+'call hand hands gesture'
+],[
+'👈',
+'backhand index pointing left',
+'backhand finger hand index point direction fingers left'
+],[
+'👉',
+'backhand index pointing right',
+'backhand finger hand index point fingers direction right'
+],[
+'👆',
+'backhand index pointing up',
+'backhand finger hand point up fingers direction'
+],[
+'🖕',
+'middle finger',
+'finger hand fingers rude middle flipping'
+],[
+'👇',
+'backhand index pointing down',
+'backhand down finger hand point fingers direction'
+],[
+'☝',
+'index pointing up',
+'finger hand index point up fingers direction'
+],[
+'👍',
+'thumbs up',
+'+1 hand thumb up thumbsup yes awesome good agree accept cool like'
+],[
+'👎',
+'thumbs down',
+'-1 down hand thumb thumbsdown no dislike'
+],[
+'✊',
+'raised fist',
+'clenched fist hand punch fingers grasp'
+],[
+'👊',
+'oncoming fist',
+'clenched fist hand punch angry violence hit attack'
+],[
+'🤛',
+'left-facing fist',
+'fist leftwards left facing fist hand fistbump'
+],[
+'🤜',
+'right-facing fist',
+'fist rightwards right facing fist hand fistbump'
+],[
+'👏',
+'clapping hands',
+'clap hand hands praise applause congrats yay'
+],[
+'🙌',
+'raising hands',
+'celebration gesture hand hooray raised yea hands'
+],[
+'👐',
+'open hands',
+'hand open fingers butterfly hands'
+],[
+'🤲',
+'palms up together',
+'prayer cupped hands hands gesture cupped'
+],[
+'🤝',
+'handshake',
+'agreement hand meeting shake'
+],[
+'🙏',
+'folded hands',
+'ask hand high 5 high five please pray thanks hope wish namaste highfive'
+],[
+'✍',
+'writing hand',
+'hand write lower left ballpoint pen stationery compose'
+],[
+'💅',
+'nail polish',
+'care cosmetics manicure nail polish beauty finger fashion'
+],[
+'🤳',
+'selfie',
+'camera phone'
+],[
+'💪',
+'flexed biceps',
+'biceps comic flex muscle arm hand summer strong'
+],[
+'🦾',
+'mechanical arm',
+'accessibility prosthetic'
+],[
+'🦿',
+'mechanical leg',
+'accessibility prosthetic'
+],[
+'🦵',
+'leg',
+'kick limb'
+],[
+'🦶',
+'foot',
+'kick stomp'
+],[
+'👂',
+'ear',
+'body face hear sound listen'
+],[
+'🦻',
+'ear with hearing aid',
+'accessibility hard of hearing'
+],[
+'👃',
+'nose',
+'body smell sniff'
+],[
+'🧠',
+'brain',
+'intelligent smart'
+],[
+'🫀',
+'anatomical heart',
+'anatomical cardiology heart organ pulse health heartbeat'
+],[
+'🫁',
+'lungs',
+'breath exhalation inhalation organ respiration breathe'
+],[
+'🦷',
+'tooth',
+'dentist teeth'
+],[
+'🦴',
+'bone',
+'skeleton'
+],[
+'👀',
+'eyes',
+'eye face look watch stalk peek see'
+],[
+'👁',
+'eye',
+'body face look see watch stare'
+],[
+'👅',
+'tongue',
+'body mouth playful'
+],[
+'👄',
+'mouth',
+'lips kiss'
+],[
+'👶',
+'baby',
+'young child boy girl toddler'
+],[
+'🧒',
+'child',
+'gender-neutral unspecified gender young'
+],[
+'👦',
+'boy',
+'young man male guy teenager'
+],[
+'👧',
+'girl',
+'Virgo young zodiac female woman teenager'
+],[
+'🧑',
+'person',
+'adult gender-neutral unspecified gender'
+],[
+'👱',
+'person: blond hair',
+'blond blond-haired person hair person blond hair hairstyle'
+],[
+'👨',
+'man',
+'adult mustache father dad guy classy sir moustache'
+],[
+'🧔',
+'person: beard',
+'beard person bewhiskered man beard'
+],[
+'🧔‍♂️',
+'man: beard',
+'beard man'
+],[
+'🧔‍♀️',
+'woman: beard',
+'beard woman'
+],[
+'👨‍🦰',
+'man: red hair',
+'adult man red hair man red hair hairstyle'
+],[
+'👨‍🦱',
+'man: curly hair',
+'adult curly hair man man curly hair hairstyle'
+],[
+'👨‍🦳',
+'man: white hair',
+'adult man white hair man white hair old elder'
+],[
+'👨‍🦲',
+'man: bald',
+'adult bald man man bald hairless'
+],[
+'👩',
+'woman',
+'adult female girls lady'
+],[
+'👩‍🦰',
+'woman: red hair',
+'adult red hair woman woman red hair hairstyle'
+],[
+'🧑‍🦰',
+'person: red hair',
+'adult gender-neutral person red hair unspecified gender person red hair hairstyle'
+],[
+'👩‍🦱',
+'woman: curly hair',
+'adult curly hair woman woman curly hair hairstyle'
+],[
+'🧑‍🦱',
+'person: curly hair',
+'adult curly hair gender-neutral person unspecified gender person curly hair hairstyle'
+],[
+'👩‍🦳',
+'woman: white hair',
+'adult white hair woman woman white hair old elder'
+],[
+'🧑‍🦳',
+'person: white hair',
+'adult gender-neutral person unspecified gender white hair person white hair elder old'
+],[
+'👩‍🦲',
+'woman: bald',
+'adult bald woman woman bald hairless'
+],[
+'🧑‍🦲',
+'person: bald',
+'adult bald gender-neutral person unspecified gender person bald hairless'
+],[
+'👱‍♀️',
+'woman: blond hair',
+'blond-haired woman blonde hair woman woman blond hair female girl person'
+],[
+'👱‍♂️',
+'man: blond hair',
+'blond blond-haired man hair man man blond hair male boy blonde guy person'
+],[
+'🧓',
+'older person',
+'adult gender-neutral old unspecified gender human elder senior'
+],[
+'👴',
+'old man',
+'adult man old human male men elder senior'
+],[
+'👵',
+'old woman',
+'adult old woman human female women lady elder senior'
+],[
+'🙍',
+'person frowning',
+'frown gesture worried'
+],[
+'🙍‍♂️',
+'man frowning',
+'frowning gesture man male boy sad depressed discouraged unhappy'
+],[
+'🙍‍♀️',
+'woman frowning',
+'frowning gesture woman female girl sad depressed discouraged unhappy'
+],[
+'🙎',
+'person pouting',
+'gesture pouting upset'
+],[
+'🙎‍♂️',
+'man pouting',
+'gesture man pouting male boy'
+],[
+'🙎‍♀️',
+'woman pouting',
+'gesture pouting woman female girl'
+],[
+'🙅',
+'person gesturing NO',
+'forbidden gesture hand prohibited person gesturing no decline'
+],[
+'🙅‍♂️',
+'man gesturing NO',
+'forbidden gesture hand man prohibited man gesturing no male boy nope'
+],[
+'🙅‍♀️',
+'woman gesturing NO',
+'forbidden gesture hand prohibited woman woman gesturing no female girl nope'
+],[
+'🙆',
+'person gesturing OK',
+'gesture hand OK person gesturing ok agree'
+],[
+'🙆‍♂️',
+'man gesturing OK',
+'gesture hand man OK man gesturing ok men boy male blue human'
+],[
+'🙆‍♀️',
+'woman gesturing OK',
+'gesture hand OK woman woman gesturing ok women girl female pink human'
+],[
+'💁',
+'person tipping hand',
+'hand help information sassy tipping'
+],[
+'💁‍♂️',
+'man tipping hand',
+'man sassy tipping hand male boy human information'
+],[
+'💁‍♀️',
+'woman tipping hand',
+'sassy tipping hand woman female girl human information'
+],[
+'🙋',
+'person raising hand',
+'gesture hand happy raised question'
+],[
+'🙋‍♂️',
+'man raising hand',
+'gesture man raising hand male boy'
+],[
+'🙋‍♀️',
+'woman raising hand',
+'gesture raising hand woman female girl'
+],[
+'🧏',
+'deaf person',
+'accessibility deaf ear hear'
+],[
+'🧏‍♂️',
+'deaf man',
+'deaf man accessibility'
+],[
+'🧏‍♀️',
+'deaf woman',
+'deaf woman accessibility'
+],[
+'🙇',
+'person bowing',
+'apology bow gesture sorry respectiful'
+],[
+'🙇‍♂️',
+'man bowing',
+'apology bowing favor gesture man sorry male boy'
+],[
+'🙇‍♀️',
+'woman bowing',
+'apology bowing favor gesture sorry woman female girl'
+],[
+'🤦',
+'person facepalming',
+'disbelief exasperation face palm disappointed'
+],[
+'🤦‍♂️',
+'man facepalming',
+'disbelief exasperation facepalm man male boy'
+],[
+'🤦‍♀️',
+'woman facepalming',
+'disbelief exasperation facepalm woman female girl'
+],[
+'🤷',
+'person shrugging',
+'doubt ignorance indifference shrug regardless'
+],[
+'🤷‍♂️',
+'man shrugging',
+'doubt ignorance indifference man shrug male boy confused indifferent'
+],[
+'🤷‍♀️',
+'woman shrugging',
+'doubt ignorance indifference shrug woman female girl confused indifferent'
+],[
+'🧑‍⚕️',
+'health worker',
+'doctor healthcare nurse therapist hospital'
+],[
+'👨‍⚕️',
+'man health worker',
+'doctor healthcare man nurse therapist human'
+],[
+'👩‍⚕️',
+'woman health worker',
+'doctor healthcare nurse therapist woman human'
+],[
+'🧑‍🎓',
+'student',
+'graduate learn'
+],[
+'👨‍🎓',
+'man student',
+'graduate man student human'
+],[
+'👩‍🎓',
+'woman student',
+'graduate student woman human'
+],[
+'🧑‍🏫',
+'teacher',
+'instructor professor'
+],[
+'👨‍🏫',
+'man teacher',
+'instructor man professor teacher human'
+],[
+'👩‍🏫',
+'woman teacher',
+'instructor professor teacher woman human'
+],[
+'🧑‍⚖️',
+'judge',
+'justice scales law'
+],[
+'👨‍⚖️',
+'man judge',
+'judge justice man scales court human'
+],[
+'👩‍⚖️',
+'woman judge',
+'judge justice scales woman court human'
+],[
+'🧑‍🌾',
+'farmer',
+'gardener rancher crops'
+],[
+'👨‍🌾',
+'man farmer',
+'farmer gardener man rancher human'
+],[
+'👩‍🌾',
+'woman farmer',
+'farmer gardener rancher woman human'
+],[
+'🧑‍🍳',
+'cook',
+'chef food kitchen culinary'
+],[
+'👨‍🍳',
+'man cook',
+'chef cook man human'
+],[
+'👩‍🍳',
+'woman cook',
+'chef cook woman human'
+],[
+'🧑‍🔧',
+'mechanic',
+'electrician plumber tradesperson worker technician'
+],[
+'👨‍🔧',
+'man mechanic',
+'electrician man mechanic plumber tradesperson human wrench'
+],[
+'👩‍🔧',
+'woman mechanic',
+'electrician mechanic plumber tradesperson woman human wrench'
+],[
+'🧑‍🏭',
+'factory worker',
+'assembly factory industrial worker labor'
+],[
+'👨‍🏭',
+'man factory worker',
+'assembly factory industrial man worker human'
+],[
+'👩‍🏭',
+'woman factory worker',
+'assembly factory industrial woman worker human'
+],[
+'🧑‍💼',
+'office worker',
+'architect business manager white-collar'
+],[
+'👨‍💼',
+'man office worker',
+'architect business man manager white-collar human'
+],[
+'👩‍💼',
+'woman office worker',
+'architect business manager white-collar woman human'
+],[
+'🧑‍🔬',
+'scientist',
+'biologist chemist engineer physicist chemistry'
+],[
+'👨‍🔬',
+'man scientist',
+'biologist chemist engineer man physicist scientist human'
+],[
+'👩‍🔬',
+'woman scientist',
+'biologist chemist engineer physicist scientist woman human'
+],[
+'🧑‍💻',
+'technologist',
+'coder developer inventor software computer'
+],[
+'👨‍💻',
+'man technologist',
+'coder developer inventor man software technologist engineer programmer human laptop computer'
+],[
+'👩‍💻',
+'woman technologist',
+'coder developer inventor software technologist woman engineer programmer human laptop computer'
+],[
+'🧑‍🎤',
+'singer',
+'actor entertainer rock star song artist performer'
+],[
+'👨‍🎤',
+'man singer',
+'actor entertainer man rock singer star rockstar human'
+],[
+'👩‍🎤',
+'woman singer',
+'actor entertainer rock singer star woman rockstar human'
+],[
+'🧑‍🎨',
+'artist',
+'palette painting draw creativity'
+],[
+'👨‍🎨',
+'man artist',
+'artist man palette painter human'
+],[
+'👩‍🎨',
+'woman artist',
+'artist palette woman painter human'
+],[
+'🧑‍✈️',
+'pilot',
+'plane fly airplane'
+],[
+'👨‍✈️',
+'man pilot',
+'man pilot plane aviator human'
+],[
+'👩‍✈️',
+'woman pilot',
+'pilot plane woman aviator human'
+],[
+'🧑‍🚀',
+'astronaut',
+'rocket outerspace'
+],[
+'👨‍🚀',
+'man astronaut',
+'astronaut man rocket space human'
+],[
+'👩‍🚀',
+'woman astronaut',
+'astronaut rocket woman space human'
+],[
+'🧑‍🚒',
+'firefighter',
+'firetruck fire'
+],[
+'👨‍🚒',
+'man firefighter',
+'firefighter firetruck man fireman human'
+],[
+'👩‍🚒',
+'woman firefighter',
+'firefighter firetruck woman fireman human'
+],[
+'👮',
+'police officer',
+'cop officer police'
+],[
+'👮‍♂️',
+'man police officer',
+'cop man officer police law legal enforcement arrest 911'
+],[
+'👮‍♀️',
+'woman police officer',
+'cop officer police woman law legal enforcement arrest 911 female'
+],[
+'🕵',
+'detective',
+'sleuth spy human'
+],[
+'🕵️‍♂️',
+'man detective',
+'detective man sleuth spy crime'
+],[
+'🕵️‍♀️',
+'woman detective',
+'detective sleuth spy woman human female'
+],[
+'💂',
+'guard',
+'protect'
+],[
+'💂‍♂️',
+'man guard',
+'guard man uk gb british male guy royal'
+],[
+'💂‍♀️',
+'woman guard',
+'guard woman uk gb british female royal'
+],[
+'🥷',
+'ninja',
+'fighter hidden stealth ninjutsu skills japanese'
+],[
+'👷',
+'construction worker',
+'construction hat worker labor build'
+],[
+'👷‍♂️',
+'man construction worker',
+'construction man worker male human wip guy build labor'
+],[
+'👷‍♀️',
+'woman construction worker',
+'construction woman worker female human wip build labor'
+],[
+'🤴',
+'prince',
+'boy man male crown royal king'
+],[
+'👸',
+'princess',
+'fairy tale fantasy girl woman female blond crown royal queen'
+],[
+'👳',
+'person wearing turban',
+'turban headdress'
+],[
+'👳‍♂️',
+'man wearing turban',
+'man turban male indian hinduism arabs'
+],[
+'👳‍♀️',
+'woman wearing turban',
+'turban woman female indian hinduism arabs'
+],[
+'👲',
+'person with skullcap',
+'cap gua pi mao hat person skullcap man with skullcap male boy chinese'
+],[
+'🧕',
+'woman with headscarf',
+'headscarf hijab mantilla tichel bandana head kerchief female'
+],[
+'🤵',
+'person in tuxedo',
+'groom person tuxedo man in tuxedo couple marriage wedding'
+],[
+'🤵‍♂️',
+'man in tuxedo',
+'man tuxedo formal fashion'
+],[
+'🤵‍♀️',
+'woman in tuxedo',
+'tuxedo woman formal fashion'
+],[
+'👰',
+'person with veil',
+'bride person veil wedding bride with veil couple marriage woman'
+],[
+'👰‍♂️',
+'man with veil',
+'man veil wedding marriage'
+],[
+'👰‍♀️',
+'woman with veil',
+'veil woman wedding marriage'
+],[
+'🤰',
+'pregnant woman',
+'pregnant woman baby'
+],[
+'🤱',
+'breast-feeding',
+'baby breast nursing breast feeding'
+],[
+'👩‍🍼',
+'woman feeding baby',
+'baby feeding nursing woman birth food'
+],[
+'👨‍🍼',
+'man feeding baby',
+'baby feeding man nursing birth food'
+],[
+'🧑‍🍼',
+'person feeding baby',
+'baby feeding nursing person birth food'
+],[
+'👼',
+'baby angel',
+'angel baby face fairy tale fantasy heaven wings halo'
+],[
+'🎅',
+'Santa Claus',
+'celebration Christmas claus father santa santa claus festival man male xmas father christmas'
+],[
+'🤶',
+'Mrs. Claus',
+'celebration Christmas claus mother Mrs. mrs claus woman female xmas mother christmas'
+],[
+'🧑‍🎄',
+'mx claus',
+'Claus, christmas christmas'
+],[
+'🦸',
+'superhero',
+'good hero heroine superpower marvel'
+],[
+'🦸‍♂️',
+'man superhero',
+'good hero man superpower male superpowers'
+],[
+'🦸‍♀️',
+'woman superhero',
+'good hero heroine superpower woman female superpowers'
+],[
+'🦹',
+'supervillain',
+'criminal evil superpower villain marvel'
+],[
+'🦹‍♂️',
+'man supervillain',
+'criminal evil man superpower villain male bad hero superpowers'
+],[
+'🦹‍♀️',
+'woman supervillain',
+'criminal evil superpower villain woman female bad heroine superpowers'
+],[
+'🧙',
+'mage',
+'sorcerer sorceress witch wizard magic'
+],[
+'🧙‍♂️',
+'man mage',
+'sorcerer wizard man male mage'
+],[
+'🧙‍♀️',
+'woman mage',
+'sorceress witch woman female mage'
+],[
+'🧚',
+'fairy',
+'Oberon Puck Titania wings magical'
+],[
+'🧚‍♂️',
+'man fairy',
+'Oberon Puck man male'
+],[
+'🧚‍♀️',
+'woman fairy',
+'Titania woman female'
+],[
+'🧛',
+'vampire',
+'Dracula undead blood twilight'
+],[
+'🧛‍♂️',
+'man vampire',
+'Dracula undead man male dracula'
+],[
+'🧛‍♀️',
+'woman vampire',
+'undead woman female'
+],[
+'🧜',
+'merperson',
+'mermaid merman merwoman sea'
+],[
+'🧜‍♂️',
+'merman',
+'Triton man male triton'
+],[
+'🧜‍♀️',
+'mermaid',
+'merwoman woman female ariel'
+],[
+'🧝',
+'elf',
+'magical LOTR style'
+],[
+'🧝‍♂️',
+'man elf',
+'magical man male'
+],[
+'🧝‍♀️',
+'woman elf',
+'magical woman female'
+],[
+'🧞',
+'genie',
+'djinn (non-human color) magical wishes'
+],[
+'🧞‍♂️',
+'man genie',
+'djinn man male'
+],[
+'🧞‍♀️',
+'woman genie',
+'djinn woman female'
+],[
+'🧟',
+'zombie',
+'undead walking dead (non-human color) dead'
+],[
+'🧟‍♂️',
+'man zombie',
+'undead walking dead man male dracula'
+],[
+'🧟‍♀️',
+'woman zombie',
+'undead walking dead woman female'
+],[
+'💆',
+'person getting massage',
+'face massage salon relax'
+],[
+'💆‍♂️',
+'man getting massage',
+'face man massage male boy head'
+],[
+'💆‍♀️',
+'woman getting massage',
+'face massage woman female girl head'
+],[
+'💇',
+'person getting haircut',
+'barber beauty haircut parlor hairstyle'
+],[
+'💇‍♂️',
+'man getting haircut',
+'haircut man male boy'
+],[
+'💇‍♀️',
+'woman getting haircut',
+'haircut woman female girl'
+],[
+'🚶',
+'person walking',
+'hike walk walking move'
+],[
+'🚶‍♂️',
+'man walking',
+'hike man walk human feet steps'
+],[
+'🚶‍♀️',
+'woman walking',
+'hike walk woman human feet steps female'
+],[
+'🧍',
+'person standing',
+'stand standing still'
+],[
+'🧍‍♂️',
+'man standing',
+'man standing still'
+],[
+'🧍‍♀️',
+'woman standing',
+'standing woman still'
+],[
+'🧎',
+'person kneeling',
+'kneel kneeling pray respectful'
+],[
+'🧎‍♂️',
+'man kneeling',
+'kneeling man pray respectful'
+],[
+'🧎‍♀️',
+'woman kneeling',
+'kneeling woman respectful pray'
+],[
+'🧑‍🦯',
+'person with white cane',
+'accessibility blind person with probing cane'
+],[
+'👨‍🦯',
+'man with white cane',
+'accessibility blind man man with probing cane'
+],[
+'👩‍🦯',
+'woman with white cane',
+'accessibility blind woman woman with probing cane'
+],[
+'🧑‍🦼',
+'person in motorized wheelchair',
+'accessibility wheelchair disability'
+],[
+'👨‍🦼',
+'man in motorized wheelchair',
+'accessibility man wheelchair disability'
+],[
+'👩‍🦼',
+'woman in motorized wheelchair',
+'accessibility wheelchair woman disability'
+],[
+'🧑‍🦽',
+'person in manual wheelchair',
+'accessibility wheelchair disability'
+],[
+'👨‍🦽',
+'man in manual wheelchair',
+'accessibility man wheelchair disability'
+],[
+'👩‍🦽',
+'woman in manual wheelchair',
+'accessibility wheelchair woman disability'
+],[
+'🏃',
+'person running',
+'marathon running move'
+],[
+'🏃‍♂️',
+'man running',
+'man marathon racing running walking exercise race'
+],[
+'🏃‍♀️',
+'woman running',
+'marathon racing running woman walking exercise race female'
+],[
+'💃',
+'woman dancing',
+'dance dancing woman female girl fun'
+],[
+'🕺',
+'man dancing',
+'dance dancing man male boy fun dancer'
+],[
+'🕴',
+'person in suit levitating',
+'business person suit man in suit levitating levitate hover jump'
+],[
+'👯',
+'people with bunny ears',
+'bunny ear dancer partying perform costume'
+],[
+'👯‍♂️',
+'men with bunny ears',
+'bunny ear dancer men partying male bunny boys'
+],[
+'👯‍♀️',
+'women with bunny ears',
+'bunny ear dancer partying women female bunny girls'
+],[
+'🧖',
+'person in steamy room',
+'sauna steam room hamam steambath relax spa'
+],[
+'🧖‍♂️',
+'man in steamy room',
+'sauna steam room male man spa steamroom'
+],[
+'🧖‍♀️',
+'woman in steamy room',
+'sauna steam room female woman spa steamroom'
+],[
+'🧗',
+'person climbing',
+'climber sport'
+],[
+'🧗‍♂️',
+'man climbing',
+'climber sports hobby man male rock'
+],[
+'🧗‍♀️',
+'woman climbing',
+'climber sports hobby woman female rock'
+],[
+'🤺',
+'person fencing',
+'fencer fencing sword sports'
+],[
+'🏇',
+'horse racing',
+'horse jockey racehorse racing animal betting competition gambling luck'
+],[
+'⛷',
+'skier',
+'ski snow sports winter'
+],[
+'🏂',
+'snowboarder',
+'ski snow snowboard sports winter'
+],[
+'🏌',
+'person golfing',
+'ball golf sports business'
+],[
+'🏌️‍♂️',
+'man golfing',
+'golf man sport'
+],[
+'🏌️‍♀️',
+'woman golfing',
+'golf woman sports business female'
+],[
+'🏄',
+'person surfing',
+'surfing sport sea'
+],[
+'🏄‍♂️',
+'man surfing',
+'man surfing sports ocean sea summer beach'
+],[
+'🏄‍♀️',
+'woman surfing',
+'surfing woman sports ocean sea summer beach female'
+],[
+'🚣',
+'person rowing boat',
+'boat rowboat sport move'
+],[
+'🚣‍♂️',
+'man rowing boat',
+'boat man rowboat sports hobby water ship'
+],[
+'🚣‍♀️',
+'woman rowing boat',
+'boat rowboat woman sports hobby water ship female'
+],[
+'🏊',
+'person swimming',
+'swim sport pool'
+],[
+'🏊‍♂️',
+'man swimming',
+'man swim sports exercise human athlete water summer'
+],[
+'🏊‍♀️',
+'woman swimming',
+'swim woman sports exercise human athlete water summer female'
+],[
+'⛹',
+'person bouncing ball',
+'ball sports human'
+],[
+'⛹️‍♂️',
+'man bouncing ball',
+'ball man sport'
+],[
+'⛹️‍♀️',
+'woman bouncing ball',
+'ball woman sports human female'
+],[
+'🏋',
+'person lifting weights',
+'lifter weight sports training exercise'
+],[
+'🏋️‍♂️',
+'man lifting weights',
+'man weight lifter sport'
+],[
+'🏋️‍♀️',
+'woman lifting weights',
+'weight lifter woman sports training exercise female'
+],[
+'🚴',
+'person biking',
+'bicycle biking cyclist sport move'
+],[
+'🚴‍♂️',
+'man biking',
+'bicycle biking cyclist man sports bike exercise hipster'
+],[
+'🚴‍♀️',
+'woman biking',
+'bicycle biking cyclist woman sports bike exercise hipster female'
+],[
+'🚵',
+'person mountain biking',
+'bicycle bicyclist bike cyclist mountain sport move'
+],[
+'🚵‍♂️',
+'man mountain biking',
+'bicycle bike cyclist man mountain transportation sports human race'
+],[
+'🚵‍♀️',
+'woman mountain biking',
+'bicycle bike biking cyclist mountain woman transportation sports human race female'
+],[
+'🤸',
+'person cartwheeling',
+'cartwheel gymnastics sport gymnastic'
+],[
+'🤸‍♂️',
+'man cartwheeling',
+'cartwheel gymnastics man'
+],[
+'🤸‍♀️',
+'woman cartwheeling',
+'cartwheel gymnastics woman'
+],[
+'🤼',
+'people wrestling',
+'wrestle wrestler sport'
+],[
+'🤼‍♂️',
+'men wrestling',
+'men wrestle sports wrestlers'
+],[
+'🤼‍♀️',
+'women wrestling',
+'women wrestle sports wrestlers'
+],[
+'🤽',
+'person playing water polo',
+'polo water sport'
+],[
+'🤽‍♂️',
+'man playing water polo',
+'man water polo sports pool'
+],[
+'🤽‍♀️',
+'woman playing water polo',
+'water polo woman sports pool'
+],[
+'🤾',
+'person playing handball',
+'ball handball sport'
+],[
+'🤾‍♂️',
+'man playing handball',
+'handball man sports'
+],[
+'🤾‍♀️',
+'woman playing handball',
+'handball woman sports'
+],[
+'🤹',
+'person juggling',
+'balance juggle multitask skill performance'
+],[
+'🤹‍♂️',
+'man juggling',
+'juggling man multitask juggle balance skill'
+],[
+'🤹‍♀️',
+'woman juggling',
+'juggling multitask woman juggle balance skill'
+],[
+'🧘',
+'person in lotus position',
+'meditation yoga serenity meditate'
+],[
+'🧘‍♂️',
+'man in lotus position',
+'meditation yoga man male serenity zen mindfulness'
+],[
+'🧘‍♀️',
+'woman in lotus position',
+'meditation yoga woman female serenity zen mindfulness'
+],[
+'🛀',
+'person taking bath',
+'bath bathtub clean shower bathroom'
+],[
+'🛌',
+'person in bed',
+'hotel sleep bed rest'
+],[
+'🧑‍🤝‍🧑',
+'people holding hands',
+'couple hand hold holding hands person friendship'
+],[
+'👭',
+'women holding hands',
+'couple hand holding hands women pair friendship love like female people human'
+],[
+'👫',
+'woman and man holding hands',
+'couple hand hold holding hands man woman pair people human love date dating like affection valentines marriage'
+],[
+'👬',
+'men holding hands',
+'couple Gemini holding hands man men twins zodiac pair love like bromance friendship people human'
+],[
+'💏',
+'kiss',
+'couple pair valentines love like dating marriage'
+],[
+'👩‍❤️‍💋‍👨',
+'kiss: woman, man',
+'couple kiss man woman kiss woman man love'
+],[
+'👨‍❤️‍💋‍👨',
+'kiss: man, man',
+'couple kiss man kiss man man pair valentines love like dating marriage'
+],[
+'👩‍❤️‍💋‍👩',
+'kiss: woman, woman',
+'couple kiss woman kiss woman woman pair valentines love like dating marriage'
+],[
+'💑',
+'couple with heart',
+'couple love pair like affection human dating valentines marriage'
+],[
+'👩‍❤️‍👨',
+'couple with heart: woman, man',
+'couple couple with heart love man woman couple with heart woman man'
+],[
+'👨‍❤️‍👨',
+'couple with heart: man, man',
+'couple couple with heart love man couple with heart man man pair like affection human dating valentines marriage'
+],[
+'👩‍❤️‍👩',
+'couple with heart: woman, woman',
+'couple couple with heart love woman couple with heart woman woman pair like affection human dating valentines marriage'
+],[
+'👪',
+'family',
+'home parents child mom dad father mother people human'
+],[
+'👨‍👩‍👦',
+'family: man, woman, boy',
+'boy family man woman family man woman boy love'
+],[
+'👨‍👩‍👧',
+'family: man, woman, girl',
+'family girl man woman family man woman girl home parents people human child'
+],[
+'👨‍👩‍👧‍👦',
+'family: man, woman, girl, boy',
+'boy family girl man woman family man woman girl boy home parents people human children'
+],[
+'👨‍👩‍👦‍👦',
+'family: man, woman, boy, boy',
+'boy family man woman family man woman boy boy home parents people human children'
+],[
+'👨‍👩‍👧‍👧',
+'family: man, woman, girl, girl',
+'family girl man woman family man woman girl girl home parents people human children'
+],[
+'👨‍👨‍👦',
+'family: man, man, boy',
+'boy family man family man man boy home parents people human children'
+],[
+'👨‍👨‍👧',
+'family: man, man, girl',
+'family girl man family man man girl home parents people human children'
+],[
+'👨‍👨‍👧‍👦',
+'family: man, man, girl, boy',
+'boy family girl man family man man girl boy home parents people human children'
+],[
+'👨‍👨‍👦‍👦',
+'family: man, man, boy, boy',
+'boy family man family man man boy boy home parents people human children'
+],[
+'👨‍👨‍👧‍👧',
+'family: man, man, girl, girl',
+'family girl man family man man girl girl home parents people human children'
+],[
+'👩‍👩‍👦',
+'family: woman, woman, boy',
+'boy family woman family woman woman boy home parents people human children'
+],[
+'👩‍👩‍👧',
+'family: woman, woman, girl',
+'family girl woman family woman woman girl home parents people human children'
+],[
+'👩‍👩‍👧‍👦',
+'family: woman, woman, girl, boy',
+'boy family girl woman family woman woman girl boy home parents people human children'
+],[
+'👩‍👩‍👦‍👦',
+'family: woman, woman, boy, boy',
+'boy family woman family woman woman boy boy home parents people human children'
+],[
+'👩‍👩‍👧‍👧',
+'family: woman, woman, girl, girl',
+'family girl woman family woman woman girl girl home parents people human children'
+],[
+'👨‍👦',
+'family: man, boy',
+'boy family man family man boy home parent people human child'
+],[
+'👨‍👦‍👦',
+'family: man, boy, boy',
+'boy family man family man boy boy home parent people human children'
+],[
+'👨‍👧',
+'family: man, girl',
+'family girl man family man girl home parent people human child'
+],[
+'👨‍👧‍👦',
+'family: man, girl, boy',
+'boy family girl man family man girl boy home parent people human children'
+],[
+'👨‍👧‍👧',
+'family: man, girl, girl',
+'family girl man family man girl girl home parent people human children'
+],[
+'👩‍👦',
+'family: woman, boy',
+'boy family woman family woman boy home parent people human child'
+],[
+'👩‍👦‍👦',
+'family: woman, boy, boy',
+'boy family woman family woman boy boy home parent people human children'
+],[
+'👩‍👧',
+'family: woman, girl',
+'family girl woman family woman girl home parent people human child'
+],[
+'👩‍👧‍👦',
+'family: woman, girl, boy',
+'boy family girl woman family woman girl boy home parent people human children'
+],[
+'👩‍👧‍👧',
+'family: woman, girl, girl',
+'family girl woman family woman girl girl home parent people human children'
+],[
+'🗣',
+'speaking head',
+'face head silhouette speak speaking user person human sing say talk'
+],[
+'👤',
+'bust in silhouette',
+'bust silhouette user person human'
+],[
+'👥',
+'busts in silhouette',
+'bust silhouette user person human group team'
+],[
+'🫂',
+'people hugging',
+'goodbye hello hug thanks care'
+],[
+'👣',
+'footprints',
+'clothing footprint print feet tracking walking beach'
+],[
+'🦰',
+'red hair',
+'ginger redhead'
+],[
+'🦱',
+'curly hair',
+'afro curly ringlets'
+],[
+'🦳',
+'white hair',
+'gray hair old white'
+],[
+'🦲',
+'bald',
+'chemotherapy hairless no hair shaven'
+],[
+'🐵',
+'monkey face',
+'face monkey animal nature circus'
+],[
+'🐒',
+'monkey',
+'animal nature banana circus'
+],[
+'🦍',
+'gorilla',
+'animal nature circus'
+],[
+'🦧',
+'orangutan',
+'ape animal'
+],[
+'🐶',
+'dog face',
+'dog face pet animal friend nature woof puppy faithful'
+],[
+'🐕',
+'dog',
+'pet animal nature friend doge faithful'
+],[
+'🦮',
+'guide dog',
+'accessibility blind guide animal'
+],[
+'🐕‍🦺',
+'service dog',
+'accessibility assistance dog service blind animal'
+],[
+'🐩',
+'poodle',
+'dog animal 101 nature pet'
+],[
+'🐺',
+'wolf',
+'face animal nature wild'
+],[
+'🦊',
+'fox',
+'face animal nature'
+],[
+'🦝',
+'raccoon',
+'curious sly animal nature'
+],[
+'🐱',
+'cat face',
+'cat face pet animal meow nature kitten'
+],[
+'🐈',
+'cat',
+'pet animal meow cats'
+],[
+'🐈‍⬛',
+'black cat',
+'black cat unlucky superstition luck'
+],[
+'🦁',
+'lion',
+'face Leo zodiac animal nature'
+],[
+'🐯',
+'tiger face',
+'face tiger animal cat danger wild nature roar'
+],[
+'🐅',
+'tiger',
+'animal nature roar'
+],[
+'🐆',
+'leopard',
+'animal nature'
+],[
+'🐴',
+'horse face',
+'face horse animal brown nature'
+],[
+'🐎',
+'horse',
+'equestrian racehorse racing animal gamble luck'
+],[
+'🦄',
+'unicorn',
+'face animal nature mystical'
+],[
+'🦓',
+'zebra',
+'stripe animal nature stripes safari'
+],[
+'🦌',
+'deer',
+'animal nature horns venison'
+],[
+'🦬',
+'bison',
+'buffalo herd wisent ox'
+],[
+'🐮',
+'cow face',
+'cow face beef ox animal nature moo milk'
+],[
+'🐂',
+'ox',
+'bull Taurus zodiac animal cow beef'
+],[
+'🐃',
+'water buffalo',
+'buffalo water animal nature ox cow'
+],[
+'🐄',
+'cow',
+'beef ox animal nature moo milk'
+],[
+'🐷',
+'pig face',
+'face pig animal oink nature'
+],[
+'🐖',
+'pig',
+'sow animal nature'
+],[
+'🐗',
+'boar',
+'pig animal nature'
+],[
+'🐽',
+'pig nose',
+'face nose pig animal oink'
+],[
+'🐏',
+'ram',
+'Aries male sheep zodiac animal nature'
+],[
+'🐑',
+'ewe',
+'female sheep animal nature wool shipit'
+],[
+'🐐',
+'goat',
+'Capricorn zodiac animal nature'
+],[
+'🐪',
+'camel',
+'dromedary hump animal hot desert'
+],[
+'🐫',
+'two-hump camel',
+'bactrian camel hump two hump camel animal nature hot desert'
+],[
+'🦙',
+'llama',
+'alpaca guanaco vicuña wool animal nature'
+],[
+'🦒',
+'giraffe',
+'spots animal nature safari'
+],[
+'🐘',
+'elephant',
+'animal nature nose th circus'
+],[
+'🦣',
+'mammoth',
+'extinction large tusk woolly elephant tusks'
+],[
+'🦏',
+'rhinoceros',
+'animal nature horn'
+],[
+'🦛',
+'hippopotamus',
+'hippo animal nature'
+],[
+'🐭',
+'mouse face',
+'face mouse animal nature cheese wedge rodent'
+],[
+'🐁',
+'mouse',
+'animal nature rodent'
+],[
+'🐀',
+'rat',
+'animal mouse rodent'
+],[
+'🐹',
+'hamster',
+'face pet animal nature'
+],[
+'🐰',
+'rabbit face',
+'bunny face pet rabbit animal nature spring magic'
+],[
+'🐇',
+'rabbit',
+'bunny pet animal nature magic spring'
+],[
+'🐿',
+'chipmunk',
+'squirrel animal nature rodent'
+],[
+'🦫',
+'beaver',
+'dam animal rodent'
+],[
+'🦔',
+'hedgehog',
+'spiny animal nature'
+],[
+'🦇',
+'bat',
+'vampire animal nature blind'
+],[
+'🐻',
+'bear',
+'face animal nature wild'
+],[
+'🐻‍❄️',
+'polar bear',
+'arctic bear white animal'
+],[
+'🐨',
+'koala',
+'bear animal nature'
+],[
+'🐼',
+'panda',
+'face animal nature'
+],[
+'🦥',
+'sloth',
+'lazy slow animal'
+],[
+'🦦',
+'otter',
+'fishing playful animal'
+],[
+'🦨',
+'skunk',
+'stink animal'
+],[
+'🦘',
+'kangaroo',
+'Australia joey jump marsupial animal nature australia hop'
+],[
+'🦡',
+'badger',
+'honey badger pester animal nature honey'
+],[
+'🐾',
+'paw prints',
+'feet paw print animal tracking footprints dog cat pet'
+],[
+'🦃',
+'turkey',
+'bird animal'
+],[
+'🐔',
+'chicken',
+'bird animal cluck nature'
+],[
+'🐓',
+'rooster',
+'bird animal nature chicken'
+],[
+'🐣',
+'hatching chick',
+'baby bird chick hatching animal chicken egg born'
+],[
+'🐤',
+'baby chick',
+'baby bird chick animal chicken'
+],[
+'🐥',
+'front-facing baby chick',
+'baby bird chick front facing baby chick animal chicken'
+],[
+'🐦',
+'bird',
+'animal nature fly tweet spring'
+],[
+'🐧',
+'penguin',
+'bird animal nature'
+],[
+'🕊',
+'dove',
+'bird fly peace animal'
+],[
+'🦅',
+'eagle',
+'bird animal nature'
+],[
+'🦆',
+'duck',
+'bird animal nature mallard'
+],[
+'🦢',
+'swan',
+'bird cygnet ugly duckling animal nature'
+],[
+'🦉',
+'owl',
+'bird wise animal nature hoot'
+],[
+'🦤',
+'dodo',
+'extinction large Mauritius animal bird'
+],[
+'🪶',
+'feather',
+'bird flight light plumage fly'
+],[
+'🦩',
+'flamingo',
+'flamboyant tropical animal'
+],[
+'🦚',
+'peacock',
+'bird ostentatious peahen proud animal nature'
+],[
+'🦜',
+'parrot',
+'bird pirate talk animal nature'
+],[
+'🐸',
+'frog',
+'face animal nature croak toad'
+],[
+'🐊',
+'crocodile',
+'animal nature reptile lizard alligator'
+],[
+'🐢',
+'turtle',
+'terrapin tortoise animal slow nature'
+],[
+'🦎',
+'lizard',
+'reptile animal nature'
+],[
+'🐍',
+'snake',
+'bearer Ophiuchus serpent zodiac animal evil nature hiss python'
+],[
+'🐲',
+'dragon face',
+'dragon face fairy tale animal myth nature chinese green'
+],[
+'🐉',
+'dragon',
+'fairy tale animal myth nature chinese green'
+],[
+'🦕',
+'sauropod',
+'brachiosaurus brontosaurus diplodocus animal nature dinosaur extinct'
+],[
+'🦖',
+'T-Rex',
+'Tyrannosaurus Rex t rex animal nature dinosaur tyrannosaurus extinct'
+],[
+'🐳',
+'spouting whale',
+'face spouting whale animal nature sea ocean'
+],[
+'🐋',
+'whale',
+'animal nature sea ocean'
+],[
+'🐬',
+'dolphin',
+'flipper animal nature fish sea ocean fins beach'
+],[
+'🦭',
+'seal',
+'sea Lion animal creature sea'
+],[
+'🐟',
+'fish',
+'Pisces zodiac animal food nature'
+],[
+'🐠',
+'tropical fish',
+'fish tropical animal swim ocean beach nemo'
+],[
+'🐡',
+'blowfish',
+'fish animal nature food sea ocean'
+],[
+'🦈',
+'shark',
+'fish animal nature sea ocean jaws fins beach'
+],[
+'🐙',
+'octopus',
+'animal creature ocean sea nature beach'
+],[
+'🐚',
+'spiral shell',
+'shell spiral nature sea beach'
+],[
+'🐌',
+'snail',
+'slow animal shell'
+],[
+'🦋',
+'butterfly',
+'insect pretty animal nature caterpillar'
+],[
+'🐛',
+'bug',
+'insect animal nature worm'
+],[
+'🐜',
+'ant',
+'insect animal nature bug'
+],[
+'🐝',
+'honeybee',
+'bee insect animal nature bug spring honey'
+],[
+'🪲',
+'beetle',
+'bug insect'
+],[
+'🐞',
+'lady beetle',
+'beetle insect ladybird ladybug animal nature'
+],[
+'🦗',
+'cricket',
+'grasshopper Orthoptera animal chirp'
+],[
+'🪳',
+'cockroach',
+'insect pest roach pests'
+],[
+'🕷',
+'spider',
+'insect animal arachnid'
+],[
+'🕸',
+'spider web',
+'spider web animal insect arachnid silk'
+],[
+'🦂',
+'scorpion',
+'scorpio Scorpio zodiac animal arachnid'
+],[
+'🦟',
+'mosquito',
+'disease fever malaria pest virus animal nature insect'
+],[
+'🪰',
+'fly',
+'disease maggot pest rotting insect'
+],[
+'🪱',
+'worm',
+'annelid earthworm parasite animal'
+],[
+'🦠',
+'microbe',
+'amoeba bacteria virus germs'
+],[
+'💐',
+'bouquet',
+'flower flowers nature spring'
+],[
+'🌸',
+'cherry blossom',
+'blossom cherry flower nature plant spring'
+],[
+'💮',
+'white flower',
+'flower japanese spring'
+],[
+'🏵',
+'rosette',
+'plant flower decoration military'
+],[
+'🌹',
+'rose',
+'flower flowers valentines love spring'
+],[
+'🥀',
+'wilted flower',
+'flower wilted plant nature'
+],[
+'🌺',
+'hibiscus',
+'flower plant vegetable flowers beach'
+],[
+'🌻',
+'sunflower',
+'flower sun nature plant fall'
+],[
+'🌼',
+'blossom',
+'flower nature flowers yellow'
+],[
+'🌷',
+'tulip',
+'flower flowers plant nature summer spring'
+],[
+'🌱',
+'seedling',
+'young plant nature grass lawn spring'
+],[
+'🪴',
+'potted plant',
+'boring grow house nurturing plant useless greenery'
+],[
+'🌲',
+'evergreen tree',
+'tree plant nature'
+],[
+'🌳',
+'deciduous tree',
+'deciduous shedding tree plant nature'
+],[
+'🌴',
+'palm tree',
+'palm tree plant vegetable nature summer beach mojito tropical'
+],[
+'🌵',
+'cactus',
+'plant vegetable nature'
+],[
+'🌾',
+'sheaf of rice',
+'ear grain rice nature plant'
+],[
+'🌿',
+'herb',
+'leaf vegetable plant medicine weed grass lawn'
+],[
+'☘',
+'shamrock',
+'plant vegetable nature irish clover'
+],[
+'🍀',
+'four leaf clover',
+'4 clover four four-leaf clover leaf vegetable plant nature lucky irish'
+],[
+'🍁',
+'maple leaf',
+'falling leaf maple nature plant vegetable ca fall'
+],[
+'🍂',
+'fallen leaf',
+'falling leaf nature plant vegetable leaves'
+],[
+'🍃',
+'leaf fluttering in wind',
+'blow flutter leaf wind nature plant tree vegetable grass lawn spring'
+],[
+'🍇',
+'grapes',
+'fruit grape food wine'
+],[
+'🍈',
+'melon',
+'fruit nature food'
+],[
+'🍉',
+'watermelon',
+'fruit food picnic summer'
+],[
+'🍊',
+'tangerine',
+'fruit orange food nature'
+],[
+'🍋',
+'lemon',
+'citrus fruit nature'
+],[
+'🍌',
+'banana',
+'fruit food monkey'
+],[
+'🍍',
+'pineapple',
+'fruit nature food'
+],[
+'🥭',
+'mango',
+'fruit tropical food'
+],[
+'🍎',
+'red apple',
+'apple fruit red mac school'
+],[
+'🍏',
+'green apple',
+'apple fruit green nature'
+],[
+'🍐',
+'pear',
+'fruit nature food'
+],[
+'🍑',
+'peach',
+'fruit nature food'
+],[
+'🍒',
+'cherries',
+'berries cherry fruit red food'
+],[
+'🍓',
+'strawberry',
+'berry fruit food nature'
+],[
+'🫐',
+'blueberries',
+'berry bilberry blue blueberry fruit'
+],[
+'🥝',
+'kiwi fruit',
+'food fruit kiwi'
+],[
+'🍅',
+'tomato',
+'fruit vegetable nature food'
+],[
+'🫒',
+'olive',
+'food fruit'
+],[
+'🥥',
+'coconut',
+'palm piña colada fruit nature food'
+],[
+'🥑',
+'avocado',
+'food fruit'
+],[
+'🍆',
+'eggplant',
+'aubergine vegetable nature food'
+],[
+'🥔',
+'potato',
+'food vegetable tuber vegatable starch'
+],[
+'🥕',
+'carrot',
+'food vegetable orange'
+],[
+'🌽',
+'ear of corn',
+'corn ear maize maze food vegetable plant'
+],[
+'🌶',
+'hot pepper',
+'hot pepper food spicy chilli chili'
+],[
+'🫑',
+'bell pepper',
+'capsicum pepper vegetable fruit plant'
+],[
+'🥒',
+'cucumber',
+'food pickle vegetable fruit'
+],[
+'🥬',
+'leafy green',
+'bok choy cabbage kale lettuce food vegetable plant'
+],[
+'🥦',
+'broccoli',
+'wild cabbage fruit food vegetable'
+],[
+'🧄',
+'garlic',
+'flavoring food spice cook'
+],[
+'🧅',
+'onion',
+'flavoring cook food spice'
+],[
+'🍄',
+'mushroom',
+'toadstool plant vegetable'
+],[
+'🥜',
+'peanuts',
+'food nut peanut vegetable'
+],[
+'🌰',
+'chestnut',
+'plant food squirrel'
+],[
+'🍞',
+'bread',
+'loaf food wheat breakfast toast'
+],[
+'🥐',
+'croissant',
+'bread breakfast food french roll'
+],[
+'🥖',
+'baguette bread',
+'baguette bread food french'
+],[
+'🫓',
+'flatbread',
+'arepa lavash naan pita flour food'
+],[
+'🥨',
+'pretzel',
+'twisted convoluted food bread'
+],[
+'🥯',
+'bagel',
+'bakery breakfast schmear food bread'
+],[
+'🥞',
+'pancakes',
+'breakfast crêpe food hotcake pancake flapjacks hotcakes'
+],[
+'🧇',
+'waffle',
+'breakfast indecisive iron food'
+],[
+'🧀',
+'cheese wedge',
+'cheese food chadder'
+],[
+'🍖',
+'meat on bone',
+'bone meat good food drumstick'
+],[
+'🍗',
+'poultry leg',
+'bone chicken drumstick leg poultry food meat bird turkey'
+],[
+'🥩',
+'cut of meat',
+'chop lambchop porkchop steak food cow meat cut'
+],[
+'🥓',
+'bacon',
+'breakfast food meat pork pig'
+],[
+'🍔',
+'hamburger',
+'burger meat fast food beef cheeseburger mcdonalds burger king'
+],[
+'🍟',
+'french fries',
+'french fries chips snack fast food'
+],[
+'🍕',
+'pizza',
+'cheese slice food party'
+],[
+'🌭',
+'hot dog',
+'frankfurter hotdog sausage food'
+],[
+'🥪',
+'sandwich',
+'bread food lunch'
+],[
+'🌮',
+'taco',
+'mexican food'
+],[
+'🌯',
+'burrito',
+'mexican wrap food'
+],[
+'🫔',
+'tamale',
+'mexican wrapped food masa'
+],[
+'🥙',
+'stuffed flatbread',
+'falafel flatbread food gyro kebab stuffed'
+],[
+'🧆',
+'falafel',
+'chickpea meatball food'
+],[
+'🥚',
+'egg',
+'breakfast food chicken'
+],[
+'🍳',
+'cooking',
+'breakfast egg frying pan food kitchen'
+],[
+'🥘',
+'shallow pan of food',
+'casserole food paella pan shallow cooking'
+],[
+'🍲',
+'pot of food',
+'pot stew food meat soup'
+],[
+'🫕',
+'fondue',
+'cheese chocolate melted pot Swiss food'
+],[
+'🥣',
+'bowl with spoon',
+'breakfast cereal congee oatmeal porridge food'
+],[
+'🥗',
+'green salad',
+'food green salad healthy lettuce'
+],[
+'🍿',
+'popcorn',
+'food movie theater films snack'
+],[
+'🧈',
+'butter',
+'dairy food cook'
+],[
+'🧂',
+'salt',
+'condiment shaker'
+],[
+'🥫',
+'canned food',
+'can food soup'
+],[
+'🍱',
+'bento box',
+'bento box food japanese'
+],[
+'🍘',
+'rice cracker',
+'cracker rice food japanese'
+],[
+'🍙',
+'rice ball',
+'ball Japanese rice food japanese'
+],[
+'🍚',
+'cooked rice',
+'cooked rice food china asian'
+],[
+'🍛',
+'curry rice',
+'curry rice food spicy hot indian'
+],[
+'🍜',
+'steaming bowl',
+'bowl noodle ramen steaming food japanese chopsticks'
+],[
+'🍝',
+'spaghetti',
+'pasta food italian noodle'
+],[
+'🍠',
+'roasted sweet potato',
+'potato roasted sweet food nature'
+],[
+'🍢',
+'oden',
+'kebab seafood skewer stick food japanese'
+],[
+'🍣',
+'sushi',
+'food fish japanese rice'
+],[
+'🍤',
+'fried shrimp',
+'fried prawn shrimp tempura food animal appetizer summer'
+],[
+'🍥',
+'fish cake with swirl',
+'cake fish pastry swirl food japan sea beach narutomaki pink kamaboko surimi ramen'
+],[
+'🥮',
+'moon cake',
+'autumn festival yuèbǐng food'
+],[
+'🍡',
+'dango',
+'dessert Japanese skewer stick sweet food japanese barbecue meat'
+],[
+'🥟',
+'dumpling',
+'empanada gyōza jiaozi pierogi potsticker food'
+],[
+'🥠',
+'fortune cookie',
+'prophecy food'
+],[
+'🥡',
+'takeout box',
+'oyster pail food leftovers'
+],[
+'🦀',
+'crab',
+'Cancer zodiac animal crustacean'
+],[
+'🦞',
+'lobster',
+'bisque claws seafood animal nature'
+],[
+'🦐',
+'shrimp',
+'food shellfish small animal ocean nature seafood'
+],[
+'🦑',
+'squid',
+'food molusc animal nature ocean sea'
+],[
+'🦪',
+'oyster',
+'diving pearl food'
+],[
+'🍦',
+'soft ice cream',
+'cream dessert ice icecream soft sweet food hot summer'
+],[
+'🍧',
+'shaved ice',
+'dessert ice shaved sweet hot summer'
+],[
+'🍨',
+'ice cream',
+'cream dessert ice sweet food hot'
+],[
+'🍩',
+'doughnut',
+'breakfast dessert donut sweet food snack'
+],[
+'🍪',
+'cookie',
+'dessert sweet food snack oreo chocolate'
+],[
+'🎂',
+'birthday cake',
+'birthday cake celebration dessert pastry sweet food'
+],[
+'🍰',
+'shortcake',
+'cake dessert pastry slice sweet food'
+],[
+'🧁',
+'cupcake',
+'bakery sweet food dessert'
+],[
+'🥧',
+'pie',
+'filling pastry fruit meat food dessert'
+],[
+'🍫',
+'chocolate bar',
+'bar chocolate dessert sweet food snack'
+],[
+'🍬',
+'candy',
+'dessert sweet snack lolly'
+],[
+'🍭',
+'lollipop',
+'candy dessert sweet food snack'
+],[
+'🍮',
+'custard',
+'dessert pudding sweet food'
+],[
+'🍯',
+'honey pot',
+'honey honeypot pot sweet bees kitchen'
+],[
+'🍼',
+'baby bottle',
+'baby bottle drink milk food container'
+],[
+'🥛',
+'glass of milk',
+'drink glass milk beverage cow'
+],[
+'☕',
+'hot beverage',
+'beverage coffee drink hot steaming tea caffeine latte espresso'
+],[
+'🫖',
+'teapot',
+'drink pot tea hot'
+],[
+'🍵',
+'teacup without handle',
+'beverage cup drink tea teacup bowl breakfast green british'
+],[
+'🍶',
+'sake',
+'bar beverage bottle cup drink wine drunk japanese alcohol booze'
+],[
+'🍾',
+'bottle with popping cork',
+'bar bottle cork drink popping wine celebration'
+],[
+'🍷',
+'wine glass',
+'bar beverage drink glass wine drunk alcohol booze'
+],[
+'🍸',
+'cocktail glass',
+'bar cocktail drink glass drunk alcohol beverage booze mojito'
+],[
+'🍹',
+'tropical drink',
+'bar drink tropical beverage cocktail summer beach alcohol booze mojito'
+],[
+'🍺',
+'beer mug',
+'bar beer drink mug relax beverage drunk party pub summer alcohol booze'
+],[
+'🍻',
+'clinking beer mugs',
+'bar beer clink drink mug relax beverage drunk party pub summer alcohol booze'
+],[
+'🥂',
+'clinking glasses',
+'celebrate clink drink glass beverage party alcohol cheers wine champagne toast'
+],[
+'🥃',
+'tumbler glass',
+'glass liquor shot tumbler whisky drink beverage drunk alcohol booze bourbon scotch'
+],[
+'🥤',
+'cup with straw',
+'juice soda malt soft drink water drink'
+],[
+'🧋',
+'bubble tea',
+'bubble milk pearl tea taiwan boba milk tea straw'
+],[
+'🧃',
+'beverage box',
+'beverage box juice straw sweet drink'
+],[
+'🧉',
+'mate',
+'drink tea beverage'
+],[
+'🧊',
+'ice',
+'cold ice cube iceberg water'
+],[
+'🥢',
+'chopsticks',
+'hashi jeotgarak kuaizi food'
+],[
+'🍽',
+'fork and knife with plate',
+'cooking fork knife plate food eat meal lunch dinner restaurant'
+],[
+'🍴',
+'fork and knife',
+'cooking cutlery fork knife kitchen'
+],[
+'🥄',
+'spoon',
+'tableware cutlery kitchen'
+],[
+'🔪',
+'kitchen knife',
+'cooking hocho knife tool weapon blade cutlery kitchen'
+],[
+'🏺',
+'amphora',
+'Aquarius cooking drink jug zodiac vase jar'
+],[
+'🌍',
+'globe showing Europe-Africa',
+'Africa earth Europe globe world globe showing europe africa international'
+],[
+'🌎',
+'globe showing Americas',
+'Americas earth globe world globe showing americas USA international'
+],[
+'🌏',
+'globe showing Asia-Australia',
+'Asia Australia earth globe world globe showing asia australia east international'
+],[
+'🌐',
+'globe with meridians',
+'earth globe meridians world international internet interweb i18n'
+],[
+'🗺',
+'world map',
+'map world location direction'
+],[
+'🗾',
+'map of Japan',
+'Japan map map of japan nation country japanese asia'
+],[
+'🧭',
+'compass',
+'magnetic navigation orienteering'
+],[
+'🏔',
+'snow-capped mountain',
+'cold mountain snow snow capped mountain photo nature environment winter'
+],[
+'⛰',
+'mountain',
+'photo nature environment'
+],[
+'🌋',
+'volcano',
+'eruption mountain photo nature disaster'
+],[
+'🗻',
+'mount fuji',
+'fuji mountain photo nature japanese'
+],[
+'🏕',
+'camping',
+'photo outdoors tent'
+],[
+'🏖',
+'beach with umbrella',
+'beach umbrella weather summer sunny sand mojito'
+],[
+'🏜',
+'desert',
+'photo warm saharah'
+],[
+'🏝',
+'desert island',
+'desert island photo tropical mojito'
+],[
+'🏞',
+'national park',
+'park photo environment nature'
+],[
+'🏟',
+'stadium',
+'photo place sports concert venue'
+],[
+'🏛',
+'classical building',
+'classical art culture history'
+],[
+'🏗',
+'building construction',
+'construction wip working progress'
+],[
+'🧱',
+'brick',
+'bricks clay mortar wall'
+],[
+'🪨',
+'rock',
+'boulder heavy solid stone'
+],[
+'🪵',
+'wood',
+'log lumber timber nature trunk'
+],[
+'🛖',
+'hut',
+'house roundhouse yurt structure'
+],[
+'🏘',
+'houses',
+'buildings photo'
+],[
+'🏚',
+'derelict house',
+'derelict house abandon evict broken building'
+],[
+'🏠',
+'house',
+'home building'
+],[
+'🏡',
+'house with garden',
+'garden home house plant nature'
+],[
+'🏢',
+'office building',
+'building bureau work'
+],[
+'🏣',
+'Japanese post office',
+'Japanese post japanese post office building envelope communication'
+],[
+'🏤',
+'post office',
+'European post building email'
+],[
+'🏥',
+'hospital',
+'doctor medicine building health surgery'
+],[
+'🏦',
+'bank',
+'building money sales cash business enterprise'
+],[
+'🏨',
+'hotel',
+'building accomodation checkin'
+],[
+'🏩',
+'love hotel',
+'hotel love like affection dating'
+],[
+'🏪',
+'convenience store',
+'convenience store building shopping groceries'
+],[
+'🏫',
+'school',
+'building student education learn teach'
+],[
+'🏬',
+'department store',
+'department store building shopping mall'
+],[
+'🏭',
+'factory',
+'building industry pollution smoke'
+],[
+'🏯',
+'Japanese castle',
+'castle Japanese japanese castle photo building'
+],[
+'🏰',
+'castle',
+'European building royalty history'
+],[
+'💒',
+'wedding',
+'chapel romance love like affection couple marriage bride groom'
+],[
+'🗼',
+'Tokyo tower',
+'Tokyo tower tokyo tower photo japanese'
+],[
+'🗽',
+'Statue of Liberty',
+'liberty statue statue of liberty american newyork'
+],[
+'⛪',
+'church',
+'Christian cross religion building christ'
+],[
+'🕌',
+'mosque',
+'islam Muslim religion worship minaret'
+],[
+'🛕',
+'hindu temple',
+'hindu temple religion'
+],[
+'🕍',
+'synagogue',
+'Jew Jewish religion temple judaism worship jewish'
+],[
+'⛩',
+'shinto shrine',
+'religion shinto shrine temple japan kyoto'
+],[
+'🕋',
+'kaaba',
+'islam Muslim religion mecca mosque'
+],[
+'⛲',
+'fountain',
+'photo summer water fresh'
+],[
+'⛺',
+'tent',
+'camping photo outdoors'
+],[
+'🌁',
+'foggy',
+'fog photo mountain'
+],[
+'🌃',
+'night with stars',
+'night star evening city downtown'
+],[
+'🏙',
+'cityscape',
+'city photo night life urban'
+],[
+'🌄',
+'sunrise over mountains',
+'morning mountain sun sunrise view vacation photo'
+],[
+'🌅',
+'sunrise',
+'morning sun view vacation photo'
+],[
+'🌆',
+'cityscape at dusk',
+'city dusk evening landscape sunset photo sky buildings'
+],[
+'🌇',
+'sunset',
+'dusk sun photo good morning dawn'
+],[
+'🌉',
+'bridge at night',
+'bridge night photo sanfrancisco'
+],[
+'♨',
+'hot springs',
+'hot hotsprings springs steaming bath warm relax'
+],[
+'🎠',
+'carousel horse',
+'carousel horse photo carnival'
+],[
+'🎡',
+'ferris wheel',
+'amusement park ferris wheel photo carnival londoneye'
+],[
+'🎢',
+'roller coaster',
+'amusement park coaster roller carnival playground photo fun'
+],[
+'💈',
+'barber pole',
+'barber haircut pole hair salon style'
+],[
+'🎪',
+'circus tent',
+'circus tent festival carnival party'
+],[
+'🚂',
+'locomotive',
+'engine railway steam train transportation vehicle'
+],[
+'🚃',
+'railway car',
+'car electric railway train tram trolleybus transportation vehicle'
+],[
+'🚄',
+'high-speed train',
+'railway shinkansen speed train high speed train transportation vehicle'
+],[
+'🚅',
+'bullet train',
+'bullet railway shinkansen speed train transportation vehicle fast public travel'
+],[
+'🚆',
+'train',
+'railway transportation vehicle'
+],[
+'🚇',
+'metro',
+'subway transportation blue-square mrt underground tube'
+],[
+'🚈',
+'light rail',
+'railway transportation vehicle'
+],[
+'🚉',
+'station',
+'railway train transportation vehicle public'
+],[
+'🚊',
+'tram',
+'trolleybus transportation vehicle'
+],[
+'🚝',
+'monorail',
+'vehicle transportation'
+],[
+'🚞',
+'mountain railway',
+'car mountain railway transportation vehicle'
+],[
+'🚋',
+'tram car',
+'car tram trolleybus transportation vehicle carriage public travel'
+],[
+'🚌',
+'bus',
+'vehicle car transportation'
+],[
+'🚍',
+'oncoming bus',
+'bus oncoming vehicle transportation'
+],[
+'🚎',
+'trolleybus',
+'bus tram trolley bart transportation vehicle'
+],[
+'🚐',
+'minibus',
+'bus vehicle car transportation'
+],[
+'🚑',
+'ambulance',
+'vehicle health 911 hospital'
+],[
+'🚒',
+'fire engine',
+'engine fire truck transportation cars vehicle'
+],[
+'🚓',
+'police car',
+'car patrol police vehicle cars transportation law legal enforcement'
+],[
+'🚔',
+'oncoming police car',
+'car oncoming police vehicle law legal enforcement 911'
+],[
+'🚕',
+'taxi',
+'vehicle uber cars transportation'
+],[
+'🚖',
+'oncoming taxi',
+'oncoming taxi vehicle cars uber'
+],[
+'🚗',
+'automobile',
+'car red transportation vehicle'
+],[
+'🚘',
+'oncoming automobile',
+'automobile car oncoming vehicle transportation'
+],[
+'🚙',
+'sport utility vehicle',
+'recreational sport utility transportation vehicle'
+],[
+'🛻',
+'pickup truck',
+'pick-up pickup truck car transportation'
+],[
+'🚚',
+'delivery truck',
+'delivery truck cars transportation'
+],[
+'🚛',
+'articulated lorry',
+'lorry semi truck vehicle cars transportation express'
+],[
+'🚜',
+'tractor',
+'vehicle car farming agriculture'
+],[
+'🏎',
+'racing car',
+'car racing sports race fast formula f1'
+],[
+'🏍',
+'motorcycle',
+'racing race sports fast'
+],[
+'🛵',
+'motor scooter',
+'motor scooter vehicle vespa sasha'
+],[
+'🦽',
+'manual wheelchair',
+'accessibility'
+],[
+'🦼',
+'motorized wheelchair',
+'accessibility'
+],[
+'🛺',
+'auto rickshaw',
+'tuk tuk move transportation'
+],[
+'🚲',
+'bicycle',
+'bike sports exercise hipster'
+],[
+'🛴',
+'kick scooter',
+'kick scooter vehicle razor'
+],[
+'🛹',
+'skateboard',
+'board'
+],[
+'🛼',
+'roller skate',
+'roller skate footwear sports'
+],[
+'🚏',
+'bus stop',
+'bus busstop stop transportation wait'
+],[
+'🛣',
+'motorway',
+'highway road cupertino interstate'
+],[
+'🛤',
+'railway track',
+'railway train transportation'
+],[
+'🛢',
+'oil drum',
+'drum oil barrell'
+],[
+'⛽',
+'fuel pump',
+'diesel fuel fuelpump gas pump station gas station petroleum'
+],[
+'🚨',
+'police car light',
+'beacon car light police revolving ambulance 911 emergency alert error pinged law legal'
+],[
+'🚥',
+'horizontal traffic light',
+'light signal traffic transportation'
+],[
+'🚦',
+'vertical traffic light',
+'light signal traffic transportation driving'
+],[
+'🛑',
+'stop sign',
+'octagonal sign stop'
+],[
+'🚧',
+'construction',
+'barrier wip progress caution warning'
+],[
+'⚓',
+'anchor',
+'ship tool ferry sea boat'
+],[
+'⛵',
+'sailboat',
+'boat resort sea yacht ship summer transportation water sailing'
+],[
+'🛶',
+'canoe',
+'boat paddle water ship'
+],[
+'🚤',
+'speedboat',
+'boat ship transportation vehicle summer'
+],[
+'🛳',
+'passenger ship',
+'passenger ship yacht cruise ferry'
+],[
+'⛴',
+'ferry',
+'boat passenger ship yacht'
+],[
+'🛥',
+'motor boat',
+'boat motorboat ship'
+],[
+'🚢',
+'ship',
+'boat passenger transportation titanic deploy'
+],[
+'✈',
+'airplane',
+'aeroplane vehicle transportation flight fly'
+],[
+'🛩',
+'small airplane',
+'aeroplane airplane flight transportation fly vehicle'
+],[
+'🛫',
+'airplane departure',
+'aeroplane airplane check-in departure departures airport flight landing'
+],[
+'🛬',
+'airplane arrival',
+'aeroplane airplane arrivals arriving landing airport flight boarding'
+],[
+'🪂',
+'parachute',
+'hang-glide parasail skydive fly glide'
+],[
+'💺',
+'seat',
+'chair sit airplane transport bus flight fly'
+],[
+'🚁',
+'helicopter',
+'vehicle transportation fly'
+],[
+'🚟',
+'suspension railway',
+'railway suspension vehicle transportation'
+],[
+'🚠',
+'mountain cableway',
+'cable gondola mountain transportation vehicle ski'
+],[
+'🚡',
+'aerial tramway',
+'aerial cable car gondola tramway transportation vehicle ski'
+],[
+'🛰',
+'satellite',
+'space communication gps orbit spaceflight NASA ISS'
+],[
+'🚀',
+'rocket',
+'space launch ship staffmode NASA outer space fly'
+],[
+'🛸',
+'flying saucer',
+'UFO transportation vehicle ufo'
+],[
+'🛎',
+'bellhop bell',
+'bell bellhop hotel service'
+],[
+'🧳',
+'luggage',
+'packing travel'
+],[
+'⌛',
+'hourglass done',
+'sand timer time clock oldschool limit exam quiz test'
+],[
+'⏳',
+'hourglass not done',
+'hourglass sand timer oldschool time countdown'
+],[
+'⌚',
+'watch',
+'clock time accessories'
+],[
+'⏰',
+'alarm clock',
+'alarm clock time wake'
+],[
+'⏱',
+'stopwatch',
+'clock time deadline'
+],[
+'⏲',
+'timer clock',
+'clock timer alarm'
+],[
+'🕰',
+'mantelpiece clock',
+'clock time'
+],[
+'🕛',
+'twelve o’clock',
+'00 12 12:00 clock o’clock twelve twelve o clock time noon midnight midday late early schedule'
+],[
+'🕧',
+'twelve-thirty',
+'12 12:30 clock thirty twelve twelve thirty time late early schedule'
+],[
+'🕐',
+'one o’clock',
+'00 1 1:00 clock o’clock one one o clock time late early schedule'
+],[
+'🕜',
+'one-thirty',
+'1 1:30 clock one thirty one thirty time late early schedule'
+],[
+'🕑',
+'two o’clock',
+'00 2 2:00 clock o’clock two two o clock time late early schedule'
+],[
+'🕝',
+'two-thirty',
+'2 2:30 clock thirty two two thirty time late early schedule'
+],[
+'🕒',
+'three o’clock',
+'00 3 3:00 clock o’clock three three o clock time late early schedule'
+],[
+'🕞',
+'three-thirty',
+'3 3:30 clock thirty three three thirty time late early schedule'
+],[
+'🕓',
+'four o’clock',
+'00 4 4:00 clock four o’clock four o clock time late early schedule'
+],[
+'🕟',
+'four-thirty',
+'4 4:30 clock four thirty four thirty time late early schedule'
+],[
+'🕔',
+'five o’clock',
+'00 5 5:00 clock five o’clock five o clock time late early schedule'
+],[
+'🕠',
+'five-thirty',
+'5 5:30 clock five thirty five thirty time late early schedule'
+],[
+'🕕',
+'six o’clock',
+'00 6 6:00 clock o’clock six six o clock time late early schedule dawn dusk'
+],[
+'🕡',
+'six-thirty',
+'6 6:30 clock six thirty six thirty time late early schedule'
+],[
+'🕖',
+'seven o’clock',
+'00 7 7:00 clock o’clock seven seven o clock time late early schedule'
+],[
+'🕢',
+'seven-thirty',
+'7 7:30 clock seven thirty seven thirty time late early schedule'
+],[
+'🕗',
+'eight o’clock',
+'00 8 8:00 clock eight o’clock eight o clock time late early schedule'
+],[
+'🕣',
+'eight-thirty',
+'8 8:30 clock eight thirty eight thirty time late early schedule'
+],[
+'🕘',
+'nine o’clock',
+'00 9 9:00 clock nine o’clock nine o clock time late early schedule'
+],[
+'🕤',
+'nine-thirty',
+'9 9:30 clock nine thirty nine thirty time late early schedule'
+],[
+'🕙',
+'ten o’clock',
+'00 10 10:00 clock o’clock ten ten o clock time late early schedule'
+],[
+'🕥',
+'ten-thirty',
+'10 10:30 clock ten thirty ten thirty time late early schedule'
+],[
+'🕚',
+'eleven o’clock',
+'00 11 11:00 clock eleven o’clock eleven o clock time late early schedule'
+],[
+'🕦',
+'eleven-thirty',
+'11 11:30 clock eleven thirty eleven thirty time late early schedule'
+],[
+'🌑',
+'new moon',
+'dark moon nature twilight planet space night evening sleep'
+],[
+'🌒',
+'waxing crescent moon',
+'crescent moon waxing nature twilight planet space night evening sleep'
+],[
+'🌓',
+'first quarter moon',
+'moon quarter nature twilight planet space night evening sleep'
+],[
+'🌔',
+'waxing gibbous moon',
+'gibbous moon waxing nature night sky gray twilight planet space evening sleep'
+],[
+'🌕',
+'full moon',
+'full moon nature yellow twilight planet space night evening sleep'
+],[
+'🌖',
+'waning gibbous moon',
+'gibbous moon waning nature twilight planet space night evening sleep waxing gibbous moon'
+],[
+'🌗',
+'last quarter moon',
+'moon quarter nature twilight planet space night evening sleep'
+],[
+'🌘',
+'waning crescent moon',
+'crescent moon waning nature twilight planet space night evening sleep'
+],[
+'🌙',
+'crescent moon',
+'crescent moon night sleep sky evening magic'
+],[
+'🌚',
+'new moon face',
+'face moon nature twilight planet space night evening sleep'
+],[
+'🌛',
+'first quarter moon face',
+'face moon quarter nature twilight planet space night evening sleep'
+],[
+'🌜',
+'last quarter moon face',
+'face moon quarter nature twilight planet space night evening sleep'
+],[
+'🌡',
+'thermometer',
+'weather temperature hot cold'
+],[
+'☀',
+'sun',
+'bright rays sunny weather nature brightness summer beach spring'
+],[
+'🌝',
+'full moon face',
+'bright face full moon nature twilight planet space night evening sleep'
+],[
+'🌞',
+'sun with face',
+'bright face sun nature morning sky'
+],[
+'🪐',
+'ringed planet',
+'saturn saturnine outerspace'
+],[
+'⭐',
+'star',
+'night yellow'
+],[
+'🌟',
+'glowing star',
+'glittery glow shining sparkle star night awesome good magic'
+],[
+'🌠',
+'shooting star',
+'falling shooting star night photo'
+],[
+'🌌',
+'milky way',
+'space photo stars'
+],[
+'☁',
+'cloud',
+'weather sky'
+],[
+'⛅',
+'sun behind cloud',
+'cloud sun weather nature cloudy morning fall spring'
+],[
+'⛈',
+'cloud with lightning and rain',
+'cloud rain thunder weather lightning'
+],[
+'🌤',
+'sun behind small cloud',
+'cloud sun weather'
+],[
+'🌥',
+'sun behind large cloud',
+'cloud sun weather'
+],[
+'🌦',
+'sun behind rain cloud',
+'cloud rain sun weather'
+],[
+'🌧',
+'cloud with rain',
+'cloud rain weather'
+],[
+'🌨',
+'cloud with snow',
+'cloud cold snow weather'
+],[
+'🌩',
+'cloud with lightning',
+'cloud lightning weather thunder'
+],[
+'🌪',
+'tornado',
+'cloud whirlwind weather cyclone twister'
+],[
+'🌫',
+'fog',
+'cloud weather'
+],[
+'🌬',
+'wind face',
+'blow cloud face wind gust air'
+],[
+'🌀',
+'cyclone',
+'dizzy hurricane twister typhoon weather swirl blue cloud vortex spiral whirlpool spin tornado'
+],[
+'🌈',
+'rainbow',
+'rain nature happy unicorn face photo sky spring'
+],[
+'🌂',
+'closed umbrella',
+'clothing rain umbrella weather drizzle'
+],[
+'☂',
+'umbrella',
+'clothing rain weather spring'
+],[
+'☔',
+'umbrella with rain drops',
+'clothing drop rain umbrella rainy weather spring'
+],[
+'⛱',
+'umbrella on ground',
+'rain sun umbrella weather summer'
+],[
+'⚡',
+'high voltage',
+'danger electric lightning voltage zap thunder weather lightning bolt fast'
+],[
+'❄',
+'snowflake',
+'cold snow winter season weather christmas xmas'
+],[
+'☃',
+'snowman',
+'cold snow winter season weather christmas xmas frozen'
+],[
+'⛄',
+'snowman without snow',
+'cold snow snowman winter season weather christmas xmas frozen without snow'
+],[
+'☄',
+'comet',
+'space'
+],[
+'🔥',
+'fire',
+'flame tool hot cook'
+],[
+'💧',
+'droplet',
+'cold comic drop sweat water drip faucet spring'
+],[
+'🌊',
+'water wave',
+'ocean water wave sea nature tsunami disaster'
+],[
+'🎃',
+'jack-o-lantern',
+'celebration halloween jack lantern jack o lantern light pumpkin creepy fall'
+],[
+'🎄',
+'Christmas tree',
+'celebration Christmas tree christmas tree festival vacation december xmas'
+],[
+'🎆',
+'fireworks',
+'celebration photo festival carnival congratulations'
+],[
+'🎇',
+'sparkler',
+'celebration fireworks sparkle stars night shine'
+],[
+'🧨',
+'firecracker',
+'dynamite explosive fireworks boom explode explosion'
+],[
+'✨',
+'sparkles',
+'* sparkle star stars shine shiny cool awesome good magic'
+],[
+'🎈',
+'balloon',
+'celebration party birthday circus'
+],[
+'🎉',
+'party popper',
+'celebration party popper tada congratulations birthday magic circus'
+],[
+'🎊',
+'confetti ball',
+'ball celebration confetti festival party birthday circus'
+],[
+'🎋',
+'tanabata tree',
+'banner celebration Japanese tree plant nature branch summer'
+],[
+'🎍',
+'pine decoration',
+'bamboo celebration Japanese pine plant nature vegetable panda'
+],[
+'🎎',
+'Japanese dolls',
+'celebration doll festival Japanese japanese dolls japanese toy kimono'
+],[
+'🎏',
+'carp streamer',
+'carp celebration streamer fish japanese koinobori banner'
+],[
+'🎐',
+'wind chime',
+'bell celebration chime wind nature ding spring'
+],[
+'🎑',
+'moon viewing ceremony',
+'celebration ceremony moon photo japan asia tsukimi'
+],[
+'🧧',
+'red envelope',
+'gift good luck hóngbāo lai see money'
+],[
+'🎀',
+'ribbon',
+'celebration decoration pink girl bowtie'
+],[
+'🎁',
+'wrapped gift',
+'box celebration gift present wrapped birthday christmas xmas'
+],[
+'🎗',
+'reminder ribbon',
+'celebration reminder ribbon sports cause support awareness'
+],[
+'🎟',
+'admission tickets',
+'admission ticket sports concert entrance'
+],[
+'🎫',
+'ticket',
+'admission event concert pass'
+],[
+'🎖',
+'military medal',
+'celebration medal military award winning army'
+],[
+'🏆',
+'trophy',
+'prize win award contest place ftw ceremony'
+],[
+'🏅',
+'sports medal',
+'medal award winning'
+],[
+'🥇',
+'1st place medal',
+'first gold medal award winning'
+],[
+'🥈',
+'2nd place medal',
+'medal second silver award'
+],[
+'🥉',
+'3rd place medal',
+'bronze medal third award'
+],[
+'⚽',
+'soccer ball',
+'ball football soccer sports'
+],[
+'⚾',
+'baseball',
+'ball sports balls'
+],[
+'🥎',
+'softball',
+'ball glove underarm sports balls'
+],[
+'🏀',
+'basketball',
+'ball hoop sports balls NBA'
+],[
+'🏐',
+'volleyball',
+'ball game sports balls'
+],[
+'🏈',
+'american football',
+'american ball football sports balls NFL'
+],[
+'🏉',
+'rugby football',
+'ball football rugby sports team'
+],[
+'🎾',
+'tennis',
+'ball racquet sports balls green'
+],[
+'🥏',
+'flying disc',
+'ultimate sports frisbee'
+],[
+'🎳',
+'bowling',
+'ball game sports fun play'
+],[
+'🏏',
+'cricket game',
+'ball bat game sports'
+],[
+'🏑',
+'field hockey',
+'ball field game hockey stick sports'
+],[
+'🏒',
+'ice hockey',
+'game hockey ice puck stick sports'
+],[
+'🥍',
+'lacrosse',
+'ball goal stick sports'
+],[
+'🏓',
+'ping pong',
+'ball bat game paddle table tennis sports pingpong'
+],[
+'🏸',
+'badminton',
+'birdie game racquet shuttlecock sports'
+],[
+'🥊',
+'boxing glove',
+'boxing glove sports fighting'
+],[
+'🥋',
+'martial arts uniform',
+'judo karate martial arts taekwondo uniform'
+],[
+'🥅',
+'goal net',
+'goal net sports'
+],[
+'⛳',
+'flag in hole',
+'golf hole sports business flag summer'
+],[
+'⛸',
+'ice skate',
+'ice skate sports'
+],[
+'🎣',
+'fishing pole',
+'fish pole food hobby summer'
+],[
+'🤿',
+'diving mask',
+'diving scuba snorkeling sport ocean'
+],[
+'🎽',
+'running shirt',
+'athletics running sash shirt play pageant'
+],[
+'🎿',
+'skis',
+'ski snow sports winter cold'
+],[
+'🛷',
+'sled',
+'sledge sleigh luge toboggan'
+],[
+'🥌',
+'curling stone',
+'game rock sports'
+],[
+'🎯',
+'bullseye',
+'dart direct hit game hit target play bar'
+],[
+'🪀',
+'yo-yo',
+'fluctuate toy yo yo'
+],[
+'🪁',
+'kite',
+'fly soar wind'
+],[
+'🎱',
+'pool 8 ball',
+'8 ball billiard eight game pool hobby luck magic'
+],[
+'🔮',
+'crystal ball',
+'ball crystal fairy tale fantasy fortune tool disco party magic circus fortune teller'
+],[
+'🪄',
+'magic wand',
+'magic witch wizard supernature power'
+],[
+'🧿',
+'nazar amulet',
+'bead charm evil-eye nazar talisman'
+],[
+'🎮',
+'video game',
+'controller game play console PS4'
+],[
+'🕹',
+'joystick',
+'game video game play'
+],[
+'🎰',
+'slot machine',
+'game slot bet gamble vegas fruit machine luck casino'
+],[
+'🎲',
+'game die',
+'dice die game random tabletop play luck'
+],[
+'🧩',
+'puzzle piece',
+'clue interlocking jigsaw piece puzzle'
+],[
+'🧸',
+'teddy bear',
+'plaything plush stuffed toy'
+],[
+'🪅',
+'piñata',
+'celebration party pinata mexico candy'
+],[
+'🪆',
+'nesting dolls',
+'doll nesting russia matryoshka toy'
+],[
+'♠',
+'spade suit',
+'card game poker cards suits magic'
+],[
+'♥',
+'heart suit',
+'card game poker cards magic suits'
+],[
+'♦',
+'diamond suit',
+'card game poker cards magic suits'
+],[
+'♣',
+'club suit',
+'card game poker cards magic suits'
+],[
+'♟',
+'chess pawn',
+'chess dupe expendable'
+],[
+'🃏',
+'joker',
+'card game wildcard poker cards play magic'
+],[
+'🀄',
+'mahjong red dragon',
+'game mahjong red play chinese kanji'
+],[
+'🎴',
+'flower playing cards',
+'card flower game Japanese playing sunset red'
+],[
+'🎭',
+'performing arts',
+'art mask performing theater theatre acting drama'
+],[
+'🖼',
+'framed picture',
+'art frame museum painting picture photography'
+],[
+'🎨',
+'artist palette',
+'art museum painting palette design paint draw colors'
+],[
+'🧵',
+'thread',
+'needle sewing spool string'
+],[
+'🪡',
+'sewing needle',
+'embroidery needle sewing stitches sutures tailoring'
+],[
+'🧶',
+'yarn',
+'ball crochet knit'
+],[
+'🪢',
+'knot',
+'rope tangled tie twine twist scout'
+],[
+'👓',
+'glasses',
+'clothing eye eyeglasses eyewear fashion accessories eyesight nerdy dork geek'
+],[
+'🕶',
+'sunglasses',
+'dark eye eyewear glasses face cool accessories'
+],[
+'🥽',
+'goggles',
+'eye protection swimming welding eyes protection safety'
+],[
+'🥼',
+'lab coat',
+'doctor experiment scientist chemist'
+],[
+'🦺',
+'safety vest',
+'emergency safety vest protection'
+],[
+'👔',
+'necktie',
+'clothing tie shirt suitup formal fashion cloth business'
+],[
+'👕',
+'t-shirt',
+'clothing shirt tshirt t shirt fashion cloth casual tee'
+],[
+'👖',
+'jeans',
+'clothing pants trousers fashion shopping'
+],[
+'🧣',
+'scarf',
+'neck winter clothes'
+],[
+'🧤',
+'gloves',
+'hand hands winter clothes'
+],[
+'🧥',
+'coat',
+'jacket'
+],[
+'🧦',
+'socks',
+'stocking stockings clothes'
+],[
+'👗',
+'dress',
+'clothing clothes fashion shopping'
+],[
+'👘',
+'kimono',
+'clothing dress fashion women female japanese'
+],[
+'🥻',
+'sari',
+'clothing dress'
+],[
+'🩱',
+'one-piece swimsuit',
+'bathing suit one piece swimsuit fashion'
+],[
+'🩲',
+'briefs',
+'bathing suit one-piece swimsuit underwear clothing'
+],[
+'🩳',
+'shorts',
+'bathing suit pants underwear clothing'
+],[
+'👙',
+'bikini',
+'clothing swim swimming female woman girl fashion beach summer'
+],[
+'👚',
+'woman’s clothes',
+'clothing woman woman s clothes fashion shopping bags female'
+],[
+'👛',
+'purse',
+'clothing coin fashion accessories money sales shopping'
+],[
+'👜',
+'handbag',
+'bag clothing purse fashion accessory accessories shopping'
+],[
+'👝',
+'clutch bag',
+'bag clothing pouch accessories shopping'
+],[
+'🛍',
+'shopping bags',
+'bag hotel shopping mall buy purchase'
+],[
+'🎒',
+'backpack',
+'bag rucksack satchel school student education'
+],[
+'🩴',
+'thong sandal',
+'beach sandals sandals thong sandals thongs zōri footwear summer'
+],[
+'👞',
+'man’s shoe',
+'clothing man shoe man s shoe fashion male'
+],[
+'👟',
+'running shoe',
+'athletic clothing shoe sneaker shoes sports sneakers'
+],[
+'🥾',
+'hiking boot',
+'backpacking boot camping hiking'
+],[
+'🥿',
+'flat shoe',
+'ballet flat slip-on slipper ballet'
+],[
+'👠',
+'high-heeled shoe',
+'clothing heel shoe woman high heeled shoe fashion shoes female pumps stiletto'
+],[
+'👡',
+'woman’s sandal',
+'clothing sandal shoe woman woman s sandal shoes fashion flip flops'
+],[
+'🩰',
+'ballet shoes',
+'ballet dance'
+],[
+'👢',
+'woman’s boot',
+'boot clothing shoe woman woman s boot shoes fashion'
+],[
+'👑',
+'crown',
+'clothing king queen kod leader royalty lord'
+],[
+'👒',
+'woman’s hat',
+'clothing hat woman woman s hat fashion accessories female lady spring'
+],[
+'🎩',
+'top hat',
+'clothing hat top tophat magic gentleman classy circus'
+],[
+'🎓',
+'graduation cap',
+'cap celebration clothing graduation hat school college degree university legal learn education'
+],[
+'🧢',
+'billed cap',
+'baseball cap cap baseball'
+],[
+'🪖',
+'military helmet',
+'army helmet military soldier warrior protection'
+],[
+'⛑',
+'rescue worker’s helmet',
+'aid cross face hat helmet rescue worker s helmet construction build'
+],[
+'📿',
+'prayer beads',
+'beads clothing necklace prayer religion dhikr religious'
+],[
+'💄',
+'lipstick',
+'cosmetics makeup female girl fashion woman'
+],[
+'💍',
+'ring',
+'diamond wedding propose marriage valentines fashion jewelry gem engagement'
+],[
+'💎',
+'gem stone',
+'diamond gem jewel blue ruby jewelry'
+],[
+'🔇',
+'muted speaker',
+'mute quiet silent speaker sound volume silence'
+],[
+'🔈',
+'speaker low volume',
+'soft sound volume silence broadcast'
+],[
+'🔉',
+'speaker medium volume',
+'medium volume speaker broadcast'
+],[
+'🔊',
+'speaker high volume',
+'loud volume noise noisy speaker broadcast'
+],[
+'📢',
+'loudspeaker',
+'loud public address volume sound'
+],[
+'📣',
+'megaphone',
+'cheering sound speaker volume'
+],[
+'📯',
+'postal horn',
+'horn post postal instrument music'
+],[
+'🔔',
+'bell',
+'sound notification christmas xmas chime'
+],[
+'🔕',
+'bell with slash',
+'bell forbidden mute quiet silent sound volume'
+],[
+'🎼',
+'musical score',
+'music score treble clef compose'
+],[
+'🎵',
+'musical note',
+'music note score tone sound'
+],[
+'🎶',
+'musical notes',
+'music note notes score'
+],[
+'🎙',
+'studio microphone',
+'mic microphone music studio sing recording artist talkshow'
+],[
+'🎚',
+'level slider',
+'level music slider scale'
+],[
+'🎛',
+'control knobs',
+'control knobs music dial'
+],[
+'🎤',
+'microphone',
+'karaoke mic sound music PA sing talkshow'
+],[
+'🎧',
+'headphone',
+'earbud music score gadgets'
+],[
+'📻',
+'radio',
+'video communication music podcast program'
+],[
+'🎷',
+'saxophone',
+'instrument music sax jazz blues'
+],[
+'🪗',
+'accordion',
+'accordian concertina squeeze box music'
+],[
+'🎸',
+'guitar',
+'instrument music'
+],[
+'🎹',
+'musical keyboard',
+'instrument keyboard music piano compose'
+],[
+'🎺',
+'trumpet',
+'instrument music brass'
+],[
+'🎻',
+'violin',
+'instrument music orchestra symphony'
+],[
+'🪕',
+'banjo',
+'music stringed instructment'
+],[
+'🥁',
+'drum',
+'drumsticks music instrument snare'
+],[
+'🪘',
+'long drum',
+'beat conga drum rhythm music'
+],[
+'📱',
+'mobile phone',
+'cell mobile phone telephone technology apple gadgets dial'
+],[
+'📲',
+'mobile phone with arrow',
+'arrow cell mobile phone receive iphone incoming'
+],[
+'☎',
+'telephone',
+'phone technology communication dial'
+],[
+'📞',
+'telephone receiver',
+'phone receiver telephone technology communication dial'
+],[
+'📟',
+'pager',
+'bbcall oldschool 90s'
+],[
+'📠',
+'fax machine',
+'fax communication technology'
+],[
+'🔋',
+'battery',
+'power energy sustain'
+],[
+'🔌',
+'electric plug',
+'electric electricity plug charger power'
+],[
+'💻',
+'laptop',
+'computer pc personal technology screen display monitor'
+],[
+'🖥',
+'desktop computer',
+'computer desktop technology computing screen'
+],[
+'🖨',
+'printer',
+'computer paper ink'
+],[
+'⌨',
+'keyboard',
+'computer technology type input text'
+],[
+'🖱',
+'computer mouse',
+'computer click'
+],[
+'🖲',
+'trackball',
+'computer technology trackpad'
+],[
+'💽',
+'computer disk',
+'computer disk minidisk optical technology record data 90s'
+],[
+'💾',
+'floppy disk',
+'computer disk floppy oldschool technology save 90s 80s'
+],[
+'💿',
+'optical disk',
+'cd computer disk optical technology dvd disc 90s'
+],[
+'📀',
+'dvd',
+'blu-ray computer disk optical cd disc'
+],[
+'🧮',
+'abacus',
+'calculation'
+],[
+'🎥',
+'movie camera',
+'camera cinema movie film record'
+],[
+'🎞',
+'film frames',
+'cinema film frames movie'
+],[
+'📽',
+'film projector',
+'cinema film movie projector video tape record'
+],[
+'🎬',
+'clapper board',
+'clapper movie film record'
+],[
+'📺',
+'television',
+'tv video technology program oldschool show'
+],[
+'📷',
+'camera',
+'video gadgets photography'
+],[
+'📸',
+'camera with flash',
+'camera flash video photography gadgets'
+],[
+'📹',
+'video camera',
+'camera video film record'
+],[
+'📼',
+'videocassette',
+'tape vhs video record oldschool 90s 80s'
+],[
+'🔍',
+'magnifying glass tilted left',
+'glass magnifying search tool zoom find detective'
+],[
+'🔎',
+'magnifying glass tilted right',
+'glass magnifying search tool zoom find detective'
+],[
+'🕯',
+'candle',
+'light fire wax'
+],[
+'💡',
+'light bulb',
+'bulb comic electric idea light electricity'
+],[
+'🔦',
+'flashlight',
+'electric light tool torch dark camping sight night'
+],[
+'🏮',
+'red paper lantern',
+'bar lantern light red paper halloween spooky'
+],[
+'🪔',
+'diya lamp',
+'diya lamp oil lighting'
+],[
+'📔',
+'notebook with decorative cover',
+'book cover decorated notebook classroom notes record paper study'
+],[
+'📕',
+'closed book',
+'book closed read library knowledge textbook learn'
+],[
+'📖',
+'open book',
+'book open read library knowledge literature learn study'
+],[
+'📗',
+'green book',
+'book green read library knowledge study'
+],[
+'📘',
+'blue book',
+'blue book read library knowledge learn study'
+],[
+'📙',
+'orange book',
+'book orange read library knowledge textbook study'
+],[
+'📚',
+'books',
+'book literature library study'
+],[
+'📓',
+'notebook',
+'stationery record notes paper study'
+],[
+'📒',
+'ledger',
+'notebook notes paper'
+],[
+'📃',
+'page with curl',
+'curl document page documents office paper'
+],[
+'📜',
+'scroll',
+'paper documents ancient history'
+],[
+'📄',
+'page facing up',
+'document page documents office paper information'
+],[
+'📰',
+'newspaper',
+'news paper press headline'
+],[
+'🗞',
+'rolled-up newspaper',
+'news newspaper paper rolled rolled up newspaper press headline'
+],[
+'📑',
+'bookmark tabs',
+'bookmark mark marker tabs favorite save order tidy'
+],[
+'🔖',
+'bookmark',
+'mark favorite label save'
+],[
+'🏷',
+'label',
+'sale tag'
+],[
+'💰',
+'money bag',
+'bag dollar money moneybag payment coins sale'
+],[
+'🪙',
+'coin',
+'gold metal money silver treasure currency'
+],[
+'💴',
+'yen banknote',
+'banknote bill currency money note yen sales japanese dollar'
+],[
+'💵',
+'dollar banknote',
+'banknote bill currency dollar money note sales'
+],[
+'💶',
+'euro banknote',
+'banknote bill currency euro money note sales dollar'
+],[
+'💷',
+'pound banknote',
+'banknote bill currency money note pound british sterling sales bills uk england'
+],[
+'💸',
+'money with wings',
+'banknote bill fly money wings dollar bills payment sale'
+],[
+'💳',
+'credit card',
+'card credit money sales dollar bill payment shopping'
+],[
+'🧾',
+'receipt',
+'accounting bookkeeping evidence proof expenses'
+],[
+'💹',
+'chart increasing with yen',
+'chart graph growth money yen green-square presentation stats'
+],[
+'✉',
+'envelope',
+'email letter postal inbox communication'
+],[
+'📧',
+'e-mail',
+'email letter mail e mail communication inbox'
+],[
+'📨',
+'incoming envelope',
+'e-mail email envelope incoming letter receive inbox'
+],[
+'📩',
+'envelope with arrow',
+'arrow e-mail email envelope outgoing communication'
+],[
+'📤',
+'outbox tray',
+'box letter mail outbox sent tray inbox email'
+],[
+'📥',
+'inbox tray',
+'box inbox letter mail receive tray email documents'
+],[
+'📦',
+'package',
+'box parcel mail gift cardboard moving'
+],[
+'📫',
+'closed mailbox with raised flag',
+'closed mail mailbox postbox email inbox communication'
+],[
+'📪',
+'closed mailbox with lowered flag',
+'closed lowered mail mailbox postbox email communication inbox'
+],[
+'📬',
+'open mailbox with raised flag',
+'mail mailbox open postbox email inbox communication'
+],[
+'📭',
+'open mailbox with lowered flag',
+'lowered mail mailbox open postbox email inbox'
+],[
+'📮',
+'postbox',
+'mail mailbox email letter envelope'
+],[
+'🗳',
+'ballot box with ballot',
+'ballot box election vote'
+],[
+'✏',
+'pencil',
+'stationery write paper writing school study'
+],[
+'✒',
+'black nib',
+'nib pen stationery writing write'
+],[
+'🖋',
+'fountain pen',
+'fountain pen stationery writing write'
+],[
+'🖊',
+'pen',
+'ballpoint stationery writing write'
+],[
+'🖌',
+'paintbrush',
+'painting drawing creativity art'
+],[
+'🖍',
+'crayon',
+'drawing creativity'
+],[
+'📝',
+'memo',
+'pencil write documents stationery paper writing legal exam quiz test study compose'
+],[
+'💼',
+'briefcase',
+'business documents work law legal job career'
+],[
+'📁',
+'file folder',
+'file folder documents business office'
+],[
+'📂',
+'open file folder',
+'file folder open documents load'
+],[
+'🗂',
+'card index dividers',
+'card dividers index organizing business stationery'
+],[
+'📅',
+'calendar',
+'date schedule'
+],[
+'📆',
+'tear-off calendar',
+'calendar tear off calendar schedule date planning'
+],[
+'🗒',
+'spiral notepad',
+'note pad spiral memo stationery'
+],[
+'🗓',
+'spiral calendar',
+'calendar pad spiral date schedule planning'
+],[
+'📇',
+'card index',
+'card index rolodex business stationery'
+],[
+'📈',
+'chart increasing',
+'chart graph growth trend upward presentation stats recovery business economics money sales good success'
+],[
+'📉',
+'chart decreasing',
+'chart down graph trend presentation stats recession business economics money sales bad failure'
+],[
+'📊',
+'bar chart',
+'bar chart graph presentation stats'
+],[
+'📋',
+'clipboard',
+'stationery documents'
+],[
+'📌',
+'pushpin',
+'pin stationery mark here'
+],[
+'📍',
+'round pushpin',
+'pin pushpin stationery location map here'
+],[
+'📎',
+'paperclip',
+'documents stationery'
+],[
+'🖇',
+'linked paperclips',
+'link paperclip documents stationery'
+],[
+'📏',
+'straight ruler',
+'ruler straight edge stationery calculate length math school drawing architect sketch'
+],[
+'📐',
+'triangular ruler',
+'ruler set triangle stationery math architect sketch'
+],[
+'✂',
+'scissors',
+'cutting tool stationery cut'
+],[
+'🗃',
+'card file box',
+'box card file business stationery'
+],[
+'🗄',
+'file cabinet',
+'cabinet file filing organizing'
+],[
+'🗑',
+'wastebasket',
+'bin trash rubbish garbage toss'
+],[
+'🔒',
+'locked',
+'closed security password padlock'
+],[
+'🔓',
+'unlocked',
+'lock open unlock privacy security'
+],[
+'🔏',
+'locked with pen',
+'ink lock nib pen privacy security secret'
+],[
+'🔐',
+'locked with key',
+'closed key lock secure security privacy'
+],[
+'🔑',
+'key',
+'lock password door'
+],[
+'🗝',
+'old key',
+'clue key lock old door password'
+],[
+'🔨',
+'hammer',
+'tool tools build create'
+],[
+'🪓',
+'axe',
+'chop hatchet split wood tool cut'
+],[
+'⛏',
+'pick',
+'mining tool tools dig'
+],[
+'⚒',
+'hammer and pick',
+'hammer pick tool tools build create'
+],[
+'🛠',
+'hammer and wrench',
+'hammer spanner tool wrench tools build create'
+],[
+'🗡',
+'dagger',
+'knife weapon'
+],[
+'⚔',
+'crossed swords',
+'crossed swords weapon'
+],[
+'🔫',
+'water pistol',
+'gun handgun pistol revolver tool water weapon violence'
+],[
+'🪃',
+'boomerang',
+'australia rebound repercussion weapon'
+],[
+'🏹',
+'bow and arrow',
+'archer arrow bow Sagittarius zodiac sports'
+],[
+'🛡',
+'shield',
+'weapon protection security'
+],[
+'🪚',
+'carpentry saw',
+'carpenter lumber saw tool cut chop'
+],[
+'🔧',
+'wrench',
+'spanner tool tools diy ikea fix maintainer'
+],[
+'🪛',
+'screwdriver',
+'screw tool tools'
+],[
+'🔩',
+'nut and bolt',
+'bolt nut tool handy tools fix'
+],[
+'⚙',
+'gear',
+'cog cogwheel tool'
+],[
+'🗜',
+'clamp',
+'compress tool vice'
+],[
+'⚖',
+'balance scale',
+'balance justice Libra scale zodiac law fairness weight'
+],[
+'🦯',
+'white cane',
+'accessibility blind probing cane'
+],[
+'🔗',
+'link',
+'rings url'
+],[
+'⛓',
+'chains',
+'chain lock arrest'
+],[
+'🪝',
+'hook',
+'catch crook curve ensnare selling point tools'
+],[
+'🧰',
+'toolbox',
+'chest mechanic tool tools diy fix maintainer'
+],[
+'🧲',
+'magnet',
+'attraction horseshoe magnetic'
+],[
+'🪜',
+'ladder',
+'climb rung step tools'
+],[
+'⚗',
+'alembic',
+'chemistry tool distilling science experiment'
+],[
+'🧪',
+'test tube',
+'chemist chemistry experiment lab science'
+],[
+'🧫',
+'petri dish',
+'bacteria biologist biology culture lab'
+],[
+'🧬',
+'dna',
+'biologist evolution gene genetics life'
+],[
+'🔬',
+'microscope',
+'science tool laboratory experiment zoomin study'
+],[
+'🔭',
+'telescope',
+'science tool stars space zoom astronomy'
+],[
+'📡',
+'satellite antenna',
+'antenna dish satellite communication future radio space'
+],[
+'💉',
+'syringe',
+'medicine needle shot sick health hospital drugs blood doctor nurse'
+],[
+'🩸',
+'drop of blood',
+'bleed blood donation injury medicine menstruation period hurt harm wound'
+],[
+'💊',
+'pill',
+'doctor medicine sick health pharmacy drug'
+],[
+'🩹',
+'adhesive bandage',
+'bandage heal'
+],[
+'🩺',
+'stethoscope',
+'doctor heart medicine health'
+],[
+'🚪',
+'door',
+'house entry exit'
+],[
+'🛗',
+'elevator',
+'accessibility hoist lift'
+],[
+'🪞',
+'mirror',
+'reflection reflector speculum'
+],[
+'🪟',
+'window',
+'frame fresh air opening transparent view scenery'
+],[
+'🛏',
+'bed',
+'hotel sleep rest'
+],[
+'🛋',
+'couch and lamp',
+'couch hotel lamp read chill'
+],[
+'🪑',
+'chair',
+'seat sit furniture'
+],[
+'🚽',
+'toilet',
+'restroom wc washroom bathroom potty'
+],[
+'🪠',
+'plunger',
+'force cup plumber suction toilet'
+],[
+'🚿',
+'shower',
+'water clean bathroom'
+],[
+'🛁',
+'bathtub',
+'bath clean shower bathroom'
+],[
+'🪤',
+'mouse trap',
+'bait mousetrap snare trap cheese'
+],[
+'🪒',
+'razor',
+'sharp shave cut'
+],[
+'🧴',
+'lotion bottle',
+'lotion moisturizer shampoo sunscreen'
+],[
+'🧷',
+'safety pin',
+'diaper punk rock'
+],[
+'🧹',
+'broom',
+'cleaning sweeping witch'
+],[
+'🧺',
+'basket',
+'farming laundry picnic'
+],[
+'🧻',
+'roll of paper',
+'paper towels toilet paper roll'
+],[
+'🪣',
+'bucket',
+'cask pail vat water container'
+],[
+'🧼',
+'soap',
+'bar bathing cleaning lather soapdish'
+],[
+'🪥',
+'toothbrush',
+'bathroom brush clean dental hygiene teeth'
+],[
+'🧽',
+'sponge',
+'absorbing cleaning porous'
+],[
+'🧯',
+'fire extinguisher',
+'extinguish fire quench'
+],[
+'🛒',
+'shopping cart',
+'cart shopping trolley'
+],[
+'🚬',
+'cigarette',
+'smoking kills tobacco joint smoke'
+],[
+'⚰',
+'coffin',
+'death vampire dead die rip graveyard cemetery casket funeral box'
+],[
+'🪦',
+'headstone',
+'cemetery grave graveyard tombstone death rip'
+],[
+'⚱',
+'funeral urn',
+'ashes death funeral urn dead die rip'
+],[
+'🗿',
+'moai',
+'face moyai statue rock easter island'
+],[
+'🪧',
+'placard',
+'demonstration picket protest sign announcement'
+],[
+'🏧',
+'ATM sign',
+'atm automated bank teller atm sign money sales cash blue-square payment'
+],[
+'🚮',
+'litter in bin sign',
+'litter litter bin blue-square sign human info'
+],[
+'🚰',
+'potable water',
+'drinking potable water blue-square liquid restroom cleaning faucet'
+],[
+'♿',
+'wheelchair symbol',
+'access blue-square disabled accessibility'
+],[
+'🚹',
+'men’s room',
+'lavatory man restroom wc men s room toilet blue-square gender male'
+],[
+'🚺',
+'women’s room',
+'lavatory restroom wc woman women s room purple-square female toilet loo gender'
+],[
+'🚻',
+'restroom',
+'lavatory WC blue-square toilet refresh wc gender'
+],[
+'🚼',
+'baby symbol',
+'baby changing orange-square child'
+],[
+'🚾',
+'water closet',
+'closet lavatory restroom water wc toilet blue-square'
+],[
+'🛂',
+'passport control',
+'control passport custom blue-square'
+],[
+'🛃',
+'customs',
+'passport border blue-square'
+],[
+'🛄',
+'baggage claim',
+'baggage claim blue-square airport transport'
+],[
+'🛅',
+'left luggage',
+'baggage locker luggage blue-square travel'
+],[
+'⚠',
+'warning',
+'exclamation wip alert error problem issue'
+],[
+'🚸',
+'children crossing',
+'child crossing pedestrian traffic school warning danger sign driving yellow-diamond'
+],[
+'⛔',
+'no entry',
+'entry forbidden no not prohibited traffic limit security privacy bad denied stop circle'
+],[
+'🚫',
+'prohibited',
+'entry forbidden no not forbid stop limit denied disallow circle'
+],[
+'🚳',
+'no bicycles',
+'bicycle bike forbidden no prohibited cyclist circle'
+],[
+'🚭',
+'no smoking',
+'forbidden no not prohibited smoking cigarette blue-square smell smoke'
+],[
+'🚯',
+'no littering',
+'forbidden litter no not prohibited trash bin garbage circle'
+],[
+'🚱',
+'non-potable water',
+'non-drinking non-potable water non potable water drink faucet tap circle'
+],[
+'🚷',
+'no pedestrians',
+'forbidden no not pedestrian prohibited rules crossing walking circle'
+],[
+'📵',
+'no mobile phones',
+'cell forbidden mobile no phone iphone mute circle'
+],[
+'🔞',
+'no one under eighteen',
+'18 age restriction eighteen prohibited underage drink pub night minor circle'
+],[
+'☢',
+'radioactive',
+'sign nuclear danger'
+],[
+'☣',
+'biohazard',
+'sign danger'
+],[
+'⬆',
+'up arrow',
+'arrow cardinal direction north blue-square continue top'
+],[
+'↗',
+'up-right arrow',
+'arrow direction intercardinal northeast up right arrow blue-square point diagonal'
+],[
+'➡',
+'right arrow',
+'arrow cardinal direction east blue-square next'
+],[
+'↘',
+'down-right arrow',
+'arrow direction intercardinal southeast down right arrow blue-square diagonal'
+],[
+'⬇',
+'down arrow',
+'arrow cardinal direction down south blue-square bottom'
+],[
+'↙',
+'down-left arrow',
+'arrow direction intercardinal southwest down left arrow blue-square diagonal'
+],[
+'⬅',
+'left arrow',
+'arrow cardinal direction west blue-square previous back'
+],[
+'↖',
+'up-left arrow',
+'arrow direction intercardinal northwest up left arrow blue-square point diagonal'
+],[
+'↕',
+'up-down arrow',
+'arrow up down arrow blue-square direction way vertical'
+],[
+'↔',
+'left-right arrow',
+'arrow left right arrow shape direction horizontal sideways'
+],[
+'↩',
+'right arrow curving left',
+'arrow back return blue-square undo enter'
+],[
+'↪',
+'left arrow curving right',
+'arrow blue-square return rotate direction'
+],[
+'⤴',
+'right arrow curving up',
+'arrow blue-square direction top'
+],[
+'⤵',
+'right arrow curving down',
+'arrow down blue-square direction bottom'
+],[
+'🔃',
+'clockwise vertical arrows',
+'arrow clockwise reload sync cycle round repeat'
+],[
+'🔄',
+'counterclockwise arrows button',
+'anticlockwise arrow counterclockwise withershins blue-square sync cycle'
+],[
+'🔙',
+'BACK arrow',
+'arrow back back arrow words return'
+],[
+'🔚',
+'END arrow',
+'arrow end end arrow words'
+],[
+'🔛',
+'ON! arrow',
+'arrow mark on on arrow words'
+],[
+'🔜',
+'SOON arrow',
+'arrow soon soon arrow words'
+],[
+'🔝',
+'TOP arrow',
+'arrow top up top arrow words blue-square'
+],[
+'🛐',
+'place of worship',
+'religion worship church temple prayer'
+],[
+'⚛',
+'atom symbol',
+'atheist atom science physics chemistry'
+],[
+'🕉',
+'om',
+'Hindu religion hinduism buddhism sikhism jainism'
+],[
+'✡',
+'star of David',
+'David Jew Jewish religion star star of david judaism'
+],[
+'☸',
+'wheel of dharma',
+'Buddhist dharma religion wheel hinduism buddhism sikhism jainism'
+],[
+'☯',
+'yin yang',
+'religion tao taoist yang yin balance'
+],[
+'✝',
+'latin cross',
+'Christian cross religion christianity'
+],[
+'☦',
+'orthodox cross',
+'Christian cross religion suppedaneum'
+],[
+'☪',
+'star and crescent',
+'islam Muslim religion'
+],[
+'☮',
+'peace symbol',
+'peace hippie'
+],[
+'🕎',
+'menorah',
+'candelabrum candlestick religion hanukkah candles jewish'
+],[
+'🔯',
+'dotted six-pointed star',
+'fortune star dotted six pointed star purple-square religion jewish hexagram'
+],[
+'♈',
+'Aries',
+'ram zodiac aries sign purple-square astrology'
+],[
+'♉',
+'Taurus',
+'bull ox zodiac taurus purple-square sign astrology'
+],[
+'♊',
+'Gemini',
+'twins zodiac gemini sign purple-square astrology'
+],[
+'♋',
+'Cancer',
+'crab zodiac cancer sign purple-square astrology'
+],[
+'♌',
+'Leo',
+'lion zodiac leo sign purple-square astrology'
+],[
+'♍',
+'Virgo',
+'zodiac virgo sign purple-square astrology'
+],[
+'♎',
+'Libra',
+'balance justice scales zodiac libra sign purple-square astrology'
+],[
+'♏',
+'Scorpio',
+'scorpion scorpius zodiac scorpio sign purple-square astrology'
+],[
+'♐',
+'Sagittarius',
+'archer zodiac sagittarius sign purple-square astrology'
+],[
+'♑',
+'Capricorn',
+'goat zodiac capricorn sign purple-square astrology'
+],[
+'♒',
+'Aquarius',
+'bearer water zodiac aquarius sign purple-square astrology'
+],[
+'♓',
+'Pisces',
+'fish zodiac pisces purple-square sign astrology'
+],[
+'⛎',
+'Ophiuchus',
+'bearer serpent snake zodiac ophiuchus sign purple-square constellation astrology'
+],[
+'🔀',
+'shuffle tracks button',
+'arrow crossed blue-square shuffle music random'
+],[
+'🔁',
+'repeat button',
+'arrow clockwise repeat loop record'
+],[
+'🔂',
+'repeat single button',
+'arrow clockwise once blue-square loop'
+],[
+'▶',
+'play button',
+'arrow play right triangle blue-square direction'
+],[
+'⏩',
+'fast-forward button',
+'arrow double fast forward fast forward button blue-square play speed continue'
+],[
+'⏭',
+'next track button',
+'arrow next scene next track triangle forward next blue-square'
+],[
+'⏯',
+'play or pause button',
+'arrow pause play right triangle blue-square'
+],[
+'◀',
+'reverse button',
+'arrow left reverse triangle blue-square direction'
+],[
+'⏪',
+'fast reverse button',
+'arrow double rewind play blue-square'
+],[
+'⏮',
+'last track button',
+'arrow previous scene previous track triangle backward'
+],[
+'🔼',
+'upwards button',
+'arrow button red blue-square triangle direction point forward top'
+],[
+'⏫',
+'fast up button',
+'arrow double blue-square direction top'
+],[
+'🔽',
+'downwards button',
+'arrow button down red blue-square direction bottom'
+],[
+'⏬',
+'fast down button',
+'arrow double down blue-square direction bottom'
+],[
+'⏸',
+'pause button',
+'bar double pause vertical blue-square'
+],[
+'⏹',
+'stop button',
+'square stop blue-square'
+],[
+'⏺',
+'record button',
+'circle record blue-square'
+],[
+'⏏',
+'eject button',
+'eject blue-square'
+],[
+'🎦',
+'cinema',
+'camera film movie blue-square record curtain stage theater'
+],[
+'🔅',
+'dim button',
+'brightness dim low sun afternoon warm summer'
+],[
+'🔆',
+'bright button',
+'bright brightness sun light'
+],[
+'📶',
+'antenna bars',
+'antenna bar cell mobile phone blue-square reception internet connection wifi bluetooth bars'
+],[
+'📳',
+'vibration mode',
+'cell mobile mode phone telephone vibration orange-square'
+],[
+'📴',
+'mobile phone off',
+'cell mobile off phone telephone mute orange-square silence quiet'
+],[
+'♀',
+'female sign',
+'woman women lady girl'
+],[
+'♂',
+'male sign',
+'man boy men'
+],[
+'⚧',
+'transgender symbol',
+'transgender lgbtq'
+],[
+'✖',
+'multiply',
+'× cancel multiplication sign x multiplication sign math calculation'
+],[
+'➕',
+'plus',
+'+ math sign plus sign calculation addition more increase'
+],[
+'➖',
+'minus',
+'- − math sign minus sign calculation subtract less'
+],[
+'➗',
+'divide',
+'÷ division math sign division sign calculation'
+],[
+'♾',
+'infinity',
+'forever unbounded universal'
+],[
+'‼',
+'double exclamation mark',
+'! !! bangbang exclamation mark surprise'
+],[
+'⁉',
+'exclamation question mark',
+'! !? ? exclamation interrobang mark punctuation question wat surprise'
+],[
+'❓',
+'red question mark',
+'? mark punctuation question question mark doubt confused'
+],[
+'❔',
+'white question mark',
+'? mark outlined punctuation question doubts gray huh confused'
+],[
+'❕',
+'white exclamation mark',
+'! exclamation mark outlined punctuation surprise gray wow warning'
+],[
+'❗',
+'red exclamation mark',
+'! exclamation mark punctuation exclamation mark heavy exclamation mark danger surprise wow warning'
+],[
+'〰',
+'wavy dash',
+'dash punctuation wavy draw line moustache mustache squiggle scribble'
+],[
+'💱',
+'currency exchange',
+'bank currency exchange money sales dollar travel'
+],[
+'💲',
+'heavy dollar sign',
+'currency dollar money sales payment buck'
+],[
+'⚕',
+'medical symbol',
+'aesculapius medicine staff health hospital'
+],[
+'♻',
+'recycling symbol',
+'recycle arrow environment garbage trash'
+],[
+'⚜',
+'fleur-de-lis',
+'fleur de lis decorative scout'
+],[
+'🔱',
+'trident emblem',
+'anchor emblem ship tool trident weapon spear'
+],[
+'📛',
+'name badge',
+'badge name fire forbid'
+],[
+'🔰',
+'Japanese symbol for beginner',
+'beginner chevron Japanese leaf japanese symbol for beginner badge shield'
+],[
+'⭕',
+'hollow red circle',
+'circle large o red round'
+],[
+'✅',
+'check mark button',
+'✓ button check mark green-square ok agree vote election answer tick'
+],[
+'☑',
+'check box with check',
+'✓ box check ok agree confirm black-square vote election yes tick'
+],[
+'✔',
+'check mark',
+'✓ check mark ok nike answer yes tick'
+],[
+'❌',
+'cross mark',
+'× cancel cross mark multiplication multiply x no delete remove red'
+],[
+'❎',
+'cross mark button',
+'× mark square x green-square no deny'
+],[
+'➰',
+'curly loop',
+'curl loop scribble draw shape squiggle'
+],[
+'➿',
+'double curly loop',
+'curl double loop tape cassette'
+],[
+'〽',
+'part alternation mark',
+'mark part graph presentation stats business economics bad'
+],[
+'✳',
+'eight-spoked asterisk',
+'* asterisk eight spoked asterisk star sparkle green-square'
+],[
+'✴',
+'eight-pointed star',
+'* star eight pointed star orange-square shape polygon'
+],[
+'❇',
+'sparkle',
+'* stars green-square awesome good fireworks'
+],[
+'©',
+'copyright',
+'c ip license circle law legal'
+],[
+'®',
+'registered',
+'r alphabet circle'
+],[
+'™',
+'trade mark',
+'mark tm trademark brand law legal'
+],[
+'#️⃣',
+'keycap: #',
+'keycap keycap  symbol blue-square twitter'
+],[
+'*️⃣',
+'keycap: *',
+'keycap keycap  star'
+],[
+'0️⃣',
+'keycap: 0',
+'keycap keycap 0 0 numbers blue-square null'
+],[
+'1️⃣',
+'keycap: 1',
+'keycap keycap 1 blue-square numbers 1'
+],[
+'2️⃣',
+'keycap: 2',
+'keycap keycap 2 numbers 2 prime blue-square'
+],[
+'3️⃣',
+'keycap: 3',
+'keycap keycap 3 3 numbers prime blue-square'
+],[
+'4️⃣',
+'keycap: 4',
+'keycap keycap 4 4 numbers blue-square'
+],[
+'5️⃣',
+'keycap: 5',
+'keycap keycap 5 5 numbers blue-square prime'
+],[
+'6️⃣',
+'keycap: 6',
+'keycap keycap 6 6 numbers blue-square'
+],[
+'7️⃣',
+'keycap: 7',
+'keycap keycap 7 7 numbers blue-square prime'
+],[
+'8️⃣',
+'keycap: 8',
+'keycap keycap 8 8 blue-square numbers'
+],[
+'9️⃣',
+'keycap: 9',
+'keycap keycap 9 blue-square numbers 9'
+],[
+'🔟',
+'keycap: 10',
+'keycap keycap 10 numbers 10 blue-square'
+],[
+'🔠',
+'input latin uppercase',
+'ABCD input latin letters uppercase alphabet words blue-square'
+],[
+'🔡',
+'input latin lowercase',
+'abcd input latin letters lowercase blue-square alphabet'
+],[
+'🔢',
+'input numbers',
+'1234 input numbers blue-square'
+],[
+'🔣',
+'input symbols',
+'〒♪&% input blue-square music note ampersand percent glyphs characters'
+],[
+'🔤',
+'input latin letters',
+'abc alphabet input latin letters blue-square'
+],[
+'🅰',
+'A button (blood type)',
+'a blood type a button red-square alphabet letter'
+],[
+'🆎',
+'AB button (blood type)',
+'ab blood type ab button red-square alphabet'
+],[
+'🅱',
+'B button (blood type)',
+'b blood type b button red-square alphabet letter'
+],[
+'🆑',
+'CL button',
+'cl cl button alphabet words red-square'
+],[
+'🆒',
+'COOL button',
+'cool cool button words blue-square'
+],[
+'🆓',
+'FREE button',
+'free free button blue-square words'
+],[
+'ℹ',
+'information',
+'i blue-square alphabet letter'
+],[
+'🆔',
+'ID button',
+'id identity id button purple-square words'
+],[
+'Ⓜ',
+'circled M',
+'circle m circled m alphabet blue-circle letter'
+],[
+'🆕',
+'NEW button',
+'new new button blue-square words start'
+],[
+'🆖',
+'NG button',
+'ng ng button blue-square words shape icon'
+],[
+'🅾',
+'O button (blood type)',
+'blood type o o button alphabet red-square letter'
+],[
+'🆗',
+'OK button',
+'OK ok button good agree yes blue-square'
+],[
+'🅿',
+'P button',
+'parking p button cars blue-square alphabet letter'
+],[
+'🆘',
+'SOS button',
+'help sos sos button red-square words emergency 911'
+],[
+'🆙',
+'UP! button',
+'mark up up button blue-square above high'
+],[
+'🆚',
+'VS button',
+'versus vs vs button words orange-square'
+],[
+'🈁',
+'Japanese “here” button',
+'“here” Japanese katakana ココ japanese here button blue-square here japanese destination'
+],[
+'🈂',
+'Japanese “service charge” button',
+'“service charge” Japanese katakana サ japanese service charge button japanese blue-square'
+],[
+'🈷',
+'Japanese “monthly amount” button',
+'“monthly amount” ideograph Japanese 月 japanese monthly amount button chinese month moon japanese orange-square kanji'
+],[
+'🈶',
+'Japanese “not free of charge” button',
+'“not free of charge” ideograph Japanese 有 japanese not free of charge button orange-square chinese have kanji'
+],[
+'🈯',
+'Japanese “reserved” button',
+'“reserved” ideograph Japanese 指 japanese reserved button chinese point green-square kanji'
+],[
+'🉐',
+'Japanese “bargain” button',
+'“bargain” ideograph Japanese 得 japanese bargain button chinese kanji obtain get circle'
+],[
+'🈹',
+'Japanese “discount” button',
+'“discount” ideograph Japanese 割 japanese discount button cut divide chinese kanji pink-square'
+],[
+'🈚',
+'Japanese “free of charge” button',
+'“free of charge” ideograph Japanese 無 japanese free of charge button nothing chinese kanji japanese orange-square'
+],[
+'🈲',
+'Japanese “prohibited” button',
+'“prohibited” ideograph Japanese 禁 japanese prohibited button kanji japanese chinese forbidden limit restricted red-square'
+],[
+'🉑',
+'Japanese “acceptable” button',
+'“acceptable” ideograph Japanese 可 japanese acceptable button ok good chinese kanji agree yes orange-circle'
+],[
+'🈸',
+'Japanese “application” button',
+'“application” ideograph Japanese 申 japanese application button chinese japanese kanji orange-square'
+],[
+'🈴',
+'Japanese “passing grade” button',
+'“passing grade” ideograph Japanese 合 japanese passing grade button japanese chinese join kanji red-square'
+],[
+'🈳',
+'Japanese “vacancy” button',
+'“vacancy” ideograph Japanese 空 japanese vacancy button kanji japanese chinese empty sky blue-square'
+],[
+'㊗',
+'Japanese “congratulations” button',
+'“congratulations” ideograph Japanese 祝 japanese congratulations button chinese kanji japanese red-circle'
+],[
+'㊙',
+'Japanese “secret” button',
+'“secret” ideograph Japanese 秘 japanese secret button privacy chinese sshh kanji red-circle'
+],[
+'🈺',
+'Japanese “open for business” button',
+'“open for business” ideograph Japanese 営 japanese open for business button japanese opening hours orange-square'
+],[
+'🈵',
+'Japanese “no vacancy” button',
+'“no vacancy” ideograph Japanese 満 japanese no vacancy button full chinese japanese red-square kanji'
+],[
+'🔴',
+'red circle',
+'circle geometric red shape error danger'
+],[
+'🟠',
+'orange circle',
+'circle orange round'
+],[
+'🟡',
+'yellow circle',
+'circle yellow round'
+],[
+'🟢',
+'green circle',
+'circle green round'
+],[
+'🔵',
+'blue circle',
+'blue circle geometric shape icon button'
+],[
+'🟣',
+'purple circle',
+'circle purple round'
+],[
+'🟤',
+'brown circle',
+'brown circle round'
+],[
+'⚫',
+'black circle',
+'circle geometric shape button round'
+],[
+'⚪',
+'white circle',
+'circle geometric shape round'
+],[
+'🟥',
+'red square',
+'red square'
+],[
+'🟧',
+'orange square',
+'orange square'
+],[
+'🟨',
+'yellow square',
+'square yellow'
+],[
+'🟩',
+'green square',
+'green square'
+],[
+'🟦',
+'blue square',
+'blue square'
+],[
+'🟪',
+'purple square',
+'purple square'
+],[
+'🟫',
+'brown square',
+'brown square'
+],[
+'⬛',
+'black large square',
+'geometric square shape icon button'
+],[
+'⬜',
+'white large square',
+'geometric square shape icon stone button'
+],[
+'◼',
+'black medium square',
+'geometric square shape button icon'
+],[
+'◻',
+'white medium square',
+'geometric square shape stone icon'
+],[
+'◾',
+'black medium-small square',
+'geometric square black medium small square icon shape button'
+],[
+'◽',
+'white medium-small square',
+'geometric square white medium small square shape stone icon button'
+],[
+'▪',
+'black small square',
+'geometric square shape icon'
+],[
+'▫',
+'white small square',
+'geometric square shape icon'
+],[
+'🔶',
+'large orange diamond',
+'diamond geometric orange shape jewel gem'
+],[
+'🔷',
+'large blue diamond',
+'blue diamond geometric shape jewel gem'
+],[
+'🔸',
+'small orange diamond',
+'diamond geometric orange shape jewel gem'
+],[
+'🔹',
+'small blue diamond',
+'blue diamond geometric shape jewel gem'
+],[
+'🔺',
+'red triangle pointed up',
+'geometric red shape direction up top'
+],[
+'🔻',
+'red triangle pointed down',
+'down geometric red shape direction bottom'
+],[
+'💠',
+'diamond with a dot',
+'comic diamond geometric inside jewel blue gem crystal fancy'
+],[
+'🔘',
+'radio button',
+'button geometric radio input old music circle'
+],[
+'🔳',
+'white square button',
+'button geometric outlined square shape input'
+],[
+'🔲',
+'black square button',
+'button geometric square shape input frame'
+],[
+'🏁',
+'chequered flag',
+'checkered chequered racing contest finishline race gokart'
+],[
+'🚩',
+'triangular flag',
+'post mark milestone place'
+],[
+'🎌',
+'crossed flags',
+'celebration cross crossed Japanese japanese nation country border'
+],[
+'🏴',
+'black flag',
+'waving pirate'
+],[
+'🏳',
+'white flag',
+'waving losing loser lost surrender give up fail'
+],[
+'🏳️‍🌈',
+'rainbow flag',
+'pride rainbow flag gay lgbt glbt queer homosexual lesbian bisexual transgender'
+],[
+'🏳️‍⚧️',
+'transgender flag',
+'flag light blue pink transgender white lgbtq'
+],[
+'🏴‍☠️',
+'pirate flag',
+'Jolly Roger pirate plunder treasure skull crossbones flag banner'
+],[
+'🇦🇨',
+'flag: Ascension Island',
+'flag flag ascension island'
+],[
+'🇦🇩',
+'flag: Andorra',
+'flag flag andorra ad nation country banner'
+],[
+'🇦🇪',
+'flag: United Arab Emirates',
+'flag flag united arab emirates united arab emirates nation country banner'
+],[
+'🇦🇫',
+'flag: Afghanistan',
+'flag flag afghanistan af nation country banner'
+],[
+'🇦🇬',
+'flag: Antigua & Barbuda',
+'flag flag antigua barbuda antigua barbuda nation country banner'
+],[
+'🇦🇮',
+'flag: Anguilla',
+'flag flag anguilla ai nation country banner'
+],[
+'🇦🇱',
+'flag: Albania',
+'flag flag albania al nation country banner'
+],[
+'🇦🇲',
+'flag: Armenia',
+'flag flag armenia am nation country banner'
+],[
+'🇦🇴',
+'flag: Angola',
+'flag flag angola ao nation country banner'
+],[
+'🇦🇶',
+'flag: Antarctica',
+'flag flag antarctica aq nation country banner'
+],[
+'🇦🇷',
+'flag: Argentina',
+'flag flag argentina ar nation country banner'
+],[
+'🇦🇸',
+'flag: American Samoa',
+'flag flag american samoa american ws nation country banner'
+],[
+'🇦🇹',
+'flag: Austria',
+'flag flag austria at nation country banner'
+],[
+'🇦🇺',
+'flag: Australia',
+'flag flag australia au nation country banner'
+],[
+'🇦🇼',
+'flag: Aruba',
+'flag flag aruba aw nation country banner'
+],[
+'🇦🇽',
+'flag: Åland Islands',
+'flag flag aland islands Åland islands nation country banner'
+],[
+'🇦🇿',
+'flag: Azerbaijan',
+'flag flag azerbaijan az nation country banner'
+],[
+'🇧🇦',
+'flag: Bosnia & Herzegovina',
+'flag flag bosnia herzegovina bosnia herzegovina nation country banner'
+],[
+'🇧🇧',
+'flag: Barbados',
+'flag flag barbados bb nation country banner'
+],[
+'🇧🇩',
+'flag: Bangladesh',
+'flag flag bangladesh bd nation country banner'
+],[
+'🇧🇪',
+'flag: Belgium',
+'flag flag belgium be nation country banner'
+],[
+'🇧🇫',
+'flag: Burkina Faso',
+'flag flag burkina faso burkina faso nation country banner'
+],[
+'🇧🇬',
+'flag: Bulgaria',
+'flag flag bulgaria bg nation country banner'
+],[
+'🇧🇭',
+'flag: Bahrain',
+'flag flag bahrain bh nation country banner'
+],[
+'🇧🇮',
+'flag: Burundi',
+'flag flag burundi bi nation country banner'
+],[
+'🇧🇯',
+'flag: Benin',
+'flag flag benin bj nation country banner'
+],[
+'🇧🇱',
+'flag: St. Barthélemy',
+'flag flag st barthelemy saint barthélemy nation country banner'
+],[
+'🇧🇲',
+'flag: Bermuda',
+'flag flag bermuda bm nation country banner'
+],[
+'🇧🇳',
+'flag: Brunei',
+'flag flag brunei bn darussalam nation country banner'
+],[
+'🇧🇴',
+'flag: Bolivia',
+'flag flag bolivia bo nation country banner'
+],[
+'🇧🇶',
+'flag: Caribbean Netherlands',
+'flag flag caribbean netherlands bonaire nation country banner'
+],[
+'🇧🇷',
+'flag: Brazil',
+'flag flag brazil br nation country banner'
+],[
+'🇧🇸',
+'flag: Bahamas',
+'flag flag bahamas bs nation country banner'
+],[
+'🇧🇹',
+'flag: Bhutan',
+'flag flag bhutan bt nation country banner'
+],[
+'🇧🇻',
+'flag: Bouvet Island',
+'flag flag bouvet island norway'
+],[
+'🇧🇼',
+'flag: Botswana',
+'flag flag botswana bw nation country banner'
+],[
+'🇧🇾',
+'flag: Belarus',
+'flag flag belarus by nation country banner'
+],[
+'🇧🇿',
+'flag: Belize',
+'flag flag belize bz nation country banner'
+],[
+'🇨🇦',
+'flag: Canada',
+'flag flag canada ca nation country banner'
+],[
+'🇨🇨',
+'flag: Cocos (Keeling) Islands',
+'flag flag cocos islands cocos keeling islands nation country banner'
+],[
+'🇨🇩',
+'flag: Congo - Kinshasa',
+'flag flag congo kinshasa congo democratic republic nation country banner'
+],[
+'🇨🇫',
+'flag: Central African Republic',
+'flag flag central african republic central african republic nation country banner'
+],[
+'🇨🇬',
+'flag: Congo - Brazzaville',
+'flag flag congo brazzaville congo nation country banner'
+],[
+'🇨🇭',
+'flag: Switzerland',
+'flag flag switzerland ch nation country banner'
+],[
+'🇨🇮',
+'flag: Côte d’Ivoire',
+'flag flag cote d ivoire ivory coast nation country banner'
+],[
+'🇨🇰',
+'flag: Cook Islands',
+'flag flag cook islands cook islands nation country banner'
+],[
+'🇨🇱',
+'flag: Chile',
+'flag flag chile nation country banner'
+],[
+'🇨🇲',
+'flag: Cameroon',
+'flag flag cameroon cm nation country banner'
+],[
+'🇨🇳',
+'flag: China',
+'flag flag china china chinese prc country nation banner'
+],[
+'🇨🇴',
+'flag: Colombia',
+'flag flag colombia co nation country banner'
+],[
+'🇨🇵',
+'flag: Clipperton Island',
+'flag flag clipperton island'
+],[
+'🇨🇷',
+'flag: Costa Rica',
+'flag flag costa rica costa rica nation country banner'
+],[
+'🇨🇺',
+'flag: Cuba',
+'flag flag cuba cu nation country banner'
+],[
+'🇨🇻',
+'flag: Cape Verde',
+'flag flag cape verde cabo verde nation country banner'
+],[
+'🇨🇼',
+'flag: Curaçao',
+'flag flag curacao curaçao nation country banner'
+],[
+'🇨🇽',
+'flag: Christmas Island',
+'flag flag christmas island christmas island nation country banner'
+],[
+'🇨🇾',
+'flag: Cyprus',
+'flag flag cyprus cy nation country banner'
+],[
+'🇨🇿',
+'flag: Czechia',
+'flag flag czechia cz nation country banner'
+],[
+'🇩🇪',
+'flag: Germany',
+'flag flag germany german nation country banner'
+],[
+'🇩🇬',
+'flag: Diego Garcia',
+'flag flag diego garcia'
+],[
+'🇩🇯',
+'flag: Djibouti',
+'flag flag djibouti dj nation country banner'
+],[
+'🇩🇰',
+'flag: Denmark',
+'flag flag denmark dk nation country banner'
+],[
+'🇩🇲',
+'flag: Dominica',
+'flag flag dominica dm nation country banner'
+],[
+'🇩🇴',
+'flag: Dominican Republic',
+'flag flag dominican republic dominican republic nation country banner'
+],[
+'🇩🇿',
+'flag: Algeria',
+'flag flag algeria dz nation country banner'
+],[
+'🇪🇦',
+'flag: Ceuta & Melilla',
+'flag flag ceuta melilla'
+],[
+'🇪🇨',
+'flag: Ecuador',
+'flag flag ecuador ec nation country banner'
+],[
+'🇪🇪',
+'flag: Estonia',
+'flag flag estonia ee nation country banner'
+],[
+'🇪🇬',
+'flag: Egypt',
+'flag flag egypt eg nation country banner'
+],[
+'🇪🇭',
+'flag: Western Sahara',
+'flag flag western sahara western sahara nation country banner'
+],[
+'🇪🇷',
+'flag: Eritrea',
+'flag flag eritrea er nation country banner'
+],[
+'🇪🇸',
+'flag: Spain',
+'flag flag spain spain nation country banner'
+],[
+'🇪🇹',
+'flag: Ethiopia',
+'flag flag ethiopia et nation country banner'
+],[
+'🇪🇺',
+'flag: European Union',
+'flag flag european union european union banner'
+],[
+'🇫🇮',
+'flag: Finland',
+'flag flag finland fi nation country banner'
+],[
+'🇫🇯',
+'flag: Fiji',
+'flag flag fiji fj nation country banner'
+],[
+'🇫🇰',
+'flag: Falkland Islands',
+'flag flag falkland islands falkland islands malvinas nation country banner'
+],[
+'🇫🇲',
+'flag: Micronesia',
+'flag flag micronesia micronesia federated states nation country banner'
+],[
+'🇫🇴',
+'flag: Faroe Islands',
+'flag flag faroe islands faroe islands nation country banner'
+],[
+'🇫🇷',
+'flag: France',
+'flag flag france banner nation france french country'
+],[
+'🇬🇦',
+'flag: Gabon',
+'flag flag gabon ga nation country banner'
+],[
+'🇬🇧',
+'flag: United Kingdom',
+'flag flag united kingdom united kingdom great britain northern ireland nation country banner british UK english england union jack'
+],[
+'🇬🇩',
+'flag: Grenada',
+'flag flag grenada gd nation country banner'
+],[
+'🇬🇪',
+'flag: Georgia',
+'flag flag georgia ge nation country banner'
+],[
+'🇬🇫',
+'flag: French Guiana',
+'flag flag french guiana french guiana nation country banner'
+],[
+'🇬🇬',
+'flag: Guernsey',
+'flag flag guernsey gg nation country banner'
+],[
+'🇬🇭',
+'flag: Ghana',
+'flag flag ghana gh nation country banner'
+],[
+'🇬🇮',
+'flag: Gibraltar',
+'flag flag gibraltar gi nation country banner'
+],[
+'🇬🇱',
+'flag: Greenland',
+'flag flag greenland gl nation country banner'
+],[
+'🇬🇲',
+'flag: Gambia',
+'flag flag gambia gm nation country banner'
+],[
+'🇬🇳',
+'flag: Guinea',
+'flag flag guinea gn nation country banner'
+],[
+'🇬🇵',
+'flag: Guadeloupe',
+'flag flag guadeloupe gp nation country banner'
+],[
+'🇬🇶',
+'flag: Equatorial Guinea',
+'flag flag equatorial guinea equatorial gn nation country banner'
+],[
+'🇬🇷',
+'flag: Greece',
+'flag flag greece gr nation country banner'
+],[
+'🇬🇸',
+'flag: South Georgia & South Sandwich Islands',
+'flag flag south georgia south sandwich islands south georgia sandwich islands nation country banner'
+],[
+'🇬🇹',
+'flag: Guatemala',
+'flag flag guatemala gt nation country banner'
+],[
+'🇬🇺',
+'flag: Guam',
+'flag flag guam gu nation country banner'
+],[
+'🇬🇼',
+'flag: Guinea-Bissau',
+'flag flag guinea bissau gw bissau nation country banner'
+],[
+'🇬🇾',
+'flag: Guyana',
+'flag flag guyana gy nation country banner'
+],[
+'🇭🇰',
+'flag: Hong Kong SAR China',
+'flag flag hong kong sar china hong kong nation country banner'
+],[
+'🇭🇲',
+'flag: Heard & McDonald Islands',
+'flag flag heard mcdonald islands'
+],[
+'🇭🇳',
+'flag: Honduras',
+'flag flag honduras hn nation country banner'
+],[
+'🇭🇷',
+'flag: Croatia',
+'flag flag croatia hr nation country banner'
+],[
+'🇭🇹',
+'flag: Haiti',
+'flag flag haiti ht nation country banner'
+],[
+'🇭🇺',
+'flag: Hungary',
+'flag flag hungary hu nation country banner'
+],[
+'🇮🇨',
+'flag: Canary Islands',
+'flag flag canary islands canary islands nation country banner'
+],[
+'🇮🇩',
+'flag: Indonesia',
+'flag flag indonesia nation country banner'
+],[
+'🇮🇪',
+'flag: Ireland',
+'flag flag ireland ie nation country banner'
+],[
+'🇮🇱',
+'flag: Israel',
+'flag flag israel il nation country banner'
+],[
+'🇮🇲',
+'flag: Isle of Man',
+'flag flag isle of man isle man nation country banner'
+],[
+'🇮🇳',
+'flag: India',
+'flag flag india in nation country banner'
+],[
+'🇮🇴',
+'flag: British Indian Ocean Territory',
+'flag flag british indian ocean territory british indian ocean territory nation country banner'
+],[
+'🇮🇶',
+'flag: Iraq',
+'flag flag iraq iq nation country banner'
+],[
+'🇮🇷',
+'flag: Iran',
+'flag flag iran iran islamic republic nation country banner'
+],[
+'🇮🇸',
+'flag: Iceland',
+'flag flag iceland is nation country banner'
+],[
+'🇮🇹',
+'flag: Italy',
+'flag flag italy italy nation country banner'
+],[
+'🇯🇪',
+'flag: Jersey',
+'flag flag jersey je nation country banner'
+],[
+'🇯🇲',
+'flag: Jamaica',
+'flag flag jamaica jm nation country banner'
+],[
+'🇯🇴',
+'flag: Jordan',
+'flag flag jordan jo nation country banner'
+],[
+'🇯🇵',
+'flag: Japan',
+'flag flag japan japanese nation country banner'
+],[
+'🇰🇪',
+'flag: Kenya',
+'flag flag kenya ke nation country banner'
+],[
+'🇰🇬',
+'flag: Kyrgyzstan',
+'flag flag kyrgyzstan kg nation country banner'
+],[
+'🇰🇭',
+'flag: Cambodia',
+'flag flag cambodia kh nation country banner'
+],[
+'🇰🇮',
+'flag: Kiribati',
+'flag flag kiribati ki nation country banner'
+],[
+'🇰🇲',
+'flag: Comoros',
+'flag flag comoros km nation country banner'
+],[
+'🇰🇳',
+'flag: St. Kitts & Nevis',
+'flag flag st kitts nevis saint kitts nevis nation country banner'
+],[
+'🇰🇵',
+'flag: North Korea',
+'flag flag north korea north korea nation country banner'
+],[
+'🇰🇷',
+'flag: South Korea',
+'flag flag south korea south korea nation country banner'
+],[
+'🇰🇼',
+'flag: Kuwait',
+'flag flag kuwait kw nation country banner'
+],[
+'🇰🇾',
+'flag: Cayman Islands',
+'flag flag cayman islands cayman islands nation country banner'
+],[
+'🇰🇿',
+'flag: Kazakhstan',
+'flag flag kazakhstan kz nation country banner'
+],[
+'🇱🇦',
+'flag: Laos',
+'flag flag laos lao democratic republic nation country banner'
+],[
+'🇱🇧',
+'flag: Lebanon',
+'flag flag lebanon lb nation country banner'
+],[
+'🇱🇨',
+'flag: St. Lucia',
+'flag flag st lucia saint lucia nation country banner'
+],[
+'🇱🇮',
+'flag: Liechtenstein',
+'flag flag liechtenstein li nation country banner'
+],[
+'🇱🇰',
+'flag: Sri Lanka',
+'flag flag sri lanka sri lanka nation country banner'
+],[
+'🇱🇷',
+'flag: Liberia',
+'flag flag liberia lr nation country banner'
+],[
+'🇱🇸',
+'flag: Lesotho',
+'flag flag lesotho ls nation country banner'
+],[
+'🇱🇹',
+'flag: Lithuania',
+'flag flag lithuania lt nation country banner'
+],[
+'🇱🇺',
+'flag: Luxembourg',
+'flag flag luxembourg lu nation country banner'
+],[
+'🇱🇻',
+'flag: Latvia',
+'flag flag latvia lv nation country banner'
+],[
+'🇱🇾',
+'flag: Libya',
+'flag flag libya ly nation country banner'
+],[
+'🇲🇦',
+'flag: Morocco',
+'flag flag morocco ma nation country banner'
+],[
+'🇲🇨',
+'flag: Monaco',
+'flag flag monaco mc nation country banner'
+],[
+'🇲🇩',
+'flag: Moldova',
+'flag flag moldova moldova republic nation country banner'
+],[
+'🇲🇪',
+'flag: Montenegro',
+'flag flag montenegro me nation country banner'
+],[
+'🇲🇫',
+'flag: St. Martin',
+'flag flag st martin'
+],[
+'🇲🇬',
+'flag: Madagascar',
+'flag flag madagascar mg nation country banner'
+],[
+'🇲🇭',
+'flag: Marshall Islands',
+'flag flag marshall islands marshall islands nation country banner'
+],[
+'🇲🇰',
+'flag: North Macedonia',
+'flag flag north macedonia macedonia nation country banner'
+],[
+'🇲🇱',
+'flag: Mali',
+'flag flag mali ml nation country banner'
+],[
+'🇲🇲',
+'flag: Myanmar (Burma)',
+'flag flag myanmar mm nation country banner'
+],[
+'🇲🇳',
+'flag: Mongolia',
+'flag flag mongolia mn nation country banner'
+],[
+'🇲🇴',
+'flag: Macao SAR China',
+'flag flag macao sar china macao nation country banner'
+],[
+'🇲🇵',
+'flag: Northern Mariana Islands',
+'flag flag northern mariana islands northern mariana islands nation country banner'
+],[
+'🇲🇶',
+'flag: Martinique',
+'flag flag martinique mq nation country banner'
+],[
+'🇲🇷',
+'flag: Mauritania',
+'flag flag mauritania mr nation country banner'
+],[
+'🇲🇸',
+'flag: Montserrat',
+'flag flag montserrat ms nation country banner'
+],[
+'🇲🇹',
+'flag: Malta',
+'flag flag malta mt nation country banner'
+],[
+'🇲🇺',
+'flag: Mauritius',
+'flag flag mauritius mu nation country banner'
+],[
+'🇲🇻',
+'flag: Maldives',
+'flag flag maldives mv nation country banner'
+],[
+'🇲🇼',
+'flag: Malawi',
+'flag flag malawi mw nation country banner'
+],[
+'🇲🇽',
+'flag: Mexico',
+'flag flag mexico mx nation country banner'
+],[
+'🇲🇾',
+'flag: Malaysia',
+'flag flag malaysia my nation country banner'
+],[
+'🇲🇿',
+'flag: Mozambique',
+'flag flag mozambique mz nation country banner'
+],[
+'🇳🇦',
+'flag: Namibia',
+'flag flag namibia na nation country banner'
+],[
+'🇳🇨',
+'flag: New Caledonia',
+'flag flag new caledonia new caledonia nation country banner'
+],[
+'🇳🇪',
+'flag: Niger',
+'flag flag niger ne nation country banner'
+],[
+'🇳🇫',
+'flag: Norfolk Island',
+'flag flag norfolk island norfolk island nation country banner'
+],[
+'🇳🇬',
+'flag: Nigeria',
+'flag flag nigeria nation country banner'
+],[
+'🇳🇮',
+'flag: Nicaragua',
+'flag flag nicaragua ni nation country banner'
+],[
+'🇳🇱',
+'flag: Netherlands',
+'flag flag netherlands nl nation country banner'
+],[
+'🇳🇴',
+'flag: Norway',
+'flag flag norway no nation country banner'
+],[
+'🇳🇵',
+'flag: Nepal',
+'flag flag nepal np nation country banner'
+],[
+'🇳🇷',
+'flag: Nauru',
+'flag flag nauru nr nation country banner'
+],[
+'🇳🇺',
+'flag: Niue',
+'flag flag niue nu nation country banner'
+],[
+'🇳🇿',
+'flag: New Zealand',
+'flag flag new zealand new zealand nation country banner'
+],[
+'🇴🇲',
+'flag: Oman',
+'flag flag oman om symbol nation country banner'
+],[
+'🇵🇦',
+'flag: Panama',
+'flag flag panama pa nation country banner'
+],[
+'🇵🇪',
+'flag: Peru',
+'flag flag peru pe nation country banner'
+],[
+'🇵🇫',
+'flag: French Polynesia',
+'flag flag french polynesia french polynesia nation country banner'
+],[
+'🇵🇬',
+'flag: Papua New Guinea',
+'flag flag papua new guinea papua new guinea nation country banner'
+],[
+'🇵🇭',
+'flag: Philippines',
+'flag flag philippines ph nation country banner'
+],[
+'🇵🇰',
+'flag: Pakistan',
+'flag flag pakistan pk nation country banner'
+],[
+'🇵🇱',
+'flag: Poland',
+'flag flag poland pl nation country banner'
+],[
+'🇵🇲',
+'flag: St. Pierre & Miquelon',
+'flag flag st pierre miquelon saint pierre miquelon nation country banner'
+],[
+'🇵🇳',
+'flag: Pitcairn Islands',
+'flag flag pitcairn islands pitcairn nation country banner'
+],[
+'🇵🇷',
+'flag: Puerto Rico',
+'flag flag puerto rico puerto rico nation country banner'
+],[
+'🇵🇸',
+'flag: Palestinian Territories',
+'flag flag palestinian territories palestine palestinian territories nation country banner'
+],[
+'🇵🇹',
+'flag: Portugal',
+'flag flag portugal pt nation country banner'
+],[
+'🇵🇼',
+'flag: Palau',
+'flag flag palau pw nation country banner'
+],[
+'🇵🇾',
+'flag: Paraguay',
+'flag flag paraguay py nation country banner'
+],[
+'🇶🇦',
+'flag: Qatar',
+'flag flag qatar qa nation country banner'
+],[
+'🇷🇪',
+'flag: Réunion',
+'flag flag reunion réunion nation country banner'
+],[
+'🇷🇴',
+'flag: Romania',
+'flag flag romania ro nation country banner'
+],[
+'🇷🇸',
+'flag: Serbia',
+'flag flag serbia rs nation country banner'
+],[
+'🇷🇺',
+'flag: Russia',
+'flag flag russia russian federation nation country banner'
+],[
+'🇷🇼',
+'flag: Rwanda',
+'flag flag rwanda rw nation country banner'
+],[
+'🇸🇦',
+'flag: Saudi Arabia',
+'flag flag saudi arabia nation country banner'
+],[
+'🇸🇧',
+'flag: Solomon Islands',
+'flag flag solomon islands solomon islands nation country banner'
+],[
+'🇸🇨',
+'flag: Seychelles',
+'flag flag seychelles sc nation country banner'
+],[
+'🇸🇩',
+'flag: Sudan',
+'flag flag sudan sd nation country banner'
+],[
+'🇸🇪',
+'flag: Sweden',
+'flag flag sweden se nation country banner'
+],[
+'🇸🇬',
+'flag: Singapore',
+'flag flag singapore sg nation country banner'
+],[
+'🇸🇭',
+'flag: St. Helena',
+'flag flag st helena saint helena ascension tristan cunha nation country banner'
+],[
+'🇸🇮',
+'flag: Slovenia',
+'flag flag slovenia si nation country banner'
+],[
+'🇸🇯',
+'flag: Svalbard & Jan Mayen',
+'flag flag svalbard jan mayen'
+],[
+'🇸🇰',
+'flag: Slovakia',
+'flag flag slovakia sk nation country banner'
+],[
+'🇸🇱',
+'flag: Sierra Leone',
+'flag flag sierra leone sierra leone nation country banner'
+],[
+'🇸🇲',
+'flag: San Marino',
+'flag flag san marino san marino nation country banner'
+],[
+'🇸🇳',
+'flag: Senegal',
+'flag flag senegal sn nation country banner'
+],[
+'🇸🇴',
+'flag: Somalia',
+'flag flag somalia so nation country banner'
+],[
+'🇸🇷',
+'flag: Suriname',
+'flag flag suriname sr nation country banner'
+],[
+'🇸🇸',
+'flag: South Sudan',
+'flag flag south sudan south sd nation country banner'
+],[
+'🇸🇹',
+'flag: São Tomé & Príncipe',
+'flag flag sao tome principe sao tome principe nation country banner'
+],[
+'🇸🇻',
+'flag: El Salvador',
+'flag flag el salvador el salvador nation country banner'
+],[
+'🇸🇽',
+'flag: Sint Maarten',
+'flag flag sint maarten sint maarten dutch nation country banner'
+],[
+'🇸🇾',
+'flag: Syria',
+'flag flag syria syrian arab republic nation country banner'
+],[
+'🇸🇿',
+'flag: Eswatini',
+'flag flag eswatini sz nation country banner'
+],[
+'🇹🇦',
+'flag: Tristan da Cunha',
+'flag flag tristan da cunha'
+],[
+'🇹🇨',
+'flag: Turks & Caicos Islands',
+'flag flag turks caicos islands turks caicos islands nation country banner'
+],[
+'🇹🇩',
+'flag: Chad',
+'flag flag chad td nation country banner'
+],[
+'🇹🇫',
+'flag: French Southern Territories',
+'flag flag french southern territories french southern territories nation country banner'
+],[
+'🇹🇬',
+'flag: Togo',
+'flag flag togo tg nation country banner'
+],[
+'🇹🇭',
+'flag: Thailand',
+'flag flag thailand th nation country banner'
+],[
+'🇹🇯',
+'flag: Tajikistan',
+'flag flag tajikistan tj nation country banner'
+],[
+'🇹🇰',
+'flag: Tokelau',
+'flag flag tokelau tk nation country banner'
+],[
+'🇹🇱',
+'flag: Timor-Leste',
+'flag flag timor leste timor leste nation country banner'
+],[
+'🇹🇲',
+'flag: Turkmenistan',
+'flag flag turkmenistan nation country banner'
+],[
+'🇹🇳',
+'flag: Tunisia',
+'flag flag tunisia tn nation country banner'
+],[
+'🇹🇴',
+'flag: Tonga',
+'flag flag tonga to nation country banner'
+],[
+'🇹🇷',
+'flag: Turkey',
+'flag flag turkey turkey nation country banner'
+],[
+'🇹🇹',
+'flag: Trinidad & Tobago',
+'flag flag trinidad tobago trinidad tobago nation country banner'
+],[
+'🇹🇻',
+'flag: Tuvalu',
+'flag flag tuvalu nation country banner'
+],[
+'🇹🇼',
+'flag: Taiwan',
+'flag flag taiwan tw nation country banner'
+],[
+'🇹🇿',
+'flag: Tanzania',
+'flag flag tanzania tanzania united republic nation country banner'
+],[
+'🇺🇦',
+'flag: Ukraine',
+'flag flag ukraine ua nation country banner'
+],[
+'🇺🇬',
+'flag: Uganda',
+'flag flag uganda ug nation country banner'
+],[
+'🇺🇲',
+'flag: U.S. Outlying Islands',
+'flag flag u s outlying islands'
+],[
+'🇺🇳',
+'flag: United Nations',
+'flag flag united nations un banner'
+],[
+'🇺🇸',
+'flag: United States',
+'flag flag united states united states america nation country banner'
+],[
+'🇺🇾',
+'flag: Uruguay',
+'flag flag uruguay uy nation country banner'
+],[
+'🇺🇿',
+'flag: Uzbekistan',
+'flag flag uzbekistan uz nation country banner'
+],[
+'🇻🇦',
+'flag: Vatican City',
+'flag flag vatican city vatican city nation country banner'
+],[
+'🇻🇨',
+'flag: St. Vincent & Grenadines',
+'flag flag st vincent grenadines saint vincent grenadines nation country banner'
+],[
+'🇻🇪',
+'flag: Venezuela',
+'flag flag venezuela ve bolivarian republic nation country banner'
+],[
+'🇻🇬',
+'flag: British Virgin Islands',
+'flag flag british virgin islands british virgin islands bvi nation country banner'
+],[
+'🇻🇮',
+'flag: U.S. Virgin Islands',
+'flag flag u s virgin islands virgin islands us nation country banner'
+],[
+'🇻🇳',
+'flag: Vietnam',
+'flag flag vietnam viet nam nation country banner'
+],[
+'🇻🇺',
+'flag: Vanuatu',
+'flag flag vanuatu vu nation country banner'
+],[
+'🇼🇫',
+'flag: Wallis & Futuna',
+'flag flag wallis futuna wallis futuna nation country banner'
+],[
+'🇼🇸',
+'flag: Samoa',
+'flag flag samoa ws nation country banner'
+],[
+'🇽🇰',
+'flag: Kosovo',
+'flag flag kosovo xk nation country banner'
+],[
+'🇾🇪',
+'flag: Yemen',
+'flag flag yemen ye nation country banner'
+],[
+'🇾🇹',
+'flag: Mayotte',
+'flag flag mayotte yt nation country banner'
+],[
+'🇿🇦',
+'flag: South Africa',
+'flag flag south africa south africa nation country banner'
+],[
+'🇿🇲',
+'flag: Zambia',
+'flag flag zambia zm nation country banner'
+],[
+'🇿🇼',
+'flag: Zimbabwe',
+'flag flag zimbabwe zw nation country banner'
+],[
+'🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+'flag: England',
+'flag flag england english'
+],[
+'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+'flag: Scotland',
+'flag flag scotland scottish'
+],[
+'🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+'flag: Wales',
+'flag flag wales welsh'
 ]
-].forEach(emoji => { EMOJI.push({ 'code': emoji[0],
-                                  'name': emoji[1],
-                                  'keywords': emoji[2]
-                                });
-                    });
+];
 
 //this list is taken from https://unicode.org/emoji/charts/full-emoji-modifiers.html
+//Full Emoji Modifier Sequences, v13.1
+
 const MODED = [
 '👋🏻',
 '🤚🏻',
@@ -7574,8 +7574,7 @@ const MODED = [
 // create MODABLE[], the same emoji but with the skin tone modifiers removed.
 const MODABLE = [];
 for (let i = 0; i < MODED.length; i++) {
-    MODABLE[i] = MODED[i].replace('\u{1F3FB}', '');
-    MODABLE[i] = MODABLE[i].replace('\u{1F3FB}', '');
+    MODABLE[i] = MODED[i].replace(/\u{1F3FB}/ug, '');
 }
 
 module.exports = {EMOJI, MODED, MODABLE};

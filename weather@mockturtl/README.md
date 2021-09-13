@@ -23,7 +23,6 @@ You can also save locations what you entered manually and switch between them in
 | ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
 | **OpenWeatherMap**      | No            | 8                         | 48                         | --                        |
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
-| **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
 | **DMI Denmark**         | No            | 10                        | 48                         | --                        |
 | **Met Office UK**       | No            | 5                         | 36                         | --                        |
 | **US National Weather** | No            | 7                         | 156                        | --                        |
@@ -31,7 +30,6 @@ You can also save locations what you entered manually and switch between them in
 | **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
 | **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
 | **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
-| **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
 
 ### OpenWeatherMap
 
@@ -44,14 +42,6 @@ This is the default provider that works out of the box. Big Thanks to them suppo
 Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [Link](https://www.met.no/en)
 
 * Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
-
-### Yahoo
-
-**On approximately May 1, 2021, the free Yahoo Weather API will be retired and will cease to function.**
-
-The Weather Forecast provider that this applet once started with. [Link](https://www.yahoo.com/news/weather)
-
-* Current weather refreshes every 2 hours.
 
 ### DMI Denmark
 

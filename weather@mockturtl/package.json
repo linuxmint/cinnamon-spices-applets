@@ -1,0 +1,27 @@
+{
+  "name": "weather-mockturtl",
+  "version": "1.0.0",
+  "description": "Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the Cinnamon desktop.",
+  "main": "applet.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Attila Greguss",
+  "dependencies": {
+    "luxon": "^1.27.0",
+    "suncalc": "^1.8.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@types/luxon": "^1.27.0",
+    "@types/suncalc": "^1.8.0",
+    "babel-loader": "^8.2.2",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.5",
+    "webpack": "^5.42.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.2"
+  }
+}

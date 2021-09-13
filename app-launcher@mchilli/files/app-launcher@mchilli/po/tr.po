@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-25 12:25+0200\n"
+"PO-Revision-Date: 2021-08-03 12:58+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:91
+msgid "Edit Applications"
+msgstr "Uygulamaları Düzenle"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Uygulama Başlatıcı"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Basit bir Uygulama Başlatıcı"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Uygulamalar"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. settings-schema.json->section-groups->title
+msgid "Groups"
+msgstr "Gruplar"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Genel Ayarlar"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Uygulama Ayarları"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+msgid "Name"
+msgstr "Ad"
+
+#. settings-schema.json->list-applications->columns->title
+msgid "Group"
+msgstr "Grup"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+msgid "Icon"
+msgstr "Simge"
+
+#. settings-schema.json->list-applications->columns->title
+msgid "Command"
+msgstr "Komut"
+
+#. settings-schema.json->info-applications->description
+msgid ""
+"If you don't type in a group, the application will be displayed without a "
+"submenu."
+msgstr ""
+"Bir grup yazmazsanız, uygulama bir alt menü olmadan görüntülenecektir."
+
+#. settings-schema.json->force-update-groups->description
+msgid "Update Groups"
+msgstr "Grupları Güncelle"
+
+#. settings-schema.json->info-force-update->description
+msgid ""
+"Unfortunately you must be force update the group list. It updates "
+"internally\n"
+"but it will not be shown in the list without a restart of this dialog."
+msgstr ""
+"Maalesef grup listesini güncellemeye zorlamalısınız. Dahili olarak "
+"güncellenir\n"
+"ancak bu iletişim kutusu yeniden başlatılmadan listede gösterilmeyecektir."
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Etiketi Göster"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Etiket"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Özel Simge"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Bildirimleri Göster"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Uygulama başlatıldığında bildirimi göster"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Bildirim Metni"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s uygulama adınız olacak"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Uygulama Simgelerini Göster"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Açılır Menüde Uygulama Simgelerini Göster"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Sembolik Uygulama Simgelerini Kullanın"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Mümkün olduğunda Sembolik Uygulama Simgelerini kullanın"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Uygulama Simge Boyutu"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Simge boyutunu ayarla"

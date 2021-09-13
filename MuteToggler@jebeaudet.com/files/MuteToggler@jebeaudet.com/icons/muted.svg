@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" x="0px" y="0px" viewBox="-106 108.6 285.4 285.4" style="enable-background:new -106 108.6 285.4 285.4;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="36.7" y1="115.6" x2="36.7" y2="387" id="gradient-0">
+      <stop offset="0" style="stop-color: rgba(218, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(116, 0, 0, 1)"/>
+    </linearGradient>
+  </defs>
+  <style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#231F20;stroke-width:10;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#231F20;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+  <g id="Layer_1">
+    <g id="Layer_1_1_">
+      <circle class="st0" cx="36.7" cy="251.3" r="135.7" style="fill-opacity: 0.88; stroke-width: 0px; fill: url(#gradient-0);"/>
+    </g>
+  </g>
+  <g id="Layer_3">
+    <line class="st1" x1="36.7" y1="359.6" x2="36.7" y2="298.6" style="stroke: rgb(196, 196, 196);"/>
+    <path class="st1" d="M-23,245.6c0,29.2,26.7,53,59.7,53s59.7-23.7,59.7-53" style="stroke: rgb(196, 196, 196);"/>
+  </g>
+  <g id="Layer_2"/>
+  <g id="Layer_4" style="" transform="matrix(0.82699, 0, 0, 0.861801, 7.279117, 36.925617)">
+    <g>
+      <path d="M65,170H8.4c-6.6,0-12,5.4-12,12v81.6c0,6.6,5.4,12,12,12H65c6.6,0,12-5.4,12-12V182C77,175.4,71.6,170,65,170z" style="fill: rgb(196, 196, 196);"/>
+      <circle cx="36.7" cy="178" r="40.3" style="fill: rgb(196, 196, 196);"/>
+    </g>
+  </g>
+  <line style="fill: rgb(75, 192, 155); stroke: rgb(196, 196, 196); stroke-width: 10px; stroke-linecap: round; stroke-miterlimit: 6;" x1="-42.087" y1="152.758" x2="129.897" y2="334.038"/>
+</svg>

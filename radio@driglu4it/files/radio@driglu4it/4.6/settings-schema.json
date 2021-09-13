@@ -102,6 +102,11 @@
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
 				"inc": true
+			},
+			{
+				"name": "Deep House Radio",
+				"url": "http://62.210.105.16:7000/stream",
+				"inc": true
 			}
 		]
 	},

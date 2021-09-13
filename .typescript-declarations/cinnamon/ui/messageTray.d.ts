@@ -95,7 +95,7 @@ declare namespace imports.ui.messageTray {
 
 	interface NotificationParams {
 		/** Default null */
-		icon: string;
+		icon: gi.St.Icon;
 		/** Default false */
 		titleMarkup: boolean;
 		/** Default false */
@@ -201,6 +201,11 @@ declare namespace imports.ui.messageTray {
 		protected _onDestroy(): void;
 
 		public destroy(reason: string): void;
+
+		public connect(event: 'action-invoked', cb: (actor: this, actionId: string) => void): void
+		public connect(event: 'done-displaying' | 'clicked', cb: (actor: this) => void): void
+		public connect(event: 'destroyed', cb: (actor: this, destroyedReason: string) => void): void
+
 	}
 
 	type SourceEventEmitters = "title-changed" | "notification-added" | "notify" | "destroy";

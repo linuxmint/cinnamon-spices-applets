@@ -107,6 +107,7 @@ class CategoryButton {
     setButtonStyleNormal() {
         this.actor.set_style_class_name('menu-category-button');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+        this.icon.set_opacity(255);
     }
 
     setButtonStyleSelected() {
@@ -122,37 +123,27 @@ class CategoryButton {
         //-----some style tweaks for menu-category-button-hover class.-----
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = 'Cinnamon default';
-        [//Mint-Y & Mint-Y-<color>
-        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],
-        //Mint-Y-Dark & Mint-Y-Dark-<color>
-        ['/Mint-Y-Dark',        'background-color: #404040;'],
-        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-        //Mint-X-<color>
-        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],
-        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark'
-        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +
+        [
+        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],//Mint-Y & Mint-Y-<color> (red)
+        ['/Mint-Y-Dark',        'background-color: #404040;'],//Mint-Y-Dark & Mint-Y-Dark-<color> (light grey)
+        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],//(normal)
+        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],//Mint-X-<color>
+        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark' //(light grey)
+        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],//normal
+        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +   //normal
                                                     'background-gradient-end: rgba(255,255,255,0.03);'],
-        ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-        ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-        //Cinnamox-<color>
-        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],
-        ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-        ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-        ['/Monternos/',         'color: rgb(70, 70, 70); background-color: rgb(201, 204, 238); ' +
-                                                                                'border-image: none;'],
-        ['/Sweet/',             'background-color: #222e32;'],
-        //Sweet-Ambar & Sweet-Ambar-blue
-        ['/Sweet-Ambar',        'background-color: #25262d;'],
-        ['/Sweet-Dark/',        'background-color: #1c1f2e;'],
-        ['/Sweet-mars/',        'background-color: #23282c;'],
-        //Vivaldi & Vivaldi-ZorinOS
-        ['/Vivaldi',            'background-color: rgba(50,50,50,1);'],
-        //Ubuntu cinnamon
-        ['/Yaru-Cinnamon-Light/', 'background-color: #d8d8d8; color: black;'],
-        ['/Yaru-Cinnamon-Dark/', 'background-color: #404040;']
+        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],//Manjaro (normal)
+        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],//Manjaro default
+        ['/Cinnamox-',          'background-color: rgba(255,255,255,0.2);'],//Cinnamox- themes (normal)
+        ['/Dracula',            'background-color: #2d2f3d'],
+        ['/Matcha-',            'background-color: white;'],//other Matcha- and Matcha-light- themes
+        ['/Matcha-dark-aliz',   'background-color: #2d2d2d;'],
+        ['/Matcha-dark-azul',   'background-color: #2a2d36;'],
+        ['/Matcha-dark-sea',    'background-color: #273136;'],
+        ['/Matcha-dark-cold',   'background-color: #282b33;'],
+        //Yaru are ubuntu cinnamon themes:
+        ['/Yaru-Cinnamon-Light/','background-color: #d8d8d8; color: black;'],
+        ['/Yaru-Cinnamon-Dark/','background-color: #404040;']
         ].forEach(fix => {
             if (themePath.includes(fix[0])) {
                 this.actor.set_style(fix[1]);
@@ -163,6 +154,12 @@ class CategoryButton {
     _setButtonStyleGreyed() {
         this.actor.set_style_class_name('menu-category-button-greyed');
         this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
+
+        let icon_opacity = this.icon.get_theme_node().get_double('opacity');
+        icon_opacity = Math.min(Math.max(0, icon_opacity), 1);
+        if (icon_opacity) { // Don't set opacity to 0 if not defined
+            this.icon.set_opacity(icon_opacity * 255);
+        }
     }
 
     selectCategory() {
@@ -178,7 +175,7 @@ class CategoryButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keypress
-            this.appThis.scrollToButton(this, true);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;
@@ -333,7 +330,7 @@ class ContextMenu {
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
-        
+
         //------populate menu
         if (isACategoryButton) {
             const addMenuItem = (item) => {
@@ -351,15 +348,14 @@ class ContextMenu {
                 return;
             }
         } else if (app.isSearchResult && app.emoji) {
-            if (!MODABLE.includes(app.emoji)) {
+            const i = MODABLE.indexOf(app.emoji);//Find if emoji is in list of emoji that can have
+                                                 //skin tone modifiers.
+            if (i < 0) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.emoji);//Find if emoji is in list of emoji that can have
-                                                     //skin tone modifiers.
-                let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
-                                                                    // MODED[i] with skin tone chosen by user.
-                newEmoji = newEmoji.replace('\u{1F3FB}', char);//repeat in case a second modifier
+                const newEmoji = MODED[i].replace(/\u{1F3FB}/ug, char); //replace light skin tone character in
+                                                                       // MODED[i] with skin tone option.
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
@@ -367,11 +363,11 @@ class ContextMenu {
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
-            addMenuItem('\u{1F3FB}', 'light skin tone');
-            addMenuItem('\u{1F3FC}', 'medium-light skin tone');
-            addMenuItem('\u{1F3FD}', 'medium skin tone');
-            addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
-            addMenuItem('\u{1F3FF}', 'dark skin tone');
+            addMenuItem('\u{1F3FB}', _('light skin tone'));
+            addMenuItem('\u{1F3FC}', _('medium-light skin tone'));
+            addMenuItem('\u{1F3FD}', _('medium skin tone'));
+            addMenuItem('\u{1F3FE}', _('medium-dark skin tone'));
+            addMenuItem('\u{1F3FF}', _('dark skin tone'));
         } else {
             return;
         }
@@ -580,11 +576,12 @@ class AppButton {
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.signals = new SignalManager(null);
         //----------ICON---------------------------------------------
-        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton
+        if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
+                                    //isFolderviewFile/Directory, isSearchResult(wikipedia)
             let gicon = this.app.gicon;
-            if (!this.app.isWebBookmark) {
+            if (!this.app.isWebBookmark && !this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
@@ -595,30 +592,34 @@ class AppButton {
             this.icon = iconLabel;
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
-        } else if (this.app.isPlace) {//isPlace
+        } else if (this.app.iconFactory) {//isPlace
             this.icon = this.app.iconFactory(this.appThis.getAppIconSize());
             if (!this.icon) {
                 this.icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
             }
-        } else if (this.app.isBackButton) {
-            this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
-        //menu-application-button-label in themes are designed for list view and may have uneven
+        //.menu-application-button-label{} in themes are designed for list view and may have uneven
         //padding, so in grid view make padding symmetrical and center text
+        let labelStyle = '';
         if (!isListView) {
-            this.label.style = 'padding-right: 2px; padding-left: 2px; text-align: center;';
+            labelStyle = 'padding-right: 2px; padding-left: 2px; text-align: center; ';
         }
+        if (this.app.isClearRecentsButton) {
+            labelStyle += 'font-weight: bold;';
+        }
+        this.label.style = labelStyle;
         //set label text
         let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
         let description = this.app.description ?
                             this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
         let markup = '<span>' + name + '</span>';
         if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
+            description = description.replace(/\n/g, ' ');//remove formatting intended for tooltip
             markup += '\n<span size="small">' + description + '</span>';
         }
         const clutterText = this.label.get_clutter_text();
@@ -771,7 +772,7 @@ class AppButton {
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keyboard navigation
-            this.appThis.scrollToButton(this);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
         this._setButtonSelected();
 
@@ -1028,7 +1029,7 @@ class SidebarButton {
         if (event) {
             this.appThis.clearEnteredActors();
         } else {//key nav
-            this.appThis.scrollToButton(this);
+            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.entered = true;

@@ -105,7 +105,7 @@
     "applet-save-location" : {
         "type" : "filechooser",
         "description": "Picture save location",
-        "default" : "/home/simon",
+        "default" : "",
         "select-dir" : true,
         "tooltip": "When you choose to save the current background, where do you want to put it?"
     },

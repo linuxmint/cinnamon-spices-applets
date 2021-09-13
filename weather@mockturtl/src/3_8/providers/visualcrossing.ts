@@ -1,9 +1,9 @@
-import { Services } from "config";
-import { HttpError, HTTPParams } from "lib/httpLib";
-import { WeatherApplet } from "main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
-import { CelsiusToKelvin, IsLangSupported, _ } from "utils";
-
+import { DateTime } from "luxon";
+import { Services } from "../config";
+import { HttpError, HTTPParams } from "../lib/httpLib";
+import { WeatherApplet } from "../main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
 
 
 export class VisualCrossing implements WeatherProvider {
@@ -31,7 +31,7 @@ export class VisualCrossing implements WeatherProvider {
 		this.app = app;
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		if (loc == null) return null;
 		this.params['key'] = this.app.config.ApiKey;
 		let translate = true;
@@ -48,9 +48,9 @@ export class VisualCrossing implements WeatherProvider {
 	}
 
 	private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {
-		let currentHour = this.GetCurrentHour(weather.days);
+		let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
 		let result: WeatherData = {
-			date: new Date(weather.currentConditions.datetimeEpoch * 1000),
+			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
 			location: {
 				url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
 				timeZone: weather.timezone,
@@ -60,89 +60,93 @@ export class VisualCrossing implements WeatherProvider {
 				lat: weather.latitude,
 				lon: weather.longitude,
 			},
-			humidity: weather.currentConditions.humidity ?? currentHour.humidity,
-			pressure: weather.currentConditions.pressure ?? currentHour.pressure,
+			humidity: weather.currentConditions.humidity ?? currentHour?.humidity,
+			pressure: weather.currentConditions.pressure ?? currentHour?.pressure,
 			wind: {
-				degree: weather.currentConditions.winddir ?? currentHour.winddir,
-				speed: weather.currentConditions.windspeed ?? currentHour.windspeed,
+				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
+				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,
 			},
-			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour.temp),
-			sunrise: new Date(weather.currentConditions.sunriseEpoch * 1000),
-			sunset: new Date(weather.currentConditions.sunsetEpoch * 1000),
+			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour?.temp),
+			sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
+			sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
 			condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
 			extra_field: {
 				name: _("Feels Like"),
 				type: "temperature",
 				// use current hour instead, observations feels like doesn't seem to differ at all
-				value: CelsiusToKelvin(currentHour.feelslike ?? weather.currentConditions.feelslike)
+				value: CelsiusToKelvin(currentHour?.feelslike ?? weather.currentConditions.feelslike)
 			},
-			forecasts: this.ParseForecasts(weather.days, translate),
-			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate)
+			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
+			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
 		}
 
 		return result;
 	}
 
-	private ParseForecasts(forecasts: DayForecast[], translate: boolean): ForecastData[] {
+	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
 		let result: ForecastData[] = [];
-		for (let index = 0; index < forecasts.length; index++) {
-			const element = forecasts[index];
-			result.push({
-				date: new Date(element.datetimeEpoch * 1000),
-				condition: this.GenerateCondition(element.icon, element.conditions, translate),
-				temp_max: CelsiusToKelvin(element.tempmax),
-				temp_min: CelsiusToKelvin(element.tempmin)
-			});
+		if (!! forecasts) {
+			for (let index = 0; index < forecasts.length; index++) {
+				const element = forecasts[index];
+				result.push({
+					date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
+					condition: this.GenerateCondition(element.icon, element.conditions, translate),
+					temp_max: CelsiusToKelvin(element.tempmax),
+					temp_min: CelsiusToKelvin(element.tempmin)
+				});
+			}
 		}
 
 		return result;
 	}
 
-	private ParseHourlyForecasts(forecasts: DayForecast[], translate: boolean): HourlyForecastData[] {
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+	private ParseHourlyForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): HourlyForecastData[] {
+		let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
 		let result: HourlyForecastData[] = [];
-		for (let index = 0; index < forecasts.length; index++) {
-			const element = forecasts[index];
-			for (let index = 0; index < element.hours.length; index++) {
-				const hour = element.hours[index];
-				let time = new Date(hour.datetimeEpoch * 1000);
-				if (time < currentHour) continue;
-				let item: HourlyForecastData = {
-					date: time,
-					temp: CelsiusToKelvin(hour.temp),
-					condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
-				}
+		if (!!forecasts) {
+			for (let index = 0; index < forecasts.length; index++) {
+				const element = forecasts[index];
+				if (!element.hours)
+					continue;
 
-				if (hour.preciptype != null) {
-					item.precipitation = {
-						type: hour.preciptype[0],
-						chance: hour.precipprob,
-						volume: hour.precip
+				for (let index = 0; index < element.hours.length; index++) {
+					const hour = element.hours[index];
+					let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+					if (time < currentHour) continue;
+					let item: HourlyForecastData = {
+						date: time,
+						temp: CelsiusToKelvin(hour.temp),
+						condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
 					}
 
-					/*if (item.precipitation.type == "snow")
-					item.precipitation.volume = hour.snow;*/
-				}
+					if (hour.preciptype != null) {
+						item.precipitation = {
+							type: hour.preciptype[0],
+							chance: hour.precipprob,
+							volume: hour.precip
+						}
 
-				result.push(item);
+						/*if (item.precipitation.type == "snow")
+						item.precipitation.volume = hour.snow;*/
+					}
+
+					result.push(item);
+				}
 			}
 		}
 		return result;
 	}
 
-	private GetCurrentHour(forecasts: DayForecast[]): HourForecast {
-		if (forecasts?.length < 1)
+	private GetCurrentHour(forecasts: DayForecast[] | undefined, tz: string): HourForecast | null {
+		if (!forecasts || forecasts?.length < 1 || !forecasts[0].hours)
 			return null;
 
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+		let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
-		const element = forecasts[0];
-		for (let index = 0; index < element.hours.length; index++) {
-			const hour = element.hours[index];
-			let time = new Date(hour.datetimeEpoch * 1000);
+		for (let index = 0; index < forecasts[0].hours.length; index++) {
+			const hour = forecasts[0].hours[index];
+			let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 			if (time < currentHour) continue;
 			return hour;
 		}

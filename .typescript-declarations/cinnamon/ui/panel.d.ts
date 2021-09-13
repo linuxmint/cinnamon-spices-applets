@@ -649,5 +649,8 @@ declare namespace imports.ui.panel {
 		public getIsVisible(): boolean;
 
 		public resetDNDZones(): void;
+
+		public connect(event: 'size-changed', cb: (actor: this, height: number) => void): number
+		public connect(event: 'icon-size-changed', cb: (actor: this) => void): number
 	}
 }

@@ -1,21 +1,15 @@
 {
-	"compilerOptions": {
-		"lib": [
-			"es2017"
-		],
-		"module": "CommonJS",
-		"target": "es2017",
-		"noImplicitAny": true,
-		"removeComments": true,
-		"baseUrl": "./src",
-		"preserveConstEnums": false,
-		"sourceMap": false,
-		"noImplicitThis": true,
-		"outDir": "./files/radio@driglu4it/4.6/",
-		"types": [] // ignore types from node_modules https://stackoverflow.com/a/54277766/11603006
-	},
-	"include": [
-		"./src/**/*",
-		"../.typescript-declarations/**/*",
-	],
+    "compilerOptions": {
+        "lib": [
+            "es2017" // important to hide default typescript libraries (such as DOM elements): https://stackoverflow.com/questions/57336918/disable-intellisense-for-default-typescript-libraries-in-vscode
+        ],
+        "moduleResolution": "Node",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "target": "es2017",
+        "types": [] // ignore global types from node_modules https://stackoverflow.com/a/54277766/11603006 (important for not showing node globals such as console in intelisense)
+    },
+    "include": [
+        "./src/**/*",
+    ]
 }

@@ -1,4 +1,12 @@
+import { DateTime } from "luxon";
+import { GetTimesResult } from "suncalc";
 import { Services } from "./config";
+
+export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
+export interface SunTime {
+	sunrise: DateTime;
+	sunset: DateTime;
+}
 
 /**
  * A WeatherProvider must implement this interface.
@@ -11,7 +19,7 @@ export interface WeatherProvider {
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 
-	GetWeather(loc: LocationData): Promise<WeatherData>;
+	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -22,7 +30,7 @@ export const enum RefreshState {
 }
 
 export interface WeatherData {
-	date: Date;
+	date: DateTime;
 	coord: {
 		lat: number,
 		lon: number,
@@ -31,27 +39,27 @@ export interface WeatherData {
 		city?: string,
 		country?: string,
 		timeZone?: string,
-		url: string,
+		url?: string,
 		/** in metres */
 		distanceFrom?: number,
 		tzOffset?: number
 	},
 	/** preferably in UTC */
-	sunrise: Date,
+	sunrise: DateTime | null,
 	/** preferably in UTC */
-	sunset: Date,
+	sunset: DateTime | null,
 	wind: {
 		/** Meter/sec */
-		speed: number,
+		speed: number | null,
 		/** Meteorological Degrees */
-		degree: number,
+		degree: number | null,
 	};
 	/** In Kelvin */
-	temperature: number;
+	temperature: number | null;
 	/** In hPa */
-	pressure: number;
+	pressure: number | null;
 	/** In percent */
-	humidity: number;
+	humidity: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[]
@@ -80,20 +88,20 @@ type ExtraField = "percent" | "temperature" | "string";
 
 export interface ForecastData {
 	/** Set to 12:00 if possible */
-	date: Date,
+	date: DateTime,
 	/** Kelvin */
-	temp_min: number,
+	temp_min: number | null,
 	/** Kelvin */
-	temp_max: number,
+	temp_max: number | null,
 	condition: Condition
 }
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
 	/** Set to 12:00 if possible */
-	date: Date;
+	date: DateTime;
 	/** Kelvin */
-	temp: number;
+	temp: number | null;
 	condition: Condition;
 	precipitation?: Precipitation;
 }
@@ -110,8 +118,9 @@ type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city: string;
-	country: string;
+	city?: string;
+	country?: string;
+	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
 }

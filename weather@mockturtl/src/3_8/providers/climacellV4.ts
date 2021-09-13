@@ -1,9 +1,9 @@
-import { Services } from "config";
-import { HttpError, HTTPParams } from "lib/httpLib";
-import { WeatherApplet } from "main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
-import { CelsiusToKelvin, _ } from "utils";
-
+import { DateTime } from "luxon";
+import { Services } from "../config";
+import { HttpError, HTTPParams } from "../lib/httpLib";
+import { WeatherApplet } from "../main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import { CelsiusToKelvin, _ } from "../utils";
 
 export class ClimacellV4 implements WeatherProvider {
 	needsApiKey: boolean = true;
@@ -29,7 +29,7 @@ export class ClimacellV4 implements WeatherProvider {
 		this.app = app;
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
@@ -58,17 +58,20 @@ export class ClimacellV4 implements WeatherProvider {
 		return true;
 	}
 
-	private ParseWeather(loc: LocationData, data: ClimacellV4Payload): WeatherData {
+	private ParseWeather(loc: LocationData, data: ClimacellV4Payload): WeatherData | null {
 		let current = data.data.timelines.find(x => x.timestep == "current")?.intervals?.[0];
-		let hourly = data.data.timelines.find(x => x.timestep == "1h").intervals;
-		let daily = data.data.timelines.find(x => x.timestep == "1d").intervals;
+		let hourly = data.data.timelines.find(x => x.timestep == "1h")?.intervals;
+		let daily = data.data.timelines.find(x => x.timestep == "1d")?.intervals;
+
+		if (!current || !daily || !hourly || !daily[0]?.values)
+			return null;
 
 		let result: WeatherData = {
 			coord: {
 				lat: loc.lat,
 				lon: loc.lon
 			},
-			date: new Date(current.startTime),
+			date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
 			condition: this.ResolveCondition(current.values.weatherCode),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
@@ -77,8 +80,9 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
-			sunrise: new Date(daily?.[0].values.sunriseTime),
-			sunset: new Date(daily?.[0].values.sunsetTime),
+			// Cast to string, we always get sunrise/sunset from daily
+			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
+			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
 			location: {
 				url: "https://www.climacell.co/weather"
 			},
@@ -97,7 +101,7 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = daily[index];
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: new Date(element.startTime),
+				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
@@ -107,13 +111,13 @@ export class ClimacellV4 implements WeatherProvider {
 			const element = hourly[index];
 			let hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
-				date: new Date(element.startTime),
+				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.values.temperature)
 			};
 
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
-			hour.date.setMinutes(0, 0, 0);
+			hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
 
 			if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
 				hour.precipitation = {

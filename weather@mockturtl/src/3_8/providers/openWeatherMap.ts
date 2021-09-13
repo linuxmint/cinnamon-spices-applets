@@ -6,13 +6,12 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "lib/httpLib";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "types";
-import { _, IsLangSupported } from "utils";
-
-const Lang: typeof imports.lang = imports.lang;
+import { DateTime } from "luxon";
+import { HttpError } from "../lib/httpLib";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
+import { _, IsLangSupported } from "../utils";
 
 export class OpenWeatherMap implements WeatherProvider {
 	//--------------------------------------------------------
@@ -41,21 +40,21 @@ export class OpenWeatherMap implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let query = this.ConstructQuery(this.base_url, loc);
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleError));
+		let json = await this.app.LoadJsonAsync<any>(query, {}, this.HandleError);
 		if (!json)
 			return null;
 
 		if (this.HadErrors(json)) return null;
 
-		return this.ParseWeather(json, this);
+		return this.ParseWeather(json, loc);
 	};
 
-	private ParseWeather(json: any, self: OpenWeatherMap): WeatherData {
+	private ParseWeather(json: any, loc: LocationData): WeatherData | null {
 		try {
 			let weather: WeatherData = {
 				coord: {
@@ -68,9 +67,9 @@ export class OpenWeatherMap implements WeatherProvider {
 					url: "https://openweathermap.org/city/",
 					timeZone: json.timezone
 				},
-				date: new Date((json.current.dt) * 1000),
-				sunrise: new Date((json.current.sunrise) * 1000),
-				sunset: new Date((json.current.sunset) * 1000),
+				date: DateTime.fromSeconds(json.current.dt, {zone: json.timezone}),
+				sunrise: DateTime.fromSeconds(json.current.sunrise, {zone: json.timezone}),
+				sunset: DateTime.fromSeconds(json.current.sunset, {zone: json.timezone}),
 				wind: {
 					speed: json.current.wind_speed,
 					degree: json.current.wind_deg
@@ -81,8 +80,8 @@ export class OpenWeatherMap implements WeatherProvider {
 				condition: {
 					main: json?.current?.weather?.[0]?.main,
 					description: json?.current?.weather?.[0]?.description,
-					icons: self.ResolveIcon(json?.current?.weather?.[0]?.icon),
-					customIcon: self.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
+					icons: this.ResolveIcon(json?.current?.weather?.[0]?.icon),
+					customIcon: this.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
 				},
 				extra_field: {
 					name: _("Feels Like"),
@@ -116,14 +115,14 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let i = 0; i < json.daily.length; i++) {
 				let day = json.daily[i];
 				let forecast: ForecastData = {
-					date: new Date(day.dt * 1000),
+					date: DateTime.fromSeconds(day.dt, {zone: json.timezone}),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
 					condition: {
 						main: day.weather[0].main,
 						description: day.weather[0].description,
-						icons: self.ResolveIcon(day.weather[0].icon),
-						customIcon: self.ResolveCustomIcon(day.weather[0].icon)
+						icons: this.ResolveIcon(day.weather[0].icon),
+						customIcon: this.ResolveCustomIcon(day.weather[0].icon)
 					},
 				};
 				forecasts.push(forecast);
@@ -134,13 +133,13 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
 				let forecast: HourlyForecastData = {
-					date: new Date(hour.dt * 1000),
+					date: DateTime.fromSeconds(hour.dt, {zone: json.timezone}),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather[0].main,
 						description: hour.weather[0].description,
-						icons: self.ResolveIcon(hour.weather[0].icon),
-						customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+						icons: this.ResolveIcon(hour.weather[0].icon),
+						customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
 					},
 				}
 
@@ -148,7 +147,7 @@ export class OpenWeatherMap implements WeatherProvider {
 					forecast.precipitation = {
 						chance: hour.pop * 100,
 						type: "none",
-						volume: null
+						volume: undefined
 					}
 				}
 
@@ -169,8 +168,8 @@ export class OpenWeatherMap implements WeatherProvider {
 			weather.hourlyForecasts = hourly;
 			return weather;
 		} catch (e) {
-			Log.Instance.Error("OpenWeatherMap Weather Parsing error: " + e);
-			self.app.ShowError({
+			Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",
 				detail: "unusual payload",
@@ -193,7 +192,10 @@ export class OpenWeatherMap implements WeatherProvider {
 		return query;
 	};
 
-	private ConvertToAPILocale(systemLocale: string) {
+	private ConvertToAPILocale(systemLocale: string | null) {
+		if (systemLocale == null)
+			return "en";
+			
 		// Dialect? support by OWM
 		if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
 			return systemLocale;
@@ -245,8 +247,8 @@ export class OpenWeatherMap implements WeatherProvider {
 				break;
 		};
 		this.app.ShowError(error);
-		Log.Instance.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
-		Log.Instance.Error(errorMsg + errorPayload.message);
+		Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
+		Logger.Error(errorMsg + errorPayload.message);
 		return true;
 	};
 
@@ -254,7 +256,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		return (!!json?.cod);
 	}
 
-	public HandleError(error: HttpError): boolean {
+	public HandleError = (error: HttpError): boolean => {
 		if (error.code == 404) {
 			this.app.ShowError({
 				detail: "location not found",
