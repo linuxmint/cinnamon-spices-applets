@@ -154,9 +154,8 @@ msgid "Bosnia and Herzegovina"
 msgstr "Bosnien og Herzegovina"
 
 #. settings-schema.json->country->options
-#, fuzzy
 msgid "Belarus"
-msgstr "Glarus"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -511,14 +510,12 @@ msgid "Asturias"
 msgstr ""
 
 #. settings-schema.json->region_esp->options
-#, fuzzy
 msgid "Canarias"
-msgstr "Canada"
+msgstr ""
 
 #. settings-schema.json->region_esp->options
-#, fuzzy
 msgid "Cantabria"
-msgstr "Canterbury"
+msgstr ""
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla y León"

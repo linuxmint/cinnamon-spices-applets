@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: 2021-08-27 20:43-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: pt_BR\n"
 
 #: applet.js:65
 msgid "Date and Time Settings"
@@ -33,6 +33,7 @@ msgstr "Editar entrada"
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -52,7 +53,9 @@ msgstr "Calendário com feriados púbicos"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Miniaplicativo de calendário com dados de feriados fornecidos por serviço Enrico"
+msgstr ""
+"Miniaplicativo de calendário com dados de feriados fornecidos por serviço "
+"Enrico"
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
@@ -108,8 +111,11 @@ msgid "Use a custom date format"
 msgstr "Usar um formato de data personalizado"
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Marque esta opção para definir um formato personalizado para a data no miniaplicativo de calendário."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Marque esta opção para definir um formato personalizado para a data no "
+"miniaplicativo de calendário."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
@@ -125,7 +131,8 @@ msgstr "Mostra informações sobre a sintaxe do formato de data"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
+msgstr ""
+"Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -150,6 +157,10 @@ msgstr "Bélgica"
 #. settings-schema.json->country->options
 msgid "Bosnia and Herzegovina"
 msgstr "Bósnia e Herzegovina"
+
+#. settings-schema.json->country->options
+msgid "Belarus"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -186,6 +197,10 @@ msgstr "Dinamarca"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estônia"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -486,6 +501,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thüringen"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr ""
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"
