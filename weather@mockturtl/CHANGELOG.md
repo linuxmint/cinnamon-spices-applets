@@ -3,6 +3,7 @@
 ## 3.1.3
 * Update DarkSky API cutoff date
 * Update TS declarations
+* Change Climacell naming to Tomorrow.io
 
 ## 3.1.2
 
