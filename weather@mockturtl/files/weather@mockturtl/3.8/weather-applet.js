@@ -14218,11 +14218,11 @@ class VisualCrossing {
 class ClimacellV4 {
     constructor(app) {
         this.needsApiKey = true;
-        this.prettyName = _("Climacell");
-        this.name = "ClimacellV4";
+        this.prettyName = _("Tomorrow.io");
+        this.name = "Tomorrow.io";
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;
-        this.website = "https://www.climacell.co/";
+        this.website = "https://www.tomorrow.io/";
         this.url = "https://data.climacell.co/v4/timelines";
         this.params = {
             apikey: null,
@@ -14280,7 +14280,7 @@ class ClimacellV4 {
             sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
             sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
             location: {
-                url: "https://www.climacell.co/weather"
+                url: "https://www.tomorrow.io/weather"
             },
             extra_field: {
                 name: _("Feels Like"),
@@ -15195,8 +15195,8 @@ class WeatherApplet extends TextIconApplet {
                 if (currentName != "Weatherbit" || force)
                     this.provider = new Weatherbit(this);
                 break;
-            case "ClimacellV4":
-                if (currentName != "ClimacellV4" || force)
+            case "Tomorrow.io":
+                if (currentName != "Tomorrow.io" || force)
                     this.provider = new ClimacellV4(this);
                 break;
             case "Met Office UK":

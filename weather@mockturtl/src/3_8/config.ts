@@ -30,7 +30,7 @@ export type Services =
 	"DarkSky" |
 	"MetNorway" |
 	"Weatherbit" |
-	"ClimacellV4" |
+	"Tomorrow.io" |
 	"Met Office UK" |
 	"US Weather" |
 	"Visual Crossing" |

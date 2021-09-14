@@ -418,8 +418,8 @@ export class WeatherApplet extends TextIconApplet {
 			case "Weatherbit":
 				if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
 				break;
-			case "ClimacellV4":
-				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);
+			case "Tomorrow.io":
+				if (currentName != "Tomorrow.io" || force) this.provider = new ClimacellV4(this);
 				break;
 			case "Met Office UK":
 				if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);

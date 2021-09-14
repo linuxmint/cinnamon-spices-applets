@@ -7,11 +7,11 @@ import { CelsiusToKelvin, _ } from "../utils";
 
 export class ClimacellV4 implements WeatherProvider {
 	needsApiKey: boolean = true;
-	prettyName: string = _("Climacell");
-	name: Services = "ClimacellV4";
+	prettyName: string = _("Tomorrow.io");
+	name: Services = "Tomorrow.io";
 	maxForecastSupport: number = 15;
 	maxHourlyForecastSupport: number = 108;
-	website: string = "https://www.climacell.co/";
+	website: string = "https://www.tomorrow.io/";
 
 	private app: WeatherApplet;
 
@@ -84,7 +84,7 @@ export class ClimacellV4 implements WeatherProvider {
 			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
 			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
 			location: {
-				url: "https://www.climacell.co/weather"
+				url: "https://www.tomorrow.io/weather"
 			},
 			extra_field: {
 				name: _("Feels Like"),
