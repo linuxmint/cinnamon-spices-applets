@@ -38,8 +38,13 @@ createMetadata()
 module.exports = {
     mode: 'production',
     entry: './src/index.ts',
-    devtool: "eval-source-map",
+    
+    // devtool: "eval-source-map",
     target: 'node', // without webpack renames 'global'
+    optimization: {
+        minimize: false,
+        usedExports: true,
+    },
     module: {
         rules: [
             {

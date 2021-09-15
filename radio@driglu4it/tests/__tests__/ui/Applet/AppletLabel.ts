@@ -1,7 +1,6 @@
 import { createAppletLabel } from "ui/Applet/AppletLabel";
 const { EllipsizeMode } = imports.gi.Pango
 
-
 const text1 = "dummy"
 const text2 = "text2"
 
@@ -9,12 +8,9 @@ const text2 = "text2"
 it('initialization is working', () => {
     const label = createAppletLabel()
 
-    // @ts-ignore
     expect(label.actor.reactive).toBe(true)
-    // @ts-ignore
     expect(label.actor.track_hover).toBe(true)
     expect(label.actor.style_class).toBe('applet-label')
-    // @ts-ignore
     expect(label.actor.clutter_text.ellipsize).toBe(EllipsizeMode.NONE)
 })
 
@@ -63,12 +59,10 @@ describe('setting text and visibility is working', () => {
         label.setVisibility(true)
         label.setText(null)
 
-        // @ts-ignore
         expect(label.actor.visible).toBe(false)
 
         label.setText(text1)
 
-        // @ts-ignore
         expect(label.actor.visible).toBe(true)
         expect(label.actor.text).toBe(` ${text1}`)
     })
