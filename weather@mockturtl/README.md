@@ -33,25 +33,25 @@ You can also save locations what you entered manually and switch between them in
 
 ### OpenWeatherMap
 
-Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [Link OpenWeatherMap Website](https://openweathermap.org/) 
+Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [OpenWeatherMap Website](https://openweathermap.org/) 
 
 This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
-Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [Link MET Norway Website](https://www.met.no/en)
+Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en)
 
 * Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
 
 ### DMI Denmark
 
-The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [Link DMI Denmark Website](https://www.dmi.dk)
+The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk)
 
 * The service is global with open weather data.
 
 ### Met Office UK
 
-The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Link Met Office UK Website](https://www.metoffice.gov.uk/)
+The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/)
 
 * Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
 
@@ -61,7 +61,7 @@ The Meteorological Office, abbreviated as the Met Office, is the UK's national w
 
 ### US National Weather
 
-The National Weather Service in the USA is a federal government agency formed in 1861. [Link US National Weather Website](https://www.weather.gov/)
+The National Weather Service in the USA is a federal government agency formed in 1861. [US National Weather Website](https://www.weather.gov/)
 
 * Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
 
@@ -71,7 +71,7 @@ The National Weather Service in the USA is a federal government agency formed in
 
 ### Weatherbit.io
 
-Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Link Weatherbit.io Website](https://www.weatherbit.io)
+Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Weatherbit.io Website](https://www.weatherbit.io)
 
 * To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
@@ -81,7 +81,7 @@ Historical and Forecast Weather data service provided by Weatherbit LLC in the U
 
 ### Visual Crossing
 
-Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Link Visual Crossing Website](https://www.visualcrossing.com/) 
+Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/) 
 
 * Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
@@ -89,13 +89,15 @@ Weather service from Visual Crossing Corporation founded in 2003 with headquarte
 
 ### Tomorrow.io (ClimacellV4)
 
-Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Link Tomorrow.io Website](https://www.tomowrrow.io/)
+Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Tomorrow.io Website](https://www.tomowrrow.io/)
+
+* Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
 
 * API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
 
 ### DarkSky
 
-Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [Link DarkSky Website](https://darksky.net/)
+Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/)
 
 * **[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).**
 
