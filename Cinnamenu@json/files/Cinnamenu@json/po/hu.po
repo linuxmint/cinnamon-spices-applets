@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-25 21:14+0000\n"
+"POT-Creation-Date: 2021-08-22 07:17+0100\n"
+"PO-Revision-Date: 2021-09-11 10:52+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "Type to search..."
 msgstr "Gépeljen a kereséshez…"
@@ -85,15 +85,6 @@ msgstr "Kilépés"
 msgid "Shutdown the computer"
 msgstr "Számítógép kikapcsolása"
 
-msgid "Home"
-msgstr "Otthoni"
-
-msgid "Computer"
-msgstr "Számítógép"
-
-msgid "Browse network"
-msgstr "Hálózat tallózása"
-
 msgid "Run with NVIDIA GPU"
 msgstr "NVIDIA GPU használatával"
 
@@ -112,6 +103,15 @@ msgstr "Hozzáadás a kedvencekhez"
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
+msgid "Home"
+msgstr "Saját mappa"
+
+msgid "Computer"
+msgstr "Számítógép"
+
+msgid "Browse network"
+msgstr "Hálózat tallózása"
+
 msgid "Find files..."
 msgstr "Fájlok keresése…"
 
@@ -121,14 +121,11 @@ msgstr "Kis türelmet…"
 msgid "No recent Items"
 msgstr "Nincsenek legutóbbi elemek"
 
-msgid "Solution:"
-msgstr "Megoldás:"
-
 msgid "Click to copy"
 msgstr "Kattintson a másoláshoz"
 
-msgid "Search web for"
-msgstr "Keresés a világhálón:"
+msgid "Trash"
+msgstr "Kuka"
 
 msgid "Favorites"
 msgstr "Kedvencek"
@@ -144,6 +141,21 @@ msgstr "Túl sok bejegyzés – csak az első 1000 bejegyzés jelenik meg"
 
 msgid "Reset category order"
 msgstr "Kategória sorrend visszaállítása"
+
+msgid "light skin tone"
+msgstr "világos tónus"
+
+msgid "medium-light skin tone"
+msgstr "közepesen világos tónus"
+
+msgid "medium skin tone"
+msgstr "közepes tónus"
+
+msgid "medium-dark skin tone"
+msgstr "közepesen sötét tónus"
+
+msgid "dark skin tone"
+msgstr "sötét tónus"
 
 msgid "This file is no longer available"
 msgstr "Ez a fájl már nem létezik"
@@ -164,7 +176,7 @@ msgid "Error while moving file to trash:"
 msgstr "Hiba lépett fel a fájl Kukába helyezésekor:"
 
 msgid "Error while opening file:"
-msgstr ""
+msgstr "Hiba lépett fel a fájl megnyitásakor:"
 
 msgid "Open"
 msgstr "Megnyitás"
@@ -221,11 +233,11 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"Rugalmas menü, amely formázási lehetőségeket, internetes könyvjelzőket, "
-"keresőszolgáltatói támogatást és homályos keresést biztosít."
+"Rugalmas menü rács vagy lista elrendezéssel, fájlböngészővel és emodzsi "
+"kereséssel."
 
 msgid "Behavior"
 msgstr "Viselkedés"
@@ -275,17 +287,14 @@ msgstr "Panel szövege"
 msgid "Text to show beside the panel icon"
 msgstr "A panel ikon mellett megjelenítendő szöveg"
 
-msgid "pixels"
-msgstr "képpont"
+msgid "Category icon size (pixels)"
+msgstr "Kategória ikonméret (képpontban megadva)"
 
-msgid "Category icon size"
-msgstr "Kategória ikonméret"
+msgid "Applications list icon size (pixels)"
+msgstr "Alkalmazás lista ikonméret (képpontban megadva)"
 
-msgid "Applications list icon size"
-msgstr "Alkalmazás lista ikonméret"
-
-msgid "Applications grid icon size"
-msgstr "Alkalmazás rács ikonméret"
+msgid "Applications grid icon size (pixels)"
+msgstr "Alkalmazás rács ikonméret (képpontban megadva)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Gyorsbillentyű a menü megnyitásához és bezárásához"
@@ -385,8 +394,8 @@ msgstr "Eszköztippek késleltetése"
 msgid "Use a custom menu height"
 msgstr "Egyedi menü magasság használata"
 
-msgid "Custom menu height"
-msgstr "Egyéni menü magasság"
+msgid "Custom menu height (pixels)"
+msgstr "Egyéni menü magasság (képpontban megadva)"
 
 msgid "Applications view mode"
 msgstr "Alkalmazások nézet mód"
@@ -409,14 +418,14 @@ msgstr "Nincs"
 msgid "Choose where to show application descriptions"
 msgstr "Válassza ki, hogy hol jelenjen meg az alkalmazás leírása"
 
-msgid "Session buttons location"
-msgstr "Munkamenet gombok elhelyezkedése"
+msgid "Sidebar location"
+msgstr "Oldalsáv helye"
 
 msgid "Top"
-msgstr "A csúcson"
+msgstr "Felül"
 
 msgid "Bottom"
-msgstr "Alsó"
+msgstr "Alul"
 
 msgid "Left"
 msgstr "Balra"
@@ -424,10 +433,8 @@ msgstr "Balra"
 msgid "Right"
 msgstr "Jobbra"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr ""
-"Válassza ki, hogy hol jelenjen meg a munkamenet-kezelő gombok (kilépés, "
-"kijelentkezés, stb.)"
+msgid "Choose where to show the sidebar"
+msgstr "Válassza ki, hogy hol jelenjen meg az oldalsáv"
 
 msgid ""
 "\n"
@@ -436,11 +443,17 @@ msgstr ""
 "\n"
 "Tipp: A menü szélének húzásával megváltoztathatja a menü méretét.\n"
 
-msgid "Add favorites to session buttons"
-msgstr "Kedvencek hozzáadása a munkamenet gombjaihoz"
+msgid "Show favorites on sidebar"
+msgstr "Kedvencek kategória megjelenítése az oldalsávon"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Mutassa meg kedvenc alkalmazásikonjait a munkamenet gombjai mellett"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "A Kedvenc alkalmazások kategória megjelenítése az oldalsávon"
+
+msgid "Show recent items"
+msgstr "Legutóbbi elemek megjelenítése"
+
+msgid "Show recent items category in the menu"
+msgstr "Legutóbbi elemek kategória megjelenítése a menüben"
 
 msgid "Show favorite apps category"
 msgstr "Kedvenc alkalmazások kategória megjelenítése"
@@ -460,8 +473,14 @@ msgstr "Előző kategória"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatikus görgetés az alkalmazás listában egér rámutatással"
 
-msgid "Enable emoji search"
-msgstr "Emodzsi keresés engedélyezése"
+msgid "Show hidden files"
+msgstr "Rejtett fájlok megjelenítése"
+
+msgid "Show hidden files in folder view"
+msgstr "Rejtett fájlok és mappák megjelenítése"
+
+msgid "Emoji search"
+msgstr "Emodzsi keresés"
 
 msgid "Show emojis in search results"
 msgstr "Emodzsik megjelenítése a keresési találatok között"
@@ -469,33 +488,41 @@ msgstr "Emodzsik megjelenítése a keresési találatok között"
 msgid "Web search option"
 msgstr "Keresés a világhálón beállítások"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
 msgid "Show an internet search option in search results"
 msgstr ""
 "Keresés a világhalón lehetőség megjelenítése a keresési találatok között"
 
 msgid "Search home folder"
-msgstr "Keresés az otthoni mappában"
+msgstr "Keresés a Saját mappában"
 
-msgid "When searching, also search home folder for files"
-msgstr "A keresés során fájlokat kereshet az otthoni mappában is"
+msgid "When searching, also search my home folder for files"
+msgstr "A keresés során fájlokat kereshet a Saját mappában is"
 
-msgid "Show hidden files"
-msgstr "Rejtett fájlok megjelenítése"
+msgid "Web bookmarks search"
+msgstr "Webhely könyvjelzők keresése"
 
-msgid "Show hidden files in folder view"
-msgstr "Rejtett fájlok és mappák megjelenítése"
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Keresés a böngészők könyvjelzői között is (Google Chrome, Firefox, Chromium, "
+"Opera, Brave)\n"
+"Megjegyzés: A Firefox könyvjelzők közötti kereséshez telepítenie kell a "
+"gir1.2-gda-5.0 csomagot (Debian alapú terjesztésnél, Ubuntu és Linux Mint "
+"esetén) vagy a libgda csomagot (Arch alapú terjesztésnél), majd a telepítés "
+"után indítsa újra a számítógépet a böngészők könyvjelzői közötti kereséshez."
+
+msgid "Wikipedia search"
+msgstr "Keresés a Wikipédián"
+
+msgid "Show some Wikipedia results"
+msgstr "Wikipédia találtatok megjelenítése a keresési találatok között"
+
+msgid "Wikipedia language"
+msgstr "Wikipédia nyelve"
 
 msgid "Use a custom icon size"
 msgstr "Egyéni ikonméret használata"
@@ -503,14 +530,72 @@ msgstr "Egyéni ikonméret használata"
 msgid "Use a custom size for the panel icon"
 msgstr "Egyéni ikonméret használata a panelon"
 
-msgid "Panel icon size"
-msgstr "Panel ikonméret"
+msgid "Panel icon size (pixels)"
+msgstr "Panel ikonméret (képpontban megadva)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Adja meg a panelen használt egyéni ikonméretet"
 
-msgid "Session buttons icon size"
-msgstr "Munkamenet gombok ikonjainak mérete"
+msgid "Sidebar icon size (pixels)"
+msgstr "Oldalsáv ikonméret (képpontban megadva)"
 
-msgid "Use session buttons box style"
-msgstr "Munkamenet gombok stílusa"
+msgid "Use sidebar box style"
+msgstr "Oldalsáv stílus használata"
+
+msgid "Use a sidebar box style"
+msgstr "Az oldalsáv stílus használata"
+
+msgid "Use tile style"
+msgstr "Mozaik stílus használata"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Mozaik stílus használata az alkalmazás gombokhoz (megjegyzés: néhány téma "
+"esetén nem működik jól)"
+
+#~ msgid "Solution:"
+#~ msgstr "Megoldás:"
+
+#~ msgid "Search web for"
+#~ msgstr "Keresés a világhálón:"
+
+#~ msgid ""
+#~ "A flexible menu providing formatting options, web bookmarks, search "
+#~ "provider support and fuzzy searching."
+#~ msgstr ""
+#~ "Rugalmas menü, amely formázási lehetőségeket, internetes könyvjelzőket, "
+#~ "keresőszolgáltatói támogatást és homályos keresést biztosít."
+
+#~ msgid "pixels"
+#~ msgstr "képpont"
+
+#~ msgid "Session buttons location"
+#~ msgstr "Munkamenet gombok elhelyezkedése"
+
+#~ msgid "Choose where to show the session buttons (quit, logout, etc.)"
+#~ msgstr ""
+#~ "Válassza ki, hogy hol jelenjen meg a munkamenet-kezelő gombok (kilépés, "
+#~ "kijelentkezés, stb.)"
+
+#~ msgid "Add favorites to session buttons"
+#~ msgstr "Kedvencek hozzáadása a munkamenet gombjaihoz"
+
+#~ msgid "Show your favorite app icons next to the session buttons"
+#~ msgstr "Mutassa meg kedvenc alkalmazásikonjait a munkamenet gombjai mellett"
+
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Bing"
+#~ msgstr "Bing"
+
+#~ msgid "Yahoo"
+#~ msgstr "Yahoo"
+
+#~ msgid "DuckDuckGo"
+#~ msgstr "DuckDuckGo"
+
+#~ msgid "Session buttons icon size"
+#~ msgstr "Munkamenet gombok ikonjainak mérete"
