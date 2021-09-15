@@ -2,6 +2,7 @@
   "name": "most-simple-applet",
   "version": "1.0.0",
   "description": "",
+  "sideEffects": false,
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
@@ -11,9 +12,10 @@
   "author": "Jonathan Heard",
   "license": "MIT",
   "devDependencies": {
-    "@ci-types/cjs": "1.0.4",
+    "@ci-types/cjs": "^1.0.4",
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.170",
+    "@types/lodash-es": "^4.17.5",
     "@types/node": "^16.6.2",
     "cjs-jest-test-runtime": "1.0.8",
     "jest": "^27.1.0",
@@ -25,6 +27,7 @@
   },
   "dependencies": {
     "cinnamonpopup": "^1.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21"
   }
 }
