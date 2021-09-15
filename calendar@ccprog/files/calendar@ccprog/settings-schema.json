@@ -41,6 +41,7 @@
                 "region_aus",
                 "region_can",
                 "region_deu",
+                "region_esp",
                 "region_nzl",
                 "region_svk",
                 "region_che",
@@ -121,6 +122,7 @@
             "Czech Republic": "cze",
             "Denmark": "dnk",
             "Estonia": "est",
+            "Spain": "esp",
             "Finland": "fin",
             "France": "fra",
             "Germany": "deu",
@@ -167,6 +169,7 @@
             "aus",
             "can",
             "deu",
+            "esp",
             "nzl",
             "svk",
             "che",
@@ -234,6 +237,33 @@
             "Thüringen": "th"
         },
         "dependency": "country=deu"
+    },
+    "region_esp": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Andalucía": "an",
+            "Aragón": "ar",
+            "Asturias": "as",
+            "Canarias": "cn",
+            "Cantabria": "cb",
+            "Castilla y León": "cl",
+            "Castilla-La Mancha": "cm",
+            "Cataluña": "ct",
+            "Ceuta": "ce",
+            "Extremadura": "ex",
+            "Galicia": "ga",
+            "Islas Baleares": "ib",
+            "La Rioja": "ri",
+            "Madrid": "md",
+            "Melilla": "ml",
+            "Murcia": "mc",
+            "Navarra": "nc",
+            "País Vasco": "pv",
+            "Valencia": "vc"
+        },
+        "dependency": "country=esp"
     },
     "region_nzl": {
         "type": "combobox",

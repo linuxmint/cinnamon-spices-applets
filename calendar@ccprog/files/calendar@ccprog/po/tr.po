@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog 1.1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: 2021-07-05 18:36+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
 #: applet.js:65
 msgid "Date and Time Settings"
@@ -26,18 +26,6 @@ msgstr "Tarih ve Zaman Ayarları"
 msgid "Add new entry"
 msgstr "Yeni girdi ekle"
 
-msgid "Remove selected entry"
-msgstr "Seçili girdiyi kaldır"
-
-msgid "Edit selected entry"
-msgstr "Seçili girdiyi düzenle"
-
-msgid "Move selected entry up"
-msgstr "Seçili girdiyi üste taşı"
-
-msgid "Move selected entry down"
-msgstr "Seçili girdiyi alta taşı"
-
 #: settings_widgets.py:99
 msgid "Edit entry"
 msgstr "Girdiyi düzenle"
@@ -45,6 +33,7 @@ msgstr "Girdiyi düzenle"
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -64,7 +53,8 @@ msgstr "Resmi Tatiller ile Takvim"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Enrico hizmeti tarafından sağlanan resmi tatil verileriyle takvim uygulaması"
+msgstr ""
+"Enrico hizmeti tarafından sağlanan resmi tatil verileriyle takvim uygulaması"
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
@@ -120,8 +110,11 @@ msgid "Use a custom date format"
 msgstr "Özel bir tarih biçimi kullan"
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Takvim uygulamacığında, özel bir tarih biçimi tanımlamak için bunu kontrol edin."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Takvim uygulamacığında, özel bir tarih biçimi tanımlamak için bunu kontrol "
+"edin."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
@@ -137,7 +130,9 @@ msgstr "Tarih biçimi sözdizimi için bilgi göster"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "Tarih formatı için sözdilimi hakkında daha fazla bilgi için bu düğmeyi tıklayınız."
+msgstr ""
+"Tarih formatı için sözdilimi hakkında daha fazla bilgi için bu düğmeyi "
+"tıklayınız."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -162,6 +157,10 @@ msgstr "Belçika"
 #. settings-schema.json->country->options
 msgid "Bosnia and Herzegovina"
 msgstr "Bosna Hersek"
+
+#. settings-schema.json->country->options
+msgid "Belarus"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -198,6 +197,10 @@ msgstr "Danimarka"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estonya"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -498,6 +501,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thüringen"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr ""
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"
@@ -938,3 +1017,15 @@ msgstr "Görünüm Adı"
 #. settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
 msgstr "Zaman dilimi"
+
+#~ msgid "Remove selected entry"
+#~ msgstr "Seçili girdiyi kaldır"
+
+#~ msgid "Edit selected entry"
+#~ msgstr "Seçili girdiyi düzenle"
+
+#~ msgid "Move selected entry up"
+#~ msgstr "Seçili girdiyi üste taşı"
+
+#~ msgid "Move selected entry down"
+#~ msgstr "Seçili girdiyi alta taşı"
