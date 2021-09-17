@@ -7,20 +7,99 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 12:25+0200\n"
-"PO-Revision-Date: 2021-07-25 13:09+0200\n"
+"POT-Creation-Date: 2021-09-16 20:04+0200\n"
+"PO-Revision-Date: 2021-09-17 05:47+0200\n"
+"Last-Translator: MCHilli\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: MCHilli\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de\n"
 
-#: applet.js:91
+#: applet.js:98
 msgid "Edit Applications"
 msgstr "Anwendungen bearbeiten"
+
+#: applet.js:647 applet.js:891
+msgid "Delete"
+msgstr "Löschen"
+
+#: applet.js:648 applet.js:892
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: applet.js:649 applet.js:893
+msgid "Cancel"
+msgstr "Abbruch"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:33 widgets.py:27
+msgid "Name"
+msgstr "Name"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:39
+msgid "Group"
+msgstr "Gruppe"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:40 widgets.py:33
+msgid "Command"
+msgstr "Befehl"
+
+#: dialogs.py:120
+msgid "The name cannot be empty"
+msgstr "Der Name darf nicht leer sein"
+
+#: dialogs.py:125
+msgid "The name is already used"
+msgstr "Der Name wird schon verwendet"
+
+#: dialogs.py:132
+msgid "Valid name"
+msgstr "Gültiger Name"
+
+#: dialogs.py:138
+msgid "Valid command"
+msgstr "Gültiger Befehl"
+
+#: dialogs.py:141
+msgid "The command is not valid"
+msgstr "Der Befehl ist nicht gültig"
+
+#: dialogs.py:158
+msgid "really delete?"
+msgstr "wirklich löschen?"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:21
+msgid "Icon"
+msgstr "Symbol"
+
+#: widgets.py:102
+msgid "Add new entry"
+msgstr "Neuer Eintrag"
+
+#: widgets.py:107
+msgid "Remove selected entry"
+msgstr "Ausgewählten Eintrag löschen"
+
+#: widgets.py:113
+msgid "Edit selected entry"
+msgstr "Ausgewählten Eintrag bearbeiten"
+
+#: widgets.py:119
+msgid "Move selected entry up"
+msgstr "Ausgewählten Eintrag nach oben bewegen"
+
+#: widgets.py:125
+msgid "Move selected entry down"
+msgstr "Ausgewählten Eintrag nach unten bewegen"
 
 #. metadata.json->name
 msgid "App Launcher"
@@ -39,10 +118,6 @@ msgstr "Anwendungen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#. settings-schema.json->section-groups->title
-msgid "Groups"
-msgstr "Gruppen"
-
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Allgemeine Einstellungen"
@@ -50,46 +125,6 @@ msgstr "Allgemeine Einstellungen"
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Anwendungseinstellungen"
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-msgid "Name"
-msgstr "Name"
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Group"
-msgstr "Gruppe"
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-#. settings-schema.json->launcher-icon->description
-msgid "Icon"
-msgstr "Symbol"
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Command"
-msgstr "Befehl"
-
-#. settings-schema.json->info-applications->description
-msgid ""
-"If you don't type in a group, the application will be displayed without a "
-"submenu."
-msgstr ""
-"Wenn du keine Gruppe angibst, wird die Anwendung ohne Untermenü angezeigt."
-
-#. settings-schema.json->force-update-groups->description
-msgid "Update Groups"
-msgstr "Gruppen aktualisieren"
-
-#. settings-schema.json->info-force-update->description
-msgid ""
-"Unfortunately you must be force update the group list. It updates "
-"internally\n"
-"but it will not be shown in the list without a restart of this dialog."
-msgstr ""
-"Leider musst du die Gruppenliste manuell aktualisieren. Es wird zwar "
-"intern\n"
-"aktualisiert aber nicht angezeigt ohne den Dialog neu zu starten."
 
 #. settings-schema.json->visible-launcher-label->description
 msgid "Show Label"
