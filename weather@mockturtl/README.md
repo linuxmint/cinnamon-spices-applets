@@ -33,25 +33,25 @@ You can also save locations what you entered manually and switch between them in
 
 ### OpenWeatherMap
 
-Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [Link](https://openweathermap.org/) 
+Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [OpenWeatherMap Website](https://openweathermap.org/) 
 
 This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
-Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [Link](https://www.met.no/en)
+Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en)
 
 * Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
 
 ### DMI Denmark
 
-The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [Link](https://www.dmi.dk)
+The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk)
 
 * The service is global with open weather data.
 
 ### Met Office UK
 
-The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Link](https://www.metoffice.gov.uk/)
+The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/)
 
 * Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
 
@@ -61,7 +61,7 @@ The Meteorological Office, abbreviated as the Met Office, is the UK's national w
 
 ### US National Weather
 
-The National Weather Service in the USA is a federal government agency formed in 1861. [Link](https://www.weather.gov/)
+The National Weather Service in the USA is a federal government agency formed in 1861. [US National Weather Website](https://www.weather.gov/)
 
 * Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
 
@@ -71,7 +71,7 @@ The National Weather Service in the USA is a federal government agency formed in
 
 ### Weatherbit.io
 
-Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Link](https://www.weatherbit.io)
+Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Weatherbit.io Website](https://www.weatherbit.io)
 
 * To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
@@ -81,25 +81,25 @@ Historical and Forecast Weather data service provided by Weatherbit LLC in the U
 
 ### Visual Crossing
 
-Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Link](https://www.visualcrossing.com/) 
+Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/) 
 
 * Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
 * Provides 1000 Free calls a day
 
-### Climacell
+### Tomorrow.io (ClimacellV4)
 
-Meteorological data from American weather technology company with headquarters in Boston since 2016. [Link](https://www.climacell.co/)
+Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Tomorrow.io Website](https://www.tomowrrow.io/)
 
-* **V3: ClimaCell API and [announced](https://developer.climacell.co/v3/docs/deprecation-notice) that version 3 will be sunset on July 1, 2021** It doesn't accept new signups.
+* Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
 
-* V4: API key can be obtained [here](https://app.climacell.co/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the Overview section. Free plan comes with 1000 free calls per day.
+* API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
 
 ### DarkSky
 
-Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [Link](https://darksky.net/)
+Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/)
 
-***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups, and it will cease to function at the end of 2021.**
+* **[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).**
 
 ## Versions
 
@@ -120,14 +120,14 @@ http://groups.google.com/group/cinnamon-weather
 
 * None at the moment, I can take requests for provider integrations or for new features
 
-## Working with Language Translations
+## Language Translations
 
 If you want to update or change the translation in your language other than English, here are some  steps to get you started. Keep in mind that your local changes will be overwritten when an update of the applets language is installed. Feel free to share your translation, which is very much appreciated, 
 by making a PR (pull request) on Github or contact the current maintainer of the applet.
 
 1. Install the translation editor **poedit** with your package manager and download your language PO file e. g. *xx.po* where xx is your ISO language code, and the template POT file *[weather@mockturtl.pot](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/weather@mockturtl.pot)* from the *files/weather@mockturtl/po/* sub directory on the [Github website](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/)
 
-2. Start **poedit** and open your downloaded PO file *xx.po*, then go to menu *Catalogue*, choose *Update from POT file…* and open the POT file *[weather@mockturtl.pot](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/weather@mockturtl.pot)*. Start your editing and try to use previously contributed translations as much as possible and get familiar with the correct technical weather terms for things in your language.
+2. Start **poedit** and open your downloaded PO file *xx.po*, then go to menu *Catalogue* or *Translate* depending on version, choose *"Update from POT file…"* and open the POT file *[weather@mockturtl.pot](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl/files/weather%40mockturtl/po/weather@mockturtl.pot)*. Start your editing and try to use previously contributed translations as much as possible and get familiar with the correct technical weather terms for things in your language.
 
 3. When done translating, click on *Validate* and *Save*. This creates a new MO file that you can use locally in your system by overwriting the file *~/.local/share/locale/xx/LC_MESSAGES/weather@mockturtl.mo* and restart your system to check how your translation works.
 
