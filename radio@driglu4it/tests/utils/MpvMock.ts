@@ -1,6 +1,5 @@
 import { MEDIA_PLAYER_2_PLAYER_NAME, MEDIA_PLAYER_2_PATH, MPV_MPRIS_BUS_NAME, MPV_CVC_NAME } from 'consts'
-import { reject } from 'lodash';
-import { MprisMetadataRecursiveUnpacked, MprisPropertiesDeepUnpacked, MprisPropertiesPacked, PlaybackStatus, MprisPropsDbus, MprisMediaPlayerDbus } from 'MprisTypes';
+import { MprisPropertiesDeepUnpacked, MprisPropertiesPacked, MprisPropsDbus, MprisMediaPlayerDbus } from 'types';
 const fs = require('fs')
 
 const EXAMPLE_TITLE_1 = 'dummy Title'
@@ -55,7 +54,7 @@ export function initMprisMocks(args: Arguments) {
     let positionTimerId: ReturnType<typeof setInterval>
 
     let cvcVolMaxNorm: number
-    let busNames = []
+    let busNames: string[] = []
 
 
     // seems to be always the same ...
@@ -89,7 +88,7 @@ export function initMprisMocks(args: Arguments) {
         return mediaPropsDbus
     }
 
-    function getDbus() {
+    function getDBus() {
         return new DBus()
     }
 
@@ -348,7 +347,7 @@ export function initMprisMocks(args: Arguments) {
 
         }
 
-        GetSync(interfaceName, propertyName) {
+        GetSync(interfaceName: string, propertyName: string) {
             if (interfaceName !== MEDIA_PLAYER_2_PLAYER_NAME)
                 throw new RangeError(`interface name must be ${MEDIA_PLAYER_2_PLAYER_NAME}`)
 
@@ -412,8 +411,8 @@ export function initMprisMocks(args: Arguments) {
 
     class MixerStream {
         name = MPV_CVC_NAME
-        #unpushedVolume
-        #pushedVolume
+        #unpushedVolume: number
+        #pushedVolume: number
 
 
         get volume() {
@@ -435,15 +434,23 @@ export function initMprisMocks(args: Arguments) {
 
     }
 
+    imports.misc.interfaces = {
+        getDBusProxyWithOwner,
+        getDBusProperties,
+        // @ts-ignore
+        getDBus
+    }
 
-    imports.misc.interfaces.getDBusProxyWithOwner = getDBusProxyWithOwner
-    imports.misc.interfaces.getDBusProperties = getDBusProperties
-    // @ts-ignore
-    imports.misc.interfaces.getDBus = getDbus
-    // @ts-ignore
-    imports.misc.util.spawnCommandLine = spawnCommandLine
-    // @ts-ignore
-    imports.gi.Cvc.MixerControl = MixerControl
+    imports.misc.util = {
+        // @ts-ignore
+        spawnCommandLine
+    }
+
+    imports.gi.Cvc = {
+        // @ts-ignore
+        MixerControl
+    }
+
 
     resetInterfaces()
 

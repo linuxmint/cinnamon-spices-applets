@@ -143,7 +143,7 @@ export function createMpvHandler(args: Arguments) {
 
                 playbackStatus && handleMprisPlaybackStatusChanged(playbackStatus)
                 url && newUrlValid && url !== currentUrl && handleUrlChanged(url)
-                title && handleTitleSet(title)
+                title && onTitleChanged(title)
             }
         )
     }
@@ -246,10 +246,6 @@ export function createMpvHandler(args: Arguments) {
     function handleCvcVolumeChanged() {
         const normalizedVolume = Math.round(cvcStream.volume / control.get_vol_max_norm() * 100)
         setMprisVolume(normalizedVolume)
-    }
-
-    function handleTitleSet(title: string) {
-        onTitleChanged(title)
     }
 
     /** @returns length in seconds */
