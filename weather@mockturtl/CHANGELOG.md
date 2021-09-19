@@ -3,7 +3,8 @@
 ## 3.1.3
 * Update DarkSky API cutoff date
 * Update TS declarations
-* Change Climacell naming to Tomorrow.io
+* Resolved [#3926](https://github.com/linuxmint/cinnamon-spices-applets/issues/3926) Change Climacell naming to Tomorrow.io
+* Update screenshot
 
 ## 3.1.2
 
