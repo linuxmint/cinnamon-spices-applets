@@ -963,7 +963,7 @@ declare namespace imports.gi.Soup {
 
 	class MessageHeaders {
 
-
+		public static new(type: MessageHeadersType): MessageHeaders;
 		public append(name: string, value: string): void;
 		public clean_connection_headers(): void;
 		public clear(): void;
@@ -997,10 +997,10 @@ declare namespace imports.gi.Soup {
 
 
 
+
+
 	class MessageHeadersIter {
 		public dummy: any[];
-
-
 		public next(name: string, value: string): boolean;
 	}
 
@@ -1564,9 +1564,9 @@ declare namespace imports.gi.Soup {
 
 
 	enum MessageHeadersType {
-		request = 0,
-		response = 1,
-		multipart = 2
+		REQUEST = 0,
+		RESPONSE = 1,
+		MULTIPART = 2
 	}
 
 
