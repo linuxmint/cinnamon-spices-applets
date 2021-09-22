@@ -3270,14 +3270,14 @@ const isoOrdinalWithTimeExtensionRegex = combineRegexes(isoOrdinalRegex, isoTime
 const isoTimeCombinedRegex = combineRegexes(isoTimeRegex);
 const extractISOYmdTimeAndOffset = combineExtractors(extractISOYmd, extractISOTime, extractISOOffset);
 const extractISOWeekTimeAndOffset = combineExtractors(extractISOWeekData, extractISOTime, extractISOOffset);
-const extractISOOrdinalDataAndTime = combineExtractors(extractISOOrdinalData, extractISOTime);
+const extractISOOrdinalDateAndTime = combineExtractors(extractISOOrdinalData, extractISOTime, extractISOOffset);
 const extractISOTimeAndOffset = combineExtractors(extractISOTime, extractISOOffset);
 /**
  * @private
  */
 
 function parseISODate(s) {
-  return parse(s, [isoYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [isoWeekWithTimeExtensionRegex, extractISOWeekTimeAndOffset], [isoOrdinalWithTimeExtensionRegex, extractISOOrdinalDataAndTime], [isoTimeCombinedRegex, extractISOTimeAndOffset]);
+  return parse(s, [isoYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [isoWeekWithTimeExtensionRegex, extractISOWeekTimeAndOffset], [isoOrdinalWithTimeExtensionRegex, extractISOOrdinalDateAndTime], [isoTimeCombinedRegex, extractISOTimeAndOffset]);
 }
 function parseRFC2822Date(s) {
   return parse(preprocessRFC2822(s), [rfc2822, extractRFC2822]);
@@ -3523,7 +3523,7 @@ class Duration {
     }, opts));
   }
   /**
-   * Create a Duration from a JavaScript object with keys like 'years' and 'hours.
+   * Create a Duration from a JavaScript object with keys like 'years' and 'hours'.
    * If this object is empty then a zero milliseconds duration is returned.
    * @param {Object} obj - the object to create the DateTime from
    * @param {number} obj.years
@@ -11599,7 +11599,7 @@ class DarkSky {
     }
     async GetWeather(loc) {
         let now = new Date(Date.now());
-        if (now.getUTCFullYear() >= 2022) {
+        if (now.getUTCFullYear() > 2022) {
             this.app.ShowError({
                 type: "hard",
                 detail: "no api response",
@@ -13804,7 +13804,7 @@ const conditionSeverity = {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 
-const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+const { Message, ProxyResolverDefault, SessionAsync, MessageHeaders, MessageHeadersType } = imports.gi.Soup;
 class HttpLib {
     constructor() {
         this._httpSession = new SessionAsync();
@@ -13818,8 +13818,8 @@ class HttpLib {
             this.instance = new HttpLib();
         return this.instance;
     }
-    async LoadJsonAsync(url, params, method = "GET") {
-        let response = await this.LoadAsync(url, params, method);
+    async LoadJsonAsync(url, params, headers, method = "GET") {
+        let response = await this.LoadAsync(url, params, headers, method);
         if (!response.Success)
             return response;
         try {
@@ -13839,9 +13839,9 @@ class HttpLib {
             return response;
         }
     }
-    async LoadAsync(url, params, method = "GET") {
+    async LoadAsync(url, params, headers, method = "GET") {
         var _a, _b, _c, _d, _e;
-        let message = await this.Send(url, params, method);
+        let message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
             error = {
@@ -13884,7 +13884,7 @@ class HttpLib {
             };
         }
         if ((message === null || message === void 0 ? void 0 : message.status_code) > 200 && (message === null || message === void 0 ? void 0 : message.status_code) < 300) {
-            logger_Logger.Info("Wrning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
+            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
         logger_Logger.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
         if (error != null)
@@ -13895,7 +13895,7 @@ class HttpLib {
             ErrorData: error
         };
     }
-    async Send(url, params, method = "GET") {
+    async Send(url, params, headers, method = "GET") {
         if (params != null) {
             let items = Object.keys(params);
             for (let index = 0; index < items.length; index++) {
@@ -13908,6 +13908,11 @@ class HttpLib {
         logger_Logger.Debug("URL called: " + query);
         let data = await new Promise((resolve, reject) => {
             let message = Message.new(method, query);
+            if (headers != null) {
+                for (const key in headers) {
+                    message.request_headers.append(key, headers[key]);
+                }
+            }
             this._httpSession.queue_message(message, (session, message) => {
                 resolve(message);
             });
@@ -14218,11 +14223,11 @@ class VisualCrossing {
 class ClimacellV4 {
     constructor(app) {
         this.needsApiKey = true;
-        this.prettyName = _("Climacell");
-        this.name = "ClimacellV4";
+        this.prettyName = _("Tomorrow.io");
+        this.name = "Tomorrow.io";
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;
-        this.website = "https://www.climacell.co/";
+        this.website = "https://www.tomorrow.io/";
         this.url = "https://data.climacell.co/v4/timelines";
         this.params = {
             apikey: null,
@@ -14280,7 +14285,7 @@ class ClimacellV4 {
             sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
             sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
             location: {
-                url: "https://www.climacell.co/weather"
+                url: "https://www.tomorrow.io/weather"
             },
             extra_field: {
                 name: _("Feels Like"),
@@ -15088,8 +15093,8 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsync(url, params, HandleError, method = "GET") {
-        let response = await HttpLib.Instance.LoadJsonAsync(url, params, method);
+    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+        let response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -15100,8 +15105,8 @@ class WeatherApplet extends TextIconApplet {
         }
         return response.Data;
     }
-    async LoadAsync(url, params, HandleError, method = "GET") {
-        let response = await HttpLib.Instance.LoadAsync(url, params, method);
+    async LoadAsync(url, params, HandleError, headers, method = "GET") {
+        let response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -15195,8 +15200,8 @@ class WeatherApplet extends TextIconApplet {
                 if (currentName != "Weatherbit" || force)
                     this.provider = new Weatherbit(this);
                 break;
-            case "ClimacellV4":
-                if (currentName != "ClimacellV4" || force)
+            case "Tomorrow.io":
+                if (currentName != "Tomorrow.io" || force)
                     this.provider = new ClimacellV4(this);
                 break;
             case "Met Office UK":

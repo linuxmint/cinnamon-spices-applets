@@ -290,7 +290,8 @@ declare namespace imports.ui.applet {
 	/** Applet with icon */
 	export class IconApplet extends Applet {
 		/** Actor of the icon */
-		private _applet_icon: gi.St.Icon;
+		protected _applet_icon: gi.St.Icon;
+		protected _applet_icon_box: gi.St.Bin;
 
 		/**
 		 * 

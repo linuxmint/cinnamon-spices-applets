@@ -4,7 +4,6 @@ declare namespace imports {
     class ByteArray {
         /**
          * Converts the Uint8Array into a literal string. The bytes are interpreted according to the given encoding (or UTF-8 if not given).
-
         The resulting string is guaranteed to round-trip back into an identical ByteArray by passing the result to ByteArray.fromString(), i.e., `b === ByteArray.fromString(ByteArray.toString(b, encoding), encoding)`.
          * @param array 
          * @param encoding 
