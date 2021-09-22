@@ -429,10 +429,6 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Executing " + this._getNetworkInterfacesPath, 2);
         let output = GLib.spawn_command_line_sync(this._getNetworkInterfacesPath);
         let interfaces = output[1].toString().split("\n");
-        //remove Iface column header
-        interfaces.splice(0, 1);
-        //remove last empty element
-        interfaces.splice(-1, 1);
         return interfaces;
     },
 
