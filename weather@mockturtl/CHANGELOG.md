@@ -1,6 +1,13 @@
 # Changelog
 
+## 3.1.4
+
+* Update translations file
+* Make sure translation generation is not missed again, now included as a build step
+* Add VSCode workspace
+
 ## 3.1.3
+
 * Update DarkSky API cutoff date
 * Update TS declarations
 * Resolved [#3926](https://github.com/linuxmint/cinnamon-spices-applets/issues/3926) Change Climacell naming to Tomorrow.io
@@ -340,8 +347,8 @@ General changes:
 
 Fixes:
 
-* !!! the panel was not rebuilding at the correct time on refresh (I 
-  honestly don't know how the app was working before at all), now 
+* !!! the panel was not rebuilding at the correct time on refresh (I
+  honestly don't know how the app was working before at all), now
   rebuilding is part of the data refresh function.
 * Applet was crashing when there was no internet (Debug line was outside try/catch)
 * Big performance increase in version 3.4, plus DarkSky support
@@ -376,8 +383,8 @@ New stuff:
 
 ## 2.1.3
 
-* Multiversion fix. Everything below 3.8 should use the previous 
-  version now (3.6 version moved to the root folder), because it does not 
+* Multiversion fix. Everything below 3.8 should use the previous
+  version now (3.6 version moved to the root folder), because it does not
   even work with version 3.2 at the moment.
 * Small addition for DarkSky condition processing for shorter conditions.
 
@@ -393,15 +400,15 @@ New stuff:
 * Fixed bug when Cinnamon froze when the taskbar was manipulated when the applet was enabled on it.
 * DarkSky was Getting the Forecast day names from sunrise time, fixed
 * Humidity is rounded now.
-* Location element is a button again, opens Data services webpages 
-  with more weather, or it can trigger a refresh if there was an error 
+* Location element is a button again, opens Data services webpages
+  with more weather, or it can trigger a refresh if there was an error
   (there is no need anymore, but still).
 
 ## 2.1.1
 
 * Openweathermap no longer requires key
-* Forcing main loop to refresh when Weather update fails (it was not 
-  updating for a whole refresh interval when we had a successful update 
+* Forcing main loop to refresh when Weather update fails (it was not
+  updating for a whole refresh interval when we had a successful update
   then the settings was changed right after and update failed)
 * Using Regex against Location setting
 * DarkSky error messages are displayed properly to the users now
@@ -414,8 +421,8 @@ New stuff:
 
 * Fixed issue where sunset/sunrise displayed twice
 * Forecast compiling uses timezone calculation to separate forecasts to the correct days now
-* Fixed issue where days were displayed incorrectly, now are 
-  calculated displayed with timezone offset (was bad with people near the 
+* Fixed issue where days were displayed incorrectly, now are
+  calculated displayed with timezone offset (was bad with people near the
   day boundary i guess)
 * using HTTPS to call OpenWeather
 
