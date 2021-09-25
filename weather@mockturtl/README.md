@@ -19,17 +19,17 @@ You can also save locations what you entered manually and switch between them in
 
 ## Weather providers to choose from
 
-| Weather Providers       | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
-| ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
-| **OpenWeatherMap**      | No            | 8                         | 48                         | --                        |
-| **MET Norway**          | No            | 10                        | 48                         | --                        |
-| **DMI Denmark**         | No            | 10                        | 48                         | --                        |
-| **Met Office UK**       | No            | 5                         | 36                         | --                        |
-| **US National Weather** | No            | 7                         | 156                        | --                        |
-| **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
-| **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
-| **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
-| **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
+| Weather Providers       | Needs API key | Maximum Forecast Days     | Maximum Forecast Hours | Other information             |
+| ----------------------- | ------------- | ------------------------- | ---------------------- | ----------------------------- |
+| **OpenWeatherMap**      | No            | 8                         | 48                     | Default provider              |
+| **MET Norway**          | No            | 10                        | 48                     | --                            |
+| **DMI Denmark**         | No            | 10                        | 48                     | --                            |
+| **Met Office UK**       | No            | 5                         | 36                     | --                            |
+| **US National Weather** | No            | 7                         | 156                    | --                            |
+| **WeatherBit**          | Yes           | 16                        | 0**                    | --                            |
+| **Visual Crossing**     | Yes           | 15                        | 336                    | --                            |
+| **Tomorrow.io**         | Yes           | 15                        | 108                    | Previously known as Climacell |
+| **DarkSky**             | Yes           | 8                         | 168                    | Signups closed, will end 2022 |
 
 ### OpenWeatherMap
 
@@ -87,7 +87,7 @@ Weather service from Visual Crossing Corporation founded in 2003 with headquarte
 
 * Provides 1000 Free calls a day
 
-### Tomorrow.io (ClimacellV4)
+### Tomorrow.io
 
 Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Tomorrow.io Website](https://www.tomowrrow.io/)
 
