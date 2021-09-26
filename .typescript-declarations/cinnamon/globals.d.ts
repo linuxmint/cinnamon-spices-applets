@@ -3,7 +3,7 @@ declare function require(path: string): any;
 declare function setInterval(callback: { (): void }, delay: number): number;
 declare function clearInterval(intervalID: number): void;
 declare function setTimeout(callback: { (): void }, delay: number): number;
-declare function clearTimeout(timouetId: number): void;
+declare function clearTimeout(timeoutId: number): void;
 
 /** Interface typing for the global variable.
  * Extendable, for example overloading in a d.ts file:
@@ -38,6 +38,8 @@ declare interface Global {
     ui_scale: number;
 
     stage_input_mode: imports.gi.Cinnamon.StageInputMode;
+
+    reparentActor(actor_before: imports.gi.Clutter.Actor, actor_after: imports.gi.Clutter.Actor): void
 }
 
 declare const global: Global;
@@ -108,6 +110,6 @@ declare namespace imports {
     export const signals: Signals
 
     class Signals {
-        addSignalMethods(protoype: any): void
+        addSignalMethods(prototype: any): void
     }
 }

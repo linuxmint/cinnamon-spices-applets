@@ -52,7 +52,7 @@ export class DarkSky implements WeatherProvider {
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		let now = new Date(Date.now());
-		if (now.getUTCFullYear() >= 2022) {
+		if (now.getUTCFullYear() > 2022) {
 			this.app.ShowError(
 				{
 					type: "hard",

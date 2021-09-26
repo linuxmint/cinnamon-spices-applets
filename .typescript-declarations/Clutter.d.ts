@@ -2249,6 +2249,8 @@ declare namespace imports.gi.Clutter {
 		 * GObject.finalize() implementation.
 		 */
 		unmap(): void;
+		/** Deprecated since 1.10. Use Actor.remove_child instead */
+		unparent(): void;
 		/**
 		 *  Deprecated since 1.16. Actors are automatically unrealized, and nothing
 		 * requires explicit realization.
@@ -2821,12 +2823,16 @@ declare namespace imports.gi.Clutter {
 		ellipsize: gi.Pango.EllipsizeMode
 		line_wrap: boolean
 		line_wrap_mode: gi.Pango.WrapMode
+		text: string
+		coords_to_position(x: number, y: number): number
+		get_layout(): gi.Pango.Layout;
 		set_line_wrap(line_wrap: boolean): void;
 		set_ellipsize(mode: gi.Pango.EllipsizeMode): void;
 		set_line_alignment(alignment: gi.Pango.Alignment): void;
 		set_line_wrap_mode(wrap_mode: gi.Pango.WrapMode): void;
-		get_layout(): gi.Pango.Layout;
+		set_markup(markup: string): void
 	}
+
 	export class TextBuffer {
 
 	}

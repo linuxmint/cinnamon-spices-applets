@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog 1.1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: \n"
@@ -29,6 +29,7 @@ msgstr "Modifier l'entrée sélectionnée"
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -111,8 +112,8 @@ msgstr "Utiliser un format de date personnalisé"
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
 msgstr ""
-"Cochez cette case pour définir votre propre format de date dans la barre "
-"des tâches."
+"Cochez cette case pour définir votre propre format de date dans la barre des "
+"tâches."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
@@ -129,8 +130,7 @@ msgstr "Afficher des indications sur la syntaxe du format de date"
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
 msgstr ""
-"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de "
-"date."
+"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -155,6 +155,10 @@ msgstr "Belgique"
 #. settings-schema.json->country->options
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnie-Herzégovine"
+
+#. settings-schema.json->country->options
+msgid "Belarus"
+msgstr "Biélorussie"
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -191,6 +195,10 @@ msgstr "Danemark"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estonie"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr "Espagne"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -491,6 +499,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thuringe"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr "Andalousie"
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr "Aragon"
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr "Asturies"
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr "Îles Canaries"
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr "Cantabrie"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr "Castille-et-León"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr "Castille-La Manche"
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr "Catalogne"
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr "Ceuta"
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr "Estrémadure"
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr "Galice"
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr "Îles Baléares"
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr "La Rioja"
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr "Madrid"
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr "Melilla"
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr "Murcie"
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr "Navarre"
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr "Pays Basque"
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr "Valence"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"

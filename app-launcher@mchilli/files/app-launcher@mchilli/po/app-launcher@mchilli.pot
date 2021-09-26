@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 12:25+0200\n"
+"POT-Creation-Date: 2021-09-16 20:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:91
+#: applet.js:98
 msgid "Edit Applications"
+msgstr ""
+
+#: applet.js:647 applet.js:891
+msgid "Delete"
+msgstr ""
+
+#: applet.js:648 applet.js:892
+msgid "Edit"
+msgstr ""
+
+#: applet.js:649 applet.js:893
+msgid "Cancel"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:33 widgets.py:27
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:39
+msgid "Group"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:40 widgets.py:33
+msgid "Command"
+msgstr ""
+
+#: dialogs.py:120
+msgid "The name cannot be empty"
+msgstr ""
+
+#: dialogs.py:125
+msgid "The name is already used"
+msgstr ""
+
+#: dialogs.py:132
+msgid "Valid name"
+msgstr ""
+
+#: dialogs.py:138
+msgid "Valid command"
+msgstr ""
+
+#: dialogs.py:141
+msgid "The command is not valid"
+msgstr ""
+
+#: dialogs.py:158
+msgid "really delete?"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:21
+msgid "Icon"
+msgstr ""
+
+#: widgets.py:102
+msgid "Add new entry"
+msgstr ""
+
+#: widgets.py:107
+msgid "Remove selected entry"
+msgstr ""
+
+#: widgets.py:113
+msgid "Edit selected entry"
+msgstr ""
+
+#: widgets.py:119
+msgid "Move selected entry up"
+msgstr ""
+
+#: widgets.py:125
+msgid "Move selected entry down"
 msgstr ""
 
 #. metadata.json->name
@@ -38,51 +117,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->section-groups->title
-msgid "Groups"
-msgstr ""
-
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr ""
 
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-msgid "Name"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Group"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-#. settings-schema.json->launcher-icon->description
-msgid "Icon"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Command"
-msgstr ""
-
-#. settings-schema.json->info-applications->description
-msgid ""
-"If you don't type in a group, the application will be displayed without a "
-"submenu."
-msgstr ""
-
-#. settings-schema.json->force-update-groups->description
-msgid "Update Groups"
-msgstr ""
-
-#. settings-schema.json->info-force-update->description
-msgid ""
-"Unfortunately you must be force update the group list. It updates internally\n"
-"but it will not be shown in the list without a restart of this dialog."
 msgstr ""
 
 #. settings-schema.json->visible-launcher-label->description

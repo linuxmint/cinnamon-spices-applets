@@ -2570,16 +2570,17 @@ declare namespace imports.gi.Gtk {
         set_xalign (xalign: number) : void;
         set_yalign (yalign: number) : void;
     }
+
     
-    var Label: {
-        new (_str: string) : Widget;
-        new_with_mnemonic (_str: string) : Widget;
-        
+    interface LabelOptions {
+        label: string
     }
     
-    
-    
-    
+    class Label {
+        constructor(options?: LabelOptions)
+        new_with_mnemonic (_str: string) : Widget;
+    }
+   
     interface LabelAccessible extends WidgetAccessible, Atk.Component, Atk.Hypertext, Atk.Text {
         
     }
@@ -5933,8 +5934,12 @@ declare namespace imports.gi.Gtk {
         unstick () : void;
     }
     
-    var Window: {
-        new (_type: WindowType) : Widget;
+    interface WindowOptions {
+        type: WindowType
+    }
+
+    class Window {
+        constructor (options?: WindowOptions);
         get_default_icon_list () : GLib.List;
         get_default_icon_name () : string;
         list_toplevels () : GLib.List;
@@ -13222,8 +13227,8 @@ declare namespace imports.gi.Gtk {
     
     
     enum WindowType {
-        toplevel = 0,
-        popup = 1
+        TOPLEVEL = 0,
+        POPUP = 1
     }
     
     
@@ -14166,7 +14171,7 @@ declare namespace imports.gi.Gtk {
     
     
     
-    function init (argc: number, argv: string[]): void;
+    function init (argc: number | null, argv?: string[]): void;
     
     
     

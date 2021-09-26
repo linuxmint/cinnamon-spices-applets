@@ -1,4 +1,3 @@
-// import * as _ from 'lodash'; now possible
 import { createConfig } from './Config';
 import { ChannelStore } from './ChannelStore';
 import { createChannelList } from './ui/ChannelList/ChannelList';

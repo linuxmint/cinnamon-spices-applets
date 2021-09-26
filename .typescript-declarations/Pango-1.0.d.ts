@@ -949,13 +949,13 @@ declare namespace imports.gi.Pango {
     
     
     enum Direction {
-        ltr = 0,
-        rtl = 1,
-        ttb_ltr = 2,
-        ttb_rtl = 3,
-        weak_ltr = 4,
-        weak_rtl = 5,
-        neutral = 6
+        LTR = 0,
+        RTL = 1,
+        TTB_LTR = 2,
+        TTB_RTL = 3,
+        WEAK_LTR = 4,
+        WEAK_RTL = 5,
+        NEUTRAL = 6
     }
     
     
@@ -1468,7 +1468,7 @@ declare namespace imports.gi.Pango {
     
     
     
-    function parse_markup (markup_text: string, length: number, accel_marker: string, attr_list: AttrList, text: string, accel_char: string): boolean;
+    function parse_markup(markup_text: string, length: number, accel_marker: string): boolean;
     
     
     

@@ -288,17 +288,20 @@ declare namespace imports.gi.St {
 	}
 
 	interface ScrollViewOptions extends BinOptions {
-		overlay_scrollbars: boolean;
+		enable_mouse_scrolling: boolean;
+		hscroll: ScrollBar;
 		hscrollbar_policy: Gtk.PolicyType;
-		vscrollbar_policy: Gtk.PolicyType;
 		hscrollbar_visible: boolean;
+		overlay_scrollbars: boolean;
+		vscroll: ScrollBar;
+		vscrollbar_policy: Gtk.PolicyType;
 		vscrollbar_visible: boolean;
 	}
 
 	interface ScrollView extends ScrollViewOptions, Bin {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
-		set_policy(hscroll: any, vscroll: any): void;
+		set_policy(hscroll: Gtk.PolicyType, vscroll: Gtk.PolicyType): void;
 		get_vscroll_bar(): ScrollBar;
 		get_hscroll_bar(): ScrollBar;
 	}
@@ -529,20 +532,24 @@ declare namespace imports.gi.St {
 	}
 
 	interface TableAddOptions {
-		row: number,
 		col: number,
 		col_span: number,
-		x_expand: boolean,
-		y_expand: boolean,
-		x_fill: boolean,
-		y_fill: boolean,
+		row: number,
+		row_span: number,
 		x_align: Align,
+		x_fill: boolean,
+		x_expand: boolean,
+		y_align: Align
+		y_expand: boolean,
+		y_fill: boolean,
 	}
 
 	export class Table extends Widget {
 		row_count: number
 
 		add(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
+		set_direction(direction: TextDirection): void
+		child_set(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
 	}
 
 	export class Content {
