@@ -7,58 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 19:11+0200\n"
-"PO-Revision-Date: 2020-10-09 11:42+0200\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2021-09-26 07:40+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: hu\n"
 
-#: applet.js:144
+#: applet.js:148
 msgid "(Right click to open folder)"
 msgstr "(Jobb egérgomb a mappa megnyitásához)"
 
-#: applet.js:166
+#: applet.js:170
 msgid "Places"
 msgstr "Helyek"
 
-#: applet.js:281
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#: applet.js:304
+#: applet.js:307
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#: applet.js:313
+#: applet.js:316
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#: applet.js:338
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
-#: applet.js:352
+#: applet.js:355
 msgid "Clear"
 msgstr "Törlés"
 
-#: applet.js:395
+#: applet.js:398
 msgid "Computer"
 msgstr "Számítógép"
 
-#: applet.js:401
+#: applet.js:404
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: applet.js:417
+#: applet.js:420
 msgid "Network"
 msgstr "Hálózat"
 
-#: applet.js:554
+#: applet.js:560
 msgid "Trash"
 msgstr "Kuka"
 
@@ -131,8 +131,9 @@ msgid "Skipping"
 msgstr "Átugrás"
 
 #: search.py:259
-msgid " - direcotry already searched"
-msgstr " - mappában már keresett"
+#| msgid " - direcotry already searched"
+msgid " - directory already searched"
+msgstr " - a mappa már része volt a keresésnek"
 
 #. metadata.json->name
 msgid "Places Center"
