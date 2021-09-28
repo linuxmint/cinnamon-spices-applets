@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-23 09:38+0100\n"
-"PO-Revision-Date: 2021-09-23 21:23+0200\n"
+"PO-Revision-Date: 2021-09-25 22:15+0200\n"
 "Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1586,7 +1586,6 @@ msgid "Please make sure you entered the API key correctly"
 msgstr "Vänligen kolla att du angett API-nyckel korrekt"
 
 #: 3.8/weather-applet.js:14226
-#, fuzzy
 msgid "Tomorrow.io"
 msgstr "Tomorrow.io"
 
@@ -2121,7 +2120,6 @@ msgid "Visual Crossing (key needed)"
 msgstr "Visual Crossing (nyckel behövs)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Tomorrow.io (key needed)"
 msgstr "Tomorrow.io (nyckel behövs)"
 
@@ -2257,9 +2255,10 @@ msgid ""
 "section by logging in with your Github account."
 msgstr ""
 "För mer detaljerad information om denna applet vänligen gå till Spices-"
-"webben där info om kända problem, felsökning, förändringsloggar och mera "
-"finns genom att klicka på knappen nedan. Här kan du ställa frågor etc i "
-"kommentarsfältet på denna sida genom att logga in med ditt Github-konto."
+"webbplatsen där info om kända problem, felsökning, förändringsloggar "
+"med mera finns, så klicka på knappen nedan. Här kan du ställa frågor och "
+"annat i kommentarsfältet på denna sida genom att logga in med ditt Github-"
+"konto."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
