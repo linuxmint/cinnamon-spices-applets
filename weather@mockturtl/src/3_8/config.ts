@@ -70,7 +70,8 @@ const Keys = {
 	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
 	IMMEDIATE_PRECIP: "immediatePrecip",
 	SHOW_BOTH_TEMP: "showBothTempUnits",
-	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
+	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
+	ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
 }
 
 export class Config {
@@ -128,6 +129,7 @@ export class Config {
 	public readonly _immediatePrecip!: boolean;
 	public readonly _showBothTempUnits!: boolean;
 	public readonly _displayWindAsText!: boolean;
+	public readonly _alwaysShowHourlyWeather!: boolean;
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;

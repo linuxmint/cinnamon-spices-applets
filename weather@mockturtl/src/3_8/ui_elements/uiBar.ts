@@ -59,7 +59,7 @@ export class UIBar {
 			this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
 		}
 
-		if (!shouldShowToggle)
+		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();
 		return true;
 	}

@@ -9443,7 +9443,8 @@ const Keys = {
     WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
     IMMEDIATE_PRECIP: "immediatePrecip",
     SHOW_BOTH_TEMP: "showBothTempUnits",
-    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
+    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
+    ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
 };
 class Config {
     constructor(app, instanceID) {
@@ -11127,7 +11128,11 @@ class UIHourlyForecasts {
         this.AdjustHourlyBoxItemWidth();
         return !(max <= 0);
     }
-    async Show() {
+    ResetScroll() {
+        let hscroll = this.actor.get_hscroll_bar();
+        hscroll.get_adjustment().set_value(0);
+    }
+    async Show(animate = true) {
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth();
@@ -11139,7 +11144,7 @@ class UIHourlyForecasts {
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
         return new Promise((resolve, reject) => {
-            if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 this.actor.height = 0;
                 addTween(this.actor, {
                     height: naturalHeight,
@@ -11157,11 +11162,10 @@ class UIHourlyForecasts {
             }
         });
     }
-    async Hide() {
-        let hscroll = this.actor.get_hscroll_bar();
+    async Hide(animate = true) {
         this.hourlyToggled = false;
         return new Promise((resolve, reject) => {
-            if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 addTween(this.actor, {
                     height: 0,
                     time: 0.25,
@@ -11170,7 +11174,7 @@ class UIHourlyForecasts {
                         this.actor.set_height(-1);
                         this.actor.style = "";
                         this.actor.hide();
-                        hscroll.get_adjustment().set_value(0);
+                        this.ResetScroll();
                         resolve();
                     }
                 });
@@ -11178,6 +11182,7 @@ class UIHourlyForecasts {
             else {
                 this.actor.style = "";
                 this.actor.set_height(-1);
+                this.ResetScroll();
                 this.actor.hide();
                 resolve();
             }
@@ -11340,7 +11345,7 @@ class UIBar {
             };
             this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
         }
-        if (!shouldShowToggle)
+        if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
     }
@@ -11436,6 +11441,7 @@ class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
         this.lastDateToggled = undefined;
+        this.noHourlyWeather = false;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
         this.menu = new AppletPopupMenu(this.App, orientation);
@@ -11449,7 +11455,22 @@ class UI {
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
     Toggle() {
-        this.menu.toggle();
+        if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
+            if (this.menu.isOpen) {
+                this.menu.close(true);
+            }
+            else {
+                this.menu.open(false);
+                this.ShowHourlyWeather(false);
+                this.menu.close(false);
+                this.menu.open(true);
+            }
+        }
+        else {
+            if (this.HourlyWeather.Toggled && !this.menu.isOpen)
+                this.HideHourlyWeather(false);
+            this.menu.toggle();
+        }
     }
     async ToggleHourlyWeather() {
         if (this.HourlyWeather.Toggled) {
@@ -11481,6 +11502,9 @@ class UI {
         this.CurrentWeather.Display(weather, config);
         this.FutureWeather.Display(weather, config);
         let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+        this.noHourlyWeather = !shouldShowToggle;
+        if (!shouldShowToggle)
+            this.ForceHideHourlyWeather();
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
     }
@@ -11559,16 +11583,24 @@ class UI {
         this.HourlyWeather.ScrollTo(date);
         this.lastDateToggled = date;
     }
-    async ShowHourlyWeather() {
+    async ShowHourlyWeather(animate = true) {
         this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
-        await this.HourlyWeather.Show();
+        await this.HourlyWeather.Show(animate);
     }
-    async HideHourlyWeather() {
+    async HideHourlyWeather(animate = true) {
+        if (this.App.config._alwaysShowHourlyWeather) {
+            this.lastDateToggled = undefined;
+            this.HourlyWeather.ResetScroll();
+            return;
+        }
+        await this.ForceHideHourlyWeather(animate);
+    }
+    async ForceHideHourlyWeather(animate = true) {
         this.lastDateToggled = undefined;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
-        await this.HourlyWeather.Hide();
+        await this.HourlyWeather.Hide(animate);
     }
 }
 

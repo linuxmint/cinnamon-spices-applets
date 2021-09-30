@@ -102,6 +102,7 @@
 				"verticalOrientation",
 				"forecastColumns",
 				"forecastRows",
+				"alwaysShowHourlyWeather",
 				"showSunrise",
 				"show24Hours",
 				"showForecastDates",
@@ -314,7 +315,7 @@
 	},
 	"showCommentInPanel": {
 		"type": "checkbox",
-		"default": true,
+		"default": false,
 		"description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel",
 		"tooltip": "Only works with horizontal panels"
 	},
@@ -329,6 +330,12 @@
 		"default": false,
 		"tooltip": "Iconset is weather-icons by Erik Flowers",
 		"description": "Use custom icons on the panel"
+	},
+	"alwaysShowHourlyWeather": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Always show Hourly Weather",
+		"tooltip": "Hide/Show button will be hidden and Hourly weather will be permanently visible."
 	},
 	"verticalOrientation": {
 		"type": "checkbox",
