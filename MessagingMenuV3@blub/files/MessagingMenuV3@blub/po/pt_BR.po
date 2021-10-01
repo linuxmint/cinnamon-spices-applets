@@ -28,8 +28,8 @@ msgstr "Contatos"
 
 #. metadata.json->name
 msgid "Messaging Menu"
-msgstr "Menu de mensagens"
+msgstr "Menu de mensageiros"
 
 #. metadata.json->description
 msgid "Messaging Menu applet"
-msgstr "Applet de menu de mensagens"
+msgstr "Applet de menu de mensageiros"
