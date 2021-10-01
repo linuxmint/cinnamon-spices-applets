@@ -25,4 +25,4 @@ msgstr "Rede"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
-msgstr "Mostrar a rede"
+msgstr "Mostra a rede"
