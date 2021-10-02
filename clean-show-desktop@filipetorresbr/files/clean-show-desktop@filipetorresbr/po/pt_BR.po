@@ -39,11 +39,11 @@ msgstr "Configurações"
 
 #. settings-schema.json->peek-desktop->description
 msgid "Peek at the desktop on hover"
-msgstr "Olhar a área de trabalho ao sobrepor o mouse no applet"
+msgstr "Olhar área de trabalho ao passar o mouse por cima"
 
 #. settings-schema.json->peek-desktop->tooltip
 msgid "Peek at the desktop when hovering the applet"
-msgstr "Olha a área de trabalho ao sobrepor o mouse no applet"
+msgstr "Olha a área de trabalho ao passar o mouse por cima do applet"
 
 #. settings-schema.json->peek-blur->description
 msgid "Blur effect"
@@ -63,7 +63,7 @@ msgstr "Tempo de atraso"
 
 #. settings-schema.json->peek-delay->tooltip
 msgid "Delay before Peek shows desktop"
-msgstr "Atraso para mostrar a área de trabalho ao sobrepor o mouse no applet"
+msgstr "Atraso para mostrar a área de trabalho ao passar o mouse"
 
 #. settings-schema.json->peek-opacity->description
 msgid "Window opacity"
@@ -84,7 +84,7 @@ msgstr "Tamanho do applet"
 
 #. settings-schema.json->width->tooltip
 msgid "Adjust this to increase or decrease the width of this applet"
-msgstr "Ajuste essa opção para aumentar ou diminuir o tamanho do applet"
+msgstr "Ajuste isto para aumentar ou diminuir o tamanho do applet"
 
 #. settings-schema.json->background->description
 msgid "Fill color"
