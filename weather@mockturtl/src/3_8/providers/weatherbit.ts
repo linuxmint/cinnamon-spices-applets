@@ -122,6 +122,7 @@ export class Weatherbit implements WeatherProvider {
 				temperature: json.temp,
 				pressure: json.pres,
 				humidity: json.rh,
+				dewPoint: null,
 				condition: {
 					main: json.weather.description,
 					description: json.weather.description,

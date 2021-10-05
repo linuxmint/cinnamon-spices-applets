@@ -255,6 +255,7 @@ export class USWeather implements WeatherProvider {
 				temperature: CelsiusToKelvin(observation.properties.temperature.value),
 				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
+				dewPoint: null,
 				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};

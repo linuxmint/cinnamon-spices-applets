@@ -214,6 +214,7 @@ export class MetUk implements WeatherProvider {
 				temperature: null,
 				pressure: null,
 				humidity: null,
+				dewPoint: null,
 				condition: this.ResolveCondition(observation?.W),
 				forecasts: []
 			};

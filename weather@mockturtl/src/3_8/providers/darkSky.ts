@@ -101,6 +101,7 @@ export class DarkSky implements WeatherProvider {
 				temperature: this.ToKelvin(json.currently.temperature),
 				pressure: json.currently.pressure,
 				humidity: json.currently.humidity * 100,
+				dewPoint: null,
 				condition: {
 					main: this.GetShortCurrentSummary(json.currently.summary),
 					description: json.currently.summary,

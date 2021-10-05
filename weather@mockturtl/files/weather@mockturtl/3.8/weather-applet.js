@@ -10026,6 +10026,7 @@ class MetUk {
                 temperature: null,
                 pressure: null,
                 humidity: null,
+                dewPoint: null,
                 condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
                 forecasts: []
             };
@@ -11677,6 +11678,7 @@ class DarkSky {
                 temperature: this.ToKelvin(json.currently.temperature),
                 pressure: json.currently.pressure,
                 humidity: json.currently.humidity * 100,
+                dewPoint: null,
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
@@ -11995,6 +11997,7 @@ class OpenWeatherMap {
                 temperature: json.current.temp,
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
+                dewPoint: json.current.dew_point,
                 condition: {
                     main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
                     description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
@@ -12555,6 +12558,7 @@ class USWeather {
                 temperature: CelsiusToKelvin(observation.properties.temperature.value),
                 pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
                 humidity: observation.properties.relativeHumidity.value,
+                dewPoint: null,
                 condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
                 forecasts: []
             };
@@ -12906,6 +12910,7 @@ class Weatherbit {
                     temperature: json.temp,
                     pressure: json.pres,
                     humidity: json.rh,
+                    dewPoint: null,
                     condition: {
                         main: json.weather.description,
                         description: json.weather.description,
@@ -13338,6 +13343,7 @@ class MetNorway {
             condition: this.ResolveCondition((_b = (_a = current.data.next_1_hours) === null || _a === void 0 ? void 0 : _a.summary) === null || _b === void 0 ? void 0 : _b.symbol_code, IsNight(suntimes)),
             humidity: current.data.instant.details.relative_humidity,
             pressure: current.data.instant.details.air_pressure_at_sea_level,
+            dewPoint: null,
             extra_field: {
                 name: _("Cloudiness"),
                 type: "percent",
@@ -14005,6 +14011,7 @@ class VisualCrossing {
             },
             humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
             pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
+            dewPoint: null,
             wind: {
                 degree: (_c = weather.currentConditions.winddir) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
                 speed: (_d = weather.currentConditions.windspeed) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
@@ -14314,6 +14321,7 @@ class ClimacellV4 {
                 degree: current.values.windDirection,
                 speed: current.values.windSpeed
             },
+            dewPoint: null,
             sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
             sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
             location: {
@@ -14622,7 +14630,8 @@ class DanishMI {
             wind: {
                 degree: observation.WindDirection,
                 speed: observation.WindSpeed10m
-            }
+            },
+            dewPoint: null,
         };
         result.location = {
             city: forecasts.city,

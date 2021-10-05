@@ -77,6 +77,7 @@ export class MetNorway implements WeatherProvider {
 			condition: this.ResolveCondition(current.data.next_1_hours?.summary?.symbol_code, IsNight(suntimes)),
 			humidity: current.data.instant.details.relative_humidity,
 			pressure: current.data.instant.details.air_pressure_at_sea_level,
+			dewPoint: null,
 			extra_field: {
 				name: _("Cloudiness"),
 				type: "percent",
