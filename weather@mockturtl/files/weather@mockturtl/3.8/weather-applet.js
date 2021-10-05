@@ -8551,6 +8551,7 @@ function friendlyDateTime(dateTimeish) {
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const { Object: utils_Object } = imports.gi.GObject;
 function _(str, args) {
     let result = imports.gettext.dgettext(UUID, str);
     if (result === str && result === "")
@@ -8988,6 +8989,9 @@ function Guid() {
         return v.toString(16);
     });
 }
+const isFinalized = function (obj) {
+    return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+};
 function utils_setTimeout(func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -10580,6 +10584,7 @@ class CurrentWeather {
             this.SetHumidity(weather.humidity);
             this.SetWind(weather.wind.speed, weather.wind.degree);
             this.SetPressure(weather.pressure);
+            this.SetDewPointField(weather.dewPoint);
             this.SetAPIUniqueField(weather.extra_field);
             if (config._showSunrise)
                 this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
@@ -10635,19 +10640,23 @@ class CurrentWeather {
         this.temperatureLabel = new Label(textOb);
         this.humidityLabel = new Label(textOb);
         this.pressureLabel = new Label(textOb);
+        this.dewPointLabel = new Label({ text: '' });
         this.apiUniqueLabel = new Label({ text: '' });
         this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+        this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
         rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(this.dewPointCaption);
         rb_captions.add_actor(this.apiUniqueCaptionLabel);
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
         rb_values.add_actor(this.BuildWind(config));
+        rb_values.add_actor(this.dewPointLabel);
         rb_values.add_actor(this.apiUniqueLabel);
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
@@ -10797,6 +10806,17 @@ class CurrentWeather {
             }
             this.apiUniqueLabel.text = value !== null && value !== void 0 ? value : "";
         }
+    }
+    SetDewPointField(dewPoint) {
+        let temp = TempToUserConfig(dewPoint, this.app.config);
+        if (temp == null) {
+            this.dewPointCaption.set_style_class_name("weather-hidden");
+            this.dewPointLabel.set_style_class_name("weather-hidden");
+            return;
+        }
+        this.dewPointCaption.remove_style_class_name("weather-hidden");
+        this.dewPointLabel.remove_style_class_name("weather-hidden");
+        this.dewPointLabel.text = temp;
     }
     SetWeatherIcon(iconNames, customIconName) {
         if (this.app.config._useCustomMenuIcons) {

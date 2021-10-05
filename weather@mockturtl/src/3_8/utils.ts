@@ -1,11 +1,11 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { GetTimesResult } from "suncalc";
 import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const { Object } = imports.gi.GObject;
 
 // --------------------------------------------------------------
 // Text Generators
@@ -572,6 +572,10 @@ export function Guid() {
 		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
+}
+
+export const isFinalized = function(obj: any) {
+    return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 }
 
 // -----------------------------------------------------------
