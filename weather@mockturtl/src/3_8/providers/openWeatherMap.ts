@@ -77,6 +77,7 @@ export class OpenWeatherMap implements WeatherProvider {
 				temperature: json.current.temp,
 				pressure: json.current.pressure,
 				humidity: json.current.humidity,
+				dewPoint: json.current.dew_point,
 				condition: {
 					main: json?.current?.weather?.[0]?.main,
 					description: json?.current?.weather?.[0]?.description,

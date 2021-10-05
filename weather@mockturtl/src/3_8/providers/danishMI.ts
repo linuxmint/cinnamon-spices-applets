@@ -62,7 +62,8 @@ export class DanishMI implements WeatherProvider {
 			wind: {
 				degree: observation.WindDirection,
 				speed: observation.WindSpeed10m
-			}
+			},
+			dewPoint: null,
 		} as WeatherData;
 
 		result.location = {

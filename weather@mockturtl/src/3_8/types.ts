@@ -60,6 +60,8 @@ export interface WeatherData {
 	pressure: number | null;
 	/** In percent */
 	humidity: number | null;
+	/** In kelvin */
+	dewPoint: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[]

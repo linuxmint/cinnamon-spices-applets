@@ -80,6 +80,7 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
+			dewPoint: null,
 			// Cast to string, we always get sunrise/sunset from daily
 			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
 			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
