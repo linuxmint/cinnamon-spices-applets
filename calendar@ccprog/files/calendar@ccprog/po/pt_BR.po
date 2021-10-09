@@ -86,7 +86,7 @@ msgstr "Mostrar números da semana no calendário"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr "Marque isso para mostrar o número da semana no calendário."
+msgstr "Marque isso para mostrar números das semanas no calendário."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
