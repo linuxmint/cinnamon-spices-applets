@@ -1,0 +1,130 @@
+#!/bin/bash
+# Copyright 2021 Dennis Johansson, dennis@nixdev.com. License: MIT.
+
+check_args()
+{
+    OPTION=$1
+    shift
+    ARG=$1
+    shift
+
+    FOUND=0
+    for i in "$@"; do 
+        if [ "$i" = "$ARG" ]; then
+           FOUND=1
+        fi 
+    done
+
+    if [ "$FOUND" -eq 0 ]; then
+        echo "$OPTION error - wrong argument: $ARG"
+        echo "Valid args: $@"
+        exit
+    fi
+}
+
+create_resolution()
+{
+
+gsettings set org.cinnamon.desktop.interface scaling-factor $SCALINGFACTOR
+
+xrandr \
+    --output $PRIMARY_DEV \
+    --mode "$RESOLUTION" \
+    --fb "$SCALED_X"x"$SCALED_Y"  \
+    --scale "$XRANDR_SCALER"x"$XRANDR_SCALER" \
+    --panning "$SCALED_X"x"$SCALED_Y"+0+0
+}
+
+if [ -z "$2" ] || [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo Usage: $0 [OPTION]...
+    echo "Set primary resolution with fractional scaling options"
+    echo "  -r --resolution [ARG]        Resolution of the display"
+    echo "                               Set [ARG] 'max' to get maximum resolution possible."
+    echo "  -s --scalingfactor [ARG]     The GTK scaling factor: 1 - 3"
+    echo "  -f --fractionalscaling [ARG] Fractional scaling in percent: 125, 150, 175 200"
+    echo Example: $0 --resolution 3840x2160 --scalingfactor 2 --fractionalscaling 150
+    echo "Will result in 150% factional scaling with a perceived resolution output at 2560x1440"
+    exit
+fi
+
+for ARG in "$@"; do
+    case $ARG in
+        '-r'| '--resolution')
+            shift
+            RESOLUTION="$1"
+            shift
+            continue
+        ;;
+        '-s'| '--scalingfactor')
+            shift
+            SCALINGFACTOR="$1"
+            shift
+            continue
+        ;;
+        '-f' | '--fractionalscaling')
+            shift
+            FRACTIONALSCALING="$1"
+            shift
+            continue 
+        ;;
+        *)
+        # unknown option
+        ;;
+    esac
+done
+
+if [ -n "$RESOLUTION" ]; then
+    check_args "Resolution" $RESOLUTION max `xrandr | grep primary -A 14 | awk 'NR>1 { print $1 }'`
+fi
+if [ -n "$SCALINGFACTOR" ]; then
+    check_args "Scalingfactor" $SCALINGFACTOR 1 2 3
+fi
+
+if [ -n "$FRACTIONALSCALING" ]; then
+    check_args "Fractional scaling" $FRACTIONALSCALING 125 150 175 200
+fi
+
+# get some info from xrandr
+PRIMARY_DEV=`xrandr | grep primary | cut -f 1 -d " "`
+HIGHRES=`xrandr | grep primary -A 1 | grep "   " | cut -f 4  -d " "`
+
+# We can just write max instead of resolution if we want max-resolution.
+if [ "$RESOLUTION" == "max" ]; then 
+    RESOLUTION=$HIGHRES
+fi
+
+RES_X=`echo $RESOLUTION | cut -f 1 -d "x"`
+RES_Y=`echo $RESOLUTION | cut -f 2 -d "x"`
+
+# Set default values
+SCALED_X=$RES_X
+SCALED_Y=$RES_Y
+XRANDR_SCALER=1
+
+echo "Primary device      - $PRIMARY_DEV"
+echo "GTK scaling factor  - $SCALINGFACTOR"
+echo "Max resolution      - $HIGHRES"
+echo "Physical resolution - $RESOLUTION"
+
+if [ -n "$FRACTIONALSCALING" ]; then
+    FRACT_X="$((RES_X * 100 / $FRACTIONALSCALING))"
+    FRACT_Y="$((RES_Y * 100 / $FRACTIONALSCALING))"
+    XRANDR_SCALER=`printf %.10f\\n "$((1000000000 * FRACT_X / 1920 ))e-9" | sed -e s/n// | sed -e s/,/\./`
+    SCALED_X=`printf %.0f\\n "$((1000000000 * FRACT_X / 1920 * RES_X ))e-9" | sed -e s/n//`
+    SCALED_Y=`printf %.0f\\n "$((1000000000 * FRACT_Y / 1080 * RES_Y ))e-9" | sed -e s/n//`
+    
+  
+    echo "Perceived resolution- $FRACT_X"x"$FRACT_Y"
+    echo "Virtual resolution  - $SCALED_X"x"$SCALED_Y"
+    echo "Xrandr scaler       - $XRANDR_SCALER"
+fi
+
+if [ -z "$SCALINGFACTOR" ]; then
+  SCALINGFACTOR=1
+fi
+
+# Run the xrandr function to create the new settings.
+create_resolution
+
+# Reload cinnamon. Else Startmenu won't resize. 
+dbus-send --type=method_call --dest=org.Cinnamon /org/Cinnamon org.Cinnamon.Eval string:'global.reexec_self()'
