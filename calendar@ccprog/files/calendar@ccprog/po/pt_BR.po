@@ -70,7 +70,7 @@ msgstr "Exibição"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
-msgstr "Obter os Feriados de"
+msgstr "Obter Feriados para"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
