@@ -20,7 +20,7 @@ msgstr ""
 
 #: applet.js:65
 msgid "Date and Time Settings"
-msgstr "Configurações de data e hora"
+msgstr "Configurações de Data e Hora"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -62,7 +62,7 @@ msgstr "Calendário"
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
 msgid "World Clocks"
-msgstr "Relógios mundiais"
+msgstr "Relógios Mundiais"
 
 #. settings-schema.json->section1->title
 msgid "Display"
@@ -70,23 +70,23 @@ msgstr "Exibição"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
-msgstr "Obter os feriados de"
+msgstr "Obter os Feriados de"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
-msgstr "Atalhos de teclado"
+msgstr "Atalhos de Teclado"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
-msgstr "Mostrar relógios mundiais"
+msgstr "Mostrar Relógios Mundiais"
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
-msgstr "Exibir números da semana no calendário"
+msgstr "Mostrar números da semana no calendário"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr "Marque essa opção para mostrar o número da semana no calendário."
+msgstr "Marque isso para mostrar o número da semana no calendário."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -114,7 +114,7 @@ msgstr "Marque esta opção para definir um formato de data personalizado no app
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr "Formato da data"
+msgstr "Formato da Data"
 
 #. settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
