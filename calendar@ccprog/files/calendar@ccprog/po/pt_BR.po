@@ -90,7 +90,7 @@ msgstr "Marque essa opção para mostrar o número da semana no calendário."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
-msgstr "Considerar como dias de fim de semana"
+msgstr "Considerar quantos dias de fim de semana"
 
 #. settings-schema.json->weekend-length->tooltip
 msgid "Set how many days are marked as non-working days per week."
@@ -98,11 +98,11 @@ msgstr "Defina quantos dias não são marcados como dias úteis em uma semana."
 
 #. settings-schema.json->weekend-length->options
 msgid "One day"
-msgstr "Um dia (domingo)"
+msgstr "Um dia"
 
 #. settings-schema.json->weekend-length->options
 msgid "Two days"
-msgstr "Dois dias (sábado e domingo)"
+msgstr "Dois dias"
 
 #. settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
