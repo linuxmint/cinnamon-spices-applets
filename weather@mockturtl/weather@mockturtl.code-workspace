@@ -1,0 +1,49 @@
+{
+  "folders": [
+    {
+      "path": "../.typescript-declarations",
+      "name": "ts-declarations",
+    },
+    {
+      "path": "../weather@mockturtl",
+      "name": "weather",
+    }
+  ],
+  "settings": {
+    "cSpell.ignoreWords": [
+      "Climacell",
+      "Luxon",
+      "mockturtl",
+      "suncalc",
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "npm",
+        "script": "install",
+        "path": "${workspaceFolder:weather}",
+        "problemMatcher": [],
+        "label": "npm: install",
+        "detail": "install dependencies from package",
+        "group": "build"
+      },
+      {
+        "type": "shell",
+        "command": "${workspaceFolder:weather}/build.sh",
+        "problemMatcher": [],
+        "label": "npx webpack + translation generation",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "streetsidesoftware.code-spell-checker"
+    ]
+  }
+}

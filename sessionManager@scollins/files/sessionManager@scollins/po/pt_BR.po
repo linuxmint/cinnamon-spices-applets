@@ -1,38 +1,38 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Vinícius Queiroz <viniciusqueiroz.voq@gmail.com>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-20 23:29-0300\n"
-"PO-Revision-Date: 2018-11-20 23:36-0300\n"
+"PO-Revision-Date: 2021-09-30 17:28-0300\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Marcelo Aof\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: pt_BR\n"
 
 #: applet.js:159
 msgid "Session"
-msgstr "Seção"
+msgstr "Sessão"
 
 #: applet.js:226
 msgid "Lock Screen"
-msgstr "Bloquear Tela"
+msgstr "Bloquear tela"
 
 #: applet.js:230
 msgid "Switch User"
-msgstr "Trocar Usuário"
+msgstr "Trocar usuário"
 
 #: applet.js:235
 msgid "Guest Session"
-msgstr "Seção de Convidado"
+msgstr "Sessão de convidado"
 
 #: applet.js:240
 msgid "Log Off"
@@ -60,11 +60,11 @@ msgstr "Desligar"
 
 #. sessionManager@scollins->settings-schema.json->panelIcon->description
 msgid "Panel Icon"
-msgstr "Ícone do Painel"
+msgstr "Ícone no painel"
 
 #. sessionManager@scollins->settings-schema.json->iconSize->description
 msgid "Icon Size"
-msgstr "Tamanho do Ícone"
+msgstr "Tamanho do ícone"
 
 #. sessionManager@scollins->settings-schema.json->iconSize->units
 msgid "px"
@@ -73,15 +73,15 @@ msgstr "px"
 #. sessionManager@scollins->settings-
 #. schema.json->symbolicMenuIcons->description
 msgid "Symbolic icons in menu"
-msgstr "Ícones simbólicos no menu"
+msgstr "Ícones monocromáticos no menu"
 
 #. sessionManager@scollins->settings-schema.json->panelText->description
 msgid "Panel Text"
-msgstr "Texto do Painel"
+msgstr "Texto no painel"
 
 #. sessionManager@scollins->settings-schema.json->general->description
 msgid "General Settings"
-msgstr "Configurações Gerais"
+msgstr "Configurações gerais"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
@@ -100,12 +100,13 @@ msgid ""
 "submit a feature request on github, and I will add it at my earliest "
 "convenience."
 msgstr ""
-"Gerenciador de Seção é um applet que fornece um acesso fácil para os controles de seção "
-"como desligar, reiniciar, sair (log off),alternar usuário, etc. Ele foi testado no "
-"Arch, Fedora e Linux Mint e suporta uma ampla variedade de configurações de software. "
-"Se sua configuração particular não for suportada, por favor "
-"envie uma solicitação de recurso no github e eu a adicionarei assim que possível."
+"Gerenciador de Seção é um applet que fornece um acesso fácil para controles "
+"de sessão como desligar, reiniciar, sair, trocar usuário, etc. Ele foi "
+"testado no Arch, Fedora e Linux Mint. Oferece compatibilidade com uma ampla "
+"variedade de Linux personalizados. Para solicitar recursos e correção de "
+"erros, entre em contato por meio do GitHub. Eu considerarei o seu pedido "
+"assim que possível."
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr "Gerenciador de Seção"
+msgstr "Gerenciador de sessão"

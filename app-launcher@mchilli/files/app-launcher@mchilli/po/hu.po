@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-16 20:04+0200\n"
+"PO-Revision-Date: 2021-09-26 06:51+0200\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:98
+msgid "Edit Applications"
+msgstr "Alkalmazások szerkesztése"
+
+#: applet.js:647 applet.js:891
+msgid "Delete"
+msgstr "Törlés"
+
+#: applet.js:648 applet.js:892
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: applet.js:649 applet.js:893
+msgid "Cancel"
+msgstr "Mégse"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:33 widgets.py:27
+msgid "Name"
+msgstr "Név"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:39
+msgid "Group"
+msgstr "Csoport"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:40 widgets.py:33
+msgid "Command"
+msgstr "Parancs"
+
+#: dialogs.py:120
+msgid "The name cannot be empty"
+msgstr "A név nem lehet üres"
+
+#: dialogs.py:125
+msgid "The name is already used"
+msgstr "A megadott név már használatban van"
+
+#: dialogs.py:132
+msgid "Valid name"
+msgstr "Érvényes név"
+
+#: dialogs.py:138
+msgid "Valid command"
+msgstr "Érvényes parancs"
+
+#: dialogs.py:141
+msgid "The command is not valid"
+msgstr "Az elindítandó parancs nem érvényes"
+
+#: dialogs.py:158
+msgid "really delete?"
+msgstr "valóban törli?"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:21
+msgid "Icon"
+msgstr "Ikon"
+
+#: widgets.py:102
+msgid "Add new entry"
+msgstr "Új bejegyzés hozzáadása"
+
+#: widgets.py:107
+msgid "Remove selected entry"
+msgstr "Kijelölt bejegyzés eltávolítása"
+
+#: widgets.py:113
+msgid "Edit selected entry"
+msgstr "Kijelölt bejegyzés szerkesztése"
+
+#: widgets.py:119
+msgid "Move selected entry up"
+msgstr "Kijelölt bejegyzés mozgatása fel"
+
+#: widgets.py:125
+msgid "Move selected entry down"
+msgstr "Kijelölt bejegyzés mozgatása le"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Alkalmazásindító"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Egy egyszerű alkalmazásindító"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Alkalmazások"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Alkalmazások beállítások"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Címke megjelenítése"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Címke"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Egyedi ikon"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Értesítések megjelenítése"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Értesítés megjelenítése az alkalmazás indításakor"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Értesítési szöveg"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "A(z) %s lesz az alkalmazás neve"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Alkalmazásikonok megjelenítése"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Egyéni alkalmazás ikonok használata a helyi menüben"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Szimbolikus ikonok használata"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Szimbolikus ikonok használata, ha lehetséges"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Alkalmazás ikon mérete"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Ikonméret beállítása"

@@ -76,11 +76,13 @@ function createPopupMenu(args) {
         var freeSpaceHeight = (freeSpace.bottom - freeSpace.top) / global.ui_scale;
         var boxThemeNode = box.get_theme_node();
         var binThemeNode = bin.get_theme_node();
-        var paddingTop = boxThemeNode.get_padding(Side.TOP);
-        var paddingBottom = boxThemeNode.get_padding(Side.BOTTOM);
-        var borderWidthTop = binThemeNode.get_border_width(Side.TOP);
-        var borderWidthBottom = binThemeNode.get_border_width(Side.BOTTOM);
-        var maxHeight = freeSpaceHeight - paddingBottom - paddingTop - borderWidthTop - borderWidthBottom;
+        var paddingTopBox = boxThemeNode.get_padding(Side.TOP);
+        var paddingBottomBox = boxThemeNode.get_padding(Side.BOTTOM);
+        var borderWidthTopBin = binThemeNode.get_border_width(Side.TOP);
+        var borderWidthBottomBIN = binThemeNode.get_border_width(Side.BOTTOM);
+        var paddingTopBin = binThemeNode.get_padding(Side.TOP);
+        var paddingBottomBin = binThemeNode.get_padding(Side.BOTTOM);
+        var maxHeight = freeSpaceHeight - paddingBottomBox - paddingTopBox - borderWidthTopBin - borderWidthBottomBIN - paddingTopBin - paddingBottomBin;
         return maxHeight;
     }
     function calculatePosition(maxHeight, freeSpace) {
@@ -5082,7 +5084,6 @@ function mapValues(object, iteratee) {
 /* harmony default export */ const lodash_es_mapValues = (mapValues);
 
 ;// CONCATENATED MODULE: ./src/polyfill.ts
-// import { isObject, mapValues } from "lodash";
 
 const { Variant } = imports.gi.GLib;
 function initPolyfills() {

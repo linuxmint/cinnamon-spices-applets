@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Vinícius Queiroz <viniciusqueiroz.voq@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-13 13:37+0200\n"
-"PO-Revision-Date: 2021-08-27 20:43-0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2021-10-02 18:47-0300\n"
+"Last-Translator: Marcelo Aof\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr "Configurações de Data e Hora"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
-msgstr "Adicionar nova entrada"
+msgstr "Adicionar novo relógio"
 
 #: settings_widgets.py:99
 msgid "Edit entry"
-msgstr "Editar entrada"
+msgstr "Editar relógio"
 
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
@@ -49,13 +49,11 @@ msgstr "Cidade"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"
-msgstr "Calendário com feriados púbicos"
+msgstr "Calendário com feriados"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr ""
-"Miniaplicativo de calendário com dados de feriados fornecidos por serviço "
-"Enrico"
+msgstr "Applet de calendário que exibe os próximos feriados. Dados fornecidos pelo serviço Enrico"
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
@@ -72,15 +70,15 @@ msgstr "Exibição"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
-msgstr "Obter Feriados Públicos para"
+msgstr "Obter Feriados para"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
-msgstr "Atalhos do Teclado"
+msgstr "Atalhos de Teclado"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
-msgstr "Mostrar Relógios Mudiais"
+msgstr "Mostrar Relógios Mundiais"
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
@@ -88,15 +86,15 @@ msgstr "Mostrar números da semana no calendário"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr "Marque isso para mostrar números da semana no calendário."
+msgstr "Marque isso para mostrar números das semanas no calendário."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
-msgstr "Marcar como dias de fim de semana"
+msgstr "Considerar quantos dias de fim de semana"
 
 #. settings-schema.json->weekend-length->tooltip
 msgid "Set how many days are marked as non-working days per week."
-msgstr "Defina quantos dias são marcados como dias não úteis por semana."
+msgstr "Defina quantos dias não são marcados como dias úteis em uma semana."
 
 #. settings-schema.json->weekend-length->options
 msgid "One day"
@@ -111,15 +109,12 @@ msgid "Use a custom date format"
 msgstr "Usar um formato de data personalizado"
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid ""
-"Check this to define a custom format for the date in the calendar applet."
-msgstr ""
-"Marque esta opção para definir um formato personalizado para a data no "
-"miniaplicativo de calendário."
+msgid "Check this to define a custom format for the date in the calendar applet."
+msgstr "Marque esta opção para definir um formato de data personalizado no applet de calendário."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr "Formato de Data"
+msgstr "Formato da Data"
 
 #. settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
@@ -127,12 +122,11 @@ msgstr "Defina seu formato personalizado aqui."
 
 #. settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr "Mostra informações sobre a sintaxe do formato de data"
+msgstr "Saiba mais sobre a sintaxe do formato de data"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr ""
-"Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
+msgstr "Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -160,11 +154,11 @@ msgstr "Bósnia e Herzegovina"
 
 #. settings-schema.json->country->options
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorrússia"
 
 #. settings-schema.json->country->options
 msgid "Brazil"
-msgstr "Brazil"
+msgstr "Brasil"
 
 #. settings-schema.json->country->options
 msgid "Canada"
@@ -188,7 +182,7 @@ msgstr "Croácia"
 
 #. settings-schema.json->country->options
 msgid "Czech Republic"
-msgstr "República Checa"
+msgstr "Tchéquia"
 
 #. settings-schema.json->country->options
 msgid "Denmark"
@@ -200,7 +194,7 @@ msgstr "Estônia"
 
 #. settings-schema.json->country->options
 msgid "Spain"
-msgstr ""
+msgstr "Espanha"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -268,7 +262,7 @@ msgstr "Luxemburgo"
 
 #. settings-schema.json->country->options
 msgid "Macedonia"
-msgstr "Macedonia"
+msgstr "Macedônia do Norte"
 
 #. settings-schema.json->country->options
 msgid "Mexico"
@@ -276,7 +270,7 @@ msgstr "México"
 
 #. settings-schema.json->country->options
 msgid "Netherlands"
-msgstr "Holanda"
+msgstr "Países Baixos"
 
 #. settings-schema.json->country->options
 msgid "New Zealand"
@@ -308,7 +302,7 @@ msgstr "Romênia"
 
 #. settings-schema.json->country->options
 msgid "Russian Federation"
-msgstr "Federação Russa"
+msgstr "Rússia"
 
 #. settings-schema.json->country->options
 msgid "Serbia"
@@ -316,7 +310,7 @@ msgstr "Sérvia"
 
 #. settings-schema.json->country->options
 msgid "Singapore"
-msgstr "Cingapura"
+msgstr "Singapura"
 
 #. settings-schema.json->country->options
 msgid "Slovakia"
@@ -356,7 +350,7 @@ msgstr "Estados Unidos da América"
 
 #. settings-schema.json->region_aus->options
 msgid "Australian Capital Territory"
-msgstr "Território Capital da Australia"
+msgstr "Território da Capital Australiana"
 
 #. settings-schema.json->region_aus->options
 msgid "Queensland"
@@ -380,7 +374,7 @@ msgstr "Tasmânia"
 
 #. settings-schema.json->region_aus->options
 msgid "Victoria"
-msgstr "Vitória (Colúmbia Britânica)"
+msgstr "Vitória"
 
 #. settings-schema.json->region_aus->options
 msgid "Western Australia"
@@ -424,7 +418,7 @@ msgstr "Ontário"
 
 #. settings-schema.json->region_can->options
 msgid "Prince Edward Island"
-msgstr "Prince Edward Island"
+msgstr "Ilha do Príncipe Eduardo"
 
 #. settings-schema.json->region_can->options
 msgid "Quebec"
@@ -444,7 +438,7 @@ msgstr "Baden-Württemberg"
 
 #. settings-schema.json->region_deu->options
 msgid "Bayern"
-msgstr "Bayern"
+msgstr "Baviera"
 
 #. settings-schema.json->region_deu->options
 msgid "Berlin"
@@ -452,7 +446,7 @@ msgstr "Berlim"
 
 #. settings-schema.json->region_deu->options
 msgid "Brandenburg"
-msgstr "Brandenburgo"
+msgstr "Brandemburgo"
 
 #. settings-schema.json->region_deu->options
 msgid "Bremen"
@@ -472,15 +466,15 @@ msgstr "Baixa Saxônia"
 
 #. settings-schema.json->region_deu->options
 msgid "Mecklenburg-Vorpommern"
-msgstr "Mecklenburg-Vorpommern"
+msgstr "Mecklemburgo-Pomerânia Ocidental"
 
 #. settings-schema.json->region_deu->options
 msgid "Nordrhein-Westfalen"
-msgstr "Nordrhein-Westfalen"
+msgstr "Renânia do Norte-Vestfália"
 
 #. settings-schema.json->region_deu->options
 msgid "Rheinland-Pfalz"
-msgstr "Rheinland-Pfalz"
+msgstr "Renânia-Palatinado"
 
 #. settings-schema.json->region_deu->options
 msgid "Saarland"
@@ -500,83 +494,83 @@ msgstr "Schleswig-Holstein"
 
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
-msgstr "Thüringen"
+msgstr "Turíngia"
 
 #. settings-schema.json->region_esp->options
 msgid "Andalucía"
-msgstr ""
+msgstr "Andaluzia"
 
 #. settings-schema.json->region_esp->options
 msgid "Aragón"
-msgstr ""
+msgstr "Aragão"
 
 #. settings-schema.json->region_esp->options
 msgid "Asturias"
-msgstr ""
+msgstr "Astúrias"
 
 #. settings-schema.json->region_esp->options
 msgid "Canarias"
-msgstr ""
+msgstr "Ilhas Canárias"
 
 #. settings-schema.json->region_esp->options
 msgid "Cantabria"
-msgstr ""
+msgstr "Cantábria"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla y León"
-msgstr ""
+msgstr "Castela e Leão"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla-La Mancha"
-msgstr ""
+msgstr "Castilla-La Mancha"
 
 #. settings-schema.json->region_esp->options
 msgid "Cataluña"
-msgstr ""
+msgstr "Catalunha"
 
 #. settings-schema.json->region_esp->options
 msgid "Ceuta"
-msgstr ""
+msgstr "Ceuta"
 
 #. settings-schema.json->region_esp->options
 msgid "Extremadura"
-msgstr ""
+msgstr "Extremadura"
 
 #. settings-schema.json->region_esp->options
 msgid "Galicia"
-msgstr ""
+msgstr "Galícia"
 
 #. settings-schema.json->region_esp->options
 msgid "Islas Baleares"
-msgstr ""
+msgstr "Ilhas Baleares"
 
 #. settings-schema.json->region_esp->options
 msgid "La Rioja"
-msgstr ""
+msgstr "La Rioja"
 
 #. settings-schema.json->region_esp->options
 msgid "Madrid"
-msgstr ""
+msgstr "Madri"
 
 #. settings-schema.json->region_esp->options
 msgid "Melilla"
-msgstr ""
+msgstr "Melilla"
 
 #. settings-schema.json->region_esp->options
 msgid "Murcia"
-msgstr ""
+msgstr "Múrcia"
 
 #. settings-schema.json->region_esp->options
 msgid "Navarra"
-msgstr ""
+msgstr "Navarra"
 
 #. settings-schema.json->region_esp->options
 msgid "País Vasco"
-msgstr ""
+msgstr "País Basco"
 
 #. settings-schema.json->region_esp->options
 msgid "Valencia"
-msgstr ""
+msgstr "Valência"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"
@@ -588,7 +582,7 @@ msgstr "Baía de Plenty"
 
 #. settings-schema.json->region_nzl->options
 msgid "Canterbury"
-msgstr "Cantuária"
+msgstr "Canterbury"
 
 #. settings-schema.json->region_nzl->options
 msgid "Gisborne"
@@ -596,7 +590,7 @@ msgstr "Gisborne"
 
 #. settings-schema.json->region_nzl->options
 msgid "Hawke's Bay"
-msgstr "Hawke's Bay"
+msgstr "Baía de Hawke"
 
 #. settings-schema.json->region_nzl->options
 msgid "Marlborough"
@@ -648,35 +642,35 @@ msgstr "Ilhas Chatham"
 
 #. settings-schema.json->region_svk->options
 msgid "Banskobystrický kraj"
-msgstr "Banskobystrický kraj"
+msgstr "Banská Bystrica"
 
 #. settings-schema.json->region_svk->options
 msgid "Bratislavský kraj"
-msgstr "Bratislavský kraj"
+msgstr "Bratislava"
 
 #. settings-schema.json->region_svk->options
 msgid "Košický kraj"
-msgstr "Košický kraj"
+msgstr "Košice"
 
 #. settings-schema.json->region_svk->options
 msgid "Nitriansky kraj"
-msgstr "Nitriansky kraj"
+msgstr "Nitra"
 
 #. settings-schema.json->region_svk->options
 msgid "Prešovský kraj"
-msgstr "Prešovský kraj"
+msgstr "Prešov"
 
 #. settings-schema.json->region_svk->options
 msgid "Trnavský kraj"
-msgstr "Trnavský kraj"
+msgstr "Trnava"
 
 #. settings-schema.json->region_svk->options
 msgid "Trenčiansky kraj"
-msgstr "Trenčiansky kraj"
+msgstr "Trenčín"
 
 #. settings-schema.json->region_svk->options
 msgid "Žilinský kraj"
-msgstr "Žilinský kraj"
+msgstr "Žilina"
 
 #. settings-schema.json->region_che->options
 msgid "Aargau"
@@ -692,15 +686,15 @@ msgstr "Appenzell Ausserrhoden"
 
 #. settings-schema.json->region_che->options
 msgid "Basel-Landschaft"
-msgstr "Basel-Landschaft"
+msgstr "Basileia-Campo"
 
 #. settings-schema.json->region_che->options
 msgid "Basel-Stadt"
-msgstr "Basel-Stadt"
+msgstr "Basileia-Cidade"
 
 #. settings-schema.json->region_che->options
 msgid "Bern"
-msgstr "Bern"
+msgstr "Berna"
 
 #. settings-schema.json->region_che->options
 msgid "Fribourg"
@@ -708,7 +702,7 @@ msgstr "Friburgo"
 
 #. settings-schema.json->region_che->options
 msgid "Geneva"
-msgstr "Geneva"
+msgstr "Genebra"
 
 #. settings-schema.json->region_che->options
 msgid "Glarus"
@@ -716,7 +710,7 @@ msgstr "Glarus"
 
 #. settings-schema.json->region_che->options
 msgid "Grisons"
-msgstr "Grisons"
+msgstr "Grisões"
 
 #. settings-schema.json->region_che->options
 msgid "Jura"
@@ -724,7 +718,7 @@ msgstr "Jura"
 
 #. settings-schema.json->region_che->options
 msgid "Luzern"
-msgstr "Luzern"
+msgstr "Lucerna"
 
 #. settings-schema.json->region_che->options
 msgid "Neuchâtel"
@@ -776,7 +770,7 @@ msgstr "Vaud"
 
 #. settings-schema.json->region_che->options
 msgid "Zug"
-msgstr "Zugo"
+msgstr "Zug"
 
 #. settings-schema.json->region_che->options
 msgid "Zürich"
@@ -796,7 +790,7 @@ msgstr "Escócia"
 
 #. settings-schema.json->region_gbr->options
 msgid "Wales"
-msgstr "Wales"
+msgstr "País de Gales"
 
 #. settings-schema.json->region_usa->options
 msgid "Alabama"
@@ -840,7 +834,7 @@ msgstr "Flórida"
 
 #. settings-schema.json->region_usa->options
 msgid "Georgia"
-msgstr "Georgia"
+msgstr "Geórgia"
 
 #. settings-schema.json->region_usa->options
 msgid "Hawaii"
@@ -984,7 +978,7 @@ msgstr "Vermont"
 
 #. settings-schema.json->region_usa->options
 msgid "Virginia"
-msgstr "Virginia"
+msgstr "Virgínia"
 
 #. settings-schema.json->region_usa->options
 msgid "Washington"
@@ -1012,7 +1006,7 @@ msgstr "Defina os atalhos de teclado para mostrar o calendário."
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"
-msgstr "Nome de exibição"
+msgstr "Nome em exibição"
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
