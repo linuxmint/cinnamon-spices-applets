@@ -259,7 +259,7 @@ export class MetNorway implements WeatherProvider {
 				icons: ["weather-severe-alert"]
 			}
 		}
-			
+
 		let weather = this.DeconstructCondition(icon);
 		switch (weather.condition) {
 			case "clearsky":

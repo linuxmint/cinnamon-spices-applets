@@ -396,7 +396,7 @@ export class MetUk implements WeatherProvider {
 		for (let index = 0; index < observations.length; index++) {
 			if (observations[index]?.SiteRep?.DV?.Location?.Period == null) continue;
 			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
-			if (result == null) 
+			if (result == null)
 				result = nextObservation;
 			let debugText =
 				" Observation data missing, plugged in from ID " +
@@ -442,7 +442,7 @@ export class MetUk implements WeatherProvider {
 					result.Dp = nextObservation?.Dp;
 					Logger.Debug("Dew Point" + debugText);
 				}
-			} 
+			}
 		}
 		return result;
 	}

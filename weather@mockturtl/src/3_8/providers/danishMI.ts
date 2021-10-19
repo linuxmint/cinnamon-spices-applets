@@ -179,14 +179,14 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private ResolveCondition(symbol: number | undefined): Condition {
-		if (symbol == null) 
+		if (symbol == null)
 			return {
 				main: _("NOT FOUND"),
 				description: _("NOT FOUND"),
 				customIcon: "alien-symbolic",
 				icons: ["weather-severe-alert"]
 			}
-			
+
 		let isNight = (symbol > 100);
 		if (isNight)
 			symbol = symbol - 100;

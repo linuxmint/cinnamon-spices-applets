@@ -197,7 +197,7 @@ export class LocationStore {
 	public ShouldShowLocationSelectors(currentLoc: LocationData | null): boolean {
 		if (currentLoc == null)
 			return false;
-			
+
 		let threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;

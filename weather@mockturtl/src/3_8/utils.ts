@@ -303,7 +303,7 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 		if (temp < 0) return `−${Math.abs(temp).toString()}`;
 		else if (temp > 0) return `+${temp.toString()}`;
 	}
-	
+
 	return temp.toString();
 }
 
@@ -496,7 +496,7 @@ export function mode<T>(arr: T[]): T | null {
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any} as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -574,8 +574,8 @@ export function Guid() {
 	});
 }
 
-export const isFinalized = function(obj: any) {
-    return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+export const isFinalized = function (obj: any) {
+	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 }
 
 // -----------------------------------------------------------

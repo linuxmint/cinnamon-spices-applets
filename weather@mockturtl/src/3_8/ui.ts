@@ -65,7 +65,7 @@ export class UI {
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
 	}
 
-	public Toggle(): void {		
+	public Toggle(): void {
 		// Hourly weather is always open
 		if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
 			if (this.menu.isOpen) {

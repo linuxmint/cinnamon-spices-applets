@@ -86,7 +86,7 @@ export class VisualCrossing implements WeatherProvider {
 
 	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
 		let result: ForecastData[] = [];
-		if (!! forecasts) {
+		if (!!forecasts) {
 			for (let index = 0; index < forecasts.length; index++) {
 				const element = forecasts[index];
 				result.push({

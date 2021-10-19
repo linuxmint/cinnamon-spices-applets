@@ -151,12 +151,12 @@ export class CurrentWeather {
 		this.temperatureLabel = new Label(textOb)
 		this.humidityLabel = new Label(textOb)
 		this.pressureLabel = new Label(textOb)
-		this.dewPointLabel = new Label({ text: ''});
+		this.dewPointLabel = new Label({ text: '' });
 
 		this.apiUniqueLabel = new Label({ text: '' })
 		// APi Unique Caption
 		this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
-		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle});
+		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
 
 		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
@@ -414,8 +414,8 @@ export class CurrentWeather {
 	}
 
 	private SetLocation(locationString: string, url?: string) {
-		this.location.label = locationString;			
-		if (!url) 
+		this.location.label = locationString;
+		if (!url)
 			this.locationButton.disable();
 		else
 			this.locationButton.url = url;
