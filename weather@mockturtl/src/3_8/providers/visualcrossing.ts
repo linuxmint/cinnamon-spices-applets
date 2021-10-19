@@ -224,7 +224,7 @@ export class VisualCrossing implements WeatherProvider {
 			case "type_6":
 				return _("Light drizzle/rain");
 			case "type_7":
-				return _("Duststorm");
+				return _("Dust Storm");
 			case "type_8":
 				return _("Fog");
 			case "type_9":

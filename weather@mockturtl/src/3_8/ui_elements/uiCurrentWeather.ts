@@ -5,7 +5,7 @@ import { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
-import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
+import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
@@ -335,7 +335,7 @@ export class CurrentWeather {
 			let value;
 			switch (extra_field.type) {
 				case "percent":
-					value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
+					value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
 					break;
 				case "temperature":
 					value = TempToUserConfig(extra_field.value, this.app.config);
@@ -364,7 +364,7 @@ export class CurrentWeather {
 	private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {
 		if (this.app.config._useCustomMenuIcons) {
 			this.weatherIcon.icon_name = customIconName;
-			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
+			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as IconSet is symbolic
 		}
 		else {
 			let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
@@ -385,7 +385,7 @@ export class CurrentWeather {
 
 	private SetHumidity(humidity: number | null) {
 		if (humidity != null) {
-			this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
+			this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
 		}
 	}
 

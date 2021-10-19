@@ -8695,7 +8695,7 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PrecentToLocale(humidity, locale) {
+function PercentToLocale(humidity, locale) {
     return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
 }
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
@@ -9439,8 +9439,8 @@ const Keys = {
     PRESSURE_UNIT: "pressureUnit",
     SHORT_CONDITIONS: "shortConditions",
     MANUAL_LOCATION: "manualLocation",
-    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+    USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
     RUSSIAN_STYLE: "tempRussianStyle",
     SHORT_HOURLY_TIME: "shortHourlyTime",
     SHOW_FORECAST_DATES: "showForecastDates",
@@ -9598,7 +9598,7 @@ class Config {
             this.InjectLocationToConfig(location);
             return location;
         }
-        logger_Logger.Debug("Location is text, geolocating...");
+        logger_Logger.Debug("Location is text, geo locating...");
         let locationData = await this.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
@@ -10802,7 +10802,7 @@ class CurrentWeather {
             let value;
             switch (extra_field.type) {
                 case "percent":
-                    value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
+                    value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
                     break;
                 case "temperature":
                     value = TempToUserConfig(extra_field.value, this.app.config);
@@ -10847,7 +10847,7 @@ class CurrentWeather {
     }
     SetHumidity(humidity) {
         if (humidity != null) {
-            this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
+            this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
         }
     }
     async SetWind(windSpeed, windDegree) {
@@ -11325,7 +11325,7 @@ class UIHourlyForecasts {
         logger_Logger.Debug("Scrollbar height is " + scrollBarHeight);
         let theme = this.container.get_theme_node();
         let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-        logger_Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        logger_Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
         return (boxItemHeight + scrollBarHeight + styling);
     }
 }
@@ -14186,7 +14186,7 @@ class VisualCrossing {
             case "type_6":
                 return _("Light drizzle/rain");
             case "type_7":
-                return _("Duststorm");
+                return _("Dust Storm");
             case "type_8":
                 return _("Fog");
             case "type_9":

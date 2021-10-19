@@ -32,7 +32,7 @@ export class UIForecasts {
 	public DayClicked: Event<WeatherButton, DateTime> = new Event();
 	public DayHovered: Event<WeatherButton, DateTime> = new Event();
 
-	// Callbacks with bound context, which has constant signature for event subsciption/unsubscription
+	// Callbacks with bound context, which has constant signature for event Subscription/unSubscription
 	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event | null) => void;
 	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
 

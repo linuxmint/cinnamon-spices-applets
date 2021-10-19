@@ -148,7 +148,7 @@ export class UI {
 	// Callbacks
 
 	/**
-	 * Resetting flags from Hourly scrollview when theme changed to 
+	 * Resetting flags from Hourly scroll view when theme changed to 
 	 * prevent incorrect height requests, rebuild 
 	 * when switching between light and dark themes
 	 * to recolor some of the text

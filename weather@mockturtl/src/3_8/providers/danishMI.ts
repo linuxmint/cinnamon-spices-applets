@@ -16,7 +16,7 @@ export class DanishMI implements WeatherProvider {
 	private app: WeatherApplet;
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
-		cmd: "llj", // latlongjson
+		cmd: "llj", // lat long json
 		lon: null,
 		lat: null,
 		tz: "UTC"   // have to as in UTC unless we don't get proper times

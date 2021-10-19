@@ -157,13 +157,13 @@ export interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name, descending from most fit to least fit.
-	 * needs mutiple in case one/some of them are not available
+	 * needs multiple in case one/some of them are not available
 	 */
 	icons: BuiltinIcons[],
 	customIcon: CustomIcons
 }
 
-/** Immediate precipitation for the next hour, currenlty only OpenWeatherMap uses it.
+/** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
 	/** Precipitation in * minutes */

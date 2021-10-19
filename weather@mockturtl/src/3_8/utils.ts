@@ -114,7 +114,7 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 
 	let dateString = date.toLocaleString(params);
 
-	// Make sure French days are caapitalised (they are not by default)
+	// Make sure French days are capitalized (they are not by default)
 	if (locale?.startsWith("fr"))
 		dateString = CapitalizeFirstLetter(dateString);
 
@@ -206,7 +206,7 @@ export function LocalizedColon(locale: string | null): string {
 	return ":"
 }
 
-export function PrecentToLocale(humidity: number, locale: string | null): string {
+export function PercentToLocale(humidity: number, locale: string | null): string {
 	return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
 }
 
