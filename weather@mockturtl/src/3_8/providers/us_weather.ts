@@ -210,6 +210,10 @@ export class USWeather implements WeatherProvider {
 				result.properties.visibility.value = element.properties.visibility.value;
 				Logger.Debug("Visibility" + debugText);
 			}
+			if (result.properties.dewpoint.value == null) {
+				result.properties.dewpoint.value = element.properties.dewpoint.value;
+				Logger.Debug("Dew Point" + debugText);
+			}
 		}
 		return result;
 	}
@@ -255,7 +259,7 @@ export class USWeather implements WeatherProvider {
 				temperature: CelsiusToKelvin(observation.properties.temperature.value),
 				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
-				dewPoint: null,
+				dewPoint:  CelsiusToKelvin(observation.properties.dewpoint.value),
 				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};

@@ -171,7 +171,6 @@ export class CurrentWeather {
 		rb_values.add_actor(this.pressureLabel);
 		rb_values.add_actor(this.BuildWind(config));
 		rb_values.add_actor(this.dewPointLabel);
-		//rb_values.add_actor(this.windLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
 		let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });

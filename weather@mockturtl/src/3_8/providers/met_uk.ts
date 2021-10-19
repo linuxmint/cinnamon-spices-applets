@@ -242,6 +242,9 @@ export class MetUk implements WeatherProvider {
 			if (observation?.H != null) {
 				weather.humidity = parseFloat(observation.H);
 			}
+			if (observation?.Dp != null) {
+				weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+			}
 
 			return weather;
 		}
@@ -434,6 +437,10 @@ export class MetUk implements WeatherProvider {
 				if (result?.H == null) {
 					result.H = nextObservation?.H;
 					Logger.Debug("Humidity" + debugText);
+				}
+				if (result?.Dp == null) {
+					result.Dp = nextObservation?.Dp;
+					Logger.Debug("Dew Point" + debugText);
 				}
 			} 
 		}

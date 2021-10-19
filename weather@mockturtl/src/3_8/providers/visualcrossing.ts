@@ -62,7 +62,7 @@ export class VisualCrossing implements WeatherProvider {
 			},
 			humidity: weather.currentConditions.humidity ?? currentHour?.humidity,
 			pressure: weather.currentConditions.pressure ?? currentHour?.pressure,
-			dewPoint: null,
+			dewPoint: CelsiusToKelvin(weather.currentConditions.dew ?? currentHour?.dew),
 			wind: {
 				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
 				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,

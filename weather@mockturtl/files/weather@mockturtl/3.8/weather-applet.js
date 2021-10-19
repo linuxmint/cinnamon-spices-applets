@@ -10056,6 +10056,9 @@ class MetUk {
             if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
+            if ((observation === null || observation === void 0 ? void 0 : observation.Dp) != null) {
+                weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+            }
             return weather;
         }
         catch (e) {
@@ -10168,6 +10171,10 @@ class MetUk {
                 if ((result === null || result === void 0 ? void 0 : result.H) == null) {
                     result.H = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.H;
                     logger_Logger.Debug("Humidity" + debugText);
+                }
+                if ((result === null || result === void 0 ? void 0 : result.Dp) == null) {
+                    result.Dp = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.Dp;
+                    logger_Logger.Debug("Dew Point" + debugText);
                 }
             }
         }
@@ -11698,7 +11705,7 @@ class DarkSky {
                 temperature: this.ToKelvin(json.currently.temperature),
                 pressure: json.currently.pressure,
                 humidity: json.currently.humidity * 100,
-                dewPoint: null,
+                dewPoint: this.ToKelvin(json.currently.dewPoint),
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
@@ -12539,6 +12546,10 @@ class USWeather {
                 result.properties.visibility.value = element.properties.visibility.value;
                 logger_Logger.Debug("Visibility" + debugText);
             }
+            if (result.properties.dewpoint.value == null) {
+                result.properties.dewpoint.value = element.properties.dewpoint.value;
+                logger_Logger.Debug("Dew Point" + debugText);
+            }
         }
         return result;
     }
@@ -12578,7 +12589,7 @@ class USWeather {
                 temperature: CelsiusToKelvin(observation.properties.temperature.value),
                 pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
                 humidity: observation.properties.relativeHumidity.value,
-                dewPoint: null,
+                dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
                 condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
                 forecasts: []
             };
@@ -12930,7 +12941,7 @@ class Weatherbit {
                     temperature: json.temp,
                     pressure: json.pres,
                     humidity: json.rh,
-                    dewPoint: null,
+                    dewPoint: json.dewpt,
                     condition: {
                         main: json.weather.description,
                         description: json.weather.description,
@@ -13363,7 +13374,7 @@ class MetNorway {
             condition: this.ResolveCondition((_b = (_a = current.data.next_1_hours) === null || _a === void 0 ? void 0 : _a.summary) === null || _b === void 0 ? void 0 : _b.symbol_code, IsNight(suntimes)),
             humidity: current.data.instant.details.relative_humidity,
             pressure: current.data.instant.details.air_pressure_at_sea_level,
-            dewPoint: null,
+            dewPoint: CelsiusToKelvin(current.data.instant.details.dew_point_temperature),
             extra_field: {
                 name: _("Cloudiness"),
                 type: "percent",
@@ -14016,7 +14027,7 @@ class VisualCrossing {
         return this.ParseWeather(json, translate);
     }
     ParseWeather(weather, translate) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
         let result = {
             date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
@@ -14031,19 +14042,19 @@ class VisualCrossing {
             },
             humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
             pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
-            dewPoint: null,
+            dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
             wind: {
-                degree: (_c = weather.currentConditions.winddir) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
-                speed: (_d = weather.currentConditions.windspeed) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
+                degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
+                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
             },
-            temperature: CelsiusToKelvin((_e = weather.currentConditions.temp) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
+            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
             sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
             sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
             condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
             extra_field: {
                 name: _("Feels Like"),
                 type: "temperature",
-                value: CelsiusToKelvin((_f = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _f !== void 0 ? _f : weather.currentConditions.feelslike)
+                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
             },
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
@@ -14293,7 +14304,7 @@ class ClimacellV4 {
             location: null,
             timesteps: "current,1h,1d",
             units: "metric",
-            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
+            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
         this.app = app;
     }
@@ -14341,7 +14352,7 @@ class ClimacellV4 {
                 degree: current.values.windDirection,
                 speed: current.values.windSpeed
             },
-            dewPoint: null,
+            dewPoint: CelsiusToKelvin(current.values.dewPoint),
             sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
             sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
             location: {
