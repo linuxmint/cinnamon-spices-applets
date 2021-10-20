@@ -1,102 +1,101 @@
-# Turkish translation for qredshift@quintao.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Translated into Polish for QRedshift.
+# Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2019.
+# FIRST AUTHOR lukaszdabrowski80@gmail.com, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2020-01-07 03:25+0300\n"
-"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
-"Language-Team: \n"
-"Language: tr\n"
+"POT-Creation-Date: 2020-08-24 13:58-0300\n"
+"PO-Revision-Date: 2021-08-24 11:09+0200\n"
+"Last-Translator: FULL NAME lukaszdabrowski80@gmail.com\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 3.0\n"
 
 #: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT KURULU DEĞİL!"
+msgstr "REDSHIFT NIE ZAINSTALOWANY!"
 
 #: applet.js:116
 msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Redshift gerekiyor: sudo apt-get install redshift"
+msgstr "Wymaga Redshift: sudo apt-get install redshift"
 
 #: applet.js:119 applet.js:159
 msgid "Reload Applet"
-msgstr "Uygulamacığı Yeniden Yükle"
+msgstr "Przeładuj aplet"
 
 #: applet.js:164
 msgid "Recompile Translations"
-msgstr "Çevirileri Yeniden Derle"
+msgstr "Rekompiluj tłumaczenia"
 
 #. settings-schema.json->enabled->description
 #: applet.js:356
 msgid "Enabled"
-msgstr "Etkin"
+msgstr "Włączone"
 
 #: applet.js:364 applet.js:410
 msgid "Temp:"
-msgstr "Sıcaklık:"
+msgstr "Temp:"
 
 #: applet.js:375 applet.js:421
 msgid "Bright:"
-msgstr "Parlaklık:"
+msgstr "Jasność:"
 
 #: applet.js:387 applet.js:635
 msgid "Gamma:"
-msgstr "Gama:"
+msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
 #: applet.js:402
 msgid "Night Enabled"
-msgstr "Gece Kipi Etkin"
+msgstr "Tryb nocny"
 
 #. settings-schema.json->iconLabel->description
 #: applet.js:464
 msgid "Show Label"
-msgstr "Etiket Göster"
+msgstr "Pokaż etykietę"
 
 #: applet.js:618
 msgid "On"
-msgstr "Açık"
+msgstr "Włączone"
 
 #: applet.js:618 applet.js:620
 msgid "Off"
-msgstr "Kapalı"
+msgstr "Wyłączone"
 
 #: applet.js:626
 msgid "Day Temperature"
-msgstr "Gün Sıcaklığı"
+msgstr "Temperatura w dzień"
 
 #: applet.js:627
 msgid "Day Brightness"
-msgstr "Gün Parlaklığı"
+msgstr "Jasność w dzień"
 
 #: applet.js:629
 msgid "Night Temperature"
-msgstr "Gece Sıcaklığı"
+msgstr "Temperatura w nocy"
 
 #: applet.js:630
 msgid "Night Brightness"
-msgstr "Gece Parlaklığı"
+msgstr "Jasność w nocy"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
 #: applet.js:632
 msgid "Temperature"
-msgstr "Sıcaklık"
+msgstr "Temperatura"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
 #: applet.js:633
 msgid "Brightness"
-msgstr "Parlaklık"
+msgstr "Jasność"
 
 #. metadata.json->name
 msgid "QRedshift"
@@ -104,71 +103,71 @@ msgstr "QRedshift"
 
 #. metadata.json->description
 msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift.\n"
-"This applet conflicts with redshift-gtk, make sure you remove it."
+"Sets brightness, gamma levels and color temperature with Redshift. This applet conflicts with redshift-gtk, make "
+"sure you remove it."
 msgstr ""
-"Redshift ile parlaklık, gama seviyesi ve renk sıcaklığını ayarlar.\n"
-"This applet conflicts with redshift-gtk, make sure you remove it."
+"Ustawia jasność, poziomy gamma i temperaturę kolorów za pomocą Redshift. Ten aplet jest w konflikcie z redshift-"
+"gtk, upewnij się, że go usunąłeś."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
-msgstr "Ayarlar"
+msgstr "Ustawienia"
 
 #. settings-schema.json->panel-location->title
 msgid "Location"
-msgstr "Konum"
+msgstr "Lokalizacja"
 
 #. settings-schema.json->panel-shortcuts->title
 msgid "Shortcuts"
-msgstr "Kısayollar"
+msgstr "Skróty"
 
 #. settings-schema.json->info-section->title
 msgid "Tips"
-msgstr "İpuçları"
+msgstr "Porady"
 
 #. settings-schema.json->opt-section->title
 msgid "Options"
-msgstr "Seçenekler"
+msgstr "Opcje"
 
 #. settings-schema.json->day-section->title
 msgid "Day Settings"
-msgstr "Gün Ayarları"
+msgstr "Ustawienia dzienne"
 
 #. settings-schema.json->night-section->title
 msgid "Night Settings"
-msgstr "Gece Ayarları"
+msgstr "Ustawienia nocne"
 
 #. settings-schema.json->keybind-section->title
 msgid "Key Bindings"
-msgstr "Tuş Atamaları"
+msgstr "Powiązania klawiszy"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
-msgstr "Konum Ayarları"
+msgstr "Ustawienia lokalizacji"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
-msgstr "Otomatik Güncelle"
+msgstr "Automatyczna aktualizacja"
 
 #. settings-schema.json->autoUpdate->tooltip
 msgid "Continuously adjust color temperature"
-msgstr "Renk sıcaklığını sürekli olarak ayarla"
+msgstr "Płynna regulacja temperatury barwowej"
 
 #. settings-schema.json->autoUpdateInterval->units
 msgid "Sec."
-msgstr "San."
+msgstr "Sek."
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
-msgstr "Güncelleme aralığı"
+msgstr "Częstotliwość aktualizacji"
 
 #. settings-schema.json->adjustmentMethod->description
 msgid "Adjustment Method"
-msgstr "Ayarlama Yöntemi"
+msgstr "Metoda dostosowania"
 
 #. settings-schema.json->adjustmentMethod->options
 msgid "needload"
-msgstr "needload"
+msgstr "trzeba załadować"
 
 #. settings-schema.json->adjustmentMethod->options
 msgid "randr"
@@ -180,33 +179,57 @@ msgstr "vidmode"
 
 #. settings-schema.json->adjustmentMethod->tooltip
 msgid "Method to use to set color temperature"
-msgstr "Renk sıcaklığını ayarlamak için kullanılacak yöntem"
+msgstr "Metoda ustawiania temperatury barwowej"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
-msgstr "Simge Kaydırma Eylemi"
+msgstr "Akcja przewijania ikony"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Disabled"
-msgstr "Pasif"
+msgstr "Wyłączone"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->keyToggle->description
 msgid "On/Off"
-msgstr "Açık/Kapalı"
+msgstr "Wł/Wył"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Zwiększanie poziomu jasności"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Zmniejszanie poziomu jasności"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Zwiększenie poziomu temperatury"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Obniżenie poziomu temperatury"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Zwiększ poziom gamma"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Obniżenie poziomu gamma"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
-msgstr "Parlaklık"
+msgstr "Jasność"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
 msgid "Gamma"
-msgstr "Gama"
+msgstr "Gamma"
 
 #. settings-schema.json->labelScrollAction->tooltip
 msgid "Action when scroll on applet icon."
-msgstr "Uygulamacık simgesi üstünde kaydırma eylemi."
+msgstr "Akcja przy przewijaniu na ikonie apletu."
 
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
@@ -220,52 +243,41 @@ msgstr "%"
 
 #. settings-schema.json->locationRemote->description
 msgid "Remote Location"
-msgstr "Uzak Konum"
+msgstr "Lokalizacja zdalna"
 
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Doğal geoclue kullanımı Redshift deneyimini yavaşlatabilir."
+msgstr "Native geoclue na redshift może sprawić, że doświadczenie będzie powolne."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
-msgstr "Konumu Güncelle"
+msgstr "Aktualizacja lokalizacji"
 
 #. settings-schema.json->locationLatitude->description
 msgid "Latitude"
-msgstr "Enlem"
+msgstr "Szerokość geograficzna"
 
 #. settings-schema.json->locationLongitude->description
 msgid "Longitude"
-msgstr "Boylam"
+msgstr "Długość geograficzna"
 
 #. settings-schema.json->aboutLocation->description
 msgid ""
 "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
 msgstr ""
-"Doğal geoclue kullanımı Redshift deneyimini yavaşlatabilir.\n"
-"Kullanım: https://geolocation-db.com/"
+"Native geoclue na redshift może sprawić, że doświadczenie będzie powolne.\n"
+"Użyj: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
-msgstr ""
-"* Varsayılan (nötr) değere sıfırlamak için kaydırma çubuklarına sağ tıklayın."
+msgstr "* Kliknięcie prawym przyciskiem myszy na suwakach powoduje przywrócenie wartości domyślnej (neutralnej)."
 
 #. settings-schema.json->textInfo->description
 msgid ""
-"If you like and use this applet take the time to visit it's page on Cinnamon "
-"Spices and give it a star. You only need a github account to do this."
+"If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only "
+"need a github account to do this."
 msgstr ""
-"Bu uygulamacığı beğendiyseniz ve kullanıyorsanız, Cinnamon Eklentileri "
-"sayfasını ziyaret edip bir yıldız verebilirsiniz. Bunu yapmak için sadece "
-"bir github hesabına ihtiyacınız var."
-
-#~ msgid "Temperature:"
-#~ msgstr "Sıcaklık:"
-
-#~ msgid "Brightness:"
-#~ msgstr "Parlaklık:"
-
-#~ msgid "Sec"
-#~ msgstr "San"
+"Jeśli lubisz i używasz tego apletu poświęć czas, aby odwiedzić jego stronę na Cinnamon Spices i daj mu gwiazdkę. "
+"Potrzebujesz tylko konta na githubie, aby to zrobić."
