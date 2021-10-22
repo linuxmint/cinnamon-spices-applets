@@ -3,7 +3,7 @@ declare function require(path: string): any;
 declare function setInterval(callback: { (): void }, delay: number): number;
 declare function clearInterval(intervalID: number): void;
 declare function setTimeout(callback: { (): void }, delay: number): number;
-declare function clearTimeout(timeoutId: number): void;
+declare function clearTimeout(timeoutID: number): void;
 
 /** Interface typing for the global variable.
  * Extendable, for example overloading in a d.ts file:
@@ -12,9 +12,11 @@ declare function clearTimeout(timeoutId: number): void;
 	}
  */
 declare interface Global {
-    log(...any: Array<any>): void;
-    logWarning(...any: Array<any>): void;
-    logError(...text: Array<string>): void;
+    log: typeof imports.ui.main._logInfo;
+    logWarning: typeof imports.ui.main._logWarning
+    logError: typeof imports.ui.main._logError
+    logTrace: typeof imports.ui.main._logTrace
+    
     create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     /** Main Cinnamon settings */
     settings: imports.gi.Gio.Settings;
