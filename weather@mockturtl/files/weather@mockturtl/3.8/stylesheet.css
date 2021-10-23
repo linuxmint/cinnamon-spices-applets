@@ -15,13 +15,20 @@
 .weather-current-summary {
     font-size: 35px;
     padding-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .weather-current-databox {
     padding-top: 15px;
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 15px;
+}
+
+.weather-hidden {
+    height: 0;
+    width: 0;
+    display: none;
 }
 
 .weather-current-icon {
@@ -47,7 +54,7 @@
 }
 
 .weather-current-astronomy {
-	padding-top: 10px;
+	padding-top: 5px;
     color: #AAAAAA;
 }
 

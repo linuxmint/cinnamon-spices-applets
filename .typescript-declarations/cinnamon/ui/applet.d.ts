@@ -99,6 +99,9 @@ declare namespace imports.ui.applet {
 		 * to Applet.AllowedLayout.HORIZONTAL */
 		 protected _allowedLayout: AllowedLayout;
 
+		 /** orientation of the panel the applet is on */
+		 protected _orientation: gi.St.Side;
+
 		/**
 		 * 
 		 * @param orientation orientation of the applet; Orientation of panel containing the actor

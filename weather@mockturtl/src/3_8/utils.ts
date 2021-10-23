@@ -1,11 +1,11 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { GetTimesResult } from "suncalc";
 import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const { Object } = imports.gi.GObject;
 
 // --------------------------------------------------------------
 // Text Generators
@@ -114,7 +114,7 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 
 	let dateString = date.toLocaleString(params);
 
-	// Make sure French days are caapitalised (they are not by default)
+	// Make sure French days are capitalized (they are not by default)
 	if (locale?.startsWith("fr"))
 		dateString = CapitalizeFirstLetter(dateString);
 
@@ -206,7 +206,7 @@ export function LocalizedColon(locale: string | null): string {
 	return ":"
 }
 
-export function PrecentToLocale(humidity: number, locale: string | null): string {
+export function PercentToLocale(humidity: number, locale: string | null): string {
 	return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
 }
 
@@ -303,7 +303,7 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 		if (temp < 0) return `−${Math.abs(temp).toString()}`;
 		else if (temp > 0) return `+${temp.toString()}`;
 	}
-	
+
 	return temp.toString();
 }
 
@@ -496,7 +496,7 @@ export function mode<T>(arr: T[]): T | null {
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any} as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -572,6 +572,10 @@ export function Guid() {
 		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
+}
+
+export const isFinalized = function (obj: any) {
+	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 }
 
 // -----------------------------------------------------------

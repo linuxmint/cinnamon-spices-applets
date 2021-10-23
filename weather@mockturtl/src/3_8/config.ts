@@ -62,15 +62,16 @@ const Keys = {
 	PRESSURE_UNIT: "pressureUnit",
 	SHORT_CONDITIONS: "shortConditions",
 	MANUAL_LOCATION: "manualLocation",
-	USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-	USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+	USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
+	USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
 	RUSSIAN_STYLE: "tempRussianStyle",
 	SHORT_HOURLY_TIME: "shortHourlyTime",
 	SHOW_FORECAST_DATES: "showForecastDates",
 	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
 	IMMEDIATE_PRECIP: "immediatePrecip",
 	SHOW_BOTH_TEMP: "showBothTempUnits",
-	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
+	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
+	ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
 }
 
 export class Config {
@@ -128,6 +129,7 @@ export class Config {
 	public readonly _immediatePrecip!: boolean;
 	public readonly _showBothTempUnits!: boolean;
 	public readonly _displayWindAsText!: boolean;
+	public readonly _alwaysShowHourlyWeather!: boolean;
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -338,7 +340,7 @@ export class Config {
 			return location;
 		}
 
-		Logger.Debug("Location is text, geolocating...")
+		Logger.Debug("Location is text, geo locating...")
 		let locationData = await this.geoLocationService.GetLocation(loc);
 		// User facing errors are handled by service
 		if (locationData == null) return null;

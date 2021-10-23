@@ -356,6 +356,11 @@ declare namespace imports.ui.main {
      */
     export function _logWarning(msg: string): void;
 
+    interface CjsError {
+        message: string, 
+        stack: string
+    }
+
     /**
      * _logError:
      * @msg (string): (optional) The message string
@@ -370,7 +375,8 @@ declare namespace imports.ui.main {
      * It can be called in the form of either _logError(msg),
      * _logError(error) or _logError(msg, error).
      */
-    export function _logError(msg: string, error: string): void;
+     export function _logError(msg: any, error?: CjsError | gi.GLib.Error): void;
+     export function _logError(error: CjsError | gi.GLib.Error): void;
 
     // If msg is an Error, its message will be printed as 'info' and its stack-trace will be printed as 'trace'
     /**
@@ -382,8 +388,9 @@ declare namespace imports.ui.main {
      * its stack trace will also be printed
      */
 
-    export function _logInfo(msg: string): void;
-
+     export function _logInfo(...msg: Array<any>): void;
+     export function _logInfo(error: CjsError | gi.GLib.Error): void;
+     
     /**
      * logStackTrace:
      * @msg (string): message

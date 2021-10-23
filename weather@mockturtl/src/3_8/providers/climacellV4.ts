@@ -22,7 +22,7 @@ export class ClimacellV4 implements WeatherProvider {
 		location: null,
 		timesteps: "current,1h,1d",
 		units: "metric",
-		fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
+		fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
 	}
 
 	constructor(app: WeatherApplet) {
@@ -80,6 +80,7 @@ export class ClimacellV4 implements WeatherProvider {
 				degree: current.values.windDirection,
 				speed: current.values.windSpeed
 			},
+			dewPoint: CelsiusToKelvin(current.values.dewPoint),
 			// Cast to string, we always get sunrise/sunset from daily
 			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
 			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
@@ -406,6 +407,8 @@ interface IntervalPayload {
 		sunriseTime?: string;
 		/** UTC Date string, only in 1d type */
 		sunsetTime?: string;
+		/** C */
+		dewPoint: number;
 	}
 }
 

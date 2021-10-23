@@ -62,6 +62,7 @@ export class VisualCrossing implements WeatherProvider {
 			},
 			humidity: weather.currentConditions.humidity ?? currentHour?.humidity,
 			pressure: weather.currentConditions.pressure ?? currentHour?.pressure,
+			dewPoint: CelsiusToKelvin(weather.currentConditions.dew ?? currentHour?.dew),
 			wind: {
 				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
 				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,
@@ -85,7 +86,7 @@ export class VisualCrossing implements WeatherProvider {
 
 	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
 		let result: ForecastData[] = [];
-		if (!! forecasts) {
+		if (!!forecasts) {
 			for (let index = 0; index < forecasts.length; index++) {
 				const element = forecasts[index];
 				result.push({
@@ -223,7 +224,7 @@ export class VisualCrossing implements WeatherProvider {
 			case "type_6":
 				return _("Light drizzle/rain");
 			case "type_7":
-				return _("Duststorm");
+				return _("Dust Storm");
 			case "type_8":
 				return _("Fog");
 			case "type_9":
