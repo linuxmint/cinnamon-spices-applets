@@ -1,0 +1,8 @@
+{
+    "uuid": "googledrive@pbojan",
+    "name": "Google Drive",
+    "description": "A simple applet to be able to sync Google Drive folders and files with just a few clicks.",
+    "website": "https://github.com/pbojan/googledrive-applet-cinnamon",
+    "max-instances": 1,
+    "version": "1.0"
+}
