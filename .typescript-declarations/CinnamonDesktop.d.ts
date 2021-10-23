@@ -1,3 +1,811 @@
 declare namespace imports.gi.CinnamonDesktop {
-	const dummy: any;
+	interface BG extends GObject.Object {
+		changes_with_time(): boolean;
+		create_and_set_gtk_image(image: Gtk.Image, width: number, height: number): void;
+		create_and_set_surface_as_root(root_window: Gdk.Window, screen: Gdk.Screen): void;
+		/**
+		 * Creates a thumbnail for a certain frame, where 'frame' is somewhat
+		 * vaguely defined as 'suitable point to show while single-stepping
+		 * through the slideshow'.
+		 * @param factory
+		 * @param screen
+		 * @param dest_width
+		 * @param dest_height
+		 * @param frame_num
+		 * @returns the newly created thumbnail or
+		 * or NULL if frame_num is out of bounds.
+		 */
+		create_frame_thumbnail(factory: DesktopThumbnailFactory, screen: Gdk.Screen, dest_width: number, dest_height: number, frame_num: number): GdkPixbuf.Pixbuf;
+		/**
+		 * Create a surface that can be set as background for #window. If #is_root is
+		 * TRUE, the surface created will be created by a temporary X server connection
+		 * so that if someone calls XKillClient on it, it won't affect the application
+		 * who created it.
+		 * @param window
+		 * @param width
+		 * @param height
+		 * @param root
+		 * @returns %NULL on error (e.g. out of X connections)
+		 */
+		create_surface(window: Gdk.Window, width: number, height: number, root: boolean): cairo.Surface;
+		create_thumbnail(factory: DesktopThumbnailFactory, screen: Gdk.Screen, dest_width: number, dest_height: number): GdkPixbuf.Pixbuf;
+		draw(dest: GdkPixbuf.Pixbuf, screen: Gdk.Screen, is_root: boolean): void;
+		get_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
+		get_filename(): string;
+		get_image_size(factory: DesktopThumbnailFactory, best_width: number, best_height: number, width: number, height: number): boolean;
+		get_placement(): CDesktopEnums.BackgroundStyle;
+		has_multiple_sizes(): boolean;
+		is_dark(dest_width: number, dest_height: number): boolean;
+		load_from_preferences(settings: Gio.Settings): void;
+		save_to_preferences(settings: Gio.Settings): void;
+		set_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
+		set_filename(filename: string): void;
+		set_placement(placement: CDesktopEnums.BackgroundStyle): void;
+	}
+
+	var BG: {
+		new(): BG;
+		/**
+		 * This function queries the _XROOTPMAP_ID property from
+		 * the root window associated with #screen to determine
+		 * the current root window background pixmap and returns
+		 * a copy of it. If the _XROOTPMAP_ID is not set, then
+		 * a black surface is returned.
+		 * @param screen a #GdkScreen
+		 * @returns a #cairo_surface_t if successful or %NULL
+		 */
+		get_surface_from_root(screen: Gdk.Screen): cairo.Surface;
+		set_accountsservice_background(background: string): void;
+		/**
+		 * Set the root pixmap, and properties pointing to it. We
+		 * do this atomically with a server grab to make sure that
+		 * we won't leak the pixmap if somebody else it setting
+		 * it at the same time. (This assumes that they follow the
+		 * same conventions we do).  #surface should come from a call
+		 * to gnome_bg_create_surface().
+		 * @param screen the #GdkScreen to change root background on
+		 * @param surface the #cairo_surface_t to set root background from.
+		 *   Must be an xlib surface backing a pixmap.
+		 */
+		set_surface_as_root(screen: Gdk.Screen, surface: cairo.Surface): void;
+		/**
+		 * Set the root pixmap, and properties pointing to it.
+		 * This function differs from gnome_bg_set_surface_as_root()
+		 * in that it adds a subtle crossfade animation from the
+		 * current root pixmap to the new one.
+		 * @param screen the #GdkScreen to change root background on
+		 * @param surface the cairo xlib surface to set root background from
+		 * @returns a #GnomeBGCrossfade object
+		 */
+		set_surface_as_root_with_crossfade(screen: Gdk.Screen, surface: cairo.Surface): BGCrossfade;
+	}
+
+	interface BGCrossfade extends GObject.Object {
+		/**
+		 * This function reveals whether or not #fade is currently
+		 * running on a window.  See gnome_bg_crossfade_start() for
+		 * information on how to initiate a crossfade.
+		 * @returns %TRUE if fading, or %FALSE if not fading
+		 */
+		is_started(): boolean;
+		/**
+		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * a start and end surface have to be set.  This function sets
+		 * the surface shown at the end of the crossfade effect.
+		 * @param surface The cairo surface to fade to
+		 * @returns %TRUE if successful, or %FALSE if the surface
+		 * could not be copied.
+		 */
+		set_end_surface(surface: cairo.Surface): boolean;
+		/**
+		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * a start and end surface have to be set.  This function sets
+		 * the surface shown at the beginning of the crossfade effect.
+		 * @param surface The cairo surface to fade from
+		 * @returns %TRUE if successful, or %FALSE if the surface
+		 * could not be copied.
+		 */
+		set_start_surface(surface: cairo.Surface): boolean;
+		/**
+		 * This function initiates a quick crossfade between two surfaces on
+		 * the background of #window.  Before initiating the crossfade both
+		 * gnome_bg_crossfade_start() and gnome_bg_crossfade_end() need to
+		 * be called. If animations are disabled, the crossfade is skipped,
+		 * and the window background is set immediately to the end surface.
+		 * @param window The #GdkWindow to draw crossfade on
+		 */
+		start(window: Gdk.Window): void;
+		/**
+		 * This function stops any in progress crossfades that may be
+		 * happening.  It's harmless to call this function if #fade is
+		 * already stopped.
+		 */
+		stop(): void;
+	}
+
+	var BGCrossfade: {
+		/**
+		 * Creates a new object to manage crossfading a
+		 * window background between two #cairo_surface_ts.
+		 * @param width The width of the crossfading window
+		 * @param height The height of the crossfading window
+		 * @returns the new #GnomeBGCrossfade
+		 */
+		new(width: number, height: number): BGCrossfade;
+	}
+
+	interface DesktopThumbnailFactory extends GObject.Object {
+		/**
+		 * Returns TRUE if this GnomeIconFactory can (at least try) to thumbnail
+		 * this file. Thumbnails or files with failed thumbnails won't be thumbnailed.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param uri the uri of a file
+		 * @param mime_type the mime type of the file
+		 * @param mtime the mtime of the file
+		 * @returns TRUE if the file can be thumbnailed.
+		 */
+		can_thumbnail(uri: string, mime_type: string, mtime: number): boolean;
+		/**
+		 * Creates a failed thumbnail for the file so that we don't try
+		 * to re-thumbnail the file later.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param uri the uri of a file
+		 * @param mtime the modification time of the file
+		 */
+		create_failed_thumbnail(uri: string, mtime: number): void;
+		/**
+		 * Tries to generate a thumbnail for the specified file. If it succeeds
+		 * it returns a pixbuf that can be used as a thumbnail.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param uri the uri of a file
+		 * @param mime_type the mime type of the file
+		 * @returns thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
+		 */
+		generate_thumbnail(uri: string, mime_type: string): GdkPixbuf.Pixbuf;
+		/**
+		 * Tries to locate an failed thumbnail for the file specified. Writing
+		 * and looking for failed thumbnails is important to avoid to try to
+		 * thumbnail e.g. broken images several times.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param uri the uri of a file
+		 * @param mtime the mtime of the file
+		 * @returns TRUE if there is a failed thumbnail for the file.
+		 */
+		has_valid_failed_thumbnail(uri: string, mtime: number): boolean;
+		/**
+		 * Tries to locate an existing thumbnail for the file specified.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param uri the uri of a file
+		 * @param mtime the mtime of the file
+		 * @returns The absolute path of the thumbnail, or %NULL if none exist.
+		 */
+		lookup(uri: string, mtime: number): string;
+		/**
+		 * Saves #thumbnail at the right place. If the save fails a
+		 * failed thumbnail is written.
+		 * 
+		 * Usage of this function is threadsafe.
+		 * @param thumbnail the thumbnail as a pixbuf
+		 * @param uri the uri of a file
+		 * @param original_mtime the modification time of the original file
+		 */
+		save_thumbnail(thumbnail: GdkPixbuf.Pixbuf, uri: string, original_mtime: number): void;
+	}
+
+	var DesktopThumbnailFactory: {
+		/**
+		 * Creates a new #GnomeDesktopThumbnailFactory.
+		 * 
+		 * This function must be called on the main thread.
+		 * @param size The thumbnail size to use
+		 * @returns a new #GnomeDesktopThumbnailFactory
+		 */
+		new(size: DesktopThumbnailSize): DesktopThumbnailFactory;
+	}
+
+	interface PnpIds extends GObject.Object {
+		/**
+		 * Find the full manufacturer name for the given PNP ID.
+		 * @param pnp_id the PNP ID to look for
+		 * @returns a new string representing the manufacturer name,
+		 * or %NULL when not found.
+		 */
+		get_pnp_id(pnp_id: string): string;
+	}
+
+	var PnpIds: {
+		/**
+		 * Returns a reference to a #GnomePnpIds object, or creates
+		 * a new one if none have been created.
+		 * @returns a #GnomePnpIds object.
+		 */
+		new(): PnpIds;
+	}
+
+	interface RRConfig extends GObject.Object {
+		applicable(screen: RRScreen): boolean;
+		apply_with_time(screen: RRScreen, timestamp: number): boolean;
+		ensure_primary(): boolean;
+		equal(config2: RRConfig): boolean;
+		get_auto_scale(): boolean;
+		get_base_scale(): number;
+		get_clone(): boolean;
+		get_outputs(): RROutputInfo[];
+		load_current(): boolean;
+		load_filename(filename: string): boolean;
+		match(config2: RRConfig): boolean;
+		sanitize(): void;
+		save(): boolean;
+		set_auto_scale(auto_scale: boolean): void;
+		set_base_scale(base_scale: number): void;
+		set_clone(clone: boolean): void;
+	}
+
+	var RRConfig: {
+		new_current(screen: RRScreen): RRConfig;
+		new_stored(screen: RRScreen): RRConfig;
+		apply_from_filename_with_time(screen: RRScreen, filename: string, timestamp: number): boolean;
+		get_backup_filename(): string;
+		get_intended_filename(): string;
+		get_legacy_filename(): string;
+	}
+
+	interface RRLabeler extends GObject.Object {
+		/**
+		 * Get the color used for the label on a given output (monitor).
+		 * @param output Output device (i.e. monitor) to query
+		 * @param rgba_out Color of selected monitor.
+		 */
+		get_rgba_for_output(output: RROutputInfo, rgba_out: Gdk.RGBA): void;
+		/**
+		 * Hide ouput labels.
+		 */
+		hide(): void;
+		/**
+		 * Show the labels.
+		 */
+		show(): void;
+	}
+
+	var RRLabeler: {
+		/**
+		 * Create a GUI element that will display colored labels on each connected monitor.
+		 * This is useful when users are required to identify which monitor is which, e.g. for
+		 * for configuring multiple monitors.
+		 * The labels will be shown by default, use gnome_rr_labeler_hide to hide them.
+		 * @param config Configuration of the screens to label
+		 * @returns A new #GnomeRRLabeler
+		 */
+		new(config: RRConfig): RRLabeler;
+	}
+
+	interface RROutputInfo extends GObject.Object {
+		get_aspect_ratio(): number;
+		get_display_name(): string;
+		get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
+		get_geometry(_x: number, _y: number, width: number, height: number): void;
+		get_name(): string;
+		get_preferred_height(): number;
+		get_preferred_width(): number;
+		get_primary(): boolean;
+		get_product(): number;
+		get_refresh_rate(): number;
+		get_refresh_rate_f(): number;
+		get_rotation(): RRRotation;
+		get_scale(): number;
+		get_serial(): number;
+		get_vendor(vendor: string[]): void;
+		is_active(): boolean;
+		is_connected(): boolean;
+		set_active(active: boolean): void;
+		set_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
+		set_geometry(_x: number, _y: number, width: number, height: number): void;
+		set_primary(primary: boolean): void;
+		set_refresh_rate(rate: number): void;
+		set_refresh_rate_f(rate: number): void;
+		set_rotation(rotation: RRRotation): void;
+		set_scale(scale: number): void;
+	}
+
+	var RROutputInfo: {
+	}
+
+	interface RRScreen extends GObject.Object, Gio.Initable {
+		calculate_best_global_scale(index: number): number;
+		calculate_supported_scales(width: number, height: number, n_supported_scales: number): number;
+		create_clone_modes(): RRMode;
+		get_crtc_by_id(_id: number): RRCrtc;
+		get_dpms_mode(mode: RRDpmsMode): boolean;
+		get_global_scale(): number;
+		get_global_scale_setting(): number;
+		get_output_by_id(_id: number): RROutput;
+		get_output_by_name(name: string): RROutput;
+		/**
+		 * Get the ranges of the screen
+		 * @param min_width the minimum width
+		 * @param max_width the maximum width
+		 * @param min_height the minimum height
+		 * @param max_height the maximum height
+		 */
+		get_ranges(min_width: number, max_width: number, min_height: number, max_height: number): void;
+		/**
+		 * Queries the two timestamps that the X RANDR extension maintains.  The X
+		 * server will prevent change requests for stale configurations, those whose
+		 * timestamp is not equal to that of the latest request for configuration.  The
+		 * X server will also prevent change requests that have an older timestamp to
+		 * the latest change request.
+		 * @param change_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last changed
+		 * @param config_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last obtained
+		 */
+		get_timestamps(change_timestamp_ret: number, config_timestamp_ret: number): void;
+		get_use_upscaling(): boolean;
+		/**
+		 * List available XRandR clone modes
+		 * @returns 
+		 */
+		list_clone_modes(): RRMode[];
+		/**
+		 * List all CRTCs
+		 * @returns 
+		 */
+		list_crtcs(): RRCrtc[];
+		/**
+		 * List available XRandR modes
+		 * @returns 
+		 */
+		list_modes(): RRMode[];
+		/**
+		 * List all outputs
+		 * @returns 
+		 */
+		list_outputs(): RROutput[];
+		/**
+		 * Refreshes the screen configuration, and calls the screen's callback if it
+		 * exists and if the screen's configuration changed.
+		 * @returns TRUE if the screen's configuration changed; otherwise, the
+		 * function returns FALSE and a NULL error if the configuration didn't change,
+		 * or FALSE and a non-NULL error if there was an error while refreshing the
+		 * configuration.
+		 */
+		refresh(): boolean;
+		/**
+		 * This method also disables the DPMS timeouts.
+		 * @param mode
+		 * @returns 
+		 */
+		set_dpms_mode(mode: RRDpmsMode): boolean;
+		set_global_scale_setting(scale_factor: number): void;
+		set_primary_output(output: RROutput): void;
+		set_size(width: number, height: number, mm_width: number, mm_height: number): void;
+	}
+
+	var RRScreen: {
+		/**
+		 * Creates a unique #GnomeRRScreen instance for the specified #screen.
+		 * @param screen the #GdkScreen on which to operate
+		 * @returns a unique #GnomeRRScreen instance, specific to the #screen, or NULL
+		 * if this could not be created, for instance if the driver does not support
+		 * Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.
+		 */
+		new(screen: Gdk.Screen): RRScreen;
+	}
+
+	interface WallClock extends GObject.Object {
+		/**
+		 * Returns a formatted date and time based on either default format
+		 * settings, or via a custom-set format string.
+		 * 
+		 * The returned string should be ready to be set on a label.
+		 * @returns The formatted date/time string.
+		 */
+		get_clock(): string;
+		/**
+		 * Returns a formatted date and time based on the provided format string.
+		 * The returned string should be ready to be set on a label.
+		 * @param format_string
+		 * @returns The formatted date/time string, or NULL
+		 * if there was a problem with the format string.
+		 */
+		get_clock_for_format(format_string: string): string;
+		/**
+		 * Returns the current date-only format based on current locale
+		 * defaults and clock settings.
+		 * @returns The default date format string.
+		 */
+		get_default_date_format(): string;
+		/**
+		 * Returns the current time-only format based on current locale
+		 * defaults and clock settings.
+		 * @returns The default time format string.
+		 */
+		get_default_time_format(): string;
+		/**
+		 * Sets the wall clock to use the provided format string for any
+		 * subsequent updates.  Passing NULL will un-set any custom format,
+		 * and rely on a default locale format.
+		 * 
+		 * Any invalid format string passed will cause it to be ignored,
+		 * and the default locale format used instead.
+		 * @param format_string
+		 * @returns Whether or not the format string was valid and accepted.
+		 */
+		set_format_string(format_string: string): boolean;
+	}
+
+	var WallClock: {
+		/**
+		 * Returns a new GnomeWallClock instance
+		 * @returns A pointer to a new GnomeWallClock instance.
+		 */
+		new(): WallClock;
+		/**
+		 * Returns the translation of the format string according to
+		 * the LC_TIME locale.
+		 * @param gettext_domain
+		 * @param format_string
+		 * @returns The translated format string.
+		 */
+		lctime_format(gettext_domain: string, format_string: string): string;
+	}
+
+	interface XkbInfo extends GObject.Object {
+		description_for_option(group_id: string, _id: string): string;
+		/**
+		 * Returns a list of all layout identifiers we know about.
+		 * @returns the list
+		 * of layout names. The caller takes ownership of the #GList but not
+		 * of the strings themselves, those are internally allocated and must
+		 * not be modified.
+		 */
+		get_all_layouts(): GLib.List;
+		/**
+		 * Returns a list of all option group identifiers we know about.
+		 * @returns the list
+		 * of option group ids. The caller takes ownership of the #GList but
+		 * not of the strings themselves, those are internally allocated and
+		 * must not be modified.
+		 */
+		get_all_option_groups(): GLib.List;
+		/**
+		 * Retrieves information about a layout. Both #display_name and
+		 * #short_name are suitable to show in UIs and might be localized if
+		 * translations are available.
+		 * 
+		 * Some layouts don't provide a short name (2 or 3 letters) or don't
+		 * specify a XKB variant, in those cases #short_name or #xkb_variant
+		 * are empty strings, i.e. "".
+		 * 
+		 * If the given layout doesn't exist the return value is %FALSE and
+		 * all the (out) parameters are set to %NULL.
+		 * @param _id layout's identifier about which to retrieve the info
+		 * @param display_name location to store
+		 * the layout's display name, or %NULL
+		 * @param short_name location to store
+		 * the layout's short name, or %NULL
+		 * @param xkb_layout location to store
+		 * the layout's XKB name, or %NULL
+		 * @param xkb_variant location to store
+		 * the layout's XKB variant, or %NULL
+		 * @returns %TRUE if the layout exists or %FALSE otherwise.
+		 */
+		get_layout_info(_id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		/**
+		 * Retrieves the layout that better fits #language. It also fetches
+		 * information about that layout like gnome_xkb_info_get_layout_info().
+		 * 
+		 * If a layout can't be found the return value is %FALSE and all the
+		 * (out) parameters are set to %NULL.
+		 * @param language an ISO 639 code
+		 * @param _id location to store the
+		 * layout's indentifier, or %NULL
+		 * @param display_name location to store
+		 * the layout's display name, or %NULL
+		 * @param short_name location to store
+		 * the layout's short name, or %NULL
+		 * @param xkb_layout location to store
+		 * the layout's XKB name, or %NULL
+		 * @param xkb_variant location to store
+		 * the layout's XKB variant, or %NULL
+		 * @returns %TRUE if a layout exists or %FALSE otherwise.
+		 */
+		get_layout_info_for_language(language: string, _id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		/**
+		 * Returns a list of all option identifiers we know about for group
+		 * #group_id.
+		 * @param group_id group's identifier about which to retrieve the options
+		 * @returns the list
+		 * of option ids. The caller takes ownership of the #GList but not of
+		 * the strings themselves, those are internally allocated and must not
+		 * be modified.
+		 */
+		get_options_for_group(group_id: string): GLib.List;
+	}
+
+	var XkbInfo: {
+		new(): XkbInfo;
+		/**
+		 * Frees an #XkbRF_VarDefsRec instance allocated by
+		 * gnome_xkb_info_get_var_defs().
+		 * @param var_defs #XkbRF_VarDefsRec instance to free
+		 */
+		free_var_defs(var_defs: undefined): void;
+		/**
+		 * Gets both the XKB rules file path and the current XKB parameters in
+		 * use by the X server.
+		 * @param rules location to store the rules file
+		 * path. Use g_free() when it's no longer needed
+		 * @param var_defs location to store a
+		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
+		 * free it
+		 */
+		get_var_defs(rules: string, var_defs: undefined): void;
+	}
+
+	class BGClass {
+	}
+
+	class BGCrossfadeClass {
+		public parent_class: GObject.ObjectClass;
+		finished: { (fade: BGCrossfade, window: Gdk.Window): void; };
+	}
+
+	class BGCrossfadePrivate {
+	}
+
+	class DesktopThumbnailFactoryClass {
+		public parent: GObject.ObjectClass;
+	}
+
+	class DesktopThumbnailFactoryPrivate {
+	}
+
+	class PnpIdsClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class PnpIdsPrivate {
+	}
+
+	class RRConfigClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class RRConfigPrivate {
+	}
+
+	class RRCrtc {
+		public can_drive_output(output: RROutput): boolean;
+		public get_current_mode(): RRMode;
+		public get_current_rotation(): RRRotation;
+		public get_gamma(size: number, red: number, green: number, blue: number): boolean;
+		public get_id(): number;
+		public get_position(_x: number, _y: number): void;
+		public get_rotations(): RRRotation;
+		public get_scale(): number;
+		public set_config_with_time(timestamp: number, _x: number, _y: number, mode: RRMode, rotation: RRRotation, outputs: RROutput, n_outputs: number, scale: number, global_scale: number): boolean;
+		public set_gamma(size: number, red: number, green: number, blue: number): void;
+		public supports_rotation(rotation: RRRotation): boolean;
+	}
+
+	class RRLabelerClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class RRLabelerPrivate {
+	}
+
+	class RRMode {
+		public get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
+		public get_freq(): number;
+		public get_freq_f(): number;
+		public get_height(): number;
+		public get_id(): number;
+		public get_width(): number;
+	}
+
+	class RROutput {
+		public can_clone(clone: RROutput): boolean;
+		public get_backlight(): number;
+		public get_backlight_max(): number;
+		public get_backlight_min(): number;
+		public get_connector_type(): string;
+		public get_crtc(): RRCrtc;
+		public get_current_mode(): RRMode;
+		public get_edid_data(size: number): number;
+		public get_height_mm(): number;
+		public get_id(): number;
+		public get_ids_from_edid(vendor: string, product: number, serial: number): boolean;
+		public get_is_primary(): boolean;
+		public get_name(): string;
+		public get_position(_x: number, _y: number): void;
+		public get_possible_crtcs(): RRCrtc;
+		public get_preferred_mode(): RRMode;
+		public get_size_inches(): number;
+		public get_width_mm(): number;
+		public is_connected(): boolean;
+		public is_laptop(): boolean;
+		public list_modes(): RRMode;
+		public set_backlight(value: number): boolean;
+		public supports_mode(mode: RRMode): boolean;
+	}
+
+	class RROutputInfoClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class RROutputInfoPrivate {
+	}
+
+	class RRScreenClass {
+		public parent_class: GObject.ObjectClass;
+		changed: { (): void; };
+		output_connected: { (output: RROutput): void; };
+		output_disconnected: { (output: RROutput): void; };
+	}
+
+	class RRScreenPrivate {
+	}
+
+	class WallClockClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class WallClockPrivate {
+	}
+
+	class XkbInfoClass {
+		public parent_class: GObject.ObjectClass;
+	}
+
+	class XkbInfoPrivate {
+	}
+
+	enum DesktopThumbnailSize {
+		NORMAL = 0,
+		LARGE = 1
+	}
+
+	enum RRDpmsMode {
+		ON = 0,
+		STANDBY = 1,
+		SUSPEND = 2,
+		OFF = 3,
+		DISABLED = 4,
+		UNKNOWN = 5
+	}
+
+	enum RRError {
+		UNKNOWN = 0,
+		NO_RANDR_EXTENSION = 1,
+		RANDR_ERROR = 2,
+		BOUNDS_ERROR = 3,
+		CRTC_ASSIGNMENT = 4,
+		NO_MATCHING_CONFIG = 5,
+		NO_DPMS_EXTENSION = 6
+	}
+
+	enum RRRotation {
+		ROTATION_NEXT = 0,
+		ROTATION_0 = 1,
+		ROTATION_90 = 2,
+		ROTATION_180 = 4,
+		ROTATION_270 = 8,
+		REFLECT_X = 16,
+		REFLECT_Y = 32
+	}
+
+	interface InstallerClientCallback {
+		(success: boolean, user_data: any): void;
+	}
+
+	/**
+	 * Returns the GSettings key string of the
+	 * given media key type.
+	 * @param _type The CDesktopMediaKeyType
+	 * @returns the string corresponding to the
+	 * provided media key type or %NULL
+	 */
+	function desktop_get_media_key_string(_type: number): string;
+
+	/**
+	 * Makes a best effort to retrieve the currently logged-in user's passwd
+	 * struct (containing uid, gid, home, etc...) based on the process uid
+	 * and various environment variables.
+	 * @returns the passwd struct corresponding to the
+	 * session user (or, as a last resort, the user returned by getuid())
+	 */
+	function desktop_get_session_user_pwent(): any;
+
+	/**
+	 * Prepends a terminal (either the one configured as default in
+	 * the user's GNOME setup, or one of the common xterm emulators) to the passed
+	 * in vector, modifying it in the process.  The vector should be allocated with
+	 * #g_malloc, as this will #g_free the original vector.  Also all elements must
+	 * have been allocated separately.  That is the standard glib/GNOME way of
+	 * doing vectors however.  If the integer that #argc points to is negative, the
+	 * size will first be computed.  Also note that passing in pointers to a vector
+	 * that is empty, will just create a new vector for you.
+	 * @param argc a pointer to the vector size
+	 * @param argv a pointer to the vector
+	 */
+	function desktop_prepend_terminal_to_vector(argc: number, argv: string): void;
+
+	function desktop_thumbnail_cache_check_permissions(factory: DesktopThumbnailFactory, quick: boolean): boolean;
+
+	function desktop_thumbnail_cache_fix_permissions(): void;
+
+	/**
+	 * Returns whether the thumbnail has the correct uri embedded in the
+	 * Thumb::URI option in the png.
+	 * @param pixbuf an loaded thumbnail pixbuf
+	 * @param uri a uri
+	 * @returns TRUE if the thumbnail is for #uri
+	 */
+	function desktop_thumbnail_has_uri(pixbuf: GdkPixbuf.Pixbuf, uri: string): boolean;
+
+	/**
+	 * Returns whether the thumbnail has the correct uri and mtime embedded in the
+	 * png options.
+	 * @param pixbuf an loaded thumbnail #GdkPixbuf
+	 * @param uri a uri
+	 * @param mtime the mtime
+	 * @returns TRUE if the thumbnail has the right #uri and #mtime
+	 */
+	function desktop_thumbnail_is_valid(pixbuf: GdkPixbuf.Pixbuf, uri: string, mtime: number): boolean;
+
+	/**
+	 * Calculates the MD5 checksum of the uri. This can be useful
+	 * if you want to manually handle thumbnail files.
+	 * @param uri an uri
+	 * @returns A string with the MD5 digest of the uri string.
+	 */
+	function desktop_thumbnail_md5(uri: string): string;
+
+	/**
+	 * Returns the filename that a thumbnail of size #size for #uri would have.
+	 * @param uri an uri
+	 * @param size a thumbnail size
+	 * @returns an absolute filename
+	 */
+	function desktop_thumbnail_path_for_uri(uri: string, size: DesktopThumbnailSize): string;
+
+	/**
+	 * Scales the pixbuf to the desired size. This function
+	 * is a lot faster than gdk-pixbuf when scaling down by
+	 * large amounts.
+	 * @param pixbuf a #GdkPixbuf
+	 * @param dest_width the desired new width
+	 * @param dest_height the desired new height
+	 * @returns a scaled pixbuf
+	 */
+	function desktop_thumbnail_scale_down_pixbuf(pixbuf: GdkPixbuf.Pixbuf, dest_width: number, dest_height: number): GdkPixbuf.Pixbuf;
+
+	/**
+	 * Uses packagekit to check if provided package names are installed.
+	 * @param packages a null-terminated array of package names
+	 * @param callback the callback to run for the result
+	 * @param user_data extra data to be sent to the callback
+	 */
+	function installer_check_for_packages(packages: string[], callback: InstallerClientCallback, user_data: any): void;
+
+	/**
+	 * Uses packagekit to install the provided list of packages.
+	 * @param packages a null-terminated array of package names
+	 * @param callback the callback to run for the result
+	 * @param user_data extra data to be sent to the callback
+	 */
+	function installer_install_packages(packages: string[], callback: InstallerClientCallback, user_data: any): void;
+
+	/**
+	 * Returns the #GQuark that will be used for #GError values returned by the
+	 * GnomeRR API.
+	 * @returns a #GQuark used to identify errors coming from the GnomeRR API.
+	 */
+	function rr_error_quark(): GLib.Quark;
+
 }
