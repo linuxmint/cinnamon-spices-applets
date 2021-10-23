@@ -536,7 +536,7 @@ declare namespace imports.gi.Clutter {
 		 * @param index_ the position in the list of children
 		 * @returns a pointer to a Clutter.Actor, or null
 		 */
-		get_child_at_index(index_: number): Actor;
+		get_child_at_index<T = Actor>(index_: number): T;
 		/**
 		 * Retrieves the child transformation matrix set using
 		 * Clutter.Actor.set_child_transform; if none is currently set,
@@ -550,7 +550,7 @@ declare namespace imports.gi.Clutter {
 		 * allocated GLib.List of Clutter.Actor<!-- -->s. Use GLib.List when
 		 * done.
 		 */
-		get_children(): Actor[];
+		get_children<T = Actor[]>(): T;
 		/**
 		 * Gets the clip area for this, if any is set.
 		 */
