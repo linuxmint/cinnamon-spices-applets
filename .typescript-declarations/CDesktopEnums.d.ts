@@ -4,7 +4,7 @@ declare namespace imports.gi.CDesktopEnums {
 		VERTICAL = 1,
 		HORIZONTAL = 2
 	}
-	
+
 	enum BackgroundStyle {
 		NONE = 0,
 		WALLPAPER = 1,
@@ -14,32 +14,32 @@ declare namespace imports.gi.CDesktopEnums {
 		ZOOM = 5,
 		SPANNED = 6
 	}
-	
+
 	enum FocusMode {
 		CLICK = 0,
 		SLOPPY = 1,
 		MOUSE = 2
 	}
-	
+
 	enum FocusNewWindows {
 		SMART = 0,
 		STRICT = 1
 	}
-	
+
 	enum MagnifierLensShape {
 		NONE = 0,
 		SQUARE = 1,
 		HORIZONTAL = 2,
 		VERTICAL = 3
 	}
-	
+
 	enum MagnifierMouseTrackingMode {
 		NONE = 0,
 		CENTERED = 1,
 		PROPORTIONAL = 2,
 		PUSH = 3
 	}
-	
+
 	enum MagnifierScreenPosition {
 		NONE = 0,
 		FULL_SCREEN = 1,
@@ -48,7 +48,7 @@ declare namespace imports.gi.CDesktopEnums {
 		LEFT_HALF = 4,
 		RIGHT_HALF = 5
 	}
-	
+
 	enum MediaKeyType {
 		MUTE = 0,
 		MUTE_QUIET = 1,
@@ -106,31 +106,31 @@ declare namespace imports.gi.CDesktopEnums {
 		BATTERY = 53,
 		LAST = 54
 	}
-	
+
 	enum MouseDwellDirection {
 		LEFT = 0,
 		RIGHT = 1,
 		UP = 2,
 		DOWN = 3
 	}
-	
+
 	enum MouseDwellMode {
 		WINDOW = 0,
 		GESTURE = 1
 	}
-	
+
 	enum ProxyMode {
 		NONE = 0,
 		MANUAL = 1,
 		AUTO = 2
 	}
-	
+
 	enum ScreensaverMode {
 		BLANK_ONLY = 0,
 		RANDOM = 1,
 		SINGLE = 2
 	}
-	
+
 	enum TitlebarAction {
 		TOGGLE_SHADE = 0,
 		TOGGLE_MAXIMIZE = 1,
@@ -143,28 +143,28 @@ declare namespace imports.gi.CDesktopEnums {
 		LOWER = 8,
 		MENU = 9
 	}
-	
+
 	enum TitlebarScrollAction {
 		SHADE = 10,
 		OPACITY = 11,
 		NONE = 12
 	}
-	
+
 	enum ToolbarIconSize {
 		SMALL = 0,
 		LARGE = 1
 	}
-	
+
 	enum ToolbarStyle {
 		BOTH = 0,
 		BOTH_HORIZ = 1,
 		ICONS = 2,
 		TEXT = 3
 	}
-	
+
 	enum VisualBellType {
 		FULLSCREEN_FLASH = 0,
 		FRAME_FLASH = 1
 	}
-	
+
 }
