@@ -307,7 +307,7 @@ declare namespace imports.gi.Soup {
 		set_priority(priority: MessagePriority): void;
 		set_redirect(status_code: number, redirect_uri: string): void;
 		set_request(content_type: string, req_use: MemoryUse, req_body: number[], req_length: number): void;
-		set_response(content_type: string, resp_use: MemoryUse, resp_body: number[], resp_length: number): void;
+		set_response(content_type: string, resp_use: MemoryUse, resp_body: string | ByteArray): void;
 		set_status(status_code: number): void;
 		set_status_full(status_code: number, reason_phrase: string): void;
 		set_uri(uri: URI): void;
@@ -419,7 +419,7 @@ declare namespace imports.gi.Soup {
 		accept_iostream(stream: Gio.IOStream, local_addr: Gio.SocketAddress, remote_addr: Gio.SocketAddress): boolean;
 		add_auth_domain(auth_domain: AuthDomain): void;
 		add_early_handler(path: string, callback: ServerCallback, user_data: any, destroy: GLib.DestroyNotify): void;
-		add_handler(path: string, callback: ServerCallback, user_data: any, destroy: GLib.DestroyNotify): void;
+		add_handler(path: string | null, callback: ServerCallback): void;
 		add_websocket_handler(path: string, origin: string, protocols: string[], callback: ServerWebsocketCallback, user_data: any, destroy: GLib.DestroyNotify): void;
 		disconnect(): void;
 		get_async_context(): GLib.MainContext;
@@ -441,11 +441,16 @@ declare namespace imports.gi.Soup {
 		run_async(): void;
 		set_ssl_cert_file(ssl_cert_file: string, ssl_key_file: string): boolean;
 		unpause_message(msg: Message): void;
+
+		connect(signal: 'request-finished' | 'request-aborted' | 'request-read' | 'request-started', callback: (server: this, message: Message, client: ClientContext) => void): number
 	}
 
-	var Server: {
-		new(optname1: string): Server;
+	interface ServerOptions {
+		port: number
+	}
 
+	class Server {
+		constructor(options ?: ServerOptions);
 	}
 
 
@@ -917,7 +922,7 @@ declare namespace imports.gi.Soup {
 		public data: string;
 		public length: number;
 
-
+		public append(data: Uint8Array): void;
 		public append(use: MemoryUse, data: number[], length: number): void;
 		public append_buffer(buffer: Buffer): void;
 		public append_take(data: number[], length: number): void;
@@ -958,7 +963,7 @@ declare namespace imports.gi.Soup {
 
 	class MessageHeaders {
 
-
+		public static new(type: MessageHeadersType): MessageHeaders;
 		public append(name: string, value: string): void;
 		public clean_connection_headers(): void;
 		public clear(): void;
@@ -992,10 +997,10 @@ declare namespace imports.gi.Soup {
 
 
 
+
+
 	class MessageHeadersIter {
 		public dummy: any[];
-
-
 		public next(name: string, value: string): boolean;
 	}
 
@@ -1550,18 +1555,18 @@ declare namespace imports.gi.Soup {
 
 
 	enum MemoryUse {
-		static = 0,
-		take = 1,
-		copy = 2,
-		temporary = 3
+		STATIC = 0,
+		TAKE = 1,
+		COPY = 2,
+		TEMPORARY = 3
 	}
 
 
 
 	enum MessageHeadersType {
-		request = 0,
-		response = 1,
-		multipart = 2
+		REQUEST = 0,
+		RESPONSE = 1,
+		MULTIPART = 2
 	}
 
 

@@ -5,7 +5,7 @@
         "page-applications": {
             "type": "page",
             "title": "Applications",
-            "sections": ["section-applications", "section-groups"]
+            "sections": ["section-applications"]
         },
         "page-settings": {
             "type": "page",
@@ -16,12 +16,7 @@
         "section-applications": {
             "type": "section",
             "title": "Applications",
-            "keys": ["list-applications", "info-applications"]
-        },
-        "section-groups": {
-            "type": "section",
-            "title": "Groups",
-            "keys": ["list-groups", "force-update-groups", "info-force-update"]
+            "keys": ["custom-app-list"]
         },
         "section-settings-global": {
             "type": "section",
@@ -41,6 +36,11 @@
             "keys": ["visible-app-icons", "use-symbolic-icons", "app-icon-size"]
         }
     },
+    "custom-app-list": {
+        "type": "custom",
+        "file": "widgets.py",
+        "widget": "CustomAppList"
+    },
     "list-applications": {
         "type": "list",
         "columns": [
@@ -54,11 +54,8 @@
             },
             { "id": "command", "title": "Command", "type": "string" }
         ],
-        "default": []
-    },
-    "info-applications": {
-        "type": "label",
-        "description": "If you don't type in a group, the application will be displayed without a submenu."
+        "default": [],
+        "show-buttons": false
     },
     "list-groups": {
         "type": "list",
@@ -69,15 +66,6 @@
         "default": [],
         "show-buttons": false
     },
-    "force-update-groups": {
-        "type": "button",
-        "description": "Update Groups",
-        "callback": "forceUpdateGroups"
-    },
-    "info-force-update": {
-        "type": "label",
-        "description": "Unfortunately you must be force update the group list. It updates internally\nbut it will not be shown in the list without a restart of this dialog."
-    },
 
     "visible-launcher-label": {
         "type": "switch",
@@ -87,8 +75,7 @@
     "launcher-label": {
         "type": "entry",
         "description": "Label",
-        "default": "Launcher",
-        "dependency": "visible-launcher-label"
+        "default": "Launcher"
     },
     "custom-launcher-icon": {
         "type": "switch",

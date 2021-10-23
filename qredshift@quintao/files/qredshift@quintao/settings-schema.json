@@ -102,13 +102,14 @@
   },
   "autoUpdate": {
     "type": "checkbox",
+    "dependency": "enabledNight=true",
     "default": true,
     "description": "Auto Update",
     "tooltip": "Continuously adjust color temperature"
   },
   "autoUpdateInterval": {
     "type": "spinbutton",
-    "dependency": "autoUpdate=true",
+    "dependency": "enabledNight=true",
     "default": 20,
     "min": 5,
     "max": 1800,
@@ -197,9 +198,9 @@
     "type": "spinbutton",
     "default": 5900,
     "min": 1000,
-    "max": 9000,
+    "max": 12000,
     "units": "K",
-    "step": 1,
+    "step": 5,
     "description": "Temperature"
   },
   "dayBrightness": {
@@ -259,7 +260,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 1,
+    "step": 5,
     "description": "Temperature"
   },
   "nightBrightness": {

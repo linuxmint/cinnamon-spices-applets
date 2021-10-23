@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: 2021-02-27 16:18+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -33,6 +33,7 @@ msgstr ""
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -93,7 +94,8 @@ msgstr "Markera som helgdagar"
 
 #. settings-schema.json->weekend-length->tooltip
 msgid "Set how many days are marked as non-working days per week."
-msgstr "Ange hur många dagar som skall markeras som icke arbetsdagar, varje vecka."
+msgstr ""
+"Ange hur många dagar som skall markeras som icke arbetsdagar, varje vecka."
 
 #. settings-schema.json->weekend-length->options
 msgid "One day"
@@ -108,7 +110,8 @@ msgid "Use a custom date format"
 msgstr ""
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
 msgstr ""
 
 #. settings-schema.json->custom-format->description
@@ -152,6 +155,10 @@ msgid "Bosnia and Herzegovina"
 msgstr "Bosnien och Herzegovina"
 
 #. settings-schema.json->country->options
+msgid "Belarus"
+msgstr ""
+
+#. settings-schema.json->country->options
 msgid "Brazil"
 msgstr "Brasilien"
 
@@ -186,6 +193,10 @@ msgstr "Danmark"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estland"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -485,6 +496,83 @@ msgstr ""
 
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+#, fuzzy
+msgid "Canarias"
+msgstr "Kanada"
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
 msgstr ""
 
 #. settings-schema.json->region_nzl->options

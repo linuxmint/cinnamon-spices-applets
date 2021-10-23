@@ -5,10 +5,12 @@ const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
+const Tooltips = imports.ui.tooltips;
 const DND = imports.ui.dnd;
 const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -34,6 +36,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.orientation = orientation;
             this.panelHeight = panelHeight;
             this.instanceId = instanceId;
+            this.groupBuffer = [];
 
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             if (this.orientation == St.Side.RIGHT || this.orientation == St.Side.LEFT) {
@@ -53,9 +56,6 @@ class MyApplet extends Applet.TextIconApplet {
     bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId);
 
-        this.settings.bind('list-applications', 'listApplications', () => {
-            this.updateMenu(true);
-        });
         this.settings.bind('list-applications', 'listApplications', this.updateGroups);
         this.settings.bind('list-groups', 'listGroups', this.updateMenu);
 
@@ -74,7 +74,12 @@ class MyApplet extends Applet.TextIconApplet {
     connectSignals() {
         this.signalManager = new SignalManager.SignalManager(null);
 
-        this.signalManager.connect(this.menu, 'open-state-changed', this.toggleIcon, this);
+        this.signalManager.connect(
+            this.menu,
+            'open-state-changed',
+            this.on_menu_state_changed,
+            this
+        );
     }
 
     initMenu() {
@@ -85,7 +90,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     updateMenu() {
-        this.menu.removeAll();
+        this.menu.clearMenu();
 
         let groups = {};
 
@@ -101,28 +106,22 @@ class MyApplet extends Applet.TextIconApplet {
                 let group = application.group;
                 let icon = application.icon;
                 let command = application.command;
-
-                let item = this.createMenuItem(name, icon);
-                item.connect('activate', () => {
-                    this.run(name, icon, command);
-                });
+                let item = this.createMenuItem(name, icon, group, command);
 
                 if (group == '') {
                     this.menu.addMenuItem(item);
                 } else {
                     if (Object.keys(groups).includes(group)) {
-                        groups[group].menu.addMenuItem(item);
+                        groups[group].addMenuItem(item);
                     } else {
-                        let subMenu = new PopupMenu.PopupSubMenuMenuItem(group);
-                        if (this.visibleAppIcons) {
-                            this._addSubMenuIcon(subMenu, group);
-                        }
-
+                        let subMenu = this.createSubMenuItem(group);
                         groups[group] = subMenu;
-                        subMenu.menu.addMenuItem(item);
+                        subMenu.addMenuItem(item);
+                        this.menu.addMenuGroupItem(subMenu);
                         this.menu.addMenuItem(subMenu);
                     }
                 }
+                this.menu.addMenuAppItem(item);
             });
         }
     }
@@ -130,7 +129,13 @@ class MyApplet extends Applet.TextIconApplet {
     updateGroups() {
         const allGroups = new Set();
         let existGroupIcons = {};
-        this.listGroups.map((e) => (existGroupIcons[e.name] = e.icon));
+        this.listGroups.map((value) => {
+            if (Object.keys(this.groupBuffer).includes(value.name)) {
+                existGroupIcons[value.name] = this.popFromGroupBuffer(value.name);
+            } else {
+                existGroupIcons[value.name] = value.icon;
+            }
+        });
         let newGroupValue = [];
 
         this.listApplications.forEach((application) => {
@@ -155,58 +160,35 @@ class MyApplet extends Applet.TextIconApplet {
         this.updateMenu();
     }
 
-    forceUpdateGroups() {
-        // this will be used, to display the changes in the group list without
-        // close and reopen the settings. Although it is already set internally!
-        this.settings.setValue('list-groups', this.listGroups);
-    }
-
-    createMenuItem(name, icon) {
-        let item;
-        if (this.visibleAppIcons) {
-            item = new PopupMenu.PopupIconMenuItem(
-                name,
-                null,
-                this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
-            );
-
-            item._icon.set_gicon(this.createGIcon(icon, this.useSymbolicIcons));
-            item._icon.set_icon_size(this.appIconSize);
-        } else {
-            item = new PopupMenu.PopupMenuItem(name);
-        }
-        return item;
-    }
-
-    _addSubMenuIcon(subMenu, groupName) {
+    createSubMenuItem(name) {
         let existGroupIcons = {};
         this.listGroups.map((e) => (existGroupIcons[e.name] = e.icon));
         let icon =
-            Object.keys(existGroupIcons).includes(groupName) && existGroupIcons[groupName] != null
-                ? existGroupIcons[groupName]
+            Object.keys(existGroupIcons).includes(name) && existGroupIcons[name] != null
+                ? existGroupIcons[name]
                 : this.settings.settingsData['list-groups'].columns[1].default;
 
-        let _icon = new St.Icon({
-            gicon: this.createGIcon(icon, this.useSymbolicIcons),
-            icon_name: null,
-            icon_type: this.useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR,
-            icon_size: this.appIconSize,
+        return new MyPopupSubMenuItem({
+            applet: this,
+            name: name,
+            visibleAppIcons: this.visibleAppIcons,
+            icon: icon,
+            useSymbolicIcons: this.useSymbolicIcons,
+            iconSize: this.appIconSize,
         });
+    }
 
-        let params = {
-            span: 0,
-            expand: false,
-            align: St.Align.START,
-            actor: _icon,
-        };
-
-        subMenu._children.unshift(params);
-        subMenu._signals.connect(
-            subMenu.actor,
-            'destroy',
-            subMenu._removeChild.bind(subMenu, _icon)
-        );
-        subMenu.actor.add_actor(_icon);
+    createMenuItem(name, icon, group, command) {
+        return new MyPopupMenuItem({
+            applet: this,
+            name: name,
+            group: group,
+            visibleAppIcons: this.visibleAppIcons,
+            icon: icon,
+            useSymbolicIcons: this.useSymbolicIcons,
+            iconSize: this.appIconSize,
+            command: command,
+        });
     }
 
     initIcons() {
@@ -284,23 +266,62 @@ class MyApplet extends Applet.TextIconApplet {
         return string.split(search).join(replace);
     }
 
-    addDropApp(name, icon, cmd, index = 0) {
+    editGroup(oldName, newName) {
         let newList = this.listApplications;
-        newList.splice(index, 0, {
-            name: name,
-            group: '',
-            icon: icon,
-            command: cmd,
+        newList.map((value) => {
+            if (value.group === oldName) {
+                value.group = newName;
+            }
         });
         this.settings.setValue('list-applications', newList);
     }
 
-    run(name, icon, cmd) {
+    removeGroup(name) {
+        let newList = this.listApplications;
+        newList.map((value) => {
+            if (value.group === name) {
+                value.group = '';
+            }
+        });
+        this.settings.setValue('list-applications', newList);
+    }
+
+    addApp(name, icon, group, command, index = 0) {
+        let newList = this.listApplications;
+        newList.splice(index, 0, {
+            name: name,
+            group: group,
+            icon: icon,
+            command: command,
+        });
+        this.settings.setValue('list-applications', newList);
+    }
+
+    removeApp(index, update = true) {
+        let newList = this.listApplications;
+        newList.splice(index, 1);
+        if (update) {
+            this.settings.setValue('list-applications', newList);
+        }
+    }
+
+    appendToGroupBuffer(name, icon) {
+        // hack to set the choosed icon for a new group
+        this.groupBuffer[name] = icon;
+    }
+
+    popFromGroupBuffer(key) {
+        let icon = this.groupBuffer[key];
+        delete this.groupBuffer[key];
+        return icon;
+    }
+
+    run(name, icon, command) {
         if (this.notificationEnabled) {
             let text = this._replaceAll(this.notificationText, '%s', name);
             this.showNotification(APPNAME, text, icon);
         }
-        Util.spawnCommandLine(cmd);
+        Util.spawnCommandLine(command);
     }
 
     handleDragOver(source, actor, x, y, time) {
@@ -327,16 +348,166 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.finalize();
         this.signalManager.disconnectAllSignals();
     }
+
+    on_menu_state_changed(menu, isOpen, sourceActor) {
+        this.toggleIcon();
+        if (!isOpen && this.menu.isContextOpen()) {
+            this.menu.closeContext();
+        }
+    }
 }
 
 class MyPopupMenu extends Applet.AppletPopupMenu {
     _init(applet, orientation) {
-        super._init(applet, orientation);
-        this.applet = applet;
-        this._dragging = false;
-        this._draggable = DND.makeDraggable(this.applet.actor);
-        this._dragPlaceholder = null;
-        this._dragIndex = null;
+        try {
+            super._init(applet, orientation);
+            this.applet = applet;
+            this._menuAppItems = [];
+            this._menuGroupItems = [];
+
+            this.contextOpen = false;
+            this._dragging = false;
+            this._draggable = DND.makeDraggable(this.applet.actor);
+            this._dragPlaceholder = null;
+            this._dragIndex = null;
+        } catch (error) {
+            global.log(error);
+        }
+    }
+
+    clearMenu() {
+        this.removeAll();
+        this.clearMenuGroupItems();
+        this.clearMenuAppItems();
+    }
+
+    addMenuGroupItem(item) {
+        this._menuGroupItems.push(item);
+    }
+
+    getMenuGroupItems() {
+        return this._menuGroupItems;
+    }
+
+    clearMenuGroupItems() {
+        this._menuGroupItems = [];
+    }
+
+    setMenuGroupItemsShowTriangle(show) {
+        this.getMenuGroupItems().forEach((group) => {
+            group.setShowTriangle(show);
+        });
+    }
+
+    unselectMenuGroupItems() {
+        this.getMenuGroupItems().forEach((group) => {
+            group.unselect();
+        });
+    }
+
+    getSelectedMenuGroupItem() {
+        let groups = this.getMenuGroupItems();
+        for (let index = 0; index < groups.length; index++) {
+            const group = groups[index];
+            if (group.isSelected()) {
+                return [group, index];
+            }
+        }
+    }
+
+    editSelectedMenuGroupItem(name, icon) {
+        let [group, index] = this.getSelectedMenuGroupItem();
+        this.closeContext();
+        this.applet.appendToGroupBuffer(name, icon);
+        this.applet.editGroup(group.name, name);
+    }
+
+    removeSelectedMenuGroupItem() {
+        let [group, index] = this.getSelectedMenuGroupItem();
+        this.closeContext();
+        this.applet.removeGroup(group.name);
+    }
+
+    openMenuGroupItems() {
+        this.getMenuGroupItems().forEach((group) => {
+            group.menu.open(true);
+        });
+    }
+
+    closeMenuGroupItems() {
+        this.getMenuGroupItems().forEach((group) => {
+            group.menu.close(true);
+        });
+    }
+
+    addMenuAppItem(item) {
+        this._menuAppItems.push(item);
+    }
+
+    getMenuAppItems() {
+        return this._menuAppItems;
+    }
+
+    clearMenuAppItems() {
+        this._menuAppItems = [];
+    }
+
+    unselectMenuAppItems() {
+        this.getMenuAppItems().forEach((item) => {
+            item.unselect();
+        });
+    }
+
+    getSelectedMenuAppItem() {
+        let items = this.getMenuAppItems();
+        for (let index = 0; index < items.length; index++) {
+            const item = items[index];
+            if (item.isSelected()) {
+                return [item, index];
+            }
+        }
+    }
+
+    editSelectedMenuAppItem(name, icon, group, command) {
+        let [item, index] = this.getSelectedMenuAppItem();
+        this.closeContext();
+        this.applet.removeApp(index, false);
+        this.applet.addApp(name, icon, group, command, index);
+    }
+
+    removeSelectedMenuAppItem() {
+        let [item, index] = this.getSelectedMenuAppItem();
+        this.closeContext();
+        this.applet.removeApp(index);
+    }
+
+    unselectMenuItems() {
+        this.unselectMenuGroupItems();
+        this.unselectMenuAppItems();
+    }
+
+    openContext() {
+        this.contextOpen = true;
+        this.openMenuGroupItems();
+        this.setMenuGroupItemsShowTriangle(false);
+        this.getMenuGroupItems().forEach((group) => {
+            group.setItemsIndentation(true);
+        });
+    }
+
+    closeContext() {
+        this.contextOpen = false;
+        this.unselectMenuItems();
+        this.closeMenuGroupItems();
+        this.setMenuGroupItemsShowTriangle(true);
+        this.getMenuGroupItems().forEach((group) => {
+            group.setItemsIndentation(false);
+        });
+        this.actor.grab_key_focus(); // necessary to recalc the width
+    }
+
+    isContextOpen() {
+        return this.contextOpen;
     }
 
     beginDrag() {
@@ -405,16 +576,12 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             dropIndex = 0;
         }
 
-        if (this._dragIndex != dropIndex) {
+        if (this._dragIndex !== dropIndex) {
             if (!this._dragPlaceholder) {
-                try {
-                    let app = this._getAppInfo(source);
-                    let name = app.get_display_name();
-                    let icon = app.get_icon().to_string();
-                    this._createPlaceholder(name, icon, dropIndex);
-                } catch (error) {
-                    global.logError(error);
-                }
+                let app = this._getAppInfo(source);
+                let name = app.get_display_name();
+                let icon = app.get_icon().to_string();
+                this._createPlaceholder(name, icon, dropIndex);
             } else {
                 this.box.set_child_at_index(this._dragPlaceholder.actor, dropIndex);
             }
@@ -436,16 +603,12 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         if (!source.isDraggableApp) {
             return false;
         }
-
-        try {
-            let app = this._getAppInfo(source);
-            let name = app.get_display_name();
-            let icon = app.get_icon().to_string();
-            let cmd = app.get_commandline();
-            this.applet.addDropApp(name, icon, cmd, this._dragIndex);
-        } catch (error) {
-            global.logError(error);
-        }
+        let app = this._getAppInfo(source);
+        let name = app.get_display_name();
+        let icon = app.get_icon().to_string();
+        let execTokens = /\s%[uU]|\s%[fF]/g;
+        let command = app.get_commandline().replace(execTokens, '');
+        this.applet.addApp(name, icon, '', command, this._dragIndex);
 
         if (this.isOpen) {
             this.close();
@@ -453,6 +616,480 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         this.endDrag();
 
         return true;
+    }
+}
+
+class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
+    _init({
+        applet = undefined,
+        name = 'PopupMenuItem',
+        visibleAppIcons = true,
+        icon = 'application-x-executable',
+        iconSize = 24,
+        useSymbolicIcons = false,
+    } = {}) {
+        try {
+            super._init(name);
+
+            this.applet = applet;
+            this.actor.type = 'popup-item';
+            this._selected = false;
+            this.name = name;
+            this.icon = icon;
+            this.iconSize = iconSize;
+            this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
+
+            this._menuItems = [];
+
+            this.buttonDelete = this._createButton('delete');
+            this.buttonEdit = this._createButton('edit');
+            this.buttonCancel = this._createButton('cancel');
+            new Tooltips.Tooltip(this.buttonDelete, _('Delete'));
+            new Tooltips.Tooltip(this.buttonEdit, _('Edit'));
+            new Tooltips.Tooltip(this.buttonCancel, _('Cancel'));
+
+            if (visibleAppIcons) {
+                this._createIcon(useSymbolicIcons);
+            }
+        } catch (error) {
+            global.log(error);
+        }
+    }
+
+    _createIcon(useSymbolicIcons) {
+        this._icon = new St.Icon({
+            gicon: this.applet.createGIcon(this.icon, useSymbolicIcons),
+            icon_name: null,
+            icon_type: this.iconType,
+            icon_size: this.iconSize,
+        });
+
+        let params = {
+            span: 0,
+            expand: false,
+            align: St.Align.START,
+            actor: this._icon,
+        };
+
+        this._children.unshift(params);
+        this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
+        this.actor.add_actor(this._icon);
+    }
+
+    _onButtonReleaseEvent(actor, event) {
+        let button = event.get_button();
+        switch (actor.type) {
+            case 'context-button':
+                switch (actor.name) {
+                    case 'delete':
+                        this._onButtonDelete();
+                        break;
+                    case 'edit':
+                        this._onButtonEdit();
+                        break;
+                    case 'cancel':
+                        this._onButtonCancel();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'popup-item':
+                this._onItemClicked(button);
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    _onButtonHoverEvent(actor, event) {
+        actor.set_opacity(actor.hover ? 255 : 125);
+        actor.hover ? global.set_cursor(Cinnamon.Cursor.POINTING_HAND) : global.unset_cursor();
+    }
+
+    _onItemClicked(button) {
+        switch (button) {
+            case 1:
+                if (this.applet.menu.isContextOpen()) {
+                    if (!this._selected) {
+                        this.applet.menu.unselectMenuItems();
+                        this.select();
+                    }
+                } else {
+                    this.menu.toggle();
+                }
+                break;
+            case 3:
+                if (this.applet.menu.isContextOpen()) {
+                    if (!this._selected) {
+                        this.applet.menu.unselectMenuItems();
+                        this.select();
+                    } else {
+                        this._closeContext();
+                    }
+                } else {
+                    this.select();
+                    this._openContext();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    _onButtonDelete() {
+        this.applet.menu.close();
+        Util.spawn_async(
+            ['python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
+            (response) => {
+                response = JSON.parse(response);
+                if (response === Gtk.ResponseType.YES) {
+                    this.select();
+                    this.applet.menu.removeSelectedMenuGroupItem();
+                }
+            }
+        );
+    }
+
+    _onButtonEdit() {
+        this.applet.menu.close();
+        Util.spawn_async(
+            [
+                'python3',
+                `${this.applet.metadata.path}/dialogs.py`,
+                'edit',
+                JSON.stringify(this.applet.listGroups),
+                JSON.stringify([
+                    {
+                        'is-group': true,
+                        group: '',
+                    },
+                    this.icon,
+                    this.name,
+                ]),
+            ],
+            (response) => {
+                response = JSON.parse(response);
+                if (response !== null) {
+                    let group = response[0];
+                    if (group.name !== this.name || group.icon !== this.icon) {
+                        this.select();
+                        this.applet.menu.editSelectedMenuGroupItem(group.name, group.icon);
+                    }
+                }
+            }
+        );
+    }
+
+    _onButtonCancel() {
+        this._closeContext();
+    }
+
+    addMenuItem(item) {
+        this.menu.addMenuItem(item);
+        this._menuItems.push(item);
+    }
+
+    getMenuItems() {
+        return this._menuItems;
+    }
+
+    setItemsIndentation(indent) {
+        this.getMenuItems().forEach((item) => {
+            item.setIndentation(indent);
+        });
+    }
+
+    select() {
+        this._selected = true;
+        this.setShowDot(true);
+
+        this.addActor(this.buttonEdit);
+        this.addActor(this.buttonDelete);
+        this.addActor(this.buttonCancel);
+    }
+
+    unselect() {
+        this._selected = false;
+        this.setShowDot(false);
+
+        this.removeActor(this.buttonEdit);
+        this.removeActor(this.buttonDelete);
+        this.removeActor(this.buttonCancel);
+    }
+
+    setShowTriangle(show) {
+        if (show) {
+            this.addActor(this._triangleBin, { expand: true, span: -1, align: St.Align.END });
+        } else {
+            this.removeActor(this._triangleBin);
+        }
+    }
+
+    isSelected() {
+        return this._selected;
+    }
+
+    _createButton(name) {
+        let button = new St.Icon({
+            name: name,
+            gicon: Gio.Icon.new_for_string(
+                `${this.applet.metadata.path}/icons/${name}-symbolic.svg`
+            ),
+            icon_size: this.iconSize,
+            icon_type: St.IconType.SYMBOLIC,
+            opacity: 125,
+            reactive: true,
+            track_hover: true,
+        });
+        button.type = 'context-button';
+
+        this._signals.connect(button, 'button-release-event', this._onButtonReleaseEvent, this);
+        this._signals.connect(button, 'notify::hover', this._onButtonHoverEvent, this);
+
+        return button;
+    }
+
+    _openContext() {
+        this.applet.menu.openContext();
+    }
+
+    _closeContext() {
+        this.applet.menu.closeContext();
+    }
+}
+
+class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
+    _init({
+        applet = undefined,
+        name = 'PopupMenuItem',
+        group = '',
+        visibleAppIcons = true,
+        icon = 'application-x-executable',
+        iconSize = 24,
+        useSymbolicIcons = false,
+        command = undefined,
+        params = undefined,
+    } = {}) {
+        try {
+            super._init(name, null, null, params);
+
+            this.applet = applet;
+            this.actor.type = 'popup-item';
+            this._selected = false;
+            this.name = name;
+            this.group = group;
+            this.icon = icon;
+            this.iconSize = iconSize;
+            this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
+            this.command = command;
+
+            this.buttonDelete = this._createButton('delete');
+            this.buttonEdit = this._createButton('edit');
+            this.buttonCancel = this._createButton('cancel');
+            new Tooltips.Tooltip(this.buttonDelete, _('Delete'));
+            new Tooltips.Tooltip(this.buttonEdit, _('Edit'));
+            new Tooltips.Tooltip(this.buttonCancel, _('Cancel'));
+
+            if (visibleAppIcons) {
+                this._icon.set_gicon(this.applet.createGIcon(this.icon, useSymbolicIcons));
+                this._icon.set_icon_size(this.iconSize);
+                this._icon.set_icon_type(this.iconType);
+            } else {
+                this._removeIcon();
+            }
+        } catch (error) {
+            global.log(error);
+        }
+    }
+
+    _onButtonReleaseEvent(actor, event) {
+        let button = event.get_button();
+        switch (actor.type) {
+            case 'context-button':
+                switch (actor.name) {
+                    case 'delete':
+                        this._onButtonDelete();
+                        break;
+                    case 'edit':
+                        this._onButtonEdit();
+                        break;
+                    case 'cancel':
+                        this._onButtonCancel();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'popup-item':
+                this._onItemClicked(button);
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    _onButtonHoverEvent(actor, event) {
+        actor.set_opacity(actor.hover ? 255 : 125);
+        actor.hover ? global.set_cursor(Cinnamon.Cursor.POINTING_HAND) : global.unset_cursor();
+    }
+
+    _onItemClicked(button) {
+        switch (button) {
+            case 1:
+                if (this.applet.menu.isContextOpen()) {
+                    if (!this._selected) {
+                        this.applet.menu.unselectMenuItems();
+                        this.select();
+                    }
+                } else {
+                    this.applet.run(this.name, this.icon, this.command);
+                    this.applet.menu.close(true);
+                }
+                break;
+            case 3:
+                if (this.applet.menu.isContextOpen()) {
+                    if (!this._selected) {
+                        this.applet.menu.unselectMenuItems();
+                        this.select();
+                    } else {
+                        this._closeContext();
+                    }
+                } else {
+                    this.select();
+                    this._openContext();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    _onButtonDelete() {
+        this.applet.menu.close();
+        Util.spawn_async(
+            ['python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
+            (response) => {
+                response = JSON.parse(response);
+                if (response === Gtk.ResponseType.YES) {
+                    this.select();
+                    this.applet.menu.removeSelectedMenuAppItem();
+                }
+            }
+        );
+    }
+
+    _onButtonEdit() {
+        this.applet.menu.close();
+        Util.spawn_async(
+            [
+                'python3',
+                `${this.applet.metadata.path}/dialogs.py`,
+                'edit',
+                JSON.stringify(this.applet.listGroups),
+                JSON.stringify([
+                    {
+                        'is-group': false,
+                        group: this.group,
+                    },
+                    this.icon,
+                    this.name,
+                    this.command,
+                ]),
+            ],
+            (response) => {
+                response = JSON.parse(response);
+                if (response !== null) {
+                    let app = response[0];
+                    let group = response[1];
+                    if (group !== null) {
+                        this.applet.appendToGroupBuffer(group.name, group.icon);
+                    }
+                    if (
+                        app.name !== this.name ||
+                        app.icon !== this.icon ||
+                        app.group !== this.group ||
+                        app.command !== this.command
+                    ) {
+                        this.select();
+                        this.applet.menu.editSelectedMenuAppItem(
+                            app.name,
+                            app.icon,
+                            app.group,
+                            app.command
+                        );
+                    }
+                }
+            }
+        );
+    }
+
+    _onButtonCancel() {
+        this._closeContext();
+    }
+
+    select() {
+        this._selected = true;
+        this.setShowDot(true);
+
+        this.addActor(this.buttonEdit);
+        this.addActor(this.buttonDelete);
+        this.addActor(this.buttonCancel);
+    }
+
+    unselect() {
+        this._selected = false;
+        this.setShowDot(false);
+
+        this.removeActor(this.buttonEdit);
+        this.removeActor(this.buttonDelete);
+        this.removeActor(this.buttonCancel);
+    }
+
+    isSelected() {
+        return this._selected;
+    }
+
+    _removeIcon() {
+        this.removeActor(this._icon);
+    }
+
+    _createButton(name) {
+        let button = new St.Icon({
+            name: name,
+            gicon: Gio.Icon.new_for_string(
+                `${this.applet.metadata.path}/icons/${name}-symbolic.svg`
+            ),
+            icon_size: this.iconSize,
+            icon_type: St.IconType.SYMBOLIC,
+            opacity: 125,
+            reactive: true,
+            track_hover: true,
+        });
+        button.type = 'context-button';
+
+        this._signals.connect(button, 'button-release-event', this._onButtonReleaseEvent, this);
+        this._signals.connect(button, 'notify::hover', this._onButtonHoverEvent, this);
+
+        return button;
+    }
+
+    setIndentation(indent) {
+        if (indent) {
+            this.actor.get_children()[0].set_style('margin-left: 20px');
+        } else {
+            this.actor.get_children()[0].set_style(null);
+        }
+    }
+
+    _openContext() {
+        this.applet.menu.openContext();
+    }
+
+    _closeContext() {
+        this.applet.menu.closeContext();
     }
 }
 

@@ -99,6 +99,9 @@ declare namespace imports.ui.applet {
 		 * to Applet.AllowedLayout.HORIZONTAL */
 		 protected _allowedLayout: AllowedLayout;
 
+		 /** orientation of the panel the applet is on */
+		 protected _orientation: gi.St.Side;
+
 		/**
 		 * 
 		 * @param orientation orientation of the applet; Orientation of panel containing the actor
@@ -290,7 +293,8 @@ declare namespace imports.ui.applet {
 	/** Applet with icon */
 	export class IconApplet extends Applet {
 		/** Actor of the icon */
-		private _applet_icon: gi.St.Icon;
+		protected _applet_icon: gi.St.Icon;
+		protected _applet_icon_box: gi.St.Bin;
 
 		/**
 		 * 

@@ -5,7 +5,7 @@ import { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
-import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale, CompassDirectionText } from "../utils";
+import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
@@ -46,6 +46,8 @@ export class CurrentWeather {
 	private humidityLabel!: imports.gi.St.Label;
 	private pressureLabel!: imports.gi.St.Label;
 	private windLabel!: imports.gi.St.Label;
+	private dewPointLabel!: imports.gi.St.Label;
+	private dewPointCaption!: imports.gi.St.Label;
 	private windDirectionIcon!: imports.gi.St.Icon;
 	private apiUniqueLabel!: imports.gi.St.Label;
 	private apiUniqueCaptionLabel!: imports.gi.St.Label;
@@ -77,6 +79,7 @@ export class CurrentWeather {
 			this.SetHumidity(weather.humidity);
 			this.SetWind(weather.wind.speed, weather.wind.degree);
 			this.SetPressure(weather.pressure);
+			this.SetDewPointField(weather.dewPoint);
 			this.SetAPIUniqueField(weather.extra_field);
 			if (config._showSunrise)
 				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
@@ -148,10 +151,12 @@ export class CurrentWeather {
 		this.temperatureLabel = new Label(textOb)
 		this.humidityLabel = new Label(textOb)
 		this.pressureLabel = new Label(textOb)
+		this.dewPointLabel = new Label({ text: '' });
 
 		this.apiUniqueLabel = new Label({ text: '' })
 		// APi Unique Caption
 		this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
 
 		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
@@ -159,12 +164,13 @@ export class CurrentWeather {
 		rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
 		rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
 		rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(this.dewPointCaption);
 		rb_captions.add_actor(this.apiUniqueCaptionLabel);
 		rb_values.add_actor(this.temperatureLabel);
 		rb_values.add_actor(this.humidityLabel);
 		rb_values.add_actor(this.pressureLabel);
 		rb_values.add_actor(this.BuildWind(config));
-		//rb_values.add_actor(this.windLabel);
+		rb_values.add_actor(this.dewPointLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
 		let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
@@ -329,7 +335,7 @@ export class CurrentWeather {
 			let value;
 			switch (extra_field.type) {
 				case "percent":
-					value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
+					value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
 					break;
 				case "temperature":
 					value = TempToUserConfig(extra_field.value, this.app.config);
@@ -342,10 +348,23 @@ export class CurrentWeather {
 		}
 	}
 
+	private SetDewPointField(dewPoint: number | null): void {
+		let temp = TempToUserConfig(dewPoint, this.app.config);
+		if (temp == null) {
+			this.dewPointCaption.set_style_class_name("weather-hidden");
+			this.dewPointLabel.set_style_class_name("weather-hidden");
+			return;
+		}
+
+		this.dewPointCaption.remove_style_class_name("weather-hidden");
+		this.dewPointLabel.remove_style_class_name("weather-hidden");
+		this.dewPointLabel.text = temp;
+	}
+
 	private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {
 		if (this.app.config._useCustomMenuIcons) {
 			this.weatherIcon.icon_name = customIconName;
-			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
+			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as IconSet is symbolic
 		}
 		else {
 			let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
@@ -366,7 +385,7 @@ export class CurrentWeather {
 
 	private SetHumidity(humidity: number | null) {
 		if (humidity != null) {
-			this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
+			this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
 		}
 	}
 
@@ -395,8 +414,8 @@ export class CurrentWeather {
 	}
 
 	private SetLocation(locationString: string, url?: string) {
-		this.location.label = locationString;			
-		if (!url) 
+		this.location.label = locationString;
+		if (!url)
 			this.locationButton.disable();
 		else
 			this.locationButton.url = url;

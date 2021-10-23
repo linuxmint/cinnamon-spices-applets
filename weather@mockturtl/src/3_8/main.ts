@@ -17,7 +17,7 @@ import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { USWeather } from "./providers/us_weather";
 import { Weatherbit } from "./providers/weatherbit";
 import { MetNorway } from "./providers/met_norway";
-import { HttpLib, HttpError, Method, HTTPParams } from "./lib/httpLib";
+import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./providers/visualcrossing";
@@ -262,8 +262,8 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T | null> {
-		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, method);
+	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
+		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
@@ -286,8 +286,8 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<string | null> {
-		let response = await HttpLib.Instance.LoadAsync(url, params, method);
+	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<string | null> {
+		let response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
@@ -418,8 +418,8 @@ export class WeatherApplet extends TextIconApplet {
 			case "Weatherbit":
 				if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
 				break;
-			case "ClimacellV4":
-				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);
+			case "Tomorrow.io":
+				if (currentName != "Tomorrow.io" || force) this.provider = new ClimacellV4(this);
 				break;
 			case "Met Office UK":
 				if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);

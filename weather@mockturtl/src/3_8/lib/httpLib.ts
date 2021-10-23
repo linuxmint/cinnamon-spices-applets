@@ -2,7 +2,7 @@ import { Logger } from "./logger";
 import { ErrorDetail } from "../types";
 import { _ } from "../utils";
 
-const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+const { Message, ProxyResolverDefault, SessionAsync, MessageHeaders, MessageHeadersType } = imports.gi.Soup;
 
 export class HttpLib {
 	private static instance: HttpLib;
@@ -26,8 +26,8 @@ export class HttpLib {
 	/**
 	 * Handles obtaining JSON over http. 
 	 */
-	public async LoadJsonAsync<T>(url: string, params?: HTTPParams, method: Method = "GET"): Promise<Response<T>> {
-		let response = await this.LoadAsync(url, params, method);
+	public async LoadJsonAsync<T>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T>> {
+		let response = await this.LoadAsync(url, params, headers, method);
 
 		if (!response.Success)
 			return response;
@@ -53,8 +53,8 @@ export class HttpLib {
 	/**
 	 * Handles obtaining data over http. 
 	 */
-	public async LoadAsync(url: string, params?: HTTPParams, method: Method = "GET"): Promise<GenericResponse> {
-		let message = await this.Send(url, params, method);
+	public async LoadAsync(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<GenericResponse> {
+		let message = await this.Send(url, params, headers, method);
 
 		let error: HttpError | undefined = undefined;
 
@@ -102,7 +102,7 @@ export class HttpLib {
 		}
 
 		if (message?.status_code > 200 && message?.status_code < 300) {
-			Logger.Info("Wrning: API returned non-OK status code '" + message?.status_code + "'");
+			Logger.Info("Warning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
 		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
@@ -121,7 +121,7 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: HTTPParams | null, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
 		// Add params to url
 		if (params != null) {
 			let items = Object.keys(params);
@@ -136,6 +136,11 @@ export class HttpLib {
 		Logger.Debug("URL called: " + query);
 		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
 			let message = Message.new(method, query);
+			if (headers != null) {
+				for (const key in headers) {
+					message.request_headers.append(key, headers[key]);
+				}
+			}
 			this._httpSession.queue_message(message, (session, message) => {
 				resolve(message);
 			});
@@ -161,6 +166,10 @@ interface GenericResponse {
 
 export interface HTTPParams {
 	[key: string]: boolean | string | number | null;
+}
+
+export interface HTTPHeaders {
+	[key: string]: string;
 }
 
 export interface HttpError {

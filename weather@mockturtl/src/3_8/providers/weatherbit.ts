@@ -98,7 +98,7 @@ export class Weatherbit implements WeatherProvider {
 
 	private ParseCurrent = (json: any): WeatherData | null => {
 		json = json.data[0];
-		let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, {zone: json.timezone}), this.ParseStringTime(json.ob_time, json.timezone));
+		let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
 		if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
 		try {
 			let weather: WeatherData = {
@@ -112,7 +112,7 @@ export class Weatherbit implements WeatherProvider {
 					url: undefined,
 					timeZone: json.timezone
 				},
-				date: DateTime.fromSeconds(json.ts, {zone: json.timezone}),
+				date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
 				sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
 				sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
 				wind: {
@@ -122,6 +122,7 @@ export class Weatherbit implements WeatherProvider {
 				temperature: json.temp,
 				pressure: json.pres,
 				humidity: json.rh,
+				dewPoint: json.dewpt,
 				condition: {
 					main: json.weather.description,
 					description: json.weather.description,
@@ -151,7 +152,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let day = json.data[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.ts, {zone: json.timezone}),
+					date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
 					temp_min: day.min_temp,
 					temp_max: day.max_temp,
 					condition: {
@@ -178,7 +179,7 @@ export class Weatherbit implements WeatherProvider {
 			for (let i = 0; i < json.data.length; i++) {
 				let hour = json.data[i];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.ts, {zone: json.timezone}),
+					date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather.description,

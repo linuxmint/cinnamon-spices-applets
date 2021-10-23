@@ -14,6 +14,8 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 # Save current dir for convenience
 path=${PWD}
 
-#cd $DIR/src/3_8
+cd $DIR
 npx webpack
-#cd $DIR
+cd ..
+./cinnamon-spices-makepot weather@mockturtl
+cd $PWD

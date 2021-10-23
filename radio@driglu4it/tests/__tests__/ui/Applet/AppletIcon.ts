@@ -1,5 +1,5 @@
 import { RADIO_SYMBOLIC_ICON_NAME } from "consts"
-import { IconType } from "types"
+import { AppletIcon } from "types"
 import { createAppletIcon } from "ui/Applet/AppletIcon"
 
 const { Panel } = imports.ui.panel
@@ -24,7 +24,7 @@ function testSymbolicIcon(appletIcon: ReturnType<typeof createAppletIcon>) {
     expect(appletIcon.actor.style_class).toBe('system-status-icon')
 }
 
-function testFullBiColorIcon(appletIcon: ReturnType<typeof createAppletIcon>, iconType: IconType) {
+function testFullBiColorIcon(appletIcon: ReturnType<typeof createAppletIcon>, iconType: AppletIcon) {
     const expectedIconSize = panel.getPanelZoneIconSize(locationLabel, IconType.FULLCOLOR)
 
     expect(appletIcon.actor.icon_size).toBe(expectedIconSize)

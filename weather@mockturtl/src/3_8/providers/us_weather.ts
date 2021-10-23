@@ -57,7 +57,7 @@ export class USWeather implements WeatherProvider {
 			Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
 
 			let observationStations = await this.GetStationData(grid.properties.observationStations);
-			if (observationStations == null) 
+			if (observationStations == null)
 				return null;
 
 			// Caching
@@ -210,6 +210,10 @@ export class USWeather implements WeatherProvider {
 				result.properties.visibility.value = element.properties.visibility.value;
 				Logger.Debug("Visibility" + debugText);
 			}
+			if (result.properties.dewpoint.value == null) {
+				result.properties.dewpoint.value = element.properties.dewpoint.value;
+				Logger.Debug("Dew Point" + debugText);
+			}
 		}
 		return result;
 	}
@@ -255,6 +259,7 @@ export class USWeather implements WeatherProvider {
 				temperature: CelsiusToKelvin(observation.properties.temperature.value),
 				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
+				dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
 				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};
@@ -395,7 +400,7 @@ export class USWeather implements WeatherProvider {
 	 * @param isNight 
 	 */
 	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
-		if (icon == null) 
+		if (icon == null)
 			return {
 				main: _("Unknown"),
 				description: _("Unknown"),

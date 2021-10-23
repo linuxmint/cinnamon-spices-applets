@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 10:55+0100\n"
-"PO-Revision-Date: 2021-08-13 14:44+0200\n"
+"POT-Creation-Date: 2021-08-22 07:17+0100\n"
+"PO-Revision-Date: 2021-08-25 20:45+0200\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -370,7 +370,7 @@ msgid "Number of columns in apps grid"
 msgstr "Anzahl an Spalten bei Anzeige der Apps in einem Raster"
 
 msgid "Show bookmarks and places"
-msgstr "Orte anzeigen"
+msgstr "Kategorie »Orte« anzeigen"
 
 msgid "Show bookmarks and places category in the menu"
 msgstr "Orte als Kategorie anzeigen"
@@ -488,37 +488,7 @@ msgid "Show emojis in search results"
 msgstr "Emojis in Suchergebnissen anzeigen"
 
 msgid "Web search option"
-msgstr "Suchmaschinen für Web-Suche auswählen"
-
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "\"Ask\""
-
-msgid "Ecosia"
-msgstr "Ecosia"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Startpage"
+msgstr "Suchmaschine für Web-Suche auswählen"
 
 msgid "Show an internet search option in search results"
 msgstr "Ergebnisse der Internet-Suche zu Suchergebnissen hinzufügen"
@@ -530,7 +500,7 @@ msgid "When searching, also search my home folder for files"
 msgstr "Bei der Suche auch im persönlichen Ordner suchen"
 
 msgid "Web bookmarks search"
-msgstr "In den Web-Lesezeichen des Browsers suchen"
+msgstr "In den Lesezeichen des Web-Browsers suchen"
 
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, "
@@ -551,6 +521,9 @@ msgstr "Wikipedia-Suche"
 
 msgid "Show some Wikipedia results"
 msgstr "Ergebnisse der Wikipedia-Suche anzeigen"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia-Sprache"
 
 msgid "Use a custom icon size"
 msgstr "Eine benutzerdefinierte Symbolgröße verwenden"
@@ -584,6 +557,36 @@ msgid ""
 msgstr ""
 "App-Symbole in Kacheln anzeigen (Hinweis: Kann bei manchen Themen nicht "
 "funktionieren)"
+
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Bing"
+#~ msgstr "Bing"
+
+#~ msgid "Baidu"
+#~ msgstr "Baidu"
+
+#~ msgid "Yahoo"
+#~ msgstr "Yahoo"
+
+#~ msgid "Yandex"
+#~ msgstr "Yandex"
+
+#~ msgid "DuckDuckGo"
+#~ msgstr "DuckDuckGo"
+
+#~ msgid "Ask"
+#~ msgstr "\"Ask\""
+
+#~ msgid "Ecosia"
+#~ msgstr "Ecosia"
+
+#~ msgid "AOL"
+#~ msgstr "AOL"
+
+#~ msgid "Startpage"
+#~ msgstr "Startpage"
 
 #~ msgid "pixels"
 #~ msgstr "Pixel"

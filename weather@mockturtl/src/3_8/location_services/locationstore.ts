@@ -58,9 +58,9 @@ export class LocationStore {
 			currentlyDisplayedChanged = !this.IsEqual(this.locations?.[currentIndex], locs?.[currentIndex])
 		else if (newIndex == -1)
 			currentlyDisplayedDeleted = true;
-		// currenlty displayed position's changed
+		// currently displayed position's changed
 		// even tho this seems to happen automatically, 
-		// probably beacause I'm using object references somewhere
+		// probably because I'm using object references somewhere
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
 
@@ -197,7 +197,7 @@ export class LocationStore {
 	public ShouldShowLocationSelectors(currentLoc: LocationData | null): boolean {
 		if (currentLoc == null)
 			return false;
-			
+
 		let threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;

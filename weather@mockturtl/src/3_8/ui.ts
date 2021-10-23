@@ -45,6 +45,8 @@ export class UI {
 
 	private lastDateToggled?: DateTime = undefined;
 
+	private noHourlyWeather: boolean = false;
+
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.App = app;
 		this.menuManager = new PopupMenuManager(this.App);
@@ -64,7 +66,30 @@ export class UI {
 	}
 
 	public Toggle(): void {
-		this.menu.toggle();
+		// Hourly weather is always open
+		if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
+			if (this.menu.isOpen) {
+				this.menu.close(true);
+			}
+			else {
+				this.menu.open(false);
+				// Showing hourly weather height calculation only works when it's visible
+				// so we trigger it then, and we need it every time
+				// so element width is set properly based on displayed text
+				this.ShowHourlyWeather(false);
+				this.menu.close(false);
+				// Open it properly here
+				this.menu.open(true);
+			}
+		}
+		// Normal behaviour
+		else {
+			// Close hourly weather because it should always start closed.
+			if (this.HourlyWeather.Toggled && !this.menu.isOpen)
+				this.HideHourlyWeather(false);
+
+			this.menu.toggle();
+		}
 	}
 
 	public async ToggleHourlyWeather(): Promise<void> {
@@ -110,6 +135,11 @@ export class UI {
 		this.CurrentWeather.Display(weather, config);
 		this.FutureWeather.Display(weather, config);
 		let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+		this.noHourlyWeather = !shouldShowToggle;
+		// Hourly weather is not shown, make sure it's closed
+		if (!shouldShowToggle)
+			this.ForceHideHourlyWeather();
+
 		this.Bar.Display(weather, provider, config, shouldShowToggle);
 		return true;
 	}
@@ -118,7 +148,7 @@ export class UI {
 	// Callbacks
 
 	/**
-	 * Resetting flags from Hourly scrollview when theme changed to 
+	 * Resetting flags from Hourly scroll view when theme changed to 
 	 * prevent incorrect height requests, rebuild 
 	 * when switching between light and dark themes
 	 * to recolor some of the text
@@ -231,16 +261,26 @@ export class UI {
 		this.lastDateToggled = date;
 	}
 
-	private async ShowHourlyWeather(): Promise<void> {
+	private async ShowHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Show();
 		this.Bar.SwitchButtonToHide();
-		await this.HourlyWeather.Show();
+		await this.HourlyWeather.Show(animate);
 	}
 
-	private async HideHourlyWeather(): Promise<void> {
+	private async HideHourlyWeather(animate: boolean = true): Promise<void> {
+		if (this.App.config._alwaysShowHourlyWeather) {
+			this.lastDateToggled = undefined;
+			this.HourlyWeather.ResetScroll();
+			return;
+		}
+
+		await this.ForceHideHourlyWeather(animate);
+	}
+
+	private async ForceHideHourlyWeather(animate: boolean = true): Promise<void> {
 		this.lastDateToggled = undefined;
 		this.HourlySeparator.Hide();
 		this.Bar.SwitchButtonToShow();
-		await this.HourlyWeather.Hide();
+		await this.HourlyWeather.Hide(animate);
 	}
 }

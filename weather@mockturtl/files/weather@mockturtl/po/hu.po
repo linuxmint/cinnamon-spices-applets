@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-06 19:08+0000\n"
-"PO-Revision-Date: 2021-02-15 20:32+0100\n"
+"POT-Creation-Date: 2021-09-23 09:38+0100\n"
+"PO-Revision-Date: 2021-09-26 07:54+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -17,597 +17,513 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: 3.0/openWeatherMap.js:129 3.0/weatherbit.js:202 3.0/darkSky.js:143
-#: 3.0/yahoo.js:141 3.0/us_weather.js:322 3.0/climacell.js:163
-#: 3.8/openWeatherMap.js:63 3.8/climacellV4.js:71 3.8/weatherbit.js:98
-#: 3.8/darkSky.js:73 3.8/yahoo.js:73 3.8/us_weather.js:187 3.8/climacell.js:80
-#: 3.8/visualcrossing.js:63
+#: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
+#: 3.8/weather-applet.js:14916
+msgid "Error"
+msgstr "Hiba"
+
+#: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
+#: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
+#: 3.8/weather-applet.js:14917 3.8/weather-applet.js:14919
+#: 3.8/weather-applet.js:14921 3.8/weather-applet.js:14924
+#: 3.8/weather-applet.js:14927 3.8/weather-applet.js:14928
+#: 3.8/weather-applet.js:14929 3.8/weather-applet.js:14930
+msgid "Service Error"
+msgstr "Szolgáltató hiba"
+
+#: 3.0/applet.js:168 3.8/weather-applet.js:14918
+msgid "Incorrect API Key"
+msgstr "Rossz API-kulcs"
+
+#: 3.0/applet.js:170 3.8/weather-applet.js:14920
+msgid "Incorrect Location Format"
+msgstr "Hibás földrajzi helyzetformátum"
+
+#: 3.0/applet.js:172 3.8/weather-applet.js:14922
+msgid "Key Blocked"
+msgstr "Kulcs ideiglenesen letilva"
+
+#: 3.0/applet.js:173 3.8/weather-applet.js:14923
+msgid "Can't find location"
+msgstr "Földrajzi helyzet nem található"
+
+#: 3.0/applet.js:175 3.8/weather-applet.js:14925
+msgid "No Api Key"
+msgstr "Nincs API-kulcs megadva"
+
+#: 3.0/applet.js:176 3.8/weather-applet.js:14926
+msgid "No Location"
+msgstr "A földrajzi helyzet nincs megadva"
+
+#: 3.0/applet.js:181 3.8/weather-applet.js:14931
+msgid "Missing Packages"
+msgstr "Hiányzó csomag"
+
+#: 3.0/applet.js:182 3.8/weather-applet.js:14932
+msgid "Location not covered"
+msgstr "A földrajzi helyzetről nincs információ"
+
+#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9111
+msgid "Weather Applet"
+msgstr "Időjárás kisalkalmazás"
+
+#: 3.0/applet.js:217 3.8/weather-applet.js:15149
+msgid "..."
+msgstr "…"
+
+#: 3.0/applet.js:218 3.8/weather-applet.js:15150
+msgid "Click to open"
+msgstr "Megnyitás"
+
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:10673
+#: 3.8/weather-applet.js:15161
+msgid "Refresh"
+msgstr "Frissítés"
+
+#: 3.0/applet.js:272
+msgid "API returned status code between 400 and 500"
+msgstr "Az API 400 és 500 közötti állapotkóddal hibát jelzett"
+
+#: 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
+#: 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9278
+#: 3.8/weather-applet.js:9282 3.8/weather-applet.js:9286
+msgid "Location Store"
+msgstr "Földrajzi helyzet tároló"
+
+#: 3.0/applet.js:426
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "Az automatikusan megállapított földrajzi helyzet nem menthető el"
+
+#: 3.0/applet.js:601
+msgid "Could not get weather information"
+msgstr "Az időjárás információk nem kérhetők le"
+
+#: 3.0/applet.js:624 3.8/weather-applet.js:15022
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+"Ismeretlen hiba lépett fel frissítés közben, a hibaüzenet megtekinthető a "
+"Looking Glass naplóban"
+
+#: 3.0/applet.js:670 3.8/weather-applet.js:15278
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Előrejelzés frissítése nem sikerült...\n"
+"csatlakoztatva van az internet?"
+
+#: 3.0/applet.js:684
+msgid "Network Error, please check logs in Looking Glass"
+msgstr ""
+"Hálózati hiba lépett fel a frissítés közben, a hibaüzenet megtekinthető a "
+"Looking Glass naplóban"
+
+#: 3.0/applet.js:969 3.0/applet.js:1110
+msgid "As of"
+msgstr "Frissítve:"
+
+#: 3.0/applet.js:1108 3.8/weather-applet.js:11332
+msgid "Powered by"
+msgstr "Időjárási-adatszolgáltató:"
+
+#: 3.0/applet.js:1113
+msgid "from you"
+msgstr "Öntől"
+
+#: 3.0/applet.js:1132 3.8/weather-applet.js:11266
+msgid "mm"
+msgstr "mm"
+
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:11266
+#: 3.8/weather-applet.js:11596
+msgid "in"
+msgstr "itt:"
+
+#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10104
+#: 3.8/weather-applet.js:11393
+msgid "mi"
+msgstr "mi"
+
+#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10105
+#: 3.8/weather-applet.js:11394
+msgid "km"
+msgstr "km"
+
+#: 3.0/applet.js:1227 3.8/weather-applet.js:11545
+msgid "Loading current weather ..."
+msgstr "Időjárás betöltése…"
+
+#: 3.0/applet.js:1230 3.8/weather-applet.js:11548
+msgid "Loading future weather ..."
+msgstr "Időjárás-előrejelzés betöltése…"
+
+#: 3.0/applet.js:1280 3.8/weather-applet.js:10616
+msgid "Loading ..."
+msgstr "Betöltés…"
+
+#: 3.0/applet.js:1329 3.8/weather-applet.js:10640
+msgid "Temperature"
+msgstr "Hőmérséklet"
+
+#: 3.0/applet.js:1330 3.8/weather-applet.js:10641
+msgid "Humidity"
+msgstr "Páratartalom"
+
+#: 3.0/applet.js:1331 3.8/weather-applet.js:10642
+msgid "Pressure"
+msgstr "Légnyomás"
+
+#: 3.0/applet.js:1332 3.8/weather-applet.js:10643 3.8/weather-applet.js:14390
+#: 3.8/weather-applet.js:14397 3.8/weather-applet.js:14398
+#: 3.8/weather-applet.js:14404
+msgid "Wind"
+msgstr "Szél"
+
+#: 3.0/applet.js:1639 3.8/weather-applet.js:9573
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr ""
+"Ellenőrizze hogy van-e földrajzi helyzet megadva vagy használja az "
+"automatikus helyzet-meghatározást"
+
+#: 3.0/applet.js:1877 3.8/weather-applet.js:9358
+msgid "Could not find location based on address, please check if it's right"
+msgstr ""
+"Cím alapján nem található a földrajzi helyzet. Ellenőrizze a megadott "
+"adatokat."
+
+#: 3.0/applet.js:1901 3.8/weather-applet.js:9379
+msgid "Failed to call Geolocation API, see Looking Glass for errors."
+msgstr ""
+"Nem sikerült a helymeghatározási API meghívása a hibaüzenetek megtekinthetők "
+"a Looking Glass naplóban."
+
+#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9278
+#: 3.8/weather-applet.js:9282
+msgid "Warning"
+msgstr "Figyelmeztetés"
+
+#: 3.0/applet.js:2032 3.8/weather-applet.js:9278
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr ""
+"Csak akkor távolítható el a földrajzi helyzet, ha a kisalkalmazás éppen nem "
+"áll frissítés alatt"
+
+#: 3.0/applet.js:2036 3.8/weather-applet.js:9282
+msgid "You can't save an incorrect location"
+msgstr "Nem menthető el a nem megfelelő földrajzi helyzet"
+
+#: 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#: 3.8/weather-applet.js:9286
+msgid "Info"
+msgstr "Információk"
+
+#: 3.0/applet.js:2040 3.8/weather-applet.js:9286
+msgid "Location is already saved"
+msgstr "A földrajzi helyzet már el lett mentve"
+
+#: 3.0/applet.js:2049 3.0/applet.js:2083
+msgid "Success"
+msgstr "Siker"
+
+#: 3.0/applet.js:2049
+msgid "Location is saved to library"
+msgstr "A földrajzi helyzet el lett mentve a katalógusba"
+
+#: 3.0/applet.js:2062
+msgid "You can't remove a location while the applet is refreshing"
+msgstr ""
+"Nem távolítható el a kisalkalmazás frissítése közben a földrajzi helyzet"
+
+#: 3.0/applet.js:2066
+msgid "You can't remove an incorrect location"
+msgstr "Nem távolítható el a nem megfelelő földrajzi helyzet"
+
+#: 3.0/applet.js:2070
+msgid "Location is not in storage, can't delete"
+msgstr "Földrajzi helyzet nincs elmentve, ezért nem törölhető"
+
+#: 3.0/applet.js:2083
+msgid "Location is deleted from library"
+msgstr "A földrajzi helyzet le lett törölve katalógusból"
+
+#: 3.0/applet.js:2131
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr ""
+"Nem tölthető be adat a földrajzi helyzet tárolóból. További információkért "
+"tekintse meg a naplóbejegyzéseket a Looking Glass naplóban."
+
+#: 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
+#: 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
+#: 3.8/weather-applet.js:11655 3.8/weather-applet.js:11973
+#: 3.8/weather-applet.js:12531 3.8/weather-applet.js:12884
+#: 3.8/weather-applet.js:13985 3.8/weather-applet.js:14291
 msgid "Feels Like"
 msgstr "Hőérzet"
 
-#: 3.0/openWeatherMap.js:190 3.0/weatherbit.js:212 3.0/us_weather.js:334
-#: 3.0/met_uk.js:340 3.8/openWeatherMap.js:124 3.8/weatherbit.js:108
-#: 3.8/us_weather.js:199 3.8/met_uk.js:178
-msgid "Failed to Process Current Weather Info"
-msgstr "Nem sikerült feldolgozni a jelenlegi időjárás-jelentést"
-
-#: 3.0/openWeatherMap.js:238 3.8/openWeatherMap.js:175
-msgid "Please make sure Location is in the correct format in the Settings"
-msgstr ""
-"Kérem ellenőrizze hogy a földrajzi helyzet megfelelő formátumban van megadva"
-
-#: 3.0/openWeatherMap.js:242 3.8/openWeatherMap.js:179
-msgid "Make sure you entered the correct key in settings"
-msgstr "Ellenőrizze hogy az API kulcs korrekt a beállításokban"
-
-#: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
-#: 3.8/openWeatherMap.js:183 3.8/openWeatherMap.js:208
-msgid ""
-"Location not found, make sure location is available or it is in the correct "
-"format"
-msgstr ""
-"Földrajzi helyzet nem található, ellenőrizze hogy a földrajzi helyzet "
-"elérhető és megfelelő formátumban van megadva"
-
-#: 3.0/openWeatherMap.js:250 3.8/openWeatherMap.js:187
-msgid "If this problem persists, please contact the Author of this applet"
-msgstr ""
-"Ha a hiba továbbra is fennáll, vegye fel a kapcsolatot az applet "
-"fejlesztőjével"
-
-#: 3.0/openWeatherMap.js:254 3.8/openWeatherMap.js:191
-msgid "Unknown Error, please see the logs in Looking Glass"
-msgstr "Ismeretlen hiba, a hibaüzenet megtekinthető a Looking Glass naplóban"
-
-#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:306
-msgid "Thunderstorm with light rain"
-msgstr "Vihar enyhe esővel"
-
-#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:307
-msgid "Thunderstorm with rain"
-msgstr "Vihar"
-
-#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:308
-msgid "Thunderstorm with heavy rain"
-msgstr "Vihar erős esőzéssel"
-
-#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:309
-msgid "Light thunderstorm"
-msgstr "Enyhe vihar"
-
-#: 3.0/openWeatherMap.js:366 3.0/us_weather.js:550 3.0/us_weather.js:551
-#: 3.0/climacell.js:364 3.0/climacell.js:365 3.8/openWeatherMap.js:310
-#: 3.8/climacellV4.js:296 3.8/climacellV4.js:297 3.8/us_weather.js:414
-#: 3.8/us_weather.js:415 3.8/climacell.js:269 3.8/climacell.js:270
-#: 3.8/visualcrossing.js:254
-msgid "Thunderstorm"
-msgstr "Vihar"
-
-#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:311
-msgid "Heavy thunderstorm"
-msgstr "Erős vihar"
-
-#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:312
-msgid "Ragged thunderstorm"
-msgstr "Viharok"
-
-#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:313
-msgid "Thunderstorm with light drizzle"
-msgstr "Vihar enyhén szitáló esővel"
-
-#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:314
-msgid "Thunderstorm with drizzle"
-msgstr "Vihar szitáló esővel"
-
-#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:315
-msgid "Thunderstorm with heavy drizzle"
-msgstr "Vihar erősen szitáló esővel"
-
-#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:316
-msgid "Light intensity drizzle"
-msgstr "Enyhe szitáló eső"
-
-#: 3.0/openWeatherMap.js:373 3.0/yahoo.js:445 3.0/met_uk.js:603
-#: 3.0/met_uk.js:604 3.8/openWeatherMap.js:317 3.8/climacellV4.js:191
-#: 3.8/climacellV4.js:192 3.8/climacellV4.js:247 3.8/yahoo.js:393
-#: 3.8/met_uk.js:461 3.8/met_uk.js:462 3.8/visualcrossing.js:184
-msgid "Drizzle"
-msgstr "Szitáló eső"
-
-#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:318
-msgid "Heavy intensity drizzle"
-msgstr "Erősen szitáló eső"
-
-#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:319
-msgid "Light intensity drizzle rain"
-msgstr "Enyhén szitáló eső"
-
-#: 3.0/openWeatherMap.js:376 3.8/openWeatherMap.js:320
-msgid "Drizzle rain"
-msgstr "Szitáló eső"
-
-#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:321
-msgid "Heavy intensity drizzle rain"
-msgstr "Erősen szitáló eső"
-
-#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:322
-msgid "Shower rain and drizzle"
-msgstr "Zápor és szitáló eső"
-
-#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:323
-msgid "Heavy shower rain and drizzle"
-msgstr "Erős zápor és szitáló eső"
-
-#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:324
-msgid "Shower drizzle"
-msgstr "Szitáló záporeső"
-
-#: 3.0/openWeatherMap.js:381 3.0/met_norway.js:392 3.0/met_norway.js:393
-#: 3.0/met_norway.js:399 3.0/met_norway.js:406 3.0/met_norway.js:413
-#: 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610 3.0/met_uk.js:611
-#: 3.0/climacell.js:273 3.0/climacell.js:274 3.8/openWeatherMap.js:325
-#: 3.8/climacellV4.js:206 3.8/met_norway.js:323 3.8/met_norway.js:324
-#: 3.8/met_norway.js:330 3.8/met_norway.js:337 3.8/met_norway.js:344
-#: 3.8/met_uk.js:447 3.8/met_uk.js:454 3.8/met_uk.js:468 3.8/met_uk.js:469
-#: 3.8/climacell.js:178 3.8/climacell.js:179 3.8/visualcrossing.js:232
-msgid "Light rain"
-msgstr "Enyhe eső"
-
-#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:326
-msgid "Moderate rain"
-msgstr "Esőzés"
-
-#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:327
-msgid "Heavy intensity rain"
-msgstr "Erős eső"
-
-#: 3.0/openWeatherMap.js:384 3.8/openWeatherMap.js:328
-msgid "Very heavy rain"
-msgstr "Nagyon erős esőzés"
-
-#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:329
-msgid "Extreme rain"
-msgstr "Hatalmas Esőzés"
-
-#: 3.0/openWeatherMap.js:386 3.0/us_weather.js:505 3.0/us_weather.js:506
-#: 3.0/us_weather.js:512 3.0/us_weather.js:513 3.0/us_weather.js:519
-#: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
-#: 3.0/climacell.js:295 3.8/openWeatherMap.js:330 3.8/climacellV4.js:255
-#: 3.8/us_weather.js:369 3.8/us_weather.js:370 3.8/us_weather.js:376
-#: 3.8/us_weather.js:377 3.8/us_weather.js:383 3.8/climacell.js:186
-#: 3.8/climacell.js:192 3.8/climacell.js:193 3.8/climacell.js:200
-msgid "Freezing rain"
-msgstr "Ónos eső"
-
-#: 3.0/openWeatherMap.js:387 3.8/openWeatherMap.js:331
-msgid "Light intensity shower rain"
-msgstr "Enyhe záporeső"
-
-#: 3.0/openWeatherMap.js:388 3.8/openWeatherMap.js:332
-msgid "Shower rain"
-msgstr "Záporeső"
-
-#: 3.0/openWeatherMap.js:389 3.8/openWeatherMap.js:333
-msgid "Heavy intensity shower rain"
-msgstr "Erős záporeső"
-
-#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:334
-msgid "Ragged shower rain"
-msgstr "Szakadozott záporeső"
-
-#: 3.0/openWeatherMap.js:391 3.0/met_norway.js:448 3.0/met_norway.js:449
-#: 3.0/met_norway.js:455 3.0/met_norway.js:462 3.0/met_norway.js:469
-#: 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694 3.0/met_uk.js:695
-#: 3.0/climacell.js:350 3.0/climacell.js:351 3.8/openWeatherMap.js:335
-#: 3.8/climacellV4.js:234 3.8/met_norway.js:379 3.8/met_norway.js:380
-#: 3.8/met_norway.js:386 3.8/met_norway.js:393 3.8/met_norway.js:400
-#: 3.8/met_uk.js:538 3.8/met_uk.js:545 3.8/met_uk.js:552 3.8/met_uk.js:553
-#: 3.8/visualcrossing.js:250
-msgid "Light snow"
-msgstr "Enyhe havazás"
-
-#: 3.0/openWeatherMap.js:392 3.0/met_norway.js:539 3.0/met_norway.js:540
-#: 3.0/met_norway.js:546 3.0/yahoo.js:452 3.0/us_weather.js:477
-#: 3.0/us_weather.js:478 3.0/climacell.js:343 3.0/climacell.js:344
-#: 3.8/openWeatherMap.js:336 3.8/climacellV4.js:219 3.8/climacellV4.js:220
-#: 3.8/climacellV4.js:233 3.8/climacellV4.js:240 3.8/met_norway.js:470
-#: 3.8/met_norway.js:471 3.8/met_norway.js:477 3.8/yahoo.js:400
-#: 3.8/us_weather.js:341 3.8/us_weather.js:342 3.8/climacell.js:248
-#: 3.8/climacell.js:249 3.8/visualcrossing.js:242
-msgid "Snow"
-msgstr "Havazás"
-
-#: 3.0/openWeatherMap.js:393 3.0/met_norway.js:364 3.0/met_norway.js:365
-#: 3.0/met_norway.js:371 3.0/met_norway.js:378 3.0/met_norway.js:385
-#: 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715 3.0/met_uk.js:716
-#: 3.0/climacell.js:336 3.0/climacell.js:337 3.8/openWeatherMap.js:337
-#: 3.8/climacellV4.js:241 3.8/met_norway.js:295 3.8/met_norway.js:296
-#: 3.8/met_norway.js:302 3.8/met_norway.js:309 3.8/met_norway.js:316
-#: 3.8/met_uk.js:559 3.8/met_uk.js:566 3.8/met_uk.js:573 3.8/met_uk.js:574
-#: 3.8/climacell.js:241 3.8/climacell.js:242 3.8/visualcrossing.js:248
-msgid "Heavy snow"
-msgstr "Erős havazás"
-
-#: 3.0/openWeatherMap.js:394 3.0/met_norway.js:511 3.0/met_norway.js:512
-#: 3.0/met_norway.js:518 3.0/met_norway.js:525 3.0/met_norway.js:532
-#: 3.0/yahoo.js:454 3.0/us_weather.js:491 3.0/us_weather.js:492
-#: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
-#: 3.0/us_weather.js:527 3.0/met_uk.js:638 3.0/met_uk.js:645 3.0/met_uk.js:652
-#: 3.0/met_uk.js:653 3.8/openWeatherMap.js:338 3.8/met_norway.js:442
-#: 3.8/met_norway.js:443 3.8/met_norway.js:449 3.8/met_norway.js:456
-#: 3.8/met_norway.js:463 3.8/yahoo.js:402 3.8/us_weather.js:355
-#: 3.8/us_weather.js:356 3.8/us_weather.js:362 3.8/us_weather.js:363
-#: 3.8/us_weather.js:390 3.8/us_weather.js:391 3.8/met_uk.js:496
-#: 3.8/met_uk.js:503 3.8/met_uk.js:510 3.8/met_uk.js:511
-msgid "Sleet"
-msgstr "Havas eső"
-
-#: 3.0/openWeatherMap.js:395 3.8/openWeatherMap.js:339
-msgid "Shower sleet"
-msgstr "Havas záporeső"
-
-#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:340
-msgid "Light rain and snow"
-msgstr "Enyhe esőzés és havazás"
-
-#: 3.0/openWeatherMap.js:397 3.8/openWeatherMap.js:341
-msgid "Rain and snow"
-msgstr "Esőzés és havazás"
-
-#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:342
-msgid "Light shower snow"
-msgstr "Enyhe hózápor"
-
-#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:343
-msgid "Shower snow"
-msgstr "Elszórt havazás"
-
-#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:344
-msgid "Heavy shower snow"
-msgstr "Erős hózápor"
-
-#: 3.0/openWeatherMap.js:401 3.0/met_uk.js:561 3.0/met_uk.js:562
-#: 3.8/openWeatherMap.js:345 3.8/met_uk.js:419 3.8/met_uk.js:420
-#: 3.8/visualcrossing.js:218
-msgid "Mist"
-msgstr "Köd"
-
-#: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
-#: 3.8/openWeatherMap.js:346 3.8/us_weather.js:449 3.8/us_weather.js:450
-msgid "Smoke"
-msgstr "Füst"
-
-#: 3.0/openWeatherMap.js:403 3.0/yahoo.js:457 3.0/us_weather.js:592
-#: 3.0/us_weather.js:593 3.8/openWeatherMap.js:347 3.8/yahoo.js:405
-#: 3.8/us_weather.js:456 3.8/us_weather.js:457
-msgid "Haze"
-msgstr "Pára"
-
-#: 3.0/openWeatherMap.js:404 3.8/openWeatherMap.js:348
-msgid "Sand, dust whirls"
-msgstr "Homok, porfelhők"
-
-#: 3.0/openWeatherMap.js:405 3.0/met_norway.js:301 3.0/met_norway.js:302
-#: 3.0/us_weather.js:620 3.0/us_weather.js:621 3.0/met_uk.js:568
-#: 3.0/met_uk.js:569 3.0/climacell.js:378 3.0/climacell.js:379
-#: 3.8/openWeatherMap.js:349 3.8/climacellV4.js:156 3.8/climacellV4.js:157
-#: 3.8/climacellV4.js:163 3.8/met_norway.js:232 3.8/met_norway.js:233
-#: 3.8/us_weather.js:484 3.8/us_weather.js:485 3.8/met_uk.js:426
-#: 3.8/met_uk.js:427 3.8/climacell.js:283 3.8/climacell.js:284
-#: 3.8/visualcrossing.js:196
-msgid "Fog"
-msgstr "Köd"
-
-#: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:350
-msgid "Sand"
-msgstr "Homok"
-
-#: 3.0/openWeatherMap.js:407 3.0/yahoo.js:455 3.0/us_weather.js:578
-#: 3.0/us_weather.js:579 3.8/openWeatherMap.js:351 3.8/yahoo.js:403
-#: 3.8/us_weather.js:442 3.8/us_weather.js:443
-msgid "Dust"
-msgstr "Por"
-
-#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:352
-msgid "Volcanic ash"
-msgstr "Vulkáni hamu"
-
-#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:353
-#: 3.8/visualcrossing.js:252
-msgid "Squalls"
-msgstr "Széllökések"
-
-#: 3.0/openWeatherMap.js:410 3.0/yahoo.js:436 3.0/us_weather.js:557
-#: 3.0/us_weather.js:558 3.8/openWeatherMap.js:354 3.8/yahoo.js:384
-#: 3.8/us_weather.js:421 3.8/us_weather.js:422
-msgid "Tornado"
-msgstr "Tornádó"
-
-#: 3.0/openWeatherMap.js:411 3.0/yahoo.js:465 3.0/us_weather.js:407
-#: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/met_uk.js:526
-#: 3.0/met_uk.js:527 3.0/climacell.js:413 3.0/climacell.js:414
-#: 3.8/openWeatherMap.js:355 3.8/climacellV4.js:121 3.8/climacellV4.js:122
-#: 3.8/yahoo.js:413 3.8/us_weather.js:271 3.8/us_weather.js:272
-#: 3.8/us_weather.js:306 3.8/met_uk.js:384 3.8/met_uk.js:385
-#: 3.8/climacell.js:318 3.8/climacell.js:319 3.8/visualcrossing.js:266
-msgid "Clear"
-msgstr "Tiszta"
-
-#: 3.0/openWeatherMap.js:412 3.0/met_norway.js:280 3.0/met_norway.js:281
-#: 3.8/openWeatherMap.js:356 3.8/met_norway.js:211 3.8/met_norway.js:212
-msgid "Clear sky"
-msgstr "Tiszta égbolt"
-
-#: 3.0/openWeatherMap.js:413 3.8/openWeatherMap.js:357
-msgid "Sky is clear"
-msgstr "Tiszta égbolt"
-
-#: 3.0/openWeatherMap.js:414 3.8/openWeatherMap.js:358
-msgid "Clouds"
-msgstr "Felhős"
-
-#: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
-#: 3.0/us_weather.js:449 3.8/openWeatherMap.js:359 3.8/us_weather.js:278
-#: 3.8/us_weather.js:279 3.8/us_weather.js:313
-msgid "Few clouds"
-msgstr "Enyhén felhős"
-
-#: 3.0/openWeatherMap.js:416 3.8/openWeatherMap.js:360
-msgid "Scattered clouds"
-msgstr "Elszórtan felhős"
-
-#: 3.0/openWeatherMap.js:417 3.8/openWeatherMap.js:361
-msgid "Broken clouds"
-msgstr "Szakadozott felhőzet"
-
-#: 3.0/openWeatherMap.js:418 3.8/openWeatherMap.js:362
-msgid "Overcast clouds"
-msgstr "Borult idő"
-
-#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.0/us_weather.js:371
-#: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.8/weatherbit.js:135
-#: 3.8/weatherbit.js:170 3.8/us_weather.js:236 3.8/met_uk.js:202
-#: 3.8/met_uk.js:238
-msgid "Failed to Process Forecast Info"
-msgstr "Nem sikerült feldolgozni az időjárás-előrejelzést"
-
-#: 3.0/weatherbit.js:312
+#: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
+#: 3.8/weather-applet.js:11701
+msgid "Failed to Process Weather Info"
+msgstr "Nem sikerült feldolgozni az időjárás-jelentést"
+
+#: 3.0/climacell.js:224
 msgid ""
 "Please enter API key in settings,\n"
-"or get one first on https://www.weatherbit.io/account/create"
+"or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
 "Adjon meg egy API kulcsot az kisalkamazás beállításaiban,\n"
-"vagy szerezzen egyet a https://www.weatherbit.io/account/create oldalról"
+"vagy szerezzen egyet a https://developer.climacell.co/sign-up oldalról"
 
-#: 3.0/weatherbit.js:331 3.0/darkSky.js:229 3.0/climacell.js:239
-#: 3.8/weatherbit.js:216 3.8/darkSky.js:147 3.8/climacell.js:143
+#: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
+#: 3.8/weather-applet.js:11731 3.8/weather-applet.js:13050
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr "Ellenőrizze hogy az API kulcs helyes és az account nincs blockolva"
 
-#: 3.0/met_norway.js:131 3.8/met_norway.js:64
-msgid "Cloudiness"
-msgstr "Felhőzet"
+#: 3.0/climacell.js:248 3.8/weather-applet.js:14258
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Climacell"
+msgstr ""
+"Ellenőrizze, hogy a Climacell szolgáltatótól származó\n"
+"API kulcsot helyesen adta meg"
 
-#: 3.0/met_norway.js:287 3.0/met_norway.js:288 3.0/yahoo.js:462
-#: 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/climacell.js:385
-#: 3.0/climacell.js:386 3.8/climacellV4.js:128 3.8/climacellV4.js:129
-#: 3.8/met_norway.js:218 3.8/met_norway.js:219 3.8/yahoo.js:410
-#: 3.8/met_uk.js:433 3.8/met_uk.js:434 3.8/climacell.js:290
-#: 3.8/climacell.js:291
-msgid "Cloudy"
-msgstr "Felhős"
-
-#: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
-#: 3.8/met_norway.js:225 3.8/met_norway.js:226 3.8/yahoo.js:416
-msgid "Fair"
-msgstr "Tiszta idő"
-
-#: 3.0/met_norway.js:308 3.0/met_norway.js:309 3.0/met_norway.js:315
-#: 3.0/met_norway.js:322 3.0/met_norway.js:329 3.0/met_uk.js:617
-#: 3.0/met_uk.js:624 3.0/met_uk.js:631 3.0/met_uk.js:632 3.0/climacell.js:259
-#: 3.0/climacell.js:260 3.8/climacellV4.js:213 3.8/met_norway.js:239
-#: 3.8/met_norway.js:240 3.8/met_norway.js:246 3.8/met_norway.js:253
-#: 3.8/met_norway.js:260 3.8/met_uk.js:475 3.8/met_uk.js:482 3.8/met_uk.js:489
-#: 3.8/met_uk.js:490 3.8/climacell.js:164 3.8/climacell.js:165
-#: 3.8/visualcrossing.js:230
+#: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
+#: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
+#: 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
+#: 3.0/met_uk.js:632 3.8/weather-applet.js:10303 3.8/weather-applet.js:10310
+#: 3.8/weather-applet.js:10317 3.8/weather-applet.js:10318
+#: 3.8/weather-applet.js:13494 3.8/weather-applet.js:13495
+#: 3.8/weather-applet.js:13501 3.8/weather-applet.js:13508
+#: 3.8/weather-applet.js:13515 3.8/weather-applet.js:14155
+#: 3.8/weather-applet.js:14433
 msgid "Heavy rain"
 msgstr "Erős eső"
 
-#: 3.0/met_norway.js:316 3.8/met_norway.js:247
-msgid "Heavy rain and thunder"
-msgstr "Erős eső és mennydörgés"
-
-#: 3.0/met_norway.js:323 3.8/met_norway.js:254
-msgid "Heavy rain showers"
-msgstr "Erős zivatarok"
-
-#: 3.0/met_norway.js:330 3.8/met_norway.js:261
-msgid "Heavy rain showers and thunder"
-msgstr "Erős viharos záporeső és mennydörgés"
-
-#: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
-#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/met_norway.js:267
-#: 3.8/met_norway.js:268 3.8/met_norway.js:274 3.8/met_norway.js:281
-#: 3.8/met_norway.js:288
-msgid "Heavy sleet"
-msgstr "Erős havas eső"
-
-#: 3.0/met_norway.js:344 3.8/met_norway.js:275
-msgid "Heavy sleet and thunder"
-msgstr "Erős havas eső és mennydörgés"
-
-#: 3.0/met_norway.js:351 3.8/met_norway.js:282
-msgid "Heavy sleet showers"
-msgstr "Erős havas záporeső"
-
-#: 3.0/met_norway.js:358 3.8/met_norway.js:289
-msgid "Heavy sleet showers and thunder"
-msgstr "Erős havas záporeső és mennydörgés"
-
-#: 3.0/met_norway.js:372 3.8/met_norway.js:303
-msgid "Heavy snow and thunder"
-msgstr "Erős havazás és mennydörgés"
-
-#: 3.0/met_norway.js:379 3.8/met_norway.js:310
-msgid "Heavy snow showers"
-msgstr "Erős hózápor"
-
-#: 3.0/met_norway.js:386 3.8/met_norway.js:317
-msgid "Heavy snow showers and thunder"
-msgstr "Erős zápor és szitáló eső"
-
-#: 3.0/met_norway.js:400 3.8/met_norway.js:331
-msgid "Light rain and thunder"
-msgstr "Enyhe esőzés és mennydörgés"
-
-#: 3.0/met_norway.js:407 3.8/met_norway.js:338
-msgid "Light rain showers"
-msgstr "Enyhe záporeső"
-
-#: 3.0/met_norway.js:414 3.8/met_norway.js:345
-msgid "Light rain showers and thunder"
-msgstr "Enyhe záporeső és mennydörgés"
-
-#: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
-#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/met_norway.js:351
-#: 3.8/met_norway.js:352 3.8/met_norway.js:358 3.8/met_norway.js:365
-#: 3.8/met_norway.js:372
-msgid "Light sleet"
-msgstr "Gyenge havas záporeső"
-
-#: 3.0/met_norway.js:428 3.8/met_norway.js:359
-msgid "Light sleet and thunder"
-msgstr "Gyenge havas eső és mennydörgés"
-
-#: 3.0/met_norway.js:435 3.8/met_norway.js:366
-msgid "Light sleet showers"
-msgstr "Gyenge havas záporeső"
-
-#: 3.0/met_norway.js:442 3.8/met_norway.js:373
-msgid "Light sleet showers and thunder"
-msgstr "Gyenge havas esőzápor és mennydörgés"
-
-#: 3.0/met_norway.js:456 3.8/met_norway.js:387
-msgid "Light snow and thunder"
-msgstr "Könnyű havazás és mennydörgés"
-
-#: 3.0/met_norway.js:463 3.8/met_norway.js:394
-msgid "Light snow showers"
-msgstr "Enyhe hózáporok"
-
-#: 3.0/met_norway.js:470 3.8/met_norway.js:401
-msgid "Light snow showers and thunder"
-msgstr "Könnyű hózáporok és mennydörgés"
-
-#: 3.0/met_norway.js:476 3.0/met_norway.js:477 3.0/us_weather.js:421
-#: 3.0/us_weather.js:422 3.0/us_weather.js:456 3.0/met_uk.js:540
-#: 3.0/met_uk.js:541 3.0/met_uk.js:547 3.0/met_uk.js:548 3.0/climacell.js:399
-#: 3.0/climacell.js:400 3.8/climacellV4.js:142 3.8/climacellV4.js:143
-#: 3.8/met_norway.js:407 3.8/met_norway.js:408 3.8/us_weather.js:285
-#: 3.8/us_weather.js:286 3.8/us_weather.js:320 3.8/met_uk.js:398
-#: 3.8/met_uk.js:399 3.8/met_uk.js:405 3.8/met_uk.js:406 3.8/climacell.js:304
-#: 3.8/climacell.js:305
-msgid "Partly cloudy"
-msgstr "Közepesen felhős"
-
-#: 3.0/met_norway.js:483 3.0/met_norway.js:484 3.0/met_norway.js:490
-#: 3.0/yahoo.js:448 3.0/us_weather.js:484 3.0/us_weather.js:533
-#: 3.0/us_weather.js:534 3.0/us_weather.js:541 3.0/climacell.js:266
-#: 3.0/climacell.js:267 3.8/climacellV4.js:198 3.8/climacellV4.js:199
-#: 3.8/climacellV4.js:205 3.8/climacellV4.js:212 3.8/climacellV4.js:254
-#: 3.8/climacellV4.js:261 3.8/climacellV4.js:268 3.8/met_norway.js:414
-#: 3.8/met_norway.js:415 3.8/met_norway.js:421 3.8/yahoo.js:396
-#: 3.8/us_weather.js:348 3.8/us_weather.js:397 3.8/us_weather.js:398
-#: 3.8/us_weather.js:405 3.8/climacell.js:171 3.8/climacell.js:172
-#: 3.8/visualcrossing.js:222
+#: 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
+#: 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
+#: 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
+#: 3.0/yahoo.js:448 3.8/weather-applet.js:12674 3.8/weather-applet.js:12723
+#: 3.8/weather-applet.js:12724 3.8/weather-applet.js:12731
+#: 3.8/weather-applet.js:13669 3.8/weather-applet.js:13670
+#: 3.8/weather-applet.js:13676 3.8/weather-applet.js:14147
+#: 3.8/weather-applet.js:14418 3.8/weather-applet.js:14419
+#: 3.8/weather-applet.js:14425 3.8/weather-applet.js:14432
+#: 3.8/weather-applet.js:14474 3.8/weather-applet.js:14481
+#: 3.8/weather-applet.js:14488 3.8/weather-applet.js:14735
+#: 3.8/weather-applet.js:14736 3.8/weather-applet.js:14777
 msgid "Rain"
 msgstr "Eső"
 
-#: 3.0/met_norway.js:491 3.8/met_norway.js:422
-msgid "Rain and thunder"
-msgstr "Esőzés és mennydörgés"
+#: 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
+#: 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
+#: 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
+#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10275
+#: 3.8/weather-applet.js:10282 3.8/weather-applet.js:10296
+#: 3.8/weather-applet.js:10297 3.8/weather-applet.js:12243
+#: 3.8/weather-applet.js:13578 3.8/weather-applet.js:13579
+#: 3.8/weather-applet.js:13585 3.8/weather-applet.js:13592
+#: 3.8/weather-applet.js:13599 3.8/weather-applet.js:14157
+#: 3.8/weather-applet.js:14426
+msgid "Light rain"
+msgstr "Enyhe eső"
 
-#: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
-#: 3.0/us_weather.js:542 3.8/met_norway.js:428 3.8/met_norway.js:429
-#: 3.8/met_norway.js:435 3.8/us_weather.js:406 3.8/visualcrossing.js:228
-msgid "Rain showers"
-msgstr "Záporok"
+#: 3.0/climacell.js:280 3.8/weather-applet.js:14131 3.8/weather-applet.js:14489
+msgid "Heavy freezing rain"
+msgstr "Erős ónos eső"
 
-#: 3.0/met_norway.js:505 3.8/met_norway.js:436
-msgid "Rain showers and thunder"
-msgstr "Záporok és mennydörgés"
+#: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
+#: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
+#: 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
+#: 3.0/us_weather.js:519 3.8/weather-applet.js:12248
+#: 3.8/weather-applet.js:12695 3.8/weather-applet.js:12696
+#: 3.8/weather-applet.js:12702 3.8/weather-applet.js:12703
+#: 3.8/weather-applet.js:12709 3.8/weather-applet.js:14475
+msgid "Freezing rain"
+msgstr "Ónos eső"
 
-#: 3.0/met_norway.js:519 3.8/met_norway.js:450
-msgid "Sleet and thunder"
-msgstr "Havas eső és mennydörgés"
+#: 3.0/climacell.js:294 3.8/weather-applet.js:14133 3.8/weather-applet.js:14482
+msgid "Light freezing rain"
+msgstr "Szorványos ónos eső"
 
-#: 3.0/met_norway.js:526 3.8/met_norway.js:457
-msgid "Sleet showers"
-msgstr "Ónos záporeső"
+#: 3.0/climacell.js:301
+msgid "Light freezing drizzle"
+msgstr "Enyhe ónos eső"
 
-#: 3.0/met_norway.js:533 3.8/met_norway.js:464
-msgid "Sleet showers and thunder"
-msgstr "Ónoseső és mennydörgés"
+#: 3.0/climacell.js:302 3.8/weather-applet.js:14468
+msgid "Freezing drizzle"
+msgstr "Jeges szitálás"
 
-#: 3.0/met_norway.js:547 3.8/met_norway.js:478
-msgid "Snow and thunder"
-msgstr "Havazás és mennydörgés"
+#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:14113
+msgid "Light drizzle"
+msgstr "Enyhe szitáló eső"
 
-#: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
-#: 3.8/met_norway.js:484 3.8/met_norway.js:485 3.8/met_norway.js:491
-#: 3.8/visualcrossing.js:246
-msgid "Snow showers"
-msgstr "Hózápor"
+#: 3.0/climacell.js:315 3.8/weather-applet.js:14503
+msgid "Heavy ice pellets"
+msgstr "Erős jég eső"
 
-#: 3.0/met_norway.js:561 3.8/met_norway.js:492
-msgid "Snow showers and thunder"
-msgstr "Viharos havazás és mennydörgés"
+#: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
+#: 3.0/climacell.js:330 3.8/weather-applet.js:14495 3.8/weather-applet.js:14496
+#: 3.8/weather-applet.js:14502 3.8/weather-applet.js:14509
+msgid "Ice pellets"
+msgstr "Jégeső"
 
-#: 3.0/met_norway.js:568 3.0/met_norway.js:569 3.0/us_weather.js:627
-#: 3.0/us_weather.js:628 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
-#: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/climacell.js:421
-#: 3.0/climacell.js:422 3.8/climacellV4.js:113 3.8/climacellV4.js:114
-#: 3.8/met_norway.js:499 3.8/met_norway.js:500 3.8/us_weather.js:491
-#: 3.8/us_weather.js:492 3.8/met_uk.js:377 3.8/met_uk.js:378 3.8/met_uk.js:412
-#: 3.8/met_uk.js:413 3.8/met_uk.js:601 3.8/met_uk.js:602 3.8/climacell.js:326
-#: 3.8/climacell.js:327
+#: 3.0/climacell.js:329 3.8/weather-applet.js:14510
+msgid "Light ice pellets"
+msgstr "Enyhe jégeső"
+
+#: 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
+#: 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
+#: 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
+#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10387
+#: 3.8/weather-applet.js:10394 3.8/weather-applet.js:10401
+#: 3.8/weather-applet.js:10402 3.8/weather-applet.js:12255
+#: 3.8/weather-applet.js:13550 3.8/weather-applet.js:13551
+#: 3.8/weather-applet.js:13557 3.8/weather-applet.js:13564
+#: 3.8/weather-applet.js:13571 3.8/weather-applet.js:14173
+#: 3.8/weather-applet.js:14461 3.8/weather-applet.js:14812
+msgid "Heavy snow"
+msgstr "Erős havazás"
+
+#: 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
+#: 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
+#: 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
+#: 3.8/weather-applet.js:12254 3.8/weather-applet.js:12667
+#: 3.8/weather-applet.js:12668 3.8/weather-applet.js:13725
+#: 3.8/weather-applet.js:13726 3.8/weather-applet.js:13732
+#: 3.8/weather-applet.js:14167 3.8/weather-applet.js:14439
+#: 3.8/weather-applet.js:14440 3.8/weather-applet.js:14453
+#: 3.8/weather-applet.js:14460 3.8/weather-applet.js:14721
+#: 3.8/weather-applet.js:14805
+msgid "Snow"
+msgstr "Havazás"
+
+#: 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
+#: 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
+#: 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
+#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10366
+#: 3.8/weather-applet.js:10373 3.8/weather-applet.js:10380
+#: 3.8/weather-applet.js:10381 3.8/weather-applet.js:12253
+#: 3.8/weather-applet.js:13634 3.8/weather-applet.js:13635
+#: 3.8/weather-applet.js:13641 3.8/weather-applet.js:13648
+#: 3.8/weather-applet.js:13655 3.8/weather-applet.js:14175
+#: 3.8/weather-applet.js:14454
+msgid "Light snow"
+msgstr "Enyhe havazás"
+
+#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:14446
+#: 3.8/weather-applet.js:14447
+msgid "Flurries"
+msgstr "Széllökések"
+
+#: 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
+#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:12228
+#: 3.8/weather-applet.js:12740 3.8/weather-applet.js:12741
+#: 3.8/weather-applet.js:14179 3.8/weather-applet.js:14516
+#: 3.8/weather-applet.js:14517 3.8/weather-applet.js:14819
+#: 3.8/weather-applet.js:14820
+msgid "Thunderstorm"
+msgstr "Vihar"
+
+#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:14384
+msgid "Light fog"
+msgstr "Enyhe köd"
+
+#: 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
+#: 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
+#: 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
+#: 3.8/weather-applet.js:10254 3.8/weather-applet.js:10255
+#: 3.8/weather-applet.js:12267 3.8/weather-applet.js:12810
+#: 3.8/weather-applet.js:12811 3.8/weather-applet.js:13487
+#: 3.8/weather-applet.js:13488 3.8/weather-applet.js:14121
+#: 3.8/weather-applet.js:14376 3.8/weather-applet.js:14377
+#: 3.8/weather-applet.js:14383
+msgid "Fog"
+msgstr "Köd"
+
+#: 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
+#: 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
+#: 3.8/weather-applet.js:10261 3.8/weather-applet.js:10262
+#: 3.8/weather-applet.js:13473 3.8/weather-applet.js:13474
+#: 3.8/weather-applet.js:14348 3.8/weather-applet.js:14349
+#: 3.8/weather-applet.js:14714 3.8/weather-applet.js:14715
+msgid "Cloudy"
+msgstr "Felhős"
+
+#: 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
+#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12618
+#: 3.8/weather-applet.js:12619 3.8/weather-applet.js:12653
+#: 3.8/weather-applet.js:14369 3.8/weather-applet.js:14370
+msgid "Mostly cloudy"
+msgstr "Nagyrészt felhős"
+
+#: 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
+#: 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
+#: 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
+#: 3.0/us_weather.js:456 3.8/weather-applet.js:10226
+#: 3.8/weather-applet.js:10227 3.8/weather-applet.js:10233
+#: 3.8/weather-applet.js:10234 3.8/weather-applet.js:12611
+#: 3.8/weather-applet.js:12612 3.8/weather-applet.js:12646
+#: 3.8/weather-applet.js:13662 3.8/weather-applet.js:13663
+#: 3.8/weather-applet.js:14362 3.8/weather-applet.js:14363
+#: 3.8/weather-applet.js:14707 3.8/weather-applet.js:14708
+msgid "Partly cloudy"
+msgstr "Közepesen felhős"
+
+#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:14355
+#: 3.8/weather-applet.js:14356
+msgid "Mostly clear"
+msgstr "Nagyrészt tiszta"
+
+#: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
+#: 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
+#: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
+#: 3.8/weather-applet.js:10212 3.8/weather-applet.js:10213
+#: 3.8/weather-applet.js:12273 3.8/weather-applet.js:12597
+#: 3.8/weather-applet.js:12598 3.8/weather-applet.js:12632
+#: 3.8/weather-applet.js:14191 3.8/weather-applet.js:14341
+#: 3.8/weather-applet.js:14342 3.8/weather-applet.js:14700
+#: 3.8/weather-applet.js:14701
+msgid "Clear"
+msgstr "Tiszta"
+
+#: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
+#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10219
+#: 3.8/weather-applet.js:10220 3.8/weather-applet.js:14341
+#: 3.8/weather-applet.js:14342
+msgid "Sunny"
+msgstr "Napos"
+
+#: 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
+#: 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
+#: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
+#: 3.0/us_weather.js:628 3.8/weather-applet.js:10205
+#: 3.8/weather-applet.js:10206 3.8/weather-applet.js:10240
+#: 3.8/weather-applet.js:10241 3.8/weather-applet.js:10429
+#: 3.8/weather-applet.js:10430 3.8/weather-applet.js:12588
+#: 3.8/weather-applet.js:12589 3.8/weather-applet.js:12817
+#: 3.8/weather-applet.js:12818 3.8/weather-applet.js:13456
+#: 3.8/weather-applet.js:13457 3.8/weather-applet.js:13754
+#: 3.8/weather-applet.js:13755 3.8/weather-applet.js:14333
+#: 3.8/weather-applet.js:14334
 msgid "Unknown"
 msgstr "Ismeretlen hiba"
 
-#: 3.0/ipApi.js:89 3.8/ipApi.js:38
-msgid "Could not obtain location"
-msgstr "Helyzetmeghatározás sikertelen"
-
-#: 3.0/ipApi.js:95 3.8/ipApi.js:44
-msgid ""
-"Location Service responded with errors, please see the logs in Looking Glass"
-msgstr ""
-"Földrajzi helymeghatározás nem sikerült, a naplóbejegyzések megtekinthetők a "
-"Looking Glass naplóban"
-
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:11596
 msgid "and"
 msgstr "és"
 
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:11596
 msgid "until"
 msgstr "amíg"
 
-#: 3.0/darkSky.js:71 3.0/applet.js:1133 3.8/darkSky.js:23
-#: 3.8/uiHourlyForecasts.js:178
-msgid "in"
-msgstr "itt:"
-
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:11596
 msgid "Possible"
 msgstr "Lehetséges"
-
-#: 3.0/darkSky.js:189 3.0/yahoo.js:166 3.0/climacell.js:174 3.8/darkSky.js:119
-#: 3.8/yahoo.js:98 3.8/climacell.js:91
-msgid "Failed to Process Weather Info"
-msgstr "Nem sikerült feldolgozni az időjárás-jelentést"
 
 #: 3.0/darkSky.js:211
 msgid ""
@@ -617,274 +533,209 @@ msgstr ""
 "API-kulcs megadása szükséges a beállításokban,\n"
 "vagy szerezzen egyet a https://darksky.net/dev/register oldalról"
 
-#: 3.0/darkSky.js:238 3.8/darkSky.js:157
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:11741
 msgid ""
 "Please Make sure you\n"
-"entered the API key what you have from DarkSky"
+"entered the API key that you have from DarkSky"
 msgstr ""
 "Ellenőrizze, hogy a DarkSky szolgáltatótól származó\n"
 "API kulcsot helyesen adta meg"
 
-#: 3.0/yahoo.js:78 3.8/yahoo.js:27
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:9062
+msgid "Could not obtain location"
+msgstr "Helyzetmeghatározás sikertelen"
+
+#: 3.0/ipApi.js:95 3.8/weather-applet.js:9068
 msgid ""
-"Unknown Error happened while calling Yahoo bridge,\n"
-" see Looking Glass log for errors"
+"Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
-"Ismeretlen hiba történt az időjárás lekérése közben,\n"
-"a hibaüzenet megtekinthető a Looking Glass naplóban"
+"Földrajzi helymeghatározás nem sikerült, a naplóbejegyzések megtekinthetők a "
+"Looking Glass naplóban"
 
-#: 3.0/yahoo.js:91 3.8/yahoo.js:25
-msgid ""
-"Yahoo bridge responded in bad format,\n"
-" see Looking Glass log for errors"
-msgstr ""
-"A Yahoo adatkapcsolat hibás formátumú választ adott.\n"
-"A hibaüzenetek megtekinthetők a Looking Glass naplóban"
+#: 3.0/met_norway.js:131 3.8/weather-applet.js:13310
+msgid "Cloudiness"
+msgstr "Felhőzet"
 
-#: 3.0/yahoo.js:177 3.8/yahoo.js:109
-msgid "Missing package"
-msgstr "Hiányzó csomag"
+#: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
+#: 3.8/weather-applet.js:12274 3.8/weather-applet.js:13466
+#: 3.8/weather-applet.js:13467
+msgid "Clear sky"
+msgstr "Tiszta égbolt"
 
-#: 3.0/yahoo.js:177 3.0/yahoo.js:179
-msgid "Please install '"
-msgstr "Kérem telepítse a '"
+#: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#: 3.8/weather-applet.js:13480 3.8/weather-applet.js:13481
+msgid "Fair"
+msgstr "Tiszta idő"
 
-#: 3.0/yahoo.js:177 3.0/yahoo.js:179
-msgid "', then refresh manually."
-msgstr "' nevű csomagot és frissítsen."
+#: 3.0/met_norway.js:316 3.8/weather-applet.js:13502
+msgid "Heavy rain and thunder"
+msgstr "Erős eső és mennydörgés"
 
-#: 3.0/yahoo.js:182 3.8/yahoo.js:124
-msgid "Could not connect to Yahoo API."
-msgstr "Nem sikerült kapcsolódni a Yahoo API webhelyhez."
+#: 3.0/met_norway.js:323 3.8/weather-applet.js:13509
+msgid "Heavy rain showers"
+msgstr "Erős zivatarok"
 
-#: 3.0/yahoo.js:186 3.8/yahoo.js:133
-msgid ""
-"Unknown error happened while obtaining weather, see Looking Glass logs for "
-"more information"
-msgstr ""
-"Ismeretlen hiba lépett fel a az időjárás-előrejelzési adatok letöltése "
-"közben. További információkért tekintse meg a naplóbejegyzéseket a Looking "
-"Glass naplóban."
+#: 3.0/met_norway.js:330 3.8/weather-applet.js:13516
+msgid "Heavy rain showers and thunder"
+msgstr "Erős viharos záporeső és mennydörgés"
 
-#: 3.0/yahoo.js:437 3.8/yahoo.js:385
-msgid "Tropical Storm"
-msgstr "Trópusi vihar"
+#: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
+#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:13522
+#: 3.8/weather-applet.js:13523 3.8/weather-applet.js:13529
+#: 3.8/weather-applet.js:13536 3.8/weather-applet.js:13543
+msgid "Heavy sleet"
+msgstr "Erős havas eső"
 
-#: 3.0/yahoo.js:438 3.0/us_weather.js:564 3.0/us_weather.js:565
-#: 3.0/utils.js:336 3.8/yahoo.js:386 3.8/us_weather.js:428
-#: 3.8/us_weather.js:429 3.8/utils.js:192
-msgid "Hurricane"
-msgstr "Orkán"
+#: 3.0/met_norway.js:344 3.8/weather-applet.js:13530
+msgid "Heavy sleet and thunder"
+msgstr "Erős havas eső és mennydörgés"
 
-#: 3.0/yahoo.js:439 3.8/yahoo.js:387
-msgid "Severe Thunderstorms"
-msgstr "Veszélyes viharok"
+#: 3.0/met_norway.js:351 3.8/weather-applet.js:13537
+msgid "Heavy sleet showers"
+msgstr "Erős havas záporeső"
 
-#: 3.0/yahoo.js:440 3.8/yahoo.js:388
-msgid "Thunderstorms"
-msgstr "Viharok"
+#: 3.0/met_norway.js:358 3.8/weather-applet.js:13544
+msgid "Heavy sleet showers and thunder"
+msgstr "Erős havas záporeső és mennydörgés"
 
-#: 3.0/yahoo.js:441 3.8/yahoo.js:389
-msgid "Mixed Rain and Snow"
-msgstr "Esőzés és havazás"
+#: 3.0/met_norway.js:372 3.8/weather-applet.js:13558
+msgid "Heavy snow and thunder"
+msgstr "Erős havazás és mennydörgés"
 
-#: 3.0/yahoo.js:442 3.8/yahoo.js:390
-msgid "Mixed Rain and Sleet"
-msgstr "Eső és ónos eső vegyesen"
+#: 3.0/met_norway.js:379 3.8/weather-applet.js:13565
+#: 3.8/weather-applet.js:14813
+msgid "Heavy snow showers"
+msgstr "Erős hózápor"
 
-#: 3.0/yahoo.js:443 3.8/yahoo.js:391
-msgid "Mixed Snow and Sleet"
-msgstr "Hó és ónos eső vegyesen"
+#: 3.0/met_norway.js:386 3.8/weather-applet.js:13572
+msgid "Heavy snow showers and thunder"
+msgstr "Erős zápor és szitáló eső"
 
-#: 3.0/yahoo.js:444 3.8/yahoo.js:392
-msgid "Freezing Drizzle"
-msgstr "Jeges szitálás"
+#: 3.0/met_norway.js:400 3.8/weather-applet.js:13586
+msgid "Light rain and thunder"
+msgstr "Enyhe esőzés és mennydörgés"
 
-#: 3.0/yahoo.js:446 3.8/yahoo.js:394
-msgid "Freezing Rain"
-msgstr "Ónos eső"
+#: 3.0/met_norway.js:407 3.8/weather-applet.js:13593
+msgid "Light rain showers"
+msgstr "Enyhe záporeső"
 
-#: 3.0/yahoo.js:447 3.8/yahoo.js:395
-msgid "Showers"
+#: 3.0/met_norway.js:414 3.8/weather-applet.js:13600
+msgid "Light rain showers and thunder"
+msgstr "Enyhe záporeső és mennydörgés"
+
+#: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:13606
+#: 3.8/weather-applet.js:13607 3.8/weather-applet.js:13613
+#: 3.8/weather-applet.js:13620 3.8/weather-applet.js:13627
+msgid "Light sleet"
+msgstr "Gyenge havas záporeső"
+
+#: 3.0/met_norway.js:428 3.8/weather-applet.js:13614
+msgid "Light sleet and thunder"
+msgstr "Gyenge havas eső és mennydörgés"
+
+#: 3.0/met_norway.js:435 3.8/weather-applet.js:13621
+msgid "Light sleet showers"
+msgstr "Gyenge havas záporeső"
+
+#: 3.0/met_norway.js:442 3.8/weather-applet.js:13628
+msgid "Light sleet showers and thunder"
+msgstr "Gyenge havas esőzápor és mennydörgés"
+
+#: 3.0/met_norway.js:456 3.8/weather-applet.js:13642
+msgid "Light snow and thunder"
+msgstr "Könnyű havazás és mennydörgés"
+
+#: 3.0/met_norway.js:463 3.8/weather-applet.js:13649
+msgid "Light snow showers"
+msgstr "Enyhe hózáporok"
+
+#: 3.0/met_norway.js:470 3.8/weather-applet.js:13656
+msgid "Light snow showers and thunder"
+msgstr "Könnyű hózáporok és mennydörgés"
+
+#: 3.0/met_norway.js:491 3.8/weather-applet.js:13677
+msgid "Rain and thunder"
+msgstr "Esőzés és mennydörgés"
+
+#: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
+#: 3.0/us_weather.js:542 3.8/weather-applet.js:12732
+#: 3.8/weather-applet.js:13683 3.8/weather-applet.js:13684
+#: 3.8/weather-applet.js:13690 3.8/weather-applet.js:14153
+#: 3.8/weather-applet.js:14778 3.8/weather-applet.js:14784
+msgid "Rain showers"
 msgstr "Záporok"
 
-#: 3.0/yahoo.js:449 3.8/yahoo.js:397
-msgid "Snow Flurries"
-msgstr "Hófúvás"
+#: 3.0/met_norway.js:505 3.8/weather-applet.js:13691
+msgid "Rain showers and thunder"
+msgstr "Záporok és mennydörgés"
 
-#: 3.0/yahoo.js:450 3.8/yahoo.js:398
-msgid "Light Snow Showers"
-msgstr "Enyhe hózápor"
+#: 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
+#: 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
+#: 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
+#: 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
+#: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
+#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10324
+#: 3.8/weather-applet.js:10331 3.8/weather-applet.js:10338
+#: 3.8/weather-applet.js:10339 3.8/weather-applet.js:12256
+#: 3.8/weather-applet.js:12681 3.8/weather-applet.js:12682
+#: 3.8/weather-applet.js:12688 3.8/weather-applet.js:12689
+#: 3.8/weather-applet.js:12716 3.8/weather-applet.js:12717
+#: 3.8/weather-applet.js:13697 3.8/weather-applet.js:13698
+#: 3.8/weather-applet.js:13704 3.8/weather-applet.js:13711
+#: 3.8/weather-applet.js:13718
+msgid "Sleet"
+msgstr "Havas eső"
 
-#: 3.0/yahoo.js:451 3.8/yahoo.js:399
-msgid "Blowing Snow"
-msgstr "Hófúvás"
+#: 3.0/met_norway.js:519 3.8/weather-applet.js:13705
+msgid "Sleet and thunder"
+msgstr "Havas eső és mennydörgés"
 
-#: 3.0/yahoo.js:453 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673
-#: 3.0/met_uk.js:674 3.8/yahoo.js:401 3.8/met_uk.js:517 3.8/met_uk.js:524
-#: 3.8/met_uk.js:531 3.8/met_uk.js:532 3.8/visualcrossing.js:260
-msgid "Hail"
-msgstr "Jégeső"
+#: 3.0/met_norway.js:526 3.8/weather-applet.js:13712
+msgid "Sleet showers"
+msgstr "Ónos záporeső"
 
-#: 3.0/yahoo.js:456 3.8/yahoo.js:404
-msgid "Foggy"
-msgstr "Ködös"
+#: 3.0/met_norway.js:533 3.8/weather-applet.js:13719
+msgid "Sleet showers and thunder"
+msgstr "Ónoseső és mennydörgés"
 
-#: 3.0/yahoo.js:458 3.8/yahoo.js:406
-msgid "Smoky"
-msgstr "Füstös"
+#: 3.0/met_norway.js:547 3.8/weather-applet.js:13733
+msgid "Snow and thunder"
+msgstr "Havazás és mennydörgés"
 
-#: 3.0/yahoo.js:459 3.8/yahoo.js:407
-msgid "Blustery"
-msgstr "Heves"
+#: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
+#: 3.8/weather-applet.js:13739 3.8/weather-applet.js:13740
+#: 3.8/weather-applet.js:13746 3.8/weather-applet.js:14171
+#: 3.8/weather-applet.js:14806
+msgid "Snow showers"
+msgstr "Hózápor"
 
-#: 3.0/yahoo.js:460 3.8/yahoo.js:408
-msgid "Windy"
-msgstr "Szeles"
+#: 3.0/met_norway.js:561 3.8/weather-applet.js:13747
+msgid "Snow showers and thunder"
+msgstr "Viharos havazás és mennydörgés"
 
-#: 3.0/yahoo.js:461 3.0/us_weather.js:606 3.0/us_weather.js:607
-#: 3.8/yahoo.js:409 3.8/us_weather.js:470 3.8/us_weather.js:471
-msgid "Cold"
-msgstr "Hideg"
-
-#: 3.0/yahoo.js:463 3.8/yahoo.js:411
-msgid "Mostly Cloudy"
-msgstr "Erősen felhős"
-
-#: 3.0/yahoo.js:464 3.8/yahoo.js:412
-msgid "Partly Cloudy"
-msgstr "Közepesen felhős"
-
-#: 3.0/yahoo.js:466 3.0/met_uk.js:533 3.0/met_uk.js:534 3.0/climacell.js:413
-#: 3.0/climacell.js:414 3.8/climacellV4.js:121 3.8/climacellV4.js:122
-#: 3.8/yahoo.js:414 3.8/met_uk.js:391 3.8/met_uk.js:392 3.8/climacell.js:318
-#: 3.8/climacell.js:319
-msgid "Sunny"
-msgstr "Napos"
-
-#: 3.0/yahoo.js:467 3.8/yahoo.js:415
-msgid "Mostly Sunny"
-msgstr "Nagyrészt napos"
-
-#: 3.0/yahoo.js:469 3.8/yahoo.js:417
-msgid "Mixed Rain and Hail"
-msgstr "Eső és jégeső"
-
-#: 3.0/yahoo.js:470 3.0/us_weather.js:599 3.0/us_weather.js:600
-#: 3.8/yahoo.js:418 3.8/us_weather.js:463 3.8/us_weather.js:464
-msgid "Hot"
-msgstr "Forró"
-
-#: 3.0/yahoo.js:471 3.8/yahoo.js:419
-msgid "Isolated Thunderstorms"
-msgstr "Helyi viharok"
-
-#: 3.0/yahoo.js:472 3.8/yahoo.js:420
-msgid "Scattered Thunderstorms"
-msgstr "Hirtelen viharokkal"
-
-#: 3.0/yahoo.js:473 3.8/yahoo.js:421
-msgid "Scattered Showers"
-msgstr "Elszórt záporok"
-
-#: 3.0/yahoo.js:474 3.8/yahoo.js:422
-msgid "Heavy Rain"
-msgstr "Erős eső"
-
-#: 3.0/yahoo.js:475 3.8/yahoo.js:423
-msgid "Scattered Snow Showers"
-msgstr "Elszórt hózáporok"
-
-#: 3.0/yahoo.js:476 3.8/yahoo.js:424
-msgid "Heavy Snow"
-msgstr "Erős havazás"
-
-#: 3.0/yahoo.js:477 3.0/us_weather.js:613 3.0/us_weather.js:614
-#: 3.8/yahoo.js:425 3.8/us_weather.js:477 3.8/us_weather.js:478
-msgid "Blizzard"
-msgstr "Hóvihar"
-
-#: 3.0/yahoo.js:478 3.8/yahoo.js:426
-msgid "Not Available"
-msgstr "Nem érhető el"
-
-#: 3.0/yahoo.js:479 3.8/yahoo.js:427
-msgid "Scattered Thundershowers"
-msgstr "Elszórt zivatarok"
-
-#: 3.0/us_weather.js:120
-msgid "Could not get forecast for your area"
-msgstr "Nem szerezhető be időjárás-előrejelzés a megadott földrajzi helyzethez"
-
-#: 3.0/us_weather.js:151 3.0/us_weather.js:179 3.0/met_uk.js:162
-#: 3.0/met_uk.js:192 3.0/met_uk.js:239
+#: 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
+#: 3.0/us_weather.js:179
 msgid "Unexpected response from API"
 msgstr "Váratlan válasz az API részéről"
 
-#: 3.0/us_weather.js:231 3.8/us_weather.js:95
-msgid "Location is outside US, please use a different provider."
-msgstr ""
-"Az Egyesült Államokon kívüli földrajzi helyzet esetén válasszon másik "
-"időjárás-előrejelzés szolgáltatót."
-
-#: 3.0/us_weather.js:394 3.8/us_weather.js:259
-msgid "Failed to Process Hourly Forecast Info"
-msgstr "Nem sikerült feldolgozni az óránkénti időjárás-előrejelzést"
-
-#: 3.0/us_weather.js:428 3.0/us_weather.js:429 3.0/us_weather.js:463
-#: 3.0/climacell.js:392 3.0/climacell.js:393 3.8/climacellV4.js:149
-#: 3.8/climacellV4.js:150 3.8/us_weather.js:292 3.8/us_weather.js:293
-#: 3.8/us_weather.js:327 3.8/climacell.js:297 3.8/climacell.js:298
-msgid "Mostly cloudy"
-msgstr "Nagyrészt felhős"
-
-#: 3.0/us_weather.js:435 3.0/us_weather.js:436 3.0/us_weather.js:470
-#: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.8/us_weather.js:299
-#: 3.8/us_weather.js:300 3.8/us_weather.js:334 3.8/met_uk.js:440
-#: 3.8/met_uk.js:441 3.8/visualcrossing.js:262
-msgid "Overcast"
-msgstr "Borús"
-
-#: 3.0/us_weather.js:443 3.8/us_weather.js:307
-msgid "Clear and windy"
-msgstr "Tiszta és szeles"
-
-#: 3.0/us_weather.js:450 3.8/us_weather.js:314
-msgid "Few clouds and windy"
-msgstr "Enyhén felhős és szeles"
-
-#: 3.0/us_weather.js:457 3.8/us_weather.js:321
-msgid "Partly cloudy and windy"
-msgstr "Közepesen felhős és szeles"
-
-#: 3.0/us_weather.js:464 3.8/us_weather.js:328
-msgid "Mostly cloudy and windy"
-msgstr "Nagyrészt felhős és szeles"
-
-#: 3.0/us_weather.js:471 3.8/us_weather.js:335
-msgid "Overcast and windy"
-msgstr "Borult és szeles idő"
-
-#: 3.0/us_weather.js:485 3.8/us_weather.js:349
-msgid "Snowy rain"
-msgstr "Havaseső"
-
-#: 3.0/us_weather.js:520 3.8/us_weather.js:384
-msgid "Freezing rain and snow"
-msgstr "Ónos eső és havazás"
-
-#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/us_weather.js:435
-#: 3.8/utils.js:187
-msgid "Storm"
-msgstr "Szélvész"
-
-#: 3.0/us_weather.js:572 3.8/us_weather.js:436
-msgid "Tropical storm"
-msgstr "Trópusi vihar"
-
-#: 3.0/met_uk.js:316 3.8/met_uk.js:154
+#: 3.0/met_uk.js:316 3.8/weather-applet.js:10033
 msgid "Visibility"
 msgstr "Láthatóság"
+
+#: 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
+#: 3.0/weatherbit.js:212 3.8/weather-applet.js:10057
+#: 3.8/weather-applet.js:12053 3.8/weather-applet.js:12543
+#: 3.8/weather-applet.js:12894
+msgid "Failed to Process Current Weather Info"
+msgstr "Nem sikerült feldolgozni a jelenlegi időjárás-jelentést"
+
+#: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
+#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9853
+#: 3.8/weather-applet.js:9888 3.8/weather-applet.js:12351
+#: 3.8/weather-applet.js:12920 3.8/weather-applet.js:12954
+msgid "Failed to Process Forecast Info"
+msgstr "Nem sikerült feldolgozni az időjárás-előrejelzést"
 
 #: 3.0/met_uk.js:408
 msgid "Very poor - Less than"
@@ -910,341 +761,377 @@ msgstr "Nagyon jó - Között"
 msgid "Excellent - More than"
 msgstr "Kiváló - Több mint"
 
-#: 3.0/met_uk.js:421 3.0/applet.js:1206 3.8/uiBar.js:94 3.8/met_uk.js:279
-msgid "mi"
-msgstr "mi"
+#: 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
+#: 3.8/weather-applet.js:10247 3.8/weather-applet.js:10248
+#: 3.8/weather-applet.js:12263 3.8/weather-applet.js:14143
+msgid "Mist"
+msgstr "Köd"
 
-#: 3.0/met_uk.js:422 3.0/applet.js:1207 3.8/uiBar.js:95 3.8/met_uk.js:280
-msgid "km"
-msgstr "km"
+#: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
+#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10268
+#: 3.8/weather-applet.js:10269 3.8/weather-applet.js:12625
+#: 3.8/weather-applet.js:12626 3.8/weather-applet.js:12660
+#: 3.8/weather-applet.js:14187
+msgid "Overcast"
+msgstr "Borús"
 
-#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/met_uk.js:448 3.8/met_uk.js:455
+#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10276
+#: 3.8/weather-applet.js:10283
 msgid "Light rain shower"
 msgstr "Enyhe záporeső"
 
-#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/met_uk.js:476 3.8/met_uk.js:483
+#: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
+#: 3.0/yahoo.js:445 3.8/weather-applet.js:10289 3.8/weather-applet.js:10290
+#: 3.8/weather-applet.js:12235 3.8/weather-applet.js:14109
+#: 3.8/weather-applet.js:14411 3.8/weather-applet.js:14412
+#: 3.8/weather-applet.js:14467
+msgid "Drizzle"
+msgstr "Szitáló eső"
+
+#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10304
+#: 3.8/weather-applet.js:10311
 msgid "Heavy rain shower"
 msgstr "Erős zápor"
 
-#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/met_uk.js:497 3.8/met_uk.js:504
+#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10325
+#: 3.8/weather-applet.js:10332
 msgid "Sleet shower"
 msgstr "Ónos záporeső"
 
-#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/met_uk.js:518 3.8/met_uk.js:525
+#: 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
+#: 3.0/yahoo.js:453 3.8/weather-applet.js:10345 3.8/weather-applet.js:10352
+#: 3.8/weather-applet.js:10359 3.8/weather-applet.js:10360
+#: 3.8/weather-applet.js:14185
+msgid "Hail"
+msgstr "Jégeső"
+
+#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10346
+#: 3.8/weather-applet.js:10353
 msgid "Hail shower"
 msgstr "Jégzápor"
 
-#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/met_uk.js:539 3.8/met_uk.js:546
+#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10367
+#: 3.8/weather-applet.js:10374
 msgid "Light snow shower"
 msgstr "Enyhe elszórt hózápor"
 
-#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/met_uk.js:560 3.8/met_uk.js:567
+#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10388
+#: 3.8/weather-applet.js:10395
 msgid "Heavy snow shower"
 msgstr "Erős hózápor"
 
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
-#: 3.8/met_uk.js:580 3.8/met_uk.js:587 3.8/met_uk.js:594 3.8/met_uk.js:595
+#: 3.8/weather-applet.js:10408 3.8/weather-applet.js:10415
+#: 3.8/weather-applet.js:10422 3.8/weather-applet.js:10423
 msgid "Thunder"
 msgstr "Mennydörgés"
 
-#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/met_uk.js:581 3.8/met_uk.js:588
+#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10409
+#: 3.8/weather-applet.js:10416
 msgid "Thunder shower"
 msgstr "Viharzápor"
 
-#: 3.0/applet.js:167 3.0/applet.js:427 3.0/applet.js:2132 3.8/main.js:31
-msgid "Error"
-msgstr "Hiba"
+#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:12106
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr ""
+"Kérem ellenőrizze hogy a földrajzi helyzet megfelelő formátumban van megadva"
 
-#: 3.0/applet.js:168 3.0/applet.js:170 3.0/applet.js:172 3.0/applet.js:175
-#: 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180 3.0/applet.js:181
-#: 3.8/main.js:32 3.8/main.js:34 3.8/main.js:36 3.8/main.js:39 3.8/main.js:42
-#: 3.8/main.js:43 3.8/main.js:44 3.8/main.js:45
-msgid "Service Error"
-msgstr "Szolgáltató hiba"
+#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:12110
+msgid "Make sure you entered the correct key in settings"
+msgstr "Ellenőrizze hogy az API kulcs korrekt a beállításokban"
 
-#: 3.0/applet.js:169 3.8/main.js:33
-msgid "Incorrect API Key"
-msgstr "Rossz API-kulcs"
-
-#: 3.0/applet.js:171 3.8/main.js:35
-msgid "Incorrect Location Format"
-msgstr "Hibás földrajzi helyzetformátum"
-
-#: 3.0/applet.js:173 3.8/main.js:37
-msgid "Key Blocked"
-msgstr "Kulcs ideiglenesen letilva"
-
-#: 3.0/applet.js:174 3.8/main.js:38
-msgid "Can't find location"
-msgstr "Földrajzi helyzet nem található"
-
-#: 3.0/applet.js:176 3.8/main.js:40
-msgid "No Api Key"
-msgstr "Nincs API-kulcs megadva"
-
-#: 3.0/applet.js:177 3.8/main.js:41
-msgid "No Location"
-msgstr "A földrajzi helyzet nincs megadva"
-
-#: 3.0/applet.js:182 3.8/main.js:46
-msgid "Missing Packages"
-msgstr "Hiányzó csomag"
-
-#: 3.0/applet.js:183 3.8/main.js:47
-msgid "Location not covered"
-msgstr "A földrajzi helyzetről nincs információ"
-
-#: 3.0/applet.js:194 3.0/applet.js:379 3.8/notification_service.js:9
-msgid "Weather Applet"
-msgstr "Időjárás kisalkalmazás"
-
-#: 3.0/applet.js:218 3.8/main.js:244
-msgid "..."
-msgstr "…"
-
-#: 3.0/applet.js:219 3.8/main.js:245
-msgid "Click to open"
-msgstr "Megnyitás"
-
-#: 3.0/applet.js:233 3.0/applet.js:1245 3.8/main.js:256
-#: 3.8/uiCurrentWeather.js:127
-msgid "Refresh"
-msgstr "Frissítés"
-
-#: 3.0/applet.js:273
-msgid "API returned status code between 400 and 500"
-msgstr "Az API 400 és 500 közötti állapotkóddal hibát jelzett"
-
-#: 3.0/applet.js:427 3.0/applet.js:2033 3.0/applet.js:2037 3.0/applet.js:2041
-#: 3.0/applet.js:2050 3.0/applet.js:2063 3.0/applet.js:2067 3.0/applet.js:2071
-#: 3.0/applet.js:2084 3.0/applet.js:2132 3.8/locationstore.js:130
-#: 3.8/locationstore.js:134 3.8/locationstore.js:138
-msgid "Location Store"
-msgstr "Földrajzi helyzet tároló"
-
-#: 3.0/applet.js:427
-msgid "You can't save a location obtained automatically, sorry"
-msgstr "Az automatikusan megállapított földrajzi helyzet nem menthető el"
-
-#: 3.0/applet.js:602
-msgid "Could not get weather information"
-msgstr "Az időjárás információk nem kérhetők le"
-
-#: 3.0/applet.js:625 3.8/main.js:128
+#: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
+#: 3.8/weather-applet.js:11922 3.8/weather-applet.js:12114
 msgid ""
-"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+"Location not found, make sure location is available or it is in the correct "
+"format"
 msgstr ""
-"Ismeretlen hiba lépett fel frissítés közben, a hibaüzenet megtekinthető a "
-"Looking Glass naplóban"
+"Földrajzi helyzet nem található, ellenőrizze hogy a földrajzi helyzet "
+"elérhető és megfelelő formátumban van megadva"
 
-#: 3.0/applet.js:671 3.8/main.js:376
-msgid ""
-"Could not update weather for a while...\n"
-"are you connected to the internet?"
+#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:12118
+msgid "If this problem persists, please contact the Author of this applet"
 msgstr ""
-"Előrejelzés frissítése nem sikerült...\n"
-"csatlakoztatva van az internet?"
+"Ha a hiba továbbra is fennáll, vegye fel a kapcsolatot az applet "
+"fejlesztőjével"
 
-#: 3.0/applet.js:685
-msgid "Network Error, please check logs in Looking Glass"
-msgstr ""
-"Hálózati hiba lépett fel a frissítés közben, a hibaüzenet megtekinthető a "
-"Looking Glass naplóban"
+#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:12122
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Ismeretlen hiba, a hibaüzenet megtekinthető a Looking Glass naplóban"
 
-#: 3.0/applet.js:970 3.0/applet.js:1111
-msgid "As of"
-msgstr "Frissítve:"
+#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:12224
+msgid "Thunderstorm with light rain"
+msgstr "Vihar enyhe esővel"
 
-#: 3.0/applet.js:1109 3.8/uiBar.js:33
-msgid "Powered by"
-msgstr "Időjárási-adatszolgáltató:"
+#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:12225
+msgid "Thunderstorm with rain"
+msgstr "Vihar"
 
-#: 3.0/applet.js:1114
-msgid "from you"
-msgstr "Öntől"
+#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:12226
+msgid "Thunderstorm with heavy rain"
+msgstr "Vihar erős esőzéssel"
 
-#: 3.0/applet.js:1133 3.8/uiHourlyForecasts.js:178
-msgid "mm"
-msgstr "mm"
+#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:12227
+msgid "Light thunderstorm"
+msgstr "Enyhe vihar"
 
-#: 3.0/applet.js:1228 3.8/ui.js:126
-msgid "Loading current weather ..."
-msgstr "Időjárás betöltése…"
+#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:12229
+msgid "Heavy thunderstorm"
+msgstr "Erős vihar"
 
-#: 3.0/applet.js:1231 3.8/ui.js:129
-msgid "Loading future weather ..."
-msgstr "Időjárás-előrejelzés betöltése…"
+#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:12230
+msgid "Ragged thunderstorm"
+msgstr "Viharok"
 
-#: 3.0/applet.js:1281 3.8/uiCurrentWeather.js:76
-msgid "Loading ..."
-msgstr "Betöltés…"
+#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:12231
+msgid "Thunderstorm with light drizzle"
+msgstr "Vihar enyhén szitáló esővel"
 
-#: 3.0/applet.js:1330 3.8/uiCurrentWeather.js:95
-msgid "Temperature"
-msgstr "Hőmérséklet"
+#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:12232
+msgid "Thunderstorm with drizzle"
+msgstr "Vihar szitáló esővel"
 
-#: 3.0/applet.js:1331 3.8/uiCurrentWeather.js:96
-msgid "Humidity"
-msgstr "Páratartalom"
+#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:12233
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Vihar erősen szitáló esővel"
 
-#: 3.0/applet.js:1332 3.8/uiCurrentWeather.js:97
-msgid "Pressure"
-msgstr "Légnyomás"
-
-#: 3.0/applet.js:1333 3.8/climacellV4.js:170 3.8/climacellV4.js:177
-#: 3.8/climacellV4.js:178 3.8/climacellV4.js:184 3.8/uiCurrentWeather.js:98
-msgid "Wind"
-msgstr "Szél"
-
-#: 3.0/applet.js:1640 3.8/config.js:162
-msgid "Make sure you entered a location or use Automatic location instead"
-msgstr ""
-"Ellenőrizze hogy van-e földrajzi helyzet megadva vagy használja az "
-"automatikus helyzet-meghatározást"
-
-#: 3.0/applet.js:1878 3.8/nominatim.js:30
-msgid "Could not find location based on address, please check if it's right"
-msgstr ""
-"Cím alapján nem található a földrajzi helyzet. Ellenőrizze a megadott "
-"adatokat."
-
-#: 3.0/applet.js:1902 3.8/nominatim.js:51
-msgid "Failed to call Geolocation API, see Looking Glass for errors."
-msgstr ""
-"Nem sikerült a helymeghatározási API meghívása a hibaüzenetek megtekinthetők "
-"a Looking Glass naplóban."
-
-#: 3.0/applet.js:2033 3.0/applet.js:2037 3.8/locationstore.js:130
-#: 3.8/locationstore.js:134
-msgid "Warning"
-msgstr "Figyelmeztetés"
-
-#: 3.0/applet.js:2033 3.8/locationstore.js:130
-msgid "You can only save correct locations when the applet is not refreshing"
-msgstr ""
-"Csak akkor távolítható el a földrajzi helyzet, ha a kisalkalmazás éppen nem "
-"áll frissítés alatt"
-
-#: 3.0/applet.js:2037 3.8/locationstore.js:134
-msgid "You can't save an incorrect location"
-msgstr "Nem menthető el a nem megfelelő földrajzi helyzet"
-
-#: 3.0/applet.js:2041 3.0/applet.js:2063 3.0/applet.js:2067 3.0/applet.js:2071
-#: 3.8/locationstore.js:138
-msgid "Info"
-msgstr "Információk"
-
-#: 3.0/applet.js:2041 3.8/locationstore.js:138
-msgid "Location is already saved"
-msgstr "A földrajzi helyzet már el lett mentve"
-
-#: 3.0/applet.js:2050 3.0/applet.js:2084
-msgid "Success"
-msgstr "Siker"
-
-#: 3.0/applet.js:2050
-msgid "Location is saved to library"
-msgstr "A földrajzi helyzet el lett mentve a katalógusba"
-
-#: 3.0/applet.js:2063
-msgid "You can't remove a location while the applet is refreshing"
-msgstr ""
-"Nem távolítható el a kisalkalmazás frissítése közben a földrajzi helyzet"
-
-#: 3.0/applet.js:2067
-msgid "You can't remove an incorrect location"
-msgstr "Nem távolítható el a nem megfelelő földrajzi helyzet"
-
-#: 3.0/applet.js:2071
-msgid "Location is not in storage, can't delete"
-msgstr "Földrajzi helyzet nincs elmentve, ezért nem törölhető"
-
-#: 3.0/applet.js:2084
-msgid "Location is deleted from library"
-msgstr "A földrajzi helyzet le lett törölve katalógusból"
-
-#: 3.0/applet.js:2132
-msgid ""
-"Failed to load in data from location storage, please see the logs for more "
-"information"
-msgstr ""
-"Nem tölthető be adat a földrajzi helyzet tárolóból. További információkért "
-"tekintse meg a naplóbejegyzéseket a Looking Glass naplóban."
-
-#: 3.0/climacell.js:224
-msgid ""
-"Please enter API key in settings,\n"
-"or get one first on https://developer.climacell.co/sign-up"
-msgstr ""
-"Adjon meg egy API kulcsot az kisalkamazás beállításaiban,\n"
-"vagy szerezzen egyet a https://developer.climacell.co/sign-up oldalról"
-
-#: 3.0/climacell.js:248 3.8/climacellV4.js:40 3.8/climacell.js:153
-msgid ""
-"Please Make sure you\n"
-"entered the API key what you have from Climacell"
-msgstr ""
-"Ellenőrizze, hogy a Climacell szolgáltatótól származó\n"
-"API kulcsot helyesen adta meg"
-
-#: 3.0/climacell.js:280 3.8/climacellV4.js:269 3.8/climacell.js:185
-#: 3.8/visualcrossing.js:206
-msgid "Heavy freezing rain"
-msgstr "Erős ónos eső"
-
-#: 3.0/climacell.js:294 3.8/climacellV4.js:262 3.8/climacell.js:199
-#: 3.8/visualcrossing.js:208
-msgid "Light freezing rain"
-msgstr "Szorványos ónos eső"
-
-#: 3.0/climacell.js:301 3.8/climacell.js:206
-msgid "Light freezing drizzle"
-msgstr "Enyhe ónos eső"
-
-#: 3.0/climacell.js:302 3.8/climacellV4.js:248 3.8/climacell.js:207
-msgid "Freezing drizzle"
-msgstr "Jeges szitálás"
-
-#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/climacell.js:213
-#: 3.8/climacell.js:214 3.8/visualcrossing.js:188
-msgid "Light drizzle"
+#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:12234
+msgid "Light intensity drizzle"
 msgstr "Enyhe szitáló eső"
 
-#: 3.0/climacell.js:315 3.8/climacellV4.js:283 3.8/climacell.js:220
-msgid "Heavy ice pellets"
-msgstr "Erős jég eső"
+#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:12236
+msgid "Heavy intensity drizzle"
+msgstr "Erősen szitáló eső"
 
-#: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
-#: 3.0/climacell.js:330 3.8/climacellV4.js:275 3.8/climacellV4.js:276
-#: 3.8/climacellV4.js:282 3.8/climacellV4.js:289 3.8/climacell.js:221
-#: 3.8/climacell.js:227 3.8/climacell.js:228 3.8/climacell.js:235
-msgid "Ice pellets"
-msgstr "Jégeső"
+#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:12237
+msgid "Light intensity drizzle rain"
+msgstr "Enyhén szitáló eső"
 
-#: 3.0/climacell.js:329 3.8/climacellV4.js:290 3.8/climacell.js:234
-msgid "Light ice pellets"
-msgstr "Enyhe jégeső"
+#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:12238
+msgid "Drizzle rain"
+msgstr "Szitáló eső"
 
-#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/climacellV4.js:226
-#: 3.8/climacellV4.js:227 3.8/climacell.js:262 3.8/climacell.js:263
-msgid "Flurries"
+#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:12239
+msgid "Heavy intensity drizzle rain"
+msgstr "Erősen szitáló eső"
+
+#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:12240
+msgid "Shower rain and drizzle"
+msgstr "Zápor és szitáló eső"
+
+#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:12241
+msgid "Heavy shower rain and drizzle"
+msgstr "Erős zápor és szitáló eső"
+
+#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:12242
+msgid "Shower drizzle"
+msgstr "Szitáló záporeső"
+
+#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:12244
+#: 3.8/weather-applet.js:14742 3.8/weather-applet.js:14743
+msgid "Moderate rain"
+msgstr "Esőzés"
+
+#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:12245
+msgid "Heavy intensity rain"
+msgstr "Erős eső"
+
+#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:12246
+msgid "Very heavy rain"
+msgstr "Nagyon erős esőzés"
+
+#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:12247
+msgid "Extreme rain"
+msgstr "Hatalmas Esőzés"
+
+#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:12249
+msgid "Light intensity shower rain"
+msgstr "Enyhe záporeső"
+
+#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:12250
+msgid "Shower rain"
+msgstr "Záporeső"
+
+#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:12251
+msgid "Heavy intensity shower rain"
+msgstr "Erős záporeső"
+
+#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:12252
+msgid "Ragged shower rain"
+msgstr "Szakadozott záporeső"
+
+#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:12257
+msgid "Shower sleet"
+msgstr "Havas záporeső"
+
+#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:12258
+msgid "Light rain and snow"
+msgstr "Enyhe esőzés és havazás"
+
+#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:12259
+#: 3.8/weather-applet.js:14749 3.8/weather-applet.js:14750
+#: 3.8/weather-applet.js:14756 3.8/weather-applet.js:14791
+#: 3.8/weather-applet.js:14798
+msgid "Rain and snow"
+msgstr "Esőzés és havazás"
+
+#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:12260
+msgid "Light shower snow"
+msgstr "Enyhe hózápor"
+
+#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:12261
+msgid "Shower snow"
+msgstr "Elszórt havazás"
+
+#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:12262
+msgid "Heavy shower snow"
+msgstr "Erős hózápor"
+
+#: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
+#: 3.8/weather-applet.js:12264 3.8/weather-applet.js:12775
+#: 3.8/weather-applet.js:12776
+msgid "Smoke"
+msgstr "Füst"
+
+#: 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
+#: 3.0/yahoo.js:457 3.8/weather-applet.js:12265 3.8/weather-applet.js:12782
+#: 3.8/weather-applet.js:12783
+msgid "Haze"
+msgstr "Pára"
+
+#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:12266
+msgid "Sand, dust whirls"
+msgstr "Homok, porfelhők"
+
+#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:12268
+msgid "Sand"
+msgstr "Homok"
+
+#: 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
+#: 3.0/yahoo.js:455 3.8/weather-applet.js:12269 3.8/weather-applet.js:12768
+#: 3.8/weather-applet.js:12769
+msgid "Dust"
+msgstr "Por"
+
+#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:12270
+msgid "Volcanic ash"
+msgstr "Vulkáni hamu"
+
+#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:12271
+#: 3.8/weather-applet.js:14177
+msgid "Squalls"
 msgstr "Széllökések"
 
-#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/climacellV4.js:164
-#: 3.8/climacell.js:276 3.8/climacell.js:277
-msgid "Light fog"
-msgstr "Enyhe köd"
+#: 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
+#: 3.0/yahoo.js:436 3.8/weather-applet.js:12272 3.8/weather-applet.js:12747
+#: 3.8/weather-applet.js:12748
+msgid "Tornado"
+msgstr "Tornádó"
 
-#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/climacellV4.js:135
-#: 3.8/climacellV4.js:136 3.8/climacell.js:311 3.8/climacell.js:312
-msgid "Mostly clear"
-msgstr "Nagyrészt tiszta"
+#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:12275
+msgid "Sky is clear"
+msgstr "Tiszta égbolt"
 
-#: 3.0/utils.js:146 3.8/utils.js:84
+#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:12276
+msgid "Clouds"
+msgstr "Felhős"
+
+#: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
+#: 3.0/us_weather.js:449 3.8/weather-applet.js:12277
+#: 3.8/weather-applet.js:12604 3.8/weather-applet.js:12605
+#: 3.8/weather-applet.js:12639
+msgid "Few clouds"
+msgstr "Enyhén felhős"
+
+#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:12278
+msgid "Scattered clouds"
+msgstr "Elszórtan felhős"
+
+#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:12279
+msgid "Broken clouds"
+msgstr "Szakadozott felhőzet"
+
+#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:12280
+msgid "Overcast clouds"
+msgstr "Borult idő"
+
+#: 3.0/us_weather.js:120
+msgid "Could not get forecast for your area"
+msgstr "Nem szerezhető be időjárás-előrejelzés a megadott földrajzi helyzethez"
+
+#: 3.0/us_weather.js:231 3.8/weather-applet.js:12309
+msgid "Location is outside US, please use a different provider."
+msgstr ""
+"Az Egyesült Államokon kívüli földrajzi helyzet esetén válasszon másik "
+"időjárás-előrejelzés szolgáltatót."
+
+#: 3.0/us_weather.js:394 3.8/weather-applet.js:12373
+msgid "Failed to Process Hourly Forecast Info"
+msgstr "Nem sikerült feldolgozni az óránkénti időjárás-előrejelzést"
+
+#: 3.0/us_weather.js:443 3.8/weather-applet.js:12633
+msgid "Clear and windy"
+msgstr "Tiszta és szeles"
+
+#: 3.0/us_weather.js:450 3.8/weather-applet.js:12640
+msgid "Few clouds and windy"
+msgstr "Enyhén felhős és szeles"
+
+#: 3.0/us_weather.js:457 3.8/weather-applet.js:12647
+msgid "Partly cloudy and windy"
+msgstr "Közepesen felhős és szeles"
+
+#: 3.0/us_weather.js:464 3.8/weather-applet.js:12654
+msgid "Mostly cloudy and windy"
+msgstr "Nagyrészt felhős és szeles"
+
+#: 3.0/us_weather.js:471 3.8/weather-applet.js:12661
+msgid "Overcast and windy"
+msgstr "Borult és szeles idő"
+
+#: 3.0/us_weather.js:485 3.8/weather-applet.js:12675
+msgid "Snowy rain"
+msgstr "Havaseső"
+
+#: 3.0/us_weather.js:520 3.8/weather-applet.js:12710
+msgid "Freezing rain and snow"
+msgstr "Ónos eső és havazás"
+
+#: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
+#: 3.0/yahoo.js:438 3.8/weather-applet.js:8750 3.8/weather-applet.js:12754
+#: 3.8/weather-applet.js:12755
+msgid "Hurricane"
+msgstr "Orkán"
+
+#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8745
+#: 3.8/weather-applet.js:12761
+msgid "Storm"
+msgstr "Szélvész"
+
+#: 3.0/us_weather.js:572 3.8/weather-applet.js:12762
+msgid "Tropical storm"
+msgstr "Trópusi vihar"
+
+#: 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
+#: 3.8/weather-applet.js:12789 3.8/weather-applet.js:12790
+msgid "Hot"
+msgstr "Forró"
+
+#: 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
+#: 3.8/weather-applet.js:12796 3.8/weather-applet.js:12797
+msgid "Cold"
+msgstr "Hideg"
+
+#: 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
+#: 3.8/weather-applet.js:12803 3.8/weather-applet.js:12804
+msgid "Blizzard"
+msgstr "Hóvihar"
+
+#: 3.0/utils.js:146 3.8/weather-applet.js:8634
 msgid "Today"
 msgstr "Ma"
 
-#: 3.0/utils.js:148 3.8/utils.js:86
+#: 3.0/utils.js:148 3.8/weather-applet.js:8636
 msgid "Tomorrow"
 msgstr "Holnap"
 
@@ -1276,253 +1163,494 @@ msgstr "Péntek"
 msgid "Saturday"
 msgstr "Szombat"
 
-#: 3.0/utils.js:301 3.8/utils.js:157
+#: 3.0/utils.js:301 3.8/weather-applet.js:8715
 msgid "Calm"
 msgstr "Szélcsend"
 
-#: 3.0/utils.js:304 3.8/utils.js:160
+#: 3.0/utils.js:304 3.8/weather-applet.js:8718
 msgid "Light air"
 msgstr "Gyenge szellő"
 
-#: 3.0/utils.js:307 3.8/utils.js:163
+#: 3.0/utils.js:307 3.8/weather-applet.js:8721
 msgid "Light breeze"
 msgstr "Enyhe szellő"
 
-#: 3.0/utils.js:310 3.8/utils.js:166
+#: 3.0/utils.js:310 3.8/weather-applet.js:8724
 msgid "Gentle breeze"
 msgstr "Gyenge szél"
 
-#: 3.0/utils.js:313 3.8/utils.js:169
+#: 3.0/utils.js:313 3.8/weather-applet.js:8727
 msgid "Moderate breeze"
 msgstr "Mérsékelt szél"
 
-#: 3.0/utils.js:316 3.8/utils.js:172
+#: 3.0/utils.js:316 3.8/weather-applet.js:8730
 msgid "Fresh breeze"
 msgstr "Élénk szél"
 
-#: 3.0/utils.js:319 3.8/utils.js:175
+#: 3.0/utils.js:319 3.8/weather-applet.js:8733
 msgid "Strong breeze"
 msgstr "Erős szél"
 
-#: 3.0/utils.js:322 3.8/utils.js:178
+#: 3.0/utils.js:322 3.8/weather-applet.js:8736
 msgid "Near gale"
 msgstr "Viharos szél"
 
-#: 3.0/utils.js:325 3.8/utils.js:181
+#: 3.0/utils.js:325 3.8/weather-applet.js:8739
 msgid "Gale"
 msgstr "Élénk viharos szél"
 
-#: 3.0/utils.js:328 3.8/utils.js:184
+#: 3.0/utils.js:328 3.8/weather-applet.js:8742
 msgid "Strong gale"
 msgstr "Heves vihar"
 
-#: 3.0/utils.js:334 3.8/utils.js:190
+#: 3.0/utils.js:334 3.8/weather-applet.js:8748
 msgid "Violent storm"
 msgstr "Heves szélvész"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "N"
 msgstr "É"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "NE"
 msgstr "ÉK"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "E"
 msgstr "K"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "SE"
 msgstr "DK"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "S"
 msgstr "D"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "SW"
 msgstr "DNY"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "W"
 msgstr "NY"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8900
 msgid "NW"
 msgstr "ÉNY"
 
-#: 3.8/climacellV4.js:171
+#: 3.0/weatherbit.js:312
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Adjon meg egy API kulcsot az kisalkamazás beállításaiban,\n"
+"vagy szerezzen egyet a https://www.weatherbit.io/account/create oldalról"
+
+#: 3.0/yahoo.js:78
+msgid ""
+"Unknown Error happened while calling Yahoo bridge,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Ismeretlen hiba történt az időjárás lekérése közben,\n"
+"a hibaüzenet megtekinthető a Looking Glass naplóban"
+
+#: 3.0/yahoo.js:91
+msgid ""
+"Yahoo bridge responded in bad format,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"A Yahoo adatkapcsolat hibás formátumú választ adott.\n"
+"A hibaüzenetek megtekinthetők a Looking Glass naplóban"
+
+#: 3.0/yahoo.js:177
+msgid "Missing package"
+msgstr "Hiányzó csomag"
+
+#: 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "Please install '"
+msgstr "Kérem telepítse a '"
+
+#: 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "', then refresh manually."
+msgstr "' nevű csomagot és frissítsen."
+
+#: 3.0/yahoo.js:182
+msgid "Could not connect to Yahoo API."
+msgstr "Nem sikerült kapcsolódni a Yahoo API webhelyhez."
+
+#: 3.0/yahoo.js:186
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr ""
+"Ismeretlen hiba lépett fel a az időjárás-előrejelzési adatok letöltése "
+"közben. További információkért tekintse meg a naplóbejegyzéseket a Looking "
+"Glass naplóban."
+
+#: 3.0/yahoo.js:437
+msgid "Tropical Storm"
+msgstr "Trópusi vihar"
+
+#: 3.0/yahoo.js:439
+msgid "Severe Thunderstorms"
+msgstr "Veszélyes viharok"
+
+#: 3.0/yahoo.js:440
+msgid "Thunderstorms"
+msgstr "Viharok"
+
+#: 3.0/yahoo.js:441
+msgid "Mixed Rain and Snow"
+msgstr "Esőzés és havazás"
+
+#: 3.0/yahoo.js:442
+msgid "Mixed Rain and Sleet"
+msgstr "Eső és ónos eső vegyesen"
+
+#: 3.0/yahoo.js:443
+msgid "Mixed Snow and Sleet"
+msgstr "Hó és ónos eső vegyesen"
+
+#: 3.0/yahoo.js:444
+msgid "Freezing Drizzle"
+msgstr "Jeges szitálás"
+
+#: 3.0/yahoo.js:446
+msgid "Freezing Rain"
+msgstr "Ónos eső"
+
+#: 3.0/yahoo.js:447
+msgid "Showers"
+msgstr "Záporok"
+
+#: 3.0/yahoo.js:449
+msgid "Snow Flurries"
+msgstr "Hófúvás"
+
+#: 3.0/yahoo.js:450
+msgid "Light Snow Showers"
+msgstr "Enyhe hózápor"
+
+#: 3.0/yahoo.js:451
+msgid "Blowing Snow"
+msgstr "Hófúvás"
+
+#: 3.0/yahoo.js:456 3.8/weather-applet.js:14728 3.8/weather-applet.js:14729
+msgid "Foggy"
+msgstr "Ködös"
+
+#: 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr "Füstös"
+
+#: 3.0/yahoo.js:459
+msgid "Blustery"
+msgstr "Heves"
+
+#: 3.0/yahoo.js:460
+msgid "Windy"
+msgstr "Szeles"
+
+#: 3.0/yahoo.js:463
+msgid "Mostly Cloudy"
+msgstr "Erősen felhős"
+
+#: 3.0/yahoo.js:464
+msgid "Partly Cloudy"
+msgstr "Közepesen felhős"
+
+#: 3.0/yahoo.js:467
+msgid "Mostly Sunny"
+msgstr "Nagyrészt napos"
+
+#: 3.0/yahoo.js:469
+msgid "Mixed Rain and Hail"
+msgstr "Eső és jégeső"
+
+#: 3.0/yahoo.js:471
+msgid "Isolated Thunderstorms"
+msgstr "Helyi viharok"
+
+#: 3.0/yahoo.js:472
+msgid "Scattered Thunderstorms"
+msgstr "Hirtelen viharokkal"
+
+#: 3.0/yahoo.js:473
+msgid "Scattered Showers"
+msgstr "Elszórt záporok"
+
+#: 3.0/yahoo.js:474
+msgid "Heavy Rain"
+msgstr "Erős eső"
+
+#: 3.0/yahoo.js:475
+msgid "Scattered Snow Showers"
+msgstr "Elszórt hózáporok"
+
+#: 3.0/yahoo.js:476
+msgid "Heavy Snow"
+msgstr "Erős havazás"
+
+#: 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr "Nem érhető el"
+
+#: 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr "Elszórt zivatarok"
+
+#. 3.0->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:9815
+msgid "Met Office UK"
+msgstr "Met Office UK"
+
+#: 3.8/weather-applet.js:9999
+msgid "Data was not found for location"
+msgstr "Nem található adat a földrajzi helyzethez"
+
+#: 3.8/weather-applet.js:10070
+msgid "Very poor"
+msgstr "Nagyon rossz"
+
+#: 3.8/weather-applet.js:10070
+msgid "Less than {distance} {distanceUnit}"
+msgstr "Kevesebb mint {distance} {distanceUnit}"
+
+#: 3.8/weather-applet.js:10074
+msgid "Excellent"
+msgstr "Kiváló"
+
+#: 3.8/weather-applet.js:10074
+msgid "More than {distance} {distanceUnit}"
+msgstr "Több mint {distance} {distanceUnit}"
+
+#: 3.8/weather-applet.js:10079
+msgid "Poor"
+msgstr "Rossz"
+
+#: 3.8/weather-applet.js:10079 3.8/weather-applet.js:10084
+#: 3.8/weather-applet.js:10089 3.8/weather-applet.js:10094
+#: 3.8/weather-applet.js:10099
+msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
+msgstr "{smallerDistance}-{biggerDistance} {distanceUnit} között"
+
+#: 3.8/weather-applet.js:10084
+msgid "Moderate"
+msgstr "Mérsékelt"
+
+#: 3.8/weather-applet.js:10089
+msgid "Good"
+msgstr "Jó"
+
+#: 3.8/weather-applet.js:10094 3.8/weather-applet.js:10099
+msgid "Very good"
+msgstr "Nagyon jó"
+
+#: 3.8/weather-applet.js:10761
+msgid "Precipitation will end in {precipEnd} minutes"
+msgstr "A csapadék {precipStart} percen belül megszűnik"
+
+#: 3.8/weather-applet.js:10763
+msgid "Precipitation won't end in within an hour"
+msgstr "A csapadék nem szűnik meg egy órán belül"
+
+#: 3.8/weather-applet.js:10766
+msgid "Precipitation will start within {precipStart} minutes"
+msgstr "A csapadék {precipStart} percen belül esni kezd"
+
+#: 3.8/weather-applet.js:11335 3.8/weather-applet.js:15030
+msgid "As of {lastUpdatedTime}"
+msgstr "Frissítve: {lastUpdatedTime}"
+
+#: 3.8/weather-applet.js:11341
+msgid "{distance}{distanceUnit} from you"
+msgstr "{distance}{distanceUnit} távolságra Öntől"
+
+#: 3.8/weather-applet.js:11582
+msgid "DarkSky"
+msgstr "DarkSky"
+
+#: 3.8/weather-applet.js:11606
+msgid "This API has ceased to function, please use another one."
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:11907
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#: 3.8/weather-applet.js:12290
+msgid "US Weather"
+msgstr "US Weather"
+
+#: 3.8/weather-applet.js:12834
+msgid "WeatherBit"
+msgstr "WeatherBit"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:13251
+msgid "MET Norway"
+msgstr "MET Norvégia"
+
+#: 3.8/weather-applet.js:13929
+msgid "Visual Crossing"
+msgstr "Visual Crossing"
+
+#: 3.8/weather-applet.js:14107
+msgid "Blowing or drifting snow"
+msgstr "Hófúvás vagy hócsuszamlás"
+
+#: 3.8/weather-applet.js:14111
+msgid "Heavy drizzle"
+msgstr "Erősen szitáló eső"
+
+#: 3.8/weather-applet.js:14115
+msgid "Heavy drizzle/rain"
+msgstr "Erősen szitáló eső és eső"
+
+#: 3.8/weather-applet.js:14117
+msgid "Light drizzle/rain"
+msgstr "Enyhe szitáló eső"
+
+#: 3.8/weather-applet.js:14119
+msgid "Duststorm"
+msgstr "Porvihar"
+
+#: 3.8/weather-applet.js:14123
+msgid "Freezing drizzle/freezing rain"
+msgstr "Jeges szitálás és ónos eső"
+
+#: 3.8/weather-applet.js:14125
+msgid "Heavy freezing drizzle/freezing rain"
+msgstr "Erősen szitáló ónos eső és ónos eső"
+
+#: 3.8/weather-applet.js:14127
+msgid "Light freezing drizzle/freezing rain"
+msgstr "Enyhe jégszitálás és ónos eső"
+
+#: 3.8/weather-applet.js:14129
+msgid "Freezing fog"
+msgstr "Zúzmarás köd"
+
+#: 3.8/weather-applet.js:14135
+msgid "Funnel cloud/tornado"
+msgstr "Tölcsérfelhő és tornádó"
+
+#: 3.8/weather-applet.js:14137
+msgid "Hail showers"
+msgstr "Jégzápor"
+
+#: 3.8/weather-applet.js:14139
+msgid "Ice"
+msgstr "Jég"
+
+#: 3.8/weather-applet.js:14141
+msgid "Lightning without thunder"
+msgstr "Villámlás mennydörgés nélkül"
+
+#: 3.8/weather-applet.js:14145
+msgid "Precipitation in vicinity"
+msgstr "Csapadék a közelben"
+
+#: 3.8/weather-applet.js:14149 3.8/weather-applet.js:14757
+msgid "Heavy rain and snow"
+msgstr "Erős eső és havazás"
+
+#: 3.8/weather-applet.js:14151
+msgid "Light rain And snow"
+msgstr "Enyhe esőzés és havazás"
+
+#: 3.8/weather-applet.js:14159
+msgid "Sky coverage decreasing"
+msgstr "Csökkenő felhőzet"
+
+#: 3.8/weather-applet.js:14161
+msgid "Sky coverage increasing"
+msgstr "Növekvő felhőzet"
+
+#: 3.8/weather-applet.js:14163
+msgid "Sky unchanged"
+msgstr "Változatlan fedettség"
+
+#: 3.8/weather-applet.js:14165
+msgid "Smoke or haze"
+msgstr "Füst vagy köd"
+
+#: 3.8/weather-applet.js:14169
+msgid "Snow and rain showers"
+msgstr "Hózápor és záporeső"
+
+#: 3.8/weather-applet.js:14181
+msgid "Thunderstorm without precipitation"
+msgstr "Vihar lecsapás nélkül"
+
+#: 3.8/weather-applet.js:14183
+msgid "Diamond dust"
+msgstr "Jégtű"
+
+#: 3.8/weather-applet.js:14189
+msgid "Partially cloudy"
+msgstr "Közepesen felhős"
+
+#: 3.8/weather-applet.js:14212
+msgid "Please make sure you entered the API key correctly"
+msgstr "Ellenőrizze hogy az API kulcsot helyesen adta meg"
+
+#: 3.8/weather-applet.js:14226
+#| msgid "Tomorrow"
+msgid "Tomorrow.io"
+msgstr "Tomorrow.io"
+
+#: 3.8/weather-applet.js:14391
 msgid "Light wind"
 msgstr "Enyhe szellő"
 
-#: 3.8/climacellV4.js:185
+#: 3.8/weather-applet.js:14405
 msgid "Strong wind"
 msgstr "Erős szél"
 
-#: 3.8/weatherbit.js:230
-msgid "API key doesn't provide access to Hourly Weather, skipping"
-msgstr ""
-"Az API-kulcs nem biztosít elérést az óránkénti időjárás előrejelzéshez. "
-"Adatok kihagyása."
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:14549
+msgid "DMI Denmark"
+msgstr "DMI Dánia"
 
-#: 3.8/main.js:104
+#: 3.8/weather-applet.js:14689 3.8/weather-applet.js:14690
+#: 3.8/weather-applet.js:14826 3.8/weather-applet.js:14827
+msgid "NOT FOUND"
+msgstr "Nem található"
+
+#: 3.8/weather-applet.js:14722
+msgid "Blowing snow"
+msgstr "Hófúvás"
+
+#: 3.8/weather-applet.js:14763 3.8/weather-applet.js:14764
+msgid "Slight snow"
+msgstr "Enyhe havazás"
+
+#: 3.8/weather-applet.js:14770 3.8/weather-applet.js:14771
+msgid "Moderate snow"
+msgstr "Hóesés"
+
+#: 3.8/weather-applet.js:14785
+msgid "Moderate rain showers"
+msgstr "Záporok"
+
+#: 3.8/weather-applet.js:14792
+msgid "Mixed rain and snow"
+msgstr "Esőzés és havazás"
+
+#: 3.8/weather-applet.js:14799
+msgid "Heavy mixed rain and snow"
+msgstr "Erős eső és havazás"
+
+#: 3.8/weather-applet.js:14991
 msgid "This provider requires an API key to operate"
 msgstr ""
 "Ez az időjárás-előrejelzés szolgáltató API-kulcs használatát írj elő a "
 "szolgáltatása használatához"
-
-#: 3.8/main.js:137 3.8/uiBar.js:36
-msgid "As of {lastUpdatedTime}"
-msgstr "Frissítve: {lastUpdatedTime}"
-
-#: 3.8/uiBar.js:42
-msgid "{distance}{distanceUnit} from you"
-msgstr "{distance}{distanceUnit} távolságra Öntől"
-
-#: 3.8/yahoo.js:109 3.8/yahoo.js:116
-msgid "Please install '{missingPackage}', then refresh manually."
-msgstr "Telepítse a(z) „{missingPackage}” nevű csomagot és frissítsen."
-
-#: 3.8/met_uk.js:250
-msgid "Very poor"
-msgstr "Nagyon rossz"
-
-#: 3.8/met_uk.js:250
-msgid "Less than {distance} {distanceUnit}"
-msgstr "Kevesebb mint {distance} {distanceUnit}"
-
-#: 3.8/met_uk.js:254
-msgid "Excellent"
-msgstr "Kiváló"
-
-#: 3.8/met_uk.js:254
-msgid "More than {distance} {distanceUnit}"
-msgstr "Több mint {distance} {distanceUnit}"
-
-#: 3.8/met_uk.js:259
-msgid "Poor"
-msgstr "Rossz"
-
-#: 3.8/met_uk.js:259 3.8/met_uk.js:264 3.8/met_uk.js:269 3.8/met_uk.js:274
-msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
-msgstr "{smallerDistance}-{biggerDistance} {distanceUnit} között"
-
-#: 3.8/met_uk.js:264
-msgid "Moderate"
-msgstr "Mérsékelt"
-
-#: 3.8/met_uk.js:269
-msgid "Good"
-msgstr "Jó"
-
-#: 3.8/met_uk.js:274
-msgid "Very good"
-msgstr "Nagyon jó"
-
-#: 3.8/climacell.js:255 3.8/climacell.js:256
-msgid "Light Snow"
-msgstr "Enyhe havazás"
-
-#: 3.8/visualcrossing.js:182
-msgid "Blowing or drifting snow"
-msgstr "Hófúvás vagy hócsuszamlás"
-
-#: 3.8/visualcrossing.js:186
-msgid "Heavy drizzle"
-msgstr "Erősen szitáló eső"
-
-#: 3.8/visualcrossing.js:190
-msgid "Heavy drizzle/rain"
-msgstr "Erősen szitáló eső és eső"
-
-#: 3.8/visualcrossing.js:192
-msgid "Light drizzle/rain"
-msgstr "Enyhe szitáló eső"
-
-#: 3.8/visualcrossing.js:194
-msgid "Duststorm"
-msgstr "Porvihar"
-
-#: 3.8/visualcrossing.js:198
-msgid "Freezing drizzle/freezing rain"
-msgstr "Jeges szitálás és ónos eső"
-
-#: 3.8/visualcrossing.js:200
-msgid "Heavy freezing drizzle/freezing rain"
-msgstr "Erősen szitáló ónos eső és ónos eső"
-
-#: 3.8/visualcrossing.js:202
-msgid "Light freezing drizzle/freezing rain"
-msgstr "Enyhe jégszitálás és ónos eső"
-
-#: 3.8/visualcrossing.js:204
-msgid "Freezing fog"
-msgstr "Zúzmarás köd"
-
-#: 3.8/visualcrossing.js:210
-msgid "Funnel cloud/tornado"
-msgstr "Tölcsérfelhő és tornádó"
-
-#: 3.8/visualcrossing.js:212
-msgid "Hail showers"
-msgstr "Jégzápor"
-
-#: 3.8/visualcrossing.js:214
-msgid "Ice"
-msgstr "Jég"
-
-#: 3.8/visualcrossing.js:216
-msgid "Lightning without thunder"
-msgstr "Villámlás mennydörgés nélkül"
-
-#: 3.8/visualcrossing.js:220
-msgid "Precipitation in vicinity"
-msgstr ""
-
-#: 3.8/visualcrossing.js:224
-msgid "Heavy rain and snow"
-msgstr "Erős eső és havazás"
-
-#: 3.8/visualcrossing.js:226
-msgid "Light rain And snow"
-msgstr "Enyhe esőzés és havazás"
-
-#: 3.8/visualcrossing.js:234
-msgid "Sky coverage decreasing"
-msgstr "Csökkenő felhőzet"
-
-#: 3.8/visualcrossing.js:236
-msgid "Sky coverage increasing"
-msgstr "Növekvő felhőzet"
-
-#: 3.8/visualcrossing.js:238
-msgid "Sky unchanged"
-msgstr "Változatlan fedettség"
-
-#: 3.8/visualcrossing.js:240
-msgid "Smoke or haze"
-msgstr "Füst vagy köd"
-
-#: 3.8/visualcrossing.js:244
-msgid "Snow and rain showers"
-msgstr "Hózápor és záporeső"
-
-#: 3.8/visualcrossing.js:256
-msgid "Thunderstorm without precipitation"
-msgstr "Vihar lecsapás nélkül"
-
-#: 3.8/visualcrossing.js:258
-msgid "Diamond dust"
-msgstr ""
-
-#: 3.8/visualcrossing.js:264
-msgid "Partially cloudy"
-msgstr "Közepesen felhős"
-
-#: 3.8/visualcrossing.js:287
-msgid "Please make sure you entered the API key correctly"
-msgstr "Ellenőrizze hogy az API kulcsot helyesen adta meg"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -1568,18 +1696,8 @@ msgstr "Időjárási-adatszolgáltató"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-msgid "OpenWeatherMap"
-msgstr "OpenWeatherMap"
-
-#. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
 msgstr "DarkSky (kulcs szükséges)"
-
-#. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
-msgid "MET Norway"
-msgstr "MET Norvégia"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1587,17 +1705,12 @@ msgid "Weatherbit (key needed)"
 msgstr "Weatherbit (kulcs szükséges)"
 
 #. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
 msgid "Yahoo"
 msgstr "Yahoo"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
 msgstr "Climacell (kulcs szükséges)"
-
-#. 3.0->settings-schema.json->dataService->options
-msgid "Met Office UK"
-msgstr "Met Office UK"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
@@ -1669,7 +1782,6 @@ msgid "Hourly Forecast length"
 msgstr "Óránkénti előrejelzés hossza"
 
 #. 3.0->settings-schema.json->unitSettings->description
-#. 3.8->settings-schema.json->units-section->title
 msgid "Units"
 msgstr "Egységek"
 
@@ -1689,13 +1801,13 @@ msgstr "Automatikus"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "celsius"
-msgstr "celsius"
+msgid "Celsius"
+msgstr "Celsius"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
-msgstr "fahrenheit"
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
 
 #. 3.0->settings-schema.json->temperatureUnit->tooltip
 #. 3.0->settings-schema.json->distanceUnit->tooltip
@@ -1705,6 +1817,7 @@ msgid ""
 "Automatic will try to guess your preference based your current display "
 "language."
 msgstr ""
+"A megjelenített nyelvből megpróbálja meghatározni a megfelelő beállításokat."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
@@ -1888,7 +2001,6 @@ msgid "Only display hours for hourly forecast time"
 msgstr "Kizárólag az órát jelzi ki az óránkénti előrejelzésnél"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
-#. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
 msgstr ""
 "15:00 vagy du. 3:00 időkijelzés helyett 15 vagy du. 3 időkijelzés lesz "
@@ -1920,7 +2032,8 @@ msgid "Override location label"
 msgstr "Megjelenített földrajzi helyzet felülírása"
 
 #. 3.0->settings-schema.json->conditionSettings->description
-msgid "Weather Conditions"
+#. 3.8->settings-schema.json->weather-conditions->title
+msgid "Weather conditions"
 msgstr "Időjárási viszonyok"
 
 #. 3.0->settings-schema.json->translateCondition->description
@@ -1932,11 +2045,6 @@ msgstr "Időjárási viszonyok lefordítása"
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
 msgstr "Rövidebb leírás megjelenítése az időjárási körülményekhez"
-
-#. 3.0->settings-schema.json->shortConditions->tooltip
-#. 3.8->settings-schema.json->shortConditions->tooltip
-msgid "Currently only used with DarkSky."
-msgstr "Jelenleg csak a DarkSky szolgáltatást érinti."
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -1958,8 +2066,8 @@ msgid "Location"
 msgstr "Földrajzi helyzet"
 
 #. 3.8->settings-schema.json->units-page->title
-msgid "Units, Icons and Keys"
-msgstr "Mértékegységek, ikonok és billentyűkombinációk"
+msgid "Other options"
+msgstr "Egyéb beállítások"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
@@ -1973,10 +2081,6 @@ msgstr "Helybeállítások"
 msgid "Saved Locations"
 msgstr "Elmentett földrajzi helyzet"
 
-#. 3.8->settings-schema.json->weather-conditions->title
-msgid "Weather conditions"
-msgstr "Időjárási viszonyok"
-
 #. 3.8->settings-schema.json->panel-options->title
 msgid "Panel (Taskbar)"
 msgstr "Panel (Tálca)"
@@ -1984,6 +2088,14 @@ msgstr "Panel (Tálca)"
 #. 3.8->settings-schema.json->presentation->title
 msgid "Popup menu"
 msgstr "Helyi menü"
+
+#. 3.8->settings-schema.json->units-section->title
+msgid "Other Units"
+msgstr "Egyéb mértékegységek"
+
+#. 3.8->settings-schema.json->temp-unit-section->title
+msgid "Temperature Unit"
+msgstr "Hőmérséklet mértékegysége"
 
 #. 3.8->settings-schema.json->keybindings->title
 msgid "Keybindings"
@@ -2007,24 +2119,20 @@ msgid ""
 msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
-msgid "Visual Crossing (key needed)"
-msgstr "Visual Crossing (kulcs szükséges)"
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "ClimacellV4 (key needed)"
-msgstr "ClimacellV4 (kulcs szükséges)"
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "ClimacellV3 (key needed)"
-msgstr "ClimacellV3 (kulcs szükséges)"
-
-#. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
 msgstr "Met Office UK (csak az Egyesült Királyság területéről)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
 msgstr "US National Weather (csak az Egyesült Államok területéről)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr "Visual Crossing (kulcs szükséges)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr "Tomorrow.io (kulcs szükséges)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2041,13 +2149,40 @@ msgstr "Jelenlegi földrajzi helyzet mentése"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
-"Saves location information to file, so you can switch between them with "
-"buttons in the applet (what will appear if you have more than one)."
+"Saves location information to file so you can switch between them with "
+"buttons in the applet, which will appear if you have more than one."
 msgstr ""
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
 msgstr "Időjárás kisalkalmazás a Cinnamon Spices weboldalon"
+
+#. 3.8->settings-schema.json->refreshInterval->tooltip
+msgid ""
+"If you are using a provider with API keys set it to an interval you won't "
+"run out of your quota with."
+msgstr ""
+
+#. 3.8->settings-schema.json->forecastDays->tooltip
+msgid ""
+"Maximum number of days that can be displayed, maximum rows and columns "
+"setting in the Presentation tab will affect the final number."
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->description
+msgid "Enable minutely precipitation forecast"
+msgstr "Percre pontos csapadék-előrejelzés engedélyezése"
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. Currently implemented with OpenWeatherMap "
+"only."
+msgstr ""
+
+#. 3.8->settings-schema.json->showBothTempUnits->description
+msgid "Show both temperature units at the same time"
+msgstr "Hőmérséklet megjelenítése mindkét mértékegységben"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -2058,6 +2193,12 @@ msgstr ""
 #. 3.8->settings-schema.json->locationList->description
 msgid "Your saved locations"
 msgstr "Elmentett földrajzi helyzet"
+
+#. 3.8->settings-schema.json->locationList->tooltip
+msgid ""
+"You have to make sure the Search entry field is unique and your Timezone is "
+"in the IANA time zone format (e.g. 'Europe/London')"
+msgstr ""
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
@@ -2083,6 +2224,21 @@ msgstr "Időzóna"
 msgid "Search entry"
 msgstr "Keresési bejegyzés"
 
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr "Szél irányának megjelenítése szövegként"
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr ""
+"Ehhez hasonló betűvel történő jelölés (DK vagy É) irány ikonok helyett."
+
+#. 3.8->settings-schema.json->shortHourlyTime->tooltip
+msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
+msgstr ""
+"15:00 vagy du. 3:00 időkijelzés helyett 15 vagy du. 3 időkijelzés lesz "
+"megjelenítve"
+
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
@@ -2094,10 +2250,10 @@ msgstr "Szimbolikus ikonok használata mindenhol a kisalkalmazásban"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
-"For detailed information about the applet please go to the Spices Website by "
-"clicking the button below. You can also comment and ask a questions to the "
-"community at this page by logging in with your Github account. You can also "
-"find information about known issues, troubleshooting, changelog and more."
+"For detailed information about the applet please go to the Spices Website to "
+"find info about known issues, troubleshooting, changelog and more by "
+"clicking the button below. Here you can ask questions etc in the comment "
+"section by logging in with your Github account."
 msgstr ""
 "További információkért látogassa meg a Spices webhelyet, amit elérhet az "
 "alábbi gombra kattintva. Itt továbbá megjegyzéseket fűzhet, vagy kérdéseket "
@@ -2127,10 +2283,11 @@ msgstr "Jelenlegi karbantartó: Gr3q"
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
 "If you find an issue with this applet please make a report by clicking on "
-"the button below and login in with your Github account. Don't forget to "
-"write weather@mockturtl in the top Title field to make it easier for "
-"everyone to know that the issue is about the weather applet (the form is for "
-"all Cinnamon applets)."
+"the button below and login in with your Github account. Before you start "
+"writing please make sure that the issue is not already submitted in the "
+"issues section. Don't forget to write weather@mockturtl in the top Title "
+"field to make it easier for everyone to know that the issue is about the "
+"weather applet (the form is for all Cinnamon applets)."
 msgstr ""
 "Amennyiben a kisalkalmazásban hibát talál, kérjük szépen, hogy jelentse be "
 "az alábbi gombra kattintva, majd jelentkezzen be az ingyenes GitHub "
@@ -2148,6 +2305,32 @@ msgid ""
 "format. After 3 seconds without typing the address you entered is replaced "
 "automatically for validating your choice."
 msgstr ""
+
+#~ msgid "Climacell"
+#~ msgstr "Climacell"
+
+#~ msgid "ClimacellV4 (key needed)"
+#~ msgstr "ClimacellV4 (kulcs szükséges)"
+
+#~ msgid "API key doesn't provide access to Hourly Weather, skipping"
+#~ msgstr ""
+#~ "Az API-kulcs nem biztosít elérést az óránkénti időjárás előrejelzéshez. "
+#~ "Adatok kihagyása."
+
+#~ msgid "Please install '{missingPackage}', then refresh manually."
+#~ msgstr "Telepítse a(z) „{missingPackage}” nevű csomagot és frissítsen."
+
+#~ msgid "Light Snow"
+#~ msgstr "Enyhe havazás"
+
+#~ msgid "Currently only used with DarkSky."
+#~ msgstr "Jelenleg csak a DarkSky szolgáltatást érinti."
+
+#~ msgid "Units, Icons and Keys"
+#~ msgstr "Mértékegységek, ikonok és billentyűkombinációk"
+
+#~ msgid "ClimacellV3 (key needed)"
+#~ msgstr "ClimacellV3 (kulcs szükséges)"
 
 #~ msgid "Clear Sky"
 #~ msgstr "Napos idő"
@@ -2376,9 +2559,6 @@ msgstr ""
 
 #~ msgid "Settings for weather@mockturtl 3.6"
 #~ msgstr "Időjárás kisalkalmazás 3.6 beállítások"
-
-#~ msgid "DarkSky"
-#~ msgstr "DarkSky"
 
 #~ msgid "Use this if your location is not accurate"
 #~ msgstr "Kapcsold be ha a helyzeted nem elég pontos"

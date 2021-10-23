@@ -58,7 +58,7 @@ export class UIHourlyForecasts {
 		this.container = new BoxLayout({ style_class: "hourly-box" });
 		// Only add_actor works with ScrollView for some reason, not add_child
 		// and only BoxLayout results in drawn stuff inside the ScrollView.
-		// (Only Boxlayout and Viewport implements St.Scrollable needed inside a scrollview)
+		// (Only BoxLayout and Viewport implements St.Scrollable needed inside a ScrollView)
 		this.actor.add_actor(this.container)
 	}
 
@@ -128,7 +128,12 @@ export class UIHourlyForecasts {
 		return !(max <= 0);
 	}
 
-	public async Show(): Promise<void> {
+	public ResetScroll() {
+		let hscroll = this.actor.get_hscroll_bar();
+		hscroll.get_adjustment().set_value(0);
+	}
+
+	public async Show(animate: boolean = true): Promise<void> {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
 		this.actor.show();
@@ -149,7 +154,7 @@ export class UIHourlyForecasts {
 		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
 		this.hourlyToggled = true;
 		return new Promise((resolve, reject) => {
-			if (global.settings.get_boolean("desktop-effects-on-menus")) {
+			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
 					{
@@ -171,11 +176,10 @@ export class UIHourlyForecasts {
 		});
 	}
 
-	public async Hide(): Promise<void> {
-		let hscroll = this.actor.get_hscroll_bar();
+	public async Hide(animate: boolean = true): Promise<void> {
 		this.hourlyToggled = false;
 		return new Promise((resolve, reject) => {
-			if (global.settings.get_boolean("desktop-effects-on-menus")) {
+			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
 				addTween(this.actor,
 					{
@@ -191,7 +195,7 @@ export class UIHourlyForecasts {
 							this.actor.style = "";
 							this.actor.hide();
 							// Scroll back to the start
-							hscroll.get_adjustment().set_value(0);
+							this.ResetScroll();
 							resolve();
 						}
 					}
@@ -200,6 +204,7 @@ export class UIHourlyForecasts {
 			else {
 				this.actor.style = "";
 				this.actor.set_height(-1);
+				this.ResetScroll();
 				this.actor.hide();
 				resolve();
 			}
@@ -207,7 +212,7 @@ export class UIHourlyForecasts {
 	}
 
 	/** Sets the correct width for the hourly boxes, make
-	 * sure to call this whn the hourly scrollview is shown
+	 * sure to call this whn the hourly ScrollView is shown
 	 */
 	private AdjustHourlyBoxItemWidth(): void {
 		let requiredWidth = this.GetHourlyBoxItemWidth();
@@ -340,7 +345,7 @@ export class UIHourlyForecasts {
 		Logger.Debug("Scrollbar height is " + scrollBarHeight);
 		let theme = this.container.get_theme_node();
 		let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-		Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
+		Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
 
 		return (boxItemHeight + scrollBarHeight + styling);
 	}

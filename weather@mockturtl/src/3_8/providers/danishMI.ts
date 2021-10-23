@@ -16,7 +16,7 @@ export class DanishMI implements WeatherProvider {
 	private app: WeatherApplet;
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
-		cmd: "llj", // latlongjson
+		cmd: "llj", // lat long json
 		lon: null,
 		lat: null,
 		tz: "UTC"   // have to as in UTC unless we don't get proper times
@@ -62,7 +62,8 @@ export class DanishMI implements WeatherProvider {
 			wind: {
 				degree: observation.WindDirection,
 				speed: observation.WindSpeed10m
-			}
+			},
+			dewPoint: null,
 		} as WeatherData;
 
 		result.location = {
@@ -178,14 +179,14 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private ResolveCondition(symbol: number | undefined): Condition {
-		if (symbol == null) 
+		if (symbol == null)
 			return {
 				main: _("NOT FOUND"),
 				description: _("NOT FOUND"),
 				customIcon: "alien-symbolic",
 				icons: ["weather-severe-alert"]
 			}
-			
+
 		let isNight = (symbol > 100);
 		if (isNight)
 			symbol = symbol - 100;

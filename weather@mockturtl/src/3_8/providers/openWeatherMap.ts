@@ -67,9 +67,9 @@ export class OpenWeatherMap implements WeatherProvider {
 					url: "https://openweathermap.org/city/",
 					timeZone: json.timezone
 				},
-				date: DateTime.fromSeconds(json.current.dt, {zone: json.timezone}),
-				sunrise: DateTime.fromSeconds(json.current.sunrise, {zone: json.timezone}),
-				sunset: DateTime.fromSeconds(json.current.sunset, {zone: json.timezone}),
+				date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
+				sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
+				sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
 				wind: {
 					speed: json.current.wind_speed,
 					degree: json.current.wind_deg
@@ -77,6 +77,7 @@ export class OpenWeatherMap implements WeatherProvider {
 				temperature: json.current.temp,
 				pressure: json.current.pressure,
 				humidity: json.current.humidity,
+				dewPoint: json.current.dew_point,
 				condition: {
 					main: json?.current?.weather?.[0]?.main,
 					description: json?.current?.weather?.[0]?.description,
@@ -96,7 +97,7 @@ export class OpenWeatherMap implements WeatherProvider {
 					start: -1,
 					end: -1
 				}
-	
+
 				for (let index = 0; index < json.minutely.length; index++) {
 					const element = json.minutely[index];
 					if (element.precipitation > 0 && immediate.start == -1) {
@@ -110,12 +111,12 @@ export class OpenWeatherMap implements WeatherProvider {
 				}
 				weather.immediatePrecipitation = immediate;
 			}
-			
+
 			let forecasts: ForecastData[] = [];
 			for (let i = 0; i < json.daily.length; i++) {
 				let day = json.daily[i];
 				let forecast: ForecastData = {
-					date: DateTime.fromSeconds(day.dt, {zone: json.timezone}),
+					date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
 					condition: {
@@ -133,7 +134,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
 				let forecast: HourlyForecastData = {
-					date: DateTime.fromSeconds(hour.dt, {zone: json.timezone}),
+					date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
 					temp: hour.temp,
 					condition: {
 						main: hour.weather[0].main,
@@ -195,7 +196,7 @@ export class OpenWeatherMap implements WeatherProvider {
 	private ConvertToAPILocale(systemLocale: string | null) {
 		if (systemLocale == null)
 			return "en";
-			
+
 		// Dialect? support by OWM
 		if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
 			return systemLocale;
