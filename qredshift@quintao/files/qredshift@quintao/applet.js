@@ -411,7 +411,7 @@ class QRedshift extends Applet.TextIconApplet {
             this.timeout = undefined;
         }
         
-        if (this.opt.enabled && this.opt.autoUpdate) {
+        if (this.opt.enabled && this.opt.autoUpdate && this.opt.enabledNight) {
             this.timeout = Mainloop.timeout_add_seconds(this.opt.autoUpdateInterval, this.doUpdate.bind(this), null);
             // qLOG('auto update', this.opt.autoUpdateInterval);
         }
@@ -826,12 +826,15 @@ class QRedshift extends Applet.TextIconApplet {
     setInfo() {
         let period = this.opt.period + "";
         
-        if (this.opt.enabled && this.opt.manualNightTime) {
+        if (this.opt.enabled && this.opt.enabledNight && this.opt.manualNightTime) {
             if (this.check_period().is_night) period = _("Night");
             else period = _("Day");
         }
         
-        this.headerIcon.setStatus(period + "");
+        if(this.opt.enabledNight)
+            this.headerIcon.setStatus(period + "");
+        else
+            this.headerIcon.setStatus("-");
     }
     
     updateTooltip() {
