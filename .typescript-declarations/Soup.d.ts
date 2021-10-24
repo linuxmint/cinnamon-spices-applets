@@ -1434,6 +1434,7 @@ declare namespace imports.gi.Soup {
 	}
 
 	var ProxyResolverDefault: {
+		new(): ProxyResolverDefault;
 	}
 
 	/**
@@ -2196,7 +2197,7 @@ declare namespace imports.gi.Soup {
 		 * be called after the message completes or when an unrecoverable error occurs.
 		 * @param user_data a pointer passed to #callback.
 		 */
-		queue_message(msg: Message, callback: SessionCallback, user_data: any): void;
+		queue_message(msg: Message, callback: SessionCallback): void;
 		/**
 		 * Updates #msg's URI according to its status code and "Location"
 		 * header, and requeues it on #session. Use this when you have set

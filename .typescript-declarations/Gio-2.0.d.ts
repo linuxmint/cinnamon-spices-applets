@@ -10968,7 +10968,12 @@ declare namespace imports.gi.Gio {
         set_value(key: string, value: GLib.Variant): boolean;
     }
 
-    var Settings: {
+    interface SettingsInitOptions {
+        schema?: string;
+    }
+
+    class Settings {
+        constructor(options?: SettingsInitOptions)
         /**
          * Creates a new #GSettings object with the schema specified by
          * #schema_id.
@@ -10986,7 +10991,7 @@ declare namespace imports.gi.Gio {
          * @param schema_id the id of the schema
          * @returns a new #GSettings object
          */
-        new(schema_id: string): Settings;
+        static new(schema_id: string): Settings;
         /**
          * Creates a new #GSettings object with a given schema, backend and
          * path.
@@ -11016,7 +11021,7 @@ declare namespace imports.gi.Gio {
          * @param path the path to use
          * @returns a new #GSettings object
          */
-        new_full(schema: SettingsSchema, backend: SettingsBackend, path: string): Settings;
+        static new_full(schema: SettingsSchema, backend: SettingsBackend, path: string): Settings;
         /**
          * Creates a new #GSettings object with the schema specified by
          * #schema_id and a given #GSettingsBackend.
@@ -11030,7 +11035,7 @@ declare namespace imports.gi.Gio {
          * @param backend the #GSettingsBackend to use
          * @returns a new #GSettings object
          */
-        new_with_backend(schema_id: string, backend: SettingsBackend): Settings;
+        static new_with_backend(schema_id: string, backend: SettingsBackend): Settings;
         /**
          * Creates a new #GSettings object with the schema specified by
          * #schema_id and a given #GSettingsBackend and path.
@@ -11042,7 +11047,7 @@ declare namespace imports.gi.Gio {
          * @param path the path to use
          * @returns a new #GSettings object
          */
-        new_with_backend_and_path(schema_id: string, backend: SettingsBackend, path: string): Settings;
+        static new_with_backend_and_path(schema_id: string, backend: SettingsBackend, path: string): Settings;
         /**
          * Creates a new #GSettings object with the relocatable schema specified
          * by #schema_id and a given path.
@@ -11061,17 +11066,17 @@ declare namespace imports.gi.Gio {
          * @param path the path to use
          * @returns a new #GSettings object
          */
-        new_with_path(schema_id: string, path: string): Settings;
+        static new_with_path(schema_id: string, path: string): Settings;
         /**
          * Deprecated.
          * @returns 
          */
-        list_relocatable_schemas(): string[];
+        static list_relocatable_schemas(): string[];
         /**
          * Deprecated.
          * @returns 
          */
-        list_schemas(): string[];
+        static list_schemas(): string[];
         /**
          * Ensures that all pending operations are complete for the default backend.
          * 
@@ -11084,7 +11089,7 @@ declare namespace imports.gi.Gio {
          * will be dispatched during this call (but some may be queued by the
          * time the call is done).
          */
-        sync(): void;
+        static sync(): void;
         /**
          * Removes an existing binding for #property on #object.
          * 
@@ -11094,7 +11099,7 @@ declare namespace imports.gi.Gio {
          * @param object the object
          * @param property the property whose binding is removed
          */
-        unbind(object: GObject.Object, property: string): void;
+        static unbind(object: GObject.Object, property: string): void;
     }
 
     /**
