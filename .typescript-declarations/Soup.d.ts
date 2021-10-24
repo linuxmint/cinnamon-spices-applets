@@ -1305,9 +1305,8 @@ declare namespace imports.gi.Soup {
 		 * @param content_type MIME Content-Type of the body
 		 * @param resp_use a {@link MemoryUse} describing how to handle #resp_body
 		 * @param resp_body 
-		 * @param resp_length the byte length of #resp_body.
 		 */
-		set_response(content_type: string, resp_use: MemoryUse, resp_body: number[], resp_length: number): void;
+		set_response(content_type: string, resp_use: MemoryUse, resp_body: string | ByteArray): void;
 		/**
 		 * Sets #site_for_cookies as the policy URL for same-site cookies for #msg.
 		 * 
@@ -1645,7 +1644,7 @@ declare namespace imports.gi.Soup {
 		 * @param user_data data for #callback
 		 * @param destroy destroy notifier to free #user_data
 		 */
-		add_handler(path: string, callback: ServerCallback, user_data: any, destroy: GLib.DestroyNotify): void;
+		add_handler(path: string | null, callback: ServerCallback, user_data?: any, destroy?: GLib.DestroyNotify): void;
 		/**
 		 * Add support for a WebSocket extension of the given #extension_type.
 		 * When a WebSocket client requests an extension of #extension_type,
@@ -1939,9 +1938,15 @@ declare namespace imports.gi.Soup {
 		 * @param msg a {@link Message} associated with #server.
 		 */
 		unpause_message(msg: Message): void;
+
+		connect(signal: 'request-finished' | 'request-aborted' | 'request-read' | 'request-started', callback: (server: this, message: Message, client: ClientContext) => void): number
 	}
 
-	var Server: {
+	interface ServerOptions {
+		port: number
+	}
+
+	class Server {
 		/**
 		 * Creates a new {@link Server}. This is exactly equivalent to calling
 		 * g_object_new() and specifying %SOUP_TYPE_SERVER as the type.
@@ -1950,7 +1955,7 @@ declare namespace imports.gi.Soup {
 		 * certain legacy properties, this may also return %NULL if an error
 		 * occurs.
 		 */
-		new(optname1: string): Server;
+		constructor(options?: ServerOptions);
 	}
 
 	interface Session extends GObject.Object {
@@ -3540,6 +3545,8 @@ declare namespace imports.gi.Soup {
 	class MessageBody {
 		public data: string;
 		public length: number;
+		
+		public append(data: Uint8Array): void;
 		/**
 		 * Appends #length bytes from #data to #body according to #use.
 		 * @param use how to use #data
