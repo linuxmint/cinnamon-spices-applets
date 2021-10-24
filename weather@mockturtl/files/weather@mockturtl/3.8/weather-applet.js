@@ -381,42 +381,48 @@ const FORWARD_SLASH = '\u002F';
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
 
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
 class Log {
     constructor(_instanceId) {
-        this.debug = false;
-        this.level = 1;
+        this.logLevel = "info";
         this.ID = _instanceId;
-        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
-        this.debug = this.DEBUG();
     }
-    DEBUG() {
-        let path = this.appletDir + "/../DEBUG";
-        let _debug = imports.gi.Gio.file_new_for_path(path);
-        let result = _debug.query_exists(null);
-        if (result)
-            this.Info("DEBUG file found in " + path + ", enabling Debug mode");
-        return result;
+    ChangeLevel(level) {
+        this.logLevel = level;
     }
-    ;
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
     Info(message) {
+        if (!this.CanLog("info"))
+            return;
         let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
         global.log(msg);
     }
     Error(error, e) {
+        if (!this.CanLog("error"))
+            return;
         global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
         if (!!(e === null || e === void 0 ? void 0 : e.stack))
             global.logError(e.stack);
     }
     ;
     Debug(message) {
-        if (this.debug) {
-            this.Info(message);
-        }
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message);
     }
-    Debug2(message) {
-        if (this.debug && this.level > 1) {
-            this.Info(message);
-        }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message);
     }
     UpdateInstanceID(instanceID) {
         this.ID = instanceID;
@@ -9465,6 +9471,30 @@ class Config {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.timezone = undefined;
+        this.OnKeySettingsUpdated = () => {
+            if (this.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+            }
+        };
+        this.onLogLevelUpdated = () => {
+            logger_Logger.ChangeLevel(this._logLevel);
+        };
+        this.OnLocationChanged = () => {
+            logger_Logger.Debug("User changed location, waiting 3 seconds...");
+            if (this.doneTypingLocation != null)
+                utils_clearTimeout(this.doneTypingLocation);
+            this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+        };
+        this.OnLocationStoreChanged = () => {
+            this.LocStore.OnLocationChanged(this._locationList);
+        };
+        this.OnFontChanged = () => {
+            this.currentFontSize = this.GetCurrentFontSize();
+            this.app.RefreshAndRebuild();
+        };
+        this.OnSettingChanged = () => {
+            this.app.RefreshAndRebuild();
+        };
         this.app = app;
         this.currentLocale = ConstructJsLocale(get_language_names()[0]);
         logger_Logger.Debug("System locale is " + this.currentLocale);
@@ -9477,6 +9507,7 @@ class Config {
         this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
         this.LocStore = new LocationStore(this.app, this);
+        this.onLogLevelUpdated();
     }
     get Timezone() {
         return this.timezone;
@@ -9491,12 +9522,13 @@ class Config {
         for (k in Keys) {
             let key = Keys[k];
             let keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
-        keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -9625,30 +9657,9 @@ class Config {
         if (switchToManual == true)
             this.settings.setValue(Keys.MANUAL_LOCATION, true);
     }
-    OnKeySettingsUpdated() {
-        if (this.keybinding != null) {
-            keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        }
-    }
-    OnLocationChanged() {
-        logger_Logger.Debug("User changed location, waiting 3 seconds...");
-        if (this.doneTypingLocation != null)
-            utils_clearTimeout(this.doneTypingLocation);
-        this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-    }
-    OnLocationStoreChanged() {
-        this.LocStore.OnLocationChanged(this._locationList);
-    }
-    OnFontChanged() {
-        this.currentFontSize = this.GetCurrentFontSize();
-        this.app.RefreshAndRebuild();
-    }
     DoneTypingLocation() {
         logger_Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        this.app.RefreshAndRebuild();
-    }
-    OnSettingChanged() {
         this.app.RefreshAndRebuild();
     }
     SetLocation(value) {
@@ -13955,7 +13966,7 @@ class HttpLib {
         if ((message === null || message === void 0 ? void 0 : message.status_code) > 200 && (message === null || message === void 0 ? void 0 : message.status_code) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
+        logger_Logger.Verbose("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
         if (error != null)
             logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = (_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data));
         return {
@@ -15199,6 +15210,8 @@ class WeatherApplet extends TextIconApplet {
     }
     async saveCurrentLocation() {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    }
+    async saveLog() {
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

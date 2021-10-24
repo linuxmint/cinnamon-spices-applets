@@ -3,7 +3,7 @@ import { IpApi } from "./location_services/ipApi";
 import { LocationData } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
-import { UUID } from "./consts";
+import { LogLevel, UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
@@ -130,6 +130,7 @@ export class Config {
 	public readonly _showBothTempUnits!: boolean;
 	public readonly _displayWindAsText!: boolean;
 	public readonly _alwaysShowHourlyWeather!: boolean;
+	public readonly _logLevel!: LogLevel;
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -175,6 +176,7 @@ export class Config {
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.BindSettings();
 		this.LocStore = new LocationStore(this.app, this);
+		this.onLogLevelUpdated();
 	}
 
 	/** Attaches settings to functions */
@@ -184,21 +186,24 @@ export class Config {
 			let key = Keys[k];
 			let keyProp = "_" + key;
 			this.settings.bindProperty(BindingDirection.IN,
-				key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
+				key, keyProp, this.OnSettingChanged, null);
 		}
 
 		// Settings what need special care
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
+			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
+			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
+			"keybinding", this.OnKeySettingsUpdated, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "logLevel",
+			"_logLevel", this.onLogLevelUpdated, null);
 
 		keybindingManager.addHotKey(
-			UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
 	}
 
 	public get CurrentFontSize(): number {
@@ -372,7 +377,7 @@ export class Config {
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
 	}
 
-	private OnKeySettingsUpdated(): void {
+	private OnKeySettingsUpdated = (): void => {
 		if (this.keybinding != null) {
 			keybindingManager.addHotKey(
 				UUID,
@@ -382,18 +387,22 @@ export class Config {
 		}
 	}
 
+	private onLogLevelUpdated = () => {
+		Logger.ChangeLevel(this._logLevel);
+	}
+
 	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
-	private OnLocationChanged() {
+	private OnLocationChanged = () => {
 		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
 		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
 	}
 
-	private OnLocationStoreChanged() {
+	private OnLocationStoreChanged = () => {
 		this.LocStore.OnLocationChanged(this._locationList)
 	}
 
-	private OnFontChanged() {
+	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.app.RefreshAndRebuild();
 	}
@@ -405,7 +414,7 @@ export class Config {
 		this.app.RefreshAndRebuild();
 	}
 
-	private OnSettingChanged() {
+	private OnSettingChanged = () => {
 		this.app.RefreshAndRebuild();
 	}
 

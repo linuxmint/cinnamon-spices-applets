@@ -105,7 +105,7 @@ export class HttpLib {
 			Logger.Info("Warning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
-		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Logger.Verbose("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
 			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
 		return {

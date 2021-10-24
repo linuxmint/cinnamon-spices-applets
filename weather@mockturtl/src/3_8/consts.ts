@@ -20,3 +20,5 @@ export const ELLIPSIS = '...';
 export const EN_DASH = '\u2013';
 /** Forward slash magic string */
 export const FORWARD_SLASH = '\u002F';
+
+export type LogLevel = "info" | "debug" | "verbose" | "critical" | "error" | "always";

@@ -1,46 +1,59 @@
-import { UUID } from "../consts";
+import { UUID, LogLevel } from "../consts";
+
+const LogLevelSeverity: Record<LogLevel, number> = {
+	always: 0,
+	critical: 1,
+	error: 5,
+	info: 10,
+	debug: 50,
+	verbose: 100
+}
 
 class Log {
 	private ID?: number;
-	private debug: boolean = false;
-	private level = 1;
-	private appletDir: string;
+	private logLevel: LogLevel = "info";
 
 	public constructor(_instanceId?: number) {
 		this.ID = _instanceId;
-		this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
-		this.debug = this.DEBUG();
 	}
 
-	private DEBUG(): boolean {
-		let path = this.appletDir + "/../DEBUG";
-		let _debug = imports.gi.Gio.file_new_for_path(path);
-		let result = _debug.query_exists(null);
-		if (result) this.Info("DEBUG file found in " + path + ", enabling Debug mode");
-		return result;
-	};
+	public ChangeLevel(level: LogLevel) {
+		this.logLevel = level;
+	}
+
+	private CanLog(level: LogLevel): boolean {
+		return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+	}
 
 	Info(message: string): void {
+		if (!this.CanLog("info"))
+			return;
+
 		let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
 		global.log(msg);
 	}
 
 	Error(error: string, e?: Error): void {
+		if (!this.CanLog("error"))
+			return;
+
 		global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
 		if (!!e?.stack)
 			global.logError(e.stack);
 	};
 
 	Debug(message: string): void {
-		if (this.debug) {
-			this.Info(message);
-		}
+		if (!this.CanLog("debug"))
+			return;
+
+		this.Info(message);
 	}
 
-	Debug2(message: string): void {
-		if (this.debug && this.level > 1) {
-			this.Info(message);
-		}
+	Verbose(message: string): void {
+		if (!this.CanLog("verbose"))
+			return;
+
+		this.Info(message);
 	}
 
 	public UpdateInstanceID(instanceID: number): void {

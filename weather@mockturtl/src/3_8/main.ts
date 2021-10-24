@@ -320,6 +320,10 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
+	private async saveLog(): Promise<void> {
+		// TODO: Save log to file
+	}
+
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
