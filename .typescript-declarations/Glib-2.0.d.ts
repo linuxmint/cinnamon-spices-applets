@@ -8707,7 +8707,17 @@ declare namespace imports.gi.GLib {
      * management for those dictionaries, but the type information would
      * be shared.
      */
-    class Variant {
+    class Variant<UnpackType = any,
+                  DeepUnpackType = UnpackType,
+                  RecursiveUnpackType = UnpackType>
+    {
+        public constructor(type: string, value: UnpackType);
+        public static new_string(str: string): Variant;
+        public static new_double(value: number): Variant;
+        public unpack(): UnpackType;
+        public deep_unpack(): DeepUnpackType;
+        public deepUnpack(): DeepUnpackType;
+        public recursiveUnpack(): RecursiveUnpackType
         /**
          * Performs a byteswapping operation on the contents of #value.  The
          * result is that all multi-byte numeric data contained in #value is

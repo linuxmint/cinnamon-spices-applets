@@ -15191,6 +15191,10 @@ declare namespace imports.gi.Gtk {
         new_for_screen(screen: Gdk.Screen): Widget;
     }
 
+    interface LabelOptions {
+        label: string
+    }
+
     /**
      * The {@link Label} widget displays a small amount of text. As the name
      * implies, most labels are used to label another widget such as a
@@ -15768,14 +15772,14 @@ declare namespace imports.gi.Gtk {
         set_yalign(yalign: number): void;
     }
 
-    var Label: {
+    class Label {
         /**
          * Creates a new label with the given text inside it. You can
          * pass %NULL to get an empty label widget.
          * @param _str The text of the label
          * @returns the new {@link Label}
          */
-        new(_str: string): Widget;
+         constructor(options?: LabelOptions)
         /**
          * Creates a new {@link Label}, containing the text in #str.
          * 
@@ -15795,7 +15799,7 @@ declare namespace imports.gi.Gtk {
          *       mnemonic character
          * @returns the new {@link Label}
          */
-        new_with_mnemonic(_str: string): Widget;
+        static new_with_mnemonic(_str: string): Label;
     }
 
     interface LabelAccessible extends WidgetAccessible, Atk.Component, Atk.Hypertext, Atk.Text {
@@ -37514,7 +37518,11 @@ declare namespace imports.gi.Gtk {
         unstick(): void;
     }
 
-    var Window: {
+    interface WindowOptions {
+        type: WindowType
+    }
+
+    class Window {
         /**
          * Creates a new {@link Window}, which is a toplevel window that can
          * contain other widgets. Nearly always, the type of the window should
@@ -37539,7 +37547,7 @@ declare namespace imports.gi.Gtk {
          * @param _type type of window
          * @returns a new {@link Window}.
          */
-        new(_type: WindowType): Widget;
+        constructor(options?: WindowOptions);
         /**
          * Gets the value set by gtk_window_set_default_icon_list().
          * The list is a copy and should be freed with g_list_free(),
@@ -37547,7 +37555,7 @@ declare namespace imports.gi.Gtk {
          * incremented.
          * @returns copy of default icon list
          */
-        get_default_icon_list(): GLib.List;
+        static get_default_icon_list(): GLib.List;
         /**
          * Returns the fallback icon name for windows that has been set
          * with gtk_window_set_default_icon_name(). The returned
@@ -37556,7 +37564,7 @@ declare namespace imports.gi.Gtk {
          * gtk_window_set_default_icon_name().
          * @returns the fallback icon name for windows
          */
-        get_default_icon_name(): string;
+        static get_default_icon_name(): string;
         /**
          * Returns a list of all existing toplevel windows. The widgets
          * in the list are not individually referenced. If you want
@@ -37566,7 +37574,7 @@ declare namespace imports.gi.Gtk {
          * then unref all the widgets afterwards.
          * @returns list of toplevel widgets
          */
-        list_toplevels(): GLib.List;
+        static list_toplevels(): GLib.List;
         /**
          * By default, after showing the first {@link Window}, GTK+ calls
          * gdk_notify_startup_complete().  Call this function to disable
@@ -37579,13 +37587,13 @@ declare namespace imports.gi.Gtk {
          * showing the main window would automatically result in notification.
          * @param setting %TRUE to automatically do startup notification
          */
-        set_auto_startup_notification(setting: boolean): void;
+        static set_auto_startup_notification(setting: boolean): void;
         /**
          * Sets an icon to be used as fallback for windows that haven't
          * had gtk_window_set_icon() called on them from a pixbuf.
          * @param icon the icon
          */
-        set_default_icon(icon: GdkPixbuf.Pixbuf): void;
+        static set_default_icon(icon: GdkPixbuf.Pixbuf): void;
         /**
          * Sets an icon to be used as fallback for windows that haven't
          * had gtk_window_set_icon_list() called on them from a file
@@ -37593,7 +37601,7 @@ declare namespace imports.gi.Gtk {
          * @param filename location of icon file
          * @returns %TRUE if setting the icon succeeded.
          */
-        set_default_icon_from_file(filename: string): boolean;
+        static set_default_icon_from_file(filename: string): boolean;
         /**
          * Sets an icon list to be used as fallback for windows that haven't
          * had gtk_window_set_icon_list() called on them to set up a
@@ -37603,21 +37611,21 @@ declare namespace imports.gi.Gtk {
          * See gtk_window_set_icon_list() for more details.
          * @param list a list of #GdkPixbuf
          */
-        set_default_icon_list(list: GLib.List): void;
+        static set_default_icon_list(list: GLib.List): void;
         /**
          * Sets an icon to be used as fallback for windows that haven't
          * had gtk_window_set_icon_list() called on them from a named
          * themed icon, see gtk_window_set_icon_name().
          * @param name the name of the themed icon
          */
-        set_default_icon_name(name: string): void;
+        static set_default_icon_name(name: string): void;
         /**
          * Opens or closes the [interactive debugger][interactive-debugging],
          * which offers access to the widget hierarchy of the application
          * and to useful debugging tools.
          * @param enable %TRUE to enable interactive debugging
          */
-        set_interactive_debugging(enable: boolean): void;
+        static set_interactive_debugging(enable: boolean): void;
     }
 
     interface WindowAccessible extends ContainerAccessible, Atk.Component, Atk.Window {
@@ -52483,7 +52491,7 @@ declare namespace imports.gi.Gtk {
      *     `argv` parameter of main(), or %NULL. Any options
      *     understood by GTK+ are stripped before return.
      */
-    function init(argc: number, argv: string[]): void;
+    function init(argc: number | null, argv?: string[]): void;
 
     /**
      * This function does the same work as gtk_init() with only a single

@@ -5959,7 +5959,7 @@ declare namespace imports.gi.Pango {
      * @param accel_char address of return location for accelerator char
      * @returns %FALSE if #error is set, otherwise %TRUE
      */
-    function parse_markup(markup_text: string, length: number, accel_marker: string, attr_list: AttrList, text: string, accel_char: string): boolean;
+    function parse_markup(markup_text: string, length: number, accel_marker: string, attr_list?: AttrList, text?: string, accel_char?: string): boolean;
 
     /**
      * Parses a font stretch.

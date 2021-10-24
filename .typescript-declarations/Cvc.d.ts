@@ -75,9 +75,9 @@ declare namespace imports.gi.Cvc {
         connect(signal: 'stream-added', callback: (actor: this, streamId: number) => void): number
     }
 
-    class MicerControl {
+    class MixerControl {
         constructor(name: Name);
-        new(name: string): MixerControl;
+        static new(name: string): MixerControl;
     }
 
     interface MixerEventRole extends MixerStream {
@@ -86,6 +86,7 @@ declare namespace imports.gi.Cvc {
 
     var MixerEventRole: {
         new(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
+        constructor(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
     }
 
     interface MixerSink extends MixerStream {
