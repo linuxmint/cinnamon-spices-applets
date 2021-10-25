@@ -94,7 +94,7 @@ export async function OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promis
 		file.get_parent().make_directory_with_parents(null); //don't know if this is a blocking call or not
 
 	return new Promise((resolve, reject) => {
-		file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
+		file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
 			let ioStream = file.replace_readwrite_finish(result);
 			resolve(ioStream);
 			return ioStream;

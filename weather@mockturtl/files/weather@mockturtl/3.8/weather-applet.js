@@ -9084,7 +9084,7 @@ async function OverwriteAndGetIOStream(file) {
     if (!FileExists(file.get_parent()))
         file.get_parent().make_directory_with_parents(null);
     return new Promise((resolve, reject) => {
-        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
             let ioStream = file.replace_readwrite_finish(result);
             resolve(ioStream);
             return ioStream;
@@ -9697,6 +9697,7 @@ class Config {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
         keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
     }
     get CurrentFontSize() {
@@ -15168,6 +15169,23 @@ class WeatherApplet extends TextIconApplet {
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
+        this.saveLog = async () => {
+            let logLines = [];
+            try {
+                logLines = await logger_Logger.GetAppletLogs();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
+                }
+                return;
+            }
+            const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
+            const stream = await OverwriteAndGetIOStream(appletLogFile);
+            await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+            await CloseStream(stream.get_output_stream());
+            NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", { filePath: this.config._selectedLogPath }));
+        };
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -15383,25 +15401,6 @@ class WeatherApplet extends TextIconApplet {
     }
     async saveCurrentLocation() {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
-    }
-    async saveLog() {
-        var _a;
-        const home = (_a = main_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let logLines = [];
-        try {
-            logLines = await logger_Logger.GetAppletLogs();
-        }
-        catch (e) {
-            if (e instanceof Error) {
-                NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
-            }
-            return;
-        }
-        const appletLogFile = main_File.new_for_path(`${home}/weather@mockturtl.log`);
-        const stream = await OverwriteAndGetIOStream(appletLogFile);
-        await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
-        await CloseStream(stream.get_output_stream());
-        NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", { filePath: `${home}/weather@mockturtl.log` }));
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

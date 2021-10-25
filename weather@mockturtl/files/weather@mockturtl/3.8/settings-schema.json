@@ -169,7 +169,7 @@
 			"title": "Debug",
 			"keys": [
 				"logLevel",
-				"saveLog"
+				"fileSelect"
 			]
 		}
 	},
@@ -515,11 +515,16 @@
 			"Verbose": "verbose"
 		}
 	},
-	"saveLog": {
-		"type": "button",
-		"indent": true,
-		"description": "Save log into file",
-		"callback": "saveLog",
-		"tooltip": "Saves logs related to the applet onto ~/weather-mockturtl.log"
-	}
+	"fileSelect" : {
+        "type" : "custom",
+        "file" : "LogSaver.py",
+        "widget" : "FileSaver",
+        "description" : "Click Save to save logs to file"
+    },
+	"selectedLogPath" : {
+        "type": "entry",
+		"default": "",
+		"description": "Override label on panel",
+		"value": ""
+    }
 }

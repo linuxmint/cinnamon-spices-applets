@@ -131,6 +131,7 @@ export class Config {
 	public readonly _displayWindAsText!: boolean;
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
+	public readonly _selectedLogPath!: string;
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -201,6 +202,9 @@ export class Config {
 
 		this.settings.bindProperty(BindingDirection.IN, "logLevel",
 			"_logLevel", this.onLogLevelUpdated, null);
+
+		this.settings.bind("selectedLogPath",
+			"_selectedLogPath", this.app.saveLog);
 
 		keybindingManager.addHotKey(
 			UUID, this.keybinding, () => this.app.on_applet_clicked(null));

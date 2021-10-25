@@ -325,8 +325,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
-	private async saveLog(): Promise<void> {
-		const home = get_home_dir() ?? "~";
+	public saveLog = async(): Promise<void> => {
 		let logLines: string[] = [];
 		try {
 			logLines = await Logger.GetAppletLogs();
@@ -338,11 +337,11 @@ export class WeatherApplet extends TextIconApplet {
 			return;
 		}
 
-		const appletLogFile = File.new_for_path(`${home}/weather@mockturtl.log`);
+		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
 		await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
 		await CloseStream(stream.get_output_stream());
-		NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", {filePath: `${home}/weather@mockturtl.log`}));
+		NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", {filePath: this.config._selectedLogPath}));
 	}
 
 	// -------------------------------------------------------------------
