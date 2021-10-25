@@ -1,4 +1,9 @@
 import { UUID, LogLevel } from "../consts";
+import { CompareVersion, _ } from "../utils";
+import { FileExists, LoadContents } from "./io_lib";
+
+const { File } = imports.gi.Gio;
+const { get_home_dir } = imports.gi.GLib;
 
 const LogLevelSeverity: Record<LogLevel, number> = {
 	always: 0,
@@ -58,6 +63,56 @@ class Log {
 
 	public UpdateInstanceID(instanceID: number): void {
 		this.ID = instanceID;
+	}
+
+	public async GetAppletLogs(): Promise<string[]> {
+		const home = get_home_dir() ?? "~";
+		let logFilePath = `${home}/`;
+
+		// Get correct log file
+		if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+			logFilePath += ".cinnamon/glass.log";
+		}
+		else {
+			logFilePath += ".xsession-errors";
+		}
+		const logFile = File.new_for_path(logFilePath);
+
+		// Check if file exists
+		if (!await FileExists(logFile)) {
+			throw new Error(
+				_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath })
+			);
+		}
+
+		// Load file contents
+		const logs = await LoadContents(logFile);
+		if (logs == null) {
+			throw new Error(
+				_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath })
+			);
+		}
+
+		const logLines = logs.split("\n");
+		const filteredLines: string[] = [];
+		let lastWasCinnamonLog = false;
+		for (const line of logLines) {
+			// Trace line
+			if (lastWasCinnamonLog && (line.match(/.js:\d+:\d+$/gm)?.length ?? 0) > 0) {
+				filteredLines.push(line)
+			}
+			// Looking glass line
+			else if (line.includes("LookingGlass") && line.includes(UUID)) {
+				filteredLines.push(line);
+				lastWasCinnamonLog = true;
+			}
+			else {
+				lastWasCinnamonLog = false;
+			}
+
+		}
+
+		return filteredLines;
 	}
 }
 

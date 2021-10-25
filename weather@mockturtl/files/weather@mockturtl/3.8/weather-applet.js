@@ -379,57 +379,6 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 
-;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
-
-const LogLevelSeverity = {
-    always: 0,
-    critical: 1,
-    error: 5,
-    info: 10,
-    debug: 50,
-    verbose: 100
-};
-class Log {
-    constructor(_instanceId) {
-        this.logLevel = "info";
-        this.ID = _instanceId;
-    }
-    ChangeLevel(level) {
-        this.logLevel = level;
-    }
-    CanLog(level) {
-        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
-    }
-    Info(message) {
-        if (!this.CanLog("info"))
-            return;
-        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
-        global.log(msg);
-    }
-    Error(error, e) {
-        if (!this.CanLog("error"))
-            return;
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
-        if (!!(e === null || e === void 0 ? void 0 : e.stack))
-            global.logError(e.stack);
-    }
-    ;
-    Debug(message) {
-        if (!this.CanLog("debug"))
-            return;
-        this.Info(message);
-    }
-    Verbose(message) {
-        if (!this.CanLog("verbose"))
-            return;
-        this.Info(message);
-    }
-    UpdateInstanceID(instanceID) {
-        this.ID = instanceID;
-    }
-}
-const logger_Logger = new Log();
-
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -8984,10 +8933,7 @@ function GetDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 function GetFuncName(func) {
-    if (!!func.name)
-        return func.name;
-    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
-    return result ? result[1] : '';
+    return func.name;
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -8998,6 +8944,39 @@ function Guid() {
 const isFinalized = function (obj) {
     return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 };
+function CompareVersion(v1, v2, options) {
+    let zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
+    function isValidPart(x) {
+        return (/^\d+$/).test(x);
+    }
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length)
+            v1parts.push("0");
+        while (v2parts.length < v1parts.length)
+            v2parts.push("0");
+    }
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        }
+        else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+    return 0;
+}
 function utils_setTimeout(func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -9033,6 +9012,196 @@ function utils_setInterval(func, ms) {
     return id;
 }
 ;
+
+;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
+async function GetFileInfo(file) {
+    return new Promise((resolve, reject) => {
+        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+            let result = file.query_info_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+async function FileExists(file, dictionary = false) {
+    try {
+        return file.query_exists(null);
+    }
+    catch (e) {
+        logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        return false;
+    }
+}
+async function LoadContents(file) {
+    return new Promise((resolve, reject) => {
+        file.load_contents_async(null, (obj, res) => {
+            let result, contents = null;
+            try {
+                [result, contents] = file.load_contents_finish(res);
+            }
+            catch (e) {
+                reject(e);
+                return e;
+            }
+            if (result != true) {
+                resolve(null);
+                return null;
+            }
+            if (contents instanceof Uint8Array)
+                contents = ByteArray.toString(contents);
+            resolve(contents.toString());
+            return contents.toString();
+        });
+    });
+}
+async function DeleteFile(file) {
+    let result = await new Promise((resolve, reject) => {
+        file.delete_async(null, null, (obj, res) => {
+            let result = null;
+            try {
+                result = file.delete_finish(res);
+            }
+            catch (e) {
+                let error = e;
+                if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                    resolve(true);
+                    return true;
+                }
+                Logger.Error("Can't delete file, reason: ", e);
+                resolve(false);
+                return false;
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return result;
+}
+async function OverwriteAndGetIOStream(file) {
+    if (!FileExists(file.get_parent()))
+        file.get_parent().make_directory_with_parents(null);
+    return new Promise((resolve, reject) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
+            let ioStream = file.replace_readwrite_finish(result);
+            resolve(ioStream);
+            return ioStream;
+        });
+    });
+}
+async function WriteAsync(outputStream, buffer) {
+    let text = ByteArray.fromString(buffer);
+    if (outputStream.is_closed())
+        return false;
+    return new Promise((resolve, reject) => {
+        outputStream.write_bytes_async(text, null, null, (obj, res) => {
+            let ioStream = outputStream.write_bytes_finish(res);
+            resolve(true);
+            return true;
+        });
+    });
+}
+async function CloseStream(stream) {
+    return new Promise((resolve, reject) => {
+        stream.close_async(null, null, (obj, res) => {
+            let result = stream.close_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
+
+
+
+const { File } = imports.gi.Gio;
+const { get_home_dir } = imports.gi.GLib;
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
+class Log {
+    constructor(_instanceId) {
+        this.logLevel = "info";
+        this.ID = _instanceId;
+    }
+    ChangeLevel(level) {
+        this.logLevel = level;
+    }
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
+    Info(message) {
+        if (!this.CanLog("info"))
+            return;
+        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        global.log(msg);
+    }
+    Error(error, e) {
+        if (!this.CanLog("error"))
+            return;
+        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+        if (!!(e === null || e === void 0 ? void 0 : e.stack))
+            global.logError(e.stack);
+    }
+    ;
+    Debug(message) {
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message);
+    }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message);
+    }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
+    async GetAppletLogs() {
+        var _a, _b, _c;
+        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logFilePath = `${home}/`;
+        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+            logFilePath += ".cinnamon/glass.log";
+        }
+        else {
+            logFilePath += ".xsession-errors";
+        }
+        const logFile = File.new_for_path(logFilePath);
+        if (!await FileExists(logFile)) {
+            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logs = await LoadContents(logFile);
+        if (logs == null) {
+            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logLines = logs.split("\n");
+        const filteredLines = [];
+        let lastWasCinnamonLog = false;
+        for (const line of logLines) {
+            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
+                filteredLines.push(line);
+            }
+            else if (line.includes("LookingGlass") && line.includes(UUID)) {
+                filteredLines.push(line);
+                lastWasCinnamonLog = true;
+            }
+            else {
+                lastWasCinnamonLog = false;
+            }
+        }
+        return filteredLines;
+    }
+}
+const logger_Logger = new Log();
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/ipApi.ts
 
@@ -14986,9 +15155,13 @@ class DanishMI {
 
 
 
+
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
+const { File: main_File } = imports.gi.Gio;
+const { get_home_dir: main_get_home_dir } = imports.gi.GLib;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -15212,6 +15385,23 @@ class WeatherApplet extends TextIconApplet {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
     async saveLog() {
+        var _a;
+        const home = (_a = main_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logLines = [];
+        try {
+            logLines = await logger_Logger.GetAppletLogs();
+        }
+        catch (e) {
+            if (e instanceof Error) {
+                NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
+            }
+            return;
+        }
+        const appletLogFile = main_File.new_for_path(`${home}/weather@mockturtl.log`);
+        const stream = await OverwriteAndGetIOStream(appletLogFile);
+        await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+        await CloseStream(stream.get_output_stream());
+        NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", { filePath: `${home}/weather@mockturtl.log` }));
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

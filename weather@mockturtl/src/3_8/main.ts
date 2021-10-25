@@ -23,10 +23,15 @@ import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { ClimacellV4 } from "./providers/climacellV4";
 import { DanishMI } from "./providers/danishMI";
+import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
+import { NotificationService } from "./lib/notification_service";
+
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
+const { File } = imports.gi.Gio;
+const { get_home_dir } = imports.gi.GLib;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
@@ -321,7 +326,23 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private async saveLog(): Promise<void> {
-		// TODO: Save log to file
+		const home = get_home_dir() ?? "~";
+		let logLines: string[] = [];
+		try {
+			logLines = await Logger.GetAppletLogs();
+		}
+		catch(e) {
+			if (e instanceof Error) {
+				NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
+			}
+			return;
+		}
+
+		const appletLogFile = File.new_for_path(`${home}/weather@mockturtl.log`);
+		const stream = await OverwriteAndGetIOStream(appletLogFile);
+		await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+		await CloseStream(stream.get_output_stream());
+		NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", {filePath: `${home}/weather@mockturtl.log`}));
 	}
 
 	// -------------------------------------------------------------------
