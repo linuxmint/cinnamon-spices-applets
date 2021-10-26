@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 20:46+0100\n"
+"POT-Creation-Date: 2021-10-26 09:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,48 +18,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:15190
+#: 3.8/weather-applet.js:15193
 msgid "Error"
 msgstr ""
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:15191 3.8/weather-applet.js:15193
-#: 3.8/weather-applet.js:15195 3.8/weather-applet.js:15198
-#: 3.8/weather-applet.js:15201 3.8/weather-applet.js:15202
-#: 3.8/weather-applet.js:15203 3.8/weather-applet.js:15204
+#: 3.8/weather-applet.js:15194 3.8/weather-applet.js:15196
+#: 3.8/weather-applet.js:15198 3.8/weather-applet.js:15201
+#: 3.8/weather-applet.js:15204 3.8/weather-applet.js:15205
+#: 3.8/weather-applet.js:15206 3.8/weather-applet.js:15207
 msgid "Service Error"
 msgstr ""
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:15192
+#: 3.0/applet.js:168 3.8/weather-applet.js:15195
 msgid "Incorrect API Key"
 msgstr ""
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:15194
+#: 3.0/applet.js:170 3.8/weather-applet.js:15197
 msgid "Incorrect Location Format"
 msgstr ""
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:15196
+#: 3.0/applet.js:172 3.8/weather-applet.js:15199
 msgid "Key Blocked"
 msgstr ""
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:15197
+#: 3.0/applet.js:173 3.8/weather-applet.js:15200
 msgid "Can't find location"
 msgstr ""
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:15199
+#: 3.0/applet.js:175 3.8/weather-applet.js:15202
 msgid "No Api Key"
 msgstr ""
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:15200
+#: 3.0/applet.js:176 3.8/weather-applet.js:15203
 msgid "No Location"
 msgstr ""
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:15205
+#: 3.0/applet.js:181 3.8/weather-applet.js:15208
 msgid "Missing Packages"
 msgstr ""
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:15206
+#: 3.0/applet.js:182 3.8/weather-applet.js:15209
 msgid "Location not covered"
 msgstr ""
 
@@ -67,16 +67,16 @@ msgstr ""
 msgid "Weather Applet"
 msgstr ""
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:15423
+#: 3.0/applet.js:217 3.8/weather-applet.js:15426
 msgid "..."
 msgstr ""
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:15424
+#: 3.0/applet.js:218 3.8/weather-applet.js:15427
 msgid "Click to open"
 msgstr ""
 
 #: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:10872
-#: 3.8/weather-applet.js:15435
+#: 3.8/weather-applet.js:15438
 msgid "Refresh"
 msgstr ""
 
@@ -99,12 +99,12 @@ msgstr ""
 msgid "Could not get weather information"
 msgstr ""
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:15296
+#: 3.0/applet.js:624 3.8/weather-applet.js:15299
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:15552
+#: 3.0/applet.js:670 3.8/weather-applet.js:15555
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -1436,7 +1436,7 @@ msgstr ""
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr ""
 
-#: 3.8/weather-applet.js:11549 3.8/weather-applet.js:15304
+#: 3.8/weather-applet.js:11549 3.8/weather-applet.js:15307
 msgid "As of {lastUpdatedTime}"
 msgstr ""
 
@@ -1622,19 +1622,19 @@ msgstr ""
 msgid "Heavy mixed rain and snow"
 msgstr ""
 
-#: 3.8/weather-applet.js:15179
+#: 3.8/weather-applet.js:15182
 msgid "Error Saving Logs"
 msgstr ""
 
-#: 3.8/weather-applet.js:15187
+#: 3.8/weather-applet.js:15190
 msgid "Logs saved successfully"
 msgstr ""
 
-#: 3.8/weather-applet.js:15187
+#: 3.8/weather-applet.js:15190
 msgid "Logs are saved to {filePath}"
 msgstr ""
 
-#: 3.8/weather-applet.js:15265
+#: 3.8/weather-applet.js:15268
 msgid "This provider requires an API key to operate"
 msgstr ""
 

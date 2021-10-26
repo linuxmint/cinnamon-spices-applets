@@ -16,6 +16,8 @@ class FileSaver(SettingsWidget):
 
         # Binding
         self.entry = Gtk.Entry()
+        # Have to bind to a different setting than this was opened from
+        # otherwise the callback won't work
         self.settings.bind('selectedLogPath', self.entry, 'text', Gio.SettingsBindFlags.SET)
 
     def button_pressed(self, *args):
@@ -25,6 +27,8 @@ class FileSaver(SettingsWidget):
             Gtk.FileChooserAction.SAVE,
             (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
              Gtk.STOCK_SAVE, Gtk.ResponseType.OK))
+        # Have to reset the text if we want it to work every time
+        self.entry.set_text("")
         response = saver.run()
         if response == Gtk.ResponseType.OK:
             file_path = saver.get_filename()

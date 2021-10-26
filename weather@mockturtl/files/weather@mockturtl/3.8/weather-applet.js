@@ -15170,6 +15170,9 @@ class WeatherApplet extends TextIconApplet {
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
         this.saveLog = async () => {
+            var _a;
+            if (!(((_a = this.config._selectedLogPath) === null || _a === void 0 ? void 0 : _a.length) > 0))
+                return;
             let logLines = [];
             try {
                 logLines = await logger_Logger.GetAppletLogs();

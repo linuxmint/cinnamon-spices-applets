@@ -326,6 +326,10 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	public saveLog = async(): Promise<void> => {
+		// Empty string, abort
+		if (!(this.config._selectedLogPath?.length > 0))
+			return;
+
 		let logLines: string[] = [];
 		try {
 			logLines = await Logger.GetAppletLogs();
