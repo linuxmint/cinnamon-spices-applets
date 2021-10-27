@@ -1,5 +1,8 @@
 declare namespace imports.gi.Caribou {
-    interface DisplayAdapter extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DisplayAdapter} instead.
+     */
+    interface IDisplayAdapter {
         keyval_press(keyval: number): void;
         keyval_release(keyval: number): void;
         mod_lock(mask: number): void;
@@ -13,48 +16,84 @@ declare namespace imports.gi.Caribou {
         get_display(): Gdk.Display;
     }
 
-    var DisplayAdapter: {
-        set_default(adapter: Caribou.DisplayAdapter): boolean;
-        get_default(): Caribou.DisplayAdapter;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DisplayAdapter} instead.
+     */
+    type DisplayAdapterMixin = IDisplayAdapter & GObject.IObject;
+
+    interface DisplayAdapter extends DisplayAdapterMixin { }
+
+    class DisplayAdapter {
+        constructor();
+        static set_default(adapter: Caribou.DisplayAdapter): boolean;
+        static get_default(): Caribou.DisplayAdapter;
     }
 
-    interface NullAdapter extends Caribou.DisplayAdapter {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NullAdapter} instead.
+     */
+    interface INullAdapter {
 
     }
 
-    var NullAdapter: {
-        new(): Caribou.NullAdapter;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NullAdapter} instead.
+     */
+    type NullAdapterMixin = INullAdapter & Caribou.IDisplayAdapter;
+
+    interface NullAdapter extends NullAdapterMixin { }
+
+    class NullAdapter {
+        constructor();
+        static new(): Caribou.NullAdapter;
     }
 
-    interface XAdapter extends Caribou.DisplayAdapter {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link XAdapter} instead.
+     */
+    interface IXAdapter {
 
     }
 
-    var XAdapter: {
-        new(): Caribou.XAdapter;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link XAdapter} instead.
+     */
+    type XAdapterMixin = IXAdapter & Caribou.IDisplayAdapter;
+
+    interface XAdapter extends XAdapterMixin { }
+
+    class XAdapter {
+        constructor();
+        static new(): Caribou.XAdapter;
     }
 
-    interface KeyboardModelOptions {
-        keyboard_type: string
-    }
-
-    interface KeyboardModel extends GObject.Object, Caribou.IKeyboardObject {
-        keyboard_type: string
-        active_group: string
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyboardModel} instead.
+     */
+    interface IKeyboardModel {
         get_groups(result_length1: number): string[];
         get_group(group_name: string): Caribou.GroupModel;
         get_active_group(): string;
         get_keyboard_type(): string;
         get_keyboard_file(): string;
-
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyboardModel} instead.
+     */
+    type KeyboardModelMixin = IKeyboardModel & GObject.IObject & Caribou.IIKeyboardObject;
+
+    interface KeyboardModel extends KeyboardModelMixin { }
 
     class KeyboardModel {
+        constructor();
         static new(): Caribou.KeyboardModel;
-        constructor(options?: KeyboardModelOptions)
     }
 
-    interface KeyboardService extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyboardService} instead.
+     */
+    interface IKeyboardService {
         set_cursor_location(_x: number, _y: number, _w: number, _h: number): void;
         set_entry_location(_x: number, _y: number, _w: number, _h: number): void;
         show(timestamp: number): void;
@@ -63,38 +102,82 @@ declare namespace imports.gi.Caribou {
         name_lost(name: string): void;
     }
 
-    var KeyboardService: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyboardService} instead.
+     */
+    type KeyboardServiceMixin = IKeyboardService & GObject.IObject;
+
+    interface KeyboardService extends KeyboardServiceMixin { }
+
+    class KeyboardService {
+        constructor();
     }
 
-    interface GroupModel extends GObject.Object, Caribou.IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GroupModel} instead.
+     */
+    interface IGroupModel {
         get_levels(result_length1: number): string[];
         get_level(level_name: string): Caribou.LevelModel;
         get_active_level(): string;
     }
 
-    var GroupModel: {
-        new(group: string, variant: string): Caribou.GroupModel;
-        create_group_name(group: string, variant: string): string;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GroupModel} instead.
+     */
+    type GroupModelMixin = IGroupModel & GObject.IObject & Caribou.IIKeyboardObject;
+
+    interface GroupModel extends GroupModelMixin { }
+
+    class GroupModel {
+        constructor();
+        static new(group: string, variant: string): Caribou.GroupModel;
+        static create_group_name(group: string, variant: string): string;
     }
 
-    interface LevelModel extends Caribou.ScannableGroup, Caribou.IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link LevelModel} instead.
+     */
+    interface ILevelModel {
         get_rows(result_length1: number): Caribou.RowModel[];
         get_mode(): string;
     }
 
-    var LevelModel: {
-        new(mode: string): Caribou.LevelModel;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link LevelModel} instead.
+     */
+    type LevelModelMixin = ILevelModel & Caribou.IScannableGroup & Caribou.IIKeyboardObject;
+
+    interface LevelModel extends LevelModelMixin { }
+
+    class LevelModel {
+        constructor();
+        static new(mode: string): Caribou.LevelModel;
     }
 
-    interface RowModel extends Caribou.ScannableGroup, Caribou.IScannableItem, Caribou.IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RowModel} instead.
+     */
+    interface IRowModel {
         get_columns(result_length1: number): Caribou.ColumnModel[];
     }
 
-    var RowModel: {
-        new(): Caribou.RowModel;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RowModel} instead.
+     */
+    type RowModelMixin = IRowModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+
+    interface RowModel extends RowModelMixin { }
+
+    class RowModel {
+        constructor();
+        static new(): Caribou.RowModel;
     }
 
-    interface KeyModel extends GObject.Object, Caribou.IScannableItem, Caribou.IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyModel} instead.
+     */
+    interface IKeyModel {
         press(): void;
         release(): void;
         get_extended_keys(result_length1: number): Caribou.KeyModel[];
@@ -117,20 +200,42 @@ declare namespace imports.gi.Caribou {
         set_label(value: string): void;
     }
 
-    var KeyModel: {
-        new(name: string, text: string): Caribou.KeyModel;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link KeyModel} instead.
+     */
+    type KeyModelMixin = IKeyModel & GObject.IObject & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+
+    interface KeyModel extends KeyModelMixin { }
+
+    class KeyModel {
+        constructor();
+        static new(name: string, text: string): Caribou.KeyModel;
     }
 
-    interface ColumnModel extends Caribou.ScannableGroup, Caribou.IScannableItem, Caribou.IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ColumnModel} instead.
+     */
+    interface IColumnModel {
         get_key(index: number): Caribou.KeyModel;
         first_key(): Caribou.KeyModel;
     }
 
-    var ColumnModel: {
-        new(): Caribou.ColumnModel;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ColumnModel} instead.
+     */
+    type ColumnModelMixin = IColumnModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+
+    interface ColumnModel extends ColumnModelMixin { }
+
+    class ColumnModel {
+        constructor();
+        static new(): Caribou.ColumnModel;
     }
 
-    interface Scanner extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Scanner} instead.
+     */
+    interface IScanner {
         set_keyboard(keyboard: Caribou.KeyboardModel): void;
         reset(): void;
         get_bind_settings(): boolean;
@@ -154,16 +259,35 @@ declare namespace imports.gi.Caribou {
         set_inverse_scanning(value: boolean): void;
     }
 
-    var Scanner: {
-        new(): Caribou.Scanner;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Scanner} instead.
+     */
+    type ScannerMixin = IScanner & GObject.IObject;
+
+    interface Scanner extends ScannerMixin { }
+
+    class Scanner {
+        constructor();
+        static new(): Caribou.Scanner;
     }
 
-    interface ScannableGroup extends GObject.Object, Caribou.IScannableGroup {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ScannableGroup} instead.
+     */
+    interface IScannableGroup {
         get_scan_children(result_length1: number): Caribou.IScannableItem[];
         child_select(): Caribou.IScannableItem;
     }
 
-    var ScannableGroup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ScannableGroup} instead.
+     */
+    type ScannableGroupMixin = IScannableGroup & GObject.IObject & Caribou.IIScannableGroup;
+
+    interface ScannableGroup extends ScannableGroupMixin { }
+
+    class ScannableGroup {
+        constructor();
     }
 
     class DisplayAdapterClass {
@@ -293,19 +417,33 @@ declare namespace imports.gi.Caribou {
         get_keys: { (self: Caribou.IKeyboardObject, result_length1: number): Caribou.KeyModel[]; };
     }
 
-    interface IScannableItem {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IScannableItem} instead.
+     */
+    interface IIScannableItem {
         get_scan_stepping(): boolean;
         set_scan_stepping(value: boolean): void;
         get_scan_selected(): boolean;
         set_scan_selected(value: boolean): void;
     }
 
-    var IScannableItem: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IScannableItem} instead.
+     */
+    type IScannableItemMixin = IIScannableItem;
+
+    interface IScannableItem extends IScannableItemMixin { }
+
+    class IScannableItem {
+        constructor();
     }
 
 
 
-    interface IScannableGroup {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IScannableGroup} instead.
+     */
+    interface IIScannableGroup {
         child_select(): Caribou.IScannableItem;
         scan_reset(): void;
         get_scan_children(result_length1: number): Caribou.IScannableItem[];
@@ -316,17 +454,36 @@ declare namespace imports.gi.Caribou {
         set_scan_grouping(value: Caribou.ScanGrouping): void;
     }
 
-    var IScannableGroup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IScannableGroup} instead.
+     */
+    type IScannableGroupMixin = IIScannableGroup;
+
+    interface IScannableGroup extends IScannableGroupMixin { }
+
+    class IScannableGroup {
+        constructor();
     }
 
 
 
-    interface IKeyboardObject {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IKeyboardObject} instead.
+     */
+    interface IIKeyboardObject {
         get_children(result_length1: number): Caribou.IKeyboardObject[];
         get_keys(result_length1: number): Caribou.KeyModel[];
     }
 
-    var IKeyboardObject: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IKeyboardObject} instead.
+     */
+    type IKeyboardObjectMixin = IIKeyboardObject;
+
+    interface IKeyboardObject extends IKeyboardObjectMixin { }
+
+    class IKeyboardObject {
+        constructor();
     }
 
 
@@ -345,7 +502,7 @@ declare namespace imports.gi.Caribou {
     }
 
     interface KeyButtonCallback {
-        (keybuttoncode: number, pressed: boolean, user_data: any): void;
+        (keybuttoncode: number, pressed: boolean): void;
     }
 
 }

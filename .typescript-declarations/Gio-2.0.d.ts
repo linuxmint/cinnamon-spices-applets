@@ -1,4 +1,16 @@
 declare namespace imports.gi.Gio {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppInfoMonitor} instead.
+     */
+    interface IAppInfoMonitor {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppInfoMonitor} instead.
+     */
+    type AppInfoMonitorMixin = IAppInfoMonitor & GObject.IObject;
+
     /**
      * #GAppInfoMonitor is a very simple object used for monitoring the app
      * info database for changes (ie: newly installed or removed
@@ -18,11 +30,10 @@ declare namespace imports.gi.Gio {
      * applications often come in groups (like during system updates) and
      * rescanning the list on every change is pointless and expensive.
      */
-    interface AppInfoMonitor extends GObject.Object {
+    interface AppInfoMonitor extends AppInfoMonitorMixin { }
 
-    }
-
-    var AppInfoMonitor: {
+    class AppInfoMonitor {
+        constructor();
         /**
          * Gets the #GAppInfoMonitor for the current thread-default main
          * context.
@@ -35,15 +46,13 @@ declare namespace imports.gi.Gio {
          * the same main context as you created it.
          * @returns a reference to a #GAppInfoMonitor
          */
-        get(): AppInfoMonitor;
+        static get(): AppInfoMonitor;
     }
 
-    /**
-     * Integrating the launch with the launching application. This is used to
-     * handle for instance startup notification and launching the new application
-     * on the same screen as the launching window.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppLaunchContext} instead.
      */
-    interface AppLaunchContext extends GObject.Object {
+    interface IAppLaunchContext {
         /**
          * Gets the display string for the #context. This is used to ensure new
          * applications are started on the same display as the launching
@@ -94,132 +103,32 @@ declare namespace imports.gi.Gio {
         unsetenv(variable: string): void;
     }
 
-    var AppLaunchContext: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppLaunchContext} instead.
+     */
+    type AppLaunchContextMixin = IAppLaunchContext & GObject.IObject;
+
+    /**
+     * Integrating the launch with the launching application. This is used to
+     * handle for instance startup notification and launching the new application
+     * on the same screen as the launching window.
+     */
+    interface AppLaunchContext extends AppLaunchContextMixin { }
+
+    class AppLaunchContext {
+        constructor();
         /**
          * Creates a new application launch context. This is not normally used,
          * instead you instantiate a subclass of this, such as #GdkAppLaunchContext.
          * @returns a #GAppLaunchContext.
          */
-        new(): AppLaunchContext;
+        static new(): AppLaunchContext;
     }
 
-    /**
-     * A #GApplication is the foundation of an application.  It wraps some
-     * low-level platform-specific services and is intended to act as the
-     * foundation for higher-level application classes such as
-     * #GtkApplication or #MxApplication.  In general, you should not use
-     * this class outside of a higher level framework.
-     * 
-     * GApplication provides convenient life cycle management by maintaining
-     * a "use count" for the primary application instance. The use count can
-     * be changed using g_application_hold() and g_application_release(). If
-     * it drops to zero, the application exits. Higher-level classes such as
-     * #GtkApplication employ the use count to ensure that the application
-     * stays alive as long as it has any opened windows.
-     * 
-     * Another feature that GApplication (optionally) provides is process
-     * uniqueness. Applications can make use of this functionality by
-     * providing a unique application ID. If given, only one application
-     * with this ID can be running at a time per session. The session
-     * concept is platform-dependent, but corresponds roughly to a graphical
-     * desktop login. When your application is launched again, its
-     * arguments are passed through platform communication to the already
-     * running program. The already running instance of the program is
-     * called the "primary instance"; for non-unique applications this is
-     * always the current instance. On Linux, the D-Bus session bus
-     * is used for communication.
-     * 
-     * The use of #GApplication differs from some other commonly-used
-     * uniqueness libraries (such as libunique) in important ways. The
-     * application is not expected to manually register itself and check
-     * if it is the primary instance. Instead, the main() function of a
-     * #GApplication should do very little more than instantiating the
-     * application instance, possibly connecting signal handlers, then
-     * calling g_application_run(). All checks for uniqueness are done
-     * internally. If the application is the primary instance then the
-     * startup signal is emitted and the mainloop runs. If the application
-     * is not the primary instance then a signal is sent to the primary
-     * instance and g_application_run() promptly returns. See the code
-     * examples below.
-     * 
-     * If used, the expected form of an application identifier is the same as
-     * that of of a
-     * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
-     * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
-     * `org._7_zip.Archiver`.
-     * For details on valid application identifiers, see g_application_id_is_valid().
-     * 
-     * On Linux, the application identifier is claimed as a well-known bus name
-     * on the user's session bus.  This means that the uniqueness of your
-     * application is scoped to the current session.  It also means that your
-     * application may provide additional services (through registration of other
-     * object paths) at that bus name.  The registration of these object paths
-     * should be done with the shared GDBus session bus.  Note that due to the
-     * internal architecture of GDBus, method calls can be dispatched at any time
-     * (even if a main loop is not running).  For this reason, you must ensure that
-     * any object paths that you wish to register are registered before #GApplication
-     * attempts to acquire the bus name of your application (which happens in
-     * g_application_register()).  Unfortunately, this means that you cannot use
-     * g_application_get_is_remote() to decide if you want to register object paths.
-     * 
-     * GApplication also implements the #GActionGroup and #GActionMap
-     * interfaces and lets you easily export actions by adding them with
-     * g_action_map_add_action(). When invoking an action by calling
-     * g_action_group_activate_action() on the application, it is always
-     * invoked in the primary instance. The actions are also exported on
-     * the session bus, and GIO provides the #GDBusActionGroup wrapper to
-     * conveniently access them remotely. GIO provides a #GDBusMenuModel wrapper
-     * for remote access to exported #GMenuModels.
-     * 
-     * There is a number of different entry points into a GApplication:
-     * 
-     * - via 'Activate' (i.e. just starting the application)
-     * 
-     * - via 'Open' (i.e. opening some files)
-     * 
-     * - by handling a command-line
-     * 
-     * - via activating an action
-     * 
-     * The #GApplication::startup signal lets you handle the application
-     * initialization for all of these in a single place.
-     * 
-     * Regardless of which of these entry points is used to start the
-     * application, GApplication passes some ‘platform data’ from the
-     * launching instance to the primary instance, in the form of a
-     * #GVariant dictionary mapping strings to variants. To use platform
-     * data, override the #before_emit or #after_emit virtual functions
-     * in your #GApplication subclass. When dealing with
-     * #GApplicationCommandLine objects, the platform data is
-     * directly available via g_application_command_line_get_cwd(),
-     * g_application_command_line_get_environ() and
-     * g_application_command_line_get_platform_data().
-     * 
-     * As the name indicates, the platform data may vary depending on the
-     * operating system, but it always includes the current directory (key
-     * "cwd"), and optionally the environment (ie the set of environment
-     * variables and their values) of the calling process (key "environ").
-     * The environment is only added to the platform data if the
-     * %G_APPLICATION_SEND_ENVIRONMENT flag is set. #GApplication subclasses
-     * can add their own platform data by overriding the #add_platform_data
-     * virtual function. For instance, #GtkApplication adds startup notification
-     * data in this way.
-     * 
-     * To parse commandline arguments you may handle the
-     * #GApplication::command-line signal or override the local_command_line()
-     * vfunc, to parse them in either the primary instance or the local instance,
-     * respectively.
-     * 
-     * For an example of opening files with a GApplication, see
-     * [gapplication-example-open.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-open.c).
-     * 
-     * For an example of using actions with GApplication, see
-     * [gapplication-example-actions.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-actions.c).
-     * 
-     * For an example of using extra D-Bus hooks with GApplication, see
-     * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Application} instead.
      */
-    interface Application extends GObject.Object, ActionGroup, ActionMap {
+    interface IApplication {
         /**
          * Activates the application.
          * 
@@ -806,7 +715,131 @@ declare namespace imports.gi.Gio {
         withdraw_notification(_id: string): void;
     }
 
-    var Application: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Application} instead.
+     */
+    type ApplicationMixin = IApplication & GObject.IObject & IActionGroup & IActionMap;
+
+    /**
+     * A #GApplication is the foundation of an application.  It wraps some
+     * low-level platform-specific services and is intended to act as the
+     * foundation for higher-level application classes such as
+     * #GtkApplication or #MxApplication.  In general, you should not use
+     * this class outside of a higher level framework.
+     * 
+     * GApplication provides convenient life cycle management by maintaining
+     * a "use count" for the primary application instance. The use count can
+     * be changed using g_application_hold() and g_application_release(). If
+     * it drops to zero, the application exits. Higher-level classes such as
+     * #GtkApplication employ the use count to ensure that the application
+     * stays alive as long as it has any opened windows.
+     * 
+     * Another feature that GApplication (optionally) provides is process
+     * uniqueness. Applications can make use of this functionality by
+     * providing a unique application ID. If given, only one application
+     * with this ID can be running at a time per session. The session
+     * concept is platform-dependent, but corresponds roughly to a graphical
+     * desktop login. When your application is launched again, its
+     * arguments are passed through platform communication to the already
+     * running program. The already running instance of the program is
+     * called the "primary instance"; for non-unique applications this is
+     * always the current instance. On Linux, the D-Bus session bus
+     * is used for communication.
+     * 
+     * The use of #GApplication differs from some other commonly-used
+     * uniqueness libraries (such as libunique) in important ways. The
+     * application is not expected to manually register itself and check
+     * if it is the primary instance. Instead, the main() function of a
+     * #GApplication should do very little more than instantiating the
+     * application instance, possibly connecting signal handlers, then
+     * calling g_application_run(). All checks for uniqueness are done
+     * internally. If the application is the primary instance then the
+     * startup signal is emitted and the mainloop runs. If the application
+     * is not the primary instance then a signal is sent to the primary
+     * instance and g_application_run() promptly returns. See the code
+     * examples below.
+     * 
+     * If used, the expected form of an application identifier is the same as
+     * that of of a
+     * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
+     * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
+     * `org._7_zip.Archiver`.
+     * For details on valid application identifiers, see g_application_id_is_valid().
+     * 
+     * On Linux, the application identifier is claimed as a well-known bus name
+     * on the user's session bus.  This means that the uniqueness of your
+     * application is scoped to the current session.  It also means that your
+     * application may provide additional services (through registration of other
+     * object paths) at that bus name.  The registration of these object paths
+     * should be done with the shared GDBus session bus.  Note that due to the
+     * internal architecture of GDBus, method calls can be dispatched at any time
+     * (even if a main loop is not running).  For this reason, you must ensure that
+     * any object paths that you wish to register are registered before #GApplication
+     * attempts to acquire the bus name of your application (which happens in
+     * g_application_register()).  Unfortunately, this means that you cannot use
+     * g_application_get_is_remote() to decide if you want to register object paths.
+     * 
+     * GApplication also implements the #GActionGroup and #GActionMap
+     * interfaces and lets you easily export actions by adding them with
+     * g_action_map_add_action(). When invoking an action by calling
+     * g_action_group_activate_action() on the application, it is always
+     * invoked in the primary instance. The actions are also exported on
+     * the session bus, and GIO provides the #GDBusActionGroup wrapper to
+     * conveniently access them remotely. GIO provides a #GDBusMenuModel wrapper
+     * for remote access to exported #GMenuModels.
+     * 
+     * There is a number of different entry points into a GApplication:
+     * 
+     * - via 'Activate' (i.e. just starting the application)
+     * 
+     * - via 'Open' (i.e. opening some files)
+     * 
+     * - by handling a command-line
+     * 
+     * - via activating an action
+     * 
+     * The #GApplication::startup signal lets you handle the application
+     * initialization for all of these in a single place.
+     * 
+     * Regardless of which of these entry points is used to start the
+     * application, GApplication passes some ‘platform data’ from the
+     * launching instance to the primary instance, in the form of a
+     * #GVariant dictionary mapping strings to variants. To use platform
+     * data, override the #before_emit or #after_emit virtual functions
+     * in your #GApplication subclass. When dealing with
+     * #GApplicationCommandLine objects, the platform data is
+     * directly available via g_application_command_line_get_cwd(),
+     * g_application_command_line_get_environ() and
+     * g_application_command_line_get_platform_data().
+     * 
+     * As the name indicates, the platform data may vary depending on the
+     * operating system, but it always includes the current directory (key
+     * "cwd"), and optionally the environment (ie the set of environment
+     * variables and their values) of the calling process (key "environ").
+     * The environment is only added to the platform data if the
+     * %G_APPLICATION_SEND_ENVIRONMENT flag is set. #GApplication subclasses
+     * can add their own platform data by overriding the #add_platform_data
+     * virtual function. For instance, #GtkApplication adds startup notification
+     * data in this way.
+     * 
+     * To parse commandline arguments you may handle the
+     * #GApplication::command-line signal or override the local_command_line()
+     * vfunc, to parse them in either the primary instance or the local instance,
+     * respectively.
+     * 
+     * For an example of opening files with a GApplication, see
+     * [gapplication-example-open.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-open.c).
+     * 
+     * For an example of using actions with GApplication, see
+     * [gapplication-example-actions.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-actions.c).
+     * 
+     * For an example of using extra D-Bus hooks with GApplication, see
+     * [gapplication-example-dbushooks.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-dbushooks.c).
+     */
+    interface Application extends ApplicationMixin { }
+
+    class Application {
+        constructor();
         /**
          * Creates a new #GApplication instance.
          * 
@@ -819,7 +852,7 @@ declare namespace imports.gi.Gio {
          * @param flags the application flags
          * @returns a new #GApplication instance
          */
-        new(application_id: string, flags: ApplicationFlags): Application;
+        static new(application_id: string, flags: ApplicationFlags): Application;
         /**
          * Returns the default #GApplication instance for this process.
          * 
@@ -830,7 +863,7 @@ declare namespace imports.gi.Gio {
          * If there is no default application then %NULL is returned.
          * @returns the default application for this process, or %NULL
          */
-        get_default(): Application;
+        static get_default(): Application;
         /**
          * Checks if #application_id is a valid application identifier.
          * 
@@ -880,166 +913,13 @@ declare namespace imports.gi.Gio {
          * @param application_id a potential application identifier
          * @returns %TRUE if #application_id is valid
          */
-        id_is_valid(application_id: string): boolean;
+        static id_is_valid(application_id: string): boolean;
     }
 
-    /**
-     * #GApplicationCommandLine represents a command-line invocation of
-     * an application.  It is created by #GApplication and emitted
-     * in the #GApplication::command-line signal and virtual function.
-     * 
-     * The class contains the list of arguments that the program was invoked
-     * with.  It is also possible to query if the commandline invocation was
-     * local (ie: the current process is running in direct response to the
-     * invocation) or remote (ie: some other process forwarded the
-     * commandline to this process).
-     * 
-     * The GApplicationCommandLine object can provide the #argc and #argv
-     * parameters for use with the #GOptionContext command-line parsing API,
-     * with the g_application_command_line_get_arguments() function. See
-     * [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
-     * for an example.
-     * 
-     * The exit status of the originally-invoked process may be set and
-     * messages can be printed to stdout or stderr of that process.  The
-     * lifecycle of the originally-invoked process is tied to the lifecycle
-     * of this object (ie: the process exits when the last reference is
-     * dropped).
-     * 
-     * The main use for #GApplicationCommandLine (and the
-     * #GApplication::command-line signal) is 'Emacs server' like use cases:
-     * You can set the `EDITOR` environment variable to have e.g. git use
-     * your favourite editor to edit commit messages, and if you already
-     * have an instance of the editor running, the editing will happen
-     * in the running instance, instead of opening a new one. An important
-     * aspect of this use case is that the process that gets started by git
-     * does not return until the editing is done.
-     * 
-     * Normally, the commandline is completely handled in the
-     * #GApplication::command-line handler. The launching instance exits
-     * once the signal handler in the primary instance has returned, and
-     * the return value of the signal handler becomes the exit status
-     * of the launching instance.
-     * |[<!-- language="C" -->
-     * static int
-     * command_line (GApplication            *application,
-     *               GApplicationCommandLine *cmdline)
-     * {
-     *   gchar **argv;
-     *   gint argc;
-     *   gint i;
-     * 
-     *   argv = g_application_command_line_get_arguments (cmdline, &argc);
-     * 
-     *   g_application_command_line_print (cmdline,
-     *                                     "This text is written back\n"
-     *                                     "to stdout of the caller\n");
-     * 
-     *   for (i = 0; i < argc; i++)
-     *     g_print ("argument %d: %s\n", i, argv[i]);
-     * 
-     *   g_strfreev (argv);
-     * 
-     *   return 0;
-     * }
-     * ]|
-     * The complete example can be found here:
-     * [gapplication-example-cmdline.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline.c)
-     * 
-     * In more complicated cases, the handling of the comandline can be
-     * split between the launcher and the primary instance.
-     * |[<!-- language="C" -->
-     * static gboolean
-     *  test_local_cmdline (GApplication   *application,
-     *                      gchar        ***arguments,
-     *                      gint           *exit_status)
-     * {
-     *   gint i, j;
-     *   gchar **argv;
-     * 
-     *   argv = *arguments;
-     * 
-     *   i = 1;
-     *   while (argv[i])
-     *     {
-     *       if (g_str_has_prefix (argv[i], "--local-"))
-     *         {
-     *           g_print ("handling argument %s locally\n", argv[i]);
-     *           g_free (argv[i]);
-     *           for (j = i; argv[j]; j++)
-     *             argv[j] = argv[j + 1];
-     *         }
-     *       else
-     *         {
-     *           g_print ("not handling argument %s locally\n", argv[i]);
-     *           i++;
-     *         }
-     *     }
-     * 
-     *   *exit_status = 0;
-     * 
-     *   return FALSE;
-     * }
-     * 
-     * static void
-     * test_application_class_init (TestApplicationClass *class)
-     * {
-     *   G_APPLICATION_CLASS (class)->local_command_line = test_local_cmdline;
-     * 
-     *   ...
-     * }
-     * ]|
-     * In this example of split commandline handling, options that start
-     * with `--local-` are handled locally, all other options are passed
-     * to the #GApplication::command-line handler which runs in the primary
-     * instance.
-     * 
-     * The complete example can be found here:
-     * [gapplication-example-cmdline2.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c)
-     * 
-     * If handling the commandline requires a lot of work, it may
-     * be better to defer it.
-     * |[<!-- language="C" -->
-     * static gboolean
-     * my_cmdline_handler (gpointer data)
-     * {
-     *   GApplicationCommandLine *cmdline = data;
-     * 
-     *   // do the heavy lifting in an idle
-     * 
-     *   g_application_command_line_set_exit_status (cmdline, 0);
-     *   g_object_unref (cmdline); // this releases the application
-     * 
-     *   return G_SOURCE_REMOVE;
-     * }
-     * 
-     * static int
-     * command_line (GApplication            *application,
-     *               GApplicationCommandLine *cmdline)
-     * {
-     *   // keep the application running until we are done with this commandline
-     *   g_application_hold (application);
-     * 
-     *   g_object_set_data_full (G_OBJECT (cmdline),
-     *                           "application", application,
-     *                           (GDestroyNotify)g_application_release);
-     * 
-     *   g_object_ref (cmdline);
-     *   g_idle_add (my_cmdline_handler, cmdline);
-     * 
-     *   return 0;
-     * }
-     * ]|
-     * In this example the commandline is not completely handled before
-     * the #GApplication::command-line handler returns. Instead, we keep
-     * a reference to the #GApplicationCommandLine object and handle it
-     * later (in this example, in an idle). Note that it is necessary to
-     * hold the application until you are done with the commandline.
-     * 
-     * The complete example can be found here:
-     * [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ApplicationCommandLine} instead.
      */
-    interface ApplicationCommandLine extends GObject.Object {
+    interface IApplicationCommandLine {
         /**
          * Creates a #GFile corresponding to a filename that was given as part
          * of the invocation of #cmdline.
@@ -1211,26 +1091,177 @@ declare namespace imports.gi.Gio {
         set_exit_status(exit_status: number): void;
     }
 
-    var ApplicationCommandLine: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ApplicationCommandLine} instead.
+     */
+    type ApplicationCommandLineMixin = IApplicationCommandLine & GObject.IObject;
 
     /**
-     * Buffered input stream implements #GFilterInputStream and provides
-     * for buffered reads.
+     * #GApplicationCommandLine represents a command-line invocation of
+     * an application.  It is created by #GApplication and emitted
+     * in the #GApplication::command-line signal and virtual function.
      * 
-     * By default, #GBufferedInputStream's buffer size is set at 4 kilobytes.
+     * The class contains the list of arguments that the program was invoked
+     * with.  It is also possible to query if the commandline invocation was
+     * local (ie: the current process is running in direct response to the
+     * invocation) or remote (ie: some other process forwarded the
+     * commandline to this process).
      * 
-     * To create a buffered input stream, use g_buffered_input_stream_new(),
-     * or g_buffered_input_stream_new_sized() to specify the buffer's size at
-     * construction.
+     * The GApplicationCommandLine object can provide the #argc and #argv
+     * parameters for use with the #GOptionContext command-line parsing API,
+     * with the g_application_command_line_get_arguments() function. See
+     * [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
+     * for an example.
      * 
-     * To get the size of a buffer within a buffered input stream, use
-     * g_buffered_input_stream_get_buffer_size(). To change the size of a
-     * buffered input stream's buffer, use
-     * g_buffered_input_stream_set_buffer_size(). Note that the buffer's size
-     * cannot be reduced below the size of the data within the buffer.
+     * The exit status of the originally-invoked process may be set and
+     * messages can be printed to stdout or stderr of that process.  The
+     * lifecycle of the originally-invoked process is tied to the lifecycle
+     * of this object (ie: the process exits when the last reference is
+     * dropped).
+     * 
+     * The main use for #GApplicationCommandLine (and the
+     * #GApplication::command-line signal) is 'Emacs server' like use cases:
+     * You can set the `EDITOR` environment variable to have e.g. git use
+     * your favourite editor to edit commit messages, and if you already
+     * have an instance of the editor running, the editing will happen
+     * in the running instance, instead of opening a new one. An important
+     * aspect of this use case is that the process that gets started by git
+     * does not return until the editing is done.
+     * 
+     * Normally, the commandline is completely handled in the
+     * #GApplication::command-line handler. The launching instance exits
+     * once the signal handler in the primary instance has returned, and
+     * the return value of the signal handler becomes the exit status
+     * of the launching instance.
+     * |[<!-- language="C" -->
+     * static int
+     * command_line (GApplication            *application,
+     *               GApplicationCommandLine *cmdline)
+     * {
+     *   gchar **argv;
+     *   gint argc;
+     *   gint i;
+     * 
+     *   argv = g_application_command_line_get_arguments (cmdline, &argc);
+     * 
+     *   g_application_command_line_print (cmdline,
+     *                                     "This text is written back\n"
+     *                                     "to stdout of the caller\n");
+     * 
+     *   for (i = 0; i < argc; i++)
+     *     g_print ("argument %d: %s\n", i, argv[i]);
+     * 
+     *   g_strfreev (argv);
+     * 
+     *   return 0;
+     * }
+     * ]|
+     * The complete example can be found here:
+     * [gapplication-example-cmdline.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline.c)
+     * 
+     * In more complicated cases, the handling of the comandline can be
+     * split between the launcher and the primary instance.
+     * |[<!-- language="C" -->
+     * static gboolean
+     *  test_local_cmdline (GApplication   *application,
+     *                      gchar        ***arguments,
+     *                      gint           *exit_status)
+     * {
+     *   gint i, j;
+     *   gchar **argv;
+     * 
+     *   argv = *arguments;
+     * 
+     *   i = 1;
+     *   while (argv[i])
+     *     {
+     *       if (g_str_has_prefix (argv[i], "--local-"))
+     *         {
+     *           g_print ("handling argument %s locally\n", argv[i]);
+     *           g_free (argv[i]);
+     *           for (j = i; argv[j]; j++)
+     *             argv[j] = argv[j + 1];
+     *         }
+     *       else
+     *         {
+     *           g_print ("not handling argument %s locally\n", argv[i]);
+     *           i++;
+     *         }
+     *     }
+     * 
+     *   *exit_status = 0;
+     * 
+     *   return FALSE;
+     * }
+     * 
+     * static void
+     * test_application_class_init (TestApplicationClass *class)
+     * {
+     *   G_APPLICATION_CLASS (class)->local_command_line = test_local_cmdline;
+     * 
+     *   ...
+     * }
+     * ]|
+     * In this example of split commandline handling, options that start
+     * with `--local-` are handled locally, all other options are passed
+     * to the #GApplication::command-line handler which runs in the primary
+     * instance.
+     * 
+     * The complete example can be found here:
+     * [gapplication-example-cmdline2.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c)
+     * 
+     * If handling the commandline requires a lot of work, it may
+     * be better to defer it.
+     * |[<!-- language="C" -->
+     * static gboolean
+     * my_cmdline_handler (gpointer data)
+     * {
+     *   GApplicationCommandLine *cmdline = data;
+     * 
+     *   // do the heavy lifting in an idle
+     * 
+     *   g_application_command_line_set_exit_status (cmdline, 0);
+     *   g_object_unref (cmdline); // this releases the application
+     * 
+     *   return G_SOURCE_REMOVE;
+     * }
+     * 
+     * static int
+     * command_line (GApplication            *application,
+     *               GApplicationCommandLine *cmdline)
+     * {
+     *   // keep the application running until we are done with this commandline
+     *   g_application_hold (application);
+     * 
+     *   g_object_set_data_full (G_OBJECT (cmdline),
+     *                           "application", application,
+     *                           (GDestroyNotify)g_application_release);
+     * 
+     *   g_object_ref (cmdline);
+     *   g_idle_add (my_cmdline_handler, cmdline);
+     * 
+     *   return 0;
+     * }
+     * ]|
+     * In this example the commandline is not completely handled before
+     * the #GApplication::command-line handler returns. Instead, we keep
+     * a reference to the #GApplicationCommandLine object and handle it
+     * later (in this example, in an idle). Note that it is necessary to
+     * hold the application until you are done with the commandline.
+     * 
+     * The complete example can be found here:
+     * [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
      */
-    interface BufferedInputStream extends FilterInputStream, Seekable {
+    interface ApplicationCommandLine extends ApplicationCommandLineMixin { }
+
+    class ApplicationCommandLine {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BufferedInputStream} instead.
+     */
+    interface IBufferedInputStream {
         /**
          * Tries to read #count bytes from the stream into the buffer.
          * Will block during this read.
@@ -1273,9 +1304,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object
          * @param callback a #GAsyncReadyCallback
-         * @param user_data a #gpointer
          */
-        fill_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        fill_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous read.
          * @param result a #GAsyncResult
@@ -1336,14 +1366,38 @@ declare namespace imports.gi.Gio {
         set_buffer_size(size: number): void;
     }
 
-    var BufferedInputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BufferedInputStream} instead.
+     */
+    type BufferedInputStreamMixin = IBufferedInputStream & IFilterInputStream & ISeekable;
+
+    /**
+     * Buffered input stream implements #GFilterInputStream and provides
+     * for buffered reads.
+     * 
+     * By default, #GBufferedInputStream's buffer size is set at 4 kilobytes.
+     * 
+     * To create a buffered input stream, use g_buffered_input_stream_new(),
+     * or g_buffered_input_stream_new_sized() to specify the buffer's size at
+     * construction.
+     * 
+     * To get the size of a buffer within a buffered input stream, use
+     * g_buffered_input_stream_get_buffer_size(). To change the size of a
+     * buffered input stream's buffer, use
+     * g_buffered_input_stream_set_buffer_size(). Note that the buffer's size
+     * cannot be reduced below the size of the data within the buffer.
+     */
+    interface BufferedInputStream extends BufferedInputStreamMixin { }
+
+    class BufferedInputStream {
+        constructor();
         /**
          * Creates a new #GInputStream from the given #base_stream, with
          * a buffer set to the default size (4 kilobytes).
          * @param base_stream a #GInputStream
          * @returns a #GInputStream for the given #base_stream.
          */
-        new(base_stream: InputStream): InputStream;
+        static new(base_stream: InputStream): InputStream;
         /**
          * Creates a new #GBufferedInputStream from the given #base_stream,
          * with a buffer set to #size.
@@ -1351,26 +1405,13 @@ declare namespace imports.gi.Gio {
          * @param size a #gsize
          * @returns a #GInputStream.
          */
-        new_sized(base_stream: InputStream, size: number): InputStream;
+        static new_sized(base_stream: InputStream, size: number): InputStream;
     }
 
-    /**
-     * Buffered output stream implements #GFilterOutputStream and provides
-     * for buffered writes.
-     * 
-     * By default, #GBufferedOutputStream's buffer size is set at 4 kilobytes.
-     * 
-     * To create a buffered output stream, use g_buffered_output_stream_new(),
-     * or g_buffered_output_stream_new_sized() to specify the buffer's size
-     * at construction.
-     * 
-     * To get the size of a buffer within a buffered input stream, use
-     * g_buffered_output_stream_get_buffer_size(). To change the size of a
-     * buffered output stream's buffer, use
-     * g_buffered_output_stream_set_buffer_size(). Note that the buffer's
-     * size cannot be reduced below the size of the data within the buffer.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BufferedOutputStream} instead.
      */
-    interface BufferedOutputStream extends FilterOutputStream, Seekable {
+    interface IBufferedOutputStream {
         /**
          * Checks if the buffer automatically grows as data is added.
          * @returns %TRUE if the #stream's buffer automatically grows,
@@ -1397,27 +1438,50 @@ declare namespace imports.gi.Gio {
         set_buffer_size(size: number): void;
     }
 
-    var BufferedOutputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BufferedOutputStream} instead.
+     */
+    type BufferedOutputStreamMixin = IBufferedOutputStream & IFilterOutputStream & ISeekable;
+
+    /**
+     * Buffered output stream implements #GFilterOutputStream and provides
+     * for buffered writes.
+     * 
+     * By default, #GBufferedOutputStream's buffer size is set at 4 kilobytes.
+     * 
+     * To create a buffered output stream, use g_buffered_output_stream_new(),
+     * or g_buffered_output_stream_new_sized() to specify the buffer's size
+     * at construction.
+     * 
+     * To get the size of a buffer within a buffered input stream, use
+     * g_buffered_output_stream_get_buffer_size(). To change the size of a
+     * buffered output stream's buffer, use
+     * g_buffered_output_stream_set_buffer_size(). Note that the buffer's
+     * size cannot be reduced below the size of the data within the buffer.
+     */
+    interface BufferedOutputStream extends BufferedOutputStreamMixin { }
+
+    class BufferedOutputStream {
+        constructor();
         /**
          * Creates a new buffered output stream for a base stream.
          * @param base_stream a #GOutputStream.
          * @returns a #GOutputStream for the given #base_stream.
          */
-        new(base_stream: OutputStream): OutputStream;
+        static new(base_stream: OutputStream): OutputStream;
         /**
          * Creates a new buffered output stream with a given buffer size.
          * @param base_stream a #GOutputStream.
          * @param size a #gsize.
          * @returns a #GOutputStream with an internal buffer set to #size.
          */
-        new_sized(base_stream: OutputStream, size: number): OutputStream;
+        static new_sized(base_stream: OutputStream, size: number): OutputStream;
     }
 
-    /**
-     * #GBytesIcon specifies an image held in memory in a common format (usually
-     * png) to be used as icon.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BytesIcon} instead.
      */
-    interface BytesIcon extends GObject.Object, Icon, LoadableIcon {
+    interface IBytesIcon {
         /**
          * Gets the #GBytes associated with the given #icon.
          * @returns a #GBytes.
@@ -1425,7 +1489,19 @@ declare namespace imports.gi.Gio {
         get_bytes(): GLib.Bytes;
     }
 
-    var BytesIcon: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link BytesIcon} instead.
+     */
+    type BytesIconMixin = IBytesIcon & GObject.IObject & IIcon & ILoadableIcon;
+
+    /**
+     * #GBytesIcon specifies an image held in memory in a common format (usually
+     * png) to be used as icon.
+     */
+    interface BytesIcon extends BytesIconMixin { }
+
+    class BytesIcon {
+        constructor();
         /**
          * Creates a new icon for a bytes.
          * 
@@ -1435,15 +1511,13 @@ declare namespace imports.gi.Gio {
          * @returns a #GIcon for the given
          *   #bytes.
          */
-        new(bytes: GLib.Bytes): BytesIcon;
+        static new(bytes: GLib.Bytes): BytesIcon;
     }
 
-    /**
-     * GCancellable is a thread-safe operation cancellation stack used
-     * throughout GIO to allow for cancellation of synchronous and
-     * asynchronous operations.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Cancellable} instead.
      */
-    interface Cancellable extends GObject.Object {
+    interface ICancellable {
         /**
          * Will set #cancellable to cancelled, and will emit the
          * #GCancellable::cancelled signal. (However, see the warning about
@@ -1618,7 +1692,20 @@ declare namespace imports.gi.Gio {
         source_new(): GLib.Source;
     }
 
-    var Cancellable: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Cancellable} instead.
+     */
+    type CancellableMixin = ICancellable & GObject.IObject;
+
+    /**
+     * GCancellable is a thread-safe operation cancellation stack used
+     * throughout GIO to allow for cancellation of synchronous and
+     * asynchronous operations.
+     */
+    interface Cancellable extends CancellableMixin { }
+
+    class Cancellable {
+        constructor();
         /**
          * Creates a new #GCancellable object.
          * 
@@ -1630,20 +1717,19 @@ declare namespace imports.gi.Gio {
          * operations or in multiple concurrent operations.
          * @returns a #GCancellable.
          */
-        new(): Cancellable;
+        static new(): Cancellable;
         /**
          * Gets the top cancellable from the stack.
          * @returns a #GCancellable from the top
          * of the stack, or %NULL if the stack is empty.
          */
-        get_current(): Cancellable;
+        static get_current(): Cancellable;
     }
 
-    /**
-     * #GCharsetConverter is an implementation of #GConverter based on
-     * GIConv.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link CharsetConverter} instead.
      */
-    interface CharsetConverter extends GObject.Object, Converter, Initable {
+    interface ICharsetConverter {
         /**
          * Gets the number of fallbacks that #converter has applied so far.
          * @returns the number of fallbacks that #converter has applied
@@ -1661,15 +1747,43 @@ declare namespace imports.gi.Gio {
         set_use_fallback(use_fallback: boolean): void;
     }
 
-    var CharsetConverter: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link CharsetConverter} instead.
+     */
+    type CharsetConverterMixin = ICharsetConverter & GObject.IObject & IConverter & IInitable;
+
+    /**
+     * #GCharsetConverter is an implementation of #GConverter based on
+     * GIConv.
+     */
+    interface CharsetConverter extends CharsetConverterMixin { }
+
+    class CharsetConverter {
+        constructor();
         /**
          * Creates a new #GCharsetConverter.
          * @param to_charset destination charset
          * @param from_charset source charset
          * @returns a new #GCharsetConverter or %NULL on error.
          */
-        new(to_charset: string, from_charset: string): CharsetConverter;
+        static new(to_charset: string, from_charset: string): CharsetConverter;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ConverterInputStream} instead.
+     */
+    interface IConverterInputStream {
+        /**
+         * Gets the #GConverter that is used by #converter_stream.
+         * @returns the converter of the converter input stream
+         */
+        get_converter(): Converter;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ConverterInputStream} instead.
+     */
+    type ConverterInputStreamMixin = IConverterInputStream & IFilterInputStream & IPollableInputStream;
 
     /**
      * Converter input stream implements #GInputStream and allows
@@ -1678,23 +1792,34 @@ declare namespace imports.gi.Gio {
      * As of GLib 2.34, #GConverterInputStream implements
      * #GPollableInputStream.
      */
-    interface ConverterInputStream extends FilterInputStream, PollableInputStream {
-        /**
-         * Gets the #GConverter that is used by #converter_stream.
-         * @returns the converter of the converter input stream
-         */
-        get_converter(): Converter;
-    }
+    interface ConverterInputStream extends ConverterInputStreamMixin { }
 
-    var ConverterInputStream: {
+    class ConverterInputStream {
+        constructor();
         /**
          * Creates a new converter input stream for the #base_stream.
          * @param base_stream a #GInputStream
          * @param converter a #GConverter
          * @returns a new #GInputStream.
          */
-        new(base_stream: InputStream, converter: Converter): InputStream;
+        static new(base_stream: InputStream, converter: Converter): InputStream;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ConverterOutputStream} instead.
+     */
+    interface IConverterOutputStream {
+        /**
+         * Gets the #GConverter that is used by #converter_stream.
+         * @returns the converter of the converter output stream
+         */
+        get_converter(): Converter;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ConverterOutputStream} instead.
+     */
+    type ConverterOutputStreamMixin = IConverterOutputStream & IFilterOutputStream & IPollableOutputStream;
 
     /**
      * Converter output stream implements #GOutputStream and allows
@@ -1703,61 +1828,23 @@ declare namespace imports.gi.Gio {
      * As of GLib 2.34, #GConverterOutputStream implements
      * #GPollableOutputStream.
      */
-    interface ConverterOutputStream extends FilterOutputStream, PollableOutputStream {
-        /**
-         * Gets the #GConverter that is used by #converter_stream.
-         * @returns the converter of the converter output stream
-         */
-        get_converter(): Converter;
-    }
+    interface ConverterOutputStream extends ConverterOutputStreamMixin { }
 
-    var ConverterOutputStream: {
+    class ConverterOutputStream {
+        constructor();
         /**
          * Creates a new converter output stream for the #base_stream.
          * @param base_stream a #GOutputStream
          * @param converter a #GConverter
          * @returns a new #GOutputStream.
          */
-        new(base_stream: OutputStream, converter: Converter): OutputStream;
+        static new(base_stream: OutputStream, converter: Converter): OutputStream;
     }
 
-    /**
-     * The #GCredentials type is a reference-counted wrapper for native
-     * credentials. This information is typically used for identifying,
-     * authenticating and authorizing other processes.
-     * 
-     * Some operating systems supports looking up the credentials of the
-     * remote peer of a communication endpoint - see e.g.
-     * g_socket_get_credentials().
-     * 
-     * Some operating systems supports securely sending and receiving
-     * credentials over a Unix Domain Socket, see
-     * #GUnixCredentialsMessage, g_unix_connection_send_credentials() and
-     * g_unix_connection_receive_credentials() for details.
-     * 
-     * On Linux, the native credential type is a `struct ucred` - see the
-     * unix(7) man page for details. This corresponds to
-     * %G_CREDENTIALS_TYPE_LINUX_UCRED.
-     * 
-     * On Apple operating systems (including iOS, tvOS, and macOS),
-     * the native credential type is a `struct xucred`.
-     * This corresponds to %G_CREDENTIALS_TYPE_APPLE_XUCRED.
-     * 
-     * On FreeBSD, Debian GNU/kFreeBSD, and GNU/Hurd, the native
-     * credential type is a `struct cmsgcred`. This corresponds
-     * to %G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED.
-     * 
-     * On NetBSD, the native credential type is a `struct unpcbid`.
-     * This corresponds to %G_CREDENTIALS_TYPE_NETBSD_UNPCBID.
-     * 
-     * On OpenBSD, the native credential type is a `struct sockpeercred`.
-     * This corresponds to %G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED.
-     * 
-     * On Solaris (including OpenSolaris and its derivatives), the native
-     * credential type is a `ucred_t`. This corresponds to
-     * %G_CREDENTIALS_TYPE_SOLARIS_UCRED.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Credentials} instead.
      */
-    interface Credentials extends GObject.Object {
+    interface ICredentials {
         /**
          * Gets a pointer to native credentials of type #native_type from
          * #credentials.
@@ -1835,25 +1922,80 @@ declare namespace imports.gi.Gio {
         to_string(): string;
     }
 
-    var Credentials: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Credentials} instead.
+     */
+    type CredentialsMixin = ICredentials & GObject.IObject;
+
+    /**
+     * The #GCredentials type is a reference-counted wrapper for native
+     * credentials. This information is typically used for identifying,
+     * authenticating and authorizing other processes.
+     * 
+     * Some operating systems supports looking up the credentials of the
+     * remote peer of a communication endpoint - see e.g.
+     * g_socket_get_credentials().
+     * 
+     * Some operating systems supports securely sending and receiving
+     * credentials over a Unix Domain Socket, see
+     * #GUnixCredentialsMessage, g_unix_connection_send_credentials() and
+     * g_unix_connection_receive_credentials() for details.
+     * 
+     * On Linux, the native credential type is a `struct ucred` - see the
+     * unix(7) man page for details. This corresponds to
+     * %G_CREDENTIALS_TYPE_LINUX_UCRED.
+     * 
+     * On Apple operating systems (including iOS, tvOS, and macOS),
+     * the native credential type is a `struct xucred`.
+     * This corresponds to %G_CREDENTIALS_TYPE_APPLE_XUCRED.
+     * 
+     * On FreeBSD, Debian GNU/kFreeBSD, and GNU/Hurd, the native
+     * credential type is a `struct cmsgcred`. This corresponds
+     * to %G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED.
+     * 
+     * On NetBSD, the native credential type is a `struct unpcbid`.
+     * This corresponds to %G_CREDENTIALS_TYPE_NETBSD_UNPCBID.
+     * 
+     * On OpenBSD, the native credential type is a `struct sockpeercred`.
+     * This corresponds to %G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED.
+     * 
+     * On Solaris (including OpenSolaris and its derivatives), the native
+     * credential type is a `ucred_t`. This corresponds to
+     * %G_CREDENTIALS_TYPE_SOLARIS_UCRED.
+     */
+    interface Credentials extends CredentialsMixin { }
+
+    class Credentials {
+        constructor();
         /**
          * Creates a new #GCredentials object with credentials matching the
          * the current process.
          * @returns A #GCredentials. Free with g_object_unref().
          */
-        new(): Credentials;
+        static new(): Credentials;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusActionGroup} instead.
+     */
+    interface IDBusActionGroup {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusActionGroup} instead.
+     */
+    type DBusActionGroupMixin = IDBusActionGroup & GObject.IObject & IActionGroup & IRemoteActionGroup;
 
     /**
      * #GDBusActionGroup is an implementation of the #GActionGroup
      * interface that can be used as a proxy for an action group
      * that is exported over D-Bus with g_dbus_connection_export_action_group().
      */
-    interface DBusActionGroup extends GObject.Object, ActionGroup, RemoteActionGroup {
+    interface DBusActionGroup extends DBusActionGroupMixin { }
 
-    }
-
-    var DBusActionGroup: {
+    class DBusActionGroup {
+        constructor();
         /**
          * Obtains a #GDBusActionGroup for the action group which is exported at
          * the given #bus_name and #object_path.
@@ -1874,8 +2016,32 @@ declare namespace imports.gi.Gio {
          * @param object_path the object path at which the action group is exported
          * @returns a #GDBusActionGroup
          */
-        get(connection: DBusConnection, bus_name: string, object_path: string): DBusActionGroup;
+        static get(connection: DBusConnection, bus_name: string, object_path: string): DBusActionGroup;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusAuthObserver} instead.
+     */
+    interface IDBusAuthObserver {
+        /**
+         * Emits the #GDBusAuthObserver::allow-mechanism signal on #observer.
+         * @param mechanism The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
+         * @returns %TRUE if #mechanism can be used to authenticate the other peer, %FALSE if not.
+         */
+        allow_mechanism(mechanism: string): boolean;
+        /**
+         * Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on #observer.
+         * @param stream A #GIOStream for the #GDBusConnection.
+         * @param credentials Credentials received from the peer or %NULL.
+         * @returns %TRUE if the peer is authorized, %FALSE if not.
+         */
+        authorize_authenticated_peer(stream: IOStream, credentials: Credentials): boolean;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusAuthObserver} instead.
+     */
+    type DBusAuthObserverMixin = IDBusAuthObserver & GObject.IObject;
 
     /**
      * The #GDBusAuthObserver type provides a mechanism for participating
@@ -1941,82 +2107,21 @@ declare namespace imports.gi.Gio {
      * }
      * ]|
      */
-    interface DBusAuthObserver extends GObject.Object {
-        /**
-         * Emits the #GDBusAuthObserver::allow-mechanism signal on #observer.
-         * @param mechanism The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
-         * @returns %TRUE if #mechanism can be used to authenticate the other peer, %FALSE if not.
-         */
-        allow_mechanism(mechanism: string): boolean;
-        /**
-         * Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on #observer.
-         * @param stream A #GIOStream for the #GDBusConnection.
-         * @param credentials Credentials received from the peer or %NULL.
-         * @returns %TRUE if the peer is authorized, %FALSE if not.
-         */
-        authorize_authenticated_peer(stream: IOStream, credentials: Credentials): boolean;
-    }
+    interface DBusAuthObserver extends DBusAuthObserverMixin { }
 
-    var DBusAuthObserver: {
+    class DBusAuthObserver {
+        constructor();
         /**
          * Creates a new #GDBusAuthObserver object.
          * @returns A #GDBusAuthObserver. Free with g_object_unref().
          */
-        new(): DBusAuthObserver;
+        static new(): DBusAuthObserver;
     }
 
-    /**
-     * The #GDBusConnection type is used for D-Bus connections to remote
-     * peers such as a message buses. It is a low-level API that offers a
-     * lot of flexibility. For instance, it lets you establish a connection
-     * over any transport that can by represented as a #GIOStream.
-     * 
-     * This class is rarely used directly in D-Bus clients. If you are writing
-     * a D-Bus client, it is often easier to use the g_bus_own_name(),
-     * g_bus_watch_name() or g_dbus_proxy_new_for_bus() APIs.
-     * 
-     * As an exception to the usual GLib rule that a particular object must not
-     * be used by two threads at the same time, #GDBusConnection's methods may be
-     * called from any thread. This is so that g_bus_get() and g_bus_get_sync()
-     * can safely return the same #GDBusConnection when called from any thread.
-     * 
-     * Most of the ways to obtain a #GDBusConnection automatically initialize it
-     * (i.e. connect to D-Bus): for instance, g_dbus_connection_new() and
-     * g_bus_get(), and the synchronous versions of those methods, give you an
-     * initialized connection. Language bindings for GIO should use
-     * g_initable_new() or g_async_initable_new_async(), which also initialize the
-     * connection.
-     * 
-     * If you construct an uninitialized #GDBusConnection, such as via
-     * g_object_new(), you must initialize it via g_initable_init() or
-     * g_async_initable_init_async() before using its methods or properties.
-     * Calling methods or accessing properties on a #GDBusConnection that has not
-     * completed initialization successfully is considered to be invalid, and leads
-     * to undefined behaviour. In particular, if initialization fails with a
-     * #GError, the only valid thing you can do with that #GDBusConnection is to
-     * free it with g_object_unref().
-     * 
-     * ## An example D-Bus server # {#gdbus-server}
-     * 
-     * Here is an example for a D-Bus server:
-     * [gdbus-example-server.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c)
-     * 
-     * ## An example for exporting a subtree # {#gdbus-subtree-server}
-     * 
-     * Here is an example for exporting a subtree:
-     * [gdbus-example-subtree.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-subtree.c)
-     * 
-     * ## An example for file descriptor passing # {#gdbus-unix-fd-client}
-     * 
-     * Here is an example for passing UNIX file descriptors:
-     * [gdbus-unix-fd-client.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-unix-fd-client.c)
-     * 
-     * ## An example for exporting a GObject # {#gdbus-export}
-     * 
-     * Here is an example for exporting a #GObject:
-     * [gdbus-example-export.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-export.c)
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusConnection} instead.
      */
-    interface DBusConnection extends GObject.Object, AsyncInitable, Initable {
+    interface IDBusConnection {
         /**
          * Adds a message filter. Filters are handlers that are run on all
          * incoming and outgoing messages, prior to standard dispatch. Filters
@@ -2046,13 +2151,12 @@ declare namespace imports.gi.Gio {
          * filter is removed, and may be called after #connection has been
          * destroyed.)
          * @param filter_function a filter function
-         * @param user_data user data to pass to #filter_function
          * @param user_data_free_func function to free #user_data with when filter
          *     is removed or %NULL
          * @returns a filter identifier that can be used with
          *     g_dbus_connection_remove_filter()
          */
-        add_filter(filter_function: DBusMessageFilterFunction, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+        add_filter(filter_function: DBusMessageFilterFunction, user_data_free_func: GLib.DestroyNotify): number;
         /**
          * Asynchronously invokes the #method_name method on the
          * #interface_name D-Bus interface on the remote object at
@@ -2115,9 +2219,8 @@ declare namespace imports.gi.Gio {
          * @param callback a #GAsyncReadyCallback to call when the request
          *     is satisfied or %NULL if you don't care about the result of the
          *     method invocation
-         * @param user_data the data to pass to #callback
          */
-        call(bus_name: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, reply_type: GLib.VariantType, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        call(bus_name: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, reply_type: GLib.VariantType, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_connection_call().
          * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_connection_call()
@@ -2210,9 +2313,8 @@ declare namespace imports.gi.Gio {
          * @param callback a #GAsyncReadyCallback to call when the request is
          *     satisfied or %NULL if you don't * care about the result of the
          *     method invocation
-         * @param user_data The data to pass to #callback.
          */
-        call_with_unix_fd_list(bus_name: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, reply_type: GLib.VariantType, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        call_with_unix_fd_list(bus_name: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, reply_type: GLib.VariantType, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_connection_call_with_unix_fd_list().
          * 
@@ -2257,7 +2359,6 @@ declare namespace imports.gi.Gio {
          *     #GVariant tuple with return values. Free with g_variant_unref().
          */
         call_with_unix_fd_list_sync(bus_name: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, reply_type: GLib.VariantType, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, out_fd_list: UnixFDList, cancellable: Cancellable): GLib.Variant;
-        disconnectSignal(id: number): void;
         /**
          * Closes #connection. Note that this never causes the process to
          * exit (this might only happen if the other end of a shared message
@@ -2286,9 +2387,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the request is
          *     satisfied or %NULL if you don't care about the result
-         * @param user_data The data to pass to #callback
          */
-        close(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        close(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_connection_close().
          * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
@@ -2386,9 +2486,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the
          *     request is satisfied or %NULL if you don't care about the result
-         * @param user_data The data to pass to #callback
          */
-        flush(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        flush(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_connection_flush().
          * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
@@ -2519,12 +2618,11 @@ declare namespace imports.gi.Gio {
          * @param object_path the object path to register at
          * @param interface_info introspection data for the interface
          * @param vtable a #GDBusInterfaceVTable to call into or %NULL
-         * @param user_data data to pass to functions in #vtable
          * @param user_data_free_func function to call when the object path is unregistered
          * @returns 0 if #error is set, otherwise a registration id (never 0)
          *     that can be used with g_dbus_connection_unregister_object()
          */
-        register_object(object_path: string, interface_info: DBusInterfaceInfo, vtable: DBusInterfaceVTable, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+        register_object(object_path: string, interface_info: DBusInterfaceInfo, vtable: DBusInterfaceVTable, user_data_free_func: GLib.DestroyNotify): number;
         /**
          * Version of g_dbus_connection_register_object() using closures instead of a
          * #GDBusInterfaceVTable for easier binding in other languages.
@@ -2576,12 +2674,11 @@ declare namespace imports.gi.Gio {
          * @param vtable a #GDBusSubtreeVTable to enumerate, introspect and
          *     dispatch nodes in the subtree
          * @param flags flags used to fine tune the behavior of the subtree
-         * @param user_data data to pass to functions in #vtable
          * @param user_data_free_func function to call when the subtree is unregistered
          * @returns 0 if #error is set, otherwise a subtree registration ID (never 0)
          * that can be used with g_dbus_connection_unregister_subtree()
          */
-        register_subtree(object_path: string, vtable: DBusSubtreeVTable, flags: DBusSubtreeFlags, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+        register_subtree(object_path: string, vtable: DBusSubtreeVTable, flags: DBusSubtreeFlags, user_data_free_func: GLib.DestroyNotify): number;
         /**
          * Removes a filter.
          * 
@@ -2663,9 +2760,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the request
          *     is satisfied or %NULL if you don't care about the result
-         * @param user_data The data to pass to #callback
          */
-        send_message_with_reply(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, out_serial: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        send_message_with_reply(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, out_serial: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_connection_send_message_with_reply().
          * 
@@ -2802,12 +2898,11 @@ declare namespace imports.gi.Gio {
          * @param flags #GDBusSignalFlags describing how arg0 is used in subscribing to the
          *     signal
          * @param callback callback to invoke when there is a signal matching the requested data
-         * @param user_data user data to pass to #callback
          * @param user_data_free_func function to free #user_data with when
          *     subscription is removed or %NULL
          * @returns a subscription identifier that can be used with g_dbus_connection_signal_unsubscribe()
          */
-        signal_subscribe(sender: string, interface_name: string, member: string, object_path: string, arg0: string, flags: DBusSignalFlags, callback: DBusSignalCallback, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+        signal_subscribe(sender: string, interface_name: string, member: string, object_path: string, arg0: string, flags: DBusSignalFlags, callback: DBusSignalCallback, user_data_free_func: GLib.DestroyNotify): number;
         /**
          * Unsubscribes from signals.
          * 
@@ -2868,7 +2963,66 @@ declare namespace imports.gi.Gio {
         unregister_subtree(registration_id: number): boolean;
     }
 
-    var DBusConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusConnection} instead.
+     */
+    type DBusConnectionMixin = IDBusConnection & GObject.IObject & IAsyncInitable & IInitable;
+
+    /**
+     * The #GDBusConnection type is used for D-Bus connections to remote
+     * peers such as a message buses. It is a low-level API that offers a
+     * lot of flexibility. For instance, it lets you establish a connection
+     * over any transport that can by represented as a #GIOStream.
+     * 
+     * This class is rarely used directly in D-Bus clients. If you are writing
+     * a D-Bus client, it is often easier to use the g_bus_own_name(),
+     * g_bus_watch_name() or g_dbus_proxy_new_for_bus() APIs.
+     * 
+     * As an exception to the usual GLib rule that a particular object must not
+     * be used by two threads at the same time, #GDBusConnection's methods may be
+     * called from any thread. This is so that g_bus_get() and g_bus_get_sync()
+     * can safely return the same #GDBusConnection when called from any thread.
+     * 
+     * Most of the ways to obtain a #GDBusConnection automatically initialize it
+     * (i.e. connect to D-Bus): for instance, g_dbus_connection_new() and
+     * g_bus_get(), and the synchronous versions of those methods, give you an
+     * initialized connection. Language bindings for GIO should use
+     * g_initable_new() or g_async_initable_new_async(), which also initialize the
+     * connection.
+     * 
+     * If you construct an uninitialized #GDBusConnection, such as via
+     * g_object_new(), you must initialize it via g_initable_init() or
+     * g_async_initable_init_async() before using its methods or properties.
+     * Calling methods or accessing properties on a #GDBusConnection that has not
+     * completed initialization successfully is considered to be invalid, and leads
+     * to undefined behaviour. In particular, if initialization fails with a
+     * #GError, the only valid thing you can do with that #GDBusConnection is to
+     * free it with g_object_unref().
+     * 
+     * ## An example D-Bus server # {#gdbus-server}
+     * 
+     * Here is an example for a D-Bus server:
+     * [gdbus-example-server.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c)
+     * 
+     * ## An example for exporting a subtree # {#gdbus-subtree-server}
+     * 
+     * Here is an example for exporting a subtree:
+     * [gdbus-example-subtree.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-subtree.c)
+     * 
+     * ## An example for file descriptor passing # {#gdbus-unix-fd-client}
+     * 
+     * Here is an example for passing UNIX file descriptors:
+     * [gdbus-unix-fd-client.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-unix-fd-client.c)
+     * 
+     * ## An example for exporting a GObject # {#gdbus-export}
+     * 
+     * Here is an example for exporting a #GObject:
+     * [gdbus-example-export.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-export.c)
+     */
+    interface DBusConnection extends DBusConnectionMixin { }
+
+    class DBusConnection {
+        constructor();
         /**
          * Finishes an operation started with g_dbus_connection_new().
          * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback
@@ -2876,7 +3030,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GDBusConnection or %NULL if #error is set. Free
          *     with g_object_unref().
          */
-        new_finish(res: AsyncResult): DBusConnection;
+        static new_finish(res: AsyncResult): DBusConnection;
         /**
          * Finishes an operation started with g_dbus_connection_new_for_address().
          * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
@@ -2884,7 +3038,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GDBusConnection or %NULL if #error is set.
          *     Free with g_object_unref().
          */
-        new_for_address_finish(res: AsyncResult): DBusConnection;
+        static new_for_address_finish(res: AsyncResult): DBusConnection;
         /**
          * Synchronously connects and sets up a D-Bus client connection for
          * exchanging D-Bus messages with an endpoint specified by #address
@@ -2910,7 +3064,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GDBusConnection or %NULL if #error is set.
          *     Free with g_object_unref().
          */
-        new_for_address_sync(address: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable): DBusConnection;
+        static new_for_address_sync(address: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable): DBusConnection;
         /**
          * Synchronously sets up a D-Bus connection for exchanging D-Bus messages
          * with the end represented by #stream.
@@ -2935,7 +3089,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GDBusConnection or %NULL if #error is set.
          *     Free with g_object_unref().
          */
-        new_sync(stream: IOStream, guid: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable): DBusConnection;
+        static new_sync(stream: IOStream, guid: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable): DBusConnection;
         /**
          * Asynchronously sets up a D-Bus connection for exchanging D-Bus messages
          * with the end represented by #stream.
@@ -2963,9 +3117,8 @@ declare namespace imports.gi.Gio {
          * @param observer a #GDBusAuthObserver or %NULL
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to #callback
          */
-        new(stream: IOStream, guid: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new(stream: IOStream, guid: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Asynchronously connects and sets up a D-Bus client connection for
          * exchanging D-Bus messages with an endpoint specified by #address
@@ -2994,15 +3147,14 @@ declare namespace imports.gi.Gio {
          * @param observer a #GDBusAuthObserver or %NULL
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to #callback
          */
-        new_for_address(address: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new_for_address(address: string, flags: DBusConnectionFlags, observer: DBusAuthObserver, cancellable: Cancellable, callback: AsyncReadyCallback): void;
     }
 
-    /**
-     * Abstract base class for D-Bus interfaces on the service side.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusInterfaceSkeleton} instead.
      */
-    interface DBusInterfaceSkeleton extends GObject.Object, DBusInterface {
+    interface IDBusInterfaceSkeleton {
         /**
          * Exports #interface_ at #object_path on #connection.
          * 
@@ -3102,19 +3254,41 @@ declare namespace imports.gi.Gio {
         unexport_from_connection(connection: DBusConnection): void;
     }
 
-    var DBusInterfaceSkeleton: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusInterfaceSkeleton} instead.
+     */
+    type DBusInterfaceSkeletonMixin = IDBusInterfaceSkeleton & GObject.IObject & IDBusInterface;
+
+    /**
+     * Abstract base class for D-Bus interfaces on the service side.
+     */
+    interface DBusInterfaceSkeleton extends DBusInterfaceSkeletonMixin { }
+
+    class DBusInterfaceSkeleton {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMenuModel} instead.
+     */
+    interface IDBusMenuModel {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMenuModel} instead.
+     */
+    type DBusMenuModelMixin = IDBusMenuModel & IMenuModel;
 
     /**
      * #GDBusMenuModel is an implementation of #GMenuModel that can be used
      * as a proxy for a menu model that is exported over D-Bus with
      * g_dbus_connection_export_menu_model().
      */
-    interface DBusMenuModel extends MenuModel {
+    interface DBusMenuModel extends DBusMenuModelMixin { }
 
-    }
-
-    var DBusMenuModel: {
+    class DBusMenuModel {
+        constructor();
         /**
          * Obtains a #GDBusMenuModel for the menu model which is exported
          * at the given #bus_name and #object_path.
@@ -3131,14 +3305,13 @@ declare namespace imports.gi.Gio {
          * @returns a #GDBusMenuModel object. Free with
          *     g_object_unref().
          */
-        get(connection: DBusConnection, bus_name: string, object_path: string): DBusMenuModel;
+        static get(connection: DBusConnection, bus_name: string, object_path: string): DBusMenuModel;
     }
 
-    /**
-     * A type for representing D-Bus messages that can be sent or received
-     * on a #GDBusConnection.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMessage} instead.
      */
-    interface DBusMessage extends GObject.Object {
+    interface IDBusMessage {
         /**
          * Copies #message. The copy is a deep copy and the returned
          * #GDBusMessage is completely identical except that it is guaranteed
@@ -3452,12 +3625,24 @@ declare namespace imports.gi.Gio {
         to_gerror(): boolean;
     }
 
-    var DBusMessage: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMessage} instead.
+     */
+    type DBusMessageMixin = IDBusMessage & GObject.IObject;
+
+    /**
+     * A type for representing D-Bus messages that can be sent or received
+     * on a #GDBusConnection.
+     */
+    interface DBusMessage extends DBusMessageMixin { }
+
+    class DBusMessage {
+        constructor();
         /**
          * Creates a new empty #GDBusMessage.
          * @returns A #GDBusMessage. Free with g_object_unref().
          */
-        new(): DBusMessage;
+        static new(): DBusMessage;
         /**
          * Creates a new #GDBusMessage from the data stored at #blob. The byte
          * order that the message was in can be retrieved using
@@ -3471,7 +3656,7 @@ declare namespace imports.gi.Gio {
          * @returns A new #GDBusMessage or %NULL if #error is set. Free with
          * g_object_unref().
          */
-        new_from_blob(blob: number[], blob_len: number, capabilities: DBusCapabilityFlags): DBusMessage;
+        static new_from_blob(blob: number[], blob_len: number, capabilities: DBusCapabilityFlags): DBusMessage;
         /**
          * Creates a new #GDBusMessage for a method call.
          * @param name A valid D-Bus name or %NULL.
@@ -3480,7 +3665,7 @@ declare namespace imports.gi.Gio {
          * @param method A valid method name.
          * @returns A #GDBusMessage. Free with g_object_unref().
          */
-        new_method_call(name: string, path: string, interface_: string, method: string): DBusMessage;
+        static new_method_call(name: string, path: string, interface_: string, method: string): DBusMessage;
         /**
          * Creates a new #GDBusMessage for a signal emission.
          * @param path A valid object path.
@@ -3488,7 +3673,7 @@ declare namespace imports.gi.Gio {
          * @param signal A valid signal name.
          * @returns A #GDBusMessage. Free with g_object_unref().
          */
-        new_signal(path: string, interface_: string, signal: string): DBusMessage;
+        static new_signal(path: string, interface_: string, signal: string): DBusMessage;
         /**
          * Utility function to calculate how many bytes are needed to
          * completely deserialize the D-Bus message stored at #blob.
@@ -3498,19 +3683,13 @@ declare namespace imports.gi.Gio {
          * #blob contains invalid data or not enough data is available to
          * determine the size).
          */
-        bytes_needed(blob: number[], blob_len: number): number;
+        static bytes_needed(blob: number[], blob_len: number): number;
     }
 
-    /**
-     * Instances of the #GDBusMethodInvocation class are used when
-     * handling D-Bus method calls. It provides a way to asynchronously
-     * return results and errors.
-     * 
-     * The normal way to obtain a #GDBusMethodInvocation object is to receive
-     * it as an argument to the handle_method_call() function in a
-     * #GDBusInterfaceVTable that was passed to g_dbus_connection_register_object().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMethodInvocation} instead.
      */
-    interface DBusMethodInvocation extends GObject.Object {
+    interface IDBusMethodInvocation {
         /**
          * Gets the #GDBusConnection the method was invoked on.
          * @returns A #GDBusConnection. Do not free, it is owned by #invocation.
@@ -3719,8 +3898,64 @@ declare namespace imports.gi.Gio {
         take_error(error: GLib.Error): void;
     }
 
-    var DBusMethodInvocation: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusMethodInvocation} instead.
+     */
+    type DBusMethodInvocationMixin = IDBusMethodInvocation & GObject.IObject;
+
+    /**
+     * Instances of the #GDBusMethodInvocation class are used when
+     * handling D-Bus method calls. It provides a way to asynchronously
+     * return results and errors.
+     * 
+     * The normal way to obtain a #GDBusMethodInvocation object is to receive
+     * it as an argument to the handle_method_call() function in a
+     * #GDBusInterfaceVTable that was passed to g_dbus_connection_register_object().
+     */
+    interface DBusMethodInvocation extends DBusMethodInvocationMixin { }
+
+    class DBusMethodInvocation {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManagerClient} instead.
+     */
+    interface IDBusObjectManagerClient {
+        /**
+         * Gets the #GDBusConnection used by #manager.
+         * @returns A #GDBusConnection object. Do not free,
+         *   the object belongs to #manager.
+         */
+        get_connection(): DBusConnection;
+        /**
+         * Gets the flags that #manager was constructed with.
+         * @returns Zero of more flags from the #GDBusObjectManagerClientFlags
+         * enumeration.
+         */
+        get_flags(): DBusObjectManagerClientFlags;
+        /**
+         * Gets the name that #manager is for, or %NULL if not a message bus
+         * connection.
+         * @returns A unique or well-known name. Do not free, the string
+         * belongs to #manager.
+         */
+        get_name(): string;
+        /**
+         * The unique name that owns the name that #manager is for or %NULL if
+         * no-one currently owns that name. You can connect to the
+         * #GObject::notify signal to track changes to the
+         * #GDBusObjectManagerClient:name-owner property.
+         * @returns The name owner or %NULL if no name owner
+         * exists. Free with g_free().
+         */
+        get_name_owner(): string;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManagerClient} instead.
+     */
+    type DBusObjectManagerClientMixin = IDBusObjectManagerClient & GObject.IObject & IAsyncInitable & IDBusObjectManager & IInitable;
 
     /**
      * #GDBusObjectManagerClient is used to create, monitor and delete object
@@ -3799,38 +4034,10 @@ declare namespace imports.gi.Gio {
      * the same context and, consequently, will deliver signals in the
      * same main loop.
      */
-    interface DBusObjectManagerClient extends GObject.Object, AsyncInitable, DBusObjectManager, Initable {
-        /**
-         * Gets the #GDBusConnection used by #manager.
-         * @returns A #GDBusConnection object. Do not free,
-         *   the object belongs to #manager.
-         */
-        get_connection(): DBusConnection;
-        /**
-         * Gets the flags that #manager was constructed with.
-         * @returns Zero of more flags from the #GDBusObjectManagerClientFlags
-         * enumeration.
-         */
-        get_flags(): DBusObjectManagerClientFlags;
-        /**
-         * Gets the name that #manager is for, or %NULL if not a message bus
-         * connection.
-         * @returns A unique or well-known name. Do not free, the string
-         * belongs to #manager.
-         */
-        get_name(): string;
-        /**
-         * The unique name that owns the name that #manager is for or %NULL if
-         * no-one currently owns that name. You can connect to the
-         * #GObject::notify signal to track changes to the
-         * #GDBusObjectManagerClient:name-owner property.
-         * @returns The name owner or %NULL if no name owner
-         * exists. Free with g_free().
-         */
-        get_name_owner(): string;
-    }
+    interface DBusObjectManagerClient extends DBusObjectManagerClientMixin { }
 
-    var DBusObjectManagerClient: {
+    class DBusObjectManagerClient {
+        constructor();
         /**
          * Finishes an operation started with g_dbus_object_manager_client_new().
          * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new().
@@ -3838,7 +4045,7 @@ declare namespace imports.gi.Gio {
          *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
          *   with g_object_unref().
          */
-        new_finish(res: AsyncResult): DBusObjectManagerClient;
+        static new_finish(res: AsyncResult): DBusObjectManagerClient;
         /**
          * Finishes an operation started with g_dbus_object_manager_client_new_for_bus().
          * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new_for_bus().
@@ -3846,7 +4053,7 @@ declare namespace imports.gi.Gio {
          *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
          *   with g_object_unref().
          */
-        new_for_bus_finish(res: AsyncResult): DBusObjectManagerClient;
+        static new_for_bus_finish(res: AsyncResult): DBusObjectManagerClient;
         /**
          * Like g_dbus_object_manager_client_new_sync() but takes a #GBusType instead
          * of a #GDBusConnection.
@@ -3866,7 +4073,7 @@ declare namespace imports.gi.Gio {
          *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
          *   with g_object_unref().
          */
-        new_for_bus_sync(bus_type: BusType, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable): DBusObjectManagerClient;
+        static new_for_bus_sync(bus_type: BusType, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable): DBusObjectManagerClient;
         /**
          * Creates a new #GDBusObjectManagerClient object.
          * 
@@ -3885,7 +4092,7 @@ declare namespace imports.gi.Gio {
          *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
          *   with g_object_unref().
          */
-        new_sync(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable): DBusObjectManagerClient;
+        static new_sync(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable): DBusObjectManagerClient;
         /**
          * Asynchronously creates a new #GDBusObjectManagerClient object.
          * 
@@ -3904,9 +4111,8 @@ declare namespace imports.gi.Gio {
          * @param get_proxy_type_destroy_notify Free function for #get_proxy_type_user_data or %NULL.
          * @param cancellable A #GCancellable or %NULL
          * @param callback A #GAsyncReadyCallback to call when the request is satisfied.
-         * @param user_data The data to pass to #callback.
          */
-        new(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Like g_dbus_object_manager_client_new() but takes a #GBusType instead of a
          * #GDBusConnection.
@@ -3926,36 +4132,14 @@ declare namespace imports.gi.Gio {
          * @param get_proxy_type_destroy_notify Free function for #get_proxy_type_user_data or %NULL.
          * @param cancellable A #GCancellable or %NULL
          * @param callback A #GAsyncReadyCallback to call when the request is satisfied.
-         * @param user_data The data to pass to #callback.
          */
-        new_for_bus(bus_type: BusType, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new_for_bus(bus_type: BusType, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc, get_proxy_type_user_data: any, get_proxy_type_destroy_notify: GLib.DestroyNotify, cancellable: Cancellable, callback: AsyncReadyCallback): void;
     }
 
-    /**
-     * #GDBusObjectManagerServer is used to export #GDBusObject instances using
-     * the standardized
-     * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-     * interface. For example, remote D-Bus clients can get all objects
-     * and properties in a single call. Additionally, any change in the
-     * object hierarchy is broadcast using signals. This means that D-Bus
-     * clients can keep caches up to date by only listening to D-Bus
-     * signals.
-     * 
-     * The recommended path to export an object manager at is the path form of the
-     * well-known name of a D-Bus service, or below. For example, if a D-Bus service
-     * is available at the well-known name `net.example.ExampleService1`, the object
-     * manager should typically be exported at `/net/example/ExampleService1`, or
-     * below (to allow for multiple object managers in a service).
-     * 
-     * It is supported, but not recommended, to export an object manager at the root
-     * path, `/`.
-     * 
-     * See #GDBusObjectManagerClient for the client-side code that is
-     * intended to be used with #GDBusObjectManagerServer or any D-Bus
-     * object implementing the org.freedesktop.DBus.ObjectManager
-     * interface.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManagerServer} instead.
      */
-    interface DBusObjectManagerServer extends GObject.Object, DBusObjectManager {
+    interface IDBusObjectManagerServer {
         /**
          * Exports #object on #manager.
          * 
@@ -4009,7 +4193,39 @@ declare namespace imports.gi.Gio {
         unexport(object_path: string): boolean;
     }
 
-    var DBusObjectManagerServer: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManagerServer} instead.
+     */
+    type DBusObjectManagerServerMixin = IDBusObjectManagerServer & GObject.IObject & IDBusObjectManager;
+
+    /**
+     * #GDBusObjectManagerServer is used to export #GDBusObject instances using
+     * the standardized
+     * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
+     * interface. For example, remote D-Bus clients can get all objects
+     * and properties in a single call. Additionally, any change in the
+     * object hierarchy is broadcast using signals. This means that D-Bus
+     * clients can keep caches up to date by only listening to D-Bus
+     * signals.
+     * 
+     * The recommended path to export an object manager at is the path form of the
+     * well-known name of a D-Bus service, or below. For example, if a D-Bus service
+     * is available at the well-known name `net.example.ExampleService1`, the object
+     * manager should typically be exported at `/net/example/ExampleService1`, or
+     * below (to allow for multiple object managers in a service).
+     * 
+     * It is supported, but not recommended, to export an object manager at the root
+     * path, `/`.
+     * 
+     * See #GDBusObjectManagerClient for the client-side code that is
+     * intended to be used with #GDBusObjectManagerServer or any D-Bus
+     * object implementing the org.freedesktop.DBus.ObjectManager
+     * interface.
+     */
+    interface DBusObjectManagerServer extends DBusObjectManagerServerMixin { }
+
+    class DBusObjectManagerServer {
+        constructor();
         /**
          * Creates a new #GDBusObjectManagerServer object.
          * 
@@ -4021,16 +4237,13 @@ declare namespace imports.gi.Gio {
          * @param object_path The object path to export the manager object at.
          * @returns A #GDBusObjectManagerServer object. Free with g_object_unref().
          */
-        new(object_path: string): DBusObjectManagerServer;
+        static new(object_path: string): DBusObjectManagerServer;
     }
 
-    /**
-     * A #GDBusObjectProxy is an object used to represent a remote object
-     * with one or more D-Bus interfaces. Normally, you don't instantiate
-     * a #GDBusObjectProxy yourself - typically #GDBusObjectManagerClient
-     * is used to obtain it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectProxy} instead.
      */
-    interface DBusObjectProxy extends GObject.Object, DBusObject {
+    interface IDBusObjectProxy {
         /**
          * Gets the connection that #proxy is for.
          * @returns A #GDBusConnection. Do not free, the
@@ -4039,7 +4252,21 @@ declare namespace imports.gi.Gio {
         get_connection(): DBusConnection;
     }
 
-    var DBusObjectProxy: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectProxy} instead.
+     */
+    type DBusObjectProxyMixin = IDBusObjectProxy & GObject.IObject & IDBusObject;
+
+    /**
+     * A #GDBusObjectProxy is an object used to represent a remote object
+     * with one or more D-Bus interfaces. Normally, you don't instantiate
+     * a #GDBusObjectProxy yourself - typically #GDBusObjectManagerClient
+     * is used to obtain it.
+     */
+    interface DBusObjectProxy extends DBusObjectProxyMixin { }
+
+    class DBusObjectProxy {
+        constructor();
         /**
          * Creates a new #GDBusObjectProxy for the given connection and
          * object path.
@@ -4047,17 +4274,13 @@ declare namespace imports.gi.Gio {
          * @param object_path the object path
          * @returns a new #GDBusObjectProxy
          */
-        new(connection: DBusConnection, object_path: string): DBusObjectProxy;
+        static new(connection: DBusConnection, object_path: string): DBusObjectProxy;
     }
 
-    /**
-     * A #GDBusObjectSkeleton instance is essentially a group of D-Bus
-     * interfaces. The set of exported interfaces on the object may be
-     * dynamic and change at runtime.
-     * 
-     * This type is intended to be used with #GDBusObjectManager.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectSkeleton} instead.
      */
-    interface DBusObjectSkeleton extends GObject.Object, DBusObject {
+    interface IDBusObjectSkeleton {
         /**
          * Adds #interface_ to #object.
          * 
@@ -4095,62 +4318,34 @@ declare namespace imports.gi.Gio {
         set_object_path(object_path: string): void;
     }
 
-    var DBusObjectSkeleton: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectSkeleton} instead.
+     */
+    type DBusObjectSkeletonMixin = IDBusObjectSkeleton & GObject.IObject & IDBusObject;
+
+    /**
+     * A #GDBusObjectSkeleton instance is essentially a group of D-Bus
+     * interfaces. The set of exported interfaces on the object may be
+     * dynamic and change at runtime.
+     * 
+     * This type is intended to be used with #GDBusObjectManager.
+     */
+    interface DBusObjectSkeleton extends DBusObjectSkeletonMixin { }
+
+    class DBusObjectSkeleton {
+        constructor();
         /**
          * Creates a new #GDBusObjectSkeleton.
          * @param object_path An object path.
          * @returns A #GDBusObjectSkeleton. Free with g_object_unref().
          */
-        new(object_path: string): DBusObjectSkeleton;
+        static new(object_path: string): DBusObjectSkeleton;
     }
 
-    /**
-     * #GDBusProxy is a base class used for proxies to access a D-Bus
-     * interface on a remote object. A #GDBusProxy can be constructed for
-     * both well-known and unique names.
-     * 
-     * By default, #GDBusProxy will cache all properties (and listen to
-     * changes) of the remote object, and proxy all signals that get
-     * emitted. This behaviour can be changed by passing suitable
-     * #GDBusProxyFlags when the proxy is created. If the proxy is for a
-     * well-known name, the property cache is flushed when the name owner
-     * vanishes and reloaded when a name owner appears.
-     * 
-     * The unique name owner of the proxy's name is tracked and can be read from
-     * #GDBusProxy:g-name-owner. Connect to the #GObject::notify signal to
-     * get notified of changes. Additionally, only signals and property
-     * changes emitted from the current name owner are considered and
-     * calls are always sent to the current name owner. This avoids a
-     * number of race conditions when the name is lost by one owner and
-     * claimed by another. However, if no name owner currently exists,
-     * then calls will be sent to the well-known name which may result in
-     * the message bus launching an owner (unless
-     * %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START is set).
-     * 
-     * If the proxy is for a stateless D-Bus service, where the name owner may
-     * be started and stopped between calls, the #GDBusProxy:g-name-owner tracking
-     * of #GDBusProxy will cause the proxy to drop signal and property changes from
-     * the service after it has restarted for the first time. When interacting
-     * with a stateless D-Bus service, do not use #GDBusProxy — use direct D-Bus
-     * method calls and signal connections.
-     * 
-     * The generic #GDBusProxy::g-properties-changed and
-     * #GDBusProxy::g-signal signals are not very convenient to work with.
-     * Therefore, the recommended way of working with proxies is to subclass
-     * #GDBusProxy, and have more natural properties and signals in your derived
-     * class. This [example][gdbus-example-gdbus-codegen] shows how this can
-     * easily be done using the [gdbus-codegen][gdbus-codegen] tool.
-     * 
-     * A #GDBusProxy instance can be used from multiple threads but note
-     * that all signals (e.g. #GDBusProxy::g-signal, #GDBusProxy::g-properties-changed
-     * and #GObject::notify) are emitted in the
-     * [thread-default main context][g-main-context-push-thread-default]
-     * of the thread where the instance was constructed.
-     * 
-     * An example using a proxy for a well-known name can be found in
-     * [gdbus-example-watch-proxy.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c)
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusProxy} instead.
      */
-    interface DBusProxy extends GObject.Object, AsyncInitable, DBusInterface, Initable {
+    interface IDBusProxy {
         /**
          * Asynchronously invokes the #method_name method on #proxy.
          * 
@@ -4202,9 +4397,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable A #GCancellable or %NULL.
          * @param callback A #GAsyncReadyCallback to call when the request is satisfied or %NULL if you don't
          * care about the result of the method invocation.
-         * @param user_data The data to pass to #callback.
          */
-        call(method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        call(method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_proxy_call().
          * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call().
@@ -4271,9 +4465,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable A #GCancellable or %NULL.
          * @param callback A #GAsyncReadyCallback to call when the request is satisfied or %NULL if you don't
          * care about the result of the method invocation.
-         * @param user_data The data to pass to #callback.
          */
-        call_with_unix_fd_list(method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        call_with_unix_fd_list(method_name: string, parameters: GLib.Variant, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list().
          * @param out_fd_list Return location for a #GUnixFDList or %NULL.
@@ -4429,21 +4622,75 @@ declare namespace imports.gi.Gio {
         set_interface_info(info: DBusInterfaceInfo): void;
     }
 
-    var DBusProxy: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusProxy} instead.
+     */
+    type DBusProxyMixin = IDBusProxy & GObject.IObject & IAsyncInitable & IDBusInterface & IInitable;
+
+    /**
+     * #GDBusProxy is a base class used for proxies to access a D-Bus
+     * interface on a remote object. A #GDBusProxy can be constructed for
+     * both well-known and unique names.
+     * 
+     * By default, #GDBusProxy will cache all properties (and listen to
+     * changes) of the remote object, and proxy all signals that get
+     * emitted. This behaviour can be changed by passing suitable
+     * #GDBusProxyFlags when the proxy is created. If the proxy is for a
+     * well-known name, the property cache is flushed when the name owner
+     * vanishes and reloaded when a name owner appears.
+     * 
+     * The unique name owner of the proxy's name is tracked and can be read from
+     * #GDBusProxy:g-name-owner. Connect to the #GObject::notify signal to
+     * get notified of changes. Additionally, only signals and property
+     * changes emitted from the current name owner are considered and
+     * calls are always sent to the current name owner. This avoids a
+     * number of race conditions when the name is lost by one owner and
+     * claimed by another. However, if no name owner currently exists,
+     * then calls will be sent to the well-known name which may result in
+     * the message bus launching an owner (unless
+     * %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START is set).
+     * 
+     * If the proxy is for a stateless D-Bus service, where the name owner may
+     * be started and stopped between calls, the #GDBusProxy:g-name-owner tracking
+     * of #GDBusProxy will cause the proxy to drop signal and property changes from
+     * the service after it has restarted for the first time. When interacting
+     * with a stateless D-Bus service, do not use #GDBusProxy — use direct D-Bus
+     * method calls and signal connections.
+     * 
+     * The generic #GDBusProxy::g-properties-changed and
+     * #GDBusProxy::g-signal signals are not very convenient to work with.
+     * Therefore, the recommended way of working with proxies is to subclass
+     * #GDBusProxy, and have more natural properties and signals in your derived
+     * class. This [example][gdbus-example-gdbus-codegen] shows how this can
+     * easily be done using the [gdbus-codegen][gdbus-codegen] tool.
+     * 
+     * A #GDBusProxy instance can be used from multiple threads but note
+     * that all signals (e.g. #GDBusProxy::g-signal, #GDBusProxy::g-properties-changed
+     * and #GObject::notify) are emitted in the
+     * [thread-default main context][g-main-context-push-thread-default]
+     * of the thread where the instance was constructed.
+     * 
+     * An example using a proxy for a well-known name can be found in
+     * [gdbus-example-watch-proxy.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c)
+     */
+    interface DBusProxy extends DBusProxyMixin { }
+
+    class DBusProxy {
+        constructor();
         /**
          * Finishes creating a #GDBusProxy.
          * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new().
          * @returns A #GDBusProxy or %NULL if #error is set.
          *    Free with g_object_unref().
          */
-        new_finish(res: AsyncResult): DBusProxy;
+        static new_finish(res: AsyncResult): DBusProxy;
         /**
          * Finishes creating a #GDBusProxy.
          * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new_for_bus().
          * @returns A #GDBusProxy or %NULL if #error is set.
          *    Free with g_object_unref().
          */
-        new_for_bus_finish(res: AsyncResult): DBusProxy;
+        static new_for_bus_finish(res: AsyncResult): DBusProxy;
         /**
          * Like g_dbus_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
          * 
@@ -4459,7 +4706,7 @@ declare namespace imports.gi.Gio {
          * @returns A #GDBusProxy or %NULL if error is set.
          *    Free with g_object_unref().
          */
-        new_for_bus_sync(bus_type: BusType, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable): DBusProxy;
+        static new_for_bus_sync(bus_type: BusType, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable): DBusProxy;
         /**
          * Creates a proxy for accessing #interface_name on the remote object
          * at #object_path owned by #name at #connection and synchronously
@@ -4493,7 +4740,7 @@ declare namespace imports.gi.Gio {
          * @returns A #GDBusProxy or %NULL if error is set.
          *    Free with g_object_unref().
          */
-        new_sync(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable): DBusProxy;
+        static new_sync(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable): DBusProxy;
         /**
          * Creates a proxy for accessing #interface_name on the remote object
          * at #object_path owned by #name at #connection and asynchronously
@@ -4530,9 +4777,8 @@ declare namespace imports.gi.Gio {
          * @param interface_name A D-Bus interface name.
          * @param cancellable A #GCancellable or %NULL.
          * @param callback Callback function to invoke when the proxy is ready.
-         * @param user_data User data to pass to #callback.
          */
-        new(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Like g_dbus_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
          * 
@@ -4545,32 +4791,14 @@ declare namespace imports.gi.Gio {
          * @param interface_name A D-Bus interface name.
          * @param cancellable A #GCancellable or %NULL.
          * @param callback Callback function to invoke when the proxy is ready.
-         * @param user_data User data to pass to #callback.
          */
-        new_for_bus(bus_type: BusType, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new_for_bus(bus_type: BusType, flags: DBusProxyFlags, info: DBusInterfaceInfo, name: string, object_path: string, interface_name: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
     }
 
-    /**
-     * #GDBusServer is a helper for listening to and accepting D-Bus
-     * connections. This can be used to create a new D-Bus server, allowing two
-     * peers to use the D-Bus protocol for their own specialized communication.
-     * A server instance provided in this way will not perform message routing or
-     * implement the org.freedesktop.DBus interface.
-     * 
-     * To just export an object on a well-known name on a message bus, such as the
-     * session or system bus, you should instead use g_bus_own_name().
-     * 
-     * An example of peer-to-peer communication with GDBus can be found
-     * in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
-     * 
-     * Note that a minimal #GDBusServer will accept connections from any
-     * peer. In many use-cases it will be necessary to add a #GDBusAuthObserver
-     * that only accepts connections that have successfully authenticated
-     * as the same user that is running the #GDBusServer. Since GLib 2.68 this can
-     * be achieved more simply by passing the
-     * %G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flag to the server.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusServer} instead.
      */
-    interface DBusServer extends GObject.Object, Initable {
+    interface IDBusServer {
         /**
          * Gets a
          * [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
@@ -4606,7 +4834,35 @@ declare namespace imports.gi.Gio {
         stop(): void;
     }
 
-    var DBusServer: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusServer} instead.
+     */
+    type DBusServerMixin = IDBusServer & GObject.IObject & IInitable;
+
+    /**
+     * #GDBusServer is a helper for listening to and accepting D-Bus
+     * connections. This can be used to create a new D-Bus server, allowing two
+     * peers to use the D-Bus protocol for their own specialized communication.
+     * A server instance provided in this way will not perform message routing or
+     * implement the org.freedesktop.DBus interface.
+     * 
+     * To just export an object on a well-known name on a message bus, such as the
+     * session or system bus, you should instead use g_bus_own_name().
+     * 
+     * An example of peer-to-peer communication with GDBus can be found
+     * in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
+     * 
+     * Note that a minimal #GDBusServer will accept connections from any
+     * peer. In many use-cases it will be necessary to add a #GDBusAuthObserver
+     * that only accepts connections that have successfully authenticated
+     * as the same user that is running the #GDBusServer. Since GLib 2.68 this can
+     * be achieved more simply by passing the
+     * %G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flag to the server.
+     */
+    interface DBusServer extends DBusServerMixin { }
+
+    class DBusServer {
+        constructor();
         /**
          * Creates a new D-Bus server that listens on the first address in
          * #address that works.
@@ -4636,14 +4892,13 @@ declare namespace imports.gi.Gio {
          * @returns A #GDBusServer or %NULL if #error is set. Free with
          * g_object_unref().
          */
-        new_sync(address: string, flags: DBusServerFlags, guid: string, observer: DBusAuthObserver, cancellable: Cancellable): DBusServer;
+        static new_sync(address: string, flags: DBusServerFlags, guid: string, observer: DBusAuthObserver, cancellable: Cancellable): DBusServer;
     }
 
-    /**
-     * Data input stream implements #GInputStream and includes functions for
-     * reading structured data directly from a binary input stream.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DataInputStream} instead.
      */
-    interface DataInputStream extends BufferedInputStream, Seekable {
+    interface IDataInputStream {
         /**
          * Gets the byte order for the data input stream.
          * @returns the #stream's current #GDataStreamByteOrder.
@@ -4722,9 +4977,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied.
-         * @param user_data the data to pass to callback function.
          */
-        read_line_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_line_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous call started by
          * g_data_input_stream_read_line_async().  Note the warning about
@@ -4844,9 +5098,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied.
-         * @param user_data the data to pass to callback function.
          */
-        read_until_async(stop_chars: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_until_async(stop_chars: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous call started by
          * g_data_input_stream_read_until_async().
@@ -4903,9 +5156,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        read_upto_async(stop_chars: string, stop_chars_len: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_upto_async(stop_chars: string, stop_chars_len: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous call started by
          * g_data_input_stream_read_upto_async().
@@ -4940,20 +5192,31 @@ declare namespace imports.gi.Gio {
         set_newline_type(_type: DataStreamNewlineType): void;
     }
 
-    var DataInputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DataInputStream} instead.
+     */
+    type DataInputStreamMixin = IDataInputStream & IBufferedInputStream & ISeekable;
+
+    /**
+     * Data input stream implements #GInputStream and includes functions for
+     * reading structured data directly from a binary input stream.
+     */
+    interface DataInputStream extends DataInputStreamMixin { }
+
+    class DataInputStream {
+        constructor();
         /**
          * Creates a new data input stream for the #base_stream.
          * @param base_stream a #GInputStream.
          * @returns a new #GDataInputStream.
          */
-        new(base_stream: InputStream): DataInputStream;
+        static new(base_stream: InputStream): DataInputStream;
     }
 
-    /**
-     * Data output stream implements #GOutputStream and includes functions for
-     * writing data directly to an output stream.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DataOutputStream} instead.
      */
-    interface DataOutputStream extends FilterOutputStream, Seekable {
+    interface IDataOutputStream {
         /**
          * Gets the byte order for the stream.
          * @returns the #GDataStreamByteOrder for the #stream.
@@ -5022,24 +5285,31 @@ declare namespace imports.gi.Gio {
         set_byte_order(order: DataStreamByteOrder): void;
     }
 
-    var DataOutputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DataOutputStream} instead.
+     */
+    type DataOutputStreamMixin = IDataOutputStream & IFilterOutputStream & ISeekable;
+
+    /**
+     * Data output stream implements #GOutputStream and includes functions for
+     * writing data directly to an output stream.
+     */
+    interface DataOutputStream extends DataOutputStreamMixin { }
+
+    class DataOutputStream {
+        constructor();
         /**
          * Creates a new data output stream for #base_stream.
          * @param base_stream a #GOutputStream.
          * @returns #GDataOutputStream.
          */
-        new(base_stream: OutputStream): DataOutputStream;
+        static new(base_stream: OutputStream): DataOutputStream;
     }
 
-    /**
-     * #GDesktopAppInfo is an implementation of #GAppInfo based on
-     * desktop files.
-     * 
-     * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
-     * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-     * file when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DesktopAppInfo} instead.
      */
-    interface DesktopAppInfo extends GObject.Object, AppInfo {
+    interface IDesktopAppInfo {
         /**
          * Gets the user-visible display name of the "additional application
          * action" specified by #action_name.
@@ -5238,7 +5508,23 @@ declare namespace imports.gi.Gio {
         list_actions(): string[];
     }
 
-    var DesktopAppInfo: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DesktopAppInfo} instead.
+     */
+    type DesktopAppInfoMixin = IDesktopAppInfo & GObject.IObject & IAppInfo;
+
+    /**
+     * #GDesktopAppInfo is an implementation of #GAppInfo based on
+     * desktop files.
+     * 
+     * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
+     * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+     * file when using it.
+     */
+    interface DesktopAppInfo extends DesktopAppInfoMixin { }
+
+    class DesktopAppInfo {
+        constructor();
         /**
          * Creates a new #GDesktopAppInfo based on a desktop file id.
          * 
@@ -5255,20 +5541,20 @@ declare namespace imports.gi.Gio {
          * @returns a new #GDesktopAppInfo, or %NULL if no desktop
          *     file with that id exists.
          */
-        new(desktop_id: string): DesktopAppInfo;
+        static new(desktop_id: string): DesktopAppInfo;
         /**
          * Creates a new #GDesktopAppInfo.
          * @param filename the path of a desktop file, in the GLib
          *      filename encoding
          * @returns a new #GDesktopAppInfo or %NULL on error.
          */
-        new_from_filename(filename: string): DesktopAppInfo;
+        static new_from_filename(filename: string): DesktopAppInfo;
         /**
          * Creates a new #GDesktopAppInfo.
          * @param key_file an opened #GKeyFile
          * @returns a new #GDesktopAppInfo or %NULL on error.
          */
-        new_from_keyfile(key_file: GLib.KeyFile): DesktopAppInfo;
+        static new_from_keyfile(key_file: GLib.KeyFile): DesktopAppInfo;
         /**
          * Gets all applications that implement #interface.
          * 
@@ -5278,7 +5564,7 @@ declare namespace imports.gi.Gio {
          * @returns a list of #GDesktopAppInfo
          * objects.
          */
-        get_implementations(_interface: string): GLib.List;
+        static get_implementations(_interface: string): GLib.List;
         /**
          * Searches desktop files for ones that match #search_string.
          * 
@@ -5298,7 +5584,7 @@ declare namespace imports.gi.Gio {
          * @param search_string the search string to use
          * @returns 
          */
-        search(search_string: string): string[][];
+        static search(search_string: string): string[][];
         /**
          * Sets the name of the desktop that the application is running in.
          * This is used by g_app_info_should_show() and
@@ -5309,18 +5595,13 @@ declare namespace imports.gi.Gio {
          * Should be called only once; subsequent calls are ignored.
          * @param desktop_env a string specifying what desktop this is
          */
-        set_desktop_env(desktop_env: string): void;
+        static set_desktop_env(desktop_env: string): void;
     }
 
-    /**
-     * #GEmblem is an implementation of #GIcon that supports
-     * having an emblem, which is an icon with additional properties.
-     * It can than be added to a #GEmblemedIcon.
-     * 
-     * Currently, only metainformation about the emblem's origin is
-     * supported. More may be added in the future.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Emblem} instead.
      */
-    interface Emblem extends GObject.Object, Icon {
+    interface IEmblem {
         /**
          * Gives back the icon from #emblem.
          * @returns a #GIcon. The returned object belongs to
@@ -5334,31 +5615,42 @@ declare namespace imports.gi.Gio {
         get_origin(): EmblemOrigin;
     }
 
-    var Emblem: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Emblem} instead.
+     */
+    type EmblemMixin = IEmblem & GObject.IObject & IIcon;
+
+    /**
+     * #GEmblem is an implementation of #GIcon that supports
+     * having an emblem, which is an icon with additional properties.
+     * It can than be added to a #GEmblemedIcon.
+     * 
+     * Currently, only metainformation about the emblem's origin is
+     * supported. More may be added in the future.
+     */
+    interface Emblem extends EmblemMixin { }
+
+    class Emblem {
+        constructor();
         /**
          * Creates a new emblem for #icon.
          * @param icon a GIcon containing the icon.
          * @returns a new #GEmblem.
          */
-        new(icon: Icon): Emblem;
+        static new(icon: Icon): Emblem;
         /**
          * Creates a new emblem for #icon.
          * @param icon a GIcon containing the icon.
          * @param origin a GEmblemOrigin enum defining the emblem's origin
          * @returns a new #GEmblem.
          */
-        new_with_origin(icon: Icon, origin: EmblemOrigin): Emblem;
+        static new_with_origin(icon: Icon, origin: EmblemOrigin): Emblem;
     }
 
-    /**
-     * #GEmblemedIcon is an implementation of #GIcon that supports
-     * adding an emblem to an icon. Adding multiple emblems to an
-     * icon is ensured via g_emblemed_icon_add_emblem().
-     * 
-     * Note that #GEmblemedIcon allows no control over the position
-     * of the emblems. See also #GEmblem for more information.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link EmblemedIcon} instead.
      */
-    interface EmblemedIcon extends GObject.Object, Icon {
+    interface IEmblemedIcon {
         /**
          * Adds #emblem to the #GList of #GEmblems.
          * @param emblem a #GEmblem
@@ -5381,45 +5673,36 @@ declare namespace imports.gi.Gio {
         get_icon(): Icon;
     }
 
-    var EmblemedIcon: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link EmblemedIcon} instead.
+     */
+    type EmblemedIconMixin = IEmblemedIcon & GObject.IObject & IIcon;
+
+    /**
+     * #GEmblemedIcon is an implementation of #GIcon that supports
+     * adding an emblem to an icon. Adding multiple emblems to an
+     * icon is ensured via g_emblemed_icon_add_emblem().
+     * 
+     * Note that #GEmblemedIcon allows no control over the position
+     * of the emblems. See also #GEmblem for more information.
+     */
+    interface EmblemedIcon extends EmblemedIconMixin { }
+
+    class EmblemedIcon {
+        constructor();
         /**
          * Creates a new emblemed icon for #icon with the emblem #emblem.
          * @param icon a #GIcon
          * @param emblem a #GEmblem, or %NULL
          * @returns a new #GIcon
          */
-        new(icon: Icon, emblem: Emblem): EmblemedIcon;
+        static new(icon: Icon, emblem: Emblem): EmblemedIcon;
     }
 
-    /**
-     * #GFileEnumerator allows you to operate on a set of #GFiles,
-     * returning a #GFileInfo structure for each file enumerated (e.g.
-     * g_file_enumerate_children() will return a #GFileEnumerator for each
-     * of the children within a directory).
-     * 
-     * To get the next file's information from a #GFileEnumerator, use
-     * g_file_enumerator_next_file() or its asynchronous version,
-     * g_file_enumerator_next_files_async(). Note that the asynchronous
-     * version will return a list of #GFileInfos, whereas the
-     * synchronous will only return the next file in the enumerator.
-     * 
-     * The ordering of returned files is unspecified for non-Unix
-     * platforms; for more information, see g_dir_read_name().  On Unix,
-     * when operating on local files, returned files will be sorted by
-     * inode number.  Effectively you can assume that the ordering of
-     * returned files will be stable between successive calls (and
-     * applications) assuming the directory is unchanged.
-     * 
-     * If your application needs a specific ordering, such as by name or
-     * modification time, you will have to implement that in your
-     * application code.
-     * 
-     * To close a #GFileEnumerator, use g_file_enumerator_close(), or
-     * its asynchronous version, g_file_enumerator_close_async(). Once
-     * a #GFileEnumerator is closed, no further actions may be performed
-     * on it, and it should be freed with g_object_unref().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileEnumerator} instead.
      */
-    interface FileEnumerator extends GObject.Object {
+    interface IFileEnumerator {
         /**
          * Releases all resources used by this enumerator, making the
          * enumerator return %G_IO_ERROR_CLOSED on all calls.
@@ -5441,9 +5724,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes closing a file enumerator, started from g_file_enumerator_close_async().
          * 
@@ -5577,9 +5859,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        next_files_async(num_files: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        next_files_async(num_files: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes the asynchronous operation started with g_file_enumerator_next_files_async().
          * @param result a #GAsyncResult.
@@ -5595,32 +5876,49 @@ declare namespace imports.gi.Gio {
         set_pending(pending: boolean): void;
     }
 
-    var FileEnumerator: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileEnumerator} instead.
+     */
+    type FileEnumeratorMixin = IFileEnumerator & GObject.IObject;
 
     /**
-     * GFileIOStream provides io streams that both read and write to the same
-     * file handle.
+     * #GFileEnumerator allows you to operate on a set of #GFiles,
+     * returning a #GFileInfo structure for each file enumerated (e.g.
+     * g_file_enumerate_children() will return a #GFileEnumerator for each
+     * of the children within a directory).
      * 
-     * GFileIOStream implements #GSeekable, which allows the io
-     * stream to jump to arbitrary positions in the file and to truncate
-     * the file, provided the filesystem of the file supports these
-     * operations.
+     * To get the next file's information from a #GFileEnumerator, use
+     * g_file_enumerator_next_file() or its asynchronous version,
+     * g_file_enumerator_next_files_async(). Note that the asynchronous
+     * version will return a list of #GFileInfos, whereas the
+     * synchronous will only return the next file in the enumerator.
      * 
-     * To find the position of a file io stream, use
-     * g_seekable_tell().
+     * The ordering of returned files is unspecified for non-Unix
+     * platforms; for more information, see g_dir_read_name().  On Unix,
+     * when operating on local files, returned files will be sorted by
+     * inode number.  Effectively you can assume that the ordering of
+     * returned files will be stable between successive calls (and
+     * applications) assuming the directory is unchanged.
      * 
-     * To find out if a file io stream supports seeking, use g_seekable_can_seek().
-     * To position a file io stream, use g_seekable_seek().
-     * To find out if a file io stream supports truncating, use
-     * g_seekable_can_truncate(). To truncate a file io
-     * stream, use g_seekable_truncate().
+     * If your application needs a specific ordering, such as by name or
+     * modification time, you will have to implement that in your
+     * application code.
      * 
-     * The default implementation of all the #GFileIOStream operations
-     * and the implementation of #GSeekable just call into the same operations
-     * on the output stream.
+     * To close a #GFileEnumerator, use g_file_enumerator_close(), or
+     * its asynchronous version, g_file_enumerator_close_async(). Once
+     * a #GFileEnumerator is closed, no further actions may be performed
+     * on it, and it should be freed with g_object_unref().
      */
-    interface FileIOStream extends IOStream, Seekable {
+    interface FileEnumerator extends FileEnumeratorMixin { }
+
+    class FileEnumerator {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileIOStream} instead.
+     */
+    interface IFileIOStream {
         /**
          * Gets the entity tag for the file when it has been written.
          * This must be called after the stream has been written
@@ -5662,9 +5960,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][gio-GIOScheduler] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finalizes the asynchronous query started
          * by g_file_io_stream_query_info_async().
@@ -5674,14 +5971,43 @@ declare namespace imports.gi.Gio {
         query_info_finish(result: AsyncResult): FileInfo;
     }
 
-    var FileIOStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileIOStream} instead.
+     */
+    type FileIOStreamMixin = IFileIOStream & IIOStream & ISeekable;
 
     /**
-     * #GFileIcon specifies an icon by pointing to an image file
-     * to be used as icon.
+     * GFileIOStream provides io streams that both read and write to the same
+     * file handle.
+     * 
+     * GFileIOStream implements #GSeekable, which allows the io
+     * stream to jump to arbitrary positions in the file and to truncate
+     * the file, provided the filesystem of the file supports these
+     * operations.
+     * 
+     * To find the position of a file io stream, use
+     * g_seekable_tell().
+     * 
+     * To find out if a file io stream supports seeking, use g_seekable_can_seek().
+     * To position a file io stream, use g_seekable_seek().
+     * To find out if a file io stream supports truncating, use
+     * g_seekable_can_truncate(). To truncate a file io
+     * stream, use g_seekable_truncate().
+     * 
+     * The default implementation of all the #GFileIOStream operations
+     * and the implementation of #GSeekable just call into the same operations
+     * on the output stream.
      */
-    interface FileIcon extends GObject.Object, Icon, LoadableIcon {
+    interface FileIOStream extends FileIOStreamMixin { }
+
+    class FileIOStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileIcon} instead.
+     */
+    interface IFileIcon {
         /**
          * Gets the #GFile associated with the given #icon.
          * @returns a #GFile.
@@ -5689,7 +6015,19 @@ declare namespace imports.gi.Gio {
         get_file(): File;
     }
 
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileIcon} instead.
+     */
+    type FileIconMixin = IFileIcon & GObject.IObject & IIcon & ILoadableIcon;
+
+    /**
+     * #GFileIcon specifies an icon by pointing to an image file
+     * to be used as icon.
+     */
+    interface FileIcon extends FileIconMixin { }
+
     class FileIcon {
+        constructor();
         /**
          * Creates a new icon for a file.
          * @param file a #GFile.
@@ -5697,41 +6035,12 @@ declare namespace imports.gi.Gio {
          *   #file, or %NULL on error.
          */
         static new(file: File): FileIcon;
-        constructor(options?: { file?: File });
     }
 
-    /**
-     * Functionality for manipulating basic metadata for files. #GFileInfo
-     * implements methods for getting information that all files should
-     * contain, and allows for manipulation of extended attributes.
-     * 
-     * See [GFileAttribute][gio-GFileAttribute] for more information on how
-     * GIO handles file attributes.
-     * 
-     * To obtain a #GFileInfo for a #GFile, use g_file_query_info() (or its
-     * async variant). To obtain a #GFileInfo for a file input or output
-     * stream, use g_file_input_stream_query_info() or
-     * g_file_output_stream_query_info() (or their async variants).
-     * 
-     * To change the actual attributes of a file, you should then set the
-     * attribute in the #GFileInfo and call g_file_set_attributes_from_info()
-     * or g_file_set_attributes_async() on a GFile.
-     * 
-     * However, not all attributes can be changed in the file. For instance,
-     * the actual size of a file cannot be changed via g_file_info_set_size().
-     * You may call g_file_query_settable_attributes() and
-     * g_file_query_writable_namespaces() to discover the settable attributes
-     * of a particular file at runtime.
-     * 
-     * The direct accessors, such as g_file_info_get_name(), are slightly more
-     * optimized than the generic attribute accessors, such as
-     * g_file_info_get_attribute_byte_string().This optimization will matter
-     * only if calling the API in a tight loop.
-     * 
-     * #GFileAttributeMatcher allows for searching through a #GFileInfo for
-     * attributes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileInfo} instead.
      */
-    interface FileInfo extends GObject.Object {
+    interface IFileInfo {
         /**
          * Clears the status information from #info.
          */
@@ -6195,26 +6504,57 @@ declare namespace imports.gi.Gio {
         unset_attribute_mask(): void;
     }
 
-    var FileInfo: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileInfo} instead.
+     */
+    type FileInfoMixin = IFileInfo & GObject.IObject;
+
+    /**
+     * Functionality for manipulating basic metadata for files. #GFileInfo
+     * implements methods for getting information that all files should
+     * contain, and allows for manipulation of extended attributes.
+     * 
+     * See [GFileAttribute][gio-GFileAttribute] for more information on how
+     * GIO handles file attributes.
+     * 
+     * To obtain a #GFileInfo for a #GFile, use g_file_query_info() (or its
+     * async variant). To obtain a #GFileInfo for a file input or output
+     * stream, use g_file_input_stream_query_info() or
+     * g_file_output_stream_query_info() (or their async variants).
+     * 
+     * To change the actual attributes of a file, you should then set the
+     * attribute in the #GFileInfo and call g_file_set_attributes_from_info()
+     * or g_file_set_attributes_async() on a GFile.
+     * 
+     * However, not all attributes can be changed in the file. For instance,
+     * the actual size of a file cannot be changed via g_file_info_set_size().
+     * You may call g_file_query_settable_attributes() and
+     * g_file_query_writable_namespaces() to discover the settable attributes
+     * of a particular file at runtime.
+     * 
+     * The direct accessors, such as g_file_info_get_name(), are slightly more
+     * optimized than the generic attribute accessors, such as
+     * g_file_info_get_attribute_byte_string().This optimization will matter
+     * only if calling the API in a tight loop.
+     * 
+     * #GFileAttributeMatcher allows for searching through a #GFileInfo for
+     * attributes.
+     */
+    interface FileInfo extends FileInfoMixin { }
+
+    class FileInfo {
+        constructor();
         /**
          * Creates a new file info structure.
          * @returns a #GFileInfo.
          */
-        new(): FileInfo;
+        static new(): FileInfo;
     }
 
-    /**
-     * GFileInputStream provides input streams that take their
-     * content from a file.
-     * 
-     * GFileInputStream implements #GSeekable, which allows the input
-     * stream to jump to arbitrary positions in the file, provided the
-     * filesystem of the file allows it. To find the position of a file
-     * input stream, use g_seekable_tell(). To find out if a file input
-     * stream supports seeking, use g_seekable_can_seek().
-     * To position a file input stream, use g_seekable_seek().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileInputStream} instead.
      */
-    interface FileInputStream extends InputStream, Seekable {
+    interface IFileInputStream {
         /**
          * Queries a file input stream the given #attributes. This function blocks
          * while querying the stream. For the asynchronous (non-blocking) version
@@ -6242,9 +6582,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous info query operation.
          * @param result a #GAsyncResult.
@@ -6253,26 +6592,32 @@ declare namespace imports.gi.Gio {
         query_info_finish(result: AsyncResult): FileInfo;
     }
 
-    var FileInputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileInputStream} instead.
+     */
+    type FileInputStreamMixin = IFileInputStream & IInputStream & ISeekable;
 
     /**
-     * Monitors a file or directory for changes.
+     * GFileInputStream provides input streams that take their
+     * content from a file.
      * 
-     * To obtain a #GFileMonitor for a file or directory, use
-     * g_file_monitor(), g_file_monitor_file(), or
-     * g_file_monitor_directory().
-     * 
-     * To get informed about changes to the file or directory you are
-     * monitoring, connect to the #GFileMonitor::changed signal. The
-     * signal will be emitted in the
-     * [thread-default main context][g-main-context-push-thread-default]
-     * of the thread that the monitor was created in
-     * (though if the global default main context is blocked, this may
-     * cause notifications to be blocked even if the thread-default
-     * context is still running).
+     * GFileInputStream implements #GSeekable, which allows the input
+     * stream to jump to arbitrary positions in the file, provided the
+     * filesystem of the file allows it. To find the position of a file
+     * input stream, use g_seekable_tell(). To find out if a file input
+     * stream supports seeking, use g_seekable_can_seek().
+     * To position a file input stream, use g_seekable_seek().
      */
-    interface FileMonitor extends GObject.Object {
+    interface FileInputStream extends FileInputStreamMixin { }
+
+    class FileInputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileMonitor} instead.
+     */
+    interface IFileMonitor {
         /**
          * Cancels a file monitor.
          * @returns always %TRUE
@@ -6305,26 +6650,37 @@ declare namespace imports.gi.Gio {
         set_rate_limit(limit_msecs: number): void;
     }
 
-    var FileMonitor: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileMonitor} instead.
+     */
+    type FileMonitorMixin = IFileMonitor & GObject.IObject;
 
     /**
-     * GFileOutputStream provides output streams that write their
-     * content to a file.
+     * Monitors a file or directory for changes.
      * 
-     * GFileOutputStream implements #GSeekable, which allows the output
-     * stream to jump to arbitrary positions in the file and to truncate
-     * the file, provided the filesystem of the file supports these
-     * operations.
+     * To obtain a #GFileMonitor for a file or directory, use
+     * g_file_monitor(), g_file_monitor_file(), or
+     * g_file_monitor_directory().
      * 
-     * To find the position of a file output stream, use g_seekable_tell().
-     * To find out if a file output stream supports seeking, use
-     * g_seekable_can_seek().To position a file output stream, use
-     * g_seekable_seek(). To find out if a file output stream supports
-     * truncating, use g_seekable_can_truncate(). To truncate a file output
-     * stream, use g_seekable_truncate().
+     * To get informed about changes to the file or directory you are
+     * monitoring, connect to the #GFileMonitor::changed signal. The
+     * signal will be emitted in the
+     * [thread-default main context][g-main-context-push-thread-default]
+     * of the thread that the monitor was created in
+     * (though if the global default main context is blocked, this may
+     * cause notifications to be blocked even if the thread-default
+     * context is still running).
      */
-    interface FileOutputStream extends OutputStream, Seekable {
+    interface FileMonitor extends FileMonitorMixin { }
+
+    class FileMonitor {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileOutputStream} instead.
+     */
+    interface IFileOutputStream {
         /**
          * Gets the entity tag for the file when it has been written.
          * This must be called after the stream has been written
@@ -6366,9 +6722,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][gio-GIOScheduler] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        query_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finalizes the asynchronous query started
          * by g_file_output_stream_query_info_async().
@@ -6378,15 +6733,37 @@ declare namespace imports.gi.Gio {
         query_info_finish(result: AsyncResult): FileInfo;
     }
 
-    var FileOutputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileOutputStream} instead.
+     */
+    type FileOutputStreamMixin = IFileOutputStream & IOutputStream & ISeekable;
 
     /**
-     * Completes partial file and directory names given a partial string by
-     * looking in the file system for clues. Can return a list of possible
-     * completion strings for widget implementations.
+     * GFileOutputStream provides output streams that write their
+     * content to a file.
+     * 
+     * GFileOutputStream implements #GSeekable, which allows the output
+     * stream to jump to arbitrary positions in the file and to truncate
+     * the file, provided the filesystem of the file supports these
+     * operations.
+     * 
+     * To find the position of a file output stream, use g_seekable_tell().
+     * To find out if a file output stream supports seeking, use
+     * g_seekable_can_seek().To position a file output stream, use
+     * g_seekable_seek(). To find out if a file output stream supports
+     * truncating, use g_seekable_can_truncate(). To truncate a file output
+     * stream, use g_seekable_truncate().
      */
-    interface FilenameCompleter extends GObject.Object {
+    interface FileOutputStream extends FileOutputStreamMixin { }
+
+    class FileOutputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilenameCompleter} instead.
+     */
+    interface IFilenameCompleter {
         /**
          * Obtains a completion for #initial_text from #completer.
          * @param initial_text text to be completed.
@@ -6409,21 +6786,31 @@ declare namespace imports.gi.Gio {
         set_dirs_only(dirs_only: boolean): void;
     }
 
-    var FilenameCompleter: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilenameCompleter} instead.
+     */
+    type FilenameCompleterMixin = IFilenameCompleter & GObject.IObject;
+
+    /**
+     * Completes partial file and directory names given a partial string by
+     * looking in the file system for clues. Can return a list of possible
+     * completion strings for widget implementations.
+     */
+    interface FilenameCompleter extends FilenameCompleterMixin { }
+
+    class FilenameCompleter {
+        constructor();
         /**
          * Creates a new filename completer.
          * @returns a #GFilenameCompleter.
          */
-        new(): FilenameCompleter;
+        static new(): FilenameCompleter;
     }
 
-    /**
-     * Base class for input stream implementations that perform some
-     * kind of filtering operation on a base stream. Typical examples
-     * of filtering operations are character set conversion, compression
-     * and byte order flipping.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilterInputStream} instead.
      */
-    interface FilterInputStream extends InputStream {
+    interface IFilterInputStream {
         /**
          * Gets the base stream for the filter stream.
          * @returns a #GInputStream.
@@ -6442,16 +6829,27 @@ declare namespace imports.gi.Gio {
         set_close_base_stream(close_base: boolean): void;
     }
 
-    var FilterInputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilterInputStream} instead.
+     */
+    type FilterInputStreamMixin = IFilterInputStream & IInputStream;
 
     /**
-     * Base class for output stream implementations that perform some
+     * Base class for input stream implementations that perform some
      * kind of filtering operation on a base stream. Typical examples
      * of filtering operations are character set conversion, compression
      * and byte order flipping.
      */
-    interface FilterOutputStream extends OutputStream {
+    interface FilterInputStream extends FilterInputStreamMixin { }
+
+    class FilterInputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilterOutputStream} instead.
+     */
+    interface IFilterOutputStream {
         /**
          * Gets the base stream for the filter stream.
          * @returns a #GOutputStream.
@@ -6470,15 +6868,27 @@ declare namespace imports.gi.Gio {
         set_close_base_stream(close_base: boolean): void;
     }
 
-    var FilterOutputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FilterOutputStream} instead.
+     */
+    type FilterOutputStreamMixin = IFilterOutputStream & IOutputStream;
 
     /**
-     * Provides an interface and default functions for loading and unloading
-     * modules. This is used internally to make GIO extensible, but can also
-     * be used by others to implement module loading.
+     * Base class for output stream implementations that perform some
+     * kind of filtering operation on a base stream. Typical examples
+     * of filtering operations are character set conversion, compression
+     * and byte order flipping.
      */
-    interface IOModule extends GObject.TypeModule, GObject.TypePlugin {
+    interface FilterOutputStream extends FilterOutputStreamMixin { }
+
+    class FilterOutputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IOModule} instead.
+     */
+    interface IIOModule {
         /**
          * Required API for GIO modules to implement.
          * 
@@ -6512,7 +6922,20 @@ declare namespace imports.gi.Gio {
         unload(): void;
     }
 
-    var IOModule: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IOModule} instead.
+     */
+    type IOModuleMixin = IIOModule & GObject.ITypeModule & GObject.ITypePlugin;
+
+    /**
+     * Provides an interface and default functions for loading and unloading
+     * modules. This is used internally to make GIO extensible, but can also
+     * be used by others to implement module loading.
+     */
+    interface IOModule extends IOModuleMixin { }
+
+    class IOModule {
+        constructor();
         /**
          * Creates a new GIOModule that will load the specific
          * shared library when in use.
@@ -6520,7 +6943,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GIOModule from given #filename,
          * or %NULL on error.
          */
-        new(filename: string): IOModule;
+        static new(filename: string): IOModule;
         /**
          * Optional API for GIO modules to implement.
          * 
@@ -6555,58 +6978,13 @@ declare namespace imports.gi.Gio {
          * for static builds.
          * @returns 
          */
-        query(): string[];
+        static query(): string[];
     }
 
-    /**
-     * GIOStream represents an object that has both read and write streams.
-     * Generally the two streams act as separate input and output streams,
-     * but they share some common resources and state. For instance, for
-     * seekable streams, both streams may use the same position.
-     * 
-     * Examples of #GIOStream objects are #GSocketConnection, which represents
-     * a two-way network connection; and #GFileIOStream, which represents a
-     * file handle opened in read-write mode.
-     * 
-     * To do the actual reading and writing you need to get the substreams
-     * with g_io_stream_get_input_stream() and g_io_stream_get_output_stream().
-     * 
-     * The #GIOStream object owns the input and the output streams, not the other
-     * way around, so keeping the substreams alive will not keep the #GIOStream
-     * object alive. If the #GIOStream object is freed it will be closed, thus
-     * closing the substreams, so even if the substreams stay alive they will
-     * always return %G_IO_ERROR_CLOSED for all operations.
-     * 
-     * To close a stream use g_io_stream_close() which will close the common
-     * stream object and also the individual substreams. You can also close
-     * the substreams themselves. In most cases this only marks the
-     * substream as closed, so further I/O on it fails but common state in the
-     * #GIOStream may still be open. However, some streams may support
-     * "half-closed" states where one direction of the stream is actually shut down.
-     * 
-     * Operations on #GIOStreams cannot be started while another operation on the
-     * #GIOStream or its substreams is in progress. Specifically, an application can
-     * read from the #GInputStream and write to the #GOutputStream simultaneously
-     * (either in separate threads, or as asynchronous operations in the same
-     * thread), but an application cannot start any #GIOStream operation while there
-     * is a #GIOStream, #GInputStream or #GOutputStream operation in progress, and
-     * an application can’t start any #GInputStream or #GOutputStream operation
-     * while there is a #GIOStream operation in progress.
-     * 
-     * This is a product of individual stream operations being associated with a
-     * given #GMainContext (the thread-default context at the time the operation was
-     * started), rather than entire streams being associated with a single
-     * #GMainContext.
-     * 
-     * GIO may run operations on #GIOStreams from other (worker) threads, and this
-     * may be exposed to application code in the behaviour of wrapper streams, such
-     * as #GBufferedInputStream or #GTlsConnection. With such wrapper APIs,
-     * application code may only run operations on the base (wrapped) stream when
-     * the wrapper stream is idle. Note that the semantics of such operations may
-     * not be well-defined due to the state the wrapper stream leaves the base
-     * stream in (though they are guaranteed not to crash).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IOStream} instead.
      */
-    interface IOStream extends GObject.Object {
+    interface IIOStream {
         /**
          * Clears the pending flag on #stream.
          */
@@ -6663,9 +7041,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request
          * @param cancellable optional cancellable object
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Closes a stream.
          * @param result a #GAsyncResult
@@ -6716,33 +7093,79 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback.
-         * @param user_data user data passed to #callback.
          */
-        splice_async(stream2: IOStream, flags: IOStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        splice_async(stream2: IOStream, flags: IOStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
     }
 
-    var IOStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link IOStream} instead.
+     */
+    type IOStreamMixin = IIOStream & GObject.IObject;
+
+    /**
+     * GIOStream represents an object that has both read and write streams.
+     * Generally the two streams act as separate input and output streams,
+     * but they share some common resources and state. For instance, for
+     * seekable streams, both streams may use the same position.
+     * 
+     * Examples of #GIOStream objects are #GSocketConnection, which represents
+     * a two-way network connection; and #GFileIOStream, which represents a
+     * file handle opened in read-write mode.
+     * 
+     * To do the actual reading and writing you need to get the substreams
+     * with g_io_stream_get_input_stream() and g_io_stream_get_output_stream().
+     * 
+     * The #GIOStream object owns the input and the output streams, not the other
+     * way around, so keeping the substreams alive will not keep the #GIOStream
+     * object alive. If the #GIOStream object is freed it will be closed, thus
+     * closing the substreams, so even if the substreams stay alive they will
+     * always return %G_IO_ERROR_CLOSED for all operations.
+     * 
+     * To close a stream use g_io_stream_close() which will close the common
+     * stream object and also the individual substreams. You can also close
+     * the substreams themselves. In most cases this only marks the
+     * substream as closed, so further I/O on it fails but common state in the
+     * #GIOStream may still be open. However, some streams may support
+     * "half-closed" states where one direction of the stream is actually shut down.
+     * 
+     * Operations on #GIOStreams cannot be started while another operation on the
+     * #GIOStream or its substreams is in progress. Specifically, an application can
+     * read from the #GInputStream and write to the #GOutputStream simultaneously
+     * (either in separate threads, or as asynchronous operations in the same
+     * thread), but an application cannot start any #GIOStream operation while there
+     * is a #GIOStream, #GInputStream or #GOutputStream operation in progress, and
+     * an application can’t start any #GInputStream or #GOutputStream operation
+     * while there is a #GIOStream operation in progress.
+     * 
+     * This is a product of individual stream operations being associated with a
+     * given #GMainContext (the thread-default context at the time the operation was
+     * started), rather than entire streams being associated with a single
+     * #GMainContext.
+     * 
+     * GIO may run operations on #GIOStreams from other (worker) threads, and this
+     * may be exposed to application code in the behaviour of wrapper streams, such
+     * as #GBufferedInputStream or #GTlsConnection. With such wrapper APIs,
+     * application code may only run operations on the base (wrapped) stream when
+     * the wrapper stream is idle. Note that the semantics of such operations may
+     * not be well-defined due to the state the wrapper stream leaves the base
+     * stream in (though they are guaranteed not to crash).
+     */
+    interface IOStream extends IOStreamMixin { }
+
+    class IOStream {
+        constructor();
         /**
          * Finishes an asynchronous io stream splice operation.
          * @param result a #GAsyncResult.
          * @returns %TRUE on success, %FALSE otherwise.
          */
-        splice_finish(result: AsyncResult): boolean;
+        static splice_finish(result: AsyncResult): boolean;
     }
 
-    /**
-     * #GInetAddress represents an IPv4 or IPv6 internet address. Use
-     * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_async() to
-     * look up the #GInetAddress for a hostname. Use
-     * g_resolver_lookup_by_address() or
-     * g_resolver_lookup_by_address_async() to look up the hostname for a
-     * #GInetAddress.
-     * 
-     * To actually connect to a remote host, you will need a
-     * #GInetSocketAddress (which includes a #GInetAddress as well as a
-     * port number).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetAddress} instead.
      */
-    interface InetAddress extends GObject.Object {
+    interface IInetAddress {
         /**
          * Checks if two #GInetAddress instances are equal, e.g. the same address.
          * @param other_address Another #GInetAddress.
@@ -6830,7 +7253,27 @@ declare namespace imports.gi.Gio {
         to_string(): string;
     }
 
-    var InetAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetAddress} instead.
+     */
+    type InetAddressMixin = IInetAddress & GObject.IObject;
+
+    /**
+     * #GInetAddress represents an IPv4 or IPv6 internet address. Use
+     * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_async() to
+     * look up the #GInetAddress for a hostname. Use
+     * g_resolver_lookup_by_address() or
+     * g_resolver_lookup_by_address_async() to look up the hostname for a
+     * #GInetAddress.
+     * 
+     * To actually connect to a remote host, you will need a
+     * #GInetSocketAddress (which includes a #GInetAddress as well as a
+     * port number).
+     */
+    interface InetAddress extends InetAddressMixin { }
+
+    class InetAddress {
+        constructor();
         /**
          * Creates a #GInetAddress for the "any" address (unassigned/"don't
          * care") for #family.
@@ -6839,7 +7282,7 @@ declare namespace imports.gi.Gio {
          * for #family.
          *     Free the returned object with g_object_unref().
          */
-        new_any(family: SocketFamily): InetAddress;
+        static new_any(family: SocketFamily): InetAddress;
         /**
          * Creates a new #GInetAddress from the given #family and #bytes.
          * #bytes should be 4 bytes for %G_SOCKET_FAMILY_IPV4 and 16 bytes for
@@ -6849,7 +7292,7 @@ declare namespace imports.gi.Gio {
          * @returns a new #GInetAddress corresponding to #family and #bytes.
          *     Free the returned object with g_object_unref().
          */
-        new_from_bytes(bytes: number[], family: SocketFamily): InetAddress;
+        static new_from_bytes(bytes: number[], family: SocketFamily): InetAddress;
         /**
          * Parses #string as an IP address and creates a new #GInetAddress.
          * @param string a string representation of an IP address
@@ -6857,7 +7300,7 @@ declare namespace imports.gi.Gio {
          * to #string, or %NULL if #string could not be parsed.
          *     Free the returned object with g_object_unref().
          */
-        new_from_string(string: string): InetAddress;
+        static new_from_string(string: string): InetAddress;
         /**
          * Creates a #GInetAddress for the loopback address for #family.
          * @param family the address family
@@ -6865,16 +7308,13 @@ declare namespace imports.gi.Gio {
          * for #family.
          *     Free the returned object with g_object_unref().
          */
-        new_loopback(family: SocketFamily): InetAddress;
+        static new_loopback(family: SocketFamily): InetAddress;
     }
 
-    /**
-     * #GInetAddressMask represents a range of IPv4 or IPv6 addresses
-     * described by a base address and a length indicating how many bits
-     * of the base address are relevant for matching purposes. These are
-     * often given in string form. Eg, "10.0.0.0/8", or "fe80::/10".
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetAddressMask} instead.
      */
-    interface InetAddressMask extends GObject.Object, Initable {
+    interface IInetAddressMask {
         /**
          * Tests if #mask and #mask2 are the same mask.
          * @param mask2 another #GInetAddressMask
@@ -6910,7 +7350,21 @@ declare namespace imports.gi.Gio {
         to_string(): string;
     }
 
-    var InetAddressMask: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetAddressMask} instead.
+     */
+    type InetAddressMaskMixin = IInetAddressMask & GObject.IObject & IInitable;
+
+    /**
+     * #GInetAddressMask represents a range of IPv4 or IPv6 addresses
+     * described by a base address and a length indicating how many bits
+     * of the base address are relevant for matching purposes. These are
+     * often given in string form. Eg, "10.0.0.0/8", or "fe80::/10".
+     */
+    interface InetAddressMask extends InetAddressMaskMixin { }
+
+    class InetAddressMask {
+        constructor();
         /**
          * Creates a new #GInetAddressMask representing all addresses whose
          * first #length bits match #addr.
@@ -6918,7 +7372,7 @@ declare namespace imports.gi.Gio {
          * @param length number of bits of #addr to use
          * @returns a new #GInetAddressMask, or %NULL on error
          */
-        new(addr: InetAddress, length: number): InetAddressMask;
+        static new(addr: InetAddress, length: number): InetAddressMask;
         /**
          * Parses #mask_string as an IP address and (optional) length, and
          * creates a new #GInetAddressMask. The length, if present, is
@@ -6928,14 +7382,13 @@ declare namespace imports.gi.Gio {
          * @returns a new #GInetAddressMask corresponding to #string, or %NULL
          * on error.
          */
-        new_from_string(mask_string: string): InetAddressMask;
+        static new_from_string(mask_string: string): InetAddressMask;
     }
 
-    /**
-     * An IPv4 or IPv6 socket address; that is, the combination of a
-     * #GInetAddress and a port number.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetSocketAddress} instead.
      */
-    interface InetSocketAddress extends SocketAddress, SocketConnectable {
+    interface IInetSocketAddress {
         /**
          * Gets #address's #GInetAddress.
          * @returns the #GInetAddress for #address, which must be
@@ -6961,14 +7414,26 @@ declare namespace imports.gi.Gio {
         get_scope_id(): number;
     }
 
-    var InetSocketAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InetSocketAddress} instead.
+     */
+    type InetSocketAddressMixin = IInetSocketAddress & ISocketAddress & ISocketConnectable;
+
+    /**
+     * An IPv4 or IPv6 socket address; that is, the combination of a
+     * #GInetAddress and a port number.
+     */
+    interface InetSocketAddress extends InetSocketAddressMixin { }
+
+    class InetSocketAddress {
+        constructor();
         /**
          * Creates a new #GInetSocketAddress for #address and #port.
          * @param address a #GInetAddress
          * @param _port a port number
          * @returns a new #GInetSocketAddress
          */
-        new(address: InetAddress, _port: number): SocketAddress;
+        static new(address: InetAddress, _port: number): SocketAddress;
         /**
          * Creates a new #GInetSocketAddress for #address and #port.
          * 
@@ -6979,23 +7444,13 @@ declare namespace imports.gi.Gio {
          * @returns a new #GInetSocketAddress,
          * or %NULL if #address cannot be parsed.
          */
-        new_from_string(address: string, _port: number): SocketAddress;
+        static new_from_string(address: string, _port: number): SocketAddress;
     }
 
-    /**
-     * #GInputStream has functions to read from a stream (g_input_stream_read()),
-     * to close a stream (g_input_stream_close()) and to skip some content
-     * (g_input_stream_skip()).
-     * 
-     * To copy the content of an input stream to an output stream without
-     * manually handling the reads and writes, use g_output_stream_splice().
-     * 
-     * See the documentation for #GIOStream for details of thread safety of
-     * streaming APIs.
-     * 
-     * All of these functions have async variants too.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InputStream} instead.
      */
-    interface InputStream extends GObject.Object {
+    interface IInputStream {
         /**
          * Clears the pending flag on #stream.
          */
@@ -7042,9 +7497,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional cancellable object
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes closing a stream asynchronously, started from g_input_stream_close_async().
          * @param result a #GAsyncResult.
@@ -7132,9 +7586,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        read_all_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_all_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous stream read operation started with
          * g_input_stream_read_all_async().
@@ -7180,9 +7633,8 @@ declare namespace imports.gi.Gio {
          * of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        read_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Like g_input_stream_read(), this tries to read #count bytes from
          * the stream in a blocking fashion. However, rather than reading into
@@ -7238,9 +7690,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        read_bytes_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_bytes_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous stream read-into-#GBytes operation.
          * @param result a #GAsyncResult.
@@ -7308,9 +7759,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        skip_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        skip_async(count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a stream skip operation.
          * @param result a #GAsyncResult.
@@ -7319,17 +7769,34 @@ declare namespace imports.gi.Gio {
         skip_finish(result: AsyncResult): number;
     }
 
-    var InputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InputStream} instead.
+     */
+    type InputStreamMixin = IInputStream & GObject.IObject;
 
     /**
-     * #GListStore is a simple implementation of #GListModel that stores all
-     * items in memory.
+     * #GInputStream has functions to read from a stream (g_input_stream_read()),
+     * to close a stream (g_input_stream_close()) and to skip some content
+     * (g_input_stream_skip()).
      * 
-     * It provides insertions, deletions, and lookups in logarithmic time
-     * with a fast path for the common case of iterating the list linearly.
+     * To copy the content of an input stream to an output stream without
+     * manually handling the reads and writes, use g_output_stream_splice().
+     * 
+     * See the documentation for #GIOStream for details of thread safety of
+     * streaming APIs.
+     * 
+     * All of these functions have async variants too.
      */
-    interface ListStore extends GObject.Object, ListModel {
+    interface InputStream extends InputStreamMixin { }
+
+    class InputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ListStore} instead.
+     */
+    interface IListStore {
         /**
          * Appends #item to #store. #item must be of type #GListStore:item-type.
          * 
@@ -7389,10 +7856,9 @@ declare namespace imports.gi.Gio {
          * This function takes a ref on #item.
          * @param item the new item
          * @param compare_func pairwise comparison function for sorting
-         * @param user_data user data for #compare_func
          * @returns the position at which #item was inserted
          */
-        insert_sorted(item: GObject.Object, compare_func: GLib.CompareDataFunc, user_data: any): number;
+        insert_sorted(item: GObject.Object, compare_func: GLib.CompareDataFunc): number;
         /**
          * Removes the item from #store that is at #position. #position must be
          * smaller than the current length of the list.
@@ -7409,9 +7875,8 @@ declare namespace imports.gi.Gio {
         /**
          * Sort the items in #store according to #compare_func.
          * @param compare_func pairwise comparison function for sorting
-         * @param user_data user data for #compare_func
          */
-        sort(compare_func: GLib.CompareDataFunc, user_data: any): void;
+        sort(compare_func: GLib.CompareDataFunc): void;
         /**
          * Changes #store by removing #n_removals items and adding #n_additions
          * items to it. #additions must contain #n_additions items of type
@@ -7434,24 +7899,35 @@ declare namespace imports.gi.Gio {
         splice(position: number, n_removals: number, additions: GObject.Object[], n_additions: number): void;
     }
 
-    var ListStore: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ListStore} instead.
+     */
+    type ListStoreMixin = IListStore & GObject.IObject & IListModel;
+
+    /**
+     * #GListStore is a simple implementation of #GListModel that stores all
+     * items in memory.
+     * 
+     * It provides insertions, deletions, and lookups in logarithmic time
+     * with a fast path for the common case of iterating the list linearly.
+     */
+    interface ListStore extends ListStoreMixin { }
+
+    class ListStore {
+        constructor();
         /**
          * Creates a new #GListStore with items of type #item_type. #item_type
          * must be a subclass of #GObject.
          * @param item_type the #GType of items in the list
          * @returns a new #GListStore
          */
-        new(item_type: GObject.Type): ListStore;
+        static new(item_type: GObject.Type): ListStore;
     }
 
-    /**
-     * #GMemoryInputStream is a class for using arbitrary
-     * memory chunks as input for GIO streaming input operations.
-     * 
-     * As of GLib 2.34, #GMemoryInputStream implements
-     * #GPollableInputStream.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryInputStream} instead.
      */
-    interface MemoryInputStream extends InputStream, PollableInputStream, Seekable {
+    interface IMemoryInputStream {
         /**
          * Appends #bytes to data that can be read from the input stream.
          * @param bytes input data
@@ -7466,18 +7942,33 @@ declare namespace imports.gi.Gio {
         add_data(data: number[], len: number, destroy: GLib.DestroyNotify): void;
     }
 
-    var MemoryInputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryInputStream} instead.
+     */
+    type MemoryInputStreamMixin = IMemoryInputStream & IInputStream & IPollableInputStream & ISeekable;
+
+    /**
+     * #GMemoryInputStream is a class for using arbitrary
+     * memory chunks as input for GIO streaming input operations.
+     * 
+     * As of GLib 2.34, #GMemoryInputStream implements
+     * #GPollableInputStream.
+     */
+    interface MemoryInputStream extends MemoryInputStreamMixin { }
+
+    class MemoryInputStream {
+        constructor();
         /**
          * Creates a new empty #GMemoryInputStream.
          * @returns a new #GInputStream
          */
-        new(): InputStream;
+        static new(): InputStream;
         /**
          * Creates a new #GMemoryInputStream with data from the given #bytes.
          * @param bytes a #GBytes
          * @returns new #GInputStream read from #bytes
          */
-        new_from_bytes(bytes: GLib.Bytes): InputStream;
+        static new_from_bytes(bytes: GLib.Bytes): InputStream;
         /**
          * Creates a new #GMemoryInputStream with data in memory of a given size.
          * @param data 
@@ -7485,17 +7976,13 @@ declare namespace imports.gi.Gio {
          * @param destroy function that is called to free #data, or %NULL
          * @returns new #GInputStream read from #data of #len bytes.
          */
-        new_from_data(data: number[], len: number, destroy: GLib.DestroyNotify): InputStream;
+        static new_from_data(data: number[], len: number, destroy: GLib.DestroyNotify): InputStream;
     }
 
-    /**
-     * #GMemoryOutputStream is a class for using arbitrary
-     * memory chunks as output for GIO streaming output operations.
-     * 
-     * As of GLib 2.34, #GMemoryOutputStream trivially implements
-     * #GPollableOutputStream: it always polls as ready.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryOutputStream} instead.
      */
-    interface MemoryOutputStream extends OutputStream, PollableOutputStream, Seekable {
+    interface IMemoryOutputStream {
         /**
          * Gets any loaded data from the #ostream.
          * 
@@ -7549,7 +8036,22 @@ declare namespace imports.gi.Gio {
         steal_data(): any;
     }
 
-    var MemoryOutputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryOutputStream} instead.
+     */
+    type MemoryOutputStreamMixin = IMemoryOutputStream & IOutputStream & IPollableOutputStream & ISeekable;
+
+    /**
+     * #GMemoryOutputStream is a class for using arbitrary
+     * memory chunks as output for GIO streaming output operations.
+     * 
+     * As of GLib 2.34, #GMemoryOutputStream trivially implements
+     * #GPollableOutputStream: it always polls as ready.
+     */
+    interface MemoryOutputStream extends MemoryOutputStreamMixin { }
+
+    class MemoryOutputStream {
+        constructor();
         /**
          * Creates a new #GMemoryOutputStream.
          * 
@@ -7600,26 +8102,19 @@ declare namespace imports.gi.Gio {
          *     finalized, or %NULL
          * @returns A newly created #GMemoryOutputStream object.
          */
-        new(data: any, size: number, realloc_function: ReallocFunc, destroy_function: GLib.DestroyNotify): OutputStream;
+        static new(data: any, size: number, realloc_function: ReallocFunc, destroy_function: GLib.DestroyNotify): OutputStream;
         /**
          * Creates a new #GMemoryOutputStream, using g_realloc() and g_free()
          * for memory allocation.
          * @returns 
          */
-        new_resizable(): OutputStream;
+        static new_resizable(): OutputStream;
     }
 
-    /**
-     * #GMenu is a simple implementation of #GMenuModel.
-     * You populate a #GMenu by adding #GMenuItem instances to it.
-     * 
-     * There are some convenience functions to allow you to directly
-     * add items (avoiding #GMenuItem) for the common cases. To add
-     * a regular item, use g_menu_insert(). To add a section, use
-     * g_menu_insert_section(). To add a submenu, use
-     * g_menu_insert_submenu().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Menu} instead.
      */
-    interface Menu extends MenuModel {
+    interface IMenu {
         /**
          * Convenience function for appending a normal menu item to the end of
          * #menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
@@ -7762,21 +8257,38 @@ declare namespace imports.gi.Gio {
         remove_all(): void;
     }
 
-    var Menu: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Menu} instead.
+     */
+    type MenuMixin = IMenu & IMenuModel;
+
+    /**
+     * #GMenu is a simple implementation of #GMenuModel.
+     * You populate a #GMenu by adding #GMenuItem instances to it.
+     * 
+     * There are some convenience functions to allow you to directly
+     * add items (avoiding #GMenuItem) for the common cases. To add
+     * a regular item, use g_menu_insert(). To add a section, use
+     * g_menu_insert_section(). To add a submenu, use
+     * g_menu_insert_submenu().
+     */
+    interface Menu extends MenuMixin { }
+
+    class Menu {
+        constructor();
         /**
          * Creates a new #GMenu.
          * 
          * The new menu has no items.
          * @returns a new #GMenu
          */
-        new(): Menu;
+        static new(): Menu;
     }
 
-    /**
-     * #GMenuAttributeIter is an opaque structure type.  You must access it
-     * using the functions below.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuAttributeIter} instead.
      */
-    interface MenuAttributeIter extends GObject.Object {
+    interface IMenuAttributeIter {
         /**
          * Gets the name of the attribute at the current iterator position, as
          * a string.
@@ -7829,14 +8341,25 @@ declare namespace imports.gi.Gio {
         next(): boolean;
     }
 
-    var MenuAttributeIter: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuAttributeIter} instead.
+     */
+    type MenuAttributeIterMixin = IMenuAttributeIter & GObject.IObject;
 
     /**
-     * #GMenuItem is an opaque structure type.  You must access it using the
-     * functions below.
+     * #GMenuAttributeIter is an opaque structure type.  You must access it
+     * using the functions below.
      */
-    interface MenuItem extends GObject.Object {
+    interface MenuAttributeIter extends MenuAttributeIterMixin { }
+
+    class MenuAttributeIter {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuItem} instead.
+     */
+    interface IMenuItem {
         /**
          * Queries the named #attribute on #menu_item.
          * 
@@ -8059,7 +8582,19 @@ declare namespace imports.gi.Gio {
         set_submenu(submenu: MenuModel): void;
     }
 
-    var MenuItem: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuItem} instead.
+     */
+    type MenuItemMixin = IMenuItem & GObject.IObject;
+
+    /**
+     * #GMenuItem is an opaque structure type.  You must access it using the
+     * functions below.
+     */
+    interface MenuItem extends MenuItemMixin { }
+
+    class MenuItem {
+        constructor();
         /**
          * Creates a new #GMenuItem.
          * 
@@ -8073,7 +8608,7 @@ declare namespace imports.gi.Gio {
          * @param detailed_action the detailed action string, or %NULL
          * @returns a new #GMenuItem
          */
-        new(label: string, detailed_action: string): MenuItem;
+        static new(label: string, detailed_action: string): MenuItem;
         /**
          * Creates a #GMenuItem as an exact copy of an existing menu item in a
          * #GMenuModel.
@@ -8084,7 +8619,7 @@ declare namespace imports.gi.Gio {
          * @param item_index the index of an item in #model
          * @returns a new #GMenuItem.
          */
-        new_from_model(model: MenuModel, item_index: number): MenuItem;
+        static new_from_model(model: MenuModel, item_index: number): MenuItem;
         /**
          * Creates a new #GMenuItem representing a section.
          * 
@@ -8150,7 +8685,7 @@ declare namespace imports.gi.Gio {
          * @param section a #GMenuModel with the items of the section
          * @returns a new #GMenuItem
          */
-        new_section(label: string, section: MenuModel): MenuItem;
+        static new_section(label: string, section: MenuModel): MenuItem;
         /**
          * Creates a new #GMenuItem representing a submenu.
          * 
@@ -8160,14 +8695,13 @@ declare namespace imports.gi.Gio {
          * @param submenu a #GMenuModel with the items of the submenu
          * @returns a new #GMenuItem
          */
-        new_submenu(label: string, submenu: MenuModel): MenuItem;
+        static new_submenu(label: string, submenu: MenuModel): MenuItem;
     }
 
-    /**
-     * #GMenuLinkIter is an opaque structure type.  You must access it using
-     * the functions below.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuLinkIter} instead.
      */
-    interface MenuLinkIter extends GObject.Object {
+    interface IMenuLinkIter {
         /**
          * Gets the name of the link at the current iterator position.
          * 
@@ -8216,8 +8750,138 @@ declare namespace imports.gi.Gio {
         next(): boolean;
     }
 
-    var MenuLinkIter: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuLinkIter} instead.
+     */
+    type MenuLinkIterMixin = IMenuLinkIter & GObject.IObject;
+
+    /**
+     * #GMenuLinkIter is an opaque structure type.  You must access it using
+     * the functions below.
+     */
+    interface MenuLinkIter extends MenuLinkIterMixin { }
+
+    class MenuLinkIter {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuModel} instead.
+     */
+    interface IMenuModel {
+        /**
+         * Queries item at position #item_index in #model for the attribute
+         * specified by #attribute.
+         * 
+         * If the attribute exists and matches the #GVariantType corresponding
+         * to #format_string then #format_string is used to deconstruct the
+         * value into the positional parameters and %TRUE is returned.
+         * 
+         * If the attribute does not exist, or it does exist but has the wrong
+         * type, then the positional parameters are ignored and %FALSE is
+         * returned.
+         * 
+         * This function is a mix of g_menu_model_get_item_attribute_value() and
+         * g_variant_get(), followed by a g_variant_unref().  As such,
+         * #format_string must make a complete copy of the data (since the
+         * #GVariant may go away after the call to g_variant_unref()).  In
+         * particular, no '&' characters are allowed in #format_string.
+         * @param item_index the index of the item
+         * @param attribute the attribute to query
+         * @param format_string a #GVariant format string
+         * @returns %TRUE if the named attribute was found with the expected
+         *     type
+         */
+        get_item_attribute(item_index: number, attribute: string, format_string: string): boolean;
+        /**
+         * Queries the item at position #item_index in #model for the attribute
+         * specified by #attribute.
+         * 
+         * If #expected_type is non-%NULL then it specifies the expected type of
+         * the attribute.  If it is %NULL then any type will be accepted.
+         * 
+         * If the attribute exists and matches #expected_type (or if the
+         * expected type is unspecified) then the value is returned.
+         * 
+         * If the attribute does not exist, or does not match the expected type
+         * then %NULL is returned.
+         * @param item_index the index of the item
+         * @param attribute the attribute to query
+         * @param expected_type the expected type of the attribute, or
+         *     %NULL
+         * @returns the value of the attribute
+         */
+        get_item_attribute_value(item_index: number, attribute: string, expected_type: GLib.VariantType): GLib.Variant;
+        /**
+         * Queries the item at position #item_index in #model for the link
+         * specified by #link.
+         * 
+         * If the link exists, the linked #GMenuModel is returned.  If the link
+         * does not exist, %NULL is returned.
+         * @param item_index the index of the item
+         * @param link the link to query
+         * @returns the linked #GMenuModel, or %NULL
+         */
+        get_item_link(item_index: number, link: string): MenuModel;
+        /**
+         * Query the number of items in #model.
+         * @returns the number of items
+         */
+        get_n_items(): number;
+        /**
+         * Queries if #model is mutable.
+         * 
+         * An immutable #GMenuModel will never emit the #GMenuModel::items-changed
+         * signal. Consumers of the model may make optimisations accordingly.
+         * @returns %TRUE if the model is mutable (ie: "items-changed" may be
+         *     emitted).
+         */
+        is_mutable(): boolean;
+        /**
+         * Requests emission of the #GMenuModel::items-changed signal on #model.
+         * 
+         * This function should never be called except by #GMenuModel
+         * subclasses.  Any other calls to this function will very likely lead
+         * to a violation of the interface of the model.
+         * 
+         * The implementation should update its internal representation of the
+         * menu before emitting the signal.  The implementation should further
+         * expect to receive queries about the new state of the menu (and
+         * particularly added menu items) while signal handlers are running.
+         * 
+         * The implementation must dispatch this call directly from a mainloop
+         * entry and not in response to calls -- particularly those from the
+         * #GMenuModel API.  Said another way: the menu must not change while
+         * user code is running without returning to the mainloop.
+         * @param position the position of the change
+         * @param removed the number of items removed
+         * @param added the number of items added
+         */
+        items_changed(position: number, removed: number, added: number): void;
+        /**
+         * Creates a #GMenuAttributeIter to iterate over the attributes of
+         * the item at position #item_index in #model.
+         * 
+         * You must free the iterator with g_object_unref() when you are done.
+         * @param item_index the index of the item
+         * @returns a new #GMenuAttributeIter
+         */
+        iterate_item_attributes(item_index: number): MenuAttributeIter;
+        /**
+         * Creates a #GMenuLinkIter to iterate over the links of the item at
+         * position #item_index in #model.
+         * 
+         * You must free the iterator with g_object_unref() when you are done.
+         * @param item_index the index of the item
+         * @returns a new #GMenuLinkIter
+         */
+        iterate_item_links(item_index: number): MenuLinkIter;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MenuModel} instead.
+     */
+    type MenuModelMixin = IMenuModel & GObject.IObject;
 
     /**
      * #GMenuModel represents the contents of a menu -- an ordered list of
@@ -8334,143 +8998,16 @@ declare namespace imports.gi.Gio {
      * be rendered as "selected" when the state of the action is equal to the
      * target value of the menu item.
      */
-    interface MenuModel extends GObject.Object {
-        /**
-         * Queries item at position #item_index in #model for the attribute
-         * specified by #attribute.
-         * 
-         * If the attribute exists and matches the #GVariantType corresponding
-         * to #format_string then #format_string is used to deconstruct the
-         * value into the positional parameters and %TRUE is returned.
-         * 
-         * If the attribute does not exist, or it does exist but has the wrong
-         * type, then the positional parameters are ignored and %FALSE is
-         * returned.
-         * 
-         * This function is a mix of g_menu_model_get_item_attribute_value() and
-         * g_variant_get(), followed by a g_variant_unref().  As such,
-         * #format_string must make a complete copy of the data (since the
-         * #GVariant may go away after the call to g_variant_unref()).  In
-         * particular, no '&' characters are allowed in #format_string.
-         * @param item_index the index of the item
-         * @param attribute the attribute to query
-         * @param format_string a #GVariant format string
-         * @returns %TRUE if the named attribute was found with the expected
-         *     type
-         */
-        get_item_attribute(item_index: number, attribute: string, format_string: string): boolean;
-        /**
-         * Queries the item at position #item_index in #model for the attribute
-         * specified by #attribute.
-         * 
-         * If #expected_type is non-%NULL then it specifies the expected type of
-         * the attribute.  If it is %NULL then any type will be accepted.
-         * 
-         * If the attribute exists and matches #expected_type (or if the
-         * expected type is unspecified) then the value is returned.
-         * 
-         * If the attribute does not exist, or does not match the expected type
-         * then %NULL is returned.
-         * @param item_index the index of the item
-         * @param attribute the attribute to query
-         * @param expected_type the expected type of the attribute, or
-         *     %NULL
-         * @returns the value of the attribute
-         */
-        get_item_attribute_value(item_index: number, attribute: string, expected_type: GLib.VariantType): GLib.Variant;
-        /**
-         * Queries the item at position #item_index in #model for the link
-         * specified by #link.
-         * 
-         * If the link exists, the linked #GMenuModel is returned.  If the link
-         * does not exist, %NULL is returned.
-         * @param item_index the index of the item
-         * @param link the link to query
-         * @returns the linked #GMenuModel, or %NULL
-         */
-        get_item_link(item_index: number, link: string): MenuModel;
-        /**
-         * Query the number of items in #model.
-         * @returns the number of items
-         */
-        get_n_items(): number;
-        /**
-         * Queries if #model is mutable.
-         * 
-         * An immutable #GMenuModel will never emit the #GMenuModel::items-changed
-         * signal. Consumers of the model may make optimisations accordingly.
-         * @returns %TRUE if the model is mutable (ie: "items-changed" may be
-         *     emitted).
-         */
-        is_mutable(): boolean;
-        /**
-         * Requests emission of the #GMenuModel::items-changed signal on #model.
-         * 
-         * This function should never be called except by #GMenuModel
-         * subclasses.  Any other calls to this function will very likely lead
-         * to a violation of the interface of the model.
-         * 
-         * The implementation should update its internal representation of the
-         * menu before emitting the signal.  The implementation should further
-         * expect to receive queries about the new state of the menu (and
-         * particularly added menu items) while signal handlers are running.
-         * 
-         * The implementation must dispatch this call directly from a mainloop
-         * entry and not in response to calls -- particularly those from the
-         * #GMenuModel API.  Said another way: the menu must not change while
-         * user code is running without returning to the mainloop.
-         * @param position the position of the change
-         * @param removed the number of items removed
-         * @param added the number of items added
-         */
-        items_changed(position: number, removed: number, added: number): void;
-        /**
-         * Creates a #GMenuAttributeIter to iterate over the attributes of
-         * the item at position #item_index in #model.
-         * 
-         * You must free the iterator with g_object_unref() when you are done.
-         * @param item_index the index of the item
-         * @returns a new #GMenuAttributeIter
-         */
-        iterate_item_attributes(item_index: number): MenuAttributeIter;
-        /**
-         * Creates a #GMenuLinkIter to iterate over the links of the item at
-         * position #item_index in #model.
-         * 
-         * You must free the iterator with g_object_unref() when you are done.
-         * @param item_index the index of the item
-         * @returns a new #GMenuLinkIter
-         */
-        iterate_item_links(item_index: number): MenuLinkIter;
+    interface MenuModel extends MenuModelMixin { }
+
+    class MenuModel {
+        constructor();
     }
 
-    var MenuModel: {
-    }
-
-    /**
-     * #GMountOperation provides a mechanism for interacting with the user.
-     * It can be used for authenticating mountable operations, such as loop
-     * mounting files, hard drive partitions or server locations. It can
-     * also be used to ask the user questions or show a list of applications
-     * preventing unmount or eject operations from completing.
-     * 
-     * Note that #GMountOperation is used for more than just #GMount
-     * objects – for example it is also used in g_drive_start() and
-     * g_drive_stop().
-     * 
-     * Users should instantiate a subclass of this that implements all the
-     * various callbacks to show the required dialogs, such as
-     * #GtkMountOperation. If no user interaction is desired (for example
-     * when automounting filesystems at login time), usually %NULL can be
-     * passed, see each method taking a #GMountOperation for details.
-     * 
-     * The term ‘TCRYPT’ is used to mean ‘compatible with TrueCrypt and VeraCrypt’.
-     * [TrueCrypt](https://en.wikipedia.org/wiki/TrueCrypt) is a discontinued system for
-     * encrypting file containers, partitions or whole disks, typically used with Windows.
-     * [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
-     * improvements and auditing fixes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MountOperation} instead.
      */
-    interface MountOperation extends GObject.Object {
+    interface IMountOperation {
         /**
          * Check to see whether the mount operation is being used
          * for an anonymous user.
@@ -8572,51 +9109,95 @@ declare namespace imports.gi.Gio {
         set_username(username: string): void;
     }
 
-    var MountOperation: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MountOperation} instead.
+     */
+    type MountOperationMixin = IMountOperation & GObject.IObject;
+
+    /**
+     * #GMountOperation provides a mechanism for interacting with the user.
+     * It can be used for authenticating mountable operations, such as loop
+     * mounting files, hard drive partitions or server locations. It can
+     * also be used to ask the user questions or show a list of applications
+     * preventing unmount or eject operations from completing.
+     * 
+     * Note that #GMountOperation is used for more than just #GMount
+     * objects – for example it is also used in g_drive_start() and
+     * g_drive_stop().
+     * 
+     * Users should instantiate a subclass of this that implements all the
+     * various callbacks to show the required dialogs, such as
+     * #GtkMountOperation. If no user interaction is desired (for example
+     * when automounting filesystems at login time), usually %NULL can be
+     * passed, see each method taking a #GMountOperation for details.
+     * 
+     * The term ‘TCRYPT’ is used to mean ‘compatible with TrueCrypt and VeraCrypt’.
+     * [TrueCrypt](https://en.wikipedia.org/wiki/TrueCrypt) is a discontinued system for
+     * encrypting file containers, partitions or whole disks, typically used with Windows.
+     * [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
+     * improvements and auditing fixes.
+     */
+    interface MountOperation extends MountOperationMixin { }
+
+    class MountOperation {
+        constructor();
         /**
          * Creates a new mount operation.
          * @returns a #GMountOperation.
          */
-        new(): MountOperation;
+        static new(): MountOperation;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NativeSocketAddress} instead.
+     */
+    interface INativeSocketAddress {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NativeSocketAddress} instead.
+     */
+    type NativeSocketAddressMixin = INativeSocketAddress & ISocketAddress & ISocketConnectable;
 
     /**
      * A socket address of some unknown native type.
      */
-    interface NativeSocketAddress extends SocketAddress, SocketConnectable {
+    interface NativeSocketAddress extends NativeSocketAddressMixin { }
 
-    }
-
-    var NativeSocketAddress: {
+    class NativeSocketAddress {
+        constructor();
         /**
          * Creates a new #GNativeSocketAddress for #native and #len.
          * @param _native a native address object
          * @param len the length of #native, in bytes
          * @returns a new #GNativeSocketAddress
          */
-        new(_native: any, len: number): SocketAddress;
+        static new(_native: any, len: number): SocketAddress;
     }
 
-    interface NativeVolumeMonitor extends VolumeMonitor {
-
-    }
-
-    var NativeVolumeMonitor: {
-    }
-
-    /**
-     * #GNetworkAddress provides an easy way to resolve a hostname and
-     * then attempt to connect to that host, handling the possibility of
-     * multiple IP addresses and multiple address families.
-     * 
-     * The enumeration results of resolved addresses *may* be cached as long
-     * as this object is kept alive which may have unexpected results if
-     * alive for too long.
-     * 
-     * See #GSocketConnectable for an example of using the connectable
-     * interface.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NativeVolumeMonitor} instead.
      */
-    interface NetworkAddress extends GObject.Object, SocketConnectable {
+    interface INativeVolumeMonitor {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NativeVolumeMonitor} instead.
+     */
+    type NativeVolumeMonitorMixin = INativeVolumeMonitor & IVolumeMonitor;
+
+    interface NativeVolumeMonitor extends NativeVolumeMonitorMixin { }
+
+    class NativeVolumeMonitor {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkAddress} instead.
+     */
+    interface INetworkAddress {
         /**
          * Gets #addr's hostname. This might be either UTF-8 or ASCII-encoded,
          * depending on what #addr was created with.
@@ -8635,7 +9216,27 @@ declare namespace imports.gi.Gio {
         get_scheme(): string;
     }
 
-    var NetworkAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkAddress} instead.
+     */
+    type NetworkAddressMixin = INetworkAddress & GObject.IObject & ISocketConnectable;
+
+    /**
+     * #GNetworkAddress provides an easy way to resolve a hostname and
+     * then attempt to connect to that host, handling the possibility of
+     * multiple IP addresses and multiple address families.
+     * 
+     * The enumeration results of resolved addresses *may* be cached as long
+     * as this object is kept alive which may have unexpected results if
+     * alive for too long.
+     * 
+     * See #GSocketConnectable for an example of using the connectable
+     * interface.
+     */
+    interface NetworkAddress extends NetworkAddressMixin { }
+
+    class NetworkAddress {
+        constructor();
         /**
          * Creates a new #GSocketConnectable for connecting to the given
          * #hostname and #port.
@@ -8649,7 +9250,7 @@ declare namespace imports.gi.Gio {
          * @param _port the port
          * @returns the new #GNetworkAddress
          */
-        new(hostname: string, _port: number): NetworkAddress;
+        static new(hostname: string, _port: number): NetworkAddress;
         /**
          * Creates a new #GSocketConnectable for connecting to the local host
          * over a loopback connection to the given #port. This is intended for
@@ -8666,7 +9267,7 @@ declare namespace imports.gi.Gio {
          * @param _port the port
          * @returns the new #GNetworkAddress
          */
-        new_loopback(_port: number): NetworkAddress;
+        static new_loopback(_port: number): NetworkAddress;
         /**
          * Creates a new #GSocketConnectable for connecting to the given
          * #hostname and #port. May fail and return %NULL in case
@@ -8694,7 +9295,7 @@ declare namespace imports.gi.Gio {
          * @returns the new
          *   #GNetworkAddress, or %NULL on error
          */
-        parse(host_and_port: string, default_port: number): NetworkAddress;
+        static parse(host_and_port: string, default_port: number): NetworkAddress;
         /**
          * Creates a new #GSocketConnectable for connecting to the given
          * #uri. May fail and return %NULL in case parsing #uri fails.
@@ -8707,21 +9308,13 @@ declare namespace imports.gi.Gio {
          * @returns the new
          *   #GNetworkAddress, or %NULL on error
          */
-        parse_uri(uri: string, default_port: number): NetworkAddress;
+        static parse_uri(uri: string, default_port: number): NetworkAddress;
     }
 
-    /**
-     * Like #GNetworkAddress does with hostnames, #GNetworkService
-     * provides an easy way to resolve a SRV record, and then attempt to
-     * connect to one of the hosts that implements that service, handling
-     * service priority/weighting, multiple IP addresses, and multiple
-     * address families.
-     * 
-     * See #GSrvTarget for more information about SRV records, and see
-     * #GSocketConnectable for an example of using the connectable
-     * interface.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkService} instead.
      */
-    interface NetworkService extends GObject.Object, SocketConnectable {
+    interface INetworkService {
         /**
          * Gets the domain that #srv serves. This might be either UTF-8 or
          * ASCII-encoded, depending on what #srv was created with.
@@ -8752,7 +9345,26 @@ declare namespace imports.gi.Gio {
         set_scheme(scheme: string): void;
     }
 
-    var NetworkService: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkService} instead.
+     */
+    type NetworkServiceMixin = INetworkService & GObject.IObject & ISocketConnectable;
+
+    /**
+     * Like #GNetworkAddress does with hostnames, #GNetworkService
+     * provides an easy way to resolve a SRV record, and then attempt to
+     * connect to one of the hosts that implements that service, handling
+     * service priority/weighting, multiple IP addresses, and multiple
+     * address families.
+     * 
+     * See #GSrvTarget for more information about SRV records, and see
+     * #GSocketConnectable for an example of using the connectable
+     * interface.
+     */
+    interface NetworkService extends NetworkServiceMixin { }
+
+    class NetworkService {
+        constructor();
         /**
          * Creates a new #GNetworkService representing the given #service,
          * #protocol, and #domain. This will initially be unresolved; use the
@@ -8762,56 +9374,13 @@ declare namespace imports.gi.Gio {
          * @param domain the DNS domain to look up the service in
          * @returns a new #GNetworkService
          */
-        new(service: string, protocol: string, domain: string): NetworkService;
+        static new(service: string, protocol: string, domain: string): NetworkService;
     }
 
-    /**
-     * #GNotification is a mechanism for creating a notification to be shown
-     * to the user -- typically as a pop-up notification presented by the
-     * desktop environment shell.
-     * 
-     * The key difference between #GNotification and other similar APIs is
-     * that, if supported by the desktop environment, notifications sent
-     * with #GNotification will persist after the application has exited,
-     * and even across system reboots.
-     * 
-     * Since the user may click on a notification while the application is
-     * not running, applications using #GNotification should be able to be
-     * started as a D-Bus service, using #GApplication.
-     * 
-     * In order for #GNotification to work, the application must have installed
-     * a `.desktop` file. For example:
-     * |[
-     *  [Desktop Entry]
-     *   Name=Test Application
-     *   Comment=Description of what Test Application does
-     *   Exec=gnome-test-application
-     *   Icon=org.gnome.TestApplication
-     *   Terminal=false
-     *   Type=Application
-     *   Categories=GNOME;GTK;TestApplication Category;
-     *   StartupNotify=true
-     *   DBusActivatable=true
-     *   X-GNOME-UsesNotifications=true
-     * ]|
-     * 
-     * The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
-     * that this application uses notifications, so it can be listed in the
-     * Control Center’s ‘Notifications’ panel.
-     * 
-     * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
-     * where `org.gnome.TestApplication` is the ID passed to g_application_new().
-     * 
-     * User interaction with a notification (either the default action, or
-     * buttons) must be associated with actions on the application (ie:
-     * "app." actions).  It is not possible to route user interaction
-     * through the notification itself, because the object will not exist if
-     * the application is autostarted as a result of a notification being
-     * clicked.
-     * 
-     * A notification can be sent with g_application_send_notification().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Notification} instead.
      */
-    interface Notification extends GObject.Object {
+    interface INotification {
         /**
          * Adds a button to #notification that activates the action in
          * #detailed_action when clicked. That action must be an
@@ -8932,7 +9501,61 @@ declare namespace imports.gi.Gio {
         set_urgent(urgent: boolean): void;
     }
 
-    var Notification: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Notification} instead.
+     */
+    type NotificationMixin = INotification & GObject.IObject;
+
+    /**
+     * #GNotification is a mechanism for creating a notification to be shown
+     * to the user -- typically as a pop-up notification presented by the
+     * desktop environment shell.
+     * 
+     * The key difference between #GNotification and other similar APIs is
+     * that, if supported by the desktop environment, notifications sent
+     * with #GNotification will persist after the application has exited,
+     * and even across system reboots.
+     * 
+     * Since the user may click on a notification while the application is
+     * not running, applications using #GNotification should be able to be
+     * started as a D-Bus service, using #GApplication.
+     * 
+     * In order for #GNotification to work, the application must have installed
+     * a `.desktop` file. For example:
+     * |[
+     *  [Desktop Entry]
+     *   Name=Test Application
+     *   Comment=Description of what Test Application does
+     *   Exec=gnome-test-application
+     *   Icon=org.gnome.TestApplication
+     *   Terminal=false
+     *   Type=Application
+     *   Categories=GNOME;GTK;TestApplication Category;
+     *   StartupNotify=true
+     *   DBusActivatable=true
+     *   X-GNOME-UsesNotifications=true
+     * ]|
+     * 
+     * The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
+     * that this application uses notifications, so it can be listed in the
+     * Control Center’s ‘Notifications’ panel.
+     * 
+     * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
+     * where `org.gnome.TestApplication` is the ID passed to g_application_new().
+     * 
+     * User interaction with a notification (either the default action, or
+     * buttons) must be associated with actions on the application (ie:
+     * "app." actions).  It is not possible to route user interaction
+     * through the notification itself, because the object will not exist if
+     * the application is autostarted as a result of a notification being
+     * clicked.
+     * 
+     * A notification can be sent with g_application_send_notification().
+     */
+    interface Notification extends NotificationMixin { }
+
+    class Notification {
+        constructor();
         /**
          * Creates a new #GNotification with #title as its title.
          * 
@@ -8943,23 +9566,13 @@ declare namespace imports.gi.Gio {
          * @param title the title of the notification
          * @returns a new #GNotification instance
          */
-        new(title: string): Notification;
+        static new(title: string): Notification;
     }
 
-    /**
-     * #GOutputStream has functions to write to a stream (g_output_stream_write()),
-     * to close a stream (g_output_stream_close()) and to flush pending writes
-     * (g_output_stream_flush()).
-     * 
-     * To copy the content of an input stream to an output stream without
-     * manually handling the reads and writes, use g_output_stream_splice().
-     * 
-     * See the documentation for #GIOStream for details of thread safety of
-     * streaming APIs.
-     * 
-     * All of these functions have async variants too.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link OutputStream} instead.
      */
-    interface OutputStream extends GObject.Object {
+    interface IOutputStream {
         /**
          * Clears the pending flag on #stream.
          */
@@ -9012,9 +9625,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional cancellable object
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Closes an output stream.
          * @param result a #GAsyncResult.
@@ -9046,7 +9658,6 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
         flush_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
@@ -9126,7 +9737,6 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback.
-         * @param user_data user data passed to #callback.
          */
         splice_async(source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
@@ -9236,7 +9846,6 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
         write_all_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
@@ -9296,9 +9905,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        write_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        write_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * A wrapper function for g_output_stream_write() which takes a
          * #GBytes as input.  This can be more convenient for use by language
@@ -9334,9 +9942,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the io priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        write_bytes_async(bytes: GLib.Bytes, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        write_bytes_async(bytes: GLib.Bytes, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a stream write-from-#GBytes operation.
          * @param result a #GAsyncResult.
@@ -9434,7 +10041,6 @@ declare namespace imports.gi.Gio {
          * @param io_priority the I/O priority of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
         writev_all_async(vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
@@ -9489,7 +10095,6 @@ declare namespace imports.gi.Gio {
          * @param io_priority the I/O priority of the request.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback callback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
         writev_async(vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
@@ -9501,27 +10106,34 @@ declare namespace imports.gi.Gio {
         writev_finish(result: AsyncResult, bytes_written: number): boolean;
     }
 
-    var OutputStream: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link OutputStream} instead.
+     */
+    type OutputStreamMixin = IOutputStream & GObject.IObject;
 
     /**
-     * A #GPermission represents the status of the caller's permission to
-     * perform a certain action.
+     * #GOutputStream has functions to write to a stream (g_output_stream_write()),
+     * to close a stream (g_output_stream_close()) and to flush pending writes
+     * (g_output_stream_flush()).
      * 
-     * You can query if the action is currently allowed and if it is
-     * possible to acquire the permission so that the action will be allowed
-     * in the future.
+     * To copy the content of an input stream to an output stream without
+     * manually handling the reads and writes, use g_output_stream_splice().
      * 
-     * There is also an API to actually acquire the permission and one to
-     * release it.
+     * See the documentation for #GIOStream for details of thread safety of
+     * streaming APIs.
      * 
-     * As an example, a #GPermission might represent the ability for the
-     * user to write to a #GSettings object.  This #GPermission object could
-     * then be used to decide if it is appropriate to show a "Click here to
-     * unlock" button in a dialog and to provide the mechanism to invoke
-     * when that button is clicked.
+     * All of these functions have async variants too.
      */
-    interface Permission extends GObject.Object {
+    interface OutputStream extends OutputStreamMixin { }
+
+    class OutputStream {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Permission} instead.
+     */
+    interface IPermission {
         /**
          * Attempts to acquire the permission represented by #permission.
          * 
@@ -9549,9 +10161,8 @@ declare namespace imports.gi.Gio {
          * g_permission_acquire().
          * @param cancellable a #GCancellable, or %NULL
          * @param callback the #GAsyncReadyCallback to call when done
-         * @param user_data the user data to pass to #callback
          */
-        acquire_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        acquire_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Collects the result of attempting to acquire the permission
          * represented by #permission.
@@ -9621,9 +10232,8 @@ declare namespace imports.gi.Gio {
          * g_permission_release().
          * @param cancellable a #GCancellable, or %NULL
          * @param callback the #GAsyncReadyCallback to call when done
-         * @param user_data the user data to pass to #callback
          */
-        release_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        release_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Collects the result of attempting to release the permission
          * represented by #permission.
@@ -9636,8 +10246,45 @@ declare namespace imports.gi.Gio {
         release_finish(result: AsyncResult): boolean;
     }
 
-    var Permission: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Permission} instead.
+     */
+    type PermissionMixin = IPermission & GObject.IObject;
+
+    /**
+     * A #GPermission represents the status of the caller's permission to
+     * perform a certain action.
+     * 
+     * You can query if the action is currently allowed and if it is
+     * possible to acquire the permission so that the action will be allowed
+     * in the future.
+     * 
+     * There is also an API to actually acquire the permission and one to
+     * release it.
+     * 
+     * As an example, a #GPermission might represent the ability for the
+     * user to write to a #GSettings object.  This #GPermission object could
+     * then be used to decide if it is appropriate to show a "Click here to
+     * unlock" button in a dialog and to provide the mechanism to invoke
+     * when that button is clicked.
+     */
+    interface Permission extends PermissionMixin { }
+
+    class Permission {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PropertyAction} instead.
+     */
+    interface IPropertyAction {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PropertyAction} instead.
+     */
+    type PropertyActionMixin = IPropertyAction & GObject.IObject & IAction;
 
     /**
      * A #GPropertyAction is a way to get a #GAction with a state value
@@ -9692,11 +10339,10 @@ declare namespace imports.gi.Gio {
      * #GSettings, see g_settings_create_action() instead, and possibly
      * combine its use with g_settings_bind().
      */
-    interface PropertyAction extends GObject.Object, Action {
+    interface PropertyAction extends PropertyActionMixin { }
 
-    }
-
-    var PropertyAction: {
+    class PropertyAction {
+        constructor();
         /**
          * Creates a #GAction corresponding to the value of property
          * #property_name on #object.
@@ -9712,13 +10358,13 @@ declare namespace imports.gi.Gio {
          * @param property_name the name of the property
          * @returns a new #GPropertyAction
          */
-        new(name: string, object: GObject.Object, property_name: string): PropertyAction;
+        static new(name: string, object: GObject.Object, property_name: string): PropertyAction;
     }
 
-    /**
-     * Support for proxied #GInetSocketAddress.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyAddress} instead.
      */
-    interface ProxyAddress extends InetSocketAddress, SocketConnectable {
+    interface IProxyAddress {
         /**
          * Gets #proxy's destination hostname; that is, the name of the host
          * that will be connected to via the proxy, not the name of the proxy
@@ -9761,7 +10407,18 @@ declare namespace imports.gi.Gio {
         get_username(): string;
     }
 
-    var ProxyAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyAddress} instead.
+     */
+    type ProxyAddressMixin = IProxyAddress & IInetSocketAddress & ISocketConnectable;
+
+    /**
+     * Support for proxied #GInetSocketAddress.
+     */
+    interface ProxyAddress extends ProxyAddressMixin { }
+
+    class ProxyAddress {
+        constructor();
         /**
          * Creates a new #GProxyAddress for #inetaddr with #protocol that should
          * tunnel through #dest_hostname and #dest_port.
@@ -9780,8 +10437,20 @@ declare namespace imports.gi.Gio {
          *     (or %NULL).
          * @returns a new #GProxyAddress
          */
-        new(inetaddr: InetAddress, _port: number, protocol: string, dest_hostname: string, dest_port: number, username: string, password: string): SocketAddress;
+        static new(inetaddr: InetAddress, _port: number, protocol: string, dest_hostname: string, dest_port: number, username: string, password: string): SocketAddress;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyAddressEnumerator} instead.
+     */
+    interface IProxyAddressEnumerator {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyAddressEnumerator} instead.
+     */
+    type ProxyAddressEnumeratorMixin = IProxyAddressEnumerator & ISocketAddressEnumerator;
 
     /**
      * #GProxyAddressEnumerator is a wrapper around #GSocketAddressEnumerator which
@@ -9794,24 +10463,16 @@ declare namespace imports.gi.Gio {
      * there should be no need to manually wrap a #GSocketAddressEnumerator instance
      * with one.
      */
-    interface ProxyAddressEnumerator extends SocketAddressEnumerator {
+    interface ProxyAddressEnumerator extends ProxyAddressEnumeratorMixin { }
 
+    class ProxyAddressEnumerator {
+        constructor();
     }
 
-    var ProxyAddressEnumerator: {
-    }
-
-    /**
-     * #GResolver provides cancellable synchronous and asynchronous DNS
-     * resolution, for hostnames (g_resolver_lookup_by_address(),
-     * g_resolver_lookup_by_name() and their async variants) and SRV
-     * (service) records (g_resolver_lookup_service()).
-     * 
-     * #GNetworkAddress and #GNetworkService provide wrappers around
-     * #GResolver functionality that also implement #GSocketConnectable,
-     * making it easy to connect to a remote host/service.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Resolver} instead.
      */
-    interface Resolver extends GObject.Object {
+    interface IResolver {
         /**
          * Synchronously reverse-resolves #address to determine its
          * associated hostname.
@@ -9835,9 +10496,8 @@ declare namespace imports.gi.Gio {
          * @param address the address to reverse-resolve
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_by_address_async(address: InetAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_by_address_async(address: InetAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a previous call to
          * g_resolver_lookup_by_address_async().
@@ -9890,9 +10550,8 @@ declare namespace imports.gi.Gio {
          * @param hostname the hostname to look up the address of
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_by_name_async(hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_by_name_async(hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a call to
          * g_resolver_lookup_by_name_async().
@@ -9928,9 +10587,8 @@ declare namespace imports.gi.Gio {
          * @param flags extra #GResolverNameLookupFlags for the lookup
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_by_name_with_flags_async(hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_by_name_with_flags_async(hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a call to
          * g_resolver_lookup_by_name_with_flags_async().
@@ -9973,9 +10631,8 @@ declare namespace imports.gi.Gio {
          * @param record_type the type of DNS record to look up
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_records_async(rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_records_async(rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a previous call to
          * g_resolver_lookup_records_async(). Returns a non-empty list of records as
@@ -10035,9 +10692,8 @@ declare namespace imports.gi.Gio {
          * @param domain the DNS domain to look up the service in
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_service_async(service: string, protocol: string, domain: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_service_async(service: string, protocol: string, domain: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a previous call to
          * g_resolver_lookup_service_async().
@@ -10065,7 +10721,25 @@ declare namespace imports.gi.Gio {
         set_default(): void;
     }
 
-    var Resolver: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Resolver} instead.
+     */
+    type ResolverMixin = IResolver & GObject.IObject;
+
+    /**
+     * #GResolver provides cancellable synchronous and asynchronous DNS
+     * resolution, for hostnames (g_resolver_lookup_by_address(),
+     * g_resolver_lookup_by_name() and their async variants) and SRV
+     * (service) records (g_resolver_lookup_service()).
+     * 
+     * #GNetworkAddress and #GNetworkService provide wrappers around
+     * #GResolver functionality that also implement #GSocketConnectable,
+     * making it easy to connect to a remote host/service.
+     */
+    interface Resolver extends ResolverMixin { }
+
+    class Resolver {
+        constructor();
         /**
          * Frees #addresses (which should be the return value from
          * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_finish()).
@@ -10073,7 +10747,7 @@ declare namespace imports.gi.Gio {
          * by hand.)
          * @param addresses a #GList of #GInetAddress
          */
-        free_addresses(addresses: GLib.List): void;
+        static free_addresses(addresses: GLib.List): void;
         /**
          * Frees #targets (which should be the return value from
          * g_resolver_lookup_service() or g_resolver_lookup_service_finish()).
@@ -10081,306 +10755,20 @@ declare namespace imports.gi.Gio {
          * results by hand.)
          * @param targets a #GList of #GSrvTarget
          */
-        free_targets(targets: GLib.List): void;
+        static free_targets(targets: GLib.List): void;
         /**
          * Gets the default #GResolver. You should unref it when you are done
          * with it. #GResolver may use its reference count as a hint about how
          * many threads it should allocate for concurrent DNS resolutions.
          * @returns the default #GResolver.
          */
-        get_default(): Resolver;
+        static get_default(): Resolver;
     }
 
-    /**
-     * The #GSettings class provides a convenient API for storing and retrieving
-     * application settings.
-     * 
-     * Reads and writes can be considered to be non-blocking.  Reading
-     * settings with #GSettings is typically extremely fast: on
-     * approximately the same order of magnitude (but slower than) a
-     * #GHashTable lookup.  Writing settings is also extremely fast in terms
-     * of time to return to your application, but can be extremely expensive
-     * for other threads and other processes.  Many settings backends
-     * (including dconf) have lazy initialisation which means in the common
-     * case of the user using their computer without modifying any settings
-     * a lot of work can be avoided.  For dconf, the D-Bus service doesn't
-     * even need to be started in this case.  For this reason, you should
-     * only ever modify #GSettings keys in response to explicit user action.
-     * Particular care should be paid to ensure that modifications are not
-     * made during startup -- for example, when setting the initial value
-     * of preferences widgets.  The built-in g_settings_bind() functionality
-     * is careful not to write settings in response to notify signals as a
-     * result of modifications that it makes to widgets.
-     * 
-     * When creating a GSettings instance, you have to specify a schema
-     * that describes the keys in your settings and their types and default
-     * values, as well as some other information.
-     * 
-     * Normally, a schema has a fixed path that determines where the settings
-     * are stored in the conceptual global tree of settings. However, schemas
-     * can also be '[relocatable][gsettings-relocatable]', i.e. not equipped with
-     * a fixed path. This is
-     * useful e.g. when the schema describes an 'account', and you want to be
-     * able to store a arbitrary number of accounts.
-     * 
-     * Paths must start with and end with a forward slash character ('/')
-     * and must not contain two sequential slash characters.  Paths should
-     * be chosen based on a domain name associated with the program or
-     * library to which the settings belong.  Examples of paths are
-     * "/org/gtk/settings/file-chooser/" and "/ca/desrt/dconf-editor/".
-     * Paths should not start with "/apps/", "/desktop/" or "/system/" as
-     * they often did in GConf.
-     * 
-     * Unlike other configuration systems (like GConf), GSettings does not
-     * restrict keys to basic types like strings and numbers. GSettings stores
-     * values as #GVariant, and allows any #GVariantType for keys. Key names
-     * are restricted to lowercase characters, numbers and '-'. Furthermore,
-     * the names must begin with a lowercase character, must not end
-     * with a '-', and must not contain consecutive dashes.
-     * 
-     * Similar to GConf, the default values in GSettings schemas can be
-     * localized, but the localized values are stored in gettext catalogs
-     * and looked up with the domain that is specified in the
-     * `gettext-domain` attribute of the <schemalist> or <schema>
-     * elements and the category that is specified in the `l10n` attribute of
-     * the <default> element. The string which is translated includes all text in
-     * the <default> element, including any surrounding quotation marks.
-     * 
-     * The `l10n` attribute must be set to `messages` or `time`, and sets the
-     * [locale category for
-     * translation](https://www.gnu.org/software/gettext/manual/html_node/Aspects.html#index-locale-categories-1).
-     * The `messages` category should be used by default; use `time` for
-     * translatable date or time formats. A translation comment can be added as an
-     * XML comment immediately above the <default> element — it is recommended to
-     * add these comments to aid translators understand the meaning and
-     * implications of the default value. An optional translation `context`
-     * attribute can be set on the <default> element to disambiguate multiple
-     * defaults which use the same string.
-     * 
-     * For example:
-     * |[
-     *  <!-- Translators: A list of words which are not allowed to be typed, in
-     *       GVariant serialization syntax.
-     *       See: https://developer.gnome.org/glib/stable/gvariant-text.html -->
-     *  <default l10n='messages' context='Banned words'>['bad', 'words']</default>
-     * ]|
-     * 
-     * Translations of default values must remain syntactically valid serialized
-     * #GVariants (e.g. retaining any surrounding quotation marks) or runtime
-     * errors will occur.
-     * 
-     * GSettings uses schemas in a compact binary form that is created
-     * by the [glib-compile-schemas][glib-compile-schemas]
-     * utility. The input is a schema description in an XML format.
-     * 
-     * A DTD for the gschema XML format can be found here:
-     * [gschema.dtd](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/gschema.dtd)
-     * 
-     * The [glib-compile-schemas][glib-compile-schemas] tool expects schema
-     * files to have the extension `.gschema.xml`.
-     * 
-     * At runtime, schemas are identified by their id (as specified in the
-     * id attribute of the <schema> element). The convention for schema
-     * ids is to use a dotted name, similar in style to a D-Bus bus name,
-     * e.g. "org.gnome.SessionManager". In particular, if the settings are
-     * for a specific service that owns a D-Bus bus name, the D-Bus bus name
-     * and schema id should match. For schemas which deal with settings not
-     * associated with one named application, the id should not use
-     * StudlyCaps, e.g. "org.gnome.font-rendering".
-     * 
-     * In addition to #GVariant types, keys can have types that have
-     * enumerated types. These can be described by a <choice>,
-     * <enum> or <flags> element, as seen in the
-     * [example][schema-enumerated]. The underlying type of such a key
-     * is string, but you can use g_settings_get_enum(), g_settings_set_enum(),
-     * g_settings_get_flags(), g_settings_set_flags() access the numeric values
-     * corresponding to the string value of enum and flags keys.
-     * 
-     * An example for default value:
-     * |[
-     * <schemalist>
-     *   <schema id="org.gtk.Test" path="/org/gtk/Test/" gettext-domain="test">
-     * 
-     *     <key name="greeting" type="s">
-     *       <default l10n="messages">"Hello, earthlings"</default>
-     *       <summary>A greeting</summary>
-     *       <description>
-     *         Greeting of the invading martians
-     *       </description>
-     *     </key>
-     * 
-     *     <key name="box" type="(ii)">
-     *       <default>(20,30)</default>
-     *     </key>
-     * 
-     *     <key name="empty-string" type="s">
-     *       <default>""</default>
-     *       <summary>Empty strings have to be provided in GVariant form</summary>
-     *     </key>
-     * 
-     *   </schema>
-     * </schemalist>
-     * ]|
-     * 
-     * An example for ranges, choices and enumerated types:
-     * |[
-     * <schemalist>
-     * 
-     *   <enum id="org.gtk.Test.myenum">
-     *     <value nick="first" value="1"/>
-     *     <value nick="second" value="2"/>
-     *   </enum>
-     * 
-     *   <flags id="org.gtk.Test.myflags">
-     *     <value nick="flag1" value="1"/>
-     *     <value nick="flag2" value="2"/>
-     *     <value nick="flag3" value="4"/>
-     *   </flags>
-     * 
-     *   <schema id="org.gtk.Test">
-     * 
-     *     <key name="key-with-range" type="i">
-     *       <range min="1" max="100"/>
-     *       <default>10</default>
-     *     </key>
-     * 
-     *     <key name="key-with-choices" type="s">
-     *       <choices>
-     *         <choice value='Elisabeth'/>
-     *         <choice value='Annabeth'/>
-     *         <choice value='Joe'/>
-     *       </choices>
-     *       <aliases>
-     *         <alias value='Anna' target='Annabeth'/>
-     *         <alias value='Beth' target='Elisabeth'/>
-     *       </aliases>
-     *       <default>'Joe'</default>
-     *     </key>
-     * 
-     *     <key name='enumerated-key' enum='org.gtk.Test.myenum'>
-     *       <default>'first'</default>
-     *     </key>
-     * 
-     *     <key name='flags-key' flags='org.gtk.Test.myflags'>
-     *       <default>["flag1","flag2"]</default>
-     *     </key>
-     *   </schema>
-     * </schemalist>
-     * ]|
-     * 
-     * ## Vendor overrides
-     * 
-     * Default values are defined in the schemas that get installed by
-     * an application. Sometimes, it is necessary for a vendor or distributor
-     * to adjust these defaults. Since patching the XML source for the schema
-     * is inconvenient and error-prone,
-     * [glib-compile-schemas][glib-compile-schemas] reads so-called vendor
-     * override' files. These are keyfiles in the same directory as the XML
-     * schema sources which can override default values. The schema id serves
-     * as the group name in the key file, and the values are expected in
-     * serialized GVariant form, as in the following example:
-     * |[
-     *     [org.gtk.Example]
-     *     key1='string'
-     *     key2=1.5
-     * ]|
-     * 
-     * glib-compile-schemas expects schema files to have the extension
-     * `.gschema.override`.
-     * 
-     * ## Binding
-     * 
-     * A very convenient feature of GSettings lets you bind #GObject properties
-     * directly to settings, using g_settings_bind(). Once a GObject property
-     * has been bound to a setting, changes on either side are automatically
-     * propagated to the other side. GSettings handles details like mapping
-     * between GObject and GVariant types, and preventing infinite cycles.
-     * 
-     * This makes it very easy to hook up a preferences dialog to the
-     * underlying settings. To make this even more convenient, GSettings
-     * looks for a boolean property with the name "sensitivity" and
-     * automatically binds it to the writability of the bound setting.
-     * If this 'magic' gets in the way, it can be suppressed with the
-     * #G_SETTINGS_BIND_NO_SENSITIVITY flag.
-     * 
-     * ## Relocatable schemas # {#gsettings-relocatable}
-     * 
-     * A relocatable schema is one with no `path` attribute specified on its
-     * <schema> element. By using g_settings_new_with_path(), a #GSettings object
-     * can be instantiated for a relocatable schema, assigning a path to the
-     * instance. Paths passed to g_settings_new_with_path() will typically be
-     * constructed dynamically from a constant prefix plus some form of instance
-     * identifier; but they must still be valid GSettings paths. Paths could also
-     * be constant and used with a globally installed schema originating from a
-     * dependency library.
-     * 
-     * For example, a relocatable schema could be used to store geometry information
-     * for different windows in an application. If the schema ID was
-     * `org.foo.MyApp.Window`, it could be instantiated for paths
-     * `/org/foo/MyApp/main/`, `/org/foo/MyApp/document-1/`,
-     * `/org/foo/MyApp/document-2/`, etc. If any of the paths are well-known
-     * they can be specified as <child> elements in the parent schema, e.g.:
-     * |[
-     * <schema id="org.foo.MyApp" path="/org/foo/MyApp/">
-     *   <child name="main" schema="org.foo.MyApp.Window"/>
-     * </schema>
-     * ]|
-     * 
-     * ## Build system integration # {#gsettings-build-system}
-     * 
-     * GSettings comes with autotools integration to simplify compiling and
-     * installing schemas. To add GSettings support to an application, add the
-     * following to your `configure.ac`:
-     * |[
-     * GLIB_GSETTINGS
-     * ]|
-     * 
-     * In the appropriate `Makefile.am`, use the following snippet to compile and
-     * install the named schema:
-     * |[
-     * gsettings_SCHEMAS = org.foo.MyApp.gschema.xml
-     * EXTRA_DIST = $(gsettings_SCHEMAS)
-     * 
-     * #GSETTINGS_RULES#
-     * ]|
-     * 
-     * No changes are needed to the build system to mark a schema XML file for
-     * translation. Assuming it sets the `gettext-domain` attribute, a schema may
-     * be marked for translation by adding it to `POTFILES.in`, assuming gettext
-     * 0.19 is in use (the preferred method for translation):
-     * |[
-     * data/org.foo.MyApp.gschema.xml
-     * ]|
-     * 
-     * Alternatively, if intltool 0.50.1 is in use:
-     * |[
-     * [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
-     * ]|
-     * 
-     * GSettings will use gettext to look up translations for the <summary> and
-     * <description> elements, and also any <default> elements which have a `l10n`
-     * attribute set. Translations must not be included in the `.gschema.xml` file
-     * by the build system, for example by using intltool XML rules with a
-     * `.gschema.xml.in` template.
-     * 
-     * If an enumerated type defined in a C header file is to be used in a GSettings
-     * schema, it can either be defined manually using an <enum> element in the
-     * schema XML, or it can be extracted automatically from the C header. This
-     * approach is preferred, as it ensures the two representations are always
-     * synchronised. To do so, add the following to the relevant `Makefile.am`:
-     * |[
-     * gsettings_ENUM_NAMESPACE = org.foo.MyApp
-     * gsettings_ENUM_FILES = my-app-enums.h my-app-misc.h
-     * ]|
-     * 
-     * `gsettings_ENUM_NAMESPACE` specifies the schema namespace for the enum files,
-     * which are specified in `gsettings_ENUM_FILES`. This will generate a
-     * `org.foo.MyApp.enums.xml` file containing the extracted enums, which will be
-     * automatically included in the schema compilation, install and uninstall
-     * rules. It should not be committed to version control or included in
-     * `EXTRA_DIST`.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Settings} instead.
      */
-    interface Settings extends GObject.Object {
+    interface ISettings {
         /**
          * Applies any changes that have been made to the settings.  This
          * function does nothing unless #settings is in 'delay-apply' mode;
@@ -10434,10 +10822,9 @@ declare namespace imports.gi.Gio {
          *     from #settings to #object, or %NULL to use the default GIO mapping
          * @param set_mapping a function that gets called to convert values
          *     from #object to #settings, or %NULL to use the default GIO mapping
-         * @param user_data data that gets passed to #get_mapping and #set_mapping
          * @param destroy #GDestroyNotify function for #user_data
          */
-        bind_with_mapping(key: string, object: GObject.Object, property: string, flags: SettingsBindFlags, get_mapping: SettingsBindGetMapping, set_mapping: SettingsBindSetMapping, user_data: any, destroy: GLib.DestroyNotify): void;
+        bind_with_mapping(key: string, object: GObject.Object, property: string, flags: SettingsBindFlags, get_mapping: SettingsBindGetMapping, set_mapping: SettingsBindSetMapping, destroy: GLib.DestroyNotify): void;
         /**
          * Create a binding between the writability of #key in the
          * #settings object and the property #property of #object.
@@ -10652,10 +11039,9 @@ declare namespace imports.gi.Gio {
          * @param key the key to get the value for
          * @param mapping the function to map the value in the
          *           settings database to the value used by the application
-         * @param user_data user data for #mapping
          * @returns the result, which may be %NULL
          */
-        get_mapped(key: string, mapping: SettingsGetMapping, user_data: any): any;
+        get_mapped(key: string, mapping: SettingsGetMapping): any;
         /**
          * Queries the range of a key.
          * @param key the key to query the range of
@@ -10968,12 +11354,304 @@ declare namespace imports.gi.Gio {
         set_value(key: string, value: GLib.Variant): boolean;
     }
 
-    interface SettingsInitOptions {
-        schema?: string;
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Settings} instead.
+     */
+    type SettingsMixin = ISettings & GObject.IObject;
+
+    /**
+     * The #GSettings class provides a convenient API for storing and retrieving
+     * application settings.
+     * 
+     * Reads and writes can be considered to be non-blocking.  Reading
+     * settings with #GSettings is typically extremely fast: on
+     * approximately the same order of magnitude (but slower than) a
+     * #GHashTable lookup.  Writing settings is also extremely fast in terms
+     * of time to return to your application, but can be extremely expensive
+     * for other threads and other processes.  Many settings backends
+     * (including dconf) have lazy initialisation which means in the common
+     * case of the user using their computer without modifying any settings
+     * a lot of work can be avoided.  For dconf, the D-Bus service doesn't
+     * even need to be started in this case.  For this reason, you should
+     * only ever modify #GSettings keys in response to explicit user action.
+     * Particular care should be paid to ensure that modifications are not
+     * made during startup -- for example, when setting the initial value
+     * of preferences widgets.  The built-in g_settings_bind() functionality
+     * is careful not to write settings in response to notify signals as a
+     * result of modifications that it makes to widgets.
+     * 
+     * When creating a GSettings instance, you have to specify a schema
+     * that describes the keys in your settings and their types and default
+     * values, as well as some other information.
+     * 
+     * Normally, a schema has a fixed path that determines where the settings
+     * are stored in the conceptual global tree of settings. However, schemas
+     * can also be '[relocatable][gsettings-relocatable]', i.e. not equipped with
+     * a fixed path. This is
+     * useful e.g. when the schema describes an 'account', and you want to be
+     * able to store a arbitrary number of accounts.
+     * 
+     * Paths must start with and end with a forward slash character ('/')
+     * and must not contain two sequential slash characters.  Paths should
+     * be chosen based on a domain name associated with the program or
+     * library to which the settings belong.  Examples of paths are
+     * "/org/gtk/settings/file-chooser/" and "/ca/desrt/dconf-editor/".
+     * Paths should not start with "/apps/", "/desktop/" or "/system/" as
+     * they often did in GConf.
+     * 
+     * Unlike other configuration systems (like GConf), GSettings does not
+     * restrict keys to basic types like strings and numbers. GSettings stores
+     * values as #GVariant, and allows any #GVariantType for keys. Key names
+     * are restricted to lowercase characters, numbers and '-'. Furthermore,
+     * the names must begin with a lowercase character, must not end
+     * with a '-', and must not contain consecutive dashes.
+     * 
+     * Similar to GConf, the default values in GSettings schemas can be
+     * localized, but the localized values are stored in gettext catalogs
+     * and looked up with the domain that is specified in the
+     * `gettext-domain` attribute of the <schemalist> or <schema>
+     * elements and the category that is specified in the `l10n` attribute of
+     * the <default> element. The string which is translated includes all text in
+     * the <default> element, including any surrounding quotation marks.
+     * 
+     * The `l10n` attribute must be set to `messages` or `time`, and sets the
+     * [locale category for
+     * translation](https://www.gnu.org/software/gettext/manual/html_node/Aspects.html#index-locale-categories-1).
+     * The `messages` category should be used by default; use `time` for
+     * translatable date or time formats. A translation comment can be added as an
+     * XML comment immediately above the <default> element — it is recommended to
+     * add these comments to aid translators understand the meaning and
+     * implications of the default value. An optional translation `context`
+     * attribute can be set on the <default> element to disambiguate multiple
+     * defaults which use the same string.
+     * 
+     * For example:
+     * |[
+     *  <!-- Translators: A list of words which are not allowed to be typed, in
+     *       GVariant serialization syntax.
+     *       See: https://developer.gnome.org/glib/stable/gvariant-text.html -->
+     *  <default l10n='messages' context='Banned words'>['bad', 'words']</default>
+     * ]|
+     * 
+     * Translations of default values must remain syntactically valid serialized
+     * #GVariants (e.g. retaining any surrounding quotation marks) or runtime
+     * errors will occur.
+     * 
+     * GSettings uses schemas in a compact binary form that is created
+     * by the [glib-compile-schemas][glib-compile-schemas]
+     * utility. The input is a schema description in an XML format.
+     * 
+     * A DTD for the gschema XML format can be found here:
+     * [gschema.dtd](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/gschema.dtd)
+     * 
+     * The [glib-compile-schemas][glib-compile-schemas] tool expects schema
+     * files to have the extension `.gschema.xml`.
+     * 
+     * At runtime, schemas are identified by their id (as specified in the
+     * id attribute of the <schema> element). The convention for schema
+     * ids is to use a dotted name, similar in style to a D-Bus bus name,
+     * e.g. "org.gnome.SessionManager". In particular, if the settings are
+     * for a specific service that owns a D-Bus bus name, the D-Bus bus name
+     * and schema id should match. For schemas which deal with settings not
+     * associated with one named application, the id should not use
+     * StudlyCaps, e.g. "org.gnome.font-rendering".
+     * 
+     * In addition to #GVariant types, keys can have types that have
+     * enumerated types. These can be described by a <choice>,
+     * <enum> or <flags> element, as seen in the
+     * [example][schema-enumerated]. The underlying type of such a key
+     * is string, but you can use g_settings_get_enum(), g_settings_set_enum(),
+     * g_settings_get_flags(), g_settings_set_flags() access the numeric values
+     * corresponding to the string value of enum and flags keys.
+     * 
+     * An example for default value:
+     * |[
+     * <schemalist>
+     *   <schema id="org.gtk.Test" path="/org/gtk/Test/" gettext-domain="test">
+     * 
+     *     <key name="greeting" type="s">
+     *       <default l10n="messages">"Hello, earthlings"</default>
+     *       <summary>A greeting</summary>
+     *       <description>
+     *         Greeting of the invading martians
+     *       </description>
+     *     </key>
+     * 
+     *     <key name="box" type="(ii)">
+     *       <default>(20,30)</default>
+     *     </key>
+     * 
+     *     <key name="empty-string" type="s">
+     *       <default>""</default>
+     *       <summary>Empty strings have to be provided in GVariant form</summary>
+     *     </key>
+     * 
+     *   </schema>
+     * </schemalist>
+     * ]|
+     * 
+     * An example for ranges, choices and enumerated types:
+     * |[
+     * <schemalist>
+     * 
+     *   <enum id="org.gtk.Test.myenum">
+     *     <value nick="first" value="1"/>
+     *     <value nick="second" value="2"/>
+     *   </enum>
+     * 
+     *   <flags id="org.gtk.Test.myflags">
+     *     <value nick="flag1" value="1"/>
+     *     <value nick="flag2" value="2"/>
+     *     <value nick="flag3" value="4"/>
+     *   </flags>
+     * 
+     *   <schema id="org.gtk.Test">
+     * 
+     *     <key name="key-with-range" type="i">
+     *       <range min="1" max="100"/>
+     *       <default>10</default>
+     *     </key>
+     * 
+     *     <key name="key-with-choices" type="s">
+     *       <choices>
+     *         <choice value='Elisabeth'/>
+     *         <choice value='Annabeth'/>
+     *         <choice value='Joe'/>
+     *       </choices>
+     *       <aliases>
+     *         <alias value='Anna' target='Annabeth'/>
+     *         <alias value='Beth' target='Elisabeth'/>
+     *       </aliases>
+     *       <default>'Joe'</default>
+     *     </key>
+     * 
+     *     <key name='enumerated-key' enum='org.gtk.Test.myenum'>
+     *       <default>'first'</default>
+     *     </key>
+     * 
+     *     <key name='flags-key' flags='org.gtk.Test.myflags'>
+     *       <default>["flag1","flag2"]</default>
+     *     </key>
+     *   </schema>
+     * </schemalist>
+     * ]|
+     * 
+     * ## Vendor overrides
+     * 
+     * Default values are defined in the schemas that get installed by
+     * an application. Sometimes, it is necessary for a vendor or distributor
+     * to adjust these defaults. Since patching the XML source for the schema
+     * is inconvenient and error-prone,
+     * [glib-compile-schemas][glib-compile-schemas] reads so-called vendor
+     * override' files. These are keyfiles in the same directory as the XML
+     * schema sources which can override default values. The schema id serves
+     * as the group name in the key file, and the values are expected in
+     * serialized GVariant form, as in the following example:
+     * |[
+     *     [org.gtk.Example]
+     *     key1='string'
+     *     key2=1.5
+     * ]|
+     * 
+     * glib-compile-schemas expects schema files to have the extension
+     * `.gschema.override`.
+     * 
+     * ## Binding
+     * 
+     * A very convenient feature of GSettings lets you bind #GObject properties
+     * directly to settings, using g_settings_bind(). Once a GObject property
+     * has been bound to a setting, changes on either side are automatically
+     * propagated to the other side. GSettings handles details like mapping
+     * between GObject and GVariant types, and preventing infinite cycles.
+     * 
+     * This makes it very easy to hook up a preferences dialog to the
+     * underlying settings. To make this even more convenient, GSettings
+     * looks for a boolean property with the name "sensitivity" and
+     * automatically binds it to the writability of the bound setting.
+     * If this 'magic' gets in the way, it can be suppressed with the
+     * #G_SETTINGS_BIND_NO_SENSITIVITY flag.
+     * 
+     * ## Relocatable schemas # {#gsettings-relocatable}
+     * 
+     * A relocatable schema is one with no `path` attribute specified on its
+     * <schema> element. By using g_settings_new_with_path(), a #GSettings object
+     * can be instantiated for a relocatable schema, assigning a path to the
+     * instance. Paths passed to g_settings_new_with_path() will typically be
+     * constructed dynamically from a constant prefix plus some form of instance
+     * identifier; but they must still be valid GSettings paths. Paths could also
+     * be constant and used with a globally installed schema originating from a
+     * dependency library.
+     * 
+     * For example, a relocatable schema could be used to store geometry information
+     * for different windows in an application. If the schema ID was
+     * `org.foo.MyApp.Window`, it could be instantiated for paths
+     * `/org/foo/MyApp/main/`, `/org/foo/MyApp/document-1/`,
+     * `/org/foo/MyApp/document-2/`, etc. If any of the paths are well-known
+     * they can be specified as <child> elements in the parent schema, e.g.:
+     * |[
+     * <schema id="org.foo.MyApp" path="/org/foo/MyApp/">
+     *   <child name="main" schema="org.foo.MyApp.Window"/>
+     * </schema>
+     * ]|
+     * 
+     * ## Build system integration # {#gsettings-build-system}
+     * 
+     * GSettings comes with autotools integration to simplify compiling and
+     * installing schemas. To add GSettings support to an application, add the
+     * following to your `configure.ac`:
+     * |[
+     * GLIB_GSETTINGS
+     * ]|
+     * 
+     * In the appropriate `Makefile.am`, use the following snippet to compile and
+     * install the named schema:
+     * |[
+     * gsettings_SCHEMAS = org.foo.MyApp.gschema.xml
+     * EXTRA_DIST = $(gsettings_SCHEMAS)
+     * 
+     * #GSETTINGS_RULES#
+     * ]|
+     * 
+     * No changes are needed to the build system to mark a schema XML file for
+     * translation. Assuming it sets the `gettext-domain` attribute, a schema may
+     * be marked for translation by adding it to `POTFILES.in`, assuming gettext
+     * 0.19 is in use (the preferred method for translation):
+     * |[
+     * data/org.foo.MyApp.gschema.xml
+     * ]|
+     * 
+     * Alternatively, if intltool 0.50.1 is in use:
+     * |[
+     * [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
+     * ]|
+     * 
+     * GSettings will use gettext to look up translations for the <summary> and
+     * <description> elements, and also any <default> elements which have a `l10n`
+     * attribute set. Translations must not be included in the `.gschema.xml` file
+     * by the build system, for example by using intltool XML rules with a
+     * `.gschema.xml.in` template.
+     * 
+     * If an enumerated type defined in a C header file is to be used in a GSettings
+     * schema, it can either be defined manually using an <enum> element in the
+     * schema XML, or it can be extracted automatically from the C header. This
+     * approach is preferred, as it ensures the two representations are always
+     * synchronised. To do so, add the following to the relevant `Makefile.am`:
+     * |[
+     * gsettings_ENUM_NAMESPACE = org.foo.MyApp
+     * gsettings_ENUM_FILES = my-app-enums.h my-app-misc.h
+     * ]|
+     * 
+     * `gsettings_ENUM_NAMESPACE` specifies the schema namespace for the enum files,
+     * which are specified in `gsettings_ENUM_FILES`. This will generate a
+     * `org.foo.MyApp.enums.xml` file containing the extracted enums, which will be
+     * automatically included in the schema compilation, install and uninstall
+     * rules. It should not be committed to version control or included in
+     * `EXTRA_DIST`.
+     */
+    interface Settings extends SettingsMixin { }
 
     class Settings {
-        constructor(options?: SettingsInitOptions)
+        constructor();
         /**
          * Creates a new #GSettings object with the schema specified by
          * #schema_id.
@@ -11102,33 +11780,10 @@ declare namespace imports.gi.Gio {
         static unbind(object: GObject.Object, property: string): void;
     }
 
-    /**
-     * The #GSettingsBackend interface defines a generic interface for
-     * non-strictly-typed data that is stored in a hierarchy. To implement
-     * an alternative storage backend for #GSettings, you need to implement
-     * the #GSettingsBackend interface and then make it implement the
-     * extension point #G_SETTINGS_BACKEND_EXTENSION_POINT_NAME.
-     * 
-     * The interface defines methods for reading and writing values, a
-     * method for determining if writing of certain values will fail
-     * (lockdown) and a change notification mechanism.
-     * 
-     * The semantics of the interface are very precisely defined and
-     * implementations must carefully adhere to the expectations of
-     * callers that are documented on each of the interface methods.
-     * 
-     * Some of the #GSettingsBackend functions accept or return a #GTree.
-     * These trees always have strings as keys and #GVariant as values.
-     * g_settings_backend_create_tree() is a convenience function to create
-     * suitable trees.
-     * 
-     * The #GSettingsBackend API is exported to allow third-party
-     * implementations, but does not carry the same stability guarantees
-     * as the public GIO API. For this reason, you have to define the
-     * C preprocessor symbol %G_SETTINGS_ENABLE_BACKEND before including
-     * `gio/gsettingsbackend.h`.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SettingsBackend} instead.
      */
-    interface SettingsBackend extends GObject.Object {
+    interface ISettingsBackend {
         /**
          * Signals that a single key has possibly changed.  Backend
          * implementations should call this if a key has possibly changed its
@@ -11236,7 +11891,41 @@ declare namespace imports.gi.Gio {
         writable_changed(key: string): void;
     }
 
-    var SettingsBackend: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SettingsBackend} instead.
+     */
+    type SettingsBackendMixin = ISettingsBackend & GObject.IObject;
+
+    /**
+     * The #GSettingsBackend interface defines a generic interface for
+     * non-strictly-typed data that is stored in a hierarchy. To implement
+     * an alternative storage backend for #GSettings, you need to implement
+     * the #GSettingsBackend interface and then make it implement the
+     * extension point #G_SETTINGS_BACKEND_EXTENSION_POINT_NAME.
+     * 
+     * The interface defines methods for reading and writing values, a
+     * method for determining if writing of certain values will fail
+     * (lockdown) and a change notification mechanism.
+     * 
+     * The semantics of the interface are very precisely defined and
+     * implementations must carefully adhere to the expectations of
+     * callers that are documented on each of the interface methods.
+     * 
+     * Some of the #GSettingsBackend functions accept or return a #GTree.
+     * These trees always have strings as keys and #GVariant as values.
+     * g_settings_backend_create_tree() is a convenience function to create
+     * suitable trees.
+     * 
+     * The #GSettingsBackend API is exported to allow third-party
+     * implementations, but does not carry the same stability guarantees
+     * as the public GIO API. For this reason, you have to define the
+     * C preprocessor symbol %G_SETTINGS_ENABLE_BACKEND before including
+     * `gio/gsettingsbackend.h`.
+     */
+    interface SettingsBackend extends SettingsBackendMixin { }
+
+    class SettingsBackend {
+        constructor();
         /**
          * Calculate the longest common prefix of all keys in a tree and write
          * out an array of the key names relative to that prefix and,
@@ -11250,7 +11939,7 @@ declare namespace imports.gi.Gio {
          * @param keys 
          * @param values 
          */
-        flatten_tree(tree: GLib.Tree, path: string, keys: string[], values: GLib.Variant[]): void;
+        static flatten_tree(tree: GLib.Tree, path: string, keys: string[], values: GLib.Variant[]): void;
         /**
          * Returns the default #GSettingsBackend. It is possible to override
          * the default by setting the `GSETTINGS_BACKEND` environment variable
@@ -11261,17 +11950,13 @@ declare namespace imports.gi.Gio {
          *     which will be a dummy (memory) settings backend if no other settings
          *     backend is available.
          */
-        get_default(): SettingsBackend;
+        static get_default(): SettingsBackend;
     }
 
-    /**
-     * A #GSimpleAction is the obvious simple implementation of the #GAction
-     * interface. This is the easiest way to create an action for purposes of
-     * adding it to a #GSimpleActionGroup.
-     * 
-     * See also #GtkAction.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleAction} instead.
      */
-    interface SimpleAction extends GObject.Object, Action {
+    interface ISimpleAction {
         /**
          * Sets the action as enabled or not.
          * 
@@ -11307,7 +11992,22 @@ declare namespace imports.gi.Gio {
         set_state_hint(state_hint: GLib.Variant): void;
     }
 
-    var SimpleAction: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleAction} instead.
+     */
+    type SimpleActionMixin = ISimpleAction & GObject.IObject & IAction;
+
+    /**
+     * A #GSimpleAction is the obvious simple implementation of the #GAction
+     * interface. This is the easiest way to create an action for purposes of
+     * adding it to a #GSimpleActionGroup.
+     * 
+     * See also #GtkAction.
+     */
+    interface SimpleAction extends SimpleActionMixin { }
+
+    class SimpleAction {
+        constructor();
         /**
          * Creates a new action.
          * 
@@ -11318,7 +12018,7 @@ declare namespace imports.gi.Gio {
          *   handlers for the #GSimpleAction::activate signal, or %NULL for no parameter
          * @returns a new #GSimpleAction
          */
-        new(name: string, parameter_type: GLib.VariantType): SimpleAction;
+        static new(name: string, parameter_type: GLib.VariantType): SimpleAction;
         /**
          * Creates a new stateful action.
          * 
@@ -11332,22 +12032,20 @@ declare namespace imports.gi.Gio {
          * @param state the initial state of the action
          * @returns a new #GSimpleAction
          */
-        new_stateful(name: string, parameter_type: GLib.VariantType, state: GLib.Variant): SimpleAction;
+        static new_stateful(name: string, parameter_type: GLib.VariantType, state: GLib.Variant): SimpleAction;
     }
 
-    /**
-     * #GSimpleActionGroup is a hash table filled with #GAction objects,
-     * implementing the #GActionGroup and #GActionMap interfaces.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleActionGroup} instead.
      */
-    interface SimpleActionGroup extends GObject.Object, ActionGroup, ActionMap {
+    interface ISimpleActionGroup {
         /**
          * A convenience function for creating multiple #GSimpleAction instances
          * and adding them to the action group.
          * @param entries 
          * @param n_entries the length of #entries, or -1
-         * @param user_data the user data for signal connections
          */
-        add_entries(entries: ActionEntry[], n_entries: number, user_data: any): void;
+        add_entries(entries: ActionEntry[], n_entries: number): void;
         /**
          * Adds an action to the action group.
          * 
@@ -11375,13 +12073,171 @@ declare namespace imports.gi.Gio {
         remove(action_name: string): void;
     }
 
-    var SimpleActionGroup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleActionGroup} instead.
+     */
+    type SimpleActionGroupMixin = ISimpleActionGroup & GObject.IObject & IActionGroup & IActionMap;
+
+    /**
+     * #GSimpleActionGroup is a hash table filled with #GAction objects,
+     * implementing the #GActionGroup and #GActionMap interfaces.
+     */
+    interface SimpleActionGroup extends SimpleActionGroupMixin { }
+
+    class SimpleActionGroup {
+        constructor();
         /**
          * Creates a new, empty, #GSimpleActionGroup.
          * @returns a new #GSimpleActionGroup
          */
-        new(): SimpleActionGroup;
+        static new(): SimpleActionGroup;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleAsyncResult} instead.
+     */
+    interface ISimpleAsyncResult {
+        /**
+         * Completes an asynchronous I/O job immediately. Must be called in
+         * the thread where the asynchronous result was to be delivered, as it
+         * invokes the callback directly. If you are in a different thread use
+         * g_simple_async_result_complete_in_idle().
+         * 
+         * Calling this function takes a reference to #simple for as long as
+         * is needed to complete the call.
+         */
+        complete(): void;
+        /**
+         * Completes an asynchronous function in an idle handler in the
+         * [thread-default main context][g-main-context-push-thread-default]
+         * of the thread that #simple was initially created in
+         * (and re-pushes that context around the invocation of the callback).
+         * 
+         * Calling this function takes a reference to #simple for as long as
+         * is needed to complete the call.
+         */
+        complete_in_idle(): void;
+        /**
+         * Gets the operation result boolean from within the asynchronous result.
+         * @returns %TRUE if the operation's result was %TRUE, %FALSE
+         *     if the operation's result was %FALSE.
+         */
+        get_op_res_gboolean(): boolean;
+        /**
+         * Gets a pointer result as returned by the asynchronous function.
+         * @returns a pointer from the result.
+         */
+        get_op_res_gpointer(): any;
+        /**
+         * Gets a gssize from the asynchronous result.
+         * @returns a gssize returned from the asynchronous function.
+         */
+        get_op_res_gssize(): number;
+        /**
+         * Gets the source tag for the #GSimpleAsyncResult.
+         * @returns a #gpointer to the source object for the #GSimpleAsyncResult.
+         */
+        get_source_tag(): any;
+        /**
+         * Propagates an error from within the simple asynchronous result to
+         * a given destination.
+         * 
+         * If the #GCancellable given to a prior call to
+         * g_simple_async_result_set_check_cancellable() is cancelled then this
+         * function will return %TRUE with #dest set appropriately.
+         * @returns %TRUE if the error was propagated to #dest. %FALSE otherwise.
+         */
+        propagate_error(): boolean;
+        /**
+         * Runs the asynchronous job in a separate thread and then calls
+         * g_simple_async_result_complete_in_idle() on #simple to return
+         * the result to the appropriate main loop.
+         * 
+         * Calling this function takes a reference to #simple for as long as
+         * is needed to run the job and report its completion.
+         * @param _func a #GSimpleAsyncThreadFunc.
+         * @param io_priority the io priority of the request.
+         * @param cancellable optional #GCancellable object, %NULL to ignore.
+         */
+        run_in_thread(_func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable): void;
+        /**
+         * Sets a #GCancellable to check before dispatching results.
+         * 
+         * This function has one very specific purpose: the provided cancellable
+         * is checked at the time of g_simple_async_result_propagate_error() If
+         * it is cancelled, these functions will return an "Operation was
+         * cancelled" error (%G_IO_ERROR_CANCELLED).
+         * 
+         * Implementors of cancellable asynchronous functions should use this in
+         * order to provide a guarantee to their callers that cancelling an
+         * async operation will reliably result in an error being returned for
+         * that operation (even if a positive result for the operation has
+         * already been sent as an idle to the main context to be dispatched).
+         * 
+         * The checking described above is done regardless of any call to the
+         * unrelated g_simple_async_result_set_handle_cancellation() function.
+         * @param check_cancellable a #GCancellable to check, or %NULL to unset
+         */
+        set_check_cancellable(check_cancellable: Cancellable): void;
+        /**
+         * Sets an error within the asynchronous result without a #GError.
+         * @param domain a #GQuark (usually #G_IO_ERROR).
+         * @param code an error code.
+         * @param format a formatted error reporting string.
+         */
+        set_error(domain: GLib.Quark, code: number, format: string): void;
+        /**
+         * Sets an error within the asynchronous result without a #GError.
+         * Unless writing a binding, see g_simple_async_result_set_error().
+         * @param domain a #GQuark (usually #G_IO_ERROR).
+         * @param code an error code.
+         * @param format a formatted error reporting string.
+         * @param args va_list of arguments.
+         */
+        set_error_va(domain: GLib.Quark, code: number, format: string, args: any[]): void;
+        /**
+         * Sets the result from a #GError.
+         * @param error #GError.
+         */
+        set_from_error(error: GLib.Error): void;
+        /**
+         * Sets whether to handle cancellation within the asynchronous operation.
+         * 
+         * This function has nothing to do with
+         * g_simple_async_result_set_check_cancellable().  It only refers to the
+         * #GCancellable passed to g_simple_async_result_run_in_thread().
+         * @param handle_cancellation a #gboolean.
+         */
+        set_handle_cancellation(handle_cancellation: boolean): void;
+        /**
+         * Sets the operation result to a boolean within the asynchronous result.
+         * @param op_res a #gboolean.
+         */
+        set_op_res_gboolean(op_res: boolean): void;
+        /**
+         * Sets the operation result within the asynchronous result to a pointer.
+         * @param op_res a pointer result from an asynchronous function.
+         * @param destroy_op_res a #GDestroyNotify function.
+         */
+        set_op_res_gpointer(op_res: any, destroy_op_res: GLib.DestroyNotify): void;
+        /**
+         * Sets the operation result within the asynchronous result to
+         * the given #op_res.
+         * @param op_res a #gssize.
+         */
+        set_op_res_gssize(op_res: number): void;
+        /**
+         * Sets the result from #error, and takes over the caller's ownership
+         * of #error, so the caller does not need to free it any more.
+         * @param error a #GError
+         */
+        take_error(error: GLib.Error): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleAsyncResult} instead.
+     */
+    type SimpleAsyncResultMixin = ISimpleAsyncResult & GObject.IObject & IAsyncResult;
 
     /**
      * As of GLib 2.46, #GSimpleAsyncResult is deprecated in favor of
@@ -11550,145 +12406,10 @@ declare namespace imports.gi.Gio {
      * }
      * ]|
      */
-    interface SimpleAsyncResult extends GObject.Object, AsyncResult {
-        /**
-         * Completes an asynchronous I/O job immediately. Must be called in
-         * the thread where the asynchronous result was to be delivered, as it
-         * invokes the callback directly. If you are in a different thread use
-         * g_simple_async_result_complete_in_idle().
-         * 
-         * Calling this function takes a reference to #simple for as long as
-         * is needed to complete the call.
-         */
-        complete(): void;
-        /**
-         * Completes an asynchronous function in an idle handler in the
-         * [thread-default main context][g-main-context-push-thread-default]
-         * of the thread that #simple was initially created in
-         * (and re-pushes that context around the invocation of the callback).
-         * 
-         * Calling this function takes a reference to #simple for as long as
-         * is needed to complete the call.
-         */
-        complete_in_idle(): void;
-        /**
-         * Gets the operation result boolean from within the asynchronous result.
-         * @returns %TRUE if the operation's result was %TRUE, %FALSE
-         *     if the operation's result was %FALSE.
-         */
-        get_op_res_gboolean(): boolean;
-        /**
-         * Gets a pointer result as returned by the asynchronous function.
-         * @returns a pointer from the result.
-         */
-        get_op_res_gpointer(): any;
-        /**
-         * Gets a gssize from the asynchronous result.
-         * @returns a gssize returned from the asynchronous function.
-         */
-        get_op_res_gssize(): number;
-        /**
-         * Gets the source tag for the #GSimpleAsyncResult.
-         * @returns a #gpointer to the source object for the #GSimpleAsyncResult.
-         */
-        get_source_tag(): any;
-        /**
-         * Propagates an error from within the simple asynchronous result to
-         * a given destination.
-         * 
-         * If the #GCancellable given to a prior call to
-         * g_simple_async_result_set_check_cancellable() is cancelled then this
-         * function will return %TRUE with #dest set appropriately.
-         * @returns %TRUE if the error was propagated to #dest. %FALSE otherwise.
-         */
-        propagate_error(): boolean;
-        /**
-         * Runs the asynchronous job in a separate thread and then calls
-         * g_simple_async_result_complete_in_idle() on #simple to return
-         * the result to the appropriate main loop.
-         * 
-         * Calling this function takes a reference to #simple for as long as
-         * is needed to run the job and report its completion.
-         * @param _func a #GSimpleAsyncThreadFunc.
-         * @param io_priority the io priority of the request.
-         * @param cancellable optional #GCancellable object, %NULL to ignore.
-         */
-        run_in_thread(_func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable): void;
-        /**
-         * Sets a #GCancellable to check before dispatching results.
-         * 
-         * This function has one very specific purpose: the provided cancellable
-         * is checked at the time of g_simple_async_result_propagate_error() If
-         * it is cancelled, these functions will return an "Operation was
-         * cancelled" error (%G_IO_ERROR_CANCELLED).
-         * 
-         * Implementors of cancellable asynchronous functions should use this in
-         * order to provide a guarantee to their callers that cancelling an
-         * async operation will reliably result in an error being returned for
-         * that operation (even if a positive result for the operation has
-         * already been sent as an idle to the main context to be dispatched).
-         * 
-         * The checking described above is done regardless of any call to the
-         * unrelated g_simple_async_result_set_handle_cancellation() function.
-         * @param check_cancellable a #GCancellable to check, or %NULL to unset
-         */
-        set_check_cancellable(check_cancellable: Cancellable): void;
-        /**
-         * Sets an error within the asynchronous result without a #GError.
-         * @param domain a #GQuark (usually #G_IO_ERROR).
-         * @param code an error code.
-         * @param format a formatted error reporting string.
-         */
-        set_error(domain: GLib.Quark, code: number, format: string): void;
-        /**
-         * Sets an error within the asynchronous result without a #GError.
-         * Unless writing a binding, see g_simple_async_result_set_error().
-         * @param domain a #GQuark (usually #G_IO_ERROR).
-         * @param code an error code.
-         * @param format a formatted error reporting string.
-         * @param args va_list of arguments.
-         */
-        set_error_va(domain: GLib.Quark, code: number, format: string, args: any[]): void;
-        /**
-         * Sets the result from a #GError.
-         * @param error #GError.
-         */
-        set_from_error(error: GLib.Error): void;
-        /**
-         * Sets whether to handle cancellation within the asynchronous operation.
-         * 
-         * This function has nothing to do with
-         * g_simple_async_result_set_check_cancellable().  It only refers to the
-         * #GCancellable passed to g_simple_async_result_run_in_thread().
-         * @param handle_cancellation a #gboolean.
-         */
-        set_handle_cancellation(handle_cancellation: boolean): void;
-        /**
-         * Sets the operation result to a boolean within the asynchronous result.
-         * @param op_res a #gboolean.
-         */
-        set_op_res_gboolean(op_res: boolean): void;
-        /**
-         * Sets the operation result within the asynchronous result to a pointer.
-         * @param op_res a pointer result from an asynchronous function.
-         * @param destroy_op_res a #GDestroyNotify function.
-         */
-        set_op_res_gpointer(op_res: any, destroy_op_res: GLib.DestroyNotify): void;
-        /**
-         * Sets the operation result within the asynchronous result to
-         * the given #op_res.
-         * @param op_res a #gssize.
-         */
-        set_op_res_gssize(op_res: number): void;
-        /**
-         * Sets the result from #error, and takes over the caller's ownership
-         * of #error, so the caller does not need to free it any more.
-         * @param error a #GError
-         */
-        take_error(error: GLib.Error): void;
-    }
+    interface SimpleAsyncResult extends SimpleAsyncResultMixin { }
 
-    var SimpleAsyncResult: {
+    class SimpleAsyncResult {
+        constructor();
         /**
          * Creates a #GSimpleAsyncResult.
          * 
@@ -11702,41 +12423,37 @@ declare namespace imports.gi.Gio {
          * this function returns.
          * @param source_object a #GObject, or %NULL.
          * @param callback a #GAsyncReadyCallback.
-         * @param user_data user data passed to #callback.
          * @param source_tag the asynchronous function.
          * @returns a #GSimpleAsyncResult.
          */
-        new(source_object: GObject.Object, callback: AsyncReadyCallback, user_data: any, source_tag: any): SimpleAsyncResult;
+        static new(source_object: GObject.Object, callback: AsyncReadyCallback, source_tag: any): SimpleAsyncResult;
         /**
          * Creates a new #GSimpleAsyncResult with a set error.
          * @param source_object a #GObject, or %NULL.
          * @param callback a #GAsyncReadyCallback.
-         * @param user_data user data passed to #callback.
          * @param domain a #GQuark.
          * @param code an error code.
          * @param format a string with format characters.
          * @returns a #GSimpleAsyncResult.
          */
-        new_error(source_object: GObject.Object, callback: AsyncReadyCallback, user_data: any, domain: GLib.Quark, code: number, format: string): SimpleAsyncResult;
+        static new_error(source_object: GObject.Object, callback: AsyncReadyCallback, domain: GLib.Quark, code: number, format: string): SimpleAsyncResult;
         /**
          * Creates a #GSimpleAsyncResult from an error condition.
          * @param source_object a #GObject, or %NULL.
          * @param callback a #GAsyncReadyCallback.
-         * @param user_data user data passed to #callback.
          * @param error a #GError
          * @returns a #GSimpleAsyncResult.
          */
-        new_from_error(source_object: GObject.Object, callback: AsyncReadyCallback, user_data: any, error: GLib.Error): SimpleAsyncResult;
+        static new_from_error(source_object: GObject.Object, callback: AsyncReadyCallback, error: GLib.Error): SimpleAsyncResult;
         /**
          * Creates a #GSimpleAsyncResult from an error condition, and takes over the
          * caller's ownership of #error, so the caller does not need to free it anymore.
          * @param source_object a #GObject, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data passed to #callback
          * @param error a #GError
          * @returns a #GSimpleAsyncResult
          */
-        new_take_error(source_object: GObject.Object, callback: AsyncReadyCallback, user_data: any, error: GLib.Error): SimpleAsyncResult;
+        static new_take_error(source_object: GObject.Object, callback: AsyncReadyCallback, error: GLib.Error): SimpleAsyncResult;
         /**
          * Ensures that the data passed to the _finish function of an async
          * operation is consistent.  Three checks are performed.
@@ -11755,8 +12472,20 @@ declare namespace imports.gi.Gio {
          * @param source_tag the asynchronous function.
          * @returns #TRUE if all checks passed or #FALSE if any failed.
          */
-        is_valid(result: AsyncResult, source: GObject.Object, source_tag: any): boolean;
+        static is_valid(result: AsyncResult, source: GObject.Object, source_tag: any): boolean;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleIOStream} instead.
+     */
+    interface ISimpleIOStream {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleIOStream} instead.
+     */
+    type SimpleIOStreamMixin = ISimpleIOStream & IIOStream;
 
     /**
      * GSimpleIOStream creates a #GIOStream from an arbitrary #GInputStream and
@@ -11768,11 +12497,10 @@ declare namespace imports.gi.Gio {
      * g_unix_input_stream_new() or g_win32_input_stream_new(), and you want
      * to take advantage of the methods provided by #GIOStream.
      */
-    interface SimpleIOStream extends IOStream {
+    interface SimpleIOStream extends SimpleIOStreamMixin { }
 
-    }
-
-    var SimpleIOStream: {
+    class SimpleIOStream {
+        constructor();
         /**
          * Creates a new #GSimpleIOStream wrapping #input_stream and #output_stream.
          * See also #GIOStream.
@@ -11780,8 +12508,20 @@ declare namespace imports.gi.Gio {
          * @param output_stream a #GOutputStream.
          * @returns a new #GSimpleIOStream instance.
          */
-        new(input_stream: InputStream, output_stream: OutputStream): IOStream;
+        static new(input_stream: InputStream, output_stream: OutputStream): IOStream;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimplePermission} instead.
+     */
+    interface ISimplePermission {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimplePermission} instead.
+     */
+    type SimplePermissionMixin = ISimplePermission & IPermission;
 
     /**
      * #GSimplePermission is a trivial implementation of #GPermission that
@@ -11790,31 +12530,23 @@ declare namespace imports.gi.Gio {
      * 
      * Calling request or release will result in errors.
      */
-    interface SimplePermission extends Permission {
+    interface SimplePermission extends SimplePermissionMixin { }
 
-    }
-
-    var SimplePermission: {
+    class SimplePermission {
+        constructor();
         /**
          * Creates a new #GPermission instance that represents an action that is
          * either always or never allowed.
          * @param allowed %TRUE if the action is allowed
          * @returns the #GSimplePermission, as a #GPermission
          */
-        new(allowed: boolean): Permission;
+        static new(allowed: boolean): Permission;
     }
 
-    /**
-     * #GSimpleProxyResolver is a simple #GProxyResolver implementation
-     * that handles a single default proxy, multiple URI-scheme-specific
-     * proxies, and a list of hosts that proxies should not be used for.
-     * 
-     * #GSimpleProxyResolver is never the default proxy resolver, but it
-     * can be used as the base class for another proxy resolver
-     * implementation, or it can be created and used manually, such as
-     * with g_socket_client_set_proxy_resolver().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleProxyResolver} instead.
      */
-    interface SimpleProxyResolver extends GObject.Object, ProxyResolver {
+    interface ISimpleProxyResolver {
         /**
          * Sets the default proxy on #resolver, to be used for any URIs that
          * don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
@@ -11850,7 +12582,25 @@ declare namespace imports.gi.Gio {
         set_uri_proxy(uri_scheme: string, proxy: string): void;
     }
 
-    var SimpleProxyResolver: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SimpleProxyResolver} instead.
+     */
+    type SimpleProxyResolverMixin = ISimpleProxyResolver & GObject.IObject & IProxyResolver;
+
+    /**
+     * #GSimpleProxyResolver is a simple #GProxyResolver implementation
+     * that handles a single default proxy, multiple URI-scheme-specific
+     * proxies, and a list of hosts that proxies should not be used for.
+     * 
+     * #GSimpleProxyResolver is never the default proxy resolver, but it
+     * can be used as the base class for another proxy resolver
+     * implementation, or it can be created and used manually, such as
+     * with g_socket_client_set_proxy_resolver().
+     */
+    interface SimpleProxyResolver extends SimpleProxyResolverMixin { }
+
+    class SimpleProxyResolver {
+        constructor();
         /**
          * Creates a new #GSimpleProxyResolver. See
          * #GSimpleProxyResolver:default-proxy and
@@ -11862,63 +12612,13 @@ declare namespace imports.gi.Gio {
          *     to not use a proxy for.
          * @returns a new #GSimpleProxyResolver
          */
-        new(default_proxy: string, ignore_hosts: string): ProxyResolver;
+        static new(default_proxy: string, ignore_hosts: string): ProxyResolver;
     }
 
-    /**
-     * A #GSocket is a low-level networking primitive. It is a more or less
-     * direct mapping of the BSD socket API in a portable GObject based API.
-     * It supports both the UNIX socket implementations and winsock2 on Windows.
-     * 
-     * #GSocket is the platform independent base upon which the higher level
-     * network primitives are based. Applications are not typically meant to
-     * use it directly, but rather through classes like #GSocketClient,
-     * #GSocketService and #GSocketConnection. However there may be cases where
-     * direct use of #GSocket is useful.
-     * 
-     * #GSocket implements the #GInitable interface, so if it is manually constructed
-     * by e.g. g_object_new() you must call g_initable_init() and check the
-     * results before using the object. This is done automatically in
-     * g_socket_new() and g_socket_new_from_fd(), so these functions can return
-     * %NULL.
-     * 
-     * Sockets operate in two general modes, blocking or non-blocking. When
-     * in blocking mode all operations (which don’t take an explicit blocking
-     * parameter) block until the requested operation
-     * is finished or there is an error. In non-blocking mode all calls that
-     * would block return immediately with a %G_IO_ERROR_WOULD_BLOCK error.
-     * To know when a call would successfully run you can call g_socket_condition_check(),
-     * or g_socket_condition_wait(). You can also use g_socket_create_source() and
-     * attach it to a #GMainContext to get callbacks when I/O is possible.
-     * Note that all sockets are always set to non blocking mode in the system, and
-     * blocking mode is emulated in GSocket.
-     * 
-     * When working in non-blocking mode applications should always be able to
-     * handle getting a %G_IO_ERROR_WOULD_BLOCK error even when some other
-     * function said that I/O was possible. This can easily happen in case
-     * of a race condition in the application, but it can also happen for other
-     * reasons. For instance, on Windows a socket is always seen as writable
-     * until a write returns %G_IO_ERROR_WOULD_BLOCK.
-     * 
-     * #GSockets can be either connection oriented or datagram based.
-     * For connection oriented types you must first establish a connection by
-     * either connecting to an address or accepting a connection from another
-     * address. For connectionless socket types the target/source address is
-     * specified or received in each I/O operation.
-     * 
-     * All socket file descriptors are set to be close-on-exec.
-     * 
-     * Note that creating a #GSocket causes the signal %SIGPIPE to be
-     * ignored for the remainder of the program. If you are writing a
-     * command-line utility that uses #GSocket, you may need to take into
-     * account the fact that your program will not automatically be killed
-     * if it tries to write to %stdout after it has been closed.
-     * 
-     * Like most other APIs in GLib, #GSocket is not inherently thread safe. To use
-     * a #GSocket concurrently from multiple threads, you must implement your own
-     * locking.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Socket} instead.
      */
-    interface Socket extends GObject.Object, DatagramBased, Initable {
+    interface ISocket {
         /**
          * Accept incoming connections on a connection-based socket. This removes
          * the first outstanding connection request from the listening socket and
@@ -12892,7 +13592,68 @@ declare namespace imports.gi.Gio {
         speaks_ipv4(): boolean;
     }
 
-    var Socket: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Socket} instead.
+     */
+    type SocketMixin = ISocket & GObject.IObject & IDatagramBased & IInitable;
+
+    /**
+     * A #GSocket is a low-level networking primitive. It is a more or less
+     * direct mapping of the BSD socket API in a portable GObject based API.
+     * It supports both the UNIX socket implementations and winsock2 on Windows.
+     * 
+     * #GSocket is the platform independent base upon which the higher level
+     * network primitives are based. Applications are not typically meant to
+     * use it directly, but rather through classes like #GSocketClient,
+     * #GSocketService and #GSocketConnection. However there may be cases where
+     * direct use of #GSocket is useful.
+     * 
+     * #GSocket implements the #GInitable interface, so if it is manually constructed
+     * by e.g. g_object_new() you must call g_initable_init() and check the
+     * results before using the object. This is done automatically in
+     * g_socket_new() and g_socket_new_from_fd(), so these functions can return
+     * %NULL.
+     * 
+     * Sockets operate in two general modes, blocking or non-blocking. When
+     * in blocking mode all operations (which don’t take an explicit blocking
+     * parameter) block until the requested operation
+     * is finished or there is an error. In non-blocking mode all calls that
+     * would block return immediately with a %G_IO_ERROR_WOULD_BLOCK error.
+     * To know when a call would successfully run you can call g_socket_condition_check(),
+     * or g_socket_condition_wait(). You can also use g_socket_create_source() and
+     * attach it to a #GMainContext to get callbacks when I/O is possible.
+     * Note that all sockets are always set to non blocking mode in the system, and
+     * blocking mode is emulated in GSocket.
+     * 
+     * When working in non-blocking mode applications should always be able to
+     * handle getting a %G_IO_ERROR_WOULD_BLOCK error even when some other
+     * function said that I/O was possible. This can easily happen in case
+     * of a race condition in the application, but it can also happen for other
+     * reasons. For instance, on Windows a socket is always seen as writable
+     * until a write returns %G_IO_ERROR_WOULD_BLOCK.
+     * 
+     * #GSockets can be either connection oriented or datagram based.
+     * For connection oriented types you must first establish a connection by
+     * either connecting to an address or accepting a connection from another
+     * address. For connectionless socket types the target/source address is
+     * specified or received in each I/O operation.
+     * 
+     * All socket file descriptors are set to be close-on-exec.
+     * 
+     * Note that creating a #GSocket causes the signal %SIGPIPE to be
+     * ignored for the remainder of the program. If you are writing a
+     * command-line utility that uses #GSocket, you may need to take into
+     * account the fact that your program will not automatically be killed
+     * if it tries to write to %stdout after it has been closed.
+     * 
+     * Like most other APIs in GLib, #GSocket is not inherently thread safe. To use
+     * a #GSocket concurrently from multiple threads, you must implement your own
+     * locking.
+     */
+    interface Socket extends SocketMixin { }
+
+    class Socket {
+        constructor();
         /**
          * Creates a new #GSocket with the defined family, type and protocol.
          * If #protocol is 0 (%G_SOCKET_PROTOCOL_DEFAULT) the default protocol type
@@ -12913,7 +13674,7 @@ declare namespace imports.gi.Gio {
          * @returns a #GSocket or %NULL on error.
          *     Free the returned object with g_object_unref().
          */
-        new(family: SocketFamily, _type: SocketType, protocol: SocketProtocol): Socket;
+        static new(family: SocketFamily, _type: SocketType, protocol: SocketProtocol): Socket;
         /**
          * Creates a new #GSocket from a native file descriptor
          * or winsock SOCKET handle.
@@ -12932,15 +13693,13 @@ declare namespace imports.gi.Gio {
          * @returns a #GSocket or %NULL on error.
          *     Free the returned object with g_object_unref().
          */
-        new_from_fd(fd: number): Socket;
+        static new_from_fd(fd: number): Socket;
     }
 
-    /**
-     * #GSocketAddress is the equivalent of struct sockaddr in the BSD
-     * sockets API. This is an abstract class; use #GInetSocketAddress
-     * for internet sockets, or #GUnixSocketAddress for UNIX domain sockets.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketAddress} instead.
      */
-    interface SocketAddress extends GObject.Object, SocketConnectable {
+    interface ISocketAddress {
         /**
          * Gets the socket family type of #address.
          * @returns the socket family type of #address
@@ -12970,7 +13729,20 @@ declare namespace imports.gi.Gio {
         to_native(dest: any, destlen: number): boolean;
     }
 
-    var SocketAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketAddress} instead.
+     */
+    type SocketAddressMixin = ISocketAddress & GObject.IObject & ISocketConnectable;
+
+    /**
+     * #GSocketAddress is the equivalent of struct sockaddr in the BSD
+     * sockets API. This is an abstract class; use #GInetSocketAddress
+     * for internet sockets, or #GUnixSocketAddress for UNIX domain sockets.
+     */
+    interface SocketAddress extends SocketAddressMixin { }
+
+    class SocketAddress {
+        constructor();
         /**
          * Creates a #GSocketAddress subclass corresponding to the native
          * struct sockaddr #native.
@@ -12979,26 +13751,13 @@ declare namespace imports.gi.Gio {
          * @returns a new #GSocketAddress if #native could successfully
          *     be converted, otherwise %NULL
          */
-        new_from_native(_native: any, len: number): SocketAddress;
+        static new_from_native(_native: any, len: number): SocketAddress;
     }
 
-    /**
-     * #GSocketAddressEnumerator is an enumerator type for #GSocketAddress
-     * instances. It is returned by enumeration functions such as
-     * g_socket_connectable_enumerate(), which returns a #GSocketAddressEnumerator
-     * to list each #GSocketAddress which could be used to connect to that
-     * #GSocketConnectable.
-     * 
-     * Enumeration is typically a blocking operation, so the asynchronous methods
-     * g_socket_address_enumerator_next_async() and
-     * g_socket_address_enumerator_next_finish() should be used where possible.
-     * 
-     * Each #GSocketAddressEnumerator can only be enumerated once. Once
-     * g_socket_address_enumerator_next() has returned %NULL, further
-     * enumeration with that #GSocketAddressEnumerator is not possible, and it can
-     * be unreffed.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketAddressEnumerator} instead.
      */
-    interface SocketAddressEnumerator extends GObject.Object {
+    interface ISocketAddressEnumerator {
         /**
          * Retrieves the next #GSocketAddress from #enumerator. Note that this
          * may block for some amount of time. (Eg, a #GNetworkAddress may need
@@ -13028,9 +13787,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request
          *     is satisfied
-         * @param user_data the data to pass to callback function
          */
-        next_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        next_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Retrieves the result of a completed call to
          * g_socket_address_enumerator_next_async(). See
@@ -13044,25 +13802,37 @@ declare namespace imports.gi.Gio {
         next_finish(result: AsyncResult): SocketAddress;
     }
 
-    var SocketAddressEnumerator: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketAddressEnumerator} instead.
+     */
+    type SocketAddressEnumeratorMixin = ISocketAddressEnumerator & GObject.IObject;
 
     /**
-     * #GSocketClient is a lightweight high-level utility class for connecting to
-     * a network host using a connection oriented socket type.
+     * #GSocketAddressEnumerator is an enumerator type for #GSocketAddress
+     * instances. It is returned by enumeration functions such as
+     * g_socket_connectable_enumerate(), which returns a #GSocketAddressEnumerator
+     * to list each #GSocketAddress which could be used to connect to that
+     * #GSocketConnectable.
      * 
-     * You create a #GSocketClient object, set any options you want, and then
-     * call a sync or async connect operation, which returns a #GSocketConnection
-     * subclass on success.
+     * Enumeration is typically a blocking operation, so the asynchronous methods
+     * g_socket_address_enumerator_next_async() and
+     * g_socket_address_enumerator_next_finish() should be used where possible.
      * 
-     * The type of the #GSocketConnection object returned depends on the type of
-     * the underlying socket that is in use. For instance, for a TCP/IP connection
-     * it will be a #GTcpConnection.
-     * 
-     * As #GSocketClient is a lightweight object, you don't need to cache it. You
-     * can just create a new one any time you need one.
+     * Each #GSocketAddressEnumerator can only be enumerated once. Once
+     * g_socket_address_enumerator_next() has returned %NULL, further
+     * enumeration with that #GSocketAddressEnumerator is not possible, and it can
+     * be unreffed.
      */
-    interface SocketClient extends GObject.Object {
+    interface SocketAddressEnumerator extends SocketAddressEnumeratorMixin { }
+
+    class SocketAddressEnumerator {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketClient} instead.
+     */
+    interface ISocketClient {
         /**
          * Enable proxy protocols to be handled by the application. When the
          * indicated proxy protocol is returned by the #GProxyResolver,
@@ -13128,9 +13898,8 @@ declare namespace imports.gi.Gio {
          * @param connectable a #GSocketConnectable specifying the remote address.
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        connect_async(connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_async(connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async connect operation. See g_socket_client_connect_async()
          * @param result a #GAsyncResult.
@@ -13184,9 +13953,8 @@ declare namespace imports.gi.Gio {
          * @param default_port the default port to connect to
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        connect_to_host_async(host_and_port: string, default_port: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_to_host_async(host_and_port: string, default_port: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async connect operation. See g_socket_client_connect_to_host_async()
          * @param result a #GAsyncResult.
@@ -13221,9 +13989,8 @@ declare namespace imports.gi.Gio {
          * @param service the name of the service to connect to
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        connect_to_service_async(domain: string, service: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_to_service_async(domain: string, service: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async connect operation. See g_socket_client_connect_to_service_async()
          * @param result a #GAsyncResult.
@@ -13268,9 +14035,8 @@ declare namespace imports.gi.Gio {
          * @param default_port the default port to connect to
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        connect_to_uri_async(uri: string, default_port: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_to_uri_async(uri: string, default_port: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async connect operation. See g_socket_client_connect_to_uri_async()
          * @param result a #GAsyncResult.
@@ -13442,34 +14208,42 @@ declare namespace imports.gi.Gio {
         set_tls_validation_flags(flags: TlsCertificateFlags): void;
     }
 
-    var SocketClient: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketClient} instead.
+     */
+    type SocketClientMixin = ISocketClient & GObject.IObject;
+
+    /**
+     * #GSocketClient is a lightweight high-level utility class for connecting to
+     * a network host using a connection oriented socket type.
+     * 
+     * You create a #GSocketClient object, set any options you want, and then
+     * call a sync or async connect operation, which returns a #GSocketConnection
+     * subclass on success.
+     * 
+     * The type of the #GSocketConnection object returned depends on the type of
+     * the underlying socket that is in use. For instance, for a TCP/IP connection
+     * it will be a #GTcpConnection.
+     * 
+     * As #GSocketClient is a lightweight object, you don't need to cache it. You
+     * can just create a new one any time you need one.
+     */
+    interface SocketClient extends SocketClientMixin { }
+
+    class SocketClient {
+        constructor();
         /**
          * Creates a new #GSocketClient with the default options.
          * @returns a #GSocketClient.
          *     Free the returned object with g_object_unref().
          */
-        new(): SocketClient;
+        static new(): SocketClient;
     }
 
-    /**
-     * #GSocketConnection is a #GIOStream for a connected socket. They
-     * can be created either by #GSocketClient when connecting to a host,
-     * or by #GSocketListener when accepting a new client.
-     * 
-     * The type of the #GSocketConnection object returned from these calls
-     * depends on the type of the underlying socket that is in use. For
-     * instance, for a TCP/IP connection it will be a #GTcpConnection.
-     * 
-     * Choosing what type of object to construct is done with the socket
-     * connection factory, and it is possible for 3rd parties to register
-     * custom socket connection types for specific combination of socket
-     * family/type/protocol using g_socket_connection_factory_register_type().
-     * 
-     * To close a #GSocketConnection, use g_io_stream_close(). Closing both
-     * substreams of the #GIOStream separately will not close the underlying
-     * #GSocket.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketConnection} instead.
      */
-    interface SocketConnection extends IOStream {
+    interface ISocketConnection {
         /**
          * Connect #connection to the specified remote address.
          * @param address a #GSocketAddress specifying the remote address.
@@ -13487,9 +14261,8 @@ declare namespace imports.gi.Gio {
          * @param address a #GSocketAddress specifying the remote address.
          * @param cancellable a %GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        connect_async(address: SocketAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_async(address: SocketAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Gets the result of a g_socket_connection_connect_async() call.
          * @param result the #GAsyncResult
@@ -13530,7 +14303,33 @@ declare namespace imports.gi.Gio {
         is_connected(): boolean;
     }
 
-    var SocketConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketConnection} instead.
+     */
+    type SocketConnectionMixin = ISocketConnection & IIOStream;
+
+    /**
+     * #GSocketConnection is a #GIOStream for a connected socket. They
+     * can be created either by #GSocketClient when connecting to a host,
+     * or by #GSocketListener when accepting a new client.
+     * 
+     * The type of the #GSocketConnection object returned from these calls
+     * depends on the type of the underlying socket that is in use. For
+     * instance, for a TCP/IP connection it will be a #GTcpConnection.
+     * 
+     * Choosing what type of object to construct is done with the socket
+     * connection factory, and it is possible for 3rd parties to register
+     * custom socket connection types for specific combination of socket
+     * family/type/protocol using g_socket_connection_factory_register_type().
+     * 
+     * To close a #GSocketConnection, use g_io_stream_close(). Closing both
+     * substreams of the #GIOStream separately will not close the underlying
+     * #GSocket.
+     */
+    interface SocketConnection extends SocketConnectionMixin { }
+
+    class SocketConnection {
+        constructor();
         /**
          * Looks up the #GType to be used when creating socket connections on
          * sockets with the specified #family, #type and #protocol_id.
@@ -13541,7 +14340,7 @@ declare namespace imports.gi.Gio {
          * @param protocol_id a protocol id
          * @returns a #GType
          */
-        factory_lookup_type(family: SocketFamily, _type: SocketType, protocol_id: number): GObject.Type;
+        static factory_lookup_type(family: SocketFamily, _type: SocketType, protocol_id: number): GObject.Type;
         /**
          * Looks up the #GType to be used when creating socket connections on
          * sockets with the specified #family, #type and #protocol.
@@ -13552,32 +14351,13 @@ declare namespace imports.gi.Gio {
          * @param _type a #GSocketType
          * @param protocol a protocol id
          */
-        factory_register_type(g_type: GObject.Type, family: SocketFamily, _type: SocketType, protocol: number): void;
+        static factory_register_type(g_type: GObject.Type, family: SocketFamily, _type: SocketType, protocol: number): void;
     }
 
-    /**
-     * A #GSocketControlMessage is a special-purpose utility message that
-     * can be sent to or received from a #GSocket. These types of
-     * messages are often called "ancillary data".
-     * 
-     * The message can represent some sort of special instruction to or
-     * information from the socket or can represent a special kind of
-     * transfer to the peer (for example, sending a file descriptor over
-     * a UNIX socket).
-     * 
-     * These messages are sent with g_socket_send_message() and received
-     * with g_socket_receive_message().
-     * 
-     * To extend the set of control message that can be sent, subclass this
-     * class and override the get_size, get_level, get_type and serialize
-     * methods.
-     * 
-     * To extend the set of control messages that can be received, subclass
-     * this class and implement the deserialize method. Also, make sure your
-     * class is registered with the GType typesystem before calling
-     * g_socket_receive_message() to read such a message.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketControlMessage} instead.
      */
-    interface SocketControlMessage extends GObject.Object {
+    interface ISocketControlMessage {
         /**
          * Returns the "level" (i.e. the originating protocol) of the control message.
          * This is often SOL_SOCKET.
@@ -13608,7 +14388,37 @@ declare namespace imports.gi.Gio {
         serialize(data: any): void;
     }
 
-    var SocketControlMessage: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketControlMessage} instead.
+     */
+    type SocketControlMessageMixin = ISocketControlMessage & GObject.IObject;
+
+    /**
+     * A #GSocketControlMessage is a special-purpose utility message that
+     * can be sent to or received from a #GSocket. These types of
+     * messages are often called "ancillary data".
+     * 
+     * The message can represent some sort of special instruction to or
+     * information from the socket or can represent a special kind of
+     * transfer to the peer (for example, sending a file descriptor over
+     * a UNIX socket).
+     * 
+     * These messages are sent with g_socket_send_message() and received
+     * with g_socket_receive_message().
+     * 
+     * To extend the set of control message that can be sent, subclass this
+     * class and override the get_size, get_level, get_type and serialize
+     * methods.
+     * 
+     * To extend the set of control messages that can be received, subclass
+     * this class and implement the deserialize method. Also, make sure your
+     * class is registered with the GType typesystem before calling
+     * g_socket_receive_message() to read such a message.
+     */
+    interface SocketControlMessage extends SocketControlMessageMixin { }
+
+    class SocketControlMessage {
+        constructor();
         /**
          * Tries to deserialize a socket control message of a given
          * #level and #type. This will ask all known (to GType) subclasses
@@ -13623,26 +14433,13 @@ declare namespace imports.gi.Gio {
          * @param data 
          * @returns the deserialized message or %NULL
          */
-        deserialize(level: number, _type: number, size: number, data: number[]): SocketControlMessage;
+        static deserialize(level: number, _type: number, size: number, data: number[]): SocketControlMessage;
     }
 
-    /**
-     * A #GSocketListener is an object that keeps track of a set
-     * of server sockets and helps you accept sockets from any of the
-     * socket, either sync or async.
-     * 
-     * Add addresses and ports to listen on using g_socket_listener_add_address()
-     * and g_socket_listener_add_inet_port(). These will be listened on until
-     * g_socket_listener_close() is called. Dropping your final reference to the
-     * #GSocketListener will not cause g_socket_listener_close() to be called
-     * implicitly, as some references to the #GSocketListener may be held
-     * internally.
-     * 
-     * If you want to implement a network server, also look at #GSocketService
-     * and #GThreadedSocketService which are subclasses of #GSocketListener
-     * that make this even easier.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketListener} instead.
      */
-    interface SocketListener extends GObject.Object {
+    interface ISocketListener {
         /**
          * Blocks waiting for a client to connect to any of the sockets added
          * to the listener. Returns a #GSocketConnection for the socket that was
@@ -13668,9 +14465,8 @@ declare namespace imports.gi.Gio {
          * to get the result of the operation.
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        accept_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        accept_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async accept operation. See g_socket_listener_accept_async()
          * @param result a #GAsyncResult.
@@ -13706,9 +14502,8 @@ declare namespace imports.gi.Gio {
          * to get the result of the operation.
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data for the callback
          */
-        accept_socket_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        accept_socket_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async accept operation. See g_socket_listener_accept_socket_async()
          * @param result a #GAsyncResult.
@@ -13815,45 +14610,44 @@ declare namespace imports.gi.Gio {
         set_backlog(listen_backlog: number): void;
     }
 
-    var SocketListener: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketListener} instead.
+     */
+    type SocketListenerMixin = ISocketListener & GObject.IObject;
+
+    /**
+     * A #GSocketListener is an object that keeps track of a set
+     * of server sockets and helps you accept sockets from any of the
+     * socket, either sync or async.
+     * 
+     * Add addresses and ports to listen on using g_socket_listener_add_address()
+     * and g_socket_listener_add_inet_port(). These will be listened on until
+     * g_socket_listener_close() is called. Dropping your final reference to the
+     * #GSocketListener will not cause g_socket_listener_close() to be called
+     * implicitly, as some references to the #GSocketListener may be held
+     * internally.
+     * 
+     * If you want to implement a network server, also look at #GSocketService
+     * and #GThreadedSocketService which are subclasses of #GSocketListener
+     * that make this even easier.
+     */
+    interface SocketListener extends SocketListenerMixin { }
+
+    class SocketListener {
+        constructor();
         /**
          * Creates a new #GSocketListener with no sockets to listen for.
          * New listeners can be added with e.g. g_socket_listener_add_address()
          * or g_socket_listener_add_inet_port().
          * @returns a new #GSocketListener.
          */
-        new(): SocketListener;
+        static new(): SocketListener;
     }
 
-    /**
-     * A #GSocketService is an object that represents a service that
-     * is provided to the network or over local sockets.  When a new
-     * connection is made to the service the #GSocketService::incoming
-     * signal is emitted.
-     * 
-     * A #GSocketService is a subclass of #GSocketListener and you need
-     * to add the addresses you want to accept connections on with the
-     * #GSocketListener APIs.
-     * 
-     * There are two options for implementing a network service based on
-     * #GSocketService. The first is to create the service using
-     * g_socket_service_new() and to connect to the #GSocketService::incoming
-     * signal. The second is to subclass #GSocketService and override the
-     * default signal handler implementation.
-     * 
-     * In either case, the handler must immediately return, or else it
-     * will block additional incoming connections from being serviced.
-     * If you are interested in writing connection handlers that contain
-     * blocking code then see #GThreadedSocketService.
-     * 
-     * The socket service runs on the main loop of the
-     * [thread-default context][g-main-context-push-thread-default-context]
-     * of the thread it is created in, and is not
-     * threadsafe in general. However, the calls to start and stop the
-     * service are thread-safe so these can be used from threads that
-     * handle incoming clients.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketService} instead.
      */
-    interface SocketService extends SocketListener {
+    interface ISocketService {
         /**
          * Check whether the service is active or not. An active
          * service will accept new clients that connect, while
@@ -13892,7 +14686,43 @@ declare namespace imports.gi.Gio {
         stop(): void;
     }
 
-    var SocketService: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketService} instead.
+     */
+    type SocketServiceMixin = ISocketService & ISocketListener;
+
+    /**
+     * A #GSocketService is an object that represents a service that
+     * is provided to the network or over local sockets.  When a new
+     * connection is made to the service the #GSocketService::incoming
+     * signal is emitted.
+     * 
+     * A #GSocketService is a subclass of #GSocketListener and you need
+     * to add the addresses you want to accept connections on with the
+     * #GSocketListener APIs.
+     * 
+     * There are two options for implementing a network service based on
+     * #GSocketService. The first is to create the service using
+     * g_socket_service_new() and to connect to the #GSocketService::incoming
+     * signal. The second is to subclass #GSocketService and override the
+     * default signal handler implementation.
+     * 
+     * In either case, the handler must immediately return, or else it
+     * will block additional incoming connections from being serviced.
+     * If you are interested in writing connection handlers that contain
+     * blocking code then see #GThreadedSocketService.
+     * 
+     * The socket service runs on the main loop of the
+     * [thread-default context][g-main-context-push-thread-default-context]
+     * of the thread it is created in, and is not
+     * threadsafe in general. However, the calls to start and stop the
+     * service are thread-safe so these can be used from threads that
+     * handle incoming clients.
+     */
+    interface SocketService extends SocketServiceMixin { }
+
+    class SocketService {
+        constructor();
         /**
          * Creates a new #GSocketService with no sockets to listen for.
          * New listeners can be added with e.g. g_socket_listener_add_address()
@@ -13903,66 +14733,13 @@ declare namespace imports.gi.Gio {
          * called before.
          * @returns a new #GSocketService.
          */
-        new(): SocketService;
+        static new(): SocketService;
     }
 
-    /**
-     * #GSubprocess allows the creation of and interaction with child
-     * processes.
-     * 
-     * Processes can be communicated with using standard GIO-style APIs (ie:
-     * #GInputStream, #GOutputStream).  There are GIO-style APIs to wait for
-     * process termination (ie: cancellable and with an asynchronous
-     * variant).
-     * 
-     * There is an API to force a process to terminate, as well as a
-     * race-free API for sending UNIX signals to a subprocess.
-     * 
-     * One major advantage that GIO brings over the core GLib library is
-     * comprehensive API for asynchronous I/O, such
-     * g_output_stream_splice_async().  This makes GSubprocess
-     * significantly more powerful and flexible than equivalent APIs in
-     * some other languages such as the `subprocess.py`
-     * included with Python.  For example, using #GSubprocess one could
-     * create two child processes, reading standard output from the first,
-     * processing it, and writing to the input stream of the second, all
-     * without blocking the main loop.
-     * 
-     * A powerful g_subprocess_communicate() API is provided similar to the
-     * `communicate()` method of `subprocess.py`. This enables very easy
-     * interaction with a subprocess that has been opened with pipes.
-     * 
-     * #GSubprocess defaults to tight control over the file descriptors open
-     * in the child process, avoiding dangling-fd issues that are caused by
-     * a simple fork()/exec().  The only open file descriptors in the
-     * spawned process are ones that were explicitly specified by the
-     * #GSubprocess API (unless %G_SUBPROCESS_FLAGS_INHERIT_FDS was
-     * specified).
-     * 
-     * #GSubprocess will quickly reap all child processes as they exit,
-     * avoiding "zombie processes" remaining around for long periods of
-     * time.  g_subprocess_wait() can be used to wait for this to happen,
-     * but it will happen even without the call being explicitly made.
-     * 
-     * As a matter of principle, #GSubprocess has no API that accepts
-     * shell-style space-separated strings.  It will, however, match the
-     * typical shell behaviour of searching the PATH for executables that do
-     * not contain a directory separator in their name.
-     * 
-     * #GSubprocess attempts to have a very simple API for most uses (ie:
-     * spawning a subprocess with arguments and support for most typical
-     * kinds of input and output redirection).  See g_subprocess_new(). The
-     * #GSubprocessLauncher API is provided for more complicated cases
-     * (advanced types of redirection, environment variable manipulation,
-     * change of working directory, child setup functions, etc).
-     * 
-     * A typical use of #GSubprocess will involve calling
-     * g_subprocess_new(), followed by g_subprocess_wait_async() or
-     * g_subprocess_wait().  After the process exits, the status can be
-     * checked using functions such as g_subprocess_get_if_exited() (which
-     * are similar to the familiar WIFEXITED-style POSIX macros).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Subprocess} instead.
      */
-    interface Subprocess extends GObject.Object, Initable {
+    interface ISubprocess {
         /**
          * Communicate with the subprocess until it terminates, and all input
          * and output has been completed.
@@ -14018,9 +14795,8 @@ declare namespace imports.gi.Gio {
          * @param stdin_buf Input data, or %NULL
          * @param cancellable Cancellable
          * @param callback Callback
-         * @param user_data User data
          */
-        communicate_async(stdin_buf: GLib.Bytes, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        communicate_async(stdin_buf: GLib.Bytes, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Complete an invocation of g_subprocess_communicate_async().
          * @param result Result
@@ -14048,9 +14824,8 @@ declare namespace imports.gi.Gio {
          * @param stdin_buf Input data, or %NULL
          * @param cancellable Cancellable
          * @param callback Callback
-         * @param user_data User data
          */
-        communicate_utf8_async(stdin_buf: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        communicate_utf8_async(stdin_buf: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Complete an invocation of g_subprocess_communicate_utf8_async().
          * @param result Result
@@ -14206,9 +14981,8 @@ declare namespace imports.gi.Gio {
          * This is the asynchronous version of g_subprocess_wait().
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback to call when the operation is complete
-         * @param user_data user_data for #callback
          */
-        wait_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        wait_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Combines g_subprocess_wait() with g_spawn_check_wait_status().
          * @param cancellable a #GCancellable
@@ -14222,9 +14996,8 @@ declare namespace imports.gi.Gio {
          * This is the asynchronous version of g_subprocess_wait_check().
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback to call when the operation is complete
-         * @param user_data user_data for #callback
          */
-        wait_check_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        wait_check_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Collects the result of a previous call to
          * g_subprocess_wait_check_async().
@@ -14241,7 +15014,71 @@ declare namespace imports.gi.Gio {
         wait_finish(result: AsyncResult): boolean;
     }
 
-    var Subprocess: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Subprocess} instead.
+     */
+    type SubprocessMixin = ISubprocess & GObject.IObject & IInitable;
+
+    /**
+     * #GSubprocess allows the creation of and interaction with child
+     * processes.
+     * 
+     * Processes can be communicated with using standard GIO-style APIs (ie:
+     * #GInputStream, #GOutputStream).  There are GIO-style APIs to wait for
+     * process termination (ie: cancellable and with an asynchronous
+     * variant).
+     * 
+     * There is an API to force a process to terminate, as well as a
+     * race-free API for sending UNIX signals to a subprocess.
+     * 
+     * One major advantage that GIO brings over the core GLib library is
+     * comprehensive API for asynchronous I/O, such
+     * g_output_stream_splice_async().  This makes GSubprocess
+     * significantly more powerful and flexible than equivalent APIs in
+     * some other languages such as the `subprocess.py`
+     * included with Python.  For example, using #GSubprocess one could
+     * create two child processes, reading standard output from the first,
+     * processing it, and writing to the input stream of the second, all
+     * without blocking the main loop.
+     * 
+     * A powerful g_subprocess_communicate() API is provided similar to the
+     * `communicate()` method of `subprocess.py`. This enables very easy
+     * interaction with a subprocess that has been opened with pipes.
+     * 
+     * #GSubprocess defaults to tight control over the file descriptors open
+     * in the child process, avoiding dangling-fd issues that are caused by
+     * a simple fork()/exec().  The only open file descriptors in the
+     * spawned process are ones that were explicitly specified by the
+     * #GSubprocess API (unless %G_SUBPROCESS_FLAGS_INHERIT_FDS was
+     * specified).
+     * 
+     * #GSubprocess will quickly reap all child processes as they exit,
+     * avoiding "zombie processes" remaining around for long periods of
+     * time.  g_subprocess_wait() can be used to wait for this to happen,
+     * but it will happen even without the call being explicitly made.
+     * 
+     * As a matter of principle, #GSubprocess has no API that accepts
+     * shell-style space-separated strings.  It will, however, match the
+     * typical shell behaviour of searching the PATH for executables that do
+     * not contain a directory separator in their name.
+     * 
+     * #GSubprocess attempts to have a very simple API for most uses (ie:
+     * spawning a subprocess with arguments and support for most typical
+     * kinds of input and output redirection).  See g_subprocess_new(). The
+     * #GSubprocessLauncher API is provided for more complicated cases
+     * (advanced types of redirection, environment variable manipulation,
+     * change of working directory, child setup functions, etc).
+     * 
+     * A typical use of #GSubprocess will involve calling
+     * g_subprocess_new(), followed by g_subprocess_wait_async() or
+     * g_subprocess_wait().  After the process exits, the status can be
+     * checked using functions such as g_subprocess_get_if_exited() (which
+     * are similar to the familiar WIFEXITED-style POSIX macros).
+     */
+    interface Subprocess extends SubprocessMixin { }
+
+    class Subprocess {
+        constructor();
         /**
          * Create a new process with the given flags and varargs argument
          * list.  By default, matching the g_spawn_async() defaults, the
@@ -14256,7 +15093,7 @@ declare namespace imports.gi.Gio {
          * @returns A newly created #GSubprocess, or %NULL on error (and #error
          *   will be set)
          */
-        new(flags: SubprocessFlags, error: GLib.Error, argv0: string): Subprocess;
+        static new(flags: SubprocessFlags, error: GLib.Error, argv0: string): Subprocess;
         /**
          * Create a new process with the given flags and argument list.
          * 
@@ -14266,20 +15103,13 @@ declare namespace imports.gi.Gio {
          * @returns A newly created #GSubprocess, or %NULL on error (and #error
          *   will be set)
          */
-        newv(argv: string[], flags: SubprocessFlags): Subprocess;
+        static newv(argv: string[], flags: SubprocessFlags): Subprocess;
     }
 
-    /**
-     * This class contains a set of options for launching child processes,
-     * such as where its standard input and output will be directed, the
-     * argument list, the environment, and more.
-     * 
-     * While the #GSubprocess class has high level functions covering
-     * popular cases, use of this class allows access to more advanced
-     * options.  It can also be used to launch multiple subprocesses with
-     * a similar configuration.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SubprocessLauncher} instead.
      */
-    interface SubprocessLauncher extends GObject.Object {
+    interface ISubprocessLauncher {
         /**
          * Closes all the file descriptors previously passed to the object with
          * g_subprocess_launcher_take_fd(), g_subprocess_launcher_take_stderr_fd(), etc.
@@ -14319,10 +15149,9 @@ declare namespace imports.gi.Gio {
          * 
          * Child setup functions are only available on UNIX.
          * @param child_setup a #GSpawnChildSetupFunc to use as the child setup function
-         * @param user_data user data for #child_setup
          * @param destroy_notify a #GDestroyNotify for #user_data
          */
-        set_child_setup(child_setup: GLib.SpawnChildSetupFunc, user_data: any, destroy_notify: GLib.DestroyNotify): void;
+        set_child_setup(child_setup: GLib.SpawnChildSetupFunc, destroy_notify: GLib.DestroyNotify): void;
         /**
          * Sets the current working directory that processes will be launched
          * with.
@@ -14536,7 +15365,25 @@ declare namespace imports.gi.Gio {
         unsetenv(variable: string): void;
     }
 
-    var SubprocessLauncher: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SubprocessLauncher} instead.
+     */
+    type SubprocessLauncherMixin = ISubprocessLauncher & GObject.IObject;
+
+    /**
+     * This class contains a set of options for launching child processes,
+     * such as where its standard input and output will be directed, the
+     * argument list, the environment, and more.
+     * 
+     * While the #GSubprocess class has high level functions covering
+     * popular cases, use of this class allows access to more advanced
+     * options.  It can also be used to launch multiple subprocesses with
+     * a similar configuration.
+     */
+    interface SubprocessLauncher extends SubprocessLauncherMixin { }
+
+    class SubprocessLauncher {
+        constructor();
         /**
          * Creates a new #GSubprocessLauncher.
          * 
@@ -14546,8 +15393,365 @@ declare namespace imports.gi.Gio {
          * @param flags #GSubprocessFlags
          * @returns 
          */
-        new(flags: SubprocessFlags): SubprocessLauncher;
+        static new(flags: SubprocessFlags): SubprocessLauncher;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Task} instead.
+     */
+    interface ITask {
+        /**
+         * A utility function for dealing with async operations where you need
+         * to wait for a #GSource to trigger. Attaches #source to #task's
+         * #GMainContext with #task's [priority][io-priority], and sets #source's
+         * callback to #callback, with #task as the callback's `user_data`.
+         * 
+         * It will set the #source’s name to the task’s name (as set with
+         * g_task_set_name()), if one has been set.
+         * 
+         * This takes a reference on #task until #source is destroyed.
+         * @param source the source to attach
+         * @param callback the callback to invoke when #source triggers
+         */
+        attach_source(source: GLib.Source, callback: GLib.SourceFunc): void;
+        /**
+         * Gets #task's #GCancellable
+         * @returns #task's #GCancellable
+         */
+        get_cancellable(): Cancellable;
+        /**
+         * Gets #task's check-cancellable flag. See
+         * g_task_set_check_cancellable() for more details.
+         * @returns 
+         */
+        get_check_cancellable(): boolean;
+        /**
+         * Gets the value of #GTask:completed. This changes from %FALSE to %TRUE after
+         * the task’s callback is invoked, and will return %FALSE if called from inside
+         * the callback.
+         * @returns %TRUE if the task has completed, %FALSE otherwise.
+         */
+        get_completed(): boolean;
+        /**
+         * Gets the #GMainContext that #task will return its result in (that
+         * is, the context that was the
+         * [thread-default main context][g-main-context-push-thread-default]
+         * at the point when #task was created).
+         * 
+         * This will always return a non-%NULL value, even if the task's
+         * context is the default #GMainContext.
+         * @returns #task's #GMainContext
+         */
+        get_context(): GLib.MainContext;
+        /**
+         * Gets #task’s name. See g_task_set_name().
+         * @returns #task’s name, or %NULL
+         */
+        get_name(): string;
+        /**
+         * Gets #task's priority
+         * @returns #task's priority
+         */
+        get_priority(): number;
+        /**
+         * Gets #task's return-on-cancel flag. See
+         * g_task_set_return_on_cancel() for more details.
+         * @returns 
+         */
+        get_return_on_cancel(): boolean;
+        /**
+         * Gets the source object from #task. Like
+         * g_async_result_get_source_object(), but does not ref the object.
+         * @returns #task's source object, or %NULL
+         */
+        get_source_object(): GObject.Object;
+        /**
+         * Gets #task's source tag. See g_task_set_source_tag().
+         * @returns #task's source tag
+         */
+        get_source_tag(): any;
+        /**
+         * Gets #task's `task_data`.
+         * @returns #task's `task_data`.
+         */
+        get_task_data(): any;
+        /**
+         * Tests if #task resulted in an error.
+         * @returns %TRUE if the task resulted in an error, %FALSE otherwise.
+         */
+        had_error(): boolean;
+        /**
+         * Gets the result of #task as a #gboolean.
+         * 
+         * If the task resulted in an error, or was cancelled, then this will
+         * instead return %FALSE and set #error.
+         * 
+         * Since this method transfers ownership of the return value (or
+         * error) to the caller, you may only call it once.
+         * @returns the task result, or %FALSE on error
+         */
+        propagate_boolean(): boolean;
+        /**
+         * Gets the result of #task as an integer (#gssize).
+         * 
+         * If the task resulted in an error, or was cancelled, then this will
+         * instead return -1 and set #error.
+         * 
+         * Since this method transfers ownership of the return value (or
+         * error) to the caller, you may only call it once.
+         * @returns the task result, or -1 on error
+         */
+        propagate_int(): number;
+        /**
+         * Gets the result of #task as a pointer, and transfers ownership
+         * of that value to the caller.
+         * 
+         * If the task resulted in an error, or was cancelled, then this will
+         * instead return %NULL and set #error.
+         * 
+         * Since this method transfers ownership of the return value (or
+         * error) to the caller, you may only call it once.
+         * @returns the task result, or %NULL on error
+         */
+        propagate_pointer(): any;
+        /**
+         * Gets the result of #task as a #GValue, and transfers ownership of
+         * that value to the caller. As with g_task_return_value(), this is
+         * a generic low-level method; g_task_propagate_pointer() and the like
+         * will usually be more useful for C code.
+         * 
+         * If the task resulted in an error, or was cancelled, then this will
+         * instead set #error and return %FALSE.
+         * 
+         * Since this method transfers ownership of the return value (or
+         * error) to the caller, you may only call it once.
+         * @param value return location for the #GValue
+         * @returns %TRUE if #task succeeded, %FALSE on error.
+         */
+        propagate_value(value: GObject.Value): boolean;
+        /**
+         * Sets #task's result to #result and completes the task (see
+         * g_task_return_pointer() for more discussion of exactly what this
+         * means).
+         * @param result the #gboolean result of a task function.
+         */
+        return_boolean(result: boolean): void;
+        /**
+         * Sets #task's result to #error (which #task assumes ownership of)
+         * and completes the task (see g_task_return_pointer() for more
+         * discussion of exactly what this means).
+         * 
+         * Note that since the task takes ownership of #error, and since the
+         * task may be completed before returning from g_task_return_error(),
+         * you cannot assume that #error is still valid after calling this.
+         * Call g_error_copy() on the error if you need to keep a local copy
+         * as well.
+         * 
+         * See also g_task_return_new_error().
+         * @param error the #GError result of a task function.
+         */
+        return_error(error: GLib.Error): void;
+        /**
+         * Checks if #task's #GCancellable has been cancelled, and if so, sets
+         * #task's error accordingly and completes the task (see
+         * g_task_return_pointer() for more discussion of exactly what this
+         * means).
+         * @returns %TRUE if #task has been cancelled, %FALSE if not
+         */
+        return_error_if_cancelled(): boolean;
+        /**
+         * Sets #task's result to #result and completes the task (see
+         * g_task_return_pointer() for more discussion of exactly what this
+         * means).
+         * @param result the integer (#gssize) result of a task function.
+         */
+        return_int(result: number): void;
+        /**
+         * Sets #task's result to a new #GError created from #domain, #code,
+         * #format, and the remaining arguments, and completes the task (see
+         * g_task_return_pointer() for more discussion of exactly what this
+         * means).
+         * 
+         * See also g_task_return_error().
+         * @param domain a #GQuark.
+         * @param code an error code.
+         * @param format a string with format characters.
+         */
+        return_new_error(domain: GLib.Quark, code: number, format: string): void;
+        /**
+         * Sets #task's result to #result and completes the task. If #result
+         * is not %NULL, then #result_destroy will be used to free #result if
+         * the caller does not take ownership of it with
+         * g_task_propagate_pointer().
+         * 
+         * "Completes the task" means that for an ordinary asynchronous task
+         * it will either invoke the task's callback, or else queue that
+         * callback to be invoked in the proper #GMainContext, or in the next
+         * iteration of the current #GMainContext. For a task run via
+         * g_task_run_in_thread() or g_task_run_in_thread_sync(), calling this
+         * method will save #result to be returned to the caller later, but
+         * the task will not actually be completed until the #GTaskThreadFunc
+         * exits.
+         * 
+         * Note that since the task may be completed before returning from
+         * g_task_return_pointer(), you cannot assume that #result is still
+         * valid after calling this, unless you are still holding another
+         * reference on it.
+         * @param result the pointer result of a task
+         *     function
+         * @param result_destroy a #GDestroyNotify function.
+         */
+        return_pointer(result: any, result_destroy: GLib.DestroyNotify): void;
+        /**
+         * Sets #task's result to #result (by copying it) and completes the task.
+         * 
+         * If #result is %NULL then a #GValue of type #G_TYPE_POINTER
+         * with a value of %NULL will be used for the result.
+         * 
+         * This is a very generic low-level method intended primarily for use
+         * by language bindings; for C code, g_task_return_pointer() and the
+         * like will normally be much easier to use.
+         * @param result the #GValue result of
+         *                                      a task function
+         */
+        return_value(result: GObject.Value): void;
+        /**
+         * Runs #task_func in another thread. When #task_func returns, #task's
+         * #GAsyncReadyCallback will be invoked in #task's #GMainContext.
+         * 
+         * This takes a ref on #task until the task completes.
+         * 
+         * See #GTaskThreadFunc for more details about how #task_func is handled.
+         * 
+         * Although GLib currently rate-limits the tasks queued via
+         * g_task_run_in_thread(), you should not assume that it will always
+         * do this. If you have a very large number of tasks to run (several tens of
+         * tasks), but don't want them to all run at once, you should only queue a
+         * limited number of them (around ten) at a time.
+         * @param task_func a #GTaskThreadFunc
+         */
+        run_in_thread(task_func: TaskThreadFunc): void;
+        /**
+         * Runs #task_func in another thread, and waits for it to return or be
+         * cancelled. You can use g_task_propagate_pointer(), etc, afterward
+         * to get the result of #task_func.
+         * 
+         * See #GTaskThreadFunc for more details about how #task_func is handled.
+         * 
+         * Normally this is used with tasks created with a %NULL
+         * `callback`, but note that even if the task does
+         * have a callback, it will not be invoked when #task_func returns.
+         * #GTask:completed will be set to %TRUE just before this function returns.
+         * 
+         * Although GLib currently rate-limits the tasks queued via
+         * g_task_run_in_thread_sync(), you should not assume that it will
+         * always do this. If you have a very large number of tasks to run,
+         * but don't want them to all run at once, you should only queue a
+         * limited number of them at a time.
+         * @param task_func a #GTaskThreadFunc
+         */
+        run_in_thread_sync(task_func: TaskThreadFunc): void;
+        /**
+         * Sets or clears #task's check-cancellable flag. If this is %TRUE
+         * (the default), then g_task_propagate_pointer(), etc, and
+         * g_task_had_error() will check the task's #GCancellable first, and
+         * if it has been cancelled, then they will consider the task to have
+         * returned an "Operation was cancelled" error
+         * (%G_IO_ERROR_CANCELLED), regardless of any other error or return
+         * value the task may have had.
+         * 
+         * If #check_cancellable is %FALSE, then the #GTask will not check the
+         * cancellable itself, and it is up to #task's owner to do this (eg,
+         * via g_task_return_error_if_cancelled()).
+         * 
+         * If you are using g_task_set_return_on_cancel() as well, then
+         * you must leave check-cancellable set %TRUE.
+         * @param check_cancellable whether #GTask will check the state of
+         *   its #GCancellable for you.
+         */
+        set_check_cancellable(check_cancellable: boolean): void;
+        /**
+         * Sets #task’s name, used in debugging and profiling. The name defaults to
+         * %NULL.
+         * 
+         * The task name should describe in a human readable way what the task does.
+         * For example, ‘Open file’ or ‘Connect to network host’. It is used to set the
+         * name of the #GSource used for idle completion of the task.
+         * 
+         * This function may only be called before the #task is first used in a thread
+         * other than the one it was constructed in.
+         * @param name a human readable name for the task, or %NULL to unset it
+         */
+        set_name(name: string): void;
+        /**
+         * Sets #task's priority. If you do not call this, it will default to
+         * %G_PRIORITY_DEFAULT.
+         * 
+         * This will affect the priority of #GSources created with
+         * g_task_attach_source() and the scheduling of tasks run in threads,
+         * and can also be explicitly retrieved later via
+         * g_task_get_priority().
+         * @param priority the [priority][io-priority] of the request
+         */
+        set_priority(priority: number): void;
+        /**
+         * Sets or clears #task's return-on-cancel flag. This is only
+         * meaningful for tasks run via g_task_run_in_thread() or
+         * g_task_run_in_thread_sync().
+         * 
+         * If #return_on_cancel is %TRUE, then cancelling #task's
+         * #GCancellable will immediately cause it to return, as though the
+         * task's #GTaskThreadFunc had called
+         * g_task_return_error_if_cancelled() and then returned.
+         * 
+         * This allows you to create a cancellable wrapper around an
+         * uninterruptible function. The #GTaskThreadFunc just needs to be
+         * careful that it does not modify any externally-visible state after
+         * it has been cancelled. To do that, the thread should call
+         * g_task_set_return_on_cancel() again to (atomically) set
+         * return-on-cancel %FALSE before making externally-visible changes;
+         * if the task gets cancelled before the return-on-cancel flag could
+         * be changed, g_task_set_return_on_cancel() will indicate this by
+         * returning %FALSE.
+         * 
+         * You can disable and re-enable this flag multiple times if you wish.
+         * If the task's #GCancellable is cancelled while return-on-cancel is
+         * %FALSE, then calling g_task_set_return_on_cancel() to set it %TRUE
+         * again will cause the task to be cancelled at that point.
+         * 
+         * If the task's #GCancellable is already cancelled before you call
+         * g_task_run_in_thread()/g_task_run_in_thread_sync(), then the
+         * #GTaskThreadFunc will still be run (for consistency), but the task
+         * will also be completed right away.
+         * @param return_on_cancel whether the task returns automatically when
+         *   it is cancelled.
+         * @returns %TRUE if #task's return-on-cancel flag was changed to
+         *   match #return_on_cancel. %FALSE if #task has already been
+         *   cancelled.
+         */
+        set_return_on_cancel(return_on_cancel: boolean): boolean;
+        /**
+         * Sets #task's source tag. You can use this to tag a task return
+         * value with a particular pointer (usually a pointer to the function
+         * doing the tagging) and then later check it using
+         * g_task_get_source_tag() (or g_async_result_is_tagged()) in the
+         * task's "finish" function, to figure out if the response came from a
+         * particular place.
+         * @param source_tag an opaque pointer indicating the source of this task
+         */
+        set_source_tag(source_tag: any): void;
+        /**
+         * Sets #task's task data (freeing the existing task data, if any).
+         * @param task_data task-specific data
+         * @param task_data_destroy #GDestroyNotify for #task_data
+         */
+        set_task_data(task_data: any, task_data_destroy: GLib.DestroyNotify): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Task} instead.
+     */
+    type TaskMixin = ITask & GObject.IObject & IAsyncResult;
 
     /**
      * A #GTask represents and manages a cancellable "task".
@@ -15046,356 +16250,10 @@ declare namespace imports.gi.Gio {
      *   function (for "short-circuit" results, such as when passing
      *   0 to g_input_stream_read_async()).
      */
-    interface Task extends GObject.Object, AsyncResult {
-        /**
-         * A utility function for dealing with async operations where you need
-         * to wait for a #GSource to trigger. Attaches #source to #task's
-         * #GMainContext with #task's [priority][io-priority], and sets #source's
-         * callback to #callback, with #task as the callback's `user_data`.
-         * 
-         * It will set the #source’s name to the task’s name (as set with
-         * g_task_set_name()), if one has been set.
-         * 
-         * This takes a reference on #task until #source is destroyed.
-         * @param source the source to attach
-         * @param callback the callback to invoke when #source triggers
-         */
-        attach_source(source: GLib.Source, callback: GLib.SourceFunc): void;
-        /**
-         * Gets #task's #GCancellable
-         * @returns #task's #GCancellable
-         */
-        get_cancellable(): Cancellable;
-        /**
-         * Gets #task's check-cancellable flag. See
-         * g_task_set_check_cancellable() for more details.
-         * @returns 
-         */
-        get_check_cancellable(): boolean;
-        /**
-         * Gets the value of #GTask:completed. This changes from %FALSE to %TRUE after
-         * the task’s callback is invoked, and will return %FALSE if called from inside
-         * the callback.
-         * @returns %TRUE if the task has completed, %FALSE otherwise.
-         */
-        get_completed(): boolean;
-        /**
-         * Gets the #GMainContext that #task will return its result in (that
-         * is, the context that was the
-         * [thread-default main context][g-main-context-push-thread-default]
-         * at the point when #task was created).
-         * 
-         * This will always return a non-%NULL value, even if the task's
-         * context is the default #GMainContext.
-         * @returns #task's #GMainContext
-         */
-        get_context(): GLib.MainContext;
-        /**
-         * Gets #task’s name. See g_task_set_name().
-         * @returns #task’s name, or %NULL
-         */
-        get_name(): string;
-        /**
-         * Gets #task's priority
-         * @returns #task's priority
-         */
-        get_priority(): number;
-        /**
-         * Gets #task's return-on-cancel flag. See
-         * g_task_set_return_on_cancel() for more details.
-         * @returns 
-         */
-        get_return_on_cancel(): boolean;
-        /**
-         * Gets the source object from #task. Like
-         * g_async_result_get_source_object(), but does not ref the object.
-         * @returns #task's source object, or %NULL
-         */
-        get_source_object(): GObject.Object;
-        /**
-         * Gets #task's source tag. See g_task_set_source_tag().
-         * @returns #task's source tag
-         */
-        get_source_tag(): any;
-        /**
-         * Gets #task's `task_data`.
-         * @returns #task's `task_data`.
-         */
-        get_task_data(): any;
-        /**
-         * Tests if #task resulted in an error.
-         * @returns %TRUE if the task resulted in an error, %FALSE otherwise.
-         */
-        had_error(): boolean;
-        /**
-         * Gets the result of #task as a #gboolean.
-         * 
-         * If the task resulted in an error, or was cancelled, then this will
-         * instead return %FALSE and set #error.
-         * 
-         * Since this method transfers ownership of the return value (or
-         * error) to the caller, you may only call it once.
-         * @returns the task result, or %FALSE on error
-         */
-        propagate_boolean(): boolean;
-        /**
-         * Gets the result of #task as an integer (#gssize).
-         * 
-         * If the task resulted in an error, or was cancelled, then this will
-         * instead return -1 and set #error.
-         * 
-         * Since this method transfers ownership of the return value (or
-         * error) to the caller, you may only call it once.
-         * @returns the task result, or -1 on error
-         */
-        propagate_int(): number;
-        /**
-         * Gets the result of #task as a pointer, and transfers ownership
-         * of that value to the caller.
-         * 
-         * If the task resulted in an error, or was cancelled, then this will
-         * instead return %NULL and set #error.
-         * 
-         * Since this method transfers ownership of the return value (or
-         * error) to the caller, you may only call it once.
-         * @returns the task result, or %NULL on error
-         */
-        propagate_pointer(): any;
-        /**
-         * Gets the result of #task as a #GValue, and transfers ownership of
-         * that value to the caller. As with g_task_return_value(), this is
-         * a generic low-level method; g_task_propagate_pointer() and the like
-         * will usually be more useful for C code.
-         * 
-         * If the task resulted in an error, or was cancelled, then this will
-         * instead set #error and return %FALSE.
-         * 
-         * Since this method transfers ownership of the return value (or
-         * error) to the caller, you may only call it once.
-         * @param value return location for the #GValue
-         * @returns %TRUE if #task succeeded, %FALSE on error.
-         */
-        propagate_value(value: GObject.Value): boolean;
-        /**
-         * Sets #task's result to #result and completes the task (see
-         * g_task_return_pointer() for more discussion of exactly what this
-         * means).
-         * @param result the #gboolean result of a task function.
-         */
-        return_boolean(result: boolean): void;
-        /**
-         * Sets #task's result to #error (which #task assumes ownership of)
-         * and completes the task (see g_task_return_pointer() for more
-         * discussion of exactly what this means).
-         * 
-         * Note that since the task takes ownership of #error, and since the
-         * task may be completed before returning from g_task_return_error(),
-         * you cannot assume that #error is still valid after calling this.
-         * Call g_error_copy() on the error if you need to keep a local copy
-         * as well.
-         * 
-         * See also g_task_return_new_error().
-         * @param error the #GError result of a task function.
-         */
-        return_error(error: GLib.Error): void;
-        /**
-         * Checks if #task's #GCancellable has been cancelled, and if so, sets
-         * #task's error accordingly and completes the task (see
-         * g_task_return_pointer() for more discussion of exactly what this
-         * means).
-         * @returns %TRUE if #task has been cancelled, %FALSE if not
-         */
-        return_error_if_cancelled(): boolean;
-        /**
-         * Sets #task's result to #result and completes the task (see
-         * g_task_return_pointer() for more discussion of exactly what this
-         * means).
-         * @param result the integer (#gssize) result of a task function.
-         */
-        return_int(result: number): void;
-        /**
-         * Sets #task's result to a new #GError created from #domain, #code,
-         * #format, and the remaining arguments, and completes the task (see
-         * g_task_return_pointer() for more discussion of exactly what this
-         * means).
-         * 
-         * See also g_task_return_error().
-         * @param domain a #GQuark.
-         * @param code an error code.
-         * @param format a string with format characters.
-         */
-        return_new_error(domain: GLib.Quark, code: number, format: string): void;
-        /**
-         * Sets #task's result to #result and completes the task. If #result
-         * is not %NULL, then #result_destroy will be used to free #result if
-         * the caller does not take ownership of it with
-         * g_task_propagate_pointer().
-         * 
-         * "Completes the task" means that for an ordinary asynchronous task
-         * it will either invoke the task's callback, or else queue that
-         * callback to be invoked in the proper #GMainContext, or in the next
-         * iteration of the current #GMainContext. For a task run via
-         * g_task_run_in_thread() or g_task_run_in_thread_sync(), calling this
-         * method will save #result to be returned to the caller later, but
-         * the task will not actually be completed until the #GTaskThreadFunc
-         * exits.
-         * 
-         * Note that since the task may be completed before returning from
-         * g_task_return_pointer(), you cannot assume that #result is still
-         * valid after calling this, unless you are still holding another
-         * reference on it.
-         * @param result the pointer result of a task
-         *     function
-         * @param result_destroy a #GDestroyNotify function.
-         */
-        return_pointer(result: any, result_destroy: GLib.DestroyNotify): void;
-        /**
-         * Sets #task's result to #result (by copying it) and completes the task.
-         * 
-         * If #result is %NULL then a #GValue of type #G_TYPE_POINTER
-         * with a value of %NULL will be used for the result.
-         * 
-         * This is a very generic low-level method intended primarily for use
-         * by language bindings; for C code, g_task_return_pointer() and the
-         * like will normally be much easier to use.
-         * @param result the #GValue result of
-         *                                      a task function
-         */
-        return_value(result: GObject.Value): void;
-        /**
-         * Runs #task_func in another thread. When #task_func returns, #task's
-         * #GAsyncReadyCallback will be invoked in #task's #GMainContext.
-         * 
-         * This takes a ref on #task until the task completes.
-         * 
-         * See #GTaskThreadFunc for more details about how #task_func is handled.
-         * 
-         * Although GLib currently rate-limits the tasks queued via
-         * g_task_run_in_thread(), you should not assume that it will always
-         * do this. If you have a very large number of tasks to run (several tens of
-         * tasks), but don't want them to all run at once, you should only queue a
-         * limited number of them (around ten) at a time.
-         * @param task_func a #GTaskThreadFunc
-         */
-        run_in_thread(task_func: TaskThreadFunc): void;
-        /**
-         * Runs #task_func in another thread, and waits for it to return or be
-         * cancelled. You can use g_task_propagate_pointer(), etc, afterward
-         * to get the result of #task_func.
-         * 
-         * See #GTaskThreadFunc for more details about how #task_func is handled.
-         * 
-         * Normally this is used with tasks created with a %NULL
-         * `callback`, but note that even if the task does
-         * have a callback, it will not be invoked when #task_func returns.
-         * #GTask:completed will be set to %TRUE just before this function returns.
-         * 
-         * Although GLib currently rate-limits the tasks queued via
-         * g_task_run_in_thread_sync(), you should not assume that it will
-         * always do this. If you have a very large number of tasks to run,
-         * but don't want them to all run at once, you should only queue a
-         * limited number of them at a time.
-         * @param task_func a #GTaskThreadFunc
-         */
-        run_in_thread_sync(task_func: TaskThreadFunc): void;
-        /**
-         * Sets or clears #task's check-cancellable flag. If this is %TRUE
-         * (the default), then g_task_propagate_pointer(), etc, and
-         * g_task_had_error() will check the task's #GCancellable first, and
-         * if it has been cancelled, then they will consider the task to have
-         * returned an "Operation was cancelled" error
-         * (%G_IO_ERROR_CANCELLED), regardless of any other error or return
-         * value the task may have had.
-         * 
-         * If #check_cancellable is %FALSE, then the #GTask will not check the
-         * cancellable itself, and it is up to #task's owner to do this (eg,
-         * via g_task_return_error_if_cancelled()).
-         * 
-         * If you are using g_task_set_return_on_cancel() as well, then
-         * you must leave check-cancellable set %TRUE.
-         * @param check_cancellable whether #GTask will check the state of
-         *   its #GCancellable for you.
-         */
-        set_check_cancellable(check_cancellable: boolean): void;
-        /**
-         * Sets #task’s name, used in debugging and profiling. The name defaults to
-         * %NULL.
-         * 
-         * The task name should describe in a human readable way what the task does.
-         * For example, ‘Open file’ or ‘Connect to network host’. It is used to set the
-         * name of the #GSource used for idle completion of the task.
-         * 
-         * This function may only be called before the #task is first used in a thread
-         * other than the one it was constructed in.
-         * @param name a human readable name for the task, or %NULL to unset it
-         */
-        set_name(name: string): void;
-        /**
-         * Sets #task's priority. If you do not call this, it will default to
-         * %G_PRIORITY_DEFAULT.
-         * 
-         * This will affect the priority of #GSources created with
-         * g_task_attach_source() and the scheduling of tasks run in threads,
-         * and can also be explicitly retrieved later via
-         * g_task_get_priority().
-         * @param priority the [priority][io-priority] of the request
-         */
-        set_priority(priority: number): void;
-        /**
-         * Sets or clears #task's return-on-cancel flag. This is only
-         * meaningful for tasks run via g_task_run_in_thread() or
-         * g_task_run_in_thread_sync().
-         * 
-         * If #return_on_cancel is %TRUE, then cancelling #task's
-         * #GCancellable will immediately cause it to return, as though the
-         * task's #GTaskThreadFunc had called
-         * g_task_return_error_if_cancelled() and then returned.
-         * 
-         * This allows you to create a cancellable wrapper around an
-         * uninterruptible function. The #GTaskThreadFunc just needs to be
-         * careful that it does not modify any externally-visible state after
-         * it has been cancelled. To do that, the thread should call
-         * g_task_set_return_on_cancel() again to (atomically) set
-         * return-on-cancel %FALSE before making externally-visible changes;
-         * if the task gets cancelled before the return-on-cancel flag could
-         * be changed, g_task_set_return_on_cancel() will indicate this by
-         * returning %FALSE.
-         * 
-         * You can disable and re-enable this flag multiple times if you wish.
-         * If the task's #GCancellable is cancelled while return-on-cancel is
-         * %FALSE, then calling g_task_set_return_on_cancel() to set it %TRUE
-         * again will cause the task to be cancelled at that point.
-         * 
-         * If the task's #GCancellable is already cancelled before you call
-         * g_task_run_in_thread()/g_task_run_in_thread_sync(), then the
-         * #GTaskThreadFunc will still be run (for consistency), but the task
-         * will also be completed right away.
-         * @param return_on_cancel whether the task returns automatically when
-         *   it is cancelled.
-         * @returns %TRUE if #task's return-on-cancel flag was changed to
-         *   match #return_on_cancel. %FALSE if #task has already been
-         *   cancelled.
-         */
-        set_return_on_cancel(return_on_cancel: boolean): boolean;
-        /**
-         * Sets #task's source tag. You can use this to tag a task return
-         * value with a particular pointer (usually a pointer to the function
-         * doing the tagging) and then later check it using
-         * g_task_get_source_tag() (or g_async_result_is_tagged()) in the
-         * task's "finish" function, to figure out if the response came from a
-         * particular place.
-         * @param source_tag an opaque pointer indicating the source of this task
-         */
-        set_source_tag(source_tag: any): void;
-        /**
-         * Sets #task's task data (freeing the existing task data, if any).
-         * @param task_data task-specific data
-         * @param task_data_destroy #GDestroyNotify for #task_data
-         */
-        set_task_data(task_data: any, task_data_destroy: GLib.DestroyNotify): void;
-    }
+    interface Task extends TaskMixin { }
 
-    var Task: {
+    class Task {
+        constructor();
         /**
          * Creates a #GTask acting on #source_object, which will eventually be
          * used to invoke #callback in the current
@@ -15420,7 +16278,7 @@ declare namespace imports.gi.Gio {
          * @param callback_data user data passed to #callback.
          * @returns a #GTask.
          */
-        new(source_object: GObject.Object, cancellable: Cancellable, callback: AsyncReadyCallback, callback_data: any): Task;
+        static new(source_object: GObject.Object, cancellable: Cancellable, callback: AsyncReadyCallback, callback_data: any): Task;
         /**
          * Checks that #result is a #GTask, and that #source_object is its
          * source object (or that #source_object is %NULL and #result has no
@@ -15431,7 +16289,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if #result and #source_object are valid, %FALSE
          * if not
          */
-        is_valid(result: AsyncResult, source_object: GObject.Object): boolean;
+        static is_valid(result: AsyncResult, source_object: GObject.Object): boolean;
         /**
          * Creates a #GTask and then immediately calls g_task_return_error()
          * on it. Use this in the wrapper function of an asynchronous method
@@ -15448,7 +16306,7 @@ declare namespace imports.gi.Gio {
          * @param source_tag an opaque pointer indicating the source of this task
          * @param error error to report
          */
-        report_error(source_object: GObject.Object, callback: AsyncReadyCallback, callback_data: any, source_tag: any, error: GLib.Error): void;
+        static report_error(source_object: GObject.Object, callback: AsyncReadyCallback, callback_data: any, source_tag: any, error: GLib.Error): void;
         /**
          * Creates a #GTask and then immediately calls
          * g_task_return_new_error() on it. Use this in the wrapper function
@@ -15468,14 +16326,13 @@ declare namespace imports.gi.Gio {
          * @param code an error code.
          * @param format a string with format characters.
          */
-        report_new_error(source_object: GObject.Object, callback: AsyncReadyCallback, callback_data: any, source_tag: any, domain: GLib.Quark, code: number, format: string): void;
+        static report_new_error(source_object: GObject.Object, callback: AsyncReadyCallback, callback_data: any, source_tag: any, domain: GLib.Quark, code: number, format: string): void;
     }
 
-    /**
-     * This is the subclass of #GSocketConnection that is created
-     * for TCP/IP sockets.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TcpConnection} instead.
      */
-    interface TcpConnection extends SocketConnection {
+    interface ITcpConnection {
         /**
          * Checks if graceful disconnects are used. See
          * g_tcp_connection_set_graceful_disconnect().
@@ -15497,8 +16354,36 @@ declare namespace imports.gi.Gio {
         set_graceful_disconnect(graceful_disconnect: boolean): void;
     }
 
-    var TcpConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TcpConnection} instead.
+     */
+    type TcpConnectionMixin = ITcpConnection & ISocketConnection;
+
+    /**
+     * This is the subclass of #GSocketConnection that is created
+     * for TCP/IP sockets.
+     */
+    interface TcpConnection extends TcpConnectionMixin { }
+
+    class TcpConnection {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TcpWrapperConnection} instead.
+     */
+    interface ITcpWrapperConnection {
+        /**
+         * Gets #conn's base #GIOStream
+         * @returns #conn's base #GIOStream
+         */
+        get_base_io_stream(): IOStream;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TcpWrapperConnection} instead.
+     */
+    type TcpWrapperConnectionMixin = ITcpWrapperConnection & ITcpConnection;
 
     /**
      * A #GTcpWrapperConnection can be used to wrap a #GIOStream that is
@@ -15507,23 +16392,75 @@ declare namespace imports.gi.Gio {
      * always return a #GSocketConnection, even when the connection it has
      * actually created is not directly a #GSocketConnection.
      */
-    interface TcpWrapperConnection extends TcpConnection {
-        /**
-         * Gets #conn's base #GIOStream
-         * @returns #conn's base #GIOStream
-         */
-        get_base_io_stream(): IOStream;
-    }
+    interface TcpWrapperConnection extends TcpWrapperConnectionMixin { }
 
-    var TcpWrapperConnection: {
+    class TcpWrapperConnection {
+        constructor();
         /**
          * Wraps #base_io_stream and #socket together as a #GSocketConnection.
          * @param base_io_stream the #GIOStream to wrap
          * @param socket the #GSocket associated with #base_io_stream
          * @returns the new #GSocketConnection.
          */
-        new(base_io_stream: IOStream, socket: Socket): SocketConnection;
+        static new(base_io_stream: IOStream, socket: Socket): SocketConnection;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TestDBus} instead.
+     */
+    interface ITestDBus {
+        /**
+         * Add a path where dbus-daemon will look up .service files. This can't be
+         * called after g_test_dbus_up().
+         * @param path path to a directory containing .service files
+         */
+        add_service_dir(path: string): void;
+        /**
+         * Stop the session bus started by g_test_dbus_up().
+         * 
+         * This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
+         * to be destroyed. This is done to ensure that the next unit test won't get a
+         * leaked singleton from this test.
+         */
+        down(): void;
+        /**
+         * Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
+         * been called yet, %NULL is returned. This can be used with
+         * g_dbus_connection_new_for_address().
+         * @returns the address of the bus, or %NULL.
+         */
+        get_bus_address(): string;
+        /**
+         * Get the flags of the #GTestDBus object.
+         * @returns the value of #GTestDBus:flags property
+         */
+        get_flags(): TestDBusFlags;
+        /**
+         * Stop the session bus started by g_test_dbus_up().
+         * 
+         * Unlike g_test_dbus_down(), this won't verify the #GDBusConnection
+         * singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
+         * tests wanting to verify behaviour after the session bus has been stopped
+         * can use this function but should still call g_test_dbus_down() when done.
+         */
+        stop(): void;
+        /**
+         * Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
+         * call, it is safe for unit tests to start sending messages on the session bus.
+         * 
+         * If this function is called from setup callback of g_test_add(),
+         * g_test_dbus_down() must be called in its teardown callback.
+         * 
+         * If this function is called from unit test's main(), then g_test_dbus_down()
+         * must be called after g_test_run().
+         */
+        up(): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TestDBus} instead.
+     */
+    type TestDBusMixin = ITestDBus & GObject.IObject;
 
     /**
      * A helper class for testing code which uses D-Bus without touching the user's
@@ -15599,62 +16536,16 @@ declare namespace imports.gi.Gio {
      *     CLEANFILES += gschemas.compiled
      * ]|
      */
-    interface TestDBus extends GObject.Object {
-        /**
-         * Add a path where dbus-daemon will look up .service files. This can't be
-         * called after g_test_dbus_up().
-         * @param path path to a directory containing .service files
-         */
-        add_service_dir(path: string): void;
-        /**
-         * Stop the session bus started by g_test_dbus_up().
-         * 
-         * This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
-         * to be destroyed. This is done to ensure that the next unit test won't get a
-         * leaked singleton from this test.
-         */
-        down(): void;
-        /**
-         * Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
-         * been called yet, %NULL is returned. This can be used with
-         * g_dbus_connection_new_for_address().
-         * @returns the address of the bus, or %NULL.
-         */
-        get_bus_address(): string;
-        /**
-         * Get the flags of the #GTestDBus object.
-         * @returns the value of #GTestDBus:flags property
-         */
-        get_flags(): TestDBusFlags;
-        /**
-         * Stop the session bus started by g_test_dbus_up().
-         * 
-         * Unlike g_test_dbus_down(), this won't verify the #GDBusConnection
-         * singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
-         * tests wanting to verify behaviour after the session bus has been stopped
-         * can use this function but should still call g_test_dbus_down() when done.
-         */
-        stop(): void;
-        /**
-         * Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
-         * call, it is safe for unit tests to start sending messages on the session bus.
-         * 
-         * If this function is called from setup callback of g_test_add(),
-         * g_test_dbus_down() must be called in its teardown callback.
-         * 
-         * If this function is called from unit test's main(), then g_test_dbus_down()
-         * must be called after g_test_run().
-         */
-        up(): void;
-    }
+    interface TestDBus extends TestDBusMixin { }
 
-    var TestDBus: {
+    class TestDBus {
+        constructor();
         /**
          * Create a new #GTestDBus object.
          * @param flags a #GTestDBusFlags
          * @returns a new #GTestDBus.
          */
-        new(flags: TestDBusFlags): TestDBus;
+        static new(flags: TestDBusFlags): TestDBus;
         /**
          * Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test
          * won't use user's session bus.
@@ -15663,19 +16554,13 @@ declare namespace imports.gi.Gio {
          * bus is running. It is not necessary to call this if unit test already calls
          * g_test_dbus_up() before acquiring the session bus.
          */
-        unset(): void;
+        static unset(): void;
     }
 
-    /**
-     * #GThemedIcon is an implementation of #GIcon that supports icon themes.
-     * #GThemedIcon contains a list of all of the icons present in an icon
-     * theme, so that icons can be looked up quickly. #GThemedIcon does
-     * not provide actual pixmaps for icons, just the icon names.
-     * Ideally something like gtk_icon_theme_choose_icon() should be used to
-     * resolve the list of names so that fallback icons work nicely with
-     * themes that inherit other themes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ThemedIcon} instead.
      */
-    interface ThemedIcon extends GObject.Object, Icon {
+    interface IThemedIcon {
         /**
          * Append a name to the list of icons from within #icon.
          * 
@@ -15699,13 +16584,30 @@ declare namespace imports.gi.Gio {
         prepend_name(iconname: string): void;
     }
 
-    var ThemedIcon: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ThemedIcon} instead.
+     */
+    type ThemedIconMixin = IThemedIcon & GObject.IObject & IIcon;
+
+    /**
+     * #GThemedIcon is an implementation of #GIcon that supports icon themes.
+     * #GThemedIcon contains a list of all of the icons present in an icon
+     * theme, so that icons can be looked up quickly. #GThemedIcon does
+     * not provide actual pixmaps for icons, just the icon names.
+     * Ideally something like gtk_icon_theme_choose_icon() should be used to
+     * resolve the list of names so that fallback icons work nicely with
+     * themes that inherit other themes.
+     */
+    interface ThemedIcon extends ThemedIconMixin { }
+
+    class ThemedIcon {
+        constructor();
         /**
          * Creates a new themed icon for #iconname.
          * @param iconname a string containing an icon name.
          * @returns a new #GThemedIcon.
          */
-        new(iconname: string): ThemedIcon;
+        static new(iconname: string): ThemedIcon;
         /**
          * Creates a new themed icon for #iconnames.
          * @param iconnames 
@@ -15713,7 +16615,7 @@ declare namespace imports.gi.Gio {
          *     %NULL-terminated
          * @returns a new #GThemedIcon
          */
-        new_from_names(iconnames: string[], len: number): ThemedIcon;
+        static new_from_names(iconnames: string[], len: number): ThemedIcon;
         /**
          * Creates a new themed icon for #iconname, and all the names
          * that can be created by shortening #iconname at '-' characters.
@@ -15733,8 +16635,20 @@ declare namespace imports.gi.Gio {
          * @param iconname a string containing an icon name
          * @returns a new #GThemedIcon.
          */
-        new_with_default_fallbacks(iconname: string): ThemedIcon;
+        static new_with_default_fallbacks(iconname: string): ThemedIcon;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ThreadedSocketService} instead.
+     */
+    interface IThreadedSocketService {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ThreadedSocketService} instead.
+     */
+    type ThreadedSocketServiceMixin = IThreadedSocketService & ISocketService;
 
     /**
      * A #GThreadedSocketService is a simple subclass of #GSocketService
@@ -15753,11 +16667,10 @@ declare namespace imports.gi.Gio {
      * As with #GSocketService, you may connect to #GThreadedSocketService::run,
      * or subclass and override the default handler.
      */
-    interface ThreadedSocketService extends SocketService {
+    interface ThreadedSocketService extends ThreadedSocketServiceMixin { }
 
-    }
-
-    var ThreadedSocketService: {
+    class ThreadedSocketService {
+        constructor();
         /**
          * Creates a new #GThreadedSocketService with no listeners. Listeners
          * must be added with one of the #GSocketListener "add" methods.
@@ -15765,17 +16678,13 @@ declare namespace imports.gi.Gio {
          *   handling incoming clients, -1 means no limit
          * @returns a new #GSocketService.
          */
-        new(max_threads: number): SocketService;
+        static new(max_threads: number): SocketService;
     }
 
-    /**
-     * A certificate used for TLS authentication and encryption.
-     * This can represent either a certificate only (eg, the certificate
-     * received by a client from a server), or the combination of
-     * a certificate and a private key (which is needed when acting as a
-     * #GTlsServerConnection).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsCertificate} instead.
      */
-    interface TlsCertificate extends GObject.Object {
+    interface ITlsCertificate {
         /**
          * Gets the value of #GTlsCertificate:dns-names.
          * @returns 
@@ -15857,7 +16766,22 @@ declare namespace imports.gi.Gio {
         verify(identity: SocketConnectable, trusted_ca: TlsCertificate): TlsCertificateFlags;
     }
 
-    var TlsCertificate: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsCertificate} instead.
+     */
+    type TlsCertificateMixin = ITlsCertificate & GObject.IObject;
+
+    /**
+     * A certificate used for TLS authentication and encryption.
+     * This can represent either a certificate only (eg, the certificate
+     * received by a client from a server), or the combination of
+     * a certificate and a private key (which is needed when acting as a
+     * #GTlsServerConnection).
+     */
+    interface TlsCertificate extends TlsCertificateMixin { }
+
+    class TlsCertificate {
+        constructor();
         /**
          * Creates a #GTlsCertificate from the PEM-encoded data in #file. The
          * returned certificate will be the first certificate found in #file. As
@@ -15875,7 +16799,7 @@ declare namespace imports.gi.Gio {
          * @param file file containing a PEM-encoded certificate to import
          * @returns the new certificate, or %NULL on error
          */
-        new_from_file(file: string): TlsCertificate;
+        static new_from_file(file: string): TlsCertificate;
         /**
          * Creates a #GTlsCertificate from the PEM-encoded data in #cert_file
          * and #key_file. The returned certificate will be the first certificate
@@ -15897,7 +16821,7 @@ declare namespace imports.gi.Gio {
          *     to import
          * @returns the new certificate, or %NULL on error
          */
-        new_from_files(cert_file: string, key_file: string): TlsCertificate;
+        static new_from_files(cert_file: string, key_file: string): TlsCertificate;
         /**
          * Creates a #GTlsCertificate from the PEM-encoded data in #data. If
          * #data includes both a certificate and a private key, then the
@@ -15917,7 +16841,7 @@ declare namespace imports.gi.Gio {
          * @param length the length of #data, or -1 if it's 0-terminated.
          * @returns the new certificate, or %NULL if #data is invalid
          */
-        new_from_pem(data: string, length: number): TlsCertificate;
+        static new_from_pem(data: string, length: number): TlsCertificate;
         /**
          * Creates a #GTlsCertificate from a
          * [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html) URI.
@@ -15947,7 +16871,7 @@ declare namespace imports.gi.Gio {
          * @param private_key_pkcs11_uri A PKCS \#11 URI
          * @returns the new certificate, or %NULL on error
          */
-        new_from_pkcs11_uris(pkcs11_uri: string, private_key_pkcs11_uri: string): TlsCertificate;
+        static new_from_pkcs11_uris(pkcs11_uri: string, private_key_pkcs11_uri: string): TlsCertificate;
         /**
          * Creates one or more #GTlsCertificates from the PEM-encoded
          * data in #file. If #file cannot be read or parsed, the function will
@@ -15959,18 +16883,13 @@ declare namespace imports.gi.Gio {
          * #GList containing #GTlsCertificate objects. You must free the list
          * and its contents when you are done with it.
          */
-        list_new_from_file(file: string): GLib.List;
+        static list_new_from_file(file: string): GLib.List;
     }
 
-    /**
-     * #GTlsConnection is the base TLS connection class type, which wraps
-     * a #GIOStream and provides TLS encryption on top of it. Its
-     * subclasses, #GTlsClientConnection and #GTlsServerConnection,
-     * implement client-side and server-side TLS, respectively.
-     * 
-     * For DTLS (Datagram TLS) support, see #GDtlsConnection.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsConnection} instead.
      */
-    interface TlsConnection extends IOStream {
+    interface ITlsConnection {
         /**
          * Used by #GTlsConnection implementations to emit the
          * #GTlsConnection::accept-certificate signal.
@@ -16125,9 +17044,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the handshake is complete
-         * @param user_data the data to pass to the callback function
          */
-        handshake_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        handshake_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous TLS handshake operation. See
          * g_tls_connection_handshake() for more information.
@@ -16246,21 +17164,29 @@ declare namespace imports.gi.Gio {
         set_use_system_certdb(use_system_certdb: boolean): void;
     }
 
-    var TlsConnection: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsConnection} instead.
+     */
+    type TlsConnectionMixin = ITlsConnection & IIOStream;
 
     /**
-     * #GTlsDatabase is used to look up certificates and other information
-     * from a certificate or key store. It is an abstract base class which
-     * TLS library specific subtypes override.
+     * #GTlsConnection is the base TLS connection class type, which wraps
+     * a #GIOStream and provides TLS encryption on top of it. Its
+     * subclasses, #GTlsClientConnection and #GTlsServerConnection,
+     * implement client-side and server-side TLS, respectively.
      * 
-     * A #GTlsDatabase may be accessed from multiple threads by the TLS backend.
-     * All implementations are required to be fully thread-safe.
-     * 
-     * Most common client applications will not directly interact with
-     * #GTlsDatabase. It is used internally by #GTlsConnection.
+     * For DTLS (Datagram TLS) support, see #GDtlsConnection.
      */
-    interface TlsDatabase extends GObject.Object {
+    interface TlsConnection extends TlsConnectionMixin { }
+
+    class TlsConnection {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsDatabase} instead.
+     */
+    interface ITlsDatabase {
         /**
          * Create a handle string for the certificate. The database will only be able
          * to create a handle for certificates that originate from the database. In
@@ -16304,9 +17230,8 @@ declare namespace imports.gi.Gio {
          * @param flags Flags which affect the lookup.
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the operation completes
-         * @param user_data the data to pass to the callback function
          */
-        lookup_certificate_for_handle_async(handle: string, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_certificate_for_handle_async(handle: string, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous lookup of a certificate by its handle. See
          * g_tls_database_lookup_certificate_for_handle() for more information.
@@ -16355,9 +17280,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags which affect the lookup operation
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the operation completes
-         * @param user_data the data to pass to the callback function
          */
-        lookup_certificate_issuer_async(certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_certificate_issuer_async(certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous lookup issuer operation. See
          * g_tls_database_lookup_certificate_issuer() for more information.
@@ -16391,9 +17315,8 @@ declare namespace imports.gi.Gio {
          * @param flags Flags which affect the lookup operation.
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the operation completes
-         * @param user_data the data to pass to the callback function
          */
-        lookup_certificates_issued_by_async(issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_certificates_issued_by_async(issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous lookup of certificates. See
          * g_tls_database_lookup_certificates_issued_by() for more information.
@@ -16476,9 +17399,8 @@ declare namespace imports.gi.Gio {
          * @param flags additional verify flags
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the operation completes
-         * @param user_data the data to pass to the callback function
          */
-        verify_chain_async(chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        verify_chain_async(chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous verify chain operation. See
          * g_tls_database_verify_chain() for more information.
@@ -16498,32 +17420,32 @@ declare namespace imports.gi.Gio {
         verify_chain_finish(result: AsyncResult): TlsCertificateFlags;
     }
 
-    var TlsDatabase: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsDatabase} instead.
+     */
+    type TlsDatabaseMixin = ITlsDatabase & GObject.IObject;
 
     /**
-     * #GTlsInteraction provides a mechanism for the TLS connection and database
-     * code to interact with the user. It can be used to ask the user for passwords.
+     * #GTlsDatabase is used to look up certificates and other information
+     * from a certificate or key store. It is an abstract base class which
+     * TLS library specific subtypes override.
      * 
-     * To use a #GTlsInteraction with a TLS connection use
-     * g_tls_connection_set_interaction().
+     * A #GTlsDatabase may be accessed from multiple threads by the TLS backend.
+     * All implementations are required to be fully thread-safe.
      * 
-     * Callers should instantiate a derived class that implements the various
-     * interaction methods to show the required dialogs.
-     * 
-     * Callers should use the 'invoke' functions like
-     * g_tls_interaction_invoke_ask_password() to run interaction methods. These
-     * functions make sure that the interaction is invoked in the main loop
-     * and not in the current thread, if the current thread is not running the
-     * main loop.
-     * 
-     * Derived classes can choose to implement whichever interactions methods they'd
-     * like to support by overriding those virtual methods in their class
-     * initialization function. Any interactions not implemented will return
-     * %G_TLS_INTERACTION_UNHANDLED. If a derived class implements an async method,
-     * it must also implement the corresponding finish method.
+     * Most common client applications will not directly interact with
+     * #GTlsDatabase. It is used internally by #GTlsConnection.
      */
-    interface TlsInteraction extends GObject.Object {
+    interface TlsDatabase extends TlsDatabaseMixin { }
+
+    class TlsDatabase {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsInteraction} instead.
+     */
+    interface ITlsInteraction {
         /**
          * Run synchronous interaction to ask the user for a password. In general,
          * g_tls_interaction_invoke_ask_password() should be used instead of this
@@ -16562,9 +17484,8 @@ declare namespace imports.gi.Gio {
          * @param password a #GTlsPassword object
          * @param cancellable an optional #GCancellable cancellation object
          * @param callback will be called when the interaction completes
-         * @param user_data data to pass to the #callback
          */
-        ask_password_async(password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        ask_password_async(password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Complete an ask password user interaction request. This should be once
          * the g_tls_interaction_ask_password_async() completion callback is called.
@@ -16667,9 +17588,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags providing more information about the request
          * @param cancellable an optional #GCancellable cancellation object
          * @param callback will be called when the interaction completes
-         * @param user_data data to pass to the #callback
          */
-        request_certificate_async(connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        request_certificate_async(connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Complete a request certificate user interaction request. This should be once
          * the g_tls_interaction_request_certificate_async() completion callback is called.
@@ -16687,13 +17607,43 @@ declare namespace imports.gi.Gio {
         request_certificate_finish(result: AsyncResult): TlsInteractionResult;
     }
 
-    var TlsInteraction: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsInteraction} instead.
+     */
+    type TlsInteractionMixin = ITlsInteraction & GObject.IObject;
 
     /**
-     * Holds a password used in TLS.
+     * #GTlsInteraction provides a mechanism for the TLS connection and database
+     * code to interact with the user. It can be used to ask the user for passwords.
+     * 
+     * To use a #GTlsInteraction with a TLS connection use
+     * g_tls_connection_set_interaction().
+     * 
+     * Callers should instantiate a derived class that implements the various
+     * interaction methods to show the required dialogs.
+     * 
+     * Callers should use the 'invoke' functions like
+     * g_tls_interaction_invoke_ask_password() to run interaction methods. These
+     * functions make sure that the interaction is invoked in the main loop
+     * and not in the current thread, if the current thread is not running the
+     * main loop.
+     * 
+     * Derived classes can choose to implement whichever interactions methods they'd
+     * like to support by overriding those virtual methods in their class
+     * initialization function. Any interactions not implemented will return
+     * %G_TLS_INTERACTION_UNHANDLED. If a derived class implements an async method,
+     * it must also implement the corresponding finish method.
      */
-    interface TlsPassword extends GObject.Object {
+    interface TlsInteraction extends TlsInteractionMixin { }
+
+    class TlsInteraction {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsPassword} instead.
+     */
+    interface ITlsPassword {
         /**
          * Get a description string about what the password will be used for.
          * @returns The description of the password.
@@ -16767,28 +17717,31 @@ declare namespace imports.gi.Gio {
         set_warning(warning: string): void;
     }
 
-    var TlsPassword: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsPassword} instead.
+     */
+    type TlsPasswordMixin = ITlsPassword & GObject.IObject;
+
+    /**
+     * Holds a password used in TLS.
+     */
+    interface TlsPassword extends TlsPasswordMixin { }
+
+    class TlsPassword {
+        constructor();
         /**
          * Create a new #GTlsPassword object.
          * @param flags the password flags
          * @param description description of what the password is for
          * @returns The newly allocated password object
          */
-        new(flags: TlsPasswordFlags, description: string): TlsPassword;
+        static new(flags: TlsPasswordFlags, description: string): TlsPassword;
     }
 
-    /**
-     * This is the subclass of #GSocketConnection that is created
-     * for UNIX domain sockets.
-     * 
-     * It contains functions to do some of the UNIX socket specific
-     * functionality like passing file descriptors.
-     * 
-     * Note that `<gio/gunixconnection.h>` belongs to the UNIX-specific
-     * GIO interfaces, thus you have to use the `gio-unix-2.0.pc`
-     * pkg-config file when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixConnection} instead.
      */
-    interface UnixConnection extends SocketConnection {
+    interface IUnixConnection {
         /**
          * Receives credentials from the sending end of the connection.  The
          * sending end has to call g_unix_connection_send_credentials() (or
@@ -16823,9 +17776,8 @@ declare namespace imports.gi.Gio {
          * g_unix_connection_receive_credentials_finish() to get the result of the operation.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        receive_credentials_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        receive_credentials_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous receive credentials operation started with
          * g_unix_connection_receive_credentials_async().
@@ -16880,9 +17832,8 @@ declare namespace imports.gi.Gio {
          * g_unix_connection_send_credentials_finish() to get the result of the operation.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        send_credentials_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        send_credentials_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous send credentials operation started with
          * g_unix_connection_send_credentials_async().
@@ -16905,8 +17856,43 @@ declare namespace imports.gi.Gio {
         send_fd(fd: number, cancellable: Cancellable): boolean;
     }
 
-    var UnixConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixConnection} instead.
+     */
+    type UnixConnectionMixin = IUnixConnection & ISocketConnection;
+
+    /**
+     * This is the subclass of #GSocketConnection that is created
+     * for UNIX domain sockets.
+     * 
+     * It contains functions to do some of the UNIX socket specific
+     * functionality like passing file descriptors.
+     * 
+     * Note that `<gio/gunixconnection.h>` belongs to the UNIX-specific
+     * GIO interfaces, thus you have to use the `gio-unix-2.0.pc`
+     * pkg-config file when using it.
+     */
+    interface UnixConnection extends UnixConnectionMixin { }
+
+    class UnixConnection {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixCredentialsMessage} instead.
+     */
+    interface IUnixCredentialsMessage {
+        /**
+         * Gets the credentials stored in #message.
+         * @returns A #GCredentials instance. Do not free, it is owned by #message.
+         */
+        get_credentials(): Credentials;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixCredentialsMessage} instead.
+     */
+    type UnixCredentialsMessageMixin = IUnixCredentialsMessage & ISocketControlMessage;
 
     /**
      * This #GSocketControlMessage contains a #GCredentials instance.  It
@@ -16921,46 +17907,32 @@ declare namespace imports.gi.Gio {
      * a foreign process connected to a socket, use
      * g_socket_get_credentials().
      */
-    interface UnixCredentialsMessage extends SocketControlMessage {
-        /**
-         * Gets the credentials stored in #message.
-         * @returns A #GCredentials instance. Do not free, it is owned by #message.
-         */
-        get_credentials(): Credentials;
-    }
+    interface UnixCredentialsMessage extends UnixCredentialsMessageMixin { }
 
-    var UnixCredentialsMessage: {
+    class UnixCredentialsMessage {
+        constructor();
         /**
          * Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
          * @returns a new #GUnixCredentialsMessage
          */
-        new(): SocketControlMessage;
+        static new(): SocketControlMessage;
         /**
          * Creates a new #GUnixCredentialsMessage holding #credentials.
          * @param credentials A #GCredentials object.
          * @returns a new #GUnixCredentialsMessage
          */
-        new_with_credentials(credentials: Credentials): SocketControlMessage;
+        static new_with_credentials(credentials: Credentials): SocketControlMessage;
         /**
          * Checks if passing #GCredentials on a #GSocket is supported on this platform.
          * @returns %TRUE if supported, %FALSE otherwise
          */
-        is_supported(): boolean;
+        static is_supported(): boolean;
     }
 
-    /**
-     * A #GUnixFDList contains a list of file descriptors.  It owns the file
-     * descriptors that it contains, closing them when finalized.
-     * 
-     * It may be wrapped in a #GUnixFDMessage and sent over a #GSocket in
-     * the %G_SOCKET_FAMILY_UNIX family by using g_socket_send_message()
-     * and received using g_socket_receive_message().
-     * 
-     * Note that `<gio/gunixfdlist.h>` belongs to the UNIX-specific GIO
-     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-     * file when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixFDList} instead.
      */
-    interface UnixFDList extends GObject.Object {
+    interface IUnixFDList {
         /**
          * Adds a file descriptor to #list.
          * 
@@ -17047,12 +18019,32 @@ declare namespace imports.gi.Gio {
         steal_fds(length: number): number[];
     }
 
-    var UnixFDList: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixFDList} instead.
+     */
+    type UnixFDListMixin = IUnixFDList & GObject.IObject;
+
+    /**
+     * A #GUnixFDList contains a list of file descriptors.  It owns the file
+     * descriptors that it contains, closing them when finalized.
+     * 
+     * It may be wrapped in a #GUnixFDMessage and sent over a #GSocket in
+     * the %G_SOCKET_FAMILY_UNIX family by using g_socket_send_message()
+     * and received using g_socket_receive_message().
+     * 
+     * Note that `<gio/gunixfdlist.h>` belongs to the UNIX-specific GIO
+     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+     * file when using it.
+     */
+    interface UnixFDList extends UnixFDListMixin { }
+
+    class UnixFDList {
+        constructor();
         /**
          * Creates a new #GUnixFDList containing no file descriptors.
          * @returns a new #GUnixFDList
          */
-        new(): UnixFDList;
+        static new(): UnixFDList;
         /**
          * Creates a new #GUnixFDList containing the file descriptors given in
          * #fds.  The file descriptors become the property of the new list and
@@ -17066,25 +18058,13 @@ declare namespace imports.gi.Gio {
          * @param n_fds the length of #fds, or -1
          * @returns a new #GUnixFDList
          */
-        new_from_array(fds: number[], n_fds: number): UnixFDList;
+        static new_from_array(fds: number[], n_fds: number): UnixFDList;
     }
 
-    /**
-     * This #GSocketControlMessage contains a #GUnixFDList.
-     * It may be sent using g_socket_send_message() and received using
-     * g_socket_receive_message() over UNIX sockets (ie: sockets in the
-     * %G_SOCKET_FAMILY_UNIX family). The file descriptors are copied
-     * between processes by the kernel.
-     * 
-     * For an easier way to send and receive file descriptors over
-     * stream-oriented UNIX sockets, see g_unix_connection_send_fd() and
-     * g_unix_connection_receive_fd().
-     * 
-     * Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
-     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-     * file when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixFDMessage} instead.
      */
-    interface UnixFDMessage extends SocketControlMessage {
+    interface IUnixFDMessage {
         /**
          * Adds a file descriptor to #message.
          * 
@@ -17130,33 +18110,48 @@ declare namespace imports.gi.Gio {
         steal_fds(length: number): number[];
     }
 
-    var UnixFDMessage: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixFDMessage} instead.
+     */
+    type UnixFDMessageMixin = IUnixFDMessage & ISocketControlMessage;
+
+    /**
+     * This #GSocketControlMessage contains a #GUnixFDList.
+     * It may be sent using g_socket_send_message() and received using
+     * g_socket_receive_message() over UNIX sockets (ie: sockets in the
+     * %G_SOCKET_FAMILY_UNIX family). The file descriptors are copied
+     * between processes by the kernel.
+     * 
+     * For an easier way to send and receive file descriptors over
+     * stream-oriented UNIX sockets, see g_unix_connection_send_fd() and
+     * g_unix_connection_receive_fd().
+     * 
+     * Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
+     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+     * file when using it.
+     */
+    interface UnixFDMessage extends UnixFDMessageMixin { }
+
+    class UnixFDMessage {
+        constructor();
         /**
          * Creates a new #GUnixFDMessage containing an empty file descriptor
          * list.
          * @returns a new #GUnixFDMessage
          */
-        new(): SocketControlMessage;
+        static new(): SocketControlMessage;
         /**
          * Creates a new #GUnixFDMessage containing #list.
          * @param fd_list a #GUnixFDList
          * @returns a new #GUnixFDMessage
          */
-        new_with_fd_list(fd_list: UnixFDList): SocketControlMessage;
+        static new_with_fd_list(fd_list: UnixFDList): SocketControlMessage;
     }
 
-    /**
-     * #GUnixInputStream implements #GInputStream for reading from a UNIX
-     * file descriptor, including asynchronous operations. (If the file
-     * descriptor refers to a socket or pipe, this will use poll() to do
-     * asynchronous I/O. If it refers to a regular file, it will fall back
-     * to doing asynchronous I/O in another thread.)
-     * 
-     * Note that `<gio/gunixinputstream.h>` belongs to the UNIX-specific GIO
-     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-     * file when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixInputStream} instead.
      */
-    interface UnixInputStream extends InputStream, FileDescriptorBased, PollableInputStream {
+    interface IUnixInputStream {
         /**
          * Returns whether the file descriptor of #stream will be
          * closed when the stream is closed.
@@ -17176,7 +18171,26 @@ declare namespace imports.gi.Gio {
         set_close_fd(close_fd: boolean): void;
     }
 
-    var UnixInputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixInputStream} instead.
+     */
+    type UnixInputStreamMixin = IUnixInputStream & IInputStream & IFileDescriptorBased & IPollableInputStream;
+
+    /**
+     * #GUnixInputStream implements #GInputStream for reading from a UNIX
+     * file descriptor, including asynchronous operations. (If the file
+     * descriptor refers to a socket or pipe, this will use poll() to do
+     * asynchronous I/O. If it refers to a regular file, it will fall back
+     * to doing asynchronous I/O in another thread.)
+     * 
+     * Note that `<gio/gunixinputstream.h>` belongs to the UNIX-specific GIO
+     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+     * file when using it.
+     */
+    interface UnixInputStream extends UnixInputStreamMixin { }
+
+    class UnixInputStream {
+        constructor();
         /**
          * Creates a new #GUnixInputStream for the given #fd.
          * 
@@ -17186,13 +18200,13 @@ declare namespace imports.gi.Gio {
          * @param close_fd %TRUE to close the file descriptor when done
          * @returns a new #GUnixInputStream
          */
-        new(fd: number, close_fd: boolean): InputStream;
+        static new(fd: number, close_fd: boolean): InputStream;
     }
 
-    /**
-     * Watches #GUnixMounts for changes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixMountMonitor} instead.
      */
-    interface UnixMountMonitor extends GObject.Object {
+    interface IUnixMountMonitor {
         /**
          * This function does nothing.
          * 
@@ -17207,7 +18221,18 @@ declare namespace imports.gi.Gio {
         set_rate_limit(limit_msec: number): void;
     }
 
-    var UnixMountMonitor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixMountMonitor} instead.
+     */
+    type UnixMountMonitorMixin = IUnixMountMonitor & GObject.IObject;
+
+    /**
+     * Watches #GUnixMounts for changes.
+     */
+    interface UnixMountMonitor extends UnixMountMonitorMixin { }
+
+    class UnixMountMonitor {
+        constructor();
         /**
          * Deprecated alias for g_unix_mount_monitor_get().
          * 
@@ -17215,7 +18240,7 @@ declare namespace imports.gi.Gio {
          * renamed.
          * @returns a #GUnixMountMonitor.
          */
-        new(): UnixMountMonitor;
+        static new(): UnixMountMonitor;
         /**
          * Gets the #GUnixMountMonitor for the current thread-default main
          * context.
@@ -17228,21 +18253,13 @@ declare namespace imports.gi.Gio {
          * the same main context as you called this function.
          * @returns the #GUnixMountMonitor.
          */
-        get(): UnixMountMonitor;
+        static get(): UnixMountMonitor;
     }
 
-    /**
-     * #GUnixOutputStream implements #GOutputStream for writing to a UNIX
-     * file descriptor, including asynchronous operations. (If the file
-     * descriptor refers to a socket or pipe, this will use poll() to do
-     * asynchronous I/O. If it refers to a regular file, it will fall back
-     * to doing asynchronous I/O in another thread.)
-     * 
-     * Note that `<gio/gunixoutputstream.h>` belongs to the UNIX-specific GIO
-     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
-     * when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixOutputStream} instead.
      */
-    interface UnixOutputStream extends OutputStream, FileDescriptorBased, PollableOutputStream {
+    interface IUnixOutputStream {
         /**
          * Returns whether the file descriptor of #stream will be
          * closed when the stream is closed.
@@ -17262,7 +18279,26 @@ declare namespace imports.gi.Gio {
         set_close_fd(close_fd: boolean): void;
     }
 
-    var UnixOutputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixOutputStream} instead.
+     */
+    type UnixOutputStreamMixin = IUnixOutputStream & IOutputStream & IFileDescriptorBased & IPollableOutputStream;
+
+    /**
+     * #GUnixOutputStream implements #GOutputStream for writing to a UNIX
+     * file descriptor, including asynchronous operations. (If the file
+     * descriptor refers to a socket or pipe, this will use poll() to do
+     * asynchronous I/O. If it refers to a regular file, it will fall back
+     * to doing asynchronous I/O in another thread.)
+     * 
+     * Note that `<gio/gunixoutputstream.h>` belongs to the UNIX-specific GIO
+     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
+     * when using it.
+     */
+    interface UnixOutputStream extends UnixOutputStreamMixin { }
+
+    class UnixOutputStream {
+        constructor();
         /**
          * Creates a new #GUnixOutputStream for the given #fd.
          * 
@@ -17272,26 +18308,13 @@ declare namespace imports.gi.Gio {
          * @param close_fd %TRUE to close the file descriptor when done
          * @returns a new #GOutputStream
          */
-        new(fd: number, close_fd: boolean): OutputStream;
+        static new(fd: number, close_fd: boolean): OutputStream;
     }
 
-    /**
-     * Support for UNIX-domain (also known as local) sockets.
-     * 
-     * UNIX domain sockets are generally visible in the filesystem.
-     * However, some systems support abstract socket names which are not
-     * visible in the filesystem and not affected by the filesystem
-     * permissions, visibility, etc. Currently this is only supported
-     * under Linux. If you attempt to use abstract sockets on other
-     * systems, function calls may return %G_IO_ERROR_NOT_SUPPORTED
-     * errors. You can use g_unix_socket_address_abstract_names_supported()
-     * to see if abstract names are supported.
-     * 
-     * Note that `<gio/gunixsocketaddress.h>` belongs to the UNIX-specific GIO
-     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
-     * when using it.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixSocketAddress} instead.
      */
-    interface UnixSocketAddress extends SocketAddress, SocketConnectable {
+    interface IUnixSocketAddress {
         /**
          * Gets #address's type.
          * @returns a #GUnixSocketAddressType
@@ -17321,7 +18344,31 @@ declare namespace imports.gi.Gio {
         get_path_len(): number;
     }
 
-    var UnixSocketAddress: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link UnixSocketAddress} instead.
+     */
+    type UnixSocketAddressMixin = IUnixSocketAddress & ISocketAddress & ISocketConnectable;
+
+    /**
+     * Support for UNIX-domain (also known as local) sockets.
+     * 
+     * UNIX domain sockets are generally visible in the filesystem.
+     * However, some systems support abstract socket names which are not
+     * visible in the filesystem and not affected by the filesystem
+     * permissions, visibility, etc. Currently this is only supported
+     * under Linux. If you attempt to use abstract sockets on other
+     * systems, function calls may return %G_IO_ERROR_NOT_SUPPORTED
+     * errors. You can use g_unix_socket_address_abstract_names_supported()
+     * to see if abstract names are supported.
+     * 
+     * Note that `<gio/gunixsocketaddress.h>` belongs to the UNIX-specific GIO
+     * interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config file
+     * when using it.
+     */
+    interface UnixSocketAddress extends UnixSocketAddressMixin { }
+
+    class UnixSocketAddress {
+        constructor();
         /**
          * Creates a new #GUnixSocketAddress for #path.
          * 
@@ -17330,7 +18377,7 @@ declare namespace imports.gi.Gio {
          * @param path the socket path
          * @returns a new #GUnixSocketAddress
          */
-        new(path: string): SocketAddress;
+        static new(path: string): SocketAddress;
         /**
          * Creates a new %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
          * #GUnixSocketAddress for #path.
@@ -17338,7 +18385,7 @@ declare namespace imports.gi.Gio {
          * @param path_len the length of #path, or -1
          * @returns a new #GUnixSocketAddress
          */
-        new_abstract(path: string[], path_len: number): SocketAddress;
+        static new_abstract(path: string[], path_len: number): SocketAddress;
         /**
          * Creates a new #GUnixSocketAddress of type #type with name #path.
          * 
@@ -17376,18 +18423,18 @@ declare namespace imports.gi.Gio {
          * @param _type a #GUnixSocketAddressType
          * @returns a new #GUnixSocketAddress
          */
-        new_with_type(path: string[], path_len: number, _type: UnixSocketAddressType): SocketAddress;
+        static new_with_type(path: string[], path_len: number, _type: UnixSocketAddressType): SocketAddress;
         /**
          * Checks if abstract UNIX domain socket names are supported.
          * @returns %TRUE if supported, %FALSE otherwise
          */
-        abstract_names_supported(): boolean;
+        static abstract_names_supported(): boolean;
     }
 
-    /**
-     * Entry point for using GIO functionality.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Vfs} instead.
      */
-    interface Vfs extends GObject.Object {
+    interface IVfs {
         /**
          * Gets a #GFile for #path.
          * @param path a string containing a VFS path.
@@ -17473,34 +18520,35 @@ declare namespace imports.gi.Gio {
         unregister_uri_scheme(scheme: string): boolean;
     }
 
-    var Vfs: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Vfs} instead.
+     */
+    type VfsMixin = IVfs & GObject.IObject;
+
+    /**
+     * Entry point for using GIO functionality.
+     */
+    interface Vfs extends VfsMixin { }
+
+    class Vfs {
+        constructor();
         /**
          * Gets the default #GVfs for the system.
          * @returns a #GVfs, which will be the local
          *     file system #GVfs if no other implementation is available.
          */
-        get_default(): Vfs;
+        static get_default(): Vfs;
         /**
          * Gets the local #GVfs for the system.
          * @returns a #GVfs.
          */
-        get_local(): Vfs;
+        static get_local(): Vfs;
     }
 
-    /**
-     * #GVolumeMonitor is for listing the user interesting devices and volumes
-     * on the computer. In other words, what a file selector or file manager
-     * would show in a sidebar.
-     * 
-     * #GVolumeMonitor is not
-     * [thread-default-context aware][g-main-context-push-thread-default],
-     * and so should not be used other than from the main thread, with no
-     * thread-default-context active.
-     * 
-     * In order to receive updates about volumes and mounts monitored through GVFS,
-     * a main loop must be running.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link VolumeMonitor} instead.
      */
-    interface VolumeMonitor extends GObject.Object {
+    interface IVolumeMonitor {
         /**
          * Gets a list of drives connected to the system.
          * 
@@ -17541,7 +18589,28 @@ declare namespace imports.gi.Gio {
         get_volumes(): GLib.List;
     }
 
-    var VolumeMonitor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link VolumeMonitor} instead.
+     */
+    type VolumeMonitorMixin = IVolumeMonitor & GObject.IObject;
+
+    /**
+     * #GVolumeMonitor is for listing the user interesting devices and volumes
+     * on the computer. In other words, what a file selector or file manager
+     * would show in a sidebar.
+     * 
+     * #GVolumeMonitor is not
+     * [thread-default-context aware][g-main-context-push-thread-default],
+     * and so should not be used other than from the main thread, with no
+     * thread-default-context active.
+     * 
+     * In order to receive updates about volumes and mounts monitored through GVFS,
+     * a main loop must be running.
+     */
+    interface VolumeMonitor extends VolumeMonitorMixin { }
+
+    class VolumeMonitor {
+        constructor();
         /**
          * This function should be called by any #GVolumeMonitor
          * implementation when a new #GMount object is created that is not
@@ -17575,20 +18644,19 @@ declare namespace imports.gi.Gio {
          * @returns the #GVolume object that is the parent for #mount or %NULL
          * if no wants to adopt the #GMount.
          */
-        adopt_orphan_mount(mount: Mount): Volume;
+        static adopt_orphan_mount(mount: Mount): Volume;
         /**
          * Gets the volume monitor used by gio.
          * @returns a reference to the #GVolumeMonitor used by gio. Call
          *    g_object_unref() when done with it.
          */
-        get(): VolumeMonitor;
+        static get(): VolumeMonitor;
     }
 
-    /**
-     * #GZlibCompressor is an implementation of #GConverter that
-     * compresses data using zlib.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ZlibCompressor} instead.
      */
-    interface ZlibCompressor extends GObject.Object, Converter {
+    interface IZlibCompressor {
         /**
          * Returns the #GZlibCompressor:file-info property.
          * @returns a #GFileInfo, or %NULL
@@ -17608,21 +18676,32 @@ declare namespace imports.gi.Gio {
         set_file_info(file_info: FileInfo): void;
     }
 
-    var ZlibCompressor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ZlibCompressor} instead.
+     */
+    type ZlibCompressorMixin = IZlibCompressor & GObject.IObject & IConverter;
+
+    /**
+     * #GZlibCompressor is an implementation of #GConverter that
+     * compresses data using zlib.
+     */
+    interface ZlibCompressor extends ZlibCompressorMixin { }
+
+    class ZlibCompressor {
+        constructor();
         /**
          * Creates a new #GZlibCompressor.
          * @param format The format to use for the compressed data
          * @param level compression level (0-9), -1 for default
          * @returns a new #GZlibCompressor
          */
-        new(format: ZlibCompressorFormat, level: number): ZlibCompressor;
+        static new(format: ZlibCompressorFormat, level: number): ZlibCompressor;
     }
 
-    /**
-     * #GZlibDecompressor is an implementation of #GConverter that
-     * decompresses data compressed with zlib.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ZlibDecompressor} instead.
      */
-    interface ZlibDecompressor extends GObject.Object, Converter {
+    interface IZlibDecompressor {
         /**
          * Retrieves the #GFileInfo constructed from the GZIP header data
          * of compressed data processed by #compressor, or %NULL if #decompressor's
@@ -17634,13 +18713,25 @@ declare namespace imports.gi.Gio {
         get_file_info(): FileInfo;
     }
 
-    var ZlibDecompressor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ZlibDecompressor} instead.
+     */
+    type ZlibDecompressorMixin = IZlibDecompressor & GObject.IObject & IConverter;
+
+    /**
+     * #GZlibDecompressor is an implementation of #GConverter that
+     * decompresses data compressed with zlib.
+     */
+    interface ZlibDecompressor extends ZlibDecompressorMixin { }
+
+    class ZlibDecompressor {
+        constructor();
         /**
          * Creates a new #GZlibDecompressor.
          * @param format The format to use for the compressed data
          * @returns a new #GZlibDecompressor
          */
-        new(format: ZlibCompressorFormat): ZlibDecompressor;
+        static new(format: ZlibCompressorFormat): ZlibDecompressor;
     }
 
     /**
@@ -17660,8 +18751,8 @@ declare namespace imports.gi.Gio {
         public parameter_type: string;
         public state: string;
         public padding: number[];
-        activate: { (action: SimpleAction, parameter: GLib.Variant, user_data: any): void; };
-        change_state: { (action: SimpleAction, value: GLib.Variant, user_data: any): void; };
+        activate: { (action: SimpleAction, parameter: GLib.Variant): void; };
+        change_state: { (action: SimpleAction, value: GLib.Variant): void; };
     }
 
     /**
@@ -17738,7 +18829,7 @@ declare namespace imports.gi.Gio {
         get_display_name: { (appinfo: AppInfo): string; };
         set_as_last_used_for_type: { (appinfo: AppInfo, content_type: string): boolean; };
         get_supported_types: { (appinfo: AppInfo): string[]; };
-        launch_uris_async: { (appinfo: AppInfo, uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        launch_uris_async: { (appinfo: AppInfo, uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         launch_uris_finish: { (appinfo: AppInfo, result: AsyncResult): boolean; };
     }
 
@@ -17804,7 +18895,7 @@ declare namespace imports.gi.Gio {
      */
     class AsyncInitableIface {
         public g_iface: GObject.TypeInterface;
-        init_async: { (initable: AsyncInitable, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        init_async: { (initable: AsyncInitable, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         init_finish: { (initable: AsyncInitable, res: AsyncResult): boolean; };
     }
 
@@ -17821,7 +18912,7 @@ declare namespace imports.gi.Gio {
     class BufferedInputStreamClass {
         public parent_class: FilterInputStreamClass;
         fill: { (stream: BufferedInputStream, count: number, cancellable: Cancellable): number; };
-        fill_async: { (stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        fill_async: { (stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         fill_finish: { (stream: BufferedInputStream, result: AsyncResult): number; };
         _g_reserved1: { (): void; };
         _g_reserved2: { (): void; };
@@ -18138,6 +19229,20 @@ declare namespace imports.gi.Gio {
      * Information about nodes in a remote object hierarchy.
      */
     class DBusNodeInfo {
+        /**
+         * Parses #xml_data and returns a #GDBusNodeInfo representing the data.
+         * 
+         * The introspection XML must contain exactly one top-level
+         * <node> element.
+         * 
+         * Note that this routine is using a
+         * [GMarkup][glib-Simple-XML-Subset-Parser.description]-based
+         * parser that only accepts a subset of valid XML documents.
+         * @param xml_data Valid D-Bus introspection XML.
+         * @returns A #GDBusNodeInfo structure or %NULL if #error is set. Free
+         * with g_dbus_node_info_unref().
+         */
+        static new_for_xml(xml_data: string): DBusNodeInfo;
         public ref_count: number;
         public path: string;
         public interfaces: DBusInterfaceInfo[];
@@ -18386,22 +19491,22 @@ declare namespace imports.gi.Gio {
         is_media_check_automatic: { (drive: Drive): boolean; };
         can_eject: { (drive: Drive): boolean; };
         can_poll_for_media: { (drive: Drive): boolean; };
-        eject: { (drive: Drive, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject: { (drive: Drive, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_finish: { (drive: Drive, result: AsyncResult): boolean; };
-        poll_for_media: { (drive: Drive, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        poll_for_media: { (drive: Drive, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         poll_for_media_finish: { (drive: Drive, result: AsyncResult): boolean; };
         get_identifier: { (drive: Drive, kind: string): string; };
         enumerate_identifiers: { (drive: Drive): string[]; };
         get_start_stop_type: { (drive: Drive): DriveStartStopType; };
         can_start: { (drive: Drive): boolean; };
         can_start_degraded: { (drive: Drive): boolean; };
-        start: { (drive: Drive, flags: DriveStartFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        start: { (drive: Drive, flags: DriveStartFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         start_finish: { (drive: Drive, result: AsyncResult): boolean; };
         can_stop: { (drive: Drive): boolean; };
-        stop: { (drive: Drive, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        stop: { (drive: Drive, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         stop_finish: { (drive: Drive, result: AsyncResult): boolean; };
         stop_button: { (drive: Drive): void; };
-        eject_with_operation: { (drive: Drive, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject_with_operation: { (drive: Drive, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_with_operation_finish: { (drive: Drive, result: AsyncResult): boolean; };
         get_sort_key: { (drive: Drive): string; };
         get_symbolic_icon: { (drive: Drive): Icon; };
@@ -18422,10 +19527,10 @@ declare namespace imports.gi.Gio {
         public g_iface: GObject.TypeInterface;
         accept_certificate: { (connection: DtlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean; };
         handshake: { (conn: DtlsConnection, cancellable: Cancellable): boolean; };
-        handshake_async: { (conn: DtlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        handshake_async: { (conn: DtlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         handshake_finish: { (conn: DtlsConnection, result: AsyncResult): boolean; };
         shutdown: { (conn: DtlsConnection, shutdown_read: boolean, shutdown_write: boolean, cancellable: Cancellable): boolean; };
-        shutdown_async: { (conn: DtlsConnection, shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        shutdown_async: { (conn: DtlsConnection, shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         shutdown_finish: { (conn: DtlsConnection, result: AsyncResult): boolean; };
         set_advertised_protocols: { (conn: DtlsConnection, protocols: string[]): void; };
         get_negotiated_protocol: { (conn: DtlsConnection): string; };
@@ -18463,6 +19568,11 @@ declare namespace imports.gi.Gio {
      * The registry stores Key-Value pair formats as #GFileAttributeInfos.
      */
     class FileAttributeInfoList {
+        /**
+         * Creates a new file attribute info list.
+         * @returns a #GFileAttributeInfoList.
+         */
+        static new(): FileAttributeInfoList;
         public infos: FileAttributeInfo;
         public n_infos: number;
         /**
@@ -18501,6 +19611,30 @@ declare namespace imports.gi.Gio {
      * Determines if a string matches a file attribute.
      */
     class FileAttributeMatcher {
+        /**
+         * Creates a new file attribute matcher, which matches attributes
+         * against a given string. #GFileAttributeMatchers are reference
+         * counted structures, and are created with a reference count of 1. If
+         * the number of references falls to 0, the #GFileAttributeMatcher is
+         * automatically destroyed.
+         * 
+         * The #attributes string should be formatted with specific keys separated
+         * from namespaces with a double colon. Several "namespace::key" strings may be
+         * concatenated with a single comma (e.g. "standard::type,standard::is-hidden").
+         * The wildcard "*" may be used to match all keys and namespaces, or
+         * "namespace::*" will match all keys in a given namespace.
+         * 
+         * ## Examples of file attribute matcher strings and results
+         * 
+         * - `"*"`: matches all attributes.
+         * - `"standard::is-hidden"`: matches only the key is-hidden in the
+         *   standard namespace.
+         * - `"standard::type,unix::*"`: matches the type key in the standard
+         *   namespace and all keys in the unix namespace.
+         * @param attributes an attribute string to match.
+         * @returns a #GFileAttributeMatcher
+         */
+        static new(attributes: string): FileAttributeMatcher;
         /**
          * Checks if the matcher will match all of the keys in a given namespace.
          * This will always return %TRUE if a wildcard character is in use (e.g. if
@@ -18581,9 +19715,9 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
         next_file: { (enumerator: FileEnumerator, cancellable: Cancellable): FileInfo; };
         close_fn: { (enumerator: FileEnumerator, cancellable: Cancellable): boolean; };
-        next_files_async: { (enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        next_files_async: { (enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         next_files_finish: { (enumerator: FileEnumerator, result: AsyncResult): GLib.List; };
-        close_async: { (enumerator: FileEnumerator, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        close_async: { (enumerator: FileEnumerator, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         close_finish: { (enumerator: FileEnumerator, result: AsyncResult): boolean; };
         _g_reserved1: { (): void; };
         _g_reserved2: { (): void; };
@@ -18605,7 +19739,7 @@ declare namespace imports.gi.Gio {
         can_truncate: { (stream: FileIOStream): boolean; };
         truncate_fn: { (stream: FileIOStream, size: number, cancellable: Cancellable): boolean; };
         query_info: { (stream: FileIOStream, attributes: string, cancellable: Cancellable): FileInfo; };
-        query_info_async: { (stream: FileIOStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        query_info_async: { (stream: FileIOStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         query_info_finish: { (stream: FileIOStream, result: AsyncResult): FileInfo; };
         get_etag: { (stream: FileIOStream): string; };
         _g_reserved1: { (): void; };
@@ -18643,19 +19777,19 @@ declare namespace imports.gi.Gio {
         resolve_relative_path: { (file: File, relative_path: string): File; };
         get_child_for_display_name: { (file: File, display_name: string): File; };
         enumerate_children: { (file: File, attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable): FileEnumerator; };
-        enumerate_children_async: { (file: File, attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        enumerate_children_async: { (file: File, attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         enumerate_children_finish: { (file: File, res: AsyncResult): FileEnumerator; };
         query_info: { (file: File, attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable): FileInfo; };
-        query_info_async: { (file: File, attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        query_info_async: { (file: File, attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         query_info_finish: { (file: File, res: AsyncResult): FileInfo; };
         query_filesystem_info: { (file: File, attributes: string, cancellable: Cancellable): FileInfo; };
-        query_filesystem_info_async: { (file: File, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        query_filesystem_info_async: { (file: File, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         query_filesystem_info_finish: { (file: File, res: AsyncResult): FileInfo; };
         find_enclosing_mount: { (file: File, cancellable: Cancellable): Mount; };
-        find_enclosing_mount_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        find_enclosing_mount_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         find_enclosing_mount_finish: { (file: File, res: AsyncResult): Mount; };
         set_display_name: { (file: File, display_name: string, cancellable: Cancellable): File; };
-        set_display_name_async: { (file: File, display_name: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        set_display_name_async: { (file: File, display_name: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         set_display_name_finish: { (file: File, res: AsyncResult): File; };
         query_settable_attributes: { (file: File, cancellable: Cancellable): FileAttributeInfoList; };
         _query_settable_attributes_async: { (): void; };
@@ -18665,69 +19799,69 @@ declare namespace imports.gi.Gio {
         _query_writable_namespaces_finish: { (): void; };
         set_attribute: { (file: File, attribute: string, _type: FileAttributeType, value_p: any, flags: FileQueryInfoFlags, cancellable: Cancellable): boolean; };
         set_attributes_from_info: { (file: File, info: FileInfo, flags: FileQueryInfoFlags, cancellable: Cancellable): boolean; };
-        set_attributes_async: { (file: File, info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        set_attributes_async: { (file: File, info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         set_attributes_finish: { (file: File, result: AsyncResult, info: FileInfo): boolean; };
         read_fn: { (file: File, cancellable: Cancellable): FileInputStream; };
-        read_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        read_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         read_finish: { (file: File, res: AsyncResult): FileInputStream; };
         append_to: { (file: File, flags: FileCreateFlags, cancellable: Cancellable): FileOutputStream; };
-        append_to_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        append_to_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         append_to_finish: { (file: File, res: AsyncResult): FileOutputStream; };
         create: { (file: File, flags: FileCreateFlags, cancellable: Cancellable): FileOutputStream; };
-        create_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        create_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         create_finish: { (file: File, res: AsyncResult): FileOutputStream; };
         replace: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable): FileOutputStream; };
-        replace_async: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        replace_async: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         replace_finish: { (file: File, res: AsyncResult): FileOutputStream; };
         delete_file: { (file: File, cancellable: Cancellable): boolean; };
-        delete_file_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        delete_file_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         delete_file_finish: { (file: File, result: AsyncResult): boolean; };
         trash: { (file: File, cancellable: Cancellable): boolean; };
-        trash_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        trash_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         trash_finish: { (file: File, result: AsyncResult): boolean; };
         make_directory: { (file: File, cancellable: Cancellable): boolean; };
-        make_directory_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        make_directory_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         make_directory_finish: { (file: File, result: AsyncResult): boolean; };
         make_symbolic_link: { (file: File, symlink_value: string, cancellable: Cancellable): boolean; };
         _make_symbolic_link_async: { (): void; };
         _make_symbolic_link_finish: { (): void; };
         copy: { (source: File, destination: File, flags: FileCopyFlags, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any): boolean; };
-        copy_async: { (source: File, destination: File, flags: FileCopyFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any, callback: AsyncReadyCallback, user_data: any): void; };
+        copy_async: { (source: File, destination: File, flags: FileCopyFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any, callback: AsyncReadyCallback): void; };
         copy_finish: { (file: File, res: AsyncResult): boolean; };
         move: { (source: File, destination: File, flags: FileCopyFlags, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any): boolean; };
         _move_async: { (): void; };
         _move_finish: { (): void; };
-        mount_mountable: { (file: File, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        mount_mountable: { (file: File, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         mount_mountable_finish: { (file: File, result: AsyncResult): File; };
-        unmount_mountable: { (file: File, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        unmount_mountable: { (file: File, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         unmount_mountable_finish: { (file: File, result: AsyncResult): boolean; };
-        eject_mountable: { (file: File, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject_mountable: { (file: File, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_mountable_finish: { (file: File, result: AsyncResult): boolean; };
-        mount_enclosing_volume: { (location: File, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        mount_enclosing_volume: { (location: File, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         mount_enclosing_volume_finish: { (location: File, result: AsyncResult): boolean; };
         monitor_dir: { (file: File, flags: FileMonitorFlags, cancellable: Cancellable): FileMonitor; };
         monitor_file: { (file: File, flags: FileMonitorFlags, cancellable: Cancellable): FileMonitor; };
         open_readwrite: { (file: File, cancellable: Cancellable): FileIOStream; };
-        open_readwrite_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        open_readwrite_async: { (file: File, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         open_readwrite_finish: { (file: File, res: AsyncResult): FileIOStream; };
         create_readwrite: { (file: File, flags: FileCreateFlags, cancellable: Cancellable): FileIOStream; };
-        create_readwrite_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        create_readwrite_async: { (file: File, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         create_readwrite_finish: { (file: File, res: AsyncResult): FileIOStream; };
         replace_readwrite: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable): FileIOStream; };
-        replace_readwrite_async: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        replace_readwrite_async: { (file: File, etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         replace_readwrite_finish: { (file: File, res: AsyncResult): FileIOStream; };
-        start_mountable: { (file: File, flags: DriveStartFlags, start_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        start_mountable: { (file: File, flags: DriveStartFlags, start_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         start_mountable_finish: { (file: File, result: AsyncResult): boolean; };
-        stop_mountable: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        stop_mountable: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         stop_mountable_finish: { (file: File, result: AsyncResult): boolean; };
-        unmount_mountable_with_operation: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        unmount_mountable_with_operation: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         unmount_mountable_with_operation_finish: { (file: File, result: AsyncResult): boolean; };
-        eject_mountable_with_operation: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject_mountable_with_operation: { (file: File, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_mountable_with_operation_finish: { (file: File, result: AsyncResult): boolean; };
-        poll_mountable: { (file: File, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        poll_mountable: { (file: File, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         poll_mountable_finish: { (file: File, result: AsyncResult): boolean; };
         measure_disk_usage: { (file: File, flags: FileMeasureFlags, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, disk_usage: number, num_dirs: number, num_files: number): boolean; };
-        measure_disk_usage_async: { (file: File, flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, callback: AsyncReadyCallback, user_data: any): void; };
+        measure_disk_usage_async: { (file: File, flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, callback: AsyncReadyCallback): void; };
         measure_disk_usage_finish: { (file: File, result: AsyncResult, disk_usage: number, num_dirs: number, num_files: number): boolean; };
     }
 
@@ -18740,7 +19874,7 @@ declare namespace imports.gi.Gio {
         can_seek: { (stream: FileInputStream): boolean; };
         seek: { (stream: FileInputStream, offset: number, _type: GLib.SeekType, cancellable: Cancellable): boolean; };
         query_info: { (stream: FileInputStream, attributes: string, cancellable: Cancellable): FileInfo; };
-        query_info_async: { (stream: FileInputStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        query_info_async: { (stream: FileInputStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         query_info_finish: { (stream: FileInputStream, result: AsyncResult): FileInfo; };
         _g_reserved1: { (): void; };
         _g_reserved2: { (): void; };
@@ -18774,7 +19908,7 @@ declare namespace imports.gi.Gio {
         can_truncate: { (stream: FileOutputStream): boolean; };
         truncate_fn: { (stream: FileOutputStream, size: number, cancellable: Cancellable): boolean; };
         query_info: { (stream: FileOutputStream, attributes: string, cancellable: Cancellable): FileInfo; };
-        query_info_async: { (stream: FileOutputStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        query_info_async: { (stream: FileOutputStream, attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         query_info_finish: { (stream: FileOutputStream, result: AsyncResult): FileInfo; };
         get_etag: { (stream: FileOutputStream): string; };
         _g_reserved1: { (): void; };
@@ -18907,11 +20041,10 @@ declare namespace imports.gi.Gio {
          * that the job was started from, waiting for the result (and thus
          * blocking the I/O job).
          * @param _func a #GSourceFunc callback that will be called in the original thread
-         * @param user_data data to pass to #func
          * @param notify a #GDestroyNotify for #user_data, or %NULL
          * @returns The return value of #func
          */
-        public send_to_mainloop(_func: GLib.SourceFunc, user_data: any, notify: GLib.DestroyNotify): boolean;
+        public send_to_mainloop(_func: GLib.SourceFunc, notify: GLib.DestroyNotify): boolean;
         /**
          * Used from an I/O job to send a callback to be run asynchronously in
          * the thread that the job was started from. The callback will be run
@@ -18923,10 +20056,9 @@ declare namespace imports.gi.Gio {
          * #func is called, either by passing %NULL as #notify to
          * g_io_scheduler_push_job() or by using refcounting for #user_data.
          * @param _func a #GSourceFunc callback that will be called in the original thread
-         * @param user_data data to pass to #func
          * @param notify a #GDestroyNotify for #user_data, or %NULL
          */
-        public send_to_mainloop_async(_func: GLib.SourceFunc, user_data: any, notify: GLib.DestroyNotify): void;
+        public send_to_mainloop_async(_func: GLib.SourceFunc, notify: GLib.DestroyNotify): void;
     }
 
     class IOStreamAdapter {
@@ -18937,7 +20069,7 @@ declare namespace imports.gi.Gio {
         get_input_stream: { (stream: IOStream): InputStream; };
         get_output_stream: { (stream: IOStream): OutputStream; };
         close_fn: { (stream: IOStream, cancellable: Cancellable): boolean; };
-        close_async: { (stream: IOStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        close_async: { (stream: IOStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         close_finish: { (stream: IOStream, result: AsyncResult): boolean; };
         _g_reserved1: { (): void; };
         _g_reserved2: { (): void; };
@@ -19036,11 +20168,11 @@ declare namespace imports.gi.Gio {
         read_fn: { (stream: InputStream, buffer: any, count: number, cancellable: Cancellable): number; };
         skip: { (stream: InputStream, count: number, cancellable: Cancellable): number; };
         close_fn: { (stream: InputStream, cancellable: Cancellable): boolean; };
-        read_async: { (stream: InputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        read_async: { (stream: InputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         read_finish: { (stream: InputStream, result: AsyncResult): number; };
-        skip_async: { (stream: InputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        skip_async: { (stream: InputStream, count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         skip_finish: { (stream: InputStream, result: AsyncResult): number; };
-        close_async: { (stream: InputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        close_async: { (stream: InputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         close_finish: { (stream: InputStream, result: AsyncResult): boolean; };
         _g_reserved1: { (): void; };
         _g_reserved2: { (): void; };
@@ -19083,7 +20215,7 @@ declare namespace imports.gi.Gio {
     class LoadableIconIface {
         public g_iface: GObject.TypeInterface;
         load: { (icon: LoadableIcon, size: number, _type: string, cancellable: Cancellable): InputStream; };
-        load_async: { (icon: LoadableIcon, size: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        load_async: { (icon: LoadableIcon, size: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         load_finish: { (icon: LoadableIcon, res: AsyncResult, _type: string): InputStream; };
     }
 
@@ -19165,19 +20297,19 @@ declare namespace imports.gi.Gio {
         get_drive: { (mount: Mount): Drive; };
         can_unmount: { (mount: Mount): boolean; };
         can_eject: { (mount: Mount): boolean; };
-        unmount: { (mount: Mount, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        unmount: { (mount: Mount, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         unmount_finish: { (mount: Mount, result: AsyncResult): boolean; };
-        eject: { (mount: Mount, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject: { (mount: Mount, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_finish: { (mount: Mount, result: AsyncResult): boolean; };
-        remount: { (mount: Mount, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        remount: { (mount: Mount, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         remount_finish: { (mount: Mount, result: AsyncResult): boolean; };
-        guess_content_type: { (mount: Mount, force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        guess_content_type: { (mount: Mount, force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         guess_content_type_finish: { (mount: Mount, result: AsyncResult): string[]; };
         guess_content_type_sync: { (mount: Mount, force_rescan: boolean, cancellable: Cancellable): string[]; };
         pre_unmount: { (mount: Mount): void; };
-        unmount_with_operation: { (mount: Mount, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        unmount_with_operation: { (mount: Mount, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         unmount_with_operation_finish: { (mount: Mount, result: AsyncResult): boolean; };
-        eject_with_operation: { (mount: Mount, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject_with_operation: { (mount: Mount, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_with_operation_finish: { (mount: Mount, result: AsyncResult): boolean; };
         get_default_location: { (mount: Mount): File; };
         get_sort_key: { (mount: Mount): string; };
@@ -19232,7 +20364,7 @@ declare namespace imports.gi.Gio {
         public g_iface: GObject.TypeInterface;
         network_changed: { (monitor: NetworkMonitor, network_available: boolean): void; };
         can_reach: { (monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable): boolean; };
-        can_reach_async: { (monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        can_reach_async: { (monitor: NetworkMonitor, connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         can_reach_finish: { (monitor: NetworkMonitor, result: AsyncResult): boolean; };
     }
 
@@ -19267,16 +20399,16 @@ declare namespace imports.gi.Gio {
         splice: { (stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable): number; };
         flush: { (stream: OutputStream, cancellable: Cancellable): boolean; };
         close_fn: { (stream: OutputStream, cancellable: Cancellable): boolean; };
-        write_async: { (stream: OutputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        write_async: { (stream: OutputStream, buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         write_finish: { (stream: OutputStream, result: AsyncResult): number; };
-        splice_async: { (stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        splice_async: { (stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         splice_finish: { (stream: OutputStream, result: AsyncResult): number; };
-        flush_async: { (stream: OutputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        flush_async: { (stream: OutputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         flush_finish: { (stream: OutputStream, result: AsyncResult): boolean; };
-        close_async: { (stream: OutputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        close_async: { (stream: OutputStream, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         close_finish: { (stream: OutputStream, result: AsyncResult): boolean; };
         writev_fn: { (stream: OutputStream, vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable): boolean; };
-        writev_async: { (stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        writev_async: { (stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         writev_finish: { (stream: OutputStream, result: AsyncResult, bytes_written: number): boolean; };
         _g_reserved4: { (): void; };
         _g_reserved5: { (): void; };
@@ -19303,10 +20435,10 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
         public reserved: any[];
         acquire: { (permission: Permission, cancellable: Cancellable): boolean; };
-        acquire_async: { (permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        acquire_async: { (permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         acquire_finish: { (permission: Permission, result: AsyncResult): boolean; };
         release: { (permission: Permission, cancellable: Cancellable): boolean; };
-        release_async: { (permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        release_async: { (permission: Permission, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         release_finish: { (permission: Permission, result: AsyncResult): boolean; };
     }
 
@@ -19400,7 +20532,7 @@ declare namespace imports.gi.Gio {
     class ProxyInterface {
         public g_iface: GObject.TypeInterface;
         connect: { (proxy: Proxy, connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable): IOStream; };
-        connect_async: { (proxy: Proxy, connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        connect_async: { (proxy: Proxy, connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         connect_finish: { (proxy: Proxy, result: AsyncResult): IOStream; };
         supports_hostname: { (proxy: Proxy): boolean; };
     }
@@ -19412,7 +20544,7 @@ declare namespace imports.gi.Gio {
         public g_iface: GObject.TypeInterface;
         is_supported: { (resolver: ProxyResolver): boolean; };
         lookup: { (resolver: ProxyResolver, uri: string, cancellable: Cancellable): string[]; };
-        lookup_async: { (resolver: ProxyResolver, uri: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_async: { (resolver: ProxyResolver, uri: string, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_finish: { (resolver: ProxyResolver, result: AsyncResult): string[]; };
     }
 
@@ -19429,18 +20561,18 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
         reload: { (resolver: Resolver): void; };
         lookup_by_name: { (resolver: Resolver, hostname: string, cancellable: Cancellable): GLib.List; };
-        lookup_by_name_async: { (resolver: Resolver, hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_by_name_async: { (resolver: Resolver, hostname: string, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_by_name_finish: { (resolver: Resolver, result: AsyncResult): GLib.List; };
         lookup_by_address: { (resolver: Resolver, address: InetAddress, cancellable: Cancellable): string; };
-        lookup_by_address_async: { (resolver: Resolver, address: InetAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_by_address_async: { (resolver: Resolver, address: InetAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_by_address_finish: { (resolver: Resolver, result: AsyncResult): string; };
         lookup_service: { (resolver: Resolver, rrname: string, cancellable: Cancellable): GLib.List; };
-        lookup_service_async: { (resolver: Resolver, rrname: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_service_async: { (resolver: Resolver, rrname: string, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_service_finish: { (resolver: Resolver, result: AsyncResult): GLib.List; };
         lookup_records: { (resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable): GLib.List; };
-        lookup_records_async: { (resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_records_async: { (resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_records_finish: { (resolver: Resolver, result: AsyncResult): GLib.List; };
-        lookup_by_name_with_flags_async: { (resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_by_name_with_flags_async: { (resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_by_name_with_flags_finish: { (resolver: Resolver, result: AsyncResult): GLib.List; };
         lookup_by_name_with_flags: { (resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable): GLib.List; };
     }
@@ -19587,6 +20719,23 @@ declare namespace imports.gi.Gio {
      * location of a single resource with an individual file.
      */
     class Resource {
+        /**
+         * Creates a GResource from a reference to the binary resource bundle.
+         * This will keep a reference to #data while the resource lives, so
+         * the data should not be modified or freed.
+         * 
+         * If you want to use this resource in the global resource namespace you need
+         * to register it with g_resources_register().
+         * 
+         * Note: #data must be backed by memory that is at least pointer aligned.
+         * Otherwise this function will internally create a copy of the memory since
+         * GLib 2.56, or in older versions fail and exit the process.
+         * 
+         * If #data is empty or corrupt, %G_RESOURCE_ERROR_INTERNAL will be returned.
+         * @param data A #GBytes
+         * @returns a new #GResource, or %NULL on error
+         */
+        static new_from_data(data: GLib.Bytes): Resource;
         /**
          * Registers the resource with the process-global set of resources.
          * Once a resource is registered the files in it can be accessed
@@ -19995,6 +21144,44 @@ declare namespace imports.gi.Gio {
      */
     class SettingsSchemaSource {
         /**
+         * Attempts to create a new schema source corresponding to the contents
+         * of the given directory.
+         * 
+         * This function is not required for normal uses of #GSettings but it
+         * may be useful to authors of plugin management systems.
+         * 
+         * The directory should contain a file called `gschemas.compiled` as
+         * produced by the [glib-compile-schemas][glib-compile-schemas] tool.
+         * 
+         * If #trusted is %TRUE then `gschemas.compiled` is trusted not to be
+         * corrupted. This assumption has a performance advantage, but can result
+         * in crashes or inconsistent behaviour in the case of a corrupted file.
+         * Generally, you should set #trusted to %TRUE for files installed by the
+         * system and to %FALSE for files in the home directory.
+         * 
+         * In either case, an empty file or some types of corruption in the file will
+         * result in %G_FILE_ERROR_INVAL being returned.
+         * 
+         * If #parent is non-%NULL then there are two effects.
+         * 
+         * First, if g_settings_schema_source_lookup() is called with the
+         * #recursive flag set to %TRUE and the schema can not be found in the
+         * source, the lookup will recurse to the parent.
+         * 
+         * Second, any references to other schemas specified within this
+         * source (ie: `child` or `extends`) references may be resolved
+         * from the #parent.
+         * 
+         * For this second reason, except in very unusual situations, the
+         * #parent should probably be given as the default schema source, as
+         * returned by g_settings_schema_source_get_default().
+         * @param directory the filename of a directory
+         * @param parent a #GSettingsSchemaSource, or %NULL
+         * @param trusted %TRUE, if the directory is trusted
+         * @returns 
+         */
+        static new_from_directory(directory: string, parent: SettingsSchemaSource, trusted: boolean): SettingsSchemaSource;
+        /**
          * Lists the schemas in a given source.
          * 
          * If #recursive is %TRUE then include parent sources.  If %FALSE then
@@ -20075,7 +21262,7 @@ declare namespace imports.gi.Gio {
     class SocketAddressEnumeratorClass {
         public parent_class: GObject.ObjectClass;
         next: { (enumerator: SocketAddressEnumerator, cancellable: Cancellable): SocketAddress; };
-        next_async: { (enumerator: SocketAddressEnumerator, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        next_async: { (enumerator: SocketAddressEnumerator, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         next_finish: { (enumerator: SocketAddressEnumerator, result: AsyncResult): SocketAddress; };
     }
 
@@ -20203,6 +21390,18 @@ declare namespace imports.gi.Gio {
      * #GSrvTarget at all.
      */
     class SrvTarget {
+        /**
+         * Creates a new #GSrvTarget with the given parameters.
+         * 
+         * You should not need to use this; normally #GSrvTargets are
+         * created by #GResolver.
+         * @param hostname the host that the service is running on
+         * @param _port the port that the service is running on
+         * @param priority the target's priority
+         * @param weight the target's weight
+         * @returns a new #GSrvTarget.
+         */
+        static new(hostname: string, _port: number, priority: number, weight: number): SrvTarget;
         /**
          * Copies #target
          * @returns a copy of #target
@@ -20353,7 +21552,7 @@ declare namespace imports.gi.Gio {
         public padding: any[];
         accept_certificate: { (connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean; };
         handshake: { (conn: TlsConnection, cancellable: Cancellable): boolean; };
-        handshake_async: { (conn: TlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        handshake_async: { (conn: TlsConnection, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         handshake_finish: { (conn: TlsConnection, result: AsyncResult): boolean; };
         get_binding_data: { (conn: TlsConnection, _type: TlsChannelBindingType, data: number[]): boolean; };
         get_negotiated_protocol: { (conn: TlsConnection): string; };
@@ -20371,17 +21570,17 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
         public padding: any[];
         verify_chain: { (self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable): TlsCertificateFlags; };
-        verify_chain_async: { (self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        verify_chain_async: { (self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable, interaction: TlsInteraction, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         verify_chain_finish: { (self: TlsDatabase, result: AsyncResult): TlsCertificateFlags; };
         create_certificate_handle: { (self: TlsDatabase, certificate: TlsCertificate): string; };
         lookup_certificate_for_handle: { (self: TlsDatabase, handle: string, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable): TlsCertificate; };
-        lookup_certificate_for_handle_async: { (self: TlsDatabase, handle: string, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_certificate_for_handle_async: { (self: TlsDatabase, handle: string, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_certificate_for_handle_finish: { (self: TlsDatabase, result: AsyncResult): TlsCertificate; };
         lookup_certificate_issuer: { (self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable): TlsCertificate; };
-        lookup_certificate_issuer_async: { (self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_certificate_issuer_async: { (self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_certificate_issuer_finish: { (self: TlsDatabase, result: AsyncResult): TlsCertificate; };
         lookup_certificates_issued_by: { (self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable): GLib.List; };
-        lookup_certificates_issued_by_async: { (self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        lookup_certificates_issued_by_async: { (self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction, flags: TlsDatabaseLookupFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         lookup_certificates_issued_by_finish: { (self: TlsDatabase, result: AsyncResult): GLib.List; };
     }
 
@@ -20416,10 +21615,10 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
         public padding: any[];
         ask_password: { (interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable): TlsInteractionResult; };
-        ask_password_async: { (interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        ask_password_async: { (interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         ask_password_finish: { (interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult; };
         request_certificate: { (interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable): TlsInteractionResult; };
-        request_certificate_async: { (interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        request_certificate_async: { (interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         request_certificate_finish: { (interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult; };
     }
 
@@ -20643,15 +21842,15 @@ declare namespace imports.gi.Gio {
         get_mount: { (volume: Volume): Mount; };
         can_mount: { (volume: Volume): boolean; };
         can_eject: { (volume: Volume): boolean; };
-        mount_fn: { (volume: Volume, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        mount_fn: { (volume: Volume, flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         mount_finish: { (volume: Volume, result: AsyncResult): boolean; };
-        eject: { (volume: Volume, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject: { (volume: Volume, flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_finish: { (volume: Volume, result: AsyncResult): boolean; };
         get_identifier: { (volume: Volume, kind: string): string; };
         enumerate_identifiers: { (volume: Volume): string[]; };
         should_automount: { (volume: Volume): boolean; };
         get_activation_root: { (volume: Volume): File; };
-        eject_with_operation: { (volume: Volume, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void; };
+        eject_with_operation: { (volume: Volume, flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void; };
         eject_with_operation_finish: { (volume: Volume, result: AsyncResult): boolean; };
         get_sort_key: { (volume: Volume): string; };
         get_symbolic_icon: { (volume: Volume): Icon; };
@@ -20694,38 +21893,10 @@ declare namespace imports.gi.Gio {
         public parent_class: GObject.ObjectClass;
     }
 
-    /**
-     * #GAction represents a single named action.
-     * 
-     * The main interface to an action is that it can be activated with
-     * g_action_activate().  This results in the 'activate' signal being
-     * emitted.  An activation has a #GVariant parameter (which may be
-     * %NULL).  The correct type for the parameter is determined by a static
-     * parameter type (which is given at construction time).
-     * 
-     * An action may optionally have a state, in which case the state may be
-     * set with g_action_change_state().  This call takes a #GVariant.  The
-     * correct type for the state is determined by a static state type
-     * (which is given at construction time).
-     * 
-     * The state may have a hint associated with it, specifying its valid
-     * range.
-     * 
-     * #GAction is merely the interface to the concept of an action, as
-     * described above.  Various implementations of actions exist, including
-     * #GSimpleAction.
-     * 
-     * In all cases, the implementing class is responsible for storing the
-     * name of the action, the parameter type, the enabled state, the
-     * optional state type and the state and emitting the appropriate
-     * signals when these change.  The implementor is responsible for filtering
-     * calls to g_action_activate() and g_action_change_state() for type
-     * safety and for the state being enabled.
-     * 
-     * Probably the only useful thing to do with a #GAction is to put it
-     * inside of a #GSimpleActionGroup.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Action} instead.
      */
-    interface Action {
+    interface IAction {
         /**
          * Activates the action.
          * 
@@ -20828,7 +21999,46 @@ declare namespace imports.gi.Gio {
         get_state_type(): GLib.VariantType;
     }
 
-    var Action: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Action} instead.
+     */
+    type ActionMixin = IAction;
+
+    /**
+     * #GAction represents a single named action.
+     * 
+     * The main interface to an action is that it can be activated with
+     * g_action_activate().  This results in the 'activate' signal being
+     * emitted.  An activation has a #GVariant parameter (which may be
+     * %NULL).  The correct type for the parameter is determined by a static
+     * parameter type (which is given at construction time).
+     * 
+     * An action may optionally have a state, in which case the state may be
+     * set with g_action_change_state().  This call takes a #GVariant.  The
+     * correct type for the state is determined by a static state type
+     * (which is given at construction time).
+     * 
+     * The state may have a hint associated with it, specifying its valid
+     * range.
+     * 
+     * #GAction is merely the interface to the concept of an action, as
+     * described above.  Various implementations of actions exist, including
+     * #GSimpleAction.
+     * 
+     * In all cases, the implementing class is responsible for storing the
+     * name of the action, the parameter type, the enabled state, the
+     * optional state type and the state and emitting the appropriate
+     * signals when these change.  The implementor is responsible for filtering
+     * calls to g_action_activate() and g_action_change_state() for type
+     * safety and for the state being enabled.
+     * 
+     * Probably the only useful thing to do with a #GAction is to put it
+     * inside of a #GSimpleActionGroup.
+     */
+    interface Action extends ActionMixin { }
+
+    class Action {
+        constructor();
         /**
          * Checks if #action_name is valid.
          * 
@@ -20840,7 +22050,7 @@ declare namespace imports.gi.Gio {
          * @param action_name a potential action name
          * @returns %TRUE if #action_name is valid
          */
-        name_is_valid(action_name: string): boolean;
+        static name_is_valid(action_name: string): boolean;
         /**
          * Parses a detailed action name into its separate name and target
          * components.
@@ -20871,7 +22081,7 @@ declare namespace imports.gi.Gio {
          * @param target_value the target value, or %NULL for no target
          * @returns %TRUE if successful, else %FALSE with #error set
          */
-        parse_detailed_name(detailed_name: string, action_name: string, target_value: GLib.Variant): boolean;
+        static parse_detailed_name(detailed_name: string, action_name: string, target_value: GLib.Variant): boolean;
         /**
          * Formats a detailed action name from #action_name and #target_value.
          * 
@@ -20887,59 +22097,15 @@ declare namespace imports.gi.Gio {
          * @param target_value a #GVariant target value, or %NULL
          * @returns a detailed format string
          */
-        print_detailed_name(action_name: string, target_value: GLib.Variant): string;
+        static print_detailed_name(action_name: string, target_value: GLib.Variant): string;
     }
 
 
 
-    /**
-     * #GActionGroup represents a group of actions. Actions can be used to
-     * expose functionality in a structured way, either from one part of a
-     * program to another, or to the outside world. Action groups are often
-     * used together with a #GMenuModel that provides additional
-     * representation data for displaying the actions to the user, e.g. in
-     * a menu.
-     * 
-     * The main way to interact with the actions in a GActionGroup is to
-     * activate them with g_action_group_activate_action(). Activating an
-     * action may require a #GVariant parameter. The required type of the
-     * parameter can be inquired with g_action_group_get_action_parameter_type().
-     * Actions may be disabled, see g_action_group_get_action_enabled().
-     * Activating a disabled action has no effect.
-     * 
-     * Actions may optionally have a state in the form of a #GVariant. The
-     * current state of an action can be inquired with
-     * g_action_group_get_action_state(). Activating a stateful action may
-     * change its state, but it is also possible to set the state by calling
-     * g_action_group_change_action_state().
-     * 
-     * As typical example, consider a text editing application which has an
-     * option to change the current font to 'bold'. A good way to represent
-     * this would be a stateful action, with a boolean state. Activating the
-     * action would toggle the state.
-     * 
-     * Each action in the group has a unique name (which is a string).  All
-     * method calls, except g_action_group_list_actions() take the name of
-     * an action as an argument.
-     * 
-     * The #GActionGroup API is meant to be the 'public' API to the action
-     * group.  The calls here are exactly the interaction that 'external
-     * forces' (eg: UI, incoming D-Bus messages, etc.) are supposed to have
-     * with actions.  'Internal' APIs (ie: ones meant only to be accessed by
-     * the action group implementation) are found on subclasses.  This is
-     * why you will find - for example - g_action_group_get_action_enabled()
-     * but not an equivalent set() call.
-     * 
-     * Signals are emitted on the action group in response to state changes
-     * on individual actions.
-     * 
-     * Implementations of #GActionGroup should provide implementations for
-     * the virtual functions g_action_group_list_actions() and
-     * g_action_group_query_action().  The other virtual functions should
-     * not be implemented - their "wrappers" are actually implemented with
-     * calls to g_action_group_query_action().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ActionGroup} instead.
      */
-    interface ActionGroup {
+    interface IActionGroup {
         /**
          * Emits the #GActionGroup::action-added signal on #action_group.
          * 
@@ -21161,23 +22327,70 @@ declare namespace imports.gi.Gio {
         query_action(action_name: string, enabled: boolean, parameter_type: GLib.VariantType, state_type: GLib.VariantType, state_hint: GLib.Variant, state: GLib.Variant): boolean;
     }
 
-    var ActionGroup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ActionGroup} instead.
+     */
+    type ActionGroupMixin = IActionGroup;
+
+    /**
+     * #GActionGroup represents a group of actions. Actions can be used to
+     * expose functionality in a structured way, either from one part of a
+     * program to another, or to the outside world. Action groups are often
+     * used together with a #GMenuModel that provides additional
+     * representation data for displaying the actions to the user, e.g. in
+     * a menu.
+     * 
+     * The main way to interact with the actions in a GActionGroup is to
+     * activate them with g_action_group_activate_action(). Activating an
+     * action may require a #GVariant parameter. The required type of the
+     * parameter can be inquired with g_action_group_get_action_parameter_type().
+     * Actions may be disabled, see g_action_group_get_action_enabled().
+     * Activating a disabled action has no effect.
+     * 
+     * Actions may optionally have a state in the form of a #GVariant. The
+     * current state of an action can be inquired with
+     * g_action_group_get_action_state(). Activating a stateful action may
+     * change its state, but it is also possible to set the state by calling
+     * g_action_group_change_action_state().
+     * 
+     * As typical example, consider a text editing application which has an
+     * option to change the current font to 'bold'. A good way to represent
+     * this would be a stateful action, with a boolean state. Activating the
+     * action would toggle the state.
+     * 
+     * Each action in the group has a unique name (which is a string).  All
+     * method calls, except g_action_group_list_actions() take the name of
+     * an action as an argument.
+     * 
+     * The #GActionGroup API is meant to be the 'public' API to the action
+     * group.  The calls here are exactly the interaction that 'external
+     * forces' (eg: UI, incoming D-Bus messages, etc.) are supposed to have
+     * with actions.  'Internal' APIs (ie: ones meant only to be accessed by
+     * the action group implementation) are found on subclasses.  This is
+     * why you will find - for example - g_action_group_get_action_enabled()
+     * but not an equivalent set() call.
+     * 
+     * Signals are emitted on the action group in response to state changes
+     * on individual actions.
+     * 
+     * Implementations of #GActionGroup should provide implementations for
+     * the virtual functions g_action_group_list_actions() and
+     * g_action_group_query_action().  The other virtual functions should
+     * not be implemented - their "wrappers" are actually implemented with
+     * calls to g_action_group_query_action().
+     */
+    interface ActionGroup extends ActionGroupMixin { }
+
+    class ActionGroup {
+        constructor();
     }
 
 
 
-    /**
-     * The GActionMap interface is implemented by #GActionGroup
-     * implementations that operate by containing a number of
-     * named #GAction instances, such as #GSimpleActionGroup.
-     * 
-     * One useful application of this interface is to map the
-     * names of actions from various action groups to unique,
-     * prefixed names (e.g. by prepending "app." or "win.").
-     * This is the motivation for the 'Map' part of the interface
-     * name.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ActionMap} instead.
      */
-    interface ActionMap {
+    interface IActionMap {
         /**
          * Adds an action to the #action_map.
          * 
@@ -21228,9 +22441,8 @@ declare namespace imports.gi.Gio {
          * ]|
          * @param entries 
          * @param n_entries the length of #entries, or -1 if #entries is %NULL-terminated
-         * @param user_data the user data for signal connections
          */
-        add_action_entries(entries: ActionEntry[], n_entries: number, user_data: any): void;
+        add_action_entries(entries: ActionEntry[], n_entries: number): void;
         /**
          * Looks up the action with the name #action_name in #action_map.
          * 
@@ -21248,62 +22460,34 @@ declare namespace imports.gi.Gio {
         remove_action(action_name: string): void;
     }
 
-    var ActionMap: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ActionMap} instead.
+     */
+    type ActionMapMixin = IActionMap;
+
+    /**
+     * The GActionMap interface is implemented by #GActionGroup
+     * implementations that operate by containing a number of
+     * named #GAction instances, such as #GSimpleActionGroup.
+     * 
+     * One useful application of this interface is to map the
+     * names of actions from various action groups to unique,
+     * prefixed names (e.g. by prepending "app." or "win.").
+     * This is the motivation for the 'Map' part of the interface
+     * name.
+     */
+    interface ActionMap extends ActionMapMixin { }
+
+    class ActionMap {
+        constructor();
     }
 
 
 
-    /**
-     * #GAppInfo and #GAppLaunchContext are used for describing and launching
-     * applications installed on the system.
-     * 
-     * As of GLib 2.20, URIs will always be converted to POSIX paths
-     * (using g_file_get_path()) when using g_app_info_launch() even if
-     * the application requested an URI and not a POSIX path. For example
-     * for a desktop-file based application with Exec key `totem
-     * %U` and a single URI, `sftp://foo/file.avi`, then
-     * `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
-     * only work if a set of suitable GIO extensions (such as gvfs 2.26
-     * compiled with FUSE support), is available and operational; if this
-     * is not the case, the URI will be passed unmodified to the application.
-     * Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
-     * path (in gvfs there's no FUSE mount for it); such URIs will be
-     * passed unmodified to the application.
-     * 
-     * Specifically for gvfs 2.26 and later, the POSIX URI will be mapped
-     * back to the GIO URI in the #GFile constructors (since gvfs
-     * implements the #GVfs extension point). As such, if the application
-     * needs to examine the URI, it needs to use g_file_get_uri() or
-     * similar on #GFile. In other words, an application cannot assume
-     * that the URI passed to e.g. g_file_new_for_commandline_arg() is
-     * equal to the result of g_file_get_uri(). The following snippet
-     * illustrates this:
-     * 
-     * |[
-     * GFile *f;
-     * char *uri;
-     * 
-     * file = g_file_new_for_commandline_arg (uri_from_commandline);
-     * 
-     * uri = g_file_get_uri (file);
-     * strcmp (uri, uri_from_commandline) == 0;
-     * g_free (uri);
-     * 
-     * if (g_file_has_uri_scheme (file, "cdda"))
-     *   {
-     *     // do something special with uri
-     *   }
-     * g_object_unref (file);
-     * ]|
-     * 
-     * This code will work when both `cdda://sr0/Track 1.wav` and
-     * `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
-     * application. It should be noted that it's generally not safe
-     * for applications to rely on the format of a particular URIs.
-     * Different launcher applications (e.g. file managers) may have
-     * different ideas of what a given URI means.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppInfo} instead.
      */
-    interface AppInfo {
+    interface IAppInfo {
         /**
          * Adds a content type to the application information to indicate the
          * application is capable of opening files with the given content type.
@@ -21465,9 +22649,8 @@ declare namespace imports.gi.Gio {
          * @param context a #GAppLaunchContext or %NULL
          * @param cancellable a #GCancellable
          * @param callback a #GAsyncReadyCallback to call when the request is done
-         * @param user_data data to pass to #callback
          */
-        launch_uris_async(uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        launch_uris_async(uris: GLib.List, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a g_app_info_launch_uris_async() operation.
          * @param result a #GAsyncResult
@@ -21520,7 +22703,65 @@ declare namespace imports.gi.Gio {
         supports_uris(): boolean;
     }
 
-    var AppInfo: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppInfo} instead.
+     */
+    type AppInfoMixin = IAppInfo;
+
+    /**
+     * #GAppInfo and #GAppLaunchContext are used for describing and launching
+     * applications installed on the system.
+     * 
+     * As of GLib 2.20, URIs will always be converted to POSIX paths
+     * (using g_file_get_path()) when using g_app_info_launch() even if
+     * the application requested an URI and not a POSIX path. For example
+     * for a desktop-file based application with Exec key `totem
+     * %U` and a single URI, `sftp://foo/file.avi`, then
+     * `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
+     * only work if a set of suitable GIO extensions (such as gvfs 2.26
+     * compiled with FUSE support), is available and operational; if this
+     * is not the case, the URI will be passed unmodified to the application.
+     * Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
+     * path (in gvfs there's no FUSE mount for it); such URIs will be
+     * passed unmodified to the application.
+     * 
+     * Specifically for gvfs 2.26 and later, the POSIX URI will be mapped
+     * back to the GIO URI in the #GFile constructors (since gvfs
+     * implements the #GVfs extension point). As such, if the application
+     * needs to examine the URI, it needs to use g_file_get_uri() or
+     * similar on #GFile. In other words, an application cannot assume
+     * that the URI passed to e.g. g_file_new_for_commandline_arg() is
+     * equal to the result of g_file_get_uri(). The following snippet
+     * illustrates this:
+     * 
+     * |[
+     * GFile *f;
+     * char *uri;
+     * 
+     * file = g_file_new_for_commandline_arg (uri_from_commandline);
+     * 
+     * uri = g_file_get_uri (file);
+     * strcmp (uri, uri_from_commandline) == 0;
+     * g_free (uri);
+     * 
+     * if (g_file_has_uri_scheme (file, "cdda"))
+     *   {
+     *     // do something special with uri
+     *   }
+     * g_object_unref (file);
+     * ]|
+     * 
+     * This code will work when both `cdda://sr0/Track 1.wav` and
+     * `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
+     * application. It should be noted that it's generally not safe
+     * for applications to rely on the format of a particular URIs.
+     * Different launcher applications (e.g. file managers) may have
+     * different ideas of what a given URI means.
+     */
+    interface AppInfo extends AppInfoMixin { }
+
+    class AppInfo {
+        constructor();
         /**
          * Creates a new #GAppInfo from the given information.
          * 
@@ -21534,7 +22775,7 @@ declare namespace imports.gi.Gio {
          * @param flags flags that can specify details of the created #GAppInfo
          * @returns new #GAppInfo for given command.
          */
-        create_from_commandline(commandline: string, application_name: string, flags: AppInfoCreateFlags): AppInfo;
+        static create_from_commandline(commandline: string, application_name: string, flags: AppInfoCreateFlags): AppInfo;
         /**
          * Gets a list of all of the applications currently registered
          * on this system.
@@ -21546,7 +22787,7 @@ declare namespace imports.gi.Gio {
          * the `Hidden` key set.
          * @returns a newly allocated #GList of references to #GAppInfos.
          */
-        get_all(): GLib.List;
+        static get_all(): GLib.List;
         /**
          * Gets a list of all #GAppInfos for a given content type,
          * including the recommended and fallback #GAppInfos. See
@@ -21556,7 +22797,7 @@ declare namespace imports.gi.Gio {
          * @returns #GList of #GAppInfos
          *     for given #content_type or %NULL on error.
          */
-        get_all_for_type(content_type: string): GLib.List;
+        static get_all_for_type(content_type: string): GLib.List;
         /**
          * Gets the default #GAppInfo for a given content type.
          * @param content_type the content type to find a #GAppInfo for
@@ -21565,7 +22806,7 @@ declare namespace imports.gi.Gio {
          * @returns #GAppInfo for given #content_type or
          *     %NULL on error.
          */
-        get_default_for_type(content_type: string, must_support_uris: boolean): AppInfo;
+        static get_default_for_type(content_type: string, must_support_uris: boolean): AppInfo;
         /**
          * Gets the default application for handling URIs with
          * the given URI scheme. A URI scheme is the initial part
@@ -21575,7 +22816,7 @@ declare namespace imports.gi.Gio {
          * @returns #GAppInfo for given #uri_scheme or
          *     %NULL on error.
          */
-        get_default_for_uri_scheme(uri_scheme: string): AppInfo;
+        static get_default_for_uri_scheme(uri_scheme: string): AppInfo;
         /**
          * Gets a list of fallback #GAppInfos for a given content type, i.e.
          * those applications which claim to support the given content type
@@ -21584,7 +22825,7 @@ declare namespace imports.gi.Gio {
          * @returns #GList of #GAppInfos
          *     for given #content_type or %NULL on error.
          */
-        get_fallback_for_type(content_type: string): GLib.List;
+        static get_fallback_for_type(content_type: string): GLib.List;
         /**
          * Gets a list of recommended #GAppInfos for a given content type, i.e.
          * those applications which claim to support the given content type exactly,
@@ -21596,7 +22837,7 @@ declare namespace imports.gi.Gio {
          * @returns #GList of #GAppInfos
          *     for given #content_type or %NULL on error.
          */
-        get_recommended_for_type(content_type: string): GLib.List;
+        static get_recommended_for_type(content_type: string): GLib.List;
         /**
          * Utility function that launches the default application
          * registered to handle the specified uri. Synchronous I/O
@@ -21610,7 +22851,7 @@ declare namespace imports.gi.Gio {
          * @param context an optional #GAppLaunchContext
          * @returns %TRUE on success, %FALSE on error.
          */
-        launch_default_for_uri(uri: string, context: AppLaunchContext): boolean;
+        static launch_default_for_uri(uri: string, context: AppLaunchContext): boolean;
         /**
          * Async version of g_app_info_launch_default_for_uri().
          * 
@@ -21626,15 +22867,14 @@ declare namespace imports.gi.Gio {
          * @param context an optional #GAppLaunchContext
          * @param cancellable a #GCancellable
          * @param callback a #GAsyncReadyCallback to call when the request is done
-         * @param user_data data to pass to #callback
          */
-        launch_default_for_uri_async(uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static launch_default_for_uri_async(uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous launch-default-for-uri operation.
          * @param result a #GAsyncResult
          * @returns %TRUE if the launch was successful, %FALSE if #error is set
          */
-        launch_default_for_uri_finish(result: AsyncResult): boolean;
+        static launch_default_for_uri_finish(result: AsyncResult): boolean;
         /**
          * Removes all changes to the type associations done by
          * g_app_info_set_as_default_for_type(),
@@ -21643,10 +22883,79 @@ declare namespace imports.gi.Gio {
          * g_app_info_remove_supports_type().
          * @param content_type a content type
          */
-        reset_type_associations(content_type: string): void;
+        static reset_type_associations(content_type: string): void;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AsyncInitable} instead.
+     */
+    interface IAsyncInitable {
+        /**
+         * Starts asynchronous initialization of the object implementing the
+         * interface. This must be done before any real use of the object after
+         * initial construction. If the object also implements #GInitable you can
+         * optionally call g_initable_init() instead.
+         * 
+         * This method is intended for language bindings. If writing in C,
+         * g_async_initable_new_async() should typically be used instead.
+         * 
+         * When the initialization is finished, #callback will be called. You can
+         * then call g_async_initable_init_finish() to get the result of the
+         * initialization.
+         * 
+         * Implementations may also support cancellation. If #cancellable is not
+         * %NULL, then initialization can be cancelled by triggering the cancellable
+         * object from another thread. If the operation was cancelled, the error
+         * %G_IO_ERROR_CANCELLED will be returned. If #cancellable is not %NULL, and
+         * the object doesn't support cancellable initialization, the error
+         * %G_IO_ERROR_NOT_SUPPORTED will be returned.
+         * 
+         * As with #GInitable, if the object is not initialized, or initialization
+         * returns with an error, then all operations on the object except
+         * g_object_ref() and g_object_unref() are considered to be invalid, and
+         * have undefined behaviour. They will often fail with g_critical() or
+         * g_warning(), but this must not be relied on.
+         * 
+         * Callers should not assume that a class which implements #GAsyncInitable can
+         * be initialized multiple times; for more information, see g_initable_init().
+         * If a class explicitly supports being initialized multiple times,
+         * implementation requires yielding all subsequent calls to init_async() on the
+         * results of the first call.
+         * 
+         * For classes that also support the #GInitable interface, the default
+         * implementation of this method will run the g_initable_init() function
+         * in a thread, so if you want to support asynchronous initialization via
+         * threads, just implement the #GAsyncInitable interface without overriding
+         * any interface methods.
+         * @param io_priority the [I/O priority][io-priority] of the operation
+         * @param cancellable optional #GCancellable object, %NULL to ignore.
+         * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+         */
+        init_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
+        /**
+         * Finishes asynchronous initialization and returns the result.
+         * See g_async_initable_init_async().
+         * @param res a #GAsyncResult.
+         * @returns %TRUE if successful. If an error has occurred, this function
+         * will return %FALSE and set #error appropriately if present.
+         */
+        init_finish(res: AsyncResult): boolean;
+        /**
+         * Finishes the async construction for the various g_async_initable_new
+         * calls, returning the created object or %NULL on error.
+         * @param res the #GAsyncResult from the callback
+         * @returns a newly created #GObject,
+         *      or %NULL on error. Free with g_object_unref().
+         */
+        new_finish(res: AsyncResult): GObject.Object;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AsyncInitable} instead.
+     */
+    type AsyncInitableMixin = IAsyncInitable;
 
     /**
      * This is the asynchronous version of #GInitable; it behaves the same
@@ -21749,69 +23058,10 @@ declare namespace imports.gi.Gio {
      * }
      * ]|
      */
-    interface AsyncInitable {
-        /**
-         * Starts asynchronous initialization of the object implementing the
-         * interface. This must be done before any real use of the object after
-         * initial construction. If the object also implements #GInitable you can
-         * optionally call g_initable_init() instead.
-         * 
-         * This method is intended for language bindings. If writing in C,
-         * g_async_initable_new_async() should typically be used instead.
-         * 
-         * When the initialization is finished, #callback will be called. You can
-         * then call g_async_initable_init_finish() to get the result of the
-         * initialization.
-         * 
-         * Implementations may also support cancellation. If #cancellable is not
-         * %NULL, then initialization can be cancelled by triggering the cancellable
-         * object from another thread. If the operation was cancelled, the error
-         * %G_IO_ERROR_CANCELLED will be returned. If #cancellable is not %NULL, and
-         * the object doesn't support cancellable initialization, the error
-         * %G_IO_ERROR_NOT_SUPPORTED will be returned.
-         * 
-         * As with #GInitable, if the object is not initialized, or initialization
-         * returns with an error, then all operations on the object except
-         * g_object_ref() and g_object_unref() are considered to be invalid, and
-         * have undefined behaviour. They will often fail with g_critical() or
-         * g_warning(), but this must not be relied on.
-         * 
-         * Callers should not assume that a class which implements #GAsyncInitable can
-         * be initialized multiple times; for more information, see g_initable_init().
-         * If a class explicitly supports being initialized multiple times,
-         * implementation requires yielding all subsequent calls to init_async() on the
-         * results of the first call.
-         * 
-         * For classes that also support the #GInitable interface, the default
-         * implementation of this method will run the g_initable_init() function
-         * in a thread, so if you want to support asynchronous initialization via
-         * threads, just implement the #GAsyncInitable interface without overriding
-         * any interface methods.
-         * @param io_priority the [I/O priority][io-priority] of the operation
-         * @param cancellable optional #GCancellable object, %NULL to ignore.
-         * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
-         */
-        init_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
-        /**
-         * Finishes asynchronous initialization and returns the result.
-         * See g_async_initable_init_async().
-         * @param res a #GAsyncResult.
-         * @returns %TRUE if successful. If an error has occurred, this function
-         * will return %FALSE and set #error appropriately if present.
-         */
-        init_finish(res: AsyncResult): boolean;
-        /**
-         * Finishes the async construction for the various g_async_initable_new
-         * calls, returning the created object or %NULL on error.
-         * @param res the #GAsyncResult from the callback
-         * @returns a newly created #GObject,
-         *      or %NULL on error. Free with g_object_unref().
-         */
-        new_finish(res: AsyncResult): GObject.Object;
-    }
+    interface AsyncInitable extends AsyncInitableMixin { }
 
-    var AsyncInitable: {
+    class AsyncInitable {
+        constructor();
         /**
          * Helper function for constructing #GAsyncInitable object. This is
          * similar to g_object_new() but also initializes the object asynchronously.
@@ -21824,11 +23074,10 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the initialization is
          *     finished
-         * @param user_data the data to pass to callback function
          * @param first_property_name the name of the first property, or %NULL if no
          *     properties
          */
-        new_async(object_type: GObject.Type, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any, first_property_name: string): void;
+        static new_async(object_type: GObject.Type, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, first_property_name: string): void;
         /**
          * Helper function for constructing #GAsyncInitable object. This is
          * similar to g_object_new_valist() but also initializes the object
@@ -21845,9 +23094,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the initialization is
          *     finished
-         * @param user_data the data to pass to callback function
          */
-        new_valist_async(object_type: GObject.Type, first_property_name: string, var_args: any[], io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static new_valist_async(object_type: GObject.Type, first_property_name: string, var_args: any[], io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Helper function for constructing #GAsyncInitable object. This is
          * similar to g_object_newv() but also initializes the object asynchronously.
@@ -21862,12 +23110,56 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the initialization is
          *     finished
-         * @param user_data the data to pass to callback function
          */
-        newv_async(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        static newv_async(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AsyncResult} instead.
+     */
+    interface IAsyncResult {
+        /**
+         * Gets the source object from a #GAsyncResult.
+         * @returns a new reference to the source
+         *    object for the #res, or %NULL if there is none.
+         */
+        get_source_object(): GObject.Object;
+        /**
+         * Gets the user data from a #GAsyncResult.
+         * @returns the user data for #res.
+         */
+        get_user_data(): any;
+        /**
+         * Checks if #res has the given #source_tag (generally a function
+         * pointer indicating the function #res was created by).
+         * @param source_tag an application-defined tag
+         * @returns %TRUE if #res has the indicated #source_tag, %FALSE if
+         *   not.
+         */
+        is_tagged(source_tag: any): boolean;
+        /**
+         * If #res is a #GSimpleAsyncResult, this is equivalent to
+         * g_simple_async_result_propagate_error(). Otherwise it returns
+         * %FALSE.
+         * 
+         * This can be used for legacy error handling in async *_finish()
+         * wrapper functions that traditionally handled #GSimpleAsyncResult
+         * error returns themselves rather than calling into the virtual method.
+         * This should not be used in new code; #GAsyncResult errors that are
+         * set by virtual methods should also be extracted by virtual methods,
+         * to enable subclasses to chain up correctly.
+         * @returns %TRUE if #error is has been filled in with an error from
+         *   #res, %FALSE if not.
+         */
+        legacy_propagate_error(): boolean;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AsyncResult} instead.
+     */
+    type AsyncResultMixin = IAsyncResult;
 
     /**
      * Provides a base class for implementing asynchronous function results.
@@ -21955,58 +23247,18 @@ declare namespace imports.gi.Gio {
      * %G_PRIORITY_LOW and %G_PRIORITY_HIGH, with %G_PRIORITY_DEFAULT
      * as a default.
      */
-    interface AsyncResult {
-        /**
-         * Gets the source object from a #GAsyncResult.
-         * @returns a new reference to the source
-         *    object for the #res, or %NULL if there is none.
-         */
-        get_source_object(): GObject.Object;
-        /**
-         * Gets the user data from a #GAsyncResult.
-         * @returns the user data for #res.
-         */
-        get_user_data(): any;
-        /**
-         * Checks if #res has the given #source_tag (generally a function
-         * pointer indicating the function #res was created by).
-         * @param source_tag an application-defined tag
-         * @returns %TRUE if #res has the indicated #source_tag, %FALSE if
-         *   not.
-         */
-        is_tagged(source_tag: any): boolean;
-        /**
-         * If #res is a #GSimpleAsyncResult, this is equivalent to
-         * g_simple_async_result_propagate_error(). Otherwise it returns
-         * %FALSE.
-         * 
-         * This can be used for legacy error handling in async *_finish()
-         * wrapper functions that traditionally handled #GSimpleAsyncResult
-         * error returns themselves rather than calling into the virtual method.
-         * This should not be used in new code; #GAsyncResult errors that are
-         * set by virtual methods should also be extracted by virtual methods,
-         * to enable subclasses to chain up correctly.
-         * @returns %TRUE if #error is has been filled in with an error from
-         *   #res, %FALSE if not.
-         */
-        legacy_propagate_error(): boolean;
-    }
+    interface AsyncResult extends AsyncResultMixin { }
 
-    var AsyncResult: {
+    class AsyncResult {
+        constructor();
     }
 
 
 
-    /**
-     * #GConverter is implemented by objects that convert
-     * binary data in various ways. The conversion can be
-     * stateful and may fail at any place.
-     * 
-     * Some example conversions are: character set conversion,
-     * compression, decompression and regular expression
-     * replace.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Converter} instead.
      */
-    interface Converter {
+    interface IConverter {
         /**
          * This is the main operation used when converting data. It is to be called
          * multiple times in a loop, and each time it will do some work, i.e.
@@ -22108,17 +23360,32 @@ declare namespace imports.gi.Gio {
         reset(): void;
     }
 
-    var Converter: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Converter} instead.
+     */
+    type ConverterMixin = IConverter;
+
+    /**
+     * #GConverter is implemented by objects that convert
+     * binary data in various ways. The conversion can be
+     * stateful and may fail at any place.
+     * 
+     * Some example conversions are: character set conversion,
+     * compression, decompression and regular expression
+     * replace.
+     */
+    interface Converter extends ConverterMixin { }
+
+    class Converter {
+        constructor();
     }
 
 
 
-    /**
-     * The #GDBusInterface type is the base type for D-Bus interfaces both
-     * on the service side (see #GDBusInterfaceSkeleton) and client side
-     * (see #GDBusProxy).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusInterface} instead.
      */
-    interface DBusInterface {
+    interface IDBusInterface {
         /**
          * Gets the #GDBusObject that #interface_ belongs to, if any.
          * @returns A #GDBusObject or %NULL. The returned
@@ -22150,18 +23417,28 @@ declare namespace imports.gi.Gio {
         set_object(object: DBusObject): void;
     }
 
-    var DBusInterface: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusInterface} instead.
+     */
+    type DBusInterfaceMixin = IDBusInterface;
+
+    /**
+     * The #GDBusInterface type is the base type for D-Bus interfaces both
+     * on the service side (see #GDBusInterfaceSkeleton) and client side
+     * (see #GDBusProxy).
+     */
+    interface DBusInterface extends DBusInterfaceMixin { }
+
+    class DBusInterface {
+        constructor();
     }
 
 
 
-    /**
-     * The #GDBusObject type is the base type for D-Bus objects on both
-     * the service side (see #GDBusObjectSkeleton) and the client side
-     * (see #GDBusObjectProxy). It is essentially just a container of
-     * interfaces.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObject} instead.
      */
-    interface DBusObject {
+    interface IDBusObject {
         /**
          * Gets the D-Bus interface with name #interface_name associated with
          * #object, if any.
@@ -22184,21 +23461,29 @@ declare namespace imports.gi.Gio {
         get_object_path(): string;
     }
 
-    var DBusObject: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObject} instead.
+     */
+    type DBusObjectMixin = IDBusObject;
+
+    /**
+     * The #GDBusObject type is the base type for D-Bus objects on both
+     * the service side (see #GDBusObjectSkeleton) and the client side
+     * (see #GDBusObjectProxy). It is essentially just a container of
+     * interfaces.
+     */
+    interface DBusObject extends DBusObjectMixin { }
+
+    class DBusObject {
+        constructor();
     }
 
 
 
-    /**
-     * The #GDBusObjectManager type is the base type for service- and
-     * client-side implementations of the standardized
-     * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-     * interface.
-     * 
-     * See #GDBusObjectManagerClient for the client-side implementation
-     * and #GDBusObjectManagerServer for the service-side implementation.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManager} instead.
      */
-    interface DBusObjectManager {
+    interface IDBusObjectManager {
         /**
          * Gets the interface proxy for #interface_name at #object_path, if
          * any.
@@ -22230,61 +23515,32 @@ declare namespace imports.gi.Gio {
         get_objects(): GLib.List;
     }
 
-    var DBusObjectManager: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DBusObjectManager} instead.
+     */
+    type DBusObjectManagerMixin = IDBusObjectManager;
+
+    /**
+     * The #GDBusObjectManager type is the base type for service- and
+     * client-side implementations of the standardized
+     * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
+     * interface.
+     * 
+     * See #GDBusObjectManagerClient for the client-side implementation
+     * and #GDBusObjectManagerServer for the service-side implementation.
+     */
+    interface DBusObjectManager extends DBusObjectManagerMixin { }
+
+    class DBusObjectManager {
+        constructor();
     }
 
 
 
-    /**
-     * A #GDatagramBased is a networking interface for representing datagram-based
-     * communications. It is a more or less direct mapping of the core parts of the
-     * BSD socket API in a portable GObject interface. It is implemented by
-     * #GSocket, which wraps the UNIX socket API on UNIX and winsock2 on Windows.
-     * 
-     * #GDatagramBased is entirely platform independent, and is intended to be used
-     * alongside higher-level networking APIs such as #GIOStream.
-     * 
-     * It uses vectored scatter/gather I/O by default, allowing for many messages
-     * to be sent or received in a single call. Where possible, implementations of
-     * the interface should take advantage of vectored I/O to minimise processing
-     * or system calls. For example, #GSocket uses recvmmsg() and sendmmsg() where
-     * possible. Callers should take advantage of scatter/gather I/O (the use of
-     * multiple buffers per message) to avoid unnecessary copying of data to
-     * assemble or disassemble a message.
-     * 
-     * Each #GDatagramBased operation has a timeout parameter which may be negative
-     * for blocking behaviour, zero for non-blocking behaviour, or positive for
-     * timeout behaviour. A blocking operation blocks until finished or there is an
-     * error. A non-blocking operation will return immediately with a
-     * %G_IO_ERROR_WOULD_BLOCK error if it cannot make progress. A timeout operation
-     * will block until the operation is complete or the timeout expires; if the
-     * timeout expires it will return what progress it made, or
-     * %G_IO_ERROR_TIMED_OUT if no progress was made. To know when a call would
-     * successfully run you can call g_datagram_based_condition_check() or
-     * g_datagram_based_condition_wait(). You can also use
-     * g_datagram_based_create_source() and attach it to a #GMainContext to get
-     * callbacks when I/O is possible.
-     * 
-     * When running a non-blocking operation applications should always be able to
-     * handle getting a %G_IO_ERROR_WOULD_BLOCK error even when some other function
-     * said that I/O was possible. This can easily happen in case of a race
-     * condition in the application, but it can also happen for other reasons. For
-     * instance, on Windows a socket is always seen as writable until a write
-     * returns %G_IO_ERROR_WOULD_BLOCK.
-     * 
-     * As with #GSocket, #GDatagramBaseds can be either connection oriented (for
-     * example, SCTP) or connectionless (for example, UDP). #GDatagramBaseds must be
-     * datagram-based, not stream-based. The interface does not cover connection
-     * establishment — use methods on the underlying type to establish a connection
-     * before sending and receiving data through the #GDatagramBased API. For
-     * connectionless socket types the target/source address is specified or
-     * received in each I/O operation.
-     * 
-     * Like most other APIs in GLib, #GDatagramBased is not inherently thread safe.
-     * To use a #GDatagramBased concurrently from multiple threads, you must
-     * implement your own locking.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DatagramBased} instead.
      */
-    interface DatagramBased {
+    interface IDatagramBased {
         /**
          * Checks on the readiness of #datagram_based to perform operations. The
          * operations specified in #condition are checked for and masked against the
@@ -22480,16 +23736,72 @@ declare namespace imports.gi.Gio {
         // send_messages(messages: OutputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable): number;
     }
 
-    var DatagramBased: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DatagramBased} instead.
+     */
+    type DatagramBasedMixin = IDatagramBased;
+
+    /**
+     * A #GDatagramBased is a networking interface for representing datagram-based
+     * communications. It is a more or less direct mapping of the core parts of the
+     * BSD socket API in a portable GObject interface. It is implemented by
+     * #GSocket, which wraps the UNIX socket API on UNIX and winsock2 on Windows.
+     * 
+     * #GDatagramBased is entirely platform independent, and is intended to be used
+     * alongside higher-level networking APIs such as #GIOStream.
+     * 
+     * It uses vectored scatter/gather I/O by default, allowing for many messages
+     * to be sent or received in a single call. Where possible, implementations of
+     * the interface should take advantage of vectored I/O to minimise processing
+     * or system calls. For example, #GSocket uses recvmmsg() and sendmmsg() where
+     * possible. Callers should take advantage of scatter/gather I/O (the use of
+     * multiple buffers per message) to avoid unnecessary copying of data to
+     * assemble or disassemble a message.
+     * 
+     * Each #GDatagramBased operation has a timeout parameter which may be negative
+     * for blocking behaviour, zero for non-blocking behaviour, or positive for
+     * timeout behaviour. A blocking operation blocks until finished or there is an
+     * error. A non-blocking operation will return immediately with a
+     * %G_IO_ERROR_WOULD_BLOCK error if it cannot make progress. A timeout operation
+     * will block until the operation is complete or the timeout expires; if the
+     * timeout expires it will return what progress it made, or
+     * %G_IO_ERROR_TIMED_OUT if no progress was made. To know when a call would
+     * successfully run you can call g_datagram_based_condition_check() or
+     * g_datagram_based_condition_wait(). You can also use
+     * g_datagram_based_create_source() and attach it to a #GMainContext to get
+     * callbacks when I/O is possible.
+     * 
+     * When running a non-blocking operation applications should always be able to
+     * handle getting a %G_IO_ERROR_WOULD_BLOCK error even when some other function
+     * said that I/O was possible. This can easily happen in case of a race
+     * condition in the application, but it can also happen for other reasons. For
+     * instance, on Windows a socket is always seen as writable until a write
+     * returns %G_IO_ERROR_WOULD_BLOCK.
+     * 
+     * As with #GSocket, #GDatagramBaseds can be either connection oriented (for
+     * example, SCTP) or connectionless (for example, UDP). #GDatagramBaseds must be
+     * datagram-based, not stream-based. The interface does not cover connection
+     * establishment — use methods on the underlying type to establish a connection
+     * before sending and receiving data through the #GDatagramBased API. For
+     * connectionless socket types the target/source address is specified or
+     * received in each I/O operation.
+     * 
+     * Like most other APIs in GLib, #GDatagramBased is not inherently thread safe.
+     * To use a #GDatagramBased concurrently from multiple threads, you must
+     * implement your own locking.
+     */
+    interface DatagramBased extends DatagramBasedMixin { }
+
+    class DatagramBased {
+        constructor();
     }
 
 
 
-    /**
-     * #GDesktopAppInfoLookup is an opaque data structure and can only be accessed
-     * using the following functions.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DesktopAppInfoLookup} instead.
      */
-    interface DesktopAppInfoLookup {
+    interface IDesktopAppInfoLookup {
         /**
          * Gets the default application for launching applications
          * using this URI scheme for a particular #GDesktopAppInfoLookup
@@ -22506,40 +23818,27 @@ declare namespace imports.gi.Gio {
         get_default_for_uri_scheme(uri_scheme: string): AppInfo;
     }
 
-    var DesktopAppInfoLookup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DesktopAppInfoLookup} instead.
+     */
+    type DesktopAppInfoLookupMixin = IDesktopAppInfoLookup;
+
+    /**
+     * #GDesktopAppInfoLookup is an opaque data structure and can only be accessed
+     * using the following functions.
+     */
+    interface DesktopAppInfoLookup extends DesktopAppInfoLookupMixin { }
+
+    class DesktopAppInfoLookup {
+        constructor();
     }
 
 
 
-    /**
-     * #GDrive - this represent a piece of hardware connected to the machine.
-     * It's generally only created for removable hardware or hardware with
-     * removable media.
-     * 
-     * #GDrive is a container class for #GVolume objects that stem from
-     * the same piece of media. As such, #GDrive abstracts a drive with
-     * (or without) removable media and provides operations for querying
-     * whether media is available, determining whether media change is
-     * automatically detected and ejecting the media.
-     * 
-     * If the #GDrive reports that media isn't automatically detected, one
-     * can poll for media; typically one should not do this periodically
-     * as a poll for media operation is potentially expensive and may
-     * spin up the drive creating noise.
-     * 
-     * #GDrive supports starting and stopping drives with authentication
-     * support for the former. This can be used to support a diverse set
-     * of use cases including connecting/disconnecting iSCSI devices,
-     * powering down external disk enclosures and starting/stopping
-     * multi-disk devices such as RAID devices. Note that the actual
-     * semantics and side-effects of starting/stopping a #GDrive may vary
-     * according to implementation. To choose the correct verbs in e.g. a
-     * file manager, use g_drive_get_start_stop_type().
-     * 
-     * For porting from GnomeVFS note that there is no equivalent of
-     * #GDrive in that API.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Drive} instead.
      */
-    interface Drive {
+    interface IDrive {
         /**
          * Checks if a drive can be ejected.
          * @returns %TRUE if the #drive can be ejected, %FALSE otherwise.
@@ -22575,9 +23874,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags affecting the unmount if required for eject
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data to pass to #callback
          */
-        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a drive.
          * @param result a #GAsyncResult.
@@ -22594,9 +23892,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a drive. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -22694,9 +23991,8 @@ declare namespace imports.gi.Gio {
          * result of the operation.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data to pass to #callback
          */
-        poll_for_media(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        poll_for_media(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an operation started with g_drive_poll_for_media() on a drive.
          * @param result a #GAsyncResult.
@@ -22715,9 +24011,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data to pass to #callback
          */
-        start(flags: DriveStartFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        start(flags: DriveStartFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes starting a drive.
          * @param result a #GAsyncResult.
@@ -22736,9 +24031,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data to pass to #callback
          */
-        stop(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        stop(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes stopping a drive.
          * @param result a #GAsyncResult.
@@ -22748,16 +24042,51 @@ declare namespace imports.gi.Gio {
         stop_finish(result: AsyncResult): boolean;
     }
 
-    var Drive: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Drive} instead.
+     */
+    type DriveMixin = IDrive;
+
+    /**
+     * #GDrive - this represent a piece of hardware connected to the machine.
+     * It's generally only created for removable hardware or hardware with
+     * removable media.
+     * 
+     * #GDrive is a container class for #GVolume objects that stem from
+     * the same piece of media. As such, #GDrive abstracts a drive with
+     * (or without) removable media and provides operations for querying
+     * whether media is available, determining whether media change is
+     * automatically detected and ejecting the media.
+     * 
+     * If the #GDrive reports that media isn't automatically detected, one
+     * can poll for media; typically one should not do this periodically
+     * as a poll for media operation is potentially expensive and may
+     * spin up the drive creating noise.
+     * 
+     * #GDrive supports starting and stopping drives with authentication
+     * support for the former. This can be used to support a diverse set
+     * of use cases including connecting/disconnecting iSCSI devices,
+     * powering down external disk enclosures and starting/stopping
+     * multi-disk devices such as RAID devices. Note that the actual
+     * semantics and side-effects of starting/stopping a #GDrive may vary
+     * according to implementation. To choose the correct verbs in e.g. a
+     * file manager, use g_drive_get_start_stop_type().
+     * 
+     * For porting from GnomeVFS note that there is no equivalent of
+     * #GDrive in that API.
+     */
+    interface Drive extends DriveMixin { }
+
+    class Drive {
+        constructor();
     }
 
 
 
-    /**
-     * #GDtlsClientConnection is the client-side subclass of
-     * #GDtlsConnection, representing a client-side DTLS connection.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsClientConnection} instead.
      */
-    interface DtlsClientConnection {
+    interface IDtlsClientConnection {
         /**
          * Gets the list of distinguished names of the Certificate Authorities
          * that the server will accept certificates from. This will be set
@@ -22800,7 +24129,19 @@ declare namespace imports.gi.Gio {
         set_validation_flags(flags: TlsCertificateFlags): void;
     }
 
-    var DtlsClientConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsClientConnection} instead.
+     */
+    type DtlsClientConnectionMixin = IDtlsClientConnection;
+
+    /**
+     * #GDtlsClientConnection is the client-side subclass of
+     * #GDtlsConnection, representing a client-side DTLS connection.
+     */
+    interface DtlsClientConnection extends DtlsClientConnectionMixin { }
+
+    class DtlsClientConnection {
+        constructor();
         /**
          * Creates a new #GDtlsClientConnection wrapping #base_socket which is
          * assumed to communicate with the server identified by #server_identity.
@@ -22809,33 +24150,15 @@ declare namespace imports.gi.Gio {
          * @returns the new
          *   #GDtlsClientConnection, or %NULL on error
          */
-        new(base_socket: DatagramBased, server_identity: SocketConnectable): DtlsClientConnection;
+        static new(base_socket: DatagramBased, server_identity: SocketConnectable): DtlsClientConnection;
     }
 
 
 
-    /**
-     * #GDtlsConnection is the base DTLS connection class type, which wraps
-     * a #GDatagramBased and provides DTLS encryption on top of it. Its
-     * subclasses, #GDtlsClientConnection and #GDtlsServerConnection,
-     * implement client-side and server-side DTLS, respectively.
-     * 
-     * For TLS support, see #GTlsConnection.
-     * 
-     * As DTLS is datagram based, #GDtlsConnection implements #GDatagramBased,
-     * presenting a datagram-socket-like API for the encrypted connection. This
-     * operates over a base datagram connection, which is also a #GDatagramBased
-     * (#GDtlsConnection:base-socket).
-     * 
-     * To close a DTLS connection, use g_dtls_connection_close().
-     * 
-     * Neither #GDtlsServerConnection or #GDtlsClientConnection set the peer address
-     * on their base #GDatagramBased if it is a #GSocket — it is up to the caller to
-     * do that if they wish. If they do not, and g_socket_close() is called on the
-     * base socket, the #GDtlsConnection will not raise a %G_IO_ERROR_NOT_CONNECTED
-     * error on further I/O.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsConnection} instead.
      */
-    interface DtlsConnection {
+    interface IDtlsConnection {
         /**
          * Close the DTLS connection. This is equivalent to calling
          * g_dtls_connection_shutdown() to shut down both sides of the connection.
@@ -22866,9 +24189,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the close operation is complete
-         * @param user_data the data to pass to the callback function
          */
-        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        close_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous TLS close operation. See g_dtls_connection_close()
          * for more information.
@@ -23019,9 +24341,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the handshake is complete
-         * @param user_data the data to pass to the callback function
          */
-        handshake_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        handshake_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous TLS handshake operation. See
          * g_dtls_connection_handshake() for more information.
@@ -23156,9 +24477,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call when the shutdown operation is complete
-         * @param user_data the data to pass to the callback function
          */
-        shutdown_async(shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        shutdown_async(shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finish an asynchronous TLS shutdown operation. See
          * g_dtls_connection_shutdown() for more information.
@@ -23169,20 +24489,60 @@ declare namespace imports.gi.Gio {
         shutdown_finish(result: AsyncResult): boolean;
     }
 
-    var DtlsConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsConnection} instead.
+     */
+    type DtlsConnectionMixin = IDtlsConnection;
+
+    /**
+     * #GDtlsConnection is the base DTLS connection class type, which wraps
+     * a #GDatagramBased and provides DTLS encryption on top of it. Its
+     * subclasses, #GDtlsClientConnection and #GDtlsServerConnection,
+     * implement client-side and server-side DTLS, respectively.
+     * 
+     * For TLS support, see #GTlsConnection.
+     * 
+     * As DTLS is datagram based, #GDtlsConnection implements #GDatagramBased,
+     * presenting a datagram-socket-like API for the encrypted connection. This
+     * operates over a base datagram connection, which is also a #GDatagramBased
+     * (#GDtlsConnection:base-socket).
+     * 
+     * To close a DTLS connection, use g_dtls_connection_close().
+     * 
+     * Neither #GDtlsServerConnection or #GDtlsClientConnection set the peer address
+     * on their base #GDatagramBased if it is a #GSocket — it is up to the caller to
+     * do that if they wish. If they do not, and g_socket_close() is called on the
+     * base socket, the #GDtlsConnection will not raise a %G_IO_ERROR_NOT_CONNECTED
+     * error on further I/O.
+     */
+    interface DtlsConnection extends DtlsConnectionMixin { }
+
+    class DtlsConnection {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsServerConnection} instead.
+     */
+    interface IDtlsServerConnection {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DtlsServerConnection} instead.
+     */
+    type DtlsServerConnectionMixin = IDtlsServerConnection;
 
     /**
      * #GDtlsServerConnection is the server-side subclass of #GDtlsConnection,
      * representing a server-side DTLS connection.
      */
-    interface DtlsServerConnection {
+    interface DtlsServerConnection extends DtlsServerConnectionMixin { }
 
-    }
-
-    var DtlsServerConnection: {
+    class DtlsServerConnection {
+        constructor();
         /**
          * Creates a new #GDtlsServerConnection wrapping #base_socket.
          * @param base_socket the #GDatagramBased to wrap
@@ -23190,95 +24550,15 @@ declare namespace imports.gi.Gio {
          * @returns the new
          *   #GDtlsServerConnection, or %NULL on error
          */
-        new(base_socket: DatagramBased, certificate: TlsCertificate): DtlsServerConnection;
+        static new(base_socket: DatagramBased, certificate: TlsCertificate): DtlsServerConnection;
     }
 
 
 
-    /**
-     * #GFile is a high level abstraction for manipulating files on a
-     * virtual file system. #GFiles are lightweight, immutable objects
-     * that do no I/O upon creation. It is necessary to understand that
-     * #GFile objects do not represent files, merely an identifier for a
-     * file. All file content I/O is implemented as streaming operations
-     * (see #GInputStream and #GOutputStream).
-     * 
-     * To construct a #GFile, you can use:
-     * - g_file_new_for_path() if you have a path.
-     * - g_file_new_for_uri() if you have a URI.
-     * - g_file_new_for_commandline_arg() for a command line argument.
-     * - g_file_new_tmp() to create a temporary file from a template.
-     * - g_file_parse_name() from a UTF-8 string gotten from g_file_get_parse_name().
-     * - g_file_new_build_filename() to create a file from path elements.
-     * 
-     * One way to think of a #GFile is as an abstraction of a pathname. For
-     * normal files the system pathname is what is stored internally, but as
-     * #GFiles are extensible it could also be something else that corresponds
-     * to a pathname in a userspace implementation of a filesystem.
-     * 
-     * #GFiles make up hierarchies of directories and files that correspond to
-     * the files on a filesystem. You can move through the file system with
-     * #GFile using g_file_get_parent() to get an identifier for the parent
-     * directory, g_file_get_child() to get a child within a directory,
-     * g_file_resolve_relative_path() to resolve a relative path between two
-     * #GFiles. There can be multiple hierarchies, so you may not end up at
-     * the same root if you repeatedly call g_file_get_parent() on two different
-     * files.
-     * 
-     * All #GFiles have a basename (get with g_file_get_basename()). These names
-     * are byte strings that are used to identify the file on the filesystem
-     * (relative to its parent directory) and there is no guarantees that they
-     * have any particular charset encoding or even make any sense at all. If
-     * you want to use filenames in a user interface you should use the display
-     * name that you can get by requesting the
-     * %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME attribute with g_file_query_info().
-     * This is guaranteed to be in UTF-8 and can be used in a user interface.
-     * But always store the real basename or the #GFile to use to actually
-     * access the file, because there is no way to go from a display name to
-     * the actual name.
-     * 
-     * Using #GFile as an identifier has the same weaknesses as using a path
-     * in that there may be multiple aliases for the same file. For instance,
-     * hard or soft links may cause two different #GFiles to refer to the same
-     * file. Other possible causes for aliases are: case insensitive filesystems,
-     * short and long names on FAT/NTFS, or bind mounts in Linux. If you want to
-     * check if two #GFiles point to the same file you can query for the
-     * %G_FILE_ATTRIBUTE_ID_FILE attribute. Note that #GFile does some trivial
-     * canonicalization of pathnames passed in, so that trivial differences in
-     * the path string used at creation (duplicated slashes, slash at end of
-     * path, "." or ".." path segments, etc) does not create different #GFiles.
-     * 
-     * Many #GFile operations have both synchronous and asynchronous versions
-     * to suit your application. Asynchronous versions of synchronous functions
-     * simply have _async() appended to their function names. The asynchronous
-     * I/O functions call a #GAsyncReadyCallback which is then used to finalize
-     * the operation, producing a GAsyncResult which is then passed to the
-     * function's matching _finish() operation.
-     * 
-     * It is highly recommended to use asynchronous calls when running within a
-     * shared main loop, such as in the main thread of an application. This avoids
-     * I/O operations blocking other sources on the main loop from being dispatched.
-     * Synchronous I/O operations should be performed from worker threads. See the
-     * [introduction to asynchronous programming section][async-programming] for
-     * more.
-     * 
-     * Some #GFile operations almost always take a noticeable amount of time, and
-     * so do not have synchronous analogs. Notable cases include:
-     * - g_file_mount_mountable() to mount a mountable file.
-     * - g_file_unmount_mountable_with_operation() to unmount a mountable file.
-     * - g_file_eject_mountable_with_operation() to eject a mountable file.
-     * 
-     * ## Entity Tags # {#gfile-etag}
-     * 
-     * One notable feature of #GFiles are entity tags, or "etags" for
-     * short. Entity tags are somewhat like a more abstract version of the
-     * traditional mtime, and can be used to quickly determine if the file
-     * has been modified from the version on the file system. See the
-     * HTTP 1.1
-     * [specification](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
-     * for HTTP Etag headers, which are a very similar concept.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link File} instead.
      */
-    interface File {
+    interface IFile {
         /**
          * Gets an output stream for appending data to the file.
          * If the file doesn't already exist it is created.
@@ -23319,9 +24599,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        append_to_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        append_to_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file append operation started with
          * g_file_append_to_async().
@@ -23419,9 +24698,8 @@ declare namespace imports.gi.Gio {
          *     information, or %NULL if progress information is not needed
          * @param progress_callback_data user data to pass to #progress_callback
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        copy_async(destination: File, flags: FileCopyFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any, callback: AsyncReadyCallback, user_data: any): void;
+        copy_async(destination: File, flags: FileCopyFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileProgressCallback, progress_callback_data: any, callback: AsyncReadyCallback): void;
         /**
          * Copies the file attributes from #source to #destination.
          * 
@@ -23489,9 +24767,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        create_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        create_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file create operation started with
          * g_file_create_async().
@@ -23548,9 +24825,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        create_readwrite_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        create_readwrite_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file create operation started with
          * g_file_create_readwrite_async().
@@ -23595,9 +24871,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        delete_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        delete_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes deleting a file started with g_file_delete_async().
          * @param result a #GAsyncResult
@@ -23633,9 +24908,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        eject_mountable(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject_mountable(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous eject operation started by
          * g_file_eject_mountable().
@@ -23660,9 +24934,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        eject_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous eject operation started by
          * g_file_eject_mountable_with_operation().
@@ -23721,9 +24994,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the
          *     request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        enumerate_children_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        enumerate_children_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async enumerate children operation.
          * See g_file_enumerate_children_async().
@@ -23776,9 +25048,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        find_enclosing_mount_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        find_enclosing_mount_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous find mount request.
          * See g_file_find_enclosing_mount_async().
@@ -24011,9 +25282,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable a #GCancellable or %NULL
          * @param callback a #GAsyncReadyCallback to call when the
          *     request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        load_bytes_async(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        load_bytes_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Completes an asynchronous request to g_file_load_bytes_async().
          * 
@@ -24048,7 +25318,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if the #file's contents were successfully loaded.
          *     %FALSE if there were errors.
          */
-        load_contents(cancellable: Cancellable | null, contents?: number[], length?: number, etag_out?: string): [success: boolean, contents: Uint8Array];
+        load_contents(cancellable: Cancellable, contents: number[], length: number, etag_out: string): boolean;
         /**
          * Starts an asynchronous load of the #file's contents.
          * 
@@ -24065,9 +25335,8 @@ declare namespace imports.gi.Gio {
          * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        load_contents_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+        load_contents_async(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous load of the #file's contents.
          * The contents are placed in #contents, and #length is set to the
@@ -24083,7 +25352,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if the load was successful. If %FALSE and #error is
          *     present, it will be set appropriately.
          */
-        load_contents_finish(res: AsyncResult, contents?: number[], length?: number, etag_out?: string): boolean;
+        load_contents_finish(res: AsyncResult, contents: number[], length: number, etag_out: string): boolean;
         /**
          * Reads the partial contents of a file. A #GFileReadMoreCallback should
          * be used to stop reading from the file when appropriate, else this
@@ -24102,9 +25371,8 @@ declare namespace imports.gi.Gio {
          *     and to specify whether further data should be read
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to the callback functions
          */
-        load_partial_contents_async(cancellable: Cancellable, read_more_callback: FileReadMoreCallback, callback: AsyncReadyCallback, user_data: any): void;
+        load_partial_contents_async(cancellable: Cancellable, read_more_callback: FileReadMoreCallback, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous partial load operation that was started
          * with g_file_load_partial_contents_async(). The data is always
@@ -24148,9 +25416,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        make_directory_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        make_directory_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous directory creation, started with
          * g_file_make_directory_async().
@@ -24177,7 +25444,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if all directories have been successfully created, %FALSE
          * otherwise.
          */
-        make_directory_with_parents(cancellable: Cancellable | null): boolean;
+        make_directory_with_parents(cancellable: Cancellable): boolean;
         /**
          * Creates a symbolic link named #file which contains the string
          * #symlink_value.
@@ -24233,9 +25500,8 @@ declare namespace imports.gi.Gio {
          * @param progress_callback a #GFileMeasureProgressCallback
          * @param progress_data user_data for #progress_callback
          * @param callback a #GAsyncReadyCallback to call when complete
-         * @param user_data the data to pass to callback function
          */
-        measure_disk_usage_async(flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, callback: AsyncReadyCallback, user_data: any): void;
+        measure_disk_usage_async(flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable, progress_callback: FileMeasureProgressCallback, progress_data: any, callback: AsyncReadyCallback): void;
         /**
          * Collects the results from an earlier call to
          * g_file_measure_disk_usage_async().  See g_file_measure_disk_usage() for
@@ -24325,9 +25591,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        mount_enclosing_volume(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        mount_enclosing_volume(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a mount operation started by g_file_mount_enclosing_volume().
          * @param result a #GAsyncResult
@@ -24355,9 +25620,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        mount_mountable(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        mount_mountable(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a mount operation. See g_file_mount_mountable() for details.
          * 
@@ -24449,9 +25713,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        open_readwrite_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        open_readwrite_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file read operation started with
          * g_file_open_readwrite_async().
@@ -24485,9 +25748,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        poll_mountable(cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        poll_mountable(cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a poll operation. See g_file_poll_mountable() for details.
          * 
@@ -24516,9 +25778,8 @@ declare namespace imports.gi.Gio {
          * @param io_priority the [I/O priority][io-priority] of the request
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the request is done
-         * @param user_data data to pass to #callback
          */
-        query_default_handler_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        query_default_handler_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a g_file_query_default_handler_async() operation.
          * @param result a #GAsyncResult
@@ -24555,7 +25816,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if the file exists (and can be detected without error),
          *     %FALSE otherwise (or if cancelled).
          */
-        query_exists(cancellable: Cancellable | null): boolean;
+        query_exists(cancellable: Cancellable): boolean;
         /**
          * Utility function to inspect the #GFileType of a file. This is
          * implemented using g_file_query_info() and as such does blocking I/O.
@@ -24620,9 +25881,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        query_filesystem_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        query_filesystem_info_async(attributes: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous filesystem info query.
          * See g_file_query_filesystem_info_async().
@@ -24688,9 +25948,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the
          *     request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        query_info_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        query_info_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file info query.
          * See g_file_query_info_async().
@@ -24764,9 +26023,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        read_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        read_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file read operation started with
          * g_file_read_async().
@@ -24846,9 +26104,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        replace_async(etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        replace_async(etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Replaces the contents of #file with #contents of #length bytes.
          * 
@@ -24879,7 +26136,7 @@ declare namespace imports.gi.Gio {
          * @returns %TRUE if successful. If an error has occurred, this function
          *     will return %FALSE and set #error appropriately if present.
          */
-        replace_contents(contents: string, length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, new_etag: string, cancellable: Cancellable): [ok: boolean, new_etag: string];
+        replace_contents(contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, new_etag: string, cancellable: Cancellable): boolean;
         /**
          * Starts an asynchronous replacement of #file with the given
          * #contents of #length bytes. #etag will replace the document's
@@ -24907,9 +26164,8 @@ declare namespace imports.gi.Gio {
          * @param flags a set of #GFileCreateFlags
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        replace_contents_async(contents: string, length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        replace_contents_async(contents: number[], length: number, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Same as g_file_replace_contents_async() but takes a #GBytes input instead.
          * This function will keep a ref on #contents until the operation is done.
@@ -24925,9 +26181,8 @@ declare namespace imports.gi.Gio {
          * @param flags a set of #GFileCreateFlags
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        replace_contents_bytes_async(contents: GLib.Bytes, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        replace_contents_bytes_async(contents: GLib.Bytes, etag: string, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous replace of the given #file. See
          * g_file_replace_contents_async(). Sets #new_etag to the new entity
@@ -24988,9 +26243,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        replace_readwrite_async(etag: string | null, make_backup: boolean | null, flags: FileCreateFlags | null, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback): void;
+        replace_readwrite_async(etag: string, make_backup: boolean, flags: FileCreateFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file replace operation started with
          * g_file_replace_readwrite_async().
@@ -25138,9 +26392,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object,
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback
-         * @param user_data a #gpointer
          */
-        set_attributes_async(info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        set_attributes_async(info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes setting an attribute started in g_file_set_attributes_async().
          * @param result a #GAsyncResult
@@ -25207,9 +26460,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        set_display_name_async(display_name: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        set_display_name_async(display_name: string, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes setting a display name started with
          * g_file_set_display_name_async().
@@ -25234,9 +26486,8 @@ declare namespace imports.gi.Gio {
          * @param start_operation a #GMountOperation, or %NULL to avoid user interaction
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        start_mountable(flags: DriveStartFlags, start_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        start_mountable(flags: DriveStartFlags, start_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a start operation. See g_file_start_mountable() for details.
          * 
@@ -25264,9 +26515,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        stop_mountable(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        stop_mountable(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes a stop operation, see g_file_stop_mountable() for details.
          * 
@@ -25308,9 +26558,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        trash_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        trash_async(io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous file trashing operation, started with
          * g_file_trash_async().
@@ -25333,9 +26582,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        unmount_mountable(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        unmount_mountable(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an unmount operation, see g_file_unmount_mountable() for details.
          * 
@@ -25363,9 +26611,8 @@ declare namespace imports.gi.Gio {
          *     %NULL to ignore
          * @param callback a #GAsyncReadyCallback to call
          *     when the request is satisfied, or %NULL
-         * @param user_data the data to pass to callback function
          */
-        unmount_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        unmount_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an unmount operation,
          * see g_file_unmount_mountable_with_operation() for details.
@@ -25379,7 +26626,98 @@ declare namespace imports.gi.Gio {
         unmount_mountable_with_operation_finish(result: AsyncResult): boolean;
     }
 
-    var File: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link File} instead.
+     */
+    type FileMixin = IFile;
+
+    /**
+     * #GFile is a high level abstraction for manipulating files on a
+     * virtual file system. #GFiles are lightweight, immutable objects
+     * that do no I/O upon creation. It is necessary to understand that
+     * #GFile objects do not represent files, merely an identifier for a
+     * file. All file content I/O is implemented as streaming operations
+     * (see #GInputStream and #GOutputStream).
+     * 
+     * To construct a #GFile, you can use:
+     * - g_file_new_for_path() if you have a path.
+     * - g_file_new_for_uri() if you have a URI.
+     * - g_file_new_for_commandline_arg() for a command line argument.
+     * - g_file_new_tmp() to create a temporary file from a template.
+     * - g_file_parse_name() from a UTF-8 string gotten from g_file_get_parse_name().
+     * - g_file_new_build_filename() to create a file from path elements.
+     * 
+     * One way to think of a #GFile is as an abstraction of a pathname. For
+     * normal files the system pathname is what is stored internally, but as
+     * #GFiles are extensible it could also be something else that corresponds
+     * to a pathname in a userspace implementation of a filesystem.
+     * 
+     * #GFiles make up hierarchies of directories and files that correspond to
+     * the files on a filesystem. You can move through the file system with
+     * #GFile using g_file_get_parent() to get an identifier for the parent
+     * directory, g_file_get_child() to get a child within a directory,
+     * g_file_resolve_relative_path() to resolve a relative path between two
+     * #GFiles. There can be multiple hierarchies, so you may not end up at
+     * the same root if you repeatedly call g_file_get_parent() on two different
+     * files.
+     * 
+     * All #GFiles have a basename (get with g_file_get_basename()). These names
+     * are byte strings that are used to identify the file on the filesystem
+     * (relative to its parent directory) and there is no guarantees that they
+     * have any particular charset encoding or even make any sense at all. If
+     * you want to use filenames in a user interface you should use the display
+     * name that you can get by requesting the
+     * %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME attribute with g_file_query_info().
+     * This is guaranteed to be in UTF-8 and can be used in a user interface.
+     * But always store the real basename or the #GFile to use to actually
+     * access the file, because there is no way to go from a display name to
+     * the actual name.
+     * 
+     * Using #GFile as an identifier has the same weaknesses as using a path
+     * in that there may be multiple aliases for the same file. For instance,
+     * hard or soft links may cause two different #GFiles to refer to the same
+     * file. Other possible causes for aliases are: case insensitive filesystems,
+     * short and long names on FAT/NTFS, or bind mounts in Linux. If you want to
+     * check if two #GFiles point to the same file you can query for the
+     * %G_FILE_ATTRIBUTE_ID_FILE attribute. Note that #GFile does some trivial
+     * canonicalization of pathnames passed in, so that trivial differences in
+     * the path string used at creation (duplicated slashes, slash at end of
+     * path, "." or ".." path segments, etc) does not create different #GFiles.
+     * 
+     * Many #GFile operations have both synchronous and asynchronous versions
+     * to suit your application. Asynchronous versions of synchronous functions
+     * simply have _async() appended to their function names. The asynchronous
+     * I/O functions call a #GAsyncReadyCallback which is then used to finalize
+     * the operation, producing a GAsyncResult which is then passed to the
+     * function's matching _finish() operation.
+     * 
+     * It is highly recommended to use asynchronous calls when running within a
+     * shared main loop, such as in the main thread of an application. This avoids
+     * I/O operations blocking other sources on the main loop from being dispatched.
+     * Synchronous I/O operations should be performed from worker threads. See the
+     * [introduction to asynchronous programming section][async-programming] for
+     * more.
+     * 
+     * Some #GFile operations almost always take a noticeable amount of time, and
+     * so do not have synchronous analogs. Notable cases include:
+     * - g_file_mount_mountable() to mount a mountable file.
+     * - g_file_unmount_mountable_with_operation() to unmount a mountable file.
+     * - g_file_eject_mountable_with_operation() to eject a mountable file.
+     * 
+     * ## Entity Tags # {#gfile-etag}
+     * 
+     * One notable feature of #GFiles are entity tags, or "etags" for
+     * short. Entity tags are somewhat like a more abstract version of the
+     * traditional mtime, and can be used to quickly determine if the file
+     * has been modified from the version on the file system. See the
+     * HTTP 1.1
+     * [specification](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
+     * for HTTP Etag headers, which are a very similar concept.
+     */
+    interface File extends FileMixin { }
+
+    class File {
+        constructor();
         /**
          * Constructs a #GFile from a series of elements using the correct
          * separator for filenames.
@@ -25389,7 +26727,7 @@ declare namespace imports.gi.Gio {
          * @param first_element the first element in the path
          * @returns a new #GFile
          */
-        new_build_filename(first_element: string): File;
+        static new_build_filename(first_element: string): File;
         /**
          * Creates a #GFile with the given argument from the command line.
          * The value of #arg can be either a URI, an absolute path or a
@@ -25409,7 +26747,7 @@ declare namespace imports.gi.Gio {
          * @returns a new #GFile.
          *    Free the returned object with g_object_unref().
          */
-        new_for_commandline_arg(_arg: string): File;
+        static new_for_commandline_arg(_arg: string): File;
         /**
          * Creates a #GFile with the given argument from the command line.
          * 
@@ -25426,7 +26764,7 @@ declare namespace imports.gi.Gio {
          * @param cwd the current working directory of the commandline
          * @returns a new #GFile
          */
-        new_for_commandline_arg_and_cwd(_arg: string, cwd: string): File;
+        static new_for_commandline_arg_and_cwd(_arg: string, cwd: string): File;
         /**
          * Constructs a #GFile for a given path. This operation never
          * fails, but the returned object might not support any I/O
@@ -25436,7 +26774,7 @@ declare namespace imports.gi.Gio {
          * @returns a new #GFile for the given #path.
          *   Free the returned object with g_object_unref().
          */
-        new_for_path(path: string): File;
+        static new_for_path(path: string): File;
         /**
          * Constructs a #GFile for a given URI. This operation never
          * fails, but the returned object might not support any I/O
@@ -25446,7 +26784,7 @@ declare namespace imports.gi.Gio {
          * @returns a new #GFile for the given #uri.
          *     Free the returned object with g_object_unref().
          */
-        new_for_uri(uri: string): File;
+        static new_for_uri(uri: string): File;
         /**
          * Opens a file in the preferred directory for temporary files (as
          * returned by g_get_tmp_dir()) and returns a #GFile and
@@ -25464,7 +26802,7 @@ declare namespace imports.gi.Gio {
          * @returns a new #GFile.
          *     Free the returned object with g_object_unref().
          */
-        new_tmp(tmpl: string, iostream: FileIOStream): File;
+        static new_tmp(tmpl: string, iostream: FileIOStream): File;
         /**
          * Constructs a #GFile with the given #parse_name (i.e. something
          * given by g_file_get_parse_name()). This operation never fails,
@@ -25473,10 +26811,26 @@ declare namespace imports.gi.Gio {
          * @param parse_name a file name or path to be parsed
          * @returns a new #GFile.
          */
-        parse_name(parse_name: string): File;
+        static parse_name(parse_name: string): File;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileDescriptorBased} instead.
+     */
+    interface IFileDescriptorBased {
+        /**
+         * Gets the underlying file descriptor.
+         * @returns The file descriptor
+         */
+        get_fd(): number;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FileDescriptorBased} instead.
+     */
+    type FileDescriptorBasedMixin = IFileDescriptorBased;
 
     /**
      * #GFileDescriptorBased is implemented by streams (implementations of
@@ -25486,50 +26840,18 @@ declare namespace imports.gi.Gio {
      * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
      * file when using it.
      */
-    interface FileDescriptorBased {
-        /**
-         * Gets the underlying file descriptor.
-         * @returns The file descriptor
-         */
-        get_fd(): number;
-    }
+    interface FileDescriptorBased extends FileDescriptorBasedMixin { }
 
-    var FileDescriptorBased: {
+    class FileDescriptorBased {
+        constructor();
     }
 
 
 
-    /**
-     * #GIcon is a very minimal interface for icons. It provides functions
-     * for checking the equality of two icons, hashing of icons and
-     * serializing an icon to and from strings.
-     * 
-     * #GIcon does not provide the actual pixmap for the icon as this is out
-     * of GIO's scope, however implementations of #GIcon may contain the name
-     * of an icon (see #GThemedIcon), or the path to an icon (see #GLoadableIcon).
-     * 
-     * To obtain a hash of a #GIcon, see g_icon_hash().
-     * 
-     * To check if two #GIcons are equal, see g_icon_equal().
-     * 
-     * For serializing a #GIcon, use g_icon_serialize() and
-     * g_icon_deserialize().
-     * 
-     * If you want to consume #GIcon (for example, in a toolkit) you must
-     * be prepared to handle at least the three following cases:
-     * #GLoadableIcon, #GThemedIcon and #GEmblemedIcon.  It may also make
-     * sense to have fast-paths for other cases (like handling #GdkPixbuf
-     * directly, for example) but all compliant #GIcon implementations
-     * outside of GIO must implement #GLoadableIcon.
-     * 
-     * If your application or library provides one or more #GIcon
-     * implementations you need to ensure that your new implementation also
-     * implements #GLoadableIcon.  Additionally, you must provide an
-     * implementation of g_icon_serialize() that gives a result that is
-     * understood by g_icon_deserialize(), yielding one of the built-in icon
-     * types.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Icon} instead.
      */
-    interface Icon {
+    interface IIcon {
         /**
          * Checks if two icons are equal.
          * @param icon2 pointer to the second #GIcon.
@@ -25568,20 +26890,58 @@ declare namespace imports.gi.Gio {
         to_string(): string;
     }
 
-    var Icon: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Icon} instead.
+     */
+    type IconMixin = IIcon;
+
+    /**
+     * #GIcon is a very minimal interface for icons. It provides functions
+     * for checking the equality of two icons, hashing of icons and
+     * serializing an icon to and from strings.
+     * 
+     * #GIcon does not provide the actual pixmap for the icon as this is out
+     * of GIO's scope, however implementations of #GIcon may contain the name
+     * of an icon (see #GThemedIcon), or the path to an icon (see #GLoadableIcon).
+     * 
+     * To obtain a hash of a #GIcon, see g_icon_hash().
+     * 
+     * To check if two #GIcons are equal, see g_icon_equal().
+     * 
+     * For serializing a #GIcon, use g_icon_serialize() and
+     * g_icon_deserialize().
+     * 
+     * If you want to consume #GIcon (for example, in a toolkit) you must
+     * be prepared to handle at least the three following cases:
+     * #GLoadableIcon, #GThemedIcon and #GEmblemedIcon.  It may also make
+     * sense to have fast-paths for other cases (like handling #GdkPixbuf
+     * directly, for example) but all compliant #GIcon implementations
+     * outside of GIO must implement #GLoadableIcon.
+     * 
+     * If your application or library provides one or more #GIcon
+     * implementations you need to ensure that your new implementation also
+     * implements #GLoadableIcon.  Additionally, you must provide an
+     * implementation of g_icon_serialize() that gives a result that is
+     * understood by g_icon_deserialize(), yielding one of the built-in icon
+     * types.
+     */
+    interface Icon extends IconMixin { }
+
+    class Icon {
+        constructor();
         /**
          * Deserializes a #GIcon previously serialized using g_icon_serialize().
          * @param value a #GVariant created with g_icon_serialize()
          * @returns a #GIcon, or %NULL when deserialization fails.
          */
-        deserialize(value: GLib.Variant): Icon;
+        static deserialize(value: GLib.Variant): Icon;
         /**
          * Gets a hash for an icon.
          * @param icon #gconstpointer to an icon object.
          * @returns a #guint containing a hash for the #icon, suitable for
          * use in a #GHashTable or similar data structure.
          */
-        hash(icon: any): number;
+        static hash(icon: any): number;
         /**
          * Generate a #GIcon instance from #str. This function can fail if
          * #str is not valid - see g_icon_to_string() for discussion.
@@ -25593,38 +26953,15 @@ declare namespace imports.gi.Gio {
          * @returns An object implementing the #GIcon
          *          interface or %NULL if #error is set.
          */
-        new_for_string(_str: string): Icon;
+        static new_for_string(_str: string): Icon;
     }
 
 
 
-    /**
-     * #GInitable is implemented by objects that can fail during
-     * initialization. If an object implements this interface then
-     * it must be initialized as the first thing after construction,
-     * either via g_initable_init() or g_async_initable_init_async()
-     * (the latter is only available if it also implements #GAsyncInitable).
-     * 
-     * If the object is not initialized, or initialization returns with an
-     * error, then all operations on the object except g_object_ref() and
-     * g_object_unref() are considered to be invalid, and have undefined
-     * behaviour. They will often fail with g_critical() or g_warning(), but
-     * this must not be relied on.
-     * 
-     * Users of objects implementing this are not intended to use
-     * the interface method directly, instead it will be used automatically
-     * in various ways. For C applications you generally just call
-     * g_initable_new() directly, or indirectly via a foo_thing_new() wrapper.
-     * This will call g_initable_init() under the cover, returning %NULL and
-     * setting a #GError on failure (at which point the instance is
-     * unreferenced).
-     * 
-     * For bindings in languages where the native constructor supports
-     * exceptions the binding could check for objects implementing %GInitable
-     * during normal construction and automatically initialize them, throwing
-     * an exception on failure.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Initable} instead.
      */
-    interface Initable {
+    interface IInitable {
         /**
          * Initializes the object implementing the interface.
          * 
@@ -25671,7 +27008,41 @@ declare namespace imports.gi.Gio {
         init(cancellable: Cancellable): boolean;
     }
 
-    var Initable: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Initable} instead.
+     */
+    type InitableMixin = IInitable;
+
+    /**
+     * #GInitable is implemented by objects that can fail during
+     * initialization. If an object implements this interface then
+     * it must be initialized as the first thing after construction,
+     * either via g_initable_init() or g_async_initable_init_async()
+     * (the latter is only available if it also implements #GAsyncInitable).
+     * 
+     * If the object is not initialized, or initialization returns with an
+     * error, then all operations on the object except g_object_ref() and
+     * g_object_unref() are considered to be invalid, and have undefined
+     * behaviour. They will often fail with g_critical() or g_warning(), but
+     * this must not be relied on.
+     * 
+     * Users of objects implementing this are not intended to use
+     * the interface method directly, instead it will be used automatically
+     * in various ways. For C applications you generally just call
+     * g_initable_new() directly, or indirectly via a foo_thing_new() wrapper.
+     * This will call g_initable_init() under the cover, returning %NULL and
+     * setting a #GError on failure (at which point the instance is
+     * unreferenced).
+     * 
+     * For bindings in languages where the native constructor supports
+     * exceptions the binding could check for objects implementing %GInitable
+     * during normal construction and automatically initialize them, throwing
+     * an exception on failure.
+     */
+    interface Initable extends InitableMixin { }
+
+    class Initable {
+        constructor();
         /**
          * Helper function for constructing #GInitable object. This is
          * similar to g_object_new() but also initializes the object
@@ -25685,7 +27056,7 @@ declare namespace imports.gi.Gio {
          * @returns a newly allocated
          *      #GObject, or %NULL on error
          */
-        new(object_type: GObject.Type, cancellable: Cancellable, error: GLib.Error, first_property_name: string): GObject.Object;
+        static new(object_type: GObject.Type, cancellable: Cancellable, error: GLib.Error, first_property_name: string): GObject.Object;
         /**
          * Helper function for constructing #GInitable object. This is
          * similar to g_object_new_valist() but also initializes the object
@@ -25698,7 +27069,7 @@ declare namespace imports.gi.Gio {
          * @returns a newly allocated
          *      #GObject, or %NULL on error
          */
-        new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable): GObject.Object;
+        static new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable): GObject.Object;
         /**
          * Helper function for constructing #GInitable object. This is
          * similar to g_object_newv() but also initializes the object
@@ -25710,61 +27081,15 @@ declare namespace imports.gi.Gio {
          * @returns a newly allocated
          *      #GObject, or %NULL on error
          */
-        newv(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter[], cancellable: Cancellable): GObject.Object;
+        static newv(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter[], cancellable: Cancellable): GObject.Object;
     }
 
 
 
-    /**
-     * #GListModel is an interface that represents a mutable list of
-     * #GObjects. Its main intention is as a model for various widgets in
-     * user interfaces, such as list views, but it can also be used as a
-     * convenient method of returning lists of data, with support for
-     * updates.
-     * 
-     * Each object in the list may also report changes in itself via some
-     * mechanism (normally the #GObject::notify signal).  Taken together
-     * with the #GListModel::items-changed signal, this provides for a list
-     * that can change its membership, and in which the members can change
-     * their individual properties.
-     * 
-     * A good example would be the list of visible wireless network access
-     * points, where each access point can report dynamic properties such as
-     * signal strength.
-     * 
-     * It is important to note that the #GListModel itself does not report
-     * changes to the individual items.  It only reports changes to the list
-     * membership.  If you want to observe changes to the objects themselves
-     * then you need to connect signals to the objects that you are
-     * interested in.
-     * 
-     * All items in a #GListModel are of (or derived from) the same type.
-     * g_list_model_get_item_type() returns that type.  The type may be an
-     * interface, in which case all objects in the list must implement it.
-     * 
-     * The semantics are close to that of an array:
-     * g_list_model_get_n_items() returns the number of items in the list and
-     * g_list_model_get_item() returns an item at a (0-based) position. In
-     * order to allow implementations to calculate the list length lazily,
-     * you can also iterate over items: starting from 0, repeatedly call
-     * g_list_model_get_item() until it returns %NULL.
-     * 
-     * An implementation may create objects lazily, but must take care to
-     * return the same object for a given position until all references to
-     * it are gone.
-     * 
-     * On the other side, a consumer is expected only to hold references on
-     * objects that are currently "user visible", in order to facilitate the
-     * maximum level of laziness in the implementation of the list and to
-     * reduce the required number of signal connections at a given time.
-     * 
-     * This interface is intended only to be used from a single thread.  The
-     * thread in which it is appropriate to use it depends on the particular
-     * implementation, but typically it will be from the thread that owns
-     * the [thread-default main context][g-main-context-push-thread-default]
-     * in effect at the time that the model was created.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ListModel} instead.
      */
-    interface ListModel {
+    interface IListModel {
         /**
          * Get the item at #position. If #position is greater than the number of
          * items in #list, %NULL is returned.
@@ -25832,16 +27157,72 @@ declare namespace imports.gi.Gio {
         items_changed(position: number, removed: number, added: number): void;
     }
 
-    var ListModel: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ListModel} instead.
+     */
+    type ListModelMixin = IListModel;
+
+    /**
+     * #GListModel is an interface that represents a mutable list of
+     * #GObjects. Its main intention is as a model for various widgets in
+     * user interfaces, such as list views, but it can also be used as a
+     * convenient method of returning lists of data, with support for
+     * updates.
+     * 
+     * Each object in the list may also report changes in itself via some
+     * mechanism (normally the #GObject::notify signal).  Taken together
+     * with the #GListModel::items-changed signal, this provides for a list
+     * that can change its membership, and in which the members can change
+     * their individual properties.
+     * 
+     * A good example would be the list of visible wireless network access
+     * points, where each access point can report dynamic properties such as
+     * signal strength.
+     * 
+     * It is important to note that the #GListModel itself does not report
+     * changes to the individual items.  It only reports changes to the list
+     * membership.  If you want to observe changes to the objects themselves
+     * then you need to connect signals to the objects that you are
+     * interested in.
+     * 
+     * All items in a #GListModel are of (or derived from) the same type.
+     * g_list_model_get_item_type() returns that type.  The type may be an
+     * interface, in which case all objects in the list must implement it.
+     * 
+     * The semantics are close to that of an array:
+     * g_list_model_get_n_items() returns the number of items in the list and
+     * g_list_model_get_item() returns an item at a (0-based) position. In
+     * order to allow implementations to calculate the list length lazily,
+     * you can also iterate over items: starting from 0, repeatedly call
+     * g_list_model_get_item() until it returns %NULL.
+     * 
+     * An implementation may create objects lazily, but must take care to
+     * return the same object for a given position until all references to
+     * it are gone.
+     * 
+     * On the other side, a consumer is expected only to hold references on
+     * objects that are currently "user visible", in order to facilitate the
+     * maximum level of laziness in the implementation of the list and to
+     * reduce the required number of signal connections at a given time.
+     * 
+     * This interface is intended only to be used from a single thread.  The
+     * thread in which it is appropriate to use it depends on the particular
+     * implementation, but typically it will be from the thread that owns
+     * the [thread-default main context][g-main-context-push-thread-default]
+     * in effect at the time that the model was created.
+     */
+    interface ListModel extends ListModelMixin { }
+
+    class ListModel {
+        constructor();
     }
 
 
 
-    /**
-     * Extends the #GIcon interface and adds the ability to
-     * load icons from streams.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link LoadableIcon} instead.
      */
-    interface LoadableIcon {
+    interface ILoadableIcon {
         /**
          * Loads a loadable icon. For the asynchronous version of this function,
          * see g_loadable_icon_load_async().
@@ -25861,9 +27242,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback to call when the
          *            request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        load_async(size: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        load_async(size: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
          * @param res a #GAsyncResult.
@@ -25874,10 +27254,34 @@ declare namespace imports.gi.Gio {
         load_finish(res: AsyncResult, _type: string): InputStream;
     }
 
-    var LoadableIcon: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link LoadableIcon} instead.
+     */
+    type LoadableIconMixin = ILoadableIcon;
+
+    /**
+     * Extends the #GIcon interface and adds the ability to
+     * load icons from streams.
+     */
+    interface LoadableIcon extends LoadableIconMixin { }
+
+    class LoadableIcon {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryMonitor} instead.
+     */
+    interface IMemoryMonitor {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MemoryMonitor} instead.
+     */
+    type MemoryMonitorMixin = IMemoryMonitor;
 
     /**
      * #GMemoryMonitor will monitor system memory and suggest to the application
@@ -25927,42 +27331,23 @@ declare namespace imports.gi.Gio {
      * Don't forget to disconnect the #GMemoryMonitor::low-memory-warning
      * signal, and unref the #GMemoryMonitor itself when exiting.
      */
-    interface MemoryMonitor {
+    interface MemoryMonitor extends MemoryMonitorMixin { }
 
-    }
-
-    var MemoryMonitor: {
+    class MemoryMonitor {
+        constructor();
         /**
          * Gets a reference to the default #GMemoryMonitor for the system.
          * @returns a new reference to the default #GMemoryMonitor
          */
-        dup_default(): MemoryMonitor;
+        static dup_default(): MemoryMonitor;
     }
 
 
 
-    /**
-     * The #GMount interface represents user-visible mounts. Note, when
-     * porting from GnomeVFS, #GMount is the moral equivalent of #GnomeVFSVolume.
-     * 
-     * #GMount is a "mounted" filesystem that you can access. Mounted is in
-     * quotes because it's not the same as a unix mount, it might be a gvfs
-     * mount, but you can still access the files on it if you use GIO. Might or
-     * might not be related to a volume object.
-     * 
-     * Unmounting a #GMount instance is an asynchronous operation. For
-     * more information about asynchronous operations, see #GAsyncResult
-     * and #GTask. To unmount a #GMount instance, first call
-     * g_mount_unmount_with_operation() with (at least) the #GMount instance and a
-     * #GAsyncReadyCallback.  The callback will be fired when the
-     * operation has resolved (either with success or failure), and a
-     * #GAsyncResult structure will be passed to the callback.  That
-     * callback should then call g_mount_unmount_with_operation_finish() with the #GMount
-     * and the #GAsyncResult data to see if the operation was completed
-     * successfully.  If an #error is present when g_mount_unmount_with_operation_finish()
-     * is called, then it will be filled with any error information.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Mount} instead.
      */
-    interface Mount {
+    interface IMount {
         /**
          * Checks if #mount can be ejected.
          * @returns %TRUE if the #mount can be ejected.
@@ -25980,9 +27365,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags affecting the unmount if required for eject
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a mount. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -25999,9 +27383,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a mount. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -26097,9 +27480,8 @@ declare namespace imports.gi.Gio {
          *     Otherwise a cached result will be used if available
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback
-         * @param user_data user data passed to #callback
          */
-        guess_content_type(force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        guess_content_type(force_rescan: boolean, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes guessing content types of #mount. If any errors occurred
          * during the operation, #error will be set to contain the errors and
@@ -26168,9 +27550,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        remount(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        remount(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes remounting a mount. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -26192,9 +27573,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags affecting the operation
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        unmount(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        unmount(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes unmounting a mount. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -26211,9 +27591,8 @@ declare namespace imports.gi.Gio {
          *     user interaction.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
          * @param callback a #GAsyncReadyCallback, or %NULL.
-         * @param user_data user data passed to #callback.
          */
-        unmount_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        unmount_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes unmounting a mount. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -26230,20 +27609,44 @@ declare namespace imports.gi.Gio {
         unshadow(): void;
     }
 
-    var Mount: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Mount} instead.
+     */
+    type MountMixin = IMount;
+
+    /**
+     * The #GMount interface represents user-visible mounts. Note, when
+     * porting from GnomeVFS, #GMount is the moral equivalent of #GnomeVFSVolume.
+     * 
+     * #GMount is a "mounted" filesystem that you can access. Mounted is in
+     * quotes because it's not the same as a unix mount, it might be a gvfs
+     * mount, but you can still access the files on it if you use GIO. Might or
+     * might not be related to a volume object.
+     * 
+     * Unmounting a #GMount instance is an asynchronous operation. For
+     * more information about asynchronous operations, see #GAsyncResult
+     * and #GTask. To unmount a #GMount instance, first call
+     * g_mount_unmount_with_operation() with (at least) the #GMount instance and a
+     * #GAsyncReadyCallback.  The callback will be fired when the
+     * operation has resolved (either with success or failure), and a
+     * #GAsyncResult structure will be passed to the callback.  That
+     * callback should then call g_mount_unmount_with_operation_finish() with the #GMount
+     * and the #GAsyncResult data to see if the operation was completed
+     * successfully.  If an #error is present when g_mount_unmount_with_operation_finish()
+     * is called, then it will be filled with any error information.
+     */
+    interface Mount extends MountMixin { }
+
+    class Mount {
+        constructor();
     }
 
 
 
-    /**
-     * #GNetworkMonitor provides an easy-to-use cross-platform API
-     * for monitoring network connectivity. On Linux, the available
-     * implementations are based on the kernel's netlink interface and
-     * on NetworkManager.
-     * 
-     * There is also an implementation for use inside Flatpak sandboxes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkMonitor} instead.
      */
-    interface NetworkMonitor {
+    interface INetworkMonitor {
         /**
          * Attempts to determine whether or not the host pointed to by
          * #connectable can be reached, without actually trying to connect to
@@ -26281,9 +27684,8 @@ declare namespace imports.gi.Gio {
          * @param cancellable a #GCancellable, or %NULL
          * @param callback a #GAsyncReadyCallback to call when the
          *     request is satisfied
-         * @param user_data the data to pass to callback function
          */
-        can_reach_async(connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        can_reach_async(connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes an async network connectivity test.
          * See g_network_monitor_can_reach_async().
@@ -26330,24 +27732,37 @@ declare namespace imports.gi.Gio {
         get_network_metered(): boolean;
     }
 
-    var NetworkMonitor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NetworkMonitor} instead.
+     */
+    type NetworkMonitorMixin = INetworkMonitor;
+
+    /**
+     * #GNetworkMonitor provides an easy-to-use cross-platform API
+     * for monitoring network connectivity. On Linux, the available
+     * implementations are based on the kernel's netlink interface and
+     * on NetworkManager.
+     * 
+     * There is also an implementation for use inside Flatpak sandboxes.
+     */
+    interface NetworkMonitor extends NetworkMonitorMixin { }
+
+    class NetworkMonitor {
+        constructor();
         /**
          * Gets the default #GNetworkMonitor for the system.
          * @returns a #GNetworkMonitor, which will be
          *     a dummy object if no network monitor is available
          */
-        get_default(): NetworkMonitor;
+        static get_default(): NetworkMonitor;
     }
 
 
 
-    /**
-     * #GPollableInputStream is implemented by #GInputStreams that
-     * can be polled for readiness to read. This can be used when
-     * interfacing with a non-GIO API that expects
-     * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PollableInputStream} instead.
      */
-    interface PollableInputStream {
+    interface IPollableInputStream {
         /**
          * Checks if #stream is actually pollable. Some classes may implement
          * #GPollableInputStream but have only certain instances of that class
@@ -26408,18 +27823,29 @@ declare namespace imports.gi.Gio {
         read_nonblocking(buffer: number[], count: number, cancellable: Cancellable): number;
     }
 
-    var PollableInputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PollableInputStream} instead.
+     */
+    type PollableInputStreamMixin = IPollableInputStream;
+
+    /**
+     * #GPollableInputStream is implemented by #GInputStreams that
+     * can be polled for readiness to read. This can be used when
+     * interfacing with a non-GIO API that expects
+     * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
+     */
+    interface PollableInputStream extends PollableInputStreamMixin { }
+
+    class PollableInputStream {
+        constructor();
     }
 
 
 
-    /**
-     * #GPollableOutputStream is implemented by #GOutputStreams that
-     * can be polled for readiness to write. This can be used when
-     * interfacing with a non-GIO API that expects
-     * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PollableOutputStream} instead.
      */
-    interface PollableOutputStream {
+    interface IPollableOutputStream {
         /**
          * Checks if #stream is actually pollable. Some classes may implement
          * #GPollableOutputStream but have only certain instances of that
@@ -26512,10 +27938,44 @@ declare namespace imports.gi.Gio {
         writev_nonblocking(vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable): PollableReturn;
     }
 
-    var PollableOutputStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PollableOutputStream} instead.
+     */
+    type PollableOutputStreamMixin = IPollableOutputStream;
+
+    /**
+     * #GPollableOutputStream is implemented by #GOutputStreams that
+     * can be polled for readiness to write. This can be used when
+     * interfacing with a non-GIO API that expects
+     * UNIX-file-descriptor-style asynchronous I/O rather than GIO-style.
+     */
+    interface PollableOutputStream extends PollableOutputStreamMixin { }
+
+    class PollableOutputStream {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PowerProfileMonitor} instead.
+     */
+    interface IPowerProfileMonitor {
+        /**
+         * Gets whether the system is in “Power Saver” mode.
+         * 
+         * You are expected to listen to the
+         * #GPowerProfileMonitor::notify::power-saver-enabled signal to know when the profile has
+         * changed.
+         * @returns Whether the system is in “Power Saver” mode.
+         */
+        get_power_saver_enabled(): boolean;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PowerProfileMonitor} instead.
+     */
+    type PowerProfileMonitorMixin = IPowerProfileMonitor;
 
     /**
      * #GPowerProfileMonitor makes it possible for applications as well as OS components
@@ -26541,37 +28001,23 @@ declare namespace imports.gi.Gio {
      * Don't forget to disconnect the #GPowerProfileMonitor::notify::power-saver-enabled
      * signal, and unref the #GPowerProfileMonitor itself when exiting.
      */
-    interface PowerProfileMonitor {
-        /**
-         * Gets whether the system is in “Power Saver” mode.
-         * 
-         * You are expected to listen to the
-         * #GPowerProfileMonitor::notify::power-saver-enabled signal to know when the profile has
-         * changed.
-         * @returns Whether the system is in “Power Saver” mode.
-         */
-        get_power_saver_enabled(): boolean;
-    }
+    interface PowerProfileMonitor extends PowerProfileMonitorMixin { }
 
-    var PowerProfileMonitor: {
+    class PowerProfileMonitor {
+        constructor();
         /**
          * Gets a reference to the default #GPowerProfileMonitor for the system.
          * @returns a new reference to the default #GPowerProfileMonitor
          */
-        dup_default(): PowerProfileMonitor;
+        static dup_default(): PowerProfileMonitor;
     }
 
 
 
-    /**
-     * A #GProxy handles connecting to a remote host via a given type of
-     * proxy server. It is implemented by the 'gio-proxy' extension point.
-     * The extensions are named after their proxy protocol name. As an
-     * example, a SOCKS5 proxy implementation can be retrieved with the
-     * name 'socks5' using the function
-     * g_io_extension_point_get_extension_by_name().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Proxy} instead.
      */
-    interface Proxy {
+    interface IProxy {
         /**
          * Given #connection to communicate with a proxy (eg, a
          * #GSocketConnection that is connected to the proxy server), this
@@ -26591,9 +28037,8 @@ declare namespace imports.gi.Gio {
          * @param proxy_address a #GProxyAddress
          * @param cancellable a #GCancellable
          * @param callback a #GAsyncReadyCallback
-         * @param user_data callback data
          */
-        connect_async(connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        connect_async(connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * See g_proxy_connect().
          * @param result a #GAsyncResult
@@ -26613,7 +28058,23 @@ declare namespace imports.gi.Gio {
         supports_hostname(): boolean;
     }
 
-    var Proxy: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Proxy} instead.
+     */
+    type ProxyMixin = IProxy;
+
+    /**
+     * A #GProxy handles connecting to a remote host via a given type of
+     * proxy server. It is implemented by the 'gio-proxy' extension point.
+     * The extensions are named after their proxy protocol name. As an
+     * example, a SOCKS5 proxy implementation can be retrieved with the
+     * name 'socks5' using the function
+     * g_io_extension_point_get_extension_by_name().
+     */
+    interface Proxy extends ProxyMixin { }
+
+    class Proxy {
+        constructor();
         /**
          * Find the `gio-proxy` extension point for a proxy implementation that supports
          * the specified protocol.
@@ -26621,21 +28082,15 @@ declare namespace imports.gi.Gio {
          * @returns return a #GProxy or NULL if protocol
          *               is not supported.
          */
-        get_default_for_protocol(protocol: string): Proxy;
+        static get_default_for_protocol(protocol: string): Proxy;
     }
 
 
 
-    /**
-     * #GProxyResolver provides synchronous and asynchronous network proxy
-     * resolution. #GProxyResolver is used within #GSocketClient through
-     * the method g_socket_connectable_proxy_enumerate().
-     * 
-     * Implementations of #GProxyResolver based on libproxy and GNOME settings can
-     * be found in glib-networking. GIO comes with an implementation for use inside
-     * Flatpak portals.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyResolver} instead.
      */
-    interface ProxyResolver {
+    interface IProxyResolver {
         /**
          * Checks if #resolver can be used on this system. (This is used
          * internally; g_proxy_resolver_get_default() will only return a proxy
@@ -26670,9 +28125,8 @@ declare namespace imports.gi.Gio {
          * @param uri a URI representing the destination to connect to
          * @param cancellable a #GCancellable, or %NULL
          * @param callback callback to call after resolution completes
-         * @param user_data data for #callback
          */
-        lookup_async(uri: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        lookup_async(uri: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Call this function to obtain the array of proxy URIs when
          * g_proxy_resolver_lookup_async() is complete. See
@@ -26683,41 +28137,38 @@ declare namespace imports.gi.Gio {
         lookup_finish(result: AsyncResult): string[];
     }
 
-    var ProxyResolver: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ProxyResolver} instead.
+     */
+    type ProxyResolverMixin = IProxyResolver;
+
+    /**
+     * #GProxyResolver provides synchronous and asynchronous network proxy
+     * resolution. #GProxyResolver is used within #GSocketClient through
+     * the method g_socket_connectable_proxy_enumerate().
+     * 
+     * Implementations of #GProxyResolver based on libproxy and GNOME settings can
+     * be found in glib-networking. GIO comes with an implementation for use inside
+     * Flatpak portals.
+     */
+    interface ProxyResolver extends ProxyResolverMixin { }
+
+    class ProxyResolver {
+        constructor();
         /**
          * Gets the default #GProxyResolver for the system.
          * @returns the default #GProxyResolver, which
          *     will be a dummy object if no proxy resolver is available
          */
-        get_default(): ProxyResolver;
+        static get_default(): ProxyResolver;
     }
 
 
 
-    /**
-     * The GRemoteActionGroup interface is implemented by #GActionGroup
-     * instances that either transmit action invocations to other processes
-     * or receive action invocations in the local process from other
-     * processes.
-     * 
-     * The interface has `_full` variants of the two
-     * methods on #GActionGroup used to activate actions:
-     * g_action_group_activate_action() and
-     * g_action_group_change_action_state(). These variants allow a
-     * "platform data" #GVariant to be specified: a dictionary providing
-     * context for the action invocation (for example: timestamps, startup
-     * notification IDs, etc).
-     * 
-     * #GDBusActionGroup implements #GRemoteActionGroup.  This provides a
-     * mechanism to send platform data for action invocations over D-Bus.
-     * 
-     * Additionally, g_dbus_connection_export_action_group() will check if
-     * the exported #GActionGroup implements #GRemoteActionGroup and use the
-     * `_full` variants of the calls if available.  This
-     * provides a mechanism by which to receive platform data for action
-     * invocations that arrive by way of D-Bus.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RemoteActionGroup} instead.
      */
-    interface RemoteActionGroup {
+    interface IRemoteActionGroup {
         /**
          * Activates the remote action.
          * 
@@ -26750,28 +28201,46 @@ declare namespace imports.gi.Gio {
         change_action_state_full(action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;
     }
 
-    var RemoteActionGroup: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RemoteActionGroup} instead.
+     */
+    type RemoteActionGroupMixin = IRemoteActionGroup;
+
+    /**
+     * The GRemoteActionGroup interface is implemented by #GActionGroup
+     * instances that either transmit action invocations to other processes
+     * or receive action invocations in the local process from other
+     * processes.
+     * 
+     * The interface has `_full` variants of the two
+     * methods on #GActionGroup used to activate actions:
+     * g_action_group_activate_action() and
+     * g_action_group_change_action_state(). These variants allow a
+     * "platform data" #GVariant to be specified: a dictionary providing
+     * context for the action invocation (for example: timestamps, startup
+     * notification IDs, etc).
+     * 
+     * #GDBusActionGroup implements #GRemoteActionGroup.  This provides a
+     * mechanism to send platform data for action invocations over D-Bus.
+     * 
+     * Additionally, g_dbus_connection_export_action_group() will check if
+     * the exported #GActionGroup implements #GRemoteActionGroup and use the
+     * `_full` variants of the calls if available.  This
+     * provides a mechanism by which to receive platform data for action
+     * invocations that arrive by way of D-Bus.
+     */
+    interface RemoteActionGroup extends RemoteActionGroupMixin { }
+
+    class RemoteActionGroup {
+        constructor();
     }
 
 
 
-    /**
-     * #GSeekable is implemented by streams (implementations of
-     * #GInputStream or #GOutputStream) that support seeking.
-     * 
-     * Seekable streams largely fall into two categories: resizable and
-     * fixed-size.
-     * 
-     * #GSeekable on fixed-sized streams is approximately the same as POSIX
-     * lseek() on a block device (for example: attempting to seek past the
-     * end of the device is an error).  Fixed streams typically cannot be
-     * truncated.
-     * 
-     * #GSeekable on resizable streams is approximately the same as POSIX
-     * lseek() on a normal file.  Seeking past the end and writing data will
-     * usually cause the stream to resize by introducing zero bytes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Seekable} instead.
      */
-    interface Seekable {
+    interface ISeekable {
         /**
          * Tests if the stream supports the #GSeekableIface.
          * @returns %TRUE if #seekable can be seeked. %FALSE otherwise.
@@ -26831,10 +28300,72 @@ declare namespace imports.gi.Gio {
         truncate(offset: number, cancellable: Cancellable): boolean;
     }
 
-    var Seekable: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Seekable} instead.
+     */
+    type SeekableMixin = ISeekable;
+
+    /**
+     * #GSeekable is implemented by streams (implementations of
+     * #GInputStream or #GOutputStream) that support seeking.
+     * 
+     * Seekable streams largely fall into two categories: resizable and
+     * fixed-size.
+     * 
+     * #GSeekable on fixed-sized streams is approximately the same as POSIX
+     * lseek() on a block device (for example: attempting to seek past the
+     * end of the device is an error).  Fixed streams typically cannot be
+     * truncated.
+     * 
+     * #GSeekable on resizable streams is approximately the same as POSIX
+     * lseek() on a normal file.  Seeking past the end and writing data will
+     * usually cause the stream to resize by introducing zero bytes.
+     */
+    interface Seekable extends SeekableMixin { }
+
+    class Seekable {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketConnectable} instead.
+     */
+    interface ISocketConnectable {
+        /**
+         * Creates a #GSocketAddressEnumerator for #connectable.
+         * @returns a new #GSocketAddressEnumerator.
+         */
+        enumerate(): SocketAddressEnumerator;
+        /**
+         * Creates a #GSocketAddressEnumerator for #connectable that will
+         * return a #GProxyAddress for each of its addresses that you must connect
+         * to via a proxy.
+         * 
+         * If #connectable does not implement
+         * g_socket_connectable_proxy_enumerate(), this will fall back to
+         * calling g_socket_connectable_enumerate().
+         * @returns a new #GSocketAddressEnumerator.
+         */
+        proxy_enumerate(): SocketAddressEnumerator;
+        /**
+         * Format a #GSocketConnectable as a string. This is a human-readable format for
+         * use in debugging output, and is not a stable serialization format. It is not
+         * suitable for use in user interfaces as it exposes too much information for a
+         * user.
+         * 
+         * If the #GSocketConnectable implementation does not support string formatting,
+         * the implementation’s type name will be returned as a fallback.
+         * @returns the formatted string
+         */
+        to_string(): string;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link SocketConnectable} instead.
+     */
+    type SocketConnectableMixin = ISocketConnectable;
 
     /**
      * Objects that describe one or more potential socket endpoints
@@ -26895,45 +28426,18 @@ declare namespace imports.gi.Gio {
      * }
      * ]|
      */
-    interface SocketConnectable {
-        /**
-         * Creates a #GSocketAddressEnumerator for #connectable.
-         * @returns a new #GSocketAddressEnumerator.
-         */
-        enumerate(): SocketAddressEnumerator;
-        /**
-         * Creates a #GSocketAddressEnumerator for #connectable that will
-         * return a #GProxyAddress for each of its addresses that you must connect
-         * to via a proxy.
-         * 
-         * If #connectable does not implement
-         * g_socket_connectable_proxy_enumerate(), this will fall back to
-         * calling g_socket_connectable_enumerate().
-         * @returns a new #GSocketAddressEnumerator.
-         */
-        proxy_enumerate(): SocketAddressEnumerator;
-        /**
-         * Format a #GSocketConnectable as a string. This is a human-readable format for
-         * use in debugging output, and is not a stable serialization format. It is not
-         * suitable for use in user interfaces as it exposes too much information for a
-         * user.
-         * 
-         * If the #GSocketConnectable implementation does not support string formatting,
-         * the implementation’s type name will be returned as a fallback.
-         * @returns the formatted string
-         */
-        to_string(): string;
-    }
+    interface SocketConnectable extends SocketConnectableMixin { }
 
-    var SocketConnectable: {
+    class SocketConnectable {
+        constructor();
     }
 
 
 
-    /**
-     * TLS (Transport Layer Security, aka SSL) and DTLS backend.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsBackend} instead.
      */
-    interface TlsBackend {
+    interface ITlsBackend {
         /**
          * Gets the #GType of #backend's #GTlsCertificate implementation.
          * @returns the #GType of #backend's #GTlsCertificate
@@ -27001,22 +28505,32 @@ declare namespace imports.gi.Gio {
         supports_tls(): boolean;
     }
 
-    var TlsBackend: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsBackend} instead.
+     */
+    type TlsBackendMixin = ITlsBackend;
+
+    /**
+     * TLS (Transport Layer Security, aka SSL) and DTLS backend.
+     */
+    interface TlsBackend extends TlsBackendMixin { }
+
+    class TlsBackend {
+        constructor();
         /**
          * Gets the default #GTlsBackend for the system.
          * @returns a #GTlsBackend, which will be a
          *     dummy object if no TLS backend is available
          */
-        get_default(): TlsBackend;
+        static get_default(): TlsBackend;
     }
 
 
 
-    /**
-     * #GTlsClientConnection is the client-side subclass of
-     * #GTlsConnection, representing a client-side TLS connection.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsClientConnection} instead.
      */
-    interface TlsClientConnection {
+    interface ITlsClientConnection {
         /**
          * Possibly copies session state from one connection to another, for use
          * in TLS session resumption. This is not normally needed, but may be
@@ -27111,7 +28625,19 @@ declare namespace imports.gi.Gio {
         set_validation_flags(flags: TlsCertificateFlags): void;
     }
 
-    var TlsClientConnection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsClientConnection} instead.
+     */
+    type TlsClientConnectionMixin = ITlsClientConnection;
+
+    /**
+     * #GTlsClientConnection is the client-side subclass of
+     * #GTlsConnection, representing a client-side TLS connection.
+     */
+    interface TlsClientConnection extends TlsClientConnectionMixin { }
+
+    class TlsClientConnection {
+        constructor();
         /**
          * Creates a new #GTlsClientConnection wrapping #base_io_stream (which
          * must have pollable input and output streams) which is assumed to
@@ -27125,21 +28651,32 @@ declare namespace imports.gi.Gio {
          * @returns the new
          * #GTlsClientConnection, or %NULL on error
          */
-        new(base_io_stream: IOStream, server_identity: SocketConnectable): TlsClientConnection;
+        static new(base_io_stream: IOStream, server_identity: SocketConnectable): TlsClientConnection;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsFileDatabase} instead.
+     */
+    interface ITlsFileDatabase {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsFileDatabase} instead.
+     */
+    type TlsFileDatabaseMixin = ITlsFileDatabase;
 
     /**
      * #GTlsFileDatabase is implemented by #GTlsDatabase objects which load
      * their certificate information from a file. It is an interface which
      * TLS library specific subtypes implement.
      */
-    interface TlsFileDatabase {
+    interface TlsFileDatabase extends TlsFileDatabaseMixin { }
 
-    }
-
-    var TlsFileDatabase: {
+    class TlsFileDatabase {
+        constructor();
         /**
          * Creates a new #GTlsFileDatabase which uses anchor certificate authorities
          * in #anchors to verify certificate chains.
@@ -27149,20 +28686,31 @@ declare namespace imports.gi.Gio {
          * @returns the new
          * #GTlsFileDatabase, or %NULL on error
          */
-        new(anchors: string): TlsFileDatabase;
+        static new(anchors: string): TlsFileDatabase;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsServerConnection} instead.
+     */
+    interface ITlsServerConnection {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TlsServerConnection} instead.
+     */
+    type TlsServerConnectionMixin = ITlsServerConnection;
 
     /**
      * #GTlsServerConnection is the server-side subclass of #GTlsConnection,
      * representing a server-side TLS connection.
      */
-    interface TlsServerConnection {
+    interface TlsServerConnection extends TlsServerConnectionMixin { }
 
-    }
-
-    var TlsServerConnection: {
+    class TlsServerConnection {
+        constructor();
         /**
          * Creates a new #GTlsServerConnection wrapping #base_io_stream (which
          * must have pollable input and output streams).
@@ -27175,55 +28723,15 @@ declare namespace imports.gi.Gio {
          * @returns the new
          * #GTlsServerConnection, or %NULL on error
          */
-        new(base_io_stream: IOStream, certificate: TlsCertificate): TlsServerConnection;
+        static new(base_io_stream: IOStream, certificate: TlsCertificate): TlsServerConnection;
     }
 
 
 
-    /**
-     * The #GVolume interface represents user-visible objects that can be
-     * mounted. Note, when porting from GnomeVFS, #GVolume is the moral
-     * equivalent of #GnomeVFSDrive.
-     * 
-     * Mounting a #GVolume instance is an asynchronous operation. For more
-     * information about asynchronous operations, see #GAsyncResult and
-     * #GTask. To mount a #GVolume, first call g_volume_mount() with (at
-     * least) the #GVolume instance, optionally a #GMountOperation object
-     * and a #GAsyncReadyCallback.
-     * 
-     * Typically, one will only want to pass %NULL for the
-     * #GMountOperation if automounting all volumes when a desktop session
-     * starts since it's not desirable to put up a lot of dialogs asking
-     * for credentials.
-     * 
-     * The callback will be fired when the operation has resolved (either
-     * with success or failure), and a #GAsyncResult instance will be
-     * passed to the callback.  That callback should then call
-     * g_volume_mount_finish() with the #GVolume instance and the
-     * #GAsyncResult data to see if the operation was completed
-     * successfully.  If an #error is present when g_volume_mount_finish()
-     * is called, then it will be filled with any error information.
-     * 
-     * ## Volume Identifiers # {#volume-identifier}
-     * 
-     * It is sometimes necessary to directly access the underlying
-     * operating system object behind a volume (e.g. for passing a volume
-     * to an application via the commandline). For this purpose, GIO
-     * allows to obtain an 'identifier' for the volume. There can be
-     * different kinds of identifiers, such as Hal UDIs, filesystem labels,
-     * traditional Unix devices (e.g. `/dev/sda2`), UUIDs. GIO uses predefined
-     * strings as names for the different kinds of identifiers:
-     * #G_VOLUME_IDENTIFIER_KIND_UUID, #G_VOLUME_IDENTIFIER_KIND_LABEL, etc.
-     * Use g_volume_get_identifier() to obtain an identifier for a volume.
-     * 
-     * 
-     * Note that #G_VOLUME_IDENTIFIER_KIND_HAL_UDI will only be available
-     * when the gvfs hal volume monitor is in use. Other volume monitors
-     * will generally be able to provide the #G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE
-     * identifier, which can be used to obtain a hal device by means of
-     * libhal_manager_find_device_string_match().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Volume} instead.
      */
-    interface Volume {
+    interface IVolume {
         /**
          * Checks if a volume can be ejected.
          * @returns %TRUE if the #volume can be ejected. %FALSE otherwise
@@ -27241,9 +28749,8 @@ declare namespace imports.gi.Gio {
          * @param flags flags affecting the unmount if required for eject
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback, or %NULL
-         * @param user_data user data that gets passed to #callback
          */
-        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject(flags: MountUnmountFlags, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a volume. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -27260,9 +28767,8 @@ declare namespace imports.gi.Gio {
          *     avoid user interaction
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback, or %NULL
-         * @param user_data user data passed to #callback
          */
-        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        eject_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes ejecting a volume. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -27375,9 +28881,8 @@ declare namespace imports.gi.Gio {
          * @param mount_operation a #GMountOperation or %NULL to avoid user interaction
          * @param cancellable optional #GCancellable object, %NULL to ignore
          * @param callback a #GAsyncReadyCallback, or %NULL
-         * @param user_data user data that gets passed to #callback
          */
-        mount(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+        mount(flags: MountMountFlags, mount_operation: MountOperation, cancellable: Cancellable, callback: AsyncReadyCallback): void;
         /**
          * Finishes mounting a volume. If any errors occurred during the operation,
          * #error will be set to contain the errors and %FALSE will be returned.
@@ -27397,7 +28902,58 @@ declare namespace imports.gi.Gio {
         should_automount(): boolean;
     }
 
-    var Volume: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Volume} instead.
+     */
+    type VolumeMixin = IVolume;
+
+    /**
+     * The #GVolume interface represents user-visible objects that can be
+     * mounted. Note, when porting from GnomeVFS, #GVolume is the moral
+     * equivalent of #GnomeVFSDrive.
+     * 
+     * Mounting a #GVolume instance is an asynchronous operation. For more
+     * information about asynchronous operations, see #GAsyncResult and
+     * #GTask. To mount a #GVolume, first call g_volume_mount() with (at
+     * least) the #GVolume instance, optionally a #GMountOperation object
+     * and a #GAsyncReadyCallback.
+     * 
+     * Typically, one will only want to pass %NULL for the
+     * #GMountOperation if automounting all volumes when a desktop session
+     * starts since it's not desirable to put up a lot of dialogs asking
+     * for credentials.
+     * 
+     * The callback will be fired when the operation has resolved (either
+     * with success or failure), and a #GAsyncResult instance will be
+     * passed to the callback.  That callback should then call
+     * g_volume_mount_finish() with the #GVolume instance and the
+     * #GAsyncResult data to see if the operation was completed
+     * successfully.  If an #error is present when g_volume_mount_finish()
+     * is called, then it will be filled with any error information.
+     * 
+     * ## Volume Identifiers # {#volume-identifier}
+     * 
+     * It is sometimes necessary to directly access the underlying
+     * operating system object behind a volume (e.g. for passing a volume
+     * to an application via the commandline). For this purpose, GIO
+     * allows to obtain an 'identifier' for the volume. There can be
+     * different kinds of identifiers, such as Hal UDIs, filesystem labels,
+     * traditional Unix devices (e.g. `/dev/sda2`), UUIDs. GIO uses predefined
+     * strings as names for the different kinds of identifiers:
+     * #G_VOLUME_IDENTIFIER_KIND_UUID, #G_VOLUME_IDENTIFIER_KIND_LABEL, etc.
+     * Use g_volume_get_identifier() to obtain an identifier for a volume.
+     * 
+     * 
+     * Note that #G_VOLUME_IDENTIFIER_KIND_HAL_UDI will only be available
+     * when the gvfs hal volume monitor is in use. Other volume monitors
+     * will generally be able to provide the #G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE
+     * identifier, which can be used to obtain a hal device by means of
+     * libhal_manager_find_device_string_match().
+     */
+    interface Volume extends VolumeMixin { }
+
+    class Volume {
+        constructor();
     }
 
 
@@ -30000,9 +31556,8 @@ declare namespace imports.gi.Gio {
          * after this callback returns.
          * @param source_object the object the asynchronous operation was started with.
          * @param res a #GAsyncResult.
-         * @param user_data user data passed to the callback.
          */
-        (source_object: GObject.Object, res: AsyncResult, user_data: any): void;
+        (source_object: GObject.Object, res: AsyncResult): void;
     }
 
     /**
@@ -30013,9 +31568,8 @@ declare namespace imports.gi.Gio {
          * Invoked when a connection to a message bus has been obtained.
          * @param connection The #GDBusConnection to a message bus.
          * @param name The name that is requested to be owned.
-         * @param user_data User data passed to g_bus_own_name().
          */
-        (connection: DBusConnection, name: string, user_data: any): void;
+        (connection: DBusConnection, name: string): void;
     }
 
     /**
@@ -30026,9 +31580,8 @@ declare namespace imports.gi.Gio {
          * Invoked when the name is acquired.
          * @param connection The #GDBusConnection on which to acquired the name.
          * @param name The name being owned.
-         * @param user_data User data passed to g_bus_own_name() or g_bus_own_name_on_connection().
          */
-        (connection: DBusConnection, name: string, user_data: any): void;
+        (connection: DBusConnection, name: string): void;
     }
 
     /**
@@ -30040,9 +31593,8 @@ declare namespace imports.gi.Gio {
          * @param connection The #GDBusConnection the name is being watched on.
          * @param name The name being watched.
          * @param name_owner Unique name of the owner of the name being watched.
-         * @param user_data User data passed to g_bus_watch_name().
          */
-        (connection: DBusConnection, name: string, name_owner: string, user_data: any): void;
+        (connection: DBusConnection, name: string, name_owner: string): void;
     }
 
     /**
@@ -30054,9 +31606,8 @@ declare namespace imports.gi.Gio {
          * @param connection The #GDBusConnection on which to acquire the name or %NULL if
          * the connection was disconnected.
          * @param name The name being owned.
-         * @param user_data User data passed to g_bus_own_name() or g_bus_own_name_on_connection().
          */
-        (connection: DBusConnection, name: string, user_data: any): void;
+        (connection: DBusConnection, name: string): void;
     }
 
     /**
@@ -30076,9 +31627,8 @@ declare namespace imports.gi.Gio {
          * @param connection The #GDBusConnection the name is being watched on, or
          *     %NULL.
          * @param name The name being watched.
-         * @param user_data User data passed to g_bus_watch_name().
          */
-        (connection: DBusConnection, name: string, user_data: any): void;
+        (connection: DBusConnection, name: string): void;
     }
 
     /**
@@ -30090,10 +31640,9 @@ declare namespace imports.gi.Gio {
          * This is the function type of the callback used for the #GSource
          * returned by g_cancellable_source_new().
          * @param cancellable the #GCancellable
-         * @param user_data data passed in by the user.
          * @returns it should return %FALSE if the source should be removed.
          */
-        (cancellable: Cancellable, user_data: any): boolean;
+        (cancellable: Cancellable): boolean;
     }
 
     /**
@@ -30108,12 +31657,11 @@ declare namespace imports.gi.Gio {
          * @param interface_name The D-Bus interface name for the property.
          * @param property_name The name of the property to get the value of.
          * @param error Return location for error.
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_object().
          * @returns A #GVariant with the value for #property_name or %NULL if
          *     #error is set. If the returned #GVariant is floating, it is
          *     consumed - otherwise its reference count is decreased by one.
          */
-        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, property_name: string, error: GLib.Error, user_data: any): GLib.Variant;
+        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, property_name: string, error: GLib.Error): GLib.Variant;
     }
 
     /**
@@ -30129,9 +31677,8 @@ declare namespace imports.gi.Gio {
          * @param method_name The name of the method that was invoked.
          * @param parameters A #GVariant tuple with parameters.
          * @param invocation A #GDBusMethodInvocation object that must be used to return a value or error.
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_object().
          */
-        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, invocation: DBusMethodInvocation, user_data: any): void;
+        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant, invocation: DBusMethodInvocation): void;
     }
 
     /**
@@ -30147,10 +31694,9 @@ declare namespace imports.gi.Gio {
          * @param property_name The name of the property to get the value of.
          * @param value The value to set the property to.
          * @param error Return location for error.
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_object().
          * @returns %TRUE if the property was set to #value, %FALSE if #error is set.
          */
-        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, property_name: string, value: GLib.Variant, error: GLib.Error, user_data: any): boolean;
+        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, property_name: string, value: GLib.Variant, error: GLib.Error): boolean;
     }
 
     /**
@@ -30279,12 +31825,11 @@ declare namespace imports.gi.Gio {
          * @param message A locked #GDBusMessage that the filter function takes ownership of.
          * @param incoming %TRUE if it is a message received from the other peer, %FALSE if it is
          * a message to be sent to the other peer.
-         * @param user_data User data passed when adding the filter.
          * @returns A #GDBusMessage that will be freed with
          * g_object_unref() or %NULL to drop the message. Passive filter
          * functions can simply return the passed #message object.
          */
-        (connection: DBusConnection, message: DBusMessage, incoming: boolean, user_data: any): DBusMessage;
+        (connection: DBusConnection, message: DBusMessage, incoming: boolean): DBusMessage;
     }
 
     /**
@@ -30308,12 +31853,11 @@ declare namespace imports.gi.Gio {
          * @param manager A #GDBusObjectManagerClient.
          * @param object_path The object path of the remote object.
          * @param interface_name The interface name of the remote object or %NULL if a #GDBusObjectProxy #GType is requested.
-         * @param user_data User data.
          * @returns A #GType to use for the remote object. The returned type
          *   must be a #GDBusProxy or #GDBusObjectProxy -derived
          *   type.
          */
-        (manager: DBusObjectManagerClient, object_path: string, interface_name: string, user_data: any): GObject.Type;
+        (manager: DBusObjectManagerClient, object_path: string, interface_name: string): GObject.Type;
     }
 
     /**
@@ -30329,9 +31873,8 @@ declare namespace imports.gi.Gio {
          * @param interface_name The name of the interface.
          * @param signal_name The name of the signal.
          * @param parameters A #GVariant tuple with parameters for the signal.
-         * @param user_data User data passed when subscribing to the signal.
          */
-        (connection: DBusConnection, sender_name: string, object_path: string, interface_name: string, signal_name: string, parameters: GLib.Variant, user_data: any): void;
+        (connection: DBusConnection, sender_name: string, object_path: string, interface_name: string, signal_name: string, parameters: GLib.Variant): void;
     }
 
     /**
@@ -30352,10 +31895,9 @@ declare namespace imports.gi.Gio {
          * @param interface_name The D-Bus interface name that the method call or property access is for.
          * @param node A node that is a child of #object_path (relative to #object_path) or %NULL for the root of the subtree.
          * @param out_user_data Return location for user data to pass to functions in the returned #GDBusInterfaceVTable.
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_subtree().
          * @returns A #GDBusInterfaceVTable or %NULL if you don't want to handle the methods.
          */
-        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, node: string, out_user_data: any, user_data: any): DBusInterfaceVTable;
+        (connection: DBusConnection, sender: string, object_path: string, interface_name: string, node: string, out_user_data: any): DBusInterfaceVTable;
     }
 
     /**
@@ -30387,10 +31929,9 @@ declare namespace imports.gi.Gio {
          * @param connection A #GDBusConnection.
          * @param sender The unique bus name of the remote caller.
          * @param object_path The object path that was registered with g_dbus_connection_register_subtree().
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_subtree().
          * @returns 
          */
-        (connection: DBusConnection, sender: string, object_path: string, user_data: any): string[];
+        (connection: DBusConnection, sender: string, object_path: string): string[];
     }
 
     /**
@@ -30437,10 +31978,9 @@ declare namespace imports.gi.Gio {
          * @param sender The unique bus name of the remote caller.
          * @param object_path The object path that was registered with g_dbus_connection_register_subtree().
          * @param node A node that is a child of #object_path (relative to #object_path) or %NULL for the root of the subtree.
-         * @param user_data The #user_data #gpointer passed to g_dbus_connection_register_subtree().
          * @returns 
          */
-        (connection: DBusConnection, sender: string, object_path: string, node: string, user_data: any): DBusInterfaceInfo[];
+        (connection: DBusConnection, sender: string, object_path: string, node: string): DBusInterfaceInfo[];
     }
 
     /**
@@ -30453,11 +31993,10 @@ declare namespace imports.gi.Gio {
          * returned by g_datagram_based_create_source().
          * @param datagram_based the #GDatagramBased
          * @param condition the current condition at the source fired
-         * @param user_data data passed in by the user
          * @returns %G_SOURCE_REMOVE if the source should be removed,
          *   %G_SOURCE_CONTINUE otherwise
          */
-        (datagram_based: DatagramBased, condition: GLib.IOCondition, user_data: any): boolean;
+        (datagram_based: DatagramBased, condition: GLib.IOCondition): boolean;
     }
 
     /**
@@ -30472,9 +32011,8 @@ declare namespace imports.gi.Gio {
          * for each, providing the process ID.
          * @param appinfo a #GDesktopAppInfo
          * @param pid Process identifier
-         * @param user_data User data
          */
-        (appinfo: DesktopAppInfo, pid: GLib.Pid, user_data: any): void;
+        (appinfo: DesktopAppInfo, pid: GLib.Pid): void;
     }
 
     /**
@@ -30539,9 +32077,8 @@ declare namespace imports.gi.Gio {
          * @param current_size the current cumulative size measurement
          * @param num_dirs the number of directories visited so far
          * @param num_files the number of non-directory files encountered
-         * @param user_data the data passed to the original request for this callback
          */
-        (reporting: boolean, current_size: number, num_dirs: number, num_files: number, user_data: any): void;
+        (reporting: boolean, current_size: number, num_dirs: number, num_files: number): void;
     }
 
     /**
@@ -30556,9 +32093,8 @@ declare namespace imports.gi.Gio {
          * far along that operation is to the application.
          * @param current_num_bytes the current number of bytes in the operation.
          * @param total_num_bytes the total number of bytes in the operation.
-         * @param user_data user data passed to the callback.
          */
-        (current_num_bytes: number, total_num_bytes: number, user_data: any): void;
+        (current_num_bytes: number, total_num_bytes: number): void;
     }
 
     /**
@@ -30595,11 +32131,10 @@ declare namespace imports.gi.Gio {
          * to see if they have been cancelled.
          * @param job a #GIOSchedulerJob.
          * @param cancellable optional #GCancellable object, %NULL to ignore.
-         * @param user_data the data to pass to callback function
          * @returns %TRUE if this function should be called again to
          *    complete the job, %FALSE if the job is complete (or cancelled)
          */
-        (job: IOSchedulerJob, cancellable: Cancellable, user_data: any): boolean;
+        (job: IOSchedulerJob, cancellable: Cancellable): boolean;
     }
 
     /**
@@ -30613,10 +32148,9 @@ declare namespace imports.gi.Gio {
          * returned by g_pollable_input_stream_create_source() and
          * g_pollable_output_stream_create_source().
          * @param pollable_stream the #GPollableInputStream or #GPollableOutputStream
-         * @param user_data data passed in by the user.
          * @returns it should return %FALSE if the source should be removed.
          */
-        (pollable_stream: GObject.Object, user_data: any): boolean;
+        (pollable_stream: GObject.Object): boolean;
     }
 
     /**
@@ -30650,10 +32184,9 @@ declare namespace imports.gi.Gio {
          * of the appropriate type.
          * @param value return location for the property value
          * @param variant the #GVariant
-         * @param user_data user data that was specified when the binding was created
          * @returns %TRUE if the conversion succeeded, %FALSE in case of an error
          */
-        (value: GObject.Value, variant: GLib.Variant, user_data: any): boolean;
+        (value: GObject.Value, variant: GLib.Variant): boolean;
     }
 
     /**
@@ -30666,11 +32199,10 @@ declare namespace imports.gi.Gio {
          * value to a #GVariant for storing it in #GSettings.
          * @param value a #GValue containing the property value to map
          * @param expected_type the #GVariantType to create
-         * @param user_data user data that was specified when the binding was created
          * @returns a new #GVariant holding the data from #value,
          *     or %NULL in case of an error
          */
-        (value: GObject.Value, expected_type: GLib.VariantType, user_data: any): GLib.Variant;
+        (value: GObject.Value, expected_type: GLib.VariantType): GLib.Variant;
     }
 
     /**
@@ -30699,11 +32231,9 @@ declare namespace imports.gi.Gio {
          * must be returned in this case.
          * @param value the #GVariant to map, or %NULL
          * @param result the result of the mapping
-         * @param user_data the user data that was passed to
-         * g_settings_get_mapped()
          * @returns %TRUE if the conversion succeeded, %FALSE in case of an error
          */
-        (value: GLib.Variant, result: any, user_data: any): boolean;
+        (value: GLib.Variant, result: any): boolean;
     }
 
     /**
@@ -30731,10 +32261,9 @@ declare namespace imports.gi.Gio {
          * returned by g_socket_create_source().
          * @param socket the #GSocket
          * @param condition the current condition at the source fired.
-         * @param user_data data passed in by the user.
          * @returns it should return %FALSE if the source should be removed.
          */
-        (socket: Socket, condition: GLib.IOCondition, user_data: any): boolean;
+        (socket: Socket, condition: GLib.IOCondition): boolean;
     }
 
     /**
@@ -30798,10 +32327,9 @@ declare namespace imports.gi.Gio {
          * @param vfs a #GVfs
          * @param identifier the identifier to look up a #GFile for. This can either
          *     be an URI or a parse name as returned by g_file_get_parse_name()
-         * @param user_data user data passed to the function
          * @returns a #GFile for #identifier.
          */
-        (vfs: Vfs, identifier: string, user_data: any): File;
+        (vfs: Vfs, identifier: string): File;
     }
 
     /**
@@ -30979,9 +32507,8 @@ declare namespace imports.gi.Gio {
      * @param context an optional #GAppLaunchContext
      * @param cancellable a #GCancellable
      * @param callback a #GAsyncReadyCallback to call when the request is done
-     * @param user_data data to pass to #callback
      */
-    function app_info_launch_default_for_uri_async(uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+    function app_info_launch_default_for_uri_async(uri: string, context: AppLaunchContext, cancellable: Cancellable, callback: AsyncReadyCallback): void;
 
     /**
      * Finishes an asynchronous launch-default-for-uri operation.
@@ -31014,9 +32541,8 @@ declare namespace imports.gi.Gio {
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      * @param callback a #GAsyncReadyCallback to call when the initialization is
      *     finished
-     * @param user_data the data to pass to callback function
      */
-    function async_initable_newv_async(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+    function async_initable_newv_async(object_type: GObject.Type, n_parameters: number, parameters: GObject.Parameter, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback): void;
 
     /**
      * Asynchronously connects to the message bus specified by #bus_type.
@@ -31029,9 +32555,8 @@ declare namespace imports.gi.Gio {
      * @param bus_type a #GBusType
      * @param cancellable a #GCancellable or %NULL
      * @param callback a #GAsyncReadyCallback to call when the request is satisfied
-     * @param user_data the data to pass to #callback
      */
-    function bus_get(bus_type: BusType, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+    function bus_get(bus_type: BusType, cancellable: Cancellable, callback: AsyncReadyCallback): void;
 
     /**
      * Finishes an operation started with g_bus_get().
@@ -31131,12 +32656,11 @@ declare namespace imports.gi.Gio {
      * @param bus_acquired_handler handler to invoke when connected to the bus of type #bus_type or %NULL
      * @param name_acquired_handler handler to invoke when #name is acquired or %NULL
      * @param name_lost_handler handler to invoke when #name is lost or %NULL
-     * @param user_data user data to pass to handlers
      * @param user_data_free_func function for freeing #user_data or %NULL
      * @returns an identifier (never 0) that can be used with
      *     g_bus_unown_name() to stop owning the name.
      */
-    function bus_own_name(bus_type: BusType, name: string, flags: BusNameOwnerFlags, bus_acquired_handler: BusAcquiredCallback, name_acquired_handler: BusNameAcquiredCallback, name_lost_handler: BusNameLostCallback, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+    function bus_own_name(bus_type: BusType, name: string, flags: BusNameOwnerFlags, bus_acquired_handler: BusAcquiredCallback, name_acquired_handler: BusNameAcquiredCallback, name_lost_handler: BusNameLostCallback, user_data_free_func: GLib.DestroyNotify): number;
 
     /**
      * Like g_bus_own_name() but takes a #GDBusConnection instead of a
@@ -31146,12 +32670,11 @@ declare namespace imports.gi.Gio {
      * @param flags a set of flags from the #GBusNameOwnerFlags enumeration
      * @param name_acquired_handler handler to invoke when #name is acquired or %NULL
      * @param name_lost_handler handler to invoke when #name is lost or %NULL
-     * @param user_data user data to pass to handlers
      * @param user_data_free_func function for freeing #user_data or %NULL
      * @returns an identifier (never 0) that can be used with
      *     g_bus_unown_name() to stop owning the name
      */
-    function bus_own_name_on_connection(connection: DBusConnection, name: string, flags: BusNameOwnerFlags, name_acquired_handler: BusNameAcquiredCallback, name_lost_handler: BusNameLostCallback, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+    function bus_own_name_on_connection(connection: DBusConnection, name: string, flags: BusNameOwnerFlags, name_acquired_handler: BusNameAcquiredCallback, name_lost_handler: BusNameLostCallback, user_data_free_func: GLib.DestroyNotify): number;
 
     /**
      * Version of g_bus_own_name_on_connection() using closures instead of
@@ -31246,12 +32769,11 @@ declare namespace imports.gi.Gio {
      * @param flags Flags from the #GBusNameWatcherFlags enumeration.
      * @param name_appeared_handler Handler to invoke when #name is known to exist or %NULL.
      * @param name_vanished_handler Handler to invoke when #name is known to not exist or %NULL.
-     * @param user_data User data to pass to handlers.
      * @param user_data_free_func Function for freeing #user_data or %NULL.
      * @returns An identifier (never 0) that can be used with
      * g_bus_unwatch_name() to stop watching the name.
      */
-    function bus_watch_name(bus_type: BusType, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback, name_vanished_handler: BusNameVanishedCallback, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+    function bus_watch_name(bus_type: BusType, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback, name_vanished_handler: BusNameVanishedCallback, user_data_free_func: GLib.DestroyNotify): number;
 
     /**
      * Like g_bus_watch_name() but takes a #GDBusConnection instead of a
@@ -31261,12 +32783,11 @@ declare namespace imports.gi.Gio {
      * @param flags Flags from the #GBusNameWatcherFlags enumeration.
      * @param name_appeared_handler Handler to invoke when #name is known to exist or %NULL.
      * @param name_vanished_handler Handler to invoke when #name is known to not exist or %NULL.
-     * @param user_data User data to pass to handlers.
      * @param user_data_free_func Function for freeing #user_data or %NULL.
      * @returns An identifier (never 0) that can be used with
      * g_bus_unwatch_name() to stop watching the name.
      */
-    function bus_watch_name_on_connection(connection: DBusConnection, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback, name_vanished_handler: BusNameVanishedCallback, user_data: any, user_data_free_func: GLib.DestroyNotify): number;
+    function bus_watch_name_on_connection(connection: DBusConnection, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback, name_vanished_handler: BusNameVanishedCallback, user_data_free_func: GLib.DestroyNotify): number;
 
     /**
      * Version of g_bus_watch_name_on_connection() using closures instead of callbacks for
@@ -31520,9 +33041,8 @@ declare namespace imports.gi.Gio {
      * @param address A valid D-Bus address.
      * @param cancellable A #GCancellable or %NULL.
      * @param callback A #GAsyncReadyCallback to call when the request is satisfied.
-     * @param user_data Data to pass to #callback.
      */
-    function dbus_address_get_stream(address: string, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any): void;
+    function dbus_address_get_stream(address: string, cancellable: Cancellable, callback: AsyncReadyCallback): void;
 
     /**
      * Finishes an operation started with g_dbus_address_get_stream().
@@ -32157,13 +33677,12 @@ declare namespace imports.gi.Gio {
      * by calling g_cancellable_cancel() or by calling
      * g_io_scheduler_cancel_all_jobs().
      * @param job_func a #GIOSchedulerJobFunc.
-     * @param user_data data to pass to #job_func
      * @param notify a #GDestroyNotify for #user_data, or %NULL
      * @param io_priority the [I/O priority][io-priority]
      * of the request.
      * @param cancellable optional #GCancellable object, %NULL to ignore.
      */
-    function io_scheduler_push_job(job_func: IOSchedulerJobFunc, user_data: any, notify: GLib.DestroyNotify, io_priority: number, cancellable: Cancellable): void;
+    function io_scheduler_push_job(job_func: IOSchedulerJobFunc, notify: GLib.DestroyNotify, io_priority: number, cancellable: Cancellable): void;
 
     /**
      * Creates a keyfile-backed #GSettingsBackend.
@@ -32510,12 +34029,11 @@ declare namespace imports.gi.Gio {
      * information.
      * @param object a #GObject, or %NULL.
      * @param callback a #GAsyncReadyCallback.
-     * @param user_data user data passed to #callback.
      * @param domain a #GQuark containing the error domain (usually #G_IO_ERROR).
      * @param code a specific error code.
      * @param format a formatted error reporting string.
      */
-    function simple_async_report_error_in_idle(object: GObject.Object, callback: AsyncReadyCallback, user_data: any, domain: GLib.Quark, code: number, format: string): void;
+    function simple_async_report_error_in_idle(object: GObject.Object, callback: AsyncReadyCallback, domain: GLib.Quark, code: number, format: string): void;
 
     /**
      * Reports an error in an idle function. Similar to
@@ -32523,10 +34041,9 @@ declare namespace imports.gi.Gio {
      * than building a new one.
      * @param object a #GObject, or %NULL
      * @param callback a #GAsyncReadyCallback.
-     * @param user_data user data passed to #callback.
      * @param error the #GError to report
      */
-    function simple_async_report_gerror_in_idle(object: GObject.Object, callback: AsyncReadyCallback, user_data: any, error: GLib.Error): void;
+    function simple_async_report_gerror_in_idle(object: GObject.Object, callback: AsyncReadyCallback, error: GLib.Error): void;
 
     /**
      * Reports an error in an idle function. Similar to
@@ -32534,10 +34051,9 @@ declare namespace imports.gi.Gio {
      * ownership of #error, so the caller does not have to free it any more.
      * @param object a #GObject, or %NULL
      * @param callback a #GAsyncReadyCallback.
-     * @param user_data user data passed to #callback.
      * @param error the #GError to report
      */
-    function simple_async_report_take_gerror_in_idle(object: GObject.Object, callback: AsyncReadyCallback, user_data: any, error: GLib.Error): void;
+    function simple_async_report_take_gerror_in_idle(object: GObject.Object, callback: AsyncReadyCallback, error: GLib.Error): void;
 
     /**
      * Sorts #targets in place according to the algorithm in RFC 2782.

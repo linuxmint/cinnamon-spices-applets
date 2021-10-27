@@ -1,142 +1,8 @@
 declare namespace imports.gi.GdkPixbuf {
-    /**
-     * A pixel buffer.
-     * 
-     * `GdkPixbuf` contains information about an image's pixel data,
-     * its color space, bits per sample, width and height, and the
-     * rowstride (the number of bytes between the start of one row
-     * and the start of the next).
-     * 
-     * ## Creating new `GdkPixbuf`
-     * 
-     * The most basic way to create a pixbuf is to wrap an existing pixel
-     * buffer with a [class#GdkPixbuf.Pixbuf] instance. You can use the
-     * [`ctor#GdkPixbuf.Pixbuf.new_from_data`] function to do this.
-     * 
-     * Every time you create a new `GdkPixbuf` instance for some data, you
-     * will need to specify the destroy notification function that will be
-     * called when the data buffer needs to be freed; this will happen when
-     * a `GdkPixbuf` is finalized by the reference counting functions. If
-     * you have a chunk of static data compiled into your application, you
-     * can pass in `NULL` as the destroy notification function so that the
-     * data will not be freed.
-     * 
-     * The [`ctor#GdkPixbuf.Pixbuf.new`] constructor function can be used
-     * as a convenience to create a pixbuf with an empty buffer; this is
-     * equivalent to allocating a data buffer using `malloc()` and then
-     * wrapping it with `gdk_pixbuf_new_from_data()`. The `gdk_pixbuf_new()`
-     * function will compute an optimal rowstride so that rendering can be
-     * performed with an efficient algorithm.
-     * 
-     * As a special case, you can use the [`ctor#GdkPixbuf.Pixbuf.new_from_xpm_data`]
-     * function to create a pixbuf from inline XPM image data.
-     * 
-     * You can also copy an existing pixbuf with the [method#Pixbuf.copy]
-     * function. This is not the same as just acquiring a reference to
-     * the old pixbuf instance: the copy function will actually duplicate
-     * the pixel data in memory and create a new [class#Pixbuf] instance
-     * for it.
-     * 
-     * ## Reference counting
-     * 
-     * `GdkPixbuf` structures are reference counted. This means that an
-     * application can share a single pixbuf among many parts of the
-     * code. When a piece of the program needs to use a pixbuf, it should
-     * acquire a reference to it by calling `g_object_ref()`; when it no
-     * longer needs the pixbuf, it should release the reference it acquired
-     * by calling `g_object_unref()`. The resources associated with a
-     * `GdkPixbuf` will be freed when its reference count drops to zero.
-     * Newly-created `GdkPixbuf` instances start with a reference count
-     * of one.
-     * 
-     * ## Image Data
-     * 
-     * Image data in a pixbuf is stored in memory in an uncompressed,
-     * packed format. Rows in the image are stored top to bottom, and
-     * in each row pixels are stored from left to right.
-     * 
-     * There may be padding at the end of a row.
-     * 
-     * The "rowstride" value of a pixbuf, as returned by [`method#GdkPixbuf.Pixbuf.get_rowstride`],
-     * indicates the number of bytes between rows.
-     * 
-     * **NOTE**: If you are copying raw pixbuf data with `memcpy()` note that the
-     * last row in the pixbuf may not be as wide as the full rowstride, but rather
-     * just as wide as the pixel data needs to be; that is: it is unsafe to do
-     * `memcpy (dest, pixels, rowstride * height)` to copy a whole pixbuf. Use
-     * [method#GdkPixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
-     * last row as:
-     * 
-     * ```c
-     * last_row = width * ((n_channels * bits_per_sample + 7) / 8);
-     * ```
-     * 
-     * The same rule applies when iterating over each row of a `GdkPixbuf` pixels
-     * array.
-     * 
-     * The following code illustrates a simple `put_pixel()`
-     * function for RGB pixbufs with 8 bits per channel with an alpha
-     * channel.
-     * 
-     * ```c
-     * static void
-     * put_pixel (GdkPixbuf *pixbuf,
-     *            int x,
-     * 	   int y,
-     * 	   guchar red,
-     * 	   guchar green,
-     * 	   guchar blue,
-     * 	   guchar alpha)
-     * {
-     *   int n_channels = gdk_pixbuf_get_n_channels (pixbuf);
-     * 
-     *   // Ensure that the pixbuf is valid
-     *   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
-     *   g_assert (gdk_pixbuf_get_bits_per_sample (pixbuf) == 8);
-     *   g_assert (gdk_pixbuf_get_has_alpha (pixbuf));
-     *   g_assert (n_channels == 4);
-     * 
-     *   int width = gdk_pixbuf_get_width (pixbuf);
-     *   int height = gdk_pixbuf_get_height (pixbuf);
-     * 
-     *   // Ensure that the coordinates are in a valid range
-     *   g_assert (x >= 0 && x < width);
-     *   g_assert (y >= 0 && y < height);
-     * 
-     *   int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-     * 
-     *   // The pixel buffer in the GdkPixbuf instance
-     *   guchar *pixels = gdk_pixbuf_get_pixels (pixbuf);
-     * 
-     *   // The pixel we wish to modify
-     *   guchar *p = pixels + y * rowstride + x * n_channels;
-     *   p[0] = red;
-     *   p[1] = green;
-     *   p[2] = blue;
-     *   p[3] = alpha;
-     * }
-     * ```
-     * 
-     * ## Loading images
-     * 
-     * The `GdkPixBuf` class provides a simple mechanism for loading
-     * an image from a file in synchronous and asynchronous fashion.
-     * 
-     * For GUI applications, it is recommended to use the asynchronous
-     * stream API to avoid blocking the control flow of the application.
-     * 
-     * Additionally, `GdkPixbuf` provides the [class#GdkPixbuf.PixbufLoader`]
-     * API for progressive image loading.
-     * 
-     * ## Saving images
-     * 
-     * The `GdkPixbuf` class provides methods for saving image data in
-     * a number of file formats. The formatted data can be written to a
-     * file or to a memory buffer. `GdkPixbuf` can also call a user-defined
-     * callback on the data, which allows to e.g. write the image
-     * to a socket or store it in a database.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Pixbuf} instead.
      */
-    interface Pixbuf extends GObject.Object, Gio.Icon, Gio.LoadableIcon {
+    interface IPixbuf {
         /**
          * Takes an existing pixbuf and adds an alpha channel to it.
          * 
@@ -596,12 +462,11 @@ declare namespace imports.gi.GdkPixbuf {
          * See [method#GdkPixbuf.Pixbuf.save] for more details.
          * @param save_func a function that is called to save each block of data that
          *   the save routine generates.
-         * @param user_data user data to pass to the save function.
          * @param _type name of file format.
          * @param error return location for error, or `NULL`
          * @returns whether an error was set
          */
-        save_to_callback(save_func: PixbufSaveFunc, user_data: any, _type: string, error: GLib.Error): boolean;
+        save_to_callback(save_func: PixbufSaveFunc, _type: string, error: GLib.Error): boolean;
         /**
          * Vector version of `gdk_pixbuf_save_to_callback()`.
          * 
@@ -613,13 +478,12 @@ declare namespace imports.gi.GdkPixbuf {
          * See [method#GdkPixbuf.Pixbuf.save_to_callback] for more details.
          * @param save_func a function that is called to save each block of data that
          *   the save routine generates.
-         * @param user_data user data to pass to the save function.
          * @param _type name of file format.
          * @param option_keys 
          * @param option_values 
          * @returns whether an error was set
          */
-        save_to_callbackv(save_func: PixbufSaveFunc, user_data: any, _type: string, option_keys: string[], option_values: string[]): boolean;
+        save_to_callbackv(save_func: PixbufSaveFunc, _type: string, option_keys: string[], option_values: string[]): boolean;
         /**
          * Saves `pixbuf` to an output stream.
          * 
@@ -654,9 +518,8 @@ declare namespace imports.gi.GdkPixbuf {
          * @param _type name of file format
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
-         * @param user_data the data to pass to the callback function
          */
-        save_to_stream_async(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        save_to_stream_async(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
         /**
          * Saves `pixbuf` to an output stream.
          * 
@@ -689,9 +552,8 @@ declare namespace imports.gi.GdkPixbuf {
          * @param option_values 
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
-         * @param user_data the data to pass to the callback function
          */
-        save_to_streamv_async(stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        save_to_streamv_async(stream: Gio.OutputStream, _type: string, option_keys: string[], option_values: string[], cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
         /**
          * Vector version of `gdk_pixbuf_save()`.
          * 
@@ -774,7 +636,152 @@ declare namespace imports.gi.GdkPixbuf {
         unref(): void;
     }
 
-    var Pixbuf: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Pixbuf} instead.
+     */
+    type PixbufMixin = IPixbuf & GObject.IObject & Gio.IIcon & Gio.ILoadableIcon;
+
+    /**
+     * A pixel buffer.
+     * 
+     * `GdkPixbuf` contains information about an image's pixel data,
+     * its color space, bits per sample, width and height, and the
+     * rowstride (the number of bytes between the start of one row
+     * and the start of the next).
+     * 
+     * ## Creating new `GdkPixbuf`
+     * 
+     * The most basic way to create a pixbuf is to wrap an existing pixel
+     * buffer with a [class#GdkPixbuf.Pixbuf] instance. You can use the
+     * [`ctor#GdkPixbuf.Pixbuf.new_from_data`] function to do this.
+     * 
+     * Every time you create a new `GdkPixbuf` instance for some data, you
+     * will need to specify the destroy notification function that will be
+     * called when the data buffer needs to be freed; this will happen when
+     * a `GdkPixbuf` is finalized by the reference counting functions. If
+     * you have a chunk of static data compiled into your application, you
+     * can pass in `NULL` as the destroy notification function so that the
+     * data will not be freed.
+     * 
+     * The [`ctor#GdkPixbuf.Pixbuf.new`] constructor function can be used
+     * as a convenience to create a pixbuf with an empty buffer; this is
+     * equivalent to allocating a data buffer using `malloc()` and then
+     * wrapping it with `gdk_pixbuf_new_from_data()`. The `gdk_pixbuf_new()`
+     * function will compute an optimal rowstride so that rendering can be
+     * performed with an efficient algorithm.
+     * 
+     * As a special case, you can use the [`ctor#GdkPixbuf.Pixbuf.new_from_xpm_data`]
+     * function to create a pixbuf from inline XPM image data.
+     * 
+     * You can also copy an existing pixbuf with the [method#Pixbuf.copy]
+     * function. This is not the same as just acquiring a reference to
+     * the old pixbuf instance: the copy function will actually duplicate
+     * the pixel data in memory and create a new [class#Pixbuf] instance
+     * for it.
+     * 
+     * ## Reference counting
+     * 
+     * `GdkPixbuf` structures are reference counted. This means that an
+     * application can share a single pixbuf among many parts of the
+     * code. When a piece of the program needs to use a pixbuf, it should
+     * acquire a reference to it by calling `g_object_ref()`; when it no
+     * longer needs the pixbuf, it should release the reference it acquired
+     * by calling `g_object_unref()`. The resources associated with a
+     * `GdkPixbuf` will be freed when its reference count drops to zero.
+     * Newly-created `GdkPixbuf` instances start with a reference count
+     * of one.
+     * 
+     * ## Image Data
+     * 
+     * Image data in a pixbuf is stored in memory in an uncompressed,
+     * packed format. Rows in the image are stored top to bottom, and
+     * in each row pixels are stored from left to right.
+     * 
+     * There may be padding at the end of a row.
+     * 
+     * The "rowstride" value of a pixbuf, as returned by [`method#GdkPixbuf.Pixbuf.get_rowstride`],
+     * indicates the number of bytes between rows.
+     * 
+     * **NOTE**: If you are copying raw pixbuf data with `memcpy()` note that the
+     * last row in the pixbuf may not be as wide as the full rowstride, but rather
+     * just as wide as the pixel data needs to be; that is: it is unsafe to do
+     * `memcpy (dest, pixels, rowstride * height)` to copy a whole pixbuf. Use
+     * [method#GdkPixbuf.Pixbuf.copy] instead, or compute the width in bytes of the
+     * last row as:
+     * 
+     * ```c
+     * last_row = width * ((n_channels * bits_per_sample + 7) / 8);
+     * ```
+     * 
+     * The same rule applies when iterating over each row of a `GdkPixbuf` pixels
+     * array.
+     * 
+     * The following code illustrates a simple `put_pixel()`
+     * function for RGB pixbufs with 8 bits per channel with an alpha
+     * channel.
+     * 
+     * ```c
+     * static void
+     * put_pixel (GdkPixbuf *pixbuf,
+     *            int x,
+     * 	   int y,
+     * 	   guchar red,
+     * 	   guchar green,
+     * 	   guchar blue,
+     * 	   guchar alpha)
+     * {
+     *   int n_channels = gdk_pixbuf_get_n_channels (pixbuf);
+     * 
+     *   // Ensure that the pixbuf is valid
+     *   g_assert (gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB);
+     *   g_assert (gdk_pixbuf_get_bits_per_sample (pixbuf) == 8);
+     *   g_assert (gdk_pixbuf_get_has_alpha (pixbuf));
+     *   g_assert (n_channels == 4);
+     * 
+     *   int width = gdk_pixbuf_get_width (pixbuf);
+     *   int height = gdk_pixbuf_get_height (pixbuf);
+     * 
+     *   // Ensure that the coordinates are in a valid range
+     *   g_assert (x >= 0 && x < width);
+     *   g_assert (y >= 0 && y < height);
+     * 
+     *   int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+     * 
+     *   // The pixel buffer in the GdkPixbuf instance
+     *   guchar *pixels = gdk_pixbuf_get_pixels (pixbuf);
+     * 
+     *   // The pixel we wish to modify
+     *   guchar *p = pixels + y * rowstride + x * n_channels;
+     *   p[0] = red;
+     *   p[1] = green;
+     *   p[2] = blue;
+     *   p[3] = alpha;
+     * }
+     * ```
+     * 
+     * ## Loading images
+     * 
+     * The `GdkPixBuf` class provides a simple mechanism for loading
+     * an image from a file in synchronous and asynchronous fashion.
+     * 
+     * For GUI applications, it is recommended to use the asynchronous
+     * stream API to avoid blocking the control flow of the application.
+     * 
+     * Additionally, `GdkPixbuf` provides the [class#GdkPixbuf.PixbufLoader`]
+     * API for progressive image loading.
+     * 
+     * ## Saving images
+     * 
+     * The `GdkPixbuf` class provides methods for saving image data in
+     * a number of file formats. The formatted data can be written to a
+     * file or to a memory buffer. `GdkPixbuf` can also call a user-defined
+     * callback on the data, which allows to e.g. write the image
+     * to a socket or store it in a database.
+     */
+    interface Pixbuf extends PixbufMixin { }
+
+    class Pixbuf {
+        constructor();
         /**
          * Creates a new `GdkPixbuf` structure and allocates a buffer for it.
          * 
@@ -789,7 +796,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param height Height of image in pixels, must be > 0
          * @returns A newly-created pixel buffer
          */
-        new(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): Pixbuf;
+        static new(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): Pixbuf;
         /**
          * Creates a new #GdkPixbuf out of in-memory readonly image data.
          * 
@@ -806,7 +813,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param rowstride Distance in bytes between row starts
          * @returns A newly-created pixbuf
          */
-        new_from_bytes(data: GLib.Bytes, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number): Pixbuf;
+        static new_from_bytes(data: GLib.Bytes, colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number): Pixbuf;
         /**
          * Creates a new #GdkPixbuf out of in-memory image data.
          * 
@@ -831,7 +838,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param destroy_fn_data Closure data to pass to the destroy notification function
          * @returns A newly-created pixbuf
          */
-        new_from_data(data: number[], colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify, destroy_fn_data: any): Pixbuf;
+        static new_from_data(data: number[], colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number, rowstride: number, destroy_fn: PixbufDestroyNotify, destroy_fn_data: any): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from a file.
          * 
@@ -849,7 +856,7 @@ declare namespace imports.gi.GdkPixbuf {
          *   name encoding
          * @returns A newly-created pixbuf
          */
-        new_from_file(filename: string): Pixbuf;
+        static new_from_file(filename: string): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from a file.
          * 
@@ -880,7 +887,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param preserve_aspect_ratio `TRUE` to preserve the image's aspect ratio
          * @returns A newly-created pixbuf
          */
-        new_from_file_at_scale(filename: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
+        static new_from_file_at_scale(filename: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from a file.
          * 
@@ -906,7 +913,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param height The height the image should have or -1 to not constrain the height
          * @returns A newly-created pixbuf
          */
-        new_from_file_at_size(filename: string, width: number, height: number): Pixbuf;
+        static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf;
         /**
          * Creates a `GdkPixbuf` from a flat representation that is suitable for
          * storing as inline data in a program.
@@ -948,7 +955,7 @@ declare namespace imports.gi.GdkPixbuf {
          *   `data` for the resulting pixbuf
          * @returns A newly-created pixbuf
          */
-        new_from_inline(data_length: number, data: number[], copy_pixels: boolean): Pixbuf;
+        static new_from_inline(data_length: number, data: number[], copy_pixels: boolean): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from an resource.
          * 
@@ -957,7 +964,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param resource_path the path of the resource file
          * @returns A newly-created pixbuf
          */
-        new_from_resource(resource_path: string): Pixbuf;
+        static new_from_resource(resource_path: string): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from an resource.
          * 
@@ -978,7 +985,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param preserve_aspect_ratio `TRUE` to preserve the image's aspect ratio
          * @returns A newly-created pixbuf
          */
-        new_from_resource_at_scale(resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
+        static new_from_resource_at_scale(resource_path: string, width: number, height: number, preserve_aspect_ratio: boolean): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from an input stream.
          * 
@@ -996,7 +1003,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @returns A newly-created pixbuf
          */
-        new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): Pixbuf;
+        static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): Pixbuf;
         /**
          * Creates a new pixbuf by loading an image from an input stream.
          * 
@@ -1026,14 +1033,14 @@ declare namespace imports.gi.GdkPixbuf {
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @returns A newly-created pixbuf
          */
-        new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable): Pixbuf;
+        static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable): Pixbuf;
         /**
          * Finishes an asynchronous pixbuf creation operation started with
          * gdk_pixbuf_new_from_stream_async().
          * @param async_result a `GAsyncResult`
          * @returns the newly created pixbuf
          */
-        new_from_stream_finish(async_result: Gio.AsyncResult): Pixbuf;
+        static new_from_stream_finish(async_result: Gio.AsyncResult): Pixbuf;
         /**
          * Creates a new pixbuf by parsing XPM data in memory.
          * 
@@ -1042,7 +1049,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param data 
          * @returns A newly-created pixbuf
          */
-        new_from_xpm_data(data: string[]): Pixbuf;
+        static new_from_xpm_data(data: string[]): Pixbuf;
         /**
          * Calculates the rowstride that an image created with those values would
          * have.
@@ -1056,7 +1063,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param height Height of image in pixels, must be > 0
          * @returns the rowstride for the given values, or -1 in case of error.
          */
-        calculate_rowstride(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): number;
+        static calculate_rowstride(colorspace: Colorspace, has_alpha: boolean, bits_per_sample: number, width: number, height: number): number;
         /**
          * Parses an image file far enough to determine its format and size.
          * @param filename The name of the file to identify.
@@ -1065,7 +1072,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @returns A `GdkPixbufFormat` describing
          *   the image format of the file
          */
-        get_file_info(filename: string, width: number, height: number): PixbufFormat;
+        static get_file_info(filename: string, width: number, height: number): PixbufFormat;
         /**
          * Asynchronously parses an image file far enough to determine its
          * format and size.
@@ -1079,9 +1086,8 @@ declare namespace imports.gi.GdkPixbuf {
          * @param filename The name of the file to identify
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @param callback a `GAsyncReadyCallback` to call when the file info is available
-         * @param user_data the data to pass to the callback function
          */
-        get_file_info_async(filename: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        static get_file_info_async(filename: string, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous pixbuf parsing operation started with
          * gdk_pixbuf_get_file_info_async().
@@ -1091,14 +1097,14 @@ declare namespace imports.gi.GdkPixbuf {
          * @returns A `GdkPixbufFormat` describing the
          *   image format of the file
          */
-        get_file_info_finish(async_result: Gio.AsyncResult, width: number, height: number): PixbufFormat;
+        static get_file_info_finish(async_result: Gio.AsyncResult, width: number, height: number): PixbufFormat;
         /**
          * Obtains the available information about the image formats supported
          * by GdkPixbuf.
          * @returns A list of
          *   support image formats.
          */
-        get_formats(): GLib.SList;
+        static get_formats(): GLib.SList;
         /**
          * Initalizes the gdk-pixbuf loader modules referenced by the `loaders.cache`
          * file present inside that directory.
@@ -1116,7 +1122,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param path Path to directory where the `loaders.cache` is installed
          * @returns 
          */
-        init_modules(path: string): boolean;
+        static init_modules(path: string): boolean;
         /**
          * Creates a new pixbuf by asynchronously loading an image from an input stream.
          * 
@@ -1129,9 +1135,8 @@ declare namespace imports.gi.GdkPixbuf {
          * @param stream a `GInputStream` from which to load the pixbuf
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
-         * @param user_data the data to pass to the callback function
          */
-        new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
         /**
          * Creates a new pixbuf by asynchronously loading an image from an input stream.
          * 
@@ -1146,34 +1151,21 @@ declare namespace imports.gi.GdkPixbuf {
          * @param preserve_aspect_ratio `TRUE` to preserve the image's aspect ratio
          * @param cancellable optional `GCancellable` object, `NULL` to ignore
          * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
-         * @param user_data the data to pass to the callback function
          */
-        new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
         /**
          * Finishes an asynchronous pixbuf save operation started with
          * gdk_pixbuf_save_to_stream_async().
          * @param async_result a `GAsyncResult`
          * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an error was set.
          */
-        save_to_stream_finish(async_result: Gio.AsyncResult): boolean;
+        static save_to_stream_finish(async_result: Gio.AsyncResult): boolean;
     }
 
-    /**
-     * An opaque object representing an animation.
-     * 
-     * The GdkPixBuf library provides a simple mechanism to load and
-     * represent animations. An animation is conceptually a series of
-     * frames to be displayed over time.
-     * 
-     * The animation may not be represented as a series of frames
-     * internally; for example, it may be stored as a sprite and
-     * instructions for moving the sprite around a background.
-     * 
-     * To display an animation you don't need to understand its
-     * representation, however; you just ask `GdkPixbuf` what should
-     * be displayed at a given point in time.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufAnimation} instead.
      */
-    interface PixbufAnimation extends GObject.Object {
+    interface IPixbufAnimation {
         /**
          * Queries the height of the bounding box of a pixbuf animation.
          * @returns Height of the bounding box of the animation.
@@ -1259,7 +1251,30 @@ declare namespace imports.gi.GdkPixbuf {
         unref(): void;
     }
 
-    var PixbufAnimation: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufAnimation} instead.
+     */
+    type PixbufAnimationMixin = IPixbufAnimation & GObject.IObject;
+
+    /**
+     * An opaque object representing an animation.
+     * 
+     * The GdkPixBuf library provides a simple mechanism to load and
+     * represent animations. An animation is conceptually a series of
+     * frames to be displayed over time.
+     * 
+     * The animation may not be represented as a series of frames
+     * internally; for example, it may be stored as a sprite and
+     * instructions for moving the sprite around a background.
+     * 
+     * To display an animation you don't need to understand its
+     * representation, however; you just ask `GdkPixbuf` what should
+     * be displayed at a given point in time.
+     */
+    interface PixbufAnimation extends PixbufAnimationMixin { }
+
+    class PixbufAnimation {
+        constructor();
         /**
          * Creates a new animation by loading it from a file.
          * 
@@ -1273,7 +1288,7 @@ declare namespace imports.gi.GdkPixbuf {
          *   name encoding
          * @returns A newly-created animation
          */
-        new_from_file(filename: string): PixbufAnimation;
+        static new_from_file(filename: string): PixbufAnimation;
         /**
          * Creates a new pixbuf animation by loading an image from an resource.
          * 
@@ -1282,7 +1297,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param resource_path the path of the resource file
          * @returns A newly-created animation
          */
-        new_from_resource(resource_path: string): PixbufAnimation;
+        static new_from_resource(resource_path: string): PixbufAnimation;
         /**
          * Creates a new animation by loading it from an input stream.
          * 
@@ -1300,14 +1315,14 @@ declare namespace imports.gi.GdkPixbuf {
          * @param cancellable optional `GCancellable` object
          * @returns A newly-created animation
          */
-        new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): PixbufAnimation;
+        static new_from_stream(stream: Gio.InputStream, cancellable: Gio.Cancellable): PixbufAnimation;
         /**
          * Finishes an asynchronous pixbuf animation creation operation started with
          * [func#GdkPixbuf.PixbufAnimation.new_from_stream_async].
          * @param async_result a #GAsyncResult
          * @returns the newly created animation
          */
-        new_from_stream_finish(async_result: Gio.AsyncResult): PixbufAnimation;
+        static new_from_stream_finish(async_result: Gio.AsyncResult): PixbufAnimation;
         /**
          * Creates a new animation by asynchronously loading an image from an input stream.
          * 
@@ -1320,16 +1335,14 @@ declare namespace imports.gi.GdkPixbuf {
          * @param stream a #GInputStream from which to load the animation
          * @param cancellable optional #GCancellable object
          * @param callback a `GAsyncReadyCallback` to call when the pixbuf is loaded
-         * @param user_data the data to pass to the callback function
          */
-        new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback, user_data: any): void;
+        static new_from_stream_async(stream: Gio.InputStream, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
     }
 
-    /**
-     * An opaque object representing an iterator which points to a
-     * certain position in an animation.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufAnimationIter} instead.
      */
-    interface PixbufAnimationIter extends GObject.Object {
+    interface IPixbufAnimationIter {
         /**
          * Possibly advances an animation to a new frame.
          * 
@@ -1400,57 +1413,25 @@ declare namespace imports.gi.GdkPixbuf {
         on_currently_loading_frame(): boolean;
     }
 
-    var PixbufAnimationIter: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufAnimationIter} instead.
+     */
+    type PixbufAnimationIterMixin = IPixbufAnimationIter & GObject.IObject;
 
     /**
-     * Incremental image loader.
-     * 
-     * `GdkPixbufLoader` provides a way for applications to drive the
-     * process of loading an image, by letting them send the image data
-     * directly to the loader instead of having the loader read the data
-     * from a file. Applications can use this functionality instead of
-     * `gdk_pixbuf_new_from_file()` or `gdk_pixbuf_animation_new_from_file()`
-     * when they need to parse image data in small chunks. For example,
-     * it should be used when reading an image from a (potentially) slow
-     * network connection, or when loading an extremely large file.
-     * 
-     * To use `GdkPixbufLoader` to load an image, create a new instance,
-     * and call [method#GdkPixbuf.PixbufLoader.write] to send the data
-     * to it. When done, [method#GdkPixbuf.PixbufLoader.close] should be
-     * called to end the stream and finalize everything.
-     * 
-     * The loader will emit three important signals throughout the process:
-     * 
-     *  - [signal#GdkPixbuf.PixbufLoader::size-prepared] will be emitted as
-     *    soon as the image has enough information to determine the size of
-     *    the image to be used. If you want to scale the image while loading
-     *    it, you can call [method#GdkPixbuf.PixbufLoader.set_size] in
-     *    response to this signal.
-     *  - [signal#GdkPixbuf.PixbufLoader::area-prepared] will be emitted as
-     *    soon as the pixbuf of the desired has been allocated. You can obtain
-     *    the `GdkPixbuf` instance by calling [method#GdkPixbuf.PixbufLoader.get_pixbuf].
-     *    If you want to use it, simply acquire a reference to it. You can
-     *    also call `gdk_pixbuf_loader_get_pixbuf()` later to get the same
-     *    pixbuf.
-     *  - [signal#GdkPixbuf.PixbufLoader::area-updated] will be emitted every
-     *    time a region is updated. This way you can update a partially
-     *    completed image. Note that you do not know anything about the
-     *    completeness of an image from the updated area. For example, in an
-     *    interlaced image you will need to make several passes before the
-     *    image is done loading.
-     * 
-     * ## Loading an animation
-     * 
-     * Loading an animation is almost as easy as loading an image. Once the
-     * first [signal#GdkPixbuf.PixbufLoader::area-prepared] signal has been
-     * emitted, you can call [method#GdkPixbuf.PixbufLoader.get_animation] to
-     * get the [class#GdkPixbuf.PixbufAnimation] instance, and then call
-     * and [method#GdkPixbuf.PixbufAnimation.get_iter] to get a
-     * [class#GdkPixbuf.PixbufAnimationIter] to retrieve the pixbuf for the
-     * desired time stamp.
+     * An opaque object representing an iterator which points to a
+     * certain position in an animation.
      */
-    interface PixbufLoader extends GObject.Object {
+    interface PixbufAnimationIter extends PixbufAnimationIterMixin { }
+
+    class PixbufAnimationIter {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufLoader} instead.
+     */
+    interface IPixbufLoader {
         /**
          * Informs a pixbuf loader that no further writes with
          * gdk_pixbuf_loader_write() will occur, so that it can free its
@@ -1540,12 +1521,67 @@ declare namespace imports.gi.GdkPixbuf {
         write_bytes(buffer: GLib.Bytes): boolean;
     }
 
-    var PixbufLoader: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufLoader} instead.
+     */
+    type PixbufLoaderMixin = IPixbufLoader & GObject.IObject;
+
+    /**
+     * Incremental image loader.
+     * 
+     * `GdkPixbufLoader` provides a way for applications to drive the
+     * process of loading an image, by letting them send the image data
+     * directly to the loader instead of having the loader read the data
+     * from a file. Applications can use this functionality instead of
+     * `gdk_pixbuf_new_from_file()` or `gdk_pixbuf_animation_new_from_file()`
+     * when they need to parse image data in small chunks. For example,
+     * it should be used when reading an image from a (potentially) slow
+     * network connection, or when loading an extremely large file.
+     * 
+     * To use `GdkPixbufLoader` to load an image, create a new instance,
+     * and call [method#GdkPixbuf.PixbufLoader.write] to send the data
+     * to it. When done, [method#GdkPixbuf.PixbufLoader.close] should be
+     * called to end the stream and finalize everything.
+     * 
+     * The loader will emit three important signals throughout the process:
+     * 
+     *  - [signal#GdkPixbuf.PixbufLoader::size-prepared] will be emitted as
+     *    soon as the image has enough information to determine the size of
+     *    the image to be used. If you want to scale the image while loading
+     *    it, you can call [method#GdkPixbuf.PixbufLoader.set_size] in
+     *    response to this signal.
+     *  - [signal#GdkPixbuf.PixbufLoader::area-prepared] will be emitted as
+     *    soon as the pixbuf of the desired has been allocated. You can obtain
+     *    the `GdkPixbuf` instance by calling [method#GdkPixbuf.PixbufLoader.get_pixbuf].
+     *    If you want to use it, simply acquire a reference to it. You can
+     *    also call `gdk_pixbuf_loader_get_pixbuf()` later to get the same
+     *    pixbuf.
+     *  - [signal#GdkPixbuf.PixbufLoader::area-updated] will be emitted every
+     *    time a region is updated. This way you can update a partially
+     *    completed image. Note that you do not know anything about the
+     *    completeness of an image from the updated area. For example, in an
+     *    interlaced image you will need to make several passes before the
+     *    image is done loading.
+     * 
+     * ## Loading an animation
+     * 
+     * Loading an animation is almost as easy as loading an image. Once the
+     * first [signal#GdkPixbuf.PixbufLoader::area-prepared] signal has been
+     * emitted, you can call [method#GdkPixbuf.PixbufLoader.get_animation] to
+     * get the [class#GdkPixbuf.PixbufAnimation] instance, and then call
+     * and [method#GdkPixbuf.PixbufAnimation.get_iter] to get a
+     * [class#GdkPixbuf.PixbufAnimationIter] to retrieve the pixbuf for the
+     * desired time stamp.
+     */
+    interface PixbufLoader extends PixbufLoaderMixin { }
+
+    class PixbufLoader {
+        constructor();
         /**
          * Creates a new pixbuf loader object.
          * @returns A newly-created pixbuf loader.
          */
-        new(): PixbufLoader;
+        static new(): PixbufLoader;
         /**
          * Creates a new pixbuf loader object that always attempts to parse
          * image data as if it were an image of MIME type #mime_type, instead of
@@ -1565,7 +1601,7 @@ declare namespace imports.gi.GdkPixbuf {
          * @param mime_type the mime type to be loaded
          * @returns A newly-created pixbuf loader.
          */
-        new_with_mime_type(mime_type: string): PixbufLoader;
+        static new_with_mime_type(mime_type: string): PixbufLoader;
         /**
          * Creates a new pixbuf loader object that always attempts to parse
          * image data as if it were an image of type #image_type, instead of
@@ -1584,21 +1620,32 @@ declare namespace imports.gi.GdkPixbuf {
          * @param image_type name of the image format to be loaded with the image
          * @returns A newly-created pixbuf loader.
          */
-        new_with_type(image_type: string): PixbufLoader;
+        static new_with_type(image_type: string): PixbufLoader;
     }
 
-    interface PixbufNonAnim extends PixbufAnimation {
-
-    }
-
-    var PixbufNonAnim: {
-        new(pixbuf: Pixbuf): PixbufAnimation;
-    }
-
-    /**
-     * An opaque struct representing a simple animation.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufNonAnim} instead.
      */
-    interface PixbufSimpleAnim extends PixbufAnimation {
+    interface IPixbufNonAnim {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufNonAnim} instead.
+     */
+    type PixbufNonAnimMixin = IPixbufNonAnim & IPixbufAnimation;
+
+    interface PixbufNonAnim extends PixbufNonAnimMixin { }
+
+    class PixbufNonAnim {
+        constructor();
+        static new(pixbuf: Pixbuf): PixbufAnimation;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufSimpleAnim} instead.
+     */
+    interface IPixbufSimpleAnim {
         /**
          * Adds a new frame to #animation. The #pixbuf must
          * have the dimensions specified when the animation
@@ -1618,7 +1665,18 @@ declare namespace imports.gi.GdkPixbuf {
         set_loop(loop: boolean): void;
     }
 
-    var PixbufSimpleAnim: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufSimpleAnim} instead.
+     */
+    type PixbufSimpleAnimMixin = IPixbufSimpleAnim & IPixbufAnimation;
+
+    /**
+     * An opaque struct representing a simple animation.
+     */
+    interface PixbufSimpleAnim extends PixbufSimpleAnimMixin { }
+
+    class PixbufSimpleAnim {
+        constructor();
         /**
          * Creates a new, empty animation.
          * @param width the width of the animation
@@ -1626,14 +1684,25 @@ declare namespace imports.gi.GdkPixbuf {
          * @param rate the speed of the animation, in frames per second
          * @returns a newly allocated {@link SimpleAnim}
          */
-        new(width: number, height: number, rate: number): PixbufSimpleAnim;
+        static new(width: number, height: number, rate: number): PixbufSimpleAnim;
     }
 
-    interface PixbufSimpleAnimIter extends PixbufAnimationIter {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufSimpleAnimIter} instead.
+     */
+    interface IPixbufSimpleAnimIter {
 
     }
 
-    var PixbufSimpleAnimIter: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link PixbufSimpleAnimIter} instead.
+     */
+    type PixbufSimpleAnimIterMixin = IPixbufSimpleAnimIter & IPixbufAnimationIter;
+
+    interface PixbufSimpleAnimIter extends PixbufSimpleAnimIterMixin { }
+
+    class PixbufSimpleAnimIter {
+        constructor();
     }
 
     /**
@@ -1824,12 +1893,12 @@ declare namespace imports.gi.GdkPixbuf {
         public info: PixbufFormat;
         load: { (_f: any): Pixbuf; };
         load_xpm_data: { (data: string): Pixbuf; };
-        begin_load: { (size_func: PixbufModuleSizeFunc, prepared_func: PixbufModulePreparedFunc, updated_func: PixbufModuleUpdatedFunc, user_data: any): any; };
+        begin_load: { (size_func: PixbufModuleSizeFunc, prepared_func: PixbufModulePreparedFunc, updated_func: PixbufModuleUpdatedFunc): any; };
         stop_load: { (context: any): boolean; };
         load_increment: { (context: any, buf: number, size: number): boolean; };
         load_animation: { (_f: any): PixbufAnimation; };
         save: { (_f: any, pixbuf: Pixbuf, param_keys: string, param_values: string): boolean; };
-        save_to_callback: { (save_func: PixbufSaveFunc, user_data: any, pixbuf: Pixbuf, option_keys: string, option_values: string): boolean; };
+        save_to_callback: { (save_func: PixbufSaveFunc, pixbuf: Pixbuf, option_keys: string, option_values: string): boolean; };
         is_save_option_supported: { (option_key: string): boolean; };
         _reserved1: { (): void; };
         _reserved2: { (): void; };
@@ -2117,9 +2186,8 @@ declare namespace imports.gi.GdkPixbuf {
          * signal.
          * @param pixbuf the #GdkPixbuf that is currently being loaded.
          * @param anim if an animation is being loaded, the {@link Animation}, else %NULL.
-         * @param user_data the loader.
          */
-        (pixbuf: Pixbuf, anim: PixbufAnimation, user_data: any): void;
+        (pixbuf: Pixbuf, anim: PixbufAnimation): void;
     }
 
     /**
@@ -2154,9 +2222,8 @@ declare namespace imports.gi.GdkPixbuf {
          * efficiently.
          * @param width pointer to a location containing the current image width
          * @param height pointer to a location containing the current image height
-         * @param user_data the loader.
          */
-        (width: number, height: number, user_data: any): void;
+        (width: number, height: number): void;
     }
 
     /**
@@ -2180,9 +2247,8 @@ declare namespace imports.gi.GdkPixbuf {
          * @param _y the Y origin of the updated area.
          * @param width the width of the updated area.
          * @param height the height of the updated area.
-         * @param user_data the loader.
          */
-        (pixbuf: Pixbuf, _x: number, _y: number, width: number, height: number, user_data: any): void;
+        (pixbuf: Pixbuf, _x: number, _y: number, width: number, height: number): void;
     }
 
     /**

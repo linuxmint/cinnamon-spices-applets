@@ -1,11 +1,8 @@
 declare namespace imports.gi.Atk {
-    /**
-     * This object class is derived from AtkObject. It can be used as a
-     * basis for implementing accessible objects for GObjects which are
-     * not derived from GtkWidget. One example of its use is in providing
-     * an accessible object for GnomeCanvasItem in the GAIL library.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GObjectAccessible} instead.
      */
-    interface GObjectAccessible extends Object {
+    interface IGObjectAccessible {
         /**
          * Gets the GObject for which #obj is the accessible object.
          * @returns a #GObject which is the object for which #obj is
@@ -14,25 +11,34 @@ declare namespace imports.gi.Atk {
         get_object(): GObject.Object;
     }
 
-    var GObjectAccessible: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GObjectAccessible} instead.
+     */
+    type GObjectAccessibleMixin = IGObjectAccessible & IObject;
+
+    /**
+     * This object class is derived from AtkObject. It can be used as a
+     * basis for implementing accessible objects for GObjects which are
+     * not derived from GtkWidget. One example of its use is in providing
+     * an accessible object for GnomeCanvasItem in the GAIL library.
+     */
+    interface GObjectAccessible extends GObjectAccessibleMixin { }
+
+    class GObjectAccessible {
+        constructor();
         /**
          * Gets the accessible object for the specified #obj.
          * @param obj a #GObject
          * @returns a {@link Object} which is the accessible object for
          * the #obj
          */
-        for_object(obj: GObject.Object): Object;
+        static for_object(obj: GObject.Object): Object;
     }
 
-    /**
-     * An ATK object which encapsulates a link or set of links (for
-     * instance in the case of client-side image maps) in a hypertext
-     * document.  It may implement the AtkAction interface.  AtkHyperlink
-     * may also be used to refer to inline embedded content, since it
-     * allows specification of a start and end offset within the host
-     * AtkHypertext object.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Hyperlink} instead.
      */
-    interface Hyperlink extends GObject.Object, Action {
+    interface IHyperlink {
         /**
          * Gets the index with the hypertext document at which this link ends.
          * @returns the index with the hypertext document at which this link ends
@@ -91,14 +97,29 @@ declare namespace imports.gi.Atk {
         is_valid(): boolean;
     }
 
-    var Hyperlink: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Hyperlink} instead.
+     */
+    type HyperlinkMixin = IHyperlink & GObject.IObject & IAction;
 
     /**
-     * A set of utility functions for thread locking. This interface and
-     * all his related methods are deprecated since 2.12.
+     * An ATK object which encapsulates a link or set of links (for
+     * instance in the case of client-side image maps) in a hypertext
+     * document.  It may implement the AtkAction interface.  AtkHyperlink
+     * may also be used to refer to inline embedded content, since it
+     * allows specification of a start and end offset within the host
+     * AtkHypertext object.
      */
-    interface Misc extends GObject.Object {
+    interface Hyperlink extends HyperlinkMixin { }
+
+    class Hyperlink {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Misc} instead.
+     */
+    interface IMisc {
         /**
          * Take the thread mutex for the GUI toolkit,
          * if one exists.
@@ -120,13 +141,37 @@ declare namespace imports.gi.Atk {
         threads_leave(): void;
     }
 
-    var Misc: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Misc} instead.
+     */
+    type MiscMixin = IMisc & GObject.IObject;
+
+    /**
+     * A set of utility functions for thread locking. This interface and
+     * all his related methods are deprecated since 2.12.
+     */
+    interface Misc extends MiscMixin { }
+
+    class Misc {
+        constructor();
         /**
          * Obtain the singleton instance of AtkMisc for this application.
          * @returns The singleton instance of AtkMisc for this application.
          */
-        get_instance(): Misc;
+        static get_instance(): Misc;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NoOpObject} instead.
+     */
+    interface INoOpObject {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NoOpObject} instead.
+     */
+    type NoOpObjectMixin = INoOpObject & IObject & IAction & IComponent & IDocument & IEditableText & IHypertext & IImage & ISelection & ITable & ITableCell & IText & IValue & IWindow;
 
     /**
      * An AtkNoOpObject is an AtkObject which purports to implement all
@@ -134,61 +179,52 @@ declare namespace imports.gi.Atk {
      * accessible object is requested for an object type for which no
      * factory type is specified.
      */
-    // interface NoOpObject extends Object, Action, Component, Document, EditableText, Hypertext, Image, Selection, Table, TableCell, Text, Value, Window {
+    // interface NoOpObject extends NoOpObjectMixin {}
 
-    // }
-
-    var NoOpObject: {
+    class NoOpObject {
+        constructor();
         /**
          * Provides a default (non-functioning stub) {@link Object}.
          * Application maintainers should not use this method.
          * @param obj a #GObject
          * @returns a default (non-functioning stub) {@link Object}
          */
-        new(obj: GObject.Object): Object;
+        static new(obj: GObject.Object): Object;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NoOpObjectFactory} instead.
+     */
+    interface INoOpObjectFactory {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link NoOpObjectFactory} instead.
+     */
+    type NoOpObjectFactoryMixin = INoOpObjectFactory & IObjectFactory;
 
     /**
      * The AtkObjectFactory which creates an AtkNoOpObject. An instance of
      * this is created by an AtkRegistry if no factory type has not been
      * specified to create an accessible object of a particular type.
      */
-    interface NoOpObjectFactory extends ObjectFactory {
+    interface NoOpObjectFactory extends NoOpObjectFactoryMixin { }
 
-    }
-
-    var NoOpObjectFactory: {
+    class NoOpObjectFactory {
+        constructor();
         /**
          * Creates an instance of an {@link ObjectFactory} which generates primitive
          * (non-functioning) #AtkObjects.
          * @returns an instance of an {@link ObjectFactory}
          */
-        new(): ObjectFactory;
+        static new(): ObjectFactory;
     }
 
-    /**
-     * This class is the primary class for accessibility support via the
-     * Accessibility ToolKit (ATK).  Objects which are instances of
-     * {@link Object} (or instances of AtkObject-derived types) are queried
-     * for properties which relate basic (and generic) properties of a UI
-     * component such as name and description.  Instances of #AtkObject
-     * may also be queried as to whether they implement other ATK
-     * interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
-     * to the role which a given UI component plays in a user interface.
-     * 
-     * All UI components in an application which provide useful
-     * information or services to the user must provide corresponding
-     * #AtkObject instances on request (in GTK+, for instance, usually on
-     * a call to #gtk_widget_get_accessible ()), either via ATK support
-     * built into the toolkit for the widget class or ancestor class, or
-     * in the case of custom widgets, if the inherited #AtkObject
-     * implementation is insufficient, via instances of a new #AtkObject
-     * subclass.
-     * 
-     * See also: #AtkObjectFactory, #AtkRegistry.  (GTK+ users see also
-     * #GtkAccessible).
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Object} instead.
      */
-    interface Object extends GObject.Object {
+    interface IObject {
         /**
          * Adds a relationship of the specified type with the specified target.
          * @param relationship The {@link RelationType} of the relation
@@ -382,17 +418,43 @@ declare namespace imports.gi.Atk {
         set_role(role: Role): void;
     }
 
-    var Object: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Object} instead.
+     */
+    type ObjectMixin = IObject & GObject.IObject;
 
     /**
-     * This class is the base object class for a factory used to create an
-     * accessible object for a specific GType. The function
-     * atk_registry_set_factory_type() is normally called to store in the
-     * registry the factory type to be used to create an accessible of a
-     * particular GType.
+     * This class is the primary class for accessibility support via the
+     * Accessibility ToolKit (ATK).  Objects which are instances of
+     * {@link Object} (or instances of AtkObject-derived types) are queried
+     * for properties which relate basic (and generic) properties of a UI
+     * component such as name and description.  Instances of #AtkObject
+     * may also be queried as to whether they implement other ATK
+     * interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
+     * to the role which a given UI component plays in a user interface.
+     * 
+     * All UI components in an application which provide useful
+     * information or services to the user must provide corresponding
+     * #AtkObject instances on request (in GTK+, for instance, usually on
+     * a call to #gtk_widget_get_accessible ()), either via ATK support
+     * built into the toolkit for the widget class or ancestor class, or
+     * in the case of custom widgets, if the inherited #AtkObject
+     * implementation is insufficient, via instances of a new #AtkObject
+     * subclass.
+     * 
+     * See also: #AtkObjectFactory, #AtkRegistry.  (GTK+ users see also
+     * #GtkAccessible).
      */
-    interface ObjectFactory extends GObject.Object {
+    interface Object extends ObjectMixin { }
+
+    class Object {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ObjectFactory} instead.
+     */
+    interface IObjectFactory {
         /**
          * Provides an {@link Object} that implements an accessibility interface
          * on behalf of #obj
@@ -417,13 +479,28 @@ declare namespace imports.gi.Atk {
         invalidate(): void;
     }
 
-    var ObjectFactory: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ObjectFactory} instead.
+     */
+    type ObjectFactoryMixin = IObjectFactory & GObject.IObject;
 
     /**
-     * See {@link Socket}
+     * This class is the base object class for a factory used to create an
+     * accessible object for a specific GType. The function
+     * atk_registry_set_factory_type() is normally called to store in the
+     * registry the factory type to be used to create an accessible of a
+     * particular GType.
      */
-    interface Plug extends Object, Component {
+    interface ObjectFactory extends ObjectFactoryMixin { }
+
+    class ObjectFactory {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Plug} instead.
+     */
+    interface IPlug {
         /**
          * Gets the unique ID of an {@link Plug} object, which can be used to
          * embed inside of an #AtkSocket using atk_socket_embed().
@@ -451,23 +528,29 @@ declare namespace imports.gi.Atk {
         set_child(child: Object): void;
     }
 
-    var Plug: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Plug} instead.
+     */
+    type PlugMixin = IPlug & IObject & IComponent;
+
+    /**
+     * See {@link Socket}
+     */
+    interface Plug extends PlugMixin { }
+
+    class Plug {
+        constructor();
         /**
          * Creates a new {@link Plug} instance.
          * @returns the newly created {@link Plug}
          */
-        new(): Object;
+        static new(): Object;
     }
 
-    /**
-     * The AtkRegistry is normally used to create appropriate ATK "peers"
-     * for user interface components.  Application developers usually need
-     * only interact with the AtkRegistry by associating appropriate ATK
-     * implementation classes with GObject classes via the
-     * atk_registry_set_factory_type call, passing the appropriate GType
-     * for application custom widget classes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Registry} instead.
      */
-    interface Registry extends GObject.Object {
+    interface IRegistry {
         /**
          * Gets an {@link ObjectFactory} appropriate for creating #AtkObjects
          * appropriate for #type.
@@ -496,16 +579,29 @@ declare namespace imports.gi.Atk {
         set_factory_type(_type: GObject.Type, factory_type: GObject.Type): void;
     }
 
-    var Registry: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Registry} instead.
+     */
+    type RegistryMixin = IRegistry & GObject.IObject;
 
     /**
-     * An AtkRelation describes a relation between an object and one or
-     * more other objects. The actual relations that an object has with
-     * other objects are defined as an AtkRelationSet, which is a set of
-     * AtkRelations.
+     * The AtkRegistry is normally used to create appropriate ATK "peers"
+     * for user interface components.  Application developers usually need
+     * only interact with the AtkRegistry by associating appropriate ATK
+     * implementation classes with GObject classes via the
+     * atk_registry_set_factory_type call, passing the appropriate GType
+     * for application custom widget classes.
      */
-    interface Relation extends GObject.Object {
+    interface Registry extends RegistryMixin { }
+
+    class Registry {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Relation} instead.
+     */
+    interface IRelation {
         /**
          * Adds the specified AtkObject to the target for the relation, if it is
          * not already present.  See also atk_object_add_relationship().
@@ -530,7 +626,21 @@ declare namespace imports.gi.Atk {
         remove_target(target: Object): boolean;
     }
 
-    var Relation: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Relation} instead.
+     */
+    type RelationMixin = IRelation & GObject.IObject;
+
+    /**
+     * An AtkRelation describes a relation between an object and one or
+     * more other objects. The actual relations that an object has with
+     * other objects are defined as an AtkRelationSet, which is a set of
+     * AtkRelations.
+     */
+    interface Relation extends RelationMixin { }
+
+    class Relation {
+        constructor();
         /**
          * Create a new relation for the specified key and the specified list
          * of targets.  See also atk_object_add_relationship().
@@ -540,20 +650,13 @@ declare namespace imports.gi.Atk {
          *  #AtkRelation
          * @returns a pointer to a new {@link Relation}
          */
-        new(targets: Object[], n_targets: number, relationship: RelationType): Relation;
+        static new(targets: Object[], n_targets: number, relationship: RelationType): Relation;
     }
 
-    /**
-     * The AtkRelationSet held by an object establishes its relationships
-     * with objects beyond the normal "parent/child" hierarchical
-     * relationships that all user interface objects have.
-     * AtkRelationSets establish whether objects are labelled or
-     * controlled by other components, share group membership with other
-     * components (for instance within a radio-button group), or share
-     * content which "flows" between them, among other types of possible
-     * relationships.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RelationSet} instead.
      */
-    interface RelationSet extends GObject.Object {
+    interface IRelationSet {
         /**
          * Add a new relation to the current relation set if it is not already
          * present.
@@ -618,13 +721,61 @@ declare namespace imports.gi.Atk {
         remove(relation: Relation): void;
     }
 
-    var RelationSet: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link RelationSet} instead.
+     */
+    type RelationSetMixin = IRelationSet & GObject.IObject;
+
+    /**
+     * The AtkRelationSet held by an object establishes its relationships
+     * with objects beyond the normal "parent/child" hierarchical
+     * relationships that all user interface objects have.
+     * AtkRelationSets establish whether objects are labelled or
+     * controlled by other components, share group membership with other
+     * components (for instance within a radio-button group), or share
+     * content which "flows" between them, among other types of possible
+     * relationships.
+     */
+    interface RelationSet extends RelationSetMixin { }
+
+    class RelationSet {
+        constructor();
         /**
          * Creates a new empty relation set.
          * @returns a new {@link RelationSet}
          */
-        new(): RelationSet;
+        static new(): RelationSet;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Socket} instead.
+     */
+    interface ISocket {
+        /**
+         * Embeds the children of an {@link Plug} as the children of the
+         * #AtkSocket. The plug may be in the same process or in a different
+         * process.
+         * 
+         * The class item used by this function should be filled in by the IPC
+         * layer (usually at-spi2-atk). The implementor of the AtkSocket
+         * should call this function and pass the id for the plug as returned
+         * by atk_plug_get_id().  It is the responsibility of the application
+         * to pass the plug id on to the process implementing the #AtkSocket
+         * as needed.
+         * @param plug_id the ID of an {@link Plug}
+         */
+        embed(plug_id: string): void;
+        /**
+         * Determines whether or not the socket has an embedded plug.
+         * @returns TRUE if a plug is embedded in the socket
+         */
+        is_occupied(): boolean;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Socket} instead.
+     */
+    type SocketMixin = ISocket & IObject & IComponent;
 
     /**
      * Together with {@link Plug}, #AtkSocket provides the ability to embed
@@ -650,42 +801,21 @@ declare namespace imports.gi.Atk {
      * atk_object_ref_accessible_child(). All the logic related to those
      * functions will be implemented by the IPC layer.
      */
-    interface Socket extends Object, Component {
-        /**
-         * Embeds the children of an {@link Plug} as the children of the
-         * #AtkSocket. The plug may be in the same process or in a different
-         * process.
-         * 
-         * The class item used by this function should be filled in by the IPC
-         * layer (usually at-spi2-atk). The implementor of the AtkSocket
-         * should call this function and pass the id for the plug as returned
-         * by atk_plug_get_id().  It is the responsibility of the application
-         * to pass the plug id on to the process implementing the #AtkSocket
-         * as needed.
-         * @param plug_id the ID of an {@link Plug}
-         */
-        embed(plug_id: string): void;
-        /**
-         * Determines whether or not the socket has an embedded plug.
-         * @returns TRUE if a plug is embedded in the socket
-         */
-        is_occupied(): boolean;
-    }
+    interface Socket extends SocketMixin { }
 
-    var Socket: {
+    class Socket {
+        constructor();
         /**
          * Creates a new {@link Socket}.
          * @returns the newly created {@link Socket} instance
          */
-        new(): Object;
+        static new(): Object;
     }
 
-    /**
-     * An AtkStateSet is a read-only representation of the full set of {@link States}
-     * that apply to an object at a given time. This set is not meant to be
-     * modified, but rather created when #atk_object_ref_state_set() is called.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link StateSet} instead.
      */
-    interface StateSet extends GObject.Object {
+    interface IStateSet {
         /**
          * Adds the state of the specified type to the state set if it is not already
          * present.
@@ -769,13 +899,38 @@ declare namespace imports.gi.Atk {
         xor_sets(compare_set: StateSet): StateSet;
     }
 
-    var StateSet: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link StateSet} instead.
+     */
+    type StateSetMixin = IStateSet & GObject.IObject;
+
+    /**
+     * An AtkStateSet is a read-only representation of the full set of {@link States}
+     * that apply to an object at a given time. This set is not meant to be
+     * modified, but rather created when #atk_object_ref_state_set() is called.
+     */
+    interface StateSet extends StateSetMixin { }
+
+    class StateSet {
+        constructor();
         /**
          * Creates a new empty state set.
          * @returns a new {@link StateSet}
          */
-        new(): StateSet;
+        static new(): StateSet;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Util} instead.
+     */
+    interface IUtil {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Util} instead.
+     */
+    type UtilMixin = IUtil & GObject.IObject;
 
     /**
      * A set of ATK utility functions which are used to support event
@@ -783,11 +938,10 @@ declare namespace imports.gi.Atk {
      * of a process and information about the current ATK implementation
      * and toolkit version.
      */
-    interface Util extends GObject.Object {
+    interface Util extends UtilMixin { }
 
-    }
-
-    var Util: {
+    class Util {
+        constructor();
     }
 
     /**
@@ -1024,6 +1178,14 @@ declare namespace imports.gi.Atk {
      */
     class Range {
         /**
+         * Creates a new {@link Range}.
+         * @param lower_limit inferior limit for this range
+         * @param upper_limit superior limit for this range
+         * @param description human readable description of this range.
+         * @returns a new {@link Range}
+         */
+        static new(lower_limit: number, upper_limit: number, description: string): Range;
+        /**
          * Returns a new {@link Range} that is a exact copy of #src
          * @returns a new {@link Range} copy of #src
          */
@@ -1239,26 +1401,10 @@ declare namespace imports.gi.Atk {
         public parent: GObject.TypeInterface;
     }
 
-    /**
-     * {@link Action} should be implemented by instances of #AtkObject classes
-     * with which the user can interact directly, i.e. buttons,
-     * checkboxes, scrollbars, e.g. components which are not "passive"
-     * providers of UI information.
-     * 
-     * Exceptions: when the user interaction is already covered by another
-     * appropriate interface such as #AtkEditableText (insert/delete text,
-     * etc.) or #AtkValue (set value) then these actions should not be
-     * exposed by #AtkAction as well.
-     * 
-     * Though most UI interactions on components should be invocable via
-     * keyboard as well as mouse, there will generally be a close mapping
-     * between "mouse actions" that are possible on a component and the
-     * AtkActions.  Where mouse and keyboard actions are redundant in
-     * effect, #AtkAction should expose only one action rather than
-     * exposing redundant actions if possible.  By convention we have been
-     * using "mouse centric" terminology for #AtkAction names.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Action} instead.
      */
-    interface Action {
+    interface IAction {
         /**
          * Perform the specified action on the object.
          * @param _i the action index corresponding to the action to be performed
@@ -1344,24 +1490,42 @@ declare namespace imports.gi.Atk {
         // set_description(_i: number, desc: string): boolean;
     }
 
-    var Action: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Action} instead.
+     */
+    type ActionMixin = IAction;
+
+    /**
+     * {@link Action} should be implemented by instances of #AtkObject classes
+     * with which the user can interact directly, i.e. buttons,
+     * checkboxes, scrollbars, e.g. components which are not "passive"
+     * providers of UI information.
+     * 
+     * Exceptions: when the user interaction is already covered by another
+     * appropriate interface such as #AtkEditableText (insert/delete text,
+     * etc.) or #AtkValue (set value) then these actions should not be
+     * exposed by #AtkAction as well.
+     * 
+     * Though most UI interactions on components should be invocable via
+     * keyboard as well as mouse, there will generally be a close mapping
+     * between "mouse actions" that are possible on a component and the
+     * AtkActions.  Where mouse and keyboard actions are redundant in
+     * effect, #AtkAction should expose only one action rather than
+     * exposing redundant actions if possible.  By convention we have been
+     * using "mouse centric" terminology for #AtkAction names.
+     */
+    interface Action extends ActionMixin { }
+
+    class Action {
+        constructor();
     }
 
 
 
-    /**
-     * {@link Component} should be implemented by most if not all UI elements
-     * with an actual on-screen presence, i.e. components which can be
-     * said to have a screen-coordinate bounding box.  Virtually all
-     * widgets will need to have #AtkComponent implementations provided
-     * for their corresponding #AtkObject class.  In short, only UI
-     * elements which are *not* GUI elements will omit this ATK interface.
-     * 
-     * A possible exception might be textual information with a
-     * transparent background, in which case text glyph bounding box
-     * information is provided by #AtkText.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Component} instead.
      */
-    interface Component {
+    interface IComponent {
         /**
          * Add the specified handler to the set of functions to be called
          * when this object receives focus events (in or out). If the handler is
@@ -1515,21 +1679,35 @@ declare namespace imports.gi.Atk {
         set_size(width: number, height: number): boolean;
     }
 
-    var Component: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Component} instead.
+     */
+    type ComponentMixin = IComponent;
+
+    /**
+     * {@link Component} should be implemented by most if not all UI elements
+     * with an actual on-screen presence, i.e. components which can be
+     * said to have a screen-coordinate bounding box.  Virtually all
+     * widgets will need to have #AtkComponent implementations provided
+     * for their corresponding #AtkObject class.  In short, only UI
+     * elements which are *not* GUI elements will omit this ATK interface.
+     * 
+     * A possible exception might be textual information with a
+     * transparent background, in which case text glyph bounding box
+     * information is provided by #AtkText.
+     */
+    interface Component extends ComponentMixin { }
+
+    class Component {
+        constructor();
     }
 
 
 
-    /**
-     * The AtkDocument interface should be supported by any object whose
-     * content is a representation or view of a document.  The AtkDocument
-     * interface should appear on the toplevel container for the document
-     * content; however AtkDocument instances may be nested (i.e. an
-     * AtkDocument may be a descendant of another AtkDocument) in those
-     * cases where one document contains "embedded content" which can
-     * reasonably be considered a document in its own right.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Document} instead.
      */
-    interface Document {
+    interface IDocument {
         /**
          * Retrieves the value of the given #attribute_name inside #document.
          * @param attribute_name a character string representing the name of the attribute
@@ -1594,23 +1772,32 @@ declare namespace imports.gi.Atk {
         set_attribute_value(attribute_name: string, attribute_value: string): boolean;
     }
 
-    var Document: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Document} instead.
+     */
+    type DocumentMixin = IDocument;
+
+    /**
+     * The AtkDocument interface should be supported by any object whose
+     * content is a representation or view of a document.  The AtkDocument
+     * interface should appear on the toplevel container for the document
+     * content; however AtkDocument instances may be nested (i.e. an
+     * AtkDocument may be a descendant of another AtkDocument) in those
+     * cases where one document contains "embedded content" which can
+     * reasonably be considered a document in its own right.
+     */
+    interface Document extends DocumentMixin { }
+
+    class Document {
+        constructor();
     }
 
 
 
-    /**
-     * {@link EditableText} should be implemented by UI components which
-     * contain text which the user can edit, via the #AtkObject
-     * corresponding to that component (see #AtkObject).
-     * 
-     * #AtkEditableText is a subclass of #AtkText, and as such, an object
-     * which implements #AtkEditableText is by definition an #AtkText
-     * implementor as well.
-     * 
-     * See also: #AtkText
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link EditableText} instead.
      */
-    interface EditableText {
+    interface IEditableText {
         /**
          * Copy text from #start_pos up to, but not including #end_pos
          * to the clipboard.
@@ -1664,10 +1851,46 @@ declare namespace imports.gi.Atk {
         set_text_contents(string: string): void;
     }
 
-    var EditableText: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link EditableText} instead.
+     */
+    type EditableTextMixin = IEditableText;
+
+    /**
+     * {@link EditableText} should be implemented by UI components which
+     * contain text which the user can edit, via the #AtkObject
+     * corresponding to that component (see #AtkObject).
+     * 
+     * #AtkEditableText is a subclass of #AtkText, and as such, an object
+     * which implements #AtkEditableText is by definition an #AtkText
+     * implementor as well.
+     * 
+     * See also: #AtkText
+     */
+    interface EditableText extends EditableTextMixin { }
+
+    class EditableText {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link HyperlinkImpl} instead.
+     */
+    interface IHyperlinkImpl {
+        /**
+         * Gets the hyperlink associated with this object.
+         * @returns an AtkHyperlink object which points to this
+         * implementing AtkObject.
+         */
+        get_hyperlink(): Hyperlink;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link HyperlinkImpl} instead.
+     */
+    type HyperlinkImplMixin = IHyperlinkImpl;
 
     /**
      * AtkHyperlinkImpl allows AtkObjects to refer to their associated
@@ -1699,31 +1922,18 @@ declare namespace imports.gi.Atk {
      * interface.  Thus, in order to interact with AtkObjects via
      * AtkHyperlink semantics, a new interface was required.
      */
-    interface HyperlinkImpl {
-        /**
-         * Gets the hyperlink associated with this object.
-         * @returns an AtkHyperlink object which points to this
-         * implementing AtkObject.
-         */
-        get_hyperlink(): Hyperlink;
-    }
+    interface HyperlinkImpl extends HyperlinkImplMixin { }
 
-    var HyperlinkImpl: {
+    class HyperlinkImpl {
+        constructor();
     }
 
 
 
-    /**
-     * An interface used for objects which implement linking between
-     * multiple resource or content locations, or multiple 'markers'
-     * within a single document.  A Hypertext instance is associated with
-     * one or more Hyperlinks, which are associated with particular
-     * offsets within the Hypertext's included content.  While this
-     * interface is derived from Text, there is no requirement that
-     * Hypertext instances have textual content; they may implement Image
-     * as well, and Hyperlinks need not have non-zero text offsets.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Hypertext} instead.
      */
-    interface Hypertext {
+    interface IHypertext {
         /**
          * Gets the link in this hypertext document at index
          * #link_index
@@ -1747,27 +1957,33 @@ declare namespace imports.gi.Atk {
         get_n_links(): number;
     }
 
-    var Hypertext: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Hypertext} instead.
+     */
+    type HypertextMixin = IHypertext;
+
+    /**
+     * An interface used for objects which implement linking between
+     * multiple resource or content locations, or multiple 'markers'
+     * within a single document.  A Hypertext instance is associated with
+     * one or more Hyperlinks, which are associated with particular
+     * offsets within the Hypertext's included content.  While this
+     * interface is derived from Text, there is no requirement that
+     * Hypertext instances have textual content; they may implement Image
+     * as well, and Hyperlinks need not have non-zero text offsets.
+     */
+    interface Hypertext extends HypertextMixin { }
+
+    class Hypertext {
+        constructor();
     }
 
 
 
-    /**
-     * {@link Image} should be implemented by #AtkObject subtypes on behalf of
-     * components which display image/pixmap information onscreen, and
-     * which provide information (other than just widget borders, etc.)
-     * via that image content.  For instance, icons, buttons with icons,
-     * toolbar elements, and image viewing panes typically should
-     * implement #AtkImage.
-     * 
-     * #AtkImage primarily provides two types of information: coordinate
-     * information (useful for screen review mode of screenreaders, and
-     * for use by onscreen magnifiers), and descriptive information.  The
-     * descriptive information is provided for alternative, text-only
-     * presentation of the most significant information present in the
-     * image.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Image} instead.
      */
-    interface Image {
+    interface IImage {
         /**
          * Get a textual description of this image.
          * @returns a string representing the image description
@@ -1812,38 +2028,63 @@ declare namespace imports.gi.Atk {
         set_image_description(description: string): boolean;
     }
 
-    var Image: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Image} instead.
+     */
+    type ImageMixin = IImage;
+
+    /**
+     * {@link Image} should be implemented by #AtkObject subtypes on behalf of
+     * components which display image/pixmap information onscreen, and
+     * which provide information (other than just widget borders, etc.)
+     * via that image content.  For instance, icons, buttons with icons,
+     * toolbar elements, and image viewing panes typically should
+     * implement #AtkImage.
+     * 
+     * #AtkImage primarily provides two types of information: coordinate
+     * information (useful for screen review mode of screenreaders, and
+     * for use by onscreen magnifiers), and descriptive information.  The
+     * descriptive information is provided for alternative, text-only
+     * presentation of the most significant information present in the
+     * image.
+     */
+    interface Image extends ImageMixin { }
+
+    class Image {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ImplementorIface} instead.
+     */
+    interface IImplementorIface {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ImplementorIface} instead.
+     */
+    type ImplementorIfaceMixin = IImplementorIface;
 
     /**
      * The AtkImplementor interface is implemented by objects for which
      * AtkObject peers may be obtained via calls to
      * iface->(ref_accessible)(implementor);
      */
-    interface ImplementorIface {
+    interface ImplementorIface extends ImplementorIfaceMixin { }
 
+    class ImplementorIface {
+        constructor();
     }
 
-    var ImplementorIface: {
-    }
 
 
-
-    /**
-     * {@link Selection} should be implemented by UI components with children
-     * which are exposed by #atk_object_ref_child and
-     * #atk_object_get_n_children, if the use of the parent UI component
-     * ordinarily involves selection of one or more of the objects
-     * corresponding to those #AtkObject children - for example,
-     * selectable lists.
-     * 
-     * Note that other types of "selection" (for instance text selection)
-     * are accomplished a other ATK interfaces - #AtkSelection is limited
-     * to the selection/deselection of children.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Selection} instead.
      */
-    interface Selection {
+    interface ISelection {
         /**
          * Adds the specified accessible child of the object to the
          * object's selection.
@@ -1907,30 +2148,35 @@ declare namespace imports.gi.Atk {
         select_all_selection(): boolean;
     }
 
-    var Selection: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Selection} instead.
+     */
+    type SelectionMixin = ISelection;
+
+    /**
+     * {@link Selection} should be implemented by UI components with children
+     * which are exposed by #atk_object_ref_child and
+     * #atk_object_get_n_children, if the use of the parent UI component
+     * ordinarily involves selection of one or more of the objects
+     * corresponding to those #AtkObject children - for example,
+     * selectable lists.
+     * 
+     * Note that other types of "selection" (for instance text selection)
+     * are accomplished a other ATK interfaces - #AtkSelection is limited
+     * to the selection/deselection of children.
+     */
+    interface Selection extends SelectionMixin { }
+
+    class Selection {
+        constructor();
     }
 
 
 
-    /**
-     * An interface whereby an object allows its backing content to be
-     * streamed to clients.  Typical implementors would be images or
-     * icons, HTML content, or multimedia display/rendering widgets.
-     * 
-     * Negotiation of content type is allowed. Clients may examine the
-     * backing data and transform, convert, or parse the content in order
-     * to present it in an alternate form to end-users.
-     * 
-     * The AtkStreamableContent interface is particularly useful for
-     * saving, printing, or post-processing entire documents, or for
-     * persisting alternate views of a document. If document content
-     * itself is being serialized, stored, or converted, then use of the
-     * AtkStreamableContent interface can help address performance
-     * issues. Unlike most ATK interfaces, this interface is not strongly
-     * tied to the current user-agent view of the a particular document,
-     * but may in some cases give access to the underlying model data.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link StreamableContent} instead.
      */
-    interface StreamableContent {
+    interface IStreamableContent {
         /**
          * Gets the character string of the specified mime type. The first mime
          * type is at position 0, the second at position 1, and so on.
@@ -1968,42 +2214,41 @@ declare namespace imports.gi.Atk {
         get_uri(mime_type: string): string;
     }
 
-    var StreamableContent: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link StreamableContent} instead.
+     */
+    type StreamableContentMixin = IStreamableContent;
+
+    /**
+     * An interface whereby an object allows its backing content to be
+     * streamed to clients.  Typical implementors would be images or
+     * icons, HTML content, or multimedia display/rendering widgets.
+     * 
+     * Negotiation of content type is allowed. Clients may examine the
+     * backing data and transform, convert, or parse the content in order
+     * to present it in an alternate form to end-users.
+     * 
+     * The AtkStreamableContent interface is particularly useful for
+     * saving, printing, or post-processing entire documents, or for
+     * persisting alternate views of a document. If document content
+     * itself is being serialized, stored, or converted, then use of the
+     * AtkStreamableContent interface can help address performance
+     * issues. Unlike most ATK interfaces, this interface is not strongly
+     * tied to the current user-agent view of the a particular document,
+     * but may in some cases give access to the underlying model data.
+     */
+    interface StreamableContent extends StreamableContentMixin { }
+
+    class StreamableContent {
+        constructor();
     }
 
 
 
-    /**
-     * {@link Table} should be implemented by components which present
-     * elements ordered via rows and columns.  It may also be used to
-     * present tree-structured information if the nodes of the trees can
-     * be said to contain multiple "columns".  Individual elements of an
-     * #AtkTable are typically referred to as "cells". Those cells should
-     * implement the interface #AtkTableCell, but #Atk doesn't require
-     * them to be direct children of the current #AtkTable. They can be
-     * grand-children, grand-grand-children etc. #AtkTable provides the
-     * API needed to get a individual cell based on the row and column
-     * numbers.
-     * 
-     * Children of #AtkTable are frequently "lightweight" objects, that
-     * is, they may not have backing widgets in the host UI toolkit.  They
-     * are therefore often transient.
-     * 
-     * Since tables are often very complex, #AtkTable includes provision
-     * for offering simplified summary information, as well as row and
-     * column headers and captions.  Headers and captions are #AtkObjects
-     * which may implement other interfaces (#AtkText, #AtkImage, etc.) as
-     * appropriate.  #AtkTable summaries may themselves be (simplified)
-     * #AtkTables, etc.
-     * 
-     * Note for implementors: in the past, #AtkTable required that all the
-     * cells should be direct children of #AtkTable, and provided some
-     * index based methods to request the cells. The practice showed that
-     * that forcing made #AtkTable implementation complex, and hard to
-     * expose other kind of children, like rows or captions. Right now,
-     * index-based methods are deprecated.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Table} instead.
      */
-    interface Table {
+    interface ITable {
         /**
          * Adds the specified #column to the selection.
          * @param column a #gint representing a column in #table
@@ -2217,19 +2462,53 @@ declare namespace imports.gi.Atk {
         set_summary(accessible: Object): void;
     }
 
-    var Table: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Table} instead.
+     */
+    type TableMixin = ITable;
+
+    /**
+     * {@link Table} should be implemented by components which present
+     * elements ordered via rows and columns.  It may also be used to
+     * present tree-structured information if the nodes of the trees can
+     * be said to contain multiple "columns".  Individual elements of an
+     * #AtkTable are typically referred to as "cells". Those cells should
+     * implement the interface #AtkTableCell, but #Atk doesn't require
+     * them to be direct children of the current #AtkTable. They can be
+     * grand-children, grand-grand-children etc. #AtkTable provides the
+     * API needed to get a individual cell based on the row and column
+     * numbers.
+     * 
+     * Children of #AtkTable are frequently "lightweight" objects, that
+     * is, they may not have backing widgets in the host UI toolkit.  They
+     * are therefore often transient.
+     * 
+     * Since tables are often very complex, #AtkTable includes provision
+     * for offering simplified summary information, as well as row and
+     * column headers and captions.  Headers and captions are #AtkObjects
+     * which may implement other interfaces (#AtkText, #AtkImage, etc.) as
+     * appropriate.  #AtkTable summaries may themselves be (simplified)
+     * #AtkTables, etc.
+     * 
+     * Note for implementors: in the past, #AtkTable required that all the
+     * cells should be direct children of #AtkTable, and provided some
+     * index based methods to request the cells. The practice showed that
+     * that forcing made #AtkTable implementation complex, and hard to
+     * expose other kind of children, like rows or captions. Right now,
+     * index-based methods are deprecated.
+     */
+    interface Table extends TableMixin { }
+
+    class Table {
+        constructor();
     }
 
 
 
-    /**
-     * Being {@link Table} a component which present elements ordered via rows
-     * and columns, an #AtkTableCell is the interface which each of those
-     * elements, so "cells" should implement.
-     * 
-     * See also #AtkTable.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TableCell} instead.
      */
-    interface TableCell {
+    interface ITableCell {
         /**
          * Returns the column headers as an array of cell accessibles.
          * @returns 
@@ -2279,33 +2558,30 @@ declare namespace imports.gi.Atk {
         get_table(): Object;
     }
 
-    var TableCell: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TableCell} instead.
+     */
+    type TableCellMixin = ITableCell;
+
+    /**
+     * Being {@link Table} a component which present elements ordered via rows
+     * and columns, an #AtkTableCell is the interface which each of those
+     * elements, so "cells" should implement.
+     * 
+     * See also #AtkTable.
+     */
+    interface TableCell extends TableCellMixin { }
+
+    class TableCell {
+        constructor();
     }
 
 
 
-    /**
-     * {@link Text} should be implemented by #AtkObjects on behalf of widgets
-     * that have text content which is either attributed or otherwise
-     * non-trivial.  #AtkObjects whose text content is simple,
-     * unattributed, and very brief may expose that content via
-     * #atk_object_get_name instead; however if the text is editable,
-     * multi-line, typically longer than three or four words, attributed,
-     * selectable, or if the object already uses the 'name' ATK property
-     * for other information, the #AtkText interface should be used to
-     * expose the text content.  In the case of editable text content,
-     * #AtkEditableText (a subtype of the #AtkText interface) should be
-     * implemented instead.
-     * 
-     *  #AtkText provides not only traversal facilities and change
-     * notification for text content, but also caret tracking and glyph
-     * bounding box calculations.  Note that the text strings are exposed
-     * as UTF-8, and are therefore potentially multi-byte, and
-     * caret-to-byte offset mapping makes no assumptions about the
-     * character length; also bounding box glyph-to-offset mapping may be
-     * complex for languages which use ligatures.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Text} instead.
      */
-    interface Text {
+    interface IText {
         /**
          * Adds a selection bounded by the specified offsets.
          * @param start_offset the starting character offset of the selected region
@@ -2603,17 +2879,136 @@ declare namespace imports.gi.Atk {
         set_selection(selection_num: number, start_offset: number, end_offset: number): boolean;
     }
 
-    var Text: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Text} instead.
+     */
+    type TextMixin = IText;
+
+    /**
+     * {@link Text} should be implemented by #AtkObjects on behalf of widgets
+     * that have text content which is either attributed or otherwise
+     * non-trivial.  #AtkObjects whose text content is simple,
+     * unattributed, and very brief may expose that content via
+     * #atk_object_get_name instead; however if the text is editable,
+     * multi-line, typically longer than three or four words, attributed,
+     * selectable, or if the object already uses the 'name' ATK property
+     * for other information, the #AtkText interface should be used to
+     * expose the text content.  In the case of editable text content,
+     * #AtkEditableText (a subtype of the #AtkText interface) should be
+     * implemented instead.
+     * 
+     *  #AtkText provides not only traversal facilities and change
+     * notification for text content, but also caret tracking and glyph
+     * bounding box calculations.  Note that the text strings are exposed
+     * as UTF-8, and are therefore potentially multi-byte, and
+     * caret-to-byte offset mapping makes no assumptions about the
+     * character length; also bounding box glyph-to-offset mapping may be
+     * complex for languages which use ligatures.
+     */
+    interface Text extends TextMixin { }
+
+    class Text {
+        constructor();
         /**
          * Frees the memory associated with an array of AtkTextRange. It is assumed
          * that the array was returned by the function atk_text_get_bounded_ranges
          * and is NULL terminated.
          * @param ranges 
          */
-        free_ranges(ranges: TextRange[]): void;
+        static free_ranges(ranges: TextRange[]): void;
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Value} instead.
+     */
+    interface IValue {
+        /**
+         * Gets the value of this object.
+         * @param value a #GValue representing the current accessible value
+         */
+        get_current_value(value: GObject.Value): void;
+        /**
+         * Gets the minimum increment by which the value of this object may be
+         * changed.  If zero, the minimum increment is undefined, which may
+         * mean that it is limited only by the floating point precision of the
+         * platform.
+         * @returns the minimum increment by which the value of this
+         * object may be changed. zero if undefined.
+         */
+        get_increment(): number;
+        /**
+         * Gets the maximum value of this object.
+         * @param value a #GValue representing the maximum accessible value
+         */
+        get_maximum_value(value: GObject.Value): void;
+        /**
+         * Gets the minimum increment by which the value of this object may be changed.  If zero,
+         * the minimum increment is undefined, which may mean that it is limited only by the
+         * floating point precision of the platform.
+         * @param value a #GValue representing the minimum increment by which the accessible value may be changed
+         */
+        get_minimum_increment(value: GObject.Value): void;
+        /**
+         * Gets the minimum value of this object.
+         * @param value a #GValue representing the minimum accessible value
+         */
+        get_minimum_value(value: GObject.Value): void;
+        /**
+         * Gets the range of this object.
+         * @returns a newly allocated {@link Range}
+         * that represents the minimum, maximum and descriptor (if available)
+         * of #obj. NULL if that range is not defined.
+         */
+        get_range(): Range;
+        /**
+         * Gets the list of subranges defined for this object. See {@link Value}
+         * introduction for examples of subranges and when to expose them.
+         * @returns an #GSList of
+         * {@link Range} which each of the subranges defined for this object. Free
+         * the returns list with g_slist_free().
+         */
+        get_sub_ranges(): GLib.SList;
+        /**
+         * Gets the current value and the human readable text alternative of
+         * #obj. #text is a newly created string, that must be freed by the
+         * caller. Can be NULL if no descriptor is available.
+         * @param value address of #gdouble to put the current value of #obj
+         * @param text address of #gchar to put the human
+         * readable text alternative for #value
+         */
+        get_value_and_text(value: number, text: string): void;
+        /**
+         * Sets the value of this object.
+         * @param value a #GValue which is the desired new accessible value.
+         * @returns %TRUE if new value is successfully set, %FALSE otherwise.
+         */
+        set_current_value(value: GObject.Value): boolean;
+        /**
+         * Sets the value of this object.
+         * 
+         * This method is intended to provide a way to change the value of the
+         * object. In any case, it is possible that the value can't be
+         * modified (ie: a read-only component). If the value changes due this
+         * call, it is possible that the text could change, and will trigger
+         * an {@link Value}::value-changed signal emission.
+         * 
+         * Note for implementors: the deprecated atk_value_set_current_value()
+         * method returned TRUE or FALSE depending if the value was assigned
+         * or not. In the practice several implementors were not able to
+         * decide it, and returned TRUE in any case. For that reason it is not
+         * required anymore to return if the value was properly assigned or
+         * not.
+         * @param new_value a double which is the desired new accessible value.
+         */
+        set_value(new_value: number): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Value} instead.
+     */
+    type ValueMixin = IValue;
 
     /**
      * {@link Value} should be implemented for components which either display
@@ -2757,103 +3152,35 @@ declare namespace imports.gi.Atk {
      * </para>
      * </refsect1>
      */
-    interface Value {
-        /**
-         * Gets the value of this object.
-         * @param value a #GValue representing the current accessible value
-         */
-        get_current_value(value: GObject.Value): void;
-        /**
-         * Gets the minimum increment by which the value of this object may be
-         * changed.  If zero, the minimum increment is undefined, which may
-         * mean that it is limited only by the floating point precision of the
-         * platform.
-         * @returns the minimum increment by which the value of this
-         * object may be changed. zero if undefined.
-         */
-        get_increment(): number;
-        /**
-         * Gets the maximum value of this object.
-         * @param value a #GValue representing the maximum accessible value
-         */
-        get_maximum_value(value: GObject.Value): void;
-        /**
-         * Gets the minimum increment by which the value of this object may be changed.  If zero,
-         * the minimum increment is undefined, which may mean that it is limited only by the
-         * floating point precision of the platform.
-         * @param value a #GValue representing the minimum increment by which the accessible value may be changed
-         */
-        get_minimum_increment(value: GObject.Value): void;
-        /**
-         * Gets the minimum value of this object.
-         * @param value a #GValue representing the minimum accessible value
-         */
-        get_minimum_value(value: GObject.Value): void;
-        /**
-         * Gets the range of this object.
-         * @returns a newly allocated {@link Range}
-         * that represents the minimum, maximum and descriptor (if available)
-         * of #obj. NULL if that range is not defined.
-         */
-        get_range(): Range;
-        /**
-         * Gets the list of subranges defined for this object. See {@link Value}
-         * introduction for examples of subranges and when to expose them.
-         * @returns an #GSList of
-         * {@link Range} which each of the subranges defined for this object. Free
-         * the returns list with g_slist_free().
-         */
-        get_sub_ranges(): GLib.SList;
-        /**
-         * Gets the current value and the human readable text alternative of
-         * #obj. #text is a newly created string, that must be freed by the
-         * caller. Can be NULL if no descriptor is available.
-         * @param value address of #gdouble to put the current value of #obj
-         * @param text address of #gchar to put the human
-         * readable text alternative for #value
-         */
-        get_value_and_text(value: number, text: string): void;
-        /**
-         * Sets the value of this object.
-         * @param value a #GValue which is the desired new accessible value.
-         * @returns %TRUE if new value is successfully set, %FALSE otherwise.
-         */
-        set_current_value(value: GObject.Value): boolean;
-        /**
-         * Sets the value of this object.
-         * 
-         * This method is intended to provide a way to change the value of the
-         * object. In any case, it is possible that the value can't be
-         * modified (ie: a read-only component). If the value changes due this
-         * call, it is possible that the text could change, and will trigger
-         * an {@link Value}::value-changed signal emission.
-         * 
-         * Note for implementors: the deprecated atk_value_set_current_value()
-         * method returned TRUE or FALSE depending if the value was assigned
-         * or not. In the practice several implementors were not able to
-         * decide it, and returned TRUE in any case. For that reason it is not
-         * required anymore to return if the value was properly assigned or
-         * not.
-         * @param new_value a double which is the desired new accessible value.
-         */
-        set_value(new_value: number): void;
-    }
+    interface Value extends ValueMixin { }
 
-    var Value: {
+    class Value {
+        constructor();
     }
 
 
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Window} instead.
+     */
+    interface IWindow {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Window} instead.
+     */
+    type WindowMixin = IWindow;
 
     /**
      * {@link Window} should be implemented by the UI elements that represent
      * a top-level window, such as the main window of an application or
      * dialog.
      */
-    interface Window {
+    interface Window extends WindowMixin { }
 
-    }
-
-    var Window: {
+    class Window {
+        constructor();
     }
 
 
@@ -4278,10 +4605,9 @@ declare namespace imports.gi.Atk {
          * An AtkFunction is a function definition used for padding which has
          * been added to class and interface structures to allow for expansion
          * in the future.
-         * @param user_data custom data defined by the user
          * @returns not used
          */
-        (user_data: any): boolean;
+        (): boolean;
     }
 
     /**
@@ -4296,14 +4622,13 @@ declare namespace imports.gi.Atk {
          * interception of key events via the return code as described below.
          * @param event an AtkKeyEventStruct containing information about the key event for which
          * notification is being given.
-         * @param user_data a block of data which will be passed to the event listener, on notification.
          * @returns TRUE (nonzero) if the event emission should be stopped and the event
          * discarded without being passed to the normal GUI recipient; FALSE (zero) if the
          * event dispatch to the client application should proceed as normal.
          * 
          * see atk_add_key_event_listener.
          */
-        (event: KeyEventStruct, user_data: any): number;
+        (event: KeyEventStruct): number;
     }
 
     /**

@@ -3370,10 +3370,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param buffer An #hb_buffer_t to work upon
 		 * @param font The #hb_font_t the #buffer is shaped with
 		 * @param message %NULL-terminated message passed to the function
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true to perform the shaping step, %false to skip it.
 		 */
-		(buffer: buffer_t, font: font_t, message: string, user_data: any): bool_t;
+		(buffer: buffer_t, font: font_t, message: string): bool_t;
 	}
 
 	/**
@@ -3382,9 +3381,8 @@ declare namespace imports.gi.HarfBuzz {
 	interface destroy_func_t {
 		/**
 		 * A virtual method for destroy user-data callbacks.
-		 * @param user_data the data to be destroyed
 		 */
-		(user_data: any): void;
+		(): void;
 	}
 
 	/**
@@ -3396,10 +3394,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param extents The font extents retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns 
 		 */
-		(font: font_t, font_data: any, extents: font_extents_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, extents: font_extents_t): bool_t;
 	}
 
 	/**
@@ -3417,10 +3414,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns The advance of #glyph within #font
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, user_data: any): position_t;
+		(font: font_t, font_data: any, glyph: codepoint_t): position_t;
 	}
 
 	/**
@@ -3440,9 +3436,8 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph_stride The stride between successive glyph IDs
 		 * @param first_advance The first advance retrieved
 		 * @param advance_stride The stride between successive advances
-		 * @param user_data User data pointer passed by the caller
 		 */
-		(font: font_t, font_data: any, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number, user_data: any): void;
+		(font: font_t, font_data: any, count: number, first_glyph: codepoint_t, glyph_stride: number, first_advance: position_t, advance_stride: number): void;
 	}
 
 	/**
@@ -3465,10 +3460,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param point_index The contour-point index to query
 		 * @param _x The X value retrieved for the contour point
 		 * @param _y The Y value retrieved for the contour point
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, glyph: codepoint_t, point_index: number, _x: position_t, _y: position_t): bool_t;
 	}
 
 	/**
@@ -3487,10 +3481,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
 		 * @param extents The #hb_glyph_extents_t retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, extents: glyph_extents_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, glyph: codepoint_t, extents: glyph_extents_t): bool_t;
 	}
 
 	/**
@@ -3510,10 +3503,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param name 
 		 * @param len The length of the name queried
 		 * @param glyph The glyph ID retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, name: string[], len: number, glyph: codepoint_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, name: string[], len: number, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3533,10 +3525,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param unicode The Unicode code point to query
 		 * @param variation_selector The  variation-selector code point to query
 		 * @param glyph The glyph ID retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3551,10 +3542,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param first_glyph The glyph ID of the first glyph in the glyph pair
 		 * @param second_glyph The glyph ID of the second glyph in the glyph pair
-		 * @param user_data User data pointer passed by the caller
 		 * @returns 
 		 */
-		(font: font_t, font_data: any, first_glyph: codepoint_t, second_glyph: codepoint_t, user_data: any): position_t;
+		(font: font_t, font_data: any, first_glyph: codepoint_t, second_glyph: codepoint_t): position_t;
 	}
 
 	/**
@@ -3574,10 +3564,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID to query
 		 * @param name 
 		 * @param size Length of the glyph-name string retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, name: string[], size: number, user_data: any): bool_t;
+		(font: font_t, font_data: any, glyph: codepoint_t, name: string[], size: number): bool_t;
 	}
 
 	/**
@@ -3599,10 +3588,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param glyph The glyph ID to query
 		 * @param _x The X coordinate of the origin
 		 * @param _y The Y coordinate of the origin
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, glyph: codepoint_t, _x: position_t, _y: position_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, glyph: codepoint_t, _x: position_t, _y: position_t): bool_t;
 	}
 
 	/**
@@ -3621,10 +3609,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font_data #font user data pointer
 		 * @param unicode The Unicode code point to query
 		 * @param glyph The glyph ID retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, glyph: codepoint_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, unicode: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3648,10 +3635,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param unicode_stride The stride between successive code points
 		 * @param first_glyph The first glyph ID retrieved
 		 * @param glyph_stride The stride between successive glyph IDs
-		 * @param user_data User data pointer passed by the caller
 		 * @returns the number of code points processed
 		 */
-		(font: font_t, font_data: any, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number, user_data: any): number;
+		(font: font_t, font_data: any, count: number, first_unicode: codepoint_t, unicode_stride: number, first_glyph: codepoint_t, glyph_stride: number): number;
 	}
 
 	/**
@@ -3673,10 +3659,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param unicode The Unicode code point to query
 		 * @param variation_selector The  variation-selector code point to query
 		 * @param glyph The glyph ID retrieved
-		 * @param user_data User data pointer passed by the caller
 		 * @returns %true if data found, %false otherwise
 		 */
-		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t, user_data: any): bool_t;
+		(font: font_t, font_data: any, unicode: codepoint_t, variation_selector: codepoint_t, glyph: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3687,10 +3672,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * Callback function for hb_face_create_for_tables().
 		 * @param _face an #hb_face_t to reference table for
 		 * @param tag the tag of the table to reference
-		 * @param user_data User data pointer passed by the caller
 		 * @returns A pointer to the #tag table within #face
 		 */
-		(_face: face_t, tag: tag_t, user_data: any): blob_t;
+		(_face: face_t, tag: tag_t): blob_t;
 	}
 
 	/**
@@ -3707,10 +3691,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * property for a specified Unicode code point.
 		 * @param ufuncs A Unicode-functions structure
 		 * @param unicode The code point to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns The #hb_unicode_combining_class_t of #unicode
 		 */
-		(ufuncs: unicode_funcs_t, unicode: codepoint_t, user_data: any): unicode_combining_class_t;
+		(ufuncs: unicode_funcs_t, unicode: codepoint_t): unicode_combining_class_t;
 	}
 
 	/**
@@ -3735,10 +3718,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param _a The first code point to compose
 		 * @param _b The second code point to compose
 		 * @param _ab The composed code point
-		 * @param user_data user data pointer passed by the caller
 		 * @returns %true is #a,#b composed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t, _ab: codepoint_t, user_data: any): bool_t;
+		(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t, _ab: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3764,10 +3746,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param ufuncs a Unicode function structure
 		 * @param _u codepoint to decompose
 		 * @param decomposed address of codepoint array (of length #HB_UNICODE_MAX_DECOMPOSITION_LEN) to write decomposition into
-		 * @param user_data user data pointer as passed to hb_unicode_funcs_set_decompose_compatibility_func()
 		 * @returns number of codepoints in the full compatibility decomposition of #u, or 0 if no decomposition available.
 		 */
-		(ufuncs: unicode_funcs_t, _u: codepoint_t, decomposed: codepoint_t, user_data: any): number;
+		(ufuncs: unicode_funcs_t, _u: codepoint_t, decomposed: codepoint_t): number;
 	}
 
 	/**
@@ -3790,10 +3771,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param _ab The code point to decompose
 		 * @param _a The first decomposed code point
 		 * @param _b The second decomposed code point
-		 * @param user_data user data pointer passed by the caller
 		 * @returns %true if #ab decomposed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _ab: codepoint_t, _a: codepoint_t, _b: codepoint_t, user_data: any): bool_t;
+		(ufuncs: unicode_funcs_t, _ab: codepoint_t, _a: codepoint_t, _b: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3804,10 +3784,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * A virtual method for the #hb_unicode_funcs_t structure.
 		 * @param ufuncs A Unicode-functions structure
 		 * @param unicode The code point to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns 
 		 */
-		(ufuncs: unicode_funcs_t, unicode: codepoint_t, user_data: any): number;
+		(ufuncs: unicode_funcs_t, unicode: codepoint_t): number;
 	}
 
 	/**
@@ -3824,10 +3803,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * a specified Unicode code point.
 		 * @param ufuncs A Unicode-functions structure
 		 * @param unicode The code point to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns The #hb_unicode_general_category_t of #unicode
 		 */
-		(ufuncs: unicode_funcs_t, unicode: codepoint_t, user_data: any): unicode_general_category_t;
+		(ufuncs: unicode_funcs_t, unicode: codepoint_t): unicode_general_category_t;
 	}
 
 	/**
@@ -3852,10 +3830,9 @@ declare namespace imports.gi.HarfBuzz {
 		 * return the original code point.</note>
 		 * @param ufuncs A Unicode-functions structure
 		 * @param unicode The code point to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns The #hb_codepoint_t of the Mirroring Glyph for #unicode
 		 */
-		(ufuncs: unicode_funcs_t, unicode: codepoint_t, user_data: any): codepoint_t;
+		(ufuncs: unicode_funcs_t, unicode: codepoint_t): codepoint_t;
 	}
 
 	/**
@@ -3872,13 +3849,12 @@ declare namespace imports.gi.HarfBuzz {
 		 * specified Unicode code point.
 		 * @param ufuncs A Unicode-functions structure
 		 * @param unicode The code point to query
-		 * @param user_data User data pointer passed by the caller
 		 * @returns The #hb_script_t of #unicode
 		 */
-		(ufuncs: unicode_funcs_t, unicode: codepoint_t, user_data: any): script_t;
+		(ufuncs: unicode_funcs_t, unicode: codepoint_t): script_t;
 	}
 
-	interface var_int_t { }
+	interface var_int_t {}
 
 	/**
 	 * Data type for booleans.
@@ -4090,12 +4066,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param data Pointer to blob data.
 	 * @param length Length of #data in bytes.
 	 * @param mode Memory mode for #data.
-	 * @param user_data Data parameter to pass to #destroy.
 	 * @param destroy Callback to call when #data is not needed anymore.
 	 * @returns New blob, or the empty blob if something failed or if #length is
 	 * zero.  Destroy with hb_blob_destroy().
 	 */
-	function blob_create(data: string, length: number, mode: memory_mode_t, user_data: any, destroy: destroy_func_t): blob_t;
+	function blob_create(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t): blob_t;
 
 	/**
 	 * Creates a new blob containing the data from the
@@ -4125,11 +4100,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param data Pointer to blob data.
 	 * @param length Length of #data in bytes.
 	 * @param mode Memory mode for #data.
-	 * @param user_data Data parameter to pass to #destroy.
 	 * @param destroy Callback to call when #data is not needed anymore.
 	 * @returns New blob, or %NULL if failed.  Destroy with hb_blob_destroy().
 	 */
-	function blob_create_or_fail(data: string, length: number, mode: memory_mode_t, user_data: any, destroy: destroy_func_t): blob_t;
+	function blob_create_or_fail(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t): blob_t;
 
 	/**
 	 * Returns a blob that represents a range of bytes in #parent.  The new
@@ -4850,10 +4824,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Sets the implementation function for #hb_buffer_message_func_t.
 	 * @param buffer An #hb_buffer_t
 	 * @param _func Callback function
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function buffer_set_message_func(buffer: buffer_t, _func: buffer_message_func_t, user_data: any, destroy: destroy_func_t): void;
+	function buffer_set_message_func(buffer: buffer_t, _func: buffer_message_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the #hb_codepoint_t that replaces invalid entries for a given encoding
@@ -5026,11 +4999,10 @@ declare namespace imports.gi.HarfBuzz {
 	 * Creates a new face object from the specified #user_data and #reference_table_func,
 	 * with the #destroy callback.
 	 * @param reference_table_func Table-referencing function
-	 * @param user_data A pointer to the user data
 	 * @param destroy A callback to call when #data is not needed anymore
 	 * @returns The new face object
 	 */
-	function face_create_for_tables(reference_table_func: reference_table_func_t, user_data: any, destroy: destroy_func_t): face_t;
+	function face_create_for_tables(reference_table_func: reference_table_func_t, destroy: destroy_func_t): face_t;
 
 	/**
 	 * Decreases the reference count on a face object. When the
@@ -5310,155 +5282,138 @@ declare namespace imports.gi.HarfBuzz {
 	 * Sets the implementation function for #hb_font_get_font_h_extents_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, _func: font_get_font_h_extents_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, _func: font_get_font_h_extents_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_font_v_extents_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, _func: font_get_font_v_extents_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, _func: font_get_font_v_extents_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_contour_point_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, _func: font_get_glyph_contour_point_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, _func: font_get_glyph_contour_point_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_extents_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, _func: font_get_glyph_extents_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, _func: font_get_glyph_extents_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_from_name_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_from_name_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_from_name_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Deprecated.  Use hb_font_funcs_set_nominal_glyph_func() and
 	 * hb_font_funcs_set_variation_glyph_func() instead.
 	 * @param ffuncs The font-functions structure
 	 * @param _func callback function
-	 * @param user_data data to pass to #func
 	 * @param destroy function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, _func: font_get_glyph_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, _func: font_get_glyph_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advance_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advance_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advance_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advances_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advances_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advances_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_kerning_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_kerning_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_kerning_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_origin_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_origin_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_origin_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_name_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_name_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_name_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advance_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advance_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advance_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advances_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advances_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advances_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_kerning_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_kerning_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_kerning_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_origin_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_origin_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_origin_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyph_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyph_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyph_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyphs_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyphs_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyphs_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified font-functions structure.
@@ -5475,10 +5430,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Sets the implementation function for #hb_font_get_variation_glyph_func_t.
 	 * @param ffuncs A font-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, _func: font_get_variation_glyph_func_t, user_data: any, destroy: destroy_func_t): void;
+	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, _func: font_get_variation_glyph_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Fetches the empty font object.
@@ -7971,73 +7925,65 @@ declare namespace imports.gi.HarfBuzz {
 	 * Sets the implementation function for #hb_unicode_combining_class_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, _func: unicode_combining_class_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, _func: unicode_combining_class_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_compose_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, _func: unicode_compose_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, _func: unicode_compose_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_compatibility_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_compatibility_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_compatibility_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_eastasian_width_func_t.
 	 * @param ufuncs a Unicode-function structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, _func: unicode_eastasian_width_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, _func: unicode_eastasian_width_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_general_category_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, _func: unicode_general_category_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, _func: unicode_general_category_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_mirroring_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, _func: unicode_mirroring_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, _func: unicode_mirroring_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_script_func_t.
 	 * @param ufuncs A Unicode-functions structure
 	 * @param _func The callback function to assign
-	 * @param user_data Data to pass to #func
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, _func: unicode_script_func_t, user_data: any, destroy: destroy_func_t): void;
+	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, _func: unicode_script_func_t, destroy: destroy_func_t): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified Unicode-functions structure.

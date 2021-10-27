@@ -1,85 +1,8 @@
 declare namespace imports.gi.GObject {
-    /**
-     * #GBinding is the representation of a binding between a property on a
-     * #GObject instance (or source) and another property on another #GObject
-     * instance (or target).
-     * 
-     * Whenever the source property changes, the same value is applied to the
-     * target property; for instance, the following binding:
-     * 
-     * |[<!-- language="C" -->
-     *   g_object_bind_property (object1, "property-a",
-     *                           object2, "property-b",
-     *                           G_BINDING_DEFAULT);
-     * ]|
-     * 
-     * will cause the property named "property-b" of #object2 to be updated
-     * every time g_object_set() or the specific accessor changes the value of
-     * the property "property-a" of #object1.
-     * 
-     * It is possible to create a bidirectional binding between two properties
-     * of two #GObject instances, so that if either property changes, the
-     * other is updated as well, for instance:
-     * 
-     * |[<!-- language="C" -->
-     *   g_object_bind_property (object1, "property-a",
-     *                           object2, "property-b",
-     *                           G_BINDING_BIDIRECTIONAL);
-     * ]|
-     * 
-     * will keep the two properties in sync.
-     * 
-     * It is also possible to set a custom transformation function (in both
-     * directions, in case of a bidirectional binding) to apply a custom
-     * transformation from the source value to the target value before
-     * applying it; for instance, the following binding:
-     * 
-     * |[<!-- language="C" -->
-     *   g_object_bind_property_full (adjustment1, "value",
-     *                                adjustment2, "value",
-     *                                G_BINDING_BIDIRECTIONAL,
-     *                                celsius_to_fahrenheit,
-     *                                fahrenheit_to_celsius,
-     *                                NULL, NULL);
-     * ]|
-     * 
-     * will keep the "value" property of the two adjustments in sync; the
-     * #celsius_to_fahrenheit function will be called whenever the "value"
-     * property of #adjustment1 changes and will transform the current value
-     * of the property before applying it to the "value" property of #adjustment2.
-     * 
-     * Vice versa, the #fahrenheit_to_celsius function will be called whenever
-     * the "value" property of #adjustment2 changes, and will transform the
-     * current value of the property before applying it to the "value" property
-     * of #adjustment1.
-     * 
-     * Note that #GBinding does not resolve cycles by itself; a cycle like
-     * 
-     * |[
-     *   object1:propertyA -> object2:propertyB
-     *   object2:propertyB -> object3:propertyC
-     *   object3:propertyC -> object1:propertyA
-     * ]|
-     * 
-     * might lead to an infinite loop. The loop, in this particular case,
-     * can be avoided if the objects emit the #GObject::notify signal only
-     * if the value has effectively been changed. A binding is implemented
-     * using the #GObject::notify signal, so it is susceptible to all the
-     * various ways of blocking a signal emission, like g_signal_stop_emission()
-     * or g_signal_handler_block().
-     * 
-     * A binding will be severed, and the resources it allocates freed, whenever
-     * either one of the #GObject instances it refers to are finalized, or when
-     * the #GBinding instance loses its last reference.
-     * 
-     * Bindings for languages with garbage collection can use
-     * g_binding_unbind() to explicitly release a binding between the source
-     * and target properties, instead of relying on the last reference on the
-     * binding, source, and target instances to drop.
-     * 
-     * #GBinding is available since GObject 2.26
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Binding} instead.
      */
-    interface Binding extends Object {
+    interface IBinding {
         /**
          * Retrieves the #GObject instance used as the source of the binding.
          * 
@@ -161,8 +84,108 @@ declare namespace imports.gi.GObject {
         unbind(): void;
     }
 
-    var Binding: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Binding} instead.
+     */
+    type BindingMixin = IBinding & IObject;
+
+    /**
+     * #GBinding is the representation of a binding between a property on a
+     * #GObject instance (or source) and another property on another #GObject
+     * instance (or target).
+     * 
+     * Whenever the source property changes, the same value is applied to the
+     * target property; for instance, the following binding:
+     * 
+     * |[<!-- language="C" -->
+     *   g_object_bind_property (object1, "property-a",
+     *                           object2, "property-b",
+     *                           G_BINDING_DEFAULT);
+     * ]|
+     * 
+     * will cause the property named "property-b" of #object2 to be updated
+     * every time g_object_set() or the specific accessor changes the value of
+     * the property "property-a" of #object1.
+     * 
+     * It is possible to create a bidirectional binding between two properties
+     * of two #GObject instances, so that if either property changes, the
+     * other is updated as well, for instance:
+     * 
+     * |[<!-- language="C" -->
+     *   g_object_bind_property (object1, "property-a",
+     *                           object2, "property-b",
+     *                           G_BINDING_BIDIRECTIONAL);
+     * ]|
+     * 
+     * will keep the two properties in sync.
+     * 
+     * It is also possible to set a custom transformation function (in both
+     * directions, in case of a bidirectional binding) to apply a custom
+     * transformation from the source value to the target value before
+     * applying it; for instance, the following binding:
+     * 
+     * |[<!-- language="C" -->
+     *   g_object_bind_property_full (adjustment1, "value",
+     *                                adjustment2, "value",
+     *                                G_BINDING_BIDIRECTIONAL,
+     *                                celsius_to_fahrenheit,
+     *                                fahrenheit_to_celsius,
+     *                                NULL, NULL);
+     * ]|
+     * 
+     * will keep the "value" property of the two adjustments in sync; the
+     * #celsius_to_fahrenheit function will be called whenever the "value"
+     * property of #adjustment1 changes and will transform the current value
+     * of the property before applying it to the "value" property of #adjustment2.
+     * 
+     * Vice versa, the #fahrenheit_to_celsius function will be called whenever
+     * the "value" property of #adjustment2 changes, and will transform the
+     * current value of the property before applying it to the "value" property
+     * of #adjustment1.
+     * 
+     * Note that #GBinding does not resolve cycles by itself; a cycle like
+     * 
+     * |[
+     *   object1:propertyA -> object2:propertyB
+     *   object2:propertyB -> object3:propertyC
+     *   object3:propertyC -> object1:propertyA
+     * ]|
+     * 
+     * might lead to an infinite loop. The loop, in this particular case,
+     * can be avoided if the objects emit the #GObject::notify signal only
+     * if the value has effectively been changed. A binding is implemented
+     * using the #GObject::notify signal, so it is susceptible to all the
+     * various ways of blocking a signal emission, like g_signal_stop_emission()
+     * or g_signal_handler_block().
+     * 
+     * A binding will be severed, and the resources it allocates freed, whenever
+     * either one of the #GObject instances it refers to are finalized, or when
+     * the #GBinding instance loses its last reference.
+     * 
+     * Bindings for languages with garbage collection can use
+     * g_binding_unbind() to explicitly release a binding between the source
+     * and target properties, instead of relying on the last reference on the
+     * binding, source, and target instances to drop.
+     * 
+     * #GBinding is available since GObject 2.26
+     */
+    interface Binding extends BindingMixin { }
+
+    class Binding {
+        constructor();
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InitiallyUnowned} instead.
+     */
+    interface IInitiallyUnowned {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link InitiallyUnowned} instead.
+     */
+    type InitiallyUnownedMixin = IInitiallyUnowned & IObject;
 
     /**
      * A type for objects that have an initially floating reference.
@@ -170,20 +193,16 @@ declare namespace imports.gi.GObject {
      * All the fields in the `GInitiallyUnowned` structure are private to the
      * implementation and should never be accessed directly.
      */
-    interface InitiallyUnowned extends Object {
+    interface InitiallyUnowned extends InitiallyUnownedMixin { }
 
+    class InitiallyUnowned {
+        constructor();
     }
 
-    var InitiallyUnowned: {
-    }
-
-    /**
-     * The base object type.
-     * 
-     * All the fields in the `GObject` structure are private to the implementation
-     * and should never be accessed directly.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Object} instead.
      */
-    interface Object {
+    interface IObject {
         /**
          * Increases the reference count of the object by one and sets a
          * callback to be called when all other references to the object are
@@ -308,15 +327,13 @@ declare namespace imports.gi.GObject {
          *     from the #source to the #target, or %NULL to use the default
          * @param transform_from the transformation function
          *     from the #target to the #source, or %NULL to use the default
-         * @param user_data custom data to be passed to the transformation functions,
-         *     or %NULL
          * @param notify a function to call when disposing the binding, to free
          *     resources used by the transformation functions, or %NULL if not required
          * @returns the #GBinding instance representing the
          *     binding between the two #GObject instances. The binding is released
          *     whenever the #GBinding reference count reaches zero.
          */
-        bind_property_full(source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: BindingTransformFunc, transform_from: BindingTransformFunc, user_data: any, notify: GLib.DestroyNotify): Binding;
+        bind_property_full(source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: BindingTransformFunc, transform_from: BindingTransformFunc, notify: GLib.DestroyNotify): Binding;
         /**
          * Creates a binding between #source_property on #source and #target_property
          * on #target, allowing you to set the transformation functions to be used by
@@ -365,7 +382,7 @@ declare namespace imports.gi.GObject {
          * @param signal_spec the spec for the first signal
          * @returns #object
          */
-        connect(...params: any): any;
+        connect(signal_spec: string): Object;
         /**
          * A convenience function to disconnect multiple signals at once.
          * 
@@ -375,7 +392,7 @@ declare namespace imports.gi.GObject {
          * disconnects the signal named "signal_name".
          * @param signal_spec the spec for the first signal
          */
-        disconnect(signal_id: any): void;
+        disconnect(signal_spec: string): void;
         /**
          * This is a variant of g_object_get_data() which returns
          * a 'duplicate' of the value. #dup_func defines the
@@ -393,13 +410,12 @@ declare namespace imports.gi.GObject {
          * object.
          * @param key a string, naming the user data pointer
          * @param dup_func function to dup the value
-         * @param user_data passed as user_data to #dup_func
          * @returns the result of calling #dup_func on the value
          *     associated with #key on #object, or %NULL if not set.
          *     If #dup_func is %NULL, the value is returned
          *     unmodified.
          */
-        dup_data(key: string, dup_func: GLib.DuplicateFunc, user_data: any): any;
+        dup_data(key: string, dup_func: GLib.DuplicateFunc): any;
         /**
          * This is a variant of g_object_get_qdata() which returns
          * a 'duplicate' of the value. #dup_func defines the
@@ -417,13 +433,12 @@ declare namespace imports.gi.GObject {
          * object.
          * @param quark a #GQuark, naming the user data pointer
          * @param dup_func function to dup the value
-         * @param user_data passed as user_data to #dup_func
          * @returns the result of calling #dup_func on the value
          *     associated with #quark on #object, or %NULL if not set.
          *     If #dup_func is %NULL, the value is returned
          *     unmodified.
          */
-        dup_qdata(quark: GLib.Quark, dup_func: GLib.DuplicateFunc, user_data: any): any;
+        dup_qdata(quark: GLib.Quark, dup_func: GLib.DuplicateFunc): any;
         /**
          * This function is intended for #GObject implementations to re-enforce
          * a [floating][floating-ref] object reference. Doing this is seldom
@@ -922,11 +937,23 @@ declare namespace imports.gi.GObject {
          * @param data data to search for
          */
         weak_unref(notify: WeakNotify, data: any): void;
-
-        is_finalized(): boolean
     }
 
-    var Object: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Object} instead.
+     */
+    type ObjectMixin = IObject;
+
+    /**
+     * The base object type.
+     * 
+     * All the fields in the `GObject` structure are private to the implementation
+     * and should never be accessed directly.
+     */
+    interface Object extends ObjectMixin { }
+
+    class Object {
+        constructor();
         /**
          * Creates a new instance of a #GObject subtype and sets its properties.
          * 
@@ -953,7 +980,7 @@ declare namespace imports.gi.GObject {
          * @returns a new instance of
          *   #object_type
          */
-        new(object_type: GObject.Type, first_property_name: string): Object;
+        static new(object_type: GObject.Type, first_property_name: string): Object;
         /**
          * Creates a new instance of a #GObject subtype and sets its properties.
          * 
@@ -965,7 +992,7 @@ declare namespace imports.gi.GObject {
          *  name/value pairs, followed by %NULL
          * @returns a new instance of #object_type
          */
-        new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[]): Object;
+        static new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[]): Object;
         /**
          * Creates a new instance of a #GObject subtype and sets its properties using
          * the provided arrays. Both arrays must have exactly #n_properties elements,
@@ -980,7 +1007,7 @@ declare namespace imports.gi.GObject {
          * @returns a new instance of
          * #object_type
          */
-        new_with_properties(object_type: GObject.Type, n_properties: number, names: string[], values: Value[]): Object;
+        static new_with_properties(object_type: GObject.Type, n_properties: number, names: string[], values: Value[]): Object;
         /**
          * Creates a new instance of a #GObject subtype and sets its properties.
          * 
@@ -992,8 +1019,8 @@ declare namespace imports.gi.GObject {
          * @returns a new instance of
          * #object_type
          */
-        newv(object_type: GObject.Type, n_parameters: number, parameters: Parameter[]): Object;
-        compat_control(what: number, data: any): number;
+        static newv(object_type: GObject.Type, n_parameters: number, parameters: Parameter[]): Object;
+        static compat_control(what: number, data: any): number;
         /**
          * Find the #GParamSpec with the given name for an
          * interface. Generally, the interface vtable passed in as #g_iface
@@ -1007,7 +1034,7 @@ declare namespace imports.gi.GObject {
          *          interface with the name #property_name, or %NULL if no
          *          such property exists.
          */
-        interface_find_property(g_iface: TypeInterface, property_name: string): ParamSpec;
+        static interface_find_property(g_iface: TypeInterface, property_name: string): ParamSpec;
         /**
          * Add a property to an interface; this is only useful for interfaces
          * that are added to GObject-derived types. Adding a property to an
@@ -1030,7 +1057,7 @@ declare namespace imports.gi.GObject {
          *  vtable for the interface.
          * @param pspec the #GParamSpec for the new property
          */
-        interface_install_property(g_iface: TypeInterface, pspec: ParamSpec): void;
+        static interface_install_property(g_iface: TypeInterface, pspec: ParamSpec): void;
         /**
          * Lists the properties of an interface.Generally, the interface
          * vtable passed in as #g_iface will be the default vtable from
@@ -1041,25 +1068,13 @@ declare namespace imports.gi.GObject {
          * @param n_properties_p location to store number of properties returned.
          * @returns 
          */
-        interface_list_properties(g_iface: TypeInterface, n_properties_p: number): ParamSpec[];
+        static interface_list_properties(g_iface: TypeInterface, n_properties_p: number): ParamSpec[];
     }
 
-    /**
-     * #GParamSpec is an object structure that encapsulates the metadata
-     * required to specify parameters, such as e.g. #GObject properties.
-     * 
-     * ## Parameter names # {#canonical-parameter-names}
-     * 
-     * A property name consists of one or more segments consisting of ASCII letters
-     * and digits, separated by either the `-` or `_` character. The first
-     * character of a property name must be a letter. These are the same rules as
-     * for signal naming (see g_signal_new()).
-     * 
-     * When creating and looking up a #GParamSpec, either separator can be
-     * used, but they cannot be mixed. Using `-` is considerably more
-     * efficient, and is the ‘canonical form’. Using `_` is discouraged.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpec} instead.
      */
-    interface ParamSpec {
+    interface IParamSpec {
         /**
          * Get the short description of a #GParamSpec.
          * @returns the short description of #pspec.
@@ -1166,7 +1181,30 @@ declare namespace imports.gi.GObject {
         unref(): void;
     }
 
-    var ParamSpec: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpec} instead.
+     */
+    type ParamSpecMixin = IParamSpec;
+
+    /**
+     * #GParamSpec is an object structure that encapsulates the metadata
+     * required to specify parameters, such as e.g. #GObject properties.
+     * 
+     * ## Parameter names # {#canonical-parameter-names}
+     * 
+     * A property name consists of one or more segments consisting of ASCII letters
+     * and digits, separated by either the `-` or `_` character. The first
+     * character of a property name must be a letter. These are the same rules as
+     * for signal naming (see g_signal_new()).
+     * 
+     * When creating and looking up a #GParamSpec, either separator can be
+     * used, but they cannot be mixed. Using `-` is considerably more
+     * efficient, and is the ‘canonical form’. Using `_` is discouraged.
+     */
+    interface ParamSpec extends ParamSpecMixin { }
+
+    class ParamSpec {
+        constructor();
         /**
          * Creates a new #GParamSpec instance.
          * 
@@ -1187,7 +1225,7 @@ declare namespace imports.gi.GObject {
          * @returns (transfer floating): a newly allocated
          *     #GParamSpec instance, which is initially floating
          */
-        internal(param_type: GObject.Type, name: string, nick: string, blurb: string, flags: ParamFlags): ParamSpec;
+        static internal(param_type: GObject.Type, name: string, nick: string, blurb: string, flags: ParamFlags): ParamSpec;
         /**
          * Validate a property name for a #GParamSpec. This can be useful for
          * dynamically-generated properties which need to be validated at run-time
@@ -1198,130 +1236,274 @@ declare namespace imports.gi.GObject {
          * @param name the canonical name of the property
          * @returns %TRUE if #name is a valid property name, %FALSE otherwise.
          */
-        is_valid_name(name: string): boolean;
+        static is_valid_name(name: string): boolean;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecBoolean} instead.
+     */
+    interface IParamSpecBoolean {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecBoolean} instead.
+     */
+    type ParamSpecBooleanMixin = IParamSpecBoolean & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for boolean properties.
      */
-    interface ParamSpecBoolean extends ParamSpec {
+    interface ParamSpecBoolean extends ParamSpecBooleanMixin { }
+
+    class ParamSpecBoolean {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecBoxed} instead.
+     */
+    interface IParamSpecBoxed {
 
     }
 
-    var ParamSpecBoolean: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecBoxed} instead.
+     */
+    type ParamSpecBoxedMixin = IParamSpecBoxed & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for boxed properties.
      */
-    interface ParamSpecBoxed extends ParamSpec {
+    interface ParamSpecBoxed extends ParamSpecBoxedMixin { }
+
+    class ParamSpecBoxed {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecChar} instead.
+     */
+    interface IParamSpecChar {
 
     }
 
-    var ParamSpecBoxed: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecChar} instead.
+     */
+    type ParamSpecCharMixin = IParamSpecChar & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for character properties.
      */
-    interface ParamSpecChar extends ParamSpec {
+    interface ParamSpecChar extends ParamSpecCharMixin { }
+
+    class ParamSpecChar {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecDouble} instead.
+     */
+    interface IParamSpecDouble {
 
     }
 
-    var ParamSpecChar: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecDouble} instead.
+     */
+    type ParamSpecDoubleMixin = IParamSpecDouble & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for double properties.
      */
-    interface ParamSpecDouble extends ParamSpec {
+    interface ParamSpecDouble extends ParamSpecDoubleMixin { }
+
+    class ParamSpecDouble {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecEnum} instead.
+     */
+    interface IParamSpecEnum {
 
     }
 
-    var ParamSpecDouble: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecEnum} instead.
+     */
+    type ParamSpecEnumMixin = IParamSpecEnum & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for enum
      * properties.
      */
-    interface ParamSpecEnum extends ParamSpec {
+    interface ParamSpecEnum extends ParamSpecEnumMixin { }
+
+    class ParamSpecEnum {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecFlags} instead.
+     */
+    interface IParamSpecFlags {
 
     }
 
-    var ParamSpecEnum: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecFlags} instead.
+     */
+    type ParamSpecFlagsMixin = IParamSpecFlags & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for flags
      * properties.
      */
-    interface ParamSpecFlags extends ParamSpec {
+    interface ParamSpecFlags extends ParamSpecFlagsMixin { }
+
+    class ParamSpecFlags {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecFloat} instead.
+     */
+    interface IParamSpecFloat {
 
     }
 
-    var ParamSpecFlags: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecFloat} instead.
+     */
+    type ParamSpecFloatMixin = IParamSpecFloat & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for float properties.
      */
-    interface ParamSpecFloat extends ParamSpec {
+    interface ParamSpecFloat extends ParamSpecFloatMixin { }
+
+    class ParamSpecFloat {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecGType} instead.
+     */
+    interface IParamSpecGType {
 
     }
 
-    var ParamSpecFloat: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecGType} instead.
+     */
+    type ParamSpecGTypeMixin = IParamSpecGType & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for #GType properties.
      */
-    interface ParamSpecGType extends ParamSpec {
+    interface ParamSpecGType extends ParamSpecGTypeMixin { }
+
+    class ParamSpecGType {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecInt} instead.
+     */
+    interface IParamSpecInt {
 
     }
 
-    var ParamSpecGType: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecInt} instead.
+     */
+    type ParamSpecIntMixin = IParamSpecInt & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for integer properties.
      */
-    interface ParamSpecInt extends ParamSpec {
+    interface ParamSpecInt extends ParamSpecIntMixin { }
+
+    class ParamSpecInt {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecInt64} instead.
+     */
+    interface IParamSpecInt64 {
 
     }
 
-    var ParamSpecInt: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecInt64} instead.
+     */
+    type ParamSpecInt64Mixin = IParamSpecInt64 & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for 64bit integer properties.
      */
-    interface ParamSpecInt64 extends ParamSpec {
+    interface ParamSpecInt64 extends ParamSpecInt64Mixin { }
+
+    class ParamSpecInt64 {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecLong} instead.
+     */
+    interface IParamSpecLong {
 
     }
 
-    var ParamSpecInt64: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecLong} instead.
+     */
+    type ParamSpecLongMixin = IParamSpecLong & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for long integer properties.
      */
-    interface ParamSpecLong extends ParamSpec {
+    interface ParamSpecLong extends ParamSpecLongMixin { }
+
+    class ParamSpecLong {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecObject} instead.
+     */
+    interface IParamSpecObject {
 
     }
 
-    var ParamSpecLong: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecObject} instead.
+     */
+    type ParamSpecObjectMixin = IParamSpecObject & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for object properties.
      */
-    interface ParamSpecObject extends ParamSpec {
+    interface ParamSpecObject extends ParamSpecObjectMixin { }
+
+    class ParamSpecObject {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecOverride} instead.
+     */
+    interface IParamSpecOverride {
 
     }
 
-    var ParamSpecObject: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecOverride} instead.
+     */
+    type ParamSpecOverrideMixin = IParamSpecOverride & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that redirects operations to
@@ -1336,104 +1518,214 @@ declare namespace imports.gi.GObject {
      * g_object_class_override_property(), and will not be directly useful
      * unless you are implementing a new base type similar to GObject.
      */
-    interface ParamSpecOverride extends ParamSpec {
+    interface ParamSpecOverride extends ParamSpecOverrideMixin { }
+
+    class ParamSpecOverride {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecParam} instead.
+     */
+    interface IParamSpecParam {
 
     }
 
-    var ParamSpecOverride: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecParam} instead.
+     */
+    type ParamSpecParamMixin = IParamSpecParam & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for %G_TYPE_PARAM
      * properties.
      */
-    interface ParamSpecParam extends ParamSpec {
+    interface ParamSpecParam extends ParamSpecParamMixin { }
+
+    class ParamSpecParam {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecPointer} instead.
+     */
+    interface IParamSpecPointer {
 
     }
 
-    var ParamSpecParam: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecPointer} instead.
+     */
+    type ParamSpecPointerMixin = IParamSpecPointer & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for pointer properties.
      */
-    interface ParamSpecPointer extends ParamSpec {
+    interface ParamSpecPointer extends ParamSpecPointerMixin { }
+
+    class ParamSpecPointer {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecString} instead.
+     */
+    interface IParamSpecString {
 
     }
 
-    var ParamSpecPointer: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecString} instead.
+     */
+    type ParamSpecStringMixin = IParamSpecString & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for string
      * properties.
      */
-    interface ParamSpecString extends ParamSpec {
+    interface ParamSpecString extends ParamSpecStringMixin { }
+
+    class ParamSpecString {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUChar} instead.
+     */
+    interface IParamSpecUChar {
 
     }
 
-    var ParamSpecString: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUChar} instead.
+     */
+    type ParamSpecUCharMixin = IParamSpecUChar & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for unsigned character properties.
      */
-    interface ParamSpecUChar extends ParamSpec {
+    interface ParamSpecUChar extends ParamSpecUCharMixin { }
+
+    class ParamSpecUChar {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUInt} instead.
+     */
+    interface IParamSpecUInt {
 
     }
 
-    var ParamSpecUChar: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUInt} instead.
+     */
+    type ParamSpecUIntMixin = IParamSpecUInt & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for unsigned integer properties.
      */
-    interface ParamSpecUInt extends ParamSpec {
+    interface ParamSpecUInt extends ParamSpecUIntMixin { }
+
+    class ParamSpecUInt {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUInt64} instead.
+     */
+    interface IParamSpecUInt64 {
 
     }
 
-    var ParamSpecUInt: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUInt64} instead.
+     */
+    type ParamSpecUInt64Mixin = IParamSpecUInt64 & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for unsigned 64bit integer properties.
      */
-    interface ParamSpecUInt64 extends ParamSpec {
+    interface ParamSpecUInt64 extends ParamSpecUInt64Mixin { }
+
+    class ParamSpecUInt64 {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecULong} instead.
+     */
+    interface IParamSpecULong {
 
     }
 
-    var ParamSpecUInt64: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecULong} instead.
+     */
+    type ParamSpecULongMixin = IParamSpecULong & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
      */
-    interface ParamSpecULong extends ParamSpec {
+    interface ParamSpecULong extends ParamSpecULongMixin { }
+
+    class ParamSpecULong {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUnichar} instead.
+     */
+    interface IParamSpecUnichar {
 
     }
 
-    var ParamSpecULong: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecUnichar} instead.
+     */
+    type ParamSpecUnicharMixin = IParamSpecUnichar & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for unichar (unsigned integer) properties.
      */
-    interface ParamSpecUnichar extends ParamSpec {
+    interface ParamSpecUnichar extends ParamSpecUnicharMixin { }
+
+    class ParamSpecUnichar {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecValueArray} instead.
+     */
+    interface IParamSpecValueArray {
 
     }
 
-    var ParamSpecUnichar: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecValueArray} instead.
+     */
+    type ParamSpecValueArrayMixin = IParamSpecValueArray & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
      */
-    interface ParamSpecValueArray extends ParamSpec {
+    interface ParamSpecValueArray extends ParamSpecValueArrayMixin { }
+
+    class ParamSpecValueArray {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecVariant} instead.
+     */
+    interface IParamSpecVariant {
 
     }
 
-    var ParamSpecValueArray: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ParamSpecVariant} instead.
+     */
+    type ParamSpecVariantMixin = IParamSpecVariant & IParamSpec;
 
     /**
      * A #GParamSpec derived structure that contains the meta data for #GVariant properties.
@@ -1444,46 +1736,16 @@ declare namespace imports.gi.GObject {
      * otherwise undefined. %NULL is ordered before non-%NULL variants. Two %NULL
      * values compare equal.
      */
-    interface ParamSpecVariant extends ParamSpec {
+    interface ParamSpecVariant extends ParamSpecVariantMixin { }
 
+    class ParamSpecVariant {
+        constructor();
     }
 
-    var ParamSpecVariant: {
-    }
-
-    /**
-     * #GTypeModule provides a simple implementation of the #GTypePlugin
-     * interface.
-     * 
-     * The model of #GTypeModule is a dynamically loaded module which
-     * implements some number of types and interface implementations.
-     * 
-     * When the module is loaded, it registers its types and interfaces
-     * using g_type_module_register_type() and g_type_module_add_interface().
-     * As long as any instances of these types and interface implementations
-     * are in use, the module is kept loaded. When the types and interfaces
-     * are gone, the module may be unloaded. If the types and interfaces
-     * become used again, the module will be reloaded. Note that the last
-     * reference cannot be released from within the module code, since that
-     * would lead to the caller's code being unloaded before g_object_unref()
-     * returns to it.
-     * 
-     * Keeping track of whether the module should be loaded or not is done by
-     * using a use count - it starts at zero, and whenever it is greater than
-     * zero, the module is loaded. The use count is maintained internally by
-     * the type system, but also can be explicitly controlled by
-     * g_type_module_use() and g_type_module_unuse(). Typically, when loading
-     * a module for the first type, g_type_module_use() will be used to load
-     * it so that it can initialize its types. At some later point, when the
-     * module no longer needs to be loaded except for the type
-     * implementations it contains, g_type_module_unuse() is called.
-     * 
-     * #GTypeModule does not actually provide any implementation of module
-     * loading and unloading. To create a particular module type you must
-     * derive from #GTypeModule and implement the load and unload functions
-     * in #GTypeModuleClass.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TypeModule} instead.
      */
-    interface TypeModule extends Object, TypePlugin {
+    interface ITypeModule {
         /**
          * Registers an additional interface for a type, whose interface lives
          * in the given type plugin. If the interface was already registered
@@ -1583,7 +1845,47 @@ declare namespace imports.gi.GObject {
         // use(): boolean;
     }
 
-    var TypeModule: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TypeModule} instead.
+     */
+    type TypeModuleMixin = ITypeModule & IObject & ITypePlugin;
+
+    /**
+     * #GTypeModule provides a simple implementation of the #GTypePlugin
+     * interface.
+     * 
+     * The model of #GTypeModule is a dynamically loaded module which
+     * implements some number of types and interface implementations.
+     * 
+     * When the module is loaded, it registers its types and interfaces
+     * using g_type_module_register_type() and g_type_module_add_interface().
+     * As long as any instances of these types and interface implementations
+     * are in use, the module is kept loaded. When the types and interfaces
+     * are gone, the module may be unloaded. If the types and interfaces
+     * become used again, the module will be reloaded. Note that the last
+     * reference cannot be released from within the module code, since that
+     * would lead to the caller's code being unloaded before g_object_unref()
+     * returns to it.
+     * 
+     * Keeping track of whether the module should be loaded or not is done by
+     * using a use count - it starts at zero, and whenever it is greater than
+     * zero, the module is loaded. The use count is maintained internally by
+     * the type system, but also can be explicitly controlled by
+     * g_type_module_use() and g_type_module_unuse(). Typically, when loading
+     * a module for the first type, g_type_module_use() will be used to load
+     * it so that it can initialize its types. At some later point, when the
+     * module no longer needs to be loaded except for the type
+     * implementations it contains, g_type_module_unuse() is called.
+     * 
+     * #GTypeModule does not actually provide any implementation of module
+     * loading and unloading. To create a particular module type you must
+     * derive from #GTypeModule and implement the load and unload functions
+     * in #GTypeModuleClass.
+     */
+    interface TypeModule extends TypeModuleMixin { }
+
+    class TypeModule {
+        constructor();
     }
 
     /**
@@ -1641,6 +1943,62 @@ declare namespace imports.gi.GObject {
      *   automatically removed when the objects they point to go away.
      */
     class Closure {
+        /**
+         * A variant of g_closure_new_simple() which stores #object in the
+         * #data field of the closure and calls g_object_watch_closure() on
+         * #object and the created closure. This function is mainly useful
+         * when implementing new types of closures.
+         * @param sizeof_closure the size of the structure to allocate, must be at least
+         *  `sizeof (GClosure)`
+         * @param object a #GObject pointer to store in the #data field of the newly
+         *  allocated #GClosure
+         * @returns a newly allocated #GClosure
+         */
+        static new_object(sizeof_closure: number, object: Object): Closure;
+        /**
+         * Allocates a struct of the given size and initializes the initial
+         * part as a #GClosure.
+         * 
+         * This function is mainly useful when implementing new types of closures:
+         * 
+         * |[<!-- language="C" -->
+         * typedef struct _MyClosure MyClosure;
+         * struct _MyClosure
+         * {
+         *   GClosure closure;
+         *   // extra data goes here
+         * };
+         * 
+         * static void
+         * my_closure_finalize (gpointer  notify_data,
+         *                      GClosure *closure)
+         * {
+         *   MyClosure *my_closure = (MyClosure *)closure;
+         * 
+         *   // free extra data here
+         * }
+         * 
+         * MyClosure *my_closure_new (gpointer data)
+         * {
+         *   GClosure *closure;
+         *   MyClosure *my_closure;
+         * 
+         *   closure = g_closure_new_simple (sizeof (MyClosure), data);
+         *   my_closure = (MyClosure *) closure;
+         * 
+         *   // initialize extra data here
+         * 
+         *   g_closure_add_finalize_notifier (closure, notify_data,
+         *                                    my_closure_finalize);
+         *   return my_closure;
+         * }
+         * ]|
+         * @param sizeof_closure the size of the structure to allocate, must be at least
+         *                  `sizeof (GClosure)`
+         * @param data data to store in the #data field of the newly allocated #GClosure
+         * @returns a floating reference to a new #GClosure
+         */
+        static new_simple(sizeof_closure: number, data: any): Closure;
         public ref_count: number;
         public meta_marshal_nouse: number;
         public n_guards: number;
@@ -2865,6 +3223,14 @@ declare namespace imports.gi.GObject {
      * A #GValueArray contains an array of #GValue elements.
      */
     class ValueArray {
+        /**
+         * Allocate and initialize a new #GValueArray, optionally preserve space
+         * for #n_prealloced elements. New arrays always contain 0 elements,
+         * regardless of the value of #n_prealloced.
+         * @param n_prealloced number of values to preallocate space for
+         * @returns a newly allocated #GValueArray with 0 values
+         */
+        static new(n_prealloced: number): ValueArray;
         public n_values: number;
         public values: Value;
         public n_prealloced: number;
@@ -2930,10 +3296,9 @@ declare namespace imports.gi.GObject {
          * The current implementation uses the same sorting algorithm as standard
          * C qsort() function.
          * @param compare_func function to compare elements
-         * @param user_data extra data argument provided for #compare_func
          * @returns the #GValueArray passed in as #value_array
          */
-        public sort_with_data(compare_func: GLib.CompareDataFunc, user_data: any): ValueArray;
+        public sort_with_data(compare_func: GLib.CompareDataFunc): ValueArray;
     }
 
     /**
@@ -3006,6 +3371,48 @@ declare namespace imports.gi.GObject {
         public set(object: Object): void;
     }
 
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TypePlugin} instead.
+     */
+    interface ITypePlugin {
+        /**
+         * Calls the #complete_interface_info function from the
+         * #GTypePluginClass of #plugin. There should be no need to use this
+         * function outside of the GObject type system itself.
+         * @param instance_type the #GType of an instantiatable type to which the interface
+         *  is added
+         * @param interface_type the #GType of the interface whose info is completed
+         * @param info the #GInterfaceInfo to fill in
+         */
+        complete_interface_info(instance_type: GObject.Type, interface_type: GObject.Type, info: InterfaceInfo): void;
+        /**
+         * Calls the #complete_type_info function from the #GTypePluginClass of #plugin.
+         * There should be no need to use this function outside of the GObject
+         * type system itself.
+         * @param g_type the #GType whose info is completed
+         * @param info the #GTypeInfo struct to fill in
+         * @param value_table the #GTypeValueTable to fill in
+         */
+        complete_type_info(g_type: GObject.Type, info: TypeInfo, value_table: TypeValueTable): void;
+        /**
+         * Calls the #unuse_plugin function from the #GTypePluginClass of
+         * #plugin.  There should be no need to use this function outside of
+         * the GObject type system itself.
+         */
+        unuse(): void;
+        /**
+         * Calls the #use_plugin function from the #GTypePluginClass of
+         * #plugin.  There should be no need to use this function outside of
+         * the GObject type system itself.
+         */
+        use(): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link TypePlugin} instead.
+     */
+    type TypePluginMixin = ITypePlugin;
+
     /**
      * An interface that handles the lifecycle of dynamically loaded types.
      * 
@@ -3056,41 +3463,10 @@ declare namespace imports.gi.GObject {
      * implements most of this except for the actual module loading and
      * unloading. It even handles multiple registered types per module.
      */
-    interface TypePlugin {
-        /**
-         * Calls the #complete_interface_info function from the
-         * #GTypePluginClass of #plugin. There should be no need to use this
-         * function outside of the GObject type system itself.
-         * @param instance_type the #GType of an instantiatable type to which the interface
-         *  is added
-         * @param interface_type the #GType of the interface whose info is completed
-         * @param info the #GInterfaceInfo to fill in
-         */
-        complete_interface_info(instance_type: GObject.Type, interface_type: GObject.Type, info: InterfaceInfo): void;
-        /**
-         * Calls the #complete_type_info function from the #GTypePluginClass of #plugin.
-         * There should be no need to use this function outside of the GObject
-         * type system itself.
-         * @param g_type the #GType whose info is completed
-         * @param info the #GTypeInfo struct to fill in
-         * @param value_table the #GTypeValueTable to fill in
-         */
-        complete_type_info(g_type: GObject.Type, info: TypeInfo, value_table: TypeValueTable): void;
-        /**
-         * Calls the #unuse_plugin function from the #GTypePluginClass of
-         * #plugin.  There should be no need to use this function outside of
-         * the GObject type system itself.
-         */
-        unuse(): void;
-        /**
-         * Calls the #use_plugin function from the #GTypePluginClass of
-         * #plugin.  There should be no need to use this function outside of
-         * the GObject type system itself.
-         */
-        use(): void;
-    }
+    interface TypePlugin extends TypePluginMixin { }
 
-    var TypePlugin: {
+    class TypePlugin {
+        constructor();
     }
 
 
@@ -3462,11 +3838,10 @@ declare namespace imports.gi.GObject {
          * @param binding a #GBinding
          * @param from_value the #GValue containing the value to transform
          * @param to_value the #GValue in which to store the transformed value
-         * @param user_data data passed to the transform function
          * @returns %TRUE if the transformation was successful, and %FALSE
          *   otherwise
          */
-        (binding: Binding, from_value: Value, to_value: Value, user_data: any): boolean;
+        (binding: Binding, from_value: Value, to_value: Value): boolean;
     }
 
     /**
@@ -4542,11 +4917,10 @@ declare namespace imports.gi.GObject {
      * 
      * #destroy_data will be called as a finalize notifier on the #GClosure.
      * @param callback_func the function to invoke
-     * @param user_data user data to pass to #callback_func
      * @param destroy_data destroy notify to be called when #user_data is no longer used
      * @returns a floating reference to a new #GCClosure
      */
-    function cclosure_new(callback_func: Callback, user_data: any, destroy_data: ClosureNotify): Closure;
+    function cclosure_new(callback_func: Callback, destroy_data: ClosureNotify): Closure;
 
     /**
      * A variant of g_cclosure_new() which uses #object as #user_data and
@@ -4578,11 +4952,10 @@ declare namespace imports.gi.GObject {
      * 
      * #destroy_data will be called as a finalize notifier on the #GClosure.
      * @param callback_func the function to invoke
-     * @param user_data user data to pass to #callback_func
      * @param destroy_data destroy notify to be called when #user_data is no longer used
      * @returns a floating reference to a new #GCClosure
      */
-    function cclosure_new_swap(callback_func: Callback, user_data: any, destroy_data: ClosureNotify): Closure;
+    function cclosure_new_swap(callback_func: Callback, destroy_data: ClosureNotify): Closure;
 
     /**
      * Clears a reference to a #GObject.

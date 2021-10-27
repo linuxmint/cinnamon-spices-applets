@@ -1,27 +1,8 @@
 declare namespace imports.gi.Gdk {
-    /**
-     * GdkAppLaunchContext is an implementation of #GAppLaunchContext that
-     * handles launching an application in a graphical context. It provides
-     * startup notification and allows to launch applications on a specific
-     * screen or workspace.
-     * 
-     * ## Launching an application
-     * 
-     * |[<!-- language="C" -->
-     * GdkAppLaunchContext *context;
-     * 
-     * context = gdk_display_get_app_launch_context (display);
-     * 
-     * gdk_app_launch_context_set_screen (screen);
-     * gdk_app_launch_context_set_timestamp (event->time);
-     * 
-     * if (!g_app_info_launch_default_for_uri ("http://www.gtk.org", context, &error))
-     *   g_warning ("Launching failed: %s\n", error->message);
-     * 
-     * g_object_unref (context);
-     * ]|
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppLaunchContext} instead.
      */
-    interface AppLaunchContext extends Gio.AppLaunchContext {
+    interface IAppLaunchContext {
         /**
          * Sets the workspace on which applications will be launched when
          * using this context when running under a window manager that
@@ -86,18 +67,48 @@ declare namespace imports.gi.Gdk {
         set_timestamp(timestamp: number): void;
     }
 
-    var AppLaunchContext: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link AppLaunchContext} instead.
+     */
+    type AppLaunchContextMixin = IAppLaunchContext & Gio.IAppLaunchContext;
+
+    /**
+     * GdkAppLaunchContext is an implementation of #GAppLaunchContext that
+     * handles launching an application in a graphical context. It provides
+     * startup notification and allows to launch applications on a specific
+     * screen or workspace.
+     * 
+     * ## Launching an application
+     * 
+     * |[<!-- language="C" -->
+     * GdkAppLaunchContext *context;
+     * 
+     * context = gdk_display_get_app_launch_context (display);
+     * 
+     * gdk_app_launch_context_set_screen (screen);
+     * gdk_app_launch_context_set_timestamp (event->time);
+     * 
+     * if (!g_app_info_launch_default_for_uri ("http://www.gtk.org", context, &error))
+     *   g_warning ("Launching failed: %s\n", error->message);
+     * 
+     * g_object_unref (context);
+     * ]|
+     */
+    interface AppLaunchContext extends AppLaunchContextMixin { }
+
+    class AppLaunchContext {
+        constructor();
         /**
          * Creates a new {@link AppLaunchContext}.
          * @returns a new {@link AppLaunchContext}
          */
-        new(): AppLaunchContext;
+        static new(): AppLaunchContext;
     }
 
-    /**
-     * A {@link Cursor} represents a cursor. Its contents are private.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Cursor} instead.
      */
-    interface Cursor extends GObject.Object {
+    interface ICursor {
         /**
          * Returns the cursor type for this cursor.
          * @returns a {@link CursorType}
@@ -144,7 +155,18 @@ declare namespace imports.gi.Gdk {
         unref(): void;
     }
 
-    var Cursor: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Cursor} instead.
+     */
+    type CursorMixin = ICursor & GObject.IObject;
+
+    /**
+     * A {@link Cursor} represents a cursor. Its contents are private.
+     */
+    interface Cursor extends CursorMixin { }
+
+    class Cursor {
+        constructor();
         /**
          * Creates a new cursor from the set of builtin cursors for the default display.
          * See gdk_cursor_new_for_display().
@@ -153,14 +175,14 @@ declare namespace imports.gi.Gdk {
          * @param cursor_type cursor to create
          * @returns a new {@link Cursor}
          */
-        new(cursor_type: CursorType): Cursor;
+        static new(cursor_type: CursorType): Cursor;
         /**
          * Creates a new cursor from the set of builtin cursors.
          * @param display the {@link Display} for which the cursor will be created
          * @param cursor_type cursor to create
          * @returns a new {@link Cursor}, or %NULL on failure
          */
-        new_for_display(display: Display, cursor_type: CursorType): Cursor;
+        static new_for_display(display: Display, cursor_type: CursorType): Cursor;
         /**
          * Creates a new cursor by looking up #name in the current cursor
          * theme.
@@ -207,7 +229,7 @@ declare namespace imports.gi.Gdk {
          * @returns a new {@link Cursor}, or %NULL if there is no
          *   cursor with the given name
          */
-        new_from_name(display: Display, name: string): Cursor;
+        static new_from_name(display: Display, name: string): Cursor;
         /**
          * Creates a new cursor from a pixbuf.
          * 
@@ -233,7 +255,7 @@ declare namespace imports.gi.Gdk {
          * @param _y the vertical offset of the “hotspot” of the cursor.
          * @returns a new {@link Cursor}.
          */
-        new_from_pixbuf(display: Display, pixbuf: GdkPixbuf.Pixbuf, _x: number, _y: number): Cursor;
+        static new_from_pixbuf(display: Display, pixbuf: GdkPixbuf.Pixbuf, _x: number, _y: number): Cursor;
         /**
          * Creates a new cursor from a cairo image surface.
          * 
@@ -254,18 +276,13 @@ declare namespace imports.gi.Gdk {
          * @param _y the vertical offset of the “hotspot” of the cursor
          * @returns a new {@link Cursor}.
          */
-        new_from_surface(display: Display, surface: cairo.Surface, _x: number, _y: number): Cursor;
+        static new_from_surface(display: Display, surface: cairo.Surface, _x: number, _y: number): Cursor;
     }
 
-    /**
-     * The {@link Device} object represents a single input device, such
-     * as a keyboard, a mouse, a touchpad, etc.
-     * 
-     * See the #GdkDeviceManager documentation for more information
-     * about the various kinds of master and slave devices, and their
-     * relationships.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Device} instead.
      */
-    interface Device extends GObject.Object {
+    interface IDevice {
         /**
          * Returns the associated device to #device, if #device is of type
          * %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -606,13 +623,29 @@ declare namespace imports.gi.Gdk {
         warp(screen: Screen, _x: number, _y: number): void;
     }
 
-    var Device: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Device} instead.
+     */
+    type DeviceMixin = IDevice & GObject.IObject;
+
+    /**
+     * The {@link Device} object represents a single input device, such
+     * as a keyboard, a mouse, a touchpad, etc.
+     * 
+     * See the #GdkDeviceManager documentation for more information
+     * about the various kinds of master and slave devices, and their
+     * relationships.
+     */
+    interface Device extends DeviceMixin { }
+
+    class Device {
+        constructor();
         /**
          * Frees an array of {@link TimeCoord} that was returned by gdk_device_get_history().
          * @param events 
          * @param n_events the length of the array.
          */
-        free_history(events: TimeCoord[], n_events: number): void;
+        static free_history(events: TimeCoord[], n_events: number): void;
         /**
          * Determines information about the current keyboard grab.
          * This is not public API and must not be used by applications.
@@ -625,8 +658,47 @@ declare namespace imports.gi.Gdk {
          * @returns %TRUE if this application currently has the
          *  keyboard grabbed.
          */
-        grab_info_libgtk_only(display: Display, device: Device, grab_window: Window, owner_events: boolean): boolean;
+        static grab_info_libgtk_only(display: Display, device: Device, grab_window: Window, owner_events: boolean): boolean;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DeviceManager} instead.
+     */
+    interface IDeviceManager {
+        /**
+         * Returns the client pointer, that is, the master pointer that acts as the core pointer
+         * for this application. In X11, window managers may change this depending on the interaction
+         * pattern under the presence of several pointers.
+         * 
+         * You should use this function seldomly, only in code that isn’t triggered by a {@link Event}
+         * and there aren’t other means to get a meaningful #GdkDevice to operate on.
+         * @returns The client pointer. This memory is
+         *          owned by GDK and must not be freed or unreferenced.
+         */
+        get_client_pointer(): Device;
+        /**
+         * Gets the {@link Display} associated to #device_manager.
+         * @returns the {@link Display} to which
+         *          #device_manager is associated to, or %NULL. This memory is
+         *          owned by GDK and must not be freed or unreferenced.
+         */
+        get_display(): Display;
+        /**
+         * Returns the list of devices of type #type currently attached to
+         * #device_manager.
+         * @param _type device type to get.
+         * @returns a list of
+         *          {@link Devices}. The returned list must be
+         *          freed with g_list_free (). The list elements are owned by
+         *          GTK+ and must not be freed or unreffed.
+         */
+        list_devices(_type: DeviceType): GLib.List;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DeviceManager} instead.
+     */
+    type DeviceManagerMixin = IDeviceManager & GObject.IObject;
 
     /**
      * In addition to a single pointer and keyboard for user interface input,
@@ -744,41 +816,16 @@ declare namespace imports.gi.Gdk {
      * supersedes #GdkDeviceManager and should be preferred in newly
      * written code.
      */
-    interface DeviceManager extends GObject.Object {
-        /**
-         * Returns the client pointer, that is, the master pointer that acts as the core pointer
-         * for this application. In X11, window managers may change this depending on the interaction
-         * pattern under the presence of several pointers.
-         * 
-         * You should use this function seldomly, only in code that isn’t triggered by a {@link Event}
-         * and there aren’t other means to get a meaningful #GdkDevice to operate on.
-         * @returns The client pointer. This memory is
-         *          owned by GDK and must not be freed or unreferenced.
-         */
-        get_client_pointer(): Device;
-        /**
-         * Gets the {@link Display} associated to #device_manager.
-         * @returns the {@link Display} to which
-         *          #device_manager is associated to, or %NULL. This memory is
-         *          owned by GDK and must not be freed or unreferenced.
-         */
-        get_display(): Display;
-        /**
-         * Returns the list of devices of type #type currently attached to
-         * #device_manager.
-         * @param _type device type to get.
-         * @returns a list of
-         *          {@link Devices}. The returned list must be
-         *          freed with g_list_free (). The list elements are owned by
-         *          GTK+ and must not be freed or unreffed.
-         */
-        list_devices(_type: DeviceType): GLib.List;
+    interface DeviceManager extends DeviceManagerMixin { }
+
+    class DeviceManager {
+        constructor();
     }
 
-    var DeviceManager: {
-    }
-
-    interface DeviceTool extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DeviceTool} instead.
+     */
+    interface IDeviceTool {
         /**
          * Gets the hardware ID of this tool, or 0 if it's not known. When
          * non-zero, the identificator is unique for the given tool model,
@@ -806,30 +853,21 @@ declare namespace imports.gi.Gdk {
         get_tool_type(): DeviceToolType;
     }
 
-    var DeviceTool: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DeviceTool} instead.
+     */
+    type DeviceToolMixin = IDeviceTool & GObject.IObject;
+
+    interface DeviceTool extends DeviceToolMixin { }
+
+    class DeviceTool {
+        constructor();
     }
 
-    /**
-     * {@link Display} objects purpose are two fold:
-     * 
-     * - To manage and provide information about input devices (pointers and keyboards)
-     * 
-     * - To manage and provide information about the available #GdkScreens
-     * 
-     * GdkDisplay objects are the GDK representation of an X Display,
-     * which can be described as a workstation consisting of
-     * a keyboard, a pointing device (such as a mouse) and one or more
-     * screens.
-     * It is used to open and keep track of various GdkScreen objects
-     * currently instantiated by the application. It is also used to
-     * access the keyboard(s) and mouse pointer(s) of the display.
-     * 
-     * Most of the input device handling has been factored out into
-     * the separate #GdkDeviceManager object. Every display has a
-     * device manager, which you can obtain using
-     * gdk_display_get_device_manager().
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Display} instead.
      */
-    interface Display extends GObject.Object {
+    interface IDisplay {
         /**
          * Emits a short beep on #display
          */
@@ -1175,7 +1213,35 @@ declare namespace imports.gi.Gdk {
         warp_pointer(screen: Screen, _x: number, _y: number): void;
     }
 
-    var Display: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Display} instead.
+     */
+    type DisplayMixin = IDisplay & GObject.IObject;
+
+    /**
+     * {@link Display} objects purpose are two fold:
+     * 
+     * - To manage and provide information about input devices (pointers and keyboards)
+     * 
+     * - To manage and provide information about the available #GdkScreens
+     * 
+     * GdkDisplay objects are the GDK representation of an X Display,
+     * which can be described as a workstation consisting of
+     * a keyboard, a pointing device (such as a mouse) and one or more
+     * screens.
+     * It is used to open and keep track of various GdkScreen objects
+     * currently instantiated by the application. It is also used to
+     * access the keyboard(s) and mouse pointer(s) of the display.
+     * 
+     * Most of the input device handling has been factored out into
+     * the separate #GdkDeviceManager object. Every display has a
+     * device manager, which you can obtain using
+     * gdk_display_get_device_manager().
+     */
+    interface Display extends DisplayMixin { }
+
+    class Display {
+        constructor();
         /**
          * Gets the default {@link Display}. This is a convenience
          * function for:
@@ -1183,14 +1249,14 @@ declare namespace imports.gi.Gdk {
          * @returns a {@link Display}, or %NULL if
          *   there is no default display.
          */
-        get_default(): Display;
+        static get_default(): Display;
         /**
          * Opens a display.
          * @param display_name the name of the display to open
          * @returns a {@link Display}, or %NULL if the
          *     display could not be opened
          */
-        open(display_name: string): Display;
+        static open(display_name: string): Display;
         /**
          * Opens the default display specified by command line arguments or
          * environment variables, sets it as the default display, and returns
@@ -1200,8 +1266,44 @@ declare namespace imports.gi.Gdk {
          * @returns the default display, if it
          *   could be opened, otherwise %NULL.
          */
-        open_default_libgtk_only(): Display;
+        static open_default_libgtk_only(): Display;
     }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DisplayManager} instead.
+     */
+    interface IDisplayManager {
+        /**
+         * Gets the default {@link Display}.
+         * @returns a {@link Display}, or %NULL if
+         *     there is no default display.
+         */
+        get_default_display(): Display;
+        /**
+         * List all currently open displays.
+         * @returns a newly
+         *     allocated #GSList of {@link Display} objects. Free with g_slist_free()
+         *     when you are done with it.
+         */
+        list_displays(): GLib.SList;
+        /**
+         * Opens a display.
+         * @param name the name of the display to open
+         * @returns a {@link Display}, or %NULL if the
+         *     display could not be opened
+         */
+        open_display(name: string): Display;
+        /**
+         * Sets #display as the default display.
+         * @param display a {@link Display}
+         */
+        set_default_display(display: Display): void;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DisplayManager} instead.
+     */
+    type DisplayManagerMixin = IDisplayManager & GObject.IObject;
 
     /**
      * The purpose of the {@link DisplayManager} singleton object is to offer
@@ -1244,35 +1346,10 @@ declare namespace imports.gi.Gdk {
      *   g_error ("Unsupported GDK backend");
      * ]|
      */
-    interface DisplayManager extends GObject.Object {
-        /**
-         * Gets the default {@link Display}.
-         * @returns a {@link Display}, or %NULL if
-         *     there is no default display.
-         */
-        get_default_display(): Display;
-        /**
-         * List all currently open displays.
-         * @returns a newly
-         *     allocated #GSList of {@link Display} objects. Free with g_slist_free()
-         *     when you are done with it.
-         */
-        list_displays(): GLib.SList;
-        /**
-         * Opens a display.
-         * @param name the name of the display to open
-         * @returns a {@link Display}, or %NULL if the
-         *     display could not be opened
-         */
-        open_display(name: string): Display;
-        /**
-         * Sets #display as the default display.
-         * @param display a {@link Display}
-         */
-        set_default_display(display: Display): void;
-    }
+    interface DisplayManager extends DisplayManagerMixin { }
 
-    var DisplayManager: {
+    class DisplayManager {
+        constructor();
         /**
          * Gets the singleton {@link DisplayManager} object.
          * 
@@ -1285,10 +1362,13 @@ declare namespace imports.gi.Gdk {
          *     gdk_parse_args(), gdk_init(), or gdk_init_check() must have
          *     been called first.
          */
-        get(): DisplayManager;
+        static get(): DisplayManager;
     }
 
-    interface DragContext extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DragContext} instead.
+     */
+    interface IDragContext {
         /**
          * Determines the bitmask of actions proposed by the source if
          * gdk_drag_context_get_suggested_action() returns %GDK_ACTION_ASK.
@@ -1378,22 +1458,21 @@ declare namespace imports.gi.Gdk {
         set_hotspot(hot_x: number, hot_y: number): void;
     }
 
-    var DragContext: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DragContext} instead.
+     */
+    type DragContextMixin = IDragContext & GObject.IObject;
+
+    interface DragContext extends DragContextMixin { }
+
+    class DragContext {
+        constructor();
     }
 
-    /**
-     * {@link DrawingContext} is an object that represents the current drawing
-     * state of a #GdkWindow.
-     * 
-     * It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
-     * via rendering API like Cairo or OpenGL.
-     * 
-     * A #GdkDrawingContext can only be created by calling gdk_window_begin_draw_frame()
-     * and will be valid until a call to gdk_window_end_draw_frame().
-     * 
-     * #GdkDrawingContext is available since GDK 3.22
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DrawingContext} instead.
      */
-    interface DrawingContext extends GObject.Object {
+    interface IDrawingContext {
         /**
          * Retrieves a Cairo context to be used to draw on the {@link Window}
          * that created the #GdkDrawingContext.
@@ -1423,45 +1502,33 @@ declare namespace imports.gi.Gdk {
         is_valid(): boolean;
     }
 
-    var DrawingContext: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DrawingContext} instead.
+     */
+    type DrawingContextMixin = IDrawingContext & GObject.IObject;
 
     /**
-     * A {@link FrameClock} tells the application when to update and repaint a
-     * window. This may be synced to the vertical refresh rate of the
-     * monitor, for example. Even when the frame clock uses a simple timer
-     * rather than a hardware-based vertical sync, the frame clock helps
-     * because it ensures everything paints at the same time (reducing the
-     * total number of frames). The frame clock can also automatically
-     * stop painting when it knows the frames will not be visible, or
-     * scale back animation framerates.
+     * {@link DrawingContext} is an object that represents the current drawing
+     * state of a #GdkWindow.
      * 
-     * #GdkFrameClock is designed to be compatible with an OpenGL-based
-     * implementation or with mozRequestAnimationFrame in Firefox,
-     * for example.
+     * It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
+     * via rendering API like Cairo or OpenGL.
      * 
-     * A frame clock is idle until someone requests a frame with
-     * gdk_frame_clock_request_phase(). At some later point that makes
-     * sense for the synchronization being implemented, the clock will
-     * process a frame and emit signals for each phase that has been
-     * requested. (See the signals of the #GdkFrameClock class for
-     * documentation of the phases. %GDK_FRAME_CLOCK_PHASE_UPDATE and the
-     * #GdkFrameClock::update signal are most interesting for application
-     * writers, and are used to update the animations, using the frame time
-     * given by gdk_frame_clock_get_frame_time().
+     * A #GdkDrawingContext can only be created by calling gdk_window_begin_draw_frame()
+     * and will be valid until a call to gdk_window_end_draw_frame().
      * 
-     * The frame time is reported in microseconds and generally in the same
-     * timescale as g_get_monotonic_time(), however, it is not the same
-     * as g_get_monotonic_time(). The frame time does not advance during
-     * the time a frame is being painted, and outside of a frame, an attempt
-     * is made so that all calls to gdk_frame_clock_get_frame_time() that
-     * are called at a “similar” time get the same value. This means that
-     * if different animations are timed by looking at the difference in
-     * time between an initial value from gdk_frame_clock_get_frame_time()
-     * and the value inside the #GdkFrameClock::update signal of the clock,
-     * they will stay exactly synchronized.
+     * #GdkDrawingContext is available since GDK 3.22
      */
-    interface FrameClock extends GObject.Object {
+    interface DrawingContext extends DrawingContextMixin { }
+
+    class DrawingContext {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FrameClock} instead.
+     */
+    interface IFrameClock {
         /**
          * Starts updates for an animation. Until a matching call to
          * gdk_frame_clock_end_updating() is made, the frame clock will continually
@@ -1557,63 +1624,56 @@ declare namespace imports.gi.Gdk {
         request_phase(phase: FrameClockPhase): void;
     }
 
-    var FrameClock: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FrameClock} instead.
+     */
+    type FrameClockMixin = IFrameClock & GObject.IObject;
 
     /**
-     * {@link GLContext} is an object representing the platform-specific
-     * OpenGL drawing context.
+     * A {@link FrameClock} tells the application when to update and repaint a
+     * window. This may be synced to the vertical refresh rate of the
+     * monitor, for example. Even when the frame clock uses a simple timer
+     * rather than a hardware-based vertical sync, the frame clock helps
+     * because it ensures everything paints at the same time (reducing the
+     * total number of frames). The frame clock can also automatically
+     * stop painting when it knows the frames will not be visible, or
+     * scale back animation framerates.
      * 
-     * #GdkGLContexts are created for a #GdkWindow using
-     * gdk_window_create_gl_context(), and the context will match
-     * the #GdkVisual of the window.
+     * #GdkFrameClock is designed to be compatible with an OpenGL-based
+     * implementation or with mozRequestAnimationFrame in Firefox,
+     * for example.
      * 
-     * A #GdkGLContext is not tied to any particular normal framebuffer.
-     * For instance, it cannot draw to the #GdkWindow back buffer. The GDK
-     * repaint system is in full control of the painting to that. Instead,
-     * you can create render buffers or textures and use gdk_cairo_draw_from_gl()
-     * in the draw function of your widget to draw them. Then GDK will handle
-     * the integration of your rendering with that of other widgets.
+     * A frame clock is idle until someone requests a frame with
+     * gdk_frame_clock_request_phase(). At some later point that makes
+     * sense for the synchronization being implemented, the clock will
+     * process a frame and emit signals for each phase that has been
+     * requested. (See the signals of the #GdkFrameClock class for
+     * documentation of the phases. %GDK_FRAME_CLOCK_PHASE_UPDATE and the
+     * #GdkFrameClock::update signal are most interesting for application
+     * writers, and are used to update the animations, using the frame time
+     * given by gdk_frame_clock_get_frame_time().
      * 
-     * Support for #GdkGLContext is platform-specific, context creation
-     * can fail, returning %NULL context.
-     * 
-     * A #GdkGLContext has to be made "current" in order to start using
-     * it, otherwise any OpenGL call will be ignored.
-     * 
-     * ## Creating a new OpenGL context ##
-     * 
-     * In order to create a new #GdkGLContext instance you need a
-     * #GdkWindow, which you typically get during the realize call
-     * of a widget.
-     * 
-     * A #GdkGLContext is not realized until either gdk_gl_context_make_current(),
-     * or until it is realized using gdk_gl_context_realize(). It is possible to
-     * specify details of the GL context like the OpenGL version to be used, or
-     * whether the GL context should have extra state validation enabled after
-     * calling gdk_window_create_gl_context() by calling gdk_gl_context_realize().
-     * If the realization fails you have the option to change the settings of the
-     * #GdkGLContext and try again.
-     * 
-     * ## Using a GdkGLContext ##
-     * 
-     * You will need to make the #GdkGLContext the current context
-     * before issuing OpenGL calls; the system sends OpenGL commands to
-     * whichever context is current. It is possible to have multiple
-     * contexts, so you always need to ensure that the one which you
-     * want to draw with is the current one before issuing commands:
-     * 
-     * |[<!-- language="C" -->
-     *   gdk_gl_context_make_current (context);
-     * ]|
-     * 
-     * You can now perform your drawing using OpenGL commands.
-     * 
-     * You can check which #GdkGLContext is the current one by using
-     * gdk_gl_context_get_current(); you can also unset any #GdkGLContext
-     * that is currently set by calling gdk_gl_context_clear_current().
+     * The frame time is reported in microseconds and generally in the same
+     * timescale as g_get_monotonic_time(), however, it is not the same
+     * as g_get_monotonic_time(). The frame time does not advance during
+     * the time a frame is being painted, and outside of a frame, an attempt
+     * is made so that all calls to gdk_frame_clock_get_frame_time() that
+     * are called at a “similar” time get the same value. This means that
+     * if different animations are timed by looking at the difference in
+     * time between an initial value from gdk_frame_clock_get_frame_time()
+     * and the value inside the #GdkFrameClock::update signal of the clock,
+     * they will stay exactly synchronized.
      */
-    interface GLContext extends GObject.Object {
+    interface FrameClock extends FrameClockMixin { }
+
+    class FrameClock {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GLContext} instead.
+     */
+    interface IGLContext {
         /**
          * Retrieves the value set using gdk_gl_context_set_debug_enabled().
          * @returns %TRUE if debugging is enabled
@@ -1743,30 +1803,86 @@ declare namespace imports.gi.Gdk {
         set_use_es(use_es: number): void;
     }
 
-    var GLContext: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link GLContext} instead.
+     */
+    type GLContextMixin = IGLContext & GObject.IObject;
+
+    /**
+     * {@link GLContext} is an object representing the platform-specific
+     * OpenGL drawing context.
+     * 
+     * #GdkGLContexts are created for a #GdkWindow using
+     * gdk_window_create_gl_context(), and the context will match
+     * the #GdkVisual of the window.
+     * 
+     * A #GdkGLContext is not tied to any particular normal framebuffer.
+     * For instance, it cannot draw to the #GdkWindow back buffer. The GDK
+     * repaint system is in full control of the painting to that. Instead,
+     * you can create render buffers or textures and use gdk_cairo_draw_from_gl()
+     * in the draw function of your widget to draw them. Then GDK will handle
+     * the integration of your rendering with that of other widgets.
+     * 
+     * Support for #GdkGLContext is platform-specific, context creation
+     * can fail, returning %NULL context.
+     * 
+     * A #GdkGLContext has to be made "current" in order to start using
+     * it, otherwise any OpenGL call will be ignored.
+     * 
+     * ## Creating a new OpenGL context ##
+     * 
+     * In order to create a new #GdkGLContext instance you need a
+     * #GdkWindow, which you typically get during the realize call
+     * of a widget.
+     * 
+     * A #GdkGLContext is not realized until either gdk_gl_context_make_current(),
+     * or until it is realized using gdk_gl_context_realize(). It is possible to
+     * specify details of the GL context like the OpenGL version to be used, or
+     * whether the GL context should have extra state validation enabled after
+     * calling gdk_window_create_gl_context() by calling gdk_gl_context_realize().
+     * If the realization fails you have the option to change the settings of the
+     * #GdkGLContext and try again.
+     * 
+     * ## Using a GdkGLContext ##
+     * 
+     * You will need to make the #GdkGLContext the current context
+     * before issuing OpenGL calls; the system sends OpenGL commands to
+     * whichever context is current. It is possible to have multiple
+     * contexts, so you always need to ensure that the one which you
+     * want to draw with is the current one before issuing commands:
+     * 
+     * |[<!-- language="C" -->
+     *   gdk_gl_context_make_current (context);
+     * ]|
+     * 
+     * You can now perform your drawing using OpenGL commands.
+     * 
+     * You can check which #GdkGLContext is the current one by using
+     * gdk_gl_context_get_current(); you can also unset any #GdkGLContext
+     * that is currently set by calling gdk_gl_context_clear_current().
+     */
+    interface GLContext extends GLContextMixin { }
+
+    class GLContext {
+        constructor();
         /**
          * Clears the current {@link GLContext}.
          * 
          * Any OpenGL call after this function returns will be ignored
          * until gdk_gl_context_make_current() is called.
          */
-        clear_current(): void;
+        static clear_current(): void;
         /**
          * Retrieves the current {@link GLContext}.
          * @returns the current {@link GLContext}, or %NULL
          */
-        get_current(): GLContext;
+        static get_current(): GLContext;
     }
 
-    /**
-     * A {@link Keymap} defines the translation from keyboard state
-     * (including a hardware key, a modifier mask, and active keyboard group)
-     * to a keyval. This translation has two phases. The first phase is
-     * to determine the effective keyboard group and level for the keyboard
-     * state; the second phase is to look up the keycode/group/level triplet
-     * in the keymap and see what keyval it corresponds to.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Keymap} instead.
      */
-    interface Keymap extends GObject.Object {
+    interface IKeymap {
         /**
          * Maps the non-virtual modifiers (i.e Mod2, Mod3, ...) which are set
          * in #state to the virtual modifiers (i.e. Super, Hyper and Meta) and
@@ -1946,31 +2062,40 @@ declare namespace imports.gi.Gdk {
         translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number, keyval: number, effective_group: number, level: number, consumed_modifiers: ModifierType): boolean;
     }
 
-    var Keymap: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Keymap} instead.
+     */
+    type KeymapMixin = IKeymap & GObject.IObject;
+
+    /**
+     * A {@link Keymap} defines the translation from keyboard state
+     * (including a hardware key, a modifier mask, and active keyboard group)
+     * to a keyval. This translation has two phases. The first phase is
+     * to determine the effective keyboard group and level for the keyboard
+     * state; the second phase is to look up the keycode/group/level triplet
+     * in the keymap and see what keyval it corresponds to.
+     */
+    interface Keymap extends KeymapMixin { }
+
+    class Keymap {
+        constructor();
         /**
          * Returns the {@link Keymap} attached to the default display.
          * @returns the {@link Keymap} attached to the default display.
          */
-        get_default(): Keymap;
+        static get_default(): Keymap;
         /**
          * Returns the {@link Keymap} attached to #display.
          * @param display the {@link Display}.
          * @returns the {@link Keymap} attached to #display.
          */
-        get_for_display(display: Display): Keymap;
+        static get_for_display(display: Display): Keymap;
     }
 
-    /**
-     * GdkMonitor objects represent the individual outputs that are
-     * associated with a {@link Display}. GdkDisplay has APIs to enumerate
-     * monitors with gdk_display_get_n_monitors() and gdk_display_get_monitor(), and
-     * to find particular monitors with gdk_display_get_primary_monitor() or
-     * gdk_display_get_monitor_at_window().
-     * 
-     * GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
-     * APIs in GdkScreen to obtain monitor-related information.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Monitor} instead.
      */
-    interface Monitor extends GObject.Object {
+    interface IMonitor {
         /**
          * Gets the display that this monitor belongs to.
          * @returns the display
@@ -2058,23 +2183,31 @@ declare namespace imports.gi.Gdk {
         is_primary(): boolean;
     }
 
-    var Monitor: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Monitor} instead.
+     */
+    type MonitorMixin = IMonitor & GObject.IObject;
 
     /**
-     * {@link Screen} objects are the GDK representation of the screen on
-     * which windows can be displayed and on which the pointer moves.
-     * X originally identified screens with physical screens, but
-     * nowadays it is more common to have a single #GdkScreen which
-     * combines several physical monitors (see gdk_screen_get_n_monitors()).
+     * GdkMonitor objects represent the individual outputs that are
+     * associated with a {@link Display}. GdkDisplay has APIs to enumerate
+     * monitors with gdk_display_get_n_monitors() and gdk_display_get_monitor(), and
+     * to find particular monitors with gdk_display_get_primary_monitor() or
+     * gdk_display_get_monitor_at_window().
      * 
-     * GdkScreen is used throughout GDK and GTK+ to specify which screen
-     * the top level windows are to be displayed on. it is also used to
-     * query the screen specification and default settings such as
-     * the default visual (gdk_screen_get_system_visual()), the dimensions
-     * of the physical monitors (gdk_screen_get_monitor_geometry()), etc.
+     * GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
+     * APIs in GdkScreen to obtain monitor-related information.
      */
-    interface Screen extends GObject.Object {
+    interface Monitor extends MonitorMixin { }
+
+    class Monitor {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Screen} instead.
+     */
+    interface IScreen {
         /**
          * Returns the screen’s currently active window.
          * 
@@ -2377,49 +2510,69 @@ declare namespace imports.gi.Gdk {
         set_resolution(dpi: number): void;
     }
 
-    var Screen: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Screen} instead.
+     */
+    type ScreenMixin = IScreen & GObject.IObject;
+
+    /**
+     * {@link Screen} objects are the GDK representation of the screen on
+     * which windows can be displayed and on which the pointer moves.
+     * X originally identified screens with physical screens, but
+     * nowadays it is more common to have a single #GdkScreen which
+     * combines several physical monitors (see gdk_screen_get_n_monitors()).
+     * 
+     * GdkScreen is used throughout GDK and GTK+ to specify which screen
+     * the top level windows are to be displayed on. it is also used to
+     * query the screen specification and default settings such as
+     * the default visual (gdk_screen_get_system_visual()), the dimensions
+     * of the physical monitors (gdk_screen_get_monitor_geometry()), etc.
+     */
+    interface Screen extends ScreenMixin { }
+
+    class Screen {
+        constructor();
         /**
          * Gets the default screen for the default display. (See
          * gdk_display_get_default ()).
          * @returns a {@link Screen}, or %NULL if
          *     there is no default display.
          */
-        get_default(): Screen;
+        static get_default(): Screen;
         /**
          * Gets the height of the default screen in pixels. The returned
          * size is in ”application pixels”, not in ”device pixels” (see
          * gdk_screen_get_monitor_scale_factor()).
          * @returns the height of the default screen in pixels.
          */
-        height(): number;
+        static height(): number;
         /**
          * Returns the height of the default screen in millimeters.
          * Note that on many X servers this value will not be correct.
          * @returns the height of the default screen in millimeters,
          * though it is not always correct.
          */
-        height_mm(): number;
+        static height_mm(): number;
         /**
          * Gets the width of the default screen in pixels. The returned
          * size is in ”application pixels”, not in ”device pixels” (see
          * gdk_screen_get_monitor_scale_factor()).
          * @returns the width of the default screen in pixels.
          */
-        width(): number;
+        static width(): number;
         /**
          * Returns the width of the default screen in millimeters.
          * Note that on many X servers this value will not be correct.
          * @returns the width of the default screen in millimeters,
          * though it is not always correct.
          */
-        width_mm(): number;
+        static width_mm(): number;
     }
 
-    /**
-     * The {@link Seat} object represents a collection of input devices
-     * that belong to a user.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Seat} instead.
      */
-    interface Seat extends GObject.Object {
+    interface ISeat {
         /**
          * Returns the capabilities this {@link Seat} currently has.
          * @returns the seat capabilities
@@ -2503,14 +2656,25 @@ declare namespace imports.gi.Gdk {
         ungrab(): void;
     }
 
-    var Seat: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Seat} instead.
+     */
+    type SeatMixin = ISeat & GObject.IObject;
 
     /**
-     * A {@link Visual} contains information about
-     * a particular visual.
+     * The {@link Seat} object represents a collection of input devices
+     * that belong to a user.
      */
-    interface Visual extends GObject.Object {
+    interface Seat extends SeatMixin { }
+
+    class Seat {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Visual} instead.
+     */
+    interface IVisual {
         /**
          * Returns the number of significant bits per red, green and blue value.
          * 
@@ -2584,25 +2748,37 @@ declare namespace imports.gi.Gdk {
         get_visual_type(): VisualType;
     }
 
-    var Visual: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Visual} instead.
+     */
+    type VisualMixin = IVisual & GObject.IObject;
+
+    /**
+     * A {@link Visual} contains information about
+     * a particular visual.
+     */
+    interface Visual extends VisualMixin { }
+
+    class Visual {
+        constructor();
         /**
          * Get the visual with the most available colors for the default
          * GDK screen. The return value should not be freed.
          * @returns best visual
          */
-        get_best(): Visual;
+        static get_best(): Visual;
         /**
          * Get the best available depth for the default GDK screen.  “Best”
          * means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
          * per pixel.
          * @returns best available depth
          */
-        get_best_depth(): number;
+        static get_best_depth(): number;
         /**
          * Return the best available visual type for the default GDK screen.
          * @returns best visual type
          */
-        get_best_type(): VisualType;
+        static get_best_type(): VisualType;
         /**
          * Combines gdk_visual_get_best_with_depth() and
          * gdk_visual_get_best_with_type().
@@ -2611,7 +2787,7 @@ declare namespace imports.gi.Gdk {
          * @returns best visual with both #depth
          *     and #visual_type, or %NULL if none
          */
-        get_best_with_both(depth: number, visual_type: VisualType): Visual;
+        static get_best_with_both(depth: number, visual_type: VisualType): Visual;
         /**
          * Get the best visual with depth #depth for the default GDK screen.
          * Color visuals and visuals with mutable colormaps are preferred
@@ -2620,7 +2796,7 @@ declare namespace imports.gi.Gdk {
          * @param depth a bit depth
          * @returns best visual for the given depth
          */
-        get_best_with_depth(depth: number): Visual;
+        static get_best_with_depth(depth: number): Visual;
         /**
          * Get the best visual of the given #visual_type for the default GDK screen.
          * Visuals with higher color depths are considered better. The return value
@@ -2629,17 +2805,20 @@ declare namespace imports.gi.Gdk {
          * @param visual_type a visual type
          * @returns best visual of the given type
          */
-        get_best_with_type(visual_type: VisualType): Visual;
+        static get_best_with_type(visual_type: VisualType): Visual;
         /**
          * Get the system’s default visual for the default GDK screen.
          * This is the visual for the root window of the display.
          * The return value should not be freed.
          * @returns system visual
          */
-        get_system(): Visual;
+        static get_system(): Visual;
     }
 
-    interface Window extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Window} instead.
+     */
+    interface IWindow {
         /**
          * Adds an event filter to #window, allowing you to intercept events
          * before they reach GDK. This is a low-level operation and makes it
@@ -3073,11 +3252,10 @@ declare namespace imports.gi.Gdk {
          * 
          * The list is returned in (relative) stacking order, i.e. the
          * lowest window is first.
-         * @param user_data user data to look for
          * @returns 
          *     list of child windows inside #window
          */
-        get_children_with_user_data(user_data: any): GLib.List;
+        get_children_with_user_data(): GLib.List;
         /**
          * Computes the region of a window that potentially can be written
          * to by drawing primitives. This region may not take into account
@@ -3520,9 +3698,8 @@ declare namespace imports.gi.Gdk {
          * @param region a #cairo_region_t
          * @param child_func function to use to decide if to
          *     recurse to a child, %NULL means never recurse.
-         * @param user_data data passed to #child_func
          */
-        invalidate_maybe_recurse(region: cairo.Region, child_func: WindowChildFunc, user_data: any): void;
+        invalidate_maybe_recurse(region: cairo.Region, child_func: WindowChildFunc): void;
         /**
          * A convenience wrapper around gdk_window_invalidate_region() which
          * invalidates a rectangular region. See
@@ -4324,9 +4501,8 @@ declare namespace imports.gi.Gdk {
          * this function for that. If GTK+ receives an event for a #GdkWindow,
          * and the user data for the window is non-%NULL, GTK+ will assume the
          * user data is a #GtkWidget, and forward the event to that widget.
-         * @param user_data user data
          */
-        set_user_data(user_data: GObject.Object): void;
+        set_user_data(): void;
         /**
          * Makes pixels in #window outside #shape_region be transparent,
          * so that the window may be nonrectangular.
@@ -4443,7 +4619,15 @@ declare namespace imports.gi.Gdk {
         withdraw(): void;
     }
 
-    var Window: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Window} instead.
+     */
+    type WindowMixin = IWindow & GObject.IObject;
+
+    interface Window extends WindowMixin { }
+
+    class Window {
+        constructor();
         /**
          * Creates a new {@link Window} using the attributes from
          * #attributes. See #GdkWindowAttr and #GdkWindowAttributesType for
@@ -4456,7 +4640,7 @@ declare namespace imports.gi.Gdk {
          *   fields in #attributes are valid
          * @returns the new {@link Window}
          */
-        new(parent: Window, attributes: WindowAttr, attributes_mask: WindowAttributesType): Window;
+        static new(parent: Window, attributes: WindowAttr, attributes_mask: WindowAttributesType): Window;
         /**
          * Obtains the window underneath the mouse pointer, returning the
          * location of that window in #win_x, #win_y. Returns %NULL if the
@@ -4470,7 +4654,7 @@ declare namespace imports.gi.Gdk {
          * @param win_y return location for origin of the window under the pointer
          * @returns window under the mouse pointer
          */
-        at_pointer(win_x: number, win_y: number): Window;
+        static at_pointer(win_x: number, win_y: number): Window;
         /**
          * Constrains a desired width and height according to a
          * set of geometry hints (such as minimum and maximum size).
@@ -4481,12 +4665,12 @@ declare namespace imports.gi.Gdk {
          * @param new_width location to store resulting width
          * @param new_height location to store resulting height
          */
-        constrain_size(geometry: Geometry, flags: WindowHints, width: number, height: number, new_width: number, new_height: number): void;
+        static constrain_size(geometry: Geometry, flags: WindowHints, width: number, height: number, new_width: number, new_height: number): void;
         /**
          * Calls gdk_window_process_updates() for all windows (see {@link Window})
          * in the application.
          */
-        process_all_updates(): void;
+        static process_all_updates(): void;
         /**
          * With update debugging enabled, calls to
          * gdk_window_invalidate_region() clear the invalidated region of the
@@ -4509,7 +4693,7 @@ declare namespace imports.gi.Gdk {
          * updates sometime after application startup time.
          * @param setting %TRUE to turn on update debugging
          */
-        set_debug_updates(setting: boolean): void;
+        static set_debug_updates(setting: boolean): void;
     }
 
     /**
@@ -5326,26 +5510,10 @@ declare namespace imports.gi.Gdk {
     class WindowRedirect {
     }
 
-    /**
-     * {@link DevicePad} is an interface implemented by devices of type
-     * %GDK_SOURCE_TABLET_PAD, it allows querying the features provided
-     * by the pad device.
-     * 
-     * Tablet pads may contain one or more groups, each containing a subset
-     * of the buttons/rings/strips available. gdk_device_pad_get_n_groups()
-     * can be used to obtain the number of groups, gdk_device_pad_get_n_features()
-     * and gdk_device_pad_get_feature_group() can be combined to find out the
-     * number of buttons/rings/strips the device has, and how are they grouped.
-     * 
-     * Each of those groups have different modes, which may be used to map
-     * each individual pad feature to multiple actions. Only one mode is
-     * effective (current) for each given group, different groups may have
-     * different current modes. The number of available modes in a group can
-     * be found out through gdk_device_pad_get_group_n_modes(), and the current
-     * mode for a given group will be notified through the #GdkEventPadGroupMode
-     * event.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DevicePad} instead.
      */
-    interface DevicePad {
+    interface IDevicePad {
         /**
          * Returns the group the given #feature and #idx belong to,
          * or -1 if feature/index do not exist in #pad.
@@ -5376,7 +5544,34 @@ declare namespace imports.gi.Gdk {
         get_n_groups(): number;
     }
 
-    var DevicePad: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link DevicePad} instead.
+     */
+    type DevicePadMixin = IDevicePad;
+
+    /**
+     * {@link DevicePad} is an interface implemented by devices of type
+     * %GDK_SOURCE_TABLET_PAD, it allows querying the features provided
+     * by the pad device.
+     * 
+     * Tablet pads may contain one or more groups, each containing a subset
+     * of the buttons/rings/strips available. gdk_device_pad_get_n_groups()
+     * can be used to obtain the number of groups, gdk_device_pad_get_n_features()
+     * and gdk_device_pad_get_feature_group() can be combined to find out the
+     * number of buttons/rings/strips the device has, and how are they grouped.
+     * 
+     * Each of those groups have different modes, which may be used to map
+     * each individual pad feature to multiple actions. Only one mode is
+     * effective (current) for each given group, different groups may have
+     * different current modes. The number of available modes in a group can
+     * be found out through gdk_device_pad_get_group_n_modes(), and the current
+     * mode for a given group will be notified through the #GdkEventPadGroupMode
+     * event.
+     */
+    interface DevicePad extends DevicePadMixin { }
+
+    class DevicePad {
+        constructor();
     }
 
 
@@ -7737,9 +7932,8 @@ declare namespace imports.gi.Gdk {
          * actions.
          * @param seat the {@link Seat} being grabbed
          * @param window the {@link Window} being grabbed
-         * @param user_data user data passed in gdk_seat_grab()
          */
-        (seat: Seat, window: Window, user_data: any): void;
+        (seat: Seat, window: Window): void;
     }
 
     /**
@@ -7753,10 +7947,9 @@ declare namespace imports.gi.Gdk {
          * It gets called for each child of the window to determine whether to
          * recursively invalidate it or now.
          * @param window a {@link Window}
-         * @param user_data user data
          * @returns %TRUE to invalidate #window recursively
          */
-        (window: Window, user_data: any): boolean;
+        (window: Window): boolean;
     }
 
     /**

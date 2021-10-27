@@ -1,11 +1,8 @@
 declare namespace imports.gi.Cvc {
-    interface Name {
-        name: string
-    }
-}
-
-declare namespace imports.gi.Cvc {
-    interface ChannelMap extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ChannelMap} instead.
+     */
+    interface IChannelMap {
         can_balance(): boolean;
         can_fade(): boolean;
         can_lfe(): boolean;
@@ -21,11 +18,22 @@ declare namespace imports.gi.Cvc {
         set_lfe(value: number): void;
     }
 
-    var ChannelMap: {
-        new(): ChannelMap;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link ChannelMap} instead.
+     */
+    type ChannelMapMixin = IChannelMap & GObject.IObject;
+
+    interface ChannelMap extends ChannelMapMixin { }
+
+    class ChannelMap {
+        constructor();
+        static new(): ChannelMap;
     }
 
-    interface MixerCard extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerCard} instead.
+     */
+    interface IMixerCard {
         change_profile(profile: string): boolean;
         get_gicon(): Gio.Icon;
         get_icon_name(): string;
@@ -42,10 +50,21 @@ declare namespace imports.gi.Cvc {
         set_profiles(profiles: GLib.List): boolean;
     }
 
-    var MixerCard: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerCard} instead.
+     */
+    type MixerCardMixin = IMixerCard & GObject.IObject;
+
+    interface MixerCard extends MixerCardMixin { }
+
+    class MixerCard {
+        constructor();
     }
 
-    interface MixerControl extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerControl} instead.
+     */
+    interface IMixerControl {
         change_input(input: MixerUIDevice): void;
         change_output(output: MixerUIDevice): void;
         change_profile_on_selected_device(device: MixerUIDevice, profile: string): boolean;
@@ -72,60 +91,119 @@ declare namespace imports.gi.Cvc {
         set_default_sink(stream: MixerStream): boolean;
         set_default_source(stream: MixerStream): boolean;
         set_headset_port(_id: number, choices: HeadsetPortChoice): void;
-        connect(signal: 'stream-added', callback: (actor: this, streamId: number) => void): number
     }
 
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerControl} instead.
+     */
+    type MixerControlMixin = IMixerControl & GObject.IObject;
+
+    interface MixerControl extends MixerControlMixin { }
+
     class MixerControl {
-        constructor(name: Name);
+        constructor();
         static new(name: string): MixerControl;
     }
 
-    interface MixerEventRole extends MixerStream {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerEventRole} instead.
+     */
+    interface IMixerEventRole {
 
     }
 
-    var MixerEventRole: {
-        new(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
-        constructor(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerEventRole} instead.
+     */
+    type MixerEventRoleMixin = IMixerEventRole & IMixerStream;
+
+    interface MixerEventRole extends MixerEventRoleMixin { }
+
+    class MixerEventRole {
+        constructor();
+        static new(context: undefined, device: string, channel_map: ChannelMap): MixerStream;
     }
 
-    interface MixerSink extends MixerStream {
-
-    }
-
-    var MixerSink: {
-        new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
-    }
-
-    interface MixerSinkInput extends MixerStream {
-
-    }
-
-    var MixerSinkInput: {
-        new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
-    }
-
-    interface MixerSource extends MixerStream {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSink} instead.
+     */
+    interface IMixerSink {
 
     }
 
-    var MixerSource: {
-        new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSink} instead.
+     */
+    type MixerSinkMixin = IMixerSink & IMixerStream;
+
+    interface MixerSink extends MixerSinkMixin { }
+
+    class MixerSink {
+        constructor();
+        static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
     }
 
-    interface MixerSourceOutput extends MixerStream {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSinkInput} instead.
+     */
+    interface IMixerSinkInput {
 
     }
 
-    var MixerSourceOutput: {
-        new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSinkInput} instead.
+     */
+    type MixerSinkInputMixin = IMixerSinkInput & IMixerStream;
+
+    interface MixerSinkInput extends MixerSinkInputMixin { }
+
+    class MixerSinkInput {
+        constructor();
+        static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
     }
 
-    interface MixerStream extends GObject.Object {
-        name: string
-        is_muted: boolean
-        volume: number
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSource} instead.
+     */
+    interface IMixerSource {
 
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSource} instead.
+     */
+    type MixerSourceMixin = IMixerSource & IMixerStream;
+
+    interface MixerSource extends MixerSourceMixin { }
+
+    class MixerSource {
+        constructor();
+        static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSourceOutput} instead.
+     */
+    interface IMixerSourceOutput {
+
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerSourceOutput} instead.
+     */
+    type MixerSourceOutputMixin = IMixerSourceOutput & IMixerStream;
+
+    interface MixerSourceOutput extends MixerSourceOutputMixin { }
+
+    class MixerSourceOutput {
+        constructor();
+        static new(context: undefined, index: number, channel_map: ChannelMap): MixerStream;
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerStream} instead.
+     */
+    interface IMixerStream {
         change_is_muted(is_muted: boolean): boolean;
         change_port(_port: string): boolean;
         create_monitor(): void;
@@ -168,13 +246,23 @@ declare namespace imports.gi.Cvc {
         set_ports(ports: GLib.List): boolean;
         set_sysfs_path(sysfs_path: string): boolean;
         set_volume(volume: number): boolean;
-        connect(signal: 'notify::volume', callback: (...args: any) => void): number
     }
 
-    var MixerStream: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerStream} instead.
+     */
+    type MixerStreamMixin = IMixerStream & GObject.IObject;
+
+    interface MixerStream extends MixerStreamMixin { }
+
+    class MixerStream {
+        constructor();
     }
 
-    interface MixerUIDevice extends GObject.Object {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerUIDevice} instead.
+     */
+    interface IMixerUIDevice {
         get_active_profile(): string;
         get_best_profile(selected: string, current: string): string;
         get_card(): MixerCard;
@@ -219,7 +307,15 @@ declare namespace imports.gi.Cvc {
         should_profiles_be_hidden(): boolean;
     }
 
-    var MixerUIDevice: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link MixerUIDevice} instead.
+     */
+    type MixerUIDeviceMixin = IMixerUIDevice & GObject.IObject;
+
+    interface MixerUIDevice extends MixerUIDeviceMixin { }
+
+    class MixerUIDevice {
+        constructor();
     }
 
     class ChannelMapClass {

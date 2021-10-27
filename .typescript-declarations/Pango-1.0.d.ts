@@ -1,15 +1,8 @@
 declare namespace imports.gi.Pango {
-    /**
-     * A `PangoContext` stores global information used to control the
-     * itemization process.
-     * 
-     * The information stored by `PangoContext` includes the fontmap used
-     * to look up fonts, and default values such as the default language,
-     * default gravity, or default font.
-     * 
-     * To obtain a `PangoContext`, use [method#Pango.FontMap.create_context].
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Context} instead.
      */
-    interface Context extends GObject.Object {
+    interface IContext {
         /**
          * Forces a change in the context, which will cause any `PangoLayout`
          * using this context to re-layout.
@@ -226,7 +219,25 @@ declare namespace imports.gi.Pango {
         set_round_glyph_positions(round_positions: boolean): void;
     }
 
-    var Context: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Context} instead.
+     */
+    type ContextMixin = IContext & GObject.IObject;
+
+    /**
+     * A `PangoContext` stores global information used to control the
+     * itemization process.
+     * 
+     * The information stored by `PangoContext` includes the fontmap used
+     * to look up fonts, and default values such as the default language,
+     * default gravity, or default font.
+     * 
+     * To obtain a `PangoContext`, use [method#Pango.FontMap.create_context].
+     */
+    interface Context extends ContextMixin { }
+
+    class Context {
+        constructor();
         /**
          * Creates a new `PangoContext` initialized to default values.
          * 
@@ -242,20 +253,13 @@ declare namespace imports.gi.Pango {
          * @returns the newly allocated `PangoContext`, which should
          *   be freed with g_object_unref().
          */
-        new(): Context;
+        static new(): Context;
     }
 
-    /**
-     * A `PangoCoverage` structure is a map from Unicode characters
-     * to [enum#Pango.CoverageLevel] values.
-     * 
-     * It is often necessary in Pango to determine if a particular
-     * font can represent a particular character, and also how well
-     * it can represent that character. The `PangoCoverage` is a data
-     * structure that is used to represent that information. It is an
-     * opaque structure with no public fields.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Coverage} instead.
      */
-    interface Coverage extends GObject.Object {
+    interface ICoverage {
         /**
          * Copy an existing `PangoCoverage`.
          * @returns the newly allocated `PangoCoverage`,
@@ -301,14 +305,32 @@ declare namespace imports.gi.Pango {
         unref(): void;
     }
 
-    var Coverage: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Coverage} instead.
+     */
+    type CoverageMixin = ICoverage & GObject.IObject;
+
+    /**
+     * A `PangoCoverage` structure is a map from Unicode characters
+     * to [enum#Pango.CoverageLevel] values.
+     * 
+     * It is often necessary in Pango to determine if a particular
+     * font can represent a particular character, and also how well
+     * it can represent that character. The `PangoCoverage` is a data
+     * structure that is used to represent that information. It is an
+     * opaque structure with no public fields.
+     */
+    interface Coverage extends CoverageMixin { }
+
+    class Coverage {
+        constructor();
         /**
          * Create a new `PangoCoverage`
          * @returns the newly allocated `PangoCoverage`, initialized
          *   to %PANGO_COVERAGE_NONE with a reference count of one, which
          *   should be freed with [method#Pango.Coverage.unref].
          */
-        new(): Coverage;
+        static new(): Coverage;
         /**
          * Convert data generated from pango_coverage_to_bytes()
          * back to a `PangoCoverage`.
@@ -316,14 +338,13 @@ declare namespace imports.gi.Pango {
          * @param n_bytes the size of #bytes in bytes
          * @returns a newly allocated `PangoCoverage`
          */
-        from_bytes(bytes: number[], n_bytes: number): Coverage;
+        static from_bytes(bytes: number[], n_bytes: number): Coverage;
     }
 
-    /**
-     * A `PangoFont` is used to represent a font in a
-     * rendering-system-independent manner.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Font} instead.
      */
-    interface Font extends GObject.Object {
+    interface IFont {
         /**
          * Returns a description of the font, with font size set in points.
          * 
@@ -434,20 +455,31 @@ declare namespace imports.gi.Pango {
         has_char(wc: string): boolean;
     }
 
-    var Font: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Font} instead.
+     */
+    type FontMixin = IFont & GObject.IObject;
+
+    /**
+     * A `PangoFont` is used to represent a font in a
+     * rendering-system-independent manner.
+     */
+    interface Font extends FontMixin { }
+
+    class Font {
+        constructor();
         /**
          * Frees an array of font descriptions.
          * @param descs 
          * @param n_descs number of font descriptions in #descs
          */
-        descriptions_free(descs: FontDescription[], n_descs: number): void;
+        static descriptions_free(descs: FontDescription[], n_descs: number): void;
     }
 
-    /**
-     * A `PangoFontFace` is used to represent a group of fonts with
-     * the same family, slant, weight, and width, but varying sizes.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontFace} instead.
      */
-    interface FontFace extends GObject.Object {
+    interface IFontFace {
         /**
          * Returns the family, style, variant, weight and stretch of
          * a `PangoFontFace`. The size field of the resulting font description
@@ -490,17 +522,25 @@ declare namespace imports.gi.Pango {
         list_sizes(sizes: number[], n_sizes: number): void;
     }
 
-    var FontFace: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontFace} instead.
+     */
+    type FontFaceMixin = IFontFace & GObject.IObject;
 
     /**
-     * A `PangoFontFamily` is used to represent a family of related
-     * font faces.
-     * 
-     * The font faces in a family share a common design, but differ in
-     * slant, weight, width or other aspects.
+     * A `PangoFontFace` is used to represent a group of fonts with
+     * the same family, slant, weight, and width, but varying sizes.
      */
-    interface FontFamily extends GObject.Object {
+    interface FontFace extends FontFaceMixin { }
+
+    class FontFace {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontFamily} instead.
+     */
+    interface IFontFamily {
         /**
          * Gets the `PangoFontFace` of #family with the given name.
          * @param name the name of a face. If the name is %NULL,
@@ -555,17 +595,28 @@ declare namespace imports.gi.Pango {
         list_faces(faces: FontFace[], n_faces: number): void;
     }
 
-    var FontFamily: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontFamily} instead.
+     */
+    type FontFamilyMixin = IFontFamily & GObject.IObject;
 
     /**
-     * A `PangoFontMap` represents the set of fonts available for a
-     * particular rendering system.
+     * A `PangoFontFamily` is used to represent a family of related
+     * font faces.
      * 
-     * This is a virtual object with implementations being specific to
-     * particular rendering systems.
+     * The font faces in a family share a common design, but differ in
+     * slant, weight, width or other aspects.
      */
-    interface FontMap extends GObject.Object {
+    interface FontFamily extends FontFamilyMixin { }
+
+    class FontFamily {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontMap} instead.
+     */
+    interface IFontMap {
         /**
          * Forces a change in the context, which will cause any `PangoContext`
          * using this fontmap to change.
@@ -638,18 +689,28 @@ declare namespace imports.gi.Pango {
         load_fontset(context: Context, desc: FontDescription, language: Language): Fontset;
     }
 
-    var FontMap: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontMap} instead.
+     */
+    type FontMapMixin = IFontMap & GObject.IObject;
 
     /**
-     * A `PangoFontset` represents a set of `PangoFont` to use when rendering text.
+     * A `PangoFontMap` represents the set of fonts available for a
+     * particular rendering system.
      * 
-     * A `PAngoFontset` is the result of resolving a `PangoFontDescription`
-     * against a particular `PangoContext`. It has operations for finding the
-     * component font for a particular Unicode character, and for finding a
-     * composite set of metrics for the entire fontset.
+     * This is a virtual object with implementations being specific to
+     * particular rendering systems.
      */
-    interface Fontset extends GObject.Object {
+    interface FontMap extends FontMapMixin { }
+
+    class FontMap {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Fontset} instead.
+     */
+    interface IFontset {
         /**
          * Iterates through all the fonts in a fontset, calling #func for
          * each one.
@@ -673,17 +734,29 @@ declare namespace imports.gi.Pango {
         get_metrics(): FontMetrics;
     }
 
-    var Fontset: {
-    }
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Fontset} instead.
+     */
+    type FontsetMixin = IFontset & GObject.IObject;
 
     /**
-     * `PangoFontsetSimple` is a implementation of the abstract
-     * `PangoFontset` base class as an array of fonts.
+     * A `PangoFontset` represents a set of `PangoFont` to use when rendering text.
      * 
-     * When creating a `PangoFontsetSimple`, you have to provide
-     * the array of fonts that make up the fontset.
+     * A `PAngoFontset` is the result of resolving a `PangoFontDescription`
+     * against a particular `PangoContext`. It has operations for finding the
+     * component font for a particular Unicode character, and for finding a
+     * composite set of metrics for the entire fontset.
      */
-    interface FontsetSimple extends Fontset {
+    interface Fontset extends FontsetMixin { }
+
+    class Fontset {
+        constructor();
+    }
+
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontsetSimple} instead.
+     */
+    interface IFontsetSimple {
         /**
          * Adds a font to the fontset.
          * @param font a `PangoFont`.
@@ -696,43 +769,34 @@ declare namespace imports.gi.Pango {
         size(): number;
     }
 
-    var FontsetSimple: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link FontsetSimple} instead.
+     */
+    type FontsetSimpleMixin = IFontsetSimple & IFontset;
+
+    /**
+     * `PangoFontsetSimple` is a implementation of the abstract
+     * `PangoFontset` base class as an array of fonts.
+     * 
+     * When creating a `PangoFontsetSimple`, you have to provide
+     * the array of fonts that make up the fontset.
+     */
+    interface FontsetSimple extends FontsetSimpleMixin { }
+
+    class FontsetSimple {
+        constructor();
         /**
          * Creates a new `PangoFontsetSimple` for the given language.
          * @param language a `PangoLanguage` tag
          * @returns the newly allocated `PangoFontsetSimple`
          */
-        new(language: Language): FontsetSimple;
+        static new(language: Language): FontsetSimple;
     }
 
-    /**
-     * A `PangoLayout` structure represents an entire paragraph of text.
-     * 
-     * While complete access to the layout capabilities of Pango is provided
-     * using the detailed interfaces for itemization and shaping, using
-     * that functionality directly involves writing a fairly large amount
-     * of code. `PangoLayout` provides a high-level driver for formatting
-     * entire paragraphs of text at once. This includes paragraph-level
-     * functionality such as line breaking, justification, alignment and
-     * ellipsization.
-     * 
-     * A `PangoLayout` is initialized with a `PangoContext`, UTF-8 string
-     * and set of attributes for that string. Once that is done, the set of
-     * formatted lines can be extracted from the object, the layout can be
-     * rendered, and conversion between logical character positions within
-     * the layout's text, and the physical position of the resulting glyphs
-     * can be made.
-     * 
-     * There are a number of parameters to adjust the formatting of a
-     * `PangoLayout`. The following image shows adjustable parameters
-     * (on the left) and font metrics (on the right):
-     * 
-     * ![Pango Layout Parameters](layout.png)
-     * 
-     * It is possible, as well, to ignore the 2-D setup,
-     * and simply treat the results of a `PangoLayout` as a list of lines.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Layout} instead.
      */
-    interface Layout extends GObject.Object {
+    interface ILayout {
         /**
          * Forces recomputation of any state in the `PangoLayout` that
          * might depend on the layout's context.
@@ -1420,25 +1484,55 @@ declare namespace imports.gi.Pango {
         xy_to_index(_x: number, _y: number, index_: number, trailing: number): boolean;
     }
 
-    var Layout: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Layout} instead.
+     */
+    type LayoutMixin = ILayout & GObject.IObject;
+
+    /**
+     * A `PangoLayout` structure represents an entire paragraph of text.
+     * 
+     * While complete access to the layout capabilities of Pango is provided
+     * using the detailed interfaces for itemization and shaping, using
+     * that functionality directly involves writing a fairly large amount
+     * of code. `PangoLayout` provides a high-level driver for formatting
+     * entire paragraphs of text at once. This includes paragraph-level
+     * functionality such as line breaking, justification, alignment and
+     * ellipsization.
+     * 
+     * A `PangoLayout` is initialized with a `PangoContext`, UTF-8 string
+     * and set of attributes for that string. Once that is done, the set of
+     * formatted lines can be extracted from the object, the layout can be
+     * rendered, and conversion between logical character positions within
+     * the layout's text, and the physical position of the resulting glyphs
+     * can be made.
+     * 
+     * There are a number of parameters to adjust the formatting of a
+     * `PangoLayout`. The following image shows adjustable parameters
+     * (on the left) and font metrics (on the right):
+     * 
+     * ![Pango Layout Parameters](layout.png)
+     * 
+     * It is possible, as well, to ignore the 2-D setup,
+     * and simply treat the results of a `PangoLayout` as a list of lines.
+     */
+    interface Layout extends LayoutMixin { }
+
+    class Layout {
+        constructor();
         /**
          * Create a new `PangoLayout` object with attributes initialized to
          * default values for a particular `PangoContext`.
          * @param context a `PangoContext`
          * @returns the newly allocated `PangoLayout`
          */
-        new(context: Context): Layout;
+        static new(context: Context): Layout;
     }
 
-    /**
-     * `PangoRenderer` is a base class for objects that can render text
-     * provided as `PangoGlyphString` or `PangoLayout`.
-     * 
-     * By subclassing `PangoRenderer` and overriding operations such as
-     * #draw_glyphs and #draw_rectangle, renderers for particular font
-     * backends and destinations can be created.
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Renderer} instead.
      */
-    interface Renderer extends GObject.Object {
+    interface IRenderer {
         /**
          * Does initial setup before rendering operations on #renderer.
          * 
@@ -1664,7 +1758,23 @@ declare namespace imports.gi.Pango {
         set_matrix(matrix: Matrix): void;
     }
 
-    var Renderer: {
+    /** This construct is only for enabling class multi-inheritance,
+     * use {@link Renderer} instead.
+     */
+    type RendererMixin = IRenderer & GObject.IObject;
+
+    /**
+     * `PangoRenderer` is a base class for objects that can render text
+     * provided as `PangoGlyphString` or `PangoLayout`.
+     * 
+     * By subclassing `PangoRenderer` and overriding operations such as
+     * #draw_glyphs and #draw_rectangle, renderers for particular font
+     * backends and destinations can be created.
+     */
+    interface Renderer extends RendererMixin { }
+
+    class Renderer {
+        constructor();
     }
 
     /**
@@ -1847,6 +1957,14 @@ declare namespace imports.gi.Pango {
      * should not use a single `PangoAttrList` for more than one paragraph of text.
      */
     class AttrList {
+        /**
+         * Create a new empty attribute list with a reference
+         * count of one.
+         * @returns the newly allocated
+         *   `PangoAttrList`, which should be freed with
+         *   [method#Pango.AttrList.unref]
+         */
+        static new(): AttrList;
         /**
          * Insert the given attribute into the `PangoAttrList`.
          * 
@@ -2157,6 +2275,12 @@ declare namespace imports.gi.Pango {
      * a font to load.
      */
     class FontDescription {
+        /**
+         * Creates a new font description structure with all fields unset.
+         * @returns the newly allocated `PangoFontDescription`, which
+         *   should be freed using [method#Pango.FontDescription.free].
+         */
+        static new(): FontDescription;
         /**
          * Determines if the style attributes of #new_match are a closer match
          * for #desc than those of #old_match are, or if #old_match is %NULL,
@@ -2886,6 +3010,12 @@ declare namespace imports.gi.Pango {
      * which simplifies memory management.
      */
     class GlyphString {
+        /**
+         * Create a new `PangoGlyphString`.
+         * @returns the newly allocated `PangoGlyphString`, which
+         *   should be freed with [method#Pango.GlyphString.free].
+         */
+        static new(): GlyphString;
         public num_glyphs: number;
         public glyphs: GlyphInfo[];
         public log_clusters: number;
@@ -3010,6 +3140,12 @@ declare namespace imports.gi.Pango {
      * with [func#itemize].
      */
     class Item {
+        /**
+         * Creates a new `PangoItem` structure initialized to default values.
+         * @returns the newly allocated `PangoItem`, which should
+         *   be freed with [method#Pango.Item.free].
+         */
+        static new(): Item;
         public offset: number;
         public length: number;
         public num_chars: number;
@@ -3680,6 +3816,21 @@ declare namespace imports.gi.Pango {
      */
     class ScriptIter {
         /**
+         * Create a new `PangoScriptIter`, used to break a string of
+         * Unicode text into runs by Unicode script.
+         * 
+         * No copy is made of #text, so the caller needs to make
+         * sure it remains valid until the iterator is freed with
+         * [method#Pango.ScriptIter.free].
+         * @param text a UTF-8 string
+         * @param length length of #text, or -1 if #text is nul-terminated.
+         * @returns the new script iterator, initialized
+         *  to point at the first range in the text, which should be
+         *  freed with [method#Pango.ScriptIter.free]. If the string is
+         *  empty, it will point at an empty range.
+         */
+        static new(text: string, length: number): ScriptIter;
+        /**
          * Frees a `PangoScriptIter`.
          */
         public free(): void;
@@ -3714,6 +3865,30 @@ declare namespace imports.gi.Pango {
      * Each tab stop has an alignment and a position.
      */
     class TabArray {
+        /**
+         * Creates an array of #initial_size tab stops.
+         * 
+         * Tab stops are specified in pixel units if #positions_in_pixels is %TRUE,
+         * otherwise in Pango units. All stops are initially at position 0.
+         * @param initial_size Initial number of tab stops to allocate, can be 0
+         * @param positions_in_pixels whether positions are in pixel units
+         * @returns the newly allocated `PangoTabArray`, which should
+         *   be freed with [method#Pango.TabArray.free].
+         */
+        static new(initial_size: number, positions_in_pixels: boolean): TabArray;
+        /**
+         * Creates a `PangoTabArray` and allows you to specify the alignment
+         * and position of each tab stop.
+         * 
+         * You **must** provide an alignment and position for #size tab stops.
+         * @param size number of tab stops in the array
+         * @param positions_in_pixels whether positions are in pixel units
+         * @param first_alignment alignment of first tab stop
+         * @param first_position position of first tab stop
+         * @returns the newly allocated `PangoTabArray`, which should
+         *   be freed with [method#Pango.TabArray.free].
+         */
+        static new_with_positions(size: number, positions_in_pixels: boolean, first_alignment: TabAlign, first_position: number): TabArray;
         /**
          * Copies a `PangoTabArray`.
          * @returns the newly allocated `PangoTabArray`, which should
@@ -5054,10 +5229,9 @@ declare namespace imports.gi.Pango {
     interface AttrDataCopyFunc {
         /**
          * Type of a function that can duplicate user data for an attribute.
-         * @param user_data user data to copy
          * @returns new copy of #user_data.
          */
-        (user_data: any): any;
+        (): any;
     }
 
     /**
@@ -5067,11 +5241,10 @@ declare namespace imports.gi.Pango {
         /**
          * Type of a function filtering a list of attributes.
          * @param attribute a Pango attribute
-         * @param user_data user data passed to the function
          * @returns %TRUE if the attribute should be selected for
          *   filtering, %FALSE otherwise.
          */
-        (attribute: Attribute, user_data: any): boolean;
+        (attribute: Attribute): boolean;
     }
 
     /**
@@ -5084,10 +5257,9 @@ declare namespace imports.gi.Pango {
          * fonts in a fontset.
          * @param fontset a `PangoFontset`
          * @param font a font from #fontset
-         * @param user_data callback data
          * @returns if %TRUE, stop iteration and return immediately.
          */
-        (fontset: Fontset, font: Font, user_data: any): boolean;
+        (fontset: Fontset, font: Font): boolean;
     }
 
     /**
@@ -5959,7 +6131,7 @@ declare namespace imports.gi.Pango {
      * @param accel_char address of return location for accelerator char
      * @returns %FALSE if #error is set, otherwise %TRUE
      */
-    function parse_markup(markup_text: string, length: number, accel_marker: string, attr_list?: AttrList, text?: string, accel_char?: string): boolean;
+    function parse_markup(markup_text: string, length: number, accel_marker: string, attr_list: AttrList, text: string, accel_char: string): boolean;
 
     /**
      * Parses a font stretch.

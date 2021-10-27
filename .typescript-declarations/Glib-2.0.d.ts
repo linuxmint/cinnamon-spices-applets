@@ -101,9 +101,8 @@ declare namespace imports.gi.GLib {
          * For an example of #func see g_async_queue_sort().
          * @param data the #data to push into the #queue
          * @param _func the #GCompareDataFunc is used to sort #queue
-         * @param user_data user data passed to #func.
          */
-        public push_sorted(data: any, _func: CompareDataFunc, user_data: any): void;
+        public push_sorted(data: any, _func: CompareDataFunc): void;
         /**
          * Inserts #data into #queue using #func to determine the new
          * position.
@@ -122,9 +121,8 @@ declare namespace imports.gi.GLib {
          * For an example of #func see g_async_queue_sort().
          * @param data the #data to push into the #queue
          * @param _func the #GCompareDataFunc is used to sort #queue
-         * @param user_data user data passed to #func.
          */
-        public push_sorted_unlocked(data: any, _func: CompareDataFunc, user_data: any): void;
+        public push_sorted_unlocked(data: any, _func: CompareDataFunc): void;
         /**
          * Pushes the #data into the #queue. #data must not be %NULL.
          * 
@@ -180,9 +178,8 @@ declare namespace imports.gi.GLib {
          *  return (id1 > id2 ? +1 : id1 == id2 ? 0 : -1);
          * ]|
          * @param _func the #GCompareDataFunc is used to sort #queue
-         * @param user_data user data passed to #func
          */
-        public sort(_func: CompareDataFunc, user_data: any): void;
+        public sort(_func: CompareDataFunc): void;
         /**
          * Sorts #queue using #func.
          * 
@@ -194,9 +191,8 @@ declare namespace imports.gi.GLib {
          * 
          * This function must be called while holding the #queue's lock.
          * @param _func the #GCompareDataFunc is used to sort #queue
-         * @param user_data user data passed to #func
          */
-        public sort_unlocked(_func: CompareDataFunc, user_data: any): void;
+        public sort_unlocked(_func: CompareDataFunc): void;
         /**
          * Pops data from the #queue. If the queue is empty, blocks until
          * #end_time or until data becomes available.
@@ -885,6 +881,59 @@ declare namespace imports.gi.GLib {
      */
     class Bytes {
         /**
+         * Creates a new #GBytes from #data.
+         * 
+         * #data is copied. If #size is 0, #data may be %NULL.
+         * @param data 
+         * @param size the size of #data
+         * @returns a new #GBytes
+         */
+        static new(data: number[], size: number): Bytes;
+        /**
+         * Creates a new #GBytes from static data.
+         * 
+         * #data must be static (ie: never modified or freed). It may be %NULL if #size
+         * is 0.
+         * @param data 
+         * @param size the size of #data
+         * @returns a new #GBytes
+         */
+        static new_static(data: number[], size: number): Bytes;
+        /**
+         * Creates a new #GBytes from #data.
+         * 
+         * After this call, #data belongs to the bytes and may no longer be
+         * modified by the caller.  g_free() will be called on #data when the
+         * bytes is no longer in use. Because of this #data must have been created by
+         * a call to g_malloc(), g_malloc0() or g_realloc() or by one of the many
+         * functions that wrap these calls (such as g_new(), g_strdup(), etc).
+         * 
+         * For creating #GBytes with memory from other allocators, see
+         * g_bytes_new_with_free_func().
+         * 
+         * #data may be %NULL if #size is 0.
+         * @param data 
+         * @param size the size of #data
+         * @returns a new #GBytes
+         */
+        static new_take(data: number[], size: number): Bytes;
+        /**
+         * Creates a #GBytes from #data.
+         * 
+         * When the last reference is dropped, #free_func will be called with the
+         * #user_data argument.
+         * 
+         * #data must not be modified after this call is made until #free_func has
+         * been called to indicate that the bytes is no longer in use.
+         * 
+         * #data may be %NULL if #size is 0.
+         * @param data 
+         * @param size the size of #data
+         * @param free_func the function to call to release the data
+         * @returns a new #GBytes
+         */
+        static new_with_free_func(data: number[], size: number, free_func: DestroyNotify): Bytes;
+        /**
          * Compares the two #GBytes values.
          * 
          * This function can be used to sort GBytes instances in lexicographical order.
@@ -1027,6 +1076,25 @@ declare namespace imports.gi.GLib {
      * a GChecksum, use g_checksum_free().
      */
     class Checksum {
+        /**
+         * Creates a new #GChecksum, using the checksum algorithm #checksum_type.
+         * If the #checksum_type is not known, %NULL is returned.
+         * A #GChecksum can be used to compute the checksum, or digest, of an
+         * arbitrary binary blob, using different hashing algorithms.
+         * 
+         * A #GChecksum works by feeding a binary blob through g_checksum_update()
+         * until there is data to be checked; the digest can then be extracted
+         * using g_checksum_get_string(), which will return the checksum as a
+         * hexadecimal string; or g_checksum_get_digest(), which will return a
+         * vector of raw bytes. Once either g_checksum_get_string() or
+         * g_checksum_get_digest() have been called on a #GChecksum, the checksum
+         * will be closed and it won't be possible to call g_checksum_update()
+         * on it anymore.
+         * @param checksum_type the desired type of checksum
+         * @returns the newly created #GChecksum, or %NULL.
+         *   Use g_checksum_free() to free the memory allocated by it.
+         */
+        static new(checksum_type: ChecksumType): Checksum;
         /**
          * Copies a #GChecksum. If #checksum has been closed, by calling
          * g_checksum_get_string() or g_checksum_get_digest(), the copied
@@ -1280,6 +1348,32 @@ declare namespace imports.gi.GLib {
      * and year.
      */
     class Date {
+        /**
+         * Allocates a #GDate and initializes
+         * it to a safe state. The new date will
+         * be cleared (as if you'd called g_date_clear()) but invalid (it won't
+         * represent an existing day). Free the return value with g_date_free().
+         * @returns a newly-allocated #GDate
+         */
+        static new(): Date;
+        /**
+         * Like g_date_new(), but also sets the value of the date. Assuming the
+         * day-month-year triplet you pass in represents an existing day, the
+         * returned date will be valid.
+         * @param day day of the month
+         * @param month month of the year
+         * @param year year
+         * @returns a newly-allocated #GDate initialized with #day, #month, and #year
+         */
+        static new_dmy(day: DateDay, month: DateMonth, year: DateYear): Date;
+        /**
+         * Like g_date_new(), but also sets the value of the date. Assuming the
+         * Julian day number you pass in is valid (greater than 0, less than an
+         * unreasonably large number), the returned date will be valid.
+         * @param julian_day days since January 1, Year 1
+         * @returns a newly-allocated #GDate initialized with #julian_day
+         */
+        static new_julian(julian_day: number): Date;
         public julian_days: number;
         public julian: number;
         public dmy: number;
@@ -1548,6 +1642,219 @@ declare namespace imports.gi.GLib {
      * An opaque structure that represents a date and time, including a time zone.
      */
     class DateTime {
+        /**
+         * Creates a new #GDateTime corresponding to the given date and time in
+         * the time zone #tz.
+         * 
+         * The #year must be between 1 and 9999, #month between 1 and 12 and #day
+         * between 1 and 28, 29, 30 or 31 depending on the month and the year.
+         * 
+         * #hour must be between 0 and 23 and #minute must be between 0 and 59.
+         * 
+         * #seconds must be at least 0.0 and must be strictly less than 60.0.
+         * It will be rounded down to the nearest microsecond.
+         * 
+         * If the given time is not representable in the given time zone (for
+         * example, 02:30 on March 14th 2010 in Toronto, due to daylight savings
+         * time) then the time will be rounded up to the nearest existing time
+         * (in this case, 03:00).  If this matters to you then you should verify
+         * the return value for containing the same as the numbers you gave.
+         * 
+         * In the case that the given time is ambiguous in the given time zone
+         * (for example, 01:30 on November 7th 2010 in Toronto, due to daylight
+         * savings time) then the time falling within standard (ie:
+         * non-daylight) time is taken.
+         * 
+         * It not considered a programmer error for the values to this function
+         * to be out of range, but in the case that they are, the function will
+         * return %NULL.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param tz a #GTimeZone
+         * @param year the year component of the date
+         * @param month the month component of the date
+         * @param day the day component of the date
+         * @param hour the hour component of the date
+         * @param minute the minute component of the date
+         * @param seconds the number of seconds past the minute
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new(tz: TimeZone, year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to the given
+         * [ISO 8601 formatted string](https://en.wikipedia.org/wiki/ISO_8601)
+         * #text. ISO 8601 strings of the form <date><sep><time><tz> are supported, with
+         * some extensions from [RFC 3339](https://tools.ietf.org/html/rfc3339) as
+         * mentioned below.
+         * 
+         * Note that as #GDateTime "is oblivious to leap seconds", leap seconds information
+         * in an ISO-8601 string will be ignored, so a `23:59:60` time would be parsed as
+         * `23:59:59`.
+         * 
+         * <sep> is the separator and can be either 'T', 't' or ' '. The latter two
+         * separators are an extension from
+         * [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6).
+         * 
+         * <date> is in the form:
+         * 
+         * - `YYYY-MM-DD` - Year/month/day, e.g. 2016-08-24.
+         * - `YYYYMMDD` - Same as above without dividers.
+         * - `YYYY-DDD` - Ordinal day where DDD is from 001 to 366, e.g. 2016-237.
+         * - `YYYYDDD` - Same as above without dividers.
+         * - `YYYY-Www-D` - Week day where ww is from 01 to 52 and D from 1-7,
+         *   e.g. 2016-W34-3.
+         * - `YYYYWwwD` - Same as above without dividers.
+         * 
+         * <time> is in the form:
+         * 
+         * - `hh:mm:ss(.sss)` - Hours, minutes, seconds (subseconds), e.g. 22:10:42.123.
+         * - `hhmmss(.sss)` - Same as above without dividers.
+         * 
+         * <tz> is an optional timezone suffix of the form:
+         * 
+         * - `Z` - UTC.
+         * - `+hh:mm` or `-hh:mm` - Offset from UTC in hours and minutes, e.g. +12:00.
+         * - `+hh` or `-hh` - Offset from UTC in hours, e.g. +12.
+         * 
+         * If the timezone is not provided in #text it must be provided in #default_tz
+         * (this field is otherwise ignored).
+         * 
+         * This call can fail (returning %NULL) if #text is not a valid ISO 8601
+         * formatted string.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param text an ISO 8601 formatted time string.
+         * @param default_tz a #GTimeZone to use if the text doesn't contain a
+         *                          timezone, or %NULL.
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_from_iso8601(text: string, default_tz: TimeZone): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to the given #GTimeVal #tv in the
+         * local time zone.
+         * 
+         * The time contained in a #GTimeVal is always stored in the form of
+         * seconds elapsed since 1970-01-01 00:00:00 UTC, regardless of the
+         * local time offset.
+         * 
+         * This call can fail (returning %NULL) if #tv represents a time outside
+         * of the supported range of #GDateTime.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param tv a #GTimeVal
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_from_timeval_local(tv: TimeVal): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to the given #GTimeVal #tv in UTC.
+         * 
+         * The time contained in a #GTimeVal is always stored in the form of
+         * seconds elapsed since 1970-01-01 00:00:00 UTC.
+         * 
+         * This call can fail (returning %NULL) if #tv represents a time outside
+         * of the supported range of #GDateTime.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param tv a #GTimeVal
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_from_timeval_utc(tv: TimeVal): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to the given Unix time #t in the
+         * local time zone.
+         * 
+         * Unix time is the number of seconds that have elapsed since 1970-01-01
+         * 00:00:00 UTC, regardless of the local time offset.
+         * 
+         * This call can fail (returning %NULL) if #t represents a time outside
+         * of the supported range of #GDateTime.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param _t the Unix time
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_from_unix_local(_t: number): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to the given Unix time #t in UTC.
+         * 
+         * Unix time is the number of seconds that have elapsed since 1970-01-01
+         * 00:00:00 UTC.
+         * 
+         * This call can fail (returning %NULL) if #t represents a time outside
+         * of the supported range of #GDateTime.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param _t the Unix time
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_from_unix_utc(_t: number): DateTime;
+        /**
+         * Creates a new #GDateTime corresponding to the given date and time in
+         * the local time zone.
+         * 
+         * This call is equivalent to calling g_date_time_new() with the time
+         * zone returned by g_time_zone_new_local().
+         * @param year the year component of the date
+         * @param month the month component of the date
+         * @param day the day component of the date
+         * @param hour the hour component of the date
+         * @param minute the minute component of the date
+         * @param seconds the number of seconds past the minute
+         * @returns a #GDateTime, or %NULL
+         */
+        static new_local(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to this exact instant in the given
+         * time zone #tz.  The time is as accurate as the system allows, to a
+         * maximum accuracy of 1 microsecond.
+         * 
+         * This function will always succeed unless GLib is still being used after the
+         * year 9999.
+         * 
+         * You should release the return value by calling g_date_time_unref()
+         * when you are done with it.
+         * @param tz a #GTimeZone
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_now(tz: TimeZone): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to this exact instant in the local
+         * time zone.
+         * 
+         * This is equivalent to calling g_date_time_new_now() with the time
+         * zone returned by g_time_zone_new_local().
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_now_local(): DateTime;
+        /**
+         * Creates a #GDateTime corresponding to this exact instant in UTC.
+         * 
+         * This is equivalent to calling g_date_time_new_now() with the time
+         * zone returned by g_time_zone_new_utc().
+         * @returns a new #GDateTime, or %NULL
+         */
+        static new_now_utc(): DateTime;
+        /**
+         * Creates a new #GDateTime corresponding to the given date and time in
+         * UTC.
+         * 
+         * This call is equivalent to calling g_date_time_new() with the time
+         * zone returned by g_time_zone_new_utc().
+         * @param year the year component of the date
+         * @param month the month component of the date
+         * @param day the day component of the date
+         * @param hour the hour component of the date
+         * @param minute the minute component of the date
+         * @param seconds the number of seconds past the minute
+         * @returns a #GDateTime, or %NULL
+         */
+        static new_utc(year: number, month: number, day: number, hour: number, minute: number, seconds: number): DateTime;
         /**
          * Creates a copy of #datetime and adds the specified timespan to the copy.
          * @param timespan a #GTimeSpan
@@ -2055,6 +2362,36 @@ declare namespace imports.gi.GLib {
      * an error that has occurred.
      */
     class Error {
+        /**
+         * Creates a new #GError with the given #domain and #code,
+         * and a message formatted with #format.
+         * @param domain error domain
+         * @param code error code
+         * @param format printf()-style format for error message
+         * @returns a new #GError
+         */
+        static new(domain: Quark, code: number, format: string): Error;
+        /**
+         * Creates a new #GError; unlike g_error_new(), #message is
+         * not a printf()-style format string. Use this function if
+         * #message contains text you don't have control over,
+         * that could include printf() escape sequences.
+         * @param domain error domain
+         * @param code error code
+         * @param message error message
+         * @returns a new #GError
+         */
+        static new_literal(domain: Quark, code: number, message: string): Error;
+        /**
+         * Creates a new #GError with the given #domain and #code,
+         * and a message formatted with #format.
+         * @param domain error domain
+         * @param code error code
+         * @param format printf()-style format for error message
+         * @param args #va_list of parameters for the message format
+         * @returns a new #GError
+         */
+        static new_valist(domain: Quark, code: number, format: string, args: any[]): Error;
         public domain: Quark;
         public code: number;
         public message: string;
@@ -2374,6 +2711,45 @@ declare namespace imports.gi.GLib {
      * functions.
      */
     class IOChannel {
+        /**
+         * Open a file #filename as a #GIOChannel using mode #mode. This
+         * channel will be closed when the last reference to it is dropped,
+         * so there is no need to call g_io_channel_close() (though doing
+         * so will not cause problems, as long as no attempt is made to
+         * access the channel after it is closed).
+         * @param filename A string containing the name of a file
+         * @param mode One of "r", "w", "a", "r+", "w+", "a+". These have
+         *        the same meaning as in fopen()
+         * @returns A #GIOChannel on success, %NULL on failure.
+         */
+        static new_file(filename: string, mode: string): IOChannel;
+        /**
+         * Creates a new #GIOChannel given a file descriptor. On UNIX systems
+         * this works for plain files, pipes, and sockets.
+         * 
+         * The returned #GIOChannel has a reference count of 1.
+         * 
+         * The default encoding for #GIOChannel is UTF-8. If your application
+         * is reading output from a command using via pipe, you may need to set
+         * the encoding to the encoding of the current locale (see
+         * g_get_charset()) with the g_io_channel_set_encoding() function.
+         * By default, the fd passed will not be closed when the final reference
+         * to the #GIOChannel data structure is dropped.
+         * 
+         * If you want to read raw binary data without interpretation, then
+         * call the g_io_channel_set_encoding() function with %NULL for the
+         * encoding argument.
+         * 
+         * This function is available in GLib on Windows, too, but you should
+         * avoid using it on Windows. The domain of file descriptors and
+         * sockets overlap. There is no way for GLib to know which one you mean
+         * in case the argument you pass to this function happens to be both a
+         * valid file descriptor and socket. If that happens a warning is
+         * issued, and GLib assumes that it is the file descriptor you mean.
+         * @param fd a file descriptor.
+         * @returns a new #GIOChannel.
+         */
+        static unix_new(fd: number): IOChannel;
         public ref_count: number;
         public funcs: IOFuncs;
         public encoding: string;
@@ -2727,6 +3103,14 @@ declare namespace imports.gi.GLib {
      * and should not be accessed directly.
      */
     class KeyFile {
+        /**
+         * Creates a new empty #GKeyFile object. Use
+         * g_key_file_load_from_file(), g_key_file_load_from_data(),
+         * g_key_file_load_from_dirs() or g_key_file_load_from_data_dirs() to
+         * read an existing key file.
+         * @returns an empty #GKeyFile.
+         */
+        static new(): KeyFile;
         /**
          * Clears all keys and groups from #key_file, and decreases the
          * reference count by 1. If the reference count reaches zero,
@@ -3295,6 +3679,11 @@ declare namespace imports.gi.GLib {
      */
     class MainContext {
         /**
+         * Creates a new #GMainContext structure.
+         * @returns the new #GMainContext
+         */
+        static new(): MainContext;
+        /**
          * Tries to become the owner of the specified context.
          * If some other thread is the owner of the context,
          * returns %FALSE immediately. Ownership is properly
@@ -3346,10 +3735,9 @@ declare namespace imports.gi.GLib {
          * multiple sources exist with the same source function and user data,
          * the first one found will be returned.
          * @param funcs the #source_funcs passed to g_source_new().
-         * @param user_data the user data from the callback.
          * @returns the source, if one was found, otherwise %NULL
          */
-        public find_source_by_funcs_user_data(funcs: SourceFuncs, user_data: any): Source;
+        public find_source_by_funcs_user_data(funcs: SourceFuncs): Source;
         /**
          * Finds a #GSource given a pair of context and ID.
          * 
@@ -3371,10 +3759,9 @@ declare namespace imports.gi.GLib {
          * Finds a source with the given user data for the callback.  If
          * multiple sources exist with the same user data, the first
          * one found will be returned.
-         * @param user_data the user_data for the callback.
          * @returns the source, if one was found, otherwise %NULL
          */
-        public find_source_by_user_data(user_data: any): Source;
+        public find_source_by_user_data(): Source;
         /**
          * Gets the poll function set by g_main_context_set_poll_func().
          * @returns the poll function
@@ -3612,6 +3999,15 @@ declare namespace imports.gi.GLib {
      */
     class MainLoop {
         /**
+         * Creates a new #GMainLoop structure.
+         * @param context a #GMainContext  (if %NULL, the default context will be used).
+         * @param is_running set to %TRUE to indicate that the loop is running. This
+         * is not very important since calling g_main_loop_run() will set this to
+         * %TRUE anyway.
+         * @returns a new #GMainLoop.
+         */
+        static new(context: MainContext, is_running: boolean): MainLoop;
+        /**
          * Returns the #GMainContext of #loop.
          * @returns the #GMainContext of #loop
          */
@@ -3654,6 +4050,48 @@ declare namespace imports.gi.GLib {
      * not be accessed directly.
      */
     class MappedFile {
+        /**
+         * Maps a file into memory. On UNIX, this is using the mmap() function.
+         * 
+         * If #writable is %TRUE, the mapped buffer may be modified, otherwise
+         * it is an error to modify the mapped buffer. Modifications to the buffer
+         * are not visible to other processes mapping the same file, and are not
+         * written back to the file.
+         * 
+         * Note that modifications of the underlying file might affect the contents
+         * of the #GMappedFile. Therefore, mapping should only be used if the file
+         * will not be modified, or if all modifications of the file are done
+         * atomically (e.g. using g_file_set_contents()).
+         * 
+         * If #filename is the name of an empty, regular file, the function
+         * will successfully return an empty #GMappedFile. In other cases of
+         * size 0 (e.g. device files such as /dev/null), #error will be set
+         * to the #GFileError value #G_FILE_ERROR_INVAL.
+         * @param filename The path of the file to load, in the GLib
+         *     filename encoding
+         * @param writable whether the mapping should be writable
+         * @returns a newly allocated #GMappedFile which must be unref'd
+         *    with g_mapped_file_unref(), or %NULL if the mapping failed.
+         */
+        static new(filename: string, writable: boolean): MappedFile;
+        /**
+         * Maps a file into memory. On UNIX, this is using the mmap() function.
+         * 
+         * If #writable is %TRUE, the mapped buffer may be modified, otherwise
+         * it is an error to modify the mapped buffer. Modifications to the buffer
+         * are not visible to other processes mapping the same file, and are not
+         * written back to the file.
+         * 
+         * Note that modifications of the underlying file might affect the contents
+         * of the #GMappedFile. Therefore, mapping should only be used if the file
+         * will not be modified, or if all modifications of the file are done
+         * atomically (e.g. using g_file_set_contents()).
+         * @param fd The file descriptor of the file to load
+         * @param writable whether the mapping should be writable
+         * @returns a newly allocated #GMappedFile which must be unref'd
+         *    with g_mapped_file_unref(), or %NULL if the mapping failed.
+         */
+        static new_from_fd(fd: number, writable: boolean): MappedFile;
         /**
          * This call existed before #GMappedFile had refcounting and is currently
          * exactly the same as g_mapped_file_unref().
@@ -3707,6 +4145,19 @@ declare namespace imports.gi.GLib {
      * on for more details.
      */
     class MarkupParseContext {
+        /**
+         * Creates a new parse context. A parse context is used to parse
+         * marked-up documents. You can feed any number of documents into
+         * a context, as long as no errors occur; once an error occurs,
+         * the parse context can't continue to parse text (you have to
+         * free it and create a new parse context).
+         * @param parser a #GMarkupParser
+         * @param flags one or more #GMarkupParseFlags
+         * @param user_data_dnotify user data destroy notifier called when
+         *     the parse context is freed
+         * @returns a new #GMarkupParseContext
+         */
+        static new(parser: MarkupParser, flags: MarkupParseFlags, user_data_dnotify: DestroyNotify): MarkupParseContext;
         /**
          * Signals to the #GMarkupParseContext that all data has been
          * fed into the parse context with g_markup_parse_context_parse().
@@ -3916,9 +4367,8 @@ declare namespace imports.gi.GLib {
          * }
          * ]|
          * @param parser a #GMarkupParser
-         * @param user_data user data to pass to #GMarkupParser functions
          */
-        public push(parser: MarkupParser, user_data: any): void;
+        public push(parser: MarkupParser): void;
         /**
          * Increases the reference count of #context.
          * @returns the same #context
@@ -3941,11 +4391,11 @@ declare namespace imports.gi.GLib {
      * back to its caller.
      */
     class MarkupParser {
-        start_element: { (context: MarkupParseContext, element_name: string, attribute_names: string, attribute_values: string, user_data: any): void; };
-        end_element: { (context: MarkupParseContext, element_name: string, user_data: any): void; };
-        text: { (context: MarkupParseContext, text: string, text_len: number, user_data: any): void; };
-        passthrough: { (context: MarkupParseContext, passthrough_text: string, text_len: number, user_data: any): void; };
-        error: { (context: MarkupParseContext, error: Error, user_data: any): void; };
+        start_element: { (context: MarkupParseContext, element_name: string, attribute_names: string, attribute_values: string): void; };
+        end_element: { (context: MarkupParseContext, element_name: string): void; };
+        text: { (context: MarkupParseContext, text: string, text_len: number): void; };
+        passthrough: { (context: MarkupParseContext, passthrough_text: string, text_len: number): void; };
+        error: { (context: MarkupParseContext, error: Error): void; };
     }
 
     /**
@@ -4648,6 +5098,21 @@ declare namespace imports.gi.GLib {
      */
     class OptionGroup {
         /**
+         * Creates a new #GOptionGroup.
+         * @param name the name for the option group, this is used to provide
+         *   help for the options in this group with `--help-`#name
+         * @param description a description for this group to be shown in
+         *   `--help`. This string is translated using the translation
+         *   domain or translation function of the group
+         * @param help_description a description for the `--help-`#name option.
+         *   This string is translated using the translation domain or translation function
+         *   of the group
+         * @param destroy a function that will be called to free #user_data, or %NULL
+         * @returns a newly created option group. It should be added
+         *   to a #GOptionContext or freed with g_option_group_unref().
+         */
+        static new(name: string, description: string, help_description: string, destroy: DestroyNotify): OptionGroup;
+        /**
          * Adds the options specified in #entries to #group.
          * @param entries 
          */
@@ -4714,6 +5179,12 @@ declare namespace imports.gi.GLib {
      * structure is opaque and its fields cannot be accessed directly.
      */
     class PatternSpec {
+        /**
+         * Compiles a pattern to a #GPatternSpec.
+         * @param pattern a zero-terminated UTF-8 encoded string
+         * @returns a newly-allocated #GPatternSpec
+         */
+        static new(pattern: string): PatternSpec;
         /**
          * Copies #pspec in a new #GPatternSpec.
          * @returns a copy of #pspec.
@@ -4894,9 +5365,8 @@ declare namespace imports.gi.GLib {
          * It is safe for #func to remove the element from #queue, but it must
          * not modify any part of the queue after that element.
          * @param _func the function to call for each element's data
-         * @param user_data user data to pass to #func
          */
-        public foreach(_func: Func, user_data: any): void;
+        public foreach(_func: Func): void;
         /**
          * Frees the memory allocated for the #GQueue. Only call this function
          * if #queue was created with g_queue_new(). If queue elements contain
@@ -4980,9 +5450,8 @@ declare namespace imports.gi.GLib {
          *     return 0 if the elements are equal, a negative value if the first
          *     element comes before the second, and a positive value if the second
          *     element comes before the first.
-         * @param user_data user data passed to #func
          */
-        public insert_sorted(data: any, _func: CompareDataFunc, user_data: any): void;
+        public insert_sorted(data: any, _func: CompareDataFunc): void;
         /**
          * Returns %TRUE if the queue is empty.
          * @returns %TRUE if the queue is empty
@@ -5125,9 +5594,8 @@ declare namespace imports.gi.GLib {
          *     is passed two elements of the queue and should return 0 if they are
          *     equal, a negative value if the first comes before the second, and
          *     a positive value if the second comes before the first.
-         * @param user_data user data passed to #compare_func
          */
-        public sort(compare_func: CompareDataFunc, user_data: any): void;
+        public sort(compare_func: CompareDataFunc): void;
         /**
          * Unlinks #link_ so that it will no longer be part of #queue.
          * The link is not freed.
@@ -5519,6 +5987,16 @@ declare namespace imports.gi.GLib {
      */
     class Regex {
         /**
+         * Compiles the regular expression to an internal form, and does
+         * the initial setup of the #GRegex structure.
+         * @param pattern the regular expression
+         * @param compile_options compile options for the regular expression, or 0
+         * @param match_options match options for the regular expression, or 0
+         * @returns a #GRegex structure or %NULL if an error occurred. Call
+         *   g_regex_unref() when you are done with it
+         */
+        static new(pattern: string, compile_options: RegexCompileFlags, match_options: RegexMatchFlags): Regex;
+        /**
          * Returns the number of capturing subpatterns in the pattern.
          * @returns the number of capturing subpatterns
          */
@@ -5839,10 +6317,9 @@ declare namespace imports.gi.GLib {
          * @param start_position starting index of the string to match, in bytes
          * @param match_options options for the match
          * @param _eval a function to call for each match
-         * @param user_data user data to pass to the function
          * @returns a newly allocated string containing the replacements
          */
-        public replace_eval(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags, _eval: RegexEvalCallback, user_data: any): string;
+        public replace_eval(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags, _eval: RegexEvalCallback): string;
         /**
          * Replaces all occurrences of the pattern in #regex with the
          * replacement text. #replacement is replaced literally, to
@@ -6067,9 +6544,8 @@ declare namespace imports.gi.GLib {
          * parameter.
          * @param scope_id the scope id
          * @param _func the function to call for each symbol/value pair
-         * @param user_data user data to pass to the function
          */
-        public scope_foreach_symbol(scope_id: number, _func: HFunc, user_data: any): void;
+        public scope_foreach_symbol(scope_id: number, _func: HFunc): void;
         /**
          * Looks up a symbol in a scope and return its value. If the
          * symbol is not bound in the scope, %NULL is returned.
@@ -6180,9 +6656,8 @@ declare namespace imports.gi.GLib {
          * Calls #func for each item in the sequence passing #user_data
          * to the function. #func must not modify the sequence itself.
          * @param _func the function to call for each item in #seq
-         * @param user_data user data passed to #func
          */
-        public foreach(_func: Func, user_data: any): void;
+        public foreach(_func: Func): void;
         /**
          * Frees the memory allocated for #seq. If #seq has a data destroy
          * function associated with it, that function is called on all items
@@ -6440,6 +6915,21 @@ declare namespace imports.gi.GLib {
      * representing an event source.
      */
     class Source {
+        /**
+         * Creates a new #GSource structure. The size is specified to
+         * allow creating structures derived from #GSource that contain
+         * additional data. The size passed in must be at least
+         * `sizeof (GSource)`.
+         * 
+         * The source will not initially be associated with any #GMainContext
+         * and must be added to one with g_source_attach() before it will be
+         * executed.
+         * @param source_funcs structure containing functions that implement
+         *                the sources behavior.
+         * @param struct_size size of the #GSource structure to create.
+         * @returns the newly-created #GSource.
+         */
+        static new(source_funcs: SourceFuncs, struct_size: number): Source;
         public callback_data: any;
         public callback_funcs: SourceCallbackFuncs;
         public source_funcs: SourceFuncs;
@@ -6947,7 +7437,7 @@ declare namespace imports.gi.GLib {
         public closure_marshal: SourceDummyMarshal;
         prepare: { (source: Source, timeout_: number): boolean; };
         check: { (source: Source): boolean; };
-        dispatch: { (source: Source, callback: SourceFunc, user_data: any): boolean; };
+        dispatch: { (source: Source, callback: SourceFunc): boolean; };
         finalize: { (source: Source): void; };
     }
 
@@ -6967,6 +7457,35 @@ declare namespace imports.gi.GLib {
      * The GString struct contains the public fields of a GString.
      */
     class String {
+        /**
+         * Creates a new #GString, initialized with the given string.
+         * @param init the initial text to copy into the string, or %NULL to
+         *   start with an empty string
+         * @returns the new #GString
+         */
+        static new(init: string): String;
+        /**
+         * Creates a new #GString with #len bytes of the #init buffer.
+         * Because a length is provided, #init need not be nul-terminated,
+         * and can contain embedded nul bytes.
+         * 
+         * Since this function does not stop at nul bytes, it is the caller's
+         * responsibility to ensure that #init has at least #len addressable
+         * bytes.
+         * @param init initial contents of the string
+         * @param len length of #init to use
+         * @returns a new #GString
+         */
+        static new_len(init: string, len: number): String;
+        /**
+         * Creates a new #GString, with enough space for #dfl_size
+         * bytes. This is useful if you are going to add a lot of
+         * text to the string and don't want it to be reallocated
+         * too often.
+         * @param dfl_size the default size of the space allocated to hold the string
+         * @returns the new #GString
+         */
+        static sized_new(dfl_size: number): String;
         public str: string;
         public len: number;
         public allocated_len: number;
@@ -7470,6 +7989,52 @@ declare namespace imports.gi.GLib {
      */
     class Thread {
         /**
+         * This function creates a new thread. The new thread starts by invoking
+         * #func with the argument data. The thread will run until #func returns
+         * or until g_thread_exit() is called from the new thread. The return value
+         * of #func becomes the return value of the thread, which can be obtained
+         * with g_thread_join().
+         * 
+         * The #name can be useful for discriminating threads in a debugger.
+         * It is not used for other purposes and does not have to be unique.
+         * Some systems restrict the length of #name to 16 bytes.
+         * 
+         * If the thread can not be created the program aborts. See
+         * g_thread_try_new() if you want to attempt to deal with failures.
+         * 
+         * If you are using threads to offload (potentially many) short-lived tasks,
+         * #GThreadPool may be more appropriate than manually spawning and tracking
+         * multiple #GThreads.
+         * 
+         * To free the struct returned by this function, use g_thread_unref().
+         * Note that g_thread_join() implicitly unrefs the #GThread as well.
+         * 
+         * New threads by default inherit their scheduler policy (POSIX) or thread
+         * priority (Windows) of the thread creating the new thread.
+         * 
+         * This behaviour changed in GLib 2.64: before threads on Windows were not
+         * inheriting the thread priority but were spawned with the default priority.
+         * Starting with GLib 2.64 the behaviour is now consistent between Windows and
+         * POSIX and all threads inherit their parent thread's priority.
+         * @param name an (optional) name for the new thread
+         * @param _func a function to execute in the new thread
+         * @param data an argument to supply to the new thread
+         * @returns the new #GThread
+         */
+        static new(name: string, _func: ThreadFunc, data: any): Thread;
+        /**
+         * This function is the same as g_thread_new() except that
+         * it allows for the possibility of failure.
+         * 
+         * If a thread can not be created (due to resource limits),
+         * #error is set and %NULL is returned.
+         * @param name an (optional) name for the new thread
+         * @param _func a function to execute in the new thread
+         * @param data an argument to supply to the new thread
+         * @returns the new #GThread, or %NULL if an error occurred
+         */
+        static try_new(name: string, _func: ThreadFunc, data: any): Thread;
+        /**
          * Waits until #thread finishes, i.e. the function #func, as
          * given to g_thread_new(), returns or g_thread_exit() is called.
          * If #thread has already terminated, then g_thread_join()
@@ -7611,9 +8176,8 @@ declare namespace imports.gi.GLib {
          *     a negative value if the first task should be processed before
          *     the second or a positive value if the second task should be
          *     processed first.
-         * @param user_data user data passed to #func
          */
-        public set_sort_function(_func: CompareDataFunc, user_data: any): void;
+        public set_sort_function(_func: CompareDataFunc): void;
         /**
          * Returns the number of tasks still unprocessed in #pool.
          * @returns the number of unprocessed tasks
@@ -7688,6 +8252,121 @@ declare namespace imports.gi.GLib {
      * directly.
      */
     class TimeZone {
+        /**
+         * A version of g_time_zone_new_identifier() which returns the UTC time zone
+         * if #identifier could not be parsed or loaded.
+         * 
+         * If you need to check whether #identifier was loaded successfully, use
+         * g_time_zone_new_identifier().
+         * @param identifier a timezone identifier
+         * @returns the requested timezone
+         */
+        static new(identifier: string): TimeZone;
+        /**
+         * Creates a #GTimeZone corresponding to #identifier. If #identifier cannot be
+         * parsed or loaded, %NULL is returned.
+         * 
+         * #identifier can either be an RFC3339/ISO 8601 time offset or
+         * something that would pass as a valid value for the `TZ` environment
+         * variable (including %NULL).
+         * 
+         * In Windows, #identifier can also be the unlocalized name of a time
+         * zone for standard time, for example "Pacific Standard Time".
+         * 
+         * Valid RFC3339 time offsets are `"Z"` (for UTC) or
+         * `"±hh:mm"`.  ISO 8601 additionally specifies
+         * `"±hhmm"` and `"±hh"`.  Offsets are
+         * time values to be added to Coordinated Universal Time (UTC) to get
+         * the local time.
+         * 
+         * In UNIX, the `TZ` environment variable typically corresponds
+         * to the name of a file in the zoneinfo database, an absolute path to a file
+         * somewhere else, or a string in
+         * "std offset [dst [offset],start[/time],end[/time]]" (POSIX) format.
+         * There  are  no spaces in the specification. The name of standard
+         * and daylight savings time zone must be three or more alphabetic
+         * characters. Offsets are time values to be added to local time to
+         * get Coordinated Universal Time (UTC) and should be
+         * `"[±]hh[[:]mm[:ss]]"`.  Dates are either
+         * `"Jn"` (Julian day with n between 1 and 365, leap
+         * years not counted), `"n"` (zero-based Julian day
+         * with n between 0 and 365) or `"Mm.w.d"` (day d
+         * (0 <= d <= 6) of week w (1 <= w <= 5) of month m (1 <= m <= 12), day
+         * 0 is a Sunday).  Times are in local wall clock time, the default is
+         * 02:00:00.
+         * 
+         * In Windows, the "tzn[+|–]hh[:mm[:ss]][dzn]" format is used, but also
+         * accepts POSIX format.  The Windows format uses US rules for all time
+         * zones; daylight savings time is 60 minutes behind the standard time
+         * with date and time of change taken from Pacific Standard Time.
+         * Offsets are time values to be added to the local time to get
+         * Coordinated Universal Time (UTC).
+         * 
+         * g_time_zone_new_local() calls this function with the value of the
+         * `TZ` environment variable. This function itself is independent of
+         * the value of `TZ`, but if #identifier is %NULL then `/etc/localtime`
+         * will be consulted to discover the correct time zone on UNIX and the
+         * registry will be consulted or GetTimeZoneInformation() will be used
+         * to get the local time zone on Windows.
+         * 
+         * If intervals are not available, only time zone rules from `TZ`
+         * environment variable or other means, then they will be computed
+         * from year 1900 to 2037.  If the maximum year for the rules is
+         * available and it is greater than 2037, then it will followed
+         * instead.
+         * 
+         * See
+         * [RFC3339 §5.6](http://tools.ietf.org/html/rfc3339#section-5.6)
+         * for a precise definition of valid RFC3339 time offsets
+         * (the `time-offset` expansion) and ISO 8601 for the
+         * full list of valid time offsets.  See
+         * [The GNU C Library manual](http://www.gnu.org/s/libc/manual/html_node/TZ-Variable.html)
+         * for an explanation of the possible
+         * values of the `TZ` environment variable. See
+         * [Microsoft Time Zone Index Values](http://msdn.microsoft.com/en-us/library/ms912391%28v=winembedded.11%29.aspx)
+         * for the list of time zones on Windows.
+         * 
+         * You should release the return value by calling g_time_zone_unref()
+         * when you are done with it.
+         * @param identifier a timezone identifier
+         * @returns the requested timezone, or %NULL on
+         *     failure
+         */
+        static new_identifier(identifier: string): TimeZone;
+        /**
+         * Creates a #GTimeZone corresponding to local time.  The local time
+         * zone may change between invocations to this function; for example,
+         * if the system administrator changes it.
+         * 
+         * This is equivalent to calling g_time_zone_new() with the value of
+         * the `TZ` environment variable (including the possibility of %NULL).
+         * 
+         * You should release the return value by calling g_time_zone_unref()
+         * when you are done with it.
+         * @returns the local timezone
+         */
+        static new_local(): TimeZone;
+        /**
+         * Creates a #GTimeZone corresponding to the given constant offset from UTC,
+         * in seconds.
+         * 
+         * This is equivalent to calling g_time_zone_new() with a string in the form
+         * `[+|-]hh[:mm[:ss]]`.
+         * @param seconds offset to UTC, in seconds
+         * @returns a timezone at the given offset from UTC
+         */
+        static new_offset(seconds: number): TimeZone;
+        /**
+         * Creates a #GTimeZone corresponding to UTC.
+         * 
+         * This is equivalent to calling g_time_zone_new() with a value like
+         * "Z", "UTC", "+00", etc.
+         * 
+         * You should release the return value by calling g_time_zone_unref()
+         * when you are done with it.
+         * @returns the universal timezone
+         */
+        static new_utc(): TimeZone;
         /**
          * Finds an interval within #tz that corresponds to the given #time_,
          * possibly adjusting #time_ if required to fit into an interval.
@@ -7855,6 +8534,39 @@ declare namespace imports.gi.GLib {
      */
     class Tree {
         /**
+         * Creates a new #GTree.
+         * @param key_compare_func the function used to order the nodes in the #GTree.
+         *   It should return values similar to the standard strcmp() function -
+         *   0 if the two arguments are equal, a negative value if the first argument
+         *   comes before the second, or a positive value if the first argument comes
+         *   after the second.
+         * @returns a newly allocated #GTree
+         */
+        static new(key_compare_func: CompareFunc): Tree;
+        /**
+         * Creates a new #GTree like g_tree_new() and allows to specify functions
+         * to free the memory allocated for the key and value that get called when
+         * removing the entry from the #GTree.
+         * @param key_compare_func qsort()-style comparison function
+         * @param key_compare_data data to pass to comparison function
+         * @param key_destroy_func a function to free the memory allocated for the key
+         *   used when removing the entry from the #GTree or %NULL if you don't
+         *   want to supply such a function
+         * @param value_destroy_func a function to free the memory allocated for the
+         *   value used when removing the entry from the #GTree or %NULL if you
+         *   don't want to supply such a function
+         * @returns a newly allocated #GTree
+         */
+        static new_full(key_compare_func: CompareDataFunc, key_compare_data: any, key_destroy_func: DestroyNotify, value_destroy_func: DestroyNotify): Tree;
+        /**
+         * Creates a new #GTree with a comparison function that accepts user data.
+         * See g_tree_new() for more details.
+         * @param key_compare_func qsort()-style comparison function
+         * @param key_compare_data data to pass to comparison function
+         * @returns a newly allocated #GTree
+         */
+        static new_with_data(key_compare_func: CompareDataFunc, key_compare_data: any): Tree;
+        /**
          * Removes all keys and values from the #GTree and decreases its
          * reference count by one. If keys and/or values are dynamically
          * allocated, you should either free them first or create the #GTree
@@ -7874,9 +8586,8 @@ declare namespace imports.gi.GLib {
          * the tree, then walk the list and remove each item.
          * @param _func the function to call for each node visited.
          *     If this function returns %TRUE, the traversal is stopped.
-         * @param user_data user data to pass to the function
          */
-        public foreach(_func: TraverseFunc, user_data: any): void;
+        public foreach(_func: TraverseFunc): void;
         /**
          * Calls the given function for each of the nodes in the #GTree.
          * The function is passed the pointer to the particular node, and the given
@@ -7888,9 +8599,8 @@ declare namespace imports.gi.GLib {
          * the tree, then walk the list and remove each item.
          * @param _func the function to call for each node visited.
          *     If this function returns %TRUE, the traversal is stopped.
-         * @param user_data user data to pass to the function
          */
-        public foreach_node(_func: TraverseNodeFunc, user_data: any): void;
+        public foreach_node(_func: TraverseNodeFunc): void;
         /**
          * Gets the height of a #GTree.
          * 
@@ -8048,11 +8758,10 @@ declare namespace imports.gi.GLib {
          * #search_func returns 1, searching will proceed among the key/value
          * pairs that have a larger key.
          * @param search_func a function used to search the #GTree
-         * @param user_data the data passed as the second argument to #search_func
          * @returns the value corresponding to the found key, or %NULL
          *     if the key was not found
          */
-        public search(search_func: CompareFunc, user_data: any): any;
+        public search(search_func: CompareFunc): any;
         /**
          * Searches a #GTree using #search_func.
          * 
@@ -8064,11 +8773,10 @@ declare namespace imports.gi.GLib {
          * #search_func returns 1, searching will proceed among the key/value
          * pairs that have a larger key.
          * @param search_func a function used to search the #GTree
-         * @param user_data the data passed as the second argument to #search_func
          * @returns the node corresponding to the
          *          found key, or %NULL if the key was not found
          */
-        public search_node(search_func: CompareFunc, user_data: any): TreeNode;
+        public search_node(search_func: CompareFunc): TreeNode;
         /**
          * Removes a key and its associated value from a #GTree without calling
          * the key and value destroy functions.
@@ -8085,9 +8793,8 @@ declare namespace imports.gi.GLib {
          *   function returns %TRUE, the traversal is stopped.
          * @param traverse_type the order in which nodes are visited, one of %G_IN_ORDER,
          *   %G_PRE_ORDER and %G_POST_ORDER
-         * @param user_data user data to pass to the function
          */
-        public traverse(traverse_func: TraverseFunc, traverse_type: TraverseType, user_data: any): void;
+        public traverse(traverse_func: TraverseFunc, traverse_type: TraverseType): void;
         /**
          * Decrements the reference count of #tree by one.
          * If the reference count drops to 0, all keys and values will
@@ -8707,17 +9414,458 @@ declare namespace imports.gi.GLib {
      * management for those dictionaries, but the type information would
      * be shared.
      */
-    class Variant<UnpackType = any,
-                  DeepUnpackType = UnpackType,
-                  RecursiveUnpackType = UnpackType>
-    {
-        public constructor(type: string, value: UnpackType);
-        public static new_string(str: string): Variant;
-        public static new_double(value: number): Variant;
-        public unpack(): UnpackType;
-        public deep_unpack(): DeepUnpackType;
-        public deepUnpack(): DeepUnpackType;
-        public recursiveUnpack(): RecursiveUnpackType
+    class Variant {
+        /**
+         * Creates a new #GVariant instance.
+         * 
+         * Think of this function as an analogue to g_strdup_printf().
+         * 
+         * The type of the created instance and the arguments that are expected
+         * by this function are determined by #format_string. See the section on
+         * [GVariant format strings][gvariant-format-strings]. Please note that
+         * the syntax of the format string is very likely to be extended in the
+         * future.
+         * 
+         * The first character of the format string must not be '*' '?' '#' or
+         * 'r'; in essence, a new #GVariant must always be constructed by this
+         * function (and not merely passed through it unmodified).
+         * 
+         * Note that the arguments must be of the correct width for their types
+         * specified in #format_string. This can be achieved by casting them. See
+         * the [GVariant varargs documentation][gvariant-varargs].
+         * 
+         * |[<!-- language="C" -->
+         * MyFlags some_flags = FLAG_ONE | FLAG_TWO;
+         * const gchar *some_strings[] = { "a", "b", "c", NULL };
+         * GVariant *new_variant;
+         * 
+         * new_variant = g_variant_new ("(t^as)",
+         *                              // This cast is required.
+         *                              (guint64) some_flags,
+         *                              some_strings);
+         * ]|
+         * @param format_string a #GVariant format string
+         * @returns a new floating #GVariant instance
+         */
+        static new(format_string: string): Variant;
+        /**
+         * Creates a new #GVariant array from #children.
+         * 
+         * #child_type must be non-%NULL if #n_children is zero.  Otherwise, the
+         * child type is determined by inspecting the first element of the
+         * #children array.  If #child_type is non-%NULL then it must be a
+         * definite type.
+         * 
+         * The items of the array are taken from the #children array.  No entry
+         * in the #children array may be %NULL.
+         * 
+         * All items in the array must have the same type, which must be the
+         * same as #child_type, if given.
+         * 
+         * If the #children are floating references (see g_variant_ref_sink()), the
+         * new instance takes ownership of them as if via g_variant_ref_sink().
+         * @param child_type the element type of the new array
+         * @param children 
+         * @param n_children the length of #children
+         * @returns a floating reference to a new #GVariant array
+         */
+        static new_array(child_type: VariantType, children: Variant[], n_children: number): Variant;
+        /**
+         * Creates a new boolean #GVariant instance -- either %TRUE or %FALSE.
+         * @param value a #gboolean value
+         * @returns a floating reference to a new boolean #GVariant instance
+         */
+        static new_boolean(value: boolean): Variant;
+        /**
+         * Creates a new byte #GVariant instance.
+         * @param value a #guint8 value
+         * @returns a floating reference to a new byte #GVariant instance
+         */
+        static new_byte(value: number): Variant;
+        /**
+         * Creates an array-of-bytes #GVariant with the contents of #string.
+         * This function is just like g_variant_new_string() except that the
+         * string need not be valid UTF-8.
+         * 
+         * The nul terminator character at the end of the string is stored in
+         * the array.
+         * @param string 
+         * @returns a floating reference to a new bytestring #GVariant instance
+         */
+        static new_bytestring(string: number[]): Variant;
+        /**
+         * Constructs an array of bytestring #GVariant from the given array of
+         * strings.
+         * 
+         * If #length is -1 then #strv is %NULL-terminated.
+         * @param strv 
+         * @param length the length of #strv, or -1
+         * @returns a new floating #GVariant instance
+         */
+        static new_bytestring_array(strv: string[], length: number): Variant;
+        /**
+         * Creates a new dictionary entry #GVariant. #key and #value must be
+         * non-%NULL. #key must be a value of a basic type (ie: not a container).
+         * 
+         * If the #key or #value are floating references (see g_variant_ref_sink()),
+         * the new instance takes ownership of them as if via g_variant_ref_sink().
+         * @param key a basic #GVariant, the key
+         * @param value a #GVariant, the value
+         * @returns a floating reference to a new dictionary entry #GVariant
+         */
+        static new_dict_entry(key: Variant, value: Variant): Variant;
+        /**
+         * Creates a new double #GVariant instance.
+         * @param value a #gdouble floating point value
+         * @returns a floating reference to a new double #GVariant instance
+         */
+        static new_double(value: number): Variant;
+        /**
+         * Constructs a new array #GVariant instance, where the elements are
+         * of #element_type type.
+         * 
+         * #elements must be an array with fixed-sized elements.  Numeric types are
+         * fixed-size as are tuples containing only other fixed-sized types.
+         * 
+         * #element_size must be the size of a single element in the array.
+         * For example, if calling this function for an array of 32-bit integers,
+         * you might say sizeof(gint32). This value isn't used except for the purpose
+         * of a double-check that the form of the serialized data matches the caller's
+         * expectation.
+         * 
+         * #n_elements must be the length of the #elements array.
+         * @param element_type the #GVariantType of each element
+         * @param elements a pointer to the fixed array of contiguous elements
+         * @param n_elements the number of elements
+         * @param element_size the size of each element
+         * @returns a floating reference to a new array #GVariant instance
+         */
+        static new_fixed_array(element_type: VariantType, elements: any, n_elements: number, element_size: number): Variant;
+        /**
+         * Constructs a new serialized-mode #GVariant instance.  This is the
+         * inner interface for creation of new serialized values that gets
+         * called from various functions in gvariant.c.
+         * 
+         * A reference is taken on #bytes.
+         * 
+         * The data in #bytes must be aligned appropriately for the #type being loaded.
+         * Otherwise this function will internally create a copy of the memory (since
+         * GLib 2.60) or (in older versions) fail and exit the process.
+         * @param _type a #GVariantType
+         * @param bytes a #GBytes
+         * @param trusted if the contents of #bytes are trusted
+         * @returns a new #GVariant with a floating reference
+         */
+        static new_from_bytes(_type: VariantType, bytes: Bytes, trusted: boolean): Variant;
+        /**
+         * Creates a new #GVariant instance from serialized data.
+         * 
+         * #type is the type of #GVariant instance that will be constructed.
+         * The interpretation of #data depends on knowing the type.
+         * 
+         * #data is not modified by this function and must remain valid with an
+         * unchanging value until such a time as #notify is called with
+         * #user_data.  If the contents of #data change before that time then
+         * the result is undefined.
+         * 
+         * If #data is trusted to be serialized data in normal form then
+         * #trusted should be %TRUE.  This applies to serialized data created
+         * within this process or read from a trusted location on the disk (such
+         * as a file installed in /usr/lib alongside your application).  You
+         * should set trusted to %FALSE if #data is read from the network, a
+         * file in the user's home directory, etc.
+         * 
+         * If #data was not stored in this machine's native endianness, any multi-byte
+         * numeric values in the returned variant will also be in non-native
+         * endianness. g_variant_byteswap() can be used to recover the original values.
+         * 
+         * #notify will be called with #user_data when #data is no longer
+         * needed.  The exact time of this call is unspecified and might even be
+         * before this function returns.
+         * 
+         * Note: #data must be backed by memory that is aligned appropriately for the
+         * #type being loaded. Otherwise this function will internally create a copy of
+         * the memory (since GLib 2.60) or (in older versions) fail and exit the
+         * process.
+         * @param _type a definite #GVariantType
+         * @param data 
+         * @param size the size of #data
+         * @param trusted %TRUE if #data is definitely in normal form
+         * @param notify function to call when #data is no longer needed
+         * @returns a new floating #GVariant of type #type
+         */
+        static new_from_data(_type: VariantType, data: number[], size: number, trusted: boolean, notify: DestroyNotify): Variant;
+        /**
+         * Creates a new handle #GVariant instance.
+         * 
+         * By convention, handles are indexes into an array of file descriptors
+         * that are sent alongside a D-Bus message.  If you're not interacting
+         * with D-Bus, you probably don't need them.
+         * @param value a #gint32 value
+         * @returns a floating reference to a new handle #GVariant instance
+         */
+        static new_handle(value: number): Variant;
+        /**
+         * Creates a new int16 #GVariant instance.
+         * @param value a #gint16 value
+         * @returns a floating reference to a new int16 #GVariant instance
+         */
+        static new_int16(value: number): Variant;
+        /**
+         * Creates a new int32 #GVariant instance.
+         * @param value a #gint32 value
+         * @returns a floating reference to a new int32 #GVariant instance
+         */
+        static new_int32(value: number): Variant;
+        /**
+         * Creates a new int64 #GVariant instance.
+         * @param value a #gint64 value
+         * @returns a floating reference to a new int64 #GVariant instance
+         */
+        static new_int64(value: number): Variant;
+        /**
+         * Depending on if #child is %NULL, either wraps #child inside of a
+         * maybe container or creates a Nothing instance for the given #type.
+         * 
+         * At least one of #child_type and #child must be non-%NULL.
+         * If #child_type is non-%NULL then it must be a definite type.
+         * If they are both non-%NULL then #child_type must be the type
+         * of #child.
+         * 
+         * If #child is a floating reference (see g_variant_ref_sink()), the new
+         * instance takes ownership of #child.
+         * @param child_type the #GVariantType of the child, or %NULL
+         * @param child the child value, or %NULL
+         * @returns a floating reference to a new #GVariant maybe instance
+         */
+        static new_maybe(child_type: VariantType, child: Variant): Variant;
+        /**
+         * Creates a D-Bus object path #GVariant with the contents of #string.
+         * #string must be a valid D-Bus object path.  Use
+         * g_variant_is_object_path() if you're not sure.
+         * @param object_path a normal C nul-terminated string
+         * @returns a floating reference to a new object path #GVariant instance
+         */
+        static new_object_path(object_path: string): Variant;
+        /**
+         * Constructs an array of object paths #GVariant from the given array of
+         * strings.
+         * 
+         * Each string must be a valid #GVariant object path; see
+         * g_variant_is_object_path().
+         * 
+         * If #length is -1 then #strv is %NULL-terminated.
+         * @param strv 
+         * @param length the length of #strv, or -1
+         * @returns a new floating #GVariant instance
+         */
+        static new_objv(strv: string[], length: number): Variant;
+        /**
+         * Parses #format and returns the result.
+         * 
+         * #format must be a text format #GVariant with one extension: at any
+         * point that a value may appear in the text, a '%' character followed
+         * by a GVariant format string (as per g_variant_new()) may appear.  In
+         * that case, the same arguments are collected from the argument list as
+         * g_variant_new() would have collected.
+         * 
+         * Note that the arguments must be of the correct width for their types
+         * specified in #format. This can be achieved by casting them. See
+         * the [GVariant varargs documentation][gvariant-varargs].
+         * 
+         * Consider this simple example:
+         * |[<!-- language="C" -->
+         *  g_variant_new_parsed ("[('one', 1), ('two', %i), (%s, 3)]", 2, "three");
+         * ]|
+         * 
+         * In the example, the variable argument parameters are collected and
+         * filled in as if they were part of the original string to produce the
+         * result of
+         * |[<!-- language="C" -->
+         * [('one', 1), ('two', 2), ('three', 3)]
+         * ]|
+         * 
+         * This function is intended only to be used with #format as a string
+         * literal.  Any parse error is fatal to the calling process.  If you
+         * want to parse data from untrusted sources, use g_variant_parse().
+         * 
+         * You may not use this function to return, unmodified, a single
+         * #GVariant pointer from the argument list.  ie: #format may not solely
+         * be anything along the lines of "%*", "%?", "\%r", or anything starting
+         * with "%#".
+         * @param format a text format #GVariant
+         * @returns a new floating #GVariant instance
+         */
+        static new_parsed(format: string): Variant;
+        /**
+         * Parses #format and returns the result.
+         * 
+         * This is the version of g_variant_new_parsed() intended to be used
+         * from libraries.
+         * 
+         * The return value will be floating if it was a newly created GVariant
+         * instance.  In the case that #format simply specified the collection
+         * of a #GVariant pointer (eg: #format was "%*") then the collected
+         * #GVariant pointer will be returned unmodified, without adding any
+         * additional references.
+         * 
+         * Note that the arguments in #app must be of the correct width for their types
+         * specified in #format when collected into the #va_list. See
+         * the [GVariant varargs documentation][gvariant-varargs].
+         * 
+         * In order to behave correctly in all cases it is necessary for the
+         * calling function to g_variant_ref_sink() the return result before
+         * returning control to the user that originally provided the pointer.
+         * At this point, the caller will have their own full reference to the
+         * result.  This can also be done by adding the result to a container,
+         * or by passing it to another g_variant_new() call.
+         * @param format a text format #GVariant
+         * @param app a pointer to a #va_list
+         * @returns a new, usually floating, #GVariant
+         */
+        static new_parsed_va(format: string, app: any[]): Variant;
+        /**
+         * Creates a string-type GVariant using printf formatting.
+         * 
+         * This is similar to calling g_strdup_printf() and then
+         * g_variant_new_string() but it saves a temporary variable and an
+         * unnecessary copy.
+         * @param format_string a printf-style format string
+         * @returns a floating reference to a new string
+         *   #GVariant instance
+         */
+        static new_printf(format_string: string): Variant;
+        /**
+         * Creates a D-Bus type signature #GVariant with the contents of
+         * #string.  #string must be a valid D-Bus type signature.  Use
+         * g_variant_is_signature() if you're not sure.
+         * @param signature a normal C nul-terminated string
+         * @returns a floating reference to a new signature #GVariant instance
+         */
+        static new_signature(signature: string): Variant;
+        /**
+         * Creates a string #GVariant with the contents of #string.
+         * 
+         * #string must be valid UTF-8, and must not be %NULL. To encode
+         * potentially-%NULL strings, use g_variant_new() with `ms` as the
+         * [format string][gvariant-format-strings-maybe-types].
+         * @param string a normal UTF-8 nul-terminated string
+         * @returns a floating reference to a new string #GVariant instance
+         */
+        static new_string(string: string): Variant;
+        /**
+         * Constructs an array of strings #GVariant from the given array of
+         * strings.
+         * 
+         * If #length is -1 then #strv is %NULL-terminated.
+         * @param strv 
+         * @param length the length of #strv, or -1
+         * @returns a new floating #GVariant instance
+         */
+        static new_strv(strv: string[], length: number): Variant;
+        /**
+         * Creates a string #GVariant with the contents of #string.
+         * 
+         * #string must be valid UTF-8, and must not be %NULL. To encode
+         * potentially-%NULL strings, use this with g_variant_new_maybe().
+         * 
+         * This function consumes #string.  g_free() will be called on #string
+         * when it is no longer required.
+         * 
+         * You must not modify or access #string in any other way after passing
+         * it to this function.  It is even possible that #string is immediately
+         * freed.
+         * @param string a normal UTF-8 nul-terminated string
+         * @returns a floating reference to a new string
+         *   #GVariant instance
+         */
+        static new_take_string(string: string): Variant;
+        /**
+         * Creates a new tuple #GVariant out of the items in #children.  The
+         * type is determined from the types of #children.  No entry in the
+         * #children array may be %NULL.
+         * 
+         * If #n_children is 0 then the unit tuple is constructed.
+         * 
+         * If the #children are floating references (see g_variant_ref_sink()), the
+         * new instance takes ownership of them as if via g_variant_ref_sink().
+         * @param children 
+         * @param n_children the length of #children
+         * @returns a floating reference to a new #GVariant tuple
+         */
+        static new_tuple(children: Variant[], n_children: number): Variant;
+        /**
+         * Creates a new uint16 #GVariant instance.
+         * @param value a #guint16 value
+         * @returns a floating reference to a new uint16 #GVariant instance
+         */
+        static new_uint16(value: number): Variant;
+        /**
+         * Creates a new uint32 #GVariant instance.
+         * @param value a #guint32 value
+         * @returns a floating reference to a new uint32 #GVariant instance
+         */
+        static new_uint32(value: number): Variant;
+        /**
+         * Creates a new uint64 #GVariant instance.
+         * @param value a #guint64 value
+         * @returns a floating reference to a new uint64 #GVariant instance
+         */
+        static new_uint64(value: number): Variant;
+        /**
+         * This function is intended to be used by libraries based on
+         * #GVariant that want to provide g_variant_new()-like functionality
+         * to their users.
+         * 
+         * The API is more general than g_variant_new() to allow a wider range
+         * of possible uses.
+         * 
+         * #format_string must still point to a valid format string, but it only
+         * needs to be nul-terminated if #endptr is %NULL.  If #endptr is
+         * non-%NULL then it is updated to point to the first character past the
+         * end of the format string.
+         * 
+         * #app is a pointer to a #va_list.  The arguments, according to
+         * #format_string, are collected from this #va_list and the list is left
+         * pointing to the argument following the last.
+         * 
+         * Note that the arguments in #app must be of the correct width for their
+         * types specified in #format_string when collected into the #va_list.
+         * See the [GVariant varargs documentation][gvariant-varargs].
+         * 
+         * These two generalisations allow mixing of multiple calls to
+         * g_variant_new_va() and g_variant_get_va() within a single actual
+         * varargs call by the user.
+         * 
+         * The return value will be floating if it was a newly created GVariant
+         * instance (for example, if the format string was "(ii)").  In the case
+         * that the format_string was '*', '?', 'r', or a format starting with
+         * '#' then the collected #GVariant pointer will be returned unmodified,
+         * without adding any additional references.
+         * 
+         * In order to behave correctly in all cases it is necessary for the
+         * calling function to g_variant_ref_sink() the return result before
+         * returning control to the user that originally provided the pointer.
+         * At this point, the caller will have their own full reference to the
+         * result.  This can also be done by adding the result to a container,
+         * or by passing it to another g_variant_new() call.
+         * @param format_string a string that is prefixed with a format string
+         * @param endptr location to store the end pointer,
+         *          or %NULL
+         * @param app a pointer to a #va_list
+         * @returns a new, usually floating, #GVariant
+         */
+        static new_va(format_string: string, endptr: string, app: any[]): Variant;
+        /**
+         * Boxes #value.  The result is a #GVariant instance representing a
+         * variant containing the original value.
+         * 
+         * If #child is a floating reference (see g_variant_ref_sink()), the new
+         * instance takes ownership of #child.
+         * @param value a #GVariant instance
+         * @returns a floating reference to a new variant #GVariant instance
+         */
+        static new_variant(value: Variant): Variant;
         /**
          * Performs a byteswapping operation on the contents of #value.  The
          * result is that all multi-byte numeric data contained in #value is
@@ -9517,6 +10665,20 @@ declare namespace imports.gi.GLib {
      */
     class VariantBuilder {
         /**
+         * Allocates and initialises a new #GVariantBuilder.
+         * 
+         * You should call g_variant_builder_unref() on the return value when it
+         * is no longer needed.  The memory will not be automatically freed by
+         * any other call.
+         * 
+         * In most cases it is easier to place a #GVariantBuilder directly on
+         * the stack of the calling function and initialise it with
+         * g_variant_builder_init().
+         * @param _type a container type
+         * @returns a #GVariantBuilder
+         */
+        static new(_type: VariantType): VariantBuilder;
+        /**
          * Adds to a #GVariantBuilder.
          * 
          * This call is a convenience wrapper that is exactly equivalent to
@@ -9826,6 +10988,22 @@ declare namespace imports.gi.GLib {
      * ]|
      */
     class VariantDict {
+        /**
+         * Allocates and initialises a new #GVariantDict.
+         * 
+         * You should call g_variant_dict_unref() on the return value when it
+         * is no longer needed.  The memory will not be automatically freed by
+         * any other call.
+         * 
+         * In some cases it may be easier to place a #GVariantDict directly on
+         * the stack of the calling function and initialise it with
+         * g_variant_dict_init().  This is particularly useful when you are
+         * using #GVariantDict to construct a #GVariant.
+         * @param from_asv the #GVariant with which to initialise the
+         *   dictionary
+         * @returns a #GVariantDict
+         */
+        static new(from_asv: Variant): VariantDict;
         /**
          * Releases all memory associated with a #GVariantDict without freeing
          * the #GVariantDict structure itself.
@@ -10299,6 +11477,65 @@ declare namespace imports.gi.GLib {
      * be a basic type, "{**}" is not a valid type string.
      */
     class VariantType {
+        /**
+         * Creates a new #GVariantType corresponding to the type string given
+         * by #type_string.  It is appropriate to call g_variant_type_free() on
+         * the return value.
+         * 
+         * It is a programmer error to call this function with an invalid type
+         * string.  Use g_variant_type_string_is_valid() if you are unsure.
+         * @param type_string a valid GVariant type string
+         * @returns a new #GVariantType
+         */
+        static new(type_string: string): VariantType;
+        /**
+         * Constructs the type corresponding to an array of elements of the
+         * type #type.
+         * 
+         * It is appropriate to call g_variant_type_free() on the return value.
+         * @param element a #GVariantType
+         * @returns a new array #GVariantType
+         * 
+         * Since 2.24
+         */
+        static new_array(element: VariantType): VariantType;
+        /**
+         * Constructs the type corresponding to a dictionary entry with a key
+         * of type #key and a value of type #value.
+         * 
+         * It is appropriate to call g_variant_type_free() on the return value.
+         * @param key a basic #GVariantType
+         * @param value a #GVariantType
+         * @returns a new dictionary entry #GVariantType
+         * 
+         * Since 2.24
+         */
+        static new_dict_entry(key: VariantType, value: VariantType): VariantType;
+        /**
+         * Constructs the type corresponding to a maybe instance containing
+         * type #type or Nothing.
+         * 
+         * It is appropriate to call g_variant_type_free() on the return value.
+         * @param element a #GVariantType
+         * @returns a new maybe #GVariantType
+         * 
+         * Since 2.24
+         */
+        static new_maybe(element: VariantType): VariantType;
+        /**
+         * Constructs a new tuple type, from #items.
+         * 
+         * #length is the number of items in #items, or -1 to indicate that
+         * #items is %NULL-terminated.
+         * 
+         * It is appropriate to call g_variant_type_free() on the return value.
+         * @param items 
+         * @param length the length of #items, or -1
+         * @returns a new tuple #GVariantType
+         * 
+         * Since 2.24
+         */
+        static new_tuple(items: VariantType[], length: number): VariantType;
         /**
          * Makes a copy of a #GVariantType.  It is appropriate to call
          * g_variant_type_free() on the return value.  #type may not be %NULL.
@@ -14143,9 +15380,8 @@ declare namespace imports.gi.GLib {
          * @param pid the process id of the child process
          * @param wait_status Status information about the child process, encoded
          *               in a platform-specific manner
-         * @param user_data user data passed to g_child_watch_add()
          */
-        (pid: Pid, wait_status: number, user_data: any): void;
+        (pid: Pid, wait_status: number): void;
     }
 
     /**
@@ -14179,11 +15415,10 @@ declare namespace imports.gi.GLib {
          * integer if the first value comes after the second.
          * @param _a a value
          * @param _b a value to compare with
-         * @param user_data user data
          * @returns negative value if #a < #b; zero if #a = #b; positive
          *          value if #a > #b
          */
-        (_a: any, _b: any, user_data: any): number;
+        (_a: any, _b: any): number;
     }
 
     /**
@@ -14233,9 +15468,8 @@ declare namespace imports.gi.GLib {
          * with the #user_data parameter supplied to g_dataset_foreach().
          * @param key_id the #GQuark id to identifying the data element.
          * @param data the data element.
-         * @param user_data user data passed to g_dataset_foreach().
          */
-        (key_id: Quark, data: any, user_data: any): void;
+        (key_id: Quark, data: any): void;
     }
 
     /**
@@ -14266,11 +15500,9 @@ declare namespace imports.gi.GLib {
          * incrementing the reference count, if #data is a ref-counted
          * object.
          * @param data the data to duplicate
-         * @param user_data user data that was specified in
-         *             g_datalist_id_dup_data()
          * @returns a duplicate of data
          */
-        (data: any, user_data: any): any;
+        (data: any): any;
     }
 
     /**
@@ -14384,9 +15616,8 @@ declare namespace imports.gi.GLib {
          * Specifies the type of functions passed to g_list_foreach() and
          * g_slist_foreach().
          * @param data the element's data
-         * @param user_data user data passed to g_list_foreach() or g_slist_foreach()
          */
-        (data: any, user_data: any): void;
+        (data: any): void;
     }
 
     /**
@@ -14401,9 +15632,8 @@ declare namespace imports.gi.GLib {
          * parameter which is passed to g_hash_table_foreach().
          * @param key a key
          * @param value the value corresponding to the key
-         * @param user_data user data passed to g_hash_table_foreach()
          */
-        (key: any, value: any, user_data: any): void;
+        (key: any, value: any): void;
     }
 
     /**
@@ -14422,11 +15652,10 @@ declare namespace imports.gi.GLib {
          * key/value pair should be removed from the #GHashTable.
          * @param key a key
          * @param value the value associated with the key
-         * @param user_data user data passed to g_hash_table_remove()
          * @returns %TRUE if the key/value pair should be removed from the
          *     #GHashTable
          */
-        (key: any, value: any, user_data: any): boolean;
+        (key: any, value: any): boolean;
     }
 
     /**
@@ -14640,9 +15869,8 @@ declare namespace imports.gi.GLib {
          * @param log_level the log level of the message (including the
          *     fatal and recursion flags)
          * @param message the message to process
-         * @param user_data user data, set in g_log_set_handler()
          */
-        (log_domain: string, log_level: LogLevelFlags, message: string, user_data: any): void;
+        (log_domain: string, log_level: LogLevelFlags, message: string): void;
     }
 
     /**
@@ -14688,11 +15916,10 @@ declare namespace imports.gi.GLib {
          * @param log_level log level of the message
          * @param fields 
          * @param n_fields number of #fields
-         * @param user_data user data passed to g_log_set_writer_func()
          * @returns %G_LOG_WRITER_HANDLED if the log entry was handled successfully;
          *   %G_LOG_WRITER_UNHANDLED otherwise
          */
-        (log_level: LogLevelFlags, fields: LogField[], n_fields: number, user_data: any): LogWriterOutput;
+        (log_level: LogLevelFlags, fields: LogField[], n_fields: number): LogWriterOutput;
     }
 
     /**
@@ -14827,10 +16054,9 @@ declare namespace imports.gi.GLib {
          *     Use g_match_info_get_regex() and g_match_info_get_string() if you
          *     need the #GRegex or the matched string.
          * @param result a #GString containing the new string
-         * @param user_data user data passed to g_regex_replace_eval()
          * @returns %FALSE to continue the replacement process, %TRUE to stop it
          */
-        (match_info: MatchInfo, result: String, user_data: any): boolean;
+        (match_info: MatchInfo, result: String): boolean;
     }
 
     /**
@@ -14907,12 +16133,10 @@ declare namespace imports.gi.GLib {
          * When calling g_source_set_callback(), you may need to cast a function of a
          * different type to this type. Use G_SOURCE_FUNC() to avoid warnings about
          * incompatible function types.
-         * @param user_data data passed to the function, set when the source was
-         *     created with one of the above functions
          * @returns %FALSE if the source should be removed. #G_SOURCE_CONTINUE and
          * #G_SOURCE_REMOVE are more memorable names for the return value.
          */
-        (user_data: any): boolean;
+        (): boolean;
     }
 
     /**
@@ -14979,9 +16203,8 @@ declare namespace imports.gi.GLib {
          * the parent, you should use g_get_environ(), g_environ_setenv(),
          * and g_environ_unsetenv(), and then pass the complete environment
          * list to the `g_spawn...` function.
-         * @param user_data user data to pass to the function.
          */
-        (user_data: any): void;
+        (): void;
     }
 
     /**
@@ -14992,9 +16215,8 @@ declare namespace imports.gi.GLib {
         /**
          * The type used for test case functions that take an extra pointer
          * argument.
-         * @param user_data the data provided when registering the test
          */
-        (user_data: any): void;
+        (): void;
     }
 
     /**
@@ -15022,9 +16244,8 @@ declare namespace imports.gi.GLib {
          * test framework, of the size requested.  If the requested size was
          * zero then #fixture will be equal to #user_data.
          * @param fixture the test fixture
-         * @param user_data the data provided when registering the test
          */
-        (fixture: any, user_data: any): void;
+        (fixture: any): void;
     }
 
     /**
@@ -15046,10 +16267,9 @@ declare namespace imports.gi.GLib {
          * @param log_domain the log domain of the message
          * @param log_level the log level of the message (including the fatal and recursion flags)
          * @param message the message to process
-         * @param user_data user data, set in g_test_log_set_fatal_handler()
          * @returns %TRUE if the program should abort, %FALSE otherwise
          */
-        (log_domain: string, log_level: LogLevelFlags, message: string, user_data: any): boolean;
+        (log_domain: string, log_level: LogLevelFlags, message: string): boolean;
     }
 
     /**
@@ -15132,10 +16352,9 @@ declare namespace imports.gi.GLib {
          * triggers.
          * @param fd the fd that triggered the event
          * @param condition the IO conditions reported on #fd
-         * @param user_data user data passed to g_unix_fd_add()
          * @returns %FALSE if the source should be removed
          */
-        (fd: number, condition: IOCondition, user_data: any): boolean;
+        (fd: number, condition: IOCondition): boolean;
     }
 
     /**
@@ -16919,9 +18138,8 @@ declare namespace imports.gi.GLib {
      * than skipping over elements that are removed.
      * @param datalist a datalist.
      * @param _func the function to call for each data element.
-     * @param user_data user data to pass to the function.
      */
-    function datalist_foreach(datalist: Data, _func: DataForeachFunc, user_data: any): void;
+    function datalist_foreach(datalist: Data, _func: DataForeachFunc): void;
 
     /**
      * Gets a data element, using its string identifier. This is slower than
@@ -16958,12 +18176,11 @@ declare namespace imports.gi.GLib {
      * @param datalist location of a datalist
      * @param key_id the #GQuark identifying a data element
      * @param dup_func function to duplicate the old value
-     * @param user_data passed as user_data to #dup_func
      * @returns the result of calling #dup_func on the value
      *     associated with #key_id in #datalist, or %NULL if not set.
      *     If #dup_func is %NULL, the value is returned unmodified.
      */
-    function datalist_id_dup_data(datalist: Data, key_id: Quark, dup_func: DuplicateFunc, user_data: any): any;
+    function datalist_id_dup_data(datalist: Data, key_id: Quark, dup_func: DuplicateFunc): any;
 
     /**
      * Retrieves the data element corresponding to #key_id.
@@ -17078,9 +18295,8 @@ declare namespace imports.gi.GLib {
      * than skipping over elements that are removed.
      * @param dataset_location the location identifying the dataset.
      * @param _func the function to call for each data element.
-     * @param user_data user data to pass to the function.
      */
-    function dataset_foreach(dataset_location: any, _func: DataForeachFunc, user_data: any): void;
+    function dataset_foreach(dataset_location: any, _func: DataForeachFunc): void;
 
     /**
      * Gets the data element corresponding to a #GQuark.
@@ -18894,10 +20110,9 @@ declare namespace imports.gi.GLib {
      * @param channel a #GIOChannel
      * @param condition the condition to watch for
      * @param _func the function to call when the condition is satisfied
-     * @param user_data user data to pass to #func
      * @returns the event source id
      */
-    function io_add_watch(channel: IOChannel, condition: IOCondition, _func: IOFunc, user_data: any): number;
+    function io_add_watch(channel: IOChannel, condition: IOCondition, _func: IOFunc): number;
 
     /**
      * Adds the #GIOChannel into the default main loop context
@@ -18910,11 +20125,10 @@ declare namespace imports.gi.GLib {
      * @param priority the priority of the #GIOChannel source
      * @param condition the condition to watch for
      * @param _func the function to call when the condition is satisfied
-     * @param user_data user data to pass to #func
      * @param notify the function to call when the source is removed
      * @returns the event source id
      */
-    function io_add_watch_full(channel: IOChannel, priority: number, condition: IOCondition, _func: IOFunc, user_data: any, notify: DestroyNotify): number;
+    function io_add_watch_full(channel: IOChannel, priority: number, condition: IOCondition, _func: IOFunc, notify: DestroyNotify): number;
 
     /**
      * Converts an `errno` error number to a #GIOChannelError.
@@ -19121,10 +20335,9 @@ declare namespace imports.gi.GLib {
      * This has no effect if structured logging is enabled; see
      * [Using Structured Logging][using-structured-logging].
      * @param log_func the log handler function
-     * @param user_data data passed to the log handler
      * @returns the previous default log handler
      */
-    function log_set_default_handler(log_func: LogFunc, user_data: any): LogFunc;
+    function log_set_default_handler(log_func: LogFunc): LogFunc;
 
     /**
      * Sets the log levels which are fatal in the given domain.
@@ -19188,10 +20401,9 @@ declare namespace imports.gi.GLib {
      *    the log levels with the %G_LOG_FLAG_FATAL and
      *    %G_LOG_FLAG_RECURSION bit flags.
      * @param log_func the log handler function
-     * @param user_data data passed to the log handler
      * @returns the id of the new handler
      */
-    function log_set_handler(log_domain: string, log_levels: LogLevelFlags, log_func: LogFunc, user_data: any): number;
+    function log_set_handler(log_domain: string, log_levels: LogLevelFlags, log_func: LogFunc): number;
 
     /**
      * Like g_log_set_handler(), but takes a destroy notify for the #user_data.
@@ -19205,11 +20417,10 @@ declare namespace imports.gi.GLib {
      *   the log levels with the %G_LOG_FLAG_FATAL and
      *   %G_LOG_FLAG_RECURSION bit flags.
      * @param log_func the log handler function
-     * @param user_data data passed to the log handler
      * @param destroy destroy notify for #user_data, or %NULL
      * @returns the id of the new handler
      */
-    function log_set_handler_full(log_domain: string, log_levels: LogLevelFlags, log_func: LogFunc, user_data: any, destroy: DestroyNotify): number;
+    function log_set_handler_full(log_domain: string, log_levels: LogLevelFlags, log_func: LogFunc, destroy: DestroyNotify): number;
 
     /**
      * Set a writer function which will be called to format and write out each log
@@ -19222,11 +20433,10 @@ declare namespace imports.gi.GLib {
      * 
      * There can only be one writer function. It is an error to set more than one.
      * @param _func log writer function, which must not be %NULL
-     * @param user_data user data to pass to #func
      * @param user_data_free function to free #user_data once it’s
      *    finished with, if non-%NULL
      */
-    function log_set_writer_func(_func: LogWriterFunc, user_data: any, user_data_free: DestroyNotify): void;
+    function log_set_writer_func(_func: LogWriterFunc, user_data_free: DestroyNotify): void;
 
     /**
      * Log a message with structured data.
@@ -19385,10 +20595,9 @@ declare namespace imports.gi.GLib {
      * @param fields key–value pairs of structured data forming
      *    the log message
      * @param n_fields number of elements in the #fields array
-     * @param user_data user data passed to g_log_set_writer_func()
      * @returns %G_LOG_WRITER_HANDLED on success, %G_LOG_WRITER_UNHANDLED otherwise
      */
-    function log_writer_default(log_level: LogLevelFlags, fields: LogField[], n_fields: number, user_data: any): LogWriterOutput;
+    function log_writer_default(log_level: LogLevelFlags, fields: LogField[], n_fields: number): LogWriterOutput;
 
     /**
      * Configure whether the built-in log functions
@@ -19497,10 +20706,9 @@ declare namespace imports.gi.GLib {
      * @param fields key–value pairs of structured data forming
      *    the log message
      * @param n_fields number of elements in the #fields array
-     * @param user_data user data passed to g_log_set_writer_func()
      * @returns %G_LOG_WRITER_HANDLED on success, %G_LOG_WRITER_UNHANDLED otherwise
      */
-    function log_writer_journald(log_level: LogLevelFlags, fields: LogField[], n_fields: number, user_data: any): LogWriterOutput;
+    function log_writer_journald(log_level: LogLevelFlags, fields: LogField[], n_fields: number): LogWriterOutput;
 
     /**
      * Format a structured log message and print it to either `stdout` or `stderr`,
@@ -19522,10 +20730,9 @@ declare namespace imports.gi.GLib {
      * @param fields key–value pairs of structured data forming
      *    the log message
      * @param n_fields number of elements in the #fields array
-     * @param user_data user data passed to g_log_set_writer_func()
      * @returns %G_LOG_WRITER_HANDLED on success, %G_LOG_WRITER_UNHANDLED otherwise
      */
-    function log_writer_standard_streams(log_level: LogLevelFlags, fields: LogField[], n_fields: number, user_data: any): LogWriterOutput;
+    function log_writer_standard_streams(log_level: LogLevelFlags, fields: LogField[], n_fields: number): LogWriterOutput;
 
     /**
      * Check whether the given #output_fd file descriptor supports ANSI color
@@ -20470,9 +21677,8 @@ declare namespace imports.gi.GLib {
      * @param total_elems elements in the array
      * @param size size of each element
      * @param compare_func function to compare elements
-     * @param user_data data to pass to #compare_func
      */
-    function qsort_with_data(pbase: any, total_elems: number, size: number, compare_func: CompareDataFunc, user_data: any): void;
+    function qsort_with_data(pbase: any, total_elems: number, size: number, compare_func: CompareDataFunc): void;
 
     /**
      * Gets the #GQuark identifying the given (static) string. If the
@@ -21298,19 +22504,17 @@ declare namespace imports.gi.GLib {
      * source functions and user data. If multiple sources exist with the
      * same source functions and user data, only one will be destroyed.
      * @param funcs The #source_funcs passed to g_source_new()
-     * @param user_data the user data for the callback
      * @returns %TRUE if a source was found and removed.
      */
-    function source_remove_by_funcs_user_data(funcs: SourceFuncs, user_data: any): boolean;
+    function source_remove_by_funcs_user_data(funcs: SourceFuncs): boolean;
 
     /**
      * Removes a source from the default main loop context given the user
      * data for the callback. If multiple sources exist with the same user
      * data, only one will be destroyed.
-     * @param user_data the user_data for the callback.
      * @returns %TRUE if a source was found and removed.
      */
-    function source_remove_by_user_data(user_data: any): boolean;
+    function source_remove_by_user_data(): boolean;
 
     /**
      * Sets the name of a source using its ID.
@@ -21372,11 +22576,10 @@ declare namespace imports.gi.GLib {
      *     child's environment, or %NULL to inherit parent's
      * @param flags flags from #GSpawnFlags
      * @param child_setup function to run in the child just before exec()
-     * @param user_data user data for #child_setup
      * @param child_pid return location for child process reference, or %NULL
      * @returns %TRUE on success, %FALSE if error is set
      */
-    function spawn_async(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, user_data: any, child_pid: Pid): boolean;
+    function spawn_async(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, child_pid: Pid): boolean;
 
     /**
      * Executes a child program asynchronously.
@@ -21388,14 +22591,13 @@ declare namespace imports.gi.GLib {
      * @param envp child's environment, or %NULL to inherit parent's, in the GLib file name encoding
      * @param flags flags from #GSpawnFlags
      * @param child_setup function to run in the child just before exec()
-     * @param user_data user data for #child_setup
      * @param child_pid return location for child process ID, or %NULL
      * @param stdin_fd file descriptor to use for child's stdin, or `-1`
      * @param stdout_fd file descriptor to use for child's stdout, or `-1`
      * @param stderr_fd file descriptor to use for child's stderr, or `-1`
      * @returns %TRUE on success, %FALSE if an error was set
      */
-    function spawn_async_with_fds(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, user_data: any, child_pid: Pid, stdin_fd: number, stdout_fd: number, stderr_fd: number): boolean;
+    function spawn_async_with_fds(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, child_pid: Pid, stdin_fd: number, stdout_fd: number, stderr_fd: number): boolean;
 
     /**
      * Identical to g_spawn_async_with_pipes_and_fds() but with `n_fds` set to zero,
@@ -21409,14 +22611,13 @@ declare namespace imports.gi.GLib {
      *     name encoding
      * @param flags flags from #GSpawnFlags
      * @param child_setup function to run in the child just before exec()
-     * @param user_data user data for #child_setup
      * @param child_pid return location for child process ID, or %NULL
      * @param standard_input return location for file descriptor to write to child's stdin, or %NULL
      * @param standard_output return location for file descriptor to read child's stdout, or %NULL
      * @param standard_error return location for file descriptor to read child's stderr, or %NULL
      * @returns %TRUE on success, %FALSE if an error was set
      */
-    function spawn_async_with_pipes(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, user_data: any, child_pid: Pid, standard_input: number, standard_output: number, standard_error: number): boolean;
+    function spawn_async_with_pipes(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, child_pid: Pid, standard_input: number, standard_output: number, standard_error: number): boolean;
 
     /**
      * Executes a child program asynchronously (your program will not
@@ -21614,7 +22815,6 @@ declare namespace imports.gi.GLib {
      *     name encoding
      * @param flags flags from #GSpawnFlags
      * @param child_setup function to run in the child just before `exec()`
-     * @param user_data user data for #child_setup
      * @param stdin_fd file descriptor to use for child's stdin, or `-1`
      * @param stdout_fd file descriptor to use for child's stdout, or `-1`
      * @param stderr_fd file descriptor to use for child's stderr, or `-1`
@@ -21629,7 +22829,7 @@ declare namespace imports.gi.GLib {
      * @param stderr_pipe_out return location for file descriptor to read child's stderr, or %NULL
      * @returns %TRUE on success, %FALSE if an error was set
      */
-    function spawn_async_with_pipes_and_fds(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, user_data: any, stdin_fd: number, stdout_fd: number, stderr_fd: number, source_fds: number[], target_fds: number[], n_fds: number, child_pid_out: Pid, stdin_pipe_out: number, stdout_pipe_out: number, stderr_pipe_out: number): boolean;
+    function spawn_async_with_pipes_and_fds(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, stdin_fd: number, stdout_fd: number, stderr_fd: number, source_fds: number[], target_fds: number[], n_fds: number, child_pid_out: Pid, stdin_pipe_out: number, stdout_pipe_out: number, stderr_pipe_out: number): boolean;
 
     /**
      * An old name for g_spawn_check_wait_status(), deprecated because its
@@ -21791,13 +22991,12 @@ declare namespace imports.gi.GLib {
      *     child's environment, or %NULL to inherit parent's
      * @param flags flags from #GSpawnFlags
      * @param child_setup function to run in the child just before exec()
-     * @param user_data user data for #child_setup
      * @param standard_output return location for child output, or %NULL
      * @param standard_error return location for child error messages, or %NULL
      * @param wait_status return location for child wait status, as returned by waitpid(), or %NULL
      * @returns %TRUE on success, %FALSE if an error was set
      */
-    function spawn_sync(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, user_data: any, standard_output: number[], standard_error: number[], wait_status: number): boolean;
+    function spawn_sync(working_directory: string, argv: string[], envp: string[], flags: SpawnFlags, child_setup: SpawnChildSetupFunc, standard_output: number[], standard_error: number[], wait_status: number): boolean;
 
     /**
      * An implementation of the standard sprintf() function which supports
@@ -22883,9 +24082,8 @@ declare namespace imports.gi.GLib {
      * writer function using g_log_set_writer_func().See
      * [Using Structured Logging][using-structured-logging].
      * @param log_func the log handler function.
-     * @param user_data data passed to the log handler.
      */
-    function test_log_set_fatal_handler(log_func: TestLogFatalFunc, user_data: any): void;
+    function test_log_set_fatal_handler(log_func: TestLogFatalFunc): void;
 
     function test_log_type_name(log_type: TestLogType): string;
 
@@ -24117,10 +25315,9 @@ declare namespace imports.gi.GLib {
      * @param fd a file descriptor
      * @param condition IO conditions to watch for on #fd
      * @param _function a #GUnixFDSourceFunc
-     * @param user_data data to pass to #function
      * @returns the ID (greater than 0) of the event source
      */
-    function unix_fd_add(fd: number, condition: IOCondition, _function: UnixFDSourceFunc, user_data: any): number;
+    function unix_fd_add(fd: number, condition: IOCondition, _function: UnixFDSourceFunc): number;
 
     /**
      * Sets a function to be called when the IO condition, as specified by
@@ -24133,11 +25330,10 @@ declare namespace imports.gi.GLib {
      * @param fd a file descriptor
      * @param condition IO conditions to watch for on #fd
      * @param _function a #GUnixFDSourceFunc
-     * @param user_data data to pass to #function
      * @param notify function to call when the idle is removed, or %NULL
      * @returns the ID (greater than 0) of the event source
      */
-    function unix_fd_add_full(priority: number, fd: number, condition: IOCondition, _function: UnixFDSourceFunc, user_data: any, notify: DestroyNotify): number;
+    function unix_fd_add_full(priority: number, fd: number, condition: IOCondition, _function: UnixFDSourceFunc, notify: DestroyNotify): number;
 
     /**
      * Creates a #GSource to watch for a particular IO condition on a file
@@ -24199,10 +25395,9 @@ declare namespace imports.gi.GLib {
      * using g_source_remove().
      * @param signum Signal number
      * @param handler Callback
-     * @param user_data Data for #handler
      * @returns An ID (greater than 0) for the event source
      */
-    function unix_signal_add(signum: number, handler: SourceFunc, user_data: any): number;
+    function unix_signal_add(signum: number, handler: SourceFunc): number;
 
     /**
      * A convenience function for g_unix_signal_source_new(), which
@@ -24212,11 +25407,10 @@ declare namespace imports.gi.GLib {
      *            the range between #G_PRIORITY_DEFAULT and #G_PRIORITY_HIGH.
      * @param signum Signal number
      * @param handler Callback
-     * @param user_data Data for #handler
      * @param notify #GDestroyNotify for #handler
      * @returns An ID (greater than 0) for the event source
      */
-    function unix_signal_add_full(priority: number, signum: number, handler: SourceFunc, user_data: any, notify: DestroyNotify): number;
+    function unix_signal_add_full(priority: number, signum: number, handler: SourceFunc, notify: DestroyNotify): number;
 
     /**
      * Create a #GSource that will be dispatched upon delivery of the UNIX
