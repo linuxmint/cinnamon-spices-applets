@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-21 17:20-0400\n"
+"POT-Creation-Date: 2021-10-28 06:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. metadata.json->name
 #. settings-schema.json->page_dark_mode->title
-#: applet.js:68 applet.js:121
+#: applet.js:75 applet.js:157
 msgid "Dark Mode"
 msgstr ""
 
@@ -39,22 +39,38 @@ msgstr ""
 msgid "Dark mode"
 msgstr ""
 
+#. settings-schema.json->enable_auto_mode_switch->description
+msgid "Automatically switch modes"
+msgstr ""
+
+#. settings-schema.json->light_mode_start->description
+msgid "Light mode start time"
+msgstr ""
+
+#. settings-schema.json->dark_mode_start->description
+msgid "Dark mode start time"
+msgstr ""
+
 #. settings-schema.json->light_gtk_theme->description
 #. settings-schema.json->dark_gtk_theme->description
-msgid "Select window control theme"
+msgid "Window control theme"
 msgstr ""
 
 #. settings-schema.json->light_win_border_theme->description
 #. settings-schema.json->dark_win_border_theme->description
-msgid "Select window border theme"
+msgid "Window border theme"
 msgstr ""
 
 #. settings-schema.json->light_cinnamon_theme->description
 #. settings-schema.json->dark_cinnamon_theme->description
-msgid "Select desktop theme"
+msgid "Desktop theme"
 msgstr ""
 
 #. settings-schema.json->light_icon_theme->description
 #. settings-schema.json->dark_icon_theme->description
-msgid "Select icon theme"
+msgid "Icon theme"
+msgstr ""
+
+#. settings-schema.json->postpone_auto_mode_until->description
+msgid "Internal use"
 msgstr ""

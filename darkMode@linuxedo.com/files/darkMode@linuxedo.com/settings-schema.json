@@ -31,7 +31,10 @@
             "type": "section",
             "title": "",
             "keys": [
-                "enable_dark_mode"
+                "enable_dark_mode",
+                "enable_auto_mode_switch",
+                "light_mode_start",
+                "dark_mode_start"
             ]
         },
         "section_light_mode": {
@@ -60,52 +63,82 @@
         "description": "Dark mode",
         "default": false
     },
+    "enable_auto_mode_switch": {
+        "type": "switch",
+        "description": "Automatically switch modes",
+        "default": false
+    },
+    "light_mode_start" : {
+        "type" : "timechooser",
+        "dependency": "enable_auto_mode_switch=true",
+        "description" : "Light mode start time",
+        "default" : {
+          "h" : 6,
+          "m" : 0,
+          "s" : 0
+        }
+      },
+      "dark_mode_start" : {
+        "type" : "timechooser",
+        "dependency": "enable_auto_mode_switch=true",
+        "description" : "Dark mode start time",
+        "default" : {
+          "h" : 18,
+          "m" : 0,
+          "s" : 0
+        }
+      },
     "light_gtk_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select window control theme"
+        "description": "Window control theme"
     },
     "dark_gtk_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select window control theme"
+        "description": "Window control theme"
     },
     "light_win_border_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select window border theme"
+        "description": "Window border theme"
     },
     "dark_win_border_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select window border theme"
+        "description": "Window border theme"
     },
     "light_cinnamon_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select desktop theme"
+        "description": "Desktop theme"
     },
     "dark_cinnamon_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select desktop theme"
+        "description": "Desktop theme"
     },
     "light_icon_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select icon theme"
+        "description": "Icon theme"
     },
     "dark_icon_theme": {
         "type": "combobox",
         "default": "none",
         "options": {},
-        "description": "Select icon theme"
+        "description": "Icon theme"
+    },
+    "postpone_auto_mode_until": {
+        "type":        "generic",
+        "default":     "-1",
+        "description": "Internal use"
     }
 }
