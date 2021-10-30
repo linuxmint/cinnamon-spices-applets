@@ -1,9 +1,15 @@
 # Dark Mode
 
 Changing themes to switch between light mode and dark mode doesn't have to be a tedious task. Once you have configured
-the applet with your default light mode and dark mode themes, it is only a matter of mouse click to switch between the modes.
+the applet with your default light mode and dark mode themes, you can switch between the modes with a single click.
+
+For more details and feature requests: [Dark Mode in Cinnamon Desktop Environment](https://www.linuxedo.com/2021/10/dark-mode-in-cinnamon-desktop.html)
+
+License: [GPL-v3](https://github.com/linuxedo/cinnamon-dark-mode-applet/blob/main/LICENSE)
 
 ## Changelog
 
-* 1.0.0
+* Oct 28, 2021
+  - Automatic mode switch based on time.
+* Oct 21, 2021
   - Stable release.
