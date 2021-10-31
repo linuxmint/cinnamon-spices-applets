@@ -14,7 +14,7 @@ declare namespace imports.gi.Cogl {
 	interface Bitmap extends BitmapMixin {}
 
 	class Bitmap {
-		constructor();
+		public constructor();
 		/**
 		 * Loads an image file from disk. This function can be safely called from
 		 * within a thread.
@@ -22,7 +22,7 @@ declare namespace imports.gi.Cogl {
 		 * @returns a {@link Bitmap} to the new loaded
 		 *               image data, or %NULL if loading the image failed.
 		 */
-		static new_from_file(filename: string): Bitmap;
+		public static new_from_file(filename: string): Bitmap;
 		/**
 		 * Parses an image file enough to extract the width and height
 		 * of the bitmap.
@@ -31,7 +31,7 @@ declare namespace imports.gi.Cogl {
 		 * @param height return location for the bitmap height, or %NULL
 		 * @returns %TRUE if the image was successfully parsed
 		 */
-		static get_size_from_file(filename: string, width: number, height: number): Bool;
+		public static get_size_from_file(filename: string, width: number, height: number): Bool;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -93,7 +93,7 @@ declare namespace imports.gi.Cogl {
 	interface Fixed extends FixedMixin {}
 
 	class Fixed {
-		constructor();
+		public constructor();
 		/**
 		 * Calculates base 2 logarithm.
 		 * 
@@ -102,14 +102,14 @@ declare namespace imports.gi.Cogl {
 		 * @param _x value to calculate base 2 logarithm from
 		 * @returns base 2 logarithm.
 		 */
-		static log2(_x: number): Fixed;
+		public static log2(_x: number): Fixed;
 		/**
 		 * Calculates #x to the #y power.
 		 * @param _x base
 		 * @param _y {@link Fixed} exponent
 		 * @returns the power of #x to the #y
 		 */
-		static pow(_x: number, _y: Fixed): number;
+		public static pow(_x: number, _y: Fixed): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -127,7 +127,7 @@ declare namespace imports.gi.Cogl {
 	interface Offscreen extends OffscreenMixin {}
 
 	class Offscreen {
-		constructor();
+		public constructor();
 		/**
 		 * This creates an offscreen buffer object using the given #texture as the
 		 * primary color buffer. It doesn't just initialize the contents of the
@@ -144,7 +144,7 @@ declare namespace imports.gi.Cogl {
 		 *   framebuffer or %NULL if it wasn't possible to create the
 		 *   buffer.
 		 */
-		static new_to_texture(texture: Texture): Offscreen;
+		public static new_to_texture(texture: Texture): Offscreen;
 		/**
 		 * This creates an offscreen framebuffer object using the given
 		 * #texture as the primary color buffer. It doesn't just initialize
@@ -174,20 +174,20 @@ declare namespace imports.gi.Cogl {
 		 * @returns a newly instantiated {@link Offscreen}
 		 *   framebuffer.
 		 */
-		static new_with_texture(texture: Texture): Offscreen;
+		public static new_with_texture(texture: Texture): Offscreen;
 		/**
 		 * Increments the reference count on the #offscreen framebuffer.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
 		 * @returns For convenience it returns the
 		 *                                given #offscreen
 		 */
-		static ref(offscreen: any): any;
+		public static ref(offscreen: any): any;
 		/**
 		 * Decreases the reference count for the #offscreen buffer and frees it when
 		 * the count reaches 0.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
 		 */
-		static unref(offscreen: any): void;
+		public static unref(offscreen: any): void;
 	}
 
 	/**
@@ -195,20 +195,22 @@ declare namespace imports.gi.Cogl {
 	 * the CoglColor structure are private and should never by accessed
 	 * directly.
 	 */
+	interface Color {}
 	class Color {
+		public constructor();
 		/**
 		 * Creates a new (empty) color
 		 * @returns a newly-allocated {@link Color}. Use cogl_color_free()
 		 *   to free the allocated resources
 		 */
-		static new(): Color;
-		public private_member_red: number;
-		public private_member_green: number;
-		public private_member_blue: number;
-		public private_member_alpha: number;
-		public private_member_padding0: number;
-		public private_member_padding1: number;
-		public private_member_padding2: number;
+		public static new(): Color;
+		public readonly private_member_red: number;
+		public readonly private_member_green: number;
+		public readonly private_member_blue: number;
+		public readonly private_member_alpha: number;
+		public readonly private_member_padding0: number;
+		public readonly private_member_padding1: number;
+		public readonly private_member_padding2: number;
 		/**
 		 * Creates a copy of #color
 		 * @returns a newly-allocated {@link Color}. Use cogl_color_free()
@@ -412,10 +414,14 @@ declare namespace imports.gi.Cogl {
 		public unpremultiply(): void;
 	}
 
+	interface Euler {}
 	class Euler {
+		public constructor();
 	}
 
+	interface Material {}
 	class Material {
+		public constructor();
 		/**
 		 * Creates a new material with the configuration copied from the
 		 * source material.
@@ -937,7 +943,9 @@ declare namespace imports.gi.Cogl {
 		public set_user_program(program: Handle): void;
 	}
 
+	interface MaterialLayer {}
 	class MaterialLayer {
+		public constructor();
 		/**
 		 * Queries the currently set downscaling filter for a material later
 		 * @returns the current downscaling filter
@@ -1013,7 +1021,9 @@ declare namespace imports.gi.Cogl {
 	 * undefined results. If you need to initialize a matrix with a constant other
 	 * than the identity matrix you can use cogl_matrix_init_from_array().</note>
 	 */
+	interface Matrix {}
 	class Matrix {
+		public constructor();
 		public xx: number;
 		public yx: number;
 		public zx: number;
@@ -1030,10 +1040,10 @@ declare namespace imports.gi.Cogl {
 		public yw: number;
 		public zw: number;
 		public ww: number;
-		public private_member_inv: number[];
-		public private_member_type: number;
-		public private_member_flags: number;
-		public private_member__padding3: number;
+		public readonly private_member_inv: number[];
+		public readonly private_member_type: number;
+		public readonly private_member_flags: number;
+		public readonly private_member__padding3: number;
 		/**
 		 * Allocates a new {@link Matrix} on the heap and initializes it with
 		 * the same values as #matrix.
@@ -1232,30 +1242,59 @@ declare namespace imports.gi.Cogl {
 		public transpose(): void;
 	}
 
+	interface Quaternion {}
 	class Quaternion {
+		public constructor();
 	}
 
 	/**
 	 * Used to specify vertex information when calling cogl_polygon()
 	 */
+	interface TextureVertex {}
 	class TextureVertex {
+		public constructor();
+		/**
+		 * Model x-coordinate
+		 */
 		public x: number;
+		/**
+		 * Model y-coordinate
+		 */
 		public y: number;
+		/**
+		 * Model z-coordinate
+		 */
 		public z: number;
+		/**
+		 * Texture x-coordinate
+		 */
 		public tx: number;
+		/**
+		 * Texture y-coordinate
+		 */
 		public ty: number;
+		/**
+		 * The color to use at this vertex. This is ignored if
+		 *   use_color is %FALSE when calling cogl_polygon()
+		 */
 		public color: Color;
 	}
 
+	interface _ColorSizeCheck {}
 	class _ColorSizeCheck {
+		public constructor();
 		public compile_time_assert_CoglColor_size: string[];
 	}
 
+	interface _MatrixSizeCheck {}
 	class _MatrixSizeCheck {
+		public constructor();
 		public compile_time_assert_CoglMatrix_size: string[];
 	}
 
+	interface _TextureVertexSizeCheck {}
 	class _TextureVertexSizeCheck {
+		public constructor();
 		public compile_time_assert_CoglTextureVertex_size: string[];
 	}
 
@@ -1434,18 +1473,18 @@ declare namespace imports.gi.Cogl {
 	interface Texture extends TextureMixin {}
 
 	class Texture {
-		constructor();
+		public constructor();
 		/**
 		 * Increment the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
 		 * @returns the #texture pointer.
 		 */
-		static ref(texture: any): any;
+		public static ref(texture: any): any;
 		/**
 		 * Decrement the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
 		 */
-		static unref(texture: any): void;
+		public static unref(texture: any): void;
 	}
 
 
@@ -2374,7 +2413,7 @@ declare namespace imports.gi.Cogl {
 	}
 
 	interface XlibFilterFunc {
-		(event: undefined, data: any): FilterReturn;
+		(event: any, data: any): FilterReturn;
 	}
 
 	/**
@@ -2562,7 +2601,7 @@ declare namespace imports.gi.Cogl {
 	 * @param bounds_y2 y coordinate for the bottom-right corner of the
 	 *             primitives bounds.
 	 */
-	function clip_push_primitive(primitive: undefined, bounds_x1: number, bounds_y1: number, bounds_x2: number, bounds_y2: number): void;
+	function clip_push_primitive(primitive: any, bounds_x1: number, bounds_y1: number, bounds_x2: number, bounds_y2: number): void;
 
 	/**
 	 * Specifies a rectangular clipping area for all subsequent drawing
@@ -2631,7 +2670,7 @@ declare namespace imports.gi.Cogl {
 
 	function clutter_winsys_has_feature_CLUTTER(feature: WinsysFeature): Bool;
 
-	function clutter_winsys_xlib_get_visual_info_CLUTTER(): undefined;
+	function clutter_winsys_xlib_get_visual_info_CLUTTER(): any;
 
 	/**
 	 * Compares two {@link Color}<!-- -->s and checks if they are the same.
@@ -2741,7 +2780,7 @@ declare namespace imports.gi.Cogl {
 	 * @param framebuffer A {@link Framebuffer} framebuffer
 	 * @returns 
 	 */
-	function framebuffer_get_color_format(framebuffer: undefined): PixelFormat;
+	function framebuffer_get_color_format(framebuffer: any): PixelFormat;
 
 	/**
 	 * Replaces the current projection matrix with a perspective matrix
@@ -3290,7 +3329,7 @@ declare namespace imports.gi.Cogl {
 	 * The previous framebuffer can be restored by calling cogl_pop_framebuffer()
 	 * @param buffer A {@link Framebuffer} object, either onscreen or offscreen.
 	 */
-	function push_framebuffer(buffer: undefined): void;
+	function push_framebuffer(buffer: any): void;
 
 	/**
 	 * Stores the current model-view matrix on the matrix stack. The matrix
@@ -3492,7 +3531,7 @@ declare namespace imports.gi.Cogl {
 	 * or in the future it may be an onscreen framebuffers too.
 	 * @param buffer A {@link Framebuffer} object, either onscreen or offscreen.
 	 */
-	function set_framebuffer(buffer: undefined): void;
+	function set_framebuffer(buffer: any): void;
 
 	/**
 	 * Loads #matrix as the new model-view matrix.
@@ -3921,17 +3960,17 @@ declare namespace imports.gi.Cogl {
 	 */
 	function viewport(width: number, height: number): void;
 
-	function xlib_renderer_add_filter(renderer: undefined, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_add_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
 
-	function xlib_renderer_get_display(renderer: undefined): undefined;
+	function xlib_renderer_get_display(renderer: any): any;
 
-	function xlib_renderer_get_foreign_display(renderer: undefined): undefined;
+	function xlib_renderer_get_foreign_display(renderer: any): any;
 
-	function xlib_renderer_get_visual_info(renderer: undefined): undefined;
+	function xlib_renderer_get_visual_info(renderer: any): any;
 
-	function xlib_renderer_handle_event(renderer: undefined, event: undefined): FilterReturn;
+	function xlib_renderer_handle_event(renderer: any, event: any): FilterReturn;
 
-	function xlib_renderer_remove_filter(renderer: undefined, _func: XlibFilterFunc, data: any): void;
+	function xlib_renderer_remove_filter(renderer: any, _func: XlibFilterFunc, data: any): void;
 
 	/**
 	 * Sets whether Cogl should automatically retrieve events from the X
@@ -3945,8 +3984,8 @@ declare namespace imports.gi.Cogl {
 	 * @param renderer a {@link Renderer}
 	 * @param enable The new value
 	 */
-	function xlib_renderer_set_event_retrieval_enabled(renderer: undefined, enable: Bool): void;
+	function xlib_renderer_set_event_retrieval_enabled(renderer: any, enable: Bool): void;
 
-	function xlib_renderer_set_foreign_display(renderer: undefined, display: undefined): void;
+	function xlib_renderer_set_foreign_display(renderer: any, display: any): void;
 
 }

@@ -1,59 +1,94 @@
 declare namespace imports.gi.xlib {
-    class Display {
-    }
+	interface Display {}
+	class Display {
+		public constructor();
+	}
 
-    class Screen {
-    }
+	interface Screen {}
+	class Screen {
+		public constructor();
+	}
 
-    class Visual {
-    }
+	interface Visual {}
+	class Visual {
+		public constructor();
+	}
 
-    class XConfigureEvent {
-    }
+	interface XConfigureEvent {}
+	class XConfigureEvent {
+		public constructor();
+	}
 
-    class XImage {
-    }
+	interface XImage {}
+	class XImage {
+		public constructor();
+	}
 
-    class XFontStruct {
-    }
+	interface XFontStruct {}
+	class XFontStruct {
+		public constructor();
+	}
 
-    class XTrapezoid {
-    }
+	interface XTrapezoid {}
+	class XTrapezoid {
+		public constructor();
+	}
 
-    class XVisualInfo {
-    }
+	interface XVisualInfo {}
+	class XVisualInfo {
+		public constructor();
+	}
 
-    class XWindowAttributes {
-    }
+	interface XWindowAttributes {}
+	class XWindowAttributes {
+		public constructor();
+	}
 
-    interface XEvent { }
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XEvent} instead.
+	 */
+	interface IXEvent {
 
-    type Atom = number;
+	}
 
-    type Colormap = number;
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XEvent} instead.
+	 */
+	type XEventMixin = IXEvent;
 
-    type Cursor = number;
+	interface XEvent extends XEventMixin {}
 
-    type Drawable = number;
+	class XEvent {
+		public constructor();
+	}
 
-    type GC = any;
 
-    type KeyCode = number;
+	type Atom = number;
 
-    type KeySym = number;
+	type Colormap = number;
 
-    type Picture = number;
+	type Cursor = number;
 
-    type Time = number;
+	type Drawable = number;
 
-    type VisualID = number;
+	type GC = any;
 
-    type Window = number;
+	type KeyCode = number;
 
-    type XID = number;
+	type KeySym = number;
 
-    type Pixmap = number;
+	type Picture = number;
 
-    function open_display(): void;
+	type Time = number;
+
+	type VisualID = number;
+
+	type Window = number;
+
+	type XID = number;
+
+	type Pixmap = number;
+
+	function open_display(): void;
 
 }

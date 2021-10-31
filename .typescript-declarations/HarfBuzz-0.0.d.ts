@@ -2,11 +2,22 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Structure representing a setting for an #hb_aat_layout_feature_type_t.
 	 */
+	interface aat_layout_feature_selector_info_t {}
 	class aat_layout_feature_selector_info_t {
+		public constructor();
+		/**
+		 * The selector's name identifier
+		 */
 		public name_id: ot_name_id_t;
+		/**
+		 * The value to turn the selector on
+		 */
 		public enable: aat_layout_feature_selector_t;
+		/**
+		 * The value to turn the selector off
+		 */
 		public disable: aat_layout_feature_selector_t;
-		public reserved: number;
+		public readonly reserved: number;
 	}
 
 	/**
@@ -14,20 +25,26 @@ declare namespace imports.gi.HarfBuzz {
 	 * data and facilitates its lifecycle management between
 	 * a client program and HarfBuzz.
 	 */
+	interface blob_t {}
 	class blob_t {
+		public constructor();
 	}
 
 	/**
 	 * The main structure holding the input text and its properties before shaping,
 	 * and output glyphs and their information after shaping.
 	 */
+	interface buffer_t {}
 	class buffer_t {
+		public constructor();
 	}
 
 	/**
 	 * Data type for holding font faces.
 	 */
+	interface face_t {}
 	class face_t {
+		public constructor();
 	}
 
 	/**
@@ -37,16 +54,32 @@ declare namespace imports.gi.HarfBuzz {
 	 * Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
 	 * specifies that the feature always applies to the entire buffer.
 	 */
+	interface feature_t {}
 	class feature_t {
+		public constructor();
+		/**
+		 * The #hb_tag_t tag of the feature
+		 */
 		public tag: tag_t;
+		/**
+		 * The value of the feature. 0 disables the feature, non-zero (usually
+		 * 1) enables the feature.  For features implemented as lookup type 3 (like
+		 * 'salt') the #value is a one based index into the alternates.
+		 */
 		public value: number;
+		/**
+		 * the cluster to start applying this feature setting (inclusive).
+		 */
 		public start: number;
+		/**
+		 * the cluster to end applying this feature setting (exclusive).
+		 */
 		public end: number;
 		/**
 		 * Converts a #hb_feature_t into a %NULL-terminated string in the format
 		 * understood by hb_feature_from_string(). The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
-		 * @param buf 
+		 * @param buf output string
 		 * @param size the allocated size of #buf
 		 */
 		public _string(buf: string[], size: number): void;
@@ -58,19 +91,30 @@ declare namespace imports.gi.HarfBuzz {
 	 * Note that typically #ascender is positive and #descender
 	 * negative, in coordinate systems that grow up.
 	 */
+	interface font_extents_t {}
 	class font_extents_t {
+		public constructor();
+		/**
+		 * The height of typographic ascenders.
+		 */
 		public ascender: position_t;
+		/**
+		 * The depth of typographic descenders.
+		 */
 		public descender: position_t;
+		/**
+		 * The suggested line-spacing gap.
+		 */
 		public line_gap: position_t;
-		public reserved9: position_t;
-		public reserved8: position_t;
-		public reserved7: position_t;
-		public reserved6: position_t;
-		public reserved5: position_t;
-		public reserved4: position_t;
-		public reserved3: position_t;
-		public reserved2: position_t;
-		public reserved1: position_t;
+		public readonly reserved9: position_t;
+		public readonly reserved8: position_t;
+		public readonly reserved7: position_t;
+		public readonly reserved6: position_t;
+		public readonly reserved5: position_t;
+		public readonly reserved4: position_t;
+		public readonly reserved3: position_t;
+		public readonly reserved2: position_t;
+		public readonly reserved1: position_t;
 	}
 
 	/**
@@ -83,13 +127,17 @@ declare namespace imports.gi.HarfBuzz {
 	 * needed, and replace the default by calling the setter for a
 	 * method.
 	 */
+	interface font_funcs_t {}
 	class font_funcs_t {
+		public constructor();
 	}
 
 	/**
 	 * Data type for holding fonts.
 	 */
+	interface font_t {}
 	class font_t {
+		public constructor();
 	}
 
 	/**
@@ -97,10 +145,24 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Note that #height is negative, in coordinate systems that grow up.
 	 */
+	interface glyph_extents_t {}
 	class glyph_extents_t {
+		public constructor();
+		/**
+		 * Distance from the x-origin to the left extremum of the glyph.
+		 */
 		public x_bearing: position_t;
+		/**
+		 * Distance from the top extremum of the glyph to the y-origin.
+		 */
 		public y_bearing: position_t;
+		/**
+		 * Distance from the left extremum of the glyph to the right extremum.
+		 */
 		public width: position_t;
+		/**
+		 * Distance from the top extremum of the glyph to the bottom extremum.
+		 */
 		public height: position_t;
 	}
 
@@ -108,12 +170,31 @@ declare namespace imports.gi.HarfBuzz {
 	 * The #hb_glyph_info_t is the structure that holds information about the
 	 * glyphs and their relation to input text.
 	 */
+	interface glyph_info_t {}
 	class glyph_info_t {
+		public constructor();
+		/**
+		 * either a Unicode code point (before shaping) or a glyph index
+		 *             (after shaping).
+		 */
 		public codepoint: codepoint_t;
-		public mask: mask_t;
+		public readonly mask: mask_t;
+		/**
+		 * the index of the character in the original text that corresponds
+		 *           to this #hb_glyph_info_t, or whatever the client passes to
+		 *           hb_buffer_add(). More than one #hb_glyph_info_t can have the same
+		 *           #cluster value, if they resulted from the same character (e.g. one
+		 *           to many glyph substitution), and when more than one character gets
+		 *           merged in the same glyph (e.g. many to one glyph substitution) the
+		 *           #hb_glyph_info_t will have the smallest cluster value of them.
+		 *           By default some characters are merged into the same cluster
+		 *           (e.g. combining marks have the same cluster as their bases)
+		 *           even if they are separate glyphs, hb_buffer_set_cluster_level()
+		 *           allow selecting more fine-grained cluster handling.
+		 */
 		public cluster: number;
-		public var1: var_int_t;
-		public var2: var_int_t;
+		public readonly var1: var_int_t;
+		public readonly var2: var_int_t;
 	}
 
 	/**
@@ -121,19 +202,39 @@ declare namespace imports.gi.HarfBuzz {
 	 * glyph in both horizontal and vertical directions. All positions in
 	 * #hb_glyph_position_t are relative to the current point.
 	 */
+	interface glyph_position_t {}
 	class glyph_position_t {
+		public constructor();
+		/**
+		 * how much the line advances after drawing this glyph when setting
+		 *             text in horizontal direction.
+		 */
 		public x_advance: position_t;
+		/**
+		 * how much the line advances after drawing this glyph when setting
+		 *             text in vertical direction.
+		 */
 		public y_advance: position_t;
+		/**
+		 * how much the glyph moves on the X-axis before drawing it, this
+		 *            should not affect how much the line advances.
+		 */
 		public x_offset: position_t;
+		/**
+		 * how much the glyph moves on the Y-axis before drawing it, this
+		 *            should not affect how much the line advances.
+		 */
 		public y_offset: position_t;
-		public var: var_int_t;
+		public readonly var: var_int_t;
 	}
 
 	/**
 	 * Data type for languages. Each #hb_language_t corresponds to a BCP 47
 	 * language tag.
 	 */
+	interface language_t {}
 	class language_t {
+		public constructor();
 		/**
 		 * Converts an #hb_language_t to a string.
 		 * @returns 
@@ -146,14 +247,24 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Data type for holding integer-to-integer hash maps.
 	 */
+	interface map_t {}
 	class map_t {
+		public constructor();
 	}
 
 	/**
 	 * Pairs of glyph and color index.
 	 */
+	interface ot_color_layer_t {}
 	class ot_color_layer_t {
+		public constructor();
+		/**
+		 * the glyph ID of the layer
+		 */
 		public glyph: codepoint_t;
+		/**
+		 * the palette color index of the layer
+		 */
 		public color_index: number;
 	}
 
@@ -162,28 +273,61 @@ declare namespace imports.gi.HarfBuzz {
 	 * Large variants for stretchable math glyphs (such as parentheses) can be constructed
 	 * on the fly from parts.
 	 */
+	interface ot_math_glyph_part_t {}
 	class ot_math_glyph_part_t {
+		public constructor();
+		/**
+		 * The glyph index of the variant part
+		 */
 		public glyph: codepoint_t;
+		/**
+		 * The length of the connector on the starting side of the variant part
+		 */
 		public start_connector_length: position_t;
+		/**
+		 * The length of the connector on the ending side of the variant part
+		 */
 		public end_connector_length: position_t;
+		/**
+		 * The total advance of the part
+		 */
 		public full_advance: position_t;
+		/**
+		 * #hb_ot_math_glyph_part_flags_t flags for the part
+		 */
 		public flags: ot_math_glyph_part_flags_t;
 	}
 
 	/**
 	 * Data type to hold math-variant information for a glyph.
 	 */
+	interface ot_math_glyph_variant_t {}
 	class ot_math_glyph_variant_t {
+		public constructor();
+		/**
+		 * The glyph index of the variant
+		 */
 		public glyph: codepoint_t;
+		/**
+		 * The advance width of the variant
+		 */
 		public advance: position_t;
 	}
 
 	/**
 	 * Structure representing a name ID in a particular language.
 	 */
+	interface ot_name_entry_t {}
 	class ot_name_entry_t {
+		public constructor();
+		/**
+		 * name ID
+		 */
 		public name_id: ot_name_id_t;
-		public var: var_int_t;
+		public readonly var: var_int_t;
+		/**
+		 * language
+		 */
 		public language: language_t;
 	}
 
@@ -195,25 +339,65 @@ declare namespace imports.gi.HarfBuzz {
 	 * <note>Note: at present, the only flag defined for #flags is
 	 * #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
 	 */
+	interface ot_var_axis_info_t {}
 	class ot_var_axis_info_t {
+		public constructor();
+		/**
+		 * Index of the axis in the variation-axis array
+		 */
 		public axis_index: number;
+		/**
+		 * The #hb_tag_t tag identifying the design variation of the axis
+		 */
 		public tag: tag_t;
+		/**
+		 * The `name` table Name ID that provides display names for the axis
+		 */
 		public name_id: ot_name_id_t;
+		/**
+		 * The #hb_ot_var_axis_flags_t flags for the axis
+		 */
 		public flags: ot_var_axis_flags_t;
+		/**
+		 * The mininum value on the variation axis that the font covers
+		 */
 		public min_value: number;
+		/**
+		 * The position on the variation axis corresponding to the font's defaults
+		 */
 		public default_value: number;
+		/**
+		 * The maximum value on the variation axis that the font covers
+		 */
 		public max_value: number;
-		public reserved: number;
+		public readonly reserved: number;
 	}
 
 	/**
 	 * Use #hb_ot_var_axis_info_t instead.
 	 */
+	interface ot_var_axis_t {}
 	class ot_var_axis_t {
+		public constructor();
+		/**
+		 * axis tag
+		 */
 		public tag: tag_t;
+		/**
+		 * axis name identifier
+		 */
 		public name_id: ot_name_id_t;
+		/**
+		 * minimum value of the axis
+		 */
 		public min_value: number;
+		/**
+		 * default value of the axis
+		 */
 		public default_value: number;
+		/**
+		 * maximum value of the axis
+		 */
 		public max_value: number;
 	}
 
@@ -222,12 +406,23 @@ declare namespace imports.gi.HarfBuzz {
 	 * set and retrieved using hb_buffer_set_segment_properties() and
 	 * hb_buffer_get_segment_properties(), respectively.
 	 */
+	interface segment_properties_t {}
 	class segment_properties_t {
+		public constructor();
+		/**
+		 * the #hb_direction_t of the buffer, see hb_buffer_set_direction().
+		 */
 		public direction: direction_t;
+		/**
+		 * the #hb_script_t of the buffer, see hb_buffer_set_script().
+		 */
 		public script: script_t;
+		/**
+		 * the #hb_language_t of the buffer, see hb_buffer_set_language().
+		 */
 		public language: language_t;
-		public reserved1: any;
-		public reserved2: any;
+		public readonly reserved1: any;
+		public readonly reserved2: any;
 	}
 
 	/**
@@ -236,7 +431,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * points, and various other collections of discrete
 	 * values.
 	 */
+	interface set_t {}
 	class set_t {
+		public constructor();
 	}
 
 	/**
@@ -250,7 +447,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * of specific input parameters (script, language, direction, features,
 	 * etc.).
 	 */
+	interface shape_plan_t {}
 	class shape_plan_t {
+		public constructor();
 	}
 
 	/**
@@ -263,14 +462,18 @@ declare namespace imports.gi.HarfBuzz {
 	 * needed, and replace the default by calling the setter for a
 	 * method.
 	 */
+	interface unicode_funcs_t {}
 	class unicode_funcs_t {
+		public constructor();
 	}
 
 	/**
 	 * Data structure for holding user-data keys.
 	 */
+	interface user_data_key_t {}
 	class user_data_key_t {
-		public unused: string;
+		public constructor();
+		public readonly unused: string;
 	}
 
 	/**
@@ -278,14 +481,22 @@ declare namespace imports.gi.HarfBuzz {
 	 * variation-axis tags are listed in
 	 * [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 	 */
+	interface variation_t {}
 	class variation_t {
+		public constructor();
+		/**
+		 * The #hb_tag_t tag of the variation-axis name
+		 */
 		public tag: tag_t;
+		/**
+		 * The value of the variation axis
+		 */
 		public value: number;
 		/**
 		 * Converts an #hb_variation_t into a %NULL-terminated string in the format
 		 * understood by hb_variation_from_string(). The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
-		 * @param buf 
+		 * @param buf output string
 		 * @param size the allocated size of #buf
 		 */
 		public _string(buf: string[], size: number): void;
@@ -3500,7 +3711,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * string.
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
-		 * @param name 
+		 * @param name The name string to query
 		 * @param len The length of the name queried
 		 * @param glyph The glyph ID retrieved
 		 * @returns %true if data found, %false otherwise
@@ -3562,7 +3773,7 @@ declare namespace imports.gi.HarfBuzz {
 		 * @param font #hb_font_t to work upon
 		 * @param font_data #font user data pointer
 		 * @param glyph The glyph ID to query
-		 * @param name 
+		 * @param name Name string retrieved for the glyph ID
 		 * @param size Length of the glyph-name string retrieved
 		 * @returns %true if data found, %false otherwise
 		 */
@@ -3854,7 +4065,37 @@ declare namespace imports.gi.HarfBuzz {
 		(ufuncs: unicode_funcs_t, unicode: codepoint_t): script_t;
 	}
 
-	interface var_int_t {}
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link var_int_t} instead.
+	 */
+	interface Ivar_int_t {
+		u32: number;
+		i32: number;
+		u16: number[];
+		i16: number[];
+		u8: number[];
+		i8: number[];
+
+		connect(signal: "notify::u32", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::i32", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::u16", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::i16", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::u8", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::i8", callback: (owner: this, ...args: any) => number): number;
+
+	}
+
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link var_int_t} instead.
+	 */
+	type var_int_tMixin = Ivar_int_t;
+
+	interface var_int_t extends var_int_tMixin {}
+
+	class var_int_t {
+		public constructor();
+	}
+
 
 	/**
 	 * Data type for booleans.
@@ -4136,7 +4377,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches the data from a blob.
 	 * @param blob a blob.
 	 * @param length The length in bytes of the data retrieved
-	 * @returns 
+	 * @returns the byte data of #blob.
 	 */
 	function blob_get_data(blob: blob_t, length: number): string[];
 
@@ -4148,7 +4389,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * fails.
 	 * @param blob a blob.
 	 * @param length output length of the writable data.
-	 * @returns 
+	 * @returns Writable blob data,
+	 * or %NULL if failed.
 	 */
 	function blob_get_data_writable(blob: blob_t, length: number): string[];
 
@@ -4428,6 +4670,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer An #hb_buffer_t
 	 * @param length The output-array length.
 	 * @returns 
+	 * The #buffer glyph information array.
+	 * The value valid as long as buffer has not been modified.
 	 */
 	function buffer_get_glyph_infos(buffer: buffer_t, length: number): glyph_info_t[];
 
@@ -4442,6 +4686,8 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer An #hb_buffer_t
 	 * @param length The output length
 	 * @returns 
+	 * The #buffer glyph position array.
+	 * The value valid as long as buffer has not been modified.
 	 */
 	function buffer_get_glyph_positions(buffer: buffer_t, length: number): glyph_position_t[];
 
@@ -4699,6 +4945,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Returns a list of supported buffer serialization formats.
 	 * @returns 
+	 * A string array of buffer serialization formats. Should not be freed.
 	 */
 	function buffer_serialize_list_formats(): string[];
 
@@ -5988,7 +6235,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the face object is not needed anymore
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create(ft_face: undefined, destroy: destroy_func_t): face_t;
+	function ft_face_create(ft_face: any, destroy: destroy_func_t): face_t;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6004,7 +6251,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create_cached(ft_face: undefined): face_t;
+	function ft_face_create_cached(ft_face: any): face_t;
 
 	/**
 	 * Creates an #hb_face_t face object from the specified FT_Face.
@@ -6019,7 +6266,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_face_t face object
 	 */
-	function ft_face_create_referenced(ft_face: undefined): face_t;
+	function ft_face_create_referenced(ft_face: any): face_t;
 
 	/**
 	 * Refreshes the state of #font when the underlying FT_Face has changed.
@@ -6054,7 +6301,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param destroy A callback to call when the font object is not needed anymore
 	 * @returns the new #hb_font_t font object
 	 */
-	function ft_font_create(ft_face: undefined, destroy: destroy_func_t): font_t;
+	function ft_font_create(ft_face: any, destroy: destroy_func_t): font_t;
 
 	/**
 	 * Creates an #hb_font_t font object from the specified FT_Face.
@@ -6072,7 +6319,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param ft_face FT_Face to work upon
 	 * @returns the new #hb_font_t font object
 	 */
-	function ft_font_create_referenced(ft_face: undefined): font_t;
+	function ft_font_create_referenced(ft_face: any): font_t;
 
 	/**
 	 * Fetches the FT_Face associated with the specified #hb_font_t
@@ -6080,7 +6327,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face found or %NULL
 	 */
-	function ft_font_get_face(font: font_t): undefined;
+	function ft_font_get_face(font: font_t): any;
 
 	/**
 	 * Fetches the FT_Load_Glyph load flags of the specified #hb_font_t.
@@ -6098,7 +6345,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face associated with #font or %NULL
 	 */
-	function ft_font_lock_face(font: font_t): undefined;
+	function ft_font_lock_face(font: font_t): any;
 
 	/**
 	 * Configures the font-functions structure of the specified
@@ -6180,14 +6427,14 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param _face #hb_face_t to query
 	 * @returns the gr_face found
 	 */
-	function graphite2_face_get_gr_face(_face: face_t): undefined;
+	function graphite2_face_get_gr_face(_face: face_t): any;
 
 	/**
 	 * Always returns %NULL. Use hb_graphite2_face_get_gr_face() instead.
 	 * @param font An #hb_font_t
 	 * @returns Graphite2 font associated with #font.
 	 */
-	function graphite2_font_get_gr_font(font: font_t): undefined;
+	function graphite2_font_get_gr_font(font: font_t): any;
 
 	/**
 	 * Converts #str representing a BCP 47 language tag to the corresponding
@@ -7134,7 +7381,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * used as long as #face is alive.
 	 * @param _face font face.
 	 * @param num_entries number of returned entries.
-	 * @returns 
+	 * @returns Array of available name entries.
 	 */
 	function ot_name_list_names(_face: face_t, num_entries: number): ot_name_entry_t[];
 
@@ -7652,7 +7899,8 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Retrieves the list of shapers supported by HarfBuzz.
-	 * @returns 
+	 * @returns an array of
+	 *    constant strings
 	 */
 	function shape_list_shapers(): string[];
 

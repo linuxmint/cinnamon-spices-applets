@@ -4,7 +4,9 @@ declare namespace imports.gi.GModule {
 	 * [dynamically-loaded module][glib-Dynamic-Loading-of-Modules].
 	 * It should only be accessed via the following functions.
 	 */
+	interface Module {}
 	class Module {
+		public constructor();
 		/**
 		 * Closes a module.
 		 * @returns %TRUE on success

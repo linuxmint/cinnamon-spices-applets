@@ -34,8 +34,8 @@ declare namespace imports.gi.St {
 		y_fill: boolean
 	}
 
-
-	interface Bin extends BinOptions, WidgetMethodsReadableProps {
+	type BinMixin = BinOptions & WidgetMethodsReadableProps;
+	interface Bin extends BinMixin {
 		get_child(): Widget;
 		set_child(widget: Widget): void
 	}
@@ -55,7 +55,7 @@ declare namespace imports.gi.St {
 		pack_start: boolean;
 	}
 
-	interface BoxLayoutMethodsReadableProps extends WidgetMethodsReadableProps {
+	interface BoxLayoutMethodsReadableProps {
 		add(element: Widget, options?: AddOptions): void;
 		/**
 		 * Get the value of the St.BoxLayout.pack-start property.
@@ -79,7 +79,8 @@ declare namespace imports.gi.St {
 		set_vertical(vertical: boolean): void; 
 	}
 
-	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps, Scrollable { }
+	type BoxLayoutMixin = BoxLayoutOptions & BoxLayoutMethodsReadableProps & Scrollable & WidgetMethodsReadableProps;
+	interface BoxLayout extends BoxLayoutMixin { }
 
 	export class BoxLayout {
 		constructor(options?: Partial<BoxLayoutOptions>)
@@ -544,12 +545,19 @@ declare namespace imports.gi.St {
 		y_fill: boolean,
 	}
 
-	export class Table extends Widget {
-		row_count: number
-
+	interface ITable {
+		row_count: number;
 		add(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
 		set_direction(direction: TextDirection): void
 		child_set(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
+	}
+
+	type TableMixin = ITable & Widget;
+
+	interface Table extends TableMixin {}
+
+	export class Table {
+
 	}
 
 	export class Content {
