@@ -9081,8 +9081,9 @@ async function DeleteFile(file) {
     return result;
 }
 async function OverwriteAndGetIOStream(file) {
-    if (!FileExists(file.get_parent()))
-        file.get_parent().make_directory_with_parents(null);
+    const parent = file.get_parent();
+    if (parent != null && !FileExists(parent))
+        parent.make_directory_with_parents(null);
     return new Promise((resolve, reject) => {
         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
             let ioStream = file.replace_readwrite_finish(result);
@@ -10730,6 +10731,7 @@ class WeatherButton {
     }
     hovered(event) {
         this.Hovered.Invoke(this, event);
+        return false;
     }
 }
 
@@ -11346,27 +11348,34 @@ class UIHourlyForecasts {
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth();
         let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+        if (minWidth == null)
+            return;
         let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+        if (naturalHeight == null)
+            return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this.actor.set_width(minWidth);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
         return new Promise((resolve, reject) => {
+            if (naturalHeight == null)
+                return;
+            let height = naturalHeight;
             if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 this.actor.height = 0;
                 addTween(this.actor, {
-                    height: naturalHeight,
+                    height: height,
                     time: 0.25,
                     onUpdate: () => { },
                     onComplete: () => {
-                        this.actor.set_height(naturalHeight);
+                        this.actor.set_height(height);
                         resolve();
                     }
                 });
             }
             else {
-                this.actor.set_height(naturalHeight);
+                this.actor.set_height(height);
                 resolve();
             }
         });
@@ -11415,6 +11424,9 @@ class UIHourlyForecasts {
             let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
             let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth == null || temperatureWidth == null ||
+                hourWidth == null || iconWidth == null || summaryWidth == null)
+                continue;
             if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
                 if (precipitationWidth > summaryWidth)
                     precipitationWidth += 10;
@@ -11497,6 +11509,9 @@ class UIHourlyForecasts {
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
             let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
             let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            if (precipitationHeight == null || temperatureHeight == null ||
+                hourHeight == null || iconHeight == null || summaryHeight == null)
+                continue;
             let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemHeight)
                 boxItemHeight = itemHeight;
@@ -11507,7 +11522,7 @@ class UIHourlyForecasts {
         let theme = this.container.get_theme_node();
         let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
         logger_Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
-        return (boxItemHeight + scrollBarHeight + styling);
+        return (boxItemHeight + (scrollBarHeight !== null && scrollBarHeight !== void 0 ? scrollBarHeight : 0) + styling);
     }
 }
 
@@ -14090,7 +14105,7 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f, _g;
         let message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -14133,15 +14148,15 @@ class HttpLib {
                 response: message
             };
         }
-        if ((message === null || message === void 0 ? void 0 : message.status_code) > 200 && (message === null || message === void 0 ? void 0 : message.status_code) < 300) {
+        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Verbose("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
+        logger_Logger.Verbose("API full response: " + ((_d = (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = (_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data));
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) === null || _f === void 0 ? void 0 : _f.data));
         return {
             Success: (error == null),
-            Data: (_e = message === null || message === void 0 ? void 0 : message.response_body) === null || _e === void 0 ? void 0 : _e.data,
+            Data: (_g = message === null || message === void 0 ? void 0 : message.response_body) === null || _g === void 0 ? void 0 : _g.data,
             ErrorData: error
         };
     }
@@ -14158,14 +14173,19 @@ class HttpLib {
         logger_Logger.Debug("URL called: " + query);
         let data = await new Promise((resolve, reject) => {
             let message = Message.new(method, query);
-            if (headers != null) {
-                for (const key in headers) {
-                    message.request_headers.append(key, headers[key]);
-                }
+            if (message == null) {
+                resolve(null);
             }
-            this._httpSession.queue_message(message, (session, message) => {
-                resolve(message);
-            });
+            else {
+                if (headers != null) {
+                    for (const key in headers) {
+                        message.request_headers.append(key, headers[key]);
+                    }
+                }
+                this._httpSession.queue_message(message, (session, message) => {
+                    resolve(message);
+                });
+            }
         });
         return data;
     }

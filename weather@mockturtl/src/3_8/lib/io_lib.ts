@@ -89,9 +89,10 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
 
 }
 
-export async function OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
-	if (!FileExists(file.get_parent()))
-		file.get_parent().make_directory_with_parents(null); //don't know if this is a blocking call or not
+export async function OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileIOStream> {
+	const parent = file.get_parent();
+	if (parent != null && !FileExists(parent))
+		parent.make_directory_with_parents(null); //don't know if this is a blocking call or not
 
 	return new Promise((resolve, reject) => {
 		file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
