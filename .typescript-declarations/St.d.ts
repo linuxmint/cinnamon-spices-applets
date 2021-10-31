@@ -34,8 +34,8 @@ declare namespace imports.gi.St {
 		y_fill: boolean
 	}
 
-
-	interface Bin extends BinOptions, WidgetMethodsReadableProps {
+	type BinMixin = BinOptions & WidgetMethodsReadableProps;
+	interface Bin extends BinMixin {
 		get_child(): Widget;
 		set_child(widget: Widget): void
 	}
@@ -55,7 +55,7 @@ declare namespace imports.gi.St {
 		pack_start: boolean;
 	}
 
-	interface BoxLayoutMethodsReadableProps extends WidgetMethodsReadableProps {
+	interface BoxLayoutMethodsReadableProps {
 		add(element: Widget, options?: AddOptions): void;
 		/**
 		 * Get the value of the St.BoxLayout.pack-start property.
@@ -79,7 +79,8 @@ declare namespace imports.gi.St {
 		set_vertical(vertical: boolean): void; 
 	}
 
-	interface BoxLayout extends BoxLayoutOptions, BoxLayoutMethodsReadableProps, Scrollable { }
+	type BoxLayoutMixin = BoxLayoutOptions & BoxLayoutMethodsReadableProps & Scrollable & WidgetMethodsReadableProps;
+	interface BoxLayout extends BoxLayoutMixin { }
 
 	export class BoxLayout {
 		constructor(options?: Partial<BoxLayoutOptions>)
@@ -298,13 +299,15 @@ declare namespace imports.gi.St {
 		vscrollbar_visible: boolean;
 	}
 
-	interface ScrollView extends ScrollViewOptions, Bin {
+	type ScrollViewMixin = ScrollViewOptions & Bin;
+	interface ScrollView extends ScrollViewMixin {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
 		set_policy(hscroll: Gtk.PolicyType, vscroll: Gtk.PolicyType): void;
 		get_vscroll_bar(): ScrollBar;
 		get_hscroll_bar(): ScrollBar;
 	}
+
 
 	export class ScrollView {
 
@@ -520,7 +523,7 @@ declare namespace imports.gi.St {
 
 	// This is the only way we can extend a class when its bases has different signatures. 
 	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
-	type WidgetMethodsReadableProps = IWidgetMethodsReadableProps & Clutter.ActorMethodsReadableProps
+	type WidgetMethodsReadableProps = IWidgetMethodsReadableProps & Clutter.ActorMethodsReadableProps & Clutter.IActor;
 
 	interface Widget extends WidgetOptions, WidgetMethodsReadableProps { }
 
@@ -544,12 +547,19 @@ declare namespace imports.gi.St {
 		y_fill: boolean,
 	}
 
-	export class Table extends Widget {
-		row_count: number
-
+	interface ITable {
+		row_count: number;
 		add(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
 		set_direction(direction: TextDirection): void
 		child_set(actor: Clutter.Actor, options: Partial<TableAddOptions>): void
+	}
+
+	type TableMixin = ITable & Widget;
+
+	interface Table extends TableMixin {}
+
+	export class Table {
+
 	}
 
 	export class Content {

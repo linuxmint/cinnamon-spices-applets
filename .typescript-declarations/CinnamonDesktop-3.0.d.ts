@@ -1,5 +1,8 @@
 declare namespace imports.gi.CinnamonDesktop {
-	interface BG extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link BG} instead.
+	 */
+	interface IBG {
 		changes_with_time(): boolean;
 		create_and_set_gtk_image(image: Gtk.Image, width: number, height: number): void;
 		create_and_set_surface_as_root(root_window: Gdk.Window, screen: Gdk.Screen): void;
@@ -41,10 +44,21 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
 		set_filename(filename: string): void;
 		set_placement(placement: CDesktopEnums.BackgroundStyle): void;
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		connect(signal: "transitioned", callback: (owner: this) => void): number;
+
 	}
 
-	var BG: {
-		new(): BG;
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link BG} instead.
+	 */
+	type BGMixin = IBG & GObject.IObject;
+
+	interface BG extends BGMixin {}
+
+	class BG {
+		public constructor();
+		public static new(): BG;
 		/**
 		 * This function queries the _XROOTPMAP_ID property from
 		 * the root window associated with #screen to determine
@@ -54,8 +68,8 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param screen a #GdkScreen
 		 * @returns a #cairo_surface_t if successful or %NULL
 		 */
-		get_surface_from_root(screen: Gdk.Screen): cairo.Surface;
-		set_accountsservice_background(background: string): void;
+		public static get_surface_from_root(screen: Gdk.Screen): cairo.Surface;
+		public static set_accountsservice_background(background: string): void;
 		/**
 		 * Set the root pixmap, and properties pointing to it. We
 		 * do this atomically with a server grab to make sure that
@@ -67,7 +81,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param surface the #cairo_surface_t to set root background from.
 		 *   Must be an xlib surface backing a pixmap.
 		 */
-		set_surface_as_root(screen: Gdk.Screen, surface: cairo.Surface): void;
+		public static set_surface_as_root(screen: Gdk.Screen, surface: cairo.Surface): void;
 		/**
 		 * Set the root pixmap, and properties pointing to it.
 		 * This function differs from gnome_bg_set_surface_as_root()
@@ -77,10 +91,24 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param surface the cairo xlib surface to set root background from
 		 * @returns a #GnomeBGCrossfade object
 		 */
-		set_surface_as_root_with_crossfade(screen: Gdk.Screen, surface: cairo.Surface): BGCrossfade;
+		public static set_surface_as_root_with_crossfade(screen: Gdk.Screen, surface: cairo.Surface): BGCrossfade;
 	}
 
-	interface BGCrossfade extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link BGCrossfade} instead.
+	 */
+	interface IBGCrossfade {
+		/**
+		 * When a crossfade is running, this is height of the fading
+		 * surface.
+		 */
+		height: number;
+		/**
+		 * When a crossfade is running, this is width of the fading
+		 * surface.
+		 */
+		width: number;
+		readonly parent_object: GObject.Object;
 		/**
 		 * This function reveals whether or not #fade is currently
 		 * running on a window.  See gnome_bg_crossfade_start() for
@@ -121,9 +149,28 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * already stopped.
 		 */
 		stop(): void;
+		/**
+		 * When a crossfade finishes, #window will have a copy
+		 * of the end surface as its background, and this signal will
+		 * get emitted.
+		 */
+		connect(signal: "finished", callback: (owner: this, window: GObject.Object) => void): number;
+
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
-	var BGCrossfade: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link BGCrossfade} instead.
+	 */
+	type BGCrossfadeMixin = IBGCrossfade & GObject.IObject;
+
+	interface BGCrossfade extends BGCrossfadeMixin {}
+
+	class BGCrossfade {
+		public constructor();
 		/**
 		 * Creates a new object to manage crossfading a
 		 * window background between two #cairo_surface_ts.
@@ -131,10 +178,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param height The height of the crossfading window
 		 * @returns the new #GnomeBGCrossfade
 		 */
-		new(width: number, height: number): BGCrossfade;
+		public static new(width: number, height: number): BGCrossfade;
 	}
 
-	interface DesktopThumbnailFactory extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link DesktopThumbnailFactory} instead.
+	 */
+	interface IDesktopThumbnailFactory {
 		/**
 		 * Returns TRUE if this GnomeIconFactory can (at least try) to thumbnail
 		 * this file. Thumbnails or files with failed thumbnails won't be thumbnailed.
@@ -197,7 +247,15 @@ declare namespace imports.gi.CinnamonDesktop {
 		save_thumbnail(thumbnail: GdkPixbuf.Pixbuf, uri: string, original_mtime: number): void;
 	}
 
-	var DesktopThumbnailFactory: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link DesktopThumbnailFactory} instead.
+	 */
+	type DesktopThumbnailFactoryMixin = IDesktopThumbnailFactory & GObject.IObject;
+
+	interface DesktopThumbnailFactory extends DesktopThumbnailFactoryMixin {}
+
+	class DesktopThumbnailFactory {
+		public constructor();
 		/**
 		 * Creates a new #GnomeDesktopThumbnailFactory.
 		 * 
@@ -205,10 +263,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param size The thumbnail size to use
 		 * @returns a new #GnomeDesktopThumbnailFactory
 		 */
-		new(size: DesktopThumbnailSize): DesktopThumbnailFactory;
+		public static new(size: DesktopThumbnailSize): DesktopThumbnailFactory;
 	}
 
-	interface PnpIds extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link PnpIds} instead.
+	 */
+	interface IPnpIds {
 		/**
 		 * Find the full manufacturer name for the given PNP ID.
 		 * @param pnp_id the PNP ID to look for
@@ -218,16 +279,27 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_pnp_id(pnp_id: string): string;
 	}
 
-	var PnpIds: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link PnpIds} instead.
+	 */
+	type PnpIdsMixin = IPnpIds & GObject.IObject;
+
+	interface PnpIds extends PnpIdsMixin {}
+
+	class PnpIds {
+		public constructor();
 		/**
 		 * Returns a reference to a #GnomePnpIds object, or creates
 		 * a new one if none have been created.
 		 * @returns a #GnomePnpIds object.
 		 */
-		new(): PnpIds;
+		public static new(): PnpIds;
 	}
 
-	interface RRConfig extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRConfig} instead.
+	 */
+	interface IRRConfig {
 		applicable(screen: RRScreen): boolean;
 		apply_with_time(screen: RRScreen, timestamp: number): boolean;
 		ensure_primary(): boolean;
@@ -246,16 +318,27 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_clone(clone: boolean): void;
 	}
 
-	var RRConfig: {
-		new_current(screen: RRScreen): RRConfig;
-		new_stored(screen: RRScreen): RRConfig;
-		apply_from_filename_with_time(screen: RRScreen, filename: string, timestamp: number): boolean;
-		get_backup_filename(): string;
-		get_intended_filename(): string;
-		get_legacy_filename(): string;
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRConfig} instead.
+	 */
+	type RRConfigMixin = IRRConfig & GObject.IObject;
+
+	interface RRConfig extends RRConfigMixin {}
+
+	class RRConfig {
+		public constructor();
+		public static new_current(screen: RRScreen): RRConfig;
+		public static new_stored(screen: RRScreen): RRConfig;
+		public static apply_from_filename_with_time(screen: RRScreen, filename: string, timestamp: number): boolean;
+		public static get_backup_filename(): string;
+		public static get_intended_filename(): string;
+		public static get_legacy_filename(): string;
 	}
 
-	interface RRLabeler extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRLabeler} instead.
+	 */
+	interface IRRLabeler {
 		/**
 		 * Get the color used for the label on a given output (monitor).
 		 * @param output Output device (i.e. monitor) to query
@@ -272,7 +355,15 @@ declare namespace imports.gi.CinnamonDesktop {
 		show(): void;
 	}
 
-	var RRLabeler: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRLabeler} instead.
+	 */
+	type RRLabelerMixin = IRRLabeler & GObject.IObject;
+
+	interface RRLabeler extends RRLabelerMixin {}
+
+	class RRLabeler {
+		public constructor();
 		/**
 		 * Create a GUI element that will display colored labels on each connected monitor.
 		 * This is useful when users are required to identify which monitor is which, e.g. for
@@ -281,14 +372,17 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param config Configuration of the screens to label
 		 * @returns A new #GnomeRRLabeler
 		 */
-		new(config: RRConfig): RRLabeler;
+		public static new(config: RRConfig): RRLabeler;
 	}
 
-	interface RROutputInfo extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RROutputInfo} instead.
+	 */
+	interface IRROutputInfo {
 		get_aspect_ratio(): number;
 		get_display_name(): string;
 		get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
-		get_geometry(_x: number, _y: number, width: number, height: number): void;
+		get_geometry(): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		get_name(): string;
 		get_preferred_height(): number;
 		get_preferred_width(): number;
@@ -312,10 +406,22 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_scale(scale: number): void;
 	}
 
-	var RROutputInfo: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RROutputInfo} instead.
+	 */
+	type RROutputInfoMixin = IRROutputInfo & GObject.IObject;
+
+	interface RROutputInfo extends RROutputInfoMixin {}
+
+	class RROutputInfo {
+		public constructor();
 	}
 
-	interface RRScreen extends GObject.Object, Gio.Initable {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRScreen} instead.
+	 */
+	interface IRRScreen {
+		gdk_screen: Gdk.Screen;
 		calculate_best_global_scale(index: number): number;
 		calculate_supported_scales(width: number, height: number, n_supported_scales: number): number;
 		create_clone_modes(): RRMode;
@@ -327,22 +433,26 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_output_by_name(name: string): RROutput;
 		/**
 		 * Get the ranges of the screen
-		 * @param min_width the minimum width
-		 * @param max_width the maximum width
-		 * @param min_height the minimum height
-		 * @param max_height the maximum height
+		 * @returns the minimum width
+		 * 
+		 * the maximum width
+		 * 
+		 * the minimum height
+		 * 
+		 * the maximum height
 		 */
-		get_ranges(min_width: number, max_width: number, min_height: number, max_height: number): void;
+		get_ranges(): [ min_width: number, max_width: number, min_height: number, max_height: number ];
 		/**
 		 * Queries the two timestamps that the X RANDR extension maintains.  The X
 		 * server will prevent change requests for stale configurations, those whose
 		 * timestamp is not equal to that of the latest request for configuration.  The
 		 * X server will also prevent change requests that have an older timestamp to
 		 * the latest change request.
-		 * @param change_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last changed
-		 * @param config_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last obtained
+		 * @returns Location in which to store the timestamp at which the RANDR configuration was last changed
+		 * 
+		 * Location in which to store the timestamp at which the RANDR configuration was last obtained
 		 */
-		get_timestamps(change_timestamp_ret: number, config_timestamp_ret: number): void;
+		get_timestamps(): [ change_timestamp_ret: number, config_timestamp_ret: number ];
 		get_use_upscaling(): boolean;
 		/**
 		 * List available XRandR clone modes
@@ -382,9 +492,52 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_global_scale_setting(scale_factor: number): void;
 		set_primary_output(output: RROutput): void;
 		set_size(width: number, height: number, mm_width: number, mm_height: number): void;
+		connect(signal: "changed", callback: (owner: this) => void): number;
+		/**
+		 * This signal is emitted when a display device is connected to a
+		 * port, or a port is hotplugged with an active output. The latter
+		 * can happen if a laptop is docked, and the dock provides a new
+		 * active output.
+		 * 
+		 * The #output value is not a #GObject. The returned #output value can
+		 * only assume to be valid during the emission of the signal (i.e. within
+		 * your signal handler only), as it may change later when the #screen
+		 * is modified due to an event from the X server, or due to another
+		 * place in the application modifying the #screen and the #output.
+		 * Therefore, deal with changes to the #output right in your signal
+		 * handler, instead of keeping the #output reference for an async or
+		 * idle function.
+		 */
+		connect(signal: "output-connected", callback: (owner: this, output: any | null) => void): number;
+		/**
+		 * This signal is emitted when a display device is disconnected from
+		 * a port, or a port output is hot-unplugged. The latter can happen
+		 * if a laptop is undocked, and the dock provided the output.
+		 * 
+		 * The #output value is not a #GObject. The returned #output value can
+		 * only assume to be valid during the emission of the signal (i.e. within
+		 * your signal handler only), as it may change later when the #screen
+		 * is modified due to an event from the X server, or due to another
+		 * place in the application modifying the #screen and the #output.
+		 * Therefore, deal with changes to the #output right in your signal
+		 * handler, instead of keeping the #output reference for an async or
+		 * idle function.
+		 */
+		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
+
+		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
-	var RRScreen: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link RRScreen} instead.
+	 */
+	type RRScreenMixin = IRRScreen & GObject.IObject & Gio.IInitable;
+
+	interface RRScreen extends RRScreenMixin {}
+
+	class RRScreen {
+		public constructor();
 		/**
 		 * Creates a unique #GnomeRRScreen instance for the specified #screen.
 		 * @param screen the #GdkScreen on which to operate
@@ -392,10 +545,24 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * if this could not be created, for instance if the driver does not support
 		 * Xrandr 1.2.  Each #GdkScreen thus has a single instance of #GnomeRRScreen.
 		 */
-		new(screen: Gdk.Screen): RRScreen;
+		public static new(screen: Gdk.Screen): RRScreen;
 	}
 
-	interface WallClock extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link WallClock} instead.
+	 */
+	interface IWallClock {
+		/**
+		 * A formatted string representing the current clock display.
+		 */
+		readonly clock: string;
+		/**
+		 * If not NULL, the wall clock will format the time/date according to
+		 * this format string.  If the format string is invalid, the default string
+		 * will be used instead.
+		 */
+		format_string: string;
+		readonly parent_object: GObject.Object;
 		/**
 		 * Returns a formatted date and time based on either default format
 		 * settings, or via a custom-set format string.
@@ -434,15 +601,27 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns Whether or not the format string was valid and accepted.
 		 */
-		set_format_string(format_string: string): boolean;
+		set_format_string(format_string: string | null): boolean;
+		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
-	var WallClock: {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link WallClock} instead.
+	 */
+	type WallClockMixin = IWallClock & GObject.IObject;
+
+	interface WallClock extends WallClockMixin {}
+
+	class WallClock {
+		public constructor();
 		/**
 		 * Returns a new GnomeWallClock instance
 		 * @returns A pointer to a new GnomeWallClock instance.
 		 */
-		new(): WallClock;
+		public static new(): WallClock;
 		/**
 		 * Returns the translation of the format string according to
 		 * the LC_TIME locale.
@@ -450,10 +629,14 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns The translated format string.
 		 */
-		lctime_format(gettext_domain: string, format_string: string): string;
+		public static lctime_format(gettext_domain: string | null, format_string: string | null): string;
 	}
 
-	interface XkbInfo extends GObject.Object {
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XkbInfo} instead.
+	 */
+	interface IXkbInfo {
+		readonly parent_object: GObject.Object;
 		description_for_option(group_id: string, _id: string): string;
 		/**
 		 * Returns a list of all layout identifiers we know about.
@@ -483,17 +666,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * If the given layout doesn't exist the return value is %FALSE and
 		 * all the (out) parameters are set to %NULL.
 		 * @param _id layout's identifier about which to retrieve the info
-		 * @param display_name location to store
-		 * the layout's display name, or %NULL
-		 * @param short_name location to store
-		 * the layout's short name, or %NULL
-		 * @param xkb_layout location to store
-		 * the layout's XKB name, or %NULL
-		 * @param xkb_variant location to store
-		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
 		 */
-		get_layout_info(_id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info(_id: string): boolean;
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -501,19 +676,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * If a layout can't be found the return value is %FALSE and all the
 		 * (out) parameters are set to %NULL.
 		 * @param language an ISO 639 code
-		 * @param _id location to store the
-		 * layout's indentifier, or %NULL
-		 * @param display_name location to store
-		 * the layout's display name, or %NULL
-		 * @param short_name location to store
-		 * the layout's short name, or %NULL
-		 * @param xkb_layout location to store
-		 * the layout's XKB name, or %NULL
-		 * @param xkb_variant location to store
-		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if a layout exists or %FALSE otherwise.
 		 */
-		get_layout_info_for_language(language: string, _id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info_for_language(language: string): boolean;
 		/**
 		 * Returns a list of all option identifiers we know about for group
 		 * #group_id.
@@ -524,61 +689,88 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * be modified.
 		 */
 		get_options_for_group(group_id: string): GLib.List;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+
 	}
 
-	var XkbInfo: {
-		new(): XkbInfo;
+	/** This construct is only for enabling class multi-inheritance,
+	 * use {@link XkbInfo} instead.
+	 */
+	type XkbInfoMixin = IXkbInfo & GObject.IObject;
+
+	interface XkbInfo extends XkbInfoMixin {}
+
+	class XkbInfo {
+		public constructor();
+		public static new(): XkbInfo;
 		/**
 		 * Frees an #XkbRF_VarDefsRec instance allocated by
 		 * gnome_xkb_info_get_var_defs().
 		 * @param var_defs #XkbRF_VarDefsRec instance to free
 		 */
-		free_var_defs(var_defs: undefined): void;
+		public static free_var_defs(var_defs: any): void;
 		/**
 		 * Gets both the XKB rules file path and the current XKB parameters in
 		 * use by the X server.
-		 * @param rules location to store the rules file
+		 * @returns location to store the rules file
 		 * path. Use g_free() when it's no longer needed
-		 * @param var_defs location to store a
+		 * 
+		 * location to store a
 		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
 		 * free it
 		 */
-		get_var_defs(rules: string, var_defs: undefined): void;
+		public static get_var_defs(): [ rules: string, var_defs: any ];
 	}
 
+	interface BGClass {}
 	class BGClass {
+		public constructor();
 	}
 
+	interface BGCrossfadeClass {}
 	class BGCrossfadeClass {
-		public parent_class: GObject.ObjectClass;
-		finished: { (fade: BGCrossfade, window: Gdk.Window): void; };
+		public constructor();
+		public finished: {(fade: BGCrossfade, window: Gdk.Window): void;};
 	}
 
+	interface BGCrossfadePrivate {}
 	class BGCrossfadePrivate {
+		public constructor();
 	}
 
+	interface DesktopThumbnailFactoryClass {}
 	class DesktopThumbnailFactoryClass {
-		public parent: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface DesktopThumbnailFactoryPrivate {}
 	class DesktopThumbnailFactoryPrivate {
+		public constructor();
 	}
 
+	interface PnpIdsClass {}
 	class PnpIdsClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface PnpIdsPrivate {}
 	class PnpIdsPrivate {
+		public constructor();
 	}
 
+	interface RRConfigClass {}
 	class RRConfigClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface RRConfigPrivate {}
 	class RRConfigPrivate {
+		public constructor();
 	}
 
+	interface RRCrtc {}
 	class RRCrtc {
+		public constructor();
 		public can_drive_output(output: RROutput): boolean;
 		public get_current_mode(): RRMode;
 		public get_current_rotation(): RRRotation;
@@ -592,14 +784,19 @@ declare namespace imports.gi.CinnamonDesktop {
 		public supports_rotation(rotation: RRRotation): boolean;
 	}
 
+	interface RRLabelerClass {}
 	class RRLabelerClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface RRLabelerPrivate {}
 	class RRLabelerPrivate {
+		public constructor();
 	}
 
+	interface RRMode {}
 	class RRMode {
+		public constructor();
 		public get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
 		public get_freq(): number;
 		public get_freq_f(): number;
@@ -608,7 +805,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		public get_width(): number;
 	}
 
+	interface RROutput {}
 	class RROutput {
+		public constructor();
 		public can_clone(clone: RROutput): boolean;
 		public get_backlight(): number;
 		public get_backlight_max(): number;
@@ -634,35 +833,47 @@ declare namespace imports.gi.CinnamonDesktop {
 		public supports_mode(mode: RRMode): boolean;
 	}
 
+	interface RROutputInfoClass {}
 	class RROutputInfoClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface RROutputInfoPrivate {}
 	class RROutputInfoPrivate {
+		public constructor();
 	}
 
+	interface RRScreenClass {}
 	class RRScreenClass {
-		public parent_class: GObject.ObjectClass;
-		changed: { (): void; };
-		output_connected: { (output: RROutput): void; };
-		output_disconnected: { (output: RROutput): void; };
+		public constructor();
+		public changed: {(): void;};
+		public output_connected: {(output: RROutput): void;};
+		public output_disconnected: {(output: RROutput): void;};
 	}
 
+	interface RRScreenPrivate {}
 	class RRScreenPrivate {
+		public constructor();
 	}
 
+	interface WallClockClass {}
 	class WallClockClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface WallClockPrivate {}
 	class WallClockPrivate {
+		public constructor();
 	}
 
+	interface XkbInfoClass {}
 	class XkbInfoClass {
-		public parent_class: GObject.ObjectClass;
+		public constructor();
 	}
 
+	interface XkbInfoPrivate {}
 	class XkbInfoPrivate {
+		public constructor();
 	}
 
 	enum DesktopThumbnailSize {
@@ -700,7 +911,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	}
 
 	interface InstallerClientCallback {
-		(success: boolean, user_data: any): void;
+		(success: boolean): void;
 	}
 
 	/**
@@ -719,7 +930,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * @returns the passwd struct corresponding to the
 	 * session user (or, as a last resort, the user returned by getuid())
 	 */
-	function desktop_get_session_user_pwent(): any;
+	function desktop_get_session_user_pwent(): any | null;
 
 	/**
 	 * Prepends a terminal (either the one configured as default in
@@ -789,17 +1000,15 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * Uses packagekit to check if provided package names are installed.
 	 * @param packages a null-terminated array of package names
 	 * @param callback the callback to run for the result
-	 * @param user_data extra data to be sent to the callback
 	 */
-	function installer_check_for_packages(packages: string[], callback: InstallerClientCallback, user_data: any): void;
+	function installer_check_for_packages(packages: string[], callback: InstallerClientCallback): void;
 
 	/**
 	 * Uses packagekit to install the provided list of packages.
 	 * @param packages a null-terminated array of package names
 	 * @param callback the callback to run for the result
-	 * @param user_data extra data to be sent to the callback
 	 */
-	function installer_install_packages(packages: string[], callback: InstallerClientCallback, user_data: any): void;
+	function installer_install_packages(packages: string[], callback: InstallerClientCallback): void;
 
 	/**
 	 * Returns the #GQuark that will be used for #GError values returned by the
