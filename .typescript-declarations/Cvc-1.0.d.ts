@@ -537,7 +537,7 @@ declare namespace imports.gi.Cvc {
 	interface MixerStreamClass {}
 	class MixerStreamClass {
 		public constructor();
-		public push_volume: {(stream: MixerStream, operation: any): boolean;};
+		public push_volume: {(stream: MixerStream, operation: any | null): boolean;};
 		public change_is_muted: {(stream: MixerStream, is_muted: boolean): boolean;};
 		public change_port: {(stream: MixerStream, _port: string): boolean;};
 		public monitor_update: {(stream: MixerStream, _v: number): void;};

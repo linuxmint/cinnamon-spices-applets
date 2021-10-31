@@ -12,8 +12,8 @@ declare namespace imports.gi.Caribou {
 		mod_unlatch(mask: number): void;
 		get_current_group(group_name: string, variant_name: string): number;
 		get_groups(group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;
-		register_key_func(keyval: number, _func: Caribou.KeyButtonCallback, func_target: any): void;
-		register_button_func(button: number, _func: Caribou.KeyButtonCallback, func_target: any): void;
+		register_key_func(keyval: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
+		register_button_func(button: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
 		get_display(): Gdk.Display;
 		connect(signal: "modifiers-changed", callback: (owner: this, modifiers: number) => void): number;
 		connect(signal: "group-changed", callback: (owner: this, gid: number, group: string, variant: string) => void): number;
@@ -235,7 +235,7 @@ declare namespace imports.gi.Caribou {
 		get_show_subkeys(): boolean;
 		get_name(): string;
 		get_keyval(): number;
-		get_text(): string;
+		get_text(): string | null;
 		get_label(): string;
 		set_label(value: string): void;
 		connect(signal: "key-hold-end", callback: (owner: this) => void): number;
@@ -264,7 +264,7 @@ declare namespace imports.gi.Caribou {
 
 	class KeyModel {
 		public constructor();
-		public static new(name: string, text: string): Caribou.KeyModel;
+		public static new(name: string, text: string | null): Caribou.KeyModel;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -352,7 +352,7 @@ declare namespace imports.gi.Caribou {
 	 */
 	interface IScannableGroup {
 		get_scan_children(result_length1: number): Caribou.IScannableItem[];
-		child_select(): Caribou.IScannableItem;
+		child_select(): Caribou.IScannableItem | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -377,8 +377,8 @@ declare namespace imports.gi.Caribou {
 		public mod_unlatch: {(self: Caribou.DisplayAdapter, mask: number): void;};
 		public get_current_group: {(self: Caribou.DisplayAdapter, group_name: string, variant_name: string): number;};
 		public get_groups: {(self: Caribou.DisplayAdapter, group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;};
-		public register_key_func: {(self: Caribou.DisplayAdapter, keyval: number, _func: Caribou.KeyButtonCallback, func_target: any): void;};
-		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, _func: Caribou.KeyButtonCallback, func_target: any): void;};
+		public register_key_func: {(self: Caribou.DisplayAdapter, keyval: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
+		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
 	}
 
 	interface DisplayAdapterPrivate {}
@@ -495,7 +495,7 @@ declare namespace imports.gi.Caribou {
 	class ScannableGroupClass {
 		public constructor();
 		public get_scan_children: {(self: Caribou.ScannableGroup, result_length1: number): Caribou.IScannableItem[];};
-		public child_select: {(self: Caribou.ScannableGroup): Caribou.IScannableItem;};
+		public child_select: {(self: Caribou.ScannableGroup): Caribou.IScannableItem | null;};
 	}
 
 	interface ScannableGroupPrivate {}
@@ -517,10 +517,10 @@ declare namespace imports.gi.Caribou {
 	class IScannableGroupIface {
 		public constructor();
 		public readonly parent_iface: GObject.TypeInterface;
-		public child_select: {(self: Caribou.IScannableGroup): Caribou.IScannableItem;};
+		public child_select: {(self: Caribou.IScannableGroup): Caribou.IScannableItem | null;};
 		public scan_reset: {(self: Caribou.IScannableGroup): void;};
 		public get_scan_children: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
-		public child_step: {(self: Caribou.IScannableGroup, cycles: number): Caribou.IScannableItem;};
+		public child_step: {(self: Caribou.IScannableGroup, cycles: number): Caribou.IScannableItem | null;};
 		public get_step_path: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
 		public get_selected_path: {(self: Caribou.IScannableGroup, result_length1: number): Caribou.IScannableItem[];};
 		public get_scan_grouping: {(self: Caribou.IScannableGroup): Caribou.ScanGrouping;};
@@ -568,16 +568,16 @@ declare namespace imports.gi.Caribou {
 	 */
 	interface IIScannableGroup {
 		scan_grouping: Caribou.ScanGrouping;
-		child_select(): Caribou.IScannableItem;
+		child_select(): Caribou.IScannableItem | null;
 		scan_reset(): void;
 		get_scan_children(result_length1: number): Caribou.IScannableItem[];
-		child_step(cycles: number): Caribou.IScannableItem;
+		child_step(cycles: number): Caribou.IScannableItem | null;
 		get_step_path(result_length1: number): Caribou.IScannableItem[];
 		get_selected_path(result_length1: number): Caribou.IScannableItem[];
 		get_scan_grouping(): Caribou.ScanGrouping;
 		set_scan_grouping(value: Caribou.ScanGrouping): void;
-		connect(signal: "selected-item-changed", callback: (owner: this, selected_item: Caribou.IScannableItem) => void): number;
-		connect(signal: "step-item-changed", callback: (owner: this, step_item: Caribou.IScannableItem) => void): number;
+		connect(signal: "selected-item-changed", callback: (owner: this, selected_item: Caribou.IScannableItem | null) => void): number;
+		connect(signal: "step-item-changed", callback: (owner: this, step_item: Caribou.IScannableItem | null) => void): number;
 		connect(signal: "scan-cleared", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::scan_grouping", callback: (owner: this, ...args: any) => number): number;

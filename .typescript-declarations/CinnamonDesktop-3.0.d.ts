@@ -382,7 +382,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_aspect_ratio(): number;
 		get_display_name(): string;
 		get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
-		get_geometry(_x: number, _y: number, width: number, height: number): void;
+		get_geometry(): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		get_name(): string;
 		get_preferred_height(): number;
 		get_preferred_width(): number;
@@ -433,22 +433,26 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_output_by_name(name: string): RROutput;
 		/**
 		 * Get the ranges of the screen
-		 * @param min_width the minimum width
-		 * @param max_width the maximum width
-		 * @param min_height the minimum height
-		 * @param max_height the maximum height
+		 * @returns the minimum width
+		 * 
+		 * the maximum width
+		 * 
+		 * the minimum height
+		 * 
+		 * the maximum height
 		 */
-		get_ranges(min_width: number, max_width: number, min_height: number, max_height: number): void;
+		get_ranges(): [ min_width: number, max_width: number, min_height: number, max_height: number ];
 		/**
 		 * Queries the two timestamps that the X RANDR extension maintains.  The X
 		 * server will prevent change requests for stale configurations, those whose
 		 * timestamp is not equal to that of the latest request for configuration.  The
 		 * X server will also prevent change requests that have an older timestamp to
 		 * the latest change request.
-		 * @param change_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last changed
-		 * @param config_timestamp_ret Location in which to store the timestamp at which the RANDR configuration was last obtained
+		 * @returns Location in which to store the timestamp at which the RANDR configuration was last changed
+		 * 
+		 * Location in which to store the timestamp at which the RANDR configuration was last obtained
 		 */
-		get_timestamps(change_timestamp_ret: number, config_timestamp_ret: number): void;
+		get_timestamps(): [ change_timestamp_ret: number, config_timestamp_ret: number ];
 		get_use_upscaling(): boolean;
 		/**
 		 * List available XRandR clone modes
@@ -504,7 +508,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
 		 */
-		connect(signal: "output-connected", callback: (owner: this, output: any) => void): number;
+		connect(signal: "output-connected", callback: (owner: this, output: any | null) => void): number;
 		/**
 		 * This signal is emitted when a display device is disconnected from
 		 * a port, or a port output is hot-unplugged. The latter can happen
@@ -519,7 +523,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
 		 */
-		connect(signal: "output-disconnected", callback: (owner: this, output: any) => void): number;
+		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
 
 		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => number): number;
 
@@ -597,7 +601,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns Whether or not the format string was valid and accepted.
 		 */
-		set_format_string(format_string: string): boolean;
+		set_format_string(format_string: string | null): boolean;
 		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
@@ -625,7 +629,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @param format_string
 		 * @returns The translated format string.
 		 */
-		public static lctime_format(gettext_domain: string, format_string: string): string;
+		public static lctime_format(gettext_domain: string | null, format_string: string | null): string;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -662,17 +666,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * If the given layout doesn't exist the return value is %FALSE and
 		 * all the (out) parameters are set to %NULL.
 		 * @param _id layout's identifier about which to retrieve the info
-		 * @param display_name location to store
-		 * the layout's display name, or %NULL
-		 * @param short_name location to store
-		 * the layout's short name, or %NULL
-		 * @param xkb_layout location to store
-		 * the layout's XKB name, or %NULL
-		 * @param xkb_variant location to store
-		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
 		 */
-		get_layout_info(_id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info(_id: string): boolean;
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -680,19 +676,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * If a layout can't be found the return value is %FALSE and all the
 		 * (out) parameters are set to %NULL.
 		 * @param language an ISO 639 code
-		 * @param _id location to store the
-		 * layout's indentifier, or %NULL
-		 * @param display_name location to store
-		 * the layout's display name, or %NULL
-		 * @param short_name location to store
-		 * the layout's short name, or %NULL
-		 * @param xkb_layout location to store
-		 * the layout's XKB name, or %NULL
-		 * @param xkb_variant location to store
-		 * the layout's XKB variant, or %NULL
 		 * @returns %TRUE if a layout exists or %FALSE otherwise.
 		 */
-		get_layout_info_for_language(language: string, _id: string, display_name: string, short_name: string, xkb_layout: string, xkb_variant: string): boolean;
+		get_layout_info_for_language(language: string): boolean;
 		/**
 		 * Returns a list of all option identifiers we know about for group
 		 * #group_id.
@@ -726,13 +712,14 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * Gets both the XKB rules file path and the current XKB parameters in
 		 * use by the X server.
-		 * @param rules location to store the rules file
+		 * @returns location to store the rules file
 		 * path. Use g_free() when it's no longer needed
-		 * @param var_defs location to store a
+		 * 
+		 * location to store a
 		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
 		 * free it
 		 */
-		public static get_var_defs(rules: string, var_defs: any): void;
+		public static get_var_defs(): [ rules: string, var_defs: any ];
 	}
 
 	interface BGClass {}
@@ -943,7 +930,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * @returns the passwd struct corresponding to the
 	 * session user (or, as a last resort, the user returned by getuid())
 	 */
-	function desktop_get_session_user_pwent(): any;
+	function desktop_get_session_user_pwent(): any | null;
 
 	/**
 	 * Prepends a terminal (either the one configured as default in

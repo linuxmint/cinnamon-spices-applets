@@ -96,29 +96,9 @@ declare namespace imports.gi.Clutter {
 
     type ActorMethodsReadableProps = IActorMethodsReadableProps & GObject.Object & Animatable & Container & Scriptable
 
-    interface Event {
-        get_button(): number;
-		get_coords(): number[];
-		get_scroll_direction(): ScrollDirection;
-        get_key_symbol(): number;
-        get_source(): Clutter.Actor;
-		type(): EventType;
-    }
-
     interface PointOptions {
         x: number;
 		y: number
-    }
-
-    interface IText {
-        ellipsize: gi.Pango.EllipsizeMode
-		line_wrap: boolean
-		line_wrap_mode: gi.Pango.WrapMode;
-        text: string;
-    }
-
-    interface IStage {
-        key_focus: Actor;
     }
 
     interface Color {

@@ -381,7 +381,7 @@ declare namespace imports.gi.Atk {
 		 * to create an instance of a subclass of #AtkObject
 		 * @param data a #gpointer which identifies the object for which the AtkObject was created.
 		 */
-		initialize(data: any): void;
+		initialize(data: any | null): void;
 		/**
 		 * Emits a state-change signal for the specified state.
 		 * 
@@ -1018,7 +1018,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a new {@link StateSet} which is
 		 * the union of the two sets, returning %NULL is empty.
 		 */
-		or_sets(compare_set: StateSet): StateSet;
+		or_sets(compare_set: StateSet): StateSet | null;
 		/**
 		 * Removes the state for the specified type from the state set.
 		 * 
@@ -1098,11 +1098,11 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public do_action: {(action: Action, _i: number): boolean;};
 		public get_n_actions: {(action: Action): number;};
-		public get_description: {(action: Action, _i: number): string;};
-		public get_name: {(action: Action, _i: number): string;};
-		public get_keybinding: {(action: Action, _i: number): string;};
+		public get_description: {(action: Action, _i: number): string | null;};
+		public get_name: {(action: Action, _i: number): string | null;};
+		public get_keybinding: {(action: Action, _i: number): string | null;};
 		public set_description: {(action: Action, _i: number, desc: string): boolean;};
-		public get_localized_name: {(action: Action, _i: number): string;};
+		public get_localized_name: {(action: Action, _i: number): string | null;};
 	}
 
 	/**
@@ -1142,10 +1142,10 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
 		public contains: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
-		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object;};
-		public get_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): void;};
-		public get_position: {(component: Component, _x: number, _y: number, coord_type: CoordType): void;};
-		public get_size: {(component: Component, width: number, height: number): void;};
+		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object | null;};
+		public get_extents: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
+		public get_position: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null ];};
+		public get_size: {(component: Component): [ width: number | null, height: number | null ];};
 		public grab_focus: {(component: Component): boolean;};
 		public remove_focus_handler: {(component: Component, handler_id: number): void;};
 		public set_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): boolean;};
@@ -1163,10 +1163,10 @@ declare namespace imports.gi.Atk {
 	class DocumentIface {
 		public constructor();
 		public get_document_type: {(document: Document): string;};
-		public get_document: {(document: Document): any;};
+		public get_document: {(document: Document): any | null;};
 		public get_document_locale: {(document: Document): string;};
 		public get_document_attributes: {(document: Document): AttributeSet;};
-		public get_document_attribute_value: {(document: Document, attribute_name: string): string;};
+		public get_document_attribute_value: {(document: Document, attribute_name: string): string | null;};
 		public set_document_attribute: {(document: Document, attribute_name: string, attribute_value: string): boolean;};
 		public get_current_page_number: {(document: Document): number;};
 		public get_page_count: {(document: Document): number;};
@@ -1225,11 +1225,11 @@ declare namespace imports.gi.Atk {
 	interface ImageIface {}
 	class ImageIface {
 		public constructor();
-		public get_image_position: {(image: Image, _x: number, _y: number, coord_type: CoordType): void;};
+		public get_image_position: {(image: Image, coord_type: CoordType): [ x: number | null, y: number | null ];};
 		public get_image_description: {(image: Image): string;};
-		public get_image_size: {(image: Image, width: number, height: number): void;};
+		public get_image_size: {(image: Image): [ width: number | null, height: number | null ];};
 		public set_image_description: {(image: Image, description: string): boolean;};
-		public get_image_locale: {(image: Image): string;};
+		public get_image_locale: {(image: Image): string | null;};
 	}
 
 	interface Implementor {}
@@ -1331,13 +1331,13 @@ declare namespace imports.gi.Atk {
 		public set_role: {(accessible: Object, role: Role): void;};
 		public connect_property_change_handler: {(accessible: Object, handler: PropertyChangeHandler): number;};
 		public remove_property_change_handler: {(accessible: Object, handler_id: number): void;};
-		public initialize: {(accessible: Object, data: any): void;};
-		public children_changed: {(accessible: Object, change_index: number, changed_child: any): void;};
+		public initialize: {(accessible: Object, data: any | null): void;};
+		public children_changed: {(accessible: Object, change_index: number, changed_child: any | null): void;};
 		public focus_event: {(accessible: Object, focus_in: boolean): void;};
 		public property_change: {(accessible: Object, values: PropertyValues): void;};
 		public state_change: {(accessible: Object, name: string, state_set: boolean): void;};
 		public visible_data_changed: {(accessible: Object): void;};
-		public active_descendant_changed: {(accessible: Object, child: any): void;};
+		public active_descendant_changed: {(accessible: Object, child: any | null): void;};
 		public get_attributes: {(accessible: Object): AttributeSet;};
 		public get_object_locale: {(accessible: Object): string;};
 	}
@@ -1471,7 +1471,7 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public add_selection: {(selection: Selection, _i: number): boolean;};
 		public clear_selection: {(selection: Selection): boolean;};
-		public ref_selection: {(selection: Selection, _i: number): Object;};
+		public ref_selection: {(selection: Selection, _i: number): Object | null;};
 		public get_selection_count: {(selection: Selection): number;};
 		public is_child_selected: {(selection: Selection, _i: number): boolean;};
 		public remove_selection: {(selection: Selection, _i: number): boolean;};
@@ -1499,7 +1499,7 @@ declare namespace imports.gi.Atk {
 		public get_n_mime_types: {(streamable: StreamableContent): number;};
 		public get_mime_type: {(streamable: StreamableContent, _i: number): string;};
 		public get_stream: {(streamable: StreamableContent, mime_type: string): GLib.IOChannel;};
-		public get_uri: {(streamable: StreamableContent, mime_type: string): string;};
+		public get_uri: {(streamable: StreamableContent, mime_type: string): string | null;};
 	}
 
 	/**
@@ -1510,10 +1510,10 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public get_column_span: {(cell: TableCell): number;};
 		public get_column_header_cells: {(cell: TableCell): Object[];};
-		public get_position: {(cell: TableCell, _row: number, column: number): boolean;};
+		public get_position: {(cell: TableCell): boolean;};
 		public get_row_span: {(cell: TableCell): number;};
 		public get_row_header_cells: {(cell: TableCell): Object[];};
-		public get_row_column_span: {(cell: TableCell, _row: number, column: number, row_span: number, column_span: number): boolean;};
+		public get_row_column_span: {(cell: TableCell): boolean;};
 		public get_table: {(cell: TableCell): Object;};
 	}
 
@@ -1528,11 +1528,11 @@ declare namespace imports.gi.Atk {
 		public get_n_rows: {(table: Table): number;};
 		public get_column_extent_at: {(table: Table, _row: number, column: number): number;};
 		public get_row_extent_at: {(table: Table, _row: number, column: number): number;};
-		public get_caption: {(table: Table): Object;};
+		public get_caption: {(table: Table): Object | null;};
 		public get_column_description: {(table: Table, column: number): string;};
-		public get_column_header: {(table: Table, column: number): Object;};
-		public get_row_description: {(table: Table, _row: number): string;};
-		public get_row_header: {(table: Table, _row: number): Object;};
+		public get_column_header: {(table: Table, column: number): Object | null;};
+		public get_row_description: {(table: Table, _row: number): string | null;};
+		public get_row_header: {(table: Table, _row: number): Object | null;};
 		public get_summary: {(table: Table): Object;};
 		public set_caption: {(table: Table, caption: Object): void;};
 		public set_column_description: {(table: Table, column: number, description: string): void;};
@@ -1562,18 +1562,18 @@ declare namespace imports.gi.Atk {
 	class TextIface {
 		public constructor();
 		public get_text: {(text: Text, start_offset: number, end_offset: number): string;};
-		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
-		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
+		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
 		public get_character_at_offset: {(text: Text, offset: number): string;};
-		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;};
+		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
 		public get_caret_offset: {(text: Text): number;};
-		public get_run_attributes: {(text: Text, offset: number, start_offset: number, end_offset: number): AttributeSet;};
+		public get_run_attributes: {(text: Text, offset: number): AttributeSet;};
 		public get_default_attributes: {(text: Text): AttributeSet;};
-		public get_character_extents: {(text: Text, offset: number, _x: number, _y: number, width: number, height: number, coords: CoordType): void;};
+		public get_character_extents: {(text: Text, offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_character_count: {(text: Text): number;};
 		public get_offset_at_point: {(text: Text, _x: number, _y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
-		public get_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): string;};
+		public get_selection: {(text: Text, selection_num: number): string;};
 		public add_selection: {(text: Text, start_offset: number, end_offset: number): boolean;};
 		public remove_selection: {(text: Text, selection_num: number): boolean;};
 		public set_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): boolean;};
@@ -1584,7 +1584,7 @@ declare namespace imports.gi.Atk {
 		public text_attributes_changed: {(text: Text): void;};
 		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
-		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity, start_offset: number, end_offset: number): string;};
+		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string | null;};
 		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, _type: ScrollType): boolean;};
 		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number): boolean;};
 	}
@@ -1642,7 +1642,7 @@ declare namespace imports.gi.Atk {
 		public constructor();
 		public add_global_event_listener: {(listener: GObject.SignalEmissionHook, event_type: string): number;};
 		public remove_global_event_listener: {(listener_id: number): void;};
-		public add_key_event_listener: {(listener: KeySnoopFunc, data: any): number;};
+		public add_key_event_listener: {(listener: KeySnoopFunc, data: any | null): number;};
 		public remove_key_event_listener: {(listener_id: number): void;};
 		public get_root: {(): Object;};
 		public get_toolkit_name: {(): string;};
@@ -1657,8 +1657,8 @@ declare namespace imports.gi.Atk {
 		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
 		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
-		public get_value_and_text: {(obj: Value, value: number, text: string): void;};
-		public get_range: {(obj: Value): Range;};
+		public get_value_and_text: {(obj: Value): [ value: number, text: string | null ];};
+		public get_range: {(obj: Value): Range | null;};
 		public get_increment: {(obj: Value): number;};
 		public get_sub_ranges: {(obj: Value): GLib.SList;};
 		public set_value: {(obj: Value, new_value: number): void;};
@@ -1685,7 +1685,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a description string, or %NULL if #action does
 		 * not implement this interface.
 		 */
-		// get_description(_i: number): string;
+		// get_description(_i: number): string | null;
 		/**
 		 * Gets the keybinding which can be used to activate this action, if one
 		 * exists. The string returned should contain localized, human-readable,
@@ -1713,14 +1713,14 @@ declare namespace imports.gi.Atk {
 		 * @returns the keybinding which can be used to activate
 		 * this action, or %NULL if there is no keybinding for this action.
 		 */
-		// get_keybinding(_i: number): string;
+		// get_keybinding(_i: number): string | null;
 		/**
 		 * Returns the localized name of the specified action of the object.
 		 * @param _i the action index corresponding to the action to be performed
 		 * @returns a name string, or %NULL if #action does not
 		 * implement this interface.
 		 */
-		// get_localized_name(_i: number): string;
+		// get_localized_name(_i: number): string | null;
 		/**
 		 * Gets the number of accessible actions available on the object.
 		 * If there are more than one, the first one is considered the
@@ -1748,7 +1748,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a name string, or %NULL if #action does not
 		 * implement this interface.
 		 */
-		// get_name(_i: number): string;
+		// get_name(_i: number): string | null;
 		/**
 		 * Sets a description of the specified action of the object.
 		 * @param _i the action index corresponding to the action to be performed
@@ -1829,14 +1829,17 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the extent can not be obtained (e.g. a non-embedded plug or missing
 		 * support), all of x, y, width, height are set to -1.
-		 * @param _x address of #gint to put x coordinate
-		 * @param _y address of #gint to put y coordinate
-		 * @param width address of #gint to put width
-		 * @param height address of #gint to put height
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate
+		 * 
+		 * address of #gint to put y coordinate
+		 * 
+		 * address of #gint to put width
+		 * 
+		 * address of #gint to put height
 		 */
-		get_extents(_x: number, _y: number, width: number, height: number, coord_type: CoordType): void;
+		get_extents(coord_type: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
 		 * Gets the layer of the component.
 		 * @returns an {@link Layer} which is the layer of the component
@@ -1856,21 +1859,23 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the position can not be obtained (e.g. a non-embedded plug or missing
 		 * support), x and y are set to -1.
-		 * @param _x address of #gint to put x coordinate position
-		 * @param _y address of #gint to put y coordinate position
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate position
+		 * 
+		 * address of #gint to put y coordinate position
 		 */
-		// get_position(_x: number, _y: number, coord_type: CoordType): void;
+		// get_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
 		 * Gets the size of the #component in terms of width and height.
 		 * 
 		 * If the size can not be obtained (e.g. a non-embedded plug or missing
 		 * support), width and height are set to -1.
-		 * @param width address of #gint to put width of #component
-		 * @param height address of #gint to put height of #component
+		 * @returns address of #gint to put width of #component
+		 * 
+		 * address of #gint to put height of #component
 		 */
-		get_size(width: number, height: number): void;
+		get_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Grabs focus for this #component.
 		 * @returns %TRUE if successful, %FALSE otherwise.
@@ -1886,7 +1891,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a reference to the accessible
 		 * child, if one exists
 		 */
-		ref_accessible_at_point(_x: number, _y: number, coord_type: CoordType): Object;
+		ref_accessible_at_point(_x: number, _y: number, coord_type: CoordType): Object | null;
 		/**
 		 * Remove the handler specified by #handler_id from the list of
 		 * functions to be executed when this object receives focus events
@@ -1990,7 +1995,7 @@ declare namespace imports.gi.Atk {
 		 *    attribute for this document, or %NULL if a value for
 		 *    #attribute_name has not been specified for this document.
 		 */
-		get_attribute_value(attribute_name: string): string;
+		get_attribute_value(attribute_name: string): string | null;
 		/**
 		 * Gets an AtkAttributeSet which describes document-wide
 		 *          attributes as name-value pairs.
@@ -2011,7 +2016,7 @@ declare namespace imports.gi.Atk {
 		 * how to cast this pointer.
 		 * @returns a %gpointer that points to an instance of the DOM.
 		 */
-		get_document(): any;
+		get_document(): any | null;
 		/**
 		 * Gets a string indicating the document type.
 		 * @returns a string indicating the document type
@@ -2312,19 +2317,20 @@ declare namespace imports.gi.Atk {
 		 *   `LC_MESSAGES` locale used by the image description, or
 		 *   %NULL if the image does not specify a locale.
 		 */
-		get_image_locale(): string;
+		get_image_locale(): string | null;
 		/**
 		 * Gets the position of the image in the form of a point specifying the
 		 * images top-left corner.
 		 * 
 		 * If the position can not be obtained (e.g. missing support), x and y are set
 		 * to -1.
-		 * @param _x address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained.
-		 * @param _y address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained.
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
+		 * @returns address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained.
+		 * 
+		 * address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained.
 		 */
-		get_image_position(_x: number, _y: number, coord_type: CoordType): void;
+		get_image_position(coord_type: CoordType): [ x: number | null, y: number | null ];
 		/**
 		 * Get the width and height in pixels for the specified image.
 		 * The values of #width and #height are returned as -1 if the
@@ -2332,10 +2338,11 @@ declare namespace imports.gi.Atk {
 		 * 
 		 * If the size can not be obtained (e.g. missing support), x and y are set
 		 * to -1.
-		 * @param width filled with the image width, or -1 if the value cannot be obtained.
-		 * @param height filled with the image height, or -1 if the value cannot be obtained.
+		 * @returns filled with the image width, or -1 if the value cannot be obtained.
+		 * 
+		 * filled with the image height, or -1 if the value cannot be obtained.
 		 */
-		get_image_size(width: number, height: number): void;
+		get_image_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Sets the textual description for this image.
 		 * @param description a string description to set for #image
@@ -2449,7 +2456,7 @@ declare namespace imports.gi.Atk {
 		 * selected accessible, or %NULL if #selection does not implement this
 		 * interface.
 		 */
-		ref_selection(_i: number): Object;
+		ref_selection(_i: number): Object | null;
 		/**
 		 * Removes the specified child of the object from the object's selection.
 		 * @param _i a #gint specifying the index in the selection set.  (e.g. the
@@ -2534,7 +2541,7 @@ declare namespace imports.gi.Atk {
 		 * @returns Returns a string representing a URI, or %NULL
 		 * if no corresponding URI can be constructed.
 		 */
-		get_uri(mime_type: string): string;
+		get_uri(mime_type: string): string | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2591,7 +2598,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a AtkObject* representing the
 		 * table caption, or %NULL if value does not implement this interface.
 		 */
-		get_caption(): Object;
+		get_caption(): Object | null;
 		/**
 		 * Gets a #gint representing the column at the specified #index_.
 		 * @param index_ a #gint representing an index in #table
@@ -2622,7 +2629,7 @@ declare namespace imports.gi.Atk {
 		 * specified column header, or %NULL if value does not implement this
 		 * interface.
 		 */
-		get_column_header(column: number): Object;
+		get_column_header(column: number): Object | null;
 		/**
 		 * Gets a #gint representing the index at the specified #row and
 		 * #column.
@@ -2658,7 +2665,7 @@ declare namespace imports.gi.Atk {
 		 * @returns a gchar* representing the row description, or
 		 * %NULL if value does not implement this interface.
 		 */
-		get_row_description(_row: number): string;
+		get_row_description(_row: number): string | null;
 		/**
 		 * Gets the number of rows occupied by the accessible object
 		 * at a specified #row and #column in the #table.
@@ -2675,7 +2682,7 @@ declare namespace imports.gi.Atk {
 		 * specified row header, or %NULL if value does not implement this
 		 * interface.
 		 */
-		get_row_header(_row: number): Object;
+		get_row_header(_row: number): Object | null;
 		/**
 		 * Gets the selected columns of the table by initializing **selected with
 		 * the selected column numbers. This array should be freed by the caller.
@@ -2885,24 +2892,18 @@ declare namespace imports.gi.Atk {
 		get_column_span(): number;
 		/**
 		 * Retrieves the tabular position of this cell.
-		 * @param _row the row of the given cell.
-		 * @param column the column of the given cell.
 		 * @returns TRUE if successful; FALSE otherwise.
 		 */
-		get_position(_row: number, column: number): boolean;
+		get_position(): boolean;
 		/**
 		 * Gets the row and column indexes and span of this cell accessible.
 		 * 
 		 * Note: If the object does not implement this function, then, by default, atk
 		 * will implement this function by calling get_row_span and get_column_span
 		 * on the object.
-		 * @param _row the row index of the given cell.
-		 * @param column the column index of the given cell.
-		 * @param row_span the number of rows occupied by this cell.
-		 * @param column_span the number of columns occupied by this cell.
 		 * @returns TRUE if successful; FALSE otherwise.
 		 */
-		get_row_column_span(_row: number, column: number, row_span: number, column_span: number): boolean;
+		get_row_column_span(): boolean;
 		/**
 		 * Returns the row headers as an array of cell accessibles.
 		 * @returns a GPtrArray of AtkObjects
@@ -2988,13 +2989,16 @@ declare namespace imports.gi.Atk {
 		 * Get the bounding box containing the glyph representing the character at
 		 *     a particular text offset.
 		 * @param offset The offset of the text character for which bounding information is required.
-		 * @param _x Pointer for the x coordinate of the bounding box
-		 * @param _y Pointer for the y coordinate of the bounding box
-		 * @param width Pointer for the width of the bounding box
-		 * @param height Pointer for the height of the bounding box
 		 * @param coords specify whether coordinates are relative to the screen or widget window
+		 * @returns Pointer for the x coordinate of the bounding box
+		 * 
+		 * Pointer for the y coordinate of the bounding box
+		 * 
+		 * Pointer for the width of the bounding box
+		 * 
+		 * Pointer for the height of the bounding box
 		 */
-		get_character_extents(offset: number, _x: number, _y: number, width: number, height: number, coords: CoordType): void;
+		get_character_extents(offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
 		 * Creates an {@link AttributeSet} which consists of the default values of
 		 * attributes for the text. See the enum AtkTextAttribute for types of text
@@ -3045,13 +3049,11 @@ declare namespace imports.gi.Atk {
 		 * returned.
 		 * @param offset the character offset at which to get the attributes, -1 means the offset of
 		 * the character to be inserted at the caret location.
-		 * @param start_offset the address to put the start offset of the range
-		 * @param end_offset the address to put the end offset of the range
 		 * @returns an {@link AttributeSet} which contains the attributes
 		 *         explicitly set at #offset. This #AtkAttributeSet should be freed by
 		 *         a call to atk_attribute_set_free().
 		 */
-		get_run_attributes(offset: number, start_offset: number, end_offset: number): AttributeSet;
+		get_run_attributes(offset: number): AttributeSet;
 		/**
 		 * Gets the text from the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3059,13 +3061,10 @@ declare namespace imports.gi.Atk {
 		 * start of the text.  The selected region closest to the beginning
 		 * of the text region is assigned the number 0, etc.  Note that adding,
 		 * moving or deleting a selected region can change the numbering.
-		 * @param start_offset passes back the starting character offset of the selected region
-		 * @param end_offset passes back the ending character offset (offset immediately past)
-		 * of the selected region
 		 * @returns a newly allocated string containing the selected text. Use g_free()
 		 *          to free the returned string.
 		 */
-		get_selection(selection_num: number, start_offset: number, end_offset: number): string;
+		get_selection(selection_num: number): string;
 		/**
 		 * Gets a portion of the text exposed through an {@link Text} according to a given #offset
 		 * and a specific #granularity, along with the start and end offsets defining the
@@ -3099,16 +3098,12 @@ declare namespace imports.gi.Atk {
 		 * of the following paragraph after the offset.
 		 * @param offset position
 		 * @param granularity An {@link TextGranularity}
-		 * @param start_offset the starting character offset of the returned string, or -1
-		 *                in the case of error (e.g. invalid offset, not implemented)
-		 * @param end_offset the offset of the first character after the returned string,
-		 *              or -1 in the case of error (e.g. invalid offset, not implemented)
 		 * @returns a newly allocated string containing the text at
 		 *          the #offset bounded by the specified #granularity. Use g_free()
 		 *          to free the returned string.  Returns %NULL if the offset is invalid
 		 *          or no implementation is available.
 		 */
-		get_string_at_offset(offset: number, granularity: TextGranularity, start_offset: number, end_offset: number): string;
+		get_string_at_offset(offset: number, granularity: TextGranularity): string | null;
 		/**
 		 * Gets the specified text.
 		 * @param start_offset a starting character offset within #text
@@ -3122,14 +3117,11 @@ declare namespace imports.gi.Atk {
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text after #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_after_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_after_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Gets the specified text.
 		 * 
@@ -3157,26 +3149,20 @@ declare namespace imports.gi.Atk {
 		 * start after the offset.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text at #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_at_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_at_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Gets the specified text.
 		 * @param offset position
 		 * @param boundary_type An {@link TextBoundary}
-		 * @param start_offset the starting character offset of the returned string
-		 * @param end_offset the offset of the first character after the
-		 *              returned substring
 		 * @returns a newly allocated string containing the text before #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
 		 */
-		get_text_before_offset(offset: number, boundary_type: TextBoundary, start_offset: number, end_offset: number): string;
+		get_text_before_offset(offset: number, boundary_type: TextBoundary): string;
 		/**
 		 * Removes the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3367,7 +3353,7 @@ declare namespace imports.gi.Atk {
 		 * that represents the minimum, maximum and descriptor (if available)
 		 * of #obj. NULL if that range is not defined.
 		 */
-		get_range(): Range;
+		get_range(): Range | null;
 		/**
 		 * Gets the list of subranges defined for this object. See {@link Value}
 		 * introduction for examples of subranges and when to expose them.
@@ -3380,11 +3366,12 @@ declare namespace imports.gi.Atk {
 		 * Gets the current value and the human readable text alternative of
 		 * #obj. #text is a newly created string, that must be freed by the
 		 * caller. Can be NULL if no descriptor is available.
-		 * @param value address of #gdouble to put the current value of #obj
-		 * @param text address of #gchar to put the human
+		 * @returns address of #gdouble to put the current value of #obj
+		 * 
+		 * address of #gchar to put the human
 		 * readable text alternative for #value
 		 */
-		get_value_and_text(value: number, text: string): void;
+		get_value_and_text(): [ value: number, text: string | null ];
 		/**
 		 * Sets the value of this object.
 		 * @param value a #GValue which is the desired new accessible value.
@@ -5184,7 +5171,7 @@ declare namespace imports.gi.Atk {
 	 *        along with the event notification, when it occurs.
 	 * @returns added event listener id, or 0 on failure.
 	 */
-	function add_key_event_listener(listener: KeySnoopFunc, data: any): number;
+	function add_key_event_listener(listener: KeySnoopFunc, data: any | null): number;
 
 	/**
 	 * Frees the memory used by an {@link AttributeSet}, including all its
@@ -5434,7 +5421,7 @@ declare namespace imports.gi.Atk {
 	 * should not be freed; %NULL is returned if there are no values
 	 * maintained for the attr value.
 	 */
-	function text_attribute_get_value(attr: TextAttribute, index_: number): string;
+	function text_attribute_get_value(attr: TextAttribute, index_: number): string | null;
 
 	/**
 	 * Associate #name with a new {@link TextAttribute}

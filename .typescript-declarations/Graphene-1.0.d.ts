@@ -118,7 +118,7 @@ declare namespace imports.gi.Graphene {
 		 * @param max the coordinates of the maximum vertex
 		 * @returns the initialized #graphene_box_t
 		 */
-		public init(min: Point3D, max: Point3D): Box;
+		public init(min: Point3D | null, max: Point3D | null): Box;
 		/**
 		 * Initializes the given #graphene_box_t with the vertices of
 		 * another #graphene_box_t.
@@ -144,7 +144,7 @@ declare namespace imports.gi.Graphene {
 		 * @param max the coordinates of the maximum vertex
 		 * @returns the initialized #graphene_box_t
 		 */
-		public init_from_vec3(min: Vec3, max: Vec3): Box;
+		public init_from_vec3(min: Vec3 | null, max: Vec3 | null): Box;
 		/**
 		 * Initializes the given #graphene_box_t with the given array
 		 * of vertices.
@@ -165,7 +165,7 @@ declare namespace imports.gi.Graphene {
 		 * @param res return location for the result
 		 * @returns true if the two boxes intersect
 		 */
-		public intersection(_b: Box, res: Box): boolean;
+		public intersection(_b: Box, res: Box | null): boolean;
 		/**
 		 * Unions the two given #graphene_box_t.
 		 * @param _b the box to union to #a
@@ -271,7 +271,7 @@ declare namespace imports.gi.Graphene {
 		 * @param src a #graphene_euler_t
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_euler(src: Euler): Euler;
+		public init_from_euler(src: Euler | null): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the given rotation matrix.
 		 * 
@@ -281,7 +281,7 @@ declare namespace imports.gi.Graphene {
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_matrix(_m: Matrix, order: EulerOrder): Euler;
+		public init_from_matrix(_m: Matrix | null, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the given normalized quaternion.
 		 * 
@@ -291,7 +291,7 @@ declare namespace imports.gi.Graphene {
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_quaternion(q: Quaternion, order: EulerOrder): Euler;
+		public init_from_quaternion(q: Quaternion | null, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the given angles
 		 * and order of rotation.
@@ -313,7 +313,7 @@ declare namespace imports.gi.Graphene {
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_vec3(_v: Vec3, order: EulerOrder): Euler;
+		public init_from_vec3(_v: Vec3 | null, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t with the given angles and #order.
 		 * @param _x rotation angle on the X axis, in degrees
@@ -905,16 +905,10 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * This function can be used to convert between a #graphene_matrix_t
 		 * and an affine matrix type from other libraries.
-		 * @param xx return location for the xx member
-		 * @param yx return location for the yx member
-		 * @param xy return location for the xy member
-		 * @param yy return location for the yy member
-		 * @param x_0 return location for the x0 member
-		 * @param y_0 return location for the y0 member
 		 * @returns `true` if the matrix is compatible with an affine
 		 *   transformation matrix
 		 */
-		public to_2d(xx: number, yx: number, xy: number, yy: number, x_0: number, y_0: number): boolean;
+		public to_2d(): boolean;
 		/**
 		 * Converts a #graphene_matrix_t to an array of floating point
 		 * values.
@@ -1120,7 +1114,7 @@ declare namespace imports.gi.Graphene {
 		 *   plane
 		 * @returns the initialized plane
 		 */
-		public init(normal: Vec3, constant: number): Plane;
+		public init(normal: Vec3 | null, constant: number): Plane;
 		/**
 		 * Initializes the given #graphene_plane_t using the normal
 		 * vector and constant of another #graphene_plane_t.
@@ -1181,7 +1175,7 @@ declare namespace imports.gi.Graphene {
 		 * @param normal_matrix a #graphene_matrix_t
 		 * @param res the transformed plane
 		 */
-		public transform(matrix: Matrix, normal_matrix: Matrix, res: Plane): void;
+		public transform(matrix: Matrix, normal_matrix: Matrix | null, res: Plane): void;
 	}
 
 	/**
@@ -1227,11 +1221,9 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Computes the distance between #a and #b.
 		 * @param _b a #graphene_point_t
-		 * @param d_x distance component on the X axis
-		 * @param d_y distance component on the Y axis
 		 * @returns the distance between the two points
 		 */
-		public distance(_b: Point, d_x: number, d_y: number): number;
+		public distance(_b: Point): number;
 		/**
 		 * Checks if the two points #a and #b point to the same
 		 * coordinates.
@@ -1332,7 +1324,7 @@ declare namespace imports.gi.Graphene {
 		 *   components on the X, Y, and Z axis
 		 * @returns the distance between two points
 		 */
-		public distance(_b: Point3D, delta: Vec3): number;
+		public distance(_b: Point3D, delta: Vec3 | null): number;
 		/**
 		 * Computes the dot product of the two given #graphene_point3d_t.
 		 * @param _b a #graphene_point3d_t
@@ -1645,22 +1637,23 @@ declare namespace imports.gi.Graphene {
 		public slerp(_b: Quaternion, factor: number, res: Quaternion): void;
 		/**
 		 * Converts a quaternion into an #angle, #axis pair.
-		 * @param angle return location for the angle, in degrees
 		 * @param axis return location for the rotation axis
 		 */
-		public to_angle_vec3(angle: number, axis: Vec3): void;
+		public to_angle_vec3(axis: Vec3): void;
 		/**
 		 * Converts a #graphene_quaternion_t to its corresponding rotations
 		 * on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 		 * on each axis.
-		 * @param deg_x return location for the rotation angle on
+		 * @returns return location for the rotation angle on
 		 *   the X axis (yaw), in degrees
-		 * @param deg_y return location for the rotation angle on
+		 * 
+		 * return location for the rotation angle on
 		 *   the Y axis (pitch), in degrees
-		 * @param deg_z return location for the rotation angle on
+		 * 
+		 * return location for the rotation angle on
 		 *   the Z axis (roll), in degrees
 		 */
-		public to_angles(deg_x: number, deg_y: number, deg_z: number): void;
+		public to_angles(): [ deg_x: number | null, deg_y: number | null, deg_z: number | null ];
 		/**
 		 * Converts a quaternion into a transformation matrix expressing
 		 * the rotation defined by the #graphene_quaternion_t.
@@ -1671,14 +1664,16 @@ declare namespace imports.gi.Graphene {
 		 * Converts a #graphene_quaternion_t to its corresponding rotations
 		 * on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 		 * on each axis.
-		 * @param rad_x return location for the rotation angle on
+		 * @returns return location for the rotation angle on
 		 *   the X axis (yaw), in radians
-		 * @param rad_y return location for the rotation angle on
+		 * 
+		 * return location for the rotation angle on
 		 *   the Y axis (pitch), in radians
-		 * @param rad_z return location for the rotation angle on
+		 * 
+		 * return location for the rotation angle on
 		 *   the Z axis (roll), in radians
 		 */
-		public to_radians(rad_x: number, rad_y: number, rad_z: number): void;
+		public to_radians(): [ rad_x: number | null, rad_y: number | null, rad_z: number | null ];
 		/**
 		 * Copies the components of a #graphene_quaternion_t into a
 		 * #graphene_vec4_t.
@@ -1769,7 +1764,7 @@ declare namespace imports.gi.Graphene {
 		 * @param direction the direction vector
 		 * @returns the initialized ray
 		 */
-		public init(origin: Point3D, direction: Vec3): Ray;
+		public init(origin: Point3D | null, direction: Vec3 | null): Ray;
 		/**
 		 * Initializes the given #graphene_ray_t using the origin and direction
 		 * values of another #graphene_ray_t.
@@ -1783,31 +1778,28 @@ declare namespace imports.gi.Graphene {
 		 * @param direction a #graphene_vec3_t
 		 * @returns the initialized ray
 		 */
-		public init_from_vec3(origin: Vec3, direction: Vec3): Ray;
+		public init_from_vec3(origin: Vec3 | null, direction: Vec3 | null): Ray;
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_box_t #b.
 		 * @param _b a #graphene_box_t
-		 * @param t_out the distance of the point on the ray that intersects the box
 		 * @returns the type of intersection
 		 */
-		public intersect_box(_b: Box, t_out: number): RayIntersectionKind;
+		public intersect_box(_b: Box): RayIntersectionKind;
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_sphere_t #s.
 		 * @param _s a #graphene_sphere_t
-		 * @param t_out the distance of the point on the ray that intersects the sphere
 		 * @returns the type of intersection
 		 */
-		public intersect_sphere(_s: Sphere, t_out: number): RayIntersectionKind;
+		public intersect_sphere(_s: Sphere): RayIntersectionKind;
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_triangle_t #t.
 		 * @param _t a #graphene_triangle_t
-		 * @param t_out the distance of the point on the ray that intersects the triangle
 		 * @returns the type of intersection
 		 */
-		public intersect_triangle(_t: Triangle, t_out: number): RayIntersectionKind;
+		public intersect_triangle(_t: Triangle): RayIntersectionKind;
 		/**
 		 * Checks whether the given #graphene_ray_t #r intersects the
 		 * given #graphene_box_t #b.
@@ -2033,7 +2025,7 @@ declare namespace imports.gi.Graphene {
 		 *   a #graphene_rect_t
 		 * @returns `true` if the two rectangles intersect
 		 */
-		public intersection(_b: Rect, res: Rect): boolean;
+		public intersection(_b: Rect, res: Rect | null): boolean;
 		/**
 		 * Normalizes the passed rectangle.
 		 * 
@@ -2283,7 +2275,7 @@ declare namespace imports.gi.Graphene {
 		 * @param radius the radius of the sphere
 		 * @returns the initialized #graphene_sphere_t
 		 */
-		public init(center: Point3D, radius: number): Sphere;
+		public init(center: Point3D | null, radius: number): Sphere;
 		/**
 		 * Initializes the given #graphene_sphere_t using the given array
 		 * of 3D coordinates so that the sphere includes them.
@@ -2295,7 +2287,7 @@ declare namespace imports.gi.Graphene {
 		 * @param center the center of the sphere
 		 * @returns the initialized #graphene_sphere_t
 		 */
-		public init_from_points(n_points: number, points: Point3D[], center: Point3D): Sphere;
+		public init_from_points(n_points: number, points: Point3D[], center: Point3D | null): Sphere;
 		/**
 		 * Initializes the given #graphene_sphere_t using the given array
 		 * of 3D coordinates so that the sphere includes them.
@@ -2307,7 +2299,7 @@ declare namespace imports.gi.Graphene {
 		 * @param center the center of the sphere
 		 * @returns the initialized #graphene_sphere_t
 		 */
-		public init_from_vectors(n_vectors: number, vectors: Vec3[], center: Point3D): Sphere;
+		public init_from_vectors(n_vectors: number, vectors: Vec3[], center: Point3D | null): Sphere;
 		/**
 		 * Checks whether the sphere has a zero radius.
 		 * @returns `true` if the sphere is empty
@@ -2383,7 +2375,7 @@ declare namespace imports.gi.Graphene {
 		 *   with the barycentric coordinates
 		 * @returns `true` if the barycentric coordinates are valid
 		 */
-		public get_barycoords(_p: Point3D, res: Vec2): boolean;
+		public get_barycoords(_p: Point3D | null, res: Vec2): boolean;
 		/**
 		 * Computes the bounding box of the given #graphene_triangle_t.
 		 * @param res return location for the box
@@ -2418,7 +2410,7 @@ declare namespace imports.gi.Graphene {
 		 * @param _c return location for the coordinates
 		 *   of the third vertex
 		 */
-		public get_points(_a: Point3D, _b: Point3D, _c: Point3D): void;
+		public get_points(_a: Point3D | null, _b: Point3D | null, _c: Point3D | null): void;
 		/**
 		 * Computes the UV coordinates of the given point #p.
 		 * 
@@ -2440,14 +2432,14 @@ declare namespace imports.gi.Graphene {
 		 *   of the given point #p
 		 * @returns `true` if the coordinates are valid
 		 */
-		public get_uv(_p: Point3D, uv_a: Vec2, uv_b: Vec2, uv_c: Vec2, res: Vec2): boolean;
+		public get_uv(_p: Point3D | null, uv_a: Vec2, uv_b: Vec2, uv_c: Vec2, res: Vec2): boolean;
 		/**
 		 * Retrieves the three vertices of the given #graphene_triangle_t.
 		 * @param _a return location for the first vertex
 		 * @param _b return location for the second vertex
 		 * @param _c return location for the third vertex
 		 */
-		public get_vertices(_a: Vec3, _b: Vec3, _c: Vec3): void;
+		public get_vertices(_a: Vec3 | null, _b: Vec3 | null, _c: Vec3 | null): void;
 		/**
 		 * Initializes a #graphene_triangle_t using the three given arrays
 		 * of floating point values, each representing the coordinates of
@@ -2465,7 +2457,7 @@ declare namespace imports.gi.Graphene {
 		 * @param _c a #graphene_point3d_t
 		 * @returns the initialized #graphene_triangle_t
 		 */
-		public init_from_point3d(_a: Point3D, _b: Point3D, _c: Point3D): Triangle;
+		public init_from_point3d(_a: Point3D | null, _b: Point3D | null, _c: Point3D | null): Triangle;
 		/**
 		 * Initializes a #graphene_triangle_t using the three given vectors.
 		 * @param _a a #graphene_vec3_t
@@ -2473,7 +2465,7 @@ declare namespace imports.gi.Graphene {
 		 * @param _c a #graphene_vec3_t
 		 * @returns the initialized #graphene_triangle_t
 		 */
-		public init_from_vec3(_a: Vec3, _b: Vec3, _c: Vec3): Triangle;
+		public init_from_vec3(_a: Vec3 | null, _b: Vec3 | null, _c: Vec3 | null): Triangle;
 	}
 
 	/**

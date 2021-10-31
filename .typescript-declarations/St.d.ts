@@ -299,13 +299,15 @@ declare namespace imports.gi.St {
 		vscrollbar_visible: boolean;
 	}
 
-	interface ScrollView extends ScrollViewOptions, Bin {
+	type ScrollViewMixin = ScrollViewOptions & Bin;
+	interface ScrollView extends ScrollViewMixin {
 		set_row_size(row_size: number): void;
 		get_row_size(): number;
 		set_policy(hscroll: Gtk.PolicyType, vscroll: Gtk.PolicyType): void;
 		get_vscroll_bar(): ScrollBar;
 		get_hscroll_bar(): ScrollBar;
 	}
+
 
 	export class ScrollView {
 
@@ -521,7 +523,7 @@ declare namespace imports.gi.St {
 
 	// This is the only way we can extend a class when its bases has different signatures. 
 	// See: https://github.com/linuxmint/cinnamon-spices-applets/pull/3766
-	type WidgetMethodsReadableProps = IWidgetMethodsReadableProps & Clutter.ActorMethodsReadableProps
+	type WidgetMethodsReadableProps = IWidgetMethodsReadableProps & Clutter.ActorMethodsReadableProps & Clutter.IActor;
 
 	interface Widget extends WidgetOptions, WidgetMethodsReadableProps { }
 

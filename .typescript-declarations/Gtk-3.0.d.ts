@@ -219,13 +219,13 @@ declare namespace imports.gi.Gtk {
 		 * This should be a short string of one or two lines.
 		 * @param comments a comments string
 		 */
-		set_comments(comments: string): void;
+		set_comments(comments: string | null): void;
 		/**
 		 * Sets the copyright string to display in the about dialog.
 		 * This should be a short string of one or two lines.
 		 * @param copyright the copyright string
 		 */
-		set_copyright(copyright: string): void;
+		set_copyright(copyright: string | null): void;
 		/**
 		 * Sets the strings which are displayed in the documenters tab
 		 * of the secondary credits dialog.
@@ -238,7 +238,7 @@ declare namespace imports.gi.Gtk {
 		 * hidden.
 		 * @param license the license information or %NULL
 		 */
-		set_license(license: string): void;
+		set_license(license: string | null): void;
 		/**
 		 * Sets the license of the application showing the #about dialog from a
 		 * list of known licenses.
@@ -254,14 +254,14 @@ declare namespace imports.gi.Gtk {
 		 * gtk_window_set_default_icon() will be used.
 		 * @param logo a #GdkPixbuf, or %NULL
 		 */
-		set_logo(logo: GdkPixbuf.Pixbuf): void;
+		set_logo(logo: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets the pixbuf to be displayed as logo in the about dialog.
 		 * If it is %NULL, the default window icon set with
 		 * gtk_window_set_default_icon() will be used.
 		 * @param icon_name an icon name, or %NULL
 		 */
-		set_logo_icon_name(icon_name: string): void;
+		set_logo_icon_name(icon_name: string | null): void;
 		/**
 		 * Sets the name to display in the about dialog.
 		 * If this is not set, it defaults to g_get_application_name().
@@ -287,17 +287,17 @@ declare namespace imports.gi.Gtk {
 		 * and hide the tab.
 		 * @param translator_credits the translator credits
 		 */
-		set_translator_credits(translator_credits: string): void;
+		set_translator_credits(translator_credits: string | null): void;
 		/**
 		 * Sets the version string to display in the about dialog.
 		 * @param version the version string
 		 */
-		set_version(version: string): void;
+		set_version(version: string | null): void;
 		/**
 		 * Sets the URL to use for the website link.
 		 * @param website a URL string starting with "http://"
 		 */
-		set_website(website: string): void;
+		set_website(website: string | null): void;
 		/**
 		 * Sets the label to be used for the website link.
 		 * @param website_label the label used for the website link
@@ -449,7 +449,7 @@ declare namespace imports.gi.Gtk {
 		 *     group, or %NULL to remove all closures
 		 * @returns %TRUE if the closure was found and got disconnected
 		 */
-		disconnect(closure: GObject.Closure): boolean;
+		disconnect(closure: GObject.Closure | null): boolean;
 		/**
 		 * Removes an accelerator previously installed through
 		 * gtk_accel_group_connect().
@@ -468,7 +468,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the key of the first entry passing
 		 *    #find_func. The key is owned by GTK+ and must not be freed.
 		 */
-		find(find_func: AccelGroupFindFunc, data: any): AccelKey;
+		find(find_func: AccelGroupFindFunc, data: any | null): AccelKey;
 		/**
 		 * Locks are added and removed using gtk_accel_group_lock() and
 		 * gtk_accel_group_unlock().
@@ -499,13 +499,11 @@ declare namespace imports.gi.Gtk {
 		 * and #accel_mods.
 		 * @param accel_key key value of the accelerator
 		 * @param accel_mods modifier combination of the accelerator
-		 * @param n_entries location to return the number
-		 *     of entries found, or %NULL
 		 * @returns an array of
 		 *     #n_entries {@link AccelGroupEntry} elements, or %NULL. The array
 		 *     is owned by GTK+ and must not be freed.
 		 */
-		query(accel_key: number, accel_mods: Gdk.ModifierType, n_entries: number): AccelGroupEntry[];
+		query(accel_key: number, accel_mods: Gdk.ModifierType): AccelGroupEntry[] | null;
 		/**
 		 * Undoes the last call to gtk_accel_group_lock() on this #accel_group.
 		 */
@@ -568,7 +566,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link AccelGroup} to which #closure
 		 *     is connected, or %NULL
 		 */
-		public static from_accel_closure(closure: GObject.Closure): AccelGroup;
+		public static from_accel_closure(closure: GObject.Closure): AccelGroup | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -581,16 +579,17 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the keyval and modifier mask set with
 		 * gtk_accel_label_set_accel().
-		 * @param accelerator_key return location for the keyval
-		 * @param accelerator_mods return location for the modifier mask
+		 * @returns return location for the keyval
+		 * 
+		 * return location for the modifier mask
 		 */
-		get_accel(accelerator_key: number, accelerator_mods: Gdk.ModifierType): void;
+		get_accel(): [ accelerator_key: number, accelerator_mods: Gdk.ModifierType ];
 		/**
 		 * Fetches the widget monitored by this accelerator label. See
 		 * gtk_accel_label_set_accel_widget().
 		 * @returns the object monitored by the accelerator label, or %NULL.
 		 */
-		get_accel_widget(): Widget;
+		get_accel_widget(): Widget | null;
 		/**
 		 * Returns the width needed to display the accelerator key(s).
 		 * This is used by menus to align all of the {@link MenuItem} widgets, and shouldn't
@@ -625,13 +624,13 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_closure the closure to monitor for accelerator changes,
 		 * or %NULL
 		 */
-		set_accel_closure(accel_closure: GObject.Closure): void;
+		set_accel_closure(accel_closure: GObject.Closure | null): void;
 		/**
 		 * Sets the widget to be monitored by this accelerator label. Passing %NULL for
 		 * #accel_widget will dissociate #accel_label from its current widget, if any.
 		 * @param accel_widget the widget to be monitored, or %NULL
 		 */
-		set_accel_widget(accel_widget: Widget): void;
+		set_accel_widget(accel_widget: Widget | null): void;
 		connect(signal: "notify::accel_closure", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::accel_widget", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
@@ -855,7 +854,7 @@ declare namespace imports.gi.Gtk {
 		 * @param foreach_func function to be executed for each accel
 		 *                map entry which is not filtered out
 		 */
-		public static foreach(data: any, foreach_func: AccelMapForeach): void;
+		public static foreach(data: any | null, foreach_func: AccelMapForeach): void;
 		/**
 		 * Loops over all entries in the accelerator map, and execute
 		 * #foreach_func on each. The signature of #foreach_func is that of
@@ -866,7 +865,7 @@ declare namespace imports.gi.Gtk {
 		 * @param foreach_func function to be executed for each accel
 		 *                map entry
 		 */
-		public static foreach_unfiltered(data: any, foreach_func: AccelMapForeach): void;
+		public static foreach_unfiltered(data: any | null, foreach_func: AccelMapForeach): void;
 		/**
 		 * Gets the singleton global {@link AccelMap} object. This object
 		 * is useful only for notification of changes to the accelerator
@@ -920,7 +919,7 @@ declare namespace imports.gi.Gtk {
 		 * @param key the accelerator key to be filled in (optional)
 		 * @returns %TRUE if #accel_path is known, %FALSE otherwise
 		 */
-		public static lookup_entry(accel_path: string, key: AccelKey): boolean;
+		public static lookup_entry(accel_path: string, key: AccelKey | null): boolean;
 		/**
 		 * Saves current accelerator specifications (accelerator path, key
 		 * and modifiers) to #file_name.
@@ -962,7 +961,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns pointer to the {@link Widget}
 		 *     corresponding to the #GtkAccessible, or %NULL.
 		 */
-		get_widget(): Widget;
+		get_widget(): Widget | null;
 		/**
 		 * Sets the {@link Widget} corresponding to the #GtkAccessible.
 		 * 
@@ -972,7 +971,7 @@ declare namespace imports.gi.Gtk {
 		 * again with #widget set to %NULL.
 		 * @param widget a {@link Widget} or %NULL to unset
 		 */
-		set_widget(widget: Widget): void;
+		set_widget(widget: Widget | null): void;
 		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -1268,7 +1267,7 @@ declare namespace imports.gi.Gtk {
 		 * will be installed.
 		 * @param accel_group a {@link AccelGroup} or %NULL
 		 */
-		set_accel_group(accel_group: AccelGroup): void;
+		set_accel_group(accel_group: AccelGroup | null): void;
 		/**
 		 * Sets the accel path for this action.  All proxy widgets associated
 		 * with the action will have this accel path, so that their
@@ -1453,7 +1452,7 @@ declare namespace imports.gi.Gtk {
 		 *            the action, or %NULL
 		 * @returns a new {@link Action}
 		 */
-		public static new(name: string, label: string, tooltip: string, stock_id: string): Action;
+		public static new(name: string, label: string | null, tooltip: string | null, stock_id: string | null): Action;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1464,7 +1463,7 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the center bar widget of the bar.
 		 * @returns the center {@link Widget} or %NULL.
 		 */
-		get_center_widget(): Widget;
+		get_center_widget(): Widget | null;
 		/**
 		 * Adds #child to #action_bar, packed with reference to the
 		 * end of the #action_bar.
@@ -1481,7 +1480,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the center widget for the {@link ActionBar}.
 		 * @param center_widget a widget to use for the center
 		 */
-		set_center_widget(center_widget: Widget): void;
+		set_center_widget(center_widget: Widget | null): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1556,7 +1555,7 @@ declare namespace imports.gi.Gtk {
 		 *   the format understood by gtk_accelerator_parse(), or "" for no accelerator, or
 		 *   %NULL to use the stock accelerator
 		 */
-		add_action_with_accel(action: Action, accelerator: string): void;
+		add_action_with_accel(action: Action, accelerator: string | null): void;
 		/**
 		 * This is a convenience function to create a number of actions and add them
 		 * to the action group.
@@ -1574,7 +1573,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_entries the number of entries
 		 * @param destroy destroy notification callback for #user_data
 		 */
-		add_actions_full(entries: ActionEntry[], n_entries: number, destroy: GLib.DestroyNotify): void;
+		add_actions_full(entries: ActionEntry[], n_entries: number, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * This is a convenience routine to create a group of radio actions and
 		 * add them to the action group.
@@ -1617,7 +1616,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_entries the number of entries
 		 * @param destroy destroy notification callback for #user_data
 		 */
-		add_toggle_actions_full(entries: ToggleActionEntry[], n_entries: number, destroy: GLib.DestroyNotify): void;
+		add_toggle_actions_full(entries: ToggleActionEntry[], n_entries: number, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Gets the accelerator group.
 		 * @returns the accelerator group associated with this action
@@ -1665,7 +1664,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the accelerator group to be used by every action in this group.
 		 * @param accel_group a {@link AccelGroup} to set or %NULL
 		 */
-		set_accel_group(accel_group: AccelGroup): void;
+		set_accel_group(accel_group: AccelGroup | null): void;
 		/**
 		 * Changes the sensitivity of #action_group
 		 * @param sensitive new sensitivity
@@ -1682,7 +1681,7 @@ declare namespace imports.gi.Gtk {
 		 * @param notify a #GDestroyNotify function to be called when #action_group is
 		 *   destroyed and when the translation function is changed again
 		 */
-		set_translate_func(_func: TranslateFunc, data: any, notify: GLib.DestroyNotify): void;
+		set_translate_func(_func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Sets the translation domain and uses g_dgettext() for translating the
 		 * #label and #tooltip of {@link ActionEntrys} added by
@@ -1693,7 +1692,7 @@ declare namespace imports.gi.Gtk {
 		 * @param domain the translation domain to use for g_dgettext()
 		 * calls, or %NULL to use the domain set with textdomain()
 		 */
-		set_translation_domain(domain: string): void;
+		set_translation_domain(domain: string | null): void;
 		/**
 		 * Changes the visible of #action_group.
 		 * @param visible new visiblity
@@ -2098,16 +2097,19 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the padding on the different sides of the widget.
 		 * See gtk_alignment_set_padding ().
-		 * @param padding_top location to store the padding for
+		 * @returns location to store the padding for
 		 *     the top of the widget, or %NULL
-		 * @param padding_bottom location to store the padding
+		 * 
+		 * location to store the padding
 		 *     for the bottom of the widget, or %NULL
-		 * @param padding_left location to store the padding
+		 * 
+		 * location to store the padding
 		 *     for the left of the widget, or %NULL
-		 * @param padding_right location to store the padding
+		 * 
+		 * location to store the padding
 		 *     for the right of the widget, or %NULL
 		 */
-		get_padding(padding_top: number, padding_bottom: number, padding_left: number, padding_right: number): void;
+		get_padding(): [ padding_top: number | null, padding_bottom: number | null, padding_left: number | null, padding_right: number | null ];
 		/**
 		 * Sets the {@link Alignment} values.
 		 * @param xalign the horizontal alignment of the child widget, from 0 (left) to 1
@@ -2235,7 +2237,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the text to display at the top of the dialog,
 		 *     or %NULL, in which case a default text is displayed
 		 */
-		get_heading(): string;
+		get_heading(): string | null;
 		/**
 		 * Returns the current value of the {@link AppChooserButton}:show-default-item
 		 * property.
@@ -2350,7 +2352,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the text to display at the top of the dialog, or %NULL, in which
 		 *     case a default text is displayed
 		 */
-		get_heading(): string;
+		get_heading(): string | null;
 		/**
 		 * Returns the {@link AppChooserWidget} of this dialog.
 		 * @returns the {@link AppChooserWidget} of #self
@@ -2395,7 +2397,7 @@ declare namespace imports.gi.Gtk {
 		 * @param file a #GFile
 		 * @returns a newly created {@link AppChooserDialog}
 		 */
-		public static new(parent: Window, flags: DialogFlags, file: Gio.File): Widget;
+		public static new(parent: Window | null, flags: DialogFlags, file: Gio.File): Widget;
 		/**
 		 * Creates a new {@link AppChooserDialog} for the provided content type,
 		 * to allow the user to select an application for it.
@@ -2404,7 +2406,7 @@ declare namespace imports.gi.Gtk {
 		 * @param content_type a content type string
 		 * @returns a newly created {@link AppChooserDialog}
 		 */
-		public static new_for_content_type(parent: Window, flags: DialogFlags, content_type: string): Widget;
+		public static new_for_content_type(parent: Window | null, flags: DialogFlags, content_type: string): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2633,7 +2635,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parameter parameter to pass when activating the action,
 		 *   or %NULL if the action does not accept an activation parameter
 		 */
-		add_accelerator(accelerator: string, action_name: string, parameter: GLib.Variant): void;
+		add_accelerator(accelerator: string, action_name: string, parameter: GLib.Variant | null): void;
 		/**
 		 * Adds a window to #application.
 		 * 
@@ -2692,14 +2694,14 @@ declare namespace imports.gi.Gtk {
 		 * @returns the active window, or %NULL if
 		 *   there isn't one.
 		 */
-		get_active_window(): Window;
+		get_active_window(): Window | null;
 		/**
 		 * Returns the menu model that has been set with
 		 * gtk_application_set_app_menu().
 		 * @returns the application menu of #application
 		 *   or %NULL if no application menu has been set.
 		 */
-		get_app_menu(): Gio.MenuModel;
+		get_app_menu(): Gio.MenuModel | null;
 		/**
 		 * Gets a menu from automatically loaded resources.
 		 * See [Automatic resources][automatic-resources]
@@ -2724,7 +2726,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the window with ID #id, or
 		 *   %NULL if there is no window with this ID
 		 */
-		get_window_by_id(_id: number): Window;
+		get_window_by_id(_id: number): Window | null;
 		/**
 		 * Gets a list of the {@link Windows} associated with #application.
 		 * 
@@ -2769,7 +2771,7 @@ declare namespace imports.gi.Gtk {
 		 *     in order to remove the request. If the platform does not support
 		 *     inhibiting or the request failed for some reason, 0 is returned.
 		 */
-		inhibit(window: Window, flags: ApplicationInhibitFlags, reason: string): number;
+		inhibit(window: Window | null, flags: ApplicationInhibitFlags, reason: string | null): number;
 		/**
 		 * Determines if any of the actions specified in #flags are
 		 * currently inhibited (possibly by another application).
@@ -2832,7 +2834,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parameter parameter to pass when activating the action,
 		 *   or %NULL if the action does not accept an activation parameter
 		 */
-		remove_accelerator(action_name: string, parameter: GLib.Variant): void;
+		remove_accelerator(action_name: string, parameter: GLib.Variant | null): void;
 		/**
 		 * Remove a window from #application.
 		 * 
@@ -2881,7 +2883,7 @@ declare namespace imports.gi.Gtk {
 		 * selecting these menu items.
 		 * @param app_menu a #GMenuModel, or %NULL
 		 */
-		set_app_menu(app_menu: Gio.MenuModel): void;
+		set_app_menu(app_menu: Gio.MenuModel | null): void;
 		/**
 		 * Sets or unsets the menubar for windows of #application.
 		 * 
@@ -2903,7 +2905,7 @@ declare namespace imports.gi.Gtk {
 		 * user selecting these menu items.
 		 * @param menubar a #GMenuModel, or %NULL
 		 */
-		set_menubar(menubar: Gio.MenuModel): void;
+		set_menubar(menubar: Gio.MenuModel | null): void;
 		/**
 		 * Removes an inhibitor that has been established with gtk_application_inhibit().
 		 * Inhibitors are also cleared when the application exits.
@@ -3054,7 +3056,7 @@ declare namespace imports.gi.Gtk {
 		 * @param flags the application flags
 		 * @returns a new {@link Application} instance
 		 */
-		public static new(application_id: string, flags: Gio.ApplicationFlags): Application;
+		public static new(application_id: string | null, flags: Gio.ApplicationFlags): Application;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3076,7 +3078,7 @@ declare namespace imports.gi.Gtk {
 		 * a prior call to gtk_application_window_set_help_overlay().
 		 * @returns the help overlay associated with #window, or %NULL
 		 */
-		get_help_overlay(): ShortcutsWindow;
+		get_help_overlay(): ShortcutsWindow | null;
 		/**
 		 * Returns the unique ID of the window. If the window has not yet been added to
 		 * a {@link Application}, returns `0`.
@@ -3098,7 +3100,7 @@ declare namespace imports.gi.Gtk {
 		 * #window takes resposibility for destroying #help_overlay.
 		 * @param help_overlay a {@link ShortcutsWindow}
 		 */
-		set_help_overlay(help_overlay: ShortcutsWindow): void;
+		set_help_overlay(help_overlay: ShortcutsWindow | null): void;
 		/**
 		 * Sets whether the window will display a menubar for the app menu
 		 * and menubar as needed.
@@ -3374,7 +3376,7 @@ declare namespace imports.gi.Gtk {
 		 *  ratio is taken from the requistion of the child.
 		 * @returns the new {@link AspectFrame}.
 		 */
-		public static new(label: string, xalign: number, yalign: number, ratio: number, obey_child: boolean): Widget;
+		public static new(label: string | null, xalign: number, yalign: number, ratio: number, obey_child: boolean): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3431,7 +3433,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child widget, or %NULL
 		 *     if #page_num is out of bounds
 		 */
-		get_nth_page(page_num: number): Widget;
+		get_nth_page(page_num: number): Widget | null;
 		/**
 		 * Gets whether #page is complete.
 		 * @param page a page of #assistant
@@ -3540,7 +3542,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data for #page_func
 		 * @param destroy destroy notifier for #data
 		 */
-		set_forward_page_func(page_func: AssistantPageFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_forward_page_func(page_func: AssistantPageFunc | null, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets whether #page contents are complete.
 		 * 
@@ -3562,7 +3564,7 @@ declare namespace imports.gi.Gtk {
 		 * @param page a page of #assistant
 		 * @param pixbuf the new header image #page
 		 */
-		set_page_header_image(page: Widget, pixbuf: GdkPixbuf.Pixbuf): void;
+		set_page_header_image(page: Widget, pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets a side image for #page.
 		 * 
@@ -3571,7 +3573,7 @@ declare namespace imports.gi.Gtk {
 		 * @param page a page of #assistant
 		 * @param pixbuf the new side image #page
 		 */
-		set_page_side_image(page: Widget, pixbuf: GdkPixbuf.Pixbuf): void;
+		set_page_side_image(page: Widget, pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets a title for #page.
 		 * 
@@ -3697,7 +3699,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child of #bin, or %NULL if it does
 		 * not have a child.
 		 */
-		get_child(): Widget;
+		get_child(): Widget | null;
 		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -3757,7 +3759,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the center widget
 		 *   or %NULL in case no center widget is set.
 		 */
-		get_center_widget(): Widget;
+		get_center_widget(): Widget | null;
 		/**
 		 * Returns whether the box is homogeneous (all children are the
 		 * same size). See gtk_box_set_homogeneous().
@@ -3812,16 +3814,19 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Obtains information about how #child is packed into #box.
 		 * @param child the {@link Widget} of the child to query
-		 * @param expand pointer to return location for expand child
+		 * @returns pointer to return location for expand child
 		 *     property
-		 * @param fill pointer to return location for fill child
+		 * 
+		 * pointer to return location for fill child
 		 *     property
-		 * @param padding pointer to return location for padding
+		 * 
+		 * pointer to return location for padding
 		 *     child property
-		 * @param pack_type pointer to return location for pack-type
+		 * 
+		 * pointer to return location for pack-type
 		 *     child property
 		 */
-		query_child_packing(child: Widget, expand: boolean, fill: boolean, padding: number, pack_type: PackType): void;
+		query_child_packing(child: Widget): [ expand: boolean, fill: boolean, padding: number, pack_type: PackType ];
 		/**
 		 * Moves #child to a new #position in the list of #box children.
 		 * The list contains widgets packed #GTK_PACK_START
@@ -3855,7 +3860,7 @@ declare namespace imports.gi.Gtk {
 		 * of space.
 		 * @param widget the widget to center
 		 */
-		set_center_widget(widget: Widget): void;
+		set_center_widget(widget: Widget | null): void;
 		/**
 		 * Sets the way #child is packed into #box.
 		 * @param child the {@link Widget} of the child to set
@@ -4151,7 +4156,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the application being used by the builder,
 		 *     or %NULL
 		 */
-		get_application(): Application;
+		get_application(): Application | null;
 		/**
 		 * Gets the object named #name. Note that this function does not
 		 * increment the reference count of the returned object.
@@ -4159,7 +4164,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the object named #name or %NULL if
 		 *    it could not be found in the object tree.
 		 */
-		get_object(name: string): GObject.Object;
+		get_object(name: string): GObject.Object | null;
 		/**
 		 * Gets all objects that have been constructed by #builder. Note that
 		 * this function does not increment the reference counts of the returned
@@ -4194,7 +4199,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback_name The name of the callback
 		 * @returns The callback symbol in #builder for #callback_name, or %NULL
 		 */
-		lookup_callback_symbol(callback_name: string): GObject.Callback;
+		lookup_callback_symbol(callback_name: string): GObject.Callback | null;
 		/**
 		 * Sets the application associated with #builder.
 		 * 
@@ -4208,7 +4213,7 @@ declare namespace imports.gi.Gtk {
 		 * See {@link Builder}:translation-domain.
 		 * @param domain the translation domain or %NULL
 		 */
-		set_translation_domain(domain: string): void;
+		set_translation_domain(domain: string | null): void;
 		/**
 		 * This function demarshals a value from a string. This function
 		 * calls g_value_init() on the #value argument, so it need not be
@@ -4535,10 +4540,11 @@ declare namespace imports.gi.Gtk {
 		enter(): void;
 		/**
 		 * Gets the alignment of the child in the button.
-		 * @param xalign return location for horizontal alignment
-		 * @param yalign return location for vertical alignment
+		 * @returns return location for horizontal alignment
+		 * 
+		 * return location for vertical alignment
 		 */
-		get_alignment(xalign: number, yalign: number): void;
+		get_alignment(): [ xalign: number, yalign: number ];
 		/**
 		 * Returns whether the button will ignore the {@link Settings}:gtk-button-images
 		 * setting and always show the image, if available.
@@ -4565,7 +4571,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link Widget} or %NULL in case
 		 *     there is no image
 		 */
-		get_image(): Widget;
+		get_image(): Widget | null;
 		/**
 		 * Gets the position of the image relative to the text
 		 * inside the button.
@@ -4646,7 +4652,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_show() on #image yourself.
 		 * @param image a widget to set as the image for the button, or %NULL to unset
 		 */
-		set_image(image: Widget): void;
+		set_image(image: Widget | null): void;
 		/**
 		 * Sets the position of the image relative to the text
 		 * inside the button.
@@ -4775,7 +4781,7 @@ declare namespace imports.gi.Gtk {
 		 * @param size an icon size ({@link IconSize})
 		 * @returns a new {@link Button} displaying the themed icon
 		 */
-		public static new_from_icon_name(icon_name: string, size: number): Widget;
+		public static new_from_icon_name(icon_name: string | null, size: number): Widget;
 		/**
 		 * Creates a new {@link Button} containing the image and text from a
 		 * [stock item][gtkstock].
@@ -4961,14 +4967,16 @@ declare namespace imports.gi.Gtk {
 		clear_marks(): void;
 		/**
 		 * Obtains the selected date from a {@link Calendar}.
-		 * @param year location to store the year as a decimal
+		 * @returns location to store the year as a decimal
 		 *     number (e.g. 2011), or %NULL
-		 * @param month location to store the month number
+		 * 
+		 * location to store the month number
 		 *     (between 0 and 11), or %NULL
-		 * @param day location to store the day number (between
+		 * 
+		 * location to store the day number (between
 		 *     1 and 31), or %NULL
 		 */
-		get_date(year: number, month: number, day: number): void;
+		get_date(): [ year: number | null, month: number | null, day: number | null ];
 		/**
 		 * Returns if the #day of the #calendar is already marked.
 		 * @param day the day number between 1 and 31.
@@ -5024,7 +5032,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data data to pass to #func invokations.
 		 * @param destroy a function for releasing #data.
 		 */
-		set_detail_func(_func: CalendarDetailFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_detail_func(_func: CalendarDetailFunc, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Updates the height of detail cells.
 		 * See {@link Calendar}:detail-height-rows.
@@ -5350,7 +5358,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback the {@link CellCallback} to call
 		 * @param callback_data user provided data pointer
 		 */
-		foreach(callback: CellCallback, callback_data: any): void;
+		foreach(callback: CellCallback, callback_data: any | null): void;
 		/**
 		 * Calls #callback for every {@link CellRenderer} in #area with the
 		 * allocated rectangle inside #cell_area.
@@ -5361,7 +5369,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback the {@link CellAllocCallback} to call
 		 * @param callback_data user provided data pointer
 		 */
-		foreach_alloc(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, background_area: Gdk.Rectangle, callback: CellAllocCallback, callback_data: any): void;
+		foreach_alloc(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, background_area: Gdk.Rectangle, callback: CellAllocCallback, callback_data: any | null): void;
 		/**
 		 * Derives the allocation of #renderer inside #area if #area
 		 * were to be renderered in #cell_area.
@@ -5386,7 +5394,7 @@ declare namespace imports.gi.Gtk {
 		 *                                  returned cell renderer, or %NULL.
 		 * @returns the {@link CellRenderer} at #x and #y.
 		 */
-		get_cell_at_position(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, _x: number, _y: number, alloc_area: Gdk.Rectangle): CellRenderer;
+		get_cell_at_position(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, _x: number, _y: number, alloc_area: Gdk.Rectangle | null): CellRenderer;
 		/**
 		 * Gets the current {@link TreePath} string for the currently
 		 * applied #GtkTreeIter, this is implicitly updated when
@@ -5427,7 +5435,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link CellRenderer} for which #renderer
 		 *    is a sibling, or %NULL.
 		 */
-		get_focus_from_sibling(renderer: CellRenderer): CellRenderer;
+		get_focus_from_sibling(renderer: CellRenderer): CellRenderer | null;
 		/**
 		 * Gets the focus sibling cell renderers for #renderer.
 		 * @param renderer the {@link CellRenderer} expected to have focus
@@ -5445,10 +5453,11 @@ declare namespace imports.gi.Gtk {
 		 * requests.
 		 * @param context the {@link CellAreaContext} to perform this request with
 		 * @param widget the {@link Widget} where #area will be rendering
-		 * @param minimum_height location to store the minimum height, or %NULL
-		 * @param natural_height location to store the natural height, or %NULL
+		 * @returns location to store the minimum height, or %NULL
+		 * 
+		 * location to store the natural height, or %NULL
 		 */
-		get_preferred_height(context: CellAreaContext, widget: Widget, minimum_height: number, natural_height: number): void;
+		get_preferred_height(context: CellAreaContext, widget: Widget): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Retrieves a cell area’s minimum and natural height if it would be given
 		 * the specified #width.
@@ -5467,10 +5476,11 @@ declare namespace imports.gi.Gtk {
 		 * @param context the {@link CellAreaContext} which has already been requested for widths.
 		 * @param widget the {@link Widget} where #area will be rendering
 		 * @param width the width for which to check the height of this area
-		 * @param minimum_height location to store the minimum height, or %NULL
-		 * @param natural_height location to store the natural height, or %NULL
+		 * @returns location to store the minimum height, or %NULL
+		 * 
+		 * location to store the natural height, or %NULL
 		 */
-		get_preferred_height_for_width(context: CellAreaContext, widget: Widget, width: number, minimum_height: number, natural_height: number): void;
+		get_preferred_height_for_width(context: CellAreaContext, widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Retrieves a cell area’s initial minimum and natural width.
 		 * 
@@ -5481,10 +5491,11 @@ declare namespace imports.gi.Gtk {
 		 * requests.
 		 * @param context the {@link CellAreaContext} to perform this request with
 		 * @param widget the {@link Widget} where #area will be rendering
-		 * @param minimum_width location to store the minimum width, or %NULL
-		 * @param natural_width location to store the natural width, or %NULL
+		 * @returns location to store the minimum width, or %NULL
+		 * 
+		 * location to store the natural width, or %NULL
 		 */
-		get_preferred_width(context: CellAreaContext, widget: Widget, minimum_width: number, natural_width: number): void;
+		get_preferred_width(context: CellAreaContext, widget: Widget): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Retrieves a cell area’s minimum and natural width if it would be given
 		 * the specified #height.
@@ -5503,10 +5514,11 @@ declare namespace imports.gi.Gtk {
 		 * @param context the {@link CellAreaContext} which has already been requested for widths.
 		 * @param widget the {@link Widget} where #area will be rendering
 		 * @param height the height for which to check the width of this area
-		 * @param minimum_width location to store the minimum width, or %NULL
-		 * @param natural_width location to store the natural width, or %NULL
+		 * @returns location to store the minimum width, or %NULL
+		 * 
+		 * location to store the natural width, or %NULL
 		 */
-		get_preferred_width_for_height(context: CellAreaContext, widget: Widget, height: number, minimum_width: number, natural_width: number): void;
+		get_preferred_width_for_height(context: CellAreaContext, widget: Widget, height: number): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Gets whether the area prefers a height-for-width layout
 		 * or a width-for-height layout.
@@ -5578,10 +5590,11 @@ declare namespace imports.gi.Gtk {
 		 * @param widget the {@link Widget} that #area is rendering onto
 		 * @param for_size the allocation contextual size to request for, or -1 if
 		 * the base request for the orientation is to be returned.
-		 * @param minimum_size location to store the minimum size, or %NULL
-		 * @param natural_size location to store the natural size, or %NULL
+		 * @returns location to store the minimum size, or %NULL
+		 * 
+		 * location to store the natural size, or %NULL
 		 */
-		request_renderer(renderer: CellRenderer, orientation: Orientation, widget: Widget, for_size: number, minimum_size: number, natural_size: number): void;
+		request_renderer(renderer: CellRenderer, orientation: Orientation, widget: Widget, for_size: number): [ minimum_size: number | null, natural_size: number | null ];
 		/**
 		 * Explicitly sets the currently focused cell to #renderer.
 		 * 
@@ -6100,10 +6113,11 @@ declare namespace imports.gi.Gtk {
 		 * If the context was not allocated in width or height, or if the
 		 * context was recently reset with gtk_cell_area_context_reset(),
 		 * the returned value will be -1.
-		 * @param width location to store the allocated width, or %NULL
-		 * @param height location to store the allocated height, or %NULL
+		 * @returns location to store the allocated width, or %NULL
+		 * 
+		 * location to store the allocated height, or %NULL
 		 */
-		get_allocation(width: number, height: number): void;
+		get_allocation(): [ width: number | null, height: number | null ];
 		/**
 		 * Fetches the {@link CellArea} this #context was created by.
 		 * 
@@ -6124,12 +6138,13 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * After gtk_cell_area_context_reset() is called and/or before ever
 		 * requesting the size of a {@link CellArea}, the returned values are 0.
-		 * @param minimum_height location to store the minimum height,
+		 * @returns location to store the minimum height,
 		 *     or %NULL
-		 * @param natural_height location to store the natural height,
+		 * 
+		 * location to store the natural height,
 		 *     or %NULL
 		 */
-		get_preferred_height(minimum_height: number, natural_height: number): void;
+		get_preferred_height(): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Gets the accumulative preferred height for #width for all rows
 		 * which have been requested for the same said #width with this context.
@@ -6137,24 +6152,26 @@ declare namespace imports.gi.Gtk {
 		 * After gtk_cell_area_context_reset() is called and/or before ever
 		 * requesting the size of a {@link CellArea}, the returned values are -1.
 		 * @param width a proposed width for allocation
-		 * @param minimum_height location to store the minimum height,
+		 * @returns location to store the minimum height,
 		 *     or %NULL
-		 * @param natural_height location to store the natural height,
+		 * 
+		 * location to store the natural height,
 		 *     or %NULL
 		 */
-		get_preferred_height_for_width(width: number, minimum_height: number, natural_height: number): void;
+		get_preferred_height_for_width(width: number): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Gets the accumulative preferred width for all rows which have been
 		 * requested with this context.
 		 * 
 		 * After gtk_cell_area_context_reset() is called and/or before ever
 		 * requesting the size of a {@link CellArea}, the returned values are 0.
-		 * @param minimum_width location to store the minimum width,
+		 * @returns location to store the minimum width,
 		 *     or %NULL
-		 * @param natural_width location to store the natural width,
+		 * 
+		 * location to store the natural width,
 		 *     or %NULL
 		 */
-		get_preferred_width(minimum_width: number, natural_width: number): void;
+		get_preferred_width(): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Gets the accumulative preferred width for #height for all rows which
 		 * have been requested for the same said #height with this context.
@@ -6162,12 +6179,13 @@ declare namespace imports.gi.Gtk {
 		 * After gtk_cell_area_context_reset() is called and/or before ever
 		 * requesting the size of a {@link CellArea}, the returned values are -1.
 		 * @param height a proposed height for allocation
-		 * @param minimum_width location to store the minimum width,
+		 * @returns location to store the minimum width,
 		 *     or %NULL
-		 * @param natural_width location to store the natural width,
+		 * 
+		 * location to store the natural width,
 		 *     or %NULL
 		 */
-		get_preferred_width_for_height(height: number, minimum_width: number, natural_width: number): void;
+		get_preferred_width_for_height(height: number): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Causes the minimum and/or natural height to grow if the new
 		 * proposed sizes exceed the current minimum and natural height.
@@ -6301,38 +6319,43 @@ declare namespace imports.gi.Gtk {
 		get_aligned_area(widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle, aligned_area: Gdk.Rectangle): void;
 		/**
 		 * Fills in #xalign and #yalign with the appropriate values of #cell.
-		 * @param xalign location to fill in with the x alignment of the cell, or %NULL
-		 * @param yalign location to fill in with the y alignment of the cell, or %NULL
+		 * @returns location to fill in with the x alignment of the cell, or %NULL
+		 * 
+		 * location to fill in with the y alignment of the cell, or %NULL
 		 */
-		get_alignment(xalign: number, yalign: number): void;
+		get_alignment(): [ xalign: number | null, yalign: number | null ];
 		/**
 		 * Fills in #width and #height with the appropriate size of #cell.
-		 * @param width location to fill in with the fixed width of the cell, or %NULL
-		 * @param height location to fill in with the fixed height of the cell, or %NULL
+		 * @returns location to fill in with the fixed width of the cell, or %NULL
+		 * 
+		 * location to fill in with the fixed height of the cell, or %NULL
 		 */
-		get_fixed_size(width: number, height: number): void;
+		get_fixed_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Fills in #xpad and #ypad with the appropriate values of #cell.
-		 * @param xpad location to fill in with the x padding of the cell, or %NULL
-		 * @param ypad location to fill in with the y padding of the cell, or %NULL
+		 * @returns location to fill in with the x padding of the cell, or %NULL
+		 * 
+		 * location to fill in with the y padding of the cell, or %NULL
 		 */
-		get_padding(xpad: number, ypad: number): void;
+		get_padding(): [ xpad: number | null, ypad: number | null ];
 		/**
 		 * Retreives a renderer’s natural size when rendered to #widget.
 		 * @param widget the {@link Widget} this cell will be rendering to
-		 * @param minimum_size location to store the minimum size, or %NULL
-		 * @param natural_size location to store the natural size, or %NULL
+		 * @returns location to store the minimum size, or %NULL
+		 * 
+		 * location to store the natural size, or %NULL
 		 */
-		get_preferred_height(widget: Widget, minimum_size: number, natural_size: number): void;
+		get_preferred_height(widget: Widget): [ minimum_size: number | null, natural_size: number | null ];
 		/**
 		 * Retreives a cell renderers’s minimum and natural height if it were rendered to
 		 * #widget with the specified #width.
 		 * @param widget the {@link Widget} this cell will be rendering to
 		 * @param width the size which is available for allocation
-		 * @param minimum_height location for storing the minimum size, or %NULL
-		 * @param natural_height location for storing the preferred size, or %NULL
+		 * @returns location for storing the minimum size, or %NULL
+		 * 
+		 * location for storing the preferred size, or %NULL
 		 */
-		get_preferred_height_for_width(widget: Widget, width: number, minimum_height: number, natural_height: number): void;
+		get_preferred_height_for_width(widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Retrieves the minimum and natural size of a cell taking
 		 * into account the widget’s preference for height-for-width management.
@@ -6340,23 +6363,25 @@ declare namespace imports.gi.Gtk {
 		 * @param minimum_size location for storing the minimum size, or %NULL
 		 * @param natural_size location for storing the natural size, or %NULL
 		 */
-		get_preferred_size(widget: Widget, minimum_size: Requisition, natural_size: Requisition): void;
+		get_preferred_size(widget: Widget, minimum_size: Requisition | null, natural_size: Requisition | null): void;
 		/**
 		 * Retreives a renderer’s natural size when rendered to #widget.
 		 * @param widget the {@link Widget} this cell will be rendering to
-		 * @param minimum_size location to store the minimum size, or %NULL
-		 * @param natural_size location to store the natural size, or %NULL
+		 * @returns location to store the minimum size, or %NULL
+		 * 
+		 * location to store the natural size, or %NULL
 		 */
-		get_preferred_width(widget: Widget, minimum_size: number, natural_size: number): void;
+		get_preferred_width(widget: Widget): [ minimum_size: number | null, natural_size: number | null ];
 		/**
 		 * Retreives a cell renderers’s minimum and natural width if it were rendered to
 		 * #widget with the specified #height.
 		 * @param widget the {@link Widget} this cell will be rendering to
 		 * @param height the size which is available for allocation
-		 * @param minimum_width location for storing the minimum size, or %NULL
-		 * @param natural_width location for storing the preferred size, or %NULL
+		 * @returns location for storing the minimum size, or %NULL
+		 * 
+		 * location for storing the preferred size, or %NULL
 		 */
-		get_preferred_width_for_height(widget: Widget, height: number, minimum_width: number, natural_width: number): void;
+		get_preferred_width_for_height(widget: Widget, height: number): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Gets whether the cell renderer prefers a height-for-width layout
 		 * or a width-for-height layout.
@@ -6378,12 +6403,15 @@ declare namespace imports.gi.Gtk {
 		 * in #x_offset and #y_offset are inclusive of the xpad and ypad properties.
 		 * @param widget the widget the renderer is rendering to
 		 * @param cell_area The area a cell will be allocated, or %NULL
-		 * @param x_offset location to return x offset of cell relative to #cell_area, or %NULL
-		 * @param y_offset location to return y offset of cell relative to #cell_area, or %NULL
-		 * @param width location to return width needed to render a cell, or %NULL
-		 * @param height location to return height needed to render a cell, or %NULL
+		 * @returns location to return x offset of cell relative to #cell_area, or %NULL
+		 * 
+		 * location to return y offset of cell relative to #cell_area, or %NULL
+		 * 
+		 * location to return width needed to render a cell, or %NULL
+		 * 
+		 * location to return height needed to render a cell, or %NULL
 		 */
-		get_size(widget: Widget, cell_area: Gdk.Rectangle, x_offset: number, y_offset: number, width: number, height: number): void;
+		get_size(widget: Widget, cell_area: Gdk.Rectangle | null): [ x_offset: number | null, y_offset: number | null, width: number | null, height: number | null ];
 		/**
 		 * Translates the cell renderer state to {@link StateFlags},
 		 * based on the cell renderer and widget sensitivity, and
@@ -6392,7 +6420,7 @@ declare namespace imports.gi.Gtk {
 		 * @param cell_state cell renderer state
 		 * @returns the widget state flags applying to #cell
 		 */
-		get_state(widget: Widget, cell_state: CellRendererState): StateFlags;
+		get_state(widget: Widget | null, cell_state: CellRendererState): StateFlags;
 		/**
 		 * Returns the cell renderer’s visibility.
 		 * @returns %TRUE if the cell renderer is visible
@@ -6460,7 +6488,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A new {@link CellEditable} for editing this
 		 *   #cell, or %NULL if editing is not possible
 		 */
-		start_editing(event: Gdk.Event, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable;
+		start_editing(event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable | null;
 		/**
 		 * Informs the cell renderer that the editing is stopped.
 		 * If #canceled is %TRUE, the cell renderer will emit the
@@ -7351,7 +7379,7 @@ declare namespace imports.gi.Gtk {
 		 * %NULL is returned.
 		 * @returns the currently displayed row or %NULL
 		 */
-		get_displayed_row(): TreePath;
+		get_displayed_row(): TreePath | null;
 		/**
 		 * Gets whether #cell_view is configured to draw all of its
 		 * cells in a sensitive state.
@@ -7371,7 +7399,7 @@ declare namespace imports.gi.Gtk {
 		 * returned.
 		 * @returns a {@link TreeModel} used or %NULL
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Sets #requisition to the size needed by #cell_view to display
 		 * the model row pointed to by #path.
@@ -7399,7 +7427,7 @@ declare namespace imports.gi.Gtk {
 		 * the #GtkCellView becomes temporarily empty.
 		 * @param path a {@link TreePath} or %NULL to unset.
 		 */
-		set_displayed_row(path: TreePath): void;
+		set_displayed_row(path: TreePath | null): void;
 		/**
 		 * Sets whether #cell_view should draw all of its
 		 * cells in a sensitive state, this is used by {@link ComboBox} menus
@@ -7423,7 +7451,7 @@ declare namespace imports.gi.Gtk {
 		 * %NULL, then it will unset the old model.
 		 * @param model a {@link TreeModel}
 		 */
-		set_model(model: TreeModel): void;
+		set_model(model: TreeModel | null): void;
 		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => number): number;
@@ -7734,7 +7762,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the owner of the clipboard, if any;
 		 *     otherwise %NULL.
 		 */
-		get_owner(): GObject.Object;
+		get_owner(): GObject.Object | null;
 		/**
 		 * Gets the selection that this clipboard is for.
 		 * @returns the selection
@@ -7827,7 +7855,7 @@ declare namespace imports.gi.Gtk {
 		 *           to indicate that all forms should be stored.
 		 * @param n_targets number of elements in #targets
 		 */
-		set_can_store(targets: TargetEntry[], n_targets: number): void;
+		set_can_store(targets: TargetEntry[] | null, n_targets: number): void;
 		/**
 		 * Sets the contents of the clipboard to the given #GdkPixbuf.
 		 * GTK+ will take responsibility for responding for requests
@@ -7900,7 +7928,7 @@ declare namespace imports.gi.Gtk {
 		 *               this value must be freed with gtk_selection_data_free()
 		 *               when you are finished with it.
 		 */
-		wait_for_contents(target: Gdk.Atom): SelectionData;
+		wait_for_contents(target: Gdk.Atom): SelectionData | null;
 		/**
 		 * Requests the contents of the clipboard as image and converts
 		 * the result to a #GdkPixbuf. This function waits for
@@ -7913,14 +7941,13 @@ declare namespace imports.gi.Gtk {
 		 *     was empty or if the contents of the clipboard could not be
 		 *     converted into an image.)
 		 */
-		wait_for_image(): GdkPixbuf.Pixbuf;
+		wait_for_image(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Requests the contents of the clipboard as rich text.  This function
 		 * waits for the data to be received using the main loop, so events,
 		 * timeouts, etc, may be dispatched during the wait.
 		 * @param buffer a {@link TextBuffer}
 		 * @param format return location for the format of the returned data
-		 * @param length return location for the length of the returned data
 		 * @returns a
 		 *               newly-allocated binary block of data which must be
 		 *               freed with g_free(), or %NULL if retrieving the
@@ -7929,21 +7956,17 @@ declare namespace imports.gi.Gtk {
 		 *               if the contents of the clipboard could not be
 		 *               converted into text form.)
 		 */
-		wait_for_rich_text(buffer: TextBuffer, format: Gdk.Atom, length: number): number[];
+		wait_for_rich_text(buffer: TextBuffer, format: Gdk.Atom): number[] | null;
 		/**
 		 * Returns a list of targets that are present on the clipboard, or %NULL
 		 * if there aren’t any targets available. The returned list must be
 		 * freed with g_free().
 		 * This function waits for the data to be received using the main
 		 * loop, so events, timeouts, etc, may be dispatched during the wait.
-		 * @param targets location
-		 *           to store an array of targets. The result stored here must
-		 *           be freed with g_free().
-		 * @param n_targets location to store number of items in #targets.
 		 * @returns %TRUE if any targets are present on the clipboard,
 		 *               otherwise %FALSE.
 		 */
-		wait_for_targets(targets: Gdk.Atom[], n_targets: number): boolean;
+		wait_for_targets(): boolean;
 		/**
 		 * Requests the contents of the clipboard as text and converts
 		 * the result to UTF-8 if necessary. This function waits for
@@ -7956,7 +7979,7 @@ declare namespace imports.gi.Gtk {
 		 *               clipboard was empty or if the contents of the
 		 *               clipboard could not be converted into text form.)
 		 */
-		wait_for_text(): string;
+		wait_for_text(): string | null;
 		/**
 		 * Requests the contents of the clipboard as URIs. This function waits
 		 * for the data to be received using the main loop, so events,
@@ -7968,7 +7991,7 @@ declare namespace imports.gi.Gtk {
 		 *     in particular if the clipboard was empty or if the contents of
 		 *     the clipboard could not be converted into URI form.)
 		 */
-		wait_for_uris(): string[];
+		wait_for_uris(): string[] | null;
 		/**
 		 * Test to see if there is an image available to be pasted
 		 * This is done by requesting the TARGETS atom and checking
@@ -8344,7 +8367,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent Transient parent of the dialog, or %NULL
 		 * @returns a new {@link ColorChooserDialog}
 		 */
-		public static new(title: string, parent: Window): Widget;
+		public static new(title: string | null, parent: Window | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8556,12 +8579,9 @@ declare namespace imports.gi.Gtk {
 		 * Parses a color palette string; the string is a colon-separated
 		 * list of color names readable by gdk_color_parse().
 		 * @param _str a string encoding a color palette
-		 * @param colors return location for
-		 *     allocated array of #GdkColor
-		 * @param n_colors return location for length of array
 		 * @returns %TRUE if a palette was successfully parsed
 		 */
-		public static palette_from_string(_str: string, colors: Gdk.Color[], n_colors: number): boolean;
+		public static palette_from_string(_str: string): boolean;
 		/**
 		 * Encodes a palette as a string, useful for persistent storage.
 		 * @param colors an array of colors
@@ -8738,7 +8758,7 @@ declare namespace imports.gi.Gtk {
 		 * is returned.
 		 * @returns the ID of the active row, or %NULL
 		 */
-		get_active_id(): string;
+		get_active_id(): string | null;
 		/**
 		 * Sets #iter to point to the currently active item, if any item is active.
 		 * Otherwise, #iter is left unchanged.
@@ -8876,13 +8896,13 @@ declare namespace imports.gi.Gtk {
 		 *          #active_id was given to unset the active row, the function
 		 *          always returns %TRUE.
 		 */
-		set_active_id(active_id: string): boolean;
+		set_active_id(active_id: string | null): boolean;
 		/**
 		 * Sets the current active item to be the one referenced by #iter, or
 		 * unsets the active item if #iter is %NULL.
 		 * @param iter The {@link TreeIter}, or %NULL
 		 */
-		set_active_iter(iter: TreeIter): void;
+		set_active_iter(iter: TreeIter | null): void;
 		/**
 		 * Sets whether the popup menu should have a tearoff
 		 * menu item.
@@ -8939,7 +8959,7 @@ declare namespace imports.gi.Gtk {
 		 * cell renderers for the new model.
 		 * @param model A {@link TreeModel}
 		 */
-		set_model(model: TreeModel): void;
+		set_model(model: TreeModel | null): void;
 		/**
 		 * Specifies whether the popup’s width should be a fixed width
 		 * matching the allocated width of the combo box.
@@ -8954,7 +8974,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy destroy notifier for #data, or %NULL
 		 */
-		set_row_separator_func(_func: TreeViewRowSeparatorFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_row_separator_func(_func: TreeViewRowSeparatorFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the column with row span information for #combo_box to be #row_span.
 		 * The row span column contains integers which indicate how many rows
@@ -9195,7 +9215,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _id a string ID for this value, or %NULL
 		 * @param text A string
 		 */
-		append(_id: string, text: string): void;
+		append(_id: string | null, text: string): void;
 		/**
 		 * Appends #text to the list of strings stored in #combo_box.
 		 * 
@@ -9223,7 +9243,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _id a string ID for this value, or %NULL
 		 * @param text A string to display
 		 */
-		insert(position: number, _id: string, text: string): void;
+		insert(position: number, _id: string | null, text: string): void;
 		/**
 		 * Inserts #text at #position in the list of strings stored in #combo_box.
 		 * 
@@ -9244,7 +9264,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _id a string ID for this value, or %NULL
 		 * @param text a string
 		 */
-		prepend(_id: string, text: string): void;
+		prepend(_id: string | null, text: string): void;
 		/**
 		 * Prepends #text to the list of strings stored in #combo_box.
 		 * 
@@ -9459,7 +9479,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback a callback
 		 * @param callback_data callback user data
 		 */
-		forall(callback: Callback, callback_data: any): void;
+		forall(callback: Callback, callback_data: any | null): void;
 		/**
 		 * Invokes #callback on each non-internal child of #container.
 		 * See gtk_container_forall() for details on what constitutes
@@ -9475,7 +9495,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback a callback
 		 * @param callback_data callback user data
 		 */
-		foreach(callback: Callback, callback_data: any): void;
+		foreach(callback: Callback, callback_data: any | null): void;
 		/**
 		 * Retrieves the border width of the container. See
 		 * gtk_container_set_border_width().
@@ -9494,16 +9514,10 @@ declare namespace imports.gi.Gtk {
 		 * set, GTK+ computes the focus chain based on the positions
 		 * of the children. In that case, GTK+ stores %NULL in
 		 * #focusable_widgets and returns %FALSE.
-		 * @param focusable_widgets location
-		 *                     to store the focus chain of the
-		 *                     container, or %NULL. You should free this list
-		 *                     using g_list_free() when you are done with it, however
-		 *                     no additional reference count is added to the
-		 *                     individual widgets in the focus chain.
 		 * @returns %TRUE if the focus chain of the container
 		 * has been set explicitly.
 		 */
-		get_focus_chain(focusable_widgets: GLib.List): boolean;
+		get_focus_chain(): boolean;
 		/**
 		 * Returns the current focus child widget inside #container. This is not the
 		 * currently focused widget. That can be obtained by calling
@@ -9512,21 +9526,21 @@ declare namespace imports.gi.Gtk {
 		 *          focus inside #container when the #container is focused,
 		 *          or %NULL if none is set.
 		 */
-		get_focus_child(): Widget;
+		get_focus_child(): Widget | null;
 		/**
 		 * Retrieves the horizontal focus adjustment for the container. See
 		 * gtk_container_set_focus_hadjustment ().
 		 * @returns the horizontal focus adjustment, or %NULL if
 		 *   none has been set.
 		 */
-		get_focus_hadjustment(): Adjustment;
+		get_focus_hadjustment(): Adjustment | null;
 		/**
 		 * Retrieves the vertical focus adjustment for the container. See
 		 * gtk_container_set_focus_vadjustment().
 		 * @returns the vertical focus adjustment, or
 		 *   %NULL if none has been set.
 		 */
-		get_focus_vadjustment(): Adjustment;
+		get_focus_vadjustment(): Adjustment | null;
 		/**
 		 * Returns a newly created widget path representing all the widget hierarchy
 		 * from the toplevel down to and including #child.
@@ -9613,7 +9627,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_grab_focus() to manually set the focus to a specific widget.
 		 * @param child a {@link Widget}, or %NULL
 		 */
-		set_focus_child(child: Widget): void;
+		set_focus_child(child: Widget | null): void;
 		/**
 		 * Hooks up an adjustment to focus handling in a container, so when a child
 		 * of the container is focused, the adjustment is scrolled to show that
@@ -10059,7 +10073,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link CssProvider} with the theme loaded.
 		 *     This memory is owned by GTK+, and you must not free it.
 		 */
-		public static get_named(name: string, variant: string): CssProvider;
+		public static get_named(name: string, variant: string | null): CssProvider;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10137,7 +10151,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #widget button that uses the given
 		 *     #response_id, or %NULL.
 		 */
-		get_widget_for_response(response_id: number): Widget;
+		get_widget_for_response(response_id: number): Widget | null;
 		/**
 		 * Emits the {@link Dialog}::response signal with the given response ID.
 		 * Used to indicate that the user has responded to the dialog in some way;
@@ -10462,7 +10476,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_button_text text to go in first button, or %NULL
 		 * @returns a new {@link Dialog}
 		 */
-		public static new_with_buttons(title: string, parent: Window, flags: DialogFlags, first_button_text: string): Widget;
+		public static new_with_buttons(title: string | null, parent: Window | null, flags: DialogFlags, first_button_text: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10830,7 +10844,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the attribute list, or %NULL
 		 *     if none was set.
 		 */
-		get_attributes(): Pango.AttrList;
+		get_attributes(): Pango.AttrList | null;
 		/**
 		 * Get the {@link EntryBuffer} object which holds the text for
 		 * this widget.
@@ -10859,7 +10873,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the horizontal cursor adjustment, or %NULL
 		 *   if none has been set.
 		 */
-		get_cursor_hadjustment(): Adjustment;
+		get_cursor_hadjustment(): Adjustment | null;
 		/**
 		 * Gets the value set by gtk_entry_set_has_frame().
 		 * @returns whether the entry has a beveled frame
@@ -10904,7 +10918,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GIcon, or %NULL if no icon is set
 		 *     or if the icon is not a #GIcon
 		 */
-		get_icon_gicon(icon_pos: EntryIconPosition): Gio.Icon;
+		get_icon_gicon(icon_pos: EntryIconPosition): Gio.Icon | null;
 		/**
 		 * Retrieves the icon name used for the icon, or %NULL if there is
 		 * no icon or if the icon was set by some other method (e.g., by
@@ -10913,7 +10927,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns An icon name, or %NULL if no icon is set or if the icon
 		 *          wasn’t set from an icon name
 		 */
-		get_icon_name(icon_pos: EntryIconPosition): string;
+		get_icon_name(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * Retrieves the image used for the icon.
 		 * 
@@ -10924,7 +10938,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GdkPixbuf, or %NULL if no icon is
 		 *     set for this position.
 		 */
-		get_icon_pixbuf(icon_pos: EntryIconPosition): GdkPixbuf.Pixbuf;
+		get_icon_pixbuf(icon_pos: EntryIconPosition): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Returns whether the icon appears sensitive or insensitive.
 		 * @param icon_pos Icon position
@@ -10955,7 +10969,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. Free the returned
 		 *     string with g_free() when done.
 		 */
-		get_icon_tooltip_markup(icon_pos: EntryIconPosition): string;
+		get_icon_tooltip_markup(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * Gets the contents of the tooltip on the icon at the specified
 		 * position in #entry.
@@ -10963,14 +10977,14 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. Free the returned
 		 *     string with g_free() when done.
 		 */
-		get_icon_tooltip_text(icon_pos: EntryIconPosition): string;
+		get_icon_tooltip_text(icon_pos: EntryIconPosition): string | null;
 		/**
 		 * This function returns the entry’s {@link Entry}:inner-border property. See
 		 * gtk_entry_set_inner_border() for more information.
 		 * @returns the entry’s {@link Border}, or
 		 *   %NULL if none was set.
 		 */
-		get_inner_border(): Border;
+		get_inner_border(): Border | null;
 		/**
 		 * Gets the value of the {@link Entry}:input-hints property.
 		 * @returns 
@@ -11022,10 +11036,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_entry_layout_index_to_text_index() and
 		 * gtk_entry_text_index_to_layout_index() are needed to convert byte
 		 * indices in the layout to byte indices in the entry contents.
-		 * @param _x location to store X offset of layout, or %NULL
-		 * @param _y location to store Y offset of layout, or %NULL
+		 * @returns location to store X offset of layout, or %NULL
+		 * 
+		 * location to store Y offset of layout, or %NULL
 		 */
-		get_layout_offsets(_x: number, _y: number): void;
+		get_layout_offsets(): [ x: number | null, y: number | null ];
 		/**
 		 * Retrieves the maximum allowed length of the text in
 		 * #entry. See gtk_entry_set_max_length().
@@ -11069,7 +11084,7 @@ declare namespace imports.gi.Gtk {
 		 * any.
 		 * @returns the tabstops, or %NULL if none was set.
 		 */
-		get_tabs(): Pango.TabArray;
+		get_tabs(): Pango.TabArray | null;
 		/**
 		 * Retrieves the contents of the entry widget.
 		 * See also gtk_editable_get_chars().
@@ -11201,7 +11216,7 @@ declare namespace imports.gi.Gtk {
 		 * #completion is set to %NULL.
 		 * @param completion The {@link EntryCompletion} or %NULL
 		 */
-		set_completion(completion: EntryCompletion): void;
+		set_completion(completion: EntryCompletion | null): void;
 		/**
 		 * Hooks up an adjustment to the cursor position in an entry, so that when
 		 * the cursor is moved, the adjustment is scrolled to show that position.
@@ -11213,7 +11228,7 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment an adjustment which should be adjusted when the cursor
 		 *              is moved, or %NULL
 		 */
-		set_cursor_hadjustment(adjustment: Adjustment): void;
+		set_cursor_hadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Sets whether the entry has a beveled frame around it.
 		 * @param setting new value
@@ -11254,7 +11269,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos The position at which to set the icon
 		 * @param icon The icon to set, or %NULL
 		 */
-		set_icon_from_gicon(icon_pos: EntryIconPosition, icon: Gio.Icon): void;
+		set_icon_from_gicon(icon_pos: EntryIconPosition, icon: Gio.Icon | null): void;
 		/**
 		 * Sets the icon shown in the entry at the specified position
 		 * from the current icon theme.
@@ -11266,7 +11281,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos The position at which to set the icon
 		 * @param icon_name An icon name, or %NULL
 		 */
-		set_icon_from_icon_name(icon_pos: EntryIconPosition, icon_name: string): void;
+		set_icon_from_icon_name(icon_pos: EntryIconPosition, icon_name: string | null): void;
 		/**
 		 * Sets the icon shown in the specified position using a pixbuf.
 		 * 
@@ -11274,7 +11289,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos Icon position
 		 * @param pixbuf A #GdkPixbuf, or %NULL
 		 */
-		set_icon_from_pixbuf(icon_pos: EntryIconPosition, pixbuf: GdkPixbuf.Pixbuf): void;
+		set_icon_from_pixbuf(icon_pos: EntryIconPosition, pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets the icon shown in the entry at the specified position from
 		 * a stock image.
@@ -11283,7 +11298,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos Icon position
 		 * @param stock_id The name of the stock item, or %NULL
 		 */
-		set_icon_from_stock(icon_pos: EntryIconPosition, stock_id: string): void;
+		set_icon_from_stock(icon_pos: EntryIconPosition, stock_id: string | null): void;
 		/**
 		 * Sets the sensitivity for the specified icon.
 		 * @param icon_pos Icon position
@@ -11303,7 +11318,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos the icon position
 		 * @param tooltip the contents of the tooltip for the icon, or %NULL
 		 */
-		set_icon_tooltip_markup(icon_pos: EntryIconPosition, tooltip: string): void;
+		set_icon_tooltip_markup(icon_pos: EntryIconPosition, tooltip: string | null): void;
 		/**
 		 * Sets #tooltip as the contents of the tooltip for the icon
 		 * at the specified position.
@@ -11321,7 +11336,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_pos the icon position
 		 * @param tooltip the contents of the tooltip for the icon, or %NULL
 		 */
-		set_icon_tooltip_text(icon_pos: EntryIconPosition, tooltip: string): void;
+		set_icon_tooltip_text(icon_pos: EntryIconPosition, tooltip: string | null): void;
 		/**
 		 * Sets %entry’s inner-border property to #border, or clears it if %NULL
 		 * is passed. The inner-border is the area around the entry’s text, but
@@ -11333,7 +11348,7 @@ declare namespace imports.gi.Gtk {
 		 * pixel-exact positioning of the entry is important.
 		 * @param border a {@link Border}, or %NULL
 		 */
-		set_inner_border(border: Border): void;
+		set_inner_border(border: Border | null): void;
 		/**
 		 * Sets the {@link Entry}:input-hints property, which
 		 * allows input methods to fine-tune their behaviour.
@@ -11393,7 +11408,7 @@ declare namespace imports.gi.Gtk {
 		 * first key event arrives.
 		 * @param text a string to be displayed when #entry is empty and unfocused, or %NULL
 		 */
-		set_placeholder_text(text: string): void;
+		set_placeholder_text(text: string | null): void;
 		/**
 		 * Causes the entry’s progress indicator to “fill in” the given
 		 * fraction of the bar. The fraction should be between 0.0 and 1.0,
@@ -11924,7 +11939,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_initial_chars number of characters in #initial_chars, or -1
 		 * @returns A new GtkEntryBuffer object.
 		 */
-		public static new(initial_chars: string, n_initial_chars: number): EntryBuffer;
+		public static new(initial_chars: string | null, n_initial_chars: number): EntryBuffer;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11990,7 +12005,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The common prefix all rows starting with
 		 *   #key or %NULL if no row matches #key.
 		 */
-		compute_prefix(key: string): string;
+		compute_prefix(key: string): string | null;
 		/**
 		 * Deletes the action at #index_ from #completion’s action list.
 		 * 
@@ -12032,7 +12047,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if none
 		 *     is currently being used
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Returns whether the completions should be presented in a popup window.
 		 * @returns %TRUE if popup completion is turned on
@@ -12099,7 +12114,7 @@ declare namespace imports.gi.Gtk {
 		 * @param func_data user data for #func
 		 * @param func_notify destroy notify for #func_data.
 		 */
-		set_match_func(_func: EntryCompletionMatchFunc, func_data: any, func_notify: GLib.DestroyNotify): void;
+		set_match_func(_func: EntryCompletionMatchFunc, func_data: any | null, func_notify: GLib.DestroyNotify): void;
 		/**
 		 * Requires the length of the search key for #completion to be at least
 		 * #length. This is useful for long lists, where completing using a small
@@ -12114,7 +12129,7 @@ declare namespace imports.gi.Gtk {
 		 * If model is %NULL, then it will unset the model.
 		 * @param model the {@link TreeModel}
 		 */
-		set_model(model: TreeModel): void;
+		set_model(model: TreeModel | null): void;
 		/**
 		 * Sets whether the completions should be presented in a popup window.
 		 * @param popup_completion %TRUE to do popup completion
@@ -12686,7 +12701,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The text of the label widget. This string is owned
 		 *     by the widget and must not be modified or freed.
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns whether the label widget will fill all available
 		 * horizontal space allocated to #expander.
@@ -12700,7 +12715,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the label widget,
 		 *     or %NULL if there is none
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Returns whether the expander will resize the toplevel widget
 		 * containing the expander upon resizing and collpasing.
@@ -12739,7 +12754,7 @@ declare namespace imports.gi.Gtk {
 		 * This will also clear any previously set labels.
 		 * @param label a string
 		 */
-		set_label(label: string): void;
+		set_label(label: string | null): void;
 		/**
 		 * Sets whether the label widget should fill all available
 		 * horizontal space allocated to #expander.
@@ -12754,7 +12769,7 @@ declare namespace imports.gi.Gtk {
 		 * that will appear embedded alongside the expander arrow.
 		 * @param label_widget the new label widget
 		 */
-		set_label_widget(label_widget: Widget): void;
+		set_label_widget(label_widget: Widget | null): void;
 		/**
 		 * Sets whether the expander will resize the toplevel widget
 		 * containing the expander upon resizing and collpasing.
@@ -12892,7 +12907,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text of the label
 		 * @returns a new {@link Expander} widget.
 		 */
-		public static new(label: string): Widget;
+		public static new(label: string | null): Widget;
 		/**
 		 * Creates a new expander using #label as the text of the label.
 		 * If characters in #label are preceded by an underscore, they are underlined.
@@ -12904,7 +12919,7 @@ declare namespace imports.gi.Gtk {
 		 *     in front of the mnemonic character
 		 * @returns a new {@link Expander} widget.
 		 */
-		public static new_with_mnemonic(label: string): Widget;
+		public static new_with_mnemonic(label: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13237,7 +13252,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_button_text stock ID or text to go in the first button, or %NULL
 		 * @returns a new {@link FileChooserDialog}
 		 */
-		public static new(title: string, parent: Window, action: FileChooserAction, first_button_text: string): Widget;
+		public static new(title: string | null, parent: Window | null, action: FileChooserAction, first_button_text: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13259,13 +13274,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns The custom label, or %NULL for the default. This string
 		 * is owned by GTK+ and should not be modified or freed
 		 */
-		get_accept_label(): string;
+		get_accept_label(): string | null;
 		/**
 		 * Retrieves the custom label text for the cancel button.
 		 * @returns The custom label, or %NULL for the default. This string
 		 * is owned by GTK+ and should not be modified or freed
 		 */
-		get_cancel_label(): string;
+		get_cancel_label(): string | null;
 		/**
 		 * Sets the custom label text for the accept button.
 		 * 
@@ -13276,7 +13291,7 @@ declare namespace imports.gi.Gtk {
 		 * Pressing Alt and that key activates the button.
 		 * @param accept_label custom label or %NULL for the default
 		 */
-		set_accept_label(accept_label: string): void;
+		set_accept_label(accept_label: string | null): void;
 		/**
 		 * Sets the custom label text for the cancel button.
 		 * 
@@ -13287,7 +13302,7 @@ declare namespace imports.gi.Gtk {
 		 * Pressing Alt and that key activates the button.
 		 * @param cancel_label custom label or %NULL for the default
 		 */
-		set_cancel_label(cancel_label: string): void;
+		set_cancel_label(cancel_label: string | null): void;
 		connect(signal: "notify::accept_label", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::cancel_label", callback: (owner: this, ...args: any) => number): number;
 
@@ -13469,7 +13484,7 @@ declare namespace imports.gi.Gtk {
 		 * @param cancel_label text to go in the cancel button, or %NULL for the default
 		 * @returns a new {@link FileChooserNative}
 		 */
-		public static new(title: string, parent: Window, action: FileChooserAction, accept_label: string, cancel_label: string): FileChooserNative;
+		public static new(title: string | null, parent: Window | null, action: FileChooserAction, accept_label: string | null, cancel_label: string | null): FileChooserNative;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -13677,7 +13692,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data data to pass to #func
 		 * @param notify function to call to free #data when it is no longer needed.
 		 */
-		add_custom(needed: FileFilterFlags, _func: FileFilterFunc, data: any, notify: GLib.DestroyNotify): void;
+		add_custom(needed: FileFilterFlags, _func: FileFilterFunc, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Adds a rule allowing a given mime type to #filter.
 		 * @param mime_type name of a MIME type
@@ -13712,7 +13727,7 @@ declare namespace imports.gi.Gtk {
 		 *   or %NULL. This value is owned by GTK+ and must not
 		 *   be modified or freed.
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Gets the fields that need to be filled in for the {@link FileFilterInfo}
 		 * passed to gtk_file_filter_filter()
@@ -13731,7 +13746,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name the human-readable-name for the filter, or %NULL
 		 *   to remove any existing name.
 		 */
-		set_name(name: string): void;
+		set_name(name: string | null): void;
 		/**
 		 * Serialize a file filter to an a{sv} variant.
 		 * @returns a new, floating, #GVariant
@@ -13955,7 +13970,7 @@ declare namespace imports.gi.Gtk {
 		 * @param create_widget_func a function that creates widgets for items
 		 * @param user_data_free_func function for freeing #user_data
 		 */
-		bind_model(model: Gio.ListModel, create_widget_func: FlowBoxCreateWidgetFunc, user_data_free_func: GLib.DestroyNotify): void;
+		bind_model(model: Gio.ListModel | null, create_widget_func: FlowBoxCreateWidgetFunc, user_data_free_func: GLib.DestroyNotify): void;
 		/**
 		 * Returns whether children activate on single clicks.
 		 * @returns %TRUE if children are activated on single click,
@@ -13969,7 +13984,7 @@ declare namespace imports.gi.Gtk {
 		 *     always be a {@link FlowBoxChild} or %NULL in case no child widget
 		 *     with the given index exists.
 		 */
-		get_child_at_index(idx: number): FlowBoxChild;
+		get_child_at_index(idx: number): FlowBoxChild | null;
 		/**
 		 * Gets the child in the (#x, #y) position.
 		 * @param _x the x coordinate of the child
@@ -13978,7 +13993,7 @@ declare namespace imports.gi.Gtk {
 		 *     always be a {@link FlowBoxChild} or %NULL in case no child widget
 		 *     exists for the given x and y coordinates.
 		 */
-		get_child_at_pos(_x: number, _y: number): FlowBoxChild;
+		get_child_at_pos(_x: number, _y: number): FlowBoxChild | null;
 		/**
 		 * Gets the horizontal spacing.
 		 * @returns the horizontal spacing
@@ -14066,7 +14081,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func the function to call for each selected child
 		 * @param data user data to pass to the function
 		 */
-		selected_foreach(_func: FlowBoxForeachFunc, data: any): void;
+		selected_foreach(_func: FlowBoxForeachFunc, data: any | null): void;
 		/**
 		 * If #single is %TRUE, children will be activated when you click
 		 * on them, otherwise you need to double-click.
@@ -14095,7 +14110,7 @@ declare namespace imports.gi.Gtk {
 		 *     lets you filter which children to show
 		 * @param destroy destroy notifier for #user_data
 		 */
-		set_filter_func(filter_func: FlowBoxFilterFunc, destroy: GLib.DestroyNotify): void;
+		set_filter_func(filter_func: FlowBoxFilterFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Hooks up an adjustment to focus handling in #box.
 		 * The adjustment is also used for autoscrolling during
@@ -14162,7 +14177,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sort_func the sort function
 		 * @param destroy destroy notifier for #user_data
 		 */
-		set_sort_func(sort_func: FlowBoxSortFunc, destroy: GLib.DestroyNotify): void;
+		set_sort_func(sort_func: FlowBoxSortFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Hooks up an adjustment to focus handling in #box.
 		 * The adjustment is also used for autoscrolling during
@@ -14612,7 +14627,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent Transient parent of the dialog, or %NULL
 		 * @returns a new {@link FontChooserDialog}
 		 */
-		public static new(title: string, parent: Window): Widget;
+		public static new(title: string | null, parent: Window | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14875,23 +14890,24 @@ declare namespace imports.gi.Gtk {
 		 *               a {@link Label}. This string is owned by GTK+ and
 		 *               must not be modified or freed.
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Retrieves the X and Y alignment of the frame’s label. See
 		 * gtk_frame_set_label_align().
-		 * @param xalign location to store X alignment of
+		 * @returns location to store X alignment of
 		 *     frame’s label, or %NULL
-		 * @param yalign location to store X alignment of
+		 * 
+		 * location to store X alignment of
 		 *     frame’s label, or %NULL
 		 */
-		get_label_align(xalign: number, yalign: number): void;
+		get_label_align(): [ xalign: number | null, yalign: number | null ];
 		/**
 		 * Retrieves the label widget for the frame. See
 		 * gtk_frame_set_label_widget().
 		 * @returns the label widget, or %NULL if
 		 * there is none.
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Retrieves the shadow type of the frame. See
 		 * gtk_frame_set_shadow_type().
@@ -14903,7 +14919,7 @@ declare namespace imports.gi.Gtk {
 		 * new #GtkLabel with that text and adds it as the #GtkFrame:label-widget.
 		 * @param label the text to use as the label of the frame
 		 */
-		set_label(label: string): void;
+		set_label(label: string | null): void;
 		/**
 		 * Sets the alignment of the frame widget’s label. The
 		 * default values for a newly created frame are 0.0 and 0.5.
@@ -14921,7 +14937,7 @@ declare namespace imports.gi.Gtk {
 		 * will appear embedded in the top edge of the frame as a title.
 		 * @param label_widget the new label widget
 		 */
-		set_label_widget(label_widget: Widget): void;
+		set_label_widget(label_widget: Widget | null): void;
 		/**
 		 * Sets the {@link Frame}:shadow-type for #frame, i.e. whether it is drawn without
 		 * (%GTK_SHADOW_NONE) or with (other values) a visible border. Values other than
@@ -14998,7 +15014,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text to use as the label of the frame
 		 * @returns a new {@link Frame} widget
 		 */
-		public static new(label: string): Widget;
+		public static new(label: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15093,7 +15109,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current error set on the #area.
 		 * @returns the #GError or %NULL
 		 */
-		get_error(): GLib.Error;
+		get_error(): GLib.Error | null;
 		/**
 		 * Returns whether the area has an alpha component.
 		 * @returns %TRUE if the #area has an alpha component, %FALSE otherwise
@@ -15112,10 +15128,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Retrieves the required version of OpenGL set
 		 * using gtk_gl_area_set_required_version().
-		 * @param major return location for the required major version
-		 * @param minor return location for the required minor version
+		 * @returns return location for the required major version
+		 * 
+		 * return location for the required minor version
 		 */
-		get_required_version(major: number, minor: number): void;
+		get_required_version(): [ major: number, minor: number ];
 		/**
 		 * Retrieves the value set by gtk_gl_area_set_use_es().
 		 * @returns %TRUE if the {@link GLArea} should create an OpenGL ES context
@@ -15160,7 +15177,7 @@ declare namespace imports.gi.Gtk {
 		 * signal if GL context creation fails.
 		 * @param error a new #GError, or %NULL to unset the error
 		 */
-		set_error(error: GLib.Error): void;
+		set_error(error: GLib.Error | null): void;
 		/**
 		 * If #has_alpha is %TRUE the buffer allocated by the widget will have
 		 * an alpha channel component, and when rendering to the window the
@@ -15394,17 +15411,15 @@ declare namespace imports.gi.Gtk {
 		 * this function returns %TRUE and fills in #x and #y with the center
 		 * of the bounding box containing all active touches. Otherwise, %FALSE
 		 * will be returned.
-		 * @param _x X coordinate for the bounding box center
-		 * @param _y Y coordinate for the bounding box center
 		 * @returns %FALSE if no active touches are present, %TRUE otherwise
 		 */
-		get_bounding_box_center(_x: number, _y: number): boolean;
+		get_bounding_box_center(): boolean;
 		/**
 		 * Returns the master #GdkDevice that is currently operating
 		 * on #gesture, or %NULL if the gesture is not being interacted.
 		 * @returns a #GdkDevice, or %NULL
 		 */
-		get_device(): Gdk.Device;
+		get_device(): Gdk.Device | null;
 		/**
 		 * Returns all gestures in the group of #gesture
 		 * @returns The list
@@ -15420,23 +15435,21 @@ declare namespace imports.gi.Gtk {
 		 * @param sequence a #GdkEventSequence
 		 * @returns The last event from #sequence
 		 */
-		get_last_event(sequence: Gdk.EventSequence): Gdk.Event;
+		get_last_event(sequence: Gdk.EventSequence | null): Gdk.Event | null;
 		/**
 		 * Returns the #GdkEventSequence that was last updated on #gesture.
 		 * @returns The last updated sequence
 		 */
-		get_last_updated_sequence(): Gdk.EventSequence;
+		get_last_updated_sequence(): Gdk.EventSequence | null;
 		/**
 		 * If #sequence is currently being interpreted by #gesture, this
 		 * function returns %TRUE and fills in #x and #y with the last coordinates
 		 * stored for that event sequence. The coordinates are always relative to the
 		 * widget allocation.
 		 * @param sequence a #GdkEventSequence, or %NULL for pointer events
-		 * @param _x return location for X axis of the sequence coordinates
-		 * @param _y return location for Y axis of the sequence coordinates
 		 * @returns %TRUE if #sequence is currently interpreted
 		 */
-		get_point(sequence: Gdk.EventSequence, _x: number, _y: number): boolean;
+		get_point(sequence: Gdk.EventSequence | null): boolean;
 		/**
 		 * Returns the #sequence state, as seen by #gesture.
 		 * @param sequence a #GdkEventSequence
@@ -15458,7 +15471,7 @@ declare namespace imports.gi.Gtk {
 		 * information.
 		 * @returns the user defined window, or %NULL if none
 		 */
-		get_window(): Gdk.Window;
+		get_window(): Gdk.Window | null;
 		/**
 		 * Adds #gesture to the same group than #group_gesture. Gestures
 		 * are by default isolated in their own groups.
@@ -15480,7 +15493,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sequence a #GdkEventSequence or %NULL
 		 * @returns %TRUE if #gesture is handling #sequence, %FALSE otherwise
 		 */
-		handles_sequence(sequence: Gdk.EventSequence): boolean;
+		handles_sequence(sequence: Gdk.EventSequence | null): boolean;
 		/**
 		 * Returns %TRUE if the gesture is currently active.
 		 * A gesture is active meanwhile there are touch sequences
@@ -15566,7 +15579,7 @@ declare namespace imports.gi.Gtk {
 		 * a child of it. #window must pertain to gtk_event_controller_get_widget().
 		 * @param window a #GdkWindow, or %NULL
 		 */
-		set_window(window: Gdk.Window): void;
+		set_window(window: Gdk.Window | null): void;
 		/**
 		 * Separates #gesture into an isolated group.
 		 */
@@ -15580,7 +15593,7 @@ declare namespace imports.gi.Gtk {
 		 * on a 2-touches gesture) is lifted, in that situation #sequence won't pertain
 		 * to the current set of active touches, so don't rely on this being true.
 		 */
-		connect(signal: "begin", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		connect(signal: "begin", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
 		 * This signal is emitted whenever a sequence is cancelled. This usually
 		 * happens on active touches when gtk_event_controller_reset() is called
@@ -15589,7 +15602,7 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * #gesture must forget everything about #sequence as a reaction to this signal.
 		 */
-		connect(signal: "cancel", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		connect(signal: "cancel", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
 		 * This signal is emitted when #gesture either stopped recognizing the event
 		 * sequences as something to be handled (the {@link Gesture}::check handler returned
@@ -15601,18 +15614,18 @@ declare namespace imports.gi.Gtk {
 		 * sequence that exceeds #GtkGesture:n-points). This situation may be detected
 		 * by checking through gtk_gesture_handles_sequence().
 		 */
-		connect(signal: "end", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		connect(signal: "end", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 		/**
 		 * This signal is emitted whenever a sequence state changes. See
 		 * gtk_gesture_set_sequence_state() to know more about the expectable
 		 * sequence lifetimes.
 		 */
-		connect(signal: "sequence-state-changed", callback: (owner: this, sequence: Gdk.EventSequence, state: EventSequenceState) => void): number;
+		connect(signal: "sequence-state-changed", callback: (owner: this, sequence: Gdk.EventSequence | null, state: EventSequenceState) => void): number;
 		/**
 		 * This signal is emitted whenever an event is handled while the gesture is
 		 * recognized. #sequence is guaranteed to pertain to the set of active touches.
 		 */
-		connect(signal: "update", callback: (owner: this, sequence: Gdk.EventSequence) => void): number;
+		connect(signal: "update", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 
 		connect(signal: "notify::n_points", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
@@ -15729,20 +15742,16 @@ declare namespace imports.gi.Gtk {
 		 * If the #gesture is active, this function returns %TRUE and
 		 * fills in #x and #y with the coordinates of the current point,
 		 * as an offset to the starting drag point.
-		 * @param _x X offset for the current point
-		 * @param _y Y offset for the current point
 		 * @returns %TRUE if the gesture is active
 		 */
-		get_offset(_x: number, _y: number): boolean;
+		get_offset(): boolean;
 		/**
 		 * If the #gesture is active, this function returns %TRUE
 		 * and fills in #x and #y with the drag start coordinates,
 		 * in window-relative coordinates.
-		 * @param _x X coordinate for the drag start point
-		 * @param _y Y coordinate for the drag start point
 		 * @returns %TRUE if the gesture is active
 		 */
-		get_start_point(_x: number, _y: number): boolean;
+		get_start_point(): boolean;
 		/**
 		 * This signal is emitted whenever dragging starts.
 		 */
@@ -15855,7 +15864,7 @@ declare namespace imports.gi.Gtk {
 		 * akin to an input shape.
 		 * @param rect rectangle to receive coordinates on
 		 */
-		set_area(rect: Gdk.Rectangle): void;
+		set_area(rect: Gdk.Rectangle | null): void;
 		/**
 		 * This signal is emitted whenever a button or touch press happens.
 		 */
@@ -16043,7 +16052,7 @@ declare namespace imports.gi.Gtk {
 		 * This is only meaningful if gtk_gesture_is_active() returns %TRUE.
 		 * @returns the current sequence
 		 */
-		get_current_sequence(): Gdk.EventSequence;
+		get_current_sequence(): Gdk.EventSequence | null;
 		/**
 		 * Gets whether a gesture is exclusive. For more information, see
 		 * gtk_gesture_single_set_exclusive().
@@ -16118,20 +16127,18 @@ declare namespace imports.gi.Gtk {
 		 * #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity
 		 * signals.
 		 * @param axes array of requested axes, terminated with #GDK_AXIS_IGNORE
-		 * @param values return location for the axis values
 		 * @returns #TRUE if there is a current value for the axes
 		 */
-		get_axes(axes: Gdk.AxisUse[], values: number[]): boolean;
+		get_axes(axes: Gdk.AxisUse[]): boolean;
 		/**
 		 * Returns the current value for the requested #axis. This function
 		 * must be called from either the {@link GestureStylus}:down,
 		 * #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity
 		 * signals.
 		 * @param axis requested device axis
-		 * @param value return location for the axis value
 		 * @returns #TRUE if there is a current value for the axis
 		 */
-		get_axis(axis: Gdk.AxisUse, value: number): boolean;
+		get_axis(axis: Gdk.AxisUse): boolean;
 		/**
 		 * Returns the #GdkDeviceTool currently driving input through this gesture.
 		 * This function must be called from either the {@link GestureStylus}::down,
@@ -16139,7 +16146,7 @@ declare namespace imports.gi.Gtk {
 		 * signal handlers.
 		 * @returns The current stylus tool
 		 */
-		get_device_tool(): Gdk.DeviceTool;
+		get_device_tool(): Gdk.DeviceTool | null;
 		connect(signal: "down", callback: (owner: this, object: number, p0: number) => void): number;
 		connect(signal: "motion", callback: (owner: this, object: number, p0: number) => void): number;
 		connect(signal: "proximity", callback: (owner: this, object: number, p0: number) => void): number;
@@ -16176,11 +16183,9 @@ declare namespace imports.gi.Gtk {
 		 * If the gesture is recognized, this function returns %TRUE and fill in
 		 * #velocity_x and #velocity_y with the recorded velocity, as per the
 		 * last event(s) processed.
-		 * @param velocity_x return value for the velocity in the X axis, in pixels/sec
-		 * @param velocity_y return value for the velocity in the Y axis, in pixels/sec
 		 * @returns whether velocity could be calculated
 		 */
-		get_velocity(velocity_x: number, velocity_y: number): boolean;
+		get_velocity(): boolean;
 		/**
 		 * This signal is emitted when the recognized gesture is finished, velocity
 		 * and direction are a product of previously recorded events.
@@ -16300,7 +16305,7 @@ declare namespace imports.gi.Gtk {
 		 * @param width the number of columns that #child will span
 		 * @param height the number of rows that #child will span
 		 */
-		attach_next_to(child: Widget, sibling: Widget, side: PositionType, width: number, height: number): void;
+		attach_next_to(child: Widget, sibling: Widget | null, side: PositionType, width: number, height: number): void;
 		/**
 		 * Returns which row defines the global baseline of #grid.
 		 * @returns the row index defining the global baseline
@@ -16313,7 +16318,7 @@ declare namespace imports.gi.Gtk {
 		 * @param top the top edge of the cell
 		 * @returns the child at the given position, or %NULL
 		 */
-		get_child_at(left: number, top: number): Widget;
+		get_child_at(left: number, top: number): Widget | null;
 		/**
 		 * Returns whether all columns of #grid have the same width.
 		 * @returns whether all columns of #grid have the same width.
@@ -16584,17 +16589,20 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Queries the current color in an HSV color selector.
 		 * Returned values will be in the [0.0, 1.0] range.
-		 * @param _h Return value for the hue
-		 * @param _s Return value for the saturation
-		 * @param _v Return value for the value
+		 * @returns Return value for the hue
+		 * 
+		 * Return value for the saturation
+		 * 
+		 * Return value for the value
 		 */
-		get_color(_h: number, _s: number, _v: number): void;
+		get_color(): [ h: number, s: number, v: number ];
 		/**
 		 * Queries the size and ring width of an HSV color selector.
-		 * @param size Return value for the diameter of the hue ring
-		 * @param ring_width Return value for the width of the hue ring
+		 * @returns Return value for the diameter of the hue ring
+		 * 
+		 * Return value for the width of the hue ring
 		 */
-		get_metrics(size: number, ring_width: number): void;
+		get_metrics(): [ size: number, ring_width: number ];
 		/**
 		 * An HSV color selector can be said to be adjusting if multiple rapid
 		 * changes are being made to its value, for example, when the user is
@@ -16656,11 +16664,13 @@ declare namespace imports.gi.Gtk {
 		 * @param _h Hue
 		 * @param _s Saturation
 		 * @param _v Value
-		 * @param _r Return value for the red component
-		 * @param _g Return value for the green component
-		 * @param _b Return value for the blue component
+		 * @returns Return value for the red component
+		 * 
+		 * Return value for the green component
+		 * 
+		 * Return value for the blue component
 		 */
-		public static to_rgb(_h: number, _s: number, _v: number, _r: number, _g: number, _b: number): void;
+		public static to_rgb(_h: number, _s: number, _v: number): [ r: number, g: number, b: number ];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16697,7 +16707,7 @@ declare namespace imports.gi.Gtk {
 		 * the scale.
 		 * @returns a new {@link HScale}.
 		 */
-		public static new(adjustment: Adjustment): Widget;
+		public static new(adjustment: Adjustment | null): Widget;
 		/**
 		 * Creates a new horizontal scale widget that lets the user input a
 		 * number between #min and #max (including #min and #max) with the
@@ -16749,7 +16759,7 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
 		 * @returns the new {@link HScrollbar}
 		 */
-		public static new(adjustment: Adjustment): Widget;
+		public static new(adjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16960,7 +16970,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the custom title widget
 		 *    of the header, or %NULL if none has been set explicitly.
 		 */
-		get_custom_title(): Widget;
+		get_custom_title(): Widget | null;
 		/**
 		 * Gets the decoration layout set with
 		 * gtk_header_bar_set_decoration_layout().
@@ -16986,14 +16996,14 @@ declare namespace imports.gi.Gtk {
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_subtitle(): string;
+		get_subtitle(): string | null;
 		/**
 		 * Retrieves the title of the header. See gtk_header_bar_set_title().
 		 * @returns the title of the header, or %NULL if none has
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Adds #child to #bar, packed with reference to the
 		 * end of the #bar.
@@ -17019,7 +17029,7 @@ declare namespace imports.gi.Gtk {
 		 * label to be visible again.
 		 * @param title_widget a custom widget to use for a title
 		 */
-		set_custom_title(title_widget: Widget): void;
+		set_custom_title(title_widget: Widget | null): void;
 		/**
 		 * Sets the decoration layout for this header bar, overriding
 		 * the {@link Settings}:gtk-decoration-layout setting.
@@ -17041,7 +17051,7 @@ declare namespace imports.gi.Gtk {
 		 * @param layout a decoration layout, or %NULL to
 		 *     unset the layout
 		 */
-		set_decoration_layout(layout: string): void;
+		set_decoration_layout(layout: string | null): void;
 		/**
 		 * Sets whether the header bar should reserve space
 		 * for a subtitle, even if none is currently set.
@@ -17063,14 +17073,14 @@ declare namespace imports.gi.Gtk {
 		 * #GtkHeaderBar:has-subtitle property to %FALSE.
 		 * @param subtitle a subtitle, or %NULL
 		 */
-		set_subtitle(subtitle: string): void;
+		set_subtitle(subtitle: string | null): void;
 		/**
 		 * Sets the title of the {@link HeaderBar}. The title should help a user
 		 * identify the current view. A good title should not include the
 		 * application name.
 		 * @param title a title, or %NULL
 		 */
-		set_title(title: string): void;
+		set_title(title: string | null): void;
 		connect(signal: "notify::custom_title", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::decoration_layout", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::decoration_layout_set", callback: (owner: this, ...args: any) => number): number;
@@ -17190,15 +17200,17 @@ declare namespace imports.gi.Gtk {
 		 * and a list of attributes to apply to the string.
 		 * This string should be displayed inserted at the insertion
 		 * point.
-		 * @param _str location to store the retrieved
+		 * @returns location to store the retrieved
 		 *              string. The string retrieved must be freed with g_free().
-		 * @param attrs location to store the retrieved
+		 * 
+		 * location to store the retrieved
 		 *              attribute list.  When you are done with this list, you
 		 *              must unreference it with pango_attr_list_unref().
-		 * @param cursor_pos location to store position of cursor (in characters)
+		 * 
+		 * location to store position of cursor (in characters)
 		 *              within the preedit string.
 		 */
-		get_preedit_string(_str: string, attrs: Pango.AttrList, cursor_pos: number): void;
+		get_preedit_string(): [ str: string, attrs: Pango.AttrList, cursor_pos: number ];
 		/**
 		 * Retrieves context around the insertion point. Input methods
 		 * typically want context in order to constrain input text based on
@@ -17212,16 +17224,10 @@ declare namespace imports.gi.Gtk {
 		 * gtk_im_context_set_surrounding(). Note that there is no obligation
 		 * for a widget to respond to the ::retrieve_surrounding signal, so input
 		 * methods must be prepared to function without context.
-		 * @param text location to store a UTF-8 encoded
-		 *        string of text holding context around the insertion point.
-		 *        If the function returns %TRUE, then you must free the result
-		 *        stored in this location with g_free().
-		 * @param cursor_index location to store byte index of the insertion
-		 *        cursor within #text.
 		 * @returns %TRUE if surrounding text was provided; in this case
 		 *    you must free the result stored in *text.
 		 */
-		get_surrounding(text: string, cursor_index: number): boolean;
+		get_surrounding(): boolean;
 		/**
 		 * Notify the input method that a change such as a change in cursor
 		 * position has been made. This will typically cause the input
@@ -17236,7 +17242,7 @@ declare namespace imports.gi.Gtk {
 		 * @param window the client window. This may be %NULL to indicate
 		 *           that the previous client window no longer exists.
 		 */
-		set_client_window(window: Gdk.Window): void;
+		set_client_window(window: Gdk.Window | null): void;
 		/**
 		 * Notify the input method that a change in cursor
 		 * position has been made. The location is relative to the client
@@ -17663,13 +17669,9 @@ declare namespace imports.gi.Gtk {
 		free(): void;
 		/**
 		 * This function is deprecated and always returns %FALSE.
-		 * @param points location to store pointer
-		 *     to an array of points, or %NULL free the array of points with g_free().
-		 * @param n_points location to store the number of points in #points,
-		 *     or %NULL
 		 * @returns %FALSE
 		 */
-		get_attach_points(points: Gdk.Point[], n_points: number): boolean;
+		get_attach_points(): boolean;
 		/**
 		 * Gets the base scale for the icon. The base scale is a scale
 		 * for the icon that was specified by the icon theme creator.
@@ -17704,7 +17706,7 @@ declare namespace imports.gi.Gtk {
 		 *     you want to keep it around, you must use g_object_ref().
 		 *     The returned image must not be modified.
 		 */
-		get_builtin_pixbuf(): GdkPixbuf.Pixbuf;
+		get_builtin_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * This function is deprecated and always returns %NULL.
 		 * @returns %NULL
@@ -17728,7 +17730,7 @@ declare namespace imports.gi.Gtk {
 		 *     The return value is owned by GTK+ and should not be modified
 		 *     or freed.
 		 */
-		get_filename(): string;
+		get_filename(): string | null;
 		/**
 		 * Checks if the icon is symbolic or not. This currently uses only
 		 * the file name and not the file contents for determining this.
@@ -17764,7 +17766,7 @@ declare namespace imports.gi.Gtk {
 		 * @param callback a #GAsyncReadyCallback to call when the
 		 *     request is satisfied
 		 */
-		load_icon_async(cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		load_icon_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an async icon load, see gtk_icon_info_load_icon_async().
 		 * @param res a #GAsyncResult
@@ -17792,7 +17794,7 @@ declare namespace imports.gi.Gtk {
 		 *     not modify the icon. Use cairo_surface_destroy() to release your
 		 *     reference to the icon.
 		 */
-		load_surface(for_window: Gdk.Window): cairo.Surface;
+		load_surface(for_window: Gdk.Window | null): cairo.Surface;
 		/**
 		 * Loads an icon, modifying it to match the system colours for the foreground,
 		 * success, warning and error colors provided. If the icon is not a symbolic
@@ -17817,12 +17819,9 @@ declare namespace imports.gi.Gtk {
 		 *     of the icon or %NULL to use the default color
 		 * @param error_color a #GdkRGBA representing the error color
 		 *     of the icon or %NULL to use the default color (allow-none)
-		 * @param was_symbolic a #gboolean, returns whether the
-		 *     loaded icon was a symbolic one and whether the #fg color was
-		 *     applied to it.
 		 * @returns a #GdkPixbuf representing the loaded icon
 		 */
-		load_symbolic(fg: Gdk.RGBA, success_color: Gdk.RGBA, warning_color: Gdk.RGBA, error_color: Gdk.RGBA, was_symbolic: boolean): GdkPixbuf.Pixbuf;
+		load_symbolic(fg: Gdk.RGBA, success_color: Gdk.RGBA | null, warning_color: Gdk.RGBA | null, error_color: Gdk.RGBA | null): GdkPixbuf.Pixbuf;
 		/**
 		 * Asynchronously load, render and scale a symbolic icon previously looked up
 		 * from the icon theme using gtk_icon_theme_lookup_icon().
@@ -17841,19 +17840,16 @@ declare namespace imports.gi.Gtk {
 		 * @param callback a #GAsyncReadyCallback to call when the
 		 *     request is satisfied
 		 */
-		load_symbolic_async(fg: Gdk.RGBA, success_color: Gdk.RGBA, warning_color: Gdk.RGBA, error_color: Gdk.RGBA, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		load_symbolic_async(fg: Gdk.RGBA, success_color: Gdk.RGBA | null, warning_color: Gdk.RGBA | null, error_color: Gdk.RGBA | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an async icon load, see gtk_icon_info_load_symbolic_async().
 		 * @param res a #GAsyncResult
-		 * @param was_symbolic a #gboolean, returns whether the
-		 *     loaded icon was a symbolic one and whether the #fg color was
-		 *     applied to it.
 		 * @returns the rendered icon; this may be a newly
 		 *     created icon or a new reference to an internal icon, so you must
 		 *     not modify the icon. Use g_object_unref() to release your reference
 		 *     to the icon.
 		 */
-		load_symbolic_finish(res: Gio.AsyncResult, was_symbolic: boolean): GdkPixbuf.Pixbuf;
+		load_symbolic_finish(res: Gio.AsyncResult): GdkPixbuf.Pixbuf;
 		/**
 		 * Loads an icon, modifying it to match the system colors for the foreground,
 		 * success, warning and error colors provided. If the icon is not a symbolic
@@ -17866,12 +17862,9 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * See gtk_icon_info_load_symbolic() for more details.
 		 * @param context a {@link StyleContext}
-		 * @param was_symbolic a #gboolean, returns whether the
-		 *     loaded icon was a symbolic one and whether the #fg color was
-		 *     applied to it.
 		 * @returns a #GdkPixbuf representing the loaded icon
 		 */
-		load_symbolic_for_context(context: StyleContext, was_symbolic: boolean): GdkPixbuf.Pixbuf;
+		load_symbolic_for_context(context: StyleContext): GdkPixbuf.Pixbuf;
 		/**
 		 * Asynchronously load, render and scale a symbolic icon previously
 		 * looked up from the icon theme using gtk_icon_theme_lookup_icon().
@@ -17884,19 +17877,16 @@ declare namespace imports.gi.Gtk {
 		 * @param callback a #GAsyncReadyCallback to call when the
 		 *     request is satisfied
 		 */
-		load_symbolic_for_context_async(context: StyleContext, cancellable: Gio.Cancellable, callback: Gio.AsyncReadyCallback): void;
+		load_symbolic_for_context_async(context: StyleContext, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an async icon load, see gtk_icon_info_load_symbolic_for_context_async().
 		 * @param res a #GAsyncResult
-		 * @param was_symbolic a #gboolean, returns whether the
-		 *     loaded icon was a symbolic one and whether the #fg color was
-		 *     applied to it.
 		 * @returns the rendered icon; this may be a newly
 		 *     created icon or a new reference to an internal icon, so you must
 		 *     not modify the icon. Use g_object_unref() to release your reference
 		 *     to the icon.
 		 */
-		load_symbolic_for_context_finish(res: Gio.AsyncResult, was_symbolic: boolean): GdkPixbuf.Pixbuf;
+		load_symbolic_for_context_finish(res: Gio.AsyncResult): GdkPixbuf.Pixbuf;
 		/**
 		 * Loads an icon, modifying it to match the system colours for the foreground,
 		 * success, warning and error colors provided. If the icon is not a symbolic
@@ -17907,12 +17897,9 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_icon_info_load_symbolic() for more details.
 		 * @param style a {@link Style} to take the colors from
 		 * @param state the widget state to use for colors
-		 * @param was_symbolic a #gboolean, returns whether the
-		 *     loaded icon was a symbolic one and whether the #fg color was
-		 *     applied to it.
 		 * @returns a #GdkPixbuf representing the loaded icon
 		 */
-		load_symbolic_for_style(style: Style, state: StateType, was_symbolic: boolean): GdkPixbuf.Pixbuf;
+		load_symbolic_for_style(style: Style, state: StateType): GdkPixbuf.Pixbuf;
 		/**
 		 * Sets whether the coordinates returned by gtk_icon_info_get_embedded_rect()
 		 * and gtk_icon_info_get_attach_points() should be returned in their
@@ -18000,7 +17987,7 @@ declare namespace imports.gi.Gtk {
 		 * containing information about the icon, or %NULL if the icon wasn’t
 		 * found.
 		 */
-		choose_icon(icon_names: string[], size: number, flags: IconLookupFlags): IconInfo;
+		choose_icon(icon_names: string[], size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon for a particular window scale and returns
 		 * a {@link IconInfo} containing information such as the filename of the
@@ -18020,7 +18007,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		choose_icon_for_scale(icon_names: string[], size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		choose_icon_for_scale(icon_names: string[], size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Gets the name of an icon that is representative of the
 		 * current theme (for instance, to use when presenting
@@ -18028,7 +18015,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the name of an example icon or %NULL.
 		 *     Free with g_free().
 		 */
-		get_example_icon_name(): string;
+		get_example_icon_name(): string | null;
 		/**
 		 * Returns an array of integers describing the sizes at which
 		 * the icon is available without scaling. A size of -1 means
@@ -18043,12 +18030,13 @@ declare namespace imports.gi.Gtk {
 		get_icon_sizes(icon_name: string): number[];
 		/**
 		 * Gets the current search path. See gtk_icon_theme_set_search_path().
-		 * @param path 
+		 * @returns 
 		 *     location to store a list of icon theme path directories or %NULL.
 		 *     The stored value should be freed with g_strfreev().
-		 * @param n_elements location to store number of elements in #path, or %NULL
+		 * 
+		 * location to store number of elements in #path, or %NULL
 		 */
-		get_search_path(path: string[], n_elements: number): void;
+		get_search_path(): [ string[] | null, number ];
 		/**
 		 * Checks whether an icon theme includes an icon
 		 * for a particular name.
@@ -18084,7 +18072,7 @@ declare namespace imports.gi.Gtk {
 		 *     first free each element in the list with g_free(), then
 		 *     free the list itself with g_list_free().
 		 */
-		list_icons(context: string): GLib.List;
+		list_icons(context: string | null): GLib.List;
 		/**
 		 * Looks up an icon in an icon theme, scales it to the given size
 		 * and renders it into a pixbuf. This is a convenience function;
@@ -18107,7 +18095,7 @@ declare namespace imports.gi.Gtk {
 		 *     you must not modify the icon. Use g_object_unref() to release
 		 *     your reference to the icon. %NULL if the icon isn’t found.
 		 */
-		load_icon(icon_name: string, size: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf;
+		load_icon(icon_name: string, size: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Looks up an icon in an icon theme for a particular window scale,
 		 * scales it to the given size and renders it into a pixbuf. This is a
@@ -18132,7 +18120,7 @@ declare namespace imports.gi.Gtk {
 		 *     you must not modify the icon. Use g_object_unref() to release
 		 *     your reference to the icon. %NULL if the icon isn’t found.
 		 */
-		load_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf;
+		load_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Looks up an icon in an icon theme for a particular window scale,
 		 * scales it to the given size and renders it into a cairo surface. This is a
@@ -18155,7 +18143,7 @@ declare namespace imports.gi.Gtk {
 		 *     release your reference to the icon. %NULL if the icon isn’t
 		 *     found.
 		 */
-		load_surface(icon_name: string, size: number, scale: number, for_window: Gdk.Window, flags: IconLookupFlags): cairo.Surface;
+		load_surface(icon_name: string, size: number, scale: number, for_window: Gdk.Window | null, flags: IconLookupFlags): cairo.Surface | null;
 		/**
 		 * Looks up an icon and returns a {@link IconInfo} containing information
 		 * such as the filename of the icon. The icon can then be rendered
@@ -18173,7 +18161,7 @@ declare namespace imports.gi.Gtk {
 		 *     information about the icon, or %NULL if the icon wasn’t
 		 *     found. Unref with g_object_unref()
 		 */
-		lookup_by_gicon(icon: Gio.Icon, size: number, flags: IconLookupFlags): IconInfo;
+		lookup_by_gicon(icon: Gio.Icon, size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up an icon and returns a {@link IconInfo} containing information
 		 * such as the filename of the icon. The icon can then be rendered into
@@ -18186,7 +18174,7 @@ declare namespace imports.gi.Gtk {
 		 *     information about the icon, or %NULL if the icon wasn’t
 		 *     found. Unref with g_object_unref()
 		 */
-		lookup_by_gicon_for_scale(icon: Gio.Icon, size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		lookup_by_gicon_for_scale(icon: Gio.Icon, size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon and returns a {@link IconInfo} containing
 		 * information such as the filename of the icon. The icon
@@ -18206,7 +18194,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		lookup_icon(icon_name: string, size: number, flags: IconLookupFlags): IconInfo;
+		lookup_icon(icon_name: string, size: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Looks up a named icon for a particular window scale and returns a
 		 * {@link IconInfo} containing information such as the filename of the
@@ -18221,7 +18209,7 @@ declare namespace imports.gi.Gtk {
 		 *     containing information about the icon, or %NULL if the
 		 *     icon wasn’t found.
 		 */
-		lookup_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): IconInfo;
+		lookup_icon_for_scale(icon_name: string, size: number, scale: number, flags: IconLookupFlags): IconInfo | null;
 		/**
 		 * Prepends a directory to the search path.
 		 * See gtk_icon_theme_set_search_path().
@@ -18244,7 +18232,7 @@ declare namespace imports.gi.Gtk {
 		 * @param theme_name name of icon theme to use instead of
 		 *   configured theme, or %NULL to unset a previously set custom theme
 		 */
-		set_custom_theme(theme_name: string): void;
+		set_custom_theme(theme_name: string | null): void;
 		/**
 		 * Sets the screen for an icon theme; the screen is used
 		 * to track the user’s currently configured icon theme,
@@ -18514,10 +18502,11 @@ declare namespace imports.gi.Gtk {
 		 * as expected by e.g. gtk_icon_view_get_path_at_pos().
 		 * @param wx X coordinate relative to the widget
 		 * @param wy Y coordinate relative to the widget
-		 * @param bx return location for bin_window X coordinate
-		 * @param _by return location for bin_window Y coordinate
+		 * @returns return location for bin_window X coordinate
+		 * 
+		 * return location for bin_window Y coordinate
 		 */
-		convert_widget_to_bin_window_coords(wx: number, wy: number, bx: number, _by: number): void;
+		convert_widget_to_bin_window_coords(wx: number, wy: number): [ bx: number, by: number ];
 		/**
 		 * Creates a #cairo_surface_t representation of the item at #path.
 		 * This image is used for a drag icon.
@@ -18561,7 +18550,7 @@ declare namespace imports.gi.Gtk {
 		 * @param rect rectangle to fill with cell rect
 		 * @returns %FALSE if there is no such item, %TRUE otherwise
 		 */
-		get_cell_rect(path: TreePath, cell: CellRenderer, rect: Gdk.Rectangle): boolean;
+		get_cell_rect(path: TreePath, cell: CellRenderer | null, rect: Gdk.Rectangle): boolean;
 		/**
 		 * Returns the value of the ::column-spacing property.
 		 * @returns the space between columns
@@ -18578,30 +18567,24 @@ declare namespace imports.gi.Gtk {
 		 * If no cell currently has focus, then *#cell will be %NULL.
 		 * 
 		 * The returned {@link TreePath} must be freed with gtk_tree_path_free().
-		 * @param path Return location for the current
-		 *        cursor path, or %NULL
-		 * @param cell Return location the current
-		 *        focus cell, or %NULL
 		 * @returns %TRUE if the cursor is set.
 		 */
-		get_cursor(path: TreePath, cell: CellRenderer): boolean;
+		get_cursor(): boolean;
 		/**
 		 * Determines the destination item for a given position.
 		 * @param drag_x the position to determine the destination item for
 		 * @param drag_y the position to determine the destination item for
-		 * @param path Return location for the path of the item,
-		 *    or %NULL.
-		 * @param pos Return location for the drop position, or %NULL
 		 * @returns whether there is an item at the given position.
 		 */
-		get_dest_item_at_pos(drag_x: number, drag_y: number, path: TreePath, pos: IconViewDropPosition): boolean;
+		get_dest_item_at_pos(drag_x: number, drag_y: number): boolean;
 		/**
 		 * Gets information about the item that is highlighted for feedback.
-		 * @param path Return location for the path of
+		 * @returns Return location for the path of
 		 *        the highlighted item, or %NULL.
-		 * @param pos Return location for the drop position, or %NULL
+		 * 
+		 * Return location for the drop position, or %NULL
 		 */
-		get_drag_dest_item(path: TreePath, pos: IconViewDropPosition): void;
+		get_drag_dest_item(): [ path: TreePath | null, pos: IconViewDropPosition | null ];
 		/**
 		 * Finds the path at the point (#x, #y), relative to bin_window coordinates.
 		 * In contrast to gtk_icon_view_get_path_at_pos(), this function also
@@ -18611,12 +18594,9 @@ declare namespace imports.gi.Gtk {
 		 * widget coordinates to bin_window coordinates.
 		 * @param _x The x position to be identified
 		 * @param _y The y position to be identified
-		 * @param path Return location for the path, or %NULL
-		 * @param cell Return location for the renderer
-		 *   responsible for the cell at (#x, #y), or %NULL
 		 * @returns %TRUE if an item exists at the specified position
 		 */
-		get_item_at_pos(_x: number, _y: number, path: TreePath, cell: CellRenderer): boolean;
+		get_item_at_pos(_x: number, _y: number): boolean;
 		/**
 		 * Gets the column in which the item #path is currently
 		 * displayed. Column numbers start at 0.
@@ -18663,7 +18643,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if none is
 		 *     currently being used.
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Finds the path at the point (#x, #y), relative to bin_window coordinates.
 		 * See gtk_icon_view_get_item_at_pos(), if you are also interested in
@@ -18675,7 +18655,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The {@link TreePath} corresponding
 		 * to the icon or %NULL if no icon exists at that position.
 		 */
-		get_path_at_pos(_x: number, _y: number): TreePath;
+		get_path_at_pos(_x: number, _y: number): TreePath | null;
 		/**
 		 * Returns the column with pixbufs for #icon_view.
 		 * @returns the pixbuf column, or -1 if it’s unset.
@@ -18739,27 +18719,19 @@ declare namespace imports.gi.Gtk {
 		 * #model, #path and #iter which have been provided will be set to point to
 		 * that row and the corresponding model. #x and #y will always be converted
 		 * to be relative to #icon_view’s bin_window if #keyboard_tooltip is %FALSE.
-		 * @param _x the x coordinate (relative to widget coordinates)
-		 * @param _y the y coordinate (relative to widget coordinates)
 		 * @param keyboard_tip whether this is a keyboard tooltip or not
-		 * @param model a pointer to receive a
-		 *         {@link TreeModel} or %NULL
-		 * @param path a pointer to receive a {@link TreePath} or %NULL
 		 * @param iter a pointer to receive a {@link TreeIter} or %NULL
 		 * @returns whether or not the given tooltip context points to a item
 		 */
-		get_tooltip_context(_x: number, _y: number, keyboard_tip: boolean, model: TreeModel, path: TreePath, iter: TreeIter): boolean;
+		get_tooltip_context(keyboard_tip: boolean, iter: TreeIter | null): boolean;
 		/**
 		 * Sets #start_path and #end_path to be the first and last visible path.
 		 * Note that there may be invisible paths in between.
 		 * 
 		 * Both paths should be freed with gtk_tree_path_free() after use.
-		 * @param start_path Return location for start of region,
-		 *              or %NULL
-		 * @param end_path Return location for end of region, or %NULL
 		 * @returns %TRUE, if valid paths were placed in #start_path and #end_path
 		 */
-		get_visible_range(start_path: TreePath, end_path: TreePath): boolean;
+		get_visible_range(): boolean;
 		/**
 		 * Activates the item determined by #path.
 		 * @param path The {@link TreePath} to be activated
@@ -18809,7 +18781,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func The function to call for each selected icon.
 		 * @param data User data to pass to the function.
 		 */
-		selected_foreach(_func: IconViewForeachFunc, data: any): void;
+		selected_foreach(_func: IconViewForeachFunc, data: any | null): void;
 		/**
 		 * Causes the {@link IconView}::item-activated signal to be emitted on
 		 * a single click instead of a double click.
@@ -18844,13 +18816,13 @@ declare namespace imports.gi.Gtk {
 		 * @param cell One of the cell renderers of #icon_view, or %NULL
 		 * @param start_editing %TRUE if the specified cell should start being edited.
 		 */
-		set_cursor(path: TreePath, cell: CellRenderer, start_editing: boolean): void;
+		set_cursor(path: TreePath, cell: CellRenderer | null, start_editing: boolean): void;
 		/**
 		 * Sets the item that is highlighted for feedback.
 		 * @param path The path of the item to highlight, or %NULL.
 		 * @param pos Specifies where to drop, relative to the item
 		 */
-		set_drag_dest_item(path: TreePath, pos: IconViewDropPosition): void;
+		set_drag_dest_item(path: TreePath | null, pos: IconViewDropPosition): void;
 		/**
 		 * Sets the ::item-orientation property which determines whether the labels
 		 * are drawn beside the icons instead of below.
@@ -18892,7 +18864,7 @@ declare namespace imports.gi.Gtk {
 		 * it will unset the old model.
 		 * @param model The model.
 		 */
-		set_model(model: TreeModel): void;
+		set_model(model: TreeModel | null): void;
 		/**
 		 * Sets the column with pixbufs for #icon_view to be #column. The pixbuf
 		 * column must be of type #GDK_TYPE_PIXBUF
@@ -18948,7 +18920,7 @@ declare namespace imports.gi.Gtk {
 		 * @param path a {@link TreePath}
 		 * @param cell a {@link CellRenderer} or %NULL
 		 */
-		set_tooltip_cell(tooltip: Tooltip, path: TreePath, cell: CellRenderer): void;
+		set_tooltip_cell(tooltip: Tooltip, path: TreePath, cell: CellRenderer | null): void;
 		/**
 		 * If you only plan to have simple (text-only) tooltips on full items, you
 		 * can use this function to have {@link IconView} handle these automatically
@@ -19226,41 +19198,44 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed animation, or %NULL if
 		 * the image is empty
 		 */
-		get_animation(): GdkPixbuf.PixbufAnimation;
+		get_animation(): GdkPixbuf.PixbufAnimation | null;
 		/**
 		 * Gets the #GIcon and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_GICON (see gtk_image_get_storage_type()).
 		 * The caller of this function does not own a reference to the
 		 * returned #GIcon.
-		 * @param gicon place to store a
+		 * @returns place to store a
 		 *     #GIcon, or %NULL
-		 * @param size place to store an icon size
+		 * 
+		 * place to store an icon size
 		 *     ({@link IconSize}), or %NULL
 		 */
-		get_gicon(gicon: Gio.Icon, size: number): void;
+		get_gicon(): [ gicon: Gio.Icon | null, size: number | null ];
 		/**
 		 * Gets the icon name and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_ICON_NAME (see gtk_image_get_storage_type()).
 		 * The returned string is owned by the #GtkImage and should not
 		 * be freed.
-		 * @param icon_name place to store an
+		 * @returns place to store an
 		 *     icon name, or %NULL
-		 * @param size place to store an icon size
+		 * 
+		 * place to store an icon size
 		 *     ({@link IconSize}), or %NULL
 		 */
-		get_icon_name(icon_name: string, size: number): void;
+		get_icon_name(): [ icon_name: string | null, size: number | null ];
 		/**
 		 * Gets the icon set and size being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
 		 * %GTK_IMAGE_ICON_SET (see gtk_image_get_storage_type()).
-		 * @param icon_set location to store a
+		 * @returns location to store a
 		 *     {@link IconSet}, or %NULL
-		 * @param size location to store a stock
-		 *     icon size ({@link IconSize}), or %NULL
+		 * 
+		 * location to store a stock
+		 *     icon size (#GtkIconSize), or %NULL
 		 */
-		get_icon_set(icon_set: IconSet, size: number): void;
+		get_icon_set(): [ icon_set: IconSet | null, size: number | null ];
 		/**
 		 * Gets the #GdkPixbuf being displayed by the {@link Image}.
 		 * The storage type of the image must be %GTK_IMAGE_EMPTY or
@@ -19270,7 +19245,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed pixbuf, or %NULL if
 		 * the image is empty
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Gets the pixel size used for named icons.
 		 * @returns the pixel size used for named icons.
@@ -19282,12 +19257,13 @@ declare namespace imports.gi.Gtk {
 		 * %GTK_IMAGE_STOCK (see gtk_image_get_storage_type()).
 		 * The returned string is owned by the #GtkImage and should not
 		 * be freed.
-		 * @param stock_id place to store a
+		 * @returns place to store a
 		 *     stock icon name, or %NULL
-		 * @param size place to store a stock icon
+		 * 
+		 * place to store a stock icon
 		 *     size ({@link IconSize}), or %NULL
 		 */
-		get_stock(stock_id: string, size: number): void;
+		get_stock(): [ stock_id: string | null, size: number | null ];
 		/**
 		 * Gets the type of representation being used by the {@link Image}
 		 * to store image data. If the #GtkImage has no image data,
@@ -19305,7 +19281,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_image_new_from_file() for details.
 		 * @param filename a filename or %NULL
 		 */
-		set_from_file(filename: string): void;
+		set_from_file(filename: string | null): void;
 		/**
 		 * See gtk_image_new_from_gicon() for details.
 		 * @param icon an icon
@@ -19317,7 +19293,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_name an icon name or %NULL
 		 * @param size an icon size ({@link IconSize})
 		 */
-		set_from_icon_name(icon_name: string, size: number): void;
+		set_from_icon_name(icon_name: string | null, size: number): void;
 		/**
 		 * See gtk_image_new_from_icon_set() for details.
 		 * @param icon_set a {@link IconSet}
@@ -19328,12 +19304,12 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_image_new_from_pixbuf() for details.
 		 * @param pixbuf a #GdkPixbuf or %NULL
 		 */
-		set_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf): void;
+		set_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * See gtk_image_new_from_resource() for details.
 		 * @param resource_path a resource path or %NULL
 		 */
-		set_from_resource(resource_path: string): void;
+		set_from_resource(resource_path: string | null): void;
 		/**
 		 * See gtk_image_new_from_stock() for details.
 		 * @param stock_id a stock icon name
@@ -19344,7 +19320,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_image_new_from_surface() for details.
 		 * @param surface a cairo_surface_t or %NULL
 		 */
-		set_from_surface(surface: cairo.Surface): void;
+		set_from_surface(surface: cairo.Surface | null): void;
 		/**
 		 * Sets the pixel size to use for named icons. If the pixel size is set
 		 * to a value != -1, it is used instead of the icon size set by
@@ -19523,7 +19499,7 @@ declare namespace imports.gi.Gtk {
 		 * @param size a stock icon size ({@link IconSize})
 		 * @returns a new {@link Image} displaying the themed icon
 		 */
-		public static new_from_icon_name(icon_name: string, size: number): Widget;
+		public static new_from_icon_name(icon_name: string | null, size: number): Widget;
 		/**
 		 * Creates a {@link Image} displaying an icon set. Sample stock sizes are
 		 * #GTK_ICON_SIZE_MENU, #GTK_ICON_SIZE_SMALL_TOOLBAR. Instead of using
@@ -19553,7 +19529,7 @@ declare namespace imports.gi.Gtk {
 		 * @param pixbuf a #GdkPixbuf, or %NULL
 		 * @returns a new {@link Image}
 		 */
-		public static new_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf): Widget;
+		public static new_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf | null): Widget;
 		/**
 		 * Creates a new {@link Image} displaying the resource file #resource_path. If the file
 		 * isn’t found or can’t be loaded, the resulting #GtkImage will
@@ -19595,7 +19571,7 @@ declare namespace imports.gi.Gtk {
 		 * @param surface a #cairo_surface_t, or %NULL
 		 * @returns a new {@link Image}
 		 */
-		public static new_from_surface(surface: cairo.Surface): Widget;
+		public static new_from_surface(surface: cairo.Surface | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19700,7 +19676,7 @@ declare namespace imports.gi.Gtk {
 		 * the image will be displayed or not.
 		 * @param image a widget to set as the image for the menu item.
 		 */
-		set_image(image: Widget): void;
+		set_image(image: Widget | null): void;
 		/**
 		 * If %TRUE, the label set in the menuitem is used as a
 		 * stock id to select the stock item for the item.
@@ -19806,7 +19782,7 @@ declare namespace imports.gi.Gtk {
 		 *   accelerator to, or %NULL.
 		 * @returns a new {@link ImageMenuItem}.
 		 */
-		public static new_from_stock(stock_id: string, accel_group: AccelGroup): Widget;
+		public static new_from_stock(stock_id: string, accel_group: AccelGroup | null): Widget;
 		/**
 		 * Creates a new {@link ImageMenuItem} containing a label.
 		 * @param label the text of the menu item.
@@ -20053,7 +20029,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_button_text stock ID or text to go in first button, or %NULL
 		 * @returns a new {@link InfoBar}
 		 */
-		public static new_with_buttons(first_button_text: string): Widget;
+		public static new_with_buttons(first_button_text: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20232,7 +20208,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the attribute list, or %NULL
 		 *     if none was set.
 		 */
-		get_attributes(): Pango.AttrList;
+		get_attributes(): Pango.AttrList | null;
 		/**
 		 * Returns the URI for the currently active link in the label.
 		 * The active link is the one under the mouse pointer or, in a
@@ -20283,10 +20259,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_get_has_window()). Remember
 		 * when using the #PangoLayout functions you need to convert to
 		 * and from pixels using PANGO_PIXELS() or #PANGO_SCALE.
-		 * @param _x location to store X offset of layout, or %NULL
-		 * @param _y location to store Y offset of layout, or %NULL
+		 * @returns location to store X offset of layout, or %NULL
+		 * 
+		 * location to store Y offset of layout, or %NULL
 		 */
-		get_layout_offsets(_x: number, _y: number): void;
+		get_layout_offsets(): [ x: number | null, y: number | null ];
 		/**
 		 * Returns whether lines in the label are automatically wrapped.
 		 * See gtk_label_set_line_wrap().
@@ -20323,7 +20300,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the target of the label’s mnemonic,
 		 *     or %NULL if none has been set and the default algorithm will be used.
 		 */
-		get_mnemonic_widget(): Widget;
+		get_mnemonic_widget(): Widget | null;
 		/**
 		 * Gets the value set by gtk_label_set_selectable().
 		 * @returns %TRUE if the user can copy text from the label
@@ -20332,11 +20309,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the selected range of characters in the label, returning %TRUE
 		 * if there’s a selection.
-		 * @param start return location for start of selection, as a character offset
-		 * @param _end return location for end of selection, as a character offset
 		 * @returns %TRUE if selection is non-empty
 		 */
-		get_selection_bounds(start: number, _end: number): boolean;
+		get_selection_bounds(): boolean;
 		/**
 		 * Returns whether the label is in single line mode.
 		 * @returns %TRUE when the label is in single line mode.
@@ -20416,7 +20391,7 @@ declare namespace imports.gi.Gtk {
 		 * to the label after the markup string is parsed.
 		 * @param attrs a #PangoAttrList, or %NULL
 		 */
-		set_attributes(attrs: Pango.AttrList): void;
+		set_attributes(attrs: Pango.AttrList | null): void;
 		/**
 		 * Sets the mode used to ellipsize (add an ellipsis: "...") to the text
 		 * if there is not enough space to render the entire string.
@@ -20534,7 +20509,7 @@ declare namespace imports.gi.Gtk {
 		 * and toggle focus between the colliding widgets otherwise.
 		 * @param widget the target {@link Widget}, or %NULL to unset
 		 */
-		set_mnemonic_widget(widget: Widget): void;
+		set_mnemonic_widget(widget: Widget | null): void;
 		/**
 		 * The pattern of underlines you want under the existing text within the
 		 * {@link Label} widget.  For example if the current text of the label says
@@ -20884,7 +20859,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _str The text of the label
 		 * @returns the new {@link Label}
 		 */
-		public static new(_str: string): Widget;
+		public static new(_str: string | null): Widget;
 		/**
 		 * Creates a new {@link Label}, containing the text in #str.
 		 * 
@@ -20904,7 +20879,7 @@ declare namespace imports.gi.Gtk {
 		 *       mnemonic character
 		 * @returns the new {@link Label}
 		 */
-		public static new_with_mnemonic(_str: string): Widget;
+		public static new_with_mnemonic(_str: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20951,12 +20926,13 @@ declare namespace imports.gi.Gtk {
 		 * Gets the size that has been set on the layout, and that determines
 		 * the total extents of the layout’s scrollbar area. See
 		 * gtk_layout_set_size ().
-		 * @param width location to store the width set on
+		 * @returns location to store the width set on
 		 *     #layout, or %NULL
-		 * @param height location to store the height set on
+		 * 
+		 * location to store the height set on
 		 *     #layout, or %NULL
 		 */
-		get_size(width: number, height: number): void;
+		get_size(): [ width: number | null, height: number | null ];
 		/**
 		 * This function should only be called after the layout has been
 		 * placed in a {@link ScrolledWindow} or otherwise configured for
@@ -20988,7 +20964,7 @@ declare namespace imports.gi.Gtk {
 		 * See {@link ScrolledWindow}, #GtkScrollbar, #GtkAdjustment for details.
 		 * @param adjustment new scroll adjustment
 		 */
-		set_hadjustment(adjustment: Adjustment): void;
+		set_hadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Sets the size of the scrollable area of the layout.
 		 * @param width width of entire scrollable area
@@ -21001,7 +20977,7 @@ declare namespace imports.gi.Gtk {
 		 * See {@link ScrolledWindow}, #GtkScrollbar, #GtkAdjustment for details.
 		 * @param adjustment new scroll adjustment
 		 */
-		set_vadjustment(adjustment: Adjustment): void;
+		set_vadjustment(adjustment: Adjustment | null): void;
 		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
@@ -21039,7 +21015,7 @@ declare namespace imports.gi.Gtk {
 		 * @param vadjustment vertical scroll adjustment, or %NULL
 		 * @returns a new {@link Layout}
 		 */
-		public static new(hadjustment: Adjustment, vadjustment: Adjustment): Widget;
+		public static new(hadjustment: Adjustment | null, vadjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21113,10 +21089,9 @@ declare namespace imports.gi.Gtk {
 		 * Fetches the value specified for the offset marker #name in #self,
 		 * returning %TRUE in case an offset named #name was found.
 		 * @param name the name of an offset in the bar
-		 * @param value location where to store the value
 		 * @returns %TRUE if the specified offset is found
 		 */
-		get_offset_value(name: string, value: number): boolean;
+		get_offset_value(name: string | null): boolean;
 		/**
 		 * Returns the value of the {@link LevelBar}:value property.
 		 * @returns a value in the interval between
@@ -21128,7 +21103,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_level_bar_add_offset_value().
 		 * @param name the name of an offset in the bar
 		 */
-		remove_offset_value(name: string): void;
+		remove_offset_value(name: string | null): void;
 		/**
 		 * Sets the value of the {@link LevelBar}:inverted property.
 		 * @param inverted %TRUE to invert the level bar
@@ -21417,7 +21392,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text of the button
 		 * @returns a new link button widget.
 		 */
-		public static new_with_label(uri: string, label: string): Widget;
+		public static new_with_label(uri: string, label: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -21466,7 +21441,7 @@ declare namespace imports.gi.Gtk {
 		 *   or %NULL in case you also passed %NULL as #model
 		 * @param user_data_free_func function for freeing #user_data
 		 */
-		bind_model(model: Gio.ListModel, create_widget_func: ListBoxCreateWidgetFunc, user_data_free_func: GLib.DestroyNotify): void;
+		bind_model(model: Gio.ListModel | null, create_widget_func: ListBoxCreateWidgetFunc | null, user_data_free_func: GLib.DestroyNotify): void;
 		/**
 		 * This is a helper function for implementing DnD onto a {@link ListBox}.
 		 * The passed in #row will be highlighted via gtk_drag_highlight(),
@@ -21500,14 +21475,14 @@ declare namespace imports.gi.Gtk {
 		 * @param index_ the index of the row
 		 * @returns the child {@link Widget} or %NULL
 		 */
-		get_row_at_index(index_: number): ListBoxRow;
+		get_row_at_index(index_: number): ListBoxRow | null;
 		/**
 		 * Gets the row at the #y position.
 		 * @param _y position
 		 * @returns the row or %NULL
 		 *   in case no row exists for the given y coordinate.
 		 */
-		get_row_at_y(_y: number): ListBoxRow;
+		get_row_at_y(_y: number): ListBoxRow | null;
 		/**
 		 * Gets the selected row.
 		 * 
@@ -21575,7 +21550,7 @@ declare namespace imports.gi.Gtk {
 		 * Make #row the currently selected row.
 		 * @param _row The row to select or %NULL
 		 */
-		select_row(_row: ListBoxRow): void;
+		select_row(_row: ListBoxRow | null): void;
 		/**
 		 * Calls a function for each selected child.
 		 * 
@@ -21583,7 +21558,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func the function to call for each selected child
 		 * @param data user data to pass to the function
 		 */
-		selected_foreach(_func: ListBoxForeachFunc, data: any): void;
+		selected_foreach(_func: ListBoxForeachFunc, data: any | null): void;
 		/**
 		 * If #single is %TRUE, rows will be activated when you click on them,
 		 * otherwise you need to double-click.
@@ -21601,7 +21576,7 @@ declare namespace imports.gi.Gtk {
 		 * to manually do that.
 		 * @param adjustment the adjustment, or %NULL
 		 */
-		set_adjustment(adjustment: Adjustment): void;
+		set_adjustment(adjustment: Adjustment | null): void;
 		/**
 		 * By setting a filter function on the #box one can decide dynamically which
 		 * of the rows to show. For instance, to implement a search function on a list that
@@ -21616,7 +21591,7 @@ declare namespace imports.gi.Gtk {
 		 * @param filter_func callback that lets you filter which rows to show
 		 * @param destroy destroy notifier for #user_data
 		 */
-		set_filter_func(filter_func: ListBoxFilterFunc, destroy: GLib.DestroyNotify): void;
+		set_filter_func(filter_func: ListBoxFilterFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * By setting a header function on the #box one can dynamically add headers
 		 * in front of rows, depending on the contents of the row and its position in the list.
@@ -21639,13 +21614,13 @@ declare namespace imports.gi.Gtk {
 		 * @param update_header callback that lets you add row headers
 		 * @param destroy destroy notifier for #user_data
 		 */
-		set_header_func(update_header: ListBoxUpdateHeaderFunc, destroy: GLib.DestroyNotify): void;
+		set_header_func(update_header: ListBoxUpdateHeaderFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the placeholder widget that is shown in the list when
 		 * it doesn't display any visible children.
 		 * @param placeholder a {@link Widget} or %NULL
 		 */
-		set_placeholder(placeholder: Widget): void;
+		set_placeholder(placeholder: Widget | null): void;
 		/**
 		 * Sets how selection works in the listbox.
 		 * See {@link SelectionMode} for details.
@@ -21665,7 +21640,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sort_func the sort function
 		 * @param destroy destroy notifier for #user_data
 		 */
-		set_sort_func(sort_func: ListBoxSortFunc, destroy: GLib.DestroyNotify): void;
+		set_sort_func(sort_func: ListBoxSortFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Unselect all children of #box, if the selection mode allows it.
 		 */
@@ -21689,7 +21664,7 @@ declare namespace imports.gi.Gtk {
 		 * give you the full picture of selection changes, and you should use
 		 * the {@link ListBox}::selected-rows-changed signal instead.
 		 */
-		connect(signal: "row-selected", callback: (owner: this, _row: ListBoxRow) => void): number;
+		connect(signal: "row-selected", callback: (owner: this, _row: ListBoxRow | null) => void): number;
 		/**
 		 * The ::select-all signal is a [keybinding signal][GtkBindingSignal]
 		 * which gets emitted to select all children of the box, if the selection
@@ -21836,7 +21811,7 @@ declare namespace imports.gi.Gtk {
 		 * set already, and if so to update the state of it.
 		 * @returns the current header, or %NULL if none
 		 */
-		get_header(): Widget;
+		get_header(): Widget | null;
 		/**
 		 * Gets the current index of the #row in its {@link ListBox} container.
 		 * @returns the index of the #row, or -1 if the #row is not in a listbox
@@ -21865,7 +21840,7 @@ declare namespace imports.gi.Gtk {
 		 * header in the row, and be shown in front of the row in the listbox.
 		 * @param header the header, or %NULL
 		 */
-		set_header(header: Widget): void;
+		set_header(header: Widget | null): void;
 		/**
 		 * Set the {@link ListBoxRow}:selectable property for this row.
 		 * @param selectable %TRUE to mark the row as selectable
@@ -21951,7 +21926,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter An unset {@link TreeIter} to set to the new row
 		 * @param sibling A valid {@link TreeIter}, or %NULL
 		 */
-		insert_after(iter: TreeIter, sibling: TreeIter): void;
+		insert_after(iter: TreeIter, sibling: TreeIter | null): void;
 		/**
 		 * Inserts a new row before #sibling. If #sibling is %NULL, then the row will
 		 * be appended to the end of the list. #iter will be changed to point to this
@@ -21960,7 +21935,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter An unset {@link TreeIter} to set to the new row
 		 * @param sibling A valid {@link TreeIter}, or %NULL
 		 */
-		insert_before(iter: TreeIter, sibling: TreeIter): void;
+		insert_before(iter: TreeIter, sibling: TreeIter | null): void;
 		/**
 		 * Creates a new row at #position. #iter will be changed to point to this new
 		 * row. If #position is -1, or larger than the number of rows in the list, then
@@ -21993,7 +21968,7 @@ declare namespace imports.gi.Gtk {
 		 * @param position position to insert the new row, or -1 to append after existing
 		 *     rows
 		 */
-		insert_with_values(iter: TreeIter, position: number): void;
+		insert_with_values(iter: TreeIter | null, position: number): void;
 		/**
 		 * A variant of gtk_list_store_insert_with_values() which
 		 * takes the columns and values as two arrays, instead of
@@ -22005,7 +21980,7 @@ declare namespace imports.gi.Gtk {
 		 * @param values an array of GValues
 		 * @param n_values the length of the #columns and #values arrays
 		 */
-		insert_with_valuesv(iter: TreeIter, position: number, columns: number[], values: GObject.Value[], n_values: number): void;
+		insert_with_valuesv(iter: TreeIter | null, position: number, columns: number[], values: GObject.Value[], n_values: number): void;
 		/**
 		 * > This function is slow. Only use it for debugging and/or testing
 		 * > purposes.
@@ -22022,7 +21997,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter}.
 		 * @param position A {@link TreeIter} or %NULL.
 		 */
-		move_after(iter: TreeIter, position: TreeIter): void;
+		move_after(iter: TreeIter, position: TreeIter | null): void;
 		/**
 		 * Moves #iter in #store to the position before #position. Note that this
 		 * function only works with unsorted stores. If #position is %NULL, #iter
@@ -22030,7 +22005,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter}.
 		 * @param position A {@link TreeIter}, or %NULL.
 		 */
-		move_before(iter: TreeIter, position: TreeIter): void;
+		move_before(iter: TreeIter, position: TreeIter | null): void;
 		/**
 		 * Prepends a new row to #list_store. #iter will be changed to point to this new
 		 * row. The row will be empty after this function is called. To fill in
@@ -22302,7 +22277,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the #GPermission object that controls #button.
 		 * @param permission a #GPermission object, or %NULL
 		 */
-		set_permission(permission: Gio.Permission): void;
+		set_permission(permission: Gio.Permission | null): void;
 		connect(signal: "notify::permission", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::text_lock", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::text_unlock", callback: (owner: this, ...args: any) => number): number;
@@ -22358,7 +22333,7 @@ declare namespace imports.gi.Gtk {
 		 * @param permission a #GPermission
 		 * @returns a new {@link LockButton}
 		 */
-		public static new(permission: Gio.Permission): Widget;
+		public static new(permission: Gio.Permission | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -22496,7 +22471,7 @@ declare namespace imports.gi.Gtk {
 		 * @param detacher the user supplied callback function
 		 *             that will be called when the menu calls gtk_menu_detach()
 		 */
-		attach_to_widget(attach_widget: Widget, detacher: MenuDetachFunc): void;
+		attach_to_widget(attach_widget: Widget, detacher: MenuDetachFunc | null): void;
 		/**
 		 * Detaches the menu from the widget to which it had been attached.
 		 * This function will call the callback function, #detacher, provided
@@ -22596,7 +22571,7 @@ declare namespace imports.gi.Gtk {
 		 * @param button the mouse button which was pressed to initiate the event.
 		 * @param activate_time the time at which the activation event occurred.
 		 */
-		popup(parent_menu_shell: Widget, parent_menu_item: Widget, _func: MenuPositionFunc, data: any, button: number, activate_time: number): void;
+		popup(parent_menu_shell: Widget | null, parent_menu_item: Widget | null, _func: MenuPositionFunc | null, data: any | null, button: number, activate_time: number): void;
 		/**
 		 * Displays #menu and makes it available for selection.
 		 * 
@@ -22613,7 +22588,7 @@ declare namespace imports.gi.Gtk {
 		 * @param trigger_event the #GdkEvent that initiated this request or
 		 *                 %NULL if it's the current event
 		 */
-		popup_at_pointer(trigger_event: Gdk.Event): void;
+		popup_at_pointer(trigger_event: Gdk.Event | null): void;
 		/**
 		 * Displays #menu and makes it available for selection.
 		 * 
@@ -22640,7 +22615,7 @@ declare namespace imports.gi.Gtk {
 		 * @param trigger_event the #GdkEvent that initiated this request or
 		 *                 %NULL if it's the current event
 		 */
-		popup_at_rect(rect_window: Gdk.Window, rect: Gdk.Rectangle, rect_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event): void;
+		popup_at_rect(rect_window: Gdk.Window, rect: Gdk.Rectangle, rect_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event | null): void;
 		/**
 		 * Displays #menu and makes it available for selection.
 		 * 
@@ -22668,7 +22643,7 @@ declare namespace imports.gi.Gtk {
 		 * @param trigger_event the #GdkEvent that initiated this request or
 		 *                 %NULL if it's the current event
 		 */
-		popup_at_widget(widget: Widget, widget_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event): void;
+		popup_at_widget(widget: Widget, widget_anchor: Gdk.Gravity, menu_anchor: Gdk.Gravity, trigger_event: Gdk.Event | null): void;
 		/**
 		 * Displays a menu and makes it available for selection.
 		 * 
@@ -22706,7 +22681,7 @@ declare namespace imports.gi.Gtk {
 		 * @param button the mouse button which was pressed to initiate the event
 		 * @param activate_time the time at which the activation event occurred
 		 */
-		popup_for_device(device: Gdk.Device, parent_menu_shell: Widget, parent_menu_item: Widget, _func: MenuPositionFunc, data: any, destroy: GLib.DestroyNotify, button: number, activate_time: number): void;
+		popup_for_device(device: Gdk.Device | null, parent_menu_shell: Widget | null, parent_menu_item: Widget | null, _func: MenuPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null, button: number, activate_time: number): void;
 		/**
 		 * Moves #child to a new #position in the list of #menu
 		 * children.
@@ -22728,7 +22703,7 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_group the {@link AccelGroup} to be associated
 		 *               with the menu.
 		 */
-		set_accel_group(accel_group: AccelGroup): void;
+		set_accel_group(accel_group: AccelGroup | null): void;
 		/**
 		 * Sets an accelerator path for this menu from which accelerator paths
 		 * for its immediate children, its menu items, can be constructed.
@@ -22753,7 +22728,7 @@ declare namespace imports.gi.Gtk {
 		 * it first with g_intern_static_string().
 		 * @param accel_path a valid accelerator path, or %NULL to unset the path
 		 */
-		set_accel_path(accel_path: string): void;
+		set_accel_path(accel_path: string | null): void;
 		/**
 		 * Selects the specified menu item within the menu.  This is used by
 		 * the {@link ComboBox} and should not be used by anyone else.
@@ -22786,7 +22761,7 @@ declare namespace imports.gi.Gtk {
 		 * @param screen a #GdkScreen, or %NULL if the screen should be
 		 *          determined by the widget the menu is attached to
 		 */
-		set_screen(screen: Gdk.Screen): void;
+		set_screen(screen: Gdk.Screen | null): void;
 		/**
 		 * Changes the tearoff state of the menu.  A menu is normally
 		 * displayed as drop down menu which persists as long as the menu is
@@ -22805,7 +22780,7 @@ declare namespace imports.gi.Gtk {
 		 * @param title a string containing the title for the menu, or %NULL to
 		 *   inherit the title of the parent menu item, if any
 		 */
-		set_title(title: string): void;
+		set_title(title: string | null): void;
 		connect(signal: "move-scroll", callback: (owner: this, scroll_type: ScrollType) => void): number;
 		/**
 		 * Emitted when the position of #menu is finalized after being popped up
@@ -22831,7 +22806,7 @@ declare namespace imports.gi.Gtk {
 		 * #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and
 		 * #GtkMenu:menu-type-hint.
 		 */
-		connect(signal: "popped-up", callback: (owner: this, flipped_rect: any, final_rect: any, flipped_x: boolean, flipped_y: boolean) => void): number;
+		connect(signal: "popped-up", callback: (owner: this, flipped_rect: any | null, final_rect: any | null, flipped_x: boolean, flipped_y: boolean) => void): number;
 
 		connect(signal: "notify::accel_group", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => number): number;
@@ -23097,7 +23072,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the parent {@link Widget} to use to line up with menu.
 		 * @returns a {@link Widget} value or %NULL
 		 */
-		get_align_widget(): Widget;
+		get_align_widget(): Widget | null;
 		/**
 		 * Returns the direction the popup will be pointing at when popped up.
 		 * @returns a {@link ArrowType} value
@@ -23107,21 +23082,21 @@ declare namespace imports.gi.Gtk {
 		 * Returns the #GMenuModel used to generate the popup.
 		 * @returns a #GMenuModel or %NULL
 		 */
-		get_menu_model(): Gio.MenuModel;
+		get_menu_model(): Gio.MenuModel | null;
 		/**
 		 * Returns the {@link Popover} that pops out of the button.
 		 * If the button is not using a #GtkPopover, this function
 		 * returns %NULL.
 		 * @returns a {@link Popover} or %NULL
 		 */
-		get_popover(): Popover;
+		get_popover(): Popover | null;
 		/**
 		 * Returns the {@link Menu} that pops out of the button.
 		 * If the button does not use a #GtkMenu, this function
 		 * returns %NULL.
 		 * @returns a {@link Menu} or %NULL
 		 */
-		get_popup(): Menu;
+		get_popup(): Menu | null;
 		/**
 		 * Returns whether a {@link Popover} or a #GtkMenu will be constructed
 		 * from the menu model.
@@ -23139,7 +23114,7 @@ declare namespace imports.gi.Gtk {
 		 * and not for popovers.
 		 * @param align_widget a {@link Widget}
 		 */
-		set_align_widget(align_widget: Widget): void;
+		set_align_widget(align_widget: Widget | null): void;
 		/**
 		 * Sets the direction in which the popup will be popped up, as
 		 * well as changing the arrow’s direction. The child will not
@@ -23168,7 +23143,7 @@ declare namespace imports.gi.Gtk {
 		 * @param menu_model a #GMenuModel, or %NULL to unset and disable the
 		 *   button
 		 */
-		set_menu_model(menu_model: Gio.MenuModel): void;
+		set_menu_model(menu_model: Gio.MenuModel | null): void;
 		/**
 		 * Sets the {@link Popover} that will be popped up when the #menu_button is clicked,
 		 * or %NULL to dissociate any existing popover and disable the button.
@@ -23177,7 +23152,7 @@ declare namespace imports.gi.Gtk {
 		 * are dissociated from the #menu_button, and those properties are set to %NULL.
 		 * @param popover a {@link Popover}, or %NULL to unset and disable the button
 		 */
-		set_popover(popover: Widget): void;
+		set_popover(popover: Widget | null): void;
 		/**
 		 * Sets the {@link Menu} that will be popped up when the #menu_button is clicked, or
 		 * %NULL to dissociate any existing menu and disable the button.
@@ -23186,7 +23161,7 @@ declare namespace imports.gi.Gtk {
 		 * are dissociated from the #menu_button, and those properties are set to %NULL.
 		 * @param menu a {@link Menu}, or %NULL to unset and disable the button
 		 */
-		set_popup(menu: Widget): void;
+		set_popup(menu: Widget | null): void;
 		/**
 		 * Sets whether to construct a {@link Popover} instead of #GtkMenu
 		 * when gtk_menu_button_set_menu_model() is called. Note that
@@ -23367,7 +23342,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the accelerator path corresponding to
 		 *     this menu item’s functionality, or %NULL if not set
 		 */
-		get_accel_path(): string;
+		get_accel_path(): string | null;
 		/**
 		 * Sets #text on the #menu_item label
 		 * @returns The text in the #menu_item label. This is the internal
@@ -23394,7 +23369,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_menu_item_set_submenu().
 		 * @returns submenu for this menu item, or %NULL if none
 		 */
-		get_submenu(): Widget;
+		get_submenu(): Widget | null;
 		/**
 		 * Checks if an underline in the text indicates the next character
 		 * should be used for the mnemonic accelerator key.
@@ -23429,7 +23404,7 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_path accelerator path, corresponding to this menu
 		 *     item’s functionality, or %NULL to unset the current path.
 		 */
-		set_accel_path(accel_path: string): void;
+		set_accel_path(accel_path: string | null): void;
 		/**
 		 * Sets #text on the #menu_item label
 		 * @param label the text you want to set
@@ -23460,7 +23435,7 @@ declare namespace imports.gi.Gtk {
 		 * submenu is passed.
 		 * @param submenu the submenu, or %NULL
 		 */
-		set_submenu(submenu: Menu): void;
+		set_submenu(submenu: Menu | null): void;
 		/**
 		 * If true, an underline in the text indicates the next character
 		 * should be used for the mnemonic accelerator key.
@@ -23474,9 +23449,8 @@ declare namespace imports.gi.Gtk {
 		toggle_size_allocate(allocation: number): void;
 		/**
 		 * Emits the {@link MenuItem}::toggle-size-request signal on the given item.
-		 * @param requisition the requisition to use as signal data.
 		 */
-		toggle_size_request(requisition: number): void;
+		toggle_size_request(): void;
 		/**
 		 * Emitted when the item is activated.
 		 */
@@ -23490,7 +23464,7 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "deselect", callback: (owner: this) => void): number;
 		connect(signal: "select", callback: (owner: this) => void): number;
 		connect(signal: "toggle-size-allocate", callback: (owner: this, object: number) => void): number;
-		connect(signal: "toggle-size-request", callback: (owner: this, object: any) => void): number;
+		connect(signal: "toggle-size-request", callback: (owner: this, object: any | null) => void): number;
 
 		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
@@ -23665,7 +23639,7 @@ declare namespace imports.gi.Gtk {
 		 * @param with_separators %TRUE if toplevel items in #shell should have
 		 *   separators between them
 		 */
-		bind_model(model: Gio.MenuModel, action_namespace: string, with_separators: boolean): void;
+		bind_model(model: Gio.MenuModel | null, action_namespace: string | null, with_separators: boolean): void;
 		/**
 		 * Cancels the selection within the menu shell.
 		 */
@@ -23955,7 +23929,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label a string that will be used as label, or %NULL
 		 * @returns the new {@link MenuToolButton}
 		 */
-		public static new(icon_widget: Widget, label: string): ToolItem;
+		public static new(icon_widget: Widget | null, label: string | null): ToolItem;
 		/**
 		 * Creates a new {@link MenuToolButton}.
 		 * The new #GtkMenuToolButton will contain an icon and label from
@@ -24030,7 +24004,7 @@ declare namespace imports.gi.Gtk {
 		 * (with printf()-style).
 		 * @param message_format printf()-style format string, or %NULL
 		 */
-		format_secondary_text(message_format: string): void;
+		format_secondary_text(message_format: string | null): void;
 		/**
 		 * Gets the dialog’s image.
 		 * @returns the dialog’s image
@@ -24142,7 +24116,7 @@ declare namespace imports.gi.Gtk {
 		 * @param message_format printf()-style format string, or %NULL
 		 * @returns a new {@link MessageDialog}
 		 */
-		public static new(parent: Window, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string): Widget;
+		public static new(parent: Window | null, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
 		/**
 		 * Creates a new message dialog, which is a simple dialog with some text that
 		 * is marked up with the [Pango text markup language][PangoMarkupFormat].
@@ -24176,7 +24150,7 @@ declare namespace imports.gi.Gtk {
 		 * @param message_format printf()-style format string, or %NULL
 		 * @returns a new {@link MessageDialog}
 		 */
-		public static new_with_markup(parent: Window, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string): Widget;
+		public static new_with_markup(parent: Window | null, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24208,19 +24182,21 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the X and Y alignment of the widget within its allocation.
 		 * See gtk_misc_set_alignment().
-		 * @param xalign location to store X alignment of #misc, or %NULL
-		 * @param yalign location to store Y alignment of #misc, or %NULL
+		 * @returns location to store X alignment of #misc, or %NULL
+		 * 
+		 * location to store Y alignment of #misc, or %NULL
 		 */
-		get_alignment(xalign: number, yalign: number): void;
+		get_alignment(): [ xalign: number | null, yalign: number | null ];
 		/**
 		 * Gets the padding in the X and Y directions of the widget.
 		 * See gtk_misc_set_padding().
-		 * @param xpad location to store padding in the X
+		 * @returns location to store padding in the X
 		 *        direction, or %NULL
-		 * @param ypad location to store padding in the Y
+		 * 
+		 * location to store padding in the Y
 		 *        direction, or %NULL
 		 */
-		get_padding(xpad: number, ypad: number): void;
+		get_padding(): [ xpad: number | null, ypad: number | null ];
 		/**
 		 * Sets the alignment of the widget.
 		 * @param xalign the horizontal alignment, from 0 (left) to 1 (right).
@@ -24481,7 +24457,7 @@ declare namespace imports.gi.Gtk {
 		 * {@link MountOperation}.
 		 * @param parent transient parent of the window, or %NULL
 		 */
-		set_parent(parent: Window): void;
+		set_parent(parent: Window | null): void;
 		/**
 		 * Sets the screen to show windows of the {@link MountOperation} on.
 		 * @param screen a #GdkScreen
@@ -24509,7 +24485,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent transient parent of the window, or %NULL
 		 * @returns a new {@link MountOperation}
 		 */
-		public static new(parent: Window): Gio.MountOperation;
+		public static new(parent: Window | null): Gio.MountOperation;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24555,14 +24531,14 @@ declare namespace imports.gi.Gtk {
 		 *    been set explicitly. The returned string is owned by the widget
 		 *    and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Fetches the transient parent for this window. See
 		 * gtk_native_dialog_set_transient_for().
 		 * @returns the transient parent for this window,
 		 * or %NULL if no transient parent has been set.
 		 */
-		get_transient_for(): Window;
+		get_transient_for(): Window | null;
 		/**
 		 * Determines whether the dialog is visible.
 		 * @returns %TRUE if the dialog is visible
@@ -24634,7 +24610,7 @@ declare namespace imports.gi.Gtk {
 		 * Passing %NULL for #parent unsets the current transient window.
 		 * @param parent parent window, or %NULL
 		 */
-		set_transient_for(parent: Window): void;
+		set_transient_for(parent: Window | null): void;
 		/**
 		 * Shows the dialog on the display, allowing the user to interact with
 		 * it. When the user accepts the state of the dialog the dialog will
@@ -24711,7 +24687,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the appended
 		 *     page in the notebook, or -1 if function fails
 		 */
-		append_page(child: Widget, tab_label: Widget): number;
+		append_page(child: Widget, tab_label: Widget | null): number;
 		/**
 		 * Appends a page to #notebook, specifying the widget to use as the
 		 * label in the popup menu.
@@ -24727,7 +24703,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the appended
 		 *     page in the notebook, or -1 if function fails
 		 */
-		append_page_menu(child: Widget, tab_label: Widget, menu_label: Widget): number;
+		append_page_menu(child: Widget, tab_label: Widget | null, menu_label: Widget | null): number;
 		/**
 		 * Removes the child from the notebook.
 		 * 
@@ -24744,7 +24720,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The action widget with the given
 		 * #pack_type or %NULL when this action widget has not been set
 		 */
-		get_action_widget(pack_type: PackType): Widget;
+		get_action_widget(pack_type: PackType): Widget | null;
 		/**
 		 * Returns the page number of the current page.
 		 * @returns the index (starting from 0) of the current
@@ -24756,7 +24732,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current group name for #notebook.
 		 * @returns the group name, or %NULL if none is set
 		 */
-		get_group_name(): string;
+		get_group_name(): string | null;
 		/**
 		 * Retrieves the menu label widget of the page containing #child.
 		 * @param child a widget contained in a page of #notebook
@@ -24764,7 +24740,7 @@ declare namespace imports.gi.Gtk {
 		 * notebook page does not have a menu label other than the default (the tab
 		 * label).
 		 */
-		get_menu_label(child: Widget): Widget;
+		get_menu_label(child: Widget): Widget | null;
 		/**
 		 * Retrieves the text of the menu label for the page containing
 		 * #child.
@@ -24774,7 +24750,7 @@ declare namespace imports.gi.Gtk {
 		 * widget is not a {@link Label}. The string is owned by the widget and must not be
 		 * freed.
 		 */
-		get_menu_label_text(child: Widget): string;
+		get_menu_label_text(child: Widget): string | null;
 		/**
 		 * Gets the number of pages in a notebook.
 		 * @returns the number of pages in the notebook
@@ -24787,7 +24763,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the child widget, or %NULL if #page_num
 		 * is out of bounds
 		 */
-		get_nth_page(page_num: number): Widget;
+		get_nth_page(page_num: number): Widget | null;
 		/**
 		 * Returns whether the tab label area has arrows for scrolling.
 		 * See gtk_notebook_set_scrollable().
@@ -24824,7 +24800,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child the page
 		 * @returns the tab label
 		 */
-		get_tab_label(child: Widget): Widget;
+		get_tab_label(child: Widget): Widget | null;
 		/**
 		 * Retrieves the text of the tab label for the page containing
 		 * #child.
@@ -24833,7 +24809,7 @@ declare namespace imports.gi.Gtk {
 		 * widget is not a {@link Label}. The string is owned by the widget and must not be
 		 * freed.
 		 */
-		get_tab_label_text(child: Widget): string;
+		get_tab_label_text(child: Widget): string | null;
 		/**
 		 * Gets the edge at which the tabs for switching pages in the
 		 * notebook are drawn.
@@ -24861,7 +24837,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the inserted
 		 *     page in the notebook, or -1 if function fails
 		 */
-		insert_page(child: Widget, tab_label: Widget, position: number): number;
+		insert_page(child: Widget, tab_label: Widget | null, position: number): number;
 		/**
 		 * Insert a page into #notebook at the given position, specifying
 		 * the widget to use as the label in the popup menu.
@@ -24879,7 +24855,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the inserted
 		 *     page in the notebook
 		 */
-		insert_page_menu(child: Widget, tab_label: Widget, menu_label: Widget, position: number): number;
+		insert_page_menu(child: Widget, tab_label: Widget | null, menu_label: Widget | null, position: number): number;
 		/**
 		 * Switches to the next page. Nothing happens if the current page is
 		 * the last page.
@@ -24911,7 +24887,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the prepended
 		 *     page in the notebook, or -1 if function fails
 		 */
-		prepend_page(child: Widget, tab_label: Widget): number;
+		prepend_page(child: Widget, tab_label: Widget | null): number;
 		/**
 		 * Prepends a page to #notebook, specifying the widget to use as the
 		 * label in the popup menu.
@@ -24927,7 +24903,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the index (starting from 0) of the prepended
 		 *     page in the notebook, or -1 if function fails
 		 */
-		prepend_page_menu(child: Widget, tab_label: Widget, menu_label: Widget): number;
+		prepend_page_menu(child: Widget, tab_label: Widget | null, menu_label: Widget | null): number;
 		/**
 		 * Switches to the previous page. Nothing happens if the current page
 		 * is the first page.
@@ -24982,13 +24958,13 @@ declare namespace imports.gi.Gtk {
 		 * @param group_name the name of the notebook group,
 		 *     or %NULL to unset it
 		 */
-		set_group_name(group_name: string): void;
+		set_group_name(group_name: string | null): void;
 		/**
 		 * Changes the menu label for the page containing #child.
 		 * @param child the child widget
 		 * @param menu_label the menu label, or %NULL for default
 		 */
-		set_menu_label(child: Widget, menu_label: Widget): void;
+		set_menu_label(child: Widget, menu_label: Widget | null): void;
 		/**
 		 * Creates a new label and sets it as the menu label of #child.
 		 * @param child the child widget
@@ -25071,7 +25047,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tab_label the tab label widget to use, or %NULL
 		 *     for default tab label
 		 */
-		set_tab_label(child: Widget, tab_label: Widget): void;
+		set_tab_label(child: Widget, tab_label: Widget | null): void;
 		/**
 		 * Creates a new label and sets it as the tab label for the page
 		 * containing #child.
@@ -25289,13 +25265,13 @@ declare namespace imports.gi.Gtk {
 		 * a reference to the returned #GIcon.
 		 * @returns a #GIcon, or %NULL
 		 */
-		get_background_gicon(): Gio.Icon;
+		get_background_gicon(): Gio.Icon | null;
 		/**
 		 * Returns the icon name used as the base background image,
 		 * or %NULL if there’s none.
 		 * @returns an icon name, or %NULL
 		 */
-		get_background_icon_name(): string;
+		get_background_icon_name(): string | null;
 		/**
 		 * Returns the value currently displayed by #self.
 		 * @returns the currently displayed value
@@ -25305,7 +25281,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the currently displayed label of the icon, or %NULL.
 		 * @returns the currently displayed label
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns the {@link StyleContext} used by the icon for theming,
 		 * or %NULL if there’s none.
@@ -25313,7 +25289,7 @@ declare namespace imports.gi.Gtk {
 		 *     This object is internal to GTK+ and should not be unreffed.
 		 *     Use g_object_ref() if you want to keep it around
 		 */
-		get_style_context(): StyleContext;
+		get_style_context(): StyleContext | null;
 		/**
 		 * Updates the icon to use #icon as the base background image.
 		 * If #icon is %NULL, #self will go back using style information
@@ -25325,7 +25301,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_numerable_icon_set_background_icon_name() has always priority.
 		 * @param icon a #GIcon, or %NULL
 		 */
-		set_background_gicon(icon: Gio.Icon): void;
+		set_background_gicon(icon: Gio.Icon | null): void;
 		/**
 		 * Updates the icon to use the icon named #icon_name from the
 		 * current icon theme as the base background image. If #icon_name
@@ -25338,7 +25314,7 @@ declare namespace imports.gi.Gtk {
 		 * and gtk_numerable_icon_set_background_gicon() has always priority.
 		 * @param icon_name an icon name, or %NULL
 		 */
-		set_background_icon_name(icon_name: string): void;
+		set_background_icon_name(icon_name: string | null): void;
 		/**
 		 * Sets the currently displayed value of #self to #count.
 		 * 
@@ -25367,7 +25343,7 @@ declare namespace imports.gi.Gtk {
 		 * has always priority.
 		 * @param label a short label, or %NULL
 		 */
-		set_label(label: string): void;
+		set_label(label: string | null): void;
 		/**
 		 * Updates the icon to fetch theme information from the
 		 * given {@link StyleContext}.
@@ -25433,7 +25409,7 @@ declare namespace imports.gi.Gtk {
 		 * needed.
 		 * @returns A #GdkPixbuf pointer, or %NULL.
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves a snapshot of the contained widget in the form of
 		 * a #cairo_surface_t.  If you need to keep this around over window
@@ -25441,7 +25417,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #cairo_surface_t pointer to the offscreen
 		 *     surface, or %NULL.
 		 */
-		get_surface(): cairo.Surface;
+		get_surface(): cairo.Surface | null;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -25692,7 +25668,7 @@ declare namespace imports.gi.Gtk {
 		 * @param pad A %GDK_SOURCE_TABLET_PAD device, or %NULL to handle all pads
 		 * @returns A newly created {@link PadController}
 		 */
-		public static new(window: Window, group: Gio.ActionGroup, pad: Gdk.Device): PadController;
+		public static new(window: Window, group: Gio.ActionGroup, pad: Gdk.Device | null): PadController;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25793,7 +25769,7 @@ declare namespace imports.gi.Gtk {
 		 *              to use the default name “Page Setup”
 		 * @returns %TRUE on success
 		 */
-		load_key_file(key_file: GLib.KeyFile, group_name: string): boolean;
+		load_key_file(key_file: GLib.KeyFile, group_name: string | null): boolean;
 		/**
 		 * Sets the bottom margin of the {@link PageSetup}.
 		 * @param margin the new bottom margin in units of #unit
@@ -25853,7 +25829,7 @@ declare namespace imports.gi.Gtk {
 		 * @param group_name the group to add the settings to in #key_file,
 		 *      or %NULL to use the default name “Page Setup”
 		 */
-		to_key_file(key_file: GLib.KeyFile, group_name: string): void;
+		to_key_file(key_file: GLib.KeyFile, group_name: string | null): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25939,7 +25915,7 @@ declare namespace imports.gi.Gtk {
 		 *              to use the default name “Page Setup”
 		 * @returns the restored {@link PageSetup}
 		 */
-		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string): PageSetup;
+		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string | null): PageSetup;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -25985,12 +25961,12 @@ declare namespace imports.gi.Gtk {
 		 * Obtains the first child of the paned widget.
 		 * @returns first child, or %NULL if it is not set.
 		 */
-		get_child1(): Widget;
+		get_child1(): Widget | null;
 		/**
 		 * Obtains the second child of the paned widget.
 		 * @returns second child, or %NULL if it is not set.
 		 */
-		get_child2(): Widget;
+		get_child2(): Widget | null;
 		/**
 		 * Returns the #GdkWindow of the handle. This function is
 		 * useful when handling button or motion events because it
@@ -26248,7 +26224,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GFile with the selected location, or
 		 * %NULL if nothing is visually selected.
 		 */
-		get_location(): Gio.File;
+		get_location(): Gio.File | null;
 		/**
 		 * This function queries the bookmarks added by the user to the places sidebar,
 		 * and returns one of them.  This function is used by {@link FileChooser} to implement
@@ -26258,7 +26234,7 @@ declare namespace imports.gi.Gtk {
 		 * %NULL if no such index exist.  Note that the indices start at 0, even though
 		 * the file chooser starts them with the keyboard shortcut "Alt-1".
 		 */
-		get_nth_bookmark(_n: number): Gio.File;
+		get_nth_bookmark(_n: number): Gio.File | null;
 		/**
 		 * Gets the open flags.
 		 * @returns the {@link PlacesOpenFlags} of #sidebar
@@ -26345,7 +26321,7 @@ declare namespace imports.gi.Gtk {
 		 * places in the list.
 		 * @param location location to select, or %NULL for no current path
 		 */
-		set_location(location: Gio.File): void;
+		set_location(location: Gio.File | null): void;
 		/**
 		 * Sets the way in which the calling application can open new locations from
 		 * the places sidebar.  For example, some applications only open locations
@@ -26490,7 +26466,7 @@ declare namespace imports.gi.Gtk {
 		 * situation, you can set #GtkPlacesSidebar::populate-all to %TRUE to request
 		 * that this signal is emitted for populating popovers as well.
 		 */
-		connect(signal: "populate-popup", callback: (owner: this, container: Widget, selected_item: Gio.File, selected_volume: Gio.Volume) => void): number;
+		connect(signal: "populate-popup", callback: (owner: this, container: Widget, selected_item: Gio.File | null, selected_volume: Gio.Volume | null) => void): number;
 		/**
 		 * The places sidebar emits this signal when it needs the calling
 		 * application to present an way to connect directly to a network server.
@@ -26657,7 +26633,7 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the socket the plug is embedded in.
 		 * @returns the window of the socket, or %NULL
 		 */
-		get_socket_window(): Gdk.Window;
+		get_socket_window(): Gdk.Window | null;
 		/**
 		 * Gets emitted when the plug becomes embedded in a socket.
 		 */
@@ -26791,7 +26767,7 @@ declare namespace imports.gi.Gtk {
 		 *   binding
 		 * @param action_namespace the namespace for actions in #model
 		 */
-		bind_model(model: Gio.MenuModel, action_namespace: string): void;
+		bind_model(model: Gio.MenuModel | null, action_namespace: string | null): void;
 		/**
 		 * Returns the constraint for placing this popover.
 		 * See gtk_popover_set_constrain_to().
@@ -26804,7 +26780,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the default widget,
 		 * or %NULL if there is none
 		 */
-		get_default_widget(): Widget;
+		get_default_widget(): Widget | null;
 		/**
 		 * Returns whether the popover is modal, see gtk_popover_set_modal to
 		 * see the implications of this.
@@ -26863,7 +26839,7 @@ declare namespace imports.gi.Gtk {
 		 * when the popover is dismissed.
 		 * @param widget the new default widget, or %NULL
 		 */
-		set_default_widget(widget: Widget): void;
+		set_default_widget(widget: Widget | null): void;
 		/**
 		 * Sets whether #popover is modal, a modal popover will grab all input
 		 * within the toplevel and grab the keyboard focus on it when being
@@ -26899,7 +26875,7 @@ declare namespace imports.gi.Gtk {
 		 * unless extra references are kept.
 		 * @param relative_to a {@link Widget}
 		 */
-		set_relative_to(relative_to: Widget): void;
+		set_relative_to(relative_to: Widget | null): void;
 		/**
 		 * Sets whether show/hide transitions are enabled on this popover
 		 * @param transitions_enabled Whether transitions are enabled
@@ -26997,7 +26973,7 @@ declare namespace imports.gi.Gtk {
 		 * @param relative_to {@link Widget} the popover is related to
 		 * @returns a new {@link Popover}
 		 */
-		public static new(relative_to: Widget): Widget;
+		public static new(relative_to: Widget | null): Widget;
 		/**
 		 * Creates a {@link Popover} and populates it according to
 		 * #model. The popover is pointed to the #relative_to widget.
@@ -27013,7 +26989,7 @@ declare namespace imports.gi.Gtk {
 		 * @param model a #GMenuModel
 		 * @returns the new {@link Popover}
 		 */
-		public static new_from_model(relative_to: Widget, model: Gio.MenuModel): Widget;
+		public static new_from_model(relative_to: Widget | null, model: Gio.MenuModel): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -27182,13 +27158,9 @@ declare namespace imports.gi.Gtk {
 		get_dpi_y(): number;
 		/**
 		 * Obtains the hardware printer margins of the {@link PrintContext}, in units.
-		 * @param top top hardware printer margin
-		 * @param bottom bottom hardware printer margin
-		 * @param left left hardware printer margin
-		 * @param right right hardware printer margin
 		 * @returns %TRUE if the hard margins were retrieved
 		 */
-		get_hard_margins(top: number, bottom: number, left: number, right: number): boolean;
+		get_hard_margins(): boolean;
 		/**
 		 * Obtains the height of the {@link PrintContext}, in pixels.
 		 * @returns the height of #context
@@ -27620,7 +27592,7 @@ declare namespace imports.gi.Gtk {
 		 *   asynchronously, and will emit the {@link PrintOperation}::done signal when
 		 *   done.
 		 */
-		run(action: PrintOperationAction, parent: Window): PrintOperationResult;
+		run(action: PrintOperationAction, parent: Window | null): PrintOperationResult;
 		/**
 		 * Sets whether the gtk_print_operation_run() may return
 		 * before the print operation is completed. Note that
@@ -27642,7 +27614,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the label for the tab holding custom widgets.
 		 * @param label the label to use, or %NULL to use the default label
 		 */
-		set_custom_tab_label(label: string): void;
+		set_custom_tab_label(label: string | null): void;
 		/**
 		 * Makes #default_page_setup the default page setup for #op.
 		 * 
@@ -27651,7 +27623,7 @@ declare namespace imports.gi.Gtk {
 		 * to the {@link PrintOperation}::request-page-setup signal.
 		 * @param default_page_setup a {@link PageSetup}, or %NULL
 		 */
-		set_default_page_setup(default_page_setup: PageSetup): void;
+		set_default_page_setup(default_page_setup: PageSetup | null): void;
 		/**
 		 * Sets up the {@link PrintOperation} to wait for calling of
 		 * gtk_print_operation_draw_page_finish() from application. It can
@@ -27717,7 +27689,7 @@ declare namespace imports.gi.Gtk {
 		 * see gtk_print_operation_run().
 		 * @param print_settings {@link PrintSettings}
 		 */
-		set_print_settings(print_settings: PrintSettings): void;
+		set_print_settings(print_settings: PrintSettings | null): void;
 		/**
 		 * If #show_progress is %TRUE, the print operation will show a
 		 * progress dialog during the print operation.
@@ -27891,7 +27863,7 @@ declare namespace imports.gi.Gtk {
 		 * finished by calling gtk_print_operation_preview_end_preview()
 		 * (typically in response to the user clicking a close button).
 		 */
-		connect(signal: "preview", callback: (owner: this, preview: PrintOperationPreview, context: PrintContext, parent: Window) => boolean): number;
+		connect(signal: "preview", callback: (owner: this, preview: PrintOperationPreview, context: PrintContext, parent: Window | null) => boolean): number;
 		/**
 		 * Emitted once for every page that is printed, to give
 		 * the application a chance to modify the page setup. Any changes
@@ -28141,12 +28113,11 @@ declare namespace imports.gi.Gtk {
 		get_output_bin(): string;
 		/**
 		 * Gets the value of %GTK_PRINT_SETTINGS_PAGE_RANGES.
-		 * @param num_ranges return location for the length of the returned array
 		 * @returns an array
 		 *     of {@link PageRanges}.  Use g_free() to free the array when
 		 *     it is no longer needed.
 		 */
-		get_page_ranges(num_ranges: number): PageRange[];
+		get_page_ranges(): PageRange[];
 		/**
 		 * Gets the value of %GTK_PRINT_SETTINGS_PAGE_SET.
 		 * @returns the set of pages to print
@@ -28246,13 +28217,13 @@ declare namespace imports.gi.Gtk {
 		 *     “Print Settings”
 		 * @returns %TRUE on success
 		 */
-		load_key_file(key_file: GLib.KeyFile, group_name: string): boolean;
+		load_key_file(key_file: GLib.KeyFile, group_name: string | null): boolean;
 		/**
 		 * Associates #value with #key.
 		 * @param key a key
 		 * @param value a string value, or %NULL
 		 */
-		set(key: string, value: string): void;
+		set(key: string, value: string | null): void;
 		/**
 		 * Sets #key to a boolean value.
 		 * @param key a key
@@ -28435,7 +28406,7 @@ declare namespace imports.gi.Gtk {
 		 * @param group_name the group to add the settings to in #key_file, or
 		 *     %NULL to use the default “Print Settings”
 		 */
-		to_key_file(key_file: GLib.KeyFile, group_name: string): void;
+		to_key_file(key_file: GLib.KeyFile, group_name: string | null): void;
 		/**
 		 * Removes any value associated with #key.
 		 * This has the same effect as setting the value to %NULL.
@@ -28498,7 +28469,7 @@ declare namespace imports.gi.Gtk {
 		 *     the default “Print Settings”
 		 * @returns the restored {@link PrintSettings}
 		 */
-		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string): PrintSettings;
+		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string | null): PrintSettings;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28567,7 +28538,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns text, or %NULL; this string is owned by the widget
 		 * and should not be modified or freed.
 		 */
-		get_text(): string;
+		get_text(): string | null;
 		/**
 		 * Indicates that some progress has been made, but you don’t know how much.
 		 * Causes the progress bar to enter “activity mode,” where a block
@@ -28626,7 +28597,7 @@ declare namespace imports.gi.Gtk {
 		 * #GtkProgressBar:show-text is %TRUE.
 		 * @param text a UTF-8 string, or %NULL
 		 */
-		set_text(text: string): void;
+		set_text(text: string | null): void;
 		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::fraction", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
@@ -28777,7 +28748,7 @@ declare namespace imports.gi.Gtk {
 		 * @param group_source a radio action object whos group we are
 		 *   joining, or %NULL to remove the radio action from its group
 		 */
-		join_group(group_source: RadioAction): void;
+		join_group(group_source: RadioAction | null): void;
 		/**
 		 * Sets the currently active group member to the member with value
 		 * property #current_value.
@@ -28788,7 +28759,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the radio group for the radio action object.
 		 * @param group a list representing a radio group, or %NULL
 		 */
-		set_group(group: GLib.SList): void;
+		set_group(group: GLib.SList | null): void;
 		/**
 		 * The ::changed signal is emitted on every member of a radio group when the
 		 * active member is changed. The signal gets emitted after the ::activate signals
@@ -28829,7 +28800,7 @@ declare namespace imports.gi.Gtk {
 		 *   return if this action is selected.
 		 * @returns a new {@link RadioAction}
 		 */
-		public static new(name: string, label: string, tooltip: string, stock_id: string, value: number): RadioAction;
+		public static new(name: string, label: string | null, tooltip: string | null, stock_id: string | null, value: number): RadioAction;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -28867,7 +28838,7 @@ declare namespace imports.gi.Gtk {
 		 * @param group_source a radio button object whos group we are
 		 *   joining, or %NULL to remove the radio button from its group
 		 */
-		join_group(group_source: RadioButton): void;
+		join_group(group_source: RadioButton | null): void;
 		/**
 		 * Sets a {@link RadioButton}’s group. It should be noted that this does not change
 		 * the layout of your interface in any way, so if you are changing the group,
@@ -28876,7 +28847,7 @@ declare namespace imports.gi.Gtk {
 		 * @param group an existing radio
 		 *     button group, such as one returned from gtk_radio_button_get_group(), or %NULL.
 		 */
-		set_group(group: GLib.SList): void;
+		set_group(group: GLib.SList | null): void;
 		/**
 		 * Emitted when the group of radio buttons that a radio button belongs
 		 * to changes. This is emitted when a radio button switches from
@@ -28993,7 +28964,7 @@ declare namespace imports.gi.Gtk {
 		 *         radio button group, or %NULL if you are creating a new group.
 		 * @returns a new radio button
 		 */
-		public static new(group: GLib.SList): Widget;
+		public static new(group: GLib.SList | null): Widget;
 		/**
 		 * Creates a new {@link RadioButton}, adding it to the same group as
 		 * #radio_group_member. As with gtk_radio_button_new(), a widget
@@ -29001,7 +28972,7 @@ declare namespace imports.gi.Gtk {
 		 * @param radio_group_member an existing {@link RadioButton}.
 		 * @returns a new radio button.
 		 */
-		public static new_from_widget(radio_group_member: RadioButton): Widget;
+		public static new_from_widget(radio_group_member: RadioButton | null): Widget;
 		/**
 		 * Creates a new {@link RadioButton} with a text label.
 		 * @param group an existing
@@ -29009,7 +28980,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text label to display next to the radio button.
 		 * @returns a new radio button.
 		 */
-		public static new_with_label(group: GLib.SList, label: string): Widget;
+		public static new_with_label(group: GLib.SList | null, label: string): Widget;
 		/**
 		 * Creates a new {@link RadioButton} with a text label, adding it to
 		 * the same group as #radio_group_member.
@@ -29017,7 +28988,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label a text string to display next to the radio button.
 		 * @returns a new radio button.
 		 */
-		public static new_with_label_from_widget(radio_group_member: RadioButton, label: string): Widget;
+		public static new_with_label_from_widget(radio_group_member: RadioButton | null, label: string): Widget;
 		/**
 		 * Creates a new {@link RadioButton} containing a label, adding it to the same
 		 * group as #group. The label will be created using
@@ -29029,7 +29000,7 @@ declare namespace imports.gi.Gtk {
 		 *         mnemonic character
 		 * @returns a new {@link RadioButton}
 		 */
-		public static new_with_mnemonic(group: GLib.SList, label: string): Widget;
+		public static new_with_mnemonic(group: GLib.SList | null, label: string): Widget;
 		/**
 		 * Creates a new {@link RadioButton} containing a label. The label
 		 * will be created using gtk_label_new_with_mnemonic(), so underscores
@@ -29039,7 +29010,7 @@ declare namespace imports.gi.Gtk {
 		 *         mnemonic character
 		 * @returns a new {@link RadioButton}
 		 */
-		public static new_with_mnemonic_from_widget(radio_group_member: RadioButton, label: string): Widget;
+		public static new_with_mnemonic_from_widget(radio_group_member: RadioButton | null, label: string): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29099,12 +29070,12 @@ declare namespace imports.gi.Gtk {
 		 *   joining, or %NULL to remove the #radio_menu_item from its current
 		 *   group
 		 */
-		join_group(group_source: RadioMenuItem): void;
+		join_group(group_source: RadioMenuItem | null): void;
 		/**
 		 * Sets the group of a radio menu item, or changes it.
 		 * @param group the new group, or %NULL.
 		 */
-		set_group(group: GLib.SList): void;
+		set_group(group: GLib.SList | null): void;
 		connect(signal: "group-changed", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::check_menu_item", callback: (owner: this, ...args: any) => number): number;
@@ -29163,13 +29134,13 @@ declare namespace imports.gi.Gtk {
 		 *   radio menu item is to be attached, or %NULL
 		 * @returns a new {@link RadioMenuItem}
 		 */
-		public static new(group: GLib.SList): Widget;
+		public static new(group: GLib.SList | null): Widget;
 		/**
 		 * Creates a new {@link RadioMenuItem} adding it to the same group as #group.
 		 * @param group An existing {@link RadioMenuItem}
 		 * @returns The new {@link RadioMenuItem}
 		 */
-		public static new_from_widget(group: RadioMenuItem): Widget;
+		public static new_from_widget(group: RadioMenuItem | null): Widget;
 		/**
 		 * Creates a new {@link RadioMenuItem} whose child is a simple #GtkLabel.
 		 * @param group 
@@ -29177,7 +29148,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text for the label
 		 * @returns A new {@link RadioMenuItem}
 		 */
-		public static new_with_label(group: GLib.SList, label: string): Widget;
+		public static new_with_label(group: GLib.SList | null, label: string): Widget;
 		/**
 		 * Creates a new GtkRadioMenuItem whose child is a simple GtkLabel.
 		 * The new {@link RadioMenuItem} is added to the same group as #group.
@@ -29185,7 +29156,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label the text for the label
 		 * @returns The new {@link RadioMenuItem}
 		 */
-		public static new_with_label_from_widget(group: RadioMenuItem, label: string): Widget;
+		public static new_with_label_from_widget(group: RadioMenuItem | null, label: string | null): Widget;
 		/**
 		 * Creates a new {@link RadioMenuItem} containing a label. The label
 		 * will be created using gtk_label_new_with_mnemonic(), so underscores
@@ -29196,7 +29167,7 @@ declare namespace imports.gi.Gtk {
 		 *         mnemonic character
 		 * @returns a new {@link RadioMenuItem}
 		 */
-		public static new_with_mnemonic(group: GLib.SList, label: string): Widget;
+		public static new_with_mnemonic(group: GLib.SList | null, label: string): Widget;
 		/**
 		 * Creates a new GtkRadioMenuItem containing a label. The label will be
 		 * created using gtk_label_new_with_mnemonic(), so underscores in label
@@ -29208,7 +29179,7 @@ declare namespace imports.gi.Gtk {
 		 *         mnemonic character
 		 * @returns The new {@link RadioMenuItem}
 		 */
-		public static new_with_mnemonic_from_widget(group: RadioMenuItem, label: string): Widget;
+		public static new_with_mnemonic_from_widget(group: RadioMenuItem | null, label: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29242,7 +29213,7 @@ declare namespace imports.gi.Gtk {
 		 * Adds #button to #group, removing it from the group it belonged to before.
 		 * @param group an existing radio button group, or %NULL
 		 */
-		set_group(group: GLib.SList): void;
+		set_group(group: GLib.SList | null): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29273,7 +29244,7 @@ declare namespace imports.gi.Gtk {
 		 *   existing radio button group, or %NULL if you are creating a new group
 		 * @returns The new {@link RadioToolButton}
 		 */
-		public static new(group: GLib.SList): ToolItem;
+		public static new(group: GLib.SList | null): ToolItem;
 		/**
 		 * Creates a new {@link RadioToolButton}, adding it to #group.
 		 * The new #GtkRadioToolButton will contain an icon and label from the
@@ -29283,13 +29254,13 @@ declare namespace imports.gi.Gtk {
 		 * @param stock_id the name of a stock item
 		 * @returns The new {@link RadioToolButton}
 		 */
-		public static new_from_stock(group: GLib.SList, stock_id: string): ToolItem;
+		public static new_from_stock(group: GLib.SList | null, stock_id: string): ToolItem;
 		/**
 		 * Creates a new {@link RadioToolButton} adding it to the same group as #gruup
 		 * @param group An existing {@link RadioToolButton}, or %NULL
 		 * @returns The new {@link RadioToolButton}
 		 */
-		public static new_from_widget(group: RadioToolButton): ToolItem;
+		public static new_from_widget(group: RadioToolButton | null): ToolItem;
 		/**
 		 * Creates a new {@link RadioToolButton} adding it to the same group as #group.
 		 * The new #GtkRadioToolButton will contain an icon and label from the
@@ -29298,7 +29269,7 @@ declare namespace imports.gi.Gtk {
 		 * @param stock_id the name of a stock item
 		 * @returns A new {@link RadioToolButton}
 		 */
-		public static new_with_stock_from_widget(group: RadioToolButton, stock_id: string): ToolItem;
+		public static new_with_stock_from_widget(group: RadioToolButton | null, stock_id: string): ToolItem;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29397,12 +29368,13 @@ declare namespace imports.gi.Gtk {
 		 * in widget->window coordinates.
 		 * 
 		 * This function is useful mainly for {@link Range} subclasses.
-		 * @param slider_start return location for the slider's
+		 * @returns return location for the slider's
 		 *     start, or %NULL
-		 * @param slider_end return location for the slider's
+		 * 
+		 * return location for the slider's
 		 *     end, or %NULL
 		 */
-		get_slider_range(slider_start: number, slider_end: number): void;
+		get_slider_range(): [ slider_start: number | null, slider_end: number | null ];
 		/**
 		 * This function is useful mainly for {@link Range} subclasses.
 		 * 
@@ -29763,7 +29735,7 @@ declare namespace imports.gi.Gtk {
 		 *   the action, or %NULL
 		 * @returns the newly created {@link RecentAction}.
 		 */
-		public static new(name: string, label: string, tooltip: string, stock_id: string): Action;
+		public static new(name: string, label: string | null, tooltip: string | null, stock_id: string | null): Action;
 		/**
 		 * Creates a new {@link RecentAction} object. To add the action to
 		 * a #GtkActionGroup and set the accelerator for the action,
@@ -29778,7 +29750,7 @@ declare namespace imports.gi.Gtk {
 		 *   #GtkRecentManager
 		 * @returns the newly created {@link RecentAction}
 		 */
-		public static new_for_manager(name: string, label: string, tooltip: string, stock_id: string, manager: RecentManager): Action;
+		public static new_for_manager(name: string, label: string | null, tooltip: string | null, stock_id: string | null, manager: RecentManager | null): Action;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -29848,7 +29820,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_button_text stock ID or text to go in the first button, or %NULL
 		 * @returns a new {@link RecentChooserDialog}
 		 */
-		public static new(title: string, parent: Window, first_button_text: string): Widget;
+		public static new(title: string | null, parent: Window | null, first_button_text: string | null): Widget;
 		/**
 		 * Creates a new {@link RecentChooserDialog} with a specified recent manager.
 		 * 
@@ -29860,7 +29832,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_button_text stock ID or text to go in the first button, or %NULL
 		 * @returns a new {@link RecentChooserDialog}
 		 */
-		public static new_for_manager(title: string, parent: Window, manager: RecentManager, first_button_text: string): Widget;
+		public static new_for_manager(title: string | null, parent: Window | null, manager: RecentManager, first_button_text: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30021,7 +29993,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data data to pass to #func
 		 * @param data_destroy function to call to free #data when it is no longer needed.
 		 */
-		add_custom(needed: RecentFilterFlags, _func: RecentFilterFunc, data: any, data_destroy: GLib.DestroyNotify): void;
+		add_custom(needed: RecentFilterFlags, _func: RecentFilterFunc, data: any | null, data_destroy: GLib.DestroyNotify): void;
 		/**
 		 * Adds a rule that allows resources based on the name of the group
 		 * to which they belong
@@ -30065,7 +30037,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the name of the filter, or %NULL.  The returned string
 		 *   is owned by the filter object and should not be freed.
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Gets the fields that need to be filled in for the {@link RecentFilterInfo}
 		 * passed to gtk_recent_filter_filter()
@@ -30240,7 +30212,7 @@ declare namespace imports.gi.Gtk {
 		 *   not registered in the recently used resources list. Free with
 		 *   gtk_recent_info_unref().
 		 */
-		lookup_item(uri: string): RecentInfo;
+		lookup_item(uri: string): RecentInfo | null;
 		/**
 		 * Changes the location of a recently used resource from #uri to #new_uri.
 		 * 
@@ -30251,7 +30223,7 @@ declare namespace imports.gi.Gtk {
 		 *    %NULL to remove the item pointed by #uri in the list
 		 * @returns %TRUE on success
 		 */
-		move_item(uri: string, new_uri: string): boolean;
+		move_item(uri: string, new_uri: string | null): boolean;
 		/**
 		 * Purges every item from the recently used resources list.
 		 * @returns the number of items that have been removed from the
@@ -30514,7 +30486,7 @@ declare namespace imports.gi.Gtk {
 		 *   the left of the scale, anything else to the right.
 		 * @param markup Text to be shown at the mark, using [Pango markup][PangoMarkupFormat], or %NULL
 		 */
-		add_mark(value: number, position: PositionType, markup: string): void;
+		add_mark(value: number, position: PositionType, markup: string | null): void;
 		/**
 		 * Removes any marks that have been added with gtk_scale_add_mark().
 		 */
@@ -30542,7 +30514,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #PangoLayout for this scale,
 		 *     or %NULL if the {@link Scale}:draw-value property is %FALSE.
 		 */
-		get_layout(): Pango.Layout;
+		get_layout(): Pango.Layout | null;
 		/**
 		 * Obtains the coordinates where the scale will draw the
 		 * #PangoLayout representing the text in the scale. Remember
@@ -30551,10 +30523,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If the {@link Scale}:draw-value property is %FALSE, the return
 		 * values are undefined.
-		 * @param _x location to store X offset of layout, or %NULL
-		 * @param _y location to store Y offset of layout, or %NULL
+		 * @returns location to store X offset of layout, or %NULL
+		 * 
+		 * location to store Y offset of layout, or %NULL
 		 */
-		get_layout_offsets(_x: number, _y: number): void;
+		get_layout_offsets(): [ x: number | null, y: number | null ];
 		/**
 		 * Gets the position in which the current value is displayed.
 		 * @returns the position in which the current value is displayed
@@ -30713,7 +30686,7 @@ declare namespace imports.gi.Gtk {
 		 *              of the scale, or %NULL to create a new adjustment.
 		 * @returns a new {@link Scale}
 		 */
-		public static new(orientation: Orientation, adjustment: Adjustment): Widget;
+		public static new(orientation: Orientation, adjustment: Adjustment | null): Widget;
 		/**
 		 * Creates a new scale widget with the given orientation that lets the
 		 * user input a number between #min and #max (including #min and #max)
@@ -30887,7 +30860,7 @@ declare namespace imports.gi.Gtk {
 		 *         later with gtk_scale_button_set_icons()
 		 * @returns a new {@link ScaleButton}
 		 */
-		public static new(size: number, min: number, max: number, step: number, icons: string[]): Widget;
+		public static new(size: number, min: number, max: number, step: number, icons: string[] | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -30974,7 +30947,7 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment.
 		 * @returns the new {@link Scrollbar}.
 		 */
-		public static new(orientation: Orientation, adjustment: Adjustment): Widget;
+		public static new(orientation: Orientation, adjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -31120,12 +31093,13 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Retrieves the current policy values for the horizontal and vertical
 		 * scrollbars. See gtk_scrolled_window_set_policy().
-		 * @param hscrollbar_policy location to store the policy
+		 * @returns location to store the policy
 		 *     for the horizontal scrollbar, or %NULL
-		 * @param vscrollbar_policy location to store the policy
+		 * 
+		 * location to store the policy
 		 *     for the vertical scrollbar, or %NULL
 		 */
-		get_policy(hscrollbar_policy: PolicyType, vscrollbar_policy: PolicyType): void;
+		get_policy(): [ hscrollbar_policy: PolicyType | null, vscrollbar_policy: PolicyType | null ];
 		/**
 		 * Reports whether the natural height of the child will be calculated and propagated
 		 * through the scrolled window’s requested natural height.
@@ -31174,7 +31148,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the {@link Adjustment} for the horizontal scrollbar.
 		 * @param hadjustment the {@link Adjustment} to use, or %NULL to create a new one
 		 */
-		set_hadjustment(hadjustment: Adjustment): void;
+		set_hadjustment(hadjustment: Adjustment | null): void;
 		/**
 		 * Turns kinetic scrolling on or off.
 		 * Kinetic scrolling only applies to devices with source
@@ -31276,7 +31250,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the {@link Adjustment} for the vertical scrollbar.
 		 * @param vadjustment the {@link Adjustment} to use, or %NULL to create a new one
 		 */
-		set_vadjustment(vadjustment: Adjustment): void;
+		set_vadjustment(vadjustment: Adjustment | null): void;
 		/**
 		 * Unsets the placement of the contents with respect to the scrollbars
 		 * for the scrolled window. If no window placement is set for a scrolled
@@ -31447,7 +31421,7 @@ declare namespace imports.gi.Gtk {
 		 * @param vadjustment vertical adjustment
 		 * @returns a new scrolled window
 		 */
-		public static new(hadjustment: Adjustment, vadjustment: Adjustment): Widget;
+		public static new(hadjustment: Adjustment | null, vadjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -32401,7 +32375,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link Settings} object. If there is
 		 * no default screen, then returns %NULL.
 		 */
-		public static get_default(): Settings;
+		public static get_default(): Settings | null;
 		/**
 		 * Gets the {@link Settings} object for #screen, creating it if necessary.
 		 * @param screen a #GdkScreen.
@@ -32429,13 +32403,13 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the current accelerator of #self.
 		 * @returns the current accelerator.
 		 */
-		get_accelerator(): string;
+		get_accelerator(): string | null;
 		/**
 		 * Retrieves the text that is displayed when no accelerator is set.
 		 * @returns the current text displayed when no
 		 * accelerator is set.
 		 */
-		get_disabled_text(): string;
+		get_disabled_text(): string | null;
 		/**
 		 * Sets the accelerator to be displayed by #self.
 		 * @param accelerator the new accelerator
@@ -32973,7 +32947,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the window of the plug if
 		 * available, or %NULL
 		 */
-		get_plug_window(): Gdk.Window;
+		get_plug_window(): Gdk.Window | null;
 		/**
 		 * This signal is emitted when a client is successfully
 		 * added to the socket.
@@ -33098,7 +33072,7 @@ declare namespace imports.gi.Gtk {
 		 * @param climb_rate the new climb rate
 		 * @param digits the number of decimal places to display in the spin button
 		 */
-		configure(adjustment: Adjustment, climb_rate: number, digits: number): void;
+		configure(adjustment: Adjustment | null, climb_rate: number, digits: number): void;
 		/**
 		 * Get the adjustment associated with a {@link SpinButton}
 		 * @returns the {@link Adjustment} of #spin_button
@@ -33112,10 +33086,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the current step and page the increments used by #spin_button. See
 		 * gtk_spin_button_set_increments().
-		 * @param step location to store step increment, or %NULL
-		 * @param page location to store page increment, or %NULL
+		 * @returns location to store step increment, or %NULL
+		 * 
+		 * location to store page increment, or %NULL
 		 */
-		get_increments(step: number, page: number): void;
+		get_increments(): [ step: number | null, page: number | null ];
 		/**
 		 * Returns whether non-numeric text can be typed into the spin button.
 		 * See gtk_spin_button_set_numeric().
@@ -33125,10 +33100,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the range allowed for #spin_button.
 		 * See gtk_spin_button_set_range().
-		 * @param min location to store minimum allowed value, or %NULL
-		 * @param max location to store maximum allowed value, or %NULL
+		 * @returns location to store minimum allowed value, or %NULL
+		 * 
+		 * location to store maximum allowed value, or %NULL
 		 */
-		get_range(min: number, max: number): void;
+		get_range(): [ min: number | null, max: number | null ];
 		/**
 		 * Returns whether the values are corrected to the nearest step.
 		 * See gtk_spin_button_set_snap_to_ticks().
@@ -33247,7 +33223,7 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The default conversion uses g_strtod().
 		 */
-		connect(signal: "input", callback: (owner: this, new_value: number) => number): number;
+		connect(signal: "input", callback: (owner: this) => number): number;
 		/**
 		 * The ::output signal can be used to change to formatting
 		 * of the value that is displayed in the spin buttons entry.
@@ -33422,7 +33398,7 @@ declare namespace imports.gi.Gtk {
 		 * @param digits the number of decimal places to display
 		 * @returns The new spin button as a {@link Widget}
 		 */
-		public static new(adjustment: Adjustment, climb_rate: number, digits: number): Widget;
+		public static new(adjustment: Adjustment | null, climb_rate: number, digits: number): Widget;
 		/**
 		 * This is a convenience constructor that allows creation of a numeric
 		 * {@link SpinButton} without manually creating an adjustment. The value is
@@ -33566,7 +33542,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name the name of the child to find
 		 * @returns the requested child of the {@link Stack}
 		 */
-		get_child_by_name(name: string): Widget;
+		get_child_by_name(name: string): Widget | null;
 		/**
 		 * Gets whether #stack is horizontally homogeneous.
 		 * See gtk_stack_set_hhomogeneous().
@@ -33614,13 +33590,13 @@ declare namespace imports.gi.Gtk {
 		 * there are no visible children.
 		 * @returns the visible child of the {@link Stack}
 		 */
-		get_visible_child(): Widget;
+		get_visible_child(): Widget | null;
 		/**
 		 * Returns the name of the currently visible child of #stack, or
 		 * %NULL if there is no visible child.
 		 * @returns the name of the visible child of the {@link Stack}
 		 */
-		get_visible_child_name(): string;
+		get_visible_child_name(): string | null;
 		/**
 		 * Sets the {@link Stack} to be horizontally homogeneous or not.
 		 * If it is homogeneous, the #GtkStack will request the same
@@ -33788,7 +33764,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the associated {@link Stack} or
 		 *     %NULL if none has been set explicitly
 		 */
-		get_stack(): Stack;
+		get_stack(): Stack | null;
 		/**
 		 * Set the {@link Stack} associated with this #GtkStackSidebar.
 		 * 
@@ -33852,12 +33828,12 @@ declare namespace imports.gi.Gtk {
 		 * @returns the stack, or %NULL if
 		 *    none has been set explicitly.
 		 */
-		get_stack(): Stack;
+		get_stack(): Stack | null;
 		/**
 		 * Sets the stack to control.
 		 * @param stack a {@link Stack}
 		 */
-		set_stack(stack: Stack): void;
+		set_stack(stack: Stack | null): void;
 		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
@@ -33994,18 +33970,12 @@ declare namespace imports.gi.Gtk {
 		 * the information is not reliable unless the status icon
 		 * is embedded in a notification area, see
 		 * gtk_status_icon_is_embedded().
-		 * @param screen return location for
-		 *          the screen, or %NULL if the information is not needed
 		 * @param area return location for the area occupied by
 		 *        the status icon, or %NULL
-		 * @param orientation return location for the
-		 *    orientation of the panel in which the status icon is embedded,
-		 *    or %NULL. A panel at the top or bottom of the screen is
-		 *    horizontal, a panel at the left or right is vertical.
 		 * @returns %TRUE if the location information has
 		 *               been filled in
 		 */
-		get_geometry(screen: Gdk.Screen, area: Gdk.Rectangle, orientation: Orientation): boolean;
+		get_geometry(area: Gdk.Rectangle | null): boolean;
 		/**
 		 * Retrieves the #GIcon being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
@@ -34016,7 +33986,7 @@ declare namespace imports.gi.Gtk {
 		 * If this function fails, #icon is left unchanged;
 		 * @returns the displayed icon, or %NULL if the image is empty
 		 */
-		get_gicon(): Gio.Icon;
+		get_gicon(): Gio.Icon | null;
 		/**
 		 * Returns the current value of the has-tooltip property.
 		 * See {@link StatusIcon}:has-tooltip for more information.
@@ -34031,7 +34001,7 @@ declare namespace imports.gi.Gtk {
 		 * be freed or modified.
 		 * @returns name of the displayed icon, or %NULL if the image is empty.
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Gets the #GdkPixbuf being displayed by the {@link StatusIcon}.
 		 * The storage type of the status icon must be %GTK_IMAGE_EMPTY or
@@ -34041,7 +34011,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the displayed pixbuf,
 		 *     or %NULL if the image is empty.
 		 */
-		get_pixbuf(): GdkPixbuf.Pixbuf;
+		get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Returns the #GdkScreen associated with #status_icon.
 		 * @returns a #GdkScreen.
@@ -34068,7 +34038,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns stock id of the displayed stock icon,
 		 *   or %NULL if the image is empty.
 		 */
-		get_stock(): string;
+		get_stock(): string | null;
 		/**
 		 * Gets the type of representation being used by the {@link StatusIcon}
 		 * to store image data. If the #GtkStatusIcon has no image data,
@@ -34086,13 +34056,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_markup(): string;
+		get_tooltip_markup(): string | null;
 		/**
 		 * Gets the contents of the tooltip for #status_icon.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_text(): string;
+		get_tooltip_text(): string | null;
 		/**
 		 * Returns whether the status icon is visible or not.
 		 * Note that being visible does not guarantee that
@@ -34148,7 +34118,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_status_icon_new_from_pixbuf() for details.
 		 * @param pixbuf a #GdkPixbuf or %NULL
 		 */
-		set_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf): void;
+		set_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Makes #status_icon display the stock icon with the id #stock_id.
 		 * See gtk_status_icon_new_from_stock() for details.
@@ -34195,7 +34165,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_tooltip_set_markup().
 		 * @param markup the contents of the tooltip for #status_icon, or %NULL
 		 */
-		set_tooltip_markup(markup: string): void;
+		set_tooltip_markup(markup: string | null): void;
 		/**
 		 * Sets #text as the contents of the tooltip.
 		 * 
@@ -34393,13 +34363,8 @@ declare namespace imports.gi.Gtk {
 		 * Menu positioning function to use with gtk_menu_popup()
 		 * to position #menu aligned to the status icon #user_data.
 		 * @param menu the {@link Menu}
-		 * @param _x return location for the x position
-		 * @param _y return location for the y position
-		 * @param push_in whether the first menu item should be offset
-		 *           (pushed in) to be aligned with the menu popup position
-		 *           (only useful for GtkOptionMenu).
 		 */
-		public static position_menu(menu: Menu, _x: number, _y: number, push_in: boolean): void;
+		public static position_menu(menu: Menu): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -34689,7 +34654,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly-created #GdkPixbuf
 		 *     containing the rendered icon
 		 */
-		render_icon(source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget, detail: string): GdkPixbuf.Pixbuf;
+		render_icon(source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;
 		/**
 		 * Sets the background of #window to the background color or pixmap
 		 * specified by #style for the given state.
@@ -34850,7 +34815,7 @@ declare namespace imports.gi.Gtk {
 		 * @param region_id animatable region to stop, or %NULL.
 		 *     See gtk_style_context_push_animatable_region()
 		 */
-		cancel_animations(region_id: any): void;
+		cancel_animations(region_id: any | null): void;
 		/**
 		 * Retrieves several style property values from #context for a
 		 * given state.
@@ -34918,7 +34883,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GdkFrameClock, or %NULL
 		 *  if #context does not have an attached frame clock.
 		 */
-		get_frame_clock(): Gdk.FrameClock;
+		get_frame_clock(): Gdk.FrameClock | null;
 		/**
 		 * Returns the sides where rendered elements connect visually with others.
 		 * @returns the junction sides
@@ -34945,7 +34910,7 @@ declare namespace imports.gi.Gtk {
 		 * See that function for details.
 		 * @returns the parent context or %NULL
 		 */
-		get_parent(): StyleContext;
+		get_parent(): StyleContext | null;
 		/**
 		 * Returns the widget path used for style matching.
 		 * @returns A {@link WidgetPath}
@@ -34997,7 +34962,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns %NULL or the section where a value
 		 * for #property was defined
 		 */
-		get_section(property: string): CssSection;
+		get_section(property: string): CssSection | null;
 		/**
 		 * Returns the state used for style matching.
 		 * 
@@ -35048,10 +35013,9 @@ declare namespace imports.gi.Gtk {
 		 * If #flags_return is not %NULL, it is set to the flags
 		 * affecting the region.
 		 * @param region_name a region name
-		 * @param flags_return return location for region flags
 		 * @returns %TRUE if region is defined
 		 */
-		has_region(region_name: string, flags_return: RegionFlags): boolean;
+		has_region(region_name: string): boolean;
 		/**
 		 * Invalidates #context style information, so it will be reconstructed
 		 * again. It is useful if you modify the #context and need the new
@@ -35088,7 +35052,7 @@ declare namespace imports.gi.Gtk {
 		 * @param stock_id an icon name
 		 * @returns The looked up %GtkIconSet, or %NULL
 		 */
-		lookup_icon_set(stock_id: string): IconSet;
+		lookup_icon_set(stock_id: string): IconSet | null;
 		/**
 		 * Notifies a state change on #context, so if the current style makes use
 		 * of transition animations, one will be started so all rendered elements
@@ -35137,7 +35101,7 @@ declare namespace imports.gi.Gtk {
 		 * @param state_value %TRUE if #state is the state we are changing to,
 		 *     %FALSE if we are changing away from it
 		 */
-		notify_state_change(window: Gdk.Window, region_id: any, state: StateType, state_value: boolean): void;
+		notify_state_change(window: Gdk.Window, region_id: any | null, state: StateType, state_value: boolean): void;
 		/**
 		 * Pops an animatable region from #context.
 		 * See gtk_style_context_push_animatable_region().
@@ -35155,7 +35119,7 @@ declare namespace imports.gi.Gtk {
 		 * can uniquely identify rendered elements subject to a state transition.
 		 * @param region_id unique identifier for the animatable region
 		 */
-		push_animatable_region(region_id: any): void;
+		push_animatable_region(region_id: any | null): void;
 		/**
 		 * Removes #class_name from #context.
 		 * @param class_name class name to remove
@@ -35247,7 +35211,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_get_style_context(), the parent will be set for you.
 		 * @param parent the new parent or %NULL
 		 */
-		set_parent(parent: StyleContext): void;
+		set_parent(parent: StyleContext | null): void;
 		/**
 		 * Sets the {@link WidgetPath} used for style matching. As a
 		 * consequence, the style will be regenerated to match
@@ -35291,10 +35255,9 @@ declare namespace imports.gi.Gtk {
 		 * run from 0 to 1 when #state is being set and from 1 to 0 when
 		 * it’s being unset.
 		 * @param state a widget state
-		 * @param progress return location for the transition progress
 		 * @returns %TRUE if there is a running transition animation for #state.
 		 */
-		state_is_running(state: StateType, progress: number): boolean;
+		state_is_running(state: StateType): boolean;
 		/**
 		 * Converts the style context into a string representation.
 		 * 
@@ -35556,11 +35519,9 @@ declare namespace imports.gi.Gtk {
 		 * #parse_func are not %NULL, the #GParamSpec and parsing function
 		 * will be respectively returned.
 		 * @param property_name property name to look up
-		 * @param parse_func return location for the parse function
-		 * @param pspec return location for the #GParamSpec
 		 * @returns %TRUE if the property is registered, %FALSE otherwise
 		 */
-		public static lookup_property(property_name: string, parse_func: StylePropertyParser, pspec: GObject.ParamSpec): boolean;
+		public static lookup_property(property_name: string): boolean;
 		/**
 		 * Registers a property so it can be used in the CSS file format.
 		 * This function is the low-level equivalent of
@@ -35569,7 +35530,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parse_func parsing function to use, or %NULL
 		 * @param pspec the #GParamSpec for the new property
 		 */
-		public static register_property(parse_func: StylePropertyParser, pspec: GObject.ParamSpec): void;
+		public static register_property(parse_func: StylePropertyParser | null, pspec: GObject.ParamSpec): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35776,12 +35737,13 @@ declare namespace imports.gi.Gtk {
 		get_row_spacing(_row: number): number;
 		/**
 		 * Gets the number of rows and columns in the table.
-		 * @param _rows return location for the number of
+		 * @returns return location for the number of
 		 *   rows, or %NULL
-		 * @param columns return location for the number
+		 * 
+		 * return location for the number
 		 *   of columns, or %NULL
 		 */
-		get_size(_rows: number, columns: number): void;
+		get_size(): [ rows: number | null, columns: number | null ];
 		/**
 		 * If you need to change a table’s size after
 		 * it has been created, this function allows you to do so.
@@ -36062,7 +36024,7 @@ declare namespace imports.gi.Gtk {
 		 * @param left_gravity whether the mark has left gravity
 		 * @returns the new {@link TextMark} object
 		 */
-		create_mark(mark_name: string, where: TextIter, left_gravity: boolean): TextMark;
+		create_mark(mark_name: string | null, where: TextIter, left_gravity: boolean): TextMark;
 		/**
 		 * Creates a tag and adds it to the tag table for #buffer.
 		 * Equivalent to calling gtk_text_tag_new() and then adding the
@@ -36080,7 +36042,7 @@ declare namespace imports.gi.Gtk {
 		 * @param first_property_name name of first property to set, or %NULL
 		 * @returns a new tag
 		 */
-		create_tag(tag_name: string, first_property_name: string): TextTag;
+		create_tag(tag_name: string | null, first_property_name: string | null): TextTag;
 		/**
 		 * Copies the currently-selected text to a clipboard, then deletes
 		 * said text if it’s editable.
@@ -36218,11 +36180,10 @@ declare namespace imports.gi.Gtk {
 		 * This function returns the rich text deserialize formats registered
 		 * with #buffer using gtk_text_buffer_register_deserialize_format() or
 		 * gtk_text_buffer_register_deserialize_tagset()
-		 * @param n_formats return location for the number of formats
 		 * @returns an array of
 		 *               #GdkAtoms representing the registered formats.
 		 */
-		get_deserialize_formats(n_formats: number): Gdk.Atom[];
+		get_deserialize_formats(): Gdk.Atom[];
 		/**
 		 * Initializes #iter with the “end iterator,” one past the last valid
 		 * character in the text buffer. If dereferenced with
@@ -36315,7 +36276,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name a mark name
 		 * @returns a {@link TextMark}, or %NULL
 		 */
-		get_mark(name: string): TextMark;
+		get_mark(name: string): TextMark | null;
 		/**
 		 * Indicates whether the buffer has been modified since the last call
 		 * to gtk_text_buffer_set_modified() set the modification flag to
@@ -36364,11 +36325,10 @@ declare namespace imports.gi.Gtk {
 		 * This function returns the rich text serialize formats registered
 		 * with #buffer using gtk_text_buffer_register_serialize_format() or
 		 * gtk_text_buffer_register_serialize_tagset()
-		 * @param n_formats return location for the number of formats
 		 * @returns an array of
 		 *               #GdkAtoms representing the registered formats.
 		 */
-		get_serialize_formats(n_formats: number): Gdk.Atom[];
+		get_serialize_formats(): Gdk.Atom[];
 		/**
 		 * Returns the text in the range [#start,#end). Excludes undisplayed
 		 * text (text marked with tags that set the invisibility attribute) if
@@ -36575,7 +36535,7 @@ declare namespace imports.gi.Gtk {
 		 * @param override_location location to insert pasted text, or %NULL
 		 * @param default_editable whether the buffer is editable by default
 		 */
-		paste_clipboard(clipboard: Clipboard, override_location: TextIter, default_editable: boolean): void;
+		paste_clipboard(clipboard: Clipboard, override_location: TextIter | null, default_editable: boolean): void;
 		/**
 		 * This function moves the “insert” and “selection_bound” marks
 		 * simultaneously.  If you move them to the same place in two steps
@@ -36605,7 +36565,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #GdkAtom that corresponds to the
 		 *               newly registered format’s mime-type.
 		 */
-		register_deserialize_tagset(tagset_name: string): Gdk.Atom;
+		register_deserialize_tagset(tagset_name: string | null): Gdk.Atom;
 		/**
 		 * This function registers a rich text serialization #function along with
 		 * its #mime_type with the passed #buffer.
@@ -36638,7 +36598,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #GdkAtom that corresponds to the
 		 *               newly registered format’s mime-type.
 		 */
-		register_serialize_tagset(tagset_name: string): Gdk.Atom;
+		register_serialize_tagset(tagset_name: string | null): Gdk.Atom;
 		/**
 		 * Removes all tags in the range between #start and #end.  Be careful
 		 * with this function; it could remove tags added in code unrelated to
@@ -36696,11 +36656,10 @@ declare namespace imports.gi.Gtk {
 		 * @param format the rich text format to use for serializing
 		 * @param start start of block of text to serialize
 		 * @param _end end of block of test to serialize
-		 * @param length return location for the length of the serialized data
 		 * @returns the serialized
 		 *               data, encoded as #format
 		 */
-		serialize(content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter, length: number): number[];
+		serialize(content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter): number[];
 		/**
 		 * Used to keep track of whether the buffer has been modified since the
 		 * last time it was saved. Whenever the buffer is saved to disk, call
@@ -36903,7 +36862,7 @@ declare namespace imports.gi.Gtk {
 		 * @param table a tag table, or %NULL to create a new one
 		 * @returns a new text buffer
 		 */
-		public static new(table: TextTagTable): TextBuffer;
+		public static new(table: TextTagTable | null): TextBuffer;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -37006,7 +36965,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the mark name; returns NULL for anonymous marks.
 		 * @returns mark name
 		 */
-		get_name(): string;
+		get_name(): string | null;
 		/**
 		 * Returns %TRUE if the mark is visible (i.e. a cursor is displayed
 		 * for it).
@@ -37081,7 +37040,7 @@ declare namespace imports.gi.Gtk {
 		 * @param left_gravity whether the mark should have left gravity
 		 * @returns new {@link TextMark}
 		 */
-		public static new(name: string, left_gravity: boolean): TextMark;
+		public static new(name: string | null, left_gravity: boolean): TextMark;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -37384,7 +37343,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name tag name, or %NULL
 		 * @returns a new {@link TextTag}
 		 */
-		public static new(name: string): TextTag;
+		public static new(name: string | null): TextTag;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -37408,7 +37367,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func a function to call on each tag
 		 * @param data user data
 		 */
-		foreach(_func: TextTagTableForeach, data: any): void;
+		foreach(_func: TextTagTableForeach, data: any | null): void;
 		/**
 		 * Returns the size of the table (number of tags)
 		 * @returns number of tags in #table
@@ -37420,7 +37379,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The tag, or %NULL if none by that
 		 * name is in the table.
 		 */
-		lookup(name: string): TextTag;
+		lookup(name: string): TextTag | null;
 		/**
 		 * Remove a tag from the table. If a {@link TextBuffer} has #table as its tag table,
 		 * the tag is removed from the buffer. The table’s reference to the tag is
@@ -37617,10 +37576,11 @@ declare namespace imports.gi.Gtk {
 		 * @param win a {@link TextWindowType}, except %GTK_TEXT_WINDOW_PRIVATE
 		 * @param buffer_x buffer x coordinate
 		 * @param buffer_y buffer y coordinate
-		 * @param window_x window x coordinate return location or %NULL
-		 * @param window_y window y coordinate return location or %NULL
+		 * @returns window x coordinate return location or %NULL
+		 * 
+		 * window y coordinate return location or %NULL
 		 */
-		buffer_to_window_coords(win: TextWindowType, buffer_x: number, buffer_y: number, window_x: number, window_y: number): void;
+		buffer_to_window_coords(win: TextWindowType, buffer_x: number, buffer_y: number): [ window_x: number | null, window_y: number | null ];
 		/**
 		 * Moves the given #iter forward by one display (wrapped) line.
 		 * A display line is different from a paragraph. Paragraphs are
@@ -37699,7 +37659,7 @@ declare namespace imports.gi.Gtk {
 		 * @param weak location to store the weak
 		 *     cursor position (may be %NULL)
 		 */
-		get_cursor_locations(iter: TextIter, strong: Gdk.Rectangle, weak: Gdk.Rectangle): void;
+		get_cursor_locations(iter: TextIter | null, strong: Gdk.Rectangle | null, weak: Gdk.Rectangle | null): void;
 		/**
 		 * Find out whether the cursor should be displayed.
 		 * @returns whether the insertion mark is visible
@@ -37769,15 +37729,11 @@ declare namespace imports.gi.Gtk {
 		 * which returns cursor locations, i.e. positions between
 		 * characters.
 		 * @param iter a {@link TextIter}
-		 * @param trailing if non-%NULL, location to store an integer indicating where
-		 *    in the grapheme the user clicked. It will either be
-		 *    zero, or the number of characters in the grapheme.
-		 *    0 represents the trailing edge of the grapheme.
 		 * @param _x x position, in buffer coordinates
 		 * @param _y y position, in buffer coordinates
 		 * @returns %TRUE if the position is over text
 		 */
-		get_iter_at_position(iter: TextIter, trailing: number, _x: number, _y: number): boolean;
+		get_iter_at_position(iter: TextIter, _x: number, _y: number): boolean;
 		/**
 		 * Gets a rectangle which roughly contains the character at #iter.
 		 * The rectangle position is in buffer coordinates; use
@@ -37807,18 +37763,18 @@ declare namespace imports.gi.Gtk {
 		 * edge of the line.
 		 * @param target_iter a {@link TextIter}
 		 * @param _y a y coordinate
-		 * @param line_top return location for top coordinate of the line
 		 */
-		get_line_at_y(target_iter: TextIter, _y: number, line_top: number): void;
+		get_line_at_y(target_iter: TextIter, _y: number): void;
 		/**
 		 * Gets the y coordinate of the top of the line containing #iter,
 		 * and the height of the line. The coordinate is a buffer coordinate;
 		 * convert to window coordinates with gtk_text_view_buffer_to_window_coords().
 		 * @param iter a {@link TextIter}
-		 * @param _y return location for a y coordinate
-		 * @param height return location for a height
+		 * @returns return location for a y coordinate
+		 * 
+		 * return location for a height
 		 */
-		get_line_yrange(iter: TextIter, _y: number, height: number): void;
+		get_line_yrange(iter: TextIter): [ y: number, height: number ];
 		/**
 		 * Gets the value of the {@link TextView}:monospace property.
 		 * @returns %TRUE if monospace fonts are desired
@@ -37863,7 +37819,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns copy of default tab array, or %NULL if
 		 *    “standard" tabs are used; must be freed with pango_tab_array_free().
 		 */
-		get_tabs(): Pango.TabArray;
+		get_tabs(): Pango.TabArray | null;
 		/**
 		 * Gets the top margin for text in the #text_view.
 		 * @returns top margin in pixels
@@ -37891,7 +37847,7 @@ declare namespace imports.gi.Gtk {
 		 * @param win window to get
 		 * @returns a #GdkWindow, or %NULL
 		 */
-		get_window(win: TextWindowType): Gdk.Window;
+		get_window(win: TextWindowType): Gdk.Window | null;
 		/**
 		 * Usually used to find out which window an event corresponds to.
 		 * 
@@ -38080,7 +38036,7 @@ declare namespace imports.gi.Gtk {
 		 * will not “adopt” it.
 		 * @param buffer a {@link TextBuffer}
 		 */
-		set_buffer(buffer: TextBuffer): void;
+		set_buffer(buffer: TextBuffer | null): void;
 		/**
 		 * Toggles whether the insertion point should be displayed. A buffer with
 		 * no editable text probably shouldn’t have a visible cursor, so you may
@@ -38209,10 +38165,11 @@ declare namespace imports.gi.Gtk {
 		 * @param win a {@link TextWindowType} except %GTK_TEXT_WINDOW_PRIVATE
 		 * @param window_x window x coordinate
 		 * @param window_y window y coordinate
-		 * @param buffer_x buffer x coordinate return location or %NULL
-		 * @param buffer_y buffer y coordinate return location or %NULL
+		 * @returns buffer x coordinate return location or %NULL
+		 * 
+		 * buffer y coordinate return location or %NULL
 		 */
-		window_to_buffer_coords(win: TextWindowType, window_x: number, window_y: number, buffer_x: number, buffer_y: number): void;
+		window_to_buffer_coords(win: TextWindowType, window_x: number, window_y: number): [ buffer_x: number | null, buffer_y: number | null ];
 		/**
 		 * The ::backspace signal is a
 		 * [keybinding signal][GtkBindingSignal]
@@ -38578,7 +38535,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the #GdkScreen to which #engine currently rendering to.
 		 * @returns a #GdkScreen, or %NULL.
 		 */
-		get_screen(): Gdk.Screen;
+		get_screen(): Gdk.Screen | null;
 		/**
 		 * returns the state used when rendering.
 		 * @returns the state flags
@@ -38621,10 +38578,9 @@ declare namespace imports.gi.Gtk {
 		 * region defined. If #flags_return is not %NULL, it is set
 		 * to the flags affecting the region.
 		 * @param style_region a region name
-		 * @param flags return location for region flags
 		 * @returns %TRUE if region is defined
 		 */
-		has_region(style_region: string, flags: RegionFlags): boolean;
+		has_region(style_region: string): boolean;
 		/**
 		 * Looks up and resolves a color name in the current style’s color map.
 		 * @param color_name color name to lookup
@@ -38642,10 +38598,9 @@ declare namespace imports.gi.Gtk {
 		 * run from 0 to 1 when #state is being set to %TRUE and from 1 to 0 when
 		 * it’s being set to %FALSE.
 		 * @param state a widget state
-		 * @param progress return location for the transition progress
 		 * @returns %TRUE if there is a running transition animation for #state.
 		 */
-		state_is_running(state: StateType, progress: number): boolean;
+		state_is_running(state: StateType): boolean;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
 
@@ -38678,7 +38633,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A theming engine, or %NULL if
 		 * the engine #name doesn’t exist.
 		 */
-		public static load(name: string): ThemingEngine;
+		public static load(name: string): ThemingEngine | null;
 		/**
 		 * Registers a property so it can be used in the CSS file format,
 		 * on the CSS file the property will look like
@@ -38711,7 +38666,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parse_func parsing function to use, or %NULL
 		 * @param pspec the #GParamSpec for the new property
 		 */
-		public static register_property(name_space: string, parse_func: StylePropertyParser, pspec: GObject.ParamSpec): void;
+		public static register_property(name_space: string, parse_func: StylePropertyParser | null, pspec: GObject.ParamSpec): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -38790,7 +38745,7 @@ declare namespace imports.gi.Gtk {
 		 *            the action, or %NULL
 		 * @returns a new {@link ToggleAction}
 		 */
-		public static new(name: string, label: string, tooltip: string, stock_id: string): ToggleAction;
+		public static new(name: string, label: string | null, tooltip: string | null, stock_id: string | null): ToggleAction;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -39070,28 +39025,28 @@ declare namespace imports.gi.Gtk {
 		 * @returns the icon name or %NULL if the tool button has
 		 * no themed icon
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Return the widget used as icon widget on #button.
 		 * See gtk_tool_button_set_icon_widget().
 		 * @returns The widget used as icon
 		 *     on #button, or %NULL.
 		 */
-		get_icon_widget(): Widget;
+		get_icon_widget(): Widget | null;
 		/**
 		 * Returns the label used by the tool button, or %NULL if the tool button
 		 * doesn’t have a label. or uses a the label from a stock item. The returned
 		 * string is owned by GTK+, and must not be modified or freed.
 		 * @returns The label, or %NULL
 		 */
-		get_label(): string;
+		get_label(): string | null;
 		/**
 		 * Returns the widget used as label on #button.
 		 * See gtk_tool_button_set_label_widget().
 		 * @returns The widget used as label
 		 *     on #button, or %NULL.
 		 */
-		get_label_widget(): Widget;
+		get_label_widget(): Widget | null;
 		/**
 		 * Returns the name of the stock item. See gtk_tool_button_set_stock_id().
 		 * The returned string is owned by GTK+ and must not be freed or modifed.
@@ -39113,14 +39068,14 @@ declare namespace imports.gi.Gtk {
 		 * #GtkToolButton:icon-widget and #GtkToolButton:stock-id properties.
 		 * @param icon_name the name of the themed icon
 		 */
-		set_icon_name(icon_name: string): void;
+		set_icon_name(icon_name: string | null): void;
 		/**
 		 * Sets #icon as the widget used as icon on #button. If #icon_widget is
 		 * %NULL the icon is determined by the {@link ToolButton}:stock-id property. If the
 		 * #GtkToolButton:stock-id property is also %NULL, #button will not have an icon.
 		 * @param icon_widget the widget used as icon, or %NULL
 		 */
-		set_icon_widget(icon_widget: Widget): void;
+		set_icon_widget(icon_widget: Widget | null): void;
 		/**
 		 * Sets #label as the label used for the tool button. The {@link ToolButton}:label
 		 * property only has an effect if not overridden by a non-%NULL
@@ -39130,7 +39085,7 @@ declare namespace imports.gi.Gtk {
 		 * also %NULL, #button will not have a label.
 		 * @param label a string that will be used as label, or %NULL.
 		 */
-		set_label(label: string): void;
+		set_label(label: string | null): void;
 		/**
 		 * Sets #label_widget as the widget that will be used as the label
 		 * for #button. If #label_widget is %NULL the {@link ToolButton}:label property is used
@@ -39139,14 +39094,14 @@ declare namespace imports.gi.Gtk {
 		 * #GtkToolButton:stock-id is also %NULL, #button does not have a label.
 		 * @param label_widget the widget used as label, or %NULL
 		 */
-		set_label_widget(label_widget: Widget): void;
+		set_label_widget(label_widget: Widget | null): void;
 		/**
 		 * Sets the name of the stock item. See gtk_tool_button_new_from_stock().
 		 * The stock_id property only has an effect if not overridden by non-%NULL
 		 * {@link ToolButton}:label-widget and #GtkToolButton:icon-widget properties.
 		 * @param stock_id a name of a stock item, or %NULL
 		 */
-		set_stock_id(stock_id: string): void;
+		set_stock_id(stock_id: string | null): void;
 		/**
 		 * If set, an underline in the label property indicates that the next character
 		 * should be used for the mnemonic accelerator key in the overflow menu. For
@@ -39214,7 +39169,7 @@ declare namespace imports.gi.Gtk {
 		 * @param label a string that will be used as label, or %NULL
 		 * @returns A new {@link ToolButton}
 		 */
-		public static new(icon_widget: Widget, label: string): ToolItem;
+		public static new(icon_widget: Widget | null, label: string | null): ToolItem;
 		/**
 		 * Creates a new {@link ToolButton} containing the image and text from a
 		 * stock item. Some stock ids have preprocessor macros like #GTK_STOCK_OK
@@ -39290,7 +39245,7 @@ declare namespace imports.gi.Gtk {
 		 *     gtk_tool_item_set_proxy_menu_item(), if the #menu_item_ids
 		 *     match.
 		 */
-		get_proxy_menu_item(menu_item_id: string): Widget;
+		get_proxy_menu_item(menu_item_id: string): Widget | null;
 		/**
 		 * Returns the relief style of #tool_item. See gtk_button_set_relief().
 		 * Custom subclasses of {@link ToolItem} should call this function in the handler
@@ -39410,7 +39365,7 @@ declare namespace imports.gi.Gtk {
 		 * @param menu_item_id a string used to identify #menu_item
 		 * @param menu_item a {@link MenuItem} to use in the overflow menu, or %NULL
 		 */
-		set_proxy_menu_item(menu_item_id: string, menu_item: Widget): void;
+		set_proxy_menu_item(menu_item_id: string, menu_item: Widget | null): void;
 		/**
 		 * Sets the markup text to be displayed as tooltip on the item.
 		 * See gtk_widget_set_tooltip_markup().
@@ -39706,7 +39661,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the {@link ToolItemGroup} at position
 		 * or %NULL if there is no such group
 		 */
-		get_drop_group(_x: number, _y: number): ToolItemGroup;
+		get_drop_group(_x: number, _y: number): ToolItemGroup | null;
 		/**
 		 * Gets the item at position (x, y).
 		 * See gtk_tool_palette_get_drop_group().
@@ -39714,7 +39669,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _y the y position
 		 * @returns the {@link ToolItem} at position or %NULL if there is no such item
 		 */
-		get_drop_item(_x: number, _y: number): ToolItem;
+		get_drop_item(_x: number, _y: number): ToolItem | null;
 		/**
 		 * Gets whether #group is exclusive or not.
 		 * See gtk_tool_palette_set_exclusive().
@@ -39968,7 +39923,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The #n'th {@link ToolItem} on #toolbar,
 		 *     or %NULL if there isn’t an #n'th item.
 		 */
-		get_nth_item(_n: number): ToolItem;
+		get_nth_item(_n: number): ToolItem | null;
 		/**
 		 * Returns the relief style of buttons on #toolbar. See
 		 * gtk_button_set_relief().
@@ -40008,7 +39963,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tool_item a {@link ToolItem}, or %NULL to turn of highlighting
 		 * @param index_ a position on #toolbar
 		 */
-		set_drop_highlight_item(tool_item: ToolItem, index_: number): void;
+		set_drop_highlight_item(tool_item: ToolItem | null, index_: number): void;
 		/**
 		 * This function sets the size of stock icons in the toolbar. You
 		 * can call it both before you add the icons and after they’ve been
@@ -40133,13 +40088,13 @@ declare namespace imports.gi.Gtk {
 		 * and gtk_tooltip_set_icon().
 		 * @param custom_widget a {@link Widget}, or %NULL to unset the old custom widget.
 		 */
-		set_custom(custom_widget: Widget): void;
+		set_custom(custom_widget: Widget | null): void;
 		/**
 		 * Sets the icon of the tooltip (which is in front of the text) to be
 		 * #pixbuf.  If #pixbuf is %NULL, the image will be hidden.
 		 * @param pixbuf a #GdkPixbuf, or %NULL
 		 */
-		set_icon(pixbuf: GdkPixbuf.Pixbuf): void;
+		set_icon(pixbuf: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets the icon of the tooltip (which is in front of the text)
 		 * to be the icon indicated by #gicon with the size indicated
@@ -40147,7 +40102,7 @@ declare namespace imports.gi.Gtk {
 		 * @param gicon a #GIcon representing the icon, or %NULL
 		 * @param size a stock icon size ({@link IconSize})
 		 */
-		set_icon_from_gicon(gicon: Gio.Icon, size: number): void;
+		set_icon_from_gicon(gicon: Gio.Icon | null, size: number): void;
 		/**
 		 * Sets the icon of the tooltip (which is in front of the text) to be
 		 * the icon indicated by #icon_name with the size indicated
@@ -40155,7 +40110,7 @@ declare namespace imports.gi.Gtk {
 		 * @param icon_name an icon name, or %NULL
 		 * @param size a stock icon size ({@link IconSize})
 		 */
-		set_icon_from_icon_name(icon_name: string, size: number): void;
+		set_icon_from_icon_name(icon_name: string | null, size: number): void;
 		/**
 		 * Sets the icon of the tooltip (which is in front of the text) to be
 		 * the stock item indicated by #stock_id with the size indicated
@@ -40163,20 +40118,20 @@ declare namespace imports.gi.Gtk {
 		 * @param stock_id a stock id, or %NULL
 		 * @param size a stock icon size ({@link IconSize})
 		 */
-		set_icon_from_stock(stock_id: string, size: number): void;
+		set_icon_from_stock(stock_id: string | null, size: number): void;
 		/**
 		 * Sets the text of the tooltip to be #markup, which is marked up
 		 * with the [Pango text markup language][PangoMarkupFormat].
 		 * If #markup is %NULL, the label will be hidden.
 		 * @param markup a markup string (see [Pango markup format][PangoMarkupFormat]) or %NULL
 		 */
-		set_markup(markup: string): void;
+		set_markup(markup: string | null): void;
 		/**
 		 * Sets the text of the tooltip to be #text. If #text is %NULL, the label
 		 * will be hidden. See also gtk_tooltip_set_markup().
 		 * @param text a text string or %NULL
 		 */
-		set_text(text: string): void;
+		set_text(text: string | null): void;
 		/**
 		 * Sets the area of the widget, where the contents of this tooltip apply,
 		 * to be #rect (in widget coordinates).  This is especially useful for
@@ -40298,7 +40253,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child_path A {@link TreePath} to convert.
 		 * @returns A newly allocated {@link TreePath}, or %NULL.
 		 */
-		convert_child_path_to_path(child_path: TreePath): TreePath;
+		convert_child_path_to_path(child_path: TreePath): TreePath | null;
 		/**
 		 * Sets #child_iter to point to the row pointed to by #filter_iter.
 		 * @param child_iter An uninitialized {@link TreeIter}.
@@ -40313,7 +40268,7 @@ declare namespace imports.gi.Gtk {
 		 * @param filter_path A {@link TreePath} to convert.
 		 * @returns A newly allocated {@link TreePath}, or %NULL.
 		 */
-		convert_path_to_child_path(filter_path: TreePath): TreePath;
+		convert_path_to_child_path(filter_path: TreePath): TreePath | null;
 		/**
 		 * Returns a pointer to the child model of #filter.
 		 * @returns A pointer to a {@link TreeModel}.
@@ -40341,7 +40296,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data User data to pass to the modify function, or %NULL.
 		 * @param destroy Destroy notifier of #data, or %NULL.
 		 */
-		set_modify_func(n_columns: number, types: GObject.Type[], _func: TreeModelFilterModifyFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_modify_func(n_columns: number, types: GObject.Type[], _func: TreeModelFilterModifyFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets #column of the child_model to be the column where #filter should
 		 * look for visibility information. #columns should be a column of type
@@ -40394,7 +40349,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data User data to pass to the visible function, or %NULL
 		 * @param destroy Destroy notifier of #data, or %NULL
 		 */
-		set_visible_func(_func: TreeModelFilterVisibleFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_visible_func(_func: TreeModelFilterVisibleFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		connect(signal: "notify::child_model", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::virtual_root", callback: (owner: this, ...args: any) => number): number;
 
@@ -40510,7 +40465,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child_path A {@link TreePath} to convert
 		 * @returns A newly allocated {@link TreePath}, or %NULL
 		 */
-		convert_child_path_to_path(child_path: TreePath): TreePath;
+		convert_child_path_to_path(child_path: TreePath): TreePath | null;
 		/**
 		 * Sets #child_iter to point to the row pointed to by #sorted_iter.
 		 * @param child_iter An uninitialized {@link TreeIter}
@@ -40526,7 +40481,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sorted_path A {@link TreePath} to convert
 		 * @returns A newly allocated {@link TreePath}, or %NULL
 		 */
-		convert_path_to_child_path(sorted_path: TreePath): TreePath;
+		convert_path_to_child_path(sorted_path: TreePath): TreePath | null;
 		/**
 		 * Returns the model the {@link TreeModelSort} is sorting.
 		 * @returns the "child model" being sorted
@@ -40696,11 +40651,10 @@ declare namespace imports.gi.Gtk {
 		 * just want to test if #selection has any selected nodes.  #model is filled
 		 * with the current model as a convenience.  This function will not work if you
 		 * use #selection is #GTK_SELECTION_MULTIPLE.
-		 * @param model A pointer to set to the {@link TreeModel}, or NULL.
 		 * @param iter The {@link TreeIter}, or NULL.
 		 * @returns TRUE, if there is a selected node.
 		 */
-		get_selected(model: TreeModel, iter: TreeIter): boolean;
+		get_selected(iter: TreeIter | null): boolean;
 		/**
 		 * Creates a list of path of all selected rows. Additionally, if you are
 		 * planning on modifying the model after calling this function, you may
@@ -40711,10 +40665,9 @@ declare namespace imports.gi.Gtk {
 		 * |[<!-- language="C" -->
 		 * g_list_free_full (list, (GDestroyNotify) gtk_tree_path_free);
 		 * ]|
-		 * @param model A pointer to set to the {@link TreeModel}, or %NULL.
 		 * @returns A #GList containing a {@link TreePath} for each selected row.
 		 */
-		get_selected_rows(model: TreeModel): GLib.List;
+		get_selected_rows(): GLib.List;
 		/**
 		 * Returns the tree view associated with #selection.
 		 * @returns A {@link TreeView}
@@ -40724,7 +40677,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the user data for the selection function.
 		 * @returns The user data.
 		 */
-		get_user_data(): any;
+		get_user_data(): any | null;
 		/**
 		 * Returns %TRUE if the row at #iter is currently selected.
 		 * @param iter A valid {@link TreeIter}
@@ -40767,7 +40720,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func The function to call for each selected node.
 		 * @param data user data to pass to the function.
 		 */
-		selected_foreach(_func: TreeSelectionForeachFunc, data: any): void;
+		selected_foreach(_func: TreeSelectionForeachFunc, data: any | null): void;
 		/**
 		 * Sets the selection mode of the #selection.  If the previous type was
 		 * #GTK_SELECTION_MULTIPLE, then the anchor is kept selected, if it was
@@ -40786,7 +40739,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data The selection function’s data. May be %NULL
 		 * @param destroy The destroy function for user data.  May be %NULL
 		 */
-		set_select_function(_func: TreeSelectionFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_select_function(_func: TreeSelectionFunc | null, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Unselects all the nodes.
 		 */
@@ -40869,7 +40822,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter An unset {@link TreeIter} to set to the appended row
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 */
-		append(iter: TreeIter, parent: TreeIter): void;
+		append(iter: TreeIter, parent: TreeIter | null): void;
 		/**
 		 * Removes all rows from #tree_store
 		 */
@@ -40886,7 +40839,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 * @param position position to insert the new row, or -1 for last
 		 */
-		insert(iter: TreeIter, parent: TreeIter, position: number): void;
+		insert(iter: TreeIter, parent: TreeIter | null, position: number): void;
 		/**
 		 * Inserts a new row after #sibling.  If #sibling is %NULL, then the row will be
 		 * prepended to #parent ’s children.  If #parent and #sibling are %NULL, then
@@ -40901,7 +40854,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 * @param sibling A valid {@link TreeIter}, or %NULL
 		 */
-		insert_after(iter: TreeIter, parent: TreeIter, sibling: TreeIter): void;
+		insert_after(iter: TreeIter, parent: TreeIter | null, sibling: TreeIter | null): void;
 		/**
 		 * Inserts a new row before #sibling.  If #sibling is %NULL, then the row will
 		 * be appended to #parent ’s children.  If #parent and #sibling are %NULL, then
@@ -40916,7 +40869,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 * @param sibling A valid {@link TreeIter}, or %NULL
 		 */
-		insert_before(iter: TreeIter, parent: TreeIter, sibling: TreeIter): void;
+		insert_before(iter: TreeIter, parent: TreeIter | null, sibling: TreeIter | null): void;
 		/**
 		 * Creates a new row at #position. #iter will be changed to point to this
 		 * new row. If #position is -1, or larger than the number of rows on the list, then
@@ -40940,7 +40893,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 * @param position position to insert the new row, or -1 to append after existing rows
 		 */
-		insert_with_values(iter: TreeIter, parent: TreeIter, position: number): void;
+		insert_with_values(iter: TreeIter | null, parent: TreeIter | null, position: number): void;
 		/**
 		 * A variant of gtk_tree_store_insert_with_values() which takes
 		 * the columns and values as two arrays, instead of varargs.  This
@@ -40952,7 +40905,7 @@ declare namespace imports.gi.Gtk {
 		 * @param values an array of GValues
 		 * @param n_values the length of the #columns and #values arrays
 		 */
-		insert_with_valuesv(iter: TreeIter, parent: TreeIter, position: number, columns: number[], values: GObject.Value[], n_values: number): void;
+		insert_with_valuesv(iter: TreeIter | null, parent: TreeIter | null, position: number, columns: number[], values: GObject.Value[], n_values: number): void;
 		/**
 		 * Returns %TRUE if #iter is an ancestor of #descendant.  That is, #iter is the
 		 * parent (or grandparent or great-grandparent) of #descendant.
@@ -40985,7 +40938,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter}.
 		 * @param position A {@link TreeIter}.
 		 */
-		move_after(iter: TreeIter, position: TreeIter): void;
+		move_after(iter: TreeIter, position: TreeIter | null): void;
 		/**
 		 * Moves #iter in #tree_store to the position before #position. #iter and
 		 * #position should be in the same level. Note that this function only
@@ -40994,7 +40947,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter}.
 		 * @param position A {@link TreeIter} or %NULL.
 		 */
-		move_before(iter: TreeIter, position: TreeIter): void;
+		move_before(iter: TreeIter, position: TreeIter | null): void;
 		/**
 		 * Prepends a new row to #tree_store.  If #parent is non-%NULL, then it will prepend
 		 * the new row before the first child of #parent, otherwise it will prepend a row
@@ -41004,7 +40957,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter An unset {@link TreeIter} to set to the prepended row
 		 * @param parent A valid {@link TreeIter}, or %NULL
 		 */
-		prepend(iter: TreeIter, parent: TreeIter): void;
+		prepend(iter: TreeIter, parent: TreeIter | null): void;
 		/**
 		 * Removes #iter from #tree_store.  After being removed, #iter is set to the
 		 * next valid row at that level, or invalidated if it previously pointed to the
@@ -41022,7 +40975,7 @@ declare namespace imports.gi.Gtk {
 		 *      to its old position before the re-ordering,
 		 *      i.e. #new_order`[newpos] = oldpos`.
 		 */
-		reorder(parent: TreeIter, new_order: number[]): void;
+		reorder(parent: TreeIter | null, new_order: number[]): void;
 		/**
 		 * Sets the value of one or more cells in the row referenced by #iter.
 		 * The variable argument list should contain integer column numbers,
@@ -41226,55 +41179,61 @@ declare namespace imports.gi.Gtk {
 		 * tree (the full scrollable area of the tree).
 		 * @param bx X coordinate relative to bin_window
 		 * @param _by Y coordinate relative to bin_window
-		 * @param tx return location for tree X coordinate
-		 * @param _ty return location for tree Y coordinate
+		 * @returns return location for tree X coordinate
+		 * 
+		 * return location for tree Y coordinate
 		 */
-		convert_bin_window_to_tree_coords(bx: number, _by: number, tx: number, _ty: number): void;
+		convert_bin_window_to_tree_coords(bx: number, _by: number): [ tx: number, ty: number ];
 		/**
 		 * Converts bin_window coordinates (see gtk_tree_view_get_bin_window())
 		 * to widget relative coordinates.
 		 * @param bx bin_window X coordinate
 		 * @param _by bin_window Y coordinate
-		 * @param wx return location for widget X coordinate
-		 * @param wy return location for widget Y coordinate
+		 * @returns return location for widget X coordinate
+		 * 
+		 * return location for widget Y coordinate
 		 */
-		convert_bin_window_to_widget_coords(bx: number, _by: number, wx: number, wy: number): void;
+		convert_bin_window_to_widget_coords(bx: number, _by: number): [ wx: number, wy: number ];
 		/**
 		 * Converts tree coordinates (coordinates in full scrollable area of the tree)
 		 * to bin_window coordinates.
 		 * @param tx tree X coordinate
 		 * @param _ty tree Y coordinate
-		 * @param bx return location for X coordinate relative to bin_window
-		 * @param _by return location for Y coordinate relative to bin_window
+		 * @returns return location for X coordinate relative to bin_window
+		 * 
+		 * return location for Y coordinate relative to bin_window
 		 */
-		convert_tree_to_bin_window_coords(tx: number, _ty: number, bx: number, _by: number): void;
+		convert_tree_to_bin_window_coords(tx: number, _ty: number): [ bx: number, by: number ];
 		/**
 		 * Converts tree coordinates (coordinates in full scrollable area of the tree)
 		 * to widget coordinates.
 		 * @param tx X coordinate relative to the tree
 		 * @param _ty Y coordinate relative to the tree
-		 * @param wx return location for widget X coordinate
-		 * @param wy return location for widget Y coordinate
+		 * @returns return location for widget X coordinate
+		 * 
+		 * return location for widget Y coordinate
 		 */
-		convert_tree_to_widget_coords(tx: number, _ty: number, wx: number, wy: number): void;
+		convert_tree_to_widget_coords(tx: number, _ty: number): [ wx: number, wy: number ];
 		/**
 		 * Converts widget coordinates to coordinates for the bin_window
 		 * (see gtk_tree_view_get_bin_window()).
 		 * @param wx X coordinate relative to the widget
 		 * @param wy Y coordinate relative to the widget
-		 * @param bx return location for bin_window X coordinate
-		 * @param _by return location for bin_window Y coordinate
+		 * @returns return location for bin_window X coordinate
+		 * 
+		 * return location for bin_window Y coordinate
 		 */
-		convert_widget_to_bin_window_coords(wx: number, wy: number, bx: number, _by: number): void;
+		convert_widget_to_bin_window_coords(wx: number, wy: number): [ bx: number, by: number ];
 		/**
 		 * Converts widget coordinates to coordinates for the
 		 * tree (the full scrollable area of the tree).
 		 * @param wx X coordinate relative to the widget
 		 * @param wy Y coordinate relative to the widget
-		 * @param tx return location for tree X coordinate
-		 * @param _ty return location for tree Y coordinate
+		 * @returns return location for tree X coordinate
+		 * 
+		 * return location for tree Y coordinate
 		 */
-		convert_widget_to_tree_coords(wx: number, wy: number, tx: number, _ty: number): void;
+		convert_widget_to_tree_coords(wx: number, wy: number): [ tx: number, ty: number ];
 		/**
 		 * Creates a #cairo_surface_t representation of the row at #path.
 		 * This image is used for a drag icon.
@@ -41338,7 +41297,7 @@ declare namespace imports.gi.Gtk {
 		 * @param column a {@link TreeViewColumn} for the column, or %NULL to get only vertical coordiantes
 		 * @param rect rectangle to fill with cell background rect
 		 */
-		get_background_area(path: TreePath, column: TreeViewColumn, rect: Gdk.Rectangle): void;
+		get_background_area(path: TreePath | null, column: TreeViewColumn | null, rect: Gdk.Rectangle): void;
 		/**
 		 * Returns the window that #tree_view renders to.
 		 * This is used primarily to compare to `event->window`
@@ -41346,7 +41305,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #GdkWindow, or %NULL when #tree_view
 		 * hasn’t been realized yet.
 		 */
-		get_bin_window(): Gdk.Window;
+		get_bin_window(): Gdk.Window | null;
 		/**
 		 * Fills the bounding rectangle in bin_window coordinates for the cell at the
 		 * row specified by #path and the column specified by #column.  If #path is
@@ -41361,14 +41320,14 @@ declare namespace imports.gi.Gtk {
 		 * @param column a {@link TreeViewColumn} for the column, or %NULL to get only vertical coordinates
 		 * @param rect rectangle to fill with cell rect
 		 */
-		get_cell_area(path: TreePath, column: TreeViewColumn, rect: Gdk.Rectangle): void;
+		get_cell_area(path: TreePath | null, column: TreeViewColumn | null, rect: Gdk.Rectangle): void;
 		/**
 		 * Gets the {@link TreeViewColumn} at the given position in the #tree_view.
 		 * @param _n The position of the column, counting from 0.
 		 * @returns The {@link TreeViewColumn}, or %NULL if the
 		 * position is outside the range of columns.
 		 */
-		get_column(_n: number): TreeViewColumn;
+		get_column(_n: number): TreeViewColumn | null;
 		/**
 		 * Returns a #GList of all the {@link TreeViewColumn} s currently in #tree_view.
 		 * The returned list must be freed with g_list_free ().
@@ -41382,12 +41341,13 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The returned {@link TreePath} must be freed with gtk_tree_path_free() when
 		 * you are done with it.
-		 * @param path A pointer to be
+		 * @returns A pointer to be
 		 *   filled with the current cursor path, or %NULL
-		 * @param focus_column A
+		 * 
+		 * A
 		 *   pointer to be filled with the current focus column, or %NULL
 		 */
-		get_cursor(path: TreePath, focus_column: TreeViewColumn): void;
+		get_cursor(): [ path: TreePath | null, focus_column: TreeViewColumn | null ];
 		/**
 		 * Determines the destination row for a given position.  #drag_x and
 		 * #drag_y are expected to be in widget coordinates.  This function is only
@@ -41395,20 +41355,17 @@ declare namespace imports.gi.Gtk {
 		 * return %FALSE if #tree_view is not realized or does not have a model.
 		 * @param drag_x the position to determine the destination row for
 		 * @param drag_y the position to determine the destination row for
-		 * @param path Return location for the path of
-		 *   the highlighted row, or %NULL.
-		 * @param pos Return location for the drop position, or
-		 *   %NULL
 		 * @returns whether there is a row at the given position, %TRUE if this
 		 * is indeed the case.
 		 */
-		get_dest_row_at_pos(drag_x: number, drag_y: number, path: TreePath, pos: TreeViewDropPosition): boolean;
+		get_dest_row_at_pos(drag_x: number, drag_y: number): boolean;
 		/**
 		 * Gets information about the row that is highlighted for feedback.
-		 * @param path Return location for the path of the highlighted row, or %NULL.
-		 * @param pos Return location for the drop position, or %NULL
+		 * @returns Return location for the path of the highlighted row, or %NULL.
+		 * 
+		 * Return location for the drop position, or %NULL
 		 */
-		get_drag_dest_row(path: TreePath, pos: TreeViewDropPosition): void;
+		get_drag_dest_row(): [ path: TreePath | null, pos: TreeViewDropPosition | null ];
 		/**
 		 * Returns whether or not the tree allows to start interactive searching
 		 * by typing in text.
@@ -41477,7 +41434,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A {@link TreeModel}, or %NULL if
 		 * none is currently being used.
 		 */
-		get_model(): TreeModel;
+		get_model(): TreeModel | null;
 		/**
 		 * Queries the number of columns in the given #tree_view.
 		 * @returns The number of columns in the #tree_view
@@ -41503,17 +41460,9 @@ declare namespace imports.gi.Gtk {
 		 * gtk_tree_view_convert_widget_to_bin_window_coords().
 		 * @param _x The x position to be identified (relative to bin_window).
 		 * @param _y The y position to be identified (relative to bin_window).
-		 * @param path A pointer to a {@link TreePath}
-		 *   pointer to be filled in, or %NULL
-		 * @param column A pointer to
-		 *   a {@link TreeViewColumn} pointer to be filled in, or %NULL
-		 * @param cell_x A pointer where the X coordinate
-		 *   relative to the cell can be placed, or %NULL
-		 * @param cell_y A pointer where the Y coordinate
-		 *   relative to the cell can be placed, or %NULL
 		 * @returns %TRUE if a row exists at that coordinate.
 		 */
-		get_path_at_pos(_x: number, _y: number, path: TreePath, column: TreeViewColumn, cell_x: number, cell_y: number): boolean;
+		get_path_at_pos(_x: number, _y: number): boolean;
 		/**
 		 * Retrieves whether the user can reorder the tree via drag-and-drop. See
 		 * gtk_tree_view_set_reorderable().
@@ -41589,16 +41538,11 @@ declare namespace imports.gi.Gtk {
 		 * #model, #path and #iter which have been provided will be set to point to
 		 * that row and the corresponding model.  #x and #y will always be converted
 		 * to be relative to #tree_view’s bin_window if #keyboard_tooltip is %FALSE.
-		 * @param _x the x coordinate (relative to widget coordinates)
-		 * @param _y the y coordinate (relative to widget coordinates)
 		 * @param keyboard_tip whether this is a keyboard tooltip or not
-		 * @param model a pointer to
-		 *         receive a {@link TreeModel} or %NULL
-		 * @param path a pointer to receive a {@link TreePath} or %NULL
 		 * @param iter a pointer to receive a {@link TreeIter} or %NULL
 		 * @returns whether or not the given tooltip context points to a row.
 		 */
-		get_tooltip_context(_x: number, _y: number, keyboard_tip: boolean, model: TreeModel, path: TreePath, iter: TreeIter): boolean;
+		get_tooltip_context(keyboard_tip: boolean, iter: TreeIter | null): boolean;
 		/**
 		 * Gets the {@link Adjustment} currently being used for the vertical aspect.
 		 * @returns A {@link Adjustment} object, or %NULL
@@ -41610,12 +41554,9 @@ declare namespace imports.gi.Gtk {
 		 * Note that there may be invisible paths in between.
 		 * 
 		 * The paths should be freed with gtk_tree_path_free() after use.
-		 * @param start_path Return location for start of region,
-		 *              or %NULL.
-		 * @param end_path Return location for end of region, or %NULL.
 		 * @returns %TRUE, if valid paths were placed in #start_path and #end_path.
 		 */
-		get_visible_range(start_path: TreePath, end_path: TreePath): boolean;
+		get_visible_range(): boolean;
 		/**
 		 * Fills #visible_rect with the currently-visible region of the
 		 * buffer, in tree coordinates. Convert to bin_window coordinates with
@@ -41662,7 +41603,7 @@ declare namespace imports.gi.Gtk {
 		 * @param dnotify destroy notifier for #data
 		 * @returns number of columns in the tree view post-insert
 		 */
-		insert_column_with_data_func(position: number, title: string, cell: CellRenderer, _func: TreeCellDataFunc, data: any, dnotify: GLib.DestroyNotify): number;
+		insert_column_with_data_func(position: number, title: string, cell: CellRenderer, _func: TreeCellDataFunc, data: any | null, dnotify: GLib.DestroyNotify): number;
 		/**
 		 * Determine whether the point (#x, #y) in #tree_view is blank, that is no
 		 * cell content nor an expander arrow is drawn at the location. If so, the
@@ -41683,18 +41624,10 @@ declare namespace imports.gi.Gtk {
 		 * gtk_tree_view_get_path_at_pos() for more information.
 		 * @param _x The x position to be identified (relative to bin_window)
 		 * @param _y The y position to be identified (relative to bin_window)
-		 * @param path A pointer to a {@link TreePath} pointer to
-		 *   be filled in, or %NULL
-		 * @param column A pointer to a
-		 *   {@link TreeViewColumn} pointer to be filled in, or %NULL
-		 * @param cell_x A pointer where the X coordinate relative to the
-		 *   cell can be placed, or %NULL
-		 * @param cell_y A pointer where the Y coordinate relative to the
-		 *   cell can be placed, or %NULL
 		 * @returns %TRUE if the area at the given coordinates is blank,
 		 * %FALSE otherwise.
 		 */
-		is_blank_at_pos(_x: number, _y: number, path: TreePath, column: TreeViewColumn, cell_x: number, cell_y: number): boolean;
+		is_blank_at_pos(_x: number, _y: number): boolean;
 		/**
 		 * Returns whether a rubber banding operation is currently being done
 		 * in #tree_view.
@@ -41707,14 +41640,14 @@ declare namespace imports.gi.Gtk {
 		 * @param _func A function to be called
 		 * @param data User data to be passed to the function.
 		 */
-		map_expanded_rows(_func: TreeViewMappingFunc, data: any): void;
+		map_expanded_rows(_func: TreeViewMappingFunc, data: any | null): void;
 		/**
 		 * Moves #column to be after to #base_column.  If #base_column is %NULL, then
 		 * #column is placed in the first position.
 		 * @param column The {@link TreeViewColumn} to be moved.
 		 * @param base_column The {@link TreeViewColumn} to be moved relative to, or %NULL.
 		 */
-		move_column_after(column: TreeViewColumn, base_column: TreeViewColumn): void;
+		move_column_after(column: TreeViewColumn, base_column: TreeViewColumn | null): void;
 		/**
 		 * Removes #column from #tree_view.
 		 * @param column The {@link TreeViewColumn} to remove.
@@ -41756,7 +41689,7 @@ declare namespace imports.gi.Gtk {
 		 * @param row_align The vertical alignment of the row specified by #path.
 		 * @param col_align The horizontal alignment of the column specified by #column.
 		 */
-		scroll_to_cell(path: TreePath, column: TreeViewColumn, use_align: boolean, row_align: number, col_align: number): void;
+		scroll_to_cell(path: TreePath | null, column: TreeViewColumn | null, use_align: boolean, row_align: number, col_align: number): void;
 		/**
 		 * Scrolls the tree view such that the top-left corner of the visible
 		 * area is #tree_x, #tree_y, where #tree_x and #tree_y are specified
@@ -41788,7 +41721,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _func A function to determine which columns are reorderable, or %NULL.
 		 * @param destroy Destroy notifier for #user_data, or %NULL
 		 */
-		set_column_drag_function(_func: TreeViewColumnDropFunc, destroy: GLib.DestroyNotify): void;
+		set_column_drag_function(_func: TreeViewColumnDropFunc | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the current keyboard focus to be at #path, and selects it.  This is
 		 * useful when you want to focus the user’s attention on a particular row.  If
@@ -41805,7 +41738,7 @@ declare namespace imports.gi.Gtk {
 		 * @param focus_column A {@link TreeViewColumn}, or %NULL
 		 * @param start_editing %TRUE if the specified cell should start being edited.
 		 */
-		set_cursor(path: TreePath, focus_column: TreeViewColumn, start_editing: boolean): void;
+		set_cursor(path: TreePath, focus_column: TreeViewColumn | null, start_editing: boolean): void;
 		/**
 		 * Sets the current keyboard focus to be at #path, and selects it.  This is
 		 * useful when you want to focus the user’s attention on a particular row.  If
@@ -41826,7 +41759,7 @@ declare namespace imports.gi.Gtk {
 		 * @param focus_cell A {@link CellRenderer}, or %NULL
 		 * @param start_editing %TRUE if the specified cell should start being edited.
 		 */
-		set_cursor_on_cell(path: TreePath, focus_column: TreeViewColumn, focus_cell: CellRenderer, start_editing: boolean): void;
+		set_cursor_on_cell(path: TreePath, focus_column: TreeViewColumn | null, focus_cell: CellRenderer | null, start_editing: boolean): void;
 		/**
 		 * This function should almost never be used.  It is meant for private use by
 		 * ATK for determining the number of visible children that are removed when the
@@ -41835,14 +41768,14 @@ declare namespace imports.gi.Gtk {
 		 * @param data User data to be passed to #func, or %NULL
 		 * @param destroy Destroy notifier for #data, or %NULL
 		 */
-		set_destroy_count_func(_func: TreeDestroyCountFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_destroy_count_func(_func: TreeDestroyCountFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the row that is highlighted for feedback.
 		 * If #path is %NULL, an existing highlight is removed.
 		 * @param path The path of the row to highlight, or %NULL
 		 * @param pos Specifies whether to drop before, after or into the row
 		 */
-		set_drag_dest_row(path: TreePath, pos: TreeViewDropPosition): void;
+		set_drag_dest_row(path: TreePath | null, pos: TreeViewDropPosition): void;
 		/**
 		 * If #enable_search is set, then the user can type in text to search through
 		 * the tree interactively (this is sometimes called "typeahead find").
@@ -41867,7 +41800,7 @@ declare namespace imports.gi.Gtk {
 		 * expander column to a hidden column.
 		 * @param column %NULL, or the column to draw the expander arrow at.
 		 */
-		set_expander_column(column: TreeViewColumn): void;
+		set_expander_column(column: TreeViewColumn | null): void;
 		/**
 		 * Enables or disables the fixed height mode of #tree_view.
 		 * Fixed height mode speeds up {@link TreeView} by assuming that all
@@ -41887,7 +41820,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the {@link Adjustment} for the current horizontal aspect.
 		 * @param adjustment The {@link Adjustment} to set, or %NULL
 		 */
-		set_hadjustment(adjustment: Adjustment): void;
+		set_hadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Allow the column title buttons to be clicked.
 		 * @param setting %TRUE if the columns are clickable.
@@ -41928,7 +41861,7 @@ declare namespace imports.gi.Gtk {
 		 * then it will unset the old model.
 		 * @param model The model.
 		 */
-		set_model(model: TreeModel): void;
+		set_model(model: TreeModel | null): void;
 		/**
 		 * This function is a convenience function to allow you to reorder
 		 * models that support the {@link TreeDragSourceIface} and the
@@ -41955,7 +41888,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy destroy notifier for #data, or %NULL
 		 */
-		set_row_separator_func(_func: TreeViewRowSeparatorFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_row_separator_func(_func: TreeViewRowSeparatorFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Enables or disables rubber banding in #tree_view.  If the selection mode
 		 * is #GTK_SELECTION_MULTIPLE, rubber banding will allow the user to select
@@ -42003,7 +41936,7 @@ declare namespace imports.gi.Gtk {
 		 * entry again.
 		 * @param entry the entry the interactive search code of #tree_view should use or %NULL
 		 */
-		set_search_entry(entry: Entry): void;
+		set_search_entry(entry: Entry | null): void;
 		/**
 		 * Sets the compare function for the interactive search capabilities; note
 		 * that somewhat like strcmp() returning 0 for equality
@@ -42012,7 +41945,7 @@ declare namespace imports.gi.Gtk {
 		 * @param search_user_data user data to pass to #search_equal_func, or %NULL
 		 * @param search_destroy Destroy notifier for #search_user_data, or %NULL
 		 */
-		set_search_equal_func(search_equal_func: TreeViewSearchEqualFunc, search_user_data: any, search_destroy: GLib.DestroyNotify): void;
+		set_search_equal_func(search_equal_func: TreeViewSearchEqualFunc, search_user_data: any | null, search_destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the function to use when positioning the search dialog.
 		 * @param _func the function to use to position the search dialog, or %NULL
@@ -42020,7 +41953,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy Destroy notifier for #data, or %NULL
 		 */
-		set_search_position_func(_func: TreeViewSearchPositionFunc, data: any, destroy: GLib.DestroyNotify): void;
+		set_search_position_func(_func: TreeViewSearchPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets whether to draw and enable expanders and indent child rows in
 		 * #tree_view.  When disabled there will be no expanders visible in trees
@@ -42049,7 +41982,7 @@ declare namespace imports.gi.Gtk {
 		 * @param column a {@link TreeViewColumn} or %NULL
 		 * @param cell a {@link CellRenderer} or %NULL
 		 */
-		set_tooltip_cell(tooltip: Tooltip, path: TreePath, column: TreeViewColumn, cell: CellRenderer): void;
+		set_tooltip_cell(tooltip: Tooltip, path: TreePath | null, column: TreeViewColumn | null, cell: CellRenderer | null): void;
 		/**
 		 * If you only plan to have simple (text-only) tooltips on full rows, you
 		 * can use this function to have {@link TreeView} handle these automatically
@@ -42076,7 +42009,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the {@link Adjustment} for the current vertical aspect.
 		 * @param adjustment The {@link Adjustment} to set, or %NULL
 		 */
-		set_vadjustment(adjustment: Adjustment): void;
+		set_vadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Undoes the effect of
 		 * gtk_tree_view_enable_model_drag_dest(). Calling this method sets
@@ -42336,23 +42269,22 @@ declare namespace imports.gi.Gtk {
 		 * cell is not found in the column, #start_pos and #width are not changed and
 		 * %FALSE is returned.
 		 * @param cell_renderer a {@link CellRenderer}
-		 * @param x_offset return location for the horizontal
-		 *            position of #cell within #tree_column, may be %NULL
-		 * @param width return location for the width of #cell,
-		 *         may be %NULL
 		 * @returns %TRUE if #cell belongs to #tree_column.
 		 */
-		cell_get_position(cell_renderer: CellRenderer, x_offset: number, width: number): boolean;
+		cell_get_position(cell_renderer: CellRenderer): boolean;
 		/**
 		 * Obtains the width and height needed to render the column.  This is used
 		 * primarily by the {@link TreeView}.
 		 * @param cell_area The area a cell in the column will be allocated, or %NULL
-		 * @param x_offset location to return x offset of a cell relative to #cell_area, or %NULL
-		 * @param y_offset location to return y offset of a cell relative to #cell_area, or %NULL
-		 * @param width location to return width needed to render a cell, or %NULL
-		 * @param height location to return height needed to render a cell, or %NULL
+		 * @returns location to return x offset of a cell relative to #cell_area, or %NULL
+		 * 
+		 * location to return y offset of a cell relative to #cell_area, or %NULL
+		 * 
+		 * location to return width needed to render a cell, or %NULL
+		 * 
+		 * location to return height needed to render a cell, or %NULL
 		 */
-		cell_get_size(cell_area: Gdk.Rectangle, x_offset: number, y_offset: number, width: number, height: number): void;
+		cell_get_size(cell_area: Gdk.Rectangle | null): [ x_offset: number | null, y_offset: number | null, width: number | null, height: number | null ];
 		/**
 		 * Returns %TRUE if any of the cells packed into the #tree_column are visible.
 		 * For this to be meaningful, you must first initialize the cells with
@@ -42482,7 +42414,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The tree view wherein #column has
 		 *     been inserted if any, %NULL otherwise.
 		 */
-		get_tree_view(): Widget;
+		get_tree_view(): Widget | null;
 		/**
 		 * Returns %TRUE if #tree_column is visible.
 		 * @returns whether the column is visible or not.  If it is visible, then
@@ -42495,7 +42427,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns The {@link Widget} in the column
 		 *     header, or %NULL
 		 */
-		get_widget(): Widget;
+		get_widget(): Widget | null;
 		/**
 		 * Returns the current size of #tree_column in pixels.
 		 * @returns The current width of #tree_column.
@@ -42553,7 +42485,7 @@ declare namespace imports.gi.Gtk {
 		 * @param func_data The user data for #func.
 		 * @param destroy The destroy notification for #func_data
 		 */
-		set_cell_data_func(cell_renderer: CellRenderer, _func: TreeCellDataFunc, func_data: any, destroy: GLib.DestroyNotify): void;
+		set_cell_data_func(cell_renderer: CellRenderer, _func: TreeCellDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the header to be active if #clickable is %TRUE.  When the header is
 		 * active, then it can take keyboard focus, and can be clicked.
@@ -42670,7 +42602,7 @@ declare namespace imports.gi.Gtk {
 		 * header button is set with a {@link Label} set to the title of #tree_column.
 		 * @param widget A child {@link Widget}, or %NULL.
 		 */
-		set_widget(widget: Widget): void;
+		set_widget(widget: Widget | null): void;
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::alignment", callback: (owner: this, ...args: any) => number): number;
@@ -42783,7 +42715,7 @@ declare namespace imports.gi.Gtk {
 		 * @param top if %TRUE, the UI element is added before its siblings, otherwise it
 		 *   is added after its siblings.
 		 */
-		add_ui(merge_id: number, path: string, name: string, action: string, _type: UIManagerItemType, top: boolean): void;
+		add_ui(merge_id: number, path: string, name: string, action: string | null, _type: UIManagerItemType, top: boolean): void;
 		/**
 		 * Parses a file containing a [UI definition][XML-UI] and
 		 * merges it with the current contents of #manager.
@@ -43420,7 +43352,7 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment the {@link Adjustment} to use, or %NULL to create a new adjustment
 		 * @returns the new {@link VScrollbar}
 		 */
-		public static new(adjustment: Adjustment): Widget;
+		public static new(adjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -43492,7 +43424,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the horizontal adjustment of the viewport.
 		 * @param adjustment a {@link Adjustment}.
 		 */
-		set_hadjustment(adjustment: Adjustment): void;
+		set_hadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Sets the shadow type of the viewport.
 		 * @param _type the new shadow type.
@@ -43502,7 +43434,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the vertical adjustment of the viewport.
 		 * @param adjustment a {@link Adjustment}.
 		 */
-		set_vadjustment(adjustment: Adjustment): void;
+		set_vadjustment(adjustment: Adjustment | null): void;
 		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
 
@@ -43545,7 +43477,7 @@ declare namespace imports.gi.Gtk {
 		 * @param vadjustment vertical adjustment
 		 * @returns a new {@link Viewport}
 		 */
-		public static new(hadjustment: Adjustment, vadjustment: Adjustment): Widget;
+		public static new(hadjustment: Adjustment | null, vadjustment: Adjustment | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -43888,14 +43820,16 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Same as gtk_widget_path(), but always uses the name of a widget’s type,
 		 * never uses a custom name set with gtk_widget_set_name().
-		 * @param path_length location to store the length of the
+		 * @returns location to store the length of the
 		 *     class path, or %NULL
-		 * @param path location to store the class path as an
+		 * 
+		 * location to store the class path as an
 		 *     allocated string, or %NULL
-		 * @param path_reversed location to store the reverse
+		 * 
+		 * location to store the reverse
 		 *     class path as an allocated string, or %NULL
 		 */
-		class_path(path_length: number, path: string, path_reversed: string): void;
+		class_path(): [ path_length: number | null, path: string | null, path_reversed: string | null ];
 		/**
 		 * Computes whether a container should give this widget extra space
 		 * when possible. Containers should check this, rather than
@@ -43931,7 +43865,7 @@ declare namespace imports.gi.Gtk {
 		 * @param text text to set on the layout (can be %NULL)
 		 * @returns the new #PangoLayout
 		 */
-		create_pango_layout(text: string): Pango.Layout;
+		create_pango_layout(text: string | null): Pango.Layout;
 		/**
 		 * Destroys a widget.
 		 * 
@@ -43974,9 +43908,8 @@ declare namespace imports.gi.Gtk {
 		 * as user data. Then when the widget is destroyed, the variable will
 		 * be set to %NULL. Useful for example to avoid multiple copies
 		 * of the same dialog.
-		 * @param widget_pointer address of a variable that contains #widget
 		 */
-		destroyed(widget_pointer: Widget): void;
+		destroyed(): void;
 		/**
 		 * Returns %TRUE if #device has been shadowed by a GTK+
 		 * device grab on another widget, so it would stop sending
@@ -43999,7 +43932,7 @@ declare namespace imports.gi.Gtk {
 		 *    or %NULL if none can be obtained.
 		 * @returns the context for this drag
 		 */
-		drag_begin(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event): Gdk.DragContext;
+		drag_begin(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event | null): Gdk.DragContext;
 		/**
 		 * Initiates a drag on the source side. The function only needs to be used
 		 * when the application is starting drags itself, and is not needed when
@@ -44040,7 +43973,7 @@ declare namespace imports.gi.Gtk {
 		 *    the current pointer position
 		 * @returns the context for this drag
 		 */
-		drag_begin_with_coordinates(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event, _x: number, _y: number): Gdk.DragContext;
+		drag_begin_with_coordinates(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event | null, _x: number, _y: number): Gdk.DragContext;
 		/**
 		 * Checks to see if a mouse drag starting at (#start_x, #start_y) and ending
 		 * at (#current_x, #current_y) has passed the GTK+ drag threshold, and thus
@@ -44090,13 +44023,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns first target that the source offers
 		 *     and the dest can accept, or %GDK_NONE
 		 */
-		drag_dest_find_target(context: Gdk.DragContext, target_list: TargetList): Gdk.Atom;
+		drag_dest_find_target(context: Gdk.DragContext, target_list: TargetList | null): Gdk.Atom;
 		/**
 		 * Returns the list of targets this widget can accept from
 		 * drag-and-drop.
 		 * @returns the {@link TargetList}, or %NULL if none
 		 */
-		drag_dest_get_target_list(): TargetList;
+		drag_dest_get_target_list(): TargetList | null;
 		/**
 		 * Returns whether the widget has been configured to always
 		 * emit {@link Widget}::drag-motion signals.
@@ -44152,7 +44085,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_targets the number of entries in #targets
 		 * @param actions a bitmask of possible actions for a drop onto this #widget.
 		 */
-		drag_dest_set(flags: DestDefaults, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction): void;
+		drag_dest_set(flags: DestDefaults, targets: TargetEntry[] | null, n_targets: number, actions: Gdk.DragAction): void;
 		/**
 		 * Sets this widget as a proxy for drops to another window.
 		 * @param proxy_window the window to which to forward drag events
@@ -44169,7 +44102,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_drag_dest_set().
 		 * @param target_list list of droppable targets, or %NULL for none
 		 */
-		drag_dest_set_target_list(target_list: TargetList): void;
+		drag_dest_set_target_list(target_list: TargetList | null): void;
 		/**
 		 * Tells the widget to emit {@link Widget}::drag-motion and
 		 * #GtkWidget::drag-leave events regardless of the targets and the
@@ -44237,7 +44170,7 @@ declare namespace imports.gi.Gtk {
 		 * drag-and-drop.
 		 * @returns the {@link TargetList}, or %NULL if none
 		 */
-		drag_source_get_target_list(): TargetList;
+		drag_source_get_target_list(): TargetList | null;
 		/**
 		 * Sets up a widget so that GTK+ will start a drag operation when the user
 		 * clicks and drags on the widget. The widget must have a window.
@@ -44247,7 +44180,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_targets the number of items in #targets
 		 * @param actions the bitmask of possible actions for a drag from this widget
 		 */
-		drag_source_set(start_button_mask: Gdk.ModifierType, targets: TargetEntry[], n_targets: number, actions: Gdk.DragAction): void;
+		drag_source_set(start_button_mask: Gdk.ModifierType, targets: TargetEntry[] | null, n_targets: number, actions: Gdk.DragAction): void;
 		/**
 		 * Sets the icon that will be used for drags from a particular source
 		 * to #icon. See the docs for {@link IconTheme} for more details.
@@ -44279,7 +44212,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_drag_source_set().
 		 * @param target_list list of draggable targets, or %NULL for none
 		 */
-		drag_source_set_target_list(target_list: TargetList): void;
+		drag_source_set_target_list(target_list: TargetList | null): void;
 		/**
 		 * Undoes the effects of gtk_drag_source_set().
 		 */
@@ -44375,7 +44308,7 @@ declare namespace imports.gi.Gtk {
 		 * @param prefix The “prefix” of the action group.
 		 * @returns A #GActionGroup or %NULL.
 		 */
-		get_action_group(prefix: string): Gio.ActionGroup;
+		get_action_group(prefix: string): Gio.ActionGroup | null;
 		/**
 		 * Returns the baseline that has currently been allocated to #widget.
 		 * This function is intended to be used when implementing handlers
@@ -44402,9 +44335,8 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If a widget is not visible, its allocated size is 0.
 		 * @param allocation a pointer to a {@link Allocation} to copy to
-		 * @param baseline a pointer to an integer to copy to
 		 */
-		get_allocated_size(allocation: Allocation, baseline: number): void;
+		get_allocated_size(allocation: Allocation): void;
 		/**
 		 * Returns the width that has currently been allocated to #widget.
 		 * This function is intended to be used when implementing handlers
@@ -44445,7 +44377,7 @@ declare namespace imports.gi.Gtk {
 		 * @param widget_type ancestor type
 		 * @returns the ancestor widget, or %NULL if not found
 		 */
-		get_ancestor(widget_type: GObject.Type): Widget;
+		get_ancestor(widget_type: GObject.Type): Widget | null;
 		/**
 		 * Determines whether the application intends to draw on the widget in
 		 * an {@link Widget}::draw handler.
@@ -44592,13 +44524,13 @@ declare namespace imports.gi.Gtk {
 		 * Gets the font map that has been set with gtk_widget_set_font_map().
 		 * @returns A #PangoFontMap, or %NULL
 		 */
-		get_font_map(): Pango.FontMap;
+		get_font_map(): Pango.FontMap | null;
 		/**
 		 * Returns the #cairo_font_options_t used for Pango rendering. When not set,
 		 * the defaults font options for the #GdkScreen will be used.
 		 * @returns the #cairo_font_options_t or %NULL if not set
 		 */
-		get_font_options(): cairo.FontOptions;
+		get_font_options(): cairo.FontOptions | null;
 		/**
 		 * Obtains the frame clock for a widget. The frame clock is a global
 		 * “ticker” that can be used to drive animations and repaints.  The
@@ -44624,7 +44556,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GdkFrameClock,
 		 * or %NULL if widget is unrealized
 		 */
-		get_frame_clock(): Gdk.FrameClock;
+		get_frame_clock(): Gdk.FrameClock | null;
 		/**
 		 * Gets the value of the {@link Widget}:halign property.
 		 * 
@@ -44777,13 +44709,13 @@ declare namespace imports.gi.Gtk {
 		 * Returns the parent container of #widget.
 		 * @returns the parent container of #widget, or %NULL
 		 */
-		get_parent(): Widget;
+		get_parent(): Widget | null;
 		/**
 		 * Gets #widget’s parent window, or %NULL if it does not have one.
 		 * @returns the parent window of #widget, or %NULL
 		 * if it does not have a parent window.
 		 */
-		get_parent_window(): Gdk.Window;
+		get_parent_window(): Gdk.Window | null;
 		/**
 		 * Returns the {@link WidgetPath} representing #widget, if the widget
 		 * is not connected to a toplevel widget, a partial path will be
@@ -44797,10 +44729,11 @@ declare namespace imports.gi.Gtk {
 		 * defined as #widget->window coordinates for widgets that return %TRUE for
 		 * gtk_widget_get_has_window(); and are relative to #widget->allocation.x,
 		 * #widget->allocation.y otherwise.
-		 * @param _x return location for the X coordinate, or %NULL
-		 * @param _y return location for the Y coordinate, or %NULL
+		 * @returns return location for the X coordinate, or %NULL
+		 * 
+		 * return location for the Y coordinate, or %NULL
 		 */
-		get_pointer(_x: number, _y: number): void;
+		get_pointer(): [ x: number | null, y: number | null ];
 		/**
 		 * Retrieves a widget’s initial minimum and natural height.
 		 * 
@@ -44811,10 +44744,11 @@ declare namespace imports.gi.Gtk {
 		 * {@link SizeGroups} that have been applied. That is, the returned request
 		 * is the one that should be used for layout, not necessarily the one
 		 * returned by the widget itself.
-		 * @param minimum_height location to store the minimum height, or %NULL
-		 * @param natural_height location to store the natural height, or %NULL
+		 * @returns location to store the minimum height, or %NULL
+		 * 
+		 * location to store the natural height, or %NULL
 		 */
-		get_preferred_height(minimum_height: number, natural_height: number): void;
+		get_preferred_height(): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Retrieves a widget’s minimum and natural height and the corresponding baselines if it would be given
 		 * the specified #width, or the default height if #width is -1. The baselines may be -1 which means
@@ -44826,12 +44760,15 @@ declare namespace imports.gi.Gtk {
 		 * is the one that should be used for layout, not necessarily the one
 		 * returned by the widget itself.
 		 * @param width the width which is available for allocation, or -1 if none
-		 * @param minimum_height location for storing the minimum height, or %NULL
-		 * @param natural_height location for storing the natural height, or %NULL
-		 * @param minimum_baseline location for storing the baseline for the minimum height, or %NULL
-		 * @param natural_baseline location for storing the baseline for the natural height, or %NULL
+		 * @returns location for storing the minimum height, or %NULL
+		 * 
+		 * location for storing the natural height, or %NULL
+		 * 
+		 * location for storing the baseline for the minimum height, or %NULL
+		 * 
+		 * location for storing the baseline for the natural height, or %NULL
 		 */
-		get_preferred_height_and_baseline_for_width(width: number, minimum_height: number, natural_height: number, minimum_baseline: number, natural_baseline: number): void;
+		get_preferred_height_and_baseline_for_width(width: number): [ minimum_height: number | null, natural_height: number | null, minimum_baseline: number | null, natural_baseline: number | null ];
 		/**
 		 * Retrieves a widget’s minimum and natural height if it would be given
 		 * the specified #width.
@@ -44842,10 +44779,11 @@ declare namespace imports.gi.Gtk {
 		 * is the one that should be used for layout, not necessarily the one
 		 * returned by the widget itself.
 		 * @param width the width which is available for allocation
-		 * @param minimum_height location for storing the minimum height, or %NULL
-		 * @param natural_height location for storing the natural height, or %NULL
+		 * @returns location for storing the minimum height, or %NULL
+		 * 
+		 * location for storing the natural height, or %NULL
 		 */
-		get_preferred_height_for_width(width: number, minimum_height: number, natural_height: number): void;
+		get_preferred_height_for_width(width: number): [ minimum_height: number | null, natural_height: number | null ];
 		/**
 		 * Retrieves the minimum and natural size of a widget, taking
 		 * into account the widget’s preference for height-for-width management.
@@ -44865,7 +44803,7 @@ declare namespace imports.gi.Gtk {
 		 * @param minimum_size location for storing the minimum size, or %NULL
 		 * @param natural_size location for storing the natural size, or %NULL
 		 */
-		get_preferred_size(minimum_size: Requisition, natural_size: Requisition): void;
+		get_preferred_size(minimum_size: Requisition | null, natural_size: Requisition | null): void;
 		/**
 		 * Retrieves a widget’s initial minimum and natural width.
 		 * 
@@ -44876,10 +44814,11 @@ declare namespace imports.gi.Gtk {
 		 * {@link SizeGroups} that have been applied. That is, the returned request
 		 * is the one that should be used for layout, not necessarily the one
 		 * returned by the widget itself.
-		 * @param minimum_width location to store the minimum width, or %NULL
-		 * @param natural_width location to store the natural width, or %NULL
+		 * @returns location to store the minimum width, or %NULL
+		 * 
+		 * location to store the natural width, or %NULL
 		 */
-		get_preferred_width(minimum_width: number, natural_width: number): void;
+		get_preferred_width(): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Retrieves a widget’s minimum and natural width if it would be given
 		 * the specified #height.
@@ -44890,10 +44829,11 @@ declare namespace imports.gi.Gtk {
 		 * is the one that should be used for layout, not necessarily the one
 		 * returned by the widget itself.
 		 * @param height the height which is available for allocation
-		 * @param minimum_width location for storing the minimum width, or %NULL
-		 * @param natural_width location for storing the natural width, or %NULL
+		 * @returns location for storing the minimum width, or %NULL
+		 * 
+		 * location for storing the natural width, or %NULL
 		 */
-		get_preferred_width_for_height(height: number, minimum_width: number, natural_width: number): void;
+		get_preferred_width_for_height(height: number): [ minimum_width: number | null, natural_width: number | null ];
 		/**
 		 * Determines whether #widget is realized.
 		 * @returns %TRUE if #widget is realized, %FALSE otherwise
@@ -44991,10 +44931,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_set_size_request(). To get the size a widget will
 		 * actually request, call gtk_widget_get_preferred_size() instead of
 		 * this function.
-		 * @param width return location for width, or %NULL
-		 * @param height return location for height, or %NULL
+		 * @returns return location for width, or %NULL
+		 * 
+		 * return location for height, or %NULL
 		 */
-		get_size_request(width: number, height: number): void;
+		get_size_request(): [ width: number | null, height: number | null ];
 		/**
 		 * Returns the widget’s state. See gtk_widget_set_state().
 		 * @returns the state of #widget.
@@ -45050,13 +44991,13 @@ declare namespace imports.gi.Gtk {
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_markup(): string;
+		get_tooltip_markup(): string | null;
 		/**
 		 * Gets the contents of the tooltip for #widget.
 		 * @returns the tooltip text, or %NULL. You should free the
 		 *   returned string with g_free() when done.
 		 */
-		get_tooltip_text(): string;
+		get_tooltip_text(): string | null;
 		/**
 		 * Returns the {@link Window} of the current tooltip. This can be the
 		 * GtkWindow created by default, or the custom tooltip window set
@@ -45154,7 +45095,7 @@ declare namespace imports.gi.Gtk {
 		 * Returns the widget’s window if it is realized, %NULL otherwise
 		 * @returns #widget’s window.
 		 */
-		// get_window(): Gdk.Window;
+		// get_window(): Gdk.Window | null;
 		/**
 		 * Makes #widget the current grabbed widget.
 		 * 
@@ -45297,7 +45238,7 @@ declare namespace imports.gi.Gtk {
 		 * gdk_window_input_shape_combine_region() for more information.
 		 * @param region shape to be added, or %NULL to remove an existing shape
 		 */
-		input_shape_combine_region(region: cairo.Region): void;
+		input_shape_combine_region(region: cairo.Region | null): void;
 		/**
 		 * Inserts #group into #widget. Children of #widget that implement
 		 * {@link Actionable} can then be associated with actions in #group by
@@ -45309,7 +45250,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name the prefix for actions in #group
 		 * @param group a #GActionGroup, or %NULL
 		 */
-		insert_action_group(name: string, group: Gio.ActionGroup): void;
+		insert_action_group(name: string, group: Gio.ActionGroup | null): void;
 		/**
 		 * Computes the intersection of a #widget’s area and #area, storing
 		 * the intersection in #intersection, and returns %TRUE if there was
@@ -45320,7 +45261,7 @@ declare namespace imports.gi.Gtk {
 		 *   intersection of #widget and #area
 		 * @returns %TRUE if there was an intersection
 		 */
-		intersect(area: Gdk.Rectangle, intersection: Gdk.Rectangle): boolean;
+		intersect(area: Gdk.Rectangle, intersection: Gdk.Rectangle | null): boolean;
 		/**
 		 * Determines whether #widget is somewhere inside #ancestor, possibly with
 		 * intermediate containers.
@@ -45479,7 +45420,7 @@ declare namespace imports.gi.Gtk {
 		 *     be allocated), or %NULL to undo the effect of previous
 		 *     calls to of gtk_widget_modify_base().
 		 */
-		modify_base(state: StateType, color: Gdk.Color): void;
+		modify_base(state: StateType, color: Gdk.Color | null): void;
 		/**
 		 * Sets the background color for a widget in a particular state.
 		 * 
@@ -45500,7 +45441,7 @@ declare namespace imports.gi.Gtk {
 		 *     to be allocated), or %NULL to undo the effect of previous
 		 *     calls to of gtk_widget_modify_bg().
 		 */
-		modify_bg(state: StateType, color: Gdk.Color): void;
+		modify_bg(state: StateType, color: Gdk.Color | null): void;
 		/**
 		 * Sets the cursor color to use in a widget, overriding the {@link Widget}
 		 * cursor-color and secondary-cursor-color
@@ -45515,7 +45456,7 @@ declare namespace imports.gi.Gtk {
 		 *     not need to be allocated), or %NULL to undo the effect of
 		 *     previous calls to of gtk_widget_modify_cursor().
 		 */
-		modify_cursor(primary: Gdk.Color, secondary: Gdk.Color): void;
+		modify_cursor(primary: Gdk.Color | null, secondary: Gdk.Color | null): void;
 		/**
 		 * Sets the foreground color for a widget in a particular state.
 		 * 
@@ -45526,7 +45467,7 @@ declare namespace imports.gi.Gtk {
 		 *     or %NULL to undo the effect of previous calls to
 		 *     of gtk_widget_modify_fg().
 		 */
-		modify_fg(state: StateType, color: Gdk.Color): void;
+		modify_fg(state: StateType, color: Gdk.Color | null): void;
 		/**
 		 * Sets the font to use for a widget.
 		 * 
@@ -45535,7 +45476,7 @@ declare namespace imports.gi.Gtk {
 		 * @param font_desc the font description to use, or %NULL
 		 *     to undo the effect of previous calls to gtk_widget_modify_font()
 		 */
-		modify_font(font_desc: Pango.FontDescription): void;
+		modify_font(font_desc: Pango.FontDescription | null): void;
 		/**
 		 * Modifies style values on the widget.
 		 * 
@@ -45571,7 +45512,7 @@ declare namespace imports.gi.Gtk {
 		 *     be allocated), or %NULL to undo the effect of previous
 		 *     calls to of gtk_widget_modify_text().
 		 */
-		modify_text(state: StateType, color: Gdk.Color): void;
+		modify_text(state: StateType, color: Gdk.Color | null): void;
 		/**
 		 * Sets the background color to use for a widget.
 		 * 
@@ -45581,7 +45522,7 @@ declare namespace imports.gi.Gtk {
 		 * @param color the color to assign, or %NULL to undo the effect
 		 *     of previous calls to gtk_widget_override_background_color()
 		 */
-		override_background_color(state: StateFlags, color: Gdk.RGBA): void;
+		override_background_color(state: StateFlags, color: Gdk.RGBA | null): void;
 		/**
 		 * Sets the color to use for a widget.
 		 * 
@@ -45612,7 +45553,7 @@ declare namespace imports.gi.Gtk {
 		 * @param color the color to assign, or %NULL to undo the effect
 		 *     of previous calls to gtk_widget_override_color()
 		 */
-		override_color(state: StateFlags, color: Gdk.RGBA): void;
+		override_color(state: StateFlags, color: Gdk.RGBA | null): void;
 		/**
 		 * Sets the cursor color to use in a widget, overriding the
 		 * cursor-color and secondary-cursor-color
@@ -45628,14 +45569,14 @@ declare namespace imports.gi.Gtk {
 		 *     need to be allocated), or %NULL to undo the effect of previous
 		 *     calls to of gtk_widget_override_cursor().
 		 */
-		override_cursor(cursor: Gdk.RGBA, secondary_cursor: Gdk.RGBA): void;
+		override_cursor(cursor: Gdk.RGBA | null, secondary_cursor: Gdk.RGBA | null): void;
 		/**
 		 * Sets the font to use for a widget. All other style values are
 		 * left untouched. See gtk_widget_override_color().
 		 * @param font_desc the font description to use, or %NULL to undo
 		 *     the effect of previous calls to gtk_widget_override_font()
 		 */
-		override_font(font_desc: Pango.FontDescription): void;
+		override_font(font_desc: Pango.FontDescription | null): void;
 		/**
 		 * Sets a symbolic color for a widget.
 		 * 
@@ -45647,7 +45588,7 @@ declare namespace imports.gi.Gtk {
 		 *     to be allocated), or %NULL to undo the effect of previous
 		 *     calls to gtk_widget_override_symbolic_color()
 		 */
-		override_symbolic_color(name: string, color: Gdk.RGBA): void;
+		override_symbolic_color(name: string, color: Gdk.RGBA | null): void;
 		/**
 		 * Obtains the full path to #widget. The path is simply the name of a
 		 * widget and all its parents in the container hierarchy, separated by
@@ -45661,14 +45602,16 @@ declare namespace imports.gi.Gtk {
 		 * file. #path_reversed_p fills in the path in reverse order,
 		 * i.e. starting with #widget’s name instead of starting with the name
 		 * of #widget’s outermost ancestor.
-		 * @param path_length location to store length of the path,
+		 * @returns location to store length of the path,
 		 *     or %NULL
-		 * @param path location to store allocated path string,
+		 * 
+		 * location to store allocated path string,
 		 *     or %NULL
-		 * @param path_reversed location to store allocated reverse
+		 * 
+		 * location to store allocated reverse
 		 *     path string, or %NULL
 		 */
-		path(path_length: number, path: string, path_reversed: string): void;
+		path(): [ path_length: number | null, path: string | null, path_reversed: string | null ];
 		/**
 		 * This function is only for use in widget implementations.
 		 * 
@@ -45832,7 +45775,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new pixbuf, or %NULL if the
 		 *     stock ID wasn’t known
 		 */
-		render_icon(stock_id: string, size: number, detail: string): GdkPixbuf.Pixbuf;
+		render_icon(stock_id: string, size: number, detail: string | null): GdkPixbuf.Pixbuf | null;
 		/**
 		 * A convenience function that uses the theme engine and style
 		 * settings for #widget to look up #stock_id and render it to
@@ -45850,7 +45793,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new pixbuf, or %NULL if the
 		 *     stock ID wasn’t known
 		 */
-		render_icon_pixbuf(stock_id: string, size: number): GdkPixbuf.Pixbuf;
+		render_icon_pixbuf(stock_id: string, size: number): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Moves a widget from one {@link Container} to another, handling reference
 		 * count issues to avoid destroying the widget.
@@ -45942,7 +45885,7 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_path path used to look up the accelerator
 		 * @param accel_group a {@link AccelGroup}.
 		 */
-		set_accel_path(accel_path: string, accel_group: AccelGroup): void;
+		set_accel_path(accel_path: string | null, accel_group: AccelGroup | null): void;
 		/**
 		 * Sets the widget’s allocation.  This should not be used
 		 * directly, but from within a widget’s size_allocate method.
@@ -46127,14 +46070,14 @@ declare namespace imports.gi.Gtk {
 		 * @param font_map a #PangoFontMap, or %NULL to unset any previously
 		 *     set font map
 		 */
-		set_font_map(font_map: Pango.FontMap): void;
+		set_font_map(font_map: Pango.FontMap | null): void;
 		/**
 		 * Sets the #cairo_font_options_t used for Pango rendering in this widget.
 		 * When not set, the default font options for the #GdkScreen will be used.
 		 * @param options a #cairo_font_options_t, or %NULL to unset any
 		 *   previously set default font options.
 		 */
-		set_font_options(options: cairo.FontOptions): void;
+		set_font_options(options: cairo.FontOptions | null): void;
 		/**
 		 * Sets the horizontal alignment of #widget.
 		 * See the {@link Widget}:halign property.
@@ -46431,7 +46374,7 @@ declare namespace imports.gi.Gtk {
 		 *     of a previous call to gtk_widget_set_style() and go back to
 		 *     the default style
 		 */
-		// set_style(style: Style): void;
+		// set_style(style: Style | null): void;
 		/**
 		 * Enables or disables multiple pointer awareness. If this setting is %TRUE,
 		 * #widget will start receiving multiple, per device enter/leave events. Note
@@ -46451,7 +46394,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_tooltip_set_markup().
 		 * @param markup the contents of the tooltip for #widget, or %NULL
 		 */
-		set_tooltip_markup(markup: string): void;
+		set_tooltip_markup(markup: string | null): void;
 		/**
 		 * Sets #text as the contents of the tooltip. This function will take
 		 * care of setting {@link Widget}:has-tooltip to %TRUE and of the default
@@ -46460,7 +46403,7 @@ declare namespace imports.gi.Gtk {
 		 * See also the #GtkWidget:tooltip-text property and gtk_tooltip_set_text().
 		 * @param text the contents of the tooltip for #widget
 		 */
-		set_tooltip_text(text: string): void;
+		set_tooltip_text(text: string | null): void;
 		/**
 		 * Replaces the default window used for displaying
 		 * tooltips with #custom_window. GTK+ will take care of showing and
@@ -46469,7 +46412,7 @@ declare namespace imports.gi.Gtk {
 		 * tooltip window will be used.
 		 * @param custom_window a {@link Window}, or %NULL
 		 */
-		set_tooltip_window(custom_window: Window): void;
+		set_tooltip_window(custom_window: Window | null): void;
 		/**
 		 * Sets the vertical alignment of #widget.
 		 * See the {@link Widget}:valign property.
@@ -46513,7 +46456,7 @@ declare namespace imports.gi.Gtk {
 		 * so you should call this function before #widget is realized.
 		 * @param visual visual to be used or %NULL to unset a previous one
 		 */
-		set_visual(visual: Gdk.Visual): void;
+		set_visual(visual: Gdk.Visual | null): void;
 		/**
 		 * Sets a widget’s window. This function should only be used in a
 		 * widget’s {@link Widget}::realize implementation. The %window passed is
@@ -46535,7 +46478,7 @@ declare namespace imports.gi.Gtk {
 		 * for more information.
 		 * @param region shape to be added, or %NULL to remove an existing shape
 		 */
-		shape_combine_region(region: cairo.Region): void;
+		shape_combine_region(region: cairo.Region | null): void;
 		/**
 		 * Flags a widget to be displayed. Any widget that isn’t shown will
 		 * not appear on the screen. If you want to show all the widgets in a
@@ -46660,13 +46603,11 @@ declare namespace imports.gi.Gtk {
 		 * @param dest_widget a {@link Widget}
 		 * @param src_x X position relative to #src_widget
 		 * @param src_y Y position relative to #src_widget
-		 * @param dest_x location to store X position relative to #dest_widget
-		 * @param dest_y location to store Y position relative to #dest_widget
 		 * @returns %FALSE if either widget was not realized, or there
 		 *   was no common ancestor. In this case, nothing is stored in
 		 *   *#dest_x and *#dest_y. Otherwise %TRUE.
 		 */
-		translate_coordinates(dest_widget: Widget, src_x: number, src_y: number, dest_x: number, dest_y: number): boolean;
+		translate_coordinates(dest_widget: Widget, src_x: number, src_y: number): boolean;
 		/**
 		 * Triggers a tooltip query on the display where the toplevel of #widget
 		 * is located. See gtk_tooltip_trigger_tooltip_query() for more
@@ -47102,7 +47043,7 @@ declare namespace imports.gi.Gtk {
 		 * ancestor is a {@link Window}. This signal is emitted when
 		 * a widget changes from un-anchored to anchored or vice-versa.
 		 */
-		connect(signal: "hierarchy-changed", callback: (owner: this, previous_toplevel: Widget) => void): number;
+		connect(signal: "hierarchy-changed", callback: (owner: this, previous_toplevel: Widget | null) => void): number;
 		/**
 		 * The ::key-press-event signal is emitted when a key is pressed. The signal
 		 * emission will reoccur at the key-repeat rate when the key is kept pressed.
@@ -47178,7 +47119,7 @@ declare namespace imports.gi.Gtk {
 		 * The ::parent-set signal is emitted when a new parent
 		 * has been set on a widget.
 		 */
-		connect(signal: "parent-set", callback: (owner: this, old_parent: Widget) => void): number;
+		connect(signal: "parent-set", callback: (owner: this, old_parent: Widget | null) => void): number;
 		/**
 		 * This signal gets emitted whenever a widget should pop up a context
 		 * menu. This usually happens through the standard key binding mechanism;
@@ -47236,7 +47177,7 @@ declare namespace imports.gi.Gtk {
 		 * The ::screen-changed signal gets emitted when the
 		 * screen of a widget has changed.
 		 */
-		connect(signal: "screen-changed", callback: (owner: this, previous_screen: Gdk.Screen) => void): number;
+		connect(signal: "screen-changed", callback: (owner: this, previous_screen: Gdk.Screen | null) => void): number;
 		/**
 		 * The ::scroll-event signal is emitted when a button in the 4 to 7
 		 * range is pressed. Wheel mice are usually configured to generate
@@ -47288,7 +47229,7 @@ declare namespace imports.gi.Gtk {
 		 * {@link Style}. To track changes to the #GtkStyleContext associated
 		 * with a widget, use the #GtkWidget::style-updated signal.
 		 */
-		connect(signal: "style-set", callback: (owner: this, previous_style: Style) => void): number;
+		connect(signal: "style-set", callback: (owner: this, previous_style: Style | null) => void): number;
 		/**
 		 * The ::style-updated signal is a convenience signal that is emitted when the
 		 * {@link StyleContext}::changed signal is emitted on the #widget's associated
@@ -48063,14 +48004,14 @@ declare namespace imports.gi.Gtk {
 		 * Gets the {@link Application} associated with the window (if any).
 		 * @returns a {@link Application}, or %NULL
 		 */
-		get_application(): Application;
+		get_application(): Application | null;
 		/**
 		 * Fetches the attach widget for this window. See
 		 * gtk_window_set_attached_to().
 		 * @returns the widget where the window
 		 * is attached, or %NULL if the window is not attached to any widget.
 		 */
-		get_attached_to(): Widget;
+		get_attached_to(): Widget | null;
 		/**
 		 * Returns whether the window has been set to have decorations
 		 * such as a title bar via gtk_window_set_decorated().
@@ -48082,17 +48023,18 @@ declare namespace imports.gi.Gtk {
 		 * height indicates that a default size has not been explicitly set
 		 * for that dimension, so the “natural” size of the window will be
 		 * used.
-		 * @param width location to store the default width, or %NULL
-		 * @param height location to store the default height, or %NULL
+		 * @returns location to store the default width, or %NULL
+		 * 
+		 * location to store the default height, or %NULL
 		 */
-		get_default_size(width: number, height: number): void;
+		get_default_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Returns the default widget for #window. See
 		 * gtk_window_set_default() for more details.
 		 * @returns the default widget, or %NULL
 		 * if there is none.
 		 */
-		get_default_widget(): Widget;
+		get_default_widget(): Widget | null;
 		/**
 		 * Returns whether the window has been set to have a close button
 		 * via gtk_window_set_deletable().
@@ -48114,7 +48056,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the currently focused widget,
 		 * or %NULL if there is none.
 		 */
-		get_focus(): Widget;
+		get_focus(): Widget | null;
 		/**
 		 * Gets the value set by gtk_window_set_focus_on_map().
 		 * @returns %TRUE if window should receive the input focus when
@@ -48157,7 +48099,7 @@ declare namespace imports.gi.Gtk {
 		 * the icon list).
 		 * @returns icon for window or %NULL if none
 		 */
-		get_icon(): GdkPixbuf.Pixbuf;
+		get_icon(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves the list of icons set by gtk_window_set_icon_list().
 		 * The list is copied, but the reference count on each
@@ -48171,7 +48113,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the icon name or %NULL if the window has
 		 * no themed icon
 		 */
-		get_icon_name(): string;
+		get_icon_name(): string | null;
 		/**
 		 * Returns the mnemonic modifier for this window. See
 		 * gtk_window_set_mnemonic_modifier().
@@ -48234,12 +48176,13 @@ declare namespace imports.gi.Gtk {
 		 * system and the window manager state to effectively do so. The
 		 * appropriate way to implement saving the window position is to
 		 * use a platform-specific protocol, wherever that is available.
-		 * @param root_x return location for X coordinate of
+		 * @returns return location for X coordinate of
 		 *     gravity-determined reference point, or %NULL
-		 * @param root_y return location for Y coordinate of
+		 * 
+		 * return location for Y coordinate of
 		 *     gravity-determined reference point, or %NULL
 		 */
-		get_position(root_x: number, root_y: number): void;
+		get_position(): [ root_x: number | null, root_y: number | null ];
 		/**
 		 * Gets the value set by gtk_window_set_resizable().
 		 * @returns %TRUE if the user can resize the window
@@ -48259,7 +48202,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the role of the window if set, or %NULL. The
 		 * returned is owned by the widget and must not be modified or freed.
 		 */
-		get_role(): string;
+		get_role(): string | null;
 		/**
 		 * Returns the #GdkScreen associated with #window.
 		 * @returns a #GdkScreen.
@@ -48338,10 +48281,11 @@ declare namespace imports.gi.Gtk {
 		 * knowledge. Additionally, positioning windows in global screen coordinates
 		 * may not be allowed by the windowing system. For more information,
 		 * see: gtk_window_set_position().
-		 * @param width return location for width, or %NULL
-		 * @param height return location for height, or %NULL
+		 * @returns return location for width, or %NULL
+		 * 
+		 * return location for height, or %NULL
 		 */
-		get_size(width: number, height: number): void;
+		get_size(): [ width: number | null, height: number | null ];
 		/**
 		 * Gets the value set by gtk_window_set_skip_pager_hint().
 		 * @returns %TRUE if window shouldn’t be in pager
@@ -48358,20 +48302,20 @@ declare namespace imports.gi.Gtk {
 		 * been set explicitly. The returned string is owned by the widget
 		 * and must not be modified or freed.
 		 */
-		get_title(): string;
+		get_title(): string | null;
 		/**
 		 * Returns the custom titlebar that has been set with
 		 * gtk_window_set_titlebar().
 		 * @returns the custom titlebar, or %NULL
 		 */
-		get_titlebar(): Widget;
+		get_titlebar(): Widget | null;
 		/**
 		 * Fetches the transient parent for this window. See
 		 * gtk_window_set_transient_for().
 		 * @returns the transient parent for this
 		 * window, or %NULL if no transient parent has been set.
 		 */
-		get_transient_for(): Window;
+		get_transient_for(): Window | null;
 		/**
 		 * Gets the type hint for this window. See gtk_window_set_type_hint().
 		 * @returns the type hint for #window.
@@ -48703,7 +48647,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_application_add_window() on the old/new applications as relevant.
 		 * @param application a {@link Application}, or %NULL to unset
 		 */
-		set_application(application: Application): void;
+		set_application(application: Application | null): void;
 		/**
 		 * Marks #window as attached to #attach_widget. This creates a logical binding
 		 * between the window and the widget it belongs to, which is used by GTK+ to
@@ -48721,7 +48665,7 @@ declare namespace imports.gi.Gtk {
 		 * Passing %NULL for #attach_widget detaches the window.
 		 * @param attach_widget a {@link Widget}, or %NULL
 		 */
-		set_attached_to(attach_widget: Widget): void;
+		set_attached_to(attach_widget: Widget | null): void;
 		/**
 		 * By default, windows are decorated with a title bar, resize
 		 * controls, etc.  Some [window managers][gtk-X11-arch]
@@ -48748,7 +48692,7 @@ declare namespace imports.gi.Gtk {
 		 * @param default_widget widget to be the default, or %NULL
 		 *     to unset the default widget for the toplevel
 		 */
-		set_default(default_widget: Widget): void;
+		set_default(default_widget: Widget | null): void;
 		/**
 		 * Like gtk_window_set_default_size(), but #width and #height are interpreted
 		 * in terms of the base size and increment set with
@@ -48826,7 +48770,7 @@ declare namespace imports.gi.Gtk {
 		 * @param focus widget to be the new focus widget, or %NULL to unset
 		 *   any focus widget for the toplevel window.
 		 */
-		set_focus(focus: Widget): void;
+		set_focus(focus: Widget | null): void;
 		/**
 		 * Windows may set a hint asking the desktop environment not to receive
 		 * the input focus when the window is mapped.  This function sets this
@@ -48850,7 +48794,7 @@ declare namespace imports.gi.Gtk {
 		 * @param geometry struct containing geometry information or %NULL
 		 * @param geom_mask mask indicating which struct fields should be paid attention to
 		 */
-		set_geometry_hints(geometry_widget: Widget, geometry: Gdk.Geometry, geom_mask: Gdk.WindowHints): void;
+		set_geometry_hints(geometry_widget: Widget | null, geometry: Gdk.Geometry | null, geom_mask: Gdk.WindowHints): void;
 		/**
 		 * Window gravity defines the meaning of coordinates passed to
 		 * gtk_window_move(). See gtk_window_move() and #GdkGravity for
@@ -48918,7 +48862,7 @@ declare namespace imports.gi.Gtk {
 		 * for all windows in your application in one go.
 		 * @param icon icon image, or %NULL
 		 */
-		set_icon(icon: GdkPixbuf.Pixbuf): void;
+		set_icon(icon: GdkPixbuf.Pixbuf | null): void;
 		/**
 		 * Sets the icon for #window.
 		 * Warns on failure if #err is %NULL.
@@ -48967,7 +48911,7 @@ declare namespace imports.gi.Gtk {
 		 * property which is mentioned in the ICCCM.
 		 * @param name the name of the themed icon
 		 */
-		set_icon_name(name: string): void;
+		set_icon_name(name: string | null): void;
 		/**
 		 * Asks to keep #window above, so that it stays on top. Note that
 		 * you shouldn’t assume the window is definitely above afterward,
@@ -49140,7 +49084,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_widget_show().
 		 * @param titlebar the widget to use as titlebar
 		 */
-		set_titlebar(titlebar: Widget): void;
+		set_titlebar(titlebar: Widget | null): void;
 		/**
 		 * Dialog windows should be set transient for the main application
 		 * window they were spawned from. This allows
@@ -49162,7 +49106,7 @@ declare namespace imports.gi.Gtk {
 		 * much as the window manager would have done on X.
 		 * @param parent parent window, or %NULL
 		 */
-		set_transient_for(parent: Window): void;
+		set_transient_for(parent: Window | null): void;
 		/**
 		 * By setting the type hint for the window, you allow the window
 		 * manager to decorate and handle the window in a way which is
@@ -49280,7 +49224,7 @@ declare namespace imports.gi.Gtk {
 		 * This signal is emitted whenever the currently focused widget in
 		 * this window changes.
 		 */
-		connect(signal: "set-focus", callback: (owner: this, widget: Widget) => void): number;
+		connect(signal: "set-focus", callback: (owner: this, widget: Widget | null) => void): number;
 
 		connect(signal: "notify::accept_focus", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::application", callback: (owner: this, ...args: any) => number): number;
@@ -49522,7 +49466,7 @@ declare namespace imports.gi.Gtk {
 		 * @param device a #GdkDevice
 		 * @returns The grab widget, or %NULL
 		 */
-		get_current_device_grab(device: Gdk.Device): Widget;
+		get_current_device_grab(device: Gdk.Device): Widget | null;
 		/**
 		 * Gets the current grab widget of the given group,
 		 * see gtk_grab_add().
@@ -49767,10 +49711,10 @@ declare namespace imports.gi.Gtk {
 	class ActionableInterface {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
-		public get_action_name: {(actionable: Actionable): string;};
-		public set_action_name: {(actionable: Actionable, action_name: string): void;};
+		public get_action_name: {(actionable: Actionable): string | null;};
+		public set_action_name: {(actionable: Actionable, action_name: string | null): void;};
 		public get_action_target_value: {(actionable: Actionable): GLib.Variant;};
-		public set_action_target_value: {(actionable: Actionable, target_value: GLib.Variant): void;};
+		public set_action_target_value: {(actionable: Actionable, target_value: GLib.Variant | null): void;};
 	}
 
 	/**
@@ -49781,7 +49725,7 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
 		public update: {(activatable: Activatable, action: Action, property_name: string): void;};
-		public sync_action_properties: {(activatable: Activatable, action: Action): void;};
+		public sync_action_properties: {(activatable: Activatable, action: Action | null): void;};
 	}
 
 	interface AdjustmentClass {}
@@ -50173,12 +50117,12 @@ declare namespace imports.gi.Gtk {
 		public readonly g_iface: GObject.TypeInterface;
 		public set_name: {(buildable: Buildable, name: string): void;};
 		public get_name: {(buildable: Buildable): string;};
-		public add_child: {(buildable: Buildable, builder: Builder, child: GObject.Object, _type: string): void;};
+		public add_child: {(buildable: Buildable, builder: Builder, child: GObject.Object, _type: string | null): void;};
 		public set_buildable_property: {(buildable: Buildable, builder: Builder, name: string, value: GObject.Value): void;};
 		public construct_child: {(buildable: Buildable, builder: Builder, name: string): GObject.Object;};
-		public custom_tag_start: {(buildable: Buildable, builder: Builder, child: GObject.Object, tagname: string, parser: GLib.MarkupParser, data: any): boolean;};
-		public custom_tag_end: {(buildable: Buildable, builder: Builder, child: GObject.Object, tagname: string, data: any): void;};
-		public custom_finished: {(buildable: Buildable, builder: Builder, child: GObject.Object, tagname: string, data: any): void;};
+		public custom_tag_start: {(buildable: Buildable, builder: Builder, child: GObject.Object | null, tagname: string, parser: GLib.MarkupParser): boolean;};
+		public custom_tag_end: {(buildable: Buildable, builder: Builder, child: GObject.Object | null, tagname: string, data: any | null): void;};
+		public custom_finished: {(buildable: Buildable, builder: Builder, child: GObject.Object | null, tagname: string, data: any | null): void;};
 		public parser_finished: {(buildable: Buildable, builder: Builder): void;};
 		public get_internal_child: {(buildable: Buildable, builder: Builder, childname: string): GObject.Object;};
 	}
@@ -50276,7 +50220,7 @@ declare namespace imports.gi.Gtk {
 	interface CellAccessibleParentIface {}
 	class CellAccessibleParentIface {
 		public constructor();
-		public get_cell_extents: {(parent: CellAccessibleParent, cell: CellAccessible, _x: number, _y: number, width: number, height: number, coord_type: Atk.CoordType): void;};
+		public get_cell_extents: {(parent: CellAccessibleParent, cell: CellAccessible, coord_type: Atk.CoordType): [ x: number, y: number, width: number, height: number ];};
 		public get_cell_area: {(parent: CellAccessibleParent, cell: CellAccessible, cell_rect: Gdk.Rectangle): void;};
 		public grab_focus: {(parent: CellAccessibleParent, cell: CellAccessible): boolean;};
 		public get_child_index: {(parent: CellAccessibleParent, cell: CellAccessible): number;};
@@ -50285,7 +50229,7 @@ declare namespace imports.gi.Gtk {
 		public activate: {(parent: CellAccessibleParent, cell: CellAccessible): void;};
 		public edit: {(parent: CellAccessibleParent, cell: CellAccessible): void;};
 		public update_relationset: {(parent: CellAccessibleParent, cell: CellAccessible, relationset: Atk.RelationSet): void;};
-		public get_cell_position: {(parent: CellAccessibleParent, cell: CellAccessible, _row: number, column: number): void;};
+		public get_cell_position: {(parent: CellAccessibleParent, cell: CellAccessible): [ row: number, column: number ];};
 		public get_column_header_cells: {(parent: CellAccessibleParent, cell: CellAccessible): Atk.Object[];};
 		public get_row_header_cells: {(parent: CellAccessibleParent, cell: CellAccessible): Atk.Object[];};
 	}
@@ -50314,18 +50258,18 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public add: {(area: CellArea, renderer: CellRenderer): void;};
 		public remove: {(area: CellArea, renderer: CellRenderer): void;};
-		public foreach: {(area: CellArea, callback: CellCallback, callback_data: any): void;};
-		public foreach_alloc: {(area: CellArea, context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, background_area: Gdk.Rectangle, callback: CellAllocCallback, callback_data: any): void;};
+		public foreach: {(area: CellArea, callback: CellCallback, callback_data: any | null): void;};
+		public foreach_alloc: {(area: CellArea, context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, background_area: Gdk.Rectangle, callback: CellAllocCallback, callback_data: any | null): void;};
 		public event: {(area: CellArea, context: CellAreaContext, widget: Widget, event: Gdk.Event, cell_area: Gdk.Rectangle, flags: CellRendererState): number;};
 		public render: {(area: CellArea, context: CellAreaContext, widget: Widget, cr: cairo.Context, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState, paint_focus: boolean): void;};
 		public apply_attributes: {(area: CellArea, tree_model: TreeModel, iter: TreeIter, is_expander: boolean, is_expanded: boolean): void;};
 		public create_context: {(area: CellArea): CellAreaContext;};
 		public copy_context: {(area: CellArea, context: CellAreaContext): CellAreaContext;};
 		public get_request_mode: {(area: CellArea): SizeRequestMode;};
-		public get_preferred_width: {(area: CellArea, context: CellAreaContext, widget: Widget, minimum_width: number, natural_width: number): void;};
-		public get_preferred_height_for_width: {(area: CellArea, context: CellAreaContext, widget: Widget, width: number, minimum_height: number, natural_height: number): void;};
-		public get_preferred_height: {(area: CellArea, context: CellAreaContext, widget: Widget, minimum_height: number, natural_height: number): void;};
-		public get_preferred_width_for_height: {(area: CellArea, context: CellAreaContext, widget: Widget, height: number, minimum_width: number, natural_width: number): void;};
+		public get_preferred_width: {(area: CellArea, context: CellAreaContext, widget: Widget): [ minimum_width: number | null, natural_width: number | null ];};
+		public get_preferred_height_for_width: {(area: CellArea, context: CellAreaContext, widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];};
+		public get_preferred_height: {(area: CellArea, context: CellAreaContext, widget: Widget): [ minimum_height: number | null, natural_height: number | null ];};
+		public get_preferred_width_for_height: {(area: CellArea, context: CellAreaContext, widget: Widget, height: number): [ minimum_width: number | null, natural_width: number | null ];};
 		public set_cell_property: {(area: CellArea, renderer: CellRenderer, property_id: number, value: GObject.Value, pspec: GObject.ParamSpec): void;};
 		public get_cell_property: {(area: CellArea, renderer: CellRenderer, property_id: number, value: GObject.Value, pspec: GObject.ParamSpec): void;};
 		public focus: {(area: CellArea, direction: DirectionType): boolean;};
@@ -50354,12 +50298,11 @@ declare namespace imports.gi.Gtk {
 		public install_cell_property(property_id: number, pspec: GObject.ParamSpec): void;
 		/**
 		 * Returns all cell properties of a cell area class.
-		 * @param n_properties location to return the number of cell properties found
 		 * @returns a newly
 		 *     allocated %NULL-terminated array of #GParamSpec*.  The array
 		 *     must be freed with g_free().
 		 */
-		public list_cell_properties(n_properties: number): GObject.ParamSpec[];
+		public list_cell_properties(): GObject.ParamSpec[];
 	}
 
 	interface CellAreaContextClass {}
@@ -50367,8 +50310,8 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public allocate: {(context: CellAreaContext, width: number, height: number): void;};
 		public reset: {(context: CellAreaContext): void;};
-		public get_preferred_height_for_width: {(context: CellAreaContext, width: number, minimum_height: number, natural_height: number): void;};
-		public get_preferred_width_for_height: {(context: CellAreaContext, height: number, minimum_width: number, natural_width: number): void;};
+		public get_preferred_height_for_width: {(context: CellAreaContext, width: number): [ minimum_height: number | null, natural_height: number | null ];};
+		public get_preferred_width_for_height: {(context: CellAreaContext, height: number): [ minimum_width: number | null, natural_width: number | null ];};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -50393,7 +50336,7 @@ declare namespace imports.gi.Gtk {
 		public readonly g_iface: GObject.TypeInterface;
 		public editing_done: {(cell_editable: CellEditable): void;};
 		public remove_widget: {(cell_editable: CellEditable): void;};
-		public start_editing: {(cell_editable: CellEditable, event: Gdk.Event): void;};
+		public start_editing: {(cell_editable: CellEditable, event: Gdk.Event | null): void;};
 	}
 
 	interface CellLayoutIface {}
@@ -50404,11 +50347,11 @@ declare namespace imports.gi.Gtk {
 		public pack_end: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
 		public clear: {(cell_layout: CellLayout): void;};
 		public add_attribute: {(cell_layout: CellLayout, cell: CellRenderer, attribute: string, column: number): void;};
-		public set_cell_data_func: {(cell_layout: CellLayout, cell: CellRenderer, _func: CellLayoutDataFunc, func_data: any, destroy: GLib.DestroyNotify): void;};
+		public set_cell_data_func: {(cell_layout: CellLayout, cell: CellRenderer, _func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;};
 		public clear_attributes: {(cell_layout: CellLayout, cell: CellRenderer): void;};
 		public reorder: {(cell_layout: CellLayout, cell: CellRenderer, position: number): void;};
 		public get_cells: {(cell_layout: CellLayout): GLib.List;};
-		public get_area: {(cell_layout: CellLayout): CellArea;};
+		public get_area: {(cell_layout: CellLayout): CellArea | null;};
 	}
 
 	interface CellRendererAccelClass {}
@@ -50432,15 +50375,15 @@ declare namespace imports.gi.Gtk {
 	class CellRendererClass {
 		public constructor();
 		public get_request_mode: {(cell: CellRenderer): SizeRequestMode;};
-		public get_preferred_width: {(cell: CellRenderer, widget: Widget, minimum_size: number, natural_size: number): void;};
-		public get_preferred_height_for_width: {(cell: CellRenderer, widget: Widget, width: number, minimum_height: number, natural_height: number): void;};
-		public get_preferred_height: {(cell: CellRenderer, widget: Widget, minimum_size: number, natural_size: number): void;};
-		public get_preferred_width_for_height: {(cell: CellRenderer, widget: Widget, height: number, minimum_width: number, natural_width: number): void;};
+		public get_preferred_width: {(cell: CellRenderer, widget: Widget): [ minimum_size: number | null, natural_size: number | null ];};
+		public get_preferred_height_for_width: {(cell: CellRenderer, widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];};
+		public get_preferred_height: {(cell: CellRenderer, widget: Widget): [ minimum_size: number | null, natural_size: number | null ];};
+		public get_preferred_width_for_height: {(cell: CellRenderer, widget: Widget, height: number): [ minimum_width: number | null, natural_width: number | null ];};
 		public get_aligned_area: {(cell: CellRenderer, widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle, aligned_area: Gdk.Rectangle): void;};
-		public get_size: {(cell: CellRenderer, widget: Widget, cell_area: Gdk.Rectangle, x_offset: number, y_offset: number, width: number, height: number): void;};
+		public get_size: {(cell: CellRenderer, widget: Widget, cell_area: Gdk.Rectangle | null): [ x_offset: number | null, y_offset: number | null, width: number | null, height: number | null ];};
 		public render: {(cell: CellRenderer, cr: cairo.Context, widget: Widget, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): void;};
 		public activate: {(cell: CellRenderer, event: Gdk.Event, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): boolean;};
-		public start_editing: {(cell: CellRenderer, event: Gdk.Event, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable;};
+		public start_editing: {(cell: CellRenderer, event: Gdk.Event | null, widget: Widget, path: string, background_area: Gdk.Rectangle, cell_area: Gdk.Rectangle, flags: CellRendererState): CellEditable | null;};
 		public editing_canceled: {(cell: CellRenderer): void;};
 		public editing_started: {(cell: CellRenderer, editable: CellEditable, path: string): void;};
 		public _gtk_reserved2: {(): void;};
@@ -50655,7 +50598,7 @@ declare namespace imports.gi.Gtk {
 		public readonly padding: any[];
 		public get_rgba: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
 		public set_rgba: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
-		public add_palette: {(chooser: ColorChooser, orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[]): void;};
+		public add_palette: {(chooser: ColorChooser, orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[] | null): void;};
 		public color_activated: {(chooser: ColorChooser, color: Gdk.RGBA): void;};
 	}
 
@@ -50777,8 +50720,8 @@ declare namespace imports.gi.Gtk {
 		public add: {(container: Container, widget: Widget): void;};
 		public remove: {(container: Container, widget: Widget): void;};
 		public check_resize: {(container: Container): void;};
-		public forall: {(container: Container, include_internals: boolean, callback: Callback, callback_data: any): void;};
-		public set_focus_child: {(container: Container, child: Widget): void;};
+		public forall: {(container: Container, include_internals: boolean, callback: Callback, callback_data: any | null): void;};
+		public set_focus_child: {(container: Container, child: Widget | null): void;};
 		public child_type: {(container: Container): GObject.Type;};
 		public composite_name: {(container: Container, child: Widget): string;};
 		public set_child_property: {(container: Container, child: Widget, property_id: number, value: GObject.Value, pspec: GObject.ParamSpec): void;};
@@ -50799,7 +50742,7 @@ declare namespace imports.gi.Gtk {
 		 *     property or %NULL if #class has no child property with that
 		 *     name.
 		 */
-		public find_child_property(property_name: string): GObject.ParamSpec;
+		public find_child_property(property_name: string): GObject.ParamSpec | null;
 		/**
 		 * Modifies a subclass of {@link ContainerClass} to automatically add and
 		 * remove the border-width setting on GtkContainer.  This allows the
@@ -50828,12 +50771,11 @@ declare namespace imports.gi.Gtk {
 		public install_child_property(property_id: number, pspec: GObject.ParamSpec): void;
 		/**
 		 * Returns all child properties of a container class.
-		 * @param n_properties location to return the number of child properties found
 		 * @returns 
 		 *     a newly allocated %NULL-terminated array of #GParamSpec*.
 		 *     The array must be freed with g_free().
 		 */
-		public list_child_properties(n_properties: number): GObject.ParamSpec[];
+		public list_child_properties(): GObject.ParamSpec[];
 	}
 
 	interface ContainerPrivate {}
@@ -50906,7 +50848,7 @@ declare namespace imports.gi.Gtk {
 		 * a different file.
 		 * @returns the parent section or %NULL if none
 		 */
-		public get_parent(): CssSection;
+		public get_parent(): CssSection | null;
 		/**
 		 * Gets the type of information that #section describes.
 		 * @returns the type of #section
@@ -50966,14 +50908,14 @@ declare namespace imports.gi.Gtk {
 	class EditableInterface {
 		public constructor();
 		public readonly base_iface: GObject.TypeInterface;
-		public insert_text: {(editable: Editable, new_text: string, new_text_length: number, position: number): void;};
+		public insert_text: {(editable: Editable, new_text: string, new_text_length: number): void;};
 		public delete_text: {(editable: Editable, start_pos: number, end_pos: number): void;};
 		public changed: {(editable: Editable): void;};
-		public do_insert_text: {(editable: Editable, new_text: string, new_text_length: number, position: number): void;};
+		public do_insert_text: {(editable: Editable, new_text: string, new_text_length: number): void;};
 		public do_delete_text: {(editable: Editable, start_pos: number, end_pos: number): void;};
 		public get_chars: {(editable: Editable, start_pos: number, end_pos: number): string;};
 		public set_selection_bounds: {(editable: Editable, start_pos: number, end_pos: number): void;};
-		public get_selection_bounds: {(editable: Editable, start_pos: number, end_pos: number): boolean;};
+		public get_selection_bounds: {(editable: Editable): boolean;};
 		public set_position: {(editable: Editable, position: number): void;};
 		public get_position: {(editable: Editable): number;};
 	}
@@ -51311,13 +51253,13 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public readonly base_iface: GObject.TypeInterface;
 		public readonly padding: any[];
-		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily;};
-		public get_font_face: {(fontchooser: FontChooser): Pango.FontFace;};
+		public get_font_family: {(fontchooser: FontChooser): Pango.FontFamily | null;};
+		public get_font_face: {(fontchooser: FontChooser): Pango.FontFace | null;};
 		public get_font_size: {(fontchooser: FontChooser): number;};
-		public set_filter_func: {(fontchooser: FontChooser, filter: FontFilterFunc, destroy: GLib.DestroyNotify): void;};
+		public set_filter_func: {(fontchooser: FontChooser, filter: FontFilterFunc | null, destroy: GLib.DestroyNotify): void;};
 		public font_activated: {(chooser: FontChooser, fontname: string): void;};
-		public set_font_map: {(fontchooser: FontChooser, fontmap: Pango.FontMap): void;};
-		public get_font_map: {(fontchooser: FontChooser): Pango.FontMap;};
+		public set_font_map: {(fontchooser: FontChooser, fontmap: Pango.FontMap | null): void;};
+		public get_font_map: {(fontchooser: FontChooser): Pango.FontMap | null;};
 	}
 
 	interface FontChooserWidgetClass {}
@@ -51515,10 +51457,9 @@ declare namespace imports.gi.Gtk {
 		 * due to it being defined on top of a named color that doesn't
 		 * exist in #props.
 		 * @param props {@link StyleProperties} to use when resolving named colors
-		 * @param resolved_gradient return location for the resolved pattern
 		 * @returns %TRUE if the gradient has been resolved
 		 */
-		public resolve(props: StyleProperties, resolved_gradient: cairo.Pattern): boolean;
+		public resolve(props: StyleProperties): boolean;
 		public resolve_for_context(context: StyleContext): cairo.Pattern;
 		/**
 		 * Creates a string representation for #gradient that is suitable
@@ -51646,8 +51587,8 @@ declare namespace imports.gi.Gtk {
 		public commit: {(context: IMContext, _str: string): void;};
 		public retrieve_surrounding: {(context: IMContext): boolean;};
 		public delete_surrounding: {(context: IMContext, offset: number, n_chars: number): boolean;};
-		public set_client_window: {(context: IMContext, window: Gdk.Window): void;};
-		public get_preedit_string: {(context: IMContext, _str: string, attrs: Pango.AttrList, cursor_pos: number): void;};
+		public set_client_window: {(context: IMContext, window: Gdk.Window | null): void;};
+		public get_preedit_string: {(context: IMContext): [ str: string, attrs: Pango.AttrList, cursor_pos: number ];};
 		public filter_keypress: {(context: IMContext, event: Gdk.EventKey): boolean;};
 		public focus_in: {(context: IMContext): void;};
 		public focus_out: {(context: IMContext): void;};
@@ -51655,7 +51596,7 @@ declare namespace imports.gi.Gtk {
 		public set_cursor_location: {(context: IMContext, area: Gdk.Rectangle): void;};
 		public set_use_preedit: {(context: IMContext, use_preedit: boolean): void;};
 		public set_surrounding: {(context: IMContext, text: string, len: number, cursor_index: number): void;};
-		public get_surrounding: {(context: IMContext, text: string, cursor_index: number): boolean;};
+		public get_surrounding: {(context: IMContext): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -51799,11 +51740,12 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Obtains a list of icon sizes this icon set can render. The returned
 		 * array must be freed with g_free().
-		 * @param sizes return location
+		 * @returns return location
 		 *     for array of sizes ({@link IconSize})
-		 * @param n_sizes location to store number of elements in returned array
+		 * 
+		 * location to store number of elements in returned array
 		 */
-		public get_sizes(sizes: number[], n_sizes: number): void;
+		public get_sizes(): [ number[], number ];
 		/**
 		 * Increments the reference count on #icon_set.
 		 * @returns #icon_set.
@@ -51829,7 +51771,7 @@ declare namespace imports.gi.Gtk {
 		 *          will disable caching.
 		 * @returns a #GdkPixbuf to be displayed
 		 */
-		public render_icon(style: Style, direction: TextDirection, state: StateType, size: number, widget: Widget, detail: string): GdkPixbuf.Pixbuf;
+		public render_icon(style: Style | null, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;
 		/**
 		 * Renders an icon using gtk_render_icon_pixbuf(). In most cases,
 		 * gtk_widget_render_icon_pixbuf() is better, since it automatically provides
@@ -51857,7 +51799,7 @@ declare namespace imports.gi.Gtk {
 		 * @param for_window #GdkWindow to optimize drawing for, or %NULL
 		 * @returns a #cairo_surface_t to be displayed
 		 */
-		public render_icon_surface(context: StyleContext, size: number, scale: number, for_window: Gdk.Window): cairo.Surface;
+		public render_icon_surface(context: StyleContext, size: number, scale: number, for_window: Gdk.Window | null): cairo.Surface;
 		/**
 		 * Decrements the reference count on #icon_set, and frees memory
 		 * if the reference count reaches 0.
@@ -52006,7 +51948,7 @@ declare namespace imports.gi.Gtk {
 		 * to use as a base image when creating icon variants for {@link IconSet}.
 		 * @param icon_name name of icon to use
 		 */
-		public set_icon_name(icon_name: string): void;
+		public set_icon_name(icon_name: string | null): void;
 		/**
 		 * Sets a pixbuf to use as a base image when creating icon variants
 		 * for {@link IconSet}.
@@ -52456,7 +52398,7 @@ declare namespace imports.gi.Gtk {
 		public readonly hide_on_activate: number;
 		public activate: {(menu_item: MenuItem): void;};
 		public activate_item: {(menu_item: MenuItem): void;};
-		public toggle_size_request: {(menu_item: MenuItem, requisition: number): void;};
+		public toggle_size_request: {(menu_item: MenuItem): void;};
 		public toggle_size_allocate: {(menu_item: MenuItem, allocation: number): void;};
 		public set_label: {(menu_item: MenuItem, label: string): void;};
 		public get_label: {(menu_item: MenuItem): string;};
@@ -52783,7 +52725,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new {@link PaperSize}, use gtk_paper_size_free()
 		 * to free it
 		 */
-		public static new(name: string): PaperSize;
+		public static new(name: string | null): PaperSize;
 		/**
 		 * Creates a new {@link PaperSize} object with the
 		 * given parameters.
@@ -52826,7 +52768,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a new {@link PaperSize} object with the restored
 		 *     paper size, or %NULL if an error occurred
 		 */
-		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string): PaperSize;
+		public static new_from_key_file(key_file: GLib.KeyFile, group_name: string | null): PaperSize;
 		/**
 		 * Creates a new {@link PaperSize} object by using
 		 * PPD information.
@@ -53296,7 +53238,7 @@ declare namespace imports.gi.Gtk {
 		public add_filter: {(chooser: RecentChooser, filter: RecentFilter): void;};
 		public remove_filter: {(chooser: RecentChooser, filter: RecentFilter): void;};
 		public list_filters: {(chooser: RecentChooser): GLib.SList;};
-		public set_sort_func: {(chooser: RecentChooser, sort_func: RecentSortFunc, sort_data: any, data_destroy: GLib.DestroyNotify): void;};
+		public set_sort_func: {(chooser: RecentChooser, sort_func: RecentSortFunc, sort_data: any | null, data_destroy: GLib.DestroyNotify | null): void;};
 		public item_activated: {(chooser: RecentChooser): void;};
 		public selection_changed: {(chooser: RecentChooser): void;};
 	}
@@ -53434,7 +53376,7 @@ declare namespace imports.gi.Gtk {
 		 *   In case of error, #error will be set either with a
 		 *   %GTK_RECENT_MANAGER_ERROR or a %G_IO_ERROR
 		 */
-		public create_app_info(app_name: string): Gio.AppInfo;
+		public create_app_info(app_name: string | null): Gio.AppInfo | null;
 		/**
 		 * Checks whether the resource pointed by #info still exists.
 		 * At the moment this check is done only on resources pointing
@@ -53463,25 +53405,19 @@ declare namespace imports.gi.Gtk {
 		 * If the command line contains any escape characters defined inside the
 		 * storage specification, they will be expanded.
 		 * @param app_name the name of the application that has registered this item
-		 * @param app_exec return location for the string containing
-		 *    the command line
-		 * @param count return location for the number of times this item was registered
-		 * @param time_ return location for the timestamp this item was last registered
-		 *    for this application
 		 * @returns %TRUE if an application with #app_name has registered this
 		 *   resource inside the recently used list, or %FALSE otherwise. The
 		 *   #app_exec string is owned by the {@link RecentInfo} and should not be
 		 *   modified or freed
 		 */
-		public get_application_info(app_name: string, app_exec: string, count: number, time_: number): boolean;
+		public get_application_info(app_name: string): boolean;
 		/**
 		 * Retrieves the list of applications that have registered this resource.
-		 * @param length return location for the length of the returned list
 		 * @returns 
 		 *     a newly allocated %NULL-terminated array of strings.
 		 *     Use g_strfreev() to free it.
 		 */
-		public get_applications(length: number): string[];
+		public get_applications(): string[];
 		/**
 		 * Gets the (short) description of the resource.
 		 * @returns the description of the resource. The returned string
@@ -53500,24 +53436,23 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GIcon containing the icon, or %NULL.
 		 *   Use g_object_unref() when finished using the icon
 		 */
-		public get_gicon(): Gio.Icon;
+		public get_gicon(): Gio.Icon | null;
 		/**
 		 * Returns all groups registered for the recently used item #info.
 		 * The array of returned group names will be %NULL terminated, so
 		 * length might optionally be %NULL.
-		 * @param length return location for the number of groups returned
 		 * @returns 
 		 *   a newly allocated %NULL terminated array of strings.
 		 *   Use g_strfreev() to free it.
 		 */
-		public get_groups(length: number): string[];
+		public get_groups(): string[];
 		/**
 		 * Retrieves the icon of size #size associated to the resource MIME type.
 		 * @param size the size of the icon in pixels
 		 * @returns a #GdkPixbuf containing the icon,
 		 *     or %NULL. Use g_object_unref() when finished using the icon.
 		 */
-		public get_icon(size: number): GdkPixbuf.Pixbuf;
+		public get_icon(size: number): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Gets the MIME type of the resource.
 		 * @returns the MIME type of the resource. The returned string
@@ -53560,7 +53495,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly allocated UTF-8 string containing the
 		 *   resource’s URI or %NULL. Use g_free() when done using it.
 		 */
-		public get_uri_display(): string;
+		public get_uri_display(): string | null;
 		/**
 		 * Gets the timestamp (seconds from system’s Epoch) when the meta-data
 		 * for the resource was last visited.
@@ -53743,7 +53678,7 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public format_value: {(scale: Scale, value: number): string;};
 		public draw_value: {(scale: Scale): void;};
-		public get_layout_offsets: {(scale: Scale, _x: number, _y: number): void;};
+		public get_layout_offsets: {(scale: Scale): [ x: number | null, y: number | null ];};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -53841,10 +53776,9 @@ declare namespace imports.gi.Gtk {
 		public get_data_type(): Gdk.Atom;
 		/**
 		 * Retrieves the raw data of the selection along with its length.
-		 * @param length return location for length of the data segment
 		 * @returns the raw data of the selection
 		 */
-		public get_data_with_length(length: number): number[];
+		public get_data_with_length(): number[];
 		/**
 		 * Retrieves the display of the selection.
 		 * @returns the display of the selection.
@@ -53868,7 +53802,7 @@ declare namespace imports.gi.Gtk {
 		 *   %NULL.  If the result is non-%NULL it must be freed with
 		 *   g_object_unref().
 		 */
-		public get_pixbuf(): GdkPixbuf.Pixbuf;
+		public get_pixbuf(): GdkPixbuf.Pixbuf | null;
 		/**
 		 * Retrieves the selection #GdkAtom of the selection data.
 		 * @returns the selection #GdkAtom of the selection data.
@@ -53884,14 +53818,10 @@ declare namespace imports.gi.Gtk {
 		 * This can be used to interpret the results of getting
 		 * the standard TARGETS target that is always supplied for
 		 * any selection.
-		 * @param targets 
-		 *           location to store an array of targets. The result stored
-		 *           here must be freed with g_free().
-		 * @param n_atoms location to store number of items in #targets.
 		 * @returns %TRUE if #selection_data contains a valid
 		 *    array of targets, otherwise %FALSE.
 		 */
-		public get_targets(targets: Gdk.Atom[], n_atoms: number): boolean;
+		public get_targets(): boolean;
 		/**
 		 * Gets the contents of the selection data as a UTF-8 string.
 		 * @returns if the selection data contained a
@@ -53899,7 +53829,7 @@ declare namespace imports.gi.Gtk {
 		 *   allocated string containing the converted text, otherwise %NULL.
 		 *   If the result is non-%NULL it must be freed with g_free().
 		 */
-		public get_text(): string;
+		public get_text(): string | null;
 		/**
 		 * Gets the contents of the selection data as array of URIs.
 		 * @returns if
@@ -54298,7 +54228,7 @@ declare namespace imports.gi.Gtk {
 		public clone: {(style: Style): Style;};
 		public init_from_rc: {(style: Style, rc_style: RcStyle): void;};
 		public set_background: {(style: Style, window: Gdk.Window, state_type: StateType): void;};
-		public render_icon: {(style: Style, source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget, detail: string): GdkPixbuf.Pixbuf;};
+		public render_icon: {(style: Style, source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;};
 		public draw_hline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x1: number, x2: number, _y: number): void;};
 		public draw_vline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, y1_: number, y2_: number, _x: number): void;};
 		public draw_shadow: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
@@ -54365,9 +54295,9 @@ declare namespace imports.gi.Gtk {
 	class StyleProviderIface {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
-		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties;};
+		public get_style: {(provider: StyleProvider, path: WidgetPath): StyleProperties | null;};
 		public get_style_property: {(provider: StyleProvider, path: WidgetPath, state: StateFlags, pspec: GObject.ParamSpec, value: GObject.Value): boolean;};
-		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory;};
+		public get_icon_factory: {(provider: StyleProvider, path: WidgetPath): IconFactory | null;};
 	}
 
 	interface SwitchAccessibleClass {}
@@ -54492,7 +54422,7 @@ declare namespace imports.gi.Gtk {
 		 * @param resolved_color return location for the resolved color
 		 * @returns %TRUE if the color has been resolved
 		 */
-		public resolve(props: StyleProperties, resolved_color: Gdk.RGBA): boolean;
+		public resolve(props: StyleProperties | null, resolved_color: Gdk.RGBA): boolean;
 		/**
 		 * Converts the given #color to a string representation. This is useful
 		 * both for debugging and for serialization of strings. The format of
@@ -54614,7 +54544,7 @@ declare namespace imports.gi.Gtk {
 		 * @param ntargets number of entries in #targets.
 		 * @returns the new {@link TargetList}.
 		 */
-		public static new(targets: TargetEntry[], ntargets: number): TargetList;
+		public static new(targets: TargetEntry[] | null, ntargets: number): TargetList;
 		/**
 		 * Appends another target to a {@link TargetList}.
 		 * @param target the interned atom representing the target
@@ -54662,11 +54592,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Looks up a given target in a {@link TargetList}.
 		 * @param target an interned atom representing the target to search for
-		 * @param info a pointer to the location to store
-		 *        application info for target, or %NULL
 		 * @returns %TRUE if the target was found, otherwise %FALSE
 		 */
-		public find(target: Gdk.Atom, info: number): boolean;
+		public find(target: Gdk.Atom): boolean;
 		/**
 		 * Increases the reference count of a {@link TargetList} by one.
 		 * @returns the passed in {@link TargetList}.
@@ -55007,7 +54935,7 @@ declare namespace imports.gi.Gtk {
 		 * @param limit search limit, or %NULL for none
 		 * @returns whether a match was found
 		 */
-		public backward_find_char(pred: TextCharPredicate, limit: TextIter): boolean;
+		public backward_find_char(pred: TextCharPredicate, limit: TextIter | null): boolean;
 		/**
 		 * Moves #iter to the start of the previous line. Returns %TRUE if
 		 * #iter could be moved; i.e. if #iter was at character offset 0, this
@@ -55043,7 +54971,7 @@ declare namespace imports.gi.Gtk {
 		 * @param limit location of last possible #match_start, or %NULL for start of buffer
 		 * @returns whether a match was found
 		 */
-		public backward_search(_str: string, flags: TextSearchFlags, match_start: TextIter, match_end: TextIter, limit: TextIter): boolean;
+		public backward_search(_str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
 		/**
 		 * Moves backward to the previous sentence start; if #iter is already at
 		 * the start of a sentence, moves backward to the next one.  Sentence
@@ -55072,7 +55000,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether we found a tag toggle before #iter
 		 */
-		public backward_to_tag_toggle(tag: TextTag): boolean;
+		public backward_to_tag_toggle(tag: TextTag | null): boolean;
 		/**
 		 * Moves #iter forward to the previous visible cursor position. See
 		 * gtk_text_iter_backward_cursor_position() for details.
@@ -55152,7 +55080,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether #iter is the start of a range tagged with #tag
 		 */
-		public begins_tag(tag: TextTag): boolean;
+		public begins_tag(tag: TextTag | null): boolean;
 		/**
 		 * Considering the default editability of the buffer, and tags that
 		 * affect editability, determines whether text inserted at #iter would
@@ -55230,7 +55158,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether #iter is the end of a range tagged with #tag
 		 */
-		public ends_tag(tag: TextTag): boolean;
+		public ends_tag(tag: TextTag | null): boolean;
 		/**
 		 * Determines whether #iter ends a natural-language word.  Word breaks
 		 * are determined by Pango and should be correct for nearly any
@@ -55301,7 +55229,7 @@ declare namespace imports.gi.Gtk {
 		 * @param limit search limit, or %NULL for none
 		 * @returns whether a match was found
 		 */
-		public forward_find_char(pred: TextCharPredicate, limit: TextIter): boolean;
+		public forward_find_char(pred: TextCharPredicate, limit: TextIter | null): boolean;
 		/**
 		 * Moves #iter to the start of the next line. If the iter is already on the
 		 * last line of the buffer, moves the iter to the end of the current line.
@@ -55339,7 +55267,7 @@ declare namespace imports.gi.Gtk {
 		 * @param limit location of last possible #match_end, or %NULL for the end of the buffer
 		 * @returns whether a match was found
 		 */
-		public forward_search(_str: string, flags: TextSearchFlags, match_start: TextIter, match_end: TextIter, limit: TextIter): boolean;
+		public forward_search(_str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
 		/**
 		 * Moves forward to the next sentence end. (If #iter is at the end of
 		 * a sentence, moves to the next end of sentence.)  Sentence
@@ -55386,7 +55314,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether we found a tag toggle after #iter
 		 */
-		public forward_to_tag_toggle(tag: TextTag): boolean;
+		public forward_to_tag_toggle(tag: TextTag | null): boolean;
 		/**
 		 * Moves #iter forward to the next visible cursor position. See
 		 * gtk_text_iter_forward_cursor_position() for details.
@@ -55776,7 +55704,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether #iter is the start of a range tagged with #tag
 		 */
-		public starts_tag(tag: TextTag): boolean;
+		public starts_tag(tag: TextTag | null): boolean;
 		/**
 		 * Determines whether #iter begins a natural-language word.  Word
 		 * breaks are determined by Pango and should be correct for nearly any
@@ -55792,7 +55720,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tag a {@link TextTag}, or %NULL
 		 * @returns whether #tag is toggled on or off at #iter
 		 */
-		public toggles_tag(tag: TextTag): boolean;
+		public toggles_tag(tag: TextTag | null): boolean;
 	}
 
 	interface TextMarkClass {}
@@ -56205,10 +56133,10 @@ declare namespace imports.gi.Gtk {
 		public get_value: {(tree_model: TreeModel, iter: TreeIter, column: number, value: GObject.Value): void;};
 		public iter_next: {(tree_model: TreeModel, iter: TreeIter): boolean;};
 		public iter_previous: {(tree_model: TreeModel, iter: TreeIter): boolean;};
-		public iter_children: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter): boolean;};
+		public iter_children: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter | null): boolean;};
 		public iter_has_child: {(tree_model: TreeModel, iter: TreeIter): boolean;};
-		public iter_n_children: {(tree_model: TreeModel, iter: TreeIter): number;};
-		public iter_nth_child: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter, _n: number): boolean;};
+		public iter_n_children: {(tree_model: TreeModel, iter: TreeIter | null): number;};
+		public iter_nth_child: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter | null, _n: number): boolean;};
 		public iter_parent: {(tree_model: TreeModel, iter: TreeIter, child: TreeIter): boolean;};
 		public ref_node: {(tree_model: TreeModel, iter: TreeIter): void;};
 		public unref_node: {(tree_model: TreeModel, iter: TreeIter): void;};
@@ -56320,12 +56248,10 @@ declare namespace imports.gi.Gtk {
 		 * This is an array of integers, each representing a node in a tree.
 		 * It also returns the number of elements in the array.
 		 * The array should not be freed.
-		 * @param depth return location for number of elements
-		 *     returned in the integer array, or %NULL
 		 * @returns The current
 		 *     indices, or %NULL
 		 */
-		public get_indices_with_depth(depth: number): number[];
+		public get_indices_with_depth(): number[];
 		/**
 		 * Returns %TRUE if #descendant is a descendant of #path.
 		 * @param descendant another {@link TreePath}-struct
@@ -56443,7 +56369,7 @@ declare namespace imports.gi.Gtk {
 		 * or %NULL if the path pointed to is no longer valid.
 		 * @returns a current path, or %NULL
 		 */
-		public get_path(): TreePath;
+		public get_path(): TreePath | null;
 		/**
 		 * Returns %TRUE if the #reference is non-%NULL and refers to
 		 * a current valid path.
@@ -56472,10 +56398,10 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public readonly g_iface: GObject.TypeInterface;
 		public sort_column_changed: {(sortable: TreeSortable): void;};
-		public get_sort_column_id: {(sortable: TreeSortable, sort_column_id: number, order: SortType): boolean;};
+		public get_sort_column_id: {(sortable: TreeSortable): boolean;};
 		public set_sort_column_id: {(sortable: TreeSortable, sort_column_id: number, order: SortType): void;};
-		public set_sort_func: {(sortable: TreeSortable, sort_column_id: number, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify): void;};
-		public set_default_sort_func: {(sortable: TreeSortable, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify): void;};
+		public set_sort_func: {(sortable: TreeSortable, sort_column_id: number, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify | null): void;};
+		public set_default_sort_func: {(sortable: TreeSortable, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify | null): void;};
 		public has_default_sort_func: {(sortable: TreeSortable): boolean;};
 	}
 
@@ -56666,10 +56592,10 @@ declare namespace imports.gi.Gtk {
 		public child_notify: {(widget: Widget, child_property: GObject.ParamSpec): void;};
 		public draw: {(widget: Widget, cr: cairo.Context): boolean;};
 		public get_request_mode: {(widget: Widget): SizeRequestMode;};
-		public get_preferred_height: {(widget: Widget, minimum_height: number, natural_height: number): void;};
-		public get_preferred_width_for_height: {(widget: Widget, height: number, minimum_width: number, natural_width: number): void;};
-		public get_preferred_width: {(widget: Widget, minimum_width: number, natural_width: number): void;};
-		public get_preferred_height_for_width: {(widget: Widget, width: number, minimum_height: number, natural_height: number): void;};
+		public get_preferred_height: {(widget: Widget): [ minimum_height: number | null, natural_height: number | null ];};
+		public get_preferred_width_for_height: {(widget: Widget, height: number): [ minimum_width: number | null, natural_width: number | null ];};
+		public get_preferred_width: {(widget: Widget): [ minimum_width: number | null, natural_width: number | null ];};
+		public get_preferred_height_for_width: {(widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null ];};
 		public mnemonic_activate: {(widget: Widget, group_cycling: boolean): boolean;};
 		public grab_focus: {(widget: Widget): void;};
 		public focus: {(widget: Widget, direction: DirectionType): boolean;};
@@ -56724,7 +56650,7 @@ declare namespace imports.gi.Gtk {
 		public adjust_size_allocation: {(widget: Widget, orientation: Orientation, minimum_size: number, natural_size: number, allocated_pos: number, allocated_size: number): void;};
 		public style_updated: {(widget: Widget): void;};
 		public touch_event: {(widget: Widget, event: Gdk.EventTouch): boolean;};
-		public get_preferred_height_and_baseline_for_width: {(widget: Widget, width: number, minimum_height: number, natural_height: number, minimum_baseline: number, natural_baseline: number): void;};
+		public get_preferred_height_and_baseline_for_width: {(widget: Widget, width: number): [ minimum_height: number | null, natural_height: number | null, minimum_baseline: number | null, natural_baseline: number | null ];};
 		public adjust_baseline_request: {(widget: Widget, minimum_baseline: number, natural_baseline: number): void;};
 		public adjust_baseline_allocation: {(widget: Widget, baseline: number): void;};
 		public queue_draw_region: {(widget: Widget, region: cairo.Region): void;};
@@ -56797,12 +56723,11 @@ declare namespace imports.gi.Gtk {
 		public install_style_property_parser(pspec: GObject.ParamSpec, parser: RcPropertyParser): void;
 		/**
 		 * Returns all style properties of a widget class.
-		 * @param n_properties location to return the number of style properties found
 		 * @returns a
 		 *     newly allocated array of #GParamSpec*. The array must be
 		 *     freed with g_free().
 		 */
-		public list_style_properties(n_properties: number): GObject.ParamSpec[];
+		public list_style_properties(): GObject.ParamSpec[];
 		/**
 		 * Sets the default #AtkRole to be set on accessibles created for
 		 * widgets of #widget_class. Accessibles may decide to not honor this
@@ -56841,7 +56766,7 @@ declare namespace imports.gi.Gtk {
 		 * @param connect_data_destroy The #GDestroyNotify to free #connect_data, this will only be used at
 		 *                        class finalization time, when no classes of type #widget_type are in use anymore.
 		 */
-		public set_connect_func(connect_func: BuilderConnectFunc, connect_data: any, connect_data_destroy: GLib.DestroyNotify): void;
+		public set_connect_func(connect_func: BuilderConnectFunc, connect_data: any | null, connect_data_destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the name to be used for CSS matching of widgets.
 		 * 
@@ -57033,14 +56958,14 @@ declare namespace imports.gi.Gtk {
 		 * @param pos position to get the widget name for, -1 for the path head
 		 * @returns The widget name, or %NULL if none was set.
 		 */
-		public iter_get_name(pos: number): string;
+		public iter_get_name(pos: number): string | null;
 		/**
 		 * Returns the object name that is at position #pos in the widget
 		 * hierarchy defined in #path.
 		 * @param pos position to get the object name for, -1 for the path head
 		 * @returns the name or %NULL
 		 */
-		public iter_get_object_name(pos: number): string;
+		public iter_get_object_name(pos: number): string | null;
 		/**
 		 * Returns the object #GType that is at position #pos in the widget
 		 * hierarchy defined in #path.
@@ -57109,19 +57034,17 @@ declare namespace imports.gi.Gtk {
 		 * with GQuarks.
 		 * @param pos position to query, -1 for the path head
 		 * @param qname region name as a #GQuark
-		 * @param flags return location for the region flags
 		 * @returns %TRUE if the widget at #pos has the region defined.
 		 */
-		public iter_has_qregion(pos: number, qname: GLib.Quark, flags: RegionFlags): boolean;
+		public iter_has_qregion(pos: number, qname: GLib.Quark): boolean;
 		/**
 		 * Returns %TRUE if the widget at position #pos has the class #name
 		 * defined, %FALSE otherwise.
 		 * @param pos position to query, -1 for the path head
 		 * @param name region name
-		 * @param flags return location for the region flags
 		 * @returns %TRUE if the class #name is defined for the widget at #pos
 		 */
-		public iter_has_region(pos: number, name: string, flags: RegionFlags): boolean;
+		public iter_has_region(pos: number, name: string): boolean;
 		/**
 		 * Returns a list with all the class names defined for the widget
 		 * at position #pos in the hierarchy defined in #path.
@@ -57172,7 +57095,7 @@ declare namespace imports.gi.Gtk {
 		 * @param pos position to modify, -1 for the path head
 		 * @param name object name to set or %NULL to unset
 		 */
-		public iter_set_object_name(pos: number, name: string): void;
+		public iter_set_object_name(pos: number, name: string | null): void;
 		/**
 		 * Sets the object type for a given position in the widget hierarchy
 		 * defined by #path.
@@ -57253,7 +57176,7 @@ declare namespace imports.gi.Gtk {
 	interface WindowClass {}
 	class WindowClass {
 		public constructor();
-		public set_focus: {(window: Window, focus: Widget): void;};
+		public set_focus: {(window: Window, focus: Widget | null): void;};
 		public activate_focus: {(window: Window): void;};
 		public activate_default: {(window: Window): void;};
 		public keys_changed: {(window: Window): void;};
@@ -57365,7 +57288,7 @@ declare namespace imports.gi.Gtk {
 		 * See gtk_actionable_set_action_name() for more information.
 		 * @returns the action name, or %NULL if none is set
 		 */
-		get_action_name(): string;
+		get_action_name(): string | null;
 		/**
 		 * Gets the current target value of #actionable.
 		 * 
@@ -57387,7 +57310,7 @@ declare namespace imports.gi.Gtk {
 		 * associated with the window.
 		 * @param action_name an action name, or %NULL
 		 */
-		set_action_name(action_name: string): void;
+		set_action_name(action_name: string | null): void;
 		/**
 		 * Sets the target of an actionable widget.
 		 * 
@@ -57423,7 +57346,7 @@ declare namespace imports.gi.Gtk {
 		 * rendered inactive).
 		 * @param target_value a #GVariant to set as the target value, or %NULL
 		 */
-		set_action_target_value(target_value: GLib.Variant): void;
+		set_action_target_value(target_value: GLib.Variant | null): void;
 		/**
 		 * Sets the action-name and associated string target value of an
 		 * actionable widget.
@@ -57553,7 +57476,7 @@ declare namespace imports.gi.Gtk {
 		 * #GtkActivatable:use-action-appearance changes.
 		 * @param action the related {@link Action} or %NULL
 		 */
-		sync_action_properties(action: Action): void;
+		sync_action_properties(action: Action | null): void;
 		connect(signal: "notify::related_action", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::use_action_appearance", callback: (owner: this, ...args: any) => number): number;
 
@@ -57824,7 +57747,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a #GAppInfo for the currently selected
 		 *     application, or %NULL if none is selected. Free with g_object_unref()
 		 */
-		get_app_info(): Gio.AppInfo;
+		get_app_info(): Gio.AppInfo | null;
 		/**
 		 * Returns the current value of the {@link AppChooser}:content-type property.
 		 * @returns the content type of #self. Free with g_free()
@@ -57881,7 +57804,7 @@ declare namespace imports.gi.Gtk {
 		 * @param child child to add
 		 * @param _type kind of child or %NULL
 		 */
-		add_child(builder: Builder, child: GObject.Object, _type: string): void;
+		add_child(builder: Builder, child: GObject.Object, _type: string | null): void;
 		/**
 		 * Constructs a child of #buildable with the name #name.
 		 * 
@@ -57900,7 +57823,7 @@ declare namespace imports.gi.Gtk {
 		 * @param tagname the name of the tag
 		 * @param data user data created in custom_tag_start
 		 */
-		custom_finished(builder: Builder, child: GObject.Object, tagname: string, data: any): void;
+		custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data: any | null): void;
 		/**
 		 * This is called at the end of each custom element handled by
 		 * the buildable.
@@ -57909,19 +57832,17 @@ declare namespace imports.gi.Gtk {
 		 * @param tagname name of tag
 		 * @param data user data that will be passed in to parser functions
 		 */
-		custom_tag_end(builder: Builder, child: GObject.Object, tagname: string, data: any): void;
+		custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data: any | null): void;
 		/**
 		 * This is called for each unknown element under `<child>`.
 		 * @param builder a {@link Builder} used to construct this object
 		 * @param child child object or %NULL for non-child tags
 		 * @param tagname name of tag
 		 * @param parser a #GMarkupParser to fill in
-		 * @param data return location for user data that will be passed in
-		 *   to parser functions
 		 * @returns %TRUE if a object has a custom implementation, %FALSE
 		 *          if it doesn't.
 		 */
-		custom_tag_start(builder: Builder, child: GObject.Object, tagname: string, parser: GLib.MarkupParser, data: any): boolean;
+		custom_tag_start(builder: Builder, child: GObject.Object | null, tagname: string, parser: GLib.MarkupParser): boolean;
 		/**
 		 * Get the internal child called #childname of the #buildable object.
 		 * @param builder a {@link Builder}
@@ -57996,8 +57917,8 @@ declare namespace imports.gi.Gtk {
 		edit(cell: CellAccessible): void;
 		expand_collapse(cell: CellAccessible): void;
 		get_cell_area(cell: CellAccessible, cell_rect: Gdk.Rectangle): void;
-		get_cell_extents(cell: CellAccessible, _x: number, _y: number, width: number, height: number, coord_type: Atk.CoordType): void;
-		get_cell_position(cell: CellAccessible, _row: number, column: number): void;
+		get_cell_extents(cell: CellAccessible, coord_type: Atk.CoordType): [ x: number, y: number, width: number, height: number ];
+		get_cell_position(cell: CellAccessible): [ row: number, column: number ];
 		get_child_index(cell: CellAccessible): number;
 		get_column_header_cells(cell: CellAccessible): Atk.Object[];
 		get_renderer_state(cell: CellAccessible): CellRendererState;
@@ -58049,7 +57970,7 @@ declare namespace imports.gi.Gtk {
 		 * @param event The #GdkEvent that began the editing process, or
 		 *   %NULL if editing was initiated programmatically
 		 */
-		start_editing(event: Gdk.Event): void;
+		start_editing(event: Gdk.Event | null): void;
 		/**
 		 * This signal is a sign for the cell renderer to update its
 		 * value from the #cell_editable.
@@ -58136,7 +58057,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the cell area used by #cell_layout,
 		 * or %NULL in case no cell area is used.
 		 */
-		get_area(): CellArea;
+		get_area(): CellArea | null;
 		/**
 		 * Returns the cell renderers which have been added to #cell_layout.
 		 * @returns 
@@ -58196,7 +58117,7 @@ declare namespace imports.gi.Gtk {
 		 * @param func_data user data for #func
 		 * @param destroy destroy notify for #func_data
 		 */
-		set_cell_data_func(cell: CellRenderer, _func: CellLayoutDataFunc, func_data: any, destroy: GLib.DestroyNotify): void;
+		set_cell_data_func(cell: CellRenderer, _func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -58362,7 +58283,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_colors the total number of elements in #colors
 		 * @param colors the colors of the palette, or %NULL
 		 */
-		add_palette(orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[]): void;
+		add_palette(orientation: Orientation, colors_per_line: number, n_colors: number, colors: Gdk.RGBA[] | null): void;
 		/**
 		 * Gets the currently-selected color.
 		 * @param color a #GdkRGBA to fill in with the current color
@@ -58482,11 +58403,9 @@ declare namespace imports.gi.Gtk {
 		 * selected both will be identical and %FALSE will be returned.
 		 * 
 		 * Note that positions are specified in characters, not bytes.
-		 * @param start_pos location to store the starting position, or %NULL
-		 * @param end_pos location to store the end position, or %NULL
 		 * @returns %TRUE if an area is selected, %FALSE otherwise
 		 */
-		get_selection_bounds(start_pos: number, end_pos: number): boolean;
+		get_selection_bounds(): boolean;
 		/**
 		 * Inserts #new_text_length bytes of #new_text into the contents of the
 		 * widget, at position #position.
@@ -58495,9 +58414,8 @@ declare namespace imports.gi.Gtk {
 		 * The function updates #position to point after the newly inserted text.
 		 * @param new_text the text to append
 		 * @param new_text_length the length of the text in bytes, or -1
-		 * @param position location of the position text will be inserted at
 		 */
-		insert_text(new_text: string, new_text_length: number, position: number): void;
+		insert_text(new_text: string, new_text_length: number): void;
 		/**
 		 * Pastes the content of the clipboard to the current position of the
 		 * cursor in the editable.
@@ -58565,7 +58483,7 @@ declare namespace imports.gi.Gtk {
 		 * is possible to modify the inserted text, or prevent
 		 * it from being inserted entirely.
 		 */
-		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number, position: number) => void): number;
+		connect(signal: "insert-text", callback: (owner: this, new_text: string, new_text_length: number) => void): number;
 
 	}
 
@@ -58656,7 +58574,7 @@ declare namespace imports.gi.Gtk {
 		 * @param options ids for the options of the choice, or %NULL for a boolean choice
 		 * @param option_labels user-visible labels for the options, must be the same length as #options
 		 */
-		add_choice(_id: string, label: string, options: string[], option_labels: string[]): void;
+		add_choice(_id: string, label: string, options: string[] | null, option_labels: string[] | null): void;
 		/**
 		 * Adds #filter to the list of filters that the user can select between.
 		 * When a filter is selected, only files that are passed by that
@@ -58723,7 +58641,7 @@ declare namespace imports.gi.Gtk {
 		 * was requested from it; for example, as would be for calling
 		 * gtk_file_chooser_set_current_folder() on a nonexistent folder.
 		 */
-		get_current_folder(): string;
+		get_current_folder(): string | null;
 		/**
 		 * Gets the current folder of #chooser as #GFile.
 		 * See gtk_file_chooser_get_current_folder_uri().
@@ -58747,7 +58665,7 @@ declare namespace imports.gi.Gtk {
 		 * as would be for calling gtk_file_chooser_set_current_folder_uri() on a
 		 * nonexistent folder.
 		 */
-		get_current_folder_uri(): string;
+		get_current_folder_uri(): string | null;
 		/**
 		 * Gets the current name in the file selector, as entered by the user in the
 		 * text entry for “Name”.
@@ -58775,7 +58693,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_file_chooser_set_extra_widget().
 		 * @returns the current extra widget, or %NULL
 		 */
-		get_extra_widget(): Widget;
+		get_extra_widget(): Widget | null;
 		/**
 		 * Gets the #GFile for the currently selected file in
 		 * the file selector. If multiple files are selected,
@@ -58799,7 +58717,7 @@ declare namespace imports.gi.Gtk {
 		 *  or %NULL if no file is selected, or the selected file can't
 		 *  be represented with a local filename. Free with g_free().
 		 */
-		get_filename(): string;
+		get_filename(): string | null;
 		/**
 		 * Lists all the selected files and subfolders in the current folder of
 		 * #chooser. The returned names are full absolute paths. If files in the current
@@ -58824,7 +58742,7 @@ declare namespace imports.gi.Gtk {
 		 * Gets the current filter; see gtk_file_chooser_set_filter().
 		 * @returns the current filter, or %NULL
 		 */
-		get_filter(): FileFilter;
+		get_filter(): FileFilter | null;
 		/**
 		 * Gets whether only local files can be selected in the
 		 * file selector. See gtk_file_chooser_set_local_only()
@@ -58837,7 +58755,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns the #GFile for the file to preview,
 		 *     or %NULL if no file is selected. Free with g_object_unref().
 		 */
-		get_preview_file(): Gio.File;
+		get_preview_file(): Gio.File | null;
 		/**
 		 * Gets the filename that should be previewed in a custom preview
 		 * widget. See gtk_file_chooser_set_preview_widget().
@@ -58845,20 +58763,20 @@ declare namespace imports.gi.Gtk {
 		 *  no file is selected, or if the selected file cannot be represented
 		 *  as a local filename. Free with g_free()
 		 */
-		get_preview_filename(): string;
+		get_preview_filename(): string | null;
 		/**
 		 * Gets the URI that should be previewed in a custom preview
 		 * widget. See gtk_file_chooser_set_preview_widget().
 		 * @returns the URI for the file to preview,
 		 *     or %NULL if no file is selected. Free with g_free().
 		 */
-		get_preview_uri(): string;
+		get_preview_uri(): string | null;
 		/**
 		 * Gets the current preview widget; see
 		 * gtk_file_chooser_set_preview_widget().
 		 * @returns the current preview widget, or %NULL
 		 */
-		get_preview_widget(): Widget;
+		get_preview_widget(): Widget | null;
 		/**
 		 * Gets whether the preview widget set by gtk_file_chooser_set_preview_widget()
 		 * should be shown for the current filename. See
@@ -58890,7 +58808,7 @@ declare namespace imports.gi.Gtk {
 		 *    %TRUE (the default) a local URI will be returned for any FUSE locations.
 		 *    Free with g_free()
 		 */
-		get_uri(): string;
+		get_uri(): string | null;
 		/**
 		 * Lists all the selected files and subfolders in the current folder of
 		 * #chooser. The returned names are full absolute URIs.
@@ -58922,7 +58840,7 @@ declare namespace imports.gi.Gtk {
 		 * folder URIs, or %NULL if there are no shortcut folders.  Free the
 		 * returned list with g_slist_free(), and the URIs with g_free().
 		 */
-		list_shortcut_folder_uris(): GLib.SList;
+		list_shortcut_folder_uris(): GLib.SList | null;
 		/**
 		 * Queries the list of shortcut folders in the file chooser, as set by
 		 * gtk_file_chooser_add_shortcut_folder().
@@ -58931,7 +58849,7 @@ declare namespace imports.gi.Gtk {
 		 * Free the returned list with g_slist_free(), and the filenames with
 		 * g_free().
 		 */
-		list_shortcut_folders(): GLib.SList;
+		list_shortcut_folders(): GLib.SList | null;
 		/**
 		 * Removes a 'choice' that has been added with gtk_file_chooser_add_choice().
 		 * @param _id the ID of the choice to remove
@@ -59628,7 +59546,7 @@ declare namespace imports.gi.Gtk {
 		 *     of the current font, or %NULL if  no font is selected. You must
 		 *     free this string with g_free().
 		 */
-		get_font(): string;
+		get_font(): string | null;
 		/**
 		 * Gets the currently-selected font.
 		 * 
@@ -59643,7 +59561,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns A #PangoFontDescription for the
 		 *     current font, or %NULL if  no font is selected.
 		 */
-		get_font_desc(): Pango.FontDescription;
+		get_font_desc(): Pango.FontDescription | null;
 		/**
 		 * Gets the #PangoFontFace representing the selected font group
 		 * details (i.e. family, slant, weight, width, etc).
@@ -59653,7 +59571,7 @@ declare namespace imports.gi.Gtk {
 		 *     selected font group details, or %NULL. The returned object is owned by
 		 *     #fontchooser and must not be modified or freed.
 		 */
-		get_font_face(): Pango.FontFace;
+		get_font_face(): Pango.FontFace | null;
 		/**
 		 * Gets the #PangoFontFamily representing the selected font family.
 		 * Font families are a collection of font faces.
@@ -59663,7 +59581,7 @@ declare namespace imports.gi.Gtk {
 		 *     selected font family, or %NULL. The returned object is owned by #fontchooser
 		 *     and must not be modified or freed.
 		 */
-		get_font_family(): Pango.FontFamily;
+		get_font_family(): Pango.FontFamily | null;
 		/**
 		 * Gets the currently-selected font features.
 		 * @returns the currently selected font features
@@ -59674,7 +59592,7 @@ declare namespace imports.gi.Gtk {
 		 * or %NULL if it does not have one.
 		 * @returns a #PangoFontMap, or %NULL
 		 */
-		get_font_map(): Pango.FontMap;
+		get_font_map(): Pango.FontMap | null;
 		/**
 		 * The selected font size.
 		 * @returns A n integer representing the selected font size,
@@ -59709,7 +59627,7 @@ declare namespace imports.gi.Gtk {
 		 * @param filter a {@link FontFilterFunc}, or %NULL
 		 * @param destroy function to call to free #data when it is no longer needed
 		 */
-		set_filter_func(filter: FontFilterFunc, destroy: GLib.DestroyNotify): void;
+		set_filter_func(filter: FontFilterFunc | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the currently-selected font.
 		 * @param fontname a font name like “Helvetica 12” or “Times Bold 18”
@@ -59747,7 +59665,7 @@ declare namespace imports.gi.Gtk {
 		 * ]|
 		 * @param fontmap a #PangoFontMap
 		 */
-		set_font_map(fontmap: Pango.FontMap): void;
+		set_font_map(fontmap: Pango.FontMap | null): void;
 		/**
 		 * Sets the language to use for font features.
 		 * @param language a language
@@ -60050,13 +59968,11 @@ declare namespace imports.gi.Gtk {
 		 * properties of #chooser.
 		 * 
 		 * Since the returned array is %NULL terminated, #length may be %NULL.
-		 * @param length return location for a the length of the
-		 *     URI list, or %NULL
 		 * @returns 
 		 *     A newly allocated, %NULL-terminated array of strings. Use
 		 *     g_strfreev() to free it.
 		 */
-		get_uris(length: number): string[];
+		get_uris(): string[];
 		/**
 		 * Gets the {@link RecentFilter} objects held by #chooser.
 		 * @returns A singly linked list
@@ -60091,7 +60007,7 @@ declare namespace imports.gi.Gtk {
 		 * to affect the displayed recently used resources.
 		 * @param filter a {@link RecentFilter}
 		 */
-		set_filter(filter: RecentFilter): void;
+		set_filter(filter: RecentFilter | null): void;
 		/**
 		 * Sets the number of items that should be returned by
 		 * gtk_recent_chooser_get_items() and gtk_recent_chooser_get_uris().
@@ -60147,7 +60063,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sort_data user data to pass to #sort_func, or %NULL
 		 * @param data_destroy destroy notifier for #sort_data, or %NULL
 		 */
-		set_sort_func(sort_func: RecentSortFunc, sort_data: any, data_destroy: GLib.DestroyNotify): void;
+		set_sort_func(sort_func: RecentSortFunc, sort_data: any | null, data_destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Changes the sorting order of the recently used resources list displayed by
 		 * #chooser.
@@ -60269,7 +60185,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the horizontal adjustment of the {@link Scrollable}.
 		 * @param hadjustment a {@link Adjustment}
 		 */
-		set_hadjustment(hadjustment: Adjustment): void;
+		set_hadjustment(hadjustment: Adjustment | null): void;
 		/**
 		 * Sets the {@link ScrollablePolicy} to determine whether
 		 * horizontal scrolling should start below the minimum width or
@@ -60281,7 +60197,7 @@ declare namespace imports.gi.Gtk {
 		 * Sets the vertical adjustment of the {@link Scrollable}.
 		 * @param vadjustment a {@link Adjustment}
 		 */
-		set_vadjustment(vadjustment: Adjustment): void;
+		set_vadjustment(vadjustment: Adjustment | null): void;
 		/**
 		 * Sets the {@link ScrollablePolicy} to determine whether
 		 * vertical scrolling should start below the minimum height or
@@ -60348,7 +60264,7 @@ declare namespace imports.gi.Gtk {
 		 * @param path {@link WidgetPath} to query
 		 * @returns The icon factory to use for #path, or %NULL
 		 */
-		get_icon_factory(path: WidgetPath): IconFactory;
+		get_icon_factory(path: WidgetPath): IconFactory | null;
 		/**
 		 * Returns the style settings affecting a widget defined by #path, or %NULL if
 		 * #provider doesn’t contemplate styling #path.
@@ -60356,7 +60272,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a {@link StyleProperties} containing the
 		 * style settings affecting #path
 		 */
-		get_style(path: WidgetPath): StyleProperties;
+		get_style(path: WidgetPath): StyleProperties | null;
 		/**
 		 * Looks up a widget style property as defined by #provider for
 		 * the widget represented by #path.
@@ -60572,7 +60488,7 @@ declare namespace imports.gi.Gtk {
 		 * @param root A {@link TreePath} or %NULL.
 		 * @returns A new {@link TreeModel}.
 		 */
-		filter_new(root: TreePath): TreeModel;
+		filter_new(root: TreePath | null): TreeModel;
 		/**
 		 * Calls func on each node in model in a depth-first fashion.
 		 * 
@@ -60690,7 +60606,7 @@ declare namespace imports.gi.Gtk {
 		 * @param parent the {@link TreeIter}-struct, or %NULL
 		 * @returns %TRUE, if #iter has been set to the first child
 		 */
-		iter_children(iter: TreeIter, parent: TreeIter): boolean;
+		iter_children(iter: TreeIter, parent: TreeIter | null): boolean;
 		/**
 		 * Returns %TRUE if #iter has children, %FALSE otherwise.
 		 * @param iter the {@link TreeIter}-struct to test for children
@@ -60705,7 +60621,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter the {@link TreeIter}-struct, or %NULL
 		 * @returns the number of children of #iter
 		 */
-		iter_n_children(iter: TreeIter): number;
+		iter_n_children(iter: TreeIter | null): number;
 		/**
 		 * Sets #iter to point to the node following it at the current level.
 		 * 
@@ -60728,7 +60644,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _n the index of the desired child
 		 * @returns %TRUE, if #parent has an #n-th child
 		 */
-		iter_nth_child(iter: TreeIter, parent: TreeIter, _n: number): boolean;
+		iter_nth_child(iter: TreeIter, parent: TreeIter | null, _n: number): boolean;
 		/**
 		 * Sets #iter to be the parent of #child.
 		 * 
@@ -60837,7 +60753,7 @@ declare namespace imports.gi.Gtk {
 		 *     i.e. #new_order`[newpos] = oldpos`
 		 * @param length length of #new_order array
 		 */
-		rows_reordered_with_length(path: TreePath, iter: TreeIter, new_order: number[], length: number): void;
+		rows_reordered_with_length(path: TreePath, iter: TreeIter | null, new_order: number[], length: number): void;
 		/**
 		 * Lets the tree unref the node.
 		 * 
@@ -60887,7 +60803,7 @@ declare namespace imports.gi.Gtk {
 		 * when rows are reordered by DND, since this is implemented
 		 * by removing and then reinserting the row.
 		 */
-		connect(signal: "rows-reordered", callback: (owner: this, path: TreePath, iter: TreeIter, new_order: any) => void): number;
+		connect(signal: "rows-reordered", callback: (owner: this, path: TreePath, iter: TreeIter, new_order: any | null) => void): number;
 
 	}
 
@@ -61109,12 +61025,10 @@ declare namespace imports.gi.Gtk {
 		 * order. It returns %TRUE unless the #sort_column_id is
 		 * %GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID or
 		 * %GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID.
-		 * @param sort_column_id The sort column id to be filled in
-		 * @param order The {@link SortType} to be filled in
 		 * @returns %TRUE if the sort column is not one of the special sort
 		 *   column ids.
 		 */
-		get_sort_column_id(sort_column_id: number, order: SortType): boolean;
+		get_sort_column_id(): boolean;
 		/**
 		 * Returns %TRUE if the model has a default sort function. This is used
 		 * primarily by GtkTreeViewColumns in order to determine if a model can
@@ -61135,7 +61049,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sort_func The comparison function
 		 * @param destroy Destroy notifier of #user_data, or %NULL
 		 */
-		set_default_sort_func(sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify): void;
+		set_default_sort_func(sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the current sort column to be #sort_column_id. The #sortable will
 		 * resort itself to reflect this change, after emitting a
@@ -61158,7 +61072,7 @@ declare namespace imports.gi.Gtk {
 		 * @param sort_func The comparison function
 		 * @param destroy Destroy notifier of #user_data, or %NULL
 		 */
-		set_sort_func(sort_column_id: number, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify): void;
+		set_sort_func(sort_column_id: number, sort_func: TreeIterCompareFunc, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Emits a {@link TreeSortable}::sort-column-changed signal on #sortable.
 		 */
@@ -64879,11 +64793,11 @@ declare namespace imports.gi.Gtk {
 	}
 
 	interface AccelGroupFindFunc {
-		(key: AccelKey, closure: GObject.Closure, data: any): boolean;
+		(key: AccelKey, closure: GObject.Closure, data: any | null): boolean;
 	}
 
 	interface AccelMapForeach {
-		(data: any, accel_path: string, accel_key: number, accel_mods: Gdk.ModifierType, changed: boolean): void;
+		(data: any | null, accel_path: string, accel_key: number, accel_mods: Gdk.ModifierType, changed: boolean): void;
 	}
 
 	/**
@@ -64902,7 +64816,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data.
 		 * @returns The next page number.
 		 */
-		(current_page: number, data: any): number;
+		(current_page: number, data: any | null): number;
 	}
 
 	/**
@@ -64928,7 +64842,7 @@ declare namespace imports.gi.Gtk {
 		 * @param connect_object a #GObject, if non-%NULL, use g_signal_connect_object()
 		 * @param flags #GConnectFlags to use
 		 */
-		(builder: Builder, object: GObject.Object, signal_name: string, handler_name: string, connect_object: GObject.Object, flags: GObject.ConnectFlags): void;
+		(builder: Builder, object: GObject.Object, signal_name: string, handler_name: string, connect_object: GObject.Object | null, flags: GObject.ConnectFlags): void;
 	}
 
 	/**
@@ -64948,7 +64862,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns Newly allocated string with Pango markup
 		 *     with details for the specified day or %NULL.
 		 */
-		(calendar: Calendar, year: number, month: number, day: number): string;
+		(calendar: Calendar, year: number, month: number, day: number): string | null;
 	}
 
 	/**
@@ -64962,7 +64876,7 @@ declare namespace imports.gi.Gtk {
 		 * @param widget the widget to operate on
 		 * @param data user-supplied data
 		 */
-		(widget: Widget, data: any): void;
+		(widget: Widget, data: any | null): void;
 	}
 
 	/**
@@ -64983,7 +64897,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user-supplied data
 		 * @returns %TRUE to stop iterating over cells.
 		 */
-		(renderer: CellRenderer, cell_area: Gdk.Rectangle, cell_background: Gdk.Rectangle, data: any): boolean;
+		(renderer: CellRenderer, cell_area: Gdk.Rectangle, cell_background: Gdk.Rectangle, data: any | null): boolean;
 	}
 
 	/**
@@ -64998,7 +64912,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user-supplied data
 		 * @returns %TRUE to stop iterating over cells.
 		 */
-		(renderer: CellRenderer, data: any): boolean;
+		(renderer: CellRenderer, data: any | null): boolean;
 	}
 
 	/**
@@ -65015,7 +64929,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter a {@link TreeIter} indicating the row to set the value for
 		 * @param data user data passed to gtk_cell_layout_set_cell_data_func()
 		 */
-		(cell_layout: CellLayout, cell: CellRenderer, tree_model: TreeModel, iter: TreeIter, data: any): void;
+		(cell_layout: CellLayout, cell: CellRenderer, tree_model: TreeModel, iter: TreeIter, data: any | null): void;
 	}
 
 	/**
@@ -65032,7 +64946,7 @@ declare namespace imports.gi.Gtk {
 		 * @param user_data_or_owner the #user_data argument passed to gtk_clipboard_set_with_data(),
 		 *   or the #owner argument passed to gtk_clipboard_set_with_owner()
 		 */
-		(clipboard: Clipboard, user_data_or_owner: any): void;
+		(clipboard: Clipboard, user_data_or_owner: any | null): void;
 	}
 
 	/**
@@ -65065,7 +64979,7 @@ declare namespace imports.gi.Gtk {
 		 *   gtk_clipboard_set_with_data(), or the #owner argument passed to
 		 *   gtk_clipboard_set_with_owner()
 		 */
-		(clipboard: Clipboard, selection_data: SelectionData, info: number, user_data_or_owner: any): void;
+		(clipboard: Clipboard, selection_data: SelectionData, info: number, user_data_or_owner: any | null): void;
 	}
 
 	/**
@@ -65081,7 +64995,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_image().
 		 */
-		(clipboard: Clipboard, pixbuf: GdkPixbuf.Pixbuf, data: any): void;
+		(clipboard: Clipboard, pixbuf: GdkPixbuf.Pixbuf, data: any | null): void;
 	}
 
 	/**
@@ -65099,7 +65013,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_contents().
 		 */
-		(clipboard: Clipboard, selection_data: SelectionData, data: any): void;
+		(clipboard: Clipboard, selection_data: SelectionData, data: any | null): void;
 	}
 
 	/**
@@ -65120,7 +65034,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_rich_text().
 		 */
-		(clipboard: Clipboard, format: Gdk.Atom, text: string, length: number, data: any): void;
+		(clipboard: Clipboard, format: Gdk.Atom, text: string | null, length: number, data: any | null): void;
 	}
 
 	/**
@@ -65138,7 +65052,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_targets().
 		 */
-		(clipboard: Clipboard, atoms: Gdk.Atom[], n_atoms: number, data: any): void;
+		(clipboard: Clipboard, atoms: Gdk.Atom[] | null, n_atoms: number, data: any | null): void;
 	}
 
 	/**
@@ -65155,7 +65069,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_text().
 		 */
-		(clipboard: Clipboard, text: string, data: any): void;
+		(clipboard: Clipboard, text: string | null, data: any | null): void;
 	}
 
 	/**
@@ -65173,7 +65087,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data the #user_data supplied to
 		 *   gtk_clipboard_request_uris().
 		 */
-		(clipboard: Clipboard, uris: string[], data: any): void;
+		(clipboard: Clipboard, uris: string[], data: any | null): void;
 	}
 
 	interface ColorSelectionChangePaletteFunc {
@@ -65222,7 +65136,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data passed to gtk_file_filter_add_custom()
 		 * @returns %TRUE if the file should be displayed
 		 */
-		(filter_info: FileFilterInfo, data: any): boolean;
+		(filter_info: FileFilterInfo, data: any | null): boolean;
 	}
 
 	/**
@@ -65298,7 +65212,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data passed to gtk_font_chooser_set_filter_func()
 		 * @returns %TRUE if the font should be displayed
 		 */
-		(family: Pango.FontFamily, _face: Pango.FontFace, data: any): boolean;
+		(family: Pango.FontFamily, _face: Pango.FontFace, data: any | null): boolean;
 	}
 
 	/**
@@ -65313,7 +65227,7 @@ declare namespace imports.gi.Gtk {
 		 * @param path The {@link TreePath} of a selected row
 		 * @param data user data
 		 */
-		(icon_view: IconView, path: TreePath, data: any): void;
+		(icon_view: IconView, path: TreePath, data: any | null): void;
 	}
 
 	/**
@@ -65329,7 +65243,7 @@ declare namespace imports.gi.Gtk {
 		 * @param func_data data supplied to gtk_key_snooper_install()
 		 * @returns %TRUE to stop further processing of #event, %FALSE to continue.
 		 */
-		(grab_widget: Widget, event: Gdk.EventKey, func_data: any): number;
+		(grab_widget: Widget, event: Gdk.EventKey, func_data: any | null): number;
 	}
 
 	/**
@@ -65413,7 +65327,7 @@ declare namespace imports.gi.Gtk {
 		 * @param _row the row to update
 		 * @param before the row before #row, or %NULL if it is first
 		 */
-		(_row: ListBoxRow, before: ListBoxRow): void;
+		(_row: ListBoxRow, before: ListBoxRow | null): void;
 	}
 
 	/**
@@ -65447,23 +65361,8 @@ declare namespace imports.gi.Gtk {
 		 * monitor than the mouse pointer, gtk_menu_set_monitor() must be
 		 * called.
 		 * @param menu a {@link Menu}.
-		 * @param _x address of the #gint representing the horizontal
-		 *     position where the menu shall be drawn.
-		 * @param _y address of the #gint representing the vertical position
-		 *     where the menu shall be drawn.  This is an output parameter.
-		 * @param push_in This parameter controls how menus placed outside
-		 *     the monitor are handled.  If this is set to %TRUE and part of
-		 *     the menu is outside the monitor then GTK+ pushes the window
-		 *     into the visible area, effectively modifying the popup
-		 *     position.  Note that moving and possibly resizing the menu
-		 *     around will alter the scroll position to keep the menu items
-		 *     “in place”, i.e. at the same monitor position they would have
-		 *     been without resizing.  In practice, this behavior is only
-		 *     useful for combobox popups or option menus and cannot be used
-		 *     to simply confine a menu to monitor boundaries.  In that case,
-		 *     changing the scroll offset is not desirable.
 		 */
-		(menu: Menu, _x: number, _y: number, push_in: boolean): void;
+		(menu: Menu): void;
 	}
 
 	/**
@@ -65490,7 +65389,7 @@ declare namespace imports.gi.Gtk {
 		 * @param argc GTK+ always passes %NULL for this argument
 		 * @param argv GTK+ always passes %NULL for this argument
 		 */
-		(argc: number, argv: string[]): void;
+		(argc: number | null, argv: string[] | null): void;
 	}
 
 	/**
@@ -65511,7 +65410,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data that has been passed to
 		 *     gtk_print_run_page_setup_dialog_async()
 		 */
-		(page_setup: PageSetup, data: any): void;
+		(page_setup: PageSetup, data: any | null): void;
 	}
 
 	interface PrintSettingsFunc {
@@ -65580,7 +65479,7 @@ declare namespace imports.gi.Gtk {
 		 * @returns a newly-allocated array of guint8 which contains
 		 * the serialized data, or %NULL if an error occurred
 		 */
-		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, _end: TextIter, length: number): number;
+		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, _end: TextIter, length: number): number | null;
 	}
 
 	interface TextCharPredicate {
@@ -65588,7 +65487,7 @@ declare namespace imports.gi.Gtk {
 	}
 
 	interface TextTagTableForeach {
-		(tag: TextTag, data: any): void;
+		(tag: TextTag, data: any | null): void;
 	}
 
 	/**
@@ -65619,7 +65518,7 @@ declare namespace imports.gi.Gtk {
 		 *   function
 		 * @returns the translated message
 		 */
-		(path: string, func_data: any): string;
+		(path: string, func_data: any | null): string;
 	}
 
 	/**
@@ -65644,7 +65543,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter} of the current row rendered
 		 * @param data user data
 		 */
-		(tree_column: TreeViewColumn, cell: CellRenderer, tree_model: TreeModel, iter: TreeIter, data: any): void;
+		(tree_column: TreeViewColumn, cell: CellRenderer, tree_model: TreeModel, iter: TreeIter, data: any | null): void;
 	}
 
 	interface TreeDestroyCountFunc {
@@ -65707,7 +65606,7 @@ declare namespace imports.gi.Gtk {
 		 * @param column the column whose display value is determined
 		 * @param data user data given to gtk_tree_model_filter_set_modify_func()
 		 */
-		(model: TreeModel, iter: TreeIter, value: GObject.Value, column: number, data: any): void;
+		(model: TreeModel, iter: TreeIter, value: GObject.Value, column: number, data: any | null): void;
 	}
 
 	/**
@@ -65722,7 +65621,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data given to gtk_tree_model_filter_set_visible_func()
 		 * @returns Whether the row indicated by #iter is visible.
 		 */
-		(model: TreeModel, iter: TreeIter, data: any): boolean;
+		(model: TreeModel, iter: TreeIter, data: any | null): boolean;
 	}
 
 	/**
@@ -65739,7 +65638,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data The user data passed to gtk_tree_model_foreach()
 		 * @returns %TRUE to stop iterating, %FALSE to continue
 		 */
-		(model: TreeModel, path: TreePath, iter: TreeIter, data: any): boolean;
+		(model: TreeModel, path: TreePath, iter: TreeIter, data: any | null): boolean;
 	}
 
 	/**
@@ -65755,7 +65654,7 @@ declare namespace imports.gi.Gtk {
 		 * @param iter A {@link TreeIter} pointing to a selected row
 		 * @param data user data
 		 */
-		(model: TreeModel, path: TreePath, iter: TreeIter, data: any): void;
+		(model: TreeModel, path: TreePath, iter: TreeIter, data: any | null): void;
 	}
 
 	/**
@@ -65777,7 +65676,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data
 		 * @returns %TRUE, if the selection state of the row can be toggled
 		 */
-		(selection: TreeSelection, model: TreeModel, path: TreePath, path_currently_selected: boolean, data: any): boolean;
+		(selection: TreeSelection, model: TreeModel, path: TreePath, path_currently_selected: boolean, data: any | null): boolean;
 	}
 
 	/**
@@ -65807,7 +65706,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data
 		 * @returns %TRUE, if #column can be dropped in this spot
 		 */
-		(tree_view: TreeView, column: TreeViewColumn, prev_column: TreeViewColumn, next_column: TreeViewColumn, data: any): boolean;
+		(tree_view: TreeView, column: TreeViewColumn, prev_column: TreeViewColumn, next_column: TreeViewColumn, data: any | null): boolean;
 	}
 
 	/**
@@ -65839,7 +65738,7 @@ declare namespace imports.gi.Gtk {
 		 * @param data user data
 		 * @returns %TRUE if the row is a separator
 		 */
-		(model: TreeModel, iter: TreeIter, data: any): boolean;
+		(model: TreeModel, iter: TreeIter, data: any | null): boolean;
 	}
 
 	/**
@@ -65862,7 +65761,7 @@ declare namespace imports.gi.Gtk {
 		 * @param search_data user data from gtk_tree_view_set_search_equal_func()
 		 * @returns %FALSE if the row matches, %TRUE otherwise.
 		 */
-		(model: TreeModel, column: number, key: string, iter: TreeIter, search_data: any): boolean;
+		(model: TreeModel, column: number, key: string, iter: TreeIter, search_data: any | null): boolean;
 	}
 
 	interface TreeViewSearchPositionFunc {
@@ -65933,7 +65832,7 @@ declare namespace imports.gi.Gtk {
 	 * @param accelerator_mods accelerator modifier mask
 	 * @returns a newly-allocated string representing the accelerator.
 	 */
-	function accelerator_get_label_with_keycode(display: Gdk.Display, accelerator_key: number, keycode: number, accelerator_mods: Gdk.ModifierType): string;
+	function accelerator_get_label_with_keycode(display: Gdk.Display | null, accelerator_key: number, keycode: number, accelerator_mods: Gdk.ModifierType): string;
 
 	/**
 	 * Converts an accelerator keyval and modifier mask into a string
@@ -65960,7 +65859,7 @@ declare namespace imports.gi.Gtk {
 	 * @param accelerator_mods accelerator modifier mask
 	 * @returns a newly allocated accelerator name.
 	 */
-	function accelerator_name_with_keycode(display: Gdk.Display, accelerator_key: number, keycode: number, accelerator_mods: Gdk.ModifierType): string;
+	function accelerator_name_with_keycode(display: Gdk.Display | null, accelerator_key: number, keycode: number, accelerator_mods: Gdk.ModifierType): string;
 
 	/**
 	 * Parses a string representing an accelerator. The format looks like
@@ -65976,12 +65875,13 @@ declare namespace imports.gi.Gtk {
 	 * If the parse fails, #accelerator_key and #accelerator_mods will
 	 * be set to 0 (zero).
 	 * @param accelerator string representing an accelerator
-	 * @param accelerator_key return location for accelerator
+	 * @returns return location for accelerator
 	 *     keyval, or %NULL
-	 * @param accelerator_mods return location for accelerator
+	 * 
+	 * return location for accelerator
 	 *     modifier mask, %NULL
 	 */
-	function accelerator_parse(accelerator: string, accelerator_key: number, accelerator_mods: Gdk.ModifierType): void;
+	function accelerator_parse(accelerator: string): [ accelerator_key: number | null, accelerator_mods: Gdk.ModifierType | null ];
 
 	/**
 	 * Parses a string representing an accelerator, similarly to
@@ -65998,14 +65898,16 @@ declare namespace imports.gi.Gtk {
 	 * If the parse fails, #accelerator_key, #accelerator_mods and
 	 * #accelerator_codes will be set to 0 (zero).
 	 * @param accelerator string representing an accelerator
-	 * @param accelerator_key return location for accelerator
+	 * @returns return location for accelerator
 	 *     keyval, or %NULL
-	 * @param accelerator_codes 
+	 * 
+	 * 
 	 *     return location for accelerator keycodes, or %NULL
-	 * @param accelerator_mods return location for accelerator
+	 * 
+	 * return location for accelerator
 	 *     modifier mask, %NULL
 	 */
-	function accelerator_parse_with_keycode(accelerator: string, accelerator_key: number, accelerator_codes: number[], accelerator_mods: Gdk.ModifierType): void;
+	function accelerator_parse_with_keycode(accelerator: string): [ number | null, number[] | null, Gdk.ModifierType | null ];
 
 	/**
 	 * Sets the modifiers that will be considered significant for keyboard
@@ -66049,7 +65951,7 @@ declare namespace imports.gi.Gtk {
 	 * @param screen a #GdkScreen, or %NULL to use the default screen
 	 * @returns Whether the alternative button order should be used
 	 */
-	function alternative_dialog_button_order(screen: Gdk.Screen): boolean;
+	function alternative_dialog_button_order(screen: Gdk.Screen | null): boolean;
 
 	/**
 	 * Parses a signal description from #signal_desc and incorporates
@@ -66117,7 +66019,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns the binding set corresponding to
 	 *     #object_class
 	 */
-	function binding_set_by_class(object_class: any): BindingSet;
+	function binding_set_by_class(object_class: any | null): BindingSet;
 
 	/**
 	 * Find a binding set by its globally unique name.
@@ -66127,7 +66029,7 @@ declare namespace imports.gi.Gtk {
 	 * @param set_name unique binding set name
 	 * @returns %NULL or the specified binding set
 	 */
-	function binding_set_find(set_name: string): BindingSet;
+	function binding_set_find(set_name: string): BindingSet | null;
 
 	/**
 	 * GTK+ maintains a global list of binding sets. Each binding set has
@@ -66222,7 +66124,7 @@ declare namespace imports.gi.Gtk {
 	 *   The returned string is owned by GTK+ and should not be modified
 	 *   or freed.
 	 */
-	function check_version(required_major: number, required_minor: number, required_micro: number): string;
+	function check_version(required_major: number, required_minor: number, required_micro: number): string | null;
 
 	function css_provider_error_quark(): GLib.Quark;
 
@@ -66311,7 +66213,7 @@ declare namespace imports.gi.Gtk {
 	 *     within a single application, a pointer to the source widget.
 	 *     Otherwise, %NULL.
 	 */
-	function drag_get_source_widget(context: Gdk.DragContext): Widget;
+	function drag_get_source_widget(context: Gdk.DragContext): Widget | null;
 
 	/**
 	 * Sets the icon for a particular drag to the default
@@ -66461,24 +66363,23 @@ declare namespace imports.gi.Gtk {
 	 *     %NULL if there is no current event. The returned event must be
 	 *     freed with gdk_event_free().
 	 */
-	function get_current_event(): Gdk.Event;
+	function get_current_event(): Gdk.Event | null;
 
 	/**
 	 * If there is a current event and it has a device, return that
 	 * device, otherwise return %NULL.
 	 * @returns a #GdkDevice, or %NULL
 	 */
-	function get_current_event_device(): Gdk.Device;
+	function get_current_event_device(): Gdk.Device | null;
 
 	/**
 	 * If there is a current event and it has a state field, place
 	 * that state field in #state and return %TRUE, otherwise return
 	 * %FALSE.
-	 * @param state a location to store the state of the current event
 	 * @returns %TRUE if there was a current event and it
 	 *     had a state field
 	 */
-	function get_current_event_state(state: Gdk.ModifierType): boolean;
+	function get_current_event_state(): boolean;
 
 	/**
 	 * If there is a current event and it has a timestamp,
@@ -66519,7 +66420,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns the widget that originally
 	 *     received #event, or %NULL
 	 */
-	function get_event_widget(event: Gdk.Event): Widget;
+	function get_event_widget(event: Gdk.Event): Widget | null;
 
 	/**
 	 * Returns the interface age as passed to `libtool`
@@ -66611,7 +66512,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns The widget which currently
 	 *     has the grab or %NULL if no grab is active
 	 */
-	function grab_get_current(): Widget;
+	function grab_get_current(): Widget | null;
 
 	/**
 	 * Looks up the icon size associated with #name.
@@ -66638,11 +66539,9 @@ declare namespace imports.gi.Gtk {
 	 * are free to render the pixbuf however they like, including changing
 	 * the usual size.
 	 * @param size an icon size ({@link IconSize})
-	 * @param width location to store icon width
-	 * @param height location to store icon height
 	 * @returns %TRUE if #size was a valid size
 	 */
-	function icon_size_lookup(size: number, width: number, height: number): boolean;
+	function icon_size_lookup(size: number): boolean;
 
 	/**
 	 * Obtains the pixel size of a semantic icon size, possibly
@@ -66658,11 +66557,9 @@ declare namespace imports.gi.Gtk {
 	 * @param settings a {@link Settings} object, used to determine
 	 *   which set of user preferences to used.
 	 * @param size an icon size ({@link IconSize})
-	 * @param width location to store icon width
-	 * @param height location to store icon height
 	 * @returns %TRUE if #size was a valid size
 	 */
-	function icon_size_lookup_for_settings(settings: Settings, size: number, width: number, height: number): boolean;
+	function icon_size_lookup_for_settings(settings: Settings, size: number): boolean;
 
 	/**
 	 * Registers a new icon size, along the same lines as #GTK_ICON_SIZE_MENU,
@@ -66718,14 +66615,8 @@ declare namespace imports.gi.Gtk {
 	 * handle SIGPIPE for some reason, reset the handler after gtk_init(),
 	 * but notice that other libraries (e.g. libdbus or gvfs) might do
 	 * similar things.
-	 * @param argc Address of the `argc` parameter of
-	 *     your main() function (or 0 if #argv is %NULL). This will be changed if
-	 *     any arguments were handled.
-	 * @param argv Address of the
-	 *     `argv` parameter of main(), or %NULL. Any options
-	 *     understood by GTK+ are stripped before return.
 	 */
-	function init(argc: number | null, argv: string[]): void;
+	function init(): void;
 
 	/**
 	 * This function does the same work as gtk_init() with only a single
@@ -66739,17 +66630,11 @@ declare namespace imports.gi.Gtk {
 	 * 
 	 * Note that calling any GTK function or instantiating any GTK type after
 	 * this function returns %FALSE results in undefined behavior.
-	 * @param argc Address of the `argc` parameter of
-	 *     your main() function (or 0 if #argv is %NULL). This will be changed if
-	 *     any arguments were handled.
-	 * @param argv Address of the
-	 *     `argv` parameter of main(), or %NULL. Any options
-	 *     understood by GTK+ are stripped before return.
 	 * @returns %TRUE if the commandline arguments (if any) were valid and
 	 *     the windowing system has been successfully initialized, %FALSE
 	 *     otherwise
 	 */
-	function init_check(argc: number, argv: string[]): boolean;
+	function init_check(): boolean;
 
 	/**
 	 * This function does the same work as gtk_init_check().
@@ -66757,12 +66642,6 @@ declare namespace imports.gi.Gtk {
 	 * and it automatically generates nicely formatted
 	 * `--help` output. Note that your program will
 	 * be terminated after writing out the help output.
-	 * @param argc Address of the `argc` parameter of
-	 *     your main() function (or 0 if #argv is %NULL). This will be changed if
-	 *     any arguments were handled.
-	 * @param argv Address of the
-	 *     `argv` parameter of main(), or %NULL. Any options
-	 *     understood by GTK+ are stripped before return.
 	 * @param parameter_string a string which is displayed in
 	 *    the first line of `--help` output, after
 	 *    `programname [OPTION...]`
@@ -66775,7 +66654,7 @@ declare namespace imports.gi.Gtk {
 	 *     if the windowing system has been successfully initialized,
 	 *     %FALSE otherwise
 	 */
-	function init_with_args(argc: number, argv: string[], parameter_string: string, entries: GLib.OptionEntry[], translation_domain: string): boolean;
+	function init_with_args(parameter_string: string | null, entries: GLib.OptionEntry[], translation_domain: string | null): boolean;
 
 	/**
 	 * Installs a key snooper function, which will get called on all
@@ -66785,7 +66664,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns a unique id for this key snooper for use with
 	 *    gtk_key_snooper_remove().
 	 */
-	function key_snooper_install(snooper: KeySnoopFunc, func_data: any): number;
+	function key_snooper_install(snooper: KeySnoopFunc, func_data: any | null): number;
 
 	/**
 	 * Removes the key snooper function with the given id.
@@ -66893,7 +66772,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width width of the rectangle to draw the arrow in
 	 * @param height height of the rectangle to draw the arrow in
 	 */
-	function paint_arrow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, arrow_type: ArrowType, fill: boolean, _x: number, _y: number, width: number, height: number): void;
+	function paint_arrow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, arrow_type: ArrowType, fill: boolean, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a box on #cr with the given parameters.
@@ -66908,7 +66787,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the box
 	 * @param height the height of the box
 	 */
-	function paint_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a box in #cr using the given style and state and shadow type,
@@ -66927,7 +66806,7 @@ declare namespace imports.gi.Gtk {
 	 * @param gap_x starting position of the gap
 	 * @param gap_width width of the gap
 	 */
-	function paint_box_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
+	function paint_box_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
 
 	/**
 	 * Draws a check button indicator in the given rectangle on #cr with
@@ -66943,7 +66822,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle to draw the check in
 	 * @param height the height of the rectangle to draw the check in
 	 */
-	function paint_check(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_check(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a diamond in the given rectangle on #window using the given
@@ -66959,7 +66838,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width width of the rectangle to draw the diamond in
 	 * @param height height of the rectangle to draw the diamond in
 	 */
-	function paint_diamond(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_diamond(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws an expander as used in {@link TreeView}. #x and #y specify the
@@ -66982,7 +66861,7 @@ declare namespace imports.gi.Gtk {
 	 *   whether the expander is collapsed, expanded, or in an
 	 *   intermediate state.
 	 */
-	function paint_expander(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, _x: number, _y: number, expander_style: ExpanderStyle): void;
+	function paint_expander(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, _x: number, _y: number, expander_style: ExpanderStyle): void;
 
 	/**
 	 * Draws an extension, i.e. a notebook tab.
@@ -66998,7 +66877,7 @@ declare namespace imports.gi.Gtk {
 	 * @param height width of the extension
 	 * @param gap_side the side on to which the extension is attached
 	 */
-	function paint_extension(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;
+	function paint_extension(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;
 
 	/**
 	 * Draws a flat box on #cr with the given parameters.
@@ -67013,7 +66892,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the box
 	 * @param height the height of the box
 	 */
-	function paint_flat_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_flat_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a focus indicator around the given rectangle on #cr using the
@@ -67028,7 +66907,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle around which to draw a focus indicator
 	 * @param height the height of the rectangle around which to draw a focus indicator
 	 */
-	function paint_focus(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_focus(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a handle as used in {@link HandleBox} and #GtkPaned.
@@ -67044,7 +66923,7 @@ declare namespace imports.gi.Gtk {
 	 * @param height height of the handle
 	 * @param orientation the orientation of the handle
 	 */
-	function paint_handle(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
+	function paint_handle(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
 
 	/**
 	 * Draws a horizontal line from (#x1, #y) to (#x2, #y) in #cr
@@ -67058,7 +66937,7 @@ declare namespace imports.gi.Gtk {
 	 * @param x2 the ending x coordinate
 	 * @param _y the y coordinate
 	 */
-	function paint_hline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x1: number, x2: number, _y: number): void;
+	function paint_hline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, x1: number, x2: number, _y: number): void;
 
 	/**
 	 * Draws a layout on #cr using the given parameters.
@@ -67073,7 +66952,7 @@ declare namespace imports.gi.Gtk {
 	 * @param _y y origin
 	 * @param layout the layout to draw
 	 */
-	function paint_layout(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget, detail: string, _x: number, _y: number, layout: Pango.Layout): void;
+	function paint_layout(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget | null, detail: string | null, _x: number, _y: number, layout: Pango.Layout): void;
 
 	/**
 	 * Draws a radio button indicator in the given rectangle on #cr with
@@ -67089,7 +66968,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle to draw the option in
 	 * @param height the height of the rectangle to draw the option in
 	 */
-	function paint_option(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_option(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a resize grip in the given rectangle on #cr using the given
@@ -67105,7 +66984,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle in which to draw the resize grip
 	 * @param height the height of the rectangle in which to draw the resize grip
 	 */
-	function paint_resize_grip(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, edge: Gdk.WindowEdge, _x: number, _y: number, width: number, height: number): void;
+	function paint_resize_grip(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, edge: Gdk.WindowEdge, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a shadow around the given rectangle in #cr
@@ -67121,7 +67000,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width width of the rectangle
 	 * @param height width of the rectangle
 	 */
-	function paint_shadow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_shadow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a shadow around the given rectangle in #cr
@@ -67141,7 +67020,7 @@ declare namespace imports.gi.Gtk {
 	 * @param gap_x starting position of the gap
 	 * @param gap_width width of the gap
 	 */
-	function paint_shadow_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
+	function paint_shadow_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
 
 	/**
 	 * Draws a slider in the given rectangle on #cr using the
@@ -67158,7 +67037,7 @@ declare namespace imports.gi.Gtk {
 	 * @param height the height of the rectangle in which to draw a slider
 	 * @param orientation the orientation to be used
 	 */
-	function paint_slider(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
+	function paint_slider(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
 
 	/**
 	 * Draws a spinner on #window using the given parameters.
@@ -67173,7 +67052,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle in which to draw the spinner
 	 * @param height the height of the rectangle in which to draw the spinner
 	 */
-	function paint_spinner(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, step: number, _x: number, _y: number, width: number, height: number): void;
+	function paint_spinner(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, step: number, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws an option menu tab (i.e. the up and down pointing arrows)
@@ -67189,7 +67068,7 @@ declare namespace imports.gi.Gtk {
 	 * @param width the width of the rectangle to draw the tab in
 	 * @param height the height of the rectangle to draw the tab in
 	 */
-	function paint_tab(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;
+	function paint_tab(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a vertical line from (#x, #y1_) to (#x, #y2_) in #cr
@@ -67203,7 +67082,7 @@ declare namespace imports.gi.Gtk {
 	 * @param y2_ the ending y coordinate
 	 * @param _x the x coordinate
 	 */
-	function paint_vline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, y1_: number, y2_: number, _x: number): void;
+	function paint_vline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, y1_: number, y2_: number, _x: number): void;
 
 	/**
 	 * Returns the name of the default paper size, which
@@ -67236,12 +67115,9 @@ declare namespace imports.gi.Gtk {
 	 * Note that many aspects of GTK+ require a display connection to
 	 * function, so this way of initializing GTK+ is really only useful
 	 * for specialized use cases.
-	 * @param argc a pointer to the number of command line arguments
-	 * @param argv a pointer to the array of
-	 *     command line arguments
 	 * @returns %TRUE if initialization succeeded, otherwise %FALSE
 	 */
-	function parse_args(argc: number, argv: string[]): boolean;
+	function parse_args(): boolean;
 
 	/**
 	 * Registers an error quark for {@link PrintOperation} if necessary.
@@ -67263,7 +67139,7 @@ declare namespace imports.gi.Gtk {
 	 * @param settings a {@link PrintSettings}
 	 * @returns a new {@link PageSetup}
 	 */
-	function print_run_page_setup_dialog(parent: Window, page_setup: PageSetup, settings: PrintSettings): PageSetup;
+	function print_run_page_setup_dialog(parent: Window | null, page_setup: PageSetup | null, settings: PrintSettings): PageSetup;
 
 	/**
 	 * Runs a page setup dialog, letting the user modify the values from #page_setup.
@@ -67278,7 +67154,7 @@ declare namespace imports.gi.Gtk {
 	 *           the modified page setup
 	 * @param data user data to pass to #done_cb
 	 */
-	function print_run_page_setup_dialog_async(parent: Window, page_setup: PageSetup, settings: PrintSettings, done_cb: PageSetupDoneFunc, data: any): void;
+	function print_run_page_setup_dialog_async(parent: Window | null, page_setup: PageSetup | null, settings: PrintSettings, done_cb: PageSetupDoneFunc, data: any | null): void;
 
 	/**
 	 * Sends an event to a widget, propagating the event to parent widgets
@@ -67414,7 +67290,7 @@ declare namespace imports.gi.Gtk {
 	 *     must call g_object_ref() on the returned value if you want to
 	 *     keep a reference to it.
 	 */
-	function rc_get_style_by_paths(settings: Settings, widget_path: string, class_path: string, _type: GObject.Type): Style;
+	function rc_get_style_by_paths(settings: Settings, widget_path: string | null, class_path: string | null, _type: GObject.Type): Style | null;
 
 	/**
 	 * Returns the standard directory in which themes should
@@ -67456,7 +67332,7 @@ declare namespace imports.gi.Gtk {
 	 * @returns %G_TOKEN_NONE if parsing succeeded, otherwise the token
 	 *     that was expected but not found
 	 */
-	function rc_parse_color_full(scanner: GLib.Scanner, style: RcStyle, color: Gdk.Color): number;
+	function rc_parse_color_full(scanner: GLib.Scanner, style: RcStyle | null, color: Gdk.Color): number;
 
 	/**
 	 * Parses a {@link PathPriorityType} variable from the format expected
@@ -67473,12 +67349,10 @@ declare namespace imports.gi.Gtk {
 	 * Parses a {@link StateType} variable from the format expected
 	 * in a RC file.
 	 * @param scanner a #GScanner (must be initialized for parsing an RC file)
-	 * @param state A pointer to a {@link StateType} variable in which to
-	 *  store the result.
 	 * @returns %G_TOKEN_NONE if parsing succeeded, otherwise the token
 	 *   that was expected but not found.
 	 */
-	function rc_parse_state(scanner: GLib.Scanner, state: StateType): number;
+	function rc_parse_state(scanner: GLib.Scanner): number;
 
 	/**
 	 * Parses resource information directly from a string.
@@ -67901,11 +67775,13 @@ declare namespace imports.gi.Gtk {
 	 * @param _r Red
 	 * @param _g Green
 	 * @param _b Blue
-	 * @param _h Return value for the hue component
-	 * @param _s Return value for the saturation component
-	 * @param _v Return value for the value component
+	 * @returns Return value for the hue component
+	 * 
+	 * Return value for the saturation component
+	 * 
+	 * Return value for the value component
 	 */
-	function rgb_to_hsv(_r: number, _g: number, _b: number, _h: number, _s: number, _v: number): void;
+	function rgb_to_hsv(_r: number, _g: number, _b: number): [ h: number, s: number, v: number ];
 
 	/**
 	 * Appends a specified target to the list of supported targets for a
@@ -67957,7 +67833,7 @@ declare namespace imports.gi.Gtk {
 	 * @param time_ timestamp with which to claim the selection
 	 * @returns %TRUE if the operation succeeded
 	 */
-	function selection_owner_set(widget: Widget, selection: Gdk.Atom, time_: number): boolean;
+	function selection_owner_set(widget: Widget | null, selection: Gdk.Atom, time_: number): boolean;
 
 	/**
 	 * Claim ownership of a given selection for a particular widget, or,
@@ -67968,7 +67844,7 @@ declare namespace imports.gi.Gtk {
 	 * @param time_ timestamp with which to claim the selection
 	 * @returns TRUE if the operation succeeded
 	 */
-	function selection_owner_set_for_display(display: Gdk.Display, widget: Widget, selection: Gdk.Atom, time_: number): boolean;
+	function selection_owner_set_for_display(display: Gdk.Display, widget: Widget | null, selection: Gdk.Atom, time_: number): boolean;
 
 	/**
 	 * Removes all handlers and unsets ownership of all
@@ -67992,7 +67868,7 @@ declare namespace imports.gi.Gtk {
 	 * @param parent transient parent, or %NULL for none
 	 * @param first_property_name the name of the first property
 	 */
-	function show_about_dialog(parent: Window, first_property_name: string): void;
+	function show_about_dialog(parent: Window | null, first_property_name: string): void;
 
 	/**
 	 * A convenience function for launching the default application
@@ -68008,7 +67884,7 @@ declare namespace imports.gi.Gtk {
 	 * @param timestamp a timestamp to prevent focus stealing
 	 * @returns %TRUE on success, %FALSE on error
 	 */
-	function show_uri(screen: Gdk.Screen, uri: string, timestamp: number): boolean;
+	function show_uri(screen: Gdk.Screen | null, uri: string, timestamp: number): boolean;
 
 	/**
 	 * This is a convenience function for launching the default application
@@ -68031,7 +67907,7 @@ declare namespace imports.gi.Gtk {
 	 * @param timestamp a timestamp to prevent focus stealing
 	 * @returns %TRUE on success, %FALSE on error
 	 */
-	function show_uri_on_window(parent: Window, uri: string, timestamp: number): boolean;
+	function show_uri_on_window(parent: Window | null, uri: string, timestamp: number): boolean;
 
 	/**
 	 * Registers each of the stock items in #items. If an item already
@@ -68111,7 +67987,7 @@ declare namespace imports.gi.Gtk {
 	 * @param notify a #GDestroyNotify that is called when #data is
 	 *   no longer needed
 	 */
-	function stock_set_translate_func(domain: string, _func: TranslateFunc, data: any, notify: GLib.DestroyNotify): void;
+	function stock_set_translate_func(domain: string, _func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
 
 	/**
 	 * This function frees a target table as returned by
@@ -68127,10 +68003,9 @@ declare namespace imports.gi.Gtk {
 	 * allocated and should be freed using gtk_target_table_free() when no
 	 * longer needed.
 	 * @param list a {@link TargetList}
-	 * @param n_targets return location for the number ot targets in the table
 	 * @returns the new table.
 	 */
-	function target_table_new_from_list(list: TargetList, n_targets: number): TargetEntry[];
+	function target_table_new_from_list(list: TargetList): TargetEntry[];
 
 	/**
 	 * Determines if any of the targets in #targets can be used to
@@ -68195,7 +68070,7 @@ declare namespace imports.gi.Gtk {
 	 * @param first_property_name Name of first property to set or %NULL
 	 * @returns a newly created widget.
 	 */
-	function test_create_widget(widget_type: GObject.Type, first_property_name: string): Widget;
+	function test_create_widget(widget_type: GObject.Type, first_property_name: string | null): Widget;
 
 	/**
 	 * Create a window with window title #window_title, text contents #dialog_text,
@@ -68255,7 +68130,7 @@ declare namespace imports.gi.Gtk {
 	 * @param widget_type Type of a aearched for label sibling widget.
 	 * @returns a valid widget if any is found or %NULL.
 	 */
-	function test_find_widget(widget: Widget, label_pattern: string, widget_type: GObject.Type): Widget;
+	function test_find_widget(widget: Widget, label_pattern: string, widget_type: GObject.Type): Widget | null;
 
 	/**
 	 * This function is used to initialize a GTK+ test program.
@@ -68268,23 +68143,16 @@ declare namespace imports.gi.Gtk {
 	 * 
 	 * Like gtk_init() and g_test_init(), any known arguments will be
 	 * processed and stripped from #argc and #argv.
-	 * @param argcp Address of the `argc` parameter of the
-	 *        main() function. Changed if any arguments were handled.
-	 * @param argvp Address of the
-	 *        `argv` parameter of main().
-	 *        Any parameters understood by g_test_init() or gtk_init() are
-	 *        stripped before return.
 	 */
-	function test_init(argcp: number, argvp: string[]): void;
+	function test_init(): void;
 
 	/**
 	 * Return the type ids that have been registered after
 	 * calling gtk_test_register_all_types().
-	 * @param n_types location to store number of types
 	 * @returns 
 	 *    0-terminated array of type ids
 	 */
-	function test_list_all_types(n_types: number): GObject.Type[];
+	function test_list_all_types(): GObject.Type[];
 
 	/**
 	 * Force registration of all core Gtk+ and Gdk object types.
@@ -68398,12 +68266,10 @@ declare namespace imports.gi.Gtk {
 	 * in from the current process. The returned path must be freed with
 	 * gtk_tree_path_free().
 	 * @param selection_data a {@link SelectionData}
-	 * @param tree_model a {@link TreeModel}
-	 * @param path row in #tree_model
 	 * @returns %TRUE if #selection_data had target type %GTK_TREE_MODEL_ROW and
 	 *  is otherwise valid
 	 */
-	function tree_get_row_drag_data(selection_data: SelectionData, tree_model: TreeModel, path: TreePath): boolean;
+	function tree_get_row_drag_data(selection_data: SelectionData): boolean;
 
 	/**
 	 * Lets a set of row reference created by
