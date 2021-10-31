@@ -5,6 +5,7 @@ gi.require_version("Gtk", "3.0")
 gi.require_version('XApp', '1.0')
 
 import os
+import configparser
 from gi.repository import Gio, Gtk, GLib, XApp
 
 UUID = 'app-launcher@mchilli'
@@ -17,7 +18,7 @@ class EditDialog():
         self.variant = variant
         if self.variant == 'edit' and item is not None:
             self.item = item
-            self.type = 'group' if self.item[0]['is-group'] else 'app'
+            self.type = self.item[0]['type']
         else:
             self.type = self.variant
         
@@ -91,8 +92,61 @@ class EditDialog():
         self.dialog.destroy()
         return None
 
+    def open_filechooser(self, *args):
+        filechooser = Gtk.FileChooserDialog(
+            title=APP_NAME, 
+            parent=self.dialog, 
+            action=Gtk.FileChooserAction.OPEN,
+            buttons=(
+                Gtk.STOCK_CANCEL,
+                Gtk.ResponseType.CANCEL,
+                Gtk.STOCK_OPEN,
+                Gtk.ResponseType.OK
+            )
+        )
+
+        response = filechooser.run()
+        if response == Gtk.ResponseType.OK:
+            file = filechooser.get_filename()
+            filechooser.destroy()
+            if file.endswith('.desktop'):
+                config = configparser.ConfigParser(interpolation=None)
+                config.read(file)
+                data = config['Desktop Entry']
+
+                import_data = {}
+                if 'Name' in data:
+                    if self.name_entry.get_text() == '':
+                        self.name_entry.set_text(data['Name'])
+                    if self.name_entry.get_text() != data['Name']:
+                        import_data['Name'] = (self.name_entry.get_text(), data['Name'])
+                if 'Icon' in data:
+                    if self.icon_entry.get_icon() == 'application-x-executable':
+                        self.icon_entry.set_icon(data['Icon'])
+                    if self.icon_entry.get_icon() != data['Icon']:
+                        import_data['Icon'] = (self.icon_entry.get_icon(), data['Icon'])
+                if 'Exec' in data:
+                    if self.command_entry.get_text() == '':
+                        self.command_entry.set_text(data['Exec'])
+                    if self.command_entry.get_text() != data['Exec']:
+                        import_data['Exec'] = (self.command_entry.get_text(), data['Exec'])
+                if len(import_data) > 0:
+                    data = ImportDialog(self.dialog, import_data).run()
+                    if data is not None:
+                        if 'Name' in data: self.name_entry.set_text(data['Name'])
+                        if 'Icon' in data: self.icon_entry.set_icon(data['Icon'])
+                        if 'Exec' in data: self.command_entry.set_text(data['Exec'])
+
+            else:    
+                self.command_entry.set_text(file)
+        else:
+            filechooser.destroy()
+
     def add_group(self, *args):
-        data, new_group = EditDialog('group', self.groups).run()
+        dialog = EditDialog('group', self.groups)
+        dialog.set_transient(self.dialog)
+
+        data, new_group = dialog.run()
         if data is not None:
             self.group_entry.append(data["name"], data["name"])
             self.group_entry.set_active_id(data["name"])
@@ -101,6 +155,9 @@ class EditDialog():
                 "name": data["name"],
                 "icon": data["icon"]
             }
+
+    def set_transient(self, parent=None):
+        self.dialog.set_transient_for(parent)
 
     def valid_exec(self, exec):
         try:
@@ -142,6 +199,46 @@ class EditDialog():
                 self.command_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The command is not valid"))
 
         self.button_ok.set_sensitive(valid_name and (valid_exec if self.type == 'app' else True))
+
+class ImportDialog():
+    def __init__(self, parent, data):
+        self.data = data
+
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file(os.path.join(APPLET_DIR, "dialogs.glade"))
+        self.builder.connect_signals(self)
+
+        self.builder.get_object("import-label").set_text(_('Which data should be replaced from *.desktop file?'))
+
+        self.list = self.builder.get_object("import-list")
+        self.checkboxes = {}
+        for key in self.data:
+            row = Gtk.ListBoxRow()
+            checkbox = Gtk.CheckButton(f'{key}\t"{self.data[key][0]}"\n └─>\t"{self.data[key][1]}"')
+            checkbox.set_active(True)
+            self.checkboxes[key] = checkbox
+            row.add(checkbox)
+            self.list.add(row)
+
+        self.dialog = self.builder.get_object("import-dialog")
+        self.dialog.set_title(APP_NAME)
+        self.dialog.set_transient_for(parent)
+        self.dialog.set_position(Gtk.WindowPosition.MOUSE)
+        self.dialog.show_all()
+    
+    def run(self):
+        response = self.dialog.run()
+
+        if response == Gtk.ResponseType.OK:
+            data = {}
+            for key in self.checkboxes:
+                if self.checkboxes[key].get_active():
+                    data[key] = self.data[key][1]
+            self.dialog.destroy()
+            return data
+
+        self.dialog.destroy()
+        return None
 
 class ConfirmDialog():
     def __init__(self, icon, name):
