@@ -226,6 +226,18 @@ declare namespace imports.gi.Clutter {
 		pivot_y: number;
 	}
 
+  export enum DebugFlag {
+
+  }
+
+  export enum PickDebugFlag {
+    
+  }
+
+  export enum DrawDebugFlag {
+    
+  }
+
 	export interface PositionResult {
 		/** return location for the X coordinate, or null */
 		x: number;

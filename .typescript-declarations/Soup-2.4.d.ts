@@ -1,3 +1,4 @@
+/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.Soup {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Address} instead.

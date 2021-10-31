@@ -1,3 +1,4 @@
+/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Structure representing a setting for an #hb_aat_layout_feature_type_t.
