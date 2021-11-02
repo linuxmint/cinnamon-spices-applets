@@ -6,6 +6,7 @@ A simple App Launcher for your panels
 
 -   organize your applications, even in groups
 -   add new applications via **drag'n'drop**
+-   add colorful **separators**
 -   open **context menu** with rightclick
 -   support for horizontal and vertical panels
 -   set **custom icons** for applications and groups
