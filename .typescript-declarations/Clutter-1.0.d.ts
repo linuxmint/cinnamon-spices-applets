@@ -1,4 +1,3 @@
-/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
@@ -10,7 +9,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
-	type ActionMixin = IAction & IActorMeta;
+	type ActionMixin = IAction & ActorMeta;
 
 	/**
 	 * The {@link Action} structure contains only private data and
@@ -835,15 +834,15 @@ declare namespace imports.gi.Clutter {
 		 * This function can be used by fluid layout managers to allocate
 		 * an actor's preferred size without making it bigger than the area
 		 * available for the container.
-		 * @param _x the actor's X coordinate
-		 * @param _y the actor's Y coordinate
+		 * @param x the actor's X coordinate
+		 * @param y the actor's Y coordinate
 		 * @param available_width the maximum available width, or -1 to use the
 		 *   actor's natural width
 		 * @param available_height the maximum available height, or -1 to use the
 		 *   actor's natural height
 		 * @param flags flags controlling the allocation
 		 */
-		allocate_available_size(_x: number, _y: number, available_width: number, available_height: number, flags: AllocationFlags): void;
+		allocate_available_size(x: number, y: number, available_width: number, available_height: number, flags: AllocationFlags): void;
 		/**
 		 * Allocates the natural size of #self.
 		 * 
@@ -3120,10 +3119,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If a layout manager is in use, this position will override the
 		 * layout manager and force a fixed position.
-		 * @param _x New left position of actor in pixels.
-		 * @param _y New top position of actor in pixels.
+		 * @param x New left position of actor in pixels.
+		 * @param y New top position of actor in pixels.
 		 */
-		set_position(_x: number, _y: number): void;
+		set_position(x: number, y: number): void;
 		/**
 		 * Sets #actor as reactive. Reactive actors will receive events.
 		 * @param reactive whether the actor should be reactive to events
@@ -3152,11 +3151,11 @@ declare namespace imports.gi.Clutter {
 		 * point is set, the upper left corner is assumed as the origin.
 		 * @param axis the axis of rotation
 		 * @param angle the angle of rotation
-		 * @param _x X coordinate of the rotation center
-		 * @param _y Y coordinate of the rotation center
-		 * @param _z Z coordinate of the rotation center
+		 * @param x X coordinate of the rotation center
+		 * @param y Y coordinate of the rotation center
+		 * @param z Z coordinate of the rotation center
 		 */
-		set_rotation(axis: RotateAxis, angle: number, _x: number, _y: number, _z: number): void;
+		set_rotation(axis: RotateAxis, angle: number, x: number, y: number, z: number): void;
 		/**
 		 * Sets the #angle of rotation of a {@link Actor} on the given #axis.
 		 * 
@@ -3317,9 +3316,9 @@ declare namespace imports.gi.Clutter {
 		 * the actor.
 		 * 
 		 * The {@link Actor}:x property is animatable.
-		 * @param _x the actor's position on the X axis
+		 * @param x the actor's position on the X axis
 		 */
-		set_x(_x: number): void;
+		set_x(x: number): void;
 		/**
 		 * Sets the horizontal alignment policy of a {@link Actor}, in case the
 		 * actor received extra horizontal space.
@@ -3346,9 +3345,9 @@ declare namespace imports.gi.Clutter {
 		 * the actor.
 		 * 
 		 * The {@link Actor}:y property is animatable.
-		 * @param _y the actor's position on the Y axis
+		 * @param y the actor's position on the Y axis
 		 */
-		set_y(_y: number): void;
+		set_y(y: number): void;
 		/**
 		 * Sets the vertical alignment policy of a {@link Actor}, in case the
 		 * actor received extra vertical space.
@@ -3426,11 +3425,11 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function only works when the allocation is up-to-date, i.e. inside of
 		 * the {@link ActorClass}.paint() implementation
-		 * @param _x x screen coordinate of the point to unproject
-		 * @param _y y screen coordinate of the point to unproject
+		 * @param x x screen coordinate of the point to unproject
+		 * @param y y screen coordinate of the point to unproject
 		 * @returns %TRUE if conversion was successful.
 		 */
-		transform_stage_point(_x: number, _y: number): boolean;
+		transform_stage_point(x: number, y: number): boolean;
 		/**
 		 * Unsets the %CLUTTER_ACTOR_MAPPED flag on the actor and possibly
 		 * unmaps its children if they were mapped.
@@ -3801,7 +3800,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actor} instead.
 	 */
-	type ActorMixin = IActor & GObject.IInitiallyUnowned & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type ActorMixin = IActor & GObject.InitiallyUnowned & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * Base class for actors.
@@ -3875,7 +3874,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActorMeta} instead.
 	 */
-	type ActorMetaMixin = IActorMeta & GObject.IInitiallyUnowned;
+	type ActorMetaMixin = IActorMeta & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link ActorMeta} structure contains only
@@ -3961,7 +3960,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AlignConstraint} instead.
 	 */
-	type AlignConstraintMixin = IAlignConstraint & IConstraint;
+	type AlignConstraintMixin = IAlignConstraint & Constraint;
 
 	/**
 	 * {@link AlignConstraint} is an opaque structure
@@ -4035,11 +4034,11 @@ declare namespace imports.gi.Clutter {
 		 * bound to #alpha.
 		 * 
 		 * This function will not register #func as a global alpha function.
-		 * @param _func A {@link AlphaFunc}
+		 * @param func A {@link AlphaFunc}
 		 * @param data user data to be passed to the alpha function, or %NULL
 		 * @param destroy notify function used when disposing the alpha function
 		 */
-		set_func(_func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): void;
+		set_func(func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the progress function of #alpha using the symbolic value
 		 * of #mode, as taken by the {@link AnimationMode} enumeration or
@@ -4061,7 +4060,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alpha} instead.
 	 */
-	type AlphaMixin = IAlpha & GObject.IInitiallyUnowned & IScriptable;
+	type AlphaMixin = IAlpha & GObject.InitiallyUnowned & Scriptable;
 
 	/**
 	 * {@link Alpha} combines a #ClutterTimeline and a function.
@@ -4101,12 +4100,12 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * See also clutter_alpha_set_timeline() and clutter_alpha_set_func().
 		 * @param timeline a {@link Timeline}
-		 * @param _func a {@link AlphaFunc}
+		 * @param func a {@link AlphaFunc}
 		 * @param data data to pass to the function, or %NULL
 		 * @param destroy function to call when removing the alpha function, or %NULL
 		 * @returns the newly created {@link Alpha}
 		 */
-		public static new_with_func(timeline: Timeline, _func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): Alpha;
+		public static new_with_func(timeline: Timeline, func: AlphaFunc, data: any | null, destroy: GLib.DestroyNotify): Alpha;
 		/**
 		 * #GClosure variant of clutter_alpha_register_func().
 		 * 
@@ -4123,11 +4122,11 @@ declare namespace imports.gi.Clutter {
 		 * to be used by clutter_alpha_set_mode() or by {@link Animation}.
 		 * 
 		 * The logical id is always greater than %CLUTTER_ANIMATION_LAST.
-		 * @param _func a {@link AlphaFunc}
+		 * @param func a {@link AlphaFunc}
 		 * @param data user data to pass to #func, or %NULL
 		 * @returns the logical id of the alpha function
 		 */
-		public static register_func(_func: AlphaFunc, data: any | null): number;
+		public static register_func(func: AlphaFunc, data: any | null): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4338,7 +4337,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animation} instead.
 	 */
-	type AnimationMixin = IAnimation & GObject.IObject & IScriptable;
+	type AnimationMixin = IAnimation & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Animation} structure contains only private data and should
@@ -4517,7 +4516,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animator} instead.
 	 */
-	type AnimatorMixin = IAnimator & GObject.IObject & IScriptable;
+	type AnimatorMixin = IAnimator & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Animator} structure contains only private data and
@@ -4642,7 +4641,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Backend} instead.
 	 */
-	type BackendMixin = IBackend & GObject.IObject;
+	type BackendMixin = IBackend & GObject.Object;
 
 	/**
 	 * {@link Backend} is an opaque structure whose
@@ -4667,10 +4666,10 @@ declare namespace imports.gi.Clutter {
 		alpha: Alpha;
 		/**
 		 * Calls #func for every actor driven by #behave.
-		 * @param _func a function called for each actor
+		 * @param func a function called for each actor
 		 * @param data optional data to be passed to the function, or %NULL
 		 */
-		actors_foreach(_func: BehaviourForeachFunc, data: any | null): void;
+		actors_foreach(func: BehaviourForeachFunc, data: any | null): void;
 		/**
 		 * Applies #behave to #actor.  This function adds a reference on
 		 * the actor.
@@ -4750,7 +4749,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Behaviour} instead.
 	 */
-	type BehaviourMixin = IBehaviour & GObject.IObject & IScriptable;
+	type BehaviourMixin = IBehaviour & GObject.Object & Scriptable;
 
 	/**
 	 * {@link Behaviour}-struct contains only private data and should
@@ -4795,7 +4794,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourDepth} instead.
 	 */
-	type BehaviourDepthMixin = IBehaviourDepth & IBehaviour & IScriptable;
+	type BehaviourDepthMixin = IBehaviourDepth & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourDepth} structure contains only private data
@@ -4928,10 +4927,10 @@ declare namespace imports.gi.Clutter {
 		set_angle_tilt(axis: RotateAxis, angle_tilt: number): void;
 		/**
 		 * Sets the center of the elliptical path to the point represented by knot.
-		 * @param _x x coordinace of centre
-		 * @param _y y coordinace of centre
+		 * @param x x coordinace of centre
+		 * @param y y coordinace of centre
 		 */
-		set_center(_x: number, _y: number): void;
+		set_center(x: number, y: number): void;
 		/**
 		 * Sets the rotation direction used by the ellipse behaviour.
 		 * @param direction the rotation direction
@@ -4969,7 +4968,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourEllipse} instead.
 	 */
-	type BehaviourEllipseMixin = IBehaviourEllipse & IBehaviour & IScriptable;
+	type BehaviourEllipseMixin = IBehaviourEllipse & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourEllipse} struct contains only private data
@@ -4991,16 +4990,16 @@ declare namespace imports.gi.Clutter {
 		 * of the #ClutterAlpha instance. In the case when #alpha is %NULL,
 		 * it can be set later with clutter_behaviour_set_alpha().
 		 * @param alpha a {@link Alpha} instance, or %NULL
-		 * @param _x x coordinace of the center
-		 * @param _y y coordiance of the center
+		 * @param x x coordinace of the center
+		 * @param y y coordiance of the center
 		 * @param width width of the ellipse
 		 * @param height height of the ellipse
 		 * @param direction {@link RotateDirection} of rotation
 		 * @param start angle in degrees at which movement starts, between 0 and 360
-		 * @param _end angle in degrees at which movement ends, between 0 and 360
+		 * @param end angle in degrees at which movement ends, between 0 and 360
 		 * @returns the newly created {@link BehaviourEllipse}
 		 */
-		public static new(alpha: Alpha | null, _x: number, _y: number, width: number, height: number, direction: RotateDirection, start: number, _end: number): Behaviour;
+		public static new(alpha: Alpha | null, x: number, y: number, width: number, height: number, direction: RotateDirection, start: number, end: number): Behaviour;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -5038,7 +5037,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourOpacity} instead.
 	 */
-	type BehaviourOpacityMixin = IBehaviourOpacity & IBehaviour & IScriptable;
+	type BehaviourOpacityMixin = IBehaviourOpacity & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourOpacity} structure contains only private data and
@@ -5094,7 +5093,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourPath} instead.
 	 */
-	type BehaviourPathMixin = IBehaviourPath & IBehaviour & IScriptable;
+	type BehaviourPathMixin = IBehaviourPath & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourPath} structure contains only private data
@@ -5224,11 +5223,11 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Sets the center of rotation. The coordinates are relative to the plane
 		 * normal to the rotation axis set with clutter_behaviour_rotate_set_axis().
-		 * @param _x X axis center of rotation
-		 * @param _y Y axis center of rotation
-		 * @param _z Z axis center of rotation
+		 * @param x X axis center of rotation
+		 * @param y Y axis center of rotation
+		 * @param z Z axis center of rotation
 		 */
-		set_center(_x: number, _y: number, _z: number): void;
+		set_center(x: number, y: number, z: number): void;
 		/**
 		 * Sets the rotation direction used by the rotate behaviour.
 		 * @param direction the rotation direction
@@ -5247,7 +5246,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourRotate} instead.
 	 */
-	type BehaviourRotateMixin = IBehaviourRotate & IBehaviour & IScriptable;
+	type BehaviourRotateMixin = IBehaviourRotate & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourRotate} struct contains only private data and
@@ -5330,7 +5329,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourScale} instead.
 	 */
-	type BehaviourScaleMixin = IBehaviourScale & IBehaviour & IScriptable;
+	type BehaviourScaleMixin = IBehaviourScale & Behaviour & Scriptable;
 
 	/**
 	 * The {@link BehaviourScale} struct contains only private data and
@@ -5418,7 +5417,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BinLayout} instead.
 	 */
-	type BinLayoutMixin = IBinLayout & ILayoutManager;
+	type BinLayoutMixin = IBinLayout & LayoutManager;
 
 	/**
 	 * The {@link BinLayout} structure contains only private data
@@ -5497,7 +5496,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindConstraint} instead.
 	 */
-	type BindConstraintMixin = IBindConstraint & IConstraint;
+	type BindConstraintMixin = IBindConstraint & Constraint;
 
 	/**
 	 * {@link BindConstraint} is an opaque structure
@@ -5667,7 +5666,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindingPool} instead.
 	 */
-	type BindingPoolMixin = IBindingPool & GObject.IObject;
+	type BindingPoolMixin = IBindingPool & GObject.Object;
 
 	/**
 	 * Container of key bindings. The {@link BindingPool} struct is
@@ -5726,7 +5725,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BlurEffect} instead.
 	 */
-	type BlurEffectMixin = IBlurEffect & IOffscreenEffect;
+	type BlurEffectMixin = IBlurEffect & OffscreenEffect;
 
 	/**
 	 * {@link BlurEffect} is an opaque structure
@@ -5867,7 +5866,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
-	type BoxMixin = IBox & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type BoxMixin = IBox & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Box} structure contains only private data and should
@@ -6108,7 +6107,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayout} instead.
 	 */
-	type BoxLayoutMixin = IBoxLayout & ILayoutManager;
+	type BoxLayoutMixin = IBoxLayout & LayoutManager;
 
 	/**
 	 * The {@link BoxLayout} structure contains only private data
@@ -6213,7 +6212,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BrightnessContrastEffect} instead.
 	 */
-	type BrightnessContrastEffectMixin = IBrightnessContrastEffect & IOffscreenEffect;
+	type BrightnessContrastEffectMixin = IBrightnessContrastEffect & OffscreenEffect;
 
 	/**
 	 * {@link BrightnessContrastEffect} is an opaque structure
@@ -6379,7 +6378,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CairoTexture} instead.
 	 */
-	type CairoTextureMixin = ICairoTexture & ITexture & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type CairoTextureMixin = ICairoTexture & Texture & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link CairoTexture} struct contains only private data.
@@ -6491,7 +6490,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Canvas} instead.
 	 */
-	type CanvasMixin = ICanvas & GObject.IObject & IContent;
+	type CanvasMixin = ICanvas & GObject.Object & Content;
 
 	/**
 	 * The {@link Canvas} structure contains
@@ -6555,7 +6554,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChildMeta} instead.
 	 */
-	type ChildMetaMixin = IChildMeta & GObject.IObject;
+	type ChildMetaMixin = IChildMeta & GObject.Object;
 
 	/**
 	 * Base interface for container specific state for child actors. A child
@@ -6688,7 +6687,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClickAction} instead.
 	 */
-	type ClickActionMixin = IClickAction & IAction;
+	type ClickActionMixin = IClickAction & Action;
 
 	/**
 	 * The {@link ClickAction} structure contains
@@ -6715,7 +6714,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClipNode} instead.
 	 */
-	type ClipNodeMixin = IClipNode & IPaintNode;
+	type ClipNodeMixin = IClipNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -6759,7 +6758,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clone} instead.
 	 */
-	type CloneMixin = IClone & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type CloneMixin = IClone & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Clone} structure contains only private data
@@ -6787,7 +6786,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorNode} instead.
 	 */
-	type ColorNodeMixin = IColorNode & IPipelineNode;
+	type ColorNodeMixin = IColorNode & PipelineNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -6832,7 +6831,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorizeEffect} instead.
 	 */
-	type ColorizeEffectMixin = IColorizeEffect & IOffscreenEffect;
+	type ColorizeEffectMixin = IColorizeEffect & OffscreenEffect;
 
 	/**
 	 * {@link ColorizeEffect} is an opaque structure
@@ -6861,7 +6860,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Constraint} instead.
 	 */
-	type ConstraintMixin = IConstraint & IActorMeta;
+	type ConstraintMixin = IConstraint & ActorMeta;
 
 	/**
 	 * The {@link Constraint} structure contains only
@@ -6944,7 +6943,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeformEffect} instead.
 	 */
-	type DeformEffectMixin = IDeformEffect & IOffscreenEffect;
+	type DeformEffectMixin = IDeformEffect & OffscreenEffect;
 
 	/**
 	 * The {@link DeformEffect} structure contains
@@ -6983,7 +6982,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesaturateEffect} instead.
 	 */
-	type DesaturateEffectMixin = IDesaturateEffect & IOffscreenEffect;
+	type DesaturateEffectMixin = IDesaturateEffect & OffscreenEffect;
 
 	/**
 	 * {@link DesaturateEffect} is an opaque structure
@@ -7059,7 +7058,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceManager} instead.
 	 */
-	type DeviceManagerMixin = IDeviceManager & GObject.IObject;
+	type DeviceManagerMixin = IDeviceManager & GObject.Object;
 
 	/**
 	 * The {@link DeviceManager} structure contains only private data
@@ -7285,7 +7284,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DragAction} instead.
 	 */
-	type DragActionMixin = IDragAction & IAction;
+	type DragActionMixin = IDragAction & Action;
 
 	/**
 	 * The {@link DragAction} structure contains only
@@ -7347,7 +7346,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DropAction} instead.
 	 */
-	type DropActionMixin = IDropAction & IAction;
+	type DropActionMixin = IDropAction & Action;
 
 	/**
 	 * The {@link DropAction} structure contains only
@@ -7413,7 +7412,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Effect} instead.
 	 */
-	type EffectMixin = IEffect & IActorMeta;
+	type EffectMixin = IEffect & ActorMeta;
 
 	/**
 	 * The {@link Effect} structure contains only private data and should
@@ -7435,7 +7434,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FixedLayout} instead.
 	 */
-	type FixedLayoutMixin = IFixedLayout & ILayoutManager;
+	type FixedLayoutMixin = IFixedLayout & LayoutManager;
 
 	/**
 	 * The {@link FixedLayout} structure contains only private data and
@@ -7601,7 +7600,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowLayout} instead.
 	 */
-	type FlowLayoutMixin = IFlowLayout & ILayoutManager;
+	type FlowLayoutMixin = IFlowLayout & LayoutManager;
 
 	/**
 	 * The {@link FlowLayout} structure contains only private data
@@ -7765,10 +7764,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function should only be called by sub-classes of
 		 * {@link GestureAction} during their construction phase.
-		 * @param _x the distance on the horizontal axis
-		 * @param _y the distance on the vertical axis
+		 * @param x the distance on the horizontal axis
+		 * @param y the distance on the vertical axis
 		 */
-		set_threshold_trigger_distance(_x: number, _y: number): void;
+		set_threshold_trigger_distance(x: number, y: number): void;
 		/**
 		 * Sets the edge trigger for the gesture drag threshold, if any.
 		 * 
@@ -7814,7 +7813,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureAction} instead.
 	 */
-	type GestureActionMixin = IGestureAction & IAction;
+	type GestureActionMixin = IGestureAction & Action;
 
 	/**
 	 * The {@link GestureAction} structure contains
@@ -7991,7 +7990,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GridLayout} instead.
 	 */
-	type GridLayoutMixin = IGridLayout & ILayoutManager;
+	type GridLayoutMixin = IGridLayout & LayoutManager;
 
 	/**
 	 * The {@link GridLayout} structure contains only private data
@@ -8033,7 +8032,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
-	type GroupMixin = IGroup & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type GroupMixin = IGroup & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Group} structure contains only private data
@@ -8141,7 +8140,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
-	type ImageMixin = IImage & GObject.IObject & IContent;
+	type ImageMixin = IImage & GObject.Object & Content;
 
 	/**
 	 * The {@link Image} structure contains
@@ -8504,7 +8503,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputDevice} instead.
 	 */
-	type InputDeviceMixin = IInputDevice & GObject.IObject;
+	type InputDeviceMixin = IInputDevice & GObject.Object;
 
 	/**
 	 * Generic representation of an input device. The actual contents of this
@@ -8677,7 +8676,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Interval} instead.
 	 */
-	type IntervalMixin = IInterval & GObject.IInitiallyUnowned & IScriptable;
+	type IntervalMixin = IInterval & GObject.InitiallyUnowned & Scriptable;
 
 	/**
 	 * The {@link Interval} structure contains only private data and should
@@ -8749,10 +8748,10 @@ declare namespace imports.gi.Clutter {
 		 * To unset a previously set progress function of a #GType, pass %NULL
 		 * for #func.
 		 * @param value_type a #GType
-		 * @param _func a {@link ProgressFunc}, or %NULL to unset a previously
+		 * @param func a {@link ProgressFunc}, or %NULL to unset a previously
 		 *   set progress function
 		 */
-		public static register_progress_func(value_type: GObject.Type, _func: ProgressFunc): void;
+		public static register_progress_func(value_type: GObject.Type, func: ProgressFunc): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8842,7 +8841,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyframeTransition} instead.
 	 */
-	type KeyframeTransitionMixin = IKeyframeTransition & IPropertyTransition & IScriptable;
+	type KeyframeTransitionMixin = IKeyframeTransition & PropertyTransition & Scriptable;
 
 	/**
 	 * The `ClutterKeyframeTransition` structure contains only private
@@ -9054,7 +9053,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutManager} instead.
 	 */
-	type LayoutManagerMixin = ILayoutManager & GObject.IInitiallyUnowned;
+	type LayoutManagerMixin = ILayoutManager & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link LayoutManager} structure contains only private data
@@ -9091,7 +9090,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutMeta} instead.
 	 */
-	type LayoutMetaMixin = ILayoutMeta & IChildMeta;
+	type LayoutMetaMixin = ILayoutMeta & ChildMeta;
 
 	/**
 	 * Sub-class of {@link ChildMeta} specific for layout managers
@@ -9116,7 +9115,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListModel} instead.
 	 */
-	type ListModelMixin = IListModel & IModel & IScriptable;
+	type ListModelMixin = IListModel & Model & Scriptable;
 
 	/**
 	 * The {@link ListModel} struct contains only private data.
@@ -9207,16 +9206,16 @@ declare namespace imports.gi.Clutter {
 		 * filtering function set on #model.
 		 * 
 		 * This function should be used only by subclasses of {@link Model}.
-		 * @param _row the row to filter
+		 * @param row the row to filter
 		 * @returns %TRUE if the row should be displayed,
 		 *   %FALSE otherwise
 		 */
-		filter_row(_row: number): boolean;
+		filter_row(row: number): boolean;
 		/**
 		 * Calls #func for each row in the model.
-		 * @param _func a {@link ModelForeachFunc}
+		 * @param func a {@link ModelForeachFunc}
 		 */
-		foreach(_func: ModelForeachFunc): void;
+		foreach(func: ModelForeachFunc): void;
 		/**
 		 * Retrieves the name of the #column
 		 * @param column the column number
@@ -9249,12 +9248,12 @@ declare namespace imports.gi.Clutter {
 		 * If a filter function has been set using clutter_model_set_filter()
 		 * then the #model implementation will return the first non filtered
 		 * row.
-		 * @param _row position of the row to retrieve
+		 * @param row position of the row to retrieve
 		 * @returns A new {@link ModelIter}, or %NULL if #row was
 		 *   out of bounds. When done using the iterator object, call g_object_unref()
 		 *   to deallocate its resources
 		 */
-		get_iter_at_row(_row: number): ModelIter;
+		get_iter_at_row(row: number): ModelIter;
 		/**
 		 * Retrieves a {@link ModelIter} representing the last non-filtered
 		 * row in #model.
@@ -9292,27 +9291,27 @@ declare namespace imports.gi.Clutter {
 		 *                                      G_TYPE_STRING, "Team");
 		 *   clutter_model_insert (model, 3, 0, 42, 1, "Team #1", -1);
 		 * </programlisting></informalexample>
-		 * @param _row the position to insert the new row
+		 * @param row the position to insert the new row
 		 */
-		insert(_row: number): void;
+		insert(row: number): void;
 		/**
 		 * Sets the data in the cell specified by #iter and #column. The type of
 		 * #value must be convertable to the type of the column. If the row does
 		 * not exist then it is created.
-		 * @param _row position of the row to modify
+		 * @param row position of the row to modify
 		 * @param column column to modify
 		 * @param value new value for the cell
 		 */
-		insert_value(_row: number, column: number, value: GObject.Value): void;
+		insert_value(row: number, column: number, value: GObject.Value): void;
 		/**
 		 * Inserts data at #row into the {@link Model}, setting the row
 		 * values for the given #columns upon creation.
-		 * @param _row row index
+		 * @param row row index
 		 * @param n_columns the number of columns and values to set
 		 * @param columns a vector containing the columns to set
 		 * @param values a vector containing the values for the cells
 		 */
-		insertv(_row: number, n_columns: number, columns: number[], values: GObject.Value[]): void;
+		insertv(row: number, n_columns: number, columns: number[], values: GObject.Value[]): void;
 		/**
 		 * Creates and prepends a new row to the {@link Model}, setting the row
 		 * values upon creation. For example, to prepend a new row where column 0
@@ -9337,9 +9336,9 @@ declare namespace imports.gi.Clutter {
 		prependv(n_columns: number, columns: number[], values: GObject.Value[]): void;
 		/**
 		 * Removes the row at the given position from the model.
-		 * @param _row position of row to remove
+		 * @param row position of row to remove
 		 */
-		remove(_row: number): void;
+		remove(row: number): void;
 		/**
 		 * Force a resort on the #model. This function should only be
 		 * used by subclasses of {@link Model}.
@@ -9347,10 +9346,10 @@ declare namespace imports.gi.Clutter {
 		resort(): void;
 		/**
 		 * Filters the #model using the given filtering function.
-		 * @param _func a {@link ModelFilterFunc}, or #NULL
+		 * @param func a {@link ModelFilterFunc}, or #NULL
 		 * @param notify destroy notifier of #user_data, or #NULL
 		 */
-		set_filter(_func: ModelFilterFunc | null, notify: GLib.DestroyNotify): void;
+		set_filter(func: ModelFilterFunc | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Assigns a name to the columns of a {@link Model}.
 		 * 
@@ -9364,10 +9363,10 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Sorts #model using the given sorting function.
 		 * @param column the column to sort on
-		 * @param _func a {@link ModelSortFunc}, or #NULL
+		 * @param func a {@link ModelSortFunc}, or #NULL
 		 * @param notify destroy notifier of #user_data, or #NULL
 		 */
-		set_sort(column: number, _func: ModelSortFunc | null, notify: GLib.DestroyNotify): void;
+		set_sort(column: number, func: ModelSortFunc | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Sets the model to sort by #column. If #column is a negative value
 		 * the sorting column will be unset.
@@ -9418,7 +9417,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Model} instead.
 	 */
-	type ModelMixin = IModel & GObject.IObject & IScriptable;
+	type ModelMixin = IModel & GObject.Object & Scriptable;
 
 	/**
 	 * Base class for list models. The {@link Model} structure contains
@@ -9547,7 +9546,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelIter} instead.
 	 */
-	type ModelIterMixin = IModelIter & GObject.IObject;
+	type ModelIterMixin = IModelIter & GObject.Object;
 
 	/**
 	 * Base class for list models iters. The {@link ModelIter} structure
@@ -9631,7 +9630,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenEffect} instead.
 	 */
-	type OffscreenEffectMixin = IOffscreenEffect & IEffect;
+	type OffscreenEffectMixin = IOffscreenEffect & Effect;
 
 	/**
 	 * The {@link OffscreenEffect} structure contains only private data
@@ -9700,7 +9699,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageTurnEffect} instead.
 	 */
-	type PageTurnEffectMixin = IPageTurnEffect & IDeformEffect;
+	type PageTurnEffectMixin = IPageTurnEffect & DeformEffect;
 
 	/**
 	 * {@link PageTurnEffect} is an opaque structure
@@ -9932,7 +9931,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanAction} instead.
 	 */
-	type PanActionMixin = IPanAction & IGestureAction;
+	type PanActionMixin = IPanAction & GestureAction;
 
 	/**
 	 * The {@link PanAction} structure contains
@@ -9965,7 +9964,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecColor} instead.
 	 */
-	type ParamSpecColorMixin = IParamSpecColor & GObject.IParamSpec;
+	type ParamSpecColorMixin = IParamSpecColor & GObject.ParamSpec;
 
 	/**
 	 * A #GParamSpec subclass for defining properties holding
@@ -10003,7 +10002,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFixed} instead.
 	 */
-	type ParamSpecFixedMixin = IParamSpecFixed & GObject.IParamSpec;
+	type ParamSpecFixedMixin = IParamSpecFixed & GObject.ParamSpec;
 
 	/**
 	 * #GParamSpec subclass for fixed point based properties
@@ -10024,7 +10023,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUnit} instead.
 	 */
-	type ParamSpecUnitMixin = IParamSpecUnit & GObject.IParamSpec;
+	type ParamSpecUnitMixin = IParamSpecUnit & GObject.ParamSpec;
 
 	interface ParamSpecUnit extends ParamSpecUnitMixin {}
 
@@ -10064,18 +10063,18 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Adds a %CLUTTER_PATH_LINE_TO type node to the path. This causes the
 		 * actor to move to the new coordinates in a straight line.
-		 * @param _x the x coordinate
-		 * @param _y the y coordinate
+		 * @param x the x coordinate
+		 * @param y the y coordinate
 		 */
-		add_line_to(_x: number, _y: number): void;
+		add_line_to(x: number, y: number): void;
 		/**
 		 * Adds a %CLUTTER_PATH_MOVE_TO type node to the path. This is usually
 		 * used as the first node in a path. It can also be used in the middle
 		 * of the path to cause the actor to jump to the new coordinate.
-		 * @param _x the x coordinate
-		 * @param _y the y coordinate
+		 * @param x the x coordinate
+		 * @param y the y coordinate
 		 */
-		add_move_to(_x: number, _y: number): void;
+		add_move_to(x: number, y: number): void;
 		/**
 		 * Adds #node to the end of the path.
 		 * @param node a {@link PathNode}
@@ -10095,17 +10094,17 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Same as clutter_path_add_line_to() except the coordinates are
 		 * relative to the previous node.
-		 * @param _x the x coordinate
-		 * @param _y the y coordinate
+		 * @param x the x coordinate
+		 * @param y the y coordinate
 		 */
-		add_rel_line_to(_x: number, _y: number): void;
+		add_rel_line_to(x: number, y: number): void;
 		/**
 		 * Same as clutter_path_add_move_to() except the coordinates are
 		 * relative to the previous node.
-		 * @param _x the x coordinate
-		 * @param _y the y coordinate
+		 * @param x the x coordinate
+		 * @param y the y coordinate
 		 */
-		add_rel_move_to(_x: number, _y: number): void;
+		add_rel_move_to(x: number, y: number): void;
 		/**
 		 * Adds new nodes to the end of the path as described in #str. The
 		 * format is a subset of the SVG path format. Each node is represented
@@ -10130,11 +10129,11 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If the path description isn't valid %FALSE will be returned and no
 		 * nodes will be added.
-		 * @param _str a string describing the new nodes
+		 * @param str a string describing the new nodes
 		 * @returns %TRUE is the path description was valid or %FALSE
 		 * otherwise.
 		 */
-		add_string(_str: string): boolean;
+		add_string(str: string): boolean;
 		/**
 		 * Removes all nodes from the path.
 		 */
@@ -10209,10 +10208,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If the string is invalid then %FALSE is returned and the path is
 		 * unaltered.
-		 * @param _str a string describing the path
+		 * @param str a string describing the path
 		 * @returns %TRUE is the path was valid, %FALSE otherwise.
 		 */
-		set_description(_str: string): boolean;
+		set_description(str: string): boolean;
 		/**
 		 * Add the nodes of the ClutterPath to the path in the Cairo context.
 		 * @param cr a Cairo context
@@ -10226,7 +10225,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Path} instead.
 	 */
-	type PathMixin = IPath & GObject.IInitiallyUnowned;
+	type PathMixin = IPath & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link Path} struct contains only private data and should
@@ -10309,7 +10308,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PathConstraint} instead.
 	 */
-	type PathConstraintMixin = IPathConstraint & IConstraint;
+	type PathConstraintMixin = IPathConstraint & Constraint;
 
 	/**
 	 * {@link PathConstraint} is an opaque structure
@@ -10338,7 +10337,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PipelineNode} instead.
 	 */
-	type PipelineNodeMixin = IPipelineNode & IPaintNode;
+	type PipelineNodeMixin = IPipelineNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -10378,7 +10377,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PropertyTransition} instead.
 	 */
-	type PropertyTransitionMixin = IPropertyTransition & ITransition & IScriptable;
+	type PropertyTransitionMixin = IPropertyTransition & Transition & Scriptable;
 
 	/**
 	 * The {@link PropertyTransition} structure contains
@@ -10459,7 +10458,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Rectangle} instead.
 	 */
-	type RectangleMixin = IRectangle & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type RectangleMixin = IRectangle & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Rectangle} structure contains only private data
@@ -10500,7 +10499,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RotateAction} instead.
 	 */
-	type RotateActionMixin = IRotateAction & IGestureAction;
+	type RotateActionMixin = IRotateAction & GestureAction;
 
 	/**
 	 * The {@link RotateAction} structure contains
@@ -10646,7 +10645,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Score} instead.
 	 */
-	type ScoreMixin = IScore & GObject.IObject;
+	type ScoreMixin = IScore & GObject.Object;
 
 	/**
 	 * The {@link Score} structure contains only private data
@@ -10736,9 +10735,9 @@ declare namespace imports.gi.Clutter {
 		 * that do not support GModule.
 		 * 
 		 * Applications should use clutter_script_connect_signals().
-		 * @param _func signal connection function
+		 * @param func signal connection function
 		 */
-		connect_signals_full(_func: ScriptConnectFunc): void;
+		connect_signals_full(func: ScriptConnectFunc): void;
 		/**
 		 * Ensure that every object defined inside #script is correctly
 		 * constructed. You should rarely need to use this function.
@@ -10867,7 +10866,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Script} instead.
 	 */
-	type ScriptMixin = IScript & GObject.IObject;
+	type ScriptMixin = IScript & GObject.Object;
 
 	/**
 	 * The {@link Script} structure contains only private data
@@ -10930,7 +10929,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollActor} instead.
 	 */
-	type ScrollActorMixin = IScrollActor & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type ScrollActorMixin = IScrollActor & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link ScrollActor} structure contains only
@@ -11039,7 +11038,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	/**
 	 * `ClutterSettings` is an opaque structure whose
@@ -11178,7 +11177,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Shader} instead.
 	 */
-	type ShaderMixin = IShader & GObject.IObject;
+	type ShaderMixin = IShader & GObject.Object;
 
 	/**
 	 * The {@link Shader} structure contains only private data
@@ -11299,7 +11298,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderEffect} instead.
 	 */
-	type ShaderEffectMixin = IShaderEffect & IOffscreenEffect;
+	type ShaderEffectMixin = IShaderEffect & OffscreenEffect;
 
 	/**
 	 * The {@link ShaderEffect} structure contains
@@ -11445,7 +11444,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SnapConstraint} instead.
 	 */
-	type SnapConstraintMixin = ISnapConstraint & IConstraint;
+	type SnapConstraintMixin = ISnapConstraint & Constraint;
 
 	/**
 	 * {@link SnapConstraint} is an opaque structure
@@ -11581,12 +11580,12 @@ declare namespace imports.gi.Clutter {
 		 * By using #pick_mode it is possible to control which actors will be
 		 * painted and thus available.
 		 * @param pick_mode how the scene graph should be painted
-		 * @param _x X coordinate to check
-		 * @param _y Y coordinate to check
+		 * @param x X coordinate to check
+		 * @param y Y coordinate to check
 		 * @returns the actor at the specified coordinates,
 		 *   if any
 		 */
-		get_actor_at_pos(pick_mode: PickMode, _x: number, _y: number): Actor;
+		get_actor_at_pos(pick_mode: PickMode, x: number, y: number): Actor;
 		/**
 		 * Retrieves the stage color.
 		 * @param color return location for a {@link Color}
@@ -11704,8 +11703,8 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The alpha data contained in the returned buffer is driver-dependent,
 		 * and not guaranteed to hold any sensible value.
-		 * @param _x x coordinate of the first pixel that is read from stage
-		 * @param _y y coordinate of the first pixel that is read from stage
+		 * @param x x coordinate of the first pixel that is read from stage
+		 * @param y y coordinate of the first pixel that is read from stage
 		 * @param width Width dimention of pixels to be read, or -1 for the
 		 *   entire stage width
 		 * @param height Height dimention of pixels to be read, or -1 for the
@@ -11714,7 +11713,7 @@ declare namespace imports.gi.Clutter {
 		 *   or %NULL if the read failed. Use g_free() on the returned data
 		 *   to release the resources it has allocated.
 		 */
-		read_pixels(_x: number, _y: number, width: number, height: number): number[];
+		read_pixels(x: number, y: number, width: number, height: number): number[];
 		/**
 		 * Sets whether the #stage should accept the key focus when shown.
 		 * 
@@ -11974,7 +11973,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stage} instead.
 	 */
-	type StageMixin = IStage & IGroup & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type StageMixin = IStage & Group & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Stage} structure contains only private data
@@ -12077,7 +12076,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StageManager} instead.
 	 */
-	type StageManagerMixin = IStageManager & GObject.IObject;
+	type StageManagerMixin = IStageManager & GObject.Object;
 
 	/**
 	 * The {@link StageManager} structure is private.
@@ -12334,7 +12333,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link State} instead.
 	 */
-	type StateMixin = IState & GObject.IObject & IScriptable;
+	type StateMixin = IState & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link State} structure contains only
@@ -12372,7 +12371,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwipeAction} instead.
 	 */
-	type SwipeActionMixin = ISwipeAction & IGestureAction;
+	type SwipeActionMixin = ISwipeAction & GestureAction;
 
 	/**
 	 * The {@link SwipeAction} structure contains
@@ -12510,9 +12509,9 @@ declare namespace imports.gi.Clutter {
 		 * at the given row and column.
 		 * @param actor a {@link Actor}
 		 * @param column the column the #actor should be put, or -1 to append
-		 * @param _row the row the #actor should be put, or -1 to append
+		 * @param row the row the #actor should be put, or -1 to append
 		 */
-		pack(actor: Actor, column: number, _row: number): void;
+		pack(actor: Actor, column: number, row: number): void;
 		/**
 		 * Sets the horizontal and vertical alignment policies for #actor
 		 * inside #layout
@@ -12594,7 +12593,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableLayout} instead.
 	 */
-	type TableLayoutMixin = ITableLayout & ILayoutManager;
+	type TableLayoutMixin = ITableLayout & LayoutManager;
 
 	/**
 	 * The {@link TableLayout} structure contains only private data
@@ -12626,7 +12625,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TapAction} instead.
 	 */
-	type TapActionMixin = ITapAction & IGestureAction;
+	type TapActionMixin = ITapAction & GestureAction;
 
 	/**
 	 * The {@link TapAction} structure contains
@@ -12818,11 +12817,11 @@ declare namespace imports.gi.Clutter {
 		activate(): boolean;
 		/**
 		 * Retrieves the position of the character at the given coordinates.
-		 * @param _x the X coordinate, relative to the actor
-		 * @param _y the Y coordinate, relative to the actor
+		 * @param x the X coordinate, relative to the actor
+		 * @param y the Y coordinate, relative to the actor
 		 * @returns the position of the character
 		 */
-		coords_to_position(_x: number, _y: number): number;
+		coords_to_position(x: number, y: number): number;
 		/**
 		 * Deletes #n_chars inside a {@link Text} actor, starting from the
 		 * current cursor position.
@@ -13417,7 +13416,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
-	type TextMixin = IText & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type TextMixin = IText & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Text} struct contains only private data.
@@ -13595,7 +13594,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
-	type TextBufferMixin = ITextBuffer & GObject.IObject;
+	type TextBufferMixin = ITextBuffer & GObject.Object;
 
 	/**
 	 * The {@link TextBuffer} structure contains private
@@ -13629,7 +13628,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextNode} instead.
 	 */
-	type TextNodeMixin = ITextNode & IPaintNode;
+	type TextNodeMixin = ITextNode & PaintNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -13772,8 +13771,8 @@ declare namespace imports.gi.Clutter {
 		 * Updates a sub-region of the pixel data in a {@link Texture}.
 		 * @param data Image data in RGB type colorspace.
 		 * @param has_alpha Set to TRUE if image data has an alpha channel.
-		 * @param _x X coordinate of upper left corner of region to update.
-		 * @param _y Y coordinate of upper left corner of region to update.
+		 * @param x X coordinate of upper left corner of region to update.
+		 * @param y Y coordinate of upper left corner of region to update.
 		 * @param width Width in pixels of region to update.
 		 * @param height Height in pixels of region to update.
 		 * @param rowstride Distance in bytes between row starts on source buffer.
@@ -13782,7 +13781,7 @@ declare namespace imports.gi.Clutter {
 		 * @param flags {@link TextureFlags}
 		 * @returns %TRUE on success, %FALSE on failure.
 		 */
-		set_area_from_rgb_data(data: number[], has_alpha: boolean, _x: number, _y: number, width: number, height: number, rowstride: number, bpp: number, flags: TextureFlags): boolean;
+		set_area_from_rgb_data(data: number[], has_alpha: boolean, x: number, y: number, width: number, height: number, rowstride: number, bpp: number, flags: TextureFlags): boolean;
 		/**
 		 * Replaces the underlying Cogl material drawn by this actor with
 		 * #cogl_material. A reference to the material is taken so if the
@@ -13953,7 +13952,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
-	type TextureMixin = ITexture & IActor & Atk.IImplementorIface & IAnimatable & IContainer & IScriptable;
+	type TextureMixin = ITexture & Actor & Atk.ImplementorIface & Animatable & Container & Scriptable;
 
 	/**
 	 * The {@link Texture} structure contains only private data
@@ -14043,7 +14042,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextureNode} instead.
 	 */
-	type TextureNodeMixin = ITextureNode & IPipelineNode;
+	type TextureNodeMixin = ITextureNode & PipelineNode;
 
 	/**
 	 * The {@link TextNode} structure is an opaque
@@ -14413,12 +14412,12 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If #func is %NULL, any previously set progress function will be unset, and
 		 * the #ClutterTimeline:progress-mode property will be set to %CLUTTER_LINEAR.
-		 * @param _func a progress function, or %NULL
+		 * @param func a progress function, or %NULL
 		 * @param data data to pass to #func
 		 * @param notify a function to be called when the progress function is removed
 		 *    or the timeline is disposed
 		 */
-		set_progress_func(_func: TimelineProgressFunc | null, data: any | null, notify: GLib.DestroyNotify): void;
+		set_progress_func(func: TimelineProgressFunc | null, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Sets the progress function using a value from the {@link AnimationMode}
 		 * enumeration. The #mode cannot be %CLUTTER_CUSTOM_MODE or bigger than
@@ -14538,7 +14537,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Timeline} instead.
 	 */
-	type TimelineMixin = ITimeline & GObject.IObject & IScriptable;
+	type TimelineMixin = ITimeline & GObject.Object & Scriptable;
 
 	/**
 	 * The {@link Timeline} structure contains only private data
@@ -14705,7 +14704,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Transition} instead.
 	 */
-	type TransitionMixin = ITransition & ITimeline & IScriptable;
+	type TransitionMixin = ITransition & Timeline & Scriptable;
 
 	/**
 	 * The {@link Transition} structure contains private
@@ -14749,7 +14748,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TransitionGroup} instead.
 	 */
-	type TransitionGroupMixin = ITransitionGroup & ITransition & IScriptable;
+	type TransitionGroupMixin = ITransitionGroup & Transition & Scriptable;
 
 	/**
 	 * The {@link TransitionGroup} structure contains
@@ -14816,7 +14815,7 @@ declare namespace imports.gi.Clutter {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZoomAction} instead.
 	 */
-	type ZoomActionMixin = IZoomAction & IGestureAction;
+	type ZoomActionMixin = IZoomAction & GestureAction;
 
 	/**
 	 * The {@link ZoomAction} structure contains only
@@ -14899,11 +14898,11 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Checks whether a point with #x, #y coordinates is contained
 		 * withing #box
-		 * @param _x X coordinate of the point
-		 * @param _y Y coordinate of the point
+		 * @param x X coordinate of the point
+		 * @param y Y coordinate of the point
 		 * @returns %TRUE if the point is contained by the {@link ActorBox}
 		 */
-		public contains(_x: number, _y: number): boolean;
+		public contains(x: number, y: number): boolean;
 		/**
 		 * Copies #box
 		 * @returns a newly allocated copy of {@link ActorBox}. Use
@@ -14977,12 +14976,12 @@ declare namespace imports.gi.Clutter {
 		public init(x_1: number, y_1: number, x_2: number, y_2: number): ActorBox;
 		/**
 		 * Initializes #box with the given origin and size.
-		 * @param _x X coordinate of the origin
-		 * @param _y Y coordinate of the origin
+		 * @param x X coordinate of the origin
+		 * @param y Y coordinate of the origin
 		 * @param width width of the box
 		 * @param height height of the box
 		 */
-		public init_rect(_x: number, _y: number, width: number, height: number): void;
+		public init_rect(x: number, y: number, width: number, height: number): void;
 		/**
 		 * Interpolates between #initial and #final {@link ActorBox}<!-- -->es
 		 * using #progress
@@ -14993,10 +14992,10 @@ declare namespace imports.gi.Clutter {
 		public interpolate(_final: ActorBox, progress: number, result: ActorBox): void;
 		/**
 		 * Changes the origin of #box, maintaining the size of the {@link ActorBox}.
-		 * @param _x the X coordinate of the new origin
-		 * @param _y the Y coordinate of the new origin
+		 * @param x the X coordinate of the new origin
+		 * @param y the Y coordinate of the new origin
 		 */
-		public set_origin(_x: number, _y: number): void;
+		public set_origin(x: number, y: number): void;
 		/**
 		 * Sets the size of #box, maintaining the origin of the {@link ActorBox}.
 		 * @param width the new width
@@ -15005,11 +15004,11 @@ declare namespace imports.gi.Clutter {
 		public set_size(width: number, height: number): void;
 		/**
 		 * Unions the two boxes #a and #b and stores the result in #result.
-		 * @param _b the second {@link ActorBox}
+		 * @param b the second {@link ActorBox}
 		 * @param result the {@link ActorBox} representing a union
 		 *   of #a and #b
 		 */
-		public union(_b: ActorBox, result: ActorBox): void;
+		public union(b: ActorBox, result: ActorBox): void;
 	}
 
 	/**
@@ -15707,10 +15706,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The alpha channel of #result is set as as the maximum value
 		 * between the alpha channels of #a and #b.
-		 * @param _b a {@link Color}
+		 * @param b a {@link Color}
 		 * @param result return location for the result
 		 */
-		public add(_b: Color, result: Color): void;
+		public add(b: Color, result: Color): void;
 		/**
 		 * Makes a copy of the color structure.  The result must be
 		 * freed using clutter_color_free().
@@ -15781,10 +15780,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The alpha channel of #result is set as the minimum value
 		 * between the alpha channels of #a and #b.
-		 * @param _b a {@link Color}
+		 * @param b a {@link Color}
 		 * @param result return location for the result
 		 */
-		public subtract(_b: Color, result: Color): void;
+		public subtract(b: Color, result: Color): void;
 		/**
 		 * Converts #color to the HLS format.
 		 * 
@@ -16451,10 +16450,10 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Initializes the {@link Matrix} #a with the contents of the
 		 * #ClutterMatrix #b.
-		 * @param _b the {@link Matrix} to copy
+		 * @param b the {@link Matrix} to copy
 		 * @returns the initialized {@link Matrix}
 		 */
-		public init_from_matrix(_b: Matrix): Matrix;
+		public init_from_matrix(b: Matrix): Matrix;
 		/**
 		 * Initializes #matrix with the identity matrix, i.e.:
 		 * 
@@ -16491,9 +16490,9 @@ declare namespace imports.gi.Clutter {
 		public get_column_name: {(model: Model, column: number): string;};
 		public get_column_type: {(model: Model, column: number): GObject.Type;};
 		public insert_row: {(model: Model, index_: number): ModelIter;};
-		public remove_row: {(model: Model, _row: number): void;};
-		public get_iter_at_row: {(model: Model, _row: number): ModelIter;};
-		public resort: {(model: Model, _func: ModelSortFunc, data: any | null): void;};
+		public remove_row: {(model: Model, row: number): void;};
+		public get_iter_at_row: {(model: Model, row: number): ModelIter;};
+		public resort: {(model: Model, func: ModelSortFunc, data: any | null): void;};
 		public row_added: {(model: Model, iter: ModelIter): void;};
 		public row_removed: {(model: Model, iter: ModelIter): void;};
 		public row_changed: {(model: Model, iter: ModelIter): void;};
@@ -16976,27 +16975,27 @@ declare namespace imports.gi.Clutter {
 		public copy(): Point;
 		/**
 		 * Computes the distance between two {@link Point}.
-		 * @param _b a {@link Point}
+		 * @param b a {@link Point}
 		 * @returns the distance between the points.
 		 */
-		public distance(_b: Point): number;
+		public distance(b: Point): number;
 		/**
 		 * Compares two {@link Point} for equality.
-		 * @param _b the second {@link Point} to compare
+		 * @param b the second {@link Point} to compare
 		 * @returns %TRUE if the {@link Points} are equal
 		 */
-		public equals(_b: Point): boolean;
+		public equals(b: Point): boolean;
 		/**
 		 * Frees the resources allocated for #point.
 		 */
 		public free(): void;
 		/**
 		 * Initializes #point with the given coordinates.
-		 * @param _x the X coordinate of the point
-		 * @param _y the Y coordinate of the point
+		 * @param x the X coordinate of the point
+		 * @param y the Y coordinate of the point
 		 * @returns the initialized {@link Point}
 		 */
-		public init(_x: number, _y: number): Point;
+		public init(x: number, y: number): Point;
 	}
 
 	/**
@@ -17072,10 +17071,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The first rectangle contains the second if the union of the
 		 * two {@link Rect} is equal to the first rectangle.
-		 * @param _b a {@link Rect}
+		 * @param b a {@link Rect}
 		 * @returns %TRUE if the first rectangle contains the second.
 		 */
-		public contains_rect(_b: Rect): boolean;
+		public contains_rect(b: Rect): boolean;
 		/**
 		 * Copies #rect into a new {@link Rect} instance.
 		 * @returns the newly allocate copy of #rect.
@@ -17087,10 +17086,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function will normalize both #a and #b before comparing
 		 * their origin and size.
-		 * @param _b a {@link Rect}
+		 * @param b a {@link Rect}
 		 * @returns %TRUE if the rectangles match in origin and size.
 		 */
-		public equals(_b: Rect): boolean;
+		public equals(b: Rect): boolean;
 		/**
 		 * Frees the resources allocated by #rect.
 		 */
@@ -17123,13 +17122,13 @@ declare namespace imports.gi.Clutter {
 		public get_y(): number;
 		/**
 		 * Initializes a {@link Rect} with the given origin and size.
-		 * @param _x X coordinate of the origin
-		 * @param _y Y coordinate of the origin
+		 * @param x X coordinate of the origin
+		 * @param y Y coordinate of the origin
 		 * @param width width of the rectangle
 		 * @param height height of the rectangle
 		 * @returns the updated rectangle
 		 */
-		public init(_x: number, _y: number, width: number, height: number): Rect;
+		public init(x: number, y: number, width: number, height: number): Rect;
 		/**
 		 * Normalizes the #rect and offsets its origin by the #d_x and #d_y values;
 		 * the size is adjusted by (2 * #d_x, 2 * #d_y).
@@ -17154,11 +17153,11 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function can be used to simply check if the intersection of #a and #b
 		 * is not empty, by using %NULL for #res.
-		 * @param _b a {@link Rect}
+		 * @param b a {@link Rect}
 		 * @param res a {@link Rect}, or %NULL
 		 * @returns %TRUE if the intersection of #a and #b is not empty
 		 */
-		public intersection(_b: Rect, res: Rect | null): boolean;
+		public intersection(b: Rect, res: Rect | null): boolean;
 		/**
 		 * Normalizes a {@link Rect}.
 		 * 
@@ -17185,10 +17184,10 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * This function will normalize both #a and #b prior to computing their
 		 * union.
-		 * @param _b a {@link Rect}
+		 * @param b a {@link Rect}
 		 * @param res a {@link Rect}
 		 */
-		public union(_b: Rect, res: Rect): void;
+		public union(b: Rect, res: Rect): void;
 	}
 
 	/**
@@ -17432,10 +17431,10 @@ declare namespace imports.gi.Clutter {
 		public copy(): Size;
 		/**
 		 * Compares two {@link Size} for equality.
-		 * @param _b a {@link Size} to compare
+		 * @param b a {@link Size} to compare
 		 * @returns %TRUE if the two {@link Size} are equal
 		 */
-		public equals(_b: Size): boolean;
+		public equals(b: Size): boolean;
 		/**
 		 * Frees the resources allocated for #size.
 		 */
@@ -17804,13 +17803,13 @@ declare namespace imports.gi.Clutter {
 		 * invoke the function multiple times to catch up missing frames if
 		 * #func takes more than #interval ms to execute.
 		 * @param fps the time between calls to the function, in frames per second
-		 * @param _func function to call
+		 * @param func function to call
 		 * @param data data to pass to the function, or %NULL
 		 * @param notify function to call when the timeout is removed, or %NULL
 		 * @returns the ID (greater than 0) of the timeout inside the pool.
 		 *   Use clutter_timeout_pool_remove() to stop the timeout.
 		 */
-		public add(fps: number, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+		public add(fps: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 		/**
 		 * Removes a timeout function with #id_ from the timeout pool. The id
 		 * is the same returned when adding a function to the timeout pool with
@@ -18114,13 +18113,13 @@ declare namespace imports.gi.Clutter {
 		 * |[
 		 *   clutter_vertex_init (clutter_vertex_alloc (), x, y, z);
 		 * ]|
-		 * @param _x X coordinate
-		 * @param _y Y coordinate
-		 * @param _z Z coordinate
+		 * @param x X coordinate
+		 * @param y Y coordinate
+		 * @param z Z coordinate
 		 * @returns the newly allocated {@link Vertex}.
 		 *   Use clutter_vertex_free() to free the resources
 		 */
-		public static new(_x: number, _y: number, _z: number): Vertex;
+		public static new(x: number, y: number, z: number): Vertex;
 		/**
 		 * X coordinate of the vertex
 		 */
@@ -18152,12 +18151,12 @@ declare namespace imports.gi.Clutter {
 		public free(): void;
 		/**
 		 * Initializes #vertex with the given coordinates.
-		 * @param _x X coordinate
-		 * @param _y Y coordinate
-		 * @param _z Z coordinate
+		 * @param x X coordinate
+		 * @param y Y coordinate
+		 * @param z Z coordinate
 		 * @returns the initialized {@link Vertex}
 		 */
-		public init(_x: number, _y: number, _z: number): Vertex;
+		public init(x: number, y: number, z: number): Vertex;
 	}
 
 	/**
@@ -20854,12 +20853,12 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Compares the content of two rows in the model.
 		 * @param model a {@link Model}
-		 * @param _a a #GValue representing the contents of the row
-		 * @param _b a #GValue representing the contents of the second row
+		 * @param a a #GValue representing the contents of the row
+		 * @param b a #GValue representing the contents of the second row
 		 * @returns a positive integer if #a is after #b, a negative integer if
 		 *   #a is before #b, or 0 if the rows are the same
 		 */
-		(model: Model, _a: GObject.Value, _b: GObject.Value): number;
+		(model: Model, a: GObject.Value, b: GObject.Value): number;
 	}
 
 	/**
@@ -20900,14 +20899,14 @@ declare namespace imports.gi.Clutter {
 		 * This function will be called by {@link Interval} if the
 		 * type of the values of the interval was registered using
 		 * clutter_interval_register_progress_func().
-		 * @param _a the initial value of an interval
-		 * @param _b the final value of an interval
+		 * @param a the initial value of an interval
+		 * @param b the final value of an interval
 		 * @param progress the progress factor, between 0 and 1
 		 * @param retval the value used to store the progress
 		 * @returns %TRUE if the function successfully computed
 		 *   the value and stored it inside #retval
 		 */
-		(_a: GObject.Value, _b: GObject.Value, progress: number, retval: GObject.Value): boolean;
+		(a: GObject.Value, b: GObject.Value, progress: number, retval: GObject.Value): boolean;
 	}
 
 	/**
@@ -21197,10 +21196,10 @@ declare namespace imports.gi.Clutter {
 		set_button(button: number): void;
 		/**
 		 * Sets the coordinates of the #event.
-		 * @param _x the X coordinate of the event
-		 * @param _y the Y coordinate of the event
+		 * @param x the X coordinate of the event
+		 * @param y the Y coordinate of the event
 		 */
-		set_coords(_x: number, _y: number): void;
+		set_coords(x: number, y: number): void;
 		/**
 		 * Sets the device for #event.
 		 * @param device a {@link InputDevice}, or %NULL
@@ -21290,21 +21289,21 @@ declare namespace imports.gi.Clutter {
 		public constructor();
 		/**
 		 * Creates a new {@link Event} of the specified type.
-		 * @param _type The type of event.
+		 * @param type The type of event.
 		 * @returns A newly allocated {@link Event}.
 		 */
-		public static new(_type: EventType): Event;
+		public static new(type: EventType): Event;
 		/**
 		 * Adds a function which will be called for all events that Clutter
 		 * processes. The function will be called before any signals are
 		 * emitted for the event and it will take precedence over any grabs.
 		 * @param stage The {@link Stage} to capture events for
-		 * @param _func The callback function which will be passed all events.
+		 * @param func The callback function which will be passed all events.
 		 * @param notify A #GDestroyNotify
 		 * @returns an identifier for the event filter, to be used
 		 *   with clutter_event_remove_filter().
 		 */
-		public static add_filter(stage: Stage | null, _func: EventFilterFunc, notify: GLib.DestroyNotify): number;
+		public static add_filter(stage: Stage | null, func: EventFilterFunc, notify: GLib.DestroyNotify): number;
 		/**
 		 * Pops an event off the event queue. Applications should not need to call
 		 * this.
@@ -21320,9 +21319,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Removes an event filter that was previously added with
 		 * clutter_event_add_filter().
-		 * @param _id The ID of the event filter, as returned from clutter_event_add_filter()
+		 * @param id The ID of the event filter, as returned from clutter_event_add_filter()
 		 */
-		public static remove_filter(_id: number): void;
+		public static remove_filter(id: number): void;
 	}
 
 
@@ -21466,10 +21465,10 @@ declare namespace imports.gi.Clutter {
 	 * If the alpha component is not specified then it is assumed to be set to
 	 * be fully opaque.
 	 * @param color return location for a {@link Color}
-	 * @param _str a string specifiying a color
+	 * @param str a string specifiying a color
 	 * @returns %TRUE if parsing succeeded, and %FALSE otherwise
 	 */
-	function color_from_string(color: Color, _str: string): boolean;
+	function color_from_string(color: Color, str: string): boolean;
 
 	/**
 	 * Retrieves a static color for the given #color name
@@ -21524,12 +21523,12 @@ declare namespace imports.gi.Clutter {
 	 * processes. The function will be called before any signals are
 	 * emitted for the event and it will take precedence over any grabs.
 	 * @param stage The {@link Stage} to capture events for
-	 * @param _func The callback function which will be passed all events.
+	 * @param func The callback function which will be passed all events.
 	 * @param notify A #GDestroyNotify
 	 * @returns an identifier for the event filter, to be used
 	 *   with clutter_event_remove_filter().
 	 */
-	function event_add_filter(stage: Stage | null, _func: EventFilterFunc, notify: GLib.DestroyNotify): number;
+	function event_add_filter(stage: Stage | null, func: EventFilterFunc, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Pops an event off the event queue. Applications should not need to call
@@ -21548,9 +21547,9 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Removes an event filter that was previously added with
 	 * clutter_event_add_filter().
-	 * @param _id The ID of the event filter, as returned from clutter_event_add_filter()
+	 * @param id The ID of the event filter, as returned from clutter_event_add_filter()
 	 */
-	function event_remove_filter(_id: number): void;
+	function event_remove_filter(id: number): void;
 
 	/**
 	 * Checks if events are pending in the event queue.
@@ -21575,11 +21574,11 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Simple wrapper around clutter_frame_source_add_full().
 	 * @param fps the number of times per second to call the function
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function frame_source_add(fps: number, _func: GLib.SourceFunc, data: any | null): number;
+	function frame_source_add(fps: number, func: GLib.SourceFunc, data: any | null): number;
 
 	/**
 	 * Sets a function to be called at regular intervals with the given
@@ -21601,12 +21600,12 @@ declare namespace imports.gi.Clutter {
 	 * @param priority the priority of the frame source. Typically this will be in the
 	 *   range between %G_PRIORITY_DEFAULT and %G_PRIORITY_HIGH.
 	 * @param fps the number of times per second to call the function
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @param notify function to call when the timeout source is removed
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function frame_source_add_full(priority: number, fps: number, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function frame_source_add_full(priority: number, fps: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Returns whether Clutter has accessibility support enabled.  As
@@ -22170,11 +22169,11 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Simple wrapper around clutter_threads_add_frame_source_full().
 	 * @param fps the number of times per second to call the function
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_frame_source(fps: number, _func: GLib.SourceFunc, data: any | null): number;
+	function threads_add_frame_source(fps: number, func: GLib.SourceFunc, data: any | null): number;
 
 	/**
 	 * Sets a function to be called at regular intervals holding the Clutter
@@ -22197,21 +22196,21 @@ declare namespace imports.gi.Clutter {
 	 * @param priority the priority of the frame source. Typically this will be in the
 	 *   range between %G_PRIORITY_DEFAULT and %G_PRIORITY_HIGH.
 	 * @param fps the number of times per second to call the function
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @param notify function to call when the timeout source is removed
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_frame_source_full(priority: number, fps: number, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function threads_add_frame_source_full(priority: number, fps: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Simple wrapper around clutter_threads_add_idle_full() using the
 	 * default priority.
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_idle(_func: GLib.SourceFunc, data: any | null): number;
+	function threads_add_idle(func: GLib.SourceFunc, data: any | null): number;
 
 	/**
 	 * Adds a function to be called whenever there are no higher priority
@@ -22296,12 +22295,12 @@ declare namespace imports.gi.Clutter {
 	 * ]|
 	 * @param priority the priority of the timeout source. Typically this will be in the
 	 *    range between #G_PRIORITY_DEFAULT_IDLE and #G_PRIORITY_HIGH_IDLE
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @param notify functio to call when the idle source is removed
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_idle_full(priority: number, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function threads_add_idle_full(priority: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Adds a function to be called whenever Clutter is processing a new
@@ -22329,7 +22328,7 @@ declare namespace imports.gi.Clutter {
 	 * #notify function will be called, if any is set.
 	 * 
 	 * See also: clutter_threads_add_repaint_func_full()
-	 * @param _func the function to be called within the paint cycle
+	 * @param func the function to be called within the paint cycle
 	 * @param data data to be passed to the function, or %NULL
 	 * @param notify function to be called when removing the repaint
 	 *    function, or %NULL
@@ -22337,7 +22336,7 @@ declare namespace imports.gi.Clutter {
 	 *   can use the returned integer to remove the repaint function by
 	 *   calling clutter_threads_remove_repaint_func().
 	 */
-	function threads_add_repaint_func(_func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function threads_add_repaint_func(func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Adds a function to be called whenever Clutter is processing a new
@@ -22364,7 +22363,7 @@ declare namespace imports.gi.Clutter {
 	 * or because clutter_threads_remove_repaint_func() has been called) the
 	 * #notify function will be called, if any is set.
 	 * @param flags flags for the repaint function
-	 * @param _func the function to be called within the paint cycle
+	 * @param func the function to be called within the paint cycle
 	 * @param data data to be passed to the function, or %NULL
 	 * @param notify function to be called when removing the repaint
 	 *    function, or %NULL
@@ -22372,16 +22371,16 @@ declare namespace imports.gi.Clutter {
 	 *   can use the returned integer to remove the repaint function by
 	 *   calling clutter_threads_remove_repaint_func().
 	 */
-	function threads_add_repaint_func_full(flags: RepaintFlags, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function threads_add_repaint_func_full(flags: RepaintFlags, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Simple wrapper around clutter_threads_add_timeout_full().
 	 * @param interval the time between calls to the function, in milliseconds
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_timeout(interval: number, _func: GLib.SourceFunc, data: any | null): number;
+	function threads_add_timeout(interval: number, func: GLib.SourceFunc, data: any | null): number;
 
 	/**
 	 * Sets a function to be called at regular intervals holding the Clutter
@@ -22400,12 +22399,12 @@ declare namespace imports.gi.Clutter {
 	 * @param priority the priority of the timeout source. Typically this will be in the
 	 *            range between #G_PRIORITY_DEFAULT and #G_PRIORITY_HIGH.
 	 * @param interval the time between calls to the function, in milliseconds
-	 * @param _func function to call
+	 * @param func function to call
 	 * @param data data to pass to the function
 	 * @param notify function to call when the timeout source is removed
 	 * @returns the ID (greater than 0) of the event source.
 	 */
-	function threads_add_timeout_full(priority: number, interval: number, _func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
+	function threads_add_timeout_full(priority: number, interval: number, func: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify): number;
 
 	/**
 	 * Locks the Clutter thread lock.
@@ -22515,17 +22514,17 @@ declare namespace imports.gi.Clutter {
 	 * Stores a value in em inside #units, using the default font
 	 * name as returned by clutter_backend_get_font_name()
 	 * @param units a {@link Units}
-	 * @param _em em
+	 * @param em em
 	 */
-	function units_from_em(units: Units, _em: number): void;
+	function units_from_em(units: Units, em: number): void;
 
 	/**
 	 * Stores a value in em inside #units using #font_name
 	 * @param units a {@link Units}
 	 * @param font_name the font name and size
-	 * @param _em em
+	 * @param em em
 	 */
-	function units_from_em_for_font(units: Units, font_name: string | null, _em: number): void;
+	function units_from_em_for_font(units: Units, font_name: string | null, em: number): void;
 
 	/**
 	 * Stores a value in millimiters inside #units
@@ -22583,18 +22582,18 @@ declare namespace imports.gi.Clutter {
 	 * 
 	 * If no unit is specified, pixels are assumed.
 	 * @param units a {@link Units}
-	 * @param _str the string to convert
+	 * @param str the string to convert
 	 * @returns %TRUE if the string was successfully parsed,
 	 *   and %FALSE otherwise
 	 */
-	function units_from_string(units: Units, _str: string): boolean;
+	function units_from_string(units: Units, str: string): boolean;
 
 	/**
 	 * Calculates the nearest power of two, greater than or equal to #a.
-	 * @param _a Value to get the next power
+	 * @param a Value to get the next power
 	 * @returns The nearest power of two, greater or equal to #a.
 	 */
-	function util_next_p2(_a: number): number;
+	function util_next_p2(a: number): number;
 
 	/**
 	 * Retrieves a pointer to the {@link PaintNode} contained inside
@@ -22739,5 +22738,9255 @@ declare namespace imports.gi.Clutter {
 	 * @param node a {@link PaintNode}, or %NULL
 	 */
 	function value_take_paint_node(value: GObject.Value, node: PaintNode | null): void;
+
+	// const 0: number;
+
+	// const 1: number;
+
+	// const 2: number;
+
+	// const 3: number;
+
+	// const 3270_AltCursor: number;
+
+	// const 3270_Attn: number;
+
+	// const 3270_BackTab: number;
+
+	// const 3270_ChangeScreen: number;
+
+	// const 3270_Copy: number;
+
+	// const 3270_CursorBlink: number;
+
+	// const 3270_CursorSelect: number;
+
+	// const 3270_DeleteWord: number;
+
+	// const 3270_Duplicate: number;
+
+	// const 3270_Enter: number;
+
+	// const 3270_EraseEOF: number;
+
+	// const 3270_EraseInput: number;
+
+	// const 3270_ExSelect: number;
+
+	// const 3270_FieldMark: number;
+
+	// const 3270_Ident: number;
+
+	// const 3270_Jump: number;
+
+	// const 3270_KeyClick: number;
+
+	// const 3270_Left2: number;
+
+	// const 3270_PA1: number;
+
+	// const 3270_PA2: number;
+
+	// const 3270_PA3: number;
+
+	// const 3270_Play: number;
+
+	// const 3270_PrintScreen: number;
+
+	// const 3270_Quit: number;
+
+	// const 3270_Record: number;
+
+	// const 3270_Reset: number;
+
+	// const 3270_Right2: number;
+
+	// const 3270_Rule: number;
+
+	// const 3270_Setup: number;
+
+	// const 3270_Test: number;
+
+	// const 4: number;
+
+	// const 5: number;
+
+	// const 6: number;
+
+	// const 7: number;
+
+	// const 8: number;
+
+	// const 9: number;
+
+	const A: number;
+
+	const AE: number;
+
+	const Aacute: number;
+
+	const Abelowdot: number;
+
+	const Abreve: number;
+
+	const Abreveacute: number;
+
+	const Abrevebelowdot: number;
+
+	const Abrevegrave: number;
+
+	const Abrevehook: number;
+
+	const Abrevetilde: number;
+
+	const AccessX_Enable: number;
+
+	const AccessX_Feedback_Enable: number;
+
+	const Acircumflex: number;
+
+	const Acircumflexacute: number;
+
+	const Acircumflexbelowdot: number;
+
+	const Acircumflexgrave: number;
+
+	const Acircumflexhook: number;
+
+	const Acircumflextilde: number;
+
+	const AddFavorite: number;
+
+	const Adiaeresis: number;
+
+	const Agrave: number;
+
+	const Ahook: number;
+
+	const Alt_L: number;
+
+	const Alt_R: number;
+
+	const Amacron: number;
+
+	const Aogonek: number;
+
+	const ApplicationLeft: number;
+
+	const ApplicationRight: number;
+
+	const Arabic_0: number;
+
+	const Arabic_1: number;
+
+	const Arabic_2: number;
+
+	const Arabic_3: number;
+
+	const Arabic_4: number;
+
+	const Arabic_5: number;
+
+	const Arabic_6: number;
+
+	const Arabic_7: number;
+
+	const Arabic_8: number;
+
+	const Arabic_9: number;
+
+	const Arabic_ain: number;
+
+	const Arabic_alef: number;
+
+	const Arabic_alefmaksura: number;
+
+	const Arabic_beh: number;
+
+	const Arabic_comma: number;
+
+	const Arabic_dad: number;
+
+	const Arabic_dal: number;
+
+	const Arabic_damma: number;
+
+	const Arabic_dammatan: number;
+
+	const Arabic_ddal: number;
+
+	const Arabic_farsi_yeh: number;
+
+	const Arabic_fatha: number;
+
+	const Arabic_fathatan: number;
+
+	const Arabic_feh: number;
+
+	const Arabic_fullstop: number;
+
+	const Arabic_gaf: number;
+
+	const Arabic_ghain: number;
+
+	const Arabic_ha: number;
+
+	const Arabic_hah: number;
+
+	const Arabic_hamza: number;
+
+	const Arabic_hamza_above: number;
+
+	const Arabic_hamza_below: number;
+
+	const Arabic_hamzaonalef: number;
+
+	const Arabic_hamzaonwaw: number;
+
+	const Arabic_hamzaonyeh: number;
+
+	const Arabic_hamzaunderalef: number;
+
+	const Arabic_heh: number;
+
+	const Arabic_heh_doachashmee: number;
+
+	const Arabic_heh_goal: number;
+
+	const Arabic_jeem: number;
+
+	const Arabic_jeh: number;
+
+	const Arabic_kaf: number;
+
+	const Arabic_kasra: number;
+
+	const Arabic_kasratan: number;
+
+	const Arabic_keheh: number;
+
+	const Arabic_khah: number;
+
+	const Arabic_lam: number;
+
+	const Arabic_madda_above: number;
+
+	const Arabic_maddaonalef: number;
+
+	const Arabic_meem: number;
+
+	const Arabic_noon: number;
+
+	const Arabic_noon_ghunna: number;
+
+	const Arabic_peh: number;
+
+	const Arabic_percent: number;
+
+	const Arabic_qaf: number;
+
+	const Arabic_question_mark: number;
+
+	const Arabic_ra: number;
+
+	const Arabic_rreh: number;
+
+	const Arabic_sad: number;
+
+	const Arabic_seen: number;
+
+	const Arabic_semicolon: number;
+
+	const Arabic_shadda: number;
+
+	const Arabic_sheen: number;
+
+	const Arabic_sukun: number;
+
+	const Arabic_superscript_alef: number;
+
+	const Arabic_switch: number;
+
+	const Arabic_tah: number;
+
+	const Arabic_tatweel: number;
+
+	const Arabic_tcheh: number;
+
+	const Arabic_teh: number;
+
+	const Arabic_tehmarbuta: number;
+
+	const Arabic_thal: number;
+
+	const Arabic_theh: number;
+
+	const Arabic_tteh: number;
+
+	const Arabic_veh: number;
+
+	const Arabic_waw: number;
+
+	const Arabic_yeh: number;
+
+	const Arabic_yeh_baree: number;
+
+	const Arabic_zah: number;
+
+	const Arabic_zain: number;
+
+	const Aring: number;
+
+	const Armenian_AT: number;
+
+	const Armenian_AYB: number;
+
+	const Armenian_BEN: number;
+
+	const Armenian_CHA: number;
+
+	const Armenian_DA: number;
+
+	const Armenian_DZA: number;
+
+	const Armenian_E: number;
+
+	const Armenian_FE: number;
+
+	const Armenian_GHAT: number;
+
+	const Armenian_GIM: number;
+
+	const Armenian_HI: number;
+
+	const Armenian_HO: number;
+
+	const Armenian_INI: number;
+
+	const Armenian_JE: number;
+
+	const Armenian_KE: number;
+
+	const Armenian_KEN: number;
+
+	const Armenian_KHE: number;
+
+	const Armenian_LYUN: number;
+
+	const Armenian_MEN: number;
+
+	const Armenian_NU: number;
+
+	const Armenian_O: number;
+
+	const Armenian_PE: number;
+
+	const Armenian_PYUR: number;
+
+	const Armenian_RA: number;
+
+	const Armenian_RE: number;
+
+	const Armenian_SE: number;
+
+	const Armenian_SHA: number;
+
+	const Armenian_TCHE: number;
+
+	const Armenian_TO: number;
+
+	const Armenian_TSA: number;
+
+	const Armenian_TSO: number;
+
+	const Armenian_TYUN: number;
+
+	const Armenian_VEV: number;
+
+	const Armenian_VO: number;
+
+	const Armenian_VYUN: number;
+
+	const Armenian_YECH: number;
+
+	const Armenian_ZA: number;
+
+	const Armenian_ZHE: number;
+
+	const Armenian_accent: number;
+
+	const Armenian_amanak: number;
+
+	const Armenian_apostrophe: number;
+
+	const Armenian_at: number;
+
+	const Armenian_ayb: number;
+
+	const Armenian_ben: number;
+
+	const Armenian_but: number;
+
+	const Armenian_cha: number;
+
+	const Armenian_da: number;
+
+	const Armenian_dza: number;
+
+	const Armenian_e: number;
+
+	const Armenian_exclam: number;
+
+	const Armenian_fe: number;
+
+	const Armenian_full_stop: number;
+
+	const Armenian_ghat: number;
+
+	const Armenian_gim: number;
+
+	const Armenian_hi: number;
+
+	const Armenian_ho: number;
+
+	const Armenian_hyphen: number;
+
+	const Armenian_ini: number;
+
+	const Armenian_je: number;
+
+	const Armenian_ke: number;
+
+	const Armenian_ken: number;
+
+	const Armenian_khe: number;
+
+	const Armenian_ligature_ew: number;
+
+	const Armenian_lyun: number;
+
+	const Armenian_men: number;
+
+	const Armenian_nu: number;
+
+	const Armenian_o: number;
+
+	const Armenian_paruyk: number;
+
+	const Armenian_pe: number;
+
+	const Armenian_pyur: number;
+
+	const Armenian_question: number;
+
+	const Armenian_ra: number;
+
+	const Armenian_re: number;
+
+	const Armenian_se: number;
+
+	const Armenian_separation_mark: number;
+
+	const Armenian_sha: number;
+
+	const Armenian_shesht: number;
+
+	const Armenian_tche: number;
+
+	const Armenian_to: number;
+
+	const Armenian_tsa: number;
+
+	const Armenian_tso: number;
+
+	const Armenian_tyun: number;
+
+	const Armenian_verjaket: number;
+
+	const Armenian_vev: number;
+
+	const Armenian_vo: number;
+
+	const Armenian_vyun: number;
+
+	const Armenian_yech: number;
+
+	const Armenian_yentamna: number;
+
+	const Armenian_za: number;
+
+	const Armenian_zhe: number;
+
+	const Atilde: number;
+
+	const AudibleBell_Enable: number;
+
+	const AudioCycleTrack: number;
+
+	const AudioForward: number;
+
+	const AudioLowerVolume: number;
+
+	const AudioMedia: number;
+
+	const AudioMicMute: number;
+
+	const AudioMute: number;
+
+	const AudioNext: number;
+
+	const AudioPause: number;
+
+	const AudioPlay: number;
+
+	const AudioPrev: number;
+
+	const AudioRaiseVolume: number;
+
+	const AudioRandomPlay: number;
+
+	const AudioRecord: number;
+
+	const AudioRepeat: number;
+
+	const AudioRewind: number;
+
+	const AudioStop: number;
+
+	const Away: number;
+
+	const B: number;
+
+	/**
+	 * The middle button of a pointer device.
+	 * @returns The middle button of a pointer device.
+	 */
+	const BUTTON_MIDDLE: number;
+
+	/**
+	 * The primary button of a pointer device.
+	 * 
+	 * This is typically the left mouse button in a right-handed
+	 * mouse configuration.
+	 * @returns The primary button of a pointer device.
+	 * 
+	 * This is typically the left mouse button in a right-handed
+	 * mouse configuration.
+	 */
+	const BUTTON_PRIMARY: number;
+
+	/**
+	 * The secondary button of a pointer device.
+	 * 
+	 * This is typically the right mouse button in a right-handed
+	 * mouse configuration.
+	 * @returns The secondary button of a pointer device.
+	 * 
+	 * This is typically the right mouse button in a right-handed
+	 * mouse configuration.
+	 */
+	const BUTTON_SECONDARY: number;
+
+	const Babovedot: number;
+
+	const Back: number;
+
+	const BackForward: number;
+
+	const BackSpace: number;
+
+	const Battery: number;
+
+	const Begin: number;
+
+	const Blue: number;
+
+	const Bluetooth: number;
+
+	const Book: number;
+
+	const BounceKeys_Enable: number;
+
+	const Break: number;
+
+	const BrightnessAdjust: number;
+
+	const Byelorussian_SHORTU: number;
+
+	const Byelorussian_shortu: number;
+
+	const C: number;
+
+	const CD: number;
+
+	const CH: number;
+
+	/**
+	 * Cogl (internal GL abstraction utility library) backend. Can be "gl" or
+	 * "gles" currently
+	 * @returns Cogl (internal GL abstraction utility library) backend. Can be "gl" or
+	 * "gles" currently
+	 */
+	const COGL: string;
+
+	/**
+	 * Default value for "now".
+	 * @returns Default value for "now".
+	 */
+	const CURRENT_TIME: number;
+
+	const C_H: number;
+
+	const C_h: number;
+
+	const Cabovedot: number;
+
+	const Cacute: number;
+
+	const Calculator: number;
+
+	const Calendar: number;
+
+	const Cancel: number;
+
+	const Caps_Lock: number;
+
+	const Ccaron: number;
+
+	const Ccedilla: number;
+
+	const Ccircumflex: number;
+
+	const Ch: number;
+
+	const Clear: number;
+
+	const ClearGrab: number;
+
+	const Close: number;
+
+	const Codeinput: number;
+
+	const ColonSign: number;
+
+	const Community: number;
+
+	const ContrastAdjust: number;
+
+	const Control_L: number;
+
+	const Control_R: number;
+
+	const Copy: number;
+
+	const CruzeiroSign: number;
+
+	const Cut: number;
+
+	const CycleAngle: number;
+
+	const Cyrillic_A: number;
+
+	const Cyrillic_BE: number;
+
+	const Cyrillic_CHE: number;
+
+	const Cyrillic_CHE_descender: number;
+
+	const Cyrillic_CHE_vertstroke: number;
+
+	const Cyrillic_DE: number;
+
+	const Cyrillic_DZHE: number;
+
+	const Cyrillic_E: number;
+
+	const Cyrillic_EF: number;
+
+	const Cyrillic_EL: number;
+
+	const Cyrillic_EM: number;
+
+	const Cyrillic_EN: number;
+
+	const Cyrillic_EN_descender: number;
+
+	const Cyrillic_ER: number;
+
+	const Cyrillic_ES: number;
+
+	const Cyrillic_GHE: number;
+
+	const Cyrillic_GHE_bar: number;
+
+	const Cyrillic_HA: number;
+
+	const Cyrillic_HARDSIGN: number;
+
+	const Cyrillic_HA_descender: number;
+
+	const Cyrillic_I: number;
+
+	const Cyrillic_IE: number;
+
+	const Cyrillic_IO: number;
+
+	const Cyrillic_I_macron: number;
+
+	const Cyrillic_JE: number;
+
+	const Cyrillic_KA: number;
+
+	const Cyrillic_KA_descender: number;
+
+	const Cyrillic_KA_vertstroke: number;
+
+	const Cyrillic_LJE: number;
+
+	const Cyrillic_NJE: number;
+
+	const Cyrillic_O: number;
+
+	const Cyrillic_O_bar: number;
+
+	const Cyrillic_PE: number;
+
+	const Cyrillic_SCHWA: number;
+
+	const Cyrillic_SHA: number;
+
+	const Cyrillic_SHCHA: number;
+
+	const Cyrillic_SHHA: number;
+
+	const Cyrillic_SHORTI: number;
+
+	const Cyrillic_SOFTSIGN: number;
+
+	const Cyrillic_TE: number;
+
+	const Cyrillic_TSE: number;
+
+	const Cyrillic_U: number;
+
+	const Cyrillic_U_macron: number;
+
+	const Cyrillic_U_straight: number;
+
+	const Cyrillic_U_straight_bar: number;
+
+	const Cyrillic_VE: number;
+
+	const Cyrillic_YA: number;
+
+	const Cyrillic_YERU: number;
+
+	const Cyrillic_YU: number;
+
+	const Cyrillic_ZE: number;
+
+	const Cyrillic_ZHE: number;
+
+	const Cyrillic_ZHE_descender: number;
+
+	const Cyrillic_a: number;
+
+	const Cyrillic_be: number;
+
+	const Cyrillic_che: number;
+
+	const Cyrillic_che_descender: number;
+
+	const Cyrillic_che_vertstroke: number;
+
+	const Cyrillic_de: number;
+
+	const Cyrillic_dzhe: number;
+
+	const Cyrillic_e: number;
+
+	const Cyrillic_ef: number;
+
+	const Cyrillic_el: number;
+
+	const Cyrillic_em: number;
+
+	const Cyrillic_en: number;
+
+	const Cyrillic_en_descender: number;
+
+	const Cyrillic_er: number;
+
+	const Cyrillic_es: number;
+
+	const Cyrillic_ghe: number;
+
+	const Cyrillic_ghe_bar: number;
+
+	const Cyrillic_ha: number;
+
+	const Cyrillic_ha_descender: number;
+
+	const Cyrillic_hardsign: number;
+
+	const Cyrillic_i: number;
+
+	const Cyrillic_i_macron: number;
+
+	const Cyrillic_ie: number;
+
+	const Cyrillic_io: number;
+
+	const Cyrillic_je: number;
+
+	const Cyrillic_ka: number;
+
+	const Cyrillic_ka_descender: number;
+
+	const Cyrillic_ka_vertstroke: number;
+
+	const Cyrillic_lje: number;
+
+	const Cyrillic_nje: number;
+
+	const Cyrillic_o: number;
+
+	const Cyrillic_o_bar: number;
+
+	const Cyrillic_pe: number;
+
+	const Cyrillic_schwa: number;
+
+	const Cyrillic_sha: number;
+
+	const Cyrillic_shcha: number;
+
+	const Cyrillic_shha: number;
+
+	const Cyrillic_shorti: number;
+
+	const Cyrillic_softsign: number;
+
+	const Cyrillic_te: number;
+
+	const Cyrillic_tse: number;
+
+	const Cyrillic_u: number;
+
+	const Cyrillic_u_macron: number;
+
+	const Cyrillic_u_straight: number;
+
+	const Cyrillic_u_straight_bar: number;
+
+	const Cyrillic_ve: number;
+
+	const Cyrillic_ya: number;
+
+	const Cyrillic_yeru: number;
+
+	const Cyrillic_yu: number;
+
+	const Cyrillic_ze: number;
+
+	const Cyrillic_zhe: number;
+
+	const Cyrillic_zhe_descender: number;
+
+	const D: number;
+
+	const DOS: number;
+
+	const Dabovedot: number;
+
+	const Dcaron: number;
+
+	const Delete: number;
+
+	const Display: number;
+
+	const Documents: number;
+
+	const DongSign: number;
+
+	const Down: number;
+
+	const Dstroke: number;
+
+	const E: number;
+
+	const ENG: number;
+
+	const ETH: number;
+
+	/**
+	 * Continues the propagation of an event; this macro should be
+	 * used in event-related signals.
+	 * @returns Continues the propagation of an event; this macro should be
+	 * used in event-related signals.
+	 */
+	const EVENT_PROPAGATE: boolean;
+
+	/**
+	 * Stops the propagation of an event; this macro should be used
+	 * in event-related signals.
+	 * @returns Stops the propagation of an event; this macro should be used
+	 * in event-related signals.
+	 */
+	const EVENT_STOP: boolean;
+
+	const EZH: number;
+
+	const Eabovedot: number;
+
+	const Eacute: number;
+
+	const Ebelowdot: number;
+
+	const Ecaron: number;
+
+	const Ecircumflex: number;
+
+	const Ecircumflexacute: number;
+
+	const Ecircumflexbelowdot: number;
+
+	const Ecircumflexgrave: number;
+
+	const Ecircumflexhook: number;
+
+	const Ecircumflextilde: number;
+
+	const EcuSign: number;
+
+	const Ediaeresis: number;
+
+	const Egrave: number;
+
+	const Ehook: number;
+
+	const Eisu_Shift: number;
+
+	const Eisu_toggle: number;
+
+	const Eject: number;
+
+	const Emacron: number;
+
+	const End: number;
+
+	const Eogonek: number;
+
+	const Escape: number;
+
+	const Eth: number;
+
+	const Etilde: number;
+
+	const EuroSign: number;
+
+	const Excel: number;
+
+	const Execute: number;
+
+	const Explorer: number;
+
+	const F: number;
+
+	const F1: number;
+
+	const F10: number;
+
+	const F11: number;
+
+	const F12: number;
+
+	const F13: number;
+
+	const F14: number;
+
+	const F15: number;
+
+	const F16: number;
+
+	const F17: number;
+
+	const F18: number;
+
+	const F19: number;
+
+	const F2: number;
+
+	const F20: number;
+
+	const F21: number;
+
+	const F22: number;
+
+	const F23: number;
+
+	const F24: number;
+
+	const F25: number;
+
+	const F26: number;
+
+	const F27: number;
+
+	const F28: number;
+
+	const F29: number;
+
+	const F3: number;
+
+	const F30: number;
+
+	const F31: number;
+
+	const F32: number;
+
+	const F33: number;
+
+	const F34: number;
+
+	const F35: number;
+
+	const F4: number;
+
+	const F5: number;
+
+	const F6: number;
+
+	const F7: number;
+
+	const F8: number;
+
+	const F9: number;
+
+	const FFrancSign: number;
+
+	/**
+	 * GL Windowing system used
+	 * @returns GL Windowing system used
+	 */
+	const FLAVOUR: string;
+
+	const Fabovedot: number;
+
+	const Farsi_0: number;
+
+	const Farsi_1: number;
+
+	const Farsi_2: number;
+
+	const Farsi_3: number;
+
+	const Farsi_4: number;
+
+	const Farsi_5: number;
+
+	const Farsi_6: number;
+
+	const Farsi_7: number;
+
+	const Farsi_8: number;
+
+	const Farsi_9: number;
+
+	const Farsi_yeh: number;
+
+	const Favorites: number;
+
+	const Finance: number;
+
+	const Find: number;
+
+	const First_Virtual_Screen: number;
+
+	const Forward: number;
+
+	const FrameBack: number;
+
+	const FrameForward: number;
+
+	const G: number;
+
+	const Gabovedot: number;
+
+	const Game: number;
+
+	const Gbreve: number;
+
+	const Gcaron: number;
+
+	const Gcedilla: number;
+
+	const Gcircumflex: number;
+
+	const Georgian_an: number;
+
+	const Georgian_ban: number;
+
+	const Georgian_can: number;
+
+	const Georgian_char: number;
+
+	const Georgian_chin: number;
+
+	const Georgian_cil: number;
+
+	const Georgian_don: number;
+
+	const Georgian_en: number;
+
+	const Georgian_fi: number;
+
+	const Georgian_gan: number;
+
+	const Georgian_ghan: number;
+
+	const Georgian_hae: number;
+
+	const Georgian_har: number;
+
+	const Georgian_he: number;
+
+	const Georgian_hie: number;
+
+	const Georgian_hoe: number;
+
+	const Georgian_in: number;
+
+	const Georgian_jhan: number;
+
+	const Georgian_jil: number;
+
+	const Georgian_kan: number;
+
+	const Georgian_khar: number;
+
+	const Georgian_las: number;
+
+	const Georgian_man: number;
+
+	const Georgian_nar: number;
+
+	const Georgian_on: number;
+
+	const Georgian_par: number;
+
+	const Georgian_phar: number;
+
+	const Georgian_qar: number;
+
+	const Georgian_rae: number;
+
+	const Georgian_san: number;
+
+	const Georgian_shin: number;
+
+	const Georgian_tan: number;
+
+	const Georgian_tar: number;
+
+	const Georgian_un: number;
+
+	const Georgian_vin: number;
+
+	const Georgian_we: number;
+
+	const Georgian_xan: number;
+
+	const Georgian_zen: number;
+
+	const Georgian_zhar: number;
+
+	const Go: number;
+
+	const Greek_ALPHA: number;
+
+	const Greek_ALPHAaccent: number;
+
+	const Greek_BETA: number;
+
+	const Greek_CHI: number;
+
+	const Greek_DELTA: number;
+
+	const Greek_EPSILON: number;
+
+	const Greek_EPSILONaccent: number;
+
+	const Greek_ETA: number;
+
+	const Greek_ETAaccent: number;
+
+	const Greek_GAMMA: number;
+
+	const Greek_IOTA: number;
+
+	const Greek_IOTAaccent: number;
+
+	const Greek_IOTAdiaeresis: number;
+
+	const Greek_IOTAdieresis: number;
+
+	const Greek_KAPPA: number;
+
+	const Greek_LAMBDA: number;
+
+	const Greek_LAMDA: number;
+
+	const Greek_MU: number;
+
+	const Greek_NU: number;
+
+	const Greek_OMEGA: number;
+
+	const Greek_OMEGAaccent: number;
+
+	const Greek_OMICRON: number;
+
+	const Greek_OMICRONaccent: number;
+
+	const Greek_PHI: number;
+
+	const Greek_PI: number;
+
+	const Greek_PSI: number;
+
+	const Greek_RHO: number;
+
+	const Greek_SIGMA: number;
+
+	const Greek_TAU: number;
+
+	const Greek_THETA: number;
+
+	const Greek_UPSILON: number;
+
+	const Greek_UPSILONaccent: number;
+
+	const Greek_UPSILONdieresis: number;
+
+	const Greek_XI: number;
+
+	const Greek_ZETA: number;
+
+	const Greek_accentdieresis: number;
+
+	const Greek_alpha: number;
+
+	const Greek_alphaaccent: number;
+
+	const Greek_beta: number;
+
+	const Greek_chi: number;
+
+	const Greek_delta: number;
+
+	const Greek_epsilon: number;
+
+	const Greek_epsilonaccent: number;
+
+	const Greek_eta: number;
+
+	const Greek_etaaccent: number;
+
+	const Greek_finalsmallsigma: number;
+
+	const Greek_gamma: number;
+
+	const Greek_horizbar: number;
+
+	const Greek_iota: number;
+
+	const Greek_iotaaccent: number;
+
+	const Greek_iotaaccentdieresis: number;
+
+	const Greek_iotadieresis: number;
+
+	const Greek_kappa: number;
+
+	const Greek_lambda: number;
+
+	const Greek_lamda: number;
+
+	const Greek_mu: number;
+
+	const Greek_nu: number;
+
+	const Greek_omega: number;
+
+	const Greek_omegaaccent: number;
+
+	const Greek_omicron: number;
+
+	const Greek_omicronaccent: number;
+
+	const Greek_phi: number;
+
+	const Greek_pi: number;
+
+	const Greek_psi: number;
+
+	const Greek_rho: number;
+
+	const Greek_sigma: number;
+
+	const Greek_switch: number;
+
+	const Greek_tau: number;
+
+	const Greek_theta: number;
+
+	const Greek_upsilon: number;
+
+	const Greek_upsilonaccent: number;
+
+	const Greek_upsilonaccentdieresis: number;
+
+	const Greek_upsilondieresis: number;
+
+	const Greek_xi: number;
+
+	const Greek_zeta: number;
+
+	const Green: number;
+
+	const H: number;
+
+	const HAS_WAYLAND_COMPOSITOR_SUPPORT: number;
+
+	const Hangul: number;
+
+	const Hangul_A: number;
+
+	const Hangul_AE: number;
+
+	const Hangul_AraeA: number;
+
+	const Hangul_AraeAE: number;
+
+	const Hangul_Banja: number;
+
+	const Hangul_Cieuc: number;
+
+	const Hangul_Codeinput: number;
+
+	const Hangul_Dikeud: number;
+
+	const Hangul_E: number;
+
+	const Hangul_EO: number;
+
+	const Hangul_EU: number;
+
+	const Hangul_End: number;
+
+	const Hangul_Hanja: number;
+
+	const Hangul_Hieuh: number;
+
+	const Hangul_I: number;
+
+	const Hangul_Ieung: number;
+
+	const Hangul_J_Cieuc: number;
+
+	const Hangul_J_Dikeud: number;
+
+	const Hangul_J_Hieuh: number;
+
+	const Hangul_J_Ieung: number;
+
+	const Hangul_J_Jieuj: number;
+
+	const Hangul_J_Khieuq: number;
+
+	const Hangul_J_Kiyeog: number;
+
+	const Hangul_J_KiyeogSios: number;
+
+	const Hangul_J_KkogjiDalrinIeung: number;
+
+	const Hangul_J_Mieum: number;
+
+	const Hangul_J_Nieun: number;
+
+	const Hangul_J_NieunHieuh: number;
+
+	const Hangul_J_NieunJieuj: number;
+
+	const Hangul_J_PanSios: number;
+
+	const Hangul_J_Phieuf: number;
+
+	const Hangul_J_Pieub: number;
+
+	const Hangul_J_PieubSios: number;
+
+	const Hangul_J_Rieul: number;
+
+	const Hangul_J_RieulHieuh: number;
+
+	const Hangul_J_RieulKiyeog: number;
+
+	const Hangul_J_RieulMieum: number;
+
+	const Hangul_J_RieulPhieuf: number;
+
+	const Hangul_J_RieulPieub: number;
+
+	const Hangul_J_RieulSios: number;
+
+	const Hangul_J_RieulTieut: number;
+
+	const Hangul_J_Sios: number;
+
+	const Hangul_J_SsangKiyeog: number;
+
+	const Hangul_J_SsangSios: number;
+
+	const Hangul_J_Tieut: number;
+
+	const Hangul_J_YeorinHieuh: number;
+
+	const Hangul_Jamo: number;
+
+	const Hangul_Jeonja: number;
+
+	const Hangul_Jieuj: number;
+
+	const Hangul_Khieuq: number;
+
+	const Hangul_Kiyeog: number;
+
+	const Hangul_KiyeogSios: number;
+
+	const Hangul_KkogjiDalrinIeung: number;
+
+	const Hangul_Mieum: number;
+
+	const Hangul_MultipleCandidate: number;
+
+	const Hangul_Nieun: number;
+
+	const Hangul_NieunHieuh: number;
+
+	const Hangul_NieunJieuj: number;
+
+	const Hangul_O: number;
+
+	const Hangul_OE: number;
+
+	const Hangul_PanSios: number;
+
+	const Hangul_Phieuf: number;
+
+	const Hangul_Pieub: number;
+
+	const Hangul_PieubSios: number;
+
+	const Hangul_PostHanja: number;
+
+	const Hangul_PreHanja: number;
+
+	const Hangul_PreviousCandidate: number;
+
+	const Hangul_Rieul: number;
+
+	const Hangul_RieulHieuh: number;
+
+	const Hangul_RieulKiyeog: number;
+
+	const Hangul_RieulMieum: number;
+
+	const Hangul_RieulPhieuf: number;
+
+	const Hangul_RieulPieub: number;
+
+	const Hangul_RieulSios: number;
+
+	const Hangul_RieulTieut: number;
+
+	const Hangul_RieulYeorinHieuh: number;
+
+	const Hangul_Romaja: number;
+
+	const Hangul_SingleCandidate: number;
+
+	const Hangul_Sios: number;
+
+	const Hangul_Special: number;
+
+	const Hangul_SsangDikeud: number;
+
+	const Hangul_SsangJieuj: number;
+
+	const Hangul_SsangKiyeog: number;
+
+	const Hangul_SsangPieub: number;
+
+	const Hangul_SsangSios: number;
+
+	const Hangul_Start: number;
+
+	const Hangul_SunkyeongeumMieum: number;
+
+	const Hangul_SunkyeongeumPhieuf: number;
+
+	const Hangul_SunkyeongeumPieub: number;
+
+	const Hangul_Tieut: number;
+
+	const Hangul_U: number;
+
+	const Hangul_WA: number;
+
+	const Hangul_WAE: number;
+
+	const Hangul_WE: number;
+
+	const Hangul_WEO: number;
+
+	const Hangul_WI: number;
+
+	const Hangul_YA: number;
+
+	const Hangul_YAE: number;
+
+	const Hangul_YE: number;
+
+	const Hangul_YEO: number;
+
+	const Hangul_YI: number;
+
+	const Hangul_YO: number;
+
+	const Hangul_YU: number;
+
+	const Hangul_YeorinHieuh: number;
+
+	const Hangul_switch: number;
+
+	const Hankaku: number;
+
+	const Hcircumflex: number;
+
+	const Hebrew_switch: number;
+
+	const Help: number;
+
+	const Henkan: number;
+
+	const Henkan_Mode: number;
+
+	const Hibernate: number;
+
+	const Hiragana: number;
+
+	const Hiragana_Katakana: number;
+
+	const History: number;
+
+	const Home: number;
+
+	const HomePage: number;
+
+	const HotLinks: number;
+
+	const Hstroke: number;
+
+	const Hyper_L: number;
+
+	const Hyper_R: number;
+
+	const I: number;
+
+	const INPUT_EVDEV: string;
+
+	const INPUT_GDK: string;
+
+	const INPUT_NULL: string;
+
+	const INPUT_WAYLAND: string;
+
+	const INPUT_X11: string;
+
+	const ISO_Center_Object: number;
+
+	const ISO_Continuous_Underline: number;
+
+	const ISO_Discontinuous_Underline: number;
+
+	const ISO_Emphasize: number;
+
+	const ISO_Enter: number;
+
+	const ISO_Fast_Cursor_Down: number;
+
+	const ISO_Fast_Cursor_Left: number;
+
+	const ISO_Fast_Cursor_Right: number;
+
+	const ISO_Fast_Cursor_Up: number;
+
+	const ISO_First_Group: number;
+
+	const ISO_First_Group_Lock: number;
+
+	const ISO_Group_Latch: number;
+
+	const ISO_Group_Lock: number;
+
+	const ISO_Group_Shift: number;
+
+	const ISO_Last_Group: number;
+
+	const ISO_Last_Group_Lock: number;
+
+	const ISO_Left_Tab: number;
+
+	const ISO_Level2_Latch: number;
+
+	const ISO_Level3_Latch: number;
+
+	const ISO_Level3_Lock: number;
+
+	const ISO_Level3_Shift: number;
+
+	const ISO_Level5_Latch: number;
+
+	const ISO_Level5_Lock: number;
+
+	const ISO_Level5_Shift: number;
+
+	const ISO_Lock: number;
+
+	const ISO_Move_Line_Down: number;
+
+	const ISO_Move_Line_Up: number;
+
+	const ISO_Next_Group: number;
+
+	const ISO_Next_Group_Lock: number;
+
+	const ISO_Partial_Line_Down: number;
+
+	const ISO_Partial_Line_Up: number;
+
+	const ISO_Partial_Space_Left: number;
+
+	const ISO_Partial_Space_Right: number;
+
+	const ISO_Prev_Group: number;
+
+	const ISO_Prev_Group_Lock: number;
+
+	const ISO_Release_Both_Margins: number;
+
+	const ISO_Release_Margin_Left: number;
+
+	const ISO_Release_Margin_Right: number;
+
+	const ISO_Set_Margin_Left: number;
+
+	const ISO_Set_Margin_Right: number;
+
+	const Iabovedot: number;
+
+	const Iacute: number;
+
+	const Ibelowdot: number;
+
+	const Ibreve: number;
+
+	const Icircumflex: number;
+
+	const Idiaeresis: number;
+
+	const Igrave: number;
+
+	const Ihook: number;
+
+	const Imacron: number;
+
+	const Insert: number;
+
+	const Iogonek: number;
+
+	const Itilde: number;
+
+	const J: number;
+
+	const Jcircumflex: number;
+
+	const K: number;
+
+	const KEY_0: number;
+
+	const KEY_1: number;
+
+	const KEY_2: number;
+
+	const KEY_3: number;
+
+	const KEY_3270_AltCursor: number;
+
+	const KEY_3270_Attn: number;
+
+	const KEY_3270_BackTab: number;
+
+	const KEY_3270_ChangeScreen: number;
+
+	const KEY_3270_Copy: number;
+
+	const KEY_3270_CursorBlink: number;
+
+	const KEY_3270_CursorSelect: number;
+
+	const KEY_3270_DeleteWord: number;
+
+	const KEY_3270_Duplicate: number;
+
+	const KEY_3270_Enter: number;
+
+	const KEY_3270_EraseEOF: number;
+
+	const KEY_3270_EraseInput: number;
+
+	const KEY_3270_ExSelect: number;
+
+	const KEY_3270_FieldMark: number;
+
+	const KEY_3270_Ident: number;
+
+	const KEY_3270_Jump: number;
+
+	const KEY_3270_KeyClick: number;
+
+	const KEY_3270_Left2: number;
+
+	const KEY_3270_PA1: number;
+
+	const KEY_3270_PA2: number;
+
+	const KEY_3270_PA3: number;
+
+	const KEY_3270_Play: number;
+
+	const KEY_3270_PrintScreen: number;
+
+	const KEY_3270_Quit: number;
+
+	const KEY_3270_Record: number;
+
+	const KEY_3270_Reset: number;
+
+	const KEY_3270_Right2: number;
+
+	const KEY_3270_Rule: number;
+
+	const KEY_3270_Setup: number;
+
+	const KEY_3270_Test: number;
+
+	const KEY_4: number;
+
+	const KEY_5: number;
+
+	const KEY_6: number;
+
+	const KEY_7: number;
+
+	const KEY_8: number;
+
+	const KEY_9: number;
+
+	const KEY_A: number;
+
+	const KEY_AE: number;
+
+	const KEY_Aacute: number;
+
+	const KEY_Abelowdot: number;
+
+	const KEY_Abreve: number;
+
+	const KEY_Abreveacute: number;
+
+	const KEY_Abrevebelowdot: number;
+
+	const KEY_Abrevegrave: number;
+
+	const KEY_Abrevehook: number;
+
+	const KEY_Abrevetilde: number;
+
+	const KEY_AccessX_Enable: number;
+
+	const KEY_AccessX_Feedback_Enable: number;
+
+	const KEY_Acircumflex: number;
+
+	const KEY_Acircumflexacute: number;
+
+	const KEY_Acircumflexbelowdot: number;
+
+	const KEY_Acircumflexgrave: number;
+
+	const KEY_Acircumflexhook: number;
+
+	const KEY_Acircumflextilde: number;
+
+	const KEY_AddFavorite: number;
+
+	const KEY_Adiaeresis: number;
+
+	const KEY_Agrave: number;
+
+	const KEY_Ahook: number;
+
+	const KEY_Alt_L: number;
+
+	const KEY_Alt_R: number;
+
+	const KEY_Amacron: number;
+
+	const KEY_Aogonek: number;
+
+	const KEY_ApplicationLeft: number;
+
+	const KEY_ApplicationRight: number;
+
+	const KEY_Arabic_0: number;
+
+	const KEY_Arabic_1: number;
+
+	const KEY_Arabic_2: number;
+
+	const KEY_Arabic_3: number;
+
+	const KEY_Arabic_4: number;
+
+	const KEY_Arabic_5: number;
+
+	const KEY_Arabic_6: number;
+
+	const KEY_Arabic_7: number;
+
+	const KEY_Arabic_8: number;
+
+	const KEY_Arabic_9: number;
+
+	const KEY_Arabic_ain: number;
+
+	const KEY_Arabic_alef: number;
+
+	const KEY_Arabic_alefmaksura: number;
+
+	const KEY_Arabic_beh: number;
+
+	const KEY_Arabic_comma: number;
+
+	const KEY_Arabic_dad: number;
+
+	const KEY_Arabic_dal: number;
+
+	const KEY_Arabic_damma: number;
+
+	const KEY_Arabic_dammatan: number;
+
+	const KEY_Arabic_ddal: number;
+
+	const KEY_Arabic_farsi_yeh: number;
+
+	const KEY_Arabic_fatha: number;
+
+	const KEY_Arabic_fathatan: number;
+
+	const KEY_Arabic_feh: number;
+
+	const KEY_Arabic_fullstop: number;
+
+	const KEY_Arabic_gaf: number;
+
+	const KEY_Arabic_ghain: number;
+
+	const KEY_Arabic_ha: number;
+
+	const KEY_Arabic_hah: number;
+
+	const KEY_Arabic_hamza: number;
+
+	const KEY_Arabic_hamza_above: number;
+
+	const KEY_Arabic_hamza_below: number;
+
+	const KEY_Arabic_hamzaonalef: number;
+
+	const KEY_Arabic_hamzaonwaw: number;
+
+	const KEY_Arabic_hamzaonyeh: number;
+
+	const KEY_Arabic_hamzaunderalef: number;
+
+	const KEY_Arabic_heh: number;
+
+	const KEY_Arabic_heh_doachashmee: number;
+
+	const KEY_Arabic_heh_goal: number;
+
+	const KEY_Arabic_jeem: number;
+
+	const KEY_Arabic_jeh: number;
+
+	const KEY_Arabic_kaf: number;
+
+	const KEY_Arabic_kasra: number;
+
+	const KEY_Arabic_kasratan: number;
+
+	const KEY_Arabic_keheh: number;
+
+	const KEY_Arabic_khah: number;
+
+	const KEY_Arabic_lam: number;
+
+	const KEY_Arabic_madda_above: number;
+
+	const KEY_Arabic_maddaonalef: number;
+
+	const KEY_Arabic_meem: number;
+
+	const KEY_Arabic_noon: number;
+
+	const KEY_Arabic_noon_ghunna: number;
+
+	const KEY_Arabic_peh: number;
+
+	const KEY_Arabic_percent: number;
+
+	const KEY_Arabic_qaf: number;
+
+	const KEY_Arabic_question_mark: number;
+
+	const KEY_Arabic_ra: number;
+
+	const KEY_Arabic_rreh: number;
+
+	const KEY_Arabic_sad: number;
+
+	const KEY_Arabic_seen: number;
+
+	const KEY_Arabic_semicolon: number;
+
+	const KEY_Arabic_shadda: number;
+
+	const KEY_Arabic_sheen: number;
+
+	const KEY_Arabic_sukun: number;
+
+	const KEY_Arabic_superscript_alef: number;
+
+	const KEY_Arabic_switch: number;
+
+	const KEY_Arabic_tah: number;
+
+	const KEY_Arabic_tatweel: number;
+
+	const KEY_Arabic_tcheh: number;
+
+	const KEY_Arabic_teh: number;
+
+	const KEY_Arabic_tehmarbuta: number;
+
+	const KEY_Arabic_thal: number;
+
+	const KEY_Arabic_theh: number;
+
+	const KEY_Arabic_tteh: number;
+
+	const KEY_Arabic_veh: number;
+
+	const KEY_Arabic_waw: number;
+
+	const KEY_Arabic_yeh: number;
+
+	const KEY_Arabic_yeh_baree: number;
+
+	const KEY_Arabic_zah: number;
+
+	const KEY_Arabic_zain: number;
+
+	const KEY_Aring: number;
+
+	const KEY_Armenian_AT: number;
+
+	const KEY_Armenian_AYB: number;
+
+	const KEY_Armenian_BEN: number;
+
+	const KEY_Armenian_CHA: number;
+
+	const KEY_Armenian_DA: number;
+
+	const KEY_Armenian_DZA: number;
+
+	const KEY_Armenian_E: number;
+
+	const KEY_Armenian_FE: number;
+
+	const KEY_Armenian_GHAT: number;
+
+	const KEY_Armenian_GIM: number;
+
+	const KEY_Armenian_HI: number;
+
+	const KEY_Armenian_HO: number;
+
+	const KEY_Armenian_INI: number;
+
+	const KEY_Armenian_JE: number;
+
+	const KEY_Armenian_KE: number;
+
+	const KEY_Armenian_KEN: number;
+
+	const KEY_Armenian_KHE: number;
+
+	const KEY_Armenian_LYUN: number;
+
+	const KEY_Armenian_MEN: number;
+
+	const KEY_Armenian_NU: number;
+
+	const KEY_Armenian_O: number;
+
+	const KEY_Armenian_PE: number;
+
+	const KEY_Armenian_PYUR: number;
+
+	const KEY_Armenian_RA: number;
+
+	const KEY_Armenian_RE: number;
+
+	const KEY_Armenian_SE: number;
+
+	const KEY_Armenian_SHA: number;
+
+	const KEY_Armenian_TCHE: number;
+
+	const KEY_Armenian_TO: number;
+
+	const KEY_Armenian_TSA: number;
+
+	const KEY_Armenian_TSO: number;
+
+	const KEY_Armenian_TYUN: number;
+
+	const KEY_Armenian_VEV: number;
+
+	const KEY_Armenian_VO: number;
+
+	const KEY_Armenian_VYUN: number;
+
+	const KEY_Armenian_YECH: number;
+
+	const KEY_Armenian_ZA: number;
+
+	const KEY_Armenian_ZHE: number;
+
+	const KEY_Armenian_accent: number;
+
+	const KEY_Armenian_amanak: number;
+
+	const KEY_Armenian_apostrophe: number;
+
+	const KEY_Armenian_at: number;
+
+	const KEY_Armenian_ayb: number;
+
+	const KEY_Armenian_ben: number;
+
+	const KEY_Armenian_but: number;
+
+	const KEY_Armenian_cha: number;
+
+	const KEY_Armenian_da: number;
+
+	const KEY_Armenian_dza: number;
+
+	const KEY_Armenian_e: number;
+
+	const KEY_Armenian_exclam: number;
+
+	const KEY_Armenian_fe: number;
+
+	const KEY_Armenian_full_stop: number;
+
+	const KEY_Armenian_ghat: number;
+
+	const KEY_Armenian_gim: number;
+
+	const KEY_Armenian_hi: number;
+
+	const KEY_Armenian_ho: number;
+
+	const KEY_Armenian_hyphen: number;
+
+	const KEY_Armenian_ini: number;
+
+	const KEY_Armenian_je: number;
+
+	const KEY_Armenian_ke: number;
+
+	const KEY_Armenian_ken: number;
+
+	const KEY_Armenian_khe: number;
+
+	const KEY_Armenian_ligature_ew: number;
+
+	const KEY_Armenian_lyun: number;
+
+	const KEY_Armenian_men: number;
+
+	const KEY_Armenian_nu: number;
+
+	const KEY_Armenian_o: number;
+
+	const KEY_Armenian_paruyk: number;
+
+	const KEY_Armenian_pe: number;
+
+	const KEY_Armenian_pyur: number;
+
+	const KEY_Armenian_question: number;
+
+	const KEY_Armenian_ra: number;
+
+	const KEY_Armenian_re: number;
+
+	const KEY_Armenian_se: number;
+
+	const KEY_Armenian_separation_mark: number;
+
+	const KEY_Armenian_sha: number;
+
+	const KEY_Armenian_shesht: number;
+
+	const KEY_Armenian_tche: number;
+
+	const KEY_Armenian_to: number;
+
+	const KEY_Armenian_tsa: number;
+
+	const KEY_Armenian_tso: number;
+
+	const KEY_Armenian_tyun: number;
+
+	const KEY_Armenian_verjaket: number;
+
+	const KEY_Armenian_vev: number;
+
+	const KEY_Armenian_vo: number;
+
+	const KEY_Armenian_vyun: number;
+
+	const KEY_Armenian_yech: number;
+
+	const KEY_Armenian_yentamna: number;
+
+	const KEY_Armenian_za: number;
+
+	const KEY_Armenian_zhe: number;
+
+	const KEY_Atilde: number;
+
+	const KEY_AudibleBell_Enable: number;
+
+	const KEY_AudioCycleTrack: number;
+
+	const KEY_AudioForward: number;
+
+	const KEY_AudioLowerVolume: number;
+
+	const KEY_AudioMedia: number;
+
+	const KEY_AudioMicMute: number;
+
+	const KEY_AudioMute: number;
+
+	const KEY_AudioNext: number;
+
+	const KEY_AudioPause: number;
+
+	const KEY_AudioPlay: number;
+
+	const KEY_AudioPrev: number;
+
+	const KEY_AudioRaiseVolume: number;
+
+	const KEY_AudioRandomPlay: number;
+
+	const KEY_AudioRecord: number;
+
+	const KEY_AudioRepeat: number;
+
+	const KEY_AudioRewind: number;
+
+	const KEY_AudioStop: number;
+
+	const KEY_Away: number;
+
+	const KEY_B: number;
+
+	const KEY_Babovedot: number;
+
+	const KEY_Back: number;
+
+	const KEY_BackForward: number;
+
+	const KEY_BackSpace: number;
+
+	const KEY_Battery: number;
+
+	const KEY_Begin: number;
+
+	const KEY_Blue: number;
+
+	const KEY_Bluetooth: number;
+
+	const KEY_Book: number;
+
+	const KEY_BounceKeys_Enable: number;
+
+	const KEY_Break: number;
+
+	const KEY_BrightnessAdjust: number;
+
+	const KEY_Byelorussian_SHORTU: number;
+
+	const KEY_Byelorussian_shortu: number;
+
+	const KEY_C: number;
+
+	const KEY_CD: number;
+
+	const KEY_CH: number;
+
+	const KEY_C_H: number;
+
+	const KEY_C_h: number;
+
+	const KEY_Cabovedot: number;
+
+	const KEY_Cacute: number;
+
+	const KEY_Calculator: number;
+
+	const KEY_Calendar: number;
+
+	const KEY_Cancel: number;
+
+	const KEY_Caps_Lock: number;
+
+	const KEY_Ccaron: number;
+
+	const KEY_Ccedilla: number;
+
+	const KEY_Ccircumflex: number;
+
+	const KEY_Ch: number;
+
+	const KEY_Clear: number;
+
+	const KEY_ClearGrab: number;
+
+	const KEY_Close: number;
+
+	const KEY_Codeinput: number;
+
+	const KEY_ColonSign: number;
+
+	const KEY_Community: number;
+
+	const KEY_ContrastAdjust: number;
+
+	const KEY_Control_L: number;
+
+	const KEY_Control_R: number;
+
+	const KEY_Copy: number;
+
+	const KEY_CruzeiroSign: number;
+
+	const KEY_Cut: number;
+
+	const KEY_CycleAngle: number;
+
+	const KEY_Cyrillic_A: number;
+
+	const KEY_Cyrillic_BE: number;
+
+	const KEY_Cyrillic_CHE: number;
+
+	const KEY_Cyrillic_CHE_descender: number;
+
+	const KEY_Cyrillic_CHE_vertstroke: number;
+
+	const KEY_Cyrillic_DE: number;
+
+	const KEY_Cyrillic_DZHE: number;
+
+	const KEY_Cyrillic_E: number;
+
+	const KEY_Cyrillic_EF: number;
+
+	const KEY_Cyrillic_EL: number;
+
+	const KEY_Cyrillic_EM: number;
+
+	const KEY_Cyrillic_EN: number;
+
+	const KEY_Cyrillic_EN_descender: number;
+
+	const KEY_Cyrillic_ER: number;
+
+	const KEY_Cyrillic_ES: number;
+
+	const KEY_Cyrillic_GHE: number;
+
+	const KEY_Cyrillic_GHE_bar: number;
+
+	const KEY_Cyrillic_HA: number;
+
+	const KEY_Cyrillic_HARDSIGN: number;
+
+	const KEY_Cyrillic_HA_descender: number;
+
+	const KEY_Cyrillic_I: number;
+
+	const KEY_Cyrillic_IE: number;
+
+	const KEY_Cyrillic_IO: number;
+
+	const KEY_Cyrillic_I_macron: number;
+
+	const KEY_Cyrillic_JE: number;
+
+	const KEY_Cyrillic_KA: number;
+
+	const KEY_Cyrillic_KA_descender: number;
+
+	const KEY_Cyrillic_KA_vertstroke: number;
+
+	const KEY_Cyrillic_LJE: number;
+
+	const KEY_Cyrillic_NJE: number;
+
+	const KEY_Cyrillic_O: number;
+
+	const KEY_Cyrillic_O_bar: number;
+
+	const KEY_Cyrillic_PE: number;
+
+	const KEY_Cyrillic_SCHWA: number;
+
+	const KEY_Cyrillic_SHA: number;
+
+	const KEY_Cyrillic_SHCHA: number;
+
+	const KEY_Cyrillic_SHHA: number;
+
+	const KEY_Cyrillic_SHORTI: number;
+
+	const KEY_Cyrillic_SOFTSIGN: number;
+
+	const KEY_Cyrillic_TE: number;
+
+	const KEY_Cyrillic_TSE: number;
+
+	const KEY_Cyrillic_U: number;
+
+	const KEY_Cyrillic_U_macron: number;
+
+	const KEY_Cyrillic_U_straight: number;
+
+	const KEY_Cyrillic_U_straight_bar: number;
+
+	const KEY_Cyrillic_VE: number;
+
+	const KEY_Cyrillic_YA: number;
+
+	const KEY_Cyrillic_YERU: number;
+
+	const KEY_Cyrillic_YU: number;
+
+	const KEY_Cyrillic_ZE: number;
+
+	const KEY_Cyrillic_ZHE: number;
+
+	const KEY_Cyrillic_ZHE_descender: number;
+
+	const KEY_Cyrillic_a: number;
+
+	const KEY_Cyrillic_be: number;
+
+	const KEY_Cyrillic_che: number;
+
+	const KEY_Cyrillic_che_descender: number;
+
+	const KEY_Cyrillic_che_vertstroke: number;
+
+	const KEY_Cyrillic_de: number;
+
+	const KEY_Cyrillic_dzhe: number;
+
+	const KEY_Cyrillic_e: number;
+
+	const KEY_Cyrillic_ef: number;
+
+	const KEY_Cyrillic_el: number;
+
+	const KEY_Cyrillic_em: number;
+
+	const KEY_Cyrillic_en: number;
+
+	const KEY_Cyrillic_en_descender: number;
+
+	const KEY_Cyrillic_er: number;
+
+	const KEY_Cyrillic_es: number;
+
+	const KEY_Cyrillic_ghe: number;
+
+	const KEY_Cyrillic_ghe_bar: number;
+
+	const KEY_Cyrillic_ha: number;
+
+	const KEY_Cyrillic_ha_descender: number;
+
+	const KEY_Cyrillic_hardsign: number;
+
+	const KEY_Cyrillic_i: number;
+
+	const KEY_Cyrillic_i_macron: number;
+
+	const KEY_Cyrillic_ie: number;
+
+	const KEY_Cyrillic_io: number;
+
+	const KEY_Cyrillic_je: number;
+
+	const KEY_Cyrillic_ka: number;
+
+	const KEY_Cyrillic_ka_descender: number;
+
+	const KEY_Cyrillic_ka_vertstroke: number;
+
+	const KEY_Cyrillic_lje: number;
+
+	const KEY_Cyrillic_nje: number;
+
+	const KEY_Cyrillic_o: number;
+
+	const KEY_Cyrillic_o_bar: number;
+
+	const KEY_Cyrillic_pe: number;
+
+	const KEY_Cyrillic_schwa: number;
+
+	const KEY_Cyrillic_sha: number;
+
+	const KEY_Cyrillic_shcha: number;
+
+	const KEY_Cyrillic_shha: number;
+
+	const KEY_Cyrillic_shorti: number;
+
+	const KEY_Cyrillic_softsign: number;
+
+	const KEY_Cyrillic_te: number;
+
+	const KEY_Cyrillic_tse: number;
+
+	const KEY_Cyrillic_u: number;
+
+	const KEY_Cyrillic_u_macron: number;
+
+	const KEY_Cyrillic_u_straight: number;
+
+	const KEY_Cyrillic_u_straight_bar: number;
+
+	const KEY_Cyrillic_ve: number;
+
+	const KEY_Cyrillic_ya: number;
+
+	const KEY_Cyrillic_yeru: number;
+
+	const KEY_Cyrillic_yu: number;
+
+	const KEY_Cyrillic_ze: number;
+
+	const KEY_Cyrillic_zhe: number;
+
+	const KEY_Cyrillic_zhe_descender: number;
+
+	const KEY_D: number;
+
+	const KEY_DOS: number;
+
+	const KEY_Dabovedot: number;
+
+	const KEY_Dcaron: number;
+
+	const KEY_Delete: number;
+
+	const KEY_Display: number;
+
+	const KEY_Documents: number;
+
+	const KEY_DongSign: number;
+
+	const KEY_Down: number;
+
+	const KEY_Dstroke: number;
+
+	const KEY_E: number;
+
+	const KEY_ENG: number;
+
+	const KEY_ETH: number;
+
+	const KEY_EZH: number;
+
+	const KEY_Eabovedot: number;
+
+	const KEY_Eacute: number;
+
+	const KEY_Ebelowdot: number;
+
+	const KEY_Ecaron: number;
+
+	const KEY_Ecircumflex: number;
+
+	const KEY_Ecircumflexacute: number;
+
+	const KEY_Ecircumflexbelowdot: number;
+
+	const KEY_Ecircumflexgrave: number;
+
+	const KEY_Ecircumflexhook: number;
+
+	const KEY_Ecircumflextilde: number;
+
+	const KEY_EcuSign: number;
+
+	const KEY_Ediaeresis: number;
+
+	const KEY_Egrave: number;
+
+	const KEY_Ehook: number;
+
+	const KEY_Eisu_Shift: number;
+
+	const KEY_Eisu_toggle: number;
+
+	const KEY_Eject: number;
+
+	const KEY_Emacron: number;
+
+	const KEY_End: number;
+
+	const KEY_Eogonek: number;
+
+	const KEY_Escape: number;
+
+	const KEY_Eth: number;
+
+	const KEY_Etilde: number;
+
+	const KEY_EuroSign: number;
+
+	const KEY_Excel: number;
+
+	const KEY_Execute: number;
+
+	const KEY_Explorer: number;
+
+	const KEY_F: number;
+
+	const KEY_F1: number;
+
+	const KEY_F10: number;
+
+	const KEY_F11: number;
+
+	const KEY_F12: number;
+
+	const KEY_F13: number;
+
+	const KEY_F14: number;
+
+	const KEY_F15: number;
+
+	const KEY_F16: number;
+
+	const KEY_F17: number;
+
+	const KEY_F18: number;
+
+	const KEY_F19: number;
+
+	const KEY_F2: number;
+
+	const KEY_F20: number;
+
+	const KEY_F21: number;
+
+	const KEY_F22: number;
+
+	const KEY_F23: number;
+
+	const KEY_F24: number;
+
+	const KEY_F25: number;
+
+	const KEY_F26: number;
+
+	const KEY_F27: number;
+
+	const KEY_F28: number;
+
+	const KEY_F29: number;
+
+	const KEY_F3: number;
+
+	const KEY_F30: number;
+
+	const KEY_F31: number;
+
+	const KEY_F32: number;
+
+	const KEY_F33: number;
+
+	const KEY_F34: number;
+
+	const KEY_F35: number;
+
+	const KEY_F4: number;
+
+	const KEY_F5: number;
+
+	const KEY_F6: number;
+
+	const KEY_F7: number;
+
+	const KEY_F8: number;
+
+	const KEY_F9: number;
+
+	const KEY_FFrancSign: number;
+
+	const KEY_Fabovedot: number;
+
+	const KEY_Farsi_0: number;
+
+	const KEY_Farsi_1: number;
+
+	const KEY_Farsi_2: number;
+
+	const KEY_Farsi_3: number;
+
+	const KEY_Farsi_4: number;
+
+	const KEY_Farsi_5: number;
+
+	const KEY_Farsi_6: number;
+
+	const KEY_Farsi_7: number;
+
+	const KEY_Farsi_8: number;
+
+	const KEY_Farsi_9: number;
+
+	const KEY_Farsi_yeh: number;
+
+	const KEY_Favorites: number;
+
+	const KEY_Finance: number;
+
+	const KEY_Find: number;
+
+	const KEY_First_Virtual_Screen: number;
+
+	const KEY_Forward: number;
+
+	const KEY_FrameBack: number;
+
+	const KEY_FrameForward: number;
+
+	const KEY_G: number;
+
+	const KEY_Gabovedot: number;
+
+	const KEY_Game: number;
+
+	const KEY_Gbreve: number;
+
+	const KEY_Gcaron: number;
+
+	const KEY_Gcedilla: number;
+
+	const KEY_Gcircumflex: number;
+
+	const KEY_Georgian_an: number;
+
+	const KEY_Georgian_ban: number;
+
+	const KEY_Georgian_can: number;
+
+	const KEY_Georgian_char: number;
+
+	const KEY_Georgian_chin: number;
+
+	const KEY_Georgian_cil: number;
+
+	const KEY_Georgian_don: number;
+
+	const KEY_Georgian_en: number;
+
+	const KEY_Georgian_fi: number;
+
+	const KEY_Georgian_gan: number;
+
+	const KEY_Georgian_ghan: number;
+
+	const KEY_Georgian_hae: number;
+
+	const KEY_Georgian_har: number;
+
+	const KEY_Georgian_he: number;
+
+	const KEY_Georgian_hie: number;
+
+	const KEY_Georgian_hoe: number;
+
+	const KEY_Georgian_in: number;
+
+	const KEY_Georgian_jhan: number;
+
+	const KEY_Georgian_jil: number;
+
+	const KEY_Georgian_kan: number;
+
+	const KEY_Georgian_khar: number;
+
+	const KEY_Georgian_las: number;
+
+	const KEY_Georgian_man: number;
+
+	const KEY_Georgian_nar: number;
+
+	const KEY_Georgian_on: number;
+
+	const KEY_Georgian_par: number;
+
+	const KEY_Georgian_phar: number;
+
+	const KEY_Georgian_qar: number;
+
+	const KEY_Georgian_rae: number;
+
+	const KEY_Georgian_san: number;
+
+	const KEY_Georgian_shin: number;
+
+	const KEY_Georgian_tan: number;
+
+	const KEY_Georgian_tar: number;
+
+	const KEY_Georgian_un: number;
+
+	const KEY_Georgian_vin: number;
+
+	const KEY_Georgian_we: number;
+
+	const KEY_Georgian_xan: number;
+
+	const KEY_Georgian_zen: number;
+
+	const KEY_Georgian_zhar: number;
+
+	const KEY_Go: number;
+
+	const KEY_Greek_ALPHA: number;
+
+	const KEY_Greek_ALPHAaccent: number;
+
+	const KEY_Greek_BETA: number;
+
+	const KEY_Greek_CHI: number;
+
+	const KEY_Greek_DELTA: number;
+
+	const KEY_Greek_EPSILON: number;
+
+	const KEY_Greek_EPSILONaccent: number;
+
+	const KEY_Greek_ETA: number;
+
+	const KEY_Greek_ETAaccent: number;
+
+	const KEY_Greek_GAMMA: number;
+
+	const KEY_Greek_IOTA: number;
+
+	const KEY_Greek_IOTAaccent: number;
+
+	const KEY_Greek_IOTAdiaeresis: number;
+
+	const KEY_Greek_IOTAdieresis: number;
+
+	const KEY_Greek_KAPPA: number;
+
+	const KEY_Greek_LAMBDA: number;
+
+	const KEY_Greek_LAMDA: number;
+
+	const KEY_Greek_MU: number;
+
+	const KEY_Greek_NU: number;
+
+	const KEY_Greek_OMEGA: number;
+
+	const KEY_Greek_OMEGAaccent: number;
+
+	const KEY_Greek_OMICRON: number;
+
+	const KEY_Greek_OMICRONaccent: number;
+
+	const KEY_Greek_PHI: number;
+
+	const KEY_Greek_PI: number;
+
+	const KEY_Greek_PSI: number;
+
+	const KEY_Greek_RHO: number;
+
+	const KEY_Greek_SIGMA: number;
+
+	const KEY_Greek_TAU: number;
+
+	const KEY_Greek_THETA: number;
+
+	const KEY_Greek_UPSILON: number;
+
+	const KEY_Greek_UPSILONaccent: number;
+
+	const KEY_Greek_UPSILONdieresis: number;
+
+	const KEY_Greek_XI: number;
+
+	const KEY_Greek_ZETA: number;
+
+	const KEY_Greek_accentdieresis: number;
+
+	const KEY_Greek_alpha: number;
+
+	const KEY_Greek_alphaaccent: number;
+
+	const KEY_Greek_beta: number;
+
+	const KEY_Greek_chi: number;
+
+	const KEY_Greek_delta: number;
+
+	const KEY_Greek_epsilon: number;
+
+	const KEY_Greek_epsilonaccent: number;
+
+	const KEY_Greek_eta: number;
+
+	const KEY_Greek_etaaccent: number;
+
+	const KEY_Greek_finalsmallsigma: number;
+
+	const KEY_Greek_gamma: number;
+
+	const KEY_Greek_horizbar: number;
+
+	const KEY_Greek_iota: number;
+
+	const KEY_Greek_iotaaccent: number;
+
+	const KEY_Greek_iotaaccentdieresis: number;
+
+	const KEY_Greek_iotadieresis: number;
+
+	const KEY_Greek_kappa: number;
+
+	const KEY_Greek_lambda: number;
+
+	const KEY_Greek_lamda: number;
+
+	const KEY_Greek_mu: number;
+
+	const KEY_Greek_nu: number;
+
+	const KEY_Greek_omega: number;
+
+	const KEY_Greek_omegaaccent: number;
+
+	const KEY_Greek_omicron: number;
+
+	const KEY_Greek_omicronaccent: number;
+
+	const KEY_Greek_phi: number;
+
+	const KEY_Greek_pi: number;
+
+	const KEY_Greek_psi: number;
+
+	const KEY_Greek_rho: number;
+
+	const KEY_Greek_sigma: number;
+
+	const KEY_Greek_switch: number;
+
+	const KEY_Greek_tau: number;
+
+	const KEY_Greek_theta: number;
+
+	const KEY_Greek_upsilon: number;
+
+	const KEY_Greek_upsilonaccent: number;
+
+	const KEY_Greek_upsilonaccentdieresis: number;
+
+	const KEY_Greek_upsilondieresis: number;
+
+	const KEY_Greek_xi: number;
+
+	const KEY_Greek_zeta: number;
+
+	const KEY_Green: number;
+
+	const KEY_H: number;
+
+	const KEY_Hangul: number;
+
+	const KEY_Hangul_A: number;
+
+	const KEY_Hangul_AE: number;
+
+	const KEY_Hangul_AraeA: number;
+
+	const KEY_Hangul_AraeAE: number;
+
+	const KEY_Hangul_Banja: number;
+
+	const KEY_Hangul_Cieuc: number;
+
+	const KEY_Hangul_Codeinput: number;
+
+	const KEY_Hangul_Dikeud: number;
+
+	const KEY_Hangul_E: number;
+
+	const KEY_Hangul_EO: number;
+
+	const KEY_Hangul_EU: number;
+
+	const KEY_Hangul_End: number;
+
+	const KEY_Hangul_Hanja: number;
+
+	const KEY_Hangul_Hieuh: number;
+
+	const KEY_Hangul_I: number;
+
+	const KEY_Hangul_Ieung: number;
+
+	const KEY_Hangul_J_Cieuc: number;
+
+	const KEY_Hangul_J_Dikeud: number;
+
+	const KEY_Hangul_J_Hieuh: number;
+
+	const KEY_Hangul_J_Ieung: number;
+
+	const KEY_Hangul_J_Jieuj: number;
+
+	const KEY_Hangul_J_Khieuq: number;
+
+	const KEY_Hangul_J_Kiyeog: number;
+
+	const KEY_Hangul_J_KiyeogSios: number;
+
+	const KEY_Hangul_J_KkogjiDalrinIeung: number;
+
+	const KEY_Hangul_J_Mieum: number;
+
+	const KEY_Hangul_J_Nieun: number;
+
+	const KEY_Hangul_J_NieunHieuh: number;
+
+	const KEY_Hangul_J_NieunJieuj: number;
+
+	const KEY_Hangul_J_PanSios: number;
+
+	const KEY_Hangul_J_Phieuf: number;
+
+	const KEY_Hangul_J_Pieub: number;
+
+	const KEY_Hangul_J_PieubSios: number;
+
+	const KEY_Hangul_J_Rieul: number;
+
+	const KEY_Hangul_J_RieulHieuh: number;
+
+	const KEY_Hangul_J_RieulKiyeog: number;
+
+	const KEY_Hangul_J_RieulMieum: number;
+
+	const KEY_Hangul_J_RieulPhieuf: number;
+
+	const KEY_Hangul_J_RieulPieub: number;
+
+	const KEY_Hangul_J_RieulSios: number;
+
+	const KEY_Hangul_J_RieulTieut: number;
+
+	const KEY_Hangul_J_Sios: number;
+
+	const KEY_Hangul_J_SsangKiyeog: number;
+
+	const KEY_Hangul_J_SsangSios: number;
+
+	const KEY_Hangul_J_Tieut: number;
+
+	const KEY_Hangul_J_YeorinHieuh: number;
+
+	const KEY_Hangul_Jamo: number;
+
+	const KEY_Hangul_Jeonja: number;
+
+	const KEY_Hangul_Jieuj: number;
+
+	const KEY_Hangul_Khieuq: number;
+
+	const KEY_Hangul_Kiyeog: number;
+
+	const KEY_Hangul_KiyeogSios: number;
+
+	const KEY_Hangul_KkogjiDalrinIeung: number;
+
+	const KEY_Hangul_Mieum: number;
+
+	const KEY_Hangul_MultipleCandidate: number;
+
+	const KEY_Hangul_Nieun: number;
+
+	const KEY_Hangul_NieunHieuh: number;
+
+	const KEY_Hangul_NieunJieuj: number;
+
+	const KEY_Hangul_O: number;
+
+	const KEY_Hangul_OE: number;
+
+	const KEY_Hangul_PanSios: number;
+
+	const KEY_Hangul_Phieuf: number;
+
+	const KEY_Hangul_Pieub: number;
+
+	const KEY_Hangul_PieubSios: number;
+
+	const KEY_Hangul_PostHanja: number;
+
+	const KEY_Hangul_PreHanja: number;
+
+	const KEY_Hangul_PreviousCandidate: number;
+
+	const KEY_Hangul_Rieul: number;
+
+	const KEY_Hangul_RieulHieuh: number;
+
+	const KEY_Hangul_RieulKiyeog: number;
+
+	const KEY_Hangul_RieulMieum: number;
+
+	const KEY_Hangul_RieulPhieuf: number;
+
+	const KEY_Hangul_RieulPieub: number;
+
+	const KEY_Hangul_RieulSios: number;
+
+	const KEY_Hangul_RieulTieut: number;
+
+	const KEY_Hangul_RieulYeorinHieuh: number;
+
+	const KEY_Hangul_Romaja: number;
+
+	const KEY_Hangul_SingleCandidate: number;
+
+	const KEY_Hangul_Sios: number;
+
+	const KEY_Hangul_Special: number;
+
+	const KEY_Hangul_SsangDikeud: number;
+
+	const KEY_Hangul_SsangJieuj: number;
+
+	const KEY_Hangul_SsangKiyeog: number;
+
+	const KEY_Hangul_SsangPieub: number;
+
+	const KEY_Hangul_SsangSios: number;
+
+	const KEY_Hangul_Start: number;
+
+	const KEY_Hangul_SunkyeongeumMieum: number;
+
+	const KEY_Hangul_SunkyeongeumPhieuf: number;
+
+	const KEY_Hangul_SunkyeongeumPieub: number;
+
+	const KEY_Hangul_Tieut: number;
+
+	const KEY_Hangul_U: number;
+
+	const KEY_Hangul_WA: number;
+
+	const KEY_Hangul_WAE: number;
+
+	const KEY_Hangul_WE: number;
+
+	const KEY_Hangul_WEO: number;
+
+	const KEY_Hangul_WI: number;
+
+	const KEY_Hangul_YA: number;
+
+	const KEY_Hangul_YAE: number;
+
+	const KEY_Hangul_YE: number;
+
+	const KEY_Hangul_YEO: number;
+
+	const KEY_Hangul_YI: number;
+
+	const KEY_Hangul_YO: number;
+
+	const KEY_Hangul_YU: number;
+
+	const KEY_Hangul_YeorinHieuh: number;
+
+	const KEY_Hangul_switch: number;
+
+	const KEY_Hankaku: number;
+
+	const KEY_Hcircumflex: number;
+
+	const KEY_Hebrew_switch: number;
+
+	const KEY_Help: number;
+
+	const KEY_Henkan: number;
+
+	const KEY_Henkan_Mode: number;
+
+	const KEY_Hibernate: number;
+
+	const KEY_Hiragana: number;
+
+	const KEY_Hiragana_Katakana: number;
+
+	const KEY_History: number;
+
+	const KEY_Home: number;
+
+	const KEY_HomePage: number;
+
+	const KEY_HotLinks: number;
+
+	const KEY_Hstroke: number;
+
+	const KEY_Hyper_L: number;
+
+	const KEY_Hyper_R: number;
+
+	const KEY_I: number;
+
+	const KEY_ISO_Center_Object: number;
+
+	const KEY_ISO_Continuous_Underline: number;
+
+	const KEY_ISO_Discontinuous_Underline: number;
+
+	const KEY_ISO_Emphasize: number;
+
+	const KEY_ISO_Enter: number;
+
+	const KEY_ISO_Fast_Cursor_Down: number;
+
+	const KEY_ISO_Fast_Cursor_Left: number;
+
+	const KEY_ISO_Fast_Cursor_Right: number;
+
+	const KEY_ISO_Fast_Cursor_Up: number;
+
+	const KEY_ISO_First_Group: number;
+
+	const KEY_ISO_First_Group_Lock: number;
+
+	const KEY_ISO_Group_Latch: number;
+
+	const KEY_ISO_Group_Lock: number;
+
+	const KEY_ISO_Group_Shift: number;
+
+	const KEY_ISO_Last_Group: number;
+
+	const KEY_ISO_Last_Group_Lock: number;
+
+	const KEY_ISO_Left_Tab: number;
+
+	const KEY_ISO_Level2_Latch: number;
+
+	const KEY_ISO_Level3_Latch: number;
+
+	const KEY_ISO_Level3_Lock: number;
+
+	const KEY_ISO_Level3_Shift: number;
+
+	const KEY_ISO_Level5_Latch: number;
+
+	const KEY_ISO_Level5_Lock: number;
+
+	const KEY_ISO_Level5_Shift: number;
+
+	const KEY_ISO_Lock: number;
+
+	const KEY_ISO_Move_Line_Down: number;
+
+	const KEY_ISO_Move_Line_Up: number;
+
+	const KEY_ISO_Next_Group: number;
+
+	const KEY_ISO_Next_Group_Lock: number;
+
+	const KEY_ISO_Partial_Line_Down: number;
+
+	const KEY_ISO_Partial_Line_Up: number;
+
+	const KEY_ISO_Partial_Space_Left: number;
+
+	const KEY_ISO_Partial_Space_Right: number;
+
+	const KEY_ISO_Prev_Group: number;
+
+	const KEY_ISO_Prev_Group_Lock: number;
+
+	const KEY_ISO_Release_Both_Margins: number;
+
+	const KEY_ISO_Release_Margin_Left: number;
+
+	const KEY_ISO_Release_Margin_Right: number;
+
+	const KEY_ISO_Set_Margin_Left: number;
+
+	const KEY_ISO_Set_Margin_Right: number;
+
+	const KEY_Iabovedot: number;
+
+	const KEY_Iacute: number;
+
+	const KEY_Ibelowdot: number;
+
+	const KEY_Ibreve: number;
+
+	const KEY_Icircumflex: number;
+
+	const KEY_Idiaeresis: number;
+
+	const KEY_Igrave: number;
+
+	const KEY_Ihook: number;
+
+	const KEY_Imacron: number;
+
+	const KEY_Insert: number;
+
+	const KEY_Iogonek: number;
+
+	const KEY_Itilde: number;
+
+	const KEY_J: number;
+
+	const KEY_Jcircumflex: number;
+
+	const KEY_K: number;
+
+	const KEY_KP_0: number;
+
+	const KEY_KP_1: number;
+
+	const KEY_KP_2: number;
+
+	const KEY_KP_3: number;
+
+	const KEY_KP_4: number;
+
+	const KEY_KP_5: number;
+
+	const KEY_KP_6: number;
+
+	const KEY_KP_7: number;
+
+	const KEY_KP_8: number;
+
+	const KEY_KP_9: number;
+
+	const KEY_KP_Add: number;
+
+	const KEY_KP_Begin: number;
+
+	const KEY_KP_Decimal: number;
+
+	const KEY_KP_Delete: number;
+
+	const KEY_KP_Divide: number;
+
+	const KEY_KP_Down: number;
+
+	const KEY_KP_End: number;
+
+	const KEY_KP_Enter: number;
+
+	const KEY_KP_Equal: number;
+
+	const KEY_KP_F1: number;
+
+	const KEY_KP_F2: number;
+
+	const KEY_KP_F3: number;
+
+	const KEY_KP_F4: number;
+
+	const KEY_KP_Home: number;
+
+	const KEY_KP_Insert: number;
+
+	const KEY_KP_Left: number;
+
+	const KEY_KP_Multiply: number;
+
+	const KEY_KP_Next: number;
+
+	const KEY_KP_Page_Down: number;
+
+	const KEY_KP_Page_Up: number;
+
+	const KEY_KP_Prior: number;
+
+	const KEY_KP_Right: number;
+
+	const KEY_KP_Separator: number;
+
+	const KEY_KP_Space: number;
+
+	const KEY_KP_Subtract: number;
+
+	const KEY_KP_Tab: number;
+
+	const KEY_KP_Up: number;
+
+	const KEY_Kana_Lock: number;
+
+	const KEY_Kana_Shift: number;
+
+	const KEY_Kanji: number;
+
+	const KEY_Kanji_Bangou: number;
+
+	const KEY_Katakana: number;
+
+	const KEY_KbdBrightnessDown: number;
+
+	const KEY_KbdBrightnessUp: number;
+
+	const KEY_KbdLightOnOff: number;
+
+	const KEY_Kcedilla: number;
+
+	const KEY_Korean_Won: number;
+
+	const KEY_L: number;
+
+	const KEY_L1: number;
+
+	const KEY_L10: number;
+
+	const KEY_L2: number;
+
+	const KEY_L3: number;
+
+	const KEY_L4: number;
+
+	const KEY_L5: number;
+
+	const KEY_L6: number;
+
+	const KEY_L7: number;
+
+	const KEY_L8: number;
+
+	const KEY_L9: number;
+
+	const KEY_Lacute: number;
+
+	const KEY_Last_Virtual_Screen: number;
+
+	const KEY_Launch0: number;
+
+	const KEY_Launch1: number;
+
+	const KEY_Launch2: number;
+
+	const KEY_Launch3: number;
+
+	const KEY_Launch4: number;
+
+	const KEY_Launch5: number;
+
+	const KEY_Launch6: number;
+
+	const KEY_Launch7: number;
+
+	const KEY_Launch8: number;
+
+	const KEY_Launch9: number;
+
+	const KEY_LaunchA: number;
+
+	const KEY_LaunchB: number;
+
+	const KEY_LaunchC: number;
+
+	const KEY_LaunchD: number;
+
+	const KEY_LaunchE: number;
+
+	const KEY_LaunchF: number;
+
+	const KEY_Lbelowdot: number;
+
+	const KEY_Lcaron: number;
+
+	const KEY_Lcedilla: number;
+
+	const KEY_Left: number;
+
+	const KEY_LightBulb: number;
+
+	const KEY_Linefeed: number;
+
+	const KEY_LiraSign: number;
+
+	const KEY_LogGrabInfo: number;
+
+	const KEY_LogOff: number;
+
+	const KEY_LogWindowTree: number;
+
+	const KEY_Lstroke: number;
+
+	const KEY_M: number;
+
+	const KEY_Mabovedot: number;
+
+	const KEY_Macedonia_DSE: number;
+
+	const KEY_Macedonia_GJE: number;
+
+	const KEY_Macedonia_KJE: number;
+
+	const KEY_Macedonia_dse: number;
+
+	const KEY_Macedonia_gje: number;
+
+	const KEY_Macedonia_kje: number;
+
+	const KEY_Mae_Koho: number;
+
+	const KEY_Mail: number;
+
+	const KEY_MailForward: number;
+
+	const KEY_Market: number;
+
+	const KEY_Massyo: number;
+
+	const KEY_Meeting: number;
+
+	const KEY_Memo: number;
+
+	const KEY_Menu: number;
+
+	const KEY_MenuKB: number;
+
+	const KEY_MenuPB: number;
+
+	const KEY_Messenger: number;
+
+	const KEY_Meta_L: number;
+
+	const KEY_Meta_R: number;
+
+	const KEY_MillSign: number;
+
+	const KEY_ModeLock: number;
+
+	const KEY_Mode_switch: number;
+
+	const KEY_MonBrightnessDown: number;
+
+	const KEY_MonBrightnessUp: number;
+
+	const KEY_MouseKeys_Accel_Enable: number;
+
+	const KEY_MouseKeys_Enable: number;
+
+	const KEY_Muhenkan: number;
+
+	const KEY_Multi_key: number;
+
+	const KEY_MultipleCandidate: number;
+
+	const KEY_Music: number;
+
+	const KEY_MyComputer: number;
+
+	const KEY_MySites: number;
+
+	const KEY_N: number;
+
+	const KEY_Nacute: number;
+
+	const KEY_NairaSign: number;
+
+	const KEY_Ncaron: number;
+
+	const KEY_Ncedilla: number;
+
+	const KEY_New: number;
+
+	const KEY_NewSheqelSign: number;
+
+	const KEY_News: number;
+
+	const KEY_Next: number;
+
+	const KEY_Next_VMode: number;
+
+	const KEY_Next_Virtual_Screen: number;
+
+	const KEY_Ntilde: number;
+
+	const KEY_Num_Lock: number;
+
+	const KEY_O: number;
+
+	const KEY_OE: number;
+
+	const KEY_Oacute: number;
+
+	const KEY_Obarred: number;
+
+	const KEY_Obelowdot: number;
+
+	const KEY_Ocaron: number;
+
+	const KEY_Ocircumflex: number;
+
+	const KEY_Ocircumflexacute: number;
+
+	const KEY_Ocircumflexbelowdot: number;
+
+	const KEY_Ocircumflexgrave: number;
+
+	const KEY_Ocircumflexhook: number;
+
+	const KEY_Ocircumflextilde: number;
+
+	const KEY_Odiaeresis: number;
+
+	const KEY_Odoubleacute: number;
+
+	const KEY_OfficeHome: number;
+
+	const KEY_Ograve: number;
+
+	const KEY_Ohook: number;
+
+	const KEY_Ohorn: number;
+
+	const KEY_Ohornacute: number;
+
+	const KEY_Ohornbelowdot: number;
+
+	const KEY_Ohorngrave: number;
+
+	const KEY_Ohornhook: number;
+
+	const KEY_Ohorntilde: number;
+
+	const KEY_Omacron: number;
+
+	const KEY_Ooblique: number;
+
+	const KEY_Open: number;
+
+	const KEY_OpenURL: number;
+
+	const KEY_Option: number;
+
+	const KEY_Oslash: number;
+
+	const KEY_Otilde: number;
+
+	const KEY_Overlay1_Enable: number;
+
+	const KEY_Overlay2_Enable: number;
+
+	const KEY_P: number;
+
+	const KEY_Pabovedot: number;
+
+	const KEY_Page_Down: number;
+
+	const KEY_Page_Up: number;
+
+	const KEY_Paste: number;
+
+	const KEY_Pause: number;
+
+	const KEY_PesetaSign: number;
+
+	const KEY_Phone: number;
+
+	const KEY_Pictures: number;
+
+	const KEY_Pointer_Accelerate: number;
+
+	const KEY_Pointer_Button1: number;
+
+	const KEY_Pointer_Button2: number;
+
+	const KEY_Pointer_Button3: number;
+
+	const KEY_Pointer_Button4: number;
+
+	const KEY_Pointer_Button5: number;
+
+	const KEY_Pointer_Button_Dflt: number;
+
+	const KEY_Pointer_DblClick1: number;
+
+	const KEY_Pointer_DblClick2: number;
+
+	const KEY_Pointer_DblClick3: number;
+
+	const KEY_Pointer_DblClick4: number;
+
+	const KEY_Pointer_DblClick5: number;
+
+	const KEY_Pointer_DblClick_Dflt: number;
+
+	const KEY_Pointer_DfltBtnNext: number;
+
+	const KEY_Pointer_DfltBtnPrev: number;
+
+	const KEY_Pointer_Down: number;
+
+	const KEY_Pointer_DownLeft: number;
+
+	const KEY_Pointer_DownRight: number;
+
+	const KEY_Pointer_Drag1: number;
+
+	const KEY_Pointer_Drag2: number;
+
+	const KEY_Pointer_Drag3: number;
+
+	const KEY_Pointer_Drag4: number;
+
+	const KEY_Pointer_Drag5: number;
+
+	const KEY_Pointer_Drag_Dflt: number;
+
+	const KEY_Pointer_EnableKeys: number;
+
+	const KEY_Pointer_Left: number;
+
+	const KEY_Pointer_Right: number;
+
+	const KEY_Pointer_Up: number;
+
+	const KEY_Pointer_UpLeft: number;
+
+	const KEY_Pointer_UpRight: number;
+
+	const KEY_PowerDown: number;
+
+	const KEY_PowerOff: number;
+
+	const KEY_Prev_VMode: number;
+
+	const KEY_Prev_Virtual_Screen: number;
+
+	const KEY_PreviousCandidate: number;
+
+	const KEY_Print: number;
+
+	const KEY_Prior: number;
+
+	const KEY_Q: number;
+
+	const KEY_R: number;
+
+	const KEY_R1: number;
+
+	const KEY_R10: number;
+
+	const KEY_R11: number;
+
+	const KEY_R12: number;
+
+	const KEY_R13: number;
+
+	const KEY_R14: number;
+
+	const KEY_R15: number;
+
+	const KEY_R2: number;
+
+	const KEY_R3: number;
+
+	const KEY_R4: number;
+
+	const KEY_R5: number;
+
+	const KEY_R6: number;
+
+	const KEY_R7: number;
+
+	const KEY_R8: number;
+
+	const KEY_R9: number;
+
+	const KEY_Racute: number;
+
+	const KEY_Rcaron: number;
+
+	const KEY_Rcedilla: number;
+
+	const KEY_Red: number;
+
+	const KEY_Redo: number;
+
+	const KEY_Refresh: number;
+
+	const KEY_Reload: number;
+
+	const KEY_RepeatKeys_Enable: number;
+
+	const KEY_Reply: number;
+
+	const KEY_Return: number;
+
+	const KEY_Right: number;
+
+	const KEY_RockerDown: number;
+
+	const KEY_RockerEnter: number;
+
+	const KEY_RockerUp: number;
+
+	const KEY_Romaji: number;
+
+	const KEY_RotateWindows: number;
+
+	const KEY_RotationKB: number;
+
+	const KEY_RotationPB: number;
+
+	const KEY_RupeeSign: number;
+
+	const KEY_S: number;
+
+	const KEY_SCHWA: number;
+
+	const KEY_Sabovedot: number;
+
+	const KEY_Sacute: number;
+
+	const KEY_Save: number;
+
+	const KEY_Scaron: number;
+
+	const KEY_Scedilla: number;
+
+	const KEY_Scircumflex: number;
+
+	const KEY_ScreenSaver: number;
+
+	const KEY_ScrollClick: number;
+
+	const KEY_ScrollDown: number;
+
+	const KEY_ScrollUp: number;
+
+	const KEY_Scroll_Lock: number;
+
+	const KEY_Search: number;
+
+	const KEY_Select: number;
+
+	const KEY_SelectButton: number;
+
+	const KEY_Send: number;
+
+	const KEY_Serbian_DJE: number;
+
+	const KEY_Serbian_DZE: number;
+
+	const KEY_Serbian_JE: number;
+
+	const KEY_Serbian_LJE: number;
+
+	const KEY_Serbian_NJE: number;
+
+	const KEY_Serbian_TSHE: number;
+
+	const KEY_Serbian_dje: number;
+
+	const KEY_Serbian_dze: number;
+
+	const KEY_Serbian_je: number;
+
+	const KEY_Serbian_lje: number;
+
+	const KEY_Serbian_nje: number;
+
+	const KEY_Serbian_tshe: number;
+
+	const KEY_Shift_L: number;
+
+	const KEY_Shift_Lock: number;
+
+	const KEY_Shift_R: number;
+
+	const KEY_Shop: number;
+
+	const KEY_SingleCandidate: number;
+
+	const KEY_Sinh_a: number;
+
+	const KEY_Sinh_aa: number;
+
+	const KEY_Sinh_aa2: number;
+
+	const KEY_Sinh_ae: number;
+
+	const KEY_Sinh_ae2: number;
+
+	const KEY_Sinh_aee: number;
+
+	const KEY_Sinh_aee2: number;
+
+	const KEY_Sinh_ai: number;
+
+	const KEY_Sinh_ai2: number;
+
+	const KEY_Sinh_al: number;
+
+	const KEY_Sinh_au: number;
+
+	const KEY_Sinh_au2: number;
+
+	const KEY_Sinh_ba: number;
+
+	const KEY_Sinh_bha: number;
+
+	const KEY_Sinh_ca: number;
+
+	const KEY_Sinh_cha: number;
+
+	const KEY_Sinh_dda: number;
+
+	const KEY_Sinh_ddha: number;
+
+	const KEY_Sinh_dha: number;
+
+	const KEY_Sinh_dhha: number;
+
+	const KEY_Sinh_e: number;
+
+	const KEY_Sinh_e2: number;
+
+	const KEY_Sinh_ee: number;
+
+	const KEY_Sinh_ee2: number;
+
+	const KEY_Sinh_fa: number;
+
+	const KEY_Sinh_ga: number;
+
+	const KEY_Sinh_gha: number;
+
+	const KEY_Sinh_h2: number;
+
+	const KEY_Sinh_ha: number;
+
+	const KEY_Sinh_i: number;
+
+	const KEY_Sinh_i2: number;
+
+	const KEY_Sinh_ii: number;
+
+	const KEY_Sinh_ii2: number;
+
+	const KEY_Sinh_ja: number;
+
+	const KEY_Sinh_jha: number;
+
+	const KEY_Sinh_jnya: number;
+
+	const KEY_Sinh_ka: number;
+
+	const KEY_Sinh_kha: number;
+
+	const KEY_Sinh_kunddaliya: number;
+
+	const KEY_Sinh_la: number;
+
+	const KEY_Sinh_lla: number;
+
+	const KEY_Sinh_lu: number;
+
+	const KEY_Sinh_lu2: number;
+
+	const KEY_Sinh_luu: number;
+
+	const KEY_Sinh_luu2: number;
+
+	const KEY_Sinh_ma: number;
+
+	const KEY_Sinh_mba: number;
+
+	const KEY_Sinh_na: number;
+
+	const KEY_Sinh_ndda: number;
+
+	const KEY_Sinh_ndha: number;
+
+	const KEY_Sinh_ng: number;
+
+	const KEY_Sinh_ng2: number;
+
+	const KEY_Sinh_nga: number;
+
+	const KEY_Sinh_nja: number;
+
+	const KEY_Sinh_nna: number;
+
+	const KEY_Sinh_nya: number;
+
+	const KEY_Sinh_o: number;
+
+	const KEY_Sinh_o2: number;
+
+	const KEY_Sinh_oo: number;
+
+	const KEY_Sinh_oo2: number;
+
+	const KEY_Sinh_pa: number;
+
+	const KEY_Sinh_pha: number;
+
+	const KEY_Sinh_ra: number;
+
+	const KEY_Sinh_ri: number;
+
+	const KEY_Sinh_rii: number;
+
+	const KEY_Sinh_ru2: number;
+
+	const KEY_Sinh_ruu2: number;
+
+	const KEY_Sinh_sa: number;
+
+	const KEY_Sinh_sha: number;
+
+	const KEY_Sinh_ssha: number;
+
+	const KEY_Sinh_tha: number;
+
+	const KEY_Sinh_thha: number;
+
+	const KEY_Sinh_tta: number;
+
+	const KEY_Sinh_ttha: number;
+
+	const KEY_Sinh_u: number;
+
+	const KEY_Sinh_u2: number;
+
+	const KEY_Sinh_uu: number;
+
+	const KEY_Sinh_uu2: number;
+
+	const KEY_Sinh_va: number;
+
+	const KEY_Sinh_ya: number;
+
+	const KEY_Sleep: number;
+
+	const KEY_SlowKeys_Enable: number;
+
+	const KEY_Spell: number;
+
+	const KEY_SplitScreen: number;
+
+	const KEY_Standby: number;
+
+	const KEY_Start: number;
+
+	const KEY_StickyKeys_Enable: number;
+
+	const KEY_Stop: number;
+
+	const KEY_Subtitle: number;
+
+	const KEY_Super_L: number;
+
+	const KEY_Super_R: number;
+
+	const KEY_Support: number;
+
+	const KEY_Suspend: number;
+
+	const KEY_Switch_VT_1: number;
+
+	const KEY_Switch_VT_10: number;
+
+	const KEY_Switch_VT_11: number;
+
+	const KEY_Switch_VT_12: number;
+
+	const KEY_Switch_VT_2: number;
+
+	const KEY_Switch_VT_3: number;
+
+	const KEY_Switch_VT_4: number;
+
+	const KEY_Switch_VT_5: number;
+
+	const KEY_Switch_VT_6: number;
+
+	const KEY_Switch_VT_7: number;
+
+	const KEY_Switch_VT_8: number;
+
+	const KEY_Switch_VT_9: number;
+
+	const KEY_Sys_Req: number;
+
+	const KEY_T: number;
+
+	const KEY_THORN: number;
+
+	const KEY_Tab: number;
+
+	const KEY_Tabovedot: number;
+
+	const KEY_TaskPane: number;
+
+	const KEY_Tcaron: number;
+
+	const KEY_Tcedilla: number;
+
+	const KEY_Terminal: number;
+
+	const KEY_Terminate_Server: number;
+
+	const KEY_Thai_baht: number;
+
+	const KEY_Thai_bobaimai: number;
+
+	const KEY_Thai_chochan: number;
+
+	const KEY_Thai_chochang: number;
+
+	const KEY_Thai_choching: number;
+
+	const KEY_Thai_chochoe: number;
+
+	const KEY_Thai_dochada: number;
+
+	const KEY_Thai_dodek: number;
+
+	const KEY_Thai_fofa: number;
+
+	const KEY_Thai_fofan: number;
+
+	const KEY_Thai_hohip: number;
+
+	const KEY_Thai_honokhuk: number;
+
+	const KEY_Thai_khokhai: number;
+
+	const KEY_Thai_khokhon: number;
+
+	const KEY_Thai_khokhuat: number;
+
+	const KEY_Thai_khokhwai: number;
+
+	const KEY_Thai_khorakhang: number;
+
+	const KEY_Thai_kokai: number;
+
+	const KEY_Thai_lakkhangyao: number;
+
+	const KEY_Thai_lekchet: number;
+
+	const KEY_Thai_lekha: number;
+
+	const KEY_Thai_lekhok: number;
+
+	const KEY_Thai_lekkao: number;
+
+	const KEY_Thai_leknung: number;
+
+	const KEY_Thai_lekpaet: number;
+
+	const KEY_Thai_leksam: number;
+
+	const KEY_Thai_leksi: number;
+
+	const KEY_Thai_leksong: number;
+
+	const KEY_Thai_leksun: number;
+
+	const KEY_Thai_lochula: number;
+
+	const KEY_Thai_loling: number;
+
+	const KEY_Thai_lu: number;
+
+	const KEY_Thai_maichattawa: number;
+
+	const KEY_Thai_maiek: number;
+
+	const KEY_Thai_maihanakat: number;
+
+	const KEY_Thai_maihanakat_maitho: number;
+
+	const KEY_Thai_maitaikhu: number;
+
+	const KEY_Thai_maitho: number;
+
+	const KEY_Thai_maitri: number;
+
+	const KEY_Thai_maiyamok: number;
+
+	const KEY_Thai_moma: number;
+
+	const KEY_Thai_ngongu: number;
+
+	const KEY_Thai_nikhahit: number;
+
+	const KEY_Thai_nonen: number;
+
+	const KEY_Thai_nonu: number;
+
+	const KEY_Thai_oang: number;
+
+	const KEY_Thai_paiyannoi: number;
+
+	const KEY_Thai_phinthu: number;
+
+	const KEY_Thai_phophan: number;
+
+	const KEY_Thai_phophung: number;
+
+	const KEY_Thai_phosamphao: number;
+
+	const KEY_Thai_popla: number;
+
+	const KEY_Thai_rorua: number;
+
+	const KEY_Thai_ru: number;
+
+	const KEY_Thai_saraa: number;
+
+	const KEY_Thai_saraaa: number;
+
+	const KEY_Thai_saraae: number;
+
+	const KEY_Thai_saraaimaimalai: number;
+
+	const KEY_Thai_saraaimaimuan: number;
+
+	const KEY_Thai_saraam: number;
+
+	const KEY_Thai_sarae: number;
+
+	const KEY_Thai_sarai: number;
+
+	const KEY_Thai_saraii: number;
+
+	const KEY_Thai_sarao: number;
+
+	const KEY_Thai_sarau: number;
+
+	const KEY_Thai_saraue: number;
+
+	const KEY_Thai_sarauee: number;
+
+	const KEY_Thai_sarauu: number;
+
+	const KEY_Thai_sorusi: number;
+
+	const KEY_Thai_sosala: number;
+
+	const KEY_Thai_soso: number;
+
+	const KEY_Thai_sosua: number;
+
+	const KEY_Thai_thanthakhat: number;
+
+	const KEY_Thai_thonangmontho: number;
+
+	const KEY_Thai_thophuthao: number;
+
+	const KEY_Thai_thothahan: number;
+
+	const KEY_Thai_thothan: number;
+
+	const KEY_Thai_thothong: number;
+
+	const KEY_Thai_thothung: number;
+
+	const KEY_Thai_topatak: number;
+
+	const KEY_Thai_totao: number;
+
+	const KEY_Thai_wowaen: number;
+
+	const KEY_Thai_yoyak: number;
+
+	const KEY_Thai_yoying: number;
+
+	const KEY_Thorn: number;
+
+	const KEY_Time: number;
+
+	const KEY_ToDoList: number;
+
+	const KEY_Tools: number;
+
+	const KEY_TopMenu: number;
+
+	const KEY_TouchpadOff: number;
+
+	const KEY_TouchpadOn: number;
+
+	const KEY_TouchpadToggle: number;
+
+	const KEY_Touroku: number;
+
+	const KEY_Travel: number;
+
+	const KEY_Tslash: number;
+
+	const KEY_U: number;
+
+	const KEY_UWB: number;
+
+	const KEY_Uacute: number;
+
+	const KEY_Ubelowdot: number;
+
+	const KEY_Ubreve: number;
+
+	const KEY_Ucircumflex: number;
+
+	const KEY_Udiaeresis: number;
+
+	const KEY_Udoubleacute: number;
+
+	const KEY_Ugrave: number;
+
+	const KEY_Uhook: number;
+
+	const KEY_Uhorn: number;
+
+	const KEY_Uhornacute: number;
+
+	const KEY_Uhornbelowdot: number;
+
+	const KEY_Uhorngrave: number;
+
+	const KEY_Uhornhook: number;
+
+	const KEY_Uhorntilde: number;
+
+	const KEY_Ukrainian_GHE_WITH_UPTURN: number;
+
+	const KEY_Ukrainian_I: number;
+
+	const KEY_Ukrainian_IE: number;
+
+	const KEY_Ukrainian_YI: number;
+
+	const KEY_Ukrainian_ghe_with_upturn: number;
+
+	const KEY_Ukrainian_i: number;
+
+	const KEY_Ukrainian_ie: number;
+
+	const KEY_Ukrainian_yi: number;
+
+	const KEY_Ukranian_I: number;
+
+	const KEY_Ukranian_JE: number;
+
+	const KEY_Ukranian_YI: number;
+
+	const KEY_Ukranian_i: number;
+
+	const KEY_Ukranian_je: number;
+
+	const KEY_Ukranian_yi: number;
+
+	const KEY_Umacron: number;
+
+	const KEY_Undo: number;
+
+	const KEY_Ungrab: number;
+
+	const KEY_Uogonek: number;
+
+	const KEY_Up: number;
+
+	const KEY_Uring: number;
+
+	const KEY_User1KB: number;
+
+	const KEY_User2KB: number;
+
+	const KEY_UserPB: number;
+
+	const KEY_Utilde: number;
+
+	const KEY_V: number;
+
+	const KEY_VendorHome: number;
+
+	const KEY_Video: number;
+
+	const KEY_View: number;
+
+	const KEY_VoidSymbol: number;
+
+	const KEY_W: number;
+
+	const KEY_WLAN: number;
+
+	const KEY_WWW: number;
+
+	const KEY_Wacute: number;
+
+	const KEY_WakeUp: number;
+
+	const KEY_Wcircumflex: number;
+
+	const KEY_Wdiaeresis: number;
+
+	const KEY_WebCam: number;
+
+	const KEY_Wgrave: number;
+
+	const KEY_WheelButton: number;
+
+	const KEY_WindowClear: number;
+
+	const KEY_WonSign: number;
+
+	const KEY_Word: number;
+
+	const KEY_X: number;
+
+	const KEY_Xabovedot: number;
+
+	const KEY_Xfer: number;
+
+	const KEY_Y: number;
+
+	const KEY_Yacute: number;
+
+	const KEY_Ybelowdot: number;
+
+	const KEY_Ycircumflex: number;
+
+	const KEY_Ydiaeresis: number;
+
+	const KEY_Yellow: number;
+
+	const KEY_Ygrave: number;
+
+	const KEY_Yhook: number;
+
+	const KEY_Ytilde: number;
+
+	const KEY_Z: number;
+
+	const KEY_Zabovedot: number;
+
+	const KEY_Zacute: number;
+
+	const KEY_Zcaron: number;
+
+	const KEY_Zen_Koho: number;
+
+	const KEY_Zenkaku: number;
+
+	const KEY_Zenkaku_Hankaku: number;
+
+	const KEY_ZoomIn: number;
+
+	const KEY_ZoomOut: number;
+
+	const KEY_Zstroke: number;
+
+	const KEY_a: number;
+
+	const KEY_aacute: number;
+
+	const KEY_abelowdot: number;
+
+	const KEY_abovedot: number;
+
+	const KEY_abreve: number;
+
+	const KEY_abreveacute: number;
+
+	const KEY_abrevebelowdot: number;
+
+	const KEY_abrevegrave: number;
+
+	const KEY_abrevehook: number;
+
+	const KEY_abrevetilde: number;
+
+	const KEY_acircumflex: number;
+
+	const KEY_acircumflexacute: number;
+
+	const KEY_acircumflexbelowdot: number;
+
+	const KEY_acircumflexgrave: number;
+
+	const KEY_acircumflexhook: number;
+
+	const KEY_acircumflextilde: number;
+
+	const KEY_acute: number;
+
+	const KEY_adiaeresis: number;
+
+	const KEY_ae: number;
+
+	const KEY_agrave: number;
+
+	const KEY_ahook: number;
+
+	const KEY_amacron: number;
+
+	const KEY_ampersand: number;
+
+	const KEY_aogonek: number;
+
+	const KEY_apostrophe: number;
+
+	const KEY_approxeq: number;
+
+	const KEY_approximate: number;
+
+	const KEY_aring: number;
+
+	const KEY_asciicircum: number;
+
+	const KEY_asciitilde: number;
+
+	const KEY_asterisk: number;
+
+	const KEY_at: number;
+
+	const KEY_atilde: number;
+
+	const KEY_b: number;
+
+	const KEY_babovedot: number;
+
+	const KEY_backslash: number;
+
+	const KEY_ballotcross: number;
+
+	const KEY_bar: number;
+
+	const KEY_because: number;
+
+	const KEY_blank: number;
+
+	const KEY_botintegral: number;
+
+	const KEY_botleftparens: number;
+
+	const KEY_botleftsqbracket: number;
+
+	const KEY_botleftsummation: number;
+
+	const KEY_botrightparens: number;
+
+	const KEY_botrightsqbracket: number;
+
+	const KEY_botrightsummation: number;
+
+	const KEY_bott: number;
+
+	const KEY_botvertsummationconnector: number;
+
+	const KEY_braceleft: number;
+
+	const KEY_braceright: number;
+
+	const KEY_bracketleft: number;
+
+	const KEY_bracketright: number;
+
+	const KEY_braille_blank: number;
+
+	const KEY_braille_dot_1: number;
+
+	const KEY_braille_dot_10: number;
+
+	const KEY_braille_dot_2: number;
+
+	const KEY_braille_dot_3: number;
+
+	const KEY_braille_dot_4: number;
+
+	const KEY_braille_dot_5: number;
+
+	const KEY_braille_dot_6: number;
+
+	const KEY_braille_dot_7: number;
+
+	const KEY_braille_dot_8: number;
+
+	const KEY_braille_dot_9: number;
+
+	const KEY_braille_dots_1: number;
+
+	const KEY_braille_dots_12: number;
+
+	const KEY_braille_dots_123: number;
+
+	const KEY_braille_dots_1234: number;
+
+	const KEY_braille_dots_12345: number;
+
+	const KEY_braille_dots_123456: number;
+
+	const KEY_braille_dots_1234567: number;
+
+	const KEY_braille_dots_12345678: number;
+
+	const KEY_braille_dots_1234568: number;
+
+	const KEY_braille_dots_123457: number;
+
+	const KEY_braille_dots_1234578: number;
+
+	const KEY_braille_dots_123458: number;
+
+	const KEY_braille_dots_12346: number;
+
+	const KEY_braille_dots_123467: number;
+
+	const KEY_braille_dots_1234678: number;
+
+	const KEY_braille_dots_123468: number;
+
+	const KEY_braille_dots_12347: number;
+
+	const KEY_braille_dots_123478: number;
+
+	const KEY_braille_dots_12348: number;
+
+	const KEY_braille_dots_1235: number;
+
+	const KEY_braille_dots_12356: number;
+
+	const KEY_braille_dots_123567: number;
+
+	const KEY_braille_dots_1235678: number;
+
+	const KEY_braille_dots_123568: number;
+
+	const KEY_braille_dots_12357: number;
+
+	const KEY_braille_dots_123578: number;
+
+	const KEY_braille_dots_12358: number;
+
+	const KEY_braille_dots_1236: number;
+
+	const KEY_braille_dots_12367: number;
+
+	const KEY_braille_dots_123678: number;
+
+	const KEY_braille_dots_12368: number;
+
+	const KEY_braille_dots_1237: number;
+
+	const KEY_braille_dots_12378: number;
+
+	const KEY_braille_dots_1238: number;
+
+	const KEY_braille_dots_124: number;
+
+	const KEY_braille_dots_1245: number;
+
+	const KEY_braille_dots_12456: number;
+
+	const KEY_braille_dots_124567: number;
+
+	const KEY_braille_dots_1245678: number;
+
+	const KEY_braille_dots_124568: number;
+
+	const KEY_braille_dots_12457: number;
+
+	const KEY_braille_dots_124578: number;
+
+	const KEY_braille_dots_12458: number;
+
+	const KEY_braille_dots_1246: number;
+
+	const KEY_braille_dots_12467: number;
+
+	const KEY_braille_dots_124678: number;
+
+	const KEY_braille_dots_12468: number;
+
+	const KEY_braille_dots_1247: number;
+
+	const KEY_braille_dots_12478: number;
+
+	const KEY_braille_dots_1248: number;
+
+	const KEY_braille_dots_125: number;
+
+	const KEY_braille_dots_1256: number;
+
+	const KEY_braille_dots_12567: number;
+
+	const KEY_braille_dots_125678: number;
+
+	const KEY_braille_dots_12568: number;
+
+	const KEY_braille_dots_1257: number;
+
+	const KEY_braille_dots_12578: number;
+
+	const KEY_braille_dots_1258: number;
+
+	const KEY_braille_dots_126: number;
+
+	const KEY_braille_dots_1267: number;
+
+	const KEY_braille_dots_12678: number;
+
+	const KEY_braille_dots_1268: number;
+
+	const KEY_braille_dots_127: number;
+
+	const KEY_braille_dots_1278: number;
+
+	const KEY_braille_dots_128: number;
+
+	const KEY_braille_dots_13: number;
+
+	const KEY_braille_dots_134: number;
+
+	const KEY_braille_dots_1345: number;
+
+	const KEY_braille_dots_13456: number;
+
+	const KEY_braille_dots_134567: number;
+
+	const KEY_braille_dots_1345678: number;
+
+	const KEY_braille_dots_134568: number;
+
+	const KEY_braille_dots_13457: number;
+
+	const KEY_braille_dots_134578: number;
+
+	const KEY_braille_dots_13458: number;
+
+	const KEY_braille_dots_1346: number;
+
+	const KEY_braille_dots_13467: number;
+
+	const KEY_braille_dots_134678: number;
+
+	const KEY_braille_dots_13468: number;
+
+	const KEY_braille_dots_1347: number;
+
+	const KEY_braille_dots_13478: number;
+
+	const KEY_braille_dots_1348: number;
+
+	const KEY_braille_dots_135: number;
+
+	const KEY_braille_dots_1356: number;
+
+	const KEY_braille_dots_13567: number;
+
+	const KEY_braille_dots_135678: number;
+
+	const KEY_braille_dots_13568: number;
+
+	const KEY_braille_dots_1357: number;
+
+	const KEY_braille_dots_13578: number;
+
+	const KEY_braille_dots_1358: number;
+
+	const KEY_braille_dots_136: number;
+
+	const KEY_braille_dots_1367: number;
+
+	const KEY_braille_dots_13678: number;
+
+	const KEY_braille_dots_1368: number;
+
+	const KEY_braille_dots_137: number;
+
+	const KEY_braille_dots_1378: number;
+
+	const KEY_braille_dots_138: number;
+
+	const KEY_braille_dots_14: number;
+
+	const KEY_braille_dots_145: number;
+
+	const KEY_braille_dots_1456: number;
+
+	const KEY_braille_dots_14567: number;
+
+	const KEY_braille_dots_145678: number;
+
+	const KEY_braille_dots_14568: number;
+
+	const KEY_braille_dots_1457: number;
+
+	const KEY_braille_dots_14578: number;
+
+	const KEY_braille_dots_1458: number;
+
+	const KEY_braille_dots_146: number;
+
+	const KEY_braille_dots_1467: number;
+
+	const KEY_braille_dots_14678: number;
+
+	const KEY_braille_dots_1468: number;
+
+	const KEY_braille_dots_147: number;
+
+	const KEY_braille_dots_1478: number;
+
+	const KEY_braille_dots_148: number;
+
+	const KEY_braille_dots_15: number;
+
+	const KEY_braille_dots_156: number;
+
+	const KEY_braille_dots_1567: number;
+
+	const KEY_braille_dots_15678: number;
+
+	const KEY_braille_dots_1568: number;
+
+	const KEY_braille_dots_157: number;
+
+	const KEY_braille_dots_1578: number;
+
+	const KEY_braille_dots_158: number;
+
+	const KEY_braille_dots_16: number;
+
+	const KEY_braille_dots_167: number;
+
+	const KEY_braille_dots_1678: number;
+
+	const KEY_braille_dots_168: number;
+
+	const KEY_braille_dots_17: number;
+
+	const KEY_braille_dots_178: number;
+
+	const KEY_braille_dots_18: number;
+
+	const KEY_braille_dots_2: number;
+
+	const KEY_braille_dots_23: number;
+
+	const KEY_braille_dots_234: number;
+
+	const KEY_braille_dots_2345: number;
+
+	const KEY_braille_dots_23456: number;
+
+	const KEY_braille_dots_234567: number;
+
+	const KEY_braille_dots_2345678: number;
+
+	const KEY_braille_dots_234568: number;
+
+	const KEY_braille_dots_23457: number;
+
+	const KEY_braille_dots_234578: number;
+
+	const KEY_braille_dots_23458: number;
+
+	const KEY_braille_dots_2346: number;
+
+	const KEY_braille_dots_23467: number;
+
+	const KEY_braille_dots_234678: number;
+
+	const KEY_braille_dots_23468: number;
+
+	const KEY_braille_dots_2347: number;
+
+	const KEY_braille_dots_23478: number;
+
+	const KEY_braille_dots_2348: number;
+
+	const KEY_braille_dots_235: number;
+
+	const KEY_braille_dots_2356: number;
+
+	const KEY_braille_dots_23567: number;
+
+	const KEY_braille_dots_235678: number;
+
+	const KEY_braille_dots_23568: number;
+
+	const KEY_braille_dots_2357: number;
+
+	const KEY_braille_dots_23578: number;
+
+	const KEY_braille_dots_2358: number;
+
+	const KEY_braille_dots_236: number;
+
+	const KEY_braille_dots_2367: number;
+
+	const KEY_braille_dots_23678: number;
+
+	const KEY_braille_dots_2368: number;
+
+	const KEY_braille_dots_237: number;
+
+	const KEY_braille_dots_2378: number;
+
+	const KEY_braille_dots_238: number;
+
+	const KEY_braille_dots_24: number;
+
+	const KEY_braille_dots_245: number;
+
+	const KEY_braille_dots_2456: number;
+
+	const KEY_braille_dots_24567: number;
+
+	const KEY_braille_dots_245678: number;
+
+	const KEY_braille_dots_24568: number;
+
+	const KEY_braille_dots_2457: number;
+
+	const KEY_braille_dots_24578: number;
+
+	const KEY_braille_dots_2458: number;
+
+	const KEY_braille_dots_246: number;
+
+	const KEY_braille_dots_2467: number;
+
+	const KEY_braille_dots_24678: number;
+
+	const KEY_braille_dots_2468: number;
+
+	const KEY_braille_dots_247: number;
+
+	const KEY_braille_dots_2478: number;
+
+	const KEY_braille_dots_248: number;
+
+	const KEY_braille_dots_25: number;
+
+	const KEY_braille_dots_256: number;
+
+	const KEY_braille_dots_2567: number;
+
+	const KEY_braille_dots_25678: number;
+
+	const KEY_braille_dots_2568: number;
+
+	const KEY_braille_dots_257: number;
+
+	const KEY_braille_dots_2578: number;
+
+	const KEY_braille_dots_258: number;
+
+	const KEY_braille_dots_26: number;
+
+	const KEY_braille_dots_267: number;
+
+	const KEY_braille_dots_2678: number;
+
+	const KEY_braille_dots_268: number;
+
+	const KEY_braille_dots_27: number;
+
+	const KEY_braille_dots_278: number;
+
+	const KEY_braille_dots_28: number;
+
+	const KEY_braille_dots_3: number;
+
+	const KEY_braille_dots_34: number;
+
+	const KEY_braille_dots_345: number;
+
+	const KEY_braille_dots_3456: number;
+
+	const KEY_braille_dots_34567: number;
+
+	const KEY_braille_dots_345678: number;
+
+	const KEY_braille_dots_34568: number;
+
+	const KEY_braille_dots_3457: number;
+
+	const KEY_braille_dots_34578: number;
+
+	const KEY_braille_dots_3458: number;
+
+	const KEY_braille_dots_346: number;
+
+	const KEY_braille_dots_3467: number;
+
+	const KEY_braille_dots_34678: number;
+
+	const KEY_braille_dots_3468: number;
+
+	const KEY_braille_dots_347: number;
+
+	const KEY_braille_dots_3478: number;
+
+	const KEY_braille_dots_348: number;
+
+	const KEY_braille_dots_35: number;
+
+	const KEY_braille_dots_356: number;
+
+	const KEY_braille_dots_3567: number;
+
+	const KEY_braille_dots_35678: number;
+
+	const KEY_braille_dots_3568: number;
+
+	const KEY_braille_dots_357: number;
+
+	const KEY_braille_dots_3578: number;
+
+	const KEY_braille_dots_358: number;
+
+	const KEY_braille_dots_36: number;
+
+	const KEY_braille_dots_367: number;
+
+	const KEY_braille_dots_3678: number;
+
+	const KEY_braille_dots_368: number;
+
+	const KEY_braille_dots_37: number;
+
+	const KEY_braille_dots_378: number;
+
+	const KEY_braille_dots_38: number;
+
+	const KEY_braille_dots_4: number;
+
+	const KEY_braille_dots_45: number;
+
+	const KEY_braille_dots_456: number;
+
+	const KEY_braille_dots_4567: number;
+
+	const KEY_braille_dots_45678: number;
+
+	const KEY_braille_dots_4568: number;
+
+	const KEY_braille_dots_457: number;
+
+	const KEY_braille_dots_4578: number;
+
+	const KEY_braille_dots_458: number;
+
+	const KEY_braille_dots_46: number;
+
+	const KEY_braille_dots_467: number;
+
+	const KEY_braille_dots_4678: number;
+
+	const KEY_braille_dots_468: number;
+
+	const KEY_braille_dots_47: number;
+
+	const KEY_braille_dots_478: number;
+
+	const KEY_braille_dots_48: number;
+
+	const KEY_braille_dots_5: number;
+
+	const KEY_braille_dots_56: number;
+
+	const KEY_braille_dots_567: number;
+
+	const KEY_braille_dots_5678: number;
+
+	const KEY_braille_dots_568: number;
+
+	const KEY_braille_dots_57: number;
+
+	const KEY_braille_dots_578: number;
+
+	const KEY_braille_dots_58: number;
+
+	const KEY_braille_dots_6: number;
+
+	const KEY_braille_dots_67: number;
+
+	const KEY_braille_dots_678: number;
+
+	const KEY_braille_dots_68: number;
+
+	const KEY_braille_dots_7: number;
+
+	const KEY_braille_dots_78: number;
+
+	const KEY_braille_dots_8: number;
+
+	const KEY_breve: number;
+
+	const KEY_brokenbar: number;
+
+	const KEY_c: number;
+
+	const KEY_c_h: number;
+
+	const KEY_cabovedot: number;
+
+	const KEY_cacute: number;
+
+	const KEY_careof: number;
+
+	const KEY_caret: number;
+
+	const KEY_caron: number;
+
+	const KEY_ccaron: number;
+
+	const KEY_ccedilla: number;
+
+	const KEY_ccircumflex: number;
+
+	const KEY_cedilla: number;
+
+	const KEY_cent: number;
+
+	const KEY_ch: number;
+
+	const KEY_checkerboard: number;
+
+	const KEY_checkmark: number;
+
+	const KEY_circle: number;
+
+	const KEY_club: number;
+
+	const KEY_colon: number;
+
+	const KEY_comma: number;
+
+	const KEY_containsas: number;
+
+	const KEY_copyright: number;
+
+	const KEY_cr: number;
+
+	const KEY_crossinglines: number;
+
+	const KEY_cuberoot: number;
+
+	const KEY_currency: number;
+
+	const KEY_cursor: number;
+
+	const KEY_d: number;
+
+	const KEY_dabovedot: number;
+
+	const KEY_dagger: number;
+
+	const KEY_dcaron: number;
+
+	const KEY_dead_A: number;
+
+	const KEY_dead_E: number;
+
+	const KEY_dead_I: number;
+
+	const KEY_dead_O: number;
+
+	const KEY_dead_U: number;
+
+	const KEY_dead_a: number;
+
+	const KEY_dead_abovecomma: number;
+
+	const KEY_dead_abovedot: number;
+
+	const KEY_dead_abovereversedcomma: number;
+
+	const KEY_dead_abovering: number;
+
+	const KEY_dead_aboveverticalline: number;
+
+	const KEY_dead_acute: number;
+
+	const KEY_dead_belowbreve: number;
+
+	const KEY_dead_belowcircumflex: number;
+
+	const KEY_dead_belowcomma: number;
+
+	const KEY_dead_belowdiaeresis: number;
+
+	const KEY_dead_belowdot: number;
+
+	const KEY_dead_belowmacron: number;
+
+	const KEY_dead_belowring: number;
+
+	const KEY_dead_belowtilde: number;
+
+	const KEY_dead_belowverticalline: number;
+
+	const KEY_dead_breve: number;
+
+	const KEY_dead_capital_schwa: number;
+
+	const KEY_dead_caron: number;
+
+	const KEY_dead_cedilla: number;
+
+	const KEY_dead_circumflex: number;
+
+	const KEY_dead_currency: number;
+
+	const KEY_dead_dasia: number;
+
+	const KEY_dead_diaeresis: number;
+
+	const KEY_dead_doubleacute: number;
+
+	const KEY_dead_doublegrave: number;
+
+	const KEY_dead_e: number;
+
+	const KEY_dead_grave: number;
+
+	const KEY_dead_greek: number;
+
+	const KEY_dead_hook: number;
+
+	const KEY_dead_horn: number;
+
+	const KEY_dead_i: number;
+
+	const KEY_dead_invertedbreve: number;
+
+	const KEY_dead_iota: number;
+
+	const KEY_dead_longsolidusoverlay: number;
+
+	const KEY_dead_lowline: number;
+
+	const KEY_dead_macron: number;
+
+	const KEY_dead_o: number;
+
+	const KEY_dead_ogonek: number;
+
+	const KEY_dead_perispomeni: number;
+
+	const KEY_dead_psili: number;
+
+	const KEY_dead_semivoiced_sound: number;
+
+	const KEY_dead_small_schwa: number;
+
+	const KEY_dead_stroke: number;
+
+	const KEY_dead_tilde: number;
+
+	const KEY_dead_u: number;
+
+	const KEY_dead_voiced_sound: number;
+
+	const KEY_decimalpoint: number;
+
+	const KEY_degree: number;
+
+	const KEY_diaeresis: number;
+
+	const KEY_diamond: number;
+
+	const KEY_digitspace: number;
+
+	const KEY_dintegral: number;
+
+	const KEY_division: number;
+
+	const KEY_dollar: number;
+
+	const KEY_doubbaselinedot: number;
+
+	const KEY_doubleacute: number;
+
+	const KEY_doubledagger: number;
+
+	const KEY_doublelowquotemark: number;
+
+	const KEY_downarrow: number;
+
+	const KEY_downcaret: number;
+
+	const KEY_downshoe: number;
+
+	const KEY_downstile: number;
+
+	const KEY_downtack: number;
+
+	const KEY_dstroke: number;
+
+	const KEY_e: number;
+
+	const KEY_eabovedot: number;
+
+	const KEY_eacute: number;
+
+	const KEY_ebelowdot: number;
+
+	const KEY_ecaron: number;
+
+	const KEY_ecircumflex: number;
+
+	const KEY_ecircumflexacute: number;
+
+	const KEY_ecircumflexbelowdot: number;
+
+	const KEY_ecircumflexgrave: number;
+
+	const KEY_ecircumflexhook: number;
+
+	const KEY_ecircumflextilde: number;
+
+	const KEY_ediaeresis: number;
+
+	const KEY_egrave: number;
+
+	const KEY_ehook: number;
+
+	const KEY_eightsubscript: number;
+
+	const KEY_eightsuperior: number;
+
+	const KEY_elementof: number;
+
+	const KEY_ellipsis: number;
+
+	const KEY_em3space: number;
+
+	const KEY_em4space: number;
+
+	const KEY_emacron: number;
+
+	const KEY_emdash: number;
+
+	const KEY_emfilledcircle: number;
+
+	const KEY_emfilledrect: number;
+
+	const KEY_emopencircle: number;
+
+	const KEY_emopenrectangle: number;
+
+	const KEY_emptyset: number;
+
+	const KEY_emspace: number;
+
+	const KEY_endash: number;
+
+	const KEY_enfilledcircbullet: number;
+
+	const KEY_enfilledsqbullet: number;
+
+	const KEY_eng: number;
+
+	const KEY_enopencircbullet: number;
+
+	const KEY_enopensquarebullet: number;
+
+	const KEY_enspace: number;
+
+	const KEY_eogonek: number;
+
+	const KEY_equal: number;
+
+	const KEY_eth: number;
+
+	const KEY_etilde: number;
+
+	const KEY_exclam: number;
+
+	const KEY_exclamdown: number;
+
+	const KEY_ezh: number;
+
+	const KEY_f: number;
+
+	const KEY_fabovedot: number;
+
+	const KEY_femalesymbol: number;
+
+	const KEY_ff: number;
+
+	const KEY_figdash: number;
+
+	const KEY_filledlefttribullet: number;
+
+	const KEY_filledrectbullet: number;
+
+	const KEY_filledrighttribullet: number;
+
+	const KEY_filledtribulletdown: number;
+
+	const KEY_filledtribulletup: number;
+
+	const KEY_fiveeighths: number;
+
+	const KEY_fivesixths: number;
+
+	const KEY_fivesubscript: number;
+
+	const KEY_fivesuperior: number;
+
+	const KEY_fourfifths: number;
+
+	const KEY_foursubscript: number;
+
+	const KEY_foursuperior: number;
+
+	const KEY_fourthroot: number;
+
+	const KEY_function: number;
+
+	const KEY_g: number;
+
+	const KEY_gabovedot: number;
+
+	const KEY_gbreve: number;
+
+	const KEY_gcaron: number;
+
+	const KEY_gcedilla: number;
+
+	const KEY_gcircumflex: number;
+
+	const KEY_grave: number;
+
+	const KEY_greater: number;
+
+	const KEY_greaterthanequal: number;
+
+	const KEY_guillemotleft: number;
+
+	const KEY_guillemotright: number;
+
+	const KEY_h: number;
+
+	const KEY_hairspace: number;
+
+	const KEY_hcircumflex: number;
+
+	const KEY_heart: number;
+
+	const KEY_hebrew_aleph: number;
+
+	const KEY_hebrew_ayin: number;
+
+	const KEY_hebrew_bet: number;
+
+	const KEY_hebrew_beth: number;
+
+	const KEY_hebrew_chet: number;
+
+	const KEY_hebrew_dalet: number;
+
+	const KEY_hebrew_daleth: number;
+
+	const KEY_hebrew_doublelowline: number;
+
+	const KEY_hebrew_finalkaph: number;
+
+	const KEY_hebrew_finalmem: number;
+
+	const KEY_hebrew_finalnun: number;
+
+	const KEY_hebrew_finalpe: number;
+
+	const KEY_hebrew_finalzade: number;
+
+	const KEY_hebrew_finalzadi: number;
+
+	const KEY_hebrew_gimel: number;
+
+	const KEY_hebrew_gimmel: number;
+
+	const KEY_hebrew_he: number;
+
+	const KEY_hebrew_het: number;
+
+	const KEY_hebrew_kaph: number;
+
+	const KEY_hebrew_kuf: number;
+
+	const KEY_hebrew_lamed: number;
+
+	const KEY_hebrew_mem: number;
+
+	const KEY_hebrew_nun: number;
+
+	const KEY_hebrew_pe: number;
+
+	const KEY_hebrew_qoph: number;
+
+	const KEY_hebrew_resh: number;
+
+	const KEY_hebrew_samech: number;
+
+	const KEY_hebrew_samekh: number;
+
+	const KEY_hebrew_shin: number;
+
+	const KEY_hebrew_taf: number;
+
+	const KEY_hebrew_taw: number;
+
+	const KEY_hebrew_tet: number;
+
+	const KEY_hebrew_teth: number;
+
+	const KEY_hebrew_waw: number;
+
+	const KEY_hebrew_yod: number;
+
+	const KEY_hebrew_zade: number;
+
+	const KEY_hebrew_zadi: number;
+
+	const KEY_hebrew_zain: number;
+
+	const KEY_hebrew_zayin: number;
+
+	const KEY_hexagram: number;
+
+	const KEY_horizconnector: number;
+
+	const KEY_horizlinescan1: number;
+
+	const KEY_horizlinescan3: number;
+
+	const KEY_horizlinescan5: number;
+
+	const KEY_horizlinescan7: number;
+
+	const KEY_horizlinescan9: number;
+
+	const KEY_hstroke: number;
+
+	const KEY_ht: number;
+
+	const KEY_hyphen: number;
+
+	const KEY_i: number;
+
+	const KEY_iTouch: number;
+
+	const KEY_iacute: number;
+
+	const KEY_ibelowdot: number;
+
+	const KEY_ibreve: number;
+
+	const KEY_icircumflex: number;
+
+	const KEY_identical: number;
+
+	const KEY_idiaeresis: number;
+
+	const KEY_idotless: number;
+
+	const KEY_ifonlyif: number;
+
+	const KEY_igrave: number;
+
+	const KEY_ihook: number;
+
+	const KEY_imacron: number;
+
+	const KEY_implies: number;
+
+	const KEY_includedin: number;
+
+	const KEY_includes: number;
+
+	const KEY_infinity: number;
+
+	const KEY_integral: number;
+
+	const KEY_intersection: number;
+
+	const KEY_iogonek: number;
+
+	const KEY_itilde: number;
+
+	const KEY_j: number;
+
+	const KEY_jcircumflex: number;
+
+	const KEY_jot: number;
+
+	const KEY_k: number;
+
+	const KEY_kana_A: number;
+
+	const KEY_kana_CHI: number;
+
+	const KEY_kana_E: number;
+
+	const KEY_kana_FU: number;
+
+	const KEY_kana_HA: number;
+
+	const KEY_kana_HE: number;
+
+	const KEY_kana_HI: number;
+
+	const KEY_kana_HO: number;
+
+	const KEY_kana_HU: number;
+
+	const KEY_kana_I: number;
+
+	const KEY_kana_KA: number;
+
+	const KEY_kana_KE: number;
+
+	const KEY_kana_KI: number;
+
+	const KEY_kana_KO: number;
+
+	const KEY_kana_KU: number;
+
+	const KEY_kana_MA: number;
+
+	const KEY_kana_ME: number;
+
+	const KEY_kana_MI: number;
+
+	const KEY_kana_MO: number;
+
+	const KEY_kana_MU: number;
+
+	const KEY_kana_N: number;
+
+	const KEY_kana_NA: number;
+
+	const KEY_kana_NE: number;
+
+	const KEY_kana_NI: number;
+
+	const KEY_kana_NO: number;
+
+	const KEY_kana_NU: number;
+
+	const KEY_kana_O: number;
+
+	const KEY_kana_RA: number;
+
+	const KEY_kana_RE: number;
+
+	const KEY_kana_RI: number;
+
+	const KEY_kana_RO: number;
+
+	const KEY_kana_RU: number;
+
+	const KEY_kana_SA: number;
+
+	const KEY_kana_SE: number;
+
+	const KEY_kana_SHI: number;
+
+	const KEY_kana_SO: number;
+
+	const KEY_kana_SU: number;
+
+	const KEY_kana_TA: number;
+
+	const KEY_kana_TE: number;
+
+	const KEY_kana_TI: number;
+
+	const KEY_kana_TO: number;
+
+	const KEY_kana_TSU: number;
+
+	const KEY_kana_TU: number;
+
+	const KEY_kana_U: number;
+
+	const KEY_kana_WA: number;
+
+	const KEY_kana_WO: number;
+
+	const KEY_kana_YA: number;
+
+	const KEY_kana_YO: number;
+
+	const KEY_kana_YU: number;
+
+	const KEY_kana_a: number;
+
+	const KEY_kana_closingbracket: number;
+
+	const KEY_kana_comma: number;
+
+	const KEY_kana_conjunctive: number;
+
+	const KEY_kana_e: number;
+
+	const KEY_kana_fullstop: number;
+
+	const KEY_kana_i: number;
+
+	const KEY_kana_middledot: number;
+
+	const KEY_kana_o: number;
+
+	const KEY_kana_openingbracket: number;
+
+	const KEY_kana_switch: number;
+
+	const KEY_kana_tsu: number;
+
+	const KEY_kana_tu: number;
+
+	const KEY_kana_u: number;
+
+	const KEY_kana_ya: number;
+
+	const KEY_kana_yo: number;
+
+	const KEY_kana_yu: number;
+
+	const KEY_kappa: number;
+
+	const KEY_kcedilla: number;
+
+	const KEY_kra: number;
+
+	const KEY_l: number;
+
+	const KEY_lacute: number;
+
+	const KEY_latincross: number;
+
+	const KEY_lbelowdot: number;
+
+	const KEY_lcaron: number;
+
+	const KEY_lcedilla: number;
+
+	const KEY_leftanglebracket: number;
+
+	const KEY_leftarrow: number;
+
+	const KEY_leftcaret: number;
+
+	const KEY_leftdoublequotemark: number;
+
+	const KEY_leftmiddlecurlybrace: number;
+
+	const KEY_leftopentriangle: number;
+
+	const KEY_leftpointer: number;
+
+	const KEY_leftradical: number;
+
+	const KEY_leftshoe: number;
+
+	const KEY_leftsinglequotemark: number;
+
+	const KEY_leftt: number;
+
+	const KEY_lefttack: number;
+
+	const KEY_less: number;
+
+	const KEY_lessthanequal: number;
+
+	const KEY_lf: number;
+
+	const KEY_logicaland: number;
+
+	const KEY_logicalor: number;
+
+	const KEY_lowleftcorner: number;
+
+	const KEY_lowrightcorner: number;
+
+	const KEY_lstroke: number;
+
+	const KEY_m: number;
+
+	const KEY_mabovedot: number;
+
+	const KEY_macron: number;
+
+	const KEY_malesymbol: number;
+
+	const KEY_maltesecross: number;
+
+	const KEY_marker: number;
+
+	const KEY_masculine: number;
+
+	const KEY_minus: number;
+
+	const KEY_minutes: number;
+
+	const KEY_mu: number;
+
+	const KEY_multiply: number;
+
+	const KEY_musicalflat: number;
+
+	const KEY_musicalsharp: number;
+
+	const KEY_n: number;
+
+	const KEY_nabla: number;
+
+	const KEY_nacute: number;
+
+	const KEY_ncaron: number;
+
+	const KEY_ncedilla: number;
+
+	const KEY_ninesubscript: number;
+
+	const KEY_ninesuperior: number;
+
+	const KEY_nl: number;
+
+	const KEY_nobreakspace: number;
+
+	const KEY_notapproxeq: number;
+
+	const KEY_notelementof: number;
+
+	const KEY_notequal: number;
+
+	const KEY_notidentical: number;
+
+	const KEY_notsign: number;
+
+	const KEY_ntilde: number;
+
+	const KEY_numbersign: number;
+
+	const KEY_numerosign: number;
+
+	const KEY_o: number;
+
+	const KEY_oacute: number;
+
+	const KEY_obarred: number;
+
+	const KEY_obelowdot: number;
+
+	const KEY_ocaron: number;
+
+	const KEY_ocircumflex: number;
+
+	const KEY_ocircumflexacute: number;
+
+	const KEY_ocircumflexbelowdot: number;
+
+	const KEY_ocircumflexgrave: number;
+
+	const KEY_ocircumflexhook: number;
+
+	const KEY_ocircumflextilde: number;
+
+	const KEY_odiaeresis: number;
+
+	const KEY_odoubleacute: number;
+
+	const KEY_oe: number;
+
+	const KEY_ogonek: number;
+
+	const KEY_ograve: number;
+
+	const KEY_ohook: number;
+
+	const KEY_ohorn: number;
+
+	const KEY_ohornacute: number;
+
+	const KEY_ohornbelowdot: number;
+
+	const KEY_ohorngrave: number;
+
+	const KEY_ohornhook: number;
+
+	const KEY_ohorntilde: number;
+
+	const KEY_omacron: number;
+
+	const KEY_oneeighth: number;
+
+	const KEY_onefifth: number;
+
+	const KEY_onehalf: number;
+
+	const KEY_onequarter: number;
+
+	const KEY_onesixth: number;
+
+	const KEY_onesubscript: number;
+
+	const KEY_onesuperior: number;
+
+	const KEY_onethird: number;
+
+	const KEY_ooblique: number;
+
+	const KEY_openrectbullet: number;
+
+	const KEY_openstar: number;
+
+	const KEY_opentribulletdown: number;
+
+	const KEY_opentribulletup: number;
+
+	const KEY_ordfeminine: number;
+
+	const KEY_oslash: number;
+
+	const KEY_otilde: number;
+
+	const KEY_overbar: number;
+
+	const KEY_overline: number;
+
+	const KEY_p: number;
+
+	const KEY_pabovedot: number;
+
+	const KEY_paragraph: number;
+
+	const KEY_parenleft: number;
+
+	const KEY_parenright: number;
+
+	const KEY_partdifferential: number;
+
+	const KEY_partialderivative: number;
+
+	const KEY_percent: number;
+
+	const KEY_period: number;
+
+	const KEY_periodcentered: number;
+
+	const KEY_permille: number;
+
+	const KEY_phonographcopyright: number;
+
+	const KEY_plus: number;
+
+	const KEY_plusminus: number;
+
+	const KEY_prescription: number;
+
+	const KEY_prolongedsound: number;
+
+	const KEY_punctspace: number;
+
+	const KEY_q: number;
+
+	const KEY_quad: number;
+
+	const KEY_question: number;
+
+	const KEY_questiondown: number;
+
+	const KEY_quotedbl: number;
+
+	const KEY_quoteleft: number;
+
+	const KEY_quoteright: number;
+
+	const KEY_r: number;
+
+	const KEY_racute: number;
+
+	const KEY_radical: number;
+
+	const KEY_rcaron: number;
+
+	const KEY_rcedilla: number;
+
+	const KEY_registered: number;
+
+	const KEY_rightanglebracket: number;
+
+	const KEY_rightarrow: number;
+
+	const KEY_rightcaret: number;
+
+	const KEY_rightdoublequotemark: number;
+
+	const KEY_rightmiddlecurlybrace: number;
+
+	const KEY_rightmiddlesummation: number;
+
+	const KEY_rightopentriangle: number;
+
+	const KEY_rightpointer: number;
+
+	const KEY_rightshoe: number;
+
+	const KEY_rightsinglequotemark: number;
+
+	const KEY_rightt: number;
+
+	const KEY_righttack: number;
+
+	const KEY_s: number;
+
+	const KEY_sabovedot: number;
+
+	const KEY_sacute: number;
+
+	const KEY_scaron: number;
+
+	const KEY_scedilla: number;
+
+	const KEY_schwa: number;
+
+	const KEY_scircumflex: number;
+
+	const KEY_script_switch: number;
+
+	const KEY_seconds: number;
+
+	const KEY_section: number;
+
+	const KEY_semicolon: number;
+
+	const KEY_semivoicedsound: number;
+
+	const KEY_seveneighths: number;
+
+	const KEY_sevensubscript: number;
+
+	const KEY_sevensuperior: number;
+
+	const KEY_signaturemark: number;
+
+	const KEY_signifblank: number;
+
+	const KEY_similarequal: number;
+
+	const KEY_singlelowquotemark: number;
+
+	const KEY_sixsubscript: number;
+
+	const KEY_sixsuperior: number;
+
+	const KEY_slash: number;
+
+	const KEY_soliddiamond: number;
+
+	const KEY_space: number;
+
+	const KEY_squareroot: number;
+
+	const KEY_ssharp: number;
+
+	const KEY_sterling: number;
+
+	const KEY_stricteq: number;
+
+	const KEY_t: number;
+
+	const KEY_tabovedot: number;
+
+	const KEY_tcaron: number;
+
+	const KEY_tcedilla: number;
+
+	const KEY_telephone: number;
+
+	const KEY_telephonerecorder: number;
+
+	const KEY_therefore: number;
+
+	const KEY_thinspace: number;
+
+	const KEY_thorn: number;
+
+	const KEY_threeeighths: number;
+
+	const KEY_threefifths: number;
+
+	const KEY_threequarters: number;
+
+	const KEY_threesubscript: number;
+
+	const KEY_threesuperior: number;
+
+	const KEY_tintegral: number;
+
+	const KEY_topintegral: number;
+
+	const KEY_topleftparens: number;
+
+	const KEY_topleftradical: number;
+
+	const KEY_topleftsqbracket: number;
+
+	const KEY_topleftsummation: number;
+
+	const KEY_toprightparens: number;
+
+	const KEY_toprightsqbracket: number;
+
+	const KEY_toprightsummation: number;
+
+	const KEY_topt: number;
+
+	const KEY_topvertsummationconnector: number;
+
+	const KEY_trademark: number;
+
+	const KEY_trademarkincircle: number;
+
+	const KEY_tslash: number;
+
+	const KEY_twofifths: number;
+
+	const KEY_twosubscript: number;
+
+	const KEY_twosuperior: number;
+
+	const KEY_twothirds: number;
+
+	const KEY_u: number;
+
+	const KEY_uacute: number;
+
+	const KEY_ubelowdot: number;
+
+	const KEY_ubreve: number;
+
+	const KEY_ucircumflex: number;
+
+	const KEY_udiaeresis: number;
+
+	const KEY_udoubleacute: number;
+
+	const KEY_ugrave: number;
+
+	const KEY_uhook: number;
+
+	const KEY_uhorn: number;
+
+	const KEY_uhornacute: number;
+
+	const KEY_uhornbelowdot: number;
+
+	const KEY_uhorngrave: number;
+
+	const KEY_uhornhook: number;
+
+	const KEY_uhorntilde: number;
+
+	const KEY_umacron: number;
+
+	const KEY_underbar: number;
+
+	const KEY_underscore: number;
+
+	const KEY_union: number;
+
+	const KEY_uogonek: number;
+
+	const KEY_uparrow: number;
+
+	const KEY_upcaret: number;
+
+	const KEY_upleftcorner: number;
+
+	const KEY_uprightcorner: number;
+
+	const KEY_upshoe: number;
+
+	const KEY_upstile: number;
+
+	const KEY_uptack: number;
+
+	const KEY_uring: number;
+
+	const KEY_utilde: number;
+
+	const KEY_v: number;
+
+	const KEY_variation: number;
+
+	const KEY_vertbar: number;
+
+	const KEY_vertconnector: number;
+
+	const KEY_voicedsound: number;
+
+	const KEY_vt: number;
+
+	const KEY_w: number;
+
+	const KEY_wacute: number;
+
+	const KEY_wcircumflex: number;
+
+	const KEY_wdiaeresis: number;
+
+	const KEY_wgrave: number;
+
+	const KEY_x: number;
+
+	const KEY_xabovedot: number;
+
+	const KEY_y: number;
+
+	const KEY_yacute: number;
+
+	const KEY_ybelowdot: number;
+
+	const KEY_ycircumflex: number;
+
+	const KEY_ydiaeresis: number;
+
+	const KEY_yen: number;
+
+	const KEY_ygrave: number;
+
+	const KEY_yhook: number;
+
+	const KEY_ytilde: number;
+
+	const KEY_z: number;
+
+	const KEY_zabovedot: number;
+
+	const KEY_zacute: number;
+
+	const KEY_zcaron: number;
+
+	const KEY_zerosubscript: number;
+
+	const KEY_zerosuperior: number;
+
+	const KEY_zstroke: number;
+
+	const KP_0: number;
+
+	const KP_1: number;
+
+	const KP_2: number;
+
+	const KP_3: number;
+
+	const KP_4: number;
+
+	const KP_5: number;
+
+	const KP_6: number;
+
+	const KP_7: number;
+
+	const KP_8: number;
+
+	const KP_9: number;
+
+	const KP_Add: number;
+
+	const KP_Begin: number;
+
+	const KP_Decimal: number;
+
+	const KP_Delete: number;
+
+	const KP_Divide: number;
+
+	const KP_Down: number;
+
+	const KP_End: number;
+
+	const KP_Enter: number;
+
+	const KP_Equal: number;
+
+	const KP_F1: number;
+
+	const KP_F2: number;
+
+	const KP_F3: number;
+
+	const KP_F4: number;
+
+	const KP_Home: number;
+
+	const KP_Insert: number;
+
+	const KP_Left: number;
+
+	const KP_Multiply: number;
+
+	const KP_Next: number;
+
+	const KP_Page_Down: number;
+
+	const KP_Page_Up: number;
+
+	const KP_Prior: number;
+
+	const KP_Right: number;
+
+	const KP_Separator: number;
+
+	const KP_Space: number;
+
+	const KP_Subtract: number;
+
+	const KP_Tab: number;
+
+	const KP_Up: number;
+
+	const Kana_Lock: number;
+
+	const Kana_Shift: number;
+
+	const Kanji: number;
+
+	const Kanji_Bangou: number;
+
+	const Katakana: number;
+
+	const KbdBrightnessDown: number;
+
+	const KbdBrightnessUp: number;
+
+	const KbdLightOnOff: number;
+
+	const Kcedilla: number;
+
+	const Korean_Won: number;
+
+	const L: number;
+
+	const L1: number;
+
+	const L10: number;
+
+	const L2: number;
+
+	const L3: number;
+
+	const L4: number;
+
+	const L5: number;
+
+	const L6: number;
+
+	const L7: number;
+
+	const L8: number;
+
+	const L9: number;
+
+	const Lacute: number;
+
+	const Last_Virtual_Screen: number;
+
+	const Launch0: number;
+
+	const Launch1: number;
+
+	const Launch2: number;
+
+	const Launch3: number;
+
+	const Launch4: number;
+
+	const Launch5: number;
+
+	const Launch6: number;
+
+	const Launch7: number;
+
+	const Launch8: number;
+
+	const Launch9: number;
+
+	const LaunchA: number;
+
+	const LaunchB: number;
+
+	const LaunchC: number;
+
+	const LaunchD: number;
+
+	const LaunchE: number;
+
+	const LaunchF: number;
+
+	const Lbelowdot: number;
+
+	const Lcaron: number;
+
+	const Lcedilla: number;
+
+	const Left: number;
+
+	const LightBulb: number;
+
+	const Linefeed: number;
+
+	const LiraSign: number;
+
+	const LogGrabInfo: number;
+
+	const LogOff: number;
+
+	const LogWindowTree: number;
+
+	const Lstroke: number;
+
+	const M: number;
+
+	/**
+	 * The major version of the Clutter library (1, if %CLUTTER_VERSION is 1.2.3)
+	 * @returns The major version of the Clutter library (1, if %CLUTTER_VERSION is 1.2.3)
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * The micro version of the Clutter library (3, if %CLUTTER_VERSION is 1.2.3)
+	 * @returns The micro version of the Clutter library (3, if %CLUTTER_VERSION is 1.2.3)
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * The minor version of the Clutter library (2, if %CLUTTER_VERSION is 1.2.3)
+	 * @returns The minor version of the Clutter library (2, if %CLUTTER_VERSION is 1.2.3)
+	 */
+	const MINOR_VERSION: number;
+
+	const Mabovedot: number;
+
+	const Macedonia_DSE: number;
+
+	const Macedonia_GJE: number;
+
+	const Macedonia_KJE: number;
+
+	const Macedonia_dse: number;
+
+	const Macedonia_gje: number;
+
+	const Macedonia_kje: number;
+
+	const Mae_Koho: number;
+
+	const Mail: number;
+
+	const MailForward: number;
+
+	const Market: number;
+
+	const Massyo: number;
+
+	const Meeting: number;
+
+	const Memo: number;
+
+	const Menu: number;
+
+	const MenuKB: number;
+
+	const MenuPB: number;
+
+	const Messenger: number;
+
+	const Meta_L: number;
+
+	const Meta_R: number;
+
+	const MillSign: number;
+
+	const ModeLock: number;
+
+	const Mode_switch: number;
+
+	const MonBrightnessDown: number;
+
+	const MonBrightnessUp: number;
+
+	const MouseKeys_Accel_Enable: number;
+
+	const MouseKeys_Enable: number;
+
+	const Muhenkan: number;
+
+	const Multi_key: number;
+
+	const MultipleCandidate: number;
+
+	const Music: number;
+
+	const MyComputer: number;
+
+	const MySites: number;
+
+	const N: number;
+
+	/**
+	 * Set to 1 if Clutter was built without FPU (i.e fixed math), 0 otherwise
+	 * @returns Set to 1 if Clutter was built without FPU (i.e fixed math), 0 otherwise
+	 */
+	const NO_FPU: number;
+
+	const Nacute: number;
+
+	const NairaSign: number;
+
+	const Ncaron: number;
+
+	const Ncedilla: number;
+
+	const New: number;
+
+	const NewSheqelSign: number;
+
+	const News: number;
+
+	const Next: number;
+
+	const Next_VMode: number;
+
+	const Next_Virtual_Screen: number;
+
+	const Ntilde: number;
+
+	const Num_Lock: number;
+
+	const O: number;
+
+	const OE: number;
+
+	const Oacute: number;
+
+	const Obarred: number;
+
+	const Obelowdot: number;
+
+	const Ocaron: number;
+
+	const Ocircumflex: number;
+
+	const Ocircumflexacute: number;
+
+	const Ocircumflexbelowdot: number;
+
+	const Ocircumflexgrave: number;
+
+	const Ocircumflexhook: number;
+
+	const Ocircumflextilde: number;
+
+	const Odiaeresis: number;
+
+	const Odoubleacute: number;
+
+	const OfficeHome: number;
+
+	const Ograve: number;
+
+	const Ohook: number;
+
+	const Ohorn: number;
+
+	const Ohornacute: number;
+
+	const Ohornbelowdot: number;
+
+	const Ohorngrave: number;
+
+	const Ohornhook: number;
+
+	const Ohorntilde: number;
+
+	const Omacron: number;
+
+	const Ooblique: number;
+
+	const Open: number;
+
+	const OpenURL: number;
+
+	const Option: number;
+
+	const Oslash: number;
+
+	const Otilde: number;
+
+	const Overlay1_Enable: number;
+
+	const Overlay2_Enable: number;
+
+	const P: number;
+
+	const PATH_RELATIVE: number;
+
+	/**
+	 * Priority of the redraws. This is chosen to be lower than the GTK+
+	 * redraw and resize priorities, because in application with both
+	 * GTK+ and Clutter it's more likely that the Clutter part will be
+	 * continually animating (and thus able to starve GTK+) than
+	 * vice-versa.
+	 * @returns Priority of the redraws. This is chosen to be lower than the GTK+
+	 * redraw and resize priorities, because in application with both
+	 * GTK+ and Clutter it's more likely that the Clutter part will be
+	 * continually animating (and thus able to starve GTK+) than
+	 * vice-versa.
+	 */
+	const PRIORITY_REDRAW: number;
+
+	const Pabovedot: number;
+
+	const Page_Down: number;
+
+	const Page_Up: number;
+
+	const Paste: number;
+
+	const Pause: number;
+
+	const PesetaSign: number;
+
+	const Phone: number;
+
+	const Pictures: number;
+
+	const Pointer_Accelerate: number;
+
+	const Pointer_Button1: number;
+
+	const Pointer_Button2: number;
+
+	const Pointer_Button3: number;
+
+	const Pointer_Button4: number;
+
+	const Pointer_Button5: number;
+
+	const Pointer_Button_Dflt: number;
+
+	const Pointer_DblClick1: number;
+
+	const Pointer_DblClick2: number;
+
+	const Pointer_DblClick3: number;
+
+	const Pointer_DblClick4: number;
+
+	const Pointer_DblClick5: number;
+
+	const Pointer_DblClick_Dflt: number;
+
+	const Pointer_DfltBtnNext: number;
+
+	const Pointer_DfltBtnPrev: number;
+
+	const Pointer_Down: number;
+
+	const Pointer_DownLeft: number;
+
+	const Pointer_DownRight: number;
+
+	const Pointer_Drag1: number;
+
+	const Pointer_Drag2: number;
+
+	const Pointer_Drag3: number;
+
+	const Pointer_Drag4: number;
+
+	const Pointer_Drag5: number;
+
+	const Pointer_Drag_Dflt: number;
+
+	const Pointer_EnableKeys: number;
+
+	const Pointer_Left: number;
+
+	const Pointer_Right: number;
+
+	const Pointer_Up: number;
+
+	const Pointer_UpLeft: number;
+
+	const Pointer_UpRight: number;
+
+	const PowerDown: number;
+
+	const PowerOff: number;
+
+	const Prev_VMode: number;
+
+	const Prev_Virtual_Screen: number;
+
+	const PreviousCandidate: number;
+
+	const Print: number;
+
+	const Prior: number;
+
+	const Q: number;
+
+	const R: number;
+
+	const R1: number;
+
+	const R10: number;
+
+	const R11: number;
+
+	const R12: number;
+
+	const R13: number;
+
+	const R14: number;
+
+	const R15: number;
+
+	const R2: number;
+
+	const R3: number;
+
+	const R4: number;
+
+	const R5: number;
+
+	const R6: number;
+
+	const R7: number;
+
+	const R8: number;
+
+	const R9: number;
+
+	const Racute: number;
+
+	const Rcaron: number;
+
+	const Rcedilla: number;
+
+	const Red: number;
+
+	const Redo: number;
+
+	const Refresh: number;
+
+	const Reload: number;
+
+	const RepeatKeys_Enable: number;
+
+	const Reply: number;
+
+	const Return: number;
+
+	const Right: number;
+
+	const RockerDown: number;
+
+	const RockerEnter: number;
+
+	const RockerUp: number;
+
+	const Romaji: number;
+
+	const RotateWindows: number;
+
+	const RotationKB: number;
+
+	const RotationPB: number;
+
+	const RupeeSign: number;
+
+	const S: number;
+
+	const SCHWA: number;
+
+	/**
+	 * The default GObject type for the Clutter stage.
+	 * @returns The default GObject type for the Clutter stage.
+	 */
+	const STAGE_TYPE: string;
+
+	const Sabovedot: number;
+
+	const Sacute: number;
+
+	const Save: number;
+
+	const Scaron: number;
+
+	const Scedilla: number;
+
+	const Scircumflex: number;
+
+	const ScreenSaver: number;
+
+	const ScrollClick: number;
+
+	const ScrollDown: number;
+
+	const ScrollUp: number;
+
+	const Scroll_Lock: number;
+
+	const Search: number;
+
+	const Select: number;
+
+	const SelectButton: number;
+
+	const Send: number;
+
+	const Serbian_DJE: number;
+
+	const Serbian_DZE: number;
+
+	const Serbian_JE: number;
+
+	const Serbian_LJE: number;
+
+	const Serbian_NJE: number;
+
+	const Serbian_TSHE: number;
+
+	const Serbian_dje: number;
+
+	const Serbian_dze: number;
+
+	const Serbian_je: number;
+
+	const Serbian_lje: number;
+
+	const Serbian_nje: number;
+
+	const Serbian_tshe: number;
+
+	const Shift_L: number;
+
+	const Shift_Lock: number;
+
+	const Shift_R: number;
+
+	const Shop: number;
+
+	const SingleCandidate: number;
+
+	const Sinh_a: number;
+
+	const Sinh_aa: number;
+
+	const Sinh_aa2: number;
+
+	const Sinh_ae: number;
+
+	const Sinh_ae2: number;
+
+	const Sinh_aee: number;
+
+	const Sinh_aee2: number;
+
+	const Sinh_ai: number;
+
+	const Sinh_ai2: number;
+
+	const Sinh_al: number;
+
+	const Sinh_au: number;
+
+	const Sinh_au2: number;
+
+	const Sinh_ba: number;
+
+	const Sinh_bha: number;
+
+	const Sinh_ca: number;
+
+	const Sinh_cha: number;
+
+	const Sinh_dda: number;
+
+	const Sinh_ddha: number;
+
+	const Sinh_dha: number;
+
+	const Sinh_dhha: number;
+
+	const Sinh_e: number;
+
+	const Sinh_e2: number;
+
+	const Sinh_ee: number;
+
+	const Sinh_ee2: number;
+
+	const Sinh_fa: number;
+
+	const Sinh_ga: number;
+
+	const Sinh_gha: number;
+
+	const Sinh_h2: number;
+
+	const Sinh_ha: number;
+
+	const Sinh_i: number;
+
+	const Sinh_i2: number;
+
+	const Sinh_ii: number;
+
+	const Sinh_ii2: number;
+
+	const Sinh_ja: number;
+
+	const Sinh_jha: number;
+
+	const Sinh_jnya: number;
+
+	const Sinh_ka: number;
+
+	const Sinh_kha: number;
+
+	const Sinh_kunddaliya: number;
+
+	const Sinh_la: number;
+
+	const Sinh_lla: number;
+
+	const Sinh_lu: number;
+
+	const Sinh_lu2: number;
+
+	const Sinh_luu: number;
+
+	const Sinh_luu2: number;
+
+	const Sinh_ma: number;
+
+	const Sinh_mba: number;
+
+	const Sinh_na: number;
+
+	const Sinh_ndda: number;
+
+	const Sinh_ndha: number;
+
+	const Sinh_ng: number;
+
+	const Sinh_ng2: number;
+
+	const Sinh_nga: number;
+
+	const Sinh_nja: number;
+
+	const Sinh_nna: number;
+
+	const Sinh_nya: number;
+
+	const Sinh_o: number;
+
+	const Sinh_o2: number;
+
+	const Sinh_oo: number;
+
+	const Sinh_oo2: number;
+
+	const Sinh_pa: number;
+
+	const Sinh_pha: number;
+
+	const Sinh_ra: number;
+
+	const Sinh_ri: number;
+
+	const Sinh_rii: number;
+
+	const Sinh_ru2: number;
+
+	const Sinh_ruu2: number;
+
+	const Sinh_sa: number;
+
+	const Sinh_sha: number;
+
+	const Sinh_ssha: number;
+
+	const Sinh_tha: number;
+
+	const Sinh_thha: number;
+
+	const Sinh_tta: number;
+
+	const Sinh_ttha: number;
+
+	const Sinh_u: number;
+
+	const Sinh_u2: number;
+
+	const Sinh_uu: number;
+
+	const Sinh_uu2: number;
+
+	const Sinh_va: number;
+
+	const Sinh_ya: number;
+
+	const Sleep: number;
+
+	const SlowKeys_Enable: number;
+
+	const Spell: number;
+
+	const SplitScreen: number;
+
+	const Standby: number;
+
+	const Start: number;
+
+	const StickyKeys_Enable: number;
+
+	const Stop: number;
+
+	const Subtitle: number;
+
+	const Super_L: number;
+
+	const Super_R: number;
+
+	const Support: number;
+
+	const Suspend: number;
+
+	const Switch_VT_1: number;
+
+	const Switch_VT_10: number;
+
+	const Switch_VT_11: number;
+
+	const Switch_VT_12: number;
+
+	const Switch_VT_2: number;
+
+	const Switch_VT_3: number;
+
+	const Switch_VT_4: number;
+
+	const Switch_VT_5: number;
+
+	const Switch_VT_6: number;
+
+	const Switch_VT_7: number;
+
+	const Switch_VT_8: number;
+
+	const Switch_VT_9: number;
+
+	const Sys_Req: number;
+
+	const T: number;
+
+	const THORN: number;
+
+	const Tab: number;
+
+	const Tabovedot: number;
+
+	const TaskPane: number;
+
+	const Tcaron: number;
+
+	const Tcedilla: number;
+
+	const Terminal: number;
+
+	const Terminate_Server: number;
+
+	const Thai_baht: number;
+
+	const Thai_bobaimai: number;
+
+	const Thai_chochan: number;
+
+	const Thai_chochang: number;
+
+	const Thai_choching: number;
+
+	const Thai_chochoe: number;
+
+	const Thai_dochada: number;
+
+	const Thai_dodek: number;
+
+	const Thai_fofa: number;
+
+	const Thai_fofan: number;
+
+	const Thai_hohip: number;
+
+	const Thai_honokhuk: number;
+
+	const Thai_khokhai: number;
+
+	const Thai_khokhon: number;
+
+	const Thai_khokhuat: number;
+
+	const Thai_khokhwai: number;
+
+	const Thai_khorakhang: number;
+
+	const Thai_kokai: number;
+
+	const Thai_lakkhangyao: number;
+
+	const Thai_lekchet: number;
+
+	const Thai_lekha: number;
+
+	const Thai_lekhok: number;
+
+	const Thai_lekkao: number;
+
+	const Thai_leknung: number;
+
+	const Thai_lekpaet: number;
+
+	const Thai_leksam: number;
+
+	const Thai_leksi: number;
+
+	const Thai_leksong: number;
+
+	const Thai_leksun: number;
+
+	const Thai_lochula: number;
+
+	const Thai_loling: number;
+
+	const Thai_lu: number;
+
+	const Thai_maichattawa: number;
+
+	const Thai_maiek: number;
+
+	const Thai_maihanakat: number;
+
+	const Thai_maihanakat_maitho: number;
+
+	const Thai_maitaikhu: number;
+
+	const Thai_maitho: number;
+
+	const Thai_maitri: number;
+
+	const Thai_maiyamok: number;
+
+	const Thai_moma: number;
+
+	const Thai_ngongu: number;
+
+	const Thai_nikhahit: number;
+
+	const Thai_nonen: number;
+
+	const Thai_nonu: number;
+
+	const Thai_oang: number;
+
+	const Thai_paiyannoi: number;
+
+	const Thai_phinthu: number;
+
+	const Thai_phophan: number;
+
+	const Thai_phophung: number;
+
+	const Thai_phosamphao: number;
+
+	const Thai_popla: number;
+
+	const Thai_rorua: number;
+
+	const Thai_ru: number;
+
+	const Thai_saraa: number;
+
+	const Thai_saraaa: number;
+
+	const Thai_saraae: number;
+
+	const Thai_saraaimaimalai: number;
+
+	const Thai_saraaimaimuan: number;
+
+	const Thai_saraam: number;
+
+	const Thai_sarae: number;
+
+	const Thai_sarai: number;
+
+	const Thai_saraii: number;
+
+	const Thai_sarao: number;
+
+	const Thai_sarau: number;
+
+	const Thai_saraue: number;
+
+	const Thai_sarauee: number;
+
+	const Thai_sarauu: number;
+
+	const Thai_sorusi: number;
+
+	const Thai_sosala: number;
+
+	const Thai_soso: number;
+
+	const Thai_sosua: number;
+
+	const Thai_thanthakhat: number;
+
+	const Thai_thonangmontho: number;
+
+	const Thai_thophuthao: number;
+
+	const Thai_thothahan: number;
+
+	const Thai_thothan: number;
+
+	const Thai_thothong: number;
+
+	const Thai_thothung: number;
+
+	const Thai_topatak: number;
+
+	const Thai_totao: number;
+
+	const Thai_wowaen: number;
+
+	const Thai_yoyak: number;
+
+	const Thai_yoying: number;
+
+	const Thorn: number;
+
+	const Time: number;
+
+	const ToDoList: number;
+
+	const Tools: number;
+
+	const TopMenu: number;
+
+	const TouchpadOff: number;
+
+	const TouchpadOn: number;
+
+	const TouchpadToggle: number;
+
+	const Touroku: number;
+
+	const Travel: number;
+
+	const Tslash: number;
+
+	const U: number;
+
+	const UWB: number;
+
+	const Uacute: number;
+
+	const Ubelowdot: number;
+
+	const Ubreve: number;
+
+	const Ucircumflex: number;
+
+	const Udiaeresis: number;
+
+	const Udoubleacute: number;
+
+	const Ugrave: number;
+
+	const Uhook: number;
+
+	const Uhorn: number;
+
+	const Uhornacute: number;
+
+	const Uhornbelowdot: number;
+
+	const Uhorngrave: number;
+
+	const Uhornhook: number;
+
+	const Uhorntilde: number;
+
+	const Ukrainian_GHE_WITH_UPTURN: number;
+
+	const Ukrainian_I: number;
+
+	const Ukrainian_IE: number;
+
+	const Ukrainian_YI: number;
+
+	const Ukrainian_ghe_with_upturn: number;
+
+	const Ukrainian_i: number;
+
+	const Ukrainian_ie: number;
+
+	const Ukrainian_yi: number;
+
+	const Ukranian_I: number;
+
+	const Ukranian_JE: number;
+
+	const Ukranian_YI: number;
+
+	const Ukranian_i: number;
+
+	const Ukranian_je: number;
+
+	const Ukranian_yi: number;
+
+	const Umacron: number;
+
+	const Undo: number;
+
+	const Ungrab: number;
+
+	const Uogonek: number;
+
+	const Up: number;
+
+	const Uring: number;
+
+	const User1KB: number;
+
+	const User2KB: number;
+
+	const UserPB: number;
+
+	const Utilde: number;
+
+	const V: number;
+
+	/**
+	 * The full version of the Clutter library, like 1.2.3
+	 * @returns The full version of the Clutter library, like 1.2.3
+	 */
+	const VERSION: number;
+
+	/**
+	 * Numerically encoded version of the Clutter library, like 0x010203
+	 * @returns Numerically encoded version of the Clutter library, like 0x010203
+	 */
+	const VERSION_HEX: number;
+
+	/**
+	 * The full version of the Clutter library, in string form (suited for
+	 * string concatenation)
+	 * @returns The full version of the Clutter library, in string form (suited for
+	 * string concatenation)
+	 */
+	const VERSION_S: string;
+
+	const VendorHome: number;
+
+	const Video: number;
+
+	const View: number;
+
+	const VoidSymbol: number;
+
+	const W: number;
+
+	const WINDOWING_EGL: string;
+
+	const WINDOWING_GDK: string;
+
+	const WINDOWING_GLX: string;
+
+	const WINDOWING_WAYLAND: string;
+
+	const WINDOWING_X11: string;
+
+	const WLAN: number;
+
+	const WWW: number;
+
+	const Wacute: number;
+
+	const WakeUp: number;
+
+	const Wcircumflex: number;
+
+	const Wdiaeresis: number;
+
+	const WebCam: number;
+
+	const Wgrave: number;
+
+	const WheelButton: number;
+
+	const WindowClear: number;
+
+	const WonSign: number;
+
+	const Word: number;
+
+	const X: number;
+
+	const Xabovedot: number;
+
+	const Xfer: number;
+
+	const Y: number;
+
+	const Yacute: number;
+
+	const Ybelowdot: number;
+
+	const Ycircumflex: number;
+
+	const Ydiaeresis: number;
+
+	const Yellow: number;
+
+	const Ygrave: number;
+
+	const Yhook: number;
+
+	const Ytilde: number;
+
+	const Z: number;
+
+	const Zabovedot: number;
+
+	const Zacute: number;
+
+	const Zcaron: number;
+
+	const Zen_Koho: number;
+
+	const Zenkaku: number;
+
+	const Zenkaku_Hankaku: number;
+
+	const ZoomIn: number;
+
+	const ZoomOut: number;
+
+	const Zstroke: number;
+
+	const a: number;
+
+	const aacute: number;
+
+	const abelowdot: number;
+
+	const abovedot: number;
+
+	const abreve: number;
+
+	const abreveacute: number;
+
+	const abrevebelowdot: number;
+
+	const abrevegrave: number;
+
+	const abrevehook: number;
+
+	const abrevetilde: number;
+
+	const acircumflex: number;
+
+	const acircumflexacute: number;
+
+	const acircumflexbelowdot: number;
+
+	const acircumflexgrave: number;
+
+	const acircumflexhook: number;
+
+	const acircumflextilde: number;
+
+	const acute: number;
+
+	const adiaeresis: number;
+
+	const ae: number;
+
+	const agrave: number;
+
+	const ahook: number;
+
+	const amacron: number;
+
+	const ampersand: number;
+
+	const aogonek: number;
+
+	const apostrophe: number;
+
+	const approxeq: number;
+
+	const approximate: number;
+
+	const aring: number;
+
+	const asciicircum: number;
+
+	const asciitilde: number;
+
+	const asterisk: number;
+
+	const at: number;
+
+	const atilde: number;
+
+	const b: number;
+
+	const babovedot: number;
+
+	const backslash: number;
+
+	const ballotcross: number;
+
+	const bar: number;
+
+	const because: number;
+
+	const blank: number;
+
+	const botintegral: number;
+
+	const botleftparens: number;
+
+	const botleftsqbracket: number;
+
+	const botleftsummation: number;
+
+	const botrightparens: number;
+
+	const botrightsqbracket: number;
+
+	const botrightsummation: number;
+
+	const bott: number;
+
+	const botvertsummationconnector: number;
+
+	const braceleft: number;
+
+	const braceright: number;
+
+	const bracketleft: number;
+
+	const bracketright: number;
+
+	const braille_blank: number;
+
+	const braille_dot_1: number;
+
+	const braille_dot_10: number;
+
+	const braille_dot_2: number;
+
+	const braille_dot_3: number;
+
+	const braille_dot_4: number;
+
+	const braille_dot_5: number;
+
+	const braille_dot_6: number;
+
+	const braille_dot_7: number;
+
+	const braille_dot_8: number;
+
+	const braille_dot_9: number;
+
+	const braille_dots_1: number;
+
+	const braille_dots_12: number;
+
+	const braille_dots_123: number;
+
+	const braille_dots_1234: number;
+
+	const braille_dots_12345: number;
+
+	const braille_dots_123456: number;
+
+	const braille_dots_1234567: number;
+
+	const braille_dots_12345678: number;
+
+	const braille_dots_1234568: number;
+
+	const braille_dots_123457: number;
+
+	const braille_dots_1234578: number;
+
+	const braille_dots_123458: number;
+
+	const braille_dots_12346: number;
+
+	const braille_dots_123467: number;
+
+	const braille_dots_1234678: number;
+
+	const braille_dots_123468: number;
+
+	const braille_dots_12347: number;
+
+	const braille_dots_123478: number;
+
+	const braille_dots_12348: number;
+
+	const braille_dots_1235: number;
+
+	const braille_dots_12356: number;
+
+	const braille_dots_123567: number;
+
+	const braille_dots_1235678: number;
+
+	const braille_dots_123568: number;
+
+	const braille_dots_12357: number;
+
+	const braille_dots_123578: number;
+
+	const braille_dots_12358: number;
+
+	const braille_dots_1236: number;
+
+	const braille_dots_12367: number;
+
+	const braille_dots_123678: number;
+
+	const braille_dots_12368: number;
+
+	const braille_dots_1237: number;
+
+	const braille_dots_12378: number;
+
+	const braille_dots_1238: number;
+
+	const braille_dots_124: number;
+
+	const braille_dots_1245: number;
+
+	const braille_dots_12456: number;
+
+	const braille_dots_124567: number;
+
+	const braille_dots_1245678: number;
+
+	const braille_dots_124568: number;
+
+	const braille_dots_12457: number;
+
+	const braille_dots_124578: number;
+
+	const braille_dots_12458: number;
+
+	const braille_dots_1246: number;
+
+	const braille_dots_12467: number;
+
+	const braille_dots_124678: number;
+
+	const braille_dots_12468: number;
+
+	const braille_dots_1247: number;
+
+	const braille_dots_12478: number;
+
+	const braille_dots_1248: number;
+
+	const braille_dots_125: number;
+
+	const braille_dots_1256: number;
+
+	const braille_dots_12567: number;
+
+	const braille_dots_125678: number;
+
+	const braille_dots_12568: number;
+
+	const braille_dots_1257: number;
+
+	const braille_dots_12578: number;
+
+	const braille_dots_1258: number;
+
+	const braille_dots_126: number;
+
+	const braille_dots_1267: number;
+
+	const braille_dots_12678: number;
+
+	const braille_dots_1268: number;
+
+	const braille_dots_127: number;
+
+	const braille_dots_1278: number;
+
+	const braille_dots_128: number;
+
+	const braille_dots_13: number;
+
+	const braille_dots_134: number;
+
+	const braille_dots_1345: number;
+
+	const braille_dots_13456: number;
+
+	const braille_dots_134567: number;
+
+	const braille_dots_1345678: number;
+
+	const braille_dots_134568: number;
+
+	const braille_dots_13457: number;
+
+	const braille_dots_134578: number;
+
+	const braille_dots_13458: number;
+
+	const braille_dots_1346: number;
+
+	const braille_dots_13467: number;
+
+	const braille_dots_134678: number;
+
+	const braille_dots_13468: number;
+
+	const braille_dots_1347: number;
+
+	const braille_dots_13478: number;
+
+	const braille_dots_1348: number;
+
+	const braille_dots_135: number;
+
+	const braille_dots_1356: number;
+
+	const braille_dots_13567: number;
+
+	const braille_dots_135678: number;
+
+	const braille_dots_13568: number;
+
+	const braille_dots_1357: number;
+
+	const braille_dots_13578: number;
+
+	const braille_dots_1358: number;
+
+	const braille_dots_136: number;
+
+	const braille_dots_1367: number;
+
+	const braille_dots_13678: number;
+
+	const braille_dots_1368: number;
+
+	const braille_dots_137: number;
+
+	const braille_dots_1378: number;
+
+	const braille_dots_138: number;
+
+	const braille_dots_14: number;
+
+	const braille_dots_145: number;
+
+	const braille_dots_1456: number;
+
+	const braille_dots_14567: number;
+
+	const braille_dots_145678: number;
+
+	const braille_dots_14568: number;
+
+	const braille_dots_1457: number;
+
+	const braille_dots_14578: number;
+
+	const braille_dots_1458: number;
+
+	const braille_dots_146: number;
+
+	const braille_dots_1467: number;
+
+	const braille_dots_14678: number;
+
+	const braille_dots_1468: number;
+
+	const braille_dots_147: number;
+
+	const braille_dots_1478: number;
+
+	const braille_dots_148: number;
+
+	const braille_dots_15: number;
+
+	const braille_dots_156: number;
+
+	const braille_dots_1567: number;
+
+	const braille_dots_15678: number;
+
+	const braille_dots_1568: number;
+
+	const braille_dots_157: number;
+
+	const braille_dots_1578: number;
+
+	const braille_dots_158: number;
+
+	const braille_dots_16: number;
+
+	const braille_dots_167: number;
+
+	const braille_dots_1678: number;
+
+	const braille_dots_168: number;
+
+	const braille_dots_17: number;
+
+	const braille_dots_178: number;
+
+	const braille_dots_18: number;
+
+	const braille_dots_2: number;
+
+	const braille_dots_23: number;
+
+	const braille_dots_234: number;
+
+	const braille_dots_2345: number;
+
+	const braille_dots_23456: number;
+
+	const braille_dots_234567: number;
+
+	const braille_dots_2345678: number;
+
+	const braille_dots_234568: number;
+
+	const braille_dots_23457: number;
+
+	const braille_dots_234578: number;
+
+	const braille_dots_23458: number;
+
+	const braille_dots_2346: number;
+
+	const braille_dots_23467: number;
+
+	const braille_dots_234678: number;
+
+	const braille_dots_23468: number;
+
+	const braille_dots_2347: number;
+
+	const braille_dots_23478: number;
+
+	const braille_dots_2348: number;
+
+	const braille_dots_235: number;
+
+	const braille_dots_2356: number;
+
+	const braille_dots_23567: number;
+
+	const braille_dots_235678: number;
+
+	const braille_dots_23568: number;
+
+	const braille_dots_2357: number;
+
+	const braille_dots_23578: number;
+
+	const braille_dots_2358: number;
+
+	const braille_dots_236: number;
+
+	const braille_dots_2367: number;
+
+	const braille_dots_23678: number;
+
+	const braille_dots_2368: number;
+
+	const braille_dots_237: number;
+
+	const braille_dots_2378: number;
+
+	const braille_dots_238: number;
+
+	const braille_dots_24: number;
+
+	const braille_dots_245: number;
+
+	const braille_dots_2456: number;
+
+	const braille_dots_24567: number;
+
+	const braille_dots_245678: number;
+
+	const braille_dots_24568: number;
+
+	const braille_dots_2457: number;
+
+	const braille_dots_24578: number;
+
+	const braille_dots_2458: number;
+
+	const braille_dots_246: number;
+
+	const braille_dots_2467: number;
+
+	const braille_dots_24678: number;
+
+	const braille_dots_2468: number;
+
+	const braille_dots_247: number;
+
+	const braille_dots_2478: number;
+
+	const braille_dots_248: number;
+
+	const braille_dots_25: number;
+
+	const braille_dots_256: number;
+
+	const braille_dots_2567: number;
+
+	const braille_dots_25678: number;
+
+	const braille_dots_2568: number;
+
+	const braille_dots_257: number;
+
+	const braille_dots_2578: number;
+
+	const braille_dots_258: number;
+
+	const braille_dots_26: number;
+
+	const braille_dots_267: number;
+
+	const braille_dots_2678: number;
+
+	const braille_dots_268: number;
+
+	const braille_dots_27: number;
+
+	const braille_dots_278: number;
+
+	const braille_dots_28: number;
+
+	const braille_dots_3: number;
+
+	const braille_dots_34: number;
+
+	const braille_dots_345: number;
+
+	const braille_dots_3456: number;
+
+	const braille_dots_34567: number;
+
+	const braille_dots_345678: number;
+
+	const braille_dots_34568: number;
+
+	const braille_dots_3457: number;
+
+	const braille_dots_34578: number;
+
+	const braille_dots_3458: number;
+
+	const braille_dots_346: number;
+
+	const braille_dots_3467: number;
+
+	const braille_dots_34678: number;
+
+	const braille_dots_3468: number;
+
+	const braille_dots_347: number;
+
+	const braille_dots_3478: number;
+
+	const braille_dots_348: number;
+
+	const braille_dots_35: number;
+
+	const braille_dots_356: number;
+
+	const braille_dots_3567: number;
+
+	const braille_dots_35678: number;
+
+	const braille_dots_3568: number;
+
+	const braille_dots_357: number;
+
+	const braille_dots_3578: number;
+
+	const braille_dots_358: number;
+
+	const braille_dots_36: number;
+
+	const braille_dots_367: number;
+
+	const braille_dots_3678: number;
+
+	const braille_dots_368: number;
+
+	const braille_dots_37: number;
+
+	const braille_dots_378: number;
+
+	const braille_dots_38: number;
+
+	const braille_dots_4: number;
+
+	const braille_dots_45: number;
+
+	const braille_dots_456: number;
+
+	const braille_dots_4567: number;
+
+	const braille_dots_45678: number;
+
+	const braille_dots_4568: number;
+
+	const braille_dots_457: number;
+
+	const braille_dots_4578: number;
+
+	const braille_dots_458: number;
+
+	const braille_dots_46: number;
+
+	const braille_dots_467: number;
+
+	const braille_dots_4678: number;
+
+	const braille_dots_468: number;
+
+	const braille_dots_47: number;
+
+	const braille_dots_478: number;
+
+	const braille_dots_48: number;
+
+	const braille_dots_5: number;
+
+	const braille_dots_56: number;
+
+	const braille_dots_567: number;
+
+	const braille_dots_5678: number;
+
+	const braille_dots_568: number;
+
+	const braille_dots_57: number;
+
+	const braille_dots_578: number;
+
+	const braille_dots_58: number;
+
+	const braille_dots_6: number;
+
+	const braille_dots_67: number;
+
+	const braille_dots_678: number;
+
+	const braille_dots_68: number;
+
+	const braille_dots_7: number;
+
+	const braille_dots_78: number;
+
+	const braille_dots_8: number;
+
+	const breve: number;
+
+	const brokenbar: number;
+
+	const c: number;
+
+	const c_h: number;
+
+	const cabovedot: number;
+
+	const cacute: number;
+
+	const careof: number;
+
+	const caret: number;
+
+	const caron: number;
+
+	const ccaron: number;
+
+	const ccedilla: number;
+
+	const ccircumflex: number;
+
+	const cedilla: number;
+
+	const cent: number;
+
+	const ch: number;
+
+	const checkerboard: number;
+
+	const checkmark: number;
+
+	const circle: number;
+
+	const club: number;
+
+	const colon: number;
+
+	const comma: number;
+
+	const containsas: number;
+
+	const copyright: number;
+
+	const cr: number;
+
+	const crossinglines: number;
+
+	const cuberoot: number;
+
+	const currency: number;
+
+	const cursor: number;
+
+	const d: number;
+
+	const dabovedot: number;
+
+	const dagger: number;
+
+	const dcaron: number;
+
+	const dead_A: number;
+
+	const dead_E: number;
+
+	const dead_I: number;
+
+	const dead_O: number;
+
+	const dead_U: number;
+
+	const dead_a: number;
+
+	const dead_abovecomma: number;
+
+	const dead_abovedot: number;
+
+	const dead_abovereversedcomma: number;
+
+	const dead_abovering: number;
+
+	const dead_aboveverticalline: number;
+
+	const dead_acute: number;
+
+	const dead_belowbreve: number;
+
+	const dead_belowcircumflex: number;
+
+	const dead_belowcomma: number;
+
+	const dead_belowdiaeresis: number;
+
+	const dead_belowdot: number;
+
+	const dead_belowmacron: number;
+
+	const dead_belowring: number;
+
+	const dead_belowtilde: number;
+
+	const dead_belowverticalline: number;
+
+	const dead_breve: number;
+
+	const dead_capital_schwa: number;
+
+	const dead_caron: number;
+
+	const dead_cedilla: number;
+
+	const dead_circumflex: number;
+
+	const dead_currency: number;
+
+	const dead_dasia: number;
+
+	const dead_diaeresis: number;
+
+	const dead_doubleacute: number;
+
+	const dead_doublegrave: number;
+
+	const dead_e: number;
+
+	const dead_grave: number;
+
+	const dead_greek: number;
+
+	const dead_hook: number;
+
+	const dead_horn: number;
+
+	const dead_i: number;
+
+	const dead_invertedbreve: number;
+
+	const dead_iota: number;
+
+	const dead_longsolidusoverlay: number;
+
+	const dead_lowline: number;
+
+	const dead_macron: number;
+
+	const dead_o: number;
+
+	const dead_ogonek: number;
+
+	const dead_perispomeni: number;
+
+	const dead_psili: number;
+
+	const dead_semivoiced_sound: number;
+
+	const dead_small_schwa: number;
+
+	const dead_stroke: number;
+
+	const dead_tilde: number;
+
+	const dead_u: number;
+
+	const dead_voiced_sound: number;
+
+	const decimalpoint: number;
+
+	const degree: number;
+
+	const diaeresis: number;
+
+	const diamond: number;
+
+	const digitspace: number;
+
+	const dintegral: number;
+
+	const division: number;
+
+	const dollar: number;
+
+	const doubbaselinedot: number;
+
+	const doubleacute: number;
+
+	const doubledagger: number;
+
+	const doublelowquotemark: number;
+
+	const downarrow: number;
+
+	const downcaret: number;
+
+	const downshoe: number;
+
+	const downstile: number;
+
+	const downtack: number;
+
+	const dstroke: number;
+
+	const e: number;
+
+	const eabovedot: number;
+
+	const eacute: number;
+
+	const ebelowdot: number;
+
+	const ecaron: number;
+
+	const ecircumflex: number;
+
+	const ecircumflexacute: number;
+
+	const ecircumflexbelowdot: number;
+
+	const ecircumflexgrave: number;
+
+	const ecircumflexhook: number;
+
+	const ecircumflextilde: number;
+
+	const ediaeresis: number;
+
+	const egrave: number;
+
+	const ehook: number;
+
+	const eightsubscript: number;
+
+	const eightsuperior: number;
+
+	const elementof: number;
+
+	const ellipsis: number;
+
+	const em3space: number;
+
+	const em4space: number;
+
+	const emacron: number;
+
+	const emdash: number;
+
+	const emfilledcircle: number;
+
+	const emfilledrect: number;
+
+	const emopencircle: number;
+
+	const emopenrectangle: number;
+
+	const emptyset: number;
+
+	const emspace: number;
+
+	const endash: number;
+
+	const enfilledcircbullet: number;
+
+	const enfilledsqbullet: number;
+
+	const eng: number;
+
+	const enopencircbullet: number;
+
+	const enopensquarebullet: number;
+
+	const enspace: number;
+
+	const eogonek: number;
+
+	const equal: number;
+
+	const eth: number;
+
+	const etilde: number;
+
+	const exclam: number;
+
+	const exclamdown: number;
+
+	const ezh: number;
+
+	const f: number;
+
+	const fabovedot: number;
+
+	const femalesymbol: number;
+
+	const ff: number;
+
+	const figdash: number;
+
+	const filledlefttribullet: number;
+
+	const filledrectbullet: number;
+
+	const filledrighttribullet: number;
+
+	const filledtribulletdown: number;
+
+	const filledtribulletup: number;
+
+	const fiveeighths: number;
+
+	const fivesixths: number;
+
+	const fivesubscript: number;
+
+	const fivesuperior: number;
+
+	const fourfifths: number;
+
+	const foursubscript: number;
+
+	const foursuperior: number;
+
+	const fourthroot: number;
+
+	// const function: number;
+
+	const g: number;
+
+	const gabovedot: number;
+
+	const gbreve: number;
+
+	const gcaron: number;
+
+	const gcedilla: number;
+
+	const gcircumflex: number;
+
+	const grave: number;
+
+	const greater: number;
+
+	const greaterthanequal: number;
+
+	const guillemotleft: number;
+
+	const guillemotright: number;
+
+	const h: number;
+
+	const hairspace: number;
+
+	const hcircumflex: number;
+
+	const heart: number;
+
+	const hebrew_aleph: number;
+
+	const hebrew_ayin: number;
+
+	const hebrew_bet: number;
+
+	const hebrew_beth: number;
+
+	const hebrew_chet: number;
+
+	const hebrew_dalet: number;
+
+	const hebrew_daleth: number;
+
+	const hebrew_doublelowline: number;
+
+	const hebrew_finalkaph: number;
+
+	const hebrew_finalmem: number;
+
+	const hebrew_finalnun: number;
+
+	const hebrew_finalpe: number;
+
+	const hebrew_finalzade: number;
+
+	const hebrew_finalzadi: number;
+
+	const hebrew_gimel: number;
+
+	const hebrew_gimmel: number;
+
+	const hebrew_he: number;
+
+	const hebrew_het: number;
+
+	const hebrew_kaph: number;
+
+	const hebrew_kuf: number;
+
+	const hebrew_lamed: number;
+
+	const hebrew_mem: number;
+
+	const hebrew_nun: number;
+
+	const hebrew_pe: number;
+
+	const hebrew_qoph: number;
+
+	const hebrew_resh: number;
+
+	const hebrew_samech: number;
+
+	const hebrew_samekh: number;
+
+	const hebrew_shin: number;
+
+	const hebrew_taf: number;
+
+	const hebrew_taw: number;
+
+	const hebrew_tet: number;
+
+	const hebrew_teth: number;
+
+	const hebrew_waw: number;
+
+	const hebrew_yod: number;
+
+	const hebrew_zade: number;
+
+	const hebrew_zadi: number;
+
+	const hebrew_zain: number;
+
+	const hebrew_zayin: number;
+
+	const hexagram: number;
+
+	const horizconnector: number;
+
+	const horizlinescan1: number;
+
+	const horizlinescan3: number;
+
+	const horizlinescan5: number;
+
+	const horizlinescan7: number;
+
+	const horizlinescan9: number;
+
+	const hstroke: number;
+
+	const ht: number;
+
+	const hyphen: number;
+
+	const i: number;
+
+	const iTouch: number;
+
+	const iacute: number;
+
+	const ibelowdot: number;
+
+	const ibreve: number;
+
+	const icircumflex: number;
+
+	const identical: number;
+
+	const idiaeresis: number;
+
+	const idotless: number;
+
+	const ifonlyif: number;
+
+	const igrave: number;
+
+	const ihook: number;
+
+	const imacron: number;
+
+	const implies: number;
+
+	const includedin: number;
+
+	const includes: number;
+
+	const infinity: number;
+
+	const integral: number;
+
+	const intersection: number;
+
+	const iogonek: number;
+
+	const itilde: number;
+
+	const j: number;
+
+	const jcircumflex: number;
+
+	const jot: number;
+
+	const k: number;
+
+	const kana_A: number;
+
+	const kana_CHI: number;
+
+	const kana_E: number;
+
+	const kana_FU: number;
+
+	const kana_HA: number;
+
+	const kana_HE: number;
+
+	const kana_HI: number;
+
+	const kana_HO: number;
+
+	const kana_HU: number;
+
+	const kana_I: number;
+
+	const kana_KA: number;
+
+	const kana_KE: number;
+
+	const kana_KI: number;
+
+	const kana_KO: number;
+
+	const kana_KU: number;
+
+	const kana_MA: number;
+
+	const kana_ME: number;
+
+	const kana_MI: number;
+
+	const kana_MO: number;
+
+	const kana_MU: number;
+
+	const kana_N: number;
+
+	const kana_NA: number;
+
+	const kana_NE: number;
+
+	const kana_NI: number;
+
+	const kana_NO: number;
+
+	const kana_NU: number;
+
+	const kana_O: number;
+
+	const kana_RA: number;
+
+	const kana_RE: number;
+
+	const kana_RI: number;
+
+	const kana_RO: number;
+
+	const kana_RU: number;
+
+	const kana_SA: number;
+
+	const kana_SE: number;
+
+	const kana_SHI: number;
+
+	const kana_SO: number;
+
+	const kana_SU: number;
+
+	const kana_TA: number;
+
+	const kana_TE: number;
+
+	const kana_TI: number;
+
+	const kana_TO: number;
+
+	const kana_TSU: number;
+
+	const kana_TU: number;
+
+	const kana_U: number;
+
+	const kana_WA: number;
+
+	const kana_WO: number;
+
+	const kana_YA: number;
+
+	const kana_YO: number;
+
+	const kana_YU: number;
+
+	const kana_a: number;
+
+	const kana_closingbracket: number;
+
+	const kana_comma: number;
+
+	const kana_conjunctive: number;
+
+	const kana_e: number;
+
+	const kana_fullstop: number;
+
+	const kana_i: number;
+
+	const kana_middledot: number;
+
+	const kana_o: number;
+
+	const kana_openingbracket: number;
+
+	const kana_switch: number;
+
+	const kana_tsu: number;
+
+	const kana_tu: number;
+
+	const kana_u: number;
+
+	const kana_ya: number;
+
+	const kana_yo: number;
+
+	const kana_yu: number;
+
+	const kappa: number;
+
+	const kcedilla: number;
+
+	const kra: number;
+
+	const l: number;
+
+	const lacute: number;
+
+	const latincross: number;
+
+	const lbelowdot: number;
+
+	const lcaron: number;
+
+	const lcedilla: number;
+
+	const leftanglebracket: number;
+
+	const leftarrow: number;
+
+	const leftcaret: number;
+
+	const leftdoublequotemark: number;
+
+	const leftmiddlecurlybrace: number;
+
+	const leftopentriangle: number;
+
+	const leftpointer: number;
+
+	const leftradical: number;
+
+	const leftshoe: number;
+
+	const leftsinglequotemark: number;
+
+	const leftt: number;
+
+	const lefttack: number;
+
+	const less: number;
+
+	const lessthanequal: number;
+
+	const lf: number;
+
+	const logicaland: number;
+
+	const logicalor: number;
+
+	const lowleftcorner: number;
+
+	const lowrightcorner: number;
+
+	const lstroke: number;
+
+	const m: number;
+
+	const mabovedot: number;
+
+	const macron: number;
+
+	const malesymbol: number;
+
+	const maltesecross: number;
+
+	const marker: number;
+
+	const masculine: number;
+
+	const minus: number;
+
+	const minutes: number;
+
+	const mu: number;
+
+	const multiply: number;
+
+	const musicalflat: number;
+
+	const musicalsharp: number;
+
+	const n: number;
+
+	const nabla: number;
+
+	const nacute: number;
+
+	const ncaron: number;
+
+	const ncedilla: number;
+
+	const ninesubscript: number;
+
+	const ninesuperior: number;
+
+	const nl: number;
+
+	const nobreakspace: number;
+
+	const notapproxeq: number;
+
+	const notelementof: number;
+
+	const notequal: number;
+
+	const notidentical: number;
+
+	const notsign: number;
+
+	const ntilde: number;
+
+	const numbersign: number;
+
+	const numerosign: number;
+
+	const o: number;
+
+	const oacute: number;
+
+	const obarred: number;
+
+	const obelowdot: number;
+
+	const ocaron: number;
+
+	const ocircumflex: number;
+
+	const ocircumflexacute: number;
+
+	const ocircumflexbelowdot: number;
+
+	const ocircumflexgrave: number;
+
+	const ocircumflexhook: number;
+
+	const ocircumflextilde: number;
+
+	const odiaeresis: number;
+
+	const odoubleacute: number;
+
+	const oe: number;
+
+	const ogonek: number;
+
+	const ograve: number;
+
+	const ohook: number;
+
+	const ohorn: number;
+
+	const ohornacute: number;
+
+	const ohornbelowdot: number;
+
+	const ohorngrave: number;
+
+	const ohornhook: number;
+
+	const ohorntilde: number;
+
+	const omacron: number;
+
+	const oneeighth: number;
+
+	const onefifth: number;
+
+	const onehalf: number;
+
+	const onequarter: number;
+
+	const onesixth: number;
+
+	const onesubscript: number;
+
+	const onesuperior: number;
+
+	const onethird: number;
+
+	const ooblique: number;
+
+	const openrectbullet: number;
+
+	const openstar: number;
+
+	const opentribulletdown: number;
+
+	const opentribulletup: number;
+
+	const ordfeminine: number;
+
+	const oslash: number;
+
+	const otilde: number;
+
+	const overbar: number;
+
+	const overline: number;
+
+	const p: number;
+
+	const pabovedot: number;
+
+	const paragraph: number;
+
+	const parenleft: number;
+
+	const parenright: number;
+
+	const partdifferential: number;
+
+	const partialderivative: number;
+
+	const percent: number;
+
+	const period: number;
+
+	const periodcentered: number;
+
+	const permille: number;
+
+	const phonographcopyright: number;
+
+	const plus: number;
+
+	const plusminus: number;
+
+	const prescription: number;
+
+	const prolongedsound: number;
+
+	const punctspace: number;
+
+	const q: number;
+
+	const quad: number;
+
+	const question: number;
+
+	const questiondown: number;
+
+	const quotedbl: number;
+
+	const quoteleft: number;
+
+	const quoteright: number;
+
+	const r: number;
+
+	const racute: number;
+
+	const radical: number;
+
+	const rcaron: number;
+
+	const rcedilla: number;
+
+	const registered: number;
+
+	const rightanglebracket: number;
+
+	const rightarrow: number;
+
+	const rightcaret: number;
+
+	const rightdoublequotemark: number;
+
+	const rightmiddlecurlybrace: number;
+
+	const rightmiddlesummation: number;
+
+	const rightopentriangle: number;
+
+	const rightpointer: number;
+
+	const rightshoe: number;
+
+	const rightsinglequotemark: number;
+
+	const rightt: number;
+
+	const righttack: number;
+
+	const s: number;
+
+	const sabovedot: number;
+
+	const sacute: number;
+
+	const scaron: number;
+
+	const scedilla: number;
+
+	const schwa: number;
+
+	const scircumflex: number;
+
+	const script_switch: number;
+
+	const seconds: number;
+
+	const section: number;
+
+	const semicolon: number;
+
+	const semivoicedsound: number;
+
+	const seveneighths: number;
+
+	const sevensubscript: number;
+
+	const sevensuperior: number;
+
+	const signaturemark: number;
+
+	const signifblank: number;
+
+	const similarequal: number;
+
+	const singlelowquotemark: number;
+
+	const sixsubscript: number;
+
+	const sixsuperior: number;
+
+	const slash: number;
+
+	const soliddiamond: number;
+
+	const space: number;
+
+	const squareroot: number;
+
+	const ssharp: number;
+
+	const sterling: number;
+
+	const stricteq: number;
+
+	const t: number;
+
+	const tabovedot: number;
+
+	const tcaron: number;
+
+	const tcedilla: number;
+
+	const telephone: number;
+
+	const telephonerecorder: number;
+
+	const therefore: number;
+
+	const thinspace: number;
+
+	const thorn: number;
+
+	const threeeighths: number;
+
+	const threefifths: number;
+
+	const threequarters: number;
+
+	const threesubscript: number;
+
+	const threesuperior: number;
+
+	const tintegral: number;
+
+	const topintegral: number;
+
+	const topleftparens: number;
+
+	const topleftradical: number;
+
+	const topleftsqbracket: number;
+
+	const topleftsummation: number;
+
+	const toprightparens: number;
+
+	const toprightsqbracket: number;
+
+	const toprightsummation: number;
+
+	const topt: number;
+
+	const topvertsummationconnector: number;
+
+	const trademark: number;
+
+	const trademarkincircle: number;
+
+	const tslash: number;
+
+	const twofifths: number;
+
+	const twosubscript: number;
+
+	const twosuperior: number;
+
+	const twothirds: number;
+
+	const u: number;
+
+	const uacute: number;
+
+	const ubelowdot: number;
+
+	const ubreve: number;
+
+	const ucircumflex: number;
+
+	const udiaeresis: number;
+
+	const udoubleacute: number;
+
+	const ugrave: number;
+
+	const uhook: number;
+
+	const uhorn: number;
+
+	const uhornacute: number;
+
+	const uhornbelowdot: number;
+
+	const uhorngrave: number;
+
+	const uhornhook: number;
+
+	const uhorntilde: number;
+
+	const umacron: number;
+
+	const underbar: number;
+
+	const underscore: number;
+
+	const union: number;
+
+	const uogonek: number;
+
+	const uparrow: number;
+
+	const upcaret: number;
+
+	const upleftcorner: number;
+
+	const uprightcorner: number;
+
+	const upshoe: number;
+
+	const upstile: number;
+
+	const uptack: number;
+
+	const uring: number;
+
+	const utilde: number;
+
+	const v: number;
+
+	const variation: number;
+
+	const vertbar: number;
+
+	const vertconnector: number;
+
+	const voicedsound: number;
+
+	const vt: number;
+
+	const w: number;
+
+	const wacute: number;
+
+	const wcircumflex: number;
+
+	const wdiaeresis: number;
+
+	const wgrave: number;
+
+	const x: number;
+
+	const xabovedot: number;
+
+	const y: number;
+
+	const yacute: number;
+
+	const ybelowdot: number;
+
+	const ycircumflex: number;
+
+	const ydiaeresis: number;
+
+	const yen: number;
+
+	const ygrave: number;
+
+	const yhook: number;
+
+	const ytilde: number;
+
+	const z: number;
+
+	const zabovedot: number;
+
+	const zacute: number;
+
+	const zcaron: number;
+
+	const zerosubscript: number;
+
+	const zerosuperior: number;
+
+	const zstroke: number;
 
 }

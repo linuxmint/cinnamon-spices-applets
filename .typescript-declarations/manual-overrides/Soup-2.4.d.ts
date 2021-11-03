@@ -3,7 +3,7 @@ declare namespace imports.gi.Soup {
         connect(signal: 'request-finished' | 'request-aborted' | 'request-read' | 'request-started', callback: (server: this, message: Message, client: ClientContext) => void): number;
     }
 
-    interface SeverOptions {
+    interface ServerOptions {
         port: number;
     }
 

@@ -315,7 +315,7 @@ declare namespace imports.gi.Meta {
 
 	type SelectionMixin = ISelection & GObject.Object;
 
-	interface Selection extends SelectionMixin {}
+	interface Selection extends SelectionMixin { }
 
 	export class Selection {
 		public static new(display: Display): Selection;
@@ -821,7 +821,7 @@ declare namespace imports.gi.Meta {
 
 	type WorkspaceMixin = IWorkspace & GObject.Object;
 
-	interface Workspace extends WorkspaceMixin {}
+	interface Workspace extends WorkspaceMixin { }
 
 	export class Workspace {
 		public readonly active: boolean;

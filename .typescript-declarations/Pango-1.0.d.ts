@@ -1,4 +1,3 @@
-/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Context} instead.
@@ -226,7 +225,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Context} instead.
 	 */
-	type ContextMixin = IContext & GObject.IObject;
+	type ContextMixin = IContext & GObject.Object;
 
 	/**
 	 * A `PangoContext` stores global information used to control the
@@ -314,7 +313,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Coverage} instead.
 	 */
-	type CoverageMixin = ICoverage & GObject.IObject;
+	type CoverageMixin = ICoverage & GObject.Object;
 
 	/**
 	 * A `PangoCoverage` structure is a map from Unicode characters
@@ -463,7 +462,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Font} instead.
 	 */
-	type FontMixin = IFont & GObject.IObject;
+	type FontMixin = IFont & GObject.Object;
 
 	/**
 	 * A `PangoFont` is used to represent a font in a
@@ -534,7 +533,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFace} instead.
 	 */
-	type FontFaceMixin = IFontFace & GObject.IObject;
+	type FontFaceMixin = IFontFace & GObject.Object;
 
 	/**
 	 * A `PangoFontFace` is used to represent a group of fonts with
@@ -611,7 +610,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontFamily} instead.
 	 */
-	type FontFamilyMixin = IFontFamily & GObject.IObject;
+	type FontFamilyMixin = IFontFamily & GObject.Object;
 
 	/**
 	 * A `PangoFontFamily` is used to represent a family of related
@@ -708,7 +707,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontMap} instead.
 	 */
-	type FontMapMixin = IFontMap & GObject.IObject;
+	type FontMapMixin = IFontMap & GObject.Object;
 
 	/**
 	 * A `PangoFontMap` represents the set of fonts available for a
@@ -732,10 +731,10 @@ declare namespace imports.gi.Pango {
 		 * each one.
 		 * 
 		 * If #func returns %TRUE, that stops the iteration.
-		 * @param _func Callback function
+		 * @param func Callback function
 		 * @param data data to pass to the callback function
 		 */
-		foreach(_func: FontsetForeachFunc, data: any | null): void;
+		foreach(func: FontsetForeachFunc, data: any | null): void;
 		/**
 		 * Returns the font in the fontset that contains the best glyph for a
 		 * Unicode character.
@@ -753,7 +752,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fontset} instead.
 	 */
-	type FontsetMixin = IFontset & GObject.IObject;
+	type FontsetMixin = IFontset & GObject.Object;
 
 	/**
 	 * A `PangoFontset` represents a set of `PangoFont` to use when rendering text.
@@ -788,7 +787,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontsetSimple} instead.
 	 */
-	type FontsetSimpleMixin = IFontsetSimple & IFontset;
+	type FontsetSimpleMixin = IFontsetSimple & Fontset;
 
 	/**
 	 * `PangoFontsetSimple` is a implementation of the abstract
@@ -1493,17 +1492,17 @@ declare namespace imports.gi.Pango {
 		 * chosen as described for [method#Pango.LayoutLine.x_to_index]. If either
 		 * the X or Y positions were not inside the layout, then the function returns
 		 * %FALSE; on an exact hit, it returns %TRUE.
-		 * @param _x the X offset (in Pango units) from the left edge of the layout
-		 * @param _y the Y offset (in Pango units) from the top edge of the layout
+		 * @param x the X offset (in Pango units) from the left edge of the layout
+		 * @param y the Y offset (in Pango units) from the top edge of the layout
 		 * @returns %TRUE if the coordinates were inside text, %FALSE otherwise
 		 */
-		xy_to_index(_x: number, _y: number): boolean;
+		xy_to_index(x: number, y: number): boolean;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
-	type LayoutMixin = ILayout & GObject.IObject;
+	type LayoutMixin = ILayout & GObject.Object;
 
 	/**
 	 * A `PangoLayout` structure represents an entire paragraph of text.
@@ -1583,20 +1582,20 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * This should be called while #renderer is already active.
 		 * Use [method#Pango.Renderer.activate] to activate a renderer.
-		 * @param _x X coordinate of underline, in Pango units in user coordinate system
-		 * @param _y Y coordinate of underline, in Pango units in user coordinate system
+		 * @param x X coordinate of underline, in Pango units in user coordinate system
+		 * @param y Y coordinate of underline, in Pango units in user coordinate system
 		 * @param width width of underline, in Pango units in user coordinate system
 		 * @param height height of underline, in Pango units in user coordinate system
 		 */
-		draw_error_underline(_x: number, _y: number, width: number, height: number): void;
+		draw_error_underline(x: number, y: number, width: number, height: number): void;
 		/**
 		 * Draws a single glyph with coordinates in device space.
 		 * @param font a `PangoFont`
 		 * @param glyph the glyph index of a single glyph
-		 * @param _x X coordinate of left edge of baseline of glyph
-		 * @param _y Y coordinate of left edge of baseline of glyph
+		 * @param x X coordinate of left edge of baseline of glyph
+		 * @param y Y coordinate of left edge of baseline of glyph
 		 */
-		draw_glyph(font: Font, glyph: Glyph, _x: number, _y: number): void;
+		draw_glyph(font: Font, glyph: Glyph, x: number, y: number): void;
 		/**
 		 * Draws the glyphs in #glyph_item with the specified `PangoRenderer`,
 		 * embedding the text associated with the glyphs in the output if the
@@ -1618,34 +1617,34 @@ declare namespace imports.gi.Pango {
 		 * [method#Pango.Renderer.draw_glyphs].
 		 * @param text the UTF-8 text that #glyph_item refers to
 		 * @param glyph_item a `PangoGlyphItem`
-		 * @param _x X position of left edge of baseline, in user space coordinates
+		 * @param x X position of left edge of baseline, in user space coordinates
 		 *   in Pango units
-		 * @param _y Y position of left edge of baseline, in user space coordinates
+		 * @param y Y position of left edge of baseline, in user space coordinates
 		 *   in Pango units
 		 */
-		draw_glyph_item(text: string | null, glyph_item: GlyphItem, _x: number, _y: number): void;
+		draw_glyph_item(text: string | null, glyph_item: GlyphItem, x: number, y: number): void;
 		/**
 		 * Draws the glyphs in #glyphs with the specified `PangoRenderer`.
 		 * @param font a `PangoFont`
 		 * @param glyphs a `PangoGlyphString`
-		 * @param _x X position of left edge of baseline, in user space coordinates
+		 * @param x X position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
-		 * @param _y Y position of left edge of baseline, in user space coordinates
+		 * @param y Y position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
 		 */
-		draw_glyphs(font: Font, glyphs: GlyphString, _x: number, _y: number): void;
+		draw_glyphs(font: Font, glyphs: GlyphString, x: number, y: number): void;
 		/**
 		 * Draws #layout with the specified `PangoRenderer`.
 		 * 
 		 * This is equivalent to drawing the lines of the layout, at their
 		 * respective positions relative to #x, #y.
 		 * @param layout a `PangoLayout`
-		 * @param _x X position of left edge of baseline, in user space coordinates
+		 * @param x X position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
-		 * @param _y Y position of left edge of baseline, in user space coordinates
+		 * @param y Y position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
 		 */
-		draw_layout(layout: Layout, _x: number, _y: number): void;
+		draw_layout(layout: Layout, x: number, y: number): void;
 		/**
 		 * Draws #line with the specified `PangoRenderer`.
 		 * 
@@ -1653,12 +1652,12 @@ declare namespace imports.gi.Pango {
 		 * shapes, backgrounds and lines that are specified by the attributes
 		 * of those items.
 		 * @param line a `PangoLayoutLine`
-		 * @param _x X position of left edge of baseline, in user space coordinates
+		 * @param x X position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
-		 * @param _y Y position of left edge of baseline, in user space coordinates
+		 * @param y Y position of left edge of baseline, in user space coordinates
 		 *   in Pango units.
 		 */
-		draw_layout_line(line: LayoutLine, _x: number, _y: number): void;
+		draw_layout_line(line: LayoutLine, x: number, y: number): void;
 		/**
 		 * Draws an axis-aligned rectangle in user space coordinates with the
 		 * specified `PangoRenderer`.
@@ -1666,14 +1665,14 @@ declare namespace imports.gi.Pango {
 		 * This should be called while #renderer is already active.
 		 * Use [method#Pango.Renderer.activate] to activate a renderer.
 		 * @param part type of object this rectangle is part of
-		 * @param _x X position at which to draw rectangle, in user space coordinates
+		 * @param x X position at which to draw rectangle, in user space coordinates
 		 *   in Pango units
-		 * @param _y Y position at which to draw rectangle, in user space coordinates
+		 * @param y Y position at which to draw rectangle, in user space coordinates
 		 *   in Pango units
 		 * @param width width of rectangle in Pango units
 		 * @param height height of rectangle in Pango units
 		 */
-		draw_rectangle(part: RenderPart, _x: number, _y: number, width: number, height: number): void;
+		draw_rectangle(part: RenderPart, x: number, y: number, width: number, height: number): void;
 		/**
 		 * Draws a trapezoid with the parallel sides aligned with the X axis
 		 * using the given `PangoRenderer`; coordinates are in device space.
@@ -1785,7 +1784,7 @@ declare namespace imports.gi.Pango {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Renderer} instead.
 	 */
-	type RendererMixin = IRenderer & GObject.IObject;
+	type RendererMixin = IRenderer & GObject.Object;
 
 	/**
 	 * `PangoRenderer` is a base class for objects that can render text
@@ -1980,12 +1979,12 @@ declare namespace imports.gi.Pango {
 		 * When multiple attributes of the same type overlap,
 		 * the attribute whose range starts closest to the
 		 * current location is used.
-		 * @param _type the type of attribute to find
+		 * @param type the type of attribute to find
 		 * @returns the current
 		 *   attribute of the given type, or %NULL if no attribute
 		 *   of that type applies to the current location.
 		 */
-		public get(_type: AttrType): Attribute | null;
+		public get(type: AttrType): Attribute | null;
 		/**
 		 * Gets a list of all attributes at the current position of the
 		 * iterator.
@@ -2117,14 +2116,14 @@ declare namespace imports.gi.Pango {
 		 * Given a `PangoAttrList` and callback function, removes
 		 * any elements of #list for which #func returns %TRUE and
 		 * inserts them into a new list.
-		 * @param _func callback function;
+		 * @param func callback function;
 		 *   returns %TRUE if an attribute should be filtered out
 		 * @param data Data to be passed to #func
 		 * @returns the new
 		 *   `PangoAttrList` or %NULL if no attributes of the
 		 *   given types were found
 		 */
-		public filter(_func: AttrFilterFunc, data: any | null): AttrList | null;
+		public filter(func: AttrFilterFunc, data: any | null): AttrList | null;
 		/**
 		 * Gets a list of all attributes in #list.
 		 * @returns 
@@ -2811,11 +2810,11 @@ declare namespace imports.gi.Pango {
 	interface FontFaceClass {}
 	class FontFaceClass {
 		public constructor();
-		public get_face_name: {(_face: FontFace): string;};
-		public describe: {(_face: FontFace): FontDescription;};
-		public list_sizes: {(_face: FontFace): [ number[] | null, number ];};
-		public is_synthesized: {(_face: FontFace): boolean;};
-		public get_family: {(_face: FontFace): FontFamily;};
+		public get_face_name: {(face: FontFace): string;};
+		public describe: {(face: FontFace): FontDescription;};
+		public list_sizes: {(face: FontFace): [ number[] | null, number ];};
+		public is_synthesized: {(face: FontFace): boolean;};
+		public get_family: {(face: FontFace): FontFamily;};
 		public _pango_reserved3: {(): void;};
 		public _pango_reserved4: {(): void;};
 	}
@@ -2973,7 +2972,7 @@ declare namespace imports.gi.Pango {
 		public get_font: {(fontset: Fontset, wc: number): Font;};
 		public get_metrics: {(fontset: Fontset): FontMetrics;};
 		public get_language: {(fontset: Fontset): Language;};
-		public foreach: {(fontset: Fontset, _func: FontsetForeachFunc, data: any | null): void;};
+		public foreach: {(fontset: Fontset, func: FontsetForeachFunc, data: any | null): void;};
 		public _pango_reserved1: {(): void;};
 		public _pango_reserved2: {(): void;};
 		public _pango_reserved3: {(): void;};
@@ -3289,7 +3288,7 @@ declare namespace imports.gi.Pango {
 		 * (the origin of their coordinate system is at the start of the range,
 		 * not at the start of the entire glyph string).
 		 * @param start start index
-		 * @param _end end index (the range is the set of bytes with
+		 * @param end end index (the range is the set of bytes with
 		 *   indices such that start <= index < end)
 		 * @param font a `PangoFont`
 		 * @param ink_rect rectangle used to
@@ -3297,7 +3296,7 @@ declare namespace imports.gi.Pango {
 		 * @param logical_rect rectangle used to
 		 *   store the logical extents of the glyph string range
 		 */
-		public extents_range(start: number, _end: number, font: Font, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
+		public extents_range(start: number, end: number, font: Font, ink_rect: Rectangle | null, logical_rect: Rectangle | null): void;
 		/**
 		 * Free a glyph string and associated storage.
 		 */
@@ -4134,9 +4133,9 @@ declare namespace imports.gi.Pango {
 		 * transformation given by first translating by (#tx, #ty)
 		 * then applying the original transformation.
 		 * @param tx amount to translate in the X direction
-		 * @param _ty amount to translate in the Y direction
+		 * @param ty amount to translate in the Y direction
 		 */
-		public translate(tx: number, _ty: number): void;
+		public translate(tx: number, ty: number): void;
 	}
 
 	/**
@@ -4188,17 +4187,17 @@ declare namespace imports.gi.Pango {
 	interface RendererClass {}
 	class RendererClass {
 		public constructor();
-		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, _x: number, _y: number): void;};
-		public draw_rectangle: {(renderer: Renderer, part: RenderPart, _x: number, _y: number, width: number, height: number): void;};
-		public draw_error_underline: {(renderer: Renderer, _x: number, _y: number, width: number, height: number): void;};
-		public draw_shape: {(renderer: Renderer, attr: AttrShape, _x: number, _y: number): void;};
+		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, x: number, y: number): void;};
+		public draw_rectangle: {(renderer: Renderer, part: RenderPart, x: number, y: number, width: number, height: number): void;};
+		public draw_error_underline: {(renderer: Renderer, x: number, y: number, width: number, height: number): void;};
+		public draw_shape: {(renderer: Renderer, attr: AttrShape, x: number, y: number): void;};
 		public draw_trapezoid: {(renderer: Renderer, part: RenderPart, y1_: number, x11: number, x21: number, y2: number, x12: number, x22: number): void;};
-		public draw_glyph: {(renderer: Renderer, font: Font, glyph: Glyph, _x: number, _y: number): void;};
+		public draw_glyph: {(renderer: Renderer, font: Font, glyph: Glyph, x: number, y: number): void;};
 		public part_changed: {(renderer: Renderer, part: RenderPart): void;};
 		public begin: {(renderer: Renderer): void;};
 		public end: {(renderer: Renderer): void;};
 		public prepare_run: {(renderer: Renderer, run: LayoutRun): void;};
-		public draw_glyph_item: {(renderer: Renderer, text: string | null, glyph_item: GlyphItem, _x: number, _y: number): void;};
+		public draw_glyph_item: {(renderer: Renderer, text: string | null, glyph_item: GlyphItem, x: number, y: number): void;};
 		public _pango_reserved2: {(): void;};
 		public _pango_reserved3: {(): void;};
 		public _pango_reserved4: {(): void;};
@@ -6006,12 +6005,12 @@ declare namespace imports.gi.Pango {
 	 * The returned value is an interned string (see
 	 * g_intern_string() for what that means) that should
 	 * not be modified or freed.
-	 * @param _type an attribute type ID to fetch the name for
+	 * @param type an attribute type ID to fetch the name for
 	 * @returns the type ID name (which
 	 *   may be %NULL), or %NULL if #type is a built-in Pango
 	 *   attribute type or invalid.
 	 */
-	function attr_type_get_name(_type: AttrType): string | null;
+	function attr_type_get_name(type: AttrType): string | null;
 
 	/**
 	 * Allocate a new attribute type ID.
@@ -6069,11 +6068,11 @@ declare namespace imports.gi.Pango {
 	 * The bidirectional type is specified in the Unicode Character Database.
 	 * 
 	 * A simplified version of this function is available as [func#unichar_direction].
-	 * @param _ch a Unicode character
+	 * @param ch a Unicode character
 	 * @returns the bidirectional character type, as used in the
 	 * Unicode bidirectional algorithm.
 	 */
-	function bidi_type_for_unichar(_ch: string): BidiType;
+	function bidi_type_for_unichar(ch: string): BidiType;
 
 	/**
 	 * Determines possible line, word, and character breaks
@@ -6207,10 +6206,10 @@ declare namespace imports.gi.Pango {
 	 * A typical example:
 	 * 
 	 *     "Cantarell Italic Light 15 \#wght=200"
-	 * @param _str string representation of a font description.
+	 * @param str string representation of a font description.
 	 * @returns a new `PangoFontDescription`.
 	 */
-	function font_description_from_string(_str: string): FontDescription;
+	function font_description_from_string(str: string): FontDescription;
 
 	/**
 	 * Computes a `PangoLogAttr` for each character in #text.
@@ -6236,12 +6235,12 @@ declare namespace imports.gi.Pango {
 	 * Returns the mirrored character of a Unicode character.
 	 * 
 	 * Mirror characters are determined by the Unicode mirrored property.
-	 * @param _ch a Unicode character
+	 * @param ch a Unicode character
 	 * @param mirrored_ch location to store the mirrored character
 	 * @returns %TRUE if #ch has a mirrored character and #mirrored_ch is
 	 * filled in, %FALSE otherwise
 	 */
-	function get_mirror_char(_ch: string, mirrored_ch: string): boolean;
+	function get_mirror_char(ch: string, mirrored_ch: string): boolean;
 
 	/**
 	 * Finds the gravity that best matches the rotation component
@@ -6310,10 +6309,10 @@ declare namespace imports.gi.Pango {
 	 * This includes all Unicode characters with "ZERO WIDTH" in their name,
 	 * as well as *bidi* formatting characters, and a few other ones.  This is
 	 * totally different from g_unichar_iszerowidth() and is at best misnamed.
-	 * @param _ch a Unicode character
+	 * @param ch a Unicode character
 	 * @returns %TRUE if #ch is a zero-width character, %FALSE otherwise
 	 */
-	function is_zero_width(_ch: string): boolean;
+	function is_zero_width(ch: string): boolean;
 
 	/**
 	 * Breaks a piece of text into segments with consistent directional
@@ -6501,12 +6500,12 @@ declare namespace imports.gi.Pango {
 	 * 
 	 * If failed and #possible_values is not %NULL, returned string should
 	 * be freed using g_free().
-	 * @param _type enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE
-	 * @param _str string to parse
+	 * @param type enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE
+	 * @param str string to parse
 	 * @param warn if %TRUE, issue a g_warning() on bad input
 	 * @returns %TRUE if #str was successfully parsed
 	 */
-	function parse_enum(_type: GObject.Type, _str: string | null, warn: boolean): boolean;
+	function parse_enum(type: GObject.Type, str: string | null, warn: boolean): boolean;
 
 	/**
 	 * Parses marked-up text to create a plain-text string and an attribute list.
@@ -6541,11 +6540,11 @@ declare namespace imports.gi.Pango {
 	 * "semi_condensed", "normal", "semi_expanded", "expanded",
 	 * "extra_expanded" and "ultra_expanded". Case variations are
 	 * ignored and the '_' characters may be omitted.
-	 * @param _str a string to parse.
+	 * @param str a string to parse.
 	 * @param warn if %TRUE, issue a g_warning() on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 */
-	function parse_stretch(_str: string, warn: boolean): boolean;
+	function parse_stretch(str: string, warn: boolean): boolean;
 
 	/**
 	 * Parses a font style.
@@ -6553,22 +6552,22 @@ declare namespace imports.gi.Pango {
 	 * The allowed values are "normal", "italic" and "oblique", case
 	 * variations being
 	 * ignored.
-	 * @param _str a string to parse.
+	 * @param str a string to parse.
 	 * @param warn if %TRUE, issue a g_warning() on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 */
-	function parse_style(_str: string, warn: boolean): boolean;
+	function parse_style(str: string, warn: boolean): boolean;
 
 	/**
 	 * Parses a font variant.
 	 * 
 	 * The allowed values are "normal" and "smallcaps" or "small_caps",
 	 * case variations being ignored.
-	 * @param _str a string to parse.
+	 * @param str a string to parse.
 	 * @param warn if %TRUE, issue a g_warning() on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 */
-	function parse_variant(_str: string, warn: boolean): boolean;
+	function parse_variant(str: string, warn: boolean): boolean;
 
 	/**
 	 * Parses a font weight.
@@ -6576,11 +6575,11 @@ declare namespace imports.gi.Pango {
 	 * The allowed values are "heavy",
 	 * "ultrabold", "bold", "normal", "light", "ultraleight"
 	 * and integers. Case variations are ignored.
-	 * @param _str a string to parse.
+	 * @param str a string to parse.
 	 * @param warn if %TRUE, issue a g_warning() on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 */
-	function parse_weight(_str: string, warn: boolean): boolean;
+	function parse_weight(str: string, warn: boolean): boolean;
 
 	/**
 	 * Quantizes the thickness and position of a line to whole device pixels.
@@ -6604,12 +6603,12 @@ declare namespace imports.gi.Pango {
 	 * any other character is ignored and written into the output buffer
 	 * unmodified.
 	 * @param stream a stdio stream
-	 * @param _str `GString` buffer into which to write the result
+	 * @param str `GString` buffer into which to write the result
 	 * @returns 0 if the stream was already at an %EOF character,
 	 *   otherwise the number of lines read (this is useful for maintaining
 	 *   a line number counter which doesn't combine lines with '\')
 	 */
-	function read_line(stream: any | null, _str: GLib.String): number;
+	function read_line(stream: any | null, str: GLib.String): number;
 
 	/**
 	 * Reorder items from logical order to visual order.
@@ -6667,10 +6666,10 @@ declare namespace imports.gi.Pango {
 	 * as `PangoScript`, as of Pango 1.18, this function simply returns
 	 * the return value of g_unichar_get_script(). Callers must be
 	 * prepared to handle unknown values.
-	 * @param _ch a Unicode character
+	 * @param ch a Unicode character
 	 * @returns the `PangoScript` for the character.
 	 */
-	function script_for_unichar(_ch: string): Script;
+	function script_for_unichar(ch: string): Script;
 
 	/**
 	 * Finds a language tag that is reasonably representative of #script.
@@ -6794,11 +6793,11 @@ declare namespace imports.gi.Pango {
 	/**
 	 * Splits a %G_SEARCHPATH_SEPARATOR-separated list of files, stripping
 	 * white space and substituting ~/ with $HOME/.
-	 * @param _str a %G_SEARCHPATH_SEPARATOR separated list of filenames
+	 * @param str a %G_SEARCHPATH_SEPARATOR separated list of filenames
 	 * @returns a list of
 	 *   strings to be freed with g_strfreev()
 	 */
-	function split_file_list(_str: string): string[];
+	function split_file_list(str: string): string[];
 
 	/**
 	 * Apply language-specific tailoring to the breaks
@@ -6822,10 +6821,10 @@ declare namespace imports.gi.Pango {
 
 	/**
 	 * Trims leading and trailing whitespace from a string.
-	 * @param _str a string
+	 * @param str a string
 	 * @returns A newly-allocated string that must be freed with g_free()
 	 */
-	function trim_string(_str: string): string;
+	function trim_string(str: string): string;
 
 	/**
 	 * Determines the inherent direction of a character.
@@ -6837,29 +6836,29 @@ declare namespace imports.gi.Pango {
 	 * letters, right-to-left letters, and everything else. If full Unicode
 	 * bidirectional type of a character is needed,
 	 * [func#Pango.BidiType.for_unichar] can be used instead.
-	 * @param _ch a Unicode character
+	 * @param ch a Unicode character
 	 * @returns the direction of the character.
 	 */
-	function unichar_direction(_ch: string): Direction;
+	function unichar_direction(ch: string): Direction;
 
 	/**
 	 * Converts a floating-point number to Pango units.
 	 * 
 	 * The conversion is done by multiplying #d by %PANGO_SCALE and
 	 * rounding the result to nearest integer.
-	 * @param _d double floating-point value
+	 * @param d double floating-point value
 	 * @returns the value in Pango units.
 	 */
-	function units_from_double(_d: number): number;
+	function units_from_double(d: number): number;
 
 	/**
 	 * Converts a number in Pango units to floating-point.
 	 * 
 	 * The conversion is done by dividing #i by %PANGO_SCALE.
-	 * @param _i value in Pango units
+	 * @param i value in Pango units
 	 * @returns the double value.
 	 */
-	function units_to_double(_i: number): number;
+	function units_to_double(i: number): number;
 
 	/**
 	 * Returns the encoded version of Pango available at run-time.
@@ -6909,5 +6908,129 @@ declare namespace imports.gi.Pango {
 	 *   be modified or freed.
 	 */
 	function version_string(): string;
+
+	/**
+	 * Whether the segment should be shifted to center around the baseline.
+	 * 
+	 * This is mainly used in vertical writing directions.
+	 * @returns Whether the segment should be shifted to center around the baseline.
+	 * 
+	 * This is mainly used in vertical writing directions.
+	 */
+	const ANALYSIS_FLAG_CENTERED_BASELINE: number;
+
+	/**
+	 * Whether this run holds ellipsized text.
+	 * @returns Whether this run holds ellipsized text.
+	 */
+	const ANALYSIS_FLAG_IS_ELLIPSIS: number;
+
+	/**
+	 * Whether to add a hyphen at the end of the run during shaping.
+	 * @returns Whether to add a hyphen at the end of the run during shaping.
+	 */
+	const ANALYSIS_FLAG_NEED_HYPHEN: number;
+
+	/**
+	 * Value for #start_index in `PangoAttribute` that indicates
+	 * the beginning of the text.
+	 * @returns Value for #start_index in `PangoAttribute` that indicates
+	 * the beginning of the text.
+	 */
+	const ATTR_INDEX_FROM_TEXT_BEGINNING: number;
+
+	/**
+	 * Value for #end_index in `PangoAttribute` that indicates
+	 * the end of the text.
+	 * @returns Value for #end_index in `PangoAttribute` that indicates
+	 * the end of the text.
+	 */
+	const ATTR_INDEX_TO_TEXT_END: number;
+
+	/**
+	 * A `PangoGlyph` value that indicates a zero-width empty glpyh.
+	 * 
+	 * This is useful for example in shaper modules, to use as the glyph for
+	 * various zero-width Unicode characters (those passing [func#is_zero_width]).
+	 * @returns A `PangoGlyph` value that indicates a zero-width empty glpyh.
+	 * 
+	 * This is useful for example in shaper modules, to use as the glyph for
+	 * various zero-width Unicode characters (those passing [func#is_zero_width]).
+	 */
+	const GLYPH_EMPTY: Glyph;
+
+	/**
+	 * A `PangoGlyph` value for invalid input.
+	 * 
+	 * `PangoLayout` produces one such glyph per invalid input UTF-8 byte and such
+	 * a glyph is rendered as a crossed box.
+	 * 
+	 * Note that this value is defined such that it has the %PANGO_GLYPH_UNKNOWN_FLAG
+	 * set.
+	 * @returns A `PangoGlyph` value for invalid input.
+	 * 
+	 * `PangoLayout` produces one such glyph per invalid input UTF-8 byte and such
+	 * a glyph is rendered as a crossed box.
+	 * 
+	 * Note that this value is defined such that it has the %PANGO_GLYPH_UNKNOWN_FLAG
+	 * set.
+	 */
+	const GLYPH_INVALID_INPUT: Glyph;
+
+	/**
+	 * Flag used in `PangoGlyph` to turn a `gunichar` value of a valid Unicode
+	 * character into an unknown-character glyph for that `gunichar`.
+	 * 
+	 * Such unknown-character glyphs may be rendered as a 'hex box'.
+	 * @returns Flag used in `PangoGlyph` to turn a `gunichar` value of a valid Unicode
+	 * character into an unknown-character glyph for that `gunichar`.
+	 * 
+	 * Such unknown-character glyphs may be rendered as a 'hex box'.
+	 */
+	const GLYPH_UNKNOWN_FLAG: Glyph;
+
+	/**
+	 * The scale between dimensions used for Pango distances and device units.
+	 * 
+	 * The definition of device units is dependent on the output device; it will
+	 * typically be pixels for a screen, and points for a printer. %PANGO_SCALE is
+	 * currently 1024, but this may be changed in the future.
+	 * 
+	 * When setting font sizes, device units are always considered to be
+	 * points (as in "12 point font"), rather than pixels.
+	 * @returns The scale between dimensions used for Pango distances and device units.
+	 * 
+	 * The definition of device units is dependent on the output device; it will
+	 * typically be pixels for a screen, and points for a printer. %PANGO_SCALE is
+	 * currently 1024, but this may be changed in the future.
+	 * 
+	 * When setting font sizes, device units are always considered to be
+	 * points (as in "12 point font"), rather than pixels.
+	 */
+	const SCALE: number;
+
+	/**
+	 * The major component of the version of Pango available at compile-time.
+	 * @returns The major component of the version of Pango available at compile-time.
+	 */
+	const VERSION_MAJOR: number;
+
+	/**
+	 * The micro component of the version of Pango available at compile-time.
+	 * @returns The micro component of the version of Pango available at compile-time.
+	 */
+	const VERSION_MICRO: number;
+
+	/**
+	 * The minor component of the version of Pango available at compile-time.
+	 * @returns The minor component of the version of Pango available at compile-time.
+	 */
+	const VERSION_MINOR: number;
+
+	/**
+	 * A string literal containing the version of Pango available at compile-time.
+	 * @returns A string literal containing the version of Pango available at compile-time.
+	 */
+	const VERSION_STRING: string;
 
 }

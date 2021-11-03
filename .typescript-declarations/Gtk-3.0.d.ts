@@ -1,4 +1,3 @@
-/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AboutDialog} instead.
@@ -338,7 +337,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AboutDialog} instead.
 	 */
-	type AboutDialogMixin = IAboutDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type AboutDialogMixin = IAboutDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkAboutDialog offers a simple way to display information about
@@ -532,7 +531,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelGroup} instead.
 	 */
-	type AccelGroupMixin = IAccelGroup & GObject.IObject;
+	type AccelGroupMixin = IAccelGroup & GObject.Object;
 
 	/**
 	 * A {@link AccelGroup} represents a group of keyboard accelerators,
@@ -641,7 +640,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelLabel} instead.
 	 */
-	type AccelLabelMixin = IAccelLabel & ILabel & Atk.IImplementorIface & IBuildable;
+	type AccelLabelMixin = IAccelLabel & Label & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link AccelLabel} widget is a subclass of #GtkLabel that also displays an
@@ -735,7 +734,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AccelMap} instead.
 	 */
-	type AccelMapMixin = IAccelMap & GObject.IObject;
+	type AccelMapMixin = IAccelMap & GObject.Object;
 
 	/**
 	 * Accelerator maps are used to define runtime configurable accelerators.
@@ -980,7 +979,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Accessible} instead.
 	 */
-	type AccessibleMixin = IAccessible & Atk.IObject;
+	type AccessibleMixin = IAccessible & Atk.Object;
 
 	/**
 	 * The {@link Accessible} class is the base class for accessible
@@ -1384,7 +1383,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
-	type ActionMixin = IAction & GObject.IObject & IBuildable;
+	type ActionMixin = IAction & GObject.Object & Buildable;
 
 	/**
 	 * > In GTK+ 3.10, GtkAction has been deprecated. Use #GAction
@@ -1487,7 +1486,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionBar} instead.
 	 */
-	type ActionBarMixin = IActionBar & IBin & Atk.IImplementorIface & IBuildable;
+	type ActionBarMixin = IActionBar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkActionBar is designed to present contextual actions. It is
@@ -1677,12 +1676,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If you’re using gettext(), it is enough to set the translation domain
 		 * with gtk_action_group_set_translation_domain().
-		 * @param _func a {@link TranslateFunc}
+		 * @param func a {@link TranslateFunc}
 		 * @param data data to be passed to #func and #notify
 		 * @param notify a #GDestroyNotify function to be called when #action_group is
 		 *   destroyed and when the translation function is changed again
 		 */
-		set_translate_func(_func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
+		set_translate_func(func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Sets the translation domain and uses g_dgettext() for translating the
 		 * #label and #tooltip of {@link ActionEntrys} added by
@@ -1757,7 +1756,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionGroup} instead.
 	 */
-	type ActionGroupMixin = IActionGroup & GObject.IObject & IBuildable;
+	type ActionGroupMixin = IActionGroup & GObject.Object & Buildable;
 
 	/**
 	 * Actions are organised into groups. An action group is essentially a
@@ -2022,7 +2021,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Adjustment} instead.
 	 */
-	type AdjustmentMixin = IAdjustment & GObject.IInitiallyUnowned;
+	type AdjustmentMixin = IAdjustment & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link Adjustment} object represents a value which has an associated lower
@@ -2152,7 +2151,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alignment} instead.
 	 */
-	type AlignmentMixin = IAlignment & IBin & Atk.IImplementorIface & IBuildable;
+	type AlignmentMixin = IAlignment & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Alignment} widget controls the alignment and size of its child widget.
@@ -2294,7 +2293,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserButton} instead.
 	 */
-	type AppChooserButtonMixin = IAppChooserButton & IComboBox & Atk.IImplementorIface & IAppChooser & IBuildable & ICellEditable & ICellLayout;
+	type AppChooserButtonMixin = IAppChooserButton & ComboBox & Atk.ImplementorIface & AppChooser & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * The {@link AppChooserButton} is a widget that lets the user select
@@ -2373,7 +2372,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserDialog} instead.
 	 */
-	type AppChooserDialogMixin = IAppChooserDialog & IDialog & Atk.IImplementorIface & IAppChooser & IBuildable;
+	type AppChooserDialogMixin = IAppChooserDialog & Dialog & Atk.ImplementorIface & AppChooser & Buildable;
 
 	/**
 	 * {@link AppChooserDialog} shows a #GtkAppChooserWidget inside a #GtkDialog.
@@ -2557,7 +2556,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppChooserWidget} instead.
 	 */
-	type AppChooserWidgetMixin = IAppChooserWidget & IBox & Atk.IImplementorIface & IAppChooser & IBuildable & IOrientable;
+	type AppChooserWidgetMixin = IAppChooserWidget & Box & Atk.ImplementorIface & AppChooser & Buildable & Orientable;
 
 	/**
 	 * {@link AppChooserWidget} is a widget for selecting applications.
@@ -2707,11 +2706,11 @@ declare namespace imports.gi.Gtk {
 		 * Gets a menu from automatically loaded resources.
 		 * See [Automatic resources][automatic-resources]
 		 * for more information.
-		 * @param _id the id of the menu to look up
+		 * @param id the id of the menu to look up
 		 * @returns Gets the menu with the
 		 *     given id from the automatically loaded resources
 		 */
-		get_menu_by_id(_id: string): Gio.Menu;
+		get_menu_by_id(id: string): Gio.Menu;
 		/**
 		 * Returns the menu model that has been set with
 		 * gtk_application_set_menubar().
@@ -2723,11 +2722,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The ID of a #GtkApplicationWindow can be retrieved with
 		 * gtk_application_window_get_id().
-		 * @param _id an identifier number
+		 * @param id an identifier number
 		 * @returns the window with ID #id, or
 		 *   %NULL if there is no window with this ID
 		 */
-		get_window_by_id(_id: number): Window | null;
+		get_window_by_id(id: number): Window | null;
 		/**
 		 * Gets a list of the {@link Windows} associated with #application.
 		 * 
@@ -2944,7 +2943,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Application} instead.
 	 */
-	type ApplicationMixin = IApplication & Gio.IApplication & Gio.IActionGroup & Gio.IActionMap;
+	type ApplicationMixin = IApplication & Gio.Application & Gio.ActionGroup & Gio.ActionMap;
 
 	/**
 	 * {@link Application} is a class that handles many important aspects
@@ -3115,7 +3114,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ApplicationWindow} instead.
 	 */
-	type ApplicationWindowMixin = IApplicationWindow & IWindow & Atk.IImplementorIface & Gio.IActionGroup & Gio.IActionMap & IBuildable;
+	type ApplicationWindowMixin = IApplicationWindow & Window & Atk.ImplementorIface & Gio.ActionGroup & Gio.ActionMap & Buildable;
 
 	/**
 	 * {@link ApplicationWindow} is a #GtkWindow subclass that offers some
@@ -3256,7 +3255,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Arrow} instead.
 	 */
-	type ArrowMixin = IArrow & IMisc & Atk.IImplementorIface & IBuildable;
+	type ArrowMixin = IArrow & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkArrow should be used to draw simple arrows that need to point in
@@ -3303,7 +3302,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ArrowAccessible} instead.
 	 */
-	type ArrowAccessibleMixin = IArrowAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type ArrowAccessibleMixin = IArrowAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface ArrowAccessible extends ArrowAccessibleMixin {}
 
@@ -3344,7 +3343,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AspectFrame} instead.
 	 */
-	type AspectFrameMixin = IAspectFrame & IFrame & Atk.IImplementorIface & IBuildable;
+	type AspectFrameMixin = IAspectFrame & Frame & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link AspectFrame} is useful when you want
@@ -3589,9 +3588,9 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The page type determines the page behavior in the #assistant.
 		 * @param page a page of #assistant
-		 * @param _type the new type for #page
+		 * @param type the new type for #page
 		 */
-		set_page_type(page: Widget, _type: AssistantPageType): void;
+		set_page_type(page: Widget, type: AssistantPageType): void;
 		/**
 		 * Forces #assistant to recompute the buttons state.
 		 * 
@@ -3645,7 +3644,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Assistant} instead.
 	 */
-	type AssistantMixin = IAssistant & IWindow & Atk.IImplementorIface & IBuildable;
+	type AssistantMixin = IAssistant & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Assistant} is a widget used to represent a generally complex
@@ -3708,7 +3707,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bin} instead.
 	 */
-	type BinMixin = IBin & IContainer & Atk.IImplementorIface & IBuildable;
+	type BinMixin = IBin & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Bin} widget is a container with just one child.
@@ -3734,7 +3733,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BooleanCellAccessible} instead.
 	 */
-	type BooleanCellAccessibleMixin = IBooleanCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type BooleanCellAccessibleMixin = IBooleanCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface BooleanCellAccessible extends BooleanCellAccessibleMixin {}
 
@@ -3895,7 +3894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
-	type BoxMixin = IBox & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type BoxMixin = IBox & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The GtkBox widget arranges child widgets into a single row or column,
@@ -4122,9 +4121,9 @@ declare namespace imports.gi.Gtk {
 		 * This function can be thought of the interpreted language binding
 		 * version of gtk_builder_connect_signals(), except that it does not
 		 * require GModule to function correctly.
-		 * @param _func the function used to connect the signals
+		 * @param func the function used to connect the signals
 		 */
-		connect_signals_full(_func: BuilderConnectFunc): void;
+		connect_signals_full(func: BuilderConnectFunc): void;
 		/**
 		 * Add #object to the #builder object pool so it can be referenced just like any
 		 * other object built by builder.
@@ -4241,12 +4240,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Upon errors %FALSE will be returned and #error will be assigned a
 		 * #GError from the #GTK_BUILDER_ERROR domain.
-		 * @param _type the #GType of the value
+		 * @param type the #GType of the value
 		 * @param string the string representation of the value
 		 * @param value the #GValue to store the result in
 		 * @returns %TRUE on success
 		 */
-		value_from_string_type(_type: GObject.Type, string: string, value: GObject.Value): boolean;
+		value_from_string_type(type: GObject.Type, string: string, value: GObject.Value): boolean;
 		connect(signal: "notify::translation_domain", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -4254,7 +4253,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Builder} instead.
 	 */
-	type BuilderMixin = IBuilder & GObject.IObject;
+	type BuilderMixin = IBuilder & GObject.Object;
 
 	/**
 	 * A GtkBuilder is an auxiliary object that reads textual descriptions
@@ -4733,7 +4732,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Button} instead.
 	 */
-	type ButtonMixin = IButton & IBin & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ButtonMixin = IButton & Bin & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link Button} widget is generally used to trigger a callback function that is
@@ -4826,7 +4825,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonAccessible} instead.
 	 */
-	type ButtonAccessibleMixin = IButtonAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type ButtonAccessibleMixin = IButtonAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface ButtonAccessible extends ButtonAccessibleMixin {}
 
@@ -4895,7 +4894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ButtonBox} instead.
 	 */
-	type ButtonBoxMixin = IButtonBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ButtonBoxMixin = IButtonBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface ButtonBox extends ButtonBoxMixin {}
 
@@ -5029,17 +5028,17 @@ declare namespace imports.gi.Gtk {
 		 * The size of the details area can be restricted by setting the
 		 * #GtkCalendar:detail-width-chars and #GtkCalendar:detail-height-rows
 		 * properties.
-		 * @param _func a function providing details for each day.
+		 * @param func a function providing details for each day.
 		 * @param data data to pass to #func invokations.
 		 * @param destroy a function for releasing #data.
 		 */
-		set_detail_func(_func: CalendarDetailFunc, data: any | null, destroy: GLib.DestroyNotify): void;
+		set_detail_func(func: CalendarDetailFunc, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Updates the height of detail cells.
 		 * See {@link Calendar}:detail-height-rows.
-		 * @param _rows detail height in rows.
+		 * @param rows detail height in rows.
 		 */
-		set_detail_height_rows(_rows: number): void;
+		set_detail_height_rows(rows: number): void;
 		/**
 		 * Updates the width of detail cells.
 		 * See {@link Calendar}:detail-width-chars.
@@ -5104,7 +5103,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Calendar} instead.
 	 */
-	type CalendarMixin = ICalendar & IWidget & Atk.IImplementorIface & IBuildable;
+	type CalendarMixin = ICalendar & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link Calendar} is a widget that displays a Gregorian calendar, one month
@@ -5150,7 +5149,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAccessible} instead.
 	 */
-	type CellAccessibleMixin = ICellAccessible & IAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type CellAccessibleMixin = ICellAccessible & Accessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface CellAccessible extends CellAccessibleMixin {}
 
@@ -5389,13 +5388,13 @@ declare namespace imports.gi.Gtk {
 		 * @param widget the {@link Widget} that #area is rendering on
 		 * @param cell_area the whole allocated area for #area in #widget
 		 *             for this row
-		 * @param _x the x position
-		 * @param _y the y position
+		 * @param x the x position
+		 * @param y the y position
 		 * @param alloc_area where to store the inner allocated area of the
 		 *                                  returned cell renderer, or %NULL.
 		 * @returns the {@link CellRenderer} at #x and #y.
 		 */
-		get_cell_at_position(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, _x: number, _y: number, alloc_area: Gdk.Rectangle | null): CellRenderer;
+		get_cell_at_position(context: CellAreaContext, widget: Widget, cell_area: Gdk.Rectangle, x: number, y: number, alloc_area: Gdk.Rectangle | null): CellRenderer;
 		/**
 		 * Gets the current {@link TreePath} string for the currently
 		 * applied #GtkTreeIter, this is implicitly updated when
@@ -5653,7 +5652,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellArea} instead.
 	 */
-	type CellAreaMixin = ICellArea & GObject.IInitiallyUnowned & IBuildable & ICellLayout;
+	type CellAreaMixin = ICellArea & GObject.InitiallyUnowned & Buildable & CellLayout;
 
 	/**
 	 * The {@link CellArea} is an abstract class for #GtkCellLayout widgets
@@ -6025,7 +6024,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaBox} instead.
 	 */
-	type CellAreaBoxMixin = ICellAreaBox & ICellArea & IBuildable & ICellLayout & IOrientable;
+	type CellAreaBoxMixin = ICellAreaBox & CellArea & Buildable & CellLayout & Orientable;
 
 	/**
 	 * The {@link CellAreaBox} renders cell renderers into a row or a column
@@ -6249,7 +6248,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellAreaContext} instead.
 	 */
-	type CellAreaContextMixin = ICellAreaContext & GObject.IObject;
+	type CellAreaContextMixin = ICellAreaContext & GObject.Object;
 
 	/**
 	 * The {@link CellAreaContext} object is created by a given #GtkCellArea
@@ -6563,7 +6562,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRenderer} instead.
 	 */
-	type CellRendererMixin = ICellRenderer & GObject.IInitiallyUnowned;
+	type CellRendererMixin = ICellRenderer & GObject.InitiallyUnowned;
 
 	/**
 	 * The {@link CellRenderer} is a base class of a set of objects used for
@@ -6653,7 +6652,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererAccel} instead.
 	 */
-	type CellRendererAccelMixin = ICellRendererAccel & ICellRendererText;
+	type CellRendererAccelMixin = ICellRendererAccel & CellRendererText;
 
 	/**
 	 * {@link CellRendererAccel} displays a keyboard accelerator (i.e. a key
@@ -6724,7 +6723,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererCombo} instead.
 	 */
-	type CellRendererComboMixin = ICellRendererCombo & ICellRendererText;
+	type CellRendererComboMixin = ICellRendererCombo & CellRendererText;
 
 	/**
 	 * {@link CellRendererCombo} renders text in a cell like #GtkCellRendererText from
@@ -6805,7 +6804,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererPixbuf} instead.
 	 */
-	type CellRendererPixbufMixin = ICellRendererPixbuf & ICellRenderer;
+	type CellRendererPixbufMixin = ICellRendererPixbuf & CellRenderer;
 
 	/**
 	 * A {@link CellRendererPixbuf} can be used to render an image in a cell. It allows
@@ -6893,7 +6892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererProgress} instead.
 	 */
-	type CellRendererProgressMixin = ICellRendererProgress & ICellRenderer & IOrientable;
+	type CellRendererProgressMixin = ICellRendererProgress & CellRenderer & Orientable;
 
 	/**
 	 * {@link CellRendererProgress} renders a numeric value as a progress par in a cell.
@@ -6939,7 +6938,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpin} instead.
 	 */
-	type CellRendererSpinMixin = ICellRendererSpin & ICellRendererText;
+	type CellRendererSpinMixin = ICellRendererSpin & CellRendererText;
 
 	/**
 	 * {@link CellRendererSpin} renders text in a cell like #GtkCellRendererText from
@@ -6994,7 +6993,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererSpinner} instead.
 	 */
-	type CellRendererSpinnerMixin = ICellRendererSpinner & ICellRenderer;
+	type CellRendererSpinnerMixin = ICellRendererSpinner & CellRenderer;
 
 	/**
 	 * GtkCellRendererSpinner renders a spinning animation in a cell, very
@@ -7195,7 +7194,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererText} instead.
 	 */
-	type CellRendererTextMixin = ICellRendererText & ICellRenderer;
+	type CellRendererTextMixin = ICellRendererText & CellRenderer;
 
 	/**
 	 * A {@link CellRendererText} renders a given text in its cell, using the font, color and
@@ -7289,7 +7288,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellRendererToggle} instead.
 	 */
-	type CellRendererToggleMixin = ICellRendererToggle & ICellRenderer;
+	type CellRendererToggleMixin = ICellRendererToggle & CellRenderer;
 
 	/**
 	 * {@link CellRendererToggle} renders a toggle button in a cell. The
@@ -7467,7 +7466,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CellView} instead.
 	 */
-	type CellViewMixin = ICellView & IWidget & Atk.IImplementorIface & IBuildable & ICellLayout & IOrientable;
+	type CellViewMixin = ICellView & Widget & Atk.ImplementorIface & Buildable & CellLayout & Orientable;
 
 	/**
 	 * A {@link CellView} displays a single row of a #GtkTreeModel using a #GtkCellArea
@@ -7547,7 +7546,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckButton} instead.
 	 */
-	type CheckButtonMixin = ICheckButton & IToggleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type CheckButtonMixin = ICheckButton & ToggleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link CheckButton} places a discrete #GtkToggleButton next to a widget,
@@ -7672,7 +7671,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItem} instead.
 	 */
-	type CheckMenuItemMixin = ICheckMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type CheckMenuItemMixin = ICheckMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link CheckMenuItem} is a menu item that maintains the state of a boolean
@@ -7730,7 +7729,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CheckMenuItemAccessible} instead.
 	 */
-	type CheckMenuItemAccessibleMixin = ICheckMenuItemAccessible & IMenuItemAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type CheckMenuItemAccessibleMixin = ICheckMenuItemAccessible & MenuItemAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface CheckMenuItemAccessible extends CheckMenuItemAccessibleMixin {}
 
@@ -8069,7 +8068,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clipboard} instead.
 	 */
-	type ClipboardMixin = IClipboard & GObject.IObject;
+	type ClipboardMixin = IClipboard & GObject.Object;
 
 	/**
 	 * The {@link Clipboard} object represents a clipboard of data shared
@@ -8298,7 +8297,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorButton} instead.
 	 */
-	type ColorButtonMixin = IColorButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IColorChooser;
+	type ColorButtonMixin = IColorButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & ColorChooser;
 
 	/**
 	 * The {@link ColorButton} is a button which displays the currently selected
@@ -8352,7 +8351,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserDialog} instead.
 	 */
-	type ColorChooserDialogMixin = IColorChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IColorChooser;
+	type ColorChooserDialogMixin = IColorChooserDialog & Dialog & Atk.ImplementorIface & Buildable & ColorChooser;
 
 	/**
 	 * The {@link ColorChooserDialog} widget is a dialog for choosing
@@ -8389,7 +8388,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserWidget} instead.
 	 */
-	type ColorChooserWidgetMixin = IColorChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IColorChooser & IOrientable;
+	type ColorChooserWidgetMixin = IColorChooserWidget & Box & Atk.ImplementorIface & Buildable & ColorChooser & Orientable;
 
 	/**
 	 * The {@link ColorChooserWidget} widget lets the user select a
@@ -8565,7 +8564,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelection} instead.
 	 */
-	type ColorSelectionMixin = IColorSelection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ColorSelectionMixin = IColorSelection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface ColorSelection extends ColorSelectionMixin {}
 
@@ -8579,10 +8578,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Parses a color palette string; the string is a colon-separated
 		 * list of color names readable by gdk_color_parse().
-		 * @param _str a string encoding a color palette
+		 * @param str a string encoding a color palette
 		 * @returns %TRUE if a palette was successfully parsed
 		 */
-		public static palette_from_string(_str: string): boolean;
+		public static palette_from_string(str: string): boolean;
 		/**
 		 * Encodes a palette as a string, useful for persistent storage.
 		 * @param colors an array of colors
@@ -8597,10 +8596,10 @@ declare namespace imports.gi.Gtk {
 		 * This function should save the new palette contents, and update
 		 * the {@link Settings}:gtk-color-palette GtkSettings property so all
 		 * GtkColorSelection widgets will be modified.
-		 * @param _func a function to call when the custom palette needs saving
+		 * @param func a function to call when the custom palette needs saving
 		 * @returns the previous change palette hook (that was replaced)
 		 */
-		public static set_change_palette_with_screen_hook(_func: ColorSelectionChangePaletteWithScreenFunc): ColorSelectionChangePaletteWithScreenFunc;
+		public static set_change_palette_with_screen_hook(func: ColorSelectionChangePaletteWithScreenFunc): ColorSelectionChangePaletteWithScreenFunc;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8626,7 +8625,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorSelectionDialog} instead.
 	 */
-	type ColorSelectionDialogMixin = IColorSelectionDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type ColorSelectionDialogMixin = IColorSelectionDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	interface ColorSelectionDialog extends ColorSelectionDialogMixin {}
 
@@ -8971,11 +8970,11 @@ declare namespace imports.gi.Gtk {
 		 * Sets the row separator function, which is used to determine
 		 * whether a row should be drawn as a separator. If the row separator
 		 * function is %NULL, no separators are drawn. This is the default value.
-		 * @param _func a {@link TreeViewRowSeparatorFunc}
+		 * @param func a {@link TreeViewRowSeparatorFunc}
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy destroy notifier for #data, or %NULL
 		 */
-		set_row_separator_func(_func: TreeViewRowSeparatorFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_row_separator_func(func: TreeViewRowSeparatorFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the column with row span information for #combo_box to be #row_span.
 		 * The row span column contains integers which indicate how many rows
@@ -9084,7 +9083,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBox} instead.
 	 */
-	type ComboBoxMixin = IComboBox & IBin & Atk.IImplementorIface & IBuildable & ICellEditable & ICellLayout;
+	type ComboBoxMixin = IComboBox & Bin & Atk.ImplementorIface & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * A GtkComboBox is a widget that allows the user to choose from a list of
@@ -9195,7 +9194,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxAccessible} instead.
 	 */
-	type ComboBoxAccessibleMixin = IComboBoxAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type ComboBoxAccessibleMixin = IComboBoxAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface ComboBoxAccessible extends ComboBoxAccessibleMixin {}
 
@@ -9213,10 +9212,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is the same as calling gtk_combo_box_text_insert() with a
 		 * position of -1.
-		 * @param _id a string ID for this value, or %NULL
+		 * @param id a string ID for this value, or %NULL
 		 * @param text A string
 		 */
-		append(_id: string | null, text: string): void;
+		append(id: string | null, text: string): void;
 		/**
 		 * Appends #text to the list of strings stored in #combo_box.
 		 * 
@@ -9241,10 +9240,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If #position is negative then #text is appended.
 		 * @param position An index to insert #text
-		 * @param _id a string ID for this value, or %NULL
+		 * @param id a string ID for this value, or %NULL
 		 * @param text A string to display
 		 */
-		insert(position: number, _id: string | null, text: string): void;
+		insert(position: number, id: string | null, text: string): void;
 		/**
 		 * Inserts #text at #position in the list of strings stored in #combo_box.
 		 * 
@@ -9262,10 +9261,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This is the same as calling gtk_combo_box_text_insert() with a
 		 * position of 0.
-		 * @param _id a string ID for this value, or %NULL
+		 * @param id a string ID for this value, or %NULL
 		 * @param text a string
 		 */
-		prepend(_id: string | null, text: string): void;
+		prepend(id: string | null, text: string): void;
 		/**
 		 * Prepends #text to the list of strings stored in #combo_box.
 		 * 
@@ -9288,7 +9287,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ComboBoxText} instead.
 	 */
-	type ComboBoxTextMixin = IComboBoxText & IComboBox & Atk.IImplementorIface & IBuildable & ICellEditable & ICellLayout;
+	type ComboBoxTextMixin = IComboBoxText & ComboBox & Atk.ImplementorIface & Buildable & CellEditable & CellLayout;
 
 	/**
 	 * A GtkComboBoxText is a simple variant of {@link ComboBox} that hides
@@ -9692,7 +9691,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Container} instead.
 	 */
-	type ContainerMixin = IContainer & IWidget & Atk.IImplementorIface & IBuildable;
+	type ContainerMixin = IContainer & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GTK+ user interface is constructed by nesting widgets inside widgets.
@@ -9913,7 +9912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerAccessible} instead.
 	 */
-	type ContainerAccessibleMixin = IContainerAccessible & IWidgetAccessible & Atk.IComponent;
+	type ContainerAccessibleMixin = IContainerAccessible & WidgetAccessible & Atk.Component;
 
 	interface ContainerAccessible extends ContainerAccessibleMixin {}
 
@@ -9937,7 +9936,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContainerCellAccessible} instead.
 	 */
-	type ContainerCellAccessibleMixin = IContainerCellAccessible & ICellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type ContainerCellAccessibleMixin = IContainerCellAccessible & CellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface ContainerCellAccessible extends ContainerCellAccessibleMixin {}
 
@@ -10023,7 +10022,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CssProvider} instead.
 	 */
-	type CssProviderMixin = ICssProvider & GObject.IObject & IStyleProvider;
+	type CssProviderMixin = ICssProvider & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkCssProvider is an object implementing the {@link StyleProvider} interface.
@@ -10304,7 +10303,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Dialog} instead.
 	 */
-	type DialogMixin = IDialog & IWindow & Atk.IImplementorIface & IBuildable;
+	type DialogMixin = IDialog & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Dialog boxes are a convenient way to prompt the user for a small amount
@@ -10493,7 +10492,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingArea} instead.
 	 */
-	type DrawingAreaMixin = IDrawingArea & IWidget & Atk.IImplementorIface & IBuildable;
+	type DrawingAreaMixin = IDrawingArea & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link DrawingArea} widget is used for creating custom user interface
@@ -10906,11 +10905,11 @@ declare namespace imports.gi.Gtk {
 		 * If #x, #y doesn’t lie inside an icon, -1 is returned.
 		 * This function is intended for use in a {@link Widget}::query-tooltip
 		 * signal handler.
-		 * @param _x the x coordinate of the position to find
-		 * @param _y the y coordinate of the position to find
+		 * @param x the x coordinate of the position to find
+		 * @param y the y coordinate of the position to find
 		 * @returns the index of the icon at the given position, or -1
 		 */
-		get_icon_at_pos(_x: number, _y: number): number;
+		get_icon_at_pos(x: number, y: number): number;
 		/**
 		 * Retrieves the #GIcon used for the icon, or %NULL if there is
 		 * no icon or if the icon was set by some other method (e.g., by
@@ -11371,9 +11370,9 @@ declare namespace imports.gi.Gtk {
 		 * picks the best invisible char available in the current font. If you
 		 * set the invisible char to 0, then the user will get no feedback
 		 * at all; there will be no text on the screen as they type.
-		 * @param _ch a Unicode character
+		 * @param ch a Unicode character
 		 */
-		set_invisible_char(_ch: string): void;
+		set_invisible_char(ch: string): void;
 		/**
 		 * Sets the maximum allowed length of the contents of the widget. If
 		 * the current contents are longer than the given length, then they
@@ -11531,7 +11530,7 @@ declare namespace imports.gi.Gtk {
 		 * Delete for deleting a character and Ctrl-Delete for
 		 * deleting a word.
 		 */
-		connect(signal: "delete-from-cursor", callback: (owner: this, _type: DeleteType, count: number) => void): number;
+		connect(signal: "delete-from-cursor", callback: (owner: this, type: DeleteType, count: number) => void): number;
 		/**
 		 * The ::icon-press signal is emitted when an activatable icon
 		 * is clicked.
@@ -11676,7 +11675,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Entry} instead.
 	 */
-	type EntryMixin = IEntry & IWidget & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable;
+	type EntryMixin = IEntry & Widget & Atk.ImplementorIface & Buildable & CellEditable & Editable;
 
 	/**
 	 * The {@link Entry} widget is a single line text entry
@@ -11779,7 +11778,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryAccessible} instead.
 	 */
-	type EntryAccessibleMixin = IEntryAccessible & IWidgetAccessible & Atk.IAction & Atk.IComponent & Atk.IEditableText & Atk.IText;
+	type EntryAccessibleMixin = IEntryAccessible & WidgetAccessible & Atk.Action & Atk.Component & Atk.EditableText & Atk.Text;
 
 	interface EntryAccessible extends EntryAccessibleMixin {}
 
@@ -11913,7 +11912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryBuffer} instead.
 	 */
-	type EntryBufferMixin = IEntryBuffer & GObject.IObject;
+	type EntryBufferMixin = IEntryBuffer & GObject.Object;
 
 	/**
 	 * The {@link EntryBuffer} class contains the actual text displayed in a
@@ -12111,11 +12110,11 @@ declare namespace imports.gi.Gtk {
 		 * Sets the match function for #completion to be #func. The match function
 		 * is used to determine if a row should or should not be in the completion
 		 * list.
-		 * @param _func the {@link EntryCompletionMatchFunc} to use
+		 * @param func the {@link EntryCompletionMatchFunc} to use
 		 * @param func_data user data for #func
 		 * @param func_notify destroy notify for #func_data.
 		 */
-		set_match_func(_func: EntryCompletionMatchFunc, func_data: any | null, func_notify: GLib.DestroyNotify): void;
+		set_match_func(func: EntryCompletionMatchFunc, func_data: any | null, func_notify: GLib.DestroyNotify): void;
 		/**
 		 * Requires the length of the search key for #completion to be at least
 		 * #length. This is useful for long lists, where completing using a small
@@ -12221,7 +12220,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryCompletion} instead.
 	 */
-	type EntryCompletionMixin = IEntryCompletion & GObject.IObject & IBuildable & ICellLayout;
+	type EntryCompletionMixin = IEntryCompletion & GObject.Object & Buildable & CellLayout;
 
 	/**
 	 * {@link EntryCompletion} is an auxiliary object to be used in conjunction with
@@ -12294,7 +12293,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EntryIconAccessible} instead.
 	 */
-	type EntryIconAccessibleMixin = IEntryIconAccessible & Atk.IObject & Atk.IAction & Atk.IComponent;
+	type EntryIconAccessibleMixin = IEntryIconAccessible & Atk.Object & Atk.Action & Atk.Component;
 
 	interface EntryIconAccessible extends EntryIconAccessibleMixin {}
 
@@ -12380,7 +12379,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventBox} instead.
 	 */
-	type EventBoxMixin = IEventBox & IBin & Atk.IImplementorIface & IBuildable;
+	type EventBoxMixin = IEventBox & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link EventBox} widget is a subclass of #GtkBin which also has its
@@ -12451,7 +12450,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventController} instead.
 	 */
-	type EventControllerMixin = IEventController & GObject.IObject;
+	type EventControllerMixin = IEventController & GObject.Object;
 
 	/**
 	 * {@link EventController} is a base, low-level implementation for event
@@ -12494,7 +12493,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerKey} instead.
 	 */
-	type EventControllerKeyMixin = IEventControllerKey & IEventController;
+	type EventControllerKeyMixin = IEventControllerKey & EventController;
 
 	/**
 	 * {@link EventControllerKey} is an event controller meant for situations
@@ -12517,7 +12516,7 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Signals that the pointer has entered the widget.
 		 */
-		connect(signal: "enter", callback: (owner: this, _x: number, _y: number) => void): number;
+		connect(signal: "enter", callback: (owner: this, x: number, y: number) => void): number;
 		/**
 		 * Signals that pointer has left the widget.
 		 */
@@ -12525,14 +12524,14 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Emitted when the pointer moves inside the widget.
 		 */
-		connect(signal: "motion", callback: (owner: this, _x: number, _y: number) => void): number;
+		connect(signal: "motion", callback: (owner: this, x: number, y: number) => void): number;
 
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerMotion} instead.
 	 */
-	type EventControllerMotionMixin = IEventControllerMotion & IEventController;
+	type EventControllerMotionMixin = IEventControllerMotion & EventController;
 
 	/**
 	 * {@link EventControllerMotion} is an event controller meant for situations
@@ -12601,7 +12600,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EventControllerScroll} instead.
 	 */
-	type EventControllerScrollMixin = IEventControllerScroll & IEventController;
+	type EventControllerScrollMixin = IEventControllerScroll & EventController;
 
 	/**
 	 * {@link EventControllerScroll} is an event controller meant to handle
@@ -12813,7 +12812,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Expander} instead.
 	 */
-	type ExpanderMixin = IExpander & IBin & Atk.IImplementorIface & IBuildable;
+	type ExpanderMixin = IExpander & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Expander} allows the user to hide or show its child by clicking
@@ -12933,7 +12932,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ExpanderAccessible} instead.
 	 */
-	type ExpanderAccessibleMixin = IExpanderAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent;
+	type ExpanderAccessibleMixin = IExpanderAccessible & ContainerAccessible & Atk.Action & Atk.Component;
 
 	interface ExpanderAccessible extends ExpanderAccessibleMixin {}
 
@@ -13005,7 +13004,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserButton} instead.
 	 */
-	type FileChooserButtonMixin = IFileChooserButton & IBox & Atk.IImplementorIface & IBuildable & IFileChooser & IOrientable;
+	type FileChooserButtonMixin = IFileChooserButton & Box & Atk.ImplementorIface & Buildable & FileChooser & Orientable;
 
 	/**
 	 * The {@link FileChooserButton} is a widget that lets the user select a
@@ -13081,7 +13080,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserDialog} instead.
 	 */
-	type FileChooserDialogMixin = IFileChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IFileChooser;
+	type FileChooserDialogMixin = IFileChooserDialog & Dialog & Atk.ImplementorIface & Buildable & FileChooser;
 
 	/**
 	 * {@link FileChooserDialog} is a dialog box suitable for use with
@@ -13312,7 +13311,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserNative} instead.
 	 */
-	type FileChooserNativeMixin = IFileChooserNative & INativeDialog & IFileChooser;
+	type FileChooserNativeMixin = IFileChooserNative & NativeDialog & FileChooser;
 
 	/**
 	 * {@link FileChooserNative} is an abstraction of a dialog box suitable
@@ -13632,7 +13631,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidget} instead.
 	 */
-	type FileChooserWidgetMixin = IFileChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IFileChooser & IOrientable;
+	type FileChooserWidgetMixin = IFileChooserWidget & Box & Atk.ImplementorIface & Buildable & FileChooser & Orientable;
 
 	/**
 	 * {@link FileChooserWidget} is a widget for choosing files.
@@ -13668,7 +13667,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserWidgetAccessible} instead.
 	 */
-	type FileChooserWidgetAccessibleMixin = IFileChooserWidgetAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent;
+	type FileChooserWidgetAccessibleMixin = IFileChooserWidgetAccessible & ContainerAccessible & Atk.Action & Atk.Component;
 
 	interface FileChooserWidgetAccessible extends FileChooserWidgetAccessibleMixin {}
 
@@ -13688,12 +13687,12 @@ declare namespace imports.gi.Gtk {
 		 * it isn’t needed by the filter.
 		 * @param needed bitfield of flags indicating the information that the custom
 		 *          filter function needs.
-		 * @param _func callback function; if the function returns %TRUE, then
+		 * @param func callback function; if the function returns %TRUE, then
 		 *   the file will be displayed.
 		 * @param data data to pass to #func
 		 * @param notify function to call to free #data when it is no longer needed.
 		 */
-		add_custom(needed: FileFilterFlags, _func: FileFilterFunc, data: any | null, notify: GLib.DestroyNotify): void;
+		add_custom(needed: FileFilterFlags, func: FileFilterFunc, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * Adds a rule allowing a given mime type to #filter.
 		 * @param mime_type name of a MIME type
@@ -13758,7 +13757,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileFilter} instead.
 	 */
-	type FileFilterMixin = IFileFilter & GObject.IInitiallyUnowned & IBuildable;
+	type FileFilterMixin = IFileFilter & GObject.InitiallyUnowned & Buildable;
 
 	/**
 	 * A GtkFileFilter can be used to restrict the files being shown in a
@@ -13836,17 +13835,17 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Moves a child of a {@link Fixed} container to the given position.
 		 * @param widget the child widget.
-		 * @param _x the horizontal position to move the widget to.
-		 * @param _y the vertical position to move the widget to.
+		 * @param x the horizontal position to move the widget to.
+		 * @param y the vertical position to move the widget to.
 		 */
-		move(widget: Widget, _x: number, _y: number): void;
+		move(widget: Widget, x: number, y: number): void;
 		/**
 		 * Adds a widget to a {@link Fixed} container at the given position.
 		 * @param widget the widget to add.
-		 * @param _x the horizontal position to place the widget at.
-		 * @param _y the vertical position to place the widget at.
+		 * @param x the horizontal position to place the widget at.
+		 * @param y the vertical position to place the widget at.
 		 */
-		put(widget: Widget, _x: number, _y: number): void;
+		put(widget: Widget, x: number, y: number): void;
 		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
 
 	}
@@ -13854,7 +13853,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fixed} instead.
 	 */
-	type FixedMixin = IFixed & IContainer & Atk.IImplementorIface & IBuildable;
+	type FixedMixin = IFixed & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Fixed} widget is a container which can place child widgets
@@ -13988,13 +13987,13 @@ declare namespace imports.gi.Gtk {
 		get_child_at_index(idx: number): FlowBoxChild | null;
 		/**
 		 * Gets the child in the (#x, #y) position.
-		 * @param _x the x coordinate of the child
-		 * @param _y the y coordinate of the child
+		 * @param x the x coordinate of the child
+		 * @param y the y coordinate of the child
 		 * @returns the child widget, which will
 		 *     always be a {@link FlowBoxChild} or %NULL in case no child widget
 		 *     exists for the given x and y coordinates.
 		 */
-		get_child_at_pos(_x: number, _y: number): FlowBoxChild | null;
+		get_child_at_pos(x: number, y: number): FlowBoxChild | null;
 		/**
 		 * Gets the horizontal spacing.
 		 * @returns the horizontal spacing
@@ -14079,10 +14078,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Note that the selection cannot be modified from within
 		 * this function.
-		 * @param _func the function to call for each selected child
+		 * @param func the function to call for each selected child
 		 * @param data user data to pass to the function
 		 */
-		selected_foreach(_func: FlowBoxForeachFunc, data: any | null): void;
+		selected_foreach(func: FlowBoxForeachFunc, data: any | null): void;
 		/**
 		 * If #single is %TRUE, children will be activated when you click
 		 * on them, otherwise you need to double-click.
@@ -14284,7 +14283,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBox} instead.
 	 */
-	type FlowBoxMixin = IFlowBox & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type FlowBoxMixin = IFlowBox & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkFlowBox positions child widgets in sequence according to its
@@ -14352,7 +14351,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxAccessible} instead.
 	 */
-	type FlowBoxAccessibleMixin = IFlowBoxAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type FlowBoxAccessibleMixin = IFlowBoxAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface FlowBoxAccessible extends FlowBoxAccessibleMixin {}
 
@@ -14411,7 +14410,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChild} instead.
 	 */
-	type FlowBoxChildMixin = IFlowBoxChild & IBin & Atk.IImplementorIface & IBuildable;
+	type FlowBoxChildMixin = IFlowBoxChild & Bin & Atk.ImplementorIface & Buildable;
 
 	interface FlowBoxChild extends FlowBoxChildMixin {}
 
@@ -14435,7 +14434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowBoxChildAccessible} instead.
 	 */
-	type FlowBoxChildAccessibleMixin = IFlowBoxChildAccessible & IContainerAccessible & Atk.IComponent;
+	type FlowBoxChildAccessibleMixin = IFlowBoxChildAccessible & ContainerAccessible & Atk.Component;
 
 	interface FlowBoxChildAccessible extends FlowBoxChildAccessibleMixin {}
 
@@ -14568,7 +14567,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontButton} instead.
 	 */
-	type FontButtonMixin = IFontButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IFontChooser;
+	type FontButtonMixin = IFontButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & FontChooser;
 
 	/**
 	 * The {@link FontButton} is a button which displays the currently selected
@@ -14606,7 +14605,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserDialog} instead.
 	 */
-	type FontChooserDialogMixin = IFontChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IFontChooser;
+	type FontChooserDialogMixin = IFontChooserDialog & Dialog & Atk.ImplementorIface & Buildable & FontChooser;
 
 	/**
 	 * The {@link FontChooserDialog} widget is a dialog for selecting a font.
@@ -14652,7 +14651,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontChooserWidget} instead.
 	 */
-	type FontChooserWidgetMixin = IFontChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IFontChooser & IOrientable;
+	type FontChooserWidgetMixin = IFontChooserWidget & Box & Atk.ImplementorIface & Buildable & FontChooser & Orientable;
 
 	/**
 	 * The {@link FontChooserWidget} widget lists the available fonts,
@@ -14786,7 +14785,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelection} instead.
 	 */
-	type FontSelectionMixin = IFontSelection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type FontSelectionMixin = IFontSelection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface FontSelection extends FontSelectionMixin {}
 
@@ -14857,7 +14856,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FontSelectionDialog} instead.
 	 */
-	type FontSelectionDialogMixin = IFontSelectionDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type FontSelectionDialogMixin = IFontSelectionDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	interface FontSelectionDialog extends FontSelectionDialogMixin {}
 
@@ -14944,9 +14943,9 @@ declare namespace imports.gi.Gtk {
 		 * (%GTK_SHADOW_NONE) or with (other values) a visible border. Values other than
 		 * %GTK_SHADOW_NONE are treated identically by GtkFrame. The chosen type is
 		 * applied by removing or adding the .flat class to the CSS node named border.
-		 * @param _type the new {@link ShadowType}
+		 * @param type the new {@link ShadowType}
 		 */
-		set_shadow_type(_type: ShadowType): void;
+		set_shadow_type(type: ShadowType): void;
 		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::label_xalign", callback: (owner: this, ...args: any) => number): number;
@@ -14959,7 +14958,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Frame} instead.
 	 */
-	type FrameMixin = IFrame & IBin & Atk.IImplementorIface & IBuildable;
+	type FrameMixin = IFrame & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The frame widget is a bin that surrounds its child with a decorative
@@ -15028,7 +15027,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FrameAccessible} instead.
 	 */
-	type FrameAccessibleMixin = IFrameAccessible & IContainerAccessible & Atk.IComponent;
+	type FrameAccessibleMixin = IFrameAccessible & ContainerAccessible & Atk.Component;
 
 	interface FrameAccessible extends FrameAccessibleMixin {}
 
@@ -15265,7 +15264,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GLArea} instead.
 	 */
-	type GLAreaMixin = IGLArea & IWidget & Atk.IImplementorIface & IBuildable;
+	type GLAreaMixin = IGLArea & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link GLArea} is a widget that allows drawing with OpenGL.
@@ -15636,7 +15635,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Gesture} instead.
 	 */
-	type GestureMixin = IGesture & IEventController;
+	type GestureMixin = IGesture & EventController;
 
 	/**
 	 * {@link Gesture} is the base object for gesture recognition, although this
@@ -15771,7 +15770,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureDrag} instead.
 	 */
-	type GestureDragMixin = IGestureDrag & IGestureSingle;
+	type GestureDragMixin = IGestureDrag & GestureSingle;
 
 	/**
 	 * {@link GestureDrag} is a #GtkGesture implementation that recognizes drag
@@ -15808,7 +15807,7 @@ declare namespace imports.gi.Gtk {
 		 * This signal is emitted whenever a press goes unmoved/unreleased longer than
 		 * what the GTK+ defaults tell.
 		 */
-		connect(signal: "pressed", callback: (owner: this, _x: number, _y: number) => void): number;
+		connect(signal: "pressed", callback: (owner: this, x: number, y: number) => void): number;
 
 		connect(signal: "notify::delay_factor", callback: (owner: this, ...args: any) => number): number;
 
@@ -15817,7 +15816,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureLongPress} instead.
 	 */
-	type GestureLongPressMixin = IGestureLongPress & IGestureSingle;
+	type GestureLongPressMixin = IGestureLongPress & GestureSingle;
 
 	/**
 	 * {@link GestureLongPress} is a #GtkGesture implementation able to recognize
@@ -15869,14 +15868,14 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * This signal is emitted whenever a button or touch press happens.
 		 */
-		connect(signal: "pressed", callback: (owner: this, n_press: number, _x: number, _y: number) => void): number;
+		connect(signal: "pressed", callback: (owner: this, n_press: number, x: number, y: number) => void): number;
 		/**
 		 * This signal is emitted when a button or touch is released. #n_press
 		 * will report the number of press that is paired to this event, note
 		 * that {@link GestureMultiPress}::stopped may have been emitted between the
 		 * press and its release, #n_press will only start over at the next press.
 		 */
-		connect(signal: "released", callback: (owner: this, n_press: number, _x: number, _y: number) => void): number;
+		connect(signal: "released", callback: (owner: this, n_press: number, x: number, y: number) => void): number;
 		/**
 		 * This signal is emitted whenever any time/distance threshold has
 		 * been exceeded.
@@ -15888,7 +15887,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureMultiPress} instead.
 	 */
-	type GestureMultiPressMixin = IGestureMultiPress & IGestureSingle;
+	type GestureMultiPressMixin = IGestureMultiPress & GestureSingle;
 
 	/**
 	 * {@link GestureMultiPress} is a #GtkGesture implementation able to recognize
@@ -15946,7 +15945,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GesturePan} instead.
 	 */
-	type GesturePanMixin = IGesturePan & IGestureDrag;
+	type GesturePanMixin = IGesturePan & GestureDrag;
 
 	/**
 	 * {@link GesturePan} is a #GtkGesture implementation able to recognize
@@ -15999,7 +15998,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureRotate} instead.
 	 */
-	type GestureRotateMixin = IGestureRotate & IGesture;
+	type GestureRotateMixin = IGestureRotate & Gesture;
 
 	/**
 	 * {@link GestureRotate} is a #GtkGesture implementation able to recognize
@@ -16096,7 +16095,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSingle} instead.
 	 */
-	type GestureSingleMixin = IGestureSingle & IGesture;
+	type GestureSingleMixin = IGestureSingle & Gesture;
 
 	/**
 	 * {@link GestureSingle} is a subclass of #GtkGesture, optimized (although
@@ -16158,7 +16157,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureStylus} instead.
 	 */
-	type GestureStylusMixin = IGestureStylus & IGestureSingle;
+	type GestureStylusMixin = IGestureStylus & GestureSingle;
 
 	/**
 	 * {@link GestureStylus} is a #GtkGesture implementation specific to stylus
@@ -16198,7 +16197,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureSwipe} instead.
 	 */
-	type GestureSwipeMixin = IGestureSwipe & IGestureSingle;
+	type GestureSwipeMixin = IGestureSwipe & GestureSingle;
 
 	/**
 	 * {@link GestureSwipe} is a #GtkGesture implementation able to recognize
@@ -16246,7 +16245,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureZoom} instead.
 	 */
-	type GestureZoomMixin = IGestureZoom & IGesture;
+	type GestureZoomMixin = IGestureZoom & Gesture;
 
 	/**
 	 * {@link GestureZoom} is a #GtkGesture implementation able to recognize
@@ -16334,10 +16333,10 @@ declare namespace imports.gi.Gtk {
 		 * Returns the baseline position of #row as set
 		 * by gtk_grid_set_row_baseline_position() or the default value
 		 * %GTK_BASELINE_POSITION_CENTER.
-		 * @param _row a row index
+		 * @param row a row index
 		 * @returns the baseline position of #row
 		 */
-		get_row_baseline_position(_row: number): BaselinePosition;
+		get_row_baseline_position(row: number): BaselinePosition;
 		/**
 		 * Returns whether all rows of #grid have the same height.
 		 * @returns whether all rows of #grid have the same height.
@@ -16403,9 +16402,9 @@ declare namespace imports.gi.Gtk {
 		 * Each row in the grid can have its own local baseline, but only
 		 * one of those is global, meaning it will be the baseline in the
 		 * parent of the #grid.
-		 * @param _row the row index
+		 * @param row the row index
 		 */
-		set_baseline_row(_row: number): void;
+		set_baseline_row(row: number): void;
 		/**
 		 * Sets whether all columns of #grid will have the same width.
 		 * @param homogeneous %TRUE to make columns homogeneous
@@ -16419,10 +16418,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Sets how the baseline should be positioned on #row of the
 		 * grid, in case that row is assigned more space than is requested.
-		 * @param _row a row index
+		 * @param row a row index
 		 * @param pos a {@link BaselinePosition}
 		 */
-		set_row_baseline_position(_row: number, pos: BaselinePosition): void;
+		set_row_baseline_position(row: number, pos: BaselinePosition): void;
 		/**
 		 * Sets whether all rows of #grid will have the same height.
 		 * @param homogeneous %TRUE to make rows homogeneous
@@ -16444,7 +16443,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Grid} instead.
 	 */
-	type GridMixin = IGrid & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type GridMixin = IGrid & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * GtkGrid is a container which arranges its child widgets in
@@ -16488,7 +16487,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HBox} instead.
 	 */
-	type HBoxMixin = IHBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HBoxMixin = IHBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link HBox} is a container that organizes child widgets into a single row.
@@ -16536,7 +16535,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HButtonBox} instead.
 	 */
-	type HButtonBoxMixin = IHButtonBox & IButtonBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HButtonBoxMixin = IHButtonBox & ButtonBox & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface HButtonBox extends HButtonBoxMixin {}
 
@@ -16562,7 +16561,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HPaned} instead.
 	 */
-	type HPanedMixin = IHPaned & IPaned & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HPanedMixin = IHPaned & Paned & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The HPaned widget is a container widget with two
@@ -16617,11 +16616,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Sets the current color in an HSV color selector.
 		 * Color component values must be in the [0.0, 1.0] range.
-		 * @param _h Hue
-		 * @param _s Saturation
-		 * @param _v Value
+		 * @param h Hue
+		 * @param s Saturation
+		 * @param v Value
 		 */
-		set_color(_h: number, _s: number, _v: number): void;
+		set_color(h: number, s: number, v: number): void;
 		/**
 		 * Sets the size and ring width of an HSV color selector.
 		 * @param size Diameter for the hue ring
@@ -16636,7 +16635,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSV} instead.
 	 */
-	type HSVMixin = IHSV & IWidget & Atk.IImplementorIface & IBuildable;
+	type HSVMixin = IHSV & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link HSV} is the “color wheel” part of a complete color selector widget.
@@ -16662,16 +16661,16 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Input values must be in the [0.0, 1.0] range;
 		 * output values will be in the same range.
-		 * @param _h Hue
-		 * @param _s Saturation
-		 * @param _v Value
+		 * @param h Hue
+		 * @param s Saturation
+		 * @param v Value
 		 * @returns Return value for the red component
 		 * 
 		 * Return value for the green component
 		 * 
 		 * Return value for the blue component
 		 */
-		public static to_rgb(_h: number, _s: number, _v: number): [ r: number, g: number, b: number ];
+		public static to_rgb(h: number, s: number, v: number): [ r: number, g: number, b: number ];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -16687,7 +16686,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScale} instead.
 	 */
-	type HScaleMixin = IHScale & IScale & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HScaleMixin = IHScale & Scale & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HScale} widget is used to allow the user to select a value using
@@ -16739,7 +16738,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HScrollbar} instead.
 	 */
-	type HScrollbarMixin = IHScrollbar & IScrollbar & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HScrollbarMixin = IHScrollbar & Scrollbar & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HScrollbar} widget is a widget arranged horizontally creating a
@@ -16776,7 +16775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSeparator} instead.
 	 */
-	type HSeparatorMixin = IHSeparator & ISeparator & Atk.IImplementorIface & IBuildable & IOrientable;
+	type HSeparatorMixin = IHSeparator & Separator & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link HSeparator} widget is a horizontal separator, used to group the
@@ -16844,9 +16843,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Sets the type of shadow to be drawn around the border
 		 * of the handle box.
-		 * @param _type the shadow type.
+		 * @param type the shadow type.
 		 */
-		set_shadow_type(_type: ShadowType): void;
+		set_shadow_type(type: ShadowType): void;
 		/**
 		 * Sets the snap edge of a handlebox. The snap edge is
 		 * the edge of the detached child that must be aligned
@@ -16889,7 +16888,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HandleBox} instead.
 	 */
-	type HandleBoxMixin = IHandleBox & IBin & Atk.IImplementorIface & IBuildable;
+	type HandleBoxMixin = IHandleBox & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link HandleBox} widget allows a portion of a window to be "torn
@@ -17097,7 +17096,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBar} instead.
 	 */
-	type HeaderBarMixin = IHeaderBar & IContainer & Atk.IImplementorIface & IBuildable;
+	type HeaderBarMixin = IHeaderBar & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkHeaderBar is similar to a horizontal {@link Box}. It allows children to
@@ -17137,7 +17136,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HeaderBarAccessible} instead.
 	 */
-	type HeaderBarAccessibleMixin = IHeaderBarAccessible & IContainerAccessible & Atk.IComponent;
+	type HeaderBarAccessibleMixin = IHeaderBarAccessible & ContainerAccessible & Atk.Component;
 
 	interface HeaderBarAccessible extends HeaderBarAccessibleMixin {}
 
@@ -17276,7 +17275,7 @@ declare namespace imports.gi.Gtk {
 		 * has been entered by the user. This can be a single character
 		 * immediately after a key press or the final result of preediting.
 		 */
-		connect(signal: "commit", callback: (owner: this, _str: string) => void): number;
+		connect(signal: "commit", callback: (owner: this, str: string) => void): number;
 		/**
 		 * The ::delete-surrounding signal is emitted when the input method
 		 * needs to delete all or part of the context surrounding the cursor.
@@ -17315,7 +17314,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContext} instead.
 	 */
-	type IMContextMixin = IIMContext & GObject.IObject;
+	type IMContextMixin = IIMContext & GObject.Object;
 
 	/**
 	 * {@link IMContext} defines the interface for GTK+ input methods. An input method
@@ -17423,7 +17422,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMContextSimple} instead.
 	 */
-	type IMContextSimpleMixin = IIMContextSimple & IIMContext;
+	type IMContextSimpleMixin = IIMContextSimple & IMContext;
 
 	/**
 	 * GtkIMContextSimple is a simple input method context supporting table-based
@@ -17486,7 +17485,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IMMulticontext} instead.
 	 */
-	type IMMulticontextMixin = IIMMulticontext & IIMContext;
+	type IMMulticontextMixin = IIMMulticontext & IMContext;
 
 	interface IMMulticontext extends IMMulticontextMixin {}
 
@@ -17548,7 +17547,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconFactory} instead.
 	 */
-	type IconFactoryMixin = IIconFactory & GObject.IObject & IBuildable;
+	type IconFactoryMixin = IIconFactory & GObject.Object & Buildable;
 
 	/**
 	 * An icon factory manages a collection of {@link IconSet}; a #GtkIconSet manages a
@@ -17926,7 +17925,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconInfo} instead.
 	 */
-	type IconInfoMixin = IIconInfo & GObject.IObject;
+	type IconInfoMixin = IIconInfo & GObject.Object;
 
 	/**
 	 * Contains information found when looking up an icon in
@@ -18273,7 +18272,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconTheme} instead.
 	 */
-	type IconThemeMixin = IIconTheme & GObject.IObject;
+	type IconThemeMixin = IIconTheme & GObject.Object;
 
 	/**
 	 * {@link IconTheme} provides a facility for looking up icons by name
@@ -18593,11 +18592,11 @@ declare namespace imports.gi.Gtk {
 		 * be freed with gtk_tree_path_free().
 		 * See gtk_icon_view_convert_widget_to_bin_window_coords() for converting
 		 * widget coordinates to bin_window coordinates.
-		 * @param _x The x position to be identified
-		 * @param _y The y position to be identified
+		 * @param x The x position to be identified
+		 * @param y The y position to be identified
 		 * @returns %TRUE if an item exists at the specified position
 		 */
-		get_item_at_pos(_x: number, _y: number): boolean;
+		get_item_at_pos(x: number, y: number): boolean;
 		/**
 		 * Gets the column in which the item #path is currently
 		 * displayed. Column numbers start at 0.
@@ -18651,12 +18650,12 @@ declare namespace imports.gi.Gtk {
 		 * the cell at the specified position.
 		 * See gtk_icon_view_convert_widget_to_bin_window_coords() for converting
 		 * widget coordinates to bin_window coordinates.
-		 * @param _x The x position to be identified
-		 * @param _y The y position to be identified
+		 * @param x The x position to be identified
+		 * @param y The y position to be identified
 		 * @returns The {@link TreePath} corresponding
 		 * to the icon or %NULL if no icon exists at that position.
 		 */
-		get_path_at_pos(_x: number, _y: number): TreePath | null;
+		get_path_at_pos(x: number, y: number): TreePath | null;
 		/**
 		 * Returns the column with pixbufs for #icon_view.
 		 * @returns the pixbuf column, or -1 if it’s unset.
@@ -18779,10 +18778,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Calls a function for each selected icon. Note that the model or
 		 * selection cannot be modified from within this function.
-		 * @param _func The function to call for each selected icon.
+		 * @param func The function to call for each selected icon.
 		 * @param data User data to pass to the function.
 		 */
-		selected_foreach(_func: IconViewForeachFunc, data: any | null): void;
+		selected_foreach(func: IconViewForeachFunc, data: any | null): void;
 		/**
 		 * Causes the {@link IconView}::item-activated signal to be emitted on
 		 * a single click instead of a double click.
@@ -19078,7 +19077,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconView} instead.
 	 */
-	type IconViewMixin = IIconView & IContainer & Atk.IImplementorIface & IBuildable & ICellLayout & IScrollable;
+	type IconViewMixin = IIconView & Container & Atk.ImplementorIface & Buildable & CellLayout & Scrollable;
 
 	/**
 	 * {@link IconView} provides an alternative view on a #GtkTreeModel.
@@ -19137,7 +19136,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IconViewAccessible} instead.
 	 */
-	type IconViewAccessibleMixin = IIconViewAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type IconViewAccessibleMixin = IIconViewAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface IconViewAccessible extends IconViewAccessibleMixin {}
 
@@ -19349,7 +19348,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
-	type ImageMixin = IImage & IMisc & Atk.IImplementorIface & IBuildable;
+	type ImageMixin = IImage & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Image} widget displays an image. Various kinds of object
@@ -19585,7 +19584,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageAccessible} instead.
 	 */
-	type ImageAccessibleMixin = IImageAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type ImageAccessibleMixin = IImageAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface ImageAccessible extends ImageAccessibleMixin {}
 
@@ -19603,7 +19602,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageCellAccessible} instead.
 	 */
-	type ImageCellAccessibleMixin = IImageCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.IImage & Atk.ITableCell;
+	type ImageCellAccessibleMixin = IImageCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.Image & Atk.TableCell;
 
 	interface ImageCellAccessible extends ImageCellAccessibleMixin {}
 
@@ -19694,7 +19693,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImageMenuItem} instead.
 	 */
-	type ImageMenuItemMixin = IImageMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ImageMenuItemMixin = IImageMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A GtkImageMenuItem is a menu item which has an icon next to the text label.
@@ -19936,7 +19935,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InfoBar} instead.
 	 */
-	type InfoBarMixin = IInfoBar & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type InfoBarMixin = IInfoBar & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link InfoBar} is a widget that can be used to show messages to
@@ -20057,7 +20056,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Invisible} instead.
 	 */
-	type InvisibleMixin = IInvisible & IWidget & Atk.IImplementorIface & IBuildable;
+	type InvisibleMixin = IInvisible & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Invisible} widget is used internally in GTK+, and is probably not
@@ -20414,9 +20413,9 @@ declare namespace imports.gi.Gtk {
 		 * including embedded underlines and/or Pango markup depending
 		 * on the values of the {@link Label}:use-underline and
 		 * #GtkLabel:use-markup properties.
-		 * @param _str the new text to set for the label
+		 * @param str the new text to set for the label
 		 */
-		set_label(_str: string): void;
+		set_label(str: string): void;
 		/**
 		 * Toggles line wrapping within the {@link Label} widget. %TRUE makes it break
 		 * lines if text exceeds the widget’s size. %FALSE lets the text get cut off
@@ -20472,9 +20471,9 @@ declare namespace imports.gi.Gtk {
 		 * accordingly.
 		 * 
 		 * See also: gtk_label_set_text()
-		 * @param _str a markup string (see [Pango markup format][PangoMarkupFormat])
+		 * @param str a markup string (see [Pango markup format][PangoMarkupFormat])
 		 */
-		set_markup(_str: string): void;
+		set_markup(str: string): void;
 		/**
 		 * Parses #str which is marked up with the
 		 * [Pango text markup language][PangoMarkupFormat],
@@ -20484,10 +20483,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The mnemonic key can be used to activate another widget, chosen
 		 * automatically, or explicitly using gtk_label_set_mnemonic_widget().
-		 * @param _str a markup string (see
+		 * @param str a markup string (see
 		 *     [Pango markup format][PangoMarkupFormat])
 		 */
-		set_markup_with_mnemonic(_str: string): void;
+		set_markup_with_mnemonic(str: string): void;
 		/**
 		 * Sets the desired maximum width in characters of #label to #n_chars.
 		 * @param n_chars the new desired maximum width, in characters.
@@ -20541,18 +20540,18 @@ declare namespace imports.gi.Gtk {
 		 * as a side effect.
 		 * 
 		 * See also: gtk_label_set_markup()
-		 * @param _str The text you want to set
+		 * @param str The text you want to set
 		 */
-		set_text(_str: string): void;
+		set_text(str: string): void;
 		/**
 		 * Sets the label’s text from the string #str.
 		 * If characters in #str are preceded by an underscore, they are underlined
 		 * indicating that they represent a keyboard accelerator called a mnemonic.
 		 * The mnemonic key can be used to activate another widget, chosen
 		 * automatically, or explicitly using gtk_label_set_mnemonic_widget().
-		 * @param _str a string
+		 * @param str a string
 		 */
-		set_text_with_mnemonic(_str: string): void;
+		set_text_with_mnemonic(str: string): void;
 		/**
 		 * Sets whether the label should keep track of clicked
 		 * links (and use a different color for them).
@@ -20669,7 +20668,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Label} instead.
 	 */
-	type LabelMixin = ILabel & IMisc & Atk.IImplementorIface & IBuildable;
+	type LabelMixin = ILabel & Misc & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Label} widget displays a small amount of text. As the name
@@ -20857,10 +20856,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Creates a new label with the given text inside it. You can
 		 * pass %NULL to get an empty label widget.
-		 * @param _str The text of the label
+		 * @param str The text of the label
 		 * @returns the new {@link Label}
 		 */
-		public static new(_str: string | null): Widget;
+		public static new(str: string | null): Widget;
 		/**
 		 * Creates a new {@link Label}, containing the text in #str.
 		 * 
@@ -20876,11 +20875,11 @@ declare namespace imports.gi.Gtk {
 		 * widget. For instance, if the label is inside a button or menu item,
 		 * the button or menu item will automatically become the mnemonic widget
 		 * and be activated by the mnemonic.
-		 * @param _str The text of the label, with an underscore in front of the
+		 * @param str The text of the label, with an underscore in front of the
 		 *       mnemonic character
 		 * @returns the new {@link Label}
 		 */
-		public static new_with_mnemonic(_str: string | null): Widget;
+		public static new_with_mnemonic(str: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -20893,7 +20892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LabelAccessible} instead.
 	 */
-	type LabelAccessibleMixin = ILabelAccessible & IWidgetAccessible & Atk.IComponent & Atk.IHypertext & Atk.IText;
+	type LabelAccessibleMixin = ILabelAccessible & WidgetAccessible & Atk.Component & Atk.Hypertext & Atk.Text;
 
 	interface LabelAccessible extends LabelAccessibleMixin {}
 
@@ -20947,18 +20946,18 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Moves a current child of #layout to a new position.
 		 * @param child_widget a current child of #layout
-		 * @param _x X position to move to
-		 * @param _y Y position to move to
+		 * @param x X position to move to
+		 * @param y Y position to move to
 		 */
-		move(child_widget: Widget, _x: number, _y: number): void;
+		move(child_widget: Widget, x: number, y: number): void;
 		/**
 		 * Adds #child_widget to #layout, at position (#x,#y).
 		 * #layout becomes the new parent container of #child_widget.
 		 * @param child_widget child widget
-		 * @param _x X position of child widget
-		 * @param _y Y position of child widget
+		 * @param x X position of child widget
+		 * @param y Y position of child widget
 		 */
-		put(child_widget: Widget, _x: number, _y: number): void;
+		put(child_widget: Widget, x: number, y: number): void;
 		/**
 		 * Sets the horizontal scroll adjustment for the layout.
 		 * 
@@ -20988,7 +20987,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Layout} instead.
 	 */
-	type LayoutMixin = ILayout & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type LayoutMixin = ILayout & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * {@link Layout} is similar to #GtkDrawingArea in that it’s a “blank slate” and
@@ -21158,7 +21157,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBar} instead.
 	 */
-	type LevelBarMixin = ILevelBar & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type LevelBarMixin = ILevelBar & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link LevelBar} is a bar widget that can be used
@@ -21284,7 +21283,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelBarAccessible} instead.
 	 */
-	type LevelBarAccessibleMixin = ILevelBarAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type LevelBarAccessibleMixin = ILevelBarAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface LevelBarAccessible extends LevelBarAccessibleMixin {}
 
@@ -21353,7 +21352,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButton} instead.
 	 */
-	type LinkButtonMixin = ILinkButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type LinkButtonMixin = ILinkButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A GtkLinkButton is a {@link Button} with a hyperlink, similar to the one
@@ -21406,7 +21405,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LinkButtonAccessible} instead.
 	 */
-	type LinkButtonAccessibleMixin = ILinkButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IHyperlinkImpl & Atk.IImage;
+	type LinkButtonAccessibleMixin = ILinkButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.HyperlinkImpl & Atk.Image;
 
 	interface LinkButtonAccessible extends LinkButtonAccessibleMixin {}
 
@@ -21450,9 +21449,9 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * The row will also be unhighlighted when the widget gets
 		 * a drag leave event.
-		 * @param _row a {@link ListBoxRow}
+		 * @param row a {@link ListBoxRow}
 		 */
-		drag_highlight_row(_row: ListBoxRow): void;
+		drag_highlight_row(row: ListBoxRow): void;
 		/**
 		 * If a row has previously been highlighted via gtk_list_box_drag_highlight_row()
 		 * it will have the highlight removed.
@@ -21479,11 +21478,11 @@ declare namespace imports.gi.Gtk {
 		get_row_at_index(index_: number): ListBoxRow | null;
 		/**
 		 * Gets the row at the #y position.
-		 * @param _y position
+		 * @param y position
 		 * @returns the row or %NULL
 		 *   in case no row exists for the given y coordinate.
 		 */
-		get_row_at_y(_y: number): ListBoxRow | null;
+		get_row_at_y(y: number): ListBoxRow | null;
 		/**
 		 * Gets the selected row.
 		 * 
@@ -21549,17 +21548,17 @@ declare namespace imports.gi.Gtk {
 		select_all(): void;
 		/**
 		 * Make #row the currently selected row.
-		 * @param _row The row to select or %NULL
+		 * @param row The row to select or %NULL
 		 */
-		select_row(_row: ListBoxRow | null): void;
+		select_row(row: ListBoxRow | null): void;
 		/**
 		 * Calls a function for each selected child.
 		 * 
 		 * Note that the selection cannot be modified from within this function.
-		 * @param _func the function to call for each selected child
+		 * @param func the function to call for each selected child
 		 * @param data user data to pass to the function
 		 */
-		selected_foreach(_func: ListBoxForeachFunc, data: any | null): void;
+		selected_foreach(func: ListBoxForeachFunc, data: any | null): void;
 		/**
 		 * If #single is %TRUE, rows will be activated when you click on them,
 		 * otherwise you need to double-click.
@@ -21648,15 +21647,15 @@ declare namespace imports.gi.Gtk {
 		unselect_all(): void;
 		/**
 		 * Unselects a single row of #box, if the selection mode allows it.
-		 * @param _row the row to unselected
+		 * @param row the row to unselected
 		 */
-		unselect_row(_row: ListBoxRow): void;
+		unselect_row(row: ListBoxRow): void;
 		connect(signal: "activate-cursor-row", callback: (owner: this) => void): number;
 		connect(signal: "move-cursor", callback: (owner: this, object: MovementStep, p0: number) => void): number;
 		/**
 		 * The ::row-activated signal is emitted when a row has been activated by the user.
 		 */
-		connect(signal: "row-activated", callback: (owner: this, _row: ListBoxRow) => void): number;
+		connect(signal: "row-activated", callback: (owner: this, row: ListBoxRow) => void): number;
 		/**
 		 * The ::row-selected signal is emitted when a new row is selected, or
 		 * (with a %NULL #row) when the selection is cleared.
@@ -21665,7 +21664,7 @@ declare namespace imports.gi.Gtk {
 		 * give you the full picture of selection changes, and you should use
 		 * the {@link ListBox}::selected-rows-changed signal instead.
 		 */
-		connect(signal: "row-selected", callback: (owner: this, _row: ListBoxRow | null) => void): number;
+		connect(signal: "row-selected", callback: (owner: this, row: ListBoxRow | null) => void): number;
 		/**
 		 * The ::select-all signal is a [keybinding signal][GtkBindingSignal]
 		 * which gets emitted to select all children of the box, if the selection
@@ -21697,7 +21696,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBox} instead.
 	 */
-	type ListBoxMixin = IListBox & IContainer & Atk.IImplementorIface & IBuildable;
+	type ListBoxMixin = IListBox & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkListBox is a vertical container that contains GtkListBoxRow
@@ -21760,7 +21759,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxAccessible} instead.
 	 */
-	type ListBoxAccessibleMixin = IListBoxAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type ListBoxAccessibleMixin = IListBoxAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface ListBoxAccessible extends ListBoxAccessibleMixin {}
 
@@ -21863,7 +21862,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRow} instead.
 	 */
-	type ListBoxRowMixin = IListBoxRow & IBin & Atk.IImplementorIface & IActionable & IBuildable;
+	type ListBoxRowMixin = IListBoxRow & Bin & Atk.ImplementorIface & Actionable & Buildable;
 
 	interface ListBoxRow extends ListBoxRowMixin {}
 
@@ -21886,7 +21885,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListBoxRowAccessible} instead.
 	 */
-	type ListBoxRowAccessibleMixin = IListBoxRowAccessible & IContainerAccessible & Atk.IComponent;
+	type ListBoxRowAccessibleMixin = IListBoxRowAccessible & ContainerAccessible & Atk.Component;
 
 	interface ListBoxRowAccessible extends ListBoxRowAccessibleMixin {}
 
@@ -22084,16 +22083,16 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Swaps #a and #b in #store. Note that this function only works with
 		 * unsorted stores.
-		 * @param _a A {@link TreeIter}.
-		 * @param _b Another {@link TreeIter}.
+		 * @param a A {@link TreeIter}.
+		 * @param b Another {@link TreeIter}.
 		 */
-		swap(_a: TreeIter, _b: TreeIter): void;
+		swap(a: TreeIter, b: TreeIter): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListStore} instead.
 	 */
-	type ListStoreMixin = IListStore & GObject.IObject & IBuildable & ITreeDragDest & ITreeDragSource & ITreeModel & ITreeSortable;
+	type ListStoreMixin = IListStore & GObject.Object & Buildable & TreeDragDest & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link ListStore} object is a list model for use with a #GtkTreeView
@@ -22291,7 +22290,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButton} instead.
 	 */
-	type LockButtonMixin = ILockButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type LockButtonMixin = ILockButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * GtkLockButton is a widget that can be used in control panels or
@@ -22347,7 +22346,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LockButtonAccessible} instead.
 	 */
-	type LockButtonAccessibleMixin = ILockButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type LockButtonAccessibleMixin = ILockButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface LockButtonAccessible extends LockButtonAccessibleMixin {}
 
@@ -22566,13 +22565,13 @@ declare namespace imports.gi.Gtk {
 		 *     triggering menu item, or %NULL
 		 * @param parent_menu_item the menu item whose activation
 		 *     triggered the popup, or %NULL
-		 * @param _func a user supplied function used to position
+		 * @param func a user supplied function used to position
 		 *     the menu, or %NULL
 		 * @param data user supplied data to be passed to #func.
 		 * @param button the mouse button which was pressed to initiate the event.
 		 * @param activate_time the time at which the activation event occurred.
 		 */
-		popup(parent_menu_shell: Widget | null, parent_menu_item: Widget | null, _func: MenuPositionFunc | null, data: any | null, button: number, activate_time: number): void;
+		popup(parent_menu_shell: Widget | null, parent_menu_item: Widget | null, func: MenuPositionFunc | null, data: any | null, button: number, activate_time: number): void;
 		/**
 		 * Displays #menu and makes it available for selection.
 		 * 
@@ -22675,14 +22674,14 @@ declare namespace imports.gi.Gtk {
 		 *     menu item, or %NULL
 		 * @param parent_menu_item the menu item whose activation triggered
 		 *     the popup, or %NULL
-		 * @param _func a user supplied function used to position the menu,
+		 * @param func a user supplied function used to position the menu,
 		 *     or %NULL
 		 * @param data user supplied data to be passed to #func
 		 * @param destroy destroy notify for #data
 		 * @param button the mouse button which was pressed to initiate the event
 		 * @param activate_time the time at which the activation event occurred
 		 */
-		popup_for_device(device: Gdk.Device | null, parent_menu_shell: Widget | null, parent_menu_item: Widget | null, _func: MenuPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null, button: number, activate_time: number): void;
+		popup_for_device(device: Gdk.Device | null, parent_menu_shell: Widget | null, parent_menu_item: Widget | null, func: MenuPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null, button: number, activate_time: number): void;
 		/**
 		 * Moves #child to a new #position in the list of #menu
 		 * children.
@@ -22828,7 +22827,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Menu} instead.
 	 */
-	type MenuMixin = IMenu & IMenuShell & Atk.IImplementorIface & IBuildable;
+	type MenuMixin = IMenu & MenuShell & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link Menu} is a #GtkMenuShell that implements a drop down menu
@@ -22946,7 +22945,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuAccessible} instead.
 	 */
-	type MenuAccessibleMixin = IMenuAccessible & IMenuShellAccessible & Atk.IComponent & Atk.ISelection;
+	type MenuAccessibleMixin = IMenuAccessible & MenuShellAccessible & Atk.Component & Atk.Selection;
 
 	interface MenuAccessible extends MenuAccessibleMixin {}
 
@@ -23000,7 +22999,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuBar} instead.
 	 */
-	type MenuBarMixin = IMenuBar & IMenuShell & Atk.IImplementorIface & IBuildable;
+	type MenuBarMixin = IMenuBar & MenuShell & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link MenuBar} is a subclass of #GtkMenuShell which contains one or
@@ -23182,7 +23181,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButton} instead.
 	 */
-	type MenuButtonMixin = IMenuButton & IToggleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuButtonMixin = IMenuButton & ToggleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link MenuButton} widget is used to display a popup when clicked on.
@@ -23292,7 +23291,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuButtonAccessible} instead.
 	 */
-	type MenuButtonAccessibleMixin = IMenuButtonAccessible & IToggleButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type MenuButtonAccessibleMixin = IMenuButtonAccessible & ToggleButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface MenuButtonAccessible extends MenuButtonAccessibleMixin {}
 
@@ -23479,7 +23478,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItem} instead.
 	 */
-	type MenuItemMixin = IMenuItem & IBin & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuItemMixin = IMenuItem & Bin & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link MenuItem} widget and the derived widgets are the only valid
@@ -23568,7 +23567,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItemAccessible} instead.
 	 */
-	type MenuItemAccessibleMixin = IMenuItemAccessible & IContainerAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type MenuItemAccessibleMixin = IMenuItemAccessible & ContainerAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface MenuItemAccessible extends MenuItemAccessibleMixin {}
 
@@ -23788,7 +23787,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShell} instead.
 	 */
-	type MenuShellMixin = IMenuShell & IContainer & Atk.IImplementorIface & IBuildable;
+	type MenuShellMixin = IMenuShell & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A {@link MenuShell} is the abstract base class used to derive the
@@ -23835,7 +23834,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuShellAccessible} instead.
 	 */
-	type MenuShellAccessibleMixin = IMenuShellAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type MenuShellAccessibleMixin = IMenuShellAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface MenuShellAccessible extends MenuShellAccessibleMixin {}
 
@@ -23893,7 +23892,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuToolButton} instead.
 	 */
-	type MenuToolButtonMixin = IMenuToolButton & IToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type MenuToolButtonMixin = IMenuToolButton & ToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link MenuToolButton} is a #GtkToolItem that contains a button and
@@ -24029,9 +24028,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Sets the text of the message dialog to be #str, which is marked
 		 * up with the [Pango text markup language][PangoMarkupFormat].
-		 * @param _str markup string (see [Pango markup format][PangoMarkupFormat])
+		 * @param str markup string (see [Pango markup format][PangoMarkupFormat])
 		 */
-		set_markup(_str: string): void;
+		set_markup(str: string): void;
 		connect(signal: "notify::image", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::message_area", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::message_type", callback: (owner: this, ...args: any) => number): number;
@@ -24045,7 +24044,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MessageDialog} instead.
 	 */
-	type MessageDialogMixin = IMessageDialog & IDialog & Atk.IImplementorIface & IBuildable;
+	type MessageDialogMixin = IMessageDialog & Dialog & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link MessageDialog} presents a dialog with some message text. It’s simply a
@@ -24112,12 +24111,12 @@ declare namespace imports.gi.Gtk {
 		 * #GtkDialog for more details.
 		 * @param parent transient parent, or %NULL for none
 		 * @param flags flags
-		 * @param _type type of message
+		 * @param type type of message
 		 * @param buttons set of buttons to use
 		 * @param message_format printf()-style format string, or %NULL
 		 * @returns a new {@link MessageDialog}
 		 */
-		public static new(parent: Window | null, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
+		public static new(parent: Window | null, flags: DialogFlags, type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
 		/**
 		 * Creates a new message dialog, which is a simple dialog with some text that
 		 * is marked up with the [Pango text markup language][PangoMarkupFormat].
@@ -24146,12 +24145,12 @@ declare namespace imports.gi.Gtk {
 		 * ]|
 		 * @param parent transient parent, or %NULL for none
 		 * @param flags flags
-		 * @param _type type of message
+		 * @param type type of message
 		 * @param buttons set of buttons to use
 		 * @param message_format printf()-style format string, or %NULL
 		 * @returns a new {@link MessageDialog}
 		 */
-		public static new_with_markup(parent: Window | null, flags: DialogFlags, _type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
+		public static new_with_markup(parent: Window | null, flags: DialogFlags, type: MessageType, buttons: ButtonsType, message_format: string | null): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24223,7 +24222,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
-	type MiscMixin = IMisc & IWidget & Atk.IImplementorIface & IBuildable;
+	type MiscMixin = IMisc & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Misc} widget is an abstract widget which is not useful itself, but
@@ -24316,7 +24315,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelButton} instead.
 	 */
-	type ModelButtonMixin = IModelButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ModelButtonMixin = IModelButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * GtkModelButton is a button class that can use a #GAction as its model.
@@ -24472,7 +24471,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MountOperation} instead.
 	 */
-	type MountOperationMixin = IMountOperation & Gio.IMountOperation;
+	type MountOperationMixin = IMountOperation & Gio.MountOperation;
 
 	/**
 	 * This should not be accessed directly. Use the accessor functions below.
@@ -24641,7 +24640,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeDialog} instead.
 	 */
-	type NativeDialogMixin = INativeDialog & GObject.IObject;
+	type NativeDialogMixin = INativeDialog & GObject.Object;
 
 	/**
 	 * Native dialogs are platform dialogs that don't use {@link Dialog} or
@@ -25080,7 +25079,7 @@ declare namespace imports.gi.Gtk {
 		 * necessary properties to the notebook (e.g. the
 		 * {@link Notebook}:group-name ).
 		 */
-		connect(signal: "create-window", callback: (owner: this, page: Widget, _x: number, _y: number) => Notebook): number;
+		connect(signal: "create-window", callback: (owner: this, page: Widget, x: number, y: number) => Notebook): number;
 		connect(signal: "focus-tab", callback: (owner: this, object: NotebookTab) => boolean): number;
 		connect(signal: "move-focus-out", callback: (owner: this, object: DirectionType) => void): number;
 		/**
@@ -25118,7 +25117,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notebook} instead.
 	 */
-	type NotebookMixin = INotebook & IContainer & Atk.IImplementorIface & IBuildable;
+	type NotebookMixin = INotebook & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Notebook} widget is a #GtkContainer whose children are pages that
@@ -25224,7 +25223,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookAccessible} instead.
 	 */
-	type NotebookAccessibleMixin = INotebookAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection;
+	type NotebookAccessibleMixin = INotebookAccessible & ContainerAccessible & Atk.Component & Atk.Selection;
 
 	interface NotebookAccessible extends NotebookAccessibleMixin {}
 
@@ -25242,7 +25241,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotebookPageAccessible} instead.
 	 */
-	type NotebookPageAccessibleMixin = INotebookPageAccessible & Atk.IObject & Atk.IComponent;
+	type NotebookPageAccessibleMixin = INotebookPageAccessible & Atk.Object & Atk.Component;
 
 	interface NotebookPageAccessible extends NotebookPageAccessibleMixin {}
 
@@ -25362,7 +25361,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NumerableIcon} instead.
 	 */
-	type NumerableIconMixin = INumerableIcon & Gio.IEmblemedIcon & Gio.IIcon;
+	type NumerableIconMixin = INumerableIcon & Gio.EmblemedIcon & Gio.Icon;
 
 	/**
 	 * GtkNumerableIcon is a subclass of #GEmblemedIcon that can
@@ -25426,7 +25425,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenWindow} instead.
 	 */
-	type OffscreenWindowMixin = IOffscreenWindow & IWindow & Atk.IImplementorIface & IBuildable;
+	type OffscreenWindowMixin = IOffscreenWindow & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkOffscreenWindow is strictly intended to be used for obtaining
@@ -25524,7 +25523,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Overlay} instead.
 	 */
-	type OverlayMixin = IOverlay & IBin & Atk.IImplementorIface & IBuildable;
+	type OverlayMixin = IOverlay & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkOverlay is a container which contains a single main child, on top
@@ -25581,14 +25580,14 @@ declare namespace imports.gi.Gtk {
 		 * The given #label should be considered user-visible, so internationalization
 		 * rules apply. Some windowing systems may be able to use those for user
 		 * feedback.
-		 * @param _type the type of pad feature that will trigger this action
+		 * @param type the type of pad feature that will trigger this action
 		 * @param index the 0-indexed button/ring/strip number that will trigger this action
 		 * @param mode the mode that will trigger this action, or -1 for all modes.
 		 * @param label Human readable description of this action, this string should
 		 *   be deemed user-visible.
 		 * @param action_name action name that will be activated in the #GActionGroup
 		 */
-		set_action(_type: PadActionType, index: number, mode: number, label: string, action_name: string): void;
+		set_action(type: PadActionType, index: number, mode: number, label: string, action_name: string): void;
 		/**
 		 * This is a convenience function to add a group of action entries on
 		 * #controller. See {@link PadActionEntry} and gtk_pad_controller_set_action().
@@ -25604,7 +25603,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PadController} instead.
 	 */
-	type PadControllerMixin = IPadController & IEventController;
+	type PadControllerMixin = IPadController & EventController;
 
 	/**
 	 * {@link PadController} is an event controller for the pads found in drawing
@@ -25836,7 +25835,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageSetup} instead.
 	 */
-	type PageSetupMixin = IPageSetup & GObject.IObject;
+	type PageSetupMixin = IPageSetup & GObject.Object;
 
 	/**
 	 * A GtkPageSetup object stores the page size, orientation and margins.
@@ -26076,7 +26075,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Paned} instead.
 	 */
-	type PanedMixin = IPaned & IContainer & Atk.IImplementorIface & IBuildable & IOrientable;
+	type PanedMixin = IPaned & Container & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link Paned} has two panes, arranged either
@@ -26166,7 +26165,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanedAccessible} instead.
 	 */
-	type PanedAccessibleMixin = IPanedAccessible & IContainerAccessible & Atk.IComponent & Atk.IValue;
+	type PanedAccessibleMixin = IPanedAccessible & ContainerAccessible & Atk.Component & Atk.Value;
 
 	interface PanedAccessible extends PanedAccessibleMixin {}
 
@@ -26230,12 +26229,12 @@ declare namespace imports.gi.Gtk {
 		 * This function queries the bookmarks added by the user to the places sidebar,
 		 * and returns one of them.  This function is used by {@link FileChooser} to implement
 		 * the “Alt-1”, “Alt-2”, etc. shortcuts, which activate the cooresponding bookmark.
-		 * @param _n index of the bookmark to query
+		 * @param n index of the bookmark to query
 		 * @returns The bookmark specified by the index #n, or
 		 * %NULL if no such index exist.  Note that the indices start at 0, even though
 		 * the file chooser starts them with the keyboard shortcut "Alt-1".
 		 */
-		get_nth_bookmark(_n: number): Gio.File | null;
+		get_nth_bookmark(n: number): Gio.File | null;
 		/**
 		 * Gets the open flags.
 		 * @returns the {@link PlacesOpenFlags} of #sidebar
@@ -26538,7 +26537,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlacesSidebar} instead.
 	 */
-	type PlacesSidebarMixin = IPlacesSidebar & IScrolledWindow & Atk.IImplementorIface & IBuildable;
+	type PlacesSidebarMixin = IPlacesSidebar & ScrolledWindow & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link PlacesSidebar} is a widget that displays a list of frequently-used places in the
@@ -26649,7 +26648,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
-	type PlugMixin = IPlug & IWindow & Atk.IImplementorIface & IBuildable;
+	type PlugMixin = IPlug & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Together with {@link Socket}, #GtkPlug provides the ability to embed
@@ -26702,7 +26701,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PlugAccessible} instead.
 	 */
-	type PlugAccessibleMixin = IPlugAccessible & IWindowAccessible & Atk.IComponent & Atk.IWindow;
+	type PlugAccessibleMixin = IPlugAccessible & WindowAccessible & Atk.Component & Atk.Window;
 
 	interface PlugAccessible extends PlugAccessibleMixin {}
 
@@ -26900,7 +26899,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Popover} instead.
 	 */
-	type PopoverMixin = IPopover & IBin & Atk.IImplementorIface & IBuildable;
+	type PopoverMixin = IPopover & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkPopover is a bubble-like context window, primarily meant to
@@ -27003,7 +27002,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverAccessible} instead.
 	 */
-	type PopoverAccessibleMixin = IPopoverAccessible & IContainerAccessible & Atk.IComponent;
+	type PopoverAccessibleMixin = IPopoverAccessible & ContainerAccessible & Atk.Component;
 
 	interface PopoverAccessible extends PopoverAccessibleMixin {}
 
@@ -27036,7 +27035,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PopoverMenu} instead.
 	 */
-	type PopoverMenuMixin = IPopoverMenu & IPopover & Atk.IImplementorIface & IBuildable;
+	type PopoverMenuMixin = IPopoverMenu & Popover & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkPopoverMenu is a subclass of {@link Popover} that treats its
@@ -27201,7 +27200,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintContext} instead.
 	 */
-	type PrintContextMixin = IPrintContext & GObject.IObject;
+	type PrintContextMixin = IPrintContext & GObject.Object;
 
 	/**
 	 * A GtkPrintContext encapsulates context information that is required when
@@ -27909,7 +27908,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
-	type PrintOperationMixin = IPrintOperation & GObject.IObject & IPrintOperationPreview;
+	type PrintOperationMixin = IPrintOperation & GObject.Object & PrintOperationPreview;
 
 	/**
 	 * GtkPrintOperation is the high-level, portable printing API.
@@ -27996,9 +27995,9 @@ declare namespace imports.gi.Gtk {
 		copy(): PrintSettings;
 		/**
 		 * Calls #func for each key-value pair of #settings.
-		 * @param _func the function to call
+		 * @param func the function to call
 		 */
-		foreach(_func: PrintSettingsFunc): void;
+		foreach(func: PrintSettingsFunc): void;
 		/**
 		 * Looks up the string value associated with #key.
 		 * @param key a key
@@ -28043,10 +28042,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * Floating point numbers are parsed with g_ascii_strtod().
 		 * @param key a key
-		 * @param _def the default value
+		 * @param def the default value
 		 * @returns the floating point number associated with #key
 		 */
-		get_double_with_default(key: string, _def: number): number;
+		get_double_with_default(key: string, def: number): number;
 		/**
 		 * Gets the value of %GTK_PRINT_SETTINGS_DUPLEX.
 		 * @returns whether to print the output in duplex.
@@ -28067,10 +28066,10 @@ declare namespace imports.gi.Gtk {
 		 * Returns the value of #key, interpreted as
 		 * an integer, or the default value.
 		 * @param key a key
-		 * @param _def the default value
+		 * @param def the default value
 		 * @returns the integer value of #key
 		 */
-		get_int_with_default(key: string, _def: number): number;
+		get_int_with_default(key: string, def: number): number;
 		/**
 		 * Returns the value associated with #key, interpreted
 		 * as a length. The returned value is converted to #units.
@@ -28419,7 +28418,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintSettings} instead.
 	 */
-	type PrintSettingsMixin = IPrintSettings & GObject.IObject;
+	type PrintSettingsMixin = IPrintSettings & GObject.Object;
 
 	/**
 	 * A GtkPrintSettings object represents the settings of a print dialog in
@@ -28611,7 +28610,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBar} instead.
 	 */
-	type ProgressBarMixin = IProgressBar & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ProgressBarMixin = IProgressBar & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link ProgressBar} is typically used to display the progress of a long
@@ -28675,7 +28674,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProgressBarAccessible} instead.
 	 */
-	type ProgressBarAccessibleMixin = IProgressBarAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type ProgressBarAccessibleMixin = IProgressBarAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface ProgressBarAccessible extends ProgressBarAccessibleMixin {}
 
@@ -28776,7 +28775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioAction} instead.
 	 */
-	type RadioActionMixin = IRadioAction & IToggleAction & IBuildable;
+	type RadioActionMixin = IRadioAction & ToggleAction & Buildable;
 
 	/**
 	 * A {@link RadioAction} is similar to #GtkRadioMenuItem. A number of radio
@@ -28866,7 +28865,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButton} instead.
 	 */
-	type RadioButtonMixin = IRadioButton & ICheckButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioButtonMixin = IRadioButton & CheckButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A single radio button performs the same basic function as a {@link CheckButton},
@@ -29024,7 +29023,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioButtonAccessible} instead.
 	 */
-	type RadioButtonAccessibleMixin = IRadioButtonAccessible & IToggleButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type RadioButtonAccessibleMixin = IRadioButtonAccessible & ToggleButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface RadioButtonAccessible extends RadioButtonAccessibleMixin {}
 
@@ -29086,7 +29085,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItem} instead.
 	 */
-	type RadioMenuItemMixin = IRadioMenuItem & ICheckMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioMenuItemMixin = IRadioMenuItem & CheckMenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A radio menu item is a check menu item that belongs to a group. At each
@@ -29193,7 +29192,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioMenuItemAccessible} instead.
 	 */
-	type RadioMenuItemAccessibleMixin = IRadioMenuItemAccessible & ICheckMenuItemAccessible & Atk.IAction & Atk.IComponent & Atk.ISelection;
+	type RadioMenuItemAccessibleMixin = IRadioMenuItemAccessible & CheckMenuItemAccessible & Atk.Action & Atk.Component & Atk.Selection;
 
 	interface RadioMenuItemAccessible extends RadioMenuItemAccessibleMixin {}
 
@@ -29220,7 +29219,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RadioToolButton} instead.
 	 */
-	type RadioToolButtonMixin = IRadioToolButton & IToggleToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type RadioToolButtonMixin = IRadioToolButton & ToggleToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link RadioToolButton} is a #GtkToolItem that contains a radio button,
@@ -29558,7 +29557,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Range} instead.
 	 */
-	type RangeMixin = IRange & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type RangeMixin = IRange & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link Range} is the common base class for widgets which visualize an
@@ -29585,7 +29584,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RangeAccessible} instead.
 	 */
-	type RangeAccessibleMixin = IRangeAccessible & IWidgetAccessible & Atk.IComponent & Atk.IValue;
+	type RangeAccessibleMixin = IRangeAccessible & WidgetAccessible & Atk.Component & Atk.Value;
 
 	interface RangeAccessible extends RangeAccessibleMixin {}
 
@@ -29660,7 +29659,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RcStyle} instead.
 	 */
-	type RcStyleMixin = IRcStyle & GObject.IObject;
+	type RcStyleMixin = IRcStyle & GObject.Object;
 
 	/**
 	 * The {@link RcStyle}-struct is used to represent a set
@@ -29708,7 +29707,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentAction} instead.
 	 */
-	type RecentActionMixin = IRecentAction & IAction & IBuildable & IRecentChooser;
+	type RecentActionMixin = IRecentAction & Action & Buildable & RecentChooser;
 
 	/**
 	 * A {@link RecentAction} represents a list of recently used files, which
@@ -29764,7 +29763,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserDialog} instead.
 	 */
-	type RecentChooserDialogMixin = IRecentChooserDialog & IDialog & Atk.IImplementorIface & IBuildable & IRecentChooser;
+	type RecentChooserDialogMixin = IRecentChooserDialog & Dialog & Atk.ImplementorIface & Buildable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserDialog} is a dialog box suitable for displaying the recently
@@ -29865,7 +29864,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserMenu} instead.
 	 */
-	type RecentChooserMenuMixin = IRecentChooserMenu & IMenu & Atk.IImplementorIface & IActivatable & IBuildable & IRecentChooser;
+	type RecentChooserMenuMixin = IRecentChooserMenu & Menu & Atk.ImplementorIface & Activatable & Buildable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserMenu} is a widget suitable for displaying recently used files
@@ -29931,7 +29930,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentChooserWidget} instead.
 	 */
-	type RecentChooserWidgetMixin = IRecentChooserWidget & IBox & Atk.IImplementorIface & IBuildable & IOrientable & IRecentChooser;
+	type RecentChooserWidgetMixin = IRecentChooserWidget & Box & Atk.ImplementorIface & Buildable & Orientable & RecentChooser;
 
 	/**
 	 * {@link RecentChooserWidget} is a widget suitable for selecting recently used
@@ -29989,12 +29988,12 @@ declare namespace imports.gi.Gtk {
 		 * it isn’t needed by the filter.
 		 * @param needed bitfield of flags indicating the information that the custom
 		 *          filter function needs.
-		 * @param _func callback function; if the function returns %TRUE, then
+		 * @param func callback function; if the function returns %TRUE, then
 		 *   the file will be displayed.
 		 * @param data data to pass to #func
 		 * @param data_destroy function to call to free #data when it is no longer needed.
 		 */
-		add_custom(needed: RecentFilterFlags, _func: RecentFilterFunc, data: any | null, data_destroy: GLib.DestroyNotify): void;
+		add_custom(needed: RecentFilterFlags, func: RecentFilterFunc, data: any | null, data_destroy: GLib.DestroyNotify): void;
 		/**
 		 * Adds a rule that allows resources based on the name of the group
 		 * to which they belong
@@ -30062,7 +30061,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentFilter} instead.
 	 */
-	type RecentFilterMixin = IRecentFilter & GObject.IInitiallyUnowned & IBuildable;
+	type RecentFilterMixin = IRecentFilter & GObject.InitiallyUnowned & Buildable;
 
 	/**
 	 * A {@link RecentFilter} can be used to restrict the files being shown
@@ -30254,7 +30253,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RecentManager} instead.
 	 */
-	type RecentManagerMixin = IRecentManager & GObject.IObject;
+	type RecentManagerMixin = IRecentManager & GObject.Object;
 
 	/**
 	 * {@link RecentManager} provides a facility for adding, removing and
@@ -30355,7 +30354,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RendererCellAccessible} instead.
 	 */
-	type RendererCellAccessibleMixin = IRendererCellAccessible & ICellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell;
+	type RendererCellAccessibleMixin = IRendererCellAccessible & CellAccessible & Atk.Action & Atk.Component & Atk.TableCell;
 
 	interface RendererCellAccessible extends RendererCellAccessibleMixin {}
 
@@ -30431,7 +30430,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Revealer} instead.
 	 */
-	type RevealerMixin = IRevealer & IBin & Atk.IImplementorIface & IBuildable;
+	type RevealerMixin = IRevealer & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkRevealer widget is a container which animates
@@ -30600,7 +30599,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scale} instead.
 	 */
-	type ScaleMixin = IScale & IRange & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ScaleMixin = IScale & Range & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkScale is a slider control used to select a numeric value.
@@ -30717,7 +30716,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleAccessible} instead.
 	 */
-	type ScaleAccessibleMixin = IScaleAccessible & IRangeAccessible & Atk.IComponent & Atk.IValue;
+	type ScaleAccessibleMixin = IScaleAccessible & RangeAccessible & Atk.Component & Atk.Value;
 
 	interface ScaleAccessible extends ScaleAccessibleMixin {}
 
@@ -30829,7 +30828,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButton} instead.
 	 */
-	type ScaleButtonMixin = IScaleButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IOrientable;
+	type ScaleButtonMixin = IScaleButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable & Orientable;
 
 	/**
 	 * {@link ScaleButton} provides a button which pops up a scale widget.
@@ -30874,7 +30873,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScaleButtonAccessible} instead.
 	 */
-	type ScaleButtonAccessibleMixin = IScaleButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage & Atk.IValue;
+	type ScaleButtonAccessibleMixin = IScaleButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image & Atk.Value;
 
 	interface ScaleButtonAccessible extends ScaleButtonAccessibleMixin {}
 
@@ -30895,7 +30894,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scrollbar} instead.
 	 */
-	type ScrollbarMixin = IScrollbar & IRange & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ScrollbarMixin = IScrollbar & Range & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link Scrollbar} widget is a horizontal or vertical scrollbar,
@@ -31244,9 +31243,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Changes the type of shadow drawn around the contents of
 		 * #scrolled_window.
-		 * @param _type kind of shadow to draw around scrolled window contents
+		 * @param type kind of shadow to draw around scrolled window contents
 		 */
-		set_shadow_type(_type: ShadowType): void;
+		set_shadow_type(type: ShadowType): void;
 		/**
 		 * Sets the {@link Adjustment} for the vertical scrollbar.
 		 * @param vadjustment the {@link Adjustment} to use, or %NULL to create a new one
@@ -31326,7 +31325,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindow} instead.
 	 */
-	type ScrolledWindowMixin = IScrolledWindow & IBin & Atk.IImplementorIface & IBuildable;
+	type ScrolledWindowMixin = IScrolledWindow & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkScrolledWindow is a container that accepts a single child widget, makes
@@ -31435,7 +31434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrolledWindowAccessible} instead.
 	 */
-	type ScrolledWindowAccessibleMixin = IScrolledWindowAccessible & IContainerAccessible & Atk.IComponent;
+	type ScrolledWindowAccessibleMixin = IScrolledWindowAccessible & ContainerAccessible & Atk.Component;
 
 	interface ScrolledWindowAccessible extends ScrolledWindowAccessibleMixin {}
 
@@ -31533,7 +31532,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchBar} instead.
 	 */
-	type SearchBarMixin = ISearchBar & IBin & Atk.IImplementorIface & IBuildable;
+	type SearchBarMixin = ISearchBar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * {@link SearchBar} is a container made to have a search entry (possibly
@@ -31638,7 +31637,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SearchEntry} instead.
 	 */
-	type SearchEntryMixin = ISearchEntry & IEntry & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable;
+	type SearchEntryMixin = ISearchEntry & Entry & Atk.ImplementorIface & Buildable & CellEditable & Editable;
 
 	/**
 	 * {@link SearchEntry} is a subclass of #GtkEntry that has been
@@ -31691,7 +31690,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Separator} instead.
 	 */
-	type SeparatorMixin = ISeparator & IWidget & Atk.IImplementorIface & IBuildable & IOrientable;
+	type SeparatorMixin = ISeparator & Widget & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * GtkSeparator is a horizontal or vertical separator widget, depending on the
@@ -31729,7 +31728,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorMenuItem} instead.
 	 */
-	type SeparatorMenuItemMixin = ISeparatorMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type SeparatorMenuItemMixin = ISeparatorMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * The {@link SeparatorMenuItem} is a separator used to group
@@ -31776,7 +31775,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SeparatorToolItem} instead.
 	 */
-	type SeparatorToolItemMixin = ISeparatorToolItem & IToolItem & Atk.IImplementorIface & IActivatable & IBuildable;
+	type SeparatorToolItemMixin = ISeparatorToolItem & ToolItem & Atk.ImplementorIface & Activatable & Buildable;
 
 	/**
 	 * A {@link SeparatorToolItem} is a #GtkToolItem that separates groups of other
@@ -32326,7 +32325,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject & IStyleProvider;
+	type SettingsMixin = ISettings & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkSettings provide a mechanism to share global settings between
@@ -32429,7 +32428,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutLabel} instead.
 	 */
-	type ShortcutLabelMixin = IShortcutLabel & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutLabelMixin = IShortcutLabel & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * {@link ShortcutLabel} is a widget that represents a single keyboard shortcut or gesture
@@ -32479,7 +32478,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsGroup} instead.
 	 */
-	type ShortcutsGroupMixin = IShortcutsGroup & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsGroupMixin = IShortcutsGroup & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsGroup represents a group of related keyboard shortcuts
@@ -32540,7 +32539,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsSection} instead.
 	 */
-	type ShortcutsSectionMixin = IShortcutsSection & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsSectionMixin = IShortcutsSection & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsSection collects all the keyboard shortcuts and gestures
@@ -32650,7 +32649,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsShortcut} instead.
 	 */
-	type ShortcutsShortcutMixin = IShortcutsShortcut & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type ShortcutsShortcutMixin = IShortcutsShortcut & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A GtkShortcutsShortcut represents a single keyboard shortcut or gesture
@@ -32711,7 +32710,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShortcutsWindow} instead.
 	 */
-	type ShortcutsWindowMixin = IShortcutsWindow & IWindow & Atk.IImplementorIface & IBuildable;
+	type ShortcutsWindowMixin = IShortcutsWindow & Window & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkShortcutsWindow shows brief information about the keyboard shortcuts
@@ -32829,7 +32828,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SizeGroup} instead.
 	 */
-	type SizeGroupMixin = ISizeGroup & GObject.IObject & IBuildable;
+	type SizeGroupMixin = ISizeGroup & GObject.Object & Buildable;
 
 	/**
 	 * {@link SizeGroup} provides a mechanism for grouping a number of widgets
@@ -32968,7 +32967,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & IContainer & Atk.IImplementorIface & IBuildable;
+	type SocketMixin = ISocket & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * Together with {@link Plug}, #GtkSocket provides the ability to embed
@@ -33044,7 +33043,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAccessible} instead.
 	 */
-	type SocketAccessibleMixin = ISocketAccessible & IContainerAccessible & Atk.IComponent;
+	type SocketAccessibleMixin = ISocketAccessible & ContainerAccessible & Atk.Component;
 
 	interface SocketAccessible extends SocketAccessibleMixin {}
 
@@ -33275,7 +33274,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButton} instead.
 	 */
-	type SpinButtonMixin = ISpinButton & IEntry & Atk.IImplementorIface & IBuildable & ICellEditable & IEditable & IOrientable;
+	type SpinButtonMixin = ISpinButton & Entry & Atk.ImplementorIface & Buildable & CellEditable & Editable & Orientable;
 
 	/**
 	 * A {@link SpinButton} is an ideal way to allow the user to set the value of
@@ -33428,7 +33427,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinButtonAccessible} instead.
 	 */
-	type SpinButtonAccessibleMixin = ISpinButtonAccessible & IEntryAccessible & Atk.IAction & Atk.IComponent & Atk.IEditableText & Atk.IText & Atk.IValue;
+	type SpinButtonAccessibleMixin = ISpinButtonAccessible & EntryAccessible & Atk.Action & Atk.Component & Atk.EditableText & Atk.Text & Atk.Value;
 
 	interface SpinButtonAccessible extends SpinButtonAccessibleMixin {}
 
@@ -33456,7 +33455,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Spinner} instead.
 	 */
-	type SpinnerMixin = ISpinner & IWidget & Atk.IImplementorIface & IBuildable;
+	type SpinnerMixin = ISpinner & Widget & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkSpinner widget displays an icon-size spinning animation.
@@ -33492,7 +33491,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SpinnerAccessible} instead.
 	 */
-	type SpinnerAccessibleMixin = ISpinnerAccessible & IWidgetAccessible & Atk.IComponent & Atk.IImage;
+	type SpinnerAccessibleMixin = ISpinnerAccessible & WidgetAccessible & Atk.Component & Atk.Image;
 
 	interface SpinnerAccessible extends SpinnerAccessibleMixin {}
 
@@ -33705,7 +33704,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stack} instead.
 	 */
-	type StackMixin = IStack & IContainer & Atk.IImplementorIface & IBuildable;
+	type StackMixin = IStack & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The GtkStack widget is a container which only shows
@@ -33746,7 +33745,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackAccessible} instead.
 	 */
-	type StackAccessibleMixin = IStackAccessible & IContainerAccessible & Atk.IComponent;
+	type StackAccessibleMixin = IStackAccessible & ContainerAccessible & Atk.Component;
 
 	interface StackAccessible extends StackAccessibleMixin {}
 
@@ -33781,7 +33780,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSidebar} instead.
 	 */
-	type StackSidebarMixin = IStackSidebar & IBin & Atk.IImplementorIface & IBuildable;
+	type StackSidebarMixin = IStackSidebar & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkStackSidebar enables you to quickly and easily provide a
@@ -33844,7 +33843,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StackSwitcher} instead.
 	 */
-	type StackSwitcherMixin = IStackSwitcher & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type StackSwitcherMixin = IStackSwitcher & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The GtkStackSwitcher widget acts as a controller for a
@@ -34237,7 +34236,7 @@ declare namespace imports.gi.Gtk {
 		 * Whether this signal is emitted is platform-dependent.
 		 * For plain text tooltips, use {@link StatusIcon}:tooltip-text in preference.
 		 */
-		connect(signal: "query-tooltip", callback: (owner: this, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
+		connect(signal: "query-tooltip", callback: (owner: this, x: number, y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
 		/**
 		 * The ::scroll-event signal is emitted when a button in the 4 to 7
 		 * range is pressed. Wheel mice are usually configured to generate
@@ -34272,7 +34271,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusIcon} instead.
 	 */
-	type StatusIconMixin = IStatusIcon & GObject.IObject;
+	type StatusIconMixin = IStatusIcon & GObject.Object;
 
 	/**
 	 * The “system tray” or notification area is normally used for transient icons
@@ -34435,7 +34434,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Statusbar} instead.
 	 */
-	type StatusbarMixin = IStatusbar & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type StatusbarMixin = IStatusbar & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A {@link Statusbar} is usually placed along the bottom of an application's
@@ -34493,7 +34492,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StatusbarAccessible} instead.
 	 */
-	type StatusbarAccessibleMixin = IStatusbarAccessible & IContainerAccessible & Atk.IComponent;
+	type StatusbarAccessibleMixin = IStatusbarAccessible & ContainerAccessible & Atk.Component;
 
 	interface StatusbarAccessible extends StatusbarAccessibleMixin {}
 
@@ -34562,7 +34561,7 @@ declare namespace imports.gi.Gtk {
 		 * Set of background #cairo_pattern_t
 		 */
 		readonly background: cairo.Pattern[];
-		apply_default_background(cr: cairo.Context, window: Gdk.Window, state_type: StateType, _x: number, _y: number, width: number, height: number): void;
+		apply_default_background(cr: cairo.Context, window: Gdk.Window, state_type: StateType, x: number, y: number, width: number, height: number): void;
 		/**
 		 * Attaches a style to a window; this process allocates the
 		 * colors and creates the GC’s for the style - it specializes
@@ -34699,7 +34698,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Style} instead.
 	 */
-	type StyleMixin = IStyle & GObject.IObject;
+	type StyleMixin = IStyle & GObject.Object;
 
 	/**
 	 * A {@link Style} object encapsulates the information that provides the look and
@@ -35295,7 +35294,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleContext} instead.
 	 */
-	type StyleContextMixin = IStyleContext & GObject.IObject;
+	type StyleContextMixin = IStyleContext & GObject.Object;
 
 	/**
 	 * {@link StyleContext} is an object that stores styling information affecting
@@ -35486,7 +35485,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StyleProperties} instead.
 	 */
-	type StylePropertiesMixin = IStyleProperties & GObject.IObject & IStyleProvider;
+	type StylePropertiesMixin = IStyleProperties & GObject.Object & StyleProvider;
 
 	/**
 	 * GtkStyleProperties provides the storage for style information
@@ -35605,7 +35604,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Switch} instead.
 	 */
-	type SwitchMixin = ISwitch & IWidget & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type SwitchMixin = ISwitch & Widget & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * {@link Switch} is a widget that has two states: on or off. The user can control
@@ -35646,7 +35645,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwitchAccessible} instead.
 	 */
-	type SwitchAccessibleMixin = ISwitchAccessible & IWidgetAccessible & Atk.IAction & Atk.IComponent;
+	type SwitchAccessibleMixin = ISwitchAccessible & WidgetAccessible & Atk.Action & Atk.Component;
 
 	interface SwitchAccessible extends SwitchAccessibleMixin {}
 
@@ -35732,10 +35731,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the amount of space between row #row, and
 		 * row #row + 1. See gtk_table_set_row_spacing().
-		 * @param _row a row in the table, 0 indicates the first row
+		 * @param row a row in the table, 0 indicates the first row
 		 * @returns the row spacing
 		 */
-		get_row_spacing(_row: number): number;
+		get_row_spacing(row: number): number;
 		/**
 		 * Gets the number of rows and columns in the table.
 		 * @returns return location for the number of
@@ -35748,10 +35747,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * If you need to change a table’s size after
 		 * it has been created, this function allows you to do so.
-		 * @param _rows The new number of rows.
+		 * @param rows The new number of rows.
 		 * @param columns The new number of columns.
 		 */
-		resize(_rows: number, columns: number): void;
+		resize(rows: number, columns: number): void;
 		/**
 		 * Alters the amount of space between a given table column and the following
 		 * column.
@@ -35774,10 +35773,10 @@ declare namespace imports.gi.Gtk {
 		set_homogeneous(homogeneous: boolean): void;
 		/**
 		 * Changes the space between a given table row and the subsequent row.
-		 * @param _row row number whose spacing will be changed.
+		 * @param row row number whose spacing will be changed.
 		 * @param spacing number of pixels that the spacing should take up.
 		 */
-		set_row_spacing(_row: number, spacing: number): void;
+		set_row_spacing(row: number, spacing: number): void;
 		/**
 		 * Sets the space between every row in #table equal to #spacing.
 		 * @param spacing the number of pixels of space to place between every row in the table.
@@ -35795,7 +35794,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
-	type TableMixin = ITable & IContainer & Atk.IImplementorIface & IBuildable;
+	type TableMixin = ITable & Container & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * The {@link Table} functions allow the programmer to arrange widgets in rows and
@@ -35833,13 +35832,13 @@ declare namespace imports.gi.Gtk {
 		 * this can be changed later with gtk_table_resize().  #rows and #columns
 		 * must both be in the range 1 .. 65535. For historical reasons, 0 is accepted
 		 * as well and is silently interpreted as 1.
-		 * @param _rows The number of rows the new table should have.
+		 * @param rows The number of rows the new table should have.
 		 * @param columns The number of columns the new table should have.
 		 * @param homogeneous If set to %TRUE, all table cells are resized to the size of
 		 *   the cell containing the largest widget.
 		 * @returns A pointer to the newly created table widget.
 		 */
-		public static new(_rows: number, columns: number, homogeneous: boolean): Widget;
+		public static new(rows: number, columns: number, homogeneous: boolean): Widget;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -35855,7 +35854,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TearoffMenuItem} instead.
 	 */
-	type TearoffMenuItemMixin = ITearoffMenuItem & IMenuItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type TearoffMenuItemMixin = ITearoffMenuItem & MenuItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link TearoffMenuItem} is a special #GtkMenuItem which is used to
@@ -35939,17 +35938,17 @@ declare namespace imports.gi.Gtk {
 		 * #start and #end do not have to be in order.
 		 * @param tag a {@link TextTag}
 		 * @param start one bound of range to be tagged
-		 * @param _end other bound of range to be tagged
+		 * @param end other bound of range to be tagged
 		 */
-		apply_tag(tag: TextTag, start: TextIter, _end: TextIter): void;
+		apply_tag(tag: TextTag, start: TextIter, end: TextIter): void;
 		/**
 		 * Calls gtk_text_tag_table_lookup() on the buffer’s tag table to
 		 * get a {@link TextTag}, then calls gtk_text_buffer_apply_tag().
 		 * @param name name of a named {@link TextTag}
 		 * @param start one bound of range to be tagged
-		 * @param _end other bound of range to be tagged
+		 * @param end other bound of range to be tagged
 		 */
-		apply_tag_by_name(name: string, start: TextIter, _end: TextIter): void;
+		apply_tag_by_name(name: string, start: TextIter, end: TextIter): void;
 		/**
 		 * Performs the appropriate action as if the user hit the delete
 		 * key with the cursor at the position specified by #iter. In the
@@ -36060,9 +36059,9 @@ declare namespace imports.gi.Gtk {
 		 * calling this function; however, the #start and #end will be
 		 * re-initialized to point to the location where text was deleted.
 		 * @param start a position in #buffer
-		 * @param _end another position in #buffer
+		 * @param end another position in #buffer
 		 */
-		delete(start: TextIter, _end: TextIter): void;
+		delete(start: TextIter, end: TextIter): void;
 		/**
 		 * Deletes all editable text in the given range.
 		 * Calls gtk_text_buffer_delete() for each editable sub-range of
@@ -36157,9 +36156,9 @@ declare namespace imports.gi.Gtk {
 		 * Retrieves the first and last iterators in the buffer, i.e. the
 		 * entire buffer lies within the range [#start,#end).
 		 * @param start iterator to initialize with first position in the buffer
-		 * @param _end iterator to initialize with the end iterator
+		 * @param end iterator to initialize with the end iterator
 		 */
-		get_bounds(start: TextIter, _end: TextIter): void;
+		get_bounds(start: TextIter, end: TextIter): void;
 		/**
 		 * Gets the number of characters in the buffer; note that characters
 		 * and bytes are not the same, you can’t e.g. expect the contents of
@@ -36318,10 +36317,10 @@ declare namespace imports.gi.Gtk {
 		 * NULL, then they are not filled in, but the return value still indicates
 		 * whether text is selected.
 		 * @param start iterator to initialize with selection start
-		 * @param _end iterator to initialize with selection end
+		 * @param end iterator to initialize with selection end
 		 * @returns whether the selection has nonzero length
 		 */
-		get_selection_bounds(start: TextIter, _end: TextIter): boolean;
+		get_selection_bounds(start: TextIter, end: TextIter): boolean;
 		/**
 		 * This function returns the rich text serialize formats registered
 		 * with #buffer using gtk_text_buffer_register_serialize_format() or
@@ -36342,11 +36341,11 @@ declare namespace imports.gi.Gtk {
 		 * text as well, so it is not a reliable indicator that a pixbuf or
 		 * widget is in the buffer.
 		 * @param start start of a range
-		 * @param _end end of a range
+		 * @param end end of a range
 		 * @param include_hidden_chars whether to include invisible text
 		 * @returns an allocated UTF-8 string
 		 */
-		get_slice(start: TextIter, _end: TextIter, include_hidden_chars: boolean): string;
+		get_slice(start: TextIter, end: TextIter, include_hidden_chars: boolean): string;
 		/**
 		 * Initialized #iter with the first position in the text buffer. This
 		 * is the same as using gtk_text_buffer_get_iter_at_offset() to get
@@ -36368,11 +36367,11 @@ declare namespace imports.gi.Gtk {
 		 * and character indexes into the buffer. Contrast with
 		 * gtk_text_buffer_get_slice().
 		 * @param start start of a range
-		 * @param _end end of a range
+		 * @param end end of a range
 		 * @param include_hidden_chars whether to include invisible text
 		 * @returns an allocated UTF-8 string
 		 */
-		get_text(start: TextIter, _end: TextIter, include_hidden_chars: boolean): string;
+		get_text(start: TextIter, end: TextIter, include_hidden_chars: boolean): string;
 		/**
 		 * Inserts #len bytes of #text at position #iter.  If #len is -1,
 		 * #text must be nul-terminated and will be inserted in its
@@ -36473,9 +36472,9 @@ declare namespace imports.gi.Gtk {
 		 * so expect those.
 		 * @param iter a position in #buffer
 		 * @param start a position in a {@link TextBuffer}
-		 * @param _end another position in the same buffer as #start
+		 * @param end another position in the same buffer as #start
 		 */
-		insert_range(iter: TextIter, start: TextIter, _end: TextIter): void;
+		insert_range(iter: TextIter, start: TextIter, end: TextIter): void;
 		/**
 		 * Same as gtk_text_buffer_insert_range(), but does nothing if the
 		 * insertion point isn’t editable. The #default_editable parameter
@@ -36484,11 +36483,11 @@ declare namespace imports.gi.Gtk {
 		 * gtk_text_view_get_editable() is appropriate here.
 		 * @param iter a position in #buffer
 		 * @param start a position in a {@link TextBuffer}
-		 * @param _end another position in the same buffer as #start
+		 * @param end another position in the same buffer as #start
 		 * @param default_editable default editability of the buffer
 		 * @returns whether an insertion was possible at #iter
 		 */
-		insert_range_interactive(iter: TextIter, start: TextIter, _end: TextIter, default_editable: boolean): boolean;
+		insert_range_interactive(iter: TextIter, start: TextIter, end: TextIter, default_editable: boolean): boolean;
 		/**
 		 * Inserts #text into #buffer at #iter, applying the list of tags to
 		 * the newly-inserted text. The last tag specified must be %NULL to
@@ -36607,9 +36606,9 @@ declare namespace imports.gi.Gtk {
 		 * probably a bad idea if you have two or more unrelated code sections
 		 * that add tags.
 		 * @param start one bound of range to be untagged
-		 * @param _end other bound of range to be untagged
+		 * @param end other bound of range to be untagged
 		 */
-		remove_all_tags(start: TextIter, _end: TextIter): void;
+		remove_all_tags(start: TextIter, end: TextIter): void;
 		/**
 		 * Removes a {@link Clipboard} added with
 		 * gtk_text_buffer_add_selection_clipboard().
@@ -36623,17 +36622,17 @@ declare namespace imports.gi.Gtk {
 		 * #end don’t have to be in order.
 		 * @param tag a {@link TextTag}
 		 * @param start one bound of range to be untagged
-		 * @param _end other bound of range to be untagged
+		 * @param end other bound of range to be untagged
 		 */
-		remove_tag(tag: TextTag, start: TextIter, _end: TextIter): void;
+		remove_tag(tag: TextTag, start: TextIter, end: TextIter): void;
 		/**
 		 * Calls gtk_text_tag_table_lookup() on the buffer’s tag table to
 		 * get a {@link TextTag}, then calls gtk_text_buffer_remove_tag().
 		 * @param name name of a {@link TextTag}
 		 * @param start one bound of range to be untagged
-		 * @param _end other bound of range to be untagged
+		 * @param end other bound of range to be untagged
 		 */
-		remove_tag_by_name(name: string, start: TextIter, _end: TextIter): void;
+		remove_tag_by_name(name: string, start: TextIter, end: TextIter): void;
 		/**
 		 * This function moves the “insert” and “selection_bound” marks
 		 * simultaneously.  If you move them in two steps
@@ -36642,10 +36641,10 @@ declare namespace imports.gi.Gtk {
 		 * inefficient since the temporarily-selected region will force stuff
 		 * to be recalculated. This function moves them as a unit, which can
 		 * be optimized.
-		 * @param _ins where to put the “insert” mark
+		 * @param ins where to put the “insert” mark
 		 * @param bound where to put the “selection_bound” mark
 		 */
-		select_range(_ins: TextIter, bound: TextIter): void;
+		select_range(ins: TextIter, bound: TextIter): void;
 		/**
 		 * This function serializes the portion of text between #start
 		 * and #end in the rich text format represented by #format.
@@ -36656,11 +36655,11 @@ declare namespace imports.gi.Gtk {
 		 * @param content_buffer the {@link TextBuffer} to serialize
 		 * @param format the rich text format to use for serializing
 		 * @param start start of block of text to serialize
-		 * @param _end end of block of test to serialize
+		 * @param end end of block of test to serialize
 		 * @returns the serialized
 		 *               data, encoded as #format
 		 */
-		serialize(content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, _end: TextIter): number[];
+		serialize(content_buffer: TextBuffer, format: Gdk.Atom, start: TextIter, end: TextIter): number[];
 		/**
 		 * Used to keep track of whether the buffer has been modified since the
 		 * last time it was saved. Whenever the buffer is saved to disk, call
@@ -36704,7 +36703,7 @@ declare namespace imports.gi.Gtk {
 		 * gtk_text_buffer_insert_with_tags(),
 		 * gtk_text_buffer_insert_range().
 		 */
-		connect(signal: "apply-tag", callback: (owner: this, tag: TextTag, start: TextIter, _end: TextIter) => void): number;
+		connect(signal: "apply-tag", callback: (owner: this, tag: TextTag, start: TextIter, end: TextIter) => void): number;
 		/**
 		 * The ::begin-user-action signal is emitted at the beginning of a single
 		 * user-visible operation on a {@link TextBuffer}.
@@ -36736,7 +36735,7 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * See also: gtk_text_buffer_delete().
 		 */
-		connect(signal: "delete-range", callback: (owner: this, start: TextIter, _end: TextIter) => void): number;
+		connect(signal: "delete-range", callback: (owner: this, start: TextIter, end: TextIter) => void): number;
 		/**
 		 * The ::end-user-action signal is emitted at the end of a single
 		 * user-visible operation on the {@link TextBuffer}.
@@ -36832,7 +36831,7 @@ declare namespace imports.gi.Gtk {
 		 * See also:
 		 * gtk_text_buffer_remove_tag().
 		 */
-		connect(signal: "remove-tag", callback: (owner: this, tag: TextTag, start: TextIter, _end: TextIter) => void): number;
+		connect(signal: "remove-tag", callback: (owner: this, tag: TextTag, start: TextIter, end: TextIter) => void): number;
 
 		connect(signal: "notify::copy_target_list", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => number): number;
@@ -36846,7 +36845,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
-	type TextBufferMixin = ITextBuffer & GObject.IObject;
+	type TextBufferMixin = ITextBuffer & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -36876,7 +36875,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextCellAccessible} instead.
 	 */
-	type TextCellAccessibleMixin = ITextCellAccessible & IRendererCellAccessible & Atk.IAction & Atk.IComponent & Atk.ITableCell & Atk.IText;
+	type TextCellAccessibleMixin = ITextCellAccessible & RendererCellAccessible & Atk.Action & Atk.Component & Atk.TableCell & Atk.Text;
 
 	interface TextCellAccessible extends TextCellAccessibleMixin {}
 
@@ -36909,7 +36908,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextChildAnchor} instead.
 	 */
-	type TextChildAnchorMixin = ITextChildAnchor & GObject.IObject;
+	type TextChildAnchorMixin = ITextChildAnchor & GObject.Object;
 
 	/**
 	 * A {@link TextChildAnchor} is a spot in the buffer where child widgets can
@@ -36990,7 +36989,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextMark} instead.
 	 */
-	type TextMarkMixin = ITextMark & GObject.IObject;
+	type TextMarkMixin = ITextMark & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -37315,7 +37314,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTag} instead.
 	 */
-	type TextTagMixin = ITextTag & GObject.IObject;
+	type TextTagMixin = ITextTag & GObject.Object;
 
 	/**
 	 * You may wish to begin by reading the
@@ -37365,10 +37364,10 @@ declare namespace imports.gi.Gtk {
 		 * Calls #func on each tag in #table, with user data #data.
 		 * Note that the table may not be modified while iterating
 		 * over it (you can’t add/remove tags).
-		 * @param _func a function to call on each tag
+		 * @param func a function to call on each tag
 		 * @param data user data
 		 */
-		foreach(_func: TextTagTableForeach, data: any | null): void;
+		foreach(func: TextTagTableForeach, data: any | null): void;
 		/**
 		 * Returns the size of the table (number of tags)
 		 * @returns number of tags in #table
@@ -37398,7 +37397,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextTagTable} instead.
 	 */
-	type TextTagTableMixin = ITextTagTable & GObject.IObject & IBuildable;
+	type TextTagTableMixin = ITextTagTable & GObject.Object & Buildable;
 
 	/**
 	 * You may wish to begin by reading the
@@ -37618,10 +37617,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Gets the width of the specified border window. See
 		 * gtk_text_view_set_border_window_size().
-		 * @param _type window to return size from
+		 * @param type window to return size from
 		 * @returns width of window
 		 */
-		get_border_window_size(_type: TextWindowType): number;
+		get_border_window_size(type: TextWindowType): number;
 		/**
 		 * Gets the bottom margin for text in the #text_view.
 		 * @returns bottom margin in pixels
@@ -37713,11 +37712,11 @@ declare namespace imports.gi.Gtk {
 		 * event, you have to convert those to buffer coordinates with
 		 * gtk_text_view_window_to_buffer_coords().
 		 * @param iter a {@link TextIter}
-		 * @param _x x position, in buffer coordinates
-		 * @param _y y position, in buffer coordinates
+		 * @param x x position, in buffer coordinates
+		 * @param y y position, in buffer coordinates
 		 * @returns %TRUE if the position is over text
 		 */
-		get_iter_at_location(iter: TextIter, _x: number, _y: number): boolean;
+		get_iter_at_location(iter: TextIter, x: number, y: number): boolean;
 		/**
 		 * Retrieves the iterator pointing to the character at buffer
 		 * coordinates #x and #y. Buffer coordinates are coordinates for
@@ -37730,11 +37729,11 @@ declare namespace imports.gi.Gtk {
 		 * which returns cursor locations, i.e. positions between
 		 * characters.
 		 * @param iter a {@link TextIter}
-		 * @param _x x position, in buffer coordinates
-		 * @param _y y position, in buffer coordinates
+		 * @param x x position, in buffer coordinates
+		 * @param y y position, in buffer coordinates
 		 * @returns %TRUE if the position is over text
 		 */
-		get_iter_at_position(iter: TextIter, _x: number, _y: number): boolean;
+		get_iter_at_position(iter: TextIter, x: number, y: number): boolean;
 		/**
 		 * Gets a rectangle which roughly contains the character at #iter.
 		 * The rectangle position is in buffer coordinates; use
@@ -37763,9 +37762,9 @@ declare namespace imports.gi.Gtk {
 		 * If non-%NULL, #line_top will be filled with the coordinate of the top
 		 * edge of the line.
 		 * @param target_iter a {@link TextIter}
-		 * @param _y a y coordinate
+		 * @param y a y coordinate
 		 */
-		get_line_at_y(target_iter: TextIter, _y: number): void;
+		get_line_at_y(target_iter: TextIter, y: number): void;
 		/**
 		 * Gets the y coordinate of the top of the line containing #iter,
 		 * and the height of the line. The coordinate is a buffer coordinate;
@@ -38017,10 +38016,10 @@ declare namespace imports.gi.Gtk {
 		 * function can only be used for the “border windows”, and it won’t
 		 * work with %GTK_TEXT_WINDOW_WIDGET, %GTK_TEXT_WINDOW_TEXT, or
 		 * %GTK_TEXT_WINDOW_PRIVATE.
-		 * @param _type window to affect
+		 * @param type window to affect
 		 * @param size width or height of the window
 		 */
-		set_border_window_size(_type: TextWindowType, size: number): void;
+		set_border_window_size(type: TextWindowType, size: number): void;
 		/**
 		 * Sets the bottom margin for text in #text_view.
 		 * 
@@ -38212,12 +38211,12 @@ declare namespace imports.gi.Gtk {
 		 * deleting a word and Ctrl-Backspace for deleting a word
 		 * backwords.
 		 */
-		connect(signal: "delete-from-cursor", callback: (owner: this, _type: DeleteType, count: number) => void): number;
+		connect(signal: "delete-from-cursor", callback: (owner: this, type: DeleteType, count: number) => void): number;
 		/**
 		 * The ::extend-selection signal is emitted when the selection needs to be
 		 * extended at #location.
 		 */
-		connect(signal: "extend-selection", callback: (owner: this, granularity: TextExtendSelection, location: TextIter, start: TextIter, _end: TextIter) => boolean): number;
+		connect(signal: "extend-selection", callback: (owner: this, granularity: TextExtendSelection, location: TextIter, start: TextIter, end: TextIter) => boolean): number;
 		/**
 		 * The ::insert-at-cursor signal is a
 		 * [keybinding signal][GtkBindingSignal]
@@ -38368,7 +38367,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextView} instead.
 	 */
-	type TextViewMixin = ITextView & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type TextViewMixin = ITextView & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * You may wish to begin by reading the
@@ -38434,7 +38433,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextViewAccessible} instead.
 	 */
-	type TextViewAccessibleMixin = ITextViewAccessible & IContainerAccessible & Atk.IComponent & Atk.IEditableText & Atk.IStreamableContent & Atk.IText;
+	type TextViewAccessibleMixin = ITextViewAccessible & ContainerAccessible & Atk.Component & Atk.EditableText & Atk.StreamableContent & Atk.Text;
 
 	interface TextViewAccessible extends TextViewAccessibleMixin {}
 
@@ -38610,7 +38609,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemingEngine} instead.
 	 */
-	type ThemingEngineMixin = IThemingEngine & GObject.IObject;
+	type ThemingEngineMixin = IThemingEngine & GObject.Object;
 
 	/**
 	 * {@link ThemingEngine} was the object used for rendering themed content
@@ -38724,7 +38723,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleAction} instead.
 	 */
-	type ToggleActionMixin = IToggleAction & IAction & IBuildable;
+	type ToggleActionMixin = IToggleAction & Action & Buildable;
 
 	/**
 	 * A {@link ToggleAction} corresponds roughly to a #GtkCheckMenuItem. It has an
@@ -38830,7 +38829,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButton} instead.
 	 */
-	type ToggleButtonMixin = IToggleButton & IButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToggleButtonMixin = IToggleButton & Button & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link ToggleButton} is a #GtkButton which will remain “pressed-in” when
@@ -38930,7 +38929,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleButtonAccessible} instead.
 	 */
-	type ToggleButtonAccessibleMixin = IToggleButtonAccessible & IButtonAccessible & Atk.IAction & Atk.IComponent & Atk.IImage;
+	type ToggleButtonAccessibleMixin = IToggleButtonAccessible & ButtonAccessible & Atk.Action & Atk.Component & Atk.Image;
 
 	interface ToggleButtonAccessible extends ToggleButtonAccessibleMixin {}
 
@@ -38971,7 +38970,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToggleToolButton} instead.
 	 */
-	type ToggleToolButtonMixin = IToggleToolButton & IToolButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToggleToolButtonMixin = IToggleToolButton & ToolButton & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * A {@link ToggleToolButton} is a #GtkToolItem that contains a toggle
@@ -39133,7 +39132,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolButton} instead.
 	 */
-	type ToolButtonMixin = IToolButton & IToolItem & Atk.IImplementorIface & IActionable & IActivatable & IBuildable;
+	type ToolButtonMixin = IToolButton & ToolItem & Atk.ImplementorIface & Actionable & Activatable & Buildable;
 
 	/**
 	 * {@link ToolButtons} are #GtkToolItems containing buttons.
@@ -39451,7 +39450,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItem} instead.
 	 */
-	type ToolItemMixin = IToolItem & IBin & Atk.IImplementorIface & IActivatable & IBuildable;
+	type ToolItemMixin = IToolItem & Bin & Atk.ImplementorIface & Activatable & Buildable;
 
 	/**
 	 * {@link ToolItems} are widgets that can appear on a toolbar. To
@@ -39492,11 +39491,11 @@ declare namespace imports.gi.Gtk {
 		get_collapsed(): boolean;
 		/**
 		 * Gets the tool item at position (x, y).
-		 * @param _x the x position
-		 * @param _y the y position
+		 * @param x the x position
+		 * @param y the y position
 		 * @returns the {@link ToolItem} at position (x, y)
 		 */
-		get_drop_item(_x: number, _y: number): ToolItem;
+		get_drop_item(x: number, y: number): ToolItem;
 		/**
 		 * Gets the ellipsization mode of #group.
 		 * @returns the #PangoEllipsizeMode of #group
@@ -39592,7 +39591,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolItemGroup} instead.
 	 */
-	type ToolItemGroupMixin = IToolItemGroup & IContainer & Atk.IImplementorIface & IBuildable & IToolShell;
+	type ToolItemGroupMixin = IToolItemGroup & Container & Atk.ImplementorIface & Buildable & ToolShell;
 
 	/**
 	 * A {@link ToolItemGroup} is used together with #GtkToolPalette to add
@@ -39657,20 +39656,20 @@ declare namespace imports.gi.Gtk {
 		get_drag_item(selection: SelectionData): Widget;
 		/**
 		 * Gets the group at position (x, y).
-		 * @param _x the x position
-		 * @param _y the y position
+		 * @param x the x position
+		 * @param y the y position
 		 * @returns the {@link ToolItemGroup} at position
 		 * or %NULL if there is no such group
 		 */
-		get_drop_group(_x: number, _y: number): ToolItemGroup | null;
+		get_drop_group(x: number, y: number): ToolItemGroup | null;
 		/**
 		 * Gets the item at position (x, y).
 		 * See gtk_tool_palette_get_drop_group().
-		 * @param _x the x position
-		 * @param _y the y position
+		 * @param x the x position
+		 * @param y the y position
 		 * @returns the {@link ToolItem} at position or %NULL if there is no such item
 		 */
-		get_drop_item(_x: number, _y: number): ToolItem | null;
+		get_drop_item(x: number, y: number): ToolItem | null;
 		/**
 		 * Gets whether #group is exclusive or not.
 		 * See gtk_tool_palette_set_exclusive().
@@ -39773,7 +39772,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToolPalette} instead.
 	 */
-	type ToolPaletteMixin = IToolPalette & IContainer & Atk.IImplementorIface & IBuildable & IOrientable & IScrollable;
+	type ToolPaletteMixin = IToolPalette & Container & Atk.ImplementorIface & Buildable & Orientable & Scrollable;
 
 	/**
 	 * A {@link ToolPalette} allows you to add #GtkToolItems to a palette-like
@@ -39895,11 +39894,11 @@ declare namespace imports.gi.Gtk {
 		 * inserted.
 		 * 
 		 * #x and #y are in #toolbar coordinates.
-		 * @param _x x coordinate of a point on the toolbar
-		 * @param _y y coordinate of a point on the toolbar
+		 * @param x x coordinate of a point on the toolbar
+		 * @param y y coordinate of a point on the toolbar
 		 * @returns The position corresponding to the point (#x, #y) on the toolbar.
 		 */
-		get_drop_index(_x: number, _y: number): number;
+		get_drop_index(x: number, y: number): number;
 		/**
 		 * Retrieves the icon size for the toolbar. See gtk_toolbar_set_icon_size().
 		 * @returns the current icon size for the icons on the toolbar.
@@ -39920,11 +39919,11 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns the #n'th item on #toolbar, or %NULL if the
 		 * toolbar does not contain an #n'th item.
-		 * @param _n A position on the toolbar
+		 * @param n A position on the toolbar
 		 * @returns The #n'th {@link ToolItem} on #toolbar,
 		 *     or %NULL if there isn’t an #n'th item.
 		 */
-		get_nth_item(_n: number): ToolItem | null;
+		get_nth_item(n: number): ToolItem | null;
 		/**
 		 * Returns the relief style of buttons on #toolbar. See
 		 * gtk_button_set_relief().
@@ -40021,7 +40020,7 @@ declare namespace imports.gi.Gtk {
 		 * number is given by the #button parameter. If the menu was popped
 		 * up using the keybaord, #button is -1.
 		 */
-		connect(signal: "popup-context-menu", callback: (owner: this, _x: number, _y: number, button: number) => boolean): number;
+		connect(signal: "popup-context-menu", callback: (owner: this, x: number, y: number, button: number) => boolean): number;
 		/**
 		 * Emitted when the style of the toolbar changes.
 		 */
@@ -40038,7 +40037,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Toolbar} instead.
 	 */
-	type ToolbarMixin = IToolbar & IContainer & Atk.IImplementorIface & IBuildable & IOrientable & IToolShell;
+	type ToolbarMixin = IToolbar & Container & Atk.ImplementorIface & Buildable & Orientable & ToolShell;
 
 	/**
 	 * A toolbar is created with a call to gtk_toolbar_new().
@@ -40150,7 +40149,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tooltip} instead.
 	 */
-	type TooltipMixin = ITooltip & GObject.IObject;
+	type TooltipMixin = ITooltip & GObject.Object;
 
 	/**
 	 * Basic tooltips can be realized simply by using gtk_widget_set_tooltip_text()
@@ -40212,7 +40211,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ToplevelAccessible} instead.
 	 */
-	type ToplevelAccessibleMixin = IToplevelAccessible & Atk.IObject;
+	type ToplevelAccessibleMixin = IToplevelAccessible & Atk.Object;
 
 	interface ToplevelAccessible extends ToplevelAccessibleMixin {}
 
@@ -40293,11 +40292,11 @@ declare namespace imports.gi.Gtk {
 		 * can only be called once for a given filter model.
 		 * @param n_columns The number of columns in the filter model.
 		 * @param types The #GTypes of the columns.
-		 * @param _func A {@link TreeModelFilterModifyFunc}
+		 * @param func A {@link TreeModelFilterModifyFunc}
 		 * @param data User data to pass to the modify function, or %NULL.
 		 * @param destroy Destroy notifier of #data, or %NULL.
 		 */
-		set_modify_func(n_columns: number, types: GObject.Type[], _func: TreeModelFilterModifyFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_modify_func(n_columns: number, types: GObject.Type[], func: TreeModelFilterModifyFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets #column of the child_model to be the column where #filter should
 		 * look for visibility information. #columns should be a column of type
@@ -40346,11 +40345,11 @@ declare namespace imports.gi.Gtk {
 		 * Note that gtk_tree_model_filter_set_visible_func() or
 		 * gtk_tree_model_filter_set_visible_column() can only be called
 		 * once for a given filter model.
-		 * @param _func A {@link TreeModelFilterVisibleFunc}, the visible function
+		 * @param func A {@link TreeModelFilterVisibleFunc}, the visible function
 		 * @param data User data to pass to the visible function, or %NULL
 		 * @param destroy Destroy notifier of #data, or %NULL
 		 */
-		set_visible_func(_func: TreeModelFilterVisibleFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_visible_func(func: TreeModelFilterVisibleFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		connect(signal: "notify::child_model", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::virtual_root", callback: (owner: this, ...args: any) => number): number;
 
@@ -40359,7 +40358,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelFilter} instead.
 	 */
-	type TreeModelFilterMixin = ITreeModelFilter & GObject.IObject & ITreeDragSource & ITreeModel;
+	type TreeModelFilterMixin = ITreeModelFilter & GObject.Object & TreeDragSource & TreeModel;
 
 	/**
 	 * A {@link TreeModelFilter} is a tree model which wraps another tree model,
@@ -40511,7 +40510,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeModelSort} instead.
 	 */
-	type TreeModelSortMixin = ITreeModelSort & GObject.IObject & ITreeDragSource & ITreeModel & ITreeSortable;
+	type TreeModelSortMixin = ITreeModelSort & GObject.Object & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link TreeModelSort} is a model which implements the #GtkTreeSortable
@@ -40718,17 +40717,17 @@ declare namespace imports.gi.Gtk {
 		 * Calls a function for each selected node. Note that you cannot modify
 		 * the tree or selection from within this function. As a result,
 		 * gtk_tree_selection_get_selected_rows() might be more useful.
-		 * @param _func The function to call for each selected node.
+		 * @param func The function to call for each selected node.
 		 * @param data user data to pass to the function.
 		 */
-		selected_foreach(_func: TreeSelectionForeachFunc, data: any | null): void;
+		selected_foreach(func: TreeSelectionForeachFunc, data: any | null): void;
 		/**
 		 * Sets the selection mode of the #selection.  If the previous type was
 		 * #GTK_SELECTION_MULTIPLE, then the anchor is kept selected, if it was
 		 * previously selected.
-		 * @param _type The selection mode
+		 * @param type The selection mode
 		 */
-		set_mode(_type: SelectionMode): void;
+		set_mode(type: SelectionMode): void;
 		/**
 		 * Sets the selection function.
 		 * 
@@ -40736,11 +40735,11 @@ declare namespace imports.gi.Gtk {
 		 * giving some control over which nodes are selected. The select function
 		 * should return %TRUE if the state of the node may be toggled, and %FALSE
 		 * if the state of the node should be left unchanged.
-		 * @param _func The selection function. May be %NULL
+		 * @param func The selection function. May be %NULL
 		 * @param data The selection function’s data. May be %NULL
 		 * @param destroy The destroy function for user data.  May be %NULL
 		 */
-		set_select_function(_func: TreeSelectionFunc | null, data: any | null, destroy: GLib.DestroyNotify): void;
+		set_select_function(func: TreeSelectionFunc | null, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Unselects all the nodes.
 		 */
@@ -40777,7 +40776,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeSelection} instead.
 	 */
-	type TreeSelectionMixin = ITreeSelection & GObject.IObject;
+	type TreeSelectionMixin = ITreeSelection & GObject.Object;
 
 	/**
 	 * The {@link TreeSelection} object is a helper object to manage the selection
@@ -41029,16 +41028,16 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Swaps #a and #b in the same level of #tree_store. Note that this function
 		 * only works with unsorted stores.
-		 * @param _a A {@link TreeIter}.
-		 * @param _b Another {@link TreeIter}.
+		 * @param a A {@link TreeIter}.
+		 * @param b Another {@link TreeIter}.
 		 */
-		swap(_a: TreeIter, _b: TreeIter): void;
+		swap(a: TreeIter, b: TreeIter): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeStore} instead.
 	 */
-	type TreeStoreMixin = ITreeStore & GObject.IObject & IBuildable & ITreeDragDest & ITreeDragSource & ITreeModel & ITreeSortable;
+	type TreeStoreMixin = ITreeStore & GObject.Object & Buildable & TreeDragDest & TreeDragSource & TreeModel & TreeSortable;
 
 	/**
 	 * The {@link TreeStore} object is a list model for use with a #GtkTreeView
@@ -41179,42 +41178,42 @@ declare namespace imports.gi.Gtk {
 		 * Converts bin_window coordinates to coordinates for the
 		 * tree (the full scrollable area of the tree).
 		 * @param bx X coordinate relative to bin_window
-		 * @param _by Y coordinate relative to bin_window
+		 * @param by Y coordinate relative to bin_window
 		 * @returns return location for tree X coordinate
 		 * 
 		 * return location for tree Y coordinate
 		 */
-		convert_bin_window_to_tree_coords(bx: number, _by: number): [ tx: number, ty: number ];
+		convert_bin_window_to_tree_coords(bx: number, by: number): [ tx: number, ty: number ];
 		/**
 		 * Converts bin_window coordinates (see gtk_tree_view_get_bin_window())
 		 * to widget relative coordinates.
 		 * @param bx bin_window X coordinate
-		 * @param _by bin_window Y coordinate
+		 * @param by bin_window Y coordinate
 		 * @returns return location for widget X coordinate
 		 * 
 		 * return location for widget Y coordinate
 		 */
-		convert_bin_window_to_widget_coords(bx: number, _by: number): [ wx: number, wy: number ];
+		convert_bin_window_to_widget_coords(bx: number, by: number): [ wx: number, wy: number ];
 		/**
 		 * Converts tree coordinates (coordinates in full scrollable area of the tree)
 		 * to bin_window coordinates.
 		 * @param tx tree X coordinate
-		 * @param _ty tree Y coordinate
+		 * @param ty tree Y coordinate
 		 * @returns return location for X coordinate relative to bin_window
 		 * 
 		 * return location for Y coordinate relative to bin_window
 		 */
-		convert_tree_to_bin_window_coords(tx: number, _ty: number): [ bx: number, by: number ];
+		convert_tree_to_bin_window_coords(tx: number, ty: number): [ bx: number, by: number ];
 		/**
 		 * Converts tree coordinates (coordinates in full scrollable area of the tree)
 		 * to widget coordinates.
 		 * @param tx X coordinate relative to the tree
-		 * @param _ty Y coordinate relative to the tree
+		 * @param ty Y coordinate relative to the tree
 		 * @returns return location for widget X coordinate
 		 * 
 		 * return location for widget Y coordinate
 		 */
-		convert_tree_to_widget_coords(tx: number, _ty: number): [ wx: number, wy: number ];
+		convert_tree_to_widget_coords(tx: number, ty: number): [ wx: number, wy: number ];
 		/**
 		 * Converts widget coordinates to coordinates for the bin_window
 		 * (see gtk_tree_view_get_bin_window()).
@@ -41324,11 +41323,11 @@ declare namespace imports.gi.Gtk {
 		get_cell_area(path: TreePath | null, column: TreeViewColumn | null, rect: Gdk.Rectangle): void;
 		/**
 		 * Gets the {@link TreeViewColumn} at the given position in the #tree_view.
-		 * @param _n The position of the column, counting from 0.
+		 * @param n The position of the column, counting from 0.
 		 * @returns The {@link TreeViewColumn}, or %NULL if the
 		 * position is outside the range of columns.
 		 */
-		get_column(_n: number): TreeViewColumn | null;
+		get_column(n: number): TreeViewColumn | null;
 		/**
 		 * Returns a #GList of all the {@link TreeViewColumn} s currently in #tree_view.
 		 * The returned list must be freed with g_list_free ().
@@ -41459,11 +41458,11 @@ declare namespace imports.gi.Gtk {
 		 * For converting widget coordinates (eg. the ones you get from
 		 * GtkWidget::query-tooltip), please see
 		 * gtk_tree_view_convert_widget_to_bin_window_coords().
-		 * @param _x The x position to be identified (relative to bin_window).
-		 * @param _y The y position to be identified (relative to bin_window).
+		 * @param x The x position to be identified (relative to bin_window).
+		 * @param y The y position to be identified (relative to bin_window).
 		 * @returns %TRUE if a row exists at that coordinate.
 		 */
-		get_path_at_pos(_x: number, _y: number): boolean;
+		get_path_at_pos(x: number, y: number): boolean;
 		/**
 		 * Retrieves whether the user can reorder the tree via drag-and-drop. See
 		 * gtk_tree_view_set_reorderable().
@@ -41599,12 +41598,12 @@ declare namespace imports.gi.Gtk {
 		 * @param position Position to insert, -1 for append
 		 * @param title column title
 		 * @param cell cell renderer for column
-		 * @param _func function to set attributes of cell renderer
+		 * @param func function to set attributes of cell renderer
 		 * @param data data for #func
 		 * @param dnotify destroy notifier for #data
 		 * @returns number of columns in the tree view post-insert
 		 */
-		insert_column_with_data_func(position: number, title: string, cell: CellRenderer, _func: TreeCellDataFunc, data: any | null, dnotify: GLib.DestroyNotify): number;
+		insert_column_with_data_func(position: number, title: string, cell: CellRenderer, func: TreeCellDataFunc, data: any | null, dnotify: GLib.DestroyNotify): number;
 		/**
 		 * Determine whether the point (#x, #y) in #tree_view is blank, that is no
 		 * cell content nor an expander arrow is drawn at the location. If so, the
@@ -41623,12 +41622,12 @@ declare namespace imports.gi.Gtk {
 		 * The #path, #column, #cell_x and #cell_y arguments will be filled in
 		 * likewise as for gtk_tree_view_get_path_at_pos().  Please see
 		 * gtk_tree_view_get_path_at_pos() for more information.
-		 * @param _x The x position to be identified (relative to bin_window)
-		 * @param _y The y position to be identified (relative to bin_window)
+		 * @param x The x position to be identified (relative to bin_window)
+		 * @param y The y position to be identified (relative to bin_window)
 		 * @returns %TRUE if the area at the given coordinates is blank,
 		 * %FALSE otherwise.
 		 */
-		is_blank_at_pos(_x: number, _y: number): boolean;
+		is_blank_at_pos(x: number, y: number): boolean;
 		/**
 		 * Returns whether a rubber banding operation is currently being done
 		 * in #tree_view.
@@ -41638,10 +41637,10 @@ declare namespace imports.gi.Gtk {
 		is_rubber_banding_active(): boolean;
 		/**
 		 * Calls #func on all expanded rows.
-		 * @param _func A function to be called
+		 * @param func A function to be called
 		 * @param data User data to be passed to the function.
 		 */
-		map_expanded_rows(_func: TreeViewMappingFunc, data: any | null): void;
+		map_expanded_rows(func: TreeViewMappingFunc, data: any | null): void;
 		/**
 		 * Moves #column to be after to #base_column.  If #base_column is %NULL, then
 		 * #column is placed in the first position.
@@ -41719,10 +41718,10 @@ declare namespace imports.gi.Gtk {
 		 * are %NULL, then they indicate an edge.  If #func is set to be %NULL, then
 		 * #tree_view reverts to the default behavior of allowing all columns to be
 		 * dropped everywhere.
-		 * @param _func A function to determine which columns are reorderable, or %NULL.
+		 * @param func A function to determine which columns are reorderable, or %NULL.
 		 * @param destroy Destroy notifier for #user_data, or %NULL
 		 */
-		set_column_drag_function(_func: TreeViewColumnDropFunc | null, destroy: GLib.DestroyNotify | null): void;
+		set_column_drag_function(func: TreeViewColumnDropFunc | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the current keyboard focus to be at #path, and selects it.  This is
 		 * useful when you want to focus the user’s attention on a particular row.  If
@@ -41765,11 +41764,11 @@ declare namespace imports.gi.Gtk {
 		 * This function should almost never be used.  It is meant for private use by
 		 * ATK for determining the number of visible children that are removed when the
 		 * user collapses a row, or a row is deleted.
-		 * @param _func Function to be called when a view row is destroyed, or %NULL
+		 * @param func Function to be called when a view row is destroyed, or %NULL
 		 * @param data User data to be passed to #func, or %NULL
 		 * @param destroy Destroy notifier for #data, or %NULL
 		 */
-		set_destroy_count_func(_func: TreeDestroyCountFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_destroy_count_func(func: TreeDestroyCountFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the row that is highlighted for feedback.
 		 * If #path is %NULL, an existing highlight is removed.
@@ -41885,11 +41884,11 @@ declare namespace imports.gi.Gtk {
 		 * Sets the row separator function, which is used to determine
 		 * whether a row should be drawn as a separator. If the row separator
 		 * function is %NULL, no separators are drawn. This is the default value.
-		 * @param _func a {@link TreeViewRowSeparatorFunc}
+		 * @param func a {@link TreeViewRowSeparatorFunc}
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy destroy notifier for #data, or %NULL
 		 */
-		set_row_separator_func(_func: TreeViewRowSeparatorFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_row_separator_func(func: TreeViewRowSeparatorFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Enables or disables rubber banding in #tree_view.  If the selection mode
 		 * is #GTK_SELECTION_MULTIPLE, rubber banding will allow the user to select
@@ -41949,12 +41948,12 @@ declare namespace imports.gi.Gtk {
 		set_search_equal_func(search_equal_func: TreeViewSearchEqualFunc, search_user_data: any | null, search_destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets the function to use when positioning the search dialog.
-		 * @param _func the function to use to position the search dialog, or %NULL
+		 * @param func the function to use to position the search dialog, or %NULL
 		 *    to use the default search position function
 		 * @param data user data to pass to #func, or %NULL
 		 * @param destroy Destroy notifier for #data, or %NULL
 		 */
-		set_search_position_func(_func: TreeViewSearchPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
+		set_search_position_func(func: TreeViewSearchPositionFunc | null, data: any | null, destroy: GLib.DestroyNotify | null): void;
 		/**
 		 * Sets whether to draw and enable expanders and indent child rows in
 		 * #tree_view.  When disabled there will be no expanders visible in trees
@@ -42107,7 +42106,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeView} instead.
 	 */
-	type TreeViewMixin = ITreeView & IContainer & Atk.IImplementorIface & IBuildable & IScrollable;
+	type TreeViewMixin = ITreeView & Container & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * Widget that displays any object that implements the {@link TreeModel} interface.
@@ -42212,7 +42211,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewAccessible} instead.
 	 */
-	type TreeViewAccessibleMixin = ITreeViewAccessible & IContainerAccessible & Atk.IComponent & Atk.ISelection & Atk.ITable & ICellAccessibleParent;
+	type TreeViewAccessibleMixin = ITreeViewAccessible & ContainerAccessible & Atk.Component & Atk.Selection & Atk.Table & CellAccessibleParent;
 
 	interface TreeViewAccessible extends TreeViewAccessibleMixin {}
 
@@ -42482,11 +42481,11 @@ declare namespace imports.gi.Gtk {
 		 * cell renderer as appropriate.  #func may be %NULL to remove an
 		 * older one.
 		 * @param cell_renderer A {@link CellRenderer}
-		 * @param _func The {@link TreeCellDataFunc} to use.
+		 * @param func The {@link TreeCellDataFunc} to use.
 		 * @param func_data The user data for #func.
 		 * @param destroy The destroy notification for #func_data
 		 */
-		set_cell_data_func(cell_renderer: CellRenderer, _func: TreeCellDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
+		set_cell_data_func(cell_renderer: CellRenderer, func: TreeCellDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
 		 * Sets the header to be active if #clickable is %TRUE.  When the header is
 		 * active, then it can take keyboard focus, and can be clicked.
@@ -42549,9 +42548,9 @@ declare namespace imports.gi.Gtk {
 		set_resizable(resizable: boolean): void;
 		/**
 		 * Sets the growth behavior of #tree_column to #type.
-		 * @param _type The {@link TreeViewColumnSizing}.
+		 * @param type The {@link TreeViewColumnSizing}.
 		 */
-		set_sizing(_type: TreeViewColumnSizing): void;
+		set_sizing(type: TreeViewColumnSizing): void;
 		/**
 		 * Sets the logical #sort_column_id that this column sorts on when this column
 		 * is selected for sorting.  Doing so makes the column header clickable.
@@ -42631,7 +42630,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TreeViewColumn} instead.
 	 */
-	type TreeViewColumnMixin = ITreeViewColumn & GObject.IInitiallyUnowned & IBuildable & ICellLayout;
+	type TreeViewColumnMixin = ITreeViewColumn & GObject.InitiallyUnowned & Buildable & CellLayout;
 
 	/**
 	 * The GtkTreeViewColumn object represents a visible column in a {@link TreeView} widget.
@@ -42712,11 +42711,11 @@ declare namespace imports.gi.Gtk {
 		 * @param path a path
 		 * @param name the name for the added UI element
 		 * @param action the name of the action to be proxied, or %NULL to add a separator
-		 * @param _type the type of UI element to add.
+		 * @param type the type of UI element to add.
 		 * @param top if %TRUE, the UI element is added before its siblings, otherwise it
 		 *   is added after its siblings.
 		 */
-		add_ui(merge_id: number, path: string, name: string, action: string | null, _type: UIManagerItemType, top: boolean): void;
+		add_ui(merge_id: number, path: string, name: string, action: string | null, type: UIManagerItemType, top: boolean): void;
 		/**
 		 * Parses a file containing a [UI definition][XML-UI] and
 		 * merges it with the current contents of #manager.
@@ -42913,7 +42912,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UIManager} instead.
 	 */
-	type UIManagerMixin = IUIManager & GObject.IObject & IBuildable;
+	type UIManagerMixin = IUIManager & GObject.Object & Buildable;
 
 	/**
 	 * A {@link UIManager} constructs a user interface (menus and toolbars) from
@@ -43166,7 +43165,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VBox} instead.
 	 */
-	type VBoxMixin = IVBox & IBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VBoxMixin = IVBox & Box & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * A {@link VBox} is a container that organizes child widgets into a single column.
@@ -43221,7 +43220,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VButtonBox} instead.
 	 */
-	type VButtonBoxMixin = IVButtonBox & IButtonBox & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VButtonBoxMixin = IVButtonBox & ButtonBox & Atk.ImplementorIface & Buildable & Orientable;
 
 	interface VButtonBox extends VButtonBoxMixin {}
 
@@ -43247,7 +43246,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VPaned} instead.
 	 */
-	type VPanedMixin = IVPaned & IPaned & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VPanedMixin = IVPaned & Paned & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The VPaned widget is a container widget with two
@@ -43281,7 +43280,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScale} instead.
 	 */
-	type VScaleMixin = IVScale & IScale & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VScaleMixin = IVScale & Scale & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VScale} widget is used to allow the user to select a value using
@@ -43332,7 +43331,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VScrollbar} instead.
 	 */
-	type VScrollbarMixin = IVScrollbar & IScrollbar & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VScrollbarMixin = IVScrollbar & Scrollbar & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VScrollbar} widget is a widget arranged vertically creating a
@@ -43369,7 +43368,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VSeparator} instead.
 	 */
-	type VSeparatorMixin = IVSeparator & ISeparator & Atk.IImplementorIface & IBuildable & IOrientable;
+	type VSeparatorMixin = IVSeparator & Separator & Atk.ImplementorIface & Buildable & Orientable;
 
 	/**
 	 * The {@link VSeparator} widget is a vertical separator, used to group the
@@ -43428,9 +43427,9 @@ declare namespace imports.gi.Gtk {
 		set_hadjustment(adjustment: Adjustment | null): void;
 		/**
 		 * Sets the shadow type of the viewport.
-		 * @param _type the new shadow type.
+		 * @param type the new shadow type.
 		 */
-		set_shadow_type(_type: ShadowType): void;
+		set_shadow_type(type: ShadowType): void;
 		/**
 		 * Sets the vertical adjustment of the viewport.
 		 * @param adjustment a {@link Adjustment}.
@@ -43444,7 +43443,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Viewport} instead.
 	 */
-	type ViewportMixin = IViewport & IBin & Atk.IImplementorIface & IBuildable & IScrollable;
+	type ViewportMixin = IViewport & Bin & Atk.ImplementorIface & Buildable & Scrollable;
 
 	/**
 	 * The {@link Viewport} widget acts as an adaptor class, implementing
@@ -43500,7 +43499,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VolumeButton} instead.
 	 */
-	type VolumeButtonMixin = IVolumeButton & IScaleButton & Atk.IImplementorIface & IActionable & IActivatable & IBuildable & IOrientable;
+	type VolumeButtonMixin = IVolumeButton & ScaleButton & Atk.ImplementorIface & Actionable & Activatable & Buildable & Orientable;
 
 	/**
 	 * {@link VolumeButton} is a subclass of #GtkScaleButton that has
@@ -43966,15 +43965,15 @@ declare namespace imports.gi.Gtk {
 		 * @param button The button the user clicked to start the drag
 		 * @param event The event that triggered the start of the drag,
 		 *    or %NULL if none can be obtained.
-		 * @param _x The initial x coordinate to start dragging from, in the coordinate space
+		 * @param x The initial x coordinate to start dragging from, in the coordinate space
 		 *    of #widget. If -1 is passed, the coordinates are retrieved from #event or
 		 *    the current pointer position
-		 * @param _y The initial y coordinate to start dragging from, in the coordinate space
+		 * @param y The initial y coordinate to start dragging from, in the coordinate space
 		 *    of #widget. If -1 is passed, the coordinates are retrieved from #event or
 		 *    the current pointer position
 		 * @returns the context for this drag
 		 */
-		drag_begin_with_coordinates(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event | null, _x: number, _y: number): Gdk.DragContext;
+		drag_begin_with_coordinates(targets: TargetList, actions: Gdk.DragAction, button: number, event: Gdk.Event | null, x: number, y: number): Gdk.DragContext;
 		/**
 		 * Checks to see if a mouse drag starting at (#start_x, #start_y) and ending
 		 * at (#current_x, #current_y) has passed the GTK+ drag threshold, and thus
@@ -45649,12 +45648,12 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * #width or #height may be 0, in this case this function does
 		 * nothing. Negative values for #width and #height are not allowed.
-		 * @param _x x coordinate of upper-left corner of rectangle to redraw
-		 * @param _y y coordinate of upper-left corner of rectangle to redraw
+		 * @param x x coordinate of upper-left corner of rectangle to redraw
+		 * @param y y coordinate of upper-left corner of rectangle to redraw
 		 * @param width width of region to draw
 		 * @param height height of region to draw
 		 */
-		queue_draw_area(_x: number, _y: number, width: number, height: number): void;
+		queue_draw_area(x: number, y: number, width: number, height: number): void;
 		/**
 		 * Invalidates the area of #widget defined by #region by calling
 		 * gdk_window_invalidate_region() on the widget’s window and all its
@@ -45753,9 +45752,9 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Removes a tick callback previously registered with
 		 * gtk_widget_add_tick_callback().
-		 * @param _id an id returned by gtk_widget_add_tick_callback()
+		 * @param id an id returned by gtk_widget_add_tick_callback()
 		 */
-		remove_tick_callback(_id: number): void;
+		remove_tick_callback(id: number): void;
 		/**
 		 * A convenience function that uses the theme settings for #widget
 		 * to look up #stock_id and render it to a pixbuf. #stock_id should
@@ -46821,7 +46820,7 @@ declare namespace imports.gi.Gtk {
 		 *  }
 		 * ]|
 		 */
-		connect(signal: "drag-data-received", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, data: SelectionData, info: number, time: number) => void): number;
+		connect(signal: "drag-data-received", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, data: SelectionData, info: number, time: number) => void): number;
 		/**
 		 * The ::drag-drop signal is emitted on the drop site when the user drops
 		 * the data onto the widget. The signal handler must determine whether
@@ -46834,7 +46833,7 @@ declare namespace imports.gi.Gtk {
 		 * triggered by calling gtk_drag_get_data() to receive the data for one
 		 * or more of the supported targets.
 		 */
-		connect(signal: "drag-drop", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, time: number) => boolean): number;
+		connect(signal: "drag-drop", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, time: number) => boolean): number;
 		/**
 		 * The ::drag-end signal is emitted on the drag source when a drag is
 		 * finished.  A typical reason to connect to this signal is to undo
@@ -46949,7 +46948,7 @@ declare namespace imports.gi.Gtk {
 		 * }
 		 * ]|
 		 */
-		connect(signal: "drag-motion", callback: (owner: this, context: Gdk.DragContext, _x: number, _y: number, time: number) => boolean): number;
+		connect(signal: "drag-motion", callback: (owner: this, context: Gdk.DragContext, x: number, y: number, time: number) => boolean): number;
 		/**
 		 * This signal is emitted when a widget is supposed to render itself.
 		 * The #widget's top left corner must be painted at the origin of
@@ -47167,7 +47166,7 @@ declare namespace imports.gi.Gtk {
 		 * The signal handler is free to manipulate #tooltip with the therefore
 		 * destined function calls.
 		 */
-		connect(signal: "query-tooltip", callback: (owner: this, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
+		connect(signal: "query-tooltip", callback: (owner: this, x: number, y: number, keyboard_mode: boolean, tooltip: Tooltip) => boolean): number;
 		/**
 		 * The ::realize signal is emitted when #widget is associated with a
 		 * #GdkWindow, which means that gtk_widget_realize() has been called or the
@@ -47328,7 +47327,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Widget} instead.
 	 */
-	type WidgetMixin = IWidget & GObject.IInitiallyUnowned & Atk.IImplementorIface & IBuildable;
+	type WidgetMixin = IWidget & GObject.InitiallyUnowned & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * GtkWidget is the base class all widgets in GTK+ derive from. It manages the
@@ -47726,11 +47725,11 @@ declare namespace imports.gi.Gtk {
 		 * 0.0, NULL)` to create a left-aligned label. Equivalent to
 		 * g_object_new(), but returns a widget so you don’t have to
 		 * cast the object yourself.
-		 * @param _type type ID of the widget to create
+		 * @param type type ID of the widget to create
 		 * @param first_property_name name of first property to set
 		 * @returns a new {@link Widget} of type #widget_type
 		 */
-		public static new(_type: GObject.Type, first_property_name: string): Widget;
+		public static new(type: GObject.Type, first_property_name: string): Widget;
 		/**
 		 * Obtains the current default reading direction. See
 		 * gtk_widget_set_default_direction().
@@ -47777,7 +47776,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WidgetAccessible} instead.
 	 */
-	type WidgetAccessibleMixin = IWidgetAccessible & IAccessible & Atk.IComponent;
+	type WidgetAccessibleMixin = IWidgetAccessible & Accessible & Atk.Component;
 
 	interface WidgetAccessible extends WidgetAccessibleMixin {}
 
@@ -48444,10 +48443,10 @@ declare namespace imports.gi.Gtk {
 		 * has a nice table of gravities in the “implementation notes” section.
 		 * 
 		 * The gtk_window_get_position() documentation may also be relevant.
-		 * @param _x X coordinate to move window to
-		 * @param _y Y coordinate to move window to
+		 * @param x X coordinate to move window to
+		 * @param y Y coordinate to move window to
 		 */
-		move(_x: number, _y: number): void;
+		move(x: number, y: number): void;
 		/**
 		 * Parses a standard X Window System geometry string - see the
 		 * manual page for X (type “man X”) for details on this.
@@ -49266,7 +49265,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
-	type WindowMixin = IWindow & IBin & Atk.IImplementorIface & IBuildable;
+	type WindowMixin = IWindow & Bin & Atk.ImplementorIface & Buildable;
 
 	/**
 	 * A GtkWindow is a toplevel window which can contain other widgets.
@@ -49351,10 +49350,10 @@ declare namespace imports.gi.Gtk {
 		 * to the caller.
 		 * 
 		 * To delete a #GtkWindow, call gtk_widget_destroy().
-		 * @param _type type of window
+		 * @param type type of window
 		 * @returns a new {@link Window}.
 		 */
-		public static new(_type: WindowType): Widget;
+		public static new(type: WindowType): Widget;
 		/**
 		 * Gets the value set by gtk_window_set_default_icon_list().
 		 * The list is a copy and should be freed with g_list_free(),
@@ -49445,7 +49444,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowAccessible} instead.
 	 */
-	type WindowAccessibleMixin = IWindowAccessible & IContainerAccessible & Atk.IComponent & Atk.IWindow;
+	type WindowAccessibleMixin = IWindowAccessible & ContainerAccessible & Atk.Component & Atk.Window;
 
 	interface WindowAccessible extends WindowAccessibleMixin {}
 
@@ -49490,7 +49489,7 @@ declare namespace imports.gi.Gtk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowGroup} instead.
 	 */
-	type WindowGroupMixin = IWindowGroup & GObject.IObject;
+	type WindowGroupMixin = IWindowGroup & GObject.Object;
 
 	/**
 	 * A {@link WindowGroup} restricts the effect of grabs to windows
@@ -50118,7 +50117,7 @@ declare namespace imports.gi.Gtk {
 		public readonly g_iface: GObject.TypeInterface;
 		public set_name: {(buildable: Buildable, name: string): void;};
 		public get_name: {(buildable: Buildable): string;};
-		public add_child: {(buildable: Buildable, builder: Builder, child: GObject.Object, _type: string | null): void;};
+		public add_child: {(buildable: Buildable, builder: Builder, child: GObject.Object, type: string | null): void;};
 		public set_buildable_property: {(buildable: Buildable, builder: Builder, name: string, value: GObject.Value): void;};
 		public construct_child: {(buildable: Buildable, builder: Builder, name: string): GObject.Object;};
 		public custom_tag_start: {(buildable: Buildable, builder: Builder, child: GObject.Object | null, tagname: string, parser: GLib.MarkupParser): boolean;};
@@ -50348,7 +50347,7 @@ declare namespace imports.gi.Gtk {
 		public pack_end: {(cell_layout: CellLayout, cell: CellRenderer, expand: boolean): void;};
 		public clear: {(cell_layout: CellLayout): void;};
 		public add_attribute: {(cell_layout: CellLayout, cell: CellRenderer, attribute: string, column: number): void;};
-		public set_cell_data_func: {(cell_layout: CellLayout, cell: CellRenderer, _func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;};
+		public set_cell_data_func: {(cell_layout: CellLayout, cell: CellRenderer, func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;};
 		public clear_attributes: {(cell_layout: CellLayout, cell: CellRenderer): void;};
 		public reorder: {(cell_layout: CellLayout, cell: CellRenderer, position: number): void;};
 		public get_cells: {(cell_layout: CellLayout): GLib.List;};
@@ -50397,10 +50396,10 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * This function should only be called from class init functions of cell
 		 * renderers.
-		 * @param _type The object type that implements the accessible for #widget_class.
+		 * @param type The object type that implements the accessible for #widget_class.
 		 *     The type must be a subtype of {@link RendererCellAccessible}
 		 */
-		public set_accessible_type(_type: GObject.Type): void;
+		public set_accessible_type(type: GObject.Type): void;
 	}
 
 	interface CellRendererClassPrivate {}
@@ -50968,15 +50967,15 @@ declare namespace imports.gi.Gtk {
 		public populate_popup: {(entry: Entry, popup: Widget): void;};
 		public activate: {(entry: Entry): void;};
 		public move_cursor: {(entry: Entry, step: MovementStep, count: number, extend_selection: boolean): void;};
-		public insert_at_cursor: {(entry: Entry, _str: string): void;};
-		public delete_from_cursor: {(entry: Entry, _type: DeleteType, count: number): void;};
+		public insert_at_cursor: {(entry: Entry, str: string): void;};
+		public delete_from_cursor: {(entry: Entry, type: DeleteType, count: number): void;};
 		public backspace: {(entry: Entry): void;};
 		public cut_clipboard: {(entry: Entry): void;};
 		public copy_clipboard: {(entry: Entry): void;};
 		public paste_clipboard: {(entry: Entry): void;};
 		public toggle_overwrite: {(entry: Entry): void;};
-		public get_text_area_size: {(entry: Entry, _x: number, _y: number, width: number, height: number): void;};
-		public get_frame_size: {(entry: Entry, _x: number, _y: number, width: number, height: number): void;};
+		public get_text_area_size: {(entry: Entry, x: number, y: number, width: number, height: number): void;};
+		public get_frame_size: {(entry: Entry, x: number, y: number, width: number, height: number): void;};
 		public insert_emoji: {(entry: Entry): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -51512,7 +51511,7 @@ declare namespace imports.gi.Gtk {
 	class HSVClass {
 		public constructor();
 		public changed: {(hsv: HSV): void;};
-		public move: {(hsv: HSV, _type: DirectionType): void;};
+		public move: {(hsv: HSV, type: DirectionType): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -51585,7 +51584,7 @@ declare namespace imports.gi.Gtk {
 		public preedit_start: {(context: IMContext): void;};
 		public preedit_end: {(context: IMContext): void;};
 		public preedit_changed: {(context: IMContext): void;};
-		public commit: {(context: IMContext, _str: string): void;};
+		public commit: {(context: IMContext, str: string): void;};
 		public retrieve_surrounding: {(context: IMContext): boolean;};
 		public delete_surrounding: {(context: IMContext, offset: number, n_chars: number): boolean;};
 		public set_client_window: {(context: IMContext, window: Gdk.Window | null): void;};
@@ -52253,8 +52252,8 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxClass {}
 	class ListBoxClass {
 		public constructor();
-		public row_selected: {(box: ListBox, _row: ListBoxRow): void;};
-		public row_activated: {(box: ListBox, _row: ListBoxRow): void;};
+		public row_selected: {(box: ListBox, row: ListBoxRow): void;};
+		public row_activated: {(box: ListBox, row: ListBoxRow): void;};
 		public activate_cursor_row: {(box: ListBox): void;};
 		public toggle_cursor_row: {(box: ListBox): void;};
 		public move_cursor: {(box: ListBox, step: MovementStep, count: number): void;};
@@ -52274,7 +52273,7 @@ declare namespace imports.gi.Gtk {
 	interface ListBoxRowClass {}
 	class ListBoxRowClass {
 		public constructor();
-		public activate: {(_row: ListBoxRow): void;};
+		public activate: {(row: ListBoxRow): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 	}
@@ -52539,12 +52538,12 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public switch_page: {(notebook: Notebook, page: Widget, page_num: number): void;};
 		public select_page: {(notebook: Notebook, move_focus: boolean): boolean;};
-		public focus_tab: {(notebook: Notebook, _type: NotebookTab): boolean;};
+		public focus_tab: {(notebook: Notebook, type: NotebookTab): boolean;};
 		public change_current_page: {(notebook: Notebook, offset: number): boolean;};
 		public move_focus_out: {(notebook: Notebook, direction: DirectionType): void;};
 		public reorder_tab: {(notebook: Notebook, direction: DirectionType, move_to_last: boolean): boolean;};
 		public insert_page: {(notebook: Notebook, child: Widget, tab_label: Widget, menu_label: Widget, position: number): number;};
-		public create_window: {(notebook: Notebook, page: Widget, _x: number, _y: number): Notebook;};
+		public create_window: {(notebook: Notebook, page: Widget, x: number, y: number): Notebook;};
 		public page_reordered: {(notebook: Notebook, child: Widget, page_num: number): void;};
 		public page_removed: {(notebook: Notebook, child: Widget, page_num: number): void;};
 		public page_added: {(notebook: Notebook, child: Widget, page_num: number): void;};
@@ -53844,12 +53843,12 @@ declare namespace imports.gi.Gtk {
 		 * Stores new data into a {@link SelectionData} object. Should
 		 * only be called from a selection handler callback.
 		 * Zero-terminates the stored data.
-		 * @param _type the type of selection data
+		 * @param type the type of selection data
 		 * @param format format (number of bits in a unit)
 		 * @param data pointer to the data (will be copied)
 		 * @param length length of the data
 		 */
-		public set(_type: Gdk.Atom, format: number, data: number[], length: number): void;
+		public set(type: Gdk.Atom, format: number, data: number[], length: number): void;
 		/**
 		 * Sets the contents of the selection from a #GdkPixbuf
 		 * The pixbuf is converted to the form determined by
@@ -53863,12 +53862,12 @@ declare namespace imports.gi.Gtk {
 		 * Sets the contents of the selection from a UTF-8 encoded string.
 		 * The string is converted to the form determined by
 		 * #selection_data->target.
-		 * @param _str a UTF-8 string
+		 * @param str a UTF-8 string
 		 * @param len the length of #str, or -1 if #str is nul-terminated.
 		 * @returns %TRUE if the selection was successfully set,
 		 *   otherwise %FALSE.
 		 */
-		public set_text(_str: string, len: number): boolean;
+		public set_text(str: string, len: number): boolean;
 		/**
 		 * Sets the contents of the selection from a list of URIs.
 		 * The string is converted to the form determined by
@@ -54145,7 +54144,7 @@ declare namespace imports.gi.Gtk {
 		public button_press_event: {(status_icon: StatusIcon, event: Gdk.EventButton): boolean;};
 		public button_release_event: {(status_icon: StatusIcon, event: Gdk.EventButton): boolean;};
 		public scroll_event: {(status_icon: StatusIcon, event: Gdk.EventScroll): boolean;};
-		public query_tooltip: {(status_icon: StatusIcon, _x: number, _y: number, keyboard_mode: boolean, tooltip: Tooltip): boolean;};
+		public query_tooltip: {(status_icon: StatusIcon, x: number, y: number, keyboard_mode: boolean, tooltip: Tooltip): boolean;};
 		public __gtk_reserved1: {(): void;};
 		public __gtk_reserved2: {(): void;};
 		public __gtk_reserved3: {(): void;};
@@ -54230,26 +54229,26 @@ declare namespace imports.gi.Gtk {
 		public init_from_rc: {(style: Style, rc_style: RcStyle): void;};
 		public set_background: {(style: Style, window: Gdk.Window, state_type: StateType): void;};
 		public render_icon: {(style: Style, source: IconSource, direction: TextDirection, state: StateType, size: number, widget: Widget | null, detail: string | null): GdkPixbuf.Pixbuf;};
-		public draw_hline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x1: number, x2: number, _y: number): void;};
-		public draw_vline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, y1_: number, y2_: number, _x: number): void;};
-		public draw_shadow: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_arrow: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, arrow_type: ArrowType, fill: boolean, _x: number, _y: number, width: number, height: number): void;};
-		public draw_diamond: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_box: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_flat_box: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_check: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_option: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_tab: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_shadow_gap: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;};
-		public draw_box_gap: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;};
-		public draw_extension: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;};
-		public draw_focus: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number): void;};
-		public draw_slider: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;};
-		public draw_handle: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;};
-		public draw_expander: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, _x: number, _y: number, expander_style: ExpanderStyle): void;};
-		public draw_layout: {(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget, detail: string, _x: number, _y: number, layout: Pango.Layout): void;};
-		public draw_resize_grip: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, edge: Gdk.WindowEdge, _x: number, _y: number, width: number, height: number): void;};
-		public draw_spinner: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, step: number, _x: number, _y: number, width: number, height: number): void;};
+		public draw_hline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x1: number, x2: number, y: number): void;};
+		public draw_vline: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, y1_: number, y2_: number, x: number): void;};
+		public draw_shadow: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_arrow: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, arrow_type: ArrowType, fill: boolean, x: number, y: number, width: number, height: number): void;};
+		public draw_diamond: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_box: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_flat_box: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_check: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_option: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_tab: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_shadow_gap: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;};
+		public draw_box_gap: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;};
+		public draw_extension: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number, gap_side: PositionType): void;};
+		public draw_focus: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x: number, y: number, width: number, height: number): void;};
+		public draw_slider: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number, orientation: Orientation): void;};
+		public draw_handle: {(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget, detail: string, x: number, y: number, width: number, height: number, orientation: Orientation): void;};
+		public draw_expander: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, x: number, y: number, expander_style: ExpanderStyle): void;};
+		public draw_layout: {(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget, detail: string, x: number, y: number, layout: Pango.Layout): void;};
+		public draw_resize_grip: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, edge: Gdk.WindowEdge, x: number, y: number, width: number, height: number): void;};
+		public draw_spinner: {(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget, detail: string, step: number, x: number, y: number, width: number, height: number): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -54314,8 +54313,8 @@ declare namespace imports.gi.Gtk {
 	interface SwitchClass {}
 	class SwitchClass {
 		public constructor();
-		public activate: {(_sw: Switch): void;};
-		public state_set: {(_sw: Switch, state: boolean): boolean;};
+		public activate: {(sw: Switch): void;};
+		public state_set: {(sw: Switch, state: boolean): boolean;};
 		public _switch_padding_1: {(): void;};
 		public _switch_padding_2: {(): void;};
 		public _switch_padding_3: {(): void;};
@@ -54400,10 +54399,10 @@ declare namespace imports.gi.Gtk {
 		 * the actual value returned is not reliable on non-win32
 		 * platforms.
 		 * @param theme_class The theme class to pull color from
-		 * @param _id The color id
+		 * @param id The color id
 		 * @returns A newly created {@link SymbolicColor}
 		 */
-		public static new_win32(theme_class: string, _id: number): SymbolicColor;
+		public static new_win32(theme_class: string, id: number): SymbolicColor;
 		/**
 		 * Increases the reference count of #color
 		 * @returns the same #color
@@ -54828,13 +54827,13 @@ declare namespace imports.gi.Gtk {
 		public insert_text: {(buffer: TextBuffer, pos: TextIter, new_text: string, new_text_length: number): void;};
 		public insert_pixbuf: {(buffer: TextBuffer, iter: TextIter, pixbuf: GdkPixbuf.Pixbuf): void;};
 		public insert_child_anchor: {(buffer: TextBuffer, iter: TextIter, anchor: TextChildAnchor): void;};
-		public delete_range: {(buffer: TextBuffer, start: TextIter, _end: TextIter): void;};
+		public delete_range: {(buffer: TextBuffer, start: TextIter, end: TextIter): void;};
 		public changed: {(buffer: TextBuffer): void;};
 		public modified_changed: {(buffer: TextBuffer): void;};
 		public mark_set: {(buffer: TextBuffer, location: TextIter, mark: TextMark): void;};
 		public mark_deleted: {(buffer: TextBuffer, mark: TextMark): void;};
-		public apply_tag: {(buffer: TextBuffer, tag: TextTag, start: TextIter, _end: TextIter): void;};
-		public remove_tag: {(buffer: TextBuffer, tag: TextTag, start: TextIter, _end: TextIter): void;};
+		public apply_tag: {(buffer: TextBuffer, tag: TextTag, start: TextIter, end: TextIter): void;};
+		public remove_tag: {(buffer: TextBuffer, tag: TextTag, start: TextIter, end: TextIter): void;};
 		public begin_user_action: {(buffer: TextBuffer): void;};
 		public end_user_action: {(buffer: TextBuffer): void;};
 		public paste_done: {(buffer: TextBuffer, clipboard: Clipboard): void;};
@@ -54965,14 +54964,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * #match_end will never be set to a {@link TextIter} located after #iter, even if
 		 * there is a possible #match_start before or at #iter.
-		 * @param _str search string
+		 * @param str search string
 		 * @param flags bitmask of flags affecting the search
 		 * @param match_start return location for start of match, or %NULL
 		 * @param match_end return location for end of match, or %NULL
 		 * @param limit location of last possible #match_start, or %NULL for start of buffer
 		 * @returns whether a match was found
 		 */
-		public backward_search(_str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
+		public backward_search(str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
 		/**
 		 * Moves backward to the previous sentence start; if #iter is already at
 		 * the start of a sentence, moves backward to the next one.  Sentence
@@ -55261,14 +55260,14 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * #match_start will never be set to a {@link TextIter} located before #iter, even if
 		 * there is a possible #match_end after or at #iter.
-		 * @param _str a search string
+		 * @param str a search string
 		 * @param flags flags affecting how the search is done
 		 * @param match_start return location for start of match, or %NULL
 		 * @param match_end return location for end of match, or %NULL
 		 * @param limit location of last possible #match_end, or %NULL for the end of the buffer
 		 * @returns whether a match was found
 		 */
-		public forward_search(_str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
+		public forward_search(str: string, flags: TextSearchFlags, match_start: TextIter | null, match_end: TextIter | null, limit: TextIter | null): boolean;
 		/**
 		 * Moves forward to the next sentence end. (If #iter is at the end of
 		 * a sentence, moves to the next end of sentence.)  Sentence
@@ -55499,10 +55498,10 @@ declare namespace imports.gi.Gtk {
 		 * offsets in the text buffer. Note that 0xFFFC can occur in normal
 		 * text as well, so it is not a reliable indicator that a pixbuf or
 		 * widget is in the buffer.
-		 * @param _end iterator at end of a range
+		 * @param end iterator at end of a range
 		 * @returns slice of text from the buffer
 		 */
-		public get_slice(_end: TextIter): string;
+		public get_slice(end: TextIter): string;
 		/**
 		 * Returns a list of tags that apply to #iter, in ascending order of
 		 * priority (highest-priority tags are last). The {@link TextTag} in the
@@ -55517,10 +55516,10 @@ declare namespace imports.gi.Gtk {
 		 * offsets in the returned string will not correspond to character and
 		 * byte offsets in the buffer. If you want offsets to correspond, see
 		 * gtk_text_iter_get_slice().
-		 * @param _end iterator at end of a range
+		 * @param end iterator at end of a range
 		 * @returns array of characters from the buffer
 		 */
-		public get_text(_end: TextIter): string;
+		public get_text(end: TextIter): string;
 		/**
 		 * Returns a list of {@link TextTag} that are toggled on or off at this
 		 * point.  (If #toggled_on is %TRUE, the list contains tags that are
@@ -55552,19 +55551,19 @@ declare namespace imports.gi.Gtk {
 		 * Like gtk_text_iter_get_slice(), but invisible text is not included.
 		 * Invisible text is usually invisible because a {@link TextTag} with the
 		 * “invisible” attribute turned on has been applied to it.
-		 * @param _end iterator at end of range
+		 * @param end iterator at end of range
 		 * @returns slice of text from the buffer
 		 */
-		public get_visible_slice(_end: TextIter): string;
+		public get_visible_slice(end: TextIter): string;
 		/**
 		 * Like gtk_text_iter_get_text(), but invisible text is not included.
 		 * Invisible text is usually invisible because a {@link TextTag} with the
 		 * “invisible” attribute turned on has been applied to it.
-		 * @param _end iterator at end of range
+		 * @param end iterator at end of range
 		 * @returns string containing visible text in the
 		 * range
 		 */
-		public get_visible_text(_end: TextIter): string;
+		public get_visible_text(end: TextIter): string;
 		/**
 		 * Returns %TRUE if #iter points to a character that is part of a range tagged
 		 * with #tag. See also gtk_text_iter_starts_tag() and gtk_text_iter_ends_tag().
@@ -55576,10 +55575,10 @@ declare namespace imports.gi.Gtk {
 		 * Checks whether #iter falls in the range [#start, #end).
 		 * #start and #end must be in ascending order.
 		 * @param start start of range
-		 * @param _end end of range
+		 * @param end end of range
 		 * @returns %TRUE if #iter is in the range
 		 */
-		public in_range(start: TextIter, _end: TextIter): boolean;
+		public in_range(start: TextIter, end: TextIter): boolean;
 		/**
 		 * Determines whether #iter is inside a sentence (as opposed to in
 		 * between two sentences, e.g. after a period and before the first
@@ -55781,8 +55780,8 @@ declare namespace imports.gi.Gtk {
 		public populate_popup: {(text_view: TextView, popup: Widget): void;};
 		public move_cursor: {(text_view: TextView, step: MovementStep, count: number, extend_selection: boolean): void;};
 		public set_anchor: {(text_view: TextView): void;};
-		public insert_at_cursor: {(text_view: TextView, _str: string): void;};
-		public delete_from_cursor: {(text_view: TextView, _type: DeleteType, count: number): void;};
+		public insert_at_cursor: {(text_view: TextView, str: string): void;};
+		public delete_from_cursor: {(text_view: TextView, type: DeleteType, count: number): void;};
 		public backspace: {(text_view: TextView): void;};
 		public cut_clipboard: {(text_view: TextView): void;};
 		public copy_clipboard: {(text_view: TextView): void;};
@@ -55790,7 +55789,7 @@ declare namespace imports.gi.Gtk {
 		public toggle_overwrite: {(text_view: TextView): void;};
 		public create_buffer: {(text_view: TextView): TextBuffer;};
 		public draw_layer: {(text_view: TextView, layer: TextViewLayer, cr: cairo.Context): void;};
-		public extend_selection: {(text_view: TextView, granularity: TextExtendSelection, location: TextIter, start: TextIter, _end: TextIter): boolean;};
+		public extend_selection: {(text_view: TextView, granularity: TextExtendSelection, location: TextIter, start: TextIter, end: TextIter): boolean;};
 		public insert_emoji: {(text_view: TextView): void;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
@@ -55816,22 +55815,22 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public readonly padding: any[];
 		public render_line: {(engine: ThemingEngine, cr: cairo.Context, x0: number, y0: number, x1: number, y1: number): void;};
-		public render_background: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_frame: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_frame_gap: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number, gap_side: PositionType, xy0_gap: number, xy1_gap: number): void;};
-		public render_extension: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;};
-		public render_check: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_option: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_arrow: {(engine: ThemingEngine, cr: cairo.Context, angle: number, _x: number, _y: number, size: number): void;};
-		public render_expander: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_focus: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_layout: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, layout: Pango.Layout): void;};
-		public render_slider: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;};
-		public render_handle: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
-		public render_activity: {(engine: ThemingEngine, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;};
+		public render_background: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_frame: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_frame_gap: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number, gap_side: PositionType, xy0_gap: number, xy1_gap: number): void;};
+		public render_extension: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number, gap_side: PositionType): void;};
+		public render_check: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_option: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_arrow: {(engine: ThemingEngine, cr: cairo.Context, angle: number, x: number, y: number, size: number): void;};
+		public render_expander: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_focus: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_layout: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, layout: Pango.Layout): void;};
+		public render_slider: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number, orientation: Orientation): void;};
+		public render_handle: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
+		public render_activity: {(engine: ThemingEngine, cr: cairo.Context, x: number, y: number, width: number, height: number): void;};
 		public render_icon_pixbuf: {(engine: ThemingEngine, source: IconSource, size: IconSize): GdkPixbuf.Pixbuf;};
-		public render_icon: {(engine: ThemingEngine, cr: cairo.Context, pixbuf: GdkPixbuf.Pixbuf, _x: number, _y: number): void;};
-		public render_icon_surface: {(engine: ThemingEngine, cr: cairo.Context, surface: cairo.Surface, _x: number, _y: number): void;};
+		public render_icon: {(engine: ThemingEngine, cr: cairo.Context, pixbuf: GdkPixbuf.Pixbuf, x: number, y: number): void;};
+		public render_icon_surface: {(engine: ThemingEngine, cr: cairo.Context, surface: cairo.Surface, x: number, y: number): void;};
 	}
 
 	interface ThemingEnginePrivate {}
@@ -56018,7 +56017,7 @@ declare namespace imports.gi.Gtk {
 		public constructor();
 		public orientation_changed: {(toolbar: Toolbar, orientation: Orientation): void;};
 		public style_changed: {(toolbar: Toolbar, style: ToolbarStyle): void;};
-		public popup_context_menu: {(toolbar: Toolbar, _x: number, _y: number, button_number: number): boolean;};
+		public popup_context_menu: {(toolbar: Toolbar, x: number, y: number, button_number: number): boolean;};
 		public _gtk_reserved1: {(): void;};
 		public _gtk_reserved2: {(): void;};
 		public _gtk_reserved3: {(): void;};
@@ -56137,7 +56136,7 @@ declare namespace imports.gi.Gtk {
 		public iter_children: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter | null): boolean;};
 		public iter_has_child: {(tree_model: TreeModel, iter: TreeIter): boolean;};
 		public iter_n_children: {(tree_model: TreeModel, iter: TreeIter | null): number;};
-		public iter_nth_child: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter | null, _n: number): boolean;};
+		public iter_nth_child: {(tree_model: TreeModel, iter: TreeIter, parent: TreeIter | null, n: number): boolean;};
 		public iter_parent: {(tree_model: TreeModel, iter: TreeIter, child: TreeIter): boolean;};
 		public ref_node: {(tree_model: TreeModel, iter: TreeIter): void;};
 		public unref_node: {(tree_model: TreeModel, iter: TreeIter): void;};
@@ -56211,10 +56210,10 @@ declare namespace imports.gi.Gtk {
 		 * If #a appears before #b in a tree, then -1 is returned.
 		 * If #b appears before #a, then 1 is returned.
 		 * If the two nodes are equal, then 0 is returned.
-		 * @param _b a {@link TreePath}-struct to compare with
+		 * @param b a {@link TreePath}-struct to compare with
 		 * @returns the relative positions of #a and #b
 		 */
-		public compare(_b: TreePath): number;
+		public compare(b: TreePath): number;
 		/**
 		 * Creates a new {@link TreePath}-struct as a copy of #path.
 		 * @returns a new {@link TreePath}-struct
@@ -56635,9 +56634,9 @@ declare namespace imports.gi.Gtk {
 		public drag_data_get: {(widget: Widget, context: Gdk.DragContext, selection_data: SelectionData, info: number, time_: number): void;};
 		public drag_data_delete: {(widget: Widget, context: Gdk.DragContext): void;};
 		public drag_leave: {(widget: Widget, context: Gdk.DragContext, time_: number): void;};
-		public drag_motion: {(widget: Widget, context: Gdk.DragContext, _x: number, _y: number, time_: number): boolean;};
-		public drag_drop: {(widget: Widget, context: Gdk.DragContext, _x: number, _y: number, time_: number): boolean;};
-		public drag_data_received: {(widget: Widget, context: Gdk.DragContext, _x: number, _y: number, selection_data: SelectionData, info: number, time_: number): void;};
+		public drag_motion: {(widget: Widget, context: Gdk.DragContext, x: number, y: number, time_: number): boolean;};
+		public drag_drop: {(widget: Widget, context: Gdk.DragContext, x: number, y: number, time_: number): boolean;};
+		public drag_data_received: {(widget: Widget, context: Gdk.DragContext, x: number, y: number, selection_data: SelectionData, info: number, time_: number): void;};
 		public drag_failed: {(widget: Widget, context: Gdk.DragContext, result: DragResult): boolean;};
 		public popup_menu: {(widget: Widget): boolean;};
 		public show_help: {(widget: Widget, help_type: WidgetHelpType): boolean;};
@@ -56645,7 +56644,7 @@ declare namespace imports.gi.Gtk {
 		public screen_changed: {(widget: Widget, previous_screen: Gdk.Screen): void;};
 		public can_activate_accel: {(widget: Widget, signal_id: number): boolean;};
 		public composited_changed: {(widget: Widget): void;};
-		public query_tooltip: {(widget: Widget, _x: number, _y: number, keyboard_tooltip: boolean, tooltip: Tooltip): boolean;};
+		public query_tooltip: {(widget: Widget, x: number, y: number, keyboard_tooltip: boolean, tooltip: Tooltip): boolean;};
 		public compute_expand: {(widget: Widget, hexpand_p: boolean, vexpand_p: boolean): void;};
 		public adjust_size_request: {(widget: Widget, orientation: Orientation, minimum_size: number, natural_size: number): void;};
 		public adjust_size_allocation: {(widget: Widget, orientation: Orientation, minimum_size: number, natural_size: number, allocated_pos: number, allocated_size: number): void;};
@@ -56753,9 +56752,9 @@ declare namespace imports.gi.Gtk {
 		 * accessibles of the parent class.
 		 * 
 		 * This function should only be called from class init functions of widgets.
-		 * @param _type The object type that implements the accessible for #widget_class
+		 * @param type The object type that implements the accessible for #widget_class
 		 */
-		public set_accessible_type(_type: GObject.Type): void;
+		public set_accessible_type(type: GObject.Type): void;
 		/**
 		 * For use in language bindings, this will override the default {@link BuilderConnectFunc} to be
 		 * used when parsing GtkBuilder XML from this class’s template data.
@@ -56870,10 +56869,10 @@ declare namespace imports.gi.Gtk {
 		public append_for_widget(widget: Widget): number;
 		/**
 		 * Appends a widget type to the widget hierarchy represented by #path.
-		 * @param _type widget type to append
+		 * @param type widget type to append
 		 * @returns the position where the element was inserted
 		 */
-		public append_type(_type: GObject.Type): number;
+		public append_type(type: GObject.Type): number;
 		/**
 		 * Appends a widget type with all its siblings to the widget hierarchy
 		 * represented by #path. Using this function instead of
@@ -56909,17 +56908,17 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Returns %TRUE if any of the parents of the widget represented
 		 * in #path is of type #type, or any subtype of it.
-		 * @param _type widget type to check in parents
+		 * @param type widget type to check in parents
 		 * @returns %TRUE if any parent is of type #type
 		 */
-		public has_parent(_type: GObject.Type): boolean;
+		public has_parent(type: GObject.Type): boolean;
 		/**
 		 * Returns %TRUE if the widget type represented by this path
 		 * is #type, or a subtype of it.
-		 * @param _type widget type to match
+		 * @param type widget type to match
 		 * @returns %TRUE if the widget represented by #path is of type #type
 		 */
-		public is_type(_type: GObject.Type): boolean;
+		public is_type(type: GObject.Type): boolean;
 		/**
 		 * Adds the class #name to the widget at position #pos in
 		 * the hierarchy defined in #path. See
@@ -57101,9 +57100,9 @@ declare namespace imports.gi.Gtk {
 		 * Sets the object type for a given position in the widget hierarchy
 		 * defined by #path.
 		 * @param pos position to modify, -1 for the path head
-		 * @param _type object type to set
+		 * @param type object type to set
 		 */
-		public iter_set_object_type(pos: number, _type: GObject.Type): void;
+		public iter_set_object_type(pos: number, type: GObject.Type): void;
 		/**
 		 * Sets the widget name for the widget found at position #pos
 		 * in the widget hierarchy defined by #path.
@@ -57134,9 +57133,9 @@ declare namespace imports.gi.Gtk {
 		public length(): number;
 		/**
 		 * Prepends a widget type to the widget hierachy represented by #path.
-		 * @param _type widget type to prepend
+		 * @param type widget type to prepend
 		 */
-		public prepend_type(_type: GObject.Type): void;
+		public prepend_type(type: GObject.Type): void;
 		/**
 		 * Increments the reference count on #path.
 		 * @returns #path itself.
@@ -57803,9 +57802,9 @@ declare namespace imports.gi.Gtk {
 		 * describing how the child should be added.
 		 * @param builder a {@link Builder}
 		 * @param child child to add
-		 * @param _type kind of child or %NULL
+		 * @param type kind of child or %NULL
 		 */
-		add_child(builder: Builder, child: GObject.Object, _type: string | null): void;
+		add_child(builder: Builder, child: GObject.Object, type: string | null): void;
 		/**
 		 * Constructs a child of #buildable with the name #name.
 		 * 
@@ -58114,11 +58113,11 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * #func may be %NULL to remove a previously set function.
 		 * @param cell a {@link CellRenderer}
-		 * @param _func the {@link CellLayoutDataFunc} to use, or %NULL
+		 * @param func the {@link CellLayoutDataFunc} to use, or %NULL
 		 * @param func_data user data for #func
 		 * @param destroy destroy notify for #func_data
 		 */
-		set_cell_data_func(cell: CellRenderer, _func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
+		set_cell_data_func(cell: CellRenderer, func: CellLayoutDataFunc | null, func_data: any | null, destroy: GLib.DestroyNotify): void;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -58570,12 +58569,12 @@ declare namespace imports.gi.Gtk {
 		 * using gtk_file_chooser_get_choice().
 		 * 
 		 * Compare gtk_file_chooser_set_extra_widget().
-		 * @param _id id for the added choice
+		 * @param id id for the added choice
 		 * @param label user-visible label for the added choice
 		 * @param options ids for the options of the choice, or %NULL for a boolean choice
 		 * @param option_labels user-visible labels for the options, must be the same length as #options
 		 */
-		add_choice(_id: string, label: string, options: string[] | null, option_labels: string[] | null): void;
+		add_choice(id: string, label: string, options: string[] | null, option_labels: string[] | null): void;
 		/**
 		 * Adds #filter to the list of filters that the user can select between.
 		 * When a filter is selected, only files that are passed by that
@@ -58614,10 +58613,10 @@ declare namespace imports.gi.Gtk {
 		get_action(): FileChooserAction;
 		/**
 		 * Gets the currently selected option in the 'choice' with the given ID.
-		 * @param _id the ID of the choice to get
+		 * @param id the ID of the choice to get
 		 * @returns the ID of the currenly selected option
 		 */
-		get_choice(_id: string): string;
+		get_choice(id: string): string;
 		/**
 		 * Gets whether file choser will offer to create new folders.
 		 * See gtk_file_chooser_set_create_folders().
@@ -58853,9 +58852,9 @@ declare namespace imports.gi.Gtk {
 		list_shortcut_folders(): GLib.SList | null;
 		/**
 		 * Removes a 'choice' that has been added with gtk_file_chooser_add_choice().
-		 * @param _id the ID of the choice to remove
+		 * @param id the ID of the choice to remove
 		 */
-		remove_choice(_id: string): void;
+		remove_choice(id: string): void;
 		/**
 		 * Removes #filter from the list of filters that the user can select between.
 		 * @param filter a {@link FileFilter}
@@ -58921,10 +58920,10 @@ declare namespace imports.gi.Gtk {
 		 * Selects an option in a 'choice' that has been added with
 		 * gtk_file_chooser_add_choice(). For a boolean choice, the
 		 * possible options are "true" and "false".
-		 * @param _id the ID of the choice to set
+		 * @param id the ID of the choice to set
 		 * @param option the ID of the option to select
 		 */
-		set_choice(_id: string, option: string): void;
+		set_choice(id: string, option: string): void;
 		/**
 		 * Sets whether file choser will offer to create new folders.
 		 * This is only relevant if the action is not set to be
@@ -60495,9 +60494,9 @@ declare namespace imports.gi.Gtk {
 		 * 
 		 * If #func returns %TRUE, then the tree ceases to be walked,
 		 * and gtk_tree_model_foreach() returns.
-		 * @param _func a function to be called on each row
+		 * @param func a function to be called on each row
 		 */
-		foreach(_func: TreeModelForeachFunc): void;
+		foreach(func: TreeModelForeachFunc): void;
 		/**
 		 * Gets the value of one or more cells in the row referenced by #iter.
 		 * The variable argument list should contain integer column numbers,
@@ -60642,10 +60641,10 @@ declare namespace imports.gi.Gtk {
 		 * is set.
 		 * @param iter the {@link TreeIter}-struct to set to the nth child
 		 * @param parent the {@link TreeIter}-struct to get the child from, or %NULL.
-		 * @param _n the index of the desired child
+		 * @param n the index of the desired child
 		 * @returns %TRUE, if #parent has an #n-th child
 		 */
-		iter_nth_child(iter: TreeIter, parent: TreeIter | null, _n: number): boolean;
+		iter_nth_child(iter: TreeIter, parent: TreeIter | null, n: number): boolean;
 		/**
 		 * Sets #iter to be the parent of #child.
 		 * 
@@ -65209,11 +65208,11 @@ declare namespace imports.gi.Gtk {
 		 * The type of function that is used for deciding what fonts get
 		 * shown in a {@link FontChooser}. See gtk_font_chooser_set_filter_func().
 		 * @param family a #PangoFontFamily
-		 * @param _face a #PangoFontFace belonging to #family
+		 * @param face a #PangoFontFace belonging to #family
 		 * @param data user data passed to gtk_font_chooser_set_filter_func()
 		 * @returns %TRUE if the font should be displayed
 		 */
-		(family: Pango.FontFamily, _face: Pango.FontFace, data: any | null): boolean;
+		(family: Pango.FontFamily, face: Pango.FontFace, data: any | null): boolean;
 	}
 
 	/**
@@ -65279,10 +65278,10 @@ declare namespace imports.gi.Gtk {
 		/**
 		 * Will be called whenever the row changes or is added and lets you control
 		 * if the row should be visible or not.
-		 * @param _row the row that may be filtered
+		 * @param row the row that may be filtered
 		 * @returns %TRUE if the row should be visible, %FALSE otherwise
 		 */
-		(_row: ListBoxRow): boolean;
+		(row: ListBoxRow): boolean;
 	}
 
 	/**
@@ -65294,9 +65293,9 @@ declare namespace imports.gi.Gtk {
 		 * A function used by gtk_list_box_selected_foreach().
 		 * It will be called on every selected child of the #box.
 		 * @param box a {@link ListBox}
-		 * @param _row a {@link ListBoxRow}
+		 * @param row a {@link ListBoxRow}
 		 */
-		(box: ListBox, _row: ListBoxRow): void;
+		(box: ListBox, row: ListBoxRow): void;
 	}
 
 	/**
@@ -65325,10 +65324,10 @@ declare namespace imports.gi.Gtk {
 		 * is called, which lets you update the header on #row. You may
 		 * remove or set a new one via gtk_list_box_row_set_header() or
 		 * just change the state of the current header widget.
-		 * @param _row the row to update
+		 * @param row the row to update
 		 * @param before the row before #row, or %NULL if it is first
 		 */
-		(_row: ListBoxRow, before: ListBoxRow | null): void;
+		(row: ListBoxRow, before: ListBoxRow | null): void;
 	}
 
 	/**
@@ -65438,7 +65437,7 @@ declare namespace imports.gi.Gtk {
 	}
 
 	interface RecentSortFunc {
-		(_a: RecentInfo, _b: RecentInfo): number;
+		(a: RecentInfo, b: RecentInfo): number;
 	}
 
 	interface StylePropertyParser {
@@ -65475,16 +65474,16 @@ declare namespace imports.gi.Gtk {
 		 * @param register_buffer the {@link TextBuffer} for which the format is registered
 		 * @param content_buffer the {@link TextBuffer} to serialize
 		 * @param start start of the block of text to serialize
-		 * @param _end end of the block of text to serialize
+		 * @param end end of the block of text to serialize
 		 * @param length Return location for the length of the serialized data
 		 * @returns a newly-allocated array of guint8 which contains
 		 * the serialized data, or %NULL if an error occurred
 		 */
-		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, _end: TextIter, length: number): number | null;
+		(register_buffer: TextBuffer, content_buffer: TextBuffer, start: TextIter, end: TextIter, length: number): number | null;
 	}
 
 	interface TextCharPredicate {
-		(_ch: string): boolean;
+		(ch: string): boolean;
 	}
 
 	interface TextTagTableForeach {
@@ -65576,12 +65575,12 @@ declare namespace imports.gi.Gtk {
 		 * for the “price” column could be one which returns
 		 * `price_of(#a) - price_of(#b)`.
 		 * @param model The {@link TreeModel} the comparison is within
-		 * @param _a A {@link TreeIter} in #model
-		 * @param _b Another {@link TreeIter} in #model
+		 * @param a A {@link TreeIter} in #model
+		 * @param b Another {@link TreeIter} in #model
 		 * @returns a negative integer, zero or a positive integer depending on whether
 		 *   #a sorts before, with or after #b
 		 */
-		(model: TreeModel, _a: TreeIter, _b: TreeIter): number;
+		(model: TreeModel, a: TreeIter, b: TreeIter): number;
 	}
 
 	/**
@@ -66201,11 +66200,11 @@ declare namespace imports.gi.Gtk {
 	 * that the data of the drag will no longer be required.
 	 * @param context the drag context
 	 * @param success a flag indicating whether the drop was successful
-	 * @param _del a flag indicating whether the source should delete the
+	 * @param del a flag indicating whether the source should delete the
 	 *   original data. (This should be %TRUE for a move)
 	 * @param time_ the timestamp from the {@link Widget}::drag-drop signal
 	 */
-	function drag_finish(context: Gdk.DragContext, success: boolean, _del: boolean, time_: number): void;
+	function drag_finish(context: Gdk.DragContext, success: boolean, del: boolean, time_: number): void;
 
 	/**
 	 * Determines the source widget for a drag.
@@ -66768,12 +66767,12 @@ declare namespace imports.gi.Gtk {
 	 * @param detail a style detail
 	 * @param arrow_type the type of arrow to draw
 	 * @param fill %TRUE if the arrow tip should be filled
-	 * @param _x x origin of the rectangle to draw the arrow in
-	 * @param _y y origin of the rectangle to draw the arrow in
+	 * @param x x origin of the rectangle to draw the arrow in
+	 * @param y y origin of the rectangle to draw the arrow in
 	 * @param width width of the rectangle to draw the arrow in
 	 * @param height height of the rectangle to draw the arrow in
 	 */
-	function paint_arrow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, arrow_type: ArrowType, fill: boolean, _x: number, _y: number, width: number, height: number): void;
+	function paint_arrow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, arrow_type: ArrowType, fill: boolean, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a box on #cr with the given parameters.
@@ -66783,12 +66782,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the box
-	 * @param _y y origin of the box
+	 * @param x x origin of the box
+	 * @param y y origin of the box
 	 * @param width the width of the box
 	 * @param height the height of the box
 	 */
-	function paint_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a box in #cr using the given style and state and shadow type,
@@ -66799,15 +66798,15 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle
-	 * @param _y y origin of the rectangle
+	 * @param x x origin of the rectangle
+	 * @param y y origin of the rectangle
 	 * @param width width of the rectangle
 	 * @param height width of the rectangle
 	 * @param gap_side side in which to leave the gap
 	 * @param gap_x starting position of the gap
 	 * @param gap_width width of the gap
 	 */
-	function paint_box_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
+	function paint_box_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
 
 	/**
 	 * Draws a check button indicator in the given rectangle on #cr with
@@ -66818,12 +66817,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle to draw the check in
-	 * @param _y y origin of the rectangle to draw the check in
+	 * @param x x origin of the rectangle to draw the check in
+	 * @param y y origin of the rectangle to draw the check in
 	 * @param width the width of the rectangle to draw the check in
 	 * @param height the height of the rectangle to draw the check in
 	 */
-	function paint_check(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_check(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a diamond in the given rectangle on #window using the given
@@ -66834,12 +66833,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle to draw the diamond in
-	 * @param _y y origin of the rectangle to draw the diamond in
+	 * @param x x origin of the rectangle to draw the diamond in
+	 * @param y y origin of the rectangle to draw the diamond in
 	 * @param width width of the rectangle to draw the diamond in
 	 * @param height height of the rectangle to draw the diamond in
 	 */
-	function paint_diamond(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_diamond(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws an expander as used in {@link TreeView}. #x and #y specify the
@@ -66856,13 +66855,13 @@ declare namespace imports.gi.Gtk {
 	 * @param state_type a state
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x the x position to draw the expander at
-	 * @param _y the y position to draw the expander at
+	 * @param x the x position to draw the expander at
+	 * @param y the y position to draw the expander at
 	 * @param expander_style the style to draw the expander in; determines
 	 *   whether the expander is collapsed, expanded, or in an
 	 *   intermediate state.
 	 */
-	function paint_expander(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, _x: number, _y: number, expander_style: ExpanderStyle): void;
+	function paint_expander(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, x: number, y: number, expander_style: ExpanderStyle): void;
 
 	/**
 	 * Draws an extension, i.e. a notebook tab.
@@ -66872,13 +66871,13 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the extension
-	 * @param _y y origin of the extension
+	 * @param x x origin of the extension
+	 * @param y y origin of the extension
 	 * @param width width of the extension
 	 * @param height width of the extension
 	 * @param gap_side the side on to which the extension is attached
 	 */
-	function paint_extension(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;
+	function paint_extension(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number, gap_side: PositionType): void;
 
 	/**
 	 * Draws a flat box on #cr with the given parameters.
@@ -66888,12 +66887,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the box
-	 * @param _y y origin of the box
+	 * @param x x origin of the box
+	 * @param y y origin of the box
 	 * @param width the width of the box
 	 * @param height the height of the box
 	 */
-	function paint_flat_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_flat_box(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a focus indicator around the given rectangle on #cr using the
@@ -66903,12 +66902,12 @@ declare namespace imports.gi.Gtk {
 	 * @param state_type a state
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x the x origin of the rectangle around which to draw a focus indicator
-	 * @param _y the y origin of the rectangle around which to draw a focus indicator
+	 * @param x the x origin of the rectangle around which to draw a focus indicator
+	 * @param y the y origin of the rectangle around which to draw a focus indicator
 	 * @param width the width of the rectangle around which to draw a focus indicator
 	 * @param height the height of the rectangle around which to draw a focus indicator
 	 */
-	function paint_focus(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_focus(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a handle as used in {@link HandleBox} and #GtkPaned.
@@ -66918,13 +66917,13 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the handle
-	 * @param _y y origin of the handle
+	 * @param x x origin of the handle
+	 * @param y y origin of the handle
 	 * @param width with of the handle
 	 * @param height height of the handle
 	 * @param orientation the orientation of the handle
 	 */
-	function paint_handle(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
+	function paint_handle(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number, orientation: Orientation): void;
 
 	/**
 	 * Draws a horizontal line from (#x1, #y) to (#x2, #y) in #cr
@@ -66936,9 +66935,9 @@ declare namespace imports.gi.Gtk {
 	 * @param detail a style detail
 	 * @param x1 the starting x coordinate
 	 * @param x2 the ending x coordinate
-	 * @param _y the y coordinate
+	 * @param y the y coordinate
 	 */
-	function paint_hline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, x1: number, x2: number, _y: number): void;
+	function paint_hline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, x1: number, x2: number, y: number): void;
 
 	/**
 	 * Draws a layout on #cr using the given parameters.
@@ -66949,11 +66948,11 @@ declare namespace imports.gi.Gtk {
 	 *            graphics context of #style
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin
-	 * @param _y y origin
+	 * @param x x origin
+	 * @param y y origin
 	 * @param layout the layout to draw
 	 */
-	function paint_layout(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget | null, detail: string | null, _x: number, _y: number, layout: Pango.Layout): void;
+	function paint_layout(style: Style, cr: cairo.Context, state_type: StateType, use_text: boolean, widget: Widget | null, detail: string | null, x: number, y: number, layout: Pango.Layout): void;
 
 	/**
 	 * Draws a radio button indicator in the given rectangle on #cr with
@@ -66964,12 +66963,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle to draw the option in
-	 * @param _y y origin of the rectangle to draw the option in
+	 * @param x x origin of the rectangle to draw the option in
+	 * @param y y origin of the rectangle to draw the option in
 	 * @param width the width of the rectangle to draw the option in
 	 * @param height the height of the rectangle to draw the option in
 	 */
-	function paint_option(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_option(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a resize grip in the given rectangle on #cr using the given
@@ -66980,12 +66979,12 @@ declare namespace imports.gi.Gtk {
 	 * @param widget the widget
 	 * @param detail a style detail
 	 * @param edge the edge in which to draw the resize grip
-	 * @param _x the x origin of the rectangle in which to draw the resize grip
-	 * @param _y the y origin of the rectangle in which to draw the resize grip
+	 * @param x the x origin of the rectangle in which to draw the resize grip
+	 * @param y the y origin of the rectangle in which to draw the resize grip
 	 * @param width the width of the rectangle in which to draw the resize grip
 	 * @param height the height of the rectangle in which to draw the resize grip
 	 */
-	function paint_resize_grip(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, edge: Gdk.WindowEdge, _x: number, _y: number, width: number, height: number): void;
+	function paint_resize_grip(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, edge: Gdk.WindowEdge, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a shadow around the given rectangle in #cr
@@ -66996,12 +66995,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle
-	 * @param _y y origin of the rectangle
+	 * @param x x origin of the rectangle
+	 * @param y y origin of the rectangle
 	 * @param width width of the rectangle
 	 * @param height width of the rectangle
 	 */
-	function paint_shadow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_shadow(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a shadow around the given rectangle in #cr
@@ -67013,15 +67012,15 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle
-	 * @param _y y origin of the rectangle
+	 * @param x x origin of the rectangle
+	 * @param y y origin of the rectangle
 	 * @param width width of the rectangle
 	 * @param height width of the rectangle
 	 * @param gap_side side in which to leave the gap
 	 * @param gap_x starting position of the gap
 	 * @param gap_width width of the gap
 	 */
-	function paint_shadow_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
+	function paint_shadow_gap(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number, gap_side: PositionType, gap_x: number, gap_width: number): void;
 
 	/**
 	 * Draws a slider in the given rectangle on #cr using the
@@ -67032,13 +67031,13 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type a shadow
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x the x origin of the rectangle in which to draw a slider
-	 * @param _y the y origin of the rectangle in which to draw a slider
+	 * @param x the x origin of the rectangle in which to draw a slider
+	 * @param y the y origin of the rectangle in which to draw a slider
 	 * @param width the width of the rectangle in which to draw a slider
 	 * @param height the height of the rectangle in which to draw a slider
 	 * @param orientation the orientation to be used
 	 */
-	function paint_slider(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
+	function paint_slider(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number, orientation: Orientation): void;
 
 	/**
 	 * Draws a spinner on #window using the given parameters.
@@ -67048,12 +67047,12 @@ declare namespace imports.gi.Gtk {
 	 * @param widget the widget (may be %NULL)
 	 * @param detail a style detail (may be %NULL)
 	 * @param step the nth step
-	 * @param _x the x origin of the rectangle in which to draw the spinner
-	 * @param _y the y origin of the rectangle in which to draw the spinner
+	 * @param x the x origin of the rectangle in which to draw the spinner
+	 * @param y the y origin of the rectangle in which to draw the spinner
 	 * @param width the width of the rectangle in which to draw the spinner
 	 * @param height the height of the rectangle in which to draw the spinner
 	 */
-	function paint_spinner(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, step: number, _x: number, _y: number, width: number, height: number): void;
+	function paint_spinner(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, step: number, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws an option menu tab (i.e. the up and down pointing arrows)
@@ -67064,12 +67063,12 @@ declare namespace imports.gi.Gtk {
 	 * @param shadow_type the type of shadow to draw
 	 * @param widget the widget
 	 * @param detail a style detail
-	 * @param _x x origin of the rectangle to draw the tab in
-	 * @param _y y origin of the rectangle to draw the tab in
+	 * @param x x origin of the rectangle to draw the tab in
+	 * @param y y origin of the rectangle to draw the tab in
 	 * @param width the width of the rectangle to draw the tab in
 	 * @param height the height of the rectangle to draw the tab in
 	 */
-	function paint_tab(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, _x: number, _y: number, width: number, height: number): void;
+	function paint_tab(style: Style, cr: cairo.Context, state_type: StateType, shadow_type: ShadowType, widget: Widget | null, detail: string | null, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Draws a vertical line from (#x, #y1_) to (#x, #y2_) in #cr
@@ -67081,9 +67080,9 @@ declare namespace imports.gi.Gtk {
 	 * @param detail a style detail
 	 * @param y1_ the starting y coordinate
 	 * @param y2_ the ending y coordinate
-	 * @param _x the x coordinate
+	 * @param x the x coordinate
 	 */
-	function paint_vline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, y1_: number, y2_: number, _x: number): void;
+	function paint_vline(style: Style, cr: cairo.Context, state_type: StateType, widget: Widget | null, detail: string | null, y1_: number, y2_: number, x: number): void;
 
 	/**
 	 * Returns the name of the default paper size, which
@@ -67282,7 +67281,7 @@ declare namespace imports.gi.Gtk {
 	 *     style, or %NULL if no matching against the widget path should be done
 	 * @param class_path the class path to use when looking up the style,
 	 *     or %NULL if no matching against the class path should be done.
-	 * @param _type a type that will be used along with parent types of this type
+	 * @param type a type that will be used along with parent types of this type
 	 *     when matching against class styles, or #G_TYPE_NONE
 	 * @returns A style created by matching
 	 *     with the supplied paths, or %NULL if nothing matching was
@@ -67291,7 +67290,7 @@ declare namespace imports.gi.Gtk {
 	 *     must call g_object_ref() on the returned value if you want to
 	 *     keep a reference to it.
 	 */
-	function rc_get_style_by_paths(settings: Settings, widget_path: string | null, class_path: string | null, _type: GObject.Type): Style | null;
+	function rc_get_style_by_paths(settings: Settings, widget_path: string | null, class_path: string | null, type: GObject.Type): Style | null;
 
 	/**
 	 * Returns the standard directory in which themes should
@@ -67487,12 +67486,12 @@ declare namespace imports.gi.Gtk {
 	 * activity going on.
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_activity(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_activity(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders an arrow pointing to #angle.
@@ -67503,11 +67502,11 @@ declare namespace imports.gi.Gtk {
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
 	 * @param angle arrow angle from 0 to 2 * %G_PI, being 0 the arrow pointing to the north
-	 * @param _x X origin of the render area
-	 * @param _y Y origin of the render area
+	 * @param x X origin of the render area
+	 * @param y Y origin of the render area
 	 * @param size square side for render area
 	 */
-	function render_arrow(context: StyleContext, cr: cairo.Context, angle: number, _x: number, _y: number, size: number): void;
+	function render_arrow(context: StyleContext, cr: cairo.Context, angle: number, x: number, y: number, size: number): void;
 
 	/**
 	 * Renders the background of an element.
@@ -67518,25 +67517,25 @@ declare namespace imports.gi.Gtk {
 	 * ![](background.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_background(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_background(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Returns the area that will be affected (i.e. drawn to) when
 	 * calling gtk_render_background() for the given #context and
 	 * rectangle.
 	 * @param context a {@link StyleContext}
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 * @param out_clip return location for the clip
 	 */
-	function render_background_get_clip(context: StyleContext, _x: number, _y: number, width: number, height: number, out_clip: Gdk.Rectangle): void;
+	function render_background_get_clip(context: StyleContext, x: number, y: number, width: number, height: number, out_clip: Gdk.Rectangle): void;
 
 	/**
 	 * Renders a checkmark (as in a {@link CheckButton}).
@@ -67550,12 +67549,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](checks.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_check(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_check(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders an expander (as used in {@link TreeView} and #GtkExpander) in the area
@@ -67567,12 +67566,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](expanders.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_expander(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_expander(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders a extension (as in a {@link Notebook} tab) in the rectangle
@@ -67584,13 +67583,13 @@ declare namespace imports.gi.Gtk {
 	 * ![](extensions.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 * @param gap_side side where the gap is
 	 */
-	function render_extension(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number, gap_side: PositionType): void;
+	function render_extension(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number, gap_side: PositionType): void;
 
 	/**
 	 * Renders a focus indicator on the rectangle determined by #x, #y, #width, #height.
@@ -67600,12 +67599,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](focus.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_focus(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_focus(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders a frame around the rectangle defined by #x, #y, #width, #height.
@@ -67616,12 +67615,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](frames.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_frame(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_frame(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders a frame around the rectangle defined by (#x, #y, #width, #height),
@@ -67634,15 +67633,15 @@ declare namespace imports.gi.Gtk {
 	 * ![](frame-gap.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 * @param gap_side side where the gap is
 	 * @param xy0_gap initial coordinate (X or Y depending on #gap_side) for the gap
 	 * @param xy1_gap end coordinate (X or Y depending on #gap_side) for the gap
 	 */
-	function render_frame_gap(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number, gap_side: PositionType, xy0_gap: number, xy1_gap: number): void;
+	function render_frame_gap(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number, gap_side: PositionType, xy0_gap: number, xy1_gap: number): void;
 
 	/**
 	 * Renders a handle (as in {@link HandleBox}, #GtkPaned and
@@ -67654,12 +67653,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](handles.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_handle(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_handle(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders the icon in #pixbuf at the specified #x and #y coordinates.
@@ -67673,10 +67672,10 @@ declare namespace imports.gi.Gtk {
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
 	 * @param pixbuf a #GdkPixbuf containing the icon to draw
-	 * @param _x X position for the #pixbuf
-	 * @param _y Y position for the #pixbuf
+	 * @param x X position for the #pixbuf
+	 * @param y Y position for the #pixbuf
 	 */
-	function render_icon(context: StyleContext, cr: cairo.Context, pixbuf: GdkPixbuf.Pixbuf, _x: number, _y: number): void;
+	function render_icon(context: StyleContext, cr: cairo.Context, pixbuf: GdkPixbuf.Pixbuf, x: number, y: number): void;
 
 	/**
 	 * Renders the icon specified by #source at the given #size, returning the result
@@ -67695,32 +67694,32 @@ declare namespace imports.gi.Gtk {
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
 	 * @param surface a #cairo_surface_t containing the icon to draw
-	 * @param _x X position for the #icon
-	 * @param _y Y position for the #incon
+	 * @param x X position for the #icon
+	 * @param y Y position for the #incon
 	 */
-	function render_icon_surface(context: StyleContext, cr: cairo.Context, surface: cairo.Surface, _x: number, _y: number): void;
+	function render_icon_surface(context: StyleContext, cr: cairo.Context, surface: cairo.Surface, x: number, y: number): void;
 
 	/**
 	 * Draws a text caret on #cr at the specified index of #layout.
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin
-	 * @param _y Y origin
+	 * @param x X origin
+	 * @param y Y origin
 	 * @param layout the #PangoLayout of the text
 	 * @param index the index in the #PangoLayout
 	 * @param direction the #PangoDirection of the text
 	 */
-	function render_insertion_cursor(context: StyleContext, cr: cairo.Context, _x: number, _y: number, layout: Pango.Layout, index: number, direction: Pango.Direction): void;
+	function render_insertion_cursor(context: StyleContext, cr: cairo.Context, x: number, y: number, layout: Pango.Layout, index: number, direction: Pango.Direction): void;
 
 	/**
 	 * Renders #layout on the coordinates #x, #y
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin
-	 * @param _y Y origin
+	 * @param x X origin
+	 * @param y Y origin
 	 * @param layout the #PangoLayout to render
 	 */
-	function render_layout(context: StyleContext, cr: cairo.Context, _x: number, _y: number, layout: Pango.Layout): void;
+	function render_layout(context: StyleContext, cr: cairo.Context, x: number, y: number, layout: Pango.Layout): void;
 
 	/**
 	 * Renders a line from (x0, y0) to (x1, y1).
@@ -67743,12 +67742,12 @@ declare namespace imports.gi.Gtk {
 	 * ![](options.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 */
-	function render_option(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number): void;
+	function render_option(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Renders a slider (as in {@link Scale}) in the rectangle defined by #x, #y,
@@ -67760,29 +67759,29 @@ declare namespace imports.gi.Gtk {
 	 * ![](sliders.png)
 	 * @param context a {@link StyleContext}
 	 * @param cr a #cairo_t
-	 * @param _x X origin of the rectangle
-	 * @param _y Y origin of the rectangle
+	 * @param x X origin of the rectangle
+	 * @param y Y origin of the rectangle
 	 * @param width rectangle width
 	 * @param height rectangle height
 	 * @param orientation orientation of the slider
 	 */
-	function render_slider(context: StyleContext, cr: cairo.Context, _x: number, _y: number, width: number, height: number, orientation: Orientation): void;
+	function render_slider(context: StyleContext, cr: cairo.Context, x: number, y: number, width: number, height: number, orientation: Orientation): void;
 
 	/**
 	 * Converts a color from RGB space to HSV.
 	 * 
 	 * Input values must be in the [0.0, 1.0] range;
 	 * output values will be in the same range.
-	 * @param _r Red
-	 * @param _g Green
-	 * @param _b Blue
+	 * @param r Red
+	 * @param g Green
+	 * @param b Blue
 	 * @returns Return value for the hue component
 	 * 
 	 * Return value for the saturation component
 	 * 
 	 * Return value for the value component
 	 */
-	function rgb_to_hsv(_r: number, _g: number, _b: number): [ h: number, s: number, v: number ];
+	function rgb_to_hsv(r: number, g: number, b: number): [ h: number, s: number, v: number ];
 
 	/**
 	 * Appends a specified target to the list of supported targets for a
@@ -67983,12 +67982,12 @@ declare namespace imports.gi.Gtk {
 	 * gtk_stock_set_translate_func ("even-item-domain", my_translate_func, "even items");
 	 * ]|
 	 * @param domain the translation domain for which #func shall be used
-	 * @param _func a {@link TranslateFunc}
+	 * @param func a {@link TranslateFunc}
 	 * @param data data to pass to #func
 	 * @param notify a #GDestroyNotify that is called when #data is
 	 *   no longer needed
 	 */
-	function stock_set_translate_func(domain: string, _func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
+	function stock_set_translate_func(domain: string, func: TranslateFunc, data: any | null, notify: GLib.DestroyNotify): void;
 
 	/**
 	 * This function frees a target table as returned by
@@ -68356,5 +68355,1995 @@ declare namespace imports.gi.Gtk {
 	 * @returns %TRUE
 	 */
 	// function true(): boolean;
+
+	/**
+	 * Like gtk_get_binary_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like gtk_get_binary_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const BINARY_AGE: number;
+
+	/**
+	 * Constant to return from a signal handler for the {@link SpinButton}::input
+	 * signal in case of conversion failure.
+	 * @returns Constant to return from a signal handler for the {@link SpinButton}::input
+	 * signal in case of conversion failure.
+	 */
+	const INPUT_ERROR: number;
+
+	/**
+	 * Like gtk_get_interface_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like gtk_get_interface_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const INTERFACE_AGE: number;
+
+	/**
+	 * The name used for the stock full offset included by {@link LevelBar}.
+	 * @returns The name used for the stock full offset included by {@link LevelBar}.
+	 */
+	const LEVEL_BAR_OFFSET_FULL: string;
+
+	/**
+	 * The name used for the stock high offset included by {@link LevelBar}.
+	 * @returns The name used for the stock high offset included by {@link LevelBar}.
+	 */
+	const LEVEL_BAR_OFFSET_HIGH: string;
+
+	/**
+	 * The name used for the stock low offset included by {@link LevelBar}.
+	 * @returns The name used for the stock low offset included by {@link LevelBar}.
+	 */
+	const LEVEL_BAR_OFFSET_LOW: string;
+
+	/**
+	 * Like gtk_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like gtk_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * The maximum length of sequences in compose tables.
+	 * @returns The maximum length of sequences in compose tables.
+	 */
+	const MAX_COMPOSE_LEN: number;
+
+	/**
+	 * Like gtk_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like gtk_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * Like gtk_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like gtk_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MINOR_VERSION: number;
+
+	/**
+	 * Name for the A3 paper size.
+	 * @returns Name for the A3 paper size.
+	 */
+	const PAPER_NAME_A3: string;
+
+	/**
+	 * Name for the A4 paper size.
+	 * @returns Name for the A4 paper size.
+	 */
+	const PAPER_NAME_A4: string;
+
+	/**
+	 * Name for the A5 paper size.
+	 * @returns Name for the A5 paper size.
+	 */
+	const PAPER_NAME_A5: string;
+
+	/**
+	 * Name for the B5 paper size.
+	 * @returns Name for the B5 paper size.
+	 */
+	const PAPER_NAME_B5: string;
+
+	/**
+	 * Name for the Executive paper size.
+	 * @returns Name for the Executive paper size.
+	 */
+	const PAPER_NAME_EXECUTIVE: string;
+
+	/**
+	 * Name for the Legal paper size.
+	 * @returns Name for the Legal paper size.
+	 */
+	const PAPER_NAME_LEGAL: string;
+
+	/**
+	 * Name for the Letter paper size.
+	 * @returns Name for the Letter paper size.
+	 */
+	const PAPER_NAME_LETTER: string;
+
+	const PATH_PRIO_MASK: number;
+
+	const PRINT_SETTINGS_COLLATE: string;
+
+	const PRINT_SETTINGS_DEFAULT_SOURCE: string;
+
+	const PRINT_SETTINGS_DITHER: string;
+
+	const PRINT_SETTINGS_DUPLEX: string;
+
+	const PRINT_SETTINGS_FINISHINGS: string;
+
+	const PRINT_SETTINGS_MEDIA_TYPE: string;
+
+	const PRINT_SETTINGS_NUMBER_UP: string;
+
+	const PRINT_SETTINGS_NUMBER_UP_LAYOUT: string;
+
+	const PRINT_SETTINGS_N_COPIES: string;
+
+	const PRINT_SETTINGS_ORIENTATION: string;
+
+	/**
+	 * The key used by the “Print to file” printer to store the file
+	 * name of the output without the path to the directory and the
+	 * file extension.
+	 * @returns The key used by the “Print to file” printer to store the file
+	 * name of the output without the path to the directory and the
+	 * file extension.
+	 */
+	const PRINT_SETTINGS_OUTPUT_BASENAME: string;
+
+	const PRINT_SETTINGS_OUTPUT_BIN: string;
+
+	/**
+	 * The key used by the “Print to file” printer to store the
+	 * directory to which the output should be written.
+	 * @returns The key used by the “Print to file” printer to store the
+	 * directory to which the output should be written.
+	 */
+	const PRINT_SETTINGS_OUTPUT_DIR: string;
+
+	/**
+	 * The key used by the “Print to file” printer to store the format
+	 * of the output. The supported values are “PS” and “PDF”.
+	 * @returns The key used by the “Print to file” printer to store the format
+	 * of the output. The supported values are “PS” and “PDF”.
+	 */
+	const PRINT_SETTINGS_OUTPUT_FILE_FORMAT: string;
+
+	/**
+	 * The key used by the “Print to file” printer to store the URI
+	 * to which the output should be written. GTK+ itself supports
+	 * only “file://” URIs.
+	 * @returns The key used by the “Print to file” printer to store the URI
+	 * to which the output should be written. GTK+ itself supports
+	 * only “file://” URIs.
+	 */
+	const PRINT_SETTINGS_OUTPUT_URI: string;
+
+	const PRINT_SETTINGS_PAGE_RANGES: string;
+
+	const PRINT_SETTINGS_PAGE_SET: string;
+
+	const PRINT_SETTINGS_PAPER_FORMAT: string;
+
+	const PRINT_SETTINGS_PAPER_HEIGHT: string;
+
+	const PRINT_SETTINGS_PAPER_WIDTH: string;
+
+	const PRINT_SETTINGS_PRINTER: string;
+
+	const PRINT_SETTINGS_PRINTER_LPI: string;
+
+	const PRINT_SETTINGS_PRINT_PAGES: string;
+
+	const PRINT_SETTINGS_QUALITY: string;
+
+	const PRINT_SETTINGS_RESOLUTION: string;
+
+	const PRINT_SETTINGS_RESOLUTION_X: string;
+
+	const PRINT_SETTINGS_RESOLUTION_Y: string;
+
+	const PRINT_SETTINGS_REVERSE: string;
+
+	const PRINT_SETTINGS_SCALE: string;
+
+	const PRINT_SETTINGS_USE_COLOR: string;
+
+	const PRINT_SETTINGS_WIN32_DRIVER_EXTRA: string;
+
+	const PRINT_SETTINGS_WIN32_DRIVER_VERSION: string;
+
+	/**
+	 * Use this priority for functionality related to size allocation.
+	 * 
+	 * It is used internally by GTK+ to compute the sizes of widgets.
+	 * This priority is higher than %GDK_PRIORITY_REDRAW to avoid
+	 * resizing a widget which was just redrawn.
+	 * @returns Use this priority for functionality related to size allocation.
+	 * 
+	 * It is used internally by GTK+ to compute the sizes of widgets.
+	 * This priority is higher than %GDK_PRIORITY_REDRAW to avoid
+	 * resizing a widget which was just redrawn.
+	 */
+	const PRIORITY_RESIZE: number;
+
+	/**
+	 * The “About” item.
+	 * ![](help-about.png)
+	 * @returns The “About” item.
+	 * ![](help-about.png)
+	 */
+	const STOCK_ABOUT: string;
+
+	/**
+	 * The “Add” item and icon.
+	 * @returns The “Add” item and icon.
+	 */
+	const STOCK_ADD: string;
+
+	/**
+	 * The “Apply” item and icon.
+	 * @returns The “Apply” item and icon.
+	 */
+	const STOCK_APPLY: string;
+
+	/**
+	 * The “Bold” item and icon.
+	 * @returns The “Bold” item and icon.
+	 */
+	const STOCK_BOLD: string;
+
+	/**
+	 * The “Cancel” item and icon.
+	 * @returns The “Cancel” item and icon.
+	 */
+	const STOCK_CANCEL: string;
+
+	/**
+	 * The “Caps Lock Warning” icon.
+	 * @returns The “Caps Lock Warning” icon.
+	 */
+	const STOCK_CAPS_LOCK_WARNING: string;
+
+	/**
+	 * The “CD-Rom” item and icon.
+	 * @returns The “CD-Rom” item and icon.
+	 */
+	const STOCK_CDROM: string;
+
+	/**
+	 * The “Clear” item and icon.
+	 * @returns The “Clear” item and icon.
+	 */
+	const STOCK_CLEAR: string;
+
+	/**
+	 * The “Close” item and icon.
+	 * @returns The “Close” item and icon.
+	 */
+	const STOCK_CLOSE: string;
+
+	/**
+	 * The “Color Picker” item and icon.
+	 * @returns The “Color Picker” item and icon.
+	 */
+	const STOCK_COLOR_PICKER: string;
+
+	/**
+	 * The “Connect” icon.
+	 * @returns The “Connect” icon.
+	 */
+	const STOCK_CONNECT: string;
+
+	/**
+	 * The “Convert” item and icon.
+	 * @returns The “Convert” item and icon.
+	 */
+	const STOCK_CONVERT: string;
+
+	/**
+	 * The “Copy” item and icon.
+	 * @returns The “Copy” item and icon.
+	 */
+	const STOCK_COPY: string;
+
+	/**
+	 * The “Cut” item and icon.
+	 * @returns The “Cut” item and icon.
+	 */
+	const STOCK_CUT: string;
+
+	/**
+	 * The “Delete” item and icon.
+	 * @returns The “Delete” item and icon.
+	 */
+	const STOCK_DELETE: string;
+
+	/**
+	 * The “Authentication” item and icon.
+	 * @returns The “Authentication” item and icon.
+	 */
+	const STOCK_DIALOG_AUTHENTICATION: string;
+
+	/**
+	 * The “Error” item and icon.
+	 * @returns The “Error” item and icon.
+	 */
+	const STOCK_DIALOG_ERROR: string;
+
+	/**
+	 * The “Information” item and icon.
+	 * @returns The “Information” item and icon.
+	 */
+	const STOCK_DIALOG_INFO: string;
+
+	/**
+	 * The “Question” item and icon.
+	 * @returns The “Question” item and icon.
+	 */
+	const STOCK_DIALOG_QUESTION: string;
+
+	/**
+	 * The “Warning” item and icon.
+	 * @returns The “Warning” item and icon.
+	 */
+	const STOCK_DIALOG_WARNING: string;
+
+	/**
+	 * The “Directory” icon.
+	 * @returns The “Directory” icon.
+	 */
+	const STOCK_DIRECTORY: string;
+
+	/**
+	 * The “Discard” item.
+	 * @returns The “Discard” item.
+	 */
+	const STOCK_DISCARD: string;
+
+	/**
+	 * The “Disconnect” icon.
+	 * @returns The “Disconnect” icon.
+	 */
+	const STOCK_DISCONNECT: string;
+
+	/**
+	 * The “Drag-And-Drop” icon.
+	 * @returns The “Drag-And-Drop” icon.
+	 */
+	const STOCK_DND: string;
+
+	/**
+	 * The “Drag-And-Drop multiple” icon.
+	 * @returns The “Drag-And-Drop multiple” icon.
+	 */
+	const STOCK_DND_MULTIPLE: string;
+
+	/**
+	 * The “Edit” item and icon.
+	 * @returns The “Edit” item and icon.
+	 */
+	const STOCK_EDIT: string;
+
+	/**
+	 * The “Execute” item and icon.
+	 * @returns The “Execute” item and icon.
+	 */
+	const STOCK_EXECUTE: string;
+
+	/**
+	 * The “File” item and icon.
+	 * 
+	 * Since 3.0, this item has a label, before it only had an icon.
+	 * @returns The “File” item and icon.
+	 * 
+	 * Since 3.0, this item has a label, before it only had an icon.
+	 */
+	const STOCK_FILE: string;
+
+	/**
+	 * The “Find” item and icon.
+	 * @returns The “Find” item and icon.
+	 */
+	const STOCK_FIND: string;
+
+	/**
+	 * The “Find and Replace” item and icon.
+	 * @returns The “Find and Replace” item and icon.
+	 */
+	const STOCK_FIND_AND_REPLACE: string;
+
+	/**
+	 * The “Floppy” item and icon.
+	 * @returns The “Floppy” item and icon.
+	 */
+	const STOCK_FLOPPY: string;
+
+	/**
+	 * The “Fullscreen” item and icon.
+	 * @returns The “Fullscreen” item and icon.
+	 */
+	const STOCK_FULLSCREEN: string;
+
+	/**
+	 * The “Bottom” item and icon.
+	 * @returns The “Bottom” item and icon.
+	 */
+	const STOCK_GOTO_BOTTOM: string;
+
+	/**
+	 * The “First” item and icon. The icon has an RTL variant.
+	 * @returns The “First” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_GOTO_FIRST: string;
+
+	/**
+	 * The “Last” item and icon. The icon has an RTL variant.
+	 * @returns The “Last” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_GOTO_LAST: string;
+
+	/**
+	 * The “Top” item and icon.
+	 * @returns The “Top” item and icon.
+	 */
+	const STOCK_GOTO_TOP: string;
+
+	/**
+	 * The “Back” item and icon. The icon has an RTL variant.
+	 * @returns The “Back” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_GO_BACK: string;
+
+	/**
+	 * The “Down” item and icon.
+	 * @returns The “Down” item and icon.
+	 */
+	const STOCK_GO_DOWN: string;
+
+	/**
+	 * The “Forward” item and icon. The icon has an RTL variant.
+	 * @returns The “Forward” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_GO_FORWARD: string;
+
+	/**
+	 * The “Up” item and icon.
+	 * @returns The “Up” item and icon.
+	 */
+	const STOCK_GO_UP: string;
+
+	/**
+	 * The “Harddisk” item and icon.
+	 * @returns The “Harddisk” item and icon.
+	 */
+	const STOCK_HARDDISK: string;
+
+	/**
+	 * The “Help” item and icon.
+	 * @returns The “Help” item and icon.
+	 */
+	const STOCK_HELP: string;
+
+	/**
+	 * The “Home” item and icon.
+	 * @returns The “Home” item and icon.
+	 */
+	const STOCK_HOME: string;
+
+	/**
+	 * The “Indent” item and icon. The icon has an RTL variant.
+	 * @returns The “Indent” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_INDENT: string;
+
+	/**
+	 * The “Index” item and icon.
+	 * @returns The “Index” item and icon.
+	 */
+	const STOCK_INDEX: string;
+
+	/**
+	 * The “Info” item and icon.
+	 * @returns The “Info” item and icon.
+	 */
+	const STOCK_INFO: string;
+
+	/**
+	 * The “Italic” item and icon.
+	 * @returns The “Italic” item and icon.
+	 */
+	const STOCK_ITALIC: string;
+
+	/**
+	 * The “Jump to” item and icon. The icon has an RTL variant.
+	 * @returns The “Jump to” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_JUMP_TO: string;
+
+	/**
+	 * The “Center” item and icon.
+	 * @returns The “Center” item and icon.
+	 */
+	const STOCK_JUSTIFY_CENTER: string;
+
+	/**
+	 * The “Fill” item and icon.
+	 * @returns The “Fill” item and icon.
+	 */
+	const STOCK_JUSTIFY_FILL: string;
+
+	/**
+	 * The “Left” item and icon.
+	 * @returns The “Left” item and icon.
+	 */
+	const STOCK_JUSTIFY_LEFT: string;
+
+	/**
+	 * The “Right” item and icon.
+	 * @returns The “Right” item and icon.
+	 */
+	const STOCK_JUSTIFY_RIGHT: string;
+
+	/**
+	 * The “Leave Fullscreen” item and icon.
+	 * @returns The “Leave Fullscreen” item and icon.
+	 */
+	const STOCK_LEAVE_FULLSCREEN: string;
+
+	/**
+	 * The “Media Forward” item and icon. The icon has an RTL variant.
+	 * @returns The “Media Forward” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_MEDIA_FORWARD: string;
+
+	/**
+	 * The “Media Next” item and icon. The icon has an RTL variant.
+	 * @returns The “Media Next” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_MEDIA_NEXT: string;
+
+	/**
+	 * The “Media Pause” item and icon.
+	 * @returns The “Media Pause” item and icon.
+	 */
+	const STOCK_MEDIA_PAUSE: string;
+
+	/**
+	 * The “Media Play” item and icon. The icon has an RTL variant.
+	 * @returns The “Media Play” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_MEDIA_PLAY: string;
+
+	/**
+	 * The “Media Previous” item and icon. The icon has an RTL variant.
+	 * @returns The “Media Previous” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_MEDIA_PREVIOUS: string;
+
+	/**
+	 * The “Media Record” item and icon.
+	 * @returns The “Media Record” item and icon.
+	 */
+	const STOCK_MEDIA_RECORD: string;
+
+	/**
+	 * The “Media Rewind” item and icon. The icon has an RTL variant.
+	 * @returns The “Media Rewind” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_MEDIA_REWIND: string;
+
+	/**
+	 * The “Media Stop” item and icon.
+	 * @returns The “Media Stop” item and icon.
+	 */
+	const STOCK_MEDIA_STOP: string;
+
+	/**
+	 * The “Missing image” icon.
+	 * @returns The “Missing image” icon.
+	 */
+	const STOCK_MISSING_IMAGE: string;
+
+	/**
+	 * The “Network” item and icon.
+	 * @returns The “Network” item and icon.
+	 */
+	const STOCK_NETWORK: string;
+
+	/**
+	 * The “New” item and icon.
+	 * @returns The “New” item and icon.
+	 */
+	const STOCK_NEW: string;
+
+	/**
+	 * The “No” item and icon.
+	 * @returns The “No” item and icon.
+	 */
+	const STOCK_NO: string;
+
+	/**
+	 * The “OK” item and icon.
+	 * @returns The “OK” item and icon.
+	 */
+	const STOCK_OK: string;
+
+	/**
+	 * The “Open” item and icon.
+	 * @returns The “Open” item and icon.
+	 */
+	const STOCK_OPEN: string;
+
+	/**
+	 * The “Landscape Orientation” item and icon.
+	 * @returns The “Landscape Orientation” item and icon.
+	 */
+	const STOCK_ORIENTATION_LANDSCAPE: string;
+
+	/**
+	 * The “Portrait Orientation” item and icon.
+	 * @returns The “Portrait Orientation” item and icon.
+	 */
+	const STOCK_ORIENTATION_PORTRAIT: string;
+
+	/**
+	 * The “Reverse Landscape Orientation” item and icon.
+	 * @returns The “Reverse Landscape Orientation” item and icon.
+	 */
+	const STOCK_ORIENTATION_REVERSE_LANDSCAPE: string;
+
+	/**
+	 * The “Reverse Portrait Orientation” item and icon.
+	 * @returns The “Reverse Portrait Orientation” item and icon.
+	 */
+	const STOCK_ORIENTATION_REVERSE_PORTRAIT: string;
+
+	/**
+	 * The “Page Setup” item and icon.
+	 * @returns The “Page Setup” item and icon.
+	 */
+	const STOCK_PAGE_SETUP: string;
+
+	/**
+	 * The “Paste” item and icon.
+	 * @returns The “Paste” item and icon.
+	 */
+	const STOCK_PASTE: string;
+
+	/**
+	 * The “Preferences” item and icon.
+	 * @returns The “Preferences” item and icon.
+	 */
+	const STOCK_PREFERENCES: string;
+
+	/**
+	 * The “Print” item and icon.
+	 * @returns The “Print” item and icon.
+	 */
+	const STOCK_PRINT: string;
+
+	/**
+	 * The “Print Error” icon.
+	 * @returns The “Print Error” icon.
+	 */
+	const STOCK_PRINT_ERROR: string;
+
+	/**
+	 * The “Print Paused” icon.
+	 * @returns The “Print Paused” icon.
+	 */
+	const STOCK_PRINT_PAUSED: string;
+
+	/**
+	 * The “Print Preview” item and icon.
+	 * @returns The “Print Preview” item and icon.
+	 */
+	const STOCK_PRINT_PREVIEW: string;
+
+	/**
+	 * The “Print Report” icon.
+	 * @returns The “Print Report” icon.
+	 */
+	const STOCK_PRINT_REPORT: string;
+
+	/**
+	 * The “Print Warning” icon.
+	 * @returns The “Print Warning” icon.
+	 */
+	const STOCK_PRINT_WARNING: string;
+
+	/**
+	 * The “Properties” item and icon.
+	 * @returns The “Properties” item and icon.
+	 */
+	const STOCK_PROPERTIES: string;
+
+	/**
+	 * The “Quit” item and icon.
+	 * @returns The “Quit” item and icon.
+	 */
+	const STOCK_QUIT: string;
+
+	/**
+	 * The “Redo” item and icon. The icon has an RTL variant.
+	 * @returns The “Redo” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_REDO: string;
+
+	/**
+	 * The “Refresh” item and icon.
+	 * @returns The “Refresh” item and icon.
+	 */
+	const STOCK_REFRESH: string;
+
+	/**
+	 * The “Remove” item and icon.
+	 * @returns The “Remove” item and icon.
+	 */
+	const STOCK_REMOVE: string;
+
+	/**
+	 * The “Revert” item and icon. The icon has an RTL variant.
+	 * @returns The “Revert” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_REVERT_TO_SAVED: string;
+
+	/**
+	 * The “Save” item and icon.
+	 * @returns The “Save” item and icon.
+	 */
+	const STOCK_SAVE: string;
+
+	/**
+	 * The “Save As” item and icon.
+	 * @returns The “Save As” item and icon.
+	 */
+	const STOCK_SAVE_AS: string;
+
+	/**
+	 * The “Select All” item and icon.
+	 * @returns The “Select All” item and icon.
+	 */
+	const STOCK_SELECT_ALL: string;
+
+	/**
+	 * The “Color” item and icon.
+	 * @returns The “Color” item and icon.
+	 */
+	const STOCK_SELECT_COLOR: string;
+
+	/**
+	 * The “Font” item and icon.
+	 * @returns The “Font” item and icon.
+	 */
+	const STOCK_SELECT_FONT: string;
+
+	/**
+	 * The “Ascending” item and icon.
+	 * @returns The “Ascending” item and icon.
+	 */
+	const STOCK_SORT_ASCENDING: string;
+
+	/**
+	 * The “Descending” item and icon.
+	 * @returns The “Descending” item and icon.
+	 */
+	const STOCK_SORT_DESCENDING: string;
+
+	/**
+	 * The “Spell Check” item and icon.
+	 * @returns The “Spell Check” item and icon.
+	 */
+	const STOCK_SPELL_CHECK: string;
+
+	/**
+	 * The “Stop” item and icon.
+	 * @returns The “Stop” item and icon.
+	 */
+	const STOCK_STOP: string;
+
+	/**
+	 * The “Strikethrough” item and icon.
+	 * @returns The “Strikethrough” item and icon.
+	 */
+	const STOCK_STRIKETHROUGH: string;
+
+	/**
+	 * The “Undelete” item and icon. The icon has an RTL variant.
+	 * @returns The “Undelete” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_UNDELETE: string;
+
+	/**
+	 * The “Underline” item and icon.
+	 * @returns The “Underline” item and icon.
+	 */
+	const STOCK_UNDERLINE: string;
+
+	/**
+	 * The “Undo” item and icon. The icon has an RTL variant.
+	 * @returns The “Undo” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_UNDO: string;
+
+	/**
+	 * The “Unindent” item and icon. The icon has an RTL variant.
+	 * @returns The “Unindent” item and icon. The icon has an RTL variant.
+	 */
+	const STOCK_UNINDENT: string;
+
+	/**
+	 * The “Yes” item and icon.
+	 * @returns The “Yes” item and icon.
+	 */
+	const STOCK_YES: string;
+
+	/**
+	 * The “Zoom 100%” item and icon.
+	 * @returns The “Zoom 100%” item and icon.
+	 */
+	const STOCK_ZOOM_100: string;
+
+	/**
+	 * The “Zoom to Fit” item and icon.
+	 * @returns The “Zoom to Fit” item and icon.
+	 */
+	const STOCK_ZOOM_FIT: string;
+
+	/**
+	 * The “Zoom In” item and icon.
+	 * @returns The “Zoom In” item and icon.
+	 */
+	const STOCK_ZOOM_IN: string;
+
+	/**
+	 * The “Zoom Out” item and icon.
+	 * @returns The “Zoom Out” item and icon.
+	 */
+	const STOCK_ZOOM_OUT: string;
+
+	/**
+	 * A CSS class to match an accelerator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match an accelerator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_ACCELERATOR: string;
+
+	/**
+	 * A CSS class used when rendering an arrow element.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering an arrow element.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_ARROW: string;
+
+	/**
+	 * A CSS class to match the window background.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match the window background.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_BACKGROUND: string;
+
+	/**
+	 * A CSS class to indicate an area at the bottom of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to indicate an area at the bottom of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_BOTTOM: string;
+
+	/**
+	 * A CSS class to match buttons.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match buttons.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_BUTTON: string;
+
+	/**
+	 * A CSS class to match calendars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match calendars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CALENDAR: string;
+
+	/**
+	 * A CSS class to match content rendered in cell views.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match content rendered in cell views.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CELL: string;
+
+	/**
+	 * A CSS class to match check boxes.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match check boxes.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CHECK: string;
+
+	/**
+	 * A CSS class to match combobox entries.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match combobox entries.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_COMBOBOX_ENTRY: string;
+
+	/**
+	 * A CSS class to match context menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match context menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CONTEXT_MENU: string;
+
+	/**
+	 * A CSS class that gets added to windows which have client-side decorations.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that gets added to windows which have client-side decorations.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CSD: string;
+
+	/**
+	 * A CSS class used when rendering a drag handle for
+	 * text selection.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering a drag handle for
+	 * text selection.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_CURSOR_HANDLE: string;
+
+	/**
+	 * A CSS class to match the default widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match the default widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_DEFAULT: string;
+
+	/**
+	 * A CSS class used when an action (usually a button) is
+	 * one that is expected to remove or destroy something visible
+	 * to the user.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when an action (usually a button) is
+	 * one that is expected to remove or destroy something visible
+	 * to the user.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_DESTRUCTIVE_ACTION: string;
+
+	/**
+	 * A CSS class to match dimmed labels.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match dimmed labels.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_DIM_LABEL: string;
+
+	/**
+	 * A CSS class for a drag-and-drop indicator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for a drag-and-drop indicator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_DND: string;
+
+	/**
+	 * A CSS class defining a dock area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a dock area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_DOCK: string;
+
+	/**
+	 * A CSS class to match text entries.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match text entries.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_ENTRY: string;
+
+	/**
+	 * A CSS class for an area displaying an error message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for an area displaying an error message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_ERROR: string;
+
+	/**
+	 * A CSS class defining an expander, such as those in treeviews.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining an expander, such as those in treeviews.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_EXPANDER: string;
+
+	/**
+	 * A CSS class that is added when widgets that usually have
+	 * a frame or border (like buttons or entries) should appear
+	 * without it.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added when widgets that usually have
+	 * a frame or border (like buttons or entries) should appear
+	 * without it.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_FLAT: string;
+
+	/**
+	 * A CSS class defining a frame delimiting content, such as
+	 * {@link Frame} or the scrolled window frame around the
+	 * scrollable area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a frame delimiting content, such as
+	 * {@link Frame} or the scrolled window frame around the
+	 * scrollable area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_FRAME: string;
+
+	/**
+	 * A CSS class defining a resize grip.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a resize grip.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_GRIP: string;
+
+	/**
+	 * A CSS class to match a header element.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match a header element.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_HEADER: string;
+
+	/**
+	 * A CSS class defining a highlighted area, such as headings in
+	 * assistants and calendars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a highlighted area, such as headings in
+	 * assistants and calendars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_HIGHLIGHT: string;
+
+	/**
+	 * A CSS class for horizontally layered widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for horizontally layered widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_HORIZONTAL: string;
+
+	/**
+	 * A CSS class defining an image, such as the icon in an entry.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining an image, such as the icon in an entry.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_IMAGE: string;
+
+	/**
+	 * A CSS class for an area displaying an informational message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for an area displaying an informational message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_INFO: string;
+
+	/**
+	 * A CSS class to match inline toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match inline toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_INLINE_TOOLBAR: string;
+
+	/**
+	 * A CSS class used when rendering a drag handle for
+	 * the insertion cursor position.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering a drag handle for
+	 * the insertion cursor position.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_INSERTION_CURSOR: string;
+
+	/**
+	 * A CSS class to match labels.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match labels.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LABEL: string;
+
+	/**
+	 * A CSS class to indicate an area at the left of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to indicate an area at the left of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LEFT: string;
+
+	/**
+	 * A CSS class used when rendering a level indicator, such
+	 * as a battery charge level, or a password strength.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering a level indicator, such
+	 * as a battery charge level, or a password strength.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LEVEL_BAR: string;
+
+	/**
+	 * A CSS class to match a linked area, such as a box containing buttons
+	 * belonging to the same control.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match a linked area, such as a box containing buttons
+	 * belonging to the same control.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LINKED: string;
+
+	/**
+	 * A CSS class to match lists.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match lists.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LIST: string;
+
+	/**
+	 * A CSS class to match list rows.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match list rows.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_LIST_ROW: string;
+
+	/**
+	 * A CSS class defining marks in a widget, such as in scales.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining marks in a widget, such as in scales.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MARK: string;
+
+	/**
+	 * A CSS class to match menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MENU: string;
+
+	/**
+	 * A CSS class to menubars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to menubars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MENUBAR: string;
+
+	/**
+	 * A CSS class to match menu items.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match menu items.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MENUITEM: string;
+
+	/**
+	 * A CSS class that is added to message dialogs.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added to message dialogs.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MESSAGE_DIALOG: string;
+
+	/**
+	 * A CSS class that is added to text view that should use
+	 * a monospace font.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added to text view that should use
+	 * a monospace font.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_MONOSPACE: string;
+
+	/**
+	 * A CSS class used when an element needs the user attention,
+	 * for instance a button in a stack switcher corresponding to
+	 * a hidden page that changed state.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when an element needs the user attention,
+	 * for instance a button in a stack switcher corresponding to
+	 * a hidden page that changed state.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_NEEDS_ATTENTION: string;
+
+	/**
+	 * A CSS class defining a notebook.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a notebook.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_NOTEBOOK: string;
+
+	/**
+	 * A CSS class used when rendering an OSD (On Screen Display) element,
+	 * on top of another container.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering an OSD (On Screen Display) element,
+	 * on top of another container.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_OSD: string;
+
+	/**
+	 * A CSS class that is added on the visual hints that happen
+	 * when scrolling is attempted past the limits of a scrollable
+	 * area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added on the visual hints that happen
+	 * when scrolling is attempted past the limits of a scrollable
+	 * area.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_OVERSHOOT: string;
+
+	/**
+	 * A CSS class for a pane separator, such as those in {@link Paned}.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for a pane separator, such as those in {@link Paned}.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_PANE_SEPARATOR: string;
+
+	/**
+	 * A CSS class that is added to areas that should look like paper.
+	 * 
+	 * This is used in print previews and themes are encouraged to
+	 * style it as black text on white background.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added to areas that should look like paper.
+	 * 
+	 * This is used in print previews and themes are encouraged to
+	 * style it as black text on white background.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_PAPER: string;
+
+	/**
+	 * A CSS class that matches popovers.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that matches popovers.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_POPOVER: string;
+
+	/**
+	 * A CSS class that is added to the toplevel windows used for menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added to the toplevel windows used for menus.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_POPUP: string;
+
+	/**
+	 * A CSS class to match primary toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match primary toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_PRIMARY_TOOLBAR: string;
+
+	/**
+	 * A CSS class to use when rendering activity as a progressbar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to use when rendering activity as a progressbar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_PROGRESSBAR: string;
+
+	/**
+	 * A CSS class to use when rendering a pulse in an indeterminate progress bar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to use when rendering a pulse in an indeterminate progress bar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_PULSE: string;
+
+	/**
+	 * A CSS class for an area displaying a question to the user,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for an area displaying a question to the user,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_QUESTION: string;
+
+	/**
+	 * A CSS class to match radio buttons.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match radio buttons.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_RADIO: string;
+
+	/**
+	 * A CSS class to match a raised control, such as a raised
+	 * button on a toolbar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match a raised control, such as a raised
+	 * button on a toolbar.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_RAISED: string;
+
+	/**
+	 * A CSS class used to indicate a read-only state.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used to indicate a read-only state.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_READ_ONLY: string;
+
+	/**
+	 * A CSS class to indicate an area at the right of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to indicate an area at the right of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_RIGHT: string;
+
+	/**
+	 * A CSS class to match the rubberband selection rectangle.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match the rubberband selection rectangle.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_RUBBERBAND: string;
+
+	/**
+	 * A CSS class to match scale widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match scale widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SCALE: string;
+
+	/**
+	 * A CSS class to match scale widgets with marks attached,
+	 * all the marks are above for horizontal {@link Scale}.
+	 * left for vertical #GtkScale.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match scale widgets with marks attached,
+	 * all the marks are above for horizontal {@link Scale}.
+	 * left for vertical #GtkScale.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SCALE_HAS_MARKS_ABOVE: string;
+
+	/**
+	 * A CSS class to match scale widgets with marks attached,
+	 * all the marks are below for horizontal {@link Scale},
+	 * right for vertical #GtkScale.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match scale widgets with marks attached,
+	 * all the marks are below for horizontal {@link Scale},
+	 * right for vertical #GtkScale.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SCALE_HAS_MARKS_BELOW: string;
+
+	/**
+	 * A CSS class to match scrollbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match scrollbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SCROLLBAR: string;
+
+	/**
+	 * A CSS class to match the junction area between an horizontal
+	 * and vertical scrollbar, when they’re both shown.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match the junction area between an horizontal
+	 * and vertical scrollbar, when they’re both shown.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SCROLLBARS_JUNCTION: string;
+
+	/**
+	 * A CSS class for a separator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for a separator.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SEPARATOR: string;
+
+	/**
+	 * A CSS class defining a sidebar, such as the left side in
+	 * a file chooser.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a sidebar, such as the left side in
+	 * a file chooser.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SIDEBAR: string;
+
+	/**
+	 * A CSS class to match sliders.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match sliders.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SLIDER: string;
+
+	/**
+	 * A CSS class defining an spinbutton.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining an spinbutton.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SPINBUTTON: string;
+
+	/**
+	 * A CSS class to use when rendering activity as a “spinner”.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to use when rendering activity as a “spinner”.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SPINNER: string;
+
+	/**
+	 * A CSS class to match statusbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match statusbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_STATUSBAR: string;
+
+	/**
+	 * A CSS class used for the subtitle label in a titlebar in
+	 * a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used for the subtitle label in a titlebar in
+	 * a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SUBTITLE: string;
+
+	/**
+	 * A CSS class used when an action (usually a button) is the
+	 * primary suggested action in a specific context.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when an action (usually a button) is the
+	 * primary suggested action in a specific context.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_SUGGESTED_ACTION: string;
+
+	/**
+	 * A CSS class used for the title label in a titlebar in
+	 * a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used for the title label in a titlebar in
+	 * a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TITLE: string;
+
+	/**
+	 * A CSS class used when rendering a titlebar in a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class used when rendering a titlebar in a toplevel window.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TITLEBAR: string;
+
+	/**
+	 * A CSS class to match toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match toolbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TOOLBAR: string;
+
+	/**
+	 * A CSS class to match tooltip windows.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match tooltip windows.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TOOLTIP: string;
+
+	/**
+	 * A CSS class to indicate an area at the top of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to indicate an area at the top of a widget.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TOP: string;
+
+	/**
+	 * A CSS class for touch selection popups on entries
+	 * and text views.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for touch selection popups on entries
+	 * and text views.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TOUCH_SELECTION: string;
+
+	/**
+	 * A CSS class to match troughs, as in scrollbars and progressbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to match troughs, as in scrollbars and progressbars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_TROUGH: string;
+
+	/**
+	 * A CSS class that is added on the visual hints that happen
+	 * where content is 'scrolled off' and can be made visible
+	 * by scrolling.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class that is added on the visual hints that happen
+	 * where content is 'scrolled off' and can be made visible
+	 * by scrolling.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_UNDERSHOOT: string;
+
+	/**
+	 * A CSS class for vertically layered widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for vertically layered widgets.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_VERTICAL: string;
+
+	/**
+	 * A CSS class defining a view, such as iconviews or treeviews.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class defining a view, such as iconviews or treeviews.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_VIEW: string;
+
+	/**
+	 * A CSS class for an area displaying a warning message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class for an area displaying a warning message,
+	 * such as those in infobars.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_WARNING: string;
+
+	/**
+	 * A CSS class to indicate that a UI element should be 'wide'.
+	 * Used by {@link Paned}.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 * @returns A CSS class to indicate that a UI element should be 'wide'.
+	 * Used by {@link Paned}.
+	 * 
+	 * Refer to individual widget documentation for used style classes.
+	 */
+	const STYLE_CLASS_WIDE: string;
+
+	/**
+	 * A property holding the background color of rendered elements as a #GdkRGBA.
+	 * @returns A property holding the background color of rendered elements as a #GdkRGBA.
+	 */
+	const STYLE_PROPERTY_BACKGROUND_COLOR: string;
+
+	/**
+	 * A property holding the element’s background as a #cairo_pattern_t.
+	 * @returns A property holding the element’s background as a #cairo_pattern_t.
+	 */
+	const STYLE_PROPERTY_BACKGROUND_IMAGE: string;
+
+	/**
+	 * A property holding the element’s border color as a #GdkRGBA.
+	 * @returns A property holding the element’s border color as a #GdkRGBA.
+	 */
+	const STYLE_PROPERTY_BORDER_COLOR: string;
+
+	/**
+	 * A property holding the rendered element’s border radius in pixels as a #gint.
+	 * @returns A property holding the rendered element’s border radius in pixels as a #gint.
+	 */
+	const STYLE_PROPERTY_BORDER_RADIUS: string;
+
+	/**
+	 * A property holding the element’s border style as a {@link BorderStyle}.
+	 * @returns A property holding the element’s border style as a {@link BorderStyle}.
+	 */
+	const STYLE_PROPERTY_BORDER_STYLE: string;
+
+	/**
+	 * A property holding the rendered element’s border width in pixels as
+	 * a {@link Border}. The border is the intermediary spacing property of the
+	 * padding/border/margin series.
+	 * 
+	 * gtk_render_frame() uses this property to find out the frame line width,
+	 * so #GtkWidgets rendering frames may need to add up this padding when
+	 * requesting size
+	 * @returns A property holding the rendered element’s border width in pixels as
+	 * a {@link Border}. The border is the intermediary spacing property of the
+	 * padding/border/margin series.
+	 * 
+	 * gtk_render_frame() uses this property to find out the frame line width,
+	 * so #GtkWidgets rendering frames may need to add up this padding when
+	 * requesting size
+	 */
+	const STYLE_PROPERTY_BORDER_WIDTH: string;
+
+	/**
+	 * A property holding the foreground color of rendered elements as a #GdkRGBA.
+	 * @returns A property holding the foreground color of rendered elements as a #GdkRGBA.
+	 */
+	const STYLE_PROPERTY_COLOR: string;
+
+	/**
+	 * A property holding the font properties used when rendering text
+	 * as a #PangoFontDescription.
+	 * @returns A property holding the font properties used when rendering text
+	 * as a #PangoFontDescription.
+	 */
+	const STYLE_PROPERTY_FONT: string;
+
+	/**
+	 * A property holding the rendered element’s margin as a {@link Border}. The
+	 * margin is defined as the spacing between the border of the element
+	 * and its surrounding elements. It is external to #GtkWidget's
+	 * size allocations, and the most external spacing property of the
+	 * padding/border/margin series.
+	 * @returns A property holding the rendered element’s margin as a {@link Border}. The
+	 * margin is defined as the spacing between the border of the element
+	 * and its surrounding elements. It is external to #GtkWidget's
+	 * size allocations, and the most external spacing property of the
+	 * padding/border/margin series.
+	 */
+	const STYLE_PROPERTY_MARGIN: string;
+
+	/**
+	 * A property holding the rendered element’s padding as a {@link Border}. The
+	 * padding is defined as the spacing between the inner part of the element border
+	 * and its child. It’s the innermost spacing property of the padding/border/margin
+	 * series.
+	 * @returns A property holding the rendered element’s padding as a {@link Border}. The
+	 * padding is defined as the spacing between the inner part of the element border
+	 * and its child. It’s the innermost spacing property of the padding/border/margin
+	 * series.
+	 */
+	const STYLE_PROPERTY_PADDING: string;
+
+	/**
+	 * A priority that can be used when adding a {@link StyleProvider}
+	 * for application-specific style information.
+	 * @returns A priority that can be used when adding a {@link StyleProvider}
+	 * for application-specific style information.
+	 */
+	const STYLE_PROVIDER_PRIORITY_APPLICATION: number;
+
+	/**
+	 * The priority used for default style information
+	 * that is used in the absence of themes.
+	 * 
+	 * Note that this is not very useful for providing default
+	 * styling for custom style classes - themes are likely to
+	 * override styling provided at this priority with
+	 * catch-all `* {...}` rules.
+	 * @returns The priority used for default style information
+	 * that is used in the absence of themes.
+	 * 
+	 * Note that this is not very useful for providing default
+	 * styling for custom style classes - themes are likely to
+	 * override styling provided at this priority with
+	 * catch-all `* {...}` rules.
+	 */
+	const STYLE_PROVIDER_PRIORITY_FALLBACK: number;
+
+	/**
+	 * The priority used for style information provided
+	 * via {@link Settings}.
+	 * 
+	 * This priority is higher than #GTK_STYLE_PROVIDER_PRIORITY_THEME
+	 * to let settings override themes.
+	 * @returns The priority used for style information provided
+	 * via {@link Settings}.
+	 * 
+	 * This priority is higher than #GTK_STYLE_PROVIDER_PRIORITY_THEME
+	 * to let settings override themes.
+	 */
+	const STYLE_PROVIDER_PRIORITY_SETTINGS: number;
+
+	/**
+	 * The priority used for style information provided
+	 * by themes.
+	 * @returns The priority used for style information provided
+	 * by themes.
+	 */
+	const STYLE_PROVIDER_PRIORITY_THEME: number;
+
+	/**
+	 * The priority used for the style information from
+	 * `XDG_CONFIG_HOME/gtk-3.0/gtk.css`.
+	 * 
+	 * You should not use priorities higher than this, to
+	 * give the user the last word.
+	 * @returns The priority used for the style information from
+	 * `XDG_CONFIG_HOME/gtk-3.0/gtk.css`.
+	 * 
+	 * You should not use priorities higher than this, to
+	 * give the user the last word.
+	 */
+	const STYLE_PROVIDER_PRIORITY_USER: number;
+
+	/**
+	 * A widget region name to define a treeview column.
+	 * @returns A widget region name to define a treeview column.
+	 */
+	const STYLE_REGION_COLUMN: string;
+
+	/**
+	 * A widget region name to define a treeview column header.
+	 * @returns A widget region name to define a treeview column header.
+	 */
+	const STYLE_REGION_COLUMN_HEADER: string;
+
+	/**
+	 * A widget region name to define a treeview row.
+	 * @returns A widget region name to define a treeview row.
+	 */
+	const STYLE_REGION_ROW: string;
+
+	/**
+	 * A widget region name to define a notebook tab.
+	 * @returns A widget region name to define a notebook tab.
+	 */
+	const STYLE_REGION_TAB: string;
+
+	/**
+	 * The priority at which the text view validates onscreen lines
+	 * in an idle job in the background.
+	 * @returns The priority at which the text view validates onscreen lines
+	 * in an idle job in the background.
+	 */
+	const TEXT_VIEW_PRIORITY_VALIDATE: number;
+
+	/**
+	 * The GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID can be used to make a
+	 * {@link TreeSortable} use the default sort function.
+	 * 
+	 * See also gtk_tree_sortable_set_sort_column_id()
+	 * @returns The GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID can be used to make a
+	 * {@link TreeSortable} use the default sort function.
+	 * 
+	 * See also gtk_tree_sortable_set_sort_column_id()
+	 */
+	const TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID: number;
+
+	/**
+	 * The GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID can be used to make a
+	 * {@link TreeSortable} use no sorting.
+	 * 
+	 * See also gtk_tree_sortable_set_sort_column_id()
+	 * @returns The GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID can be used to make a
+	 * {@link TreeSortable} use no sorting.
+	 * 
+	 * See also gtk_tree_sortable_set_sort_column_id()
+	 */
+	const TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID: number;
 
 }

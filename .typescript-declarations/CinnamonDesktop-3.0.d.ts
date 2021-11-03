@@ -1,4 +1,3 @@
-/** Generated with [GIR2TS](https://github.com/Gr3q/GIR2TS). Do not modify directly. */
 declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BG} instead.
@@ -34,7 +33,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		create_surface(window: Gdk.Window, width: number, height: number, root: boolean): cairo.Surface;
 		create_thumbnail(factory: DesktopThumbnailFactory, screen: Gdk.Screen, dest_width: number, dest_height: number): GdkPixbuf.Pixbuf;
 		draw(dest: GdkPixbuf.Pixbuf, screen: Gdk.Screen, is_root: boolean): void;
-		get_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
+		get_color(type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
 		get_filename(): string;
 		get_image_size(factory: DesktopThumbnailFactory, best_width: number, best_height: number, width: number, height: number): boolean;
 		get_placement(): CDesktopEnums.BackgroundStyle;
@@ -42,7 +41,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		is_dark(dest_width: number, dest_height: number): boolean;
 		load_from_preferences(settings: Gio.Settings): void;
 		save_to_preferences(settings: Gio.Settings): void;
-		set_color(_type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
+		set_color(type: CDesktopEnums.BackgroundShading, primary: Gdk.Color, secondary: Gdk.Color): void;
 		set_filename(filename: string): void;
 		set_placement(placement: CDesktopEnums.BackgroundStyle): void;
 		connect(signal: "changed", callback: (owner: this) => void): number;
@@ -53,7 +52,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BG} instead.
 	 */
-	type BGMixin = IBG & GObject.IObject;
+	type BGMixin = IBG & GObject.Object;
 
 	interface BG extends BGMixin {}
 
@@ -166,7 +165,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BGCrossfade} instead.
 	 */
-	type BGCrossfadeMixin = IBGCrossfade & GObject.IObject;
+	type BGCrossfadeMixin = IBGCrossfade & GObject.Object;
 
 	interface BGCrossfade extends BGCrossfadeMixin {}
 
@@ -251,7 +250,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopThumbnailFactory} instead.
 	 */
-	type DesktopThumbnailFactoryMixin = IDesktopThumbnailFactory & GObject.IObject;
+	type DesktopThumbnailFactoryMixin = IDesktopThumbnailFactory & GObject.Object;
 
 	interface DesktopThumbnailFactory extends DesktopThumbnailFactoryMixin {}
 
@@ -283,7 +282,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PnpIds} instead.
 	 */
-	type PnpIdsMixin = IPnpIds & GObject.IObject;
+	type PnpIdsMixin = IPnpIds & GObject.Object;
 
 	interface PnpIds extends PnpIdsMixin {}
 
@@ -322,7 +321,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRConfig} instead.
 	 */
-	type RRConfigMixin = IRRConfig & GObject.IObject;
+	type RRConfigMixin = IRRConfig & GObject.Object;
 
 	interface RRConfig extends RRConfigMixin {}
 
@@ -359,7 +358,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRLabeler} instead.
 	 */
-	type RRLabelerMixin = IRRLabeler & GObject.IObject;
+	type RRLabelerMixin = IRRLabeler & GObject.Object;
 
 	interface RRLabeler extends RRLabelerMixin {}
 
@@ -399,7 +398,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		is_connected(): boolean;
 		set_active(active: boolean): void;
 		set_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
-		set_geometry(_x: number, _y: number, width: number, height: number): void;
+		set_geometry(x: number, y: number, width: number, height: number): void;
 		set_primary(primary: boolean): void;
 		set_refresh_rate(rate: number): void;
 		set_refresh_rate_f(rate: number): void;
@@ -410,7 +409,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RROutputInfo} instead.
 	 */
-	type RROutputInfoMixin = IRROutputInfo & GObject.IObject;
+	type RROutputInfoMixin = IRROutputInfo & GObject.Object;
 
 	interface RROutputInfo extends RROutputInfoMixin {}
 
@@ -426,11 +425,11 @@ declare namespace imports.gi.CinnamonDesktop {
 		calculate_best_global_scale(index: number): number;
 		calculate_supported_scales(width: number, height: number, n_supported_scales: number): number;
 		create_clone_modes(): RRMode;
-		get_crtc_by_id(_id: number): RRCrtc;
+		get_crtc_by_id(id: number): RRCrtc;
 		get_dpms_mode(mode: RRDpmsMode): boolean;
 		get_global_scale(): number;
 		get_global_scale_setting(): number;
-		get_output_by_id(_id: number): RROutput;
+		get_output_by_id(id: number): RROutput;
 		get_output_by_name(name: string): RROutput;
 		/**
 		 * Get the ranges of the screen
@@ -533,7 +532,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRScreen} instead.
 	 */
-	type RRScreenMixin = IRRScreen & GObject.IObject & Gio.IInitable;
+	type RRScreenMixin = IRRScreen & GObject.Object & Gio.Initable;
 
 	interface RRScreen extends RRScreenMixin {}
 
@@ -612,7 +611,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WallClock} instead.
 	 */
-	type WallClockMixin = IWallClock & GObject.IObject;
+	type WallClockMixin = IWallClock & GObject.Object;
 
 	interface WallClock extends WallClockMixin {}
 
@@ -638,7 +637,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 */
 	interface IXkbInfo {
 		readonly parent_object: GObject.Object;
-		description_for_option(group_id: string, _id: string): string;
+		description_for_option(group_id: string, id: string): string;
 		/**
 		 * Returns a list of all layout identifiers we know about.
 		 * @returns the list
@@ -666,10 +665,10 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * 
 		 * If the given layout doesn't exist the return value is %FALSE and
 		 * all the (out) parameters are set to %NULL.
-		 * @param _id layout's identifier about which to retrieve the info
+		 * @param id layout's identifier about which to retrieve the info
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
 		 */
-		get_layout_info(_id: string): boolean;
+		get_layout_info(id: string): boolean;
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -697,7 +696,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XkbInfo} instead.
 	 */
-	type XkbInfoMixin = IXkbInfo & GObject.IObject;
+	type XkbInfoMixin = IXkbInfo & GObject.Object;
 
 	interface XkbInfo extends XkbInfoMixin {}
 
@@ -777,10 +776,10 @@ declare namespace imports.gi.CinnamonDesktop {
 		public get_current_rotation(): RRRotation;
 		public get_gamma(size: number, red: number, green: number, blue: number): boolean;
 		public get_id(): number;
-		public get_position(_x: number, _y: number): void;
+		public get_position(x: number, y: number): void;
 		public get_rotations(): RRRotation;
 		public get_scale(): number;
-		public set_config_with_time(timestamp: number, _x: number, _y: number, mode: RRMode, rotation: RRRotation, outputs: RROutput, n_outputs: number, scale: number, global_scale: number): boolean;
+		public set_config_with_time(timestamp: number, x: number, y: number, mode: RRMode, rotation: RRRotation, outputs: RROutput, n_outputs: number, scale: number, global_scale: number): boolean;
 		public set_gamma(size: number, red: number, green: number, blue: number): void;
 		public supports_rotation(rotation: RRRotation): boolean;
 	}
@@ -822,7 +821,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		public get_ids_from_edid(vendor: string, product: number, serial: number): boolean;
 		public get_is_primary(): boolean;
 		public get_name(): string;
-		public get_position(_x: number, _y: number): void;
+		public get_position(x: number, y: number): void;
 		public get_possible_crtcs(): RRCrtc;
 		public get_preferred_mode(): RRMode;
 		public get_size_inches(): number;
@@ -918,11 +917,11 @@ declare namespace imports.gi.CinnamonDesktop {
 	/**
 	 * Returns the GSettings key string of the
 	 * given media key type.
-	 * @param _type The CDesktopMediaKeyType
+	 * @param type The CDesktopMediaKeyType
 	 * @returns the string corresponding to the
 	 * provided media key type or %NULL
 	 */
-	function desktop_get_media_key_string(_type: number): string;
+	function desktop_get_media_key_string(type: number): string;
 
 	/**
 	 * Makes a best effort to retrieve the currently logged-in user's passwd
@@ -1017,5 +1016,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	 * @returns a #GQuark used to identify errors coming from the GnomeRR API.
 	 */
 	function rr_error_quark(): GLib.Quark;
+
+	const RR_CONNECTOR_TYPE_PANEL: string;
 
 }
