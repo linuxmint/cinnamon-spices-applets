@@ -121,7 +121,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Binding} instead.
 	 */
-	type BindingMixin = IBinding & IObject;
+	type BindingMixin = IBinding & Object;
 
 	/**
 	 * #GBinding is the representation of a binding between a property on a
@@ -219,7 +219,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InitiallyUnowned} instead.
 	 */
-	type InitiallyUnownedMixin = IInitiallyUnowned & IObject;
+	type InitiallyUnownedMixin = IInitiallyUnowned & Object;
 
 	/**
 	 * A type for objects that have an initially floating reference.
@@ -1336,7 +1336,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecBoolean} instead.
 	 */
-	type ParamSpecBooleanMixin = IParamSpecBoolean & IParamSpec;
+	type ParamSpecBooleanMixin = IParamSpecBoolean & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for boolean properties.
@@ -1357,7 +1357,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecBoxed} instead.
 	 */
-	type ParamSpecBoxedMixin = IParamSpecBoxed & IParamSpec;
+	type ParamSpecBoxedMixin = IParamSpecBoxed & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for boxed properties.
@@ -1394,7 +1394,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecChar} instead.
 	 */
-	type ParamSpecCharMixin = IParamSpecChar & IParamSpec;
+	type ParamSpecCharMixin = IParamSpecChar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for character properties.
@@ -1437,7 +1437,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecDouble} instead.
 	 */
-	type ParamSpecDoubleMixin = IParamSpecDouble & IParamSpec;
+	type ParamSpecDoubleMixin = IParamSpecDouble & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for double properties.
@@ -1469,7 +1469,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecEnum} instead.
 	 */
-	type ParamSpecEnumMixin = IParamSpecEnum & IParamSpec;
+	type ParamSpecEnumMixin = IParamSpecEnum & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for enum
@@ -1502,7 +1502,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFlags} instead.
 	 */
-	type ParamSpecFlagsMixin = IParamSpecFlags & IParamSpec;
+	type ParamSpecFlagsMixin = IParamSpecFlags & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for flags
@@ -1546,7 +1546,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFloat} instead.
 	 */
-	type ParamSpecFloatMixin = IParamSpecFloat & IParamSpec;
+	type ParamSpecFloatMixin = IParamSpecFloat & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for float properties.
@@ -1573,7 +1573,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecGType} instead.
 	 */
-	type ParamSpecGTypeMixin = IParamSpecGType & IParamSpec;
+	type ParamSpecGTypeMixin = IParamSpecGType & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GType properties.
@@ -1610,7 +1610,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecInt} instead.
 	 */
-	type ParamSpecIntMixin = IParamSpecInt & IParamSpec;
+	type ParamSpecIntMixin = IParamSpecInt & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for integer properties.
@@ -1647,7 +1647,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecInt64} instead.
 	 */
-	type ParamSpecInt64Mixin = IParamSpecInt64 & IParamSpec;
+	type ParamSpecInt64Mixin = IParamSpecInt64 & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for 64bit integer properties.
@@ -1684,7 +1684,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecLong} instead.
 	 */
-	type ParamSpecLongMixin = IParamSpecLong & IParamSpec;
+	type ParamSpecLongMixin = IParamSpecLong & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for long integer properties.
@@ -1705,7 +1705,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecObject} instead.
 	 */
-	type ParamSpecObjectMixin = IParamSpecObject & IParamSpec;
+	type ParamSpecObjectMixin = IParamSpecObject & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for object properties.
@@ -1726,7 +1726,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecOverride} instead.
 	 */
-	type ParamSpecOverrideMixin = IParamSpecOverride & IParamSpec;
+	type ParamSpecOverrideMixin = IParamSpecOverride & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that redirects operations to
@@ -1757,7 +1757,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecParam} instead.
 	 */
-	type ParamSpecParamMixin = IParamSpecParam & IParamSpec;
+	type ParamSpecParamMixin = IParamSpecParam & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for %G_TYPE_PARAM
@@ -1779,7 +1779,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecPointer} instead.
 	 */
-	type ParamSpecPointerMixin = IParamSpecPointer & IParamSpec;
+	type ParamSpecPointerMixin = IParamSpecPointer & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for pointer properties.
@@ -1831,7 +1831,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecString} instead.
 	 */
-	type ParamSpecStringMixin = IParamSpecString & IParamSpec;
+	type ParamSpecStringMixin = IParamSpecString & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for string
@@ -1869,7 +1869,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUChar} instead.
 	 */
-	type ParamSpecUCharMixin = IParamSpecUChar & IParamSpec;
+	type ParamSpecUCharMixin = IParamSpecUChar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned character properties.
@@ -1906,7 +1906,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUInt} instead.
 	 */
-	type ParamSpecUIntMixin = IParamSpecUInt & IParamSpec;
+	type ParamSpecUIntMixin = IParamSpecUInt & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned integer properties.
@@ -1943,7 +1943,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUInt64} instead.
 	 */
-	type ParamSpecUInt64Mixin = IParamSpecUInt64 & IParamSpec;
+	type ParamSpecUInt64Mixin = IParamSpecUInt64 & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned 64bit integer properties.
@@ -1980,7 +1980,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecULong} instead.
 	 */
-	type ParamSpecULongMixin = IParamSpecULong & IParamSpec;
+	type ParamSpecULongMixin = IParamSpecULong & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unsigned long integer properties.
@@ -2007,7 +2007,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUnichar} instead.
 	 */
-	type ParamSpecUnicharMixin = IParamSpecUnichar & IParamSpec;
+	type ParamSpecUnicharMixin = IParamSpecUnichar & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for unichar (unsigned integer) properties.
@@ -2039,7 +2039,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecValueArray} instead.
 	 */
-	type ParamSpecValueArrayMixin = IParamSpecValueArray & IParamSpec;
+	type ParamSpecValueArrayMixin = IParamSpecValueArray & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GValueArray properties.
@@ -2071,7 +2071,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecVariant} instead.
 	 */
-	type ParamSpecVariantMixin = IParamSpecVariant & IParamSpec;
+	type ParamSpecVariantMixin = IParamSpecVariant & ParamSpec;
 
 	/**
 	 * A #GParamSpec derived structure that contains the meta data for #GVariant properties.
@@ -2206,7 +2206,7 @@ declare namespace imports.gi.GObject {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TypeModule} instead.
 	 */
-	type TypeModuleMixin = ITypeModule & IObject & ITypePlugin;
+	type TypeModuleMixin = ITypeModule & Object & TypePlugin;
 
 	/**
 	 * #GTypeModule provides a simple implementation of the #GTypePlugin
@@ -2694,7 +2694,7 @@ declare namespace imports.gi.GObject {
 		public readonly construct_properties: GLib.SList;
 		public readonly flags: number;
 		public readonly pdummy: any[];
-		public constructor_: {(_type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
+		public constructor_: {(type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
 		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public dispose: {(object: Object): void;};
@@ -2763,7 +2763,7 @@ declare namespace imports.gi.GObject {
 		public readonly construct_properties: GLib.SList;
 		public readonly flags: number;
 		public readonly pdummy: any[];
-		public constructor_: {(_type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
+		public constructor_: {(type: GObject.Type, n_construct_properties: number, construct_properties: ObjectConstructParam): Object;};
 		public set_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public get_property: {(object: Object, property_id: number, value: Value, pspec: ParamSpec): void;};
 		public dispose: {(object: Object): void;};
@@ -3615,9 +3615,9 @@ declare namespace imports.gi.GObject {
 		 * #instance.  If you wish to set the #value's type to a different GType
 		 * (such as a parent class GType), you need to manually call
 		 * g_value_init() and g_value_set_instance().
-		 * @param _instance the instance
+		 * @param instance the instance
 		 */
-		public init_from_instance(_instance: TypeInstance): void;
+		public init_from_instance(instance: TypeInstance): void;
 		/**
 		 * Returns the value contents as pointer. This function asserts that
 		 * g_value_fits_pointer() returned %TRUE for the passed in value.
@@ -3679,9 +3679,9 @@ declare namespace imports.gi.GObject {
 		/**
 		 * Sets #value from an instantiatable type via the
 		 * value_table's collect_value() function.
-		 * @param _instance the instance
+		 * @param instance the instance
 		 */
-		public set_instance(_instance: any | null): void;
+		public set_instance(instance: any | null): void;
 		/**
 		 * Set the contents of a %G_TYPE_INT #GValue to #v_int.
 		 * @param v_int integer value to be set
@@ -4851,11 +4851,11 @@ declare namespace imports.gi.GObject {
 		 * 
 		 * The extended members of #instance are guaranteed to have been filled with
 		 * zeros before this function is called.
-		 * @param _instance The instance to initialize
+		 * @param instance The instance to initialize
 		 * @param g_class The class of the type the instance is
 		 *    created for
 		 */
-		(_instance: TypeInstance, g_class: TypeClass): void;
+		(instance: TypeInstance, g_class: TypeClass): void;
 	}
 
 	/**
@@ -5145,7 +5145,7 @@ declare namespace imports.gi.GObject {
 		 * @param return_value a #GValue to store the return
 		 *  value. May be %NULL if the callback of #closure doesn't return a
 		 *  value.
-		 * @param _instance the instance on which the closure is
+		 * @param instance the instance on which the closure is
 		 *  invoked.
 		 * @param args va_list of arguments to be passed to the closure.
 		 * @param marshal_data additional data specified when
@@ -5155,7 +5155,7 @@ declare namespace imports.gi.GObject {
 		 * @param param_types the #GType of each argument from
 		 *  #args.
 		 */
-		(closure: Closure, return_value: Value | null, _instance: TypeInstance, args: any[], marshal_data: any | null, n_params: number, param_types: GObject.Type[]): void;
+		(closure: Closure, return_value: Value | null, instance: TypeInstance, args: any[], marshal_data: any | null, n_params: number, param_types: GObject.Type[]): void;
 	}
 
 	/**
@@ -5696,10 +5696,10 @@ declare namespace imports.gi.GObject {
 	 * There is also a macro version of this function so that the code
 	 * will be inlined.
 	 * @param handler_id_ptr A pointer to a handler ID (of type #gulong) of the handler to be disconnected.
-	 * @param _instance The instance to remove the signal handler from.
+	 * @param instance The instance to remove the signal handler from.
 	 *   This pointer may be %NULL or invalid, if the handler ID is zero.
 	 */
-	function clear_signal_handler(handler_id_ptr: number, _instance: Object): void;
+	function clear_signal_handler(handler_id_ptr: number, instance: Object): void;
 
 	/**
 	 * This function is meant to be called from the `complete_type_info`
@@ -6182,13 +6182,13 @@ declare namespace imports.gi.GObject {
 	 * @param name canonical name of the property specified
 	 * @param nick nick name for the property specified
 	 * @param blurb description of the property specified
-	 * @param _type a #GVariantType
+	 * @param type a #GVariantType
 	 * @param default_value a #GVariant of type #type to
 	 *                 use as the default value, or %NULL
 	 * @param flags flags for the property specified
 	 * @returns the newly created #GParamSpec
 	 */
-	function param_spec_variant(name: string, nick: string, blurb: string, _type: GLib.VariantType, default_value: GLib.Variant | null, flags: ParamFlags): ParamSpec;
+	function param_spec_variant(name: string, nick: string, blurb: string, type: GLib.VariantType, default_value: GLib.Variant | null, flags: ParamFlags): ParamSpec;
 
 	/**
 	 * Registers #name as the name of a new static type derived
@@ -6334,25 +6334,25 @@ declare namespace imports.gi.GObject {
 	 * only be called from an overridden class closure; see
 	 * g_signal_override_class_closure() and
 	 * g_signal_override_class_handler().
-	 * @param _instance the instance the signal is being
+	 * @param instance the instance the signal is being
 	 *    emitted on.
 	 */
-	function signal_chain_from_overridden_handler(_instance: TypeInstance): void;
+	function signal_chain_from_overridden_handler(instance: TypeInstance): void;
 
 	/**
 	 * Connects a closure to a signal for a particular object.
-	 * @param _instance the instance to connect to.
+	 * @param instance the instance to connect to.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 * @param closure the closure to connect.
 	 * @param after whether the handler should be called before or after the
 	 *  default handler of the signal.
 	 * @returns the handler ID (always greater than 0 for successful connections)
 	 */
-	function signal_connect_closure(_instance: Object, detailed_signal: string, closure: Closure, after: boolean): number;
+	function signal_connect_closure(instance: Object, detailed_signal: string, closure: Closure, after: boolean): number;
 
 	/**
 	 * Connects a closure to a signal for a particular object.
-	 * @param _instance the instance to connect to.
+	 * @param instance the instance to connect to.
 	 * @param signal_id the id of the signal.
 	 * @param detail the detail.
 	 * @param closure the closure to connect.
@@ -6360,7 +6360,7 @@ declare namespace imports.gi.GObject {
 	 *  default handler of the signal.
 	 * @returns the handler ID (always greater than 0 for successful connections)
 	 */
-	function signal_connect_closure_by_id(_instance: Object, signal_id: number, detail: GLib.Quark, closure: Closure, after: boolean): number;
+	function signal_connect_closure_by_id(instance: Object, signal_id: number, detail: GLib.Quark, closure: Closure, after: boolean): number;
 
 	/**
 	 * Connects a #GCallback function to a signal for a particular object. Similar
@@ -6368,7 +6368,7 @@ declare namespace imports.gi.GObject {
 	 * which will be called when the signal handler is disconnected and no longer
 	 * used. Specify #connect_flags if you need `..._after()` or
 	 * `..._swapped()` variants of this function.
-	 * @param _instance the instance to connect to.
+	 * @param instance the instance to connect to.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 * @param c_handler the #GCallback to connect.
 	 * @param data data to pass to #c_handler calls.
@@ -6376,7 +6376,7 @@ declare namespace imports.gi.GObject {
 	 * @param connect_flags a combination of #GConnectFlags.
 	 * @returns the handler ID (always greater than 0 for successful connections)
 	 */
-	function signal_connect_data(_instance: Object, detailed_signal: string, c_handler: Callback, data: any | null, destroy_data: ClosureNotify | null, connect_flags: ConnectFlags): number;
+	function signal_connect_data(instance: Object, detailed_signal: string, c_handler: Callback, data: any | null, destroy_data: ClosureNotify | null, connect_flags: ConnectFlags): number;
 
 	/**
 	 * This is similar to g_signal_connect_data(), but uses a closure which
@@ -6387,7 +6387,7 @@ declare namespace imports.gi.GObject {
 	 * disconnected.  Note that this is not currently threadsafe (ie:
 	 * emitting a signal while #gobject is being destroyed in another thread
 	 * is not safe).
-	 * @param _instance the instance to connect to.
+	 * @param instance the instance to connect to.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 * @param c_handler the #GCallback to connect.
 	 * @param gobject the object to pass as data
@@ -6395,35 +6395,35 @@ declare namespace imports.gi.GObject {
 	 * @param connect_flags a combination of #GConnectFlags.
 	 * @returns the handler id.
 	 */
-	function signal_connect_object(_instance: TypeInstance, detailed_signal: string, c_handler: Callback, gobject: Object | null, connect_flags: ConnectFlags): number;
+	function signal_connect_object(instance: TypeInstance, detailed_signal: string, c_handler: Callback, gobject: Object | null, connect_flags: ConnectFlags): number;
 
 	/**
 	 * Emits a signal.
 	 * 
 	 * Note that g_signal_emit() resets the return value to the default
 	 * if no handlers are connected, in contrast to g_signal_emitv().
-	 * @param _instance the instance the signal is being emitted on.
+	 * @param instance the instance the signal is being emitted on.
 	 * @param signal_id the signal id
 	 * @param detail the detail
 	 */
-	function signal_emit(_instance: Object, signal_id: number, detail: GLib.Quark): void;
+	function signal_emit(instance: Object, signal_id: number, detail: GLib.Quark): void;
 
 	/**
 	 * Emits a signal.
 	 * 
 	 * Note that g_signal_emit_by_name() resets the return value to the default
 	 * if no handlers are connected, in contrast to g_signal_emitv().
-	 * @param _instance the instance the signal is being emitted on.
+	 * @param instance the instance the signal is being emitted on.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 */
-	function signal_emit_by_name(_instance: Object, detailed_signal: string): void;
+	function signal_emit_by_name(instance: Object, detailed_signal: string): void;
 
 	/**
 	 * Emits a signal.
 	 * 
 	 * Note that g_signal_emit_valist() resets the return value to the default
 	 * if no handlers are connected, in contrast to g_signal_emitv().
-	 * @param _instance the instance the signal is being
+	 * @param instance the instance the signal is being
 	 *    emitted on.
 	 * @param signal_id the signal id
 	 * @param detail the detail
@@ -6431,7 +6431,7 @@ declare namespace imports.gi.GObject {
 	 *  location for the return value. If the return type of the signal
 	 *  is #G_TYPE_NONE, the return value location can be omitted.
 	 */
-	function signal_emit_valist(_instance: TypeInstance, signal_id: number, detail: GLib.Quark, var_args: any[]): void;
+	function signal_emit_valist(instance: TypeInstance, signal_id: number, detail: GLib.Quark, var_args: any[]): void;
 
 	/**
 	 * Emits a signal.
@@ -6448,11 +6448,11 @@ declare namespace imports.gi.GObject {
 
 	/**
 	 * Returns the invocation hint of the innermost signal emission of instance.
-	 * @param _instance the instance to query
+	 * @param instance the instance to query
 	 * @returns the invocation hint of the innermost
 	 *     signal emission, or %NULL if not found.
 	 */
-	function signal_get_invocation_hint(_instance: Object): SignalInvocationHint | null;
+	function signal_get_invocation_hint(instance: Object): SignalInvocationHint | null;
 
 	/**
 	 * Blocks a handler of an instance so it will not be called during any
@@ -6463,10 +6463,10 @@ declare namespace imports.gi.GObject {
 	 * 
 	 * The #handler_id has to be a valid signal handler id, connected to a
 	 * signal of #instance.
-	 * @param _instance The instance to block the signal handler of.
+	 * @param instance The instance to block the signal handler of.
 	 * @param handler_id Handler id of the handler to be blocked.
 	 */
-	function signal_handler_block(_instance: Object, handler_id: number): void;
+	function signal_handler_block(instance: Object, handler_id: number): void;
 
 	/**
 	 * Disconnects a handler from an instance so it will not be called during
@@ -6475,10 +6475,10 @@ declare namespace imports.gi.GObject {
 	 * 
 	 * The #handler_id has to be a valid signal handler id, connected to a
 	 * signal of #instance.
-	 * @param _instance The instance to remove the signal handler from.
+	 * @param instance The instance to remove the signal handler from.
 	 * @param handler_id Handler id of the handler to be disconnected.
 	 */
-	function signal_handler_disconnect(_instance: Object, handler_id: number): void;
+	function signal_handler_disconnect(instance: Object, handler_id: number): void;
 
 	/**
 	 * Finds the first signal handler that matches certain selection criteria.
@@ -6486,25 +6486,25 @@ declare namespace imports.gi.GObject {
 	 * flags, and the criteria values are passed as arguments.
 	 * The match #mask has to be non-0 for successful matches.
 	 * If no handler was found, 0 is returned.
-	 * @param _instance The instance owning the signal handler to be found.
+	 * @param instance The instance owning the signal handler to be found.
 	 * @param mask Mask indicating which of #signal_id, #detail, #closure, #func
 	 *  and/or #data the handler has to match.
 	 * @param signal_id Signal the handler has to be connected to.
 	 * @param detail Signal detail the handler has to be connected to.
 	 * @param closure The closure the handler will invoke.
-	 * @param _func The C closure callback of the handler (useless for non-C closures).
+	 * @param func The C closure callback of the handler (useless for non-C closures).
 	 * @param data The closure data of the handler's closure.
 	 * @returns A valid non-0 signal handler id for a successful match.
 	 */
-	function signal_handler_find(_instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, _func: any | null, data: any | null): number;
+	function signal_handler_find(instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, func: any | null, data: any | null): number;
 
 	/**
 	 * Returns whether #handler_id is the ID of a handler connected to #instance.
-	 * @param _instance The instance where a signal handler is sought.
+	 * @param instance The instance where a signal handler is sought.
 	 * @param handler_id the handler ID.
 	 * @returns whether #handler_id identifies a handler connected to #instance.
 	 */
-	function signal_handler_is_connected(_instance: Object, handler_id: number): boolean;
+	function signal_handler_is_connected(instance: Object, handler_id: number): boolean;
 
 	/**
 	 * Undoes the effect of a previous g_signal_handler_block() call.  A
@@ -6520,10 +6520,10 @@ declare namespace imports.gi.GObject {
 	 * 
 	 * The #handler_id has to be a valid id of a signal handler that is
 	 * connected to a signal of #instance and is currently blocked.
-	 * @param _instance The instance to unblock the signal handler of.
+	 * @param instance The instance to unblock the signal handler of.
 	 * @param handler_id Handler id of the handler to be unblocked.
 	 */
-	function signal_handler_unblock(_instance: Object, handler_id: number): void;
+	function signal_handler_unblock(instance: Object, handler_id: number): void;
 
 	/**
 	 * Blocks all handlers on an instance that match a certain selection criteria.
@@ -6533,25 +6533,25 @@ declare namespace imports.gi.GObject {
 	 * or %G_SIGNAL_MATCH_DATA match flags is required for successful matches.
 	 * If no handlers were found, 0 is returned, the number of blocked handlers
 	 * otherwise.
-	 * @param _instance The instance to block handlers from.
+	 * @param instance The instance to block handlers from.
 	 * @param mask Mask indicating which of #signal_id, #detail, #closure, #func
 	 *  and/or #data the handlers have to match.
 	 * @param signal_id Signal the handlers have to be connected to.
 	 * @param detail Signal detail the handlers have to be connected to.
 	 * @param closure The closure the handlers will invoke.
-	 * @param _func The C closure callback of the handlers (useless for non-C closures).
+	 * @param func The C closure callback of the handlers (useless for non-C closures).
 	 * @param data The closure data of the handlers' closures.
 	 * @returns The number of handlers that matched.
 	 */
-	function signal_handlers_block_matched(_instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, _func: any | null, data: any | null): number;
+	function signal_handlers_block_matched(instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, func: any | null, data: any | null): number;
 
 	/**
 	 * Destroy all signal handlers of a type instance. This function is
 	 * an implementation detail of the #GObject dispose implementation,
 	 * and should not be used outside of the type system.
-	 * @param _instance The instance whose signal handlers are destroyed
+	 * @param instance The instance whose signal handlers are destroyed
 	 */
-	function signal_handlers_destroy(_instance: Object): void;
+	function signal_handlers_destroy(instance: Object): void;
 
 	/**
 	 * Disconnects all handlers on an instance that match a certain
@@ -6562,17 +6562,17 @@ declare namespace imports.gi.GObject {
 	 * %G_SIGNAL_MATCH_DATA match flags is required for successful
 	 * matches.  If no handlers were found, 0 is returned, the number of
 	 * disconnected handlers otherwise.
-	 * @param _instance The instance to remove handlers from.
+	 * @param instance The instance to remove handlers from.
 	 * @param mask Mask indicating which of #signal_id, #detail, #closure, #func
 	 *  and/or #data the handlers have to match.
 	 * @param signal_id Signal the handlers have to be connected to.
 	 * @param detail Signal detail the handlers have to be connected to.
 	 * @param closure The closure the handlers will invoke.
-	 * @param _func The C closure callback of the handlers (useless for non-C closures).
+	 * @param func The C closure callback of the handlers (useless for non-C closures).
 	 * @param data The closure data of the handlers' closures.
 	 * @returns The number of handlers that matched.
 	 */
-	function signal_handlers_disconnect_matched(_instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, _func: any | null, data: any | null): number;
+	function signal_handlers_disconnect_matched(instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, func: any | null, data: any | null): number;
 
 	/**
 	 * Unblocks all handlers on an instance that match a certain selection
@@ -6583,17 +6583,17 @@ declare namespace imports.gi.GObject {
 	 * If no handlers were found, 0 is returned, the number of unblocked handlers
 	 * otherwise. The match criteria should not apply to any handlers that are
 	 * not currently blocked.
-	 * @param _instance The instance to unblock handlers from.
+	 * @param instance The instance to unblock handlers from.
 	 * @param mask Mask indicating which of #signal_id, #detail, #closure, #func
 	 *  and/or #data the handlers have to match.
 	 * @param signal_id Signal the handlers have to be connected to.
 	 * @param detail Signal detail the handlers have to be connected to.
 	 * @param closure The closure the handlers will invoke.
-	 * @param _func The C closure callback of the handlers (useless for non-C closures).
+	 * @param func The C closure callback of the handlers (useless for non-C closures).
 	 * @param data The closure data of the handlers' closures.
 	 * @returns The number of handlers that matched.
 	 */
-	function signal_handlers_unblock_matched(_instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, _func: any | null, data: any | null): number;
+	function signal_handlers_unblock_matched(instance: Object, mask: SignalMatchType, signal_id: number, detail: GLib.Quark, closure: Closure | null, func: any | null, data: any | null): number;
 
 	/**
 	 * Returns whether there are any handlers connected to #instance for the
@@ -6612,14 +6612,14 @@ declare namespace imports.gi.GObject {
 	 * signal are difficult to compute. A class implementor may opt to not
 	 * emit the signal if no one is attached anyway, thus saving the cost
 	 * of building the arguments.
-	 * @param _instance the object whose signal handlers are sought.
+	 * @param instance the object whose signal handlers are sought.
 	 * @param signal_id the signal id.
 	 * @param detail the detail.
 	 * @param may_be_blocked whether blocked handlers should count as match.
 	 * @returns %TRUE if a handler is connected to the signal, %FALSE
 	 *          otherwise.
 	 */
-	function signal_has_handler_pending(_instance: Object, signal_id: number, detail: GLib.Quark, may_be_blocked: boolean): boolean;
+	function signal_has_handler_pending(instance: Object, signal_id: number, detail: GLib.Quark, may_be_blocked: boolean): boolean;
 
 	/**
 	 * Validate a signal name. This can be useful for dynamically-generated signals
@@ -6887,21 +6887,21 @@ declare namespace imports.gi.GObject {
 	 * flag).
 	 * 
 	 * Prints a warning if used on a signal which isn't being emitted.
-	 * @param _instance the object whose signal handlers you wish to stop.
+	 * @param instance the object whose signal handlers you wish to stop.
 	 * @param signal_id the signal identifier, as returned by g_signal_lookup().
 	 * @param detail the detail which the signal was emitted with.
 	 */
-	function signal_stop_emission(_instance: Object, signal_id: number, detail: GLib.Quark): void;
+	function signal_stop_emission(instance: Object, signal_id: number, detail: GLib.Quark): void;
 
 	/**
 	 * Stops a signal's current emission.
 	 * 
 	 * This is just like g_signal_stop_emission() except it will look up the
 	 * signal id for you.
-	 * @param _instance the object whose signal handlers you wish to stop.
+	 * @param instance the object whose signal handlers you wish to stop.
 	 * @param detailed_signal a string of the form "signal-name::detail".
 	 */
-	function signal_stop_emission_by_name(_instance: Object, detailed_signal: string): void;
+	function signal_stop_emission_by_name(instance: Object, detailed_signal: string): void;
 
 	/**
 	 * Creates a new closure which invokes the function found at the offset
@@ -7025,31 +7025,31 @@ declare namespace imports.gi.GObject {
 	/**
 	 * Private helper function to aid implementation of the
 	 * G_TYPE_CHECK_INSTANCE() macro.
-	 * @param _instance a valid #GTypeInstance structure
+	 * @param instance a valid #GTypeInstance structure
 	 * @returns %TRUE if #instance is valid, %FALSE otherwise
 	 */
-	function type_check_instance(_instance: TypeInstance): boolean;
+	function type_check_instance(instance: TypeInstance): boolean;
 
-	function type_check_instance_cast(_instance: TypeInstance, iface_type: GObject.Type): TypeInstance;
+	function type_check_instance_cast(instance: TypeInstance, iface_type: GObject.Type): TypeInstance;
 
-	function type_check_instance_is_a(_instance: TypeInstance, iface_type: GObject.Type): boolean;
+	function type_check_instance_is_a(instance: TypeInstance, iface_type: GObject.Type): boolean;
 
-	function type_check_instance_is_fundamentally_a(_instance: TypeInstance, fundamental_type: GObject.Type): boolean;
+	function type_check_instance_is_fundamentally_a(instance: TypeInstance, fundamental_type: GObject.Type): boolean;
 
-	function type_check_is_value_type(_type: GObject.Type): boolean;
+	function type_check_is_value_type(type: GObject.Type): boolean;
 
 	function type_check_value(value: Value): boolean;
 
-	function type_check_value_holds(value: Value, _type: GObject.Type): boolean;
+	function type_check_value_holds(value: Value, type: GObject.Type): boolean;
 
 	/**
 	 * Return a newly allocated and 0-terminated array of type IDs, listing
 	 * the child types of #type.
-	 * @param _type the parent type
+	 * @param type the parent type
 	 * @returns Newly allocated
 	 *     and 0-terminated array of child types, free with g_free()
 	 */
-	function type_children(_type: GObject.Type): GObject.Type[];
+	function type_children(type: GObject.Type): GObject.Type[];
 
 	function type_class_adjust_private_offset(g_class: any | null, private_size_or_offset: number): void;
 
@@ -7059,32 +7059,32 @@ declare namespace imports.gi.GObject {
 	 * As a consequence, this function may return %NULL if the class
 	 * of the type passed in does not currently exist (hasn't been
 	 * referenced before).
-	 * @param _type type ID of a classed type
+	 * @param type type ID of a classed type
 	 * @returns the #GTypeClass
 	 *     structure for the given type ID or %NULL if the class does not
 	 *     currently exist
 	 */
-	function type_class_peek(_type: GObject.Type): TypeClass;
+	function type_class_peek(type: GObject.Type): TypeClass;
 
 	/**
 	 * A more efficient version of g_type_class_peek() which works only for
 	 * static types.
-	 * @param _type type ID of a classed type
+	 * @param type type ID of a classed type
 	 * @returns the #GTypeClass
 	 *     structure for the given type ID or %NULL if the class does not
 	 *     currently exist or is dynamically loaded
 	 */
-	function type_class_peek_static(_type: GObject.Type): TypeClass;
+	function type_class_peek_static(type: GObject.Type): TypeClass;
 
 	/**
 	 * Increments the reference count of the class structure belonging to
 	 * #type. This function will demand-create the class if it doesn't
 	 * exist already.
-	 * @param _type type ID of a classed type
+	 * @param type type ID of a classed type
 	 * @returns the #GTypeClass
 	 *     structure for the given type ID
 	 */
-	function type_class_ref(_type: GObject.Type): TypeClass;
+	function type_class_ref(type: GObject.Type): TypeClass;
 
 	/**
 	 * Creates and initializes an instance of #type if #type is valid and
@@ -7103,11 +7103,11 @@ declare namespace imports.gi.GObject {
 	 * Note: Do not use this function, unless you're implementing a
 	 * fundamental type. Also language bindings should not use this
 	 * function, but g_object_new() instead.
-	 * @param _type an instantiatable type to create an instance for
+	 * @param type an instantiatable type to create an instance for
 	 * @returns an allocated and initialized instance, subject to further
 	 *     treatment by the fundamental type implementation
 	 */
-	function type_create_instance(_type: GObject.Type): TypeInstance;
+	function type_create_instance(type: GObject.Type): TypeInstance;
 
 	/**
 	 * If the interface type #g_type is currently in use, returns its
@@ -7151,10 +7151,10 @@ declare namespace imports.gi.GObject {
 	/**
 	 * Returns the length of the ancestry of the passed in type. This
 	 * includes the type itself, so that e.g. a fundamental type has depth 1.
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @returns the depth of #type
 	 */
-	function type_depth(_type: GObject.Type): number;
+	function type_depth(type: GObject.Type): number;
 
 	/**
 	 * Ensures that the indicated #type has been registered with the
@@ -7169,9 +7169,9 @@ declare namespace imports.gi.GObject {
 	 * you write a bare call to a _get_type() macro, it may get optimized
 	 * out by the compiler. Using g_type_ensure() guarantees that the
 	 * type's _get_type() method is called.
-	 * @param _type a #GType
+	 * @param type a #GType
 	 */
-	function type_ensure(_type: GObject.Type): void;
+	function type_ensure(type: GObject.Type): void;
 
 	/**
 	 * Frees an instance of a type, returning it to the instance pool for
@@ -7179,9 +7179,9 @@ declare namespace imports.gi.GObject {
 	 * 
 	 * Like g_type_create_instance(), this function is reserved for
 	 * implementors of fundamental types.
-	 * @param _instance an instance of a type
+	 * @param instance an instance of a type
 	 */
-	function type_free_instance(_instance: TypeInstance): void;
+	function type_free_instance(instance: TypeInstance): void;
 
 	/**
 	 * Look up the type ID from a given type name, returning 0 if no type
@@ -7216,19 +7216,19 @@ declare namespace imports.gi.GObject {
 	 * this is only available if GLib is built with debugging support and
 	 * the instance_count debug flag is set (by setting the GOBJECT_DEBUG
 	 * variable to include instance-count).
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @returns the number of instances allocated of the given type;
 	 *   if instance counts are not available, returns 0.
 	 */
-	function type_get_instance_count(_type: GObject.Type): number;
+	function type_get_instance_count(type: GObject.Type): number;
 
 	/**
 	 * Returns the #GTypePlugin structure for #type.
-	 * @param _type #GType to retrieve the plugin for
+	 * @param type #GType to retrieve the plugin for
 	 * @returns the corresponding plugin
 	 *     if #type is a dynamic type, %NULL otherwise
 	 */
-	function type_get_plugin(_type: GObject.Type): TypePlugin;
+	function type_get_plugin(type: GObject.Type): TypePlugin;
 
 	/**
 	 * Obtains data which has previously been attached to #type
@@ -7237,11 +7237,11 @@ declare namespace imports.gi.GObject {
 	 * Note that this does not take subtyping into account; data
 	 * attached to one type with g_type_set_qdata() cannot
 	 * be retrieved from a subtype using g_type_get_qdata().
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @param quark a #GQuark id to identify the data
 	 * @returns the data, or %NULL if no data was found
 	 */
-	function type_get_qdata(_type: GObject.Type, quark: GLib.Quark): any | null;
+	function type_get_qdata(type: GObject.Type, quark: GLib.Quark): any | null;
 
 	/**
 	 * Returns an opaque serial number that represents the state of the set
@@ -7330,22 +7330,22 @@ declare namespace imports.gi.GObject {
 	/**
 	 * Return a newly allocated and 0-terminated array of type IDs, listing
 	 * the interface types that #type conforms to.
-	 * @param _type the type to list interface types for
+	 * @param type the type to list interface types for
 	 * @returns Newly allocated
 	 *     and 0-terminated array of interface types, free with g_free()
 	 */
-	function type_interfaces(_type: GObject.Type): GObject.Type[];
+	function type_interfaces(type: GObject.Type): GObject.Type[];
 
 	/**
 	 * If #is_a_type is a derivable type, check whether #type is a
 	 * descendant of #is_a_type. If #is_a_type is an interface, check
 	 * whether #type conforms to it.
-	 * @param _type type to check ancestry for
+	 * @param type type to check ancestry for
 	 * @param is_a_type possible ancestor of #type or interface that #type
 	 *     could conform to
 	 * @returns %TRUE if #type is a #is_a_type
 	 */
-	function type_is_a(_type: GObject.Type, is_a_type: GObject.Type): boolean;
+	function type_is_a(type: GObject.Type, is_a_type: GObject.Type): boolean;
 
 	/**
 	 * Get the unique name that is assigned to a type ID.  Note that this
@@ -7353,14 +7353,14 @@ declare namespace imports.gi.GObject {
 	 * IDs. %G_TYPE_INVALID may be passed to this function, as may be any
 	 * other validly registered type ID, but randomized type IDs should
 	 * not be passed in and will most likely lead to a crash.
-	 * @param _type type to return name for
+	 * @param type type to return name for
 	 * @returns static type name or %NULL
 	 */
-	function type_name(_type: GObject.Type): string;
+	function type_name(type: GObject.Type): string;
 
 	function type_name_from_class(g_class: TypeClass): string;
 
-	function type_name_from_instance(_instance: TypeInstance): string;
+	function type_name_from_instance(instance: TypeInstance): string;
 
 	/**
 	 * Given a #leaf_type and a #root_type which is contained in its
@@ -7379,17 +7379,17 @@ declare namespace imports.gi.GObject {
 	/**
 	 * Return the direct parent type of the passed in type. If the passed
 	 * in type has no parent, i.e. is a fundamental type, 0 is returned.
-	 * @param _type the derived type
+	 * @param type the derived type
 	 * @returns the parent type
 	 */
-	function type_parent(_type: GObject.Type): GObject.Type;
+	function type_parent(type: GObject.Type): GObject.Type;
 
 	/**
 	 * Get the corresponding quark of the type IDs name.
-	 * @param _type type to return quark of type name for
+	 * @param type type to return quark of type name for
 	 * @returns the type names quark or 0
 	 */
-	function type_qname(_type: GObject.Type): GLib.Quark;
+	function type_qname(type: GObject.Type): GLib.Quark;
 
 	/**
 	 * Queries the type system for information about a specific type.
@@ -7398,11 +7398,11 @@ declare namespace imports.gi.GObject {
 	 * #type member of the #GTypeQuery is 0. All members filled into the
 	 * #GTypeQuery structure should be considered constant and have to be
 	 * left untouched.
-	 * @param _type #GType of a static, classed type
+	 * @param type #GType of a static, classed type
 	 * @param query a user provided structure that is
 	 *     filled in with constant values upon success
 	 */
-	function type_query(_type: GObject.Type, query: TypeQuery): void;
+	function type_query(type: GObject.Type, query: TypeQuery): void;
 
 	/**
 	 * Registers #type_name as the name of a new dynamic type derived from
@@ -7484,13 +7484,13 @@ declare namespace imports.gi.GObject {
 
 	/**
 	 * Attaches arbitrary data to a type.
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @param quark a #GQuark id to identify the data
 	 * @param data the data
 	 */
-	function type_set_qdata(_type: GObject.Type, quark: GLib.Quark, data: any | null): void;
+	function type_set_qdata(type: GObject.Type, quark: GLib.Quark, data: any | null): void;
 
-	function type_test_flags(_type: GObject.Type, flags: number): boolean;
+	function type_test_flags(type: GObject.Type, flags: number): boolean;
 
 	/**
 	 * Returns the location of the #GTypeValueTable associated with #type.
@@ -7498,11 +7498,11 @@ declare namespace imports.gi.GObject {
 	 * Note that this function should only be used from source code
 	 * that implements or has internal knowledge of the implementation of
 	 * #type.
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @returns location of the #GTypeValueTable associated with #type or
 	 *     %NULL if there is no #GTypeValueTable associated with #type
 	 */
-	function type_value_table_peek(_type: GObject.Type): TypeValueTable;
+	function type_value_table_peek(type: GObject.Type): TypeValueTable;
 
 	/**
 	 * Registers a value transformation function for use in g_value_transform().
@@ -7534,5 +7534,117 @@ declare namespace imports.gi.GObject {
 	 * @returns %TRUE if the transformation is possible, %FALSE otherwise.
 	 */
 	function value_type_transformable(src_type: GObject.Type, dest_type: GObject.Type): boolean;
+
+	/**
+	 * Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
+	 * @returns Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
+	 */
+	const PARAM_MASK: number;
+
+	/**
+	 * #GParamFlags value alias for %G_PARAM_STATIC_NAME | %G_PARAM_STATIC_NICK | %G_PARAM_STATIC_BLURB.
+	 * 
+	 * Since 2.13.0
+	 * @returns #GParamFlags value alias for %G_PARAM_STATIC_NAME | %G_PARAM_STATIC_NICK | %G_PARAM_STATIC_BLURB.
+	 * 
+	 * Since 2.13.0
+	 */
+	const PARAM_STATIC_STRINGS: number;
+
+	/**
+	 * Minimum shift count to be used for user defined flags, to be stored in
+	 * #GParamSpec.flags. The maximum allowed is 10.
+	 * @returns Minimum shift count to be used for user defined flags, to be stored in
+	 * #GParamSpec.flags. The maximum allowed is 10.
+	 */
+	const PARAM_USER_SHIFT: number;
+
+	/**
+	 * A mask for all #GSignalFlags bits.
+	 * @returns A mask for all #GSignalFlags bits.
+	 */
+	const SIGNAL_FLAGS_MASK: number;
+
+	/**
+	 * A mask for all #GSignalMatchType bits.
+	 * @returns A mask for all #GSignalMatchType bits.
+	 */
+	const SIGNAL_MATCH_MASK: number;
+
+	/**
+	 * A bit in the type number that's supposed to be left untouched.
+	 * @returns A bit in the type number that's supposed to be left untouched.
+	 */
+	const TYPE_FLAG_RESERVED_ID_BIT: GLib.Type;
+
+	/**
+	 * An integer constant that represents the number of identifiers reserved
+	 * for types that are assigned at compile-time.
+	 * @returns An integer constant that represents the number of identifiers reserved
+	 * for types that are assigned at compile-time.
+	 */
+	const TYPE_FUNDAMENTAL_MAX: number;
+
+	/**
+	 * Shift value used in converting numbers to type IDs.
+	 * @returns Shift value used in converting numbers to type IDs.
+	 */
+	const TYPE_FUNDAMENTAL_SHIFT: number;
+
+	/**
+	 * First fundamental type number to create a new fundamental type id with
+	 * G_TYPE_MAKE_FUNDAMENTAL() reserved for BSE.
+	 * @returns First fundamental type number to create a new fundamental type id with
+	 * G_TYPE_MAKE_FUNDAMENTAL() reserved for BSE.
+	 */
+	const TYPE_RESERVED_BSE_FIRST: number;
+
+	/**
+	 * Last fundamental type number reserved for BSE.
+	 * @returns Last fundamental type number reserved for BSE.
+	 */
+	const TYPE_RESERVED_BSE_LAST: number;
+
+	/**
+	 * First fundamental type number to create a new fundamental type id with
+	 * G_TYPE_MAKE_FUNDAMENTAL() reserved for GLib.
+	 * @returns First fundamental type number to create a new fundamental type id with
+	 * G_TYPE_MAKE_FUNDAMENTAL() reserved for GLib.
+	 */
+	const TYPE_RESERVED_GLIB_FIRST: number;
+
+	/**
+	 * Last fundamental type number reserved for GLib.
+	 * @returns Last fundamental type number reserved for GLib.
+	 */
+	const TYPE_RESERVED_GLIB_LAST: number;
+
+	/**
+	 * First available fundamental type number to create new fundamental
+	 * type id with G_TYPE_MAKE_FUNDAMENTAL().
+	 * @returns First available fundamental type number to create new fundamental
+	 * type id with G_TYPE_MAKE_FUNDAMENTAL().
+	 */
+	const TYPE_RESERVED_USER_FIRST: number;
+
+	/**
+	 * For string values, indicates that the string contained is canonical and will
+	 * exist for the duration of the process. See g_value_set_interned_string().
+	 * @returns For string values, indicates that the string contained is canonical and will
+	 * exist for the duration of the process. See g_value_set_interned_string().
+	 */
+	const VALUE_INTERNED_STRING: number;
+
+	/**
+	 * If passed to G_VALUE_COLLECT(), allocated data won't be copied
+	 * but used verbatim. This does not affect ref-counted types like
+	 * objects. This does not affect usage of g_value_copy(), the data will
+	 * be copied if it is not ref-counted.
+	 * @returns If passed to G_VALUE_COLLECT(), allocated data won't be copied
+	 * but used verbatim. This does not affect ref-counted types like
+	 * objects. This does not affect usage of g_value_copy(), the data will
+	 * be copied if it is not ref-counted.
+	 */
+	const VALUE_NOCOPY_CONTENTS: number;
 
 }

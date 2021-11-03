@@ -12,8 +12,8 @@ declare namespace imports.gi.Caribou {
 		mod_unlatch(mask: number): void;
 		get_current_group(group_name: string, variant_name: string): number;
 		get_groups(group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;
-		register_key_func(keyval: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
-		register_button_func(button: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
+		register_key_func(keyval: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
+		register_button_func(button: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;
 		get_display(): Gdk.Display;
 		connect(signal: "modifiers-changed", callback: (owner: this, modifiers: number) => void): number;
 		connect(signal: "group-changed", callback: (owner: this, gid: number, group: string, variant: string) => void): number;
@@ -26,7 +26,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DisplayAdapter} instead.
 	 */
-	type DisplayAdapterMixin = IDisplayAdapter & GObject.IObject;
+	type DisplayAdapterMixin = IDisplayAdapter & GObject.Object;
 
 	interface DisplayAdapter extends DisplayAdapterMixin {}
 
@@ -46,7 +46,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NullAdapter} instead.
 	 */
-	type NullAdapterMixin = INullAdapter & Caribou.IDisplayAdapter;
+	type NullAdapterMixin = INullAdapter & Caribou.DisplayAdapter;
 
 	interface NullAdapter extends NullAdapterMixin {}
 
@@ -65,7 +65,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XAdapter} instead.
 	 */
-	type XAdapterMixin = IXAdapter & Caribou.IDisplayAdapter;
+	type XAdapterMixin = IXAdapter & Caribou.DisplayAdapter;
 
 	interface XAdapter extends XAdapterMixin {}
 
@@ -98,7 +98,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardModel} instead.
 	 */
-	type KeyboardModelMixin = IKeyboardModel & GObject.IObject & Caribou.IIKeyboardObject;
+	type KeyboardModelMixin = IKeyboardModel & GObject.Object & Caribou.IKeyboardObject;
 
 	interface KeyboardModel extends KeyboardModelMixin {}
 
@@ -111,8 +111,8 @@ declare namespace imports.gi.Caribou {
 	 * use {@link KeyboardService} instead.
 	 */
 	interface IKeyboardService {
-		set_cursor_location(_x: number, _y: number, _w: number, _h: number): void;
-		set_entry_location(_x: number, _y: number, _w: number, _h: number): void;
+		set_cursor_location(x: number, y: number, w: number, h: number): void;
+		set_entry_location(x: number, y: number, w: number, h: number): void;
 		show(timestamp: number): void;
 		hide(timestamp: number): void;
 		register_keyboard(name: string): void;
@@ -122,7 +122,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyboardService} instead.
 	 */
-	type KeyboardServiceMixin = IKeyboardService & GObject.IObject;
+	type KeyboardServiceMixin = IKeyboardService & GObject.Object;
 
 	interface KeyboardService extends KeyboardServiceMixin {}
 
@@ -149,7 +149,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GroupModel} instead.
 	 */
-	type GroupModelMixin = IGroupModel & GObject.IObject & Caribou.IIKeyboardObject;
+	type GroupModelMixin = IGroupModel & GObject.Object & Caribou.IKeyboardObject;
 
 	interface GroupModel extends GroupModelMixin {}
 
@@ -175,7 +175,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LevelModel} instead.
 	 */
-	type LevelModelMixin = ILevelModel & Caribou.IScannableGroup & Caribou.IIKeyboardObject;
+	type LevelModelMixin = ILevelModel & Caribou.ScannableGroup & Caribou.IKeyboardObject;
 
 	interface LevelModel extends LevelModelMixin {}
 
@@ -194,7 +194,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RowModel} instead.
 	 */
-	type RowModelMixin = IRowModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type RowModelMixin = IRowModel & Caribou.ScannableGroup & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface RowModel extends RowModelMixin {}
 
@@ -258,7 +258,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyModel} instead.
 	 */
-	type KeyModelMixin = IKeyModel & GObject.IObject & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type KeyModelMixin = IKeyModel & GObject.Object & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface KeyModel extends KeyModelMixin {}
 
@@ -278,7 +278,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColumnModel} instead.
 	 */
-	type ColumnModelMixin = IColumnModel & Caribou.IScannableGroup & Caribou.IIScannableItem & Caribou.IIKeyboardObject;
+	type ColumnModelMixin = IColumnModel & Caribou.ScannableGroup & Caribou.IScannableItem & Caribou.IKeyboardObject;
 
 	interface ColumnModel extends ColumnModelMixin {}
 
@@ -338,7 +338,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scanner} instead.
 	 */
-	type ScannerMixin = IScanner & GObject.IObject;
+	type ScannerMixin = IScanner & GObject.Object;
 
 	interface Scanner extends ScannerMixin {}
 
@@ -358,7 +358,7 @@ declare namespace imports.gi.Caribou {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScannableGroup} instead.
 	 */
-	type ScannableGroupMixin = IScannableGroup & GObject.IObject & Caribou.IIScannableGroup;
+	type ScannableGroupMixin = IScannableGroup & GObject.Object & Caribou.IScannableGroup;
 
 	interface ScannableGroup extends ScannableGroupMixin {}
 
@@ -377,8 +377,8 @@ declare namespace imports.gi.Caribou {
 		public mod_unlatch: {(self: Caribou.DisplayAdapter, mask: number): void;};
 		public get_current_group: {(self: Caribou.DisplayAdapter, group_name: string, variant_name: string): number;};
 		public get_groups: {(self: Caribou.DisplayAdapter, group_names: string[], group_names_length1: number, variant_names: string[], variant_names_length1: number): void;};
-		public register_key_func: {(self: Caribou.DisplayAdapter, keyval: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
-		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, _func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
+		public register_key_func: {(self: Caribou.DisplayAdapter, keyval: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
+		public register_button_func: {(self: Caribou.DisplayAdapter, button: number, func: Caribou.KeyButtonCallback | null, func_target: any | null): void;};
 	}
 
 	interface DisplayAdapterPrivate {}
@@ -419,8 +419,8 @@ declare namespace imports.gi.Caribou {
 	interface KeyboardServiceClass {}
 	class KeyboardServiceClass {
 		public constructor();
-		public set_cursor_location: {(self: Caribou.KeyboardService, _x: number, _y: number, _w: number, _h: number): void;};
-		public set_entry_location: {(self: Caribou.KeyboardService, _x: number, _y: number, _w: number, _h: number): void;};
+		public set_cursor_location: {(self: Caribou.KeyboardService, x: number, y: number, w: number, h: number): void;};
+		public set_entry_location: {(self: Caribou.KeyboardService, x: number, y: number, w: number, h: number): void;};
 		public show: {(self: Caribou.KeyboardService, timestamp: number): void;};
 		public hide: {(self: Caribou.KeyboardService, timestamp: number): void;};
 		public name_lost: {(self: Caribou.KeyboardService, name: string): void;};

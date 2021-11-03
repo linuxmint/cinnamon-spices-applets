@@ -23,7 +23,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChannelMap} instead.
 	 */
-	type ChannelMapMixin = IChannelMap & GObject.IObject;
+	type ChannelMapMixin = IChannelMap & GObject.Object;
 
 	interface ChannelMap extends ChannelMapMixin {}
 
@@ -70,7 +70,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerCard} instead.
 	 */
-	type MixerCardMixin = IMixerCard & GObject.IObject;
+	type MixerCardMixin = IMixerCard & GObject.Object;
 
 	interface MixerCard extends MixerCardMixin {}
 
@@ -100,15 +100,15 @@ declare namespace imports.gi.Cvc {
 		get_streams(): GLib.SList;
 		get_vol_max_amplified(): number;
 		get_vol_max_norm(): number;
-		lookup_card_id(_id: number): MixerCard;
+		lookup_card_id(id: number): MixerCard;
 		lookup_device_from_stream(stream: MixerStream): MixerUIDevice;
-		lookup_input_id(_id: number): MixerUIDevice;
-		lookup_output_id(_id: number): MixerUIDevice;
-		lookup_stream_id(_id: number): MixerStream;
+		lookup_input_id(id: number): MixerUIDevice;
+		lookup_output_id(id: number): MixerUIDevice;
+		lookup_stream_id(id: number): MixerStream;
 		open(): boolean;
 		set_default_sink(stream: MixerStream): boolean;
 		set_default_source(stream: MixerStream): boolean;
-		set_headset_port(_id: number, choices: HeadsetPortChoice): void;
+		set_headset_port(id: number, choices: HeadsetPortChoice): void;
 		connect(signal: "active-input-update", callback: (owner: this, object: number) => void): number;
 		connect(signal: "active-output-update", callback: (owner: this, object: number) => void): number;
 		connect(signal: "audio-device-selection-needed", callback: (owner: this, object: number, p0: boolean, p1: number) => void): number;
@@ -132,7 +132,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerControl} instead.
 	 */
-	type MixerControlMixin = IMixerControl & GObject.IObject;
+	type MixerControlMixin = IMixerControl & GObject.Object;
 
 	interface MixerControl extends MixerControlMixin {}
 
@@ -154,7 +154,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerEventRole} instead.
 	 */
-	type MixerEventRoleMixin = IMixerEventRole & IMixerStream;
+	type MixerEventRoleMixin = IMixerEventRole & MixerStream;
 
 	interface MixerEventRole extends MixerEventRoleMixin {}
 
@@ -173,7 +173,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSink} instead.
 	 */
-	type MixerSinkMixin = IMixerSink & IMixerStream;
+	type MixerSinkMixin = IMixerSink & MixerStream;
 
 	interface MixerSink extends MixerSinkMixin {}
 
@@ -192,7 +192,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSinkInput} instead.
 	 */
-	type MixerSinkInputMixin = IMixerSinkInput & IMixerStream;
+	type MixerSinkInputMixin = IMixerSinkInput & MixerStream;
 
 	interface MixerSinkInput extends MixerSinkInputMixin {}
 
@@ -211,7 +211,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSource} instead.
 	 */
-	type MixerSourceMixin = IMixerSource & IMixerStream;
+	type MixerSourceMixin = IMixerSource & MixerStream;
 
 	interface MixerSource extends MixerSourceMixin {}
 
@@ -230,7 +230,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerSourceOutput} instead.
 	 */
-	type MixerSourceOutputMixin = IMixerSourceOutput & IMixerStream;
+	type MixerSourceOutputMixin = IMixerSourceOutput & MixerStream;
 
 	interface MixerSourceOutput extends MixerSourceOutputMixin {}
 
@@ -262,7 +262,7 @@ declare namespace imports.gi.Cvc {
 		sysfs_path: string;
 		volume: number;
 		change_is_muted(is_muted: boolean): boolean;
-		change_port(_port: string): boolean;
+		change_port(port: string): boolean;
 		create_monitor(): void;
 		get_application_id(): string;
 		get_base_volume(): number;
@@ -299,7 +299,7 @@ declare namespace imports.gi.Cvc {
 		set_is_muted(is_muted: boolean): boolean;
 		set_is_virtual(is_event_stream: boolean): boolean;
 		set_name(name: string): boolean;
-		set_port(_port: string): boolean;
+		set_port(port: string): boolean;
 		set_ports(ports: GLib.List): boolean;
 		set_sysfs_path(sysfs_path: string): boolean;
 		set_volume(volume: number): boolean;
@@ -330,7 +330,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerStream} instead.
 	 */
-	type MixerStreamMixin = IMixerStream & GObject.IObject;
+	type MixerStreamMixin = IMixerStream & GObject.Object;
 
 	interface MixerStream extends MixerStreamMixin {}
 
@@ -406,7 +406,7 @@ declare namespace imports.gi.Cvc {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MixerUIDevice} instead.
 	 */
-	type MixerUIDeviceMixin = IMixerUIDevice & GObject.IObject;
+	type MixerUIDeviceMixin = IMixerUIDevice & GObject.Object;
 
 	interface MixerUIDevice extends MixerUIDeviceMixin {}
 
@@ -456,27 +456,27 @@ declare namespace imports.gi.Cvc {
 		public priority: number;
 		public n_sinks: number;
 		public n_sources: number;
-		public compare(_b: MixerCardProfile): number;
+		public compare(b: MixerCardProfile): number;
 	}
 
 	interface MixerControlClass {}
 	class MixerControlClass {
 		public constructor();
 		public state_changed: {(control: MixerControl, new_state: MixerControlState): void;};
-		public stream_added: {(control: MixerControl, _id: number): void;};
-		public stream_changed: {(control: MixerControl, _id: number): void;};
-		public stream_removed: {(control: MixerControl, _id: number): void;};
-		public card_added: {(control: MixerControl, _id: number): void;};
-		public card_removed: {(control: MixerControl, _id: number): void;};
-		public default_sink_changed: {(control: MixerControl, _id: number): void;};
-		public default_source_changed: {(control: MixerControl, _id: number): void;};
-		public active_output_update: {(control: MixerControl, _id: number): void;};
-		public active_input_update: {(control: MixerControl, _id: number): void;};
-		public output_added: {(control: MixerControl, _id: number): void;};
-		public input_added: {(control: MixerControl, _id: number): void;};
-		public output_removed: {(control: MixerControl, _id: number): void;};
-		public input_removed: {(control: MixerControl, _id: number): void;};
-		public audio_device_selection_needed: {(control: MixerControl, _id: number, show_dialog: boolean, choices: HeadsetPortChoice): void;};
+		public stream_added: {(control: MixerControl, id: number): void;};
+		public stream_changed: {(control: MixerControl, id: number): void;};
+		public stream_removed: {(control: MixerControl, id: number): void;};
+		public card_added: {(control: MixerControl, id: number): void;};
+		public card_removed: {(control: MixerControl, id: number): void;};
+		public default_sink_changed: {(control: MixerControl, id: number): void;};
+		public default_source_changed: {(control: MixerControl, id: number): void;};
+		public active_output_update: {(control: MixerControl, id: number): void;};
+		public active_input_update: {(control: MixerControl, id: number): void;};
+		public output_added: {(control: MixerControl, id: number): void;};
+		public input_added: {(control: MixerControl, id: number): void;};
+		public output_removed: {(control: MixerControl, id: number): void;};
+		public input_removed: {(control: MixerControl, id: number): void;};
+		public audio_device_selection_needed: {(control: MixerControl, id: number, show_dialog: boolean, choices: HeadsetPortChoice): void;};
 	}
 
 	interface MixerControlPrivate {}
@@ -539,8 +539,8 @@ declare namespace imports.gi.Cvc {
 		public constructor();
 		public push_volume: {(stream: MixerStream, operation: any | null): boolean;};
 		public change_is_muted: {(stream: MixerStream, is_muted: boolean): boolean;};
-		public change_port: {(stream: MixerStream, _port: string): boolean;};
-		public monitor_update: {(stream: MixerStream, _v: number): void;};
+		public change_port: {(stream: MixerStream, port: string): boolean;};
+		public monitor_update: {(stream: MixerStream, v: number): void;};
 		public monitor_suspend: {(stream: MixerStream): void;};
 	}
 
@@ -586,5 +586,7 @@ declare namespace imports.gi.Cvc {
 		HEADSET = 2,
 		MIC = 4
 	}
+
+	const MIXER_UI_DEVICE_INVALID: number;
 
 }

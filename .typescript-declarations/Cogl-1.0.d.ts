@@ -44,11 +44,11 @@ declare namespace imports.gi.Cogl {
 		/**
 		 * Computes the arc tangent of #a / #b but uses the sign of both
 		 * arguments to return the angle in right quadrant.
-		 * @param _b the denominator as a {@link Fixed} number
+		 * @param b the denominator as a {@link Fixed} number
 		 * @returns the arc tangent of the passed fraction, in fixed point
 		 *   notation
 		 */
-		atan2(_b: Fixed): Fixed;
+		atan2(b: Fixed): Fixed;
 		/**
 		 * Computes the cosine of #angle.
 		 * @returns the cosine of the passed angle, in fixed point notation
@@ -97,17 +97,17 @@ declare namespace imports.gi.Cogl {
 		 * 
 		 * This function is some 2.5 times faster on x86, and over 12 times faster on
 		 * fpu-less arm, than using libc log().
-		 * @param _x value to calculate base 2 logarithm from
+		 * @param x value to calculate base 2 logarithm from
 		 * @returns base 2 logarithm.
 		 */
-		public static log2(_x: number): Fixed;
+		public static log2(x: number): Fixed;
 		/**
 		 * Calculates #x to the #y power.
-		 * @param _x base
-		 * @param _y {@link Fixed} exponent
+		 * @param x base
+		 * @param y {@link Fixed} exponent
 		 * @returns the power of #x to the #y
 		 */
-		public static pow(_x: number, _y: Fixed): number;
+		public static pow(x: number, y: Fixed): number;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1116,10 +1116,10 @@ declare namespace imports.gi.Cogl {
 		 *   .wx=0; .wy=0; .wz=0; .ww=1;
 		 * ]|
 		 * @param tx x coordinate of the translation vector
-		 * @param _ty y coordinate of the translation vector
+		 * @param ty y coordinate of the translation vector
 		 * @param tz z coordinate of the translation vector
 		 */
-		public init_translation(tx: number, _ty: number, tz: number): void;
+		public init_translation(tx: number, ty: number, tz: number): void;
 		/**
 		 * Determines if the given matrix is an identity matrix.
 		 * @returns %TRUE if #matrix is an identity matrix else %FALSE
@@ -1169,10 +1169,10 @@ declare namespace imports.gi.Cogl {
 		 * 
 		 * <note>It is possible to multiply the #a matrix in-place, so
 		 * #result can be equal to #a but can't be equal to #b.</note>
-		 * @param _a A 4x4 transformation matrix
-		 * @param _b A 4x4 transformation matrix
+		 * @param a A 4x4 transformation matrix
+		 * @param b A 4x4 transformation matrix
 		 */
-		public multiply(_a: Matrix, _b: Matrix): void;
+		public multiply(a: Matrix, b: Matrix): void;
 		/**
 		 * Multiplies #matrix by a parallel projection matrix.
 		 * @param left The coordinate for the left clipping plane
@@ -1205,19 +1205,19 @@ declare namespace imports.gi.Cogl {
 		 * Multiplies #matrix with a rotation matrix that applies a rotation
 		 * of #angle degrees around the specified 3D vector.
 		 * @param angle The angle you want to rotate in degrees
-		 * @param _x X component of your rotation vector
-		 * @param _y Y component of your rotation vector
-		 * @param _z Z component of your rotation vector
+		 * @param x X component of your rotation vector
+		 * @param y Y component of your rotation vector
+		 * @param z Z component of your rotation vector
 		 */
-		public rotate(angle: number, _x: number, _y: number, _z: number): void;
+		public rotate(angle: number, x: number, y: number, z: number): void;
 		/**
 		 * Multiplies #matrix with a transform matrix that scales along the X,
 		 * Y and Z axis.
 		 * @param sx The X scale factor
-		 * @param _sy The Y scale factor
+		 * @param sy The Y scale factor
 		 * @param sz The Z scale factor
 		 */
-		public scale(sx: number, _sy: number, sz: number): void;
+		public scale(sx: number, sy: number, sz: number): void;
 		/**
 		 * Transforms a point whos position is given and returned as four float
 		 * components.
@@ -1226,11 +1226,11 @@ declare namespace imports.gi.Cogl {
 		/**
 		 * Multiplies #matrix with a transform matrix that translates along
 		 * the X, Y and Z axis.
-		 * @param _x The X translation you want to apply
-		 * @param _y The Y translation you want to apply
-		 * @param _z The Z translation you want to apply
+		 * @param x The X translation you want to apply
+		 * @param y The Y translation you want to apply
+		 * @param z The Z translation you want to apply
 		 */
-		public translate(_x: number, _y: number, _z: number): void;
+		public translate(x: number, y: number, z: number): void;
 		/**
 		 * Replaces #matrix with its transpose. Ie, every element (i,j) in the
 		 * new matrix is taken from element (j,i) in the old matrix.
@@ -2526,10 +2526,10 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Check whether #name occurs in list of extensions in #ext.
 	 * @param name extension to check for
-	 * @param _ext list of extensions
+	 * @param ext list of extensions
 	 * @returns %TRUE if the extension occurs in the list, %FALSE otherwise.
 	 */
-	function check_extension(name: string, _ext: string): Bool;
+	function check_extension(name: string, ext: string): Bool;
 
 	/**
 	 * Clears all the auxiliary buffers identified in the #buffers mask, and if
@@ -2658,7 +2658,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	function clip_stack_save(): void;
 
-	function clutter_check_extension_CLUTTER(name: string, _ext: string): Bool;
+	function clutter_check_extension_CLUTTER(name: string, ext: string): Bool;
 
 	function clutter_winsys_has_feature_CLUTTER(feature: WinsysFeature): Bool;
 
@@ -3348,8 +3348,8 @@ declare namespace imports.gi.Cogl {
 	 * read the pixel values without any conversion you should either
 	 * specify a format that doesn't use an alpha channel or use one of
 	 * the formats ending in PRE.
-	 * @param _x The window x position to start reading from
-	 * @param _y The window y position to start reading from
+	 * @param x The window x position to start reading from
+	 * @param y The window y position to start reading from
 	 * @param width The width of the rectangle you want to read
 	 * @param height The height of the rectangle you want to read
 	 * @param source Identifies which auxillary buffer you want to read
@@ -3358,7 +3358,7 @@ declare namespace imports.gi.Cogl {
 	 *          (only COGL_PIXEL_FORMAT_RGBA_8888 supported currently)
 	 * @param pixels The location to write the pixel data.
 	 */
-	function read_pixels(_x: number, _y: number, width: number, height: number, source: ReadPixelsFlags, format: PixelFormat, pixels: number): void;
+	function read_pixels(x: number, y: number, width: number, height: number, source: ReadPixelsFlags, format: PixelFormat, pixels: number): void;
 
 	/**
 	 * Fills a rectangle at the given coordinates with the current source material
@@ -3446,20 +3446,20 @@ declare namespace imports.gi.Cogl {
 	 * degrees about the vertex (0, 0, 1) causes a small counter-clockwise
 	 * rotation.
 	 * @param angle Angle in degrees to rotate.
-	 * @param _x X-component of vertex to rotate around.
-	 * @param _y Y-component of vertex to rotate around.
-	 * @param _z Z-component of vertex to rotate around.
+	 * @param x X-component of vertex to rotate around.
+	 * @param y Y-component of vertex to rotate around.
+	 * @param z Z-component of vertex to rotate around.
 	 */
-	function rotate(angle: number, _x: number, _y: number, _z: number): void;
+	function rotate(angle: number, x: number, y: number, z: number): void;
 
 	/**
 	 * Multiplies the current model-view matrix by one that scales the x,
 	 * y and z axes by the given values.
-	 * @param _x Amount to scale along the x-axis
-	 * @param _y Amount to scale along the y-axis
-	 * @param _z Amount to scale along the z-axis
+	 * @param x Amount to scale along the x-axis
+	 * @param y Amount to scale along the y-axis
+	 * @param z Amount to scale along the z-axis
 	 */
-	function scale(_x: number, _y: number, _z: number): void;
+	function scale(x: number, y: number, z: number): void;
 
 	/**
 	 * Sets whether textures positioned so that their backface is showing
@@ -3611,12 +3611,12 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Replaces the current viewport with the given values.
-	 * @param _x X offset of the viewport
-	 * @param _y Y offset of the viewport
+	 * @param x X offset of the viewport
+	 * @param y Y offset of the viewport
 	 * @param width Width of the viewport
 	 * @param height Height of the viewport
 	 */
-	function set_viewport(_x: number, _y: number, width: number, height: number): void;
+	function set_viewport(x: number, y: number, width: number, height: number): void;
 
 	/**
 	 * Compiles the shader, no return value, but the shader is now ready
@@ -3687,10 +3687,10 @@ declare namespace imports.gi.Cogl {
 	 * 5% for arguments smaller than %COGL_SQRTI_ARG_5_PERCENT and less than 10%
 	 * for narguments smaller than %COGL_SQRTI_ARG_10_PERCENT. The maximum
 	 * argument that can be passed to this function is %COGL_SQRTI_ARG_MAX.
-	 * @param _x integer value
+	 * @param x integer value
 	 * @returns integer square root.
 	 */
-	function sqrti(_x: number): number;
+	function sqrti(x: number): number;
 
 	function texture_error_quark(): number;
 
@@ -3716,11 +3716,11 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Multiplies the current model-view matrix by one that translates the
 	 * model along all three axes according to the given values.
-	 * @param _x Distance to translate along the x-axis
-	 * @param _y Distance to translate along the y-axis
-	 * @param _z Distance to translate along the z-axis
+	 * @param x Distance to translate along the x-axis
+	 * @param y Distance to translate along the y-axis
+	 * @param z Distance to translate along the z-axis
 	 */
-	function translate(_x: number, _y: number, _z: number): void;
+	function translate(x: number, y: number, z: number): void;
 
 	/**
 	 * Adds an attribute to a buffer, or replaces a previously added
@@ -3768,7 +3768,7 @@ declare namespace imports.gi.Cogl {
 	 *   "gl_Color::inactive"
 	 * @param n_components The number of components per attribute and must be 1, 2,
 	 *   3 or 4
-	 * @param _type a {@link AttributeType} specifying the data type of each component.
+	 * @param type a {@link AttributeType} specifying the data type of each component.
 	 * @param normalized If %TRUE, this specifies that values stored in an integer
 	 *   format should be mapped into the range [-1.0, 1.0] or [0.0, 1.0]
 	 *   for unsigned values. If %FALSE they are converted to floats
@@ -3783,7 +3783,7 @@ declare namespace imports.gi.Cogl {
 	 *   must remain valid until you either call cogl_vertex_buffer_submit() or
 	 *   issue a draw call.
 	 */
-	function vertex_buffer_add(handle: Handle, attribute_name: string, n_components: number, _type: AttributeType, normalized: Bool, stride: number, pointer: any | null): void;
+	function vertex_buffer_add(handle: Handle, attribute_name: string, n_components: number, type: AttributeType, normalized: Bool, stride: number, pointer: any | null): void;
 
 	/**
 	 * Deletes an attribute from a buffer. You will need to call
@@ -3953,7 +3953,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	function viewport(width: number, height: number): void;
 
-	function xlib_renderer_add_filter(renderer: any, _func: XlibFilterFunc, data: any | null): void;
+	function xlib_renderer_add_filter(renderer: any, func: XlibFilterFunc, data: any | null): void;
 
 	function xlib_renderer_get_display(renderer: any): any;
 
@@ -3963,7 +3963,7 @@ declare namespace imports.gi.Cogl {
 
 	function xlib_renderer_handle_event(renderer: any, event: any): FilterReturn;
 
-	function xlib_renderer_remove_filter(renderer: any, _func: XlibFilterFunc, data: any | null): void;
+	function xlib_renderer_remove_filter(renderer: any, func: XlibFilterFunc, data: any | null): void;
 
 	/**
 	 * Sets whether Cogl should automatically retrieve events from the X
@@ -3980,5 +3980,115 @@ declare namespace imports.gi.Cogl {
 	function xlib_renderer_set_event_retrieval_enabled(renderer: any, enable: Bool): void;
 
 	function xlib_renderer_set_foreign_display(renderer: any, display: any): void;
+
+	const AFIRST_BIT: number;
+
+	const A_BIT: number;
+
+	const BGR_BIT: number;
+
+	const DEPTH_BIT: number;
+
+	/**
+	 * The number 0.5 expressed as a {@link Fixed} number.
+	 * @returns The number 0.5 expressed as a {@link Fixed} number.
+	 */
+	const FIXED_0_5: number;
+
+	/**
+	 * The number 1 expressed as a {@link Fixed} number.
+	 * @returns The number 1 expressed as a {@link Fixed} number.
+	 */
+	const FIXED_1: number;
+
+	/**
+	 * Two times pi, expressed as a {@link Fixed} number.
+	 * @returns Two times pi, expressed as a {@link Fixed} number.
+	 */
+	const FIXED_2_PI: number;
+
+	/**
+	 * Evaluates to the number of bits used by the {@link Fixed} type.
+	 * @returns Evaluates to the number of bits used by the {@link Fixed} type.
+	 */
+	const FIXED_BITS: number;
+
+	/**
+	 * A very small number expressed as a {@link Fixed} number.
+	 * @returns A very small number expressed as a {@link Fixed} number.
+	 */
+	const FIXED_EPSILON: number;
+
+	/**
+	 * The biggest number representable using {@link Fixed}
+	 * @returns The biggest number representable using {@link Fixed}
+	 */
+	const FIXED_MAX: number;
+
+	/**
+	 * The smallest number representable using {@link Fixed}
+	 * @returns The smallest number representable using {@link Fixed}
+	 */
+	const FIXED_MIN: number;
+
+	/**
+	 * The number pi, expressed as a {@link Fixed} number.
+	 * @returns The number pi, expressed as a {@link Fixed} number.
+	 */
+	const FIXED_PI: number;
+
+	/**
+	 * Half pi, expressed as a {@link Fixed} number.
+	 * @returns Half pi, expressed as a {@link Fixed} number.
+	 */
+	const FIXED_PI_2: number;
+
+	/**
+	 * pi / 4, expressed as {@link Fixed} number.
+	 * @returns pi / 4, expressed as {@link Fixed} number.
+	 */
+	const FIXED_PI_4: number;
+
+	/**
+	 * Evaluates to the number of bits used for the non-integer part
+	 * of the {@link Fixed} type.
+	 * @returns Evaluates to the number of bits used for the non-integer part
+	 * of the {@link Fixed} type.
+	 */
+	const FIXED_Q: number;
+
+	const PREMULT_BIT: number;
+
+	/**
+	 * Evaluates to 180 / pi in fixed point notation.
+	 * @returns Evaluates to 180 / pi in fixed point notation.
+	 */
+	const RADIANS_TO_DEGREES: number;
+
+	/**
+	 * Maximum argument that can be passed to cogl_sqrti() for which the
+	 * resulting error is < 10%
+	 * @returns Maximum argument that can be passed to cogl_sqrti() for which the
+	 * resulting error is < 10%
+	 */
+	const SQRTI_ARG_10_PERCENT: number;
+
+	/**
+	 * Maximum argument that can be passed to cogl_sqrti() for which the
+	 * resulting error is < 5%
+	 * @returns Maximum argument that can be passed to cogl_sqrti() for which the
+	 * resulting error is < 5%
+	 */
+	const SQRTI_ARG_5_PERCENT: number;
+
+	/**
+	 * Maximum argument that can be passed to cogl_sqrti() function.
+	 * @returns Maximum argument that can be passed to cogl_sqrti() function.
+	 */
+	const SQRTI_ARG_MAX: number;
+
+	const STENCIL_BIT: number;
+
+	const TEXTURE_MAX_WASTE: number;
 
 }

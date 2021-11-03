@@ -19,10 +19,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Checks whether the #graphene_box_t #a contains the given
 		 * #graphene_box_t #b.
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @returns `true` if the box is contained in the given box
 		 */
-		public contains_box(_b: Box): boolean;
+		public contains_box(b: Box): boolean;
 		/**
 		 * Checks whether #box contains the given #point.
 		 * @param point the coordinates to check
@@ -31,10 +31,10 @@ declare namespace imports.gi.Graphene {
 		public contains_point(point: Point3D): boolean;
 		/**
 		 * Checks whether the two given boxes are equal.
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @returns `true` if the boxes are equal
 		 */
-		public equal(_b: Box): boolean;
+		public equal(b: Box): boolean;
 		/**
 		 * Expands the dimensions of #box to include the coordinates at #point.
 		 * @param point the coordinates of the point to include
@@ -161,17 +161,17 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * If the two boxes do not intersect, #res will contain a degenerate box
 		 * initialized with graphene_box_empty().
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @param res return location for the result
 		 * @returns true if the two boxes intersect
 		 */
-		public intersection(_b: Box, res: Box | null): boolean;
+		public intersection(b: Box, res: Box | null): boolean;
 		/**
 		 * Unions the two given #graphene_box_t.
-		 * @param _b the box to union to #a
+		 * @param b the box to union to #a
 		 * @param res return location for the result
 		 */
-		public union(_b: Box, res: Box): void;
+		public union(b: Box, res: Box): void;
 	}
 
 	/**
@@ -194,10 +194,10 @@ declare namespace imports.gi.Graphene {
 		public readonly order: EulerOrder;
 		/**
 		 * Checks if two #graphene_euler_t are equal.
-		 * @param _b a #graphene_euler_t
+		 * @param b a #graphene_euler_t
 		 * @returns `true` if the two #graphene_euler_t are equal
 		 */
-		public equal(_b: Euler): boolean;
+		public equal(b: Euler): boolean;
 		/**
 		 * Frees the resources allocated by graphene_euler_alloc().
 		 */
@@ -256,12 +256,12 @@ declare namespace imports.gi.Graphene {
 		 * Initializes a #graphene_euler_t using the given angles.
 		 * 
 		 * The order of the rotations is %GRAPHENE_EULER_ORDER_DEFAULT.
-		 * @param _x rotation angle on the X axis, in degrees
-		 * @param _y rotation angle on the Y axis, in degrees
-		 * @param _z rotation angle on the Z axis, in degrees
+		 * @param x rotation angle on the X axis, in degrees
+		 * @param y rotation angle on the Y axis, in degrees
+		 * @param z rotation angle on the Z axis, in degrees
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init(_x: number, _y: number, _z: number): Euler;
+		public init(x: number, y: number, z: number): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the angles and order of
 		 * another #graphene_euler_t.
@@ -277,11 +277,11 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * If the #graphene_matrix_t #m is %NULL, the #graphene_euler_t will
 		 * be initialized with all angles set to 0.
-		 * @param _m a rotation matrix
+		 * @param m a rotation matrix
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_matrix(_m: Matrix | null, order: EulerOrder): Euler;
+		public init_from_matrix(m: Matrix | null, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the given normalized quaternion.
 		 * 
@@ -295,34 +295,34 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_euler_t using the given angles
 		 * and order of rotation.
-		 * @param _x rotation angle on the X axis, in radians
-		 * @param _y rotation angle on the Y axis, in radians
-		 * @param _z rotation angle on the Z axis, in radians
+		 * @param x rotation angle on the X axis, in radians
+		 * @param y rotation angle on the Y axis, in radians
+		 * @param z rotation angle on the Z axis, in radians
 		 * @param order order of rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_radians(_x: number, _y: number, _z: number, order: EulerOrder): Euler;
+		public init_from_radians(x: number, y: number, z: number, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t using the angles contained in a
 		 * #graphene_vec3_t.
 		 * 
 		 * If the #graphene_vec3_t #v is %NULL, the #graphene_euler_t will be
 		 * initialized with all angles set to 0.
-		 * @param _v a #graphene_vec3_t containing the rotation
+		 * @param v a #graphene_vec3_t containing the rotation
 		 *   angles in degrees
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_from_vec3(_v: Vec3 | null, order: EulerOrder): Euler;
+		public init_from_vec3(v: Vec3 | null, order: EulerOrder): Euler;
 		/**
 		 * Initializes a #graphene_euler_t with the given angles and #order.
-		 * @param _x rotation angle on the X axis, in degrees
-		 * @param _y rotation angle on the Y axis, in degrees
-		 * @param _z rotation angle on the Z axis, in degrees
+		 * @param x rotation angle on the X axis, in degrees
+		 * @param y rotation angle on the Y axis, in degrees
+		 * @param z rotation angle on the Z axis, in degrees
 		 * @param order the order used to apply the rotations
 		 * @returns the initialized #graphene_euler_t
 		 */
-		public init_with_order(_x: number, _y: number, _z: number, order: EulerOrder): Euler;
+		public init_with_order(x: number, y: number, z: number, order: EulerOrder): Euler;
 		/**
 		 * Reorders a #graphene_euler_t using #order.
 		 * 
@@ -395,10 +395,10 @@ declare namespace imports.gi.Graphene {
 		public contains_point(point: Point3D): boolean;
 		/**
 		 * Checks whether the two given #graphene_frustum_t are equal.
-		 * @param _b a #graphene_frustum_t
+		 * @param b a #graphene_frustum_t
 		 * @returns `true` if the given frustums are equal
 		 */
-		public equal(_b: Frustum): boolean;
+		public equal(b: Frustum): boolean;
 		/**
 		 * Frees the resources allocated by graphene_frustum_alloc().
 		 */
@@ -488,10 +488,10 @@ declare namespace imports.gi.Graphene {
 		public determinant(): number;
 		/**
 		 * Checks whether the two given #graphene_matrix_t matrices are equal.
-		 * @param _b a #graphene_matrix_t
+		 * @param b a #graphene_matrix_t
 		 * @returns `true` if the two matrices are equal, and `false` otherwise
 		 */
-		public equal(_b: Matrix): boolean;
+		public equal(b: Matrix): boolean;
 		/**
 		 * Checks whether the two given #graphene_matrix_t matrices are
 		 * byte-by-byte equal.
@@ -516,10 +516,10 @@ declare namespace imports.gi.Graphene {
 		 *         // matrices are not equal
 		 *     }
 		 * ]|
-		 * @param _b a #graphene_matrix_t
+		 * @param b a #graphene_matrix_t
 		 * @returns `true` if the matrices are equal. and `false` otherwise
 		 */
-		public equal_fast(_b: Matrix): boolean;
+		public equal_fast(b: Matrix): boolean;
 		/**
 		 * Frees the resources allocated by graphene_matrix_alloc().
 		 */
@@ -533,11 +533,11 @@ declare namespace imports.gi.Graphene {
 		public get_row(index_: number, res: Vec4): void;
 		/**
 		 * Retrieves the value at the given #row and #col index.
-		 * @param _row the row index
+		 * @param row the row index
 		 * @param col the column index
 		 * @returns the value at the given indices
 		 */
-		public get_value(_row: number, col: number): number;
+		public get_value(row: number, col: number): number;
 		/**
 		 * Retrieves the scaling factor on the X axis in #m.
 		 * @returns the value of the scaling factor
@@ -594,11 +594,11 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_matrix_t with the given array of floating
 		 * point values.
-		 * @param _v an array of at least 16 floating
+		 * @param v an array of at least 16 floating
 		 *   point values
 		 * @returns the initialized matrix
 		 */
-		public init_from_float(_v: number[]): Matrix;
+		public init_from_float(v: number[]): Matrix;
 		/**
 		 * Initializes a #graphene_matrix_t using the values of the
 		 * given matrix.
@@ -653,11 +653,11 @@ declare namespace imports.gi.Graphene {
 		 * coordinates.
 		 * @param eye the vector describing the position to look from
 		 * @param center the vector describing the position to look at
-		 * @param _up the vector describing the world's upward direction; usually,
+		 * @param up the vector describing the world's upward direction; usually,
 		 *   this is the graphene_vec3_y_axis() vector
 		 * @returns the initialized matrix
 		 */
-		public init_look_at(eye: Vec3, center: Vec3, _up: Vec3): Matrix;
+		public init_look_at(eye: Vec3, center: Vec3, up: Vec3): Matrix;
 		/**
 		 * Initializes a #graphene_matrix_t with an orthographic projection.
 		 * @param left the left edge of the clipping plane
@@ -688,12 +688,12 @@ declare namespace imports.gi.Graphene {
 		public init_rotate(angle: number, axis: Vec3): Matrix;
 		/**
 		 * Initializes a #graphene_matrix_t with the given scaling factors.
-		 * @param _x the scale factor on the X axis
-		 * @param _y the scale factor on the Y axis
-		 * @param _z the scale factor on the Z axis
+		 * @param x the scale factor on the X axis
+		 * @param y the scale factor on the Y axis
+		 * @param z the scale factor on the Z axis
 		 * @returns the initialized matrix
 		 */
-		public init_scale(_x: number, _y: number, _z: number): Matrix;
+		public init_scale(x: number, y: number, z: number): Matrix;
 		/**
 		 * Initializes a #graphene_matrix_t with a skew transformation
 		 * with the given factors.
@@ -705,10 +705,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_matrix_t with a translation to the
 		 * given coordinates.
-		 * @param _p the translation coordinates
+		 * @param p the translation coordinates
 		 * @returns the initialized matrix
 		 */
-		public init_translate(_p: Point3D): Matrix;
+		public init_translate(p: Point3D): Matrix;
 		/**
 		 * Linearly interpolates the two given #graphene_matrix_t by
 		 * interpolating the decomposed transformations separately.
@@ -716,12 +716,12 @@ declare namespace imports.gi.Graphene {
 		 * If either matrix cannot be reduced to their transformations
 		 * then the interpolation cannot be performed, and this function
 		 * will return an identity matrix.
-		 * @param _b a #graphene_matrix_t
+		 * @param b a #graphene_matrix_t
 		 * @param factor the linear interpolation factor
 		 * @param res return location for the
 		 *   interpolated matrix
 		 */
-		public interpolate(_b: Matrix, factor: number, res: Matrix): void;
+		public interpolate(b: Matrix, factor: number, res: Matrix): void;
 		/**
 		 * Inverts the given matrix.
 		 * @param res return location for the
@@ -756,21 +756,21 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * Matrix multiplication is not commutative in general; the order of the factors matters.
 		 * The product of this multiplication is (#a × #b)
-		 * @param _b a #graphene_matrix_t
+		 * @param b a #graphene_matrix_t
 		 * @param res return location for the matrix
 		 *   result
 		 */
-		public multiply(_b: Matrix, res: Matrix): void;
+		public multiply(b: Matrix, res: Matrix): void;
 		/**
 		 * Compares the two given #graphene_matrix_t matrices and checks
 		 * whether their values are within the given #epsilon of each
 		 * other.
-		 * @param _b a #graphene_matrix_t
+		 * @param b a #graphene_matrix_t
 		 * @param epsilon the threshold between the two matrices
 		 * @returns `true` if the two matrices are near each other, and
 		 *   `false` otherwise
 		 */
-		public near(_b: Matrix, epsilon: number): boolean;
+		public near(b: Matrix, epsilon: number): boolean;
 		/**
 		 * Normalizes the given #graphene_matrix_t.
 		 * @param res return location for the normalized matrix
@@ -792,30 +792,30 @@ declare namespace imports.gi.Graphene {
 		public print(): void;
 		/**
 		 * Projects a #graphene_point_t using the matrix #m.
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @param res return location for the projected
 		 *   point
 		 */
-		public project_point(_p: Point, res: Point): void;
+		public project_point(p: Point, res: Point): void;
 		/**
 		 * Projects all corners of a #graphene_rect_t using the given matrix.
 		 * 
 		 * See also: graphene_matrix_project_point()
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @param res return location for the projected
 		 *   rectangle
 		 */
-		public project_rect(_r: Rect, res: Quad): void;
+		public project_rect(r: Rect, res: Quad): void;
 		/**
 		 * Projects a #graphene_rect_t using the given matrix.
 		 * 
 		 * The resulting rectangle is the axis aligned bounding rectangle capable
 		 * of fully containing the projected rectangle.
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @param res return location for the projected
 		 *   rectangle
 		 */
-		public project_rect_bounds(_r: Rect, res: Rect): void;
+		public project_rect_bounds(r: Rect, res: Rect): void;
 		/**
 		 * Adds a rotation transformation to #m, using the given #angle
 		 * and #axis vector.
@@ -829,9 +829,9 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Adds a rotation transformation to #m, using the given
 		 * #graphene_euler_t.
-		 * @param _e a rotation described by a #graphene_euler_t
+		 * @param e a rotation described by a #graphene_euler_t
 		 */
-		public rotate_euler(_e: Euler): void;
+		public rotate_euler(e: Euler): void;
 		/**
 		 * Adds a rotation transformation to #m, using the given
 		 * #graphene_quaternion_t.
@@ -912,11 +912,11 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Converts a #graphene_matrix_t to an array of floating point
 		 * values.
-		 * @param _v return location
+		 * @param v return location
 		 *   for an array of floating point values. The array must be capable
 		 *   of holding at least 16 values.
 		 */
-		public to_float(_v: number[]): void;
+		public to_float(v: number[]): void;
 		/**
 		 * Transforms each corner of a #graphene_rect_t using the given matrix #m.
 		 * 
@@ -924,21 +924,21 @@ declare namespace imports.gi.Graphene {
 		 * quadrilateral.
 		 * 
 		 * See also: graphene_matrix_transform_point()
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @param res return location for the bounds
 		 *   of the transformed rectangle
 		 */
-		public transform_bounds(_r: Rect, res: Rect): void;
+		public transform_bounds(r: Rect, res: Rect): void;
 		/**
 		 * Transforms the vertices of a #graphene_box_t using the given matrix #m.
 		 * 
 		 * The result is the axis aligned bounding box containing the transformed
 		 * vertices.
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @param res return location for the bounds
 		 *   of the transformed box
 		 */
-		public transform_box(_b: Box, res: Box): void;
+		public transform_box(b: Box, res: Box): void;
 		/**
 		 * Transforms the given #graphene_point_t using the matrix #m.
 		 * 
@@ -947,11 +947,11 @@ declare namespace imports.gi.Graphene {
 		 * the dot product of each row vector of the matrix.
 		 * 
 		 * See also: graphene_simd4x4f_point3_mul()
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @param res return location for the
 		 *   transformed #graphene_point_t
 		 */
-		public transform_point(_p: Point, res: Point): void;
+		public transform_point(p: Point, res: Point): void;
 		/**
 		 * Transforms the given #graphene_point3d_t using the matrix #m.
 		 * 
@@ -960,36 +960,36 @@ declare namespace imports.gi.Graphene {
 		 * the dot product of each row vector of the matrix.
 		 * 
 		 * See also: graphene_simd4x4f_point3_mul()
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @param res return location for the result
 		 */
-		public transform_point3d(_p: Point3D, res: Point3D): void;
+		public transform_point3d(p: Point3D, res: Point3D): void;
 		/**
 		 * Transform a #graphene_ray_t using the given matrix #m.
-		 * @param _r a #graphene_ray_t
+		 * @param r a #graphene_ray_t
 		 * @param res return location for the
 		 *   transformed ray
 		 */
-		public transform_ray(_r: Ray, res: Ray): void;
+		public transform_ray(r: Ray, res: Ray): void;
 		/**
 		 * Transforms each corner of a #graphene_rect_t using the given matrix #m.
 		 * 
 		 * The result is a coplanar quadrilateral.
 		 * 
 		 * See also: graphene_matrix_transform_point()
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @param res return location for the
 		 *   transformed quad
 		 */
-		public transform_rect(_r: Rect, res: Quad): void;
+		public transform_rect(r: Rect, res: Quad): void;
 		/**
 		 * Transforms a #graphene_sphere_t using the given matrix #m. The
 		 * result is the bounding sphere containing the transformed sphere.
-		 * @param _s a #graphene_sphere_t
+		 * @param s a #graphene_sphere_t
 		 * @param res return location for the bounds
 		 *   of the transformed sphere
 		 */
-		public transform_sphere(_s: Sphere, res: Sphere): void;
+		public transform_sphere(s: Sphere, res: Sphere): void;
 		/**
 		 * Transforms the given #graphene_vec3_t using the matrix #m.
 		 * 
@@ -998,18 +998,18 @@ declare namespace imports.gi.Graphene {
 		 * be ignored.
 		 * 
 		 * See also: graphene_simd4x4f_vec3_mul()
-		 * @param _v a #graphene_vec3_t
+		 * @param v a #graphene_vec3_t
 		 * @param res return location for a #graphene_vec3_t
 		 */
-		public transform_vec3(_v: Vec3, res: Vec3): void;
+		public transform_vec3(v: Vec3, res: Vec3): void;
 		/**
 		 * Transforms the given #graphene_vec4_t using the matrix #m.
 		 * 
 		 * See also: graphene_simd4x4f_vec4_mul()
-		 * @param _v a #graphene_vec4_t
+		 * @param v a #graphene_vec4_t
 		 * @param res return location for a #graphene_vec4_t
 		 */
-		public transform_vec4(_v: Vec4, res: Vec4): void;
+		public transform_vec4(v: Vec4, res: Vec4): void;
 		/**
 		 * Adds a translation transformation to #m using the coordinates
 		 * of the given #graphene_point3d_t.
@@ -1038,22 +1038,22 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Undoes the transformation on the corners of a #graphene_rect_t using the
 		 * given matrix, within the given axis aligned rectangular #bounds.
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @param bounds the bounds of the transformation
 		 * @param res return location for the
 		 *   untransformed rectangle
 		 */
-		public untransform_bounds(_r: Rect, bounds: Rect, res: Rect): void;
+		public untransform_bounds(r: Rect, bounds: Rect, res: Rect): void;
 		/**
 		 * Undoes the transformation of a #graphene_point_t using the
 		 * given matrix, within the given axis aligned rectangular #bounds.
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @param bounds the bounds of the transformation
 		 * @param res return location for the
 		 *   untransformed point
 		 * @returns `true` if the point was successfully untransformed
 		 */
-		public untransform_point(_p: Point, bounds: Rect, res: Point): boolean;
+		public untransform_point(p: Point, bounds: Rect, res: Point): boolean;
 	}
 
 	/**
@@ -1084,10 +1084,10 @@ declare namespace imports.gi.Graphene {
 		public distance(point: Point3D): number;
 		/**
 		 * Checks whether the two given #graphene_plane_t are equal.
-		 * @param _b a #graphene_plane_t
+		 * @param b a #graphene_plane_t
 		 * @returns `true` if the given planes are equal
 		 */
-		public equal(_b: Plane): boolean;
+		public equal(b: Plane): boolean;
 		/**
 		 * Frees the resources allocated by graphene_plane_alloc().
 		 */
@@ -1136,12 +1136,12 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The winding order is counter-clockwise, and determines which direction
 		 * the normal vector will point.
-		 * @param _a a #graphene_point3d_t
-		 * @param _b a #graphene_point3d_t
-		 * @param _c a #graphene_point3d_t
+		 * @param a a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
+		 * @param c a #graphene_point3d_t
 		 * @returns the initialized plane
 		 */
-		public init_from_points(_a: Point3D, _b: Point3D, _c: Point3D): Plane;
+		public init_from_points(a: Point3D, b: Point3D, c: Point3D): Plane;
 		/**
 		 * Initializes the given #graphene_plane_t using the components of
 		 * the given #graphene_vec4_t vector.
@@ -1220,10 +1220,10 @@ declare namespace imports.gi.Graphene {
 		public y: number;
 		/**
 		 * Computes the distance between #a and #b.
-		 * @param _b a #graphene_point_t
+		 * @param b a #graphene_point_t
 		 * @returns the distance between the two points
 		 */
-		public distance(_b: Point): number;
+		public distance(b: Point): number;
 		/**
 		 * Checks if the two points #a and #b point to the same
 		 * coordinates.
@@ -1231,10 +1231,10 @@ declare namespace imports.gi.Graphene {
 		 * This function accounts for floating point fluctuations; if
 		 * you want to control the fuzziness of the match, you can use
 		 * graphene_point_near() instead.
-		 * @param _b a #graphene_point_t
+		 * @param b a #graphene_point_t
 		 * @returns `true` if the points have the same coordinates
 		 */
-		public equal(_b: Point): boolean;
+		public equal(b: Point): boolean;
 		/**
 		 * Frees the resources allocated by graphene_point_alloc().
 		 */
@@ -1243,11 +1243,11 @@ declare namespace imports.gi.Graphene {
 		 * Initializes #p to the given #x and #y coordinates.
 		 * 
 		 * It's safe to call this function multiple times.
-		 * @param _x the X coordinate
-		 * @param _y the Y coordinate
+		 * @param x the X coordinate
+		 * @param y the Y coordinate
 		 * @returns the initialized point
 		 */
-		public init(_x: number, _y: number): Point;
+		public init(x: number, y: number): Point;
 		/**
 		 * Initializes #p with the same coordinates of #src.
 		 * @param src the #graphene_point_t to use
@@ -1263,26 +1263,26 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Linearly interpolates the coordinates of #a and #b using the
 		 * given #factor.
-		 * @param _b a #graphene_point_t
+		 * @param b a #graphene_point_t
 		 * @param factor the linear interpolation factor
 		 * @param res return location for the interpolated
 		 *   point
 		 */
-		public interpolate(_b: Point, factor: number, res: Point): void;
+		public interpolate(b: Point, factor: number, res: Point): void;
 		/**
 		 * Checks whether the two points #a and #b are within
 		 * the threshold of #epsilon.
-		 * @param _b a #graphene_point_t
+		 * @param b a #graphene_point_t
 		 * @param epsilon threshold between the two points
 		 * @returns `true` if the distance is within #epsilon
 		 */
-		public near(_b: Point, epsilon: number): boolean;
+		public near(b: Point, epsilon: number): boolean;
 		/**
 		 * Stores the coordinates of the given #graphene_point_t into a
 		 * #graphene_vec2_t.
-		 * @param _v return location for the vertex
+		 * @param v return location for the vertex
 		 */
-		public to_vec2(_v: Vec2): void;
+		public to_vec2(v: Vec2): void;
 	}
 
 	/**
@@ -1312,43 +1312,43 @@ declare namespace imports.gi.Graphene {
 		public z: number;
 		/**
 		 * Computes the cross product of the two given #graphene_point3d_t.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @param res return location for the cross
 		 *   product
 		 */
-		public cross(_b: Point3D, res: Point3D): void;
+		public cross(b: Point3D, res: Point3D): void;
 		/**
 		 * Computes the distance between the two given #graphene_point3d_t.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @param delta return location for the distance
 		 *   components on the X, Y, and Z axis
 		 * @returns the distance between two points
 		 */
-		public distance(_b: Point3D, delta: Vec3 | null): number;
+		public distance(b: Point3D, delta: Vec3 | null): number;
 		/**
 		 * Computes the dot product of the two given #graphene_point3d_t.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @returns the value of the dot product
 		 */
-		public dot(_b: Point3D): number;
+		public dot(b: Point3D): number;
 		/**
 		 * Checks whether two given points are equal.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @returns `true` if the points are equal
 		 */
-		public equal(_b: Point3D): boolean;
+		public equal(b: Point3D): boolean;
 		/**
 		 * Frees the resources allocated via graphene_point3d_alloc().
 		 */
 		public free(): void;
 		/**
 		 * Initializes a #graphene_point3d_t with the given coordinates.
-		 * @param _x the X coordinate of the point
-		 * @param _y the Y coordinate of the point
-		 * @param _z the Z coordinate of the point
+		 * @param x the X coordinate of the point
+		 * @param y the Y coordinate of the point
+		 * @param z the Z coordinate of the point
 		 * @returns the initialized #graphene_point3d_t
 		 */
-		public init(_x: number, _y: number, _z: number): Point3D;
+		public init(x: number, y: number, z: number): Point3D;
 		/**
 		 * Initializes a #graphene_point3d_t using the coordinates of
 		 * another #graphene_point3d_t.
@@ -1359,19 +1359,19 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_point3d_t using the components
 		 * of a #graphene_vec3_t.
-		 * @param _v a #graphene_vec3_t
+		 * @param v a #graphene_vec3_t
 		 * @returns the initialized #graphene_point3d_t
 		 */
-		public init_from_vec3(_v: Vec3): Point3D;
+		public init_from_vec3(v: Vec3): Point3D;
 		/**
 		 * Linearly interpolates each component of #a and #b using the
 		 * provided #factor, and places the result in #res.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @param factor the interpolation factor
 		 * @param res the return location for the
 		 *   interpolated #graphene_point3d_t
 		 */
-		public interpolate(_b: Point3D, factor: number, res: Point3D): void;
+		public interpolate(b: Point3D, factor: number, res: Point3D): void;
 		/**
 		 * Computes the length of the vector represented by the
 		 * coordinates of the given #graphene_point3d_t.
@@ -1381,11 +1381,11 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Checks whether the two points are near each other, within
 		 * an #epsilon factor.
-		 * @param _b a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
 		 * @param epsilon fuzzyness factor
 		 * @returns `true` if the points are near each other
 		 */
-		public near(_b: Point3D, epsilon: number): boolean;
+		public near(b: Point3D, epsilon: number): boolean;
 		/**
 		 * Computes the normalization of the vector represented by the
 		 * coordinates of the given #graphene_point3d_t.
@@ -1418,9 +1418,9 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Stores the coordinates of a #graphene_point3d_t into a
 		 * #graphene_vec3_t.
-		 * @param _v return location for a #graphene_vec3_t
+		 * @param v return location for a #graphene_vec3_t
 		 */
-		public to_vec3(_v: Vec3): void;
+		public to_vec3(v: Vec3): void;
 	}
 
 	/**
@@ -1442,15 +1442,15 @@ declare namespace imports.gi.Graphene {
 		public readonly points: Point[];
 		/**
 		 * Computes the bounding rectangle of #q and places it into #r.
-		 * @param _r return location for a #graphene_rect_t
+		 * @param r return location for a #graphene_rect_t
 		 */
-		public bounds(_r: Rect): void;
+		public bounds(r: Rect): void;
 		/**
 		 * Checks if the given #graphene_quad_t contains the given #graphene_point_t.
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @returns `true` if the point is inside the #graphene_quad_t
 		 */
-		public contains(_p: Point): boolean;
+		public contains(p: Point): boolean;
 		/**
 		 * Frees the resources allocated by graphene_quad_alloc()
 		 */
@@ -1479,10 +1479,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_quad_t using the four corners of the
 		 * given #graphene_rect_t.
-		 * @param _r a #graphene_rect_t
+		 * @param r a #graphene_rect_t
 		 * @returns the initialized #graphene_quad_t
 		 */
-		public init_from_rect(_r: Rect): Quad;
+		public init_from_rect(r: Rect): Quad;
 	}
 
 	/**
@@ -1507,35 +1507,35 @@ declare namespace imports.gi.Graphene {
 		public readonly w: number;
 		/**
 		 * Adds two #graphene_quaternion_t #a and #b.
-		 * @param _b a #graphene_quaternion_t
+		 * @param b a #graphene_quaternion_t
 		 * @param res the result of the operation
 		 */
-		public add(_b: Quaternion, res: Quaternion): void;
+		public add(b: Quaternion, res: Quaternion): void;
 		/**
 		 * Computes the dot product of two #graphene_quaternion_t.
-		 * @param _b a #graphene_quaternion_t
+		 * @param b a #graphene_quaternion_t
 		 * @returns the value of the dot products
 		 */
-		public dot(_b: Quaternion): number;
+		public dot(b: Quaternion): number;
 		/**
 		 * Checks whether the given quaternions are equal.
-		 * @param _b a #graphene_quaternion_t
+		 * @param b a #graphene_quaternion_t
 		 * @returns `true` if the quaternions are equal
 		 */
-		public equal(_b: Quaternion): boolean;
+		public equal(b: Quaternion): boolean;
 		/**
 		 * Releases the resources allocated by graphene_quaternion_alloc().
 		 */
 		public free(): void;
 		/**
 		 * Initializes a #graphene_quaternion_t using the given four values.
-		 * @param _x the first component of the quaternion
-		 * @param _y the second component of the quaternion
-		 * @param _z the third component of the quaternion
-		 * @param _w the fourth component of the quaternion
+		 * @param x the first component of the quaternion
+		 * @param y the second component of the quaternion
+		 * @param z the third component of the quaternion
+		 * @param w the fourth component of the quaternion
 		 * @returns the initialized quaternion
 		 */
-		public init(_x: number, _y: number, _z: number, _w: number): Quaternion;
+		public init(x: number, y: number, z: number, w: number): Quaternion;
 		/**
 		 * Initializes a #graphene_quaternion_t using an #angle on a
 		 * specific #axis.
@@ -1558,17 +1558,17 @@ declare namespace imports.gi.Graphene {
 		public init_from_angles(deg_x: number, deg_y: number, deg_z: number): Quaternion;
 		/**
 		 * Initializes a #graphene_quaternion_t using the given #graphene_euler_t.
-		 * @param _e a #graphene_euler_t
+		 * @param e a #graphene_euler_t
 		 * @returns the initialized #graphene_quaternion_t
 		 */
-		public init_from_euler(_e: Euler): Quaternion;
+		public init_from_euler(e: Euler): Quaternion;
 		/**
 		 * Initializes a #graphene_quaternion_t using the rotation components
 		 * of a transformation matrix.
-		 * @param _m a #graphene_matrix_t
+		 * @param m a #graphene_matrix_t
 		 * @returns the initialized quaternion
 		 */
-		public init_from_matrix(_m: Matrix): Quaternion;
+		public init_from_matrix(m: Matrix): Quaternion;
 		/**
 		 * Initializes a #graphene_quaternion_t with the values from #src.
 		 * @param src a #graphene_quaternion_t
@@ -1608,10 +1608,10 @@ declare namespace imports.gi.Graphene {
 		public invert(res: Quaternion): void;
 		/**
 		 * Multiplies two #graphene_quaternion_t #a and #b.
-		 * @param _b a #graphene_quaternion_t
+		 * @param b a #graphene_quaternion_t
 		 * @param res the result of the operation
 		 */
-		public multiply(_b: Quaternion, res: Quaternion): void;
+		public multiply(b: Quaternion, res: Quaternion): void;
 		/**
 		 * Normalizes a #graphene_quaternion_t.
 		 * @param res return location for the normalized
@@ -1629,12 +1629,12 @@ declare namespace imports.gi.Graphene {
 		 * Interpolates between the two given quaternions using a spherical
 		 * linear interpolation, or [SLERP](http://en.wikipedia.org/wiki/Slerp),
 		 * using the given interpolation #factor.
-		 * @param _b a #graphene_quaternion_t
+		 * @param b a #graphene_quaternion_t
 		 * @param factor the linear interpolation factor
 		 * @param res return location for the interpolated
 		 *   quaternion
 		 */
-		public slerp(_b: Quaternion, factor: number, res: Quaternion): void;
+		public slerp(b: Quaternion, factor: number, res: Quaternion): void;
 		/**
 		 * Converts a quaternion into an #angle, #axis pair.
 		 * @param axis return location for the rotation axis
@@ -1657,9 +1657,9 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Converts a quaternion into a transformation matrix expressing
 		 * the rotation defined by the #graphene_quaternion_t.
-		 * @param _m a #graphene_matrix_t
+		 * @param m a #graphene_matrix_t
 		 */
-		public to_matrix(_m: Matrix): void;
+		public to_matrix(m: Matrix): void;
 		/**
 		 * Converts a #graphene_quaternion_t to its corresponding rotations
 		 * on the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
@@ -1705,10 +1705,10 @@ declare namespace imports.gi.Graphene {
 		public readonly direction: Vec3;
 		/**
 		 * Checks whether the two given #graphene_ray_t are equal.
-		 * @param _b a #graphene_ray_t
+		 * @param b a #graphene_ray_t
 		 * @returns `true` if the given rays are equal
 		 */
-		public equal(_b: Ray): boolean;
+		public equal(b: Ray): boolean;
 		/**
 		 * Frees the resources allocated by graphene_ray_alloc().
 		 */
@@ -1716,10 +1716,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Computes the point on the given #graphene_ray_t that is closest to the
 		 * given point #p.
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @param res return location for the closest point3d
 		 */
-		public get_closest_point_to_point(_p: Point3D, res: Point3D): void;
+		public get_closest_point_to_point(p: Point3D, res: Point3D): void;
 		/**
 		 * Retrieves the direction of the given #graphene_ray_t.
 		 * @param direction return location for the direction
@@ -1730,10 +1730,10 @@ declare namespace imports.gi.Graphene {
 		 * given plane.
 		 * 
 		 * If the ray does not intersect the plane, this function returns `INFINITY`.
-		 * @param _p a #graphene_plane_t
+		 * @param p a #graphene_plane_t
 		 * @returns the distance of the origin of the ray from the plane
 		 */
-		public get_distance_to_plane(_p: Plane): number;
+		public get_distance_to_plane(p: Plane): number;
 		/**
 		 * Computes the distance of the closest approach between the
 		 * given #graphene_ray_t #r and the point #p.
@@ -1741,10 +1741,10 @@ declare namespace imports.gi.Graphene {
 		 * The closest approach to a ray from a point is the distance
 		 * between the point and the projection of the point on the
 		 * ray itself.
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @returns the distance of the point
 		 */
-		public get_distance_to_point(_p: Point3D): number;
+		public get_distance_to_point(p: Point3D): number;
 		/**
 		 * Retrieves the origin of the given #graphene_ray_t.
 		 * @param origin return location for the origin
@@ -1753,10 +1753,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Retrieves the coordinates of a point at the distance #t along the
 		 * given #graphene_ray_t.
-		 * @param _t the distance along the ray
+		 * @param t the distance along the ray
 		 * @param position return location for the position
 		 */
-		public get_position_at(_t: number, position: Point3D): void;
+		public get_position_at(t: number, position: Point3D): void;
 		/**
 		 * Initializes the given #graphene_ray_t using the given #origin
 		 * and #direction values.
@@ -1782,51 +1782,51 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_box_t #b.
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @returns the type of intersection
 		 */
-		public intersect_box(_b: Box): RayIntersectionKind;
+		public intersect_box(b: Box): RayIntersectionKind;
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_sphere_t #s.
-		 * @param _s a #graphene_sphere_t
+		 * @param s a #graphene_sphere_t
 		 * @returns the type of intersection
 		 */
-		public intersect_sphere(_s: Sphere): RayIntersectionKind;
+		public intersect_sphere(s: Sphere): RayIntersectionKind;
 		/**
 		 * Intersects the given #graphene_ray_t #r with the given
 		 * #graphene_triangle_t #t.
-		 * @param _t a #graphene_triangle_t
+		 * @param t a #graphene_triangle_t
 		 * @returns the type of intersection
 		 */
-		public intersect_triangle(_t: Triangle): RayIntersectionKind;
+		public intersect_triangle(t: Triangle): RayIntersectionKind;
 		/**
 		 * Checks whether the given #graphene_ray_t #r intersects the
 		 * given #graphene_box_t #b.
 		 * 
 		 * See also: graphene_ray_intersect_box()
-		 * @param _b a #graphene_box_t
+		 * @param b a #graphene_box_t
 		 * @returns `true` if the ray intersects the box
 		 */
-		public intersects_box(_b: Box): boolean;
+		public intersects_box(b: Box): boolean;
 		/**
 		 * Checks if the given #graphene_ray_t #r intersects the
 		 * given #graphene_sphere_t #s.
 		 * 
 		 * See also: graphene_ray_intersect_sphere()
-		 * @param _s a #graphene_sphere_t
+		 * @param s a #graphene_sphere_t
 		 * @returns `true` if the ray intersects the sphere
 		 */
-		public intersects_sphere(_s: Sphere): boolean;
+		public intersects_sphere(s: Sphere): boolean;
 		/**
 		 * Checks whether the given #graphene_ray_t #r intersects the
 		 * given #graphene_triangle_t #b.
 		 * 
 		 * See also: graphene_ray_intersect_triangle()
-		 * @param _t a #graphene_triangle_t
+		 * @param t a #graphene_triangle_t
 		 * @returns `true` if the ray intersects the triangle
 		 */
-		public intersects_triangle(_t: Triangle): boolean;
+		public intersects_triangle(t: Triangle): boolean;
 	}
 
 	/**
@@ -1856,29 +1856,29 @@ declare namespace imports.gi.Graphene {
 		public size: Size;
 		/**
 		 * Checks whether a #graphene_rect_t contains the given coordinates.
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @returns `true` if the rectangle contains the point
 		 */
-		public contains_point(_p: Point): boolean;
+		public contains_point(p: Point): boolean;
 		/**
 		 * Checks whether a #graphene_rect_t fully contains the given
 		 * rectangle.
-		 * @param _b a #graphene_rect_t
+		 * @param b a #graphene_rect_t
 		 * @returns `true` if the rectangle #a fully contains #b
 		 */
-		public contains_rect(_b: Rect): boolean;
+		public contains_rect(b: Rect): boolean;
 		/**
 		 * Checks whether the two given rectangle are equal.
-		 * @param _b a #graphene_rect_t
+		 * @param b a #graphene_rect_t
 		 * @returns `true` if the rectangles are equal
 		 */
-		public equal(_b: Rect): boolean;
+		public equal(b: Rect): boolean;
 		/**
 		 * Expands a #graphene_rect_t to contain the given #graphene_point_t.
-		 * @param _p a #graphene_point_t
+		 * @param p a #graphene_point_t
 		 * @param res return location for the expanded rectangle
 		 */
-		public expand(_p: Point, res: Rect): void;
+		public expand(p: Point, res: Rect): void;
 		/**
 		 * Frees the resources allocated by graphene_rect_alloc().
 		 */
@@ -1890,19 +1890,19 @@ declare namespace imports.gi.Graphene {
 		public get_area(): number;
 		/**
 		 * Retrieves the coordinates of the bottom-left corner of the given rectangle.
-		 * @param _p return location for a #graphene_point_t
+		 * @param p return location for a #graphene_point_t
 		 */
-		public get_bottom_left(_p: Point): void;
+		public get_bottom_left(p: Point): void;
 		/**
 		 * Retrieves the coordinates of the bottom-right corner of the given rectangle.
-		 * @param _p return location for a #graphene_point_t
+		 * @param p return location for a #graphene_point_t
 		 */
-		public get_bottom_right(_p: Point): void;
+		public get_bottom_right(p: Point): void;
 		/**
 		 * Retrieves the coordinates of the center of the given rectangle.
-		 * @param _p return location for a #graphene_point_t
+		 * @param p return location for a #graphene_point_t
 		 */
-		public get_center(_p: Point): void;
+		public get_center(p: Point): void;
 		/**
 		 * Retrieves the normalized height of the given rectangle.
 		 * @returns the normalized height of the rectangle
@@ -1910,14 +1910,14 @@ declare namespace imports.gi.Graphene {
 		public get_height(): number;
 		/**
 		 * Retrieves the coordinates of the top-left corner of the given rectangle.
-		 * @param _p return location for a #graphene_point_t
+		 * @param p return location for a #graphene_point_t
 		 */
-		public get_top_left(_p: Point): void;
+		public get_top_left(p: Point): void;
 		/**
 		 * Retrieves the coordinates of the top-right corner of the given rectangle.
-		 * @param _p return location for a #graphene_point_t
+		 * @param p return location for a #graphene_point_t
 		 */
-		public get_top_right(_p: Point): void;
+		public get_top_right(p: Point): void;
 		/**
 		 * Computes the four vertices of a #graphene_rect_t.
 		 * @param vertices return location for an array
@@ -1946,13 +1946,13 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * This function will implicitly normalize the #graphene_rect_t
 		 * before returning.
-		 * @param _x the X coordinate of the #graphene_rect_t.origin
-		 * @param _y the Y coordinate of the #graphene_rect_t.origin
+		 * @param x the X coordinate of the #graphene_rect_t.origin
+		 * @param y the Y coordinate of the #graphene_rect_t.origin
 		 * @param width the width of the #graphene_rect_t.size
 		 * @param height the height of the #graphene_rect_t.size
 		 * @returns the initialized rectangle
 		 */
-		public init(_x: number, _y: number, width: number, height: number): Rect;
+		public init(x: number, y: number, width: number, height: number): Rect;
 		/**
 		 * Initializes #r using the given #src rectangle.
 		 * 
@@ -2005,12 +2005,12 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Linearly interpolates the origin and size of the two given
 		 * rectangles.
-		 * @param _b a #graphene_rect_t
+		 * @param b a #graphene_rect_t
 		 * @param factor the linear interpolation factor
 		 * @param res return location for the
 		 *   interpolated rectangle
 		 */
-		public interpolate(_b: Rect, factor: number, res: Rect): void;
+		public interpolate(b: Rect, factor: number, res: Rect): void;
 		/**
 		 * Computes the intersection of the two given rectangles.
 		 * 
@@ -2020,12 +2020,12 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * If the two rectangles do not intersect, #res will contain
 		 * a degenerate rectangle with origin in (0, 0) and a size of 0.
-		 * @param _b a #graphene_rect_t
+		 * @param b a #graphene_rect_t
 		 * @param res return location for
 		 *   a #graphene_rect_t
 		 * @returns `true` if the two rectangles intersect
 		 */
-		public intersection(_b: Rect, res: Rect | null): boolean;
+		public intersection(b: Rect, res: Rect | null): boolean;
 		/**
 		 * Normalizes the passed rectangle.
 		 * 
@@ -2126,10 +2126,10 @@ declare namespace imports.gi.Graphene {
 		 * ![](rectangle-union.png)
 		 * 
 		 * The union in the image above is the blue outline.
-		 * @param _b a #graphene_rect_t
+		 * @param b a #graphene_rect_t
 		 * @param res return location for a #graphene_rect_t
 		 */
-		public union(_b: Rect, res: Rect): void;
+		public union(b: Rect, res: Rect): void;
 	}
 
 	interface Simd4F {}
@@ -2173,10 +2173,10 @@ declare namespace imports.gi.Graphene {
 		public height: number;
 		/**
 		 * Checks whether the two give #graphene_size_t are equal.
-		 * @param _b a #graphene_size_t
+		 * @param b a #graphene_size_t
 		 * @returns `true` if the sizes are equal
 		 */
-		public equal(_b: Size): boolean;
+		public equal(b: Size): boolean;
 		/**
 		 * Frees the resources allocated by graphene_size_alloc().
 		 */
@@ -2198,11 +2198,11 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Linearly interpolates the two given #graphene_size_t using the given
 		 * interpolation #factor.
-		 * @param _b a #graphene_size_t
+		 * @param b a #graphene_size_t
 		 * @param factor the linear interpolation factor
 		 * @param res return location for the interpolated size
 		 */
-		public interpolate(_b: Size, factor: number, res: Size): void;
+		public interpolate(b: Size, factor: number, res: Size): void;
 		/**
 		 * Scales the components of a #graphene_size_t using the given #factor.
 		 * @param factor the scaling factor
@@ -2243,10 +2243,10 @@ declare namespace imports.gi.Graphene {
 		public distance(point: Point3D): number;
 		/**
 		 * Checks whether two #graphene_sphere_t are equal.
-		 * @param _b a #graphene_sphere_t
+		 * @param b a #graphene_sphere_t
 		 * @returns `true` if the spheres are equal
 		 */
-		public equal(_b: Sphere): boolean;
+		public equal(b: Sphere): boolean;
 		/**
 		 * Frees the resources allocated by graphene_sphere_alloc().
 		 */
@@ -2334,16 +2334,16 @@ declare namespace imports.gi.Graphene {
 		public readonly c: Vec3;
 		/**
 		 * Checks whether the given triangle #t contains the point #p.
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @returns `true` if the point is inside the triangle
 		 */
-		public contains_point(_p: Point3D): boolean;
+		public contains_point(p: Point3D): boolean;
 		/**
 		 * Checks whether the two given #graphene_triangle_t are equal.
-		 * @param _b a #graphene_triangle_t
+		 * @param b a #graphene_triangle_t
 		 * @returns `true` if the triangles are equal
 		 */
-		public equal(_b: Triangle): boolean;
+		public equal(b: Triangle): boolean;
 		/**
 		 * Frees the resources allocated by graphene_triangle_alloc().
 		 */
@@ -2370,12 +2370,12 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 *  - `res.x = u`
 		 *  - `res.y = v`
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @param res return location for the vector
 		 *   with the barycentric coordinates
 		 * @returns `true` if the barycentric coordinates are valid
 		 */
-		public get_barycoords(_p: Point3D | null, res: Vec2): boolean;
+		public get_barycoords(p: Point3D | null, res: Vec2): boolean;
 		/**
 		 * Computes the bounding box of the given #graphene_triangle_t.
 		 * @param res return location for the box
@@ -2403,14 +2403,14 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Retrieves the three vertices of the given #graphene_triangle_t and returns
 		 * their coordinates as #graphene_point3d_t.
-		 * @param _a return location for the coordinates
+		 * @param a return location for the coordinates
 		 *   of the first vertex
-		 * @param _b return location for the coordinates
+		 * @param b return location for the coordinates
 		 *   of the second vertex
-		 * @param _c return location for the coordinates
+		 * @param c return location for the coordinates
 		 *   of the third vertex
 		 */
-		public get_points(_a: Point3D | null, _b: Point3D | null, _c: Point3D | null): void;
+		public get_points(a: Point3D | null, b: Point3D | null, c: Point3D | null): void;
 		/**
 		 * Computes the UV coordinates of the given point #p.
 		 * 
@@ -2424,7 +2424,7 @@ declare namespace imports.gi.Graphene {
 		 *  - `res.y = v`
 		 * 
 		 * See also: graphene_triangle_get_barycoords()
-		 * @param _p a #graphene_point3d_t
+		 * @param p a #graphene_point3d_t
 		 * @param uv_a the UV coordinates of the first point
 		 * @param uv_b the UV coordinates of the second point
 		 * @param uv_c the UV coordinates of the third point
@@ -2432,40 +2432,40 @@ declare namespace imports.gi.Graphene {
 		 *   of the given point #p
 		 * @returns `true` if the coordinates are valid
 		 */
-		public get_uv(_p: Point3D | null, uv_a: Vec2, uv_b: Vec2, uv_c: Vec2, res: Vec2): boolean;
+		public get_uv(p: Point3D | null, uv_a: Vec2, uv_b: Vec2, uv_c: Vec2, res: Vec2): boolean;
 		/**
 		 * Retrieves the three vertices of the given #graphene_triangle_t.
-		 * @param _a return location for the first vertex
-		 * @param _b return location for the second vertex
-		 * @param _c return location for the third vertex
+		 * @param a return location for the first vertex
+		 * @param b return location for the second vertex
+		 * @param c return location for the third vertex
 		 */
-		public get_vertices(_a: Vec3 | null, _b: Vec3 | null, _c: Vec3 | null): void;
+		public get_vertices(a: Vec3 | null, b: Vec3 | null, c: Vec3 | null): void;
 		/**
 		 * Initializes a #graphene_triangle_t using the three given arrays
 		 * of floating point values, each representing the coordinates of
 		 * a point in 3D space.
-		 * @param _a an array of 3 floating point values
-		 * @param _b an array of 3 floating point values
-		 * @param _c an array of 3 floating point values
+		 * @param a an array of 3 floating point values
+		 * @param b an array of 3 floating point values
+		 * @param c an array of 3 floating point values
 		 * @returns the initialized #graphene_triangle_t
 		 */
-		public init_from_float(_a: number[], _b: number[], _c: number[]): Triangle;
+		public init_from_float(a: number[], b: number[], c: number[]): Triangle;
 		/**
 		 * Initializes a #graphene_triangle_t using the three given 3D points.
-		 * @param _a a #graphene_point3d_t
-		 * @param _b a #graphene_point3d_t
-		 * @param _c a #graphene_point3d_t
+		 * @param a a #graphene_point3d_t
+		 * @param b a #graphene_point3d_t
+		 * @param c a #graphene_point3d_t
 		 * @returns the initialized #graphene_triangle_t
 		 */
-		public init_from_point3d(_a: Point3D | null, _b: Point3D | null, _c: Point3D | null): Triangle;
+		public init_from_point3d(a: Point3D | null, b: Point3D | null, c: Point3D | null): Triangle;
 		/**
 		 * Initializes a #graphene_triangle_t using the three given vectors.
-		 * @param _a a #graphene_vec3_t
-		 * @param _b a #graphene_vec3_t
-		 * @param _c a #graphene_vec3_t
+		 * @param a a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
+		 * @param c a #graphene_vec3_t
 		 * @returns the initialized #graphene_triangle_t
 		 */
-		public init_from_vec3(_a: Vec3 | null, _b: Vec3 | null, _c: Vec3 | null): Triangle;
+		public init_from_vec3(a: Vec3 | null, b: Vec3 | null, c: Vec3 | null): Triangle;
 	}
 
 	/**
@@ -2492,24 +2492,24 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Adds each component of the two passed vectors and places
 		 * each result into the components of #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res return location for the result
 		 */
-		public add(_b: Vec2, res: Vec2): void;
+		public add(b: Vec2, res: Vec2): void;
 		/**
 		 * Divides each component of the first operand #a by the corresponding
 		 * component of the second operand #b, and places the results into the
 		 * vector #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res return location for the result
 		 */
-		public divide(_b: Vec2, res: Vec2): void;
+		public divide(b: Vec2, res: Vec2): void;
 		/**
 		 * Computes the dot product of the two given vectors.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @returns the dot product of the vectors
 		 */
-		public dot(_b: Vec2): number;
+		public dot(b: Vec2): number;
 		/**
 		 * Checks whether the two given #graphene_vec2_t are equal.
 		 * @param v2 a #graphene_vec2_t
@@ -2534,11 +2534,11 @@ declare namespace imports.gi.Graphene {
 		 * Initializes a #graphene_vec2_t using the given values.
 		 * 
 		 * This function can be called multiple times.
-		 * @param _x the X field of the vector
-		 * @param _y the Y field of the vector
+		 * @param x the X field of the vector
+		 * @param y the Y field of the vector
 		 * @returns the initialized vector
 		 */
-		public init(_x: number, _y: number): Vec2;
+		public init(x: number, y: number): Vec2;
 		/**
 		 * Initializes #v with the contents of the given array.
 		 * @param src an array of floating point values
@@ -2567,24 +2567,24 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Compares the two given vectors and places the maximum
 		 * values of each component into #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res the resulting vector
 		 */
-		public max(_b: Vec2, res: Vec2): void;
+		public max(b: Vec2, res: Vec2): void;
 		/**
 		 * Compares the two given vectors and places the minimum
 		 * values of each component into #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res the resulting vector
 		 */
-		public min(_b: Vec2, res: Vec2): void;
+		public min(b: Vec2, res: Vec2): void;
 		/**
 		 * Multiplies each component of the two passed vectors and places
 		 * each result into the components of #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res return location for the result
 		 */
-		public multiply(_b: Vec2, res: Vec2): void;
+		public multiply(b: Vec2, res: Vec2): void;
 		/**
 		 * Compares the two given #graphene_vec2_t vectors and checks
 		 * whether their values are within the given #epsilon.
@@ -2614,10 +2614,10 @@ declare namespace imports.gi.Graphene {
 		 * Subtracts from each component of the first operand #a the
 		 * corresponding component of the second operand #b and places
 		 * each result into the components of #res.
-		 * @param _b a #graphene_vec2_t
+		 * @param b a #graphene_vec2_t
 		 * @param res return location for the result
 		 */
-		public subtract(_b: Vec2, res: Vec2): void;
+		public subtract(b: Vec2, res: Vec2): void;
 		/**
 		 * Stores the components of #v into an array.
 		 * @param dest return location
@@ -2649,30 +2649,30 @@ declare namespace imports.gi.Graphene {
 		public readonly value: Simd4F;
 		/**
 		 * Adds each component of the two given vectors.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the resulting vector
 		 */
-		public add(_b: Vec3, res: Vec3): void;
+		public add(b: Vec3, res: Vec3): void;
 		/**
 		 * Computes the cross product of the two given vectors.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the resulting vector
 		 */
-		public cross(_b: Vec3, res: Vec3): void;
+		public cross(b: Vec3, res: Vec3): void;
 		/**
 		 * Divides each component of the first operand #a by the corresponding
 		 * component of the second operand #b, and places the results into the
 		 * vector #res.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the resulting vector
 		 */
-		public divide(_b: Vec3, res: Vec3): void;
+		public divide(b: Vec3, res: Vec3): void;
 		/**
 		 * Computes the dot product of the two given vectors.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @returns the value of the dot product
 		 */
-		public dot(_b: Vec3): number;
+		public dot(b: Vec3): number;
 		/**
 		 * Checks whether the two given #graphene_vec3_t are equal.
 		 * @param v2 a #graphene_vec3_t
@@ -2715,10 +2715,10 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Converts a #graphene_vec3_t in a #graphene_vec4_t using #w as
 		 * the value of the fourth component of the resulting vector.
-		 * @param _w the value of the W component
+		 * @param w the value of the W component
 		 * @param res return location for the vector
 		 */
-		public get_xyzw(_w: number, res: Vec4): void;
+		public get_xyzw(w: number, res: Vec4): void;
 		/**
 		 * Retrieves the second component of the given vector #v.
 		 * @returns the value of the second component of the vector
@@ -2733,13 +2733,13 @@ declare namespace imports.gi.Graphene {
 		 * Initializes a #graphene_vec3_t using the given values.
 		 * 
 		 * This function can be called multiple times.
-		 * @param _x the X field of the vector
-		 * @param _y the Y field of the vector
-		 * @param _z the Z field of the vector
+		 * @param x the X field of the vector
+		 * @param y the Y field of the vector
+		 * @param z the Z field of the vector
 		 * @returns a pointer to the initialized
 		 *   vector
 		 */
-		public init(_x: number, _y: number, _z: number): Vec3;
+		public init(x: number, y: number, z: number): Vec3;
 		/**
 		 * Initializes a #graphene_vec3_t with the values from an array.
 		 * @param src an array of 3 floating point values
@@ -2768,23 +2768,23 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Compares each component of the two given vectors and creates a
 		 * vector that contains the maximum values.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the result vector
 		 */
-		public max(_b: Vec3, res: Vec3): void;
+		public max(b: Vec3, res: Vec3): void;
 		/**
 		 * Compares each component of the two given vectors and creates a
 		 * vector that contains the minimum values.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the result vector
 		 */
-		public min(_b: Vec3, res: Vec3): void;
+		public min(b: Vec3, res: Vec3): void;
 		/**
 		 * Multiplies each component of the two given vectors.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the resulting vector
 		 */
-		public multiply(_b: Vec3, res: Vec3): void;
+		public multiply(b: Vec3, res: Vec3): void;
 		/**
 		 * Compares the two given #graphene_vec3_t vectors and checks
 		 * whether their values are within the given #epsilon.
@@ -2813,10 +2813,10 @@ declare namespace imports.gi.Graphene {
 		 * Subtracts from each component of the first operand #a the
 		 * corresponding component of the second operand #b and places
 		 * each result into the components of #res.
-		 * @param _b a #graphene_vec3_t
+		 * @param b a #graphene_vec3_t
 		 * @param res return location for the resulting vector
 		 */
-		public subtract(_b: Vec3, res: Vec3): void;
+		public subtract(b: Vec3, res: Vec3): void;
 		/**
 		 * Copies the components of a #graphene_vec3_t into the given array.
 		 * @param dest return location for
@@ -2848,24 +2848,24 @@ declare namespace imports.gi.Graphene {
 		public readonly value: Simd4F;
 		/**
 		 * Adds each component of the two given vectors.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the resulting vector
 		 */
-		public add(_b: Vec4, res: Vec4): void;
+		public add(b: Vec4, res: Vec4): void;
 		/**
 		 * Divides each component of the first operand #a by the corresponding
 		 * component of the second operand #b, and places the results into the
 		 * vector #res.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the resulting vector
 		 */
-		public divide(_b: Vec4, res: Vec4): void;
+		public divide(b: Vec4, res: Vec4): void;
 		/**
 		 * Computes the dot product of the two given vectors.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @returns the value of the dot product
 		 */
-		public dot(_b: Vec4): number;
+		public dot(b: Vec4): number;
 		/**
 		 * Checks whether the two given #graphene_vec4_t are equal.
 		 * @param v2 a #graphene_vec4_t
@@ -2912,14 +2912,14 @@ declare namespace imports.gi.Graphene {
 		 * Initializes a #graphene_vec4_t using the given values.
 		 * 
 		 * This function can be called multiple times.
-		 * @param _x the X field of the vector
-		 * @param _y the Y field of the vector
-		 * @param _z the Z field of the vector
-		 * @param _w the W field of the vector
+		 * @param x the X field of the vector
+		 * @param y the Y field of the vector
+		 * @param z the Z field of the vector
+		 * @param w the W field of the vector
 		 * @returns a pointer to the initialized
 		 *   vector
 		 */
-		public init(_x: number, _y: number, _z: number, _w: number): Vec4;
+		public init(x: number, y: number, z: number, w: number): Vec4;
 		/**
 		 * Initializes a #graphene_vec4_t with the values inside the given array.
 		 * @param src an array of four floating point values
@@ -2930,19 +2930,19 @@ declare namespace imports.gi.Graphene {
 		 * Initializes a #graphene_vec4_t using the components of a
 		 * #graphene_vec2_t and the values of #z and #w.
 		 * @param src a #graphene_vec2_t
-		 * @param _z the value for the third component of #v
-		 * @param _w the value for the fourth component of #v
+		 * @param z the value for the third component of #v
+		 * @param w the value for the fourth component of #v
 		 * @returns the initialized vector
 		 */
-		public init_from_vec2(src: Vec2, _z: number, _w: number): Vec4;
+		public init_from_vec2(src: Vec2, z: number, w: number): Vec4;
 		/**
 		 * Initializes a #graphene_vec4_t using the components of a
 		 * #graphene_vec3_t and the value of #w.
 		 * @param src a #graphene_vec3_t
-		 * @param _w the value for the fourth component of #v
+		 * @param w the value for the fourth component of #v
 		 * @returns the initialized vector
 		 */
-		public init_from_vec3(src: Vec3, _w: number): Vec4;
+		public init_from_vec3(src: Vec3, w: number): Vec4;
 		/**
 		 * Initializes a #graphene_vec4_t using the components of
 		 * another #graphene_vec4_t.
@@ -2965,23 +2965,23 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Compares each component of the two given vectors and creates a
 		 * vector that contains the maximum values.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the result vector
 		 */
-		public max(_b: Vec4, res: Vec4): void;
+		public max(b: Vec4, res: Vec4): void;
 		/**
 		 * Compares each component of the two given vectors and creates a
 		 * vector that contains the minimum values.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the result vector
 		 */
-		public min(_b: Vec4, res: Vec4): void;
+		public min(b: Vec4, res: Vec4): void;
 		/**
 		 * Multiplies each component of the two given vectors.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the resulting vector
 		 */
-		public multiply(_b: Vec4, res: Vec4): void;
+		public multiply(b: Vec4, res: Vec4): void;
 		/**
 		 * Compares the two given #graphene_vec4_t vectors and checks
 		 * whether their values are within the given #epsilon.
@@ -3011,10 +3011,10 @@ declare namespace imports.gi.Graphene {
 		 * Subtracts from each component of the first operand #a the
 		 * corresponding component of the second operand #b and places
 		 * each result into the components of #res.
-		 * @param _b a #graphene_vec4_t
+		 * @param b a #graphene_vec4_t
 		 * @param res return location for the resulting vector
 		 */
-		public subtract(_b: Vec4, res: Vec4): void;
+		public subtract(b: Vec4, res: Vec4): void;
 		/**
 		 * Stores the components of the given #graphene_vec4_t into an array
 		 * of floating point values.
@@ -3369,5 +3369,111 @@ declare namespace imports.gi.Graphene {
 	 * @returns a constant vector
 	 */
 	function vec4_zero(): Vec4;
+
+	const PI: number;
+
+	const PI_2: number;
+
+	/**
+	 * Evaluates to the number of components of a #graphene_vec2_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec2_init_from_float() and
+	 * graphene_vec2_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC2_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec2_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC2_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 * @returns Evaluates to the number of components of a #graphene_vec2_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec2_init_from_float() and
+	 * graphene_vec2_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC2_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec2_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC2_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 */
+	const VEC2_LEN: number;
+
+	/**
+	 * Evaluates to the number of components of a #graphene_vec3_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec3_init_from_float() and
+	 * graphene_vec3_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC3_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec3_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC2_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 * @returns Evaluates to the number of components of a #graphene_vec3_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec3_init_from_float() and
+	 * graphene_vec3_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC3_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec3_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC2_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 */
+	const VEC3_LEN: number;
+
+	/**
+	 * Evaluates to the number of components of a #graphene_vec4_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec4_init_from_float() and
+	 * graphene_vec4_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC4_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec4_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC4_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 * @returns Evaluates to the number of components of a #graphene_vec4_t.
+	 * 
+	 * This symbol is useful when declaring a C array of floating
+	 * point values to be used with graphene_vec4_init_from_float() and
+	 * graphene_vec4_to_float(), e.g.
+	 * 
+	 * |[
+	 *   float v[GRAPHENE_VEC4_LEN];
+	 * 
+	 *   // vec is defined elsewhere
+	 *   graphene_vec4_to_float (&vec, v);
+	 * 
+	 *   for (int i = 0; i < GRAPHENE_VEC4_LEN; i++)
+	 *     fprintf (stdout, "component %d: %g\n", i, v[i]);
+	 * ]|
+	 */
+	const VEC4_LEN: number;
 
 }

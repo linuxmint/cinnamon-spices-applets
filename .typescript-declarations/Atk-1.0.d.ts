@@ -14,7 +14,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GObjectAccessible} instead.
 	 */
-	type GObjectAccessibleMixin = IGObjectAccessible & IObject;
+	type GObjectAccessibleMixin = IGObjectAccessible & Object;
 
 	/**
 	 * This object class is derived from AtkObject. It can be used as a
@@ -63,11 +63,11 @@ declare namespace imports.gi.Atk {
 		 * hyperlink etc.
 		 * 
 		 * Multiple anchors are primarily used by client-side image maps.
-		 * @param _i a (zero-index) integer specifying the desired anchor
+		 * @param i a (zero-index) integer specifying the desired anchor
 		 * @returns an {@link Object} associated with this hyperlinks
 		 * i-th anchor
 		 */
-		get_object(_i: number): Object;
+		get_object(i: number): Object;
 		/**
 		 * Gets the index with the hypertext document at which this link begins.
 		 * @returns the index with the hypertext document at which this link begins
@@ -78,10 +78,10 @@ declare namespace imports.gi.Atk {
 		 * by #i of #link_.
 		 * 
 		 * Multiple anchors are primarily used by client-side image maps.
-		 * @param _i a (zero-index) integer specifying the desired anchor
+		 * @param i a (zero-index) integer specifying the desired anchor
 		 * @returns a string specifying the URI
 		 */
-		get_uri(_i: number): string;
+		get_uri(i: number): string;
 		/**
 		 * Indicates whether the link currently displays some or all of its
 		 *           content inline.  Ordinary HTML links will usually return
@@ -117,7 +117,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Hyperlink} instead.
 	 */
-	type HyperlinkMixin = IHyperlink & GObject.IObject & IAction;
+	type HyperlinkMixin = IHyperlink & GObject.Object & Action;
 
 	/**
 	 * An ATK object which encapsulates a link or set of links (for
@@ -161,7 +161,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
-	type MiscMixin = IMisc & GObject.IObject;
+	type MiscMixin = IMisc & GObject.Object;
 
 	/**
 	 * A set of utility functions for thread locking. This interface and
@@ -188,7 +188,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObject} instead.
 	 */
-	type NoOpObjectMixin = INoOpObject & IObject & IAction & IComponent & IDocument & IEditableText & IHypertext & IImage & ISelection & ITable & ITableCell & IText & IValue & IWindow;
+	type NoOpObjectMixin = INoOpObject & Object & Action & Component & Document & EditableText & Hypertext & Image & Selection & Table & TableCell & Text & Value & Window;
 
 	/**
 	 * An AtkNoOpObject is an AtkObject which purports to implement all
@@ -219,7 +219,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObjectFactory} instead.
 	 */
-	type NoOpObjectFactoryMixin = INoOpObjectFactory & IObjectFactory;
+	type NoOpObjectFactoryMixin = INoOpObjectFactory & ObjectFactory;
 
 	/**
 	 * The AtkObjectFactory which creates an AtkNoOpObject. An instance of
@@ -407,11 +407,11 @@ declare namespace imports.gi.Atk {
 		 * Gets a reference to the specified accessible child of the object.
 		 * The accessible children are 0-based so the first accessible child is
 		 * at index 0, the second at index 1 and so on.
-		 * @param _i a gint representing the position of the child, starting from 0
+		 * @param i a gint representing the position of the child, starting from 0
 		 * @returns an {@link Object} representing the specified
 		 * accessible child of the accessible.
 		 */
-		ref_accessible_child(_i: number): Object;
+		ref_accessible_child(i: number): Object;
 		/**
 		 * Gets the {@link RelationSet} associated with the object.
 		 * @returns an {@link RelationSet} representing the relation set
@@ -545,7 +545,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Object} instead.
 	 */
-	type ObjectMixin = IObject & GObject.IObject;
+	type ObjectMixin = IObject & GObject.Object;
 
 	/**
 	 * This class is the primary class for accessibility support via the
@@ -606,7 +606,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ObjectFactory} instead.
 	 */
-	type ObjectFactoryMixin = IObjectFactory & GObject.IObject;
+	type ObjectFactoryMixin = IObjectFactory & GObject.Object;
 
 	/**
 	 * This class is the base object class for a factory used to create an
@@ -655,7 +655,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
-	type PlugMixin = IPlug & IObject & IComponent;
+	type PlugMixin = IPlug & Object & Component;
 
 	/**
 	 * See {@link Socket}
@@ -680,29 +680,29 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets an {@link ObjectFactory} appropriate for creating #AtkObjects
 		 * appropriate for #type.
-		 * @param _type a #GType with which to look up the associated {@link ObjectFactory}
+		 * @param type a #GType with which to look up the associated {@link ObjectFactory}
 		 * @returns an {@link ObjectFactory} appropriate for creating
 		 * #AtkObjects appropriate for #type.
 		 */
-		get_factory(_type: GObject.Type): ObjectFactory;
+		get_factory(type: GObject.Type): ObjectFactory;
 		/**
 		 * Provides a #GType indicating the {@link ObjectFactory} subclass
 		 * associated with #type.
-		 * @param _type a #GType with which to look up the associated {@link ObjectFactory}
+		 * @param type a #GType with which to look up the associated {@link ObjectFactory}
 		 * subclass
 		 * @returns a #GType associated with type #type
 		 */
-		get_factory_type(_type: GObject.Type): GObject.Type;
+		get_factory_type(type: GObject.Type): GObject.Type;
 		/**
 		 * Associate an {@link ObjectFactory} subclass with a #GType. Note:
 		 * The associated #factory_type will thereafter be responsible for
 		 * the creation of new #AtkObject implementations for instances
 		 * appropriate for #type.
-		 * @param _type an {@link Object} type
+		 * @param type an {@link Object} type
 		 * @param factory_type an {@link ObjectFactory} type to associate with #type.  Must
 		 * implement AtkObject appropriate for #type.
 		 */
-		set_factory_type(_type: GObject.Type, factory_type: GObject.Type): void;
+		set_factory_type(type: GObject.Type, factory_type: GObject.Type): void;
 		connect(signal: "notify::factory_type_registry", callback: (owner: this, ...args: any) => number): number;
 		connect(signal: "notify::factory_singleton_cache", callback: (owner: this, ...args: any) => number): number;
 
@@ -711,7 +711,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Registry} instead.
 	 */
-	type RegistryMixin = IRegistry & GObject.IObject;
+	type RegistryMixin = IRegistry & GObject.Object;
 
 	/**
 	 * The AtkRegistry is normally used to create appropriate ATK "peers"
@@ -767,7 +767,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Relation} instead.
 	 */
-	type RelationMixin = IRelation & GObject.IObject;
+	type RelationMixin = IRelation & GObject.Object;
 
 	/**
 	 * An AtkRelation describes a relation between an object and one or
@@ -840,11 +840,11 @@ declare namespace imports.gi.Atk {
 		get_n_relations(): number;
 		/**
 		 * Determines the relation at the specified position in the relation set.
-		 * @param _i a gint representing a position in the set, starting from 0.
+		 * @param i a gint representing a position in the set, starting from 0.
 		 * @returns a {@link Relation}, which is the relation at
 		 * position i in the set.
 		 */
-		get_relation(_i: number): Relation;
+		get_relation(i: number): Relation;
 		/**
 		 * Finds a relation that matches the specified type.
 		 * @param relationship an {@link RelationType}
@@ -866,7 +866,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RelationSet} instead.
 	 */
-	type RelationSetMixin = IRelationSet & GObject.IObject;
+	type RelationSetMixin = IRelationSet & GObject.Object;
 
 	/**
 	 * The AtkRelationSet held by an object establishes its relationships
@@ -917,7 +917,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & IObject & IComponent;
+	type SocketMixin = ISocket & Object & Component;
 
 	/**
 	 * Together with {@link Plug}, #AtkSocket provides the ability to embed
@@ -966,10 +966,10 @@ declare namespace imports.gi.Atk {
 		 * be used to add a state to a newly-created set which will then be returned by
 		 * #atk_object_ref_state_set. It should not be used to modify the existing state
 		 * of an object. See also #atk_object_notify_state_change.
-		 * @param _type an {@link StateType}
+		 * @param type an {@link StateType}
 		 * @returns %TRUE if  the state for #type is not already in #set.
 		 */
-		add_state(_type: StateType): boolean;
+		add_state(type: StateType): boolean;
 		/**
 		 * Adds the states of the specified types to the state set.
 		 * 
@@ -995,10 +995,10 @@ declare namespace imports.gi.Atk {
 		clear_states(): void;
 		/**
 		 * Checks whether the state for the specified type is in the specified set.
-		 * @param _type an {@link StateType}
+		 * @param type an {@link StateType}
 		 * @returns %TRUE if #type is the state type is in #set.
 		 */
-		contains_state(_type: StateType): boolean;
+		contains_state(type: StateType): boolean;
 		/**
 		 * Checks whether the states for all the specified types are in the
 		 * specified set.
@@ -1026,10 +1026,10 @@ declare namespace imports.gi.Atk {
 		 * be used to remove a state to a newly-created set which will then be returned
 		 * by #atk_object_ref_state_set. It should not be used to modify the existing
 		 * state of an object. See also #atk_object_notify_state_change.
-		 * @param _type an {@link Type}
+		 * @param type an {@link Type}
 		 * @returns %TRUE if #type was the state type is in #set.
 		 */
-		remove_state(_type: StateType): boolean;
+		remove_state(type: StateType): boolean;
 		/**
 		 * Constructs the exclusive-or of the two sets, returning %NULL is empty.
 		 * The set returned by this operation contains the states in exactly
@@ -1044,7 +1044,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StateSet} instead.
 	 */
-	type StateSetMixin = IStateSet & GObject.IObject;
+	type StateSetMixin = IStateSet & GObject.Object;
 
 	/**
 	 * An AtkStateSet is a read-only representation of the full set of {@link States}
@@ -1072,7 +1072,7 @@ declare namespace imports.gi.Atk {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Util} instead.
 	 */
-	type UtilMixin = IUtil & GObject.IObject;
+	type UtilMixin = IUtil & GObject.Object;
 
 	/**
 	 * A set of ATK utility functions which are used to support event
@@ -1096,13 +1096,13 @@ declare namespace imports.gi.Atk {
 	interface ActionIface {}
 	class ActionIface {
 		public constructor();
-		public do_action: {(action: Action, _i: number): boolean;};
+		public do_action: {(action: Action, i: number): boolean;};
 		public get_n_actions: {(action: Action): number;};
-		public get_description: {(action: Action, _i: number): string | null;};
-		public get_name: {(action: Action, _i: number): string | null;};
-		public get_keybinding: {(action: Action, _i: number): string | null;};
-		public set_description: {(action: Action, _i: number, desc: string): boolean;};
-		public get_localized_name: {(action: Action, _i: number): string | null;};
+		public get_description: {(action: Action, i: number): string | null;};
+		public get_name: {(action: Action, i: number): string | null;};
+		public get_keybinding: {(action: Action, i: number): string | null;};
+		public set_description: {(action: Action, i: number, desc: string): boolean;};
+		public get_localized_name: {(action: Action, i: number): string | null;};
 	}
 
 	/**
@@ -1141,22 +1141,22 @@ declare namespace imports.gi.Atk {
 	class ComponentIface {
 		public constructor();
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
-		public contains: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
-		public ref_accessible_at_point: {(component: Component, _x: number, _y: number, coord_type: CoordType): Object | null;};
+		public contains: {(component: Component, x: number, y: number, coord_type: CoordType): boolean;};
+		public ref_accessible_at_point: {(component: Component, x: number, y: number, coord_type: CoordType): Object | null;};
 		public get_extents: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_position: {(component: Component, coord_type: CoordType): [ x: number | null, y: number | null ];};
 		public get_size: {(component: Component): [ width: number | null, height: number | null ];};
 		public grab_focus: {(component: Component): boolean;};
 		public remove_focus_handler: {(component: Component, handler_id: number): void;};
-		public set_extents: {(component: Component, _x: number, _y: number, width: number, height: number, coord_type: CoordType): boolean;};
-		public set_position: {(component: Component, _x: number, _y: number, coord_type: CoordType): boolean;};
+		public set_extents: {(component: Component, x: number, y: number, width: number, height: number, coord_type: CoordType): boolean;};
+		public set_position: {(component: Component, x: number, y: number, coord_type: CoordType): boolean;};
 		public set_size: {(component: Component, width: number, height: number): boolean;};
 		public get_layer: {(component: Component): Layer;};
 		public get_mdi_zorder: {(component: Component): number;};
 		public bounds_changed: {(component: Component, bounds: Rectangle): void;};
 		public get_alpha: {(component: Component): number;};
-		public scroll_to: {(component: Component, _type: ScrollType): boolean;};
-		public scroll_to_point: {(component: Component, coords: CoordType, _x: number, _y: number): boolean;};
+		public scroll_to: {(component: Component, type: ScrollType): boolean;};
+		public scroll_to_point: {(component: Component, coords: CoordType, x: number, y: number): boolean;};
 	}
 
 	interface DocumentIface {}
@@ -1196,8 +1196,8 @@ declare namespace imports.gi.Atk {
 	class HyperlinkClass {
 		public constructor();
 		public readonly pad1: Function;
-		public get_uri: {(link_: Hyperlink, _i: number): string;};
-		public get_object: {(link_: Hyperlink, _i: number): Object;};
+		public get_uri: {(link_: Hyperlink, i: number): string;};
+		public get_object: {(link_: Hyperlink, i: number): Object;};
 		public get_end_index: {(link_: Hyperlink): number;};
 		public get_start_index: {(link_: Hyperlink): number;};
 		public is_valid: {(link_: Hyperlink): boolean;};
@@ -1210,7 +1210,7 @@ declare namespace imports.gi.Atk {
 	interface HyperlinkImplIface {}
 	class HyperlinkImplIface {
 		public constructor();
-		public get_hyperlink: {(_impl: HyperlinkImpl): Hyperlink;};
+		public get_hyperlink: {(impl: HyperlinkImpl): Hyperlink;};
 	}
 
 	interface HypertextIface {}
@@ -1318,7 +1318,7 @@ declare namespace imports.gi.Atk {
 		public get_description: {(accessible: Object): string;};
 		public get_parent: {(accessible: Object): Object;};
 		public get_n_children: {(accessible: Object): number;};
-		public ref_child: {(accessible: Object, _i: number): Object;};
+		public ref_child: {(accessible: Object, i: number): Object;};
 		public get_index_in_parent: {(accessible: Object): number;};
 		public ref_relation_set: {(accessible: Object): RelationSet;};
 		public get_role: {(accessible: Object): Role;};
@@ -1469,12 +1469,12 @@ declare namespace imports.gi.Atk {
 	interface SelectionIface {}
 	class SelectionIface {
 		public constructor();
-		public add_selection: {(selection: Selection, _i: number): boolean;};
+		public add_selection: {(selection: Selection, i: number): boolean;};
 		public clear_selection: {(selection: Selection): boolean;};
-		public ref_selection: {(selection: Selection, _i: number): Object | null;};
+		public ref_selection: {(selection: Selection, i: number): Object | null;};
 		public get_selection_count: {(selection: Selection): number;};
-		public is_child_selected: {(selection: Selection, _i: number): boolean;};
-		public remove_selection: {(selection: Selection, _i: number): boolean;};
+		public is_child_selected: {(selection: Selection, i: number): boolean;};
+		public remove_selection: {(selection: Selection, i: number): boolean;};
 		public select_all_selection: {(selection: Selection): boolean;};
 		public selection_changed: {(selection: Selection): void;};
 	}
@@ -1497,7 +1497,7 @@ declare namespace imports.gi.Atk {
 		public readonly pad2: Function;
 		public readonly pad3: Function;
 		public get_n_mime_types: {(streamable: StreamableContent): number;};
-		public get_mime_type: {(streamable: StreamableContent, _i: number): string;};
+		public get_mime_type: {(streamable: StreamableContent, i: number): string;};
 		public get_stream: {(streamable: StreamableContent, mime_type: string): GLib.IOChannel;};
 		public get_uri: {(streamable: StreamableContent, mime_type: string): string | null;};
 	}
@@ -1520,38 +1520,38 @@ declare namespace imports.gi.Atk {
 	interface TableIface {}
 	class TableIface {
 		public constructor();
-		public ref_at: {(table: Table, _row: number, column: number): Object;};
-		public get_index_at: {(table: Table, _row: number, column: number): number;};
+		public ref_at: {(table: Table, row: number, column: number): Object;};
+		public get_index_at: {(table: Table, row: number, column: number): number;};
 		public get_column_at_index: {(table: Table, index_: number): number;};
 		public get_row_at_index: {(table: Table, index_: number): number;};
 		public get_n_columns: {(table: Table): number;};
 		public get_n_rows: {(table: Table): number;};
-		public get_column_extent_at: {(table: Table, _row: number, column: number): number;};
-		public get_row_extent_at: {(table: Table, _row: number, column: number): number;};
+		public get_column_extent_at: {(table: Table, row: number, column: number): number;};
+		public get_row_extent_at: {(table: Table, row: number, column: number): number;};
 		public get_caption: {(table: Table): Object | null;};
 		public get_column_description: {(table: Table, column: number): string;};
 		public get_column_header: {(table: Table, column: number): Object | null;};
-		public get_row_description: {(table: Table, _row: number): string | null;};
-		public get_row_header: {(table: Table, _row: number): Object | null;};
+		public get_row_description: {(table: Table, row: number): string | null;};
+		public get_row_header: {(table: Table, row: number): Object | null;};
 		public get_summary: {(table: Table): Object;};
 		public set_caption: {(table: Table, caption: Object): void;};
 		public set_column_description: {(table: Table, column: number, description: string): void;};
 		public set_column_header: {(table: Table, column: number, header: Object): void;};
-		public set_row_description: {(table: Table, _row: number, description: string): void;};
-		public set_row_header: {(table: Table, _row: number, header: Object): void;};
+		public set_row_description: {(table: Table, row: number, description: string): void;};
+		public set_row_header: {(table: Table, row: number, header: Object): void;};
 		public set_summary: {(table: Table, accessible: Object): void;};
 		public get_selected_columns: {(table: Table, selected: number): number;};
 		public get_selected_rows: {(table: Table, selected: number): number;};
 		public is_column_selected: {(table: Table, column: number): boolean;};
-		public is_row_selected: {(table: Table, _row: number): boolean;};
-		public is_selected: {(table: Table, _row: number, column: number): boolean;};
-		public add_row_selection: {(table: Table, _row: number): boolean;};
-		public remove_row_selection: {(table: Table, _row: number): boolean;};
+		public is_row_selected: {(table: Table, row: number): boolean;};
+		public is_selected: {(table: Table, row: number, column: number): boolean;};
+		public add_row_selection: {(table: Table, row: number): boolean;};
+		public remove_row_selection: {(table: Table, row: number): boolean;};
 		public add_column_selection: {(table: Table, column: number): boolean;};
 		public remove_column_selection: {(table: Table, column: number): boolean;};
-		public row_inserted: {(table: Table, _row: number, num_inserted: number): void;};
+		public row_inserted: {(table: Table, row: number, num_inserted: number): void;};
 		public column_inserted: {(table: Table, column: number, num_inserted: number): void;};
-		public row_deleted: {(table: Table, _row: number, num_deleted: number): void;};
+		public row_deleted: {(table: Table, row: number, num_deleted: number): void;};
 		public column_deleted: {(table: Table, column: number, num_deleted: number): void;};
 		public row_reordered: {(table: Table): void;};
 		public column_reordered: {(table: Table): void;};
@@ -1571,7 +1571,7 @@ declare namespace imports.gi.Atk {
 		public get_default_attributes: {(text: Text): AttributeSet;};
 		public get_character_extents: {(text: Text, offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_character_count: {(text: Text): number;};
-		public get_offset_at_point: {(text: Text, _x: number, _y: number, coords: CoordType): number;};
+		public get_offset_at_point: {(text: Text, x: number, y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
 		public get_selection: {(text: Text, selection_num: number): string;};
 		public add_selection: {(text: Text, start_offset: number, end_offset: number): boolean;};
@@ -1585,8 +1585,8 @@ declare namespace imports.gi.Atk {
 		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
 		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string | null;};
-		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, _type: ScrollType): boolean;};
-		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number): boolean;};
+		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, type: ScrollType): boolean;};
+		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, x: number, y: number): boolean;};
 	}
 
 	/**
@@ -1675,17 +1675,17 @@ declare namespace imports.gi.Atk {
 	interface IAction {
 		/**
 		 * Perform the specified action on the object.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @returns %TRUE if success, %FALSE otherwise
 		 */
-		// do_action(_i: number): boolean;
+		// do_action(i: number): boolean;
 		/**
 		 * Returns a description of the specified action of the object.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @returns a description string, or %NULL if #action does
 		 * not implement this interface.
 		 */
-		// get_description(_i: number): string | null;
+		// get_description(i: number): string | null;
 		/**
 		 * Gets the keybinding which can be used to activate this action, if one
 		 * exists. The string returned should contain localized, human-readable,
@@ -1709,18 +1709,18 @@ declare namespace imports.gi.Atk {
 		 * would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
 		 * for the German locale. If, hypothetically, this menu item lacked a mnemonic,
 		 * it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @returns the keybinding which can be used to activate
 		 * this action, or %NULL if there is no keybinding for this action.
 		 */
-		// get_keybinding(_i: number): string | null;
+		// get_keybinding(i: number): string | null;
 		/**
 		 * Returns the localized name of the specified action of the object.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @returns a name string, or %NULL if #action does not
 		 * implement this interface.
 		 */
-		// get_localized_name(_i: number): string | null;
+		// get_localized_name(i: number): string | null;
 		/**
 		 * Gets the number of accessible actions available on the object.
 		 * If there are more than one, the first one is considered the
@@ -1744,18 +1744,18 @@ declare namespace imports.gi.Atk {
 		 * reported action is actually 'bound' to a nontrivial user event;
 		 * i.e. the result of some actions via atk_action_do_action() may be
 		 * NIL.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @returns a name string, or %NULL if #action does not
 		 * implement this interface.
 		 */
-		// get_name(_i: number): string | null;
+		// get_name(i: number): string | null;
 		/**
 		 * Sets a description of the specified action of the object.
-		 * @param _i the action index corresponding to the action to be performed
+		 * @param i the action index corresponding to the action to be performed
 		 * @param desc the description to be assigned to this action
 		 * @returns a gboolean representing if the description was successfully set;
 		 */
-		// set_description(_i: number, desc: string): boolean;
+		// set_description(i: number, desc: string): boolean;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1809,14 +1809,14 @@ declare namespace imports.gi.Atk {
 		 * Toolkit implementor note: ATK provides a default implementation for
 		 * this virtual method. In general there are little reason to
 		 * re-implement it.
-		 * @param _x x coordinate
-		 * @param _y y coordinate
+		 * @param x x coordinate
+		 * @param y y coordinate
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 * @returns %TRUE or %FALSE indicating whether the specified point is within
 		 * the extent of the #component or not
 		 */
-		contains(_x: number, _y: number, coord_type: CoordType): boolean;
+		contains(x: number, y: number, coord_type: CoordType): boolean;
 		/**
 		 * Returns the alpha value (i.e. the opacity) for this
 		 * #component, on a scale from 0 (fully transparent) to 1.0
@@ -1884,14 +1884,14 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets a reference to the accessible child, if one exists, at the
 		 * coordinate point specified by #x and #y.
-		 * @param _x x coordinate
-		 * @param _y y coordinate
+		 * @param x x coordinate
+		 * @param y y coordinate
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 * @returns a reference to the accessible
 		 * child, if one exists
 		 */
-		ref_accessible_at_point(_x: number, _y: number, coord_type: CoordType): Object | null;
+		ref_accessible_at_point(x: number, y: number, coord_type: CoordType): Object | null;
 		/**
 		 * Remove the handler specified by #handler_id from the list of
 		 * functions to be executed when this object receives focus events
@@ -1906,43 +1906,43 @@ declare namespace imports.gi.Atk {
 		 * Contrary to atk_component_set_position, this does not actually move
 		 * #component in its parent, this only makes the parents scroll so that the
 		 * object shows up on the screen, given its current position within the parents.
-		 * @param _type specify where the object should be made visible.
+		 * @param type specify where the object should be made visible.
 		 * @returns whether scrolling was successful.
 		 */
-		scroll_to(_type: ScrollType): boolean;
+		scroll_to(type: ScrollType): boolean;
 		/**
 		 * Move the top-left of #component to a given position of the screen by
 		 * scrolling all necessary parents.
 		 * @param coords specify whether coordinates are relative to the screen or to the
 		 * parent object.
-		 * @param _x x-position where to scroll to
-		 * @param _y y-position where to scroll to
+		 * @param x x-position where to scroll to
+		 * @param y y-position where to scroll to
 		 * @returns whether scrolling was successful.
 		 */
-		scroll_to_point(coords: CoordType, _x: number, _y: number): boolean;
+		scroll_to_point(coords: CoordType, x: number, y: number): boolean;
 		/**
 		 * Sets the extents of #component.
-		 * @param _x x coordinate
-		 * @param _y y coordinate
+		 * @param x x coordinate
+		 * @param y y coordinate
 		 * @param width width to set for #component
 		 * @param height height to set for #component
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the components top level window
 		 * @returns %TRUE or %FALSE whether the extents were set or not
 		 */
-		set_extents(_x: number, _y: number, width: number, height: number, coord_type: CoordType): boolean;
+		set_extents(x: number, y: number, width: number, height: number, coord_type: CoordType): boolean;
 		/**
 		 * Sets the position of #component.
 		 * 
 		 * Contrary to atk_component_scroll_to, this does not trigger any scrolling,
 		 * this just moves #component in its parent.
-		 * @param _x x coordinate
-		 * @param _y y coordinate
+		 * @param x x coordinate
+		 * @param y y coordinate
 		 * @param coord_type specifies whether the coordinates are relative to the screen
 		 * or to the component's top level window
 		 * @returns %TRUE or %FALSE whether or not the position was set or not
 		 */
-		set_position(_x: number, _y: number, coord_type: CoordType): boolean;
+		set_position(x: number, y: number, coord_type: CoordType): boolean;
 		/**
 		 * Set the size of the #component in terms of width and height.
 		 * @param width width to set for #component
@@ -2412,10 +2412,10 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Adds the specified accessible child of the object to the
 		 * object's selection.
-		 * @param _i a #gint specifying the child index.
+		 * @param i a #gint specifying the child index.
 		 * @returns TRUE if success, FALSE otherwise.
 		 */
-		add_selection(_i: number): boolean;
+		add_selection(i: number): boolean;
 		/**
 		 * Clears the selection in the object so that no children in the object
 		 * are selected.
@@ -2438,11 +2438,11 @@ declare namespace imports.gi.Atk {
 		 * indication of whether AtkSelectionIface is implemented, they should
 		 * use type checking/interface checking macros or the
 		 * atk_get_accessible_value() convenience method.
-		 * @param _i a #gint specifying the child index.
+		 * @param i a #gint specifying the child index.
 		 * @returns a gboolean representing the specified child is selected, or 0
 		 * if #selection does not implement this interface.
 		 */
-		is_child_selected(_i: number): boolean;
+		is_child_selected(i: number): boolean;
 		/**
 		 * Gets a reference to the accessible object representing the specified
 		 * selected child of the object.
@@ -2450,20 +2450,20 @@ declare namespace imports.gi.Atk {
 		 * indication of whether AtkSelectionIface is implemented, they should
 		 * use type checking/interface checking macros or the
 		 * atk_get_accessible_value() convenience method.
-		 * @param _i a #gint specifying the index in the selection set.  (e.g. the
+		 * @param i a #gint specifying the index in the selection set.  (e.g. the
 		 * ith selection as opposed to the ith child).
 		 * @returns an {@link Object} representing the
 		 * selected accessible, or %NULL if #selection does not implement this
 		 * interface.
 		 */
-		ref_selection(_i: number): Object | null;
+		ref_selection(i: number): Object | null;
 		/**
 		 * Removes the specified child of the object from the object's selection.
-		 * @param _i a #gint specifying the index in the selection set.  (e.g. the
+		 * @param i a #gint specifying the index in the selection set.  (e.g. the
 		 * ith selection as opposed to the ith child).
 		 * @returns TRUE if success, FALSE otherwise.
 		 */
-		remove_selection(_i: number): boolean;
+		remove_selection(i: number): boolean;
 		/**
 		 * Causes every child of the object to be selected if the object
 		 * supports multiple selections.
@@ -2510,11 +2510,11 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets the character string of the specified mime type. The first mime
 		 * type is at position 0, the second at position 1, and so on.
-		 * @param _i a gint representing the position of the mime type starting from 0
+		 * @param i a gint representing the position of the mime type starting from 0
 		 * @returns a gchar* representing the specified mime type; the caller
 		 * should not free the character string.
 		 */
-		get_mime_type(_i: number): string;
+		get_mime_type(i: number): string;
 		/**
 		 * Gets the number of mime types supported by this object.
 		 * @returns a gint which is the number of mime types supported by the object.
@@ -2588,11 +2588,11 @@ declare namespace imports.gi.Atk {
 		add_column_selection(column: number): boolean;
 		/**
 		 * Adds the specified #row to the selection.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @returns a gboolean representing if row was successfully added to selection,
 		 * or 0 if value does not implement this interface.
 		 */
-		add_row_selection(_row: number): boolean;
+		add_row_selection(row: number): boolean;
 		/**
 		 * Gets the caption for the #table.
 		 * @returns a AtkObject* representing the
@@ -2616,12 +2616,12 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets the number of columns occupied by the accessible object
 		 * at the specified #row and #column in the #table.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param column a #gint representing a column in #table
 		 * @returns a gint representing the column extent at specified position, or 0
 		 * if value does not implement this interface.
 		 */
-		get_column_extent_at(_row: number, column: number): number;
+		get_column_extent_at(row: number, column: number): number;
 		/**
 		 * Gets the column header of a specified column in an accessible table.
 		 * @param column a #gint representing a column in the table
@@ -2633,13 +2633,13 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets a #gint representing the index at the specified #row and
 		 * #column.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param column a #gint representing a column in #table
 		 * @returns a #gint representing the index at specified position.
 		 * The value -1 is returned if the object at row,column is not a child
 		 * of table or table does not implement this interface.
 		 */
-		get_index_at(_row: number, column: number): number;
+		get_index_at(row: number, column: number): number;
 		/**
 		 * Gets the number of columns in the table.
 		 * @returns a gint representing the number of columns, or 0
@@ -2661,28 +2661,28 @@ declare namespace imports.gi.Atk {
 		get_row_at_index(index_: number): number;
 		/**
 		 * Gets the description text of the specified row in the table
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @returns a gchar* representing the row description, or
 		 * %NULL if value does not implement this interface.
 		 */
-		get_row_description(_row: number): string | null;
+		get_row_description(row: number): string | null;
 		/**
 		 * Gets the number of rows occupied by the accessible object
 		 * at a specified #row and #column in the #table.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param column a #gint representing a column in #table
 		 * @returns a gint representing the row extent at specified position, or 0
 		 * if value does not implement this interface.
 		 */
-		get_row_extent_at(_row: number, column: number): number;
+		get_row_extent_at(row: number, column: number): number;
 		/**
 		 * Gets the row header of a specified row in an accessible table.
-		 * @param _row a #gint representing a row in the table
+		 * @param row a #gint representing a row in the table
 		 * @returns a AtkObject* representing the
 		 * specified row header, or %NULL if value does not implement this
 		 * interface.
 		 */
-		get_row_header(_row: number): Object | null;
+		get_row_header(row: number): Object | null;
 		/**
 		 * Gets the selected columns of the table by initializing **selected with
 		 * the selected column numbers. This array should be freed by the caller.
@@ -2716,29 +2716,29 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Gets a boolean value indicating whether the specified #row
 		 * is selected
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @returns a gboolean representing if the row is selected, or 0
 		 * if value does not implement this interface.
 		 */
-		is_row_selected(_row: number): boolean;
+		is_row_selected(row: number): boolean;
 		/**
 		 * Gets a boolean value indicating whether the accessible object
 		 * at the specified #row and #column is selected
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param column a #gint representing a column in #table
 		 * @returns a gboolean representing if the cell is selected, or 0
 		 * if value does not implement this interface.
 		 */
-		is_selected(_row: number, column: number): boolean;
+		is_selected(row: number, column: number): boolean;
 		/**
 		 * Get a reference to the table cell at #row, #column. This cell
 		 * should implement the interface {@link TableCell}
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param column a #gint representing a column in #table
 		 * @returns an {@link Object} representing the referred
 		 * to accessible
 		 */
-		ref_at(_row: number, column: number): Object;
+		ref_at(row: number, column: number): Object;
 		/**
 		 * Adds the specified #column to the selection.
 		 * @param column a #gint representing a column in #table
@@ -2748,11 +2748,11 @@ declare namespace imports.gi.Atk {
 		remove_column_selection(column: number): boolean;
 		/**
 		 * Removes the specified #row from the selection.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @returns a gboolean representing if the row was successfully removed from
 		 * the selection, or 0 if value does not implement this interface.
 		 */
-		remove_row_selection(_row: number): boolean;
+		remove_row_selection(row: number): boolean;
 		/**
 		 * Sets the caption for the table.
 		 * @param caption a {@link Object} representing the caption to set for #table
@@ -2773,17 +2773,17 @@ declare namespace imports.gi.Atk {
 		set_column_header(column: number, header: Object): void;
 		/**
 		 * Sets the description text for the specified #row of #table.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param description a #gchar representing the description text
 		 * to set for the specified #row of #table
 		 */
-		set_row_description(_row: number, description: string): void;
+		set_row_description(row: number, description: string): void;
 		/**
 		 * Sets the specified row header to #header.
-		 * @param _row a #gint representing a row in #table
+		 * @param row a #gint representing a row in #table
 		 * @param header an {@link Table}
 		 */
-		set_row_header(_row: number, header: Object): void;
+		set_row_header(row: number, header: Object): void;
 		/**
 		 * Sets the summary description of the table.
 		 * @param accessible an {@link Object} representing the summary description
@@ -3018,14 +3018,14 @@ declare namespace imports.gi.Atk {
 		 * Gets the offset of the character located at coordinates #x and #y. #x and #y
 		 * are interpreted as being relative to the screen or this widget's window
 		 * depending on #coords.
-		 * @param _x screen x-position of character
-		 * @param _y screen y-position of character
+		 * @param x screen x-position of character
+		 * @param y screen y-position of character
 		 * @param coords specify whether coordinates are relative to the screen or
 		 * widget window
 		 * @returns the offset to the character which is located at  the specified
 		 *          #x and #y coordinates of -1 in case of failure.
 		 */
-		get_offset_at_point(_x: number, _y: number, coords: CoordType): number;
+		get_offset_at_point(x: number, y: number, coords: CoordType): number;
 		/**
 		 * Get the bounding box for text within the specified range.
 		 * 
@@ -3177,10 +3177,10 @@ declare namespace imports.gi.Atk {
 		 * Makes a substring of #text visible on the screen by scrolling all necessary parents.
 		 * @param start_offset start offset in the #text
 		 * @param end_offset end offset in the #text, or -1 for the end of the text.
-		 * @param _type specify where the object should be made visible.
+		 * @param type specify where the object should be made visible.
 		 * @returns whether scrolling was successful.
 		 */
-		scroll_substring_to(start_offset: number, end_offset: number, _type: ScrollType): boolean;
+		scroll_substring_to(start_offset: number, end_offset: number, type: ScrollType): boolean;
 		/**
 		 * Move the top-left of a substring of #text to a given position of the screen
 		 * by scrolling all necessary parents.
@@ -3188,11 +3188,11 @@ declare namespace imports.gi.Atk {
 		 * @param end_offset end offset in the #text, or -1 for the end of the text.
 		 * @param coords specify whether coordinates are relative to the screen or to the
 		 * parent object.
-		 * @param _x x-position where to scroll to
-		 * @param _y y-position where to scroll to
+		 * @param x x-position where to scroll to
+		 * @param y y-position where to scroll to
 		 * @returns whether scrolling was successful.
 		 */
-		scroll_substring_to_point(start_offset: number, end_offset: number, coords: CoordType, _x: number, _y: number): boolean;
+		scroll_substring_to_point(start_offset: number, end_offset: number, coords: CoordType, x: number, y: number): boolean;
 		/**
 		 * Sets the caret (cursor) position to the specified #offset.
 		 * 
@@ -5301,10 +5301,10 @@ declare namespace imports.gi.Atk {
 
 	/**
 	 * Gets the description string describing the {@link RelationType} #type.
-	 * @param _type The {@link RelationType} whose name is required
+	 * @param type The {@link RelationType} whose name is required
 	 * @returns the string describing the AtkRelationType
 	 */
-	function relation_type_get_name(_type: RelationType): string;
+	function relation_type_get_name(type: RelationType): string;
 
 	/**
 	 * Associate #name with a new {@link RelationType}
@@ -5385,10 +5385,10 @@ declare namespace imports.gi.Atk {
 
 	/**
 	 * Gets the description string describing the {@link StateType} #type.
-	 * @param _type The {@link StateType} whose name is required
+	 * @param type The {@link StateType} whose name is required
 	 * @returns the string describing the AtkStateType
 	 */
-	function state_type_get_name(_type: StateType): string;
+	function state_type_get_name(type: StateType): string;
 
 	/**
 	 * Register a new object state.
@@ -5452,5 +5452,83 @@ declare namespace imports.gi.Atk {
 	 * @returns the string describing the {@link ValueType}
 	 */
 	function value_type_get_name(value_type: ValueType): string;
+
+	/**
+	 * Like atk_get_binary_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like atk_get_binary_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const BINARY_AGE: number;
+
+	/**
+	 * Like atk_get_interface_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like atk_get_interface_age(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const INTERFACE_AGE: number;
+
+	/**
+	 * Like atk_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like atk_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * Like atk_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like atk_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * Like atk_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like atk_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MINOR_VERSION: number;
+
+	/**
+	 * A macro that should be defined by the user prior to including
+	 * the atk/atk.h header.
+	 * The definition should be one of the predefined ATK version
+	 * macros: %ATK_VERSION_2_12, %ATK_VERSION_2_14,...
+	 * 
+	 * This macro defines the earliest version of ATK that the package is
+	 * required to be able to compile against.
+	 * 
+	 * If the compiler is configured to warn about the use of deprecated
+	 * functions, then using functions that were deprecated in version
+	 * %ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but
+	 * using functions deprecated in later releases will not).
+	 * @returns A macro that should be defined by the user prior to including
+	 * the atk/atk.h header.
+	 * The definition should be one of the predefined ATK version
+	 * macros: %ATK_VERSION_2_12, %ATK_VERSION_2_14,...
+	 * 
+	 * This macro defines the earliest version of ATK that the package is
+	 * required to be able to compile against.
+	 * 
+	 * If the compiler is configured to warn about the use of deprecated
+	 * functions, then using functions that were deprecated in version
+	 * %ATK_VERSION_MIN_REQUIRED or earlier will cause warnings (but
+	 * using functions deprecated in later releases will not).
+	 */
+	const VERSION_MIN_REQUIRED: number;
 
 }

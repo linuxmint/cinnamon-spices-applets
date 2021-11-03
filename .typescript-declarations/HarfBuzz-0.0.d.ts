@@ -3871,11 +3871,11 @@ declare namespace imports.gi.HarfBuzz {
 	interface reference_table_func_t {
 		/**
 		 * Callback function for hb_face_create_for_tables().
-		 * @param _face an #hb_face_t to reference table for
+		 * @param face an #hb_face_t to reference table for
 		 * @param tag the tag of the table to reference
 		 * @returns A pointer to the #tag table within #face
 		 */
-		(_face: face_t, tag: tag_t): blob_t;
+		(face: face_t, tag: tag_t): blob_t;
 	}
 
 	/**
@@ -3916,11 +3916,11 @@ declare namespace imports.gi.HarfBuzz {
 		 * The method must return an #hb_bool_t indicating the success
 		 * of the composition.
 		 * @param ufuncs A Unicode-functions structure
-		 * @param _a The first code point to compose
-		 * @param _b The second code point to compose
+		 * @param a The first code point to compose
+		 * @param b The second code point to compose
 		 * @returns %true is #a,#b composed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t): bool_t;
+		(ufuncs: unicode_funcs_t, a: codepoint_t, b: codepoint_t): bool_t;
 	}
 
 	/**
@@ -3944,11 +3944,11 @@ declare namespace imports.gi.HarfBuzz {
 		 * compatibility decomposition plus an terminating value of 0.  Consequently, #decompose must be allocated by the caller to be at least this length.  Implementations
 		 * of this function type must ensure that they do not write past the provided array.
 		 * @param ufuncs a Unicode function structure
-		 * @param _u codepoint to decompose
+		 * @param u codepoint to decompose
 		 * @param decomposed address of codepoint array (of length #HB_UNICODE_MAX_DECOMPOSITION_LEN) to write decomposition into
 		 * @returns number of codepoints in the full compatibility decomposition of #u, or 0 if no decomposition available.
 		 */
-		(ufuncs: unicode_funcs_t, _u: codepoint_t, decomposed: codepoint_t): number;
+		(ufuncs: unicode_funcs_t, u: codepoint_t, decomposed: codepoint_t): number;
 	}
 
 	/**
@@ -3968,10 +3968,10 @@ declare namespace imports.gi.HarfBuzz {
 		 * output parameters (if successful). The method must return an
 		 * #hb_bool_t indicating the success of the composition.
 		 * @param ufuncs A Unicode-functions structure
-		 * @param _ab The code point to decompose
+		 * @param ab The code point to decompose
 		 * @returns %true if #ab decomposed, %false otherwise
 		 */
-		(ufuncs: unicode_funcs_t, _ab: codepoint_t): bool_t;
+		(ufuncs: unicode_funcs_t, ab: codepoint_t): bool_t;
 	}
 
 	/**
@@ -4218,11 +4218,11 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Fetches the name identifier of the specified feature type in the face's `name` table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param feature_type The #hb_aat_layout_feature_type_t of the requested feature type
 	 * @returns Name identifier of the requested feature type
 	 */
-	function aat_layout_feature_type_get_name_id(_face: face_t, feature_type: aat_layout_feature_type_t): ot_name_id_t;
+	function aat_layout_feature_type_get_name_id(face: face_t, feature_type: aat_layout_feature_type_t): ot_name_id_t;
 
 	/**
 	 * Fetches a list of the selectors available for the specified feature in the given face.
@@ -4230,51 +4230,51 @@ declare namespace imports.gi.HarfBuzz {
 	 * If upon return, #default_index is set to #HB_AAT_LAYOUT_NO_SELECTOR_INDEX, then
 	 * the feature type is non-exclusive.  Otherwise, #default_index is the index of
 	 * the selector that is selected by default.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param feature_type The #hb_aat_layout_feature_type_t of the requested feature type
 	 * @param start_offset offset of the first feature type to retrieve
 	 * @param selectors 
 	 *             A buffer pointer. The selectors available for the feature type queries.
 	 * @returns Number of all available feature selectors
 	 */
-	function aat_layout_feature_type_get_selector_infos(_face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number, selectors: aat_layout_feature_selector_info_t[] | null): number;
+	function aat_layout_feature_type_get_selector_infos(face: face_t, feature_type: aat_layout_feature_type_t, start_offset: number, selectors: aat_layout_feature_selector_info_t[] | null): number;
 
 	/**
 	 * Fetches a list of the AAT feature types included in the specified face.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param start_offset offset of the first feature type to retrieve
 	 * @param features Array of feature types found
 	 * @returns Number of all available feature types.
 	 */
-	function aat_layout_get_feature_types(_face: face_t, start_offset: number, features: aat_layout_feature_type_t[]): number;
+	function aat_layout_get_feature_types(face: face_t, start_offset: number, features: aat_layout_feature_type_t[]): number;
 
 	/**
 	 * Tests whether the specified face includes any positioning information
 	 * in the `kerx` table.
 	 * 
 	 * <note>Note: does not examine the `GPOS` table.</note>
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function aat_layout_has_positioning(_face: face_t): bool_t;
+	function aat_layout_has_positioning(face: face_t): bool_t;
 
 	/**
 	 * Tests whether the specified face includes any substitutions in the
 	 * `morx` or `mort` tables.
 	 * 
 	 * <note>Note: does not examine the `GSUB` table.</note>
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function aat_layout_has_substitution(_face: face_t): bool_t;
+	function aat_layout_has_substitution(face: face_t): bool_t;
 
 	/**
 	 * Tests whether the specified face includes any tracking information
 	 * in the `trak` table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function aat_layout_has_tracking(_face: face_t): bool_t;
+	function aat_layout_has_tracking(face: face_t): bool_t;
 
 	/**
 	 * Makes a writable copy of #blob.
@@ -4538,9 +4538,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param buffer An #hb_buffer_t
 	 * @param source source #hb_buffer_t
 	 * @param start start index into source buffer to copy.  Use 0 to copy from start of buffer.
-	 * @param _end end index into source buffer to copy.  Use #HB_FEATURE_GLOBAL_END to copy to end of buffer.
+	 * @param end end index into source buffer to copy.  Use #HB_FEATURE_GLOBAL_END to copy to end of buffer.
 	 */
-	function buffer_append(buffer: buffer_t, source: buffer_t, start: number, _end: number): void;
+	function buffer_append(buffer: buffer_t, source: buffer_t, start: number, end: number): void;
 
 	/**
 	 * Similar to hb_buffer_reset(), but does not clear the Unicode functions and
@@ -4812,9 +4812,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Reverses buffer contents between #start and #end.
 	 * @param buffer An #hb_buffer_t
 	 * @param start start index
-	 * @param _end end index
+	 * @param end end index
 	 */
-	function buffer_reverse_range(buffer: buffer_t, start: number, _end: number): void;
+	function buffer_reverse_range(buffer: buffer_t, start: number, end: number): void;
 
 	/**
 	 * Serializes #buffer into a textual representation of its content, whether
@@ -4824,7 +4824,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * hb_buffer_serialize_glyphs() for a description of the output format.
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
-	 * @param _end the last item in #buffer to serialize.
+	 * @param end the last item in #buffer to serialize.
 	 * @param font the #hb_font_t used to shape this buffer, needed to
 	 *        read glyph names and extents. If %NULL, and empty font will be used.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
@@ -4832,17 +4832,17 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize(buffer: buffer_t, start: number, _end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize(buffer: buffer_t, start: number, end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Parses a string into an #hb_buffer_serialize_format_t. Does not check if
 	 * #str is a valid buffer serialization format, use
 	 * hb_buffer_serialize_list_formats() to get the list of supported formats.
-	 * @param _str a string to parse
+	 * @param str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
 	 * @returns The parsed #hb_buffer_serialize_format_t.
 	 */
-	function buffer_serialize_format_from_string(_str: number[], len: number): buffer_serialize_format_t;
+	function buffer_serialize_format_from_string(str: number[], len: number): buffer_serialize_format_t;
 
 	/**
 	 * Converts #format to the string corresponding it, or %NULL if it is not a valid
@@ -4898,7 +4898,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *    #HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS is set.
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
-	 * @param _end the last item in #buffer to serialize.
+	 * @param end the last item in #buffer to serialize.
 	 * @param font the #hb_font_t used to shape this buffer, needed to
 	 *        read glyph names and extents. If %NULL, and empty font will be used.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
@@ -4906,7 +4906,7 @@ declare namespace imports.gi.HarfBuzz {
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_glyphs(buffer: buffer_t, start: number, _end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_glyphs(buffer: buffer_t, start: number, end: number, font: font_t | null, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Returns a list of supported buffer serialization formats.
@@ -4950,13 +4950,13 @@ declare namespace imports.gi.HarfBuzz {
 	 * ```
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
-	 * @param _end the last item in #buffer to serialize.
+	 * @param end the last item in #buffer to serialize.
 	 * @param format the #hb_buffer_serialize_format_t to use for formatting the output.
 	 * @param flags the #hb_buffer_serialize_flags_t that control what glyph properties
 	 *         to serialize.
 	 * @returns The number of serialized items.
 	 */
-	function buffer_serialize_unicode(buffer: buffer_t, start: number, _end: number, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
+	function buffer_serialize_unicode(buffer: buffer_t, start: number, end: number, format: buffer_serialize_format_t, flags: buffer_serialize_flags_t): number;
 
 	/**
 	 * Sets the cluster level of a buffer. The #hb_buffer_cluster_level_t
@@ -5032,10 +5032,10 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets the implementation function for #hb_buffer_message_func_t.
 	 * @param buffer An #hb_buffer_t
-	 * @param _func Callback function
+	 * @param func Callback function
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function buffer_set_message_func(buffer: buffer_t, _func: buffer_message_func_t, destroy: destroy_func_t | null): void;
+	function buffer_set_message_func(buffer: buffer_t, func: buffer_message_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the #hb_codepoint_t that replaces invalid entries for a given encoding
@@ -5125,11 +5125,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * examples, "LTR" and "left-to-right" will both return #HB_DIRECTION_LTR.
 	 * 
 	 * Unmatched strings will return #HB_DIRECTION_INVALID.
-	 * @param _str String to convert
+	 * @param str String to convert
 	 * @param len Length of #str, or -1 if it is %NULL-terminated
 	 * @returns The #hb_direction_t matching #str
 	 */
-	function direction_from_string(_str: number[], len: number): direction_t;
+	function direction_from_string(str: number[], len: number): direction_t;
 
 	/**
 	 * Converts an #hb_direction_t to a string.
@@ -5141,12 +5141,12 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Add table for #tag with data provided by #blob to the face.  #face must
 	 * be created using hb_face_builder_create().
-	 * @param _face A face object created with hb_face_builder_create()
+	 * @param face A face object created with hb_face_builder_create()
 	 * @param tag The #hb_tag_t of the table to add
 	 * @param blob The blob containing the table data to add
 	 * @returns 
 	 */
-	function face_builder_add_table(_face: face_t, tag: tag_t, blob: blob_t): bool_t;
+	function face_builder_add_table(face: face_t, tag: tag_t, blob: blob_t): bool_t;
 
 	/**
 	 * Creates a #hb_face_t that can be used with hb_face_builder_add_table().
@@ -5159,27 +5159,27 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Collects all of the Unicode characters covered by #face and adds
 	 * them to the #hb_set_t set #out.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param out The set to add Unicode characters to
 	 */
-	function face_collect_unicodes(_face: face_t, out: set_t): void;
+	function face_collect_unicodes(face: face_t, out: set_t): void;
 
 	/**
 	 * Collects all Unicode "Variation Selector" characters covered by #face and adds
 	 * them to the #hb_set_t set #out.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param out The set to add Variation Selector characters to
 	 */
-	function face_collect_variation_selectors(_face: face_t, out: set_t): void;
+	function face_collect_variation_selectors(face: face_t, out: set_t): void;
 
 	/**
 	 * Collects all Unicode characters for #variation_selector covered by #face and adds
 	 * them to the #hb_set_t set #out.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param variation_selector The Variation Selector to query
 	 * @param out The set to add Unicode characters to
 	 */
-	function face_collect_variation_unicodes(_face: face_t, variation_selector: codepoint_t, out: set_t): void;
+	function face_collect_variation_unicodes(face: face_t, variation_selector: codepoint_t, out: set_t): void;
 
 	/**
 	 * Fetches the number of faces in a blob.
@@ -5217,9 +5217,9 @@ declare namespace imports.gi.HarfBuzz {
 	 * Decreases the reference count on a face object. When the
 	 * reference count reaches zero, the face is destroyed,
 	 * freeing all memory.
-	 * @param _face A face object
+	 * @param face A face object
 	 */
-	function face_destroy(_face: face_t): void;
+	function face_destroy(face: face_t): void;
 
 	/**
 	 * Fetches the singleton empty face object.
@@ -5229,117 +5229,117 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Fetches the glyph-count value of the specified face object.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns The glyph-count value of #face
 	 */
-	function face_get_glyph_count(_face: face_t): number;
+	function face_get_glyph_count(face: face_t): number;
 
 	/**
 	 * Fetches the face-index corresponding to the given face.
 	 * 
 	 * <note>Note: face indices within a collection are zero-based.</note>
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns The index of #face.
 	 */
-	function face_get_index(_face: face_t): number;
+	function face_get_index(face: face_t): number;
 
 	/**
 	 * Fetches a list of all table tags for a face, if possible. The list returned will
 	 * begin at the offset provided
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param start_offset The index of first table tag to retrieve
 	 * @returns Total number of tables, or zero if it is not possible to list
 	 */
-	function face_get_table_tags(_face: face_t, start_offset: number): number;
+	function face_get_table_tags(face: face_t, start_offset: number): number;
 
 	/**
 	 * Fetches the units-per-em (upem) value of the specified face object.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns The upem value of #face
 	 */
-	function face_get_upem(_face: face_t): number;
+	function face_get_upem(face: face_t): number;
 
 	/**
 	 * Fetches the user data associated with the specified key,
 	 * attached to the specified face object.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param key The user-data key to query
 	 * @returns A pointer to the user data
 	 */
-	function face_get_user_data(_face: face_t, key: user_data_key_t): any | null;
+	function face_get_user_data(face: face_t, key: user_data_key_t): any | null;
 
 	/**
 	 * Tests whether the given face object is immutable.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns %true is #face is immutable, %false otherwise
 	 */
-	function face_is_immutable(_face: face_t): bool_t;
+	function face_is_immutable(face: face_t): bool_t;
 
 	/**
 	 * Makes the given face object immutable.
-	 * @param _face A face object
+	 * @param face A face object
 	 */
-	function face_make_immutable(_face: face_t): void;
+	function face_make_immutable(face: face_t): void;
 
 	/**
 	 * Increases the reference count on a face object.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns The #face object
 	 */
-	function face_reference(_face: face_t): face_t;
+	function face_reference(face: face_t): face_t;
 
 	/**
 	 * Fetches a pointer to the binary blob that contains the
 	 * specified face. Returns an empty blob if referencing face data is not
 	 * possible.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @returns A pointer to the blob for #face
 	 */
-	function face_reference_blob(_face: face_t): blob_t;
+	function face_reference_blob(face: face_t): blob_t;
 
 	/**
 	 * Fetches a reference to the specified table within
 	 * the specified face.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param tag The #hb_tag_t of the table to query
 	 * @returns A pointer to the #tag table within #face
 	 */
-	function face_reference_table(_face: face_t, tag: tag_t): blob_t;
+	function face_reference_table(face: face_t, tag: tag_t): blob_t;
 
 	/**
 	 * Sets the glyph count for a face object to the specified value.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param glyph_count The glyph-count value to assign
 	 */
-	function face_set_glyph_count(_face: face_t, glyph_count: number): void;
+	function face_set_glyph_count(face: face_t, glyph_count: number): void;
 
 	/**
 	 * Assigns the specified face-index to #face. Fails if the
 	 * face is immutable.
 	 * 
 	 * <note>Note: face indices within a collection are zero-based.</note>
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param index The index to assign
 	 */
-	function face_set_index(_face: face_t, index: number): void;
+	function face_set_index(face: face_t, index: number): void;
 
 	/**
 	 * Sets the units-per-em (upem) for a face object to the specified value.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param upem The units-per-em value to assign
 	 */
-	function face_set_upem(_face: face_t, upem: number): void;
+	function face_set_upem(face: face_t, upem: number): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the given face object.
-	 * @param _face A face object
+	 * @param face A face object
 	 * @param key The user-data key to set
 	 * @param data A pointer to the user data
 	 * @param destroy A callback to call when #data is not needed anymore
 	 * @param replace Whether to replace an existing data with the same key
 	 * @returns %true if success, %false otherwise
 	 */
-	function face_set_user_data(_face: face_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
+	function face_set_user_data(face: face_t, key: user_data_key_t, data: any | null, destroy: destroy_func_t | null, replace: bool_t): bool_t;
 
 	/**
 	 * Parses a string into a #hb_feature_t.
@@ -5379,12 +5379,12 @@ declare namespace imports.gi.HarfBuzz {
 	 * </tbody>
 	 * </tgroup>
 	 * </informaltable>
-	 * @param _str a string to parse
+	 * @param str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
 	 * @param feature the #hb_feature_t to initialize with the parsed values
 	 * @returns %true if #str is successfully parsed, %false otherwise
 	 */
-	function feature_from_string(_str: number[], len: number, feature: feature_t): bool_t;
+	function feature_from_string(str: number[], len: number, feature: feature_t): bool_t;
 
 	/**
 	 * Converts a #hb_feature_t into a %NULL-terminated string in the format
@@ -5411,10 +5411,10 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Constructs a new font object from the specified face.
-	 * @param _face a face.
+	 * @param face a face.
 	 * @returns The new font object
 	 */
-	function font_create(_face: face_t): font_t;
+	function font_create(face: face_t): font_t;
 
 	/**
 	 * Constructs a sub-font font object from the specified #parent font,
@@ -5484,139 +5484,139 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets the implementation function for #hb_font_get_font_h_extents_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, _func: font_get_font_h_extents_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_font_h_extents_func(ffuncs: font_funcs_t, func: font_get_font_h_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_font_v_extents_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, _func: font_get_font_v_extents_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_font_v_extents_func(ffuncs: font_funcs_t, func: font_get_font_v_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_contour_point_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, _func: font_get_glyph_contour_point_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_contour_point_func(ffuncs: font_funcs_t, func: font_get_glyph_contour_point_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_extents_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, _func: font_get_glyph_extents_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_extents_func(ffuncs: font_funcs_t, func: font_get_glyph_extents_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_from_name_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_from_name_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, func: font_get_glyph_from_name_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Deprecated.  Use hb_font_funcs_set_nominal_glyph_func() and
 	 * hb_font_funcs_set_variation_glyph_func() instead.
 	 * @param ffuncs The font-functions structure
-	 * @param _func callback function
+	 * @param func callback function
 	 * @param destroy function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, _func: font_get_glyph_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_func(ffuncs: font_funcs_t, func: font_get_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advance_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advance_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_h_advance_func(ffuncs: font_funcs_t, func: font_get_glyph_h_advance_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_advances_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_advances_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_h_advances_func(ffuncs: font_funcs_t, func: font_get_glyph_h_advances_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_kerning_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_kerning_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_h_kerning_func(ffuncs: font_funcs_t, func: font_get_glyph_h_kerning_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_h_origin_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_h_origin_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_h_origin_func(ffuncs: font_funcs_t, func: font_get_glyph_h_origin_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_name_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, _func: font_get_glyph_name_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_name_func(ffuncs: font_funcs_t, func: font_get_glyph_name_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advance_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advance_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_v_advance_func(ffuncs: font_funcs_t, func: font_get_glyph_v_advance_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_advances_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_advances_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_v_advances_func(ffuncs: font_funcs_t, func: font_get_glyph_v_advances_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_kerning_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_kerning_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_v_kerning_func(ffuncs: font_funcs_t, func: font_get_glyph_v_kerning_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_glyph_v_origin_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, _func: font_get_glyph_v_origin_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_glyph_v_origin_func(ffuncs: font_funcs_t, func: font_get_glyph_v_origin_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyph_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyph_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_nominal_glyph_func(ffuncs: font_funcs_t, func: font_get_nominal_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_font_get_nominal_glyphs_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, _func: font_get_nominal_glyphs_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_nominal_glyphs_func(ffuncs: font_funcs_t, func: font_get_nominal_glyphs_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified font-functions structure.
@@ -5632,10 +5632,10 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets the implementation function for #hb_font_get_variation_glyph_func_t.
 	 * @param ffuncs A font-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, _func: font_get_variation_glyph_func_t, destroy: destroy_func_t | null): void;
+	function font_funcs_set_variation_glyph_func(ffuncs: font_funcs_t, func: font_get_variation_glyph_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Fetches the empty font object.
@@ -6006,11 +6006,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * <note>Note: #len == -1 means the string is null-terminated.</note>
 	 * @param font #hb_font_t to work upon
-	 * @param _s string to query
+	 * @param s string to query
 	 * @param len The length of the string #s
 	 * @returns %true if data found, %false otherwise
 	 */
-	function font_glyph_from_string(font: font_t, _s: number[], len: number): bool_t;
+	function font_glyph_from_string(font: font_t, s: number[], len: number): bool_t;
 
 	/**
 	 * Fetches the name of the specified glyph ID in #font and returns
@@ -6049,9 +6049,9 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets #face as the font-face value of #font.
 	 * @param font #hb_font_t to work upon
-	 * @param _face The #hb_face_t to assign
+	 * @param face The #hb_face_t to assign
 	 */
-	function font_set_face(font: font_t, _face: face_t): void;
+	function font_set_face(font: font_t, face: face_t): void;
 
 	/**
 	 * Replaces the font-functions structure attached to a font, updating
@@ -6367,10 +6367,10 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches the Graphite2 gr_face corresponding to the specified
 	 * #hb_face_t face object.
-	 * @param _face #hb_face_t to query
+	 * @param face #hb_face_t to query
 	 * @returns the gr_face found
 	 */
-	function graphite2_face_get_gr_face(_face: face_t): any;
+	function graphite2_face_get_gr_face(face: face_t): any;
 
 	/**
 	 * Always returns %NULL. Use hb_graphite2_face_get_gr_face() instead.
@@ -6382,13 +6382,13 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Converts #str representing a BCP 47 language tag to the corresponding
 	 * #hb_language_t.
-	 * @param _str a string representing
+	 * @param str a string representing
 	 *       a BCP 47 language tag
 	 * @param len length of the #str, or -1 if it is %NULL-terminated.
 	 * @returns 
 	 * The #hb_language_t corresponding to the BCP 47 language tag.
 	 */
-	function language_from_string(_str: number[], len: number): language_t;
+	function language_from_string(str: number[], len: number): language_t;
 
 	/**
 	 * Fetch the default language from current locale.
@@ -6521,13 +6521,13 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches a list of all color layers for the specified glyph index in the specified
 	 * face. The list returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param glyph The glyph index to query
 	 * @param start_offset offset of the first layer to retrieve
 	 * @param layers The array of layers found
 	 * @returns Total number of layers available for the glyph index queried
 	 */
-	function ot_color_glyph_get_layers(_face: face_t, glyph: codepoint_t, start_offset: number, layers: ot_color_layer_t[] | null): number;
+	function ot_color_glyph_get_layers(face: face_t, glyph: codepoint_t, start_offset: number, layers: ot_color_layer_t[] | null): number;
 
 	/**
 	 * Fetches the PNG image for a glyph. This function takes a font object, not a face object,
@@ -6541,39 +6541,39 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Fetches the SVG document for a glyph. The blob may be either plain text or gzip-encoded.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param glyph a svg glyph index
 	 * @returns An #hb_blob_t containing the SVG document of the glyph, if available
 	 */
-	function ot_color_glyph_reference_svg(_face: face_t, glyph: codepoint_t): blob_t;
+	function ot_color_glyph_reference_svg(face: face_t, glyph: codepoint_t): blob_t;
 
 	/**
 	 * Tests whether a face includes any `COLR` color layers.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_color_has_layers(_face: face_t): bool_t;
+	function ot_color_has_layers(face: face_t): bool_t;
 
 	/**
 	 * Tests whether a face includes a `CPAL` color-palette table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_color_has_palettes(_face: face_t): bool_t;
+	function ot_color_has_palettes(face: face_t): bool_t;
 
 	/**
 	 * Tests whether a face has PNG glyph images (either in `CBDT` or `sbix` tables).
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_color_has_png(_face: face_t): bool_t;
+	function ot_color_has_png(face: face_t): bool_t;
 
 	/**
 	 * Tests whether a face includes any `SVG` glyph images.
-	 * @param _face #hb_face_t to work upon.
+	 * @param face #hb_face_t to work upon.
 	 * @returns %true if data found, %false otherwise.
 	 */
-	function ot_color_has_svg(_face: face_t): bool_t;
+	function ot_color_has_svg(face: face_t): bool_t;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
@@ -6581,11 +6581,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Display names can be generic (e.g., "Background") or specific
 	 * (e.g., "Eye color").
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param color_index The index of the color
 	 * @returns the Name ID found for the color.
 	 */
-	function ot_color_palette_color_get_name_id(_face: face_t, color_index: number): ot_name_id_t;
+	function ot_color_palette_color_get_name_id(face: face_t, color_index: number): ot_name_id_t;
 
 	/**
 	 * Fetches a list of the colors in a color palette.
@@ -6595,27 +6595,27 @@ declare namespace imports.gi.HarfBuzz {
 	 * of total colors without storing any actual colors; this can be used
 	 * for allocating a buffer of suitable size before calling
 	 * hb_ot_color_palette_get_colors() a second time.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param palette_index the index of the color palette to query
 	 * @param start_offset offset of the first color to retrieve
 	 * @returns the total number of colors in the palette
 	 */
-	function ot_color_palette_get_colors(_face: face_t, palette_index: number, start_offset: number): number;
+	function ot_color_palette_get_colors(face: face_t, palette_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the number of color palettes in a face.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns the number of palettes found
 	 */
-	function ot_color_palette_get_count(_face: face_t): number;
+	function ot_color_palette_get_count(face: face_t): number;
 
 	/**
 	 * Fetches the flags defined for a color palette.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param palette_index The index of the color palette
 	 * @returns the #hb_ot_color_palette_flags_t of the requested color palette
 	 */
-	function ot_color_palette_get_flags(_face: face_t, palette_index: number): ot_color_palette_flags_t;
+	function ot_color_palette_get_flags(face: face_t, palette_index: number): ot_color_palette_flags_t;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
@@ -6623,12 +6623,12 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Palette display names can be generic (e.g., "Default") or provide
 	 * specific, themed names (e.g., "Spring", "Summer", "Fall", and "Winter").
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param palette_index The index of the color palette
 	 * @returns the Named ID found for the palette.
 	 * If the requested palette has no name the result is #HB_OT_NAME_ID_INVALID.
 	 */
-	function ot_color_palette_get_name_id(_face: face_t, palette_index: number): ot_name_id_t;
+	function ot_color_palette_get_name_id(face: face_t, palette_index: number): ot_name_id_t;
 
 	/**
 	 * Sets the font functions to use when working with #font.
@@ -6642,14 +6642,14 @@ declare namespace imports.gi.HarfBuzz {
 	 * If no list of scripts is provided, all scripts will be queried. If no list
 	 * of languages is provided, all languages will be queried. If no list of
 	 * features is provided, all features will be queried.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param scripts The array of scripts to collect features for
 	 * @param languages The array of languages to collect features for
 	 * @param features The array of features to collect
 	 * @param feature_indexes The array of feature indexes found for the query
 	 */
-	function ot_layout_collect_features(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, feature_indexes: set_t): void;
+	function ot_layout_collect_features(face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, feature_indexes: set_t): void;
 
 	/**
 	 * Fetches a list of all feature-lookup indexes in the specified face's GSUB
@@ -6657,19 +6657,19 @@ declare namespace imports.gi.HarfBuzz {
 	 * features. If no list of scripts is provided, all scripts will be queried.
 	 * If no list of languages is provided, all languages will be queried. If no
 	 * list of features is provided, all features will be queried.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param scripts The array of scripts to collect lookups for
 	 * @param languages The array of languages to collect lookups for
 	 * @param features The array of features to collect lookups for
 	 * @param lookup_indexes The array of lookup indexes found for the query
 	 */
-	function ot_layout_collect_lookups(_face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, lookup_indexes: set_t): void;
+	function ot_layout_collect_lookups(face: face_t, table_tag: tag_t, scripts: tag_t, languages: tag_t, features: tag_t, lookup_indexes: set_t): void;
 
 	/**
 	 * Fetches a list of the characters defined as having a variant under the specified
 	 * "Character Variant" ("cvXX") feature tag.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag table tag to query, "GSUB" or "GPOS".
 	 * @param feature_index index of feature to query.
 	 * @param start_offset offset of the first character to retrieve
@@ -6678,54 +6678,54 @@ declare namespace imports.gi.HarfBuzz {
 	 *               glyph variants.
 	 * @returns Number of total sample characters in the cvXX feature.
 	 */
-	function ot_layout_feature_get_characters(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, characters: codepoint_t[]): number;
+	function ot_layout_feature_get_characters(face: face_t, table_tag: tag_t, feature_index: number, start_offset: number, characters: codepoint_t[]): number;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
 	 * the specified face's GSUB table or GPOS table. The list returned will
 	 * begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param feature_index The index of the requested feature
 	 * @param start_offset offset of the first lookup to retrieve
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): number;
+	function ot_layout_feature_get_lookups(face: face_t, table_tag: tag_t, feature_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches name indices from feature parameters for "Stylistic Set" ('ssXX') or
 	 * "Character Variant" ('cvXX') features.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag table tag to query, "GSUB" or "GPOS".
 	 * @param feature_index index of feature to query.
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_feature_get_name_ids(_face: face_t, table_tag: tag_t, feature_index: number): bool_t;
+	function ot_layout_feature_get_name_ids(face: face_t, table_tag: tag_t, feature_index: number): bool_t;
 
 	/**
 	 * Fetches a list of all lookups enumerated for the specified feature, in
 	 * the specified face's GSUB table or GPOS table, enabled at the specified
 	 * variations index. The list returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param feature_index The index of the feature to query
 	 * @param variations_index The index of the feature variation to query
 	 * @param start_offset offset of the first lookup to retrieve
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_feature_with_variations_get_lookups(_face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number): number;
+	function ot_layout_feature_with_variations_get_lookups(face: face_t, table_tag: tag_t, feature_index: number, variations_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches a list of all attachment points for the specified glyph in the GDEF
 	 * table of the face. The list returned will begin at the offset provided.
 	 * 
 	 * Useful if the client program wishes to cache the list.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param glyph The #hb_codepoint_t code point to query
 	 * @param start_offset offset of the first attachment point to retrieve
 	 * @returns Total number of attachment points for #glyph.
 	 */
-	function ot_layout_get_attach_points(_face: face_t, glyph: codepoint_t, start_offset: number): number;
+	function ot_layout_get_attach_points(face: face_t, glyph: codepoint_t, start_offset: number): number;
 
 	/**
 	 * Fetches a baseline value from the face.
@@ -6740,22 +6740,22 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Fetches the GDEF class of the requested glyph in the specified face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param glyph The #hb_codepoint_t code point to query
 	 * @returns The #hb_ot_layout_glyph_class_t glyph class of the given code
 	 * point in the GDEF table of the face.
 	 */
-	function ot_layout_get_glyph_class(_face: face_t, glyph: codepoint_t): ot_layout_glyph_class_t;
+	function ot_layout_get_glyph_class(face: face_t, glyph: codepoint_t): ot_layout_glyph_class_t;
 
 	/**
 	 * Retrieves the set of all glyphs from the face that belong to the requested
 	 * glyph class in the face's GDEF table.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param klass The #hb_ot_layout_glyph_class_t GDEF class to retrieve
 	 * @param glyphs The #hb_set_t set of all glyphs belonging to the requested
 	 *          class.
 	 */
-	function ot_layout_get_glyphs_in_class(_face: face_t, klass: ot_layout_glyph_class_t, glyphs: set_t): void;
+	function ot_layout_get_glyphs_in_class(face: face_t, klass: ot_layout_glyph_class_t, glyphs: set_t): void;
 
 	/**
 	 * Fetches a list of the caret positions defined for a ligature glyph in the GDEF
@@ -6777,96 +6777,96 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * For more information on this distinction, see the [`size` feature documentation](
 	 * https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt#tag-size).
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_get_size_params(_face: face_t): bool_t;
+	function ot_layout_get_size_params(face: face_t): bool_t;
 
 	/**
 	 * Tests whether a face has any glyph classes defined in its GDEF table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_has_glyph_classes(_face: face_t): bool_t;
+	function ot_layout_has_glyph_classes(face: face_t): bool_t;
 
 	/**
 	 * Tests whether the specified face includes any GPOS positioning.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if the face has GPOS data, %false otherwise
 	 */
-	function ot_layout_has_positioning(_face: face_t): bool_t;
+	function ot_layout_has_positioning(face: face_t): bool_t;
 
 	/**
 	 * Tests whether the specified face includes any GSUB substitutions.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_layout_has_substitution(_face: face_t): bool_t;
+	function ot_layout_has_substitution(face: face_t): bool_t;
 
 	/**
 	 * Fetches the index of a given feature tag in the specified face's GSUB table
 	 * or GPOS table, underneath the specified script and language.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param feature_tag #hb_tag_t of the feature tag requested
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_find_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_tag: tag_t): bool_t;
+	function ot_layout_language_find_feature(face: face_t, table_tag: tag_t, script_index: number, language_index: number, feature_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of all features in the specified face's GSUB table
 	 * or GPOS table, underneath the specified script and language. The list
 	 * returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param start_offset offset of the first feature tag to retrieve
 	 * @returns Total number of features.
 	 */
-	function ot_layout_language_get_feature_indexes(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
+	function ot_layout_language_get_feature_indexes(face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches a list of all features in the specified face's GSUB table
 	 * or GPOS table, underneath the specified script and language. The list
 	 * returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @param start_offset offset of the first feature tag to retrieve
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_language_get_feature_tags(_face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
+	function ot_layout_language_get_feature_tags(face: face_t, table_tag: tag_t, script_index: number, language_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the tag of a requested feature index in the given face's GSUB or GPOS table,
 	 * underneath the specified script and language.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_get_required_feature(_face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
+	function ot_layout_language_get_required_feature(face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
 
 	/**
 	 * Fetches the index of a requested feature in the given face's GSUB or GPOS table,
 	 * underneath the specified script and language.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_index The index of the requested language tag
 	 * @returns %true if the feature is found, %false otherwise
 	 */
-	function ot_layout_language_get_required_feature_index(_face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
+	function ot_layout_language_get_required_feature_index(face: face_t, table_tag: tag_t, script_index: number, language_index: number): bool_t;
 
 	/**
 	 * Fetches a list of all glyphs affected by the specified lookup in the
 	 * specified face's GSUB table or GPOS table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param lookup_index The index of the feature lookup to query
 	 * @param glyphs_before Array of glyphs preceding the substitution range
@@ -6874,11 +6874,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param glyphs_after Array of glyphs following the substitution range
 	 * @param glyphs_output Array of glyphs that would be the substituted output of the lookup
 	 */
-	function ot_layout_lookup_collect_glyphs(_face: face_t, table_tag: tag_t, lookup_index: number, glyphs_before: set_t, glyphs_input: set_t, glyphs_after: set_t, glyphs_output: set_t): void;
+	function ot_layout_lookup_collect_glyphs(face: face_t, table_tag: tag_t, lookup_index: number, glyphs_before: set_t, glyphs_input: set_t, glyphs_after: set_t, glyphs_output: set_t): void;
 
 	/**
 	 * Fetches alternates of a glyph from a given GSUB lookup index.
-	 * @param _face a face.
+	 * @param face a face.
 	 * @param lookup_index index of the feature lookup to query.
 	 * @param glyph a glyph id.
 	 * @param start_offset starting offset.
@@ -6886,21 +6886,21 @@ declare namespace imports.gi.HarfBuzz {
 	 *                    Alternate glyphs associated with the glyph id.
 	 * @returns Total number of alternates found in the specific lookup index for the given glyph id.
 	 */
-	function ot_layout_lookup_get_glyph_alternates(_face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number, alternate_glyphs: codepoint_t[]): number;
+	function ot_layout_lookup_get_glyph_alternates(face: face_t, lookup_index: number, glyph: codepoint_t, start_offset: number, alternate_glyphs: codepoint_t[]): number;
 
 	/**
 	 * Compute the transitive closure of glyphs needed for a
 	 * specified lookup.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param lookup_index index of the feature lookup to query
 	 * @param glyphs Array of glyphs comprising the transitive closure of the lookup
 	 */
-	function ot_layout_lookup_substitute_closure(_face: face_t, lookup_index: number, glyphs: set_t): void;
+	function ot_layout_lookup_substitute_closure(face: face_t, lookup_index: number, glyphs: set_t): void;
 
 	/**
 	 * Tests whether a specified lookup in the specified face would
 	 * trigger a substitution on the given glyph sequence.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param lookup_index The index of the lookup to query
 	 * @param glyphs The sequence of glyphs to query for substitution
 	 * @param glyphs_length The length of the glyph sequence
@@ -6908,109 +6908,109 @@ declare namespace imports.gi.HarfBuzz {
 	 * in substitutions
 	 * @returns %true if a substitution would be triggered, %false otherwise
 	 */
-	function ot_layout_lookup_would_substitute(_face: face_t, lookup_index: number, glyphs: codepoint_t, glyphs_length: number, zero_context: bool_t): bool_t;
+	function ot_layout_lookup_would_substitute(face: face_t, lookup_index: number, glyphs: codepoint_t, glyphs_length: number, zero_context: bool_t): bool_t;
 
 	/**
 	 * Compute the transitive closure of glyphs needed for all of the
 	 * provided lookups.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param lookups The set of lookups to query
 	 * @param glyphs Array of glyphs comprising the transitive closure of the lookups
 	 */
-	function ot_layout_lookups_substitute_closure(_face: face_t, lookups: set_t, glyphs: set_t): void;
+	function ot_layout_lookups_substitute_closure(face: face_t, lookups: set_t, glyphs: set_t): void;
 
 	/**
 	 * Fetches the index of a given language tag in the specified face's GSUB table
 	 * or GPOS table, underneath the specified script tag.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_tag The #hb_tag_t of the requested language
 	 * @param language_index The index of the requested language
 	 * @returns %true if the language tag is found, %false otherwise
 	 */
-	function ot_layout_script_find_language(_face: face_t, table_tag: tag_t, script_index: number, language_tag: tag_t, language_index: number): bool_t;
+	function ot_layout_script_find_language(face: face_t, table_tag: tag_t, script_index: number, language_tag: tag_t, language_index: number): bool_t;
 
 	/**
 	 * Fetches a list of language tags in the given face's GSUB or GPOS table, underneath
 	 * the specified script index. The list returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param start_offset offset of the first language tag to retrieve
 	 * @returns Total number of language tags.
 	 */
-	function ot_layout_script_get_language_tags(_face: face_t, table_tag: tag_t, script_index: number, start_offset: number): number;
+	function ot_layout_script_get_language_tags(face: face_t, table_tag: tag_t, script_index: number, start_offset: number): number;
 
 	/**
 	 * Fetches the index of a given language tag in the specified face's GSUB table
 	 * or GPOS table, underneath the specified script index.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_index The index of the requested script tag
 	 * @param language_count The number of languages in the specified script
 	 * @param language_tags The array of language tags
 	 * @returns %true if the language tag is found, %false otherwise
 	 */
-	function ot_layout_script_select_language(_face: face_t, table_tag: tag_t, script_index: number, language_count: number, language_tags: tag_t): bool_t;
+	function ot_layout_script_select_language(face: face_t, table_tag: tag_t, script_index: number, language_count: number, language_tags: tag_t): bool_t;
 
 	/**
 	 * Deprecated since 2.0.0
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_tags Array of #hb_tag_t script tags
 	 * @returns 
 	 */
-	function ot_layout_table_choose_script(_face: face_t, table_tag: tag_t, script_tags: tag_t): bool_t;
+	function ot_layout_table_choose_script(face: face_t, table_tag: tag_t, script_tags: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of feature variations in the specified face's GSUB table
 	 * or GPOS table, at the specified variation coordinates.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param coords The variation coordinates to query
 	 * @param num_coords The number of variation coordinates
 	 * @returns %true if feature variations were found, %false otherwise.
 	 */
-	function ot_layout_table_find_feature_variations(_face: face_t, table_tag: tag_t, coords: number, num_coords: number): bool_t;
+	function ot_layout_table_find_feature_variations(face: face_t, table_tag: tag_t, coords: number, num_coords: number): bool_t;
 
 	/**
 	 * Fetches the index if a given script tag in the specified face's GSUB table
 	 * or GPOS table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_tag #hb_tag_t of the script tag requested
 	 * @returns %true if the script is found, %false otherwise
 	 */
-	function ot_layout_table_find_script(_face: face_t, table_tag: tag_t, script_tag: tag_t): bool_t;
+	function ot_layout_table_find_script(face: face_t, table_tag: tag_t, script_tag: tag_t): bool_t;
 
 	/**
 	 * Fetches a list of all feature tags in the given face's GSUB or GPOS table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param start_offset offset of the first feature tag to retrieve
 	 * @returns Total number of feature tags.
 	 */
-	function ot_layout_table_get_feature_tags(_face: face_t, table_tag: tag_t, start_offset: number): number;
+	function ot_layout_table_get_feature_tags(face: face_t, table_tag: tag_t, start_offset: number): number;
 
 	/**
 	 * Fetches the total number of lookups enumerated in the specified
 	 * face's GSUB table or GPOS table.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @returns Total number of lookups.
 	 */
-	function ot_layout_table_get_lookup_count(_face: face_t, table_tag: tag_t): number;
+	function ot_layout_table_get_lookup_count(face: face_t, table_tag: tag_t): number;
 
 	/**
 	 * Fetches a list of all scripts enumerated in the specified face's GSUB table
 	 * or GPOS table. The list returned will begin at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param start_offset offset of the first script tag to retrieve
 	 * @returns Total number of script tags.
 	 */
-	function ot_layout_table_get_script_tags(_face: face_t, table_tag: tag_t, start_offset: number): number;
+	function ot_layout_table_get_script_tags(face: face_t, table_tag: tag_t, start_offset: number): number;
 
 	/**
 	 * Selects an OpenType script for #table_tag from the #script_tags array.
@@ -7019,14 +7019,14 @@ declare namespace imports.gi.HarfBuzz {
 	 * `dflt`, and `latn` tags are tried in that order. If the table still does not
 	 * have any of these scripts, #script_index and #chosen_script are set to
 	 * #HB_OT_LAYOUT_NO_SCRIPT_INDEX.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param table_tag #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
 	 * @param script_count Number of script tags in the array
 	 * @param script_tags Array of #hb_tag_t script tags
 	 * @returns %true if one of the requested scripts is selected, %false if a fallback
 	 * script is selected or if no scripts are selected.
 	 */
-	function ot_layout_table_select_script(_face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t): bool_t;
+	function ot_layout_table_select_script(face: face_t, table_tag: tag_t, script_count: number, script_tags: tag_t): bool_t;
 
 	/**
 	 * Fetches the specified math constant. For most constants, the value returned
@@ -7137,35 +7137,35 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Tests whether a face has a `MATH` table.
-	 * @param _face #hb_face_t to test
+	 * @param face #hb_face_t to test
 	 * @returns %true if the table is found, %false otherwise
 	 */
-	function ot_math_has_data(_face: face_t): bool_t;
+	function ot_math_has_data(face: face_t): bool_t;
 
 	/**
 	 * Tests whether the given glyph index is an extended shape in the face.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param glyph The glyph index to test
 	 * @returns %true if the glyph is an extended shape, %false otherwise
 	 */
-	function ot_math_is_glyph_extended_shape(_face: face_t, glyph: codepoint_t): bool_t;
+	function ot_math_is_glyph_extended_shape(face: face_t, glyph: codepoint_t): bool_t;
 
 	/**
 	 * Fetches all available feature types.
-	 * @param _face a face object
+	 * @param face a face object
 	 * @param start_offset iteration's start offset
 	 * @param entries entries tags buffer
 	 * @returns Number of all available feature types.
 	 */
-	function ot_meta_get_entry_tags(_face: face_t, start_offset: number, entries: ot_meta_tag_t[]): number;
+	function ot_meta_get_entry_tags(face: face_t, start_offset: number, entries: ot_meta_tag_t[]): number;
 
 	/**
 	 * It fetches metadata entry of a given tag from a font.
-	 * @param _face a #hb_face_t object.
+	 * @param face a #hb_face_t object.
 	 * @param meta_tag tag of metadata you like to have.
 	 * @returns A blob containing the blob.
 	 */
-	function ot_meta_reference_entry(_face: face_t, meta_tag: ot_meta_tag_t): blob_t;
+	function ot_meta_reference_entry(face: face_t, meta_tag: ot_meta_tag_t): blob_t;
 
 	/**
 	 * Fetches metrics value corresponding to #metrics_tag from #font.
@@ -7207,48 +7207,48 @@ declare namespace imports.gi.HarfBuzz {
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
 	 * Returns string in UTF-16 encoding. A NUL terminator is always written
 	 * for convenience, and isn't included in the output #text_size.
-	 * @param _face font face.
+	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf16(_face: face_t, name_id: ot_name_id_t, language: language_t, text: number[]): number;
+	function ot_name_get_utf16(face: face_t, name_id: ot_name_id_t, language: language_t, text: number[]): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
 	 * Returns string in UTF-32 encoding. A NUL terminator is always written
 	 * for convenience, and isn't included in the output #text_size.
-	 * @param _face font face.
+	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf32(_face: face_t, name_id: ot_name_id_t, language: language_t, text: number[]): number;
+	function ot_name_get_utf32(face: face_t, name_id: ot_name_id_t, language: language_t, text: number[]): number;
 
 	/**
 	 * Fetches a font name from the OpenType 'name' table.
 	 * If #language is #HB_LANGUAGE_INVALID, English ("en") is assumed.
 	 * Returns string in UTF-8 encoding. A NUL terminator is always written
 	 * for convenience, and isn't included in the output #text_size.
-	 * @param _face font face.
+	 * @param face font face.
 	 * @param name_id OpenType name identifier to fetch.
 	 * @param language language to fetch the name for.
 	 * @param text buffer to write fetched name into.
 	 * @returns full length of the requested string, or 0 if not found.
 	 */
-	function ot_name_get_utf8(_face: face_t, name_id: ot_name_id_t, language: language_t, text: string[]): number;
+	function ot_name_get_utf8(face: face_t, name_id: ot_name_id_t, language: language_t, text: string[]): number;
 
 	/**
 	 * Enumerates all available name IDs and language combinations. Returned
 	 * array is owned by the #face and should not be modified.  It can be
 	 * used as long as #face is alive.
-	 * @param _face font face.
+	 * @param face font face.
 	 * @returns Array of available name entries.
 	 */
-	function ot_name_list_names(_face: face_t): ot_name_entry_t[];
+	function ot_name_list_names(face: face_t): ot_name_entry_t[];
 
 	/**
 	 * Computes the transitive closure of glyphs needed for a specified
@@ -7315,91 +7315,91 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Fetches the variation-axis information corresponding to the specified axis tag
 	 * in the specified face.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param axis_tag The #hb_tag_t of the variation axis to query
 	 * @param axis_index The index of the variation axis
 	 * @param axis_info The #hb_ot_var_axis_info_t of the axis tag queried
 	 * @returns 
 	 */
-	function ot_var_find_axis(_face: face_t, axis_tag: tag_t, axis_index: number, axis_info: ot_var_axis_t): bool_t;
+	function ot_var_find_axis(face: face_t, axis_tag: tag_t, axis_index: number, axis_info: ot_var_axis_t): bool_t;
 
 	/**
 	 * Fetches the variation-axis information corresponding to the specified axis tag
 	 * in the specified face.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param axis_tag The #hb_tag_t of the variation axis to query
 	 * @param axis_info The #hb_ot_var_axis_info_t of the axis tag queried
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_var_find_axis_info(_face: face_t, axis_tag: tag_t, axis_info: ot_var_axis_info_t): bool_t;
+	function ot_var_find_axis_info(face: face_t, axis_tag: tag_t, axis_info: ot_var_axis_info_t): bool_t;
 
 	/**
 	 * Fetches a list of all variation axes in the specified face. The list returned will begin
 	 * at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param start_offset offset of the first lookup to retrieve
 	 * @param axes_array The array of variation axes found
 	 * @returns 
 	 */
-	function ot_var_get_axes(_face: face_t, start_offset: number, axes_array: ot_var_axis_t[]): number;
+	function ot_var_get_axes(face: face_t, start_offset: number, axes_array: ot_var_axis_t[]): number;
 
 	/**
 	 * Fetches the number of OpenType variation axes included in the face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @returns the number of variation axes defined
 	 */
-	function ot_var_get_axis_count(_face: face_t): number;
+	function ot_var_get_axis_count(face: face_t): number;
 
 	/**
 	 * Fetches a list of all variation axes in the specified face. The list returned will begin
 	 * at the offset provided.
-	 * @param _face #hb_face_t to work upon
+	 * @param face #hb_face_t to work upon
 	 * @param start_offset offset of the first lookup to retrieve
 	 * @param axes_array The array of variation axes found
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_get_axis_infos(_face: face_t, start_offset: number, axes_array: ot_var_axis_info_t[]): number;
+	function ot_var_get_axis_infos(face: face_t, start_offset: number, axes_array: ot_var_axis_info_t[]): number;
 
 	/**
 	 * Fetches the number of named instances included in the face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @returns the number of named instances defined
 	 */
-	function ot_var_get_named_instance_count(_face: face_t): number;
+	function ot_var_get_named_instance_count(face: face_t): number;
 
 	/**
 	 * Tests whether a face includes any OpenType variation data in the `fvar` table.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @returns %true if data found, %false otherwise
 	 */
-	function ot_var_has_data(_face: face_t): bool_t;
+	function ot_var_has_data(face: face_t): bool_t;
 
 	/**
 	 * Fetches the design-space coordinates corresponding to the given
 	 * named instance in the face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param instance_index The index of the named instance to query
 	 * @returns the number of variation axes in the face
 	 */
-	function ot_var_named_instance_get_design_coords(_face: face_t, instance_index: number): number;
+	function ot_var_named_instance_get_design_coords(face: face_t, instance_index: number): number;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
 	 * the "PostScript name" defined for the given named instance in the face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param instance_index The index of the named instance to query
 	 * @returns the Name ID found for the PostScript name
 	 */
-	function ot_var_named_instance_get_postscript_name_id(_face: face_t, instance_index: number): ot_name_id_t;
+	function ot_var_named_instance_get_postscript_name_id(face: face_t, instance_index: number): ot_name_id_t;
 
 	/**
 	 * Fetches the `name` table Name ID that provides display names for
 	 * the "Subfamily name" defined for the given named instance in the face.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param instance_index The index of the named instance to query
 	 * @returns the Name ID found for the Subfamily name
 	 */
-	function ot_var_named_instance_get_subfamily_name_id(_face: face_t, instance_index: number): ot_name_id_t;
+	function ot_var_named_instance_get_subfamily_name_id(face: face_t, instance_index: number): ot_name_id_t;
 
 	/**
 	 * Normalizes the given design-space coordinates. The minimum and maximum
@@ -7408,22 +7408,22 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Any additional scaling defined in the face's `avar` table is also
 	 * applied, as described at https://docs.microsoft.com/en-us/typography/opentype/spec/avar
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param coords_length The length of the coordinate array
 	 * @param design_coords The design-space coordinates to normalize
 	 */
-	function ot_var_normalize_coords(_face: face_t, coords_length: number, design_coords: number): void;
+	function ot_var_normalize_coords(face: face_t, coords_length: number, design_coords: number): void;
 
 	/**
 	 * Normalizes all of the coordinates in the given list of variation axes.
-	 * @param _face The #hb_face_t to work on
+	 * @param face The #hb_face_t to work on
 	 * @param variations The array of variations to normalize
 	 * @param variations_length The number of variations to normalize
 	 * @returns The array of normalized coordinates
 	 * 
 	 * The length of the coordinate array
 	 */
-	function ot_var_normalize_variations(_face: face_t, variations: variation_t, variations_length: number): [ number[], number ];
+	function ot_var_normalize_variations(face: face_t, variations: variation_t, variations_length: number): [ number[], number ];
 
 	/**
 	 * Converts an ISO 15924 script tag to a corresponding #hb_script_t.
@@ -7436,12 +7436,12 @@ declare namespace imports.gi.HarfBuzz {
 	 * Converts a string #str representing an ISO 15924 script tag to a
 	 * corresponding #hb_script_t. Shorthand for hb_tag_from_string() then
 	 * hb_script_from_iso15924_tag().
-	 * @param _str a string representing an
+	 * @param str a string representing an
 	 *       ISO 15924 tag.
 	 * @param len length of the #str, or -1 if it is %NULL-terminated.
 	 * @returns An #hb_script_t corresponding to the ISO 15924 tag.
 	 */
-	function script_from_string(_str: number[], len: number): script_t;
+	function script_from_string(str: number[], len: number): script_t;
 
 	/**
 	 * Fetches the #hb_direction_t of a script when it is
@@ -7464,18 +7464,18 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Checks the equality of two #hb_segment_properties_t's.
-	 * @param _a first #hb_segment_properties_t to compare.
-	 * @param _b second #hb_segment_properties_t to compare.
+	 * @param a first #hb_segment_properties_t to compare.
+	 * @param b second #hb_segment_properties_t to compare.
 	 * @returns %true if all properties of #a equal those of #b, %false otherwise.
 	 */
-	function segment_properties_equal(_a: segment_properties_t, _b: segment_properties_t): bool_t;
+	function segment_properties_equal(a: segment_properties_t, b: segment_properties_t): bool_t;
 
 	/**
 	 * Creates a hash representing #p.
-	 * @param _p #hb_segment_properties_t to hash.
+	 * @param p #hb_segment_properties_t to hash.
 	 * @returns A hash of #p.
 	 */
-	function segment_properties_hash(_p: segment_properties_t): number;
+	function segment_properties_hash(p: segment_properties_t): number;
 
 	/**
 	 * Adds #codepoint to #set.
@@ -7751,20 +7751,20 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Constructs a shaping plan for a combination of #face, #user_features, #props,
 	 * and #shaper_list.
-	 * @param _face #hb_face_t to use
+	 * @param face #hb_face_t to use
 	 * @param props The #hb_segment_properties_t of the segment
 	 * @param user_features The list of user-selected features
 	 * @param num_user_features The number of user-selected features
 	 * @param shaper_list List of shapers to try
 	 * @returns The shaping plan
 	 */
-	function shape_plan_create(_face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, shaper_list: string[]): shape_plan_t;
+	function shape_plan_create(face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, shaper_list: string[]): shape_plan_t;
 
 	/**
 	 * The variable-font version of #hb_shape_plan_create.
 	 * Constructs a shaping plan for a combination of #face, #user_features, #props,
 	 * and #shaper_list, plus the variation-space coordinates #coords.
-	 * @param _face #hb_face_t to use
+	 * @param face #hb_face_t to use
 	 * @param props The #hb_segment_properties_t of the segment
 	 * @param user_features The list of user-selected features
 	 * @param num_user_features The number of user-selected features
@@ -7773,26 +7773,26 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param shaper_list List of shapers to try
 	 * @returns The shaping plan
 	 */
-	function shape_plan_create2(_face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, coords: number[], num_coords: number, shaper_list: string[]): shape_plan_t;
+	function shape_plan_create2(face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, coords: number[], num_coords: number, shaper_list: string[]): shape_plan_t;
 
 	/**
 	 * Creates a cached shaping plan suitable for reuse, for a combination
 	 * of #face, #user_features, #props, and #shaper_list.
-	 * @param _face #hb_face_t to use
+	 * @param face #hb_face_t to use
 	 * @param props The #hb_segment_properties_t of the segment
 	 * @param user_features The list of user-selected features
 	 * @param num_user_features The number of user-selected features
 	 * @param shaper_list List of shapers to try
 	 * @returns The shaping plan
 	 */
-	function shape_plan_create_cached(_face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, shaper_list: string[]): shape_plan_t;
+	function shape_plan_create_cached(face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, shaper_list: string[]): shape_plan_t;
 
 	/**
 	 * The variable-font version of #hb_shape_plan_create_cached.
 	 * Creates a cached shaping plan suitable for reuse, for a combination
 	 * of #face, #user_features, #props, and #shaper_list, plus the
 	 * variation-space coordinates #coords.
-	 * @param _face #hb_face_t to use
+	 * @param face #hb_face_t to use
 	 * @param props The #hb_segment_properties_t of the segment
 	 * @param user_features The list of user-selected features
 	 * @param num_user_features The number of user-selected features
@@ -7801,7 +7801,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param shaper_list List of shapers to try
 	 * @returns The shaping plan
 	 */
-	function shape_plan_create_cached2(_face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, coords: number[], num_coords: number, shaper_list: string[]): shape_plan_t;
+	function shape_plan_create_cached2(face: face_t, props: segment_properties_t, user_features: feature_t[], num_user_features: number, coords: number[], num_coords: number, shaper_list: string[]): shape_plan_t;
 
 	/**
 	 * Decreases the reference count on the given shaping plan. When the
@@ -7878,11 +7878,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * are four characters. Shorter input strings will be
 	 * padded with spaces. Longer input strings will be
 	 * truncated.
-	 * @param _str String to convert
+	 * @param str String to convert
 	 * @param len Length of #str, or -1 if it is %NULL-terminated
 	 * @returns The #hb_tag_t corresponding to #str
 	 */
-	function tag_from_string(_str: number[], len: number): tag_t;
+	function tag_from_string(str: number[], len: number): tag_t;
 
 	/**
 	 * Converts an #hb_tag_t to a string and returns it in #buf.
@@ -7908,11 +7908,11 @@ declare namespace imports.gi.HarfBuzz {
 	 * Calls the composition function of the specified
 	 * Unicode-functions structure #ufuncs.
 	 * @param ufuncs The Unicode-functions structure
-	 * @param _a The first Unicode code point to compose
-	 * @param _b The second Unicode code point to compose
+	 * @param a The first Unicode code point to compose
+	 * @param b The second Unicode code point to compose
 	 * @returns %true if #a and #b composed, %false otherwise
 	 */
-	function unicode_compose(ufuncs: unicode_funcs_t, _a: codepoint_t, _b: codepoint_t): bool_t;
+	function unicode_compose(ufuncs: unicode_funcs_t, a: codepoint_t, b: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the decomposition of a Unicode code point.
@@ -7920,19 +7920,19 @@ declare namespace imports.gi.HarfBuzz {
 	 * Calls the decomposition function of the specified
 	 * Unicode-functions structure #ufuncs.
 	 * @param ufuncs The Unicode-functions structure
-	 * @param _ab Unicode code point to decompose
+	 * @param ab Unicode code point to decompose
 	 * @returns %true if #ab was decomposed, %false otherwise
 	 */
-	function unicode_decompose(ufuncs: unicode_funcs_t, _ab: codepoint_t): bool_t;
+	function unicode_decompose(ufuncs: unicode_funcs_t, ab: codepoint_t): bool_t;
 
 	/**
 	 * Fetches the compatibility decomposition of a Unicode
 	 * code point. Deprecated.
 	 * @param ufuncs The Unicode-functions structure
-	 * @param _u Code point to decompose
+	 * @param u Code point to decompose
 	 * @returns length of #decomposed.
 	 */
-	function unicode_decompose_compatibility(ufuncs: unicode_funcs_t, _u: codepoint_t): number;
+	function unicode_decompose_compatibility(ufuncs: unicode_funcs_t, u: codepoint_t): number;
 
 	/**
 	 * Don't use. Not used by HarfBuzz.
@@ -8012,66 +8012,66 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Sets the implementation function for #hb_unicode_combining_class_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, _func: unicode_combining_class_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_combining_class_func(ufuncs: unicode_funcs_t, func: unicode_combining_class_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_compose_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, _func: unicode_compose_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_compose_func(ufuncs: unicode_funcs_t, func: unicode_compose_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_compatibility_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_compatibility_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_decompose_compatibility_func(ufuncs: unicode_funcs_t, func: unicode_decompose_compatibility_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_decompose_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, _func: unicode_decompose_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_decompose_func(ufuncs: unicode_funcs_t, func: unicode_decompose_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_eastasian_width_func_t.
 	 * @param ufuncs a Unicode-function structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, _func: unicode_eastasian_width_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_eastasian_width_func(ufuncs: unicode_funcs_t, func: unicode_eastasian_width_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_general_category_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, _func: unicode_general_category_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_general_category_func(ufuncs: unicode_funcs_t, func: unicode_general_category_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_mirroring_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, _func: unicode_mirroring_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_mirroring_func(ufuncs: unicode_funcs_t, func: unicode_mirroring_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Sets the implementation function for #hb_unicode_script_func_t.
 	 * @param ufuncs A Unicode-functions structure
-	 * @param _func The callback function to assign
+	 * @param func The callback function to assign
 	 * @param destroy The function to call when #user_data is not needed anymore
 	 */
-	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, _func: unicode_script_func_t, destroy: destroy_func_t | null): void;
+	function unicode_funcs_set_script_func(ufuncs: unicode_funcs_t, func: unicode_script_func_t, destroy: destroy_func_t | null): void;
 
 	/**
 	 * Attaches a user-data key/data pair to the specified Unicode-functions structure.
@@ -8120,12 +8120,12 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * The format is a tag, optionally followed by an equals sign, followed by a
 	 * number. For example `wght=500`, or `slnt=-7.5`.
-	 * @param _str a string to parse
+	 * @param str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
 	 * @param variation the #hb_variation_t to initialize with the parsed values
 	 * @returns %true if #str is successfully parsed, %false otherwise
 	 */
-	function variation_from_string(_str: number[], len: number, variation: variation_t): bool_t;
+	function variation_from_string(str: number[], len: number, variation: variation_t): bool_t;
 
 	/**
 	 * Converts an #hb_variation_t into a %NULL-terminated string in the format
@@ -8137,5 +8137,109 @@ declare namespace imports.gi.HarfBuzz {
 	 * the allocated size of #buf
 	 */
 	function variation_to_string(variation: variation_t): [ string[], number ];
+
+	/**
+	 * Used when getting or setting AAT feature selectors. Indicates that
+	 * there is no selector index corresponding to the selector of interest.
+	 * @returns Used when getting or setting AAT feature selectors. Indicates that
+	 * there is no selector index corresponding to the selector of interest.
+	 */
+	const AAT_LAYOUT_NO_SELECTOR_INDEX: number;
+
+	/**
+	 * The default code point for replacing invalid characters in a given encoding.
+	 * Set to U+FFFD REPLACEMENT CHARACTER.
+	 * @returns The default code point for replacing invalid characters in a given encoding.
+	 * Set to U+FFFD REPLACEMENT CHARACTER.
+	 */
+	const BUFFER_REPLACEMENT_CODEPOINT_DEFAULT: number;
+
+	/**
+	 * Special setting for #hb_feature_t.start to apply the feature from the start
+	 * of the buffer.
+	 * @returns Special setting for #hb_feature_t.start to apply the feature from the start
+	 * of the buffer.
+	 */
+	const FEATURE_GLOBAL_START: number;
+
+	/**
+	 * An unset #hb_language_t.
+	 * @returns An unset #hb_language_t.
+	 */
+	const LANGUAGE_INVALID: language_t;
+
+	/**
+	 * Unset #hb_map_t value.
+	 * @returns Unset #hb_map_t value.
+	 */
+	const MAP_VALUE_INVALID: codepoint_t;
+
+	/**
+	 * Special value for language index indicating default or unsupported language.
+	 * @returns Special value for language index indicating default or unsupported language.
+	 */
+	const OT_LAYOUT_DEFAULT_LANGUAGE_INDEX: number;
+
+	/**
+	 * Special value for feature index indicating unsupported feature.
+	 * @returns Special value for feature index indicating unsupported feature.
+	 */
+	const OT_LAYOUT_NO_FEATURE_INDEX: number;
+
+	/**
+	 * Special value for script index indicating unsupported script.
+	 * @returns Special value for script index indicating unsupported script.
+	 */
+	const OT_LAYOUT_NO_SCRIPT_INDEX: number;
+
+	/**
+	 * Special value for variations index indicating unsupported variation.
+	 * @returns Special value for variations index indicating unsupported variation.
+	 */
+	const OT_LAYOUT_NO_VARIATIONS_INDEX: number;
+
+	/**
+	 * Maximum number of OpenType tags that can correspond to a give #hb_language_t.
+	 * @returns Maximum number of OpenType tags that can correspond to a give #hb_language_t.
+	 */
+	const OT_MAX_TAGS_PER_LANGUAGE: number;
+
+	/**
+	 * Maximum number of OpenType tags that can correspond to a give #hb_script_t.
+	 * @returns Maximum number of OpenType tags that can correspond to a give #hb_script_t.
+	 */
+	const OT_MAX_TAGS_PER_SCRIPT: number;
+
+	/**
+	 * Do not use.
+	 * @returns Do not use.
+	 */
+	const OT_VAR_NO_AXIS_INDEX: number;
+
+	/**
+	 * Unset #hb_set_t value.
+	 * @returns Unset #hb_set_t value.
+	 */
+	const SET_VALUE_INVALID: codepoint_t;
+
+	/**
+	 * Maximum valid Unicode code point.
+	 * @returns Maximum valid Unicode code point.
+	 */
+	const UNICODE_MAX: number;
+
+	/**
+	 * See Unicode 6.1 for details on the maximum decomposition length.
+	 * @returns See Unicode 6.1 for details on the maximum decomposition length.
+	 */
+	const UNICODE_MAX_DECOMPOSITION_LEN: number;
+
+	const VERSION_MAJOR: number;
+
+	const VERSION_MICRO: number;
+
+	const VERSION_MINOR: number;
+
+	const VERSION_STRING: string;
 
 }
