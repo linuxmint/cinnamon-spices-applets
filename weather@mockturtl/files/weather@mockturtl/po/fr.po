@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-19 21:37+0100\n"
-"PO-Revision-Date: 2021-10-23 12:32+0200\n"
+"PO-Revision-Date: 2021-11-02 09:29+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -116,7 +116,7 @@ msgid ""
 "are you connected to the internet?"
 msgstr ""
 "Impossible de mettre à jour la météo depuis un certain temps...\n"
-"vérifier la connexion à l'Internet ?"
+"vérifier la connexion à Internet ?"
 
 #: 3.0/applet.js:684
 msgid "Network Error, please check logs in Looking Glass"
@@ -1707,6 +1707,7 @@ msgstr "DarkSky (clé requise)"
 msgid "Weatherbit (key needed)"
 msgstr "WeatherBit (clé requise)"
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
 msgstr "Yahoo!"
@@ -1732,10 +1733,11 @@ msgstr ""
 msgid "Manual Location"
 msgstr "Choisir l'emplacement"
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
-msgstr "À activer si vous voulez indiquer vous-même l'emplacement"
+msgstr "À activer si vous voulez indiquer vous-même l'emplacement."
 
 #. 3.0->settings-schema.json->location->description
 msgid "Location - Coordinates"
@@ -1925,10 +1927,11 @@ msgstr ""
 "Afficher les conditions météorologiques (par ex. « Venteux », « Beau ») dans "
 "le panneau"
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
 #. 3.8->settings-schema.json->showCommentInPanel->tooltip
 msgid "Only works with horizontal panels"
-msgstr "Fonctionne uniquement avec des panneaux horizontaux"
+msgstr "Fonctionne uniquement avec des panneaux horizontaux."
 
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
@@ -1946,12 +1949,13 @@ msgstr ""
 "pour la température et {u} pour l'unité.\n"
 "Peut être utilisé si l'étiquette ne tient pas sur le panneau vertical."
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
 #. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
 msgid "Iconset is weather-icons by Erik Flowers"
-msgstr "Le jeu d’icônes est weather-icons par Erik Flowers"
+msgstr "Le jeu d’icônes est weather-icons par Erik Flowers."
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
@@ -2007,9 +2011,10 @@ msgstr "Afficher l'heure au format 24 heures"
 msgid "Only display hours for hourly forecast time"
 msgstr "Afficher uniquement les heures pour les prévisions horaires"
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
-msgstr "Au lieu de 15:00 ou 3 pm, apparaîtra comme 15 ou 3 pm"
+msgstr "Au lieu de 15:00 ou 3 pm, apparaîtra comme 15 ou 3 pm."
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
@@ -2019,7 +2024,7 @@ msgstr "Afficher la date pour les prévisions quotidiennes"
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
 msgid "Like \"Friday 15\""
-msgstr "Comme « Vendredi 15 »"
+msgstr "Comme « Vendredi 15 »."
 
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
@@ -2197,7 +2202,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr "Activer les prévisions de pluie minute-par-minute."
+msgstr "Activer les prévisions de pluie minute-par-minute"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2222,7 +2227,7 @@ msgid ""
 "Hide/Show button will be hidden and Hourly weather will be permanently "
 "visible."
 msgstr ""
-"Le bouton Masquer/Afficher sera masqué et la météo horaire sera visible en "
+"Le bouton Cacher/Afficher sera caché et la météo horaire sera visible en "
 "permanence."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
@@ -2240,7 +2245,7 @@ msgid ""
 msgstr ""
 "Vous devez vous assurer que le champ de saisie Requête de recherche est "
 "unique et que votre fuseau horaire est au format IANA (par ex. 'Europe/"
-"Londres')"
+"Londres')."
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
@@ -2278,11 +2283,12 @@ msgstr "Comme SE, N au lieu d'icônes de direction."
 msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
 msgstr "Au lieu de 15:00 ou 3:00 pm, apparaîtra comme 15 ou 3 pm"
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
 "Ne s'applique pas à l'ensemble d'icônes personnalisé, qui est symbolique par "
-"défaut"
+"défaut."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
