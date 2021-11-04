@@ -1,4 +1,13 @@
-// declare namespace imports.gi.St {
+declare namespace imports.gi.St {
+    interface IIcon {
+        icon_type: IconType;
+    }
+
+    export enum IconType {
+		SYMBOLIC,
+		FULLCOLOR
+	}
+}
 
 
 // 	// CLASSES
