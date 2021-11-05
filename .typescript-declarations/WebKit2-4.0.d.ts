@@ -109,7 +109,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthenticationRequest} instead.
 	 */
-	type AuthenticationRequestMixin = IAuthenticationRequest & GObject.IObject;
+	type AuthenticationRequestMixin = IAuthenticationRequest & GObject.Object;
 
 	interface AuthenticationRequest extends AuthenticationRequestMixin {}
 
@@ -174,7 +174,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AutomationSession} instead.
 	 */
-	type AutomationSessionMixin = IAutomationSession & GObject.IObject;
+	type AutomationSessionMixin = IAutomationSession & GObject.Object;
 
 	interface AutomationSession extends AutomationSessionMixin {}
 
@@ -233,7 +233,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardList} instead.
 	 */
-	type BackForwardListMixin = IBackForwardList & GObject.IObject;
+	type BackForwardListMixin = IBackForwardList & GObject.Object;
 
 	interface BackForwardList extends BackForwardListMixin {}
 
@@ -268,7 +268,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardListItem} instead.
 	 */
-	type BackForwardListItemMixin = IBackForwardListItem & GObject.IInitiallyUnowned;
+	type BackForwardListItemMixin = IBackForwardListItem & GObject.InitiallyUnowned;
 
 	interface BackForwardListItem extends BackForwardListItemMixin {}
 
@@ -331,7 +331,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserRequest} instead.
 	 */
-	type ColorChooserRequestMixin = IColorChooserRequest & GObject.IObject;
+	type ColorChooserRequestMixin = IColorChooserRequest & GObject.Object;
 
 	interface ColorChooserRequest extends ColorChooserRequestMixin {}
 
@@ -434,7 +434,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenu} instead.
 	 */
-	type ContextMenuMixin = IContextMenu & GObject.IObject;
+	type ContextMenuMixin = IContextMenu & GObject.Object;
 
 	interface ContextMenu extends ContextMenuMixin {}
 
@@ -510,7 +510,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenuItem} instead.
 	 */
-	type ContextMenuItemMixin = IContextMenuItem & GObject.IInitiallyUnowned;
+	type ContextMenuItemMixin = IContextMenuItem & GObject.InitiallyUnowned;
 
 	interface ContextMenuItem extends ContextMenuItemMixin {}
 
@@ -704,7 +704,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieManager} instead.
 	 */
-	type CookieManagerMixin = ICookieManager & GObject.IObject;
+	type CookieManagerMixin = ICookieManager & GObject.Object;
 
 	interface CookieManager extends CookieManagerMixin {}
 
@@ -725,7 +725,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceInfoPermissionRequest} instead.
 	 */
-	type DeviceInfoPermissionRequestMixin = IDeviceInfoPermissionRequest & GObject.IObject & IPermissionRequest;
+	type DeviceInfoPermissionRequestMixin = IDeviceInfoPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface DeviceInfoPermissionRequest extends DeviceInfoPermissionRequestMixin {}
 
@@ -900,7 +900,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Download} instead.
 	 */
-	type DownloadMixin = IDownload & GObject.IObject;
+	type DownloadMixin = IDownload & GObject.Object;
 
 	interface Download extends DownloadMixin {}
 
@@ -964,7 +964,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EditorState} instead.
 	 */
-	type EditorStateMixin = IEditorState & GObject.IObject;
+	type EditorStateMixin = IEditorState & GObject.Object;
 
 	interface EditorState extends EditorStateMixin {}
 
@@ -1032,7 +1032,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FaviconDatabase} instead.
 	 */
-	type FaviconDatabaseMixin = IFaviconDatabase & GObject.IObject;
+	type FaviconDatabaseMixin = IFaviconDatabase & GObject.Object;
 
 	interface FaviconDatabase extends FaviconDatabaseMixin {}
 
@@ -1155,7 +1155,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserRequest} instead.
 	 */
-	type FileChooserRequestMixin = IFileChooserRequest & GObject.IObject;
+	type FileChooserRequestMixin = IFileChooserRequest & GObject.Object;
 
 	interface FileChooserRequest extends FileChooserRequestMixin {}
 
@@ -1313,7 +1313,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FindController} instead.
 	 */
-	type FindControllerMixin = IFindController & GObject.IObject;
+	type FindControllerMixin = IFindController & GObject.Object;
 
 	interface FindController extends FindControllerMixin {}
 
@@ -1362,7 +1362,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FormSubmissionRequest} instead.
 	 */
-	type FormSubmissionRequestMixin = IFormSubmissionRequest & GObject.IObject;
+	type FormSubmissionRequestMixin = IFormSubmissionRequest & GObject.Object;
 
 	interface FormSubmissionRequest extends FormSubmissionRequestMixin {}
 
@@ -1425,7 +1425,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationManager} instead.
 	 */
-	type GeolocationManagerMixin = IGeolocationManager & GObject.IObject;
+	type GeolocationManagerMixin = IGeolocationManager & GObject.Object;
 
 	interface GeolocationManager extends GeolocationManagerMixin {}
 
@@ -1446,7 +1446,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationPermissionRequest} instead.
 	 */
-	type GeolocationPermissionRequestMixin = IGeolocationPermissionRequest & GObject.IObject & IPermissionRequest;
+	type GeolocationPermissionRequestMixin = IGeolocationPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface GeolocationPermissionRequest extends GeolocationPermissionRequestMixin {}
 
@@ -1590,7 +1590,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HitTestResult} instead.
 	 */
-	type HitTestResultMixin = IHitTestResult & GObject.IObject;
+	type HitTestResultMixin = IHitTestResult & GObject.Object;
 
 	interface HitTestResult extends HitTestResultMixin {}
 
@@ -1633,12 +1633,12 @@ declare namespace imports.gi.WebKit2 {
 		get_preedit(): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];
 		/**
 		 * Notify #context that cursor area changed in input associated.
-		 * @param _x the x coordinate of cursor location
-		 * @param _y the y coordinate of cursor location
+		 * @param x the x coordinate of cursor location
+		 * @param y the y coordinate of cursor location
 		 * @param width the width of cursor area
 		 * @param height the height of cursor area
 		 */
-		notify_cursor_area(_x: number, _y: number, width: number, height: number): void;
+		notify_cursor_area(x: number, y: number, width: number, height: number): void;
 		/**
 		 * Notify #context that input associated has gained focus.
 		 */
@@ -1712,7 +1712,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputMethodContext} instead.
 	 */
-	type InputMethodContextMixin = IInputMethodContext & GObject.IObject;
+	type InputMethodContextMixin = IInputMethodContext & GObject.Object;
 
 	interface InputMethodContext extends InputMethodContextMixin {}
 
@@ -1737,7 +1737,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InstallMissingMediaPluginsPermissionRequest} instead.
 	 */
-	type InstallMissingMediaPluginsPermissionRequestMixin = IInstallMissingMediaPluginsPermissionRequest & GObject.IObject & IPermissionRequest;
+	type InstallMissingMediaPluginsPermissionRequestMixin = IInstallMissingMediaPluginsPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface InstallMissingMediaPluginsPermissionRequest extends InstallMissingMediaPluginsPermissionRequestMixin {}
 
@@ -1758,7 +1758,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MediaKeySystemPermissionRequest} instead.
 	 */
-	type MediaKeySystemPermissionRequestMixin = IMediaKeySystemPermissionRequest & GObject.IObject & IPermissionRequest;
+	type MediaKeySystemPermissionRequestMixin = IMediaKeySystemPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface MediaKeySystemPermissionRequest extends MediaKeySystemPermissionRequestMixin {}
 
@@ -1861,7 +1861,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NavigationPolicyDecision} instead.
 	 */
-	type NavigationPolicyDecisionMixin = INavigationPolicyDecision & IPolicyDecision;
+	type NavigationPolicyDecisionMixin = INavigationPolicyDecision & PolicyDecision;
 
 	interface NavigationPolicyDecision extends NavigationPolicyDecisionMixin {}
 
@@ -1949,7 +1949,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notification} instead.
 	 */
-	type NotificationMixin = INotification & GObject.IObject;
+	type NotificationMixin = INotification & GObject.Object;
 
 	interface Notification extends NotificationMixin {}
 
@@ -1970,7 +1970,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotificationPermissionRequest} instead.
 	 */
-	type NotificationPermissionRequestMixin = INotificationPermissionRequest & GObject.IObject & IPermissionRequest;
+	type NotificationPermissionRequestMixin = INotificationPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface NotificationPermissionRequest extends NotificationPermissionRequestMixin {}
 
@@ -2032,7 +2032,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OptionMenu} instead.
 	 */
-	type OptionMenuMixin = IOptionMenu & GObject.IObject;
+	type OptionMenuMixin = IOptionMenu & GObject.Object;
 
 	interface OptionMenu extends OptionMenuMixin {}
 
@@ -2061,7 +2061,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plugin} instead.
 	 */
-	type PluginMixin = IPlugin & GObject.IObject;
+	type PluginMixin = IPlugin & GObject.Object;
 
 	interface Plugin extends PluginMixin {}
 
@@ -2082,7 +2082,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PointerLockPermissionRequest} instead.
 	 */
-	type PointerLockPermissionRequestMixin = IPointerLockPermissionRequest & GObject.IObject & IPermissionRequest;
+	type PointerLockPermissionRequestMixin = IPointerLockPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface PointerLockPermissionRequest extends PointerLockPermissionRequestMixin {}
 
@@ -2126,7 +2126,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PolicyDecision} instead.
 	 */
-	type PolicyDecisionMixin = IPolicyDecision & GObject.IObject;
+	type PolicyDecisionMixin = IPolicyDecision & GObject.Object;
 
 	interface PolicyDecision extends PolicyDecisionMixin {}
 
@@ -2189,7 +2189,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintCustomWidget} instead.
 	 */
-	type PrintCustomWidgetMixin = IPrintCustomWidget & GObject.IObject;
+	type PrintCustomWidgetMixin = IPrintCustomWidget & GObject.Object;
 
 	interface PrintCustomWidget extends PrintCustomWidgetMixin {}
 
@@ -2313,7 +2313,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
-	type PrintOperationMixin = IPrintOperation & GObject.IObject;
+	type PrintOperationMixin = IPrintOperation & GObject.Object;
 
 	interface PrintOperation extends PrintOperationMixin {}
 
@@ -2377,7 +2377,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ResponsePolicyDecision} instead.
 	 */
-	type ResponsePolicyDecisionMixin = IResponsePolicyDecision & IPolicyDecision;
+	type ResponsePolicyDecisionMixin = IResponsePolicyDecision & PolicyDecision;
 
 	interface ResponsePolicyDecision extends ResponsePolicyDecisionMixin {}
 
@@ -2477,7 +2477,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SecurityManager} instead.
 	 */
-	type SecurityManagerMixin = ISecurityManager & GObject.IObject;
+	type SecurityManagerMixin = ISecurityManager & GObject.Object;
 
 	interface SecurityManager extends SecurityManagerMixin {}
 
@@ -3583,7 +3583,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
-	type SettingsMixin = ISettings & GObject.IObject;
+	type SettingsMixin = ISettings & GObject.Object;
 
 	interface Settings extends SettingsMixin {}
 
@@ -3662,7 +3662,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIRequest} instead.
 	 */
-	type URIRequestMixin = IURIRequest & GObject.IObject;
+	type URIRequestMixin = IURIRequest & GObject.Object;
 
 	interface URIRequest extends URIRequestMixin {}
 
@@ -3757,7 +3757,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIResponse} instead.
 	 */
-	type URIResponseMixin = IURIResponse & GObject.IObject;
+	type URIResponseMixin = IURIResponse & GObject.Object;
 
 	interface URIResponse extends URIResponseMixin {}
 
@@ -3809,7 +3809,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URISchemeRequest} instead.
 	 */
-	type URISchemeRequestMixin = IURISchemeRequest & GObject.IObject;
+	type URISchemeRequestMixin = IURISchemeRequest & GObject.Object;
 
 	interface URISchemeRequest extends URISchemeRequestMixin {}
 
@@ -3937,7 +3937,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentFilterStore} instead.
 	 */
-	type UserContentFilterStoreMixin = IUserContentFilterStore & GObject.IObject;
+	type UserContentFilterStoreMixin = IUserContentFilterStore & GObject.Object;
 
 	interface UserContentFilterStore extends UserContentFilterStoreMixin {}
 
@@ -4097,7 +4097,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentManager} instead.
 	 */
-	type UserContentManagerMixin = IUserContentManager & GObject.IObject;
+	type UserContentManagerMixin = IUserContentManager & GObject.Object;
 
 	interface UserContentManager extends UserContentManagerMixin {}
 
@@ -4132,7 +4132,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMediaPermissionRequest} instead.
 	 */
-	type UserMediaPermissionRequestMixin = IUserMediaPermissionRequest & GObject.IObject & IPermissionRequest;
+	type UserMediaPermissionRequestMixin = IUserMediaPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface UserMediaPermissionRequest extends UserMediaPermissionRequestMixin {}
 
@@ -4197,7 +4197,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMessage} instead.
 	 */
-	type UserMessageMixin = IUserMessage & GObject.IInitiallyUnowned;
+	type UserMessageMixin = IUserMessage & GObject.InitiallyUnowned;
 
 	interface UserMessage extends UserMessageMixin {}
 
@@ -4709,7 +4709,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebContext} instead.
 	 */
-	type WebContextMixin = IWebContext & GObject.IObject;
+	type WebContextMixin = IWebContext & GObject.Object;
 
 	interface WebContext extends WebContextMixin {}
 
@@ -4887,7 +4887,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebInspector} instead.
 	 */
-	type WebInspectorMixin = IWebInspector & GObject.IObject;
+	type WebInspectorMixin = IWebInspector & GObject.Object;
 
 	interface WebInspector extends WebInspectorMixin {}
 
@@ -5011,7 +5011,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebResource} instead.
 	 */
-	type WebResourceMixin = IWebResource & GObject.IObject;
+	type WebResourceMixin = IWebResource & GObject.Object;
 
 	interface WebResource extends WebResourceMixin {}
 
@@ -5174,9 +5174,9 @@ declare namespace imports.gi.WebKit2 {
 		 * webkit_web_view_can_execute_editing_command() to check whether
 		 * it's possible to execute the command.
 		 * @param command the command to execute
-		 * @param _argument the command argument
+		 * @param argument the command argument
 		 */
-		execute_editing_command_with_argument(command: string, _argument: string): void;
+		execute_editing_command_with_argument(command: string, argument: string): void;
 		/**
 		 * Get the presentation type of #WebKitWebView when created for automation.
 		 * @returns a #WebKitAutomationBrowsingContextPresentation.
@@ -6308,7 +6308,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebView} instead.
 	 */
-	type WebViewMixin = IWebView & IWebViewBase & Atk.IImplementorIface & Gtk.IBuildable;
+	type WebViewMixin = IWebView & WebViewBase & Atk.ImplementorIface & Gtk.Buildable;
 
 	interface WebView extends WebViewMixin {}
 
@@ -6384,7 +6384,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebViewBase} instead.
 	 */
-	type WebViewBaseMixin = IWebViewBase & Gtk.IContainer & Atk.IImplementorIface & Gtk.IBuildable;
+	type WebViewBaseMixin = IWebViewBase & Gtk.Container & Atk.ImplementorIface & Gtk.Buildable;
 
 	interface WebViewBase extends WebViewBaseMixin {}
 
@@ -6414,7 +6414,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataAccessPermissionRequest} instead.
 	 */
-	type WebsiteDataAccessPermissionRequestMixin = IWebsiteDataAccessPermissionRequest & GObject.IObject & IPermissionRequest;
+	type WebsiteDataAccessPermissionRequestMixin = IWebsiteDataAccessPermissionRequest & GObject.Object & PermissionRequest;
 
 	interface WebsiteDataAccessPermissionRequest extends WebsiteDataAccessPermissionRequestMixin {}
 
@@ -6705,7 +6705,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataManager} instead.
 	 */
-	type WebsiteDataManagerMixin = IWebsiteDataManager & GObject.IObject;
+	type WebsiteDataManagerMixin = IWebsiteDataManager & GObject.Object;
 
 	interface WebsiteDataManager extends WebsiteDataManagerMixin {}
 
@@ -6751,7 +6751,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsitePolicies} instead.
 	 */
-	type WebsitePoliciesMixin = IWebsitePolicies & GObject.IObject;
+	type WebsitePoliciesMixin = IWebsitePolicies & GObject.Object;
 
 	interface WebsitePolicies extends WebsitePoliciesMixin {}
 
@@ -6864,7 +6864,7 @@ declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowProperties} instead.
 	 */
-	type WindowPropertiesMixin = IWindowProperties & GObject.IObject;
+	type WindowPropertiesMixin = IWindowProperties & GObject.Object;
 
 	interface WindowProperties extends WindowPropertiesMixin {}
 
@@ -7389,7 +7389,7 @@ declare namespace imports.gi.WebKit2 {
 		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
 		public notify_focus_in: {(context: InputMethodContext): void;};
 		public notify_focus_out: {(context: InputMethodContext): void;};
-		public notify_cursor_area: {(context: InputMethodContext, _x: number, _y: number, width: number, height: number): void;};
+		public notify_cursor_area: {(context: InputMethodContext, x: number, y: number, width: number, height: number): void;};
 		public notify_surrounding: {(context: InputMethodContext, text: string, length: number, cursor_index: number, selection_index: number): void;};
 		public reset: {(context: InputMethodContext): void;};
 		public _webkit_reserved0: {(): void;};
@@ -7946,11 +7946,11 @@ declare namespace imports.gi.WebKit2 {
 		 * port.
 		 * @param protocol The protocol for the new origin
 		 * @param host The host for the new origin
-		 * @param _port The port number for the new origin, or 0 to indicate the
+		 * @param port The port number for the new origin, or 0 to indicate the
 		 *        default port for #protocol
 		 * @returns A #WebKitSecurityOrigin.
 		 */
-		public static new(protocol: string, host: string, _port: number): SecurityOrigin;
+		public static new(protocol: string, host: string, port: number): SecurityOrigin;
 		/**
 		 * Create a new security origin from the provided URI. Components of
 		 * #uri other than protocol, host, and port do not affect the created
@@ -8335,7 +8335,7 @@ declare namespace imports.gi.WebKit2 {
 		public run_as_modal: {(web_view: WebView): void;};
 		public close: {(web_view: WebView): void;};
 		public script_dialog: {(web_view: WebView, dialog: ScriptDialog): boolean;};
-		public decide_policy: {(web_view: WebView, decision: PolicyDecision, _type: PolicyDecisionType): boolean;};
+		public decide_policy: {(web_view: WebView, decision: PolicyDecision, type: PolicyDecisionType): boolean;};
 		public permission_request: {(web_view: WebView, permission_request: PermissionRequest): boolean;};
 		public mouse_target_changed: {(web_view: WebView, hit_test_result: HitTestResult, modifiers: number): void;};
 		public print: {(web_view: WebView, print_operation: PrintOperation): boolean;};
@@ -9717,5 +9717,165 @@ declare namespace imports.gi.WebKit2 {
 	function user_media_permission_is_for_video_device(request: UserMediaPermissionRequest): boolean;
 
 	function user_message_error_quark(): GLib.Quark;
+
+	/**
+	 * The copy clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to copy to the clipboard when there is an active selection
+	 * inside the #WebKitWebView.
+	 * @returns The copy clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to copy to the clipboard when there is an active selection
+	 * inside the #WebKitWebView.
+	 */
+	const EDITING_COMMAND_COPY: string;
+
+	/**
+	 * The create link command. Creates a link element that is inserted at
+	 * the current cursor position. If there's a selection, the selected text
+	 * will be used as the link text, otherwise the URL itself will be used.
+	 * It receives the link URL as argument. This command should be executed
+	 * with webkit_web_view_execute_editing_command_with_argument()
+	 * @returns The create link command. Creates a link element that is inserted at
+	 * the current cursor position. If there's a selection, the selected text
+	 * will be used as the link text, otherwise the URL itself will be used.
+	 * It receives the link URL as argument. This command should be executed
+	 * with webkit_web_view_execute_editing_command_with_argument()
+	 */
+	const EDITING_COMMAND_CREATE_LINK: string;
+
+	/**
+	 * The cut clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard and deletes the selected content.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to cut to the clipboard when the #WebKitWebView content is
+	 * editable and there is an active selection.
+	 * @returns The cut clipboard command. Copies the current selection inside
+	 * a #WebKitWebView to the clipboard and deletes the selected content.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * possible to cut to the clipboard when the #WebKitWebView content is
+	 * editable and there is an active selection.
+	 */
+	const EDITING_COMMAND_CUT: string;
+
+	/**
+	 * The insert image command. Creates an image element that is inserted at
+	 * the current cursor position. It receives an URI as argument,
+	 * that is used as the image source. This command should be executed with
+	 * webkit_web_view_execute_editing_command_with_argument().
+	 * @returns The insert image command. Creates an image element that is inserted at
+	 * the current cursor position. It receives an URI as argument,
+	 * that is used as the image source. This command should be executed with
+	 * webkit_web_view_execute_editing_command_with_argument().
+	 */
+	const EDITING_COMMAND_INSERT_IMAGE: string;
+
+	/**
+	 * The paste clipboard command. Pastes the contents of the clipboard to
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 * @returns The paste clipboard command. Pastes the contents of the clipboard to
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 */
+	const EDITING_COMMAND_PASTE: string;
+
+	/**
+	 * The paste as plaintext clipboard command. Pastes the contents of the
+	 * clipboard to a #WebKitWebView, with formatting removed.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 * @returns The paste as plaintext clipboard command. Pastes the contents of the
+	 * clipboard to a #WebKitWebView, with formatting removed.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * to paste from the clipboard when the #WebKitWebView content is editable
+	 * and clipboard is not empty.
+	 */
+	const EDITING_COMMAND_PASTE_AS_PLAIN_TEXT: string;
+
+	/**
+	 * The redo command. Redoes a previously undone editing command in
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to redo a command when it has been previously undone.
+	 * @returns The redo command. Redoes a previously undone editing command in
+	 * a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to redo a command when it has been previously undone.
+	 */
+	const EDITING_COMMAND_REDO: string;
+
+	/**
+	 * The select all command. Selects all the content of the current text field in
+	 * a #WebKitWebView.
+	 * It is always possible to select all text, no matter whether the
+	 * #WebKitWebView content is editable or not. You can still check it
+	 * with webkit_web_view_can_execute_editing_command().
+	 * @returns The select all command. Selects all the content of the current text field in
+	 * a #WebKitWebView.
+	 * It is always possible to select all text, no matter whether the
+	 * #WebKitWebView content is editable or not. You can still check it
+	 * with webkit_web_view_can_execute_editing_command().
+	 */
+	const EDITING_COMMAND_SELECT_ALL: string;
+
+	/**
+	 * The undo command. Undoes the last editing command in a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to undo a command after a previously executed editing operation.
+	 * @returns The undo command. Undoes the last editing command in a #WebKitWebView.
+	 * You can check whether it's possible to execute the command with
+	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * to undo a command after a previously executed editing operation.
+	 */
+	const EDITING_COMMAND_UNDO: string;
+
+	/**
+	 * Like webkit_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * Like webkit_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * Like webkit_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like webkit_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MINOR_VERSION: number;
 
 }

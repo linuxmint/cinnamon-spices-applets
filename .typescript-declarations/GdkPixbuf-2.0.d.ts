@@ -61,12 +61,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * If `substitute_color` is `FALSE`, then the (`r`, `g`, `b`) arguments
 		 * will be ignored.
 		 * @param substitute_color Whether to set a color to zero opacity.
-		 * @param _r Red value to substitute.
-		 * @param _g Green value to substitute.
-		 * @param _b Blue value to substitute.
+		 * @param r Red value to substitute.
+		 * @param g Green value to substitute.
+		 * @param b Blue value to substitute.
 		 * @returns A newly-created pixbuf
 		 */
-		add_alpha(substitute_color: boolean, _r: number, _g: number, _b: number): Pixbuf;
+		add_alpha(substitute_color: boolean, r: number, g: number, b: number): Pixbuf;
 		/**
 		 * Takes an existing pixbuf and checks for the presence of an
 		 * associated "orientation" option.
@@ -286,8 +286,10 @@ declare namespace imports.gi.GdkPixbuf {
 		 * about how the pixel data is stored in memory.
 		 * @returns A pointer to the pixbuf's
 		 * pixel data.
+		 * 
+		 * The length of the binary data.
 		 */
-		get_pixels_with_length(): number[];
+		get_pixels_with_length(): [ number[], number ];
 		/**
 		 * Queries the rowstride of a pixbuf, which is the number of bytes between
 		 * the start of a row and the start of the next row.
@@ -449,11 +451,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * parameter. When the ICO saver is given "x_hot" and "y_hot" parameters,
 		 * it produces a CUR instead of an ICO.
 		 * @param filename name of file to save.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param error return location for error
 		 * @returns `TRUE` on success, and `FALSE` otherwise
 		 */
-		save(filename: string, _type: string, error: GLib.Error | null): boolean;
+		save(filename: string, type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
 		 * "png", "tiff", "ico" or "bmp".
@@ -469,11 +471,16 @@ declare namespace imports.gi.GdkPixbuf {
 		 * domain.
 		 * 
 		 * See `gdk_pixbuf_save()` for more details.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param error return location for error, or `NULL`
 		 * @returns whether an error was set
+		 * 
+		 * location to receive a pointer
+		 *   to the new buffer.
+		 * 
+		 * location to receive the size of the new buffer.
 		 */
-		save_to_buffer(_type: string, error: GLib.Error | null): boolean;
+		save_to_buffer(type: string, error: GLib.Error | null): [ boolean, number[], number ];
 		/**
 		 * Vector version of `gdk_pixbuf_save_to_buffer()`.
 		 * 
@@ -481,12 +488,17 @@ declare namespace imports.gi.GdkPixbuf {
 		 * "tiff", "png", "ico" or "bmp".
 		 * 
 		 * See [method#GdkPixbuf.Pixbuf.save_to_buffer] for more details.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @returns whether an error was set
+		 * 
+		 * 
+		 *   location to receive a pointer to the new buffer.
+		 * 
+		 * location to receive the size of the new buffer.
 		 */
-		save_to_bufferv(_type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
+		save_to_bufferv(type: string, option_keys: string[] | null, option_values: string[] | null): [ boolean, number[], number ];
 		/**
 		 * Saves pixbuf in format `type` by feeding the produced data to a
 		 * callback.
@@ -501,11 +513,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * See [method#GdkPixbuf.Pixbuf.save] for more details.
 		 * @param save_func a function that is called to save each block of data that
 		 *   the save routine generates.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param error return location for error, or `NULL`
 		 * @returns whether an error was set
 		 */
-		save_to_callback(save_func: PixbufSaveFunc, _type: string, error: GLib.Error | null): boolean;
+		save_to_callback(save_func: PixbufSaveFunc, type: string, error: GLib.Error | null): boolean;
 		/**
 		 * Vector version of `gdk_pixbuf_save_to_callback()`.
 		 * 
@@ -517,12 +529,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * See [method#GdkPixbuf.Pixbuf.save_to_callback] for more details.
 		 * @param save_func a function that is called to save each block of data that
 		 *   the save routine generates.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		save_to_callbackv(save_func: PixbufSaveFunc, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
+		save_to_callbackv(save_func: PixbufSaveFunc, type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream.
 		 * 
@@ -536,13 +548,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * The stream is not closed at the end of this call.
 		 * @param stream a `GOutputStream` to save the pixbuf to
-		 * @param _type name of file format
+		 * @param type name of file format
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param error return location for error, or `NULL`
 		 * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an
 		 *   error was set.
 		 */
-		save_to_stream(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable | null, error: GLib.Error | null): boolean;
+		save_to_stream(stream: Gio.OutputStream, type: string, cancellable: Gio.Cancellable | null, error: GLib.Error | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
@@ -554,11 +566,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
 		 * the operation.
 		 * @param stream a `GOutputStream` to which to save the pixbuf
-		 * @param _type name of file format
+		 * @param type name of file format
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
 		 */
-		save_to_stream_async(stream: Gio.OutputStream, _type: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
+		save_to_stream_async(stream: Gio.OutputStream, type: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Saves `pixbuf` to an output stream.
 		 * 
@@ -567,14 +579,14 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * See [method#GdkPixbuf.Pixbuf.save_to_stream] for more details.
 		 * @param stream a `GOutputStream` to save the pixbuf to
-		 * @param _type name of file format
+		 * @param type name of file format
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an
 		 *   error was set.
 		 */
-		save_to_streamv(stream: Gio.OutputStream, _type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null): boolean;
+		save_to_streamv(stream: Gio.OutputStream, type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null): boolean;
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
@@ -586,13 +598,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * You can then call gdk_pixbuf_save_to_stream_finish() to get the result of
 		 * the operation.
 		 * @param stream a `GOutputStream` to which to save the pixbuf
-		 * @param _type name of file format
+		 * @param type name of file format
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @param cancellable optional `GCancellable` object, `NULL` to ignore
 		 * @param callback a `GAsyncReadyCallback` to call when the pixbuf is saved
 		 */
-		save_to_streamv_async(stream: Gio.OutputStream, _type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
+		save_to_streamv_async(stream: Gio.OutputStream, type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Vector version of `gdk_pixbuf_save()`.
 		 * 
@@ -602,12 +614,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * See [method#GdkPixbuf.Pixbuf.save] for more details.
 		 * @param filename name of file to save.
-		 * @param _type name of file format.
+		 * @param type name of file format.
 		 * @param option_keys name of options to set
 		 * @param option_values values for named options
 		 * @returns whether an error was set
 		 */
-		savev(filename: string, _type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
+		savev(filename: string, type: string, option_keys: string[] | null, option_values: string[] | null): boolean;
 		/**
 		 * Creates a transformation of the source image #src by scaling by
 		 * #scale_x and #scale_y then translating by #offset_x and #offset_y,
@@ -685,10 +697,24 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufInitOptionsMixin = GObject.ObjectInitOptions & Gio.IconInitOptions & Gio.LoadableIconInitOptions & 
+	Pick<IPixbuf,
+		"bits_per_sample" |
+		"colorspace" |
+		"has_alpha" |
+		"height" |
+		"n_channels" |
+		"pixel_bytes" |
+		"pixels" |
+		"rowstride" |
+		"width">;
+
+	export interface PixbufInitOptions extends PixbufInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Pixbuf} instead.
 	 */
-	type PixbufMixin = IPixbuf & GObject.IObject & Gio.IIcon & Gio.ILoadableIcon;
+	type PixbufMixin = IPixbuf & GObject.Object & Gio.Icon & Gio.LoadableIcon;
 
 	/**
 	 * A pixel buffer.
@@ -830,7 +856,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface Pixbuf extends PixbufMixin {}
 
 	class Pixbuf {
-		public constructor();
+		public constructor(options?: Partial<PixbufInitOptions>);
 		/**
 		 * Creates a new `GdkPixbuf` structure and allocates a buffer for it.
 		 * 
@@ -1119,8 +1145,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param filename The name of the file to identify.
 		 * @returns A `GdkPixbufFormat` describing
 		 *   the image format of the file
+		 * 
+		 * Return location for the width of the image
+		 * 
+		 * Return location for the height of the image
 		 */
-		public static get_file_info(filename: string): PixbufFormat | null;
+		public static get_file_info(filename: string): [ PixbufFormat | null, number | null, number | null ];
 		/**
 		 * Asynchronously parses an image file far enough to determine its
 		 * format and size.
@@ -1142,8 +1172,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param async_result a `GAsyncResult`
 		 * @returns A `GdkPixbufFormat` describing the
 		 *   image format of the file
+		 * 
+		 * Return location for the width of the image, or `NULL`
+		 * 
+		 * Return location for the height of the image, or `NULL`
 		 */
-		public static get_file_info_finish(async_result: Gio.AsyncResult): PixbufFormat | null;
+		public static get_file_info_finish(async_result: Gio.AsyncResult): [ PixbufFormat | null, number, number ];
 		/**
 		 * Obtains the available information about the image formats supported
 		 * by GdkPixbuf.
@@ -1297,10 +1331,13 @@ declare namespace imports.gi.GdkPixbuf {
 		unref(): void;
 	}
 
+	type PixbufAnimationInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufAnimationInitOptions extends PixbufAnimationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimation} instead.
 	 */
-	type PixbufAnimationMixin = IPixbufAnimation & GObject.IObject;
+	type PixbufAnimationMixin = IPixbufAnimation & GObject.Object;
 
 	/**
 	 * An opaque object representing an animation.
@@ -1320,7 +1357,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimation extends PixbufAnimationMixin {}
 
 	class PixbufAnimation {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationInitOptions>);
 		/**
 		 * Creates a new animation by loading it from a file.
 		 * 
@@ -1459,10 +1496,13 @@ declare namespace imports.gi.GdkPixbuf {
 		on_currently_loading_frame(): boolean;
 	}
 
+	type PixbufAnimationIterInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufAnimationIterInitOptions extends PixbufAnimationIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufAnimationIter} instead.
 	 */
-	type PixbufAnimationIterMixin = IPixbufAnimationIter & GObject.IObject;
+	type PixbufAnimationIterMixin = IPixbufAnimationIter & GObject.Object;
 
 	/**
 	 * An opaque object representing an iterator which points to a
@@ -1471,7 +1511,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufAnimationIter extends PixbufAnimationIterMixin {}
 
 	class PixbufAnimationIter {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationIterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1584,7 +1624,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Applications can use this signal to know when to repaint
 		 * areas of an image that is being loaded.
 		 */
-		connect(signal: "area-updated", callback: (owner: this, _x: number, _y: number, width: number, height: number) => void): number;
+		connect(signal: "area-updated", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 		/**
 		 * This signal is emitted when gdk_pixbuf_loader_close() is called.
 		 * 
@@ -1606,10 +1646,13 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufLoaderInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PixbufLoaderInitOptions extends PixbufLoaderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufLoader} instead.
 	 */
-	type PixbufLoaderMixin = IPixbufLoader & GObject.IObject;
+	type PixbufLoaderMixin = IPixbufLoader & GObject.Object;
 
 	/**
 	 * Incremental image loader.
@@ -1661,7 +1704,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufLoader extends PixbufLoaderMixin {}
 
 	class PixbufLoader {
-		public constructor();
+		public constructor(options?: Partial<PixbufLoaderInitOptions>);
 		/**
 		 * Creates a new pixbuf loader object.
 		 * @returns A newly-created pixbuf loader.
@@ -1715,15 +1758,18 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufNonAnimInitOptionsMixin = PixbufAnimationInitOptions
+	export interface PixbufNonAnimInitOptions extends PixbufNonAnimInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufNonAnim} instead.
 	 */
-	type PixbufNonAnimMixin = IPixbufNonAnim & IPixbufAnimation;
+	type PixbufNonAnimMixin = IPixbufNonAnim & PixbufAnimation;
 
 	interface PixbufNonAnim extends PixbufNonAnimMixin {}
 
 	class PixbufNonAnim {
-		public constructor();
+		public constructor(options?: Partial<PixbufNonAnimInitOptions>);
 		public static new(pixbuf: Pixbuf): PixbufAnimation;
 	}
 
@@ -1756,10 +1802,16 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufSimpleAnimInitOptionsMixin = PixbufAnimationInitOptions & 
+	Pick<IPixbufSimpleAnim,
+		"loop">;
+
+	export interface PixbufSimpleAnimInitOptions extends PixbufSimpleAnimInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnim} instead.
 	 */
-	type PixbufSimpleAnimMixin = IPixbufSimpleAnim & IPixbufAnimation;
+	type PixbufSimpleAnimMixin = IPixbufSimpleAnim & PixbufAnimation;
 
 	/**
 	 * An opaque struct representing a simple animation.
@@ -1767,7 +1819,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface PixbufSimpleAnim extends PixbufSimpleAnimMixin {}
 
 	class PixbufSimpleAnim {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimInitOptions>);
 		/**
 		 * Creates a new, empty animation.
 		 * @param width the width of the animation
@@ -1785,17 +1837,21 @@ declare namespace imports.gi.GdkPixbuf {
 
 	}
 
+	type PixbufSimpleAnimIterInitOptionsMixin = PixbufAnimationIterInitOptions
+	export interface PixbufSimpleAnimIterInitOptions extends PixbufSimpleAnimIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PixbufSimpleAnimIter} instead.
 	 */
-	type PixbufSimpleAnimIterMixin = IPixbufSimpleAnimIter & IPixbufAnimationIter;
+	type PixbufSimpleAnimIterMixin = IPixbufSimpleAnimIter & PixbufAnimationIter;
 
 	interface PixbufSimpleAnimIter extends PixbufSimpleAnimIterMixin {}
 
 	class PixbufSimpleAnimIter {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimIterInitOptions>);
 	}
 
+	export interface PixbufAnimationClassInitOptions {}
 	/**
 	 * Modules supporting animations must derive a type from
 	 * {@link Animation}, providing suitable implementations of the
@@ -1803,13 +1859,14 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufAnimationClass {}
 	class PixbufAnimationClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationClassInitOptions>);
 		public is_static_image: {(animation: PixbufAnimation): boolean;};
 		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
 		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
 		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal | null): PixbufAnimationIter;};
 	}
 
+	export interface PixbufAnimationIterClassInitOptions {}
 	/**
 	 * Modules supporting animations must derive a type from
 	 * {@link AnimationIter}, providing suitable implementations of the
@@ -1817,13 +1874,14 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufAnimationIterClass {}
 	class PixbufAnimationIterClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufAnimationIterClassInitOptions>);
 		public get_delay_time: {(iter: PixbufAnimationIter): number;};
 		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
 		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
 		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal | null): boolean;};
 	}
 
+	export interface PixbufFormatInitOptions {}
 	/**
 	 * A `GdkPixbufFormat` contains information about the image format accepted
 	 * by a module.
@@ -1833,7 +1891,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufFormat {}
 	class PixbufFormat {
-		public constructor();
+		public constructor(options?: Partial<PixbufFormatInitOptions>);
 		/**
 		 * the name of the image format
 		 */
@@ -1956,15 +2014,17 @@ declare namespace imports.gi.GdkPixbuf {
 		public set_disabled(disabled: boolean): void;
 	}
 
+	export interface PixbufLoaderClassInitOptions {}
 	interface PixbufLoaderClass {}
 	class PixbufLoaderClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufLoaderClassInitOptions>);
 		public size_prepared: {(loader: PixbufLoader, width: number, height: number): void;};
 		public area_prepared: {(loader: PixbufLoader): void;};
-		public area_updated: {(loader: PixbufLoader, _x: number, _y: number, width: number, height: number): void;};
+		public area_updated: {(loader: PixbufLoader, x: number, y: number, width: number, height: number): void;};
 		public closed: {(loader: PixbufLoader): void;};
 	}
 
+	export interface PixbufModuleInitOptions {}
 	/**
 	 * A `GdkPixbufModule` contains the necessary functions to load and save
 	 * images in a certain file format.
@@ -2014,7 +2074,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufModule {}
 	class PixbufModule {
-		public constructor();
+		public constructor(options?: Partial<PixbufModuleInitOptions>);
 		/**
 		 * the name of the module, usually the same as the
 		 *  usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
@@ -2032,13 +2092,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * a `GdkPixbufFormat` holding information about the module.
 		 */
 		public info: PixbufFormat;
-		public load: {(_f: any): Pixbuf;};
+		public load: {(f: any): Pixbuf;};
 		public load_xpm_data: {(data: string): Pixbuf;};
 		public begin_load: {(size_func: PixbufModuleSizeFunc, prepared_func: PixbufModulePreparedFunc, updated_func: PixbufModuleUpdatedFunc): any;};
 		public stop_load: {(context: any): boolean;};
 		public load_increment: {(context: any, buf: number, size: number): boolean;};
-		public load_animation: {(_f: any): PixbufAnimation;};
-		public save: {(_f: any, pixbuf: Pixbuf, param_keys: string, param_values: string): boolean;};
+		public load_animation: {(f: any): PixbufAnimation;};
+		public save: {(f: any, pixbuf: Pixbuf, param_keys: string, param_values: string): boolean;};
 		public save_to_callback: {(save_func: PixbufSaveFunc, pixbuf: Pixbuf, option_keys: string, option_values: string): boolean;};
 		public is_save_option_supported: {(option_key: string): boolean;};
 		public _reserved1: {(): void;};
@@ -2047,6 +2107,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public _reserved4: {(): void;};
 	}
 
+	export interface PixbufModulePatternInitOptions {}
 	/**
 	 * The signature prefix for a module.
 	 * 
@@ -2081,7 +2142,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 */
 	interface PixbufModulePattern {}
 	class PixbufModulePattern {
-		public constructor();
+		public constructor(options?: Partial<PixbufModulePatternInitOptions>);
 		/**
 		 * the prefix for this pattern
 		 */
@@ -2097,9 +2158,10 @@ declare namespace imports.gi.GdkPixbuf {
 		public relevance: number;
 	}
 
+	export interface PixbufSimpleAnimClassInitOptions {}
 	interface PixbufSimpleAnimClass {}
 	class PixbufSimpleAnimClass {
-		public constructor();
+		public constructor(options?: Partial<PixbufSimpleAnimClassInitOptions>);
 	}
 
 	/**
@@ -2399,12 +2461,12 @@ declare namespace imports.gi.GdkPixbuf {
 		 * "<link linkend="GdkPixbufLoader-area-updated">area_updated</link>"
 		 * signal.
 		 * @param pixbuf the #GdkPixbuf that is currently being loaded.
-		 * @param _x the X origin of the updated area.
-		 * @param _y the Y origin of the updated area.
+		 * @param x the X origin of the updated area.
+		 * @param y the Y origin of the updated area.
 		 * @param width the width of the updated area.
 		 * @param height the height of the updated area.
 		 */
-		(pixbuf: Pixbuf, _x: number, _y: number, width: number, height: number): void;
+		(pixbuf: Pixbuf, x: number, y: number, width: number, height: number): void;
 	}
 
 	/**
@@ -2431,10 +2493,48 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param count number of bytes in #buf.
 		 * @param data user data passed to gdk_pixbuf_save_to_callback().
 		 * @returns `TRUE` if successful, `FALSE` otherwise
+		 * 
+		 * A location to return an error.
 		 */
-		(buf: number[], count: number, data: any | null): boolean;
+		(buf: number[], count: number, data: any | null): [ boolean, GLib.Error ];
 	}
 
 	function pixbuf_error_quark(): GLib.Quark;
+
+	/**
+	 * Major version of gdk-pixbuf library, that is the "0" in
+	 * "0.8.2" for example.
+	 * @returns Major version of gdk-pixbuf library, that is the "0" in
+	 * "0.8.2" for example.
+	 */
+	const PIXBUF_MAJOR: number;
+
+	/**
+	 * Micro version of gdk-pixbuf library, that is the "2" in
+	 * "0.8.2" for example.
+	 * @returns Micro version of gdk-pixbuf library, that is the "2" in
+	 * "0.8.2" for example.
+	 */
+	const PIXBUF_MICRO: number;
+
+	/**
+	 * Minor version of gdk-pixbuf library, that is the "8" in
+	 * "0.8.2" for example.
+	 * @returns Minor version of gdk-pixbuf library, that is the "8" in
+	 * "0.8.2" for example.
+	 */
+	const PIXBUF_MINOR: number;
+
+	/**
+	 * Contains the full version of GdkPixbuf as a string.
+	 * 
+	 * This is the version being compiled against; contrast with
+	 * `gdk_pixbuf_version`.
+	 * @returns Contains the full version of GdkPixbuf as a string.
+	 * 
+	 * This is the version being compiled against; contrast with
+	 * `gdk_pixbuf_version`.
+	 */
+	const PIXBUF_VERSION: string;
 
 }

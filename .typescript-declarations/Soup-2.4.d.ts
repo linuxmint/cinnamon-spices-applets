@@ -164,34 +164,45 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AddressInitOptionsMixin = GObject.ObjectInitOptions & Gio.SocketConnectableInitOptions & 
+	Pick<IAddress,
+		"family" |
+		"name" |
+		"physical" |
+		"port" |
+		"protocol" |
+		"sockaddr">;
+
+	export interface AddressInitOptions extends AddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Address} instead.
 	 */
-	type AddressMixin = IAddress & GObject.IObject & Gio.ISocketConnectable;
+	type AddressMixin = IAddress & GObject.Object & Gio.SocketConnectable;
 
 	interface Address extends AddressMixin {}
 
 	class Address {
-		public constructor();
+		public constructor(options?: Partial<AddressInitOptions>);
 		/**
 		 * Creates a {@link Address} from #name and #port. The #SoupAddress's IP
 		 * address may not be available right away; the caller can call
 		 * soup_address_resolve_async() or soup_address_resolve_sync() to
 		 * force a DNS resolution.
 		 * @param name a hostname or physical address
-		 * @param _port a port number
+		 * @param port a port number
 		 * @returns a {@link Address}
 		 */
-		public static new(name: string, _port: number): Address;
+		public static new(name: string, port: number): Address;
 		/**
 		 * Returns a {@link Address} corresponding to the "any" address
 		 * for #family (or %NULL if #family isn't supported), suitable for
 		 * using as a listening #SoupSocket.
 		 * @param family the address family
-		 * @param _port the port number (usually %SOUP_ADDRESS_ANY_PORT)
+		 * @param port the port number (usually %SOUP_ADDRESS_ANY_PORT)
 		 * @returns the new {@link Address}
 		 */
-		public static new_any(family: AddressFamily, _port: number): Address | null;
+		public static new_any(family: AddressFamily, port: number): Address | null;
 		/**
 		 * Returns a {@link Address} equivalent to #sa (or %NULL if #sa's
 		 * address family isn't supported)
@@ -319,10 +330,21 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IAuth,
+		"host" |
+		"is_authenticated" |
+		"is_for_proxy" |
+		"realm" |
+		"scheme_name" |
+		"realm">;
+
+	export interface AuthInitOptions extends AuthInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Auth} instead.
 	 */
-	type AuthMixin = IAuth & GObject.IObject;
+	type AuthMixin = IAuth & GObject.Object;
 
 	/**
 	 * The abstract base class for handling authentication. Specific HTTP
@@ -333,20 +355,20 @@ declare namespace imports.gi.Soup {
 	interface Auth extends AuthMixin {}
 
 	class Auth {
-		public constructor();
+		public constructor(options?: Partial<AuthInitOptions>);
 		/**
 		 * Creates a new {@link Auth} of type #type with the information from
 		 * #msg and #auth_header.
 		 * 
 		 * This is called by #SoupSession; you will normally not create auths
 		 * yourself.
-		 * @param _type the type of auth to create (a subtype of {@link Auth})
+		 * @param type the type of auth to create (a subtype of {@link Auth})
 		 * @param msg the {@link Message} the auth is being created for
 		 * @param auth_header the WWW-Authenticate/Proxy-Authenticate header
 		 * @returns the new {@link Auth}, or %NULL if it could
 		 * not be created
 		 */
-		public static new(_type: GObject.Type, msg: Message, auth_header: string): Auth | null;
+		public static new(type: GObject.Type, msg: Message, auth_header: string): Auth | null;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -356,15 +378,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthBasicInitOptionsMixin = AuthInitOptions
+	export interface AuthBasicInitOptions extends AuthBasicInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthBasic} instead.
 	 */
-	type AuthBasicMixin = IAuthBasic & IAuth;
+	type AuthBasicMixin = IAuthBasic & Auth;
 
 	interface AuthBasic extends AuthBasicMixin {}
 
 	class AuthBasic {
-		public constructor();
+		public constructor(options?: Partial<AuthBasicInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -374,15 +399,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthDigestInitOptionsMixin = AuthInitOptions
+	export interface AuthDigestInitOptions extends AuthDigestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDigest} instead.
 	 */
-	type AuthDigestMixin = IAuthDigest & IAuth;
+	type AuthDigestMixin = IAuthDigest & Auth;
 
 	interface AuthDigest extends AuthDigestMixin {}
 
 	class AuthDigest {
-		public constructor();
+		public constructor(options?: Partial<AuthDigestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -534,15 +562,26 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthDomainInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IAuthDomain,
+		"filter" |
+		"filter_data" |
+		"generic_auth_callback" |
+		"generic_auth_data" |
+		"proxy" |
+		"realm">;
+
+	export interface AuthDomainInitOptions extends AuthDomainInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomain} instead.
 	 */
-	type AuthDomainMixin = IAuthDomain & GObject.IObject;
+	type AuthDomainMixin = IAuthDomain & GObject.Object;
 
 	interface AuthDomain extends AuthDomainMixin {}
 
 	class AuthDomain {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -577,15 +616,22 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthDomainBasicInitOptionsMixin = AuthDomainInitOptions & 
+	Pick<IAuthDomainBasic,
+		"auth_callback" |
+		"auth_data">;
+
+	export interface AuthDomainBasicInitOptions extends AuthDomainBasicInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomainBasic} instead.
 	 */
-	type AuthDomainBasicMixin = IAuthDomainBasic & IAuthDomain;
+	type AuthDomainBasicMixin = IAuthDomainBasic & AuthDomain;
 
 	interface AuthDomainBasic extends AuthDomainBasicMixin {}
 
 	class AuthDomainBasic {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainBasicInitOptions>);
 		/**
 		 * Creates a {@link AuthDomainBasic}. You must set the
 		 * %SOUP_AUTH_DOMAIN_REALM parameter, to indicate the realm name to be
@@ -629,15 +675,22 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthDomainDigestInitOptionsMixin = AuthDomainInitOptions & 
+	Pick<IAuthDomainDigest,
+		"auth_callback" |
+		"auth_data">;
+
+	export interface AuthDomainDigestInitOptions extends AuthDomainDigestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthDomainDigest} instead.
 	 */
-	type AuthDomainDigestMixin = IAuthDomainDigest & IAuthDomain;
+	type AuthDomainDigestMixin = IAuthDomainDigest & AuthDomain;
 
 	interface AuthDomainDigest extends AuthDomainDigestMixin {}
 
 	class AuthDomainDigest {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainDigestInitOptions>);
 		/**
 		 * Creates a {@link AuthDomainDigest}. You must set the
 		 * %SOUP_AUTH_DOMAIN_REALM parameter, to indicate the realm name to be
@@ -703,15 +756,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthManagerInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface AuthManagerInitOptions extends AuthManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthManager} instead.
 	 */
-	type AuthManagerMixin = IAuthManager & GObject.IObject & ISessionFeature;
+	type AuthManagerMixin = IAuthManager & GObject.Object & SessionFeature;
 
 	interface AuthManager extends AuthManagerMixin {}
 
 	class AuthManager {
-		public constructor();
+		public constructor(options?: Partial<AuthManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -721,15 +777,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthNTLMInitOptionsMixin = AuthInitOptions
+	export interface AuthNTLMInitOptions extends AuthNTLMInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthNTLM} instead.
 	 */
-	type AuthNTLMMixin = IAuthNTLM & IAuth;
+	type AuthNTLMMixin = IAuthNTLM & Auth;
 
 	interface AuthNTLM extends AuthNTLMMixin {}
 
 	class AuthNTLM {
-		public constructor();
+		public constructor(options?: Partial<AuthNTLMInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -739,15 +798,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type AuthNegotiateInitOptionsMixin = AuthInitOptions
+	export interface AuthNegotiateInitOptions extends AuthNegotiateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthNegotiate} instead.
 	 */
-	type AuthNegotiateMixin = IAuthNegotiate & IAuth;
+	type AuthNegotiateMixin = IAuthNegotiate & Auth;
 
 	interface AuthNegotiate extends AuthNegotiateMixin {}
 
 	class AuthNegotiate {
-		public constructor();
+		public constructor(options?: Partial<AuthNegotiateInitOptions>);
 		/**
 		 * Indicates whether libsoup was built with GSSAPI support. If this is
 		 * %FALSE, %SOUP_TYPE_AUTH_NEGOTIATE will still be defined and can
@@ -805,15 +867,22 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type CacheInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions & 
+	Pick<ICache,
+		"cache_dir" |
+		"cache_type">;
+
+	export interface CacheInitOptions extends CacheInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cache} instead.
 	 */
-	type CacheMixin = ICache & GObject.IObject & ISessionFeature;
+	type CacheMixin = ICache & GObject.Object & SessionFeature;
 
 	interface Cache extends CacheMixin {}
 
 	class Cache {
-		public constructor();
+		public constructor(options?: Partial<CacheInitOptions>);
 		/**
 		 * Creates a new {@link Cache}.
 		 * @param cache_dir the directory to store the cached data, or %NULL
@@ -833,15 +902,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type ContentDecoderInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface ContentDecoderInitOptions extends ContentDecoderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContentDecoder} instead.
 	 */
-	type ContentDecoderMixin = IContentDecoder & GObject.IObject & ISessionFeature;
+	type ContentDecoderMixin = IContentDecoder & GObject.Object & SessionFeature;
 
 	interface ContentDecoder extends ContentDecoderMixin {}
 
 	class ContentDecoder {
-		public constructor();
+		public constructor(options?: Partial<ContentDecoderInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -862,19 +934,25 @@ declare namespace imports.gi.Soup {
 		 * @param buffer a buffer containing the start of #msg's response body
 		 * @returns the sniffed Content-Type of #buffer; this will never be %NULL,
 		 *   but may be "application/octet-stream".
+		 * 
+		 * return
+		 *   location for Content-Type parameters (eg, "charset"), or %NULL
 		 */
-		sniff(msg: Message, buffer: Buffer): string;
+		sniff(msg: Message, buffer: Buffer): [ string, GLib.HashTable | null ];
 	}
+
+	type ContentSnifferInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface ContentSnifferInitOptions extends ContentSnifferInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContentSniffer} instead.
 	 */
-	type ContentSnifferMixin = IContentSniffer & GObject.IObject & ISessionFeature;
+	type ContentSnifferMixin = IContentSniffer & GObject.Object & SessionFeature;
 
 	interface ContentSniffer extends ContentSnifferMixin {}
 
 	class ContentSniffer {
-		public constructor();
+		public constructor(options?: Partial<ContentSnifferInitOptions>);
 		/**
 		 * Creates a new {@link ContentSniffer}.
 		 * @returns a new {@link ContentSniffer}
@@ -1060,15 +1138,22 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type CookieJarInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions & 
+	Pick<ICookieJar,
+		"accept_policy" |
+		"read_only">;
+
+	export interface CookieJarInitOptions extends CookieJarInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJar} instead.
 	 */
-	type CookieJarMixin = ICookieJar & GObject.IObject & ISessionFeature;
+	type CookieJarMixin = ICookieJar & GObject.Object & SessionFeature;
 
 	interface CookieJar extends CookieJarMixin {}
 
 	class CookieJar {
-		public constructor();
+		public constructor(options?: Partial<CookieJarInitOptions>);
 		/**
 		 * Creates a new {@link CookieJar}. The base #SoupCookieJar class does
 		 * not support persistent storage of cookies; use a subclass for that.
@@ -1087,15 +1172,21 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type CookieJarDBInitOptionsMixin = CookieJarInitOptions & SessionFeatureInitOptions & 
+	Pick<ICookieJarDB,
+		"filename">;
+
+	export interface CookieJarDBInitOptions extends CookieJarDBInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJarDB} instead.
 	 */
-	type CookieJarDBMixin = ICookieJarDB & ICookieJar & ISessionFeature;
+	type CookieJarDBMixin = ICookieJarDB & CookieJar & SessionFeature;
 
 	interface CookieJarDB extends CookieJarDBMixin {}
 
 	class CookieJarDB {
-		public constructor();
+		public constructor(options?: Partial<CookieJarDBInitOptions>);
 		/**
 		 * Creates a {@link CookieJarDB}.
 		 * 
@@ -1122,15 +1213,21 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type CookieJarTextInitOptionsMixin = CookieJarInitOptions & SessionFeatureInitOptions & 
+	Pick<ICookieJarText,
+		"filename">;
+
+	export interface CookieJarTextInitOptions extends CookieJarTextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieJarText} instead.
 	 */
-	type CookieJarTextMixin = ICookieJarText & ICookieJar & ISessionFeature;
+	type CookieJarTextMixin = ICookieJarText & CookieJar & SessionFeature;
 
 	interface CookieJarText extends CookieJarTextMixin {}
 
 	class CookieJarText {
-		public constructor();
+		public constructor(options?: Partial<CookieJarTextInitOptions>);
 		/**
 		 * Creates a {@link CookieJarText}.
 		 * 
@@ -1220,15 +1317,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type HSTSEnforcerInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface HSTSEnforcerInitOptions extends HSTSEnforcerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSTSEnforcer} instead.
 	 */
-	type HSTSEnforcerMixin = IHSTSEnforcer & GObject.IObject & ISessionFeature;
+	type HSTSEnforcerMixin = IHSTSEnforcer & GObject.Object & SessionFeature;
 
 	interface HSTSEnforcer extends HSTSEnforcerMixin {}
 
 	class HSTSEnforcer {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerInitOptions>);
 		/**
 		 * Creates a new {@link HSTSEnforcer}. The base #SoupHSTSEnforcer class
 		 * does not support persistent storage of HSTS policies, see
@@ -1251,15 +1351,21 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type HSTSEnforcerDBInitOptionsMixin = HSTSEnforcerInitOptions & SessionFeatureInitOptions & 
+	Pick<IHSTSEnforcerDB,
+		"filename">;
+
+	export interface HSTSEnforcerDBInitOptions extends HSTSEnforcerDBInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HSTSEnforcerDB} instead.
 	 */
-	type HSTSEnforcerDBMixin = IHSTSEnforcerDB & IHSTSEnforcer & ISessionFeature;
+	type HSTSEnforcerDBMixin = IHSTSEnforcerDB & HSTSEnforcer & SessionFeature;
 
 	interface HSTSEnforcerDB extends HSTSEnforcerDBMixin {}
 
 	class HSTSEnforcerDB {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerDBInitOptions>);
 		/**
 		 * Creates a {@link HSTSEnforcerDB}.
 		 * 
@@ -1339,15 +1445,22 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type LoggerInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions & 
+	Pick<ILogger,
+		"level" |
+		"max_body_size">;
+
+	export interface LoggerInitOptions extends LoggerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Logger} instead.
 	 */
-	type LoggerMixin = ILogger & GObject.IObject & ISessionFeature;
+	type LoggerMixin = ILogger & GObject.Object & SessionFeature;
 
 	interface Logger extends LoggerMixin {}
 
 	class Logger {
-		public constructor();
+		public constructor(options?: Partial<LoggerInitOptions>);
 		/**
 		 * Creates a new {@link Logger} with the given debug level. If #level is
 		 * %SOUP_LOGGER_LOG_BODY, #max_body_size gives the maximum number of
@@ -1510,8 +1623,12 @@ declare namespace imports.gi.Soup {
 		 * <note><para>This is only meaningful with messages processed by a {@link Session} and is
 		 * not useful for messages received by a #SoupServer</para></note>
 		 * @returns %TRUE if #msg used/attempted https, %FALSE if not
+		 * 
+		 * #msg's TLS certificate
+		 * 
+		 * the verification status of #certificate
 		 */
-		get_https_status(): boolean;
+		get_https_status(): [ boolean, Gio.TlsCertificate, Gio.TlsCertificateFlags ];
 		get_is_top_level_navigation(): boolean;
 		/**
 		 * Retrieves the {@link MessagePriority}. If not set this value defaults
@@ -1720,7 +1837,7 @@ declare namespace imports.gi.Soup {
 		 * that sniffing could be done is delivered on the first
 		 * emission of #SoupMessage::got-chunk.
 		 */
-		connect(signal: "content-sniffed", callback: (owner: this, _type: string, params: GLib.HashTable) => void): number;
+		connect(signal: "content-sniffed", callback: (owner: this, type: string, params: GLib.HashTable) => void): number;
 		/**
 		 * Emitted when all HTTP processing is finished for a message.
 		 * (After {@link Message}::got_body for client-side messages, or
@@ -1879,10 +1996,41 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type MessageInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMessage,
+		"first_party" |
+		"flags" |
+		"http_version" |
+		"is_top_level_navigation" |
+		"method" |
+		"priority" |
+		"reason_phrase" |
+		"request_body" |
+		"request_body_data" |
+		"request_headers" |
+		"response_body" |
+		"response_body_data" |
+		"response_headers" |
+		"server_side" |
+		"site_for_cookies" |
+		"status_code" |
+		"tls_certificate" |
+		"tls_errors" |
+		"uri" |
+		"method" |
+		"status_code" |
+		"reason_phrase" |
+		"request_body" |
+		"request_headers" |
+		"response_body" |
+		"response_headers">;
+
+	export interface MessageInitOptions extends MessageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Message} instead.
 	 */
-	type MessageMixin = IMessage & GObject.IObject;
+	type MessageMixin = IMessage & GObject.Object;
 
 	/**
 	 * Represents an HTTP message being sent or received.
@@ -1929,7 +2077,7 @@ declare namespace imports.gi.Soup {
 	interface Message extends MessageMixin {}
 
 	class Message {
-		public constructor();
+		public constructor(options?: Partial<MessageInitOptions>);
 		/**
 		 * Creates a new empty {@link Message}, which will connect to #uri
 		 * @param method the HTTP method for the created request
@@ -2006,15 +2154,21 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type MultipartInputStreamInitOptionsMixin = Gio.FilterInputStreamInitOptions & Gio.PollableInputStreamInitOptions & 
+	Pick<IMultipartInputStream,
+		"message">;
+
+	export interface MultipartInputStreamInitOptions extends MultipartInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MultipartInputStream} instead.
 	 */
-	type MultipartInputStreamMixin = IMultipartInputStream & Gio.IFilterInputStream & Gio.IPollableInputStream;
+	type MultipartInputStreamMixin = IMultipartInputStream & Gio.FilterInputStream & Gio.PollableInputStream;
 
 	interface MultipartInputStream extends MultipartInputStreamMixin {}
 
 	class MultipartInputStream {
-		public constructor();
+		public constructor(options?: Partial<MultipartInputStreamInitOptions>);
 		/**
 		 * Creates a new {@link MultipartInputStream} that wraps the
 		 * #GInputStream obtained by sending the #SoupRequest. Reads should
@@ -2035,15 +2189,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type ProxyResolverDefaultInitOptionsMixin = GObject.ObjectInitOptions & ProxyURIResolverInitOptions & SessionFeatureInitOptions
+	export interface ProxyResolverDefaultInitOptions extends ProxyResolverDefaultInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyResolverDefault} instead.
 	 */
-	type ProxyResolverDefaultMixin = IProxyResolverDefault & GObject.IObject & IProxyURIResolver & ISessionFeature;
+	type ProxyResolverDefaultMixin = IProxyResolverDefault & GObject.Object & ProxyURIResolver & SessionFeature;
 
 	interface ProxyResolverDefault extends ProxyResolverDefaultMixin {}
 
 	class ProxyResolverDefault {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverDefaultInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2120,10 +2277,17 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type RequestInitOptionsMixin = GObject.ObjectInitOptions & Gio.InitableInitOptions & 
+	Pick<IRequest,
+		"session" |
+		"uri">;
+
+	export interface RequestInitOptions extends RequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Request} instead.
 	 */
-	type RequestMixin = IRequest & GObject.IObject & Gio.IInitable;
+	type RequestMixin = IRequest & GObject.Object & Gio.Initable;
 
 	/**
 	 * A request to retrieve a particular URI.
@@ -2131,7 +2295,7 @@ declare namespace imports.gi.Soup {
 	interface Request extends RequestMixin {}
 
 	class Request {
-		public constructor();
+		public constructor(options?: Partial<RequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2141,15 +2305,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type RequestDataInitOptionsMixin = RequestInitOptions & Gio.InitableInitOptions
+	export interface RequestDataInitOptions extends RequestDataInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestData} instead.
 	 */
-	type RequestDataMixin = IRequestData & IRequest & Gio.IInitable;
+	type RequestDataMixin = IRequestData & Request & Gio.Initable;
 
 	interface RequestData extends RequestDataMixin {}
 
 	class RequestData {
-		public constructor();
+		public constructor(options?: Partial<RequestDataInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2163,15 +2330,18 @@ declare namespace imports.gi.Soup {
 		get_file(): Gio.File;
 	}
 
+	type RequestFileInitOptionsMixin = RequestInitOptions & Gio.InitableInitOptions
+	export interface RequestFileInitOptions extends RequestFileInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestFile} instead.
 	 */
-	type RequestFileMixin = IRequestFile & IRequest & Gio.IInitable;
+	type RequestFileMixin = IRequestFile & Request & Gio.Initable;
 
 	interface RequestFile extends RequestFileMixin {}
 
 	class RequestFile {
-		public constructor();
+		public constructor(options?: Partial<RequestFileInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2185,15 +2355,18 @@ declare namespace imports.gi.Soup {
 		get_message(): Message;
 	}
 
+	type RequestHTTPInitOptionsMixin = RequestInitOptions & Gio.InitableInitOptions
+	export interface RequestHTTPInitOptions extends RequestHTTPInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RequestHTTP} instead.
 	 */
-	type RequestHTTPMixin = IRequestHTTP & IRequest & Gio.IInitable;
+	type RequestHTTPMixin = IRequestHTTP & Request & Gio.Initable;
 
 	interface RequestHTTP extends RequestHTTPMixin {}
 
 	class RequestHTTP {
-		public constructor();
+		public constructor(options?: Partial<RequestHTTPInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2204,15 +2377,18 @@ declare namespace imports.gi.Soup {
 		request_uri(uri: URI): Request;
 	}
 
+	type RequesterInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface RequesterInitOptions extends RequesterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Requester} instead.
 	 */
-	type RequesterMixin = IRequester & GObject.IObject & ISessionFeature;
+	type RequesterMixin = IRequester & GObject.Object & SessionFeature;
 
 	interface Requester extends RequesterMixin {}
 
 	class Requester {
-		public constructor();
+		public constructor(options?: Partial<RequesterInitOptions>);
 		public static new(): Requester;
 	}
 
@@ -2579,12 +2755,12 @@ declare namespace imports.gi.Soup {
 		 * soup_server_get_uris() to find out what port it ended up choosing.)
 		 * 
 		 * See soup_server_listen() for more details.
-		 * @param _port the port to listen on, or 0
+		 * @param port the port to listen on, or 0
 		 * @param options listening options for this server
 		 * @returns %TRUE on success, %FALSE if #port could not be bound
 		 * or any other error occurred (in which case #error will be set).
 		 */
-		listen_all(_port: number, options: ServerListenOptions): boolean;
+		listen_all(port: number, options: ServerListenOptions): boolean;
 		/**
 		 * This attempts to set up #server to listen for connections on
 		 * #fd.
@@ -2610,12 +2786,12 @@ declare namespace imports.gi.Soup {
 		 * ended up choosing.)
 		 * 
 		 * See soup_server_listen() for more details.
-		 * @param _port the port to listen on, or 0
+		 * @param port the port to listen on, or 0
 		 * @param options listening options for this server
 		 * @returns %TRUE on success, %FALSE if #port could not be bound
 		 * or any other error occurred (in which case #error will be set).
 		 */
-		listen_local(_port: number, options: ServerListenOptions): boolean;
+		listen_local(port: number, options: ServerListenOptions): boolean;
 		/**
 		 * This attempts to set up #server to listen for connections on
 		 * #socket.
@@ -2771,15 +2947,30 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type ServerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IServer,
+		"async_context" |
+		"http_aliases" |
+		"https_aliases" |
+		"interface" |
+		"port" |
+		"raw_paths" |
+		"server_header" |
+		"ssl_cert_file" |
+		"ssl_key_file" |
+		"tls_certificate">;
+
+	export interface ServerInitOptions extends ServerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Server} instead.
 	 */
-	type ServerMixin = IServer & GObject.IObject;
+	type ServerMixin = IServer & GObject.Object;
 
 	interface Server extends ServerMixin {}
 
 	class Server {
-		public constructor(options?: Partial<SeverOptions>);
+		public constructor(options?: Partial<ServerInitOptions>);
 		/**
 		 * Creates a new {@link Server}. This is exactly equivalent to calling
 		 * g_object_new() and specifying %SOUP_TYPE_SERVER as the type.
@@ -3600,15 +3791,43 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type SessionInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISession,
+		"accept_language" |
+		"accept_language_auto" |
+		"add_feature" |
+		"add_feature_by_type" |
+		"async_context" |
+		"http_aliases" |
+		"https_aliases" |
+		"idle_timeout" |
+		"local_address" |
+		"max_conns" |
+		"max_conns_per_host" |
+		"proxy_resolver" |
+		"proxy_uri" |
+		"remove_feature_by_type" |
+		"ssl_ca_file" |
+		"ssl_strict" |
+		"ssl_use_system_ca_file" |
+		"timeout" |
+		"tls_database" |
+		"tls_interaction" |
+		"use_ntlm" |
+		"use_thread_context" |
+		"user_agent">;
+
+	export interface SessionInitOptions extends SessionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Session} instead.
 	 */
-	type SessionMixin = ISession & GObject.IObject;
+	type SessionMixin = ISession & GObject.Object;
 
 	interface Session extends SessionMixin {}
 
 	class Session {
-		public constructor();
+		public constructor(options?: Partial<SessionInitOptions>);
 		/**
 		 * Creates a {@link Session} with the default options.
 		 * @returns the new session.
@@ -3629,15 +3848,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type SessionAsyncInitOptionsMixin = SessionInitOptions
+	export interface SessionAsyncInitOptions extends SessionAsyncInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SessionAsync} instead.
 	 */
-	type SessionAsyncMixin = ISessionAsync & ISession;
+	type SessionAsyncMixin = ISessionAsync & Session;
 
 	interface SessionAsync extends SessionAsyncMixin {}
 
 	class SessionAsync {
-		public constructor();
+		public constructor(options?: Partial<SessionAsyncInitOptions>);
 		/**
 		 * Creates an asynchronous {@link Session} with the default options.
 		 * @returns the new session.
@@ -3658,15 +3880,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type SessionSyncInitOptionsMixin = SessionInitOptions
+	export interface SessionSyncInitOptions extends SessionSyncInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SessionSync} instead.
 	 */
-	type SessionSyncMixin = ISessionSync & ISession;
+	type SessionSyncMixin = ISessionSync & Session;
 
 	interface SessionSync extends SessionSyncMixin {}
 
 	class SessionSync {
-		public constructor();
+		public constructor(options?: Partial<SessionSyncInitOptions>);
 		/**
 		 * Creates an synchronous {@link Session} with the default options.
 		 * @returns the new session.
@@ -3821,8 +4046,10 @@ declare namespace imports.gi.Soup {
 		 * %SOUP_SOCKET_EOF if the socket is no longer connected, or
 		 * %SOUP_SOCKET_ERROR on any other error, in which case #error will
 		 * also be set).
+		 * 
+		 * on return, the number of bytes read into #buffer
 		 */
-		read(buffer: number[], len: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		read(buffer: number[], len: number, cancellable: Gio.Cancellable | null): [ SocketIOStatus, number ];
 		/**
 		 * Like soup_socket_read(), but reads no further than the first
 		 * occurrence of #boundary. (If the boundary is found, it will be
@@ -3845,8 +4072,10 @@ declare namespace imports.gi.Soup {
 		 * ends with the boundary string
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns as for soup_socket_read()
+		 * 
+		 * on return, the number of bytes read into #buffer
 		 */
-		read_until(buffer: number[], len: number, boundary: any | null, boundary_len: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		read_until(buffer: number[], len: number, boundary: any | null, boundary_len: number, got_boundary: boolean, cancellable: Gio.Cancellable | null): [ SocketIOStatus, number ];
 		/**
 		 * Starts using SSL on #socket, expecting to find a host named
 		 * #ssl_host.
@@ -3880,8 +4109,10 @@ declare namespace imports.gi.Soup {
 		 * @returns a {@link SocketIOStatus}, as described above (or
 		 * %SOUP_SOCKET_EOF or %SOUP_SOCKET_ERROR. #error will be set if the
 		 * return value is %SOUP_SOCKET_ERROR.)
+		 * 
+		 * on return, number of bytes written
 		 */
-		write(buffer: number[], len: number, cancellable: Gio.Cancellable | null): SocketIOStatus;
+		write(buffer: number[], len: number, cancellable: Gio.Cancellable | null): [ SocketIOStatus, number ];
 		/**
 		 * Emitted when the socket is disconnected, for whatever
 		 * reason.
@@ -3930,15 +4161,35 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type SocketInitOptionsMixin = GObject.ObjectInitOptions & Gio.InitableInitOptions & 
+	Pick<ISocket,
+		"async_context" |
+		"fd" |
+		"ipv6_only" |
+		"is_server" |
+		"local_address" |
+		"non_blocking" |
+		"remote_address" |
+		"ssl_creds" |
+		"ssl_fallback" |
+		"ssl_strict" |
+		"timeout" |
+		"tls_certificate" |
+		"tls_errors" |
+		"trusted_certificate" |
+		"use_thread_context">;
+
+	export interface SocketInitOptions extends SocketInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
-	type SocketMixin = ISocket & GObject.IObject & Gio.IInitable;
+	type SocketMixin = ISocket & GObject.Object & Gio.Initable;
 
 	interface Socket extends SocketMixin {}
 
 	class Socket {
-		public constructor();
+		public constructor(options?: Partial<SocketInitOptions>);
 		/**
 		 * Creates a new (disconnected) socket
 		 * @param optname1 name of first property to set (or %NULL)
@@ -4094,10 +4345,10 @@ declare namespace imports.gi.Soup {
 		 * 
 		 * The message is queued to be sent and will be sent when the main loop
 		 * is run.
-		 * @param _type the type of message contents
+		 * @param type the type of message contents
 		 * @param message the message data as #GBytes
 		 */
-		send_message(_type: WebsocketDataType, message: GLib.Bytes): void;
+		send_message(type: WebsocketDataType, message: GLib.Bytes): void;
 		/**
 		 * Send a %NULL-terminated text (UTF-8) message to the peer. If you need
 		 * to send text messages containing %NULL characters use
@@ -4146,7 +4397,7 @@ declare namespace imports.gi.Soup {
 		 * NUL-terminated, but the NUL byte will not be included in
 		 * the length count.
 		 */
-		connect(signal: "message", callback: (owner: this, _type: number, message: GLib.Bytes) => void): number;
+		connect(signal: "message", callback: (owner: this, type: number, message: GLib.Bytes) => void): number;
 		/**
 		 * Emitted when we receive a Pong frame (solicited or
 		 * unsolicited) from the peer.
@@ -4169,10 +4420,24 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type WebsocketConnectionInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebsocketConnection,
+		"connection_type" |
+		"extensions" |
+		"io_stream" |
+		"keepalive_interval" |
+		"max_incoming_payload_size" |
+		"origin" |
+		"protocol" |
+		"state" |
+		"uri">;
+
+	export interface WebsocketConnectionInitOptions extends WebsocketConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketConnection} instead.
 	 */
-	type WebsocketConnectionMixin = IWebsocketConnection & GObject.IObject;
+	type WebsocketConnectionMixin = IWebsocketConnection & GObject.Object;
 
 	/**
 	 * A class representing a WebSocket connection.
@@ -4180,32 +4445,32 @@ declare namespace imports.gi.Soup {
 	interface WebsocketConnection extends WebsocketConnectionMixin {}
 
 	class WebsocketConnection {
-		public constructor();
+		public constructor(options?: Partial<WebsocketConnectionInitOptions>);
 		/**
 		 * Creates a {@link WebsocketConnection} on #stream. This should be
 		 * called after completing the handshake to begin using the WebSocket
 		 * protocol.
 		 * @param stream a #GIOStream connected to the WebSocket server
 		 * @param uri the URI of the connection
-		 * @param _type the type of connection (client/side)
+		 * @param type the type of connection (client/side)
 		 * @param origin the Origin of the client
 		 * @param protocol the subprotocol in use
 		 * @returns a new {@link WebsocketConnection}
 		 */
-		public static new(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string | null, protocol: string | null): WebsocketConnection;
+		public static new(stream: Gio.IOStream, uri: URI, type: WebsocketConnectionType, origin: string | null, protocol: string | null): WebsocketConnection;
 		/**
 		 * Creates a {@link WebsocketConnection} on #stream with the given active #extensions.
 		 * This should be called after completing the handshake to begin using the WebSocket
 		 * protocol.
 		 * @param stream a #GIOStream connected to the WebSocket server
 		 * @param uri the URI of the connection
-		 * @param _type the type of connection (client/side)
+		 * @param type the type of connection (client/side)
 		 * @param origin the Origin of the client
 		 * @param protocol the subprotocol in use
 		 * @param extensions a #GList of {@link WebsocketExtension} objects
 		 * @returns a new {@link WebsocketConnection}
 		 */
-		public static new_with_extensions(stream: Gio.IOStream, uri: URI, _type: WebsocketConnectionType, origin: string | null, protocol: string | null, extensions: GLib.List): WebsocketConnection;
+		public static new_with_extensions(stream: Gio.IOStream, uri: URI, type: WebsocketConnectionType, origin: string | null, protocol: string | null, extensions: GLib.List): WebsocketConnection;
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4253,15 +4518,18 @@ declare namespace imports.gi.Soup {
 		process_outgoing_message(payload: GLib.Bytes): GLib.Bytes;
 	}
 
+	type WebsocketExtensionInitOptionsMixin = GObject.ObjectInitOptions
+	export interface WebsocketExtensionInitOptions extends WebsocketExtensionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtension} instead.
 	 */
-	type WebsocketExtensionMixin = IWebsocketExtension & GObject.IObject;
+	type WebsocketExtensionMixin = IWebsocketExtension & GObject.Object;
 
 	interface WebsocketExtension extends WebsocketExtensionMixin {}
 
 	class WebsocketExtension {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4271,15 +4539,18 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type WebsocketExtensionDeflateInitOptionsMixin = WebsocketExtensionInitOptions
+	export interface WebsocketExtensionDeflateInitOptions extends WebsocketExtensionDeflateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtensionDeflate} instead.
 	 */
-	type WebsocketExtensionDeflateMixin = IWebsocketExtensionDeflate & IWebsocketExtension;
+	type WebsocketExtensionDeflateMixin = IWebsocketExtensionDeflate & WebsocketExtension;
 
 	interface WebsocketExtensionDeflate extends WebsocketExtensionDeflateMixin {}
 
 	class WebsocketExtensionDeflate {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionDeflateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4289,29 +4560,34 @@ declare namespace imports.gi.Soup {
 
 	}
 
+	type WebsocketExtensionManagerInitOptionsMixin = GObject.ObjectInitOptions & SessionFeatureInitOptions
+	export interface WebsocketExtensionManagerInitOptions extends WebsocketExtensionManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsocketExtensionManager} instead.
 	 */
-	type WebsocketExtensionManagerMixin = IWebsocketExtensionManager & GObject.IObject & ISessionFeature;
+	type WebsocketExtensionManagerMixin = IWebsocketExtensionManager & GObject.Object & SessionFeature;
 
 	interface WebsocketExtensionManager extends WebsocketExtensionManagerMixin {}
 
 	class WebsocketExtensionManager {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionManagerInitOptions>);
 	}
 
+	export interface AddressClassInitOptions {}
 	interface AddressClass {}
 	class AddressClass {
-		public constructor();
+		public constructor(options?: Partial<AddressClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface AuthClassInitOptions {}
 	interface AuthClass {}
 	class AuthClass {
-		public constructor();
+		public constructor(options?: Partial<AuthClassInitOptions>);
 		public readonly scheme_name: string;
 		public readonly strength: number;
 		public update: {(auth: Auth, msg: Message, auth_header: GLib.HashTable): boolean;};
@@ -4325,18 +4601,20 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface AuthDomainBasicClassInitOptions {}
 	interface AuthDomainBasicClass {}
 	class AuthDomainBasicClass {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainBasicClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface AuthDomainClassInitOptions {}
 	interface AuthDomainClass {}
 	class AuthDomainClass {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainClassInitOptions>);
 		public accepts: {(domain: AuthDomain, msg: Message, header: string): string;};
 		public challenge: {(domain: AuthDomain, msg: Message): string;};
 		public check_password: {(domain: AuthDomain, msg: Message, username: string, password: string): boolean;};
@@ -4345,26 +4623,30 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface AuthDomainDigestClassInitOptions {}
 	interface AuthDomainDigestClass {}
 	class AuthDomainDigestClass {
-		public constructor();
+		public constructor(options?: Partial<AuthDomainDigestClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface AuthManagerClassInitOptions {}
 	interface AuthManagerClass {}
 	class AuthManagerClass {
-		public constructor();
+		public constructor(options?: Partial<AuthManagerClassInitOptions>);
 		public authenticate: {(manager: AuthManager, msg: Message, auth: Auth, retrying: boolean): void;};
 	}
 
+	export interface AuthManagerPrivateInitOptions {}
 	interface AuthManagerPrivate {}
 	class AuthManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<AuthManagerPrivateInitOptions>);
 	}
 
+	export interface BufferInitOptions {}
 	/**
 	 * A data buffer, generally used to represent a chunk of a
 	 * {@link MessageBody}.
@@ -4374,7 +4656,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface Buffer {}
 	class Buffer {
-		public constructor();
+		public constructor(options?: Partial<BufferInitOptions>);
 		/**
 		 * Creates a new {@link Buffer} containing #length bytes from #data.
 		 * @param use how #data is to be used by the buffer
@@ -4480,20 +4762,23 @@ declare namespace imports.gi.Soup {
 		public new_subbuffer(offset: number, length: number): Buffer;
 	}
 
+	export interface CacheClassInitOptions {}
 	interface CacheClass {}
 	class CacheClass {
-		public constructor();
+		public constructor(options?: Partial<CacheClassInitOptions>);
 		public get_cacheability: {(cache: Cache, msg: Message): Cacheability;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 	}
 
+	export interface CachePrivateInitOptions {}
 	interface CachePrivate {}
 	class CachePrivate {
-		public constructor();
+		public constructor(options?: Partial<CachePrivateInitOptions>);
 	}
 
+	export interface ClientContextInitOptions {}
 	/**
 	 * A {@link ClientContext} provides additional information about the
 	 * client making a particular request. In particular, you can use
@@ -4509,7 +4794,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface ClientContext {}
 	class ClientContext {
-		public constructor();
+		public constructor(options?: Partial<ClientContextInitOptions>);
 		/**
 		 * Retrieves the {@link Address} associated with the remote end
 		 * of a connection.
@@ -4605,14 +4890,16 @@ declare namespace imports.gi.Soup {
 		public steal_connection(): Gio.IOStream;
 	}
 
+	export interface ConnectionInitOptions {}
 	interface Connection {}
 	class Connection {
-		public constructor();
+		public constructor(options?: Partial<ConnectionInitOptions>);
 	}
 
+	export interface ContentDecoderClassInitOptions {}
 	interface ContentDecoderClass {}
 	class ContentDecoderClass {
-		public constructor();
+		public constructor(options?: Partial<ContentDecoderClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
@@ -4620,15 +4907,17 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved5: {(): void;};
 	}
 
+	export interface ContentDecoderPrivateInitOptions {}
 	interface ContentDecoderPrivate {}
 	class ContentDecoderPrivate {
-		public constructor();
+		public constructor(options?: Partial<ContentDecoderPrivateInitOptions>);
 	}
 
+	export interface ContentSnifferClassInitOptions {}
 	interface ContentSnifferClass {}
 	class ContentSnifferClass {
-		public constructor();
-		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer): string;};
+		public constructor(options?: Partial<ContentSnifferClassInitOptions>);
+		public sniff: {(sniffer: ContentSniffer, msg: Message, buffer: Buffer): [ string, GLib.HashTable | null ];};
 		public get_buffer_size: {(sniffer: ContentSniffer): number;};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
@@ -4637,11 +4926,13 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved5: {(): void;};
 	}
 
+	export interface ContentSnifferPrivateInitOptions {}
 	interface ContentSnifferPrivate {}
 	class ContentSnifferPrivate {
-		public constructor();
+		public constructor(options?: Partial<ContentSnifferPrivateInitOptions>);
 	}
 
+	export interface CookieInitOptions {}
 	/**
 	 * An HTTP cookie.
 	 * 
@@ -4666,7 +4957,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface Cookie {}
 	class Cookie {
-		public constructor();
+		public constructor(options?: Partial<CookieInitOptions>);
 		/**
 		 * Creates a new {@link Cookie} with the given attributes. (Use
 		 * soup_cookie_set_secure() and soup_cookie_set_http_only() if you
@@ -4874,9 +5165,10 @@ declare namespace imports.gi.Soup {
 		public to_set_cookie_header(): string;
 	}
 
+	export interface CookieJarClassInitOptions {}
 	interface CookieJarClass {}
 	class CookieJarClass {
-		public constructor();
+		public constructor(options?: Partial<CookieJarClassInitOptions>);
 		public save: {(jar: CookieJar): void;};
 		public is_persistent: {(jar: CookieJar): boolean;};
 		public changed: {(jar: CookieJar, old_cookie: Cookie, new_cookie: Cookie): void;};
@@ -4884,24 +5176,27 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved2: {(): void;};
 	}
 
+	export interface CookieJarDBClassInitOptions {}
 	interface CookieJarDBClass {}
 	class CookieJarDBClass {
-		public constructor();
+		public constructor(options?: Partial<CookieJarDBClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface CookieJarTextClassInitOptions {}
 	interface CookieJarTextClass {}
 	class CookieJarTextClass {
-		public constructor();
+		public constructor(options?: Partial<CookieJarTextClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface DateInitOptions {}
 	/**
 	 * A date and time. The date is assumed to be in the (proleptic)
 	 * Gregorian calendar. The time is in UTC if #utc is %TRUE. Otherwise,
@@ -4913,7 +5208,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface Date {}
 	class Date {
-		public constructor();
+		public constructor(options?: Partial<DateInitOptions>);
 		/**
 		 * Creates a {@link Date} representing the indicated time, UTC.
 		 * @param year the year (1-9999)
@@ -5059,14 +5354,15 @@ declare namespace imports.gi.Soup {
 		public to_time_t(): number;
 		/**
 		 * Converts #date to a #GTimeVal.
-		 * @param time a #GTimeVal structure in which to store the converted time.
+		 * @returns a #GTimeVal structure in which to store the converted time.
 		 */
-		public to_timeval(time: GLib.TimeVal): void;
+		public to_timeval(): GLib.TimeVal;
 	}
 
+	export interface HSTSEnforcerClassInitOptions {}
 	interface HSTSEnforcerClass {}
 	class HSTSEnforcerClass {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerClassInitOptions>);
 		public is_persistent: {(hsts_enforcer: HSTSEnforcer): boolean;};
 		public has_valid_policy: {(hsts_enforcer: HSTSEnforcer, domain: string): boolean;};
 		public changed: {(enforcer: HSTSEnforcer, old_policy: HSTSPolicy, new_policy: HSTSPolicy): void;};
@@ -5077,25 +5373,29 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface HSTSEnforcerDBClassInitOptions {}
 	interface HSTSEnforcerDBClass {}
 	class HSTSEnforcerDBClass {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerDBClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface HSTSEnforcerDBPrivateInitOptions {}
 	interface HSTSEnforcerDBPrivate {}
 	class HSTSEnforcerDBPrivate {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerDBPrivateInitOptions>);
 	}
 
+	export interface HSTSEnforcerPrivateInitOptions {}
 	interface HSTSEnforcerPrivate {}
 	class HSTSEnforcerPrivate {
-		public constructor();
+		public constructor(options?: Partial<HSTSEnforcerPrivateInitOptions>);
 	}
 
+	export interface HSTSPolicyInitOptions {}
 	/**
 	 * An HTTP Strict Transport Security policy.
 	 * 
@@ -5116,7 +5416,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface HSTSPolicy {}
 	class HSTSPolicy {
-		public constructor();
+		public constructor(options?: Partial<HSTSPolicyInitOptions>);
 		/**
 		 * Creates a new {@link HSTSPolicy} with the given attributes.
 		 * 
@@ -5226,15 +5526,17 @@ declare namespace imports.gi.Soup {
 		public is_session_policy(): boolean;
 	}
 
+	export interface LoggerClassInitOptions {}
 	interface LoggerClass {}
 	class LoggerClass {
-		public constructor();
+		public constructor(options?: Partial<LoggerClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface MessageBodyInitOptions {}
 	/**
 	 * A {@link Message} request or response body.
 	 * 
@@ -5252,7 +5554,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface MessageBody {}
 	class MessageBody {
-		public constructor();
+		public constructor(options?: Partial<MessageBodyInitOptions>);
 		/**
 		 * Creates a new {@link MessageBody}. #SoupMessage uses this internally; you
 		 * will not normally need to call it yourself.
@@ -5397,9 +5699,10 @@ declare namespace imports.gi.Soup {
 		public wrote_chunk(chunk: Buffer): void;
 	}
 
+	export interface MessageClassInitOptions {}
 	interface MessageClass {}
 	class MessageClass {
-		public constructor();
+		public constructor(options?: Partial<MessageClassInitOptions>);
 		public wrote_informational: {(msg: Message): void;};
 		public wrote_headers: {(msg: Message): void;};
 		public wrote_chunk: {(msg: Message): void;};
@@ -5416,20 +5719,21 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved3: {(): void;};
 	}
 
+	export interface MessageHeadersInitOptions {}
 	/**
 	 * The HTTP message headers associated with a request or response.
 	 */
 	interface MessageHeaders {}
 	class MessageHeaders {
-		public constructor();
+		public constructor(options?: Partial<MessageHeadersInitOptions>);
 		/**
 		 * Creates a {@link MessageHeaders}. (#SoupMessage does this
 		 * automatically for its own headers. You would only need to use this
 		 * method if you are manually parsing or generating message headers.)
-		 * @param _type the type of headers
+		 * @param type the type of headers
 		 * @returns a new {@link MessageHeaders}
 		 */
-		public static new(_type: MessageHeadersType): MessageHeaders;
+		public static new(type: MessageHeadersType): MessageHeaders;
 		/**
 		 * Appends a new header with name #name and value #value to #hdrs. (If
 		 * there is an existing header with name #name, then this creates a
@@ -5463,9 +5767,9 @@ declare namespace imports.gi.Soup {
 		 * required for interoperability in some cases.)
 		 * 
 		 * You may not modify the headers from #func.
-		 * @param _func callback function to run for each header
+		 * @param func callback function to run for each header
 		 */
-		public foreach(_func: MessageHeadersForeachFunc): void;
+		public foreach(func: MessageHeadersForeachFunc): void;
 		/**
 		 * Frees #hdrs.
 		 */
@@ -5509,8 +5813,14 @@ declare namespace imports.gi.Soup {
 		 * @returns %TRUE if #hdrs contains a "Content-Disposition"
 		 * header, %FALSE if not (in which case *#disposition and *#params
 		 * will be unchanged).
+		 * 
+		 * return location for the
+		 * disposition-type, or %NULL
+		 * 
+		 * return
+		 * location for the Content-Disposition parameters, or %NULL
 		 */
-		public get_content_disposition(): boolean;
+		public get_content_disposition(): [ boolean, string, GLib.HashTable ];
 		/**
 		 * Gets the message body length that #hdrs declare. This will only
 		 * be non-0 if soup_message_headers_get_encoding() returns
@@ -5524,8 +5834,15 @@ declare namespace imports.gi.Soup {
 		 * was specified as "*", then #total_length will be set to -1.
 		 * @returns %TRUE if #hdrs contained a "Content-Range" header
 		 * containing a byte range which could be parsed, %FALSE otherwise.
+		 * 
+		 * return value for the start of the range
+		 * 
+		 * return value for the end of the range
+		 * 
+		 * return value for the total length of the
+		 * resource, or %NULL if you don't care.
 		 */
-		public get_content_range(): boolean;
+		public get_content_range(): [ boolean, number, number, number | null ];
 		/**
 		 * Looks up the "Content-Type" header in #hdrs, parses it, and returns
 		 * its value in *#content_type and *#params. #params can be %NULL if you
@@ -5534,8 +5851,12 @@ declare namespace imports.gi.Soup {
 		 * "Content-Type" header or %NULL if #hdrs does not contain that
 		 * header or it cannot be parsed (in which case *#params will be
 		 * unchanged).
+		 * 
+		 * 
+		 *   return location for the Content-Type parameters (eg, "charset"), or
+		 *   %NULL
 		 */
-		public get_content_type(): string | null;
+		public get_content_type(): [ string | null, GLib.HashTable | null ];
 		/**
 		 * Gets the message body encoding that #hdrs declare. This may not
 		 * always correspond to the encoding used on the wire; eg, a HEAD
@@ -5621,8 +5942,13 @@ declare namespace imports.gi.Soup {
 		 * @returns %TRUE if #hdrs contained a syntactically-valid
 		 * "Range" header, %FALSE otherwise (in which case #range and #length
 		 * will not be set).
+		 * 
+		 * return location for an array
+		 * of {@link Range}
+		 * 
+		 * the length of the returned array
 		 */
-		public get_ranges(total_length: number): boolean;
+		public get_ranges(total_length: number): [ boolean, Range[], number ];
 		/**
 		 * Checks whether the list-valued header #name is present in #hdrs,
 		 * and contains a case-insensitive match for #token.
@@ -5697,10 +6023,10 @@ declare namespace imports.gi.Soup {
 		 * soup_message_headers_get_ranges() for more details.
 		 * </para></note>
 		 * @param start the start of the range
-		 * @param _end the end of the range
+		 * @param end the end of the range
 		 * @param total_length the total length of the resource, or -1 if unknown
 		 */
-		public set_content_range(start: number, _end: number, total_length: number): void;
+		public set_content_range(start: number, end: number, total_length: number): void;
 		/**
 		 * Sets the "Content-Type" header in #hdrs to #content_type,
 		 * optionally with additional parameters specified in #params.
@@ -5737,9 +6063,9 @@ declare namespace imports.gi.Soup {
 		 * If you need to request multiple ranges, use
 		 * soup_message_headers_set_ranges().
 		 * @param start the start of the range to request
-		 * @param _end the end of the range to request
+		 * @param end the end of the range to request
 		 */
-		public set_range(start: number, _end: number): void;
+		public set_range(start: number, end: number): void;
 		/**
 		 * Sets #hdrs's Range header to request the indicated ranges. (If you
 		 * only want to request a single range, you can use
@@ -5750,6 +6076,7 @@ declare namespace imports.gi.Soup {
 		public set_ranges(ranges: Range, length: number): void;
 	}
 
+	export interface MessageHeadersIterInitOptions {}
 	/**
 	 * An opaque type used to iterate over a %SoupMessageHeaders
 	 * structure.
@@ -5762,7 +6089,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface MessageHeadersIter {}
 	class MessageHeadersIter {
-		public constructor();
+		public constructor(options?: Partial<MessageHeadersIterInitOptions>);
 		public readonly dummy: any[];
 		/**
 		 * Yields the next name/value pair in the %SoupMessageHeaders being
@@ -5771,20 +6098,29 @@ declare namespace imports.gi.Soup {
 		 * and #value will be unchanged.
 		 * @returns %TRUE if another name and value were returned, %FALSE
 		 * if the end of the headers has been reached.
+		 * 
+		 * pointer to a variable to return
+		 * the header name in
+		 * 
+		 * pointer to a variable to return
+		 * the header value in
 		 */
-		public next(): boolean;
+		public next(): [ boolean, string, string ];
 	}
 
+	export interface MessageQueueInitOptions {}
 	interface MessageQueue {}
 	class MessageQueue {
-		public constructor();
+		public constructor(options?: Partial<MessageQueueInitOptions>);
 	}
 
+	export interface MessageQueueItemInitOptions {}
 	interface MessageQueueItem {}
 	class MessageQueueItem {
-		public constructor();
+		public constructor(options?: Partial<MessageQueueItemInitOptions>);
 	}
 
+	export interface MultipartInitOptions {}
 	/**
 	 * Represents a multipart HTTP message body, parsed according to the
 	 * syntax of RFC 2046. Of particular interest to HTTP are
@@ -5800,7 +6136,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface Multipart {}
 	class Multipart {
-		public constructor();
+		public constructor(options?: Partial<MultipartInitOptions>);
 		/**
 		 * Creates a new empty {@link Multipart} with a randomly-generated
 		 * boundary string. Note that #mime_type must be the full MIME type,
@@ -5860,8 +6196,14 @@ declare namespace imports.gi.Soup {
 		 * @param part the part number to get (counting from 0)
 		 * @returns %TRUE on success, %FALSE if #part is out of range (in
 		 * which case #headers and #body won't be set)
+		 * 
+		 * return location for the MIME part
+		 * headers
+		 * 
+		 * return location for the MIME part
+		 * body
 		 */
-		public get_part(part: number): boolean;
+		public get_part(part: number): [ boolean, MessageHeaders, Buffer ];
 		/**
 		 * Serializes #multipart to #dest_headers and #dest_body.
 		 * @param dest_headers the headers of the HTTP message to serialize #multipart to
@@ -5870,49 +6212,56 @@ declare namespace imports.gi.Soup {
 		public to_message(dest_headers: MessageHeaders, dest_body: MessageBody): void;
 	}
 
+	export interface MultipartInputStreamClassInitOptions {}
 	interface MultipartInputStreamClass {}
 	class MultipartInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<MultipartInputStreamClassInitOptions>);
 	}
 
+	export interface MultipartInputStreamPrivateInitOptions {}
 	interface MultipartInputStreamPrivate {}
 	class MultipartInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<MultipartInputStreamPrivateInitOptions>);
 	}
 
+	export interface PasswordManagerInterfaceInitOptions {}
 	interface PasswordManagerInterface {}
 	class PasswordManagerInterface {
-		public constructor();
+		public constructor(options?: Partial<PasswordManagerInterfaceInitOptions>);
 		public readonly base: GObject.TypeInterface;
 		public get_passwords_async: {(password_manager: PasswordManager, msg: Message, auth: Auth, retrying: boolean, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: PasswordManagerCallback): void;};
 		public get_passwords_sync: {(password_manager: PasswordManager, msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void;};
 	}
 
+	export interface ProxyResolverDefaultClassInitOptions {}
 	interface ProxyResolverDefaultClass {}
 	class ProxyResolverDefaultClass {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverDefaultClassInitOptions>);
 	}
 
+	export interface ProxyResolverInterfaceInitOptions {}
 	interface ProxyResolverInterface {}
 	class ProxyResolverInterface {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverInterfaceInitOptions>);
 		public readonly base: GObject.TypeInterface;
 		public get_proxy_async: {(proxy_resolver: ProxyResolver, msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;};
-		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null): number;};
+		public get_proxy_sync: {(proxy_resolver: ProxyResolver, msg: Message, cancellable: Gio.Cancellable | null): [ number, Address ];};
 	}
 
+	export interface ProxyURIResolverInterfaceInitOptions {}
 	interface ProxyURIResolverInterface {}
 	class ProxyURIResolverInterface {
-		public constructor();
+		public constructor(options?: Partial<ProxyURIResolverInterfaceInitOptions>);
 		public readonly base: GObject.TypeInterface;
 		public get_proxy_uri_async: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, async_context: GLib.MainContext | null, cancellable: Gio.Cancellable | null, callback: ProxyURIResolverCallback): void;};
-		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null): number;};
+		public get_proxy_uri_sync: {(proxy_uri_resolver: ProxyURIResolver, uri: URI, cancellable: Gio.Cancellable | null): [ number, URI ];};
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface RangeInitOptions {}
 	/**
 	 * Represents a byte range as used in the Range header.
 	 * 
@@ -5931,7 +6280,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface Range {}
 	class Range {
-		public constructor();
+		public constructor(options?: Partial<RangeInitOptions>);
 		/**
 		 * the start of the range
 		 */
@@ -5942,9 +6291,10 @@ declare namespace imports.gi.Soup {
 		public end: number;
 	}
 
+	export interface RequestClassInitOptions {}
 	interface RequestClass {}
 	class RequestClass {
-		public constructor();
+		public constructor(options?: Partial<RequestClassInitOptions>);
 		public readonly schemes: string;
 		public check_uri: {(req_base: Request, uri: URI): boolean;};
 		public send: {(request: Request, cancellable: Gio.Cancellable | null): Gio.InputStream;};
@@ -5954,54 +6304,64 @@ declare namespace imports.gi.Soup {
 		public get_content_type: {(request: Request): string | null;};
 	}
 
+	export interface RequestDataClassInitOptions {}
 	interface RequestDataClass {}
 	class RequestDataClass {
-		public constructor();
+		public constructor(options?: Partial<RequestDataClassInitOptions>);
 	}
 
+	export interface RequestDataPrivateInitOptions {}
 	interface RequestDataPrivate {}
 	class RequestDataPrivate {
-		public constructor();
+		public constructor(options?: Partial<RequestDataPrivateInitOptions>);
 	}
 
+	export interface RequestFileClassInitOptions {}
 	interface RequestFileClass {}
 	class RequestFileClass {
-		public constructor();
+		public constructor(options?: Partial<RequestFileClassInitOptions>);
 	}
 
+	export interface RequestFilePrivateInitOptions {}
 	interface RequestFilePrivate {}
 	class RequestFilePrivate {
-		public constructor();
+		public constructor(options?: Partial<RequestFilePrivateInitOptions>);
 	}
 
+	export interface RequestHTTPClassInitOptions {}
 	interface RequestHTTPClass {}
 	class RequestHTTPClass {
-		public constructor();
+		public constructor(options?: Partial<RequestHTTPClassInitOptions>);
 	}
 
+	export interface RequestHTTPPrivateInitOptions {}
 	interface RequestHTTPPrivate {}
 	class RequestHTTPPrivate {
-		public constructor();
+		public constructor(options?: Partial<RequestHTTPPrivateInitOptions>);
 	}
 
+	export interface RequestPrivateInitOptions {}
 	interface RequestPrivate {}
 	class RequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<RequestPrivateInitOptions>);
 	}
 
+	export interface RequesterClassInitOptions {}
 	interface RequesterClass {}
 	class RequesterClass {
-		public constructor();
+		public constructor(options?: Partial<RequesterClassInitOptions>);
 	}
 
+	export interface RequesterPrivateInitOptions {}
 	interface RequesterPrivate {}
 	class RequesterPrivate {
-		public constructor();
+		public constructor(options?: Partial<RequesterPrivateInitOptions>);
 	}
 
+	export interface ServerClassInitOptions {}
 	interface ServerClass {}
 	class ServerClass {
-		public constructor();
+		public constructor(options?: Partial<ServerClassInitOptions>);
 		public request_started: {(server: Server, msg: Message, client: ClientContext): void;};
 		public request_read: {(server: Server, msg: Message, client: ClientContext): void;};
 		public request_finished: {(server: Server, msg: Message, client: ClientContext): void;};
@@ -6012,18 +6372,20 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface SessionAsyncClassInitOptions {}
 	interface SessionAsyncClass {}
 	class SessionAsyncClass {
-		public constructor();
+		public constructor(options?: Partial<SessionAsyncClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface SessionClassInitOptions {}
 	interface SessionClass {}
 	class SessionClass {
-		public constructor();
+		public constructor(options?: Partial<SessionClassInitOptions>);
 		public request_started: {(session: Session, msg: Message, socket: Socket): void;};
 		public authenticate: {(session: Session, msg: Message, auth: Auth, retrying: boolean): void;};
 		public queue_message: {(session: Session, msg: Message, callback: SessionCallback | null): void;};
@@ -6036,34 +6398,37 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface SessionFeatureInterfaceInitOptions {}
 	/**
 	 * The interface implemented by {@link SessionFeature}<!-- -->s.
 	 */
 	interface SessionFeatureInterface {}
 	class SessionFeatureInterface {
-		public constructor();
+		public constructor(options?: Partial<SessionFeatureInterfaceInitOptions>);
 		public attach: {(feature: SessionFeature, session: Session): void;};
 		public detach: {(feature: SessionFeature, session: Session): void;};
 		public request_queued: {(feature: SessionFeature, session: Session, msg: Message): void;};
 		public request_started: {(feature: SessionFeature, session: Session, msg: Message, socket: Socket): void;};
 		public request_unqueued: {(feature: SessionFeature, session: Session, msg: Message): void;};
-		public add_feature: {(feature: SessionFeature, _type: GObject.Type): boolean;};
-		public remove_feature: {(feature: SessionFeature, _type: GObject.Type): boolean;};
-		public has_feature: {(feature: SessionFeature, _type: GObject.Type): boolean;};
+		public add_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
+		public remove_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
+		public has_feature: {(feature: SessionFeature, type: GObject.Type): boolean;};
 	}
 
+	export interface SessionSyncClassInitOptions {}
 	interface SessionSyncClass {}
 	class SessionSyncClass {
-		public constructor();
+		public constructor(options?: Partial<SessionSyncClassInitOptions>);
 		public _libsoup_reserved1: {(): void;};
 		public _libsoup_reserved2: {(): void;};
 		public _libsoup_reserved3: {(): void;};
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface SocketClassInitOptions {}
 	interface SocketClass {}
 	class SocketClass {
-		public constructor();
+		public constructor(options?: Partial<SocketClassInitOptions>);
 		public readable: {(sock: Socket): void;};
 		public writable: {(sock: Socket): void;};
 		public disconnected: {(sock: Socket): void;};
@@ -6074,6 +6439,7 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface URIInitOptions {}
 	/**
 	 * A {@link URI} represents a (parsed) URI. #SoupURI supports RFC 3986
 	 * (URI Generic Syntax), and can parse any valid URI. However, libsoup
@@ -6119,7 +6485,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface URI {}
 	class URI {
-		public constructor();
+		public constructor(options?: Partial<URIInitOptions>);
 		/**
 		 * Parses an absolute URI.
 		 * 
@@ -6272,9 +6638,9 @@ declare namespace imports.gi.Soup {
 		/**
 		 * Sets #uri's port to #port. If #port is 0, #uri will not have an
 		 * explicitly-specified port.
-		 * @param _port the port, or 0
+		 * @param port the port, or 0
 		 */
-		public set_port(_port: number): void;
+		public set_port(port: number): void;
 		/**
 		 * Sets #uri's query to #query.
 		 * @param query the query
@@ -6327,30 +6693,33 @@ declare namespace imports.gi.Soup {
 		public uses_default_port(): boolean;
 	}
 
+	export interface WebsocketConnectionClassInitOptions {}
 	/**
 	 * The abstract base class for {@link WebsocketConnection}
 	 */
 	interface WebsocketConnectionClass {}
 	class WebsocketConnectionClass {
-		public constructor();
-		public message: {(self: WebsocketConnection, _type: WebsocketDataType, message: GLib.Bytes): void;};
+		public constructor(options?: Partial<WebsocketConnectionClassInitOptions>);
+		public message: {(self: WebsocketConnection, type: WebsocketDataType, message: GLib.Bytes): void;};
 		public error: {(self: WebsocketConnection, error: GLib.Error): void;};
 		public closing: {(self: WebsocketConnection): void;};
 		public closed: {(self: WebsocketConnection): void;};
 		public pong: {(self: WebsocketConnection, message: GLib.Bytes): void;};
 	}
 
+	export interface WebsocketConnectionPrivateInitOptions {}
 	interface WebsocketConnectionPrivate {}
 	class WebsocketConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebsocketConnectionPrivateInitOptions>);
 	}
 
+	export interface WebsocketExtensionClassInitOptions {}
 	/**
 	 * The class structure for the SoupWebsocketExtension.
 	 */
 	interface WebsocketExtensionClass {}
 	class WebsocketExtensionClass {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionClassInitOptions>);
 		public readonly name: string;
 		public configure: {(extension: WebsocketExtension, connection_type: WebsocketConnectionType, params: GLib.HashTable | null): boolean;};
 		public get_request_params: {(extension: WebsocketExtension): string | null;};
@@ -6363,16 +6732,19 @@ declare namespace imports.gi.Soup {
 		public _libsoup_reserved4: {(): void;};
 	}
 
+	export interface WebsocketExtensionDeflateClassInitOptions {}
 	interface WebsocketExtensionDeflateClass {}
 	class WebsocketExtensionDeflateClass {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionDeflateClassInitOptions>);
 	}
 
+	export interface WebsocketExtensionManagerClassInitOptions {}
 	interface WebsocketExtensionManagerClass {}
 	class WebsocketExtensionManagerClass {
-		public constructor();
+		public constructor(options?: Partial<WebsocketExtensionManagerClassInitOptions>);
 	}
 
+	export interface XMLRPCParamsInitOptions {}
 	/**
 	 * Opaque structure containing XML-RPC methodCall parameter values.
 	 * Can be parsed using soup_xmlrpc_params_parse() and freed with
@@ -6380,7 +6752,7 @@ declare namespace imports.gi.Soup {
 	 */
 	interface XMLRPCParams {}
 	class XMLRPCParams {
-		public constructor();
+		public constructor(options?: Partial<XMLRPCParamsInitOptions>);
 		/**
 		 * Free a {@link XMLRPCParams} returned by soup_xmlrpc_parse_request().
 		 */
@@ -6420,6 +6792,9 @@ declare namespace imports.gi.Soup {
 		get_passwords_sync(msg: Message, auth: Auth, cancellable: Gio.Cancellable | null): void;
 	}
 
+	type PasswordManagerInitOptionsMixin  = {};
+	export interface PasswordManagerInitOptions extends PasswordManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PasswordManager} instead.
 	 */
@@ -6428,7 +6803,7 @@ declare namespace imports.gi.Soup {
 	interface PasswordManager extends PasswordManagerMixin {}
 
 	class PasswordManager {
-		public constructor();
+		public constructor(options?: Partial<PasswordManagerInitOptions>);
 	}
 
 
@@ -6438,8 +6813,11 @@ declare namespace imports.gi.Soup {
 	 */
 	interface IProxyResolver {
 		get_proxy_async(msg: Message, async_context: GLib.MainContext, cancellable: Gio.Cancellable | null, callback: ProxyResolverCallback): void;
-		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null): number;
+		get_proxy_sync(msg: Message, cancellable: Gio.Cancellable | null): [ number, Address ];
 	}
+
+	type ProxyResolverInitOptionsMixin  = {};
+	export interface ProxyResolverInitOptions extends ProxyResolverInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyResolver} instead.
@@ -6449,7 +6827,7 @@ declare namespace imports.gi.Soup {
 	interface ProxyResolver extends ProxyResolverMixin {}
 
 	class ProxyResolver {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverInitOptions>);
 	}
 
 
@@ -6475,9 +6853,14 @@ declare namespace imports.gi.Soup {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns %SOUP_STATUS_OK if successful, or a transport-level
 		 * error.
+		 * 
+		 * on return, will contain the proxy URI
 		 */
-		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): number;
+		get_proxy_uri_sync(uri: URI, cancellable: Gio.Cancellable | null): [ number, URI ];
 	}
+
+	type ProxyURIResolverInitOptionsMixin  = {};
+	export interface ProxyURIResolverInitOptions extends ProxyURIResolverInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyURIResolver} instead.
@@ -6487,7 +6870,7 @@ declare namespace imports.gi.Soup {
 	interface ProxyURIResolver extends ProxyURIResolverMixin {}
 
 	class ProxyURIResolver {
-		public constructor();
+		public constructor(options?: Partial<ProxyURIResolverInitOptions>);
 	}
 
 
@@ -6501,27 +6884,30 @@ declare namespace imports.gi.Soup {
 		 * This is used for features that can be extended with multiple
 		 * different types. Eg, the authentication manager can be extended
 		 * with subtypes of {@link Auth}.
-		 * @param _type the #GType of a "sub-feature"
+		 * @param type the #GType of a "sub-feature"
 		 * @returns %TRUE if #feature accepted #type as a subfeature.
 		 */
-		add_feature(_type: GObject.Type): boolean;
+		add_feature(type: GObject.Type): boolean;
 		attach(session: Session): void;
 		detach(session: Session): void;
 		/**
 		 * Tests if #feature has a "sub-feature" of type #type. See
 		 * soup_session_feature_add_feature().
-		 * @param _type the #GType of a "sub-feature"
+		 * @param type the #GType of a "sub-feature"
 		 * @returns %TRUE if #feature has a subfeature of type #type
 		 */
-		has_feature(_type: GObject.Type): boolean;
+		has_feature(type: GObject.Type): boolean;
 		/**
 		 * Removes the "sub-feature" of type #type from the base feature
 		 * #feature. See soup_session_feature_add_feature().
-		 * @param _type the #GType of a "sub-feature"
+		 * @param type the #GType of a "sub-feature"
 		 * @returns %TRUE if #type was removed from #feature
 		 */
-		remove_feature(_type: GObject.Type): boolean;
+		remove_feature(type: GObject.Type): boolean;
 	}
+
+	type SessionFeatureInitOptionsMixin  = {};
+	export interface SessionFeatureInitOptions extends SessionFeatureInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SessionFeature} instead.
@@ -6535,7 +6921,7 @@ declare namespace imports.gi.Soup {
 	interface SessionFeature extends SessionFeatureMixin {}
 
 	class SessionFeature {
-		public constructor();
+		public constructor(options?: Partial<SessionFeatureInitOptions>);
 	}
 
 
@@ -7864,7 +8250,7 @@ declare namespace imports.gi.Soup {
 	}
 
 	interface ProxyResolverCallback {
-		(proxy_resolver: ProxyResolver, msg: Message, _arg: number, addr: Address): void;
+		(proxy_resolver: ProxyResolver, msg: Message, arg: number, addr: Address): void;
 	}
 
 	/**
@@ -8187,8 +8573,14 @@ declare namespace imports.gi.Soup {
 	 * a hash table containing the name/value pairs (other than
 	 * #file_control_name) from #msg, which you can free with
 	 * g_hash_table_destroy(). On error, it will return %NULL.
+	 * 
+	 * return location for the name of the uploaded file, or %NULL
+	 * 
+	 * return location for the MIME type of the uploaded file, or %NULL
+	 * 
+	 * return location for the uploaded file data, or %NULL
 	 */
-	function form_decode_multipart(msg: Message, file_control_name: string | null): GLib.HashTable | null;
+	function form_decode_multipart(msg: Message, file_control_name: string | null): [ GLib.HashTable | null, string | null, string | null, Buffer | null ];
 
 	/**
 	 * Encodes the given field names and values into a value of type
@@ -8437,8 +8829,11 @@ declare namespace imports.gi.Soup {
 	 * @param header a header value
 	 * @returns a #GSList of
 	 * acceptable values (as allocated strings), highest-qvalue first.
+	 * 
+	 * on
+	 * return, will contain a list of unacceptable values
 	 */
-	function header_parse_quality_list(header: string): GLib.SList;
+	function header_parse_quality_list(header: string): [ GLib.SList, GLib.SList | null ];
 
 	/**
 	 * Parses a header which is a semicolon-delimited list of something
@@ -8480,38 +8875,56 @@ declare namespace imports.gi.Soup {
 	 * 
 	 * This is a low-level method; normally you would use
 	 * soup_headers_parse_request() or soup_headers_parse_response().
-	 * @param _str the header string (including the Request-Line or Status-Line,
+	 * @param str the header string (including the Request-Line or Status-Line,
 	 *   but not the trailing blank line)
 	 * @param len length of #str
 	 * @param dest {@link MessageHeaders} to store the header values in
 	 * @returns success or failure
 	 */
-	function headers_parse(_str: string, len: number, dest: MessageHeaders): boolean;
+	function headers_parse(str: string, len: number, dest: MessageHeaders): boolean;
 
 	/**
 	 * Parses the headers of an HTTP request in #str and stores the
 	 * results in #req_method, #req_path, #ver, and #req_headers.
 	 * 
 	 * Beware that #req_headers may be modified even on failure.
-	 * @param _str the headers (up to, but not including, the trailing blank line)
+	 * @param str the headers (up to, but not including, the trailing blank line)
 	 * @param len length of #str
 	 * @param req_headers {@link MessageHeaders} to store the header values in
 	 * @returns %SOUP_STATUS_OK if the headers could be parsed, or an
 	 * HTTP error to be returned to the client if they could not be.
+	 * 
+	 * if non-%NULL, will be filled in with the
+	 * request method
+	 * 
+	 * if non-%NULL, will be filled in with the
+	 * request path
+	 * 
+	 * if non-%NULL, will be filled in with the HTTP
+	 * version
 	 */
-	function headers_parse_request(_str: string, len: number, req_headers: MessageHeaders): number;
+	function headers_parse_request(str: string, len: number, req_headers: MessageHeaders): [ number, string | null, string | null, HTTPVersion | null ];
 
 	/**
 	 * Parses the headers of an HTTP response in #str and stores the
 	 * results in #ver, #status_code, #reason_phrase, and #headers.
 	 * 
 	 * Beware that #headers may be modified even on failure.
-	 * @param _str the headers (up to, but not including, the trailing blank line)
+	 * @param str the headers (up to, but not including, the trailing blank line)
 	 * @param len length of #str
 	 * @param headers {@link MessageHeaders} to store the header values in
 	 * @returns success or failure.
+	 * 
+	 * if non-%NULL, will be filled in with the HTTP
+	 * version
+	 * 
+	 * if non-%NULL, will be filled in with
+	 * the status code
+	 * 
+	 * if non-%NULL, will be filled in with
+	 * the reason phrase
 	 */
-	function headers_parse_response(_str: string, len: number, headers: MessageHeaders): boolean;
+	function headers_parse_response(str: string, len: number, headers: MessageHeaders): [ boolean, HTTPVersion | null, number | null, string | null ];
 
 	/**
 	 * Parses the HTTP Status-Line string in #status_line into #ver,
@@ -8519,18 +8932,27 @@ declare namespace imports.gi.Soup {
 	 * either "\0" or "\r\n".
 	 * @param status_line an HTTP Status-Line
 	 * @returns %TRUE if #status_line was parsed successfully.
+	 * 
+	 * if non-%NULL, will be filled in with the HTTP
+	 * version
+	 * 
+	 * if non-%NULL, will be filled in with
+	 * the status code
+	 * 
+	 * if non-%NULL, will be filled in with
+	 * the reason phrase
 	 */
-	function headers_parse_status_line(status_line: string): boolean;
+	function headers_parse_status_line(status_line: string): [ boolean, HTTPVersion | null, number | null, string | null ];
 
 	function http_error_quark(): GLib.Quark;
 
 	/**
 	 * Initializes #iter for iterating #hdrs.
-	 * @param iter a pointer to a %SoupMessageHeadersIter
-	 * structure
 	 * @param hdrs a %SoupMessageHeaders
+	 * @returns a pointer to a %SoupMessageHeadersIter
+	 * structure
 	 */
-	function message_headers_iter_init(iter: MessageHeadersIter, hdrs: MessageHeaders): void;
+	function message_headers_iter_init(hdrs: MessageHeaders): MessageHeadersIter;
 
 	function request_error_quark(): GLib.Quark;
 
@@ -8665,9 +9087,9 @@ declare namespace imports.gi.Soup {
 	 * g_value_array_append(). (The provided data is copied rather than
 	 * being inserted directly.)
 	 * @param array a #GValueArray
-	 * @param _type a #GType
+	 * @param type a #GType
 	 */
-	function value_array_append(array: GObject.ValueArray, _type: GObject.Type): void;
+	function value_array_append(array: GObject.ValueArray, type: GObject.Type): void;
 
 	/**
 	 * Appends the provided values into #array as with
@@ -8694,11 +9116,11 @@ declare namespace imports.gi.Soup {
 	 * provided location.
 	 * @param array a #GValueArray
 	 * @param index_ the index to look up
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @returns %TRUE if #array contained a value with index #index_
 	 * and type #type, %FALSE if not.
 	 */
-	function value_array_get_nth(array: GObject.ValueArray, index_: number, _type: GObject.Type): boolean;
+	function value_array_get_nth(array: GObject.ValueArray, index_: number, type: GObject.Type): boolean;
 
 	/**
 	 * Inserts the provided value of type #type into #array as with
@@ -8706,9 +9128,9 @@ declare namespace imports.gi.Soup {
 	 * being inserted directly.)
 	 * @param array a #GValueArray
 	 * @param index_ the index to insert at
-	 * @param _type a #GType
+	 * @param type a #GType
 	 */
-	function value_array_insert(array: GObject.ValueArray, index_: number, _type: GObject.Type): void;
+	function value_array_insert(array: GObject.ValueArray, index_: number, type: GObject.Type): void;
 
 	/**
 	 * Creates a new %GValueArray. (This is just a wrapper around
@@ -8741,9 +9163,9 @@ declare namespace imports.gi.Soup {
 	 * g_hash_table_insert(), both the key and the value are copied).
 	 * @param hash a value hash
 	 * @param key the key
-	 * @param _type a #GType
+	 * @param type a #GType
 	 */
-	function value_hash_insert(hash: GLib.HashTable, key: string, _type: GObject.Type): void;
+	function value_hash_insert(hash: GLib.HashTable, key: string, type: GObject.Type): void;
 
 	/**
 	 * Inserts the given data into #hash. As with
@@ -8768,11 +9190,11 @@ declare namespace imports.gi.Soup {
 	 * location.
 	 * @param hash a value hash
 	 * @param key the key to look up
-	 * @param _type a #GType
+	 * @param type a #GType
 	 * @returns %TRUE if #hash contained a value with key #key and
 	 * type #type, %FALSE if not.
 	 */
-	function value_hash_lookup(hash: GLib.HashTable, key: string, _type: GObject.Type): boolean;
+	function value_hash_lookup(hash: GLib.HashTable, key: string, type: GObject.Type): boolean;
 
 	/**
 	 * Looks up a number of keys in #hash and returns their values.
@@ -8879,8 +9301,11 @@ declare namespace imports.gi.Soup {
 	 *   of supported extension types
 	 * @returns %TRUE if #msg contains a completed valid WebSocket
 	 *   handshake, %FALSE and an error if not.
+	 * 
+	 * a
+	 *   #GList of {@link WebsocketExtension} objects
 	 */
-	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null): boolean;
+	function websocket_client_verify_handshake_with_extensions(msg: Message, supported_extensions: GObject.TypeClass[] | null): [ boolean, GLib.List | null ];
 
 	function websocket_error_get_quark(): GLib.Quark;
 
@@ -8995,8 +9420,11 @@ declare namespace imports.gi.Soup {
 	 *   of supported extension types
 	 * @returns %TRUE if #msg contained a valid WebSocket handshake
 	 *   request and was updated to contain a handshake response. %FALSE if not.
+	 * 
+	 * a
+	 *   #GList of {@link WebsocketExtension} objects
 	 */
-	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): boolean;
+	function websocket_server_process_handshake_with_extensions(msg: Message, expected_origin: string | null, protocols: string[] | null, supported_extensions: GObject.TypeClass[] | null): [ boolean, GLib.List | null ];
 
 	/**
 	 * This creates an XML-RPC fault response and returns it as a string.
@@ -9113,8 +9541,10 @@ declare namespace imports.gi.Soup {
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
 	 * @returns success or failure.
+	 * 
+	 * on return, the methodName from #method_call
 	 */
-	function xmlrpc_extract_method_call(method_call: string, length: number): boolean;
+	function xmlrpc_extract_method_call(method_call: string, length: number): [ boolean, string ];
 
 	/**
 	 * Parses #method_response and extracts the return value into
@@ -9129,11 +9559,11 @@ declare namespace imports.gi.Soup {
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
 	 * @param error error return value
-	 * @param _type the expected type of the return value
+	 * @param type the expected type of the return value
 	 * @returns %TRUE if a return value was parsed, %FALSE if the
 	 * response was of the wrong type, or contained a fault.
 	 */
-	function xmlrpc_extract_method_response(method_response: string, length: number, error: GLib.Error, _type: GObject.Type): boolean;
+	function xmlrpc_extract_method_response(method_response: string, length: number, error: GLib.Error, type: GObject.Type): boolean;
 
 	function xmlrpc_fault_quark(): GLib.Quark;
 
@@ -9184,8 +9614,12 @@ declare namespace imports.gi.Soup {
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
 	 * @returns success or failure.
+	 * 
+	 * on return, the methodName from #method_call
+	 * 
+	 * on return, the parameters from #method_call
 	 */
-	function xmlrpc_parse_method_call(method_call: string, length: number): boolean;
+	function xmlrpc_parse_method_call(method_call: string, length: number): [ boolean, string, GObject.ValueArray ];
 
 	/**
 	 * Parses #method_response and returns the return value in #value. If
@@ -9197,11 +9631,12 @@ declare namespace imports.gi.Soup {
 	 * will be unset.)
 	 * @param method_response the XML-RPC methodResponse string
 	 * @param length the length of #method_response, or -1 if it is NUL-terminated
-	 * @param value on return, the return value from #method_call
 	 * @returns %TRUE if a return value was parsed, %FALSE if the
 	 * response could not be parsed, or contained a fault.
+	 * 
+	 * on return, the return value from #method_call
 	 */
-	function xmlrpc_parse_method_response(method_response: string, length: number, value: GObject.Value): boolean;
+	function xmlrpc_parse_method_response(method_response: string, length: number): [ boolean, GObject.Value ];
 
 	/**
 	 * Parses #method_call and return the method name. Method parameters can be
@@ -9209,8 +9644,10 @@ declare namespace imports.gi.Soup {
 	 * @param method_call the XML-RPC methodCall string
 	 * @param length the length of #method_call, or -1 if it is NUL-terminated
 	 * @returns method's name, or %NULL on error.
+	 * 
+	 * on success, a new {@link XMLRPCParams}
 	 */
-	function xmlrpc_parse_request(method_call: string, length: number): string;
+	function xmlrpc_parse_request(method_call: string, length: number): [ string, XMLRPCParams ];
 
 	/**
 	 * Parses #method_response and returns the return value. If
@@ -9257,9 +9694,9 @@ declare namespace imports.gi.Soup {
 	 * successful XML-RPC call, with a return value given by #type and the
 	 * following varargs argument, of the type indicated by #type.
 	 * @param msg an XML-RPC request
-	 * @param _type the type of the response value
+	 * @param type the type of the response value
 	 */
-	function xmlrpc_set_response(msg: Message, _type: GObject.Type): void;
+	function xmlrpc_set_response(msg: Message, type: GObject.Type): void;
 
 	/**
 	 * Get the {@link Date} from special #GVariant created by
@@ -9287,5 +9724,841 @@ declare namespace imports.gi.Soup {
 	 * @returns a floating #GVariant.
 	 */
 	function xmlrpc_variant_new_datetime(date: Date): GLib.Variant;
+
+	/**
+	 * This can be passed to any {@link Address} method that expects a port,
+	 * to indicate that you don't care what port is used.
+	 * @returns This can be passed to any {@link Address} method that expects a port,
+	 * to indicate that you don't care what port is used.
+	 */
+	const ADDRESS_ANY_PORT: number;
+
+	/**
+	 * Alias for the {@link Address}:family property. (The
+	 * #SoupAddressFamily for this address.)
+	 * @returns Alias for the {@link Address}:family property. (The
+	 * #SoupAddressFamily for this address.)
+	 */
+	const ADDRESS_FAMILY: string;
+
+	/**
+	 * Alias for the {@link Address}:name property. (The hostname for
+	 * this address.)
+	 * @returns Alias for the {@link Address}:name property. (The hostname for
+	 * this address.)
+	 */
+	const ADDRESS_NAME: string;
+
+	/**
+	 * An alias for the {@link Address}:physical property. (The
+	 * stringified IP address for this address.)
+	 * @returns An alias for the {@link Address}:physical property. (The
+	 * stringified IP address for this address.)
+	 */
+	const ADDRESS_PHYSICAL: string;
+
+	/**
+	 * An alias for the {@link Address}:port property. (The port for
+	 * this address.)
+	 * @returns An alias for the {@link Address}:port property. (The port for
+	 * this address.)
+	 */
+	const ADDRESS_PORT: string;
+
+	/**
+	 * Alias for the {@link Address}:protocol property. (The URI scheme
+	 * used with this address.)
+	 * @returns Alias for the {@link Address}:protocol property. (The URI scheme
+	 * used with this address.)
+	 */
+	const ADDRESS_PROTOCOL: string;
+
+	/**
+	 * An alias for the {@link Address}:sockaddr property. (A pointer
+	 * to the struct sockaddr for this address.)
+	 * @returns An alias for the {@link Address}:sockaddr property. (A pointer
+	 * to the struct sockaddr for this address.)
+	 */
+	const ADDRESS_SOCKADDR: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:add-path property. (Shortcut
+	 * for calling soup_auth_domain_add_path().)
+	 * @returns Alias for the {@link AuthDomain}:add-path property. (Shortcut
+	 * for calling soup_auth_domain_add_path().)
+	 */
+	const AUTH_DOMAIN_ADD_PATH: string;
+
+	/**
+	 * Alias for the {@link AuthDomainBasic}:auth-callback property.
+	 * (The #SoupAuthDomainBasicAuthCallback.)
+	 * @returns Alias for the {@link AuthDomainBasic}:auth-callback property.
+	 * (The #SoupAuthDomainBasicAuthCallback.)
+	 */
+	const AUTH_DOMAIN_BASIC_AUTH_CALLBACK: string;
+
+	/**
+	 * Alias for the {@link AuthDomainBasic}:auth-data property.
+	 * (The data to pass to the #SoupAuthDomainBasicAuthCallback.)
+	 * @returns Alias for the {@link AuthDomainBasic}:auth-data property.
+	 * (The data to pass to the #SoupAuthDomainBasicAuthCallback.)
+	 */
+	const AUTH_DOMAIN_BASIC_AUTH_DATA: string;
+
+	/**
+	 * Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * (The #SoupAuthDomainDigestAuthCallback.)
+	 * @returns Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * (The #SoupAuthDomainDigestAuthCallback.)
+	 */
+	const AUTH_DOMAIN_DIGEST_AUTH_CALLBACK: string;
+
+	/**
+	 * Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * (The #SoupAuthDomainDigestAuthCallback.)
+	 * @returns Alias for the {@link AuthDomainDigest}:auth-callback property.
+	 * (The #SoupAuthDomainDigestAuthCallback.)
+	 */
+	const AUTH_DOMAIN_DIGEST_AUTH_DATA: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:filter property. (The
+	 * #SoupAuthDomainFilter for the domain.)
+	 * @returns Alias for the {@link AuthDomain}:filter property. (The
+	 * #SoupAuthDomainFilter for the domain.)
+	 */
+	const AUTH_DOMAIN_FILTER: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:filter-data property. (Data
+	 * to pass to the #SoupAuthDomainFilter.)
+	 * @returns Alias for the {@link AuthDomain}:filter-data property. (Data
+	 * to pass to the #SoupAuthDomainFilter.)
+	 */
+	const AUTH_DOMAIN_FILTER_DATA: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:generic-auth-callback property.
+	 * (The #SoupAuthDomainGenericAuthCallback.)
+	 * @returns Alias for the {@link AuthDomain}:generic-auth-callback property.
+	 * (The #SoupAuthDomainGenericAuthCallback.)
+	 */
+	const AUTH_DOMAIN_GENERIC_AUTH_CALLBACK: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:generic-auth-data property.
+	 * (The data to pass to the #SoupAuthDomainGenericAuthCallback.)
+	 * @returns Alias for the {@link AuthDomain}:generic-auth-data property.
+	 * (The data to pass to the #SoupAuthDomainGenericAuthCallback.)
+	 */
+	const AUTH_DOMAIN_GENERIC_AUTH_DATA: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:proxy property. (Whether or
+	 * not this is a proxy auth domain.)
+	 * @returns Alias for the {@link AuthDomain}:proxy property. (Whether or
+	 * not this is a proxy auth domain.)
+	 */
+	const AUTH_DOMAIN_PROXY: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:realm property. (The realm of
+	 * this auth domain.)
+	 * @returns Alias for the {@link AuthDomain}:realm property. (The realm of
+	 * this auth domain.)
+	 */
+	const AUTH_DOMAIN_REALM: string;
+
+	/**
+	 * Alias for the {@link AuthDomain}:remove-path property.
+	 * (Shortcut for calling soup_auth_domain_remove_path().)
+	 * @returns Alias for the {@link AuthDomain}:remove-path property.
+	 * (Shortcut for calling soup_auth_domain_remove_path().)
+	 */
+	const AUTH_DOMAIN_REMOVE_PATH: string;
+
+	/**
+	 * An alias for the {@link Auth}:host property. (The
+	 * host being authenticated to.)
+	 * @returns An alias for the {@link Auth}:host property. (The
+	 * host being authenticated to.)
+	 */
+	const AUTH_HOST: string;
+
+	/**
+	 * An alias for the {@link Auth}:is-authenticated property.
+	 * (Whether or not the auth has been authenticated.)
+	 * @returns An alias for the {@link Auth}:is-authenticated property.
+	 * (Whether or not the auth has been authenticated.)
+	 */
+	const AUTH_IS_AUTHENTICATED: string;
+
+	/**
+	 * An alias for the {@link Auth}:is-for-proxy property. (Whether
+	 * or not the auth is for a proxy server.)
+	 * @returns An alias for the {@link Auth}:is-for-proxy property. (Whether
+	 * or not the auth is for a proxy server.)
+	 */
+	const AUTH_IS_FOR_PROXY: string;
+
+	/**
+	 * An alias for the {@link Auth}:realm property. (The
+	 * authentication realm.)
+	 * @returns An alias for the {@link Auth}:realm property. (The
+	 * authentication realm.)
+	 */
+	const AUTH_REALM: string;
+
+	/**
+	 * An alias for the {@link Auth}:scheme-name property. (The
+	 * authentication scheme name.)
+	 * @returns An alias for the {@link Auth}:scheme-name property. (The
+	 * authentication scheme name.)
+	 */
+	const AUTH_SCHEME_NAME: string;
+
+	const CHAR_HTTP_CTL: number;
+
+	const CHAR_HTTP_SEPARATOR: number;
+
+	const CHAR_URI_GEN_DELIMS: number;
+
+	const CHAR_URI_PERCENT_ENCODED: number;
+
+	const CHAR_URI_SUB_DELIMS: number;
+
+	/**
+	 * Alias for the {@link CookieJar}:accept-policy property.
+	 * @returns Alias for the {@link CookieJar}:accept-policy property.
+	 */
+	const COOKIE_JAR_ACCEPT_POLICY: string;
+
+	/**
+	 * Alias for the {@link CookieJarDB}:filename property. (The
+	 * cookie-storage filename.)
+	 * @returns Alias for the {@link CookieJarDB}:filename property. (The
+	 * cookie-storage filename.)
+	 */
+	const COOKIE_JAR_DB_FILENAME: string;
+
+	/**
+	 * Alias for the {@link CookieJar}:read-only property. (Whether
+	 * or not the cookie jar is read-only.)
+	 * @returns Alias for the {@link CookieJar}:read-only property. (Whether
+	 * or not the cookie jar is read-only.)
+	 */
+	const COOKIE_JAR_READ_ONLY: string;
+
+	/**
+	 * Alias for the {@link CookieJarText}:filename property. (The
+	 * cookie-storage filename.)
+	 * @returns Alias for the {@link CookieJarText}:filename property. (The
+	 * cookie-storage filename.)
+	 */
+	const COOKIE_JAR_TEXT_FILENAME: string;
+
+	/**
+	 * A constant corresponding to 1 day, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 * @returns A constant corresponding to 1 day, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 */
+	const COOKIE_MAX_AGE_ONE_DAY: number;
+
+	/**
+	 * A constant corresponding to 1 hour, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 * @returns A constant corresponding to 1 hour, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 */
+	const COOKIE_MAX_AGE_ONE_HOUR: number;
+
+	/**
+	 * A constant corresponding to 1 week, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 * @returns A constant corresponding to 1 week, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 */
+	const COOKIE_MAX_AGE_ONE_WEEK: number;
+
+	/**
+	 * A constant corresponding to 1 year, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 * @returns A constant corresponding to 1 year, for use with soup_cookie_new()
+	 * and soup_cookie_set_max_age().
+	 */
+	const COOKIE_MAX_AGE_ONE_YEAR: number;
+
+	/**
+	 * A macro containing the value
+	 * <literal>"multipart/form-data"</literal>; the MIME type used for
+	 * posting form data that contains files to be uploaded.
+	 * @returns A macro containing the value
+	 * <literal>"multipart/form-data"</literal>; the MIME type used for
+	 * posting form data that contains files to be uploaded.
+	 */
+	const FORM_MIME_TYPE_MULTIPART: string;
+
+	/**
+	 * A macro containing the value
+	 * <literal>"application/x-www-form-urlencoded"</literal>; the default
+	 * MIME type for POSTing HTML form data.
+	 * @returns A macro containing the value
+	 * <literal>"application/x-www-form-urlencoded"</literal>; the default
+	 * MIME type for POSTing HTML form data.
+	 */
+	const FORM_MIME_TYPE_URLENCODED: string;
+
+	const HSTS_ENFORCER_DB_FILENAME: string;
+
+	const HSTS_POLICY_MAX_AGE_PAST: number;
+
+	/**
+	 * Alias for the {@link Logger}:level property, qv.
+	 * @returns Alias for the {@link Logger}:level property, qv.
+	 */
+	const LOGGER_LEVEL: string;
+
+	/**
+	 * Alias for the {@link Logger}:max-body-size property, qv.
+	 * @returns Alias for the {@link Logger}:max-body-size property, qv.
+	 */
+	const LOGGER_MAX_BODY_SIZE: string;
+
+	/**
+	 * Like soup_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like soup_get_major_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MAJOR_VERSION: number;
+
+	/**
+	 * Alias for the {@link Message}:first-party property. (The
+	 * #SoupURI loaded in the application when the message was
+	 * queued.)
+	 * @returns Alias for the {@link Message}:first-party property. (The
+	 * #SoupURI loaded in the application when the message was
+	 * queued.)
+	 */
+	const MESSAGE_FIRST_PARTY: string;
+
+	/**
+	 * Alias for the {@link Message}:flags property. (The message's
+	 * #SoupMessageFlags.)
+	 * @returns Alias for the {@link Message}:flags property. (The message's
+	 * #SoupMessageFlags.)
+	 */
+	const MESSAGE_FLAGS: string;
+
+	/**
+	 * Alias for the {@link Message}:http-version property. (The
+	 * message's #SoupHTTPVersion.)
+	 * @returns Alias for the {@link Message}:http-version property. (The
+	 * message's #SoupHTTPVersion.)
+	 */
+	const MESSAGE_HTTP_VERSION: string;
+
+	const MESSAGE_IS_TOP_LEVEL_NAVIGATION: string;
+
+	/**
+	 * Alias for the {@link Message}:method property. (The message's
+	 * HTTP method.)
+	 * @returns Alias for the {@link Message}:method property. (The message's
+	 * HTTP method.)
+	 */
+	const MESSAGE_METHOD: string;
+
+	/**
+	 * Sets the priority of the {@link Message}. See
+	 * soup_message_set_priority() for further details.
+	 * @returns Sets the priority of the {@link Message}. See
+	 * soup_message_set_priority() for further details.
+	 */
+	const MESSAGE_PRIORITY: string;
+
+	/**
+	 * Alias for the {@link Message}:reason-phrase property. (The
+	 * message's HTTP response reason phrase.)
+	 * @returns Alias for the {@link Message}:reason-phrase property. (The
+	 * message's HTTP response reason phrase.)
+	 */
+	const MESSAGE_REASON_PHRASE: string;
+
+	/**
+	 * Alias for the {@link Message}:request-body property. (The
+	 * message's HTTP request body.)
+	 * @returns Alias for the {@link Message}:request-body property. (The
+	 * message's HTTP request body.)
+	 */
+	const MESSAGE_REQUEST_BODY: string;
+
+	/**
+	 * Alias for the {@link Message}:request-body-data property. (The
+	 * message's HTTP request body, as a #GBytes.)
+	 * @returns Alias for the {@link Message}:request-body-data property. (The
+	 * message's HTTP request body, as a #GBytes.)
+	 */
+	const MESSAGE_REQUEST_BODY_DATA: string;
+
+	/**
+	 * Alias for the {@link Message}:request-headers property. (The
+	 * message's HTTP request headers.)
+	 * @returns Alias for the {@link Message}:request-headers property. (The
+	 * message's HTTP request headers.)
+	 */
+	const MESSAGE_REQUEST_HEADERS: string;
+
+	/**
+	 * Alias for the {@link Message}:response-body property. (The
+	 * message's HTTP response body.)
+	 * @returns Alias for the {@link Message}:response-body property. (The
+	 * message's HTTP response body.)
+	 */
+	const MESSAGE_RESPONSE_BODY: string;
+
+	/**
+	 * Alias for the {@link Message}:response-body-data property. (The
+	 * message's HTTP response body, as a #GBytes.)
+	 * @returns Alias for the {@link Message}:response-body-data property. (The
+	 * message's HTTP response body, as a #GBytes.)
+	 */
+	const MESSAGE_RESPONSE_BODY_DATA: string;
+
+	/**
+	 * Alias for the {@link Message}:response-headers property. (The
+	 * message's HTTP response headers.)
+	 * @returns Alias for the {@link Message}:response-headers property. (The
+	 * message's HTTP response headers.)
+	 */
+	const MESSAGE_RESPONSE_HEADERS: string;
+
+	/**
+	 * Alias for the {@link Message}:server-side property. (%TRUE if
+	 * the message was created by #SoupServer.)
+	 * @returns Alias for the {@link Message}:server-side property. (%TRUE if
+	 * the message was created by #SoupServer.)
+	 */
+	const MESSAGE_SERVER_SIDE: string;
+
+	const MESSAGE_SITE_FOR_COOKIES: string;
+
+	/**
+	 * Alias for the {@link Message}:status-code property. (The
+	 * message's HTTP response status code.)
+	 * @returns Alias for the {@link Message}:status-code property. (The
+	 * message's HTTP response status code.)
+	 */
+	const MESSAGE_STATUS_CODE: string;
+
+	/**
+	 * Alias for the {@link Message}:tls-certificate property. (The
+	 * TLS certificate associated with the message, if any.)
+	 * @returns Alias for the {@link Message}:tls-certificate property. (The
+	 * TLS certificate associated with the message, if any.)
+	 */
+	const MESSAGE_TLS_CERTIFICATE: string;
+
+	/**
+	 * Alias for the {@link Message}:tls-errors property. (The
+	 * verification errors on #SoupMessage:tls-certificate.)
+	 * @returns Alias for the {@link Message}:tls-errors property. (The
+	 * verification errors on #SoupMessage:tls-certificate.)
+	 */
+	const MESSAGE_TLS_ERRORS: string;
+
+	/**
+	 * Alias for the {@link Message}:uri property. (The message's
+	 * #SoupURI.)
+	 * @returns Alias for the {@link Message}:uri property. (The message's
+	 * #SoupURI.)
+	 */
+	const MESSAGE_URI: string;
+
+	/**
+	 * Like soup_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like soup_get_micro_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MICRO_VERSION: number;
+
+	/**
+	 * Like soup_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 * @returns Like soup_get_minor_version(), but from the headers used at
+	 * application compile time, rather than from the library linked
+	 * against at application run time.
+	 */
+	const MINOR_VERSION: number;
+
+	/**
+	 * Alias for the {@link Request}:session property, qv.
+	 * @returns Alias for the {@link Request}:session property, qv.
+	 */
+	const REQUEST_SESSION: string;
+
+	/**
+	 * Alias for the {@link Request}:uri property, qv.
+	 * @returns Alias for the {@link Request}:uri property, qv.
+	 */
+	const REQUEST_URI: string;
+
+	/**
+	 * Alias for the {@link Server}:add-websocket-extension property, qv.
+	 * @returns Alias for the {@link Server}:add-websocket-extension property, qv.
+	 */
+	const SERVER_ADD_WEBSOCKET_EXTENSION: string;
+
+	/**
+	 * Alias for the deprecated {@link Server}:async-context
+	 * property, qv.
+	 * @returns Alias for the deprecated {@link Server}:async-context
+	 * property, qv.
+	 */
+	const SERVER_ASYNC_CONTEXT: string;
+
+	/**
+	 * Alias for the {@link Server}:https-aliases property, qv.
+	 * @returns Alias for the {@link Server}:https-aliases property, qv.
+	 */
+	const SERVER_HTTPS_ALIASES: string;
+
+	/**
+	 * Alias for the {@link Server}:http-aliases property, qv.
+	 * @returns Alias for the {@link Server}:http-aliases property, qv.
+	 */
+	const SERVER_HTTP_ALIASES: string;
+
+	/**
+	 * Alias for the {@link Server}:interface property, qv.
+	 * @returns Alias for the {@link Server}:interface property, qv.
+	 */
+	const SERVER_INTERFACE: string;
+
+	/**
+	 * Alias for the deprecated {@link Server}:port property, qv.
+	 * @returns Alias for the deprecated {@link Server}:port property, qv.
+	 */
+	const SERVER_PORT: string;
+
+	/**
+	 * Alias for the {@link Server}:raw-paths property. (If %TRUE,
+	 * percent-encoding in the Request-URI path will not be
+	 * automatically decoded.)
+	 * @returns Alias for the {@link Server}:raw-paths property. (If %TRUE,
+	 * percent-encoding in the Request-URI path will not be
+	 * automatically decoded.)
+	 */
+	const SERVER_RAW_PATHS: string;
+
+	/**
+	 * Alias for the {@link Server}:remove-websocket-extension property, qv.
+	 * @returns Alias for the {@link Server}:remove-websocket-extension property, qv.
+	 */
+	const SERVER_REMOVE_WEBSOCKET_EXTENSION: string;
+
+	/**
+	 * Alias for the {@link Server}:server-header property, qv.
+	 * @returns Alias for the {@link Server}:server-header property, qv.
+	 */
+	const SERVER_SERVER_HEADER: string;
+
+	/**
+	 * Alias for the {@link Server}:ssl-cert-file property, qv.
+	 * @returns Alias for the {@link Server}:ssl-cert-file property, qv.
+	 */
+	const SERVER_SSL_CERT_FILE: string;
+
+	/**
+	 * Alias for the {@link Server}:ssl-key-file property, qv.
+	 * @returns Alias for the {@link Server}:ssl-key-file property, qv.
+	 */
+	const SERVER_SSL_KEY_FILE: string;
+
+	/**
+	 * Alias for the {@link Server}:tls-certificate property, qv.
+	 * @returns Alias for the {@link Server}:tls-certificate property, qv.
+	 */
+	const SERVER_TLS_CERTIFICATE: string;
+
+	/**
+	 * Alias for the {@link Session}:accept-language property, qv.
+	 * @returns Alias for the {@link Session}:accept-language property, qv.
+	 */
+	const SESSION_ACCEPT_LANGUAGE: string;
+
+	/**
+	 * Alias for the {@link Session}:accept-language-auto property, qv.
+	 * @returns Alias for the {@link Session}:accept-language-auto property, qv.
+	 */
+	const SESSION_ACCEPT_LANGUAGE_AUTO: string;
+
+	/**
+	 * Alias for the {@link Session}:add-feature property, qv.
+	 * @returns Alias for the {@link Session}:add-feature property, qv.
+	 */
+	const SESSION_ADD_FEATURE: string;
+
+	/**
+	 * Alias for the {@link Session}:add-feature-by-type property, qv.
+	 * @returns Alias for the {@link Session}:add-feature-by-type property, qv.
+	 */
+	const SESSION_ADD_FEATURE_BY_TYPE: string;
+
+	/**
+	 * Alias for the {@link Session}:async-context property, qv.
+	 * @returns Alias for the {@link Session}:async-context property, qv.
+	 */
+	const SESSION_ASYNC_CONTEXT: string;
+
+	/**
+	 * Alias for the {@link Session}:https-aliases property, qv.
+	 * @returns Alias for the {@link Session}:https-aliases property, qv.
+	 */
+	const SESSION_HTTPS_ALIASES: string;
+
+	/**
+	 * Alias for the {@link Session}:http-aliases property, qv.
+	 * @returns Alias for the {@link Session}:http-aliases property, qv.
+	 */
+	const SESSION_HTTP_ALIASES: string;
+
+	/**
+	 * Alias for the {@link Session}:idle-timeout property, qv.
+	 * @returns Alias for the {@link Session}:idle-timeout property, qv.
+	 */
+	const SESSION_IDLE_TIMEOUT: string;
+
+	/**
+	 * Alias for the {@link Session}:local-address property, qv.
+	 * @returns Alias for the {@link Session}:local-address property, qv.
+	 */
+	const SESSION_LOCAL_ADDRESS: string;
+
+	/**
+	 * Alias for the {@link Session}:max-conns property, qv.
+	 * @returns Alias for the {@link Session}:max-conns property, qv.
+	 */
+	const SESSION_MAX_CONNS: string;
+
+	/**
+	 * Alias for the {@link Session}:max-conns-per-host property, qv.
+	 * @returns Alias for the {@link Session}:max-conns-per-host property, qv.
+	 */
+	const SESSION_MAX_CONNS_PER_HOST: string;
+
+	/**
+	 * Alias for the {@link Session}:proxy-resolver property, qv.
+	 * @returns Alias for the {@link Session}:proxy-resolver property, qv.
+	 */
+	const SESSION_PROXY_RESOLVER: string;
+
+	/**
+	 * Alias for the {@link Session}:proxy-uri property, qv.
+	 * @returns Alias for the {@link Session}:proxy-uri property, qv.
+	 */
+	const SESSION_PROXY_URI: string;
+
+	/**
+	 * Alias for the {@link Session}:remove-feature-by-type property,
+	 * qv.
+	 * @returns Alias for the {@link Session}:remove-feature-by-type property,
+	 * qv.
+	 */
+	const SESSION_REMOVE_FEATURE_BY_TYPE: string;
+
+	/**
+	 * Alias for the {@link Session}:ssl-ca-file property, qv.
+	 * @returns Alias for the {@link Session}:ssl-ca-file property, qv.
+	 */
+	const SESSION_SSL_CA_FILE: string;
+
+	/**
+	 * Alias for the {@link Session}:ssl-strict property, qv.
+	 * @returns Alias for the {@link Session}:ssl-strict property, qv.
+	 */
+	const SESSION_SSL_STRICT: string;
+
+	/**
+	 * Alias for the {@link Session}:ssl-use-system-ca-file property,
+	 * qv.
+	 * @returns Alias for the {@link Session}:ssl-use-system-ca-file property,
+	 * qv.
+	 */
+	const SESSION_SSL_USE_SYSTEM_CA_FILE: string;
+
+	/**
+	 * Alias for the {@link Session}:timeout property, qv.
+	 * @returns Alias for the {@link Session}:timeout property, qv.
+	 */
+	const SESSION_TIMEOUT: string;
+
+	/**
+	 * Alias for the {@link Session}:tls-database property, qv.
+	 * @returns Alias for the {@link Session}:tls-database property, qv.
+	 */
+	const SESSION_TLS_DATABASE: string;
+
+	/**
+	 * Alias for the {@link Session}:tls-interaction property, qv.
+	 * @returns Alias for the {@link Session}:tls-interaction property, qv.
+	 */
+	const SESSION_TLS_INTERACTION: string;
+
+	/**
+	 * Alias for the {@link Session}:user-agent property, qv.
+	 * @returns Alias for the {@link Session}:user-agent property, qv.
+	 */
+	const SESSION_USER_AGENT: string;
+
+	/**
+	 * Alias for the {@link Session}:use-ntlm property, qv.
+	 * @returns Alias for the {@link Session}:use-ntlm property, qv.
+	 */
+	const SESSION_USE_NTLM: string;
+
+	/**
+	 * Alias for the {@link Session}:use-thread-context property, qv.
+	 * @returns Alias for the {@link Session}:use-thread-context property, qv.
+	 */
+	const SESSION_USE_THREAD_CONTEXT: string;
+
+	/**
+	 * Alias for the {@link Socket}:async-context property. (The
+	 * socket's #GMainContext.)
+	 * @returns Alias for the {@link Socket}:async-context property. (The
+	 * socket's #GMainContext.)
+	 */
+	const SOCKET_ASYNC_CONTEXT: string;
+
+	/**
+	 * Alias for the {@link Socket}:non-blocking property. (Whether
+	 * or not the socket uses non-blocking I/O.)
+	 * @returns Alias for the {@link Socket}:non-blocking property. (Whether
+	 * or not the socket uses non-blocking I/O.)
+	 */
+	const SOCKET_FLAG_NONBLOCKING: string;
+
+	/**
+	 * Alias for the {@link Socket}:is-server property, qv.
+	 * @returns Alias for the {@link Socket}:is-server property, qv.
+	 */
+	const SOCKET_IS_SERVER: string;
+
+	/**
+	 * Alias for the {@link Socket}:local-address property. (Address
+	 * of local end of socket.)
+	 * @returns Alias for the {@link Socket}:local-address property. (Address
+	 * of local end of socket.)
+	 */
+	const SOCKET_LOCAL_ADDRESS: string;
+
+	/**
+	 * Alias for the {@link Socket}:remote-address property. (Address
+	 * of remote end of socket.)
+	 * @returns Alias for the {@link Socket}:remote-address property. (Address
+	 * of remote end of socket.)
+	 */
+	const SOCKET_REMOTE_ADDRESS: string;
+
+	/**
+	 * Alias for the {@link Socket}:ssl-creds property.
+	 * (SSL credential information.)
+	 * @returns Alias for the {@link Socket}:ssl-creds property.
+	 * (SSL credential information.)
+	 */
+	const SOCKET_SSL_CREDENTIALS: string;
+
+	/**
+	 * Alias for the {@link Socket}:ssl-fallback property.
+	 * @returns Alias for the {@link Socket}:ssl-fallback property.
+	 */
+	const SOCKET_SSL_FALLBACK: string;
+
+	/**
+	 * Alias for the {@link Socket}:ssl-strict property.
+	 * @returns Alias for the {@link Socket}:ssl-strict property.
+	 */
+	const SOCKET_SSL_STRICT: string;
+
+	/**
+	 * Alias for the {@link Socket}:timeout property. (The timeout
+	 * in seconds for blocking socket I/O operations.)
+	 * @returns Alias for the {@link Socket}:timeout property. (The timeout
+	 * in seconds for blocking socket I/O operations.)
+	 */
+	const SOCKET_TIMEOUT: string;
+
+	/**
+	 * Alias for the {@link Socket}:tls-certificate
+	 * property. Note that this property's value is only useful
+	 * if the socket is for a TLS connection, and only reliable
+	 * after some data has been transferred to or from it.
+	 * @returns Alias for the {@link Socket}:tls-certificate
+	 * property. Note that this property's value is only useful
+	 * if the socket is for a TLS connection, and only reliable
+	 * after some data has been transferred to or from it.
+	 */
+	const SOCKET_TLS_CERTIFICATE: string;
+
+	/**
+	 * Alias for the {@link Socket}:tls-errors
+	 * property. Note that this property's value is only useful
+	 * if the socket is for a TLS connection, and only reliable
+	 * after some data has been transferred to or from it.
+	 * @returns Alias for the {@link Socket}:tls-errors
+	 * property. Note that this property's value is only useful
+	 * if the socket is for a TLS connection, and only reliable
+	 * after some data has been transferred to or from it.
+	 */
+	const SOCKET_TLS_ERRORS: string;
+
+	/**
+	 * Alias for the {@link Socket}:trusted-certificate
+	 * property.
+	 * @returns Alias for the {@link Socket}:trusted-certificate
+	 * property.
+	 */
+	const SOCKET_TRUSTED_CERTIFICATE: string;
+
+	/**
+	 * Alias for the {@link Socket}:use-thread-context property. (Use
+	 * g_main_context_get_thread_default())
+	 * @returns Alias for the {@link Socket}:use-thread-context property. (Use
+	 * g_main_context_get_thread_default())
+	 */
+	const SOCKET_USE_THREAD_CONTEXT: string;
+
+	/**
+	 * A macro that should be defined by the user prior to including
+	 * libsoup.h. The definition should be one of the predefined libsoup
+	 * version macros: %SOUP_VERSION_2_24, %SOUP_VERSION_2_26, ...
+	 * 
+	 * This macro defines the earliest version of libsoup that the package
+	 * is required to be able to compile against.
+	 * 
+	 * If the compiler is configured to warn about the use of deprecated
+	 * functions, then using functions that were deprecated in version
+	 * %SOUP_VERSION_MIN_REQUIRED or earlier will cause warnings (but
+	 * using functions deprecated in later releases will not).
+	 * @returns A macro that should be defined by the user prior to including
+	 * libsoup.h. The definition should be one of the predefined libsoup
+	 * version macros: %SOUP_VERSION_2_24, %SOUP_VERSION_2_26, ...
+	 * 
+	 * This macro defines the earliest version of libsoup that the package
+	 * is required to be able to compile against.
+	 * 
+	 * If the compiler is configured to warn about the use of deprecated
+	 * functions, then using functions that were deprecated in version
+	 * %SOUP_VERSION_MIN_REQUIRED or earlier will cause warnings (but
+	 * using functions deprecated in later releases will not).
+	 */
+	const VERSION_MIN_REQUIRED: number;
 
 }
