@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Fábio Nogueira <fnogueira@gnome.org>, 2015, 2016.
-# Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>, 2021
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2021-09-06 22:00-0300\n"
-"Last-Translator: Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>\n"
+"PO-Revision-Date: 2021-11-05 19:03-0300\n"
+"Last-Translator: Marcelo Aof\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -313,16 +313,16 @@ msgid "Animate the menu on open and close"
 msgstr "Animar o menu ao abrir e fechar"
 
 msgid "Activate categories on click"
-msgstr "Ativar categorias ao clicar"
+msgstr "Alterar categorias ao clicar"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "Ativar categorias ao clicar em vez de passar o mouse"
+msgstr "Altera categorias ao clicar em vez de passar o mouse"
 
 msgid "Enable autoscrolling"
-msgstr "Habilitar auto rolagem"
+msgstr "Ativar a rolagem automática"
 
 msgid "Enable autoscrolling in application list"
-msgstr "Habilitar auto rolagem na lista de aplicativos"
+msgstr "Ativa a rolagem automática na lista de aplicativos"
 
 msgid "Show web bookmarks"
 msgstr "Mostrar favoritos da web"
@@ -332,16 +332,16 @@ msgid ""
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 "Mostra os favoritos do seu navegador no menu.\n"
-"Nota: Instale o pacote gir1.2-gda-5.0 para ler os favoritos do firefox."
+"Nota: instale o pacote gir1.2-gda-5.0 para mostrar os favoritos do Firefox."
 
 msgid "Enable searching of open windows"
-msgstr "Permitir pesquisa de janelas abertas"
+msgstr "Permitir pesquisar em janelas abertas"
 
 msgid "Enable search providers"
 msgstr "Habilitar provedores de pesquisa"
 
 msgid "Include search provider results in searches"
-msgstr "Incluir resultados dos provedores de pesquisas nas buscas"
+msgstr "Inclui resultados dos provedores de pesquisa nas buscas"
 
 msgid "Example Search Providers"
 msgstr "Exemplo de Provedor de pesquisa"
@@ -371,19 +371,19 @@ msgid "Show bookmarks and places category in the menu"
 msgstr "Mostrar marcadores e categorias de locais no menu"
 
 msgid "Show application icons"
-msgstr "Mostrar ícones de aplicativos"
+msgstr "Mostrar ícones dos aplicativos"
 
 msgid "Show category icons"
-msgstr "Mostrar ícones de categorias"
+msgstr "Mostrar ícones das categorias"
 
 msgid "Show application descriptions under titles"
-msgstr "Mostrar descrições do aplicativo sob títulos"
+msgstr "Mostrar descrições dos aplicativos sob títulos"
 
 msgid "Show tooltips"
 msgstr "Mostrar dicas"
 
 msgid "Tooltip delay"
-msgstr "Atraso na dica"
+msgstr "Atraso para exibir a dica"
 
 msgid "Use a custom menu height"
 msgstr "Use uma altura de menu personalizada"
@@ -410,7 +410,7 @@ msgid "None"
 msgstr "Nenhum"
 
 msgid "Choose where to show application descriptions"
-msgstr "Escolha onde mostrar as descrições do aplicativo"
+msgstr "Escolha onde mostrar as descrições dos aplicativos"
 
 msgid "Sidebar location"
 msgstr "Localização da barra lateral"
@@ -435,31 +435,31 @@ msgid ""
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-"Informação/Dica: Arraste na borda do menu para alterar seu tamanho.\n"
+"Informação/Dica: arraste a borda do menu para alterar o seu tamanho.\n"
 
 msgid "Show favorites on sidebar"
 msgstr "Mostrar favoritos na barra lateral"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Mostrar seu app favorito e ícone de arquivo na barra lateral"
+msgstr "Mostra seu app favorito e ícone de arquivos na barra lateral"
 
 msgid "Show recent items"
 msgstr "Mostrar itens recentes"
 
 msgid "Show recent items category in the menu"
-msgstr "Mostrar categoria de itens recentes no menu"
+msgstr "Mostra a categoria de itens recentes no menu"
 
 msgid "Show favorite apps category"
 msgstr "Mostrar categoria de apps favoritos"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "Mostrar categoria de apps favoritos no menu"
+msgstr "Mostra a categoria de apps favoritos no menu"
 
 msgid "Show home folder"
 msgstr "Mostrar pasta pessoal"
 
 msgid "Show home folder category in the menu"
-msgstr "Mostrar categoria de pasta pessoal no menu"
+msgstr "Mostra a categoria de pasta pessoal no menu"
 
 msgid "Last used category"
 msgstr "Última categoria usada"
@@ -471,68 +471,42 @@ msgid "Show hidden files"
 msgstr "Mostrar arquivos ocultos"
 
 msgid "Show hidden files in folder view"
-msgstr "Mostrar arquivos ocultos na visualização da pasta"
+msgstr "Mostra arquivos ocultos na visualização da pasta"
 
 msgid "Emoji search"
-msgstr "Pesquisa de Emoji"
+msgstr "Pesquisar emoji"
 
 msgid "Show emojis in search results"
-msgstr "Mostrar emojis nos resultados de pesquisa"
+msgstr "Mostra emojis nos resultados da pesquisa"
 
 msgid "Web search option"
-msgstr "Opções de pesquisa na Web"
-
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "Ask"
-
-msgid "Ecosia"
-msgstr "Ecosia"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Página inicial"
+msgstr "Opções de pesquisa na web"
 
 msgid "Show an internet search option in search results"
-msgstr "Mostrar uma opção de pesquisa na Internet nos resultados"
+msgstr "Mostra uma opção nos resultados da pesquisa para continuar a pesquisa na internet"
 
 msgid "Search home folder"
 msgstr "Pesquisar na pasta pessoal"
 
 msgid "When searching, also search my home folder for files"
-msgstr "Ao pesquisar, também pesquise na minha pasta pessoal por arquivos"
+msgstr "Ao pesquisar, também pesquise arquivos em minha pasta pessoal"
 
 msgid "Web bookmarks search"
-msgstr "Pesquisa de favoritos da web"
+msgstr "Pesquisar em favoritos da web"
 
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Ao pesquisar, também pesquise os favoritos do meu navegador (Google Chrome, Firefox, Chromium, Opera, Brave) \n"
-"Nota: Para pesquisar os favoritos do Firefox, você precisará instalar o pacote gir1.2-gda-5.0 (distribuições baseadas em Debian, incluindo Ubuntu e Linux Mint) ou o pacote libgda (distribuições baseadas em Arch) e reiniciar seu computador."
+"Ao pesquisar, também pesquise nos favoritos do meu navegador (Google "
+"Chrome, Firefox, Chromium, Opera, Brave)\n"
+"Nota: para pesquisar nos favoritos do Firefox, você precisará instalar o "
+"pacote gir1.2-gda-5.0 (caso sua distribuição seja baseada em Debian, "
+"incluindo Ubuntu e Linux Mint) ou o pacote libgda (caso sua distribuição "
+"seja baseada em Arch) e reiniciar seu computador."
 
 msgid "Wikipedia search"
-msgstr "Pesquisa na Wikipédia"
+msgstr "Pesquisar na Wikipédia"
 
 msgid "Show some Wikipedia results"
 msgstr "Mostra alguns resultados da Wikipédia"
@@ -541,10 +515,10 @@ msgid "Wikipedia language"
 msgstr "Idioma da Wikipédia"
 
 msgid "Use a custom icon size"
-msgstr "Usar um tamanho de ícone pesonalizado"
+msgstr "Usar um tamanho de ícone personalizado"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Usar um tamanho personalizado para o ícone do painel"
+msgstr "Usa um tamanho personalizado para o ícone do painel"
 
 msgid "Panel icon size (pixels)"
 msgstr "Tamanho do ícone do painel (pixels)"
@@ -556,13 +530,17 @@ msgid "Sidebar icon size (pixels)"
 msgstr "Tamanho do ícone da barra lateral"
 
 msgid "Use sidebar box style"
-msgstr "Usar o estilo da caixa na barra lateral"
+msgstr "Usar o estilo de caixa na barra lateral"
 
 msgid "Use a sidebar box style"
-msgstr "Usar um estilo da caixa na barra lateral"
+msgstr "Usa um estilo de caixa na barra lateral"
 
 msgid "Use tile style"
 msgstr "Usar estilo de bloco"
 
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
-msgstr "Use um estilo de bloco para os botões do aplicativo (Nota: pode não funcionar em alguns temas)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Usa um estilo de bloco para os ícones dos aplicativos (Nota: pode não "
+"funcionar em alguns temas)"
