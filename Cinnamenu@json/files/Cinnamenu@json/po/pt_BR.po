@@ -48,8 +48,8 @@ msgstr "É necessário instalar o pacote gir1.2-gda-5.0 para exibir os favoritos
 msgid "Clear List"
 msgstr "Limpar lista"
 
-msgid "No recent documents"
-msgstr "Não há documentos recentes"
+msgid "No recent files"
+msgstr "Não há arquivos recentes"
 
 msgid "Account details"
 msgstr "Detalhes da conta"
