@@ -22280,7 +22280,7 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the type of the event.
 		 * @returns a {@link EventType}
 		 */
-		type(): EventType;
+		// type(): EventType;
 	}
 
 	type EventInitOptionsMixin  = {};

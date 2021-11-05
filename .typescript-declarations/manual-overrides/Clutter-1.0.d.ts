@@ -21,6 +21,30 @@ declare namespace imports.gi.Clutter {
     y_align: ActorAlign | St.Align;
   }
 
+  interface ButtonEvent extends Event {
+
+  }
+
+  interface CrossingEvent extends Event {
+    
+  }
+
+  interface KeyEvent extends Event {
+    
+  }
+
+  interface MotionEvent extends Event {
+    
+  }
+
+  interface ScrollEvent extends Event {
+    
+  }
+
+  interface AnyEvent extends Event {
+    
+  }
+
   interface PointOptions {
     x: number;
     y: number
