@@ -43,13 +43,13 @@ msgid "Favorite apps"
 msgstr "Apps favoritos"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "o pacote gir1.2-gda-5.0 é necessário para os favoritos do Firefox e Midori."
+msgstr "É necessário instalar o pacote gir1.2-gda-5.0 para exibir os favoritos do Firefox e do Midori."
 
 msgid "Clear List"
 msgstr "Limpar lista"
 
 msgid "No recent documents"
-msgstr "Sem documentos recentes"
+msgstr "Não há documentos recentes"
 
 msgid "Account details"
 msgstr "Detalhes da conta"
@@ -67,10 +67,10 @@ msgid "Switch to list view"
 msgstr "Trocar para visão em lista"
 
 msgid "Lock screen"
-msgstr "Tela de bloqueio"
+msgstr "Bloquear tela"
 
 msgid "Lock the screen"
-msgstr "Bloquear a tela"
+msgstr "Bloqueia a tela"
 
 msgid "Logout"
 msgstr "Sair"
@@ -91,16 +91,16 @@ msgid "Add to panel"
 msgstr "Adicionar ao painel"
 
 msgid "Add to desktop"
-msgstr "Adicionar para a área de trabalho"
+msgstr "Adicionar à área de trabalho"
 
 msgid "Remove from favorites"
 msgstr "Remover dos favoritos"
 
 msgid "Add to favorites"
-msgstr "Adicionar para os favoritos"
+msgstr "Adicionar aos favoritos"
 
 msgid "Uninstall"
-msgstr "Desistalar"
+msgstr "Desinstalar"
 
 msgid "Home"
 msgstr "Início"
@@ -109,16 +109,16 @@ msgid "Computer"
 msgstr "Computador"
 
 msgid "Browse network"
-msgstr "Nevagar na rede"
+msgstr "Pesquisar na internet"
 
 msgid "Find files..."
-msgstr "Procurar Arquivos..."
+msgstr "Procurar arquivos..."
 
 msgid "Please wait..."
-msgstr "Por favor aguarde..."
+msgstr "Por favor, aguarde..."
 
 msgid "No recent Items"
-msgstr "Sem itens recentes"
+msgstr "Não há itens recentes"
 
 msgid "Click to copy"
 msgstr "Clique para copiar"
@@ -130,16 +130,16 @@ msgid "Favorites"
 msgstr "Favoritos"
 
 msgid "Recent"
-msgstr "Recente"
+msgstr "Recentes"
 
 msgid "Home folder"
 msgstr "Pasta pessoal"
 
 msgid "Too many entries - showing first 1000 entries only"
-msgstr "Muitas entradas - mostrando apenas as primeiras 1000 entradas"
+msgstr "Muitos resultados - mostrando apenas os 1000 primeiros resultados"
 
 msgid "Reset category order"
-msgstr "Redefinir ordem da categoria"
+msgstr "Redefinir a ordem das categorias"
 
 msgid "light skin tone"
 msgstr "tom de pele claro"
@@ -166,10 +166,10 @@ msgid "Other application..."
 msgstr "Outro aplicativo..."
 
 msgid "Open containing folder"
-msgstr "Abra a pasta que contém"
+msgstr "Abrir a pasta que contém o arquivo"
 
 msgid "Move to trash"
-msgstr "Mover para lixeira"
+msgstr "Mover para a lixeira"
 
 msgid "Error while moving file to trash:"
 msgstr "Erro ao mover o arquivo para a lixeira:"
@@ -199,40 +199,40 @@ msgid "Use regular expressions"
 msgstr "Usar expressões regulares"
 
 msgid "Stop"
-msgstr "Para"
+msgstr "Parar"
 
 msgid "File"
 msgstr "Arquivo"
 
 msgid "Path"
-msgstr "Caminho"
+msgstr "Endereço"
 
 msgid "Searching..."
 msgstr "Pesquisando..."
 
 msgid "Search Stopped"
-msgstr "Pesquisa Parada"
+msgstr "Pesquisa interrompida"
 
 msgid "Searching: "
 msgstr "Pesquisando: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr "Erro: permissões inssuficentes para ler a pasta "
+msgstr "Erro: permissão insuficente para ler a pasta "
 
 msgid "Search Completed"
-msgstr "Pesquisa Concluída"
+msgstr "Pesquisa concluída"
 
 msgid "Skipping"
 msgstr "Pulando"
 
 msgid " - directory already searched"
-msgstr " - diretório já pesquisado"
+msgstr " - pasta já pesquisada"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 msgid "A flexible menu with grid or list layout options, file browser and emoji search."
-msgstr "Um menu flexível com opções de layout de grade ou lista, navegador dearquivos e buscador de emoji."
+msgstr "Um menu flexível com opções de leiaute de grade ou lista, navegador de arquivos e buscador de emoji."
 
 msgid "Behavior"
 msgstr "Comportamento"
@@ -244,10 +244,10 @@ msgid "Layout and Content"
 msgstr "Leiaute e Conteúdo"
 
 msgid "Search Providers"
-msgstr "Provedores de Pesquisa"
+msgstr "Provedores de pesquisa"
 
 msgid "No search provider extensions found"
-msgstr "Nenhuma extensão do provedor de pesquisa encontrada"
+msgstr "Nenhuma extensão do provedor de pesquisa foi encontrada"
 
 msgid "Panel"
 msgstr "Painel"
@@ -268,22 +268,22 @@ msgid "Open the menu editor"
 msgstr "Abrir o editor de menu"
 
 msgid "Use a custom icon"
-msgstr "Usar um ícone customizado"
+msgstr "Usar um ícone personalizado"
 
 msgid "Use a custom icon in the panel"
-msgstr "Usar um ícone customizado no painel"
+msgstr "Usar um ícone personalizado no painel"
 
 msgid "Panel icon"
-msgstr "Ícone do painel"
+msgstr "Ícone no painel"
 
 msgid "Panel text"
-msgstr "Texto do painel"
+msgstr "Texto no painel"
 
 msgid "Text to show beside the panel icon"
-msgstr "Texto para mostrar ao lado do ícone do painel"
+msgstr "Texto para mostrar ao lado do ícone no painel"
 
 msgid "Category icon size (pixels)"
-msgstr "Tamanho do ícone de categoria (pixels)"
+msgstr "Tamanho do ícone da categoria (pixels)"
 
 msgid "Applications list icon size (pixels)"
 msgstr "Tamanho do ícone da lista de aplicativos (pixels)"
@@ -292,7 +292,7 @@ msgid "Applications grid icon size (pixels)"
 msgstr "Tamanho do ícone da grade de aplicativos (pixels)"
 
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Atalho do teclado para abrir e fechar o menu"
+msgstr "Atalho de teclado para abrir e fechar o menu"
 
 msgid "Open menu on hover"
 msgstr "Abrir o menu ao passar o mouse"
