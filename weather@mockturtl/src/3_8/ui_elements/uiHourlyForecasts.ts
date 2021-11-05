@@ -43,7 +43,6 @@ export class UIHourlyForecasts {
 				x_align: Align.MIDDLE
 			}
 		);
-		this.actor.overlay_scrollbars = true;
 
 		// Stop event passing while scrolling to allow scrolling
 		let vScroll = this.actor.get_vscroll_bar();

@@ -9,7 +9,7 @@ import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Orientation } = imports.gi.Clutter;
 
 // stylesheet.css
 const STYLE_FORECAST_ICON = 'weather-forecast-icon'
@@ -124,7 +124,7 @@ export class UIForecasts {
 
 		this.forecasts = [];
 		this.grid = new GridLayout({
-			orientation: config._verticalOrientation
+			orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
 		});
 		this.grid.set_column_homogeneous(true);
 

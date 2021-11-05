@@ -11094,7 +11094,7 @@ class CurrentWeather {
 
 
 const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Orientation } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
 const STYLE_FORECAST_DAY = 'weather-forecast-day';
@@ -11178,7 +11178,7 @@ class UIForecasts {
         this.Destroy();
         this.forecasts = [];
         this.grid = new GridLayout({
-            orientation: config._verticalOrientation
+            orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
         });
         this.grid.set_column_homogeneous(true);
         let table = new Widget({
@@ -11279,7 +11279,6 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        this.actor.overlay_scrollbars = true;
         let vScroll = this.actor.get_vscroll_bar();
         vScroll.connect("scroll-start", () => { menu.passEvents = true; });
         vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
