@@ -70,6 +70,12 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type AppLaunchContextInitOptionsMixin = Gio.AppLaunchContextInitOptions & 
+	Pick<IAppLaunchContext,
+		"display">;
+
+	export interface AppLaunchContextInitOptions extends AppLaunchContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppLaunchContext} instead.
 	 */
@@ -100,7 +106,7 @@ declare namespace imports.gi.Gdk {
 	interface AppLaunchContext extends AppLaunchContextMixin {}
 
 	class AppLaunchContext {
-		public constructor();
+		public constructor(options?: Partial<AppLaunchContextInitOptions>);
 		/**
 		 * Creates a new {@link AppLaunchContext}.
 		 * @returns a new {@link AppLaunchContext}
@@ -142,8 +148,14 @@ declare namespace imports.gi.Gdk {
 		 * case, %NULL is returned.
 		 * @returns a #cairo_surface_t
 		 *   representing #cursor, or %NULL
+		 * 
+		 * Location to store the hotspot x position,
+		 *   or %NULL
+		 * 
+		 * Location to store the hotspot y position,
+		 *   or %NULL
 		 */
-		get_surface(): cairo.Surface | null;
+		get_surface(): [ cairo.Surface | null, number | null, number | null ];
 		/**
 		 * Adds a reference to #cursor.
 		 * @returns Same #cursor that was passed in
@@ -159,6 +171,13 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type CursorInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ICursor,
+		"cursor_type" |
+		"display">;
+
+	export interface CursorInitOptions extends CursorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cursor} instead.
 	 */
@@ -170,7 +189,7 @@ declare namespace imports.gi.Gdk {
 	interface Cursor extends CursorMixin {}
 
 	class Cursor {
-		public constructor();
+		public constructor(options?: Partial<CursorInitOptions>);
 		/**
 		 * Creates a new cursor from the set of builtin cursors for the default display.
 		 * See gdk_cursor_new_for_display().
@@ -370,8 +389,10 @@ declare namespace imports.gi.Gdk {
 		 * @param axes pointer to an array of axes
 		 * @param use the use to look for
 		 * @returns %TRUE if the given axis use was found, otherwise %FALSE
+		 * 
+		 * location to store the found value.
 		 */
-		get_axis(axes: number[], use: AxisUse): boolean;
+		get_axis(axes: number[], use: AxisUse): [ boolean, number ];
 		/**
 		 * Returns the axis use for #index_.
 		 * @param index_ the index of the axis.
@@ -385,8 +406,10 @@ declare namespace imports.gi.Gdk {
 		 * @param axes pointer to an array of axes
 		 * @param axis_label {@link Atom} with the axis label.
 		 * @returns %TRUE if the given axis use was found, otherwise %FALSE.
+		 * 
+		 * location to store the found value.
 		 */
-		get_axis_value(axes: number[], axis_label: Atom): boolean;
+		get_axis_value(axes: number[], axis_label: Atom): [ boolean, number ];
 		/**
 		 * Returns the device type for #device.
 		 * @returns the {@link DeviceType} for #device.
@@ -420,15 +443,26 @@ declare namespace imports.gi.Gdk {
 		 * @param stop ending timestamp for the range of events to return
 		 * @returns %TRUE if the windowing system supports motion history and
 		 *  at least one event was found.
+		 * 
+		 * 
+		 *   location to store a newly-allocated array of {@link TimeCoord}, or
+		 *   %NULL
+		 * 
+		 * location to store the length of
+		 *   #events, or %NULL
 		 */
-		get_history(window: Window, start: number, stop: number): boolean;
+		get_history(window: Window, start: number, stop: number): [ boolean, TimeCoord[] | null, number | null ];
 		/**
 		 * If #index_ has a valid keyval, this function will return %TRUE
 		 * and fill in #keyval and #modifiers with the keyval settings.
 		 * @param index_ the index of the macro button to get.
 		 * @returns %TRUE if keyval is set for #index.
+		 * 
+		 * return value for the keyval.
+		 * 
+		 * return value for modifiers.
 		 */
-		get_key(index_: number): boolean;
+		get_key(index_: number): [ boolean, number, ModifierType ];
 		/**
 		 * Gets information about which window the given pointer device is in, based on events
 		 * that have been received so far from the display server. If another application
@@ -510,8 +544,9 @@ declare namespace imports.gi.Gdk {
 		 * @param window a {@link Window}.
 		 * @param axes an array of doubles to store the values of
 		 * the axes of #device in, or %NULL.
+		 * @returns location to store the modifiers, or %NULL.
 		 */
-		get_state(window: Window, axes: number[] | null): void;
+		get_state(window: Window, axes: number[] | null): ModifierType | null;
 		/**
 		 * Returns the vendor ID of this device, or %NULL if this information couldn't
 		 * be obtained. This ID is retrieved from the device, and is thus constant for
@@ -551,8 +586,14 @@ declare namespace imports.gi.Gdk {
 		 * unless there is an ongoing grab on them, see gdk_device_grab().
 		 * @returns the {@link Window} under the
 		 * device position, or %NULL.
+		 * 
+		 * return location for the X coordinate of the device location,
+		 *         relative to the window origin, or %NULL.
+		 * 
+		 * return location for the Y coordinate of the device location,
+		 *         relative to the window origin, or %NULL.
 		 */
-		get_window_at_position(): Window | null;
+		get_window_at_position(): [ Window | null, number | null, number | null ];
 		/**
 		 * Obtains the window underneath #device, returning the location of the device in #win_x and #win_y in
 		 * double precision. Returns %NULL if the window tree under #device is not known to GDK (for example,
@@ -563,8 +604,14 @@ declare namespace imports.gi.Gdk {
 		 * unless there is an ongoing grab on them, see gdk_device_grab().
 		 * @returns the {@link Window} under the
 		 *   device position, or %NULL.
+		 * 
+		 * return location for the X coordinate of the device location,
+		 *         relative to the window origin, or %NULL.
+		 * 
+		 * return location for the Y coordinate of the device location,
+		 *         relative to the window origin, or %NULL.
 		 */
-		get_window_at_position_double(): Window | null;
+		get_window_at_position_double(): [ Window | null, number | null, number | null ];
 		/**
 		 * Grabs the device so that all events coming from this device are passed to
 		 * this application until the device is ungrabbed with gdk_device_ungrab(),
@@ -706,6 +753,26 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DeviceInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDevice,
+		"associated_device" |
+		"axes" |
+		"device_manager" |
+		"display" |
+		"has_cursor" |
+		"input_mode" |
+		"input_source" |
+		"n_axes" |
+		"name" |
+		"num_touches" |
+		"product_id" |
+		"seat" |
+		"tool" |
+		"type" |
+		"vendor_id">;
+
+	export interface DeviceInitOptions extends DeviceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Device} instead.
 	 */
@@ -722,7 +789,7 @@ declare namespace imports.gi.Gdk {
 	interface Device extends DeviceMixin {}
 
 	class Device {
-		public constructor();
+		public constructor(options?: Partial<DeviceInitOptions>);
 		/**
 		 * Frees an array of {@link TimeCoord} that was returned by gdk_device_get_history().
 		 * @param events an array of {@link TimeCoord}.
@@ -736,8 +803,14 @@ declare namespace imports.gi.Gdk {
 		 * @param device device to get the grab information from
 		 * @returns %TRUE if this application currently has the
 		 *  keyboard grabbed.
+		 * 
+		 * location to store current grab window
+		 * 
+		 * location to store boolean indicating whether
+		 *   the #owner_events flag to gdk_keyboard_grab() or
+		 *   gdk_pointer_grab() was %TRUE.
 		 */
-		public static grab_info_libgtk_only(display: Display, device: Device): boolean;
+		public static grab_info_libgtk_only(display: Display, device: Device): [ boolean, Window, boolean ];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -802,6 +875,12 @@ declare namespace imports.gi.Gdk {
 		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type DeviceManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDeviceManager,
+		"display">;
+
+	export interface DeviceManagerInitOptions extends DeviceManagerInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceManager} instead.
@@ -927,7 +1006,7 @@ declare namespace imports.gi.Gdk {
 	interface DeviceManager extends DeviceManagerMixin {}
 
 	class DeviceManager {
-		public constructor();
+		public constructor(options?: Partial<DeviceManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -970,6 +1049,15 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DeviceToolInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDeviceTool,
+		"axes" |
+		"hardware_id" |
+		"serial" |
+		"tool_type">;
+
+	export interface DeviceToolInitOptions extends DeviceToolInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceTool} instead.
 	 */
@@ -978,7 +1066,7 @@ declare namespace imports.gi.Gdk {
 	interface DeviceTool extends DeviceToolMixin {}
 
 	class DeviceTool {
-		public constructor();
+		public constructor(options?: Partial<DeviceToolInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1143,8 +1231,14 @@ declare namespace imports.gi.Gdk {
 		 * belongs to another application).
 		 * @returns the window under the mouse
 		 *   pointer, or %NULL
+		 * 
+		 * return location for x coordinate of the pointer location relative
+		 *    to the window origin, or %NULL
+		 * 
+		 * return location for y coordinate of the pointer location relative
+		 *  &    to the window origin, or %NULL
 		 */
-		get_window_at_pointer(): Window | null;
+		get_window_at_pointer(): [ Window | null, number | null, number | null ];
 		/**
 		 * Returns whether the display has events that are waiting
 		 * to be processed.
@@ -1363,6 +1457,9 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DisplayInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DisplayInitOptions extends DisplayInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Display} instead.
 	 */
@@ -1391,7 +1488,7 @@ declare namespace imports.gi.Gdk {
 	interface Display extends DisplayMixin {}
 
 	class Display {
-		public constructor();
+		public constructor(options?: Partial<DisplayInitOptions>);
 		/**
 		 * Gets the default {@link Display}. This is a convenience
 		 * function for:
@@ -1458,6 +1555,12 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DisplayManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDisplayManager,
+		"default_display">;
+
+	export interface DisplayManagerInitOptions extends DisplayManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DisplayManager} instead.
 	 */
@@ -1507,7 +1610,7 @@ declare namespace imports.gi.Gdk {
 	interface DisplayManager extends DisplayManagerMixin {}
 
 	class DisplayManager {
-		public constructor();
+		public constructor(options?: Partial<DisplayManagerInitOptions>);
 		/**
 		 * Gets the singleton {@link DisplayManager} object.
 		 * 
@@ -1651,6 +1754,9 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DragContextInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DragContextInitOptions extends DragContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DragContext} instead.
 	 */
@@ -1659,7 +1765,7 @@ declare namespace imports.gi.Gdk {
 	interface DragContext extends DragContextMixin {}
 
 	class DragContext {
-		public constructor();
+		public constructor(options?: Partial<DragContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1706,6 +1812,13 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type DrawingContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDrawingContext,
+		"clip" |
+		"window">;
+
+	export interface DrawingContextInitOptions extends DrawingContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DrawingContext} instead.
 	 */
@@ -1726,7 +1839,7 @@ declare namespace imports.gi.Gdk {
 	interface DrawingContext extends DrawingContextMixin {}
 
 	class DrawingContext {
-		public constructor();
+		public constructor(options?: Partial<DrawingContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1876,6 +1989,9 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type FrameClockInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FrameClockInitOptions extends FrameClockInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FrameClock} instead.
 	 */
@@ -1919,7 +2035,7 @@ declare namespace imports.gi.Gdk {
 	interface FrameClock extends FrameClockMixin {}
 
 	class FrameClock {
-		public constructor();
+		public constructor(options?: Partial<FrameClockInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2073,6 +2189,14 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type GLContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IGLContext,
+		"display" |
+		"shared_context" |
+		"window">;
+
+	export interface GLContextInitOptions extends GLContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GLContext} instead.
 	 */
@@ -2134,7 +2258,7 @@ declare namespace imports.gi.Gdk {
 	interface GLContext extends GLContextMixin {}
 
 	class GLContext {
-		public constructor();
+		public constructor(options?: Partial<GLContextInitOptions>);
 		/**
 		 * Clears the current {@link GLContext}.
 		 * 
@@ -2187,8 +2311,16 @@ declare namespace imports.gi.Gdk {
 		 * keyboard group and level. See gdk_keymap_translate_keyboard_state().
 		 * @param hardware_keycode a keycode
 		 * @returns %TRUE if there were any entries
+		 * 
+		 * return
+		 *     location for array of {@link KeymapKey}, or %NULL
+		 * 
+		 * return
+		 *     location for array of keyvals, or %NULL
+		 * 
+		 * length of #keys and #keyvals
 		 */
-		get_entries_for_keycode(hardware_keycode: number): boolean;
+		get_entries_for_keycode(hardware_keycode: number): [ boolean, KeymapKey[] | null, number[] | null, number ];
 		/**
 		 * Obtains a list of keycode/group/level combinations that will
 		 * generate #keyval. Groups and levels are two kinds of keyboard mode;
@@ -2203,8 +2335,13 @@ declare namespace imports.gi.Gdk {
 		 * with g_free().
 		 * @param keyval a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
 		 * @returns %TRUE if keys were found and returned
+		 * 
+		 * return location
+		 *     for an array of {@link KeymapKey}
+		 * 
+		 * return location for number of elements in returned array
 		 */
-		get_entries_for_keyval(keyval: number): boolean;
+		get_entries_for_keyval(keyval: number): [ boolean, KeymapKey[], number ];
 		/**
 		 * Returns the modifier mask the #keymap’s windowing system backend
 		 * uses for a particular purpose.
@@ -2315,8 +2452,18 @@ declare namespace imports.gi.Gdk {
 		 * @param state a modifier state
 		 * @param group active keyboard group
 		 * @returns %TRUE if there was a keyval bound to the keycode/state/group
+		 * 
+		 * return location for keyval, or %NULL
+		 * 
+		 * return location for effective
+		 *     group, or %NULL
+		 * 
+		 * return location for level, or %NULL
+		 * 
+		 * return location for modifiers
+		 *     that were used to determine the group or level, or %NULL
 		 */
-		translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number): boolean;
+		translate_keyboard_state(hardware_keycode: number, state: ModifierType, group: number): [ boolean, number | null, number | null, number | null, ModifierType | null ];
 		/**
 		 * The ::direction-changed signal gets emitted when the direction of
 		 * the keymap changes.
@@ -2336,6 +2483,9 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type KeymapInitOptionsMixin = GObject.ObjectInitOptions
+	export interface KeymapInitOptions extends KeymapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Keymap} instead.
 	 */
@@ -2352,7 +2502,7 @@ declare namespace imports.gi.Gdk {
 	interface Keymap extends KeymapMixin {}
 
 	class Keymap {
-		public constructor();
+		public constructor(options?: Partial<KeymapInitOptions>);
 		/**
 		 * Returns the {@link Keymap} attached to the default display.
 		 * @returns the {@link Keymap} attached to the default display.
@@ -2389,9 +2539,9 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the size and position of an individual monitor within the
 		 * display coordinate space. The returned geometry is in  ”application pixels”,
 		 * not in ”device pixels” (see gdk_monitor_get_scale_factor()).
-		 * @param geometry a {@link Rectangle} to be filled with the monitor geometry
+		 * @returns a {@link Rectangle} to be filled with the monitor geometry
 		 */
-		get_geometry(geometry: Rectangle): void;
+		get_geometry(): Rectangle;
 		/**
 		 * Gets the height in millimeters of the monitor.
 		 * @returns the physical height of the monitor
@@ -2455,10 +2605,10 @@ declare namespace imports.gi.Gdk {
 		 * Note that not all backends may have a concept of workarea. This
 		 * function will return the monitor geometry if a workarea is not
 		 * available, or does not apply.
-		 * @param workarea a {@link Rectangle} to be filled with
+		 * @returns a {@link Rectangle} to be filled with
 		 *     the monitor workarea
 		 */
-		get_workarea(workarea: Rectangle): void;
+		get_workarea(): Rectangle;
 		/**
 		 * Gets whether this monitor should be considered primary
 		 * (see gdk_display_get_primary_monitor()).
@@ -2480,6 +2630,21 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type MonitorInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMonitor,
+		"display" |
+		"geometry" |
+		"height_mm" |
+		"manufacturer" |
+		"model" |
+		"refresh_rate" |
+		"scale_factor" |
+		"subpixel_layout" |
+		"width_mm" |
+		"workarea">;
+
+	export interface MonitorInitOptions extends MonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Monitor} instead.
 	 */
@@ -2498,7 +2663,7 @@ declare namespace imports.gi.Gdk {
 	interface Monitor extends MonitorMixin {}
 
 	class Monitor {
-		public constructor();
+		public constructor(options?: Partial<MonitorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2582,10 +2747,10 @@ declare namespace imports.gi.Gdk {
 		 * Note that the size of the entire screen area can be retrieved via
 		 * gdk_screen_get_width() and gdk_screen_get_height().
 		 * @param monitor_num the monitor number
-		 * @param dest a {@link Rectangle} to be filled with
+		 * @returns a {@link Rectangle} to be filled with
 		 *     the monitor geometry
 		 */
-		get_monitor_geometry(monitor_num: number, dest: Rectangle | null): void;
+		get_monitor_geometry(monitor_num: number): Rectangle | null;
 		/**
 		 * Gets the height in millimeters of the specified monitor.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -2636,10 +2801,10 @@ declare namespace imports.gi.Gdk {
 		 * Monitor numbers start at 0. To obtain the number of monitors of
 		 * #screen, use gdk_screen_get_n_monitors().
 		 * @param monitor_num the monitor number
-		 * @param dest a {@link Rectangle} to be filled with
+		 * @returns a {@link Rectangle} to be filled with
 		 *     the monitor workarea
 		 */
-		get_monitor_workarea(monitor_num: number, dest: Rectangle | null): void;
+		get_monitor_workarea(monitor_num: number): Rectangle | null;
 		/**
 		 * Returns the number of monitors which #screen consists of.
 		 * @returns number of monitors which #screen consists of
@@ -2831,6 +2996,13 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type ScreenInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IScreen,
+		"font_options" |
+		"resolution">;
+
+	export interface ScreenInitOptions extends ScreenInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Screen} instead.
 	 */
@@ -2852,7 +3024,7 @@ declare namespace imports.gi.Gdk {
 	interface Screen extends ScreenMixin {}
 
 	class Screen {
-		public constructor();
+		public constructor(options?: Partial<ScreenInitOptions>);
 		/**
 		 * Gets the default screen for the default display. (See
 		 * gdk_display_get_default ()).
@@ -3008,6 +3180,12 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type SeatInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISeat,
+		"display">;
+
+	export interface SeatInitOptions extends SeatInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Seat} instead.
 	 */
@@ -3020,7 +3198,7 @@ declare namespace imports.gi.Gdk {
 	interface Seat extends SeatMixin {}
 
 	class Seat {
-		public constructor();
+		public constructor(options?: Partial<SeatInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3106,6 +3284,9 @@ declare namespace imports.gi.Gdk {
 		get_visual_type(): VisualType;
 	}
 
+	type VisualInitOptionsMixin = GObject.ObjectInitOptions
+	export interface VisualInitOptions extends VisualInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Visual} instead.
 	 */
@@ -3118,7 +3299,7 @@ declare namespace imports.gi.Gdk {
 	interface Visual extends VisualMixin {}
 
 	class Visual {
-		public constructor();
+		public constructor(options?: Partial<VisualInitOptions>);
 		/**
 		 * Get the visual with the most available colors for the default
 		 * GDK screen. The return value should not be freed.
@@ -3653,8 +3834,10 @@ declare namespace imports.gi.Gdk {
 		 * Returns the decorations set on the GdkWindow with
 		 * gdk_window_set_decorations().
 		 * @returns %TRUE if the window has decorations set, %FALSE otherwise.
+		 * 
+		 * The window decorations will be written here
 		 */
-		get_decorations(): boolean;
+		get_decorations(): [ boolean, WMDecoration ];
 		/**
 		 * Retrieves a {@link Cursor} pointer for the #device currently set on the
 		 * specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -3683,8 +3866,14 @@ declare namespace imports.gi.Gdk {
 		 * @returns The window underneath #device
 		 * (as with gdk_device_get_window_at_position()), or %NULL if the
 		 * window is not known to GDK.
+		 * 
+		 * return location for the X coordinate of #device, or %NULL.
+		 * 
+		 * return location for the Y coordinate of #device, or %NULL.
+		 * 
+		 * return location for the modifier mask, or %NULL.
 		 */
-		get_device_position(device: Device): Window | null;
+		get_device_position(device: Device): [ Window | null, number | null, number | null, ModifierType | null ];
 		/**
 		 * Obtains the current device position in doubles and modifier state.
 		 * The position is given in coordinates relative to the upper left
@@ -3693,8 +3882,14 @@ declare namespace imports.gi.Gdk {
 		 * @returns The window underneath #device
 		 * (as with gdk_device_get_window_at_position()), or %NULL if the
 		 * window is not known to GDK.
+		 * 
+		 * return location for the X coordinate of #device, or %NULL.
+		 * 
+		 * return location for the Y coordinate of #device, or %NULL.
+		 * 
+		 * return location for the modifier mask, or %NULL.
 		 */
-		get_device_position_double(device: Device): Window | null;
+		get_device_position_double(device: Device): [ Window | null, number | null, number | null, ModifierType | null ];
 		/**
 		 * Gets the {@link Display} associated with a #GdkWindow.
 		 * @returns the {@link Display} associated with #window
@@ -3703,8 +3898,12 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Finds out the DND protocol supported by a window.
 		 * @returns the supported DND protocol.
+		 * 
+		 * location of the window
+		 *    where the drop should happen. This may be #window or a proxy window,
+		 *    or %NULL if #window does not support Drag and Drop.
 		 */
-		get_drag_protocol(): DragProtocol;
+		get_drag_protocol(): [ DragProtocol, Window | null ];
 		/**
 		 * Obtains the parent of #window, as known to GDK. Works like
 		 * gdk_window_get_parent() for normal windows, but returns the
@@ -3754,9 +3953,9 @@ declare namespace imports.gi.Gdk {
 		 * titlebar/borders if any. The frame position is given in root window
 		 * coordinates. To get the position of the window itself (rather than
 		 * the frame) in root window coordinates, use gdk_window_get_origin().
-		 * @param rect rectangle to fill with bounding box of the window frame
+		 * @returns rectangle to fill with bounding box of the window frame
 		 */
-		get_frame_extents(rect: Rectangle): void;
+		get_frame_extents(): Rectangle;
 		/**
 		 * Obtains the {@link FullscreenMode} of the #window.
 		 * @returns The {@link FullscreenMode} applied to the window when fullscreen.
@@ -3818,8 +4017,12 @@ declare namespace imports.gi.Gdk {
 		 * gdk_window_get_geometry() which return the position of a window
 		 * relative to its parent window.)
 		 * @returns not meaningful, ignore
+		 * 
+		 * return location for X coordinate
+		 * 
+		 * return location for Y coordinate
 		 */
-		get_origin(): number;
+		get_origin(): [ number, number | null, number | null ];
 		/**
 		 * Obtains the parent of #window, as known to GDK. Does not query the
 		 * X server; thus this returns the parent as passed to gdk_window_new(),
@@ -3850,8 +4053,17 @@ declare namespace imports.gi.Gdk {
 		 * @returns the window containing the
 		 * pointer (as with gdk_window_at_pointer()), or %NULL if the window
 		 * containing the pointer isn’t known to GDK
+		 * 
+		 * return location for X coordinate of pointer or %NULL to not
+		 *      return the X coordinate
+		 * 
+		 * return location for Y coordinate of pointer or %NULL to not
+		 *      return the Y coordinate
+		 * 
+		 * return location for modifier mask or %NULL to not return the
+		 *      modifier mask
 		 */
-		get_pointer(): Window | null;
+		get_pointer(): [ Window | null, number | null, number | null, ModifierType | null ];
 		/**
 		 * Obtains the position of the window as reported in the
 		 * most-recently-processed {@link EventConfigure}. Contrast with
@@ -3957,8 +4169,9 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves the user data for #window, which is normally the widget
 		 * that #window belongs to. See gdk_window_set_user_data().
+		 * @returns return location for user data
 		 */
-		get_user_data(): void;
+		get_user_data(): any | null;
 		/**
 		 * Computes the region of the #window that is potentially visible.
 		 * This does not necessarily take into account if the window is
@@ -5020,6 +5233,12 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type WindowInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWindow,
+		"cursor">;
+
+	export interface WindowInitOptions extends WindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
@@ -5028,7 +5247,7 @@ declare namespace imports.gi.Gdk {
 	interface Window extends WindowMixin {}
 
 	class Window {
-		public constructor();
+		public constructor(options?: Partial<WindowInitOptions>);
 		/**
 		 * Creates a new {@link Window} using the attributes from
 		 * #attributes. See #GdkWindowAttr and #GdkWindowAttributesType for
@@ -5052,8 +5271,12 @@ declare namespace imports.gi.Gdk {
 		 * NOTE: For multihead-aware widgets or applications use
 		 * gdk_display_get_window_at_pointer() instead.
 		 * @returns window under the mouse pointer
+		 * 
+		 * return location for origin of the window under the pointer
+		 * 
+		 * return location for origin of the window under the pointer
 		 */
-		public static at_pointer(): Window;
+		public static at_pointer(): [ Window, number | null, number | null ];
 		/**
 		 * Constrains a desired width and height according to a
 		 * set of geometry hints (such as minimum and maximum size).
@@ -5096,13 +5319,14 @@ declare namespace imports.gi.Gdk {
 		public static set_debug_updates(setting: boolean): void;
 	}
 
+	export interface AtomInitOptions {}
 	/**
 	 * An opaque type representing a string as an index into a table
 	 * of strings on the X server.
 	 */
 	interface Atom {}
 	class Atom {
-		public constructor();
+		public constructor(options?: Partial<AtomInitOptions>);
 		/**
 		 * Determines the string corresponding to an atom.
 		 * @returns a newly-allocated string containing the string
@@ -5112,13 +5336,14 @@ declare namespace imports.gi.Gdk {
 		public name(): string;
 	}
 
+	export interface ColorInitOptions {}
 	/**
 	 * A {@link Color} is used to describe a color,
 	 * similar to the XColor struct used in the X11 drawing API.
 	 */
 	interface Color {}
 	class Color {
-		public constructor();
+		public constructor(options?: Partial<ColorInitOptions>);
 		/**
 		 * For allocated colors, the pixel value used to
 		 *     draw this color on the screen. Not used anymore.
@@ -5172,16 +5397,19 @@ declare namespace imports.gi.Gdk {
 		public to_string(): string;
 	}
 
+	export interface DevicePadInterfaceInitOptions {}
 	interface DevicePadInterface {}
 	class DevicePadInterface {
-		public constructor();
+		public constructor(options?: Partial<DevicePadInterfaceInitOptions>);
 	}
 
+	export interface DrawingContextClassInitOptions {}
 	interface DrawingContextClass {}
 	class DrawingContextClass {
-		public constructor();
+		public constructor(options?: Partial<DrawingContextClassInitOptions>);
 	}
 
+	export interface EventAnyInitOptions {}
 	/**
 	 * Contains the fields which are common to all event structs.
 	 * Any event pointer can safely be cast to a pointer to a {@link EventAny} to
@@ -5189,7 +5417,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventAny {}
 	class EventAny {
-		public constructor();
+		public constructor(options?: Partial<EventAnyInitOptions>);
 		/**
 		 * the type of the event.
 		 */
@@ -5204,6 +5432,7 @@ declare namespace imports.gi.Gdk {
 		public send_event: number;
 	}
 
+	export interface EventButtonInitOptions {}
 	/**
 	 * Used for button press and button release events. The
 	 * #type field will be one of %GDK_BUTTON_PRESS,
@@ -5241,7 +5470,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventButton {}
 	class EventButton {
-		public constructor();
+		public constructor(options?: Partial<EventButtonInitOptions>);
 		/**
 		 * the type of the event (%GDK_BUTTON_PRESS, %GDK_2BUTTON_PRESS,
 		 *   %GDK_3BUTTON_PRESS or %GDK_BUTTON_RELEASE).
@@ -5302,12 +5531,13 @@ declare namespace imports.gi.Gdk {
 		public y_root: number;
 	}
 
+	export interface EventConfigureInitOptions {}
 	/**
 	 * Generated when a window size or position has changed.
 	 */
 	interface EventConfigure {}
 	class EventConfigure {
-		public constructor();
+		public constructor(options?: Partial<EventConfigureInitOptions>);
 		/**
 		 * the type of the event (%GDK_CONFIGURE).
 		 */
@@ -5338,12 +5568,13 @@ declare namespace imports.gi.Gdk {
 		public height: number;
 	}
 
+	export interface EventCrossingInitOptions {}
 	/**
 	 * Generated when the pointer enters or leaves a window.
 	 */
 	interface EventCrossing {}
 	class EventCrossing {
-		public constructor();
+		public constructor(options?: Partial<EventCrossingInitOptions>);
 		/**
 		 * the type of the event (%GDK_ENTER_NOTIFY or %GDK_LEAVE_NOTIFY).
 		 */
@@ -5406,12 +5637,13 @@ declare namespace imports.gi.Gdk {
 		public state: ModifierType;
 	}
 
+	export interface EventDNDInitOptions {}
 	/**
 	 * Generated during DND operations.
 	 */
 	interface EventDND {}
 	class EventDND {
-		public constructor();
+		public constructor(options?: Partial<EventDNDInitOptions>);
 		/**
 		 * the type of the event (%GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,
 		 *   %GDK_DRAG_MOTION, %GDK_DRAG_STATUS, %GDK_DROP_START or
@@ -5446,13 +5678,14 @@ declare namespace imports.gi.Gdk {
 		public y_root: number;
 	}
 
+	export interface EventExposeInitOptions {}
 	/**
 	 * Generated when all or part of a window becomes visible and needs to be
 	 * redrawn.
 	 */
 	interface EventExpose {}
 	class EventExpose {
-		public constructor();
+		public constructor(options?: Partial<EventExposeInitOptions>);
 		/**
 		 * the type of the event (%GDK_EXPOSE or %GDK_DAMAGE).
 		 */
@@ -5482,12 +5715,13 @@ declare namespace imports.gi.Gdk {
 		public count: number;
 	}
 
+	export interface EventFocusInitOptions {}
 	/**
 	 * Describes a change of keyboard focus.
 	 */
 	interface EventFocus {}
 	class EventFocus {
-		public constructor();
+		public constructor(options?: Partial<EventFocusInitOptions>);
 		/**
 		 * the type of the event (%GDK_FOCUS_CHANGE).
 		 */
@@ -5507,6 +5741,7 @@ declare namespace imports.gi.Gdk {
 		public in: number;
 	}
 
+	export interface EventGrabBrokenInitOptions {}
 	/**
 	 * Generated when a pointer or keyboard grab is broken. On X11, this happens
 	 * when the grab window becomes unviewable (i.e. it or one of its ancestors
@@ -5516,7 +5751,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventGrabBroken {}
 	class EventGrabBroken {
-		public constructor();
+		public constructor(options?: Partial<EventGrabBrokenInitOptions>);
 		/**
 		 * the type of the event (%GDK_GRAB_BROKEN)
 		 */
@@ -5547,12 +5782,13 @@ declare namespace imports.gi.Gdk {
 		public grab_window: Window;
 	}
 
+	export interface EventKeyInitOptions {}
 	/**
 	 * Describes a key press or key release event.
 	 */
 	interface EventKey {}
 	class EventKey {
-		public constructor();
+		public constructor(options?: Partial<EventKeyInitOptions>);
 		/**
 		 * the type of the event (%GDK_KEY_PRESS or %GDK_KEY_RELEASE).
 		 */
@@ -5614,12 +5850,13 @@ declare namespace imports.gi.Gdk {
 		public is_modifier: number;
 	}
 
+	export interface EventMotionInitOptions {}
 	/**
 	 * Generated when the pointer moves.
 	 */
 	interface EventMotion {}
 	class EventMotion {
-		public constructor();
+		public constructor(options?: Partial<EventMotionInitOptions>);
 		/**
 		 * the type of the event.
 		 */
@@ -5677,6 +5914,7 @@ declare namespace imports.gi.Gdk {
 		public y_root: number;
 	}
 
+	export interface EventOwnerChangeInitOptions {}
 	/**
 	 * Generated when the owner of a selection changes. On X11, this
 	 * information is only available if the X server supports the XFIXES
@@ -5684,7 +5922,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventOwnerChange {}
 	class EventOwnerChange {
-		public constructor();
+		public constructor(options?: Partial<EventOwnerChangeInitOptions>);
 		/**
 		 * the type of the event (%GDK_OWNER_CHANGE).
 		 */
@@ -5720,12 +5958,13 @@ declare namespace imports.gi.Gdk {
 		public selection_time: number;
 	}
 
+	export interface EventPadAxisInitOptions {}
 	/**
 	 * Generated during %GDK_SOURCE_TABLET_PAD interaction with tactile sensors.
 	 */
 	interface EventPadAxis {}
 	class EventPadAxis {
-		public constructor();
+		public constructor(options?: Partial<EventPadAxisInitOptions>);
 		/**
 		 * the type of the event (%GDK_PAD_RING or %GDK_PAD_STRIP).
 		 */
@@ -5763,12 +6002,13 @@ declare namespace imports.gi.Gdk {
 		public value: number;
 	}
 
+	export interface EventPadButtonInitOptions {}
 	/**
 	 * Generated during %GDK_SOURCE_TABLET_PAD button presses and releases.
 	 */
 	interface EventPadButton {}
 	class EventPadButton {
-		public constructor();
+		public constructor(options?: Partial<EventPadButtonInitOptions>);
 		/**
 		 * the type of the event (%GDK_PAD_BUTTON_PRESS or %GDK_PAD_BUTTON_RELEASE).
 		 */
@@ -5801,12 +6041,13 @@ declare namespace imports.gi.Gdk {
 		public mode: number;
 	}
 
+	export interface EventPadGroupModeInitOptions {}
 	/**
 	 * Generated during %GDK_SOURCE_TABLET_PAD mode switches in a group.
 	 */
 	interface EventPadGroupMode {}
 	class EventPadGroupMode {
-		public constructor();
+		public constructor(options?: Partial<EventPadGroupModeInitOptions>);
 		/**
 		 * the type of the event (%GDK_PAD_GROUP_MODE).
 		 */
@@ -5836,12 +6077,13 @@ declare namespace imports.gi.Gdk {
 		public mode: number;
 	}
 
+	export interface EventPropertyInitOptions {}
 	/**
 	 * Describes a property change on a window.
 	 */
 	interface EventProperty {}
 	class EventProperty {
-		public constructor();
+		public constructor(options?: Partial<EventPropertyInitOptions>);
 		/**
 		 * the type of the event (%GDK_PROPERTY_NOTIFY).
 		 */
@@ -5869,6 +6111,7 @@ declare namespace imports.gi.Gdk {
 		public state: PropertyState;
 	}
 
+	export interface EventProximityInitOptions {}
 	/**
 	 * Proximity events are generated when using GDK’s wrapper for the
 	 * XInput extension. The XInput extension is an add-on for standard X
@@ -5882,7 +6125,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventProximity {}
 	class EventProximity {
-		public constructor();
+		public constructor(options?: Partial<EventProximityInitOptions>);
 		/**
 		 * the type of the event (%GDK_PROXIMITY_IN or %GDK_PROXIMITY_OUT).
 		 */
@@ -5906,6 +6149,7 @@ declare namespace imports.gi.Gdk {
 		public device: Device;
 	}
 
+	export interface EventScrollInitOptions {}
 	/**
 	 * Generated from button presses for the buttons 4 to 7. Wheel mice are
 	 * usually configured to generate button press events for buttons 4 and 5
@@ -5918,7 +6162,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventScroll {}
 	class EventScroll {
-		public constructor();
+		public constructor(options?: Partial<EventScrollInitOptions>);
 		/**
 		 * the type of the event (%GDK_SCROLL).
 		 */
@@ -5981,13 +6225,14 @@ declare namespace imports.gi.Gdk {
 		public is_stop: number;
 	}
 
+	export interface EventSelectionInitOptions {}
 	/**
 	 * Generated when a selection is requested or ownership of a selection
 	 * is taken over by another client application.
 	 */
 	interface EventSelection {}
 	class EventSelection {
-		public constructor();
+		public constructor(options?: Partial<EventSelectionInitOptions>);
 		/**
 		 * the type of the event (%GDK_SELECTION_CLEAR,
 		 *   %GDK_SELECTION_NOTIFY or %GDK_SELECTION_REQUEST).
@@ -6023,17 +6268,19 @@ declare namespace imports.gi.Gdk {
 		public requestor: Window;
 	}
 
+	export interface EventSequenceInitOptions {}
 	interface EventSequence {}
 	class EventSequence {
-		public constructor();
+		public constructor(options?: Partial<EventSequenceInitOptions>);
 	}
 
+	export interface EventSettingInitOptions {}
 	/**
 	 * Generated when a setting is modified.
 	 */
 	interface EventSetting {}
 	class EventSetting {
-		public constructor();
+		public constructor(options?: Partial<EventSettingInitOptions>);
 		/**
 		 * the type of the event (%GDK_SETTING).
 		 */
@@ -6057,6 +6304,7 @@ declare namespace imports.gi.Gdk {
 		public name: string;
 	}
 
+	export interface EventTouchInitOptions {}
 	/**
 	 * Used for touch events.
 	 * #type field will be one of %GDK_TOUCH_BEGIN, %GDK_TOUCH_UPDATE,
@@ -6071,7 +6319,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface EventTouch {}
 	class EventTouch {
-		public constructor();
+		public constructor(options?: Partial<EventTouchInitOptions>);
 		/**
 		 * the type of the event (%GDK_TOUCH_BEGIN, %GDK_TOUCH_UPDATE,
 		 *   %GDK_TOUCH_END, %GDK_TOUCH_CANCEL)
@@ -6134,12 +6382,13 @@ declare namespace imports.gi.Gdk {
 		public y_root: number;
 	}
 
+	export interface EventTouchpadPinchInitOptions {}
 	/**
 	 * Generated during touchpad swipe gestures.
 	 */
 	interface EventTouchpadPinch {}
 	class EventTouchpadPinch {
-		public constructor();
+		public constructor(options?: Partial<EventTouchpadPinchInitOptions>);
 		/**
 		 * the type of the event (%GDK_TOUCHPAD_PINCH)
 		 */
@@ -6208,12 +6457,13 @@ declare namespace imports.gi.Gdk {
 		public state: ModifierType;
 	}
 
+	export interface EventTouchpadSwipeInitOptions {}
 	/**
 	 * Generated during touchpad swipe gestures.
 	 */
 	interface EventTouchpadSwipe {}
 	class EventTouchpadSwipe {
-		public constructor();
+		public constructor(options?: Partial<EventTouchpadSwipeInitOptions>);
 		/**
 		 * the type of the event (%GDK_TOUCHPAD_SWIPE)
 		 */
@@ -6272,12 +6522,13 @@ declare namespace imports.gi.Gdk {
 		public state: ModifierType;
 	}
 
+	export interface EventVisibilityInitOptions {}
 	/**
 	 * Generated when the window visibility status has changed.
 	 */
 	interface EventVisibility {}
 	class EventVisibility {
-		public constructor();
+		public constructor(options?: Partial<EventVisibilityInitOptions>);
 		/**
 		 * the type of the event (%GDK_VISIBILITY_NOTIFY).
 		 */
@@ -6297,12 +6548,13 @@ declare namespace imports.gi.Gdk {
 		public state: VisibilityState;
 	}
 
+	export interface EventWindowStateInitOptions {}
 	/**
 	 * Generated when the state of a toplevel window changes.
 	 */
 	interface EventWindowState {}
 	class EventWindowState {
-		public constructor();
+		public constructor(options?: Partial<EventWindowStateInitOptions>);
 		/**
 		 * the type of the event (%GDK_WINDOW_STATE).
 		 */
@@ -6326,16 +6578,19 @@ declare namespace imports.gi.Gdk {
 		public new_window_state: WindowState;
 	}
 
+	export interface FrameClockClassInitOptions {}
 	interface FrameClockClass {}
 	class FrameClockClass {
-		public constructor();
+		public constructor(options?: Partial<FrameClockClassInitOptions>);
 	}
 
+	export interface FrameClockPrivateInitOptions {}
 	interface FrameClockPrivate {}
 	class FrameClockPrivate {
-		public constructor();
+		public constructor(options?: Partial<FrameClockPrivateInitOptions>);
 	}
 
+	export interface FrameTimingsInitOptions {}
 	/**
 	 * A {@link FrameTimings} object holds timing information for a single frame
 	 * of the application’s displays. To retrieve #GdkFrameTimings objects,
@@ -6346,7 +6601,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface FrameTimings {}
 	class FrameTimings {
-		public constructor();
+		public constructor(options?: Partial<FrameTimingsInitOptions>);
 		/**
 		 * The timing information in a {@link FrameTimings} is filled in
 		 * incrementally as the frame as drawn and passed off to the
@@ -6419,6 +6674,7 @@ declare namespace imports.gi.Gdk {
 		public unref(): void;
 	}
 
+	export interface GeometryInitOptions {}
 	/**
 	 * The {@link Geometry} struct gives the window manager information about
 	 * a window’s geometry constraints. Normally you would set these on
@@ -6478,7 +6734,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface Geometry {}
 	class Geometry {
-		public constructor();
+		public constructor(options?: Partial<GeometryInitOptions>);
 		/**
 		 * minimum width of window (or -1 to use requisition, with
 		 *  #GtkWindow only)
@@ -6531,12 +6787,13 @@ declare namespace imports.gi.Gdk {
 		public win_gravity: Gravity;
 	}
 
+	export interface KeymapKeyInitOptions {}
 	/**
 	 * A {@link KeymapKey} is a hardware key that can be mapped to a keyval.
 	 */
 	interface KeymapKey {}
 	class KeymapKey {
-		public constructor();
+		public constructor(options?: Partial<KeymapKeyInitOptions>);
 		/**
 		 * the hardware keycode. This is an identifying number for a
 		 *   physical key.
@@ -6560,17 +6817,19 @@ declare namespace imports.gi.Gdk {
 		public level: number;
 	}
 
+	export interface MonitorClassInitOptions {}
 	interface MonitorClass {}
 	class MonitorClass {
-		public constructor();
+		public constructor(options?: Partial<MonitorClassInitOptions>);
 	}
 
+	export interface PointInitOptions {}
 	/**
 	 * Defines the x and y coordinates of a point.
 	 */
 	interface Point {}
 	class Point {
-		public constructor();
+		public constructor(options?: Partial<PointInitOptions>);
 		/**
 		 * the x coordinate of the point.
 		 */
@@ -6581,13 +6840,14 @@ declare namespace imports.gi.Gdk {
 		public y: number;
 	}
 
+	export interface RGBAInitOptions {}
 	/**
 	 * A {@link RGBA} is used to represent a (possibly translucent)
 	 * color, in a way that is compatible with cairo’s notion of color.
 	 */
 	interface RGBA {}
 	class RGBA {
-		public constructor();
+		public constructor(options?: Partial<RGBAInitOptions>);
 		/**
 		 * The intensity of the red channel from 0.0 to 1.0 inclusive
 		 */
@@ -6669,13 +6929,14 @@ declare namespace imports.gi.Gdk {
 		public to_string(): string;
 	}
 
+	export interface RectangleInitOptions {}
 	/**
 	 * Defines the position and size of a rectangle. It is identical to
 	 * #cairo_rectangle_int_t.
 	 */
 	interface Rectangle {}
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		public x: number;
 		public y: number;
 		public width: number;
@@ -6694,11 +6955,12 @@ declare namespace imports.gi.Gdk {
 		 * the rectangles intersect, but not in the intersecting area itself,
 		 * pass %NULL for #dest.
 		 * @param src2 a {@link Rectangle}
-		 * @param dest return location for the
-		 * intersection of #src1 and #src2, or %NULL
 		 * @returns %TRUE if the rectangles intersect.
+		 * 
+		 * return location for the
+		 * intersection of #src1 and #src2, or %NULL
 		 */
-		public intersect(src2: Rectangle, dest: Rectangle | null): boolean;
+		public intersect(src2: Rectangle): [ boolean, Rectangle | null ];
 		/**
 		 * Calculates the union of two rectangles.
 		 * The union of rectangles #src1 and #src2 is the smallest rectangle which
@@ -6708,17 +6970,18 @@ declare namespace imports.gi.Gdk {
 		 * Note that this function does not ignore 'empty' rectangles (ie. with
 		 * zero width or height).
 		 * @param src2 a {@link Rectangle}
-		 * @param dest return location for the union of #src1 and #src2
+		 * @returns return location for the union of #src1 and #src2
 		 */
-		public union(src2: Rectangle, dest: Rectangle): void;
+		public union(src2: Rectangle): Rectangle;
 	}
 
+	export interface TimeCoordInitOptions {}
 	/**
 	 * A {@link TimeCoord} stores a single event in a motion history.
 	 */
 	interface TimeCoord {}
 	class TimeCoord {
-		public constructor();
+		public constructor(options?: Partial<TimeCoordInitOptions>);
 		/**
 		 * The timestamp for this event.
 		 */
@@ -6729,12 +6992,13 @@ declare namespace imports.gi.Gdk {
 		public axes: number[];
 	}
 
+	export interface WindowAttrInitOptions {}
 	/**
 	 * Attributes to use for a newly-created window.
 	 */
 	interface WindowAttr {}
 	class WindowAttr {
-		public constructor();
+		public constructor(options?: Partial<WindowAttrInitOptions>);
 		/**
 		 * title of the window (for toplevel windows)
 		 */
@@ -6794,9 +7058,10 @@ declare namespace imports.gi.Gdk {
 		public type_hint: WindowTypeHint;
 	}
 
+	export interface WindowClassInitOptions {}
 	interface WindowClass {}
 	class WindowClass {
-		public constructor();
+		public constructor(options?: Partial<WindowClassInitOptions>);
 		public pick_embedded_child: {(window: Window, x: number, y: number): Window;};
 		public to_embedder: {(window: Window, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void;};
 		public from_embedder: {(window: Window, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void;};
@@ -6811,9 +7076,10 @@ declare namespace imports.gi.Gdk {
 		public _gdk_reserved8: {(): void;};
 	}
 
+	export interface WindowRedirectInitOptions {}
 	interface WindowRedirect {}
 	class WindowRedirect {
-		public constructor();
+		public constructor(options?: Partial<WindowRedirectInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6850,6 +7116,9 @@ declare namespace imports.gi.Gdk {
 		get_n_groups(): number;
 	}
 
+	type DevicePadInitOptionsMixin  = {};
+	export interface DevicePadInitOptions extends DevicePadInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DevicePad} instead.
 	 */
@@ -6877,7 +7146,7 @@ declare namespace imports.gi.Gdk {
 	interface DevicePad extends DevicePadMixin {}
 
 	class DevicePad {
-		public constructor();
+		public constructor(options?: Partial<DevicePadInitOptions>);
 	}
 
 
@@ -9391,22 +9660,30 @@ declare namespace imports.gi.Gdk {
 		 * Y axis.
 		 * @param event2 second {@link Event}
 		 * @returns %TRUE if the angle could be calculated.
+		 * 
+		 * return location for the relative angle between both events
 		 */
-		_get_angle(event2: Event): boolean;
+		_get_angle(event2: Event): [ boolean, number ];
 		/**
 		 * If both events contain X/Y information, the center of both coordinates
 		 * will be returned in #x and #y.
 		 * @param event2 second {@link Event}
 		 * @returns %TRUE if the center could be calculated.
+		 * 
+		 * return location for the X coordinate of the center
+		 * 
+		 * return location for the Y coordinate of the center
 		 */
-		_get_center(event2: Event): boolean;
+		_get_center(event2: Event): [ boolean, number, number ];
 		/**
 		 * If both events have X/Y information, the distance between both coordinates
 		 * (as in a straight line going from #event1 to #event2) will be returned.
 		 * @param event2 second {@link Event}
 		 * @returns %TRUE if the distance could be calculated.
+		 * 
+		 * return location for the distance
 		 */
-		_get_distance(event2: Event): boolean;
+		_get_distance(event2: Event): [ boolean, number ];
 		/**
 		 * Copies a {@link Event}, copying or incrementing the reference count of the
 		 * resources associated with it (e.g. #GdkWindow’s and strings).
@@ -9426,23 +9703,33 @@ declare namespace imports.gi.Gdk {
 		 * an event structure.
 		 * @param axis_use the axis use to look for
 		 * @returns %TRUE if the specified axis was found, otherwise %FALSE
+		 * 
+		 * location to store the value found
 		 */
-		get_axis(axis_use: AxisUse): boolean;
+		get_axis(axis_use: AxisUse): [ boolean, number ];
 		/**
 		 * Extract the button number from an event.
 		 * @returns %TRUE if the event delivered a button number
+		 * 
+		 * location to store mouse button number
 		 */
-		get_button(): boolean;
+		get_button(): [ boolean, number ];
 		/**
 		 * Extracts the click count from an event.
 		 * @returns %TRUE if the event delivered a click count
+		 * 
+		 * location to store click count
 		 */
-		get_click_count(): boolean;
+		get_click_count(): [ boolean, number ];
 		/**
 		 * Extract the event window relative x/y coordinates from an event.
 		 * @returns %TRUE if the event delivered event window coordinates
+		 * 
+		 * location to put event window x coordinate
+		 * 
+		 * location to put event window y coordinate
 		 */
-		get_coords(): boolean;
+		get_coords(): [ boolean, number | null, number | null ];
 		/**
 		 * If the event contains a “device” field, this function will return
 		 * it, else it will return %NULL.
@@ -9478,13 +9765,17 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Also see gdk_event_get_scancode().
 		 * @returns %TRUE if the event delivered a hardware keycode
+		 * 
+		 * location to store the keycode
 		 */
-		get_keycode(): boolean;
+		get_keycode(): [ boolean, number ];
 		/**
 		 * Extracts the keyval from an event.
 		 * @returns %TRUE if the event delivered a key symbol
+		 * 
+		 * location to store the keyval
 		 */
-		get_keyval(): boolean;
+		get_keyval(): [ boolean, number ];
 		/**
 		 * #event: a {@link Event}
 		 * Returns whether this event is an 'emulated' pointer event (typically
@@ -9495,8 +9786,12 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Extract the root window relative x/y coordinates from an event.
 		 * @returns %TRUE if the event delivered root window coordinates
+		 * 
+		 * location to put root window x coordinate
+		 * 
+		 * location to put root window y coordinate
 		 */
-		get_root_coords(): boolean;
+		get_root_coords(): [ boolean, number | null, number | null ];
 		/**
 		 * Gets the keyboard low-level scancode of a key event.
 		 * 
@@ -9523,8 +9818,12 @@ declare namespace imports.gi.Gdk {
 		 * See also: gdk_event_get_scroll_direction()
 		 * @returns %TRUE if the event contains smooth scroll information
 		 *   and %FALSE otherwise
+		 * 
+		 * return location for X delta
+		 * 
+		 * return location for Y delta
 		 */
-		get_scroll_deltas(): boolean;
+		get_scroll_deltas(): [ boolean, number, number ];
 		/**
 		 * Extracts the scroll direction from an event.
 		 * 
@@ -9566,8 +9865,10 @@ declare namespace imports.gi.Gdk {
 		 * ]|
 		 * @returns %TRUE if the event delivered a scroll direction
 		 *   and %FALSE otherwise
+		 * 
+		 * location to store the scroll direction
 		 */
-		get_scroll_direction(): boolean;
+		get_scroll_direction(): [ boolean, ScrollDirection ];
 		/**
 		 * Returns the {@link Seat} this event was generated for.
 		 * @returns The {@link Seat} of this event
@@ -9592,8 +9893,10 @@ declare namespace imports.gi.Gdk {
 		 * in the event. #event may be %NULL, in which case it’s treated
 		 * as if the event had no state field.
 		 * @returns %TRUE if there was a state field in the event
+		 * 
+		 * return location for state
 		 */
-		get_state(): boolean;
+		get_state(): [ boolean, ModifierType ];
 		/**
 		 * Returns the time stamp from #event, if there is one; otherwise
 		 * returns #GDK_CURRENT_TIME. If #event is %NULL, returns #GDK_CURRENT_TIME.
@@ -9690,6 +9993,35 @@ declare namespace imports.gi.Gdk {
 
 	}
 
+	type EventInitOptionsMixin = Pick<IEvent,
+		"type" |
+		"any" |
+		"expose" |
+		"visibility" |
+		"motion" |
+		"button" |
+		"touch" |
+		"scroll" |
+		"key" |
+		"crossing" |
+		"focus_change" |
+		"configure" |
+		"property" |
+		"selection" |
+		"owner_change" |
+		"proximity" |
+		"dnd" |
+		"window_state" |
+		"setting" |
+		"grab_broken" |
+		"touchpad_swipe" |
+		"touchpad_pinch" |
+		"pad_button" |
+		"pad_axis" |
+		"pad_group_mode">;
+
+	export interface EventInitOptions extends EventInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Event} instead.
 	 */
@@ -9730,7 +10062,7 @@ declare namespace imports.gi.Gdk {
 	interface Event extends EventMixin {}
 
 	class Event {
-		public constructor();
+		public constructor(options?: Partial<EventInitOptions>);
 		/**
 		 * Creates a new event of the given type. All fields are set to 0.
 		 * @param type a {@link EventType}
@@ -9890,11 +10222,12 @@ declare namespace imports.gi.Gdk {
 	 * It rounds the clip extents to integer coordinates and returns
 	 * a boolean indicating if a clip area exists.
 	 * @param cr a cairo context
-	 * @param rect return location for the clip, or %NULL
 	 * @returns %TRUE if a clip rectangle exists, %FALSE if all of #cr is
 	 *     clipped and all drawing can be skipped
+	 * 
+	 * return location for the clip, or %NULL
 	 */
-	function cairo_get_clip_rectangle(cr: cairo.Context, rect: Rectangle | null): boolean;
+	function cairo_get_clip_rectangle(cr: cairo.Context): [ boolean, Rectangle | null ];
 
 	/**
 	 * Retrieves the {@link DrawingContext} that created the Cairo
@@ -9993,10 +10326,11 @@ declare namespace imports.gi.Gdk {
 	 * (White in the four forms is “\#fff”, “\#ffffff”, “\#fffffffff”
 	 * and “\#ffffffffffff”).
 	 * @param spec the string specifying the color
-	 * @param color the {@link Color} to fill in
 	 * @returns %TRUE if the parsing succeeded
+	 * 
+	 * the {@link Color} to fill in
 	 */
-	function color_parse(spec: string, color: Color): boolean;
+	function color_parse(spec: string): [ boolean, Color ];
 
 	/**
 	 * Disables multidevice support in GDK. This call must happen prior
@@ -10297,8 +10631,10 @@ declare namespace imports.gi.Gdk {
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
 	 * @returns %TRUE if the angle could be calculated.
+	 * 
+	 * return location for the relative angle between both events
 	 */
-	function events_get_angle(event1: Event, event2: Event): boolean;
+	function events_get_angle(event1: Event, event2: Event): [ boolean, number ];
 
 	/**
 	 * If both events contain X/Y information, the center of both coordinates
@@ -10306,8 +10642,12 @@ declare namespace imports.gi.Gdk {
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
 	 * @returns %TRUE if the center could be calculated.
+	 * 
+	 * return location for the X coordinate of the center
+	 * 
+	 * return location for the Y coordinate of the center
 	 */
-	function events_get_center(event1: Event, event2: Event): boolean;
+	function events_get_center(event1: Event, event2: Event): [ boolean, number, number ];
 
 	/**
 	 * If both events have X/Y information, the distance between both coordinates
@@ -10315,8 +10655,10 @@ declare namespace imports.gi.Gdk {
 	 * @param event1 first {@link Event}
 	 * @param event2 second {@link Event}
 	 * @returns %TRUE if the distance could be calculated.
+	 * 
+	 * return location for the distance
 	 */
-	function events_get_distance(event1: Event, event2: Event): boolean;
+	function events_get_distance(event1: Event, event2: Event): [ boolean, number ];
 
 	/**
 	 * Checks if any events are ready to be processed for any display.
@@ -10864,12 +11206,27 @@ declare namespace imports.gi.Gdk {
 	 *   when rounded up).
 	 * @param pdelete if %TRUE, delete the property after retrieving the
 	 *   data.
-	 * @param actual_property_type location to store the
-	 *   actual type of the property.
 	 * @returns %TRUE if data was successfully received and stored
 	 *   in #data, otherwise %FALSE.
+	 * 
+	 * location to store the
+	 *   actual type of the property.
+	 * 
+	 * location to store the actual return format of the
+	 *   data; either 8, 16 or 32 bits.
+	 * 
+	 * location to store the length of the retrieved data, in
+	 *   bytes.  Data returned in the 32 bit format is stored
+	 *   in a long variable, so the actual number of 32 bit
+	 *   elements should be be calculated via
+	 *   #actual_length / sizeof(glong) to ensure portability to
+	 *   64 bit systems.
+	 * 
+	 * location
+	 *   to store a pointer to the data. The retrieved data should be
+	 *   freed with g_free() when you are finished using it.
 	 */
-	function property_get(window: Window, property: Atom, type: Atom, offset: number, length: number, pdelete: number, actual_property_type: Atom): boolean;
+	function property_get(window: Window, property: Atom, type: Atom, offset: number, length: number, pdelete: number): [ boolean, Atom, number, number, number[] ];
 
 	/**
 	 * This function returns the available bit depths for the default
@@ -11161,8 +11518,12 @@ declare namespace imports.gi.Gdk {
 	 * @param text the text to convert
 	 * @param length the length of #text, in bytes
 	 * @returns the number of strings in the resulting list
+	 * 
+	 * location to store the list
+	 *            of strings or %NULL. The list should be freed with
+	 *            g_strfreev().
 	 */
-	function text_property_to_utf8_list_for_display(display: Display, encoding: Atom, format: number, text: number[], length: number): number;
+	function text_property_to_utf8_list_for_display(display: Display, encoding: Atom, format: number, text: number[], length: number): [ number, string[] ];
 
 	/**
 	 * A wrapper for the common usage of gdk_threads_add_idle_full()

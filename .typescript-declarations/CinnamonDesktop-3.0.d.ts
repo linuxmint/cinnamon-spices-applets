@@ -49,6 +49,9 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
+	type BGInitOptionsMixin = GObject.ObjectInitOptions
+	export interface BGInitOptions extends BGInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BG} instead.
 	 */
@@ -57,7 +60,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface BG extends BGMixin {}
 
 	class BG {
-		public constructor();
+		public constructor(options?: Partial<BGInitOptions>);
 		public static new(): BG;
 		/**
 		 * This function queries the _XROOTPMAP_ID property from
@@ -162,6 +165,14 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
+	type BGCrossfadeInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IBGCrossfade,
+		"height" |
+		"width" |
+		"parent_object">;
+
+	export interface BGCrossfadeInitOptions extends BGCrossfadeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BGCrossfade} instead.
 	 */
@@ -170,7 +181,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface BGCrossfade extends BGCrossfadeMixin {}
 
 	class BGCrossfade {
-		public constructor();
+		public constructor(options?: Partial<BGCrossfadeInitOptions>);
 		/**
 		 * Creates a new object to manage crossfading a
 		 * window background between two #cairo_surface_ts.
@@ -247,6 +258,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		save_thumbnail(thumbnail: GdkPixbuf.Pixbuf, uri: string, original_mtime: number): void;
 	}
 
+	type DesktopThumbnailFactoryInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DesktopThumbnailFactoryInitOptions extends DesktopThumbnailFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopThumbnailFactory} instead.
 	 */
@@ -255,7 +269,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface DesktopThumbnailFactory extends DesktopThumbnailFactoryMixin {}
 
 	class DesktopThumbnailFactory {
-		public constructor();
+		public constructor(options?: Partial<DesktopThumbnailFactoryInitOptions>);
 		/**
 		 * Creates a new #GnomeDesktopThumbnailFactory.
 		 * 
@@ -279,6 +293,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_pnp_id(pnp_id: string): string;
 	}
 
+	type PnpIdsInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PnpIdsInitOptions extends PnpIdsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PnpIds} instead.
 	 */
@@ -287,7 +304,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface PnpIds extends PnpIdsMixin {}
 
 	class PnpIds {
-		public constructor();
+		public constructor(options?: Partial<PnpIdsInitOptions>);
 		/**
 		 * Returns a reference to a #GnomePnpIds object, or creates
 		 * a new one if none have been created.
@@ -318,6 +335,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_clone(clone: boolean): void;
 	}
 
+	type RRConfigInitOptionsMixin = GObject.ObjectInitOptions
+	export interface RRConfigInitOptions extends RRConfigInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRConfig} instead.
 	 */
@@ -326,7 +346,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRConfig extends RRConfigMixin {}
 
 	class RRConfig {
-		public constructor();
+		public constructor(options?: Partial<RRConfigInitOptions>);
 		public static new_current(screen: RRScreen): RRConfig;
 		public static new_stored(screen: RRScreen): RRConfig;
 		public static apply_from_filename_with_time(screen: RRScreen, filename: string, timestamp: number): boolean;
@@ -342,9 +362,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * Get the color used for the label on a given output (monitor).
 		 * @param output Output device (i.e. monitor) to query
-		 * @param rgba_out Color of selected monitor.
+		 * @returns Color of selected monitor.
 		 */
-		get_rgba_for_output(output: RROutputInfo, rgba_out: Gdk.RGBA): void;
+		get_rgba_for_output(output: RROutputInfo): Gdk.RGBA;
 		/**
 		 * Hide ouput labels.
 		 */
@@ -355,6 +375,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		show(): void;
 	}
 
+	type RRLabelerInitOptionsMixin = GObject.ObjectInitOptions
+	export interface RRLabelerInitOptions extends RRLabelerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRLabeler} instead.
 	 */
@@ -363,7 +386,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRLabeler extends RRLabelerMixin {}
 
 	class RRLabeler {
-		public constructor();
+		public constructor(options?: Partial<RRLabelerInitOptions>);
 		/**
 		 * Create a GUI element that will display colored labels on each connected monitor.
 		 * This is useful when users are required to identify which monitor is which, e.g. for
@@ -393,7 +416,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_rotation(): RRRotation;
 		get_scale(): number;
 		get_serial(): number;
-		get_vendor(vendor: string[]): void;
+		get_vendor(): string[];
 		is_active(): boolean;
 		is_connected(): boolean;
 		set_active(active: boolean): void;
@@ -406,6 +429,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		set_scale(scale: number): void;
 	}
 
+	type RROutputInfoInitOptionsMixin = GObject.ObjectInitOptions
+	export interface RROutputInfoInitOptions extends RROutputInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RROutputInfo} instead.
 	 */
@@ -414,7 +440,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RROutputInfo extends RROutputInfoMixin {}
 
 	class RROutputInfo {
-		public constructor();
+		public constructor(options?: Partial<RROutputInfoInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -529,6 +555,12 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
+	type RRScreenInitOptionsMixin = GObject.ObjectInitOptions & Gio.InitableInitOptions & 
+	Pick<IRRScreen,
+		"gdk_screen">;
+
+	export interface RRScreenInitOptions extends RRScreenInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RRScreen} instead.
 	 */
@@ -537,7 +569,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface RRScreen extends RRScreenMixin {}
 
 	class RRScreen {
-		public constructor();
+		public constructor(options?: Partial<RRScreenInitOptions>);
 		/**
 		 * Creates a unique #GnomeRRScreen instance for the specified #screen.
 		 * @param screen the #GdkScreen on which to operate
@@ -608,6 +640,14 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
+	type WallClockInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWallClock,
+		"clock" |
+		"format_string" |
+		"parent_object">;
+
+	export interface WallClockInitOptions extends WallClockInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WallClock} instead.
 	 */
@@ -616,7 +656,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface WallClock extends WallClockMixin {}
 
 	class WallClock {
-		public constructor();
+		public constructor(options?: Partial<WallClockInitOptions>);
 		/**
 		 * Returns a new GnomeWallClock instance
 		 * @returns A pointer to a new GnomeWallClock instance.
@@ -667,8 +707,20 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * all the (out) parameters are set to %NULL.
 		 * @param id layout's identifier about which to retrieve the info
 		 * @returns %TRUE if the layout exists or %FALSE otherwise.
+		 * 
+		 * location to store
+		 * the layout's display name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's short name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB variant, or %NULL
 		 */
-		get_layout_info(id: string): boolean;
+		get_layout_info(id: string): [ boolean, string | null, string | null, string | null, string | null ];
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
 		 * information about that layout like gnome_xkb_info_get_layout_info().
@@ -677,8 +729,23 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * (out) parameters are set to %NULL.
 		 * @param language an ISO 639 code
 		 * @returns %TRUE if a layout exists or %FALSE otherwise.
+		 * 
+		 * location to store the
+		 * layout's indentifier, or %NULL
+		 * 
+		 * location to store
+		 * the layout's display name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's short name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB name, or %NULL
+		 * 
+		 * location to store
+		 * the layout's XKB variant, or %NULL
 		 */
-		get_layout_info_for_language(language: string): boolean;
+		get_layout_info_for_language(language: string): [ boolean, string | null, string | null, string | null, string | null, string | null ];
 		/**
 		 * Returns a list of all option identifiers we know about for group
 		 * #group_id.
@@ -693,6 +760,12 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
+	type XkbInfoInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IXkbInfo,
+		"parent_object">;
+
+	export interface XkbInfoInitOptions extends XkbInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XkbInfo} instead.
 	 */
@@ -701,7 +774,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	interface XkbInfo extends XkbInfoMixin {}
 
 	class XkbInfo {
-		public constructor();
+		public constructor(options?: Partial<XkbInfoInitOptions>);
 		public static new(): XkbInfo;
 		/**
 		 * Frees an #XkbRF_VarDefsRec instance allocated by
@@ -722,55 +795,65 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static get_var_defs(): [ rules: string, var_defs: any ];
 	}
 
+	export interface BGClassInitOptions {}
 	interface BGClass {}
 	class BGClass {
-		public constructor();
+		public constructor(options?: Partial<BGClassInitOptions>);
 	}
 
+	export interface BGCrossfadeClassInitOptions {}
 	interface BGCrossfadeClass {}
 	class BGCrossfadeClass {
-		public constructor();
+		public constructor(options?: Partial<BGCrossfadeClassInitOptions>);
 		public finished: {(fade: BGCrossfade, window: Gdk.Window): void;};
 	}
 
+	export interface BGCrossfadePrivateInitOptions {}
 	interface BGCrossfadePrivate {}
 	class BGCrossfadePrivate {
-		public constructor();
+		public constructor(options?: Partial<BGCrossfadePrivateInitOptions>);
 	}
 
+	export interface DesktopThumbnailFactoryClassInitOptions {}
 	interface DesktopThumbnailFactoryClass {}
 	class DesktopThumbnailFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<DesktopThumbnailFactoryClassInitOptions>);
 	}
 
+	export interface DesktopThumbnailFactoryPrivateInitOptions {}
 	interface DesktopThumbnailFactoryPrivate {}
 	class DesktopThumbnailFactoryPrivate {
-		public constructor();
+		public constructor(options?: Partial<DesktopThumbnailFactoryPrivateInitOptions>);
 	}
 
+	export interface PnpIdsClassInitOptions {}
 	interface PnpIdsClass {}
 	class PnpIdsClass {
-		public constructor();
+		public constructor(options?: Partial<PnpIdsClassInitOptions>);
 	}
 
+	export interface PnpIdsPrivateInitOptions {}
 	interface PnpIdsPrivate {}
 	class PnpIdsPrivate {
-		public constructor();
+		public constructor(options?: Partial<PnpIdsPrivateInitOptions>);
 	}
 
+	export interface RRConfigClassInitOptions {}
 	interface RRConfigClass {}
 	class RRConfigClass {
-		public constructor();
+		public constructor(options?: Partial<RRConfigClassInitOptions>);
 	}
 
+	export interface RRConfigPrivateInitOptions {}
 	interface RRConfigPrivate {}
 	class RRConfigPrivate {
-		public constructor();
+		public constructor(options?: Partial<RRConfigPrivateInitOptions>);
 	}
 
+	export interface RRCrtcInitOptions {}
 	interface RRCrtc {}
 	class RRCrtc {
-		public constructor();
+		public constructor(options?: Partial<RRCrtcInitOptions>);
 		public can_drive_output(output: RROutput): boolean;
 		public get_current_mode(): RRMode;
 		public get_current_rotation(): RRRotation;
@@ -784,19 +867,22 @@ declare namespace imports.gi.CinnamonDesktop {
 		public supports_rotation(rotation: RRRotation): boolean;
 	}
 
+	export interface RRLabelerClassInitOptions {}
 	interface RRLabelerClass {}
 	class RRLabelerClass {
-		public constructor();
+		public constructor(options?: Partial<RRLabelerClassInitOptions>);
 	}
 
+	export interface RRLabelerPrivateInitOptions {}
 	interface RRLabelerPrivate {}
 	class RRLabelerPrivate {
-		public constructor();
+		public constructor(options?: Partial<RRLabelerPrivateInitOptions>);
 	}
 
+	export interface RRModeInitOptions {}
 	interface RRMode {}
 	class RRMode {
-		public constructor();
+		public constructor(options?: Partial<RRModeInitOptions>);
 		public get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
 		public get_freq(): number;
 		public get_freq_f(): number;
@@ -805,9 +891,10 @@ declare namespace imports.gi.CinnamonDesktop {
 		public get_width(): number;
 	}
 
+	export interface RROutputInitOptions {}
 	interface RROutput {}
 	class RROutput {
-		public constructor();
+		public constructor(options?: Partial<RROutputInitOptions>);
 		public can_clone(clone: RROutput): boolean;
 		public get_backlight(): number;
 		public get_backlight_max(): number;
@@ -833,47 +920,55 @@ declare namespace imports.gi.CinnamonDesktop {
 		public supports_mode(mode: RRMode): boolean;
 	}
 
+	export interface RROutputInfoClassInitOptions {}
 	interface RROutputInfoClass {}
 	class RROutputInfoClass {
-		public constructor();
+		public constructor(options?: Partial<RROutputInfoClassInitOptions>);
 	}
 
+	export interface RROutputInfoPrivateInitOptions {}
 	interface RROutputInfoPrivate {}
 	class RROutputInfoPrivate {
-		public constructor();
+		public constructor(options?: Partial<RROutputInfoPrivateInitOptions>);
 	}
 
+	export interface RRScreenClassInitOptions {}
 	interface RRScreenClass {}
 	class RRScreenClass {
-		public constructor();
+		public constructor(options?: Partial<RRScreenClassInitOptions>);
 		public changed: {(): void;};
 		public output_connected: {(output: RROutput): void;};
 		public output_disconnected: {(output: RROutput): void;};
 	}
 
+	export interface RRScreenPrivateInitOptions {}
 	interface RRScreenPrivate {}
 	class RRScreenPrivate {
-		public constructor();
+		public constructor(options?: Partial<RRScreenPrivateInitOptions>);
 	}
 
+	export interface WallClockClassInitOptions {}
 	interface WallClockClass {}
 	class WallClockClass {
-		public constructor();
+		public constructor(options?: Partial<WallClockClassInitOptions>);
 	}
 
+	export interface WallClockPrivateInitOptions {}
 	interface WallClockPrivate {}
 	class WallClockPrivate {
-		public constructor();
+		public constructor(options?: Partial<WallClockPrivateInitOptions>);
 	}
 
+	export interface XkbInfoClassInitOptions {}
 	interface XkbInfoClass {}
 	class XkbInfoClass {
-		public constructor();
+		public constructor(options?: Partial<XkbInfoClassInitOptions>);
 	}
 
+	export interface XkbInfoPrivateInitOptions {}
 	interface XkbInfoPrivate {}
 	class XkbInfoPrivate {
-		public constructor();
+		public constructor(options?: Partial<XkbInfoPrivateInitOptions>);
 	}
 
 	enum DesktopThumbnailSize {

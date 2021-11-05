@@ -11,6 +11,9 @@ declare namespace imports.gi.Atk {
 		get_object(): GObject.Object;
 	}
 
+	type GObjectAccessibleInitOptionsMixin = ObjectInitOptions
+	export interface GObjectAccessibleInitOptions extends GObjectAccessibleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GObjectAccessible} instead.
 	 */
@@ -25,7 +28,7 @@ declare namespace imports.gi.Atk {
 	interface GObjectAccessible extends GObjectAccessibleMixin {}
 
 	class GObjectAccessible {
-		public constructor();
+		public constructor(options?: Partial<GObjectAccessibleInitOptions>);
 		/**
 		 * Gets the accessible object for the specified #obj.
 		 * @param obj a #GObject
@@ -114,6 +117,15 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type HyperlinkInitOptionsMixin = GObject.ObjectInitOptions & ActionInitOptions & 
+	Pick<IHyperlink,
+		"end_index" |
+		"number_of_anchors" |
+		"selected_link" |
+		"start_index">;
+
+	export interface HyperlinkInitOptions extends HyperlinkInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Hyperlink} instead.
 	 */
@@ -130,7 +142,7 @@ declare namespace imports.gi.Atk {
 	interface Hyperlink extends HyperlinkMixin {}
 
 	class Hyperlink {
-		public constructor();
+		public constructor(options?: Partial<HyperlinkInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -158,6 +170,9 @@ declare namespace imports.gi.Atk {
 		threads_leave(): void;
 	}
 
+	type MiscInitOptionsMixin = GObject.ObjectInitOptions
+	export interface MiscInitOptions extends MiscInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Misc} instead.
 	 */
@@ -170,7 +185,7 @@ declare namespace imports.gi.Atk {
 	interface Misc extends MiscMixin {}
 
 	class Misc {
-		public constructor();
+		public constructor(options?: Partial<MiscInitOptions>);
 		/**
 		 * Obtain the singleton instance of AtkMisc for this application.
 		 * @returns The singleton instance of AtkMisc for this application.
@@ -184,6 +199,9 @@ declare namespace imports.gi.Atk {
 	interface INoOpObject {
 
 	}
+
+	type NoOpObjectInitOptionsMixin = ObjectInitOptions & ActionInitOptions & ComponentInitOptions & DocumentInitOptions & EditableTextInitOptions & HypertextInitOptions & ImageInitOptions & SelectionInitOptions & TableInitOptions & TableCellInitOptions & TextInitOptions & ValueInitOptions & WindowInitOptions
+	export interface NoOpObjectInitOptions extends NoOpObjectInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObject} instead.
@@ -199,7 +217,7 @@ declare namespace imports.gi.Atk {
 	// interface NoOpObject extends NoOpObjectMixin {}
 
 	class NoOpObject {
-		public constructor();
+		public constructor(options?: Partial<NoOpObjectInitOptions>);
 		/**
 		 * Provides a default (non-functioning stub) {@link Object}.
 		 * Application maintainers should not use this method.
@@ -216,6 +234,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type NoOpObjectFactoryInitOptionsMixin = ObjectFactoryInitOptions
+	export interface NoOpObjectFactoryInitOptions extends NoOpObjectFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NoOpObjectFactory} instead.
 	 */
@@ -229,7 +250,7 @@ declare namespace imports.gi.Atk {
 	interface NoOpObjectFactory extends NoOpObjectFactoryMixin {}
 
 	class NoOpObjectFactory {
-		public constructor();
+		public constructor(options?: Partial<NoOpObjectFactoryInitOptions>);
 		/**
 		 * Creates an instance of an {@link ObjectFactory} which generates primitive
 		 * (non-functioning) #AtkObjects.
@@ -542,6 +563,32 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type ObjectInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IObject,
+		"accessible_component_layer" |
+		"accessible_component_mdi_zorder" |
+		"accessible_description" |
+		"accessible_hypertext_nlinks" |
+		"accessible_name" |
+		"accessible_parent" |
+		"accessible_role" |
+		"accessible_table_caption" |
+		"accessible_table_caption_object" |
+		"accessible_table_column_description" |
+		"accessible_table_column_header" |
+		"accessible_table_row_description" |
+		"accessible_table_row_header" |
+		"accessible_table_summary" |
+		"accessible_value" |
+		"description" |
+		"name" |
+		"accessible_parent" |
+		"role" |
+		"relation_set" |
+		"layer">;
+
+	export interface ObjectInitOptions extends ObjectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Object} instead.
 	 */
@@ -572,7 +619,7 @@ declare namespace imports.gi.Atk {
 	interface Object extends ObjectMixin {}
 
 	class Object {
-		public constructor();
+		public constructor(options?: Partial<ObjectInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -603,6 +650,9 @@ declare namespace imports.gi.Atk {
 		invalidate(): void;
 	}
 
+	type ObjectFactoryInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ObjectFactoryInitOptions extends ObjectFactoryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ObjectFactory} instead.
 	 */
@@ -618,7 +668,7 @@ declare namespace imports.gi.Atk {
 	interface ObjectFactory extends ObjectFactoryMixin {}
 
 	class ObjectFactory {
-		public constructor();
+		public constructor(options?: Partial<ObjectFactoryInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -652,6 +702,9 @@ declare namespace imports.gi.Atk {
 		set_child(child: Object): void;
 	}
 
+	type PlugInitOptionsMixin = ObjectInitOptions & ComponentInitOptions
+	export interface PlugInitOptions extends PlugInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plug} instead.
 	 */
@@ -663,7 +716,7 @@ declare namespace imports.gi.Atk {
 	interface Plug extends PlugMixin {}
 
 	class Plug {
-		public constructor();
+		public constructor(options?: Partial<PlugInitOptions>);
 		/**
 		 * Creates a new {@link Plug} instance.
 		 * @returns the newly created {@link Plug}
@@ -708,6 +761,13 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type RegistryInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRegistry,
+		"factory_type_registry" |
+		"factory_singleton_cache">;
+
+	export interface RegistryInitOptions extends RegistryInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Registry} instead.
 	 */
@@ -724,7 +784,7 @@ declare namespace imports.gi.Atk {
 	interface Registry extends RegistryMixin {}
 
 	class Registry {
-		public constructor();
+		public constructor(options?: Partial<RegistryInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -764,6 +824,15 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type RelationInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRelation,
+		"relation_type" |
+		"target" |
+		"target" |
+		"relationship">;
+
+	export interface RelationInitOptions extends RelationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Relation} instead.
 	 */
@@ -778,7 +847,7 @@ declare namespace imports.gi.Atk {
 	interface Relation extends RelationMixin {}
 
 	class Relation {
-		public constructor();
+		public constructor(options?: Partial<RelationInitOptions>);
 		/**
 		 * Create a new relation for the specified key and the specified list
 		 * of targets.  See also atk_object_add_relationship().
@@ -863,6 +932,12 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type RelationSetInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRelationSet,
+		"relations">;
+
+	export interface RelationSetInitOptions extends RelationSetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RelationSet} instead.
 	 */
@@ -881,7 +956,7 @@ declare namespace imports.gi.Atk {
 	interface RelationSet extends RelationSetMixin {}
 
 	class RelationSet {
-		public constructor();
+		public constructor(options?: Partial<RelationSetInitOptions>);
 		/**
 		 * Creates a new empty relation set.
 		 * @returns a new {@link RelationSet}
@@ -913,6 +988,9 @@ declare namespace imports.gi.Atk {
 		 */
 		is_occupied(): boolean;
 	}
+
+	type SocketInitOptionsMixin = ObjectInitOptions & ComponentInitOptions
+	export interface SocketInitOptions extends SocketInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
@@ -946,7 +1024,7 @@ declare namespace imports.gi.Atk {
 	interface Socket extends SocketMixin {}
 
 	class Socket {
-		public constructor();
+		public constructor(options?: Partial<SocketInitOptions>);
 		/**
 		 * Creates a new {@link Socket}.
 		 * @returns the newly created {@link Socket} instance
@@ -1041,6 +1119,9 @@ declare namespace imports.gi.Atk {
 		xor_sets(compare_set: StateSet): StateSet;
 	}
 
+	type StateSetInitOptionsMixin = GObject.ObjectInitOptions
+	export interface StateSetInitOptions extends StateSetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StateSet} instead.
 	 */
@@ -1054,7 +1135,7 @@ declare namespace imports.gi.Atk {
 	interface StateSet extends StateSetMixin {}
 
 	class StateSet {
-		public constructor();
+		public constructor(options?: Partial<StateSetInitOptions>);
 		/**
 		 * Creates a new empty state set.
 		 * @returns a new {@link StateSet}
@@ -1068,6 +1149,9 @@ declare namespace imports.gi.Atk {
 	interface IUtil {
 
 	}
+
+	type UtilInitOptionsMixin = GObject.ObjectInitOptions
+	export interface UtilInitOptions extends UtilInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Util} instead.
@@ -1083,9 +1167,10 @@ declare namespace imports.gi.Atk {
 	interface Util extends UtilMixin {}
 
 	class Util {
-		public constructor();
+		public constructor(options?: Partial<UtilInitOptions>);
 	}
 
+	export interface ActionIfaceInitOptions {}
 	/**
 	 * The {@link Action} interface should be supported by any object that can
 	 * perform one or more actions. The interface provides the standard
@@ -1095,7 +1180,7 @@ declare namespace imports.gi.Atk {
 	 */
 	interface ActionIface {}
 	class ActionIface {
-		public constructor();
+		public constructor(options?: Partial<ActionIfaceInitOptions>);
 		public do_action: {(action: Action, i: number): boolean;};
 		public get_n_actions: {(action: Action): number;};
 		public get_description: {(action: Action, i: number): string | null;};
@@ -1105,6 +1190,7 @@ declare namespace imports.gi.Atk {
 		public get_localized_name: {(action: Action, i: number): string | null;};
 	}
 
+	export interface AttributeInitOptions {}
 	/**
 	 * AtkAttribute is a string name/value pair representing a generic
 	 * attribute. This can be used to expose additional information from
@@ -1120,7 +1206,7 @@ declare namespace imports.gi.Atk {
 	 */
 	interface Attribute {}
 	class Attribute {
-		public constructor();
+		public constructor(options?: Partial<AttributeInitOptions>);
 		/**
 		 * The attribute name.
 		 */
@@ -1131,6 +1217,7 @@ declare namespace imports.gi.Atk {
 		public value: string;
 	}
 
+	export interface ComponentIfaceInitOptions {}
 	/**
 	 * The AtkComponent interface should be supported by any object that is
 	 * rendered on the screen. The interface provides the standard mechanism
@@ -1139,7 +1226,7 @@ declare namespace imports.gi.Atk {
 	 */
 	interface ComponentIface {}
 	class ComponentIface {
-		public constructor();
+		public constructor(options?: Partial<ComponentIfaceInitOptions>);
 		public add_focus_handler: {(component: Component, handler: FocusHandler): number;};
 		public contains: {(component: Component, x: number, y: number, coord_type: CoordType): boolean;};
 		public ref_accessible_at_point: {(component: Component, x: number, y: number, coord_type: CoordType): Object | null;};
@@ -1159,9 +1246,10 @@ declare namespace imports.gi.Atk {
 		public scroll_to_point: {(component: Component, coords: CoordType, x: number, y: number): boolean;};
 	}
 
+	export interface DocumentIfaceInitOptions {}
 	interface DocumentIface {}
 	class DocumentIface {
-		public constructor();
+		public constructor(options?: Partial<DocumentIfaceInitOptions>);
 		public get_document_type: {(document: Document): string;};
 		public get_document: {(document: Document): any | null;};
 		public get_document_locale: {(document: Document): string;};
@@ -1172,9 +1260,10 @@ declare namespace imports.gi.Atk {
 		public get_page_count: {(document: Document): number;};
 	}
 
+	export interface EditableTextIfaceInitOptions {}
 	interface EditableTextIface {}
 	class EditableTextIface {
-		public constructor();
+		public constructor(options?: Partial<EditableTextIfaceInitOptions>);
 		public readonly parent_interface: GObject.TypeInterface;
 		public set_run_attributes: {(text: EditableText, attrib_set: AttributeSet, start_offset: number, end_offset: number): boolean;};
 		public set_text_contents: {(text: EditableText, string: string): void;};
@@ -1185,16 +1274,18 @@ declare namespace imports.gi.Atk {
 		public paste_text: {(text: EditableText, position: number): void;};
 	}
 
+	export interface GObjectAccessibleClassInitOptions {}
 	interface GObjectAccessibleClass {}
 	class GObjectAccessibleClass {
-		public constructor();
+		public constructor(options?: Partial<GObjectAccessibleClassInitOptions>);
 		public readonly pad1: Function;
 		public readonly pad2: Function;
 	}
 
+	export interface HyperlinkClassInitOptions {}
 	interface HyperlinkClass {}
 	class HyperlinkClass {
-		public constructor();
+		public constructor(options?: Partial<HyperlinkClassInitOptions>);
 		public readonly pad1: Function;
 		public get_uri: {(link_: Hyperlink, i: number): string;};
 		public get_object: {(link_: Hyperlink, i: number): Object;};
@@ -1207,24 +1298,27 @@ declare namespace imports.gi.Atk {
 		public link_activated: {(link_: Hyperlink): void;};
 	}
 
+	export interface HyperlinkImplIfaceInitOptions {}
 	interface HyperlinkImplIface {}
 	class HyperlinkImplIface {
-		public constructor();
+		public constructor(options?: Partial<HyperlinkImplIfaceInitOptions>);
 		public get_hyperlink: {(impl: HyperlinkImpl): Hyperlink;};
 	}
 
+	export interface HypertextIfaceInitOptions {}
 	interface HypertextIface {}
 	class HypertextIface {
-		public constructor();
+		public constructor(options?: Partial<HypertextIfaceInitOptions>);
 		public get_link: {(hypertext: Hypertext, link_index: number): Hyperlink;};
 		public get_n_links: {(hypertext: Hypertext): number;};
 		public get_link_index: {(hypertext: Hypertext, char_index: number): number;};
 		public link_selected: {(hypertext: Hypertext, link_index: number): void;};
 	}
 
+	export interface ImageIfaceInitOptions {}
 	interface ImageIface {}
 	class ImageIface {
-		public constructor();
+		public constructor(options?: Partial<ImageIfaceInitOptions>);
 		public get_image_position: {(image: Image, coord_type: CoordType): [ x: number | null, y: number | null ];};
 		public get_image_description: {(image: Image): string;};
 		public get_image_size: {(image: Image): [ width: number | null, height: number | null ];};
@@ -1232,9 +1326,10 @@ declare namespace imports.gi.Atk {
 		public get_image_locale: {(image: Image): string | null;};
 	}
 
+	export interface ImplementorInitOptions {}
 	interface Implementor {}
 	class Implementor {
-		public constructor();
+		public constructor(options?: Partial<ImplementorInitOptions>);
 		/**
 		 * Gets a reference to an object's {@link Object} implementation, if
 		 * the object implements #AtkObjectIface
@@ -1244,12 +1339,13 @@ declare namespace imports.gi.Atk {
 		public ref_accessible(): Object;
 	}
 
+	export interface KeyEventStructInitOptions {}
 	/**
 	 * Encapsulates information about a key event.
 	 */
 	interface KeyEventStruct {}
 	class KeyEventStruct {
-		public constructor();
+		public constructor(options?: Partial<KeyEventStructInitOptions>);
 		/**
 		 * An AtkKeyEventType, generally one of ATK_KEY_EVENT_PRESS or ATK_KEY_EVENT_RELEASE
 		 */
@@ -1289,30 +1385,34 @@ declare namespace imports.gi.Atk {
 		public timestamp: number;
 	}
 
+	export interface MiscClassInitOptions {}
 	/**
 	 * Usage of AtkMisc is deprecated since 2.12 and heavily discouraged.
 	 */
 	interface MiscClass {}
 	class MiscClass {
-		public constructor();
+		public constructor(options?: Partial<MiscClassInitOptions>);
 		public readonly vfuncs: any[];
 		public threads_enter: {(misc: Misc): void;};
 		public threads_leave: {(misc: Misc): void;};
 	}
 
+	export interface NoOpObjectClassInitOptions {}
 	interface NoOpObjectClass {}
 	class NoOpObjectClass {
-		public constructor();
+		public constructor(options?: Partial<NoOpObjectClassInitOptions>);
 	}
 
+	export interface NoOpObjectFactoryClassInitOptions {}
 	interface NoOpObjectFactoryClass {}
 	class NoOpObjectFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<NoOpObjectFactoryClassInitOptions>);
 	}
 
+	export interface ObjectClassInitOptions {}
 	interface ObjectClass {}
 	class ObjectClass {
-		public constructor();
+		public constructor(options?: Partial<ObjectClassInitOptions>);
 		public readonly pad1: Function;
 		public get_name: {(accessible: Object): string;};
 		public get_description: {(accessible: Object): string;};
@@ -1342,9 +1442,10 @@ declare namespace imports.gi.Atk {
 		public get_object_locale: {(accessible: Object): string;};
 	}
 
+	export interface ObjectFactoryClassInitOptions {}
 	interface ObjectFactoryClass {}
 	class ObjectFactoryClass {
-		public constructor();
+		public constructor(options?: Partial<ObjectFactoryClassInitOptions>);
 		public readonly pad1: Function;
 		public readonly pad2: Function;
 		public create_accessible: {(obj: GObject.Object): Object;};
@@ -1352,12 +1453,14 @@ declare namespace imports.gi.Atk {
 		public get_accessible_type: {(): GObject.Type;};
 	}
 
+	export interface PlugClassInitOptions {}
 	interface PlugClass {}
 	class PlugClass {
-		public constructor();
+		public constructor(options?: Partial<PlugClassInitOptions>);
 		public get_object_id: {(obj: Plug): string;};
 	}
 
+	export interface PropertyValuesInitOptions {}
 	/**
 	 * Note: #old_value field of {@link PropertyValues} will not contain a
 	 * valid value. This is a field defined with the purpose of contain
@@ -1365,7 +1468,7 @@ declare namespace imports.gi.Atk {
 	 */
 	interface PropertyValues {}
 	class PropertyValues {
-		public constructor();
+		public constructor(options?: Partial<PropertyValuesInitOptions>);
 		/**
 		 * The name of the ATK property which has changed.
 		 */
@@ -1380,6 +1483,7 @@ declare namespace imports.gi.Atk {
 		public new_value: GObject.Value;
 	}
 
+	export interface RangeInitOptions {}
 	/**
 	 * {@link Range} are used on #AtkValue, in order to represent the full
 	 * range of a given component (for example an slider or a range
@@ -1389,7 +1493,7 @@ declare namespace imports.gi.Atk {
 	 */
 	interface Range {}
 	class Range {
-		public constructor();
+		public constructor(options?: Partial<RangeInitOptions>);
 		/**
 		 * Creates a new {@link Range}.
 		 * @param lower_limit inferior limit for this range
@@ -1424,13 +1528,14 @@ declare namespace imports.gi.Atk {
 		public get_upper_limit(): number;
 	}
 
+	export interface RectangleInitOptions {}
 	/**
 	 * A data structure for holding a rectangle. Those coordinates are
 	 * relative to the component top-level parent.
 	 */
 	interface Rectangle {}
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		/**
 		 * X coordinate of the left side of the rectangle.
 		 */
@@ -1449,26 +1554,30 @@ declare namespace imports.gi.Atk {
 		public height: number;
 	}
 
+	export interface RegistryClassInitOptions {}
 	interface RegistryClass {}
 	class RegistryClass {
-		public constructor();
+		public constructor(options?: Partial<RegistryClassInitOptions>);
 	}
 
+	export interface RelationClassInitOptions {}
 	interface RelationClass {}
 	class RelationClass {
-		public constructor();
+		public constructor(options?: Partial<RelationClassInitOptions>);
 	}
 
+	export interface RelationSetClassInitOptions {}
 	interface RelationSetClass {}
 	class RelationSetClass {
-		public constructor();
+		public constructor(options?: Partial<RelationSetClassInitOptions>);
 		public readonly pad1: Function;
 		public readonly pad2: Function;
 	}
 
+	export interface SelectionIfaceInitOptions {}
 	interface SelectionIface {}
 	class SelectionIface {
-		public constructor();
+		public constructor(options?: Partial<SelectionIfaceInitOptions>);
 		public add_selection: {(selection: Selection, i: number): boolean;};
 		public clear_selection: {(selection: Selection): boolean;};
 		public ref_selection: {(selection: Selection, i: number): Object | null;};
@@ -1479,20 +1588,23 @@ declare namespace imports.gi.Atk {
 		public selection_changed: {(selection: Selection): void;};
 	}
 
+	export interface SocketClassInitOptions {}
 	interface SocketClass {}
 	class SocketClass {
-		public constructor();
+		public constructor(options?: Partial<SocketClassInitOptions>);
 		public embed: {(obj: Socket, plug_id: string): void;};
 	}
 
+	export interface StateSetClassInitOptions {}
 	interface StateSetClass {}
 	class StateSetClass {
-		public constructor();
+		public constructor(options?: Partial<StateSetClassInitOptions>);
 	}
 
+	export interface StreamableContentIfaceInitOptions {}
 	interface StreamableContentIface {}
 	class StreamableContentIface {
-		public constructor();
+		public constructor(options?: Partial<StreamableContentIfaceInitOptions>);
 		public readonly pad1: Function;
 		public readonly pad2: Function;
 		public readonly pad3: Function;
@@ -1502,24 +1614,26 @@ declare namespace imports.gi.Atk {
 		public get_uri: {(streamable: StreamableContent, mime_type: string): string | null;};
 	}
 
+	export interface TableCellIfaceInitOptions {}
 	/**
 	 * AtkTableCell is an interface for cells inside an {@link Table}.
 	 */
 	interface TableCellIface {}
 	class TableCellIface {
-		public constructor();
+		public constructor(options?: Partial<TableCellIfaceInitOptions>);
 		public get_column_span: {(cell: TableCell): number;};
 		public get_column_header_cells: {(cell: TableCell): Object[];};
-		public get_position: {(cell: TableCell): boolean;};
+		public get_position: {(cell: TableCell): [ boolean, number, number ];};
 		public get_row_span: {(cell: TableCell): number;};
 		public get_row_header_cells: {(cell: TableCell): Object[];};
-		public get_row_column_span: {(cell: TableCell): boolean;};
+		public get_row_column_span: {(cell: TableCell): [ boolean, number, number, number, number ];};
 		public get_table: {(cell: TableCell): Object;};
 	}
 
+	export interface TableIfaceInitOptions {}
 	interface TableIface {}
 	class TableIface {
-		public constructor();
+		public constructor(options?: Partial<TableIfaceInitOptions>);
 		public ref_at: {(table: Table, row: number, column: number): Object;};
 		public get_index_at: {(table: Table, row: number, column: number): number;};
 		public get_column_at_index: {(table: Table, index_: number): number;};
@@ -1558,22 +1672,23 @@ declare namespace imports.gi.Atk {
 		public model_changed: {(table: Table): void;};
 	}
 
+	export interface TextIfaceInitOptions {}
 	interface TextIface {}
 	class TextIface {
-		public constructor();
+		public constructor(options?: Partial<TextIfaceInitOptions>);
 		public get_text: {(text: Text, start_offset: number, end_offset: number): string;};
-		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
-		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_after_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
+		public get_text_at_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
 		public get_character_at_offset: {(text: Text, offset: number): string;};
-		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): string;};
+		public get_text_before_offset: {(text: Text, offset: number, boundary_type: TextBoundary): [ string, number, number ];};
 		public get_caret_offset: {(text: Text): number;};
-		public get_run_attributes: {(text: Text, offset: number): AttributeSet;};
+		public get_run_attributes: {(text: Text, offset: number): [ AttributeSet, number, number ];};
 		public get_default_attributes: {(text: Text): AttributeSet;};
 		public get_character_extents: {(text: Text, offset: number, coords: CoordType): [ x: number | null, y: number | null, width: number | null, height: number | null ];};
 		public get_character_count: {(text: Text): number;};
 		public get_offset_at_point: {(text: Text, x: number, y: number, coords: CoordType): number;};
 		public get_n_selections: {(text: Text): number;};
-		public get_selection: {(text: Text, selection_num: number): string;};
+		public get_selection: {(text: Text, selection_num: number): [ string, number, number ];};
 		public add_selection: {(text: Text, start_offset: number, end_offset: number): boolean;};
 		public remove_selection: {(text: Text, selection_num: number): boolean;};
 		public set_selection: {(text: Text, selection_num: number, start_offset: number, end_offset: number): boolean;};
@@ -1582,19 +1697,20 @@ declare namespace imports.gi.Atk {
 		public text_caret_moved: {(text: Text, location: number): void;};
 		public text_selection_changed: {(text: Text): void;};
 		public text_attributes_changed: {(text: Text): void;};
-		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;};
+		public get_range_extents: {(text: Text, start_offset: number, end_offset: number, coord_type: CoordType): TextRectangle;};
 		public get_bounded_ranges: {(text: Text, rect: TextRectangle, coord_type: CoordType, x_clip_type: TextClipType, y_clip_type: TextClipType): TextRange[];};
-		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): string | null;};
+		public get_string_at_offset: {(text: Text, offset: number, granularity: TextGranularity): [ string | null, number, number ];};
 		public scroll_substring_to: {(text: Text, start_offset: number, end_offset: number, type: ScrollType): boolean;};
 		public scroll_substring_to_point: {(text: Text, start_offset: number, end_offset: number, coords: CoordType, x: number, y: number): boolean;};
 	}
 
+	export interface TextRangeInitOptions {}
 	/**
 	 * A structure used to describe a text range.
 	 */
 	interface TextRange {}
 	class TextRange {
-		public constructor();
+		public constructor(options?: Partial<TextRangeInitOptions>);
 		/**
 		 * A rectangle giving the bounds of the text range
 		 */
@@ -1613,12 +1729,13 @@ declare namespace imports.gi.Atk {
 		public content: string;
 	}
 
+	export interface TextRectangleInitOptions {}
 	/**
 	 * A structure used to store a rectangle used by AtkText.
 	 */
 	interface TextRectangle {}
 	class TextRectangle {
-		public constructor();
+		public constructor(options?: Partial<TextRectangleInitOptions>);
 		/**
 		 * The horizontal coordinate of a rectangle
 		 */
@@ -1637,9 +1754,10 @@ declare namespace imports.gi.Atk {
 		public height: number;
 	}
 
+	export interface UtilClassInitOptions {}
 	interface UtilClass {}
 	class UtilClass {
-		public constructor();
+		public constructor(options?: Partial<UtilClassInitOptions>);
 		public add_global_event_listener: {(listener: GObject.SignalEmissionHook, event_type: string): number;};
 		public remove_global_event_listener: {(listener_id: number): void;};
 		public add_key_event_listener: {(listener: KeySnoopFunc, data: any | null): number;};
@@ -1649,14 +1767,15 @@ declare namespace imports.gi.Atk {
 		public get_toolkit_version: {(): string;};
 	}
 
+	export interface ValueIfaceInitOptions {}
 	interface ValueIface {}
 	class ValueIface {
-		public constructor();
-		public get_current_value: {(obj: Value, value: GObject.Value): void;};
-		public get_maximum_value: {(obj: Value, value: GObject.Value): void;};
-		public get_minimum_value: {(obj: Value, value: GObject.Value): void;};
+		public constructor(options?: Partial<ValueIfaceInitOptions>);
+		public get_current_value: {(obj: Value): GObject.Value;};
+		public get_maximum_value: {(obj: Value): GObject.Value;};
+		public get_minimum_value: {(obj: Value): GObject.Value;};
 		public set_current_value: {(obj: Value, value: GObject.Value): boolean;};
-		public get_minimum_increment: {(obj: Value, value: GObject.Value): void;};
+		public get_minimum_increment: {(obj: Value): GObject.Value;};
 		public get_value_and_text: {(obj: Value): [ value: number, text: string | null ];};
 		public get_range: {(obj: Value): Range | null;};
 		public get_increment: {(obj: Value): number;};
@@ -1664,9 +1783,10 @@ declare namespace imports.gi.Atk {
 		public set_value: {(obj: Value, new_value: number): void;};
 	}
 
+	export interface WindowIfaceInitOptions {}
 	interface WindowIface {}
 	class WindowIface {
-		public constructor();
+		public constructor(options?: Partial<WindowIfaceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1758,6 +1878,9 @@ declare namespace imports.gi.Atk {
 		// set_description(i: number, desc: string): boolean;
 	}
 
+	type ActionInitOptionsMixin  = {};
+	export interface ActionInitOptions extends ActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
@@ -1785,7 +1908,7 @@ declare namespace imports.gi.Atk {
 	interface Action extends ActionMixin {}
 
 	class Action {
-		public constructor();
+		public constructor(options?: Partial<ActionInitOptions>);
 	}
 
 
@@ -1958,6 +2081,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type ComponentInitOptionsMixin  = {};
+	export interface ComponentInitOptions extends ComponentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Component} instead.
 	 */
@@ -1978,7 +2104,7 @@ declare namespace imports.gi.Atk {
 	interface Component extends ComponentMixin {}
 
 	class Component {
-		public constructor();
+		public constructor(options?: Partial<ComponentInitOptions>);
 	}
 
 
@@ -2087,6 +2213,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type DocumentInitOptionsMixin  = {};
+	export interface DocumentInitOptions extends DocumentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Document} instead.
 	 */
@@ -2104,7 +2233,7 @@ declare namespace imports.gi.Atk {
 	interface Document extends DocumentMixin {}
 
 	class Document {
-		public constructor();
+		public constructor(options?: Partial<DocumentInitOptions>);
 	}
 
 
@@ -2166,6 +2295,9 @@ declare namespace imports.gi.Atk {
 		set_text_contents(string: string): void;
 	}
 
+	type EditableTextInitOptionsMixin  = {};
+	export interface EditableTextInitOptions extends EditableTextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EditableText} instead.
 	 */
@@ -2185,7 +2317,7 @@ declare namespace imports.gi.Atk {
 	interface EditableText extends EditableTextMixin {}
 
 	class EditableText {
-		public constructor();
+		public constructor(options?: Partial<EditableTextInitOptions>);
 	}
 
 
@@ -2201,6 +2333,9 @@ declare namespace imports.gi.Atk {
 		 */
 		get_hyperlink(): Hyperlink;
 	}
+
+	type HyperlinkImplInitOptionsMixin  = {};
+	export interface HyperlinkImplInitOptions extends HyperlinkImplInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HyperlinkImpl} instead.
@@ -2240,7 +2375,7 @@ declare namespace imports.gi.Atk {
 	interface HyperlinkImpl extends HyperlinkImplMixin {}
 
 	class HyperlinkImpl {
-		public constructor();
+		public constructor(options?: Partial<HyperlinkImplInitOptions>);
 	}
 
 
@@ -2279,6 +2414,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type HypertextInitOptionsMixin  = {};
+	export interface HypertextInitOptions extends HypertextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Hypertext} instead.
 	 */
@@ -2297,7 +2435,7 @@ declare namespace imports.gi.Atk {
 	interface Hypertext extends HypertextMixin {}
 
 	class Hypertext {
-		public constructor();
+		public constructor(options?: Partial<HypertextInitOptions>);
 	}
 
 
@@ -2352,6 +2490,9 @@ declare namespace imports.gi.Atk {
 		set_image_description(description: string): boolean;
 	}
 
+	type ImageInitOptionsMixin  = {};
+	export interface ImageInitOptions extends ImageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
@@ -2375,7 +2516,7 @@ declare namespace imports.gi.Atk {
 	interface Image extends ImageMixin {}
 
 	class Image {
-		public constructor();
+		public constructor(options?: Partial<ImageInitOptions>);
 	}
 
 
@@ -2386,6 +2527,9 @@ declare namespace imports.gi.Atk {
 	interface IImplementorIface {
 
 	}
+
+	type ImplementorIfaceInitOptionsMixin  = {};
+	export interface ImplementorIfaceInitOptions extends ImplementorIfaceInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ImplementorIface} instead.
@@ -2400,7 +2544,7 @@ declare namespace imports.gi.Atk {
 	interface ImplementorIface extends ImplementorIfaceMixin {}
 
 	class ImplementorIface {
-		public constructor();
+		public constructor(options?: Partial<ImplementorIfaceInitOptions>);
 	}
 
 
@@ -2478,6 +2622,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type SelectionInitOptionsMixin  = {};
+	export interface SelectionInitOptions extends SelectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Selection} instead.
 	 */
@@ -2498,7 +2645,7 @@ declare namespace imports.gi.Atk {
 	interface Selection extends SelectionMixin {}
 
 	class Selection {
-		public constructor();
+		public constructor(options?: Partial<SelectionInitOptions>);
 	}
 
 
@@ -2544,6 +2691,9 @@ declare namespace imports.gi.Atk {
 		get_uri(mime_type: string): string | null;
 	}
 
+	type StreamableContentInitOptionsMixin  = {};
+	export interface StreamableContentInitOptions extends StreamableContentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StreamableContent} instead.
 	 */
@@ -2570,7 +2720,7 @@ declare namespace imports.gi.Atk {
 	interface StreamableContent extends StreamableContentMixin {}
 
 	class StreamableContent {
-		public constructor();
+		public constructor(options?: Partial<StreamableContentInitOptions>);
 	}
 
 
@@ -2831,6 +2981,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type TableInitOptionsMixin  = {};
+	export interface TableInitOptions extends TableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Table} instead.
 	 */
@@ -2869,7 +3022,7 @@ declare namespace imports.gi.Atk {
 	interface Table extends TableMixin {}
 
 	class Table {
-		public constructor();
+		public constructor(options?: Partial<TableInitOptions>);
 	}
 
 
@@ -2893,8 +3046,12 @@ declare namespace imports.gi.Atk {
 		/**
 		 * Retrieves the tabular position of this cell.
 		 * @returns TRUE if successful; FALSE otherwise.
+		 * 
+		 * the row of the given cell.
+		 * 
+		 * the column of the given cell.
 		 */
-		get_position(): boolean;
+		get_position(): [ boolean, number, number ];
 		/**
 		 * Gets the row and column indexes and span of this cell accessible.
 		 * 
@@ -2902,8 +3059,16 @@ declare namespace imports.gi.Atk {
 		 * will implement this function by calling get_row_span and get_column_span
 		 * on the object.
 		 * @returns TRUE if successful; FALSE otherwise.
+		 * 
+		 * the row index of the given cell.
+		 * 
+		 * the column index of the given cell.
+		 * 
+		 * the number of rows occupied by this cell.
+		 * 
+		 * the number of columns occupied by this cell.
 		 */
-		get_row_column_span(): boolean;
+		get_row_column_span(): [ boolean, number, number, number, number ];
 		/**
 		 * Returns the row headers as an array of cell accessibles.
 		 * @returns a GPtrArray of AtkObjects
@@ -2923,6 +3088,9 @@ declare namespace imports.gi.Atk {
 		get_table(): Object;
 	}
 
+	type TableCellInitOptionsMixin  = {};
+	export interface TableCellInitOptions extends TableCellInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableCell} instead.
 	 */
@@ -2938,7 +3106,7 @@ declare namespace imports.gi.Atk {
 	interface TableCell extends TableCellMixin {}
 
 	class TableCell {
-		public constructor();
+		public constructor(options?: Partial<TableCellInitOptions>);
 	}
 
 
@@ -3036,9 +3204,9 @@ declare namespace imports.gi.Atk {
 		 * @param end_offset The offset of the text character after the last character
 		 *        for which boundary information is required.
 		 * @param coord_type Specify whether coordinates are relative to the screen or widget window.
-		 * @param rect A pointer to a AtkTextRectangle which is filled in by this function.
+		 * @returns A pointer to a AtkTextRectangle which is filled in by this function.
 		 */
-		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType, rect: TextRectangle): void;
+		get_range_extents(start_offset: number, end_offset: number, coord_type: CoordType): TextRectangle;
 		/**
 		 * Creates an {@link AttributeSet} which consists of the attributes explicitly
 		 * set at the position #offset in the text. #start_offset and #end_offset are
@@ -3052,8 +3220,12 @@ declare namespace imports.gi.Atk {
 		 * @returns an {@link AttributeSet} which contains the attributes
 		 *         explicitly set at #offset. This #AtkAttributeSet should be freed by
 		 *         a call to atk_attribute_set_free().
+		 * 
+		 * the address to put the start offset of the range
+		 * 
+		 * the address to put the end offset of the range
 		 */
-		get_run_attributes(offset: number): AttributeSet;
+		get_run_attributes(offset: number): [ AttributeSet, number, number ];
 		/**
 		 * Gets the text from the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3063,8 +3235,13 @@ declare namespace imports.gi.Atk {
 		 * moving or deleting a selected region can change the numbering.
 		 * @returns a newly allocated string containing the selected text. Use g_free()
 		 *          to free the returned string.
+		 * 
+		 * passes back the starting character offset of the selected region
+		 * 
+		 * passes back the ending character offset (offset immediately past)
+		 * of the selected region
 		 */
-		get_selection(selection_num: number): string;
+		get_selection(selection_num: number): [ string, number, number ];
 		/**
 		 * Gets a portion of the text exposed through an {@link Text} according to a given #offset
 		 * and a specific #granularity, along with the start and end offsets defining the
@@ -3102,8 +3279,14 @@ declare namespace imports.gi.Atk {
 		 *          the #offset bounded by the specified #granularity. Use g_free()
 		 *          to free the returned string.  Returns %NULL if the offset is invalid
 		 *          or no implementation is available.
+		 * 
+		 * the starting character offset of the returned string, or -1
+		 *                in the case of error (e.g. invalid offset, not implemented)
+		 * 
+		 * the offset of the first character after the returned string,
+		 *              or -1 in the case of error (e.g. invalid offset, not implemented)
 		 */
-		get_string_at_offset(offset: number, granularity: TextGranularity): string | null;
+		get_string_at_offset(offset: number, granularity: TextGranularity): [ string | null, number, number ];
 		/**
 		 * Gets the specified text.
 		 * @param start_offset a starting character offset within #text
@@ -3120,8 +3303,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text after #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_after_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_after_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Gets the specified text.
 		 * 
@@ -3152,8 +3340,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text at #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_at_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_at_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Gets the specified text.
 		 * @param offset position
@@ -3161,8 +3354,13 @@ declare namespace imports.gi.Atk {
 		 * @returns a newly allocated string containing the text before #offset bounded
 		 *          by the specified #boundary_type. Use g_free() to free the returned
 		 *          string.
+		 * 
+		 * the starting character offset of the returned string
+		 * 
+		 * the offset of the first character after the
+		 *              returned substring
 		 */
-		get_text_before_offset(offset: number, boundary_type: TextBoundary): string;
+		get_text_before_offset(offset: number, boundary_type: TextBoundary): [ string, number, number ];
 		/**
 		 * Removes the specified selection.
 		 * @param selection_num The selection number.  The selected regions are
@@ -3270,6 +3468,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type TextInitOptionsMixin  = {};
+	export interface TextInitOptions extends TextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
@@ -3299,7 +3500,7 @@ declare namespace imports.gi.Atk {
 	interface Text extends TextMixin {}
 
 	class Text {
-		public constructor();
+		public constructor(options?: Partial<TextInitOptions>);
 		/**
 		 * Frees the memory associated with an array of AtkTextRange. It is assumed
 		 * that the array was returned by the function atk_text_get_bounded_ranges
@@ -3318,9 +3519,9 @@ declare namespace imports.gi.Atk {
 	interface IValue {
 		/**
 		 * Gets the value of this object.
-		 * @param value a #GValue representing the current accessible value
+		 * @returns a #GValue representing the current accessible value
 		 */
-		get_current_value(value: GObject.Value): void;
+		get_current_value(): GObject.Value;
 		/**
 		 * Gets the minimum increment by which the value of this object may be
 		 * changed.  If zero, the minimum increment is undefined, which may
@@ -3332,21 +3533,21 @@ declare namespace imports.gi.Atk {
 		get_increment(): number;
 		/**
 		 * Gets the maximum value of this object.
-		 * @param value a #GValue representing the maximum accessible value
+		 * @returns a #GValue representing the maximum accessible value
 		 */
-		get_maximum_value(value: GObject.Value): void;
+		get_maximum_value(): GObject.Value;
 		/**
 		 * Gets the minimum increment by which the value of this object may be changed.  If zero,
 		 * the minimum increment is undefined, which may mean that it is limited only by the
 		 * floating point precision of the platform.
-		 * @param value a #GValue representing the minimum increment by which the accessible value may be changed
+		 * @returns a #GValue representing the minimum increment by which the accessible value may be changed
 		 */
-		get_minimum_increment(value: GObject.Value): void;
+		get_minimum_increment(): GObject.Value;
 		/**
 		 * Gets the minimum value of this object.
-		 * @param value a #GValue representing the minimum accessible value
+		 * @returns a #GValue representing the minimum accessible value
 		 */
-		get_minimum_value(value: GObject.Value): void;
+		get_minimum_value(): GObject.Value;
 		/**
 		 * Gets the range of this object.
 		 * @returns a newly allocated {@link Range}
@@ -3413,6 +3614,9 @@ declare namespace imports.gi.Atk {
 		connect(signal: "value-changed", callback: (owner: this, value: number, text: string) => void): number;
 
 	}
+
+	type ValueInitOptionsMixin  = {};
+	export interface ValueInitOptions extends ValueInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Value} instead.
@@ -3564,7 +3768,7 @@ declare namespace imports.gi.Atk {
 	interface Value extends ValueMixin {}
 
 	class Value {
-		public constructor();
+		public constructor(options?: Partial<ValueInitOptions>);
 	}
 
 
@@ -3622,6 +3826,9 @@ declare namespace imports.gi.Atk {
 
 	}
 
+	type WindowInitOptionsMixin  = {};
+	export interface WindowInitOptions extends WindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Window} instead.
 	 */
@@ -3635,7 +3842,7 @@ declare namespace imports.gi.Atk {
 	interface Window extends WindowMixin {}
 
 	class Window {
-		public constructor();
+		public constructor(options?: Partial<WindowInitOptions>);
 	}
 
 

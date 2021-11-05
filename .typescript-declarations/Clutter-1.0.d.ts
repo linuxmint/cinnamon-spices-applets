@@ -6,6 +6,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ActionInitOptionsMixin = ActorMetaInitOptions
+	export interface ActionInitOptions extends ActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
@@ -18,7 +21,7 @@ declare namespace imports.gi.Clutter {
 	interface Action extends ActionMixin {}
 
 	class Action {
-		public constructor();
+		public constructor(options?: Partial<ActionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1127,17 +1130,17 @@ declare namespace imports.gi.Clutter {
 		 * @param ancestor A {@link Actor} ancestor, or %NULL to use the
 		 *   default #ClutterStage
 		 * @param point A point as {@link Vertex}
-		 * @param vertex The translated {@link Vertex}
+		 * @returns The translated {@link Vertex}
 		 */
-		apply_relative_transform_to_point(ancestor: Actor | null, point: Vertex, vertex: Vertex): void;
+		apply_relative_transform_to_point(ancestor: Actor | null, point: Vertex): Vertex;
 		/**
 		 * Transforms #point in coordinates relative to the actor
 		 * into screen-relative coordinates with the current actor
 		 * transformation (i.e. scale, rotation, etc)
 		 * @param point A point as {@link Vertex}
-		 * @param vertex The translated {@link Vertex}
+		 * @returns The translated {@link Vertex}
 		 */
-		apply_transform_to_point(point: Vertex, vertex: Vertex): void;
+		apply_transform_to_point(point: Vertex): Vertex;
 		/**
 		 * Binds a #GListModel to a {@link Actor}.
 		 * 
@@ -1320,10 +1323,10 @@ declare namespace imports.gi.Clutter {
 		 *  - v[1] contains (x2, y1)
 		 *  - v[2] contains (x1, y2)
 		 *  - v[3] contains (x2, y2)
-		 * @param verts Pointer to a location of an array
+		 * @returns Pointer to a location of an array
 		 *   of 4 {@link Vertex} where to store the result.
 		 */
-		get_abs_allocation_vertices(verts: Vertex[]): void;
+		get_abs_allocation_vertices(): Vertex[];
 		/**
 		 * Returns the accessible object that describes the actor to an
 		 * assistive technology.
@@ -1368,9 +1371,9 @@ declare namespace imports.gi.Clutter {
 		 * Do not call any of the clutter_actor_get_allocation_*() family
 		 * of functions inside the implementation of the get_preferred_width()
 		 * or get_preferred_height() virtual functions.
-		 * @param box the function fills this in with the actor's allocation
+		 * @returns the function fills this in with the actor's allocation
 		 */
-		get_allocation_box(box: ActorBox): void;
+		get_allocation_box(): ActorBox;
 		/**
 		 * Gets the layout box an actor has been assigned.  The allocation can
 		 * only be assumed valid inside a paint() method; anywhere else, it
@@ -1380,9 +1383,9 @@ declare namespace imports.gi.Clutter {
 		 * those transformations do not affect layout, only rendering.
 		 * 
 		 * The returned rectangle is in pixels.
-		 * @param geom allocation geometry in pixels
+		 * @returns allocation geometry in pixels
 		 */
-		get_allocation_geometry(geom: Geometry): void;
+		get_allocation_geometry(): Geometry;
 		/**
 		 * Calculates the transformed coordinates of the four corners of the
 		 * actor in the plane of #ancestor. The returned vertices relate to
@@ -1399,10 +1402,10 @@ declare namespace imports.gi.Clutter {
 		 * the behaviour of clutter_actor_get_abs_allocation_vertices().
 		 * @param ancestor A {@link Actor} to calculate the vertices
 		 *   against, or %NULL to use the #ClutterStage
-		 * @param verts return
+		 * @returns return
 		 *   location for an array of 4 {@link Vertex} in which to store the result
 		 */
-		get_allocation_vertices(ancestor: Actor | null, verts: Vertex[]): void;
+		get_allocation_vertices(ancestor: Actor | null): Vertex[];
 		/**
 		 * Gets the current anchor point of the #actor in pixels.
 		 * @returns return location for the X coordinate of the anchor point
@@ -1425,9 +1428,9 @@ declare namespace imports.gi.Clutter {
 		get_animation(): Animation;
 		/**
 		 * Retrieves the color set using clutter_actor_set_background_color().
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_background_color(color: Color): void;
+		get_background_color(): Color;
 		/**
 		 * Retrieves the actor at the given #index_ inside the list of
 		 * children of #self.
@@ -1439,9 +1442,9 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the child transformation matrix set using
 		 * clutter_actor_set_child_transform(); if none is currently set,
 		 * the #transform matrix will be initialized to the identity matrix.
-		 * @param transform a {@link Matrix}
+		 * @returns a {@link Matrix}
 		 */
-		get_child_transform(transform: Matrix): void;
+		get_child_transform(): Matrix;
 		/**
 		 * Retrieves the list of children of #self.
 		 * @returns A newly
@@ -1506,10 +1509,10 @@ declare namespace imports.gi.Clutter {
 		 * If the #ClutterContent used by the actor has a preferred size, then
 		 * it is possible to modify the content box by using the
 		 * #ClutterActor:content-gravity property.
-		 * @param box the return location for the bounding
+		 * @returns the return location for the bounding
 		 *   box for the {@link Content}
 		 */
-		get_content_box(box: ActorBox): void;
+		get_content_box(): ActorBox;
 		/**
 		 * Retrieves the content gravity as set using
 		 * clutter_actor_set_content_gravity().
@@ -1614,9 +1617,9 @@ declare namespace imports.gi.Clutter {
 		 * actor. This is the same as calling clutter_actor_get_position() and
 		 * clutter_actor_get_size(). It tries to "do what you mean" and get the
 		 * requested size and position if the actor's allocation is invalid.
-		 * @param geometry A location to store actors {@link Geometry}
+		 * @returns A location to store actors {@link Geometry}
 		 */
-		get_geometry(geometry: Geometry): void;
+		get_geometry(): Geometry;
 		/**
 		 * Retrieves the unique id for #self.
 		 * @returns Globally unique value for this object instance.
@@ -1661,9 +1664,9 @@ declare namespace imports.gi.Clutter {
 		get_layout_manager(): LayoutManager;
 		/**
 		 * Retrieves all the components of the margin of a {@link Actor}.
-		 * @param margin return location for a {@link Margin}
+		 * @returns return location for a {@link Margin}
 		 */
-		get_margin(margin: Margin): void;
+		get_margin(): Margin;
 		/**
 		 * Retrieves the bottom margin of a {@link Actor}.
 		 * @returns the bottom margin
@@ -1733,11 +1736,12 @@ declare namespace imports.gi.Clutter {
 		 * There are times when a 2D paint box can't be determined, e.g.
 		 * because the actor isn't yet parented under a stage or because
 		 * the actor is unable to determine a paint volume.
-		 * @param box return location for a {@link ActorBox}
 		 * @returns %TRUE if a 2D paint box could be determined, else
 		 * %FALSE.
+		 * 
+		 * return location for a {@link ActorBox}
 		 */
-		get_paint_box(box: ActorBox): boolean;
+		get_paint_box(): [ boolean, ActorBox ];
 		/**
 		 * Retrieves the absolute opacity of the actor, as it appears on the stage.
 		 * 
@@ -1917,8 +1921,14 @@ declare namespace imports.gi.Clutter {
 		 * set using clutter_actor_set_rotation().
 		 * @param axis the axis of rotation
 		 * @returns the angle of rotation
+		 * 
+		 * return value for the X coordinate of the center of rotation
+		 * 
+		 * return value for the Y coordinate of the center of rotation
+		 * 
+		 * return value for the Z coordinate of the center of rotation
 		 */
-		get_rotation(axis: RotateAxis): number;
+		get_rotation(axis: RotateAxis): [ number, number, number, number ];
 		/**
 		 * Retrieves the angle of rotation set by clutter_actor_set_rotation_angle().
 		 * @param axis the axis of the rotation
@@ -1997,15 +2007,15 @@ declare namespace imports.gi.Clutter {
 		get_text_direction(): TextDirection;
 		/**
 		 * Retrieves the current transformation matrix of a {@link Actor}.
-		 * @param transform a {@link Matrix}
+		 * @returns a {@link Matrix}
 		 */
-		get_transform(transform: Matrix): void;
+		get_transform(): Matrix;
 		/**
 		 * Retrieves the transformations applied to #self relative to its
 		 * parent.
-		 * @param matrix the return location for a {@link Matrix}
+		 * @returns the return location for a {@link Matrix}
 		 */
-		get_transformation_matrix(matrix: Matrix): void;
+		get_transformation_matrix(): Matrix;
 		/**
 		 * Retrieves the 3D paint volume of an actor like
 		 * clutter_actor_get_paint_volume() does (Please refer to the
@@ -3428,8 +3438,12 @@ declare namespace imports.gi.Clutter {
 		 * @param x x screen coordinate of the point to unproject
 		 * @param y y screen coordinate of the point to unproject
 		 * @returns %TRUE if conversion was successful.
+		 * 
+		 * return location for the unprojected x coordinance
+		 * 
+		 * return location for the unprojected y coordinance
 		 */
-		transform_stage_point(x: number, y: number): boolean;
+		transform_stage_point(x: number, y: number): [ boolean, number, number ];
 		/**
 		 * Unsets the %CLUTTER_ACTOR_MAPPED flag on the actor and possibly
 		 * unmaps its children if they were mapped.
@@ -3797,6 +3811,91 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ActorInitOptionsMixin = GObject.InitiallyUnownedInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IActor,
+		"allocation" |
+		"anchor_gravity" |
+		"anchor_x" |
+		"anchor_y" |
+		"background_color" |
+		"background_color_set" |
+		"child_transform" |
+		"child_transform_set" |
+		"clip" |
+		"clip_rect" |
+		"clip_to_allocation" |
+		"content" |
+		"content_box" |
+		"content_gravity" |
+		"content_repeat" |
+		"depth" |
+		"first_child" |
+		"fixed_position_set" |
+		"fixed_x" |
+		"fixed_y" |
+		"has_clip" |
+		"has_pointer" |
+		"height" |
+		"last_child" |
+		"layout_manager" |
+		"magnification_filter" |
+		"mapped" |
+		"margin_bottom" |
+		"margin_left" |
+		"margin_right" |
+		"margin_top" |
+		"min_height" |
+		"min_height_set" |
+		"min_width" |
+		"min_width_set" |
+		"minification_filter" |
+		"name" |
+		"natural_height" |
+		"natural_height_set" |
+		"natural_width" |
+		"natural_width_set" |
+		"offscreen_redirect" |
+		"opacity" |
+		"pivot_point" |
+		"pivot_point_z" |
+		"position" |
+		"reactive" |
+		"realized" |
+		"request_mode" |
+		"rotation_angle_x" |
+		"rotation_angle_y" |
+		"rotation_angle_z" |
+		"rotation_center_x" |
+		"rotation_center_y" |
+		"rotation_center_z" |
+		"rotation_center_z_gravity" |
+		"scale_center_x" |
+		"scale_center_y" |
+		"scale_gravity" |
+		"scale_x" |
+		"scale_y" |
+		"scale_z" |
+		"show_on_set_parent" |
+		"size" |
+		"text_direction" |
+		"transform" |
+		"transform_set" |
+		"translation_x" |
+		"translation_y" |
+		"translation_z" |
+		"visible" |
+		"width" |
+		"x" |
+		"x_align" |
+		"x_expand" |
+		"y" |
+		"y_align" |
+		"y_expand" |
+		"z_position" |
+		"flags">;
+
+	export interface ActorInitOptions extends ActorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actor} instead.
 	 */
@@ -3808,7 +3907,7 @@ declare namespace imports.gi.Clutter {
 	interface Actor extends ActorMixin {}
 
 	class Actor {
-		public constructor(options?: Partial<ActorOptions>);
+		public constructor(options?: Partial<ActorInitOptions>);
 		/**
 		 * Creates a new {@link Actor}.
 		 * 
@@ -3871,6 +3970,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ActorMetaInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<IActorMeta,
+		"actor" |
+		"enabled" |
+		"name">;
+
+	export interface ActorMetaInitOptions extends ActorMetaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActorMeta} instead.
 	 */
@@ -3883,7 +3990,7 @@ declare namespace imports.gi.Clutter {
 	interface ActorMeta extends ActorMetaMixin {}
 
 	class ActorMeta {
-		public constructor();
+		public constructor(options?: Partial<ActorMetaInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3957,6 +4064,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type AlignConstraintInitOptionsMixin = ConstraintInitOptions & 
+	Pick<IAlignConstraint,
+		"align_axis" |
+		"factor" |
+		"source">;
+
+	export interface AlignConstraintInitOptions extends AlignConstraintInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AlignConstraint} instead.
 	 */
@@ -3969,7 +4084,7 @@ declare namespace imports.gi.Clutter {
 	interface AlignConstraint extends AlignConstraintMixin {}
 
 	class AlignConstraint {
-		public constructor();
+		public constructor(options?: Partial<AlignConstraintInitOptions>);
 		/**
 		 * Creates a new constraint, aligning a {@link Actor}'s position with
 		 * regards of the size of the actor to #source, with the given
@@ -4057,6 +4172,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type AlphaInitOptionsMixin = GObject.InitiallyUnownedInitOptions & ScriptableInitOptions & 
+	Pick<IAlpha,
+		"alpha" |
+		"mode" |
+		"timeline">;
+
+	export interface AlphaInitOptions extends AlphaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Alpha} instead.
 	 */
@@ -4070,7 +4193,7 @@ declare namespace imports.gi.Clutter {
 	interface Alpha extends AlphaMixin {}
 
 	class Alpha {
-		public constructor();
+		public constructor(options?: Partial<AlphaInitOptions>);
 		/**
 		 * Creates a new {@link Alpha} instance.  You must set a function
 		 * to compute the alpha value using clutter_alpha_set_func() and
@@ -4334,6 +4457,17 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type AnimationInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<IAnimation,
+		"alpha" |
+		"duration" |
+		"loop" |
+		"mode" |
+		"object" |
+		"timeline">;
+
+	export interface AnimationInitOptions extends AnimationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animation} instead.
 	 */
@@ -4346,7 +4480,7 @@ declare namespace imports.gi.Clutter {
 	interface Animation extends AnimationMixin {}
 
 	class Animation {
-		public constructor();
+		public constructor(options?: Partial<AnimationInitOptions>);
 		/**
 		 * Creates a new {@link Animation} instance. You should set the
 		 * #GObject to be animated using clutter_animation_set_object(),
@@ -4513,6 +4647,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type AnimatorInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<IAnimator,
+		"duration" |
+		"timeline">;
+
+	export interface AnimatorInitOptions extends AnimatorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animator} instead.
 	 */
@@ -4525,7 +4666,7 @@ declare namespace imports.gi.Clutter {
 	interface Animator extends AnimatorMixin {}
 
 	class Animator {
-		public constructor();
+		public constructor(options?: Partial<AnimatorInitOptions>);
 		/**
 		 * Creates a new {@link Animator} instance
 		 * @returns a new {@link Animator}.
@@ -4638,6 +4779,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BackendInitOptionsMixin = GObject.ObjectInitOptions
+	export interface BackendInitOptions extends BackendInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Backend} instead.
 	 */
@@ -4650,7 +4794,7 @@ declare namespace imports.gi.Clutter {
 	interface Backend extends BackendMixin {}
 
 	class Backend {
-		public constructor();
+		public constructor(options?: Partial<BackendInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4746,6 +4890,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviour,
+		"alpha">;
+
+	export interface BehaviourInitOptions extends BehaviourInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Behaviour} instead.
 	 */
@@ -4758,7 +4908,7 @@ declare namespace imports.gi.Clutter {
 	interface Behaviour extends BehaviourMixin {}
 
 	class Behaviour {
-		public constructor();
+		public constructor(options?: Partial<BehaviourInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4791,6 +4941,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourDepthInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourDepth,
+		"depth_end" |
+		"depth_start">;
+
+	export interface BehaviourDepthInitOptions extends BehaviourDepthInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourDepth} instead.
 	 */
@@ -4803,7 +4960,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourDepth extends BehaviourDepthMixin {}
 
 	class BehaviourDepth {
-		public constructor();
+		public constructor(options?: Partial<BehaviourDepthInitOptions>);
 		/**
 		 * Creates a new {@link BehaviourDepth} which can be used to control
 		 * the ClutterActor:depth property of a set of #ClutterActor<!-- -->s.
@@ -4965,6 +5122,20 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourEllipseInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourEllipse,
+		"angle_end" |
+		"angle_start" |
+		"angle_tilt_x" |
+		"angle_tilt_y" |
+		"angle_tilt_z" |
+		"center" |
+		"direction" |
+		"height" |
+		"width">;
+
+	export interface BehaviourEllipseInitOptions extends BehaviourEllipseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourEllipse} instead.
 	 */
@@ -4977,7 +5148,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourEllipse extends BehaviourEllipseMixin {}
 
 	class BehaviourEllipse {
-		public constructor();
+		public constructor(options?: Partial<BehaviourEllipseInitOptions>);
 		/**
 		 * Creates a behaviour that drives actors along an elliptical path with
 		 * given center, width and height; the movement starts at #start
@@ -5034,6 +5205,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourOpacityInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourOpacity,
+		"opacity_end" |
+		"opacity_start">;
+
+	export interface BehaviourOpacityInitOptions extends BehaviourOpacityInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourOpacity} instead.
 	 */
@@ -5046,7 +5224,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourOpacity extends BehaviourOpacityMixin {}
 
 	class BehaviourOpacity {
-		public constructor();
+		public constructor(options?: Partial<BehaviourOpacityInitOptions>);
 		/**
 		 * Creates a new {@link BehaviourOpacity} object, driven by #alpha
 		 * which controls the opacity property of every actor, making it
@@ -5090,6 +5268,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourPathInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourPath,
+		"path">;
+
+	export interface BehaviourPathInitOptions extends BehaviourPathInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourPath} instead.
 	 */
@@ -5102,7 +5286,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourPath extends BehaviourPathMixin {}
 
 	class BehaviourPath {
-		public constructor();
+		public constructor(options?: Partial<BehaviourPathInitOptions>);
 		/**
 		 * Creates a new path behaviour. You can use this behaviour to drive
 		 * actors along the nodes of a path, described by #path.
@@ -5243,6 +5427,18 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourRotateInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourRotate,
+		"angle_end" |
+		"angle_start" |
+		"axis" |
+		"center_x" |
+		"center_y" |
+		"center_z" |
+		"direction">;
+
+	export interface BehaviourRotateInitOptions extends BehaviourRotateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourRotate} instead.
 	 */
@@ -5255,7 +5451,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourRotate extends BehaviourRotateMixin {}
 
 	class BehaviourRotate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourRotateInitOptions>);
 		/**
 		 * Creates a new {@link BehaviourRotate}. This behaviour will rotate actors
 		 * bound to it on #axis, following #direction, between #angle_start and
@@ -5326,6 +5522,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BehaviourScaleInitOptionsMixin = BehaviourInitOptions & ScriptableInitOptions & 
+	Pick<IBehaviourScale,
+		"x_scale_end" |
+		"x_scale_start" |
+		"y_scale_end" |
+		"y_scale_start">;
+
+	export interface BehaviourScaleInitOptions extends BehaviourScaleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BehaviourScale} instead.
 	 */
@@ -5338,7 +5543,7 @@ declare namespace imports.gi.Clutter {
 	interface BehaviourScale extends BehaviourScaleMixin {}
 
 	class BehaviourScale {
-		public constructor();
+		public constructor(options?: Partial<BehaviourScaleInitOptions>);
 		/**
 		 * Creates a new  {@link BehaviourScale} instance.
 		 * 
@@ -5414,6 +5619,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BinLayoutInitOptionsMixin = LayoutManagerInitOptions & 
+	Pick<IBinLayout,
+		"x_align" |
+		"y_align">;
+
+	export interface BinLayoutInitOptions extends BinLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BinLayout} instead.
 	 */
@@ -5426,7 +5638,7 @@ declare namespace imports.gi.Clutter {
 	interface BinLayout extends BinLayoutMixin {}
 
 	class BinLayout {
-		public constructor();
+		public constructor(options?: Partial<BinLayoutInitOptions>);
 		/**
 		 * Creates a new {@link BinLayout} layout manager
 		 * @param x_align the default alignment policy to be used on the
@@ -5493,6 +5705,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BindConstraintInitOptionsMixin = ConstraintInitOptions & 
+	Pick<IBindConstraint,
+		"coordinate" |
+		"offset" |
+		"source">;
+
+	export interface BindConstraintInitOptions extends BindConstraintInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindConstraint} instead.
 	 */
@@ -5505,7 +5725,7 @@ declare namespace imports.gi.Clutter {
 	interface BindConstraint extends BindConstraintMixin {}
 
 	class BindConstraint {
-		public constructor();
+		public constructor(options?: Partial<BindConstraintInitOptions>);
 		/**
 		 * Creates a new constraint, binding a {@link Actor}'s position to
 		 * the given #coordinate of the position of #source
@@ -5663,6 +5883,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BindingPoolInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IBindingPool,
+		"name">;
+
+	export interface BindingPoolInitOptions extends BindingPoolInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BindingPool} instead.
 	 */
@@ -5675,7 +5901,7 @@ declare namespace imports.gi.Clutter {
 	interface BindingPool extends BindingPoolMixin {}
 
 	class BindingPool {
-		public constructor();
+		public constructor(options?: Partial<BindingPoolInitOptions>);
 		/**
 		 * Creates a new {@link BindingPool} that can be used to store
 		 * key bindings for an actor. The #name must be a unique identifier
@@ -5722,6 +5948,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BlurEffectInitOptionsMixin = OffscreenEffectInitOptions
+	export interface BlurEffectInitOptions extends BlurEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BlurEffect} instead.
 	 */
@@ -5734,7 +5963,7 @@ declare namespace imports.gi.Clutter {
 	interface BlurEffect extends BlurEffectMixin {}
 
 	class BlurEffect {
-		public constructor();
+		public constructor(options?: Partial<BlurEffectInitOptions>);
 		/**
 		 * Creates a new {@link BlurEffect} to be used with
 		 * clutter_actor_add_effect()
@@ -5768,9 +5997,9 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * If the {@link Box}:color-set property is set to %FALSE the
 		 * returned #ClutterColor is undefined
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_color(color: Color): void;
+		get_color(): Color;
 		/**
 		 * Retrieves the {@link LayoutManager} instance used by #box
 		 * @returns a {@link LayoutManager}. The returned
@@ -5863,6 +6092,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BoxInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IBox,
+		"color" |
+		"color_set">;
+
+	export interface BoxInitOptions extends BoxInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Box} instead.
 	 */
@@ -5875,7 +6111,7 @@ declare namespace imports.gi.Clutter {
 	interface Box extends BoxMixin {}
 
 	class Box {
-		public constructor();
+		public constructor(options?: Partial<BoxInitOptions>);
 		/**
 		 * Creates a new {@link Box}. The children of the box will be layed
 		 * out by the passed #manager
@@ -6104,6 +6340,19 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BoxLayoutInitOptionsMixin = LayoutManagerInitOptions & 
+	Pick<IBoxLayout,
+		"easing_duration" |
+		"easing_mode" |
+		"homogeneous" |
+		"orientation" |
+		"pack_start" |
+		"spacing" |
+		"use_animations" |
+		"vertical">;
+
+	export interface BoxLayoutInitOptions extends BoxLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BoxLayout} instead.
 	 */
@@ -6116,7 +6365,7 @@ declare namespace imports.gi.Clutter {
 	interface BoxLayout extends BoxLayoutMixin {}
 
 	class BoxLayout {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutInitOptions>);
 		/**
 		 * Creates a new {@link BoxLayout} layout manager
 		 * @returns the newly created {@link BoxLayout}
@@ -6209,6 +6458,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type BrightnessContrastEffectInitOptionsMixin = OffscreenEffectInitOptions & 
+	Pick<IBrightnessContrastEffect,
+		"brightness" |
+		"contrast">;
+
+	export interface BrightnessContrastEffectInitOptions extends BrightnessContrastEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BrightnessContrastEffect} instead.
 	 */
@@ -6221,7 +6477,7 @@ declare namespace imports.gi.Clutter {
 	interface BrightnessContrastEffect extends BrightnessContrastEffectMixin {}
 
 	class BrightnessContrastEffect {
-		public constructor();
+		public constructor(options?: Partial<BrightnessContrastEffectInitOptions>);
 		/**
 		 * Creates a new {@link BrightnessContrastEffect} to be used with
 		 * clutter_actor_add_effect()
@@ -6375,6 +6631,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type CairoTextureInitOptionsMixin = TextureInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<ICairoTexture,
+		"auto_resize" |
+		"surface_height" |
+		"surface_width">;
+
+	export interface CairoTextureInitOptions extends CairoTextureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CairoTexture} instead.
 	 */
@@ -6386,7 +6650,7 @@ declare namespace imports.gi.Clutter {
 	interface CairoTexture extends CairoTextureMixin {}
 
 	class CairoTexture {
-		public constructor();
+		public constructor(options?: Partial<CairoTextureInitOptions>);
 		/**
 		 * Creates a new {@link CairoTexture} actor, with a surface of #width by
 		 * #height pixels.
@@ -6487,6 +6751,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type CanvasInitOptionsMixin = GObject.ObjectInitOptions & ContentInitOptions & 
+	Pick<ICanvas,
+		"height" |
+		"scale_factor" |
+		"scale_factor_set" |
+		"width">;
+
+	export interface CanvasInitOptions extends CanvasInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Canvas} instead.
 	 */
@@ -6500,7 +6773,7 @@ declare namespace imports.gi.Clutter {
 	interface Canvas extends CanvasMixin {}
 
 	class Canvas {
-		public constructor();
+		public constructor(options?: Partial<CanvasInitOptions>);
 		/**
 		 * Creates a new instance of {@link Canvas}.
 		 * 
@@ -6551,6 +6824,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ChildMetaInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IChildMeta,
+		"actor" |
+		"container" |
+		"container" |
+		"actor">;
+
+	export interface ChildMetaInitOptions extends ChildMetaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ChildMeta} instead.
 	 */
@@ -6593,7 +6875,7 @@ declare namespace imports.gi.Clutter {
 	interface ChildMeta extends ChildMetaMixin {}
 
 	class ChildMeta {
-		public constructor();
+		public constructor(options?: Partial<ChildMetaInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6684,6 +6966,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ClickActionInitOptionsMixin = ActionInitOptions & 
+	Pick<IClickAction,
+		"held" |
+		"long_press_duration" |
+		"long_press_threshold" |
+		"pressed">;
+
+	export interface ClickActionInitOptions extends ClickActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClickAction} instead.
 	 */
@@ -6696,7 +6987,7 @@ declare namespace imports.gi.Clutter {
 	interface ClickAction extends ClickActionMixin {}
 
 	class ClickAction {
-		public constructor();
+		public constructor(options?: Partial<ClickActionInitOptions>);
 		/**
 		 * Creates a new {@link ClickAction} instance
 		 * @returns the newly created {@link ClickAction}
@@ -6711,6 +7002,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ClipNodeInitOptionsMixin = PaintNodeInitOptions
+	export interface ClipNodeInitOptions extends ClipNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ClipNode} instead.
 	 */
@@ -6723,7 +7017,7 @@ declare namespace imports.gi.Clutter {
 	interface ClipNode extends ClipNodeMixin {}
 
 	class ClipNode {
-		public constructor();
+		public constructor(options?: Partial<ClipNodeInitOptions>);
 		/**
 		 * Creates a new {@link PaintNode} that will clip its child
 		 * nodes to the 2D regions added to it.
@@ -6755,6 +7049,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type CloneInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IClone,
+		"source">;
+
+	export interface CloneInitOptions extends CloneInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clone} instead.
 	 */
@@ -6767,7 +7067,7 @@ declare namespace imports.gi.Clutter {
 	interface Clone extends CloneMixin {}
 
 	class Clone {
-		public constructor();
+		public constructor(options?: Partial<CloneInitOptions>);
 		/**
 		 * Creates a new {@link Actor} which clones #source/
 		 * @param source a {@link Actor}, or %NULL
@@ -6783,6 +7083,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ColorNodeInitOptionsMixin = PipelineNodeInitOptions
+	export interface ColorNodeInitOptions extends ColorNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorNode} instead.
 	 */
@@ -6795,7 +7098,7 @@ declare namespace imports.gi.Clutter {
 	interface ColorNode extends ColorNodeMixin {}
 
 	class ColorNode {
-		public constructor();
+		public constructor(options?: Partial<ColorNodeInitOptions>);
 		/**
 		 * Creates a new {@link PaintNode} that will paint a solid color
 		 * fill using #color.
@@ -6816,9 +7119,9 @@ declare namespace imports.gi.Clutter {
 		tint: Color;
 		/**
 		 * Retrieves the tint used by #effect
-		 * @param tint return location for the color used
+		 * @returns return location for the color used
 		 */
-		get_tint(tint: Color): void;
+		get_tint(): Color;
 		/**
 		 * Sets the tint to be used when colorizing
 		 * @param tint the color to be used
@@ -6827,6 +7130,12 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "notify::tint", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ColorizeEffectInitOptionsMixin = OffscreenEffectInitOptions & 
+	Pick<IColorizeEffect,
+		"tint">;
+
+	export interface ColorizeEffectInitOptions extends ColorizeEffectInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorizeEffect} instead.
@@ -6840,7 +7149,7 @@ declare namespace imports.gi.Clutter {
 	interface ColorizeEffect extends ColorizeEffectMixin {}
 
 	class ColorizeEffect {
-		public constructor();
+		public constructor(options?: Partial<ColorizeEffectInitOptions>);
 		/**
 		 * Creates a new {@link ColorizeEffect} to be used with
 		 * clutter_actor_add_effect()
@@ -6857,6 +7166,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ConstraintInitOptionsMixin = ActorMetaInitOptions
+	export interface ConstraintInitOptions extends ConstraintInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Constraint} instead.
 	 */
@@ -6869,7 +7181,7 @@ declare namespace imports.gi.Clutter {
 	interface Constraint extends ConstraintMixin {}
 
 	class Constraint {
-		public constructor();
+		public constructor(options?: Partial<ConstraintInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6940,6 +7252,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type DeformEffectInitOptionsMixin = OffscreenEffectInitOptions & 
+	Pick<IDeformEffect,
+		"back_material" |
+		"x_tiles" |
+		"y_tiles">;
+
+	export interface DeformEffectInitOptions extends DeformEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeformEffect} instead.
 	 */
@@ -6952,7 +7272,7 @@ declare namespace imports.gi.Clutter {
 	interface DeformEffect extends DeformEffectMixin {}
 
 	class DeformEffect {
-		public constructor();
+		public constructor(options?: Partial<DeformEffectInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6979,6 +7299,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type DesaturateEffectInitOptionsMixin = OffscreenEffectInitOptions & 
+	Pick<IDesaturateEffect,
+		"factor">;
+
+	export interface DesaturateEffectInitOptions extends DesaturateEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesaturateEffect} instead.
 	 */
@@ -6991,7 +7317,7 @@ declare namespace imports.gi.Clutter {
 	interface DesaturateEffect extends DesaturateEffectMixin {}
 
 	class DesaturateEffect {
-		public constructor();
+		public constructor(options?: Partial<DesaturateEffectInitOptions>);
 		/**
 		 * Creates a new {@link DesaturateEffect} to be used with
 		 * clutter_actor_add_effect()
@@ -7055,6 +7381,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type DeviceManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDeviceManager,
+		"backend">;
+
+	export interface DeviceManagerInitOptions extends DeviceManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceManager} instead.
 	 */
@@ -7066,7 +7398,7 @@ declare namespace imports.gi.Clutter {
 	interface DeviceManager extends DeviceManagerMixin {}
 
 	class DeviceManager {
-		public constructor();
+		public constructor(options?: Partial<DeviceManagerInitOptions>);
 		/**
 		 * Retrieves the device manager singleton
 		 * @returns the {@link DeviceManager} singleton.
@@ -7143,11 +7475,12 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the "drag area" associated with #action, that
 		 * is a {@link Rect} that constrains the actor movements,
 		 * in parents coordinates.
-		 * @param drag_area a {@link Rect} to be filled
 		 * @returns %TRUE if the actor is actually constrained (and thus
 		 *          #drag_area is valid), %FALSE otherwise
+		 * 
+		 * a {@link Rect} to be filled
 		 */
-		get_drag_area(drag_area: Rect): boolean;
+		get_drag_area(): [ boolean, Rect ];
 		/**
 		 * Retrieves the axis constraint set by clutter_drag_action_set_drag_axis()
 		 * @returns the axis constraint
@@ -7281,6 +7614,17 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type DragActionInitOptionsMixin = ActionInitOptions & 
+	Pick<IDragAction,
+		"drag_area" |
+		"drag_area_set" |
+		"drag_axis" |
+		"drag_handle" |
+		"x_drag_threshold" |
+		"y_drag_threshold">;
+
+	export interface DragActionInitOptions extends DragActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DragAction} instead.
 	 */
@@ -7293,7 +7637,7 @@ declare namespace imports.gi.Clutter {
 	interface DragAction extends DragActionMixin {}
 
 	class DragAction {
-		public constructor();
+		public constructor(options?: Partial<DragActionInitOptions>);
 		/**
 		 * Creates a new {@link DragAction} instance
 		 * @returns the newly created {@link DragAction}
@@ -7343,6 +7687,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type DropActionInitOptionsMixin = ActionInitOptions
+	export interface DropActionInitOptions extends DropActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DropAction} instead.
 	 */
@@ -7355,7 +7702,7 @@ declare namespace imports.gi.Clutter {
 	interface DropAction extends DropActionMixin {}
 
 	class DropAction {
-		public constructor();
+		public constructor(options?: Partial<DropActionInitOptions>);
 		/**
 		 * Creates a new {@link DropAction}.
 		 * 
@@ -7409,6 +7756,9 @@ declare namespace imports.gi.Clutter {
 		queue_repaint(): void;
 	}
 
+	type EffectInitOptionsMixin = ActorMetaInitOptions
+	export interface EffectInitOptions extends EffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Effect} instead.
 	 */
@@ -7421,7 +7771,7 @@ declare namespace imports.gi.Clutter {
 	interface Effect extends EffectMixin {}
 
 	class Effect {
-		public constructor();
+		public constructor(options?: Partial<EffectInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7430,6 +7780,9 @@ declare namespace imports.gi.Clutter {
 	interface IFixedLayout {
 
 	}
+
+	type FixedLayoutInitOptionsMixin = LayoutManagerInitOptions
+	export interface FixedLayoutInitOptions extends FixedLayoutInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FixedLayout} instead.
@@ -7443,7 +7796,7 @@ declare namespace imports.gi.Clutter {
 	interface FixedLayout extends FixedLayoutMixin {}
 
 	class FixedLayout {
-		public constructor();
+		public constructor(options?: Partial<FixedLayoutInitOptions>);
 		/**
 		 * Creates a new {@link FixedLayout}
 		 * @returns the newly created {@link FixedLayout}
@@ -7597,6 +7950,20 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type FlowLayoutInitOptionsMixin = LayoutManagerInitOptions & 
+	Pick<IFlowLayout,
+		"column_spacing" |
+		"homogeneous" |
+		"max_column_width" |
+		"max_row_height" |
+		"min_column_width" |
+		"min_row_height" |
+		"orientation" |
+		"row_spacing" |
+		"snap_to_grid">;
+
+	export interface FlowLayoutInitOptions extends FlowLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FlowLayout} instead.
 	 */
@@ -7609,7 +7976,7 @@ declare namespace imports.gi.Clutter {
 	interface FlowLayout extends FlowLayoutMixin {}
 
 	class FlowLayout {
-		public constructor();
+		public constructor(options?: Partial<FlowLayoutInitOptions>);
 		/**
 		 * Creates a new {@link FlowLayout} with the given #orientation
 		 * @param orientation the orientation of the flow layout
@@ -7684,8 +8051,14 @@ declare namespace imports.gi.Clutter {
 		 * @param point the touch point index, with 0 being the first touch
 		 *   point received by the action
 		 * @returns the distance since last motion event
+		 * 
+		 * return location for the X axis
+		 *   component of the incremental motion delta
+		 * 
+		 * return location for the Y axis
+		 *   component of the incremental motion delta
 		 */
-		get_motion_delta(point: number): number;
+		get_motion_delta(point: number): [ number, number | null, number | null ];
 		/**
 		 * Retrieves the number of points currently active.
 		 * @returns the number of points currently active.
@@ -7752,8 +8125,14 @@ declare namespace imports.gi.Clutter {
 		 * @param point the touch point index, with 0 being the first touch
 		 *   point received by the action
 		 * @returns 
+		 * 
+		 * return location for the latest motion
+		 *   event's X velocity
+		 * 
+		 * return location for the latest motion
+		 *   event's Y velocity
 		 */
-		get_velocity(point: number): number;
+		get_velocity(point: number): [ number, number | null, number | null ];
 		/**
 		 * Sets the number of points needed to trigger the gesture.
 		 * @param nb_points a number of points
@@ -7810,6 +8189,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type GestureActionInitOptionsMixin = ActionInitOptions & 
+	Pick<IGestureAction,
+		"n_touch_points" |
+		"threshold_trigger_distance_x" |
+		"threshold_trigger_distance_y" |
+		"threshold_trigger_edge">;
+
+	export interface GestureActionInitOptions extends GestureActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GestureAction} instead.
 	 */
@@ -7822,7 +8210,7 @@ declare namespace imports.gi.Clutter {
 	interface GestureAction extends GestureActionMixin {}
 
 	class GestureAction {
-		public constructor();
+		public constructor(options?: Partial<GestureActionInitOptions>);
 		/**
 		 * Creates a new {@link GestureAction} instance.
 		 * @returns the newly created {@link GestureAction}
@@ -7987,6 +8375,16 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type GridLayoutInitOptionsMixin = LayoutManagerInitOptions & 
+	Pick<IGridLayout,
+		"column_homogeneous" |
+		"column_spacing" |
+		"orientation" |
+		"row_homogeneous" |
+		"row_spacing">;
+
+	export interface GridLayoutInitOptions extends GridLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GridLayout} instead.
 	 */
@@ -7999,7 +8397,7 @@ declare namespace imports.gi.Clutter {
 	interface GridLayout extends GridLayoutMixin {}
 
 	class GridLayout {
-		public constructor(options?: any);
+		public constructor(options?: Partial<GridLayoutInitOptions>);
 		/**
 		 * Creates a new {@link GridLayout}
 		 * @returns the new {@link GridLayout}
@@ -8029,6 +8427,9 @@ declare namespace imports.gi.Clutter {
 		remove_all(): void;
 	}
 
+	type GroupInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions
+	export interface GroupInitOptions extends GroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
@@ -8041,7 +8442,7 @@ declare namespace imports.gi.Clutter {
 	interface Group extends GroupMixin {}
 
 	class Group {
-		public constructor();
+		public constructor(options?: Partial<GroupInitOptions>);
 		/**
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
@@ -8137,6 +8538,9 @@ declare namespace imports.gi.Clutter {
 		set_data(data: number[], pixel_format: Cogl.PixelFormat, width: number, height: number, row_stride: number): boolean;
 	}
 
+	type ImageInitOptionsMixin = GObject.ObjectInitOptions & ContentInitOptions
+	export interface ImageInitOptions extends ImageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Image} instead.
 	 */
@@ -8150,7 +8554,7 @@ declare namespace imports.gi.Clutter {
 	interface Image extends ImageMixin {}
 
 	class Image {
-		public constructor();
+		public constructor(options?: Partial<ImageInitOptions>);
 		/**
 		 * Creates a new {@link Image} instance.
 		 * @returns the newly created {@link Image} instance.
@@ -8244,19 +8648,22 @@ declare namespace imports.gi.Clutter {
 		 *   coming from clutter_event_get_axes()
 		 * @param axis the axis to extract
 		 * @returns %TRUE if the value was set, and %FALSE otherwise
+		 * 
+		 * return location for the axis value
 		 */
-		get_axis_value(axes: number[], axis: InputAxis): boolean;
+		get_axis_value(axes: number[], axis: InputAxis): [ boolean, number ];
 		/**
 		 * Retrieves the latest coordinates of a pointer or touch point of
 		 * #device.
 		 * @param sequence a {@link EventSequence}, or %NULL if
 		 *   the device is not touch-based
-		 * @param point return location for the pointer
-		 *   or touch point
 		 * @returns %FALSE if the device's sequence hasn't been found,
 		 *   and %TRUE otherwise.
+		 * 
+		 * return location for the pointer
+		 *   or touch point
 		 */
-		get_coords(sequence: EventSequence | null, point: Point): boolean;
+		get_coords(sequence: EventSequence | null): [ boolean, Point ];
 		/**
 		 * Retrieves the latest coordinates of the pointer of #device
 		 * @returns return location for the X coordinate
@@ -8307,8 +8714,12 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the key set using clutter_input_device_set_key()
 		 * @param index_ the index of the key
 		 * @returns %TRUE if a key was set at the given index
+		 * 
+		 * return location for the keyval at #index_
+		 * 
+		 * return location for the modifiers at #index_
 		 */
-		get_key(index_: number): boolean;
+		get_key(index_: number): [ boolean, number, ModifierType ];
 		/**
 		 * Retrieves the current modifiers state of the device, as seen
 		 * by the last event Clutter processed.
@@ -8500,6 +8911,22 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type InputDeviceInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IInputDevice,
+		"backend" |
+		"device_manager" |
+		"device_mode" |
+		"device_type" |
+		"enabled" |
+		"has_cursor" |
+		"id" |
+		"n_axes" |
+		"name" |
+		"product_id" |
+		"vendor_id">;
+
+	export interface InputDeviceInitOptions extends InputDeviceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputDevice} instead.
 	 */
@@ -8512,7 +8939,7 @@ declare namespace imports.gi.Clutter {
 	interface InputDevice extends InputDeviceMixin {}
 
 	class InputDevice {
-		public constructor();
+		public constructor(options?: Partial<InputDeviceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8555,28 +8982,29 @@ declare namespace imports.gi.Clutter {
 		 * Computes the value between the #interval boundaries given the
 		 * progress #factor and copies it into #value.
 		 * @param factor the progress factor, between 0 and 1
-		 * @param value return location for an initialized #GValue
 		 * @returns %TRUE if the operation was successful
+		 * 
+		 * return location for an initialized #GValue
 		 */
-		compute_value(factor: number, value: GObject.Value): boolean;
+		compute_value(factor: number): [ boolean, GObject.Value ];
 		/**
 		 * Retrieves the final value of #interval and copies
 		 * it into #value.
 		 * 
 		 * The passed #GValue must be initialized to the value held by
 		 * the {@link Interval}.
-		 * @param value a #GValue
+		 * @returns a #GValue
 		 */
-		get_final_value(value: GObject.Value): void;
+		get_final_value(): GObject.Value;
 		/**
 		 * Retrieves the initial value of #interval and copies
 		 * it into #value.
 		 * 
 		 * The passed #GValue must be initialized to the value held by
 		 * the {@link Interval}.
-		 * @param value a #GValue
+		 * @returns a #GValue
 		 */
-		get_initial_value(value: GObject.Value): void;
+		get_initial_value(): GObject.Value;
 		/**
 		 * Variable arguments wrapper for clutter_interval_get_initial_value()
 		 * and clutter_interval_get_final_value() that avoids using the
@@ -8673,6 +9101,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type IntervalInitOptionsMixin = GObject.InitiallyUnownedInitOptions & ScriptableInitOptions & 
+	Pick<IInterval,
+		"final" |
+		"initial" |
+		"value_type">;
+
+	export interface IntervalInitOptions extends IntervalInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Interval} instead.
 	 */
@@ -8685,7 +9121,7 @@ declare namespace imports.gi.Clutter {
 	interface Interval extends IntervalMixin {}
 
 	class Interval {
-		public constructor();
+		public constructor(options?: Partial<IntervalInitOptions>);
 		/**
 		 * Creates a new {@link Interval} holding values of type #gtype.
 		 * 
@@ -8768,13 +9204,14 @@ declare namespace imports.gi.Clutter {
 		 * The #transition must already have key frames set, and #index_ must be
 		 * smaller than the number of key frames.
 		 * @param index_ the index of the key frame
-		 * @param value a #GValue initialized with the type of
-		 *   the values
 		 * @returns return location for the key, or %NULL
 		 * 
 		 * return location for the easing mode, or %NULL
+		 * 
+		 * a #GValue initialized with the type of
+		 *   the values
 		 */
-		get_key_frame(index_: number, value: GObject.Value): [ key: number | null, mode: AnimationMode | null ];
+		get_key_frame(index_: number): [ key: number | null, mode: AnimationMode | null, value: GObject.Value ];
 		/**
 		 * Retrieves the number of key frames inside #transition.
 		 * @returns the number of key frames
@@ -8838,6 +9275,9 @@ declare namespace imports.gi.Clutter {
 		set_values(n_values: number, values: GObject.Value[]): void;
 	}
 
+	type KeyframeTransitionInitOptionsMixin = PropertyTransitionInitOptions & ScriptableInitOptions
+	export interface KeyframeTransitionInitOptions extends KeyframeTransitionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link KeyframeTransition} instead.
 	 */
@@ -8850,7 +9290,7 @@ declare namespace imports.gi.Clutter {
 	interface KeyframeTransition extends KeyframeTransitionMixin {}
 
 	class KeyframeTransition {
-		public constructor();
+		public constructor(options?: Partial<KeyframeTransitionInitOptions>);
 		/**
 		 * Creates a new {@link KeyframeTransition} for #property_name.
 		 * @param property_name the property to animate
@@ -9010,8 +9450,11 @@ declare namespace imports.gi.Clutter {
 		 * @returns the newly-allocated,
 		 *   %NULL-terminated array of #GParamSpec<!-- -->s. Use g_free() to free the
 		 *   resources allocated for the array
+		 * 
+		 * return location for the number of returned
+		 *   #GParamSpec<!-- -->s
 		 */
-		list_child_properties(): GObject.ParamSpec[];
+		list_child_properties(): [ GObject.ParamSpec[], number ];
 		/**
 		 * If the {@link LayoutManager} sub-class allows it, allow
 		 * adding a weak reference of the #container using #manager
@@ -9050,6 +9493,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type LayoutManagerInitOptionsMixin = GObject.InitiallyUnownedInitOptions
+	export interface LayoutManagerInitOptions extends LayoutManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutManager} instead.
 	 */
@@ -9062,7 +9508,7 @@ declare namespace imports.gi.Clutter {
 	interface LayoutManager extends LayoutManagerMixin {}
 
 	class LayoutManager {
-		public constructor();
+		public constructor(options?: Partial<LayoutManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9087,6 +9533,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type LayoutMetaInitOptionsMixin = ChildMetaInitOptions & 
+	Pick<ILayoutMeta,
+		"manager" |
+		"manager">;
+
+	export interface LayoutMetaInitOptions extends LayoutMetaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LayoutMeta} instead.
 	 */
@@ -9102,7 +9555,7 @@ declare namespace imports.gi.Clutter {
 	interface LayoutMeta extends LayoutMetaMixin {}
 
 	class LayoutMeta {
-		public constructor();
+		public constructor(options?: Partial<LayoutMetaInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9111,6 +9564,9 @@ declare namespace imports.gi.Clutter {
 	interface IListModel {
 
 	}
+
+	type ListModelInitOptionsMixin = ModelInitOptions & ScriptableInitOptions
+	export interface ListModelInitOptions extends ListModelInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListModel} instead.
@@ -9123,7 +9579,7 @@ declare namespace imports.gi.Clutter {
 	interface ListModel extends ListModelMixin {}
 
 	class ListModel {
-		public constructor();
+		public constructor(options?: Partial<ListModelInitOptions>);
 		/**
 		 * Creates a new default model with #n_columns columns with the types
 		 * and names passed in.
@@ -9414,6 +9870,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ModelInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<IModel,
+		"filter_set">;
+
+	export interface ModelInitOptions extends ModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Model} instead.
 	 */
@@ -9427,7 +9889,7 @@ declare namespace imports.gi.Clutter {
 	interface Model extends ModelMixin {}
 
 	class Model {
-		public constructor();
+		public constructor(options?: Partial<ModelInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9482,9 +9944,9 @@ declare namespace imports.gi.Clutter {
 		 * Sets an initializes #value to that at #column. When done with #value,
 		 * g_value_unset() needs to be called to free any allocated memory.
 		 * @param column column number to retrieve the value from
-		 * @param value an empty #GValue to set
+		 * @returns an empty #GValue to set
 		 */
-		get_value(column: number, value: GObject.Value): void;
+		get_value(column: number): GObject.Value;
 		/**
 		 * Gets whether the current iterator is at the beginning of the model
 		 * to which it belongs.
@@ -9543,6 +10005,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ModelIterInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IModelIter,
+		"model" |
+		"row">;
+
+	export interface ModelIterInitOptions extends ModelIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ModelIter} instead.
 	 */
@@ -9556,7 +10025,7 @@ declare namespace imports.gi.Clutter {
 	interface ModelIter extends ModelIterMixin {}
 
 	class ModelIter {
-		public constructor();
+		public constructor(options?: Partial<ModelIterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9590,11 +10059,12 @@ declare namespace imports.gi.Clutter {
 		 * This function should only be called by {@link OffscreenEffect}
 		 * implementations, from within the #ClutterOffscreenEffectClass.paint_target()
 		 * virtual function.
-		 * @param rect return location for the target area
 		 * @returns %TRUE if the offscreen buffer has a valid rectangle,
 		 *   and %FALSE otherwise
+		 * 
+		 * return location for the target area
 		 */
-		get_target_rect(rect: Rect): boolean;
+		get_target_rect(): [ boolean, Rect ];
 		/**
 		 * Retrieves the size of the offscreen buffer used by #effect to
 		 * paint the actor to which it has been applied.
@@ -9604,8 +10074,12 @@ declare namespace imports.gi.Clutter {
 		 * virtual function.
 		 * @returns %TRUE if the offscreen buffer has a valid size,
 		 *   and %FALSE otherwise
+		 * 
+		 * return location for the target width, or %NULL
+		 * 
+		 * return location for the target height, or %NULL
 		 */
-		get_target_size(): boolean;
+		get_target_size(): [ boolean, number, number ];
 		/**
 		 * Retrieves the texture used as a render target for the offscreen
 		 * buffer created by #effect
@@ -9627,6 +10101,9 @@ declare namespace imports.gi.Clutter {
 		paint_target(): void;
 	}
 
+	type OffscreenEffectInitOptionsMixin = EffectInitOptions
+	export interface OffscreenEffectInitOptions extends OffscreenEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OffscreenEffect} instead.
 	 */
@@ -9639,7 +10116,7 @@ declare namespace imports.gi.Clutter {
 	interface OffscreenEffect extends OffscreenEffectMixin {}
 
 	class OffscreenEffect {
-		public constructor();
+		public constructor(options?: Partial<OffscreenEffectInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9696,6 +10173,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PageTurnEffectInitOptionsMixin = DeformEffectInitOptions & 
+	Pick<IPageTurnEffect,
+		"angle" |
+		"period" |
+		"radius">;
+
+	export interface PageTurnEffectInitOptions extends PageTurnEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PageTurnEffect} instead.
 	 */
@@ -9708,7 +10193,7 @@ declare namespace imports.gi.Clutter {
 	interface PageTurnEffect extends PageTurnEffectMixin {}
 
 	class PageTurnEffect {
-		public constructor();
+		public constructor(options?: Partial<PageTurnEffectInitOptions>);
 		/**
 		 * Creates a new {@link PageTurnEffect} instance with the given parameters
 		 * @param period the period of the page curl, between 0.0 and 1.0
@@ -9765,6 +10250,9 @@ declare namespace imports.gi.Clutter {
 		unref(): void;
 	}
 
+	type PaintNodeInitOptionsMixin  = {};
+	export interface PaintNodeInitOptions extends PaintNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PaintNode} instead.
 	 */
@@ -9777,7 +10265,7 @@ declare namespace imports.gi.Clutter {
 	interface PaintNode extends PaintNodeMixin {}
 
 	class PaintNode {
-		public constructor();
+		public constructor(options?: Partial<PaintNodeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9819,8 +10307,12 @@ declare namespace imports.gi.Clutter {
 		 * @param point the touch point index, with 0 being the first touch
 		 *   point received by the action
 		 * @returns the distance since last motion event
+		 * 
+		 * return location for the X delta
+		 * 
+		 * return location for the Y delta
 		 */
-		get_constrained_motion_delta(point: number): number;
+		get_constrained_motion_delta(point: number): [ number, number | null, number | null ];
 		/**
 		 * Retrieves the deceleration rate of interpolated ::pan events.
 		 * @returns The deceleration rate of the interpolated events.
@@ -9847,8 +10339,14 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the delta, in stage space, since the latest interpolated
 		 * event, analogous to clutter_gesture_action_get_motion_delta().
 		 * @returns the distance since the latest interpolated event
+		 * 
+		 * return location for the X delta since
+		 *   the latest interpolated event
+		 * 
+		 * return location for the Y delta since
+		 *   the latest interpolated event
 		 */
-		get_interpolated_delta(): number;
+		get_interpolated_delta(): [ number, number | null, number | null ];
 		/**
 		 * Retrieves the coordinates, in stage space, dependent on the current state
 		 * of the {@link PanAction}. If it is inactive, both fields will be
@@ -9877,8 +10375,12 @@ declare namespace imports.gi.Clutter {
 		 * @param point the touch point index, with 0 being the first touch
 		 *   point received by the action
 		 * @returns 
+		 * 
+		 * return location for the X delta
+		 * 
+		 * return location for the Y delta
 		 */
-		get_motion_delta(point: number): number;
+		get_motion_delta(point: number): [ number, number | null, number | null ];
 		/**
 		 * Retrieves the axis constraint set by clutter_pan_action_set_pan_axis()
 		 * @returns the axis constraint
@@ -9928,6 +10430,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PanActionInitOptionsMixin = GestureActionInitOptions & 
+	Pick<IPanAction,
+		"acceleration_factor" |
+		"deceleration" |
+		"interpolate" |
+		"pan_axis">;
+
+	export interface PanActionInitOptions extends PanActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PanAction} instead.
 	 */
@@ -9940,7 +10451,7 @@ declare namespace imports.gi.Clutter {
 	interface PanAction extends PanActionMixin {}
 
 	class PanAction {
-		public constructor();
+		public constructor(options?: Partial<PanActionInitOptions>);
 		/**
 		 * Creates a new {@link PanAction} instance
 		 * @returns the newly created {@link PanAction}
@@ -9961,6 +10472,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ParamSpecColorInitOptionsMixin = GObject.ParamSpecInitOptions & 
+	Pick<IParamSpecColor,
+		"default_value">;
+
+	export interface ParamSpecColorInitOptions extends ParamSpecColorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecColor} instead.
 	 */
@@ -9973,7 +10490,7 @@ declare namespace imports.gi.Clutter {
 	interface ParamSpecColor extends ParamSpecColorMixin {}
 
 	class ParamSpecColor {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecColorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9999,6 +10516,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ParamSpecFixedInitOptionsMixin = GObject.ParamSpecInitOptions & 
+	Pick<IParamSpecFixed,
+		"minimum" |
+		"maximum" |
+		"default_value">;
+
+	export interface ParamSpecFixedInitOptions extends ParamSpecFixedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecFixed} instead.
 	 */
@@ -10010,7 +10535,7 @@ declare namespace imports.gi.Clutter {
 	interface ParamSpecFixed extends ParamSpecFixedMixin {}
 
 	class ParamSpecFixed {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecFixedInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10020,6 +10545,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ParamSpecUnitInitOptionsMixin = GObject.ParamSpecInitOptions
+	export interface ParamSpecUnitInitOptions extends ParamSpecUnitInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ParamSpecUnit} instead.
 	 */
@@ -10028,7 +10556,7 @@ declare namespace imports.gi.Clutter {
 	interface ParamSpecUnit extends ParamSpecUnitMixin {}
 
 	class ParamSpecUnit {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecUnitInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10162,9 +10690,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Retrieves the node of the path indexed by #index.
 		 * @param index_ the node number to retrieve
-		 * @param node a location to store a copy of the node
+		 * @returns a location to store a copy of the node
 		 */
-		get_node(index_: number, node: PathNode): void;
+		get_node(index_: number): PathNode;
 		/**
 		 * Returns a #GSList of {@link PathNode}<!-- -->s. The list should be
 		 * freed with g_slist_free(). The nodes are owned by the path and
@@ -10180,10 +10708,11 @@ declare namespace imports.gi.Clutter {
 		 * 0.0 is the beginning and 1.0 is the end of the path. An
 		 * interpolated position is then stored in #position.
 		 * @param progress a position along the path as a fraction of its length
-		 * @param position location to store the position
 		 * @returns index of the node used to calculate the position.
+		 * 
+		 * location to store the position
 		 */
-		get_position(progress: number, position: Knot): number;
+		get_position(progress: number): [ number, Knot ];
 		/**
 		 * Inserts #node into the path before the node at the given offset. If
 		 * #index_ is negative it will append the node to the end of the path.
@@ -10222,6 +10751,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PathInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<IPath,
+		"description" |
+		"length">;
+
+	export interface PathInitOptions extends PathInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Path} instead.
 	 */
@@ -10234,7 +10770,7 @@ declare namespace imports.gi.Clutter {
 	interface Path extends PathMixin {}
 
 	class Path {
-		public constructor();
+		public constructor(options?: Partial<PathInitOptions>);
 		/**
 		 * Creates a new {@link Path} instance with no nodes.
 		 * 
@@ -10305,6 +10841,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PathConstraintInitOptionsMixin = ConstraintInitOptions & 
+	Pick<IPathConstraint,
+		"offset" |
+		"path">;
+
+	export interface PathConstraintInitOptions extends PathConstraintInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PathConstraint} instead.
 	 */
@@ -10317,7 +10860,7 @@ declare namespace imports.gi.Clutter {
 	interface PathConstraint extends PathConstraintMixin {}
 
 	class PathConstraint {
-		public constructor();
+		public constructor(options?: Partial<PathConstraintInitOptions>);
 		/**
 		 * Creates a new {@link PathConstraint} with the given #path and #offset
 		 * @param path a {@link Path}, or %NULL
@@ -10334,6 +10877,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PipelineNodeInitOptionsMixin = PaintNodeInitOptions
+	export interface PipelineNodeInitOptions extends PipelineNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PipelineNode} instead.
 	 */
@@ -10346,7 +10892,7 @@ declare namespace imports.gi.Clutter {
 	interface PipelineNode extends PipelineNodeMixin {}
 
 	class PipelineNode {
-		public constructor();
+		public constructor(options?: Partial<PipelineNodeInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10374,6 +10920,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type PropertyTransitionInitOptionsMixin = TransitionInitOptions & ScriptableInitOptions & 
+	Pick<IPropertyTransition,
+		"property_name">;
+
+	export interface PropertyTransitionInitOptions extends PropertyTransitionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PropertyTransition} instead.
 	 */
@@ -10386,7 +10938,7 @@ declare namespace imports.gi.Clutter {
 	interface PropertyTransition extends PropertyTransitionMixin {}
 
 	class PropertyTransition {
-		public constructor();
+		public constructor(options?: Partial<PropertyTransitionInitOptions>);
 		/**
 		 * Creates a new {@link PropertyTransition}.
 		 * @param property_name a property of #animatable, or %NULL
@@ -10419,9 +10971,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Gets the color of the border used by #rectangle and places
 		 * it into #color.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_border_color(color: Color): void;
+		get_border_color(): Color;
 		/**
 		 * Gets the width (in pixels) of the border used by #rectangle
 		 * @returns the border's width
@@ -10429,9 +10981,9 @@ declare namespace imports.gi.Clutter {
 		get_border_width(): number;
 		/**
 		 * Retrieves the color of #rectangle.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_color(color: Color): void;
+		get_color(): Color;
 		/**
 		 * Sets the color of the border used by #rectangle using #color
 		 * @param color the color of the border
@@ -10455,6 +11007,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type RectangleInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IRectangle,
+		"border_color" |
+		"border_width" |
+		"color" |
+		"has_border">;
+
+	export interface RectangleInitOptions extends RectangleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Rectangle} instead.
 	 */
@@ -10467,7 +11028,7 @@ declare namespace imports.gi.Clutter {
 	interface Rectangle extends RectangleMixin {}
 
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		/**
 		 * Creates a new {@link Actor} with a rectangular shape.
 		 * @returns a new {@link Rectangle}
@@ -10496,6 +11057,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type RotateActionInitOptionsMixin = GestureActionInitOptions
+	export interface RotateActionInitOptions extends RotateActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RotateAction} instead.
 	 */
@@ -10508,7 +11072,7 @@ declare namespace imports.gi.Clutter {
 	interface RotateAction extends RotateActionMixin {}
 
 	class RotateAction {
-		public constructor();
+		public constructor(options?: Partial<RotateActionInitOptions>);
 		/**
 		 * Creates a new {@link RotateAction} instance
 		 * @returns the newly created {@link RotateAction}
@@ -10642,6 +11206,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ScoreInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IScore,
+		"loop">;
+
+	export interface ScoreInitOptions extends ScoreInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Score} instead.
 	 */
@@ -10654,7 +11224,7 @@ declare namespace imports.gi.Clutter {
 	interface Score extends ScoreMixin {}
 
 	class Score {
-		public constructor();
+		public constructor(options?: Partial<ScoreInitOptions>);
 		/**
 		 * Creates a new {@link Score}. A #ClutterScore is an object that can
 		 * hold multiple #ClutterTimeline<!-- -->s in a sequential order.
@@ -10863,6 +11433,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ScriptInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IScript,
+		"filename" |
+		"filename_set" |
+		"translation_domain">;
+
+	export interface ScriptInitOptions extends ScriptInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Script} instead.
 	 */
@@ -10875,7 +11453,7 @@ declare namespace imports.gi.Clutter {
 	interface Script extends ScriptMixin {}
 
 	class Script {
-		public constructor();
+		public constructor(options?: Partial<ScriptInitOptions>);
 		/**
 		 * Creates a new {@link Script} instance. #ClutterScript can be used
 		 * to load objects definitions for scenegraph elements, like actors,
@@ -10926,6 +11504,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ScrollActorInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IScrollActor,
+		"scroll_mode">;
+
+	export interface ScrollActorInitOptions extends ScrollActorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ScrollActor} instead.
 	 */
@@ -10938,7 +11522,7 @@ declare namespace imports.gi.Clutter {
 	interface ScrollActor extends ScrollActorMixin {}
 
 	class ScrollActor {
-		public constructor();
+		public constructor(options?: Partial<ScrollActorInitOptions>);
 		/**
 		 * Creates a new {@link ScrollActor}.
 		 * @returns The newly created {@link ScrollActor}
@@ -11035,6 +11619,23 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type SettingsInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISettings,
+		"dnd_drag_threshold" |
+		"double_click_distance" |
+		"double_click_time" |
+		"font_antialias" |
+		"font_dpi" |
+		"font_hint_style" |
+		"font_hinting" |
+		"font_name" |
+		"font_subpixel_order" |
+		"long_press_duration" |
+		"password_hint_time" |
+		"window_scaling_factor">;
+
+	export interface SettingsInitOptions extends SettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
@@ -11047,7 +11648,7 @@ declare namespace imports.gi.Clutter {
 	interface Settings extends SettingsMixin {}
 
 	class Settings {
-		public constructor();
+		public constructor(options?: Partial<SettingsInitOptions>);
 		/**
 		 * Retrieves the singleton instance of {@link Settings}
 		 * @returns the instance of {@link Settings}. The
@@ -11174,6 +11775,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ShaderInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IShader,
+		"compiled" |
+		"enabled" |
+		"fragment_source" |
+		"vertex_source">;
+
+	export interface ShaderInitOptions extends ShaderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Shader} instead.
 	 */
@@ -11186,7 +11796,7 @@ declare namespace imports.gi.Clutter {
 	interface Shader extends ShaderMixin {}
 
 	class Shader {
-		public constructor();
+		public constructor(options?: Partial<ShaderInitOptions>);
 		/**
 		 * Create a new {@link Shader} instance.
 		 * @returns a new {@link Shader}.
@@ -11295,6 +11905,9 @@ declare namespace imports.gi.Clutter {
 		set_uniform_value(name: string, value: GObject.Value): void;
 	}
 
+	type ShaderEffectInitOptionsMixin = OffscreenEffectInitOptions
+	export interface ShaderEffectInitOptions extends ShaderEffectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderEffect} instead.
 	 */
@@ -11307,7 +11920,7 @@ declare namespace imports.gi.Clutter {
 	interface ShaderEffect extends ShaderEffectMixin {}
 
 	class ShaderEffect {
-		public constructor();
+		public constructor(options?: Partial<ShaderEffectInitOptions>);
 		/**
 		 * Creates a new {@link ShaderEffect}, to be applied to an actor using
 		 * clutter_actor_add_effect().
@@ -11329,6 +11942,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ShaderFloatInitOptionsMixin  = {};
+	export interface ShaderFloatInitOptions extends ShaderFloatInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderFloat} instead.
 	 */
@@ -11337,7 +11953,7 @@ declare namespace imports.gi.Clutter {
 	interface ShaderFloat extends ShaderFloatMixin {}
 
 	class ShaderFloat {
-		public constructor();
+		public constructor(options?: Partial<ShaderFloatInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11347,6 +11963,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ShaderIntInitOptionsMixin  = {};
+	export interface ShaderIntInitOptions extends ShaderIntInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderInt} instead.
 	 */
@@ -11355,7 +11974,7 @@ declare namespace imports.gi.Clutter {
 	interface ShaderInt extends ShaderIntMixin {}
 
 	class ShaderInt {
-		public constructor();
+		public constructor(options?: Partial<ShaderIntInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11365,6 +11984,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ShaderMatrixInitOptionsMixin  = {};
+	export interface ShaderMatrixInitOptions extends ShaderMatrixInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ShaderMatrix} instead.
 	 */
@@ -11373,7 +11995,7 @@ declare namespace imports.gi.Clutter {
 	interface ShaderMatrix extends ShaderMatrixMixin {}
 
 	class ShaderMatrix {
-		public constructor();
+		public constructor(options?: Partial<ShaderMatrixInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11441,6 +12063,15 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type SnapConstraintInitOptionsMixin = ConstraintInitOptions & 
+	Pick<ISnapConstraint,
+		"from_edge" |
+		"offset" |
+		"source" |
+		"to_edge">;
+
+	export interface SnapConstraintInitOptions extends SnapConstraintInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SnapConstraint} instead.
 	 */
@@ -11453,7 +12084,7 @@ declare namespace imports.gi.Clutter {
 	interface SnapConstraint extends SnapConstraintMixin {}
 
 	class SnapConstraint {
-		public constructor();
+		public constructor(options?: Partial<SnapConstraintInitOptions>);
 		/**
 		 * Creates a new {@link SnapConstraint} that will snap a #ClutterActor
 		 * to the #edge of #source, with the given #offset.
@@ -11588,14 +12219,14 @@ declare namespace imports.gi.Clutter {
 		get_actor_at_pos(pick_mode: PickMode, x: number, y: number): Actor;
 		/**
 		 * Retrieves the stage color.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_color(color: Color): void;
+		get_color(): Color;
 		/**
 		 * Retrieves the current depth cueing settings from the stage.
-		 * @param fog return location for a {@link Fog} structure
+		 * @returns return location for a {@link Fog} structure
 		 */
-		get_fog(fog: Fog): void;
+		get_fog(): Fog;
 		/**
 		 * Retrieves whether the stage is full screen or not
 		 * @returns %TRUE if the stage is full screen
@@ -11634,10 +12265,10 @@ declare namespace imports.gi.Clutter {
 		get_no_clear_hint(): boolean;
 		/**
 		 * Retrieves the stage perspective.
-		 * @param perspective return location for a
+		 * @returns return location for a
 		 *   {@link Perspective}
 		 */
-		get_perspective(perspective: Perspective | null): void;
+		get_perspective(): Perspective | null;
 		/**
 		 * Gets the bounds of the current redraw for #stage in stage pixel
 		 * coordinates. E.g., if only a single actor has queued a redraw then
@@ -11648,9 +12279,9 @@ declare namespace imports.gi.Clutter {
 		 * aren't going to be painted. This should only be called while the
 		 * stage is being painted. If there is no current redraw clip then
 		 * this function will set #clip to the full extents of the stage.
-		 * @param clip Return location for the clip bounds
+		 * @returns Return location for the clip bounds
 		 */
-		get_redraw_clip_bounds(clip: cairo.RectangleInt): void;
+		get_redraw_clip_bounds(): cairo.RectangleInt;
 		/**
 		 * Retrieves the value set with clutter_stage_set_throttle_motion_events()
 		 * @returns %TRUE if the motion events are being throttled,
@@ -11970,6 +12601,24 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type StageInitOptionsMixin = GroupInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IStage,
+		"accept_focus" |
+		"color" |
+		"cursor_visible" |
+		"fog" |
+		"fullscreen_set" |
+		"key_focus" |
+		"no_clear_hint" |
+		"offscreen" |
+		"perspective" |
+		"title" |
+		"use_alpha" |
+		"use_fog" |
+		"user_resizable">;
+
+	export interface StageInitOptions extends StageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stage} instead.
 	 */
@@ -11982,7 +12631,7 @@ declare namespace imports.gi.Clutter {
 	interface Stage extends StageMixin {}
 
 	class Stage {
-		public constructor();
+		public constructor(options?: Partial<StageInitOptions>);
 		/**
 		 * Creates a new, non-default stage. A non-default stage is a new
 		 * top-level actor which can be used as another container. It works
@@ -12073,6 +12722,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type StageManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IStageManager,
+		"default_stage">;
+
+	export interface StageManagerInitOptions extends StageManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link StageManager} instead.
 	 */
@@ -12084,7 +12739,7 @@ declare namespace imports.gi.Clutter {
 	interface StageManager extends StageManagerMixin {}
 
 	class StageManager {
-		public constructor();
+		public constructor(options?: Partial<StageManagerInitOptions>);
 		/**
 		 * Returns the default {@link StageManager}.
 		 * @returns the default stage manager instance. The returned
@@ -12330,6 +12985,13 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type StateInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<IState,
+		"duration" |
+		"state">;
+
+	export interface StateInitOptions extends StateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link State} instead.
 	 */
@@ -12342,7 +13004,7 @@ declare namespace imports.gi.Clutter {
 	interface State extends StateMixin {}
 
 	class State {
-		public constructor();
+		public constructor(options?: Partial<StateInitOptions>);
 		/**
 		 * Creates a new {@link State}
 		 * @returns the newly create {@link State} instance
@@ -12368,6 +13030,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type SwipeActionInitOptionsMixin = GestureActionInitOptions
+	export interface SwipeActionInitOptions extends SwipeActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SwipeAction} instead.
 	 */
@@ -12380,7 +13045,7 @@ declare namespace imports.gi.Clutter {
 	interface SwipeAction extends SwipeActionMixin {}
 
 	class SwipeAction {
-		public constructor();
+		public constructor(options?: Partial<SwipeActionInitOptions>);
 		/**
 		 * Creates a new {@link SwipeAction} instance
 		 * @returns the newly created {@link SwipeAction}
@@ -12590,6 +13255,16 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TableLayoutInitOptionsMixin = LayoutManagerInitOptions & 
+	Pick<ITableLayout,
+		"column_spacing" |
+		"easing_duration" |
+		"easing_mode" |
+		"row_spacing" |
+		"use_animations">;
+
+	export interface TableLayoutInitOptions extends TableLayoutInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TableLayout} instead.
 	 */
@@ -12602,7 +13277,7 @@ declare namespace imports.gi.Clutter {
 	interface TableLayout extends TableLayoutMixin {}
 
 	class TableLayout {
-		public constructor();
+		public constructor(options?: Partial<TableLayoutInitOptions>);
 		/**
 		 * Creates a new {@link TableLayout} layout manager
 		 * @returns the newly created {@link TableLayout}
@@ -12622,6 +13297,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TapActionInitOptionsMixin = GestureActionInitOptions
+	export interface TapActionInitOptions extends TapActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TapAction} instead.
 	 */
@@ -12634,7 +13312,7 @@ declare namespace imports.gi.Clutter {
 	interface TapAction extends TapActionMixin {}
 
 	class TapAction {
-		public constructor();
+		public constructor(options?: Partial<TapActionInitOptions>);
 		/**
 		 * Creates a new {@link TapAction} instance
 		 * @returns the newly created {@link TapAction}
@@ -12881,14 +13559,14 @@ declare namespace imports.gi.Clutter {
 		get_chars(start_pos: number, end_pos: number): string;
 		/**
 		 * Retrieves the text color as set by clutter_text_set_color().
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_color(color: Color): void;
+		get_color(): Color;
 		/**
 		 * Retrieves the color of the cursor of a {@link Text} actor.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_cursor_color(color: Color): void;
+		get_cursor_color(): Color;
 		/**
 		 * Retrieves the cursor position.
 		 * @returns the cursor position, in characters
@@ -12899,9 +13577,9 @@ declare namespace imports.gi.Clutter {
 		 * 
 		 * The coordinates of the rectangle's origin are in actor-relative
 		 * coordinates.
-		 * @param rect return location of a {@link Rect}
+		 * @returns return location of a {@link Rect}
 		 */
-		get_cursor_rect(rect: Rect): void;
+		get_cursor_rect(): Rect;
 		/**
 		 * Retrieves the size of the cursor of a {@link Text} actor.
 		 * @returns the size of the cursor, in pixels
@@ -12996,9 +13674,9 @@ declare namespace imports.gi.Clutter {
 		get_selectable(): boolean;
 		/**
 		 * Retrieves the color of selected text of a {@link Text} actor.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_selected_text_color(color: Color): void;
+		get_selected_text_color(): Color;
 		/**
 		 * Retrieves the currently selected text.
 		 * @returns a newly allocated string containing the currently
@@ -13014,9 +13692,9 @@ declare namespace imports.gi.Clutter {
 		get_selection_bound(): number;
 		/**
 		 * Retrieves the color of the selection of a {@link Text} actor.
-		 * @param color return location for a {@link Color}
+		 * @returns return location for a {@link Color}
 		 */
-		get_selection_color(color: Color): void;
+		get_selection_color(): Color;
 		/**
 		 * Retrieves whether the {@link Text} actor is in single line mode.
 		 * @returns %TRUE if the {@link Text} actor is in single line mode
@@ -13069,8 +13747,14 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the coordinates of the given #position.
 		 * @param position position in characters
 		 * @returns %TRUE if the conversion was successful
+		 * 
+		 * return location for the X coordinate, or %NULL
+		 * 
+		 * return location for the Y coordinate, or %NULL
+		 * 
+		 * return location for the line height, or %NULL
 		 */
-		position_to_coords(position: number): boolean;
+		position_to_coords(position: number): [ boolean, number, number, number ];
 		/**
 		 * Sets whether a {@link Text} actor should be activatable.
 		 * 
@@ -13413,6 +14097,40 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TextInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<IText,
+		"activatable" |
+		"attributes" |
+		"buffer" |
+		"color" |
+		"cursor_color" |
+		"cursor_color_set" |
+		"cursor_position" |
+		"cursor_size" |
+		"cursor_visible" |
+		"editable" |
+		"ellipsize" |
+		"font_description" |
+		"font_name" |
+		"justify" |
+		"line_alignment" |
+		"line_wrap" |
+		"line_wrap_mode" |
+		"max_length" |
+		"password_char" |
+		"position" |
+		"selectable" |
+		"selected_text_color" |
+		"selected_text_color_set" |
+		"selection_bound" |
+		"selection_color" |
+		"selection_color_set" |
+		"single_line_mode" |
+		"text" |
+		"use_markup">;
+
+	export interface TextInitOptions extends TextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
@@ -13424,7 +14142,7 @@ declare namespace imports.gi.Clutter {
 	interface Text extends TextMixin {}
 
 	class Text {
-		public constructor();
+		public constructor(options?: Partial<TextInitOptions>);
 		/**
 		 * Creates a new {@link Text} actor. This actor can be used to
 		 * display and edit text.
@@ -13591,6 +14309,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TextBufferInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITextBuffer,
+		"length" |
+		"max_length" |
+		"text">;
+
+	export interface TextBufferInitOptions extends TextBufferInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextBuffer} instead.
 	 */
@@ -13603,7 +14329,7 @@ declare namespace imports.gi.Clutter {
 	interface TextBuffer extends TextBufferMixin {}
 
 	class TextBuffer {
-		public constructor();
+		public constructor(options?: Partial<TextBufferInitOptions>);
 		/**
 		 * Create a new ClutterTextBuffer object.
 		 * @returns A new ClutterTextBuffer object.
@@ -13625,6 +14351,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TextNodeInitOptionsMixin = PaintNodeInitOptions
+	export interface TextNodeInitOptions extends TextNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextNode} instead.
 	 */
@@ -13637,7 +14366,7 @@ declare namespace imports.gi.Clutter {
 	interface TextNode extends TextNodeMixin {}
 
 	class TextNode {
-		public constructor();
+		public constructor(options?: Partial<TextNodeInitOptions>);
 		/**
 		 * Creates a new {@link PaintNode} that will paint a #PangoLayout
 		 * with the given color.
@@ -13949,6 +14678,23 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TextureInitOptionsMixin = ActorInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
+	Pick<ITexture,
+		"cogl_material" |
+		"cogl_texture" |
+		"disable_slicing" |
+		"filename" |
+		"filter_quality" |
+		"keep_aspect_ratio" |
+		"pick_with_alpha" |
+		"pixel_format" |
+		"repeat_x" |
+		"repeat_y" |
+		"sync_size" |
+		"tile_waste">;
+
+	export interface TextureInitOptions extends TextureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
@@ -13961,7 +14707,7 @@ declare namespace imports.gi.Clutter {
 	interface Texture extends TextureMixin {}
 
 	class Texture {
-		public constructor();
+		public constructor(options?: Partial<TextureInitOptions>);
 		/**
 		 * Creates a new empty {@link Texture} object.
 		 * @returns A newly created {@link Texture} object.
@@ -14039,6 +14785,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TextureNodeInitOptionsMixin = PipelineNodeInitOptions
+	export interface TextureNodeInitOptions extends TextureNodeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TextureNode} instead.
 	 */
@@ -14051,7 +14800,7 @@ declare namespace imports.gi.Clutter {
 	interface TextureNode extends TextureNodeMixin {}
 
 	class TextureNode {
-		public constructor();
+		public constructor(options?: Partial<TextureNodeInitOptions>);
 		/**
 		 * Creates a new {@link PaintNode} that will paint the passed #texture.
 		 * 
@@ -14197,14 +14946,16 @@ declare namespace imports.gi.Clutter {
 		get_auto_reverse(): boolean;
 		/**
 		 * Retrieves the control points for the cubic bezier progress mode.
-		 * @param c_1 return location for the first control
-		 *   point of the cubic bezier, or %NULL
-		 * @param c_2 return location for the second control
-		 *   point of the cubic bezier, or %NULL
 		 * @returns %TRUE if the #timeline is using a cubic bezier progress
 		 *   more, and %FALSE otherwise
+		 * 
+		 * return location for the first control
+		 *   point of the cubic bezier, or %NULL
+		 * 
+		 * return location for the second control
+		 *   point of the cubic bezier, or %NULL
 		 */
-		get_cubic_bezier_progress(c_1: Point, c_2: Point): boolean;
+		get_cubic_bezier_progress(): [ boolean, Point, Point ];
 		/**
 		 * Retrieves the current repeat for a timeline.
 		 * 
@@ -14286,8 +15037,13 @@ declare namespace imports.gi.Clutter {
 		 * Retrieves the parameters of the step progress mode used by #timeline.
 		 * @returns %TRUE if the #timeline is using a step progress
 		 *   mode, and %FALSE otherwise
+		 * 
+		 * return location for the number of steps, or %NULL
+		 * 
+		 * return location for the value change policy,
+		 *   or %NULL
 		 */
-		get_step_progress(): boolean;
+		get_step_progress(): [ boolean, number, StepMode ];
 		/**
 		 * Checks whether #timeline has a marker set with the given name.
 		 * @param marker_name the name of the marker
@@ -14307,8 +15063,10 @@ declare namespace imports.gi.Clutter {
 		 * @returns 
 		 *   a newly allocated, %NULL terminated string array containing the names
 		 *   of the markers. Use g_strfreev() when done.
+		 * 
+		 * the number of markers returned
 		 */
-		list_markers(msecs: number): string[];
+		list_markers(msecs: number): [ string[], number ];
 		/**
 		 * Pauses the {@link Timeline} on current frame
 		 */
@@ -14534,6 +15292,18 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TimelineInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
+	Pick<ITimeline,
+		"auto_reverse" |
+		"delay" |
+		"direction" |
+		"duration" |
+		"loop" |
+		"progress_mode" |
+		"repeat_count">;
+
+	export interface TimelineInitOptions extends TimelineInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Timeline} instead.
 	 */
@@ -14546,7 +15316,7 @@ declare namespace imports.gi.Clutter {
 	interface Timeline extends TimelineMixin {}
 
 	class Timeline {
-		public constructor();
+		public constructor(options?: Partial<TimelineInitOptions>);
 		/**
 		 * Creates a new {@link Timeline} with a duration of #msecs.
 		 * @param msecs Duration of the timeline in milliseconds
@@ -14701,6 +15471,14 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type TransitionInitOptionsMixin = TimelineInitOptions & ScriptableInitOptions & 
+	Pick<ITransition,
+		"animatable" |
+		"interval" |
+		"remove_on_complete">;
+
+	export interface TransitionInitOptions extends TransitionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Transition} instead.
 	 */
@@ -14713,7 +15491,7 @@ declare namespace imports.gi.Clutter {
 	interface Transition extends TransitionMixin {}
 
 	class Transition {
-		public constructor();
+		public constructor(options?: Partial<TransitionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14745,6 +15523,9 @@ declare namespace imports.gi.Clutter {
 		remove_transition(transition: Transition): void;
 	}
 
+	type TransitionGroupInitOptionsMixin = TransitionInitOptions & ScriptableInitOptions
+	export interface TransitionGroupInitOptions extends TransitionGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TransitionGroup} instead.
 	 */
@@ -14757,7 +15538,7 @@ declare namespace imports.gi.Clutter {
 	interface TransitionGroup extends TransitionGroupMixin {}
 
 	class TransitionGroup {
-		public constructor();
+		public constructor(options?: Partial<TransitionGroupInitOptions>);
 		/**
 		 * Creates a new {@link TransitionGroup} instance.
 		 * @returns the newly created {@link TransitionGroup}. Use
@@ -14777,15 +15558,15 @@ declare namespace imports.gi.Clutter {
 		zoom_axis: ZoomAxis;
 		/**
 		 * Retrieves the focal point of the current zoom
-		 * @param point a {@link Point}
+		 * @returns a {@link Point}
 		 */
-		get_focal_point(point: Point): void;
+		get_focal_point(): Point;
 		/**
 		 * Retrieves the focal point relative to the actor's coordinates of
 		 * the current zoom
-		 * @param point a {@link Point}
+		 * @returns a {@link Point}
 		 */
-		get_transformed_focal_point(point: Point): void;
+		get_transformed_focal_point(): Point;
 		/**
 		 * Retrieves the axis constraint set by clutter_zoom_action_set_zoom_axis()
 		 * @returns the axis constraint
@@ -14812,6 +15593,12 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ZoomActionInitOptionsMixin = GestureActionInitOptions & 
+	Pick<IZoomAction,
+		"zoom_axis">;
+
+	export interface ZoomActionInitOptions extends ZoomActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZoomAction} instead.
 	 */
@@ -14824,7 +15611,7 @@ declare namespace imports.gi.Clutter {
 	interface ZoomAction extends ZoomActionMixin {}
 
 	class ZoomAction {
-		public constructor();
+		public constructor(options?: Partial<ZoomActionInitOptions>);
 		/**
 		 * Creates a new {@link ZoomAction} instance
 		 * @returns the newly created {@link ZoomAction}
@@ -14832,12 +15619,13 @@ declare namespace imports.gi.Clutter {
 		public static new(): Action;
 	}
 
+	export interface ActionClassInitOptions {}
 	/**
 	 * The ClutterActionClass structure contains only private data
 	 */
 	interface ActionClass {}
 	class ActionClass {
-		public constructor();
+		public constructor(options?: Partial<ActionClassInitOptions>);
 		public _clutter_action1: {(): void;};
 		public _clutter_action2: {(): void;};
 		public _clutter_action3: {(): void;};
@@ -14848,6 +15636,7 @@ declare namespace imports.gi.Clutter {
 		public _clutter_action8: {(): void;};
 	}
 
+	export interface ActorBoxInitOptions {}
 	/**
 	 * Bounding box of an actor. The coordinates of the top left and right bottom
 	 * corners of an actor. The coordinates of the two points are expressed in
@@ -14855,7 +15644,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ActorBox {}
 	class ActorBox {
-		public constructor();
+		public constructor(options?: Partial<ActorBoxInitOptions>);
 		/**
 		 * Allocates a new {@link ActorBox} using the passed coordinates
 		 * for the top left and bottom right points.
@@ -14987,9 +15776,9 @@ declare namespace imports.gi.Clutter {
 		 * using #progress
 		 * @param _final the final {@link ActorBox}
 		 * @param progress the interpolation progress
-		 * @param result return location for the interpolation
+		 * @returns return location for the interpolation
 		 */
-		public interpolate(_final: ActorBox, progress: number, result: ActorBox): void;
+		public interpolate(_final: ActorBox, progress: number): ActorBox;
 		/**
 		 * Changes the origin of #box, maintaining the size of the {@link ActorBox}.
 		 * @param x the X coordinate of the new origin
@@ -15005,18 +15794,19 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Unions the two boxes #a and #b and stores the result in #result.
 		 * @param b the second {@link ActorBox}
-		 * @param result the {@link ActorBox} representing a union
+		 * @returns the {@link ActorBox} representing a union
 		 *   of #a and #b
 		 */
-		public union(b: ActorBox, result: ActorBox): void;
+		public union(b: ActorBox): ActorBox;
 	}
 
+	export interface ActorClassInitOptions {}
 	/**
 	 * Base class for actors.
 	 */
 	interface ActorClass {}
 	class ActorClass {
-		public constructor();
+		public constructor(options?: Partial<ActorClassInitOptions>);
 		public readonly _padding_dummy: any[];
 		public show: {(self: Actor): void;};
 		public show_all: {(self: Actor): void;};
@@ -15055,6 +15845,7 @@ declare namespace imports.gi.Clutter {
 		public touch_event: {(self: Actor, event: TouchEvent): boolean;};
 	}
 
+	export interface ActorIterInitOptions {}
 	/**
 	 * An iterator structure that allows to efficiently iterate over a
 	 * section of the scene graph.
@@ -15064,7 +15855,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ActorIter {}
 	class ActorIter {
-		public constructor();
+		public constructor(options?: Partial<ActorIterInitOptions>);
 		public readonly dummy1: any;
 		public readonly dummy2: any;
 		public readonly dummy3: any;
@@ -15121,8 +15912,10 @@ declare namespace imports.gi.Clutter {
 		 * If the iterator cannot advance, this function returns %FALSE, and
 		 * the contents of #child are undefined.
 		 * @returns %TRUE if the iterator could advance, and %FALSE otherwise.
+		 * 
+		 * return location for a {@link Actor}
 		 */
-		public next(): boolean;
+		public next(): [ boolean, Actor ];
 		/**
 		 * Advances the #iter and retrieves the previous child of the root
 		 * {@link Actor} that was used to initialize the #ClutterActorIterator.
@@ -15133,8 +15926,10 @@ declare namespace imports.gi.Clutter {
 		 * If the iterator cannot advance, this function returns %FALSE, and
 		 * the contents of #child are undefined.
 		 * @returns %TRUE if the iterator could advance, and %FALSE otherwise.
+		 * 
+		 * return location for a {@link Actor}
 		 */
-		public prev(): boolean;
+		public prev(): [ boolean, Actor ];
 		/**
 		 * Safely removes the {@link Actor} currently pointer to by the iterator
 		 * from its parent.
@@ -15148,13 +15943,14 @@ declare namespace imports.gi.Clutter {
 		public remove(): void;
 	}
 
+	export interface ActorMetaClassInitOptions {}
 	/**
 	 * The {@link ActorMetaClass} structure contains
 	 * only private data
 	 */
 	interface ActorMetaClass {}
 	class ActorMetaClass {
-		public constructor();
+		public constructor(options?: Partial<ActorMetaClassInitOptions>);
 		public set_actor: {(meta: ActorMeta, actor: Actor | null): void;};
 		public _clutter_meta1: {(): void;};
 		public _clutter_meta2: {(): void;};
@@ -15165,27 +15961,31 @@ declare namespace imports.gi.Clutter {
 		public _clutter_meta7: {(): void;};
 	}
 
+	export interface ActorMetaPrivateInitOptions {}
 	interface ActorMetaPrivate {}
 	class ActorMetaPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActorMetaPrivateInitOptions>);
 	}
 
+	export interface ActorPrivateInitOptions {}
 	interface ActorPrivate {}
 	class ActorPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActorPrivateInitOptions>);
 	}
 
+	export interface AlignConstraintClassInitOptions {}
 	interface AlignConstraintClass {}
 	class AlignConstraintClass {
-		public constructor();
+		public constructor(options?: Partial<AlignConstraintClassInitOptions>);
 	}
 
+	export interface AlphaClassInitOptions {}
 	/**
 	 * Base class for {@link Alpha}
 	 */
 	interface AlphaClass {}
 	class AlphaClass {
-		public constructor();
+		public constructor(options?: Partial<AlphaClassInitOptions>);
 		public _clutter_alpha_1: {(): void;};
 		public _clutter_alpha_2: {(): void;};
 		public _clutter_alpha_3: {(): void;};
@@ -15193,33 +15993,36 @@ declare namespace imports.gi.Clutter {
 		public _clutter_alpha_5: {(): void;};
 	}
 
+	export interface AlphaPrivateInitOptions {}
 	interface AlphaPrivate {}
 	class AlphaPrivate {
-		public constructor();
+		public constructor(options?: Partial<AlphaPrivateInitOptions>);
 	}
 
+	export interface AnimatableIfaceInitOptions {}
 	/**
 	 * Base interface for #GObject<!-- -->s that can be animated by a
 	 * a {@link Animation}.
 	 */
 	interface AnimatableIface {}
 	class AnimatableIface {
-		public constructor();
+		public constructor(options?: Partial<AnimatableIfaceInitOptions>);
 		public readonly parent_iface: GObject.TypeInterface;
 		public animate_property: {(animatable: Animatable, animation: Animation, property_name: string, initial_value: GObject.Value, final_value: GObject.Value, progress: number, value: GObject.Value): boolean;};
 		public find_property: {(animatable: Animatable, property_name: string): GObject.ParamSpec;};
 		public get_initial_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
 		public set_final_state: {(animatable: Animatable, property_name: string, value: GObject.Value): void;};
-		public interpolate_value: {(animatable: Animatable, property_name: string, interval: Interval, progress: number, value: GObject.Value): boolean;};
+		public interpolate_value: {(animatable: Animatable, property_name: string, interval: Interval, progress: number): [ boolean, GObject.Value ];};
 	}
 
+	export interface AnimationClassInitOptions {}
 	/**
 	 * The {@link AnimationClass} structure contains only private data and
 	 * should be accessed using the provided functions.
 	 */
 	interface AnimationClass {}
 	class AnimationClass {
-		public constructor();
+		public constructor(options?: Partial<AnimationClassInitOptions>);
 		public started: {(animation: Animation): void;};
 		public completed: {(animation: Animation): void;};
 		public _clutter_reserved1: {(): void;};
@@ -15232,26 +16035,29 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved8: {(): void;};
 	}
 
+	export interface AnimationPrivateInitOptions {}
 	interface AnimationPrivate {}
 	class AnimationPrivate {
-		public constructor();
+		public constructor(options?: Partial<AnimationPrivateInitOptions>);
 	}
 
+	export interface AnimatorClassInitOptions {}
 	/**
 	 * The {@link AnimatorClass} structure contains only private data
 	 */
 	interface AnimatorClass {}
 	class AnimatorClass {
-		public constructor();
+		public constructor(options?: Partial<AnimatorClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface AnimatorKeyInitOptions {}
 	/**
 	 * A key frame inside a {@link Animator}
 	 */
 	interface AnimatorKey {}
 	class AnimatorKey {
-		public constructor();
+		public constructor(options?: Partial<AnimatorKeyInitOptions>);
 		/**
 		 * Retrieves the mode of a {@link Animator} key, for the first key of a
 		 * property for an object this represents the whether the animation is
@@ -15298,17 +16104,19 @@ declare namespace imports.gi.Clutter {
 		public get_value(value: GObject.Value): boolean;
 	}
 
+	export interface AnimatorPrivateInitOptions {}
 	interface AnimatorPrivate {}
 	class AnimatorPrivate {
-		public constructor();
+		public constructor(options?: Partial<AnimatorPrivateInitOptions>);
 	}
 
+	export interface AnyEventInitOptions {}
 	/**
 	 * Common members for a {@link Event}
 	 */
 	interface AnyEvent {}
 	class AnyEvent {
-		public constructor();
+		public constructor(options?: Partial<AnyEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -15328,17 +16136,19 @@ declare namespace imports.gi.Clutter {
 		public source: Actor;
 	}
 
+	export interface BackendClassInitOptions {}
 	interface BackendClass {}
 	class BackendClass {
-		public constructor();
+		public constructor(options?: Partial<BackendClassInitOptions>);
 	}
 
+	export interface BehaviourClassInitOptions {}
 	/**
 	 * Base class for behaviours.
 	 */
 	interface BehaviourClass {}
 	class BehaviourClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourClassInitOptions>);
 		public alpha_notify: {(behave: Behaviour, alpha_value: number): void;};
 		public applied: {(behave: Behaviour, actor: Actor): void;};
 		public removed: {(behave: Behaviour, actor: Actor): void;};
@@ -15350,51 +16160,58 @@ declare namespace imports.gi.Clutter {
 		public _clutter_behaviour6: {(): void;};
 	}
 
+	export interface BehaviourDepthClassInitOptions {}
 	/**
 	 * The {@link BehaviourDepthClass} structure contains only private data
 	 */
 	interface BehaviourDepthClass {}
 	class BehaviourDepthClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourDepthClassInitOptions>);
 	}
 
+	export interface BehaviourDepthPrivateInitOptions {}
 	interface BehaviourDepthPrivate {}
 	class BehaviourDepthPrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourDepthPrivateInitOptions>);
 	}
 
+	export interface BehaviourEllipseClassInitOptions {}
 	/**
 	 * The {@link BehaviourEllipseClass} struct contains only private data
 	 */
 	interface BehaviourEllipseClass {}
 	class BehaviourEllipseClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourEllipseClassInitOptions>);
 	}
 
+	export interface BehaviourEllipsePrivateInitOptions {}
 	interface BehaviourEllipsePrivate {}
 	class BehaviourEllipsePrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourEllipsePrivateInitOptions>);
 	}
 
+	export interface BehaviourOpacityClassInitOptions {}
 	/**
 	 * The {@link BehaviourOpacityClass} structure contains only private data
 	 */
 	interface BehaviourOpacityClass {}
 	class BehaviourOpacityClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourOpacityClassInitOptions>);
 	}
 
+	export interface BehaviourOpacityPrivateInitOptions {}
 	interface BehaviourOpacityPrivate {}
 	class BehaviourOpacityPrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourOpacityPrivateInitOptions>);
 	}
 
+	export interface BehaviourPathClassInitOptions {}
 	/**
 	 * The {@link BehaviourPathClass} struct contains only private data
 	 */
 	interface BehaviourPathClass {}
 	class BehaviourPathClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourPathClassInitOptions>);
 		public knot_reached: {(pathb: BehaviourPath, knot_num: number): void;};
 		public _clutter_path_1: {(): void;};
 		public _clutter_path_2: {(): void;};
@@ -15402,77 +16219,89 @@ declare namespace imports.gi.Clutter {
 		public _clutter_path_4: {(): void;};
 	}
 
+	export interface BehaviourPathPrivateInitOptions {}
 	interface BehaviourPathPrivate {}
 	class BehaviourPathPrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourPathPrivateInitOptions>);
 	}
 
+	export interface BehaviourPrivateInitOptions {}
 	interface BehaviourPrivate {}
 	class BehaviourPrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourPrivateInitOptions>);
 	}
 
+	export interface BehaviourRotateClassInitOptions {}
 	/**
 	 * The {@link BehaviourRotateClass} struct contains only private data
 	 */
 	interface BehaviourRotateClass {}
 	class BehaviourRotateClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourRotateClassInitOptions>);
 	}
 
+	export interface BehaviourRotatePrivateInitOptions {}
 	interface BehaviourRotatePrivate {}
 	class BehaviourRotatePrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourRotatePrivateInitOptions>);
 	}
 
+	export interface BehaviourScaleClassInitOptions {}
 	/**
 	 * The {@link BehaviourScaleClass} struct contains only private data
 	 */
 	interface BehaviourScaleClass {}
 	class BehaviourScaleClass {
-		public constructor();
+		public constructor(options?: Partial<BehaviourScaleClassInitOptions>);
 	}
 
+	export interface BehaviourScalePrivateInitOptions {}
 	interface BehaviourScalePrivate {}
 	class BehaviourScalePrivate {
-		public constructor();
+		public constructor(options?: Partial<BehaviourScalePrivateInitOptions>);
 	}
 
+	export interface BinLayoutClassInitOptions {}
 	/**
 	 * The {@link BinLayoutClass} structure contains only private
 	 * data and should be accessed using the provided API
 	 */
 	interface BinLayoutClass {}
 	class BinLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<BinLayoutClassInitOptions>);
 	}
 
+	export interface BinLayoutPrivateInitOptions {}
 	interface BinLayoutPrivate {}
 	class BinLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<BinLayoutPrivateInitOptions>);
 	}
 
+	export interface BindConstraintClassInitOptions {}
 	interface BindConstraintClass {}
 	class BindConstraintClass {
-		public constructor();
+		public constructor(options?: Partial<BindConstraintClassInitOptions>);
 	}
 
+	export interface BindingPoolClassInitOptions {}
 	interface BindingPoolClass {}
 	class BindingPoolClass {
-		public constructor();
+		public constructor(options?: Partial<BindingPoolClassInitOptions>);
 	}
 
+	export interface BlurEffectClassInitOptions {}
 	interface BlurEffectClass {}
 	class BlurEffectClass {
-		public constructor();
+		public constructor(options?: Partial<BlurEffectClassInitOptions>);
 	}
 
+	export interface BoxClassInitOptions {}
 	/**
 	 * The {@link BoxClass} structure contains only private data
 	 */
 	interface BoxClass {}
 	class BoxClass {
-		public constructor();
+		public constructor(options?: Partial<BoxClassInitOptions>);
 		public clutter_padding_1: {(): void;};
 		public clutter_padding_2: {(): void;};
 		public clutter_padding_3: {(): void;};
@@ -15481,30 +16310,35 @@ declare namespace imports.gi.Clutter {
 		public clutter_padding_6: {(): void;};
 	}
 
+	export interface BoxLayoutClassInitOptions {}
 	/**
 	 * The {@link BoxLayoutClass} structure contains only private
 	 * data and should be accessed using the provided API
 	 */
 	interface BoxLayoutClass {}
 	class BoxLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutClassInitOptions>);
 	}
 
+	export interface BoxLayoutPrivateInitOptions {}
 	interface BoxLayoutPrivate {}
 	class BoxLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<BoxLayoutPrivateInitOptions>);
 	}
 
+	export interface BoxPrivateInitOptions {}
 	interface BoxPrivate {}
 	class BoxPrivate {
-		public constructor();
+		public constructor(options?: Partial<BoxPrivateInitOptions>);
 	}
 
+	export interface BrightnessContrastEffectClassInitOptions {}
 	interface BrightnessContrastEffectClass {}
 	class BrightnessContrastEffectClass {
-		public constructor();
+		public constructor(options?: Partial<BrightnessContrastEffectClassInitOptions>);
 	}
 
+	export interface ButtonEventInitOptions {}
 	/**
 	 * Button event.
 	 * 
@@ -15514,7 +16348,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ButtonEvent {}
 	class ButtonEvent {
-		public constructor();
+		public constructor(options?: Partial<ButtonEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -15567,54 +16401,60 @@ declare namespace imports.gi.Clutter {
 		public device: InputDevice;
 	}
 
+	export interface CairoTextureClassInitOptions {}
 	/**
 	 * The {@link CairoTextureClass} struct contains only private data.
 	 */
 	interface CairoTextureClass {}
 	class CairoTextureClass {
-		public constructor();
+		public constructor(options?: Partial<CairoTextureClassInitOptions>);
 		public create_surface: {(texture: CairoTexture, width: number, height: number): cairo.Surface;};
 		public draw: {(texture: CairoTexture, cr: cairo.Context): boolean;};
 		public _clutter_cairo_3: {(): void;};
 		public _clutter_cairo_4: {(): void;};
 	}
 
+	export interface CairoTexturePrivateInitOptions {}
 	interface CairoTexturePrivate {}
 	class CairoTexturePrivate {
-		public constructor();
+		public constructor(options?: Partial<CairoTexturePrivateInitOptions>);
 	}
 
+	export interface CanvasClassInitOptions {}
 	/**
 	 * The {@link CanvasClass} structure contains
 	 * private data.
 	 */
 	interface CanvasClass {}
 	class CanvasClass {
-		public constructor();
+		public constructor(options?: Partial<CanvasClassInitOptions>);
 		public readonly _padding: any[];
 		public draw: {(canvas: Canvas, cr: cairo.Context, width: number, height: number): boolean;};
 	}
 
+	export interface CanvasPrivateInitOptions {}
 	interface CanvasPrivate {}
 	class CanvasPrivate {
-		public constructor();
+		public constructor(options?: Partial<CanvasPrivateInitOptions>);
 	}
 
+	export interface ChildMetaClassInitOptions {}
 	/**
 	 * The {@link ChildMetaClass} contains only private data
 	 */
 	interface ChildMetaClass {}
 	class ChildMetaClass {
-		public constructor();
+		public constructor(options?: Partial<ChildMetaClassInitOptions>);
 	}
 
+	export interface ClickActionClassInitOptions {}
 	/**
 	 * The {@link ClickActionClass} structure
 	 * contains only private data
 	 */
 	interface ClickActionClass {}
 	class ClickActionClass {
-		public constructor();
+		public constructor(options?: Partial<ClickActionClassInitOptions>);
 		public clicked: {(action: ClickAction, actor: Actor): void;};
 		public long_press: {(action: ClickAction, actor: Actor, state: LongPressState): boolean;};
 		public _clutter_click_action1: {(): void;};
@@ -15626,43 +16466,48 @@ declare namespace imports.gi.Clutter {
 		public _clutter_click_action7: {(): void;};
 	}
 
+	export interface ClickActionPrivateInitOptions {}
 	interface ClickActionPrivate {}
 	class ClickActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ClickActionPrivateInitOptions>);
 	}
 
+	export interface ClipNodeClassInitOptions {}
 	/**
 	 * The `ClutterClipNodeClass` structure is an opaque
 	 * type whose members cannot be directly accessed.
 	 */
 	interface ClipNodeClass {}
 	class ClipNodeClass {
-		public constructor();
+		public constructor(options?: Partial<ClipNodeClassInitOptions>);
 	}
 
+	export interface CloneClassInitOptions {}
 	/**
 	 * The {@link CloneClass} structure contains only private data
 	 */
 	interface CloneClass {}
 	class CloneClass {
-		public constructor();
+		public constructor(options?: Partial<CloneClassInitOptions>);
 		public _clutter_actor_clone1: {(): void;};
 		public _clutter_actor_clone2: {(): void;};
 		public _clutter_actor_clone3: {(): void;};
 		public _clutter_actor_clone4: {(): void;};
 	}
 
+	export interface ClonePrivateInitOptions {}
 	interface ClonePrivate {}
 	class ClonePrivate {
-		public constructor();
+		public constructor(options?: Partial<ClonePrivateInitOptions>);
 	}
 
+	export interface ColorInitOptions {}
 	/**
 	 * Color representation.
 	 */
 	interface Color {}
 	class Color {
-		public constructor();
+		public constructor(options?: Partial<ColorInitOptions>);
 		/**
 		 * Allocates a new, transparent black {@link Color}.
 		 * @returns the newly allocated {@link Color}; use
@@ -15707,9 +16552,9 @@ declare namespace imports.gi.Clutter {
 		 * The alpha channel of #result is set as as the maximum value
 		 * between the alpha channels of #a and #b.
 		 * @param b a {@link Color}
-		 * @param result return location for the result
+		 * @returns return location for the result
 		 */
-		public add(b: Color, result: Color): void;
+		public add(b: Color): Color;
 		/**
 		 * Makes a copy of the color structure.  The result must be
 		 * freed using clutter_color_free().
@@ -15719,9 +16564,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Darkens #color by a fixed amount, and saves the changed color
 		 * in #result.
-		 * @param result return location for the darker color
+		 * @returns return location for the darker color
 		 */
-		public darken(result: Color): void;
+		public darken(): Color;
 		/**
 		 * Compares two {@link Color}<!-- -->s and checks if they are the same.
 		 * 
@@ -15757,21 +16602,21 @@ declare namespace imports.gi.Clutter {
 		 * using #progress
 		 * @param _final the final {@link Color}
 		 * @param progress the interpolation progress
-		 * @param result return location for the interpolation
+		 * @returns return location for the interpolation
 		 */
-		public interpolate(_final: Color, progress: number, result: Color): void;
+		public interpolate(_final: Color, progress: number): Color;
 		/**
 		 * Lightens #color by a fixed amount, and saves the changed color
 		 * in #result.
-		 * @param result return location for the lighter color
+		 * @returns return location for the lighter color
 		 */
-		public lighten(result: Color): void;
+		public lighten(): Color;
 		/**
 		 * Shades #color by #factor and saves the modified color into #result.
 		 * @param factor the shade factor to apply
-		 * @param result return location for the shaded color
+		 * @returns return location for the shaded color
 		 */
-		public shade(factor: number, result: Color): void;
+		public shade(factor: number): Color;
 		/**
 		 * Subtracts #b from #a and saves the resulting color inside #result.
 		 * 
@@ -15781,9 +16626,9 @@ declare namespace imports.gi.Clutter {
 		 * The alpha channel of #result is set as the minimum value
 		 * between the alpha channels of #a and #b.
 		 * @param b a {@link Color}
-		 * @param result return location for the result
+		 * @returns return location for the result
 		 */
-		public subtract(b: Color, result: Color): void;
+		public subtract(b: Color): Color;
 		/**
 		 * Converts #color to the HLS format.
 		 * 
@@ -15813,27 +16658,30 @@ declare namespace imports.gi.Clutter {
 		public to_string(): string;
 	}
 
+	export interface ColorNodeClassInitOptions {}
 	/**
 	 * The `ClutterColorNodeClass` structure is an
 	 * opaque type whose members cannot be directly accessed.
 	 */
 	interface ColorNodeClass {}
 	class ColorNodeClass {
-		public constructor();
+		public constructor(options?: Partial<ColorNodeClassInitOptions>);
 	}
 
+	export interface ColorizeEffectClassInitOptions {}
 	interface ColorizeEffectClass {}
 	class ColorizeEffectClass {
-		public constructor();
+		public constructor(options?: Partial<ColorizeEffectClassInitOptions>);
 	}
 
+	export interface ConstraintClassInitOptions {}
 	/**
 	 * The {@link ConstraintClass} structure contains
 	 * only private data
 	 */
 	interface ConstraintClass {}
 	class ConstraintClass {
-		public constructor();
+		public constructor(options?: Partial<ConstraintClassInitOptions>);
 		public update_allocation: {(constraint: Constraint, actor: Actor, allocation: ActorBox): void;};
 		public update_preferred_size: {(constraint: Constraint, actor: Actor, direction: Orientation, for_size: number, minimum_size: number, natural_size: number): void;};
 		public _clutter_constraint1: {(): void;};
@@ -15845,6 +16693,7 @@ declare namespace imports.gi.Clutter {
 		public _clutter_constraint7: {(): void;};
 	}
 
+	export interface ContainerIfaceInitOptions {}
 	/**
 	 * Base interface for container actors. The #add, #remove and #foreach
 	 * virtual functions must be provided by any implementation; the other
@@ -15852,7 +16701,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ContainerIface {}
 	class ContainerIface {
-		public constructor();
+		public constructor(options?: Partial<ContainerIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		/**
 		 * The GType used for storing auxiliary information about
@@ -15874,27 +16723,29 @@ declare namespace imports.gi.Clutter {
 		public child_notify: {(container: Container, child: Actor, pspec: GObject.ParamSpec): void;};
 	}
 
+	export interface ContentIfaceInitOptions {}
 	/**
 	 * The {@link ContentIface} structure contains only
 	 * private data.
 	 */
 	interface ContentIface {}
 	class ContentIface {
-		public constructor();
+		public constructor(options?: Partial<ContentIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
-		public get_preferred_size: {(content: Content): boolean;};
+		public get_preferred_size: {(content: Content): [ boolean, number, number ];};
 		public paint_content: {(content: Content, actor: Actor, node: PaintNode): void;};
 		public attached: {(content: Content, actor: Actor): void;};
 		public detached: {(content: Content, actor: Actor): void;};
 		public invalidate: {(content: Content): void;};
 	}
 
+	export interface CrossingEventInitOptions {}
 	/**
 	 * Event for the movement of the pointer across different actors
 	 */
 	interface CrossingEvent {}
 	class CrossingEvent {
-		public constructor();
+		public constructor(options?: Partial<CrossingEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -15934,13 +16785,14 @@ declare namespace imports.gi.Clutter {
 		public related: Actor;
 	}
 
+	export interface DeformEffectClassInitOptions {}
 	/**
 	 * The {@link DeformEffectClass} structure contains
 	 * only private data
 	 */
 	interface DeformEffectClass {}
 	class DeformEffectClass {
-		public constructor();
+		public constructor(options?: Partial<DeformEffectClassInitOptions>);
 		public deform_vertex: {(effect: DeformEffect, width: number, height: number, vertex: Cogl.TextureVertex): void;};
 		public _clutter_deform1: {(): void;};
 		public _clutter_deform2: {(): void;};
@@ -15951,22 +16803,25 @@ declare namespace imports.gi.Clutter {
 		public _clutter_deform7: {(): void;};
 	}
 
+	export interface DeformEffectPrivateInitOptions {}
 	interface DeformEffectPrivate {}
 	class DeformEffectPrivate {
-		public constructor();
+		public constructor(options?: Partial<DeformEffectPrivateInitOptions>);
 	}
 
+	export interface DesaturateEffectClassInitOptions {}
 	interface DesaturateEffectClass {}
 	class DesaturateEffectClass {
-		public constructor();
+		public constructor(options?: Partial<DesaturateEffectClassInitOptions>);
 	}
 
+	export interface DeviceManagerClassInitOptions {}
 	/**
 	 * The {@link DeviceManagerClass} structure contains only private data
 	 */
 	interface DeviceManagerClass {}
 	class DeviceManagerClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceManagerClassInitOptions>);
 		public readonly _padding: any[];
 		public get_devices: {(device_manager: DeviceManager): GLib.SList;};
 		public get_core_device: {(device_manager: DeviceManager, device_type: InputDeviceType): InputDevice;};
@@ -15976,18 +16831,20 @@ declare namespace imports.gi.Clutter {
 		public select_stage_events: {(manager: DeviceManager, stage: Stage): void;};
 	}
 
+	export interface DeviceManagerPrivateInitOptions {}
 	interface DeviceManagerPrivate {}
 	class DeviceManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<DeviceManagerPrivateInitOptions>);
 	}
 
+	export interface DragActionClassInitOptions {}
 	/**
 	 * The {@link DragActionClass} structure contains
 	 * only private data
 	 */
 	interface DragActionClass {}
 	class DragActionClass {
-		public constructor();
+		public constructor(options?: Partial<DragActionClassInitOptions>);
 		public drag_begin: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
 		public drag_motion: {(action: DragAction, actor: Actor, delta_x: number, delta_y: number): void;};
 		public drag_end: {(action: DragAction, actor: Actor, event_x: number, event_y: number, modifiers: ModifierType): void;};
@@ -15998,18 +16855,20 @@ declare namespace imports.gi.Clutter {
 		public _clutter_drag_action4: {(): void;};
 	}
 
+	export interface DragActionPrivateInitOptions {}
 	interface DragActionPrivate {}
 	class DragActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<DragActionPrivateInitOptions>);
 	}
 
+	export interface DropActionClassInitOptions {}
 	/**
 	 * The {@link DropActionClass} structure contains
 	 * only private data.
 	 */
 	interface DropActionClass {}
 	class DropActionClass {
-		public constructor();
+		public constructor(options?: Partial<DropActionClassInitOptions>);
 		public can_drop: {(action: DropAction, actor: Actor, event_x: number, event_y: number): boolean;};
 		public over_in: {(action: DropAction, actor: Actor): void;};
 		public over_out: {(action: DropAction, actor: Actor): void;};
@@ -16024,17 +16883,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_drop_action8: {(): void;};
 	}
 
+	export interface DropActionPrivateInitOptions {}
 	interface DropActionPrivate {}
 	class DropActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<DropActionPrivateInitOptions>);
 	}
 
+	export interface EffectClassInitOptions {}
 	/**
 	 * The {@link EffectClass} structure contains only private data
 	 */
 	interface EffectClass {}
 	class EffectClass {
-		public constructor();
+		public constructor(options?: Partial<EffectClassInitOptions>);
 		public pre_paint: {(effect: Effect): boolean;};
 		public post_paint: {(effect: Effect): void;};
 		public get_paint_volume: {(effect: Effect, volume: PaintVolume): boolean;};
@@ -16045,44 +16906,49 @@ declare namespace imports.gi.Clutter {
 		public _clutter_effect6: {(): void;};
 	}
 
+	export interface EventSequenceInitOptions {}
 	/**
 	 * The {@link EventSequence} structure is an opaque
 	 * type used to denote the event sequence of a touch event.
 	 */
 	interface EventSequence {}
 	class EventSequence {
-		public constructor();
+		public constructor(options?: Partial<EventSequenceInitOptions>);
 	}
 
+	export interface FixedLayoutClassInitOptions {}
 	/**
 	 * The {@link FixedLayoutClass} structure contains only private data
 	 * and it should be accessed using the provided API
 	 */
 	interface FixedLayoutClass {}
 	class FixedLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<FixedLayoutClassInitOptions>);
 	}
 
+	export interface FlowLayoutClassInitOptions {}
 	/**
 	 * The {@link FlowLayoutClass} structure contains only private data
 	 * and should be accessed using the provided API
 	 */
 	interface FlowLayoutClass {}
 	class FlowLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<FlowLayoutClassInitOptions>);
 	}
 
+	export interface FlowLayoutPrivateInitOptions {}
 	interface FlowLayoutPrivate {}
 	class FlowLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<FlowLayoutPrivateInitOptions>);
 	}
 
+	export interface FogInitOptions {}
 	/**
 	 * Fog settings used to create the depth cueing effect.
 	 */
 	interface Fog {}
 	class Fog {
-		public constructor();
+		public constructor(options?: Partial<FogInitOptions>);
 		/**
 		 * starting distance from the viewer to the near clipping
 		 *   plane (always positive)
@@ -16095,6 +16961,7 @@ declare namespace imports.gi.Clutter {
 		public z_far: number;
 	}
 
+	export interface GeometryInitOptions {}
 	/**
 	 * The rectangle containing an actor's bounding box, measured in pixels.
 	 * 
@@ -16104,7 +16971,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface Geometry {}
 	class Geometry {
-		public constructor();
+		public constructor(options?: Partial<GeometryInitOptions>);
 		/**
 		 * X coordinate of the top left corner of an actor
 		 */
@@ -16132,18 +16999,19 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Find the union of two rectangles represented as {@link Geometry}.
 		 * @param geometry_b another {@link Geometry}
-		 * @param result location to store the result
+		 * @returns location to store the result
 		 */
-		public union(geometry_b: Geometry, result: Geometry): void;
+		public union(geometry_b: Geometry): Geometry;
 	}
 
+	export interface GestureActionClassInitOptions {}
 	/**
 	 * The {@link GestureClass} structure contains only
 	 * private data.
 	 */
 	interface GestureActionClass {}
 	class GestureActionClass {
-		public constructor();
+		public constructor(options?: Partial<GestureActionClassInitOptions>);
 		public gesture_begin: {(action: GestureAction, actor: Actor): boolean;};
 		public gesture_progress: {(action: GestureAction, actor: Actor): boolean;};
 		public gesture_end: {(action: GestureAction, actor: Actor): void;};
@@ -16157,32 +17025,36 @@ declare namespace imports.gi.Clutter {
 		public _clutter_gesture_action6: {(): void;};
 	}
 
+	export interface GestureActionPrivateInitOptions {}
 	interface GestureActionPrivate {}
 	class GestureActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<GestureActionPrivateInitOptions>);
 	}
 
+	export interface GridLayoutClassInitOptions {}
 	/**
 	 * The {@link GridLayoutClass} structure contains only private
 	 * data and should be accessed using the provided API
 	 */
 	interface GridLayoutClass {}
 	class GridLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<GridLayoutClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface GridLayoutPrivateInitOptions {}
 	interface GridLayoutPrivate {}
 	class GridLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<GridLayoutPrivateInitOptions>);
 	}
 
+	export interface GroupClassInitOptions {}
 	/**
 	 * The {@link GroupClass} structure contains only private data
 	 */
 	interface GroupClass {}
 	class GroupClass {
-		public constructor();
+		public constructor(options?: Partial<GroupClassInitOptions>);
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
 		public _clutter_reserved3: {(): void;};
@@ -16191,39 +17063,44 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved6: {(): void;};
 	}
 
+	export interface GroupPrivateInitOptions {}
 	interface GroupPrivate {}
 	class GroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<GroupPrivateInitOptions>);
 	}
 
+	export interface ImageClassInitOptions {}
 	/**
 	 * The {@link ImageClass} structure contains
 	 * private data.
 	 */
 	interface ImageClass {}
 	class ImageClass {
-		public constructor();
+		public constructor(options?: Partial<ImageClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface ImagePrivateInitOptions {}
 	interface ImagePrivate {}
 	class ImagePrivate {
-		public constructor();
+		public constructor(options?: Partial<ImagePrivateInitOptions>);
 	}
 
+	export interface InputDeviceClassInitOptions {}
 	interface InputDeviceClass {}
 	class InputDeviceClass {
-		public constructor();
+		public constructor(options?: Partial<InputDeviceClassInitOptions>);
 	}
 
+	export interface IntervalClassInitOptions {}
 	/**
 	 * The {@link IntervalClass} contains only private data.
 	 */
 	interface IntervalClass {}
 	class IntervalClass {
-		public constructor();
+		public constructor(options?: Partial<IntervalClassInitOptions>);
 		public validate: {(interval: Interval, pspec: GObject.ParamSpec): boolean;};
-		public compute_value: {(interval: Interval, factor: number, value: GObject.Value): boolean;};
+		public compute_value: {(interval: Interval, factor: number): [ boolean, GObject.Value ];};
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
 		public _clutter_reserved3: {(): void;};
@@ -16232,17 +17109,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved6: {(): void;};
 	}
 
+	export interface IntervalPrivateInitOptions {}
 	interface IntervalPrivate {}
 	class IntervalPrivate {
-		public constructor();
+		public constructor(options?: Partial<IntervalPrivateInitOptions>);
 	}
 
+	export interface KeyEventInitOptions {}
 	/**
 	 * Key event
 	 */
 	interface KeyEvent {}
 	class KeyEvent {
-		public constructor();
+		public constructor(options?: Partial<KeyEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -16286,27 +17165,30 @@ declare namespace imports.gi.Clutter {
 		public device: InputDevice;
 	}
 
+	export interface KeyframeTransitionClassInitOptions {}
 	/**
 	 * The `ClutterKeyframeTransitionClass` structure contains only
 	 * private data.
 	 */
 	interface KeyframeTransitionClass {}
 	class KeyframeTransitionClass {
-		public constructor();
+		public constructor(options?: Partial<KeyframeTransitionClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface KeyframeTransitionPrivateInitOptions {}
 	interface KeyframeTransitionPrivate {}
 	class KeyframeTransitionPrivate {
-		public constructor();
+		public constructor(options?: Partial<KeyframeTransitionPrivateInitOptions>);
 	}
 
+	export interface KnotInitOptions {}
 	/**
 	 * Point in a path behaviour.
 	 */
 	interface Knot {}
 	class Knot {
-		public constructor();
+		public constructor(options?: Partial<KnotInitOptions>);
 		/**
 		 * X coordinate of the knot
 		 */
@@ -16332,13 +17214,14 @@ declare namespace imports.gi.Clutter {
 		public free(): void;
 	}
 
+	export interface LayoutManagerClassInitOptions {}
 	/**
 	 * The {@link LayoutManagerClass} structure contains only private
 	 * data and should be accessed using the provided API
 	 */
 	interface LayoutManagerClass {}
 	class LayoutManagerClass {
-		public constructor();
+		public constructor(options?: Partial<LayoutManagerClassInitOptions>);
 		public get_preferred_width: {(manager: LayoutManager, container: Container, for_height: number): [ min_width_p: number | null, nat_width_p: number | null ];};
 		public get_preferred_height: {(manager: LayoutManager, container: Container, for_width: number): [ min_height_p: number | null, nat_height_p: number | null ];};
 		public allocate: {(manager: LayoutManager, container: Container, allocation: ActorBox, flags: AllocationFlags): void;};
@@ -16359,38 +17242,42 @@ declare namespace imports.gi.Clutter {
 		public _clutter_padding_8: {(): void;};
 	}
 
+	export interface LayoutMetaClassInitOptions {}
 	/**
 	 * The {@link LayoutMetaClass} contains only private data and
 	 * should never be accessed directly
 	 */
 	interface LayoutMetaClass {}
 	class LayoutMetaClass {
-		public constructor();
+		public constructor(options?: Partial<LayoutMetaClassInitOptions>);
 		public _clutter_padding1: {(): void;};
 		public _clutter_padding2: {(): void;};
 		public _clutter_padding3: {(): void;};
 		public _clutter_padding4: {(): void;};
 	}
 
+	export interface ListModelClassInitOptions {}
 	/**
 	 * The {@link ListModelClass} struct contains only private data.
 	 */
 	interface ListModelClass {}
 	class ListModelClass {
-		public constructor();
+		public constructor(options?: Partial<ListModelClassInitOptions>);
 	}
 
+	export interface ListModelPrivateInitOptions {}
 	interface ListModelPrivate {}
 	class ListModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<ListModelPrivateInitOptions>);
 	}
 
+	export interface MarginInitOptions {}
 	/**
 	 * A representation of the components of a margin.
 	 */
 	interface Margin {}
 	class Margin {
-		public constructor();
+		public constructor(options?: Partial<MarginInitOptions>);
 		/**
 		 * Creates a new {@link Margin}.
 		 * @returns a newly allocated {@link Margin}. Use
@@ -16427,6 +17314,7 @@ declare namespace imports.gi.Clutter {
 		public free(): void;
 	}
 
+	export interface MatrixInitOptions {}
 	/**
 	 * A type representing a 4x4 matrix.
 	 * 
@@ -16434,7 +17322,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 		/**
 		 * Frees the memory allocated by clutter_matrix_alloc().
 		 */
@@ -16468,23 +17356,25 @@ declare namespace imports.gi.Clutter {
 		public init_identity(): Matrix;
 	}
 
+	export interface MediaIfaceInitOptions {}
 	/**
 	 * Interface vtable for {@link Media} implementations
 	 */
 	interface MediaIface {}
 	class MediaIface {
-		public constructor();
+		public constructor(options?: Partial<MediaIfaceInitOptions>);
 		public readonly base_iface: GObject.TypeInterface;
 		public eos: {(media: Media): void;};
 		public error: {(media: Media, error: GLib.Error): void;};
 	}
 
+	export interface ModelClassInitOptions {}
 	/**
 	 * Class for {@link Model} instances.
 	 */
 	interface ModelClass {}
 	class ModelClass {
-		public constructor();
+		public constructor(options?: Partial<ModelClassInitOptions>);
 		public get_n_rows: {(model: Model): number;};
 		public get_n_columns: {(model: Model): number;};
 		public get_column_name: {(model: Model, column: number): string;};
@@ -16508,13 +17398,14 @@ declare namespace imports.gi.Clutter {
 		public _clutter_model_8: {(): void;};
 	}
 
+	export interface ModelIterClassInitOptions {}
 	/**
 	 * Class for {@link ModelIter} instances.
 	 */
 	interface ModelIterClass {}
 	class ModelIterClass {
-		public constructor();
-		public get_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
+		public constructor(options?: Partial<ModelIterClassInitOptions>);
+		public get_value: {(iter: ModelIter, column: number): GObject.Value;};
 		public set_value: {(iter: ModelIter, column: number, value: GObject.Value): void;};
 		public is_first: {(iter: ModelIter): boolean;};
 		public is_last: {(iter: ModelIter): boolean;};
@@ -16533,22 +17424,25 @@ declare namespace imports.gi.Clutter {
 		public _clutter_model_iter_8: {(): void;};
 	}
 
+	export interface ModelIterPrivateInitOptions {}
 	interface ModelIterPrivate {}
 	class ModelIterPrivate {
-		public constructor();
+		public constructor(options?: Partial<ModelIterPrivateInitOptions>);
 	}
 
+	export interface ModelPrivateInitOptions {}
 	interface ModelPrivate {}
 	class ModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<ModelPrivateInitOptions>);
 	}
 
+	export interface MotionEventInitOptions {}
 	/**
 	 * Event for the pointer motion
 	 */
 	interface MotionEvent {}
 	class MotionEvent {
-		public constructor();
+		public constructor(options?: Partial<MotionEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -16592,12 +17486,13 @@ declare namespace imports.gi.Clutter {
 		public device: InputDevice;
 	}
 
+	export interface OffscreenEffectClassInitOptions {}
 	/**
 	 * The {@link OffscreenEffectClass} structure contains only private data
 	 */
 	interface OffscreenEffectClass {}
 	class OffscreenEffectClass {
-		public constructor();
+		public constructor(options?: Partial<OffscreenEffectClassInitOptions>);
 		public create_texture: {(effect: OffscreenEffect, width: number, height: number): Cogl.Handle;};
 		public paint_target: {(effect: OffscreenEffect): void;};
 		public _clutter_offscreen1: {(): void;};
@@ -16609,29 +17504,34 @@ declare namespace imports.gi.Clutter {
 		public _clutter_offscreen7: {(): void;};
 	}
 
+	export interface OffscreenEffectPrivateInitOptions {}
 	interface OffscreenEffectPrivate {}
 	class OffscreenEffectPrivate {
-		public constructor();
+		public constructor(options?: Partial<OffscreenEffectPrivateInitOptions>);
 	}
 
+	export interface PageTurnEffectClassInitOptions {}
 	interface PageTurnEffectClass {}
 	class PageTurnEffectClass {
-		public constructor();
+		public constructor(options?: Partial<PageTurnEffectClassInitOptions>);
 	}
 
+	export interface PaintNodeClassInitOptions {}
 	/**
 	 * The `ClutterPaintNodeClass` structure contains only private data.
 	 */
 	interface PaintNodeClass {}
 	class PaintNodeClass {
-		public constructor();
+		public constructor(options?: Partial<PaintNodeClassInitOptions>);
 	}
 
+	export interface PaintNodePrivateInitOptions {}
 	interface PaintNodePrivate {}
 	class PaintNodePrivate {
-		public constructor();
+		public constructor(options?: Partial<PaintNodePrivateInitOptions>);
 	}
 
+	export interface PaintVolumeInitOptions {}
 	/**
 	 * {@link PaintVolume} is an opaque structure
 	 * whose members cannot be directly accessed.
@@ -16648,7 +17548,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface PaintVolume {}
 	class PaintVolume {
-		public constructor();
+		public constructor(options?: Partial<PaintVolumeInitOptions>);
 		/**
 		 * Copies #pv into a new {@link PaintVolume}
 		 * @returns a newly allocated copy of a {@link PaintVolume}
@@ -16712,9 +17612,9 @@ declare namespace imports.gi.Clutter {
 		public get_height(): number;
 		/**
 		 * Retrieves the origin of the {@link PaintVolume}.
-		 * @param vertex the return location for a {@link Vertex}
+		 * @returns the return location for a {@link Vertex}
 		 */
-		public get_origin(vertex: Vertex): void;
+		public get_origin(): Vertex;
 		/**
 		 * Retrieves the width of the volume's, axis aligned, bounding box.
 		 * 
@@ -16809,13 +17709,14 @@ declare namespace imports.gi.Clutter {
 		public union_box(box: ActorBox): void;
 	}
 
+	export interface PanActionClassInitOptions {}
 	/**
 	 * The {@link PanActionClass} structure contains
 	 * only private data.
 	 */
 	interface PanActionClass {}
 	class PanActionClass {
-		public constructor();
+		public constructor(options?: Partial<PanActionClassInitOptions>);
 		public pan: {(action: PanAction, actor: Actor, is_interpolated: boolean): boolean;};
 		public pan_stopped: {(action: PanAction, actor: Actor): void;};
 		public _clutter_pan_action1: {(): void;};
@@ -16826,17 +17727,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_pan_action6: {(): void;};
 	}
 
+	export interface PanActionPrivateInitOptions {}
 	interface PanActionPrivate {}
 	class PanActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<PanActionPrivateInitOptions>);
 	}
 
+	export interface ParamSpecUnitsInitOptions {}
 	/**
 	 * #GParamSpec subclass for unit based properties.
 	 */
 	interface ParamSpecUnits {}
 	class ParamSpecUnits {
-		public constructor();
+		public constructor(options?: Partial<ParamSpecUnitsInitOptions>);
 		/**
 		 * default type
 		 */
@@ -16855,19 +17758,22 @@ declare namespace imports.gi.Clutter {
 		public maximum: number;
 	}
 
+	export interface PathClassInitOptions {}
 	/**
 	 * The {@link PathClass} struct contains only private data.
 	 */
 	interface PathClass {}
 	class PathClass {
-		public constructor();
+		public constructor(options?: Partial<PathClassInitOptions>);
 	}
 
+	export interface PathConstraintClassInitOptions {}
 	interface PathConstraintClass {}
 	class PathConstraintClass {
-		public constructor();
+		public constructor(options?: Partial<PathConstraintClassInitOptions>);
 	}
 
+	export interface PathNodeInitOptions {}
 	/**
 	 * Represents a single node of a {@link Path}.
 	 * 
@@ -16878,7 +17784,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface PathNode {}
 	class PathNode {
-		public constructor();
+		public constructor(options?: Partial<PathNodeInitOptions>);
 		/**
 		 * the node's type
 		 */
@@ -16905,18 +17811,20 @@ declare namespace imports.gi.Clutter {
 		public free(): void;
 	}
 
+	export interface PathPrivateInitOptions {}
 	interface PathPrivate {}
 	class PathPrivate {
-		public constructor();
+		public constructor(options?: Partial<PathPrivateInitOptions>);
 	}
 
+	export interface PerspectiveInitOptions {}
 	/**
 	 * Stage perspective definition. {@link Perspective} is only used by
 	 * the fixed point version of clutter_stage_set_perspective().
 	 */
 	interface Perspective {}
 	class Perspective {
-		public constructor();
+		public constructor(options?: Partial<PerspectiveInitOptions>);
 		/**
 		 * the field of view angle, in degrees, in the y direction
 		 */
@@ -16938,21 +17846,23 @@ declare namespace imports.gi.Clutter {
 		public z_far: number;
 	}
 
+	export interface PipelineNodeClassInitOptions {}
 	/**
 	 * The `ClutterPipelineNodeClass` structure is an opaque
 	 * type whose members cannot be directly accessed.
 	 */
 	interface PipelineNodeClass {}
 	class PipelineNodeClass {
-		public constructor();
+		public constructor(options?: Partial<PipelineNodeClassInitOptions>);
 	}
 
+	export interface PointInitOptions {}
 	/**
 	 * A point in 2D space.
 	 */
 	interface Point {}
 	class Point {
-		public constructor(options?: Partial<PointOptions>);
+		public constructor(options?: Partial<PointInitOptions>);
 		/**
 		 * Allocates a new {@link Point}.
 		 * @returns the newly allocated {@link Point}.
@@ -16977,8 +17887,14 @@ declare namespace imports.gi.Clutter {
 		 * Computes the distance between two {@link Point}.
 		 * @param b a {@link Point}
 		 * @returns the distance between the points.
+		 * 
+		 * return location for the horizontal
+		 *   distance between the points
+		 * 
+		 * return location for the vertical
+		 *   distance between the points
 		 */
-		public distance(b: Point): number;
+		public distance(b: Point): [ number, number | null, number | null ];
 		/**
 		 * Compares two {@link Point} for equality.
 		 * @param b the second {@link Point} to compare
@@ -16998,21 +17914,24 @@ declare namespace imports.gi.Clutter {
 		public init(x: number, y: number): Point;
 	}
 
+	export interface PropertyTransitionClassInitOptions {}
 	/**
 	 * The {@link PropertyTransitionClass} structure
 	 * contains private data.
 	 */
 	interface PropertyTransitionClass {}
 	class PropertyTransitionClass {
-		public constructor();
+		public constructor(options?: Partial<PropertyTransitionClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface PropertyTransitionPrivateInitOptions {}
 	interface PropertyTransitionPrivate {}
 	class PropertyTransitionPrivate {
-		public constructor();
+		public constructor(options?: Partial<PropertyTransitionPrivateInitOptions>);
 	}
 
+	export interface RectInitOptions {}
 	/**
 	 * The location and size of a rectangle.
 	 * 
@@ -17030,7 +17949,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface Rect {}
 	class Rect {
-		public constructor();
+		public constructor(options?: Partial<RectInitOptions>);
 		/**
 		 * Creates a new, empty {@link Rect}.
 		 * 
@@ -17097,9 +18016,9 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Retrieves the center of #rect, after normalizing the rectangle,
 		 * and updates #center with the correct coordinates.
-		 * @param center a {@link Point}
+		 * @returns a {@link Point}
 		 */
-		public get_center(center: Point): void;
+		public get_center(): Point;
 		/**
 		 * Retrieves the height of #rect.
 		 * @returns the height of the rectangle
@@ -17154,10 +18073,11 @@ declare namespace imports.gi.Clutter {
 		 * This function can be used to simply check if the intersection of #a and #b
 		 * is not empty, by using %NULL for #res.
 		 * @param b a {@link Rect}
-		 * @param res a {@link Rect}, or %NULL
 		 * @returns %TRUE if the intersection of #a and #b is not empty
+		 * 
+		 * a {@link Rect}, or %NULL
 		 */
-		public intersection(b: Rect, res: Rect | null): boolean;
+		public intersection(b: Rect): [ boolean, Rect | null ];
 		/**
 		 * Normalizes a {@link Rect}.
 		 * 
@@ -17185,35 +18105,38 @@ declare namespace imports.gi.Clutter {
 		 * This function will normalize both #a and #b prior to computing their
 		 * union.
 		 * @param b a {@link Rect}
-		 * @param res a {@link Rect}
+		 * @returns a {@link Rect}
 		 */
-		public union(b: Rect, res: Rect): void;
+		public union(b: Rect): Rect;
 	}
 
+	export interface RectangleClassInitOptions {}
 	/**
 	 * The {@link RectangleClass} structure contains only private data
 	 */
 	interface RectangleClass {}
 	class RectangleClass {
-		public constructor();
+		public constructor(options?: Partial<RectangleClassInitOptions>);
 		public _clutter_rectangle1: {(): void;};
 		public _clutter_rectangle2: {(): void;};
 		public _clutter_rectangle3: {(): void;};
 		public _clutter_rectangle4: {(): void;};
 	}
 
+	export interface RectanglePrivateInitOptions {}
 	interface RectanglePrivate {}
 	class RectanglePrivate {
-		public constructor();
+		public constructor(options?: Partial<RectanglePrivateInitOptions>);
 	}
 
+	export interface RotateActionClassInitOptions {}
 	/**
 	 * The {@link RotateActionClass} structure contains
 	 * only private data.
 	 */
 	interface RotateActionClass {}
 	class RotateActionClass {
-		public constructor();
+		public constructor(options?: Partial<RotateActionClassInitOptions>);
 		public rotate: {(action: RotateAction, actor: Actor, angle: number): boolean;};
 		public _clutter_rotate_action1: {(): void;};
 		public _clutter_rotate_action2: {(): void;};
@@ -17224,17 +18147,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_rotate_action7: {(): void;};
 	}
 
+	export interface RotateActionPrivateInitOptions {}
 	interface RotateActionPrivate {}
 	class RotateActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<RotateActionPrivateInitOptions>);
 	}
 
+	export interface ScoreClassInitOptions {}
 	/**
 	 * The {@link ScoreClass} structure contains only private data
 	 */
 	interface ScoreClass {}
 	class ScoreClass {
-		public constructor();
+		public constructor(options?: Partial<ScoreClassInitOptions>);
 		public timeline_started: {(score: Score, timeline: Timeline): void;};
 		public timeline_completed: {(score: Score, timeline: Timeline): void;};
 		public started: {(score: Score): void;};
@@ -17247,17 +18172,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_score_5: {(): void;};
 	}
 
+	export interface ScorePrivateInitOptions {}
 	interface ScorePrivate {}
 	class ScorePrivate {
-		public constructor();
+		public constructor(options?: Partial<ScorePrivateInitOptions>);
 	}
 
+	export interface ScriptClassInitOptions {}
 	/**
 	 * The {@link ScriptClass} structure contains only private data
 	 */
 	interface ScriptClass {}
 	class ScriptClass {
-		public constructor();
+		public constructor(options?: Partial<ScriptClassInitOptions>);
 		public get_type_from_name: {(script: Script, type_name: string): GObject.Type;};
 		public _clutter_reserved1: {(): void;};
 		public _clutter_reserved2: {(): void;};
@@ -17269,11 +18196,13 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved8: {(): void;};
 	}
 
+	export interface ScriptPrivateInitOptions {}
 	interface ScriptPrivate {}
 	class ScriptPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScriptPrivateInitOptions>);
 	}
 
+	export interface ScriptableIfaceInitOptions {}
 	/**
 	 * Interface for implementing "scriptable" objects. An object implementing
 	 * this interface can override the parsing and properties setting sequence
@@ -17281,7 +18210,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface ScriptableIface {}
 	class ScriptableIface {
-		public constructor();
+		public constructor(options?: Partial<ScriptableIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public set_id: {(scriptable: Scriptable, id_: string): void;};
 		public get_id: {(scriptable: Scriptable): string;};
@@ -17289,27 +18218,30 @@ declare namespace imports.gi.Clutter {
 		public set_custom_property: {(scriptable: Scriptable, script: Script, name: string, value: GObject.Value): void;};
 	}
 
+	export interface ScrollActorClassInitOptions {}
 	/**
 	 * The {@link ScrollActor} structure contains only
 	 * private data.
 	 */
 	interface ScrollActorClass {}
 	class ScrollActorClass {
-		public constructor();
+		public constructor(options?: Partial<ScrollActorClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface ScrollActorPrivateInitOptions {}
 	interface ScrollActorPrivate {}
 	class ScrollActorPrivate {
-		public constructor();
+		public constructor(options?: Partial<ScrollActorPrivateInitOptions>);
 	}
 
+	export interface ScrollEventInitOptions {}
 	/**
 	 * Scroll wheel (or similar device) event
 	 */
 	interface ScrollEvent {}
 	class ScrollEvent {
-		public constructor();
+		public constructor(options?: Partial<ScrollEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -17365,26 +18297,29 @@ declare namespace imports.gi.Clutter {
 		public finish_flags: ScrollFinishFlags;
 	}
 
+	export interface SettingsClassInitOptions {}
 	interface SettingsClass {}
 	class SettingsClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsClassInitOptions>);
 	}
 
+	export interface ShaderClassInitOptions {}
 	/**
 	 * The {@link ShaderClass} structure contains only private data
 	 */
 	interface ShaderClass {}
 	class ShaderClass {
-		public constructor();
+		public constructor(options?: Partial<ShaderClassInitOptions>);
 	}
 
+	export interface ShaderEffectClassInitOptions {}
 	/**
 	 * The {@link ShaderEffectClass} structure contains
 	 * only private data
 	 */
 	interface ShaderEffectClass {}
 	class ShaderEffectClass {
-		public constructor();
+		public constructor(options?: Partial<ShaderEffectClassInitOptions>);
 		public get_static_shader_source: {(effect: ShaderEffect): string;};
 		public _clutter_shader1: {(): void;};
 		public _clutter_shader2: {(): void;};
@@ -17393,22 +18328,25 @@ declare namespace imports.gi.Clutter {
 		public _clutter_shader5: {(): void;};
 	}
 
+	export interface ShaderEffectPrivateInitOptions {}
 	interface ShaderEffectPrivate {}
 	class ShaderEffectPrivate {
-		public constructor();
+		public constructor(options?: Partial<ShaderEffectPrivateInitOptions>);
 	}
 
+	export interface ShaderPrivateInitOptions {}
 	interface ShaderPrivate {}
 	class ShaderPrivate {
-		public constructor();
+		public constructor(options?: Partial<ShaderPrivateInitOptions>);
 	}
 
+	export interface SizeInitOptions {}
 	/**
 	 * A size, in 2D space.
 	 */
 	interface Size {}
 	class Size {
-		public constructor();
+		public constructor(options?: Partial<SizeInitOptions>);
 		/**
 		 * Allocates a new {@link Size}.
 		 * @returns the newly allocated {@link Size}.
@@ -17448,17 +18386,19 @@ declare namespace imports.gi.Clutter {
 		public init(width: number, height: number): Size;
 	}
 
+	export interface SnapConstraintClassInitOptions {}
 	interface SnapConstraintClass {}
 	class SnapConstraintClass {
-		public constructor();
+		public constructor(options?: Partial<SnapConstraintClassInitOptions>);
 	}
 
+	export interface StageClassInitOptions {}
 	/**
 	 * The {@link StageClass} structure contains only private data
 	 */
 	interface StageClass {}
 	class StageClass {
-		public constructor();
+		public constructor(options?: Partial<StageClassInitOptions>);
 		public readonly _padding_dummy: any[];
 		public fullscreen: {(stage: Stage): void;};
 		public unfullscreen: {(stage: Stage): void;};
@@ -17467,28 +18407,31 @@ declare namespace imports.gi.Clutter {
 		public delete_event: {(stage: Stage, event: Event): boolean;};
 	}
 
+	export interface StageManagerClassInitOptions {}
 	/**
 	 * The {@link StageManagerClass} structure contains only private data
 	 * and should be accessed using the provided API
 	 */
 	interface StageManagerClass {}
 	class StageManagerClass {
-		public constructor();
+		public constructor(options?: Partial<StageManagerClassInitOptions>);
 		public stage_added: {(stage_manager: StageManager, stage: Stage): void;};
 		public stage_removed: {(stage_manager: StageManager, stage: Stage): void;};
 	}
 
+	export interface StagePrivateInitOptions {}
 	interface StagePrivate {}
 	class StagePrivate {
-		public constructor();
+		public constructor(options?: Partial<StagePrivateInitOptions>);
 	}
 
+	export interface StageStateEventInitOptions {}
 	/**
 	 * Event signalling a change in the {@link Stage} state.
 	 */
 	interface StageStateEvent {}
 	class StageStateEvent {
-		public constructor();
+		public constructor(options?: Partial<StageStateEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -17519,24 +18462,26 @@ declare namespace imports.gi.Clutter {
 		public new_state: StageState;
 	}
 
+	export interface StateClassInitOptions {}
 	/**
 	 * The {@link StateClass} structure contains
 	 * only private data
 	 */
 	interface StateClass {}
 	class StateClass {
-		public constructor();
+		public constructor(options?: Partial<StateClassInitOptions>);
 		public readonly _padding_dummy: any[];
 		public completed: {(state: State): void;};
 	}
 
+	export interface StateKeyInitOptions {}
 	/**
 	 * {@link StateKey} is an opaque structure whose
 	 * members cannot be accessed directly
 	 */
 	interface StateKey {}
 	class StateKey {
-		public constructor();
+		public constructor(options?: Partial<StateKeyInitOptions>);
 		/**
 		 * Retrieves the easing mode used for #state_key.
 		 * @returns the mode of a {@link StateKey}
@@ -17604,18 +18549,20 @@ declare namespace imports.gi.Clutter {
 		public get_value(value: GObject.Value): boolean;
 	}
 
+	export interface StatePrivateInitOptions {}
 	interface StatePrivate {}
 	class StatePrivate {
-		public constructor();
+		public constructor(options?: Partial<StatePrivateInitOptions>);
 	}
 
+	export interface SwipeActionClassInitOptions {}
 	/**
 	 * The {@link SwipeActionClass} structure contains
 	 * only private data.
 	 */
 	interface SwipeActionClass {}
 	class SwipeActionClass {
-		public constructor();
+		public constructor(options?: Partial<SwipeActionClassInitOptions>);
 		public swept: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): void;};
 		public swipe: {(action: SwipeAction, actor: Actor, direction: SwipeDirection): boolean;};
 		public _clutter_swipe_action1: {(): void;};
@@ -17626,32 +18573,36 @@ declare namespace imports.gi.Clutter {
 		public _clutter_swipe_action6: {(): void;};
 	}
 
+	export interface SwipeActionPrivateInitOptions {}
 	interface SwipeActionPrivate {}
 	class SwipeActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<SwipeActionPrivateInitOptions>);
 	}
 
+	export interface TableLayoutClassInitOptions {}
 	/**
 	 * The {@link TableLayoutClass} structure contains only private
 	 * data and should be accessed using the provided API
 	 */
 	interface TableLayoutClass {}
 	class TableLayoutClass {
-		public constructor();
+		public constructor(options?: Partial<TableLayoutClassInitOptions>);
 	}
 
+	export interface TableLayoutPrivateInitOptions {}
 	interface TableLayoutPrivate {}
 	class TableLayoutPrivate {
-		public constructor();
+		public constructor(options?: Partial<TableLayoutPrivateInitOptions>);
 	}
 
+	export interface TapActionClassInitOptions {}
 	/**
 	 * The {@link TapActionClass} structure contains
 	 * only private data.
 	 */
 	interface TapActionClass {}
 	class TapActionClass {
-		public constructor();
+		public constructor(options?: Partial<TapActionClassInitOptions>);
 		public tap: {(action: TapAction, actor: Actor): boolean;};
 		public _clutter_tap_action1: {(): void;};
 		public _clutter_tap_action2: {(): void;};
@@ -17661,18 +18612,20 @@ declare namespace imports.gi.Clutter {
 		public _clutter_tap_action6: {(): void;};
 	}
 
+	export interface TapActionPrivateInitOptions {}
 	interface TapActionPrivate {}
 	class TapActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TapActionPrivateInitOptions>);
 	}
 
+	export interface TextBufferClassInitOptions {}
 	/**
 	 * The {@link TextBufferClass} structure contains
 	 * only private data.
 	 */
 	interface TextBufferClass {}
 	class TextBufferClass {
-		public constructor();
+		public constructor(options?: Partial<TextBufferClassInitOptions>);
 		public inserted_text: {(buffer: TextBuffer, position: number, chars: string, n_chars: number): void;};
 		public deleted_text: {(buffer: TextBuffer, position: number, n_chars: number): void;};
 		public get_text: {(buffer: TextBuffer, n_bytes: number): string;};
@@ -17689,17 +18642,19 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved8: {(): void;};
 	}
 
+	export interface TextBufferPrivateInitOptions {}
 	interface TextBufferPrivate {}
 	class TextBufferPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextBufferPrivateInitOptions>);
 	}
 
+	export interface TextClassInitOptions {}
 	/**
 	 * The {@link TextClass} struct contains only private data.
 	 */
 	interface TextClass {}
 	class TextClass {
-		public constructor();
+		public constructor(options?: Partial<TextClassInitOptions>);
 		public text_changed: {(self: Text): void;};
 		public activate: {(self: Text): void;};
 		public cursor_event: {(self: Text, geometry: Geometry): void;};
@@ -17713,26 +18668,29 @@ declare namespace imports.gi.Clutter {
 		public _clutter_reserved7: {(): void;};
 	}
 
+	export interface TextNodeClassInitOptions {}
 	/**
 	 * The `ClutterTextNodeClass` structure is an opaque
 	 * type whose contents cannot be directly accessed.
 	 */
 	interface TextNodeClass {}
 	class TextNodeClass {
-		public constructor();
+		public constructor(options?: Partial<TextNodeClassInitOptions>);
 	}
 
+	export interface TextPrivateInitOptions {}
 	interface TextPrivate {}
 	class TextPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextPrivateInitOptions>);
 	}
 
+	export interface TextureClassInitOptions {}
 	/**
 	 * The {@link TextureClass} structure contains only private data
 	 */
 	interface TextureClass {}
 	class TextureClass {
-		public constructor();
+		public constructor(options?: Partial<TextureClassInitOptions>);
 		public size_change: {(texture: Texture, width: number, height: number): void;};
 		public pixbuf_change: {(texture: Texture): void;};
 		public load_finished: {(texture: Texture, error: GLib.Error): void;};
@@ -17743,26 +18701,29 @@ declare namespace imports.gi.Clutter {
 		public _clutter_texture5: {(): void;};
 	}
 
+	export interface TextureNodeClassInitOptions {}
 	/**
 	 * The `ClutterTextureNodeClass` structure is an
 	 * opaque type whose members cannot be directly accessed.
 	 */
 	interface TextureNodeClass {}
 	class TextureNodeClass {
-		public constructor();
+		public constructor(options?: Partial<TextureNodeClassInitOptions>);
 	}
 
+	export interface TexturePrivateInitOptions {}
 	interface TexturePrivate {}
 	class TexturePrivate {
-		public constructor();
+		public constructor(options?: Partial<TexturePrivateInitOptions>);
 	}
 
+	export interface TimelineClassInitOptions {}
 	/**
 	 * The {@link TimelineClass} structure contains only private data
 	 */
 	interface TimelineClass {}
 	class TimelineClass {
-		public constructor();
+		public constructor(options?: Partial<TimelineClassInitOptions>);
 		public started: {(timeline: Timeline): void;};
 		public completed: {(timeline: Timeline): void;};
 		public paused: {(timeline: Timeline): void;};
@@ -17775,18 +18736,20 @@ declare namespace imports.gi.Clutter {
 		public _clutter_timeline_4: {(): void;};
 	}
 
+	export interface TimelinePrivateInitOptions {}
 	interface TimelinePrivate {}
 	class TimelinePrivate {
-		public constructor();
+		public constructor(options?: Partial<TimelinePrivateInitOptions>);
 	}
 
+	export interface TimeoutPoolInitOptions {}
 	/**
 	 * {@link TimeoutPool} is an opaque structure
 	 * whose members cannot be directly accessed.
 	 */
 	interface TimeoutPool {}
 	class TimeoutPool {
-		public constructor();
+		public constructor(options?: Partial<TimeoutPoolInitOptions>);
 		/**
 		 * Sets a function to be called at regular intervals, and puts it inside
 		 * the #pool. The function is repeatedly called until it returns %FALSE,
@@ -17819,6 +18782,7 @@ declare namespace imports.gi.Clutter {
 		public remove(id_: number): void;
 	}
 
+	export interface TouchEventInitOptions {}
 	/**
 	 * Used for touch events.
 	 * 
@@ -17835,7 +18799,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface TouchEvent {}
 	class TouchEvent {
-		public constructor();
+		public constructor(options?: Partial<TouchEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -17885,6 +18849,7 @@ declare namespace imports.gi.Clutter {
 		public device: InputDevice;
 	}
 
+	export interface TouchpadPinchEventInitOptions {}
 	/**
 	 * Used for touchpad pinch gesture events. The current state of the
 	 * gesture will be determined by the #phase field.
@@ -17896,7 +18861,7 @@ declare namespace imports.gi.Clutter {
 	 */
 	interface TouchpadPinchEvent {}
 	class TouchpadPinchEvent {
-		public constructor();
+		public constructor(options?: Partial<TouchpadPinchEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -17948,13 +18913,14 @@ declare namespace imports.gi.Clutter {
 		public scale: number;
 	}
 
+	export interface TouchpadSwipeEventInitOptions {}
 	/**
 	 * Used for touchpad swipe gesture events. The current state of the
 	 * gesture will be determined by the #phase field.
 	 */
 	interface TouchpadSwipeEvent {}
 	class TouchpadSwipeEvent {
-		public constructor();
+		public constructor(options?: Partial<TouchpadSwipeEventInitOptions>);
 		/**
 		 * event type
 		 */
@@ -18001,46 +18967,51 @@ declare namespace imports.gi.Clutter {
 		public dy: number;
 	}
 
+	export interface TransitionClassInitOptions {}
 	/**
 	 * The {@link TransitionClass} structure contains
 	 * private data.
 	 */
 	interface TransitionClass {}
 	class TransitionClass {
-		public constructor();
+		public constructor(options?: Partial<TransitionClassInitOptions>);
 		public readonly _padding: any[];
 		public attached: {(transition: Transition, animatable: Animatable): void;};
 		public detached: {(transition: Transition, animatable: Animatable): void;};
 		public compute_value: {(transition: Transition, animatable: Animatable, interval: Interval, progress: number): void;};
 	}
 
+	export interface TransitionGroupClassInitOptions {}
 	/**
 	 * The {@link TransitionGroupClass} structure
 	 * contains only private data.
 	 */
 	interface TransitionGroupClass {}
 	class TransitionGroupClass {
-		public constructor();
+		public constructor(options?: Partial<TransitionGroupClassInitOptions>);
 		public readonly _padding: any[];
 	}
 
+	export interface TransitionGroupPrivateInitOptions {}
 	interface TransitionGroupPrivate {}
 	class TransitionGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<TransitionGroupPrivateInitOptions>);
 	}
 
+	export interface TransitionPrivateInitOptions {}
 	interface TransitionPrivate {}
 	class TransitionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TransitionPrivateInitOptions>);
 	}
 
+	export interface UnitsInitOptions {}
 	/**
 	 * An opaque structure, to be used to store sizing and positioning
 	 * values along with their unit.
 	 */
 	interface Units {}
 	class Units {
-		public constructor();
+		public constructor(options?: Partial<UnitsInitOptions>);
 		public readonly unit_type: UnitType;
 		public readonly value: number;
 		public readonly pixels: number;
@@ -18092,12 +19063,13 @@ declare namespace imports.gi.Clutter {
 		public to_string(): string;
 	}
 
+	export interface VertexInitOptions {}
 	/**
 	 * A point in 3D space, expressed in pixels
 	 */
 	interface Vertex {}
 	class Vertex {
-		public constructor();
+		public constructor(options?: Partial<VertexInitOptions>);
 		/**
 		 * Allocates a new, empty {@link Vertex}.
 		 * @returns the newly allocated {@link Vertex}.
@@ -18159,13 +19131,14 @@ declare namespace imports.gi.Clutter {
 		public init(x: number, y: number, z: number): Vertex;
 	}
 
+	export interface ZoomActionClassInitOptions {}
 	/**
 	 * The {@link ZoomActionClass} structure contains
 	 * only private data
 	 */
 	interface ZoomActionClass {}
 	class ZoomActionClass {
-		public constructor();
+		public constructor(options?: Partial<ZoomActionClassInitOptions>);
 		public zoom: {(action: ZoomAction, actor: Actor, focal_point: Point, factor: number): boolean;};
 		public _clutter_zoom_action1: {(): void;};
 		public _clutter_zoom_action2: {(): void;};
@@ -18174,9 +19147,10 @@ declare namespace imports.gi.Clutter {
 		public _clutter_zoom_action5: {(): void;};
 	}
 
+	export interface ZoomActionPrivateInitOptions {}
 	interface ZoomActionPrivate {}
 	class ZoomActionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ZoomActionPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -18229,12 +19203,13 @@ declare namespace imports.gi.Clutter {
 		 * @param interval a {@link Interval} with the animation range
 		 * @param progress the progress to use to interpolate between the
 		 *   initial and final values of the #interval
-		 * @param value return location for an initialized #GValue
-		 *   using the same type of the #interval
 		 * @returns %TRUE if the interpolation was successful,
 		 *   and %FALSE otherwise
+		 * 
+		 * return location for an initialized #GValue
+		 *   using the same type of the #interval
 		 */
-		interpolate_value(property_name: string, interval: Interval, progress: number, value: GObject.Value): boolean;
+		interpolate_value(property_name: string, interval: Interval, progress: number): [ boolean, GObject.Value ];
 		/**
 		 * Sets the current state of #property_name to #value
 		 * @param property_name the name of the animatable property to set
@@ -18242,6 +19217,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_final_state(property_name: string, value: GObject.Value): void;
 	}
+
+	type AnimatableInitOptionsMixin  = {};
+	export interface AnimatableInitOptions extends AnimatableInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Animatable} instead.
@@ -18255,7 +19233,7 @@ declare namespace imports.gi.Clutter {
 	interface Animatable extends AnimatableMixin {}
 
 	class Animatable {
-		public constructor();
+		public constructor(options?: Partial<AnimatableInitOptions>);
 	}
 
 
@@ -18493,6 +19471,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ContainerInitOptionsMixin  = {};
+	export interface ContainerInitOptions extends ContainerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Container} instead.
 	 */
@@ -18505,7 +19486,7 @@ declare namespace imports.gi.Clutter {
 	interface Container extends ContainerMixin {}
 
 	class Container {
-		public constructor();
+		public constructor(options?: Partial<ContainerInitOptions>);
 		/**
 		 * Looks up the #GParamSpec for a child property of #klass.
 		 * @param klass a #GObjectClass implementing the {@link Container} interface.
@@ -18519,8 +19500,10 @@ declare namespace imports.gi.Clutter {
 		 * @param klass a #GObjectClass implementing the {@link Container} interface.
 		 * @returns an array
 		 *   of #GParamSpec<!-- -->s which should be freed after use.
+		 * 
+		 * return location for length of returned array.
 		 */
-		public static class_list_child_properties(klass: GObject.ObjectClass): GObject.ParamSpec[];
+		public static class_list_child_properties(klass: GObject.ObjectClass): [ GObject.ParamSpec[], number ];
 	}
 
 
@@ -18537,8 +19520,12 @@ declare namespace imports.gi.Clutter {
 		 * for instance the size of an image data.
 		 * @returns %TRUE if the content has a preferred size, and %FALSE
 		 *   otherwise
+		 * 
+		 * return location for the natural width of the content
+		 * 
+		 * return location for the natural height of the content
 		 */
-		get_preferred_size(): boolean;
+		get_preferred_size(): [ boolean, number, number ];
 		/**
 		 * Invalidates a {@link Content}.
 		 * 
@@ -18560,6 +19547,9 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type ContentInitOptionsMixin  = {};
+	export interface ContentInitOptions extends ContentInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Content} instead.
 	 */
@@ -18572,7 +19562,7 @@ declare namespace imports.gi.Clutter {
 	interface Content extends ContentMixin {}
 
 	class Content {
-		public constructor();
+		public constructor(options?: Partial<ContentInitOptions>);
 	}
 
 
@@ -18740,6 +19730,19 @@ declare namespace imports.gi.Clutter {
 
 	}
 
+	type MediaInitOptionsMixin = Pick<IMedia,
+		"audio_volume" |
+		"buffer_fill" |
+		"can_seek" |
+		"duration" |
+		"playing" |
+		"progress" |
+		"subtitle_font_name" |
+		"subtitle_uri" |
+		"uri">;
+
+	export interface MediaInitOptions extends MediaInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Media} instead.
 	 */
@@ -18752,7 +19755,7 @@ declare namespace imports.gi.Clutter {
 	interface Media extends MediaMixin {}
 
 	class Media {
-		public constructor();
+		public constructor(options?: Partial<MediaInitOptions>);
 	}
 
 
@@ -18797,6 +19800,9 @@ declare namespace imports.gi.Clutter {
 		set_id(id_: string): void;
 	}
 
+	type ScriptableInitOptionsMixin  = {};
+	export interface ScriptableInitOptions extends ScriptableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Scriptable} instead.
 	 */
@@ -18809,7 +19815,7 @@ declare namespace imports.gi.Clutter {
 	interface Scriptable extends ScriptableMixin {}
 
 	class Scriptable {
-		public constructor();
+		public constructor(options?: Partial<ScriptableInitOptions>);
 	}
 
 
@@ -20970,8 +21976,10 @@ declare namespace imports.gi.Clutter {
 		/**
 		 * Retrieves the array of axes values attached to the event.
 		 * @returns an array of axis values
+		 * 
+		 * return location for the number of axes returned
 		 */
-		get_axes(): number;
+		get_axes(): [ number, number ];
 		/**
 		 * Retrieves the button number of #event
 		 * @returns the button number
@@ -21275,6 +22283,9 @@ declare namespace imports.gi.Clutter {
 		type(): EventType;
 	}
 
+	type EventInitOptionsMixin  = {};
+	export interface EventInitOptions extends EventInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Event} instead.
 	 */
@@ -21286,7 +22297,7 @@ declare namespace imports.gi.Clutter {
 	interface Event extends EventMixin {}
 
 	class Event {
-		public constructor();
+		public constructor(options?: Partial<EventInitOptions>);
 		/**
 		 * Creates a new {@link Event} of the specified type.
 		 * @param type The type of event.
@@ -21414,20 +22425,20 @@ declare namespace imports.gi.Clutter {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
-	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param luminance luminance value, in the 0 .. 1 range
 	 * @param saturation saturation value, in the 0 .. 1 range
+	 * @returns return location for a {@link Color}
 	 */
-	function color_from_hls(color: Color, hue: number, luminance: number, saturation: number): void;
+	function color_from_hls(hue: number, luminance: number, saturation: number): Color;
 
 	/**
 	 * Converts #pixel from the packed representation of a four 8 bit channel
 	 * color to a {@link Color}.
-	 * @param color return location for a {@link Color}
 	 * @param pixel a 32 bit packed integer containing a color
+	 * @returns return location for a {@link Color}
 	 */
-	function color_from_pixel(color: Color, pixel: number): void;
+	function color_from_pixel(pixel: number): Color;
 
 	/**
 	 * Parses a string definition of a color, filling the {@link Color}.red,
@@ -21464,11 +22475,12 @@ declare namespace imports.gi.Clutter {
 	 * 
 	 * If the alpha component is not specified then it is assumed to be set to
 	 * be fully opaque.
-	 * @param color return location for a {@link Color}
 	 * @param str a string specifiying a color
 	 * @returns %TRUE if parsing succeeded, and %FALSE otherwise
+	 * 
+	 * return location for a {@link Color}
 	 */
-	function color_from_string(color: Color, str: string): boolean;
+	function color_from_string(str: string): [ boolean, Color ];
 
 	/**
 	 * Retrieves a static color for the given #color name
@@ -21495,8 +22507,10 @@ declare namespace imports.gi.Clutter {
 	 * @param klass a #GObjectClass implementing the {@link Container} interface.
 	 * @returns an array
 	 *   of #GParamSpec<!-- -->s which should be freed after use.
+	 * 
+	 * return location for length of returned array.
 	 */
-	function container_class_list_child_properties(klass: GObject.ObjectClass): GObject.ParamSpec[];
+	function container_class_list_child_properties(klass: GObject.ObjectClass): [ GObject.ParamSpec[], number ];
 
 	/**
 	 * Disable loading the accessibility support. It has the same effect
@@ -22111,8 +23125,10 @@ declare namespace imports.gi.Clutter {
 	 * @param point coordinates to check
 	 * @param actor the expected actor at the given coordinates
 	 * @returns %TRUE if the actor at the given coordinates matches
+	 * 
+	 * actor at the coordinates
 	 */
-	function test_check_actor_at_point(stage: Actor, point: Point, actor: Actor): boolean;
+	function test_check_actor_at_point(stage: Actor, point: Point, actor: Actor): [ boolean, Actor | null ];
 
 	/**
 	 * Checks the color at the given coordinates on #stage, and matches
@@ -22121,10 +23137,11 @@ declare namespace imports.gi.Clutter {
 	 * @param stage a {@link Stage}
 	 * @param point coordinates to check
 	 * @param color expected color
-	 * @param result color at the given coordinates
 	 * @returns %TRUE if the colors match
+	 * 
+	 * color at the given coordinates
 	 */
-	function test_check_color_at_point(stage: Actor, point: Point, color: Color, result: Color): boolean;
+	function test_check_color_at_point(stage: Actor, point: Point, color: Color): [ boolean, Color ];
 
 	/**
 	 * Retrieves the {@link Stage} used for testing.
@@ -22505,47 +23522,47 @@ declare namespace imports.gi.Clutter {
 
 	/**
 	 * Stores a value in centimeters inside #units
-	 * @param units a {@link Units}
 	 * @param cm centimeters
+	 * @returns a {@link Units}
 	 */
-	function units_from_cm(units: Units, cm: number): void;
+	function units_from_cm(cm: number): Units;
 
 	/**
 	 * Stores a value in em inside #units, using the default font
 	 * name as returned by clutter_backend_get_font_name()
-	 * @param units a {@link Units}
 	 * @param em em
+	 * @returns a {@link Units}
 	 */
-	function units_from_em(units: Units, em: number): void;
+	function units_from_em(em: number): Units;
 
 	/**
 	 * Stores a value in em inside #units using #font_name
-	 * @param units a {@link Units}
 	 * @param font_name the font name and size
 	 * @param em em
+	 * @returns a {@link Units}
 	 */
-	function units_from_em_for_font(units: Units, font_name: string | null, em: number): void;
+	function units_from_em_for_font(font_name: string | null, em: number): Units;
 
 	/**
 	 * Stores a value in millimiters inside #units
-	 * @param units a {@link Units}
 	 * @param mm millimeters
+	 * @returns a {@link Units}
 	 */
-	function units_from_mm(units: Units, mm: number): void;
+	function units_from_mm(mm: number): Units;
 
 	/**
 	 * Stores a value in pixels inside #units
-	 * @param units a {@link Units}
 	 * @param px pixels
+	 * @returns a {@link Units}
 	 */
-	function units_from_pixels(units: Units, px: number): void;
+	function units_from_pixels(px: number): Units;
 
 	/**
 	 * Stores a value in typographic points inside #units
-	 * @param units a {@link Units}
 	 * @param pt typographic points
+	 * @returns a {@link Units}
 	 */
-	function units_from_pt(units: Units, pt: number): void;
+	function units_from_pt(pt: number): Units;
 
 	/**
 	 * Parses a value and updates #units with it
@@ -22581,12 +23598,13 @@ declare namespace imports.gi.Clutter {
 	 * ]|
 	 * 
 	 * If no unit is specified, pixels are assumed.
-	 * @param units a {@link Units}
 	 * @param str the string to convert
 	 * @returns %TRUE if the string was successfully parsed,
 	 *   and %FALSE otherwise
+	 * 
+	 * a {@link Units}
 	 */
-	function units_from_string(units: Units, str: string): boolean;
+	function units_from_string(str: string): [ boolean, Units ];
 
 	/**
 	 * Calculates the nearest power of two, greater than or equal to #a.
@@ -22637,8 +23655,11 @@ declare namespace imports.gi.Clutter {
 	 * @returns the pointer to a list of
 	 *   floating point values.  The returned value is owned by the
 	 *   #GValue and should never be modified or freed.
+	 * 
+	 * return location for the number of returned floating
+	 *   point values, or %NULL
 	 */
-	function value_get_shader_float(value: GObject.Value): number[];
+	function value_get_shader_float(value: GObject.Value): [ number[], number ];
 
 	/**
 	 * Retrieves the list of integer values stored inside the passed
@@ -22648,8 +23669,11 @@ declare namespace imports.gi.Clutter {
 	 * @returns the pointer to a list of
 	 *   integer values.  The returned value is owned by the #GValue and
 	 *   should never be modified or freed.
+	 * 
+	 * return location for the number of returned integer
+	 *   values, or %NULL
 	 */
-	function value_get_shader_int(value: GObject.Value): number[];
+	function value_get_shader_int(value: GObject.Value): [ number[], number ];
 
 	/**
 	 * Retrieves a matrix of floating point values stored inside
@@ -22659,8 +23683,11 @@ declare namespace imports.gi.Clutter {
 	 * @returns the pointer to a matrix
 	 *   of floating point values. The returned value is owned by the #GValue and
 	 *   should never be modified or freed.
+	 * 
+	 * return location for the number of returned floating
+	 *   point values, or %NULL
 	 */
-	function value_get_shader_matrix(value: GObject.Value): number[];
+	function value_get_shader_matrix(value: GObject.Value): [ number[], number ];
 
 	/**
 	 * Gets the {@link Units} contained in #value.

@@ -3,14 +3,6 @@ declare namespace imports.gi.Gio {
         disconnectSignal(id: number): void; 
     }
 
-    interface FileIconOptions {
-        file: File;
-    }
-
-    interface SettingsInitOptions {
-        schema: string;
-    }
-
     type ChangedVariable = `changed::${string}`;
     interface ISettings {
         /**

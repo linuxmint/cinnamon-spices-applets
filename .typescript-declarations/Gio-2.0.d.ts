@@ -12,6 +12,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type AppInfoMonitorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface AppInfoMonitorInitOptions extends AppInfoMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppInfoMonitor} instead.
 	 */
@@ -39,7 +42,7 @@ declare namespace imports.gi.Gio {
 	interface AppInfoMonitor extends AppInfoMonitorMixin {}
 
 	class AppInfoMonitor {
-		public constructor();
+		public constructor(options?: Partial<AppInfoMonitorInitOptions>);
 		/**
 		 * Gets the #GAppInfoMonitor for the current thread-default main
 		 * context.
@@ -125,6 +128,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type AppLaunchContextInitOptionsMixin = GObject.ObjectInitOptions
+	export interface AppLaunchContextInitOptions extends AppLaunchContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppLaunchContext} instead.
 	 */
@@ -138,7 +144,7 @@ declare namespace imports.gi.Gio {
 	interface AppLaunchContext extends AppLaunchContextMixin {}
 
 	class AppLaunchContext {
-		public constructor();
+		public constructor(options?: Partial<AppLaunchContextInitOptions>);
 		/**
 		 * Creates a new application launch context. This is not normally used,
 		 * instead you instantiate a subclass of this, such as #GdkAppLaunchContext.
@@ -837,6 +843,18 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ApplicationInitOptionsMixin = GObject.ObjectInitOptions & ActionGroupInitOptions & ActionMapInitOptions & 
+	Pick<IApplication,
+		"application_id" |
+		"flags" |
+		"inactivity_timeout" |
+		"is_busy" |
+		"is_registered" |
+		"is_remote" |
+		"resource_base_path">;
+
+	export interface ApplicationInitOptions extends ApplicationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Application} instead.
 	 */
@@ -961,7 +979,7 @@ declare namespace imports.gi.Gio {
 	interface Application extends ApplicationMixin {}
 
 	class Application {
-		public constructor();
+		public constructor(options?: Partial<ApplicationInitOptions>);
 		/**
 		 * Creates a new #GApplication instance.
 		 * 
@@ -1068,8 +1086,10 @@ declare namespace imports.gi.Gio {
 		 * g_strfreev().
 		 * @returns 
 		 *      the string array containing the arguments (the argv)
+		 * 
+		 * the length of the arguments array, or %NULL
 		 */
-		get_arguments(): string[];
+		get_arguments(): [ string[], number | null ];
 		/**
 		 * Gets the working directory of the command line invocation.
 		 * The string may contain non-utf8 data.
@@ -1216,6 +1236,12 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::is_remote", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type ApplicationCommandLineInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IApplicationCommandLine,
+		"is_remote">;
+
+	export interface ApplicationCommandLineInitOptions extends ApplicationCommandLineInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ApplicationCommandLine} instead.
@@ -1381,7 +1407,7 @@ declare namespace imports.gi.Gio {
 	interface ApplicationCommandLine extends ApplicationCommandLineMixin {}
 
 	class ApplicationCommandLine {
-		public constructor();
+		public constructor(options?: Partial<ApplicationCommandLineInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1465,8 +1491,10 @@ declare namespace imports.gi.Gio {
 		 * the stream or filling the buffer.
 		 * @returns 
 		 *          read-only buffer
+		 * 
+		 * a #gsize to get the number of bytes available in the buffer
 		 */
-		peek_buffer(): number[];
+		peek_buffer(): [ number[], number ];
 		/**
 		 * Tries to read a single byte from the stream or the buffer. Will block
 		 * during this read.
@@ -1496,6 +1524,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type BufferedInputStreamInitOptionsMixin = FilterInputStreamInitOptions & SeekableInitOptions & 
+	Pick<IBufferedInputStream,
+		"buffer_size">;
+
+	export interface BufferedInputStreamInitOptions extends BufferedInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferedInputStream} instead.
 	 */
@@ -1520,7 +1554,7 @@ declare namespace imports.gi.Gio {
 	interface BufferedInputStream extends BufferedInputStreamMixin {}
 
 	class BufferedInputStream {
-		public constructor();
+		public constructor(options?: Partial<BufferedInputStreamInitOptions>);
 		/**
 		 * Creates a new #GInputStream from the given #base_stream, with
 		 * a buffer set to the default size (4 kilobytes).
@@ -1573,6 +1607,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type BufferedOutputStreamInitOptionsMixin = FilterOutputStreamInitOptions & SeekableInitOptions & 
+	Pick<IBufferedOutputStream,
+		"auto_grow" |
+		"buffer_size">;
+
+	export interface BufferedOutputStreamInitOptions extends BufferedOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BufferedOutputStream} instead.
 	 */
@@ -1597,7 +1638,7 @@ declare namespace imports.gi.Gio {
 	interface BufferedOutputStream extends BufferedOutputStreamMixin {}
 
 	class BufferedOutputStream {
-		public constructor();
+		public constructor(options?: Partial<BufferedOutputStreamInitOptions>);
 		/**
 		 * Creates a new buffered output stream for a base stream.
 		 * @param base_stream a #GOutputStream.
@@ -1630,6 +1671,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type BytesIconInitOptionsMixin = GObject.ObjectInitOptions & IconInitOptions & LoadableIconInitOptions & 
+	Pick<IBytesIcon,
+		"bytes">;
+
+	export interface BytesIconInitOptions extends BytesIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BytesIcon} instead.
 	 */
@@ -1642,7 +1689,7 @@ declare namespace imports.gi.Gio {
 	interface BytesIcon extends BytesIconMixin {}
 
 	class BytesIcon {
-		public constructor();
+		public constructor(options?: Partial<BytesIconInitOptions>);
 		/**
 		 * Creates a new icon for a bytes.
 		 * 
@@ -1888,6 +1935,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type CancellableInitOptionsMixin = GObject.ObjectInitOptions
+	export interface CancellableInitOptions extends CancellableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Cancellable} instead.
 	 */
@@ -1901,7 +1951,7 @@ declare namespace imports.gi.Gio {
 	interface Cancellable extends CancellableMixin {}
 
 	class Cancellable {
-		public constructor();
+		public constructor(options?: Partial<CancellableInitOptions>);
 		/**
 		 * Creates a new #GCancellable object.
 		 * 
@@ -1950,6 +2000,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type CharsetConverterInitOptionsMixin = GObject.ObjectInitOptions & ConverterInitOptions & InitableInitOptions & 
+	Pick<ICharsetConverter,
+		"from_charset" |
+		"to_charset" |
+		"use_fallback">;
+
+	export interface CharsetConverterInitOptions extends CharsetConverterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CharsetConverter} instead.
 	 */
@@ -1962,7 +2020,7 @@ declare namespace imports.gi.Gio {
 	interface CharsetConverter extends CharsetConverterMixin {}
 
 	class CharsetConverter {
-		public constructor();
+		public constructor(options?: Partial<CharsetConverterInitOptions>);
 		/**
 		 * Creates a new #GCharsetConverter.
 		 * @param to_charset destination charset
@@ -1986,6 +2044,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ConverterInputStreamInitOptionsMixin = FilterInputStreamInitOptions & PollableInputStreamInitOptions & 
+	Pick<IConverterInputStream,
+		"converter">;
+
+	export interface ConverterInputStreamInitOptions extends ConverterInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ConverterInputStream} instead.
 	 */
@@ -2001,7 +2065,7 @@ declare namespace imports.gi.Gio {
 	interface ConverterInputStream extends ConverterInputStreamMixin {}
 
 	class ConverterInputStream {
-		public constructor();
+		public constructor(options?: Partial<ConverterInputStreamInitOptions>);
 		/**
 		 * Creates a new converter input stream for the #base_stream.
 		 * @param base_stream a #GInputStream
@@ -2025,6 +2089,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ConverterOutputStreamInitOptionsMixin = FilterOutputStreamInitOptions & PollableOutputStreamInitOptions & 
+	Pick<IConverterOutputStream,
+		"converter">;
+
+	export interface ConverterOutputStreamInitOptions extends ConverterOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ConverterOutputStream} instead.
 	 */
@@ -2040,7 +2110,7 @@ declare namespace imports.gi.Gio {
 	interface ConverterOutputStream extends ConverterOutputStreamMixin {}
 
 	class ConverterOutputStream {
-		public constructor();
+		public constructor(options?: Partial<ConverterOutputStreamInitOptions>);
 		/**
 		 * Creates a new converter output stream for the #base_stream.
 		 * @param base_stream a #GOutputStream
@@ -2131,6 +2201,9 @@ declare namespace imports.gi.Gio {
 		to_string(): string;
 	}
 
+	type CredentialsInitOptionsMixin = GObject.ObjectInitOptions
+	export interface CredentialsInitOptions extends CredentialsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Credentials} instead.
 	 */
@@ -2175,7 +2248,7 @@ declare namespace imports.gi.Gio {
 	interface Credentials extends CredentialsMixin {}
 
 	class Credentials {
-		public constructor();
+		public constructor(options?: Partial<CredentialsInitOptions>);
 		/**
 		 * Creates a new #GCredentials object with credentials matching the
 		 * the current process.
@@ -2191,6 +2264,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusActionGroupInitOptionsMixin = GObject.ObjectInitOptions & ActionGroupInitOptions & RemoteActionGroupInitOptions
+	export interface DBusActionGroupInitOptions extends DBusActionGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusActionGroup} instead.
 	 */
@@ -2204,7 +2280,7 @@ declare namespace imports.gi.Gio {
 	interface DBusActionGroup extends DBusActionGroupMixin {}
 
 	class DBusActionGroup {
-		public constructor();
+		public constructor(options?: Partial<DBusActionGroupInitOptions>);
 		/**
 		 * Obtains a #GDBusActionGroup for the action group which is exported at
 		 * the given #bus_name and #object_path.
@@ -2256,6 +2332,9 @@ declare namespace imports.gi.Gio {
 		connect(signal: "authorize-authenticated-peer", callback: (owner: this, stream: IOStream, credentials: Credentials | null) => boolean): number;
 
 	}
+
+	type DBusAuthObserverInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DBusAuthObserverInitOptions extends DBusAuthObserverInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusAuthObserver} instead.
@@ -2329,7 +2408,7 @@ declare namespace imports.gi.Gio {
 	interface DBusAuthObserver extends DBusAuthObserverMixin {}
 
 	class DBusAuthObserver {
-		public constructor();
+		public constructor(options?: Partial<DBusAuthObserverInitOptions>);
 		/**
 		 * Creates a new #GDBusAuthObserver object.
 		 * @returns A #GDBusAuthObserver. Free with g_object_unref().
@@ -2614,8 +2693,10 @@ declare namespace imports.gi.Gio {
 		 *     g_dbus_connection_call_with_unix_fd_list()
 		 * @returns %NULL if #error is set. Otherwise a non-floating
 		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 * 
+		 * return location for a #GUnixFDList or %NULL
 		 */
-		call_with_unix_fd_list_finish(res: AsyncResult): GLib.Variant;
+		call_with_unix_fd_list_finish(res: AsyncResult): [ GLib.Variant, UnixFDList | null ];
 		/**
 		 * Like g_dbus_connection_call_sync() but also takes and returns #GUnixFDList objects.
 		 * See g_dbus_connection_call_with_unix_fd_list() and
@@ -2637,8 +2718,10 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns %NULL if #error is set. Otherwise a non-floating
 		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 * 
+		 * return location for a #GUnixFDList or %NULL
 		 */
-		call_with_unix_fd_list_sync(bus_name: string | null, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant | null, reply_type: GLib.VariantType | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null): GLib.Variant;
+		call_with_unix_fd_list_sync(bus_name: string | null, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant | null, reply_type: GLib.VariantType | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null): [ GLib.Variant, UnixFDList | null ];
 		/**
 		 * Closes #connection. Note that this never causes the process to
 		 * exit (this might only happen if the other end of a shared message
@@ -2997,8 +3080,11 @@ declare namespace imports.gi.Gio {
 		 * @param flags flags affecting how the message is sent
 		 * @returns %TRUE if the message was well-formed and queued for
 		 *     transmission, %FALSE if #error is set
+		 * 
+		 * return location for serial number assigned
+		 *     to #message when sending it or %NULL
 		 */
-		send_message(message: DBusMessage, flags: DBusSendMessageFlags): boolean;
+		send_message(message: DBusMessage, flags: DBusSendMessageFlags): [ boolean, number | null ];
 		/**
 		 * Asynchronously sends #message to the peer represented by #connection.
 		 * 
@@ -3036,8 +3122,10 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable or %NULL
 		 * @param callback a #GAsyncReadyCallback to call when the request
 		 *     is satisfied or %NULL if you don't care about the result
+		 * @returns return location for serial number assigned
+		 *     to #message when sending it or %NULL
 		 */
-		send_message_with_reply(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+		send_message_with_reply(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number | null;
 		/**
 		 * Finishes an operation started with g_dbus_connection_send_message_with_reply().
 		 * 
@@ -3092,8 +3180,11 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns a locked #GDBusMessage that is the reply
 		 *     to #message or %NULL if #error is set
+		 * 
+		 * return location for serial number
+		 *     assigned to #message when sending it or %NULL
 		 */
-		send_message_with_reply_sync(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, cancellable: Cancellable | null): DBusMessage;
+		send_message_with_reply_sync(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, cancellable: Cancellable | null): [ DBusMessage, number | null ];
 		/**
 		 * Sets whether the process should be terminated when #connection is
 		 * closed by the remote peer. See #GDBusConnection:exit-on-close for
@@ -3265,6 +3356,18 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusConnectionInitOptionsMixin = GObject.ObjectInitOptions & AsyncInitableInitOptions & InitableInitOptions & 
+	Pick<IDBusConnection,
+		"capabilities" |
+		"closed" |
+		"exit_on_close" |
+		"flags" |
+		"guid" |
+		"stream" |
+		"unique_name">;
+
+	export interface DBusConnectionInitOptions extends DBusConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusConnection} instead.
 	 */
@@ -3324,7 +3427,7 @@ declare namespace imports.gi.Gio {
 	interface DBusConnection extends DBusConnectionMixin {}
 
 	class DBusConnection {
-		public constructor();
+		public constructor(options?: Partial<DBusConnectionInitOptions>);
 		/**
 		 * Finishes an operation started with g_dbus_connection_new().
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback
@@ -3599,6 +3702,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusInterfaceSkeletonInitOptionsMixin = GObject.ObjectInitOptions & DBusInterfaceInitOptions & 
+	Pick<IDBusInterfaceSkeleton,
+		"g_flags">;
+
+	export interface DBusInterfaceSkeletonInitOptions extends DBusInterfaceSkeletonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusInterfaceSkeleton} instead.
 	 */
@@ -3610,7 +3719,7 @@ declare namespace imports.gi.Gio {
 	interface DBusInterfaceSkeleton extends DBusInterfaceSkeletonMixin {}
 
 	class DBusInterfaceSkeleton {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceSkeletonInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3619,6 +3728,9 @@ declare namespace imports.gi.Gio {
 	interface IDBusMenuModel {
 
 	}
+
+	type DBusMenuModelInitOptionsMixin = MenuModelInitOptions
+	export interface DBusMenuModelInitOptions extends DBusMenuModelInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMenuModel} instead.
@@ -3633,7 +3745,7 @@ declare namespace imports.gi.Gio {
 	interface DBusMenuModel extends DBusMenuModelMixin {}
 
 	class DBusMenuModel {
-		public constructor();
+		public constructor(options?: Partial<DBusMenuModelInitOptions>);
 		/**
 		 * Obtains a #GDBusMenuModel for the menu model which is exported
 		 * at the given #bus_name and #object_path.
@@ -3959,8 +4071,10 @@ declare namespace imports.gi.Gio {
 		 * @returns A pointer to a
 		 * valid binary D-Bus message of #out_size bytes generated by #message
 		 * or %NULL if #error is set. Free with g_free().
+		 * 
+		 * Return location for size of generated blob.
 		 */
-		to_blob(capabilities: DBusCapabilityFlags): number[];
+		to_blob(capabilities: DBusCapabilityFlags): [ number[], number ];
 		/**
 		 * If #message is not of type %G_DBUS_MESSAGE_TYPE_ERROR does
 		 * nothing and returns %FALSE.
@@ -3976,6 +4090,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusMessageInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDBusMessage,
+		"locked">;
+
+	export interface DBusMessageInitOptions extends DBusMessageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMessage} instead.
 	 */
@@ -3988,7 +4108,7 @@ declare namespace imports.gi.Gio {
 	interface DBusMessage extends DBusMessageMixin {}
 
 	class DBusMessage {
-		public constructor();
+		public constructor(options?: Partial<DBusMessageInitOptions>);
 		/**
 		 * Creates a new empty #GDBusMessage.
 		 * @returns A #GDBusMessage. Free with g_object_unref().
@@ -4249,6 +4369,9 @@ declare namespace imports.gi.Gio {
 		take_error(error: GLib.Error): void;
 	}
 
+	type DBusMethodInvocationInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DBusMethodInvocationInitOptions extends DBusMethodInvocationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusMethodInvocation} instead.
 	 */
@@ -4266,7 +4389,7 @@ declare namespace imports.gi.Gio {
 	interface DBusMethodInvocation extends DBusMethodInvocationMixin {}
 
 	class DBusMethodInvocation {
-		public constructor();
+		public constructor(options?: Partial<DBusMethodInvocationInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4373,6 +4496,19 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectManagerClientInitOptionsMixin = GObject.ObjectInitOptions & AsyncInitableInitOptions & DBusObjectManagerInitOptions & InitableInitOptions & 
+	Pick<IDBusObjectManagerClient,
+		"connection" |
+		"flags" |
+		"get_proxy_type_destroy_notify" |
+		"get_proxy_type_func" |
+		"get_proxy_type_user_data" |
+		"name" |
+		"name_owner" |
+		"object_path">;
+
+	export interface DBusObjectManagerClientInitOptions extends DBusObjectManagerClientInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectManagerClient} instead.
 	 */
@@ -4458,7 +4594,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectManagerClient extends DBusObjectManagerClientMixin {}
 
 	class DBusObjectManagerClient {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerClientInitOptions>);
 		/**
 		 * Finishes an operation started with g_dbus_object_manager_client_new().
 		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new().
@@ -4625,6 +4761,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectManagerServerInitOptionsMixin = GObject.ObjectInitOptions & DBusObjectManagerInitOptions & 
+	Pick<IDBusObjectManagerServer,
+		"connection" |
+		"object_path">;
+
+	export interface DBusObjectManagerServerInitOptions extends DBusObjectManagerServerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectManagerServer} instead.
 	 */
@@ -4657,7 +4800,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectManagerServer extends DBusObjectManagerServerMixin {}
 
 	class DBusObjectManagerServer {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerServerInitOptions>);
 		/**
 		 * Creates a new #GDBusObjectManagerServer object.
 		 * 
@@ -4695,6 +4838,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectProxyInitOptionsMixin = GObject.ObjectInitOptions & DBusObjectInitOptions & 
+	Pick<IDBusObjectProxy,
+		"g_connection" |
+		"g_object_path">;
+
+	export interface DBusObjectProxyInitOptions extends DBusObjectProxyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectProxy} instead.
 	 */
@@ -4709,7 +4859,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectProxy extends DBusObjectProxyMixin {}
 
 	class DBusObjectProxy {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectProxyInitOptions>);
 		/**
 		 * Creates a new #GDBusObjectProxy for the given connection and
 		 * object path.
@@ -4779,6 +4929,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectSkeletonInitOptionsMixin = GObject.ObjectInitOptions & DBusObjectInitOptions & 
+	Pick<IDBusObjectSkeleton,
+		"g_object_path">;
+
+	export interface DBusObjectSkeletonInitOptions extends DBusObjectSkeletonInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectSkeleton} instead.
 	 */
@@ -4794,7 +4950,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectSkeleton extends DBusObjectSkeletonMixin {}
 
 	class DBusObjectSkeleton {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectSkeletonInitOptions>);
 		/**
 		 * Creates a new #GDBusObjectSkeleton.
 		 * @param object_path An object path.
@@ -4997,8 +5153,10 @@ declare namespace imports.gi.Gio {
 		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call_with_unix_fd_list().
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
 		 * return values. Free with g_variant_unref().
+		 * 
+		 * Return location for a #GUnixFDList or %NULL.
 		 */
-		call_with_unix_fd_list_finish(res: AsyncResult): GLib.Variant;
+		call_with_unix_fd_list_finish(res: AsyncResult): [ GLib.Variant, UnixFDList | null ];
 		/**
 		 * Like g_dbus_proxy_call_sync() but also takes and returns #GUnixFDList objects.
 		 * 
@@ -5013,8 +5171,10 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
 		 * return values. Free with g_variant_unref().
+		 * 
+		 * Return location for a #GUnixFDList or %NULL.
 		 */
-		call_with_unix_fd_list_sync(method_name: string, parameters: GLib.Variant | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null): GLib.Variant;
+		call_with_unix_fd_list_sync(method_name: string, parameters: GLib.Variant | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null): [ GLib.Variant, UnixFDList | null ];
 		/**
 		 * Looks up the value for a property from the cache. This call does no
 		 * blocking IO.
@@ -5177,6 +5337,19 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusProxyInitOptionsMixin = GObject.ObjectInitOptions & AsyncInitableInitOptions & DBusInterfaceInitOptions & InitableInitOptions & 
+	Pick<IDBusProxy,
+		"g_connection" |
+		"g_default_timeout" |
+		"g_flags" |
+		"g_interface_info" |
+		"g_interface_name" |
+		"g_name" |
+		"g_name_owner" |
+		"g_object_path">;
+
+	export interface DBusProxyInitOptions extends DBusProxyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusProxy} instead.
 	 */
@@ -5231,7 +5404,7 @@ declare namespace imports.gi.Gio {
 	interface DBusProxy extends DBusProxyMixin {}
 
 	class DBusProxy {
-		public constructor();
+		public constructor(options?: Partial<DBusProxyInitOptions>);
 		/**
 		 * Finishes creating a #GDBusProxy.
 		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new().
@@ -5447,6 +5620,17 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusServerInitOptionsMixin = GObject.ObjectInitOptions & InitableInitOptions & 
+	Pick<IDBusServer,
+		"active" |
+		"address" |
+		"authentication_observer" |
+		"client_address" |
+		"flags" |
+		"guid">;
+
+	export interface DBusServerInitOptions extends DBusServerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusServer} instead.
 	 */
@@ -5475,7 +5659,7 @@ declare namespace imports.gi.Gio {
 	interface DBusServer extends DBusServerMixin {}
 
 	class DBusServer {
-		public constructor();
+		public constructor(options?: Partial<DBusServerInitOptions>);
 		/**
 		 * Creates a new D-Bus server that listens on the first address in
 		 * #address that works.
@@ -5593,8 +5777,10 @@ declare namespace imports.gi.Gio {
 		 *  of the read line.  On an error, it will return %NULL and #error
 		 *  will be set. If there's no content to read, it will still return
 		 *  %NULL, but #error won't be set.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_line(cancellable: Cancellable | null): number[] | null;
+		read_line(cancellable: Cancellable | null): [ number[] | null, number | null ];
 		/**
 		 * The asynchronous version of g_data_input_stream_read_line().  It is
 		 * an error to have two outstanding calls to this function.
@@ -5619,8 +5805,10 @@ declare namespace imports.gi.Gio {
 		 *  of the read line.  On an error, it will return %NULL and #error
 		 *  will be set. If there's no content to read, it will still return
 		 *  %NULL, but #error won't be set.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_line_finish(result: AsyncResult): number[] | null;
+		read_line_finish(result: AsyncResult): [ number[] | null, number | null ];
 		/**
 		 * Finish an asynchronous call started by
 		 * g_data_input_stream_read_line_async().
@@ -5631,8 +5819,10 @@ declare namespace imports.gi.Gio {
 		 *  %NULL and #error will be set. For UTF-8 conversion errors, the set
 		 *  error domain is %G_CONVERT_ERROR.  If there's no content to read,
 		 *  it will still return %NULL, but #error won't be set.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_line_finish_utf8(result: AsyncResult): string | null;
+		read_line_finish_utf8(result: AsyncResult): [ string | null, number | null ];
 		/**
 		 * Reads a UTF-8 encoded line from the data input stream.
 		 * 
@@ -5647,8 +5837,10 @@ declare namespace imports.gi.Gio {
 		 *  conversion errors, the set error domain is %G_CONVERT_ERROR.  If
 		 *  there's no content to read, it will still return %NULL, but #error
 		 *  won't be set.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_line_utf8(cancellable: Cancellable | null): string | null;
+		read_line_utf8(cancellable: Cancellable | null): [ string | null, number | null ];
 		/**
 		 * Reads an unsigned 16-bit/2-byte value from #stream.
 		 * 
@@ -5705,8 +5897,10 @@ declare namespace imports.gi.Gio {
 		 *     before encountering any of the stop characters. Set #length to
 		 *     a #gsize to get the length of the string. This function will
 		 *     return %NULL on an error.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_until(stop_chars: string, cancellable: Cancellable | null): string;
+		read_until(stop_chars: string, cancellable: Cancellable | null): [ string, number | null ];
 		/**
 		 * The asynchronous version of g_data_input_stream_read_until().
 		 * It is an error to have two outstanding calls to this function.
@@ -5737,8 +5931,10 @@ declare namespace imports.gi.Gio {
 		 *     before encountering any of the stop characters. Set #length to
 		 *     a #gsize to get the length of the string. This function will
 		 *     return %NULL on an error.
+		 * 
+		 * a #gsize to get the length of the data read in.
 		 */
-		read_until_finish(result: AsyncResult): string;
+		read_until_finish(result: AsyncResult): [ string, number | null ];
 		/**
 		 * Reads a string from the data input stream, up to the first
 		 * occurrence of any of the stop characters.
@@ -5760,8 +5956,10 @@ declare namespace imports.gi.Gio {
 		 *     before encountering any of the stop characters. Set #length to
 		 *     a #gsize to get the length of the string. This function will
 		 *     return %NULL on an error
+		 * 
+		 * a #gsize to get the length of the data read in
 		 */
-		read_upto(stop_chars: string, stop_chars_len: number, cancellable: Cancellable | null): string;
+		read_upto(stop_chars: string, stop_chars_len: number, cancellable: Cancellable | null): [ string, number | null ];
 		/**
 		 * The asynchronous version of g_data_input_stream_read_upto().
 		 * It is an error to have two outstanding calls to this function.
@@ -5799,8 +5997,10 @@ declare namespace imports.gi.Gio {
 		 *     before encountering any of the stop characters. Set #length to
 		 *     a #gsize to get the length of the string. This function will
 		 *     return %NULL on an error.
+		 * 
+		 * a #gsize to get the length of the data read in
 		 */
-		read_upto_finish(result: AsyncResult): string;
+		read_upto_finish(result: AsyncResult): [ string, number | null ];
 		/**
 		 * This function sets the byte order for the given #stream. All subsequent
 		 * reads from the #stream will be read in the given #order.
@@ -5821,6 +6021,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DataInputStreamInitOptionsMixin = BufferedInputStreamInitOptions & SeekableInitOptions & 
+	Pick<IDataInputStream,
+		"byte_order" |
+		"newline_type">;
+
+	export interface DataInputStreamInitOptions extends DataInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DataInputStream} instead.
 	 */
@@ -5833,7 +6040,7 @@ declare namespace imports.gi.Gio {
 	interface DataInputStream extends DataInputStreamMixin {}
 
 	class DataInputStream {
-		public constructor();
+		public constructor(options?: Partial<DataInputStreamInitOptions>);
 		/**
 		 * Creates a new data input stream for the #base_stream.
 		 * @param base_stream a #GInputStream.
@@ -5921,6 +6128,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DataOutputStreamInitOptionsMixin = FilterOutputStreamInitOptions & SeekableInitOptions & 
+	Pick<IDataOutputStream,
+		"byte_order">;
+
+	export interface DataOutputStreamInitOptions extends DataOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DataOutputStream} instead.
 	 */
@@ -5933,7 +6146,7 @@ declare namespace imports.gi.Gio {
 	interface DataOutputStream extends DataOutputStreamMixin {}
 
 	class DataOutputStream {
-		public constructor();
+		public constructor(options?: Partial<DataOutputStreamInitOptions>);
 		/**
 		 * Creates a new data output stream for #base_stream.
 		 * @param base_stream a #GOutputStream.
@@ -6060,8 +6273,10 @@ declare namespace imports.gi.Gio {
 		 * @returns 
 		 *  a %NULL-terminated string array or %NULL if the specified
 		 *  key cannot be found. The array should be freed with g_strfreev().
+		 * 
+		 * return location for the number of returned strings, or %NULL
 		 */
-		get_string_list(key: string): string[];
+		get_string_list(key: string): [ string[], number | null ];
 		/**
 		 * Returns whether #key exists in the "Desktop Entry" group
 		 * of the keyfile backing #info.
@@ -6151,6 +6366,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DesktopAppInfoInitOptionsMixin = GObject.ObjectInitOptions & AppInfoInitOptions & 
+	Pick<IDesktopAppInfo,
+		"filename">;
+
+	export interface DesktopAppInfoInitOptions extends DesktopAppInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopAppInfo} instead.
 	 */
@@ -6167,7 +6388,7 @@ declare namespace imports.gi.Gio {
 	interface DesktopAppInfo extends DesktopAppInfoMixin {}
 
 	class DesktopAppInfo {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoInitOptions>);
 		/**
 		 * Creates a new #GDesktopAppInfo based on a desktop file id.
 		 * 
@@ -6263,6 +6484,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type EmblemInitOptionsMixin = GObject.ObjectInitOptions & IconInitOptions & 
+	Pick<IEmblem,
+		"icon" |
+		"origin">;
+
+	export interface EmblemInitOptions extends EmblemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Emblem} instead.
 	 */
@@ -6279,7 +6507,7 @@ declare namespace imports.gi.Gio {
 	interface Emblem extends EmblemMixin {}
 
 	class Emblem {
-		public constructor();
+		public constructor(options?: Partial<EmblemInitOptions>);
 		/**
 		 * Creates a new emblem for #icon.
 		 * @param icon a GIcon containing the icon.
@@ -6324,6 +6552,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type EmblemedIconInitOptionsMixin = GObject.ObjectInitOptions & IconInitOptions & 
+	Pick<IEmblemedIcon,
+		"gicon">;
+
+	export interface EmblemedIconInitOptions extends EmblemedIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EmblemedIcon} instead.
 	 */
@@ -6340,7 +6574,7 @@ declare namespace imports.gi.Gio {
 	interface EmblemedIcon extends EmblemedIconMixin {}
 
 	class EmblemedIcon {
-		public constructor();
+		public constructor(options?: Partial<EmblemedIconInitOptions>);
 		/**
 		 * Creates a new emblemed icon for #icon with the emblem #emblem.
 		 * @param icon a #GIcon
@@ -6464,8 +6698,12 @@ declare namespace imports.gi.Gio {
 		 * ]|
 		 * @param cancellable a #GCancellable
 		 * @returns 
+		 * 
+		 * Output location for the next #GFileInfo, or %NULL
+		 * 
+		 * Output location for the next #GFile, or %NULL
 		 */
-		iterate(cancellable: Cancellable | null): boolean;
+		iterate(cancellable: Cancellable | null): [ boolean, FileInfo | null, File | null ];
 		/**
 		 * Returns information for the next file in the enumerated object.
 		 * Will block until the information is available. The #GFileInfo
@@ -6525,6 +6763,9 @@ declare namespace imports.gi.Gio {
 		set_pending(pending: boolean): void;
 	}
 
+	type FileEnumeratorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FileEnumeratorInitOptions extends FileEnumeratorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileEnumerator} instead.
 	 */
@@ -6561,7 +6802,7 @@ declare namespace imports.gi.Gio {
 	interface FileEnumerator extends FileEnumeratorMixin {}
 
 	class FileEnumerator {
-		public constructor();
+		public constructor(options?: Partial<FileEnumeratorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6620,6 +6861,9 @@ declare namespace imports.gi.Gio {
 		query_info_finish(result: AsyncResult): FileInfo;
 	}
 
+	type FileIOStreamInitOptionsMixin = IOStreamInitOptions & SeekableInitOptions
+	export interface FileIOStreamInitOptions extends FileIOStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileIOStream} instead.
 	 */
@@ -6650,7 +6894,7 @@ declare namespace imports.gi.Gio {
 	interface FileIOStream extends FileIOStreamMixin {}
 
 	class FileIOStream {
-		public constructor();
+		public constructor(options?: Partial<FileIOStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6670,6 +6914,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type FileIconInitOptionsMixin = GObject.ObjectInitOptions & IconInitOptions & LoadableIconInitOptions & 
+	Pick<IFileIcon,
+		"file">;
+
+	export interface FileIconInitOptions extends FileIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileIcon} instead.
 	 */
@@ -6682,7 +6932,7 @@ declare namespace imports.gi.Gio {
 	interface FileIcon extends FileIconMixin {}
 
 	class FileIcon {
-		public constructor(options?: Partial<FileIconOptions>);
+		public constructor(options?: Partial<FileIconInitOptions>);
 		/**
 		 * Creates a new icon for a file.
 		 * @param file a #GFile.
@@ -6751,8 +7001,15 @@ declare namespace imports.gi.Gio {
 		 * @param attribute a file attribute key
 		 * @returns %TRUE if #info has an attribute named #attribute,
 		 *      %FALSE otherwise.
+		 * 
+		 * return location for the attribute type, or %NULL
+		 * 
+		 * return location for the
+		 *    attribute value, or %NULL; the attribute value will not be %NULL
+		 * 
+		 * return location for the attribute status, or %NULL
 		 */
-		get_attribute_data(attribute: string): boolean;
+		get_attribute_data(attribute: string): [ boolean, FileAttributeType | null, any | null, FileAttributeStatus | null ];
 		/**
 		 * Gets a signed 32-bit integer contained within the attribute. If the
 		 * attribute does not contain a signed 32-bit integer, or is invalid,
@@ -6901,9 +7158,9 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the modification time of the current #info and sets it
 		 * in #result.
-		 * @param result a #GTimeVal.
+		 * @returns a #GTimeVal.
 		 */
-		get_modification_time(result: GLib.TimeVal): void;
+		get_modification_time(): GLib.TimeVal;
 		/**
 		 * Gets the name for a file. This is guaranteed to always be set.
 		 * @returns a string containing the file name.
@@ -7159,6 +7416,9 @@ declare namespace imports.gi.Gio {
 		unset_attribute_mask(): void;
 	}
 
+	type FileInfoInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FileInfoInitOptions extends FileInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileInfo} instead.
 	 */
@@ -7198,7 +7458,7 @@ declare namespace imports.gi.Gio {
 	interface FileInfo extends FileInfoMixin {}
 
 	class FileInfo {
-		public constructor();
+		public constructor(options?: Partial<FileInfoInitOptions>);
 		/**
 		 * Creates a new file info structure.
 		 * @returns a #GFileInfo.
@@ -7247,6 +7507,9 @@ declare namespace imports.gi.Gio {
 		query_info_finish(result: AsyncResult): FileInfo;
 	}
 
+	type FileInputStreamInitOptionsMixin = InputStreamInitOptions & SeekableInitOptions
+	export interface FileInputStreamInitOptions extends FileInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileInputStream} instead.
 	 */
@@ -7266,7 +7529,7 @@ declare namespace imports.gi.Gio {
 	interface FileInputStream extends FileInputStreamMixin {}
 
 	class FileInputStream {
-		public constructor();
+		public constructor(options?: Partial<FileInputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7342,6 +7605,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type FileMonitorInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IFileMonitor,
+		"cancelled" |
+		"rate_limit">;
+
+	export interface FileMonitorInitOptions extends FileMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileMonitor} instead.
 	 */
@@ -7366,7 +7636,7 @@ declare namespace imports.gi.Gio {
 	interface FileMonitor extends FileMonitorMixin {}
 
 	class FileMonitor {
-		public constructor();
+		public constructor(options?: Partial<FileMonitorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7425,6 +7695,9 @@ declare namespace imports.gi.Gio {
 		query_info_finish(result: AsyncResult): FileInfo;
 	}
 
+	type FileOutputStreamInitOptionsMixin = OutputStreamInitOptions & SeekableInitOptions
+	export interface FileOutputStreamInitOptions extends FileOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileOutputStream} instead.
 	 */
@@ -7449,7 +7722,7 @@ declare namespace imports.gi.Gio {
 	interface FileOutputStream extends FileOutputStreamMixin {}
 
 	class FileOutputStream {
-		public constructor();
+		public constructor(options?: Partial<FileOutputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7484,6 +7757,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type FilenameCompleterInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FilenameCompleterInitOptions extends FilenameCompleterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilenameCompleter} instead.
 	 */
@@ -7497,7 +7773,7 @@ declare namespace imports.gi.Gio {
 	interface FilenameCompleter extends FilenameCompleterMixin {}
 
 	class FilenameCompleter {
-		public constructor();
+		public constructor(options?: Partial<FilenameCompleterInitOptions>);
 		/**
 		 * Creates a new filename completer.
 		 * @returns a #GFilenameCompleter.
@@ -7534,6 +7810,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type FilterInputStreamInitOptionsMixin = InputStreamInitOptions & 
+	Pick<IFilterInputStream,
+		"base_stream" |
+		"close_base_stream" |
+		"base_stream">;
+
+	export interface FilterInputStreamInitOptions extends FilterInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilterInputStream} instead.
 	 */
@@ -7548,7 +7832,7 @@ declare namespace imports.gi.Gio {
 	interface FilterInputStream extends FilterInputStreamMixin {}
 
 	class FilterInputStream {
-		public constructor();
+		public constructor(options?: Partial<FilterInputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7580,6 +7864,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type FilterOutputStreamInitOptionsMixin = OutputStreamInitOptions & 
+	Pick<IFilterOutputStream,
+		"base_stream" |
+		"close_base_stream" |
+		"base_stream">;
+
+	export interface FilterOutputStreamInitOptions extends FilterOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FilterOutputStream} instead.
 	 */
@@ -7594,7 +7886,7 @@ declare namespace imports.gi.Gio {
 	interface FilterOutputStream extends FilterOutputStreamMixin {}
 
 	class FilterOutputStream {
-		public constructor();
+		public constructor(options?: Partial<FilterOutputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7634,6 +7926,9 @@ declare namespace imports.gi.Gio {
 		unload(): void;
 	}
 
+	type IOModuleInitOptionsMixin = GObject.TypeModuleInitOptions & GObject.TypePluginInitOptions
+	export interface IOModuleInitOptions extends IOModuleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IOModule} instead.
 	 */
@@ -7647,7 +7942,7 @@ declare namespace imports.gi.Gio {
 	interface IOModule extends IOModuleMixin {}
 
 	class IOModule {
-		public constructor();
+		public constructor(options?: Partial<IOModuleInitOptions>);
 		/**
 		 * Creates a new GIOModule that will load the specific
 		 * shared library when in use.
@@ -7818,6 +8113,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type IOStreamInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IIOStream,
+		"closed" |
+		"input_stream" |
+		"output_stream">;
+
+	export interface IOStreamInitOptions extends IOStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link IOStream} instead.
 	 */
@@ -7874,7 +8177,7 @@ declare namespace imports.gi.Gio {
 	interface IOStream extends IOStreamMixin {}
 
 	class IOStream {
-		public constructor();
+		public constructor(options?: Partial<IOStreamInitOptions>);
 		/**
 		 * Finishes an asynchronous io stream splice operation.
 		 * @param result a #GAsyncResult.
@@ -8039,6 +8342,23 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type InetAddressInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IInetAddress,
+		"bytes" |
+		"family" |
+		"is_any" |
+		"is_link_local" |
+		"is_loopback" |
+		"is_mc_global" |
+		"is_mc_link_local" |
+		"is_mc_node_local" |
+		"is_mc_org_local" |
+		"is_mc_site_local" |
+		"is_multicast" |
+		"is_site_local">;
+
+	export interface InetAddressInitOptions extends InetAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetAddress} instead.
 	 */
@@ -8059,7 +8379,7 @@ declare namespace imports.gi.Gio {
 	interface InetAddress extends InetAddressMixin {}
 
 	class InetAddress {
-		public constructor();
+		public constructor(options?: Partial<InetAddressInitOptions>);
 		/**
 		 * Creates a #GInetAddress for the "any" address (unassigned/"don't
 		 * care") for #family.
@@ -8143,6 +8463,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type InetAddressMaskInitOptionsMixin = GObject.ObjectInitOptions & InitableInitOptions & 
+	Pick<IInetAddressMask,
+		"address" |
+		"family" |
+		"length">;
+
+	export interface InetAddressMaskInitOptions extends InetAddressMaskInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetAddressMask} instead.
 	 */
@@ -8157,7 +8485,7 @@ declare namespace imports.gi.Gio {
 	interface InetAddressMask extends InetAddressMaskMixin {}
 
 	class InetAddressMask {
-		public constructor();
+		public constructor(options?: Partial<InetAddressMaskInitOptions>);
 		/**
 		 * Creates a new #GInetAddressMask representing all addresses whose
 		 * first #length bits match #addr.
@@ -8219,6 +8547,15 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type InetSocketAddressInitOptionsMixin = SocketAddressInitOptions & SocketConnectableInitOptions & 
+	Pick<IInetSocketAddress,
+		"address" |
+		"flowinfo" |
+		"port" |
+		"scope_id">;
+
+	export interface InetSocketAddressInitOptions extends InetSocketAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InetSocketAddress} instead.
 	 */
@@ -8231,7 +8568,7 @@ declare namespace imports.gi.Gio {
 	interface InetSocketAddress extends InetSocketAddressMixin {}
 
 	class InetSocketAddress {
-		public constructor();
+		public constructor(options?: Partial<InetSocketAddressInitOptions>);
 		/**
 		 * Creates a new #GInetSocketAddress for #address and #port.
 		 * @param address a #GInetAddress
@@ -8342,13 +8679,14 @@ declare namespace imports.gi.Gio {
 		 * partial result will be returned, without an error.
 		 * 
 		 * On error -1 is returned and #error is set accordingly.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns Number of bytes read, or -1 on error, or 0 on end of file.
+		 * 
+		 * 
+		 *     a buffer to read data into (which should be at least count bytes long).
 		 */
-		read(buffer: number[], count: number, cancellable: Cancellable | null): number;
+		read(count: number, cancellable: Cancellable | null): [ number, number[] ];
 		/**
 		 * Tries to read #count bytes from the stream into the buffer starting at
 		 * #buffer. Will block during this read.
@@ -8369,13 +8707,16 @@ declare namespace imports.gi.Gio {
 		 * read before the error was encountered.  This functionality is only
 		 * available from C.  If you need it from another language then you must
 		 * write your own loop around g_input_stream_read().
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * 
+		 *     a buffer to read data into (which should be at least count bytes long).
+		 * 
+		 * location to store the number of bytes that was read from the stream
 		 */
-		read_all(buffer: number[], count: number, cancellable: Cancellable | null): boolean;
+		read_all(count: number, cancellable: Cancellable | null): [ boolean, number[], number ];
 		/**
 		 * Request an asynchronous read of #count bytes from the stream into the
 		 * buffer starting at #buffer.
@@ -8387,14 +8728,14 @@ declare namespace imports.gi.Gio {
 		 * Any outstanding I/O request with higher priority (lower numerical
 		 * value) will be executed before an outstanding request with lower
 		 * priority. Default priority is %G_PRIORITY_DEFAULT.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least count bytes long)
 		 * @param count the number of bytes that will be read from the stream
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @param callback callback to call when the request is satisfied
+		 * @returns 
+		 *     a buffer to read data into (which should be at least count bytes long)
 		 */
-		read_all_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+		read_all_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[];
 		/**
 		 * Finishes an asynchronous stream read operation started with
 		 * g_input_stream_read_all_async().
@@ -8407,8 +8748,10 @@ declare namespace imports.gi.Gio {
 		 * write your own loop around g_input_stream_read_async().
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that was read from the stream
 		 */
-		read_all_finish(result: AsyncResult): boolean;
+		read_all_finish(result: AsyncResult): [ boolean, number ];
 		/**
 		 * Request an asynchronous read of #count bytes from the stream into the buffer
 		 * starting at #buffer. When the operation is finished #callback will be called.
@@ -8433,15 +8776,15 @@ declare namespace imports.gi.Gio {
 		 * The asynchronous methods have a default fallback that uses threads to implement
 		 * asynchronicity, so they are optional for inheriting classes. However, if you
 		 * override one you must override all.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least count bytes long).
 		 * @param count the number of bytes that will be read from the stream
 		 * @param io_priority the [I/O priority][io-priority]
 		 * of the request.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @param callback callback to call when the request is satisfied
+		 * @returns 
+		 *     a buffer to read data into (which should be at least count bytes long).
 		 */
-		read_async(buffer: number[], count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
+		read_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[];
 		/**
 		 * Like g_input_stream_read(), this tries to read #count bytes from
 		 * the stream in a blocking fashion. However, rather than reading into
@@ -8576,6 +8919,9 @@ declare namespace imports.gi.Gio {
 		skip_finish(result: AsyncResult): number;
 	}
 
+	type InputStreamInitOptionsMixin = GObject.ObjectInitOptions
+	export interface InputStreamInitOptions extends InputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputStream} instead.
 	 */
@@ -8597,7 +8943,7 @@ declare namespace imports.gi.Gio {
 	interface InputStream extends InputStreamMixin {}
 
 	class InputStream {
-		public constructor();
+		public constructor(options?: Partial<InputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8629,8 +8975,10 @@ declare namespace imports.gi.Gio {
 		 * @param item an item
 		 * @returns Whether #store contains #item. If it was found, #position will be
 		 * set to the position where #item occurred for the first time.
+		 * 
+		 * the first position of #item, if it was found.
 		 */
-		find(item: GObject.Object): boolean;
+		find(item: GObject.Object): [ boolean, number | null ];
 		/**
 		 * Looks up the given #item in the list store by looping over the items and
 		 * comparing them with #compare_func until the first occurrence of #item which
@@ -8640,8 +8988,10 @@ declare namespace imports.gi.Gio {
 		 * @param equal_func A custom equality check function
 		 * @returns Whether #store contains #item. If it was found, #position will be
 		 * set to the position where #item occurred for the first time.
+		 * 
+		 * the first position of #item, if it was found.
 		 */
-		find_with_equal_func(item: GObject.Object, equal_func: GLib.EqualFunc): boolean;
+		find_with_equal_func(item: GObject.Object, equal_func: GLib.EqualFunc): [ boolean, number | null ];
 		/**
 		 * Inserts #item into #store at #position. #item must be of type
 		 * #GListStore:item-type or derived from it. #position must be smaller
@@ -8711,6 +9061,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ListStoreInitOptionsMixin = GObject.ObjectInitOptions & ListModelInitOptions & 
+	Pick<IListStore,
+		"item_type">;
+
+	export interface ListStoreInitOptions extends ListStoreInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListStore} instead.
 	 */
@@ -8726,7 +9082,7 @@ declare namespace imports.gi.Gio {
 	interface ListStore extends ListStoreMixin {}
 
 	class ListStore {
-		public constructor();
+		public constructor(options?: Partial<ListStoreInitOptions>);
 		/**
 		 * Creates a new #GListStore with items of type #item_type. #item_type
 		 * must be a subclass of #GObject.
@@ -8754,6 +9110,9 @@ declare namespace imports.gi.Gio {
 		add_data(data: number[], len: number, destroy: GLib.DestroyNotify | null): void;
 	}
 
+	type MemoryInputStreamInitOptionsMixin = InputStreamInitOptions & PollableInputStreamInitOptions & SeekableInitOptions
+	export interface MemoryInputStreamInitOptions extends MemoryInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MemoryInputStream} instead.
 	 */
@@ -8769,7 +9128,7 @@ declare namespace imports.gi.Gio {
 	interface MemoryInputStream extends MemoryInputStreamMixin {}
 
 	class MemoryInputStream {
-		public constructor();
+		public constructor(options?: Partial<MemoryInputStreamInitOptions>);
 		/**
 		 * Creates a new empty #GMemoryInputStream.
 		 * @returns a new #GInputStream
@@ -8874,6 +9233,16 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type MemoryOutputStreamInitOptionsMixin = OutputStreamInitOptions & PollableOutputStreamInitOptions & SeekableInitOptions & 
+	Pick<IMemoryOutputStream,
+		"data" |
+		"data_size" |
+		"destroy_function" |
+		"realloc_function" |
+		"size">;
+
+	export interface MemoryOutputStreamInitOptions extends MemoryOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MemoryOutputStream} instead.
 	 */
@@ -8889,7 +9258,7 @@ declare namespace imports.gi.Gio {
 	interface MemoryOutputStream extends MemoryOutputStreamMixin {}
 
 	class MemoryOutputStream {
-		public constructor();
+		public constructor(options?: Partial<MemoryOutputStreamInitOptions>);
 		/**
 		 * Creates a new #GMemoryOutputStream.
 		 * 
@@ -9095,6 +9464,9 @@ declare namespace imports.gi.Gio {
 		remove_all(): void;
 	}
 
+	type MenuInitOptionsMixin = MenuModelInitOptions
+	export interface MenuInitOptions extends MenuInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Menu} instead.
 	 */
@@ -9113,7 +9485,7 @@ declare namespace imports.gi.Gio {
 	interface Menu extends MenuMixin {}
 
 	class Menu {
-		public constructor();
+		public constructor(options?: Partial<MenuInitOptions>);
 		/**
 		 * Creates a new #GMenu.
 		 * 
@@ -9153,8 +9525,12 @@ declare namespace imports.gi.Gio {
 		 * be unreffed using g_variant_unref() when it is no longer in use.
 		 * @returns %TRUE on success, or %FALSE if there is no additional
 		 *     attribute
+		 * 
+		 * the type of the attribute
+		 * 
+		 * the attribute value
 		 */
-		get_next(): boolean;
+		get_next(): [ boolean, string | null, GLib.Variant | null ];
 		/**
 		 * Gets the value of the attribute at the current iterator position.
 		 * 
@@ -9177,6 +9553,9 @@ declare namespace imports.gi.Gio {
 		next(): boolean;
 	}
 
+	type MenuAttributeIterInitOptionsMixin = GObject.ObjectInitOptions
+	export interface MenuAttributeIterInitOptions extends MenuAttributeIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuAttributeIter} instead.
 	 */
@@ -9189,7 +9568,7 @@ declare namespace imports.gi.Gio {
 	interface MenuAttributeIter extends MenuAttributeIterMixin {}
 
 	class MenuAttributeIter {
-		public constructor();
+		public constructor(options?: Partial<MenuAttributeIterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9418,6 +9797,9 @@ declare namespace imports.gi.Gio {
 		set_submenu(submenu: MenuModel | null): void;
 	}
 
+	type MenuItemInitOptionsMixin = GObject.ObjectInitOptions
+	export interface MenuItemInitOptions extends MenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuItem} instead.
 	 */
@@ -9430,7 +9812,7 @@ declare namespace imports.gi.Gio {
 	interface MenuItem extends MenuItemMixin {}
 
 	class MenuItem {
-		public constructor();
+		public constructor(options?: Partial<MenuItemInitOptions>);
 		/**
 		 * Creates a new #GMenuItem.
 		 * 
@@ -9561,8 +9943,12 @@ declare namespace imports.gi.Gio {
 		 * remains at the current position.  The value returned in #value must
 		 * be unreffed using g_object_unref() when it is no longer in use.
 		 * @returns %TRUE on success, or %FALSE if there is no additional link
+		 * 
+		 * the name of the link
+		 * 
+		 * the linked #GMenuModel
 		 */
-		get_next(): boolean;
+		get_next(): [ boolean, string | null, MenuModel | null ];
 		/**
 		 * Gets the linked #GMenuModel at the current iterator position.
 		 * 
@@ -9584,6 +9970,9 @@ declare namespace imports.gi.Gio {
 		next(): boolean;
 	}
 
+	type MenuLinkIterInitOptionsMixin = GObject.ObjectInitOptions
+	export interface MenuLinkIterInitOptions extends MenuLinkIterInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuLinkIter} instead.
 	 */
@@ -9596,7 +9985,7 @@ declare namespace imports.gi.Gio {
 	interface MenuLinkIter extends MenuLinkIterMixin {}
 
 	class MenuLinkIter {
-		public constructor();
+		public constructor(options?: Partial<MenuLinkIterInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9736,6 +10125,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type MenuModelInitOptionsMixin = GObject.ObjectInitOptions
+	export interface MenuModelInitOptions extends MenuModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MenuModel} instead.
 	 */
@@ -9859,7 +10251,7 @@ declare namespace imports.gi.Gio {
 	interface MenuModel extends MenuModelMixin {}
 
 	class MenuModel {
-		public constructor();
+		public constructor(options?: Partial<MenuModelInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10086,6 +10478,20 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type MountOperationInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IMountOperation,
+		"anonymous" |
+		"choice" |
+		"domain" |
+		"is_tcrypt_hidden_volume" |
+		"is_tcrypt_system_volume" |
+		"password" |
+		"password_save" |
+		"pim" |
+		"username">;
+
+	export interface MountOperationInitOptions extends MountOperationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MountOperation} instead.
 	 */
@@ -10117,7 +10523,7 @@ declare namespace imports.gi.Gio {
 	interface MountOperation extends MountOperationMixin {}
 
 	class MountOperation {
-		public constructor();
+		public constructor(options?: Partial<MountOperationInitOptions>);
 		/**
 		 * Creates a new mount operation.
 		 * @returns a #GMountOperation.
@@ -10132,6 +10538,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type NativeSocketAddressInitOptionsMixin = SocketAddressInitOptions & SocketConnectableInitOptions
+	export interface NativeSocketAddressInitOptions extends NativeSocketAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeSocketAddress} instead.
 	 */
@@ -10143,7 +10552,7 @@ declare namespace imports.gi.Gio {
 	interface NativeSocketAddress extends NativeSocketAddressMixin {}
 
 	class NativeSocketAddress {
-		public constructor();
+		public constructor(options?: Partial<NativeSocketAddressInitOptions>);
 		/**
 		 * Creates a new #GNativeSocketAddress for #native and #len.
 		 * @param _native a native address object
@@ -10160,6 +10569,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type NativeVolumeMonitorInitOptionsMixin = VolumeMonitorInitOptions
+	export interface NativeVolumeMonitorInitOptions extends NativeVolumeMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NativeVolumeMonitor} instead.
 	 */
@@ -10168,7 +10580,7 @@ declare namespace imports.gi.Gio {
 	interface NativeVolumeMonitor extends NativeVolumeMonitorMixin {}
 
 	class NativeVolumeMonitor {
-		public constructor();
+		public constructor(options?: Partial<NativeVolumeMonitorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -10200,6 +10612,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type NetworkAddressInitOptionsMixin = GObject.ObjectInitOptions & SocketConnectableInitOptions & 
+	Pick<INetworkAddress,
+		"hostname" |
+		"port" |
+		"scheme">;
+
+	export interface NetworkAddressInitOptions extends NetworkAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NetworkAddress} instead.
 	 */
@@ -10220,7 +10640,7 @@ declare namespace imports.gi.Gio {
 	interface NetworkAddress extends NetworkAddressMixin {}
 
 	class NetworkAddress {
-		public constructor();
+		public constructor(options?: Partial<NetworkAddressInitOptions>);
 		/**
 		 * Creates a new #GSocketConnectable for connecting to the given
 		 * #hostname and #port.
@@ -10338,6 +10758,15 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type NetworkServiceInitOptionsMixin = GObject.ObjectInitOptions & SocketConnectableInitOptions & 
+	Pick<INetworkService,
+		"domain" |
+		"protocol" |
+		"scheme" |
+		"service">;
+
+	export interface NetworkServiceInitOptions extends NetworkServiceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NetworkService} instead.
 	 */
@@ -10357,7 +10786,7 @@ declare namespace imports.gi.Gio {
 	interface NetworkService extends NetworkServiceMixin {}
 
 	class NetworkService {
-		public constructor();
+		public constructor(options?: Partial<NetworkServiceInitOptions>);
 		/**
 		 * Creates a new #GNetworkService representing the given #service,
 		 * #protocol, and #domain. This will initially be unresolved; use the
@@ -10494,6 +10923,9 @@ declare namespace imports.gi.Gio {
 		set_urgent(urgent: boolean): void;
 	}
 
+	type NotificationInitOptionsMixin = GObject.ObjectInitOptions
+	export interface NotificationInitOptions extends NotificationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notification} instead.
 	 */
@@ -10548,7 +10980,7 @@ declare namespace imports.gi.Gio {
 	interface Notification extends NotificationMixin {}
 
 	class Notification {
-		public constructor();
+		public constructor(options?: Partial<NotificationInitOptions>);
 		/**
 		 * Creates a new #GNotification with #title as its title.
 		 * 
@@ -10694,8 +11126,11 @@ declare namespace imports.gi.Gio {
 		 * @param error location to store the error occurring, or %NULL to ignore
 		 * @param format the format string. See the printf() documentation
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that was
+		 *     written to the stream
 		 */
-		printf(cancellable: Cancellable | null, error: GLib.Error, format: string): boolean;
+		printf(cancellable: Cancellable | null, error: GLib.Error, format: string): [ boolean, number | null ];
 		/**
 		 * Sets #stream to have actions pending. If the pending flag is
 		 * already set or #stream is closed, it will return %FALSE and set
@@ -10757,8 +11192,11 @@ declare namespace imports.gi.Gio {
 		 * @param format the format string. See the printf() documentation
 		 * @param args the parameters to insert into the format string
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that was
+		 *     written to the stream
 		 */
-		vprintf(cancellable: Cancellable | null, error: GLib.Error, format: string, args: any[]): boolean;
+		vprintf(cancellable: Cancellable | null, error: GLib.Error, format: string, args: any[]): [ boolean, number | null ];
 		/**
 		 * Tries to write #count bytes from #buffer into the stream. Will block
 		 * during the operation.
@@ -10808,8 +11246,11 @@ declare namespace imports.gi.Gio {
 		 * @param buffer the buffer containing the data to write.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that was
+		 *     written to the stream
 		 */
-		write_all(buffer: number[], cancellable: Cancellable | null): boolean;
+		write_all(buffer: number[], cancellable: Cancellable | null): [ boolean, number | null ];
 		/**
 		 * Request an asynchronous write of #count bytes from #buffer into
 		 * the stream. When the operation is finished #callback will be called.
@@ -10845,8 +11286,10 @@ declare namespace imports.gi.Gio {
 		 * g_output_stream_write_async().
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that was written to the stream
 		 */
-		write_all_finish(result: AsyncResult): boolean;
+		write_all_finish(result: AsyncResult): [ boolean, number | null ];
 		/**
 		 * Request an asynchronous write of #count bytes from #buffer into
 		 * the stream. When the operation is finished #callback will be called.
@@ -10966,8 +11409,11 @@ declare namespace imports.gi.Gio {
 		 * @param n_vectors the number of vectors to write
 		 * @param cancellable optional cancellable object
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that were
+		 *     written to the stream
 		 */
-		writev(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): boolean;
+		writev(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ boolean, number | null ];
 		/**
 		 * Tries to write the bytes contained in the #n_vectors #vectors into the
 		 * stream. Will block during the operation.
@@ -10995,8 +11441,11 @@ declare namespace imports.gi.Gio {
 		 * @param n_vectors the number of vectors to write
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that were
+		 *     written to the stream
 		 */
-		writev_all(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): boolean;
+		writev_all(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ boolean, number | null ];
 		/**
 		 * Request an asynchronous write of the bytes contained in the #n_vectors #vectors into
 		 * the stream. When the operation is finished #callback will be called.
@@ -11034,8 +11483,10 @@ declare namespace imports.gi.Gio {
 		 * g_output_stream_writev_async().
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that were written to the stream
 		 */
-		writev_all_finish(result: AsyncResult): boolean;
+		writev_all_finish(result: AsyncResult): [ boolean, number | null ];
 		/**
 		 * Request an asynchronous write of the bytes contained in #n_vectors #vectors into
 		 * the stream. When the operation is finished #callback will be called.
@@ -11078,9 +11529,14 @@ declare namespace imports.gi.Gio {
 		 * Finishes a stream writev operation.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE on success, %FALSE if there was an error
+		 * 
+		 * location to store the number of bytes that were written to the stream
 		 */
-		writev_finish(result: AsyncResult): boolean;
+		writev_finish(result: AsyncResult): [ boolean, number | null ];
 	}
+
+	type OutputStreamInitOptionsMixin = GObject.ObjectInitOptions
+	export interface OutputStreamInitOptions extends OutputStreamInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OutputStream} instead.
@@ -11103,7 +11559,7 @@ declare namespace imports.gi.Gio {
 	interface OutputStream extends OutputStreamMixin {}
 
 	class OutputStream {
-		public constructor();
+		public constructor(options?: Partial<OutputStreamInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11241,6 +11697,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type PermissionInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IPermission,
+		"allowed" |
+		"can_acquire" |
+		"can_release">;
+
+	export interface PermissionInitOptions extends PermissionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Permission} instead.
 	 */
@@ -11266,7 +11730,7 @@ declare namespace imports.gi.Gio {
 	interface Permission extends PermissionMixin {}
 
 	class Permission {
-		public constructor();
+		public constructor(options?: Partial<PermissionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11313,6 +11777,17 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::state_type", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type PropertyActionInitOptionsMixin = GObject.ObjectInitOptions & ActionInitOptions & 
+	Pick<IPropertyAction,
+		"enabled" |
+		"invert_boolean" |
+		"name" |
+		"parameter_type" |
+		"state" |
+		"state_type">;
+
+	export interface PropertyActionInitOptions extends PropertyActionInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PropertyAction} instead.
@@ -11375,7 +11850,7 @@ declare namespace imports.gi.Gio {
 	interface PropertyAction extends PropertyActionMixin {}
 
 	class PropertyAction {
-		public constructor();
+		public constructor(options?: Partial<PropertyActionInitOptions>);
 		/**
 		 * Creates a #GAction corresponding to the value of property
 		 * #property_name on #object.
@@ -11463,6 +11938,18 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ProxyAddressInitOptionsMixin = InetSocketAddressInitOptions & SocketConnectableInitOptions & 
+	Pick<IProxyAddress,
+		"destination_hostname" |
+		"destination_port" |
+		"destination_protocol" |
+		"password" |
+		"protocol" |
+		"uri" |
+		"username">;
+
+	export interface ProxyAddressInitOptions extends ProxyAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyAddress} instead.
 	 */
@@ -11474,7 +11961,7 @@ declare namespace imports.gi.Gio {
 	interface ProxyAddress extends ProxyAddressMixin {}
 
 	class ProxyAddress {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressInitOptions>);
 		/**
 		 * Creates a new #GProxyAddress for #inetaddr with #protocol that should
 		 * tunnel through #dest_hostname and #dest_port.
@@ -11519,6 +12006,15 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ProxyAddressEnumeratorInitOptionsMixin = SocketAddressEnumeratorInitOptions & 
+	Pick<IProxyAddressEnumerator,
+		"connectable" |
+		"default_port" |
+		"proxy_resolver" |
+		"uri">;
+
+	export interface ProxyAddressEnumeratorInitOptions extends ProxyAddressEnumeratorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyAddressEnumerator} instead.
 	 */
@@ -11538,7 +12034,7 @@ declare namespace imports.gi.Gio {
 	interface ProxyAddressEnumerator extends ProxyAddressEnumeratorMixin {}
 
 	class ProxyAddressEnumerator {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressEnumeratorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11799,6 +12295,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ResolverInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ResolverInitOptions extends ResolverInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Resolver} instead.
 	 */
@@ -11817,7 +12316,7 @@ declare namespace imports.gi.Gio {
 	interface Resolver extends ResolverMixin {}
 
 	class Resolver {
-		public constructor();
+		public constructor(options?: Partial<ResolverInitOptions>);
 		/**
 		 * Frees #addresses (which should be the return value from
 		 * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_finish()).
@@ -12552,6 +13051,18 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SettingsInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISettings,
+		"backend" |
+		"delay_apply" |
+		"has_unapplied" |
+		"path" |
+		"schema" |
+		"schema_id" |
+		"settings_schema">;
+
+	export interface SettingsInitOptions extends SettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
@@ -13093,6 +13604,9 @@ declare namespace imports.gi.Gio {
 		writable_changed(key: string): void;
 	}
 
+	type SettingsBackendInitOptionsMixin = GObject.ObjectInitOptions
+	export interface SettingsBackendInitOptions extends SettingsBackendInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SettingsBackend} instead.
 	 */
@@ -13127,7 +13641,7 @@ declare namespace imports.gi.Gio {
 	interface SettingsBackend extends SettingsBackendMixin {}
 
 	class SettingsBackend {
-		public constructor();
+		public constructor(options?: Partial<SettingsBackendInitOptions>);
 		/**
 		 * Calculate the longest common prefix of all keys in a tree and write
 		 * out an array of the key names relative to that prefix and,
@@ -13283,6 +13797,16 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SimpleActionInitOptionsMixin = GObject.ObjectInitOptions & ActionInitOptions & 
+	Pick<ISimpleAction,
+		"enabled" |
+		"name" |
+		"parameter_type" |
+		"state" |
+		"state_type">;
+
+	export interface SimpleActionInitOptions extends SimpleActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleAction} instead.
 	 */
@@ -13298,7 +13822,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleAction extends SimpleActionMixin {}
 
 	class SimpleAction {
-		public constructor();
+		public constructor(options?: Partial<SimpleActionInitOptions>);
 		/**
 		 * Creates a new action.
 		 * 
@@ -13365,6 +13889,9 @@ declare namespace imports.gi.Gio {
 		remove(action_name: string): void;
 	}
 
+	type SimpleActionGroupInitOptionsMixin = GObject.ObjectInitOptions & ActionGroupInitOptions & ActionMapInitOptions
+	export interface SimpleActionGroupInitOptions extends SimpleActionGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleActionGroup} instead.
 	 */
@@ -13377,7 +13904,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleActionGroup extends SimpleActionGroupMixin {}
 
 	class SimpleActionGroup {
-		public constructor();
+		public constructor(options?: Partial<SimpleActionGroupInitOptions>);
 		/**
 		 * Creates a new, empty, #GSimpleActionGroup.
 		 * @returns a new #GSimpleActionGroup
@@ -13525,6 +14052,9 @@ declare namespace imports.gi.Gio {
 		 */
 		take_error(error: GLib.Error): void;
 	}
+
+	type SimpleAsyncResultInitOptionsMixin = GObject.ObjectInitOptions & AsyncResultInitOptions
+	export interface SimpleAsyncResultInitOptions extends SimpleAsyncResultInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleAsyncResult} instead.
@@ -13701,7 +14231,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleAsyncResult extends SimpleAsyncResultMixin {}
 
 	class SimpleAsyncResult {
-		public constructor();
+		public constructor(options?: Partial<SimpleAsyncResultInitOptions>);
 		/**
 		 * Creates a #GSimpleAsyncResult.
 		 * 
@@ -13779,6 +14309,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SimpleIOStreamInitOptionsMixin = IOStreamInitOptions & 
+	Pick<ISimpleIOStream,
+		"input_stream" |
+		"output_stream">;
+
+	export interface SimpleIOStreamInitOptions extends SimpleIOStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleIOStream} instead.
 	 */
@@ -13797,7 +14334,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleIOStream extends SimpleIOStreamMixin {}
 
 	class SimpleIOStream {
-		public constructor();
+		public constructor(options?: Partial<SimpleIOStreamInitOptions>);
 		/**
 		 * Creates a new #GSimpleIOStream wrapping #input_stream and #output_stream.
 		 * See also #GIOStream.
@@ -13815,6 +14352,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SimplePermissionInitOptionsMixin = PermissionInitOptions
+	export interface SimplePermissionInitOptions extends SimplePermissionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimplePermission} instead.
 	 */
@@ -13830,7 +14370,7 @@ declare namespace imports.gi.Gio {
 	interface SimplePermission extends SimplePermissionMixin {}
 
 	class SimplePermission {
-		public constructor();
+		public constructor(options?: Partial<SimplePermissionInitOptions>);
 		/**
 		 * Creates a new #GPermission instance that represents an action that is
 		 * either always or never allowed.
@@ -13929,6 +14469,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SimpleProxyResolverInitOptionsMixin = GObject.ObjectInitOptions & ProxyResolverInitOptions & 
+	Pick<ISimpleProxyResolver,
+		"default_proxy" |
+		"ignore_hosts">;
+
+	export interface SimpleProxyResolverInitOptions extends SimpleProxyResolverInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SimpleProxyResolver} instead.
 	 */
@@ -13947,7 +14494,7 @@ declare namespace imports.gi.Gio {
 	interface SimpleProxyResolver extends SimpleProxyResolverMixin {}
 
 	class SimpleProxyResolver {
-		public constructor();
+		public constructor(options?: Partial<SimpleProxyResolverInitOptions>);
 		/**
 		 * Creates a new #GSimpleProxyResolver. See
 		 * #GSimpleProxyResolver:default-proxy and
@@ -14316,8 +14863,10 @@ declare namespace imports.gi.Gio {
 		 * @returns success or failure. On failure, #error will be set, and
 		 *   the system error value (`errno` or WSAGetLastError()) will still
 		 *   be set to the result of the getsockopt() call.
+		 * 
+		 * return location for the option value
 		 */
-		get_option(level: number, optname: number): boolean;
+		get_option(level: number, optname: number): [ boolean, number ];
 		/**
 		 * Gets the socket protocol id the socket was created with.
 		 * In case the protocol is unknown, -1 is returned.
@@ -14474,13 +15023,16 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_IN condition.
 		 * 
 		 * On error -1 is returned and #error is set accordingly.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
+		 * 
+		 * 
+		 *     a buffer to read data into (which should be at least #size bytes long).
+		 * 
+		 * the number of bytes you want to read from the socket
 		 */
-		receive(buffer: number[], cancellable: Cancellable | null): number;
+		receive(cancellable: Cancellable | null): [ number, number[], number ];
 		/**
 		 * Receive data (up to #size bytes) from a socket.
 		 * 
@@ -14489,13 +15041,19 @@ declare namespace imports.gi.Gio {
 		 * #address is owned by the caller.
 		 * 
 		 * See g_socket_receive() for additional information.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
+		 * 
+		 * a pointer to a #GSocketAddress
+		 *     pointer, or %NULL
+		 * 
+		 * 
+		 *     a buffer to read data into (which should be at least #size bytes long).
+		 * 
+		 * the number of bytes you want to read from the socket
 		 */
-		receive_from(buffer: number[], cancellable: Cancellable | null): number;
+		receive_from(cancellable: Cancellable | null): [ number, SocketAddress | null, number[], number ];
 		/**
 		 * Receive data from a socket.  For receiving multiple messages, see
 		 * g_socket_receive_messages(); for easier use, see
@@ -14561,8 +15119,17 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
+		 * 
+		 * a pointer to a #GSocketAddress
+		 *     pointer, or %NULL
+		 * 
+		 * a pointer
+		 *    which may be filled with an array of #GSocketControlMessages, or %NULL
+		 * 
+		 * a pointer which will be filled with the number of
+		 *    elements in #messages, or %NULL
 		 */
-		receive_message(vectors: InputVector[], num_vectors: number, cancellable: Cancellable | null): number;
+		receive_message(vectors: InputVector[], num_vectors: number, cancellable: Cancellable | null): [ number, SocketAddress | null, SocketControlMessage[] | null, number ];
 		/**
 		 * Receive multiple data messages from #socket in one go.  This is the most
 		 * complicated and fully-featured version of this call. For easier use, see
@@ -14629,14 +15196,17 @@ declare namespace imports.gi.Gio {
 		 * This behaves exactly the same as g_socket_receive(), except that
 		 * the choice of blocking or non-blocking behavior is determined by
 		 * the #blocking argument rather than by #socket's properties.
-		 * @param buffer 
-		 *     a buffer to read data into (which should be at least #size bytes long).
 		 * @param blocking whether to do blocking or non-blocking I/O
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
+		 * 
+		 * 
+		 *     a buffer to read data into (which should be at least #size bytes long).
+		 * 
+		 * the number of bytes you want to read from the socket
 		 */
-		receive_with_blocking(buffer: number[], blocking: boolean, cancellable: Cancellable | null): number;
+		receive_with_blocking(blocking: boolean, cancellable: Cancellable | null): [ number, number[], number ];
 		/**
 		 * Tries to send #size bytes from #buffer on the socket. This is
 		 * mainly used by connection-oriented sockets; it is identical to
@@ -14737,8 +15307,10 @@ declare namespace imports.gi.Gio {
 		 * @returns %G_POLLABLE_RETURN_OK if all data was successfully written,
 		 * %G_POLLABLE_RETURN_WOULD_BLOCK if the socket is currently not writable, or
 		 * %G_POLLABLE_RETURN_FAILED if an error happened and #error is set.
+		 * 
+		 * location to store the number of bytes that were written to the socket
 		 */
-		send_message_with_timeout(address: SocketAddress | null, vectors: OutputVector[], num_vectors: number, messages: SocketControlMessage[] | null, num_messages: number, flags: number, timeout_us: number, cancellable: Cancellable | null): PollableReturn;
+		send_message_with_timeout(address: SocketAddress | null, vectors: OutputVector[], num_vectors: number, messages: SocketControlMessage[] | null, num_messages: number, flags: number, timeout_us: number, cancellable: Cancellable | null): [ PollableReturn, number | null ];
 		/**
 		 * Send multiple data messages from #socket in one go.  This is the most
 		 * complicated and fully-featured version of this call. For easier use, see
@@ -14976,6 +15548,25 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketInitOptionsMixin = GObject.ObjectInitOptions & DatagramBasedInitOptions & InitableInitOptions & 
+	Pick<ISocket,
+		"blocking" |
+		"broadcast" |
+		"family" |
+		"fd" |
+		"keepalive" |
+		"listen_backlog" |
+		"local_address" |
+		"multicast_loopback" |
+		"multicast_ttl" |
+		"protocol" |
+		"remote_address" |
+		"timeout" |
+		"ttl" |
+		"type">;
+
+	export interface SocketInitOptions extends SocketInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Socket} instead.
 	 */
@@ -15037,7 +15628,7 @@ declare namespace imports.gi.Gio {
 	interface Socket extends SocketMixin {}
 
 	class Socket {
-		public constructor();
+		public constructor(options?: Partial<SocketInitOptions>);
 		/**
 		 * Creates a new #GSocket with the defined family, type and protocol.
 		 * If #protocol is 0 (%G_SOCKET_PROTOCOL_DEFAULT) the default protocol type
@@ -15116,6 +15707,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketAddressInitOptionsMixin = GObject.ObjectInitOptions & SocketConnectableInitOptions & 
+	Pick<ISocketAddress,
+		"family">;
+
+	export interface SocketAddressInitOptions extends SocketAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAddress} instead.
 	 */
@@ -15129,7 +15726,7 @@ declare namespace imports.gi.Gio {
 	interface SocketAddress extends SocketAddressMixin {}
 
 	class SocketAddress {
-		public constructor();
+		public constructor(options?: Partial<SocketAddressInitOptions>);
 		/**
 		 * Creates a #GSocketAddress subclass corresponding to the native
 		 * struct sockaddr #native.
@@ -15189,6 +15786,9 @@ declare namespace imports.gi.Gio {
 		next_finish(result: AsyncResult): SocketAddress;
 	}
 
+	type SocketAddressEnumeratorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface SocketAddressEnumeratorInitOptions extends SocketAddressEnumeratorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketAddressEnumerator} instead.
 	 */
@@ -15213,7 +15813,7 @@ declare namespace imports.gi.Gio {
 	interface SocketAddressEnumerator extends SocketAddressEnumeratorMixin {}
 
 	class SocketAddressEnumerator {
-		public constructor();
+		public constructor(options?: Partial<SocketAddressEnumeratorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -15670,6 +16270,20 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketClientInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISocketClient,
+		"enable_proxy" |
+		"family" |
+		"local_address" |
+		"protocol" |
+		"proxy_resolver" |
+		"timeout" |
+		"tls" |
+		"tls_validation_flags" |
+		"type">;
+
+	export interface SocketClientInitOptions extends SocketClientInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketClient} instead.
 	 */
@@ -15693,7 +16307,7 @@ declare namespace imports.gi.Gio {
 	interface SocketClient extends SocketClientMixin {}
 
 	class SocketClient {
-		public constructor();
+		public constructor(options?: Partial<SocketClientInitOptions>);
 		/**
 		 * Creates a new #GSocketClient with the default options.
 		 * @returns a #GSocketClient.
@@ -15768,6 +16382,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketConnectionInitOptionsMixin = IOStreamInitOptions & 
+	Pick<ISocketConnection,
+		"socket">;
+
+	export interface SocketConnectionInitOptions extends SocketConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketConnection} instead.
 	 */
@@ -15794,7 +16414,7 @@ declare namespace imports.gi.Gio {
 	interface SocketConnection extends SocketConnectionMixin {}
 
 	class SocketConnection {
-		public constructor();
+		public constructor(options?: Partial<SocketConnectionInitOptions>);
 		/**
 		 * Looks up the #GType to be used when creating socket connections on
 		 * sockets with the specified #family, #type and #protocol_id.
@@ -15853,6 +16473,9 @@ declare namespace imports.gi.Gio {
 		serialize(data: any): void;
 	}
 
+	type SocketControlMessageInitOptionsMixin = GObject.ObjectInitOptions
+	export interface SocketControlMessageInitOptions extends SocketControlMessageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketControlMessage} instead.
 	 */
@@ -15883,7 +16506,7 @@ declare namespace imports.gi.Gio {
 	interface SocketControlMessage extends SocketControlMessageMixin {}
 
 	class SocketControlMessage {
-		public constructor();
+		public constructor(options?: Partial<SocketControlMessageInitOptions>);
 		/**
 		 * Tries to deserialize a socket control message of a given
 		 * #level and #type. This will ask all known (to GType) subclasses
@@ -15920,8 +16543,10 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns a #GSocketConnection on success, %NULL on error.
+		 * 
+		 * location where #GObject pointer will be stored, or %NULL
 		 */
-		accept(cancellable: Cancellable | null): SocketConnection;
+		accept(cancellable: Cancellable | null): [ SocketConnection, GObject.Object | null ];
 		/**
 		 * This is the asynchronous version of g_socket_listener_accept().
 		 * 
@@ -15936,8 +16561,10 @@ declare namespace imports.gi.Gio {
 		 * Finishes an async accept operation. See g_socket_listener_accept_async()
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
+		 * 
+		 * Optional #GObject identifying this source
 		 */
-		accept_finish(result: AsyncResult): SocketConnection;
+		accept_finish(result: AsyncResult): [ SocketConnection, GObject.Object | null ];
 		/**
 		 * Blocks waiting for a client to connect to any of the sockets added
 		 * to the listener. Returns the #GSocket that was accepted.
@@ -15955,8 +16582,10 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns a #GSocket on success, %NULL on error.
+		 * 
+		 * location where #GObject pointer will be stored, or %NULL.
 		 */
-		accept_socket(cancellable: Cancellable | null): Socket;
+		accept_socket(cancellable: Cancellable | null): [ Socket, GObject.Object | null ];
 		/**
 		 * This is the asynchronous version of g_socket_listener_accept_socket().
 		 * 
@@ -15971,8 +16600,10 @@ declare namespace imports.gi.Gio {
 		 * Finishes an async accept operation. See g_socket_listener_accept_socket_async()
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocket on success, %NULL on error.
+		 * 
+		 * Optional #GObject identifying this source
 		 */
-		accept_socket_finish(result: AsyncResult): Socket;
+		accept_socket_finish(result: AsyncResult): [ Socket, GObject.Object | null ];
 		/**
 		 * Creates a socket of type #type and protocol #protocol, binds
 		 * it to #address and adds it to the set of sockets we're accepting
@@ -16002,8 +16633,10 @@ declare namespace imports.gi.Gio {
 		 * @param protocol a #GSocketProtocol
 		 * @param source_object Optional #GObject identifying this source
 		 * @returns %TRUE on success, %FALSE on error.
+		 * 
+		 * location to store the address that was bound to, or %NULL.
 		 */
-		add_address(address: SocketAddress, type: SocketType, protocol: SocketProtocol, source_object: GObject.Object | null): boolean;
+		add_address(address: SocketAddress, type: SocketType, protocol: SocketProtocol, source_object: GObject.Object | null): [ boolean, SocketAddress | null ];
 		/**
 		 * Listens for TCP connections on any available port number for both
 		 * IPv6 and IPv4 (if each is available).
@@ -16081,6 +16714,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketListenerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISocketListener,
+		"listen_backlog">;
+
+	export interface SocketListenerInitOptions extends SocketListenerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketListener} instead.
 	 */
@@ -16105,7 +16744,7 @@ declare namespace imports.gi.Gio {
 	interface SocketListener extends SocketListenerMixin {}
 
 	class SocketListener {
-		public constructor();
+		public constructor(options?: Partial<SocketListenerInitOptions>);
 		/**
 		 * Creates a new #GSocketListener with no sockets to listen for.
 		 * New listeners can be added with e.g. g_socket_listener_add_address()
@@ -16174,6 +16813,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type SocketServiceInitOptionsMixin = SocketListenerInitOptions & 
+	Pick<ISocketService,
+		"active">;
+
+	export interface SocketServiceInitOptions extends SocketServiceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketService} instead.
 	 */
@@ -16210,7 +16855,7 @@ declare namespace imports.gi.Gio {
 	interface SocketService extends SocketServiceMixin {}
 
 	class SocketService {
-		public constructor();
+		public constructor(options?: Partial<SocketServiceInitOptions>);
 		/**
 		 * Creates a new #GSocketService with no sockets to listen for.
 		 * New listeners can be added with e.g. g_socket_listener_add_address()
@@ -16273,8 +16918,12 @@ declare namespace imports.gi.Gio {
 		 * @param stdin_buf data to send to the stdin of the subprocess, or %NULL
 		 * @param cancellable a #GCancellable
 		 * @returns %TRUE if successful
+		 * 
+		 * data read from the subprocess stdout
+		 * 
+		 * data read from the subprocess stderr
 		 */
-		communicate(stdin_buf: GLib.Bytes | null, cancellable: Cancellable | null): boolean;
+		communicate(stdin_buf: GLib.Bytes | null, cancellable: Cancellable | null): [ boolean, GLib.Bytes | null, GLib.Bytes | null ];
 		/**
 		 * Asynchronous version of g_subprocess_communicate().  Complete
 		 * invocation with g_subprocess_communicate_finish().
@@ -16287,8 +16936,12 @@ declare namespace imports.gi.Gio {
 		 * Complete an invocation of g_subprocess_communicate_async().
 		 * @param result Result
 		 * @returns 
+		 * 
+		 * Return location for stdout data
+		 * 
+		 * Return location for stderr data
 		 */
-		communicate_finish(result: AsyncResult): boolean;
+		communicate_finish(result: AsyncResult): [ boolean, GLib.Bytes | null, GLib.Bytes | null ];
 		/**
 		 * Like g_subprocess_communicate(), but validates the output of the
 		 * process as UTF-8, and returns it as a regular NUL terminated string.
@@ -16298,8 +16951,12 @@ declare namespace imports.gi.Gio {
 		 * @param stdin_buf data to send to the stdin of the subprocess, or %NULL
 		 * @param cancellable a #GCancellable
 		 * @returns 
+		 * 
+		 * data read from the subprocess stdout
+		 * 
+		 * data read from the subprocess stderr
 		 */
-		communicate_utf8(stdin_buf: string | null, cancellable: Cancellable | null): boolean;
+		communicate_utf8(stdin_buf: string | null, cancellable: Cancellable | null): [ boolean, string | null, string | null ];
 		/**
 		 * Asynchronous version of g_subprocess_communicate_utf8().  Complete
 		 * invocation with g_subprocess_communicate_utf8_finish().
@@ -16312,8 +16969,12 @@ declare namespace imports.gi.Gio {
 		 * Complete an invocation of g_subprocess_communicate_utf8_async().
 		 * @param result Result
 		 * @returns 
+		 * 
+		 * Return location for stdout data
+		 * 
+		 * Return location for stderr data
 		 */
-		communicate_utf8_finish(result: AsyncResult): boolean;
+		communicate_utf8_finish(result: AsyncResult): [ boolean, string | null, string | null ];
 		/**
 		 * Use an operating-system specific method to attempt an immediate,
 		 * forceful termination of the process.  There is no mechanism to
@@ -16494,6 +17155,9 @@ declare namespace imports.gi.Gio {
 		wait_finish(result: AsyncResult): boolean;
 	}
 
+	type SubprocessInitOptionsMixin = GObject.ObjectInitOptions & InitableInitOptions
+	export interface SubprocessInitOptions extends SubprocessInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Subprocess} instead.
 	 */
@@ -16558,7 +17222,7 @@ declare namespace imports.gi.Gio {
 	interface Subprocess extends SubprocessMixin {}
 
 	class Subprocess {
-		public constructor();
+		public constructor(options?: Partial<SubprocessInitOptions>);
 		/**
 		 * Create a new process with the given flags and varargs argument
 		 * list.  By default, matching the g_spawn_async() defaults, the
@@ -16846,6 +17510,9 @@ declare namespace imports.gi.Gio {
 		unsetenv(variable: string): void;
 	}
 
+	type SubprocessLauncherInitOptionsMixin = GObject.ObjectInitOptions
+	export interface SubprocessLauncherInitOptions extends SubprocessLauncherInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SubprocessLauncher} instead.
 	 */
@@ -16864,7 +17531,7 @@ declare namespace imports.gi.Gio {
 	interface SubprocessLauncher extends SubprocessLauncherMixin {}
 
 	class SubprocessLauncher {
-		public constructor();
+		public constructor(options?: Partial<SubprocessLauncherInitOptions>);
 		/**
 		 * Creates a new #GSubprocessLauncher.
 		 * 
@@ -17018,10 +17685,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Since this method transfers ownership of the return value (or
 		 * error) to the caller, you may only call it once.
-		 * @param value return location for the #GValue
 		 * @returns %TRUE if #task succeeded, %FALSE on error.
+		 * 
+		 * return location for the #GValue
 		 */
-		propagate_value(value: GObject.Value): boolean;
+		propagate_value(): [ boolean, GObject.Value ];
 		/**
 		 * Sets #task's result to #result and completes the task (see
 		 * g_task_return_pointer() for more discussion of exactly what this
@@ -17242,6 +17910,12 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::completed", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type TaskInitOptionsMixin = GObject.ObjectInitOptions & AsyncResultInitOptions & 
+	Pick<ITask,
+		"completed">;
+
+	export interface TaskInitOptions extends TaskInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Task} instead.
@@ -17748,7 +18422,7 @@ declare namespace imports.gi.Gio {
 	interface Task extends TaskMixin {}
 
 	class Task {
-		public constructor();
+		public constructor(options?: Partial<TaskInitOptions>);
 		/**
 		 * Creates a #GTask acting on #source_object, which will eventually be
 		 * used to invoke #callback in the current
@@ -17852,6 +18526,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TcpConnectionInitOptionsMixin = SocketConnectionInitOptions & 
+	Pick<ITcpConnection,
+		"graceful_disconnect">;
+
+	export interface TcpConnectionInitOptions extends TcpConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TcpConnection} instead.
 	 */
@@ -17864,7 +18544,7 @@ declare namespace imports.gi.Gio {
 	interface TcpConnection extends TcpConnectionMixin {}
 
 	class TcpConnection {
-		public constructor();
+		public constructor(options?: Partial<TcpConnectionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -17881,6 +18561,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TcpWrapperConnectionInitOptionsMixin = TcpConnectionInitOptions & 
+	Pick<ITcpWrapperConnection,
+		"base_io_stream">;
+
+	export interface TcpWrapperConnectionInitOptions extends TcpWrapperConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TcpWrapperConnection} instead.
 	 */
@@ -17896,7 +18582,7 @@ declare namespace imports.gi.Gio {
 	interface TcpWrapperConnection extends TcpWrapperConnectionMixin {}
 
 	class TcpWrapperConnection {
-		public constructor();
+		public constructor(options?: Partial<TcpWrapperConnectionInitOptions>);
 		/**
 		 * Wraps #base_io_stream and #socket together as a #GSocketConnection.
 		 * @param base_io_stream the #GIOStream to wrap
@@ -17963,6 +18649,12 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type TestDBusInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITestDBus,
+		"flags">;
+
+	export interface TestDBusInitOptions extends TestDBusInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TestDBus} instead.
@@ -18046,7 +18738,7 @@ declare namespace imports.gi.Gio {
 	interface TestDBus extends TestDBusMixin {}
 
 	class TestDBus {
-		public constructor();
+		public constructor(options?: Partial<TestDBusInitOptions>);
 		/**
 		 * Create a new #GTestDBus object.
 		 * @param flags a #GTestDBusFlags
@@ -18116,6 +18808,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ThemedIconInitOptionsMixin = GObject.ObjectInitOptions & IconInitOptions & 
+	Pick<IThemedIcon,
+		"names" |
+		"use_default_fallbacks">;
+
+	export interface ThemedIconInitOptions extends ThemedIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThemedIcon} instead.
 	 */
@@ -18133,7 +18832,7 @@ declare namespace imports.gi.Gio {
 	interface ThemedIcon extends ThemedIconMixin {}
 
 	class ThemedIcon {
-		public constructor();
+		public constructor(options?: Partial<ThemedIconInitOptions>);
 		/**
 		 * Creates a new themed icon for #iconname.
 		 * @param iconname a string containing an icon name.
@@ -18188,6 +18887,12 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ThreadedSocketServiceInitOptionsMixin = SocketServiceInitOptions & 
+	Pick<IThreadedSocketService,
+		"max_threads">;
+
+	export interface ThreadedSocketServiceInitOptions extends ThreadedSocketServiceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ThreadedSocketService} instead.
 	 */
@@ -18213,7 +18918,7 @@ declare namespace imports.gi.Gio {
 	interface ThreadedSocketService extends ThreadedSocketServiceMixin {}
 
 	class ThreadedSocketService {
-		public constructor();
+		public constructor(options?: Partial<ThreadedSocketServiceInitOptions>);
 		/**
 		 * Creates a new #GThreadedSocketService with no listeners. Listeners
 		 * must be added with one of the #GSocketListener "add" methods.
@@ -18440,6 +19145,24 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsCertificateInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITlsCertificate,
+		"certificate" |
+		"certificate_pem" |
+		"dns_names" |
+		"ip_addresses" |
+		"issuer" |
+		"issuer_name" |
+		"not_valid_after" |
+		"not_valid_before" |
+		"pkcs11_uri" |
+		"private_key" |
+		"private_key_pem" |
+		"private_key_pkcs11_uri" |
+		"subject_name">;
+
+	export interface TlsCertificateInitOptions extends TlsCertificateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsCertificate} instead.
 	 */
@@ -18455,7 +19178,7 @@ declare namespace imports.gi.Gio {
 	interface TlsCertificate extends TlsCertificateMixin {}
 
 	class TlsCertificate {
-		public constructor();
+		public constructor(options?: Partial<TlsCertificateInitOptions>);
 		/**
 		 * Creates a #GTlsCertificate from the PEM-encoded data in #file. The
 		 * returned certificate will be the first certificate found in #file. As
@@ -18673,8 +19396,11 @@ declare namespace imports.gi.Gio {
 		 * negotiation or input required.
 		 * @param type #GTlsChannelBindingType type of data to fetch
 		 * @returns %TRUE on success, %FALSE otherwise
+		 * 
+		 * #GByteArray is
+		 *        filled with the binding data, or %NULL
 		 */
-		get_channel_binding_data(type: TlsChannelBindingType): boolean;
+		get_channel_binding_data(type: TlsChannelBindingType): [ boolean, number[] | null ];
 		/**
 		 * Returns the name of the current TLS ciphersuite, or %NULL if the
 		 * connection has not handshaked or has been closed. Beware that the TLS
@@ -18967,6 +19693,24 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsConnectionInitOptionsMixin = IOStreamInitOptions & 
+	Pick<ITlsConnection,
+		"advertised_protocols" |
+		"base_io_stream" |
+		"certificate" |
+		"ciphersuite_name" |
+		"database" |
+		"interaction" |
+		"negotiated_protocol" |
+		"peer_certificate" |
+		"peer_certificate_errors" |
+		"protocol_version" |
+		"rehandshake_mode" |
+		"require_close_notify" |
+		"use_system_certdb">;
+
+	export interface TlsConnectionInitOptions extends TlsConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsConnection} instead.
 	 */
@@ -18983,7 +19727,7 @@ declare namespace imports.gi.Gio {
 	interface TlsConnection extends TlsConnectionMixin {}
 
 	class TlsConnection {
-		public constructor();
+		public constructor(options?: Partial<TlsConnectionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19223,6 +19967,9 @@ declare namespace imports.gi.Gio {
 		verify_chain_finish(result: AsyncResult): TlsCertificateFlags;
 	}
 
+	type TlsDatabaseInitOptionsMixin = GObject.ObjectInitOptions
+	export interface TlsDatabaseInitOptions extends TlsDatabaseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsDatabase} instead.
 	 */
@@ -19242,7 +19989,7 @@ declare namespace imports.gi.Gio {
 	interface TlsDatabase extends TlsDatabaseMixin {}
 
 	class TlsDatabase {
-		public constructor();
+		public constructor(options?: Partial<TlsDatabaseInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19410,6 +20157,9 @@ declare namespace imports.gi.Gio {
 		request_certificate_finish(result: AsyncResult): TlsInteractionResult;
 	}
 
+	type TlsInteractionInitOptionsMixin = GObject.ObjectInitOptions
+	export interface TlsInteractionInitOptions extends TlsInteractionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsInteraction} instead.
 	 */
@@ -19440,7 +20190,7 @@ declare namespace imports.gi.Gio {
 	interface TlsInteraction extends TlsInteractionMixin {}
 
 	class TlsInteraction {
-		public constructor();
+		public constructor(options?: Partial<TlsInteractionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19467,8 +20217,10 @@ declare namespace imports.gi.Gio {
 		 * for #length in contexts where you know the password will have a
 		 * certain fixed length.)
 		 * @returns The password value (owned by the password object).
+		 * 
+		 * location to place the length of the password.
 		 */
-		get_value(): number[];
+		get_value(): [ number[], number ];
 		/**
 		 * Get a user readable translated warning. Usually this warning is a
 		 * representation of the password flags returned from
@@ -19526,6 +20278,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsPasswordInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITlsPassword,
+		"description" |
+		"flags" |
+		"warning">;
+
+	export interface TlsPasswordInitOptions extends TlsPasswordInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsPassword} instead.
 	 */
@@ -19537,7 +20297,7 @@ declare namespace imports.gi.Gio {
 	interface TlsPassword extends TlsPasswordMixin {}
 
 	class TlsPassword {
-		public constructor();
+		public constructor(options?: Partial<TlsPasswordInitOptions>);
 		/**
 		 * Create a new #GTlsPassword object.
 		 * @param flags the password flags
@@ -19665,6 +20425,9 @@ declare namespace imports.gi.Gio {
 		send_fd(fd: number, cancellable: Cancellable | null): boolean;
 	}
 
+	type UnixConnectionInitOptionsMixin = SocketConnectionInitOptions
+	export interface UnixConnectionInitOptions extends UnixConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixConnection} instead.
 	 */
@@ -19684,7 +20447,7 @@ declare namespace imports.gi.Gio {
 	interface UnixConnection extends UnixConnectionMixin {}
 
 	class UnixConnection {
-		public constructor();
+		public constructor(options?: Partial<UnixConnectionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -19703,6 +20466,12 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::credentials", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type UnixCredentialsMessageInitOptionsMixin = SocketControlMessageInitOptions & 
+	Pick<IUnixCredentialsMessage,
+		"credentials">;
+
+	export interface UnixCredentialsMessageInitOptions extends UnixCredentialsMessageInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixCredentialsMessage} instead.
@@ -19725,7 +20494,7 @@ declare namespace imports.gi.Gio {
 	interface UnixCredentialsMessage extends UnixCredentialsMessageMixin {}
 
 	class UnixCredentialsMessage {
-		public constructor();
+		public constructor(options?: Partial<UnixCredentialsMessageInitOptions>);
 		/**
 		 * Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
 		 * @returns a new #GUnixCredentialsMessage
@@ -19805,8 +20574,11 @@ declare namespace imports.gi.Gio {
 		 * descriptors contained in #list, an empty array is returned.
 		 * @returns an array of file
 		 *     descriptors
+		 * 
+		 * pointer to the length of the returned
+		 *     array, or %NULL
 		 */
-		peek_fds(): number[];
+		peek_fds(): [ number[], number | null ];
 		/**
 		 * Returns the array of file descriptors that is contained in this
 		 * object.
@@ -19828,9 +20600,15 @@ declare namespace imports.gi.Gio {
 		 * descriptors contained in #list, an empty array is returned.
 		 * @returns an array of file
 		 *     descriptors
+		 * 
+		 * pointer to the length of the returned
+		 *     array, or %NULL
 		 */
-		steal_fds(): number[];
+		steal_fds(): [ number[], number | null ];
 	}
+
+	type UnixFDListInitOptionsMixin = GObject.ObjectInitOptions
+	export interface UnixFDListInitOptions extends UnixFDListInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixFDList} instead.
@@ -19852,7 +20630,7 @@ declare namespace imports.gi.Gio {
 	interface UnixFDList extends UnixFDListMixin {}
 
 	class UnixFDList {
-		public constructor();
+		public constructor(options?: Partial<UnixFDListInitOptions>);
 		/**
 		 * Creates a new #GUnixFDList containing no file descriptors.
 		 * @returns a new #GUnixFDList
@@ -19919,11 +20697,20 @@ declare namespace imports.gi.Gio {
 		 * descriptors contained in #message, an empty array is returned.
 		 * @returns an array of file
 		 *     descriptors
+		 * 
+		 * pointer to the length of the returned
+		 *     array, or %NULL
 		 */
-		steal_fds(): number[];
+		steal_fds(): [ number[], number | null ];
 		connect(signal: "notify::fd_list", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type UnixFDMessageInitOptionsMixin = SocketControlMessageInitOptions & 
+	Pick<IUnixFDMessage,
+		"fd_list">;
+
+	export interface UnixFDMessageInitOptions extends UnixFDMessageInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixFDMessage} instead.
@@ -19948,7 +20735,7 @@ declare namespace imports.gi.Gio {
 	interface UnixFDMessage extends UnixFDMessageMixin {}
 
 	class UnixFDMessage {
-		public constructor();
+		public constructor(options?: Partial<UnixFDMessageInitOptions>);
 		/**
 		 * Creates a new #GUnixFDMessage containing an empty file descriptor
 		 * list.
@@ -19997,6 +20784,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type UnixInputStreamInitOptionsMixin = InputStreamInitOptions & FileDescriptorBasedInitOptions & PollableInputStreamInitOptions & 
+	Pick<IUnixInputStream,
+		"close_fd" |
+		"fd">;
+
+	export interface UnixInputStreamInitOptions extends UnixInputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixInputStream} instead.
 	 */
@@ -20016,7 +20810,7 @@ declare namespace imports.gi.Gio {
 	interface UnixInputStream extends UnixInputStreamMixin {}
 
 	class UnixInputStream {
-		public constructor();
+		public constructor(options?: Partial<UnixInputStreamInitOptions>);
 		/**
 		 * Creates a new #GUnixInputStream for the given #fd.
 		 * 
@@ -20056,6 +20850,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type UnixMountMonitorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface UnixMountMonitorInitOptions extends UnixMountMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixMountMonitor} instead.
 	 */
@@ -20067,7 +20864,7 @@ declare namespace imports.gi.Gio {
 	interface UnixMountMonitor extends UnixMountMonitorMixin {}
 
 	class UnixMountMonitor {
-		public constructor();
+		public constructor(options?: Partial<UnixMountMonitorInitOptions>);
 		/**
 		 * Deprecated alias for g_unix_mount_monitor_get().
 		 * 
@@ -20125,6 +20922,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type UnixOutputStreamInitOptionsMixin = OutputStreamInitOptions & FileDescriptorBasedInitOptions & PollableOutputStreamInitOptions & 
+	Pick<IUnixOutputStream,
+		"close_fd" |
+		"fd">;
+
+	export interface UnixOutputStreamInitOptions extends UnixOutputStreamInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixOutputStream} instead.
 	 */
@@ -20144,7 +20948,7 @@ declare namespace imports.gi.Gio {
 	interface UnixOutputStream extends UnixOutputStreamMixin {}
 
 	class UnixOutputStream {
-		public constructor();
+		public constructor(options?: Partial<UnixOutputStreamInitOptions>);
 		/**
 		 * Creates a new #GUnixOutputStream for the given #fd.
 		 * 
@@ -20202,6 +21006,15 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type UnixSocketAddressInitOptionsMixin = SocketAddressInitOptions & SocketConnectableInitOptions & 
+	Pick<IUnixSocketAddress,
+		"abstract" |
+		"address_type" |
+		"path" |
+		"path_as_array">;
+
+	export interface UnixSocketAddressInitOptions extends UnixSocketAddressInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UnixSocketAddress} instead.
 	 */
@@ -20226,7 +21039,7 @@ declare namespace imports.gi.Gio {
 	interface UnixSocketAddress extends UnixSocketAddressMixin {}
 
 	class UnixSocketAddress {
-		public constructor();
+		public constructor(options?: Partial<UnixSocketAddressInitOptions>);
 		/**
 		 * Creates a new #GUnixSocketAddress for #path.
 		 * 
@@ -20380,6 +21193,9 @@ declare namespace imports.gi.Gio {
 		unregister_uri_scheme(scheme: string): boolean;
 	}
 
+	type VfsInitOptionsMixin = GObject.ObjectInitOptions
+	export interface VfsInitOptions extends VfsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Vfs} instead.
 	 */
@@ -20391,7 +21207,7 @@ declare namespace imports.gi.Gio {
 	interface Vfs extends VfsMixin {}
 
 	class Vfs {
-		public constructor();
+		public constructor(options?: Partial<VfsInitOptions>);
 		/**
 		 * Gets the default #GVfs for the system.
 		 * @returns a #GVfs, which will be the local
@@ -20501,6 +21317,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type VolumeMonitorInitOptionsMixin = GObject.ObjectInitOptions
+	export interface VolumeMonitorInitOptions extends VolumeMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link VolumeMonitor} instead.
 	 */
@@ -20522,7 +21341,7 @@ declare namespace imports.gi.Gio {
 	interface VolumeMonitor extends VolumeMonitorMixin {}
 
 	class VolumeMonitor {
-		public constructor();
+		public constructor(options?: Partial<VolumeMonitorInitOptions>);
 		/**
 		 * This function should be called by any #GVolumeMonitor
 		 * implementation when a new #GMount object is created that is not
@@ -20600,6 +21419,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ZlibCompressorInitOptionsMixin = GObject.ObjectInitOptions & ConverterInitOptions & 
+	Pick<IZlibCompressor,
+		"file_info" |
+		"format" |
+		"level">;
+
+	export interface ZlibCompressorInitOptions extends ZlibCompressorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZlibCompressor} instead.
 	 */
@@ -20612,7 +21439,7 @@ declare namespace imports.gi.Gio {
 	interface ZlibCompressor extends ZlibCompressorMixin {}
 
 	class ZlibCompressor {
-		public constructor();
+		public constructor(options?: Partial<ZlibCompressorInitOptions>);
 		/**
 		 * Creates a new #GZlibCompressor.
 		 * @param format The format to use for the compressed data
@@ -20648,6 +21475,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ZlibDecompressorInitOptionsMixin = GObject.ObjectInitOptions & ConverterInitOptions & 
+	Pick<IZlibDecompressor,
+		"file_info" |
+		"format">;
+
+	export interface ZlibDecompressorInitOptions extends ZlibDecompressorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ZlibDecompressor} instead.
 	 */
@@ -20660,7 +21494,7 @@ declare namespace imports.gi.Gio {
 	interface ZlibDecompressor extends ZlibDecompressorMixin {}
 
 	class ZlibDecompressor {
-		public constructor();
+		public constructor(options?: Partial<ZlibDecompressorInitOptions>);
 		/**
 		 * Creates a new #GZlibDecompressor.
 		 * @param format The format to use for the compressed data
@@ -20669,6 +21503,7 @@ declare namespace imports.gi.Gio {
 		public static new(format: ZlibCompressorFormat): ZlibDecompressor;
 	}
 
+	export interface ActionEntryInitOptions {}
 	/**
 	 * This struct defines a single action.  It is for use with
 	 * g_action_map_add_action_entries().
@@ -20683,7 +21518,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ActionEntry {}
 	class ActionEntry {
-		public constructor();
+		public constructor(options?: Partial<ActionEntryInitOptions>);
 		/**
 		 * the name of the action
 		 */
@@ -20707,12 +21542,13 @@ declare namespace imports.gi.Gio {
 		public change_state: {(action: SimpleAction, value: GLib.Variant): void;};
 	}
 
+	export interface ActionGroupInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GActionGroup.
 	 */
 	interface ActionGroupInterface {}
 	class ActionGroupInterface {
-		public constructor();
+		public constructor(options?: Partial<ActionGroupInterfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public has_action: {(action_group: ActionGroup, action_name: string): boolean;};
 		public list_actions: {(action_group: ActionGroup): string[];};
@@ -20727,15 +21563,16 @@ declare namespace imports.gi.Gio {
 		public action_removed: {(action_group: ActionGroup, action_name: string): void;};
 		public action_enabled_changed: {(action_group: ActionGroup, action_name: string, enabled: boolean): void;};
 		public action_state_changed: {(action_group: ActionGroup, action_name: string, state: GLib.Variant): void;};
-		public query_action: {(action_group: ActionGroup, action_name: string): boolean;};
+		public query_action: {(action_group: ActionGroup, action_name: string): [ boolean, boolean, GLib.VariantType | null, GLib.VariantType | null, GLib.Variant | null, GLib.Variant | null ];};
 	}
 
+	export interface ActionInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GAction.
 	 */
 	interface ActionInterface {}
 	class ActionInterface {
-		public constructor();
+		public constructor(options?: Partial<ActionInterfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public get_name: {(action: Action): string;};
 		public get_parameter_type: {(action: Action): GLib.VariantType | null;};
@@ -20747,24 +21584,26 @@ declare namespace imports.gi.Gio {
 		public activate: {(action: Action, parameter: GLib.Variant | null): void;};
 	}
 
+	export interface ActionMapInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GActionMap.
 	 */
 	interface ActionMapInterface {}
 	class ActionMapInterface {
-		public constructor();
+		public constructor(options?: Partial<ActionMapInterfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public lookup_action: {(action_map: ActionMap, action_name: string): Action | null;};
 		public add_action: {(action_map: ActionMap, action: Action): void;};
 		public remove_action: {(action_map: ActionMap, action_name: string): void;};
 	}
 
+	export interface AppInfoIfaceInitOptions {}
 	/**
 	 * Application Information interface, for operating system portability.
 	 */
 	interface AppInfoIface {}
 	class AppInfoIface {
-		public constructor();
+		public constructor(options?: Partial<AppInfoIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -20796,9 +21635,10 @@ declare namespace imports.gi.Gio {
 		public launch_uris_finish: {(appinfo: AppInfo, result: AsyncResult): boolean;};
 	}
 
+	export interface AppLaunchContextClassInitOptions {}
 	interface AppLaunchContextClass {}
 	class AppLaunchContextClass {
-		public constructor();
+		public constructor(options?: Partial<AppLaunchContextClassInitOptions>);
 		public get_display: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
 		public get_startup_notify_id: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
 		public launch_failed: {(context: AppLaunchContext, startup_notify_id: string): void;};
@@ -20809,23 +21649,25 @@ declare namespace imports.gi.Gio {
 		public _g_reserved4: {(): void;};
 	}
 
+	export interface AppLaunchContextPrivateInitOptions {}
 	interface AppLaunchContextPrivate {}
 	class AppLaunchContextPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppLaunchContextPrivateInitOptions>);
 	}
 
+	export interface ApplicationClassInitOptions {}
 	/**
 	 * Virtual function table for #GApplication.
 	 */
 	interface ApplicationClass {}
 	class ApplicationClass {
-		public constructor();
+		public constructor(options?: Partial<ApplicationClassInitOptions>);
 		public readonly padding: any[];
 		public startup: {(application: Application): void;};
 		public activate: {(application: Application): void;};
 		public open: {(application: Application, files: File[], n_files: number, hint: string): void;};
 		public command_line: {(application: Application, command_line: ApplicationCommandLine): number;};
-		public local_command_line: {(application: Application): boolean;};
+		public local_command_line: {(application: Application): [ boolean, number ];};
 		public before_emit: {(application: Application, platform_data: GLib.Variant): void;};
 		public after_emit: {(application: Application, platform_data: GLib.Variant): void;};
 		public add_platform_data: {(application: Application, builder: GLib.VariantBuilder): void;};
@@ -20838,36 +21680,40 @@ declare namespace imports.gi.Gio {
 		public name_lost: {(application: Application): boolean;};
 	}
 
+	export interface ApplicationCommandLineClassInitOptions {}
 	/**
 	 * The #GApplicationCommandLineClass-struct
 	 * contains private data only.
 	 */
 	interface ApplicationCommandLineClass {}
 	class ApplicationCommandLineClass {
-		public constructor();
+		public constructor(options?: Partial<ApplicationCommandLineClassInitOptions>);
 		public readonly padding: any[];
 		public print_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
 		public printerr_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
 		public get_stdin: {(cmdline: ApplicationCommandLine): InputStream | null;};
 	}
 
+	export interface ApplicationCommandLinePrivateInitOptions {}
 	interface ApplicationCommandLinePrivate {}
 	class ApplicationCommandLinePrivate {
-		public constructor();
+		public constructor(options?: Partial<ApplicationCommandLinePrivateInitOptions>);
 	}
 
+	export interface ApplicationPrivateInitOptions {}
 	interface ApplicationPrivate {}
 	class ApplicationPrivate {
-		public constructor();
+		public constructor(options?: Partial<ApplicationPrivateInitOptions>);
 	}
 
+	export interface AsyncInitableIfaceInitOptions {}
 	/**
 	 * Provides an interface for asynchronous initializing object such that
 	 * initialization may fail.
 	 */
 	interface AsyncInitableIface {}
 	class AsyncInitableIface {
-		public constructor();
+		public constructor(options?: Partial<AsyncInitableIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -20876,12 +21722,13 @@ declare namespace imports.gi.Gio {
 		public init_finish: {(initable: AsyncInitable, res: AsyncResult): boolean;};
 	}
 
+	export interface AsyncResultIfaceInitOptions {}
 	/**
 	 * Interface definition for #GAsyncResult.
 	 */
 	interface AsyncResultIface {}
 	class AsyncResultIface {
-		public constructor();
+		public constructor(options?: Partial<AsyncResultIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -20891,9 +21738,10 @@ declare namespace imports.gi.Gio {
 		public is_tagged: {(res: AsyncResult, source_tag: any | null): boolean;};
 	}
 
+	export interface BufferedInputStreamClassInitOptions {}
 	interface BufferedInputStreamClass {}
 	class BufferedInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<BufferedInputStreamClassInitOptions>);
 		public fill: {(stream: BufferedInputStream, count: number, cancellable: Cancellable | null): number;};
 		public fill_async: {(stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public fill_finish: {(stream: BufferedInputStream, result: AsyncResult): number;};
@@ -20904,26 +21752,30 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface BufferedInputStreamPrivateInitOptions {}
 	interface BufferedInputStreamPrivate {}
 	class BufferedInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<BufferedInputStreamPrivateInitOptions>);
 	}
 
+	export interface BufferedOutputStreamClassInitOptions {}
 	interface BufferedOutputStreamClass {}
 	class BufferedOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<BufferedOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
 
+	export interface BufferedOutputStreamPrivateInitOptions {}
 	interface BufferedOutputStreamPrivate {}
 	class BufferedOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<BufferedOutputStreamPrivateInitOptions>);
 	}
 
+	export interface CancellableClassInitOptions {}
 	interface CancellableClass {}
 	class CancellableClass {
-		public constructor();
+		public constructor(options?: Partial<CancellableClassInitOptions>);
 		public cancelled: {(cancellable: Cancellable | null): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -20932,16 +21784,19 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface CancellablePrivateInitOptions {}
 	interface CancellablePrivate {}
 	class CancellablePrivate {
-		public constructor();
+		public constructor(options?: Partial<CancellablePrivateInitOptions>);
 	}
 
+	export interface CharsetConverterClassInitOptions {}
 	interface CharsetConverterClass {}
 	class CharsetConverterClass {
-		public constructor();
+		public constructor(options?: Partial<CharsetConverterClassInitOptions>);
 	}
 
+	export interface ConverterIfaceInitOptions {}
 	/**
 	 * Provides an interface for converting data from one type
 	 * to another type. The conversion can be stateful
@@ -20949,18 +21804,19 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ConverterIface {}
 	class ConverterIface {
-		public constructor();
+		public constructor(options?: Partial<ConverterIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-		public convert: {(converter: Converter, inbuf: number[] | null, inbuf_size: number, outbuf: number[] | null, outbuf_size: number, flags: ConverterFlags): ConverterResult;};
+		public convert: {(converter: Converter, inbuf: number[] | null, inbuf_size: number, outbuf: number[] | null, outbuf_size: number, flags: ConverterFlags): [ ConverterResult, number, number ];};
 		public reset: {(converter: Converter): void;};
 	}
 
+	export interface ConverterInputStreamClassInitOptions {}
 	interface ConverterInputStreamClass {}
 	class ConverterInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<ConverterInputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20968,14 +21824,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface ConverterInputStreamPrivateInitOptions {}
 	interface ConverterInputStreamPrivate {}
 	class ConverterInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<ConverterInputStreamPrivateInitOptions>);
 	}
 
+	export interface ConverterOutputStreamClassInitOptions {}
 	interface ConverterOutputStreamClass {}
 	class ConverterOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<ConverterOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -20983,25 +21841,28 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface ConverterOutputStreamPrivateInitOptions {}
 	interface ConverterOutputStreamPrivate {}
 	class ConverterOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<ConverterOutputStreamPrivateInitOptions>);
 	}
 
+	export interface CredentialsClassInitOptions {}
 	/**
 	 * Class structure for #GCredentials.
 	 */
 	interface CredentialsClass {}
 	class CredentialsClass {
-		public constructor();
+		public constructor(options?: Partial<CredentialsClassInitOptions>);
 	}
 
+	export interface DBusAnnotationInfoInitOptions {}
 	/**
 	 * Information about an annotation.
 	 */
 	interface DBusAnnotationInfo {}
 	class DBusAnnotationInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusAnnotationInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21032,12 +21893,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusArgInfoInitOptions {}
 	/**
 	 * Information about an argument for a method or a signal.
 	 */
 	interface DBusArgInfo {}
 	class DBusArgInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusArgInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21068,12 +21930,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusErrorEntryInitOptions {}
 	/**
 	 * Struct used in g_dbus_error_register_error_domain().
 	 */
 	interface DBusErrorEntry {}
 	class DBusErrorEntry {
-		public constructor();
+		public constructor(options?: Partial<DBusErrorEntryInitOptions>);
 		/**
 		 * An error code.
 		 */
@@ -21084,12 +21947,13 @@ declare namespace imports.gi.Gio {
 		public dbus_error_name: string;
 	}
 
+	export interface DBusInterfaceIfaceInitOptions {}
 	/**
 	 * Base type for D-Bus interfaces.
 	 */
 	interface DBusInterfaceIface {}
 	class DBusInterfaceIface {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21100,12 +21964,13 @@ declare namespace imports.gi.Gio {
 		public dup_object: {(interface_: DBusInterface): DBusObject | null;};
 	}
 
+	export interface DBusInterfaceInfoInitOptions {}
 	/**
 	 * Information about a D-Bus interface.
 	 */
 	interface DBusInterfaceInfo {}
 	class DBusInterfaceInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21201,12 +22066,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusInterfaceSkeletonClassInitOptions {}
 	/**
 	 * Class structure for #GDBusInterfaceSkeleton.
 	 */
 	interface DBusInterfaceSkeletonClass {}
 	class DBusInterfaceSkeletonClass {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceSkeletonClassInitOptions>);
 		public readonly vfunc_padding: any[];
 		public readonly signal_padding: any[];
 		public get_info: {(interface_: DBusInterfaceSkeleton): DBusInterfaceInfo;};
@@ -21216,11 +22082,13 @@ declare namespace imports.gi.Gio {
 		public g_authorize_method: {(interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
 	}
 
+	export interface DBusInterfaceSkeletonPrivateInitOptions {}
 	interface DBusInterfaceSkeletonPrivate {}
 	class DBusInterfaceSkeletonPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceSkeletonPrivateInitOptions>);
 	}
 
+	export interface DBusInterfaceVTableInitOptions {}
 	/**
 	 * Virtual table for handling properties and method calls for a D-Bus
 	 * interface.
@@ -21266,7 +22134,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface DBusInterfaceVTable {}
 	class DBusInterfaceVTable {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceVTableInitOptions>);
 		/**
 		 * Function for handling incoming method calls.
 		 */
@@ -21282,12 +22150,13 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
+	export interface DBusMethodInfoInitOptions {}
 	/**
 	 * Information about a method on an D-Bus interface.
 	 */
 	interface DBusMethodInfo {}
 	class DBusMethodInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusMethodInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21322,12 +22191,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusNodeInfoInitOptions {}
 	/**
 	 * Information about nodes in a remote object hierarchy.
 	 */
 	interface DBusNodeInfo {}
 	class DBusNodeInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusNodeInfoInitOptions>);
 		/**
 		 * Parses #xml_data and returns a #GDBusNodeInfo representing the data.
 		 * 
@@ -21393,12 +22263,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusObjectIfaceInitOptions {}
 	/**
 	 * Base object type for D-Bus objects.
 	 */
 	interface DBusObjectIface {}
 	class DBusObjectIface {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21410,28 +22281,31 @@ declare namespace imports.gi.Gio {
 		public interface_removed: {(object: DBusObject, interface_: DBusInterface): void;};
 	}
 
+	export interface DBusObjectManagerClientClassInitOptions {}
 	/**
 	 * Class structure for #GDBusObjectManagerClient.
 	 */
 	interface DBusObjectManagerClientClass {}
 	class DBusObjectManagerClientClass {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerClientClassInitOptions>);
 		public readonly padding: any[];
 		public interface_proxy_signal: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
 		public interface_proxy_properties_changed: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
 	}
 
+	export interface DBusObjectManagerClientPrivateInitOptions {}
 	interface DBusObjectManagerClientPrivate {}
 	class DBusObjectManagerClientPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerClientPrivateInitOptions>);
 	}
 
+	export interface DBusObjectManagerIfaceInitOptions {}
 	/**
 	 * Base type for D-Bus object managers.
 	 */
 	interface DBusObjectManagerIface {}
 	class DBusObjectManagerIface {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21446,55 +22320,62 @@ declare namespace imports.gi.Gio {
 		public interface_removed: {(manager: DBusObjectManager, object: DBusObject, interface_: DBusInterface): void;};
 	}
 
+	export interface DBusObjectManagerServerClassInitOptions {}
 	/**
 	 * Class structure for #GDBusObjectManagerServer.
 	 */
 	interface DBusObjectManagerServerClass {}
 	class DBusObjectManagerServerClass {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerServerClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface DBusObjectManagerServerPrivateInitOptions {}
 	interface DBusObjectManagerServerPrivate {}
 	class DBusObjectManagerServerPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerServerPrivateInitOptions>);
 	}
 
+	export interface DBusObjectProxyClassInitOptions {}
 	/**
 	 * Class structure for #GDBusObjectProxy.
 	 */
 	interface DBusObjectProxyClass {}
 	class DBusObjectProxyClass {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectProxyClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface DBusObjectProxyPrivateInitOptions {}
 	interface DBusObjectProxyPrivate {}
 	class DBusObjectProxyPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectProxyPrivateInitOptions>);
 	}
 
+	export interface DBusObjectSkeletonClassInitOptions {}
 	/**
 	 * Class structure for #GDBusObjectSkeleton.
 	 */
 	interface DBusObjectSkeletonClass {}
 	class DBusObjectSkeletonClass {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectSkeletonClassInitOptions>);
 		public readonly padding: any[];
 		public authorize_method: {(object: DBusObjectSkeleton, interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
 	}
 
+	export interface DBusObjectSkeletonPrivateInitOptions {}
 	interface DBusObjectSkeletonPrivate {}
 	class DBusObjectSkeletonPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectSkeletonPrivateInitOptions>);
 	}
 
+	export interface DBusPropertyInfoInitOptions {}
 	/**
 	 * Information about a D-Bus property on a D-Bus interface.
 	 */
 	interface DBusPropertyInfo {}
 	class DBusPropertyInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusPropertyInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21529,28 +22410,31 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusProxyClassInitOptions {}
 	/**
 	 * Class structure for #GDBusProxy.
 	 */
 	interface DBusProxyClass {}
 	class DBusProxyClass {
-		public constructor();
+		public constructor(options?: Partial<DBusProxyClassInitOptions>);
 		public readonly padding: any[];
 		public g_properties_changed: {(proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
 		public g_signal: {(proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
 	}
 
+	export interface DBusProxyPrivateInitOptions {}
 	interface DBusProxyPrivate {}
 	class DBusProxyPrivate {
-		public constructor();
+		public constructor(options?: Partial<DBusProxyPrivateInitOptions>);
 	}
 
+	export interface DBusSignalInfoInitOptions {}
 	/**
 	 * Information about a signal on a D-Bus interface.
 	 */
 	interface DBusSignalInfo {}
 	class DBusSignalInfo {
-		public constructor();
+		public constructor(options?: Partial<DBusSignalInfoInitOptions>);
 		/**
 		 * The reference count or -1 if statically allocated.
 		 */
@@ -21581,12 +22465,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface DBusSubtreeVTableInitOptions {}
 	/**
 	 * Virtual table for handling subtrees registered with g_dbus_connection_register_subtree().
 	 */
 	interface DBusSubtreeVTable {}
 	class DBusSubtreeVTable {
-		public constructor();
+		public constructor(options?: Partial<DBusSubtreeVTableInitOptions>);
 		/**
 		 * Function for enumerating child nodes.
 		 */
@@ -21602,9 +22487,10 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
+	export interface DataInputStreamClassInitOptions {}
 	interface DataInputStreamClass {}
 	class DataInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<DataInputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -21612,14 +22498,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface DataInputStreamPrivateInitOptions {}
 	interface DataInputStreamPrivate {}
 	class DataInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<DataInputStreamPrivateInitOptions>);
 	}
 
+	export interface DataOutputStreamClassInitOptions {}
 	interface DataOutputStreamClass {}
 	class DataOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<DataOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -21627,11 +22515,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface DataOutputStreamPrivateInitOptions {}
 	interface DataOutputStreamPrivate {}
 	class DataOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<DataOutputStreamPrivateInitOptions>);
 	}
 
+	export interface DatagramBasedInterfaceInitOptions {}
 	/**
 	 * Provides an interface for socket-like objects which have datagram semantics,
 	 * following the Berkeley sockets API. The interface methods are thin wrappers
@@ -21641,7 +22531,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface DatagramBasedInterface {}
 	class DatagramBasedInterface {
-		public constructor();
+		public constructor(options?: Partial<DatagramBasedInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21653,28 +22543,31 @@ declare namespace imports.gi.Gio {
 		public condition_wait: {(datagram_based: DatagramBased, condition: GLib.IOCondition, timeout: number, cancellable: Cancellable | null): boolean;};
 	}
 
+	export interface DesktopAppInfoClassInitOptions {}
 	interface DesktopAppInfoClass {}
 	class DesktopAppInfoClass {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
 	}
 
+	export interface DesktopAppInfoLookupIfaceInitOptions {}
 	/**
 	 * Interface that is used by backends to associate default
 	 * handlers with URI schemes.
 	 */
 	interface DesktopAppInfoLookupIface {}
 	class DesktopAppInfoLookupIface {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoLookupIfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public get_default_for_uri_scheme: {(lookup: DesktopAppInfoLookup, uri_scheme: string): AppInfo | null;};
 	}
 
+	export interface DriveIfaceInitOptions {}
 	/**
 	 * Interface for creating #GDrive implementations.
 	 */
 	interface DriveIface {}
 	class DriveIface {
-		public constructor();
+		public constructor(options?: Partial<DriveIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21713,24 +22606,26 @@ declare namespace imports.gi.Gio {
 		public is_removable: {(drive: Drive): boolean;};
 	}
 
+	export interface DtlsClientConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GDtlsClientConnection implementation.
 	 */
 	interface DtlsClientConnectionInterface {}
 	class DtlsClientConnectionInterface {
-		public constructor();
+		public constructor(options?: Partial<DtlsClientConnectionInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface DtlsConnectionInterfaceInitOptions {}
 	/**
 	 * Virtual method table for a #GDtlsConnection implementation.
 	 */
 	interface DtlsConnectionInterface {}
 	class DtlsConnectionInterface {
-		public constructor();
+		public constructor(options?: Partial<DtlsConnectionInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21747,39 +22642,44 @@ declare namespace imports.gi.Gio {
 		public get_binding_data: {(conn: DtlsConnection, type: TlsChannelBindingType, data: number[]): boolean;};
 	}
 
+	export interface DtlsServerConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GDtlsServerConnection implementation.
 	 */
 	interface DtlsServerConnectionInterface {}
 	class DtlsServerConnectionInterface {
-		public constructor();
+		public constructor(options?: Partial<DtlsServerConnectionInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface EmblemClassInitOptions {}
 	interface EmblemClass {}
 	class EmblemClass {
-		public constructor();
+		public constructor(options?: Partial<EmblemClassInitOptions>);
 	}
 
+	export interface EmblemedIconClassInitOptions {}
 	interface EmblemedIconClass {}
 	class EmblemedIconClass {
-		public constructor();
+		public constructor(options?: Partial<EmblemedIconClassInitOptions>);
 	}
 
+	export interface EmblemedIconPrivateInitOptions {}
 	interface EmblemedIconPrivate {}
 	class EmblemedIconPrivate {
-		public constructor();
+		public constructor(options?: Partial<EmblemedIconPrivateInitOptions>);
 	}
 
+	export interface FileAttributeInfoInitOptions {}
 	/**
 	 * Information about a specific attribute.
 	 */
 	interface FileAttributeInfo {}
 	class FileAttributeInfo {
-		public constructor();
+		public constructor(options?: Partial<FileAttributeInfoInitOptions>);
 		/**
 		 * the name of the attribute.
 		 */
@@ -21794,13 +22694,14 @@ declare namespace imports.gi.Gio {
 		public flags: FileAttributeInfoFlags;
 	}
 
+	export interface FileAttributeInfoListInitOptions {}
 	/**
 	 * Acts as a lightweight registry for possible valid file attributes.
 	 * The registry stores Key-Value pair formats as #GFileAttributeInfos.
 	 */
 	interface FileAttributeInfoList {}
 	class FileAttributeInfoList {
-		public constructor();
+		public constructor(options?: Partial<FileAttributeInfoListInitOptions>);
 		/**
 		 * Creates a new file attribute info list.
 		 * @returns a #GFileAttributeInfoList.
@@ -21846,12 +22747,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface FileAttributeMatcherInitOptions {}
 	/**
 	 * Determines if a string matches a file attribute.
 	 */
 	interface FileAttributeMatcher {}
 	class FileAttributeMatcher {
-		public constructor();
+		public constructor(options?: Partial<FileAttributeMatcherInitOptions>);
 		/**
 		 * Creates a new file attribute matcher, which matches attributes
 		 * against a given string. #GFileAttributeMatchers are reference
@@ -21944,12 +22846,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface FileDescriptorBasedIfaceInitOptions {}
 	/**
 	 * An interface for file descriptor based io objects.
 	 */
 	interface FileDescriptorBasedIface {}
 	class FileDescriptorBasedIface {
-		public constructor();
+		public constructor(options?: Partial<FileDescriptorBasedIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -21957,9 +22860,10 @@ declare namespace imports.gi.Gio {
 		public get_fd: {(fd_based: FileDescriptorBased): number;};
 	}
 
+	export interface FileEnumeratorClassInitOptions {}
 	interface FileEnumeratorClass {}
 	class FileEnumeratorClass {
-		public constructor();
+		public constructor(options?: Partial<FileEnumeratorClassInitOptions>);
 		public next_file: {(enumerator: FileEnumerator, cancellable: Cancellable | null): FileInfo | null;};
 		public close_fn: {(enumerator: FileEnumerator, cancellable: Cancellable | null): boolean;};
 		public next_files_async: {(enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
@@ -21975,14 +22879,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved7: {(): void;};
 	}
 
+	export interface FileEnumeratorPrivateInitOptions {}
 	interface FileEnumeratorPrivate {}
 	class FileEnumeratorPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileEnumeratorPrivateInitOptions>);
 	}
 
+	export interface FileIOStreamClassInitOptions {}
 	interface FileIOStreamClass {}
 	class FileIOStreamClass {
-		public constructor();
+		public constructor(options?: Partial<FileIOStreamClassInitOptions>);
 		public tell: {(stream: FileIOStream): number;};
 		public can_seek: {(stream: FileIOStream): boolean;};
 		public seek: {(stream: FileIOStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
@@ -21999,22 +22905,25 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface FileIOStreamPrivateInitOptions {}
 	interface FileIOStreamPrivate {}
 	class FileIOStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileIOStreamPrivateInitOptions>);
 	}
 
+	export interface FileIconClassInitOptions {}
 	interface FileIconClass {}
 	class FileIconClass {
-		public constructor();
+		public constructor(options?: Partial<FileIconClassInitOptions>);
 	}
 
+	export interface FileIfaceInitOptions {}
 	/**
 	 * An interface for writing VFS file handles.
 	 */
 	interface FileIface {}
 	class FileIface {
-		public constructor();
+		public constructor(options?: Partial<FileIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22062,7 +22971,7 @@ declare namespace imports.gi.Gio {
 		public set_attribute: {(file: File, attribute: string, type: FileAttributeType, value_p: any | null, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
 		public set_attributes_from_info: {(file: File, info: FileInfo, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
 		public set_attributes_async: {(file: File, info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public set_attributes_finish: {(file: File, result: AsyncResult): boolean;};
+		public set_attributes_finish: {(file: File, result: AsyncResult): [ boolean, FileInfo ];};
 		public read_fn: {(file: File, cancellable: Cancellable | null): FileInputStream;};
 		public read_async: {(file: File, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public read_finish: {(file: File, res: AsyncResult): FileInputStream;};
@@ -22122,19 +23031,21 @@ declare namespace imports.gi.Gio {
 		public eject_mountable_with_operation_finish: {(file: File, result: AsyncResult): boolean;};
 		public poll_mountable: {(file: File, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public poll_mountable_finish: {(file: File, result: AsyncResult): boolean;};
-		public measure_disk_usage: {(file: File, flags: FileMeasureFlags, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null): boolean;};
+		public measure_disk_usage: {(file: File, flags: FileMeasureFlags, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null): [ boolean, number | null, number | null, number | null ];};
 		public measure_disk_usage_async: {(file: File, flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null, callback: AsyncReadyCallback | null): void;};
-		public measure_disk_usage_finish: {(file: File, result: AsyncResult): boolean;};
+		public measure_disk_usage_finish: {(file: File, result: AsyncResult): [ boolean, number | null, number | null, number | null ];};
 	}
 
+	export interface FileInfoClassInitOptions {}
 	interface FileInfoClass {}
 	class FileInfoClass {
-		public constructor();
+		public constructor(options?: Partial<FileInfoClassInitOptions>);
 	}
 
+	export interface FileInputStreamClassInitOptions {}
 	interface FileInputStreamClass {}
 	class FileInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<FileInputStreamClassInitOptions>);
 		public tell: {(stream: FileInputStream): number;};
 		public can_seek: {(stream: FileInputStream): boolean;};
 		public seek: {(stream: FileInputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
@@ -22148,14 +23059,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface FileInputStreamPrivateInitOptions {}
 	interface FileInputStreamPrivate {}
 	class FileInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileInputStreamPrivateInitOptions>);
 	}
 
+	export interface FileMonitorClassInitOptions {}
 	interface FileMonitorClass {}
 	class FileMonitorClass {
-		public constructor();
+		public constructor(options?: Partial<FileMonitorClassInitOptions>);
 		public changed: {(monitor: FileMonitor, file: File, other_file: File, event_type: FileMonitorEvent): void;};
 		public cancel: {(monitor: FileMonitor): boolean;};
 		public _g_reserved1: {(): void;};
@@ -22165,14 +23078,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface FileMonitorPrivateInitOptions {}
 	interface FileMonitorPrivate {}
 	class FileMonitorPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileMonitorPrivateInitOptions>);
 	}
 
+	export interface FileOutputStreamClassInitOptions {}
 	interface FileOutputStreamClass {}
 	class FileOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<FileOutputStreamClassInitOptions>);
 		public tell: {(stream: FileOutputStream): number;};
 		public can_seek: {(stream: FileOutputStream): boolean;};
 		public seek: {(stream: FileOutputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
@@ -22189,43 +23104,48 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface FileOutputStreamPrivateInitOptions {}
 	interface FileOutputStreamPrivate {}
 	class FileOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileOutputStreamPrivateInitOptions>);
 	}
 
+	export interface FilenameCompleterClassInitOptions {}
 	interface FilenameCompleterClass {}
 	class FilenameCompleterClass {
-		public constructor();
+		public constructor(options?: Partial<FilenameCompleterClassInitOptions>);
 		public got_completion_data: {(filename_completer: FilenameCompleter): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
 	}
 
+	export interface FilterInputStreamClassInitOptions {}
 	interface FilterInputStreamClass {}
 	class FilterInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<FilterInputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
 	}
 
+	export interface FilterOutputStreamClassInitOptions {}
 	interface FilterOutputStreamClass {}
 	class FilterOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<FilterOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
 	}
 
+	export interface IOExtensionInitOptions {}
 	/**
 	 * #GIOExtension is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface IOExtension {}
 	class IOExtension {
-		public constructor();
+		public constructor(options?: Partial<IOExtensionInitOptions>);
 		/**
 		 * Gets the name under which #extension was registered.
 		 * 
@@ -22252,13 +23172,14 @@ declare namespace imports.gi.Gio {
 		public ref_class(): GObject.TypeClass;
 	}
 
+	export interface IOExtensionPointInitOptions {}
 	/**
 	 * #GIOExtensionPoint is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface IOExtensionPoint {}
 	class IOExtensionPoint {
-		public constructor();
+		public constructor(options?: Partial<IOExtensionPointInitOptions>);
 		/**
 		 * Finds a #GIOExtension for an extension point by name.
 		 * @param name the name of the extension to get
@@ -22288,11 +23209,13 @@ declare namespace imports.gi.Gio {
 		public set_required_type(type: GObject.Type): void;
 	}
 
+	export interface IOModuleClassInitOptions {}
 	interface IOModuleClass {}
 	class IOModuleClass {
-		public constructor();
+		public constructor(options?: Partial<IOModuleClassInitOptions>);
 	}
 
+	export interface IOModuleScopeInitOptions {}
 	/**
 	 * Represents a scope for loading IO modules. A scope can be used for blocking
 	 * duplicate modules, or blocking a module you don't want to load.
@@ -22302,7 +23225,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IOModuleScope {}
 	class IOModuleScope {
-		public constructor();
+		public constructor(options?: Partial<IOModuleScopeInitOptions>);
 		/**
 		 * Block modules with the given #basename from being loaded when
 		 * this scope is used with g_io_modules_scan_all_in_directory_with_scope()
@@ -22316,12 +23239,13 @@ declare namespace imports.gi.Gio {
 		public free(): void;
 	}
 
+	export interface IOSchedulerJobInitOptions {}
 	/**
 	 * Opaque class for defining and scheduling IO jobs.
 	 */
 	interface IOSchedulerJob {}
 	class IOSchedulerJob {
-		public constructor();
+		public constructor(options?: Partial<IOSchedulerJobInitOptions>);
 		/**
 		 * Used from an I/O job to send a callback to be run in the thread
 		 * that the job was started from, waiting for the result (and thus
@@ -22347,14 +23271,16 @@ declare namespace imports.gi.Gio {
 		public send_to_mainloop_async(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): void;
 	}
 
+	export interface IOStreamAdapterInitOptions {}
 	interface IOStreamAdapter {}
 	class IOStreamAdapter {
-		public constructor();
+		public constructor(options?: Partial<IOStreamAdapterInitOptions>);
 	}
 
+	export interface IOStreamClassInitOptions {}
 	interface IOStreamClass {}
 	class IOStreamClass {
-		public constructor();
+		public constructor(options?: Partial<IOStreamClassInitOptions>);
 		public get_input_stream: {(stream: IOStream): InputStream;};
 		public get_output_stream: {(stream: IOStream): OutputStream;};
 		public close_fn: {(stream: IOStream, cancellable: Cancellable | null): boolean;};
@@ -22372,11 +23298,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved10: {(): void;};
 	}
 
+	export interface IOStreamPrivateInitOptions {}
 	interface IOStreamPrivate {}
 	class IOStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<IOStreamPrivateInitOptions>);
 	}
 
+	export interface IconIfaceInitOptions {}
 	/**
 	 * GIconIface is used to implement GIcon types for various
 	 * different systems. See #GThemedIcon and #GLoadableIcon for
@@ -22384,7 +23312,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IconIface {}
 	class IconIface {
-		public constructor();
+		public constructor(options?: Partial<IconIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22396,45 +23324,52 @@ declare namespace imports.gi.Gio {
 		public serialize: {(icon: Icon): GLib.Variant | null;};
 	}
 
+	export interface InetAddressClassInitOptions {}
 	interface InetAddressClass {}
 	class InetAddressClass {
-		public constructor();
+		public constructor(options?: Partial<InetAddressClassInitOptions>);
 		public to_string: {(address: InetAddress): string;};
 		public to_bytes: {(address: InetAddress): number;};
 	}
 
+	export interface InetAddressMaskClassInitOptions {}
 	interface InetAddressMaskClass {}
 	class InetAddressMaskClass {
-		public constructor();
+		public constructor(options?: Partial<InetAddressMaskClassInitOptions>);
 	}
 
+	export interface InetAddressMaskPrivateInitOptions {}
 	interface InetAddressMaskPrivate {}
 	class InetAddressMaskPrivate {
-		public constructor();
+		public constructor(options?: Partial<InetAddressMaskPrivateInitOptions>);
 	}
 
+	export interface InetAddressPrivateInitOptions {}
 	interface InetAddressPrivate {}
 	class InetAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<InetAddressPrivateInitOptions>);
 	}
 
+	export interface InetSocketAddressClassInitOptions {}
 	interface InetSocketAddressClass {}
 	class InetSocketAddressClass {
-		public constructor();
+		public constructor(options?: Partial<InetSocketAddressClassInitOptions>);
 	}
 
+	export interface InetSocketAddressPrivateInitOptions {}
 	interface InetSocketAddressPrivate {}
 	class InetSocketAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<InetSocketAddressPrivateInitOptions>);
 	}
 
+	export interface InitableIfaceInitOptions {}
 	/**
 	 * Provides an interface for initializing object such that initialization
 	 * may fail.
 	 */
 	interface InitableIface {}
 	class InitableIface {
-		public constructor();
+		public constructor(options?: Partial<InitableIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22442,6 +23377,7 @@ declare namespace imports.gi.Gio {
 		public init: {(initable: Initable, cancellable: Cancellable | null): boolean;};
 	}
 
+	export interface InputMessageInitOptions {}
 	/**
 	 * Structure used for scatter/gather data input when receiving multiple
 	 * messages or packets in one go. You generally pass in an array of empty
@@ -22465,7 +23401,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface InputMessage {}
 	class InputMessage {
-		public constructor();
+		public constructor(options?: Partial<InputMessageInitOptions>);
 		/**
 		 * return location
 		 *   for a #GSocketAddress, or %NULL
@@ -22502,13 +23438,14 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
+	export interface InputStreamClassInitOptions {}
 	interface InputStreamClass {}
 	class InputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<InputStreamClassInitOptions>);
 		public read_fn: {(stream: InputStream, buffer: any | null, count: number, cancellable: Cancellable | null): number;};
 		public skip: {(stream: InputStream, count: number, cancellable: Cancellable | null): number;};
 		public close_fn: {(stream: InputStream, cancellable: Cancellable | null): boolean;};
-		public read_async: {(stream: InputStream, buffer: number[] | null, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
+		public read_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[] | null;};
 		public read_finish: {(stream: InputStream, result: AsyncResult): number;};
 		public skip_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public skip_finish: {(stream: InputStream, result: AsyncResult): number;};
@@ -22521,11 +23458,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface InputStreamPrivateInitOptions {}
 	interface InputStreamPrivate {}
 	class InputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<InputStreamPrivateInitOptions>);
 	}
 
+	export interface InputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data input.
 	 * You generally pass in an array of #GInputVectors
@@ -22534,7 +23473,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface InputVector {}
 	class InputVector {
-		public constructor();
+		public constructor(options?: Partial<InputVectorInitOptions>);
 		/**
 		 * Pointer to a buffer where data will be written.
 		 */
@@ -22545,12 +23484,13 @@ declare namespace imports.gi.Gio {
 		public size: number;
 	}
 
+	export interface ListModelInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GListModel.
 	 */
 	interface ListModelInterface {}
 	class ListModelInterface {
-		public constructor();
+		public constructor(options?: Partial<ListModelInterfaceInitOptions>);
 		/**
 		 * parent #GTypeInterface
 		 */
@@ -22560,29 +23500,32 @@ declare namespace imports.gi.Gio {
 		public get_item: {(list: ListModel, position: number): GObject.Object | null;};
 	}
 
+	export interface ListStoreClassInitOptions {}
 	interface ListStoreClass {}
 	class ListStoreClass {
-		public constructor();
+		public constructor(options?: Partial<ListStoreClassInitOptions>);
 	}
 
+	export interface LoadableIconIfaceInitOptions {}
 	/**
 	 * Interface for icons that can be loaded as a stream.
 	 */
 	interface LoadableIconIface {}
 	class LoadableIconIface {
-		public constructor();
+		public constructor(options?: Partial<LoadableIconIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-		public load: {(icon: LoadableIcon, size: number, cancellable: Cancellable | null): InputStream;};
+		public load: {(icon: LoadableIcon, size: number, cancellable: Cancellable | null): [ InputStream, string | null ];};
 		public load_async: {(icon: LoadableIcon, size: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public load_finish: {(icon: LoadableIcon, res: AsyncResult): InputStream;};
+		public load_finish: {(icon: LoadableIcon, res: AsyncResult): [ InputStream, string | null ];};
 	}
 
+	export interface MemoryInputStreamClassInitOptions {}
 	interface MemoryInputStreamClass {}
 	class MemoryInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<MemoryInputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22590,17 +23533,19 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface MemoryInputStreamPrivateInitOptions {}
 	interface MemoryInputStreamPrivate {}
 	class MemoryInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<MemoryInputStreamPrivateInitOptions>);
 	}
 
+	export interface MemoryMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GMemoryMonitor.
 	 */
 	interface MemoryMonitorInterface {}
 	class MemoryMonitorInterface {
-		public constructor();
+		public constructor(options?: Partial<MemoryMonitorInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22608,9 +23553,10 @@ declare namespace imports.gi.Gio {
 		public low_memory_warning: {(monitor: MemoryMonitor, level: MemoryMonitorWarningLevel): void;};
 	}
 
+	export interface MemoryOutputStreamClassInitOptions {}
 	interface MemoryOutputStreamClass {}
 	class MemoryOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<MemoryOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22618,57 +23564,65 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface MemoryOutputStreamPrivateInitOptions {}
 	interface MemoryOutputStreamPrivate {}
 	class MemoryOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<MemoryOutputStreamPrivateInitOptions>);
 	}
 
+	export interface MenuAttributeIterClassInitOptions {}
 	interface MenuAttributeIterClass {}
 	class MenuAttributeIterClass {
-		public constructor();
-		public get_next: {(iter: MenuAttributeIter): boolean;};
+		public constructor(options?: Partial<MenuAttributeIterClassInitOptions>);
+		public get_next: {(iter: MenuAttributeIter): [ boolean, string | null, GLib.Variant | null ];};
 	}
 
+	export interface MenuAttributeIterPrivateInitOptions {}
 	interface MenuAttributeIterPrivate {}
 	class MenuAttributeIterPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuAttributeIterPrivateInitOptions>);
 	}
 
+	export interface MenuLinkIterClassInitOptions {}
 	interface MenuLinkIterClass {}
 	class MenuLinkIterClass {
-		public constructor();
-		public get_next: {(iter: MenuLinkIter): boolean;};
+		public constructor(options?: Partial<MenuLinkIterClassInitOptions>);
+		public get_next: {(iter: MenuLinkIter): [ boolean, string | null, MenuModel | null ];};
 	}
 
+	export interface MenuLinkIterPrivateInitOptions {}
 	interface MenuLinkIterPrivate {}
 	class MenuLinkIterPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuLinkIterPrivateInitOptions>);
 	}
 
+	export interface MenuModelClassInitOptions {}
 	interface MenuModelClass {}
 	class MenuModelClass {
-		public constructor();
+		public constructor(options?: Partial<MenuModelClassInitOptions>);
 		public is_mutable: {(model: MenuModel): boolean;};
 		public get_n_items: {(model: MenuModel): number;};
-		public get_item_attributes: {(model: MenuModel, item_index: number): void;};
+		public get_item_attributes: {(model: MenuModel, item_index: number): GLib.HashTable;};
 		public iterate_item_attributes: {(model: MenuModel, item_index: number): MenuAttributeIter;};
 		public get_item_attribute_value: {(model: MenuModel, item_index: number, attribute: string, expected_type: GLib.VariantType | null): GLib.Variant | null;};
-		public get_item_links: {(model: MenuModel, item_index: number): void;};
+		public get_item_links: {(model: MenuModel, item_index: number): GLib.HashTable;};
 		public iterate_item_links: {(model: MenuModel, item_index: number): MenuLinkIter;};
 		public get_item_link: {(model: MenuModel, item_index: number, link: string): MenuModel | null;};
 	}
 
+	export interface MenuModelPrivateInitOptions {}
 	interface MenuModelPrivate {}
 	class MenuModelPrivate {
-		public constructor();
+		public constructor(options?: Partial<MenuModelPrivateInitOptions>);
 	}
 
+	export interface MountIfaceInitOptions {}
 	/**
 	 * Interface for implementing operations for mounts.
 	 */
 	interface MountIface {}
 	class MountIface {
-		public constructor();
+		public constructor(options?: Partial<MountIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22702,9 +23656,10 @@ declare namespace imports.gi.Gio {
 		public get_symbolic_icon: {(mount: Mount): Icon;};
 	}
 
+	export interface MountOperationClassInitOptions {}
 	interface MountOperationClass {}
 	class MountOperationClass {
-		public constructor();
+		public constructor(options?: Partial<MountOperationClassInitOptions>);
 		public ask_password: {(op: MountOperation, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags): void;};
 		public ask_question: {(op: MountOperation, message: string, choices: string[]): void;};
 		public reply: {(op: MountOperation, result: MountOperationResult): void;};
@@ -22722,43 +23677,50 @@ declare namespace imports.gi.Gio {
 		public _g_reserved9: {(): void;};
 	}
 
+	export interface MountOperationPrivateInitOptions {}
 	interface MountOperationPrivate {}
 	class MountOperationPrivate {
-		public constructor();
+		public constructor(options?: Partial<MountOperationPrivateInitOptions>);
 	}
 
+	export interface NativeSocketAddressClassInitOptions {}
 	interface NativeSocketAddressClass {}
 	class NativeSocketAddressClass {
-		public constructor();
+		public constructor(options?: Partial<NativeSocketAddressClassInitOptions>);
 	}
 
+	export interface NativeSocketAddressPrivateInitOptions {}
 	interface NativeSocketAddressPrivate {}
 	class NativeSocketAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<NativeSocketAddressPrivateInitOptions>);
 	}
 
+	export interface NativeVolumeMonitorClassInitOptions {}
 	interface NativeVolumeMonitorClass {}
 	class NativeVolumeMonitorClass {
-		public constructor();
+		public constructor(options?: Partial<NativeVolumeMonitorClassInitOptions>);
 		public get_mount_for_mount_path: {(mount_path: string, cancellable: Cancellable): Mount;};
 	}
 
+	export interface NetworkAddressClassInitOptions {}
 	interface NetworkAddressClass {}
 	class NetworkAddressClass {
-		public constructor();
+		public constructor(options?: Partial<NetworkAddressClassInitOptions>);
 	}
 
+	export interface NetworkAddressPrivateInitOptions {}
 	interface NetworkAddressPrivate {}
 	class NetworkAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<NetworkAddressPrivateInitOptions>);
 	}
 
+	export interface NetworkMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GNetworkMonitor.
 	 */
 	interface NetworkMonitorInterface {}
 	class NetworkMonitorInterface {
-		public constructor();
+		public constructor(options?: Partial<NetworkMonitorInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22769,16 +23731,19 @@ declare namespace imports.gi.Gio {
 		public can_reach_finish: {(monitor: NetworkMonitor, result: AsyncResult): boolean;};
 	}
 
+	export interface NetworkServiceClassInitOptions {}
 	interface NetworkServiceClass {}
 	class NetworkServiceClass {
-		public constructor();
+		public constructor(options?: Partial<NetworkServiceClassInitOptions>);
 	}
 
+	export interface NetworkServicePrivateInitOptions {}
 	interface NetworkServicePrivate {}
 	class NetworkServicePrivate {
-		public constructor();
+		public constructor(options?: Partial<NetworkServicePrivateInitOptions>);
 	}
 
+	export interface OutputMessageInitOptions {}
 	/**
 	 * Structure used for scatter/gather data output when sending multiple
 	 * messages or packets in one go. You generally pass in an array of
@@ -22790,7 +23755,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface OutputMessage {}
 	class OutputMessage {
-		public constructor();
+		public constructor(options?: Partial<OutputMessageInitOptions>);
 		/**
 		 * a #GSocketAddress, or %NULL
 		 */
@@ -22819,9 +23784,10 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
+	export interface OutputStreamClassInitOptions {}
 	interface OutputStreamClass {}
 	class OutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<OutputStreamClassInitOptions>);
 		public write_fn: {(stream: OutputStream, buffer: number[] | null, count: number, cancellable: Cancellable | null): number;};
 		public splice: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable | null): number;};
 		public flush: {(stream: OutputStream, cancellable: Cancellable | null): boolean;};
@@ -22834,9 +23800,9 @@ declare namespace imports.gi.Gio {
 		public flush_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
 		public close_async: {(stream: OutputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public close_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
-		public writev_fn: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): boolean;};
+		public writev_fn: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ boolean, number | null ];};
 		public writev_async: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public writev_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
+		public writev_finish: {(stream: OutputStream, result: AsyncResult): [ boolean, number | null ];};
 		public _g_reserved4: {(): void;};
 		public _g_reserved5: {(): void;};
 		public _g_reserved6: {(): void;};
@@ -22844,11 +23810,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved8: {(): void;};
 	}
 
+	export interface OutputStreamPrivateInitOptions {}
 	interface OutputStreamPrivate {}
 	class OutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<OutputStreamPrivateInitOptions>);
 	}
 
+	export interface OutputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data output.
 	 * You generally pass in an array of #GOutputVectors
@@ -22857,7 +23825,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface OutputVector {}
 	class OutputVector {
-		public constructor();
+		public constructor(options?: Partial<OutputVectorInitOptions>);
 		/**
 		 * Pointer to a buffer of data to read.
 		 */
@@ -22868,9 +23836,10 @@ declare namespace imports.gi.Gio {
 		public size: number;
 	}
 
+	export interface PermissionClassInitOptions {}
 	interface PermissionClass {}
 	class PermissionClass {
-		public constructor();
+		public constructor(options?: Partial<PermissionClassInitOptions>);
 		public readonly reserved: any[];
 		public acquire: {(permission: Permission, cancellable: Cancellable | null): boolean;};
 		public acquire_async: {(permission: Permission, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
@@ -22880,11 +23849,13 @@ declare namespace imports.gi.Gio {
 		public release_finish: {(permission: Permission, result: AsyncResult): boolean;};
 	}
 
+	export interface PermissionPrivateInitOptions {}
 	interface PermissionPrivate {}
 	class PermissionPrivate {
-		public constructor();
+		public constructor(options?: Partial<PermissionPrivateInitOptions>);
 	}
 
+	export interface PollableInputStreamInterfaceInitOptions {}
 	/**
 	 * The interface for pollable input streams.
 	 * 
@@ -22899,7 +23870,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface PollableInputStreamInterface {}
 	class PollableInputStreamInterface {
-		public constructor();
+		public constructor(options?: Partial<PollableInputStreamInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22907,9 +23878,10 @@ declare namespace imports.gi.Gio {
 		public can_poll: {(stream: PollableInputStream): boolean;};
 		public is_readable: {(stream: PollableInputStream): boolean;};
 		public create_source: {(stream: PollableInputStream, cancellable: Cancellable | null): GLib.Source;};
-		public read_nonblocking: {(stream: PollableInputStream, buffer: number[] | null, count: number): number;};
+		public read_nonblocking: {(stream: PollableInputStream, count: number): [ number, number[] | null ];};
 	}
 
+	export interface PollableOutputStreamInterfaceInitOptions {}
 	/**
 	 * The interface for pollable output streams.
 	 * 
@@ -22930,7 +23902,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface PollableOutputStreamInterface {}
 	class PollableOutputStreamInterface {
-		public constructor();
+		public constructor(options?: Partial<PollableOutputStreamInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -22939,35 +23911,38 @@ declare namespace imports.gi.Gio {
 		public is_writable: {(stream: PollableOutputStream): boolean;};
 		public create_source: {(stream: PollableOutputStream, cancellable: Cancellable | null): GLib.Source;};
 		public write_nonblocking: {(stream: PollableOutputStream, buffer: number[] | null, count: number): number;};
-		public writev_nonblocking: {(stream: PollableOutputStream, vectors: OutputVector[], n_vectors: number): PollableReturn;};
+		public writev_nonblocking: {(stream: PollableOutputStream, vectors: OutputVector[], n_vectors: number): [ PollableReturn, number | null ];};
 	}
 
+	export interface PowerProfileMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GPowerProfileMonitor.
 	 */
 	interface PowerProfileMonitorInterface {}
 	class PowerProfileMonitorInterface {
-		public constructor();
+		public constructor(options?: Partial<PowerProfileMonitorInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface ProxyAddressClassInitOptions {}
 	/**
 	 * Class structure for #GProxyAddress.
 	 */
 	interface ProxyAddressClass {}
 	class ProxyAddressClass {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressClassInitOptions>);
 	}
 
+	export interface ProxyAddressEnumeratorClassInitOptions {}
 	/**
 	 * Class structure for #GProxyAddressEnumerator.
 	 */
 	interface ProxyAddressEnumeratorClass {}
 	class ProxyAddressEnumeratorClass {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressEnumeratorClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -22977,22 +23952,25 @@ declare namespace imports.gi.Gio {
 		public _g_reserved7: {(): void;};
 	}
 
+	export interface ProxyAddressEnumeratorPrivateInitOptions {}
 	interface ProxyAddressEnumeratorPrivate {}
 	class ProxyAddressEnumeratorPrivate {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressEnumeratorPrivateInitOptions>);
 	}
 
+	export interface ProxyAddressPrivateInitOptions {}
 	interface ProxyAddressPrivate {}
 	class ProxyAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<ProxyAddressPrivateInitOptions>);
 	}
 
+	export interface ProxyInterfaceInitOptions {}
 	/**
 	 * Provides an interface for handling proxy connection and payload.
 	 */
 	interface ProxyInterface {}
 	class ProxyInterface {
-		public constructor();
+		public constructor(options?: Partial<ProxyInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -23003,12 +23981,13 @@ declare namespace imports.gi.Gio {
 		public supports_hostname: {(proxy: Proxy): boolean;};
 	}
 
+	export interface ProxyResolverInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GProxyResolver.
 	 */
 	interface ProxyResolverInterface {}
 	class ProxyResolverInterface {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -23019,20 +23998,22 @@ declare namespace imports.gi.Gio {
 		public lookup_finish: {(resolver: ProxyResolver, result: AsyncResult): string[];};
 	}
 
+	export interface RemoteActionGroupInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GRemoteActionGroup.
 	 */
 	interface RemoteActionGroupInterface {}
 	class RemoteActionGroupInterface {
-		public constructor();
+		public constructor(options?: Partial<RemoteActionGroupInterfaceInitOptions>);
 		public readonly g_iface: GObject.TypeInterface;
 		public activate_action_full: {(remote: RemoteActionGroup, action_name: string, parameter: GLib.Variant | null, platform_data: GLib.Variant): void;};
 		public change_action_state_full: {(remote: RemoteActionGroup, action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;};
 	}
 
+	export interface ResolverClassInitOptions {}
 	interface ResolverClass {}
 	class ResolverClass {
-		public constructor();
+		public constructor(options?: Partial<ResolverClassInitOptions>);
 		public reload: {(resolver: Resolver): void;};
 		public lookup_by_name: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null): GLib.List;};
 		public lookup_by_name_async: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
@@ -23051,11 +24032,13 @@ declare namespace imports.gi.Gio {
 		public lookup_by_name_with_flags: {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null): GLib.List;};
 	}
 
+	export interface ResolverPrivateInitOptions {}
 	interface ResolverPrivate {}
 	class ResolverPrivate {
-		public constructor();
+		public constructor(options?: Partial<ResolverPrivateInitOptions>);
 	}
 
+	export interface ResourceInitOptions {}
 	/**
 	 * Applications and libraries often contain binary or textual data that is
 	 * really part of the application, rather than user data. For instance
@@ -23196,7 +24179,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface Resource {}
 	class Resource {
-		public constructor();
+		public constructor(options?: Partial<ResourceInitOptions>);
 		/**
 		 * Creates a GResource from a reference to the binary resource bundle.
 		 * This will keep a reference to #data while the resource lives, so
@@ -23246,8 +24229,14 @@ declare namespace imports.gi.Gio {
 		 * @param path A pathname inside the resource
 		 * @param lookup_flags A #GResourceLookupFlags
 		 * @returns %TRUE if the file was found. %FALSE if there were errors
+		 * 
+		 * a location to place the length of the contents of the file,
+		 *    or %NULL if the length is not needed
+		 * 
+		 * a location to place the flags about the file,
+		 *    or %NULL if the length is not needed
 		 */
-		public get_info(path: string, lookup_flags: ResourceLookupFlags): boolean;
+		public get_info(path: string, lookup_flags: ResourceLookupFlags): [ boolean, number | null, number | null ];
 		/**
 		 * Looks for a file at the specified #path in the resource and
 		 * returns a #GBytes that lets you directly access the data in
@@ -23295,12 +24284,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface SeekableIfaceInitOptions {}
 	/**
 	 * Provides an interface for implementing seekable functionality on I/O Streams.
 	 */
 	interface SeekableIface {}
 	class SeekableIface {
-		public constructor();
+		public constructor(options?: Partial<SeekableIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -23312,12 +24302,13 @@ declare namespace imports.gi.Gio {
 		public truncate_fn: {(seekable: Seekable, offset: number, cancellable: Cancellable | null): boolean;};
 	}
 
+	export interface SettingsBackendClassInitOptions {}
 	/**
 	 * Class structure for #GSettingsBackend.
 	 */
 	interface SettingsBackendClass {}
 	class SettingsBackendClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsBackendClassInitOptions>);
 		public readonly padding: any[];
 		public read: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType, default_value: boolean): GLib.Variant;};
 		public get_writable: {(backend: SettingsBackend, key: string): boolean;};
@@ -23331,14 +24322,16 @@ declare namespace imports.gi.Gio {
 		public read_user_value: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType): GLib.Variant;};
 	}
 
+	export interface SettingsBackendPrivateInitOptions {}
 	interface SettingsBackendPrivate {}
 	class SettingsBackendPrivate {
-		public constructor();
+		public constructor(options?: Partial<SettingsBackendPrivateInitOptions>);
 	}
 
+	export interface SettingsClassInitOptions {}
 	interface SettingsClass {}
 	class SettingsClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsClassInitOptions>);
 		public readonly padding: any[];
 		public writable_changed: {(settings: Settings, key: string): void;};
 		public changed: {(settings: Settings, key: string): void;};
@@ -23346,11 +24339,13 @@ declare namespace imports.gi.Gio {
 		public change_event: {(settings: Settings, keys: GLib.Quark, n_keys: number): boolean;};
 	}
 
+	export interface SettingsPrivateInitOptions {}
 	interface SettingsPrivate {}
 	class SettingsPrivate {
-		public constructor();
+		public constructor(options?: Partial<SettingsPrivateInitOptions>);
 	}
 
+	export interface SettingsSchemaInitOptions {}
 	/**
 	 * The #GSettingsSchemaSource and #GSettingsSchema APIs provide a
 	 * mechanism for advanced control over the loading of schemas and a
@@ -23445,7 +24440,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface SettingsSchema {}
 	class SettingsSchema {
-		public constructor();
+		public constructor(options?: Partial<SettingsSchemaInitOptions>);
 		/**
 		 * Get the ID of #schema.
 		 * @returns the ID
@@ -23509,13 +24504,14 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface SettingsSchemaKeyInitOptions {}
 	/**
 	 * #GSettingsSchemaKey is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface SettingsSchemaKey {}
 	class SettingsSchemaKey {
-		public constructor();
+		public constructor(options?: Partial<SettingsSchemaKeyInitOptions>);
 		/**
 		 * Gets the default value for #key.
 		 * 
@@ -23630,12 +24626,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface SettingsSchemaSourceInitOptions {}
 	/**
 	 * This is an opaque structure type.  You may not access it directly.
 	 */
 	interface SettingsSchemaSource {}
 	class SettingsSchemaSource {
-		public constructor();
+		public constructor(options?: Partial<SettingsSchemaSourceInitOptions>);
 		/**
 		 * Attempts to create a new schema source corresponding to the contents
 		 * of the given directory.
@@ -23722,25 +24719,29 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
+	export interface SimpleActionGroupClassInitOptions {}
 	interface SimpleActionGroupClass {}
 	class SimpleActionGroupClass {
-		public constructor();
+		public constructor(options?: Partial<SimpleActionGroupClassInitOptions>);
 		public readonly padding: any[];
 	}
 
+	export interface SimpleActionGroupPrivateInitOptions {}
 	interface SimpleActionGroupPrivate {}
 	class SimpleActionGroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<SimpleActionGroupPrivateInitOptions>);
 	}
 
+	export interface SimpleAsyncResultClassInitOptions {}
 	interface SimpleAsyncResultClass {}
 	class SimpleAsyncResultClass {
-		public constructor();
+		public constructor(options?: Partial<SimpleAsyncResultClassInitOptions>);
 	}
 
+	export interface SimpleProxyResolverClassInitOptions {}
 	interface SimpleProxyResolverClass {}
 	class SimpleProxyResolverClass {
-		public constructor();
+		public constructor(options?: Partial<SimpleProxyResolverClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -23748,33 +24749,37 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface SimpleProxyResolverPrivateInitOptions {}
 	interface SimpleProxyResolverPrivate {}
 	class SimpleProxyResolverPrivate {
-		public constructor();
+		public constructor(options?: Partial<SimpleProxyResolverPrivateInitOptions>);
 	}
 
+	export interface SocketAddressClassInitOptions {}
 	interface SocketAddressClass {}
 	class SocketAddressClass {
-		public constructor();
+		public constructor(options?: Partial<SocketAddressClassInitOptions>);
 		public get_family: {(address: SocketAddress): SocketFamily;};
 		public get_native_size: {(address: SocketAddress): number;};
 		public to_native: {(address: SocketAddress, dest: any | null, destlen: number): boolean;};
 	}
 
+	export interface SocketAddressEnumeratorClassInitOptions {}
 	/**
 	 * Class structure for #GSocketAddressEnumerator.
 	 */
 	interface SocketAddressEnumeratorClass {}
 	class SocketAddressEnumeratorClass {
-		public constructor();
+		public constructor(options?: Partial<SocketAddressEnumeratorClassInitOptions>);
 		public next: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null): SocketAddress;};
 		public next_async: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
 		public next_finish: {(enumerator: SocketAddressEnumerator, result: AsyncResult): SocketAddress;};
 	}
 
+	export interface SocketClassInitOptions {}
 	interface SocketClass {}
 	class SocketClass {
-		public constructor();
+		public constructor(options?: Partial<SocketClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -23787,9 +24792,10 @@ declare namespace imports.gi.Gio {
 		public _g_reserved10: {(): void;};
 	}
 
+	export interface SocketClientClassInitOptions {}
 	interface SocketClientClass {}
 	class SocketClientClass {
-		public constructor();
+		public constructor(options?: Partial<SocketClientClassInitOptions>);
 		public event: {(client: SocketClient, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream): void;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -23797,18 +24803,20 @@ declare namespace imports.gi.Gio {
 		public _g_reserved4: {(): void;};
 	}
 
+	export interface SocketClientPrivateInitOptions {}
 	interface SocketClientPrivate {}
 	class SocketClientPrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketClientPrivateInitOptions>);
 	}
 
+	export interface SocketConnectableIfaceInitOptions {}
 	/**
 	 * Provides an interface for returning a #GSocketAddressEnumerator
 	 * and #GProxyAddressEnumerator
 	 */
 	interface SocketConnectableIface {}
 	class SocketConnectableIface {
-		public constructor();
+		public constructor(options?: Partial<SocketConnectableIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -23818,9 +24826,10 @@ declare namespace imports.gi.Gio {
 		public to_string: {(connectable: SocketConnectable): string;};
 	}
 
+	export interface SocketConnectionClassInitOptions {}
 	interface SocketConnectionClass {}
 	class SocketConnectionClass {
-		public constructor();
+		public constructor(options?: Partial<SocketConnectionClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -23829,17 +24838,19 @@ declare namespace imports.gi.Gio {
 		public _g_reserved6: {(): void;};
 	}
 
+	export interface SocketConnectionPrivateInitOptions {}
 	interface SocketConnectionPrivate {}
 	class SocketConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketConnectionPrivateInitOptions>);
 	}
 
+	export interface SocketControlMessageClassInitOptions {}
 	/**
 	 * Class structure for #GSocketControlMessage.
 	 */
 	interface SocketControlMessageClass {}
 	class SocketControlMessageClass {
-		public constructor();
+		public constructor(options?: Partial<SocketControlMessageClassInitOptions>);
 		public get_size: {(message: SocketControlMessage): number;};
 		public get_level: {(message: SocketControlMessage): number;};
 		public get_type: {(message: SocketControlMessage): number;};
@@ -23852,17 +24863,19 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface SocketControlMessagePrivateInitOptions {}
 	interface SocketControlMessagePrivate {}
 	class SocketControlMessagePrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketControlMessagePrivateInitOptions>);
 	}
 
+	export interface SocketListenerClassInitOptions {}
 	/**
 	 * Class structure for #GSocketListener.
 	 */
 	interface SocketListenerClass {}
 	class SocketListenerClass {
-		public constructor();
+		public constructor(options?: Partial<SocketListenerClassInitOptions>);
 		public changed: {(listener: SocketListener): void;};
 		public event: {(listener: SocketListener, event: SocketListenerEvent, socket: Socket): void;};
 		public _g_reserved2: {(): void;};
@@ -23872,22 +24885,25 @@ declare namespace imports.gi.Gio {
 		public _g_reserved6: {(): void;};
 	}
 
+	export interface SocketListenerPrivateInitOptions {}
 	interface SocketListenerPrivate {}
 	class SocketListenerPrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketListenerPrivateInitOptions>);
 	}
 
+	export interface SocketPrivateInitOptions {}
 	interface SocketPrivate {}
 	class SocketPrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketPrivateInitOptions>);
 	}
 
+	export interface SocketServiceClassInitOptions {}
 	/**
 	 * Class structure for #GSocketService.
 	 */
 	interface SocketServiceClass {}
 	class SocketServiceClass {
-		public constructor();
+		public constructor(options?: Partial<SocketServiceClassInitOptions>);
 		public incoming: {(service: SocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -23897,11 +24913,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved6: {(): void;};
 	}
 
+	export interface SocketServicePrivateInitOptions {}
 	interface SocketServicePrivate {}
 	class SocketServicePrivate {
-		public constructor();
+		public constructor(options?: Partial<SocketServicePrivateInitOptions>);
 	}
 
+	export interface SrvTargetInitOptions {}
 	/**
 	 * SRV (service) records are used by some network protocols to provide
 	 * service-specific aliasing and load-balancing. For example, XMPP
@@ -23920,7 +24938,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface SrvTarget {}
 	class SrvTarget {
-		public constructor();
+		public constructor(options?: Partial<SrvTargetInitOptions>);
 		/**
 		 * Creates a new #GSrvTarget with the given parameters.
 		 * 
@@ -23971,13 +24989,14 @@ declare namespace imports.gi.Gio {
 		public get_weight(): number;
 	}
 
+	export interface StaticResourceInitOptions {}
 	/**
 	 * #GStaticResource is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface StaticResource {}
 	class StaticResource {
-		public constructor();
+		public constructor(options?: Partial<StaticResourceInitOptions>);
 		public readonly data: number;
 		public readonly data_len: number;
 		public readonly resource: Resource;
@@ -24011,39 +25030,46 @@ declare namespace imports.gi.Gio {
 		public init(): void;
 	}
 
+	export interface TaskClassInitOptions {}
 	interface TaskClass {}
 	class TaskClass {
-		public constructor();
+		public constructor(options?: Partial<TaskClassInitOptions>);
 	}
 
+	export interface TcpConnectionClassInitOptions {}
 	interface TcpConnectionClass {}
 	class TcpConnectionClass {
-		public constructor();
+		public constructor(options?: Partial<TcpConnectionClassInitOptions>);
 	}
 
+	export interface TcpConnectionPrivateInitOptions {}
 	interface TcpConnectionPrivate {}
 	class TcpConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TcpConnectionPrivateInitOptions>);
 	}
 
+	export interface TcpWrapperConnectionClassInitOptions {}
 	interface TcpWrapperConnectionClass {}
 	class TcpWrapperConnectionClass {
-		public constructor();
+		public constructor(options?: Partial<TcpWrapperConnectionClassInitOptions>);
 	}
 
+	export interface TcpWrapperConnectionPrivateInitOptions {}
 	interface TcpWrapperConnectionPrivate {}
 	class TcpWrapperConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TcpWrapperConnectionPrivateInitOptions>);
 	}
 
+	export interface ThemedIconClassInitOptions {}
 	interface ThemedIconClass {}
 	class ThemedIconClass {
-		public constructor();
+		public constructor(options?: Partial<ThemedIconClassInitOptions>);
 	}
 
+	export interface ThreadedSocketServiceClassInitOptions {}
 	interface ThreadedSocketServiceClass {}
 	class ThreadedSocketServiceClass {
-		public constructor();
+		public constructor(options?: Partial<ThreadedSocketServiceClassInitOptions>);
 		public run: {(service: ThreadedSocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
@@ -24052,17 +25078,19 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface ThreadedSocketServicePrivateInitOptions {}
 	interface ThreadedSocketServicePrivate {}
 	class ThreadedSocketServicePrivate {
-		public constructor();
+		public constructor(options?: Partial<ThreadedSocketServicePrivateInitOptions>);
 	}
 
+	export interface TlsBackendInterfaceInitOptions {}
 	/**
 	 * Provides an interface for describing TLS-related types.
 	 */
 	interface TlsBackendInterface {}
 	class TlsBackendInterface {
-		public constructor();
+		public constructor(options?: Partial<TlsBackendInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -24078,24 +25106,27 @@ declare namespace imports.gi.Gio {
 		public get_dtls_server_connection_type: {(): GObject.Type;};
 	}
 
+	export interface TlsCertificateClassInitOptions {}
 	interface TlsCertificateClass {}
 	class TlsCertificateClass {
-		public constructor();
+		public constructor(options?: Partial<TlsCertificateClassInitOptions>);
 		public readonly padding: any[];
 		public verify: {(cert: TlsCertificate, identity: SocketConnectable | null, trusted_ca: TlsCertificate | null): TlsCertificateFlags;};
 	}
 
+	export interface TlsCertificatePrivateInitOptions {}
 	interface TlsCertificatePrivate {}
 	class TlsCertificatePrivate {
-		public constructor();
+		public constructor(options?: Partial<TlsCertificatePrivateInitOptions>);
 	}
 
+	export interface TlsClientConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsClientConnection implementation.
 	 */
 	interface TlsClientConnectionInterface {}
 	class TlsClientConnectionInterface {
-		public constructor();
+		public constructor(options?: Partial<TlsClientConnectionInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -24103,12 +25134,13 @@ declare namespace imports.gi.Gio {
 		public copy_session_state: {(conn: TlsClientConnection, source: TlsClientConnection): void;};
 	}
 
+	export interface TlsConnectionClassInitOptions {}
 	/**
 	 * The class structure for the #GTlsConnection type.
 	 */
 	interface TlsConnectionClass {}
 	class TlsConnectionClass {
-		public constructor();
+		public constructor(options?: Partial<TlsConnectionClassInitOptions>);
 		public readonly padding: any[];
 		public accept_certificate: {(connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;};
 		public handshake: {(conn: TlsConnection, cancellable: Cancellable | null): boolean;};
@@ -24118,11 +25150,13 @@ declare namespace imports.gi.Gio {
 		public get_negotiated_protocol: {(conn: TlsConnection): string | null;};
 	}
 
+	export interface TlsConnectionPrivateInitOptions {}
 	interface TlsConnectionPrivate {}
 	class TlsConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TlsConnectionPrivateInitOptions>);
 	}
 
+	export interface TlsDatabaseClassInitOptions {}
 	/**
 	 * The class for #GTlsDatabase. Derived classes should implement the various
 	 * virtual methods. _async and _finish methods have a default
@@ -24130,7 +25164,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface TlsDatabaseClass {}
 	class TlsDatabaseClass {
-		public constructor();
+		public constructor(options?: Partial<TlsDatabaseClassInitOptions>);
 		public readonly padding: any[];
 		public verify_chain: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null): TlsCertificateFlags;};
 		public verify_chain_async: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
@@ -24147,17 +25181,19 @@ declare namespace imports.gi.Gio {
 		public lookup_certificates_issued_by_finish: {(self: TlsDatabase, result: AsyncResult): GLib.List;};
 	}
 
+	export interface TlsDatabasePrivateInitOptions {}
 	interface TlsDatabasePrivate {}
 	class TlsDatabasePrivate {
-		public constructor();
+		public constructor(options?: Partial<TlsDatabasePrivateInitOptions>);
 	}
 
+	export interface TlsFileDatabaseInterfaceInitOptions {}
 	/**
 	 * Provides an interface for #GTlsFileDatabase implementations.
 	 */
 	interface TlsFileDatabaseInterface {}
 	class TlsFileDatabaseInterface {
-		public constructor();
+		public constructor(options?: Partial<TlsFileDatabaseInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -24165,6 +25201,7 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
+	export interface TlsInteractionClassInitOptions {}
 	/**
 	 * The class for #GTlsInteraction. Derived classes implement the various
 	 * virtual interaction methods to handle TLS interactions.
@@ -24183,7 +25220,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface TlsInteractionClass {}
 	class TlsInteractionClass {
-		public constructor();
+		public constructor(options?: Partial<TlsInteractionClassInitOptions>);
 		public readonly padding: any[];
 		public ask_password: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null): TlsInteractionResult;};
 		public ask_password_async: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
@@ -24193,68 +25230,77 @@ declare namespace imports.gi.Gio {
 		public request_certificate_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
 	}
 
+	export interface TlsInteractionPrivateInitOptions {}
 	interface TlsInteractionPrivate {}
 	class TlsInteractionPrivate {
-		public constructor();
+		public constructor(options?: Partial<TlsInteractionPrivateInitOptions>);
 	}
 
+	export interface TlsPasswordClassInitOptions {}
 	/**
 	 * Class structure for #GTlsPassword.
 	 */
 	interface TlsPasswordClass {}
 	class TlsPasswordClass {
-		public constructor();
+		public constructor(options?: Partial<TlsPasswordClassInitOptions>);
 		public readonly padding: any[];
-		public get_value: {(password: TlsPassword): number[];};
+		public get_value: {(password: TlsPassword): [ number[], number ];};
 		public set_value: {(password: TlsPassword, value: number[], length: number, destroy: GLib.DestroyNotify | null): void;};
 		public get_default_warning: {(password: TlsPassword): string;};
 	}
 
+	export interface TlsPasswordPrivateInitOptions {}
 	interface TlsPasswordPrivate {}
 	class TlsPasswordPrivate {
-		public constructor();
+		public constructor(options?: Partial<TlsPasswordPrivateInitOptions>);
 	}
 
+	export interface TlsServerConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsServerConnection implementation.
 	 */
 	interface TlsServerConnectionInterface {}
 	class TlsServerConnectionInterface {
-		public constructor();
+		public constructor(options?: Partial<TlsServerConnectionInterfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
+	export interface UnixConnectionClassInitOptions {}
 	interface UnixConnectionClass {}
 	class UnixConnectionClass {
-		public constructor();
+		public constructor(options?: Partial<UnixConnectionClassInitOptions>);
 	}
 
+	export interface UnixConnectionPrivateInitOptions {}
 	interface UnixConnectionPrivate {}
 	class UnixConnectionPrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixConnectionPrivateInitOptions>);
 	}
 
+	export interface UnixCredentialsMessageClassInitOptions {}
 	/**
 	 * Class structure for #GUnixCredentialsMessage.
 	 */
 	interface UnixCredentialsMessageClass {}
 	class UnixCredentialsMessageClass {
-		public constructor();
+		public constructor(options?: Partial<UnixCredentialsMessageClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
 
+	export interface UnixCredentialsMessagePrivateInitOptions {}
 	interface UnixCredentialsMessagePrivate {}
 	class UnixCredentialsMessagePrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixCredentialsMessagePrivateInitOptions>);
 	}
 
+	export interface UnixFDListClassInitOptions {}
 	interface UnixFDListClass {}
 	class UnixFDListClass {
-		public constructor();
+		public constructor(options?: Partial<UnixFDListClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -24262,26 +25308,30 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface UnixFDListPrivateInitOptions {}
 	interface UnixFDListPrivate {}
 	class UnixFDListPrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixFDListPrivateInitOptions>);
 	}
 
+	export interface UnixFDMessageClassInitOptions {}
 	interface UnixFDMessageClass {}
 	class UnixFDMessageClass {
-		public constructor();
+		public constructor(options?: Partial<UnixFDMessageClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 	}
 
+	export interface UnixFDMessagePrivateInitOptions {}
 	interface UnixFDMessagePrivate {}
 	class UnixFDMessagePrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixFDMessagePrivateInitOptions>);
 	}
 
+	export interface UnixInputStreamClassInitOptions {}
 	interface UnixInputStreamClass {}
 	class UnixInputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<UnixInputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -24289,32 +25339,36 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface UnixInputStreamPrivateInitOptions {}
 	interface UnixInputStreamPrivate {}
 	class UnixInputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixInputStreamPrivateInitOptions>);
 	}
 
+	export interface UnixMountEntryInitOptions {}
 	/**
 	 * Defines a Unix mount entry (e.g. <filename>/media/cdrom</filename>).
 	 * This corresponds roughly to a mtab entry.
 	 */
 	interface UnixMountEntry {}
 	class UnixMountEntry {
-		public constructor();
+		public constructor(options?: Partial<UnixMountEntryInitOptions>);
 	}
 
+	export interface UnixMountMonitorClassInitOptions {}
 	interface UnixMountMonitorClass {}
 	class UnixMountMonitorClass {
-		public constructor();
+		public constructor(options?: Partial<UnixMountMonitorClassInitOptions>);
 	}
 
+	export interface UnixMountPointInitOptions {}
 	/**
 	 * Defines a Unix mount point (e.g. <filename>/dev</filename>).
 	 * This corresponds roughly to a fstab entry.
 	 */
 	interface UnixMountPoint {}
 	class UnixMountPoint {
-		public constructor();
+		public constructor(options?: Partial<UnixMountPointInitOptions>);
 		/**
 		 * Compares two unix mount points.
 		 * @param mount2 a #GUnixMount.
@@ -24390,9 +25444,10 @@ declare namespace imports.gi.Gio {
 		public is_user_mountable(): boolean;
 	}
 
+	export interface UnixOutputStreamClassInitOptions {}
 	interface UnixOutputStreamClass {}
 	class UnixOutputStreamClass {
-		public constructor();
+		public constructor(options?: Partial<UnixOutputStreamClassInitOptions>);
 		public _g_reserved1: {(): void;};
 		public _g_reserved2: {(): void;};
 		public _g_reserved3: {(): void;};
@@ -24400,24 +25455,28 @@ declare namespace imports.gi.Gio {
 		public _g_reserved5: {(): void;};
 	}
 
+	export interface UnixOutputStreamPrivateInitOptions {}
 	interface UnixOutputStreamPrivate {}
 	class UnixOutputStreamPrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixOutputStreamPrivateInitOptions>);
 	}
 
+	export interface UnixSocketAddressClassInitOptions {}
 	interface UnixSocketAddressClass {}
 	class UnixSocketAddressClass {
-		public constructor();
+		public constructor(options?: Partial<UnixSocketAddressClassInitOptions>);
 	}
 
+	export interface UnixSocketAddressPrivateInitOptions {}
 	interface UnixSocketAddressPrivate {}
 	class UnixSocketAddressPrivate {
-		public constructor();
+		public constructor(options?: Partial<UnixSocketAddressPrivateInitOptions>);
 	}
 
+	export interface VfsClassInitOptions {}
 	interface VfsClass {}
 	class VfsClass {
-		public constructor();
+		public constructor(options?: Partial<VfsClassInitOptions>);
 		public is_active: {(vfs: Vfs): boolean;};
 		public get_file_for_path: {(vfs: Vfs, path: string): File;};
 		public get_file_for_uri: {(vfs: Vfs, uri: string): File;};
@@ -24437,12 +25496,13 @@ declare namespace imports.gi.Gio {
 		public _g_reserved6: {(): void;};
 	}
 
+	export interface VolumeIfaceInitOptions {}
 	/**
 	 * Interface for implementing operations for mountable volumes.
 	 */
 	interface VolumeIface {}
 	class VolumeIface {
-		public constructor();
+		public constructor(options?: Partial<VolumeIfaceInitOptions>);
 		/**
 		 * The parent interface.
 		 */
@@ -24470,9 +25530,10 @@ declare namespace imports.gi.Gio {
 		public get_symbolic_icon: {(volume: Volume): Icon;};
 	}
 
+	export interface VolumeMonitorClassInitOptions {}
 	interface VolumeMonitorClass {}
 	class VolumeMonitorClass {
-		public constructor();
+		public constructor(options?: Partial<VolumeMonitorClassInitOptions>);
 		public volume_added: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
 		public volume_removed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
 		public volume_changed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
@@ -24500,14 +25561,16 @@ declare namespace imports.gi.Gio {
 		public _g_reserved6: {(): void;};
 	}
 
+	export interface ZlibCompressorClassInitOptions {}
 	interface ZlibCompressorClass {}
 	class ZlibCompressorClass {
-		public constructor();
+		public constructor(options?: Partial<ZlibCompressorClassInitOptions>);
 	}
 
+	export interface ZlibDecompressorClassInitOptions {}
 	interface ZlibDecompressorClass {}
 	class ZlibDecompressorClass {
-		public constructor();
+		public constructor(options?: Partial<ZlibDecompressorClassInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -24649,6 +25712,15 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ActionInitOptionsMixin = Pick<IAction,
+		"enabled" |
+		"name" |
+		"parameter_type" |
+		"state" |
+		"state_type">;
+
+	export interface ActionInitOptions extends ActionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
@@ -24688,7 +25760,7 @@ declare namespace imports.gi.Gio {
 	interface Action extends ActionMixin {}
 
 	class Action {
-		public constructor();
+		public constructor(options?: Partial<ActionInitOptions>);
 		/**
 		 * Checks if #action_name is valid.
 		 * 
@@ -24728,8 +25800,12 @@ declare namespace imports.gi.Gio {
 		 * empty or contains characters other than alphanumerics, '-' and '.'.
 		 * @param detailed_name a detailed action name
 		 * @returns %TRUE if successful, else %FALSE with #error set
+		 * 
+		 * the action name
+		 * 
+		 * the target value, or %NULL for no target
 		 */
-		public static parse_detailed_name(detailed_name: string): boolean;
+		public static parse_detailed_name(detailed_name: string): [ boolean, string, GLib.Variant ];
 		/**
 		 * Formats a detailed action name from #action_name and #target_value.
 		 * 
@@ -24967,8 +26043,18 @@ declare namespace imports.gi.Gio {
 		 * fields may or may not have been modified.
 		 * @param action_name the name of an action in the group
 		 * @returns %TRUE if the action exists, else %FALSE
+		 * 
+		 * if the action is presently enabled
+		 * 
+		 * the parameter type, or %NULL if none needed
+		 * 
+		 * the state type, or %NULL if stateless
+		 * 
+		 * the state hint, or %NULL if none
+		 * 
+		 * the current state, or %NULL if stateless
 		 */
-		query_action(action_name: string): boolean;
+		query_action(action_name: string): [ boolean, boolean, GLib.VariantType | null, GLib.VariantType | null, GLib.Variant | null, GLib.Variant | null ];
 		/**
 		 * Signals that a new action was just added to the group.
 		 * This signal is emitted after the action has been added
@@ -24991,6 +26077,9 @@ declare namespace imports.gi.Gio {
 		connect(signal: "action-state-changed", callback: (owner: this, action_name: string, value: GLib.Variant) => void): number;
 
 	}
+
+	type ActionGroupInitOptionsMixin  = {};
+	export interface ActionGroupInitOptions extends ActionGroupInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionGroup} instead.
@@ -25047,7 +26136,7 @@ declare namespace imports.gi.Gio {
 	interface ActionGroup extends ActionGroupMixin {}
 
 	class ActionGroup {
-		public constructor();
+		public constructor(options?: Partial<ActionGroupInitOptions>);
 	}
 
 
@@ -25126,6 +26215,9 @@ declare namespace imports.gi.Gio {
 		remove_action(action_name: string): void;
 	}
 
+	type ActionMapInitOptionsMixin  = {};
+	export interface ActionMapInitOptions extends ActionMapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ActionMap} instead.
 	 */
@@ -25145,7 +26237,7 @@ declare namespace imports.gi.Gio {
 	interface ActionMap extends ActionMapMixin {}
 
 	class ActionMap {
-		public constructor();
+		public constructor(options?: Partial<ActionMapInitOptions>);
 	}
 
 
@@ -25370,6 +26462,9 @@ declare namespace imports.gi.Gio {
 		supports_uris(): boolean;
 	}
 
+	type AppInfoInitOptionsMixin  = {};
+	export interface AppInfoInitOptions extends AppInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppInfo} instead.
 	 */
@@ -25428,7 +26523,7 @@ declare namespace imports.gi.Gio {
 	interface AppInfo extends AppInfoMixin {}
 
 	class AppInfo {
-		public constructor();
+		public constructor(options?: Partial<AppInfoInitOptions>);
 		/**
 		 * Creates a new #GAppInfo from the given information.
 		 * 
@@ -25619,6 +26714,9 @@ declare namespace imports.gi.Gio {
 		new_finish(res: AsyncResult): GObject.Object;
 	}
 
+	type AsyncInitableInitOptionsMixin  = {};
+	export interface AsyncInitableInitOptions extends AsyncInitableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AsyncInitable} instead.
 	 */
@@ -25728,7 +26826,7 @@ declare namespace imports.gi.Gio {
 	interface AsyncInitable extends AsyncInitableMixin {}
 
 	class AsyncInitable {
-		public constructor();
+		public constructor(options?: Partial<AsyncInitableInitOptions>);
 		/**
 		 * Helper function for constructing #GAsyncInitable object. This is
 		 * similar to g_object_new() but also initializes the object asynchronously.
@@ -25822,6 +26920,9 @@ declare namespace imports.gi.Gio {
 		 */
 		legacy_propagate_error(): boolean;
 	}
+
+	type AsyncResultInitOptionsMixin  = {};
+	export interface AsyncResultInitOptions extends AsyncResultInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AsyncResult} instead.
@@ -25917,7 +27018,7 @@ declare namespace imports.gi.Gio {
 	interface AsyncResult extends AsyncResultMixin {}
 
 	class AsyncResult {
-		public constructor();
+		public constructor(options?: Partial<AsyncResultInitOptions>);
 	}
 
 
@@ -26017,8 +27118,12 @@ declare namespace imports.gi.Gio {
 		 * @param outbuf_size the number of bytes in #outbuf, must be at least one
 		 * @param flags a #GConverterFlags controlling the conversion details
 		 * @returns a #GConverterResult, %G_CONVERTER_ERROR on error.
+		 * 
+		 * will be set to the number of bytes read from #inbuf on success
+		 * 
+		 * will be set to the number of bytes written to #outbuf on success
 		 */
-		convert(inbuf: number[], inbuf_size: number, outbuf: number[], outbuf_size: number, flags: ConverterFlags): ConverterResult;
+		convert(inbuf: number[], inbuf_size: number, outbuf: number[], outbuf_size: number, flags: ConverterFlags): [ ConverterResult, number, number ];
 		/**
 		 * Resets all internal state in the converter, making it behave
 		 * as if it was just created. If the converter has any internal
@@ -26026,6 +27131,9 @@ declare namespace imports.gi.Gio {
 		 */
 		reset(): void;
 	}
+
+	type ConverterInitOptionsMixin  = {};
+	export interface ConverterInitOptions extends ConverterInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Converter} instead.
@@ -26044,7 +27152,7 @@ declare namespace imports.gi.Gio {
 	interface Converter extends ConverterMixin {}
 
 	class Converter {
-		public constructor();
+		public constructor(options?: Partial<ConverterInitOptions>);
 	}
 
 
@@ -26084,6 +27192,9 @@ declare namespace imports.gi.Gio {
 		set_object(object: DBusObject | null): void;
 	}
 
+	type DBusInterfaceInitOptionsMixin  = {};
+	export interface DBusInterfaceInitOptions extends DBusInterfaceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusInterface} instead.
 	 */
@@ -26097,7 +27208,7 @@ declare namespace imports.gi.Gio {
 	interface DBusInterface extends DBusInterfaceMixin {}
 
 	class DBusInterface {
-		public constructor();
+		public constructor(options?: Partial<DBusInterfaceInitOptions>);
 	}
 
 
@@ -26137,6 +27248,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectInitOptionsMixin  = {};
+	export interface DBusObjectInitOptions extends DBusObjectInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObject} instead.
 	 */
@@ -26151,7 +27265,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObject extends DBusObjectMixin {}
 
 	class DBusObject {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectInitOptions>);
 	}
 
 
@@ -26214,6 +27328,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DBusObjectManagerInitOptionsMixin  = {};
+	export interface DBusObjectManagerInitOptions extends DBusObjectManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DBusObjectManager} instead.
 	 */
@@ -26231,7 +27348,7 @@ declare namespace imports.gi.Gio {
 	interface DBusObjectManager extends DBusObjectManagerMixin {}
 
 	class DBusObjectManager {
-		public constructor();
+		public constructor(options?: Partial<DBusObjectManagerInitOptions>);
 	}
 
 
@@ -26435,6 +27552,9 @@ declare namespace imports.gi.Gio {
 		// send_messages(messages: OutputMessage[], num_messages: number, flags: number, timeout: number, cancellable: Cancellable | null): number;
 	}
 
+	type DatagramBasedInitOptionsMixin  = {};
+	export interface DatagramBasedInitOptions extends DatagramBasedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DatagramBased} instead.
 	 */
@@ -26492,7 +27612,7 @@ declare namespace imports.gi.Gio {
 	interface DatagramBased extends DatagramBasedMixin {}
 
 	class DatagramBased {
-		public constructor();
+		public constructor(options?: Partial<DatagramBasedInitOptions>);
 	}
 
 
@@ -26517,6 +27637,9 @@ declare namespace imports.gi.Gio {
 		get_default_for_uri_scheme(uri_scheme: string): AppInfo | null;
 	}
 
+	type DesktopAppInfoLookupInitOptionsMixin  = {};
+	export interface DesktopAppInfoLookupInitOptions extends DesktopAppInfoLookupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopAppInfoLookup} instead.
 	 */
@@ -26529,7 +27652,7 @@ declare namespace imports.gi.Gio {
 	interface DesktopAppInfoLookup extends DesktopAppInfoLookupMixin {}
 
 	class DesktopAppInfoLookup {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoLookupInitOptions>);
 	}
 
 
@@ -26765,6 +27888,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DriveInitOptionsMixin  = {};
+	export interface DriveInitOptions extends DriveInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Drive} instead.
 	 */
@@ -26801,7 +27927,7 @@ declare namespace imports.gi.Gio {
 	interface Drive extends DriveMixin {}
 
 	class Drive {
-		public constructor();
+		public constructor(options?: Partial<DriveInitOptions>);
 	}
 
 
@@ -26890,6 +28016,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DtlsClientConnectionInitOptionsMixin = Pick<IDtlsClientConnection,
+		"accepted_cas" |
+		"server_identity" |
+		"validation_flags">;
+
+	export interface DtlsClientConnectionInitOptions extends DtlsClientConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DtlsClientConnection} instead.
 	 */
@@ -26902,7 +28035,7 @@ declare namespace imports.gi.Gio {
 	interface DtlsClientConnection extends DtlsClientConnectionMixin {}
 
 	class DtlsClientConnection {
-		public constructor();
+		public constructor(options?: Partial<DtlsClientConnectionInitOptions>);
 		/**
 		 * Creates a new #GDtlsClientConnection wrapping #base_socket which is
 		 * assumed to communicate with the server identified by #server_identity.
@@ -27060,8 +28193,11 @@ declare namespace imports.gi.Gio {
 		 * negotiation or input required.
 		 * @param type #GTlsChannelBindingType type of data to fetch
 		 * @returns %TRUE on success, %FALSE otherwise
+		 * 
+		 * #GByteArray is
+		 *        filled with the binding data, or %NULL
 		 */
-		get_channel_binding_data(type: TlsChannelBindingType): boolean;
+		get_channel_binding_data(type: TlsChannelBindingType): [ boolean, number[] | null ];
 		/**
 		 * Returns the name of the current DTLS ciphersuite, or %NULL if the
 		 * connection has not handshaked or has been closed. Beware that the TLS
@@ -27369,6 +28505,22 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DtlsConnectionInitOptionsMixin = Pick<IDtlsConnection,
+		"advertised_protocols" |
+		"base_socket" |
+		"certificate" |
+		"ciphersuite_name" |
+		"database" |
+		"interaction" |
+		"negotiated_protocol" |
+		"peer_certificate" |
+		"peer_certificate_errors" |
+		"protocol_version" |
+		"rehandshake_mode" |
+		"require_close_notify">;
+
+	export interface DtlsConnectionInitOptions extends DtlsConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DtlsConnection} instead.
 	 */
@@ -27398,7 +28550,7 @@ declare namespace imports.gi.Gio {
 	interface DtlsConnection extends DtlsConnectionMixin {}
 
 	class DtlsConnection {
-		public constructor();
+		public constructor(options?: Partial<DtlsConnectionInitOptions>);
 	}
 
 
@@ -27418,6 +28570,11 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type DtlsServerConnectionInitOptionsMixin = Pick<IDtlsServerConnection,
+		"authentication_mode">;
+
+	export interface DtlsServerConnectionInitOptions extends DtlsServerConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DtlsServerConnection} instead.
 	 */
@@ -27430,7 +28587,7 @@ declare namespace imports.gi.Gio {
 	interface DtlsServerConnection extends DtlsServerConnectionMixin {}
 
 	class DtlsServerConnection {
-		public constructor();
+		public constructor(options?: Partial<DtlsServerConnectionInitOptions>);
 		/**
 		 * Creates a new #GDtlsServerConnection wrapping #base_socket.
 		 * @param base_socket the #GDatagramBased to wrap
@@ -28152,8 +29309,11 @@ declare namespace imports.gi.Gio {
 		 * freed with g_bytes_unref() when no longer in use.
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns a #GBytes or %NULL and #error is set
+		 * 
+		 * a location to place the current
+		 *     entity tag for the file, or %NULL if the entity tag is not needed
 		 */
-		load_bytes(cancellable: Cancellable | null): GLib.Bytes;
+		load_bytes(cancellable: Cancellable | null): [ GLib.Bytes, string | null ];
 		/**
 		 * Asynchronously loads the contents of #file as #GBytes.
 		 * 
@@ -28182,8 +29342,11 @@ declare namespace imports.gi.Gio {
 		 * See g_file_load_bytes() for more information.
 		 * @param result a #GAsyncResult provided to the callback
 		 * @returns a #GBytes or %NULL and #error is set
+		 * 
+		 * a location to place the current
+		 *     entity tag for the file, or %NULL if the entity tag is not needed
 		 */
-		load_bytes_finish(result: AsyncResult): GLib.Bytes;
+		load_bytes_finish(result: AsyncResult): [ GLib.Bytes, string | null ];
 		/**
 		 * Loads the content of the file into memory. The data is always
 		 * zero-terminated, but this is not included in the resultant #length.
@@ -28196,6 +29359,14 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @returns %TRUE if the #file's contents were successfully loaded.
 		 *     %FALSE if there were errors.
+		 * 
+		 * a location to place the contents of the file
+		 * 
+		 * a location to place the length of the contents of the file,
+		 *    or %NULL if the length is not needed
+		 * 
+		 * a location to place the current entity tag for the file,
+		 *    or %NULL if the entity tag is not needed
 		 */
 		load_contents(cancellable: Cancellable | null): [success: boolean, contents: Uint8Array];
 		/**
@@ -28225,8 +29396,16 @@ declare namespace imports.gi.Gio {
 		 * @param res a #GAsyncResult
 		 * @returns %TRUE if the load was successful. If %FALSE and #error is
 		 *     present, it will be set appropriately.
+		 * 
+		 * a location to place the contents of the file
+		 * 
+		 * a location to place the length of the contents of the file,
+		 *     or %NULL if the length is not needed
+		 * 
+		 * a location to place the current entity tag for the file,
+		 *     or %NULL if the entity tag is not needed
 		 */
-		load_contents_finish(res: AsyncResult): boolean;
+		load_contents_finish(res: AsyncResult): [ boolean, number[], number | null, string | null ];
 		/**
 		 * Reads the partial contents of a file. A #GFileReadMoreCallback should
 		 * be used to stop reading from the file when appropriate, else this
@@ -28256,8 +29435,16 @@ declare namespace imports.gi.Gio {
 		 * @param res a #GAsyncResult
 		 * @returns %TRUE if the load was successful. If %FALSE and #error is
 		 *     present, it will be set appropriately.
+		 * 
+		 * a location to place the contents of the file
+		 * 
+		 * a location to place the length of the contents of the file,
+		 *     or %NULL if the length is not needed
+		 * 
+		 * a location to place the current entity tag for the file,
+		 *     or %NULL if the entity tag is not needed
 		 */
-		load_partial_contents_finish(res: AsyncResult): boolean;
+		load_partial_contents_finish(res: AsyncResult): [ boolean, number[], number | null, string | null ];
 		/**
 		 * Creates a directory. Note that this will only create a child directory
 		 * of the immediate parent directory of the path or URI given by the #GFile.
@@ -28353,8 +29540,14 @@ declare namespace imports.gi.Gio {
 		 * @param progress_data user_data for #progress_callback
 		 * @returns %TRUE if successful, with the out parameters set.
 		 *          %FALSE otherwise, with #error set.
+		 * 
+		 * the number of bytes of disk space used
+		 * 
+		 * the number of directories encountered
+		 * 
+		 * the number of non-directories encountered
 		 */
-		measure_disk_usage(flags: FileMeasureFlags, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null): boolean;
+		measure_disk_usage(flags: FileMeasureFlags, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null): [ boolean, number | null, number | null, number | null ];
 		/**
 		 * Recursively measures the disk usage of #file.
 		 * 
@@ -28375,8 +29568,14 @@ declare namespace imports.gi.Gio {
 		 * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
 		 * @returns %TRUE if successful, with the out parameters set.
 		 *          %FALSE otherwise, with #error set.
+		 * 
+		 * the number of bytes of disk space used
+		 * 
+		 * the number of directories encountered
+		 * 
+		 * the number of non-directories encountered
 		 */
-		measure_disk_usage_finish(result: AsyncResult): boolean;
+		measure_disk_usage_finish(result: AsyncResult): [ boolean, number | null, number | null, number | null ];
 		/**
 		 * Obtains a file or directory monitor for the given file,
 		 * depending on the type of the file.
@@ -28994,8 +30193,12 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @returns %TRUE if successful. If an error has occurred, this function
 		 *     will return %FALSE and set #error appropriately if present.
+		 * 
+		 * a location to a new [entity tag][gfile-etag]
+		 *      for the document. This should be freed with g_free() when no longer
+		 *      needed, or %NULL
 		 */
-		replace_contents(contents: string, etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null): boolean;
+		replace_contents(contents: string, etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null): [ boolean, string | null ];
 		/**
 		 * Starts an asynchronous replacement of #file with the given
 		 * #contents of #length bytes. #etag will replace the document's
@@ -29048,8 +30251,12 @@ declare namespace imports.gi.Gio {
 		 * tag for the document, if present.
 		 * @param res a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE on failure.
+		 * 
+		 * a location of a new [entity tag][gfile-etag]
+		 *     for the document. This should be freed with g_free() when it is no
+		 *     longer needed, or %NULL
 		 */
-		replace_contents_finish(res: AsyncResult): boolean;
+		replace_contents_finish(res: AsyncResult): [ boolean, string | null ];
 		/**
 		 * Finishes an asynchronous file replace operation started with
 		 * g_file_replace_async().
@@ -29254,8 +30461,10 @@ declare namespace imports.gi.Gio {
 		 * Finishes setting an attribute started in g_file_set_attributes_async().
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the attributes were set correctly, %FALSE otherwise.
+		 * 
+		 * a #GFileInfo
 		 */
-		set_attributes_finish(result: AsyncResult): boolean;
+		set_attributes_finish(result: AsyncResult): [ boolean, FileInfo ];
 		/**
 		 * Tries to set all attributes in the #GFileInfo on the target
 		 * values, not stopping on the first error.
@@ -29481,6 +30690,9 @@ declare namespace imports.gi.Gio {
 		unmount_mountable_with_operation_finish(result: AsyncResult): boolean;
 	}
 
+	type FileInitOptionsMixin  = {};
+	export interface FileInitOptions extends FileInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link File} instead.
 	 */
@@ -29572,7 +30784,7 @@ declare namespace imports.gi.Gio {
 	interface File extends FileMixin {}
 
 	class File {
-		public constructor();
+		public constructor(options?: Partial<FileInitOptions>);
 		/**
 		 * Constructs a #GFile from a series of elements using the correct
 		 * separator for filenames.
@@ -29655,8 +30867,10 @@ declare namespace imports.gi.Gio {
 		 *   name, as in g_file_open_tmp(), or %NULL for a default template
 		 * @returns a new #GFile.
 		 *     Free the returned object with g_object_unref().
+		 * 
+		 * on return, a #GFileIOStream for the created file
 		 */
-		public static new_tmp(tmpl: string | null): File;
+		public static new_tmp(tmpl: string | null): [ File, FileIOStream ];
 		/**
 		 * Constructs a #GFile with the given #parse_name (i.e. something
 		 * given by g_file_get_parse_name()). This operation never fails,
@@ -29681,6 +30895,9 @@ declare namespace imports.gi.Gio {
 		get_fd(): number;
 	}
 
+	type FileDescriptorBasedInitOptionsMixin  = {};
+	export interface FileDescriptorBasedInitOptions extends FileDescriptorBasedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileDescriptorBased} instead.
 	 */
@@ -29697,7 +30914,7 @@ declare namespace imports.gi.Gio {
 	interface FileDescriptorBased extends FileDescriptorBasedMixin {}
 
 	class FileDescriptorBased {
-		public constructor();
+		public constructor(options?: Partial<FileDescriptorBasedInitOptions>);
 	}
 
 
@@ -29744,6 +30961,9 @@ declare namespace imports.gi.Gio {
 		to_string(): string | null;
 	}
 
+	type IconInitOptionsMixin  = {};
+	export interface IconInitOptions extends IconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Icon} instead.
 	 */
@@ -29782,7 +31002,7 @@ declare namespace imports.gi.Gio {
 	interface Icon extends IconMixin {}
 
 	class Icon {
-		public constructor();
+		public constructor(options?: Partial<IconInitOptions>);
 		/**
 		 * Deserializes a #GIcon previously serialized using g_icon_serialize().
 		 * @param value a #GVariant created with g_icon_serialize()
@@ -29862,6 +31082,9 @@ declare namespace imports.gi.Gio {
 		init(cancellable: Cancellable | null): boolean;
 	}
 
+	type InitableInitOptionsMixin  = {};
+	export interface InitableInitOptions extends InitableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Initable} instead.
 	 */
@@ -29896,7 +31119,7 @@ declare namespace imports.gi.Gio {
 	interface Initable extends InitableMixin {}
 
 	class Initable {
-		public constructor();
+		public constructor(options?: Partial<InitableInitOptions>);
 		/**
 		 * Helper function for constructing #GInitable object. This is
 		 * similar to g_object_new() but also initializes the object
@@ -30021,6 +31244,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type ListModelInitOptionsMixin  = {};
+	export interface ListModelInitOptions extends ListModelInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ListModel} instead.
 	 */
@@ -30078,7 +31304,7 @@ declare namespace imports.gi.Gio {
 	interface ListModel extends ListModelMixin {}
 
 	class ListModel {
-		public constructor();
+		public constructor(options?: Partial<ListModelInitOptions>);
 	}
 
 
@@ -30094,8 +31320,11 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to
 		 * ignore.
 		 * @returns a #GInputStream to read the icon from.
+		 * 
+		 * a location to store the type of the loaded
+		 * icon, %NULL to ignore.
 		 */
-		load(size: number, cancellable: Cancellable | null): InputStream;
+		load(size: number, cancellable: Cancellable | null): [ InputStream, string | null ];
 		/**
 		 * Loads an icon asynchronously. To finish this function, see
 		 * g_loadable_icon_load_finish(). For the synchronous, blocking
@@ -30110,9 +31339,15 @@ declare namespace imports.gi.Gio {
 		 * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
 		 * @param res a #GAsyncResult.
 		 * @returns a #GInputStream to read the icon from.
+		 * 
+		 * a location to store the type of the loaded
+		 *        icon, %NULL to ignore.
 		 */
-		load_finish(res: AsyncResult): InputStream;
+		load_finish(res: AsyncResult): [ InputStream, string | null ];
 	}
+
+	type LoadableIconInitOptionsMixin  = {};
+	export interface LoadableIconInitOptions extends LoadableIconInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link LoadableIcon} instead.
@@ -30126,7 +31361,7 @@ declare namespace imports.gi.Gio {
 	interface LoadableIcon extends LoadableIconMixin {}
 
 	class LoadableIcon {
-		public constructor();
+		public constructor(options?: Partial<LoadableIconInitOptions>);
 	}
 
 
@@ -30145,6 +31380,9 @@ declare namespace imports.gi.Gio {
 		connect(signal: "low-memory-warning", callback: (owner: this, level: MemoryMonitorWarningLevel) => void): number;
 
 	}
+
+	type MemoryMonitorInitOptionsMixin  = {};
+	export interface MemoryMonitorInitOptions extends MemoryMonitorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MemoryMonitor} instead.
@@ -30202,7 +31440,7 @@ declare namespace imports.gi.Gio {
 	interface MemoryMonitor extends MemoryMonitorMixin {}
 
 	class MemoryMonitor {
-		public constructor();
+		public constructor(options?: Partial<MemoryMonitorInitOptions>);
 		/**
 		 * Gets a reference to the default #GMemoryMonitor for the system.
 		 * @returns a new reference to the default #GMemoryMonitor
@@ -30499,6 +31737,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type MountInitOptionsMixin  = {};
+	export interface MountInitOptions extends MountInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Mount} instead.
 	 */
@@ -30528,7 +31769,7 @@ declare namespace imports.gi.Gio {
 	interface Mount extends MountMixin {}
 
 	class Mount {
-		public constructor();
+		public constructor(options?: Partial<MountInitOptions>);
 	}
 
 
@@ -30677,6 +31918,13 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type NetworkMonitorInitOptionsMixin = Pick<INetworkMonitor,
+		"connectivity" |
+		"network_available" |
+		"network_metered">;
+
+	export interface NetworkMonitorInitOptions extends NetworkMonitorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NetworkMonitor} instead.
 	 */
@@ -30693,7 +31941,7 @@ declare namespace imports.gi.Gio {
 	interface NetworkMonitor extends NetworkMonitorMixin {}
 
 	class NetworkMonitor {
-		public constructor();
+		public constructor(options?: Partial<NetworkMonitorInitOptions>);
 		/**
 		 * Gets the default #GNetworkMonitor for the system.
 		 * @returns a #GNetworkMonitor, which will be
@@ -30759,15 +32007,19 @@ declare namespace imports.gi.Gio {
 		 * if #cancellable has already been cancelled when you call, which
 		 * may happen if you call this method after a source triggers due
 		 * to having been cancelled.
-		 * @param buffer a
-		 *     buffer to read data into (which should be at least #count bytes long).
 		 * @param count the number of bytes you want to read
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns the number of bytes read, or -1 on error (including
 		 *   %G_IO_ERROR_WOULD_BLOCK).
+		 * 
+		 * a
+		 *     buffer to read data into (which should be at least #count bytes long).
 		 */
-		read_nonblocking(buffer: number[], count: number, cancellable: Cancellable | null): number;
+		read_nonblocking(count: number, cancellable: Cancellable | null): [ number, number[] ];
 	}
+
+	type PollableInputStreamInitOptionsMixin  = {};
+	export interface PollableInputStreamInitOptions extends PollableInputStreamInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PollableInputStream} instead.
@@ -30783,7 +32035,7 @@ declare namespace imports.gi.Gio {
 	interface PollableInputStream extends PollableInputStreamMixin {}
 
 	class PollableInputStream {
-		public constructor();
+		public constructor(options?: Partial<PollableInputStreamInitOptions>);
 	}
 
 
@@ -30879,9 +32131,15 @@ declare namespace imports.gi.Gio {
 		 * if the stream is not currently writable (and #error is *not* set), or
 		 * %G_POLLABLE_RETURN_FAILED if there was an error in which case #error will
 		 * be set.
+		 * 
+		 * location to store the number of bytes that were
+		 *     written to the stream
 		 */
-		writev_nonblocking(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): PollableReturn;
+		writev_nonblocking(vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ PollableReturn, number | null ];
 	}
+
+	type PollableOutputStreamInitOptionsMixin  = {};
+	export interface PollableOutputStreamInitOptions extends PollableOutputStreamInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PollableOutputStream} instead.
@@ -30897,7 +32155,7 @@ declare namespace imports.gi.Gio {
 	interface PollableOutputStream extends PollableOutputStreamMixin {}
 
 	class PollableOutputStream {
-		public constructor();
+		public constructor(options?: Partial<PollableOutputStreamInitOptions>);
 	}
 
 
@@ -30922,6 +32180,11 @@ declare namespace imports.gi.Gio {
 		connect(signal: "notify::power_saver_enabled", callback: (owner: this, ...args: any) => number): number;
 
 	}
+
+	type PowerProfileMonitorInitOptionsMixin = Pick<IPowerProfileMonitor,
+		"power_saver_enabled">;
+
+	export interface PowerProfileMonitorInitOptions extends PowerProfileMonitorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PowerProfileMonitor} instead.
@@ -30955,7 +32218,7 @@ declare namespace imports.gi.Gio {
 	interface PowerProfileMonitor extends PowerProfileMonitorMixin {}
 
 	class PowerProfileMonitor {
-		public constructor();
+		public constructor(options?: Partial<PowerProfileMonitorInitOptions>);
 		/**
 		 * Gets a reference to the default #GPowerProfileMonitor for the system.
 		 * @returns a new reference to the default #GPowerProfileMonitor
@@ -31009,6 +32272,9 @@ declare namespace imports.gi.Gio {
 		supports_hostname(): boolean;
 	}
 
+	type ProxyInitOptionsMixin  = {};
+	export interface ProxyInitOptions extends ProxyInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Proxy} instead.
 	 */
@@ -31025,7 +32291,7 @@ declare namespace imports.gi.Gio {
 	interface Proxy extends ProxyMixin {}
 
 	class Proxy {
-		public constructor();
+		public constructor(options?: Partial<ProxyInitOptions>);
 		/**
 		 * Find the `gio-proxy` extension point for a proxy implementation that supports
 		 * the specified protocol.
@@ -31092,6 +32358,9 @@ declare namespace imports.gi.Gio {
 		lookup_finish(result: AsyncResult): string[];
 	}
 
+	type ProxyResolverInitOptionsMixin  = {};
+	export interface ProxyResolverInitOptions extends ProxyResolverInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ProxyResolver} instead.
 	 */
@@ -31109,7 +32378,7 @@ declare namespace imports.gi.Gio {
 	interface ProxyResolver extends ProxyResolverMixin {}
 
 	class ProxyResolver {
-		public constructor();
+		public constructor(options?: Partial<ProxyResolverInitOptions>);
 		/**
 		 * Gets the default #GProxyResolver for the system.
 		 * @returns the default #GProxyResolver, which
@@ -31156,6 +32425,9 @@ declare namespace imports.gi.Gio {
 		change_action_state_full(action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;
 	}
 
+	type RemoteActionGroupInitOptionsMixin  = {};
+	export interface RemoteActionGroupInitOptions extends RemoteActionGroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link RemoteActionGroup} instead.
 	 */
@@ -31187,7 +32459,7 @@ declare namespace imports.gi.Gio {
 	interface RemoteActionGroup extends RemoteActionGroupMixin {}
 
 	class RemoteActionGroup {
-		public constructor();
+		public constructor(options?: Partial<RemoteActionGroupInitOptions>);
 	}
 
 
@@ -31255,6 +32527,9 @@ declare namespace imports.gi.Gio {
 		truncate(offset: number, cancellable: Cancellable | null): boolean;
 	}
 
+	type SeekableInitOptionsMixin  = {};
+	export interface SeekableInitOptions extends SeekableInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Seekable} instead.
 	 */
@@ -31279,7 +32554,7 @@ declare namespace imports.gi.Gio {
 	interface Seekable extends SeekableMixin {}
 
 	class Seekable {
-		public constructor();
+		public constructor(options?: Partial<SeekableInitOptions>);
 	}
 
 
@@ -31316,6 +32591,9 @@ declare namespace imports.gi.Gio {
 		 */
 		to_string(): string;
 	}
+
+	type SocketConnectableInitOptionsMixin  = {};
+	export interface SocketConnectableInitOptions extends SocketConnectableInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SocketConnectable} instead.
@@ -31384,7 +32662,7 @@ declare namespace imports.gi.Gio {
 	interface SocketConnectable extends SocketConnectableMixin {}
 
 	class SocketConnectable {
-		public constructor();
+		public constructor(options?: Partial<SocketConnectableInitOptions>);
 	}
 
 
@@ -31460,6 +32738,9 @@ declare namespace imports.gi.Gio {
 		supports_tls(): boolean;
 	}
 
+	type TlsBackendInitOptionsMixin  = {};
+	export interface TlsBackendInitOptions extends TlsBackendInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsBackend} instead.
 	 */
@@ -31471,7 +32752,7 @@ declare namespace imports.gi.Gio {
 	interface TlsBackend extends TlsBackendMixin {}
 
 	class TlsBackend {
-		public constructor();
+		public constructor(options?: Partial<TlsBackendInitOptions>);
 		/**
 		 * Gets the default #GTlsBackend for the system.
 		 * @returns a #GTlsBackend, which will be a
@@ -31624,6 +32905,14 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsClientConnectionInitOptionsMixin = Pick<ITlsClientConnection,
+		"accepted_cas" |
+		"server_identity" |
+		"use_ssl3" |
+		"validation_flags">;
+
+	export interface TlsClientConnectionInitOptions extends TlsClientConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsClientConnection} instead.
 	 */
@@ -31636,7 +32925,7 @@ declare namespace imports.gi.Gio {
 	interface TlsClientConnection extends TlsClientConnectionMixin {}
 
 	class TlsClientConnection {
-		public constructor();
+		public constructor(options?: Partial<TlsClientConnectionInitOptions>);
 		/**
 		 * Creates a new #GTlsClientConnection wrapping #base_io_stream (which
 		 * must have pollable input and output streams) which is assumed to
@@ -31671,6 +32960,11 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsFileDatabaseInitOptionsMixin = Pick<ITlsFileDatabase,
+		"anchors">;
+
+	export interface TlsFileDatabaseInitOptions extends TlsFileDatabaseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsFileDatabase} instead.
 	 */
@@ -31684,7 +32978,7 @@ declare namespace imports.gi.Gio {
 	interface TlsFileDatabase extends TlsFileDatabaseMixin {}
 
 	class TlsFileDatabase {
-		public constructor();
+		public constructor(options?: Partial<TlsFileDatabaseInitOptions>);
 		/**
 		 * Creates a new #GTlsFileDatabase which uses anchor certificate authorities
 		 * in #anchors to verify certificate chains.
@@ -31714,6 +33008,11 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type TlsServerConnectionInitOptionsMixin = Pick<ITlsServerConnection,
+		"authentication_mode">;
+
+	export interface TlsServerConnectionInitOptions extends TlsServerConnectionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TlsServerConnection} instead.
 	 */
@@ -31726,7 +33025,7 @@ declare namespace imports.gi.Gio {
 	interface TlsServerConnection extends TlsServerConnectionMixin {}
 
 	class TlsServerConnection {
-		public constructor();
+		public constructor(options?: Partial<TlsServerConnectionInitOptions>);
 		/**
 		 * Creates a new #GTlsServerConnection wrapping #base_io_stream (which
 		 * must have pollable input and output streams).
@@ -31930,6 +33229,9 @@ declare namespace imports.gi.Gio {
 
 	}
 
+	type VolumeInitOptionsMixin  = {};
+	export interface VolumeInitOptions extends VolumeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Volume} instead.
 	 */
@@ -31981,7 +33283,7 @@ declare namespace imports.gi.Gio {
 	interface Volume extends VolumeMixin {}
 
 	class Volume {
-		public constructor();
+		public constructor(options?: Partial<VolumeInitOptions>);
 	}
 
 
@@ -35259,8 +36561,10 @@ declare namespace imports.gi.Gio {
 		 * must be returned in this case.
 		 * @param value the #GVariant to map, or %NULL
 		 * @returns %TRUE if the conversion succeeded, %FALSE in case of an error
+		 * 
+		 * the result of the mapping
 		 */
-		(value: GLib.Variant): boolean;
+		(value: GLib.Variant): [ boolean, any | null ];
 	}
 
 	/**
@@ -35399,8 +36703,12 @@ declare namespace imports.gi.Gio {
 	 * empty or contains characters other than alphanumerics, '-' and '.'.
 	 * @param detailed_name a detailed action name
 	 * @returns %TRUE if successful, else %FALSE with #error set
+	 * 
+	 * the action name
+	 * 
+	 * the target value, or %NULL for no target
 	 */
-	function action_parse_detailed_name(detailed_name: string): boolean;
+	function action_parse_detailed_name(detailed_name: string): [ boolean, string, GLib.Variant ];
 
 	/**
 	 * Formats a detailed action name from #action_name and #target_value.
@@ -35933,8 +37241,11 @@ declare namespace imports.gi.Gio {
 	 * @param data_size the size of #data
 	 * @returns a string indicating a guessed content type for the
 	 *     given data. Free with g_free()
+	 * 
+	 * return location for the certainty
+	 *     of the result, or %NULL
 	 */
-	function content_type_guess(filename: string | null, data: number[] | null, data_size: number): string;
+	function content_type_guess(filename: string | null, data: number[] | null, data_size: number): [ string, boolean | null ];
 
 	/**
 	 * Tries to guess the type of the tree with root #root, by
@@ -36077,8 +37388,10 @@ declare namespace imports.gi.Gio {
 	 * even on success.
 	 * @param res A #GAsyncResult obtained from the GAsyncReadyCallback passed to g_dbus_address_get_stream().
 	 * @returns A #GIOStream or %NULL if #error is set.
+	 * 
+	 * %NULL or return location to store the GUID extracted from #address, if any.
 	 */
-	function dbus_address_get_stream_finish(res: AsyncResult): IOStream;
+	function dbus_address_get_stream_finish(res: AsyncResult): [ IOStream, string | null ];
 
 	/**
 	 * Synchronously connects to an endpoint specified by #address and
@@ -36094,8 +37407,10 @@ declare namespace imports.gi.Gio {
 	 * @param address A valid D-Bus address.
 	 * @param cancellable A #GCancellable or %NULL.
 	 * @returns A #GIOStream or %NULL if #error is set.
+	 * 
+	 * %NULL or return location to store the GUID extracted from #address, if any.
 	 */
-	function dbus_address_get_stream_sync(address: string, cancellable: Cancellable | null): IOStream;
+	function dbus_address_get_stream_sync(address: string, cancellable: Cancellable | null): [ IOStream, string | null ];
 
 	/**
 	 * Looks up the value of an annotation.
@@ -36324,9 +37639,9 @@ declare namespace imports.gi.Gio {
 	 * The conversion never fails - a valid #GValue is always returned in
 	 * #out_gvalue.
 	 * @param value A #GVariant.
-	 * @param out_gvalue Return location pointing to a zero-filled (uninitialized) #GValue.
+	 * @returns Return location pointing to a zero-filled (uninitialized) #GValue.
 	 */
-	function dbus_gvariant_to_gvalue(value: GLib.Variant, out_gvalue: GObject.Value): void;
+	function dbus_gvariant_to_gvalue(value: GLib.Variant): GObject.Value;
 
 	/**
 	 * Checks if #string is a
@@ -36511,8 +37826,10 @@ declare namespace imports.gi.Gio {
 	 *   name, as in g_file_open_tmp(), or %NULL for a default template
 	 * @returns a new #GFile.
 	 *     Free the returned object with g_object_unref().
+	 * 
+	 * on return, a #GFileIOStream for the created file
 	 */
-	function file_new_tmp(tmpl: string | null): File;
+	function file_new_tmp(tmpl: string | null): [ File, FileIOStream ];
 
 	/**
 	 * Constructs a #GFile with the given #parse_name (i.e. something
@@ -36898,8 +38215,11 @@ declare namespace imports.gi.Gio {
 	 * @param blocking whether to do blocking I/O
 	 * @param cancellable optional #GCancellable object, %NULL to ignore.
 	 * @returns %TRUE on success, %FALSE if there was an error
+	 * 
+	 * location to store the number of bytes that was
+	 *   written to the stream
 	 */
-	function pollable_stream_write_all(stream: OutputStream, buffer: number[], count: number, blocking: boolean, cancellable: Cancellable | null): boolean;
+	function pollable_stream_write_all(stream: OutputStream, buffer: number[], count: number, blocking: boolean, cancellable: Cancellable | null): [ boolean, number ];
 
 	/**
 	 * Gets a reference to the default #GPowerProfileMonitor for the system.
@@ -36972,8 +38292,14 @@ declare namespace imports.gi.Gio {
 	 * @param path A pathname inside the resource
 	 * @param lookup_flags A #GResourceLookupFlags
 	 * @returns %TRUE if the file was found. %FALSE if there were errors
+	 * 
+	 * a location to place the length of the contents of the file,
+	 *    or %NULL if the length is not needed
+	 * 
+	 * a location to place the #GResourceFlags about the file,
+	 *    or %NULL if the flags are not needed
 	 */
-	function resources_get_info(path: string, lookup_flags: ResourceLookupFlags): boolean;
+	function resources_get_info(path: string, lookup_flags: ResourceLookupFlags): [ boolean, number | null, number | null ];
 
 	/**
 	 * Looks for a file at the specified #path in the set of
@@ -37189,8 +38515,10 @@ declare namespace imports.gi.Gio {
 	 * This will return %NULL if there is no mount point at #mount_path.
 	 * @param mount_path path for a possible unix mount.
 	 * @returns a #GUnixMountEntry.
+	 * 
+	 * guint64 to contain a timestamp.
 	 */
-	function unix_mount_at(mount_path: string): UnixMountEntry | null;
+	function unix_mount_at(mount_path: string): [ UnixMountEntry | null, number | null ];
 
 	/**
 	 * Compares two unix mounts.
@@ -37220,8 +38548,10 @@ declare namespace imports.gi.Gio {
 	 * #file_path doesn’t exist or there is an I/O error.
 	 * @param file_path file path on some unix mount.
 	 * @returns a #GUnixMountEntry.
+	 * 
+	 * guint64 to contain a timestamp.
 	 */
-	function unix_mount_for(file_path: string): UnixMountEntry | null;
+	function unix_mount_for(file_path: string): [ UnixMountEntry | null, number | null ];
 
 	/**
 	 * Frees a unix mount.
@@ -37340,8 +38670,10 @@ declare namespace imports.gi.Gio {
 	 * @param mount_path path for a possible unix mount point.
 	 * @returns a #GUnixMountPoint, or %NULL if no match
 	 * is found.
+	 * 
+	 * guint64 to contain a timestamp.
 	 */
-	function unix_mount_point_at(mount_path: string): UnixMountPoint | null;
+	function unix_mount_point_at(mount_path: string): [ UnixMountPoint | null, number | null ];
 
 	/**
 	 * Checks if the unix mount points have changed since a given unix time.
@@ -37357,8 +38689,10 @@ declare namespace imports.gi.Gio {
 	 * g_unix_mount_points_changed_since().
 	 * @returns 
 	 *     a #GList of the UNIX mountpoints.
+	 * 
+	 * guint64 to contain a timestamp.
 	 */
-	function unix_mount_points_get(): GLib.List;
+	function unix_mount_points_get(): [ GLib.List, number | null ];
 
 	/**
 	 * Checks if the unix mounts have changed since a given unix time.
@@ -37374,8 +38708,10 @@ declare namespace imports.gi.Gio {
 	 * with g_unix_mounts_changed_since().
 	 * @returns 
 	 *     a #GList of the UNIX mounts.
+	 * 
+	 * guint64 to contain a timestamp, or %NULL
 	 */
-	function unix_mounts_get(): GLib.List;
+	function unix_mounts_get(): [ GLib.List, number | null ];
 
 	/**
 	 * The value returned by handlers of the signals generated by
