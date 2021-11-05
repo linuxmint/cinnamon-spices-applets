@@ -1,3 +1,4 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.WebKit2 {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthenticationRequest} instead.
@@ -103,6 +104,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type AuthenticationRequestInitOptionsMixin = GObject.ObjectInitOptions
+	export interface AuthenticationRequestInitOptions extends AuthenticationRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AuthenticationRequest} instead.
 	 */
@@ -111,7 +115,7 @@ declare namespace imports.gi.WebKit2 {
 	interface AuthenticationRequest extends AuthenticationRequestMixin {}
 
 	class AuthenticationRequest {
-		public constructor();
+		public constructor(options?: Partial<AuthenticationRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -162,6 +166,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type AutomationSessionInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IAutomationSession,
+		"id">;
+
+	export interface AutomationSessionInitOptions extends AutomationSessionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AutomationSession} instead.
 	 */
@@ -170,7 +180,7 @@ declare namespace imports.gi.WebKit2 {
 	interface AutomationSession extends AutomationSessionMixin {}
 
 	class AutomationSession {
-		public constructor();
+		public constructor(options?: Partial<AutomationSessionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -218,6 +228,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type BackForwardListInitOptionsMixin = GObject.ObjectInitOptions
+	export interface BackForwardListInitOptions extends BackForwardListInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardList} instead.
 	 */
@@ -226,7 +239,7 @@ declare namespace imports.gi.WebKit2 {
 	interface BackForwardList extends BackForwardListMixin {}
 
 	class BackForwardList {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -250,6 +263,9 @@ declare namespace imports.gi.WebKit2 {
 		get_uri(): string;
 	}
 
+	type BackForwardListItemInitOptionsMixin = GObject.InitiallyUnownedInitOptions
+	export interface BackForwardListItemInitOptions extends BackForwardListItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link BackForwardListItem} instead.
 	 */
@@ -258,7 +274,7 @@ declare namespace imports.gi.WebKit2 {
 	interface BackForwardListItem extends BackForwardListItemMixin {}
 
 	class BackForwardListItem {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListItemInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -282,14 +298,14 @@ declare namespace imports.gi.WebKit2 {
 		finish(): void;
 		/**
 		 * Gets the bounding box of the color input element.
-		 * @param rect a #GdkRectangle to fill in with the element area
+		 * @returns a #GdkRectangle to fill in with the element area
 		 */
-		get_element_rectangle(rect: Gdk.Rectangle): void;
+		get_element_rectangle(): Gdk.Rectangle;
 		/**
 		 * Gets the current #GdkRGBA color of #request
-		 * @param rgba a #GdkRGBA to fill in with the current color.
+		 * @returns a #GdkRGBA to fill in with the current color.
 		 */
-		get_rgba(rgba: Gdk.RGBA): void;
+		get_rgba(): Gdk.RGBA;
 		/**
 		 * Sets the current #GdkRGBA color of #request
 		 * @param rgba a pointer #GdkRGBA
@@ -307,6 +323,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type ColorChooserRequestInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IColorChooserRequest,
+		"rgba">;
+
+	export interface ColorChooserRequestInitOptions extends ColorChooserRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ColorChooserRequest} instead.
 	 */
@@ -315,7 +337,7 @@ declare namespace imports.gi.WebKit2 {
 	interface ColorChooserRequest extends ColorChooserRequestMixin {}
 
 	class ColorChooserRequest {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -407,6 +429,9 @@ declare namespace imports.gi.WebKit2 {
 		set_user_data(): void;
 	}
 
+	type ContextMenuInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ContextMenuInitOptions extends ContextMenuInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenu} instead.
 	 */
@@ -415,7 +440,7 @@ declare namespace imports.gi.WebKit2 {
 	interface ContextMenu extends ContextMenuMixin {}
 
 	class ContextMenu {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuInitOptions>);
 		/**
 		 * Creates a new #WebKitContextMenu object to be used as a submenu of an existing
 		 * #WebKitContextMenu. The context menu of a #WebKitWebView is created by the view
@@ -480,6 +505,9 @@ declare namespace imports.gi.WebKit2 {
 		set_submenu(submenu: ContextMenu | null): void;
 	}
 
+	type ContextMenuItemInitOptionsMixin = GObject.InitiallyUnownedInitOptions
+	export interface ContextMenuItemInitOptions extends ContextMenuItemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ContextMenuItem} instead.
 	 */
@@ -488,7 +516,7 @@ declare namespace imports.gi.WebKit2 {
 	interface ContextMenuItem extends ContextMenuItemMixin {}
 
 	class ContextMenuItem {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuItemInitOptions>);
 		/**
 		 * Creates a new #WebKitContextMenuItem for the given #action.
 		 * @param action a #GtkAction
@@ -671,6 +699,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type CookieManagerInitOptionsMixin = GObject.ObjectInitOptions
+	export interface CookieManagerInitOptions extends CookieManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link CookieManager} instead.
 	 */
@@ -679,7 +710,7 @@ declare namespace imports.gi.WebKit2 {
 	interface CookieManager extends CookieManagerMixin {}
 
 	class CookieManager {
-		public constructor();
+		public constructor(options?: Partial<CookieManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -689,6 +720,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type DeviceInfoPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface DeviceInfoPermissionRequestInitOptions extends DeviceInfoPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DeviceInfoPermissionRequest} instead.
 	 */
@@ -697,7 +731,7 @@ declare namespace imports.gi.WebKit2 {
 	interface DeviceInfoPermissionRequest extends DeviceInfoPermissionRequestMixin {}
 
 	class DeviceInfoPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<DeviceInfoPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -855,6 +889,15 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type DownloadInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IDownload,
+		"allow_overwrite" |
+		"destination" |
+		"estimated_progress" |
+		"response">;
+
+	export interface DownloadInitOptions extends DownloadInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Download} instead.
 	 */
@@ -863,7 +906,7 @@ declare namespace imports.gi.WebKit2 {
 	interface Download extends DownloadMixin {}
 
 	class Download {
-		public constructor();
+		public constructor(options?: Partial<DownloadInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -913,6 +956,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type EditorStateInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IEditorState,
+		"typing_attributes">;
+
+	export interface EditorStateInitOptions extends EditorStateInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EditorState} instead.
 	 */
@@ -921,7 +970,7 @@ declare namespace imports.gi.WebKit2 {
 	interface EditorState extends EditorStateMixin {}
 
 	class EditorState {
-		public constructor();
+		public constructor(options?: Partial<EditorStateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -978,6 +1027,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type FaviconDatabaseInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FaviconDatabaseInitOptions extends FaviconDatabaseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FaviconDatabase} instead.
 	 */
@@ -986,7 +1038,7 @@ declare namespace imports.gi.WebKit2 {
 	interface FaviconDatabase extends FaviconDatabaseMixin {}
 
 	class FaviconDatabase {
-		public constructor();
+		public constructor(options?: Partial<FaviconDatabaseInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1092,6 +1144,15 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type FileChooserRequestInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IFileChooserRequest,
+		"filter" |
+		"mime_types" |
+		"select_multiple" |
+		"selected_files">;
+
+	export interface FileChooserRequestInitOptions extends FileChooserRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FileChooserRequest} instead.
 	 */
@@ -1100,7 +1161,7 @@ declare namespace imports.gi.WebKit2 {
 	interface FileChooserRequest extends FileChooserRequestMixin {}
 
 	class FileChooserRequest {
-		public constructor();
+		public constructor(options?: Partial<FileChooserRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1241,6 +1302,15 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type FindControllerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IFindController,
+		"max_match_count" |
+		"options" |
+		"text" |
+		"web_view">;
+
+	export interface FindControllerInitOptions extends FindControllerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FindController} instead.
 	 */
@@ -1249,7 +1319,7 @@ declare namespace imports.gi.WebKit2 {
 	interface FindController extends FindControllerMixin {}
 
 	class FindController {
-		public constructor();
+		public constructor(options?: Partial<FindControllerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1273,13 +1343,22 @@ declare namespace imports.gi.WebKit2 {
 		 * If this function returns %FALSE, then both #field_names and
 		 * #field_values will be empty.
 		 * @returns %TRUE if the form contains text fields, or %FALSE otherwise
+		 * 
+		 * 
+		 *    names of the text fields in the form
+		 * 
+		 * 
+		 *    values of the text fields in the form
 		 */
-		list_text_fields(): boolean;
+		list_text_fields(): [ boolean, string[] | null, string[] | null ];
 		/**
 		 * Continue the form submission.
 		 */
 		submit(): void;
 	}
+
+	type FormSubmissionRequestInitOptionsMixin = GObject.ObjectInitOptions
+	export interface FormSubmissionRequestInitOptions extends FormSubmissionRequestInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FormSubmissionRequest} instead.
@@ -1289,7 +1368,7 @@ declare namespace imports.gi.WebKit2 {
 	interface FormSubmissionRequest extends FormSubmissionRequestMixin {}
 
 	class FormSubmissionRequest {
-		public constructor();
+		public constructor(options?: Partial<FormSubmissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1338,6 +1417,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type GeolocationManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IGeolocationManager,
+		"enable_high_accuracy">;
+
+	export interface GeolocationManagerInitOptions extends GeolocationManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationManager} instead.
 	 */
@@ -1346,7 +1431,7 @@ declare namespace imports.gi.WebKit2 {
 	interface GeolocationManager extends GeolocationManagerMixin {}
 
 	class GeolocationManager {
-		public constructor();
+		public constructor(options?: Partial<GeolocationManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1356,6 +1441,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type GeolocationPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface GeolocationPermissionRequestInitOptions extends GeolocationPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GeolocationPermissionRequest} instead.
 	 */
@@ -1364,7 +1452,7 @@ declare namespace imports.gi.WebKit2 {
 	interface GeolocationPermissionRequest extends GeolocationPermissionRequestMixin {}
 
 	class GeolocationPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<GeolocationPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1489,6 +1577,17 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type HitTestResultInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IHitTestResult,
+		"context" |
+		"image_uri" |
+		"link_label" |
+		"link_title" |
+		"link_uri" |
+		"media_uri">;
+
+	export interface HitTestResultInitOptions extends HitTestResultInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link HitTestResult} instead.
 	 */
@@ -1497,7 +1596,7 @@ declare namespace imports.gi.WebKit2 {
 	interface HitTestResult extends HitTestResultMixin {}
 
 	class HitTestResult {
-		public constructor();
+		public constructor(options?: Partial<HitTestResultInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1604,6 +1703,13 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type InputMethodContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IInputMethodContext,
+		"input_hints" |
+		"input_purpose">;
+
+	export interface InputMethodContextInitOptions extends InputMethodContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InputMethodContext} instead.
 	 */
@@ -1612,7 +1718,7 @@ declare namespace imports.gi.WebKit2 {
 	interface InputMethodContext extends InputMethodContextMixin {}
 
 	class InputMethodContext {
-		public constructor();
+		public constructor(options?: Partial<InputMethodContextInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1626,6 +1732,9 @@ declare namespace imports.gi.WebKit2 {
 		get_description(): string;
 	}
 
+	type InstallMissingMediaPluginsPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface InstallMissingMediaPluginsPermissionRequestInitOptions extends InstallMissingMediaPluginsPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link InstallMissingMediaPluginsPermissionRequest} instead.
 	 */
@@ -1634,7 +1743,7 @@ declare namespace imports.gi.WebKit2 {
 	interface InstallMissingMediaPluginsPermissionRequest extends InstallMissingMediaPluginsPermissionRequestMixin {}
 
 	class InstallMissingMediaPluginsPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1644,6 +1753,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type MediaKeySystemPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface MediaKeySystemPermissionRequestInitOptions extends MediaKeySystemPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link MediaKeySystemPermissionRequest} instead.
 	 */
@@ -1652,7 +1764,7 @@ declare namespace imports.gi.WebKit2 {
 	interface MediaKeySystemPermissionRequest extends MediaKeySystemPermissionRequestMixin {}
 
 	class MediaKeySystemPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<MediaKeySystemPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1736,6 +1848,17 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type NavigationPolicyDecisionInitOptionsMixin = PolicyDecisionInitOptions & 
+	Pick<INavigationPolicyDecision,
+		"frame_name" |
+		"modifiers" |
+		"mouse_button" |
+		"navigation_action" |
+		"navigation_type" |
+		"request">;
+
+	export interface NavigationPolicyDecisionInitOptions extends NavigationPolicyDecisionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NavigationPolicyDecision} instead.
 	 */
@@ -1744,7 +1867,7 @@ declare namespace imports.gi.WebKit2 {
 	interface NavigationPolicyDecision extends NavigationPolicyDecisionMixin {}
 
 	class NavigationPolicyDecision {
-		public constructor();
+		public constructor(options?: Partial<NavigationPolicyDecisionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1815,6 +1938,15 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type NotificationInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<INotification,
+		"body" |
+		"id" |
+		"tag" |
+		"title">;
+
+	export interface NotificationInitOptions extends NotificationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Notification} instead.
 	 */
@@ -1823,7 +1955,7 @@ declare namespace imports.gi.WebKit2 {
 	interface Notification extends NotificationMixin {}
 
 	class Notification {
-		public constructor();
+		public constructor(options?: Partial<NotificationInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1833,6 +1965,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type NotificationPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface NotificationPermissionRequestInitOptions extends NotificationPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link NotificationPermissionRequest} instead.
 	 */
@@ -1841,7 +1976,7 @@ declare namespace imports.gi.WebKit2 {
 	interface NotificationPermissionRequest extends NotificationPermissionRequestMixin {}
 
 	class NotificationPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<NotificationPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1892,6 +2027,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type OptionMenuInitOptionsMixin = GObject.ObjectInitOptions
+	export interface OptionMenuInitOptions extends OptionMenuInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link OptionMenu} instead.
 	 */
@@ -1900,7 +2038,7 @@ declare namespace imports.gi.WebKit2 {
 	interface OptionMenu extends OptionMenuMixin {}
 
 	class OptionMenu {
-		public constructor();
+		public constructor(options?: Partial<OptionMenuInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1918,6 +2056,9 @@ declare namespace imports.gi.WebKit2 {
 		get_path(): string;
 	}
 
+	type PluginInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PluginInitOptions extends PluginInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Plugin} instead.
 	 */
@@ -1926,7 +2067,7 @@ declare namespace imports.gi.WebKit2 {
 	interface Plugin extends PluginMixin {}
 
 	class Plugin {
-		public constructor();
+		public constructor(options?: Partial<PluginInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1936,6 +2077,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type PointerLockPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface PointerLockPermissionRequestInitOptions extends PointerLockPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PointerLockPermissionRequest} instead.
 	 */
@@ -1944,7 +2088,7 @@ declare namespace imports.gi.WebKit2 {
 	interface PointerLockPermissionRequest extends PointerLockPermissionRequestMixin {}
 
 	class PointerLockPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<PointerLockPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1977,6 +2121,9 @@ declare namespace imports.gi.WebKit2 {
 		use_with_policies(policies: WebsitePolicies): void;
 	}
 
+	type PolicyDecisionInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PolicyDecisionInitOptions extends PolicyDecisionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PolicyDecision} instead.
 	 */
@@ -1985,7 +2132,7 @@ declare namespace imports.gi.WebKit2 {
 	interface PolicyDecision extends PolicyDecisionMixin {}
 
 	class PolicyDecision {
-		public constructor();
+		public constructor(options?: Partial<PolicyDecisionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2033,6 +2180,13 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type PrintCustomWidgetInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IPrintCustomWidget,
+		"title" |
+		"widget">;
+
+	export interface PrintCustomWidgetInitOptions extends PrintCustomWidgetInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintCustomWidget} instead.
 	 */
@@ -2041,7 +2195,7 @@ declare namespace imports.gi.WebKit2 {
 	interface PrintCustomWidget extends PrintCustomWidgetMixin {}
 
 	class PrintCustomWidget {
-		public constructor();
+		public constructor(options?: Partial<PrintCustomWidgetInitOptions>);
 		/**
 		 * Create a new #WebKitPrintCustomWidget with given #widget and #title. The #widget
 		 * ownership is taken and it is destroyed together with the dialog even if this
@@ -2149,6 +2303,14 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type PrintOperationInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IPrintOperation,
+		"page_setup" |
+		"print_settings" |
+		"web_view">;
+
+	export interface PrintOperationInitOptions extends PrintOperationInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PrintOperation} instead.
 	 */
@@ -2157,7 +2319,7 @@ declare namespace imports.gi.WebKit2 {
 	interface PrintOperation extends PrintOperationMixin {}
 
 	class PrintOperation {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationInitOptions>);
 		/**
 		 * Create a new #WebKitPrintOperation to print #web_view contents.
 		 * @param web_view a #WebKitWebView
@@ -2206,6 +2368,13 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type ResponsePolicyDecisionInitOptionsMixin = PolicyDecisionInitOptions & 
+	Pick<IResponsePolicyDecision,
+		"request" |
+		"response">;
+
+	export interface ResponsePolicyDecisionInitOptions extends ResponsePolicyDecisionInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link ResponsePolicyDecision} instead.
 	 */
@@ -2214,7 +2383,7 @@ declare namespace imports.gi.WebKit2 {
 	interface ResponsePolicyDecision extends ResponsePolicyDecisionMixin {}
 
 	class ResponsePolicyDecision {
-		public constructor();
+		public constructor(options?: Partial<ResponsePolicyDecisionInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2303,6 +2472,9 @@ declare namespace imports.gi.WebKit2 {
 		uri_scheme_is_secure(scheme: string): boolean;
 	}
 
+	type SecurityManagerInitOptionsMixin = GObject.ObjectInitOptions
+	export interface SecurityManagerInitOptions extends SecurityManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link SecurityManager} instead.
 	 */
@@ -2311,7 +2483,7 @@ declare namespace imports.gi.WebKit2 {
 	interface SecurityManager extends SecurityManagerMixin {}
 
 	class SecurityManager {
-		public constructor();
+		public constructor(options?: Partial<SecurityManagerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3345,6 +3517,70 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type SettingsInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ISettings,
+		"allow_file_access_from_file_urls" |
+		"allow_modal_dialogs" |
+		"allow_top_navigation_to_data_urls" |
+		"allow_universal_access_from_file_urls" |
+		"auto_load_images" |
+		"cursive_font_family" |
+		"default_charset" |
+		"default_font_family" |
+		"default_font_size" |
+		"default_monospace_font_size" |
+		"draw_compositing_indicators" |
+		"enable_accelerated_2d_canvas" |
+		"enable_back_forward_navigation_gestures" |
+		"enable_caret_browsing" |
+		"enable_developer_extras" |
+		"enable_dns_prefetching" |
+		"enable_encrypted_media" |
+		"enable_frame_flattening" |
+		"enable_fullscreen" |
+		"enable_html5_database" |
+		"enable_html5_local_storage" |
+		"enable_hyperlink_auditing" |
+		"enable_java" |
+		"enable_javascript" |
+		"enable_javascript_markup" |
+		"enable_media" |
+		"enable_media_capabilities" |
+		"enable_media_stream" |
+		"enable_mediasource" |
+		"enable_mock_capture_devices" |
+		"enable_offline_web_application_cache" |
+		"enable_page_cache" |
+		"enable_plugins" |
+		"enable_private_browsing" |
+		"enable_resizable_text_areas" |
+		"enable_site_specific_quirks" |
+		"enable_smooth_scrolling" |
+		"enable_spatial_navigation" |
+		"enable_tabs_to_links" |
+		"enable_webaudio" |
+		"enable_webgl" |
+		"enable_write_console_messages_to_stdout" |
+		"enable_xss_auditor" |
+		"fantasy_font_family" |
+		"hardware_acceleration_policy" |
+		"javascript_can_access_clipboard" |
+		"javascript_can_open_windows_automatically" |
+		"load_icons_ignoring_image_load_setting" |
+		"media_content_types_requiring_hardware_support" |
+		"media_playback_allows_inline" |
+		"media_playback_requires_user_gesture" |
+		"minimum_font_size" |
+		"monospace_font_family" |
+		"pictograph_font_family" |
+		"print_backgrounds" |
+		"sans_serif_font_family" |
+		"serif_font_family" |
+		"user_agent" |
+		"zoom_text_only">;
+
+	export interface SettingsInitOptions extends SettingsInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Settings} instead.
 	 */
@@ -3353,7 +3589,7 @@ declare namespace imports.gi.WebKit2 {
 	interface Settings extends SettingsMixin {}
 
 	class Settings {
-		public constructor();
+		public constructor(options?: Partial<SettingsInitOptions>);
 		/**
 		 * Creates a new #WebKitSettings instance with default values. It must
 		 * be manually attached to a #WebKitWebView.
@@ -3418,6 +3654,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type URIRequestInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IURIRequest,
+		"uri">;
+
+	export interface URIRequestInitOptions extends URIRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIRequest} instead.
 	 */
@@ -3426,7 +3668,7 @@ declare namespace imports.gi.WebKit2 {
 	interface URIRequest extends URIRequestMixin {}
 
 	class URIRequest {
-		public constructor();
+		public constructor(options?: Partial<URIRequestInitOptions>);
 		/**
 		 * Creates a new #WebKitURIRequest for the given URI.
 		 * @param uri an URI
@@ -3502,6 +3744,17 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type URIResponseInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IURIResponse,
+		"content_length" |
+		"http_headers" |
+		"mime_type" |
+		"status_code" |
+		"suggested_filename" |
+		"uri">;
+
+	export interface URIResponseInitOptions extends URIResponseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URIResponse} instead.
 	 */
@@ -3510,7 +3763,7 @@ declare namespace imports.gi.WebKit2 {
 	interface URIResponse extends URIResponseMixin {}
 
 	class URIResponse {
-		public constructor();
+		public constructor(options?: Partial<URIResponseInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3551,6 +3804,9 @@ declare namespace imports.gi.WebKit2 {
 		get_web_view(): WebView;
 	}
 
+	type URISchemeRequestInitOptionsMixin = GObject.ObjectInitOptions
+	export interface URISchemeRequestInitOptions extends URISchemeRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link URISchemeRequest} instead.
 	 */
@@ -3559,7 +3815,7 @@ declare namespace imports.gi.WebKit2 {
 	interface URISchemeRequest extends URISchemeRequestMixin {}
 
 	class URISchemeRequest {
-		public constructor();
+		public constructor(options?: Partial<URISchemeRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3673,6 +3929,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type UserContentFilterStoreInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IUserContentFilterStore,
+		"path">;
+
+	export interface UserContentFilterStoreInitOptions extends UserContentFilterStoreInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentFilterStore} instead.
 	 */
@@ -3681,7 +3943,7 @@ declare namespace imports.gi.WebKit2 {
 	interface UserContentFilterStore extends UserContentFilterStoreMixin {}
 
 	class UserContentFilterStore {
-		public constructor();
+		public constructor(options?: Partial<UserContentFilterStoreInitOptions>);
 		/**
 		 * Create a new #WebKitUserContentFilterStore to manipulate filters stored at #storage_path.
 		 * The path must point to a local filesystem, and will be created if needed.
@@ -3830,6 +4092,9 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type UserContentManagerInitOptionsMixin = GObject.ObjectInitOptions
+	export interface UserContentManagerInitOptions extends UserContentManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserContentManager} instead.
 	 */
@@ -3838,7 +4103,7 @@ declare namespace imports.gi.WebKit2 {
 	interface UserContentManager extends UserContentManagerMixin {}
 
 	class UserContentManager {
-		public constructor();
+		public constructor(options?: Partial<UserContentManagerInitOptions>);
 		/**
 		 * Creates a new user content manager.
 		 * @returns A #WebKitUserContentManager
@@ -3858,6 +4123,13 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type UserMediaPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions & 
+	Pick<IUserMediaPermissionRequest,
+		"is_for_audio_device" |
+		"is_for_video_device">;
+
+	export interface UserMediaPermissionRequestInitOptions extends UserMediaPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMediaPermissionRequest} instead.
 	 */
@@ -3866,7 +4138,7 @@ declare namespace imports.gi.WebKit2 {
 	interface UserMediaPermissionRequest extends UserMediaPermissionRequestMixin {}
 
 	class UserMediaPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<UserMediaPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3915,6 +4187,14 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type UserMessageInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
+	Pick<IUserMessage,
+		"fd_list" |
+		"name" |
+		"parameters">;
+
+	export interface UserMessageInitOptions extends UserMessageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link UserMessage} instead.
 	 */
@@ -3923,7 +4203,7 @@ declare namespace imports.gi.WebKit2 {
 	interface UserMessage extends UserMessageMixin {}
 
 	class UserMessage {
-		public constructor();
+		public constructor(options?: Partial<UserMessageInitOptions>);
 		/**
 		 * Create a new #WebKitUserMessage with #name.
 		 * @param name the message name
@@ -4418,6 +4698,15 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebContextInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebContext,
+		"local_storage_directory" |
+		"process_swap_on_cross_site_navigation_enabled" |
+		"use_system_appearance_for_scrollbars" |
+		"website_data_manager">;
+
+	export interface WebContextInitOptions extends WebContextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebContext} instead.
 	 */
@@ -4426,7 +4715,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebContext extends WebContextMixin {}
 
 	class WebContext {
-		public constructor();
+		public constructor(options?: Partial<WebContextInitOptions>);
 		/**
 		 * Create a new #WebKitWebContext
 		 * @returns a newly created #WebKitWebContext
@@ -4588,6 +4877,14 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebInspectorInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebInspector,
+		"attached_height" |
+		"can_attach" |
+		"inspected_uri">;
+
+	export interface WebInspectorInitOptions extends WebInspectorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebInspector} instead.
 	 */
@@ -4596,7 +4893,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebInspector extends WebInspectorMixin {}
 
 	class WebInspector {
-		public constructor();
+		public constructor(options?: Partial<WebInspectorInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4627,8 +4924,10 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a
 		 *    string with the data of #resource, or %NULL in case of error. if #length
 		 *    is not %NULL, the size of the data will be assigned to it.
+		 * 
+		 * return location for the length of the resource data
 		 */
-		get_data_finish(result: Gio.AsyncResult): number[];
+		get_data_finish(result: Gio.AsyncResult): [ number[], number | null ];
 		/**
 		 * Retrieves the #WebKitURIResponse of the resource load operation.
 		 * This method returns %NULL if called before the response
@@ -4703,6 +5002,13 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebResourceInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebResource,
+		"response" |
+		"uri">;
+
+	export interface WebResourceInitOptions extends WebResourceInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebResource} instead.
 	 */
@@ -4711,7 +5017,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebResource extends WebResourceMixin {}
 
 	class WebResource {
-		public constructor();
+		public constructor(options?: Partial<WebResourceInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4887,9 +5193,9 @@ declare namespace imports.gi.WebKit2 {
 		 * Gets the color that is used to draw the #web_view background before
 		 * the actual contents are rendered.
 		 * For more information see also webkit_web_view_set_background_color()
-		 * @param rgba a #GdkRGBA to fill in with the background color
+		 * @returns a #GdkRGBA to fill in with the background color
 		 */
-		get_background_color(rgba: Gdk.RGBA): void;
+		get_background_color(): Gdk.RGBA;
 		/**
 		 * Gets the web context of #web_view.
 		 * @returns the #WebKitWebContext of the view
@@ -5028,8 +5334,12 @@ declare namespace imports.gi.WebKit2 {
 		 * which case subresources that fail certificate verification will be blocked.
 		 * @returns %TRUE if the #web_view connection uses HTTPS and a response has been received
 		 *    from the server, or %FALSE otherwise.
+		 * 
+		 * return location for a #GTlsCertificate
+		 * 
+		 * return location for a #GTlsCertificateFlags the verification status of #certificate
 		 */
-		get_tls_info(): boolean;
+		get_tls_info(): [ boolean, Gio.TlsCertificate, Gio.TlsCertificateFlags ];
 		/**
 		 * Returns the current active URI of #web_view. The active URI might change during
 		 * a load operation:
@@ -5975,6 +6285,27 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebViewInitOptionsMixin = WebViewBaseInitOptions & Atk.ImplementorIfaceInitOptions & Gtk.BuildableInitOptions & 
+	Pick<IWebView,
+		"automation_presentation_type" |
+		"editable" |
+		"estimated_load_progress" |
+		"favicon" |
+		"is_controlled_by_automation" |
+		"is_ephemeral" |
+		"is_loading" |
+		"is_muted" |
+		"is_playing_audio" |
+		"page_id" |
+		"title" |
+		"uri" |
+		"user_content_manager" |
+		"web_context" |
+		"website_policies" |
+		"zoom_level">;
+
+	export interface WebViewInitOptions extends WebViewInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebView} instead.
 	 */
@@ -5983,7 +6314,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebView extends WebViewMixin {}
 
 	class WebView {
-		public constructor();
+		public constructor(options?: Partial<WebViewInitOptions>);
 		/**
 		 * Creates a new #WebKitWebView with the default #WebKitWebContext and
 		 * no #WebKitUserContentManager associated with it.
@@ -6045,6 +6376,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebViewBaseInitOptionsMixin = Gtk.ContainerInitOptions & Atk.ImplementorIfaceInitOptions & Gtk.BuildableInitOptions & 
+	Pick<IWebViewBase,
+		"parentInstance">;
+
+	export interface WebViewBaseInitOptions extends WebViewBaseInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebViewBase} instead.
 	 */
@@ -6053,7 +6390,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebViewBase extends WebViewBaseMixin {}
 
 	class WebViewBase {
-		public constructor();
+		public constructor(options?: Partial<WebViewBaseInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6072,6 +6409,9 @@ declare namespace imports.gi.WebKit2 {
 		get_requesting_domain(): string;
 	}
 
+	type WebsiteDataAccessPermissionRequestInitOptionsMixin = GObject.ObjectInitOptions & PermissionRequestInitOptions
+	export interface WebsiteDataAccessPermissionRequestInitOptions extends WebsiteDataAccessPermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataAccessPermissionRequest} instead.
 	 */
@@ -6080,7 +6420,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebsiteDataAccessPermissionRequest extends WebsiteDataAccessPermissionRequestMixin {}
 
 	class WebsiteDataAccessPermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6346,6 +6686,23 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebsiteDataManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebsiteDataManager,
+		"base_cache_directory" |
+		"base_data_directory" |
+		"disk_cache_directory" |
+		"dom_cache_directory" |
+		"hsts_cache_directory" |
+		"indexeddb_directory" |
+		"is_ephemeral" |
+		"itp_directory" |
+		"local_storage_directory" |
+		"offline_application_cache_directory" |
+		"service_worker_registrations_directory" |
+		"websql_directory">;
+
+	export interface WebsiteDataManagerInitOptions extends WebsiteDataManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsiteDataManager} instead.
 	 */
@@ -6354,7 +6711,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebsiteDataManager extends WebsiteDataManagerMixin {}
 
 	class WebsiteDataManager {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataManagerInitOptions>);
 		/**
 		 * Creates a new #WebKitWebsiteDataManager with the given options. It must
 		 * be passed as construction parameter of a #WebKitWebContext.
@@ -6386,6 +6743,12 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WebsitePoliciesInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWebsitePolicies,
+		"autoplay">;
+
+	export interface WebsitePoliciesInitOptions extends WebsitePoliciesInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WebsitePolicies} instead.
 	 */
@@ -6394,7 +6757,7 @@ declare namespace imports.gi.WebKit2 {
 	interface WebsitePolicies extends WebsitePoliciesMixin {}
 
 	class WebsitePolicies {
-		public constructor();
+		public constructor(options?: Partial<WebsitePoliciesInitOptions>);
 		/**
 		 * Create a new #WebKitWebsitePolicies
 		 * @returns the newly created #WebKitWebsitePolicies
@@ -6442,9 +6805,9 @@ declare namespace imports.gi.WebKit2 {
 		get_fullscreen(): boolean;
 		/**
 		 * Get the geometry the window should have on the screen when shown.
-		 * @param geometry return location for the window geometry
+		 * @returns return location for the window geometry
 		 */
-		get_geometry(geometry: Gdk.Rectangle): void;
+		get_geometry(): Gdk.Rectangle;
 		/**
 		 * Get whether the window should have the locationbar visible or not.
 		 * @returns %TRUE if locationbar should be visible or %FALSE otherwise.
@@ -6486,6 +6849,19 @@ declare namespace imports.gi.WebKit2 {
 
 	}
 
+	type WindowPropertiesInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWindowProperties,
+		"fullscreen" |
+		"geometry" |
+		"locationbar_visible" |
+		"menubar_visible" |
+		"resizable" |
+		"scrollbars_visible" |
+		"statusbar_visible" |
+		"toolbar_visible">;
+
+	export interface WindowPropertiesInitOptions extends WindowPropertiesInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowProperties} instead.
 	 */
@@ -6494,12 +6870,13 @@ declare namespace imports.gi.WebKit2 {
 	interface WindowProperties extends WindowPropertiesMixin {}
 
 	class WindowProperties {
-		public constructor();
+		public constructor(options?: Partial<WindowPropertiesInitOptions>);
 	}
 
+	export interface ApplicationInfoInitOptions {}
 	interface ApplicationInfo {}
 	class ApplicationInfo {
-		public constructor();
+		public constructor(options?: Partial<ApplicationInfoInitOptions>);
 		/**
 		 * Creates a new #WebKitApplicationInfo
 		 * @returns the newly created #WebKitApplicationInfo.
@@ -6551,117 +6928,134 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface AuthenticationRequestClassInitOptions {}
 	interface AuthenticationRequestClass {}
 	class AuthenticationRequestClass {
-		public constructor();
+		public constructor(options?: Partial<AuthenticationRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface AuthenticationRequestPrivateInitOptions {}
 	interface AuthenticationRequestPrivate {}
 	class AuthenticationRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<AuthenticationRequestPrivateInitOptions>);
 	}
 
+	export interface AutomationSessionClassInitOptions {}
 	interface AutomationSessionClass {}
 	class AutomationSessionClass {
-		public constructor();
+		public constructor(options?: Partial<AutomationSessionClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface AutomationSessionPrivateInitOptions {}
 	interface AutomationSessionPrivate {}
 	class AutomationSessionPrivate {
-		public constructor();
+		public constructor(options?: Partial<AutomationSessionPrivateInitOptions>);
 	}
 
+	export interface BackForwardListClassInitOptions {}
 	interface BackForwardListClass {}
 	class BackForwardListClass {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface BackForwardListItemClassInitOptions {}
 	interface BackForwardListItemClass {}
 	class BackForwardListItemClass {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListItemClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface BackForwardListItemPrivateInitOptions {}
 	interface BackForwardListItemPrivate {}
 	class BackForwardListItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListItemPrivateInitOptions>);
 	}
 
+	export interface BackForwardListPrivateInitOptions {}
 	interface BackForwardListPrivate {}
 	class BackForwardListPrivate {
-		public constructor();
+		public constructor(options?: Partial<BackForwardListPrivateInitOptions>);
 	}
 
+	export interface ColorChooserRequestClassInitOptions {}
 	interface ColorChooserRequestClass {}
 	class ColorChooserRequestClass {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserRequestClassInitOptions>);
 	}
 
+	export interface ColorChooserRequestPrivateInitOptions {}
 	interface ColorChooserRequestPrivate {}
 	class ColorChooserRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<ColorChooserRequestPrivateInitOptions>);
 	}
 
+	export interface ContextMenuClassInitOptions {}
 	interface ContextMenuClass {}
 	class ContextMenuClass {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface ContextMenuItemClassInitOptions {}
 	interface ContextMenuItemClass {}
 	class ContextMenuItemClass {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuItemClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface ContextMenuItemPrivateInitOptions {}
 	interface ContextMenuItemPrivate {}
 	class ContextMenuItemPrivate {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuItemPrivateInitOptions>);
 	}
 
+	export interface ContextMenuPrivateInitOptions {}
 	interface ContextMenuPrivate {}
 	class ContextMenuPrivate {
-		public constructor();
+		public constructor(options?: Partial<ContextMenuPrivateInitOptions>);
 	}
 
+	export interface CookieManagerClassInitOptions {}
 	interface CookieManagerClass {}
 	class CookieManagerClass {
-		public constructor();
+		public constructor(options?: Partial<CookieManagerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface CookieManagerPrivateInitOptions {}
 	interface CookieManagerPrivate {}
 	class CookieManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<CookieManagerPrivateInitOptions>);
 	}
 
+	export interface CredentialInitOptions {}
 	interface Credential {}
 	class Credential {
-		public constructor();
+		public constructor(options?: Partial<CredentialInitOptions>);
 		/**
 		 * Create a new credential from the provided username, password and persistence mode.
 		 * @param username The username for the new credential
@@ -6701,23 +7095,26 @@ declare namespace imports.gi.WebKit2 {
 		public has_password(): boolean;
 	}
 
+	export interface DeviceInfoPermissionRequestClassInitOptions {}
 	interface DeviceInfoPermissionRequestClass {}
 	class DeviceInfoPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<DeviceInfoPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface DeviceInfoPermissionRequestPrivateInitOptions {}
 	interface DeviceInfoPermissionRequestPrivate {}
 	class DeviceInfoPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<DeviceInfoPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface DownloadClassInitOptions {}
 	interface DownloadClass {}
 	class DownloadClass {
-		public constructor();
+		public constructor(options?: Partial<DownloadClassInitOptions>);
 		public decide_destination: {(download: Download, suggested_filename: string): boolean;};
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
@@ -6725,116 +7122,132 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface DownloadPrivateInitOptions {}
 	interface DownloadPrivate {}
 	class DownloadPrivate {
-		public constructor();
+		public constructor(options?: Partial<DownloadPrivateInitOptions>);
 	}
 
+	export interface EditorStateClassInitOptions {}
 	interface EditorStateClass {}
 	class EditorStateClass {
-		public constructor();
+		public constructor(options?: Partial<EditorStateClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface EditorStatePrivateInitOptions {}
 	interface EditorStatePrivate {}
 	class EditorStatePrivate {
-		public constructor();
+		public constructor(options?: Partial<EditorStatePrivateInitOptions>);
 	}
 
+	export interface FaviconDatabaseClassInitOptions {}
 	interface FaviconDatabaseClass {}
 	class FaviconDatabaseClass {
-		public constructor();
+		public constructor(options?: Partial<FaviconDatabaseClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface FaviconDatabasePrivateInitOptions {}
 	interface FaviconDatabasePrivate {}
 	class FaviconDatabasePrivate {
-		public constructor();
+		public constructor(options?: Partial<FaviconDatabasePrivateInitOptions>);
 	}
 
+	export interface FileChooserRequestClassInitOptions {}
 	interface FileChooserRequestClass {}
 	class FileChooserRequestClass {
-		public constructor();
+		public constructor(options?: Partial<FileChooserRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface FileChooserRequestPrivateInitOptions {}
 	interface FileChooserRequestPrivate {}
 	class FileChooserRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<FileChooserRequestPrivateInitOptions>);
 	}
 
+	export interface FindControllerClassInitOptions {}
 	interface FindControllerClass {}
 	class FindControllerClass {
-		public constructor();
+		public constructor(options?: Partial<FindControllerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface FindControllerPrivateInitOptions {}
 	interface FindControllerPrivate {}
 	class FindControllerPrivate {
-		public constructor();
+		public constructor(options?: Partial<FindControllerPrivateInitOptions>);
 	}
 
+	export interface FormSubmissionRequestClassInitOptions {}
 	interface FormSubmissionRequestClass {}
 	class FormSubmissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<FormSubmissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface FormSubmissionRequestPrivateInitOptions {}
 	interface FormSubmissionRequestPrivate {}
 	class FormSubmissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<FormSubmissionRequestPrivateInitOptions>);
 	}
 
+	export interface GeolocationManagerClassInitOptions {}
 	interface GeolocationManagerClass {}
 	class GeolocationManagerClass {
-		public constructor();
+		public constructor(options?: Partial<GeolocationManagerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface GeolocationManagerPrivateInitOptions {}
 	interface GeolocationManagerPrivate {}
 	class GeolocationManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<GeolocationManagerPrivateInitOptions>);
 	}
 
+	export interface GeolocationPermissionRequestClassInitOptions {}
 	interface GeolocationPermissionRequestClass {}
 	class GeolocationPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<GeolocationPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface GeolocationPermissionRequestPrivateInitOptions {}
 	interface GeolocationPermissionRequestPrivate {}
 	class GeolocationPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<GeolocationPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface GeolocationPositionInitOptions {}
 	/**
 	 * WebKitGeolocationPosition is an opaque struct used to provide position updates to a
 	 * #WebKitGeolocationManager using webkit_geolocation_manager_update_position().
 	 */
 	interface GeolocationPosition {}
 	class GeolocationPosition {
-		public constructor();
+		public constructor(options?: Partial<GeolocationPositionInitOptions>);
 		/**
 		 * Create a new #WebKitGeolocationPosition
 		 * @param latitude a valid latitude in degrees
@@ -6880,23 +7293,26 @@ declare namespace imports.gi.WebKit2 {
 		public set_timestamp(timestamp: number): void;
 	}
 
+	export interface HitTestResultClassInitOptions {}
 	interface HitTestResultClass {}
 	class HitTestResultClass {
-		public constructor();
+		public constructor(options?: Partial<HitTestResultClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface HitTestResultPrivateInitOptions {}
 	interface HitTestResultPrivate {}
 	class HitTestResultPrivate {
-		public constructor();
+		public constructor(options?: Partial<HitTestResultPrivateInitOptions>);
 	}
 
+	export interface ITPFirstPartyInitOptions {}
 	interface ITPFirstParty {}
 	class ITPFirstParty {
-		public constructor();
+		public constructor(options?: Partial<ITPFirstPartyInitOptions>);
 		/**
 		 * Get the domain name of #itp_first_party
 		 * @returns the domain name
@@ -6931,9 +7347,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface ITPThirdPartyInitOptions {}
 	interface ITPThirdParty {}
 	class ITPThirdParty {
-		public constructor();
+		public constructor(options?: Partial<ITPThirdPartyInitOptions>);
 		/**
 		 * Get the domain name of #itp_third_party
 		 * @returns the domain name
@@ -6959,9 +7376,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface InputMethodContextClassInitOptions {}
 	interface InputMethodContextClass {}
 	class InputMethodContextClass {
-		public constructor();
+		public constructor(options?: Partial<InputMethodContextClassInitOptions>);
 		public preedit_started: {(context: InputMethodContext): void;};
 		public preedit_changed: {(context: InputMethodContext): void;};
 		public preedit_finished: {(context: InputMethodContext): void;};
@@ -6985,14 +7403,16 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved7: {(): void;};
 	}
 
+	export interface InputMethodContextPrivateInitOptions {}
 	interface InputMethodContextPrivate {}
 	class InputMethodContextPrivate {
-		public constructor();
+		public constructor(options?: Partial<InputMethodContextPrivateInitOptions>);
 	}
 
+	export interface InputMethodUnderlineInitOptions {}
 	interface InputMethodUnderline {}
 	class InputMethodUnderline {
-		public constructor();
+		public constructor(options?: Partial<InputMethodUnderlineInitOptions>);
 		/**
 		 * Create a new #WebKitInputMethodUnderline for the given range in preedit string
 		 * @param start_offset the start offset in preedit string
@@ -7017,23 +7437,26 @@ declare namespace imports.gi.WebKit2 {
 		public set_color(rgba: Gdk.RGBA | null): void;
 	}
 
+	export interface InstallMissingMediaPluginsPermissionRequestClassInitOptions {}
 	interface InstallMissingMediaPluginsPermissionRequestClass {}
 	class InstallMissingMediaPluginsPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface InstallMissingMediaPluginsPermissionRequestPrivateInitOptions {}
 	interface InstallMissingMediaPluginsPermissionRequestPrivate {}
 	class InstallMissingMediaPluginsPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface JavascriptResultInitOptions {}
 	interface JavascriptResult {}
 	class JavascriptResult {
-		public constructor();
+		public constructor(options?: Partial<JavascriptResultInitOptions>);
 		/**
 		 * Get the global Javascript context that should be used with the
 		 * <function>JSValueRef</function> returned by webkit_javascript_result_get_value().
@@ -7066,23 +7489,26 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface MediaKeySystemPermissionRequestClassInitOptions {}
 	interface MediaKeySystemPermissionRequestClass {}
 	class MediaKeySystemPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<MediaKeySystemPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface MediaKeySystemPermissionRequestPrivateInitOptions {}
 	interface MediaKeySystemPermissionRequestPrivate {}
 	class MediaKeySystemPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<MediaKeySystemPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface MimeInfoInitOptions {}
 	interface MimeInfo {}
 	class MimeInfo {
-		public constructor();
+		public constructor(options?: Partial<MimeInfoInitOptions>);
 		public get_description(): string;
 		/**
 		 * Get the list of file extensions associated to the
@@ -7107,9 +7533,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface NavigationActionInitOptions {}
 	interface NavigationAction {}
 	class NavigationAction {
-		public constructor();
+		public constructor(options?: Partial<NavigationActionInitOptions>);
 		/**
 		 * Make a copy of #navigation.
 		 * @returns A copy of passed in #WebKitNavigationAction
@@ -7158,23 +7585,26 @@ declare namespace imports.gi.WebKit2 {
 		public is_user_gesture(): boolean;
 	}
 
+	export interface NavigationPolicyDecisionClassInitOptions {}
 	interface NavigationPolicyDecisionClass {}
 	class NavigationPolicyDecisionClass {
-		public constructor();
+		public constructor(options?: Partial<NavigationPolicyDecisionClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface NavigationPolicyDecisionPrivateInitOptions {}
 	interface NavigationPolicyDecisionPrivate {}
 	class NavigationPolicyDecisionPrivate {
-		public constructor();
+		public constructor(options?: Partial<NavigationPolicyDecisionPrivateInitOptions>);
 	}
 
+	export interface NetworkProxySettingsInitOptions {}
 	interface NetworkProxySettings {}
 	class NetworkProxySettings {
-		public constructor();
+		public constructor(options?: Partial<NetworkProxySettingsInitOptions>);
 		/**
 		 * Create a new #WebKitNetworkProxySettings with the given #default_proxy_uri and #ignore_hosts.
 		 * 
@@ -7231,9 +7661,10 @@ declare namespace imports.gi.WebKit2 {
 		public free(): void;
 	}
 
+	export interface NotificationClassInitOptions {}
 	interface NotificationClass {}
 	class NotificationClass {
-		public constructor();
+		public constructor(options?: Partial<NotificationClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
@@ -7242,33 +7673,38 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved5: {(): void;};
 	}
 
+	export interface NotificationPermissionRequestClassInitOptions {}
 	interface NotificationPermissionRequestClass {}
 	class NotificationPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<NotificationPermissionRequestClassInitOptions>);
 	}
 
+	export interface NotificationPermissionRequestPrivateInitOptions {}
 	interface NotificationPermissionRequestPrivate {}
 	class NotificationPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<NotificationPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface NotificationPrivateInitOptions {}
 	interface NotificationPrivate {}
 	class NotificationPrivate {
-		public constructor();
+		public constructor(options?: Partial<NotificationPrivateInitOptions>);
 	}
 
+	export interface OptionMenuClassInitOptions {}
 	interface OptionMenuClass {}
 	class OptionMenuClass {
-		public constructor();
+		public constructor(options?: Partial<OptionMenuClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface OptionMenuItemInitOptions {}
 	interface OptionMenuItem {}
 	class OptionMenuItem {
-		public constructor();
+		public constructor(options?: Partial<OptionMenuItemInitOptions>);
 		/**
 		 * Make a copy of the #WebKitOptionMenuItem.
 		 * @returns A copy of passed in #WebKitOptionMenuItem
@@ -7310,64 +7746,73 @@ declare namespace imports.gi.WebKit2 {
 		public is_selected(): boolean;
 	}
 
+	export interface OptionMenuPrivateInitOptions {}
 	interface OptionMenuPrivate {}
 	class OptionMenuPrivate {
-		public constructor();
+		public constructor(options?: Partial<OptionMenuPrivateInitOptions>);
 	}
 
+	export interface PermissionRequestIfaceInitOptions {}
 	interface PermissionRequestIface {}
 	class PermissionRequestIface {
-		public constructor();
+		public constructor(options?: Partial<PermissionRequestIfaceInitOptions>);
 		public readonly parent_interface: GObject.TypeInterface;
 		public allow: {(request: PermissionRequest): void;};
 		public deny: {(request: PermissionRequest): void;};
 	}
 
+	export interface PluginClassInitOptions {}
 	interface PluginClass {}
 	class PluginClass {
-		public constructor();
+		public constructor(options?: Partial<PluginClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface PluginPrivateInitOptions {}
 	interface PluginPrivate {}
 	class PluginPrivate {
-		public constructor();
+		public constructor(options?: Partial<PluginPrivateInitOptions>);
 	}
 
+	export interface PointerLockPermissionRequestClassInitOptions {}
 	interface PointerLockPermissionRequestClass {}
 	class PointerLockPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<PointerLockPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface PointerLockPermissionRequestPrivateInitOptions {}
 	interface PointerLockPermissionRequestPrivate {}
 	class PointerLockPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<PointerLockPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface PolicyDecisionClassInitOptions {}
 	interface PolicyDecisionClass {}
 	class PolicyDecisionClass {
-		public constructor();
+		public constructor(options?: Partial<PolicyDecisionClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface PolicyDecisionPrivateInitOptions {}
 	interface PolicyDecisionPrivate {}
 	class PolicyDecisionPrivate {
-		public constructor();
+		public constructor(options?: Partial<PolicyDecisionPrivateInitOptions>);
 	}
 
+	export interface PrintCustomWidgetClassInitOptions {}
 	interface PrintCustomWidgetClass {}
 	class PrintCustomWidgetClass {
-		public constructor();
+		public constructor(options?: Partial<PrintCustomWidgetClassInitOptions>);
 		public apply: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget): void;};
 		public update: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings): void;};
 		public _webkit_reserved0: {(): void;};
@@ -7376,42 +7821,48 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface PrintCustomWidgetPrivateInitOptions {}
 	interface PrintCustomWidgetPrivate {}
 	class PrintCustomWidgetPrivate {
-		public constructor();
+		public constructor(options?: Partial<PrintCustomWidgetPrivateInitOptions>);
 	}
 
+	export interface PrintOperationClassInitOptions {}
 	interface PrintOperationClass {}
 	class PrintOperationClass {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface PrintOperationPrivateInitOptions {}
 	interface PrintOperationPrivate {}
 	class PrintOperationPrivate {
-		public constructor();
+		public constructor(options?: Partial<PrintOperationPrivateInitOptions>);
 	}
 
+	export interface ResponsePolicyDecisionClassInitOptions {}
 	interface ResponsePolicyDecisionClass {}
 	class ResponsePolicyDecisionClass {
-		public constructor();
+		public constructor(options?: Partial<ResponsePolicyDecisionClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface ResponsePolicyDecisionPrivateInitOptions {}
 	interface ResponsePolicyDecisionPrivate {}
 	class ResponsePolicyDecisionPrivate {
-		public constructor();
+		public constructor(options?: Partial<ResponsePolicyDecisionPrivateInitOptions>);
 	}
 
+	export interface ScriptDialogInitOptions {}
 	interface ScriptDialog {}
 	class ScriptDialog {
-		public constructor();
+		public constructor(options?: Partial<ScriptDialogInitOptions>);
 		/**
 		 * Close #dialog. When handling a #WebKitScriptDialog asynchronously (webkit_script_dialog_ref()
 		 * was called in #WebKitWebView::script-dialog callback), this function needs to be called to notify
@@ -7471,23 +7922,26 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface SecurityManagerClassInitOptions {}
 	interface SecurityManagerClass {}
 	class SecurityManagerClass {
-		public constructor();
+		public constructor(options?: Partial<SecurityManagerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface SecurityManagerPrivateInitOptions {}
 	interface SecurityManagerPrivate {}
 	class SecurityManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<SecurityManagerPrivateInitOptions>);
 	}
 
+	export interface SecurityOriginInitOptions {}
 	interface SecurityOrigin {}
 	class SecurityOrigin {
-		public constructor();
+		public constructor(options?: Partial<SecurityOriginInitOptions>);
 		/**
 		 * Create a new security origin from the provided protocol, host and
 		 * port.
@@ -7555,65 +8009,74 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface SettingsClassInitOptions {}
 	interface SettingsClass {}
 	class SettingsClass {
-		public constructor();
+		public constructor(options?: Partial<SettingsClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface SettingsPrivateInitOptions {}
 	interface SettingsPrivate {}
 	class SettingsPrivate {
-		public constructor();
+		public constructor(options?: Partial<SettingsPrivateInitOptions>);
 	}
 
+	export interface URIRequestClassInitOptions {}
 	interface URIRequestClass {}
 	class URIRequestClass {
-		public constructor();
+		public constructor(options?: Partial<URIRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface URIRequestPrivateInitOptions {}
 	interface URIRequestPrivate {}
 	class URIRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<URIRequestPrivateInitOptions>);
 	}
 
+	export interface URIResponseClassInitOptions {}
 	interface URIResponseClass {}
 	class URIResponseClass {
-		public constructor();
+		public constructor(options?: Partial<URIResponseClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface URIResponsePrivateInitOptions {}
 	interface URIResponsePrivate {}
 	class URIResponsePrivate {
-		public constructor();
+		public constructor(options?: Partial<URIResponsePrivateInitOptions>);
 	}
 
+	export interface URISchemeRequestClassInitOptions {}
 	interface URISchemeRequestClass {}
 	class URISchemeRequestClass {
-		public constructor();
+		public constructor(options?: Partial<URISchemeRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface URISchemeRequestPrivateInitOptions {}
 	interface URISchemeRequestPrivate {}
 	class URISchemeRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<URISchemeRequestPrivateInitOptions>);
 	}
 
+	export interface UserContentFilterInitOptions {}
 	interface UserContentFilter {}
 	class UserContentFilter {
-		public constructor();
+		public constructor(options?: Partial<UserContentFilterInitOptions>);
 		/**
 		 * Obtain the identifier previously used to save the #user_content_filter in the
 		 * #WebKitUserContentFilterStore.
@@ -7635,65 +8098,74 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface UserContentFilterStoreClassInitOptions {}
 	interface UserContentFilterStoreClass {}
 	class UserContentFilterStoreClass {
-		public constructor();
+		public constructor(options?: Partial<UserContentFilterStoreClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface UserContentFilterStorePrivateInitOptions {}
 	interface UserContentFilterStorePrivate {}
 	class UserContentFilterStorePrivate {
-		public constructor();
+		public constructor(options?: Partial<UserContentFilterStorePrivateInitOptions>);
 	}
 
+	export interface UserContentManagerClassInitOptions {}
 	interface UserContentManagerClass {}
 	class UserContentManagerClass {
-		public constructor();
+		public constructor(options?: Partial<UserContentManagerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface UserContentManagerPrivateInitOptions {}
 	interface UserContentManagerPrivate {}
 	class UserContentManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<UserContentManagerPrivateInitOptions>);
 	}
 
+	export interface UserMediaPermissionRequestClassInitOptions {}
 	interface UserMediaPermissionRequestClass {}
 	class UserMediaPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<UserMediaPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface UserMediaPermissionRequestPrivateInitOptions {}
 	interface UserMediaPermissionRequestPrivate {}
 	class UserMediaPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<UserMediaPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface UserMessageClassInitOptions {}
 	interface UserMessageClass {}
 	class UserMessageClass {
-		public constructor();
+		public constructor(options?: Partial<UserMessageClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface UserMessagePrivateInitOptions {}
 	interface UserMessagePrivate {}
 	class UserMessagePrivate {
-		public constructor();
+		public constructor(options?: Partial<UserMessagePrivateInitOptions>);
 	}
 
+	export interface UserScriptInitOptions {}
 	interface UserScript {}
 	class UserScript {
-		public constructor();
+		public constructor(options?: Partial<UserScriptInitOptions>);
 		/**
 		 * Creates a new user script. Scripts can be applied to some URIs
 		 * only by passing non-null values for #allow_list or #block_list. Passing a
@@ -7737,9 +8209,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface UserStyleSheetInitOptions {}
 	interface UserStyleSheet {}
 	class UserStyleSheet {
-		public constructor();
+		public constructor(options?: Partial<UserStyleSheetInitOptions>);
 		/**
 		 * Creates a new user style sheet. Style sheets can be applied to some URIs
 		 * only by passing non-null values for #allow_list or #block_list. Passing a
@@ -7783,9 +8256,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface WebContextClassInitOptions {}
 	interface WebContextClass {}
 	class WebContextClass {
-		public constructor();
+		public constructor(options?: Partial<WebContextClassInitOptions>);
 		public download_started: {(context: WebContext, download: Download): void;};
 		public initialize_web_extensions: {(context: WebContext): void;};
 		public initialize_notification_permissions: {(context: WebContext): void;};
@@ -7796,42 +8270,48 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved2: {(): void;};
 	}
 
+	export interface WebContextPrivateInitOptions {}
 	interface WebContextPrivate {}
 	class WebContextPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebContextPrivateInitOptions>);
 	}
 
+	export interface WebInspectorClassInitOptions {}
 	interface WebInspectorClass {}
 	class WebInspectorClass {
-		public constructor();
+		public constructor(options?: Partial<WebInspectorClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebInspectorPrivateInitOptions {}
 	interface WebInspectorPrivate {}
 	class WebInspectorPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebInspectorPrivateInitOptions>);
 	}
 
+	export interface WebResourceClassInitOptions {}
 	interface WebResourceClass {}
 	class WebResourceClass {
-		public constructor();
+		public constructor(options?: Partial<WebResourceClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebResourcePrivateInitOptions {}
 	interface WebResourcePrivate {}
 	class WebResourcePrivate {
-		public constructor();
+		public constructor(options?: Partial<WebResourcePrivateInitOptions>);
 	}
 
+	export interface WebViewBaseClassInitOptions {}
 	interface WebViewBaseClass {}
 	class WebViewBaseClass {
-		public constructor();
+		public constructor(options?: Partial<WebViewBaseClassInitOptions>);
 		public readonly parentClass: Gtk.ContainerClass;
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
@@ -7839,14 +8319,16 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebViewBasePrivateInitOptions {}
 	interface WebViewBasePrivate {}
 	class WebViewBasePrivate {
-		public constructor();
+		public constructor(options?: Partial<WebViewBasePrivateInitOptions>);
 	}
 
+	export interface WebViewClassInitOptions {}
 	interface WebViewClass {}
 	class WebViewClass {
-		public constructor();
+		public constructor(options?: Partial<WebViewClassInitOptions>);
 		public load_changed: {(web_view: WebView, load_event: LoadEvent): void;};
 		public load_failed: {(web_view: WebView, load_event: LoadEvent, failing_uri: string, error: GLib.Error): boolean;};
 		public create: {(web_view: WebView, navigation_action: NavigationAction): Gtk.Widget;};
@@ -7877,14 +8359,16 @@ declare namespace imports.gi.WebKit2 {
 		public _webkit_reserved0: {(): void;};
 	}
 
+	export interface WebViewPrivateInitOptions {}
 	interface WebViewPrivate {}
 	class WebViewPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebViewPrivateInitOptions>);
 	}
 
+	export interface WebViewSessionStateInitOptions {}
 	interface WebViewSessionState {}
 	class WebViewSessionState {
-		public constructor();
+		public constructor(options?: Partial<WebViewSessionStateInitOptions>);
 		/**
 		 * Creates a new #WebKitWebViewSessionState from serialized data.
 		 * @param data a #GBytes
@@ -7911,9 +8395,10 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface WebsiteDataInitOptions {}
 	interface WebsiteData {}
 	class WebsiteData {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataInitOptions>);
 		/**
 		 * Gets the name of #WebKitWebsiteData. This is the website name, normally represented by
 		 * a domain or host name. All local documents are grouped in the same #WebKitWebsiteData using
@@ -7950,60 +8435,68 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
+	export interface WebsiteDataAccessPermissionRequestClassInitOptions {}
 	interface WebsiteDataAccessPermissionRequestClass {}
 	class WebsiteDataAccessPermissionRequestClass {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebsiteDataAccessPermissionRequestPrivateInitOptions {}
 	interface WebsiteDataAccessPermissionRequestPrivate {}
 	class WebsiteDataAccessPermissionRequestPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestPrivateInitOptions>);
 	}
 
+	export interface WebsiteDataManagerClassInitOptions {}
 	interface WebsiteDataManagerClass {}
 	class WebsiteDataManagerClass {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataManagerClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebsiteDataManagerPrivateInitOptions {}
 	interface WebsiteDataManagerPrivate {}
 	class WebsiteDataManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebsiteDataManagerPrivateInitOptions>);
 	}
 
+	export interface WebsitePoliciesClassInitOptions {}
 	interface WebsitePoliciesClass {}
 	class WebsitePoliciesClass {
-		public constructor();
+		public constructor(options?: Partial<WebsitePoliciesClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WebsitePoliciesPrivateInitOptions {}
 	interface WebsitePoliciesPrivate {}
 	class WebsitePoliciesPrivate {
-		public constructor();
+		public constructor(options?: Partial<WebsitePoliciesPrivateInitOptions>);
 	}
 
+	export interface WindowPropertiesClassInitOptions {}
 	interface WindowPropertiesClass {}
 	class WindowPropertiesClass {
-		public constructor();
+		public constructor(options?: Partial<WindowPropertiesClassInitOptions>);
 		public _webkit_reserved0: {(): void;};
 		public _webkit_reserved1: {(): void;};
 		public _webkit_reserved2: {(): void;};
 		public _webkit_reserved3: {(): void;};
 	}
 
+	export interface WindowPropertiesPrivateInitOptions {}
 	interface WindowPropertiesPrivate {}
 	class WindowPropertiesPrivate {
-		public constructor();
+		public constructor(options?: Partial<WindowPropertiesPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -8020,6 +8513,9 @@ declare namespace imports.gi.WebKit2 {
 		deny(): void;
 	}
 
+	type PermissionRequestInitOptionsMixin  = {};
+	export interface PermissionRequestInitOptions extends PermissionRequestInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PermissionRequest} instead.
 	 */
@@ -8028,7 +8524,7 @@ declare namespace imports.gi.WebKit2 {
 	interface PermissionRequest extends PermissionRequestMixin {}
 
 	class PermissionRequest {
-		public constructor();
+		public constructor(options?: Partial<PermissionRequestInitOptions>);
 	}
 
 

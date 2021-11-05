@@ -1,10 +1,12 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.GLib {
+	export interface ArrayInitOptions {}
 	/**
 	 * Contains the public fields of a GArray.
 	 */
 	interface Array {}
 	class Array {
-		public constructor();
+		public constructor(options?: Partial<ArrayInitOptions>);
 		/**
 		 * a pointer to the element data. The data may be moved as
 		 *     elements are added to the #GArray.
@@ -17,6 +19,7 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface AsyncQueueInitOptions {}
 	/**
 	 * An opaque data structure which represents an asynchronous queue.
 	 * 
@@ -24,7 +27,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface AsyncQueue {}
 	class AsyncQueue {
-		public constructor();
+		public constructor(options?: Partial<AsyncQueueInitOptions>);
 		/**
 		 * Returns the length of the queue.
 		 * 
@@ -297,12 +300,13 @@ declare namespace imports.gi.GLib {
 		public unref_and_unlock(): void;
 	}
 
+	export interface BookmarkFileInitOptions {}
 	/**
 	 * An opaque data structure representing a set of bookmarks.
 	 */
 	interface BookmarkFile {}
 	class BookmarkFile {
-		public constructor();
+		public constructor(options?: Partial<BookmarkFileInitOptions>);
 		/**
 		 * Adds the application with #name and #exec to the list of
 		 * applications that have registered a bookmark for #uri into
@@ -380,8 +384,14 @@ declare namespace imports.gi.GLib {
 		 * @param uri a valid URI
 		 * @param name an application's name
 		 * @returns %TRUE on success.
+		 * 
+		 * return location for the command line of the application, or %NULL
+		 * 
+		 * return location for the registration count, or %NULL
+		 * 
+		 * return location for the last registration time, or %NULL
 		 */
-		public get_app_info(uri: string, name: string): boolean;
+		public get_app_info(uri: string, name: string): [ boolean, string | null, number | null, number | null ];
 		/**
 		 * Gets the registration information of #app_name for the bookmark for
 		 * #uri.  See g_bookmark_file_set_application_info() for more information about
@@ -399,8 +409,14 @@ declare namespace imports.gi.GLib {
 		 * @param uri a valid URI
 		 * @param name an application's name
 		 * @returns %TRUE on success.
+		 * 
+		 * return location for the command line of the application, or %NULL
+		 * 
+		 * return location for the registration count, or %NULL
+		 * 
+		 * return location for the last registration time, or %NULL
 		 */
-		public get_application_info(uri: string, name: string): boolean;
+		public get_application_info(uri: string, name: string): [ boolean, string | null, number | null, DateTime | null ];
 		/**
 		 * Retrieves the names of the applications that have registered the
 		 * bookmark for #uri.
@@ -410,8 +426,10 @@ declare namespace imports.gi.GLib {
 		 * @param uri a valid URI
 		 * @returns a newly allocated %NULL-terminated array of strings.
 		 *   Use g_strfreev() to free it.
+		 * 
+		 * return location of the length of the returned list, or %NULL
 		 */
-		public get_applications(uri: string): string[];
+		public get_applications(uri: string): [ string[], number | null ];
 		/**
 		 * Retrieves the description of the bookmark for #uri.
 		 * 
@@ -433,8 +451,10 @@ declare namespace imports.gi.GLib {
 		 * @param uri a valid URI
 		 * @returns a newly allocated %NULL-terminated array of group names.
 		 *   Use g_strfreev() to free it.
+		 * 
+		 * return location for the length of the returned string, or %NULL
 		 */
-		public get_groups(uri: string): string[];
+		public get_groups(uri: string): [ string[], number | null ];
 		/**
 		 * Gets the icon of the bookmark for #uri.
 		 * 
@@ -443,8 +463,12 @@ declare namespace imports.gi.GLib {
 		 * @param uri a valid URI
 		 * @returns %TRUE if the icon for the bookmark for the URI was found.
 		 *   You should free the returned strings.
+		 * 
+		 * return location for the icon's location or %NULL
+		 * 
+		 * return location for the icon's MIME type or %NULL
 		 */
-		public get_icon(uri: string): boolean;
+		public get_icon(uri: string): [ boolean, string | null, string | null ];
 		/**
 		 * Gets whether the private flag of the bookmark for #uri is set.
 		 * 
@@ -509,8 +533,10 @@ declare namespace imports.gi.GLib {
 		 * optionally be %NULL.
 		 * @returns a newly allocated %NULL-terminated array of strings.
 		 *   Use g_strfreev() to free it.
+		 * 
+		 * return location for the number of returned URIs, or %NULL
 		 */
-		public get_uris(): string[];
+		public get_uris(): [ string[], number | null ];
 		/**
 		 * Gets the time the bookmark for #uri was last visited.
 		 * 
@@ -575,8 +601,11 @@ declare namespace imports.gi.GLib {
 		 * set to either a #GFileError or #GBookmarkFileError.
 		 * @param file a relative path to a filename to open and parse
 		 * @returns %TRUE if a key file could be loaded, %FALSE otherwise
+		 * 
+		 * return location for a string
+		 *    containing the full path of the file, or %NULL
 		 */
-		public load_from_data_dirs(file: string): boolean;
+		public load_from_data_dirs(file: string): [ boolean, string | null ];
 		/**
 		 * Loads a desktop bookmark file into an empty #GBookmarkFile structure.
 		 * If the file could not be loaded then #error is set to either a #GFileError
@@ -840,8 +869,10 @@ declare namespace imports.gi.GLib {
 		 * This function outputs #bookmark as a string.
 		 * @returns 
 		 *   a newly allocated string holding the contents of the #GBookmarkFile
+		 * 
+		 * return location for the length of the returned string, or %NULL
 		 */
-		public to_data(): number[];
+		public to_data(): [ number[], number | null ];
 		/**
 		 * This function outputs #bookmark into a file.  The write process is
 		 * guaranteed to be atomic by using g_file_set_contents() internally.
@@ -851,12 +882,13 @@ declare namespace imports.gi.GLib {
 		public to_file(filename: string): boolean;
 	}
 
+	export interface ByteArrayInitOptions {}
 	/**
 	 * Contains the public fields of a GByteArray.
 	 */
 	interface ByteArray {}
 	class ByteArray {
-		public constructor();
+		public constructor(options?: Partial<ByteArrayInitOptions>);
 		/**
 		 * a pointer to the element data. The data may be moved as
 		 *     elements are added to the #GByteArray
@@ -868,6 +900,7 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface BytesInitOptions {}
 	/**
 	 * A simple refcounted data type representing an immutable sequence of zero or
 	 * more bytes from an unspecified origin.
@@ -896,7 +929,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Bytes {}
 	class Bytes {
-		public constructor();
+		public constructor(options?: Partial<BytesInitOptions>);
 		/**
 		 * Creates a new #GBytes from #data.
 		 * 
@@ -990,8 +1023,10 @@ declare namespace imports.gi.GLib {
 		 * not be returned if #size is non-zero.
 		 * @returns 
 		 *          a pointer to the byte data, or %NULL
+		 * 
+		 * location to return size of byte data
 		 */
-		public get_data(): number[] | null;
+		public get_data(): [ number[] | null, number | null ];
 		/**
 		 * Gets a pointer to a region in #bytes.
 		 * 
@@ -1086,10 +1121,13 @@ declare namespace imports.gi.GLib {
 		 * data is copied.
 		 * @returns a pointer to the same byte data, which should be
 		 *          freed with g_free()
+		 * 
+		 * location to place the length of the returned data
 		 */
-		public unref_to_data(): number[];
+		public unref_to_data(): [ number[], number ];
 	}
 
+	export interface ChecksumInitOptions {}
 	/**
 	 * An opaque structure representing a checksumming operation.
 	 * 
@@ -1098,7 +1136,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Checksum {}
 	class Checksum {
-		public constructor();
+		public constructor(options?: Partial<ChecksumInitOptions>);
 		/**
 		 * Creates a new #GChecksum, using the checksum algorithm #checksum_type.
 		 * If the #checksum_type is not known, %NULL is returned.
@@ -1165,6 +1203,7 @@ declare namespace imports.gi.GLib {
 		public update(data: number[], length: number): void;
 	}
 
+	export interface CondInitOptions {}
 	/**
 	 * The #GCond struct is an opaque data structure that represents a
 	 * condition. Threads can block on a #GCond if they find a certain
@@ -1234,7 +1273,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Cond {}
 	class Cond {
-		public constructor();
+		public constructor(options?: Partial<CondInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -1349,6 +1388,7 @@ declare namespace imports.gi.GLib {
 		public wait_until(mutex: Mutex, end_time: number): boolean;
 	}
 
+	export interface DataInitOptions {}
 	/**
 	 * An opaque data structure that represents a keyed data list.
 	 * 
@@ -1356,9 +1396,10 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Data {}
 	class Data {
-		public constructor();
+		public constructor(options?: Partial<DataInitOptions>);
 	}
 
+	export interface DateInitOptions {}
 	/**
 	 * Represents a day between January 1, Year 1 and a few thousand years in
 	 * the future. None of its members should be accessed directly.
@@ -1374,7 +1415,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Date {}
 	class Date {
-		public constructor();
+		public constructor(options?: Partial<DateInitOptions>);
 		/**
 		 * Allocates a #GDate and initializes
 		 * it to a safe state. The new date will
@@ -1685,12 +1726,13 @@ declare namespace imports.gi.GLib {
 		public valid(): boolean;
 	}
 
+	export interface DateTimeInitOptions {}
 	/**
 	 * An opaque structure that represents a date and time, including a time zone.
 	 */
 	interface DateTime {}
 	class DateTime {
-		public constructor();
+		public constructor(options?: Partial<DateTimeInitOptions>);
 		/**
 		 * Creates a new #GDateTime corresponding to the given date and time in
 		 * the time zone #tz.
@@ -2365,13 +2407,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface DebugKeyInitOptions {}
 	/**
 	 * Associates a string with a bit flag.
 	 * Used in g_parse_debug_string().
 	 */
 	interface DebugKey {}
 	class DebugKey {
-		public constructor();
+		public constructor(options?: Partial<DebugKeyInitOptions>);
 		/**
 		 * the string
 		 */
@@ -2382,12 +2425,13 @@ declare namespace imports.gi.GLib {
 		public value: number;
 	}
 
+	export interface DirInitOptions {}
 	/**
 	 * An opaque structure representing an opened directory.
 	 */
 	interface Dir {}
 	class Dir {
-		public constructor();
+		public constructor(options?: Partial<DirInitOptions>);
 		/**
 		 * Closes the directory and deallocates all related resources.
 		 */
@@ -2418,13 +2462,14 @@ declare namespace imports.gi.GLib {
 		public rewind(): void;
 	}
 
+	export interface ErrorInitOptions {}
 	/**
 	 * The `GError` structure contains information about
 	 * an error that has occurred.
 	 */
 	interface Error {}
 	class Error {
-		public constructor();
+		public constructor(options?: Partial<ErrorInitOptions>);
 		/**
 		 * Creates a new #GError with the given #domain and #code,
 		 * and a message formatted with #format.
@@ -2494,6 +2539,7 @@ declare namespace imports.gi.GLib {
 		public matches(domain: Quark, code: number): boolean;
 	}
 
+	export interface HashTableInitOptions {}
 	/**
 	 * The #GHashTable struct is an opaque data structure to represent a
 	 * [Hash Table][glib-Hash-Tables]. It should only be accessed via the
@@ -2501,9 +2547,10 @@ declare namespace imports.gi.GLib {
 	 */
 	interface HashTable {}
 	class HashTable {
-		public constructor();
+		public constructor(options?: Partial<HashTableInitOptions>);
 	}
 
+	export interface HashTableIterInitOptions {}
 	/**
 	 * A GHashTableIter structure represents an iterator that can be used
 	 * to iterate over the elements of a #GHashTable. GHashTableIter
@@ -2515,7 +2562,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface HashTableIter {}
 	class HashTableIter {
-		public constructor();
+		public constructor(options?: Partial<HashTableIterInitOptions>);
 		public readonly dummy1: any;
 		public readonly dummy2: any;
 		public readonly dummy3: any;
@@ -2553,8 +2600,12 @@ declare namespace imports.gi.GLib {
 		 * pointed to as a result of this advancement. If %FALSE is returned,
 		 * #key and #value are not set, and the iterator becomes invalid.
 		 * @returns %FALSE if the end of the #GHashTable has been reached.
+		 * 
+		 * a location to store the key
+		 * 
+		 * a location to store the value
 		 */
-		public next(): boolean;
+		public next(): [ boolean, any | null, any | null ];
 		/**
 		 * Removes the key/value pair currently pointed to by the iterator
 		 * from its associated #GHashTable. Can only be called after
@@ -2596,6 +2647,7 @@ declare namespace imports.gi.GLib {
 		public steal(): void;
 	}
 
+	export interface HmacInitOptions {}
 	/**
 	 * An opaque structure representing a HMAC operation.
 	 * To create a new GHmac, use g_hmac_new(). To free
@@ -2603,7 +2655,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Hmac {}
 	class Hmac {
-		public constructor();
+		public constructor(options?: Partial<HmacInitOptions>);
 		/**
 		 * Copies a #GHmac. If #hmac has been closed, by calling
 		 * g_hmac_get_string() or g_hmac_get_digest(), the copied
@@ -2660,12 +2712,13 @@ declare namespace imports.gi.GLib {
 		public update(data: number[], length: number): void;
 	}
 
+	export interface HookInitOptions {}
 	/**
 	 * The #GHook struct represents a single hook function in a #GHookList.
 	 */
 	interface Hook {}
 	class Hook {
-		public constructor();
+		public constructor(options?: Partial<HookInitOptions>);
 		/**
 		 * data which is passed to func when this hook is invoked
 		 */
@@ -2710,12 +2763,13 @@ declare namespace imports.gi.GLib {
 		public compare_ids(sibling: Hook): number;
 	}
 
+	export interface HookListInitOptions {}
 	/**
 	 * The #GHookList struct represents a list of hook functions.
 	 */
 	interface HookList {}
 	class HookList {
-		public constructor();
+		public constructor(options?: Partial<HookListInitOptions>);
 		/**
 		 * the next free #GHook id
 		 */
@@ -2792,13 +2846,14 @@ declare namespace imports.gi.GLib {
 		public marshal_check(may_recurse: boolean, marshaller: HookCheckMarshaller, marshal_data: any | null): void;
 	}
 
+	export interface IConvInitOptions {}
 	/**
 	 * The GIConv struct wraps an iconv() conversion descriptor. It contains
 	 * private data and should only be accessed using the following functions.
 	 */
 	interface IConv {}
 	class IConv {
-		public constructor();
+		public constructor(options?: Partial<IConvInitOptions>);
 		/**
 		 * Same as the standard UNIX routine iconv(), but
 		 * may be implemented via libiconv on UNIX flavors that lack
@@ -2834,6 +2889,7 @@ declare namespace imports.gi.GLib {
 		public close(): number;
 	}
 
+	export interface IOChannelInitOptions {}
 	/**
 	 * A data structure representing an IO Channel. The fields should be
 	 * considered private and should only be accessed with the following
@@ -2841,7 +2897,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface IOChannel {}
 	class IOChannel {
-		public constructor();
+		public constructor(options?: Partial<IOChannelInitOptions>);
 		/**
 		 * Open a file #filename as a #GIOChannel using mode #mode. This
 		 * channel will be closed when the last reference to it is dropped,
@@ -2988,22 +3044,37 @@ declare namespace imports.gi.GLib {
 		public read(buf: string, count: number, bytes_read: number): IOError;
 		/**
 		 * Replacement for g_io_channel_read() with the new API.
-		 * @param buf 
-		 *     a buffer to read data into
 		 * @param count the size of the buffer. Note that the buffer may not be
 		 *     completely filled even if there is data in the buffer if the
 		 *     remaining data is not a complete character.
 		 * @returns the status of the operation.
+		 * 
+		 * 
+		 *     a buffer to read data into
+		 * 
+		 * The number of bytes read. This may be
+		 *     zero even on success if count < 6 and the channel's encoding
+		 *     is non-%NULL. This indicates that the next UTF-8 character is
+		 *     too wide for the buffer.
 		 */
-		public read_chars(buf: number[], count: number): IOStatus;
+		public read_chars(count: number): [ IOStatus, number[], number | null ];
 		/**
 		 * Reads a line, including the terminating character(s),
 		 * from a #GIOChannel into a newly-allocated string.
 		 * #str_return will contain allocated memory if the return
 		 * is %G_IO_STATUS_NORMAL.
 		 * @returns the status of the operation.
+		 * 
+		 * The line read from the #GIOChannel, including the
+		 *              line terminator. This data should be freed with g_free()
+		 *              when no longer needed. This is a nul-terminated string.
+		 *              If a #length of zero is returned, this will be %NULL instead.
+		 * 
+		 * location to store length of the read data, or %NULL
+		 * 
+		 * location to store position of line terminator, or %NULL
 		 */
-		public read_line(): IOStatus;
+		public read_line(): [ IOStatus, string, number | null, number | null ];
 		/**
 		 * Reads a line from a #GIOChannel, using a #GString as a buffer.
 		 * @param buffer a #GString into which the line will be written.
@@ -3017,14 +3088,24 @@ declare namespace imports.gi.GLib {
 		 * Reads all the remaining data from the file.
 		 * @returns %G_IO_STATUS_NORMAL on success.
 		 *     This function never returns %G_IO_STATUS_EOF.
+		 * 
+		 * Location to
+		 *              store a pointer to a string holding the remaining data in the
+		 *              #GIOChannel. This data should be freed with g_free() when no
+		 *              longer needed. This data is terminated by an extra nul
+		 *              character, but there may be other nuls in the intervening data.
+		 * 
+		 * location to store length of the data
 		 */
-		public read_to_end(): IOStatus;
+		public read_to_end(): [ IOStatus, number[], number ];
 		/**
 		 * Reads a Unicode character from #channel.
 		 * This function cannot be called on a channel with %NULL encoding.
 		 * @returns a #GIOStatus
+		 * 
+		 * a location to return a character
 		 */
-		public read_unichar(): IOStatus;
+		public read_unichar(): [ IOStatus, string ];
 		/**
 		 * Increments the reference count of a #GIOChannel.
 		 * @returns the #channel that was passed in (since 2.6)
@@ -3186,8 +3267,14 @@ declare namespace imports.gi.GLib {
 		 * @param count the size of the buffer. If -1, the buffer
 		 *         is taken to be a nul-terminated string.
 		 * @returns the status of the operation.
+		 * 
+		 * The number of bytes written. This can be nonzero
+		 *                 even if the return value is not %G_IO_STATUS_NORMAL.
+		 *                 If the return value is %G_IO_STATUS_NORMAL and the
+		 *                 channel is blocking, this will always be equal
+		 *                 to #count if #count >= 0.
 		 */
-		public write_chars(buf: number[], count: number): IOStatus;
+		public write_chars(buf: number[], count: number): [ IOStatus, number ];
 		/**
 		 * Writes a Unicode character to #channel.
 		 * This function cannot be called on a channel with %NULL encoding.
@@ -3197,13 +3284,14 @@ declare namespace imports.gi.GLib {
 		public write_unichar(thechar: string): IOStatus;
 	}
 
+	export interface IOFuncsInitOptions {}
 	/**
 	 * A table of functions used to handle different types of #GIOChannel
 	 * in a generic way.
 	 */
 	interface IOFuncs {}
 	class IOFuncs {
-		public constructor();
+		public constructor(options?: Partial<IOFuncsInitOptions>);
 		public io_read: {(channel: IOChannel, buf: string, count: number, bytes_read: number): IOStatus;};
 		public io_write: {(channel: IOChannel, buf: string, count: number, bytes_written: number): IOStatus;};
 		public io_seek: {(channel: IOChannel, offset: number, type: SeekType): IOStatus;};
@@ -3214,13 +3302,14 @@ declare namespace imports.gi.GLib {
 		public io_get_flags: {(channel: IOChannel): IOFlags;};
 	}
 
+	export interface KeyFileInitOptions {}
 	/**
 	 * The GKeyFile struct contains only private data
 	 * and should not be accessed directly.
 	 */
 	interface KeyFile {}
 	class KeyFile {
-		public constructor();
+		public constructor(options?: Partial<KeyFileInitOptions>);
 		/**
 		 * Creates a new empty #GKeyFile object. Use
 		 * g_key_file_load_from_file(), g_key_file_load_from_data(),
@@ -3263,8 +3352,10 @@ declare namespace imports.gi.GLib {
 		 *    the values associated with the key as a list of booleans, or %NULL if the
 		 *    key was not found or could not be parsed. The returned list of booleans
 		 *    should be freed with g_free() when no longer needed.
+		 * 
+		 * the number of booleans returned
 		 */
-		public get_boolean_list(group_name: string, key: string): boolean[];
+		public get_boolean_list(group_name: string, key: string): [ boolean[], number ];
 		/**
 		 * Retrieves a comment above #key from #group_name.
 		 * If #key is %NULL then #comment will be read from above
@@ -3307,16 +3398,20 @@ declare namespace imports.gi.GLib {
 		 *     the values associated with the key as a list of doubles, or %NULL if the
 		 *     key was not found or could not be parsed. The returned list of doubles
 		 *     should be freed with g_free() when no longer needed.
+		 * 
+		 * the number of doubles returned
 		 */
-		public get_double_list(group_name: string, key: string): number[];
+		public get_double_list(group_name: string, key: string): [ number[], number ];
 		/**
 		 * Returns all groups in the key file loaded with #key_file.
 		 * The array of returned groups will be %NULL-terminated, so
 		 * #length may optionally be %NULL.
 		 * @returns a newly-allocated %NULL-terminated array of strings.
 		 *   Use g_strfreev() to free it.
+		 * 
+		 * return location for the number of returned groups, or %NULL
 		 */
-		public get_groups(): string[];
+		public get_groups(): [ string[], number | null ];
 		/**
 		 * Returns the value associated with #key under #group_name as a signed
 		 * 64-bit integer. This is similar to g_key_file_get_integer() but can return
@@ -3357,8 +3452,10 @@ declare namespace imports.gi.GLib {
 		 *     the values associated with the key as a list of integers, or %NULL if
 		 *     the key was not found or could not be parsed. The returned list of
 		 *     integers should be freed with g_free() when no longer needed.
+		 * 
+		 * the number of integers returned
 		 */
-		public get_integer_list(group_name: string, key: string): number[];
+		public get_integer_list(group_name: string, key: string): [ number[], number ];
 		/**
 		 * Returns all keys for the group name #group_name.  The array of
 		 * returned keys will be %NULL-terminated, so #length may
@@ -3368,8 +3465,10 @@ declare namespace imports.gi.GLib {
 		 * @param group_name a group name
 		 * @returns a newly-allocated %NULL-terminated array of strings.
 		 *     Use g_strfreev() to free it.
+		 * 
+		 * return location for the number of keys returned, or %NULL
 		 */
-		public get_keys(group_name: string): string[];
+		public get_keys(group_name: string): [ string[], number | null ];
 		/**
 		 * Returns the actual locale which the result of
 		 * g_key_file_get_locale_string() or g_key_file_get_locale_string_list()
@@ -3428,8 +3527,10 @@ declare namespace imports.gi.GLib {
 		 * @returns a newly allocated %NULL-terminated string array
 		 *   or %NULL if the key isn't found. The string array should be freed
 		 *   with g_strfreev().
+		 * 
+		 * return location for the number of returned strings or %NULL
 		 */
-		public get_locale_string_list(group_name: string, key: string, locale: string | null): string[];
+		public get_locale_string_list(group_name: string, key: string, locale: string | null): [ string[], number | null ];
 		/**
 		 * Returns the name of the start group of the file.
 		 * @returns The start group of the key file.
@@ -3462,8 +3563,10 @@ declare namespace imports.gi.GLib {
 		 * @returns 
 		 *  a %NULL-terminated string array or %NULL if the specified
 		 *  key cannot be found. The array should be freed with g_strfreev().
+		 * 
+		 * return location for the number of returned strings, or %NULL
 		 */
-		public get_string_list(group_name: string, key: string): string[];
+		public get_string_list(group_name: string, key: string): [ string[], number | null ];
 		/**
 		 * Returns the value associated with #key under #group_name as an unsigned
 		 * 64-bit integer. This is similar to g_key_file_get_integer() but can return
@@ -3537,8 +3640,11 @@ declare namespace imports.gi.GLib {
 		 * @param file a relative path to a filename to open and parse
 		 * @param flags flags from #GKeyFileFlags
 		 * @returns %TRUE if a key file could be loaded, %FALSE otherwise
+		 * 
+		 * return location for a string containing the full path
+		 *   of the file, or %NULL
 		 */
-		public load_from_data_dirs(file: string, flags: KeyFileFlags): boolean;
+		public load_from_data_dirs(file: string, flags: KeyFileFlags): [ boolean, string | null ];
 		/**
 		 * This function looks for a key file named #file in the paths
 		 * specified in #search_dirs, loads the file into #key_file and
@@ -3553,8 +3659,11 @@ declare namespace imports.gi.GLib {
 		 * @param search_dirs %NULL-terminated array of directories to search
 		 * @param flags flags from #GKeyFileFlags
 		 * @returns %TRUE if a key file could be loaded, %FALSE otherwise
+		 * 
+		 * return location for a string containing the full path
+		 *   of the file, or %NULL
 		 */
-		public load_from_dirs(file: string, search_dirs: string[], flags: KeyFileFlags): boolean;
+		public load_from_dirs(file: string, search_dirs: string[], flags: KeyFileFlags): [ boolean, string | null ];
 		/**
 		 * Loads a key file into an empty #GKeyFile structure.
 		 * 
@@ -3760,8 +3869,11 @@ declare namespace imports.gi.GLib {
 		 * so it is safe to pass %NULL as #error.
 		 * @returns a newly allocated string holding
 		 *   the contents of the #GKeyFile
+		 * 
+		 * return location for the length of the
+		 *   returned string, or %NULL
 		 */
-		public to_data(): string;
+		public to_data(): [ string, number | null ];
 		/**
 		 * Decreases the reference count of #key_file by 1. If the reference count
 		 * reaches zero, frees the key file and all its allocated memory.
@@ -3769,12 +3881,13 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface ListInitOptions {}
 	/**
 	 * The #GList struct is used for each element in a doubly-linked list.
 	 */
 	interface List {}
 	class List {
-		public constructor();
+		public constructor(options?: Partial<ListInitOptions>);
 		/**
 		 * holds the element's data, which can be a pointer to any kind
 		 *        of data, or any integer value using the
@@ -3791,6 +3904,7 @@ declare namespace imports.gi.GLib {
 		public prev: GLib.List;
 	}
 
+	export interface LogFieldInitOptions {}
 	/**
 	 * Structure representing a single field in a structured log entry. See
 	 * g_log_structured() for details.
@@ -3802,7 +3916,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface LogField {}
 	class LogField {
-		public constructor();
+		public constructor(options?: Partial<LogFieldInitOptions>);
 		/**
 		 * field name (UTF-8 string)
 		 */
@@ -3817,13 +3931,14 @@ declare namespace imports.gi.GLib {
 		public length: number;
 	}
 
+	export interface MainContextInitOptions {}
 	/**
 	 * The `GMainContext` struct is an opaque data
 	 * type representing a set of sources to be handled in a main loop.
 	 */
 	interface MainContext {}
 	class MainContext {
-		public constructor();
+		public constructor(options?: Partial<MainContextInitOptions>);
 		/**
 		 * Creates a new #GMainContext structure.
 		 * @returns the new #GMainContext
@@ -3999,8 +4114,11 @@ declare namespace imports.gi.GLib {
 		 * g_main_context_acquire() before you may call this function.
 		 * @returns %TRUE if some source is ready to be dispatched
 		 *               prior to polling.
+		 * 
+		 * location to store priority of highest priority
+		 *            source already ready.
 		 */
-		public prepare(): boolean;
+		public prepare(): [ boolean, number | null ];
 		/**
 		 * Acquires #context and sets it as the thread-default context for the
 		 * current thread. This will cause certain asynchronous operations
@@ -4051,14 +4169,17 @@ declare namespace imports.gi.GLib {
 		 * You must have successfully acquired the context with
 		 * g_main_context_acquire() before you may call this function.
 		 * @param max_priority maximum priority source to check
-		 * @param fds location to
-		 *       store #GPollFD records that need to be polled.
 		 * @param n_fds length of #fds.
 		 * @returns the number of records actually stored in #fds,
 		 *   or, if more than #n_fds records need to be stored, the number
 		 *   of records that need to be stored.
+		 * 
+		 * location to store timeout to be used in polling
+		 * 
+		 * location to
+		 *       store #GPollFD records that need to be polled.
 		 */
-		public query(max_priority: number, fds: PollFD[], n_fds: number): number;
+		public query(max_priority: number, n_fds: number): [ number, number, PollFD[] ];
 		/**
 		 * Increases the reference count on a #GMainContext object by one.
 		 * @returns the #context that was passed in (since 2.6)
@@ -4138,13 +4259,14 @@ declare namespace imports.gi.GLib {
 		public wakeup(): void;
 	}
 
+	export interface MainLoopInitOptions {}
 	/**
 	 * The `GMainLoop` struct is an opaque data type
 	 * representing the main event loop of a GLib or GTK+ application.
 	 */
 	interface MainLoop {}
 	class MainLoop {
-		public constructor();
+		public constructor(options?: Partial<MainLoopInitOptions>);
 		/**
 		 * Creates a new #GMainLoop structure.
 		 * @param context a #GMainContext  (if %NULL, the default context will be used).
@@ -4191,6 +4313,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MappedFileInitOptions {}
 	/**
 	 * The #GMappedFile represents a file mapping created with
 	 * g_mapped_file_new(). It has only private members and should
@@ -4198,7 +4321,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MappedFile {}
 	class MappedFile {
-		public constructor();
+		public constructor(options?: Partial<MappedFileInitOptions>);
 		/**
 		 * Maps a file into memory. On UNIX, this is using the mmap() function.
 		 * 
@@ -4286,6 +4409,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MarkupParseContextInitOptions {}
 	/**
 	 * A parse context is used to parse a stream of bytes that
 	 * you expect to contain marked-up text.
@@ -4295,7 +4419,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MarkupParseContext {}
 	class MarkupParseContext {
-		public constructor();
+		public constructor(options?: Partial<MarkupParseContextInitOptions>);
 		/**
 		 * Creates a new parse context. A parse context is used to parse
 		 * marked-up documents. You can feed any number of documents into
@@ -4533,6 +4657,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MarkupParserInitOptions {}
 	/**
 	 * Any of the fields in #GMarkupParser can be %NULL, in which case they
 	 * will be ignored. Except for the #error function, any of these callbacks
@@ -4544,7 +4669,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MarkupParser {}
 	class MarkupParser {
-		public constructor();
+		public constructor(options?: Partial<MarkupParserInitOptions>);
 		public start_element: {(context: MarkupParseContext, element_name: string, attribute_names: string, attribute_values: string): void;};
 		public end_element: {(context: MarkupParseContext, element_name: string): void;};
 		public text: {(context: MarkupParseContext, text: string, text_len: number): void;};
@@ -4552,13 +4677,14 @@ declare namespace imports.gi.GLib {
 		public error: {(context: MarkupParseContext, error: Error): void;};
 	}
 
+	export interface MatchInfoInitOptions {}
 	/**
 	 * A GMatchInfo is an opaque struct used to return information about
 	 * matches.
 	 */
 	interface MatchInfo {}
 	class MatchInfo {
-		public constructor();
+		public constructor(options?: Partial<MatchInfoInitOptions>);
 		/**
 		 * Returns a new string containing the text in #string_to_expand with
 		 * references and escape sequences expanded. References refer to the last
@@ -4649,8 +4775,14 @@ declare namespace imports.gi.GLib {
 		 * @returns %TRUE if the position was fetched, %FALSE otherwise.
 		 *     If the position cannot be fetched, #start_pos and #end_pos
 		 *     are left unchanged.
+		 * 
+		 * pointer to location where to store
+		 *     the start position, or %NULL
+		 * 
+		 * pointer to location where to store
+		 *     the end position, or %NULL
 		 */
-		public fetch_named_pos(name: string): boolean;
+		public fetch_named_pos(name: string): [ boolean, number | null, number | null ];
 		/**
 		 * Retrieves the position in bytes of the #match_num'th capturing
 		 * parentheses. 0 is the full text of the match, 1 is the first
@@ -4669,8 +4801,14 @@ declare namespace imports.gi.GLib {
 		 * @returns %TRUE if the position was fetched, %FALSE otherwise. If
 		 *   the position cannot be fetched, #start_pos and #end_pos are left
 		 *   unchanged
+		 * 
+		 * pointer to location where to store
+		 *     the start position, or %NULL
+		 * 
+		 * pointer to location where to store
+		 *     the end position, or %NULL
 		 */
-		public fetch_pos(match_num: number): boolean;
+		public fetch_pos(match_num: number): [ boolean, number | null, number | null ];
 		/**
 		 * If #match_info is not %NULL, calls g_match_info_unref(); otherwise does
 		 * nothing.
@@ -4767,6 +4905,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface MemVTableInitOptions {}
 	/**
 	 * A set of functions used to perform memory allocation. The same #GMemVTable must
 	 * be used for all allocations in the same program; a call to g_mem_set_vtable(),
@@ -4776,7 +4915,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface MemVTable {}
 	class MemVTable {
-		public constructor();
+		public constructor(options?: Partial<MemVTableInitOptions>);
 		public malloc: {(n_bytes: number): any;};
 		public realloc: {(mem: any, n_bytes: number): any;};
 		public free: {(mem: any): void;};
@@ -4785,12 +4924,13 @@ declare namespace imports.gi.GLib {
 		public try_realloc: {(mem: any, n_bytes: number): any;};
 	}
 
+	export interface NodeInitOptions {}
 	/**
 	 * The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
 	 */
 	interface Node {}
 	class Node {
-		public constructor();
+		public constructor(options?: Partial<NodeInitOptions>);
 		/**
 		 * contains the actual data of the node.
 		 */
@@ -4998,6 +5138,7 @@ declare namespace imports.gi.GLib {
 		public unlink(): void;
 	}
 
+	export interface OnceInitOptions {}
 	/**
 	 * A #GOnce struct controls a one-time initialization function. Any
 	 * one-time initialization function must have its own unique #GOnce
@@ -5005,7 +5146,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Once {}
 	class Once {
-		public constructor();
+		public constructor(options?: Partial<OnceInitOptions>);
 		/**
 		 * the status of the #GOnce
 		 */
@@ -5018,6 +5159,7 @@ declare namespace imports.gi.GLib {
 		public impl(func: ThreadFunc, arg: any | null): any | null;
 	}
 
+	export interface OptionContextInitOptions {}
 	/**
 	 * A `GOptionContext` struct defines which options
 	 * are accepted by the commandline option parser. The struct has only private
@@ -5025,7 +5167,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionContext {}
 	class OptionContext {
-		public constructor();
+		public constructor(options?: Partial<OptionContextInitOptions>);
 		/**
 		 * Adds a #GOptionGroup to the #context, so that parsing with #context
 		 * will recognize the options in the group. Note that this will take
@@ -5248,6 +5390,7 @@ declare namespace imports.gi.GLib {
 		public set_translation_domain(domain: string): void;
 	}
 
+	export interface OptionEntryInitOptions {}
 	/**
 	 * A GOptionEntry struct defines a single option. To have an effect, they
 	 * must be added to a #GOptionGroup with g_option_context_add_main_entries()
@@ -5255,7 +5398,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionEntry {}
 	class OptionEntry {
-		public constructor();
+		public constructor(options?: Partial<OptionEntryInitOptions>);
 		/**
 		 * The long name of an option can be used to specify it
 		 *     in a commandline as `--long_name`. Every option must have a
@@ -5314,6 +5457,7 @@ declare namespace imports.gi.GLib {
 		public arg_description: string;
 	}
 
+	export interface OptionGroupInitOptions {}
 	/**
 	 * A `GOptionGroup` struct defines the options in a single
 	 * group. The struct has only private fields and should not be directly accessed.
@@ -5325,7 +5469,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface OptionGroup {}
 	class OptionGroup {
-		public constructor();
+		public constructor(options?: Partial<OptionGroupInitOptions>);
 		/**
 		 * Creates a new #GOptionGroup.
 		 * @param name the name for the option group, this is used to provide
@@ -5403,13 +5547,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface PatternSpecInitOptions {}
 	/**
 	 * A GPatternSpec struct is the 'compiled' form of a pattern. This
 	 * structure is opaque and its fields cannot be accessed directly.
 	 */
 	interface PatternSpec {}
 	class PatternSpec {
-		public constructor();
+		public constructor(options?: Partial<PatternSpecInitOptions>);
 		/**
 		 * Compiles a pattern to a #GPatternSpec.
 		 * @param pattern a zero-terminated UTF-8 encoded string
@@ -5467,13 +5612,14 @@ declare namespace imports.gi.GLib {
 		public match_string(string: string): boolean;
 	}
 
+	export interface PollFDInitOptions {}
 	/**
 	 * Represents a file descriptor, which events to poll for, and which events
 	 * occurred.
 	 */
 	interface PollFD {}
 	class PollFD {
-		public constructor();
+		public constructor(options?: Partial<PollFDInitOptions>);
 		/**
 		 * the file descriptor to poll (or a HANDLE on Win32)
 		 */
@@ -5492,6 +5638,7 @@ declare namespace imports.gi.GLib {
 		public revents: number;
 	}
 
+	export interface PrivateInitOptions {}
 	/**
 	 * The #GPrivate struct is an opaque data structure to represent a
 	 * thread-local data key. It is approximately equivalent to the
@@ -5513,7 +5660,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Private {}
 	class Private {
-		public constructor();
+		public constructor(options?: Partial<PrivateInitOptions>);
 		public readonly p: any;
 		public readonly notify: DestroyNotify;
 		public readonly future: any[];
@@ -5547,12 +5694,13 @@ declare namespace imports.gi.GLib {
 		public set(value: any | null): void;
 	}
 
+	export interface PtrArrayInitOptions {}
 	/**
 	 * Contains the public fields of a pointer array.
 	 */
 	interface PtrArray {}
 	class PtrArray {
-		public constructor();
+		public constructor(options?: Partial<PtrArrayInitOptions>);
 		/**
 		 * points to the array of pointers, which may be moved when the
 		 *     array grows
@@ -5564,13 +5712,14 @@ declare namespace imports.gi.GLib {
 		public len: number;
 	}
 
+	export interface QueueInitOptions {}
 	/**
 	 * Contains the public fields of a
 	 * [Queue][glib-Double-ended-Queues].
 	 */
 	interface Queue {}
 	class Queue {
-		public constructor();
+		public constructor(options?: Partial<QueueInitOptions>);
 		/**
 		 * a pointer to the first element of the queue
 		 */
@@ -5874,6 +6023,7 @@ declare namespace imports.gi.GLib {
 		public unlink(link_: GLib.List): void;
 	}
 
+	export interface RWLockInitOptions {}
 	/**
 	 * The GRWLock struct is an opaque data structure to represent a
 	 * reader-writer lock. It is similar to a #GMutex in that it allows
@@ -5941,7 +6091,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface RWLock {}
 	class RWLock {
-		public constructor();
+		public constructor(options?: Partial<RWLockInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -6041,13 +6191,14 @@ declare namespace imports.gi.GLib {
 		public writer_unlock(): void;
 	}
 
+	export interface RandInitOptions {}
 	/**
 	 * The GRand struct is an opaque data structure. It should only be
 	 * accessed through the g_rand_* functions.
 	 */
 	interface Rand {}
 	class Rand {
-		public constructor();
+		public constructor(options?: Partial<RandInitOptions>);
 		/**
 		 * Copies a #GRand into a new one with the same exact state as before.
 		 * This way you can take a snapshot of the random number generator for
@@ -6104,6 +6255,7 @@ declare namespace imports.gi.GLib {
 		public set_seed_array(seed: number, seed_length: number): void;
 	}
 
+	export interface RecMutexInitOptions {}
 	/**
 	 * The GRecMutex struct is an opaque data structure to represent a
 	 * recursive mutex. It is similar to a #GMutex with the difference
@@ -6120,7 +6272,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface RecMutex {}
 	class RecMutex {
-		public constructor();
+		public constructor(options?: Partial<RecMutexInitOptions>);
 		public readonly p: any;
 		public readonly i: number[];
 		/**
@@ -6192,6 +6344,7 @@ declare namespace imports.gi.GLib {
 		public unlock(): void;
 	}
 
+	export interface RegexInitOptions {}
 	/**
 	 * The g_regex_*() functions implement regular
 	 * expression pattern matching using syntax and semantics similar to
@@ -6261,7 +6414,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Regex {}
 	class Regex {
-		public constructor();
+		public constructor(options?: Partial<RegexInitOptions>);
 		/**
 		 * Compiles the regular expression to an internal form, and does
 		 * the initial setup of the #GRegex structure.
@@ -6367,8 +6520,11 @@ declare namespace imports.gi.GLib {
 		 * @param string the string to scan for matches
 		 * @param match_options match options
 		 * @returns %TRUE is the string matched, %FALSE otherwise
+		 * 
+		 * pointer to location where to store
+		 *     the #GMatchInfo, or %NULL if you do not need it
 		 */
-		public match(string: string, match_options: RegexMatchFlags): boolean;
+		public match(string: string, match_options: RegexMatchFlags): [ boolean, MatchInfo | null ];
 		/**
 		 * Using the standard algorithm for regular expression matching only
 		 * the longest match in the string is retrieved. This function uses
@@ -6387,8 +6543,11 @@ declare namespace imports.gi.GLib {
 		 * @param string the string to scan for matches
 		 * @param match_options match options
 		 * @returns %TRUE is the string matched, %FALSE otherwise
+		 * 
+		 * pointer to location where to store
+		 *     the #GMatchInfo, or %NULL if you do not need it
 		 */
-		public match_all(string: string, match_options: RegexMatchFlags): boolean;
+		public match_all(string: string, match_options: RegexMatchFlags): [ boolean, MatchInfo | null ];
 		/**
 		 * Using the standard algorithm for regular expression matching only
 		 * the longest match in the #string is retrieved, it is not possible
@@ -6433,8 +6592,11 @@ declare namespace imports.gi.GLib {
 		 * @param start_position starting index of the string to match, in bytes
 		 * @param match_options match options
 		 * @returns %TRUE is the string matched, %FALSE otherwise
+		 * 
+		 * pointer to location where to store
+		 *     the #GMatchInfo, or %NULL if you do not need it
 		 */
-		public match_all_full(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags): boolean;
+		public match_all_full(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags): [ boolean, MatchInfo | null ];
 		/**
 		 * Scans for a match in #string for the pattern in #regex.
 		 * The #match_options are combined with the match options specified
@@ -6492,8 +6654,11 @@ declare namespace imports.gi.GLib {
 		 * @param start_position starting index of the string to match, in bytes
 		 * @param match_options match options
 		 * @returns %TRUE is the string matched, %FALSE otherwise
+		 * 
+		 * pointer to location where to store
+		 *     the #GMatchInfo, or %NULL if you do not need it
 		 */
-		public match_full(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags): boolean;
+		public match_full(string: string[], string_len: number, start_position: number, match_options: RegexMatchFlags): [ boolean, MatchInfo | null ];
 		/**
 		 * Increases reference count of #regex by 1.
 		 * @returns #regex
@@ -6668,13 +6833,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface SListInitOptions {}
 	/**
 	 * The #GSList struct is used for each element in the singly-linked
 	 * list.
 	 */
 	interface SList {}
 	class SList {
-		public constructor();
+		public constructor(options?: Partial<SListInitOptions>);
 		/**
 		 * holds the element's data, which can be a pointer to any kind
 		 *        of data, or any integer value using the
@@ -6687,6 +6853,7 @@ declare namespace imports.gi.GLib {
 		public next: GLib.SList;
 	}
 
+	export interface ScannerInitOptions {}
 	/**
 	 * The data structure representing a lexical scanner.
 	 * 
@@ -6705,7 +6872,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Scanner {}
 	class Scanner {
-		public constructor();
+		public constructor(options?: Partial<ScannerInitOptions>);
 		/**
 		 * unused
 		 */
@@ -6933,6 +7100,7 @@ declare namespace imports.gi.GLib {
 		public warn(format: string): void;
 	}
 
+	export interface ScannerConfigInitOptions {}
 	/**
 	 * Specifies the #GScanner parser configuration. Most settings can
 	 * be changed during the parsing phase and will affect the lexical
@@ -6940,7 +7108,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface ScannerConfig {}
 	class ScannerConfig {
-		public constructor();
+		public constructor(options?: Partial<ScannerConfigInitOptions>);
 		/**
 		 * specifies which characters should be skipped
 		 *     by the scanner (the default is the whitespace characters: space,
@@ -7078,13 +7246,14 @@ declare namespace imports.gi.GLib {
 		public readonly padding_dummy: number;
 	}
 
+	export interface SequenceInitOptions {}
 	/**
 	 * The #GSequence struct is an opaque data type representing a
 	 * [sequence][glib-Sequences] data type.
 	 */
 	interface Sequence {}
 	class Sequence {
-		public constructor();
+		public constructor(options?: Partial<SequenceInitOptions>);
 		/**
 		 * Adds a new item to the end of #seq.
 		 * @param data the data for the new item
@@ -7289,13 +7458,14 @@ declare namespace imports.gi.GLib {
 		public sort_iter(cmp_func: SequenceIterCompareFunc, cmp_data: any | null): void;
 	}
 
+	export interface SequenceIterInitOptions {}
 	/**
 	 * The #GSequenceIter struct is an opaque data type representing an
 	 * iterator pointing into a #GSequence.
 	 */
 	interface SequenceIter {}
 	class SequenceIter {
-		public constructor();
+		public constructor(options?: Partial<SequenceIterInitOptions>);
 		/**
 		 * Returns a negative number if #a comes before #b, 0 if they are equal,
 		 * and a positive number if #a comes after #b.
@@ -7351,13 +7521,14 @@ declare namespace imports.gi.GLib {
 		public prev(): SequenceIter;
 	}
 
+	export interface SourceInitOptions {}
 	/**
 	 * The `GSource` struct is an opaque data type
 	 * representing an event source.
 	 */
 	interface Source {}
 	class Source {
-		public constructor();
+		public constructor(options?: Partial<SourceInitOptions>);
 		/**
 		 * Creates a new #GSource structure. The size is specified to
 		 * allow creating structures derived from #GSource that contain
@@ -7842,18 +8013,20 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface SourceCallbackFuncsInitOptions {}
 	/**
 	 * The `GSourceCallbackFuncs` struct contains
 	 * functions for managing callback objects.
 	 */
 	interface SourceCallbackFuncs {}
 	class SourceCallbackFuncs {
-		public constructor();
+		public constructor(options?: Partial<SourceCallbackFuncsInitOptions>);
 		public ref: {(cb_data: any): void;};
 		public unref: {(cb_data: any): void;};
 		public get: {(cb_data: any, source: Source, func: SourceFunc, data: any | null): void;};
 	}
 
+	export interface SourceFuncsInitOptions {}
 	/**
 	 * The `GSourceFuncs` struct contains a table of
 	 * functions used to handle event sources in a generic manner.
@@ -7878,7 +8051,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface SourceFuncs {}
 	class SourceFuncs {
-		public constructor();
+		public constructor(options?: Partial<SourceFuncsInitOptions>);
 		public readonly closure_callback: SourceFunc;
 		public readonly closure_marshal: SourceDummyMarshal;
 		public prepare: {(source: Source, timeout_: number): boolean;};
@@ -7887,11 +8060,13 @@ declare namespace imports.gi.GLib {
 		public finalize: {(source: Source): void;};
 	}
 
+	export interface SourcePrivateInitOptions {}
 	interface SourcePrivate {}
 	class SourcePrivate {
-		public constructor();
+		public constructor(options?: Partial<SourcePrivateInitOptions>);
 	}
 
+	export interface StatBufInitOptions {}
 	/**
 	 * A type corresponding to the appropriate struct type for the stat()
 	 * system call, depending on the platform and/or compiler being used.
@@ -7900,15 +8075,16 @@ declare namespace imports.gi.GLib {
 	 */
 	interface StatBuf {}
 	class StatBuf {
-		public constructor();
+		public constructor(options?: Partial<StatBufInitOptions>);
 	}
 
+	export interface StringInitOptions {}
 	/**
 	 * The GString struct contains the public fields of a GString.
 	 */
 	interface String {}
 	class String {
-		public constructor();
+		public constructor(options?: Partial<StringInitOptions>);
 		/**
 		 * Creates a new #GString, initialized with the given string.
 		 * @param init the initial text to copy into the string, or %NULL to
@@ -8239,13 +8415,14 @@ declare namespace imports.gi.GLib {
 		public vprintf(format: string, args: any[]): void;
 	}
 
+	export interface StringChunkInitOptions {}
 	/**
 	 * An opaque data structure representing String Chunks.
 	 * It should only be accessed by using the following functions.
 	 */
 	interface StringChunk {}
 	class StringChunk {
-		public constructor();
+		public constructor(options?: Partial<StringChunkInitOptions>);
 		/**
 		 * Frees all strings contained within the #GStringChunk.
 		 * After calling g_string_chunk_clear() it is not safe to
@@ -8312,6 +8489,7 @@ declare namespace imports.gi.GLib {
 		public insert_len(string: string, len: number): string;
 	}
 
+	export interface StrvBuilderInitOptions {}
 	/**
 	 * #GStrvBuilder is a method of easily building dynamically sized
 	 * NULL-terminated string arrays.
@@ -8327,7 +8505,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface StrvBuilder {}
 	class StrvBuilder {
-		public constructor();
+		public constructor(options?: Partial<StrvBuilderInitOptions>);
 		/**
 		 * Add a string to the end of the array.
 		 * 
@@ -8372,21 +8550,23 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface TestCaseInitOptions {}
 	/**
 	 * An opaque structure representing a test case.
 	 */
 	interface TestCase {}
 	class TestCase {
-		public constructor();
+		public constructor(options?: Partial<TestCaseInitOptions>);
 		/**
 		 * Free the #test_case.
 		 */
 		public free(): void;
 	}
 
+	export interface TestConfigInitOptions {}
 	interface TestConfig {}
 	class TestConfig {
-		public constructor();
+		public constructor(options?: Partial<TestConfigInitOptions>);
 		public test_initialized: boolean;
 		public test_quick: boolean;
 		public test_perf: boolean;
@@ -8395,9 +8575,10 @@ declare namespace imports.gi.GLib {
 		public test_undefined: boolean;
 	}
 
+	export interface TestLogBufferInitOptions {}
 	interface TestLogBuffer {}
 	class TestLogBuffer {
-		public constructor();
+		public constructor(options?: Partial<TestLogBufferInitOptions>);
 		public readonly data: String;
 		public readonly msgs: GLib.SList;
 		/**
@@ -8417,9 +8598,10 @@ declare namespace imports.gi.GLib {
 		public push(n_bytes: number, bytes: number): void;
 	}
 
+	export interface TestLogMsgInitOptions {}
 	interface TestLogMsg {}
 	class TestLogMsg {
-		public constructor();
+		public constructor(options?: Partial<TestLogMsgInitOptions>);
 		public log_type: TestLogType;
 		public n_strings: number;
 		public strings: string;
@@ -8431,12 +8613,13 @@ declare namespace imports.gi.GLib {
 		public free(): void;
 	}
 
+	export interface TestSuiteInitOptions {}
 	/**
 	 * An opaque structure representing a test suite.
 	 */
 	interface TestSuite {}
 	class TestSuite {
-		public constructor();
+		public constructor(options?: Partial<TestSuiteInitOptions>);
 		/**
 		 * Adds #test_case to #suite.
 		 * @param test_case a #GTestCase
@@ -8453,6 +8636,7 @@ declare namespace imports.gi.GLib {
 		public free(): void;
 	}
 
+	export interface ThreadInitOptions {}
 	/**
 	 * The #GThread struct represents a running thread. This struct
 	 * is returned by g_thread_new() or g_thread_try_new(). You can
@@ -8470,7 +8654,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Thread {}
 	class Thread {
-		public constructor();
+		public constructor(options?: Partial<ThreadInitOptions>);
 		/**
 		 * This function creates a new thread. The new thread starts by invoking
 		 * #func with the argument data. The thread will run until #func returns
@@ -8553,6 +8737,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface ThreadPoolInitOptions {}
 	/**
 	 * The #GThreadPool struct represents a thread pool. It has three
 	 * public read-only members, but the underlying struct is bigger,
@@ -8560,7 +8745,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface ThreadPool {}
 	class ThreadPool {
-		public constructor();
+		public constructor(options?: Partial<ThreadPoolInitOptions>);
 		/**
 		 * the function to execute in the threads of this pool
 		 */
@@ -8679,6 +8864,7 @@ declare namespace imports.gi.GLib {
 		public unprocessed(): number;
 	}
 
+	export interface TimeValInitOptions {}
 	/**
 	 * Represents a precise time, with seconds and microseconds.
 	 * 
@@ -8693,7 +8879,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface TimeVal {}
 	class TimeVal {
-		public constructor();
+		public constructor(options?: Partial<TimeValInitOptions>);
 		/**
 		 * seconds
 		 */
@@ -8749,13 +8935,14 @@ declare namespace imports.gi.GLib {
 		public to_iso8601(): string | null;
 	}
 
+	export interface TimeZoneInitOptions {}
 	/**
 	 * #GTimeZone is an opaque structure whose members cannot be accessed
 	 * directly.
 	 */
 	interface TimeZone {}
 	class TimeZone {
-		public constructor();
+		public constructor(options?: Partial<TimeZoneInitOptions>);
 		/**
 		 * A version of g_time_zone_new_identifier() which returns the UTC time zone
 		 * if #identifier could not be parsed or loaded.
@@ -8970,12 +9157,13 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface TimerInitOptions {}
 	/**
 	 * Opaque datatype that records a start time.
 	 */
 	interface Timer {}
 	class Timer {
-		public constructor();
+		public constructor(options?: Partial<TimerInitOptions>);
 		/**
 		 * Resumes a timer that has previously been stopped with
 		 * g_timer_stop(). g_timer_stop() must be called before using this
@@ -9025,13 +9213,14 @@ declare namespace imports.gi.GLib {
 		public stop(): void;
 	}
 
+	export interface TrashStackInitOptions {}
 	/**
 	 * Each piece of memory that is pushed onto the stack
 	 * is cast to a GTrashStack*.
 	 */
 	interface TrashStack {}
 	class TrashStack {
-		public constructor();
+		public constructor(options?: Partial<TrashStackInitOptions>);
 		/**
 		 * pointer to the previous element of the stack,
 		 *     gets stored in the first `sizeof (gpointer)`
@@ -9040,6 +9229,7 @@ declare namespace imports.gi.GLib {
 		public next: TrashStack;
 	}
 
+	export interface TreeInitOptions {}
 	/**
 	 * The GTree struct is an opaque data structure representing a
 	 * [balanced binary tree][glib-Balanced-Binary-Trees]. It should be
@@ -9047,7 +9237,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Tree {}
 	class Tree {
-		public constructor();
+		public constructor(options?: Partial<TreeInitOptions>);
 		/**
 		 * Creates a new #GTree.
 		 * @param key_compare_func the function used to order the nodes in the #GTree.
@@ -9169,8 +9359,12 @@ declare namespace imports.gi.GLib {
 		 * g_tree_remove().
 		 * @param lookup_key the key to look up
 		 * @returns %TRUE if the key was found in the #GTree
+		 * 
+		 * returns the original key
+		 * 
+		 * returns the value associated with the key
 		 */
-		public lookup_extended(lookup_key: any | null): boolean;
+		public lookup_extended(lookup_key: any | null): [ boolean, any | null, any | null ];
 		/**
 		 * Gets the tree node corresponding to the given key. Since a #GTree is
 		 * automatically balanced as key/value pairs are added, key lookup
@@ -9332,12 +9526,13 @@ declare namespace imports.gi.GLib {
 		public upper_bound(key: any | null): TreeNode | null;
 	}
 
+	export interface TreeNodeInitOptions {}
 	/**
 	 * An opaque type which identifies a specific node in a #GTree.
 	 */
 	interface TreeNode {}
 	class TreeNode {
-		public constructor();
+		public constructor(options?: Partial<TreeNodeInitOptions>);
 		/**
 		 * Gets the key stored at a particular tree node.
 		 * @returns the key at the node.
@@ -9362,6 +9557,7 @@ declare namespace imports.gi.GLib {
 		public value(): any | null;
 	}
 
+	export interface UriInitOptions {}
 	/**
 	 * The #GUri type and related functions can be used to parse URIs into
 	 * their components, and build valid URIs from individual components.
@@ -9474,7 +9670,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface Uri {}
 	class Uri {
-		public constructor();
+		public constructor(options?: Partial<UriInitOptions>);
 		/**
 		 * Gets #uri's authentication parameters, which may contain
 		 * `%`-encoding, depending on the flags with which #uri was created.
@@ -9606,6 +9802,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface UriParamsIterInitOptions {}
 	/**
 	 * Many URI schemes include one or more attribute/value pairs as part of the URI
 	 * value. For example `scheme://server/path?query=string&is=there` has two
@@ -9619,7 +9816,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface UriParamsIter {}
 	class UriParamsIter {
-		public constructor();
+		public constructor(options?: Partial<UriParamsIterInitOptions>);
 		public readonly dummy0: number;
 		public readonly dummy1: any;
 		public readonly dummy2: any;
@@ -9681,10 +9878,17 @@ declare namespace imports.gi.GLib {
 		 * allow repeated attributes.
 		 * @returns %FALSE if the end of the parameters has been reached or an error was
 		 *     encountered. %TRUE otherwise.
+		 * 
+		 * on return, contains
+		 *     the attribute, or %NULL.
+		 * 
+		 * on return, contains
+		 *     the value, or %NULL.
 		 */
-		public next(): boolean;
+		public next(): [ boolean, string | null, string | null ];
 	}
 
+	export interface VariantInitOptions {}
 	/**
 	 * #GVariant is a variant datatype; it can contain one or more values
 	 * along with information about the type of the values.
@@ -10458,8 +10662,11 @@ declare namespace imports.gi.GLib {
 		 * The return value must be freed using g_free().
 		 * @returns 
 		 *          a newly allocated string
+		 * 
+		 * a pointer to a #gsize, to store
+		 *          the length (not including the nul terminator)
 		 */
-		public dup_bytestring(): number[];
+		public dup_bytestring(): [ number[], number | null ];
 		/**
 		 * Gets the contents of an array of array of bytes #GVariant.  This call
 		 * makes a deep copy; the return result should be released with
@@ -10472,8 +10679,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public dup_bytestring_array(): string[];
+		public dup_bytestring_array(): [ string[], number | null ];
 		/**
 		 * Gets the contents of an array of object paths #GVariant.  This call
 		 * makes a deep copy; the return result should be released with
@@ -10486,8 +10695,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public dup_objv(): string[];
+		public dup_objv(): [ string[], number | null ];
 		/**
 		 * Similar to g_variant_get_string() except that instead of returning
 		 * a constant string, the string is duplicated.
@@ -10496,8 +10707,10 @@ declare namespace imports.gi.GLib {
 		 * 
 		 * The return value must be freed using g_free().
 		 * @returns a newly allocated string, UTF-8 encoded
+		 * 
+		 * a pointer to a #gsize, to store the length
 		 */
-		public dup_string(): string;
+		public dup_string(): [ string, number ];
 		/**
 		 * Gets the contents of an array of strings #GVariant.  This call
 		 * makes a deep copy; the return result should be released with
@@ -10510,8 +10723,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public dup_strv(): string[];
+		public dup_strv(): [ string[], number | null ];
 		/**
 		 * Checks if #one and #two have the same type and value.
 		 * 
@@ -10592,8 +10807,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of constant strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public get_bytestring_array(): string[];
+		public get_bytestring_array(): [ string[], number | null ];
 		/**
 		 * Reads a child item out of a container #GVariant instance and
 		 * deconstructs it according to #format_string.  This call is
@@ -10711,8 +10928,10 @@ declare namespace imports.gi.GLib {
 		 * @param element_size the size of each element
 		 * @returns a pointer to
 		 *     the fixed array
+		 * 
+		 * a pointer to the location to store the number of items
 		 */
-		public get_fixed_array(element_size: number): any[];
+		public get_fixed_array(element_size: number): [ any[], number ];
 		/**
 		 * Returns the 32-bit signed integer value of #value.
 		 * 
@@ -10794,8 +11013,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of constant strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public get_objv(): string[];
+		public get_objv(): [ string[], number | null ];
 		/**
 		 * Determines the number of bytes that would be required to store #value
 		 * with g_variant_store().
@@ -10831,8 +11052,11 @@ declare namespace imports.gi.GLib {
 		 * 
 		 * The return value remains valid as long as #value exists.
 		 * @returns the constant string, UTF-8 encoded
+		 * 
+		 * a pointer to a #gsize,
+		 *          to store the length
 		 */
-		public get_string(): string;
+		public get_string(): [ string, number | null ];
 		/**
 		 * Gets the contents of an array of strings #GVariant.  This call
 		 * makes a shallow copy; the return result should be released with
@@ -10845,8 +11069,10 @@ declare namespace imports.gi.GLib {
 		 * For an empty array, #length will be set to 0 and a pointer to a
 		 * %NULL pointer will be returned.
 		 * @returns an array of constant strings
+		 * 
+		 * the length of the result, or %NULL
 		 */
-		public get_strv(): string[];
+		public get_strv(): [ string[], number | null ];
 		/**
 		 * Determines the type of #value.
 		 * 
@@ -11164,6 +11390,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantBuilderInitOptions {}
 	/**
 	 * A utility type for constructing container-type #GVariant instances.
 	 * 
@@ -11175,7 +11402,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantBuilder {}
 	class VariantBuilder {
-		public constructor();
+		public constructor(options?: Partial<VariantBuilderInitOptions>);
 		/**
 		 * Allocates and initialises a new #GVariantBuilder.
 		 * 
@@ -11408,6 +11635,7 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantDictInitOptions {}
 	/**
 	 * #GVariantDict is a mutable interface to #GVariant dictionaries.
 	 * 
@@ -11501,7 +11729,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantDict {}
 	class VariantDict {
-		public constructor();
+		public constructor(options?: Partial<VariantDictInitOptions>);
 		/**
 		 * Allocates and initialises a new #GVariantDict.
 		 * 
@@ -11648,13 +11876,14 @@ declare namespace imports.gi.GLib {
 		public unref(): void;
 	}
 
+	export interface VariantIterInitOptions {}
 	/**
 	 * #GVariantIter is an opaque data structure and can only be accessed
 	 * using the following functions.
 	 */
 	interface VariantIter {}
 	class VariantIter {
-		public constructor();
+		public constructor(options?: Partial<VariantIterInitOptions>);
 		public readonly x: number[];
 		/**
 		 * Creates a new heap-allocated #GVariantIter to iterate over the
@@ -11843,6 +12072,7 @@ declare namespace imports.gi.GLib {
 		public next_value(): Variant | null;
 	}
 
+	export interface VariantTypeInitOptions {}
 	/**
 	 * This section introduces the GVariant type system. It is based, in
 	 * large part, on the D-Bus type system, with two major changes and
@@ -11994,7 +12224,7 @@ declare namespace imports.gi.GLib {
 	 */
 	interface VariantType {}
 	class VariantType {
-		public constructor();
+		public constructor(options?: Partial<VariantTypeInitOptions>);
 		/**
 		 * Creates a new #GVariantType corresponding to the type string given
 		 * by #type_string.  It is appropriate to call g_variant_type_free() on
@@ -16902,6 +17132,11 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type DoubleIEEE754InitOptionsMixin = Pick<IDoubleIEEE754,
+		"v_double">;
+
+	export interface DoubleIEEE754InitOptions extends DoubleIEEE754InitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DoubleIEEE754} instead.
 	 */
@@ -16916,7 +17151,7 @@ declare namespace imports.gi.GLib {
 	interface DoubleIEEE754 extends DoubleIEEE754Mixin {}
 
 	class DoubleIEEE754 {
-		public constructor();
+		public constructor(options?: Partial<DoubleIEEE754InitOptions>);
 	}
 
 
@@ -16933,6 +17168,11 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type FloatIEEE754InitOptionsMixin = Pick<IFloatIEEE754,
+		"v_float">;
+
+	export interface FloatIEEE754InitOptions extends FloatIEEE754InitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link FloatIEEE754} instead.
 	 */
@@ -16947,7 +17187,7 @@ declare namespace imports.gi.GLib {
 	interface FloatIEEE754 extends FloatIEEE754Mixin {}
 
 	class FloatIEEE754 {
-		public constructor();
+		public constructor(options?: Partial<FloatIEEE754InitOptions>);
 	}
 
 
@@ -17027,6 +17267,9 @@ declare namespace imports.gi.GLib {
 		unlock(): void;
 	}
 
+	type MutexInitOptionsMixin  = {};
+	export interface MutexInitOptions extends MutexInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Mutex} instead.
 	 */
@@ -17081,7 +17324,7 @@ declare namespace imports.gi.GLib {
 	interface Mutex extends MutexMixin {}
 
 	class Mutex {
-		public constructor();
+		public constructor(options?: Partial<MutexInitOptions>);
 	}
 
 
@@ -17153,6 +17396,22 @@ declare namespace imports.gi.GLib {
 
 	}
 
+	type TokenValueInitOptionsMixin = Pick<ITokenValue,
+		"v_symbol" |
+		"v_identifier" |
+		"v_binary" |
+		"v_octal" |
+		"v_int" |
+		"v_int64" |
+		"v_float" |
+		"v_hex" |
+		"v_string" |
+		"v_comment" |
+		"v_char" |
+		"v_error">;
+
+	export interface TokenValueInitOptions extends TokenValueInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TokenValue} instead.
 	 */
@@ -17164,7 +17423,7 @@ declare namespace imports.gi.GLib {
 	interface TokenValue extends TokenValueMixin {}
 
 	class TokenValue {
-		public constructor();
+		public constructor(options?: Partial<TokenValueInitOptions>);
 	}
 
 
@@ -17406,8 +17665,10 @@ declare namespace imports.gi.GLib {
 	 * @param min a lower bound (inclusive)
 	 * @param max an upper bound (inclusive)
 	 * @returns %TRUE if #str was a number, otherwise %FALSE.
+	 * 
+	 * a return location for a number
 	 */
-	function ascii_string_to_signed(str: string, base: number, min: number, max: number): boolean;
+	function ascii_string_to_signed(str: string, base: number, min: number, max: number): [ boolean, number | null ];
 
 	/**
 	 * A convenience function for converting a string to an unsigned number.
@@ -17437,8 +17698,10 @@ declare namespace imports.gi.GLib {
 	 * @param min a lower bound (inclusive)
 	 * @param max an upper bound (inclusive)
 	 * @returns %TRUE if #str was a number, otherwise %FALSE.
+	 * 
+	 * a return location for a number
 	 */
-	function ascii_string_to_unsigned(str: string, base: number, min: number, max: number): boolean;
+	function ascii_string_to_unsigned(str: string, base: number, min: number, max: number): [ boolean, number | null ];
 
 	/**
 	 * Compare #s1 and #s2, ignoring the case of ASCII characters and any
@@ -17485,8 +17748,11 @@ declare namespace imports.gi.GLib {
 	 * you can reliably detect overflow and underflow.
 	 * @param nptr the string to convert to a numeric value.
 	 * @returns the #gdouble value.
+	 * 
+	 * if non-%NULL, it returns the
+	 *           character after the last character used in the conversion.
 	 */
-	function ascii_strtod(nptr: string): number;
+	function ascii_strtod(nptr: string): [ number, string | null ];
 
 	/**
 	 * Converts a string to a #gint64 value.
@@ -17509,8 +17775,11 @@ declare namespace imports.gi.GLib {
 	 * @param nptr the string to convert to a numeric value.
 	 * @param base to be used for the conversion, 2..36 or 0
 	 * @returns the #gint64 value or zero on error.
+	 * 
+	 * if non-%NULL, it returns the
+	 *           character after the last character used in the conversion.
 	 */
-	function ascii_strtoll(nptr: string, base: number): number;
+	function ascii_strtoll(nptr: string, base: number): [ number, string | null ];
 
 	/**
 	 * Converts a string to a #guint64 value.
@@ -17538,8 +17807,11 @@ declare namespace imports.gi.GLib {
 	 * @param nptr the string to convert to a numeric value.
 	 * @param base to be used for the conversion, 2..36 or 0
 	 * @returns the #guint64 value or zero on error.
+	 * 
+	 * if non-%NULL, it returns the
+	 *           character after the last character used in the conversion.
 	 */
-	function ascii_strtoull(nptr: string, base: number): number;
+	function ascii_strtoull(nptr: string, base: number): [ number, string | null ];
 
 	/**
 	 * Converts all lower case ASCII letters to upper case ASCII letters.
@@ -18037,8 +18309,10 @@ declare namespace imports.gi.GLib {
 	 *               newly allocated buffer containing the binary data
 	 *               that #text represents. The returned buffer must
 	 *               be freed with g_free().
+	 * 
+	 * The length of the decoded data is written here
 	 */
-	function base64_decode(text: string): number[];
+	function base64_decode(text: string): [ number[], number ];
 
 	/**
 	 * Decode a sequence of Base-64 encoded text into binary data
@@ -18059,10 +18333,11 @@ declare namespace imports.gi.GLib {
 	 * state).
 	 * @param _in binary input data
 	 * @param len max length of #in data to decode
-	 * @param out output buffer
 	 * @returns The number of bytes of output that was written
+	 * 
+	 * output buffer
 	 */
-	function base64_decode_step(_in: number[], len: number, out: number[]): number;
+	function base64_decode_step(_in: number[], len: number): [ number, number[] ];
 
 	/**
 	 * Encode a sequence of binary data into its Base-64 stringified
@@ -18085,8 +18360,10 @@ declare namespace imports.gi.GLib {
 	 * The #out array will not be automatically nul-terminated.
 	 * @param break_lines whether to break long lines
 	 * @returns The number of bytes of output that was written
+	 * 
+	 * pointer to destination buffer
 	 */
-	function base64_encode_close(break_lines: boolean): number;
+	function base64_encode_close(break_lines: boolean): [ number, number[] ];
 
 	/**
 	 * Incrementally encode a sequence of binary data into its Base-64 stringified
@@ -18112,8 +18389,10 @@ declare namespace imports.gi.GLib {
 	 * @param len the length of #in
 	 * @param break_lines whether to break long lines
 	 * @returns The number of bytes of output that was written
+	 * 
+	 * pointer to destination buffer
 	 */
-	function base64_encode_step(_in: number[], len: number, break_lines: boolean): number;
+	function base64_encode_step(_in: number[], len: number, break_lines: boolean): [ number, number[] ];
 
 	/**
 	 * Gets the name of the file without any leading directory
@@ -18356,8 +18635,11 @@ declare namespace imports.gi.GLib {
 	 * @param array a #GByteArray.
 	 * @returns the element data, which should be
 	 *     freed using g_free().
+	 * 
+	 * pointer to retrieve the number of
+	 *    elements of the original array
 	 */
-	function byte_array_steal(array: number[]): number;
+	function byte_array_steal(array: number[]): [ number, number | null ];
 
 	/**
 	 * Atomically decrements the reference count of #array by one. If the
@@ -18731,8 +19013,20 @@ declare namespace imports.gi.GLib {
 	 *          If the conversion was successful, a newly allocated buffer
 	 *          containing the converted string, which must be freed with g_free().
 	 *          Otherwise %NULL and #error will be set.
+	 * 
+	 * location to store the number of bytes in
+	 *                 the input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 #G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in
+	 *                 the output buffer (not including the terminating nul).
 	 */
-	function convert(str: number[], len: number, to_codeset: string, from_codeset: string): number[];
+	function convert(str: number[], len: number, to_codeset: string, from_codeset: string): [ number[], number | null, number | null ];
 
 	function convert_error_quark(): Quark;
 
@@ -18771,8 +19065,17 @@ declare namespace imports.gi.GLib {
 	 *          If the conversion was successful, a newly allocated buffer
 	 *          containing the converted string, which must be freed with g_free().
 	 *          Otherwise %NULL and #error will be set.
+	 * 
+	 * location to store the number of bytes in
+	 *                the input string that were successfully converted, or %NULL.
+	 *                Even if the conversion was successful, this may be
+	 *                less than #len if there were partial characters
+	 *                at the end of the input.
+	 * 
+	 * the number of bytes stored in
+	 *                 the output buffer (not including the terminating nul).
 	 */
-	function convert_with_fallback(str: number[], len: number, to_codeset: string, from_codeset: string, fallback: string): number[];
+	function convert_with_fallback(str: number[], len: number, to_codeset: string, from_codeset: string, fallback: string): [ number[], number | null, number | null ];
 
 	/**
 	 * Converts a string from one character set to another.
@@ -18805,8 +19108,20 @@ declare namespace imports.gi.GLib {
 	 *               If the conversion was successful, a newly allocated buffer
 	 *               containing the converted string, which must be freed with
 	 *               g_free(). Otherwise %NULL and #error will be set.
+	 * 
+	 * location to store the number of bytes in
+	 *                 the input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 #G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in
+	 *                 the output buffer (not including the terminating nul).
 	 */
-	function convert_with_iconv(str: number[], len: number, converter: IConv): number[];
+	function convert_with_iconv(str: number[], len: number, converter: IConv): [ number[], number | null, number | null ];
 
 	/**
 	 * Frees all the data elements of the datalist.
@@ -18913,8 +19228,10 @@ declare namespace imports.gi.GLib {
 	 * @param destroy destroy notify for the new value
 	 * @returns %TRUE if the existing value for #key_id was replaced
 	 *  by #newval, %FALSE otherwise.
+	 * 
+	 * destroy notify for the existing value
 	 */
-	function datalist_id_replace_data(datalist: Data, key_id: Quark, oldval: any | null, newval: any | null, destroy: DestroyNotify | null): boolean;
+	function datalist_id_replace_data(datalist: Data, key_id: Quark, oldval: any | null, newval: any | null, destroy: DestroyNotify | null): [ boolean, DestroyNotify | null ];
 
 	/**
 	 * Sets the data corresponding to the given #GQuark id, and the
@@ -19396,8 +19713,13 @@ declare namespace imports.gi.GLib {
 	 * #contents is set to %NULL and #length is set to zero.
 	 * @param filename name of a file to read contents from, in the GLib file name encoding
 	 * @returns %TRUE on success, %FALSE if an error occurred
+	 * 
+	 * location to store an allocated string, use g_free() to free
+	 *     the returned string
+	 * 
+	 * location to store length in bytes of the contents, or %NULL
 	 */
-	function file_get_contents(filename: string): boolean;
+	function file_get_contents(filename: string): [ boolean, number[], number | null ];
 
 	/**
 	 * Opens a file for writing in the preferred directory for temporary
@@ -19422,8 +19744,11 @@ declare namespace imports.gi.GLib {
 	 *     reading and writing. The file is opened in binary mode on platforms
 	 *     where there is a difference. The file handle should be closed with
 	 *     close(). In case of errors, -1 is returned and #error will be set.
+	 * 
+	 * location to store actual name used,
+	 *     or %NULL
 	 */
-	function file_open_tmp(tmpl: string | null): number;
+	function file_open_tmp(tmpl: string | null): [ number, string ];
 
 	/**
 	 * Reads the contents of the symbolic link #filename like the POSIX
@@ -19615,8 +19940,12 @@ declare namespace imports.gi.GLib {
 	 * @param uri a uri describing a filename (escaped, encoded in ASCII).
 	 * @returns a newly-allocated string holding
 	 *               the resulting filename, or %NULL on an error.
+	 * 
+	 * Location to store hostname for the URI.
+	 *            If there is no hostname in the URI, %NULL will be
+	 *            stored in this location.
 	 */
-	function filename_from_uri(uri: string): string;
+	function filename_from_uri(uri: string): [ string, string | null ];
 
 	/**
 	 * Converts a string from UTF-8 to the encoding GLib uses for
@@ -19634,8 +19963,20 @@ declare namespace imports.gi.GLib {
 	 *                 nul-terminated.
 	 * @returns 
 	 *               The converted string, or %NULL on an error.
+	 * 
+	 * location to store the number of bytes in
+	 *                 the input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 %G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in
+	 *                 the output buffer (not including the terminating nul).
 	 */
-	function filename_from_utf8(utf8string: string, len: number): string;
+	function filename_from_utf8(utf8string: string, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Converts an absolute filename to an escaped ASCII-encoded URI, with the path
@@ -19668,8 +20009,20 @@ declare namespace imports.gi.GLib {
 	 *                 bytes to occur inside strings. In that case, using -1
 	 *                 for the #len parameter is unsafe)
 	 * @returns The converted string, or %NULL on an error.
+	 * 
+	 * location to store the number of bytes in the
+	 *                 input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 %G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in the output
+	 *                 buffer (not including the terminating nul).
 	 */
-	function filename_to_utf8(opsysstring: string, len: number): string;
+	function filename_to_utf8(opsysstring: string, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Locates the first executable named #program in the user's path, in the
@@ -19799,8 +20152,11 @@ declare namespace imports.gi.GLib {
 	 * The string returned in #charset is not allocated, and should not be
 	 * freed.
 	 * @returns %TRUE if the returned charset is UTF-8
+	 * 
+	 * return location for character set
+	 *   name, or %NULL.
 	 */
-	function get_charset(): boolean;
+	function get_charset(): [ boolean, string | null ];
 
 	/**
 	 * Gets the character set for the current locale.
@@ -19828,8 +20184,11 @@ declare namespace imports.gi.GLib {
 	 * The string returned in #charset is not allocated, and should not be
 	 * freed.
 	 * @returns %TRUE if the returned charset is UTF-8
+	 * 
+	 * return location for character set
+	 *   name, or %NULL.
 	 */
-	function get_console_charset(): boolean;
+	function get_console_charset(): [ boolean, string | null ];
 
 	/**
 	 * Gets the current directory.
@@ -19896,8 +20255,11 @@ declare namespace imports.gi.GLib {
 	 * `G_FILENAME_ENCODING` value, the actual file names present
 	 * on a system might be in any random encoding or just gibberish.
 	 * @returns %TRUE if the filename encoding is UTF-8.
+	 * 
+	 * 
+	 *    return location for the %NULL-terminated list of encoding names
 	 */
-	function get_filename_charsets(): boolean;
+	function get_filename_charsets(): [ boolean, string[] ];
 
 	/**
 	 * Gets the current user's home directory.
@@ -20380,8 +20742,13 @@ declare namespace imports.gi.GLib {
 	 * @param hash_table a #GHashTable
 	 * @param lookup_key the key to look up
 	 * @returns %TRUE if the key was found in the #GHashTable
+	 * 
+	 * return location for the original key
+	 * 
+	 * return location for the value associated
+	 * with the key
 	 */
-	function hash_table_lookup_extended(hash_table: GLib.HashTable, lookup_key: any | null): boolean;
+	function hash_table_lookup_extended(hash_table: GLib.HashTable, lookup_key: any | null): [ boolean, any | null, any | null ];
 
 	/**
 	 * Removes a key and its associated value from a #GHashTable.
@@ -20463,8 +20830,14 @@ declare namespace imports.gi.GLib {
 	 * @param hash_table a #GHashTable
 	 * @param lookup_key the key to look up
 	 * @returns %TRUE if the key was found in the #GHashTable
+	 * 
+	 * return location for the
+	 *    original key
+	 * 
+	 * return location
+	 *    for the value associated with the key
 	 */
-	function hash_table_steal_extended(hash_table: GLib.HashTable, lookup_key: any | null): boolean;
+	function hash_table_steal_extended(hash_table: GLib.HashTable, lookup_key: any | null): [ boolean, any | null, any | null ];
 
 	/**
 	 * Atomically decrements the reference count of #hash_table by one.
@@ -20855,8 +21228,20 @@ declare namespace imports.gi.GLib {
 	 * @returns 
 	 *          A newly-allocated buffer containing the converted string,
 	 *          or %NULL on an error, and error will be set.
+	 * 
+	 * location to store the number of bytes in the
+	 *                 input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 %G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in the output
+	 *                 buffer (not including the terminating nul).
 	 */
-	function locale_from_utf8(utf8string: string, len: number): number[];
+	function locale_from_utf8(utf8string: string, len: number): [ number[], number | null, number | null ];
 
 	/**
 	 * Converts a string which is in the encoding used for strings by
@@ -20878,8 +21263,20 @@ declare namespace imports.gi.GLib {
 	 *                 bytes to occur inside strings. In that case, using -1
 	 *                 for the #len parameter is unsafe)
 	 * @returns The converted string, or %NULL on an error.
+	 * 
+	 * location to store the number of bytes in the
+	 *                 input string that were successfully converted, or %NULL.
+	 *                 Even if the conversion was successful, this may be
+	 *                 less than #len if there were partial characters
+	 *                 at the end of the input. If the error
+	 *                 %G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
+	 *                 stored will be the byte offset after the last valid
+	 *                 input sequence.
+	 * 
+	 * the number of bytes stored in the output
+	 *                 buffer (not including the terminating nul).
 	 */
-	function locale_to_utf8(opsysstring: number[], len: number): string;
+	function locale_to_utf8(opsysstring: number[], len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Logs an error or debugging message.
@@ -22261,8 +22658,9 @@ declare namespace imports.gi.GLib {
 	 * to keep using the same GError*, you need to set it to %NULL
 	 * after calling this function on it.
 	 * @param src error to move into the return location
+	 * @returns error return location
 	 */
-	function propagate_error(src: Error): void;
+	function propagate_error(src: Error): Error | null;
 
 	/**
 	 * If #dest is %NULL, free #src; otherwise, moves #src into *#dest.
@@ -22285,8 +22683,11 @@ declare namespace imports.gi.GLib {
 	 * @param haystack pointer array to be searched
 	 * @param needle pointer to look for
 	 * @returns %TRUE if #needle is one of the elements of #haystack
+	 * 
+	 * return location for the index of
+	 *    the element, if found
 	 */
-	function ptr_array_find(haystack: any[], needle: any | null): boolean;
+	function ptr_array_find(haystack: any[], needle: any | null): [ boolean, number | null ];
 
 	/**
 	 * Checks whether #needle exists in #haystack, using the given #equal_func.
@@ -22304,8 +22705,11 @@ declare namespace imports.gi.GLib {
 	 *    return %TRUE when the desired element is found; or %NULL to use pointer
 	 *    equality
 	 * @returns %TRUE if #needle is one of the elements of #haystack
+	 * 
+	 * return location for the index of
+	 *    the element, if found
 	 */
-	function ptr_array_find_with_equal_func(haystack: any[], needle: any | null, equal_func: EqualFunc | null): boolean;
+	function ptr_array_find_with_equal_func(haystack: any[], needle: any | null, equal_func: EqualFunc | null): [ boolean, number | null ];
 
 	/**
 	 * This is just like the standard C qsort() function, but
@@ -22610,8 +23014,11 @@ declare namespace imports.gi.GLib {
 	 * subpattern) requires valid #GMatchInfo object.
 	 * @param replacement the replacement string
 	 * @returns whether #replacement is a valid replacement string
+	 * 
+	 * location to store information about
+	 *   references in #replacement or %NULL
 	 */
-	function regex_check_replacement(replacement: string): boolean;
+	function regex_check_replacement(replacement: string): [ boolean, boolean | null ];
 
 	function regex_error_quark(): Quark;
 
@@ -22845,8 +23252,9 @@ declare namespace imports.gi.GLib {
 	 * @param domain error domain
 	 * @param code error code
 	 * @param format printf()-style format
+	 * @returns a return location for a #GError
 	 */
-	function set_error(domain: Quark, code: number, format: string): void;
+	function set_error(domain: Quark, code: number, format: string): Error | null;
 
 	/**
 	 * Does nothing if #err is %NULL; if #err is non-%NULL, then *#err
@@ -22857,8 +23265,9 @@ declare namespace imports.gi.GLib {
 	 * @param domain error domain
 	 * @param code error code
 	 * @param message error message
+	 * @returns a return location for a #GError
 	 */
-	function set_error_literal(domain: Quark, code: number, message: string): void;
+	function set_error_literal(domain: Quark, code: number, message: string): Error | null;
 
 	/**
 	 * Sets the name of the program. This name should not be localized,
@@ -22947,8 +23356,13 @@ declare namespace imports.gi.GLib {
 	 * Free the returned vector with g_strfreev().
 	 * @param command_line command line to parse
 	 * @returns %TRUE on success, %FALSE if error set
+	 * 
+	 * return location for number of args
+	 * 
+	 * 
+	 *   return location for array of args
 	 */
-	function shell_parse_argv(command_line: string): boolean;
+	function shell_parse_argv(command_line: string): [ boolean, number | null, string[] | null ];
 
 	/**
 	 * Quotes a string so that the shell (/bin/sh) will interpret the
@@ -23210,8 +23624,10 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags from #GSpawnFlags
 	 * @param child_setup function to run in the child just before exec()
 	 * @returns %TRUE on success, %FALSE if error is set
+	 * 
+	 * return location for child process reference, or %NULL
 	 */
-	function spawn_async(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): boolean;
+	function spawn_async(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ boolean, Pid | null ];
 
 	/**
 	 * Executes a child program asynchronously.
@@ -23227,8 +23643,10 @@ declare namespace imports.gi.GLib {
 	 * @param stdout_fd file descriptor to use for child's stdout, or `-1`
 	 * @param stderr_fd file descriptor to use for child's stderr, or `-1`
 	 * @returns %TRUE on success, %FALSE if an error was set
+	 * 
+	 * return location for child process ID, or %NULL
 	 */
-	function spawn_async_with_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number): boolean;
+	function spawn_async_with_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number): [ boolean, Pid | null ];
 
 	/**
 	 * Identical to g_spawn_async_with_pipes_and_fds() but with `n_fds` set to zero,
@@ -23243,8 +23661,16 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags from #GSpawnFlags
 	 * @param child_setup function to run in the child just before exec()
 	 * @returns %TRUE on success, %FALSE if an error was set
+	 * 
+	 * return location for child process ID, or %NULL
+	 * 
+	 * return location for file descriptor to write to child's stdin, or %NULL
+	 * 
+	 * return location for file descriptor to read child's stdout, or %NULL
+	 * 
+	 * return location for file descriptor to read child's stderr, or %NULL
 	 */
-	function spawn_async_with_pipes(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): boolean;
+	function spawn_async_with_pipes(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ boolean, Pid | null, number | null, number | null, number | null ];
 
 	/**
 	 * Executes a child program asynchronously (your program will not
@@ -23451,8 +23877,16 @@ declare namespace imports.gi.GLib {
 	 *    #source_fds to in the child process
 	 * @param n_fds number of FDs in #source_fds and #target_fds
 	 * @returns %TRUE on success, %FALSE if an error was set
+	 * 
+	 * return location for child process ID, or %NULL
+	 * 
+	 * return location for file descriptor to write to child's stdin, or %NULL
+	 * 
+	 * return location for file descriptor to read child's stdout, or %NULL
+	 * 
+	 * return location for file descriptor to read child's stderr, or %NULL
 	 */
-	function spawn_async_with_pipes_and_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number, source_fds: number[] | null, target_fds: number[] | null, n_fds: number): boolean;
+	function spawn_async_with_pipes_and_fds(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null, stdin_fd: number, stdout_fd: number, stderr_fd: number, source_fds: number[] | null, target_fds: number[] | null, n_fds: number): [ boolean, Pid | null, number | null, number | null, number | null ];
 
 	/**
 	 * An old name for g_spawn_check_wait_status(), deprecated because its
@@ -23572,8 +24006,14 @@ declare namespace imports.gi.GLib {
 	 * "'c:\\program files\\app\\app.exe' 'e:\\folder\\argument.txt'".
 	 * @param command_line a command line
 	 * @returns %TRUE on success, %FALSE if an error was set
+	 * 
+	 * return location for child output
+	 * 
+	 * return location for child errors
+	 * 
+	 * return location for child wait status, as returned by waitpid()
 	 */
-	function spawn_command_line_sync(command_line: string): boolean;
+	function spawn_command_line_sync(command_line: string): [ boolean, number[] | null, number[] | null, number | null ];
 
 	function spawn_error_quark(): Quark;
 
@@ -23612,8 +24052,14 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags from #GSpawnFlags
 	 * @param child_setup function to run in the child just before exec()
 	 * @returns %TRUE on success, %FALSE if an error was set
+	 * 
+	 * return location for child output, or %NULL
+	 * 
+	 * return location for child error messages, or %NULL
+	 * 
+	 * return location for child wait status, as returned by waitpid(), or %NULL
 	 */
-	function spawn_sync(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): boolean;
+	function spawn_sync(working_directory: string | null, argv: string[], envp: string[] | null, flags: SpawnFlags, child_setup: SpawnChildSetupFunc | null): [ boolean, number[] | null, number[] | null, number | null ];
 
 	/**
 	 * An implementation of the standard sprintf() function which supports
@@ -23779,8 +24225,11 @@ declare namespace imports.gi.GLib {
 	 * @param translit_locale the language code (like 'de' or
 	 *   'en_GB') from which #string originates
 	 * @returns the folded tokens
+	 * 
+	 * a
+	 *   return location for ASCII alternates
 	 */
-	function str_tokenize_and_fold(string: string, translit_locale: string | null): string[];
+	function str_tokenize_and_fold(string: string, translit_locale: string | null): [ string[], string[] ];
 
 	/**
 	 * For each character in #string, if the character is not in #valid_chars,
@@ -24275,8 +24724,11 @@ declare namespace imports.gi.GLib {
 	 * point in some locales, causing unexpected results.
 	 * @param nptr the string to convert to a numeric value.
 	 * @returns the #gdouble value.
+	 * 
+	 * if non-%NULL, it returns the
+	 *           character after the last character used in the conversion.
 	 */
-	function strtod(nptr: string): number;
+	function strtod(nptr: string): [ number, string | null ];
 
 	/**
 	 * Converts a string to upper case.
@@ -25162,10 +25614,11 @@ declare namespace imports.gi.GLib {
 	 * g_date_time_unref (dt);
 	 * ]|
 	 * @param iso_date an ISO 8601 encoded date string
-	 * @param time_ a #GTimeVal
 	 * @returns %TRUE if the conversion was successful.
+	 * 
+	 * a #GTimeVal
 	 */
-	function time_val_from_iso8601(iso_date: string, time_: TimeVal): boolean;
+	function time_val_from_iso8601(iso_date: string): [ boolean, TimeVal ];
 
 	/**
 	 * Sets a function to be called at regular intervals, with the default
@@ -25453,8 +25906,16 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to a newly allocated UTF-16 string.
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set.
+	 * 
+	 * location to store number of
+	 *     bytes read, or %NULL. If an error occurs then the index of the invalid
+	 *     input is stored here.
+	 * 
+	 * location to store number
+	 *     of #gunichar2  written, or %NULL. The value stored here does not include
+	 *     the trailing 0.
 	 */
-	function ucs4_to_utf16(str: string, len: number): number;
+	function ucs4_to_utf16(str: string, len: number): [ number, number | null, number | null ];
 
 	/**
 	 * Convert a string from a 32-bit fixed width representation as UCS-4.
@@ -25466,8 +25927,15 @@ declare namespace imports.gi.GLib {
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set. In that case, #items_read
 	 *     will be set to the position of the first invalid input character.
+	 * 
+	 * location to store number of
+	 *     characters read, or %NULL.
+	 * 
+	 * location to store number
+	 *     of bytes written or %NULL. The value here stored does not include the
+	 *     trailing 0 byte.
 	 */
-	function ucs4_to_utf8(str: string, len: number): string;
+	function ucs4_to_utf8(str: string, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Determines the break type of #c. #c should be a Unicode character
@@ -25508,8 +25976,10 @@ declare namespace imports.gi.GLib {
 	 * @param a a Unicode character
 	 * @param b a Unicode character
 	 * @returns %TRUE if the characters could be composed
+	 * 
+	 * return location for the composed character
 	 */
-	function unichar_compose(a: string, b: string): boolean;
+	function unichar_compose(a: string, b: string): [ boolean, string ];
 
 	/**
 	 * Performs a single decomposition step of the
@@ -25537,8 +26007,12 @@ declare namespace imports.gi.GLib {
 	 * for details.
 	 * @param ch a Unicode character
 	 * @returns %TRUE if the character could be decomposed
+	 * 
+	 * return location for the first component of #ch
+	 * 
+	 * return location for the second component of #ch
 	 */
-	function unichar_decompose(ch: string): boolean;
+	function unichar_decompose(ch: string): [ boolean, string, string ];
 
 	/**
 	 * Determines the numeric value of a character as a decimal
@@ -25571,11 +26045,12 @@ declare namespace imports.gi.GLib {
 	 * for details.
 	 * @param ch a Unicode character.
 	 * @param compat whether perform canonical or compatibility decomposition
-	 * @param result location to store decomposed result, or %NULL
 	 * @param result_len length of #result
 	 * @returns the length of the full decomposition.
+	 * 
+	 * location to store decomposed result, or %NULL
 	 */
-	function unichar_fully_decompose(ch: string, compat: boolean, result: string | null, result_len: number): number;
+	function unichar_fully_decompose(ch: string, compat: boolean, result_len: number): [ number, string | null ];
 
 	/**
 	 * In Unicode, some characters are "mirrored". This means that their
@@ -25785,12 +26260,13 @@ declare namespace imports.gi.GLib {
 	/**
 	 * Converts a single character to UTF-8.
 	 * @param c a Unicode character code
-	 * @param outbuf output buffer, must have at
+	 * @returns number of bytes written
+	 * 
+	 * output buffer, must have at
 	 *       least 6 bytes of space. If %NULL, the length will be computed and
 	 *       returned and nothing will be written to #outbuf.
-	 * @returns number of bytes written
 	 */
-	function unichar_to_utf8(c: string, outbuf: string | null): number;
+	function unichar_to_utf8(c: string): [ number, string | null ];
 
 	/**
 	 * Converts a character to lower case.
@@ -26360,8 +26836,29 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags for parsing #uri_ref
 	 * @returns %TRUE if #uri_ref parsed successfully, %FALSE
 	 *   on error.
+	 * 
+	 * on return, contains
+	 *    the scheme (converted to lowercase), or %NULL
+	 * 
+	 * on return, contains
+	 *    the userinfo, or %NULL
+	 * 
+	 * on return, contains the
+	 *    host, or %NULL
+	 * 
+	 * on return, contains the
+	 *    port, or `-1`
+	 * 
+	 * on return, contains the
+	 *    path
+	 * 
+	 * on return, contains the
+	 *    query, or %NULL
+	 * 
+	 * on return, contains
+	 *    the fragment, or %NULL
 	 */
-	function uri_split(uri_ref: string, flags: UriFlags): boolean;
+	function uri_split(uri_ref: string, flags: UriFlags): [ boolean, string | null, string | null, string | null, number | null, string | null, string | null, string | null ];
 
 	/**
 	 * Parses #uri_string (which must be an [absolute URI][relative-absolute-uris])
@@ -26374,8 +26871,17 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags for parsing #uri_string
 	 * @returns %TRUE if #uri_string parsed successfully,
 	 *   %FALSE on error.
+	 * 
+	 * on return, contains
+	 *    the scheme (converted to lowercase), or %NULL
+	 * 
+	 * on return, contains the
+	 *    host, or %NULL
+	 * 
+	 * on return, contains the
+	 *    port, or `-1`
 	 */
-	function uri_split_network(uri_string: string, flags: UriFlags): boolean;
+	function uri_split_network(uri_string: string, flags: UriFlags): [ boolean, string | null, string | null, number | null ];
 
 	/**
 	 * Parses #uri_ref (which can be an
@@ -26393,8 +26899,35 @@ declare namespace imports.gi.GLib {
 	 * @param flags flags for parsing #uri_ref
 	 * @returns %TRUE if #uri_ref parsed successfully, %FALSE
 	 *   on error.
+	 * 
+	 * on return, contains
+	 *    the scheme (converted to lowercase), or %NULL
+	 * 
+	 * on return, contains
+	 *    the user, or %NULL
+	 * 
+	 * on return, contains
+	 *    the password, or %NULL
+	 * 
+	 * on return, contains
+	 *    the auth_params, or %NULL
+	 * 
+	 * on return, contains the
+	 *    host, or %NULL
+	 * 
+	 * on return, contains the
+	 *    port, or `-1`
+	 * 
+	 * on return, contains the
+	 *    path
+	 * 
+	 * on return, contains the
+	 *    query, or %NULL
+	 * 
+	 * on return, contains
+	 *    the fragment, or %NULL
 	 */
-	function uri_split_with_user(uri_ref: string, flags: UriFlags): boolean;
+	function uri_split_with_user(uri_ref: string, flags: UriFlags): [ boolean, string | null, string | null, string | null, string | null, string | null, number | null, string | null, string | null, string | null ];
 
 	/**
 	 * Unescapes a segment of an escaped string as binary data.
@@ -26477,8 +27010,17 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to a newly allocated UCS-4 string.
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set.
+	 * 
+	 * location to store number of
+	 *     words read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
+	 *     be returned in case #str contains a trailing partial character. If
+	 *     an error occurs then the index of the invalid input is stored here.
+	 * 
+	 * location to store number
+	 *     of characters written, or %NULL. The value stored here does not include
+	 *     the trailing 0 character.
 	 */
-	function utf16_to_ucs4(str: number, len: number): string;
+	function utf16_to_ucs4(str: number, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Convert a string from UTF-16 to UTF-8. The result will be
@@ -26500,8 +27042,17 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to a newly allocated UTF-8 string.
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set.
+	 * 
+	 * location to store number of
+	 *     words read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
+	 *     be returned in case #str contains a trailing partial character. If
+	 *     an error occurs then the index of the invalid input is stored here.
+	 * 
+	 * location to store number
+	 *     of bytes written, or %NULL. The value stored here does not include the
+	 *     trailing 0 byte.
 	 */
-	function utf16_to_utf8(str: number, len: number): string;
+	function utf16_to_utf8(str: number, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Converts a string into a form that is independent of case. The
@@ -26854,8 +27405,19 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to a newly allocated UCS-4 string.
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set.
+	 * 
+	 * location to store number of
+	 *    bytes read, or %NULL.
+	 *     If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will be
+	 *     returned in case #str contains a trailing partial
+	 *     character. If an error occurs then the index of the
+	 *     invalid input is stored here.
+	 * 
+	 * location to store number
+	 *     of characters written or %NULL. The value here stored does not include
+	 *     the trailing 0 character.
 	 */
-	function utf8_to_ucs4(str: string, len: number): string;
+	function utf8_to_ucs4(str: string, len: number): [ string, number | null, number | null ];
 
 	/**
 	 * Convert a string from UTF-8 to a 32-bit fixed width
@@ -26868,8 +27430,11 @@ declare namespace imports.gi.GLib {
 	 *     then the string is nul-terminated.
 	 * @returns a pointer to a newly allocated UCS-4 string.
 	 *     This value must be freed with g_free().
+	 * 
+	 * location to store the
+	 *     number of characters in the result, or %NULL.
 	 */
-	function utf8_to_ucs4_fast(str: string, len: number): string;
+	function utf8_to_ucs4_fast(str: string, len: number): [ string, number | null ];
 
 	/**
 	 * Convert a string from UTF-8 to UTF-16. A 0 character will be
@@ -26880,8 +27445,17 @@ declare namespace imports.gi.GLib {
 	 * @returns a pointer to a newly allocated UTF-16 string.
 	 *     This value must be freed with g_free(). If an error occurs,
 	 *     %NULL will be returned and #error set.
+	 * 
+	 * location to store number of
+	 *     bytes read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
+	 *     be returned in case #str contains a trailing partial character. If
+	 *     an error occurs then the index of the invalid input is stored here.
+	 * 
+	 * location to store number
+	 *     of #gunichar2 written, or %NULL. The value stored here does not include
+	 *     the trailing 0.
 	 */
-	function utf8_to_utf16(str: string, len: number): number;
+	function utf8_to_utf16(str: string, len: number): [ number, number | null, number | null ];
 
 	/**
 	 * Validates UTF-8 encoded text. #str is the text to validate;
@@ -26902,8 +27476,10 @@ declare namespace imports.gi.GLib {
 	 * @param str a pointer to character data
 	 * @param max_len max bytes to validate, or -1 to go until NUL
 	 * @returns %TRUE if the text was valid UTF-8
+	 * 
+	 * return location for end of valid data
 	 */
-	function utf8_validate(str: number[], max_len: number): boolean;
+	function utf8_validate(str: number[], max_len: number): [ boolean, string | null ];
 
 	/**
 	 * Validates UTF-8 encoded text.
@@ -26913,8 +27489,10 @@ declare namespace imports.gi.GLib {
 	 * @param str a pointer to character data
 	 * @param max_len max bytes to validate
 	 * @returns %TRUE if the text was valid UTF-8
+	 * 
+	 * return location for end of valid data
 	 */
-	function utf8_validate_len(str: number[], max_len: number): boolean;
+	function utf8_validate_len(str: number[], max_len: number): [ boolean, string | null ];
 
 	/**
 	 * Parses the string #str and verify if it is a UUID.
@@ -27086,8 +27664,10 @@ declare namespace imports.gi.GLib {
 	 * @param string a pointer to any string
 	 * @param limit the end of #string, or %NULL
 	 * @returns %TRUE if a valid type string was found
+	 * 
+	 * location to store the end pointer, or %NULL
 	 */
-	function variant_type_string_scan(string: string, limit: string | null): boolean;
+	function variant_type_string_scan(string: string, limit: string | null): [ boolean, string | null ];
 
 	/**
 	 * An implementation of the GNU vasprintf() function which supports

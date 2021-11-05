@@ -1,3 +1,4 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.Cogl {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bitmap} instead.
@@ -5,6 +6,9 @@ declare namespace imports.gi.Cogl {
 	interface IBitmap {
 
 	}
+
+	type BitmapInitOptionsMixin  = {};
+	export interface BitmapInitOptions extends BitmapInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Bitmap} instead.
@@ -14,7 +18,7 @@ declare namespace imports.gi.Cogl {
 	interface Bitmap extends BitmapMixin {}
 
 	class Bitmap {
-		public constructor();
+		public constructor(options?: Partial<BitmapInitOptions>);
 		/**
 		 * Loads an image file from disk. This function can be safely called from
 		 * within a thread.
@@ -28,8 +32,12 @@ declare namespace imports.gi.Cogl {
 		 * of the bitmap.
 		 * @param filename the file to check
 		 * @returns %TRUE if the image was successfully parsed
+		 * 
+		 * return location for the bitmap width, or %NULL
+		 * 
+		 * return location for the bitmap height, or %NULL
 		 */
-		public static get_size_from_file(filename: string): Bool;
+		public static get_size_from_file(filename: string): [ Bool, number, number ];
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -80,6 +88,9 @@ declare namespace imports.gi.Cogl {
 		tan(): Fixed;
 	}
 
+	type FixedInitOptionsMixin  = {};
+	export interface FixedInitOptions extends FixedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Fixed} instead.
 	 */
@@ -91,7 +102,7 @@ declare namespace imports.gi.Cogl {
 	interface Fixed extends FixedMixin {}
 
 	class Fixed {
-		public constructor();
+		public constructor(options?: Partial<FixedInitOptions>);
 		/**
 		 * Calculates base 2 logarithm.
 		 * 
@@ -117,6 +128,9 @@ declare namespace imports.gi.Cogl {
 
 	}
 
+	type OffscreenInitOptionsMixin  = {};
+	export interface OffscreenInitOptions extends OffscreenInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Offscreen} instead.
 	 */
@@ -125,7 +139,7 @@ declare namespace imports.gi.Cogl {
 	interface Offscreen extends OffscreenMixin {}
 
 	class Offscreen {
-		public constructor();
+		public constructor(options?: Partial<OffscreenInitOptions>);
 		/**
 		 * This creates an offscreen buffer object using the given #texture as the
 		 * primary color buffer. It doesn't just initialize the contents of the
@@ -188,6 +202,7 @@ declare namespace imports.gi.Cogl {
 		public static unref(offscreen: any | null): void;
 	}
 
+	export interface ColorInitOptions {}
 	/**
 	 * A structure for holding a color definition. The contents of
 	 * the CoglColor structure are private and should never by accessed
@@ -195,7 +210,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	interface Color {}
 	class Color {
-		public constructor();
+		public constructor(options?: Partial<ColorInitOptions>);
 		/**
 		 * Creates a new (empty) color
 		 * @returns a newly-allocated {@link Color}. Use cogl_color_free()
@@ -414,14 +429,16 @@ declare namespace imports.gi.Cogl {
 		public unpremultiply(): void;
 	}
 
+	export interface EulerInitOptions {}
 	interface Euler {}
 	class Euler {
-		public constructor();
+		public constructor(options?: Partial<EulerInitOptions>);
 	}
 
+	export interface MaterialInitOptions {}
 	interface Material {}
 	class Material {
-		public constructor();
+		public constructor(options?: Partial<MaterialInitOptions>);
 		/**
 		 * Creates a new material with the configuration copied from the
 		 * source material.
@@ -441,9 +458,9 @@ declare namespace imports.gi.Cogl {
 		public get_ambient(ambient: Color): void;
 		/**
 		 * Retrieves the current material color.
-		 * @param color The location to store the color
+		 * @returns The location to store the color
 		 */
-		public get_color(color: Color): void;
+		public get_color(): Color;
 		/**
 		 * Retrieves the current diffuse color for #material
 		 * @param diffuse The location to store the diffuse color
@@ -943,9 +960,10 @@ declare namespace imports.gi.Cogl {
 		public set_user_program(program: Handle): void;
 	}
 
+	export interface MaterialLayerInitOptions {}
 	interface MaterialLayer {}
 	class MaterialLayer {
-		public constructor();
+		public constructor(options?: Partial<MaterialLayerInitOptions>);
 		/**
 		 * Queries the currently set downscaling filter for a material later
 		 * @returns the current downscaling filter
@@ -995,6 +1013,7 @@ declare namespace imports.gi.Cogl {
 		public get_wrap_mode_t(): MaterialWrapMode;
 	}
 
+	export interface MatrixInitOptions {}
 	/**
 	 * A CoglMatrix holds a 4x4 transform matrix. This is a single precision,
 	 * column-major matrix which means it is compatible with what OpenGL expects.
@@ -1023,7 +1042,7 @@ declare namespace imports.gi.Cogl {
 	 */
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 		public xx: number;
 		public yx: number;
 		public zx: number;
@@ -1084,12 +1103,13 @@ declare namespace imports.gi.Cogl {
 		 * technically save a copy of the inverse transform within the given
 		 * #CoglMatrix so that subsequent requests for the inverse transform may
 		 * avoid costly inversion calculations.</note>
-		 * @param inverse The destination for a 4x4 inverse transformation matrix
 		 * @returns %TRUE if the inverse was successfully calculated or %FALSE
 		 *   for degenerate transformations that can't be inverted (in this case the
 		 *   #inverse matrix will simply be initialized with the identity matrix)
+		 * 
+		 * The destination for a 4x4 inverse transformation matrix
 		 */
-		public get_inverse(inverse: Matrix): Bool;
+		public get_inverse(): [ Bool, Matrix ];
 		/**
 		 * Initializes #matrix with the contents of #array
 		 * @param array A linear array of 16 floats (column-major order)
@@ -1238,17 +1258,19 @@ declare namespace imports.gi.Cogl {
 		public transpose(): void;
 	}
 
+	export interface QuaternionInitOptions {}
 	interface Quaternion {}
 	class Quaternion {
-		public constructor();
+		public constructor(options?: Partial<QuaternionInitOptions>);
 	}
 
+	export interface TextureVertexInitOptions {}
 	/**
 	 * Used to specify vertex information when calling cogl_polygon()
 	 */
 	interface TextureVertex {}
 	class TextureVertex {
-		public constructor();
+		public constructor(options?: Partial<TextureVertexInitOptions>);
 		/**
 		 * Model x-coordinate
 		 */
@@ -1276,21 +1298,24 @@ declare namespace imports.gi.Cogl {
 		public color: Color;
 	}
 
+	export interface _ColorSizeCheckInitOptions {}
 	interface _ColorSizeCheck {}
 	class _ColorSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_ColorSizeCheckInitOptions>);
 		public compile_time_assert_CoglColor_size: string[];
 	}
 
+	export interface _MatrixSizeCheckInitOptions {}
 	interface _MatrixSizeCheck {}
 	class _MatrixSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_MatrixSizeCheckInitOptions>);
 		public compile_time_assert_CoglMatrix_size: string[];
 	}
 
+	export interface _TextureVertexSizeCheckInitOptions {}
 	interface _TextureVertexSizeCheck {}
 	class _TextureVertexSizeCheck {
-		public constructor();
+		public constructor(options?: Partial<_TextureVertexSizeCheckInitOptions>);
 		public compile_time_assert_CoglTextureVertex_size: string[];
 	}
 
@@ -1346,8 +1371,14 @@ declare namespace imports.gi.Cogl {
 		 * queried.
 		 * @returns %TRUE if the handle was successfully retrieved, %FALSE
 		 *   if the handle was invalid
+		 * 
+		 * pointer to return location for the
+		 *   textures GL handle, or %NULL.
+		 * 
+		 * pointer to return location for the
+		 *   GL target type, or %NULL.
 		 */
-		get_gl_texture(): Bool;
+		get_gl_texture(): [ Bool, number | null, number | null ];
 		/**
 		 * Queries the height of a cogl texture.
 		 * @returns the height of the GPU side texture in pixels
@@ -1457,6 +1488,9 @@ declare namespace imports.gi.Cogl {
 		set_region(src_x: number, src_y: number, dst_x: number, dst_y: number, dst_width: number, dst_height: number, width: number, height: number, format: PixelFormat, rowstride: number, data: number): Bool;
 	}
 
+	type TextureInitOptionsMixin  = {};
+	export interface TextureInitOptions extends TextureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
@@ -1465,7 +1499,7 @@ declare namespace imports.gi.Cogl {
 	interface Texture extends TextureMixin {}
 
 	class Texture {
-		public constructor();
+		public constructor(options?: Partial<TextureInitOptions>);
 		/**
 		 * Increment the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
@@ -2678,12 +2712,12 @@ declare namespace imports.gi.Cogl {
 	/**
 	 * Converts a color expressed in HLS (hue, luminance and saturation)
 	 * values into a {@link Color}.
-	 * @param color return location for a {@link Color}
 	 * @param hue hue value, in the 0 .. 360 range
 	 * @param saturation saturation value, in the 0 .. 1 range
 	 * @param luminance luminance value, in the 0 .. 1 range
+	 * @returns return location for a {@link Color}
 	 */
-	function color_init_from_hsl(color: Color, hue: number, saturation: number, luminance: number): void;
+	function color_init_from_hsl(hue: number, saturation: number, luminance: number): Color;
 
 	/**
 	 * Create a new cogl program object that can be used to replace parts of the GL
@@ -2826,9 +2860,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current model-view matrix in #matrix.
-	 * @param matrix return location for the model-view matrix
+	 * @returns return location for the model-view matrix
 	 */
-	function get_modelview_matrix(matrix: Matrix): void;
+	function get_modelview_matrix(): Matrix;
 
 	/**
 	 * Retrieves the #GOptionGroup used by Cogl to parse the command
@@ -2854,9 +2888,9 @@ declare namespace imports.gi.Cogl {
 
 	/**
 	 * Stores the current projection matrix in #matrix.
-	 * @param matrix return location for the projection matrix
+	 * @returns return location for the projection matrix
 	 */
-	function get_projection_matrix(matrix: Matrix): void;
+	function get_projection_matrix(): Matrix;
 
 	/**
 	 * Returns the current source material as previously set using
@@ -2875,8 +2909,10 @@ declare namespace imports.gi.Cogl {
 	 * Stores the current viewport in #v. #v[0] and #v[1] get the x and y
 	 * position of the viewport and #v[2] and #v[3] get the width and
 	 * height.
+	 * @returns pointer to a 4 element array
+	 *   of #float<!-- -->s to receive the viewport dimensions.
 	 */
-	function get_viewport(): void;
+	function get_viewport(): number[];
 
 	function gtype_matrix_get_type(): GObject.Type;
 

@@ -1,66 +1,79 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.cairo {
+	export interface ContextInitOptions {}
 	interface Context {}
 	class Context {
-		public constructor();
+		public constructor(options?: Partial<ContextInitOptions>);
 	}
 
+	export interface DeviceInitOptions {}
 	interface Device {}
 	class Device {
-		public constructor();
+		public constructor(options?: Partial<DeviceInitOptions>);
 	}
 
+	export interface SurfaceInitOptions {}
 	interface Surface {}
 	class Surface {
-		public constructor();
+		public constructor(options?: Partial<SurfaceInitOptions>);
 	}
 
+	export interface MatrixInitOptions {}
 	interface Matrix {}
 	class Matrix {
-		public constructor();
+		public constructor(options?: Partial<MatrixInitOptions>);
 	}
 
+	export interface PatternInitOptions {}
 	interface Pattern {}
 	class Pattern {
-		public constructor();
+		public constructor(options?: Partial<PatternInitOptions>);
 	}
 
+	export interface RegionInitOptions {}
 	interface Region {}
 	class Region {
-		public constructor();
+		public constructor(options?: Partial<RegionInitOptions>);
 	}
 
+	export interface FontOptionsInitOptions {}
 	interface FontOptions {}
 	class FontOptions {
-		public constructor();
+		public constructor(options?: Partial<FontOptionsInitOptions>);
 	}
 
+	export interface FontFaceInitOptions {}
 	interface FontFace {}
 	class FontFace {
-		public constructor();
+		public constructor(options?: Partial<FontFaceInitOptions>);
 	}
 
+	export interface ScaledFontInitOptions {}
 	interface ScaledFont {}
 	class ScaledFont {
-		public constructor();
+		public constructor(options?: Partial<ScaledFontInitOptions>);
 	}
 
+	export interface PathInitOptions {}
 	interface Path {}
 	class Path {
-		public constructor();
+		public constructor(options?: Partial<PathInitOptions>);
 	}
 
+	export interface RectangleInitOptions {}
 	interface Rectangle {}
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		public x: number;
 		public y: number;
 		public width: number;
 		public height: number;
 	}
 
+	export interface RectangleIntInitOptions {}
 	interface RectangleInt {}
 	class RectangleInt {
-		public constructor();
+		public constructor(options?: Partial<RectangleIntInitOptions>);
 		public x: number;
 		public y: number;
 		public width: number;

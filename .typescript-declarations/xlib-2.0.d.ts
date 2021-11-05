@@ -1,47 +1,57 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.xlib {
+	export interface DisplayInitOptions {}
 	interface Display {}
 	class Display {
-		public constructor();
+		public constructor(options?: Partial<DisplayInitOptions>);
 	}
 
+	export interface ScreenInitOptions {}
 	interface Screen {}
 	class Screen {
-		public constructor();
+		public constructor(options?: Partial<ScreenInitOptions>);
 	}
 
+	export interface VisualInitOptions {}
 	interface Visual {}
 	class Visual {
-		public constructor();
+		public constructor(options?: Partial<VisualInitOptions>);
 	}
 
+	export interface XConfigureEventInitOptions {}
 	interface XConfigureEvent {}
 	class XConfigureEvent {
-		public constructor();
+		public constructor(options?: Partial<XConfigureEventInitOptions>);
 	}
 
+	export interface XImageInitOptions {}
 	interface XImage {}
 	class XImage {
-		public constructor();
+		public constructor(options?: Partial<XImageInitOptions>);
 	}
 
+	export interface XFontStructInitOptions {}
 	interface XFontStruct {}
 	class XFontStruct {
-		public constructor();
+		public constructor(options?: Partial<XFontStructInitOptions>);
 	}
 
+	export interface XTrapezoidInitOptions {}
 	interface XTrapezoid {}
 	class XTrapezoid {
-		public constructor();
+		public constructor(options?: Partial<XTrapezoidInitOptions>);
 	}
 
+	export interface XVisualInfoInitOptions {}
 	interface XVisualInfo {}
 	class XVisualInfo {
-		public constructor();
+		public constructor(options?: Partial<XVisualInfoInitOptions>);
 	}
 
+	export interface XWindowAttributesInitOptions {}
 	interface XWindowAttributes {}
 	class XWindowAttributes {
-		public constructor();
+		public constructor(options?: Partial<XWindowAttributesInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -51,6 +61,9 @@ declare namespace imports.gi.xlib {
 
 	}
 
+	type XEventInitOptionsMixin  = {};
+	export interface XEventInitOptions extends XEventInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XEvent} instead.
 	 */
@@ -59,7 +72,7 @@ declare namespace imports.gi.xlib {
 	interface XEvent extends XEventMixin {}
 
 	class XEvent {
-		public constructor();
+		public constructor(options?: Partial<XEventInitOptions>);
 	}
 
 

@@ -1,3 +1,4 @@
+/** Generated with https://github.com/Gr3q/GIR2TS - If possible do not modify. */
 declare namespace imports.gi.Cinnamon {
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link App} instead.
@@ -88,15 +89,17 @@ declare namespace imports.gi.Cinnamon {
 		 * @returns 
 		 */
 		is_window_backed(): boolean;
-		launch(timestamp: number, uris: GLib.List, workspace: number): boolean;
+		launch(timestamp: number, uris: GLib.List, workspace: number): [ boolean, string ];
 		/**
 		 * Launch an application using the dedicated gpu (if available)
 		 * @param timestamp Event timestamp, or 0 for current event timestamp
 		 * @param uris List of uris to pass to application
 		 * @param workspace Start on this workspace, or -1 for default
 		 * @returns 
+		 * 
+		 * Returned startup notification ID, or %NULL if none
 		 */
-		launch_offloaded(timestamp: number, uris: GLib.List, workspace: number): boolean;
+		launch_offloaded(timestamp: number, uris: GLib.List, workspace: number): [ boolean, string ];
 		/**
 		 * Request that the application create a new window.
 		 * @param workspace open on this workspace, or -1 for default
@@ -117,6 +120,12 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type AppInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IApp,
+		"state">;
+
+	export interface AppInitOptions extends AppInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link App} instead.
 	 */
@@ -125,7 +134,7 @@ declare namespace imports.gi.Cinnamon {
 	interface App extends AppMixin {}
 
 	class App {
-		public constructor();
+		public constructor(options?: Partial<AppInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -171,6 +180,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type AppSystemInitOptionsMixin = GObject.ObjectInitOptions
+	export interface AppSystemInitOptions extends AppSystemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link AppSystem} instead.
 	 */
@@ -179,7 +191,7 @@ declare namespace imports.gi.Cinnamon {
 	interface AppSystem extends AppSystemMixin {}
 
 	class AppSystem {
-		public constructor();
+		public constructor(options?: Partial<AppSystemInitOptions>);
 		public static get_default(): AppSystem;
 	}
 
@@ -198,6 +210,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type DocSystemInitOptionsMixin = GObject.ObjectInitOptions
+	export interface DocSystemInitOptions extends DocSystemInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DocSystem} instead.
 	 */
@@ -206,7 +221,7 @@ declare namespace imports.gi.Cinnamon {
 	interface DocSystem extends DocSystemMixin {}
 
 	class DocSystem {
-		public constructor();
+		public constructor(options?: Partial<DocSystemInitOptions>);
 		public static get_default(): DocSystem;
 	}
 
@@ -217,6 +232,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type EmbeddedWindowInitOptionsMixin = Gtk.WindowInitOptions & Atk.ImplementorIfaceInitOptions & Gtk.BuildableInitOptions
+	export interface EmbeddedWindowInitOptions extends EmbeddedWindowInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link EmbeddedWindow} instead.
 	 */
@@ -225,7 +243,7 @@ declare namespace imports.gi.Cinnamon {
 	interface EmbeddedWindow extends EmbeddedWindowMixin {}
 
 	class EmbeddedWindow {
-		public constructor();
+		public constructor(options?: Partial<EmbeddedWindowInitOptions>);
 		public static new(stage: Clutter.Stage): Gtk.Widget;
 	}
 
@@ -282,6 +300,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type GenericContainerInitOptionsMixin = St.WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface GenericContainerInitOptions extends GenericContainerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GenericContainer} instead.
 	 */
@@ -290,7 +311,7 @@ declare namespace imports.gi.Cinnamon {
 	interface GenericContainer extends GenericContainerMixin {}
 
 	class GenericContainer {
-		public constructor();
+		public constructor(options?: Partial<GenericContainerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -533,6 +554,31 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type GlobalInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IGlobal,
+		"background_actor" |
+		"bottom_window_group" |
+		"datadir" |
+		"display" |
+		"focus_manager" |
+		"gdk_screen" |
+		"imagedir" |
+		"overlay_group" |
+		"screen" |
+		"screen_height" |
+		"screen_width" |
+		"session_running" |
+		"settings" |
+		"stage" |
+		"stage_input_mode" |
+		"top_window_group" |
+		"ui_scale" |
+		"userdatadir" |
+		"window_group" |
+		"window_manager">;
+
+	export interface GlobalInitOptions extends GlobalInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Global} instead.
 	 */
@@ -541,7 +587,7 @@ declare namespace imports.gi.Cinnamon {
 	interface Global extends GlobalMixin {}
 
 	class Global {
-		public constructor();
+		public constructor(options?: Partial<GlobalInitOptions>);
 		/**
 		 * Gets the singleton global object that represents the desktop.
 		 * @returns the singleton global object
@@ -560,6 +606,12 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type GtkEmbedInitOptionsMixin = ClutterX11.TexturePixmapInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<IGtkEmbed,
+		"window">;
+
+	export interface GtkEmbedInitOptions extends GtkEmbedInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link GtkEmbed} instead.
 	 */
@@ -568,7 +620,7 @@ declare namespace imports.gi.Cinnamon {
 	interface GtkEmbed extends GtkEmbedMixin {}
 
 	class GtkEmbed {
-		public constructor();
+		public constructor(options?: Partial<GtkEmbedInitOptions>);
 		public static new(window: EmbeddedWindow): Clutter.Actor;
 	}
 
@@ -694,6 +746,9 @@ declare namespace imports.gi.Cinnamon {
 		update_statistic_x(name: string, value: number): void;
 	}
 
+	type PerfLogInitOptionsMixin = GObject.ObjectInitOptions
+	export interface PerfLogInitOptions extends PerfLogInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link PerfLog} instead.
 	 */
@@ -702,7 +757,7 @@ declare namespace imports.gi.Cinnamon {
 	interface PerfLog extends PerfLogMixin {}
 
 	class PerfLog {
-		public constructor();
+		public constructor(options?: Partial<PerfLogInitOptions>);
 		/**
 		 * Gets the global singleton performance log. This is initially disabled
 		 * and must be explicitly enabled with cinnamon_perf_log_set_enabled().
@@ -807,6 +862,15 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type RecorderInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IRecorder,
+		"filename" |
+		"framerate" |
+		"pipeline" |
+		"stage">;
+
+	export interface RecorderInitOptions extends RecorderInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Recorder} instead.
 	 */
@@ -815,7 +879,7 @@ declare namespace imports.gi.Cinnamon {
 	interface Recorder extends RecorderMixin {}
 
 	class Recorder {
-		public constructor();
+		public constructor(options?: Partial<RecorderInitOptions>);
 		/**
 		 * Create a new {@link Recorder} to record movies of a #ClutterStage
 		 * @param stage The #ClutterStage
@@ -862,6 +926,9 @@ declare namespace imports.gi.Cinnamon {
 		screenshot_window(include_frame: boolean, include_cursor: boolean, filename: string, callback: ScreenshotCallback): void;
 	}
 
+	type ScreenshotInitOptionsMixin = GObject.ObjectInitOptions
+	export interface ScreenshotInitOptions extends ScreenshotInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Screenshot} instead.
 	 */
@@ -870,7 +937,7 @@ declare namespace imports.gi.Cinnamon {
 	interface Screenshot extends ScreenshotMixin {}
 
 	class Screenshot {
-		public constructor();
+		public constructor(options?: Partial<ScreenshotInitOptions>);
 		public static new(): Screenshot;
 	}
 
@@ -881,6 +948,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type SlicerInitOptionsMixin = St.BinInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface SlicerInitOptions extends SlicerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Slicer} instead.
 	 */
@@ -889,7 +959,7 @@ declare namespace imports.gi.Cinnamon {
 	interface Slicer extends SlicerMixin {}
 
 	class Slicer {
-		public constructor();
+		public constructor(options?: Partial<SlicerInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -899,6 +969,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type StackInitOptionsMixin = St.WidgetInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
+	export interface StackInitOptions extends StackInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stack} instead.
 	 */
@@ -907,7 +980,7 @@ declare namespace imports.gi.Cinnamon {
 	interface Stack extends StackMixin {}
 
 	class Stack {
-		public constructor();
+		public constructor(options?: Partial<StackInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -931,6 +1004,14 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type TrayIconInitOptionsMixin = GtkEmbedInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<ITrayIcon,
+		"pid" |
+		"title" |
+		"wm_class">;
+
+	export interface TrayIconInitOptions extends TrayIconInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TrayIcon} instead.
 	 */
@@ -939,7 +1020,7 @@ declare namespace imports.gi.Cinnamon {
 	interface TrayIcon extends TrayIconMixin {}
 
 	class TrayIcon {
-		public constructor();
+		public constructor(options?: Partial<TrayIconInitOptions>);
 		public static new(window: EmbeddedWindow): Clutter.Actor;
 	}
 
@@ -958,6 +1039,12 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type TrayManagerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITrayManager,
+		"bg_color">;
+
+	export interface TrayManagerInitOptions extends TrayManagerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TrayManager} instead.
 	 */
@@ -966,7 +1053,7 @@ declare namespace imports.gi.Cinnamon {
 	interface TrayManager extends TrayManagerMixin {}
 
 	class TrayManager {
-		public constructor();
+		public constructor(options?: Partial<TrayManagerInitOptions>);
 		public static new(): TrayManager;
 	}
 
@@ -1025,6 +1112,9 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type WMInitOptionsMixin = GObject.ObjectInitOptions
+	export interface WMInitOptions extends WMInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WM} instead.
 	 */
@@ -1033,7 +1123,7 @@ declare namespace imports.gi.Cinnamon {
 	interface WM extends WMMixin {}
 
 	class WM {
-		public constructor();
+		public constructor(options?: Partial<WMInitOptions>);
 		/**
 		 * Creates a new window management interface by hooking into #plugin.
 		 * @param plugin the #MetaPlugin
@@ -1077,6 +1167,12 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type WindowTrackerInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IWindowTracker,
+		"focus_app">;
+
+	export interface WindowTrackerInitOptions extends WindowTrackerInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link WindowTracker} instead.
 	 */
@@ -1085,7 +1181,7 @@ declare namespace imports.gi.Cinnamon {
 	interface WindowTracker extends WindowTrackerMixin {}
 
 	class WindowTracker {
-		public constructor();
+		public constructor(options?: Partial<WindowTrackerInitOptions>);
 		public static get_default(): WindowTracker;
 	}
 
@@ -1111,6 +1207,12 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
+	type XFixesCursorInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<IXFixesCursor,
+		"stage">;
+
+	export interface XFixesCursorInitOptions extends XFixesCursorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link XFixesCursor} instead.
 	 */
@@ -1119,123 +1221,145 @@ declare namespace imports.gi.Cinnamon {
 	interface XFixesCursor extends XFixesCursorMixin {}
 
 	class XFixesCursor {
-		public constructor();
+		public constructor(options?: Partial<XFixesCursorInitOptions>);
 		public static get_for_stage(stage: Clutter.Stage): XFixesCursor;
 	}
 
+	export interface AppClassInitOptions {}
 	interface AppClass {}
 	class AppClass {
-		public constructor();
+		public constructor(options?: Partial<AppClassInitOptions>);
 	}
 
+	export interface AppPrivateInitOptions {}
 	interface AppPrivate {}
 	class AppPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppPrivateInitOptions>);
 	}
 
+	export interface AppSystemClassInitOptions {}
 	interface AppSystemClass {}
 	class AppSystemClass {
-		public constructor();
+		public constructor(options?: Partial<AppSystemClassInitOptions>);
 		public installed_changed: {(appsys: AppSystem): void;};
 		public favorites_changed: {(appsys: AppSystem): void;};
 	}
 
+	export interface AppSystemPrivateInitOptions {}
 	interface AppSystemPrivate {}
 	class AppSystemPrivate {
-		public constructor();
+		public constructor(options?: Partial<AppSystemPrivateInitOptions>);
 	}
 
+	export interface DocSystemClassInitOptions {}
 	interface DocSystemClass {}
 	class DocSystemClass {
-		public constructor();
+		public constructor(options?: Partial<DocSystemClassInitOptions>);
 	}
 
+	export interface DocSystemPrivateInitOptions {}
 	interface DocSystemPrivate {}
 	class DocSystemPrivate {
-		public constructor();
+		public constructor(options?: Partial<DocSystemPrivateInitOptions>);
 	}
 
+	export interface EmbeddedWindowClassInitOptions {}
 	interface EmbeddedWindowClass {}
 	class EmbeddedWindowClass {
-		public constructor();
+		public constructor(options?: Partial<EmbeddedWindowClassInitOptions>);
 	}
 
+	export interface EmbeddedWindowPrivateInitOptions {}
 	interface EmbeddedWindowPrivate {}
 	class EmbeddedWindowPrivate {
-		public constructor();
+		public constructor(options?: Partial<EmbeddedWindowPrivateInitOptions>);
 	}
 
+	export interface GenericContainerAllocationInitOptions {}
 	interface GenericContainerAllocation {}
 	class GenericContainerAllocation {
-		public constructor();
+		public constructor(options?: Partial<GenericContainerAllocationInitOptions>);
 		public min_size: number;
 		public natural_size: number;
 		public readonly _refcount: number;
 	}
 
+	export interface GenericContainerClassInitOptions {}
 	interface GenericContainerClass {}
 	class GenericContainerClass {
-		public constructor();
+		public constructor(options?: Partial<GenericContainerClassInitOptions>);
 	}
 
+	export interface GenericContainerPrivateInitOptions {}
 	interface GenericContainerPrivate {}
 	class GenericContainerPrivate {
-		public constructor();
+		public constructor(options?: Partial<GenericContainerPrivateInitOptions>);
 	}
 
+	export interface GlobalClassInitOptions {}
 	interface GlobalClass {}
 	class GlobalClass {
-		public constructor();
+		public constructor(options?: Partial<GlobalClassInitOptions>);
 	}
 
+	export interface GtkEmbedClassInitOptions {}
 	interface GtkEmbedClass {}
 	class GtkEmbedClass {
-		public constructor();
+		public constructor(options?: Partial<GtkEmbedClassInitOptions>);
 	}
 
+	export interface GtkEmbedPrivateInitOptions {}
 	interface GtkEmbedPrivate {}
 	class GtkEmbedPrivate {
-		public constructor();
+		public constructor(options?: Partial<GtkEmbedPrivateInitOptions>);
 	}
 
+	export interface PerfLogClassInitOptions {}
 	interface PerfLogClass {}
 	class PerfLogClass {
-		public constructor();
+		public constructor(options?: Partial<PerfLogClassInitOptions>);
 	}
 
+	export interface RecorderClassInitOptions {}
 	interface RecorderClass {}
 	class RecorderClass {
-		public constructor();
+		public constructor(options?: Partial<RecorderClassInitOptions>);
 	}
 
+	export interface ScreenshotClassInitOptions {}
 	interface ScreenshotClass {}
 	class ScreenshotClass {
-		public constructor();
+		public constructor(options?: Partial<ScreenshotClassInitOptions>);
 	}
 
+	export interface SlicerClassInitOptions {}
 	interface SlicerClass {}
 	class SlicerClass {
-		public constructor();
+		public constructor(options?: Partial<SlicerClassInitOptions>);
 	}
 
+	export interface SlicerPrivateInitOptions {}
 	interface SlicerPrivate {}
 	class SlicerPrivate {
-		public constructor();
+		public constructor(options?: Partial<SlicerPrivateInitOptions>);
 	}
 
+	export interface StackClassInitOptions {}
 	interface StackClass {}
 	class StackClass {
-		public constructor();
+		public constructor(options?: Partial<StackClassInitOptions>);
 	}
 
+	export interface StackPrivateInitOptions {}
 	interface StackPrivate {}
 	class StackPrivate {
-		public constructor();
+		public constructor(options?: Partial<StackPrivateInitOptions>);
 	}
 
+	export interface StartupSequenceInitOptions {}
 	interface StartupSequence {}
 	class StartupSequence {
-		public constructor();
+		public constructor(options?: Partial<StartupSequenceInitOptions>);
 		public create_icon(size: number): Clutter.Actor;
 		public get_app(): App;
 		public get_completed(): boolean;
@@ -1243,46 +1367,54 @@ declare namespace imports.gi.Cinnamon {
 		public get_name(): string;
 	}
 
+	export interface TrayIconClassInitOptions {}
 	interface TrayIconClass {}
 	class TrayIconClass {
-		public constructor();
+		public constructor(options?: Partial<TrayIconClassInitOptions>);
 	}
 
+	export interface TrayIconPrivateInitOptions {}
 	interface TrayIconPrivate {}
 	class TrayIconPrivate {
-		public constructor();
+		public constructor(options?: Partial<TrayIconPrivateInitOptions>);
 	}
 
+	export interface TrayManagerClassInitOptions {}
 	interface TrayManagerClass {}
 	class TrayManagerClass {
-		public constructor();
+		public constructor(options?: Partial<TrayManagerClassInitOptions>);
 		public tray_icon_added: {(manager: TrayManager, icon: Clutter.Actor, lowercase_wm_class: string): void;};
 		public tray_icon_removed: {(manager: TrayManager, icon: Clutter.Actor): void;};
 	}
 
+	export interface TrayManagerPrivateInitOptions {}
 	interface TrayManagerPrivate {}
 	class TrayManagerPrivate {
-		public constructor();
+		public constructor(options?: Partial<TrayManagerPrivateInitOptions>);
 	}
 
+	export interface WMClassInitOptions {}
 	interface WMClass {}
 	class WMClass {
-		public constructor();
+		public constructor(options?: Partial<WMClassInitOptions>);
 	}
 
+	export interface WindowTrackerClassInitOptions {}
 	interface WindowTrackerClass {}
 	class WindowTrackerClass {
-		public constructor();
+		public constructor(options?: Partial<WindowTrackerClassInitOptions>);
 	}
 
+	export interface WindowTrackerPrivateInitOptions {}
 	interface WindowTrackerPrivate {}
 	class WindowTrackerPrivate {
-		public constructor();
+		public constructor(options?: Partial<WindowTrackerPrivateInitOptions>);
 	}
 
+	export interface XFixesCursorClassInitOptions {}
 	interface XFixesCursorClass {}
 	class XFixesCursorClass {
-		public constructor();
+		public constructor(options?: Partial<XFixesCursorClassInitOptions>);
 	}
 
 	enum AppState {
@@ -1378,7 +1510,7 @@ declare namespace imports.gi.Cinnamon {
 	 */
 	function get_file_contents_utf8_sync(path: string): string;
 
-	function parse_search_provider(data: string): boolean;
+	function parse_search_provider(data: string): [ boolean, string, string, GLib.List, string ];
 
 	/**
 	 * Set a double uniform on a ClutterShaderEffect.
@@ -1433,9 +1565,9 @@ declare namespace imports.gi.Cinnamon {
 	 * clutter_actor_get_abs_allocation_vertices() if no transformation is in effect
 	 * and also works around limitations in the GJS binding of arrays.
 	 * @param actor a #ClutterActor
-	 * @param box location to store returned box in stage coordinates
+	 * @returns location to store returned box in stage coordinates
 	 */
-	function util_get_transformed_allocation(actor: Clutter.Actor, box: Clutter.ActorBox): void;
+	function util_get_transformed_allocation(actor: Clutter.Actor): Clutter.ActorBox;
 
 	/**
 	 * Gets the first week day for the current locale, expressed as a
