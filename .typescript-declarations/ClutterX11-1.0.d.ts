@@ -90,6 +90,23 @@ declare namespace imports.gi.ClutterX11 {
 
 	}
 
+	type TexturePixmapInitOptionsMixin = Clutter.TextureInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
+	Pick<ITexturePixmap,
+		"automatic_updates" |
+		"destroyed" |
+		"pixmap" |
+		"pixmap_depth" |
+		"pixmap_height" |
+		"pixmap_width" |
+		"window" |
+		"window_mapped" |
+		"window_override_redirect" |
+		"window_redirect_automatic" |
+		"window_x" |
+		"window_y">;
+
+	export interface TexturePixmapInitOptions extends TexturePixmapInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link TexturePixmap} instead.
 	 */
@@ -101,7 +118,7 @@ declare namespace imports.gi.ClutterX11 {
 	interface TexturePixmap extends TexturePixmapMixin {}
 
 	class TexturePixmap {
-		public constructor();
+		public constructor(options?: Partial<TexturePixmapInitOptions>);
 		/**
 		 * Creates a new {@link TexturePixmap} which can be used to display the
 		 * contents of an X11 Pixmap inside a Clutter scene graph
@@ -122,23 +139,26 @@ declare namespace imports.gi.ClutterX11 {
 		public static new_with_window(window: xlib.Window): Clutter.Actor;
 	}
 
+	export interface TexturePixmapClassInitOptions {}
 	/**
 	 * The {@link TexturePixmapClass} structure contains only private data
 	 */
 	interface TexturePixmapClass {}
 	class TexturePixmapClass {
-		public constructor();
+		public constructor(options?: Partial<TexturePixmapClassInitOptions>);
 		public update_area: {(texture: TexturePixmap, x: number, y: number, width: number, height: number): void;};
 	}
 
+	export interface TexturePixmapPrivateInitOptions {}
 	interface TexturePixmapPrivate {}
 	class TexturePixmapPrivate {
-		public constructor();
+		public constructor(options?: Partial<TexturePixmapPrivateInitOptions>);
 	}
 
+	export interface XInputDeviceInitOptions {}
 	interface XInputDevice {}
 	class XInputDevice {
-		public constructor();
+		public constructor(options?: Partial<XInputDeviceInitOptions>);
 	}
 
 	/**

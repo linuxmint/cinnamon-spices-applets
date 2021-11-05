@@ -37,6 +37,9 @@ declare namespace imports.gi.Cally {
 		remove_action_by_name(action_name: string): boolean;
 	}
 
+	type ActorInitOptionsMixin = Atk.GObjectAccessibleInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface ActorInitOptions extends ActorInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Actor} instead.
 	 */
@@ -49,7 +52,7 @@ declare namespace imports.gi.Cally {
 	interface Actor extends ActorMixin {}
 
 	class Actor {
-		public constructor();
+		public constructor(options?: Partial<ActorInitOptions>);
 		/**
 		 * Creates a new {@link Actor} for the given #actor
 		 * @param actor a #ClutterActor
@@ -65,6 +68,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type CloneInitOptionsMixin = ActorInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface CloneInitOptions extends CloneInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Clone} instead.
 	 */
@@ -77,7 +83,7 @@ declare namespace imports.gi.Cally {
 	interface Clone extends CloneMixin {}
 
 	class Clone {
-		public constructor();
+		public constructor(options?: Partial<CloneInitOptions>);
 		/**
 		 * Creates a new {@link Clone} for the given #actor. #actor must be a
 		 * #ClutterClone.
@@ -94,6 +100,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type GroupInitOptionsMixin = ActorInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface GroupInitOptions extends GroupInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Group} instead.
 	 */
@@ -106,7 +115,7 @@ declare namespace imports.gi.Cally {
 	interface Group extends GroupMixin {}
 
 	class Group {
-		public constructor();
+		public constructor(options?: Partial<GroupInitOptions>);
 		/**
 		 * Creates a {@link Group} for #actor
 		 * @param actor a #ClutterGroup
@@ -122,6 +131,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type RectangleInitOptionsMixin = ActorInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface RectangleInitOptions extends RectangleInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Rectangle} instead.
 	 */
@@ -134,7 +146,7 @@ declare namespace imports.gi.Cally {
 	interface Rectangle extends RectangleMixin {}
 
 	class Rectangle {
-		public constructor();
+		public constructor(options?: Partial<RectangleInitOptions>);
 		/**
 		 * Creates a new {@link Rectangle} for the given #actor. #actor must be
 		 * a #ClutterRectangle.
@@ -151,6 +163,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type RootInitOptionsMixin = Atk.GObjectAccessibleInitOptions
+	export interface RootInitOptions extends RootInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Root} instead.
 	 */
@@ -163,7 +178,7 @@ declare namespace imports.gi.Cally {
 	interface Root extends RootMixin {}
 
 	class Root {
-		public constructor();
+		public constructor(options?: Partial<RootInitOptions>);
 		/**
 		 * Creates a new {@link Root} object.
 		 * @returns the newly created #AtkObject
@@ -178,6 +193,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type StageInitOptionsMixin = GroupInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.WindowInitOptions
+	export interface StageInitOptions extends StageInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Stage} instead.
 	 */
@@ -190,7 +208,7 @@ declare namespace imports.gi.Cally {
 	interface Stage extends StageMixin {}
 
 	class Stage {
-		public constructor();
+		public constructor(options?: Partial<StageInitOptions>);
 		/**
 		 * Creates a new {@link Stage} for the given #actor. #actor should be a
 		 * #ClutterStage.
@@ -207,6 +225,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type TextInitOptionsMixin = ActorInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions & Atk.EditableTextInitOptions & Atk.TextInitOptions
+	export interface TextInitOptions extends TextInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Text} instead.
 	 */
@@ -219,7 +240,7 @@ declare namespace imports.gi.Cally {
 	interface Text extends TextMixin {}
 
 	class Text {
-		public constructor();
+		public constructor(options?: Partial<TextInitOptions>);
 		/**
 		 * Creates a new {@link Text} for the given #actor. #actor must be a
 		 * #ClutterText.
@@ -236,6 +257,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type TextureInitOptionsMixin = ActorInitOptions & Atk.ActionInitOptions & Atk.ComponentInitOptions
+	export interface TextureInitOptions extends TextureInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Texture} instead.
 	 */
@@ -248,7 +272,7 @@ declare namespace imports.gi.Cally {
 	interface Texture extends TextureMixin {}
 
 	class Texture {
-		public constructor();
+		public constructor(options?: Partial<TextureInitOptions>);
 		/**
 		 * Creates a new {@link Texture} for the given #actor. #actor must be
 		 * a #ClutterTexture.
@@ -265,6 +289,9 @@ declare namespace imports.gi.Cally {
 
 	}
 
+	type UtilInitOptionsMixin = Atk.UtilInitOptions
+	export interface UtilInitOptions extends UtilInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Util} instead.
 	 */
@@ -277,16 +304,17 @@ declare namespace imports.gi.Cally {
 	interface Util extends UtilMixin {}
 
 	class Util {
-		public constructor();
+		public constructor(options?: Partial<UtilInitOptions>);
 	}
 
+	export interface ActorClassInitOptions {}
 	/**
 	 * The <structname>CallyActorClass</structname> structure contains
 	 * only private data
 	 */
 	interface ActorClass {}
 	class ActorClass {
-		public constructor();
+		public constructor(options?: Partial<ActorClassInitOptions>);
 		public readonly _padding_dummy: any[];
 		public notify_clutter: {(object: GObject.Object, pspec: GObject.ParamSpec): void;};
 		public focus_clutter: {(actor: Clutter.Actor, data: any): boolean;};
@@ -294,129 +322,146 @@ declare namespace imports.gi.Cally {
 		public remove_actor: {(container: Clutter.Actor, actor: Clutter.Actor, data: any): number;};
 	}
 
+	export interface ActorPrivateInitOptions {}
 	interface ActorPrivate {}
 	class ActorPrivate {
-		public constructor();
+		public constructor(options?: Partial<ActorPrivateInitOptions>);
 	}
 
+	export interface CloneClassInitOptions {}
 	/**
 	 * The <structname>CallyCloneClass</structname> structure contains only
 	 * private data
 	 */
 	interface CloneClass {}
 	class CloneClass {
-		public constructor();
+		public constructor(options?: Partial<CloneClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface ClonePrivateInitOptions {}
 	interface ClonePrivate {}
 	class ClonePrivate {
-		public constructor();
+		public constructor(options?: Partial<ClonePrivateInitOptions>);
 	}
 
+	export interface GroupClassInitOptions {}
 	/**
 	 * The <structname>CallyGroupClass</structname> structure contains only
 	 * private data
 	 */
 	interface GroupClass {}
 	class GroupClass {
-		public constructor();
+		public constructor(options?: Partial<GroupClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface GroupPrivateInitOptions {}
 	interface GroupPrivate {}
 	class GroupPrivate {
-		public constructor();
+		public constructor(options?: Partial<GroupPrivateInitOptions>);
 	}
 
+	export interface RectangleClassInitOptions {}
 	/**
 	 * The <structname>CallyRectangleClass</structname> structure contains
 	 * only private data
 	 */
 	interface RectangleClass {}
 	class RectangleClass {
-		public constructor();
+		public constructor(options?: Partial<RectangleClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface RectanglePrivateInitOptions {}
 	interface RectanglePrivate {}
 	class RectanglePrivate {
-		public constructor();
+		public constructor(options?: Partial<RectanglePrivateInitOptions>);
 	}
 
+	export interface RootClassInitOptions {}
 	/**
 	 * The <structname>CallyRootClass</structname> structure contains only
 	 * private data
 	 */
 	interface RootClass {}
 	class RootClass {
-		public constructor();
+		public constructor(options?: Partial<RootClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface RootPrivateInitOptions {}
 	interface RootPrivate {}
 	class RootPrivate {
-		public constructor();
+		public constructor(options?: Partial<RootPrivateInitOptions>);
 	}
 
+	export interface StageClassInitOptions {}
 	/**
 	 * The <structname>CallyStageClass</structname> structure contains only
 	 * private data
 	 */
 	interface StageClass {}
 	class StageClass {
-		public constructor();
+		public constructor(options?: Partial<StageClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface StagePrivateInitOptions {}
 	interface StagePrivate {}
 	class StagePrivate {
-		public constructor();
+		public constructor(options?: Partial<StagePrivateInitOptions>);
 	}
 
+	export interface TextClassInitOptions {}
 	/**
 	 * The <structname>CallyTextClass</structname> structure contains only
 	 * private data
 	 */
 	interface TextClass {}
 	class TextClass {
-		public constructor();
+		public constructor(options?: Partial<TextClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface TextPrivateInitOptions {}
 	interface TextPrivate {}
 	class TextPrivate {
-		public constructor();
+		public constructor(options?: Partial<TextPrivateInitOptions>);
 	}
 
+	export interface TextureClassInitOptions {}
 	/**
 	 * The <structname>CallyTextureClass</structname> structure contains
 	 * only private data
 	 */
 	interface TextureClass {}
 	class TextureClass {
-		public constructor();
+		public constructor(options?: Partial<TextureClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface TexturePrivateInitOptions {}
 	interface TexturePrivate {}
 	class TexturePrivate {
-		public constructor();
+		public constructor(options?: Partial<TexturePrivateInitOptions>);
 	}
 
+	export interface UtilClassInitOptions {}
 	/**
 	 * The <structname>CallyUtilClass</structname> structure contains only
 	 * private data
 	 */
 	interface UtilClass {}
 	class UtilClass {
-		public constructor();
+		public constructor(options?: Partial<UtilClassInitOptions>);
 		public readonly _padding_dummy: any[];
 	}
 
+	export interface UtilPrivateInitOptions {}
 	interface UtilPrivate {}
 	class UtilPrivate {
-		public constructor();
+		public constructor(options?: Partial<UtilPrivateInitOptions>);
 	}
 
 	/**

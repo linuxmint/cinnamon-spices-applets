@@ -181,6 +181,9 @@ declare namespace imports.gi.CMenu {
 		list_actions(): string[];
 	}
 
+	type DesktopAppInfoInitOptionsMixin = GObject.ObjectInitOptions & Gio.AppInfoInitOptions
+	export interface DesktopAppInfoInitOptions extends DesktopAppInfoInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link DesktopAppInfo} instead.
 	 */
@@ -189,7 +192,7 @@ declare namespace imports.gi.CMenu {
 	interface DesktopAppInfo extends DesktopAppInfoMixin {}
 
 	class DesktopAppInfo {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoInitOptions>);
 		/**
 		 * This is currently unused in Cinnamon and does not make sense here
 		 * because the desktop id as used here is not necessarily unique
@@ -265,6 +268,14 @@ declare namespace imports.gi.CMenu {
 
 	}
 
+	type TreeInitOptionsMixin = GObject.ObjectInitOptions & 
+	Pick<ITree,
+		"flags" |
+		"menu_basename" |
+		"menu_path">;
+
+	export interface TreeInitOptions extends TreeInitOptionsMixin {}
+
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Tree} instead.
 	 */
@@ -273,21 +284,23 @@ declare namespace imports.gi.CMenu {
 	interface Tree extends TreeMixin {}
 
 	class Tree {
-		public constructor();
+		public constructor(options?: Partial<TreeInitOptions>);
 		public static new(menu_basename: string, flags: TreeFlags): Tree;
 		public static new_for_path(menu_path: string, flags: TreeFlags): Tree;
 		public static item_ref(item: any | null): any | null;
 		public static item_unref(item: any | null): void;
 	}
 
+	export interface DesktopAppInfoClassInitOptions {}
 	interface DesktopAppInfoClass {}
 	class DesktopAppInfoClass {
-		public constructor();
+		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
 	}
 
+	export interface TreeAliasInitOptions {}
 	interface TreeAlias {}
 	class TreeAlias {
-		public constructor();
+		public constructor(options?: Partial<TreeAliasInitOptions>);
 		public get_aliased_directory(): TreeDirectory;
 		public get_aliased_entry(): TreeEntry;
 		public get_aliased_item_type(): TreeItemType;
@@ -300,14 +313,16 @@ declare namespace imports.gi.CMenu {
 		public get_tree(): Tree;
 	}
 
+	export interface TreeClassInitOptions {}
 	interface TreeClass {}
 	class TreeClass {
-		public constructor();
+		public constructor(options?: Partial<TreeClassInitOptions>);
 	}
 
+	export interface TreeDirectoryInitOptions {}
 	interface TreeDirectory {}
 	class TreeDirectory {
-		public constructor();
+		public constructor(options?: Partial<TreeDirectoryInitOptions>);
 		public get_comment(): string;
 		public get_desktop_file_path(): string;
 		public get_generic_name(): string;
@@ -329,9 +344,10 @@ declare namespace imports.gi.CMenu {
 		public make_path(entry: TreeEntry): string;
 	}
 
+	export interface TreeEntryInitOptions {}
 	interface TreeEntry {}
 	class TreeEntry {
-		public constructor();
+		public constructor(options?: Partial<TreeEntryInitOptions>);
 		public get_app_info(): DesktopAppInfo;
 		public get_desktop_file_id(): string;
 		public get_desktop_file_path(): string;
@@ -347,9 +363,10 @@ declare namespace imports.gi.CMenu {
 		public get_tree(): Tree;
 	}
 
+	export interface TreeHeaderInitOptions {}
 	interface TreeHeader {}
 	class TreeHeader {
-		public constructor();
+		public constructor(options?: Partial<TreeHeaderInitOptions>);
 		public get_directory(): TreeDirectory;
 		public get_parent(): TreeDirectory;
 		/**
@@ -359,9 +376,10 @@ declare namespace imports.gi.CMenu {
 		public get_tree(): Tree;
 	}
 
+	export interface TreeIterInitOptions {}
 	interface TreeIter {}
 	class TreeIter {
-		public constructor();
+		public constructor(options?: Partial<TreeIterInitOptions>);
 		/**
 		 * This method may only be called if gmenu_tree_iter_next()
 		 * returned GMENU_TREE_ITEM_ALIAS.
@@ -409,9 +427,10 @@ declare namespace imports.gi.CMenu {
 		public unref(): void;
 	}
 
+	export interface TreeSeparatorInitOptions {}
 	interface TreeSeparator {}
 	class TreeSeparator {
-		public constructor();
+		public constructor(options?: Partial<TreeSeparatorInitOptions>);
 		public get_parent(): TreeDirectory;
 		/**
 		 * Grab the tree associated with a #GMenuTreeSeparator.
