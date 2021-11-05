@@ -250,7 +250,7 @@ msgstr "Localização remota"
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Localização remota no RedShift pode tornar sua experiência lenta."
+msgstr "Localização remota no Redshift pode tornar sua experiência lenta."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
@@ -269,7 +269,7 @@ msgid ""
 "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
 msgstr ""
-"Localização remota no RedShift pode tornar sua experiência lenta.\n"
+"Localização remota no Redshift pode tornar sua experiência lenta.\n"
 "Prefira usar: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
