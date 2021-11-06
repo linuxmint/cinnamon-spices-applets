@@ -4,12 +4,13 @@ Cinnamon applet that shows the current values of configured cryptos.
 
 ## Getting Started
 
-To install for the local user:
+Install via Cinnamon's Applets settings module Download tab.
 
-```
-cd ~/.local/share/cinnamon/applets
-git clone https://github.com/imDeprecated/cryptocoin-applet.git cryptocoin@guantanamoe
-```
+or
+
+Download the applet's zip file using the Download button on the applet's Cinnamon Spices web-pages and unzip to `~/.local/share/cinnamon/applets/`
+
+Once installed add the applet to your panel via the Applets settings module.
 
 ## Versioning
 
@@ -25,4 +26,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## API Usage
 
-Using [CryptoCompare](https://www.cryptocompare.com) api with one lookup per 5 seconds 
+Using [CryptoCompare](https://www.cryptocompare.com) api with one lookup per 5 minutes 

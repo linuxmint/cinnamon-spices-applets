@@ -32,7 +32,7 @@ msgid "Labels"
 msgstr "Метки"
 
 #: ../3.0/prefsui.glade.h:3 ../3.2/prefsui.glade.h:3 ../3.4/prefsui.glade.h:3
-msgid "Resfresh Rate (ms)"
+msgid "Refresh Rate (ms)"
 msgstr "Частота обновления (мс)"
 
 #: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4
@@ -189,8 +189,8 @@ msgstr ""
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
 #, fuzzy
-msgid "------- CPU -------"
-msgstr "-------ЦП------- \n"
+msgid "------------- CPU ------------"
+msgstr "--------------ЦП-------------- \n"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
 #: ../3.4/DataProviders.js:138
@@ -200,8 +200,8 @@ msgstr "Память"
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
 #, fuzzy
-msgid "------- Memory -------"
-msgstr "----Память---- \n"
+msgid "----------- Memory -----------"
+msgstr "------------Память------------ \n"
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
 #, fuzzy
@@ -234,8 +234,8 @@ msgstr "Подкачка"
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
 #, fuzzy
-msgid "------- Swap -------"
-msgstr "---Подкачка--- \n"
+msgid  "------------ Swap ------------"
+msgstr "-----------Подкачка----------- \n"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
 #: ../3.4/DataProviders.js:202
@@ -245,8 +245,8 @@ msgstr "Сеть"
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
 #, fuzzy
-msgid "------- Networks -------"
-msgstr "------Сеть------ \n"
+msgid "---------- Networks ----------"
+msgstr "-------------Сеть------------- \n"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
 #: ../3.4/DataProviders.js:297
@@ -273,8 +273,8 @@ msgstr "Диск"
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
 #, fuzzy
-msgid "------- Disks -------"
-msgstr "------Диск------- \n"
+msgid  "------------ Disks -----------"
+msgstr "-------------Диск------------- \n"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:383

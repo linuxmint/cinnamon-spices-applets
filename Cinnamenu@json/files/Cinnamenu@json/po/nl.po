@@ -1,0 +1,440 @@
+# Dutch translation for Cinnamenu
+# Copyright (C) 2019
+# This file is distributed under the same license as the Cinnamenu package.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-17 12:34+0100\n"
+"PO-Revision-Date: 2021-03-22 17:41+0000\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
+"Language-Team: nl\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#. 3.2 4.0
+msgid "Type to search..."
+msgstr "Tik in om te zoeken..."
+
+#. 3.2 4.0
+msgid "Initializing"
+msgstr "Bezig met opstarten"
+
+#. 3.2 4.0
+msgid "No description available"
+msgstr "Geen beschrijving beschikbaar"
+
+#. 3.2 4.0
+msgid "All Applications"
+msgstr "Alle toepassingen"
+
+#. 3.2 4.0
+msgid "Places"
+msgstr "Locaties"
+
+#. 3.2 4.0
+msgid "Recent Files"
+msgstr "Recente bestanden"
+
+#. 3.2 4.0
+msgid "Bookmarks"
+msgstr "Bladwijzers"
+
+#. 3.2 4.0
+msgid "Favorite Apps"
+msgstr "Favoriete toepassingen"
+
+#. 3.2 4.0
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist"
+
+#. 3.2 4.0
+msgid "Clear List"
+msgstr "Lijst wissen"
+
+#. 3.2 4.0
+msgid "No recent documents"
+msgstr "Geen recente documenten"
+
+#. 3.2
+msgid "Account details"
+msgstr "Bijzonderheden van account"
+
+#. 3.2 3.2
+msgid "Grid View"
+msgstr "Rasterweergave"
+
+#. 3.2 3.2
+msgid "List View"
+msgstr "Lijstweergave"
+
+#. 3.2 3.2
+msgid "Switch to grid view"
+msgstr "Omschakelen naar rasterweergave"
+
+#. 3.2 3.2
+msgid "Switch to list view"
+msgstr "Omschakelen naar lijstweergave"
+
+#. 3.2 4.0
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#. 3.2 4.0
+msgid "Lock the screen"
+msgstr "Vergrendel het scherm"
+
+#. 3.2 4.0
+msgid "Logout"
+msgstr "Afmelden"
+
+#. 3.2 4.0
+msgid "Leave the session"
+msgstr "Sessie verlaten"
+
+#. 3.2 4.0
+msgid "Quit"
+msgstr "Afsluiten"
+
+#. 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "De computer afsluiten"
+
+#. 3.2 4.0
+msgid "Home"
+msgstr "Persoonlijke map"
+
+#. 3.2 4.0
+msgid "Computer"
+msgstr "Computer"
+
+#. 3.2 4.0
+msgid "Browse network"
+msgstr "Netwerk verkennen"
+
+#. 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Draaien met NVIDIA-GPU"
+
+#. 3.2 4.0
+msgid "Add to panel"
+msgstr "Toevoegen aan werkbalk"
+
+#. 3.2 4.0
+msgid "Add to desktop"
+msgstr "Toevoegen aan bureaublad"
+
+#. 3.2 4.0
+msgid "Remove favorite"
+msgstr "Verwijder favoriet"
+
+#. 3.2 4.0
+msgid "Add to favorites"
+msgstr "Toevoegen aan favorieten"
+
+#. 3.2 4.0
+msgid "Uninstall"
+msgstr "DeÃ¯nstalleren"
+
+#. 4.0 4.0
+msgid "Please wait..."
+msgstr ""
+
+#. metadata.json->name
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Een flexibel menu met opmaakopties, webbladwijzers, ondersteuning voor "
+"zoekmachines en vaag zoeken."
+
+#. metadata.json->comments
+msgid ""
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
+msgstr ""
+
+#. 3.2 4.0
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. 3.2 4.0
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. 3.2 4.0
+msgid "Layout and Content"
+msgstr "Vormgeving en inhoud"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Zoekdienstaanbieders"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Geen extensies aangetroffen voor zoekdiensten"
+
+#. 3.2 4.0
+msgid "Panel"
+msgstr "Werkbalk"
+
+#. 3.2 4.0
+msgid "Menu"
+msgstr "Menu"
+
+#. 3.2 4.0
+msgid "Layout"
+msgstr "Vormgeving"
+
+#. 3.2 4.0
+msgid "Content"
+msgstr "Inhoud"
+
+#. 3.2 4.0
+msgid "Recent files settings"
+msgstr "Instellingen voor recente bestanden"
+
+#. 3.2 4.0
+msgid "Open the menu editor"
+msgstr "Open de menubewerker"
+
+#. 3.2 4.0
+msgid "Reset category order"
+msgstr "Categorievolgorde terugzetten op standaard"
+
+#. 3.2 4.0
+msgid "Use a custom icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 3.2 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 3.2 4.0
+msgid "Panel icon"
+msgstr "Paneelpictogram"
+
+#. 3.2 4.0
+msgid "Panel text"
+msgstr "Paneeltekst"
+
+#. 3.2 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Tekst die naast het paneelpictogram moet worden weergegeven"
+
+#. 3.2 4.0
+msgid "pixels"
+msgstr "beeldpunten"
+
+#. 3.2 4.0
+msgid "Category icon size"
+msgstr "Pictogramgrootte voor categorie"
+
+#. 3.2 4.0
+msgid "Applications list icon size"
+msgstr "Pictogramgrootte voor toepassingenlijst"
+
+#. 3.2 4.0
+msgid "Applications grid icon size"
+msgstr "Pictogramgrootte voor toepassingenraster"
+
+#. 3.2 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Sneltoets voor openen en sluiten van het menu"
+
+#. 3.2 4.0
+msgid "Open menu on hover"
+msgstr "Menu openen bij zweven"
+
+#. 3.2 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
+
+#. 3.2 4.0
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. 3.2 4.0
+msgid "Menu hover delay"
+msgstr "Zweefvertraging voor menu"
+
+#. 3.2 4.0
+msgid "Use menu animations"
+msgstr "Menu-animaties gebruiken"
+
+#. 3.2 4.0
+msgid "Animate the menu on open and close"
+msgstr "Menu-animaties inschakelen voor openen en sluiten"
+
+#. 3.2 4.0
+msgid "Activate categories on click"
+msgstr "CategorieÃ«n activeren bij klikken"
+
+#. 3.2 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "CategorieÃ«n activeren bij klikken"
+
+#. 3.2 4.0
+msgid "Enable autoscrolling"
+msgstr "Schakel automatisch scrollen in"
+
+#. 3.2 4.0
+msgid "Enable autoscrolling in application list"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
+
+#. 3.2 4.0
+msgid "Show web bookmarks"
+msgstr "Webbladwijzers tonen"
+
+#. 3.2 4.0
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Toon de webbladwijzers van uw browser in het menu"
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Opzoeken van open vensters inschakelen"
+
+#. 3.2 4.0
+msgid "Enable search providers"
+msgstr "Zoekdiensten inschakelen"
+
+#. 3.2 4.0
+msgid "Include search provider results in searches"
+msgstr "Zoekresultaten van zoekmachines opnemen in zoekopdrachten"
+
+#. 3.2 4.0
+msgid "Example Search Providers"
+msgstr "Voorbeeld van zoekdiensten"
+
+#. 3.2
+msgid "Startup applications view mode"
+msgstr "Weergavemodus van opstarttoepassingen"
+
+#. 3.2 4.0
+msgid "List"
+msgstr "Lijst"
+
+#. 3.2 4.0
+msgid "Grid"
+msgstr "Raster"
+
+#. 3.2 4.0
+msgid "columns"
+msgstr "rijen"
+
+#. 3.2 4.0
+msgid "Number of columns in apps grid"
+msgstr "Aantal rijen in toepassingenraster"
+
+#. 3.2 4.0
+msgid "Show bookmarks and places"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 3.2 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr ""
+
+#. 3.2 4.0
+msgid "Show application icons"
+msgstr "Toepassingspictogrammen tonen"
+
+#. 3.2 4.0
+msgid "Show category icons"
+msgstr "Categoriepictogrammen tonen"
+
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Beschrijvingen van toepassingen tonen onder titels"
+
+#. 3.2
+msgid "Show tooltips"
+msgstr "Zweeftips tonen"
+
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Vertraging voor zweeftip"
+
+#. 3.2 4.0
+msgid "Use a custom menu height"
+msgstr "Een aangepaste menuhoogte gebruiken"
+
+#. 3.2 4.0
+msgid "px"
+msgstr "bp"
+
+#. 3.2 4.0
+msgid "Custom menu height"
+msgstr "Aangepaste menuhoogte"
+
+#. 4.0
+msgid "Applications view mode"
+msgstr "Toepassingsweergavemodus"
+
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Bekijk applicaties als lijst of raster"
+
+#. 4.0
+msgid "Application description placement"
+msgstr "Plaatsing van applicatiebeschrijving"
+
+#. 4.0
+msgid "Tooltips"
+msgstr "Tooltips"
+
+#. 4.0
+msgid "Under titles"
+msgstr "Onder titels"
+
+#. 4.0
+msgid "None"
+msgstr "Geen"
+
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Kies waar applicatiebeschrijvingen moeten worden weergegeven"
+
+#. 4.0
+msgid "Session buttons location"
+msgstr "Locatie van sessieknoppen"
+
+#. 4.0
+msgid "Top"
+msgstr "Top"
+
+#. 4.0
+msgid "Bottom"
+msgstr "Bodem"
+
+#. 4.0
+msgid "Left"
+msgstr "Links"
+
+#. 4.0
+msgid "Right"
+msgstr "Rechtsaf"
+
+#. 4.0
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgstr "Kies waar u de sessieknoppen (stoppen, afmelden, enz.) Wilt weergeven"
+
+#. 4.0
+msgid "Add favorites to session buttons"
+msgstr "Voeg favorieten toe aan sessieknoppen"
+
+#. 4.0
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Toon uw favoriete app-pictogrammen naast de sessieknoppen"
+
+

@@ -1,0 +1,316 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["panel-options", "panel-location", "panel-shortcuts"],
+    
+    "panel-options": {
+      "type": "page",
+      "title": "Settings",
+      "sections": [
+        "opt-section",
+        "day-section",
+        "night-section"
+      ]
+    },
+    "panel-location": {
+      "type": "page",
+      "title": "Location",
+      "sections": [
+        "location-section"
+      ]
+    },
+    "panel-shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "keybind-section",
+        "info-section"
+      ]
+    },
+    
+    
+    
+    "info-section": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "textTips",
+        "textHelp",
+        "textInfo"
+      ]
+    },
+    
+    "opt-section": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "enabled",
+        "autoUpdate",
+        "autoUpdateInterval",
+        "adjustmentMethod",
+        "labelScrollAction",
+        "iconLabel",
+        "symbolicIcon"
+      ]
+    },
+    
+    "day-section": {
+      "type": "section",
+      "title": "Day Settings",
+      "keys": [
+        "dayTemp",
+        "dayBrightness",
+        "gammaMix"
+      ]
+    },
+    
+    "night-section": {
+      "type": "section",
+      "title": "Night Settings",
+      "keys": [
+        "enabledNight", "manualNightTime", "nightTimeStart", "nightTimeEnd", "nightTemp", "nightBrightness"
+      ]
+    },
+    
+    "keybind-section": {
+      "type": "section",
+      "title": "Key Bindings",
+      "keys": [
+        "keyToggle",
+        "keyBrightnessUp",
+        "keyBrightnessDown",
+        "keyTempUp",
+        "keyTempDown",
+        "keyGammaUp",
+        "keyGammaDown"
+      ]
+    },
+    
+    "location-section": {
+      "type": "section",
+      "title": "Location Settings",
+      "keys": [
+        "locationRemote", "locationUpdate", "locationLatitude", "locationLongitude", "aboutLocation"
+      ]
+    }
+  },
+  
+  "enabled": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enabled"
+  },
+  "autoUpdate": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": true,
+    "description": "Auto Update",
+    "tooltip": "Continuously adjust color temperature"
+  },
+  "autoUpdateInterval": {
+    "type": "spinbutton",
+    "dependency": "enabledNight=true",
+    "default": 20,
+    "min": 5,
+    "max": 1800,
+    "units": "Sec.",
+    "step": 1,
+    "description": "Update interval"
+  },
+  "adjustmentMethod": {
+    "type": "combobox",
+    "default": "randr",
+    "description": "Adjustment Method",
+    "options": {
+      "needload": "randr2",
+      "randr": "randr",
+      "vidmode": "vidmode"
+    },
+    "tooltip": "Method to use to set color temperature"
+  },
+  "labelScrollAction": {
+    "type": "combobox",
+    "default": "disabled",
+    "description": "Icon Scroll Action",
+    "options": {
+      "Disabled": "disabled",
+      "On/Off": "on_off",
+      "Temperature": "temp",
+      "Bright": "bright",
+      "Gamma": "gamma"
+    },
+    "tooltip": "Action when scroll on applet icon."
+  },
+  "iconLabel": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show Label"
+  },
+  "symbolicIcon": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use symbolic icon"
+  },
+  
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "On/Off",
+    "default": ""
+  },
+  
+  "keyBrightnessUp": {
+    "type": "keybinding",
+    "description": "Increase brightness level",
+    "default": ""
+  },
+  
+  "keyBrightnessDown": {
+    "type": "keybinding",
+    "description": "Decrease brightness level",
+    "default": ""
+  },
+
+  "keyTempUp": {
+    "type": "keybinding",
+    "description": "Increase temperature level",
+    "default": ""
+  },
+  
+  "keyTempDown": {
+    "type": "keybinding",
+    "description": "Decrease temperature level",
+    "default": ""
+  },
+  
+  "keyGammaUp": {
+    "type": "keybinding",
+    "description": "Increase gamma level",
+    "default": ""
+  },
+  
+  "keyGammaDown": {
+    "type": "keybinding",
+    "description": "Decrease gamma level",
+    "default": ""
+  },
+
+  "dayTemp": {
+    "type": "spinbutton",
+    "default": 5900,
+    "min": 1000,
+    "max": 12000,
+    "units": "K",
+    "step": 5,
+    "description": "Temperature"
+  },
+  "dayBrightness": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 10,
+    "max": 100,
+    "units": "%",
+    "step": 1,
+    "description": "Brightness"
+  },
+  "gammaMix": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0.5,
+    "max": 5,
+    "units": "",
+    "step": 0.01,
+    "description": "Gamma"
+  },
+  
+  "enabledNight": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Night Enabled"
+  },
+  "manualNightTime": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": true,
+    "description": "Use Manual Night Time"
+  },
+  "nightTimeStart" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose Start Time",
+    "default" : {
+      "h" : 20,
+      "m" : 0,
+      "s" : 0
+    }
+  },
+  "nightTimeEnd" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose End Time",
+    "default" : {
+      "h" : 6,
+      "m" : 0,
+      "s" : 0
+    }
+  },
+  "nightTemp": {
+    "type": "spinbutton",
+    "dependency": "enabledNight=true",
+    "default": 3500,
+    "min": 1000,
+    "max": 9000,
+    "units": "K",
+    "step": 5,
+    "description": "Temperature"
+  },
+  "nightBrightness": {
+    "type": "spinbutton",
+    "dependency": "enabledNight=true",
+    "default": 100,
+    "min": 10,
+    "max": 100,
+    "units": "%",
+    "step": 1,
+    "description": "Brightness"
+  },
+  
+  "locationRemote": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Remote Location",
+    "tooltip": "Native geoclue on redshift can make the experience slow."
+  },
+  "locationUpdate": {
+    "type": "button",
+    "description": "Update Location",
+    "dependency": "locationRemote=true",
+    "callback": "setLocation",
+    "tooltip": "Native geoclue on redshift can make the experience slow."
+  },
+  "locationLatitude": {
+    "type": "entry",
+    "default": "0",
+    "description": "Latitude"
+  },
+  "locationLongitude": {
+    "type": "entry",
+    "default": "0",
+    "description": "Longitude"
+  },
+  "aboutLocation": {
+    "type": "label",
+    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geolocation-db.com/"
+  },
+  "textTips": {
+    "type": "label",
+    "description": "* Right-click the sliders to reset the default (neutral) value."
+  },
+  "textHelp": {
+    "type": "label",
+    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n You will lost all your configs."
+  },
+  "textInfo": {
+    "type": "label",
+    "description": "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
+  }
+}

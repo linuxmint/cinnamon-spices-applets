@@ -22,6 +22,7 @@ const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Tweener = imports.ui.tweener;
 const Signals = imports.signals;
@@ -39,6 +40,7 @@ const WindowUtils = imports.misc.windowUtils;
 const DND = imports.ui.dnd;
 const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 const UUID = "windowlist@cobinja.de";
 
@@ -47,7 +49,11 @@ const DEFAULT_ICON_SIZE = 22;
 const MINIMUM_ICON_SIZE = 16;
 const ICON_HEIGHT_FACTOR = 0.8;
 
+const FLASH_INTERVAL = 500;
+
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
+
+const STYLE_CLASS_ATTENTION_STATE = "grouped-window-list-item-demands-attention";
 
 const CobiCaptionType = {
   Name: 0,
@@ -77,7 +83,7 @@ function _(text) {
   return locText;
 }
 
-function _hasFocus(metaWindow) {
+function hasFocus(metaWindow) {
   if (metaWindow.appears_focused) {
     return true;
   }
@@ -176,6 +182,28 @@ function getOverheadSize(actor) {
   return [width, height];
 }
 
+function getMonitors() {
+  let result = [];
+
+  try {
+    let gdkScreen = Gdk.Screen.get_default();
+    let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
+    let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
+    let outputInfos = currentConfig.get_outputs();
+
+    for (let index = 0; index < outputInfos.length; index++) {
+      let output = outputInfos[index];
+      if (output.is_active()) {
+        result.push(output.get_display_name());
+      }
+    }
+  } catch (err) {
+    return [];
+  }
+
+  return result;
+}
+
 const dummy = {};
 
 class CobiWindowListSettings extends Settings.AppletSettings {
@@ -235,7 +263,6 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._icon.natural_height = this._iconSize;
     this._icon.set_width(-1);
     this._icon.set_height(-1);
-    let windowActor = metaWindow.get_compositor_private();
     let monitor = this._appButton._applet.panel.monitor;
     let width = monitor.width;
     let height = monitor.height;
@@ -284,6 +311,12 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._signalManager.connect(this, "activate", this._onActivate, this);
   }
   
+  handleDragOver(source, actor, x, y, time) {
+    this.actor.hover = true;
+    Main.activateWindow(this._metaWindow);
+    return DND.DragMotionResult.COPY_DROP;
+  }
+  
   doSize(availWidth, availHeight) {
     if (Main.software_rendering || !this._settings.getValue("show-previews")) {
       return;
@@ -293,8 +326,6 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     let height = monitor.height;
     let aspectRatio = width / height;
     
-    let numItems = this._menu.numMenuItems;
-    
     let [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
     overheadHeight += this.descSize;
     
@@ -303,12 +334,14 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     if (this._menu.box.get_vertical()) {
       height = (availHeight - overheadHeight);
       width = Math.floor(height * aspectRatio);
-      this._cloneBin.natural_height = height;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     else {
       width = (availWidth - overheadWidth);
       height = Math.floor(width / aspectRatio);
-      this._cloneBin.natural_width = width;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     
     this._descBox.natural_width = width;
@@ -356,7 +389,7 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
       this._onClose();
       return true;
     }
-    PopupMenu.PopupBaseMenuItem.prototype._onButtonReleaseEvent.call(this, actor, event);
+    super._onButtonReleaseEvent(actor, event);
     return true;
   }
   
@@ -401,9 +434,18 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
   }
   
+  updateUrgentState() {
+    if (this._metaWindow.urgent || this._metaWindow.demands_attention) {
+      this.actor.add_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+    }
+    else {
+      this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+    }
+  }
+  
   destroy() {
     this._signalManager.disconnectAllSignals();
-    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
+    super.destroy();
   }
 }
 
@@ -491,10 +533,11 @@ class CobiPopupMenu extends PopupMenu.PopupMenu {
       let window = windows[i];
       this.addWindow(window);
     }
+    this.updateUrgentState();
     this.recalcItemSizes();
     
     this._appButton._computeMousePos();
-    PopupMenu.PopupMenu.prototype.open.call(this, false);
+    super.open(false);
   }
   
   close() {
@@ -502,7 +545,7 @@ class CobiPopupMenu extends PopupMenu.PopupMenu {
       return;
     }
     this.removeDelay();
-    PopupMenu.PopupMenu.prototype.close.call(this, false);
+    super.close(false);
     this.removeAll();
   }
   
@@ -565,14 +608,57 @@ class CobiPopupMenu extends PopupMenu.PopupMenu {
   
   destroy() {
     this._signalManager.disconnectAllSignals();
-    PopupMenu.PopupMenu.prototype.destroy.call(this);
+    super.destroy();
+  }
+  
+  updateUrgentState() {
+    let items = this._getMenuItems();
+    items.forEach(menuItem => {
+      menuItem.updateUrgentState();
+    });
   }
 }
 
-class CobiMenuManager extends PopupMenu.PopupMenuManager {
+const CobiMenuManager = class CobiMenuManager extends PopupMenu.PopupMenuManager {
   
   constructor(owner) {
     super(owner);
+    this.dragMotion = this.dragMotionHandler.bind(this);
+    this._signals.connect(Main.xdndHandler, "drag-end", this.onDragEnd, this);
+    this._signals.connect(Main.xdndHandler, "drag-begin", this.onDragBegin, this);
+  }
+  
+  onDragBegin() {
+    DND.addDragMonitor(this);
+  }
+  
+  onDragEnd() {
+    DND.removeDragMonitor(this);
+    this._closeMenu();
+  }
+  
+  dragMotionHandler(dragEvent) {
+    if (dragEvent) {
+      if (dragEvent.source instanceof CobiAppButton || dragEvent.source.isDraggableApp || dragEvent.source instanceof DND.LauncherDraggable) {
+        return DND.DragMotionResult.CONTINUE;
+      }
+      let hoverMenu = this._findMenuForActor(dragEvent);
+      if (hoverMenu) {
+        if (hoverMenu !== this._activeMenu) {
+          if (hoverMenu._appButton._windows.length > 1) {
+            this._changeMenu(hoverMenu);
+          }
+          else if (hoverMenu._appButton._windows.length === 1) {
+            this._closeMenu();
+            Main.activateWindow(hoverMenu._appButton._currentWindow);
+          }
+        }
+      }
+      else {
+        this._closeMenu();
+      }
+    }
+    return DND.DragMotionResult.CONTINUE;
   }
   
   addMenu(menu, position) {
@@ -678,6 +764,21 @@ class CobiMenuManager extends PopupMenu.PopupMenuManager {
     }
     return false;
   }
+  
+  _findMenuForActor(dragEvent) {
+    let actor = global.stage.get_actor_at_pos(Clutter.PickMode.ALL, dragEvent.x, dragEvent.y);
+    
+    if (actor.is_finalized()) {
+      return null;
+    }
+    for (let i = 0; i < this._menus.length; i++) {
+      let menu = this._menus[i];
+      if (menu.actor.contains(actor) || menu.sourceActor.contains(actor)) {
+        return menu;
+      }
+    }
+    return null;
+  }
 }
 
 class CobiAppButton {
@@ -687,11 +788,12 @@ class CobiAppButton {
     this._applet = applet;
     this._app = app;
     this._settings = this._applet._settings;
+    this._needsAttention = [];
     this._signalManager = new SignalManager.SignalManager(null);
     
     this._pinned = false;
     
-    this.actor = new St.BoxLayout({style_class: "window-list-item-box",
+    this.actor = new St.BoxLayout({style_class: "grouped-window-list-item-box",
                                    track_hover: true,
                                    can_focus: true,
                                    reactive: true
@@ -706,7 +808,6 @@ class CobiAppButton {
     
     this.actor._delegate = this;
     this._iconBox = new St.Group();
-    let direction = this.actor.get_text_direction();
     this.actor.add_actor(this._iconBox);
     this.actor.add_actor(this._labelBox);
     
@@ -716,14 +817,21 @@ class CobiAppButton {
     this._iconBox.add_actor(this._iconBin);
     
     this._labelNumberBox = new St.BoxLayout();
-    this._labelNumber = new St.Label();
+    this._labelNumberBin = new St.Bin({
+      important: true,
+      style_class: "grouped-window-list-badge",
+      x_align: St.Align.MIDDLE,
+      y_align: St.Align.MIDDLE
+    });
+    this._labelNumber = new St.Label({
+      style_class: "grouped-window-list-number-label"
+    });
     this._iconBox.add_actor(this._labelNumberBox);
-    this._labelNumberBox.add_actor(this._labelNumber);
+    this._labelNumberBox.add_actor(this._labelNumberBin);
+    this._labelNumberBin.add_actor(this._labelNumber);
     
     this._windows = [];
     this._currentWindow = null;
-    
-    this.actor.add_style_pseudo_class("neutral");
     
     this._updateOrientation();
     
@@ -743,7 +851,6 @@ class CobiAppButton {
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
     
     this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
-      this.actor.remove_style_pseudo_class("neutral");
       this.updateView();
     }), this);
     this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon, this);
@@ -791,24 +898,6 @@ class CobiAppButton {
     return this.actor;
   }
   
-  handleDragOver(source, actor, x, y, time) {
-    if (this._draggable && this._draggable.inhibit) {
-      return DND.DragMotionResult.MOVE_DROP;
-    }
-    if (source instanceof CobiAppButton || source.isDraggableApp || source instanceof DND.LauncherDraggable) {
-      return DND.DragMotionResult.CONTINUE;
-    }
-    if (this._currentWindow) {
-      Main.activateWindow(this._currentWindow);
-      return DND.DragMotionResult.COPY_DROP;
-    }
-    return DND.DragMotionResult.CONTINUE;
-  }
-  
-  acceptDrop(source, actor, x, y, time) {
-    return false;
-  }
-  
   getPinnedIndex() {
     let pinSetting = this._settings.getValue("pinned-apps")[this._workspace._wsNum];
     return this._pinned ? pinSetting.indexOf(this._app.get_id()) : -1;
@@ -843,7 +932,7 @@ class CobiAppButton {
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
     
-    this.actor.remove_style_pseudo_class("neutral");
+    this.actor.add_style_pseudo_class("active");
     this._updateTooltip();
     if (this._windows.length == 1) {
       this._workspace.menuManager.addMenu(this.menu);
@@ -857,6 +946,7 @@ class CobiAppButton {
     this._signalManager.disconnect("notify::demands-attention", metaWindow);
     this._signalManager.disconnect("notify::gtk-application-id", metaWindow);
     this._signalManager.disconnect("notify::wm-class", metaWindow);
+    this._signalManager.disconnect("workspace-changed", metaWindow);
     
     let arIndex = this._windows.indexOf(metaWindow);
     if (arIndex >= 0) {
@@ -870,7 +960,6 @@ class CobiAppButton {
       if (!this._currentWindow) {
         this.actor.remove_style_pseudo_class("focus");
         this.actor.remove_style_pseudo_class("active");
-        this.actor.add_style_pseudo_class("neutral");
         this._workspace.menuManager.removeMenu(this.menu);
       }
     }
@@ -962,7 +1051,19 @@ class CobiAppButton {
         this._settings.getValue("group-windows")) {
       text += number;
     }
+    
     this._labelNumber.set_text(text);
+    
+    if (text == "") {
+      this._labelNumberBox.hide();
+    }
+    else {
+      this._labelNumberBox.show();
+      let [width, height] = this._labelNumber.get_size();
+      let size = Math.max(width, height);
+      this._labelNumberBin.width = size;
+      this._labelNumberBin.height = size;
+    }
   }
   
   _updateLabel(actor, event) {
@@ -1027,21 +1128,8 @@ class CobiAppButton {
   }
   
   _updateVisualState() {
-    if (this._currentWindow) {
-      if (this.actor.has_style_pseudo_class("neutral")) {
-        this.actor.remove_style_pseudo_class("neutral");
-      }
-    }
-    else {
-      if (this.actor.has_style_pseudo_class("focus")) {
-        this.actor.remove_style_pseudo_class("focus");
-      }
-      if (!this.actor.has_style_pseudo_class("neutral")) {
-        this.actor.add_style_pseudo_class("neutral");
-      }
-      else if (this.actor.has_style_pseudo_class("hover")) {
-        this.actor.remove_style_pseudo_class("neutral");
-      }
+    if (!this._currentWindow) {
+      this.actor.remove_style_pseudo_class("focus");
     }
   }
   
@@ -1050,57 +1138,100 @@ class CobiAppButton {
     this.actor.remove_style_class_name("bottom");
     this.actor.remove_style_class_name("left");
     this.actor.remove_style_class_name("right");
+    this._labelNumberBox.set_style("padding: 1pt;");
     switch (this._applet.orientation) {
       case St.Side.LEFT:
         this.actor.add_style_class_name("left");
-        this.actor.set_style("margin-left 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
+        this.actor.set_style("margin-left 0px; margin-right: 0px; padding: 0px");
         this._inhibitLabel = true;
         break;
       case St.Side.RIGHT:
         this.actor.add_style_class_name("right");
-        this.actor.set_style("margin-left: 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
+        this.actor.set_style("margin-left: 0px; margin-right: 0px; padding: 0px;");
         this._inhibitLabel = true;
         break;
       case St.Side.TOP:
         this.actor.add_style_class_name("top");
-        this.actor.set_style("margin-top: 0px; padding-top: 0px;");
+        this.actor.set_style("margin-top: 0px; padding-top: 0px; padding-left: 0px; padding-right: 0px;");
         this._inhibitLabel = false;
         break;
       case St.Side.BOTTOM:
         this.actor.add_style_class_name("bottom");
-        this.actor.set_style("margin-bottom: 0px; padding-bottom: 0px;");
+        this.actor.set_style("margin-bottom: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px;");
         this._inhibitLabel = false;
         break;
     }
   }
   
+  _flashButton() {
+    // start over in case more than one window needs attention
+    this.flashesLeft = 3;
+    this.actor.add_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+
+    if (!this._flashTimeoutID) {
+      this._flashTimeoutID = Mainloop.timeout_add(FLASH_INTERVAL, () => {
+        if (this.actor.has_style_class_name(STYLE_CLASS_ATTENTION_STATE)) {
+          this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+        }
+        else if (this.flashesLeft > 0) {
+          this.actor.add_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+          this.flashesLeft--;
+        }
+        if (!this.flashesLeft > 0) {
+          this._flashTimeoutID = null;
+          return false;
+        }
+        return true;
+      });
+    }
+  }
+  
+  _unflashButton() {
+    this.flashesLeft = 0;
+    this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
+  }
+  
   _updateUrgentState() {
-    let state = this._windows.some(function(win) {
-      return win.urgent || win.demands_attention;
-    });
+    let newUrgent = false;
+    this._windows.forEach(function(win) {
+      let isUrgent = win.urgent || win.demands_attention;
+      let ar = this._needsAttention.indexOf(win)
+      if (ar < 0 && isUrgent) {
+        this._needsAttention.push(win);
+        newUrgent = true;
+      }
+      else if (!isUrgent) {
+        this._needsAttention.splice(ar, 1);
+      }
+    }, this);
     
-    if (state) {
-      this.actor.add_style_class_name("window-list-item-demands-attention");
+    if (newUrgent) {
+      this._flashButton();
     }
-    else {
-      this.actor.remove_style_class_name("window-list-item-demands-attention");
+    if (this._needsAttention.length == 0) {
+      this._unflashButton();
     }
+    this.menu.updateUrgentState();
   }
   
   _updateFocus() {
     for (let i = 0; i < this._windows.length; i++) {
       let metaWindow = this._windows[i];
-      if (_hasFocus(metaWindow) && !metaWindow.minimized) {
+      if (hasFocus(metaWindow) && !metaWindow.minimized) {
         this.actor.add_style_pseudo_class("focus");
+        this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
         this._currentWindow = metaWindow;
         this._updateLabel();
+        if (metaWindow.urgent || metaWindow.demands_attention) {
+          this._unflashButton();
+        }
         break;
       }
       else {
         this.actor.remove_style_pseudo_class("focus");
       }
     }
-    this._updateUrgentState();
+    // this._updateUrgentState();
     this.updateCaption();
   }
   
@@ -1126,9 +1257,6 @@ class CobiAppButton {
     this.updateIcon();
   }
   
-  demandAttention(metaWindow) {
-  }
-  
   destroy() {
     this._signalManager.disconnectAllSignals();
     this._tooltip.hide();
@@ -1152,7 +1280,7 @@ class CobiAppButton {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
         if (this._windows.length == 1 || !(this._settings.getValue("menu-show-on-click"))) {
-          if (_hasFocus(this._currentWindow)) {
+          if (hasFocus(this._currentWindow)) {
             this._currentWindow.minimize();
           }
           else {
@@ -1250,7 +1378,7 @@ class CobiAppButton {
   
   _hasFocus() {
     for (let i = 0; i < this._windows.length; i++) {
-      if (_hasFocus(this._windows[i])) {
+      if (hasFocus(this._windows[i])) {
         return true;
       }
     }
@@ -1331,29 +1459,68 @@ class CobiAppButton {
       }
     }
     
+    let appInfo = this._app.get_app_info();
+    if (appInfo != null) {
+      let actions = appInfo.list_actions();
+      if (actions.length > 0) {
+        let appId = this.get_app_id();
+        
+        if (appId == "nemo.desktop" || appId == "nemo-home.desktop") {
+          let defaultPlaces = Main.placesManager.getDefaultPlaces();
+          let bookmarks = Main.placesManager.getBookmarks();
+          let places = defaultPlaces.concat(bookmarks);
+          
+          if (places.length > 0) {
+            this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            let placesMenu = new PopupMenu.PopupSubMenuMenuItem(_("Places"));
+            
+            for (let i = 0; i < places.length; i++) {
+              let place = places[i];
+              let placeItem = new PopupMenu.PopupMenuItem(place.name);
+              placeItem.connect("activate", Lang.bind(this, function() {
+                place.launch();
+              }));
+              placesMenu.menu.addMenuItem(placeItem);
+            }
+            this._contextMenu.addMenuItem(placesMenu);
+          }
+        }
+        
+        this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        for (let i = 0; i < actions.length; i++) {
+          let action = actions[i];
+          let displayName = appInfo.get_action_name(action);
+          
+          let actionItem = new PopupMenu.PopupMenuItem(displayName);
+          actionItem.connect("activate", Lang.bind(this, function() {
+            appInfo.launch_action(action, global.create_app_launch_context());
+          }));
+          this._contextMenu.addMenuItem(actionItem);
+        }
+      }
+    }
+    
     if (this._currentWindow) {
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       // window ops for workspaces
       if (this._currentWindow.is_on_all_workspaces()) {
         this._contextMenu.addAction(_("Only on this workspace"), Lang.bind(this, function() {this._currentWindow.unstick()}));
       }
-      else {
+      else if (this._applet._workspaces.length > 1) {
         this._contextMenu.addAction(_("Visible on all workspaces"), Lang.bind(this, function() {this._currentWindow.stick()}));
-        if (this._applet._workspaces.length > 1) {
-          item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another workspace"));
-          this._contextMenu.addMenuItem(item);
-          
-          for (let i = 0; i < this._applet._workspaces.length; i++) {
-            if (i != this._workspace._wsNum) {
-              // Make the index a local variable to pass to function
-              let j = i;
-              let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
-              let ws = new PopupMenu.PopupMenuItem(name);
-              ws.connect("activate", Lang.bind(this, function() {
-                 this._currentWindow.change_workspace_by_index(j, false, 0);
-              }));
-              item.menu.addMenuItem(ws);
-            }
+        item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another workspace"));
+        this._contextMenu.addMenuItem(item);
+        
+        for (let i = 0; i < this._applet._workspaces.length; i++) {
+          if (i != this._workspace._wsNum) {
+            // Make the index a local variable to pass to function
+            let j = i;
+            let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
+            let ws = new PopupMenu.PopupMenuItem(name);
+            ws.connect("activate", Lang.bind(this, function() {
+                this._currentWindow.change_workspace_by_index(j, false, 0);
+            }));
+            item.menu.addMenuItem(ws);
           }
         }
       }
@@ -1369,17 +1536,21 @@ class CobiAppButton {
           }
           let j = i;
           let name = _("Monitor") + " " + j;
-          let mon = new PopupMenu.PopupMenuItem(name);
-          mon.connect("activate", Lang.bind(this, function() {
+          if (this._applet.xrandrMonitors[j] != null) {
+            name += " (" + this._applet.xrandrMonitors[j] + ")";
+          }
+
+          let monitorItem = new PopupMenu.PopupMenuItem(name);
+          monitorItem.connect("activate", Lang.bind(this, function() {
             this._currentWindow.move_to_monitor(j);
           }));
-          item.menu.addMenuItem(mon);
+          item.menu.addMenuItem(monitorItem);
         }
       }
       
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       // window specific
-      if (!_hasFocus(this._currentWindow)) {
+      if (!hasFocus(this._currentWindow)) {
         item = new PopupMenu.PopupIconMenuItem(_("Restore"), "view-sort-descending", St.IconType.SYMBOLIC);
         item.connect("activate", Lang.bind(this, function() { Main.activateWindow(this._currentWindow); }));
         this._contextMenu.addMenuItem(item);
@@ -1949,8 +2120,8 @@ class CobiWorkspace {
 
 class CobiWindowList extends Applet.Applet {
   
-  _init(orientation, panelHeight, instanceId) {
-    Applet.Applet.prototype._init.call(this, orientation, panelHeight, instanceId);
+  constructor(orientation, panelHeight, instanceId) {
+    super(orientation, panelHeight, instanceId);
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     
     this.actor.set_hover(false);
@@ -1966,7 +2137,7 @@ class CobiWindowList extends Applet.Applet {
   }
   
   _onDragBegin() {
-    Applet.Applet.prototype._onDragBegin.call(this);
+    super._onDragBegin();
     let children = this.actor.get_children();
     for (let i = 0; i < children.length; i++) {
       let appButton = children[i]._delegate;
@@ -2058,6 +2229,7 @@ class CobiWindowList extends Applet.Applet {
   }
   
   _updateMonitor() {
+    this.xrandrMonitors = getMonitors();
     this._monitor = Main.layoutManager.findMonitorForActor(this.actor);
   }
   

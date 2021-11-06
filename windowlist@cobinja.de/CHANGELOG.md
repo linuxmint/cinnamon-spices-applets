@@ -1,5 +1,40 @@
 Changelog
 
+2.8
+==
+- Remove some leftover development output
+- Improve urgent/attention handling
+- Make app buttons squared in all themes
+- Improve number placement
+
+2.7
+==
+- Add support for launching desktop file actions
+- Show places in nemo's context menu
+
+2.6.1
+==
+- Don't show "Visible on all workspaces" if there is only one workspace
+
+2.6
+==
+- Switch styling to the one also used by the builtin grouped window list
+- Add flashing effect for windows that demand attention
+
+2.5.2
+==
+- Fix: the number badge grew when showing after being hidden
+
+2.5.1
+==
+- Fix: the last window on an applet instance left the number label on the icon
+
+2.5
+==
+- Allow Drag'n'Drop operations from one window to another
+- Better monitor naming for moving windows around
+- Adjust thumbnail position so that the title/name is at the top of the menu
+
 2.4
 ==
 - Switch to Cinnamon 4.0 as main supported version

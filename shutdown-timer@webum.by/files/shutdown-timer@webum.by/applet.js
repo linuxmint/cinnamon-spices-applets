@@ -334,19 +334,19 @@ MyApplet.prototype = {
 		  		break;
 
 			case 'suspend':
-		  		Util.spawnCommandLine("dbus-send --system --print-reply --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
+		  		Util.spawnCommandLine("systemctl suspend");
 		  		break;
 
 			case 'hibernate':
-				Util.spawnCommandLine("dbus-send --system --print-reply --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
+				Util.spawnCommandLine("systemctl hibernate");
 		  		break;
 
 			case 'restart':
-				Util.spawnCommandLine("dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
+				Util.spawnCommandLine("systemctl reboot");
 		  		break;
 
 			case 'shutdown':
-		  		Util.spawnCommandLine("dbus-send --system --print-reply --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
+		  		Util.spawnCommandLine("systemctl poweroff");
 		  		break;
 
 			case 'restart-cinnamon':

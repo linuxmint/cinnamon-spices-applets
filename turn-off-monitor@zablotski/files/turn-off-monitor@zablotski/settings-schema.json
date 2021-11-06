@@ -1,0 +1,66 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "General"
+    ],
+    "General": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "section-mouse",
+        "section-keybinding",
+        "section-icon"
+      ]
+    },
+    "section-mouse": {
+      "type": "section",
+      "title": "Mouse",
+      "keys": [
+        "mouse-deactivation-duration"
+      ]
+    },
+    "section-keybinding": {
+      "type": "section",
+      "title": "Shortcuts",
+      "keys": [
+        "keybinding"
+      ]
+    },
+    "section-icon": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "use-symbolic-icon",
+        "icon-color"
+      ]
+    }
+  },
+  "mouse-deactivation-duration": {
+    "type": "scale",
+    "default": 5,
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "units": "seconds",
+    "show-value": true,
+    "description": "Duration of deactivation of the mouse",
+    "tooltip": "To prevent the monitor from turning on too soon after turning it off, the mouse will be disabled for the number of seconds set here."
+  },
+  "keybinding": {
+    "type": "keybinding",
+    "description": "Keyboard shortcut to turn off your monitor",
+    "default": "<Super>b"
+  },
+  "use-symbolic-icon": {
+    "type": "switch",
+    "default": true,
+    "description": "Use a symbolic icon"
+  },
+  "icon-color": {
+    "type": "colorchooser",
+    "default": "green",
+    "description": "Color of the symbolic icon",
+    "dependency": "use-symbolic-icon"
+  }
+}

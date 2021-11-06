@@ -14,7 +14,7 @@ switch workspaces instead of bringing up the Cinnamon Workspace Expo and
 Overview.
 
 Portions of this code were adapted from the workspace-switcher@cinnamon.org
-applet created by the Cinnamon Team: http://cinnamon.linuxmint.com/
+applet created by the Cinnamon Team.
 
 Portions of this code were adapted from the Gnome Shell Frippery Bottom Panel
 extension created by rmyorston: 

@@ -1,11 +1,20 @@
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio; // Needed for file infos
 const Util = imports.misc.util;
+const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+
+const UUID = "temperature@fevimu";
+
+const HOME_DIR = GLib.get_home_dir();
+// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
+var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+const DEBUG = _debug.query_exists(null);
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
 const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
@@ -15,7 +24,7 @@ const _ = function(str) {
   if (translation !== str) {
     return translation;
   }
-  return Gettext.dgettext('temperature@fevimu', str);
+  return Gettext.dgettext(UUID, str);
 }
 
 function CPUTemperatureApplet(metadata, orientation, instance_id) {
@@ -28,14 +37,27 @@ CPUTemperatureApplet.prototype = {
   _init: function(metadata, orientation, instance_id) {
     Applet.TextApplet.prototype._init.call(this, orientation, instance_id);
 
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    }
+    this.on_orientation_changed(orientation); // Initializes for panel orientation
+
     this.isLooping = true;
+    this.waitForCmd = false;
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
 
-    this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', this.updateTemperature, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', this.updateTemperature, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showUnit', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit-letter', 'showUnitLetter', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-label-prefix', 'showLabelPrefix', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'label-prefix', 'labelPrefix', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -52,20 +74,55 @@ CPUTemperatureApplet.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    this.sensorsPath = this._detectSensors();
-    if (this.sensorsPath) {
-      this.title = _('Error');
-      this.content = _('Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!');
-    } else {
-      this.title = _('Warning');
-      this.content = _('Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!');
-    }
+    this.sensorsPath = null;
+    Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
 
     this.set_applet_tooltip(_('Temperature'));
 
     this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
+
+  on_settings_changed: function() {
+    if (this.loopId > 0) {
+        Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
+    this.updateTemperature();
+    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+  },
+
+  on_orientation_changed: function (orientation) {
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+        // vertical
+        this.isHorizontal = false;
+      } else {
+        // horizontal
+        this.isHorizontal = true;
+      }
+    } else {
+      this.isHorizontal = true;  // Do not check unless >= 3.2
+    }
+  }, // End of on_orientation_changed
+
+  versionCompare: function(left, right) {
+    if (typeof left + typeof right != 'stringstring')
+      return false;
+    var a = left.split('.'),
+        b = right.split('.'),
+        i = 0,
+        len = Math.max(a.length, b.length);
+    for (; i < len; i++) {
+      if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+        return 1;
+      } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+        return -1;
+      }
+    }
+    return 0;
+  }, // End of versionCompare
 
   on_applet_clicked: function() {
     this.buildMenu(this.menuItems);
@@ -79,13 +136,21 @@ CPUTemperatureApplet.prototype = {
     this.settings.finalize();
   },
 
-  _detectSensors: function() {
+  _detectSensors: function(ret) {
     // detect if sensors is installed
-    let ret = GLib.spawn_command_line_sync('which sensors');
-    if (ret[0] && ret[3] === 0) {
-      return ret[1].toString().split('\n', 1)[0]; // find the path of the sensors
+    if (ret != "") {
+      this.sensorsPath = ret.toString().split('\n', 1)[0]; // find the path of the sensors
+    } else {
+      this.sensorsPath = null;
     }
-    return null;
+
+    if (this.sensorsPath) {
+      this.title = _('Error');
+      this.content = _('Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!');
+    } else {
+      this.title = _('Warning');
+      this.content = _('Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!');
+    }
   },
 
   buildMenu: function(items) {
@@ -113,54 +178,70 @@ CPUTemperatureApplet.prototype = {
     if (!this.isLooping) {
       return false;
     }
+
+    if (this.sensorsPath && !this.waitForCmd) {
+      this.waitForCmd = true;
+      Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
+    }
+
+    return true;
+  },
+
+  _updateTemperature: function(sensorsOutput) {
     let items = [];
     let tempInfo = null;
     let temp = 0;
 
-    if (this.sensorsPath) {
-      let sensorsOutput = GLib.spawn_command_line_sync(this.sensorsPath); //get the output of the sensors command
+    if (sensorsOutput != "") {
+      tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
+    }
 
-      if (sensorsOutput[0]) {
-        tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput[1].toString()); //get temperature from sensors
+    if (tempInfo) {
+      let critical = 0;
+      let high = 0;
+      let packageIds = 0;
+      let packageCount = 0;
+      let s = 0;
+      let n = 0; //sum and count
+
+      for (let i = 0; i < tempInfo.length; i++) {
+        if (tempInfo[i].label.indexOf('Package') > -1) {
+          critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
+          high = tempInfo[i].high ? tempInfo[i].high : 0;
+          packageIds += tempInfo[i].value;
+          packageCount++;
+        } else if (tempInfo[i].label.indexOf('Core') > -1) {
+          s += tempInfo[i].value;
+          n++;
+        }
+        if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
+          temp = tempInfo[i].value;
+        }
+        items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
       }
-
-      if (tempInfo) {
-        let critical = 0;
-        let high = 0;
-        let packageIds = 0;
-        let packageCount = 0;
-        let s = 0;
-        let n = 0; //sum and count
-
-        for (let i = 0; i < tempInfo.length; i++) {
-          if (tempInfo[i].label.indexOf('Package') > -1) {
-            critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
-            high = tempInfo[i].high ? tempInfo[i].high : 0;
-            packageIds += tempInfo[i].value;
-            packageCount++;
-          }
-          if (tempInfo[i].label.indexOf('Core') > -1) {
-            s += tempInfo[i].value;
-            n++;
-          }
-          if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
-            temp = tempInfo[i].value;
-          }
-          items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
-        }
-        if (packageCount > 0) {
-            temp = packageIds / packageCount;
-        } else if (n > 0) {
-            temp = s / n;
-        }
-        let label = this._formatTemp(temp);
-        if (critical && temp >= critical) {
-          this.title = _('Critical') + ': ' + label;
-        } else if (high && temp >= high) {
-          this.title = _('High') + ': ' + label;
-        } else {
-          this.title = label;
-        }
+      if (high > 0 || critical > 0) {
+        items.push("");
+        items.push(_("Thresholds Info") + ":")
+        if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
+        if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
+      }
+      if (packageCount > 0) {
+          temp = packageIds / packageCount;
+      } else if (n > 0) {
+          temp = s / n;
+      }
+      let label = this._formatTemp(temp);
+      if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
+      if (this.state.changeColor === false) this.state.onlyColors = false;
+      if (critical && temp >= critical) {
+        this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
+        this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "background: transparent;";
+      } else if (high && temp >= high) {
+        this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
+        this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "background: transparent;";
+      } else {
+        this.title = this._formatTemp(temp, true);
+        this.actor.style = "background: transparent;";
       }
     }
 
@@ -168,12 +249,16 @@ CPUTemperatureApplet.prototype = {
       // if we don't have the temperature yet, use some known files
       tempInfo = this._findTemperatureFromFiles();
       if (tempInfo.temp) {
-        this.title = this._formatTemp(tempInfo.temp);
+        this.title = this._formatTemp(tempInfo.temp, true);
         items.push(_('Current Temperature') + ': ' + this._formatTemp(tempInfo.temp));
         if (tempInfo.crit) {
           items.push(_('Critical Temperature') + ': ' + this._formatTemp(tempInfo.crit));
         }
       }
+    }
+
+    if (this.state.showLabelPrefix) {
+      this.title = "%s %s".format(this.state.labelPrefix, this.title);
     }
 
     if (this._applet_label.text !== this.title) {
@@ -185,6 +270,8 @@ CPUTemperatureApplet.prototype = {
     } else {
       this.menuItems = items;
     }
+
+    this.waitForCmd = false;
 
     return true;
   },
@@ -258,15 +345,17 @@ CPUTemperatureApplet.prototype = {
           }
           if (match[i - 1].indexOf(':') > -1) {
             entry.value = match[i];
-          } else if (entries[entries.length - 1].value) {
+          } else if (entries.length > 0 && entries[entries.length - 1].value) {
             entries[entries.length - 1][match[i - 1]] = match[i];
+          } else {
+            continue;
           }
         }
       }
       if (!entry.label || !entry.value) {
         continue;
       }
-      entries.push(entry);
+      if (entry != {}) entries.push(entry);
     }
     return entries;
   },
@@ -275,18 +364,35 @@ CPUTemperatureApplet.prototype = {
     return 9 / 5 * c + 32;
   },
 
-  _formatTemp: function(t) {
+  _formatTemp: function(t, line_feed = false) {
     let precisionDigits;
     precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
+    let value;
+    let unit = "";
+    let separator = "";
+    if (this.state.showUnit) {
+      unit = "°";
+      separator = (this.isHorizontal || !line_feed) ? " " : (this.state.showUnitLetter) ? "\n" : "";
+    } else if (!line_feed) {
+      separator = " ";
+      unit = "°";
+    }
+
     if (this.state.useFahrenheit) {
-      return (
+      if (this.state.showUnit && this.state.showUnitLetter) unit = "°F";
+      value = (
         this._toFahrenheit(t)
           .toFixed(precisionDigits)
-          .toString() + ' °F'
+          .toString()
       );
     } else {
-      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + ' °C';
+      if (this.state.showUnit && this.state.showUnitLetter) unit = "°C";
+      value = ((Math.round(t * 10) / 10)
+      .toFixed(precisionDigits)
+      .toString()
+      );
     }
+    return '%s%s%s'.format(value, separator, unit)
   }
 };
 

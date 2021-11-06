@@ -7,442 +7,506 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
-"PO-Revision-Date: 2018-04-08 19:02+0200\n"
+"POT-Creation-Date: 2021-03-25 21:08+0000\n"
+"PO-Revision-Date: 2021-03-25 21:15+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr "Indtast din adgangskode for at fjerne dette program"
-
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr "Tilføj til panelet"
-
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr "Tilføj til skrivebordet"
-
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr "Fjern fra favoritter"
-
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr "Tilføj til favoritter"
-
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr "Fjern"
-
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr "Kør med NVIDIA GPU"
-
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr "Listevisning"
-
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr "Skift til listevisning"
-
-#: buttons.js:1234 applet.js:2253
-msgid "Grid View"
-msgstr "Gittervisning"
-
-#: buttons.js:1235 applet.js:2254
-msgid "Switch to grid view"
-msgstr "Skift til gittervisning"
-
-#: placeDisplay.js:57
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Kunne ikke starte \"%s\""
-
-#: placeDisplay.js:146
-msgid "Home"
-msgstr "Hjem"
-
-#: placeDisplay.js:220
-msgid "Computer"
-msgstr "Computer"
-
-#: placeDisplay.js:224
-msgid "Browse network"
-msgstr "Gennemse netværk"
-
-#: applet.js:84
 msgid "Type to search..."
 msgstr "Skriv for at søge …"
 
-#: applet.js:149
 msgid "Initializing"
 msgstr "Initialiserer"
 
-#: applet.js:275
 msgid "No description available"
 msgstr "Ingen beskrivelse tilgængelig"
 
-#: applet.js:956
-msgid "All Applications"
+msgid "All applications"
 msgstr "Alle programmer"
 
-#: applet.js:994
 msgid "Places"
 msgstr "Steder"
 
-#: applet.js:995
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Seneste filer"
 
-#: applet.js:996
 msgid "Bookmarks"
 msgstr "Bogmærker"
 
-#: applet.js:997
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Favoritprogrammer"
 
-#: applet.js:1282
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "Pakken gir1.2-gda-5.0 er nødvendig til bogmærker i Firefox og Midori."
 
-#: applet.js:1362
 msgid "Clear List"
 msgstr "Ryd listen"
 
-#: applet.js:1373
-msgid "No recent documents"
-msgstr "Ingen seneste dokumenter"
+msgid "No recent files"
+msgstr "Ingen seneste filer"
 
-#: applet.js:2246
 msgid "Account details"
 msgstr "Kontodetaljer"
 
-#: applet.js:2260
-msgid "Lock Screen"
-msgstr "Låseskærm"
+msgid "Grid View"
+msgstr "Gittervisning"
 
-#: applet.js:2261
+msgid "List View"
+msgstr "Listevisning"
+
+msgid "Switch to grid view"
+msgstr "Skift til gittervisning"
+
+msgid "Switch to list view"
+msgstr "Skift til listevisning"
+
+msgid "Lock screen"
+msgstr "Låse skærm"
+
 msgid "Lock the screen"
 msgstr "Lås skærmen"
 
-#: applet.js:2282
 msgid "Logout"
 msgstr "Log ud"
 
-#: applet.js:2283
 msgid "Leave the session"
 msgstr "Forlad sessionen"
 
-#: applet.js:2290
 msgid "Quit"
 msgstr "Afslut"
 
-#: applet.js:2291
 msgid "Shutdown the computer"
 msgstr "Sluk computeren"
 
-#. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
-msgid "Cinnamenu"
-msgstr "Cinnamenu"
+msgid "Home"
+msgstr "Hjem"
 
-#. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
-msgstr ""
-"En fleksibel menu med mulighed for formatering, webbogmærker, opslag i åbne "
-"vinduer og understøttelse af søgemaskineudbydere med fuzzy søgning."
+msgid "Computer"
+msgstr "Computer"
 
-#. settings-schema.json->panel->title
-msgid "Behavior"
-msgstr "Opførsel"
+msgid "Browse network"
+msgstr "Gennemse netværk"
 
-#. settings-schema.json->appearance->title
-msgid "Appearance"
-msgstr "Udseende"
+msgid "Run with NVIDIA GPU"
+msgstr "Kør med NVIDIA GPU"
 
-#. settings-schema.json->menu->title
-msgid "Layout and Content"
-msgstr "Layout og indhold"
+msgid "Add to panel"
+msgstr "Tilføj til panelet"
 
-#. settings-schema.json->providers->title
-msgid "Search Providers"
-msgstr "Søgemaskineudbydere"
+msgid "Add to desktop"
+msgstr "Tilføj til skrivebordet"
 
-#. settings-schema.json->extensionProvidersSection->title
-msgid "No search provider extensions found"
-msgstr "Fandt ingen udvidelser til søgemaskineudbydere"
+msgid "Remove from favorites"
+msgstr "Fjern fra favoritter"
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
-msgid "Panel"
-msgstr "Panel"
+msgid "Add to favorites"
+msgstr "Tilføj til favoritter"
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
-msgid "Menu"
-msgstr "Menu"
+msgid "Uninstall"
+msgstr "Fjern"
 
-#. settings-schema.json->menu-layout->title
-msgid "Layout"
-msgstr "Layout"
+msgid "Find files..."
+msgstr "Find filer ..."
 
-#. settings-schema.json->menu-content->title
-msgid "Content"
-msgstr "Indhold"
+msgid "Please wait..."
+msgstr "Vent venligst …"
 
-#. settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Seneste filer til/fra"
+msgid "No recent Items"
+msgstr "Ingen seneste varer"
 
-#. settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Tryk på denne knap for at tilpasse dine privatlivsindstillinger."
+msgid "Solution:"
+msgstr "Løsning:"
 
-#. settings-schema.json->menu-editor-button->description
-msgid "Open the menu editor"
-msgstr "Åbn redigering af menuen"
+msgid "Click to copy"
+msgstr "Klik for at kopiere"
 
-#. settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Tryk på denne knap for at tilpasse menupunkterne."
+msgid "Search web for"
+msgstr "Søg på nettet efter"
 
-#. settings-schema.json->resetCategoryOrder-button->description
+msgid "Favorites"
+msgstr "Favoritter"
+
+msgid "Recent"
+msgstr "Seneste"
+
+msgid "Home folder"
+msgstr "Hjem"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange poster - viser kun de 1000 første poster"
+
 msgid "Reset category order"
 msgstr "Nulstil rækkefølgen af kategorier"
 
-#. settings-schema.json->menu-icon-custom->description
+msgid "This file is no longer available"
+msgstr "Filen er ikke længere tilgængelig"
+
+msgid "Open with"
+msgstr "Åbn med"
+
+msgid "Other application..."
+msgstr "Andet program …"
+
+msgid "Open containing folder"
+msgstr "Åbn indeholdende mappe"
+
+msgid "Move to trash"
+msgstr "Smid i papirkurven"
+
+msgid "Error while moving file to trash:"
+msgstr "Fejl ved flytning af filen til papirkurven:"
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr "Åben"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid "Start in"
+msgstr "Start om"
+
+msgid "Select a folder"
+msgstr "Vælg en mappe"
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr "Søgning skjult"
+
+msgid "Use regular expressions"
+msgstr "Brug regulære udtryk"
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr "Søger..."
+
+msgid "Search Stopped"
+msgstr "Søgning stoppet"
+
+msgid "Searching: "
+msgstr "Søger: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"En fleksibel menu med mulighed for formatering, webbogmærker, understøttelse "
+"af søgemaskineudbydere og fuzzy søgning."
+
+msgid "Behavior"
+msgstr "Opførsel"
+
+msgid "Appearance"
+msgstr "Udseende"
+
+msgid "Layout and Content"
+msgstr "Layout og indhold"
+
+msgid "Search Providers"
+msgstr "Søgemaskineudbydere"
+
+msgid "No search provider extensions found"
+msgstr "Fandt ingen udvidelser til søgemaskineudbydere"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Content"
+msgstr "Indhold"
+
+msgid "Recent files settings"
+msgstr "Indstillinger for seneste filer"
+
+msgid "Open the menu editor"
+msgstr "Åbn redigering af menuen"
+
 msgid "Use a custom icon"
 msgstr "Anvend et selvvalgt ikon"
 
-#. settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Hvis umarkeret vælger temaet ikonet"
+msgid "Use a custom icon in the panel"
+msgstr "Anvend et selvvalgt ikon i panelet"
 
-#. settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Ikon"
+msgid "Panel icon"
+msgstr "Panelikon"
 
-#. settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Vælg et ikon som vises i panelet."
+msgid "Panel text"
+msgstr "Paneltekst"
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Angiv ikonnavn for den tilpassede menuknap"
+msgid "Text to show beside the panel icon"
+msgstr "Tekst som vises ved siden af panelikonet"
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
 msgid "pixels"
 msgstr "pixler"
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size"
 msgstr "Ikonstørrelse for kategori"
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
 msgstr "Ikonstørrelse for programliste"
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
 msgstr "Ikonstørrelse for programgitter"
 
-#. settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tastaturgenvej til åbning og lukning af menuen"
 
-#. settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Åbn menuen, når jeg flytter markøren hen over den"
+msgid "Open menu on hover"
+msgstr "Åbn menuen, når markøren føres hen over"
 
-#. settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Aktivér åbning af menuen, når markøren føres hen over panelprogrammet"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Åbn menuen, når jeg flytter markøren hen over panelikonet"
 
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
 msgid "milliseconds"
 msgstr "millisekunder"
 
-#. settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
-msgstr "Forsinkelse når markøren føres hen over:"
+msgid "Menu hover delay"
+msgstr "Forsinkelse når markøren føres hen over menuen"
 
-#. settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Forsinkelse ved skift mellem kategorier"
-
-#. settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr "Anvend menuanimationer"
 
-#. settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
-msgstr "Tillad animation af menuen, når den åbnes og lukkes"
+msgid "Animate the menu on open and close"
+msgstr "Animér menuen, når den åbnes og lukkes"
 
-#. settings-schema.json->category-click->description
 msgid "Activate categories on click"
 msgstr "Aktivér kategorier ved klik"
 
-#. settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"Når aktiveret, aktiveres kategorivisninger ved klik i stedet for, når "
-"markøren føres hen over."
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivér kategorier ved klik i stedet for når markøren føres hen over"
 
-#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Aktivér automatisk rulning"
+
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivér automatisk rulning i programlisten"
 
-#. settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Vælg om glidende automatisk rulning i programlisten skal aktiveres."
-
-#. settings-schema.json->enable-bookmarks->description
 msgid "Show web bookmarks"
 msgstr "Vis webbogmærker"
 
-#. settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Vælg om bogmærker er indekserede i menuen."
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Vis din browsers bogmærker i menuen.\n"
+"Bemærk: Installér pakken gir1.2-gda-5.0 for at læse firefox' bogmærker."
 
-#. settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Aktivér søgning i åbne vinduer"
 
-#. settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Vælg om åbne vinduer indekseres i menuen."
-
-#. settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
 msgstr "Aktivér søgemaskineudbydere"
 
-#. settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
-msgstr "Vælg om søgemaskiners resultater er indekserede i menusøgninger."
+msgid "Include search provider results in searches"
+msgstr "Medtag søgemaskineudbyderes resultater i søgninger"
 
-#. settings-schema.json->get-providers->description
 msgid "Example Search Providers"
 msgstr "Eksempel på søgemaskineudbydere"
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
-msgid "Startup applications view mode"
-msgstr "Visningstilstand for opstartsprogrammer"
+msgid "Open menu on category:"
+msgstr "Åbn menu på kategori:"
 
-#. settings-schema.json->startup-view-mode->options
 msgid "List"
 msgstr "Liste"
 
-#. settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "Gitter"
 
-#. settings-schema.json->apps-grid-column-count->units
+msgid "Always open the menu with this category selected"
+msgstr "Åbn altid menuen med denne kategori valgt"
+
 msgid "columns"
 msgstr "kolonner"
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
 msgstr "Antal kolonner i programgitteret"
 
-#. settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
 msgstr "Vis bogmærker og steder"
 
-#. settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Vælg om bogmærker og steder skal vises i menuen."
+msgid "Show bookmarks and places category in the menu"
+msgstr "Vis kategorierne bogmærker og steder i menuen"
 
-#. settings-schema.json->show-application-icons->description
 msgid "Show application icons"
 msgstr "Vis programikoner"
 
-#. settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Vælg om programmer skal vises med ikoner."
-
-#. settings-schema.json->show-category-icons->description
 msgid "Show category icons"
 msgstr "Vis kategoriikoner"
 
-#. settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Vælg om kategorier skal vises med ikoner."
-
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Aktivér indtastning af filsystemstien i søgefeltet"
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Tillader indtastning af stien i menuens søgefelt."
-
-#. settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application descriptions under titles"
 msgstr "Show application descriptions under titles"
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr "Vælg om beskrivelse af programmet skal vises på programmets knap."
-
-#. settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
 msgstr "Vis værktøjstip"
 
-#. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Når aktiveret, vises værktøjstip med elementets navn og beskrivelse, når "
-"markøren føres hen over."
-
-#. settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
 msgstr "Forsinkelse af værktøjstip"
 
-#. settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"Forsinkelsen i millisekunder for visning af værktøjstip når markøren føres "
-"hen over."
-
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
 msgstr "Anvend en selvvalgt menuhøjde"
 
-#. settings-schema.json->custom-menu-height->units
-msgid "px"
-msgstr "px"
-
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
 msgstr "Selvvalgt menuhøjde"
+
+msgid "Applications view mode"
+msgstr "Visningstilstand for programmer"
+
+msgid "View applications as list or grid"
+msgstr "Vis programmer som en liste eller i et gitter"
+
+msgid "Application description placement"
+msgstr "Placering af programmers beskrivelse"
+
+msgid "Tooltips"
+msgstr "Værktøjstip"
+
+msgid "Under titles"
+msgstr "Under titler"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Choose where to show application descriptions"
+msgstr "Vælg hvor beskrivelse af programmet skal vises"
+
+msgid "Session buttons location"
+msgstr "Sessionsknappers placering"
+
+msgid "Top"
+msgstr "Øverst"
+
+msgid "Bottom"
+msgstr "Nederst"
+
+msgid "Left"
+msgstr "Venstre"
+
+msgid "Right"
+msgstr "Højre"
+
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr "Vælg, hvor sessionsknapper (afslut, log ud osv.) skal vises"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+" Info / tip: Træk i menukanten for at ændre menustørrelsen.\n"
+
+msgid "Add favorites to session buttons"
+msgstr "Tilføj favoritter til sessionsknapper"
+
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Vis dine favoritprogrammers ikoner ved siden af sessionsknapperne"
+
+msgid "Show favorite apps category"
+msgstr "Vis kategorien favoritprogrammer"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Vis kategorien favoritprogrammer i menuen"
+
+msgid "Show home folder"
+msgstr "Vis Hjem-mappen"
+
+msgid "Show home folder category in the menu"
+msgstr "Vis kategorien Hjem-mappe i menuen"
+
+msgid "Last used category"
+msgstr "Sidst anvendt kategori"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automatisk rulning i programlisten, når markøren føres hen over"
+
+msgid "Enable emoji search"
+msgstr "Aktivér søgning efter emojis"
+
+msgid "Show emojis in search results"
+msgstr "Vis emojis i søgeresultater"
+
+msgid "Web search option"
+msgstr "Indstillinger for websøgning"
+
+msgid "Google"
+msgstr "Google"
+
+msgid "Bing"
+msgstr "Bing"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Show an internet search option in search results"
+msgstr "Vis en internetsøgemulighed i søgeresultaterne"
+
+msgid "Search home folder"
+msgstr "Søg i hjemmemappen"
+
+msgid "When searching, also search home folder for files"
+msgstr "Når du søger, skal du også søge i hjemmemappen efter filer"
+
+msgid "Show hidden files"
+msgstr "Vis skjulte filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Vis skjulte filer i mappevisning"
+
+msgid "Use a custom icon size"
+msgstr "Brug en brugerdefineret ikonstørrelse"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Brug en brugerdefineret størrelse til panelikonet"
+
+msgid "Panel icon size"
+msgstr "Panelikonstørrelse"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Vælg en brugerdefineret størrelse til panelikonet"
+
+msgid "Session buttons icon size"
+msgstr "Sessionsknappernes ikonstørrelse"
+
+msgid "Use session buttons box style"
+msgstr "Brug kassestil til sessionsknapper"
+

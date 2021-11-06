@@ -17,7 +17,14 @@ A text reading applet for Linux Mint Cinnamon
 
 ## Installation
 1. Extract .zip archive to ~/.local/share/cinnamon/applets
-2. Enable the applet in Cinnammon settings
+2. Enable the applet in Cinnamon settings
+
+## Text-to-speech engine
+A default text-to-speech engine used by the applet is `espeak`. To install the engine in Linux Mint type in a terminal:  
+```
+sudo apt install espeak
+```
+To use other engine change `Voice command` parameter in the applet configuration.
 
 ## To start reading
 1. Highlight the text to read

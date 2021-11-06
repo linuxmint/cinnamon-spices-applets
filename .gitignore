@@ -2,3 +2,5 @@
 *.pyc
 */gschemas.compiled
 node_modules/
+/.idea/
+package-lock.json

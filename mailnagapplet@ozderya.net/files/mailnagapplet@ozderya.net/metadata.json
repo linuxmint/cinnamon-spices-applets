@@ -2,6 +2,5 @@
     "uuid": "mailnagapplet@ozderya.net",
     "name": "Mailnag",
     "description": "Mailnag mail notifier applet",
-    "icon": "mailnag",
 	"max-instances": "-1"
 }

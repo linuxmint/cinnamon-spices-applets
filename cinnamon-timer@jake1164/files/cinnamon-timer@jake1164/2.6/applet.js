@@ -389,9 +389,9 @@ MyApplet.prototype = {
         let icon = new St.Icon({ gicon: gicon });
         this._notification = new MessageTray.Notification(this._source, title, text, { icon: icon });
         this._notification.setTransient(false);
-        this._notification.connect('destroy', function () {
+        this._notification.connect('destroy', Lang.bind(this, function () {
             this._notification = null;
-        });
+        }));
 
         this._source.notify(this._notification);
 

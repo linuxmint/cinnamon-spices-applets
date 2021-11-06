@@ -1,0 +1,813 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <vladimirknezev@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-07 14:19+0100\n"
+"PO-Revision-Date: 2021-02-16 11:25+0100\n"
+"Last-Translator: Knez <vladimirknezev@gmail.com>\n"
+"Language-Team: Serbia <LL@li.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:337 3.0/applet.js:234 3.8/applet.js:184
+msgid "..."
+msgstr "..."
+
+#: applet.js:338 3.0/applet.js:235 3.8/applet.js:185
+msgid "Click to open"
+msgstr "Кликни за отварање"
+
+#: applet.js:389
+msgid "Settings"
+msgstr "Поставке"
+
+#: applet.js:511
+msgid "No location provided"
+msgstr "Нема постављене локације"
+
+#: applet.js:610 3.0/applet.js:563 3.8/applet.js:472
+msgid "Cloudiness"
+msgstr "Облачност"
+
+#: applet.js:634 3.0/applet.js:593 3.8/applet.js:502
+msgid "Sunrise"
+msgstr "Излазак сунца"
+
+#: applet.js:635 3.0/applet.js:594 3.8/applet.js:503
+msgid "Sunset"
+msgstr "Залазак сунца"
+
+#: applet.js:708 3.0/applet.js:686 3.8/applet.js:595
+msgid "Loading current weather ..."
+msgstr "Учитавање тренутне прогнозе..."
+
+#: applet.js:709 3.0/applet.js:689 3.8/applet.js:598
+msgid "Loading future weather ..."
+msgstr "Учитавање будуће прогнозе..."
+
+#: applet.js:731 3.0/applet.js:718 3.8/applet.js:627
+msgid "Loading ..."
+msgstr "Учитавање..."
+
+#: applet.js:737 3.0/applet.js:268 3.0/applet.js:708 3.8/applet.js:218 3.8/applet.js:617
+msgid "Refresh"
+msgstr "Освежи"
+
+#: applet.js:802 3.0/applet.js:740 3.8/applet.js:649
+msgid "Temperature:"
+msgstr "Температура"
+
+#: applet.js:804 3.0/applet.js:741 3.8/applet.js:650
+msgid "Humidity:"
+msgstr "Влажност:"
+
+#: applet.js:806 3.0/applet.js:742 3.8/applet.js:651
+msgid "Pressure:"
+msgstr "Притисак:"
+
+#: applet.js:808 3.0/applet.js:743 3.8/applet.js:652
+msgid "Wind:"
+msgstr "Ветар:"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Sunday"
+msgstr "Недеља"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Monday"
+msgstr "Понедељак"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Tuesday"
+msgstr "Уторак"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Wednesday"
+msgstr "Среда"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Thursday"
+msgstr "Четвртак"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Friday"
+msgstr "Петак"
+
+#: applet.js:1026 3.0/utils.js:73 3.8/utils.js:73
+msgid "Saturday"
+msgstr "Субота"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "N"
+msgstr "С"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "NE"
+msgstr "СИ"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "E"
+msgstr "И"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "SE"
+msgstr "ЈИ"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "S"
+msgstr "Ј"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "SW"
+msgstr "ЈЗ"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "W"
+msgstr "З"
+
+#: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
+msgid "NW"
+msgstr "СЗ"
+
+#: applet.js:1080
+msgid "Service Unavailable"
+msgstr "Услуга недоступна"
+
+#: applet.js:1084 3.0/applet.js:195 3.0/applet.js:197 3.0/applet.js:199 3.0/applet.js:202
+#: 3.0/applet.js:205 3.0/applet.js:206 3.0/applet.js:207 3.0/applet.js:208 3.8/applet.js:146
+#: 3.8/applet.js:148 3.8/applet.js:150 3.8/applet.js:153 3.8/applet.js:156 3.8/applet.js:157
+#: 3.8/applet.js:158 3.8/applet.js:159
+msgid "Service Error"
+msgstr "Грешка услуге"
+
+#: applet.js:1086
+msgid "Wrong API Key"
+msgstr "Неисправан АПИ кључ"
+
+#: applet.js:1089
+msgid "City Not found"
+msgstr "Град није пронађен"
+
+#: applet.js:1092
+msgid "Key Temp. Blocked"
+msgstr "Кључ темп. блокиран"
+
+#: 3.0/darkSky.js:64 3.8/darkSky.js:29
+msgid "and"
+msgstr "и"
+
+#: 3.0/darkSky.js:64 3.8/darkSky.js:29
+msgid "until"
+msgstr "до"
+
+#: 3.0/darkSky.js:64 3.8/darkSky.js:29
+msgid "in"
+msgstr "у"
+
+#: 3.0/darkSky.js:165 3.8/darkSky.js:118
+msgid "Failed to Process Weather Info"
+msgstr "Обрада информација о времену није успела"
+
+#: 3.0/darkSky.js:181 3.8/darkSky.js:134
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"Молимо вас да унесете АПИ кључ у подешавањима,\n"
+"или узмите прво један са https://darksky.net/dev/register"
+
+#: 3.0/darkSky.js:218 3.8/darkSky.js:171
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly"
+msgstr ""
+"Проверите да ли сте\n"
+"правилно унели АПИ кључ"
+
+#: 3.0/ipApi.js:85 3.8/ipApi.js:40
+msgid "Could not obtain location"
+msgstr "Није могуће добити локацију"
+
+#: 3.0/ipApi.js:91 3.8/ipApi.js:46
+msgid "Location Service responded with errors, please see the logs in Looking Glass"
+msgstr "Локацијска служба одговорила је на грешке, погледајте записнике у прозорче огледала"
+
+#: 3.0/openWeatherMap.js:153 3.8/openWeatherMap.js:96
+msgid "Failed to Process Current Weather Info"
+msgstr "Обрада тренутних информација о времену није успела"
+
+#: 3.0/openWeatherMap.js:202 3.8/openWeatherMap.js:145
+msgid "Failed to Process Forecast Info"
+msgstr "Информације о прогнози нису успеле"
+
+#: 3.0/openWeatherMap.js:218 3.8/openWeatherMap.js:161
+msgid "Please enter a Location in settings"
+msgstr "Унесите локацију у подешавањима"
+
+#: 3.0/openWeatherMap.js:245 3.8/openWeatherMap.js:188
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "Проверите да ли је локација у исправном формату у подешавањима"
+
+#: 3.0/openWeatherMap.js:249 3.8/openWeatherMap.js:192
+msgid "Make sure you entered the correct key in settings"
+msgstr "Проверите да ли сте унели исправан кључ у подешавању"
+
+#: 3.0/openWeatherMap.js:253 3.0/openWeatherMap.js:273 3.8/openWeatherMap.js:196
+#: 3.8/openWeatherMap.js:216
+msgid "Location not found, make sure location is available or it is in the correct format"
+msgstr "Локација није пронађена, проверите да ли је локација доступна или је исправнаформат"
+
+#: 3.0/openWeatherMap.js:257 3.8/openWeatherMap.js:200
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr "Ако овај проблем и даље постоји, обратите се аутору овог програмчета"
+
+#: 3.0/openWeatherMap.js:261 3.8/openWeatherMap.js:204
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Непозната грешка, погледајте записнике у прозорче огледала"
+
+#: 3.0/openWeatherMap.js:326 3.8/openWeatherMap.js:268
+msgid "Thunderstorm with light rain"
+msgstr "Грмљавина са слабом кишом"
+
+#: 3.0/openWeatherMap.js:327 3.8/openWeatherMap.js:269
+msgid "Thunderstorm with rain"
+msgstr "Грмљавина са кишом"
+
+#: 3.0/openWeatherMap.js:328 3.8/openWeatherMap.js:270
+msgid "Thunderstorm with heavy rain"
+msgstr "Грмљавина са јаком кишом"
+
+#: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:271
+msgid "Light thunderstorm"
+msgstr "Слаба олуја с грмљавином"
+
+#: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:272
+msgid "Thunderstorm"
+msgstr "Олуја с грмљавином"
+
+#: 3.0/openWeatherMap.js:331 3.8/openWeatherMap.js:273
+msgid "Heavy thunderstorm"
+msgstr "Јака олуја с грмљавином"
+
+#: 3.0/openWeatherMap.js:332 3.8/openWeatherMap.js:274
+msgid "Ragged thunderstorm"
+msgstr "Изузетно јака грмљавина"
+
+#: 3.0/openWeatherMap.js:333 3.8/openWeatherMap.js:275
+msgid "Thunderstorm with light drizzle"
+msgstr "Грмљавина са слабим ромињањем кише"
+
+#: 3.0/openWeatherMap.js:334 3.8/openWeatherMap.js:276
+msgid "Thunderstorm with drizzle"
+msgstr "Грмљавина са ромињањем"
+
+#: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:277
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Грмљавина са јаким ромињањем"
+
+#: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:278
+msgid "Light intensity drizzle"
+msgstr "Слабо ромињање"
+
+#: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:279
+msgid "Drizzle"
+msgstr "Ромињање"
+
+#: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:280
+msgid "Heavy intensity drizzle"
+msgstr "Јако ромињање"
+
+#: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:281
+msgid "Light intensity drizzle rain"
+msgstr "Слабо ромињање кише"
+
+#: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:282
+msgid "Drizzle rain"
+msgstr "Ромињање кише"
+
+#: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:283
+msgid "Heavy intensity drizzle rain"
+msgstr "Јако ромињање кише"
+
+#: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:284
+msgid "Shower rain and drizzle"
+msgstr "Пљускови и ромињање"
+
+#: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:285
+msgid "Heavy shower rain and drizzle"
+msgstr "Јаки пљускови и ромињање"
+
+#: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:286
+msgid "Shower drizzle"
+msgstr "Ромињање"
+
+#: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:287
+msgid "Light rain"
+msgstr "Слаба киша"
+
+#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:288
+msgid "Moderate rain"
+msgstr "Умерена киша"
+
+#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:289
+msgid "Heavy intensity rain"
+msgstr "Јака киша"
+
+#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:290
+msgid "Very heavy rain"
+msgstr "Веома јака киша"
+
+#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:291
+msgid "Extreme rain"
+msgstr "Екстремна киша"
+
+#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:292
+msgid "Freezing rain"
+msgstr "Ледена киша"
+
+#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:293
+msgid "Light intensity shower rain"
+msgstr "Слаби краткотрајни пљусак"
+
+#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:294
+msgid "Shower rain"
+msgstr "Пљусак"
+
+#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:295
+msgid "Heavy intensity shower rain"
+msgstr "Јак краткотрајни пљусак"
+
+#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:296
+msgid "Ragged shower rain"
+msgstr "Изузетно јак пљусак"
+
+#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:297
+msgid "Light snow"
+msgstr "Слаб снег"
+
+#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:298
+msgid "Snow"
+msgstr "Снег"
+
+#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:299
+msgid "Heavy snow"
+msgstr "Јак снег"
+
+#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:300
+msgid "Sleet"
+msgstr "Суснежица"
+
+#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:301
+msgid "Shower sleet"
+msgstr "Јака суснежица"
+
+#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:302
+msgid "Light rain and snow"
+msgstr "Слба киша и снег"
+
+#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:303
+msgid "Rain and snow"
+msgstr "Киша и снег"
+
+#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:304
+msgid "Light shower snow"
+msgstr "Блага падавина снега"
+
+#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:305
+msgid "Shower snow"
+msgstr "Мећава"
+
+#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:306
+msgid "Heavy shower snow"
+msgstr "Јак мећаве"
+
+#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:307
+msgid "Mist"
+msgstr "Сумаглица"
+
+#: 3.0/openWeatherMap.js:366 3.8/openWeatherMap.js:308
+msgid "Smoke"
+msgstr "Дим"
+
+#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:309
+msgid "Haze"
+msgstr "Измаглица"
+
+#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:310
+msgid "Sand, dust whirls"
+msgstr "Песак, ковитлаци прашине"
+
+#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:311
+msgid "Fog"
+msgstr "Магла"
+
+#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:312
+msgid "Sand"
+msgstr "Песак"
+
+#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:313
+msgid "Dust"
+msgstr "Прашина"
+
+#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:314
+msgid "Volcanic ash"
+msgstr "Вулкански пепео"
+
+#: 3.0/openWeatherMap.js:373 3.8/openWeatherMap.js:315
+msgid "Squalls"
+msgstr "Бура"
+
+#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:316
+msgid "Tornado"
+msgstr "Торнадо"
+
+#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:317
+msgid "Clear"
+msgstr "Ведро"
+
+#: 3.0/openWeatherMap.js:376 3.8/openWeatherMap.js:318
+msgid "Clear sky"
+msgstr "Ведро"
+
+#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:319
+msgid "Sky is clear"
+msgstr "Ведро"
+
+#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:320
+msgid "Few clouds"
+msgstr "Мало облака"
+
+#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:321
+msgid "Scattered clouds"
+msgstr "Распирени облаци"
+
+#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:322
+msgid "Broken clouds"
+msgstr "Испрекидани облаци"
+
+#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:323
+msgid "Overcast clouds"
+msgstr "Тмурно"
+
+#: 3.0/applet.js:194 3.8/applet.js:145
+msgid "Error"
+msgstr "Грешка"
+
+#: 3.0/applet.js:196 3.8/applet.js:147
+msgid "Incorrect API Key"
+msgstr "Нетачан АПИ кључ"
+
+#: 3.0/applet.js:198 3.8/applet.js:149
+msgid "Incorrect Location Format"
+msgstr "Нетачан формат локације"
+
+#: 3.0/applet.js:200 3.8/applet.js:151
+msgid "Key Blocked"
+msgstr "Кључ је блокиран"
+
+#: 3.0/applet.js:201 3.8/applet.js:152
+msgid "Can't find location"
+msgstr "Није могуће пронаћи локацију"
+
+#: 3.0/applet.js:203 3.8/applet.js:154
+msgid "No Api Key"
+msgstr "Нема Апи кључа"
+
+#: 3.0/applet.js:204 3.8/applet.js:155
+msgid "No Location"
+msgstr "Нема локације"
+
+#: 3.0/applet.js:442 3.8/applet.js:367
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr "Проверите да ли сте унели локацију или уместо ње користите Аутоматску локацију"
+
+#: 3.0/applet.js:487 3.8/applet.js:399
+msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr "Неочекивана грешка током освежавања времена, погледајте записнике у прозорче огледала"
+
+#: 3.0/applet.js:569 3.8/applet.js:478
+msgid "Feels like"
+msgstr "Као да је"
+
+#: 3.0/applet.js:628 3.8/applet.js:537
+msgid "Today"
+msgstr "Данас"
+
+#: 3.0/applet.js:630 3.8/applet.js:539
+msgid "Tomorrow"
+msgstr "Сутра"
+
+#: 3.0/applet.js:828 3.8/applet.js:737
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Није могуће ажурирати време...\n"
+"да ли сте повезани на интернет"
+
+#: 3.0/applet.js:841 3.8/applet.js:750
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "Мрежна грешка, погледајте записнике у прозорче огледала"
+
+#. settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 1.8+"
+msgstr "Подешавања за weather@mockturtl 1.8+"
+
+#. settings-schema.json->keybinding->description
+#. 3.0->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Подесите тастера да бисте сте позвали изборник"
+
+#. settings-schema.json->providerSettings->description
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->providerSettings->description
+msgid "Weather Provider Settings"
+msgstr "Подешавања временског провајдера"
+
+#. settings-schema.json->dataService->description
+#. 3.0->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Услуга преноса података"
+
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. settings-schema.json->location->description
+#. 3.0->settings-schema.json->location->description
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "Локација"
+
+#. settings-schema.json->location->tooltip
+#. 3.0->settings-schema.json->location->tooltip
+#. 3.8->settings-schema.json->location->tooltip
+msgid "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+msgstr ""
+"Прихватљиви уноси: Град, позивни број земље или поштански број, код земље илиШирина, дужина"
+
+#. settings-schema.json->getLocation->description
+msgid "Setup Location"
+msgstr "Подесите локацију"
+
+#. settings-schema.json->getLocation->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Отвара водич за веб странице"
+
+#. settings-schema.json->personalSettings->description
+#. 3.0->settings-schema.json->personalSettings->description
+#. 3.8->settings-schema.json->personalSettings->description
+msgid "Personal Settings"
+msgstr "Лична подешавања"
+
+#. settings-schema.json->temperatureUnit->description
+#. 3.0->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "Јединица температуре"
+
+#. settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "целзијус"
+
+#. settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "фаренхајт"
+
+#. settings-schema.json->temperatureHighFirst->description
+#. 3.0->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Прво покажи високу температуру у прогнози"
+
+#. settings-schema.json->windSpeedUnit->description
+#. 3.0->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Јединица за брзину ветра"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "kph"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mph"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "чворова"
+
+#. settings-schema.json->pressureUnit->description
+#. 3.0->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Јединица атмосферског притиска"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "in Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. settings-schema.json->verticalOrientation->description
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "Вертикална оријентација"
+
+#. settings-schema.json->showSunrise->description
+#. 3.0->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Прикажи времена изласка / заласка сунца"
+
+#. settings-schema.json->show24Hours->description
+#. 3.0->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Прикажи време у 24-сатном формату"
+
+#. settings-schema.json->forecastDays->units
+#. 3.0->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "дани"
+
+#. settings-schema.json->forecastDays->description
+#. 3.0->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Предвиђена прогноза"
+
+#. settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Преведи временска стања"
+
+#. settings-schema.json->useSymbolicIcons->description
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Прикажи симболичке иконе"
+
+#. settings-schema.json->showTextInPanel->description
+#. 3.0->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Прикажи тренутну температуру на панелу"
+
+#. settings-schema.json->showCommentInPanel->description
+#. 3.0->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Прикажи стање времена (нпр., \"Ветровито\", \"Ведро\") на панелу"
+
+#. settings-schema.json->locationLabelOverride->description
+#. 3.0->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Ручно упишите локацију"
+
+#. settings-schema.json->refreshInterval->units
+#. 3.0->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "минуте"
+
+#. settings-schema.json->refreshInterval->description
+#. 3.0->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Интервал ажурирања"
+
+#. metadata.json->name
+msgid "Weather"
+msgstr "Време"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Погледајте вашу локалну временску прогнозу"
+
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Подешавања за weather@mockturtl 3.0+"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap (no key needed)"
+msgstr "OpenWeatherMap (није потребан кључ)"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr "DarkSky"
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "АПИ кључ"
+
+#. 3.0->settings-schema.json->apiKey->tooltip
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "Копирајте ово са свог налога коришћене услуге података и убаците га овде."
+
+#. 3.0->settings-schema.json->manualLocation->description
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Ручна локација"
+
+#. 3.0->settings-schema.json->manualLocation->tooltip
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Омогућите то ако ваша локација није тачна"
+
+#. 3.0->settings-schema.json->getLocation->description
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "Подешавање АПИ кључа и локације"
+
+#. 3.0->settings-schema.json->translateCondition->description
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Преведи временска стања"
+
+#. 3.0->settings-schema.json->shortConditions->description
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Manje opširna vremenska stanja"
+
+#. 3.0->settings-schema.json->credits->description
+#. 3.8->settings-schema.json->credits->description
+msgid ""
+"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
+msgstr ""
+"покреће га: OpenWeatherMap, DarkSky, ipapi. Велико хвала OpenWeatherMap зањихову подршку!"
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8+"
+msgstr "Подешавања за weather@mockturtl 3.8+"

@@ -27,7 +27,7 @@
         "description": "Display Mode"
     },
 
- "displayType" : {
+    "displayType" : {
         "type": "combobox",
         "default" : "classic",
         "options" : {

@@ -1,109 +1,130 @@
-#!/bin/bash
+#!/usr/bin/python3
+import json
+import os
+import sys
+import subprocess
+from PIL import Image
 
-USAGE="Usage: ./validate-spice UUID"
+if len(sys.argv) != 2:
+    print("Usage:")
+    print("./validate-spice uuid")
+    print("./validate-spice --all")
+    sys.exit(1)
 
-if [ $# -ne 1 ] ; then
-    echo $USAGE
-    exit 1;
-fi
+SPICE_TYPE="applet"
 
-UUID=$1
-check="\xE2\x9C\x94"
-missing=" "
-cross="\xE2\x9D\x8C"
-valid=true
+# function with checks for an xlet
+def validate_xlet(uuid):
+    valid = True
+    os.chdir(uuid)
 
-# Get xlet type
-parentDirName=$(basename -- "$(pwd)")
-xletType=$(echo "$parentDirName" | cut -f3 -d '-')
-xletType="${xletType::-1}"
+    try:
+        # Check mandatory files
+        for file in ["info.json", "screenshot.png", "files/%s/metadata.json" % uuid, "files/%s/icon.png" % uuid]:
+            if not os.path.exists(file):
+                print("[%s] Missing file: %s" % (uuid, file))
+                valid = False
 
-# check if UUID exists
-if [ ! -d "$UUID" ]; then
-    echo "$UUID does not exist"
-    exit 1;
-fi
+        found = False
+        for root, dirs, files in os.walk("files/%s" % uuid):
+            for file in files:
+                if file == "%s.js" % SPICE_TYPE:
+                    found = True
+        if not found:
+            print("[%s] Missing main %s.js" % (uuid, SPICE_TYPE))
 
+        # Check forbidden files
+        for file in ["icon.png"]:
+            if os.path.exists(file):
+                print("[%s] Forbidden file: %s" % (uuid, file))
+                valid = False
 
-cd $UUID
+        # Check mandatory directories
+        for directory in ["files", "files/%s" % uuid]:
+            if not os.path.isdir(directory):
+                print("[%s] Missing directory: %s" % (uuid, directory))
+                valid = False
+                return
 
-# Check if info, screenshot files exist
-for file in "info.json" "screenshot.png"
-do
-    if [ ! -f $file ]; then
-        echo -e "[$missing] Missing file: $UUID/$file"
-        valid=false
-    fi
-done
+        # Check that there are no files in files other than the uuid directory
+        if len(os.listdir("files")) != 1:
+            print("[%s] The files directory should ONLY contain the $uuid directory!" % (uuid))
+            valid = False
 
-# Check if icon.png exists
-iconFile="icon.png"
-if [ ! -f $iconFile ]; then
-    echo -e "[$missing] Missing file: $UUID/$iconFile"
-    valid=false
-else
-    # check if icon is square
-    iconWidth=$(identify -format '%w' $iconFile)
-    iconHeight=$(identify -format '%h' $iconFile)
-    if [ $iconWidth != $iconHeight ]; then
-        echo -e "[$missing] icon.png of $UUID has to be square"
-        valid=false
-    fi
-fi
+        # check json
+        with open("files/%s/metadata.json" % uuid) as file:
+            metadata = json.load(file)
 
-# Check if UUID/files directory exists
-UUIDfilesUUIDDirExists=false
-if [ ! -d "files" ]; then
-    echo -e "[$missing] Missing directory: $UUID/files"
-    valid=false
-else
-    # check if UUID/files is "empty"
-    countFilesInFiles=$(ls -A files | wc -l)
-    if [ $countFilesInFiles != 1 ]; then
-        echo -e "[$missing] $UUID/files should contain ONLY the $UUID directory!"
-        valid=false
-    fi
-fi
+            # check forbidden fields
+            for field in ['icon', 'dangerous', 'last-edited']:
+                if field in metadata.keys():
+                    print("[%s] Forbidden field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    valid = False
 
-# Check if UUID/files/UUID directory exists
-if [ ! -d "files/$UUID" ]; then
-    echo -e "[$missing] Content of the spice has to be placed inside $UUID/files/$UUID"
-    valid=false
-else
+            # check mandatory fields
+            for field in ['uuid', 'name', 'description']:
+                if field not in metadata.keys():
+                    print("[%s] Missing field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    valid = False
+                    return
 
-    # Check if metadata.json exists
-    metadataFile="files/$UUID/metadata.json"
-    if [ ! -f $metadataFile ]; then
-        echo -e "[$missing] Missing file: $metadataFile"
-        valid=false
-    else
-        # check UUID in metadata
-        metadataUUID=$(grep '"uuid"' $metadataFile | grep '"'$UUID'"' | wc -c)
-        if [ $metadataUUID == 0 ]; then
-            echo -e "[$missing] uuid in metadata != $UUID -- UUID directory name must be equal to uuid in metadata.json!"
-            valid=false
-        fi
+            # check uuid value
+            if metadata['uuid'] != uuid:
+                print("[%s] Wrong uuid in %s" % (uuid, "files/%s/metadata.json" % uuid))
+                valid = False
 
-        # check for dangerous flag in metadata
-        dangerousFlag=$(grep '"dangerous"' $metadataFile | wc -c)
-        if [ $dangerousFlag != 0 ]; then
-            echo -e "[$missing] dangerous flag in $UUID/metadata.json has to be removed!"
-            valid=false
-        fi
-    fi
+            # check for unicode characters in metadata
+            for field in metadata.keys():
+                strvalue = str(metadata[field])
+                if len(strvalue.encode()) != len(strvalue):
+                    print("[%s] Forbidden unicode characters in field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    valid = False
 
-    # Check if applet.js/desklet.js/extension.js exists
-    file="files/$UUID/$xletType.js"
-    findFile=$(find files/$UUID -name "$xletType.js")
-    if [ "$findFile" == "" ]; then
-        echo -e "[$missing] $UUID/$file -- Missing file!"
-        valid=false
-    fi
-fi
+        # check if icon is square
+        im = Image.open("files/%s/icon.png" % uuid)
+        (width, height) = im.size
+        if width != height:
+            print("[%s] icon.png has to be square." % uuid)
+            valid = False
 
+        # check po and pot files
+        podir = "files/%s/po" % uuid
+        if os.path.isdir(podir):
+            for file in os.listdir(podir):
+                if file.endswith(".po"):
+                    pocheck = subprocess.run(["msgfmt", "-c", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                    if pocheck.stderr:
+                        print("[%s] The following errors were found in translation file '%s':\n%s"
+                              "HINT: Most errors in translation file `%s` can usually be prevented and solved by using Poedit.\n"
+                              % (uuid, file, pocheck.stderr, file)
+                        )
+                        valid = False
+                elif file.endswith(".pot"):
+                    potcheck = subprocess.run(["xgettext", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                    if potcheck.stderr:
+                        print("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
+                        valid = False
 
-if [ "$valid" == true ]; then
-    echo -e "$check $check $check $check $check $UUID is valid!"
-else
-    echo -e "$cross $cross $cross $cross $cross Please fix the issues in $UUID, which are mentioned above! $cross $cross $cross $cross $cross"
-fi
+    except Exception as error:
+        print("[%s] Unknown error. %s" % (uuid, error))
+
+    os.chdir("..")
+    return (valid)
+
+def quit(valid):
+    if (valid):
+        print ("No errors found. Everything looks good.")
+        sys.exit(0)
+    else:
+        print ("Errors were found!")
+        sys.exit(1)
+
+if sys.argv[1] == "--all":
+    valid = True
+    for uuid in os.listdir("."):
+        if os.path.isdir(uuid) and not uuid.startswith("."):
+            valid = validate_xlet(uuid) and valid
+else:
+    valid = validate_xlet(sys.argv[1])
+
+quit(valid)

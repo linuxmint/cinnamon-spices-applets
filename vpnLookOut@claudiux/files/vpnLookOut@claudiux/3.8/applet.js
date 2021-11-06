@@ -559,6 +559,8 @@ class vpnLookOut extends Applet.TextIconApplet {
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
             this.system_icon_theme = 'Mint-X';
+        if (this.system_icon_theme.startsWith('Mint-Y'))
+            this.system_icon_theme = 'Mint-Y';
         if (this.old_system_icon_theme == null || this.system_icon_theme != this.old_system_icon_theme) {
             this.old_system_icon_theme = this.system_icon_theme;
             this.icon_theme_path = this.appletPath + '/../icons/byTheme/' + this.system_icon_theme;
@@ -1193,10 +1195,10 @@ class vpnLookOut extends Applet.TextIconApplet {
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
-        if (this.loopId > 0) {
-            Mainloop.source_remove(this.loopId);
-        }
-        this.loopId = 0;
+        //if (this.loopId > 0) {
+            //Mainloop.source_remove(this.loopId);
+        //}
+        //this.loopId = 0;
         this.set_icons();
         if (!this.dependenciesMet && this.are_dependencies_installed()) {
             // At this time, the user just finished to install all dependencies.

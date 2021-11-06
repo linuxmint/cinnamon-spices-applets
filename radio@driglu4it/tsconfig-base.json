@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es2017" // important to hide default typescript libraries (such as DOM elements): https://stackoverflow.com/questions/57336918/disable-intellisense-for-default-typescript-libraries-in-vscode
+        ],
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "target": "es2017",
+        "baseUrl": "./src/",
+
+        // STRICT CONFIGURATION. More to add :-)
+        "noImplicitAny": true,
+    }
+}

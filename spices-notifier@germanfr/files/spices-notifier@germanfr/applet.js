@@ -246,10 +246,11 @@ class SpicesNotifier extends Applet.TextIconApplet {
 
 	on_xlets_loaded(type, xlets) {
 		let menuItems = [];
+		let username = this.username.toLowerCase();
 
 		for(let uuid in xlets) {
 			let xlet = xlets[uuid];
-			if (xlet.author_user === this.username) {
+			if (xlet.author_user.toLowerCase() === username) {
 				xlet.type = type;
 				xlet.page = `${SPICES_URL}/${type}/view/${xlet['spices-id']}#${HTML_COUNT_ID}`;
 				xlet.uuid = uuid; // Themes don't have UUIDs, use name

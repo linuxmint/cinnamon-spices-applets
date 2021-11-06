@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg10"
+   version="1.0"
+   height="16"
+   width="16">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <rect
+     style="enable-background:new;fill:#bebebe;fill-rule:evenodd;stroke-width:0.39288414"
+     id="rect2"
+     rx="2.3966103"
+     height="0.32203388"
+     width="11.983051"
+     y="6.6779661"
+     x="2" />
+  <rect
+     style="fill:#bebebe"
+     id="rect6"
+     rx="1"
+     height="5"
+     width="5"
+     y="9"
+     x="2" />
+  <rect
+     style="fill:#bebebe"
+     id="rect8"
+     rx="1"
+     height="5"
+     width="5"
+     y="9"
+     x="9" />
+</svg>

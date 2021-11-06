@@ -92,7 +92,7 @@
     "save_every": {
         "type": "spinbutton",
         "default": 60,
-        "min": 1,
+        "min": 5,
         "max": 86400,
         "step": 1,
         "units": "seconds",
@@ -126,5 +126,10 @@
     },
     "gui_end" : {
         "type" : "separator"
+    },
+
+    "last_values_string" : {
+        "type": "generic",
+        "default" : ""
     }
 }

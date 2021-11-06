@@ -1,0 +1,100 @@
+/* taken from gnome-shell.css, .dash-search-button */
+.popup-menu-content.weather-menu {
+    padding-bottom: 0em;
+    padding-top: 0em;
+}
+
+.weather-current-location-link {
+    text-align: center;
+}
+
+.weather-current-summarybox {
+    padding-top: 5px;
+}
+
+.weather-current-summary {
+    font-size: 35px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.weather-current-databox {
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.weather-current-icon {
+    padding: 0 30px;
+}
+
+.weather-current-iconbox {
+    padding: 10px;
+}
+
+.weather-icon {
+    padding-right: 5px;
+}
+
+.weather-icon-rtl {
+    padding-left: 5px;
+}
+
+.weather-current-databox-captions {
+    text-align: right;
+    padding-right: 5px;
+    color: #999999;
+}
+
+.weather-current-astronomy {
+    color: #AAAAAA;
+}
+
+.weather-forecast-icon {
+    padding: 0 10px 10px 15px;
+}
+
+.weather-forecast-databox {
+    padding: 0 20px 10px 0;
+}
+
+.weather-forecast-container {
+    margin: 10px 10px 0px 10px;
+}
+
+.weather-forecast-day {
+  color: #999999;
+  font-size: 90%;
+}
+
+.weather-config {
+  padding-right: 10px;
+}
+
+.bottombar {
+	padding: 7px 10px 7px 10px;
+}
+
+.hourly-time {
+    color: #999999;
+    font-size: 90%;
+    text-align: center;
+}
+
+.hourly-data {
+	text-align: center;
+	padding: 0px 5px;
+}
+
+.hourly-box {
+    padding: 10px 10px 0px 10px;
+}
+
+.hourly-icon {
+    padding: 5px 10px 5px 10px;
+}
+
+.location-selector {
+    margin-right: 5px;
+    margin-left: 5px;
+}

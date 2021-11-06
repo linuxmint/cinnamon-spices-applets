@@ -1,3 +1,13 @@
+v2.2 - 08-02-2021
+========
+* bug fix: remove "const _" which generates the following error "redeclaration of const _"
+
+v2.1 - 28-07-2019
+========
+* bug fix: remove AppSys.lookup_settings_app
+* bug fix: use get_names() as an array
+* manage the multiple commands with the character ;
+
 v2.0 - 12-09-2013
 ========
 * bug fix: not found desktop files no more crash the applet

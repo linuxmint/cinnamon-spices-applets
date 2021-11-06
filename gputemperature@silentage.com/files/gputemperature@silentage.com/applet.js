@@ -55,7 +55,7 @@ GPUTemp.prototype =
 		Applet.TextApplet.prototype._init.call(this, orientation);
 		try 
 		{
-			this.set_applet_label(_("GPU: ??\u1d3cC"));
+			this.set_applet_label(_("GPU: ?? \u00B0C"));
 			
 			this.menuManager = new PopupMenu.PopupMenuManager(this);
 			this.menu = new GPUMenu(this, orientation);
@@ -841,7 +841,7 @@ GPUTemp.prototype =
 	},
 	_noGpuSource: function()
 	{
-		this.set_applet_label(_(" GPU: ??\u1d3cC ERROR"));
+		this.set_applet_label(_(" GPU: ?? \u00B0C ERROR"));
 		this.menu.removeAll();
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("We couldn't determine your GPU's temperature.")), {reactive:false});
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(""), {reactive:false});
@@ -854,7 +854,7 @@ GPUTemp.prototype =
 	},
 	_formatTemperature: function(t) 
 	{
-		return (Math.round(t)).toString()+"\u1d3cC";
+		return (Math.round(t)).toString()+" \u00B0C";
 		//return ((t*100)/100).toString()+"\u1d3cC";
 	},
 	_hasCommand: function(test, match)

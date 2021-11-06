@@ -29,6 +29,8 @@ if (typeof require !== 'undefined') {
     Calendar = AppletDir.calendar;
 }
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
 
@@ -79,6 +81,9 @@ MyApplet.prototype = {
 
             this._initContextMenu();
             this._initRightClickMenu();
+
+            this.clock = new CinnamonDesktop.WallClock();
+            this.clock_notify_id = 0;
 
             this._calendarArea = new St.BoxLayout({name: "calendarArea" });
             this.menu.addActor(this._calendarArea);
@@ -137,6 +142,15 @@ MyApplet.prototype = {
             this._dateFormat = DEFAULT_FORMAT;
             this._dateFormatFull = _("%A %B %e, %Y");
 
+            // connect to system clock settings
+            this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
+            this.desktop_settings.connect("changed::clock-use-24h", Lang.bind(this, function(key) {
+                this.on_settings_changed();
+            }));
+            this.desktop_settings.connect("changed::clock-show-seconds", Lang.bind(this, function(key) {
+                this.on_settings_changed();
+            }));
+
             this.settings.bindProperty(Settings.BindingDirection.IN, "use-custom-format", "use_custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
@@ -159,7 +173,6 @@ MyApplet.prototype = {
             // Start the clock
             this.on_settings_changed();
             addWorldClocks();
-            this._updateClockAndDatePeriodic();
         }
         catch (e) {
             global.logError(e);
@@ -173,17 +186,41 @@ MyApplet.prototype = {
         this.on_applet_clicked;
     },
 
+    _clockNotify(obj, pspec, data) {
+        this._updateClockAndDate();
+    },
+
     on_applet_clicked: function() {
         this.menu.toggle();
     },
 
     on_settings_changed: function() {
+        this._updateFormatString();
+        this._updateClockAndDate();
+    },
+
+    // reads system clock setting to apply "24h" and "seconds" setting to this applet
+    _updateFormatString() {
         if (this.use_custom_format) {
             this._dateFormat = this.custom_format;
         } else {
-            this._dateFormat = DEFAULT_FORMAT;
+            let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
+            let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");
+
+            if (use_24h) {
+                if (show_seconds) {
+                    this._dateFormat = "%H:%M:%S";
+                } else {
+                    this._dateFormat = "%H:%M%";
+                }
+            } else {
+                if (show_seconds) {
+                    this._dateFormat = "%l:%M:%S %p";
+                } else {
+                    this._dateFormat = DEFAULT_FORMAT;
+                }
+            }
         }
-        this._updateClockAndDate();
     },
 
     on_custom_format_button_pressed: function() {
@@ -221,14 +258,18 @@ MyApplet.prototype = {
         }
     },
 
-    _updateClockAndDatePeriodic: function() {
-        this._updateClockAndDate();
-        this._periodicTimeoutId = Mainloop.timeout_add_seconds(1, Lang.bind(this, this._updateClockAndDatePeriodic));
+    on_applet_added_to_panel: function() {
+        this.on_settings_changed();
+
+        if (this.clock_notify_id == 0) {
+            this.clock_notify_id = this.clock.connect("notify::clock", () => this._clockNotify());
+        }
     },
 
     on_applet_removed_from_panel: function() {
-        if (this._periodicTimeoutId){
-            Mainloop.source_remove(this._periodicTimeoutId);
+        if (this.clock_notify_id > 0) {
+            this.clock.disconnect(this.clock_notify_id);
+            this.clock_notify_id = 0;
         }
     },
 
@@ -282,7 +323,7 @@ MyApplet.prototype = {
     },
 
     _launch_worldclocks_config: function() {
-        Util.spawnCommandLine("/usr/bin/env python2 " + APPLET_DIR + "/world_clock_calendar_settings.py --instance-id " + this.instance_id);
+        Util.spawnCommandLine("/usr/bin/env python3 " + APPLET_DIR + "/world_clock_calendar_settings.py --instance-id " + this.instance_id);
     },
 
     _initRightClickMenu: function () {

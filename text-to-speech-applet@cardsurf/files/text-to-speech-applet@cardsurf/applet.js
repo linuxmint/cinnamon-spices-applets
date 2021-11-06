@@ -45,8 +45,8 @@ MyApplet.prototype = {
 
         this.panel_height = panel_height;
         this.orientation = orientation;
-        this.python_name = "python";
-        this.espeak_name = "espeak";
+        this.python_name = "python3";
+        this.tts_engine_name = "espeak";
         this.start_stop_keybind_id = uuid + instance_id + "start-stop";
         this.pause_resume_keybind_id = uuid + instance_id + "pause-resume";
 
@@ -74,131 +74,10 @@ MyApplet.prototype = {
         this.start_stop_keys = "";
         this.pause_resume_keys = "";
 
-        this._init_dependencies_satisfied();
-    },
+        this.is_tts_engine_dialog_confirmed = false;
 
-    _init_dependencies_satisfied: function () {
-        let satisfied = this._check_dependencies();
-        if(satisfied) {
-            this._run_dependencies_satisfied();
-        }
-    },
-
-    _check_dependencies: function() {
-        let dependencies = this._get_dependencies();
-        if(dependencies.length > 0) {
-            this._show_dialog_dependencies(dependencies);
-            return false;
-        }
-        return true;
-    },
-
-    _get_dependencies: function() {
-        let dependencies = [];
-        dependencies = this._check_python(dependencies);
-        dependencies = this._check_espeak(dependencies);
-        return dependencies;
-    },
-
-    _check_python: function(dependencies) {
-        let python_satisfied = this._python_available();
-        if(!python_satisfied) {
-            let dependency = this._get_dependency(this.python_name);
-            dependencies.push(dependency);
-        }
-        return dependencies;
-    },
-
-    _python_available: function() {
-        let process = new ShellUtils.ShellOutputProcess(["which", this.python_name]);
-        let output = process.spawn_sync_and_get_output();
-        return output.length > 0;
-    },
-
-    _get_dependency: function(dependency) {
-        return dependency;
-    },
-
-    _show_dialog_dependencies: function(dependencies) {
-        let str = dependencies.join("\n\n");
-        let dialog_message = uuid + "\n\n" + _("The following packages were not found:") + "\n\n" +
-                             str + "\n\n" + _("Please install the above packages to use the applet");
-        let dialog = new ModalDialog.NotifyDialog(dialog_message);
-        dialog.open();
-    },
-
-    _check_espeak: function(dependencies) {
-        let espeak_satisfied = this._espeak_available();
-        if(!espeak_satisfied) {
-            let dependency = this._get_dependency(this.espeak_name);
-            dependencies.push(dependency);
-        }
-        return dependencies;
-    },
-
-    _espeak_available: function() {
-        let process = new ShellUtils.ShellOutputProcess(["which", this.espeak_name]);
-        let output = process.spawn_sync_and_get_output();
-        return output.length > 0;
-    },
-
-
-
-
-
-
-    _run_dependencies_satisfied: function () {
-        this._init_layout();
-        this._init_translations();
         this._bind_settings();
-        this._init_keybinds();
-        this._init_voice_process();
-        this._init_line_separator_regex();
-        this._init_hover_popup();
-        this._init_gui();
-    },
-
-    _init_layout: function () {
-        this._enable_hotizontal_vertical_layout();
-    },
-
-    _enable_hotizontal_vertical_layout: function() {
-        let supported = this.is_vertical_layout_supported();
-        if(supported) {
-            this._try_enable_hotizontal_vertical_layout();
-        }
-    },
-
-    is_vertical_layout_supported: function() {
-        return this._is_set_allowed_layout_defined();
-    },
-
-    _is_set_allowed_layout_defined: function() {
-        return this.is_function_defined(this.setAllowedLayout);
-    },
-
-    is_function_defined: function(reference) {
-        return typeof reference === "function";
-    },
-
-    _try_enable_hotizontal_vertical_layout: function() {
-        try {
-             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-        }
-        catch(e) {
-            global.log("Error while enabling vertical and horizontal layout: " + e);
-        }
-    },
-
-    _init_translations: function() {
-        try {
-            let translator = new Translation.Translator();
-            translator.bind_domain();
-            translator.generate_files();
-        }
-        catch(e) {
-            global.log(uuid + " error while initializing translations: " + e);
-        }
+        this._init_dependencies_tts_engine_satisfied();
     },
 
     _bind_settings: function () {
@@ -212,7 +91,8 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "gui_pause_icon_filename", this.on_gui_pause_icon_changed],
                 [Settings.BindingDirection.IN, "gui_reading_icon_filename", this.on_gui_reading_icon_changed],
                 [Settings.BindingDirection.IN, "start_stop_keys", this.on_start_stop_keys_changed],
-                [Settings.BindingDirection.IN, "pause_resume_keys", this.on_pause_resume_keys_changed] ]){
+                [Settings.BindingDirection.IN, "pause_resume_keys", this.on_pause_resume_keys_changed],
+                [Settings.BindingDirection.BIDIRECTIONAL, "is_tts_engine_dialog_confirmed", null] ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -296,10 +176,158 @@ MyApplet.prototype = {
         this.pause_resume_keybind.update_binding(this.pause_resume_keys);
     },
 
+    _init_dependencies_tts_engine_satisfied: function () {
+        let satisfied = this._check_dependencies();
+        if(satisfied) {
+            this._init_tts_engine_satisfied();
+        }
+    },
+
+    _check_dependencies: function() {
+        let dependencies = this._get_dependencies();
+        if(dependencies.length > 0) {
+            this._show_dialog_dependencies(dependencies);
+            return false;
+        }
+        return true;
+    },
+
+    _get_dependencies: function() {
+        let dependencies = [];
+        dependencies = this._check_python(dependencies);
+        return dependencies;
+    },
+
+    _check_python: function(dependencies) {
+        let python_satisfied = this._python_available();
+        if(!python_satisfied) {
+            let dependency = this._get_dependency(this.python_name);
+            dependencies.push(dependency);
+        }
+        return dependencies;
+    },
+
+    _python_available: function() {
+        let process = new ShellUtils.ShellOutputProcess(["which", this.python_name]);
+        let output = process.spawn_sync_and_get_output();
+        return output.length > 0;
+    },
+
+    _get_dependency: function(dependency) {
+        return dependency;
+    },
+
+    _show_dialog_dependencies: function(dependencies) {
+        let str = dependencies.join("\n\n");
+        let dialog_message = uuid + "\n\n" + _("The following packages were not found:") + "\n\n" +
+                             str + "\n\n" + _("Please install the above packages to use the applet");
+        let dialog = new ModalDialog.NotifyDialog(dialog_message);
+        dialog.open();
+    },
+
+    _init_tts_engine_satisfied: function () {
+        let satisfied = this._check_tts_engine();
+        if(satisfied) {
+            this._run_satisfied();
+        }
+    },
+
+    _check_tts_engine: function() {
+        let tts_engine_satisfied = this._tts_engine_available();
+        this.is_tts_engine_dialog_confirmed = this.settings.getValue("is_tts_engine_dialog_confirmed");
+        if(!tts_engine_satisfied && !this.is_tts_engine_dialog_confirmed) {
+            this._show_tts_engine_dialog();
+            return false;
+        }
+        return true;
+    },
+
+    _tts_engine_available: function() {
+        let process = new ShellUtils.ShellOutputProcess(["which", this.tts_engine_name]);
+        let output = process.spawn_sync_and_get_output();
+        return output.length > 0;
+    },
+
+    _show_tts_engine_dialog: function() {
+        let dialog_message =
+            uuid + "\n\n" +
+            _("The default text-to-speech engine") + " '" + this.tts_engine_name + "' " + _("not found.") + "\n\n" +
+            _("To use the applet either install") + " '" + this.tts_engine_name + "' " +
+            _("or specify other engine as 'Voice command' parameter in applet configuration.") + "\n\n" +
+            _("Do you want to continue ?");
+        let dialog = new ModalDialog.ConfirmDialog(dialog_message,
+                                        Lang.bind(this, this._set_tts_engine_dialog_confirmed_run_satisfied));
+        dialog.open();
+    },
+
+    _set_tts_engine_dialog_confirmed_run_satisfied: function() {
+        this.is_tts_engine_dialog_confirmed = true;
+        this.settings.setValue("is_tts_engine_dialog_confirmed", this.is_tts_engine_dialog_confirmed);
+        this._run_satisfied();
+    },
+
+
+
+
+
+
+    _run_satisfied: function () {
+        this._init_layout();
+        this._init_translations();
+        this._init_keybinds();
+        this._init_voice_process();
+        this._init_line_separator_regex();
+        this._init_hover_popup();
+        this._init_gui();
+    },
+
+    _init_layout: function () {
+        this._enable_hotizontal_vertical_layout();
+    },
+
+    _enable_hotizontal_vertical_layout: function() {
+        let supported = this.is_vertical_layout_supported();
+        if(supported) {
+            this._try_enable_hotizontal_vertical_layout();
+        }
+    },
+
+    is_vertical_layout_supported: function() {
+        return this._is_set_allowed_layout_defined();
+    },
+
+    _is_set_allowed_layout_defined: function() {
+        return this.is_function_defined(this.setAllowedLayout);
+    },
+
+    is_function_defined: function(reference) {
+        return typeof reference === "function";
+    },
+
+    _try_enable_hotizontal_vertical_layout: function() {
+        try {
+             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+        }
+        catch(e) {
+            global.log("Error while enabling vertical and horizontal layout: " + e);
+        }
+    },
+
+    _init_translations: function() {
+        try {
+            let translator = new Translation.Translator();
+            translator.bind_domain();
+            translator.generate_files();
+        }
+        catch(e) {
+            global.log(uuid + " error while initializing translations: " + e);
+        }
+    },
+
     _init_keybinds: function () {
         this.start_stop_keybind = new Keyboard.KeyBind(this.start_stop_keybind_id, this.start_stop_keys);
         this.pause_resume_keybind = new Keyboard.KeyBind(this.pause_resume_keybind_id, this.pause_resume_keys);
-        this.start_stop_keybind.set_callback_key_pressed(this, this.start_or_stop_reading);
+        this.start_stop_keybind.set_callback_key_pressed(this, this.on_applet_clicked);
         this.pause_resume_keybind.set_callback_key_pressed(this, this.pause_or_resume_reading);
         this.on_start_stop_keys_changed();
         this.on_pause_resume_keys_changed();
@@ -381,8 +409,15 @@ MyApplet.prototype = {
         this.set_gui_paused();
     },
 
+    // Override
     on_applet_clicked: function(event) {
-        this.start_or_stop_reading();
+        let is_paused = this.is_voice_process_paused();
+        if(is_paused) {
+            this.resume_reading();
+        }
+        else {
+            this.start_or_stop_reading();
+        }
     },
 
     start_or_stop_reading: function () {

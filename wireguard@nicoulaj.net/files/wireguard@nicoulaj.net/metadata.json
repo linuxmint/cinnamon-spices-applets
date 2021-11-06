@@ -1,0 +1,11 @@
+{
+  "uuid": "wireguard@nicoulaj.net",
+  "name": "WireGuard",
+  "website": "https://github.com/nicoulaj/cinnamon-applet-wireguard",
+  "description": "Enable/disable WireGuard connections.",
+  "original-authors": [
+    "Julien Nicoulaud <julien.nicoulaud@gmail.com>"
+  ],
+  "version": "1.0.3",
+  "max-instances": "-1"
+}

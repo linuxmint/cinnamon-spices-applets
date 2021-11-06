@@ -155,12 +155,12 @@ MyApplet.prototype = {
 
             // Make sure the temp files are created
 
-            GLib.spawn_command_line_async('touch /tmp/.batteryPercentage');
-            GLib.spawn_command_line_async('touch /tmp/.batteryState');
+            GLib.spawn_command_line_async('touch .batteryPercentage');
+            GLib.spawn_command_line_async('touch .batteryState');
 
             // Finally setup to start the update loop for the applet display running
 
-            this.set_applet_label(_(""));
+            this.set_applet_label(_(" "));
             this.set_applet_tooltip(_("Waiting"));
             this.on_settings_changed()   // This starts the MainLoop timer loop
 
@@ -302,7 +302,7 @@ MyApplet.prototype = {
     updateUI: function() {
 
         try {
-            this.batteryPercentage = GLib.file_get_contents("/tmp/.batteryPercentage").toString();
+            this.batteryPercentage = GLib.file_get_contents(".batteryPercentage").toString();
             this.batteryPercentage = this.batteryPercentage.trim().substr(5);
             this.batteryPercentage = Math.floor(this.batteryPercentage);
              // now check we have a genuine number otherwise use last value
@@ -311,7 +311,7 @@ MyApplet.prototype = {
             }
 //          Comment out following line when tests are complete
 //          this.batteryPercentage = this.batteryPercentage / 5 ;
-            this.batteryState = GLib.file_get_contents("/tmp/.batteryState").toString();
+            this.batteryState = GLib.file_get_contents("/.batteryState").toString();
             if ( this.batteryState.trim().length > 6 ) {
                  this.batteryState = this.batteryState.trim().substr(5);
                  this.batteryStateOld = this.batteryState;
@@ -368,7 +368,6 @@ MyApplet.prototype = {
                     this.batteryMessage = _("Battery Critical will Suspend unless connected to mains") + " "
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
                        // Audible alert moved from suspendScript in v32_1.0.0
-                       //GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"');
                        GLib.spawn_command_line_async('play ' + this.batteryLowSound);
                        GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
                     }
@@ -565,5 +564,14 @@ Bug Fix for use with early versions of Cinnamon
 ### 1.3.5
   * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
   * Add an initial mechanism to provide persistence for user edits of the stylesheet.
+### 1.3.6
+  * Translation File update
+### 1.3.7
+  * Change to allow Multiversion 3.2
+  * Change to selection of audible alert file in Applet Settings for 3.2 and higher instead of mechanism introduced in 1.3.4.
+### 1.3.7.1
+  * Change to cinnamon-version in metadata.json to add use under Cinnamon 4.2
+### 1.3.8
+  * Change location of temporary files to home folder to avoid permissions problem when switching users
+  * Fixes #2502
 */
-

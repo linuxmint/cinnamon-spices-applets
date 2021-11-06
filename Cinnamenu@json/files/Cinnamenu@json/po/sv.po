@@ -1,459 +1,610 @@
 # Swedish translation for Cinnamenu@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
-"PO-Revision-Date: 2017-06-29 09:06+0200\n"
+"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"PO-Revision-Date: 2021-08-09 14:42+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr "Ange ditt lösenord för att avinstallera det här programmet"
-
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr "Lägg till i panelen"
-
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr "Lägg till på skrivbordet"
-
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr "Ta bort från Favoriter"
-
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr "Lägg till i Favoriter"
-
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr "Avinstallera"
-
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr "Kör med NVIDIA GPU"
-
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr "Listvy"
-
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr "Växla till listvy"
-
-#: buttons.js:1234 applet.js:2253
-msgid "Grid View"
-msgstr "Ikonvy"
-
-#: buttons.js:1235 applet.js:2254
-msgid "Switch to grid view"
-msgstr "Växla till ikonvy"
-
-#: placeDisplay.js:57
-#, fuzzy, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Kunde inte starta \"%s\""
-
-#: placeDisplay.js:146
-msgid "Home"
-msgstr "Hem"
-
-#: placeDisplay.js:220
-msgid "Computer"
-msgstr "Dator"
-
-#: placeDisplay.js:224
-msgid "Browse network"
-msgstr "Navigera nätverket"
-
-#: applet.js:84
 msgid "Type to search..."
 msgstr "Skriv för att söka..."
 
-#: applet.js:149
 msgid "Initializing"
-msgstr ""
+msgstr "Startar"
 
-#: applet.js:275
 msgid "No description available"
-msgstr ""
+msgstr "Ingen beskrivning tillgänglig"
 
-#: applet.js:956
-msgid "All Applications"
+msgid "All applications"
 msgstr "Alla program"
 
-#: applet.js:994
 msgid "Places"
 msgstr "Platser"
 
-#: applet.js:995
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Tidigare filer"
 
-#: applet.js:996
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: applet.js:997
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Favoritprogram"
 
-#: applet.js:1282
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "gir1.2-gda-5.0-paketet krävs för Firefox och Midori-bokmärken."
+msgstr "Paketet gir1.2-gda-5.0 krävs för Firefox- och Midori-bokmärken."
 
-#: applet.js:1362
 msgid "Clear List"
 msgstr "Rensa listan"
 
-#: applet.js:1373
-msgid "No recent documents"
-msgstr ""
+msgid "No recent files"
+msgstr "Inga tidigare filer"
 
-#: applet.js:2246
 msgid "Account details"
-msgstr ""
+msgstr "Kontodetaljer"
 
-#: applet.js:2260
-msgid "Lock Screen"
+msgid "Grid View"
+msgstr "Ikonvy"
+
+msgid "List View"
+msgstr "Listvy"
+
+msgid "Switch to grid view"
+msgstr "Växla till ikonvy"
+
+msgid "Switch to list view"
+msgstr "Växla till listvy"
+
+msgid "Lock screen"
 msgstr "Lås skärmen"
 
-#: applet.js:2261
 msgid "Lock the screen"
 msgstr "Lås skärmen"
 
-#: applet.js:2282
 msgid "Logout"
 msgstr "Logga ut"
 
-#: applet.js:2283
 msgid "Leave the session"
 msgstr "Avsluta sessionen"
 
-#: applet.js:2290
 msgid "Quit"
 msgstr "Stäng av"
 
-#: applet.js:2291
 msgid "Shutdown the computer"
 msgstr "Stäng av datorn"
 
-#. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
+msgid "Run with NVIDIA GPU"
+msgstr "Kör med NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Lägg till i panelen"
+
+msgid "Add to desktop"
+msgstr "Lägg till på skrivbordet"
+
+msgid "Remove from favorites"
+msgstr "Ta bort från Favoriter"
+
+msgid "Add to favorites"
+msgstr "Lägg till i Favoriter"
+
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+msgid "Home"
+msgstr "Hem"
+
+msgid "Computer"
+msgstr "Dator"
+
+msgid "Browse network"
+msgstr "Navigera nätverket"
+
+msgid "Find files..."
+msgstr "Hitta filer..."
+
+msgid "Please wait..."
+msgstr "Vänta..."
+
+msgid "No recent Items"
+msgstr "Inga nya artiklar"
+
+msgid "Click to copy"
+msgstr "Klicka för att kopiera"
+
+msgid "Trash"
+msgstr "Skräp"
+
+msgid "Favorites"
+msgstr "Favoriter"
+
+msgid "Recent"
+msgstr "Senaste"
+
+msgid "Home folder"
+msgstr "Hemmapp"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "För många poster - Visar endast de 1000 första posterna"
+
+msgid "Reset category order"
+msgstr "Återställ kategoriordningen"
+
+msgid "light skin tone"
+msgstr "ljus toning"
+
+msgid "medium-light skin tone"
+msgstr "medelljus toning"
+
+msgid "medium skin tone"
+msgstr "medium toning"
+
+msgid "medium-dark skin tone"
+msgstr "medelmörk toning"
+
+msgid "dark skin tone"
+msgstr "mörk toning"
+
+msgid "This file is no longer available"
+msgstr "Filen är inte längre tillgänglig"
+
+msgid "Open with"
+msgstr "Öppna med"
+
+msgid "Other application..."
+msgstr "Annat program..."
+
+msgid "Open containing folder"
+msgstr "Öppna innehållande mapp"
+
+msgid "Move to trash"
+msgstr "Flytta till papperskorgen"
+
+msgid "Error while moving file to trash:"
+msgstr "Kunde inte flytta filen till papperskorgen:"
+
+msgid "Error while opening file:"
+msgstr "Ett fel inträffade vid öppning av filen:"
+
+msgid "Open"
+msgstr "Öppen"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Start in"
+msgstr "Starta i"
+
+msgid "Select a folder"
+msgstr "Välj en mapp"
+
+msgid "Follow symlinks"
+msgstr "Följ symboliska länkar"
+
+msgid "Search hidden"
+msgstr "Sök dold"
+
+msgid "Use regular expressions"
+msgstr "Använd Regular Expression"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Path"
+msgstr "Sökväg"
+
+msgid "Searching..."
+msgstr "Forskande..."
+
+msgid "Search Stopped"
+msgstr "Sökning stoppad"
+
+msgid "Searching: "
+msgstr "Forskande: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
+
+msgid "Search Completed"
+msgstr "Sökning slutförd"
+
+msgid "Skipping"
+msgstr "Hoppar över"
+
+msgid " - directory already searched"
+msgstr " - mappen redan genomsökt"
+
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
+"En flexibel meny med ikon- eller listlayoutalternativ, filhanterare och "
+"emoji-sökning."
 
-#. settings-schema.json->panel->title
 msgid "Behavior"
 msgstr "Beteende"
 
-#. settings-schema.json->appearance->title
 msgid "Appearance"
 msgstr "Utseende"
 
-#. settings-schema.json->menu->title
 msgid "Layout and Content"
-msgstr ""
+msgstr "Layout och innehåll"
 
-#. settings-schema.json->providers->title
 msgid "Search Providers"
-msgstr ""
+msgstr "Sökmotorer"
 
-#. settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Inga sökmotortillägg hittades"
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
-#. settings-schema.json->menu-layout->title
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
-#. settings-schema.json->menu-content->title
 msgid "Content"
-msgstr ""
+msgstr "Innehåll"
 
-#. settings-schema.json->privacy-settings-button->description
-#, fuzzy
-msgid "Toggle recent files"
-msgstr "Tidigare filer"
+msgid "Recent files settings"
+msgstr "Inställningar för tidigare filer"
 
-#. settings-schema.json->privacy-settings-button->tooltip
-#, fuzzy
-msgid "Press this button to customize your privacy settings."
-msgstr "Tryck på denna knapp för att anpassa dina menyposter."
-
-#. settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Öppna menyredigeraren"
 
-#. settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Tryck på denna knapp för att anpassa dina menyposter."
-
-#. settings-schema.json->resetCategoryOrder-button->description
-msgid "Reset category order"
-msgstr ""
-
-#. settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
 msgstr "Använd en anpassad ikon"
 
-#. settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Inaktivering innebär att temat anger ikon"
+msgid "Use a custom icon in the panel"
+msgstr "Använd en anpassad ikon i panelen"
 
-#. settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Ikon"
+msgid "Panel icon"
+msgstr "Panelikon"
 
-#. settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Välj en ikon att visas i panelen."
+msgid "Panel text"
+msgstr "Paneltext"
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Ange anpassat namn på menyikonen"
+msgid "Text to show beside the panel icon"
+msgstr "Text att visa vid panelikonen"
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
-msgid "pixels"
-msgstr "pixlar"
+msgid "Category icon size (pixels)"
+msgstr "Storlek på kategoriikoner (pixlar)"
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
-msgid "Category icon size"
-msgstr "Storlek på kategoriikoner"
+msgid "Applications list icon size (pixels)"
+msgstr "Listvyns ikonstorlek (pixlar)"
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
-msgid "Applications list icon size"
-msgstr "Listvyns ikonstorlek"
+msgid "Applications grid icon size (pixels)"
+msgstr "Ikonvyns ikonstorlek (pixlar)"
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
-msgid "Applications grid icon size"
-msgstr "Ikonvyns ikonstorlek"
-
-#. settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 
-#. settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Öppna menyn när jag för muspekaren över den"
+msgid "Open menu on hover"
+msgstr "Öppna menyn vid hovring"
 
-#. settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Aktivera menyn när muspekaren förs över panelikonen"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Öppna menyn när jag för muspekaren över panelikonen"
 
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
 msgid "milliseconds"
 msgstr "millisekunder"
 
-#. settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
-msgstr "Menyfördröjning:"
+msgid "Menu hover delay"
+msgstr "Menyfördröjning vid hovring"
 
-#. settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Fördröjning vid växling mellan kategorier"
-
-#. settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr "Använd menyanimering"
 
-#. settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
-msgstr "Tillåt animering när menyn öppnas och stängs"
+msgid "Animate the menu on open and close"
+msgstr "Animera menyn vid öppning och stängning"
 
-#. settings-schema.json->category-click->description
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Aktivera kategorier vid klick"
 
-#. settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivera kategorier vid klick istället för hovring"
 
-#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Aktivera automatisk skrollning"
+
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivera automatisk skrollning i programlistan"
 
-#. settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
-
-#. settings-schema.json->enable-bookmarks->description
-#, fuzzy
 msgid "Show web bookmarks"
-msgstr "Aktivera webbokmärken"
+msgstr "Visa webbokmärken"
 
-#. settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Avgör om bokmärken skall indexeras i menyn."
-
-#. settings-schema.json->enable-windows->description
-msgid "Enable searching of open windows"
-msgstr ""
-
-#. settings-schema.json->enable-windows->tooltip
-#, fuzzy
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Avgör om bokmärken skall indexeras i menyn."
-
-#. settings-schema.json->enable-search-providers->description
-msgid "Enable search providers"
-msgstr ""
-
-#. settings-schema.json->enable-search-providers->tooltip
-#, fuzzy
 msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
-msgstr "Avgör om bokmärken skall indexeras i menyn."
-
-#. settings-schema.json->get-providers->description
-msgid "Example Search Providers"
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Visa webbläsarens bokmärken i menyn.\n"
+"Notis: Installera paketet gir1.2-gda-5.0 för att läsa Firefox bokmärken."
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
-msgid "Startup applications view mode"
-msgstr "Programikonernas visningsläge"
+msgid "Enable searching of open windows"
+msgstr "Aktivera sökning i öppna fönster"
 
-#. settings-schema.json->startup-view-mode->options
+msgid "Enable search providers"
+msgstr "Aktivera sökmotorer"
+
+msgid "Include search provider results in searches"
+msgstr "Inkludera sökmotorresultat i sökningar"
+
+msgid "Example Search Providers"
+msgstr "Exempel på sökmotorer"
+
+msgid "Open menu on category:"
+msgstr "Öppna menyn på kategori:"
+
 msgid "List"
 msgstr "Listvy"
 
-#. settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "Ikonvy"
 
-#. settings-schema.json->apps-grid-column-count->units
+msgid "Always open the menu with this category selected"
+msgstr "Öppna alltid meny med denna kategori vald"
+
 msgid "columns"
 msgstr "kolumner"
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
 msgstr "Antal kolumner i programfältet"
 
-#. settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
 msgstr "Visa bokmärken och platser"
 
-#. settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Välj om bokmärken och platser skall visas i menyn."
+msgid "Show bookmarks and places category in the menu"
+msgstr "Visa kategori för bokmärken och platser i menyn"
 
-#. settings-schema.json->show-application-icons->description
 msgid "Show application icons"
 msgstr "Visa programikoner"
 
-#. settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Välj om programikoner skall visas."
-
-#. settings-schema.json->show-category-icons->description
 msgid "Show category icons"
 msgstr "Visa kategoriikoner"
 
-#. settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Välj om kategoriikoner skall visas."
-
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Aktivera filsystemsökvägar i sökfältet"
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Tillåt filsystemsökvägar i menyns sökfält."
-
-#. settings-schema.json->show-apps-description-on-buttons->description
-#, fuzzy
 msgid "Show application descriptions under titles"
-msgstr "Visa programbeskrivningar under programnamnen"
+msgstr "Visa programbeskrivningar under titlar"
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr "Välj om programbeskrivningar skall visas på programknappar."
-
-#. settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
-msgstr ""
+msgstr "Visa knappbeskrivningar"
 
-#. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
-#. settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Fördröjning för knappbeskrivningar"
 
-#. settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
-#, fuzzy
 msgid "Use a custom menu height"
-msgstr "Använd en anpassad ikon"
+msgstr "Använd anpassad menyhöjd"
 
-#. settings-schema.json->custom-menu-height->units
-msgid "px"
+msgid "Custom menu height (pixels)"
+msgstr "Anpassad menyhöjd (pixlar)"
+
+msgid "Applications view mode"
+msgstr "Programmens visningsläge"
+
+msgid "View applications as list or grid"
+msgstr "Visa programmen i list eller ikonvy"
+
+msgid "Application description placement"
+msgstr "Programbeskrivningens placering"
+
+msgid "Tooltips"
+msgstr "Knappbeskrivning"
+
+msgid "Under titles"
+msgstr "Under titeln"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Choose where to show application descriptions"
+msgstr "Välj var programbeskrivningarna skall visas"
+
+msgid "Sidebar location"
+msgstr "Sidofältets plats"
+
+msgid "Top"
+msgstr "Överkant"
+
+msgid "Bottom"
+msgstr "Underkant"
+
+msgid "Left"
+msgstr "Vänster"
+
+msgid "Right"
+msgstr "Höger"
+
+msgid "Choose where to show the sidebar"
+msgstr "Välj var sidofältet skall visas"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Info / Tips: Dra i menykanten för att ändra menystorlek.\n"
 
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
-msgid "Custom menu height"
+msgid "Show favorites on sidebar"
+msgstr "Visa favoriter i sidofältet"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Visa ikoner för favoritprogram och filer i sdofältet"
+
+msgid "Show recent items"
+msgstr "Visa tidigare objekt"
+
+msgid "Show recent items category in the menu"
+msgstr "Visa kategori för tidigare objekt i menyn"
+
+msgid "Show favorite apps category"
+msgstr "Visa favoritkategori"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Visa kategori för favoritprogram i menyn"
+
+msgid "Show home folder"
+msgstr "Visa hemmappen"
+
+msgid "Show home folder category in the menu"
+msgstr "Visa kategori för hemmappen i menyn"
+
+msgid "Last used category"
+msgstr "Senast använda kategori"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Skrolla programlistan automatiskt vid mus över"
+
+msgid "Show hidden files"
+msgstr "Visa dolda filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Visa dolda filer i mappvyn"
+
+msgid "Emoji search"
+msgstr "Emoji-sök"
+
+msgid "Show emojis in search results"
+msgstr "Visa emojis i sökresultat"
+
+msgid "Web search option"
+msgstr "Webbsökalternativ"
+
+msgid "Google"
+msgstr "Google"
+
+msgid "Bing"
+msgstr "Bing"
+
+msgid "Baidu"
+msgstr "Baidu"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "Yandex"
+msgstr "Yandex"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Ask"
+msgstr "Fråga"
+
+msgid "Ecosia"
+msgstr "Ekosien"
+
+msgid "AOL"
+msgstr "AOL"
+
+msgid "Startpage"
+msgstr "Startpage"
+
+msgid "Show an internet search option in search results"
+msgstr "Visa ett internetsökalternativ i sökresultat"
+
+msgid "Search home folder"
+msgstr "Sök i hemmappen"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Vid sökning, sök även i min hemkatalog efter filer"
+
+msgid "Web bookmarks search"
+msgstr "Webbokmärkessök"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
 msgstr ""
+"Genomsök också min webbläsares bokmärken vid sökning (Google Chrome, "
+"Chromium, Opera, Brave & Firefox).\n"
+"OBS! För att söka i Firefox bokmärken, måste du installera paketet, gir1.2-"
+"gda-5.0 (Debian-baserade distributioner inkl. Ubuntu & Linux Mint) eller "
+"paketet libgda (Arch-baserade distributioner) och starta om din dator."
 
-#~ msgid "Cinnamenu Settings"
-#~ msgstr "Cinnamenu inställningar"
+msgid "Wikipedia search"
+msgstr "Wikipedia-sök"
 
-#~ msgid "Applications grid label width"
-#~ msgstr "Bredd på programikonernas namnetikett"
+msgid "Show some Wikipedia results"
+msgstr "Visa några Wikipedia-resultat"
 
-#~ msgid "Menu Entries"
-#~ msgstr "Menyposter"
+msgid "Use a custom icon size"
+msgstr "Använd en anpassad ikonstorlek"
 
-#~ msgid "A flexible menu providing formatting options and bookmarks."
-#~ msgstr "En flexibel meny med formateringsalternativ och bokmärken."
+msgid "Use a custom size for the panel icon"
+msgstr "Använd en anpassad storlek för panelikonen"
+
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstorlek (pixlar)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Välj en anpassad storlek för panelikonen"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidofältets ikonstorlek (pixlar)"
+
+msgid "Use sidebar box style"
+msgstr "Använd boxstil för sidofält"
+
+msgid "Use a sidebar box style"
+msgstr "Använd en boxstil för sidofält"
+
+msgid "Use tile style"
+msgstr "Använd panelstil"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
+"vissa teman)"
+
+#~ msgid "pixels"
+#~ msgstr "pixlar"
+
+#~ msgid "Solution:"
+#~ msgstr "Lösning:"
+
+#~ msgid "Search web for"
+#~ msgstr "SökmotorerSök på nätet efter"
+
+#~ msgid ""
+#~ "A flexible menu providing formatting options, web bookmarks, search "
+#~ "provider support and fuzzy searching."
+#~ msgstr ""
+#~ "En flexibel meny som tillhandahåller formateringsalternativ, "
+#~ "webbokmärken, sökmotorstöd och luddig sökning."
+
+#~ msgid "Session buttons location"
+#~ msgstr "Placering av sessionsknappar"
+
+#~ msgid "Choose where to show the session buttons (quit, logout, etc.)"
+#~ msgstr "Välj var sessionsknapparna skall visas (Avsluta, Logga ut, etc.)"
+
+#~ msgid "Add favorites to session buttons"
+#~ msgstr "Lägg till favoriter till sessionsknapparna"
+
+#~ msgid "Show your favorite app icons next to the session buttons"
+#~ msgstr "Visa dina favoritprogramikoner tillsammans med sessionsknapparna"
+
+#~ msgid "Session buttons icon size"
+#~ msgstr "Sessionsknappars ikonstorlek"

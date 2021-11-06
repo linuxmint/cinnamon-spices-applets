@@ -55,6 +55,8 @@ MyApplet.prototype = {
         this.network_interfaces = [];
         this.checked_interfaces = [];
         this.checked_interfaces_string = "";
+        this.unplugged_interfaces = [];
+        this.unplugged_interfaces_string = "";
         this.filepath_bytes_received = "";
         this.filepath_bytes_sent = "";
         this.filepath_bytes_total = "";
@@ -71,8 +73,10 @@ MyApplet.prototype = {
         this.display_mode = AppletConstants.DisplayMode.SPEED;
         this.unit_type = AppletConstants.UnitType.BYTES;
         this.update_every = 1.0;
+        this.update_available_interfaces_every = 5;
         this.custom_start_date = "";
-        this.gui_speed_type = 0;
+        this.gui_speed_type = AppletConstants.GuiSpeedType.COMPACT;
+        this.gui_value_order = AppletConstants.GuiValueOrder.DOWNLOAD_FIRST;
         this.gui_data_limit_type = 0;
         this.decimal_places = AppletConstants.DecimalPlaces.AUTO;
         this.show_hover = true;
@@ -82,9 +86,12 @@ MyApplet.prototype = {
         this.data_limit = 0;
         this.gui_text_css = "";
         this.gui_received_icon_filename = "";
+        this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
+        this.minimum_bytes_received_to_display = 0;
+        this.minimum_bytes_sent_to_display = 0;
         this.bytes_start_time = AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION;
 
         this.gui_speed = null;
@@ -160,25 +167,31 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "display_mode", null],
                         [Settings.BindingDirection.IN, "unit_type", null],
                         [Settings.BindingDirection.IN, "update_every", null],
+                        [Settings.BindingDirection.IN, "update_available_interfaces_every", null],
                         [Settings.BindingDirection.IN, "launch_terminal", null],
+                        [Settings.BindingDirection.IN, "minimum_bytes_received_to_display", null],
+                        [Settings.BindingDirection.IN, "minimum_bytes_sent_to_display", null],
                         [Settings.BindingDirection.IN, "list_connections_command",
-                                                        this.on_list_connections_command_changed],
+                                                       this.on_list_connections_command_changed],
                         [Settings.BindingDirection.IN, "write_every", null],
                         [Settings.BindingDirection.IN, "custom_start_date", this.on_custom_start_date_changed],
                         [Settings.BindingDirection.IN, "data_limit_command", null],
                         [Settings.BindingDirection.IN, "data_limit", this.on_data_limit_changed],
                         [Settings.BindingDirection.IN, "data_limit_command_enabled", this.on_data_limit_changed],
+                        [Settings.BindingDirection.IN, "gui_value_order", this.on_gui_value_order_changed],
                         [Settings.BindingDirection.IN, "decimal_places", this.on_decimal_places_changed],
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
+                        [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
                         [Settings.BindingDirection.IN, "hover_popup_text_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.IN, "hover_popup_numbers_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "gui_speed_type", this.on_gui_speed_type_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "bytes_start_time", this.on_bytes_start_time_changed],
-                        [Settings.BindingDirection.BIDIRECTIONAL, "checked_interfaces_string", null] ]){
+                        [Settings.BindingDirection.BIDIRECTIONAL, "checked_interfaces_string", null],
+                        [Settings.BindingDirection.BIDIRECTIONAL, "unplugged_interfaces_string", null], ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -263,6 +276,11 @@ MyApplet.prototype = {
         this.gui_data_limit.set_gui(this.gui_data_limit_type);
     },
 
+    on_gui_value_order_changed: function () {
+        this._init_hover_popup();
+        this._init_gui();
+    },
+
     on_decimal_places_changed: function () {
         this.gui_speed.set_decimal_places(this.decimal_places);
     },
@@ -277,8 +295,16 @@ MyApplet.prototype = {
     },
 
     on_gui_icon_changed: function () {
-        this.gui_speed.set_reveived_icon(this.gui_received_icon_filename);
-        this.gui_speed.set_sent_icon(this.gui_sent_icon_filename);
+        this.gui_speed.set_reveived_icon(this.get_icon_path(this.gui_received_icon_filename, "arrow-pointing-down-symbolic.svg"));
+        this.gui_speed.set_sent_icon(this.get_icon_path(this.gui_sent_icon_filename, "arrow-up-symbolic.svg"));
+    },
+
+    get_icon_path: function(icon_path, symbolic_icon_name) {
+        return (this.gui_symbolic_icon) ? "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/" + symbolic_icon_name : icon_path;
+    },
+
+    on_gui_icon_style_change: function() {
+        this.on_gui_icon_changed();
     },
 
     on_gui_css_changed: function () {
@@ -336,6 +362,7 @@ MyApplet.prototype = {
     _init_network_properties: function () {
         this.network_interfaces = this._init_network_interfaces();
         this.checked_interfaces = this._init_checked_interfaces();
+        this.unplugged_interfaces = this._init_unplugged_interfaces();
     },
 
     _init_network_interfaces: function () {
@@ -366,6 +393,21 @@ MyApplet.prototype = {
 
     array_contains: function (array, element) {
         return array.indexOf(element) > -1;
+    },
+
+    _init_unplugged_interfaces: function () {
+        let unplugged_interfaces = [];
+        let unplugged_interfaces_string = this.settings.getValue("unplugged_interfaces_string");
+        if(unplugged_interfaces_string.length > 0) {
+            let network_interfaces = unplugged_interfaces_string.split(this.settings_separator);
+            for(let network_interface of network_interfaces) {
+                let is_checked = this.array_contains(this.checked_interfaces, network_interface);
+                if(!is_checked) {
+                    unplugged_interfaces.push(network_interface);
+                }
+            }
+        }
+        return unplugged_interfaces;
     },
 
     _init_dictionaries: function () {
@@ -405,8 +447,7 @@ MyApplet.prototype = {
         else {
             this.uncheck_network_interface(option_name);
         }
-        this.on_data_limit_changed();
-        this.update_checked_interfaces_string();
+        this._on_network_interface_checked_changed(option_name);
     },
 
     check_network_interface: function (network_interface) {
@@ -422,6 +463,11 @@ MyApplet.prototype = {
             this._reset_network_interface(network_interface);
             this.array_remove(this.checked_interfaces, network_interface);
         }
+    },
+
+    _on_network_interface_checked_changed: function (network_interface) {
+        this.on_data_limit_changed();
+        this.update_checked_interfaces_string();
     },
 
     _reset_network_interface: function (network_interface) {
@@ -558,11 +604,30 @@ MyApplet.prototype = {
     _update_network_properties: function () {
          this.network_interfaces = this._init_network_interfaces();
          this._init_dictionaries();
+         this._add_unplugged_interfaces();
          this.checked_interfaces = this._reset_network_interfaces();
+         this.update_unplugged_interfaces_string();
          this.update_checked_interfaces_string();
     },
 
+    _add_unplugged_interfaces: function () {
+         for(let network_interface of this.checked_interfaces) {
+             let is_unplugged = !this.array_contains(this.network_interfaces, network_interface);
+             let is_added = this.array_contains(this.unplugged_interfaces, network_interface);
+             if(is_unplugged && !is_added) {
+                 this.unplugged_interfaces.push(network_interface);
+             }
+         }
+    },
+
     _reset_network_interfaces: function () {
+        let checked_interfaces = this._reset_unchecked_interfaces();
+        let plugged_interfaces = this._remove_plugged_interfaces();
+        var network_interfaces = checked_interfaces.concat(plugged_interfaces);
+        return network_interfaces;
+    },
+
+    _reset_unchecked_interfaces: function () {
         let checked_interfaces = []
         for(let network_interface of this.checked_interfaces) {
             let exists = this.array_contains(this.network_interfaces, network_interface);
@@ -576,14 +641,37 @@ MyApplet.prototype = {
         return checked_interfaces;
     },
 
+    _remove_plugged_interfaces: function () {
+        let plugged_interfaces = [];
+        for(let i = this.unplugged_interfaces.length - 1; i >= 0; i--) {
+            var network_interface = this.unplugged_interfaces[i];
+            let exists = this.array_contains(this.network_interfaces, network_interface);
+            if(exists) {
+                plugged_interfaces.push(network_interface);
+                this.unplugged_interfaces.splice(i, 1);
+            }
+        }
+        return plugged_interfaces;
+    },
+
+    update_unplugged_interfaces_string: function () {
+        if(this.unplugged_interfaces.length < 10) {
+            this.unplugged_interfaces_string = this.unplugged_interfaces.join(this.settings_separator);
+        }
+        else {
+            this.unplugged_interfaces_string = "";
+            this.unplugged_interfaces = [];
+        }
+    },
+
     _init_hover_popup: function () {
-        this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation);
+        this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation, this.gui_value_order);
         this.on_hover_popup_css_changed();
         this.on_show_hover_changed();
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places);
         this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();
@@ -609,6 +697,7 @@ MyApplet.prototype = {
 
     run: function () {
         this._run_calculate_speed_running();
+        this._run_update_available_interfaces_running();
         this._run_write_bytes_running();
     },
 
@@ -619,13 +708,8 @@ MyApplet.prototype = {
     },
 
     _run_calculate_speed: function () {
-        if(this.update_every > 0) {
-            this._calculate_speed();
-            Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
-        else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
+        this._calculate_speed();
+        Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
     },
 
     _calculate_speed: function () {
@@ -644,10 +728,8 @@ MyApplet.prototype = {
                 bytes_sent_total += info.bytes_sent_total;
             }
 
-            let received = this.scale(bytes_received_iteration);
-            received = this.convert_to_readable_string(received);
-            let sent = this.scale(bytes_sent_iteration);
-            sent = this.convert_to_readable_string(sent);
+            let received = this.get_bytes_received_iteration_string(bytes_received_iteration);
+            let sent = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
@@ -668,6 +750,17 @@ MyApplet.prototype = {
             difference = 0;
         }
         return difference;
+    },
+
+    get_bytes_received_iteration_string: function (bytes) {
+        let received = this.replace_with_zero(bytes, this.minimum_bytes_received_to_display);
+        received = this.scale(received);
+        received = this.convert_to_readable_string(received);
+        return received;
+    },
+
+    replace_with_zero: function (bytes, minimum) {
+        return bytes >= minimum ? bytes : 0;
     },
 
     scale: function (bytes) {
@@ -752,6 +845,13 @@ MyApplet.prototype = {
         return number.toFixed(2);
     },
 
+    get_bytes_sent_iteration_string: function (bytes) {
+        let sent = this.replace_with_zero(bytes, this.minimum_bytes_sent_to_display);
+        sent = this.scale(sent);
+        sent = this.convert_to_readable_string(sent);
+        return sent;
+    },
+
     convert_to_two_decimals_string: function (bytes) {
         let [number, unit] = this.convert_bytes_to_readable_unit(bytes);
         let output = number.toFixed(2).toString() + " " + unit;
@@ -807,6 +907,23 @@ MyApplet.prototype = {
         for(let network_interface of this.checked_interfaces) {
             let info = this.dictionary_interface_to_info[network_interface];
             info.write_bytes_total();
+        }
+    },
+
+    _run_update_available_interfaces_running: function () {
+        if(this.is_running) {
+            this._run_update_available_interfaces();
+        }
+    },
+
+    _run_update_available_interfaces: function () {
+        if(this.update_available_interfaces_every > 0) {
+            this.update_network_interfaces();
+            Mainloop.timeout_add(this.update_available_interfaces_every * 1000,
+                                 Lang.bind(this, this._run_update_available_interfaces_running));
+        }
+        else {
+            Mainloop.timeout_add(1000, Lang.bind(this, this._run_update_available_interfaces_running));
         }
     },
 

@@ -792,6 +792,8 @@ Player.prototype = {
             if ( this._name === "spotify" ) {
                 artUrl = artUrl.replace("/thumb/", "/300/"); // Spotify 0.9.x
                 artUrl = artUrl.replace("/image/", "/300/"); // Spotify 0.27.x
+            } else if (this._name == "Spotify") {
+                artUrl = artUrl.replace("open.spotify.com","i.scdn.co"); // Fix missing cover art
             }
             if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
@@ -1054,6 +1056,7 @@ MyApplet.prototype = {
             this.settings.bind("middleClickAction", "middleClickAction");
             this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
             this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
+            this.settings.bind("alwaysShowInput", "alwaysShowInput", this.on_settings_changed);
 
             this.settings.bind("magneticOn", "magneticOn", this.on_settings_changed);
 
@@ -1277,6 +1280,11 @@ MyApplet.prototype = {
         this.old_pcMaxVolume = this.pcMaxVolume;
         this._outputVolumeSection._onValueChanged();
         this._outputVolumeSection._update();
+
+        if(this._recordingAppsNum === 0 && !this.alwaysShowInput)
+            this._inputSection.actor.hide();
+        else if(this._recordingAppsNum > 0 || this.alwaysShowInput)
+            this._inputSection.actor.show();
     },
 
     on_applet_removed_from_panel : function() {
@@ -1788,7 +1796,8 @@ MyApplet.prototype = {
                         this._outputApplicationsMenu.actor.hide();
                 } else if (stream.type === "SourceOutput") {
                     if(--this._recordingAppsNum === 0)
-                        this._inputSection.actor.hide();
+                        if (this.alwaysShowInput == null || !this.alwaysShowInput)
+                            this._inputSection.actor.hide();
                 }
                 this._streams.splice(i, 1);
                 break;

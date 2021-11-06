@@ -49,6 +49,7 @@ AzanApplet.prototype = {
             this._opt_latitude = null;
             this._opt_longitude = null;
             this._opt_timezone = null;
+            this._opt_juristic = null;
 
             this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
             this._bindSettings();
@@ -204,6 +205,24 @@ AzanApplet.prototype = {
                 this._updateLabel();
             }
         );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "time_format",
+            "_opt_timeFormat",
+            function() {
+                this._updateLabel();
+            }
+        );
+		
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "juristic",
+            "_opt_juristic",
+            function() {
+                this._updateLabel();
+            }
+        );
     },
 
     on_applet_clicked: function() {
@@ -231,12 +250,15 @@ AzanApplet.prototype = {
         let myLocation = [this._opt_latitude, this._opt_longitude];
         let myTimezone = this._opt_timezone;
         this._prayTimes.setMethod(this._opt_calculationMethod);
+        
+        // Adjust Juristic Setting
+        this._prayTimes.adjust({asr: this._opt_juristic});
 
         let currentDate = new Date();
 
         let currentSeconds = this._calculateSecondsFromDate(currentDate);
 
-        let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', '24h');
+        let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', this._opt_timeFormat);
         let timesFloat = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', 'Float');
 
         let nearestPrayerId;

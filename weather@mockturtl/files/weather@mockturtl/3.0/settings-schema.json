@@ -1,0 +1,267 @@
+{
+	"head": {
+		"type": "header",
+		"description": "Settings for weather@mockturtl 3.0+"
+	},
+	"keybinding": {
+		"type": "keybinding",
+		"description": "Set the keybinding to call the menu",
+		"default": "<Super><Shift>w"
+	},
+	"descriptions": {
+		"type": "header",
+		"description": "Weather service information"
+	},
+	"moreInfo": {
+		"type": "button",
+		"indent": true,
+		"description": "Click here for detailed description",
+		"callback": "locationLookup",
+		"tooltip": "Opens webpage guide"
+	},
+	"providerSettings": {
+		"type": "header",
+		"description": "Weather Provider Options"
+	},
+	"dataService": {
+		"type": "radiogroup",
+		"default": "OpenWeatherMap",
+		"description": "Data service",
+		"options": {
+			"OpenWeatherMap": "OpenWeatherMap",
+			"DarkSky (key needed)": "DarkSky",
+			"MET Norway": "MetNorway",
+			"Weatherbit (key needed)": "Weatherbit",
+			"Yahoo": "Yahoo",
+			"Climacell (key needed)": "Climacell",
+			"Met Office UK": "Met Office UK"
+		}
+	},
+	"apiKey": {
+		"type": "entry",
+		"default": "",
+		"description": "API Key",
+		"tooltip": "Copy this from your account of the used Data service and paste it here."
+	},
+	"manualLocation": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Manual Location",
+		"tooltip": "Enable this if your location is not accurate"
+	},
+	"location": {
+		"type": "entry",
+		"default": "London,UK",
+		"dependency": "manualLocation",
+		"description": "Location - Coordinates",
+		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
+	},
+	"getLocation": {
+		"type": "button",
+		"indent": true,
+		"description": "Setup API Key and Location",
+		"callback": "locationLookup",
+		"tooltip": "Opens webpage guide"
+	},
+	"refreshInterval": {
+		"type": "spinbutton",
+		"default": 15,
+		"min": 5,
+		"max": 360,
+		"units": "minutes",
+		"step": 5,
+		"description": "Update interval"
+	},
+	"forecastDays": {
+		"type": "spinbutton",
+		"default": 3,
+		"min": 2,
+		"max": 16,
+		"units": "days",
+		"step": 1,
+		"description": "Forecast length"
+	},
+	"forecastHours": {
+		"type": "spinbutton",
+		"default": 12,
+		"min": 3,
+		"max": 48,
+		"units": "hours",
+		"step": 1,
+		"description": "Hourly Forecast length"
+	},
+	"unitSettings": {
+		"type": "header",
+		"description": "Units"
+	},
+	"temperatureUnit": {
+		"type": "radiogroup",
+		"default": "automatic",
+		"description": "Temperature unit",
+		"options": {
+			"Automatic": "automatic",
+			"Celsius": "celsius",
+			"Fahrenheit": "fahrenheit"
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
+	},
+	"windSpeedUnit": {
+		"type": "combobox",
+		"default": "automatic",
+		"description": "Wind speed unit",
+		"options": {
+			"Automatic": "automatic",
+			"kph": "kph",
+			"mph": "mph",
+			"m/s": "m/s",
+			"knots": "Knots",
+			"Beaufort": "Beaufort"
+		}
+	},
+	"pressureUnit": {
+		"type": "combobox",
+		"default": "hPa",
+		"description": "Atmospheric pressure unit",
+		"options": {
+			"hPa": "hPa",
+			"in Hg": "in Hg",
+			"mm Hg": "mm Hg",
+			"psi": "psi",
+			"at": "at",
+			"atm": "atm",
+			"Pa": "Pa"
+		}
+	},
+	"distanceUnit": {
+		"type": "combobox",
+		"default": "automatic",
+		"description": "Distance unit",
+		"options": {
+			"Automatic": "automatic",
+			"Metric": "metric",
+			"Imperial": "imperial"
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
+	},
+	"panelSettings": {
+		"type": "header",
+		"description": "Panel options"
+	},
+	"showTextInPanel": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Display current temperature in panel"
+	},
+	"showCommentInPanel": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel",
+		"tooltip": "Only works with horizontal panels"
+	},
+	"tempTextOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "Override label on panel",
+		"tooltip": "Available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+	},
+	"useCustomAppletIcons": {
+		"type": "checkbox",
+		"default": false,
+		"tooltip": "Iconset is weather-icons by Erik Flowers",
+		"description": "Use custom icons on the panel"
+	},
+	"displaySettings": {
+		"type": "header",
+		"description": "Presentation"
+	},
+	"verticalOrientation": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Show forecast vertically",
+		"tooltip": "Displaying forecasts from top to bottom instead from left to right"
+	},
+	"forecastColumns": {
+		"type": "spinbutton",
+		"default": 5,
+		"min": 1,
+		"max": 16,
+		"units": "columns",
+		"step": 1,
+		"description": "Maximum number of columns for forecast"
+	},
+	"forecastRows": {
+		"type": "spinbutton",
+		"default": 4,
+		"min": 1,
+		"max": 16,
+		"units": "rows",
+		"step": 1,
+		"description": "Maximum number of rows for forecast"
+	},
+	"showSunrise": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Show sunrise / sunset times"
+	},
+	"show24Hours": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display time in 24 hour format"
+	},
+	"shortHourlyTime": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Only display hours for hourly forecast time",
+		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
+	},
+	"showForecastDates": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display date for daily forecasts",
+		"tooltip": "Like \"Friday 15\""
+	},
+	"temperatureHighFirst": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Show high temperature first in forecast"
+	},
+	"tempRussianStyle": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Show temperature Russian style"
+	},
+	"locationLabelOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "Override location label"
+	},
+	"conditionSettings": {
+		"type": "header",
+		"description": "Weather conditions"
+	},
+	"translateCondition": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Translate conditions"
+	},
+	"shortConditions": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Less verbose conditions"
+	},
+	"iconSettings": {
+		"type": "header",
+		"description": "Icons"
+	},
+	"useSymbolicIcons": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Use symbolic icons in the applet"
+	},
+	"useCustomMenuIcons": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Use custom icons in the popup menu",
+		"tooltip": "Iconset is weather-icons by Erik Flowers"
+	}
+}

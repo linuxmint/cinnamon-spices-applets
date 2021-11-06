@@ -8,433 +8,528 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"POT-Creation-Date: 2021-08-22 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr ""
-
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr ""
-
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr ""
-
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr ""
-
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr ""
-
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr ""
-
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr ""
-
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr ""
-
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr ""
-
-#: buttons.js:1234 applet.js:2253
-msgid "Grid View"
-msgstr ""
-
-#: buttons.js:1235 applet.js:2254
-msgid "Switch to grid view"
-msgstr ""
-
-#: placeDisplay.js:57
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr ""
-
-#: placeDisplay.js:146
-msgid "Home"
-msgstr ""
-
-#: placeDisplay.js:220
-msgid "Computer"
-msgstr ""
-
-#: placeDisplay.js:224
-msgid "Browse network"
-msgstr ""
-
-#: applet.js:84
 msgid "Type to search..."
 msgstr ""
 
-#: applet.js:149
 msgid "Initializing"
 msgstr ""
 
-#: applet.js:275
 msgid "No description available"
 msgstr ""
 
-#: applet.js:956
-msgid "All Applications"
+msgid "All applications"
 msgstr ""
 
-#: applet.js:994
 msgid "Places"
 msgstr ""
 
-#: applet.js:995
-msgid "Recent Files"
+msgid "Recent files"
 msgstr ""
 
-#: applet.js:996
 msgid "Bookmarks"
 msgstr ""
 
-#: applet.js:997
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr ""
 
-#: applet.js:1282
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 
-#: applet.js:1362
 msgid "Clear List"
 msgstr ""
 
-#: applet.js:1373
-msgid "No recent documents"
+msgid "No recent files"
 msgstr ""
 
-#: applet.js:2246
 msgid "Account details"
 msgstr ""
 
-#: applet.js:2260
-msgid "Lock Screen"
+msgid "Grid View"
 msgstr ""
 
-#: applet.js:2261
+msgid "List View"
+msgstr ""
+
+msgid "Switch to grid view"
+msgstr ""
+
+msgid "Switch to list view"
+msgstr ""
+
+msgid "Lock screen"
+msgstr ""
+
 msgid "Lock the screen"
 msgstr ""
 
-#: applet.js:2282
 msgid "Logout"
 msgstr ""
 
-#: applet.js:2283
 msgid "Leave the session"
 msgstr ""
 
-#: applet.js:2290
 msgid "Quit"
 msgstr ""
 
-#: applet.js:2291
 msgid "Shutdown the computer"
 msgstr ""
 
-#. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
-msgid "Cinnamenu"
+msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
+msgid "Add to panel"
 msgstr ""
 
-#. settings-schema.json->panel->title
-msgid "Behavior"
+msgid "Add to desktop"
 msgstr ""
 
-#. settings-schema.json->appearance->title
-msgid "Appearance"
+msgid "Remove from favorites"
 msgstr ""
 
-#. settings-schema.json->menu->title
-msgid "Layout and Content"
+msgid "Add to favorites"
 msgstr ""
 
-#. settings-schema.json->providers->title
-msgid "Search Providers"
+msgid "Uninstall"
 msgstr ""
 
-#. settings-schema.json->extensionProvidersSection->title
-msgid "No search provider extensions found"
+msgid "Home"
 msgstr ""
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
-msgid "Panel"
+msgid "Computer"
 msgstr ""
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
-msgid "Menu"
+msgid "Browse network"
 msgstr ""
 
-#. settings-schema.json->menu-layout->title
-msgid "Layout"
+msgid "Find files..."
 msgstr ""
 
-#. settings-schema.json->menu-content->title
-msgid "Content"
+msgid "Please wait..."
 msgstr ""
 
-#. settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
+msgid "No recent Items"
 msgstr ""
 
-#. settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
+msgid "Click to copy"
 msgstr ""
 
-#. settings-schema.json->menu-editor-button->description
-msgid "Open the menu editor"
+msgid "Trash"
 msgstr ""
 
-#. settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
+msgid "Favorites"
 msgstr ""
 
-#. settings-schema.json->resetCategoryOrder-button->description
+msgid "Recent"
+msgstr ""
+
+msgid "Home folder"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
 msgid "Reset category order"
 msgstr ""
 
-#. settings-schema.json->menu-icon-custom->description
+msgid "light skin tone"
+msgstr ""
+
+msgid "medium-light skin tone"
+msgstr ""
+
+msgid "medium skin tone"
+msgstr ""
+
+msgid "medium-dark skin tone"
+msgstr ""
+
+msgid "dark skin tone"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr ""
+
+msgid "Open with"
+msgstr ""
+
+msgid "Other application..."
+msgstr ""
+
+msgid "Open containing folder"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
+msgid "Cinnamenu"
+msgstr ""
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+
+msgid "Behavior"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Layout and Content"
+msgstr ""
+
+msgid "Search Providers"
+msgstr ""
+
+msgid "No search provider extensions found"
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Recent files settings"
+msgstr ""
+
+msgid "Open the menu editor"
+msgstr ""
+
 msgid "Use a custom icon"
 msgstr ""
 
-#. settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
+msgid "Use a custom icon in the panel"
 msgstr ""
 
-#. settings-schema.json->menu-icon->description
-msgid "Icon"
+msgid "Panel icon"
 msgstr ""
 
-#. settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
+msgid "Panel text"
 msgstr ""
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
+msgid "Text to show beside the panel icon"
 msgstr ""
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
-msgid "pixels"
+msgid "Category icon size (pixels)"
 msgstr ""
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
-msgid "Category icon size"
+msgid "Applications list icon size (pixels)"
 msgstr ""
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
-msgid "Applications list icon size"
+msgid "Applications grid icon size (pixels)"
 msgstr ""
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
-msgid "Applications grid icon size"
-msgstr ""
-
-#. settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr ""
 
-#. settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
+msgid "Open menu on hover"
 msgstr ""
 
-#. settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
+msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
 msgid "milliseconds"
 msgstr ""
 
-#. settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr ""
 
-#. settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr ""
-
-#. settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr ""
 
-#. settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr ""
 
-#. settings-schema.json->category-click->description
 msgid "Activate categories on click"
 msgstr ""
 
-#. settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
+msgid "Activate categories on click instead of on hover"
 msgstr ""
 
-#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr ""
+
 msgid "Enable autoscrolling in application list"
 msgstr ""
 
-#. settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application "
-"list."
-msgstr ""
-
-#. settings-schema.json->enable-bookmarks->description
 msgid "Show web bookmarks"
 msgstr ""
 
-#. settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 
-#. settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr ""
 
-#. settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
-
-#. settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
 msgstr ""
 
-#. settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+msgid "Include search provider results in searches"
 msgstr ""
 
-#. settings-schema.json->get-providers->description
 msgid "Example Search Providers"
 msgstr ""
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
-msgid "Startup applications view mode"
+msgid "Open menu on category:"
 msgstr ""
 
-#. settings-schema.json->startup-view-mode->options
 msgid "List"
 msgstr ""
 
-#. settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr ""
 
-#. settings-schema.json->apps-grid-column-count->units
+msgid "Always open the menu with this category selected"
+msgstr ""
+
 msgid "columns"
 msgstr ""
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
 msgstr ""
 
-#. settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
 msgstr ""
 
-#. settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
+msgid "Show bookmarks and places category in the menu"
 msgstr ""
 
-#. settings-schema.json->show-application-icons->description
 msgid "Show application icons"
 msgstr ""
 
-#. settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr ""
-
-#. settings-schema.json->show-category-icons->description
 msgid "Show category icons"
 msgstr ""
 
-#. settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr ""
-
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr ""
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr ""
-
-#. settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application descriptions under titles"
 msgstr ""
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application"
-" buttons."
-msgstr ""
-
-#. settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
 msgstr ""
 
-#. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
-#. settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
 msgstr ""
 
-#. settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
 msgstr ""
 
-#. settings-schema.json->custom-menu-height->units
-msgid "px"
+msgid "Custom menu height (pixels)"
 msgstr ""
 
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
-msgid "Custom menu height"
+msgid "Applications view mode"
+msgstr ""
+
+msgid "View applications as list or grid"
+msgstr ""
+
+msgid "Application description placement"
+msgstr ""
+
+msgid "Tooltips"
+msgstr ""
+
+msgid "Under titles"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Choose where to show application descriptions"
+msgstr ""
+
+msgid "Sidebar location"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Choose where to show the sidebar"
+msgstr ""
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+msgid "Show favorites on sidebar"
+msgstr ""
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+
+msgid "Show recent items"
+msgstr ""
+
+msgid "Show recent items category in the menu"
+msgstr ""
+
+msgid "Show favorite apps category"
+msgstr ""
+
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+msgid "Show home folder"
+msgstr ""
+
+msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Last used category"
+msgstr ""
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+
+msgid "Show hidden files"
+msgstr ""
+
+msgid "Show hidden files in folder view"
+msgstr ""
+
+msgid "Emoji search"
+msgstr ""
+
+msgid "Show emojis in search results"
+msgstr ""
+
+msgid "Web search option"
+msgstr ""
+
+msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Search home folder"
+msgstr ""
+
+msgid "When searching, also search my home folder for files"
+msgstr ""
+
+msgid "Web bookmarks search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+
+msgid "Wikipedia search"
+msgstr ""
+
+msgid "Show some Wikipedia results"
+msgstr ""
+
+msgid "Wikipedia language"
+msgstr ""
+
+msgid "Use a custom icon size"
+msgstr ""
+
+msgid "Use a custom size for the panel icon"
+msgstr ""
+
+msgid "Panel icon size (pixels)"
+msgstr ""
+
+msgid "Choose a custom size for the panel icon"
+msgstr ""
+
+msgid "Sidebar icon size (pixels)"
+msgstr ""
+
+msgid "Use sidebar box style"
+msgstr ""
+
+msgid "Use a sidebar box style"
+msgstr ""
+
+msgid "Use tile style"
+msgstr ""
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
 msgstr ""

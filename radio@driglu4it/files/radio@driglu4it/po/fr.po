@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-14 23:43+0100\n"
+"PO-Revision-Date: 2020-02-14 23:49+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. metadata.json->name
+#: applet.js:97 applet.js:125
+msgid "Radio++"
+msgstr "Radio++"
+
+#: applet.js:109
+#, javascript-format
+msgid "Playing %s"
+msgstr "À l'écoute de %s"
+
+#: applet.js:122
+msgid "Stop"
+msgstr "Arrêt"
+
+#: applet.js:135
+msgid "Stop Radio++"
+msgstr "Arrêt de Radio++"
+
+#. metadata.json->description
+msgid ""
+"This simple radio for Cinnamon. Require moc player. In setting you may add, "
+"edit and remove stations."
+msgstr ""
+"Simple Poste de Radio pour Cinnamon. Nécessite l'installation du lecteur "
+"audio moc. Dans la configuration vous pouvez ajouter, éditer et supprimer "
+"des stations de web-radios."
+
+#. settings-schema.json->page1->title
+#. settings-schema.json->tree->description
+msgid "List of stations"
+msgstr "Liste des stations"
+
+#. settings-schema.json->page2->title
+#. settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radio"
+
+#. settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
+msgstr "Couleur de l'icône symbolique"
+
+#. settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Titre"
+
+#. settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. settings-schema.json->tree->columns->title
+msgid "Include of list"
+msgstr "Afficher dans le menu"
+
+#. settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Type"
+
+#. settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Icône symbolique"
+
+#. settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Icône en couleurs"
+
+#. settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Icône bicolore"
+
+#. settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Couleur de l'icône symbolique durant l'écoute d'une radio"

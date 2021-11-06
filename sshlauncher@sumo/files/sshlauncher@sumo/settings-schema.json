@@ -1,0 +1,27 @@
+{
+    "headAppearance":
+    { "type": "header"
+    , "description": "Appearance"
+    },
+    "themeIcon":
+    { "type": "checkbox"
+    , "default": true
+    , "description": "Use icon from your icon theme"
+    },
+    "symbolicIcon":
+    { "type": "checkbox"
+    , "default": false
+    , "dependency": "themeIcon"
+    , "description": "Use symbolic icon"
+    },
+    "headFunc":
+    { "type": "header"
+    , "description": "Functionality"
+    },
+    "customCommand":
+    { "type": "entry"
+    , "default": ""
+    , "description": "Use custom command for opening terminal"
+    , "tooltip": "Usually it should end with -e so it will execute the supplied ssh command, check your chosen terminal's manual."
+    }
+}

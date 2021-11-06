@@ -43,21 +43,11 @@ if (typeof require !== 'undefined') {
     PanelMenu = AppletDir.panelMenu;
 }
 
-let start = GLib.get_monotonic_time();
-
-let cpus = [];
-let selectors = [];
-let box;
-let summary;
-let atomic = false;
 const DEFAULT_STYLE = "2";
 const DEFAULT_DIGIT_TYPE = "0";
 const DEFAULT_CPUS = "0";
 // global settings variables;
 
-let settings;
-
-let summary_only = false;
 let refresh_time = 2000;
 let background = '#FFFFFF80';
 let style = DEFAULT_STYLE;
@@ -156,7 +146,7 @@ Panel_Indicator.prototype = {
         this.graph = new St.DrawingArea({reactive: false});
         this.graph.height = height;
         this.box = new St.BoxLayout();
-        this.graph.connect('repaint', Lang.bind(this, this._draw));
+        this.repaint_id = this.graph.connect('repaint', Lang.bind(this, this._draw));
         this.box.connect('show', Lang.bind(this.graph, function() {
             this.queue_repaint();
         }));
@@ -180,7 +170,7 @@ Panel_Indicator.prototype = {
         };
 
         this._onChange();
-        this._parent.connect('cur-changed', Lang.bind(this, this._onChange));
+        this.cur_changed_id = this._parent.connect('cur-changed', Lang.bind(this, this._onChange));
     },
 
     _draw: function() {
@@ -239,7 +229,6 @@ Panel_Indicator.prototype = {
         }
     },
     _onButtonPress: function(actor, event) {
-        global.logError("test "+ actor.orientation);
         if ((this.menu._orientation == 0))
             this.menu.setOrientation(St.Side.BOTTOM);
         else if ((this.menu._orientation == 2))
@@ -260,6 +249,17 @@ Panel_Indicator.prototype = {
         }
         this.menu.toggle();
         return true;
+    },
+
+    _destroy: function() {
+        if (this.repaint_id > 0) {
+            this.graph.disconnect(this.repaint_id);
+            this.repaint_id = 0;
+        }
+        if (this.cur_changed_id > 0) {
+            this._parent.disconnect(this.cur_changed_id);
+            this.cur_changed_id = 0;
+        }
     }
 };
 
@@ -275,8 +275,8 @@ CpufreqSelectorBase.prototype = {
         this.get_avail();
         this.get_cur();
         this.indicator = new Panel_Indicator(cpu, this, orientation);
-        if ('timeout' in this)
-            Mainloop.source_remove(this.timeout);
+        // if ('timeout' in this)
+            // Mainloop.source_remove(this.timeout);
         this.timeout = Mainloop.timeout_add(refresh_time, Lang.bind(this, this.update));
     },
 
@@ -317,6 +317,18 @@ CpufreqSelectorBase.prototype = {
         if (old_freq != this.cur_freq || old_governor != this.cur_governor)
             this.emit('cur-changed');
         return true;
+    },
+
+    _destroy: function() {
+        if (this.indicator) {
+            this.indicator._destroy();
+            this.indicator = null;
+        }
+
+        if (this.timeout) {
+            Mainloop.source_remove(this.timeout);
+            this.timeout = 0;
+        }
     }
 };
 Signals.addSignalMethods(CpufreqSelectorBase.prototype);
@@ -327,13 +339,26 @@ function CpufreqSelector() {
 CpufreqSelector.prototype = {
     __proto__: CpufreqSelectorBase.prototype,
 
+    _init: function(cpu, orientation, selectors) {
+        this.orientation = orientation;
+        this.selectors = selectors
+        this.cpunum = cpu.replace(/cpu/, '');
+        this.cpufreq_path = cpu_path + '/' + cpu + '/cpufreq/';
+        this.get_avail();
+        this.get_cur();
+        this.indicator = new Panel_Indicator(cpu, this, orientation);
+        // if ('timeout' in this)
+            // Mainloop.source_remove(this.timeout);
+        this.timeout = Mainloop.timeout_add(refresh_time, Lang.bind(this, this.update));
+    },
+
     get_avail: function() {
         this.max = 0;
         this.min = 0;
         let freqs = {};
         let governors = {};
-        for (let i in selectors) {
-            let selector = selectors[i];
+        for (let i in this.selectors) {
+            let selector = this.selectors[i];
             this.max += selector.max;
             this.min += selector.min;
             for (let j in selector.avail_freqs)
@@ -341,8 +366,8 @@ CpufreqSelector.prototype = {
             for (let j in selector.avail_governors)
                 governors[selector.avail_governors[j]] = 1;
         }
-        this.max /= selectors.length;
-        this.min /= selectors.length;
+        this.max /= this.selectors.length;
+        this.min /= this.selectors.length;
         this.avail_freqs = [];
         this.avail_governors = [];
         for (let freq in freqs)
@@ -357,14 +382,14 @@ CpufreqSelector.prototype = {
         this.cur_governor = [];
         let freqs = {};
         let governors = {};
-        for (let i in selectors) {
-            let selector = selectors[i];
+        for (let i in this.selectors) {
+            let selector = this.selectors[i];
             this.avg_freq += selector.avg_freq;
             freqs[selector.avg_freq] = 1;
             for (let j in selector.cur_governor)
                 governors[selector.cur_governor[j]] = 1;
         }
-        this.avg_freq /= selectors.length;
+        this.avg_freq /= this.selectors.length;
         for (let freq in freqs)
             this.cur_freq.push(freq);
         for (let governor in governors)
@@ -372,49 +397,12 @@ CpufreqSelector.prototype = {
     },
 
     set: function(type, index) {
-        for (let i in selectors)
-            selectors[i].set(type, index);
+        for (let i in this.selectors)
+            this.selectors[i].set(type, index);
     },
 };
 
-function add_cpus_frm_files(cpu_child) {
-    try {
-        let pattern = /^cpu[0-9]+/
-        for (let i in cpu_child)
-            if (pattern.test(cpu_child[i].get_name()))
-                cpus.push(cpu_child[i].get_name());
-        for (let i in cpus) {
-            selectors[i] = new CpufreqSelectorBase(cpus[i],this.orientation);
-            box.add_actor(selectors[i].indicator.actor);
-            Main.panel._menus.addMenu(selectors[i].indicator.menu);
-        }
-        summary = new CpufreqSelector('cpu');
-        box.add_actor(summary.indicator.actor);
-        Main.panel._menus.addMenu(summary.indicator.menu);
-        let visible = [];
-        for (let i in selectors)
-            visible[i] = true;
-        visible[-1] = true;
-        switch (cpus_to_monitor) {
-            case 0:
-                break;
-            case 2:
-                for (let i = 0; i < visible.length; i++) {
-                    visible[i] = false;
-                }
-                break;
-            case 1:
-                visible[-1] = false;
-                break;
-        }
-        for (let i in selectors)
-            selectors[i].indicator.actor.visible = visible[i];
-        summary.indicator.actor.visible = visible[-1];
-    } catch (e) {
-        global.logError(e);
-    }
-    atomic=false;
-}
+
 
 function main(metadata, orientation, panel_height, instance_id) {
     let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
@@ -434,10 +422,15 @@ MyApplet.prototype = {
                     this.uuid = metadata['uuid'];
                     this.orientation = orientation;
                     this.instance_id = instance_id;
+
+                    this.cpu_ids = [];
+                    this.selectors = [];
+                    this.atomic = false;
+
+                    this.summary = null;
+                    this.main_box = null;
+
                     this._initialize_settings();
-                    this.config_menu_item = new Applet.MenuItem(_("Configure Applet"), 'system-run-symbolic',
-                                                    Lang.bind(this, this._on_open_settings));
-                    this._applet_context_menu.addMenuItem(this.config_menu_item);
                     this.rebuild();
                     Main.themeManager.connect('theme-set', Lang.bind(this, function() {
                         Mainloop.timeout_add(500, Lang.bind(this, this.rebuild));
@@ -525,43 +518,91 @@ MyApplet.prototype = {
             mid_color = this.med_color;
             hi_color = this.high_color;
 
-            if (atomic || !this.myactor)
+            if (this.atomic)
                 return;
-            atomic = true; // hackity hack - make sure only one rebuild is happening at a time,
-            try { //                         else we get lots more from setting changes
-                this.actor.remove_actor(this.myactor);
-                box.destroy();
-                this.myactor.destroy();
-                cpus = [];
-                selectors = [];
-            } catch (e) {
-                // this will error on first load, ignore?
+
+            this.atomic = true; // hackity hack - make sure only one rebuild is happening at a time,
+            if (this.main_box) {
+                this.actor.remove_actor(this.main_box);
             }
+
+            for (let i in this.selectors) {
+                this.selectors[i]._destroy();
+            }
+
+            if (this.summary) {
+                this.summary._destroy()
+            }
+
+            this.cpu_ids = [];
+            this.selectors = [];
 
             try {
                 if (this._panelHeight)
                     height = Math.floor(this._panelHeight - (this._panelHeight * .05));
-                this.myactor = new St.BoxLayout({ pack_start: true });
-                box = this.myactor;
-                this.actor.add(this.myactor);
-                FileUtils.listDirAsync(cpu_dir, Lang.bind(this, add_cpus_frm_files));
-                let finish = GLib.get_monotonic_time();
-                log('cpufreq: use ' + (finish - start));
+
+                this.main_box = new St.BoxLayout({ pack_start: true });
+                this.actor.add(this.main_box);
+                FileUtils.listDirAsync(cpu_dir, Lang.bind(this, this.add_cpus_frm_files));
             } catch (e) {
                 global.logError(e);
             }
+        },
+
+        add_cpus_frm_files(cpu_child) {
+            try {
+                let pattern = /^cpu[0-9]+/
+                for (let i in cpu_child)
+                    if (pattern.test(cpu_child[i].get_name()))
+                        this.cpu_ids.push(cpu_child[i].get_name());
+                for (let i in this.cpu_ids) {
+                    this.selectors[i] = new CpufreqSelectorBase(this.cpu_ids[i],this.orientation);
+                    this.main_box.add_actor(this.selectors[i].indicator.actor);
+                    Main.panel._menus.addMenu(this.selectors[i].indicator.menu);
+                }
+                this.summary = new CpufreqSelector('cpu', this.orientation, this.selectors);
+                this.main_box.add_actor(this.summary.indicator.actor);
+                Main.panel._menus.addMenu(this.summary.indicator.menu);
+                let visible = [];
+                for (let i in this.selectors)
+                    visible[i] = true;
+                visible[-1] = true;
+                switch (cpus_to_monitor) {
+                    case 0:
+                        break;
+                    case 2:
+                        for (let i = 0; i < visible.length; i++) {
+                            visible[i] = false;
+                        }
+                        break;
+                    case 1:
+                        visible[-1] = false;
+                        break;
+                }
+                for (let i in this.selectors)
+                    this.selectors[i].indicator.actor.visible = visible[i];
+                this.summary.indicator.actor.visible = visible[-1];
+            } catch (e) {
+                global.logError(e);
+            }
+            this.atomic = false;
         },
 
         on_panel_height_changed: function() {
             this.rebuild();
         },
 
-        _on_open_settings: function () {
-        try {
-            let command = "cinnamon-settings applets " + this.uuid;
-            Main.Util.spawnCommandLine(command);
-        } catch (e) {
-            global.logError(e);
+        on_applet_removed_from_panel: function() {
+            if (this.main_box) {
+                this.actor.remove_actor(this.main_box);
+            }
+
+            for (let i in this.selectors) {
+                this.selectors[i]._destroy();
+            }
+
+            if (this.summary) {
+                this.summary._destroy()
+            }
         }
-    },
 };
