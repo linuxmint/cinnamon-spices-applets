@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 #: applet.js:42
-msgid "Your percieved location."
+msgid "Your perceived location."
 msgstr "Az ön észlelt helye."
 
 #. localip@mrieracrespi->metadata.json->description
