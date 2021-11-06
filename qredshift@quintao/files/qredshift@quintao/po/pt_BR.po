@@ -1,4 +1,4 @@
-# Portuguese translation for qredshift@quintao.
+# Brazilian Portuguese translation for qredshift@quintao.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Raphael Quintao <raphaelquintao@gmail.com>, 2020.
@@ -8,31 +8,31 @@ msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2020-01-04 14:05-0300\n"
-"Last-Translator: Raphael Quintao <raphaelquintao@gmail.com>\n"
-"Language-Team: Raphael Quintao\n"
+"PO-Revision-Date: 2021-11-05 17:59-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT NÃO INSTALADO!"
+msgstr "REDSHIFT NÃO ESTÁ INSTALADO!"
 
 #: applet.js:116
 msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Requer Redshift: sudo apt-get install redshift"
+msgstr "É necessário instalar o Redshift: sudo apt-get install redshift"
 
 #: applet.js:119 applet.js:159
 msgid "Reload Applet"
-msgstr "Reiniciar Applet"
+msgstr "Reiniciar o applet"
 
 #: applet.js:164
 msgid "Recompile Translations"
-msgstr "Recompilar Traduções"
+msgstr "Recompilar as traduções"
 
 #. settings-schema.json->enabled->description
 #: applet.js:356
@@ -49,7 +49,7 @@ msgstr "Brilho:"
 
 #: applet.js:387 applet.js:635
 msgid "Gamma:"
-msgstr "Gama:"
+msgstr "Gama de cores:"
 
 #. settings-schema.json->enabledNight->description
 #: applet.js:402
@@ -59,7 +59,7 @@ msgstr "Modo noturno"
 #. settings-schema.json->iconLabel->description
 #: applet.js:464
 msgid "Show Label"
-msgstr "Mostrar Rótulo"
+msgstr "Mostrar rótulo"
 
 #: applet.js:618
 msgid "On"
@@ -107,8 +107,9 @@ msgid ""
 "Sets brightness, gamma levels and color temperature with Redshift. "
 "This applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
-"Define o brilho, os níveis de gama e a temperatura da cor com Redshift. "
-"Este applet entra em conflito com o redshift-gtk, certifique-se de removê-lo."
+"Ajuste o brilho, os níveis de gama e a temperatura da cor com Redshift. Este "
+"applet entra em conflito com o pacote redshift-gtk, portanto certifique-se "
+"de que ele não esteja instalado."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
@@ -140,11 +141,11 @@ msgstr "Opções para a noite"
 
 #. settings-schema.json->keybind-section->title
 msgid "Key Bindings"
-msgstr "Combinações de Teclas"
+msgstr "Atalhos de teclado"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
-msgstr "Opções de Localização"
+msgstr "Opções de localização"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
@@ -180,15 +181,15 @@ msgstr "vidmode"
 
 #. settings-schema.json->adjustmentMethod->tooltip
 msgid "Method to use to set color temperature"
-msgstr "Método usado para ajustar a temperatura"
+msgstr "Método usado para ajustar a temperatura da cor"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
-msgstr "Acão do scroll no ícone do applet"
+msgstr "Ação ao rolar sobre o ícone do applet"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Disabled"
-msgstr "Desabilitado"
+msgstr "Desativado"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->keyToggle->description
@@ -211,6 +212,14 @@ msgstr "Aumentar temperatura"
 msgid "Decrease temperature level"
 msgstr "Diminuir temperatura"
 
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Aumentar a gama de cores"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Diminuir a gama de cores"
+
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
 msgstr "Brilho"
@@ -218,11 +227,11 @@ msgstr "Brilho"
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
 msgid "Gamma"
-msgstr "Gama"
+msgstr "Gama de cores"
 
 #. settings-schema.json->labelScrollAction->tooltip
 msgid "Action when scroll on applet icon."
-msgstr "Ação ao rolar o scroll do mouse no ícone do applet."
+msgstr "Ação ao rolar o mouse sobre o ícone do applet."
 
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
@@ -241,7 +250,7 @@ msgstr "Localização remota"
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Geoclue nativo do redshift pode tornar sua experiência lenta."
+msgstr "Localização remota no Redshift pode tornar sua experiência lenta."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
@@ -260,22 +269,20 @@ msgid ""
 "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
 msgstr ""
-"Geoclue nativo do redshift pode tornar sua experiência lenta.\n"
-"Usando: https://geolocation-db.com/"
+"Localização remota no Redshift pode tornar sua experiência lenta.\n"
+"Prefira usar: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
 msgstr ""
-"* Clique com o botão direito do mouse nos sliders para redefinir o valor "
-"padrão (neutro)."
+"* Clique com o botão direito do mouse nos controles deslizantes para "
+"redefinir o valor padrão (neutro)."
 
 #. settings-schema.json->textInfo->description
 msgid ""
 "If you like and use this applet take the time to visit it's page on Cinnamon "
 "Spices and give it a star. You only need a github account to do this."
 msgstr ""
-"Se você gosta e usa este applet, visite a página do Cinnamon Spices e dê uma "
-"estrela. Você só precisa de uma conta no GitHub para fazer isso."
-
-#~ msgid "Sec"
-#~ msgstr "Seg."
+"Se você gosta e usa este applet, reserve um tempo para visitar o site dos "
+"Applets do Cinnamon e oferecer uma estrela para esse applet. Você só precisa "
+"de uma conta no GitHub para fazer isso."
