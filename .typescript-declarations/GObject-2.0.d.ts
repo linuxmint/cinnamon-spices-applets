@@ -58,6 +58,10 @@ declare namespace imports.gi.GObject {
 		 */
 		get_flags(): BindingFlags;
 		/**
+		 * @deprecated
+		 * Use g_binding_dup_source() for a safer version of this
+		 * function.
+		 * 
 		 * Retrieves the #GObject instance used as the source of the binding.
 		 * 
 		 * A #GBinding can outlive the source #GObject as the binding does not hold a
@@ -78,6 +82,10 @@ declare namespace imports.gi.GObject {
 		 */
 		get_source_property(): string;
 		/**
+		 * @deprecated
+		 * Use g_binding_dup_target() for a safer version of this
+		 * function.
+		 * 
 		 * Retrieves the #GObject instance used as the target of the binding.
 		 * 
 		 * A #GBinding can outlive the target #GObject as the binding does not hold a
@@ -436,9 +444,9 @@ declare namespace imports.gi.GObject {
 		 * "any_signal", which means to disconnect any signal with matching
 		 * callback and data, or "any_signal::signal_name", which only
 		 * disconnects the signal named "signal_name".
-		 * @param signal_spec the spec for the first signal
+		 * @param id returned ID of the connect function
 		 */
-		disconnect(signal_spec: string): void;
+		disconnect(id: number): void;
 		/**
 		 * This is a variant of g_object_get_data() which returns
 		 * a 'duplicate' of the value. #dup_func defines the
@@ -1009,6 +1017,12 @@ declare namespace imports.gi.GObject {
 		 * It is important to note that you must use
 		 * [canonical parameter names][canonical-parameter-names] as
 		 * detail strings for the notify signal.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - pspec: the #GParamSpec of the property which changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "notify", callback: (owner: this, pspec: ParamSpec) => void): number;
 
@@ -1087,6 +1101,10 @@ declare namespace imports.gi.GObject {
 		 */
 		public static new_with_properties(object_type: GObject.Type, n_properties: number, names: string[], values: Value[]): Object;
 		/**
+		 * @deprecated
+		 * Use g_object_new_with_properties() instead.
+		 * deprecated. See #GParameter for more information.
+		 * 
 		 * Creates a new instance of a #GObject subtype and sets its properties.
 		 * 
 		 * Construction parameters (see #G_PARAM_CONSTRUCT, #G_PARAM_CONSTRUCT_ONLY)
@@ -3324,6 +3342,10 @@ declare namespace imports.gi.GObject {
 		public constructor(options?: Partial<TypeClassInitOptions>);
 		public readonly g_type: GObject.Type;
 		/**
+		 * @deprecated
+		 * Use the G_ADD_PRIVATE() macro with the `G_DEFINE_*`
+		 *   family of macros to add instance private data to a type
+		 * 
 		 * Registers a private structure for an instantiatable type.
 		 * 
 		 * When an object is allocated, the private structures for
@@ -3729,6 +3751,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public get_boxed(): any | null;
 		/**
+		 * @deprecated
+		 * This function's return type is broken, see g_value_get_schar()
+		 * 
 		 * Do not use this function; it is broken on platforms where the %char
 		 * type is unsigned, such as ARM and PowerPC.  See g_value_get_schar().
 		 * 
@@ -3867,11 +3892,17 @@ declare namespace imports.gi.GObject {
 		 */
 		public set_boxed(v_boxed: any | null): void;
 		/**
+		 * @deprecated
+		 * Use g_value_take_boxed() instead.
+		 * 
 		 * This is an internal function introduced mainly for C marshallers.
 		 * @param v_boxed duplicated unowned boxed value to be set
 		 */
 		public set_boxed_take_ownership(v_boxed: any | null): void;
 		/**
+		 * @deprecated
+		 * This function's input type is broken, see g_value_set_schar()
+		 * 
 		 * Set the contents of a %G_TYPE_CHAR #GValue to #v_char.
 		 * @param v_char character value to be set
 		 */
@@ -3945,6 +3976,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public set_object(v_object: Object | null): void;
 		/**
+		 * @deprecated
+		 * Use g_value_take_object() instead.
+		 * 
 		 * This is an internal function introduced mainly for C marshallers.
 		 * @param v_object object value to be set
 		 */
@@ -3955,6 +3989,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public set_param(param: ParamSpec | null): void;
 		/**
+		 * @deprecated
+		 * Use g_value_take_param() instead.
+		 * 
 		 * This is an internal function introduced mainly for C marshallers.
 		 * @param param the #GParamSpec to be set
 		 */
@@ -3993,6 +4030,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public set_string(v_string: string | null): void;
 		/**
+		 * @deprecated
+		 * Use g_value_take_string() instead.
+		 * 
 		 * This is an internal function introduced mainly for C marshallers.
 		 * @param v_string duplicated unowned string to be set
 		 */
@@ -4099,6 +4139,9 @@ declare namespace imports.gi.GObject {
 	class ValueArray {
 		public constructor(options?: Partial<ValueArrayInitOptions>);
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_sized_new() instead.
+		 * 
 		 * Allocate and initialize a new #GValueArray, optionally preserve space
 		 * for #n_prealloced elements. New arrays always contain 0 elements,
 		 * regardless of the value of #n_prealloced.
@@ -4116,6 +4159,9 @@ declare namespace imports.gi.GObject {
 		public values: Value;
 		public readonly n_prealloced: number;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_append_val() instead.
+		 * 
 		 * Insert a copy of #value as last element of #value_array. If #value is
 		 * %NULL, an uninitialized value is appended.
 		 * @param value #GValue to copy into #GValueArray, or %NULL
@@ -4123,22 +4169,34 @@ declare namespace imports.gi.GObject {
 		 */
 		public append(value: Value | null): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_ref() instead.
+		 * 
 		 * Construct an exact copy of a #GValueArray by duplicating all its
 		 * contents.
 		 * @returns Newly allocated copy of #GValueArray
 		 */
 		public copy(): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_unref() instead.
+		 * 
 		 * Free a #GValueArray including its contents.
 		 */
 		public free(): void;
 		/**
+		 * @deprecated
+		 * Use g_array_index() instead.
+		 * 
 		 * Return a pointer to the value at #index_ containd in #value_array.
 		 * @param index_ index of the value of interest
 		 * @returns pointer to a value at #index_ in #value_array
 		 */
 		public get_nth(index_: number): Value;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_insert_val() instead.
+		 * 
 		 * Insert a copy of #value at specified position into #value_array. If #value
 		 * is %NULL, an uninitialized value is inserted.
 		 * @param index_ insertion position, must be <= value_array->;n_values
@@ -4147,6 +4205,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public insert(index_: number, value: Value | null): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_prepend_val() instead.
+		 * 
 		 * Insert a copy of #value as first element of #value_array. If #value is
 		 * %NULL, an uninitialized value is prepended.
 		 * @param value #GValue to copy into #GValueArray, or %NULL
@@ -4154,6 +4215,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public prepend(value: Value | null): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_remove_index() instead.
+		 * 
 		 * Remove the value at position #index_ from #value_array.
 		 * @param index_ position of value to remove, which must be less than
 		 *     #value_array->n_values
@@ -4161,6 +4225,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public remove(index_: number): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_sort().
+		 * 
 		 * Sort #value_array using #compare_func to compare the elements according to
 		 * the semantics of #GCompareFunc.
 		 * 
@@ -4171,6 +4238,9 @@ declare namespace imports.gi.GObject {
 		 */
 		public sort(compare_func: GLib.CompareFunc): ValueArray;
 		/**
+		 * @deprecated
+		 * Use #GArray and g_array_sort_with_data().
+		 * 
 		 * Sort #value_array using #compare_func to compare the elements according
 		 * to the semantics of #GCompareDataFunc.
 		 * 

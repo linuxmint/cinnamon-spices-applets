@@ -68,11 +68,29 @@ declare namespace imports.gi.ClutterX11 {
 		 * If you sub-class and change the paint method so this isn't true
 		 * then you must also provide your own damage signal handler to
 		 * queue a redraw that blocks this default behaviour.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: The top left x position of the damage region 
+		 *  - y: The top left y position of the damage region 
+		 *  - width: The width of the damage region 
+		 *  - height: The height of the damage region 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "queue-damage-redraw", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 		/**
 		 * The ::update-area signal is emitted to ask the texture to update its
 		 * content from its source pixmap.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: X coordinate of the area to update 
+		 *  - y: Y coordinate of the area to update 
+		 *  - width: width of the area to update 
+		 *  - height: height of the area to update 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update-area", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 

@@ -2111,6 +2111,9 @@ declare namespace imports.gi.Graphene {
 		 */
 		public offset_r(d_x: number, d_y: number): Rect;
 		/**
+		 * @deprecated
+		 * Use graphene_rect_round_extents() instead
+		 * 
 		 * Rounds the origin and size of the given rectangle to
 		 * their nearest integer values; the rounding is guaranteed
 		 * to be large enough to have an area bigger or equal to the
@@ -2151,6 +2154,9 @@ declare namespace imports.gi.Graphene {
 		 */
 		public round_extents(): Rect;
 		/**
+		 * @deprecated
+		 * Use graphene_rect_round() instead
+		 * 
 		 * Rounds the origin and the size of the given rectangle to
 		 * their nearest integer values; the rounding is guaranteed
 		 * to be large enough to contain the original rectangle.

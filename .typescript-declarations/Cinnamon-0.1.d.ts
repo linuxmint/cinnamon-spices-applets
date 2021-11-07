@@ -271,6 +271,13 @@ declare namespace imports.gi.Cinnamon {
 		 * 
 		 * Note that #box is #self's content box (qv
 		 * st_theme_node_get_content_box()), NOT its allocation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - box: #self's content box 
+		 *  - flags: the allocation flags. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "allocate", callback: (owner: this, box: Clutter.ActorBox, flags: Clutter.AllocationFlags) => void): number;
 		/**
@@ -283,6 +290,13 @@ declare namespace imports.gi.Cinnamon {
 		 * #alloc's fields are initialized to 0, so unless you have a fixed
 		 * height specified (via #ClutterActor:height or CSS), you must
 		 * connect to this signal and fill in the values.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - for_width: as in clutter_actor_get_preferred_height() 
+		 *  - alloc: a {@link GenericContainerAllocation} to be filled in 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "get-preferred-height", callback: (owner: this, for_width: number, alloc: GenericContainerAllocation) => void): number;
 		/**
@@ -295,6 +309,13 @@ declare namespace imports.gi.Cinnamon {
 		 * #alloc's fields are initialized to 0, so unless you have a fixed
 		 * width specified (via #ClutterActor:width or CSS), you must
 		 * connect to this signal and fill in the values.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - for_height: as in clutter_actor_get_preferred_width() 
+		 *  - alloc: a {@link GenericContainerAllocation} to be filled in 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "get-preferred-width", callback: (owner: this, for_height: number, alloc: GenericContainerAllocation) => void): number;
 

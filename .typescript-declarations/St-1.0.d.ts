@@ -31,6 +31,11 @@ declare namespace imports.gi.St {
 		set_values(value: number, lower: number, upper: number, step_increment: number, page_increment: number, page_size: number): void;
 		/**
 		 * Emitted when any of the adjustment values have changed
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -501,6 +506,12 @@ declare namespace imports.gi.St {
 		/**
 		 * Emitted when the user activates the button, either with a mouse press and
 		 * release or with the keyboard.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - clicked_button: the mouse button that was used 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "clicked", callback: (owner: this, clicked_button: number) => void): number;
 
@@ -694,10 +705,20 @@ declare namespace imports.gi.St {
 		set_text(text: string | null): void;
 		/**
 		 * Emitted when the primary icon is clicked
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "primary-icon-clicked", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the secondary icon is clicked
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "secondary-icon-clicked", callback: (owner: this) => void): number;
 
@@ -808,6 +829,9 @@ declare namespace imports.gi.St {
 	class Group {
 		public constructor(options?: Partial<GroupInitOptions>);
 		/**
+		 * @deprecated
+		 * Use st_widget_new() instead.
+		 * 
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
 		 */
@@ -2229,6 +2253,9 @@ declare namespace imports.gi.St {
 		 */
 		change_style_pseudo_class(pseudo_class: string, add: boolean): void;
 		/**
+		 * @deprecated
+		 * Use clutter_actor_destroy_all_children instead
+		 * 
 		 * Destroys all child actors from #widget.
 		 */
 		destroy_children(): void;
@@ -2552,11 +2579,21 @@ declare namespace imports.gi.St {
 		/**
 		 * Emitted when the user has requested a context menu (eg, via a
 		 * keybinding)
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "popup-menu", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the style information that the widget derives from the
 		 * theme changes
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "style-changed", callback: (owner: this) => void): number;
 
