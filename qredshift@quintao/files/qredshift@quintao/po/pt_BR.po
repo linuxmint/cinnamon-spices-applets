@@ -49,7 +49,7 @@ msgstr "Brilho:"
 
 #: applet.js:387 applet.js:635
 msgid "Gamma:"
-msgstr "Gama de cores:"
+msgstr "Gama:"
 
 #. settings-schema.json->enabledNight->description
 #: applet.js:402
