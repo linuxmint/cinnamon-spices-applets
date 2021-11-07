@@ -340,6 +340,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		read_pixels(): number;
 		/**
+		 * @deprecated
+		 * Use g_object_ref().
+		 * 
 		 * Adds a reference to a pixbuf.
 		 * @returns The same as the #pixbuf argument.
 		 */
@@ -683,6 +686,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		set_option(key: string, value: string): boolean;
 		/**
+		 * @deprecated
+		 * Use g_object_unref().
+		 * 
 		 * Removes a reference from a pixbuf.
 		 */
 		unref(): void;
@@ -991,6 +997,9 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		public static new_from_file_at_size(filename: string, width: number, height: number): Pixbuf | null;
 		/**
+		 * @deprecated
+		 * Use `GResource` instead.
+		 * 
 		 * Creates a `GdkPixbuf` from a flat representation that is suitable for
 		 * storing as inline data in a program.
 		 * 
@@ -1322,11 +1331,17 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		is_static_image(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_object_ref().
+		 * 
 		 * Adds a reference to an animation.
 		 * @returns The same as the #animation argument.
 		 */
 		ref(): PixbufAnimation;
 		/**
+		 * @deprecated
+		 * Use g_object_unref().
+		 * 
 		 * Removes a reference from an animation.
 		 */
 		unref(): void;
@@ -1613,6 +1628,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * After this signal is emitted, applications can call
 		 * gdk_pixbuf_loader_get_pixbuf() to fetch the partially-loaded
 		 * pixbuf.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "area-prepared", callback: (owner: this) => void): number;
 		/**
@@ -1624,6 +1644,15 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * Applications can use this signal to know when to repaint
 		 * areas of an image that is being loaded.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - x: X offset of upper-left corner of the updated area. 
+		 *  - y: Y offset of upper-left corner of the updated area. 
+		 *  - width: Width of updated area. 
+		 *  - height: Height of updated area. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "area-updated", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 		/**
@@ -1632,6 +1661,11 @@ declare namespace imports.gi.GdkPixbuf {
 		 * It can be used by different parts of an application to receive
 		 * notification when an image loader is closed by the code that
 		 * drives it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 		/**
@@ -1642,6 +1676,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Applications can call gdk_pixbuf_loader_set_size() in response
 		 * to this signal to set the desired size to which the image
 		 * should be scaled.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - width: the original width of the image 
+		 *  - height: the original height of the image 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "size-prepared", callback: (owner: this, width: number, height: number) => void): number;
 

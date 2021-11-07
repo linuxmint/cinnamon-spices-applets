@@ -8,6 +8,11 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Signal emitted when the app info database for changes (ie: newly installed
 		 * or removed applications).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -116,6 +121,12 @@ declare namespace imports.gi.Gio {
 		 * The ::launch-failed signal is emitted when a #GAppInfo launch
 		 * fails. The startup notification id is provided, so that the launcher
 		 * can cancel the startup notification.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - startup_notify_id: the startup notification id for the failed launch 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "launch-failed", callback: (owner: this, startup_notify_id: string) => void): number;
 		/**
@@ -124,6 +135,13 @@ declare namespace imports.gi.Gio {
 		 * strings to variants (ie a{sv}), which contains additional,
 		 * platform-specific data about this launch. On UNIX, at least the
 		 * "pid" and "startup-notification-id" keys will be present.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - info: the #GAppInfo that was just launched 
+		 *  - platform_data: additional platform-specific data for this launch 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "launched", callback: (owner: this, info: AppInfo, platform_data: GLib.Variant) => void): number;
 
@@ -609,6 +627,13 @@ declare namespace imports.gi.Gio {
 		 */
 		send_notification(id: string | null, notification: Notification): void;
 		/**
+		 * @deprecated
+		 * Use the #GActionMap interface instead.  Never ever
+		 * mix use of this API with use of #GActionMap on the same #application
+		 * or things will go very badly wrong.  This function is known to
+		 * introduce buggy behaviour (ie: signals not emitted on changes to the
+		 * action group), so you should really use #GActionMap instead.
+		 * 
 		 * This used to be how actions were associated with a #GApplication.
 		 * Now there is #GActionMap for that.
 		 * @param action_group a #GActionGroup, or %NULL
@@ -758,12 +783,26 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The ::activate signal is emitted on the primary instance when an
 		 * activation occurs. See g_application_activate().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * The ::command-line signal is emitted on the primary instance when
 		 * a commandline is not handled locally. See g_application_run() and
 		 * the #GApplicationCommandLine documentation for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - command_line: a #GApplicationCommandLine representing the
+		 *     passed commandline 
+		 *  - returns An integer that is set as the exit status for the calling
+		 *   process. See g_application_command_line_set_exit_status(). 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "command-line", callback: (owner: this, command_line: ApplicationCommandLine) => number): number;
 		/**
@@ -808,6 +847,16 @@ declare namespace imports.gi.Gio {
 		 * You can override local_command_line() if you need more powerful
 		 * capabilities than what is provided here, but this should not
 		 * normally be required.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - options: the options dictionary 
+		 *  - returns an exit code. If you have handled your options and want
+		 * to exit the process, return a non-negative option, 0 for success,
+		 * and a positive value for failure. To continue, return -1 to let
+		 * the default option processing continue. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "handle-local-options", callback: (owner: this, options: GLib.VariantDict) => number): number;
 		/**
@@ -816,21 +865,45 @@ declare namespace imports.gi.Gio {
 		 * is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
 		 * 
 		 * The default handler for this signal calls g_application_quit().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE if the signal has been handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "name-lost", callback: (owner: this) => boolean): number;
 		/**
 		 * The ::open signal is emitted on the primary instance when there are
 		 * files to open. See g_application_open() for more information.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - files: an array of #GFiles 
+		 *  - n_files: the length of #files 
+		 *  - hint: a hint provided by the calling instance 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "open", callback: (owner: this, files: File[], n_files: number, hint: string) => void): number;
 		/**
 		 * The ::shutdown signal is emitted only on the registered primary instance
 		 * immediately after the main loop terminates.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "shutdown", callback: (owner: this) => void): number;
 		/**
 		 * The ::startup signal is emitted on the primary instance immediately
 		 * after registration. See g_application_register().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "startup", callback: (owner: this) => void): number;
 
@@ -1931,6 +2004,11 @@ declare namespace imports.gi.Gio {
 		 * Note that the cancelled signal is emitted in the thread that
 		 * the user cancelled from, which may be the main thread. So, the
 		 * cancellable signal should not do something that can block.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancelled", callback: (owner: this) => void): number;
 
@@ -2324,11 +2402,26 @@ declare namespace imports.gi.Gio {
 		authorize_authenticated_peer(stream: IOStream, credentials: Credentials | null): boolean;
 		/**
 		 * Emitted to check if #mechanism is allowed to be used.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mechanism: The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`. 
+		 *  - returns %TRUE if #mechanism can be used to authenticate the other peer, %FALSE if not. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "allow-mechanism", callback: (owner: this, mechanism: string) => boolean): number;
 		/**
 		 * Emitted to check if a peer that is successfully authenticated
 		 * is authorized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - stream: A #GIOStream for the #GDBusConnection. 
+		 *  - credentials: Credentials received from the peer or %NULL. 
+		 *  - returns %TRUE if the peer is authorized, %FALSE if not. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authorize-authenticated-peer", callback: (owner: this, stream: IOStream, credentials: Credentials | null) => boolean): number;
 
@@ -3344,6 +3437,14 @@ declare namespace imports.gi.Gio {
 		 * Upon receiving this signal, you should give up your reference to
 		 * #connection. You are guaranteed that this signal is emitted only
 		 * once.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - remote_peer_vanished: %TRUE if #connection is closed because the
+		 *     remote peer closed its end of the connection 
+		 *  - error: a #GError with more details about the event or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this, remote_peer_vanished: boolean, error: GLib.Error | null) => void): number;
 
@@ -3696,6 +3797,13 @@ declare namespace imports.gi.Gio {
 		 * flags set, no dedicated thread is ever used and the call will be
 		 * handled in the same thread as the object that #interface belongs
 		 * to was exported in.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - invocation: A #GDBusMethodInvocation. 
+		 *  - returns %TRUE if the call is authorized, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "g-authorize-method", callback: (owner: this, invocation: DBusMethodInvocation) => boolean): number;
 
@@ -4472,6 +4580,16 @@ declare namespace imports.gi.Gio {
 		 * This signal is emitted in the
 		 * [thread-default main context][g-main-context-push-thread-default]
 		 * that #manager was constructed in.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object_proxy: The #GDBusObjectProxy on which an interface has properties that are changing. 
+		 *  - interface_proxy: The #GDBusProxy that has properties that are changing. 
+		 *  - changed_properties: A #GVariant containing the properties that changed (type: `a{sv}`). 
+		 *  - invalidated_properties: A %NULL terminated
+		 *   array of properties that were invalidated. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-proxy-properties-changed", callback: (owner: this, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string[]) => void): number;
 		/**
@@ -4483,6 +4601,16 @@ declare namespace imports.gi.Gio {
 		 * This signal is emitted in the
 		 * [thread-default main context][g-main-context-push-thread-default]
 		 * that #manager was constructed in.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object_proxy: The #GDBusObjectProxy on which an interface is emitting a D-Bus signal. 
+		 *  - interface_proxy: The #GDBusProxy that is emitting a D-Bus signal. 
+		 *  - sender_name: The sender of the signal or NULL if the connection is not a bus connection. 
+		 *  - signal_name: The signal name. 
+		 *  - parameters: A #GVariant tuple with parameters for the signal. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-proxy-signal", callback: (owner: this, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant) => void): number;
 
@@ -4923,6 +5051,14 @@ declare namespace imports.gi.Gio {
 		 * except that it is for the enclosing object.
 		 * 
 		 * The default class handler just returns %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - _interface: The #GDBusInterfaceSkeleton that #invocation is for. 
+		 *  - invocation: A #GDBusMethodInvocation. 
+		 *  - returns %TRUE if the call is authorized, %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authorize-method", callback: (owner: this, _interface: DBusInterfaceSkeleton, invocation: DBusMethodInvocation) => boolean): number;
 
@@ -5320,10 +5456,25 @@ declare namespace imports.gi.Gio {
 		 * This signal corresponds to the
 		 * `PropertiesChanged` D-Bus signal on the
 		 * `org.freedesktop.DBus.Properties` interface.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - changed_properties: A #GVariant containing the properties that changed (type: `a{sv}`) 
+		 *  - invalidated_properties: A %NULL terminated array of properties that was invalidated 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "g-properties-changed", callback: (owner: this, changed_properties: GLib.Variant, invalidated_properties: string[]) => void): number;
 		/**
 		 * Emitted when a signal from the remote object and interface that #proxy is for, has been received.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - sender_name: The sender of the signal or %NULL if the connection is not a bus connection. 
+		 *  - signal_name: The name of the signal. 
+		 *  - parameters: A #GVariant tuple with parameters for the signal. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "g-signal", callback: (owner: this, sender_name: string | null, signal_name: string, parameters: GLib.Variant) => void): number;
 
@@ -5609,6 +5760,14 @@ declare namespace imports.gi.Gio {
 		 * before incoming messages on #connection are processed. This means
 		 * that it's suitable to call g_dbus_connection_register_object() or
 		 * similar from the signal handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - connection: A #GDBusConnection for the new connection. 
+		 *  - returns %TRUE to claim #connection, %FALSE to let other handlers
+		 * run. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "new-connection", callback: (owner: this, connection: DBusConnection) => boolean): number;
 
@@ -5881,6 +6040,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_uint64(cancellable: Cancellable | null): number;
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto() instead, which has more
+		 *     consistent behaviour regarding the stop character.
+		 * 
 		 * Reads a string from the data input stream, up to the first
 		 * occurrence of any of the stop characters.
 		 * 
@@ -5903,6 +6066,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_until(stop_chars: string, cancellable: Cancellable | null): [ string, number | null ];
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto_async() instead, which
+		 *     has more consistent behaviour regarding the stop character.
+		 * 
 		 * The asynchronous version of g_data_input_stream_read_until().
 		 * It is an error to have two outstanding calls to this function.
 		 * 
@@ -5925,6 +6092,10 @@ declare namespace imports.gi.Gio {
 		 */
 		read_until_async(stop_chars: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_data_input_stream_read_upto_finish() instead, which
+		 *     has more consistent behaviour regarding the stop character.
+		 * 
 		 * Finish an asynchronous call started by
 		 * g_data_input_stream_read_until_async().
 		 * @param result the #GAsyncResult that was provided to the callback.
@@ -6451,6 +6622,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static search(search_string: string): string[][];
 		/**
+		 * @deprecated
+		 * do not use this API.  Since 2.42 the value of the
+		 * `XDG_CURRENT_DESKTOP` environment variable will be used.
+		 * 
 		 * Sets the name of the desktop that the application is running in.
 		 * This is used by g_app_info_should_show() and
 		 * g_desktop_app_info_get_show_in() to evaluate the
@@ -7157,6 +7332,10 @@ declare namespace imports.gi.Gio {
 		 */
 		get_modification_date_time(): GLib.DateTime | null;
 		/**
+		 * @deprecated
+		 * Use g_file_info_get_modification_date_time() instead, as
+		 *    #GTimeVal is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the modification time of the current #info and sets it
 		 * in #result.
 		 * @returns a #GTimeVal.
@@ -7374,6 +7553,10 @@ declare namespace imports.gi.Gio {
 		 */
 		set_modification_date_time(mtime: GLib.DateTime): void;
 		/**
+		 * @deprecated
+		 * Use g_file_info_set_modification_date_time() instead, as
+		 *    #GTimeVal is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
 		 * %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
 		 * given time value.
@@ -7598,6 +7781,14 @@ declare namespace imports.gi.Gio {
 		 * old path, and #other_file will be set to a #GFile containing the new path.
 		 * 
 		 * In all the other cases, #other_file will be set to #NULL.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - file: a #GFile. 
+		 *  - other_file: a #GFile or #NULL. 
+		 *  - event_type: a #GFileMonitorEvent. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, file: File, other_file: File | null, event_type: FileMonitorEvent) => void): number;
 
@@ -7753,6 +7944,11 @@ declare namespace imports.gi.Gio {
 		set_dirs_only(dirs_only: boolean): void;
 		/**
 		 * Emitted when the file name completion information comes available.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "got-completion-data", callback: (owner: this) => void): number;
 
@@ -10121,6 +10317,14 @@ declare namespace imports.gi.Gio {
 		 * Signal handlers may query the model (particularly the added items)
 		 * and expect to see the results of the modification that is being
 		 * reported.  The signal is emitted after the modification.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position of the change 
+		 *  - removed: the number of items removed 
+		 *  - added: the number of items added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "items-changed", callback: (owner: this, position: number, removed: number, added: number) => void): number;
 
@@ -10409,6 +10613,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Implementations of GMountOperation should handle this signal
 		 * by dismissing open password dialogs.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "aborted", callback: (owner: this) => void): number;
 		/**
@@ -10417,6 +10626,15 @@ declare namespace imports.gi.Gio {
 		 * If the message contains a line break, the first line should be
 		 * presented as a heading. For example, it may be used as the
 		 * primary text in a #GtkMessageDialog.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: string containing a message to display to the user. 
+		 *  - default_user: string containing the default user name. 
+		 *  - default_domain: string containing the default domain. 
+		 *  - flags: a set of #GAskPasswordFlags. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "ask-password", callback: (owner: this, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags) => void): number;
 		/**
@@ -10426,10 +10644,23 @@ declare namespace imports.gi.Gio {
 		 * If the message contains a line break, the first line should be
 		 * presented as a heading. For example, it may be used as the
 		 * primary text in a #GtkMessageDialog.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: string containing a message to display to the user. 
+		 *  - choices: an array of strings for each possible choice. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "ask-question", callback: (owner: this, message: string, choices: string[]) => void): number;
 		/**
 		 * Emitted when the user has replied to the mount operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - result: a #GMountOperationResult indicating how the request was handled 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "reply", callback: (owner: this, result: MountOperationResult) => void): number;
 		/**
@@ -10445,6 +10676,15 @@ declare namespace imports.gi.Gio {
 		 * If the message contains a line break, the first line should be
 		 * presented as a heading. For example, it may be used as the
 		 * primary text in a #GtkMessageDialog.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: string containing a message to display to the user. 
+		 *  - processes: an array of #GPid for processes
+		 *   blocking the operation. 
+		 *  - choices: an array of strings for each possible choice. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-processes", callback: (owner: this, message: string, processes: GLib.Pid[], choices: string[]) => void): number;
 		/**
@@ -10464,6 +10704,17 @@ declare namespace imports.gi.Gio {
 		 * If the message contains a line break, the first line should be
 		 * presented as a heading. For example, it may be used as the
 		 * primary text in a #GtkMessageDialog.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: string containing a message to display to the user 
+		 *  - time_left: the estimated time left before the operation completes,
+		 *     in microseconds, or -1 
+		 *  - bytes_left: the amount of bytes to be written before the operation
+		 *     completes (or -1 if such amount is not known), or zero if the operation
+		 *     is completed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-unmount-progress", callback: (owner: this, message: string, time_left: number, bytes_left: number) => void): number;
 
@@ -10918,6 +11169,10 @@ declare namespace imports.gi.Gio {
 		 */
 		set_title(title: string): void;
 		/**
+		 * @deprecated
+		 * Since 2.42, this has been deprecated in favour of
+		 *    g_notification_set_priority().
+		 * 
 		 * Deprecated in favor of g_notification_set_priority().
 		 * @param urgent %TRUE if #notification is urgent
 		 */
@@ -12291,6 +12546,11 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Emitted when the resolver notices that the system resolver
 		 * configuration has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "reload", callback: (owner: this) => void): number;
 
@@ -12666,6 +12926,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_mapped(key: string, mapping: SettingsGetMapping): any | null;
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_key_get_range() instead.
+		 * 
 		 * Queries the range of a key.
 		 * @param key the key to query the range of
 		 * @returns 
@@ -12772,6 +13035,9 @@ declare namespace imports.gi.Gio {
 		 */
 		list_children(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_list_keys() instead.
+		 * 
 		 * Introspects the list of keys on #settings.
 		 * 
 		 * You should probably not be calling this function from "normal" code
@@ -12785,6 +13051,9 @@ declare namespace imports.gi.Gio {
 		 */
 		list_keys(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_key_range_check() instead.
+		 * 
 		 * Checks if the given #value is of the correct type and within the
 		 * permitted range for #key.
 		 * @param key the key to check
@@ -12995,6 +13264,16 @@ declare namespace imports.gi.Gio {
 		 * The default handler for this signal invokes the "changed" signal
 		 * for each affected key.  If any other connected handler returns
 		 * %TRUE then this default functionality will be suppressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - keys: 
+		 *        an array of #GQuarks for the changed keys, or %NULL 
+		 *  - n_keys: the length of the #keys array, or 0 
+		 *  - returns %TRUE to stop other handlers from being invoked for the
+		 *          event. FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "change-event", callback: (owner: this, keys: GLib.Quark[] | null, n_keys: number) => boolean): number;
 		/**
@@ -13008,6 +13287,12 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that #settings only emits this signal if you have read #key at
 		 * least once while a signal handler was already connected for #key.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - key: the name of the key that changed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, key: string) => void): number;
 		/**
@@ -13029,6 +13314,14 @@ declare namespace imports.gi.Gio {
 		 * example, a new mandatory setting is introduced).  If any other
 		 * connected handler returns %TRUE then this default functionality
 		 * will be suppressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - key: the quark of the key, or 0 
+		 *  - returns %TRUE to stop other handlers from being invoked for the
+		 *          event. FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "writable-change-event", callback: (owner: this, key: number) => boolean): number;
 		/**
@@ -13039,6 +13332,12 @@ declare namespace imports.gi.Gio {
 		 * This signal supports detailed connections.  You can connect to the
 		 * detailed signal "writable-changed::x" in order to only receive
 		 * callbacks when the writability of "x" changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - key: the key 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "writable-changed", callback: (owner: this, key: string) => void): number;
 
@@ -13456,6 +13755,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_with_path(schema_id: string, path: string): Settings;
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_source_list_schemas() instead
+		 * 
 		 * Deprecated.
 		 * @returns a list of relocatable
 		 *   #GSettings schemas that are available, in no defined order.  The list must
@@ -13463,6 +13765,12 @@ declare namespace imports.gi.Gio {
 		 */
 		public static list_relocatable_schemas(): string[];
 		/**
+		 * @deprecated
+		 * Use g_settings_schema_source_list_schemas() instead.
+		 * If you used g_settings_list_schemas() to check for the presence of
+		 * a particular schema, use g_settings_schema_source_lookup() instead
+		 * of your whole loop.
+		 * 
 		 * Deprecated.
 		 * @returns a list of #GSettings
 		 *   schemas that are available, in no defined order.  The list must not be
@@ -13751,6 +14059,13 @@ declare namespace imports.gi.Gio {
 		 * type, the default is to forward them directly to
 		 * #GSimpleAction::change-state.  This should allow almost all users
 		 * of #GSimpleAction to connect only one handler or the other.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - parameter: the parameter to the activation, or %NULL if it has
+		 *   no parameter 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "activate", callback: (owner: this, parameter: GLib.Variant | null) => void): number;
 		/**
@@ -13787,6 +14102,12 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The handler need not set the state to the requested value.
 		 * It could set it to any value at all, or take some other action.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - value: the requested value for the state 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "change-state", callback: (owner: this, value: GLib.Variant | null) => void): number;
 
@@ -13856,6 +14177,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ISimpleActionGroup {
 		/**
+		 * @deprecated
+		 * Use g_action_map_add_action_entries()
+		 * 
 		 * A convenience function for creating multiple #GSimpleAction instances
 		 * and adding them to the action group.
 		 * @param entries a pointer to the first item in
@@ -13864,6 +14188,9 @@ declare namespace imports.gi.Gio {
 		 */
 		add_entries(entries: ActionEntry[], n_entries: number): void;
 		/**
+		 * @deprecated
+		 * Use g_action_map_add_action()
+		 * 
 		 * Adds an action to the action group.
 		 * 
 		 * If the action group already contains an action with the same name as
@@ -13874,6 +14201,9 @@ declare namespace imports.gi.Gio {
 		 */
 		insert(action: Action): void;
 		/**
+		 * @deprecated
+		 * Use g_action_map_lookup_action()
+		 * 
 		 * Looks up the action with the name #action_name in the group.
 		 * 
 		 * If no such action exists, returns %NULL.
@@ -13882,6 +14212,9 @@ declare namespace imports.gi.Gio {
 		 */
 		lookup(action_name: string): Action;
 		/**
+		 * @deprecated
+		 * Use g_action_map_remove_action()
+		 * 
 		 * Removes the named action from the action group.
 		 * 
 		 * If no action of this name is in the group then nothing happens.
@@ -13918,6 +14251,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface ISimpleAsyncResult {
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Completes an asynchronous I/O job immediately. Must be called in
 		 * the thread where the asynchronous result was to be delivered, as it
 		 * invokes the callback directly. If you are in a different thread use
@@ -13928,6 +14264,9 @@ declare namespace imports.gi.Gio {
 		 */
 		complete(): void;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Completes an asynchronous function in an idle handler in the
 		 * [thread-default main context][g-main-context-push-thread-default]
 		 * of the thread that #simple was initially created in
@@ -13938,27 +14277,42 @@ declare namespace imports.gi.Gio {
 		 */
 		complete_in_idle(): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_boolean() instead.
+		 * 
 		 * Gets the operation result boolean from within the asynchronous result.
 		 * @returns %TRUE if the operation's result was %TRUE, %FALSE
 		 *     if the operation's result was %FALSE.
 		 */
 		get_op_res_gboolean(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_pointer() instead.
+		 * 
 		 * Gets a pointer result as returned by the asynchronous function.
 		 * @returns a pointer from the result.
 		 */
 		get_op_res_gpointer(): any | null;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_propagate_int() instead.
+		 * 
 		 * Gets a gssize from the asynchronous result.
 		 * @returns a gssize returned from the asynchronous function.
 		 */
 		get_op_res_gssize(): number;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_get_source_tag() instead.
+		 * 
 		 * Gets the source tag for the #GSimpleAsyncResult.
 		 * @returns a #gpointer to the source object for the #GSimpleAsyncResult.
 		 */
 		get_source_tag(): any | null;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Propagates an error from within the simple asynchronous result to
 		 * a given destination.
 		 * 
@@ -13969,6 +14323,9 @@ declare namespace imports.gi.Gio {
 		 */
 		propagate_error(): boolean;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_run_in_thread() instead.
+		 * 
 		 * Runs the asynchronous job in a separate thread and then calls
 		 * g_simple_async_result_complete_in_idle() on #simple to return
 		 * the result to the appropriate main loop.
@@ -13981,6 +14338,9 @@ declare namespace imports.gi.Gio {
 		 */
 		run_in_thread(func: SimpleAsyncThreadFunc, io_priority: number, cancellable: Cancellable | null): void;
 		/**
+		 * @deprecated
+		 * Use #GTask instead.
+		 * 
 		 * Sets a #GCancellable to check before dispatching results.
 		 * 
 		 * This function has one very specific purpose: the provided cancellable
@@ -14000,6 +14360,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_check_cancellable(check_cancellable: Cancellable | null): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_new_error() instead.
+		 * 
 		 * Sets an error within the asynchronous result without a #GError.
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
 		 * @param code an error code.
@@ -14007,6 +14370,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_error(domain: GLib.Quark, code: number, format: string): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets an error within the asynchronous result without a #GError.
 		 * Unless writing a binding, see g_simple_async_result_set_error().
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
@@ -14016,6 +14382,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_error_va(domain: GLib.Quark, code: number, format: string, args: any[]): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets the result from a #GError.
 		 * @param error #GError.
 		 */
@@ -14030,23 +14399,35 @@ declare namespace imports.gi.Gio {
 		 */
 		set_handle_cancellation(handle_cancellation: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_boolean() instead.
+		 * 
 		 * Sets the operation result to a boolean within the asynchronous result.
 		 * @param op_res a #gboolean.
 		 */
 		set_op_res_gboolean(op_res: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_pointer() instead.
+		 * 
 		 * Sets the operation result within the asynchronous result to a pointer.
 		 * @param op_res a pointer result from an asynchronous function.
 		 * @param destroy_op_res a #GDestroyNotify function.
 		 */
 		set_op_res_gpointer(op_res: any | null, destroy_op_res: GLib.DestroyNotify): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_int() instead.
+		 * 
 		 * Sets the operation result within the asynchronous result to
 		 * the given #op_res.
 		 * @param op_res a #gssize.
 		 */
 		set_op_res_gssize(op_res: number): void;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_return_error() instead.
+		 * 
 		 * Sets the result from #error, and takes over the caller's ownership
 		 * of #error, so the caller does not need to free it any more.
 		 * @param error a #GError
@@ -14234,6 +14615,9 @@ declare namespace imports.gi.Gio {
 	class SimpleAsyncResult {
 		public constructor(options?: Partial<SimpleAsyncResultInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_task_new() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult.
 		 * 
 		 * The common convention is to create the #GSimpleAsyncResult in the
@@ -14251,6 +14635,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, source_tag: any | null): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_new_error() instead.
+		 * 
 		 * Creates a new #GSimpleAsyncResult with a set error.
 		 * @param source_object a #GObject, or %NULL.
 		 * @param callback a #GAsyncReadyCallback.
@@ -14261,6 +14648,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, domain: GLib.Quark, code: number, format: string): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_error() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition.
 		 * @param source_object a #GObject, or %NULL.
 		 * @param callback a #GAsyncReadyCallback.
@@ -14269,6 +14659,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_from_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use g_task_new() and g_task_return_error() instead.
+		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition, and takes over the
 		 * caller's ownership of #error, so the caller does not need to free it anymore.
 		 * @param source_object a #GObject, or %NULL
@@ -14278,6 +14671,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_take_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
+		 * @deprecated
+		 * Use #GTask and g_task_is_valid() instead.
+		 * 
 		 * Ensures that the data passed to the _finish function of an async
 		 * operation is consistent.  Three checks are performed.
 		 * 
@@ -16256,6 +16652,14 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that there may be additional #GSocketClientEvent values in
 		 * the future; unrecognized #event values should be ignored.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the event that is occurring 
+		 *  - connectable: the #GSocketConnectable that #event is occurring on 
+		 *  - connection: the current representation of the connection 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream | null) => void): number;
 
@@ -16708,6 +17112,13 @@ declare namespace imports.gi.Gio {
 		 * Note that when #listener is used to listen on both IPv4 and
 		 * IPv6, a separate set of signals will be emitted for each, and
 		 * the order they happen in is undefined.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the event that is occurring 
+		 *  - socket: the #GSocket the event is occurring on 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "event", callback: (owner: this, event: SocketListenerEvent, socket: Socket) => void): number;
 
@@ -16807,6 +17218,15 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * #connection will be unreffed once the signal handler returns,
 		 * so you need to ref it yourself if you are planning to use it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - connection: a new #GSocketConnection object 
+		 *  - source_object: the source_object passed to
+		 *     g_socket_listener_add_address() 
+		 *  - returns %TRUE to stop other handlers from being called 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "incoming", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object | null) => boolean): number;
 
@@ -18881,6 +19301,14 @@ declare namespace imports.gi.Gio {
 		 * incoming connection. This thread is dedicated to handling
 		 * #connection and may perform blocking IO. The signal handler need
 		 * not return until the connection is closed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - connection: a new #GSocketConnection object. 
+		 *  - source_object: the source_object passed to g_socket_listener_add_address(). 
+		 *  - returns %TRUE to stop further signal handlers from being called 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "run", callback: (owner: this, connection: SocketConnection, source_object: GObject.Object | null) => boolean): number;
 
@@ -19461,6 +19889,11 @@ declare namespace imports.gi.Gio {
 		 */
 		get_protocol_version(): TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Gets #conn rehandshaking mode. See
 		 * g_tls_connection_set_rehandshake_mode() for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
@@ -19475,6 +19908,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_require_close_notify(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_tls_connection_get_database() instead
+		 * 
 		 * Gets whether #conn uses the system certificate database to verify
 		 * peer certificates. See g_tls_connection_set_use_system_certdb().
 		 * @returns whether #conn uses the system certificate database
@@ -19592,6 +20028,11 @@ declare namespace imports.gi.Gio {
 		 */
 		set_interaction(interaction: TlsInteraction | null): void;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Since GLib 2.64, changing the rehandshake mode is no longer supported
 		 * and will have no effect. With TLS 1.3, rehandshaking has been removed from
 		 * the TLS protocol, replaced by separate post-handshake authentication and
@@ -19631,6 +20072,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_require_close_notify(require_close_notify: boolean): void;
 		/**
+		 * @deprecated
+		 * Use g_tls_connection_set_database() instead
+		 * 
 		 * Sets whether #conn uses the system certificate database to verify
 		 * peer certificates. This is %TRUE by default. If set to %FALSE, then
 		 * peer certificate validation will always set the
@@ -19675,6 +20119,17 @@ declare namespace imports.gi.Gio {
 		 * If you are doing I/O in another thread, you do not
 		 * need to worry about this, and can simply block in the signal
 		 * handler until the UI thread returns an answer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - peer_cert: the peer's #GTlsCertificate 
+		 *  - errors: the problems with #peer_cert. 
+		 *  - returns %TRUE to accept #peer_cert (which will also
+		 * immediately end the signal emission). %FALSE to allow the signal
+		 * emission to continue, which will cause the handshake to fail if
+		 * no one else overrides it. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
 
@@ -20829,6 +21284,9 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixMountMonitor {
 		/**
+		 * @deprecated
+		 * This function does nothing.  Don't call it.
+		 * 
 		 * This function does nothing.
 		 * 
 		 * Before 2.44, this was a partially-effective way of controlling the
@@ -20842,10 +21300,20 @@ declare namespace imports.gi.Gio {
 		set_rate_limit(limit_msec: number): void;
 		/**
 		 * Emitted when the unix mount points have changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mountpoints-changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the unix mounts have changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mounts-changed", callback: (owner: this) => void): number;
 
@@ -20867,6 +21335,9 @@ declare namespace imports.gi.Gio {
 	class UnixMountMonitor {
 		public constructor(options?: Partial<UnixMountMonitorInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_unix_mount_monitor_get() instead.
+		 * 
 		 * Deprecated alias for g_unix_mount_monitor_get().
 		 * 
 		 * This function was never a true constructor, which is why it was
@@ -20979,6 +21450,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_address_type(): UnixSocketAddressType;
 		/**
+		 * @deprecated
+		 * Use g_unix_socket_address_get_address_type()
+		 * 
 		 * Tests if #address is abstract.
 		 * @returns %TRUE if the address is abstract, %FALSE otherwise
 		 */
@@ -21051,6 +21525,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(path: string): SocketAddress;
 		/**
+		 * @deprecated
+		 * Use g_unix_socket_address_new_with_type().
+		 * 
 		 * Creates a new %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
 		 * #GUnixSocketAddress for #path.
 		 * @param path the abstract name
@@ -21266,30 +21743,72 @@ declare namespace imports.gi.Gio {
 		get_volumes(): GLib.List;
 		/**
 		 * Emitted when a drive changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - drive: the drive that changed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drive-changed", callback: (owner: this, drive: Drive) => void): number;
 		/**
 		 * Emitted when a drive is connected to the system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - drive: a #GDrive that was connected. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drive-connected", callback: (owner: this, drive: Drive) => void): number;
 		/**
 		 * Emitted when a drive is disconnected from the system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - drive: a #GDrive that was disconnected. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drive-disconnected", callback: (owner: this, drive: Drive) => void): number;
 		/**
 		 * Emitted when the eject button is pressed on #drive.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - drive: the drive where the eject button was pressed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drive-eject-button", callback: (owner: this, drive: Drive) => void): number;
 		/**
 		 * Emitted when the stop button is pressed on #drive.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - drive: the drive where the stop button was pressed 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "drive-stop-button", callback: (owner: this, drive: Drive) => void): number;
 		/**
 		 * Emitted when a mount is added.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount: a #GMount that was added. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mount-added", callback: (owner: this, mount: Mount) => void): number;
 		/**
 		 * Emitted when a mount changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount: a #GMount that changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mount-changed", callback: (owner: this, mount: Mount) => void): number;
 		/**
@@ -21297,22 +21816,52 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This signal depends on the backend and is only emitted if
 		 * GIO was used to unmount.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount: a #GMount that is being unmounted. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mount-pre-unmount", callback: (owner: this, mount: Mount) => void): number;
 		/**
 		 * Emitted when a mount is removed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - mount: a #GMount that was removed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mount-removed", callback: (owner: this, mount: Mount) => void): number;
 		/**
 		 * Emitted when a mountable volume is added to the system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - volume: a #GVolume that was added. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "volume-added", callback: (owner: this, volume: Volume) => void): number;
 		/**
 		 * Emitted when mountable volume is changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - volume: a #GVolume that changed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "volume-changed", callback: (owner: this, volume: Volume) => void): number;
 		/**
 		 * Emitted when a mountable volume is removed from the system.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - volume: a #GVolume that was removed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "volume-removed", callback: (owner: this, volume: Volume) => void): number;
 
@@ -21344,6 +21893,13 @@ declare namespace imports.gi.Gio {
 	class VolumeMonitor {
 		public constructor(options?: Partial<VolumeMonitorInitOptions>);
 		/**
+		 * @deprecated
+		 * Instead of using this function, #GVolumeMonitor
+		 * implementations should instead create shadow mounts with the URI of
+		 * the mount they intend to adopt. See the proxy volume monitor in
+		 * gvfs for an example of this. Also see g_mount_is_shadowed(),
+		 * g_mount_shadow() and g_mount_unshadow() functions.
+		 * 
 		 * This function should be called by any #GVolumeMonitor
 		 * implementation when a new #GMount object is created that is not
 		 * associated with a #GVolume object. It must be called just before
@@ -23248,6 +23804,9 @@ declare namespace imports.gi.Gio {
 	class IOSchedulerJob {
 		public constructor(options?: Partial<IOSchedulerJobInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_main_context_invoke().
+		 * 
 		 * Used from an I/O job to send a callback to be run in the thread
 		 * that the job was started from, waiting for the result (and thus
 		 * blocking the I/O job).
@@ -23257,6 +23816,9 @@ declare namespace imports.gi.Gio {
 		 */
 		public send_to_mainloop(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): boolean;
 		/**
+		 * @deprecated
+		 * Use g_main_context_invoke().
+		 * 
 		 * Used from an I/O job to send a callback to be run asynchronously in
 		 * the thread that the job was started from. The callback will be run
 		 * when the main loop is available, but at that time the I/O job might
@@ -26060,20 +26622,46 @@ declare namespace imports.gi.Gio {
 		 * Signals that a new action was just added to the group.
 		 * This signal is emitted after the action has been added
 		 * and is now visible.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action_name: the name of the action in #action_group 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-added", callback: (owner: this, action_name: string) => void): number;
 		/**
 		 * Signals that the enabled status of the named action has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action_name: the name of the action in #action_group 
+		 *  - enabled: whether the action is enabled or not 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-enabled-changed", callback: (owner: this, action_name: string, enabled: boolean) => void): number;
 		/**
 		 * Signals that an action is just about to be removed from the group.
 		 * This signal is emitted before the action is removed, so the action
 		 * is still visible and can be queried from the signal handler.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action_name: the name of the action in #action_group 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-removed", callback: (owner: this, action_name: string) => void): number;
 		/**
 		 * Signals that the state of the named action has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - action_name: the name of the action in #action_group 
+		 *  - value: the new value of the state 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "action-state-changed", callback: (owner: this, action_name: string, value: GLib.Variant) => void): number;
 
@@ -26863,6 +27451,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_valist_async(object_type: GObject.Type, first_property_name: string, var_args: any[], io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_object_new_with_properties() and
+		 * g_async_initable_init_async() instead. See #GParameter for more information.
+		 * 
 		 * Helper function for constructing #GAsyncInitable object. This is
 		 * similar to g_object_newv() but also initializes the object asynchronously.
 		 * 
@@ -27240,10 +27832,22 @@ declare namespace imports.gi.Gio {
 		get_object_path(): string;
 		/**
 		 * Emitted when #interface is added to #object.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - _interface: The #GDBusInterface that was added. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-added", callback: (owner: this, _interface: DBusInterface) => void): number;
 		/**
 		 * Emitted when #interface is removed from #object.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - _interface: The #GDBusInterface that was removed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-removed", callback: (owner: this, _interface: DBusInterface) => void): number;
 
@@ -27309,6 +27913,13 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This signal exists purely as a convenience to avoid having to
 		 * connect signals to all objects managed by #manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: The #GDBusObject on which an interface was added. 
+		 *  - _interface: The #GDBusInterface that was added. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-added", callback: (owner: this, object: DBusObject, _interface: DBusInterface) => void): number;
 		/**
@@ -27316,14 +27927,33 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This signal exists purely as a convenience to avoid having to
 		 * connect signals to all objects managed by #manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: The #GDBusObject on which an interface was removed. 
+		 *  - _interface: The #GDBusInterface that was removed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "interface-removed", callback: (owner: this, object: DBusObject, _interface: DBusInterface) => void): number;
 		/**
 		 * Emitted when #object is added to #manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: The #GDBusObject that was added. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "object-added", callback: (owner: this, object: DBusObject) => void): number;
 		/**
 		 * Emitted when #object is removed from #manager.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object: The #GDBusObject that was removed. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "object-removed", callback: (owner: this, object: DBusObject) => void): number;
 
@@ -27623,6 +28253,10 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IDesktopAppInfoLookup {
 		/**
+		 * @deprecated
+		 * The #GDesktopAppInfoLookup interface is deprecated and
+		 *    unused by GIO.
+		 * 
 		 * Gets the default application for launching applications
 		 * using this URI scheme for a particular #GDesktopAppInfoLookup
 		 * implementation.
@@ -27689,6 +28323,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_stop(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_drive_eject_with_operation() instead.
+		 * 
 		 * Asynchronously ejects a drive.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -27700,6 +28337,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_drive_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a drive.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE if the drive has been ejected successfully,
@@ -27867,6 +28507,11 @@ declare namespace imports.gi.Gio {
 		stop_finish(result: AsyncResult): boolean;
 		/**
 		 * Emitted when the drive's state has changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
@@ -27874,16 +28519,31 @@ declare namespace imports.gi.Gio {
 		 * disconnected. If the recipient is holding references to the
 		 * object they should release them so the object can be
 		 * finalized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "disconnected", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the physical eject button (if any) of a drive has
 		 * been pressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "eject-button", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when the physical stop button (if any) of a drive has
 		 * been pressed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stop-button", callback: (owner: this) => void): number;
 
@@ -28258,6 +28918,11 @@ declare namespace imports.gi.Gio {
 		 */
 		get_protocol_version(): TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Gets #conn rehandshaking mode. See
 		 * g_dtls_connection_set_rehandshake_mode() for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
@@ -28377,6 +29042,11 @@ declare namespace imports.gi.Gio {
 		 */
 		set_interaction(interaction: TlsInteraction | null): void;
 		/**
+		 * @deprecated
+		 * Changing the rehandshake mode is no longer
+		 *   required for compatibility. Also, rehandshaking has been removed
+		 *   from the TLS protocol in TLS 1.3.
+		 * 
 		 * Since GLib 2.64, changing the rehandshake mode is no longer supported
 		 * and will have no effect. With TLS 1.3, rehandshaking has been removed from
 		 * the TLS protocol, replaced by separate post-handshake authentication and
@@ -28488,6 +29158,17 @@ declare namespace imports.gi.Gio {
 		 * If you are doing I/O in another thread, you do not
 		 * need to worry about this, and can simply block in the signal
 		 * handler until the UI thread returns an answer.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - peer_cert: the peer's #GTlsCertificate 
+		 *  - errors: the problems with #peer_cert. 
+		 *  - returns %TRUE to accept #peer_cert (which will also
+		 * immediately end the signal emission). %FALSE to allow the signal
+		 * emission to continue, which will cause the handshake to fail if
+		 * no one else overrides it. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "accept-certificate", callback: (owner: this, peer_cert: TlsCertificate, errors: TlsCertificateFlags) => boolean): number;
 
@@ -28941,6 +29622,9 @@ declare namespace imports.gi.Gio {
 		 */
 		dup(): File;
 		/**
+		 * @deprecated
+		 * Use g_file_eject_mountable_with_operation() instead.
+		 * 
 		 * Starts an asynchronous eject on a mountable.
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
@@ -28957,6 +29641,10 @@ declare namespace imports.gi.Gio {
 		 */
 		eject_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_file_eject_mountable_with_operation_finish()
+		 *     instead.
+		 * 
 		 * Finishes an asynchronous eject operation started by
 		 * g_file_eject_mountable().
 		 * @param result a #GAsyncResult
@@ -30633,6 +31321,9 @@ declare namespace imports.gi.Gio {
 		 */
 		trash_finish(result: AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use g_file_unmount_mountable_with_operation() instead.
+		 * 
 		 * Unmounts a file of type G_FILE_TYPE_MOUNTABLE.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
@@ -30650,6 +31341,10 @@ declare namespace imports.gi.Gio {
 		 */
 		unmount_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_file_unmount_mountable_with_operation_finish()
+		 *     instead.
+		 * 
 		 * Finishes an unmount operation, see g_file_unmount_mountable() for details.
 		 * 
 		 * Finish an asynchronous unmount operation that was started
@@ -31149,6 +31844,10 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable | null): GObject.Object;
 		/**
+		 * @deprecated
+		 * Use g_object_new_with_properties() and
+		 * g_initable_init() instead. See #GParameter for more information.
+		 * 
 		 * Helper function for constructing #GInitable object. This is
 		 * similar to g_object_newv() but also initializes the object
 		 * and returns %NULL, setting an error on failure.
@@ -31240,6 +31939,14 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note: If #removed != #added, the positions of all later items
 		 * in the model change.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - position: the position at which #list changed 
+		 *  - removed: the number of items removed 
+		 *  - added: the number of items added 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "items-changed", callback: (owner: this, position: number, removed: number, added: number) => void): number;
 
@@ -31377,6 +32084,12 @@ declare namespace imports.gi.Gio {
 		 * handler should then take the appropriate action depending on the
 		 * warning level. See the #GMemoryMonitorWarningLevel documentation for
 		 * details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - level: the #GMemoryMonitorWarningLevel warning level 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "low-memory-warning", callback: (owner: this, level: MemoryMonitorWarningLevel) => void): number;
 
@@ -31466,6 +32179,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_unmount(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_mount_eject_with_operation() instead.
+		 * 
 		 * Ejects a mount. This is an asynchronous operation, and is
 		 * finished by calling g_mount_eject_finish() with the #mount
 		 * and #GAsyncResult data returned in the #callback.
@@ -31475,6 +32191,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult.
@@ -31676,6 +32395,9 @@ declare namespace imports.gi.Gio {
 		 */
 		shadow(): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_unmount_with_operation() instead.
+		 * 
 		 * Unmounts a mount. This is an asynchronous operation, and is
 		 * finished by calling g_mount_unmount_finish() with the #mount
 		 * and #GAsyncResult data returned in the #callback.
@@ -31685,6 +32407,9 @@ declare namespace imports.gi.Gio {
 		 */
 		unmount(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_mount_unmount_with_operation_finish() instead.
+		 * 
 		 * Finishes unmounting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult.
@@ -31718,6 +32443,11 @@ declare namespace imports.gi.Gio {
 		unshadow(): void;
 		/**
 		 * Emitted when the mount has been changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
@@ -31726,6 +32456,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This signal depends on the backend and is only emitted if
 		 * GIO was used to unmount.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "pre-unmount", callback: (owner: this) => void): number;
 		/**
@@ -31733,6 +32468,11 @@ declare namespace imports.gi.Gio {
 		 * unmounted. If the recipient is holding references to the
 		 * object they should release them so the object can be
 		 * finalized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "unmounted", callback: (owner: this) => void): number;
 
@@ -31910,6 +32650,12 @@ declare namespace imports.gi.Gio {
 		get_network_metered(): boolean;
 		/**
 		 * Emitted when the network configuration changes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - network_available: the current value of #GNetworkMonitor:network-available 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "network-changed", callback: (owner: this, network_available: boolean) => void): number;
 
@@ -32860,6 +33606,9 @@ declare namespace imports.gi.Gio {
 		 */
 		get_server_identity(): SocketConnectable | null;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * SSL 3.0 is no longer supported. See
 		 * g_tls_client_connection_set_use_ssl3() for details.
 		 * @returns %FALSE
@@ -32879,6 +33628,9 @@ declare namespace imports.gi.Gio {
 		 */
 		set_server_identity(identity: SocketConnectable): void;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * Since GLib 2.42.1, SSL 3.0 is no longer supported.
 		 * 
 		 * From GLib 2.42.1 through GLib 2.62, this function could be used to
@@ -33059,6 +33811,9 @@ declare namespace imports.gi.Gio {
 		 */
 		can_mount(): boolean;
 		/**
+		 * @deprecated
+		 * Use g_volume_eject_with_operation() instead.
+		 * 
 		 * Ejects a volume. This is an asynchronous operation, and is
 		 * finished by calling g_volume_eject_finish() with the #volume
 		 * and #GAsyncResult returned in the #callback.
@@ -33068,6 +33823,9 @@ declare namespace imports.gi.Gio {
 		 */
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use g_volume_eject_with_operation_finish() instead.
+		 * 
 		 * Finishes ejecting a volume. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * @param result a #GAsyncResult
@@ -33219,12 +33977,22 @@ declare namespace imports.gi.Gio {
 		should_automount(): boolean;
 		/**
 		 * Emitted when the volume has been changed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted when the #GVolume have been removed. If
 		 * the recipient is holding references to the object they should
 		 * release them so the object can be finalized.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "removed", callback: (owner: this) => void): number;
 

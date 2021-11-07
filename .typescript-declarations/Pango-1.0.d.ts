@@ -281,6 +281,9 @@ declare namespace imports.gi.Pango {
 		 */
 		get(index_: number): CoverageLevel;
 		/**
+		 * @deprecated
+		 * This function does nothing
+		 * 
 		 * Set the coverage for each index in #coverage to be the max (better)
 		 * value of the current coverage for the index and the coverage for
 		 * the corresponding index in #other.
@@ -299,6 +302,9 @@ declare namespace imports.gi.Pango {
 		 */
 		set(index_: number, level: CoverageLevel): void;
 		/**
+		 * @deprecated
+		 * This returns %NULL
+		 * 
 		 * Convert a `PangoCoverage` structure into a flat binary format.
 		 * @returns 
 		 *   location to store result (must be freed with g_free())
@@ -344,6 +350,9 @@ declare namespace imports.gi.Pango {
 		 */
 		public static new(): Coverage;
 		/**
+		 * @deprecated
+		 * This returns %NULL
+		 * 
 		 * Convert data generated from pango_coverage_to_bytes()
 		 * back to a `PangoCoverage`.
 		 * @param bytes binary data

@@ -157,6 +157,12 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * When a crossfade finishes, #window will have a copy
 		 * of the end surface as its background, and this signal will
 		 * get emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - window: the #GdkWindow the crossfade happend on. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this, window: GObject.Object) => void): number;
 
@@ -534,6 +540,12 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * Therefore, deal with changes to the #output right in your signal
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - output: the #GnomeRROutput that was connected 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "output-connected", callback: (owner: this, output: any | null) => void): number;
 		/**
@@ -549,6 +561,12 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * Therefore, deal with changes to the #output right in your signal
 		 * handler, instead of keeping the #output reference for an async or
 		 * idle function.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - output: the #GnomeRROutput that was disconnected 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
 

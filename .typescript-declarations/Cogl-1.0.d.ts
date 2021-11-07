@@ -141,6 +141,9 @@ declare namespace imports.gi.Cogl {
 	class Offscreen {
 		public constructor(options?: Partial<OffscreenInitOptions>);
 		/**
+		 * @deprecated
+		 * Use cogl_offscreen_new_with_texture instead.
+		 * 
 		 * This creates an offscreen buffer object using the given #texture as the
 		 * primary color buffer. It doesn't just initialize the contents of the
 		 * offscreen buffer with the #texture; they are tightly bound so that
@@ -188,6 +191,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public static new_with_texture(texture: Texture): Offscreen;
 		/**
+		 * @deprecated
+		 * cogl_object_ref() should be used in new code.
+		 * 
 		 * Increments the reference count on the #offscreen framebuffer.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
 		 * @returns For convenience it returns the
@@ -195,6 +201,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public static ref(offscreen: any | null): any | null;
 		/**
+		 * @deprecated
+		 * cogl_object_unref() should be used in new code.
+		 * 
 		 * Decreases the reference count for the #offscreen buffer and frees it when
 		 * the count reaches 0.
 		 * @param offscreen A pointer to a {@link Offscreen} framebuffer
@@ -364,6 +373,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_blue_float(blue: number): void;
 		/**
+		 * @deprecated
+		 * Use cogl_color_init_from_4f instead.
+		 * 
 		 * Sets the values of the passed channels into a {@link Color}
 		 * @param red value of the red channel, between 0 and %1.0
 		 * @param green value of the green channel, between 0 and %1.0
@@ -372,6 +384,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_from_4f(red: number, green: number, blue: number, alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use cogl_color_init_from_4ub instead.
+		 * 
 		 * Sets the values of the passed channels into a {@link Color}.
 		 * @param red value of the red channel, between 0 and 255
 		 * @param green value of the green channel, between 0 and 255
@@ -440,6 +455,9 @@ declare namespace imports.gi.Cogl {
 	class Material {
 		public constructor(options?: Partial<MaterialInitOptions>);
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_copy() instead
+		 * 
 		 * Creates a new material with the configuration copied from the
 		 * source material.
 		 * 
@@ -452,26 +470,42 @@ declare namespace imports.gi.Cogl {
 		 */
 		public copy(): Material;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Retrieves the current ambient color for #material
 		 * @param ambient The location to store the ambient color
 		 */
 		public get_ambient(ambient: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_color() instead
+		 * 
 		 * Retrieves the current material color.
 		 * @returns The location to store the color
 		 */
 		public get_color(): Color;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Retrieves the current diffuse color for #material
 		 * @param diffuse The location to store the diffuse color
 		 */
 		public get_diffuse(diffuse: Color): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Retrieves the materials current emission color.
 		 * @param emission The location to store the emission color
 		 */
 		public get_emission(emission: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_layer_point_sprite_coords_enabled()
+		 *                  instead
+		 * 
 		 * Gets whether point sprite coordinate generation is enabled for this
 		 * texture layer.
 		 * @param layer_index the layer number to check.
@@ -480,6 +514,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_layer_point_sprite_coords_enabled(layer_index: number): Bool;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_layer_wrap_mode_p() instead
+		 * 
 		 * Returns the wrap mode for the 'p' coordinate of texture lookups on this
 		 * layer.
 		 * @param layer_index the layer number to change.
@@ -488,6 +525,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_layer_wrap_mode_p(layer_index: number): MaterialWrapMode;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_layer_wrap_mode_s() instead
+		 * 
 		 * Returns the wrap mode for the 's' coordinate of texture lookups on this
 		 * layer.
 		 * @param layer_index the layer number to change.
@@ -496,6 +536,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_layer_wrap_mode_s(layer_index: number): MaterialWrapMode;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_layer_wrap_mode_t() instead
+		 * 
 		 * Returns the wrap mode for the 't' coordinate of texture lookups on this
 		 * layer.
 		 * @param layer_index the layer number to change.
@@ -523,27 +566,42 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_layers(): GLib.List;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_n_layers() instead
+		 * 
 		 * Retrieves the number of layers defined for the given #material
 		 * @returns the number of layers
 		 */
 		public get_n_layers(): number;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_get_point_size() instead
+		 * 
 		 * Get the size of points drawn when %COGL_VERTICES_MODE_POINTS is
 		 * used with the vertex buffer API.
 		 * @returns the point size of the material.
 		 */
 		public get_point_size(): number;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Retrieves the materials current emission color.
 		 * @returns The materials current shininess value
 		 */
 		public get_shininess(): number;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Retrieves the materials current specular color.
 		 * @param specular The location to store the specular color
 		 */
 		public get_specular(specular: Color): void;
 		/**
+		 * @deprecated
+		 * Use {@link Snippet} api instead instead
+		 * 
 		 * Queries what user program has been associated with the given
 		 * #material using cogl_material_set_user_program().
 		 * @returns The current user program
@@ -551,11 +609,17 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_user_program(): Handle;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_remove_layer() instead
+		 * 
 		 * This function removes a layer from your material
 		 * @param layer_index Specifies the layer you want to remove
 		 */
 		public remove_layer(layer_index: number): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_alpha_test_function() instead
+		 * 
 		 * Before a primitive is blended with the framebuffer, it goes through an
 		 * alpha test stage which lets you discard fragments based on the current
 		 * alpha value. This function lets you change the function used to evaluate
@@ -569,6 +633,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_alpha_test_function(alpha_func: MaterialAlphaFunc, alpha_reference: number): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Sets the material's ambient color, in the standard OpenGL lighting
 		 * model. The ambient color affects the overall color of the object.
 		 * 
@@ -581,6 +648,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_ambient(ambient: Color): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Conveniently sets the diffuse and ambient color of #material at the same
 		 * time. See cogl_material_set_ambient() and cogl_material_set_diffuse().
 		 * 
@@ -591,6 +661,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_ambient_and_diffuse(color: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_blend() instead
+		 * 
 		 * If not already familiar; please refer <link linkend="cogl-Blend-Strings">here</link>
 		 * for an overview of what blend strings are, and their syntax.
 		 * 
@@ -664,12 +737,18 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_blend(blend_string: string): Bool;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_blend_constant() instead
+		 * 
 		 * When blending is setup to reference a CONSTANT blend factor then
 		 * blending will depend on the constant set with this function.
 		 * @param constant_color The constant color you want
 		 */
 		public set_blend_constant(constant_color: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_color() instead
+		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
 		 * Note that if you don't add any layers to the material then the color
@@ -682,6 +761,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_color(color: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_color4f() instead
+		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
 		 * The default value is (1.0, 1.0, 1.0, 1.0)
@@ -692,6 +774,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_color4f(red: number, green: number, blue: number, alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_color4ub() instead
+		 * 
 		 * Sets the basic color of the material, used when no lighting is enabled.
 		 * 
 		 * The default value is (0xff, 0xff, 0xff, 0xff)
@@ -702,6 +787,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_color4ub(red: number, green: number, blue: number, alpha: number): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Sets the material's diffuse color, in the standard OpenGL lighting
 		 * model. The diffuse color is most intense where the light hits the
 		 * surface directly - perpendicular to the surface.
@@ -711,6 +799,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_diffuse(diffuse: Color): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Sets the material's emissive color, in the standard OpenGL lighting
 		 * model. It will look like the surface is a light source emitting this
 		 * color.
@@ -720,6 +811,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_emission(emission: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer() instead
+		 * 
 		 * In addition to the standard OpenGL lighting model a Cogl material may have
 		 * one or more layers comprised of textures that can be blended together in
 		 * order, with a number of different texture combine modes. This function
@@ -735,6 +829,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer(layer_index: number, texture: Handle): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_combine() instead
+		 * 
 		 * If not already familiar; you can refer
 		 * <link linkend="cogl-Blend-Strings">here</link> for an overview of what blend
 		 * strings are and there syntax.
@@ -819,6 +916,10 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_combine(layer_index: number, blend_string: string): Bool;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_combine_constant()
+		 * instead
+		 * 
 		 * When you are using the 'CONSTANT' color source in a layer combine
 		 * description then you can use this function to define its value.
 		 * @param layer_index Specifies the layer you want to specify a constant used
@@ -827,6 +928,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_combine_constant(layer_index: number, constant: Color): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_filters() instead
+		 * 
 		 * Changes the decimation and interpolation filters used when a texture is
 		 * drawn at other scales than 100%.
 		 * @param layer_index the layer number to change.
@@ -835,6 +939,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_filters(layer_index: number, min_filter: MaterialFilter, mag_filter: MaterialFilter): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_matrix() instead
+		 * 
 		 * This function lets you set a matrix that can be used to e.g. translate
 		 * and rotate a single layer of a material used to fill your geometry.
 		 * @param layer_index the index for the layer inside #material
@@ -842,6 +949,10 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_matrix(layer_index: number, matrix: Matrix): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_point_sprite_coords_enabled()
+		 *                  instead
+		 * 
 		 * When rendering points, if #enable is %TRUE then the texture
 		 * coordinates for this layer will be replaced with coordinates that
 		 * vary from 0.0 to 1.0 across the primitive. The top left of the
@@ -858,6 +969,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_point_sprite_coords_enabled(layer_index: number, enable: Bool): Bool;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_wrap_mode() instead
+		 * 
 		 * Sets the wrap mode for all three coordinates of texture lookups on
 		 * this layer. This is equivalent to calling
 		 * cogl_material_set_layer_wrap_mode_s(),
@@ -868,6 +982,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_wrap_mode(layer_index: number, mode: MaterialWrapMode): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_wrap_mode_p() instead
+		 * 
 		 * Sets the wrap mode for the 'p' coordinate of texture lookups on
 		 * this layer. 'p' is the third coordinate.
 		 * @param layer_index the layer number to change.
@@ -875,18 +992,27 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_layer_wrap_mode_p(layer_index: number, mode: MaterialWrapMode): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_wrap_mode_s() instead
+		 * 
 		 * Sets the wrap mode for the 's' coordinate of texture lookups on this layer.
 		 * @param layer_index the layer number to change.
 		 * @param mode the new wrap mode
 		 */
 		public set_layer_wrap_mode_s(layer_index: number, mode: MaterialWrapMode): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_layer_wrap_mode_t() instead
+		 * 
 		 * Sets the wrap mode for the 't' coordinate of texture lookups on this layer.
 		 * @param layer_index the layer number to change.
 		 * @param mode the new wrap mode
 		 */
 		public set_layer_wrap_mode_t(layer_index: number, mode: MaterialWrapMode): void;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_set_point_size() instead
+		 * 
 		 * Changes the size of points drawn when %COGL_VERTICES_MODE_POINTS is
 		 * used with the vertex buffer API. Note that typically the GPU will
 		 * only support a limited minimum and maximum range of point sizes. If
@@ -898,6 +1024,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_point_size(point_size: number): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Sets the shininess of the material, in the standard OpenGL lighting
 		 * model, which determines the size of the specular highlights. A
 		 * higher #shininess will produce smaller highlights which makes the
@@ -908,6 +1037,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_shininess(shininess: number): void;
 		/**
+		 * @deprecated
+		 * Use the {@link Snippet} shader api for lighting
+		 * 
 		 * Sets the material's specular color, in the standard OpenGL lighting
 		 * model. The intensity of the specular color depends on the viewport
 		 * position, and is brightest along the lines of reflection.
@@ -917,6 +1049,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public set_specular(specular: Color): void;
 		/**
+		 * @deprecated
+		 * Use {@link Snippet} api instead instead
+		 * 
 		 * Associates a linked CoglProgram with the given material so that the
 		 * program can take full control of vertex and/or fragment processing.
 		 * 
@@ -965,16 +1100,25 @@ declare namespace imports.gi.Cogl {
 	class MaterialLayer {
 		public constructor(options?: Partial<MaterialLayerInitOptions>);
 		/**
+		 * @deprecated
+		 * No replacement
+		 * 
 		 * Queries the currently set downscaling filter for a material later
 		 * @returns the current downscaling filter
 		 */
 		public get_mag_filter(): MaterialFilter;
 		/**
+		 * @deprecated
+		 * No replacement
+		 * 
 		 * Queries the currently set downscaling filter for a material layer
 		 * @returns the current downscaling filter
 		 */
 		public get_min_filter(): MaterialFilter;
 		/**
+		 * @deprecated
+		 * No replacement
+		 * 
 		 * Extracts a texture handle for a specific layer.
 		 * 
 		 * <note>In the future Cogl may support purely GLSL based layers; for those
@@ -986,6 +1130,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_texture(): Handle;
 		/**
+		 * @deprecated
+		 * No replacement
+		 * 
 		 * Retrieves the type of the layer
 		 * 
 		 * Currently there is only one type of layer defined:
@@ -996,17 +1143,26 @@ declare namespace imports.gi.Cogl {
 		 */
 		public get_type(): MaterialLayerType;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_layer_get_wrap_mode_p() instead
+		 * 
 		 * Gets the wrap mode for the 'p' coordinate of texture lookups on
 		 * this layer. 'p' is the third coordinate.
 		 * @returns the wrap mode value for the p coordinate.
 		 */
 		public get_wrap_mode_p(): MaterialWrapMode;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_layer_get_wrap_mode_s() instead
+		 * 
 		 * Gets the wrap mode for the 's' coordinate of texture lookups on this layer.
 		 * @returns the wrap mode value for the s coordinate.
 		 */
 		public get_wrap_mode_s(): MaterialWrapMode;
 		/**
+		 * @deprecated
+		 * Use cogl_pipeline_layer_get_wrap_mode_t() instead
+		 * 
 		 * Gets the wrap mode for the 't' coordinate of texture lookups on this layer.
 		 * @returns the wrap mode value for the t coordinate.
 		 */
@@ -1194,6 +1350,9 @@ declare namespace imports.gi.Cogl {
 		 */
 		public multiply(a: Matrix, b: Matrix): void;
 		/**
+		 * @deprecated
+		 * Use cogl_matrix_orthographic()
+		 * 
 		 * Multiplies #matrix by a parallel projection matrix.
 		 * @param left The coordinate for the left clipping plane
 		 * @param right The coordinate for the right clipping plane
@@ -1501,12 +1660,18 @@ declare namespace imports.gi.Cogl {
 	class Texture {
 		public constructor(options?: Partial<TextureInitOptions>);
 		/**
+		 * @deprecated
+		 * Use cogl_object_ref() instead
+		 * 
 		 * Increment the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
 		 * @returns the #texture pointer.
 		 */
 		public static ref(texture: any | null): any | null;
 		/**
+		 * @deprecated
+		 * Use cogl_object_unref() instead
+		 * 
 		 * Decrement the reference count for a cogl texture.
 		 * @param texture a {@link Texture}.
 		 */

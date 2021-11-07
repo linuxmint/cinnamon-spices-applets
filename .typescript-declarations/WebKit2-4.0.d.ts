@@ -93,12 +93,23 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted when the user authentication request succeeded.
 		 * Applications handling their own credential storage should connect to
 		 * this signal to save the credentials.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - credential: the #WebKitCredential accepted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authenticated", callback: (owner: this, credential: Credential) => void): number;
 		/**
 		 * This signal is emitted when the user authentication request is
 		 * cancelled. It allows the application to dismiss its authentication
 		 * dialog in case of page load failure for example.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "cancelled", callback: (owner: this) => void): number;
 
@@ -159,6 +170,12 @@ declare namespace imports.gi.WebKit2 {
 		 * a new web view added to a new window.
 		 * When creating a new web view and there's an active browsing context, the new window
 		 * or tab shouldn't be focused.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns a #WebKitWebView widget. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-web-view", callback: (owner: this) => WebView): number;
 
@@ -223,6 +240,13 @@ declare namespace imports.gi.WebKit2 {
 		 * items are removed. Note that both #item_added and #items_removed can
 		 * %NULL when only the current item is updated. Items are only removed
 		 * when the list is cleared or the maximum items limit is reached.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - item_added: the #WebKitBackForwardListItem added or %NULL 
+		 *  - items_removed: a #GList of #WebKitBackForwardListItem<!-- -->s 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this, item_added: BackForwardListItem | null, items_removed: any | null) => void): number;
 
@@ -316,6 +340,11 @@ declare namespace imports.gi.WebKit2 {
 		 * user completed the #request calling webkit_color_chooser_request_finish(),
 		 * or cancelled it with webkit_color_chooser_request_cancel() or because the
 		 * color input element is removed from the DOM.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 
@@ -467,6 +496,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IContextMenuItem {
 		/**
+		 * @deprecated
+		 * Use webkit_context_menu_item_get_gaction() instead.
+		 * 
 		 * Gets the action associated to #item as a #GtkAction.
 		 * @returns the #GtkAction associated to the #WebKitContextMenuItem,
 		 *    or %NULL if #item is a separator.
@@ -518,6 +550,9 @@ declare namespace imports.gi.WebKit2 {
 	class ContextMenuItem {
 		public constructor(options?: Partial<ContextMenuItemInitOptions>);
 		/**
+		 * @deprecated
+		 * Use webkit_context_menu_item_new_from_gaction() instead.
+		 * 
 		 * Creates a new #WebKitContextMenuItem for the given #action.
 		 * @param action a #GtkAction
 		 * @returns the newly created #WebKitContextMenuItem object.
@@ -590,6 +625,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		add_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_clear() instead.
+		 * 
 		 * Delete all cookies of #cookie_manager
 		 */
 		delete_all_cookies(): void;
@@ -610,6 +648,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		delete_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_remove() instead.
+		 * 
 		 * Remove all cookies of #cookie_manager for the given #domain.
 		 * @param domain a domain name
 		 */
@@ -652,6 +693,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_cookies_finish(result: Gio.AsyncResult): GLib.List;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_fetch() instead.
+		 * 
 		 * Asynchronously get the list of domains for which #cookie_manager contains cookies.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
@@ -661,6 +705,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_domains_with_cookies(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_fetch_finish() instead.
+		 * 
 		 * Finish an asynchronous operation started with webkit_cookie_manager_get_domains_with_cookies().
 		 * The return value is a %NULL terminated list of strings which should
 		 * be released with g_strfreev().
@@ -694,6 +741,11 @@ declare namespace imports.gi.WebKit2 {
 		set_persistent_storage(filename: string, storage: CookiePersistentStorage): void;
 		/**
 		 * This signal is emitted when cookies are added, removed or modified.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
@@ -852,6 +904,12 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted after #WebKitDownload::decide-destination and before
 		 * #WebKitDownload::received-data to notify that destination file has been
 		 * created successfully at #destination.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - destination: the destination URI 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "created-destination", callback: (owner: this, destination: string) => void): number;
 		/**
@@ -859,6 +917,14 @@ declare namespace imports.gi.WebKit2 {
 		 * decide a destination URI for the download. If this signal is not
 		 * handled the file will be downloaded to %G_USER_DIRECTORY_DOWNLOAD
 		 * directory using #suggested_filename.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - suggested_filename: the filename suggested for the download 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "decide-destination", callback: (owner: this, suggested_filename: string) => boolean): number;
 		/**
@@ -868,17 +934,34 @@ declare namespace imports.gi.WebKit2 {
 		 * with webkit_download_cancel(), this signal is emitted with error
 		 * %WEBKIT_DOWNLOAD_ERROR_CANCELLED_BY_USER. The download operation finishes
 		 * after an error and #WebKitDownload::finished signal is emitted after this one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: the #GError that was triggered 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
 		/**
 		 * This signal is emitted when download finishes successfully or due to an error.
 		 * In case of errors #WebKitDownload::failed signal is emitted before this one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted after response is received,
 		 * every time new data has been written to the destination. It's
 		 * useful to know the progress of the download operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - data_length: the length of data received in bytes 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "received-data", callback: (owner: this, data_length: number) => void): number;
 
@@ -1022,6 +1105,13 @@ declare namespace imports.gi.WebKit2 {
 		 * to get the favicon. If you are interested in the favicon of a
 		 * #WebKitWebView it's easier to use the #WebKitWebView:favicon
 		 * property. See webkit_web_view_get_favicon() for more details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page_uri: the URI of the Web page containing the icon 
+		 *  - favicon_uri: the URI of the favicon 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "favicon-changed", callback: (owner: this, page_uri: string, favicon_uri: string) => void): number;
 
@@ -1276,6 +1366,12 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted when the #WebKitFindController has
 		 * counted the number of matches for a given text after a call
 		 * to webkit_find_controller_count_matches().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - match_count: the number of matches of the search text 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "counted-matches", callback: (owner: this, match_count: number) => void): number;
 		/**
@@ -1284,6 +1380,11 @@ declare namespace imports.gi.WebKit2 {
 		 * is not found asynchronously after a call to
 		 * webkit_find_controller_search(), webkit_find_controller_search_next()
 		 * or webkit_find_controller_search_previous().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "failed-to-find-text", callback: (owner: this) => void): number;
 		/**
@@ -1292,6 +1393,12 @@ declare namespace imports.gi.WebKit2 {
 		 * asynchronously after a call to webkit_find_controller_search(),
 		 * webkit_find_controller_search_next() or
 		 * webkit_find_controller_search_previous().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - match_count: the number of matches found of the search text 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "found-text", callback: (owner: this, match_count: number) => void): number;
 
@@ -1327,6 +1434,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IFormSubmissionRequest {
 		/**
+		 * @deprecated
+		 * Use webkit_form_submission_request_list_text_fields() instead.
+		 * 
 		 * Get a #GHashTable with the values of the text fields contained in the form
 		 * associated to #request. Note that fields will be missing if the form
 		 * contains multiple text input elements with the same name, so this
@@ -1405,11 +1515,23 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * If the signal is not handled, WebKit will try to determine the position
 		 * using GeoClue if available.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "start", callback: (owner: this) => boolean): number;
 		/**
 		 * The signal is emitted to notify that #manager doesn't need to receive
 		 * position updates anymore.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "stop", callback: (owner: this) => void): number;
 
@@ -1676,25 +1798,53 @@ declare namespace imports.gi.WebKit2 {
 		 * Emitted when a complete input sequence has been entered by the user.
 		 * This can be a single character immediately after a key press or the
 		 * final result of preediting.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - text: the string result 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "committed", callback: (owner: this, text: string) => void): number;
 		/**
 		 * Emitted when the input method wants to delete the context surrounding the cursor.
 		 * If #offset is a negative value, it means a position before the cursor.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - offset: the character offset from the cursor position of the text to be deleted. 
+		 *  - n_chars: the number of characters to be deleted 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "delete-surrounding", callback: (owner: this, offset: number, n_chars: number) => void): number;
 		/**
 		 * Emitted whenever the preedit sequence currently being entered has changed.
 		 * It is also emitted at the end of a preedit sequence, in which case
 		 * webkit_input_method_context_get_preedit() returns the empty string.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-changed", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when a preediting sequence has been completed or canceled.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-finished", callback: (owner: this) => void): number;
 		/**
 		 * Emitted when a new preediting sequence starts.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "preedit-started", callback: (owner: this) => void): number;
 
@@ -1815,11 +1965,17 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_frame_name(): string;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:modifiers property.
 		 * @returns The modifiers active if this decision was triggered by a mouse event
 		 */
 		get_modifiers(): number;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:mouse-button property.
 		 * @returns The mouse button used if this decision was triggered by a mouse event or 0 otherwise
 		 */
@@ -1830,11 +1986,17 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_navigation_action(): NavigationAction;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:navigation-type property.
 		 * @returns The type of navigation triggering this policy decision.
 		 */
 		get_navigation_type(): NavigationType;
 		/**
+		 * @deprecated
+		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:request property.
 		 * @returns The URI request that is associated with this navigation
 		 */
@@ -1921,6 +2083,11 @@ declare namespace imports.gi.WebKit2 {
 		get_title(): string;
 		/**
 		 * Emitted when a notification has been clicked. See webkit_notification_clicked().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 		/**
@@ -1928,6 +2095,11 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The default handler will close the notification using libnotify, if built with
 		 * support for it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 
@@ -2022,6 +2194,11 @@ declare namespace imports.gi.WebKit2 {
 		 * Emitted when closing a #WebKitOptionMenu is requested. This can happen
 		 * when the user explicitly calls webkit_option_menu_close() or when the
 		 * element is detached from the current page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 
@@ -2166,12 +2343,24 @@ declare namespace imports.gi.WebKit2 {
 		 * Emitted right before the printing will start. You should read the information
 		 * from the widget and update the content based on it if necessary. The widget
 		 * is not guaranteed to be valid at a later time.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "apply", callback: (owner: this) => void): number;
 		/**
 		 * Emitted after change of selected printer in the dialog. The actual page setup
 		 * and print settings are available and the custom widget can actualize itself
 		 * according to their values.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - page_setup: actual page setup 
+		 *  - print_settings: actual print settings 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "update", callback: (owner: this, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings) => void): number;
 
@@ -2283,17 +2472,34 @@ declare namespace imports.gi.WebKit2 {
 		 * The returned #WebKitPrintCustomWidget will be added to the print dialog and
 		 * it will be owned by the #print_operation. However, the object is guaranteed
 		 * to be alive until the #WebKitPrintCustomWidget::apply is emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns A #WebKitPrintCustomWidget that will be embedded in the dialog. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create-custom-widget", callback: (owner: this) => PrintCustomWidget): number;
 		/**
 		 * Emitted when an error occurs while printing. The given #error, of the domain
 		 * %WEBKIT_PRINT_ERROR, contains further details of the failure.
 		 * The #WebKitPrintOperation::finished signal is emitted after this one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: the #GError that was triggered 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
 		/**
 		 * Emitted when the print operation has finished doing everything
 		 * required for printing.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 
@@ -3019,6 +3225,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_enable_plugins(): boolean;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebContext:is-ephemeral instead.
+		 * 
 		 * Get the #WebKitSettings:enable-private-browsing property.
 		 * @returns %TRUE If private browsing is enabled or %FALSE otherwise.
 		 */
@@ -3318,6 +3527,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_enable_plugins(enabled: boolean): void;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebContext:is-ephemeral instead.
+		 * 
 		 * Set the #WebKitSettings:enable-private-browsing property.
 		 * @param enabled Value to be set
 		 */
@@ -4087,6 +4299,12 @@ declare namespace imports.gi.WebKit2 {
 		 * <code>window.webkit.messageHandlers.&lt;name&gt;.postMessage()</code>, after registering
 		 * <code>&lt;name&gt;</code> using
 		 * webkit_user_content_manager_register_script_message_handler()
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - js_result: the #WebKitJavascriptResult holding the value received from the JavaScript world. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "script-message-received", callback: (owner: this, js_result: JavascriptResult) => void): number;
 
@@ -4371,6 +4589,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_spell_checking_languages(): string[];
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_get_tls_errors_policy() instead.
+		 * 
 		 * Get the TLS errors policy of #context
 		 * @returns a #WebKitTLSErrorsPolicy
 		 */
@@ -4521,6 +4742,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_cache_model(cache_model: CacheModel): void;
 		/**
+		 * @deprecated
+		 * Use webkit_web_context_new_with_website_data_manager() instead.
+		 * 
 		 * Set the directory where disk cache files will be stored
 		 * This method must be called before loading anything in this context, otherwise
 		 * it will not have any effect.
@@ -4545,6 +4769,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_favicon_database_directory(path: string | null): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_set_network_proxy_settings() instead.
+		 * 
 		 * Set the network proxy settings to be used by connections started in #context.
 		 * By default %WEBKIT_NETWORK_PROXY_MODE_DEFAULT is used, which means that the
 		 * system settings will be used (g_proxy_resolver_get_default()).
@@ -4617,6 +4844,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		set_spell_checking_languages(languages: string[]): void;
 		/**
+		 * @deprecated
+		 * Use webkit_website_data_manager_set_tls_errors_policy() instead.
+		 * 
 		 * Set the TLS errors policy of #context as #policy
 		 * @param policy a #WebKitTLSErrorsPolicy
 		 */
@@ -4657,10 +4887,22 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted when a new automation request is made.
 		 * Note that it will never be emitted if automation is not enabled in #context,
 		 * see webkit_web_context_set_automation_allowed() for more details.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - session: the #WebKitAutomationSession associated with this event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "automation-started", callback: (owner: this, session: AutomationSession) => void): number;
 		/**
 		 * This signal is emitted when a new download request is made.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - download: the #WebKitDownload associated with this event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "download-started", callback: (owner: this, download: Download) => void): number;
 		/**
@@ -4672,6 +4914,11 @@ declare namespace imports.gi.WebKit2 {
 		 * notification permissions have changed since the last time this
 		 * signal was emitted, then there is no need to call
 		 * webkit_web_context_initialize_notification_permissions() again.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "initialize-notification-permissions", callback: (owner: this) => void): number;
 		/**
@@ -4679,6 +4926,11 @@ declare namespace imports.gi.WebKit2 {
 		 * launched. It signals the most appropriate moment to use
 		 * webkit_web_context_set_web_extensions_initialization_user_data()
 		 * and webkit_web_context_set_web_extensions_directory().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "initialize-web-extensions", callback: (owner: this) => void): number;
 		/**
@@ -4688,6 +4940,13 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * You can handle the user message asynchronously by calling g_object_ref() on
 		 * #message and returning %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the #WebKitUserMessage received 
+		 *  - returns %TRUE if the message was handled, or %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "user-message-received", callback: (owner: this, message: UserMessage) => boolean): number;
 
@@ -4824,6 +5083,13 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * To prevent the inspector view from being attached you can connect to this
 		 * signal and simply return %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "attach", callback: (owner: this) => boolean): number;
 		/**
@@ -4838,12 +5104,24 @@ declare namespace imports.gi.WebKit2 {
 		 * In both cases, if this signal is not handled, the default implementation
 		 * calls gtk_window_present() on the current toplevel #GtkWindow of the
 		 * inspector view.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "bring-to-front", callback: (owner: this) => boolean): number;
 		/**
 		 * Emitted when the inspector page is closed. If you are using your own
 		 * inspector window, you should connect to this signal and destroy your
 		 * window.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 		/**
@@ -4856,6 +5134,13 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * To prevent the inspector view from being detached you can connect to this
 		 * signal and simply return %TRUE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "detach", callback: (owner: this) => boolean): number;
 		/**
@@ -4868,6 +5153,13 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * To prevent the inspector from being shown you can connect to this
 		 * signal and simply return %TRUE
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "open-window", callback: (owner: this) => boolean): number;
 
@@ -4969,22 +5261,46 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when an error occurs during the resource
 		 * load operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - error: the #GError that was triggered 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "failed", callback: (owner: this, error: GLib.Error) => void): number;
 		/**
 		 * This signal is emitted when a TLS error occurs during the resource load operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - certificate: a #GTlsCertificate 
+		 *  - errors: a #GTlsCertificateFlags with the verification status of #certificate 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "failed-with-tls-errors", callback: (owner: this, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags) => void): number;
 		/**
 		 * This signal is emitted when the resource load finishes successfully
 		 * or due to an error. In case of errors #WebKitWebResource::failed signal
 		 * is emitted before this one.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 		/**
 		 * This signal is emitted after response is received,
 		 * every time new data has been received. It's
 		 * useful to know the progress of the resource load operation.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - data_length: the length of data received in bytes 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "received-data", callback: (owner: this, data_length: number) => void): number;
 		/**
@@ -4994,6 +5310,13 @@ declare namespace imports.gi.WebKit2 {
 		 * request sent to the server due to the redirection and the
 		 * #redirected_response parameter containing the response
 		 * received by the server for the initial request.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: a #WebKitURIRequest 
+		 *  - redirected_response: a #WebKitURIResponse, or %NULL 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "sent-request", callback: (owner: this, request: URIRequest, redirected_response: URIResponse) => void): number;
 
@@ -5251,6 +5574,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_is_muted(): boolean;
 		/**
+		 * @deprecated
+		 * Use jsc_value_get_context() instead.
+		 * 
 		 * Get the global JavaScript context used by #web_view to deserialize the
 		 * result values of scripts executed with webkit_web_view_run_javascript().
 		 * @returns the <function>JSGlobalContextRef</function> used by #web_view to deserialize
@@ -5828,6 +6154,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The default signal handler will run a default authentication
 		 * dialog asynchronously for the user to interact with.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: a #WebKitAuthenticationRequest 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "authenticate", callback: (owner: this, request: AuthenticationRequest) => boolean): number;
 		/**
@@ -5836,6 +6170,11 @@ declare namespace imports.gi.WebKit2 {
 		 * after trying to close the #web_view with webkit_web_view_try_close().
 		 * It is the owner's responsibility to handle this signal to hide or
 		 * destroy the #WebKitWebView, if necessary.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "close", callback: (owner: this) => void): number;
 		/**
@@ -5888,11 +6227,26 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The proposed #WebKitContextMenu passed in #context_menu argument is only valid
 		 * during the signal emission.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - context_menu: the proposed #WebKitContextMenu 
+		 *  - event: the #GdkEvent that triggered the context menu 
+		 *  - hit_test_result: a #WebKitHitTestResult 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "context-menu", callback: (owner: this, context_menu: ContextMenu, event: Gdk.Event, hit_test_result: HitTestResult) => boolean): number;
 		/**
 		 * Emitted after #WebKitWebView::context-menu signal, if the context menu is shown,
 		 * to notify that the context menu is dismissed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "context-menu-dismissed", callback: (owner: this) => void): number;
 		/**
@@ -5908,6 +6262,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The new #WebKitWebView should not be displayed to the user
 		 * until the #WebKitWebView::ready-to-show signal is emitted.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - navigation_action: a #WebKitNavigationAction 
+		 *  - returns a newly allocated #WebKitWebView widget
+		 *    or %NULL to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "create", callback: (owner: this, navigation_action: NavigationAction) => Gtk.Widget): number;
 		/**
@@ -5952,6 +6314,15 @@ declare namespace imports.gi.WebKit2 {
 		 * made explicitly, webkit_policy_decision_use() will be the default policy decision. The
 		 * default signal handler will simply call webkit_policy_decision_use(). Only the first
 		 * policy decision chosen for a given #WebKitPolicyDecision will have any affect.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - decision: the #WebKitPolicyDecision 
+		 *  - decision_type: a #WebKitPolicyDecisionType denoting the type of #decision 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "decide-policy", callback: (owner: this, decision: PolicyDecision, decision_type: PolicyDecisionType) => boolean): number;
 		/**
@@ -5963,6 +6334,13 @@ declare namespace imports.gi.WebKit2 {
 		 * transition and eventually prepare the top-level window
 		 * (e.g. hide some widgets that would otherwise be part of the
 		 * full screen window).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to continue emission of the event. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "enter-fullscreen", callback: (owner: this) => boolean): number;
 		/**
@@ -5974,6 +6352,12 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * You can check the #event parameter to know exactly which kind
 		 * of event has been detected (see #WebKitInsecureContentEvent).
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - event: the #WebKitInsecureContentEvent 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "insecure-content-detected", callback: (owner: this, event: InsecureContentEvent) => void): number;
 		/**
@@ -5981,6 +6365,13 @@ declare namespace imports.gi.WebKit2 {
 		 * window out of its full screen state. This signal can be used by
 		 * client code to restore widgets hidden during the
 		 * #WebKitWebView::enter-fullscreen stage for instance.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to continue emission of the event. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "leave-fullscreen", callback: (owner: this) => boolean): number;
 		/**
@@ -6028,6 +6419,12 @@ declare namespace imports.gi.WebKit2 {
 		 *     }
 		 * }
 		 * </programlisting></informalexample>
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - load_event: the #WebKitLoadEvent 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-changed", callback: (owner: this, load_event: LoadEvent) => void): number;
 		/**
@@ -6041,6 +6438,16 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * By default, if the signal is not handled, a stock error page will be displayed.
 		 * You need to handle the signal if you want to provide your own error page.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - load_event: the #WebKitLoadEvent of the load operation 
+		 *  - failing_uri: the URI that failed to load 
+		 *  - error: the #GError that was triggered 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-failed", callback: (owner: this, load_event: LoadEvent, failing_uri: string, error: GLib.Error) => boolean): number;
 		/**
@@ -6053,6 +6460,16 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * If %FALSE is returned, #WebKitWebView::load-failed will be emitted. The load
 		 * will finish regardless of the returned value.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - failing_uri: the URI that failed to load 
+		 *  - certificate: a #GTlsCertificate 
+		 *  - errors: a #GTlsCertificateFlags with the verification status of #certificate 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "load-failed-with-tls-errors", callback: (owner: this, failing_uri: string, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags) => boolean): number;
 		/**
@@ -6064,6 +6481,13 @@ declare namespace imports.gi.WebKit2 {
 		 * #GdkModifierType flags indicating the state of modifier keys.
 		 * The signal is emitted again when the mouse is moved out of the
 		 * current element with a new #hit_test_result.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - hit_test_result: a #WebKitHitTestResult 
+		 *  - modifiers: a bitmask of #GdkModifierType 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "mouse-target-changed", callback: (owner: this, hit_test_result: HitTestResult, modifiers: number) => void): number;
 		/**
@@ -6113,6 +6537,14 @@ declare namespace imports.gi.WebKit2 {
 		 * by the specific #WebKitPermissionRequest that could allow or deny it. Check the
 		 * documentation of classes implementing #WebKitPermissionRequest interface to know
 		 * their default action.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: the #WebKitPermissionRequest 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "permission-request", callback: (owner: this, request: PermissionRequest) => boolean): number;
 		/**
@@ -6125,6 +6557,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * You can connect to this signal and return %TRUE to cancel the print operation
 		 * or implement your own print dialog.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - print_operation: the #WebKitPrintOperation that will handle the print request 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "print", callback: (owner: this, print_operation: PrintOperation) => boolean): number;
 		/**
@@ -6134,6 +6574,11 @@ declare namespace imports.gi.WebKit2 {
 		 * size, position, whether the location, status and scrollbars
 		 * should be displayed, is already set on the #WebKitWindowProperties
 		 * of #web_view. See also webkit_web_view_get_window_properties().
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "ready-to-show", callback: (owner: this) => void): number;
 		/**
@@ -6141,6 +6586,13 @@ declare namespace imports.gi.WebKit2 {
 		 * contains the #WebKitURIRequest that will be sent to the server.
 		 * You can monitor the load operation by connecting to the different signals
 		 * of #resource.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - resource: a #WebKitWebResource 
+		 *  - request: a #WebKitURIRequest 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "resource-load-started", callback: (owner: this, resource: WebResource, request: URIRequest) => void): number;
 		/**
@@ -6151,6 +6603,11 @@ declare namespace imports.gi.WebKit2 {
 		 * new view to behave as modal. Once the signal is emitted a new
 		 * main loop will be run to block user interaction in the parent
 		 * #WebKitWebView until the new dialog is closed.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "run-as-modal", callback: (owner: this) => void): number;
 		/**
@@ -6167,6 +6624,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The default signal handler will asynchronously run a regular
 		 * #GtkColorChooser for the user to interact with.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: a #WebKitColorChooserRequest 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "run-color-chooser", callback: (owner: this, request: ColorChooserRequest) => boolean): number;
 		/**
@@ -6181,6 +6646,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The default signal handler will asynchronously run a regular
 		 * #GtkFileChooserDialog for the user to interact with.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: a #WebKitFileChooserRequest 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "run-file-chooser", callback: (owner: this, request: FileChooserRequest) => boolean): number;
 		/**
@@ -6211,6 +6684,14 @@ declare namespace imports.gi.WebKit2 {
 		 * webkit_script_dialog_close() when done.
 		 * If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
 		 * closed, webkit_script_dialog_close() will be called.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - dialog: the #WebKitScriptDialog to show 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "script-dialog", callback: (owner: this, dialog: ScriptDialog) => boolean): number;
 		/**
@@ -6220,6 +6701,13 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * The default handler will emit a notification using libnotify, if built with
 		 * support for it.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - notification: a #WebKitNotification 
+		 *  - returns %TRUE to stop other handlers from being invoked. %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-notification", callback: (owner: this, notification: Notification) => boolean): number;
 		/**
@@ -6229,6 +6717,16 @@ declare namespace imports.gi.WebKit2 {
 		 * #WebKitWebView is given as #rectangle parameter, it can be used to position the
 		 * menu.
 		 * To handle this signal asynchronously you should keep a ref of the #menu.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - object:  
+		 *  - p0:  
+		 *  - p1:  
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *   %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "show-option-menu", callback: (owner: this, object: OptionMenu, p0: Gdk.Event, p1: Gdk.Rectangle) => boolean): number;
 		/**
@@ -6243,6 +6741,12 @@ declare namespace imports.gi.WebKit2 {
 		 * webkit_form_submission_request_submit() when done to continue with the form submission.
 		 * If the last reference is removed on a #WebKitFormSubmissionRequest and the
 		 * form has not been submitted, webkit_form_submission_request_submit() will be called.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - request: a #WebKitFormSubmissionRequest 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "submit-form", callback: (owner: this, request: FormSubmissionRequest) => void): number;
 		/**
@@ -6254,15 +6758,35 @@ declare namespace imports.gi.WebKit2 {
 		 * #message and returning %TRUE. If the last reference of #message is removed
 		 * and the message has not been replied to, the operation in the #WebKitWebPage will
 		 * finish with error %WEBKIT_USER_MESSAGE_UNHANDLED_MESSAGE.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - message: the #WebKitUserMessage received 
+		 *  - returns %TRUE if the message was handled, or %FALSE otherwise. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "user-message-received", callback: (owner: this, message: UserMessage) => boolean): number;
 		/**
 		 * This signal is emitted when the web process crashes.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - returns %TRUE to stop other handlers from being invoked for the event.
+		 *    %FALSE to propagate the event further. 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "web-process-crashed", callback: (owner: this) => boolean): number;
 		/**
 		 * This signal is emitted when the web process terminates abnormally due
 		 * to #reason.
+		 * @param signal 
+		 * @param callback Callback function
+		 *  - owner: owner of the emitted event 
+		 *  - reason: the a #WebKitWebProcessTerminationReason 
+		 * 
+		 * @returns Callback ID
 		 */
 		connect(signal: "web-process-terminated", callback: (owner: this, reason: WebProcessTerminationReason) => void): number;
 
@@ -6611,6 +7135,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_tls_errors_policy(): TLSErrorsPolicy;
 		/**
+		 * @deprecated
+		 * WebSQL is no longer supported. Use IndexedDB instead.
+		 * 
 		 * Get the #WebKitWebsiteDataManager:websql-directory property.
 		 * @returns the directory where WebSQL databases are stored or %NULL if #manager is ephemeral.
 		 */
@@ -7458,6 +7985,9 @@ declare namespace imports.gi.WebKit2 {
 	class JavascriptResult {
 		public constructor(options?: Partial<JavascriptResultInitOptions>);
 		/**
+		 * @deprecated
+		 * Use jsc_value_get_context() instead.
+		 * 
 		 * Get the global Javascript context that should be used with the
 		 * <function>JSValueRef</function> returned by webkit_javascript_result_get_value().
 		 * @returns the <function>JSGlobalContextRef</function> for the #WebKitJavascriptResult
@@ -7469,6 +7999,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		// public get_js_value(): JavaScriptCore.Value;
 		/**
+		 * @deprecated
+		 * Use webkit_javascript_result_get_js_value() instead.
+		 * 
 		 * Get the value of #js_result. You should use the <function>JSGlobalContextRef</function>
 		 * returned by webkit_javascript_result_get_global_context() to use the <function>JSValueRef</function>.
 		 * @returns the <function>JSValueRef</function> of the #WebKitJavascriptResult

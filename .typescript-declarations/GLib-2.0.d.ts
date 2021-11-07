@@ -152,6 +152,11 @@ declare namespace imports.gi.GLib {
 		 */
 		public ref(): AsyncQueue;
 		/**
+		 * @deprecated
+		 * Reference counting is done atomically.
+		 * so g_async_queue_ref() can be used regardless of the #queue's
+		 * lock.
+		 * 
 		 * Increases the reference count of the asynchronous #queue by 1.
 		 */
 		public ref_unlocked(): void;
@@ -209,6 +214,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public sort_unlocked(func: CompareDataFunc): void;
 		/**
+		 * @deprecated
+		 * use g_async_queue_timeout_pop().
+		 * 
 		 * Pops data from the #queue. If the queue is empty, blocks until
 		 * #end_time or until data becomes available.
 		 * 
@@ -222,6 +230,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public timed_pop(end_time: TimeVal): any | null;
 		/**
+		 * @deprecated
+		 * use g_async_queue_timeout_pop_unlocked().
+		 * 
 		 * Pops data from the #queue. If the queue is empty, blocks until
 		 * #end_time or until data becomes available.
 		 * 
@@ -292,6 +303,11 @@ declare namespace imports.gi.GLib {
 		 */
 		public unref(): void;
 		/**
+		 * @deprecated
+		 * Reference counting is done atomically.
+		 * so g_async_queue_unref() can be used regardless of the #queue's
+		 * lock.
+		 * 
 		 * Decreases the reference count of the asynchronous #queue by 1
 		 * and releases the lock. This function must be called while holding
 		 * the #queue's lock. If the reference count went to 0, the #queue
@@ -350,6 +366,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public free(): void;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_get_added_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the time the bookmark for #uri was added to #bookmark
 		 * 
 		 * In the event the URI cannot be found, -1 is returned and
@@ -368,6 +388,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public get_added_date_time(uri: string): DateTime;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_get_application_info() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the registration information of #app_name for the bookmark for
 		 * #uri.  See g_bookmark_file_set_application_info() for more information about
 		 * the returned data.
@@ -493,6 +517,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public get_mime_type(uri: string): string;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_get_modified_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the time when the bookmark for #uri was last modified.
 		 * 
 		 * In the event the URI cannot be found, -1 is returned and
@@ -538,6 +566,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public get_uris(): [ string[], number | null ];
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_get_visited_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Gets the time the bookmark for #uri was last visited.
 		 * 
 		 * In the event the URI cannot be found, -1 is returned and
@@ -661,6 +693,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public remove_item(uri: string): boolean;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_set_added_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the time the bookmark for #uri was added into #bookmark.
 		 * 
 		 * If no bookmark for #uri is found then it is created.
@@ -677,6 +713,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public set_added_date_time(uri: string, added: DateTime): void;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_set_application_info() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the meta-data of application #name inside the list of
 		 * applications that have registered a bookmark for #uri inside
 		 * #bookmark.
@@ -801,6 +841,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public set_mime_type(uri: string, mime_type: string): void;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_set_modified_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the last time the bookmark for #uri was last modified.
 		 * 
 		 * If no bookmark for #uri is found then it is created.
@@ -838,6 +882,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public set_title(uri: string | null, title: string): void;
 		/**
+		 * @deprecated
+		 * Use g_bookmark_file_set_visited_date_time() instead, as
+		 *    `time_t` is deprecated due to the year 2038 problem.
+		 * 
 		 * Sets the time the bookmark for #uri was last visited.
 		 * 
 		 * If no bookmark for #uri is found then it is created.
@@ -1652,6 +1700,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public set_parse(str: string): void;
 		/**
+		 * @deprecated
+		 * Use g_date_set_time_t() instead.
+		 * 
 		 * Sets the value of a date from a #GTime value.
 		 * The time to date conversion is done using the user's current timezone.
 		 * @param time_ #GTime value to set.
@@ -1673,6 +1724,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public set_time_t(timet: number): void;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use g_date_set_time_t()
+		 *    instead.
+		 * 
 		 * Sets the value of a date from a #GTimeVal value.  Note that the
 		 * #tv_usec member is ignored, because #GDate can't make use of the
 		 * additional precision.
@@ -1823,6 +1878,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public static new_from_iso8601(text: string, default_tz: TimeZone | null): DateTime | null;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use
+		 *    g_date_time_new_from_unix_local() instead.
+		 * 
 		 * Creates a #GDateTime corresponding to the given #GTimeVal #tv in the
 		 * local time zone.
 		 * 
@@ -1840,6 +1899,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public static new_from_timeval_local(tv: TimeVal): DateTime | null;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use
+		 *    g_date_time_new_from_unix_utc() instead.
+		 * 
 		 * Creates a #GDateTime corresponding to the given #GTimeVal #tv in UTC.
 		 * 
 		 * The time contained in a #GTimeVal is always stored in the form of
@@ -2350,6 +2413,10 @@ declare namespace imports.gi.GLib {
 		 */
 		public to_local(): DateTime | null;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use
+		 *    g_date_time_to_unix() instead.
+		 * 
 		 * Stores the instant in time that #datetime represents into #tv.
 		 * 
 		 * The time contained in a #GTimeVal is always stored in the form of
@@ -2958,6 +3025,9 @@ declare namespace imports.gi.GLib {
 		public readonly reserved1: any;
 		public readonly reserved2: any;
 		/**
+		 * @deprecated
+		 * Use g_io_channel_shutdown() instead.
+		 * 
 		 * Close an IO channel. Any pending data to be written will be
 		 * flushed, ignoring errors. The channel will not be freed until the
 		 * last reference is dropped using g_io_channel_unref().
@@ -3034,6 +3104,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public init(): void;
 		/**
+		 * @deprecated
+		 * Use g_io_channel_read_chars() instead.
+		 * 
 		 * Reads data from a #GIOChannel.
 		 * @param buf a buffer to read the data into (which should be at least
 		 *       count bytes long)
@@ -3112,6 +3185,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public ref(): IOChannel;
 		/**
+		 * @deprecated
+		 * Use g_io_channel_seek_position() instead.
+		 * 
 		 * Sets the current position in the #GIOChannel, similar to the standard
 		 * library function fseek().
 		 * @param offset an offset, in bytes, which is added to the position specified
@@ -3249,6 +3325,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public unref(): void;
 		/**
+		 * @deprecated
+		 * Use g_io_channel_write_chars() instead.
+		 * 
 		 * Writes data to a #GIOChannel.
 		 * @param buf the buffer containing the data to write
 		 * @param count the number of bytes to write
@@ -4215,6 +4294,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public unref(): void;
 		/**
+		 * @deprecated
+		 * Use g_main_context_is_owner() and separate locking instead.
+		 * 
 		 * Tries to become the owner of the specified context,
 		 * as with g_main_context_acquire(). But if another thread
 		 * is the owner, atomically drop #mutex and wait on #cond until
@@ -4365,6 +4447,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public static new_from_fd(fd: number, writable: boolean): MappedFile;
 		/**
+		 * @deprecated
+		 * Use g_mapped_file_unref() instead.
+		 * 
 		 * This call existed before #GMappedFile had refcounting and is currently
 		 * exactly the same as g_mapped_file_unref().
 		 */
@@ -5491,6 +5576,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public add_entries(entries: OptionEntry[]): void;
 		/**
+		 * @deprecated
+		 * Use g_option_group_unref() instead.
+		 * 
 		 * Frees a #GOptionGroup. Note that you must not free groups
 		 * which have been added to a #GOptionContext.
 		 */
@@ -7662,6 +7750,9 @@ declare namespace imports.gi.GLib {
 		 */
 		public get_context(): MainContext | null;
 		/**
+		 * @deprecated
+		 * use g_source_get_time() instead
+		 * 
 		 * This function ignores #source and is otherwise the same as
 		 * g_get_current_time().
 		 * @param timeval #GTimeVal structure in which to store current time.
@@ -8216,6 +8307,11 @@ declare namespace imports.gi.GLib {
 		 */
 		public assign(rval: string): String;
 		/**
+		 * @deprecated
+		 * This function uses the locale-specific
+		 *     tolower() function, which is almost never the right thing.
+		 *     Use g_string_ascii_down() or g_utf8_strdown() instead.
+		 * 
 		 * Converts a #GString to lowercase.
 		 * @returns the #GString
 		 */
@@ -8401,6 +8497,11 @@ declare namespace imports.gi.GLib {
 		 */
 		public truncate(len: number): String;
 		/**
+		 * @deprecated
+		 * This function uses the locale-specific
+		 *     toupper() function, which is almost never the right thing.
+		 *     Use g_string_ascii_up() or g_utf8_strup() instead.
+		 * 
 		 * Converts a #GString to uppercase.
 		 * @returns #string
 		 */
@@ -8889,12 +8990,20 @@ declare namespace imports.gi.GLib {
 		 */
 		public tv_usec: number;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use `guint64` for
+		 *    representing microseconds since the epoch, or use #GDateTime.
+		 * 
 		 * Adds the given number of microseconds to #time_. #microseconds can
 		 * also be negative to decrease the value of #time_.
 		 * @param microseconds number of microseconds to add to #time
 		 */
 		public add(microseconds: number): void;
 		/**
+		 * @deprecated
+		 * #GTimeVal is not year-2038-safe. Use
+		 *    g_date_time_format_iso8601(dt) instead.
+		 * 
 		 * Converts #time_ into an RFC 3339 encoded string, relative to the
 		 * Coordinated Universal Time (UTC). This is one of the many formats
 		 * allowed by ISO 8601.
@@ -8944,6 +9053,11 @@ declare namespace imports.gi.GLib {
 	class TimeZone {
 		public constructor(options?: Partial<TimeZoneInitOptions>);
 		/**
+		 * @deprecated
+		 * Use g_time_zone_new_identifier() instead, as it provides
+		 *     error reporting. Change your code to handle a potentially %NULL return
+		 *     value.
+		 * 
 		 * A version of g_time_zone_new_identifier() which returns the UTC time zone
 		 * if #identifier could not be parsed or loaded.
 		 * 
@@ -9495,6 +9609,12 @@ declare namespace imports.gi.GLib {
 		 */
 		public steal(key: any | null): boolean;
 		/**
+		 * @deprecated
+		 * The order of a balanced tree is somewhat arbitrary.
+		 *     If you just want to visit all nodes in sorted order, use
+		 *     g_tree_foreach() instead. If you really need to visit nodes in
+		 *     a different order, consider using an [n-ary tree][glib-N-ary-Trees].
+		 * 
 		 * Calls the given function for each node in the #GTree.
 		 * @param traverse_func the function to call for each node visited. If this
 		 *   function returns %TRUE, the traversal is stopped.
