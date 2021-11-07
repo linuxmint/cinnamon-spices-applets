@@ -45,61 +45,6 @@ declare namespace imports.gi.Clutter {
     
   }
 
-  interface PointOptions {
-    x: number;
-    y: number
-  }
-
-  export interface Clip {
-    /** return location for the X offset of
-     * the clip rectangle, or null */
-    xoff: number;
-    /** return location for the Y offset of
-     * the clip rectangle, or null */
-    yoff: number;
-    /** return location for the width of
-     * the clip rectangle, or null */
-    width: number;
-    /** return location for the height of
-     * the clip rectangle, or null */
-    height: number;
-  }
-
-  export interface ContentScalingFilters {
-    /**  return location for the minification
-     * filter, or null */
-    min_filter: ScalingFilter;
-    /** return location for the magnification
-     * filter, or null */
-    mag_filter: ScalingFilter;
-  }
-
-  export interface FixedPosition {
-    /** true if the fixed position is set, false if it isn't */
-    ok: boolean;
-    /** return location for the X coordinate, or null */
-    x: number;
-    /** return location for the Y coordinate, or null */
-    y: number;
-  }
-
-  export interface PaintBoxResult {
-    /** true if a 2D paint box could be determined, else
-     * false. */
-    ok: boolean;
-    /** return location for a Clutter.ActorBox */
-    box: ActorBox;
-  }
-
-  export interface PivotPointResult {
-    /** return location for the normalized X
-    coordinate of the pivot point, or null */
-    pivot_x: number;
-    /** return location for the normalized Y
-    coordinate of the pivot point, or null */
-    pivot_y: number;
-  }
-
   export enum DebugFlag {
 
   }
@@ -110,36 +55,5 @@ declare namespace imports.gi.Clutter {
 
   export enum DrawDebugFlag {
 
-  }
-
-  export interface PositionResult {
-    /** return location for the X coordinate, or null */
-    x: number;
-    /** return location for the Y coordinate, or null */
-    y: number;
-  }
-
-  export class PickContext { }
-
-  export class PaintContext { }
-
-  export enum InputContentPurpose {
-    NORMAL = 0,
-    ALPHA = 1,
-    DIGITS = 2,
-    NUMBER = 3,
-    PHONE = 4,
-    URL = 5,
-    EMAIL = 6,
-    NAME = 7,
-    PASSWORD = 8,
-    DATE = 9,
-    TIME = 10,
-    DATETIME = 11,
-    TERMINAL = 12,
-  }
-
-  export enum InputContentHintFlags {
-    
   }
 }
