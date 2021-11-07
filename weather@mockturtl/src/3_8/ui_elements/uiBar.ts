@@ -34,11 +34,11 @@ export class UIBar {
 	}
 
 	public SwitchButtonToShow() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as any as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
 	}
 
 	public SwitchButtonToHide() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as any as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
 	}
 
 	public DisplayErrorMessage(msg: string) {
