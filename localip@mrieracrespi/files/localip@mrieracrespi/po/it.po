@@ -19,7 +19,7 @@ msgstr ""
 "Language: it\n"
 
 #: applet.js:42
-msgid "Your percieved location."
+msgid "Your perceived location."
 msgstr "La tua posizione percepita."
 
 #. localip@mrieracrespi->metadata.json->description

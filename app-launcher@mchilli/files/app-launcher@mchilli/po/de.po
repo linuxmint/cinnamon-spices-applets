@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 20:04+0200\n"
-"PO-Revision-Date: 2021-09-17 05:47+0200\n"
+"POT-Creation-Date: 2021-10-31 14:27+0100\n"
+"PO-Revision-Date: 2021-10-31 14:33+0100\n"
 "Last-Translator: MCHilli\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,88 +18,104 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:98
+#: applet.js:99
 msgid "Edit Applications"
 msgstr "Anwendungen bearbeiten"
 
-#: applet.js:647 applet.js:891
+#: applet.js:672 applet.js:926
 msgid "Delete"
 msgstr "Löschen"
 
-#: applet.js:648 applet.js:892
+#: applet.js:673 applet.js:927
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: applet.js:649 applet.js:893
+#: applet.js:674 applet.js:928
 msgid "Cancel"
 msgstr "Abbruch"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:33 widgets.py:27
+#: dialogs.py:35 widgets.py:34
 msgid "Name"
 msgstr "Name"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:39
+#: dialogs.py:41
 msgid "Group"
 msgstr "Gruppe"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:40 widgets.py:33
+#: dialogs.py:42 widgets.py:40
 msgid "Command"
 msgstr "Befehl"
 
-#: dialogs.py:120
+#: dialogs.py:178
 msgid "The name cannot be empty"
 msgstr "Der Name darf nicht leer sein"
 
-#: dialogs.py:125
+#: dialogs.py:183
 msgid "The name is already used"
 msgstr "Der Name wird schon verwendet"
 
-#: dialogs.py:132
+#: dialogs.py:190
 msgid "Valid name"
 msgstr "Gültiger Name"
 
-#: dialogs.py:138
+#: dialogs.py:196
 msgid "Valid command"
 msgstr "Gültiger Befehl"
 
-#: dialogs.py:141
+#: dialogs.py:199
 msgid "The command is not valid"
 msgstr "Der Befehl ist nicht gültig"
 
-#: dialogs.py:158
+#: dialogs.py:211
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "Welche Daten sollen von der *.desktop Datei ersetzt werden?"
+
+#: dialogs.py:256
 msgid "really delete?"
 msgstr "wirklich löschen?"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:21
+#: widgets.py:28
 msgid "Icon"
 msgstr "Symbol"
 
-#: widgets.py:102
+#: widgets.py:113
+msgid "Add application"
+msgstr "Anwendungen hinzufügen"
+
+#: widgets.py:114
 msgid "Add new entry"
 msgstr "Neuer Eintrag"
 
-#: widgets.py:107
+#: widgets.py:118
+msgid "Add separator"
+msgstr "Trenner hinzufügen"
+
+#: widgets.py:126
 msgid "Remove selected entry"
 msgstr "Ausgewählten Eintrag löschen"
 
-#: widgets.py:113
+#: widgets.py:132
 msgid "Edit selected entry"
 msgstr "Ausgewählten Eintrag bearbeiten"
 
-#: widgets.py:119
+#: widgets.py:138
 msgid "Move selected entry up"
 msgstr "Ausgewählten Eintrag nach oben bewegen"
 
-#: widgets.py:125
+#: widgets.py:144
 msgid "Move selected entry down"
 msgstr "Ausgewählten Eintrag nach unten bewegen"
+
+#: widgets.py:301
+msgid "Separator"
+msgstr "Trenner"
 
 #. metadata.json->name
 msgid "App Launcher"
@@ -153,6 +169,14 @@ msgstr "Benachrichtigungstext"
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
 msgstr "%s wird durch den Anwendungsnamen ersetzt"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Feste Menübreite"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr "Basierend auf dem längsten Untermenüeintrag, um das flackern der Menübreite zu verhindern"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

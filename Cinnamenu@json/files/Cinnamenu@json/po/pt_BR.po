@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fábio Nogueira <fnogueira@gnome.org>, 2015, 2016.
-# Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>, 2021
+# Fábio Nogueira <fnogueira@gnome.org>, 2015.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2021-09-06 22:00-0300\n"
-"Last-Translator: Vinicius Queiroz <viniciusqueiroz.voq@gmail.com>\n"
+"PO-Revision-Date: 2021-11-05 19:03-0300\n"
+"Last-Translator: Marcelo Aof\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -43,13 +43,13 @@ msgid "Favorite apps"
 msgstr "Apps favoritos"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "o pacote gir1.2-gda-5.0 é necessário para os favoritos do Firefox e Midori."
+msgstr "É necessário instalar o pacote gir1.2-gda-5.0 para exibir os favoritos do Firefox e do Midori."
 
 msgid "Clear List"
 msgstr "Limpar lista"
 
-msgid "No recent documents"
-msgstr "Sem documentos recentes"
+msgid "No recent files"
+msgstr "Não há arquivos recentes"
 
 msgid "Account details"
 msgstr "Detalhes da conta"
@@ -67,10 +67,10 @@ msgid "Switch to list view"
 msgstr "Trocar para visão em lista"
 
 msgid "Lock screen"
-msgstr "Tela de bloqueio"
+msgstr "Bloquear tela"
 
 msgid "Lock the screen"
-msgstr "Bloquear a tela"
+msgstr "Bloqueia a tela"
 
 msgid "Logout"
 msgstr "Sair"
@@ -91,34 +91,34 @@ msgid "Add to panel"
 msgstr "Adicionar ao painel"
 
 msgid "Add to desktop"
-msgstr "Adicionar para a área de trabalho"
+msgstr "Adicionar à área de trabalho"
 
 msgid "Remove from favorites"
 msgstr "Remover dos favoritos"
 
 msgid "Add to favorites"
-msgstr "Adicionar para os favoritos"
+msgstr "Adicionar aos favoritos"
 
 msgid "Uninstall"
-msgstr "Desistalar"
+msgstr "Desinstalar"
 
 msgid "Home"
-msgstr "Início"
+msgstr "Pasta pessoal"
 
 msgid "Computer"
 msgstr "Computador"
 
 msgid "Browse network"
-msgstr "Nevagar na rede"
+msgstr "Pesquisar na internet"
 
 msgid "Find files..."
-msgstr "Procurar Arquivos..."
+msgstr "Procurar arquivos..."
 
 msgid "Please wait..."
-msgstr "Por favor aguarde..."
+msgstr "Por favor, aguarde..."
 
 msgid "No recent Items"
-msgstr "Sem itens recentes"
+msgstr "Não há itens recentes"
 
 msgid "Click to copy"
 msgstr "Clique para copiar"
@@ -130,16 +130,16 @@ msgid "Favorites"
 msgstr "Favoritos"
 
 msgid "Recent"
-msgstr "Recente"
+msgstr "Recentes"
 
 msgid "Home folder"
 msgstr "Pasta pessoal"
 
 msgid "Too many entries - showing first 1000 entries only"
-msgstr "Muitas entradas - mostrando apenas as primeiras 1000 entradas"
+msgstr "Muitos resultados - mostrando apenas os 1000 primeiros resultados"
 
 msgid "Reset category order"
-msgstr "Redefinir ordem da categoria"
+msgstr "Redefinir a ordem das categorias"
 
 msgid "light skin tone"
 msgstr "tom de pele claro"
@@ -166,10 +166,10 @@ msgid "Other application..."
 msgstr "Outro aplicativo..."
 
 msgid "Open containing folder"
-msgstr "Abra a pasta que contém"
+msgstr "Abrir a pasta que contém o arquivo"
 
 msgid "Move to trash"
-msgstr "Mover para lixeira"
+msgstr "Mover para a lixeira"
 
 msgid "Error while moving file to trash:"
 msgstr "Erro ao mover o arquivo para a lixeira:"
@@ -199,40 +199,44 @@ msgid "Use regular expressions"
 msgstr "Usar expressões regulares"
 
 msgid "Stop"
-msgstr "Para"
+msgstr "Parar"
 
 msgid "File"
 msgstr "Arquivo"
 
 msgid "Path"
-msgstr "Caminho"
+msgstr "Endereço"
 
 msgid "Searching..."
 msgstr "Pesquisando..."
 
 msgid "Search Stopped"
-msgstr "Pesquisa Parada"
+msgstr "Pesquisa interrompida"
 
 msgid "Searching: "
 msgstr "Pesquisando: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr "Erro: permissões inssuficentes para ler a pasta "
+msgstr "Erro: permissão insuficiente para ler a pasta "
 
 msgid "Search Completed"
-msgstr "Pesquisa Concluída"
+msgstr "Pesquisa concluída"
 
 msgid "Skipping"
 msgstr "Pulando"
 
 msgid " - directory already searched"
-msgstr " - diretório já pesquisado"
+msgstr " - pasta já pesquisada"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid "A flexible menu with grid or list layout options, file browser and emoji search."
-msgstr "Um menu flexível com opções de layout de grade ou lista, navegador dearquivos e buscador de emoji."
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Um menu flexível com opções de leiaute de grade ou lista, navegador de "
+"arquivos e buscador de emoji."
 
 msgid "Behavior"
 msgstr "Comportamento"
@@ -244,10 +248,10 @@ msgid "Layout and Content"
 msgstr "Leiaute e Conteúdo"
 
 msgid "Search Providers"
-msgstr "Provedores de Pesquisa"
+msgstr "Provedores de pesquisa"
 
 msgid "No search provider extensions found"
-msgstr "Nenhuma extensão do provedor de pesquisa encontrada"
+msgstr "Nenhuma extensão do provedor de pesquisa foi encontrada"
 
 msgid "Panel"
 msgstr "Painel"
@@ -268,22 +272,22 @@ msgid "Open the menu editor"
 msgstr "Abrir o editor de menu"
 
 msgid "Use a custom icon"
-msgstr "Usar um ícone customizado"
+msgstr "Usar um ícone personalizado"
 
 msgid "Use a custom icon in the panel"
-msgstr "Usar um ícone customizado no painel"
+msgstr "Usar um ícone personalizado no painel"
 
 msgid "Panel icon"
-msgstr "Ícone do painel"
+msgstr "Ícone no painel"
 
 msgid "Panel text"
-msgstr "Texto do painel"
+msgstr "Texto no painel"
 
 msgid "Text to show beside the panel icon"
-msgstr "Texto para mostrar ao lado do ícone do painel"
+msgstr "Texto para mostrar ao lado do ícone no painel"
 
 msgid "Category icon size (pixels)"
-msgstr "Tamanho do ícone de categoria (pixels)"
+msgstr "Tamanho do ícone da categoria (pixels)"
 
 msgid "Applications list icon size (pixels)"
 msgstr "Tamanho do ícone da lista de aplicativos (pixels)"
@@ -292,7 +296,7 @@ msgid "Applications grid icon size (pixels)"
 msgstr "Tamanho do ícone da grade de aplicativos (pixels)"
 
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Atalho do teclado para abrir e fechar o menu"
+msgstr "Atalho de teclado para abrir e fechar o menu"
 
 msgid "Open menu on hover"
 msgstr "Abrir o menu ao passar o mouse"
@@ -313,16 +317,16 @@ msgid "Animate the menu on open and close"
 msgstr "Animar o menu ao abrir e fechar"
 
 msgid "Activate categories on click"
-msgstr "Ativar categorias ao clicar"
+msgstr "Alterar categorias ao clicar"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "Ativar categorias ao clicar em vez de passar o mouse"
+msgstr "Altera categorias ao clicar em vez de passar o mouse"
 
 msgid "Enable autoscrolling"
-msgstr "Habilitar auto rolagem"
+msgstr "Ativar a rolagem automática"
 
 msgid "Enable autoscrolling in application list"
-msgstr "Habilitar auto rolagem na lista de aplicativos"
+msgstr "Ativa a rolagem automática na lista de aplicativos"
 
 msgid "Show web bookmarks"
 msgstr "Mostrar favoritos da web"
@@ -332,16 +336,16 @@ msgid ""
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 "Mostra os favoritos do seu navegador no menu.\n"
-"Nota: Instale o pacote gir1.2-gda-5.0 para ler os favoritos do firefox."
+"Nota: instale o pacote gir1.2-gda-5.0 para mostrar os favoritos do Firefox."
 
 msgid "Enable searching of open windows"
-msgstr "Permitir pesquisa de janelas abertas"
+msgstr "Permitir pesquisar em janelas abertas"
 
 msgid "Enable search providers"
 msgstr "Habilitar provedores de pesquisa"
 
 msgid "Include search provider results in searches"
-msgstr "Incluir resultados dos provedores de pesquisas nas buscas"
+msgstr "Inclui resultados dos provedores de pesquisa nas buscas"
 
 msgid "Example Search Providers"
 msgstr "Exemplo de Provedor de pesquisa"
@@ -371,19 +375,19 @@ msgid "Show bookmarks and places category in the menu"
 msgstr "Mostrar marcadores e categorias de locais no menu"
 
 msgid "Show application icons"
-msgstr "Mostrar ícones de aplicativos"
+msgstr "Mostrar ícones dos aplicativos"
 
 msgid "Show category icons"
-msgstr "Mostrar ícones de categorias"
+msgstr "Mostrar ícones das categorias"
 
 msgid "Show application descriptions under titles"
-msgstr "Mostrar descrições do aplicativo sob títulos"
+msgstr "Mostrar descrições dos aplicativos sob títulos"
 
 msgid "Show tooltips"
 msgstr "Mostrar dicas"
 
 msgid "Tooltip delay"
-msgstr "Atraso na dica"
+msgstr "Atraso para exibir a dica"
 
 msgid "Use a custom menu height"
 msgstr "Use uma altura de menu personalizada"
@@ -410,7 +414,7 @@ msgid "None"
 msgstr "Nenhum"
 
 msgid "Choose where to show application descriptions"
-msgstr "Escolha onde mostrar as descrições do aplicativo"
+msgstr "Escolha onde mostrar as descrições dos aplicativos"
 
 msgid "Sidebar location"
 msgstr "Localização da barra lateral"
@@ -435,31 +439,31 @@ msgid ""
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-"Informação/Dica: Arraste na borda do menu para alterar seu tamanho.\n"
+"Informação/Dica: arraste a borda do menu para alterar o seu tamanho.\n"
 
 msgid "Show favorites on sidebar"
 msgstr "Mostrar favoritos na barra lateral"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Mostrar seu app favorito e ícone de arquivo na barra lateral"
+msgstr "Mostra seu app favorito e ícone de arquivos na barra lateral"
 
 msgid "Show recent items"
 msgstr "Mostrar itens recentes"
 
 msgid "Show recent items category in the menu"
-msgstr "Mostrar categoria de itens recentes no menu"
+msgstr "Mostra a categoria de itens recentes no menu"
 
 msgid "Show favorite apps category"
 msgstr "Mostrar categoria de apps favoritos"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "Mostrar categoria de apps favoritos no menu"
+msgstr "Mostra a categoria de apps favoritos no menu"
 
 msgid "Show home folder"
 msgstr "Mostrar pasta pessoal"
 
 msgid "Show home folder category in the menu"
-msgstr "Mostrar categoria de pasta pessoal no menu"
+msgstr "Mostra a categoria de pasta pessoal no menu"
 
 msgid "Last used category"
 msgstr "Última categoria usada"
@@ -471,68 +475,42 @@ msgid "Show hidden files"
 msgstr "Mostrar arquivos ocultos"
 
 msgid "Show hidden files in folder view"
-msgstr "Mostrar arquivos ocultos na visualização da pasta"
+msgstr "Mostra arquivos ocultos na visualização da pasta"
 
 msgid "Emoji search"
-msgstr "Pesquisa de Emoji"
+msgstr "Pesquisar emoji"
 
 msgid "Show emojis in search results"
-msgstr "Mostrar emojis nos resultados de pesquisa"
+msgstr "Mostra emojis nos resultados da pesquisa"
 
 msgid "Web search option"
-msgstr "Opções de pesquisa na Web"
-
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "Ask"
-
-msgid "Ecosia"
-msgstr "Ecosia"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Página inicial"
+msgstr "Opções de pesquisa na web"
 
 msgid "Show an internet search option in search results"
-msgstr "Mostrar uma opção de pesquisa na Internet nos resultados"
+msgstr "Mostra uma opção nos resultados da pesquisa para continuar a pesquisa na internet"
 
 msgid "Search home folder"
 msgstr "Pesquisar na pasta pessoal"
 
 msgid "When searching, also search my home folder for files"
-msgstr "Ao pesquisar, também pesquise na minha pasta pessoal por arquivos"
+msgstr "Ao pesquisar, também pesquise arquivos em minha pasta pessoal"
 
 msgid "Web bookmarks search"
-msgstr "Pesquisa de favoritos da web"
+msgstr "Pesquisar em favoritos da web"
 
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Ao pesquisar, também pesquise os favoritos do meu navegador (Google Chrome, Firefox, Chromium, Opera, Brave) \n"
-"Nota: Para pesquisar os favoritos do Firefox, você precisará instalar o pacote gir1.2-gda-5.0 (distribuições baseadas em Debian, incluindo Ubuntu e Linux Mint) ou o pacote libgda (distribuições baseadas em Arch) e reiniciar seu computador."
+"Ao pesquisar, também pesquise nos favoritos do meu navegador (Google "
+"Chrome, Firefox, Chromium, Opera, Brave)\n"
+"Nota: para pesquisar nos favoritos do Firefox, você precisará instalar o "
+"pacote gir1.2-gda-5.0 (caso sua distribuição seja baseada em Debian, "
+"incluindo Ubuntu e Linux Mint) ou o pacote libgda (caso sua distribuição "
+"seja baseada em Arch) e reiniciar seu computador."
 
 msgid "Wikipedia search"
-msgstr "Pesquisa na Wikipédia"
+msgstr "Pesquisar na Wikipédia"
 
 msgid "Show some Wikipedia results"
 msgstr "Mostra alguns resultados da Wikipédia"
@@ -541,10 +519,10 @@ msgid "Wikipedia language"
 msgstr "Idioma da Wikipédia"
 
 msgid "Use a custom icon size"
-msgstr "Usar um tamanho de ícone pesonalizado"
+msgstr "Usar um tamanho de ícone personalizado"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Usar um tamanho personalizado para o ícone do painel"
+msgstr "Usa um tamanho personalizado para o ícone do painel"
 
 msgid "Panel icon size (pixels)"
 msgstr "Tamanho do ícone do painel (pixels)"
@@ -556,13 +534,17 @@ msgid "Sidebar icon size (pixels)"
 msgstr "Tamanho do ícone da barra lateral"
 
 msgid "Use sidebar box style"
-msgstr "Usar o estilo da caixa na barra lateral"
+msgstr "Usar o estilo de caixa na barra lateral"
 
 msgid "Use a sidebar box style"
-msgstr "Usar um estilo da caixa na barra lateral"
+msgstr "Usa um estilo de caixa na barra lateral"
 
 msgid "Use tile style"
 msgstr "Usar estilo de bloco"
 
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
-msgstr "Use um estilo de bloco para os botões do aplicativo (Nota: pode não funcionar em alguns temas)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Usa um estilo de bloco para os ícones dos aplicativos (Nota: pode não "
+"funcionar em alguns temas)"
