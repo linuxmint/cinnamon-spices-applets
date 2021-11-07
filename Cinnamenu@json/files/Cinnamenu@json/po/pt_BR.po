@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fábio Nogueira <fnogueira@gnome.org>, 2015, 2016.
+# Fábio Nogueira <fnogueira@gnome.org>, 2015.
 #
 msgid ""
 msgstr ""
@@ -103,7 +103,7 @@ msgid "Uninstall"
 msgstr "Desinstalar"
 
 msgid "Home"
-msgstr "Início"
+msgstr "Pasta pessoal"
 
 msgid "Computer"
 msgstr "Computador"
@@ -217,7 +217,7 @@ msgid "Searching: "
 msgstr "Pesquisando: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr "Erro: permissão insuficente para ler a pasta "
+msgstr "Erro: permissão insuficiente para ler a pasta "
 
 msgid "Search Completed"
 msgstr "Pesquisa concluída"
