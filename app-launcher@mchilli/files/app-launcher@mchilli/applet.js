@@ -984,6 +984,11 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                     this.applet.menu.close(true);
                 }
                 break;
+            case 2:
+                if (!this.applet.menu.isContextOpen()) {
+                    this.applet.run(this.name, this.icon, this.command);
+                }
+                break;
             case 3:
                 if (this.applet.menu.isContextOpen()) {
                     if (!this._selected) {
