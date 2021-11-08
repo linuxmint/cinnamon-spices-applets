@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: applet.js:42
-msgid "Your percieved location."
+msgid "Your perceived location."
 msgstr ""
 
 #. localip@mrieracrespi->metadata.json->description

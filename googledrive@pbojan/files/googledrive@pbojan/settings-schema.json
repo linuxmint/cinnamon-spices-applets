@@ -1,0 +1,127 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "pageConfiguration",
+      "pageHelp"
+    ],
+    "pageConfiguration": {
+      "type": "page",
+      "title": "Configuration",
+      "sections": [
+        "sectionGeneralOptions",
+        "sectionWhitelist"
+      ]
+    },
+    "pageHelp": {
+      "type": "page",
+      "title": "Help",
+      "sections": [
+        "sectionNote",
+        "sectionHelp",
+        "sectionIssues"
+      ]
+    },
+    "sectionGeneralOptions": {
+      "type": "section",
+      "title": "Google Drive Options",
+      "keys": [
+        "location"
+      ]
+    },
+    "sectionWhitelist": {
+      "type": "section",
+      "title": "Whitelisted Folders",
+      "keys": [
+        "whitelist",
+        "whitelistHelp"
+      ]
+    },
+    "sectionNote": {
+      "type": "section",
+      "title": "Important Message",
+      "keys": [
+        "note"
+      ]
+    },
+    "sectionHelp": {
+      "type": "section",
+      "title": "About/Help",
+      "keys": [
+        "website",
+        "websiteButton",
+        "helpAbout",
+        "helpAboutButton"
+      ]
+    },
+    "sectionIssues": {
+      "type": "section",
+      "title": "Bugs/Issues",
+      "keys": [
+        "helpIssue",
+        "helpSubmitIssue"
+      ]
+    }
+  },
+  "location": {
+    "type": "filechooser",
+    "description": "Drive Sync Location",
+    "tooltip": "Location to an empty folder where it will sync the Google Drive data to e.g. ~/Documents/Drive.",
+    "select-dir": true,
+    "default": ""
+  },
+  "whitelistHelp": {
+    "type": "label",
+    "description": "Note: If you want to sync only specific folders please make sure to add them on the list above. Please enter the names exactly as they are named in your Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
+  },
+  "whitelist": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Folder Name",
+        "type": "string"
+      }
+    ],
+    "description": "Whitelist Folders",
+    "tooltip": "Whitelist folders that will be sycned from Google Drive e.g. Documents, Photos",
+    "default": []
+  },
+  "note": {
+    "type": "label",
+    "description": "Note: This is a new release of this Applet, so your feedback and ideas are very important to make this applet better in the future. Please consider reporting any issues, bugs, instabilities, or ideas for general improvements on the links below! Thank you!"
+  },
+  "website": {
+    "type": "label",
+    "description": "To learn more about the applet please click the button below to visit the official repository for this applet."
+  },
+  "websiteButton": {
+    "type": "button",
+    "description": "Visit GitHub website",
+    "callback": "visitGitHub",
+    "tooltip": "Opens GitHub website to learn more about this applet.",
+    "indent": true
+  },
+  "helpAbout": {
+    "type": "label",
+    "description": "To learn more about the applet please click the button below to visit the official Cinnamon Spices website for this applet. You can also leave feedback in the comment section below."
+  },
+  "helpAboutButton": {
+    "type": "button",
+    "description": "Visit Cinnamon Spices website",
+    "callback": "visitWebsite",
+    "tooltip": "Opens Cinnamon Spices website to learn more about this applet.",
+    "indent": true
+  },
+  "helpIssue": {
+    "type": "label",
+    "description": "If you find an issue with this applet please make a report on GitHub by clicking the button below. Please make sure that the issue doesn't already exists"
+  },
+  "helpSubmitIssue": {
+    "type": "button",
+    "description": "Submit an Issue",
+    "callback": "submitIssue",
+    "tooltip": "Opens GitHub project page where you can submit a new issue for this applet.",
+    "indent": true
+  }
+}

@@ -66,6 +66,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('notification-enabled', 'notificationEnabled');
         this.settings.bind('notification-text', 'notificationText');
 
+        this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
         this.settings.bind('use-symbolic-icons', 'useSymbolicIcons', this.updateMenu);
         this.settings.bind('app-icon-size', 'appIconSize', this.updateMenu);
@@ -101,6 +102,8 @@ class MyApplet extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(item);
         } else {
+            let itemWidths = [];
+
             this.listApplications.forEach((application) => {
                 let name = application.name;
                 let group = application.group;
@@ -120,9 +123,23 @@ class MyApplet extends Applet.TextIconApplet {
                         this.menu.addMenuGroupItem(subMenu);
                         this.menu.addMenuItem(subMenu);
                     }
+                    if (item instanceof MyPopupMenuItem) {
+                        itemWidths.push(item.getWidth());
+                    }
                 }
-                this.menu.addMenuAppItem(item);
+                if (item instanceof MyPopupMenuItem) {
+                    this.menu.addMenuAppItem(item);
+                }
             });
+            if (this.fixedMenuWidth) {
+                this.menu.getMenuGroupItems().forEach((group) => {
+                    // largest item + (basic icon size + icon size) or (basic size)
+                    group.setWidth(
+                        Math.max(...itemWidths) +
+                            (this.visibleAppIcons ? 40 + this.appIconSize : 28)
+                    );
+                });
+            }
         }
     }
 
@@ -179,16 +196,24 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     createMenuItem(name, icon, group, command) {
-        return new MyPopupMenuItem({
-            applet: this,
-            name: name,
-            group: group,
-            visibleAppIcons: this.visibleAppIcons,
-            icon: icon,
-            useSymbolicIcons: this.useSymbolicIcons,
-            iconSize: this.appIconSize,
-            command: command,
-        });
+        if (name === '$eparator$') {
+            return new MyPopupSeparatorMenuItem({
+                red: command[0],
+                green: command[1],
+                blue: command[2],
+            });
+        } else {
+            return new MyPopupMenuItem({
+                applet: this,
+                name: name,
+                group: group,
+                visibleAppIcons: this.visibleAppIcons,
+                icon: icon,
+                useSymbolicIcons: this.useSymbolicIcons,
+                iconSize: this.appIconSize,
+                command: command,
+            });
+        }
     }
 
     initIcons() {
@@ -762,7 +787,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 JSON.stringify(this.applet.listGroups),
                 JSON.stringify([
                     {
-                        'is-group': true,
+                        type: 'group',
                         group: '',
                     },
                     this.icon,
@@ -786,9 +811,19 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         this._closeContext();
     }
 
+    setWidth(width) {
+        this.actor.set_width(width);
+    }
+
+    getWidth() {
+        return this.actor.get_width();
+    }
+
     addMenuItem(item) {
         this.menu.addMenuItem(item);
-        this._menuItems.push(item);
+        if (item instanceof MyPopupMenuItem) {
+            this._menuItems.push(item);
+        }
     }
 
     getMenuItems() {
@@ -991,7 +1026,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 JSON.stringify(this.applet.listGroups),
                 JSON.stringify([
                     {
-                        'is-group': false,
+                        type: 'app',
                         group: this.group,
                     },
                     this.icon,
@@ -1028,6 +1063,14 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
 
     _onButtonCancel() {
         this._closeContext();
+    }
+
+    setWidth(width) {
+        this.actor.set_width(width);
+    }
+
+    getWidth() {
+        return this.actor.get_width();
     }
 
     select() {
@@ -1090,6 +1133,43 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
 
     _closeContext() {
         this.applet.menu.closeContext();
+    }
+}
+
+class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
+    _init({ red = 255, green = 255, blue = 255, alpha = 255 } = {}) {
+        try {
+            super._init.call(this, { reactive: false });
+
+            this._drawingArea = new St.DrawingArea({ style_class: 'popup-separator-menu-item' });
+            this.addActor(this._drawingArea, { span: -1, expand: true });
+            this._signals.connect(this._drawingArea, 'repaint', (area) => {
+                this._onRepaint(area);
+            });
+
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+            this.alpha = alpha;
+        } catch (error) {
+            global.log(error);
+        }
+    }
+
+    _onRepaint(area) {
+        let cr = area.get_context();
+        let themeNode = area.get_theme_node();
+        let [width, height] = area.get_surface_size();
+        let margin = themeNode.get_length('-margin-horizontal');
+        let gradientHeight = themeNode.get_length('-gradient-height');
+        let gradientWidth = width - margin * 2;
+        let gradientOffset = (height - gradientHeight) / 2;
+
+        cr.setSourceRGBA(this.red / 255, this.green / 255, this.blue / 255, this.alpha / 255);
+        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
+        cr.fill();
+
+        cr.$dispose();
     }
 }
 

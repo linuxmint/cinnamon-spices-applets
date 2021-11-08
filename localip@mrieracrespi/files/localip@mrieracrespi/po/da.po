@@ -19,7 +19,7 @@ msgstr ""
 "Language: da\n"
 
 #: applet.js:42
-msgid "Your percieved location."
+msgid "Your perceived location."
 msgstr "Din IP-adresse."
 
 #. localip@mrieracrespi->metadata.json->description
