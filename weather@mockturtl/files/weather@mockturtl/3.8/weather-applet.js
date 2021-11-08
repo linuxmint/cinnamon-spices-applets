@@ -10693,20 +10693,22 @@ const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {
     constructor(options, doNotAddPadding = false) {
-        this.signals = new SignalManager();
         this.disabled = false;
         this.Hovered = new Event();
         this.Clicked = new Event();
+        this.onHoverLeave = (event) => {
+            this.handleLeave();
+            return false;
+        };
         this.actor = new Button(options);
         this.actor.add_style_class_name("popup-menu-item");
         if (doNotAddPadding)
             this.actor.set_style('padding: 0px; border-radius: 2px;');
         else
             this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
-        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
-        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
         this.actor.connect("clicked", () => this.clicked());
-        this.actor.connect("enter-event", (actor, event) => this.hovered(event));
+        this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
+        this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
     }
     handleEnter(actor) {
         if (!this.disabled)
@@ -10729,7 +10731,8 @@ class WeatherButton {
             this.Clicked.Invoke(this, null);
         }
     }
-    hovered(event) {
+    onHoverEnter(event) {
+        this.handleEnter();
         this.Hovered.Invoke(this, event);
         return false;
     }
