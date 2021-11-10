@@ -1061,14 +1061,14 @@ class CinnamenuApplet extends TextIconApplet {
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
 
-            const buttons = this.appsView.getActiveButtons();//todo
-            if (buttons.length > 0) {
-                Meta.later_add(Meta.LaterType.IDLE, () => {
-                                          if (!buttons[0].entered) {
-                                              this.clearEnteredActors();
-                                              buttons[0].handleEnter();
-                                          } });
-            }
+            //ensure first item in app list is selected
+            Meta.later_add(Meta.LaterType.IDLE, () => {
+                                        const buttons = this.appsView.getActiveButtons();
+                                        if (buttons[0] && !buttons[0].entered) {
+                                            this.clearEnteredActors();
+                                            buttons[0].handleEnter();
+                                        }
+                                    });
         };
 
         //---Wikipedia search----
@@ -1936,7 +1936,7 @@ class CategoriesView {
 
 /*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
  *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
- *otherwise new AppButton's would need to created each time a category is clicked on.*/
+ *otherwise new AppButton's would need to be created each time a category is clicked on.*/
 class AppsView {
     constructor(appThis) {
         this.appThis = appThis;
@@ -1970,24 +1970,26 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
-        let column = 0;
-        let rownum = 0;
-
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
 
         this.clearApps();
+
         //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
         if (appList.length > 1000) {
             appList.length = 1000; //truncate array
             headerText = _('Too many entries - showing first 1000 entries only');
         }
+
         if (headerText) {
             this.headerText.set_text(headerText);
             this.headerText.show();
         } else {
             this.headerText.hide();
         }
+
+        let column = 0;
+        let rownum = 0;
         appList.forEach(app => {
             let appButton = this.buttonStore.find(button => button.app === app);
 
@@ -2009,6 +2011,7 @@ class AppsView {
                 }
             }
         });
+
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.applicationsListBox.show();
         } else {
@@ -2020,6 +2023,7 @@ class AppsView {
 
     resizeGrid() {
         this.applicationsGridBox.hide();//for performance
+
         const newcolumnCount = this.getGridValues().columns;
         if (this.currentGridViewColumnCount === newcolumnCount) {
             //Number of columns are the same so just adjust button widths only.
@@ -2042,6 +2046,7 @@ class AppsView {
                 }
             });
         }
+
         this.applicationsGridBox.show();
         this.currentGridViewColumnCount = newcolumnCount;
     }
