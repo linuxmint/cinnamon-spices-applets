@@ -1,5 +1,5 @@
 {
-    "uuid": "rswitcher@nixdev.com",
-    "name": "Resolution Switcher",
+    "uuid": "rswitcher2@nixdev.com",
+    "name": "Resolution Switcher2",
     "description": "Switch resolution on-the-fly with HiDPI support"
 }
