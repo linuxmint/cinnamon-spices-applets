@@ -77,7 +77,7 @@ class TimeshiftSpy extends Applet.IconApplet {
         this.monitor_flags = Gio.FileMonitorFlags.SEND_MOVED +
                              Gio.FileMonitorFlags.WATCH_MOVES
 
-        this.config_file_path = '/etc/timeshift.json'
+        this.config_file_path = '/etc/timeshift/timeshift.json'
         this.config_file      = Gio.File.new_for_path(this.config_file_path)
         this.config_monitor   = this.config_file.monitor_file(this.monitor_flags, null)
         this.config_monitor.connect('changed', this.reload_config)
