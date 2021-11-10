@@ -1,3 +1,7 @@
+### 1.5
+
+- Fix config file location change. (Thanks to @amithiel)
+
 ### 1.4
 
 - Switch from timer approach to async file monitor approach
