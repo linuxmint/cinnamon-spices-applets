@@ -83,7 +83,7 @@ declare namespace imports.gi.HarfBuzz {
 		public end: number;
 		/**
 		 * Converts a #hb_feature_t into a %NULL-terminated string in the format
-		 * understood by hb_feature_from_string(). The client in responsible for
+		 * understood by {@link Hb.feature_from_string}. The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
 		 * @returns output string
 		 * 
@@ -194,7 +194,7 @@ declare namespace imports.gi.HarfBuzz {
 		/**
 		 * the index of the character in the original text that corresponds
 		 *           to this #hb_glyph_info_t, or whatever the client passes to
-		 *           hb_buffer_add(). More than one #hb_glyph_info_t can have the same
+		 *           {@link Hb.buffer_add}. More than one #hb_glyph_info_t can have the same
 		 *           #cluster value, if they resulted from the same character (e.g. one
 		 *           to many glyph substitution), and when more than one character gets
 		 *           merged in the same glyph (e.g. many to one glyph substitution) the
@@ -425,22 +425,22 @@ declare namespace imports.gi.HarfBuzz {
 	export interface segment_properties_tInitOptions {}
 	/**
 	 * The structure that holds various text properties of an #hb_buffer_t. Can be
-	 * set and retrieved using hb_buffer_set_segment_properties() and
+	 * set and retrieved using {@link Hb.buffer_set_segment_properties} and
 	 * hb_buffer_get_segment_properties(), respectively.
 	 */
 	interface segment_properties_t {}
 	class segment_properties_t {
 		public constructor(options?: Partial<segment_properties_tInitOptions>);
 		/**
-		 * the #hb_direction_t of the buffer, see hb_buffer_set_direction().
+		 * the #hb_direction_t of the buffer, see {@link Hb.buffer_set_direction}.
 		 */
 		public direction: direction_t;
 		/**
-		 * the #hb_script_t of the buffer, see hb_buffer_set_script().
+		 * the #hb_script_t of the buffer, see {@link Hb.buffer_set_script}.
 		 */
 		public script: script_t;
 		/**
-		 * the #hb_language_t of the buffer, see hb_buffer_set_language().
+		 * the #hb_language_t of the buffer, see {@link Hb.buffer_set_language}.
 		 */
 		public language: language_t;
 		public readonly reserved1: any;
@@ -521,7 +521,7 @@ declare namespace imports.gi.HarfBuzz {
 		public value: number;
 		/**
 		 * Converts an #hb_variation_t into a %NULL-terminated string in the format
-		 * understood by hb_variation_from_string(). The client in responsible for
+		 * understood by {@link Hb.variation_from_string}. The client in responsible for
 		 * allocating big enough size for #buf, 128 bytes is more than enough.
 		 * @returns output string
 		 * 
@@ -1765,7 +1765,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * The buffer serialization and de-serialization format used in
-	 * hb_buffer_serialize_glyphs() and hb_buffer_deserialize_glyphs().
+	 * {@link Hb.buffer_serialize_glyphs} and hb_buffer_deserialize_glyphs().
 	 */
 	enum buffer_serialize_format_t {
 		/**
@@ -1787,7 +1787,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * A segment can also be tested for horizontal or vertical
 	 * orientation (irrespective of specific direction) with
-	 * HB_DIRECTION_IS_HORIZONTAL() or HB_DIRECTION_IS_VERTICAL().
+	 * {@link HB.DIRECTION_IS_HORIZONTAL} or HB_DIRECTION_IS_VERTICAL().
 	 */
 	enum direction_t {
 		/**
@@ -3025,7 +3025,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * <note>Note: newer versions of Unicode may add new values.
 	 * Client programs should be ready to handle any value in the 0..254 range
-	 * being returned from hb_unicode_combining_class().</note>
+	 * being returned from {@link Hb.unicode_combining_class}.</note>
 	 */
 	enum unicode_combining_class_t {
 		/**
@@ -3488,7 +3488,7 @@ declare namespace imports.gi.HarfBuzz {
 	}
 
 	/**
-	 * Flags that control what glyph information are serialized in hb_buffer_serialize_glyphs().
+	 * Flags that control what glyph information are serialized in {@link Hb.buffer_serialize_glyphs}.
 	 */
 	enum buffer_serialize_flags_t {
 		/**
@@ -3917,11 +3917,11 @@ declare namespace imports.gi.HarfBuzz {
 	}
 
 	/**
-	 * Callback function for hb_face_create_for_tables().
+	 * Callback function for {@link Hb.face_create_for_tables}.
 	 */
 	interface reference_table_func_t {
 		/**
-		 * Callback function for hb_face_create_for_tables().
+		 * Callback function for {@link Hb.face_create_for_tables}.
 		 * @param face an #hb_face_t to reference table for
 		 * @param tag the tag of the table to reference
 		 * @returns A pointer to the #tag table within #face
@@ -4368,7 +4368,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param mode Memory mode for #data.
 	 * @param destroy Callback to call when #data is not needed anymore.
 	 * @returns New blob, or the empty blob if something failed or if #length is
-	 * zero.  Destroy with hb_blob_destroy().
+	 * zero.  Destroy with {@link Hb.blob_destroy}.
 	 */
 	function blob_create(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t | null): blob_t;
 
@@ -4377,7 +4377,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * specified binary font file.
 	 * @param file_name A font filename
 	 * @returns An #hb_blob_t pointer with the content of the file,
-	 * or hb_blob_get_empty() if failed.
+	 * or {@link Hb.blob_get_empty} if failed.
 	 */
 	function blob_create_from_file(file_name: string): blob_t;
 
@@ -4395,13 +4395,13 @@ declare namespace imports.gi.HarfBuzz {
 	 * to negotiate ownership and lifecycle of #data.
 	 * 
 	 * Note that this function returns a freshly-allocated empty blob even if #length
-	 * is zero. This is in contrast to hb_blob_create(), which returns the singleton
+	 * is zero. This is in contrast to {@link Hb.blob_create}, which returns the singleton
 	 * empty blob (as returned by hb_blob_get_empty()) if #length is zero.
 	 * @param data Pointer to blob data.
 	 * @param length Length of #data in bytes.
 	 * @param mode Memory mode for #data.
 	 * @param destroy Callback to call when #data is not needed anymore.
-	 * @returns New blob, or %NULL if failed.  Destroy with hb_blob_destroy().
+	 * @returns New blob, or %NULL if failed.  Destroy with {@link Hb.blob_destroy}.
 	 */
 	function blob_create_or_fail(data: string, length: number, mode: memory_mode_t, destroy: destroy_func_t | null): blob_t;
 
@@ -4418,7 +4418,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * @param length Length of sub-blob.
 	 * @returns New blob, or the empty blob if something failed or if
 	 * #length is zero or #offset is beyond the end of #parent's data.  Destroy
-	 * with hb_blob_destroy().
+	 * with {@link Hb.blob_destroy}.
 	 */
 	function blob_create_sub_blob(parent: blob_t, offset: number, length: number): blob_t;
 
@@ -4550,7 +4550,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_add_codepoints(buffer: buffer_t, text: codepoint_t[], text_length: number, item_offset: number, item_length: number): void;
 
 	/**
-	 * Similar to hb_buffer_add_codepoints(), but allows only access to first 256
+	 * Similar to {@link Hb.buffer_add_codepoints}, but allows only access to first 256
 	 * Unicode code points that can fit in 8-bit strings.
 	 * 
 	 * <note>Has nothing to do with non-Unicode Latin-1 encoding.</note>
@@ -4565,7 +4565,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_add_latin1(buffer: buffer_t, text: number[], text_length: number, item_offset: number, item_length: number): void;
 
 	/**
-	 * See hb_buffer_add_codepoints().
+	 * See {@link Hb.buffer_add_codepoints}.
 	 * 
 	 * Replaces invalid UTF-16 characters with the #buffer replacement code point,
 	 * see hb_buffer_set_replacement_codepoint().
@@ -4579,7 +4579,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_add_utf16(buffer: buffer_t, text: number[], text_length: number, item_offset: number, item_length: number): void;
 
 	/**
-	 * See hb_buffer_add_codepoints().
+	 * See {@link Hb.buffer_add_codepoints}.
 	 * 
 	 * Replaces invalid UTF-32 characters with the #buffer replacement code point,
 	 * see hb_buffer_set_replacement_codepoint().
@@ -4593,7 +4593,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_add_utf32(buffer: buffer_t, text: number[], text_length: number, item_offset: number, item_length: number): void;
 
 	/**
-	 * See hb_buffer_add_codepoints().
+	 * See {@link Hb.buffer_add_codepoints}.
 	 * 
 	 * Replaces invalid UTF-8 characters with the #buffer replacement code point,
 	 * see hb_buffer_set_replacement_codepoint().
@@ -4624,7 +4624,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_append(buffer: buffer_t, source: buffer_t, start: number, end: number): void;
 
 	/**
-	 * Similar to hb_buffer_reset(), but does not clear the Unicode functions and
+	 * Similar to {@link Hb.buffer_reset}, but does not clear the Unicode functions and
 	 * the replacement code point.
 	 * @param buffer An #hb_buffer_t
 	 */
@@ -4634,7 +4634,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Creates a new #hb_buffer_t with all properties to defaults.
 	 * @returns 
 	 * A newly allocated #hb_buffer_t with a reference count of 1. The initial
-	 * reference count should be released with hb_buffer_destroy() when you are done
+	 * reference count should be released with {@link Hb.buffer_destroy} when you are done
 	 * using the #hb_buffer_t. This function never returns %NULL. If memory cannot
 	 * be allocated, a special #hb_buffer_t object will be returned on which
 	 * hb_buffer_allocation_successful() returns %false.
@@ -4643,7 +4643,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Deserializes glyphs #buffer from textual representation in the format
-	 * produced by hb_buffer_serialize_glyphs().
+	 * produced by {@link Hb.buffer_serialize_glyphs}.
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param buf string to deserialize
 	 * @param buf_len the size of #buf, or -1 if it is %NULL-terminated
@@ -4658,7 +4658,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Deserializes Unicode #buffer from textual representation in the format
-	 * produced by hb_buffer_serialize_unicode().
+	 * produced by {@link Hb.buffer_serialize_unicode}.
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param buf string to deserialize
 	 * @param buf_len the size of #buf, or -1 if it is %NULL-terminated
@@ -4673,7 +4673,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Deallocate the #buffer.
 	 * Decreases the reference count on #buffer by one. If the result is zero, then
-	 * #buffer and all associated resources are freed. See hb_buffer_reference().
+	 * #buffer and all associated resources are freed. See {@link Hb.buffer_reference}.
 	 * @param buffer An #hb_buffer_t
 	 */
 	function buffer_destroy(buffer: buffer_t): void;
@@ -4708,7 +4708,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_get_content_type(buffer: buffer_t): buffer_content_type_t;
 
 	/**
-	 * See hb_buffer_set_direction()
+	 * See {@link Hb.buffer_set_direction}
 	 * @param buffer An #hb_buffer_t
 	 * @returns The direction of the #buffer.
 	 */
@@ -4745,7 +4745,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * If buffer did not have positions before, the positions will be
 	 * initialized to zeros, unless this function is called from
-	 * within a buffer message callback (see hb_buffer_set_message_func()),
+	 * within a buffer message callback (see {@link Hb.buffer_set_message_func}),
 	 * in which case %NULL is returned.
 	 * @param buffer An #hb_buffer_t
 	 * @returns 
@@ -4757,14 +4757,14 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_get_glyph_positions(buffer: buffer_t): [ glyph_position_t[], number ];
 
 	/**
-	 * See hb_buffer_set_invisible_glyph().
+	 * See {@link Hb.buffer_set_invisible_glyph}.
 	 * @param buffer An #hb_buffer_t
 	 * @returns The #buffer invisible #hb_codepoint_t
 	 */
 	function buffer_get_invisible_glyph(buffer: buffer_t): codepoint_t;
 
 	/**
-	 * See hb_buffer_set_language().
+	 * See {@link Hb.buffer_set_language}.
 	 * @param buffer An #hb_buffer_t
 	 * @returns 
 	 * The #hb_language_t of the buffer. Must not be freed by the caller.
@@ -4829,7 +4829,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * Next, if buffer direction is not set (ie. is #HB_DIRECTION_INVALID),
 	 * it will be set to the natural horizontal direction of the
-	 * buffer script as returned by hb_script_get_horizontal_direction().
+	 * buffer script as returned by {@link Hb.script_get_horizontal_direction}.
 	 * If hb_script_get_horizontal_direction() returns #HB_DIRECTION_INVALID,
 	 * then #HB_DIRECTION_LTR is used.
 	 * 
@@ -4845,7 +4845,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Returns whether #buffer has glyph position data.
-	 * A buffer gains position data when hb_buffer_get_glyph_positions() is called on it,
+	 * A buffer gains position data when {@link Hb.buffer_get_glyph_positions} is called on it,
 	 * and cleared of position data when hb_buffer_clear_contents() is called.
 	 * @param buffer an #hb_buffer_t.
 	 * @returns %true if the #buffer has position array, %false otherwise.
@@ -4871,7 +4871,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Increases the reference count on #buffer by one. This prevents #buffer from
-	 * being destroyed until a matching call to hb_buffer_destroy() is made.
+	 * being destroyed until a matching call to {@link Hb.buffer_destroy} is made.
 	 * @param buffer An #hb_buffer_t
 	 * @returns 
 	 * The referenced #hb_buffer_t.
@@ -4880,7 +4880,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Resets the buffer to its initial status, as if it was just newly created
-	 * with hb_buffer_create().
+	 * with {@link Hb.buffer_create}.
 	 * @param buffer An #hb_buffer_t
 	 */
 	function buffer_reset(buffer: buffer_t): void;
@@ -4911,7 +4911,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Serializes #buffer into a textual representation of its content, whether
 	 * Unicode codepoints or glyph identifiers and positioning information. This is
 	 * useful for showing the contents of the buffer, for example during debugging.
-	 * See the documentation of hb_buffer_serialize_unicode() and
+	 * See the documentation of {@link Hb.buffer_serialize_unicode} and
 	 * hb_buffer_serialize_glyphs() for a description of the output format.
 	 * @param buffer an #hb_buffer_t buffer.
 	 * @param start the first item in #buffer to serialize.
@@ -4935,7 +4935,7 @@ declare namespace imports.gi.HarfBuzz {
 	/**
 	 * Parses a string into an #hb_buffer_serialize_format_t. Does not check if
 	 * #str is a valid buffer serialization format, use
-	 * hb_buffer_serialize_list_formats() to get the list of supported formats.
+	 * {@link Hb.buffer_serialize_list_formats} to get the list of supported formats.
 	 * @param str a string to parse
 	 * @param len length of #str, or -1 if string is %NULL terminated
 	 * @returns The parsed #hb_buffer_serialize_format_t.
@@ -5125,7 +5125,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * are orthogonal to the scripts, and though they are related, they are
 	 * different concepts and should not be confused with each other.
 	 * 
-	 * Use hb_language_from_string() to convert from BCP 47 language tags to
+	 * Use {@link Hb.language_from_string} to convert from BCP 47 language tags to
 	 * #hb_language_t.
 	 * @param buffer An #hb_buffer_t
 	 * @param language An hb_language_t to set
@@ -5133,7 +5133,7 @@ declare namespace imports.gi.HarfBuzz {
 	function buffer_set_language(buffer: buffer_t, language: language_t): void;
 
 	/**
-	 * Similar to hb_buffer_pre_allocate(), but clears any new items added at the
+	 * Similar to {@link Hb.buffer_pre_allocate}, but clears any new items added at the
 	 * end.
 	 * @param buffer An #hb_buffer_t
 	 * @param length The new length of #buffer
@@ -5167,7 +5167,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * to be applied.
 	 * 
 	 * You can pass one of the predefined #hb_script_t values, or use
-	 * hb_script_from_string() or hb_script_from_iso15924_tag() to get the
+	 * {@link Hb.script_from_string} or hb_script_from_iso15924_tag() to get the
 	 * corresponding script from an ISO 15924 script tag.
 	 * @param buffer An #hb_buffer_t
 	 * @param script An #hb_script_t to set.
@@ -5176,7 +5176,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Sets the segment properties of the buffer, a shortcut for calling
-	 * hb_buffer_set_direction(), hb_buffer_set_script() and
+	 * {@link Hb.buffer_set_direction}, hb_buffer_set_script() and
 	 * hb_buffer_set_language() individually.
 	 * @param buffer An #hb_buffer_t
 	 * @param props An #hb_segment_properties_t to use
@@ -5252,8 +5252,8 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Add table for #tag with data provided by #blob to the face.  #face must
-	 * be created using hb_face_builder_create().
-	 * @param face A face object created with hb_face_builder_create()
+	 * be created using {@link Hb.face_builder_create}.
+	 * @param face A face object created with {@link Hb.face_builder_create}
 	 * @param tag The #hb_tag_t of the table to add
 	 * @param blob The blob containing the table data to add
 	 * @returns 
@@ -5261,7 +5261,7 @@ declare namespace imports.gi.HarfBuzz {
 	function face_builder_add_table(face: face_t, tag: tag_t, blob: blob_t): bool_t;
 
 	/**
-	 * Creates a #hb_face_t that can be used with hb_face_builder_add_table().
+	 * Creates a #hb_face_t that can be used with {@link Hb.face_builder_add_table}.
 	 * After tables are added to the face, it can be compiled to a binary
 	 * font file by calling hb_face_reference_blob().
 	 * @returns New face.
@@ -5312,7 +5312,7 @@ declare namespace imports.gi.HarfBuzz {
 	function face_create(blob: blob_t, index: number): face_t;
 
 	/**
-	 * Variant of hb_face_create(), built for those cases where it is more
+	 * Variant of {@link Hb.face_create}, built for those cases where it is more
 	 * convenient to provide data for individual tables instead of the whole font
 	 * data. With the caveat that hb_face_get_table_tags() does not currently work
 	 * with faces created this way.
@@ -5506,7 +5506,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Converts a #hb_feature_t into a %NULL-terminated string in the format
-	 * understood by hb_feature_from_string(). The client in responsible for
+	 * understood by {@link Hb.feature_from_string}. The client in responsible for
 	 * allocating big enough size for #buf, 128 bytes is more than enough.
 	 * @param feature an #hb_feature_t to convert
 	 * @returns output string
@@ -5640,7 +5640,7 @@ declare namespace imports.gi.HarfBuzz {
 	function font_funcs_set_glyph_from_name_func(ffuncs: font_funcs_t, func: font_get_glyph_from_name_func_t, destroy: destroy_func_t | null): void;
 
 	/**
-	 * Deprecated.  Use hb_font_funcs_set_nominal_glyph_func() and
+	 * Deprecated.  Use {@link Hb.font_funcs_set_nominal_glyph_func} and
 	 * hb_font_funcs_set_variation_glyph_func() instead.
 	 * @param ffuncs The font-functions structure
 	 * @param func callback function
@@ -5784,7 +5784,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Fetches the glyph ID for a Unicode code point in the specified
 	 * font, with an optional variation selector.
 	 * 
-	 * If #variation_selector is 0, calls hb_font_get_nominal_glyph();
+	 * If #variation_selector is 0, calls {@link Hb.font_get_nominal_glyph};
 	 * otherwise calls hb_font_get_variation_glyph().
 	 * @param font #hb_font_t to work upon
 	 * @param unicode The Unicode code point to query
@@ -6053,7 +6053,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * This version of the function should not be used to fetch glyph IDs
 	 * for code points modified by variation selectors. For variation-selector
-	 * support, user hb_font_get_variation_glyph() or use hb_font_get_glyph().
+	 * support, user {@link Hb.font_get_variation_glyph} or use hb_font_get_glyph().
 	 * @param font #hb_font_t to work upon
 	 * @param unicode The Unicode code point to query
 	 * @returns %true if data found, %false otherwise
@@ -6323,7 +6323,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * 
 	 * This variant of the function does not provide any life-cycle management.
 	 * 
-	 * Most client programs should use hb_ft_face_create_referenced()
+	 * Most client programs should use {@link Hb.ft_face_create_referenced}
 	 * (or, perhaps, hb_ft_face_create_cached()) instead.
 	 * 
 	 * If you know you have valid reasons not to use hb_ft_face_create_referenced(),
@@ -6355,7 +6355,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Creates an #hb_face_t face object from the specified FT_Face.
 	 * 
 	 * This is the preferred variant of the hb_ft_face_create*
-	 * function family, because it calls FT_Reference_Face() on #ft_face,
+	 * function family, because it calls {@link FT.Reference_Face} on #ft_face,
 	 * ensuring that #ft_face remains alive as long as the resulting
 	 * #hb_face_t face object remains alive. Also calls FT_Done_Face()
 	 * when the #hb_face_t face object is destroyed.
@@ -6378,7 +6378,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Creates an #hb_font_t font object from the specified FT_Face.
 	 * 
 	 * <note>Note: You must set the face size on #ft_face before calling
-	 * hb_ft_font_create() on it. HarfBuzz assumes size is always set and will
+	 * {@link Hb.ft_font_create} on it. HarfBuzz assumes size is always set and will
 	 * access `size` member of FT_Face unconditionally.</note>
 	 * 
 	 * This variant of the function does not provide any life-cycle management.
@@ -6405,7 +6405,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * Creates an #hb_font_t font object from the specified FT_Face.
 	 * 
 	 * <note>Note: You must set the face size on #ft_face before calling
-	 * hb_ft_font_create_referenced() on it. HarfBuzz assumes size is always set
+	 * {@link Hb.ft_font_create_referenced} on it. HarfBuzz assumes size is always set
 	 * and will access `size` member of FT_Face unconditionally.</note>
 	 * 
 	 * This is the preferred variant of the hb_ft_font_create*
@@ -6439,7 +6439,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Gets the FT_Face associated with #font, This face will be kept around until
-	 * you call hb_ft_font_unlock_face().
+	 * you call {@link Hb.ft_font_unlock_face}.
 	 * @param font #hb_font_t to work upon
 	 * @returns the FT_Face associated with #font or %NULL
 	 */
@@ -6452,7 +6452,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * In particular, you can use this function to configure an
 	 * existing #hb_face_t face object for use with FreeType font
 	 * functions even if that #hb_face_t face object was initially
-	 * created with hb_face_create(), and therefore was not
+	 * created with {@link Hb.face_create}, and therefore was not
 	 * initially configured to use FreeType font functions.
 	 * 
 	 * An #hb_face_t face object created with hb_ft_face_create()
@@ -6476,7 +6476,7 @@ declare namespace imports.gi.HarfBuzz {
 	function ft_font_set_load_flags(font: font_t, load_flags: number): void;
 
 	/**
-	 * Releases an FT_Face previously obtained with hb_ft_font_lock_face().
+	 * Releases an FT_Face previously obtained with {@link Hb.ft_font_lock_face}.
 	 * @param font #hb_font_t to work upon
 	 */
 	function ft_font_unlock_face(font: font_t): void;
@@ -6528,7 +6528,7 @@ declare namespace imports.gi.HarfBuzz {
 	function graphite2_face_get_gr_face(face: face_t): any;
 
 	/**
-	 * Always returns %NULL. Use hb_graphite2_face_get_gr_face() instead.
+	 * Always returns %NULL. Use {@link Hb.graphite2_face_get_gr_face} instead.
 	 * @param font An #hb_font_t
 	 * @returns Graphite2 font associated with #font.
 	 */
@@ -6552,7 +6552,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * "setlocale (LC_CTYPE, nullptr)" to fetch current locale.  The underlying
 	 * setlocale function is, in many implementations, NOT threadsafe.  To avoid
 	 * problems, call this function once before multiple threads can call it.
-	 * This function is only used from hb_buffer_guess_segment_properties() by
+	 * This function is only used from {@link Hb.buffer_guess_segment_properties} by
 	 * HarfBuzz itself.</note>
 	 * @returns The default language of the locale as
 	 * an #hb_language_t
@@ -6753,7 +6753,7 @@ declare namespace imports.gi.HarfBuzz {
 	 * colors. If #colors is NULL, the function will just return the number
 	 * of total colors without storing any actual colors; this can be used
 	 * for allocating a buffer of suitable size before calling
-	 * hb_ot_color_palette_get_colors() a second time.
+	 * {@link Hb.ot_color_palette_get_colors} a second time.
 	 * @param face #hb_face_t to work upon
 	 * @param palette_index the index of the color palette to query
 	 * @param start_offset offset of the first color to retrieve
@@ -7751,7 +7751,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Converts a string #str representing an ISO 15924 script tag to a
-	 * corresponding #hb_script_t. Shorthand for hb_tag_from_string() then
+	 * corresponding #hb_script_t. Shorthand for {@link Hb.tag_from_string} then
 	 * hb_script_from_iso15924_tag().
 	 * @param str a string representing an
 	 *       ISO 15924 tag.
@@ -8048,7 +8048,7 @@ declare namespace imports.gi.HarfBuzz {
 	function shape(font: font_t, buffer: buffer_t, features: feature_t[] | null, num_features: number): void;
 
 	/**
-	 * See hb_shape() for details. If #shaper_list is not %NULL, the specified
+	 * See {@link Hb.shape} for details. If #shaper_list is not %NULL, the specified
 	 * shapers will be used in the given order, otherwise the default shapers list
 	 * will be used.
 	 * @param font an #hb_font_t to use for shaping
@@ -8459,7 +8459,7 @@ declare namespace imports.gi.HarfBuzz {
 
 	/**
 	 * Converts an #hb_variation_t into a %NULL-terminated string in the format
-	 * understood by hb_variation_from_string(). The client in responsible for
+	 * understood by {@link Hb.variation_from_string}. The client in responsible for
 	 * allocating big enough size for #buf, 128 bytes is more than enough.
 	 * @param variation an #hb_variation_t to convert
 	 * @returns output string

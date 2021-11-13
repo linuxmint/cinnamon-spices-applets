@@ -58,7 +58,7 @@ declare namespace imports.gi.Gst {
 		 */
 		alloc(size: number, params: AllocationParams | null): Memory | null;
 		/**
-		 * Free #memory that was previously allocated with gst_allocator_alloc().
+		 * Free #memory that was previously allocated with {@link Gst.Allocator.alloc}.
 		 * @param memory the memory to free
 		 */
 		free(memory: Memory): void;
@@ -98,7 +98,7 @@ declare namespace imports.gi.Gst {
 	type AllocatorMixin = IAllocator & Object;
 
 	/**
-	 * Memory is usually created by allocators with a gst_allocator_alloc()
+	 * Memory is usually created by allocators with a {@link Gst.Allocator.alloc}
 	 * method call. When %NULL is used as the allocator, the default allocator will
 	 * be used.
 	 * 
@@ -119,7 +119,7 @@ declare namespace imports.gi.Gst {
 		 * default allocator will be returned.
 		 * @param name the name of the allocator
 		 * @returns a {@link Allocator} or %NULL when
-		 * the allocator with #name was not registered. Use gst_object_unref()
+		 * the allocator with #name was not registered. Use {@link Gst.Object.unref}
 		 * to release the allocator after usage.
 		 */
 		public static find(name: string | null): Allocator | null;
@@ -204,7 +204,7 @@ declare namespace imports.gi.Gst {
 		 * > When you add an element to an already-running pipeline, you will have to
 		 * > take care to set the state of the newly-added element to the desired
 		 * > state (usually PLAYING or PAUSED, same you set the pipeline to originally)
-		 * > with gst_element_set_state(), or use gst_element_sync_state_with_parent().
+		 * > with {@link Gst.Element.set_state}, or use gst_element_sync_state_with_parent().
 		 * > The bin or pipeline will not take care of this for you.
 		 * 
 		 * MT safe.
@@ -215,7 +215,7 @@ declare namespace imports.gi.Gst {
 		add(element: Element): boolean;
 		/**
 		 * Adds a %NULL-terminated list of elements to a bin.  This function is
-		 * equivalent to calling gst_bin_add() for each member of the list. The return
+		 * equivalent to calling {@link Gst.Bin.add} for each member of the list. The return
 		 * value of each gst_bin_add() is ignored.
 		 * @param element_1 the {@link Element} element to add to the bin
 		 */
@@ -224,7 +224,7 @@ declare namespace imports.gi.Gst {
 		 * Recursively looks for elements with an unlinked pad of the given
 		 * direction within the specified bin and returns an unlinked pad
 		 * if one is found, or %NULL otherwise. If a pad is found, the caller
-		 * owns a reference to it and should use gst_object_unref() on the
+		 * owns a reference to it and should use {@link Gst.Object.unref} on the
 		 * pad when it is not needed any longer.
 		 * @param direction whether to look for an unlinked source or sink pad
 		 * @returns unlinked pad of the given
@@ -236,7 +236,7 @@ declare namespace imports.gi.Gst {
 		 * interface. If such an element is found, it returns the element.
 		 * You can cast this element to the given interface afterwards.  If you want
 		 * all elements that implement the interface, use
-		 * gst_bin_iterate_all_by_interface(). This function recurses into child bins.
+		 * {@link Gst.Bin.iterate_all_by_interface}. This function recurses into child bins.
 		 * 
 		 * MT safe.  Caller owns returned reference.
 		 * @param iface the #GType of an interface
@@ -367,7 +367,7 @@ declare namespace imports.gi.Gst {
 		 * so if the bin holds the only reference to the element, the element
 		 * will be freed in the process of removing it from the bin.  If you
 		 * want the element to still exist after removing, you need to call
-		 * gst_object_ref() before removing it from the bin.
+		 * {@link Gst.Object.ref} before removing it from the bin.
 		 * 
 		 * If the element's pads are linked to other pads, the pads will be unlinked
 		 * before the element is removed from the bin.
@@ -380,7 +380,7 @@ declare namespace imports.gi.Gst {
 		remove(element: Element): boolean;
 		/**
 		 * Remove a list of elements from a bin. This function is equivalent
-		 * to calling gst_bin_remove() with each member of the list.
+		 * to calling {@link Gst.Bin.remove} with each member of the list.
 		 * @param element_1 the first {@link Element} to remove from the bin
 		 */
 		remove_many(element_1: Element): void;
@@ -396,7 +396,7 @@ declare namespace imports.gi.Gst {
 		set_suppressed_flags(flags: ElementFlags): void;
 		/**
 		 * Synchronizes the state of every child of #bin with the state
-		 * of #bin. See also gst_element_sync_state_with_parent().
+		 * of #bin. See also {@link Gst.Element.sync_state_with_parent}.
 		 * @returns %TRUE if syncing the state was successful for all children,
 		 *  otherwise %FALSE.
 		 */
@@ -510,7 +510,7 @@ declare namespace imports.gi.Gst {
 	 * This makes the bin look like any other elements and enables creation of
 	 * higher-level abstraction elements.
 	 * 
-	 * A new #GstBin is created with gst_bin_new(). Use a #GstPipeline instead if you
+	 * A new #GstBin is created with {@link Gst.Bin.new}. Use a #GstPipeline instead if you
 	 * want to create a toplevel bin because a normal bin doesn't have a bus or
 	 * handle clock distribution of its own.
 	 * 
@@ -658,16 +658,16 @@ declare namespace imports.gi.Gst {
 		acquire_buffer(params: BufferPoolAcquireParams | null): [ FlowReturn, Buffer ];
 		/**
 		 * Get a copy of the current configuration of the pool. This configuration
-		 * can either be modified and used for the gst_buffer_pool_set_config() call
+		 * can either be modified and used for the {@link Gst.BufferPool.set_config} call
 		 * or it must be freed after usage.
 		 * @returns a copy of the current configuration of #pool. use
-		 * gst_structure_free() after usage or gst_buffer_pool_set_config().
+		 * {@link Gst.Structure.free} after usage or gst_buffer_pool_set_config().
 		 */
 		get_config(): Structure;
 		/**
 		 * Get a %NULL terminated array of string with supported bufferpool options for
 		 * #pool. An option would typically be enabled with
-		 * gst_buffer_pool_config_add_option().
+		 * {@link Gst.BufferPool.config_add_option}.
 		 * @returns a %NULL terminated array
 		 *          of strings.
 		 */
@@ -680,13 +680,13 @@ declare namespace imports.gi.Gst {
 		has_option(option: string): boolean;
 		/**
 		 * Check if #pool is active. A pool can be activated with the
-		 * gst_buffer_pool_set_active() call.
+		 * {@link Gst.BufferPool.set_active} call.
 		 * @returns %TRUE when the pool is active.
 		 */
 		is_active(): boolean;
 		/**
 		 * Release #buffer to #pool. #buffer should have previously been allocated from
-		 * #pool with gst_buffer_pool_acquire_buffer().
+		 * #pool with {@link Gst.BufferPool.acquire_buffer}.
 		 * 
 		 * This function is usually called automatically when the last ref on #buffer
 		 * disappears.
@@ -695,7 +695,7 @@ declare namespace imports.gi.Gst {
 		release_buffer(buffer: Buffer): void;
 		/**
 		 * Control the active state of #pool. When the pool is inactive, new calls to
-		 * gst_buffer_pool_acquire_buffer() will return with %GST_FLOW_FLUSHING.
+		 * {@link Gst.BufferPool.acquire_buffer} will return with %GST_FLOW_FLUSHING.
 		 * 
 		 * Activating the bufferpool will preallocate all resources in the pool based on
 		 * the configuration of the pool.
@@ -717,7 +717,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * #config is a {@link Structure} that contains the configuration parameters for
 		 * the pool. A default and mandatory set of parameters can be configured with
-		 * gst_buffer_pool_config_set_params(), gst_buffer_pool_config_set_allocator()
+		 * {@link Gst.BufferPool.config_set_params}, gst_buffer_pool_config_set_allocator()
 		 * and gst_buffer_pool_config_add_option().
 		 * 
 		 * If the parameters in #config can not be set exactly, this function returns
@@ -756,7 +756,7 @@ declare namespace imports.gi.Gst {
 	 * A {@link BufferPool} is an object that can be used to pre-allocate and recycle
 	 * buffers of the same size and with the same properties.
 	 * 
-	 * A #GstBufferPool is created with gst_buffer_pool_new().
+	 * A #GstBufferPool is created with {@link Gst.BufferPool.new}.
 	 * 
 	 * Once a pool is created, it needs to be configured. A call to
 	 * gst_buffer_pool_get_config() returns the current configuration structure from
@@ -804,7 +804,7 @@ declare namespace imports.gi.Gst {
 		 * Enabled the option in #config. This will instruct the #bufferpool to enable
 		 * the specified option on the buffers that it allocates.
 		 * 
-		 * The supported options by #pool can be retrieved with gst_buffer_pool_get_options().
+		 * The supported options by #pool can be retrieved with {@link Gst.BufferPool.get_options}.
 		 * @param config a {@link BufferPool} configuration
 		 * @param option an option to add
 		 */
@@ -863,7 +863,7 @@ declare namespace imports.gi.Gst {
 		 * to perform its allocation. When #param is %NULL, the pool will use the
 		 * provided #allocator with its default {@link AllocationParams}.
 		 * 
-		 * A call to gst_buffer_pool_set_config() can update the allocator and params
+		 * A call to {@link Gst.BufferPool.set_config} can update the allocator and params
 		 * with the values that it is able to do. Some pools are, for example, not able
 		 * to operate with different allocators or cannot allocate with the values
 		 * specified in #params. Use gst_buffer_pool_get_config() to get the currently
@@ -885,7 +885,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Validate that changes made to #config are still valid in the context of the
 		 * expected parameters. This function is a helper that can be used to validate
-		 * changes made by a pool to a config when gst_buffer_pool_set_config()
+		 * changes made by a pool to a config when {@link Gst.BufferPool.set_config}
 		 * returns %FALSE. This expects that #caps haven't changed and that
 		 * #min_buffers aren't lower then what we initially expected.
 		 * This does not check if options or allocator parameters are still valid,
@@ -909,7 +909,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Adds a bus signal watch to the default main context with the default priority
 		 * (%G_PRIORITY_DEFAULT). It is also possible to use a non-default
-		 * main context set up using g_main_context_push_thread_default() (before
+		 * main context set up using {@link G.main_context_push_thread_default} (before
 		 * one had to create a bus watch source and attach it to the desired main
 		 * context 'manually').
 		 * 
@@ -926,7 +926,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Adds a bus signal watch to the default main context with the given #priority
 		 * (e.g. %G_PRIORITY_DEFAULT). It is also possible to use a non-default main
-		 * context set up using g_main_context_push_thread_default()
+		 * context set up using {@link G.main_context_push_thread_default}
 		 * (before one had to create a bus watch source and attach it to the desired
 		 * main context 'manually').
 		 * 
@@ -947,7 +947,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Adds a bus watch to the default main context with the default priority
 		 * (%G_PRIORITY_DEFAULT). It is also possible to use a non-default main
-		 * context set up using g_main_context_push_thread_default() (before
+		 * context set up using {@link G.main_context_push_thread_default} (before
 		 * one had to create a bus watch source and attach it to the desired main
 		 * context 'manually').
 		 * 
@@ -972,7 +972,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Adds a bus watch to the default main context with the given #priority (e.g.
 		 * %G_PRIORITY_DEFAULT). It is also possible to use a non-default  main
-		 * context set up using g_main_context_push_thread_default() (before
+		 * context set up using {@link G.main_context_push_thread_default} (before
 		 * one had to create a bus watch source and attach it to the desired main
 		 * context 'manually').
 		 * 
@@ -1016,7 +1016,7 @@ declare namespace imports.gi.Gst {
 		create_watch(): GLib.Source | null;
 		/**
 		 * Instructs GStreamer to stop emitting the "sync-message" signal for this bus.
-		 * See gst_bus_enable_sync_message_emission() for more information.
+		 * See {@link Gst.Bus.enable_sync_message_emission} for more information.
 		 * 
 		 * In the event that multiple pieces of code have called
 		 * gst_bus_enable_sync_message_emission(), the sync-message emissions will only
@@ -1035,7 +1035,7 @@ declare namespace imports.gi.Gst {
 		 * handler is.
 		 * 
 		 * This function may be called multiple times. To clean up, the caller is
-		 * responsible for calling gst_bus_disable_sync_message_emission() as many times
+		 * responsible for calling {@link Gst.Bus.disable_sync_message_emission} as many times
 		 * as this function is called.
 		 * 
 		 * While this function looks similar to gst_bus_add_signal_watch(), it is not
@@ -1050,7 +1050,7 @@ declare namespace imports.gi.Gst {
 		enable_sync_message_emission(): void;
 		/**
 		 * Gets the file descriptor from the bus which can be used to get notified about
-		 * messages being available with functions like g_poll(), and allows integration
+		 * messages being available with functions like {@link G.poll}, and allows integration
 		 * into other event loops based on file descriptors.
 		 * Whenever a message is available, the POLLIN / %G_IO_IN event is set.
 		 * 
@@ -1089,7 +1089,7 @@ declare namespace imports.gi.Gst {
 		 * #events mask
 		 * 
 		 * Because poll is implemented using the "message" signal enabled by
-		 * gst_bus_add_signal_watch(), calling gst_bus_poll() will cause the "message"
+		 * {@link Gst.Bus.add_signal_watch}, calling gst_bus_poll() will cause the "message"
 		 * signal to be emitted for every message that poll sees. Thus a "message"
 		 * signal handler will see the same messages that this function sees -- neither
 		 * will steal messages from the other.
@@ -1119,7 +1119,7 @@ declare namespace imports.gi.Gst {
 		 * indefinitely.
 		 * @returns the message that was received,
 		 *     or %NULL if the poll timed out. The message is taken from the
-		 *     bus and needs to be unreffed with gst_message_unref() after
+		 *     bus and needs to be unreffed with {@link Gst.Message.unref} after
 		 *     usage.
 		 */
 		poll(events: MessageType, timeout: ClockTime): Message | null;
@@ -1127,7 +1127,7 @@ declare namespace imports.gi.Gst {
 		 * Get a message from the bus.
 		 * @returns the {@link Message} that is on the
 		 *     bus, or %NULL if the bus is empty. The message is taken from
-		 *     the bus and needs to be unreffed with gst_message_unref() after
+		 *     the bus and needs to be unreffed with {@link Gst.Message.unref} after
 		 *     usage.
 		 * 
 		 * MT safe.
@@ -1143,7 +1143,7 @@ declare namespace imports.gi.Gst {
 		 * @returns the next {@link Message} matching
 		 *     #type that is on the bus, or %NULL if the bus is empty or there
 		 *     is no message matching #type. The message is taken from the bus
-		 *     and needs to be unreffed with gst_message_unref() after usage.
+		 *     and needs to be unreffed with {@link Gst.Message.unref} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -1158,7 +1158,7 @@ declare namespace imports.gi.Gst {
 		 */
 		post(message: Message): boolean;
 		/**
-		 * Removes a signal watch previously added with gst_bus_add_signal_watch().
+		 * Removes a signal watch previously added with {@link Gst.Bus.add_signal_watch}.
 		 * 
 		 * MT safe.
 		 */
@@ -1171,7 +1171,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * If #flushing, flush out and unref any messages queued in the bus. Releases
 		 * references to the message origin objects. Will flush future messages until
-		 * gst_bus_set_flushing() sets #flushing to %FALSE.
+		 * {@link Gst.Bus.set_flushing} sets #flushing to %FALSE.
 		 * 
 		 * MT safe.
 		 * @param flushing whether or not to flush the bus
@@ -1202,14 +1202,14 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get a message from the bus, waiting up to the specified timeout.
 		 * 
-		 * If #timeout is 0, this function behaves like gst_bus_pop(). If #timeout is
+		 * If #timeout is 0, this function behaves like {@link Gst.Bus.pop}. If #timeout is
 		 * #GST_CLOCK_TIME_NONE, this function will block forever until a message was
 		 * posted on the bus.
 		 * @param timeout a timeout
 		 * @returns the {@link Message} that is on the
 		 *     bus after the specified timeout or %NULL if the bus is empty
 		 *     after the timeout expired.  The message is taken from the bus
-		 *     and needs to be unreffed with gst_message_unref() after usage.
+		 *     and needs to be unreffed with {@link Gst.Message.unref} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -1219,7 +1219,7 @@ declare namespace imports.gi.Gst {
 		 * waiting up to the specified timeout (and discarding any messages that do not
 		 * match the mask provided).
 		 * 
-		 * If #timeout is 0, this function behaves like gst_bus_pop_filtered(). If
+		 * If #timeout is 0, this function behaves like {@link Gst.Bus.pop_filtered}. If
 		 * #timeout is #GST_CLOCK_TIME_NONE, this function will block forever until a
 		 * matching message was posted on the bus.
 		 * @param timeout a timeout in nanoseconds, or GST_CLOCK_TIME_NONE to wait forever
@@ -1227,7 +1227,7 @@ declare namespace imports.gi.Gst {
 		 * @returns a {@link Message} matching the
 		 *     filter in #types, or %NULL if no matching message was found on
 		 *     the bus until the timeout expired. The message is taken from
-		 *     the bus and needs to be unreffed with gst_message_unref() after
+		 *     the bus and needs to be unreffed with {@link Gst.Message.unref} after
 		 *     usage.
 		 * 
 		 * MT safe.
@@ -1250,7 +1250,7 @@ declare namespace imports.gi.Gst {
 		 * thread that posted the message so one has to be careful with locking.
 		 * 
 		 * This signal will not be emitted by default, you have to call
-		 * gst_bus_enable_sync_message_emission() before.
+		 * {@link Gst.Bus.enable_sync_message_emission} before.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -1288,7 +1288,7 @@ declare namespace imports.gi.Gst {
 	 * The GstBus provides support for #GSource based notifications. This makes it
 	 * possible to handle the delivery in the glib mainloop.
 	 * 
-	 * The #GSource callback function gst_bus_async_signal_func() can be used to
+	 * The #GSource callback function {@link Gst.Bus.async_signal_func} can be used to
 	 * convert all bus messages into signal emissions.
 	 * 
 	 * A message is posted on the bus with the gst_bus_post() method. With the
@@ -1358,7 +1358,7 @@ declare namespace imports.gi.Gst {
 		add_observation(slave: ClockTime, master: ClockTime): [ boolean, number ];
 		/**
 		 * Add a clock observation to the internal slaving algorithm the same as
-		 * gst_clock_add_observation(), and return the result of the master clock
+		 * {@link Gst.Clock.add_observation}, and return the result of the master clock
 		 * estimation, without updating the internal calibration.
 		 * 
 		 * The caller can then take the results and call gst_clock_set_calibration()
@@ -1380,7 +1380,7 @@ declare namespace imports.gi.Gst {
 		add_observation_unapplied(slave: ClockTime, master: ClockTime): [ boolean, number, ClockTime | null, ClockTime | null, ClockTime | null, ClockTime | null ];
 		/**
 		 * Converts the given #internal clock time to the external time, adjusting for the
-		 * rate and reference time set with gst_clock_set_calibration() and making sure
+		 * rate and reference time set with {@link Gst.Clock.set_calibration} and making sure
 		 * that the returned time is increasing. This function should be called with the
 		 * clock's OBJECT_LOCK held and is mainly used by clock subclasses.
 		 * 
@@ -1392,7 +1392,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Converts the given #internal_target clock time to the external time,
 		 * using the passed calibration parameters. This function performs the
-		 * same calculation as gst_clock_adjust_unlocked() when called using the
+		 * same calculation as {@link Gst.Clock.adjust_unlocked} when called using the
 		 * current calibration parameters, but doesn't ensure a monotonically
 		 * increasing result as gst_clock_adjust_unlocked() does.
 		 * 
@@ -1408,7 +1408,7 @@ declare namespace imports.gi.Gst {
 		adjust_with_calibration(internal_target: ClockTime, cinternal: ClockTime, cexternal: ClockTime, cnum: ClockTime, cdenom: ClockTime): ClockTime;
 		/**
 		 * Gets the internal rate and reference time of #clock. See
-		 * gst_clock_set_calibration() for more information.
+		 * {@link Gst.Clock.set_calibration} for more information.
 		 * 
 		 * #internal, #external, #rate_num, and #rate_denom can be left %NULL if the
 		 * caller is not interested in the values.
@@ -1444,7 +1444,7 @@ declare namespace imports.gi.Gst {
 		get_master(): Clock | null;
 		/**
 		 * Get the accuracy of the clock. The accuracy of the clock is the granularity
-		 * of the values returned by gst_clock_get_time().
+		 * of the values returned by {@link Gst.Clock.get_time}.
 		 * @returns the resolution of the clock in units of {@link ClockTime}.
 		 * 
 		 * MT safe.
@@ -1515,7 +1515,7 @@ declare namespace imports.gi.Gst {
 		 * the clock. Values bigger than 1/1 make the clock go faster.
 		 * 
 		 * #internal and #external are calibration parameters that arrange that
-		 * gst_clock_get_time() should have been #external at internal time #internal.
+		 * {@link Gst.Clock.get_time} should have been #external at internal time #internal.
 		 * This internal time should not be in the future; that is, it should be less
 		 * than the value of gst_clock_get_internal_time() when this function is called.
 		 * 
@@ -1543,7 +1543,7 @@ declare namespace imports.gi.Gst {
 		set_calibration(internal: ClockTime, external: ClockTime, rate_num: ClockTime, rate_denom: ClockTime): void;
 		/**
 		 * Set #master as the master clock for #clock. #clock will be automatically
-		 * calibrated so that gst_clock_get_time() reports the same time as the
+		 * calibrated so that {@link Gst.Clock.get_time} reports the same time as the
 		 * master clock.
 		 * 
 		 * A clock provider that slaves its clock to a master can get the current
@@ -1572,7 +1572,7 @@ declare namespace imports.gi.Gst {
 		set_resolution(resolution: ClockTime): ClockTime;
 		/**
 		 * Sets #clock to synced and emits the GstClock::synced signal, and wakes up any
-		 * thread waiting in gst_clock_wait_for_sync().
+		 * thread waiting in {@link Gst.Clock.wait_for_sync}.
 		 * 
 		 * This function must only be called if GST_CLOCK_FLAG_NEEDS_STARTUP_SYNC
 		 * is set on the clock, and is intended to be called by subclasses only.
@@ -1596,7 +1596,7 @@ declare namespace imports.gi.Gst {
 		single_shot_id_reinit(id: ClockID, time: ClockTime): boolean;
 		/**
 		 * Converts the given #external clock time to the internal time of #clock,
-		 * using the rate and reference time set with gst_clock_set_calibration().
+		 * using the rate and reference time set with {@link Gst.Clock.set_calibration}.
 		 * This function should be called with the clock's OBJECT_LOCK held and
 		 * is mainly used by clock subclasses.
 		 * 
@@ -1608,7 +1608,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Converts the given #external_target clock time to the internal time,
 		 * using the passed calibration parameters. This function performs the
-		 * same calculation as gst_clock_unadjust_unlocked() when called using the
+		 * same calculation as {@link Gst.Clock.unadjust_unlocked} when called using the
 		 * current calibration parameters.
 		 * 
 		 * Note: The #clock parameter is unused and can be NULL
@@ -1677,7 +1677,7 @@ declare namespace imports.gi.Gst {
 	 * base class or, more conveniently, by subclassing {@link SystemClock}.
 	 * 
 	 * The #GstClock returns a monotonically increasing time with the method
-	 * gst_clock_get_time(). Its accuracy and base time depend on the specific
+	 * {@link Gst.Clock.get_time}. Its accuracy and base time depend on the specific
 	 * clock implementation but time is always expressed in nanoseconds. Since the
 	 * baseline of the clock is undefined, the clock time returned is not
 	 * meaningful in itself, what matters are the deltas between two clock times.
@@ -1816,7 +1816,7 @@ declare namespace imports.gi.Gst {
 		public static id_uses_clock(id: ClockID, clock: Clock): boolean;
 		/**
 		 * Perform a blocking wait on #id.
-		 * #id should have been created with gst_clock_new_single_shot_id()
+		 * #id should have been created with {@link Gst.Clock.new_single_shot_id}
 		 * or gst_clock_new_periodic_id() and should not have been unscheduled
 		 * with a call to gst_clock_id_unschedule().
 		 * 
@@ -1832,7 +1832,7 @@ declare namespace imports.gi.Gst {
 		 * @returns the result of the blocking wait. #GST_CLOCK_EARLY will be returned
 		 * if the current clock time is past the time of #id, #GST_CLOCK_OK if
 		 * #id was scheduled in time. #GST_CLOCK_UNSCHEDULED if #id was
-		 * unscheduled with gst_clock_id_unschedule().
+		 * unscheduled with {@link Gst.Clock.id_unschedule}.
 		 * 
 		 * MT safe.
 		 * 
@@ -1903,7 +1903,7 @@ declare namespace imports.gi.Gst {
 		 * curve or apply a control curve sample by sample.
 		 * 
 		 * The values are unboxed and ready to be used. The similar function
-		 * gst_control_binding_get_g_value_array() returns the array as #GValues and is
+		 * {@link Gst.ControlBinding.get_g_value_array} returns the array as #GValues and is
 		 * more suitable for bindings.
 		 * @param timestamp the time that should be processed
 		 * @param interval the time spacing between subsequent values
@@ -1919,7 +1919,7 @@ declare namespace imports.gi.Gst {
 		is_disabled(): boolean;
 		/**
 		 * This function is used to disable a control binding for some time, i.e.
-		 * gst_object_sync_values() will do nothing.
+		 * {@link Gst.Object.sync_values} will do nothing.
 		 * @param disabled boolean that specifies whether to disable the controller
 		 * or not.
 		 */
@@ -2058,25 +2058,25 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Getter for the {@link Caps} that this device supports.
 		 * @returns The {@link Caps} supported by this device. Unref with
-		 * gst_caps_unref() when done.
+		 * {@link Gst.Caps.unref} when done.
 		 */
 		get_caps(): Caps | null;
 		/**
 		 * Gets the "class" of a device. This is a "/" separated list of
 		 * classes that represent this device. They are a subset of the
 		 * classes of the {@link DeviceProvider} that produced this device.
-		 * @returns The device class. Free with g_free() after use.
+		 * @returns The device class. Free with {@link G.free} after use.
 		 */
 		get_device_class(): string;
 		/**
 		 * Gets the user-friendly name of the device.
-		 * @returns The device name. Free with g_free() after use.
+		 * @returns The device name. Free with {@link G.free} after use.
 		 */
 		get_display_name(): string;
 		/**
 		 * Gets the extra properties of a device.
 		 * @returns The extra properties or %NULL when there are none.
-		 *          Free with gst_structure_free() after use.
+		 *          Free with {@link Gst.Structure.free} after use.
 		 */
 		get_properties(): Structure | null;
 		/**
@@ -2096,7 +2096,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Tries to reconfigure an existing element to use the device. If this
 		 * function fails, then one must destroy the element and create a new one
-		 * using gst_device_create_element().
+		 * using {@link Gst.Device.create_element}.
 		 * 
 		 * Note: This should only be implemented for elements can change their
 		 * device in the PLAYING state.
@@ -2155,7 +2155,7 @@ declare namespace imports.gi.Gst {
 		 * matched independently. That is, adding more filters will not further restrict
 		 * what devices are matched.
 		 * 
-		 * The #GstCaps supported by the device as returned by gst_device_get_caps() are
+		 * The #GstCaps supported by the device as returned by {@link Gst.Device.get_caps} are
 		 * not intersected with caps filters added using this function.
 		 * 
 		 * Filters must be added before the #GstDeviceMonitor is started.
@@ -2194,7 +2194,7 @@ declare namespace imports.gi.Gst {
 		get_show_all_devices(): boolean;
 		/**
 		 * Removes a filter from the {@link DeviceMonitor} using the id that was returned
-		 * by gst_device_monitor_add_filter().
+		 * by {@link Gst.DeviceMonitor.add_filter}.
 		 * @param filter_id the id of the filter
 		 * @returns %TRUE of the filter id was valid, %FALSE otherwise
 		 */
@@ -2321,7 +2321,7 @@ declare namespace imports.gi.Gst {
 		 * This is for use by subclasses.
 		 * 
 		 * #device's reference count will be incremented, and any floating reference
-		 * will be removed (see gst_object_ref_sink()).
+		 * will be removed (see {@link Gst.Object.ref_sink}).
 		 * @param device a {@link Device} that has been added
 		 */
 		device_add(device: Device): void;
@@ -2393,7 +2393,7 @@ declare namespace imports.gi.Gst {
 		 * when devices are added or removed from the system.
 		 * 
 		 * Since the {@link DeviceProvider} is a singleton,
-		 * gst_device_provider_start() may already have been called by another
+		 * {@link Gst.DeviceProvider.start} may already have been called by another
 		 * user of the object, gst_device_provider_stop() needs to be called the same
 		 * number of times.
 		 * 
@@ -2406,7 +2406,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Decreases the use-count by one. If the use count reaches zero, this
 		 * {@link DeviceProvider} will stop providering the devices. This needs to be
-		 * called the same number of times that gst_device_provider_start() was called.
+		 * called the same number of times that {@link Gst.DeviceProvider.start} was called.
 		 */
 		stop(): void;
 		/**
@@ -2479,7 +2479,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the #GType for device providers managed by this factory. The type can
 		 * only be retrieved if the device provider factory is loaded, which can be
-		 * assured with gst_plugin_feature_load().
+		 * assured with {@link Gst.PluginFeature.load}.
 		 * @returns the #GType for device providers managed by this factory.
 		 */
 		get_device_provider_type(): GObject.Type;
@@ -2494,7 +2494,7 @@ declare namespace imports.gi.Gst {
 		 * Get the available keys for the metadata on #factory.
 		 * @returns 
 		 * a %NULL-terminated array of key strings, or %NULL when there is no
-		 * metadata. Free with g_strfreev() when no longer needed.
+		 * metadata. Free with {@link G.strfreev} when no longer needed.
 		 */
 		get_metadata_keys(): string[] | null;
 		/**
@@ -2526,7 +2526,7 @@ declare namespace imports.gi.Gst {
 	 * GstDeviceProviderfactory can be added to a #GstPlugin as it is also a
 	 * #GstPluginFeature.
 	 * 
-	 * Use the gst_device_provider_factory_find() and
+	 * Use the {@link Gst.DeviceProviderFactory.find} and
 	 * gst_device_provider_factory_get() functions to create device
 	 * provider instances or use gst_device_provider_factory_get_by_name() as a
 	 * convenient shortcut.
@@ -2557,7 +2557,7 @@ declare namespace imports.gi.Gst {
 		 * @param minrank Minimum rank
 		 * @returns 
 		 * a #GList of {@link DeviceProviderFactory} device providers. Use
-		 * gst_plugin_feature_list_free() after usage.
+		 * {@link Gst.PluginFeature.list_free} after usage.
 		 */
 		public static list_get_device_providers(minrank: Rank): GLib.List;
 	}
@@ -2635,7 +2635,7 @@ declare namespace imports.gi.Gst {
 	interface IElement {
 		readonly object: Object;
 		/**
-		 * Used to serialize execution of gst_element_set_state()
+		 * Used to serialize execution of {@link Gst.Element.set_state}
 		 */
 		readonly state_lock: GLib.RecMutex;
 		/**
@@ -2644,7 +2644,7 @@ declare namespace imports.gi.Gst {
 		readonly state_cond: GLib.Cond;
 		/**
 		 * Used to detect concurrent execution of
-		 * gst_element_set_state() and gst_element_get_state()
+		 * {@link Gst.Element.set_state} and gst_element_get_state()
 		 */
 		readonly state_cookie: number;
 		/**
@@ -2733,14 +2733,14 @@ declare namespace imports.gi.Gst {
 		abort_state(): void;
 		/**
 		 * Adds a pad (link point) to #element. #pad's parent will be set to #element;
-		 * see gst_object_set_parent() for refcounting information.
+		 * see {@link Gst.Object.set_parent} for refcounting information.
 		 * 
 		 * Pads are automatically activated when added in the PAUSED or PLAYING
 		 * state.
 		 * 
 		 * The pad and the element should be unlocked when calling this function.
 		 * 
-		 * This function will emit the {@link Element}::pad-added signal on the element.
+		 * This function will emit the {@link Element.pad_added} signal on the element.
 		 * @param pad the {@link Pad} to add to the element.
 		 * @returns %TRUE if the pad could be added. This function can fail when
 		 * a pad with the same name already existed or the pad already had another
@@ -2754,7 +2754,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Calls #func from another thread and passes #user_data to it. This is to be
 		 * used for cases when a state change has to be performed from a streaming
-		 * thread, directly via gst_element_set_state() or indirectly e.g. via SEEK
+		 * thread, directly via {@link Gst.Element.set_state} or indirectly e.g. via SEEK
 		 * events.
 		 * 
 		 * Calling those functions directly from the streaming thread will cause
@@ -2858,7 +2858,7 @@ declare namespace imports.gi.Gst {
 		get_bus(): Bus | null;
 		/**
 		 * Gets the currently configured clock of the element. This is the clock as was
-		 * last set with gst_element_set_clock().
+		 * last set with {@link Gst.Element.set_clock}.
 		 * 
 		 * Elements in a pipeline will only have their clock set when the
 		 * pipeline is in the PLAYING state.
@@ -2878,7 +2878,7 @@ declare namespace imports.gi.Gst {
 		 * @param pad the {@link Pad} to find a compatible one for.
 		 * @param caps the {@link Caps} to use as a filter.
 		 * @returns the {@link Pad} to which a link
-		 *   can be made, or %NULL if one cannot be found. gst_object_unref()
+		 *   can be made, or %NULL if one cannot be found. {@link Gst.Object.unref}
 		 *   after usage.
 		 */
 		get_compatible_pad(pad: Pad, caps: Caps | null): Pad | null;
@@ -2957,7 +2957,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Retrieves a pad from the element by name (e.g. "src_\%d"). This version only
 		 * retrieves request pads. The pad should be released with
-		 * gst_element_release_request_pad().
+		 * {@link Gst.Element.release_request_pad}.
 		 * 
 		 * This method is slower than manually getting the pad template and calling
 		 * gst_element_request_pad() if the pads should have a specific name (e.g.
@@ -2982,7 +2982,7 @@ declare namespace imports.gi.Gst {
 		 * Gets the state of the element.
 		 * 
 		 * For elements that performed an ASYNC state change, as reported by
-		 * gst_element_set_state(), this function will block up to the
+		 * {@link Gst.Element.set_state}, this function will block up to the
 		 * specified timeout value for the state change to complete.
 		 * If the element completes the state change or goes into
 		 * an error, this function returns immediately with a return value of
@@ -3039,7 +3039,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Retrieves an iterator of #element's pads. The iterator should
 		 * be freed after usage. Also more specialized iterators exists such as
-		 * gst_element_iterate_src_pads() or gst_element_iterate_sink_pads().
+		 * {@link Gst.Element.iterate_src_pads} or gst_element_iterate_sink_pads().
 		 * 
 		 * The order of pads returned by the iterator will be the order in which
 		 * the pads were added to the element.
@@ -3076,7 +3076,7 @@ declare namespace imports.gi.Gst {
 		 * If multiple links are possible, only one is established.
 		 * 
 		 * Make sure you have added your elements to a bin or pipeline with
-		 * gst_bin_add() before trying to link them.
+		 * {@link Gst.Bin.add} before trying to link them.
 		 * @param dest the {@link Element} containing the destination pad.
 		 * @returns %TRUE if the elements could be linked, %FALSE otherwise.
 		 */
@@ -3089,7 +3089,7 @@ declare namespace imports.gi.Gst {
 		 * If multiple links are possible, only one is established.
 		 * 
 		 * Make sure you have added your elements to a bin or pipeline with
-		 * gst_bin_add() before trying to link them.
+		 * {@link Gst.Bin.add} before trying to link them.
 		 * @param dest the {@link Element} containing the destination pad.
 		 * @param filter the {@link Caps} to filter the link,
 		 *     or %NULL for no filter.
@@ -3097,7 +3097,7 @@ declare namespace imports.gi.Gst {
 		 */
 		link_filtered(dest: Element, filter: Caps | null): boolean;
 		/**
-		 * Chain together a series of elements. Uses gst_element_link().
+		 * Chain together a series of elements. Uses {@link Gst.Element.link}.
 		 * Make sure you have added your elements to a bin or pipeline with
 		 * gst_bin_add() before trying to link them.
 		 * @param element_2 the second {@link Element} in the link chain.
@@ -3138,7 +3138,7 @@ declare namespace imports.gi.Gst {
 		 * child of the parent of the other element.  If they have different
 		 * parents, the link fails.
 		 * 
-		 * Calling gst_element_link_pads_full() with #flags == %GST_PAD_LINK_CHECK_DEFAULT
+		 * Calling {@link Gst.Element.link_pads_full} with #flags == %GST_PAD_LINK_CHECK_DEFAULT
 		 * is the same as calling gst_element_link_pads() and the recommended way of
 		 * linking pads with safety checks applied.
 		 * 
@@ -3155,7 +3155,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Brings the element to the lost state. The current state of the
 		 * element is copied to the pending state so that any call to
-		 * gst_element_get_state() will return %GST_STATE_CHANGE_ASYNC.
+		 * {@link Gst.Element.get_state} will return %GST_STATE_CHANGE_ASYNC.
 		 * 
 		 * An ASYNC_START message is posted. If the element was PLAYING, it will
 		 * go to PAUSED. The element will be restored to its PLAYING state by
@@ -3219,7 +3219,7 @@ declare namespace imports.gi.Gst {
 		 * pad templates use this in combination with autopluggers to figure out that
 		 * the element is done initializing its pads.
 		 * 
-		 * This function emits the {@link Element}::no-more-pads signal.
+		 * This function emits the {@link Element.no_more_pads} signal.
 		 * 
 		 * MT safe.
 		 */
@@ -3293,7 +3293,7 @@ declare namespace imports.gi.Gst {
 		 * bus when that is the case.
 		 * 
 		 * If one repeatedly calls this function one can also create a query and reuse
-		 * it in gst_element_query().
+		 * it in {@link Gst.Element.query}.
 		 * @param format the {@link Format} requested
 		 * @returns %TRUE if the query could be performed.
 		 * 
@@ -3303,7 +3303,7 @@ declare namespace imports.gi.Gst {
 		query_position(format: Format): [ boolean, number | null ];
 		/**
 		 * Makes the element free the previously requested pad as obtained
-		 * with gst_element_request_pad().
+		 * with {@link Gst.Element.request_pad}.
 		 * 
 		 * This does not unref the pad. If the pad was created by using
 		 * gst_element_request_pad(), gst_element_release_request_pad() needs to be
@@ -3315,7 +3315,7 @@ declare namespace imports.gi.Gst {
 		release_request_pad(pad: Pad): void;
 		/**
 		 * Removes #pad from #element. #pad will be destroyed if it has not been
-		 * referenced elsewhere using gst_object_unparent().
+		 * referenced elsewhere using {@link Gst.Object.unparent}.
 		 * 
 		 * This function is used by plugin developers and should not be used
 		 * by applications. Pads that were dynamically requested from elements
@@ -3329,7 +3329,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The pad and the element should be unlocked when calling this function.
 		 * 
-		 * This function will emit the {@link Element}::pad-removed signal on the element.
+		 * This function will emit the {@link Element.pad_removed} signal on the element.
 		 * @param pad the {@link Pad} to remove from the element.
 		 * @returns %TRUE if the pad could be removed. Can return %FALSE if the
 		 * pad does not belong to the provided element.
@@ -3341,7 +3341,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Retrieves a request pad from the element according to the provided template.
 		 * Pad templates can be looked up using
-		 * gst_element_factory_get_static_pad_templates().
+		 * {@link Gst.ElementFactory.get_static_pad_templates}.
 		 * 
 		 * The pad should be released with gst_element_release_request_pad().
 		 * @param templ a {@link PadTemplate} of which we want a pad of.
@@ -3354,7 +3354,7 @@ declare namespace imports.gi.Gst {
 		 */
 		request_pad(templ: PadTemplate, name: string | null, caps: Caps | null): Pad | null;
 		/**
-		 * Sends a seek event to an element. See gst_event_new_seek() for the details of
+		 * Sends a seek event to an element. See {@link Gst.Event.new_seek} for the details of
 		 * the parameters. The seek event is sent to the element using
 		 * gst_element_send_event().
 		 * 
@@ -3375,7 +3375,7 @@ declare namespace imports.gi.Gst {
 		 * to the given position relative to the start of the stream. For more complex
 		 * operations like segment seeks (e.g. for looping) or changing the playback
 		 * rate or seeking relative to the last configured playback segment you should
-		 * use gst_element_seek().
+		 * use {@link Gst.Element.seek}.
 		 * 
 		 * In a completely prerolled PAUSED or PLAYING pipeline, seeking is always
 		 * guaranteed to return %TRUE on a seekable media type or %FALSE when the media
@@ -3402,7 +3402,7 @@ declare namespace imports.gi.Gst {
 		 * downstream events or a random linked source pad for upstream events.
 		 * 
 		 * This function takes ownership of the provided event so you should
-		 * gst_event_ref() it if you want to reuse the event after this call.
+		 * {@link Gst.Event.ref} it if you want to reuse the event after this call.
 		 * 
 		 * MT safe.
 		 * @param event the {@link Event} to send to the element.
@@ -3411,7 +3411,7 @@ declare namespace imports.gi.Gst {
 		 */
 		send_event(event: Event): boolean;
 		/**
-		 * Set the base time of an element. See gst_element_get_base_time().
+		 * Set the base time of an element. See {@link Gst.Element.get_base_time}.
 		 * 
 		 * MT safe.
 		 * @param time the base time to set.
@@ -3482,7 +3482,7 @@ declare namespace imports.gi.Gst {
 		 * This function can return #GST_STATE_CHANGE_ASYNC, in which case the
 		 * element will perform the remainder of the state change asynchronously in
 		 * another thread.
-		 * An application can use gst_element_get_state() to wait for the completion
+		 * An application can use {@link Gst.Element.get_state} to wait for the completion
 		 * of the state change or it can wait for a %GST_MESSAGE_ASYNC_DONE or
 		 * %GST_MESSAGE_STATE_CHANGED on the bus.
 		 * 
@@ -3506,20 +3506,20 @@ declare namespace imports.gi.Gst {
 		 * Unlinks all source pads of the source element with all sink pads
 		 * of the sink element to which they are linked.
 		 * 
-		 * If the link has been made using gst_element_link(), it could have created an
+		 * If the link has been made using {@link Gst.Element.link}, it could have created an
 		 * requestpad, which has to be released using gst_element_release_request_pad().
 		 * @param dest the sink {@link Element} to unlink.
 		 */
 		unlink(dest: Element): void;
 		/**
-		 * Unlinks a series of elements. Uses gst_element_unlink().
+		 * Unlinks a series of elements. Uses {@link Gst.Element.unlink}.
 		 * @param element_2 the second {@link Element} in the link chain.
 		 */
 		unlink_many(element_2: Element): void;
 		/**
 		 * Unlinks the two named pads of the source and destination elements.
 		 * 
-		 * This is a convenience function for gst_pad_unlink().
+		 * This is a convenience function for {@link Gst.Pad.unlink}.
 		 * @param srcpadname the name of the {@link Pad} in source element.
 		 * @param dest a {@link Element} containing the destination pad.
 		 * @param destpadname the name of the {@link Pad} in destination element.
@@ -3541,7 +3541,7 @@ declare namespace imports.gi.Gst {
 		 * usually be emitted from the context of the streaming thread. Also keep in
 		 * mind that if you add new elements to the pipeline in the signal handler
 		 * you will need to set them to the desired target state with
-		 * gst_element_set_state() or gst_element_sync_state_with_parent().
+		 * {@link Gst.Element.set_state} or gst_element_sync_state_with_parent().
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -3621,7 +3621,7 @@ declare namespace imports.gi.Gst {
 	 * can be used in a GStreamer pipeline. Please refer to the plugin writers
 	 * guide for more information on creating {@link Element} subclasses.
 	 * 
-	 * The name of a #GstElement can be get with gst_element_get_name() and set with
+	 * The name of a #GstElement can be get with {@link Gst.Element.get_name} and set with
 	 * gst_element_set_name().  For speed, GST_ELEMENT_NAME() can be used in the
 	 * core when using the appropriate locking. Do not use this in plug-ins or
 	 * applications in order to retain ABI compatibility.
@@ -3747,7 +3747,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the #GType for elements managed by this factory. The type can
 		 * only be retrieved if the element factory is loaded, which can be
-		 * assured with gst_plugin_feature_load().
+		 * assured with {@link Gst.PluginFeature.load}.
 		 * @returns the #GType for elements managed by this factory or 0 if
 		 * the factory is not loaded.
 		 */
@@ -3763,7 +3763,7 @@ declare namespace imports.gi.Gst {
 		 * Get the available keys for the metadata on #factory.
 		 * @returns 
 		 * a %NULL-terminated array of key strings, or %NULL when there is no
-		 * metadata. Free with g_strfreev() when no longer needed.
+		 * metadata. Free with {@link G.strfreev} when no longer needed.
 		 */
 		get_metadata_keys(): string[] | null;
 		/**
@@ -3780,7 +3780,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets a %NULL-terminated array of protocols this element supports or %NULL if
 		 * no protocols are supported. You may not change the contents of the returned
-		 * array, as it is still owned by the element factory. Use g_strdupv() to
+		 * array, as it is still owned by the element factory. Use {@link G.strdupv} to
 		 * make a copy of the protocol string array if you need to.
 		 * @returns the supported protocols
 		 *     or %NULL
@@ -3818,7 +3818,7 @@ declare namespace imports.gi.Gst {
 	 * GstElementFactory can be added to a #GstPlugin as it is also a
 	 * #GstPluginFeature.
 	 * 
-	 * Use the gst_element_factory_find() and gst_element_factory_create()
+	 * Use the {@link Gst.ElementFactory.find} and gst_element_factory_create()
 	 * functions to create element instances or use gst_element_factory_make() as a
 	 * convenient shortcut.
 	 * 
@@ -3876,7 +3876,7 @@ declare namespace imports.gi.Gst {
 		 * @param type a {@link ElementFactoryListType}
 		 * @param minrank Minimum rank
 		 * @returns a #GList of
-		 *     {@link ElementFactory} elements. Use gst_plugin_feature_list_free() after
+		 *     {@link ElementFactory} elements. Use {@link Gst.PluginFeature.list_free} after
 		 *     usage.
 		 */
 		public static list_get_elements(type: ElementFactoryListType, minrank: Rank): GLib.List;
@@ -4034,7 +4034,7 @@ declare namespace imports.gi.Gst {
 	 * a proxy for another pad. Thus the bin can have sink and source ghost-pads
 	 * that are associated with sink and source pads of the child elements.
 	 * 
-	 * If the target pad is known at creation time, gst_ghost_pad_new() is the
+	 * If the target pad is known at creation time, {@link Gst.GhostPad.new} is the
 	 * function to use to get a ghost-pad. Otherwise one can use gst_ghost_pad_new_no_target()
 	 * to create the ghost-pad and use gst_ghost_pad_set_target() to establish the
 	 * association later on.
@@ -4071,7 +4071,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Create a new ghostpad without a target with the given direction.
 		 * A target can be set on the ghostpad later with the
-		 * gst_ghost_pad_set_target() function.
+		 * {@link Gst.GhostPad.set_target} function.
 		 * 
 		 * The created ghostpad will not have a padtemplate.
 		 * @param name the name of the new pad, or %NULL to assign a default name.
@@ -4181,14 +4181,14 @@ declare namespace imports.gi.Gst {
 		 * #GstControlBinding for this property it will be replaced.
 		 * 
 		 * The object's reference count will be incremented, and any floating
-		 * reference will be removed (see gst_object_ref_sink())
+		 * reference will be removed (see {@link Gst.Object.ref_sink})
 		 * @param binding the {@link ControlBinding} that should be used
 		 * @returns %FALSE if the given #binding has not been setup for this object or
 		 * has been setup for a non suitable property, %TRUE otherwise.
 		 */
 		add_control_binding(binding: ControlBinding): boolean;
 		/**
-		 * A default error function that uses g_printerr() to display the error message
+		 * A default error function that uses {@link G.printerr} to display the error message
 		 * and the optional debug string..
 		 * 
 		 * The default handler will simply print the error string using g_print.
@@ -4207,7 +4207,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Obtain the control-rate for this #object. Audio processing {@link Element}
 		 * objects will use this rate to sub-divide their processing loop and call
-		 * gst_object_sync_values() in between. The length of the processing segment
+		 * {@link Gst.Object.sync_values} in between. The length of the processing segment
 		 * should be up to #control-rate nanoseconds.
 		 * 
 		 * If the #object is not under property control, this will return
@@ -4235,12 +4235,12 @@ declare namespace imports.gi.Gst {
 		get_g_value_array(property_name: string, timestamp: ClockTime, interval: ClockTime, n_values: number, values: GObject.Value[]): boolean;
 		/**
 		 * Returns a copy of the name of #object.
-		 * Caller should g_free() the return value after usage.
+		 * Caller should {@link G.free} the return value after usage.
 		 * For a nameless object, this returns %NULL, which you can safely g_free()
 		 * as well.
 		 * 
 		 * Free-function: g_free
-		 * @returns the name of #object. g_free()
+		 * @returns the name of #object. {@link G.free}
 		 * after usage.
 		 * 
 		 * MT safe. This function grabs and releases #object's LOCK.
@@ -4248,7 +4248,7 @@ declare namespace imports.gi.Gst {
 		get_name(): string | null;
 		/**
 		 * Returns the parent of #object. This function increases the refcount
-		 * of the parent object so you should gst_object_unref() it after usage.
+		 * of the parent object so you should {@link Gst.Object.unref} it after usage.
 		 * @returns parent of #object, this can be
 		 *   %NULL if #object has no parent. unref after usage.
 		 * 
@@ -4261,7 +4261,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: g_free
 		 * @returns a string describing the path of #object. You must
-		 *          g_free() the string after usage.
+		 *          {@link G.free} the string after usage.
 		 * 
 		 * MT safe. Grabs and releases the {@link Object}'s LOCK for all objects
 		 *          in the hierarchy.
@@ -4284,7 +4284,7 @@ declare namespace imports.gi.Gst {
 		 * curve or apply a control curve sample by sample.
 		 * 
 		 * The values are unboxed and ready to be used. The similar function
-		 * gst_object_get_g_value_array() returns the array as #GValues and is
+		 * {@link Gst.Object.get_g_value_array} returns the array as #GValues and is
 		 * better suites for bindings.
 		 * @param property_name the name of the property to get
 		 * @param timestamp the time that should be processed
@@ -4301,7 +4301,7 @@ declare namespace imports.gi.Gst {
 		has_active_control_bindings(): boolean;
 		/**
 		 * @deprecated
-		 * Use gst_object_has_as_ancestor() instead.
+		 * Use {@link Gst.Object.has_as_ancestor} instead.
 		 * 
 		 * MT safe. Grabs and releases #object's locks.
 		 * 
@@ -4350,7 +4350,7 @@ declare namespace imports.gi.Gst {
 		remove_control_binding(binding: ControlBinding): boolean;
 		/**
 		 * This function is used to disable the control bindings on a property for
-		 * some time, i.e. gst_object_sync_values() will do nothing for the
+		 * some time, i.e. {@link Gst.Object.sync_values} will do nothing for the
 		 * property.
 		 * @param property_name property to disable
 		 * @param disabled boolean that specifies whether to disable the controller
@@ -4359,7 +4359,7 @@ declare namespace imports.gi.Gst {
 		set_control_binding_disabled(property_name: string, disabled: boolean): void;
 		/**
 		 * This function is used to disable all controlled properties of the #object for
-		 * some time, i.e. gst_object_sync_values() will do nothing.
+		 * some time, i.e. {@link Gst.Object.sync_values} will do nothing.
 		 * @param disabled boolean that specifies whether to disable the controller
 		 * or not.
 		 */
@@ -4367,7 +4367,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Change the control-rate for this #object. Audio processing {@link Element}
 		 * objects will use this rate to sub-divide their processing loop and call
-		 * gst_object_sync_values() in between. The length of the processing segment
+		 * {@link Gst.Object.sync_values} in between. The length of the processing segment
 		 * should be up to #control-rate nanoseconds.
 		 * 
 		 * The control-rate should not change if the element is in %GST_STATE_PAUSED or
@@ -4390,7 +4390,7 @@ declare namespace imports.gi.Gst {
 		set_name(name: string | null): boolean;
 		/**
 		 * Sets the parent of #object to #parent. The object's reference count will
-		 * be incremented, and any floating reference will be removed (see gst_object_ref_sink()).
+		 * be incremented, and any floating reference will be removed (see {@link Gst.Object.ref_sink}).
 		 * @param parent new parent of object
 		 * @returns %TRUE if #parent could be set or %FALSE when #object
 		 * already had a parent or #object and #parent are the same.
@@ -4477,7 +4477,7 @@ declare namespace imports.gi.Gst {
 	 * #GstObject gives us basic refcounting, parenting functionality and locking.
 	 * Most of the functions are just extended for special GStreamer needs and can be
 	 * found under the same name in the base class of #GstObject which is #GObject
-	 * (e.g. g_object_ref() becomes gst_object_ref()).
+	 * (e.g. {@link GObject.ref} becomes gst_object_ref()).
 	 * 
 	 * Since #GstObject derives from #GInitiallyUnowned, it also inherits the
 	 * floating reference. Be aware that functions such as gst_bin_add() and
@@ -4627,7 +4627,7 @@ declare namespace imports.gi.Gst {
 		 * Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
 		 * called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
 		 * exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
-		 * immediately if the pad is already idle while calling gst_pad_add_probe().
+		 * immediately if the pad is already idle while calling {@link Gst.Pad.add_probe}.
 		 * In each of the groups, probes are called in the order in which they were
 		 * added.
 		 * @param mask the probe mask
@@ -4635,7 +4635,7 @@ declare namespace imports.gi.Gst {
 		 *           the pad state
 		 * @param destroy_data #GDestroyNotify for user_data
 		 * @returns an id or 0 if no probe is pending. The id can be used to remove the
-		 * probe with gst_pad_remove_probe(). When using GST_PAD_PROBE_TYPE_IDLE it can
+		 * probe with {@link Gst.Pad.remove_probe}. When using GST_PAD_PROBE_TYPE_IDLE it can
 		 * happen that the probe can be run immediately and if the probe returns
 		 * GST_PAD_PROBE_REMOVE this functions returns 0.
 		 * 
@@ -4659,7 +4659,7 @@ declare namespace imports.gi.Gst {
 		 * #GST_FLOW_NOT_NEGOTIATED.
 		 * 
 		 * The function proceeds calling the chain function installed on #pad (see
-		 * gst_pad_set_chain_function()) and the return value of that function is
+		 * {@link Gst.Pad.set_chain_function}) and the return value of that function is
 		 * returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if #pad has no
 		 * chain function.
 		 * 
@@ -4681,7 +4681,7 @@ declare namespace imports.gi.Gst {
 		 * returns #GST_FLOW_NOT_NEGOTIATED.
 		 * 
 		 * The function proceeds calling the chainlist function installed on #pad (see
-		 * gst_pad_set_chain_list_function()) and the return value of that function is
+		 * {@link Gst.Pad.set_chain_list_function}) and the return value of that function is
 		 * returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if #pad has no
 		 * chainlist function.
 		 * 
@@ -4720,7 +4720,7 @@ declare namespace imports.gi.Gst {
 		 * preceded by 0's, such as by using the format \%03u instead of \%u.
 		 * @param parent Parent {@link Element} of #pad
 		 * @param stream_id The stream-id
-		 * @returns A stream-id for #pad. g_free() after usage.
+		 * @returns A stream-id for #pad. {@link G.free} after usage.
 		 */
 		create_stream_id(parent: Element, stream_id: string | null): string;
 		/**
@@ -4739,7 +4739,7 @@ declare namespace imports.gi.Gst {
 		 * stream-id manually instead.
 		 * @param parent Parent {@link Element} of #pad
 		 * @param stream_id The stream-id
-		 * @returns A stream-id for #pad. g_free() after usage.
+		 * @returns A stream-id for #pad. {@link G.free} after usage.
 		 */
 		create_stream_id_printf(parent: Element, stream_id: string | null): string;
 		/**
@@ -4759,7 +4759,7 @@ declare namespace imports.gi.Gst {
 		 * @param parent Parent {@link Element} of #pad
 		 * @param stream_id The stream-id
 		 * @param var_args parameters for the #stream_id format string
-		 * @returns A stream-id for #pad. g_free() after usage.
+		 * @returns A stream-id for #pad. {@link G.free} after usage.
 		 */
 		create_stream_id_printf_valist(parent: Element, stream_id: string | null, var_args: any[]): string;
 		/**
@@ -4790,7 +4790,7 @@ declare namespace imports.gi.Gst {
 		 * #pad and its peer.
 		 * 
 		 * The allowed capabilities is calculated as the intersection of the results of
-		 * calling gst_pad_query_caps() on #pad and its peer. The caller owns a reference
+		 * calling {@link Gst.Pad.query_caps} on #pad and its peer. The caller owns a reference
 		 * on the resulting caps.
 		 * @returns the allowed {@link Caps} of the
 		 *     pad link. Unref the caps when you no longer need it. This
@@ -4869,7 +4869,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Calls the getrange function of #pad, see {@link PadGetRangeFunction} for a
 		 * description of a getrange function. If #pad has no getrange function
-		 * installed (see gst_pad_set_getrange_function()) this function returns
+		 * installed (see {@link Gst.Pad.set_getrange_function}) this function returns
 		 * #GST_FLOW_NOT_SUPPORTED.
 		 * 
 		 * If #buffer points to a variable holding %NULL, a valid new #GstBuffer will be
@@ -4905,7 +4905,7 @@ declare namespace imports.gi.Gst {
 		 * return it. Otherwise, it will return NULL.
 		 * @returns a {@link Pad}, or %NULL if #pad has none
 		 * or more than one internal links. Unref returned pad with
-		 * gst_object_unref().
+		 * {@link Gst.Object.unref}.
 		 */
 		get_single_internal_link(): Pad | null;
 		/**
@@ -4922,7 +4922,7 @@ declare namespace imports.gi.Gst {
 		 * Returns the current {@link Stream} for the #pad, or %NULL if none has been
 		 * set yet, i.e. the pad has not received a stream-start event yet.
 		 * 
-		 * This is a convenience wrapper around gst_pad_get_sticky_event() and
+		 * This is a convenience wrapper around {@link Gst.Pad.get_sticky_event} and
 		 * gst_event_parse_stream().
 		 * @returns the current {@link Stream} for #pad, or %NULL.
 		 *     unref the returned stream when no longer needed.
@@ -4932,13 +4932,13 @@ declare namespace imports.gi.Gst {
 		 * Returns the current stream-id for the #pad, or %NULL if none has been
 		 * set yet, i.e. the pad has not received a stream-start event yet.
 		 * 
-		 * This is a convenience wrapper around gst_pad_get_sticky_event() and
+		 * This is a convenience wrapper around {@link Gst.Pad.get_sticky_event} and
 		 * gst_event_parse_stream_start().
 		 * 
 		 * The returned stream-id string should be treated as an opaque string, its
 		 * contents should not be interpreted.
 		 * @returns a newly-allocated copy of the stream-id for
-		 *     #pad, or %NULL.  g_free() the returned string when no longer
+		 *     #pad, or %NULL.  {@link G.free} the returned string when no longer
 		 *     needed.
 		 */
 		get_stream_id(): string | null;
@@ -4963,7 +4963,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Checks if the pad is blocked or not. This function returns the
 		 * last requested state of the pad. It is not certain that the pad
-		 * is actually blocking at this point (see gst_pad_is_blocking()).
+		 * is actually blocking at this point (see {@link Gst.Pad.is_blocking}).
 		 * @returns %TRUE if the pad is blocked.
 		 * 
 		 * MT safe.
@@ -4994,7 +4994,7 @@ declare namespace imports.gi.Gst {
 		 * Free-function: gst_iterator_free
 		 * @returns a new {@link Iterator} of #GstPad
 		 *     or %NULL when the pad does not have an iterator function
-		 *     configured. Use gst_iterator_free() after usage.
+		 *     configured. Use {@link Gst.Iterator.free} after usage.
 		 */
 		iterate_internal_links(): Iterator | null;
 		/**
@@ -5003,10 +5003,10 @@ declare namespace imports.gi.Gst {
 		 * This is the default handler, and thus returns an iterator of all of the
 		 * pads inside the parent element with opposite direction.
 		 * 
-		 * The caller must free this iterator after use with gst_iterator_free().
+		 * The caller must free this iterator after use with {@link Gst.Iterator.free}.
 		 * @param parent the parent of #pad or %NULL
 		 * @returns a {@link Iterator} of #GstPad, or %NULL if #pad
-		 * has no parent. Unref each returned pad with gst_object_unref().
+		 * has no parent. Unref each returned pad with {@link Gst.Object.unref}.
 		 */
 		iterate_internal_links_default(parent: Object | null): Iterator | null;
 		/**
@@ -5055,7 +5055,7 @@ declare namespace imports.gi.Gst {
 		 * If #src or #sink pads don't have parent elements or do not share a common
 		 * ancestor, the link will fail.
 		 * 
-		 * Calling gst_pad_link_maybe_ghosting_full() with
+		 * Calling {@link Gst.Pad.link_maybe_ghosting_full} with
 		 * #flags == %GST_PAD_LINK_CHECK_DEFAULT is the recommended way of linking
 		 * pads with safety checks applied.
 		 * @param sink a {@link Pad}
@@ -5065,7 +5065,7 @@ declare namespace imports.gi.Gst {
 		link_maybe_ghosting_full(sink: Pad, flags: PadLinkCheck): boolean;
 		/**
 		 * Mark a pad for needing reconfiguration. The next call to
-		 * gst_pad_check_reconfigure() will return %TRUE after this call.
+		 * {@link Gst.Pad.check_reconfigure} will return %TRUE after this call.
 		 */
 		mark_reconfigure(): void;
 		/**
@@ -5083,7 +5083,7 @@ declare namespace imports.gi.Gst {
 		 */
 		pause_task(): boolean;
 		/**
-		 * Performs gst_pad_query() on the peer of #pad.
+		 * Performs {@link Gst.Pad.query} on the peer of #pad.
 		 * 
 		 * The caller is responsible for both the allocation and deallocation of
 		 * the query structure.
@@ -5101,7 +5101,7 @@ declare namespace imports.gi.Gst {
 		peer_query_accept_caps(caps: Caps): boolean;
 		/**
 		 * Gets the capabilities of the peer connected to this pad. Similar to
-		 * gst_pad_query_caps().
+		 * {@link Gst.Pad.query_caps}.
 		 * 
 		 * When called on srcpads #filter contains the caps that
 		 * upstream could produce in the order preferred by upstream. When
@@ -5155,7 +5155,7 @@ declare namespace imports.gi.Gst {
 		 */
 		proxy_query_accept_caps(query: Query): boolean;
 		/**
-		 * Calls gst_pad_query_caps() for all internally linked pads of #pad and returns
+		 * Calls {@link Gst.Pad.query_caps} for all internally linked pads of #pad and returns
 		 * the intersection of the results.
 		 * 
 		 * This function is useful as a default caps query function for an element
@@ -5172,7 +5172,7 @@ declare namespace imports.gi.Gst {
 		 * installed.
 		 * 
 		 * When #pad is not linked #GST_FLOW_NOT_LINKED is returned else this
-		 * function returns the result of gst_pad_get_range() on the peer pad.
+		 * function returns the result of {@link Gst.Pad.get_range} on the peer pad.
 		 * See gst_pad_get_range() for a list of return values and for the
 		 * semantics of the arguments of this function.
 		 * 
@@ -5207,7 +5207,7 @@ declare namespace imports.gi.Gst {
 		 * This function will call installed block probes before triggering any
 		 * installed data probes.
 		 * 
-		 * The function proceeds calling gst_pad_chain() on the peer pad and returns
+		 * The function proceeds calling {@link Gst.Pad.chain} on the peer pad and returns
 		 * the value from that function. If #pad has no peer, #GST_FLOW_NOT_LINKED will
 		 * be returned.
 		 * 
@@ -5226,7 +5226,7 @@ declare namespace imports.gi.Gst {
 		 * elements.
 		 * 
 		 * This function takes ownership of the provided event so you should
-		 * gst_event_ref() it if you want to reuse the event after this call.
+		 * {@link Gst.Event.ref} it if you want to reuse the event after this call.
 		 * @param event the {@link Event} to send to the pad.
 		 * @returns %TRUE if the event was handled.
 		 * 
@@ -5243,7 +5243,7 @@ declare namespace imports.gi.Gst {
 		 * the value from that function. If #pad has no peer, #GST_FLOW_NOT_LINKED will
 		 * be returned. If the peer pad does not have any installed chainlist function
 		 * every group buffer of the list will be merged into a normal {@link Buffer} and
-		 * chained via gst_pad_chain().
+		 * chained via {@link Gst.Pad.chain}.
 		 * 
 		 * In all cases, success or failure, the caller loses its reference to #list
 		 * after calling this function.
@@ -5278,7 +5278,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the capabilities this pad can produce or consume.
 		 * Note that this method doesn't necessarily return the caps set by sending a
-		 * gst_event_new_caps() - use gst_pad_get_current_caps() for that instead.
+		 * {@link Gst.Event.new_caps} - use gst_pad_get_current_caps() for that instead.
 		 * gst_pad_query_caps returns all possible caps a pad can operate with, using
 		 * the pad's CAPS query function, If the query fails, this function will return
 		 * #filter, if not %NULL, otherwise ANY.
@@ -5353,7 +5353,7 @@ declare namespace imports.gi.Gst {
 		 * pad's stream lock while calling its event function.
 		 * 
 		 * To find out whether an event type is upstream, downstream, or downstream and
-		 * serialized, see {@link EventTypeFlags}, gst_event_type_get_flags(),
+		 * serialized, see {@link EventTypeFlags}, {@link Gst.event.type_get_flags},
 		 * #GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
 		 * #GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
 		 * plugin doesn't need to bother itself with this information; the core handles
@@ -5367,7 +5367,7 @@ declare namespace imports.gi.Gst {
 		send_event(event: Event): boolean;
 		/**
 		 * Sets the given activate function for #pad. The activate function will
-		 * dispatch to gst_pad_activate_mode() to perform the actual activation.
+		 * dispatch to {@link Gst.Pad.activate_mode} to perform the actual activation.
 		 * Only makes sense to set on sink pads.
 		 * 
 		 * Call this function if your sink pad can start a pull-based task.
@@ -5390,7 +5390,7 @@ declare namespace imports.gi.Gst {
 		 * push or pull mode, just return. Otherwise dispatches to the pad's activate
 		 * function to perform the actual activation.
 		 * 
-		 * If not #active, calls gst_pad_activate_mode() with the pad's current mode
+		 * If not #active, calls {@link Gst.Pad.activate_mode} with the pad's current mode
 		 * and a %FALSE argument.
 		 * @param active whether or not the pad should be active.
 		 * @returns %TRUE if the operation was successful.
@@ -5507,7 +5507,7 @@ declare namespace imports.gi.Gst {
 		 * from the GstTaskFunction.
 		 * 
 		 * This function will deadlock if called from the GstTaskFunction of
-		 * the task. Use gst_task_pause() instead.
+		 * the task. Use {@link Gst.Task.pause} instead.
 		 * 
 		 * Regardless of whether the pad has a task, the stream lock is acquired and
 		 * released so as to ensure that streaming through this pad has finished.
@@ -5522,7 +5522,7 @@ declare namespace imports.gi.Gst {
 		 */
 		store_sticky_event(event: Event): FlowReturn;
 		/**
-		 * Unlinks the source pad from the sink pad. Will emit the {@link Pad}::unlinked
+		 * Unlinks the source pad from the sink pad. Will emit the {@link Pad.unlinked}
 		 * signal on both pads.
 		 * @param sinkpad the sink {@link Pad} to unlink.
 		 * @returns %TRUE if the pads were unlinked. This function returns %FALSE if
@@ -5599,7 +5599,7 @@ declare namespace imports.gi.Gst {
 	 * data.
 	 * 
 	 * Pads are typically created from a #GstPadTemplate with
-	 * gst_pad_new_from_template() and are then added to a #GstElement. This usually
+	 * {@link Gst.Pad.new_from_template} and are then added to a #GstElement. This usually
 	 * happens when the element is created but it can also happen dynamically based
 	 * on the data that the element is processing or based on the pads that the
 	 * application requests.
@@ -5732,9 +5732,9 @@ declare namespace imports.gi.Gst {
 		 */
 		get_caps(): Caps;
 		/**
-		 * See gst_pad_template_set_documentation_caps().
+		 * See {@link Gst.PadTemplate.set_documentation_caps}.
 		 * @returns The caps to document. For convenience, this will return
-		 *   gst_pad_template_get_caps() when no documentation caps were set.
+		 *   {@link Gst.PadTemplate.get_caps} when no documentation caps were set.
 		 */
 		get_documentation_caps(): Caps;
 		/**
@@ -5801,7 +5801,7 @@ declare namespace imports.gi.Gst {
 	 * created (request or sometimes pads).
 	 * 
 	 * Pad and PadTemplates have {@link Caps} attached to it to describe the media type
-	 * they are capable of dealing with. gst_pad_template_get_caps() or
+	 * they are capable of dealing with. {@link Gst.PadTemplate.get_caps} or
 	 * GST_PAD_TEMPLATE_CAPS() are used to get the caps of a padtemplate. It's not
 	 * possible to modify the caps of a padtemplate after creation.
 	 * 
@@ -5947,17 +5947,17 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Whether or not to automatically flush all messages on the
 		 * pipeline's bus when going from READY to NULL state. Please see
-		 * gst_pipeline_set_auto_flush_bus() for more information on this option.
+		 * {@link Gst.Pipeline.set_auto_flush_bus} for more information on this option.
 		 */
 		auto_flush_bus: boolean;
 		/**
 		 * The expected delay needed for elements to spin up to the
 		 * PLAYING state expressed in nanoseconds.
-		 * see gst_pipeline_set_delay() for more information on this option.
+		 * see {@link Gst.Pipeline.set_delay} for more information on this option.
 		 */
 		delay: number;
 		/**
-		 * Latency to configure on the pipeline. See gst_pipeline_set_latency().
+		 * Latency to configure on the pipeline. See {@link Gst.Pipeline.set_latency}.
 		 */
 		latency: number;
 		readonly bin: Bin;
@@ -5983,7 +5983,7 @@ declare namespace imports.gi.Gst {
 		 * behaviour.
 		 * 
 		 * Use this function if you previous forced a fixed clock with
-		 * gst_pipeline_use_clock() and want to restore the default
+		 * {@link Gst.Pipeline.use_clock} and want to restore the default
 		 * pipeline clock selection algorithm.
 		 * 
 		 * MT safe.
@@ -6008,7 +6008,7 @@ declare namespace imports.gi.Gst {
 		get_bus(): Bus;
 		/**
 		 * Gets the current clock used by #pipeline. Users of object
-		 * oriented languages should use gst_pipeline_get_pipeline_clock()
+		 * oriented languages should use {@link Gst.Pipeline.get_pipeline_clock}
 		 * to avoid confusion with gst_element_get_clock() which has a different behavior.
 		 * 
 		 * Unlike gst_element_get_clock(), this function will always return a
@@ -6017,7 +6017,7 @@ declare namespace imports.gi.Gst {
 		 */
 		get_clock(): Clock;
 		/**
-		 * Get the configured delay (see gst_pipeline_set_delay()).
+		 * Get the configured delay (see {@link Gst.Pipeline.set_delay}).
 		 * @returns The configured delay.
 		 * 
 		 * MT safe.
@@ -6025,14 +6025,14 @@ declare namespace imports.gi.Gst {
 		get_delay(): ClockTime;
 		/**
 		 * Gets the latency that should be configured on the pipeline. See
-		 * gst_pipeline_set_latency().
+		 * {@link Gst.Pipeline.set_latency}.
 		 * @returns Latency to configure on the pipeline or GST_CLOCK_TIME_NONE
 		 */
 		get_latency(): ClockTime;
 		/**
 		 * Gets the current clock used by #pipeline.
 		 * 
-		 * Unlike gst_element_get_clock(), this function will always return a
+		 * Unlike {@link Gst.Element.get_clock}, this function will always return a
 		 * clock, even if the pipeline is not in the PLAYING state.
 		 * @returns a {@link Clock}, unref after usage.
 		 */
@@ -6136,7 +6136,7 @@ declare namespace imports.gi.Gst {
 	 * distribution of a global #GstClock as well as provide a #GstBus to the
 	 * application.
 	 * 
-	 * gst_pipeline_new() is used to create a pipeline. when you are done with
+	 * {@link Gst.Pipeline.new} is used to create a pipeline. when you are done with
 	 * the pipeline, use gst_object_unref() to free its resources including all
 	 * added #GstElement objects (if not otherwise referenced).
 	 * 
@@ -6231,7 +6231,7 @@ declare namespace imports.gi.Gst {
 		 * codec loader which exposes elements and/or caps dependent on what external
 		 * codec libraries are currently installed.
 		 * 
-		 * Convenience wrapper function for gst_plugin_add_dependency() which
+		 * Convenience wrapper function for {@link Gst.Plugin.add_dependency} which
 		 * takes simple strings as arguments instead of string arrays, with multiple
 		 * arguments separated by predefined delimiters (see above).
 		 * @param env_vars one or more environment variables (separated by ':', ';' or ','),
@@ -6359,7 +6359,7 @@ declare namespace imports.gi.Gst {
 	 * can add any object that subclasses #GstPluginFeature.
 	 * 
 	 * Usually plugins are always automatically loaded so you don't need to call
-	 * gst_plugin_load() explicitly to bring it into memory. There are options to
+	 * {@link Gst.Plugin.load} explicitly to bring it into memory. There are options to
 	 * statically link plugins to an app or even use GStreamer without a plugin
 	 * repository in which case gst_plugin_load() can be needed to bring the plugin
 	 * into memory.
@@ -6459,7 +6459,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the plugin that provides this feature.
 		 * @returns the plugin that provides this
-		 *     feature, or %NULL.  Unref with gst_object_unref() when no
+		 *     feature, or %NULL.  Unref with {@link Gst.Object.unref} when no
 		 *     longer needed.
 		 */
 		get_plugin(): Plugin | null;
@@ -6617,7 +6617,7 @@ declare namespace imports.gi.Gst {
 		 * @param pad the {@link Pad} to get the internal links of.
 		 * @param parent the parent of #pad or %NULL
 		 * @returns a {@link Iterator} of #GstPad, or %NULL if #pad
-		 * has no parent. Unref each returned pad with gst_object_unref().
+		 * has no parent. Unref each returned pad with {@link Gst.Object.unref}.
 		 */
 		public static iterate_internal_links_default(pad: Pad, parent: Object | null): Iterator | null;
 	}
@@ -6631,7 +6631,7 @@ declare namespace imports.gi.Gst {
 		 * Add the feature to the registry. The feature-added signal will be emitted.
 		 * 
 		 * #feature's reference count will be incremented, and any floating
-		 * reference will be removed (see gst_object_ref_sink())
+		 * reference will be removed (see {@link Gst.Object.ref_sink})
 		 * @param feature the feature to add
 		 * @returns %TRUE on success.
 		 * 
@@ -6642,7 +6642,7 @@ declare namespace imports.gi.Gst {
 		 * Add the plugin to the registry. The plugin-added signal will be emitted.
 		 * 
 		 * #plugin's reference count will be incremented, and any floating
-		 * reference will be removed (see gst_object_ref_sink())
+		 * reference will be removed (see {@link Gst.Object.ref_sink})
 		 * @param plugin the plugin to add
 		 * @returns %TRUE on success.
 		 * 
@@ -6669,7 +6669,7 @@ declare namespace imports.gi.Gst {
 		 * @param filter the filter to use
 		 * @param first only return first match
 		 * @returns a #GList of
-		 *     {@link PluginFeature}. Use gst_plugin_feature_list_free() after usage.
+		 *     {@link PluginFeature}. Use {@link Gst.PluginFeature.list_free} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -6680,7 +6680,7 @@ declare namespace imports.gi.Gst {
 		 * @param type the pluginfeature type to find
 		 * @returns the pluginfeature with the
 		 *     given name and type or %NULL if the plugin was not
-		 *     found. gst_object_unref() after usage.
+		 *     found. {@link Gst.Object.unref} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -6690,7 +6690,7 @@ declare namespace imports.gi.Gst {
 		 * The plugin will be reffed; caller is responsible for unreffing.
 		 * @param name the plugin name to find
 		 * @returns the plugin with the given name
-		 *     or %NULL if the plugin was not found. gst_object_unref() after
+		 *     or %NULL if the plugin was not found. {@link Gst.Object.unref} after
 		 *     usage.
 		 * 
 		 * MT safe.
@@ -6700,7 +6700,7 @@ declare namespace imports.gi.Gst {
 		 * Retrieves a #GList of {@link PluginFeature} of #type.
 		 * @param type a #GType.
 		 * @returns a #GList of
-		 *     {@link PluginFeature} of #type. Use gst_plugin_feature_list_free() after use
+		 *     {@link PluginFeature} of #type. Use {@link Gst.PluginFeature.list_free} after use
 		 * 
 		 * MT safe.
 		 */
@@ -6709,7 +6709,7 @@ declare namespace imports.gi.Gst {
 		 * Retrieves a #GList of features of the plugin with name #name.
 		 * @param name a plugin name.
 		 * @returns a #GList of
-		 *     {@link PluginFeature}. Use gst_plugin_feature_list_free() after usage.
+		 *     {@link PluginFeature}. Use {@link Gst.PluginFeature.list_free} after usage.
 		 */
 		get_feature_list_by_plugin(name: string): GLib.List;
 		/**
@@ -6722,7 +6722,7 @@ declare namespace imports.gi.Gst {
 		 * Get a copy of all plugins registered in the given registry. The refcount
 		 * of each element in the list in incremented.
 		 * @returns a #GList of {@link Plugin}.
-		 *     Use gst_plugin_list_free() after usage.
+		 *     Use {@link Gst.Plugin.list_free} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -6732,14 +6732,14 @@ declare namespace imports.gi.Gst {
 		 * If found, plugin is reffed.
 		 * @param filename the name of the file to look up
 		 * @returns the {@link Plugin} if found, or
-		 *     %NULL if not.  gst_object_unref() after usage.
+		 *     %NULL if not.  {@link Gst.Object.unref} after usage.
 		 */
 		lookup(filename: string): Plugin | null;
 		/**
 		 * Find a {@link PluginFeature} with #name in #registry.
 		 * @param name a {@link PluginFeature} name
 		 * @returns a {@link PluginFeature} with its refcount incremented,
-		 *     use gst_object_unref() after usage.
+		 *     use {@link Gst.Object.unref} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -6748,12 +6748,12 @@ declare namespace imports.gi.Gst {
 		 * Runs a filter against all plugins in the registry and returns a #GList with
 		 * the results. If the first flag is set, only the first match is
 		 * returned (as a list with a single object).
-		 * Every plugin is reffed; use gst_plugin_list_free() after use, which
+		 * Every plugin is reffed; use {@link Gst.Plugin.list_free} after use, which
 		 * will unref again.
 		 * @param filter the filter to use
 		 * @param first only return first match
 		 * @returns a #GList of {@link Plugin}.
-		 *     Use gst_plugin_list_free() after usage.
+		 *     Use {@link Gst.Plugin.list_free} after usage.
 		 * 
 		 * MT safe.
 		 */
@@ -6886,7 +6886,7 @@ declare namespace imports.gi.Gst {
 		 * registry file using a helper child process.
 		 * 
 		 * Applications might want to disable this behaviour with the
-		 * gst_registry_fork_set_enabled() function, in which case new plugins
+		 * {@link Gst.Registry.fork_set_enabled} function, in which case new plugins
 		 * are scanned (and loaded) into the application process.
 		 * @returns %TRUE if GStreamer will use the child helper process when
 		 * rebuilding the registry.
@@ -6894,7 +6894,7 @@ declare namespace imports.gi.Gst {
 		public static fork_is_enabled(): boolean;
 		/**
 		 * Applications might want to disable/enable spawning of a child helper process
-		 * when rebuilding the registry. See gst_registry_fork_is_enabled() for more
+		 * when rebuilding the registry. See {@link Gst.Registry.fork_is_enabled} for more
 		 * information.
 		 * @param enabled whether rebuilding the registry can use a temporary child helper process.
 		 */
@@ -7087,7 +7087,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * A #GstStreamCollection will be provided by elements that can make those
 	 * streams available. Applications can use the collection to show the user
-	 * what streams are available by using %gst_stream_collection_get_stream()
+	 * what streams are available by using {@link %gst.stream_collection_get_stream}
 	 * 
 	 * Once posted, a #GstStreamCollection is immutable. Updates are made by sending
 	 * a new #GstStreamCollection message, which may or may not share some of
@@ -7162,7 +7162,7 @@ declare namespace imports.gi.Gst {
 		public static obtain(): Clock;
 		/**
 		 * Sets the default system clock that can be obtained with
-		 * gst_system_clock_obtain().
+		 * {@link Gst.SystemClock.obtain}.
 		 * 
 		 * This is mostly used for testing and debugging purposes when you
 		 * want to have control over the time reported by the default system
@@ -7212,7 +7212,7 @@ declare namespace imports.gi.Gst {
 		 * threads.
 		 * 
 		 * MT safe.
-		 * @returns the {@link TaskPool} used by #task. gst_object_unref()
+		 * @returns the {@link TaskPool} used by #task. {@link Gst.Object.unref}
 		 * after usage.
 		 */
 		get_pool(): TaskPool;
@@ -7225,7 +7225,7 @@ declare namespace imports.gi.Gst {
 		get_state(): TaskState;
 		/**
 		 * Joins #task. After this call, it is safe to unref the task
-		 * and clean up the lock set with gst_task_set_lock().
+		 * and clean up the lock set with {@link Gst.Task.set_lock}.
 		 * 
 		 * The task will automatically be stopped with this call.
 		 * 
@@ -7275,7 +7275,7 @@ declare namespace imports.gi.Gst {
 		 * Set the mutex used by the task. The mutex will be acquired before
 		 * calling the {@link TaskFunction}.
 		 * 
-		 * This function has to be called before calling gst_task_pause() or
+		 * This function has to be called before calling {@link Gst.Task.pause} or
 		 * gst_task_start().
 		 * 
 		 * MT safe.
@@ -7294,7 +7294,7 @@ declare namespace imports.gi.Gst {
 		 * Sets the state of #task to #state.
 		 * 
 		 * The #task must have a lock associated with it using
-		 * gst_task_set_lock() when going to GST_TASK_STARTED or GST_TASK_PAUSED or
+		 * {@link Gst.Task.set_lock} when going to GST_TASK_STARTED or GST_TASK_PAUSED or
 		 * this function will return %FALSE.
 		 * 
 		 * MT safe.
@@ -7304,7 +7304,7 @@ declare namespace imports.gi.Gst {
 		set_state(state: TaskState): boolean;
 		/**
 		 * Starts #task. The #task must have a lock associated with it using
-		 * gst_task_set_lock() or this function will return %FALSE.
+		 * {@link Gst.Task.set_lock} or this function will return %FALSE.
 		 * @returns %TRUE if the task could be started.
 		 * 
 		 * MT safe.
@@ -7313,7 +7313,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Stops #task. This method merely schedules the task to stop and
 		 * will not wait for the task to have completely stopped. Use
-		 * gst_task_join() to stop and wait for completion.
+		 * {@link Gst.Task.join} to stop and wait for completion.
 		 * @returns %TRUE if the task could be stopped.
 		 * 
 		 * MT safe.
@@ -7363,7 +7363,7 @@ declare namespace imports.gi.Gst {
 	 * a #GstPad.
 	 * 
 	 * Before the #GstTask can be run, it needs a #GRecMutex that can be set with
-	 * gst_task_set_lock().
+	 * {@link Gst.Task.set_lock}.
 	 * 
 	 * The task can be started, paused and stopped with gst_task_start(), gst_task_pause()
 	 * and gst_task_stop() respectively or with the gst_task_set_state() function.
@@ -7401,7 +7401,7 @@ declare namespace imports.gi.Gst {
 		 * The function cannot be changed after the task has been created. You
 		 * must create a new {@link Task} to change the function.
 		 * 
-		 * This function will not yet create and start a thread. Use gst_task_start() or
+		 * This function will not yet create and start a thread. Use {@link Gst.Task.start} or
 		 * gst_task_pause() to create and start the GThread.
 		 * 
 		 * Before the task can be used, a #GRecMutex must be configured using the
@@ -7437,12 +7437,12 @@ declare namespace imports.gi.Gst {
 		cleanup(): void;
 		/**
 		 * Join a task and/or return it to the pool. #id is the id obtained from
-		 * gst_task_pool_push().
+		 * {@link Gst.TaskPool.push}.
 		 * @param id the id
 		 */
 		join(id: any | null): void;
 		/**
-		 * Prepare the taskpool for accepting gst_task_pool_push() operations.
+		 * Prepare the taskpool for accepting {@link Gst.TaskPool.push} operations.
 		 * 
 		 * MT safe.
 		 */
@@ -7483,7 +7483,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Create a new default task pool. The default task pool will use a regular
 		 * GThreadPool for threads.
-		 * @returns a new {@link TaskPool}. gst_object_unref() after usage.
+		 * @returns a new {@link TaskPool}. {@link Gst.Object.unref} after usage.
 		 */
 		public static new(): TaskPool;
 	}
@@ -7511,7 +7511,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Tracing modules will subclass {@link Tracer} and register through
-	 * gst_tracer_register(). Modules can attach to various hook-types - see
+	 * {@link Gst.Tracer.register}. Modules can attach to various hook-types - see
 	 * gst_tracing_register_hook(). When invoked they receive hook specific
 	 * contextual data, which they must not modify.
 	 */
@@ -7537,7 +7537,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the #GType for elements managed by this factory. The type can
 		 * only be retrieved if the element factory is loaded, which can be
-		 * assured with gst_plugin_feature_load().
+		 * assured with {@link Gst.PluginFeature.load}.
 		 * @returns the #GType for tracers managed by this factory or 0 if
 		 * the factory is not loaded.
 		 */
@@ -7553,7 +7553,7 @@ declare namespace imports.gi.Gst {
 	type TracerFactoryMixin = ITracerFactory & PluginFeature;
 
 	/**
-	 * Use gst_tracer_factory_get_list() to get a list of tracer factories known to
+	 * Use {@link Gst.TracerFactory.get_list} to get a list of tracer factories known to
 	 * GStreamer.
 	 */
 	interface TracerFactory extends TracerFactoryMixin {}
@@ -7562,7 +7562,7 @@ declare namespace imports.gi.Gst {
 		public constructor(options?: Partial<TracerFactoryInitOptions>);
 		/**
 		 * Gets the list of all registered tracer factories. You must free the
-		 * list using gst_plugin_feature_list_free().
+		 * list using {@link Gst.PluginFeature.list_free}.
 		 * 
 		 * The returned factories are sorted by factory name.
 		 * 
@@ -7606,7 +7606,7 @@ declare namespace imports.gi.Gst {
 		public constructor(options?: Partial<TracerRecordInitOptions>);
 		/**
 		 * Create a new tracer record. The record instance can be used to efficiently
-		 * log entries using gst_tracer_record_log().
+		 * log entries using {@link Gst.TracerRecord.log}.
 		 * 
 		 * The #name without the ".class" suffix will be used for the log records.
 		 * There must be fields for each value that gets logged where the field name is
@@ -7648,7 +7648,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the extensions associated with a {@link TypeFindFactory}. The returned
 		 * array should not be changed. If you need to change stuff in it, you should
-		 * copy it using g_strdupv().  This function may return %NULL to indicate
+		 * copy it using {@link G.strdupv}.  This function may return %NULL to indicate
 		 * a 0-length list.
 		 * @returns 
 		 *     a %NULL-terminated array of extensions associated with this factory
@@ -7728,7 +7728,7 @@ declare namespace imports.gi.Gst {
 		public constructor(options?: Partial<TypeFindFactoryInitOptions>);
 		/**
 		 * Gets the list of all registered typefind factories. You must free the
-		 * list using gst_plugin_feature_list_free().
+		 * list using {@link Gst.PluginFeature.list_free}.
 		 * 
 		 * The returned factories are sorted by highest rank first, and then by
 		 * factory name.
@@ -7916,7 +7916,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_allocation_params_free
 		 * @returns a new #{@link AllocationParams}, free with
-		 * gst_allocation_params_free().
+		 * {@link Gst.AllocationParams.free}.
 		 */
 		public copy(): AllocationParams | null;
 		/**
@@ -7927,28 +7927,6 @@ declare namespace imports.gi.Gst {
 		 * Initialize #params to its default values
 		 */
 		public init(): void;
-	}
-
-	export interface AllocatorClassInitOptions {}
-	/**
-	 * The {@link Allocator} is used to create new memory.
-	 */
-	interface AllocatorClass {}
-	class AllocatorClass {
-		public constructor(options?: Partial<AllocatorClassInitOptions>);
-		/**
-		 * Object parent class
-		 */
-		public readonly object_class: ObjectClass;
-		public readonly _gst_reserved: any[];
-		public alloc: {(allocator: Allocator | null, size: number, params: AllocationParams | null): Memory | null;};
-		public free: {(allocator: Allocator, memory: Memory): void;};
-	}
-
-	export interface AllocatorPrivateInitOptions {}
-	interface AllocatorPrivate {}
-	class AllocatorPrivate {
-		public constructor(options?: Partial<AllocatorPrivateInitOptions>);
 	}
 
 	export interface AtomicQueueInitOptions {}
@@ -7998,49 +7976,13 @@ declare namespace imports.gi.Gst {
 		public unref(): void;
 	}
 
-	export interface BinClassInitOptions {}
-	/**
-	 * Subclasses can override the #add_element and #remove_element to
-	 * update the list of children in the bin.
-	 * 
-	 * The #handle_message method can be overridden to implement custom
-	 * message handling.  #handle_message takes ownership of the message, just like
-	 * #gst_element_post_message.
-	 * 
-	 * The #deep_element_added vfunc will be called when a new element has been
-	 * added to any bin inside this bin, so it will also be called if a new child
-	 * was added to a sub-bin of this bin. {@link Bin} implementations that override
-	 * this message should chain up to the parent class implementation so the
-	 * #GstBin::deep-element-added signal is emitted on all parents.
-	 */
-	interface BinClass {}
-	class BinClass {
-		public constructor(options?: Partial<BinClassInitOptions>);
-		public readonly pool: GLib.ThreadPool;
-		public readonly _gst_reserved: any[];
-		public element_added: {(bin: Bin, child: Element): void;};
-		public element_removed: {(bin: Bin, child: Element): void;};
-		public add_element: {(bin: Bin, element: Element): boolean;};
-		public remove_element: {(bin: Bin, element: Element): boolean;};
-		public handle_message: {(bin: Bin, message: Message): void;};
-		public do_latency: {(bin: Bin): boolean;};
-		public deep_element_added: {(bin: Bin, sub_bin: Bin, child: Element): void;};
-		public deep_element_removed: {(bin: Bin, sub_bin: Bin, child: Element): void;};
-	}
-
-	export interface BinPrivateInitOptions {}
-	interface BinPrivate {}
-	class BinPrivate {
-		public constructor(options?: Partial<BinPrivateInitOptions>);
-	}
-
 	export interface BufferInitOptions {}
 	/**
 	 * Buffers are the basic unit of data transfer in GStreamer. They contain the
 	 * timing and offset along with other arbitrary metadata that is associated
 	 * with the {@link Memory} blocks that the buffer contains.
 	 * 
-	 * Buffers are usually created with gst_buffer_new(). After a buffer has been
+	 * Buffers are usually created with {@link Gst.Buffer.new}. After a buffer has been
 	 * created one will typically allocate memory for it and add it to the buffer.
 	 * The following example creates a buffer that can hold a given video frame
 	 * with a given width, height and bits per plane.
@@ -8273,7 +8215,7 @@ declare namespace imports.gi.Gst {
 		 * Append the memory block #mem to #buffer. This function takes
 		 * ownership of #mem and thus doesn't increase its refcount.
 		 * 
-		 * This function is identical to gst_buffer_insert_memory() with an index of -1.
+		 * This function is identical to {@link Gst.Buffer.insert_memory} with an index of -1.
 		 * See gst_buffer_insert_memory() for more details.
 		 * @param mem a {@link Memory}.
 		 */
@@ -8343,7 +8285,7 @@ declare namespace imports.gi.Gst {
 		public extract(offset: number): [ number, number[], number ];
 		/**
 		 * Extracts a copy of at most #size bytes the data at #offset into
-		 * newly-allocated memory. #dest must be freed using g_free() when done.
+		 * newly-allocated memory. #dest must be freed using {@link G.free} when done.
 		 * @param offset the offset to extract
 		 * @param size the size to extract
 		 * @returns A pointer where
@@ -8428,7 +8370,7 @@ declare namespace imports.gi.Gst {
 		 * Get the metadata for #api on buffer. When there is no such metadata, %NULL is
 		 * returned. If multiple metadata with the given #api are attached to this
 		 * buffer only the first one is returned.  To handle multiple metadata with a
-		 * given API use gst_buffer_iterate_meta() or gst_buffer_foreach_meta() instead
+		 * given API use {@link Gst.Buffer.iterate_meta} or gst_buffer_foreach_meta() instead
 		 * and check the meta->info.api member for the API type.
 		 * @param api the #GType of an API
 		 * @returns the metadata for #api on
@@ -8459,7 +8401,7 @@ declare namespace imports.gi.Gst {
 		 * first memory block in #buffer and #maxsize will contain the sum of
 		 * the size and #offset and the amount of extra padding on the last
 		 * memory block.  #offset and #maxsize can be used to resize the
-		 * buffer memory blocks with gst_buffer_resize().
+		 * buffer memory blocks with {@link Gst.Buffer.resize}.
 		 * @returns total size of the memory blocks in #buffer.
 		 * 
 		 * a pointer to the offset
@@ -8475,7 +8417,7 @@ declare namespace imports.gi.Gst {
 		 * and #offset and the amount of extra padding on the memory block at #idx +
 		 * #length -1.
 		 * #offset and #maxsize can be used to resize the buffer memory blocks with
-		 * gst_buffer_resize_range().
+		 * {@link Gst.Buffer.resize_range}.
 		 * @param idx an index
 		 * @param length a length
 		 * @returns total size of #length memory blocks starting at #idx in #buffer.
@@ -8495,7 +8437,7 @@ declare namespace imports.gi.Gst {
 		 * Insert the memory block #mem to #buffer at #idx. This function takes ownership
 		 * of #mem and thus doesn't increase its refcount.
 		 * 
-		 * Only gst_buffer_get_max_memory() can be added to a buffer. If more memory is
+		 * Only {@link Gst.buffer.get_max_memory} can be added to a buffer. If more memory is
 		 * added, existing memory blocks will automatically be merged to make room for
 		 * the new memory.
 		 * @param idx the index to add the memory at, or -1 to append it to the end
@@ -8506,7 +8448,7 @@ declare namespace imports.gi.Gst {
 		 * Check if all memory blocks in #buffer are writable.
 		 * 
 		 * Note that this function does not check if #buffer is writable, use
-		 * gst_buffer_is_writable() to check that if needed.
+		 * {@link Gst.Buffer.is_writable} to check that if needed.
 		 * @returns %TRUE if all memory blocks in #buffer are writable
 		 */
 		public is_all_memory_writable(): boolean;
@@ -8516,7 +8458,7 @@ declare namespace imports.gi.Gst {
 		 * #length can be -1 to check all the memory blocks after #idx.
 		 * 
 		 * Note that this function does not check if #buffer is writable, use
-		 * gst_buffer_is_writable() to check that if needed.
+		 * {@link Gst.Buffer.is_writable} to check that if needed.
 		 * @param idx an index
 		 * @param length a length should not be 0
 		 * @returns %TRUE if the memory range is writable
@@ -8552,7 +8494,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * #flags describe the desired access of the memory. When #flags is
 		 * #GST_MAP_WRITE, #buffer should be writable (as returned from
-		 * gst_buffer_is_writable()).
+		 * {@link Gst.Buffer.is_writable}).
 		 * 
 		 * When #buffer is writable but the memory isn't, a writable copy will
 		 * automatically be created and returned. The readonly copy of the
@@ -8573,7 +8515,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * #flags describe the desired access of the memory. When #flags is
 		 * #GST_MAP_WRITE, #buffer should be writable (as returned from
-		 * gst_buffer_is_writable()).
+		 * {@link Gst.Buffer.is_writable}).
 		 * 
 		 * When #buffer is writable but the memory isn't, a writable copy will
 		 * automatically be created and returned. The readonly copy of the buffer memory
@@ -8608,7 +8550,7 @@ declare namespace imports.gi.Gst {
 		public memset(offset: number, val: number, size: number): number;
 		/**
 		 * Get the amount of memory blocks that this buffer has. This amount is never
-		 * larger than what gst_buffer_get_max_memory() returns.
+		 * larger than what {@link Gst.buffer.get_max_memory} returns.
 		 * @returns the number of memory blocks this buffer is made of.
 		 */
 		public n_memory(): number;
@@ -8624,7 +8566,7 @@ declare namespace imports.gi.Gst {
 		 * Prepend the memory block #mem to #buffer. This function takes
 		 * ownership of #mem and thus doesn't increase its refcount.
 		 * 
-		 * This function is identical to gst_buffer_insert_memory() with an index of 0.
+		 * This function is identical to {@link Gst.Buffer.insert_memory} with an index of 0.
 		 * See gst_buffer_insert_memory() for more details.
 		 * @param mem a {@link Memory}.
 		 */
@@ -8704,7 +8646,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public set_size(size: number): void;
 		/**
-		 * Release the memory previously mapped with gst_buffer_map().
+		 * Release the memory previously mapped with {@link Gst.Buffer.map}.
 		 * @param info a {@link MapInfo}
 		 */
 		public unmap(info: MapInfo): void;
@@ -8720,7 +8662,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Buffer lists are an object containing a list of buffers.
 	 * 
-	 * Buffer lists are created with gst_buffer_list_new() and filled with data
+	 * Buffer lists are created with {@link Gst.BufferList.new} and filled with data
 	 * using a gst_buffer_list_insert().
 	 * 
 	 * Buffer lists can be pushed on a srcpad with gst_pad_push_list(). This is
@@ -8735,7 +8677,7 @@ declare namespace imports.gi.Gst {
 		 * the returned #GstBufferList.
 		 * 
 		 * Free-function: gst_buffer_list_unref
-		 * @returns the new {@link BufferList}. gst_buffer_list_unref()
+		 * @returns the new {@link BufferList}. {@link Gst.BufferList.unref}
 		 *     after usage.
 		 */
 		public static new(): BufferList;
@@ -8746,7 +8688,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_buffer_list_unref
 		 * @param size an initial reserved size
-		 * @returns the new {@link BufferList}. gst_buffer_list_unref()
+		 * @returns the new {@link BufferList}. {@link Gst.BufferList.unref}
 		 *     after usage.
 		 */
 		public static new_sized(size: number): BufferList;
@@ -8820,7 +8762,7 @@ declare namespace imports.gi.Gst {
 
 	export interface BufferPoolAcquireParamsInitOptions {}
 	/**
-	 * Parameters passed to the gst_buffer_pool_acquire_buffer() function to control the
+	 * Parameters passed to the {@link Gst.BufferPool.acquire_buffer} function to control the
 	 * allocation of the buffer.
 	 * 
 	 * The default implementation ignores the #start and #stop members but other
@@ -8849,52 +8791,6 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
-	export interface BufferPoolClassInitOptions {}
-	/**
-	 * The GstBufferPool class.
-	 */
-	interface BufferPoolClass {}
-	class BufferPoolClass {
-		public constructor(options?: Partial<BufferPoolClassInitOptions>);
-		/**
-		 * Object parent class
-		 */
-		public readonly object_class: ObjectClass;
-		public readonly _gst_reserved: any[];
-		public get_options: {(pool: BufferPool): string[];};
-		public set_config: {(pool: BufferPool, config: Structure): boolean;};
-		public start: {(pool: BufferPool): boolean;};
-		public stop: {(pool: BufferPool): boolean;};
-		public acquire_buffer: {(pool: BufferPool, params: BufferPoolAcquireParams | null): [ FlowReturn, Buffer ];};
-		public alloc_buffer: {(pool: BufferPool, buffer: Buffer, params: BufferPoolAcquireParams): FlowReturn;};
-		public reset_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public release_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public free_buffer: {(pool: BufferPool, buffer: Buffer): void;};
-		public flush_start: {(pool: BufferPool): void;};
-		public flush_stop: {(pool: BufferPool): void;};
-	}
-
-	export interface BufferPoolPrivateInitOptions {}
-	interface BufferPoolPrivate {}
-	class BufferPoolPrivate {
-		public constructor(options?: Partial<BufferPoolPrivateInitOptions>);
-	}
-
-	export interface BusClassInitOptions {}
-	interface BusClass {}
-	class BusClass {
-		public constructor(options?: Partial<BusClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public message: {(bus: Bus, message: Message): void;};
-		public sync_message: {(bus: Bus, message: Message): void;};
-	}
-
-	export interface BusPrivateInitOptions {}
-	interface BusPrivate {}
-	class BusPrivate {
-		public constructor(options?: Partial<BusPrivateInitOptions>);
-	}
-
 	export interface CapsInitOptions {}
 	/**
 	 * Caps (capabilities) are lightweight refcounted objects describing media types.
@@ -8904,7 +8800,7 @@ declare namespace imports.gi.Gst {
 	 * given pad can handle. They are also stored in the #GstRegistry along with
 	 * a description of the #GstElement.
 	 * 
-	 * Caps are exposed on the element pads using the gst_pad_query_caps() pad
+	 * Caps are exposed on the element pads using the {@link Gst.Pad.query_caps} pad
 	 * function. This function describes the possible types that the pad can
 	 * handle or produce at runtime.
 	 * 
@@ -8977,7 +8873,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Creates a new {@link Caps} that contains one #GstStructure.  The
 		 * structure is defined by the arguments, which have the same format
-		 * as gst_structure_new().
+		 * as {@link Gst.Structure.new}.
 		 * Caller is responsible for unreffing the returned caps.
 		 * @param media_type the media type of the structure
 		 * @param fieldname first field to set
@@ -9019,7 +8915,7 @@ declare namespace imports.gi.Gst {
 		 * Creates a new {@link Caps} as a copy of the old #caps. The new caps will have a
 		 * refcount of 1, owned by the caller. The structures are copied as well.
 		 * 
-		 * Note that this function is the semantic equivalent of a gst_caps_ref()
+		 * Note that this function is the semantic equivalent of a {@link Gst.Caps.ref}
 		 * followed by a gst_caps_make_writable(). If you only want to hold on to a
 		 * reference to the data, you should use gst_caps_ref().
 		 * 
@@ -9036,7 +8932,7 @@ declare namespace imports.gi.Gst {
 		public copy_nth(nth: number): Caps;
 		/**
 		 * Calls the provided function once for each structure and caps feature in the
-		 * {@link Caps}. In contrast to gst_caps_foreach(), the function may modify the
+		 * {@link Caps}. In contrast to {@link Gst.Caps.foreach}, the function may modify the
 		 * structure and features. In contrast to gst_caps_filter_and_map_in_place(),
 		 * the structure and features are removed from the caps if %FALSE is returned
 		 * from the function.
@@ -9047,7 +8943,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Modifies the given #caps into a representation with only fixed
 		 * values. First the caps will be truncated and then the first structure will be
-		 * fixated with gst_structure_fixate().
+		 * fixated with {@link Gst.Structure.fixate}.
 		 * 
 		 * This function takes ownership of #caps and will call gst_caps_make_writable()
 		 * on it so you must not use #caps afterwards unless you keep an additional
@@ -9064,7 +8960,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Calls the provided function once for each structure and caps feature in the
 		 * {@link Caps}. The function must not modify the fields.
-		 * Also see gst_caps_map_in_place() and gst_caps_filter_and_map_in_place().
+		 * Also see {@link Gst.Caps.map_in_place} and gst_caps_filter_and_map_in_place().
 		 * @param func a function to call for each field
 		 * @returns %TRUE if the supplied function returns %TRUE for each call,
 		 * %FALSE otherwise.
@@ -9079,7 +8975,7 @@ declare namespace imports.gi.Gst {
 		 * the caller should be aware that structures inside a constant
 		 * {@link Caps} should not be modified. However, if you know the caps
 		 * are writable, either because you have just copied them or made
-		 * them writable with gst_caps_make_writable(), you may modify the
+		 * them writable with {@link Gst.Caps.make_writable}, you may modify the
 		 * features returned in the usual way, e.g. with functions like
 		 * gst_caps_features_add().
 		 * 
@@ -9104,7 +9000,7 @@ declare namespace imports.gi.Gst {
 		 * the caller should be aware that structures inside a constant
 		 * {@link Caps} should not be modified. However, if you know the caps
 		 * are writable, either because you have just copied them or made
-		 * them writable with gst_caps_make_writable(), you may modify the
+		 * them writable with {@link Gst.Caps.make_writable}, you may modify the
 		 * structure returned in the usual way, e.g. with functions like
 		 * gst_structure_set().
 		 * 
@@ -9182,14 +9078,14 @@ declare namespace imports.gi.Gst {
 		 */
 		public is_subset(superset: Caps): boolean;
 		/**
-		 * Checks if #structure is a subset of #caps. See gst_caps_is_subset()
+		 * Checks if #structure is a subset of #caps. See {@link Gst.Caps.is_subset}
 		 * for more information.
 		 * @param structure a potential {@link Structure} subset of #caps
 		 * @returns %TRUE if #structure is a subset of #caps
 		 */
 		public is_subset_structure(structure: Structure): boolean;
 		/**
-		 * Checks if #structure is a subset of #caps. See gst_caps_is_subset()
+		 * Checks if #structure is a subset of #caps. See {@link Gst.Caps.is_subset}
 		 * for more information.
 		 * @param structure a potential {@link Structure} subset of #caps
 		 * @param features a {@link CapsFeatures} for #structure
@@ -9198,7 +9094,7 @@ declare namespace imports.gi.Gst {
 		public is_subset_structure_full(structure: Structure, features: CapsFeatures | null): boolean;
 		/**
 		 * Calls the provided function once for each structure and caps feature in the
-		 * {@link Caps}. In contrast to gst_caps_foreach(), the function may modify but not
+		 * {@link Caps}. In contrast to {@link Gst.Caps.foreach}, the function may modify but not
 		 * delete the structures and features. The caps must be mutable.
 		 * @param func a function to call for each field
 		 * @returns %TRUE if the supplied function returns %TRUE for each call,
@@ -9232,7 +9128,7 @@ declare namespace imports.gi.Gst {
 		 * #caps, but contains no lists.  Each list is expanded into separate
 		 * #GstStructures.
 		 * 
-		 * This function takes ownership of #caps and will call gst_caps_make_writable()
+		 * This function takes ownership of #caps and will call {@link Gst.Caps.make_writable}
 		 * on it so you must not use #caps afterwards unless you keep an additional
 		 * reference to it with gst_caps_ref().
 		 * @returns the normalized {@link Caps}
@@ -9257,20 +9153,20 @@ declare namespace imports.gi.Gst {
 		public set_features_simple(features: CapsFeatures | null): void;
 		/**
 		 * Sets fields in a {@link Caps}.  The arguments must be passed in the same
-		 * manner as gst_structure_set(), and be %NULL-terminated.
+		 * manner as {@link Gst.Structure.set}, and be %NULL-terminated.
 		 * @param field first field to set
 		 */
 		public set_simple(field: string): void;
 		/**
 		 * Sets fields in a {@link Caps}.  The arguments must be passed in the same
-		 * manner as gst_structure_set(), and be %NULL-terminated.
+		 * manner as {@link Gst.Structure.set}, and be %NULL-terminated.
 		 * @param field first field to set
 		 * @param varargs additional parameters
 		 */
 		public set_simple_valist(field: string, varargs: any[]): void;
 		/**
 		 * Sets the given #field on all structures of #caps to the given #value.
-		 * This is a convenience function for calling gst_structure_set_value() on
+		 * This is a convenience function for calling {@link Gst.Structure.set_value} on
 		 * all structures of #caps.
 		 * @param field name of the field to set
 		 * @param value value to set the field to
@@ -9282,7 +9178,7 @@ declare namespace imports.gi.Gst {
 		 * identical are merged.  Component structures that have values that can be
 		 * merged are also merged.
 		 * 
-		 * This function takes ownership of #caps and will call gst_caps_make_writable()
+		 * This function takes ownership of #caps and will call {@link Gst.Caps.make_writable}
 		 * on it if necessary, so you must not use #caps afterwards unless you keep an
 		 * additional reference to it with gst_caps_ref().
 		 * 
@@ -9308,7 +9204,7 @@ declare namespace imports.gi.Gst {
 		public subtract(subtrahend: Caps): Caps;
 		/**
 		 * Converts #caps to a string representation.  This string representation
-		 * can be converted back to a {@link Caps} by gst_caps_from_string().
+		 * can be converted back to a {@link Caps} by {@link Gst.caps.from_string}.
 		 * 
 		 * For debugging purposes its easier to do something like this:
 		 * |[<!-- language="C" -->
@@ -9325,7 +9221,7 @@ declare namespace imports.gi.Gst {
 		 * Discard all but the first structure from #caps. Useful when
 		 * fixating.
 		 * 
-		 * This function takes ownership of #caps and will call gst_caps_make_writable()
+		 * This function takes ownership of #caps and will call {@link Gst.Caps.make_writable}
 		 * on it if necessary, so you must not use #caps afterwards unless you keep an
 		 * additional reference to it with gst_caps_ref().
 		 * 
@@ -9347,7 +9243,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * Empty #GstCapsFeatures are equivalent with the #GstCapsFeatures that only
 	 * contain #GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY. ANY #GstCapsFeatures as
-	 * created by gst_caps_features_new_any() are equal to any other #GstCapsFeatures
+	 * created by {@link Gst.CapsFeatures.new_any} are equal to any other #GstCapsFeatures
 	 * and can be used to specify that any #GstCapsFeatures would be supported, e.g.
 	 * for elements that don't touch buffer memory. #GstCaps with ANY #GstCapsFeatures
 	 * are considered non-fixed and during negotiation some #GstCapsFeatures have
@@ -9504,7 +9400,7 @@ declare namespace imports.gi.Gst {
 		 * This prints the features in human readable form.
 		 * 
 		 * Free-function: g_free
-		 * @returns a pointer to string allocated by g_malloc().
+		 * @returns a pointer to string allocated by {@link G.malloc}.
 		 *     g_free() after usage.
 		 */
 		public to_string(): string;
@@ -9523,23 +9419,6 @@ declare namespace imports.gi.Gst {
 		public get_children_count: {(parent: ChildProxy): number;};
 		public child_added: {(parent: ChildProxy, child: GObject.Object, name: string): void;};
 		public child_removed: {(parent: ChildProxy, child: GObject.Object, name: string): void;};
-	}
-
-	export interface ClockClassInitOptions {}
-	/**
-	 * GStreamer clock class. Override the vmethods to implement the clock
-	 * functionality.
-	 */
-	interface ClockClass {}
-	class ClockClass {
-		public constructor(options?: Partial<ClockClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public change_resolution: {(clock: Clock, old_resolution: ClockTime, new_resolution: ClockTime): ClockTime;};
-		public get_resolution: {(clock: Clock): ClockTime;};
-		public get_internal_time: {(clock: Clock): ClockTime;};
-		public wait: {(clock: Clock, entry: ClockEntry, jitter: ClockTimeDiff): ClockReturn;};
-		public wait_async: {(clock: Clock, entry: ClockEntry): ClockReturn;};
-		public unschedule: {(clock: Clock, entry: ClockEntry): void;};
 	}
 
 	export interface ClockEntryInitOptions {}
@@ -9569,12 +9448,6 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
-	export interface ClockPrivateInitOptions {}
-	interface ClockPrivate {}
-	class ClockPrivate {
-		public constructor(options?: Partial<ClockPrivateInitOptions>);
-	}
-
 	export interface ContextInitOptions {}
 	/**
 	 * {@link Context} is a container object used to store contexts like a device
@@ -9582,7 +9455,7 @@ declare namespace imports.gi.Gst {
 	 * be shared between multiple elements.
 	 * 
 	 * Applications can set a context on a complete pipeline by using
-	 * gst_element_set_context(), which will then be propagated to all
+	 * {@link Gst.Element.set_context}, which will then be propagated to all
 	 * child elements. Elements can handle these in #GstElementClass.set_context()
 	 * and merge them with the context information they already have.
 	 * 
@@ -9647,36 +9520,6 @@ declare namespace imports.gi.Gst {
 		 * This function checks if #context is writable.
 		 */
 		public writable_structure(): Structure;
-	}
-
-	export interface ControlBindingClassInitOptions {}
-	/**
-	 * The class structure of {@link ControlBinding}.
-	 */
-	interface ControlBindingClass {}
-	class ControlBindingClass {
-		public constructor(options?: Partial<ControlBindingClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public sync_values: {(binding: ControlBinding, object: Object, timestamp: ClockTime, last_sync: ClockTime): boolean;};
-		public get_value: {(binding: ControlBinding, timestamp: ClockTime): GObject.Value | null;};
-		public get_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: any[] | null): boolean;};
-		public get_g_value_array: {(binding: ControlBinding, timestamp: ClockTime, interval: ClockTime, n_values: number, values: GObject.Value[]): boolean;};
-	}
-
-	export interface ControlBindingPrivateInitOptions {}
-	interface ControlBindingPrivate {}
-	class ControlBindingPrivate {
-		public constructor(options?: Partial<ControlBindingPrivateInitOptions>);
-	}
-
-	export interface ControlSourceClassInitOptions {}
-	/**
-	 * The class structure of {@link ControlSource}.
-	 */
-	interface ControlSourceClass {}
-	class ControlSourceClass {
-		public constructor(options?: Partial<ControlSourceClassInitOptions>);
-		public readonly _gst_reserved: any[];
 	}
 
 	export interface DateTimeInitOptions {}
@@ -9807,7 +9650,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_date_time_unref
 		 * @returns the newly created {@link DateTime} which should
-		 *     be freed with gst_date_time_unref().
+		 *     be freed with {@link Gst.DateTime.unref}.
 		 */
 		public static new_now_local_time(): DateTime;
 		/**
@@ -9816,7 +9659,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_date_time_unref
 		 * @returns the newly created {@link DateTime} which should
-		 *   be freed with gst_date_time_unref().
+		 *   be freed with {@link Gst.DateTime.unref}.
 		 */
 		public static new_now_utc(): DateTime;
 		/**
@@ -9866,14 +9709,14 @@ declare namespace imports.gi.Gst {
 		public static new_ymd(year: number, month: number, day: number): DateTime | null;
 		/**
 		 * Returns the day of the month of this {@link DateTime}.
-		 * Call gst_date_time_has_day() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_day} before, to avoid warnings.
 		 * @returns The day of this {@link DateTime}
 		 */
 		public get_day(): number;
 		/**
 		 * Retrieves the hour of the day represented by #datetime in the gregorian
 		 * calendar. The return is in the range of 0 to 23.
-		 * Call gst_date_time_has_time() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_time} before, to avoid warnings.
 		 * @returns the hour of the day
 		 */
 		public get_hour(): number;
@@ -9886,20 +9729,20 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Retrieves the minute of the hour represented by #datetime in the gregorian
 		 * calendar.
-		 * Call gst_date_time_has_time() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_time} before, to avoid warnings.
 		 * @returns the minute of the hour
 		 */
 		public get_minute(): number;
 		/**
 		 * Returns the month of this {@link DateTime}. January is 1, February is 2, etc..
-		 * Call gst_date_time_has_month() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_month} before, to avoid warnings.
 		 * @returns The month of this {@link DateTime}
 		 */
 		public get_month(): number;
 		/**
 		 * Retrieves the second of the minute represented by #datetime in the gregorian
 		 * calendar.
-		 * Call gst_date_time_has_time() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_time} before, to avoid warnings.
 		 * @returns the second represented by #datetime
 		 */
 		public get_second(): number;
@@ -9913,7 +9756,7 @@ declare namespace imports.gi.Gst {
 		public get_time_zone_offset(): number;
 		/**
 		 * Returns the year of this {@link DateTime}
-		 * Call gst_date_time_has_year() before, to avoid warnings.
+		 * Call {@link Gst.DateTime.has_year} before, to avoid warnings.
 		 * @returns The year of this {@link DateTime}
 		 */
 		public get_year(): number;
@@ -9942,7 +9785,7 @@ declare namespace imports.gi.Gst {
 		 * @returns a newly allocated string formatted according
 		 *     to ISO 8601 and only including the datetime fields that are
 		 *     valid, or %NULL in case there was an error. The string should
-		 *     be freed with g_free().
+		 *     be freed with {@link G.free}.
 		 */
 		public to_iso8601_string(): string | null;
 		/**
@@ -9997,7 +9840,7 @@ declare namespace imports.gi.Gst {
 		 * will only be output if the threshold is lower or equal to the level of the
 		 * debugging message.
 		 * Use this function to set the threshold back to where it was after using
-		 * gst_debug_category_set_threshold().
+		 * {@link Gst.DebugCategory.set_threshold}.
 		 */
 		public reset_threshold(): void;
 		/**
@@ -10024,300 +9867,12 @@ declare namespace imports.gi.Gst {
 		public get(): string | null;
 	}
 
-	export interface DeviceClassInitOptions {}
-	/**
-	 * The class structure for a {@link Device} object.
-	 */
-	interface DeviceClass {}
-	class DeviceClass {
-		public constructor(options?: Partial<DeviceClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public create_element: {(device: Device, name: string | null): Element | null;};
-		public reconfigure_element: {(device: Device, element: Element): boolean;};
-	}
-
-	export interface DeviceMonitorClassInitOptions {}
-	/**
-	 * Opaque device monitor class structure.
-	 */
-	interface DeviceMonitorClass {}
-	class DeviceMonitorClass {
-		public constructor(options?: Partial<DeviceMonitorClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface DeviceMonitorPrivateInitOptions {}
-	interface DeviceMonitorPrivate {}
-	class DeviceMonitorPrivate {
-		public constructor(options?: Partial<DeviceMonitorPrivateInitOptions>);
-	}
-
-	export interface DevicePrivateInitOptions {}
-	interface DevicePrivate {}
-	class DevicePrivate {
-		public constructor(options?: Partial<DevicePrivateInitOptions>);
-	}
-
-	export interface DeviceProviderClassInitOptions {}
-	/**
-	 * The structure of the base {@link DeviceProviderClass}
-	 */
-	interface DeviceProviderClass {}
-	class DeviceProviderClass {
-		public constructor(options?: Partial<DeviceProviderClassInitOptions>);
-		/**
-		 * a pointer to the {@link DeviceProviderFactory} that creates this
-		 *  provider
-		 */
-		public readonly factory: DeviceProviderFactory;
-		public readonly metadata: any;
-		public readonly _gst_reserved: any[];
-		public probe: {(provider: DeviceProvider): GLib.List;};
-		public start: {(provider: DeviceProvider): boolean;};
-		public stop: {(provider: DeviceProvider): void;};
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_metadata(key: string, value: string): void;
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * 
-		 * Same as gst_device_provider_class_add_metadata(), but #value must be a static string
-		 * or an inlined string, as it will not be copied. (GStreamer plugins will
-		 * be made resident once loaded, so this function can be used even from
-		 * dynamically loaded plugins.)
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_static_metadata(key: string, value: string): void;
-		/**
-		 * Get metadata with #key in #klass.
-		 * @param key the key to get
-		 * @returns the metadata for #key.
-		 */
-		public get_metadata(key: string): string | null;
-		/**
-		 * Sets the detailed information for a {@link DeviceProviderClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * @param longname The long English name of the device provider. E.g. "File Sink"
-		 * @param classification String describing the type of device provider, as an
-		 *  unordered list separated with slashes ('/'). See draft-klass.txt of the
-		 *  design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the device provider.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_metadata(longname: string, classification: string, description: string, author: string): void;
-		/**
-		 * Sets the detailed information for a {@link DeviceProviderClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * 
-		 * Same as gst_device_provider_class_set_metadata(), but #longname, #classification,
-		 * #description, and #author must be static strings or inlined strings, as
-		 * they will not be copied. (GStreamer plugins will be made resident once
-		 * loaded, so this function can be used even from dynamically loaded plugins.)
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as
-		 * an unordered list separated with slashes ('/'). See draft-klass.txt of the
-		 * design docs for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the
-		 * element.  E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n
-		 * to separate multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at
-		 * foo.com&gt;"
-		 */
-		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
-	}
-
-	export interface DeviceProviderFactoryClassInitOptions {}
-	/**
-	 * The opaque {@link DeviceProviderFactoryClass} data structure.
-	 */
-	interface DeviceProviderFactoryClass {}
-	class DeviceProviderFactoryClass {
-		public constructor(options?: Partial<DeviceProviderFactoryClassInitOptions>);
-	}
-
-	export interface DeviceProviderPrivateInitOptions {}
-	interface DeviceProviderPrivate {}
-	class DeviceProviderPrivate {
-		public constructor(options?: Partial<DeviceProviderPrivateInitOptions>);
-	}
-
-	export interface DynamicTypeFactoryClassInitOptions {}
-	interface DynamicTypeFactoryClass {}
-	class DynamicTypeFactoryClass {
-		public constructor(options?: Partial<DynamicTypeFactoryClassInitOptions>);
-	}
-
-	export interface ElementClassInitOptions {}
-	/**
-	 * GStreamer element class. Override the vmethods to implement the element
-	 * functionality.
-	 */
-	interface ElementClass {}
-	class ElementClass {
-		public constructor(options?: Partial<ElementClassInitOptions>);
-		/**
-		 * metadata for elements of this class
-		 */
-		public readonly metadata: any;
-		/**
-		 * the {@link ElementFactory} that creates these elements
-		 */
-		public readonly elementfactory: ElementFactory;
-		/**
-		 * a #GList of {@link PadTemplate}
-		 */
-		public readonly padtemplates: GLib.List;
-		/**
-		 * the number of padtemplates
-		 */
-		public readonly numpadtemplates: number;
-		/**
-		 * changed whenever the padtemplates change
-		 */
-		public readonly pad_templ_cookie: number;
-		public readonly _gst_reserved: any[];
-		public pad_added: {(element: Element, pad: Pad): void;};
-		public pad_removed: {(element: Element, pad: Pad): void;};
-		public no_more_pads: {(element: Element): void;};
-		public request_new_pad: {(element: Element, templ: PadTemplate, name: string | null, caps: Caps | null): Pad | null;};
-		public release_pad: {(element: Element, pad: Pad): void;};
-		public get_state: {(element: Element, timeout: ClockTime): [ StateChangeReturn, State | null, State | null ];};
-		public set_state: {(element: Element, state: State): StateChangeReturn;};
-		public change_state: {(element: Element, transition: StateChange): StateChangeReturn;};
-		public state_changed: {(element: Element, oldstate: State, newstate: State, pending: State): void;};
-		public set_bus: {(element: Element, bus: Bus | null): void;};
-		public provide_clock: {(element: Element): Clock | null;};
-		public set_clock: {(element: Element, clock: Clock | null): boolean;};
-		public send_event: {(element: Element, event: Event): boolean;};
-		public query: {(element: Element, query: Query): boolean;};
-		public post_message: {(element: Element, message: Message): boolean;};
-		public set_context: {(element: Element, context: Context): void;};
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_metadata(key: string, value: string): void;
-		/**
-		 * Adds a padtemplate to an element class. This is mainly used in the _class_init
-		 * functions of classes. If a pad template with the same name as an already
-		 * existing one is added the old one is replaced by the new one.
-		 * 
-		 * #templ's reference count will be incremented, and any floating
-		 * reference will be removed (see gst_object_ref_sink())
-		 * @param templ a {@link PadTemplate} to add to the element class.
-		 */
-		public add_pad_template(templ: PadTemplate): void;
-		/**
-		 * Set #key with #value as metadata in #klass.
-		 * 
-		 * Same as gst_element_class_add_metadata(), but #value must be a static string
-		 * or an inlined string, as it will not be copied. (GStreamer plugins will
-		 * be made resident once loaded, so this function can be used even from
-		 * dynamically loaded plugins.)
-		 * @param key the key to set
-		 * @param value the value to set
-		 */
-		public add_static_metadata(key: string, value: string): void;
-		/**
-		 * Adds a pad template to an element class based on the static pad template
-		 * #templ. This is mainly used in the _class_init functions of element
-		 * implementations. If a pad template with the same name already exists,
-		 * the old one is replaced by the new one.
-		 * @param static_templ {@link StaticPadTemplate} to add as pad template to the element class.
-		 */
-		public add_static_pad_template(static_templ: StaticPadTemplate): void;
-		/**
-		 * Adds a pad template to an element class based on the static pad template
-		 * #templ. This is mainly used in the _class_init functions of element
-		 * implementations. If a pad template with the same name already exists,
-		 * the old one is replaced by the new one.
-		 * @param static_templ {@link StaticPadTemplate} to add as pad template to the element class.
-		 * @param pad_type The #GType of the pad to create
-		 */
-		public add_static_pad_template_with_gtype(static_templ: StaticPadTemplate, pad_type: GObject.Type): void;
-		/**
-		 * Get metadata with #key in #klass.
-		 * @param key the key to get
-		 * @returns the metadata for #key.
-		 */
-		public get_metadata(key: string): string;
-		/**
-		 * Retrieves a padtemplate from #element_class with the given name.
-		 * > If you use this function in the #GInstanceInitFunc of an object class
-		 * > that has subclasses, make sure to pass the g_class parameter of the
-		 * > #GInstanceInitFunc here.
-		 * @param name the name of the {@link PadTemplate} to get.
-		 * @returns the {@link PadTemplate} with the
-		 *     given name, or %NULL if none was found. No unreferencing is
-		 *     necessary.
-		 */
-		public get_pad_template(name: string): PadTemplate | null;
-		/**
-		 * Retrieves a list of the pad templates associated with #element_class. The
-		 * list must not be modified by the calling code.
-		 * > If you use this function in the #GInstanceInitFunc of an object class
-		 * > that has subclasses, make sure to pass the g_class parameter of the
-		 * > #GInstanceInitFunc here.
-		 * @returns the #GList of
-		 *     pad templates.
-		 */
-		public get_pad_template_list(): GLib.List;
-		/**
-		 * Sets the detailed information for a {@link ElementClass}.
-		 * > This function is for use in _class_init functions only.
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as an unordered list
-		 * separated with slashes ('/'). See draft-klass.txt of the design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the element.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_metadata(longname: string, classification: string, description: string, author: string): void;
-		/**
-		 * Sets the detailed information for a {@link ElementClass}.
-		 * 
-		 * > This function is for use in _class_init functions only.
-		 * 
-		 * Same as gst_element_class_set_metadata(), but #longname, #classification,
-		 * #description, and #author must be static strings or inlined strings, as
-		 * they will not be copied. (GStreamer plugins will be made resident once
-		 * loaded, so this function can be used even from dynamically loaded plugins.)
-		 * @param longname The long English name of the element. E.g. "File Sink"
-		 * @param classification String describing the type of element, as an unordered list
-		 * separated with slashes ('/'). See draft-klass.txt of the design docs
-		 * for more details and common types. E.g: "Sink/File"
-		 * @param description Sentence describing the purpose of the element.
-		 * E.g: "Write stream to a file"
-		 * @param author Name and contact details of the author(s). Use \n to separate
-		 * multiple author metadata. E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
-		 */
-		public set_static_metadata(longname: string, classification: string, description: string, author: string): void;
-	}
-
-	export interface ElementFactoryClassInitOptions {}
-	interface ElementFactoryClass {}
-	class ElementFactoryClass {
-		public constructor(options?: Partial<ElementFactoryClassInitOptions>);
-	}
-
 	export interface EventInitOptions {}
 	/**
 	 * The event class provides factory methods to construct events for sending
 	 * and functions to query (parse) received events.
 	 * 
-	 * Events are usually created with gst_event_new_*() which takes event-type
+	 * Events are usually created with {@link Gst.Event.new_*} which takes event-type
 	 * specific parameters as arguments.
 	 * To send an event application will usually use gst_element_send_event() and
 	 * elements will use gst_pad_send_event() or gst_pad_push_event().
@@ -10418,7 +9973,7 @@ declare namespace imports.gi.Gst {
 		 * upstream and downstream and travels out-of-bounds with the dataflow.
 		 * 
 		 * It marks pads as being flushing and will make them return
-		 * #GST_FLOW_FLUSHING when used for data flow with gst_pad_push(),
+		 * #GST_FLOW_FLUSHING when used for data flow with {@link Gst.Pad.push},
 		 * gst_pad_chain(), gst_pad_get_range() and gst_pad_pull_range().
 		 * Any event (except a #GST_EVENT_FLUSH_STOP) received
 		 * on a flushing pad will return %FALSE immediately.
@@ -10536,7 +10091,7 @@ declare namespace imports.gi.Gst {
 		 * some protection systems use different encodings depending upon where the
 		 * information originates.
 		 * 
-		 * The events returned by gst_event_new_protection() are implemented
+		 * The events returned by {@link Gst.Event.new_protection} are implemented
 		 * in such a way as to ensure that the most recently-pushed protection info
 		 * event of a particular #origin and #system_id will
 		 * be stuck to the output pad of the sending element.
@@ -10789,7 +10344,7 @@ declare namespace imports.gi.Gst {
 		 * stream. A new stream-id should only be created for a stream if the upstream
 		 * stream is split into (potentially) multiple new streams, e.g. in a demuxer,
 		 * but not for every single element in the pipeline.
-		 * gst_pad_create_stream_id() or gst_pad_create_stream_id_printf() can be
+		 * {@link Gst.Pad.create_stream_id} or gst_pad_create_stream_id_printf() can be
 		 * used to create a stream-id.  There are no particular semantics for the
 		 * stream-id, though it should be deterministic (to support stream matching)
 		 * and it might be used to order streams (besides any information conveyed by
@@ -10853,7 +10408,7 @@ declare namespace imports.gi.Gst {
 		 * Retrieve the accumulated running time offset of the event.
 		 * 
 		 * Events passing through {@link Pads} that have a running time
-		 * offset set via gst_pad_set_offset() will get their offset
+		 * offset set via {@link Gst.Pad.set_offset} will get their offset
 		 * adjusted according to the pad's offset.
 		 * 
 		 * If the event contains any information that related to the
@@ -10868,7 +10423,7 @@ declare namespace imports.gi.Gst {
 		 * Retrieve the sequence number of a event.
 		 * 
 		 * Events have ever-incrementing sequence numbers, which may also be set
-		 * explicitly via gst_event_set_seqnum(). Sequence numbers are typically used to
+		 * explicitly via {@link Gst.Event.set_seqnum}. Sequence numbers are typically used to
 		 * indicate that a event corresponds to some other set of events or messages,
 		 * for example an EOS event corresponding to a SEEK event. It is considered good
 		 * practice to make this correspondence when possible, though it is not
@@ -10980,7 +10535,7 @@ declare namespace imports.gi.Gst {
 		public parse_protection(): [ system_id: string | null, data: Buffer | null, origin: string | null ];
 		/**
 		 * Get the type, proportion, diff and timestamp in the qos event. See
-		 * gst_event_new_qos() for more information about the different QoS values.
+		 * {@link Gst.Event.new_qos} for more information about the different QoS values.
 		 * 
 		 * #timestamp will be adjusted for any pad offsets of pads it was passing through.
 		 * @returns A pointer to store the QoS type in
@@ -11011,7 +10566,7 @@ declare namespace imports.gi.Gst {
 		public parse_seek(): [ rate: number, format: Format, flags: SeekFlags, start_type: SeekType, start: number, stop_type: SeekType, stop: number ];
 		/**
 		 * Retrieve the trickmode interval that may have been set on a
-		 * seek event with gst_event_set_seek_trickmode_interval().
+		 * seek event with {@link Gst.Event.set_seek_trickmode_interval}.
 		 * @returns 
 		 */
 		public parse_seek_trickmode_interval(): ClockTime;
@@ -11105,13 +10660,13 @@ declare namespace imports.gi.Gst {
 		 * each time the stream is started, resulting in different group ids
 		 * each time a file is played for example.
 		 * 
-		 * Use gst_util_group_id_next() to get a new group id.
+		 * Use {@link Gst.util.group_id_next} to get a new group id.
 		 * @param group_id the group id to set
 		 */
 		public set_group_id(group_id: number): void;
 		/**
 		 * Set the running time offset of a event. See
-		 * gst_event_get_running_time_offset() for more information.
+		 * {@link Gst.Event.get_running_time_offset} for more information.
 		 * 
 		 * MT safe.
 		 * @param offset A the new running time offset
@@ -11128,7 +10683,7 @@ declare namespace imports.gi.Gst {
 		 * Set the sequence number of a event.
 		 * 
 		 * This function might be called by the creator of a event to indicate that the
-		 * event relates to other events or messages. See gst_event_get_seqnum() for
+		 * event relates to other events or messages. See {@link Gst.Event.get_seqnum} for
 		 * more information.
 		 * 
 		 * MT safe.
@@ -11179,19 +10734,6 @@ declare namespace imports.gi.Gst {
 		public quark: GLib.Quark;
 	}
 
-	export interface GhostPadClassInitOptions {}
-	interface GhostPadClass {}
-	class GhostPadClass {
-		public constructor(options?: Partial<GhostPadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface GhostPadPrivateInitOptions {}
-	interface GhostPadPrivate {}
-	class GhostPadPrivate {
-		public constructor(options?: Partial<GhostPadPrivateInitOptions>);
-	}
-
 	export interface IteratorInitOptions {}
 	/**
 	 * A GstIterator is used to retrieve multiple objects from another object in
@@ -11201,7 +10743,7 @@ declare namespace imports.gi.Gst {
 	 * an iterator.
 	 * 
 	 * Note that if calling a GstIterator function results in your code receiving
-	 * a refcounted object (with, say, g_value_get_object()), the refcount for that
+	 * a refcounted object (with, say, {@link G.value_get_object}), the refcount for that
 	 * object will not be increased. Your code is responsible for taking a reference
 	 * if it wants to continue using it later.
 	 * 
@@ -11269,7 +10811,7 @@ declare namespace imports.gi.Gst {
 		 * When a concurrent update to the list is performed, usually by #owner while
 		 * holding #lock, #master_cookie will be updated. The iterator implementation
 		 * will notice the update of the cookie and will return %GST_ITERATOR_RESYNC to
-		 * the user of the iterator in the next call to gst_iterator_next().
+		 * the user of the iterator in the next call to {@link Gst.Iterator.next}.
 		 * @param type #GType of elements
 		 * @param lock pointer to a #GMutex protecting the list.
 		 * @param master_cookie pointer to a guint32 that is incremented when the list
@@ -11313,7 +10855,7 @@ declare namespace imports.gi.Gst {
 		 */
 		// public free: IteratorFreeFunction;
 		/**
-		 * The iterator that is currently pushed with gst_iterator_push()
+		 * The iterator that is currently pushed with {@link Gst.Iterator.push}
 		 */
 		public pushed: Iterator;
 		/**
@@ -11383,7 +10925,7 @@ declare namespace imports.gi.Gst {
 		 * #ret.
 		 * 
 		 * This procedure can be used (and is used internally) to implement the
-		 * gst_iterator_foreach() and gst_iterator_find_custom() operations.
+		 * {@link Gst.Iterator.foreach} and gst_iterator_find_custom() operations.
 		 * 
 		 * The fold will proceed as long as #func returns %TRUE. When the iterator has no
 		 * more arguments, %GST_ITERATOR_DONE will be returned. If #func returns %FALSE,
@@ -11403,7 +10945,7 @@ declare namespace imports.gi.Gst {
 		 * Iterate over all element of #it and call the given function #func for
 		 * each element.
 		 * @param func the function to call for each element.
-		 * @returns the result call to gst_iterator_fold(). The iterator will not be
+		 * @returns the result call to {@link Gst.Iterator.fold}. The iterator will not be
 		 * freed.
 		 * 
 		 * MT safe.
@@ -11420,7 +10962,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Only when this function returns %GST_ITERATOR_OK, #elem will contain a valid
 		 * value. #elem must have been initialized to the type of the iterator or
-		 * initialized to zeroes with g_value_unset(). The caller is responsible for
+		 * initialized to zeroes with {@link G.value_unset}. The caller is responsible for
 		 * unsetting or resetting #elem with g_value_unset() or g_value_reset()
 		 * after usage.
 		 * 
@@ -11447,7 +10989,7 @@ declare namespace imports.gi.Gst {
 		 * This function is mainly used by objects implementing the iterator
 		 * next function to recurse into substructures.
 		 * 
-		 * When gst_iterator_resync() is called on #it, #other will automatically be
+		 * When {@link Gst.Iterator.resync} is called on #it, #other will automatically be
 		 * popped.
 		 * 
 		 * MT safe.
@@ -11456,7 +10998,7 @@ declare namespace imports.gi.Gst {
 		public push(other: Iterator): void;
 		/**
 		 * Resync the iterator. this function is mostly called
-		 * after gst_iterator_next() returned %GST_ITERATOR_RESYNC.
+		 * after {@link Gst.Iterator.next} returned %GST_ITERATOR_RESYNC.
 		 * 
 		 * When an iterator was pushed on #it, it will automatically be popped again
 		 * with this function.
@@ -11469,7 +11011,7 @@ declare namespace imports.gi.Gst {
 	export interface MapInfoInitOptions {}
 	/**
 	 * A structure containing the result of a map operation such as
-	 * gst_memory_map(). It contains the data and size.
+	 * {@link Gst.Memory.map}. It contains the data and size.
 	 */
 	interface MapInfo {}
 	class MapInfo {
@@ -11512,7 +11054,7 @@ declare namespace imports.gi.Gst {
 	 * also has an offset and size property that specifies the valid range of memory
 	 * in the allocated region.
 	 * 
-	 * Memory is usually created by allocators with a gst_allocator_alloc()
+	 * Memory is usually created by allocators with a {@link Gst.Allocator.alloc}
 	 * method call. When %NULL is used as the allocator, the default allocator will
 	 * be used.
 	 * 
@@ -11603,7 +11145,7 @@ declare namespace imports.gi.Gst {
 		public get_sizes(): [ number, number | null, number | null ];
 		/**
 		 * Initializes a newly allocated #mem with the given parameters. This function
-		 * will call gst_mini_object_init() with the default memory parameters.
+		 * will call {@link Gst.MiniObject.init} with the default memory parameters.
 		 * @param flags {@link MemoryFlags}
 		 * @param allocator the {@link Allocator}
 		 * @param parent the parent of #mem
@@ -11618,7 +11160,7 @@ declare namespace imports.gi.Gst {
 		 * and that the memory is contiguous.
 		 * 
 		 * If this is the case, the memory of #mem1 and #mem2 can be merged
-		 * efficiently by performing gst_memory_share() on the parent object from
+		 * efficiently by performing {@link Gst.Memory.share} on the parent object from
 		 * the returned #offset.
 		 * @param mem2 a {@link Memory}
 		 * @returns %TRUE if the memory is contiguous and of a common parent.
@@ -11655,7 +11197,7 @@ declare namespace imports.gi.Gst {
 		 * - the memory was already mapped with a different mapping.
 		 * 
 		 * #info and its contents remain valid for as long as #mem is valid and
-		 * until gst_memory_unmap() is called.
+		 * until {@link Gst.Memory.unmap} is called.
 		 * 
 		 * For each gst_memory_map() call, a corresponding gst_memory_unmap() call
 		 * should be done.
@@ -11686,7 +11228,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public share(offset: number, size: number): Memory;
 		/**
-		 * Release the memory obtained with gst_memory_map()
+		 * Release the memory obtained with {@link Gst.Memory.map}
 		 * @param info a {@link MapInfo}
 		 */
 		public unmap(info: MapInfo): void;
@@ -11704,7 +11246,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * The basic use pattern of posting a message on a #GstBus is as follows:
 	 * |[<!-- language="C" -->
-	 *   gst_bus_post (bus, gst_message_new_eos());
+	 *   gst_bus_post (bus, {@link Gst.Message.new_eos});
 	 * ]|
 	 * 
 	 * A #GstElement usually posts messages on the bus provided by the parent
@@ -12011,7 +11553,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * The redirect message can hold multiple entries. The first one is added
 		 * when the redirect message is created, with the given location, tag_list,
-		 * entry_struct arguments. Use gst_message_add_redirect_entry() to add more
+		 * entry_struct arguments. Use {@link Gst.Message.add_redirect_entry} to add more
 		 * entries.
 		 * 
 		 * Each entry has a location, a tag list, and a structure. All of these are
@@ -12184,7 +11726,7 @@ declare namespace imports.gi.Gst {
 		 * The message also contains the {@link StreamCollection} to which the various streams
 		 * belong to.
 		 * 
-		 * Users of gst_message_new_streams_selected() can add the selected streams with
+		 * Users of {@link Gst.Message.new_streams_selected} can add the selected streams with
 		 * gst_message_streams_selected_add().
 		 * @param src The {@link Object} that created the message
 		 * @param collection The {@link StreamCollection}
@@ -12292,7 +11834,7 @@ declare namespace imports.gi.Gst {
 		 * Retrieve the sequence number of a message.
 		 * 
 		 * Messages have ever-incrementing sequence numbers, which may also be set
-		 * explicitly via gst_message_set_seqnum(). Sequence numbers are typically used
+		 * explicitly via {@link Gst.Message.set_seqnum}. Sequence numbers are typically used
 		 * to indicate that a message corresponds to some other set of messages or
 		 * events, for example a SEGMENT_DONE message corresponding to a SEEK event. It
 		 * is considered good practice to make this correspondence when possible, though
@@ -12339,7 +11881,7 @@ declare namespace imports.gi.Gst {
 		public parse_async_done(): ClockTime | null;
 		/**
 		 * Extracts the buffering percent from the GstMessage. see also
-		 * gst_message_new_buffering().
+		 * {@link Gst.Message.new_buffering}.
 		 * 
 		 * MT safe.
 		 * @returns Return location for the percent.
@@ -12509,7 +12051,7 @@ declare namespace imports.gi.Gst {
 		public parse_progress(): [ type: ProgressType | null, code: string | null, text: string | null ];
 		/**
 		 * Parses a property-notify message. These will be posted on the bus only
-		 * when set up with gst_element_add_property_notify_watch() or
+		 * when set up with {@link Gst.Element.add_property_notify_watch} or
 		 * gst_element_add_property_deep_notify_watch().
 		 * @returns location where to store a
 		 *     pointer to the object whose property got changed, or %NULL
@@ -12583,7 +12125,7 @@ declare namespace imports.gi.Gst {
 		public parse_qos_values(): [ jitter: number | null, proportion: number | null, quality: number | null ];
 		/**
 		 * Parses the location and/or structure from the entry with the given index.
-		 * The index must be between 0 and gst_message_get_num_redirect_entries() - 1.
+		 * The index must be between 0 and {@link Gst.Message.get_num_redirect_entries} - 1.
 		 * Returned pointers are valid for as long as this message exists.
 		 * @param entry_index index of the entry to parse
 		 * @returns return location for
@@ -12760,7 +12302,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Extract the TOC from the {@link Message}. The TOC returned in the
 		 * output argument is a copy; the caller must free it with
-		 * gst_toc_unref() when done.
+		 * {@link Gst.Toc.unref} when done.
 		 * 
 		 * MT safe.
 		 * @returns return location for the TOC.
@@ -12838,7 +12380,7 @@ declare namespace imports.gi.Gst {
 		 * Set the sequence number of a message.
 		 * 
 		 * This function might be called by the creator of a message to indicate that
-		 * the message relates to other messages or events. See gst_message_get_seqnum()
+		 * the message relates to other messages or events. See {@link Gst.Message.get_seqnum}
 		 * for more information.
 		 * 
 		 * MT safe.
@@ -12886,7 +12428,7 @@ declare namespace imports.gi.Gst {
 	 * metadata structure. The structure defines the API of the metadata and should
 	 * be accessible to all elements using the metadata.
 	 * 
-	 * A metadata API is registered with gst_meta_api_type_register() which takes a
+	 * A metadata API is registered with {@link Gst.meta.api_type_register} which takes a
 	 * name for the metadata API and some tags associated with the metadata.
 	 * With gst_meta_api_type_has_tag() one can check if a certain metadata API
 	 * contains a given tag.
@@ -12990,7 +12532,7 @@ declare namespace imports.gi.Gst {
 	 * types.
 	 * 
 	 * Subclasses will include #GstMiniObject as the first member in their structure
-	 * and then call gst_mini_object_init() to initialize the #GstMiniObject fields.
+	 * and then call {@link Gst.MiniObject.init} to initialize the #GstMiniObject fields.
 	 * 
 	 * gst_mini_object_ref() and gst_mini_object_unref() increment and decrement the
 	 * refcount respectively. When the refcount of a mini-object reaches 0, the
@@ -13068,7 +12610,7 @@ declare namespace imports.gi.Gst {
 		public copy(): MiniObject | null;
 		/**
 		 * This function gets back user data pointers stored via
-		 * gst_mini_object_set_qdata().
+		 * {@link Gst.MiniObject.set_qdata}.
 		 * @param quark A #GQuark, naming the user data pointer
 		 * @returns The user data pointer set, or
 		 * %NULL
@@ -13118,7 +12660,7 @@ declare namespace imports.gi.Gst {
 		 * Increase the reference count of the mini-object.
 		 * 
 		 * Note that the refcount affects the writability
-		 * of #mini-object, see gst_mini_object_is_writable(). It is
+		 * of #mini-object, see {@link Gst.MiniObject.is_writable}. It is
 		 * important to note that keeping additional references to
 		 * GstMiniObject instances can potentially increase the number
 		 * of memcpy operations in a pipeline, especially if the miniobject
@@ -13128,14 +12670,14 @@ declare namespace imports.gi.Gst {
 		public ref(): MiniObject;
 		/**
 		 * This removes #parent as a parent for #object. See
-		 * gst_mini_object_add_parent().
+		 * {@link Gst.MiniObject.add_parent}.
 		 * @param parent a parent {@link MiniObject}
 		 */
 		public remove_parent(parent: MiniObject): void;
 		/**
 		 * This sets an opaque, named pointer on a miniobject.
 		 * The name is specified through a #GQuark (retrieved e.g. via
-		 * g_quark_from_static_string()), and the pointer
+		 * {@link G.quark_from_static_string}), and the pointer
 		 * can be gotten back from the #object with gst_mini_object_get_qdata()
 		 * until the #object is disposed.
 		 * Setting a previously set user data pointer, overrides (frees)
@@ -13152,7 +12694,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public set_qdata(quark: GLib.Quark, data: any | null, destroy: GLib.DestroyNotify): void;
 		/**
-		 * This function gets back user data pointers stored via gst_mini_object_set_qdata()
+		 * This function gets back user data pointers stored via {@link Gst.MiniObject.set_qdata}
 		 * and removes the data from #object without invoking its `destroy()` function (if
 		 * any was set).
 		 * @param quark A #GQuark, naming the user data pointer
@@ -13174,7 +12716,7 @@ declare namespace imports.gi.Gst {
 		 * Adds a weak reference callback to a mini object. Weak references are
 		 * used for notification when a mini object is finalized. They are called
 		 * "weak references" because they allow you to safely hold a pointer
-		 * to the mini object without calling gst_mini_object_ref()
+		 * to the mini object without calling {@link Gst.MiniObject.ref}
 		 * (gst_mini_object_ref() adds a strong reference, that is, forces the object
 		 * to stay alive).
 		 * @param notify callback to invoke before the mini object is freed
@@ -13187,36 +12729,6 @@ declare namespace imports.gi.Gst {
 		 * @param data data to search for
 		 */
 		public weak_unref(notify: MiniObjectNotify, data: any | null): void;
-	}
-
-	export interface ObjectClassInitOptions {}
-	/**
-	 * GStreamer base object class.
-	 */
-	interface ObjectClass {}
-	class ObjectClass {
-		public constructor(options?: Partial<ObjectClassInitOptions>);
-		/**
-		 * separator used by gst_object_get_path_string()
-		 */
-		public readonly path_string_separator: string;
-		public readonly _gst_reserved: any[];
-		public deep_notify: {(object: Object, orig: Object, pspec: GObject.ParamSpec): void;};
-	}
-
-	export interface PadClassInitOptions {}
-	interface PadClass {}
-	class PadClass {
-		public constructor(options?: Partial<PadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public linked: {(pad: Pad, peer: Pad): void;};
-		public unlinked: {(pad: Pad, peer: Pad): void;};
-	}
-
-	export interface PadPrivateInitOptions {}
-	interface PadPrivate {}
-	class PadPrivate {
-		public constructor(options?: Partial<PadPrivateInitOptions>);
 	}
 
 	export interface PadProbeInfoInitOptions {}
@@ -13253,14 +12765,6 @@ declare namespace imports.gi.Gst {
 		public get_buffer_list(): BufferList | null;
 		public get_event(): Event | null;
 		public get_query(): Query | null;
-	}
-
-	export interface PadTemplateClassInitOptions {}
-	interface PadTemplateClass {}
-	class PadTemplateClass {
-		public constructor(options?: Partial<PadTemplateClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public pad_created: {(templ: PadTemplate, pad: Pad): void;};
 	}
 
 	export interface ParamSpecArrayInitOptions {}
@@ -13338,12 +12842,12 @@ declare namespace imports.gi.Gst {
 	class ParseContext {
 		public constructor(options?: Partial<ParseContextInitOptions>);
 		/**
-		 * Allocates a parse context for use with gst_parse_launch_full() or
+		 * Allocates a parse context for use with {@link Gst.parse.launch_full} or
 		 * gst_parse_launchv_full().
 		 * 
 		 * Free-function: gst_parse_context_free
 		 * @returns a newly-allocated parse context. Free
-		 *     with gst_parse_context_free() when no longer needed.
+		 *     with {@link Gst.ParseContext.free} when no longer needed.
 		 */
 		public static new(): ParseContext | null;
 		/**
@@ -13352,37 +12856,18 @@ declare namespace imports.gi.Gst {
 		 */
 		public copy(): ParseContext | null;
 		/**
-		 * Frees a parse context previously allocated with gst_parse_context_new().
+		 * Frees a parse context previously allocated with {@link Gst.ParseContext.new}.
 		 */
 		public free(): void;
 		/**
-		 * Retrieve missing elements from a previous run of gst_parse_launch_full()
+		 * Retrieve missing elements from a previous run of {@link Gst.parse.launch_full}
 		 * or gst_parse_launchv_full(). Will only return results if an error code
 		 * of %GST_PARSE_ERROR_NO_SUCH_ELEMENT was returned.
 		 * @returns a
 		 *     %NULL-terminated array of element factory name strings of missing
-		 *     elements. Free with g_strfreev() when no longer needed.
+		 *     elements. Free with {@link G.strfreev} when no longer needed.
 		 */
 		public get_missing_elements(): string[] | null;
-	}
-
-	export interface PipelineClassInitOptions {}
-	interface PipelineClass {}
-	class PipelineClass {
-		public constructor(options?: Partial<PipelineClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface PipelinePrivateInitOptions {}
-	interface PipelinePrivate {}
-	class PipelinePrivate {
-		public constructor(options?: Partial<PipelinePrivateInitOptions>);
-	}
-
-	export interface PluginClassInitOptions {}
-	interface PluginClass {}
-	class PluginClass {
-		public constructor(options?: Partial<PluginClassInitOptions>);
 	}
 
 	export interface PluginDescInitOptions {}
@@ -13448,17 +12933,11 @@ declare namespace imports.gi.Gst {
 		public readonly _gst_reserved: any[];
 	}
 
-	export interface PluginFeatureClassInitOptions {}
-	interface PluginFeatureClass {}
-	class PluginFeatureClass {
-		public constructor(options?: Partial<PluginFeatureClassInitOptions>);
-	}
-
 	export interface PollInitOptions {}
 	/**
 	 * A {@link Poll} keeps track of file descriptors much like fd_set (used with
 	 * select ()) or a struct pollfd array (used with poll ()). Once created with
-	 * gst_poll_new(), the set can be used to wait for file descriptors to be
+	 * {@link Gst.poll.new}, the set can be used to wait for file descriptors to be
 	 * readable and/or writable. It is possible to make this wait be controlled
 	 * by specifying %TRUE for the #controllable flag when creating the set (or
 	 * later calling gst_poll_set_controllable()).
@@ -13548,7 +13027,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public fd_has_pri(fd: PollFD): boolean;
 		/**
-		 * Mark #fd as ignored so that the next call to gst_poll_wait() will yield
+		 * Mark #fd as ignored so that the next call to {@link Gst.Poll.wait} will yield
 		 * the same result for #fd as last time. This function must be called if no
 		 * operation (read/write/recv/send/etc.) will be performed on #fd before
 		 * the next call to gst_poll_wait().
@@ -13573,7 +13052,7 @@ declare namespace imports.gi.Gst {
 		 * Read a byte from the control socket of the controllable #set.
 		 * 
 		 * This function only works for timer {@link Poll} objects created with
-		 * gst_poll_new_timer().
+		 * {@link Gst.poll.new_timer}.
 		 * @returns %TRUE on success. %FALSE when when there was no byte to read or
 		 * reading the byte failed. If there was no byte to read, and only then, errno
 		 * will contain EWOULDBLOCK or EAGAIN. For all other values of errno this always signals a
@@ -13587,7 +13066,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public remove_fd(fd: PollFD): boolean;
 		/**
-		 * Restart any gst_poll_wait() that is in progress. This function is typically
+		 * Restart any {@link Gst.Poll.wait} that is in progress. This function is typically
 		 * used after adding or removing descriptors to #set.
 		 * 
 		 * If #set is not controllable, then this call will have no effect.
@@ -13598,7 +13077,7 @@ declare namespace imports.gi.Gst {
 		public restart(): void;
 		/**
 		 * When #controllable is %TRUE, this function ensures that future calls to
-		 * gst_poll_wait() will be affected by gst_poll_restart() and
+		 * {@link Gst.Poll.wait} will be affected by gst_poll_restart() and
 		 * gst_poll_set_flushing().
 		 * 
 		 * This function only works for non-timer {@link Poll} objects created with
@@ -13609,7 +13088,7 @@ declare namespace imports.gi.Gst {
 		public set_controllable(controllable: boolean): boolean;
 		/**
 		 * When #flushing is %TRUE, this function ensures that current and future calls
-		 * to gst_poll_wait() will return -1, with errno set to EBUSY.
+		 * to {@link Gst.Poll.wait} will return -1, with errno set to EBUSY.
 		 * 
 		 * Unsetting the flushing state will restore normal operation of #set.
 		 * 
@@ -13622,7 +13101,7 @@ declare namespace imports.gi.Gst {
 		 * Wait for activity on the file descriptors in #set. This function waits up to
 		 * the specified #timeout.  A timeout of #GST_CLOCK_TIME_NONE waits forever.
 		 * 
-		 * For {@link Poll} objects created with gst_poll_new(), this function can only be
+		 * For {@link Poll} objects created with {@link Gst.poll.new}, this function can only be
 		 * called from a single thread at a time.  If called from multiple threads,
 		 * -1 will be returned with errno set to EPERM.
 		 * 
@@ -13638,7 +13117,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Write a byte to the control socket of the controllable #set.
 		 * This function is mostly useful for timer {@link Poll} objects created with
-		 * gst_poll_new_timer().
+		 * {@link Gst.poll.new_timer}.
 		 * 
 		 * It will make any current and future gst_poll_wait() function return with
 		 * 1, meaning the control socket is set. After an equal amount of calls to
@@ -13699,7 +13178,7 @@ declare namespace imports.gi.Gst {
 	 * As with all Future/Promise-like functionality, there is the concept of the
 	 * producer of the value and the consumer of the value.
 	 * 
-	 * A #GstPromise is created with gst_promise_new() by the consumer and passed
+	 * A #GstPromise is created with {@link Gst.Promise.new} by the consumer and passed
 	 * to the producer to avoid thread safety issues with the change callback.
 	 * A #GstPromise can be replied to with a value (or an error) by the producer
 	 * with gst_promise_reply(). The exact value returned is defined by the API
@@ -13815,22 +13294,9 @@ declare namespace imports.gi.Gst {
 		public info: Structure;
 	}
 
-	export interface ProxyPadClassInitOptions {}
-	interface ProxyPadClass {}
-	class ProxyPadClass {
-		public constructor(options?: Partial<ProxyPadClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface ProxyPadPrivateInitOptions {}
-	interface ProxyPadPrivate {}
-	class ProxyPadPrivate {
-		public constructor(options?: Partial<ProxyPadPrivateInitOptions>);
-	}
-
 	export interface QueryInitOptions {}
 	/**
-	 * Queries can be performed on pads (gst_pad_query()) and elements
+	 * Queries can be performed on pads {@link (gst.pad_query}) and elements
 	 * (gst_element_query()). Please note that some queries might need a running
 	 * pipeline to work.
 	 * 
@@ -13860,7 +13326,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying if #caps are accepted.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param caps a fixed {@link Caps}
 		 * @returns a new {@link Query}
 		 */
@@ -13868,7 +13334,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying the allocation properties.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param caps the negotiated caps
 		 * @param need_pool return a pool
 		 * @returns a new {@link Query}
@@ -13877,7 +13343,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying the bitrate.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @returns a new {@link Query}
 		 */
 		public static new_bitrate(): Query;
@@ -13885,7 +13351,7 @@ declare namespace imports.gi.Gst {
 		 * Constructs a new query object for querying the buffering status of
 		 * a stream.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param format the default {@link Format} for the new query
 		 * @returns a new {@link Query}
 		 */
@@ -13910,7 +13376,7 @@ declare namespace imports.gi.Gst {
 		 * #filter should be returned from the CAPS query. Specifying a filter might
 		 * greatly reduce the amount of processing an element needs to do.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param filter a filter
 		 * @returns a new {@link Query}
 		 */
@@ -13918,13 +13384,13 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying the pipeline-local context.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param context_type Context type to query
 		 * @returns a new {@link Query}
 		 */
 		public static new_context(context_type: string): Query;
 		/**
-		 * Constructs a new convert query object. Use gst_query_unref()
+		 * Constructs a new convert query object. Use {@link Gst.Query.unref}
 		 * when done with it. A convert query is used to ask for a conversion between
 		 * one format and another.
 		 * 
@@ -13936,7 +13402,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public static new_convert(src_format: Format, value: number, dest_format: Format): Query;
 		/**
-		 * Constructs a new custom query object. Use gst_query_unref()
+		 * Constructs a new custom query object. Use {@link Gst.Query.unref}
 		 * when done with it.
 		 * 
 		 * Free-function: gst_query_unref()
@@ -13948,13 +13414,13 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying the drain state.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @returns a new {@link Query}
 		 */
 		public static new_drain(): Query;
 		/**
 		 * Constructs a new stream duration query object to query in the given format.
-		 * Use gst_query_unref() when done with it. A duration query will give the
+		 * Use {@link Gst.Query.unref} when done with it. A duration query will give the
 		 * total length of the stream.
 		 * 
 		 * Free-function: gst_query_unref()
@@ -13966,13 +13432,13 @@ declare namespace imports.gi.Gst {
 		 * Constructs a new query object for querying formats of
 		 * the stream.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @returns a new {@link Query}
 		 */
 		public static new_formats(): Query;
 		/**
 		 * Constructs a new latency query object.
-		 * Use gst_query_unref() when done with it. A latency query is usually performed
+		 * Use {@link Gst.Query.unref} when done with it. A latency query is usually performed
 		 * by sinks to compensate for additional latency introduced by elements in the
 		 * pipeline.
 		 * 
@@ -13981,7 +13447,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public static new_latency(): Query;
 		/**
-		 * Constructs a new query stream position query object. Use gst_query_unref()
+		 * Constructs a new query stream position query object. Use {@link Gst.Query.unref}
 		 * when done with it. A position query is used to query the current position
 		 * of playback in the streams, in some format.
 		 * 
@@ -13993,7 +13459,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Constructs a new query object for querying the scheduling properties.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @returns a new {@link Query}
 		 */
 		public static new_scheduling(): Query;
@@ -14001,13 +13467,13 @@ declare namespace imports.gi.Gst {
 		 * Constructs a new query object for querying seeking properties of
 		 * the stream.
 		 * 
-		 * Free-function: gst_query_unref()
+		 * Free-function: {@link Gst.Query.unref}
 		 * @param format the default {@link Format} for the new query
 		 * @returns a new {@link Query}
 		 */
 		public static new_seeking(format: Format): Query;
 		/**
-		 * Constructs a new segment query object. Use gst_query_unref()
+		 * Constructs a new segment query object. Use {@link Gst.Query.unref}
 		 * when done with it. A segment query is used to discover information about the
 		 * currently configured segment for playback.
 		 * 
@@ -14017,7 +13483,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public static new_segment(format: Format): Query;
 		/**
-		 * Constructs a new query URI query object. Use gst_query_unref()
+		 * Constructs a new query URI query object. Use {@link Gst.Query.unref}
 		 * when done with it. An URI query is used to query the current URI
 		 * that is used by the source or sink.
 		 * 
@@ -14124,7 +13590,7 @@ declare namespace imports.gi.Gst {
 		 * > When checking if upstream supports pull mode, it is usually not
 		 * > enough to just check for GST_PAD_MODE_PULL with this function, you
 		 * > also want to check whether the scheduling flags returned by
-		 * > gst_query_parse_scheduling() have the seeking flag set (meaning
+		 * > {@link Gst.Query.parse_scheduling} have the seeking flag set (meaning
 		 * > random access is supported, not only sequential pulls).
 		 * @param mode the scheduling mode
 		 * @returns %TRUE when #mode is in the list of scheduling modes.
@@ -14155,7 +13621,7 @@ declare namespace imports.gi.Gst {
 		 * whether a pool is needed in #need_pool, if the respective parameters
 		 * are non-%NULL.
 		 * 
-		 * Pool details can be retrieved using gst_query_get_n_allocation_pools() and
+		 * Pool details can be retrieved using {@link Gst.Query.get_n_allocation_pools} and
 		 * gst_query_parse_nth_allocation_pool().
 		 * @returns The {@link Caps}
 		 * 
@@ -14163,7 +13629,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public parse_allocation(): [ caps: Caps | null, need_pool: boolean | null ];
 		/**
-		 * Get the results of a bitrate query. See also gst_query_set_bitrate().
+		 * Get the results of a bitrate query. See also {@link Gst.Query.set_bitrate}.
 		 * @returns The resulting bitrate in bits per second
 		 */
 		public parse_bitrate(): number | null;
@@ -14286,7 +13752,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get the pool parameters in #query.
 		 * 
-		 * Unref #pool with gst_object_unref() when it's not needed any more.
+		 * Unref #pool with {@link Gst.Object.unref} when it's not needed any more.
 		 * @param index index to parse
 		 * @returns the {@link BufferPool}
 		 * 
@@ -14361,7 +13827,7 @@ declare namespace imports.gi.Gst {
 		 * Parse a segment query answer. Any of #rate, #format, #start_value, and
 		 * #stop_value may be %NULL, which will cause this value to be omitted.
 		 * 
-		 * See gst_query_set_segment() for an explanation of the function arguments.
+		 * See {@link Gst.Query.set_segment} for an explanation of the function arguments.
 		 * @returns the storage for the rate of the segment, or %NULL
 		 * 
 		 * the storage for the {@link Format} of the values,
@@ -14375,7 +13841,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Parse an URI query, writing the URI into #uri as a newly
 		 * allocated string, if the respective parameters are non-%NULL.
-		 * Free the string with g_free() after usage.
+		 * Free the string with {@link G.free} after usage.
 		 * @returns the storage for the current URI
 		 *     (may be %NULL)
 		 */
@@ -14383,7 +13849,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Parse an URI query, writing the URI into #uri as a newly
 		 * allocated string, if the respective parameters are non-%NULL.
-		 * Free the string with g_free() after usage.
+		 * Free the string with {@link G.free} after usage.
 		 * @returns the storage for the redirect URI
 		 *     (may be %NULL)
 		 */
@@ -14606,18 +14072,6 @@ declare namespace imports.gi.Gst {
 		public duration: ClockTime;
 	}
 
-	export interface RegistryClassInitOptions {}
-	interface RegistryClass {}
-	class RegistryClass {
-		public constructor(options?: Partial<RegistryClassInitOptions>);
-	}
-
-	export interface RegistryPrivateInitOptions {}
-	interface RegistryPrivate {}
-	class RegistryPrivate {
-		public constructor(options?: Partial<RegistryPrivateInitOptions>);
-	}
-
 	export interface SampleInitOptions {}
 	/**
 	 * A {@link Sample} is a small object containing data, a type, timing and
@@ -14634,7 +14088,7 @@ declare namespace imports.gi.Gst {
 		 * @param caps a {@link Caps}, or %NULL
 		 * @param segment a {@link Segment}, or %NULL
 		 * @param info a {@link Structure}, or %NULL
-		 * @returns the new {@link Sample}. gst_sample_unref()
+		 * @returns the new {@link Sample}. {@link Gst.Sample.unref}
 		 *     after usage.
 		 */
 		public static new(buffer: Buffer | null, caps: Caps | null, segment: Segment | null, info: Structure | null): Sample;
@@ -14643,7 +14097,7 @@ declare namespace imports.gi.Gst {
 		 * @returns the buffer of #sample or %NULL
 		 *  when there is no buffer. The buffer remains valid as long as
 		 *  #sample is valid.  If you need to hold on to it for longer than
-		 *  that, take a ref to the buffer with gst_buffer_ref().
+		 *  that, take a ref to the buffer with {@link Gst.Buffer.ref}.
 		 */
 		public get_buffer(): Buffer | null;
 		/**
@@ -14659,7 +14113,7 @@ declare namespace imports.gi.Gst {
 		 * @returns the caps of #sample or %NULL
 		 *  when there is no caps. The caps remain valid as long as #sample is
 		 *  valid.  If you need to hold on to the caps for longer than that,
-		 *  take a ref to the caps with gst_caps_ref().
+		 *  take a ref to the caps with {@link Gst.Caps.ref}.
 		 */
 		public get_caps(): Caps | null;
 		/**
@@ -14719,7 +14173,7 @@ declare namespace imports.gi.Gst {
 	 * The configured segment is then propagated back downstream with a newsegment event.
 	 * This information is then used to clip media to the segment boundaries.
 	 * 
-	 * A segment structure is initialized with gst_segment_init(), which takes a {@link Format}
+	 * A segment structure is initialized with {@link Gst.Segment.init}, which takes a {@link Format}
 	 * that will be used as the format of the segment values. The segment will be configured
 	 * with a start value of 0 and a stop/duration of -1, which is undefined. The default
 	 * rate and applied_rate is 1.0.
@@ -14757,10 +14211,10 @@ declare namespace imports.gi.Gst {
 		public constructor(options?: Partial<SegmentInitOptions>);
 		/**
 		 * Allocate a new {@link Segment} structure and initialize it using
-		 * gst_segment_init().
+		 * {@link Gst.Segment.init}.
 		 * 
 		 * Free-function: gst_segment_free
-		 * @returns a new {@link Segment}, free with gst_segment_free().
+		 * @returns a new {@link Segment}, free with {@link Gst.Segment.free}.
 		 */
 		public static new(): Segment;
 		/**
@@ -14885,7 +14339,7 @@ declare namespace imports.gi.Gst {
 		 * Create a copy of given #segment.
 		 * 
 		 * Free-function: gst_segment_free
-		 * @returns a new {@link Segment}, free with gst_segment_free().
+		 * @returns a new {@link Segment}, free with {@link Gst.Segment.free}.
 		 */
 		public copy(): Segment;
 		/**
@@ -14895,7 +14349,7 @@ declare namespace imports.gi.Gst {
 		public copy_into(dest: Segment): void;
 		/**
 		 * Update the segment structure with the field values of a seek event (see
-		 * gst_event_new_seek()).
+		 * {@link Gst.Event.new_seek}).
 		 * 
 		 * After calling this method, the segment field position and time will
 		 * contain the requested new position in the segment. The new requested
@@ -14964,7 +14418,7 @@ declare namespace imports.gi.Gst {
 		public offset_running_time(format: Format, offset: number): boolean;
 		/**
 		 * Convert #running_time into a position in the segment so that
-		 * gst_segment_to_running_time() with that position returns #running_time.
+		 * {@link Gst.Segment.to_running_time} with that position returns #running_time.
 		 * @param format the format of the segment.
 		 * @param running_time the running_time in the segment
 		 * @returns the position in the segment for #running_time. This function returns
@@ -14973,7 +14427,7 @@ declare namespace imports.gi.Gst {
 		public position_from_running_time(format: Format, running_time: number): number;
 		/**
 		 * Translate #running_time to the segment position using the currently configured
-		 * segment. Compared to gst_segment_position_from_running_time() this function can
+		 * segment. Compared to {@link Gst.Segment.position_from_running_time} this function can
 		 * return negative segment position.
 		 * 
 		 * This function is typically used by elements that need to synchronize buffers
@@ -14997,7 +14451,7 @@ declare namespace imports.gi.Gst {
 		public position_from_running_time_full(format: Format, running_time: number): [ number, number ];
 		/**
 		 * Convert #stream_time into a position in the segment so that
-		 * gst_segment_to_stream_time() with that position returns #stream_time.
+		 * {@link Gst.Segment.to_stream_time} with that position returns #stream_time.
 		 * @param format the format of the segment.
 		 * @param stream_time the stream_time in the segment
 		 * @returns the position in the segment for #stream_time. This function returns
@@ -15006,7 +14460,7 @@ declare namespace imports.gi.Gst {
 		public position_from_stream_time(format: Format, stream_time: number): number;
 		/**
 		 * Translate #stream_time to the segment position using the currently configured
-		 * segment. Compared to gst_segment_position_from_stream_time() this function can
+		 * segment. Compared to {@link Gst.Segment.position_from_stream_time} this function can
 		 * return negative segment position.
 		 * 
 		 * This function is typically used by elements that need to synchronize buffers
@@ -15038,10 +14492,10 @@ declare namespace imports.gi.Gst {
 		public set_running_time(format: Format, running_time: number): boolean;
 		/**
 		 * @deprecated
-		 * Use gst_segment_position_from_running_time() instead.
+		 * Use {@link Gst.Segment.position_from_running_time} instead.
 		 * 
 		 * Convert #running_time into a position in the segment so that
-		 * gst_segment_to_running_time() with that position returns #running_time.
+		 * {@link Gst.Segment.to_running_time} with that position returns #running_time.
 		 * @param format the format of the segment.
 		 * @param running_time the running_time in the segment
 		 * @returns the position in the segment for #running_time. This function returns
@@ -15054,7 +14508,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * This function is typically used by elements that need to synchronize to the
 		 * global clock in a pipeline. The running time is a constantly increasing value
-		 * starting from 0. When gst_segment_init() is called, this value will reset to
+		 * starting from 0. When {@link Gst.Segment.init} is called, this value will reset to
 		 * 0.
 		 * 
 		 * This function returns -1 if the position is outside of #segment start and stop.
@@ -15066,7 +14520,7 @@ declare namespace imports.gi.Gst {
 		public to_running_time(format: Format, position: number): number;
 		/**
 		 * Translate #position to the total running time using the currently configured
-		 * segment. Compared to gst_segment_to_running_time() this function can return
+		 * segment. Compared to {@link Gst.Segment.to_running_time} this function can return
 		 * negative running-time.
 		 * 
 		 * This function is typically used by elements that need to synchronize buffers
@@ -15106,7 +14560,7 @@ declare namespace imports.gi.Gst {
 		public to_stream_time(format: Format, position: number): number;
 		/**
 		 * Translate #position to the total stream time using the currently configured
-		 * segment. Compared to gst_segment_to_stream_time() this function can return
+		 * segment. Compared to {@link Gst.Segment.to_stream_time} this function can return
 		 * negative stream-time.
 		 * 
 		 * This function is typically used by elements that need to synchronize buffers
@@ -15132,7 +14586,7 @@ declare namespace imports.gi.Gst {
 	export interface StaticCapsInitOptions {}
 	/**
 	 * Datastructure to initialize {@link Caps} from a string description usually
-	 * used in conjunction with GST_STATIC_CAPS() and gst_static_caps_get() to
+	 * used in conjunction with {@link GST.STATIC_CAPS} and gst_static_caps_get() to
 	 * instantiate a #GstCaps.
 	 */
 	interface StaticCaps {}
@@ -15155,7 +14609,7 @@ declare namespace imports.gi.Gst {
 		 * Converts a {@link StaticCaps} to a #GstCaps.
 		 * @returns a pointer to the {@link Caps}. Unref
 		 *     after usage. Since the core holds an additional ref to the
-		 *     returned caps, use gst_caps_make_writable() on the returned caps
+		 *     returned caps, use {@link Gst.Caps.make_writable} on the returned caps
 		 *     to modify it.
 		 */
 		public get(): Caps | null;
@@ -15193,43 +14647,10 @@ declare namespace imports.gi.Gst {
 		 * Gets the capabilities of the static pad template.
 		 * @returns the {@link Caps} of the static pad template.
 		 * Unref after usage. Since the core holds an additional
-		 * ref to the returned caps, use gst_caps_make_writable()
+		 * ref to the returned caps, use {@link Gst.Caps.make_writable}
 		 * on the returned caps to modify it.
 		 */
 		public get_caps(): Caps;
-	}
-
-	export interface StreamClassInitOptions {}
-	/**
-	 * GstStream class structure
-	 */
-	interface StreamClass {}
-	class StreamClass {
-		public constructor(options?: Partial<StreamClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface StreamCollectionClassInitOptions {}
-	/**
-	 * GstStreamCollection class structure
-	 */
-	interface StreamCollectionClass {}
-	class StreamCollectionClass {
-		public constructor(options?: Partial<StreamCollectionClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public stream_notify: {(collection: StreamCollection, stream: Stream, pspec: GObject.ParamSpec): void;};
-	}
-
-	export interface StreamCollectionPrivateInitOptions {}
-	interface StreamCollectionPrivate {}
-	class StreamCollectionPrivate {
-		public constructor(options?: Partial<StreamCollectionPrivateInitOptions>);
-	}
-
-	export interface StreamPrivateInitOptions {}
-	interface StreamPrivate {}
-	class StreamPrivate {
-		public constructor(options?: Partial<StreamPrivateInitOptions>);
 	}
 
 	export interface StructureInitOptions {}
@@ -15245,7 +14666,7 @@ declare namespace imports.gi.Gst {
 	 * a flexible and extensible way. A #GstStructure does not have a refcount
 	 * because it usually is part of a higher level object such as #GstCaps,
 	 * #GstMessage, #GstEvent, #GstQuery. It provides a means to enforce mutability
-	 * using the refcount of the parent with the gst_structure_set_parent_refcount()
+	 * using the refcount of the parent with the {@link Gst.Structure.set_parent_refcount}
 	 * method.
 	 * 
 	 * A #GstStructure can be created with gst_structure_new_empty() or
@@ -15346,7 +14767,7 @@ declare namespace imports.gi.Gst {
 		 * @param string a string representation of a {@link Structure}.
 		 * @returns a new {@link Structure} or %NULL
 		 *     when the string could not be parsed. Free with
-		 *     gst_structure_free() after use.
+		 *     {@link Gst.Structure.free} after use.
 		 * 
 		 * pointer to store the end of the string in.
 		 */
@@ -15366,7 +14787,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Creates a new, empty {@link Structure} with the given #name.
 		 * 
-		 * See gst_structure_set_name() for constraints on the #name parameter.
+		 * See {@link Gst.Structure.set_name} for constraints on the #name parameter.
 		 * 
 		 * Free-function: gst_structure_free
 		 * @param name name of new structure
@@ -15385,13 +14806,13 @@ declare namespace imports.gi.Gst {
 		 * @param string a string representation of a {@link Structure}
 		 * @returns a new {@link Structure} or %NULL
 		 *     when the string could not be parsed. Free with
-		 *     gst_structure_free() after use.
+		 *     {@link Gst.Structure.free} after use.
 		 */
 		public static new_from_string(string: string): Structure | null;
 		/**
 		 * Creates a new {@link Structure} with the given name as a GQuark, followed by
 		 * fieldname quark, GType, argument(s) "triplets" in the same format as
-		 * gst_structure_id_set(). Basically a convenience wrapper around
+		 * {@link Gst.Structure.id_set}. Basically a convenience wrapper around
 		 * gst_structure_new_id_empty() and gst_structure_id_set().
 		 * 
 		 * The last variable argument must be %NULL (or 0).
@@ -15413,7 +14834,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Creates a new {@link Structure} with the given #name.  Structure fields
 		 * are set according to the varargs in a manner similar to
-		 * gst_structure_new().
+		 * {@link Gst.Structure.new}.
 		 * 
 		 * See gst_structure_set_name() for constraints on the #name parameter.
 		 * 
@@ -15445,7 +14866,7 @@ declare namespace imports.gi.Gst {
 		public copy(): Structure;
 		/**
 		 * Calls the provided function once for each field in the {@link Structure}. In
-		 * contrast to gst_structure_foreach(), the function may modify the fields.
+		 * contrast to {@link Gst.Structure.foreach}, the function may modify the fields.
 		 * In contrast to gst_structure_map_in_place(), the field is removed from
 		 * the structure if %FALSE is returned from the function.
 		 * The structure must be mutable.
@@ -15453,7 +14874,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public filter_and_map_in_place(func: StructureFilterMapFunc): void;
 		/**
-		 * Fixate all values in #structure using gst_value_fixate().
+		 * Fixate all values in #structure using {@link Gst.value.fixate}.
 		 * #structure will be modified in-place and should be writable.
 		 */
 		public fixate(): void;
@@ -15507,7 +14928,7 @@ declare namespace imports.gi.Gst {
 		public fixate_field_string(field_name: string, target: string): boolean;
 		/**
 		 * Calls the provided function once for each field in the {@link Structure}. The
-		 * function must not modify the fields. Also see gst_structure_map_in_place()
+		 * function must not modify the fields. Also see {@link Gst.Structure.map_in_place}
 		 * and gst_structure_filter_and_map_in_place().
 		 * @param func a function to call for each field
 		 * @returns %TRUE if the supplied function returns %TRUE For each of the fields,
@@ -15526,7 +14947,7 @@ declare namespace imports.gi.Gst {
 		 * The last variable argument should be %NULL.
 		 * 
 		 * For refcounted (mini)objects you will receive a new reference which
-		 * you must release with a suitable _unref\() when no longer needed. For
+		 * you must release with a suitable {@link .unref\} when no longer needed. For
 		 * strings and boxed types you will receive a copy which you will need to
 		 * release with either g_free() or the suitable function for the boxed type.
 		 * @param first_fieldname the name of the first field to read
@@ -15578,7 +14999,7 @@ declare namespace imports.gi.Gst {
 		 * and has the correct type.
 		 * 
 		 * On success #value will point to a newly-allocated copy of the date which
-		 * should be freed with g_date_free() when no longer needed (note: this is
+		 * should be freed with {@link G.date_free} when no longer needed (note: this is
 		 * inconsistent with e.g. gst_structure_get_string() which doesn't return a
 		 * copy of the string).
 		 * @param fieldname the name of a field
@@ -15595,7 +15016,7 @@ declare namespace imports.gi.Gst {
 		 * and has the correct type.
 		 * 
 		 * On success #value will point to a reference of the datetime which
-		 * should be unreffed with gst_date_time_unref() when no longer needed
+		 * should be unreffed with {@link Gst.DateTime.unref} when no longer needed
 		 * (note: this is inconsistent with e.g. gst_structure_get_string()
 		 * which doesn't return a copy of the string).
 		 * @param fieldname the name of a field
@@ -15719,7 +15140,7 @@ declare namespace imports.gi.Gst {
 		 * sure the field exists and has the correct type.
 		 * 
 		 * The string should not be modified, and remains valid until the next
-		 * call to a gst_structure_*() function with the given structure.
+		 * call to a {@link Gst.Structure.*} function with the given structure.
 		 * @param fieldname the name of a field
 		 * @returns a pointer to the string or %NULL when the
 		 * field did not exist or did not contain a string.
@@ -15751,7 +15172,7 @@ declare namespace imports.gi.Gst {
 		public get_uint64(fieldname: string): [ boolean, number ];
 		/**
 		 * Parses the variable arguments and reads fields from #structure accordingly.
-		 * valist-variant of gst_structure_get(). Look at the documentation of
+		 * valist-variant of {@link Gst.Structure.get}. Look at the documentation of
 		 * gst_structure_get() for more details.
 		 * @param first_fieldname the name of the first field to read
 		 * @param args variable arguments
@@ -15792,7 +15213,7 @@ declare namespace imports.gi.Gst {
 		 * 0 quark, but we require %NULL so compilers that support it can check for
 		 * the %NULL terminator and warn if it's not there).
 		 * 
-		 * This function is just like gst_structure_get() only that it is slightly
+		 * This function is just like {@link Gst.Structure.get} only that it is slightly
 		 * more efficient since it saves the string-to-quark lookup in the global
 		 * quark hashtable.
 		 * 
@@ -15808,7 +15229,7 @@ declare namespace imports.gi.Gst {
 		public id_get(first_field_id: GLib.Quark): boolean;
 		/**
 		 * Parses the variable arguments and reads fields from #structure accordingly.
-		 * valist-variant of gst_structure_id_get(). Look at the documentation of
+		 * valist-variant of {@link Gst.Structure.id_get}. Look at the documentation of
 		 * gst_structure_id_get() for more details.
 		 * @param first_field_id the quark of the first field to read
 		 * @param args variable arguments
@@ -15845,7 +15266,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public id_set(fieldname: GLib.Quark): void;
 		/**
-		 * va_list form of gst_structure_id_set().
+		 * va_list form of {@link Gst.Structure.id_set}.
 		 * @param fieldname the name of the field to set
 		 * @param varargs variable arguments
 		 */
@@ -15888,7 +15309,7 @@ declare namespace imports.gi.Gst {
 		public is_subset(superset: Structure): boolean;
 		/**
 		 * Calls the provided function once for each field in the {@link Structure}. In
-		 * contrast to gst_structure_foreach(), the function may modify but not delete the
+		 * contrast to {@link Gst.Structure.foreach}, the function may modify but not delete the
 		 * fields. The structure must be mutable.
 		 * @param func a function to call for each field
 		 * @returns %TRUE if the supplied function returns %TRUE For each of the fields,
@@ -15923,7 +15344,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public remove_fields(fieldname: string): void;
 		/**
-		 * va_list form of gst_structure_remove_fields().
+		 * va_list form of {@link Gst.Structure.remove_fields}.
 		 * @param fieldname the name of the field to remove
 		 * @param varargs %NULL-terminated list of more fieldnames to remove
 		 */
@@ -15971,7 +15392,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public set_parent_refcount(refcount: number): boolean;
 		/**
-		 * va_list form of gst_structure_set().
+		 * va_list form of {@link Gst.Structure.set}.
 		 * @param fieldname the name of the field to set
 		 * @param varargs variable arguments
 		 */
@@ -16005,23 +15426,10 @@ declare namespace imports.gi.Gst {
 		 * when there are nested {@link Caps} / #GstStructure deeper than one level.
 		 * 
 		 * Free-function: g_free
-		 * @returns a pointer to string allocated by g_malloc().
+		 * @returns a pointer to string allocated by {@link G.malloc}.
 		 *     g_free() after usage.
 		 */
 		public to_string(): string;
-	}
-
-	export interface SystemClockClassInitOptions {}
-	interface SystemClockClass {}
-	class SystemClockClass {
-		public constructor(options?: Partial<SystemClockClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface SystemClockPrivateInitOptions {}
-	interface SystemClockPrivate {}
-	class SystemClockPrivate {
-		public constructor(options?: Partial<SystemClockPrivateInitOptions>);
 	}
 
 	export interface TagListInitOptions {}
@@ -16036,7 +15444,7 @@ declare namespace imports.gi.Gst {
 		public constructor(options?: Partial<TagListInitOptions>);
 		/**
 		 * Creates a new taglist and appends the values for the given tags. It expects
-		 * tag-value pairs like gst_tag_list_add(), and a %NULL terminator after the
+		 * tag-value pairs like {@link Gst.TagList.add}, and a %NULL terminator after the
 		 * last pair. The type of the values is implicit and is documented in the API
 		 * reference, but can also be queried at runtime with gst_tag_get_type(). It
 		 * is an error to pass a value of a type not matching the tag type into this
@@ -16049,7 +15457,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * Free-function: gst_tag_list_unref
 		 * @param tag tag
-		 * @returns a new {@link TagList}. Free with gst_tag_list_unref()
+		 * @returns a new {@link TagList}. Free with {@link Gst.TagList.unref}
 		 *     when no longer needed.
 		 */
 		public static new(tag: string): TagList;
@@ -16062,18 +15470,18 @@ declare namespace imports.gi.Gst {
 		public static new_empty(): TagList;
 		/**
 		 * Deserializes a tag list.
-		 * @param str a string created with gst_tag_list_to_string()
+		 * @param str a string created with {@link Gst.TagList.to_string}
 		 * @returns a new {@link TagList}, or %NULL in case of an
 		 * error.
 		 */
 		public static new_from_string(str: string): TagList | null;
 		/**
-		 * Just like gst_tag_list_new(), only that it takes a va_list argument.
+		 * Just like {@link Gst.TagList.new}, only that it takes a va_list argument.
 		 * Useful mostly for language bindings.
 		 * 
 		 * Free-function: gst_tag_list_unref
 		 * @param var_args tag / value pairs to set
-		 * @returns a new {@link TagList}. Free with gst_tag_list_unref()
+		 * @returns a new {@link TagList}. Free with {@link Gst.TagList.unref}
 		 *     when no longer needed.
 		 */
 		public static new_valist(var_args: any[]): TagList;
@@ -16119,7 +15527,7 @@ declare namespace imports.gi.Gst {
 		 * will have a refcount of 1, owned by the caller, and will be writable as
 		 * a result.
 		 * 
-		 * Note that this function is the semantic equivalent of a gst_tag_list_ref()
+		 * Note that this function is the semantic equivalent of a {@link Gst.TagList.ref}
 		 * followed by a gst_tag_list_make_writable(). If you only want to hold on to a
 		 * reference to the data, you should use gst_tag_list_ref().
 		 * 
@@ -16156,7 +15564,7 @@ declare namespace imports.gi.Gst {
 		public get_boolean_index(tag: string, index: number): [ boolean, boolean ];
 		/**
 		 * Copies the first date for the given tag in the taglist into the variable
-		 * pointed to by #value. Free the date with g_date_free() when it is no longer
+		 * pointed to by #value. Free the date with {@link G.date_free} when it is no longer
 		 * needed.
 		 * 
 		 * Free-function: g_date_free
@@ -16171,7 +15579,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the date that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #value. Free the date
-		 * with g_date_free() when it is no longer needed.
+		 * with {@link G.date_free} when it is no longer needed.
 		 * 
 		 * Free-function: g_date_free
 		 * @param tag tag to read out
@@ -16184,7 +15592,7 @@ declare namespace imports.gi.Gst {
 		public get_date_index(tag: string, index: number): [ boolean, GLib.Date ];
 		/**
 		 * Copies the first datetime for the given tag in the taglist into the variable
-		 * pointed to by #value. Unref the date with gst_date_time_unref() when
+		 * pointed to by #value. Unref the date with {@link Gst.DateTime.unref} when
 		 * it is no longer needed.
 		 * 
 		 * Free-function: gst_date_time_unref
@@ -16199,7 +15607,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the datetime that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #value. Unref the datetime
-		 * with gst_date_time_unref() when it is no longer needed.
+		 * with {@link Gst.DateTime.unref} when it is no longer needed.
 		 * 
 		 * Free-function: gst_date_time_unref
 		 * @param tag tag to read out
@@ -16317,7 +15725,7 @@ declare namespace imports.gi.Gst {
 		public get_pointer_index(tag: string, index: number): [ boolean, any | null ];
 		/**
 		 * Copies the first sample for the given tag in the taglist into the variable
-		 * pointed to by #sample. Free the sample with gst_sample_unref() when it is
+		 * pointed to by #sample. Free the sample with {@link Gst.Sample.unref} when it is
 		 * no longer needed. You can retrieve the buffer from the sample using
 		 * gst_sample_get_buffer() and the associated caps (if any) with
 		 * gst_sample_get_caps().
@@ -16334,7 +15742,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Gets the sample that is at the given index for the given tag in the given
 		 * list and copies it into the variable pointed to by #sample. Free the sample
-		 * with gst_sample_unref() when it is no longer needed. You can retrieve the
+		 * with {@link Gst.Sample.unref} when it is no longer needed. You can retrieve the
 		 * buffer from the sample using gst_sample_get_buffer() and the associated
 		 * caps (if any) with gst_sample_get_caps().
 		 * 
@@ -16514,7 +15922,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Serializes a tag list to a string.
 		 * @returns a newly-allocated string, or %NULL in case of
-		 *     an error. The string must be freed with g_free() when no longer
+		 *     an error. The string must be freed with {@link G.free} when no longer
 		 *     needed.
 		 */
 		public to_string(): string | null;
@@ -16531,34 +15939,6 @@ declare namespace imports.gi.Gst {
 		 * parent interface type.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-	}
-
-	export interface TaskClassInitOptions {}
-	interface TaskClass {}
-	class TaskClass {
-		public constructor(options?: Partial<TaskClassInitOptions>);
-		public readonly pool: TaskPool;
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface TaskPoolClassInitOptions {}
-	/**
-	 * The {@link TaskPoolClass} object.
-	 */
-	interface TaskPoolClass {}
-	class TaskPoolClass {
-		public constructor(options?: Partial<TaskPoolClassInitOptions>);
-		public readonly _gst_reserved: any[];
-		public prepare: {(pool: TaskPool): void;};
-		public cleanup: {(pool: TaskPool): void;};
-		public push: {(pool: TaskPool, func: TaskPoolFunction): any | null;};
-		public join: {(pool: TaskPool, id: any | null): void;};
-	}
-
-	export interface TaskPrivateInitOptions {}
-	interface TaskPrivate {}
-	class TaskPrivate {
-		public constructor(options?: Partial<TaskPrivateInitOptions>);
 	}
 
 	export interface TimedValueInitOptions {}
@@ -16592,7 +15972,7 @@ declare namespace imports.gi.Gst {
 	 * Using TOC is very easy. Firstly, create #GstToc structure which represents root
 	 * contents of the source. You can also attach TOC-specific tags to it. Then fill
 	 * it with #GstTocEntry entries by appending them to the #GstToc using
-	 * gst_toc_append_entry(), and appending subentries to a #GstTocEntry using
+	 * {@link Gst.Toc.append_entry}, and appending subentries to a #GstTocEntry using
 	 * gst_toc_entry_append_sub_entry().
 	 * 
 	 * Note that root level of the TOC can contain only either editions or chapters. You
@@ -16633,7 +16013,7 @@ declare namespace imports.gi.Gst {
 		 * Create a new {@link Toc} structure.
 		 * @param scope scope of this TOC
 		 * @returns newly allocated {@link Toc} structure, free it
-		 *     with gst_toc_unref().
+		 *     with {@link Gst.Toc.unref}.
 		 */
 		public static new(scope: TocScope): Toc;
 		/**
@@ -16681,7 +16061,7 @@ declare namespace imports.gi.Gst {
 		 * Create new {@link TocEntry} structure.
 		 * @param type entry type.
 		 * @param uid unique ID (UID) in the whole TOC.
-		 * @returns newly allocated {@link TocEntry} structure, free it with gst_toc_entry_unref().
+		 * @returns newly allocated {@link TocEntry} structure, free it with {@link Gst.TocEntry.unref}.
 		 */
 		public static new(type: TocEntryType, uid: string): TocEntry;
 		/**
@@ -16783,31 +16163,6 @@ declare namespace imports.gi.Gst {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface TracerClassInitOptions {}
-	interface TracerClass {}
-	class TracerClass {
-		public constructor(options?: Partial<TracerClassInitOptions>);
-		public readonly _gst_reserved: any[];
-	}
-
-	export interface TracerFactoryClassInitOptions {}
-	interface TracerFactoryClass {}
-	class TracerFactoryClass {
-		public constructor(options?: Partial<TracerFactoryClassInitOptions>);
-	}
-
-	export interface TracerPrivateInitOptions {}
-	interface TracerPrivate {}
-	class TracerPrivate {
-		public constructor(options?: Partial<TracerPrivateInitOptions>);
-	}
-
-	export interface TracerRecordClassInitOptions {}
-	interface TracerRecordClass {}
-	class TracerRecordClass {
-		public constructor(options?: Partial<TracerRecordClassInitOptions>);
-	}
-
 	export interface TypeFindInitOptions {}
 	/**
 	 * The following functions allow you to detect the media type of an unknown
@@ -16857,7 +16212,7 @@ declare namespace imports.gi.Gst {
 		 * in one call. It is up to the caller of the #GstTypeFindFunction to interpret
 		 * these values.
 		 * 
-		 * This function is similar to gst_type_find_suggest(), only that instead of
+		 * This function is similar to {@link Gst.TypeFind.suggest}, only that instead of
 		 * passing a #GstCaps argument you can create the caps on the fly in the same
 		 * way as you can with gst_caps_new_simple().
 		 * 
@@ -16870,12 +16225,6 @@ declare namespace imports.gi.Gst {
 		 * @param fieldname first field of the suggested caps, or %NULL
 		 */
 		public suggest_simple(probability: number, media_type: string, fieldname: string | null): void;
-	}
-
-	export interface TypeFindFactoryClassInitOptions {}
-	interface TypeFindFactoryClass {}
-	class TypeFindFactoryClass {
-		public constructor(options?: Partial<TypeFindFactoryClassInitOptions>);
 	}
 
 	export interface URIHandlerInterfaceInitOptions {}
@@ -16919,7 +16268,7 @@ declare namespace imports.gi.Gst {
 		public static new(scheme: string | null, userinfo: string | null, host: string | null, port: number, path: string | null, query: string | null, fragment: string | null): Uri;
 		/**
 		 * Append a path onto the end of the path in the URI. The path is not
-		 * normalized, call #gst_uri_normalize() to normalize the path.
+		 * normalized, call {@link #gst.uri_normalize} to normalize the path.
 		 * @param relative_path Relative path to append to the end of the current path.
 		 * @returns %TRUE if the path was appended successfully.
 		 */
@@ -16938,7 +16287,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public equal(second: Uri): boolean;
 		/**
-		 * Like gst_uri_from_string() but also joins with a base URI.
+		 * Like {@link Gst.uri.from_string} but also joins with a base URI.
 		 * @param uri The URI string to parse.
 		 * @returns A new {@link Uri} object.
 		 */
@@ -16963,7 +16312,7 @@ declare namespace imports.gi.Gst {
 		 * be undefined keyword by standard.
 		 * A value may be %NULL to indicate that the key should appear in the fragment
 		 * string in the URI, but does not have a value. Free the returned #GHashTable
-		 * with #g_hash_table_unref() when it is no longer required.
+		 * with {@link #g.hash_table_unref} when it is no longer required.
 		 * Modifying this hash table does not affect the fragment in the URI.
 		 * 
 		 * See more about Media Fragments URI 1.0 (W3C) at https://www.w3.org/TR/media-frags/
@@ -16974,7 +16323,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Extract the path string from the URI object.
 		 * @returns The path from the URI. Once finished
-		 *                                      with the string should be g_free()'d.
+		 *                                      with the string should be {@link G.free}'d.
 		 */
 		public get_path(): string | null;
 		/**
@@ -16987,7 +16336,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Extract the path string from the URI object as a percent encoded URI path.
 		 * @returns The path from the URI. Once finished
-		 *                                      with the string should be g_free()'d.
+		 *                                      with the string should be {@link G.free}'d.
 		 */
 		public get_path_string(): string | null;
 		/**
@@ -16999,20 +16348,20 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get a list of the query keys from the URI.
 		 * @returns A list of keys from
-		 *          the URI query. Free the list with g_list_free().
+		 *          the URI query. Free the list with {@link G.list_free}.
 		 */
 		public get_query_keys(): GLib.List;
 		/**
 		 * Get a percent encoded URI query string from the #uri.
 		 * @returns A percent encoded query string. Use
-		 *                                      g_free() when no longer needed.
+		 *                                      {@link G.free} when no longer needed.
 		 */
 		public get_query_string(): string | null;
 		/**
 		 * Get the query table from the URI. Keys and values in the table are freed
 		 * with g_free when they are deleted. A value may be %NULL to indicate that
 		 * the key should appear in the query string in the URI, but does not have a
-		 * value. Free the returned #GHashTable with #g_hash_table_unref() when it is
+		 * value. Free the returned #GHashTable with {@link #g.hash_table_unref} when it is
 		 * no longer required. Modifying this hash table will modify the query in the
 		 * URI.
 		 * @returns The query
@@ -17023,7 +16372,7 @@ declare namespace imports.gi.Gst {
 		 * Get the value associated with the #query_key key. Will return %NULL if the
 		 * key has no value or if the key does not exist in the URI query table. Because
 		 * %NULL is returned for both missing keys and keys with no value, you should
-		 * use gst_uri_query_has_key() to determine if a key is present in the URI
+		 * use {@link Gst.Uri.query_has_key} to determine if a key is present in the URI
 		 * query.
 		 * @param query_key The key to lookup.
 		 * @returns The value for the given key, or %NULL if not found.
@@ -17079,7 +16428,7 @@ declare namespace imports.gi.Gst {
 		 */
 		public make_writable(): Uri;
 		/**
-		 * Like gst_uri_new(), but joins the new URI onto a base URI.
+		 * Like {@link Gst.Uri.new}, but joins the new URI onto a base URI.
 		 * @param scheme The scheme for the new URI.
 		 * @param userinfo The user-info for the new URI.
 		 * @param host The host name for the new URI.
@@ -17098,7 +16447,7 @@ declare namespace imports.gi.Gst {
 		 * will also convert the scheme and host name to lower case and any
 		 * percent-encoded values to uppercase.
 		 * 
-		 * The {@link Uri} object must be writable. Check with gst_uri_is_writable() or use
+		 * The {@link Uri} object must be writable. Check with {@link Gst.Uri.is_writable} or use
 		 * gst_uri_make_writable() first.
 		 * @returns TRUE if the URI was modified.
 		 */
@@ -17196,7 +16545,7 @@ declare namespace imports.gi.Gst {
 		 * Convert the URI to a string.
 		 * 
 		 * Returns the URI as held in this object as a #gchar* nul-terminated string.
-		 * The caller should g_free() the string once they are finished with it.
+		 * The caller should {@link G.free} the string once they are finished with it.
 		 * The string is put together as described in RFC 3986.
 		 * @returns The string version of the URI.
 		 */
@@ -17263,7 +16612,7 @@ declare namespace imports.gi.Gst {
 		 * Looks up a child element by the given name.
 		 * 
 		 * This virtual method has a default implementation that uses {@link Object}
-		 * together with gst_object_get_name(). If the interface is to be used with
+		 * together with {@link Gst.Object.get_name}. If the interface is to be used with
 		 * #GObjects, this methods needs to be overridden.
 		 * @param name the child's name
 		 * @returns the child object or %NULL if
@@ -17281,7 +16630,7 @@ declare namespace imports.gi.Gst {
 		get_children_count(): number;
 		/**
 		 * Gets a single property using the GstChildProxy mechanism.
-		 * You are responsible for freeing it by calling g_value_unset()
+		 * You are responsible for freeing it by calling {@link G.value_unset}
 		 * @param name name of the property
 		 * @returns a #GValue that should take the result.
 		 */
@@ -17367,7 +16716,7 @@ declare namespace imports.gi.Gst {
 	 * objects.
 	 * 
 	 * By implementing this interface the child properties can be accessed from the
-	 * parent element by using gst_child_proxy_get() and gst_child_proxy_set().
+	 * parent element by using {@link Gst.ChildProxy.get} and gst_child_proxy_set().
 	 * 
 	 * Property names are written as "child-name::property-name". The whole naming
 	 * scheme is recursive. Thus "child1::child2::property" is valid too, if
@@ -17405,13 +16754,13 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Get a copy of preset names as a %NULL terminated string array.
 		 * @returns 
-		 *     list with names, use g_strfreev() after usage.
+		 *     list with names, use {@link G.strfreev} after usage.
 		 */
 		get_preset_names(): string[];
 		/**
 		 * Get a the names of the GObject properties that can be used for presets.
 		 * @returns an
-		 *   array of property names which should be freed with g_strfreev() after use.
+		 *   array of property names which should be freed with {@link G.strfreev} after use.
 		 */
 		get_property_names(): string[];
 		/**
@@ -17471,7 +16820,7 @@ declare namespace imports.gi.Gst {
 	 * The interface comes with a default implementation that serves most plugins.
 	 * Wrapper plugins will override most methods to implement support for the
 	 * native preset format of those wrapped plugins.
-	 * One method that is useful to be overridden is gst_preset_get_property_names().
+	 * One method that is useful to be overridden is {@link Gst.Preset.get_property_names}.
 	 * With that one can control which properties are saved and in which order.
 	 * When implementing support for read-only presets, one should set the vmethods
 	 * for gst_preset_save_preset() and gst_preset_delete_preset() to %NULL.
@@ -17603,7 +16952,7 @@ declare namespace imports.gi.Gst {
 	 * need to do is watch for tag messages on your pipeline's bus. This
 	 * interface is only for setting metadata, not for extracting it. To set tags
 	 * from the application, find tagsetter elements and set tags using e.g.
-	 * gst_tag_setter_merge_tags() or gst_tag_setter_add_tags(). Also consider
+	 * {@link Gst.TagSetter.merge_tags} or gst_tag_setter_add_tags(). Also consider
 	 * setting the {@link TagMergeMode} that is used for tag events that arrive at the
 	 * tagsetter element (default mode is to keep existing tags).
 	 * The application should do that before the element goes to %GST_STATE_PAUSED.
@@ -17650,7 +16999,7 @@ declare namespace imports.gi.Gst {
 		 * Return current TOC the setter uses. The TOC should not be
 		 * modified without making it writable first.
 		 * @returns TOC set, or %NULL. Unref with
-		 *     gst_toc_unref() when no longer needed
+		 *     {@link Gst.Toc.unref} when no longer needed
 		 */
 		get_toc(): Toc | null;
 		/**
@@ -17684,7 +17033,7 @@ declare namespace imports.gi.Gst {
 	 * need to do is watch for TOC messages on your pipeline's bus (or you can
 	 * perform TOC query). This interface is only for setting TOC data, not for
 	 * extracting it. To set TOC from the application, find proper tocsetter element
-	 * and set TOC using gst_toc_setter_set_toc().
+	 * and set TOC using {@link Gst.TocSetter.set_toc}.
 	 * 
 	 * Elements implementing the {@link TocSetter} interface can extend existing TOC
 	 * by getting extend UID for that (you can use gst_toc_find_entry() to retrieve it)
@@ -17715,7 +17064,7 @@ declare namespace imports.gi.Gst {
 		 * Gets the currently handled URI.
 		 * @returns the URI currently handled by
 		 *   the #handler.  Returns %NULL if there are no URI currently
-		 *   handled. The returned string must be freed with g_free() when no
+		 *   handled. The returned string must be freed with {@link G.free} when no
 		 *   longer needed.
 		 */
 		get_uri(): string | null;
@@ -17747,7 +17096,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * An application can use the following functions to quickly get an element
 	 * that handles the given URI for reading or writing
-	 * (gst_element_make_from_uri()).
+	 * {@link (gst.element_make_from_uri}).
 	 * 
 	 * Source and Sink plugins should implement this interface when possible.
 	 */
@@ -18281,7 +17630,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Some (fatal) error occurred. Element generating
 		 *                               this error should post an error message using
-		 *                               GST_ELEMENT_ERROR() with more details.
+		 *                               {@link GST.ELEMENT_ERROR} with more details.
 		 */
 		ERROR = -5,
 		/**
@@ -18359,7 +17708,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * The result of gst_iterator_next().
+	 * The result of {@link Gst.Iterator.next}.
 	 */
 	enum IteratorResult {
 		/**
@@ -18503,7 +17852,7 @@ declare namespace imports.gi.Gst {
 		SOMETIMES = 1,
 		/**
 		 * the pad is only available on request with
-		 *  gst_element_request_pad().
+		 *  {@link Gst.Element.request_pad}.
 		 */
 		REQUEST = 2
 	}
@@ -18543,7 +17892,7 @@ declare namespace imports.gi.Gst {
 		 *        %GST_PAD_PROBE_DROP (except that in this case you need to unref the buffer
 		 *        or event yourself). For queries it will also return %TRUE to the caller.
 		 *        The probe can also modify the {@link FlowReturn} value by using the
-		 *        #GST_PAD_PROBE_INFO_FLOW_RETURN() accessor.
+		 *        {@link #GST.PAD_PROBE_INFO_FLOW_RETURN} accessor.
 		 *        Note that the resulting query must contain valid entries.
 		 *        Since: 1.6
 		 */
@@ -18661,7 +18010,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * The different types of QoS events that can be given to the
-	 * gst_event_new_qos() method.
+	 * {@link Gst.Event.new_qos} method.
 	 */
 	enum QOSType {
 		/**
@@ -18773,7 +18122,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Element priority ranks. Defines the order in which the autoplugger (or
-	 * similar rank-picking mechanisms, such as e.g. gst_element_make_from_uri())
+	 * similar rank-picking mechanisms, such as e.g. {@link Gst.Element.make_from_uri})
 	 * will choose this element over an alternative one with the same function.
 	 * 
 	 * These constants serve as a rough guidance for defining the rank of a
@@ -18896,7 +18245,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * The different types of seek events. When constructing a seek event with
-	 * gst_event_new_seek() or when doing gst_segment_do_seek ().
+	 * {@link Gst.Event.new_seek} or when doing gst_segment_do_seek ().
 	 */
 	enum SeekType {
 		/**
@@ -18915,7 +18264,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * The possible states an element can be in. States can be changed using
-	 * gst_element_set_state() and checked using gst_element_get_state().
+	 * {@link Gst.Element.set_state} and checked using gst_element_get_state().
 	 */
 	enum State {
 		/**
@@ -19045,7 +18394,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * The possible return values from a state change function such as
-	 * gst_element_set_state(). Only #GST_STATE_CHANGE_FAILURE is a real failure.
+	 * {@link Gst.Element.set_state}. Only #GST_STATE_CHANGE_FAILURE is a real failure.
 	 */
 	enum StateChangeReturn {
 		/**
@@ -19220,7 +18569,7 @@ declare namespace imports.gi.Gst {
 	 * The different tag merging modes are basically replace, overwrite and append,
 	 * but they can be seen from two directions. Given two taglists: (A) the tags
 	 * already in the element and (B) the ones that are supplied to the element (
-	 * e.g. via gst_tag_setter_merge_tags() / gst_tag_setter_add_tags() or a
+	 * e.g. via {@link Gst.TagSetter.merge_tags} / gst_tag_setter_add_tags() or a
 	 * %GST_EVENT_TAG), how are these tags merged?
 	 * In the table below this is shown for the cases that a tag exists in the list
 	 * (A) or does not exists (!A) and combinations thereof.
@@ -19519,7 +18868,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A set of flags that can be provided to the gst_buffer_copy_into()
+	 * A set of flags that can be provided to the {@link Gst.Buffer.copy_into}
 	 * function to specify which items should be copied.
 	 */
 	enum BufferCopyFlags {
@@ -19817,7 +19166,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Available details for pipeline graphs produced by GST_DEBUG_BIN_TO_DOT_FILE()
+	 * Available details for pipeline graphs produced by {@link GST.DEBUG_BIN_TO_DOT_FILE}
 	 * and GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS().
 	 */
 	enum DebugGraphDetails {
@@ -19891,7 +19240,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * {@link EventTypeFlags} indicate the aspects of the different #GstEventType
 	 * values. You can get the type flags of a #GstEventType with the
-	 * gst_event_type_get_flags() function.
+	 * {@link Gst.event.type_get_flags} function.
 	 */
 	enum EventTypeFlags {
 		/**
@@ -19985,7 +19334,7 @@ declare namespace imports.gi.Gst {
 		 */
 		PHYSICALLY_CONTIGUOUS = 128,
 		/**
-		 * the memory can't be mapped via gst_memory_map() without any preconditions. (Since: 1.2)
+		 * the memory can't be mapped via {@link Gst.Memory.map} without any preconditions. (Since: 1.2)
 		 */
 		NOT_MAPPABLE = 256,
 		/**
@@ -20170,7 +19519,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Message is an extended message type (see below).
 		 *     These extended message IDs can't be used directly with mask-based API
-		 *     like gst_bus_poll() or gst_bus_timed_pop_filtered(), but you can still
+		 *     like {@link Gst.Bus.poll} or gst_bus_timed_pop_filtered(), but you can still
 		 *     filter for GST_MESSAGE_EXTENDED and then check the result for the
 		 *     specific type. (Since: 1.4)
 		 */
@@ -20255,7 +19604,7 @@ declare namespace imports.gi.Gst {
 	enum MiniObjectFlags {
 		/**
 		 * the object can be locked and unlocked with
-		 * gst_mini_object_lock() and gst_mini_object_unlock().
+		 * {@link Gst.MiniObject.lock} and gst_mini_object_unlock().
 		 */
 		LOCKABLE = 1,
 		/**
@@ -20399,7 +19748,7 @@ declare namespace imports.gi.Gst {
 		TEMPLATE_CAPS = 2,
 		/**
 		 * Check if the pads are compatible by comparing the
-		 *   caps returned by gst_pad_query_caps().
+		 *   caps returned by {@link Gst.Pad.query_caps}.
 		 */
 		CAPS = 4,
 		/**
@@ -20409,7 +19758,7 @@ declare namespace imports.gi.Gst {
 		NO_RECONFIGURE = 8,
 		/**
 		 * The default checks done when linking
-		 *   pads (i.e. the ones used by gst_pad_link()).
+		 *   pads (i.e. the ones used by {@link Gst.Pad.link}).
 		 */
 		DEFAULT = 5
 	}
@@ -20574,7 +19923,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Flags used in connection with gst_plugin_add_dependency().
+	 * Flags used in connection with {@link Gst.Plugin.add_dependency}.
 	 */
 	enum PluginDependencyFlags {
 		/**
@@ -20627,7 +19976,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * {@link QueryTypeFlags} indicate the aspects of the different #GstQueryType
 	 * values. You can get the type flags of a #GstQueryType with the
-	 * gst_query_type_get_flags() function.
+	 * {@link Gst.query.type_get_flags} function.
 	 */
 	enum QueryTypeFlags {
 		/**
@@ -20664,7 +20013,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Flags to be used with gst_element_seek() or gst_event_new_seek(). All flags
+	 * Flags to be used with {@link Gst.Element.seek} or gst_event_new_seek(). All flags
 	 * can be used together.
 	 * 
 	 * A non flushing seek might take some time to perform as the currently
@@ -20928,7 +20277,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * the value is optional. When using this flag
 		 *   one need to have an additional boolean arg before this value in the
-		 *   var-args list passed to  gst_tracer_record_log().
+		 *   var-args list passed to  {@link Gst.TracerRecord.log}.
 		 */
 		OPTIONAL = 1,
 		/**
@@ -20939,7 +20288,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called from gst_buffer_foreach_meta(). The #meta
+	 * A function that will be called from {@link Gst.Buffer.foreach_meta}. The #meta
 	 * field will point to a the reference of the meta.
 	 * 
 	 * #buffer should not be modified from this callback.
@@ -20951,7 +20300,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BufferForeachMetaFunc {
 		/**
-		 * A function that will be called from gst_buffer_foreach_meta(). The #meta
+		 * A function that will be called from {@link Gst.Buffer.foreach_meta}. The #meta
 		 * field will point to a the reference of the meta.
 		 * 
 		 * #buffer should not be modified from this callback.
@@ -20961,7 +20310,7 @@ declare namespace imports.gi.Gst {
 		 * 
 		 * When #meta is set to %NULL, the item will be removed from the buffer.
 		 * @param buffer a {@link Buffer}
-		 * @returns %FALSE when gst_buffer_foreach_meta() should stop
+		 * @returns %FALSE when {@link Gst.Buffer.foreach_meta} should stop
 		 * 
 		 * a pointer to a {@link Meta}
 		 */
@@ -20969,7 +20318,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called from gst_buffer_list_foreach(). The #buffer
+	 * A function that will be called from {@link Gst.BufferList.foreach}. The #buffer
 	 * field will point to a the reference of the buffer at #idx.
 	 * 
 	 * When this function returns %TRUE, the next buffer will be
@@ -20982,7 +20331,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BufferListFunc {
 		/**
-		 * A function that will be called from gst_buffer_list_foreach(). The #buffer
+		 * A function that will be called from {@link Gst.BufferList.foreach}. The #buffer
 		 * field will point to a the reference of the buffer at #idx.
 		 * 
 		 * When this function returns %TRUE, the next buffer will be
@@ -20993,7 +20342,7 @@ declare namespace imports.gi.Gst {
 		 * to #buffer. This function is responsible for unreffing the old buffer when
 		 * removing or modifying.
 		 * @param idx the index of #buffer
-		 * @returns %FALSE when gst_buffer_list_foreach() should stop
+		 * @returns %FALSE when {@link Gst.BufferList.foreach} should stop
 		 * 
 		 * pointer the buffer
 		 */
@@ -21001,7 +20350,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Specifies the type of function passed to gst_bus_add_watch() or
+	 * Specifies the type of function passed to {@link Gst.Bus.add_watch} or
 	 * gst_bus_add_watch_full(), which is called from the mainloop when a message
 	 * is available on the bus.
 	 * 
@@ -21013,7 +20362,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface BusFunc {
 		/**
-		 * Specifies the type of function passed to gst_bus_add_watch() or
+		 * Specifies the type of function passed to {@link Gst.Bus.add_watch} or
 		 * gst_bus_add_watch_full(), which is called from the mainloop when a message
 		 * is available on the bus.
 		 * 
@@ -21053,13 +20402,13 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_caps_filter_and_map_in_place().
+	 * A function that will be called in {@link Gst.Caps.filter_and_map_in_place}.
 	 * The function may modify #features and #structure, and both will be
 	 * removed from the caps if %FALSE is returned.
 	 */
 	interface CapsFilterMapFunc {
 		/**
-		 * A function that will be called in gst_caps_filter_and_map_in_place().
+		 * A function that will be called in {@link Gst.Caps.filter_and_map_in_place}.
 		 * The function may modify #features and #structure, and both will be
 		 * removed from the caps if %FALSE is returned.
 		 * @param features the {@link CapsFeatures}
@@ -21071,12 +20420,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_caps_foreach(). The function may
+	 * A function that will be called in {@link Gst.Caps.foreach}. The function may
 	 * not modify #features or #structure.
 	 */
 	interface CapsForeachFunc {
 		/**
-		 * A function that will be called in gst_caps_foreach(). The function may
+		 * A function that will be called in {@link Gst.Caps.foreach}. The function may
 		 * not modify #features or #structure.
 		 * @param features the {@link CapsFeatures}
 		 * @param structure the {@link Structure}
@@ -21087,12 +20436,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_caps_map_in_place(). The function
+	 * A function that will be called in {@link Gst.Caps.map_in_place}. The function
 	 * may modify #features and #structure.
 	 */
 	interface CapsMapFunc {
 		/**
-		 * A function that will be called in gst_caps_map_in_place(). The function
+		 * A function that will be called in {@link Gst.Caps.map_in_place}. The function
 		 * may modify #features and #structure.
 		 * @param features the {@link CapsFeatures}
 		 * @param structure the {@link Structure}
@@ -21185,12 +20534,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Function called for each pad when using gst_element_foreach_sink_pad(),
+	 * Function called for each pad when using {@link Gst.Element.foreach_sink_pad},
 	 * gst_element_foreach_src_pad(), or gst_element_foreach_pad().
 	 */
 	interface ElementForeachPadFunc {
 		/**
-		 * Function called for each pad when using gst_element_foreach_sink_pad(),
+		 * Function called for each pad when using {@link Gst.Element.foreach_sink_pad},
 		 * gst_element_foreach_src_pad(), or gst_element_foreach_pad().
 		 * @param element the {@link Element}
 		 * @param pad a {@link Pad}
@@ -21216,11 +20565,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function to be passed to gst_iterator_fold().
+	 * A function to be passed to {@link Gst.Iterator.fold}.
 	 */
 	interface IteratorFoldFunction {
 		/**
-		 * A function to be passed to gst_iterator_fold().
+		 * A function to be passed to {@link Gst.Iterator.fold}.
 		 * @param item the item to fold
 		 * @param ret a #GValue collecting the result
 		 * @returns %TRUE if the fold should continue, %FALSE if it should stop.
@@ -21229,11 +20578,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that is called by gst_iterator_foreach() for every element.
+	 * A function that is called by {@link Gst.Iterator.foreach} for every element.
 	 */
 	interface IteratorForeachFunction {
 		/**
-		 * A function that is called by gst_iterator_foreach() for every element.
+		 * A function that is called by {@link Gst.Iterator.foreach} for every element.
 		 * @param item The item
 		 */
 		(item: GObject.Value): void;
@@ -21329,13 +20678,13 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Function prototype for a logging function that can be registered with
-	 * gst_debug_add_log_function().
+	 * {@link Gst.debug.add_log_function}.
 	 * Use G_GNUC_NO_INSTRUMENT on that function.
 	 */
 	interface LogFunction {
 		/**
 		 * Function prototype for a logging function that can be registered with
-		 * gst_debug_add_log_function().
+		 * {@link Gst.debug.add_log_function}.
 		 * Use G_GNUC_NO_INSTRUMENT on that function.
 		 * @param category a {@link DebugCategory}
 		 * @param level a {@link DebugLevel}
@@ -21440,11 +20789,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Release the pointer previously retrieved with gst_memory_map() with #info.
+	 * Release the pointer previously retrieved with {@link Gst.Memory.map} with #info.
 	 */
 	interface MemoryUnmapFullFunction {
 		/**
-		 * Release the pointer previously retrieved with gst_memory_map() with #info.
+		 * Release the pointer previously retrieved with {@link Gst.Memory.map} with #info.
 		 * @param mem a {@link Memory}
 		 * @param info a {@link MapInfo}
 		 */
@@ -21452,11 +20801,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Release the pointer previously retrieved with gst_memory_map().
+	 * Release the pointer previously retrieved with {@link Gst.Memory.map}.
 	 */
 	interface MemoryUnmapFunction {
 		/**
-		 * Release the pointer previously retrieved with gst_memory_map().
+		 * Release the pointer previously retrieved with {@link Gst.Memory.map}.
 		 * @param mem a {@link Memory}
 		 */
 		(mem: Memory): void;
@@ -21531,7 +20880,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Function prototype for when a miniobject has lost its last refcount.
 	 * Implementation of the mini object are allowed to revive the
-	 * passed object by doing a gst_mini_object_ref(). If the object is not
+	 * passed object by doing a {@link Gst.MiniObject.ref}. If the object is not
 	 * revived after the dispose function, the function should return %TRUE
 	 * and the memory associated with the object is freed.
 	 */
@@ -21539,7 +20888,7 @@ declare namespace imports.gi.Gst {
 		/**
 		 * Function prototype for when a miniobject has lost its last refcount.
 		 * Implementation of the mini object are allowed to revive the
-		 * passed object by doing a gst_mini_object_ref(). If the object is not
+		 * passed object by doing a {@link Gst.MiniObject.ref}. If the object is not
 		 * revived after the dispose function, the function should return %TRUE
 		 * and the memory associated with the object is freed.
 		 * @param obj MiniObject to dispose
@@ -21563,13 +20912,13 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A {@link MiniObjectNotify} function can be added to a mini object as a
-	 * callback that gets triggered when gst_mini_object_unref() drops the
+	 * callback that gets triggered when {@link Gst.MiniObject.unref} drops the
 	 * last ref and #obj is about to be freed.
 	 */
 	interface MiniObjectNotify {
 		/**
 		 * A {@link MiniObjectNotify} function can be added to a mini object as a
-		 * callback that gets triggered when gst_mini_object_unref() drops the
+		 * callback that gets triggered when {@link Gst.MiniObject.unref} drops the
 		 * last ref and #obj is about to be freed.
 		 * @param obj the mini object
 		 */
@@ -21616,7 +20965,7 @@ declare namespace imports.gi.Gst {
 	 * either consumes the data or passes it on to the internally linked pad(s).
 	 * 
 	 * The implementer of this function receives a refcount to #buffer and should
-	 * gst_buffer_unref() when the buffer is no longer needed.
+	 * {@link Gst.Buffer.unref} when the buffer is no longer needed.
 	 * 
 	 * When a chain function detects an error in the data stream, it must post an
 	 * error on the bus and return an appropriate {@link FlowReturn} value.
@@ -21628,7 +20977,7 @@ declare namespace imports.gi.Gst {
 		 * either consumes the data or passes it on to the internally linked pad(s).
 		 * 
 		 * The implementer of this function receives a refcount to #buffer and should
-		 * gst_buffer_unref() when the buffer is no longer needed.
+		 * {@link Gst.Buffer.unref} when the buffer is no longer needed.
 		 * 
 		 * When a chain function detects an error in the data stream, it must post an
 		 * error on the bus and return an appropriate {@link FlowReturn} value.
@@ -21648,7 +20997,7 @@ declare namespace imports.gi.Gst {
 	 * either consumes the data or passes it on to the internally linked pad(s).
 	 * 
 	 * The implementer of this function receives a refcount to #list and
-	 * should gst_buffer_list_unref() when the list is no longer needed.
+	 * should {@link Gst.BufferList.unref} when the list is no longer needed.
 	 * 
 	 * When a chainlist function detects an error in the data stream, it must
 	 * post an error on the bus and return an appropriate {@link FlowReturn} value.
@@ -21660,7 +21009,7 @@ declare namespace imports.gi.Gst {
 		 * either consumes the data or passes it on to the internally linked pad(s).
 		 * 
 		 * The implementer of this function receives a refcount to #list and
-		 * should gst_buffer_list_unref() when the list is no longer needed.
+		 * should {@link Gst.BufferList.unref} when the list is no longer needed.
 		 * 
 		 * When a chainlist function detects an error in the data stream, it must
 		 * post an error on the bus and return an appropriate {@link FlowReturn} value.
@@ -21717,12 +21066,12 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A forward function is called for all internally linked pads, see
-	 * gst_pad_forward().
+	 * {@link Gst.Pad.forward}.
 	 */
 	interface PadForwardFunction {
 		/**
 		 * A forward function is called for all internally linked pads, see
-		 * gst_pad_forward().
+		 * {@link Gst.Pad.forward}.
 		 * @param pad the {@link Pad} that is forwarded.
 		 * @returns %TRUE if the dispatching procedure has to be stopped.
 		 */
@@ -21736,7 +21085,7 @@ declare namespace imports.gi.Gst {
 	 * contents of #buffer is invalid for any other return value.
 	 * 
 	 * This function is installed on a source pad with
-	 * gst_pad_set_getrange_function() and can only be called on source pads after
+	 * {@link Gst.Pad.set_getrange_function} and can only be called on source pads after
 	 * they are successfully activated with gst_pad_activate_mode() with the
 	 * #GST_PAD_MODE_PULL.
 	 * 
@@ -21772,7 +21121,7 @@ declare namespace imports.gi.Gst {
 		 * contents of #buffer is invalid for any other return value.
 		 * 
 		 * This function is installed on a source pad with
-		 * gst_pad_set_getrange_function() and can only be called on source pads after
+		 * {@link Gst.Pad.set_getrange_function} and can only be called on source pads after
 		 * they are successfully activated with gst_pad_activate_mode() with the
 		 * #GST_PAD_MODE_PULL.
 		 * 
@@ -21825,7 +21174,7 @@ declare namespace imports.gi.Gst {
 		 * @returns a new {@link Iterator} that will iterate over all pads that are
 		 * linked to the given pad on the inside of the parent element.
 		 * 
-		 * the caller must call gst_iterator_free() after usage.
+		 * the caller must call {@link Gst.Iterator.free} after usage.
 		 */
 		(pad: Pad, parent: Object | null): Iterator;
 	}
@@ -21847,14 +21196,14 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Callback used by gst_pad_add_probe(). Gets called to notify about the current
+	 * Callback used by {@link Gst.Pad.add_probe}. Gets called to notify about the current
 	 * blocking type.
 	 * 
 	 * The callback is allowed to modify the data pointer in #info.
 	 */
 	interface PadProbeCallback {
 		/**
-		 * Callback used by gst_pad_add_probe(). Gets called to notify about the current
+		 * Callback used by {@link Gst.Pad.add_probe}. Gets called to notify about the current
 		 * blocking type.
 		 * 
 		 * The callback is allowed to modify the data pointer in #info.
@@ -21882,7 +21231,7 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Callback used by gst_pad_sticky_events_foreach().
+	 * Callback used by {@link Gst.Pad.sticky_events_foreach}.
 	 * 
 	 * When this function returns %TRUE, the next event will be
 	 * returned. When %FALSE is returned, gst_pad_sticky_events_foreach() will return.
@@ -21894,7 +21243,7 @@ declare namespace imports.gi.Gst {
 	 */
 	interface PadStickyEventsForeachFunction {
 		/**
-		 * Callback used by gst_pad_sticky_events_foreach().
+		 * Callback used by {@link Gst.Pad.sticky_events_foreach}.
 		 * 
 		 * When this function returns %TRUE, the next event will be
 		 * returned. When %FALSE is returned, gst_pad_sticky_events_foreach() will return.
@@ -21931,12 +21280,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that can be used with e.g. gst_registry_feature_filter()
+	 * A function that can be used with e.g. {@link Gst.Registry.feature_filter}
 	 * to get a list of pluginfeature that match certain criteria.
 	 */
 	interface PluginFeatureFilter {
 		/**
-		 * A function that can be used with e.g. gst_registry_feature_filter()
+		 * A function that can be used with e.g. {@link Gst.Registry.feature_filter}
 		 * to get a list of pluginfeature that match certain criteria.
 		 * @param feature the pluginfeature to check
 		 * @returns %TRUE for a positive match, %FALSE otherwise
@@ -21945,12 +21294,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that can be used with e.g. gst_registry_plugin_filter()
+	 * A function that can be used with e.g. {@link Gst.Registry.plugin_filter}
 	 * to get a list of plugins that match certain criteria.
 	 */
 	interface PluginFilter {
 		/**
-		 * A function that can be used with e.g. gst_registry_plugin_filter()
+		 * A function that can be used with e.g. {@link Gst.Registry.plugin_filter}
 		 * to get a list of plugins that match certain criteria.
 		 * @param plugin the plugin to check
 		 * @returns %TRUE for a positive match, %FALSE otherwise
@@ -22001,13 +21350,13 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_structure_filter_and_map_in_place().
+	 * A function that will be called in {@link Gst.Structure.filter_and_map_in_place}.
 	 * The function may modify #value, and the value will be removed from
 	 * the structure if %FALSE is returned.
 	 */
 	interface StructureFilterMapFunc {
 		/**
-		 * A function that will be called in gst_structure_filter_and_map_in_place().
+		 * A function that will be called in {@link Gst.Structure.filter_and_map_in_place}.
 		 * The function may modify #value, and the value will be removed from
 		 * the structure if %FALSE is returned.
 		 * @param field_id the #GQuark of the field name
@@ -22019,12 +21368,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_structure_foreach(). The function may
+	 * A function that will be called in {@link Gst.Structure.foreach}. The function may
 	 * not modify #value.
 	 */
 	interface StructureForeachFunc {
 		/**
-		 * A function that will be called in gst_structure_foreach(). The function may
+		 * A function that will be called in {@link Gst.Structure.foreach}. The function may
 		 * not modify #value.
 		 * @param field_id the #GQuark of the field name
 		 * @param value the #GValue of the field
@@ -22035,12 +21384,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_structure_map_in_place(). The function
+	 * A function that will be called in {@link Gst.Structure.map_in_place}. The function
 	 * may modify #value.
 	 */
 	interface StructureMapFunc {
 		/**
-		 * A function that will be called in gst_structure_map_in_place(). The function
+		 * A function that will be called in {@link Gst.Structure.map_in_place}. The function
 		 * may modify #value.
 		 * @param field_id the #GQuark of the field name
 		 * @param value the #GValue of the field
@@ -22051,12 +21400,12 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * A function that will be called in gst_tag_list_foreach(). The function may
+	 * A function that will be called in {@link Gst.TagList.foreach}. The function may
 	 * not modify the tag list.
 	 */
 	interface TagForeachFunc {
 		/**
-		 * A function that will be called in gst_tag_list_foreach(). The function may
+		 * A function that will be called in {@link Gst.TagList.foreach}. The function may
 		 * not modify the tag list.
 		 * @param list the {@link TagList}
 		 * @param tag a name of a tag in #list
@@ -22091,11 +21440,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Task function, see gst_task_pool_push().
+	 * Task function, see {@link Gst.TaskPool.push}.
 	 */
 	interface TaskPoolFunction {
 		/**
-		 * Task function, see gst_task_pool_push().
+		 * Task function, see {@link Gst.TaskPool.push}.
 		 */
 		(): void;
 	}
@@ -22124,11 +21473,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Used together with gst_value_compare() to compare #GValue items.
+	 * Used together with {@link Gst.value.compare} to compare #GValue items.
 	 */
 	interface ValueCompareFunc {
 		/**
-		 * Used together with gst_value_compare() to compare #GValue items.
+		 * Used together with {@link Gst.value.compare} to compare #GValue items.
 		 * @param value1 first value for comparison
 		 * @param value2 second value for comparison
 		 * @returns one of GST_VALUE_LESS_THAN, GST_VALUE_EQUAL, GST_VALUE_GREATER_THAN
@@ -22138,11 +21487,11 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Used by gst_value_deserialize() to parse a non-binary form into the #GValue.
+	 * Used by {@link Gst.value.deserialize} to parse a non-binary form into the #GValue.
 	 */
 	interface ValueDeserializeFunc {
 		/**
-		 * Used by gst_value_deserialize() to parse a non-binary form into the #GValue.
+		 * Used by {@link Gst.value.deserialize} to parse a non-binary form into the #GValue.
 		 * @param dest a #GValue
 		 * @param s a string
 		 * @returns %TRUE for success
@@ -22151,13 +21500,13 @@ declare namespace imports.gi.Gst {
 	}
 
 	/**
-	 * Used by gst_value_serialize() to obtain a non-binary form of the #GValue.
+	 * Used by {@link Gst.value.serialize} to obtain a non-binary form of the #GValue.
 	 * 
 	 * Free-function: g_free
 	 */
 	interface ValueSerializeFunc {
 		/**
-		 * Used by gst_value_serialize() to obtain a non-binary form of the #GValue.
+		 * Used by {@link Gst.value.serialize} to obtain a non-binary form of the #GValue.
 		 * 
 		 * Free-function: g_free
 		 * @param value1 a #GValue
@@ -22237,7 +21586,7 @@ declare namespace imports.gi.Gst {
 	 * @param features a string representation of a {@link CapsFeatures}.
 	 * @returns a new {@link CapsFeatures} or
 	 *     %NULL when the string could not be parsed. Free with
-	 *     gst_caps_features_free() after use.
+	 *     {@link Gst.CapsFeatures.free} after use.
 	 */
 	function caps_features_from_string(features: string): CapsFeatures | null;
 
@@ -22258,7 +21607,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * If the reference is %NULL then this function does nothing.
 	 * Otherwise, the reference count of the object is decreased using
-	 * gst_mini_object_unref() and the pointer is set to %NULL.
+	 * {@link Gst.MiniObject.unref} and the pointer is set to %NULL.
 	 * 
 	 * A macro is also included that allows this function to be used without
 	 * pointer casts.
@@ -22273,7 +21622,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * If the reference is %NULL then this function does nothing.
 	 * Otherwise, the reference count of the object is decreased using
-	 * gst_object_unref() and the pointer is set to %NULL.
+	 * {@link Gst.Object.unref} and the pointer is set to %NULL.
 	 * 
 	 * A macro is also included that allows this function to be used without
 	 * pointer casts.
@@ -22287,7 +21636,7 @@ declare namespace imports.gi.Gst {
 	 * #structure_ptr must not be %NULL.
 	 * 
 	 * If the reference is %NULL then this function does nothing.
-	 * Otherwise, the structure is free'd using gst_structure_free() and the
+	 * Otherwise, the structure is free'd using {@link Gst.Structure.free} and the
 	 * pointer is set to %NULL.
 	 * 
 	 * A macro is also included that allows this function to be used without
@@ -22311,7 +21660,7 @@ declare namespace imports.gi.Gst {
 	 * #max_size_per_thread bytes of logs per thread and times out threads after
 	 * #thread_timeout seconds of inactivity.
 	 * 
-	 * Logs can be fetched with gst_debug_ring_buffer_logger_get_logs() and the
+	 * Logs can be fetched with {@link Gst.debug.ring_buffer_logger_get_logs} and the
 	 * logger can be removed again with gst_debug_remove_ring_buffer_logger().
 	 * Only one logger at a time is possible.
 	 * @param max_size_per_thread Maximum size of log per thread in bytes
@@ -22345,7 +21694,7 @@ declare namespace imports.gi.Gst {
 	function debug_bin_to_dot_file(bin: Bin, details: DebugGraphDetails, file_name: string): void;
 
 	/**
-	 * This works like gst_debug_bin_to_dot_file(), but adds the current timestamp
+	 * This works like {@link Gst.debug.bin_to_dot_file}, but adds the current timestamp
 	 * to the filename, so that it can be used to take multiple snapshots.
 	 * @param bin the top-level pipeline that should be analyzed
 	 * @param details type of {@link DebugGraphDetails} to use
@@ -22436,7 +21785,7 @@ declare namespace imports.gi.Gst {
 	 * specified via the GST_DEBUG_FILE environment variable) as received via
 	 * #user_data.
 	 * 
-	 * You can add other handlers by using gst_debug_add_log_function().
+	 * You can add other handlers by using {@link Gst.debug.add_log_function}.
 	 * And you can remove this handler by calling
 	 * gst_debug_remove_log_function(gst_debug_log_default);
 	 * @param category category to log
@@ -22452,7 +21801,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Returns the string representation for the specified debug log message
-	 * formatted in the same way as gst_debug_log_default() (the default handler),
+	 * formatted in the same way as {@link Gst.debug.log_default} (the default handler),
 	 * without color. The purpose is to make it easy for custom log output
 	 * handlers to get a log output that is identical to what the default handler
 	 * would write out.
@@ -22505,13 +21854,13 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Removes any previously added ring buffer logger with
-	 * gst_debug_add_ring_buffer_logger().
+	 * {@link Gst.debug.add_ring_buffer_logger}.
 	 */
 	function debug_remove_ring_buffer_logger(): void;
 
 	/**
 	 * Fetches the current logs per thread from the ring buffer logger. See
-	 * gst_debug_add_ring_buffer_logger() for details.
+	 * {@link Gst.debug.add_ring_buffer_logger} for details.
 	 * @returns NULL-terminated array of
 	 * strings with the debug output per thread
 	 */
@@ -22641,7 +21990,7 @@ declare namespace imports.gi.Gst {
 	function event_type_to_quark(type: EventType): GLib.Quark;
 
 	/**
-	 * Similar to g_filename_to_uri(), but attempts to handle relative file paths
+	 * Similar to {@link G.filename_to_uri}, but attempts to handle relative file paths
 	 * as well. Before converting #filename into an URI, it will be prefixed by
 	 * the current working directory if it is a relative path, and then the path
 	 * will be canonicalised so that it doesn't contain any './' or '../' segments.
@@ -22649,7 +21998,7 @@ declare namespace imports.gi.Gst {
 	 * On Windows #filename should be in UTF-8 encoding.
 	 * @param filename absolute or relative file name path
 	 * @returns newly-allocated URI string, or NULL on error. The caller must
-	 *   free the URI string with g_free() when no longer needed.
+	 *   free the URI string with {@link G.free} when no longer needed.
 	 */
 	function filename_to_uri(filename: string): string;
 
@@ -22746,7 +22095,7 @@ declare namespace imports.gi.Gst {
 	 * Allocates, fills and returns a 0-terminated string from the printf style
 	 * #format string and corresponding arguments.
 	 * 
-	 * See gst_info_vasprintf() for when this function is required.
+	 * See {@link Gst.info.vasprintf} for when this function is required.
 	 * 
 	 * Free with g_free().
 	 * @param format a printf style format string
@@ -22758,7 +22107,7 @@ declare namespace imports.gi.Gst {
 	 * Allocates, fills and returns a null terminated string from the printf style
 	 * #format string and #args.
 	 * 
-	 * See gst_info_vasprintf() for when this function is required.
+	 * See {@link Gst.info.vasprintf} for when this function is required.
 	 * 
 	 * Free with g_free().
 	 * @param format a printf style format string
@@ -22774,7 +22123,7 @@ declare namespace imports.gi.Gst {
 	 * This function deals with the GStreamer specific printf specifiers
 	 * #GST_PTR_FORMAT and #GST_SEGMENT_FORMAT.  If you do not have these specifiers
 	 * in your #format string, you do not need to use this function and can use
-	 * alternatives such as g_vasprintf().
+	 * alternatives such as {@link G.vasprintf}.
 	 * 
 	 * Free #result with g_free().
 	 * @param format a printf style format string
@@ -22791,7 +22140,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * Unless the plugin registry is disabled at compile time, the registry will be
 	 * loaded. By default this will also check if the registry cache needs to be
-	 * updated and rescan all plugins if needed. See gst_update_registry() for
+	 * updated and rescan all plugins if needed. See {@link Gst.update.registry} for
 	 * details and section
 	 * <link linkend="gst-running">Running GStreamer Applications</link>
 	 * for how to disable automatic registry updates.
@@ -22825,7 +22174,7 @@ declare namespace imports.gi.Gst {
 	 * and initialization is automated.
 	 * 
 	 * This function is useful if you want to integrate GStreamer with other
-	 * libraries that use GOption (see g_option_context_add_group() ).
+	 * libraries that use GOption (see {@link G.option_context_add_group} ).
 	 * 
 	 * If you use this function, you should make sure you initialise the GLib
 	 * threading system as one of the very first things in your program
@@ -22915,7 +22264,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Register a new {@link Meta} implementation.
 	 * 
-	 * The same #info can be retrieved later with gst_meta_get_info() by using
+	 * The same #info can be retrieved later with {@link Gst.meta.get_info} by using
 	 * #impl as the key.
 	 * @param api the type of the {@link Meta} API
 	 * @param impl the name of the {@link Meta} implementation
@@ -22948,7 +22297,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Modifies a pointer to point to a new mini-object. The modification
-	 * is done atomically. This version is similar to gst_mini_object_replace()
+	 * is done atomically. This version is similar to {@link Gst.mini.object_replace}
 	 * except that it does not increase the refcount of #newdata and thus
 	 * takes ownership of #newdata.
 	 * 
@@ -22968,7 +22317,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * This function creates a GstArray GParamSpec for use by objects/elements
 	 * that want to expose properties of GstArray type. This function is
-	 * typically * used in connection with g_object_class_install_property() in a
+	 * typically * used in connection with {@link GObject.class_install_property} in a
 	 * GObjects's instance_init function.
 	 * @param name canonical name of the property specified
 	 * @param nick nick name for the property specified
@@ -22982,7 +22331,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * This function creates a fraction GParamSpec for use by objects/elements
 	 * that want to expose properties of fraction type. This function is typically
-	 * used in connection with g_object_class_install_property() in a GObjects's
+	 * used in connection with {@link GObject.class_install_property} in a GObjects's
 	 * instance_init function.
 	 * @param name canonical name of the property specified
 	 * @param nick nick name for the property specified
@@ -23007,7 +22356,7 @@ declare namespace imports.gi.Gst {
 	function parent_buffer_meta_get_info(): MetaInfo;
 
 	/**
-	 * This is a convenience wrapper around gst_parse_launch() to create a
+	 * This is a convenience wrapper around {@link Gst.parse.launch} to create a
 	 * {@link Bin} from a gst-launch-style pipeline description. See
 	 * gst_parse_launch() and the gst-launch man page for details about the
 	 * syntax. Ghost pads on the bin for unlinked source or sink pads
@@ -23025,7 +22374,7 @@ declare namespace imports.gi.Gst {
 	function parse_bin_from_description(bin_description: string, ghost_unlinked_pads: boolean): Bin;
 
 	/**
-	 * This is a convenience wrapper around gst_parse_launch() to create a
+	 * This is a convenience wrapper around {@link Gst.parse.launch} to create a
 	 * {@link Bin} from a gst-launch-style pipeline description. See
 	 * gst_parse_launch() and the gst-launch man page for details about the
 	 * syntax. Ghost pads on the bin for unlinked source or sink pads
@@ -23038,7 +22387,7 @@ declare namespace imports.gi.Gst {
 	 * @param ghost_unlinked_pads whether to automatically create ghost pads
 	 *     for unlinked source or sink pads within the bin
 	 * @param context a parse context allocated with
-	 *     gst_parse_context_new(), or %NULL
+	 *     {@link Gst.ParseContext.new}, or %NULL
 	 * @param flags parsing options, or #GST_PARSE_FLAG_NONE
 	 * @returns a newly-created
 	 *   element, which is guaranteed to be a bin unless
@@ -23060,7 +22409,7 @@ declare namespace imports.gi.Gst {
 	 * can try to play the pipeline.
 	 * 
 	 * To create a sub-pipeline (bin) for embedding into an existing pipeline
-	 * use gst_parse_bin_from_description().
+	 * use {@link Gst.parse.bin_from_description}.
 	 * @param pipeline_description the command line describing the pipeline
 	 * @returns a new element on success, %NULL on
 	 *   failure. If more than one toplevel element is specified by the
@@ -23076,10 +22425,10 @@ declare namespace imports.gi.Gst {
 	 * can try to play the pipeline.
 	 * 
 	 * To create a sub-pipeline (bin) for embedding into an existing pipeline
-	 * use gst_parse_bin_from_description_full().
+	 * use {@link Gst.parse.bin_from_description_full}.
 	 * @param pipeline_description the command line describing the pipeline
 	 * @param context a parse context allocated with
-	 *      gst_parse_context_new(), or %NULL
+	 *      {@link Gst.ParseContext.new}, or %NULL
 	 * @param flags parsing options, or #GST_PARSE_FLAG_NONE
 	 * @returns a new element on success, %NULL on
 	 *    failure. If more than one toplevel element is specified by the
@@ -23105,7 +22454,7 @@ declare namespace imports.gi.Gst {
 	 * An error does not mean that the pipeline could not be constructed.
 	 * @param argv null-terminated array of arguments
 	 * @param context a parse context allocated with
-	 *     gst_parse_context_new(), or %NULL
+	 *     {@link Gst.ParseContext.new}, or %NULL
 	 * @param flags parsing options, or #GST_PARSE_FLAG_NONE
 	 * @returns a new element on success; on
 	 *   failure, either %NULL or a partially-constructed bin or element will be
@@ -23123,13 +22472,13 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Create a new file descriptor set. If #controllable, it
-	 * is possible to restart or flush a call to gst_poll_wait() with
+	 * is possible to restart or flush a call to {@link Gst.Poll.wait} with
 	 * gst_poll_restart() and gst_poll_set_flushing() respectively.
 	 * 
 	 * Free-function: gst_poll_free
 	 * @param controllable whether it should be possible to control a wait.
 	 * @returns a new {@link Poll}, or %NULL in
-	 *     case of an error.  Free with gst_poll_free().
+	 *     case of an error.  Free with {@link Gst.Poll.free}.
 	 */
 	function poll_new(controllable: boolean): Poll | null;
 
@@ -23137,12 +22486,12 @@ declare namespace imports.gi.Gst {
 	 * Create a new poll object that can be used for scheduling cancellable
 	 * timeouts.
 	 * 
-	 * A timeout is performed with gst_poll_wait(). Multiple timeouts can be
+	 * A timeout is performed with {@link Gst.Poll.wait}. Multiple timeouts can be
 	 * performed from different threads.
 	 * 
 	 * Free-function: gst_poll_free
 	 * @returns a new {@link Poll}, or %NULL in
-	 *     case of an error.  Free with gst_poll_free().
+	 *     case of an error.  Free with {@link Gst.Poll.free}.
 	 */
 	function poll_new_timer(): Poll | null;
 
@@ -23303,7 +22652,7 @@ declare namespace imports.gi.Gst {
 	 * is enabled by default when loading plugins.
 	 * 
 	 * Applications might want to disable this behaviour with the
-	 * gst_segtrap_set_enabled() function. This is typically done if the application
+	 * {@link Gst.segtrap.set_enabled} function. This is typically done if the application
 	 * wants to install its own handler without GStreamer interfering.
 	 * @returns %TRUE if GStreamer is allowed to install a custom SIGSEGV handler.
 	 */
@@ -23311,7 +22660,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Applications might want to disable/enable the SIGSEGV handling of
-	 * the GStreamer core. See gst_segtrap_is_enabled() for more information.
+	 * the GStreamer core. See {@link Gst.segtrap.is_enabled} for more information.
 	 * @param enabled whether a custom SIGSEGV handler should be installed.
 	 */
 	function segtrap_set_enabled(enabled: boolean): void;
@@ -23400,7 +22749,7 @@ declare namespace imports.gi.Gst {
 	 * Copies the contents for the given tag into the value,
 	 * merging multiple values into one if multiple values are associated
 	 * with the tag.
-	 * You must g_value_unset() the value after use.
+	 * You must {@link G.value_unset} the value after use.
 	 * @param list list to get the tag from
 	 * @param tag tag to read out
 	 * @returns %TRUE, if a value was copied, %FALSE if the tag didn't exist in the
@@ -23411,7 +22760,7 @@ declare namespace imports.gi.Gst {
 	function tag_list_copy_value(list: TagList, tag: string): [ boolean, GObject.Value ];
 
 	/**
-	 * This is a convenience function for the func argument of gst_tag_register().
+	 * This is a convenience function for the func argument of {@link Gst.tag.register}.
 	 * It concatenates all given strings using a comma. The tag must be registered
 	 * as a G_TYPE_STRING or this function will fail.
 	 * @param src GValue to copy from
@@ -23420,7 +22769,7 @@ declare namespace imports.gi.Gst {
 	function tag_merge_strings_with_comma(src: GObject.Value): GObject.Value;
 
 	/**
-	 * This is a convenience function for the func argument of gst_tag_register().
+	 * This is a convenience function for the func argument of {@link Gst.tag.register}.
 	 * It creates a copy of the first value from the list.
 	 * @param src GValue to copy from
 	 * @returns uninitialized GValue to store result in
@@ -23440,7 +22789,7 @@ declare namespace imports.gi.Gst {
 	 * #GST_TAG_MERGE_PREPEND is used as merge mode, in which case the new
 	 * value will replace the old one in the list).
 	 * 
-	 * The merge function will be called from gst_tag_list_copy_value() when
+	 * The merge function will be called from {@link Gst.tag.list_copy_value} when
 	 * it is required that one or more values for a tag be condensed into
 	 * one single value. This may happen from gst_tag_list_get_string(),
 	 * gst_tag_list_get_int(), gst_tag_list_get_double() etc. What will happen
@@ -23461,7 +22810,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Registers a new tag type for the use with GStreamer's type system.
 	 * 
-	 * Same as gst_tag_register(), but #name, #nick, and #blurb must be
+	 * Same as {@link Gst.tag.register}, but #name, #nick, and #blurb must be
 	 * static strings or inlined strings, as they will not be copied. (GStreamer
 	 * plugins will be made resident once loaded, so this function can be used
 	 * even from dynamically loaded plugins.)
@@ -23523,7 +22872,7 @@ declare namespace imports.gi.Gst {
 	function type_find_register(plugin: Plugin | null, name: string, rank: number, func: TypeFindFunction, extensions: string | null, possible_caps: Caps | null, data: any | null, data_notify: GLib.DestroyNotify): boolean;
 
 	/**
-	 * Checks if #type is plugin API. See gst_type_mark_as_plugin_api() for
+	 * Checks if #type is plugin API. See {@link Gst.type.mark_as_plugin_api} for
 	 * details.
 	 * @param type a GType
 	 * @returns %TRUE if #type is plugin API or %FALSE otherwise.
@@ -23593,7 +22942,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Parses a URI string into a new {@link Uri} object. Will return NULL if the URI
-	 * cannot be parsed. This is identical to gst_uri_from_string() except that
+	 * cannot be parsed. This is identical to {@link Gst.uri.from_string} except that
 	 * the userinfo and fragment components of the URI will not be unescaped while
 	 * parsing.
 	 * 
@@ -23614,7 +22963,7 @@ declare namespace imports.gi.Gst {
 	 * Extracts the location out of a given valid URI, ie. the protocol and "://"
 	 * are stripped from the URI, which means that the location returned includes
 	 * the hostname if one is specified. The returned string must be freed using
-	 * g_free().
+	 * {@link G.free}.
 	 * 
 	 * Free-function: g_free
 	 * @param uri A URI string
@@ -23626,7 +22975,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Extracts the protocol out of a given valid URI. The returned string must be
-	 * freed using g_free().
+	 * freed using {@link G.free}.
 	 * @param uri A URI string
 	 * @returns The protocol for this URI.
 	 */
@@ -23650,7 +22999,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * This is a convenience function to join two URI strings and return the result.
-	 * The returned string should be g_free()'d after use.
+	 * The returned string should be {@link G.free}'d after use.
 	 * @param base_uri The percent-encoded base URI.
 	 * @param ref_uri The percent-encoded reference URI to join to the #base_uri.
 	 * @returns A string representing the percent-encoded join of
@@ -23661,7 +23010,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * Checks if an element exists that supports the given URI protocol. Note
 	 * that a positive return value does not imply that a subsequent call to
-	 * gst_element_make_from_uri() is guaranteed to work.
+	 * {@link Gst.Element.make_from_uri} is guaranteed to work.
 	 * @param type Whether to check for a source or a sink
 	 * @param protocol Protocol that should be checked for (e.g. "http" or "smb")
 	 * @returns %TRUE
@@ -23842,7 +23191,7 @@ declare namespace imports.gi.Gst {
 	 * 
 	 * This function never returns %GST_SEQNUM_INVALID (which is 0).
 	 * @returns A constantly incrementing 32-bit unsigned integer, which might
-	 * overflow at some point. Use gst_util_seqnum_compare() to make sure
+	 * overflow at some point. Use {@link Gst.util.seqnum_compare} to make sure
 	 * you handle wraparound correctly.
 	 */
 	function util_seqnum_next(): number;
@@ -23893,7 +23242,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer it is truncated.  See also
-	 * gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil(),
+	 * {@link Gst.util.uint64_scale_round}, gst_util_uint64_scale_ceil(),
 	 * gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
 	 * gst_util_uint64_scale_int_ceil().
 	 */
@@ -23911,7 +23260,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer, it is rounded up.  See also
-	 * gst_util_uint64_scale(), gst_util_uint64_scale_round(),
+	 * {@link Gst.util.uint64_scale}, gst_util_uint64_scale_round(),
 	 * gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
 	 * gst_util_uint64_scale_int_ceil().
 	 */
@@ -23927,7 +23276,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer, it is truncated.  See also
-	 * gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil(),
+	 * {@link Gst.util.uint64_scale_int_round}, gst_util_uint64_scale_int_ceil(),
 	 * gst_util_uint64_scale(), gst_util_uint64_scale_round(),
 	 * gst_util_uint64_scale_ceil().
 	 */
@@ -23943,7 +23292,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer, it is rounded up.  See also
-	 * gst_util_uint64_scale_int(), gst_util_uint64_scale_int_round(),
+	 * {@link Gst.util.uint64_scale_int}, gst_util_uint64_scale_int_round(),
 	 * gst_util_uint64_scale(), gst_util_uint64_scale_round(),
 	 * gst_util_uint64_scale_ceil().
 	 */
@@ -23959,7 +23308,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer, it is rounded to the nearest integer
-	 * (half-way cases are rounded up).  See also gst_util_uint64_scale_int(),
+	 * (half-way cases are rounded up).  See also {@link Gst.util.uint64_scale_int},
 	 * gst_util_uint64_scale_int_ceil(), gst_util_uint64_scale(),
 	 * gst_util_uint64_scale_round(), gst_util_uint64_scale_ceil().
 	 */
@@ -23977,7 +23326,7 @@ declare namespace imports.gi.Gst {
 	 * @returns #val * #num / #denom.  In the case of an overflow, this
 	 * function returns G_MAXUINT64.  If the result is not exactly
 	 * representable as an integer, it is rounded to the nearest integer
-	 * (half-way cases are rounded up).  See also gst_util_uint64_scale(),
+	 * (half-way cases are rounded up).  See also {@link Gst.util.uint64_scale},
 	 * gst_util_uint64_scale_ceil(), gst_util_uint64_scale_int(),
 	 * gst_util_uint64_scale_int_round(), gst_util_uint64_scale_int_ceil().
 	 */
@@ -24256,7 +23605,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * tries to transform the given #value into a string representation that allows
-	 * getting back this string later on using gst_value_deserialize().
+	 * getting back this string later on using {@link Gst.value.deserialize}.
 	 * 
 	 * Free-function: g_free
 	 * @param value a #GValue to serialize
@@ -24427,17 +23776,17 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Combination of all possible fields that can be copied with
-	 * gst_buffer_copy_into().
+	 * {@link Gst.Buffer.copy_into}.
 	 * @returns Combination of all possible fields that can be copied with
-	 * gst_buffer_copy_into().
+	 * {@link Gst.Buffer.copy_into}.
 	 */
 	const BUFFER_COPY_ALL: BufferCopyFlags;
 
 	/**
 	 * Combination of all possible metadata fields that can be copied with
-	 * gst_buffer_copy_into().
+	 * {@link Gst.Buffer.copy_into}.
 	 * @returns Combination of all possible metadata fields that can be copied with
-	 * gst_buffer_copy_into().
+	 * {@link Gst.Buffer.copy_into}.
 	 */
 	const BUFFER_COPY_METADATA: BufferCopyFlags;
 
@@ -24699,11 +24048,11 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A value which is guaranteed to never be returned by
-	 * gst_util_group_id_next().
+	 * {@link Gst.util.group_id_next}.
 	 * 
 	 * Can be used as a default value in variables used to store group_id.
 	 * @returns A value which is guaranteed to never be returned by
-	 * gst_util_group_id_next().
+	 * {@link Gst.util.group_id_next}.
 	 * 
 	 * Can be used as a default value in variables used to store group_id.
 	 */
@@ -24844,7 +24193,7 @@ declare namespace imports.gi.Gst {
 	/**
 	 * printf format type used to debug GStreamer types. You can use this in
 	 * combination with GStreamer's debug logging system as well as the functions
-	 * gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
+	 * {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and gst_info_strdup_printf()
 	 * to pretty-print the following types: {@link Caps}, #GstStructure,
 	 * #GstCapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,
 	 * #GstMessage, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All
@@ -24854,7 +24203,7 @@ declare namespace imports.gi.Gst {
 	 * This can only be used on types whose size is >= sizeof(gpointer).
 	 * @returns printf format type used to debug GStreamer types. You can use this in
 	 * combination with GStreamer's debug logging system as well as the functions
-	 * gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
+	 * {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and gst_info_strdup_printf()
 	 * to pretty-print the following types: {@link Caps}, #GstStructure,
 	 * #GstCapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,
 	 * #GstMessage, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All
@@ -24882,12 +24231,12 @@ declare namespace imports.gi.Gst {
 	/**
 	 * printf format type used to debug GStreamer segments. You can use this in
 	 * combination with GStreamer's debug logging system as well as the functions
-	 * gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
+	 * {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and gst_info_strdup_printf()
 	 * to pretty-print {@link Segment} structures.
 	 * This can only be used on pointers to GstSegment structures.
 	 * @returns printf format type used to debug GStreamer segments. You can use this in
 	 * combination with GStreamer's debug logging system as well as the functions
-	 * gst_info_vasprintf(), gst_info_strdup_vprintf() and gst_info_strdup_printf()
+	 * {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and gst_info_strdup_printf()
 	 * to pretty-print {@link Segment} structures.
 	 * This can only be used on pointers to GstSegment structures.
 	 */
@@ -24897,11 +24246,11 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A value which is guaranteed to never be returned by
-	 * gst_util_seqnum_next().
+	 * {@link Gst.util.seqnum_next}.
 	 * 
 	 * Can be used as a default value in variables used to store seqnum.
 	 * @returns A value which is guaranteed to never be returned by
-	 * gst_util_seqnum_next().
+	 * {@link Gst.util.seqnum_next}.
 	 * 
 	 * Can be used as a default value in variables used to store seqnum.
 	 */
@@ -24910,12 +24259,12 @@ declare namespace imports.gi.Gst {
 	/**
 	 * printf format type used to debug GStreamer signed time value pointers. You
 	 * can use this in combination with GStreamer's debug logging system as well as
-	 * the functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
+	 * the functions {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and
 	 * gst_info_strdup_printf() to pretty-print signed time (pointers to
 	 * {@link ClockTimeDiff} or #gint64).
 	 * @returns printf format type used to debug GStreamer signed time value pointers. You
 	 * can use this in combination with GStreamer's debug logging system as well as
-	 * the functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
+	 * the functions {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and
 	 * gst_info_strdup_printf() to pretty-print signed time (pointers to
 	 * {@link ClockTimeDiff} or #gint64).
 	 */
@@ -24923,7 +24272,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A string that can be used in printf-like format strings to display a signed
-	 * {@link ClockTimeDiff} or #gint64 value in h:m:s format.  Use GST_TIME_ARGS() to
+	 * {@link ClockTimeDiff} or #gint64 value in h:m:s format.  Use {@link GST.TIME_ARGS} to
 	 * construct the matching arguments.
 	 * 
 	 * Example:
@@ -24931,7 +24280,7 @@ declare namespace imports.gi.Gst {
 	 * printf("%" GST_STIME_FORMAT "\n", GST_STIME_ARGS(ts));
 	 * ]|
 	 * @returns A string that can be used in printf-like format strings to display a signed
-	 * {@link ClockTimeDiff} or #gint64 value in h:m:s format.  Use GST_TIME_ARGS() to
+	 * {@link ClockTimeDiff} or #gint64 value in h:m:s format.  Use {@link GST.TIME_ARGS} to
 	 * construct the matching arguments.
 	 * 
 	 * Example:
@@ -25409,11 +24758,11 @@ declare namespace imports.gi.Gst {
 	 * ISO-639-2 or ISO-639-1 code for the language the content is in (string)
 	 * 
 	 * There is utility API in libgsttag in gst-plugins-base to obtain a translated
-	 * language name from the language code: `gst_tag_get_language_name()`
+	 * language name from the language code: {@link `gst.tag_get_language_name}`
 	 * @returns ISO-639-2 or ISO-639-1 code for the language the content is in (string)
 	 * 
 	 * There is utility API in libgsttag in gst-plugins-base to obtain a translated
-	 * language name from the language code: `gst_tag_get_language_name()`
+	 * language name from the language code: {@link `gst.tag_get_language_name}`
 	 */
 	const TAG_LANGUAGE_CODE: string;
 
@@ -25648,12 +24997,12 @@ declare namespace imports.gi.Gst {
 	/**
 	 * printf format type used to debug GStreamer ClockTime pointers. You can use
 	 * this in combination with GStreamer's debug logging system as well as the
-	 * functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
+	 * functions {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and
 	 * gst_info_strdup_printf() to pretty-print {@link ClockTime} pointers. This can
 	 * only be used on pointers to GstClockTime values.
 	 * @returns printf format type used to debug GStreamer ClockTime pointers. You can use
 	 * this in combination with GStreamer's debug logging system as well as the
-	 * functions gst_info_vasprintf(), gst_info_strdup_vprintf() and
+	 * functions {@link Gst.info.vasprintf}, gst_info_strdup_vprintf() and
 	 * gst_info_strdup_printf() to pretty-print {@link ClockTime} pointers. This can
 	 * only be used on pointers to GstClockTime values.
 	 */
@@ -25661,7 +25010,7 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * A string that can be used in printf-like format strings to display a
-	 * {@link ClockTime} value in h:m:s format.  Use GST_TIME_ARGS() to construct
+	 * {@link ClockTime} value in h:m:s format.  Use {@link GST.TIME_ARGS} to construct
 	 * the matching arguments.
 	 * 
 	 * Example:
@@ -25669,7 +25018,7 @@ declare namespace imports.gi.Gst {
 	 * printf("%" GST_TIME_FORMAT "\n", GST_TIME_ARGS(ts));
 	 * ]|
 	 * @returns A string that can be used in printf-like format strings to display a
-	 * {@link ClockTime} value in h:m:s format.  Use GST_TIME_ARGS() to construct
+	 * {@link ClockTime} value in h:m:s format.  Use {@link GST.TIME_ARGS} to construct
 	 * the matching arguments.
 	 * 
 	 * Example:
@@ -25680,9 +25029,9 @@ declare namespace imports.gi.Gst {
 	const TIME_FORMAT: string;
 
 	/**
-	 * Special value for the repeat_count set in gst_toc_entry_set_loop() or
+	 * Special value for the repeat_count set in {@link Gst.TocEntry.set_loop} or
 	 * returned by gst_toc_entry_set_loop() to indicate infinite looping.
-	 * @returns Special value for the repeat_count set in gst_toc_entry_set_loop() or
+	 * @returns Special value for the repeat_count set in {@link Gst.TocEntry.set_loop} or
 	 * returned by gst_toc_entry_set_loop() to indicate infinite looping.
 	 */
 	const TOC_REPEAT_COUNT_INFINITE: number;
@@ -25701,32 +25050,32 @@ declare namespace imports.gi.Gst {
 
 	/**
 	 * Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is equal to the second one.
+	 * {@link (gst.value_compare}) is equal to the second one.
 	 * @returns Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is equal to the second one.
+	 * {@link (gst.value_compare}) is equal to the second one.
 	 */
 	const VALUE_EQUAL: number;
 
 	/**
 	 * Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is greater than the second one.
+	 * {@link (gst.value_compare}) is greater than the second one.
 	 * @returns Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is greater than the second one.
+	 * {@link (gst.value_compare}) is greater than the second one.
 	 */
 	const VALUE_GREATER_THAN: number;
 
 	/**
 	 * Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is lesser than the second one.
+	 * {@link (gst.value_compare}) is lesser than the second one.
 	 * @returns Indicates that the first value provided to a comparison function
-	 * (gst_value_compare()) is lesser than the second one.
+	 * {@link (gst.value_compare}) is lesser than the second one.
 	 */
 	const VALUE_LESS_THAN: number;
 
 	/**
-	 * Indicates that the comparison function (gst_value_compare()) can not
+	 * Indicates that the comparison function {@link (gst.value_compare}) can not
 	 * determine a order for the two provided values.
-	 * @returns Indicates that the comparison function (gst_value_compare()) can not
+	 * @returns Indicates that the comparison function {@link (gst.value_compare}) can not
 	 * determine a order for the two provided values.
 	 */
 	const VALUE_UNORDERED: number;

@@ -16,7 +16,7 @@ declare namespace imports.gi.WebKit2 {
 		 * This will return %FALSE if WebKit doesn't support credential storing,
 		 * if private browsing is enabled, or if persistent credential storage has been
 		 * disabled in #WebKitWebsiteDataManager, unless credentials saving has been
-		 * explicitly enabled with webkit_authentication_request_set_can_save_credentials().
+		 * explicitly enabled with {@link Webkit.authentication_request_set_can_save_credentials}.
 		 * @returns %TRUE if WebKit can store credentials or %FALSE otherwise.
 		 */
 		can_save_credentials(): boolean;
@@ -83,7 +83,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Set the #WebKitCredential of the proposed authentication challenge that was
 		 * stored from a previous session. This should only be used by applications handling
 		 * their own credential storage. (When using the default WebKit credential storage,
-		 * webkit_authentication_request_get_proposed_credential() already contains previously-stored
+		 * {@link Webkit.authentication_request_get_proposed_credential} already contains previously-stored
 		 * credentials.)
 		 * Passing a %NULL #credential will clear the proposed credential.
 		 * @param credential a #WebKitCredential, or %NULL
@@ -138,7 +138,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		id: string;
 		/**
-		 * Get the #WebKitAutomationSession previously set with webkit_automation_session_set_application_info().
+		 * Get the #WebKitAutomationSession previously set with {@link Webkit.automation_session_set_application_info}.
 		 * @returns the #WebKitAutomationSession of #session, or %NULL if no one has been set.
 		 */
 		get_application_info(): ApplicationInfo;
@@ -271,7 +271,7 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IBackForwardListItem {
 		/**
-		 * See also webkit_back_forward_list_item_get_uri().
+		 * See also {@link Webkit.back_forward_list_item_get_uri}.
 		 * @returns the original URI of #list_item or %NULL
 		 *    when the original URI is empty.
 		 */
@@ -280,7 +280,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This URI may differ from the original URI if the page was,
 		 * for example, redirected to a new location.
-		 * See also webkit_back_forward_list_item_get_original_uri().
+		 * See also {@link Webkit.back_forward_list_item_get_original_uri}.
 		 * @returns the URI of #list_item or %NULL
 		 *    when the URI is empty.
 		 */
@@ -337,7 +337,7 @@ declare namespace imports.gi.WebKit2 {
 		set_rgba(rgba: Gdk.RGBA): void;
 		/**
 		 * Emitted when the #request finishes. This signal can be emitted because the
-		 * user completed the #request calling webkit_color_chooser_request_finish(),
+		 * user completed the #request calling {@link Webkit.color_chooser_request_finish},
 		 * or cancelled it with webkit_color_chooser_request_cancel() or because the
 		 * color input element is removed from the DOM.
 		 * @param signal 
@@ -405,7 +405,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the user data of #menu.
 		 * This function can be used from the UI Process to get user data previously set
-		 * from the Web Process with webkit_context_menu_set_user_data().
+		 * from the Web Process with {@link Webkit.context_menu_set_user_data}.
 		 * @returns the user data of #menu, or %NULL if #menu doesn't have user data
 		 */
 		get_user_data(): GLib.Variant;
@@ -441,7 +441,7 @@ declare namespace imports.gi.WebKit2 {
 		prepend(item: ContextMenuItem): void;
 		/**
 		 * Removes #item from the #menu.
-		 * See also webkit_context_menu_remove_all() to remove all items.
+		 * See also {@link Webkit.context_menu_remove_all} to remove all items.
 		 * @param item the #WebKitContextMenuItem to remove
 		 */
 		remove(item: ContextMenuItem): void;
@@ -452,7 +452,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Sets user data to #menu.
 		 * This function can be used from a Web Process extension to set user data
-		 * that can be retrieved from the UI Process using webkit_context_menu_get_user_data().
+		 * that can be retrieved from the UI Process using {@link Webkit.context_menu_get_user_data}.
 		 * If the #user_data #GVariant is floating, it is consumed.
 		 */
 		set_user_data(): void;
@@ -474,7 +474,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Creates a new #WebKitContextMenu object to be used as a submenu of an existing
 		 * #WebKitContextMenu. The context menu of a #WebKitWebView is created by the view
 		 * and passed as an argument of #WebKitWebView::context-menu signal.
-		 * To add items to the menu use webkit_context_menu_prepend(),
+		 * To add items to the menu use {@link Webkit.context_menu_prepend},
 		 * webkit_context_menu_append() or webkit_context_menu_insert().
 		 * See also webkit_context_menu_new_with_items() to create a #WebKitContextMenu with
 		 * a list of initial items.
@@ -484,7 +484,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Creates a new #WebKitContextMenu object to be used as a submenu of an existing
 		 * #WebKitContextMenu with the given initial items.
-		 * See also webkit_context_menu_new()
+		 * See also {@link Webkit.context_menu_new}
 		 * @param items a #GList of #WebKitContextMenuItem
 		 * @returns The newly created #WebKitContextMenu object
 		 */
@@ -497,7 +497,7 @@ declare namespace imports.gi.WebKit2 {
 	interface IContextMenuItem {
 		/**
 		 * @deprecated
-		 * Use webkit_context_menu_item_get_gaction() instead.
+		 * Use {@link Webkit.context_menu_item_get_gaction} instead.
 		 * 
 		 * Gets the action associated to #item as a #GtkAction.
 		 * @returns the #GtkAction associated to the #WebKitContextMenuItem,
@@ -551,7 +551,7 @@ declare namespace imports.gi.WebKit2 {
 		public constructor(options?: Partial<ContextMenuItemInitOptions>);
 		/**
 		 * @deprecated
-		 * Use webkit_context_menu_item_new_from_gaction() instead.
+		 * Use {@link Webkit.context_menu_item_new_from_gaction} instead.
 		 * 
 		 * Creates a new #WebKitContextMenuItem for the given #action.
 		 * @param action a #GtkAction
@@ -574,7 +574,7 @@ declare namespace imports.gi.WebKit2 {
 		 * activated the action associated will be handled by WebKit and the current
 		 * load operation will be stopped. You can get the #GAction of a
 		 * #WebKitContextMenuItem created with a #WebKitContextMenuAction with
-		 * webkit_context_menu_item_get_gaction() and connect to the #GSimpleAction::activate signal
+		 * {@link Webkit.context_menu_item_get_gaction} and connect to the #GSimpleAction::activate signal
 		 * to be notified when the item is activated, but you can't prevent the associated
 		 * action from being performed.
 		 * @param action a #WebKitContextMenuAction stock action
@@ -612,21 +612,21 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously add a #SoupCookie to the underlying storage.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_cookie_manager_add_cookie_finish() to get the result of the operation.
+		 * {@link Webkit.cookie_manager_add_cookie_finish} to get the result of the operation.
 		 * @param cookie the #SoupCookie to be added
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		add_cookie(cookie: Soup.Cookie, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_cookie_manager_add_cookie().
+		 * Finish an asynchronous operation started with {@link Webkit.cookie_manager_add_cookie}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the cookie was added or %FALSE in case of error.
 		 */
 		add_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_clear() instead.
+		 * Use {@link Webkit.website_data_manager_clear} instead.
 		 * 
 		 * Delete all cookies of #cookie_manager
 		 */
@@ -635,21 +635,21 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously delete a #SoupCookie from the current session.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_cookie_manager_delete_cookie_finish() to get the result of the operation.
+		 * {@link Webkit.cookie_manager_delete_cookie_finish} to get the result of the operation.
 		 * @param cookie the #SoupCookie to be deleted
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		delete_cookie(cookie: Soup.Cookie, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_cookie_manager_delete_cookie().
+		 * Finish an asynchronous operation started with {@link Webkit.cookie_manager_delete_cookie}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the cookie was deleted or %FALSE in case of error.
 		 */
 		delete_cookie_finish(result: Gio.AsyncResult): boolean;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_remove() instead.
+		 * Use {@link Webkit.website_data_manager_remove} instead.
 		 * 
 		 * Remove all cookies of #cookie_manager for the given #domain.
 		 * @param domain a domain name
@@ -659,7 +659,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously get the cookie acceptance policy of #cookie_manager.
 		 * Note that when policy was set to %WEBKIT_COOKIE_POLICY_ACCEPT_NO_THIRD_PARTY and
 		 * ITP is enabled, this will return %WEBKIT_COOKIE_POLICY_ACCEPT_ALWAYS.
-		 * See also webkit_website_data_manager_set_itp_enabled().
+		 * See also {@link Webkit.website_data_manager_set_itp_enabled}.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
 		 * webkit_cookie_manager_get_accept_policy_finish() to get the result of the operation.
@@ -668,7 +668,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_accept_policy(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_cookie_manager_get_accept_policy().
+		 * Finish an asynchronous operation started with {@link Webkit.cookie_manager_get_accept_policy}.
 		 * @param result a #GAsyncResult
 		 * @returns the cookie acceptance policy of #cookie_manager as a #WebKitCookieAcceptPolicy.
 		 */
@@ -678,14 +678,14 @@ declare namespace imports.gi.WebKit2 {
 		 * must be either an HTTP or an HTTPS URL.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_cookie_manager_get_cookies_finish() to get the result of the operation.
+		 * {@link Webkit.cookie_manager_get_cookies_finish} to get the result of the operation.
 		 * @param uri the URI associated to the cookies to be retrieved
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		get_cookies(uri: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_cookie_manager_get_cookies().
+		 * Finish an asynchronous operation started with {@link Webkit.cookie_manager_get_cookies}.
 		 * The return value is a #GSList of #SoupCookie instances which should be released
 		 * with g_list_free_full() and soup_cookie_free().
 		 * @param result a #GAsyncResult
@@ -694,21 +694,21 @@ declare namespace imports.gi.WebKit2 {
 		get_cookies_finish(result: Gio.AsyncResult): GLib.List;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_fetch() instead.
+		 * Use {@link Webkit.website_data_manager_fetch} instead.
 		 * 
 		 * Asynchronously get the list of domains for which #cookie_manager contains cookies.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_cookie_manager_get_domains_with_cookies_finish() to get the result of the operation.
+		 * {@link Webkit.cookie_manager_get_domains_with_cookies_finish} to get the result of the operation.
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		get_domains_with_cookies(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_fetch_finish() instead.
+		 * Use {@link Webkit.website_data_manager_fetch_finish} instead.
 		 * 
-		 * Finish an asynchronous operation started with webkit_cookie_manager_get_domains_with_cookies().
+		 * Finish an asynchronous operation started with {@link Webkit.cookie_manager_get_domains_with_cookies}.
 		 * The return value is a %NULL terminated list of strings which should
 		 * be released with g_strfreev().
 		 * @param result a #GAsyncResult
@@ -721,7 +721,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Note that ITP has its own way to handle third-party cookies, so when it's enabled,
 		 * and #policy is set to %WEBKIT_COOKIE_POLICY_ACCEPT_NO_THIRD_PARTY, %WEBKIT_COOKIE_POLICY_ACCEPT_ALWAYS
 		 * will be used instead. Once disabled, the policy will be set back to %WEBKIT_COOKIE_POLICY_ACCEPT_NO_THIRD_PARTY.
-		 * See also webkit_website_data_manager_set_itp_enabled().
+		 * See also {@link Webkit.website_data_manager_set_itp_enabled}.
 		 * @param policy a #WebKitCookieAcceptPolicy
 		 */
 		set_accept_policy(policy: CookieAcceptPolicy): void;
@@ -889,7 +889,7 @@ declare namespace imports.gi.WebKit2 {
 		 * starts or it will not have any effect on the ongoing download
 		 * operation. To set the destination using the filename suggested
 		 * by the server connect to #WebKitDownload::decide-destination
-		 * signal and call webkit_download_set_destination(). If you want to
+		 * signal and call {@link Webkit.download_set_destination}. If you want to
 		 * set a fixed destination URI that doesn't depend on the suggested
 		 * filename you can connect to notify::response signal and call
 		 * webkit_download_set_destination().
@@ -931,7 +931,7 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted when an error occurs during the download
 		 * operation. The given #error, of the domain %WEBKIT_DOWNLOAD_ERROR,
 		 * contains further details of the failure. If the download is cancelled
-		 * with webkit_download_cancel(), this signal is emitted with error
+		 * with {@link Webkit.download_cancel}, this signal is emitted with error
 		 * %WEBKIT_DOWNLOAD_ERROR_CANCELLED_BY_USER. The download operation finishes
 		 * after an error and #WebKitDownload::finished signal is emitted after this one.
 		 * @param signal 
@@ -998,7 +998,7 @@ declare namespace imports.gi.WebKit2 {
 	interface IEditorState {
 		/**
 		 * Bitmask of #WebKitEditorTypingAttributes flags.
-		 * See webkit_editor_state_get_typing_attributes() for more information.
+		 * See {@link Webkit.editor_state_get_typing_attributes} for more information.
 		 */
 		readonly typing_attributes: number;
 		/**
@@ -1070,7 +1070,7 @@ declare namespace imports.gi.WebKit2 {
 		 * asynchronously waiting for the icon to be read from the database.
 		 * 
 		 * This is an asynchronous method. When the operation is finished, callback will
-		 * be invoked. You can then call webkit_favicon_database_get_favicon_finish()
+		 * be invoked. You can then call {@link Webkit.favicon_database_get_favicon_finish}
 		 * to get the result of the operation.
 		 * 
 		 * You must call webkit_web_context_set_favicon_database_directory() for
@@ -1085,8 +1085,8 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_favicon(page_uri: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with webkit_favicon_database_get_favicon().
-		 * @param result A #GAsyncResult obtained from the #GAsyncReadyCallback passed to webkit_favicon_database_get_favicon()
+		 * Finishes an operation started with {@link Webkit.favicon_database_get_favicon}.
+		 * @param result A #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link Webkit.favicon_database_get_favicon}
 		 * @returns a new reference to a #cairo_surface_t, or
 		 * %NULL in case of error.
 		 */
@@ -1101,7 +1101,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when the favicon URI of #page_uri has
 		 * been changed to #favicon_uri in the database. You can connect
-		 * to this signal and call webkit_favicon_database_get_favicon()
+		 * to this signal and call {@link Webkit.favicon_database_get_favicon}
 		 * to get the favicon. If you are interested in the favicon of a
 		 * #WebKitWebView it's easier to use the #WebKitWebView:favicon
 		 * property. See webkit_web_view_get_favicon() for more details.
@@ -1137,27 +1137,27 @@ declare namespace imports.gi.WebKit2 {
 	interface IFileChooserRequest {
 		/**
 		 * The filter currently associated with the request. See
-		 * webkit_file_chooser_request_get_mime_types_filter() for more
+		 * {@link Webkit.file_chooser_request_get_mime_types_filter} for more
 		 * details.
 		 */
 		readonly filter: Gtk.FileFilter;
 		/**
 		 * A %NULL-terminated array of strings containing the list of MIME
 		 * types the file chooser dialog should handle. See
-		 * webkit_file_chooser_request_get_mime_types() for more details.
+		 * {@link Webkit.file_chooser_request_get_mime_types} for more details.
 		 */
 		readonly mime_types: string[];
 		/**
 		 * Whether the file chooser should allow selecting multiple
 		 * files. See
-		 * webkit_file_chooser_request_get_select_multiple() for
+		 * {@link Webkit.file_chooser_request_get_select_multiple} for
 		 * more details.
 		 */
 		readonly select_multiple: boolean;
 		/**
 		 * A %NULL-terminated array of strings containing the list of
 		 * selected files associated to the current request. See
-		 * webkit_file_chooser_request_get_selected_files() for more details.
+		 * {@link Webkit.file_chooser_request_get_selected_files} for more details.
 		 */
 		readonly selected_files: string[];
 		/**
@@ -1188,7 +1188,7 @@ declare namespace imports.gi.WebKit2 {
 		 * whether to apply a filter so the user would not be allowed to
 		 * select files with other MIME types.
 		 * 
-		 * See webkit_file_chooser_request_get_mime_types() if you are
+		 * See {@link Webkit.file_chooser_request_get_mime_types} if you are
 		 * interested in getting the list of accepted MIME types.
 		 * @returns a #GtkFileFilter if a list of accepted
 		 * MIME types is defined or %NULL otherwise. The returned object is
@@ -1287,7 +1287,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the maximum number of matches to report during a text
 		 * lookup. This number is passed as the last argument of
-		 * webkit_find_controller_search() or
+		 * {@link Webkit.find_controller_search} or
 		 * webkit_find_controller_count_matches().
 		 * @returns the maximum number of matches to report.
 		 */
@@ -1302,7 +1302,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the text that #find_controller is currently searching
 		 * for. This text is passed to either
-		 * webkit_find_controller_search() or
+		 * {@link Webkit.find_controller_search} or
 		 * webkit_find_controller_count_matches().
 		 * @returns the text to look for in the #WebKitWebView.
 		 */
@@ -1322,7 +1322,7 @@ declare namespace imports.gi.WebKit2 {
 		 * and #WebKitFindController::failed-to-find-text signals.
 		 * 
 		 * To look for the next or previous occurrences of the same text
-		 * with the same find options use webkit_find_controller_search_next()
+		 * with the same find options use {@link Webkit.find_controller_search_next}
 		 * and/or webkit_find_controller_search_previous(). The
 		 * #WebKitFindController will use the same text and options for the
 		 * following searches unless they are modified by another call to this
@@ -1341,7 +1341,7 @@ declare namespace imports.gi.WebKit2 {
 		search(search_text: string, find_options: number, max_match_count: number): void;
 		/**
 		 * Finishes a find operation started by
-		 * webkit_find_controller_search(). It will basically unhighlight
+		 * {@link Webkit.find_controller_search}. It will basically unhighlight
 		 * every text match found.
 		 * 
 		 * This method will be typically called when the search UI is
@@ -1351,21 +1351,21 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Looks for the next occurrence of the search text.
 		 * 
-		 * Calling this method before webkit_find_controller_search() or
+		 * Calling this method before {@link Webkit.find_controller_search} or
 		 * webkit_find_controller_count_matches() is a programming error.
 		 */
 		search_next(): void;
 		/**
 		 * Looks for the previous occurrence of the search text.
 		 * 
-		 * Calling this method before webkit_find_controller_search() or
+		 * Calling this method before {@link Webkit.find_controller_search} or
 		 * webkit_find_controller_count_matches() is a programming error.
 		 */
 		search_previous(): void;
 		/**
 		 * This signal is emitted when the #WebKitFindController has
 		 * counted the number of matches for a given text after a call
-		 * to webkit_find_controller_count_matches().
+		 * to {@link Webkit.find_controller_count_matches}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -1378,7 +1378,7 @@ declare namespace imports.gi.WebKit2 {
 		 * This signal is emitted when a search operation does not find
 		 * any result for the given text. It will be issued if the text
 		 * is not found asynchronously after a call to
-		 * webkit_find_controller_search(), webkit_find_controller_search_next()
+		 * {@link Webkit.find_controller_search}, webkit_find_controller_search_next()
 		 * or webkit_find_controller_search_previous().
 		 * @param signal 
 		 * @param callback Callback function
@@ -1390,7 +1390,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when a given text is found in the web
 		 * page text. It will be issued if the text is found
-		 * asynchronously after a call to webkit_find_controller_search(),
+		 * asynchronously after a call to {@link Webkit.find_controller_search},
 		 * webkit_find_controller_search_next() or
 		 * webkit_find_controller_search_previous().
 		 * @param signal 
@@ -1435,7 +1435,7 @@ declare namespace imports.gi.WebKit2 {
 	interface IFormSubmissionRequest {
 		/**
 		 * @deprecated
-		 * Use webkit_form_submission_request_list_text_fields() instead.
+		 * Use {@link Webkit.form_submission_request_list_text_fields} instead.
 		 * 
 		 * Get a #GHashTable with the values of the text fields contained in the form
 		 * associated to #request. Note that fields will be missing if the form
@@ -1509,7 +1509,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * The signal is emitted to notify that #manager needs to start receiving
 		 * position updates. After this signal is emitted the user should provide
-		 * the updates using webkit_geolocation_manager_update_position() every time
+		 * the updates using {@link Webkit.geolocation_manager_update_position} every time
 		 * the position changes, or use webkit_geolocation_manager_failed() in case
 		 * it isn't possible to determine the current position.
 		 * 
@@ -1821,7 +1821,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Emitted whenever the preedit sequence currently being entered has changed.
 		 * It is also emitted at the end of a preedit sequence, in which case
-		 * webkit_input_method_context_get_preedit() returns the empty string.
+		 * {@link Webkit.input_method_context_get_preedit} returns the empty string.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -1929,6 +1929,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly frame_name: string;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * If the navigation associated with this policy decision was originally
 		 * triggered by a mouse event, this property contains a bitmask of various
 		 * #GdkModifierType values describing the modifiers used for that click.
@@ -1937,6 +1940,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly modifiers: number;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * If the navigation associated with this policy decision was originally
 		 * triggered by a mouse event, this property contains non-zero button number
 		 * of the button triggering that event. The button numbers match those from GDK.
@@ -1949,12 +1955,18 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		readonly navigation_action: NavigationAction;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * The type of navigation that triggered this policy decision. This is
 		 * useful for enacting different policies depending on what type of user
 		 * action caused the navigation.
 		 */
 		readonly navigation_type: NavigationType;
 		/**
+		 * @deprecated
+		 * Use #WebKitNavigationPolicyDecision:navigation-action instead
+		 * 
 		 * This property contains the #WebKitURIRequest associated with this
 		 * navigation.
 		 */
@@ -1966,7 +1978,7 @@ declare namespace imports.gi.WebKit2 {
 		get_frame_name(): string;
 		/**
 		 * @deprecated
-		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * Use {@link Webkit.navigation_policy_decision_get_navigation_action} instead.
 		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:modifiers property.
 		 * @returns The modifiers active if this decision was triggered by a mouse event
@@ -1974,7 +1986,7 @@ declare namespace imports.gi.WebKit2 {
 		get_modifiers(): number;
 		/**
 		 * @deprecated
-		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * Use {@link Webkit.navigation_policy_decision_get_navigation_action} instead.
 		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:mouse-button property.
 		 * @returns The mouse button used if this decision was triggered by a mouse event or 0 otherwise
@@ -1987,7 +1999,7 @@ declare namespace imports.gi.WebKit2 {
 		get_navigation_action(): NavigationAction;
 		/**
 		 * @deprecated
-		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * Use {@link Webkit.navigation_policy_decision_get_navigation_action} instead.
 		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:navigation-type property.
 		 * @returns The type of navigation triggering this policy decision.
@@ -1995,7 +2007,7 @@ declare namespace imports.gi.WebKit2 {
 		get_navigation_type(): NavigationType;
 		/**
 		 * @deprecated
-		 * Use webkit_navigation_policy_decision_get_navigation_action() instead.
+		 * Use {@link Webkit.navigation_policy_decision_get_navigation_action} instead.
 		 * 
 		 * Gets the value of the #WebKitNavigationPolicyDecision:request property.
 		 * @returns The URI request that is associated with this navigation
@@ -2082,7 +2094,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_title(): string;
 		/**
-		 * Emitted when a notification has been clicked. See webkit_notification_clicked().
+		 * Emitted when a notification has been clicked. See {@link Webkit.notification_clicked}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -2158,7 +2170,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Activates the #WebKitOptionMenuItem at #index in #menu. Activating an item changes the value
 		 * of the element making the item the active one. You are expected to close the menu with
-		 * webkit_option_menu_close() after activating an item, calling this function again will have no
+		 * {@link Webkit.option_menu_close} after activating an item, calling this function again will have no
 		 * effect.
 		 * @param index the index of the item
 		 */
@@ -2166,7 +2178,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Request to close a #WebKitOptionMenu. This emits WebKitOptionMenu::close signal.
 		 * This function should always be called to notify WebKit that the associated
-		 * menu has been closed. If the menu is closed and neither webkit_option_menu_select_item()
+		 * menu has been closed. If the menu is closed and neither {@link Webkit.option_menu_select_item}
 		 * nor webkit_option_menu_activate_item() have been called, the element value remains
 		 * unchanged.
 		 */
@@ -2185,14 +2197,14 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Selects the #WebKitOptionMenuItem at #index in #menu. Selecting an item changes the
 		 * text shown by the combo button, but it doesn't change the value of the element. You need to
-		 * explicitly activate the item with webkit_option_menu_select_item() or close the menu with
+		 * explicitly activate the item with {@link Webkit.option_menu_select_item} or close the menu with
 		 * webkit_option_menu_close() in which case the currently selected item will be activated.
 		 * @param index the index of the item
 		 */
 		select_item(index: number): void;
 		/**
 		 * Emitted when closing a #WebKitOptionMenu is requested. This can happen
-		 * when the user explicitly calls webkit_option_menu_close() or when the
+		 * when the user explicitly calls {@link Webkit.option_menu_close} or when the
 		 * element is detached from the current page.
 		 * @param signal 
 		 * @param callback Callback function
@@ -2415,14 +2427,14 @@ declare namespace imports.gi.WebKit2 {
 		web_view: WebView;
 		/**
 		 * Return the current page setup of #print_operation. It returns %NULL until
-		 * either webkit_print_operation_set_page_setup() or webkit_print_operation_run_dialog()
+		 * either {@link Webkit.print_operation_set_page_setup} or webkit_print_operation_run_dialog()
 		 * have been called.
 		 * @returns the current #GtkPageSetup of #print_operation.
 		 */
 		get_page_setup(): Gtk.PageSetup;
 		/**
 		 * Return the current print settings of #print_operation. It returns %NULL until
-		 * either webkit_print_operation_set_print_settings() or webkit_print_operation_run_dialog()
+		 * either {@link Webkit.print_operation_set_print_settings} or webkit_print_operation_run_dialog()
 		 * have been called.
 		 * @returns the current #GtkPrintSettings of #print_operation.
 		 */
@@ -2430,7 +2442,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Start a print operation using current print settings and page setup
 		 * without showing the print dialog. If either print settings or page setup
-		 * are not set with webkit_print_operation_set_print_settings() and
+		 * are not set with {@link Webkit.print_operation_set_print_settings} and
 		 * webkit_print_operation_set_page_setup(), the default options will be used
 		 * and the print job will be sent to the default printer.
 		 * The #WebKitPrintOperation::finished signal is emitted when the printing
@@ -2449,7 +2461,7 @@ declare namespace imports.gi.WebKit2 {
 		 * If the print dialog is not cancelled current print settings and page setup of #print_operation
 		 * are updated with options selected by the user when Print button is pressed in print dialog.
 		 * You can get the updated print settings and page setup by calling
-		 * webkit_print_operation_get_print_settings() and webkit_print_operation_get_page_setup()
+		 * {@link Webkit.print_operation_get_print_settings} and webkit_print_operation_get_page_setup()
 		 * after this method.
 		 * @param parent transient parent of the print dialog
 		 * @returns the #WebKitPrintOperationResponse of the print dialog
@@ -2457,18 +2469,18 @@ declare namespace imports.gi.WebKit2 {
 		run_dialog(parent: Gtk.Window | null): PrintOperationResponse;
 		/**
 		 * Set the current page setup of #print_operation. Current page setup is used for the
-		 * initial values of the print dialog when webkit_print_operation_run_dialog() is called.
+		 * initial values of the print dialog when {@link Webkit.print_operation_run_dialog} is called.
 		 * @param page_setup a #GtkPageSetup to set
 		 */
 		set_page_setup(page_setup: Gtk.PageSetup): void;
 		/**
 		 * Set the current print settings of #print_operation. Current print settings are used for
-		 * the initial values of the print dialog when webkit_print_operation_run_dialog() is called.
+		 * the initial values of the print dialog when {@link Webkit.print_operation_run_dialog} is called.
 		 * @param print_settings a #GtkPrintSettings to set
 		 */
 		set_print_settings(print_settings: Gtk.PrintSettings): void;
 		/**
-		 * Emitted when displaying the print dialog with webkit_print_operation_run_dialog().
+		 * Emitted when displaying the print dialog with {@link Webkit.print_operation_run_dialog}.
 		 * The returned #WebKitPrintCustomWidget will be added to the print dialog and
 		 * it will be owned by the #print_operation. However, the object is guaranteed
 		 * to be alive until the #WebKitPrintCustomWidget::apply is emitted.
@@ -2565,7 +2577,7 @@ declare namespace imports.gi.WebKit2 {
 		get_response(): URIResponse;
 		/**
 		 * Gets whether the MIME type of the response can be displayed in the #WebKitWebView
-		 * that triggered this policy decision request. See also webkit_web_view_can_show_mime_type().
+		 * that triggered this policy decision request. See also {@link Webkit.web_view_can_show_mime_type}.
 		 * @returns %TRUE if the MIME type of the response is supported or %FALSE otherwise
 		 */
 		is_mime_type_supported(): boolean;
@@ -2636,42 +2648,42 @@ declare namespace imports.gi.WebKit2 {
 		register_uri_scheme_as_secure(scheme: string): void;
 		/**
 		 * Whether #scheme is considered as a CORS enabled scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_cors_enabled().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_cors_enabled}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is a CORS enabled scheme or %FALSE otherwise.
 		 */
 		uri_scheme_is_cors_enabled(scheme: string): boolean;
 		/**
 		 * Whether #scheme is considered as a display isolated scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_display_isolated().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_display_isolated}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is a display isolated scheme or %FALSE otherwise.
 		 */
 		uri_scheme_is_display_isolated(scheme: string): boolean;
 		/**
 		 * Whether #scheme is considered as an empty document scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_empty_document().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_empty_document}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is an empty document scheme or %FALSE otherwise.
 		 */
 		uri_scheme_is_empty_document(scheme: string): boolean;
 		/**
 		 * Whether #scheme is considered as a local scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_local().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_local}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is a local scheme or %FALSE otherwise.
 		 */
 		uri_scheme_is_local(scheme: string): boolean;
 		/**
 		 * Whether #scheme is considered as a no-access scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_no_access().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_no_access}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is a no-access scheme or %FALSE otherwise.
 		 */
 		uri_scheme_is_no_access(scheme: string): boolean;
 		/**
 		 * Whether #scheme is considered as a secure scheme.
-		 * See also webkit_security_manager_register_uri_scheme_as_secure().
+		 * See also {@link Webkit.security_manager_register_uri_scheme_as_secure}.
 		 * @param scheme a URI scheme
 		 * @returns %TRUE if #scheme is a secure scheme or %FALSE otherwise.
 		 */
@@ -2907,6 +2919,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		enable_plugins: boolean;
 		/**
+		 * @deprecated
+		 * Use #WebKitWebView:is-ephemeral or #WebKitWebsiteDataManager:is-ephemeral instead.
+		 * 
 		 * Determines whether or not private browsing is enabled. Private browsing
 		 * will disable history, cache and form auto-fill for any pages visited.
 		 */
@@ -3049,7 +3064,7 @@ declare namespace imports.gi.WebKit2 {
 		 * content to render incorrectly or fail to run, as many web pages are written to
 		 * parse the user-agent strings of only the most popular browsers. Therefore, it's
 		 * typically better to not completely override the standard user-agent, but to use
-		 * webkit_settings_set_user_agent_with_application_details() instead.
+		 * {@link Webkit.settings_set_user_agent_with_application_details} instead.
 		 * 
 		 * If this property is set to the empty string or %NULL, it will revert to the standard
 		 * user-agent.
@@ -3805,7 +3820,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Creates a new #WebKitSettings instance with default values. It must
 		 * be manually attached to a #WebKitWebView.
-		 * See also webkit_settings_new_with_settings().
+		 * See also {@link Webkit.settings_new_with_settings}.
 		 * @returns a new #WebKitSettings instance.
 		 */
 		public static new(): Settings;
@@ -4043,7 +4058,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously retrieve a list of the identifiers for all the stored filters.
 		 * 
 		 * When the operation is finished, #callback will be invoked, which then can use
-		 * webkit_user_content_filter_store_fetch_identifiers_finish() to obtain the list of
+		 * {@link Webkit.user_content_filter_store_fetch_identifiers_finish} to obtain the list of
 		 * filter identifiers.
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the removal is completed
@@ -4051,7 +4066,7 @@ declare namespace imports.gi.WebKit2 {
 		fetch_identifiers(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous fetch of the list of identifiers for the stored filters previously
-		 * started with webkit_user_content_filter_store_fetch_identifiers().
+		 * started with {@link Webkit.user_content_filter_store_fetch_identifiers}.
 		 * @param result a #GAsyncResult
 		 * @returns a %NULL-terminated list of filter identifiers.
 		 */
@@ -4059,7 +4074,7 @@ declare namespace imports.gi.WebKit2 {
 		get_path(): string;
 		/**
 		 * Asynchronously load a content filter given its #identifier. The filter must have been
-		 * previously stored using webkit_user_content_filter_store_save().
+		 * previously stored using {@link Webkit.user_content_filter_store_save}.
 		 * 
 		 * When the operation is finished, #callback will be invoked, which then can use
 		 * webkit_user_content_filter_store_load_finish() to obtain the resulting filter.
@@ -4070,7 +4085,7 @@ declare namespace imports.gi.WebKit2 {
 		load(identifier: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous filter load previously started with
-		 * webkit_user_content_filter_store_load().
+		 * {@link Webkit.user_content_filter_store_load}.
 		 * @param result a #GAsyncResult
 		 * @returns a #WebKitUserContentFilter, or %NULL if the load failed
 		 */
@@ -4079,7 +4094,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously remove a content filter given its #identifier.
 		 * 
 		 * When the operation is finished, #callback will be invoked, which then can use
-		 * webkit_user_content_filter_store_remove_finish() to check whether the removal was
+		 * {@link Webkit.user_content_filter_store_remove_finish} to check whether the removal was
 		 * successful.
 		 * @param identifier a filter identifier
 		 * @param cancellable a #GCancellable or %NULL to ignore
@@ -4088,7 +4103,7 @@ declare namespace imports.gi.WebKit2 {
 		remove(identifier: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous filter removal previously started with
-		 * webkit_user_content_filter_store_remove().
+		 * {@link Webkit.user_content_filter_store_remove}.
 		 * @param result a #GAsyncResult
 		 * @returns whether the removal was successful
 		 */
@@ -4098,7 +4113,7 @@ declare namespace imports.gi.WebKit2 {
 		 * [WebKit content extesions JSON format](https://webkit.org/blog/3476/content-blockers-first-look/).
 		 * 
 		 * The #identifier can be used afterwards to refer to the filter when using
-		 * webkit_user_content_filter_store_remove() and webkit_user_content_filter_store_load().
+		 * {@link Webkit.user_content_filter_store_remove} and webkit_user_content_filter_store_load().
 		 * When the #identifier has been used in the past, the new filter source will replace
 		 * the one saved beforehand for the same identifier.
 		 * 
@@ -4112,14 +4127,14 @@ declare namespace imports.gi.WebKit2 {
 		save(identifier: string, source: GLib.Bytes, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous filter save previously started with
-		 * webkit_user_content_filter_store_save().
+		 * {@link Webkit.user_content_filter_store_save}.
 		 * @param result a #GAsyncResult
 		 * @returns a #WebKitUserContentFilter, or %NULL if saving failed
 		 */
 		save_finish(result: Gio.AsyncResult): UserContentFilter;
 		/**
 		 * Asynchronously save a content filter from the contents of a file, which must be
-		 * native to the platform, as checked by g_file_is_native(). See
+		 * native to the platform, as checked by {@link G.file_is_native}. See
 		 * webkit_user_content_filter_store_save() for more details.
 		 * 
 		 * When the operation is finished, #callback will be invoked, which then can use
@@ -4132,7 +4147,7 @@ declare namespace imports.gi.WebKit2 {
 		save_from_file(identifier: string, file: Gio.File, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes and asynchronous filter save previously started with
-		 * webkit_user_content_filter_store_save_from_file().
+		 * {@link Webkit.user_content_filter_store_save_from_file}.
 		 * @param result a #GAsyncResult
 		 * @returns a #WebKitUserContentFilter, or %NULL if saving failed.
 		 */
@@ -4218,7 +4233,7 @@ declare namespace imports.gi.WebKit2 {
 		register_script_message_handler(name: string): boolean;
 		/**
 		 * Registers a new user script message handler in script world with name #world_name.
-		 * See webkit_user_content_manager_register_script_message_handler() for full description.
+		 * See {@link Webkit.user_content_manager_register_script_message_handler} for full description.
 		 * 
 		 * Registering a script message handler will fail if the requested
 		 * name has been already registered before.
@@ -4234,7 +4249,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Removes all user scripts from the given #WebKitUserContentManager
 		 * 
-		 * See also webkit_user_content_manager_remove_script().
+		 * See also {@link Webkit.user_content_manager_remove_script}.
 		 */
 		remove_all_scripts(): void;
 		/**
@@ -4251,21 +4266,21 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Removes a filter from the given #WebKitUserContentManager given the
 		 * identifier of a #WebKitUserContentFilter as returned by
-		 * webkit_user_content_filter_get_identifier().
+		 * {@link Webkit.user_content_filter_get_identifier}.
 		 * @param filter_id Filter identifier
 		 */
 		remove_filter_by_id(filter_id: string): void;
 		/**
 		 * Removes a #WebKitUserScript from the given #WebKitUserContentManager.
 		 * 
-		 * See also webkit_user_content_manager_remove_all_scripts().
+		 * See also {@link Webkit.user_content_manager_remove_all_scripts}.
 		 * @param script A #WebKitUserScript
 		 */
 		remove_script(script: UserScript): void;
 		/**
 		 * Removes a #WebKitUserStyleSheet from the given #WebKitUserContentManager.
 		 * 
-		 * See also webkit_user_content_manager_remove_all_style_sheets().
+		 * See also {@link Webkit.user_content_manager_remove_all_style_sheets}.
 		 * @param stylesheet A #WebKitUserStyleSheet
 		 */
 		remove_style_sheet(stylesheet: UserStyleSheet): void;
@@ -4277,7 +4292,7 @@ declare namespace imports.gi.WebKit2 {
 		 * they will be kept connected, but the signal will not be emitted
 		 * unless the handler name is registered again.
 		 * 
-		 * See also webkit_user_content_manager_register_script_message_handler().
+		 * See also {@link Webkit.user_content_manager_register_script_message_handler}.
 		 * @param name Name of the script message channel
 		 */
 		unregister_script_message_handler(name: string): void;
@@ -4289,7 +4304,7 @@ declare namespace imports.gi.WebKit2 {
 		 * they will be kept connected, but the signal will not be emitted
 		 * unless the handler name is registered again.
 		 * 
-		 * See also webkit_user_content_manager_register_script_message_handler_in_world().
+		 * See also {@link Webkit.user_content_manager_register_script_message_handler_in_world}.
 		 * @param name Name of the script message channel
 		 * @param world_name the name of a #WebKitScriptWorld
 		 */
@@ -4444,6 +4459,9 @@ declare namespace imports.gi.WebKit2 {
 	 */
 	interface IWebContext {
 		/**
+		 * @deprecated
+		 * Use #WebKitWebsiteDataManager:local-storage-directory instead.
+		 * 
 		 * The directory where local storage data will be saved.
 		 */
 		local_storage_directory: string;
@@ -4477,7 +4495,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Paths in directories such as `/sys`, `/proc`, and `/dev` or all of `/`
 		 * are not valid.
 		 * 
-		 * See also webkit_web_context_set_sandbox_enabled()
+		 * See also {@link Webkit.web_context_set_sandbox_enabled}
 		 * @param path an absolute path to mount in the sandbox
 		 * @param read_only if %TRUE the path will be read-only
 		 */
@@ -4490,14 +4508,14 @@ declare namespace imports.gi.WebKit2 {
 		allow_tls_certificate_for_host(certificate: Gio.TlsCertificate, host: string): void;
 		/**
 		 * Clears all resources currently cached.
-		 * See also webkit_web_context_set_cache_model().
+		 * See also {@link Webkit.web_context_set_cache_model}.
 		 */
 		clear_cache(): void;
 		/**
 		 * Requests downloading of the specified URI string. The download operation
 		 * will not be associated to any #WebKitWebView, if you are interested in
 		 * starting a download from a particular #WebKitWebView use
-		 * webkit_web_view_download_uri() instead.
+		 * {@link Webkit.web_view_download_uri} instead.
 		 * @param uri the URI to download
 		 * @returns a new #WebKitDownload representing
 		 *    the download operation.
@@ -4506,7 +4524,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Returns the current cache model. For more information about this
 		 * value check the documentation of the function
-		 * webkit_web_context_set_cache_model().
+		 * {@link Webkit.web_context_set_cache_model}.
 		 * @returns the current #WebKitCacheModel
 		 */
 		get_cache_model(): CacheModel;
@@ -4519,14 +4537,14 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the #WebKitFaviconDatabase associated with #context.
 		 * 
 		 * To initialize the database you need to call
-		 * webkit_web_context_set_favicon_database_directory().
+		 * {@link Webkit.web_context_set_favicon_database_directory}.
 		 * @returns the #WebKitFaviconDatabase of #context.
 		 */
 		get_favicon_database(): FaviconDatabase;
 		/**
 		 * Get the directory path being used to store the favicons database
 		 * for #context, or %NULL if
-		 * webkit_web_context_set_favicon_database_directory() hasn't been
+		 * {@link Webkit.web_context_set_favicon_database_directory} hasn't been
 		 * called yet.
 		 * 
 		 * This function will always return the same path after having called
@@ -4545,7 +4563,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously get the list of installed plugins.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_context_get_plugins_finish() to get the result of the operation.
+		 * {@link Webkit.web_context_get_plugins_finish} to get the result of the operation.
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
@@ -4554,12 +4572,12 @@ declare namespace imports.gi.WebKit2 {
 		 * Finish an asynchronous operation started with webkit_web_context_get_plugins.
 		 * @param result a #GAsyncResult
 		 * @returns a #GList of #WebKitPlugin. You must free the #GList with
-		 *    g_list_free() and unref the #WebKitPlugin<!-- -->s with g_object_unref() when you're done with them.
+		 *    {@link G.list_free} and unref the #WebKitPlugin<!-- -->s with g_object_unref() when you're done with them.
 		 */
 		get_plugins_finish(result: Gio.AsyncResult): GLib.List;
 		/**
 		 * Returns the current process model. For more information about this value
-		 * see webkit_web_context_set_process_model().
+		 * see {@link Webkit.web_context_set_process_model}.
 		 * @returns the current #WebKitProcessModel
 		 */
 		get_process_model(): ProcessModel;
@@ -4582,7 +4600,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Get the the list of spell checking languages associated with
 		 * #context, or %NULL if no languages have been previously set.
 		 * 
-		 * See webkit_web_context_set_spell_checking_languages() for more
+		 * See {@link Webkit.web_context_set_spell_checking_languages} for more
 		 * details on the format of the languages in the list.
 		 * @returns A %NULL-terminated
 		 *    array of languages if available, or %NULL otherwise.
@@ -4590,7 +4608,7 @@ declare namespace imports.gi.WebKit2 {
 		get_spell_checking_languages(): string[];
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_get_tls_errors_policy() instead.
+		 * Use {@link Webkit.website_data_manager_get_tls_errors_policy} instead.
 		 * 
 		 * Get the TLS errors policy of #context
 		 * @returns a #WebKitTLSErrorsPolicy
@@ -4604,7 +4622,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the maximum number of web processes that can be created at the same time for the #context.
 		 * 
-		 * This function is now deprecated and always returns 0 (no limit). See also webkit_web_context_set_web_process_count_limit().
+		 * This function is now deprecated and always returns 0 (no limit). See also {@link Webkit.web_context_set_web_process_count_limit}.
 		 * @returns the maximum limit of web processes, or 0 if there isn't a limit.
 		 */
 		get_web_process_count_limit(): number;
@@ -4635,7 +4653,7 @@ declare namespace imports.gi.WebKit2 {
 		initialize_notification_permissions(allowed_origins: GLib.List, disallowed_origins: GLib.List): void;
 		/**
 		 * Get whether automation is allowed in #context.
-		 * See also webkit_web_context_set_automation_allowed().
+		 * See also {@link Webkit.web_context_set_automation_allowed}.
 		 * @returns %TRUE if automation is allowed or %FALSE otherwise.
 		 */
 		is_automation_allowed(): boolean;
@@ -4654,7 +4672,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Register #scheme in #context, so that when an URI request with #scheme is made in the
 		 * #WebKitWebContext, the #WebKitURISchemeRequestCallback registered will be called with a
 		 * #WebKitURISchemeRequest.
-		 * It is possible to handle URI scheme requests asynchronously, by calling g_object_ref() on the
+		 * It is possible to handle URI scheme requests asynchronously, by calling {@link GObject.ref} on the
 		 * #WebKitURISchemeRequest and calling webkit_uri_scheme_request_finish() later
 		 * when the data of the request is available or
 		 * webkit_uri_scheme_request_finish_error() in case of error.
@@ -4743,14 +4761,14 @@ declare namespace imports.gi.WebKit2 {
 		set_cache_model(cache_model: CacheModel): void;
 		/**
 		 * @deprecated
-		 * Use webkit_web_context_new_with_website_data_manager() instead.
+		 * Use {@link Webkit.web_context_new_with_website_data_manager} instead.
 		 * 
 		 * Set the directory where disk cache files will be stored
 		 * This method must be called before loading anything in this context, otherwise
 		 * it will not have any effect.
 		 * 
 		 * Note that this method overrides the directory set in the #WebKitWebsiteDataManager,
-		 * but it doesn't change the value returned by webkit_website_data_manager_get_disk_cache_directory()
+		 * but it doesn't change the value returned by {@link Webkit.website_data_manager_get_disk_cache_directory}
 		 * since the #WebKitWebsiteDataManager is immutable.
 		 * @param directory the directory to set
 		 */
@@ -4758,7 +4776,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Set the directory path to be used to store the favicons database
 		 * for #context on disk. Passing %NULL as #path means using the
-		 * default directory for the platform (see g_get_user_cache_dir()).
+		 * default directory for the platform (see {@link G.get_user_cache_dir}).
 		 * 
 		 * Calling this method also means enabling the favicons database for
 		 * its use from the applications, so that's why it's expected to be
@@ -4770,11 +4788,11 @@ declare namespace imports.gi.WebKit2 {
 		set_favicon_database_directory(path: string | null): void;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_set_network_proxy_settings() instead.
+		 * Use {@link Webkit.website_data_manager_set_network_proxy_settings} instead.
 		 * 
 		 * Set the network proxy settings to be used by connections started in #context.
 		 * By default %WEBKIT_NETWORK_PROXY_MODE_DEFAULT is used, which means that the
-		 * system settings will be used (g_proxy_resolver_get_default()).
+		 * system settings will be used {@link (g.proxy_resolver_get_default}).
 		 * If you want to override the system default settings, you can either use
 		 * %WEBKIT_NETWORK_PROXY_MODE_NO_PROXY to make sure no proxies are used at all,
 		 * or %WEBKIT_NETWORK_PROXY_MODE_CUSTOM to provide your own proxy settings.
@@ -4845,7 +4863,7 @@ declare namespace imports.gi.WebKit2 {
 		set_spell_checking_languages(languages: string[]): void;
 		/**
 		 * @deprecated
-		 * Use webkit_website_data_manager_set_tls_errors_policy() instead.
+		 * Use {@link Webkit.website_data_manager_set_tls_errors_policy} instead.
 		 * 
 		 * Set the TLS errors policy of #context as #policy
 		 * @param policy a #WebKitTLSErrorsPolicy
@@ -4886,7 +4904,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when a new automation request is made.
 		 * Note that it will never be emitted if automation is not enabled in #context,
-		 * see webkit_web_context_set_automation_allowed() for more details.
+		 * see {@link Webkit.web_context_set_automation_allowed} for more details.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -4910,7 +4928,7 @@ declare namespace imports.gi.WebKit2 {
 		 * initial notification permissions for a web process. It is emitted
 		 * when a new web process is about to be launched, and signals the
 		 * most appropriate moment to use
-		 * webkit_web_context_initialize_notification_permissions(). If no
+		 * {@link Webkit.web_context_initialize_notification_permissions}. If no
 		 * notification permissions have changed since the last time this
 		 * signal was emitted, then there is no need to call
 		 * webkit_web_context_initialize_notification_permissions() again.
@@ -4924,7 +4942,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when a new web process is about to be
 		 * launched. It signals the most appropriate moment to use
-		 * webkit_web_context_set_web_extensions_initialization_user_data()
+		 * {@link Webkit.web_context_set_web_extensions_initialization_user_data}
 		 * and webkit_web_context_set_web_extensions_directory().
 		 * @param signal 
 		 * @param callback Callback function
@@ -4936,7 +4954,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when a #WebKitUserMessage is received from a
 		 * #WebKitWebExtension. You can reply to the message using
-		 * webkit_user_message_send_reply().
+		 * {@link Webkit.user_message_send_reply}.
 		 * 
 		 * You can handle the user message asynchronously by calling g_object_ref() on
 		 * #message and returning %TRUE.
@@ -5102,7 +5120,7 @@ declare namespace imports.gi.WebKit2 {
 		 * window, the browser window should be raised and the tab containing the
 		 * inspector view should be the active one.
 		 * In both cases, if this signal is not handled, the default implementation
-		 * calls gtk_window_present() on the current toplevel #GtkWindow of the
+		 * calls {@link Gtk.Window.present} on the current toplevel #GtkWindow of the
 		 * inspector view.
 		 * @param signal 
 		 * @param callback Callback function
@@ -5198,20 +5216,20 @@ declare namespace imports.gi.WebKit2 {
 		readonly response: URIResponse;
 		/**
 		 * The current active URI of the #WebKitWebResource.
-		 * See webkit_web_resource_get_uri() for more details.
+		 * See {@link Webkit.web_resource_get_uri} for more details.
 		 */
 		readonly uri: string;
 		/**
 		 * Asynchronously get the raw data for #resource.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_resource_get_data_finish() to get the result of the operation.
+		 * {@link Webkit.web_resource_get_data_finish} to get the result of the operation.
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		get_data(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_resource_get_data().
+		 * Finish an asynchronous operation started with {@link Webkit.web_resource_get_data}.
 		 * @param result a #GAsyncResult
 		 * @returns a
 		 *    string with the data of #resource, or %NULL in case of error. if #length
@@ -5356,7 +5374,7 @@ declare namespace imports.gi.WebKit2 {
 		automation_presentation_type: AutomationBrowsingContextPresentation;
 		/**
 		 * Whether the pages loaded inside #WebKitWebView are editable. For more
-		 * information see webkit_web_view_set_editable().
+		 * information see {@link Webkit.web_view_set_editable}.
 		 */
 		editable: boolean;
 		/**
@@ -5371,7 +5389,7 @@ declare namespace imports.gi.WebKit2 {
 		readonly estimated_load_progress: number;
 		/**
 		 * The favicon currently associated to the #WebKitWebView.
-		 * See webkit_web_view_get_favicon() for more details.
+		 * See {@link Webkit.web_view_get_favicon} for more details.
 		 */
 		readonly favicon: any;
 		/**
@@ -5388,7 +5406,7 @@ declare namespace imports.gi.WebKit2 {
 		 * #WebKitWebView and it can't be changed. The ephemeral #WebKitWebsiteDataManager
 		 * created for the #WebKitWebView will inherit the network settings from the
 		 * #WebKitWebContext<!-- -->'s #WebKitWebsiteDataManager. To use different settings
-		 * you can get the #WebKitWebsiteDataManager with webkit_web_view_get_website_data_manager()
+		 * you can get the #WebKitWebsiteDataManager with {@link Webkit.web_view_get_website_data_manager}
 		 * and set the new ones.
 		 * Note that all #WebKitWebView<!-- -->s created with an ephemeral #WebKitWebContext
 		 * will be ephemeral automatically.
@@ -5427,7 +5445,7 @@ declare namespace imports.gi.WebKit2 {
 		readonly title: string;
 		/**
 		 * The current active URI of the #WebKitWebView.
-		 * See webkit_web_view_get_uri() for more details.
+		 * See {@link Webkit.web_view_get_uri} for more details.
 		 */
 		readonly uri: string;
 		/**
@@ -5444,21 +5462,21 @@ declare namespace imports.gi.WebKit2 {
 		website_policies: WebsitePolicies;
 		/**
 		 * The zoom level of the #WebKitWebView content.
-		 * See webkit_web_view_set_zoom_level() for more details.
+		 * See {@link Webkit.web_view_set_zoom_level} for more details.
 		 */
 		zoom_level: number;
 		/**
 		 * Asynchronously check if it is possible to execute the given editing command.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_view_can_execute_editing_command_finish() to get the result of the operation.
+		 * {@link Webkit.web_view_can_execute_editing_command_finish} to get the result of the operation.
 		 * @param command the command to check
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		can_execute_editing_command(command: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_can_execute_editing_command().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_can_execute_editing_command}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the editing command can be executed or %FALSE otherwise
 		 */
@@ -5488,14 +5506,14 @@ declare namespace imports.gi.WebKit2 {
 		download_uri(uri: string): Download;
 		/**
 		 * Request to execute the given #command for #web_view. You can use
-		 * webkit_web_view_can_execute_editing_command() to check whether
+		 * {@link Webkit.web_view_can_execute_editing_command} to check whether
 		 * it's possible to execute the command.
 		 * @param command the command to execute
 		 */
 		execute_editing_command(command: string): void;
 		/**
 		 * Request to execute the given #command with #argument for #web_view. You can use
-		 * webkit_web_view_can_execute_editing_command() to check whether
+		 * {@link Webkit.web_view_can_execute_editing_command} to check whether
 		 * it's possible to execute the command.
 		 * @param command the command to execute
 		 * @param argument the command argument
@@ -5515,7 +5533,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the color that is used to draw the #web_view background before
 		 * the actual contents are rendered.
-		 * For more information see also webkit_web_view_set_background_color()
+		 * For more information see also {@link Webkit.web_view_set_background_color}
 		 * @returns a #GdkRGBA to fill in with the background color
 		 */
 		get_background_color(): Gdk.RGBA;
@@ -5575,10 +5593,10 @@ declare namespace imports.gi.WebKit2 {
 		get_is_muted(): boolean;
 		/**
 		 * @deprecated
-		 * Use jsc_value_get_context() instead.
+		 * Use {@link Jsc.value_get_context} instead.
 		 * 
 		 * Get the global JavaScript context used by #web_view to deserialize the
-		 * result values of scripts executed with webkit_web_view_run_javascript().
+		 * result values of scripts executed with {@link Webkit.web_view_run_javascript}.
 		 * @returns the <function>JSGlobalContextRef</function> used by #web_view to deserialize
 		 *    the result values of scripts.
 		 */
@@ -5603,7 +5621,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Gets the #WebKitSettings currently applied to #web_view.
 		 * If no other #WebKitSettings have been explicitly applied to
-		 * #web_view with webkit_web_view_set_settings(), the default
+		 * #web_view with {@link Webkit.web_view_set_settings}, the default
 		 * #WebKitSettings will be returned. This method always returns
 		 * a valid #WebKitSettings object.
 		 * To modify any of the #web_view settings, you can either create
@@ -5622,7 +5640,7 @@ declare namespace imports.gi.WebKit2 {
 		 * #options specifies how the snapshot should be rendered.
 		 * 
 		 * When the operation is finished, #callback will be called. You must
-		 * call webkit_web_view_get_snapshot_finish() to get the result of the
+		 * call {@link Webkit.web_view_get_snapshot_finish} to get the result of the
 		 * operation.
 		 * @param region the #WebKitSnapshotRegion for this snapshot
 		 * @param options #WebKitSnapshotOptions for the snapshot
@@ -5631,7 +5649,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_snapshot(region: SnapshotRegion, options: SnapshotOptions, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an asynchronous operation started with webkit_web_view_get_snapshot().
+		 * Finishes an asynchronous operation started with {@link Webkit.web_view_get_snapshot}.
 		 * @param result a #GAsyncResult
 		 * @returns a #cairo_surface_t with the retrieved snapshot or %NULL in error.
 		 */
@@ -5678,7 +5696,7 @@ declare namespace imports.gi.WebKit2 {
 		 *   When a new load operation starts the active URI is the requested URI:
 		 *   <itemizedlist>
 		 *   <listitem><para>
-		 *     If the load operation was started by webkit_web_view_load_uri(),
+		 *     If the load operation was started by {@link Webkit.web_view_load_uri},
 		 *     the requested URI is the given one.
 		 *   </para></listitem>
 		 *   <listitem><para>
@@ -5738,7 +5756,7 @@ declare namespace imports.gi.WebKit2 {
 		 * #web_view. These can be overridden on a per-origin basis via the
 		 * #WebKitWebView::decide-policy signal handler.
 		 * 
-		 * See also webkit_policy_decision_use_with_policies().
+		 * See also {@link Webkit.policy_decision_use_with_policies}.
 		 * @returns the default #WebKitWebsitePolicies
 		 *     associated with the view.
 		 */
@@ -5784,7 +5802,7 @@ declare namespace imports.gi.WebKit2 {
 		is_editable(): boolean;
 		/**
 		 * Get whether a #WebKitWebView is ephemeral. To create an ephemeral #WebKitWebView you need to
-		 * use g_object_new() and pass is-ephemeral property with %TRUE value. See
+		 * use {@link GObject.new} and pass is-ephemeral property with %TRUE value. See
 		 * #WebKitWebView:is-ephemeral for more details.
 		 * If #web_view was created with a ephemeral #WebKitWebView:related-view or an
 		 * ephemeral #WebKitWebView:web-context it will also be ephemeral.
@@ -5815,7 +5833,7 @@ declare namespace imports.gi.WebKit2 {
 		 * This allows clients to display page-loading errors in the #WebKitWebView itself.
 		 * When this method is called from #WebKitWebView::load-failed signal to show an
 		 * error page, then the back-forward list is maintained appropriately.
-		 * For everything else this method works the same way as webkit_web_view_load_html().
+		 * For everything else this method works the same way as {@link Webkit.web_view_load_html}.
 		 * @param content the new content to display as the main page of the #web_view
 		 * @param content_uri the URI for the alternate page content
 		 * @param base_uri the base URI for relative locations or %NULL
@@ -5870,7 +5888,7 @@ declare namespace imports.gi.WebKit2 {
 		load_uri(uri: string): void;
 		/**
 		 * Reloads the current contents of #web_view.
-		 * See also webkit_web_view_reload_bypass_cache().
+		 * See also {@link Webkit.web_view_reload_bypass_cache}.
 		 */
 		reload(): void;
 		/**
@@ -5888,14 +5906,14 @@ declare namespace imports.gi.WebKit2 {
 		 * WebKitSettings:enable-javascript is FALSE, this method will do nothing.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_view_run_javascript_finish() to get the result of the operation.
+		 * {@link Webkit.web_view_run_javascript_finish} to get the result of the operation.
 		 * @param script the script to run
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the script finished
 		 */
 		run_javascript(script: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_run_javascript().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_run_javascript}.
 		 * 
 		 * This is an example of using webkit_web_view_run_javascript() with a script returning
 		 * a string:
@@ -5956,7 +5974,7 @@ declare namespace imports.gi.WebKit2 {
 		 * current page in #web_view.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
-		 * then call webkit_web_view_run_javascript_from_gresource_finish() to get the result
+		 * then call {@link Webkit.web_view_run_javascript_from_gresource_finish} to get the result
 		 * of the operation.
 		 * @param resource the location of the resource to load
 		 * @param cancellable a #GCancellable or %NULL to ignore
@@ -5964,7 +5982,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		run_javascript_from_gresource(resource: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_run_javascript_from_gresource().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_run_javascript_from_gresource}.
 		 * 
 		 * Check webkit_web_view_run_javascript_finish() for a usage example.
 		 * @param result a #GAsyncResult
@@ -5977,7 +5995,7 @@ declare namespace imports.gi.WebKit2 {
 		 * If WebKitSettings:enable-javascript is FALSE, this method will do nothing.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_view_run_javascript_in_world_finish() to get the result of the operation.
+		 * {@link Webkit.web_view_run_javascript_in_world_finish} to get the result of the operation.
 		 * @param script the script to run
 		 * @param world_name the name of a #WebKitScriptWorld
 		 * @param cancellable a #GCancellable or %NULL to ignore
@@ -5985,7 +6003,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		run_javascript_in_world(script: string, world_name: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_run_javascript_in_world().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_run_javascript_in_world}.
 		 * @param result a #GAsyncResult
 		 * @returns a #WebKitJavascriptResult with the result of the last executed statement in #script
 		 *    or %NULL in case of error
@@ -5997,7 +6015,7 @@ declare namespace imports.gi.WebKit2 {
 		 * specified in #save_mode.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
-		 * then call webkit_web_view_save_finish() to get the result of the
+		 * then call {@link Webkit.web_view_save_finish} to get the result of the
 		 * operation.
 		 * @param save_mode the #WebKitSaveMode specifying how the web page should be saved.
 		 * @param cancellable a #GCancellable or %NULL to ignore
@@ -6005,7 +6023,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		save(save_mode: SaveMode, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_save().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_save}.
 		 * @param result a #GAsyncResult
 		 * @returns a #GInputStream with the result of saving
 		 *    the current web page or %NULL in case of error.
@@ -6017,7 +6035,7 @@ declare namespace imports.gi.WebKit2 {
 		 * specified in #save_mode and writing it to #file.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
-		 * then call webkit_web_view_save_to_file_finish() to get the result of the
+		 * then call {@link Webkit.web_view_save_to_file_finish} to get the result of the
 		 * operation.
 		 * @param file the #GFile where the current web page should be saved to.
 		 * @param save_mode the #WebKitSaveMode specifying how the web page should be saved.
@@ -6026,7 +6044,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		save_to_file(file: Gio.File, save_mode: SaveMode, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_save_to_file().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_save_to_file}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the web page was successfully saved to a file or %FALSE otherwise.
 		 */
@@ -6036,14 +6054,14 @@ declare namespace imports.gi.WebKit2 {
 		 * 
 		 * If you don't expect any reply, or you simply want to ignore it, you can pass %NULL as #callback.
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_web_view_send_message_to_page_finish() to get the message reply.
+		 * {@link Webkit.web_view_send_message_to_page_finish} to get the message reply.
 		 * @param message a #WebKitUserMessage
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback (nullable): A #GAsyncReadyCallback to call when the request is satisfied or %NULL
 		 */
 		send_message_to_page(message: UserMessage, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_web_view_send_message_to_page().
+		 * Finish an asynchronous operation started with {@link Webkit.web_view_send_message_to_page}.
 		 * @param result a #GAsyncResult
 		 * @returns a #WebKitUserMessage with the reply or %NULL in case of error.
 		 */
@@ -6167,7 +6185,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Emitted when closing a #WebKitWebView is requested. This occurs when a
 		 * call is made from JavaScript's <function>window.close</function> function or
-		 * after trying to close the #web_view with webkit_web_view_try_close().
+		 * after trying to close the #web_view with {@link Webkit.web_view_try_close}.
 		 * It is the owner's responsibility to handle this signal to hide or
 		 * destroy the #WebKitWebView, if necessary.
 		 * @param signal 
@@ -6183,7 +6201,7 @@ declare namespace imports.gi.WebKit2 {
 		 * or build its own context menu.
 		 * <itemizedlist>
 		 * <listitem><para>
-		 *  To customize the proposed menu you can use webkit_context_menu_prepend(),
+		 *  To customize the proposed menu you can use {@link Webkit.context_menu_prepend},
 		 *  webkit_context_menu_append() or webkit_context_menu_insert() to add new
 		 *  #WebKitContextMenuItem<!-- -->s to #context_menu, webkit_context_menu_move_item()
 		 *  to reorder existing items, or webkit_context_menu_remove() to remove an
@@ -6258,7 +6276,7 @@ declare namespace imports.gi.WebKit2 {
 		 * navigation action that triggered this signal.
 		 * 
 		 * The new #WebKitWebView must be related to #web_view, see
-		 * webkit_web_view_new_with_related_view() for more details.
+		 * {@link Webkit.web_view_new_with_related_view} for more details.
 		 * 
 		 * The new #WebKitWebView should not be displayed to the user
 		 * until the #WebKitWebView::ready-to-show signal is emitted.
@@ -6301,7 +6319,7 @@ declare namespace imports.gi.WebKit2 {
 		 *         /<!-- -->* Make a policy decision here. *<!-- -->/
 		 *         break;
 		 *     default:
-		 *         /<!-- -->* Making no decision results in webkit_policy_decision_use(). *<!-- -->/
+		 *         /<!-- -->* Making no decision results in {@link Webkit.policy_decision_use}. *<!-- -->/
 		 *         return FALSE;
 		 *     }
 		 *     return TRUE;
@@ -6453,7 +6471,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Emitted when a TLS error occurs during a load operation.
 		 * To allow an exception for this #certificate
-		 * and the host of #failing_uri use webkit_web_context_allow_tls_certificate_for_host().
+		 * and the host of #failing_uri use {@link Webkit.web_context_allow_tls_certificate_for_host}.
 		 * 
 		 * To handle this signal asynchronously you should call g_object_ref() on #certificate
 		 * and return %TRUE.
@@ -6527,7 +6545,7 @@ declare namespace imports.gi.WebKit2 {
 		 * </programlisting></informalexample>
 		 * 
 		 * It is possible to handle permission requests asynchronously, by
-		 * simply calling g_object_ref() on the #request argument and
+		 * simply calling {@link GObject.ref} on the #request argument and
 		 * returning %TRUE to block the default signal handler.  If the
 		 * last reference is removed on a #WebKitPermissionRequest and the
 		 * request has not been handled, webkit_permission_request_deny()
@@ -6551,7 +6569,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Emitted when printing is requested on #web_view, usually by a JavaScript call,
 		 * before the print dialog is shown. This signal can be used to set the initial
 		 * print settings and page setup of #print_operation to be used as default values in
-		 * the print dialog. You can call webkit_print_operation_set_print_settings() and
+		 * the print dialog. You can call {@link Webkit.print_operation_set_print_settings} and
 		 * webkit_print_operation_set_page_setup() and then return %FALSE to propagate the
 		 * event so that the print dialog is shown.
 		 * 
@@ -6573,7 +6591,7 @@ declare namespace imports.gi.WebKit2 {
 		 * all the information about how the window should look, including
 		 * size, position, whether the location, status and scrollbars
 		 * should be displayed, is already set on the #WebKitWindowProperties
-		 * of #web_view. See also webkit_web_view_get_window_properties().
+		 * of #web_view. See also {@link Webkit.web_view_get_window_properties}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -6680,7 +6698,7 @@ declare namespace imports.gi.WebKit2 {
 		 * </itemizedlist>
 		 * 
 		 * It is possible to handle the script dialog request asynchronously, by simply
-		 * caling webkit_script_dialog_ref() on the #dialog argument and calling
+		 * caling {@link Webkit.script_dialog_ref} on the #dialog argument and calling
 		 * webkit_script_dialog_close() when done.
 		 * If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
 		 * closed, webkit_script_dialog_close() will be called.
@@ -6734,7 +6752,7 @@ declare namespace imports.gi.WebKit2 {
 		 * argument passed contains information about the text fields of the form. This
 		 * is typically used to store login information that can be used later to
 		 * pre-fill the form.
-		 * The form will not be submitted until webkit_form_submission_request_submit() is called.
+		 * The form will not be submitted until {@link Webkit.form_submission_request_submit} is called.
 		 * 
 		 * It is possible to handle the form submission request asynchronously, by
 		 * simply calling g_object_ref() on the #request argument and calling
@@ -6752,7 +6770,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * This signal is emitted when a #WebKitUserMessage is received from the
 		 * #WebKitWebPage corresponding to #web_view. You can reply to the message
-		 * using webkit_user_message_send_reply().
+		 * using {@link Webkit.user_message_send_reply}.
 		 * 
 		 * You can handle the user message asynchronously by calling g_object_ref() on
 		 * #message and returning %TRUE. If the last reference of #message is removed
@@ -6842,7 +6860,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Creates a new #WebKitWebView with the default #WebKitWebContext and
 		 * no #WebKitUserContentManager associated with it.
-		 * See also webkit_web_view_new_with_context(),
+		 * See also {@link Webkit.web_view_new_with_context},
 		 * webkit_web_view_new_with_user_content_manager(), and
 		 * webkit_web_view_new_with_settings().
 		 * @returns The newly created #WebKitWebView widget
@@ -6851,7 +6869,7 @@ declare namespace imports.gi.WebKit2 {
 		/**
 		 * Creates a new #WebKitWebView with the given #WebKitWebContext and
 		 * no #WebKitUserContentManager associated with it.
-		 * See also webkit_web_view_new_with_user_content_manager() and
+		 * See also {@link Webkit.web_view_new_with_user_content_manager} and
 		 * webkit_web_view_new_with_settings().
 		 * @param context the #WebKitWebContext to be used by the #WebKitWebView
 		 * @returns The newly created #WebKitWebView widget
@@ -6874,7 +6892,7 @@ declare namespace imports.gi.WebKit2 {
 		public static new_with_related_view(web_view: WebView): Gtk.Widget;
 		/**
 		 * Creates a new #WebKitWebView with the given #WebKitSettings.
-		 * See also webkit_web_view_new_with_context(), and
+		 * See also {@link Webkit.web_view_new_with_context}, and
 		 * webkit_web_view_new_with_user_content_manager().
 		 * @param settings a #WebKitSettings
 		 * @returns The newly created #WebKitWebView widget
@@ -7001,6 +7019,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		service_worker_registrations_directory: string;
 		/**
+		 * @deprecated
+		 * WebSQL is no longer supported. Use IndexedDB instead.
+		 * 
 		 * The directory where WebSQL databases will be stored.
 		 */
 		websql_directory: string;
@@ -7009,7 +7030,7 @@ declare namespace imports.gi.WebKit2 {
 		 * If #timespan is 0, all website data will be removed.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_website_data_manager_clear_finish() to get the result of the operation.
+		 * {@link Webkit.website_data_manager_clear_finish} to get the result of the operation.
 		 * 
 		 * Due to implementation limitations, this function does not currently delete
 		 * any stored cookies if #timespan is nonzero. This behavior may change in the
@@ -7021,7 +7042,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		clear(types: WebsiteDataTypes, timespan: GLib.TimeSpan, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_website_data_manager_clear()
+		 * Finish an asynchronous operation started with {@link Webkit.website_data_manager_clear}
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if website data was successfully cleared, or %FALSE otherwise.
 		 */
@@ -7030,17 +7051,17 @@ declare namespace imports.gi.WebKit2 {
 		 * Asynchronously get the list of #WebKitWebsiteData for the given #types.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_website_data_manager_fetch_finish() to get the result of the operation.
+		 * {@link Webkit.website_data_manager_fetch_finish} to get the result of the operation.
 		 * @param types #WebKitWebsiteDataTypes
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		fetch(types: WebsiteDataTypes, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_website_data_manager_fetch().
+		 * Finish an asynchronous operation started with {@link Webkit.website_data_manager_fetch}.
 		 * @param result a #GAsyncResult
 		 * @returns a #GList of #WebKitWebsiteData. You must free the #GList with
-		 *    g_list_free() and unref the #WebKitWebsiteData<!-- -->s with webkit_website_data_unref() when you're done with them.
+		 *    {@link G.list_free} and unref the #WebKitWebsiteData<!-- -->s with webkit_website_data_unref() when you're done with them.
 		 */
 		fetch_finish(result: Gio.AsyncResult): GLib.List;
 		/**
@@ -7095,16 +7116,16 @@ declare namespace imports.gi.WebKit2 {
 		 * contains the list of #WebKitITPFirstParty under which it has been seen.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
-		 * webkit_website_data_manager_get_itp_summary_finish() to get the result of the operation.
+		 * {@link Webkit.website_data_manager_get_itp_summary_finish} to get the result of the operation.
 		 * @param cancellable a #GCancellable or %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		get_itp_summary(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_website_data_manager_get_itp_summary().
+		 * Finish an asynchronous operation started with {@link Webkit.website_data_manager_get_itp_summary}.
 		 * @param result a #GAsyncResult
 		 * @returns a #GList of #WebKitITPThirdParty.
-		 *    You must free the #GList with g_list_free() and unref the #WebKitITPThirdParty<!-- -->s with
+		 *    You must free the #GList with {@link G.list_free} and unref the #WebKitITPThirdParty<!-- -->s with
 		 *    webkit_itp_third_party_unref() when you're done with them.
 		 */
 		get_itp_summary_finish(result: Gio.AsyncResult): GLib.List;
@@ -7120,7 +7141,7 @@ declare namespace imports.gi.WebKit2 {
 		get_offline_application_cache_directory(): string | null;
 		/**
 		 * Get whether persistent credential storage is enabled or not.
-		 * See also webkit_website_data_manager_set_persistent_credential_storage_enabled().
+		 * See also {@link Webkit.website_data_manager_set_persistent_credential_storage_enabled}.
 		 * @returns %TRUE if persistent credential storage is enabled, or %FALSE otherwise.
 		 */
 		get_persistent_credential_storage_enabled(): boolean;
@@ -7149,7 +7170,7 @@ declare namespace imports.gi.WebKit2 {
 		is_ephemeral(): boolean;
 		/**
 		 * Asynchronously removes the website data of the for the given #types for websites in the given #website_data list.
-		 * Use webkit_website_data_manager_clear() if you want to remove the website data for all sites.
+		 * Use {@link Webkit.website_data_manager_clear} if you want to remove the website data for all sites.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
 		 * webkit_website_data_manager_remove_finish() to get the result of the operation.
@@ -7160,7 +7181,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		remove(types: WebsiteDataTypes, website_data: GLib.List, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous operation started with webkit_website_data_manager_remove().
+		 * Finish an asynchronous operation started with {@link Webkit.website_data_manager_remove}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if website data resources were successfully removed, or %FALSE otherwise.
 		 */
@@ -7169,14 +7190,14 @@ declare namespace imports.gi.WebKit2 {
 		 * Enable or disable Intelligent Tracking Prevention (ITP). When ITP is enabled resource load statistics
 		 * are collected and used to decide whether to allow or block third-party cookies and prevent user tracking.
 		 * Note that while ITP is enabled the accept policy %WEBKIT_COOKIE_POLICY_ACCEPT_NO_THIRD_PARTY is ignored and
-		 * %WEBKIT_COOKIE_POLICY_ACCEPT_ALWAYS is used instead. See also webkit_cookie_manager_set_accept_policy().
+		 * %WEBKIT_COOKIE_POLICY_ACCEPT_ALWAYS is used instead. See also {@link Webkit.cookie_manager_set_accept_policy}.
 		 * @param enabled value to set
 		 */
 		set_itp_enabled(enabled: boolean): void;
 		/**
 		 * Set the network proxy settings to be used by connections started in #manager session.
 		 * By default %WEBKIT_NETWORK_PROXY_MODE_DEFAULT is used, which means that the
-		 * system settings will be used (g_proxy_resolver_get_default()).
+		 * system settings will be used {@link (g.proxy_resolver_get_default}).
 		 * If you want to override the system default settings, you can either use
 		 * %WEBKIT_NETWORK_PROXY_MODE_NO_PROXY to make sure no proxies are used at all,
 		 * or %WEBKIT_NETWORK_PROXY_MODE_CUSTOM to provide your own proxy settings.
@@ -7410,13 +7431,13 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		public static new(): ApplicationInfo;
 		/**
-		 * Get the name of the application. If webkit_application_info_set_name() hasn't been
+		 * Get the name of the application. If {@link Webkit.application_info_set_name} hasn't been
 		 * called with a valid name, this returns g_get_prgname().
 		 * @returns the application name
 		 */
 		public get_name(): string;
 		/**
-		 * Get the application version previously set with webkit_application_info_set_version().
+		 * Get the application version previously set with {@link Webkit.application_info_set_version}.
 		 * @returns return location for the major version number
 		 * 
 		 * return location for the minor version number
@@ -7432,7 +7453,7 @@ declare namespace imports.gi.WebKit2 {
 		public ref(): ApplicationInfo;
 		/**
 		 * Set the name of the application. If not provided, or %NULL is passed,
-		 * g_get_prgname() will be used.
+		 * {@link G.get_prgname} will be used.
 		 * @param name the application name
 		 */
 		public set_name(name: string): void;
@@ -7453,130 +7474,6 @@ declare namespace imports.gi.WebKit2 {
 		 * thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface AuthenticationRequestClassInitOptions {}
-	interface AuthenticationRequestClass {}
-	class AuthenticationRequestClass {
-		public constructor(options?: Partial<AuthenticationRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface AuthenticationRequestPrivateInitOptions {}
-	interface AuthenticationRequestPrivate {}
-	class AuthenticationRequestPrivate {
-		public constructor(options?: Partial<AuthenticationRequestPrivateInitOptions>);
-	}
-
-	export interface AutomationSessionClassInitOptions {}
-	interface AutomationSessionClass {}
-	class AutomationSessionClass {
-		public constructor(options?: Partial<AutomationSessionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface AutomationSessionPrivateInitOptions {}
-	interface AutomationSessionPrivate {}
-	class AutomationSessionPrivate {
-		public constructor(options?: Partial<AutomationSessionPrivateInitOptions>);
-	}
-
-	export interface BackForwardListClassInitOptions {}
-	interface BackForwardListClass {}
-	class BackForwardListClass {
-		public constructor(options?: Partial<BackForwardListClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface BackForwardListItemClassInitOptions {}
-	interface BackForwardListItemClass {}
-	class BackForwardListItemClass {
-		public constructor(options?: Partial<BackForwardListItemClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface BackForwardListItemPrivateInitOptions {}
-	interface BackForwardListItemPrivate {}
-	class BackForwardListItemPrivate {
-		public constructor(options?: Partial<BackForwardListItemPrivateInitOptions>);
-	}
-
-	export interface BackForwardListPrivateInitOptions {}
-	interface BackForwardListPrivate {}
-	class BackForwardListPrivate {
-		public constructor(options?: Partial<BackForwardListPrivateInitOptions>);
-	}
-
-	export interface ColorChooserRequestClassInitOptions {}
-	interface ColorChooserRequestClass {}
-	class ColorChooserRequestClass {
-		public constructor(options?: Partial<ColorChooserRequestClassInitOptions>);
-	}
-
-	export interface ColorChooserRequestPrivateInitOptions {}
-	interface ColorChooserRequestPrivate {}
-	class ColorChooserRequestPrivate {
-		public constructor(options?: Partial<ColorChooserRequestPrivateInitOptions>);
-	}
-
-	export interface ContextMenuClassInitOptions {}
-	interface ContextMenuClass {}
-	class ContextMenuClass {
-		public constructor(options?: Partial<ContextMenuClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ContextMenuItemClassInitOptions {}
-	interface ContextMenuItemClass {}
-	class ContextMenuItemClass {
-		public constructor(options?: Partial<ContextMenuItemClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ContextMenuItemPrivateInitOptions {}
-	interface ContextMenuItemPrivate {}
-	class ContextMenuItemPrivate {
-		public constructor(options?: Partial<ContextMenuItemPrivateInitOptions>);
-	}
-
-	export interface ContextMenuPrivateInitOptions {}
-	interface ContextMenuPrivate {}
-	class ContextMenuPrivate {
-		public constructor(options?: Partial<ContextMenuPrivateInitOptions>);
-	}
-
-	export interface CookieManagerClassInitOptions {}
-	interface CookieManagerClass {}
-	class CookieManagerClass {
-		public constructor(options?: Partial<CookieManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface CookieManagerPrivateInitOptions {}
-	interface CookieManagerPrivate {}
-	class CookieManagerPrivate {
-		public constructor(options?: Partial<CookieManagerPrivateInitOptions>);
 	}
 
 	export interface CredentialInitOptions {}
@@ -7622,155 +7519,10 @@ declare namespace imports.gi.WebKit2 {
 		public has_password(): boolean;
 	}
 
-	export interface DeviceInfoPermissionRequestClassInitOptions {}
-	interface DeviceInfoPermissionRequestClass {}
-	class DeviceInfoPermissionRequestClass {
-		public constructor(options?: Partial<DeviceInfoPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface DeviceInfoPermissionRequestPrivateInitOptions {}
-	interface DeviceInfoPermissionRequestPrivate {}
-	class DeviceInfoPermissionRequestPrivate {
-		public constructor(options?: Partial<DeviceInfoPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface DownloadClassInitOptions {}
-	interface DownloadClass {}
-	class DownloadClass {
-		public constructor(options?: Partial<DownloadClassInitOptions>);
-		public decide_destination: {(download: Download, suggested_filename: string): boolean;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface DownloadPrivateInitOptions {}
-	interface DownloadPrivate {}
-	class DownloadPrivate {
-		public constructor(options?: Partial<DownloadPrivateInitOptions>);
-	}
-
-	export interface EditorStateClassInitOptions {}
-	interface EditorStateClass {}
-	class EditorStateClass {
-		public constructor(options?: Partial<EditorStateClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface EditorStatePrivateInitOptions {}
-	interface EditorStatePrivate {}
-	class EditorStatePrivate {
-		public constructor(options?: Partial<EditorStatePrivateInitOptions>);
-	}
-
-	export interface FaviconDatabaseClassInitOptions {}
-	interface FaviconDatabaseClass {}
-	class FaviconDatabaseClass {
-		public constructor(options?: Partial<FaviconDatabaseClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FaviconDatabasePrivateInitOptions {}
-	interface FaviconDatabasePrivate {}
-	class FaviconDatabasePrivate {
-		public constructor(options?: Partial<FaviconDatabasePrivateInitOptions>);
-	}
-
-	export interface FileChooserRequestClassInitOptions {}
-	interface FileChooserRequestClass {}
-	class FileChooserRequestClass {
-		public constructor(options?: Partial<FileChooserRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FileChooserRequestPrivateInitOptions {}
-	interface FileChooserRequestPrivate {}
-	class FileChooserRequestPrivate {
-		public constructor(options?: Partial<FileChooserRequestPrivateInitOptions>);
-	}
-
-	export interface FindControllerClassInitOptions {}
-	interface FindControllerClass {}
-	class FindControllerClass {
-		public constructor(options?: Partial<FindControllerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FindControllerPrivateInitOptions {}
-	interface FindControllerPrivate {}
-	class FindControllerPrivate {
-		public constructor(options?: Partial<FindControllerPrivateInitOptions>);
-	}
-
-	export interface FormSubmissionRequestClassInitOptions {}
-	interface FormSubmissionRequestClass {}
-	class FormSubmissionRequestClass {
-		public constructor(options?: Partial<FormSubmissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface FormSubmissionRequestPrivateInitOptions {}
-	interface FormSubmissionRequestPrivate {}
-	class FormSubmissionRequestPrivate {
-		public constructor(options?: Partial<FormSubmissionRequestPrivateInitOptions>);
-	}
-
-	export interface GeolocationManagerClassInitOptions {}
-	interface GeolocationManagerClass {}
-	class GeolocationManagerClass {
-		public constructor(options?: Partial<GeolocationManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface GeolocationManagerPrivateInitOptions {}
-	interface GeolocationManagerPrivate {}
-	class GeolocationManagerPrivate {
-		public constructor(options?: Partial<GeolocationManagerPrivateInitOptions>);
-	}
-
-	export interface GeolocationPermissionRequestClassInitOptions {}
-	interface GeolocationPermissionRequestClass {}
-	class GeolocationPermissionRequestClass {
-		public constructor(options?: Partial<GeolocationPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface GeolocationPermissionRequestPrivateInitOptions {}
-	interface GeolocationPermissionRequestPrivate {}
-	class GeolocationPermissionRequestPrivate {
-		public constructor(options?: Partial<GeolocationPermissionRequestPrivateInitOptions>);
-	}
-
 	export interface GeolocationPositionInitOptions {}
 	/**
 	 * WebKitGeolocationPosition is an opaque struct used to provide position updates to a
-	 * #WebKitGeolocationManager using webkit_geolocation_manager_update_position().
+	 * #WebKitGeolocationManager using {@link Webkit.geolocation_manager_update_position}.
 	 */
 	interface GeolocationPosition {}
 	class GeolocationPosition {
@@ -7820,22 +7572,6 @@ declare namespace imports.gi.WebKit2 {
 		public set_timestamp(timestamp: number): void;
 	}
 
-	export interface HitTestResultClassInitOptions {}
-	interface HitTestResultClass {}
-	class HitTestResultClass {
-		public constructor(options?: Partial<HitTestResultClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface HitTestResultPrivateInitOptions {}
-	interface HitTestResultPrivate {}
-	class HitTestResultPrivate {
-		public constructor(options?: Partial<HitTestResultPrivateInitOptions>);
-	}
-
 	export interface ITPFirstPartyInitOptions {}
 	interface ITPFirstParty {}
 	class ITPFirstParty {
@@ -7847,14 +7583,14 @@ declare namespace imports.gi.WebKit2 {
 		public get_domain(): string;
 		/**
 		 * Get the last time a #WebKitITPThirdParty has been seen under #itp_first_party.
-		 * Each #WebKitITPFirstParty is created by webkit_itp_third_party_get_first_parties() and
+		 * Each #WebKitITPFirstParty is created by {@link Webkit.itp_third_party_get_first_parties} and
 		 * therefore corresponds to exactly one #WebKitITPThirdParty.
 		 * @returns the last update time as a #GDateTime
 		 */
 		public get_last_update_time(): GLib.DateTime;
 		/**
 		 * Get whether #itp_first_party has granted website data access to its #WebKitITPThirdParty.
-		 * Each #WebKitITPFirstParty is created by webkit_itp_third_party_get_first_parties() and
+		 * Each #WebKitITPFirstParty is created by {@link Webkit.itp_third_party_get_first_parties} and
 		 * therefore corresponds to exactly one #WebKitITPThirdParty.
 		 * @returns %TRUE if website data access has been granted, or %FALSE otherwise
 		 */
@@ -7903,39 +7639,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface InputMethodContextClassInitOptions {}
-	interface InputMethodContextClass {}
-	class InputMethodContextClass {
-		public constructor(options?: Partial<InputMethodContextClassInitOptions>);
-		public preedit_started: {(context: InputMethodContext): void;};
-		public preedit_changed: {(context: InputMethodContext): void;};
-		public preedit_finished: {(context: InputMethodContext): void;};
-		public committed: {(context: InputMethodContext, text: string): void;};
-		public delete_surrounding: {(context: InputMethodContext, offset: number, n_chars: number): void;};
-		public set_enable_preedit: {(context: InputMethodContext, enabled: boolean): void;};
-		public get_preedit: {(context: InputMethodContext): [ text: string | null, underlines: GLib.List | null, cursor_offset: number | null ];};
-		public filter_key_event: {(context: InputMethodContext, key_event: Gdk.EventKey): boolean;};
-		public notify_focus_in: {(context: InputMethodContext): void;};
-		public notify_focus_out: {(context: InputMethodContext): void;};
-		public notify_cursor_area: {(context: InputMethodContext, x: number, y: number, width: number, height: number): void;};
-		public notify_surrounding: {(context: InputMethodContext, text: string, length: number, cursor_index: number, selection_index: number): void;};
-		public reset: {(context: InputMethodContext): void;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-		public _webkit_reserved4: {(): void;};
-		public _webkit_reserved5: {(): void;};
-		public _webkit_reserved6: {(): void;};
-		public _webkit_reserved7: {(): void;};
-	}
-
-	export interface InputMethodContextPrivateInitOptions {}
-	interface InputMethodContextPrivate {}
-	class InputMethodContextPrivate {
-		public constructor(options?: Partial<InputMethodContextPrivateInitOptions>);
-	}
-
 	export interface InputMethodUnderlineInitOptions {}
 	interface InputMethodUnderline {}
 	class InputMethodUnderline {
@@ -7964,32 +7667,16 @@ declare namespace imports.gi.WebKit2 {
 		public set_color(rgba: Gdk.RGBA | null): void;
 	}
 
-	export interface InstallMissingMediaPluginsPermissionRequestClassInitOptions {}
-	interface InstallMissingMediaPluginsPermissionRequestClass {}
-	class InstallMissingMediaPluginsPermissionRequestClass {
-		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface InstallMissingMediaPluginsPermissionRequestPrivateInitOptions {}
-	interface InstallMissingMediaPluginsPermissionRequestPrivate {}
-	class InstallMissingMediaPluginsPermissionRequestPrivate {
-		public constructor(options?: Partial<InstallMissingMediaPluginsPermissionRequestPrivateInitOptions>);
-	}
-
 	export interface JavascriptResultInitOptions {}
 	interface JavascriptResult {}
 	class JavascriptResult {
 		public constructor(options?: Partial<JavascriptResultInitOptions>);
 		/**
 		 * @deprecated
-		 * Use jsc_value_get_context() instead.
+		 * Use {@link Jsc.value_get_context} instead.
 		 * 
 		 * Get the global Javascript context that should be used with the
-		 * <function>JSValueRef</function> returned by webkit_javascript_result_get_value().
+		 * <function>JSValueRef</function> returned by {@link Webkit.javascript_result_get_value}.
 		 * @returns the <function>JSGlobalContextRef</function> for the #WebKitJavascriptResult
 		 */
 		public get_global_context(): any;
@@ -8000,10 +7687,10 @@ declare namespace imports.gi.WebKit2 {
 		// public get_js_value(): JavaScriptCore.Value;
 		/**
 		 * @deprecated
-		 * Use webkit_javascript_result_get_js_value() instead.
+		 * Use {@link Webkit.javascript_result_get_js_value} instead.
 		 * 
 		 * Get the value of #js_result. You should use the <function>JSGlobalContextRef</function>
-		 * returned by webkit_javascript_result_get_global_context() to use the <function>JSValueRef</function>.
+		 * returned by {@link Webkit.javascript_result_get_global_context} to use the <function>JSValueRef</function>.
 		 * @returns the <function>JSValueRef</function> of the #WebKitJavascriptResult
 		 */
 		public get_value(): any;
@@ -8020,22 +7707,6 @@ declare namespace imports.gi.WebKit2 {
 		 * thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface MediaKeySystemPermissionRequestClassInitOptions {}
-	interface MediaKeySystemPermissionRequestClass {}
-	class MediaKeySystemPermissionRequestClass {
-		public constructor(options?: Partial<MediaKeySystemPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface MediaKeySystemPermissionRequestPrivateInitOptions {}
-	interface MediaKeySystemPermissionRequestPrivate {}
-	class MediaKeySystemPermissionRequestPrivate {
-		public constructor(options?: Partial<MediaKeySystemPermissionRequestPrivateInitOptions>);
 	}
 
 	export interface MimeInfoInitOptions {}
@@ -8118,22 +7789,6 @@ declare namespace imports.gi.WebKit2 {
 		public is_user_gesture(): boolean;
 	}
 
-	export interface NavigationPolicyDecisionClassInitOptions {}
-	interface NavigationPolicyDecisionClass {}
-	class NavigationPolicyDecisionClass {
-		public constructor(options?: Partial<NavigationPolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface NavigationPolicyDecisionPrivateInitOptions {}
-	interface NavigationPolicyDecisionPrivate {}
-	class NavigationPolicyDecisionPrivate {
-		public constructor(options?: Partial<NavigationPolicyDecisionPrivateInitOptions>);
-	}
-
 	export interface NetworkProxySettingsInitOptions {}
 	interface NetworkProxySettings {}
 	class NetworkProxySettings {
@@ -8142,7 +7797,7 @@ declare namespace imports.gi.WebKit2 {
 		 * Create a new #WebKitNetworkProxySettings with the given #default_proxy_uri and #ignore_hosts.
 		 * 
 		 * The default proxy URI will be used for any URI that doesn't match #ignore_hosts, and doesn't match any
-		 * of the schemes added with webkit_network_proxy_settings_add_proxy_for_scheme().
+		 * of the schemes added with {@link Webkit.network_proxy_settings_add_proxy_for_scheme}.
 		 * If #default_proxy_uri starts with "socks://", it will be treated as referring to all three of the
 		 * socks5, socks4a, and socks4 proxy types.
 		 * 
@@ -8194,46 +7849,6 @@ declare namespace imports.gi.WebKit2 {
 		public free(): void;
 	}
 
-	export interface NotificationClassInitOptions {}
-	interface NotificationClass {}
-	class NotificationClass {
-		public constructor(options?: Partial<NotificationClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-		public _webkit_reserved4: {(): void;};
-		public _webkit_reserved5: {(): void;};
-	}
-
-	export interface NotificationPermissionRequestClassInitOptions {}
-	interface NotificationPermissionRequestClass {}
-	class NotificationPermissionRequestClass {
-		public constructor(options?: Partial<NotificationPermissionRequestClassInitOptions>);
-	}
-
-	export interface NotificationPermissionRequestPrivateInitOptions {}
-	interface NotificationPermissionRequestPrivate {}
-	class NotificationPermissionRequestPrivate {
-		public constructor(options?: Partial<NotificationPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface NotificationPrivateInitOptions {}
-	interface NotificationPrivate {}
-	class NotificationPrivate {
-		public constructor(options?: Partial<NotificationPrivateInitOptions>);
-	}
-
-	export interface OptionMenuClassInitOptions {}
-	interface OptionMenuClass {}
-	class OptionMenuClass {
-		public constructor(options?: Partial<OptionMenuClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
 	export interface OptionMenuItemInitOptions {}
 	interface OptionMenuItem {}
 	class OptionMenuItem {
@@ -8279,12 +7894,6 @@ declare namespace imports.gi.WebKit2 {
 		public is_selected(): boolean;
 	}
 
-	export interface OptionMenuPrivateInitOptions {}
-	interface OptionMenuPrivate {}
-	class OptionMenuPrivate {
-		public constructor(options?: Partial<OptionMenuPrivateInitOptions>);
-	}
-
 	export interface PermissionRequestIfaceInitOptions {}
 	interface PermissionRequestIface {}
 	class PermissionRequestIface {
@@ -8294,110 +7903,12 @@ declare namespace imports.gi.WebKit2 {
 		public deny: {(request: PermissionRequest): void;};
 	}
 
-	export interface PluginClassInitOptions {}
-	interface PluginClass {}
-	class PluginClass {
-		public constructor(options?: Partial<PluginClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PluginPrivateInitOptions {}
-	interface PluginPrivate {}
-	class PluginPrivate {
-		public constructor(options?: Partial<PluginPrivateInitOptions>);
-	}
-
-	export interface PointerLockPermissionRequestClassInitOptions {}
-	interface PointerLockPermissionRequestClass {}
-	class PointerLockPermissionRequestClass {
-		public constructor(options?: Partial<PointerLockPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PointerLockPermissionRequestPrivateInitOptions {}
-	interface PointerLockPermissionRequestPrivate {}
-	class PointerLockPermissionRequestPrivate {
-		public constructor(options?: Partial<PointerLockPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface PolicyDecisionClassInitOptions {}
-	interface PolicyDecisionClass {}
-	class PolicyDecisionClass {
-		public constructor(options?: Partial<PolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PolicyDecisionPrivateInitOptions {}
-	interface PolicyDecisionPrivate {}
-	class PolicyDecisionPrivate {
-		public constructor(options?: Partial<PolicyDecisionPrivateInitOptions>);
-	}
-
-	export interface PrintCustomWidgetClassInitOptions {}
-	interface PrintCustomWidgetClass {}
-	class PrintCustomWidgetClass {
-		public constructor(options?: Partial<PrintCustomWidgetClassInitOptions>);
-		public apply: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget): void;};
-		public update: {(print_custom_widget: PrintCustomWidget, widget: Gtk.Widget, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings): void;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PrintCustomWidgetPrivateInitOptions {}
-	interface PrintCustomWidgetPrivate {}
-	class PrintCustomWidgetPrivate {
-		public constructor(options?: Partial<PrintCustomWidgetPrivateInitOptions>);
-	}
-
-	export interface PrintOperationClassInitOptions {}
-	interface PrintOperationClass {}
-	class PrintOperationClass {
-		public constructor(options?: Partial<PrintOperationClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface PrintOperationPrivateInitOptions {}
-	interface PrintOperationPrivate {}
-	class PrintOperationPrivate {
-		public constructor(options?: Partial<PrintOperationPrivateInitOptions>);
-	}
-
-	export interface ResponsePolicyDecisionClassInitOptions {}
-	interface ResponsePolicyDecisionClass {}
-	class ResponsePolicyDecisionClass {
-		public constructor(options?: Partial<ResponsePolicyDecisionClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface ResponsePolicyDecisionPrivateInitOptions {}
-	interface ResponsePolicyDecisionPrivate {}
-	class ResponsePolicyDecisionPrivate {
-		public constructor(options?: Partial<ResponsePolicyDecisionPrivateInitOptions>);
-	}
-
 	export interface ScriptDialogInitOptions {}
 	interface ScriptDialog {}
 	class ScriptDialog {
 		public constructor(options?: Partial<ScriptDialogInitOptions>);
 		/**
-		 * Close #dialog. When handling a #WebKitScriptDialog asynchronously (webkit_script_dialog_ref()
+		 * Close #dialog. When handling a #WebKitScriptDialog asynchronously {@link (webkit.script_dialog_ref}
 		 * was called in #WebKitWebView::script-dialog callback), this function needs to be called to notify
 		 * that we are done with the script dialog. The dialog will be closed on destruction if this function
 		 * hasn't been called before.
@@ -8453,22 +7964,6 @@ declare namespace imports.gi.WebKit2 {
 		 * thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface SecurityManagerClassInitOptions {}
-	interface SecurityManagerClass {}
-	class SecurityManagerClass {
-		public constructor(options?: Partial<SecurityManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface SecurityManagerPrivateInitOptions {}
-	interface SecurityManagerPrivate {}
-	class SecurityManagerPrivate {
-		public constructor(options?: Partial<SecurityManagerPrivateInitOptions>);
 	}
 
 	export interface SecurityOriginInitOptions {}
@@ -8542,70 +8037,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface SettingsPrivateInitOptions {}
-	interface SettingsPrivate {}
-	class SettingsPrivate {
-		public constructor(options?: Partial<SettingsPrivateInitOptions>);
-	}
-
-	export interface URIRequestClassInitOptions {}
-	interface URIRequestClass {}
-	class URIRequestClass {
-		public constructor(options?: Partial<URIRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URIRequestPrivateInitOptions {}
-	interface URIRequestPrivate {}
-	class URIRequestPrivate {
-		public constructor(options?: Partial<URIRequestPrivateInitOptions>);
-	}
-
-	export interface URIResponseClassInitOptions {}
-	interface URIResponseClass {}
-	class URIResponseClass {
-		public constructor(options?: Partial<URIResponseClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URIResponsePrivateInitOptions {}
-	interface URIResponsePrivate {}
-	class URIResponsePrivate {
-		public constructor(options?: Partial<URIResponsePrivateInitOptions>);
-	}
-
-	export interface URISchemeRequestClassInitOptions {}
-	interface URISchemeRequestClass {}
-	class URISchemeRequestClass {
-		public constructor(options?: Partial<URISchemeRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface URISchemeRequestPrivateInitOptions {}
-	interface URISchemeRequestPrivate {}
-	class URISchemeRequestPrivate {
-		public constructor(options?: Partial<URISchemeRequestPrivateInitOptions>);
-	}
-
 	export interface UserContentFilterInitOptions {}
 	interface UserContentFilter {}
 	class UserContentFilter {
@@ -8631,70 +8062,6 @@ declare namespace imports.gi.WebKit2 {
 		public unref(): void;
 	}
 
-	export interface UserContentFilterStoreClassInitOptions {}
-	interface UserContentFilterStoreClass {}
-	class UserContentFilterStoreClass {
-		public constructor(options?: Partial<UserContentFilterStoreClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserContentFilterStorePrivateInitOptions {}
-	interface UserContentFilterStorePrivate {}
-	class UserContentFilterStorePrivate {
-		public constructor(options?: Partial<UserContentFilterStorePrivateInitOptions>);
-	}
-
-	export interface UserContentManagerClassInitOptions {}
-	interface UserContentManagerClass {}
-	class UserContentManagerClass {
-		public constructor(options?: Partial<UserContentManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserContentManagerPrivateInitOptions {}
-	interface UserContentManagerPrivate {}
-	class UserContentManagerPrivate {
-		public constructor(options?: Partial<UserContentManagerPrivateInitOptions>);
-	}
-
-	export interface UserMediaPermissionRequestClassInitOptions {}
-	interface UserMediaPermissionRequestClass {}
-	class UserMediaPermissionRequestClass {
-		public constructor(options?: Partial<UserMediaPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserMediaPermissionRequestPrivateInitOptions {}
-	interface UserMediaPermissionRequestPrivate {}
-	class UserMediaPermissionRequestPrivate {
-		public constructor(options?: Partial<UserMediaPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface UserMessageClassInitOptions {}
-	interface UserMessageClass {}
-	class UserMessageClass {
-		public constructor(options?: Partial<UserMessageClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface UserMessagePrivateInitOptions {}
-	interface UserMessagePrivate {}
-	class UserMessagePrivate {
-		public constructor(options?: Partial<UserMessagePrivateInitOptions>);
-	}
-
 	export interface UserScriptInitOptions {}
 	interface UserScript {}
 	class UserScript {
@@ -8717,7 +8084,7 @@ declare namespace imports.gi.WebKit2 {
 		public static new(source: string, injected_frames: UserContentInjectedFrames, injection_time: UserScriptInjectionTime, allow_list: string[] | null, block_list: string[] | null): UserScript;
 		/**
 		 * Creates a new user script for script world with name #world_name.
-		 * See webkit_user_script_new() for a full description.
+		 * See {@link Webkit.user_script_new} for a full description.
 		 * @param source Source code of the user script.
 		 * @param injected_frames A #WebKitUserContentInjectedFrames value
 		 * @param injection_time A #WebKitUserScriptInjectionTime value
@@ -8764,7 +8131,7 @@ declare namespace imports.gi.WebKit2 {
 		public static new(source: string, injected_frames: UserContentInjectedFrames, level: UserStyleLevel, allow_list: string[] | null, block_list: string[] | null): UserStyleSheet;
 		/**
 		 * Creates a new user style sheet for script world with name #world_name.
-		 * See webkit_user_style_sheet_new() for a full description.
+		 * See {@link Webkit.user_style_sheet_new} for a full description.
 		 * @param source Source code of the user style sheet.
 		 * @param injected_frames A #WebKitUserContentInjectedFrames value
 		 * @param level A #WebKitUserStyleLevel
@@ -8787,115 +8154,6 @@ declare namespace imports.gi.WebKit2 {
 		 * called from any thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface WebContextClassInitOptions {}
-	interface WebContextClass {}
-	class WebContextClass {
-		public constructor(options?: Partial<WebContextClassInitOptions>);
-		public download_started: {(context: WebContext, download: Download): void;};
-		public initialize_web_extensions: {(context: WebContext): void;};
-		public initialize_notification_permissions: {(context: WebContext): void;};
-		public automation_started: {(context: WebContext, session: AutomationSession): void;};
-		public user_message_received: {(context: WebContext, message: UserMessage): boolean;};
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-	}
-
-	export interface WebContextPrivateInitOptions {}
-	interface WebContextPrivate {}
-	class WebContextPrivate {
-		public constructor(options?: Partial<WebContextPrivateInitOptions>);
-	}
-
-	export interface WebInspectorClassInitOptions {}
-	interface WebInspectorClass {}
-	class WebInspectorClass {
-		public constructor(options?: Partial<WebInspectorClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebInspectorPrivateInitOptions {}
-	interface WebInspectorPrivate {}
-	class WebInspectorPrivate {
-		public constructor(options?: Partial<WebInspectorPrivateInitOptions>);
-	}
-
-	export interface WebResourceClassInitOptions {}
-	interface WebResourceClass {}
-	class WebResourceClass {
-		public constructor(options?: Partial<WebResourceClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebResourcePrivateInitOptions {}
-	interface WebResourcePrivate {}
-	class WebResourcePrivate {
-		public constructor(options?: Partial<WebResourcePrivateInitOptions>);
-	}
-
-	export interface WebViewBaseClassInitOptions {}
-	interface WebViewBaseClass {}
-	class WebViewBaseClass {
-		public constructor(options?: Partial<WebViewBaseClassInitOptions>);
-		public readonly parentClass: Gtk.ContainerClass;
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebViewBasePrivateInitOptions {}
-	interface WebViewBasePrivate {}
-	class WebViewBasePrivate {
-		public constructor(options?: Partial<WebViewBasePrivateInitOptions>);
-	}
-
-	export interface WebViewClassInitOptions {}
-	interface WebViewClass {}
-	class WebViewClass {
-		public constructor(options?: Partial<WebViewClassInitOptions>);
-		public load_changed: {(web_view: WebView, load_event: LoadEvent): void;};
-		public load_failed: {(web_view: WebView, load_event: LoadEvent, failing_uri: string, error: GLib.Error): boolean;};
-		public create: {(web_view: WebView, navigation_action: NavigationAction): Gtk.Widget;};
-		public ready_to_show: {(web_view: WebView): void;};
-		public run_as_modal: {(web_view: WebView): void;};
-		public close: {(web_view: WebView): void;};
-		public script_dialog: {(web_view: WebView, dialog: ScriptDialog): boolean;};
-		public decide_policy: {(web_view: WebView, decision: PolicyDecision, type: PolicyDecisionType): boolean;};
-		public permission_request: {(web_view: WebView, permission_request: PermissionRequest): boolean;};
-		public mouse_target_changed: {(web_view: WebView, hit_test_result: HitTestResult, modifiers: number): void;};
-		public print: {(web_view: WebView, print_operation: PrintOperation): boolean;};
-		public resource_load_started: {(web_view: WebView, resource: WebResource, request: URIRequest): void;};
-		public enter_fullscreen: {(web_view: WebView): boolean;};
-		public leave_fullscreen: {(web_view: WebView): boolean;};
-		public run_file_chooser: {(web_view: WebView, request: FileChooserRequest): boolean;};
-		public context_menu: {(web_view: WebView, context_menu: ContextMenu, event: Gdk.Event, hit_test_result: HitTestResult): boolean;};
-		public context_menu_dismissed: {(web_view: WebView): void;};
-		public submit_form: {(web_view: WebView, request: FormSubmissionRequest): void;};
-		public insecure_content_detected: {(web_view: WebView, event: InsecureContentEvent): void;};
-		public web_process_crashed: {(web_view: WebView): boolean;};
-		public authenticate: {(web_view: WebView, request: AuthenticationRequest): boolean;};
-		public load_failed_with_tls_errors: {(web_view: WebView, failing_uri: string, certificate: Gio.TlsCertificate, errors: Gio.TlsCertificateFlags): boolean;};
-		public show_notification: {(web_view: WebView, notification: Notification): boolean;};
-		public run_color_chooser: {(web_view: WebView, request: ColorChooserRequest): boolean;};
-		public show_option_menu: {(web_view: WebView, rectangle: Gdk.Rectangle, menu: OptionMenu): boolean;};
-		public web_process_terminated: {(web_view: WebView, reason: WebProcessTerminationReason): void;};
-		public user_message_received: {(web_view: WebView, message: UserMessage): boolean;};
-		public _webkit_reserved0: {(): void;};
-	}
-
-	export interface WebViewPrivateInitOptions {}
-	interface WebViewPrivate {}
-	class WebViewPrivate {
-		public constructor(options?: Partial<WebViewPrivateInitOptions>);
 	}
 
 	export interface WebViewSessionStateInitOptions {}
@@ -8949,7 +8207,7 @@ declare namespace imports.gi.WebKit2 {
 		public get_size(types: WebsiteDataTypes): number;
 		/**
 		 * Gets the types of data stored in the client for a #WebKitWebsiteData. These are the
-		 * types actually present, not the types queried with webkit_website_data_manager_fetch().
+		 * types actually present, not the types queried with {@link Webkit.website_data_manager_fetch}.
 		 * @returns a bitmask of #WebKitWebsiteDataTypes in #website_data
 		 */
 		public get_types(): WebsiteDataTypes;
@@ -8966,70 +8224,6 @@ declare namespace imports.gi.WebKit2 {
 		 * called from any thread.
 		 */
 		public unref(): void;
-	}
-
-	export interface WebsiteDataAccessPermissionRequestClassInitOptions {}
-	interface WebsiteDataAccessPermissionRequestClass {}
-	class WebsiteDataAccessPermissionRequestClass {
-		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsiteDataAccessPermissionRequestPrivateInitOptions {}
-	interface WebsiteDataAccessPermissionRequestPrivate {}
-	class WebsiteDataAccessPermissionRequestPrivate {
-		public constructor(options?: Partial<WebsiteDataAccessPermissionRequestPrivateInitOptions>);
-	}
-
-	export interface WebsiteDataManagerClassInitOptions {}
-	interface WebsiteDataManagerClass {}
-	class WebsiteDataManagerClass {
-		public constructor(options?: Partial<WebsiteDataManagerClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsiteDataManagerPrivateInitOptions {}
-	interface WebsiteDataManagerPrivate {}
-	class WebsiteDataManagerPrivate {
-		public constructor(options?: Partial<WebsiteDataManagerPrivateInitOptions>);
-	}
-
-	export interface WebsitePoliciesClassInitOptions {}
-	interface WebsitePoliciesClass {}
-	class WebsitePoliciesClass {
-		public constructor(options?: Partial<WebsitePoliciesClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WebsitePoliciesPrivateInitOptions {}
-	interface WebsitePoliciesPrivate {}
-	class WebsitePoliciesPrivate {
-		public constructor(options?: Partial<WebsitePoliciesPrivateInitOptions>);
-	}
-
-	export interface WindowPropertiesClassInitOptions {}
-	interface WindowPropertiesClass {}
-	class WindowPropertiesClass {
-		public constructor(options?: Partial<WindowPropertiesClassInitOptions>);
-		public _webkit_reserved0: {(): void;};
-		public _webkit_reserved1: {(): void;};
-		public _webkit_reserved2: {(): void;};
-		public _webkit_reserved3: {(): void;};
-	}
-
-	export interface WindowPropertiesPrivateInitOptions {}
-	interface WindowPropertiesPrivate {}
-	class WindowPropertiesPrivate {
-		public constructor(options?: Partial<WindowPropertiesPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -9669,14 +8863,14 @@ declare namespace imports.gi.WebKit2 {
 		 * This type of policy decision
 		 *   is requested when WebKit is about to navigate to a new page in either the
 		 *   main frame or a subframe. Acceptable policy decisions are either
-		 *   webkit_policy_decision_use() or webkit_policy_decision_ignore(). This
+		 *   {@link Webkit.policy_decision_use} or webkit_policy_decision_ignore(). This
 		 *   type of policy decision is always a #WebKitNavigationPolicyDecision.
 		 */
 		NAVIGATION_ACTION = 0,
 		/**
 		 * This type of policy decision
 		 *   is requested when WebKit is about to create a new window. Acceptable policy
-		 *   decisions are either webkit_policy_decision_use() or
+		 *   decisions are either {@link Webkit.policy_decision_use} or
 		 *   webkit_policy_decision_ignore(). This type of policy decision is always
 		 *   a #WebKitNavigationPolicyDecision. These decisions are useful for implementing
 		 *   special actions for new windows, such as forcing the new window to open
@@ -9689,7 +8883,7 @@ declare namespace imports.gi.WebKit2 {
 		 *   received a response for a network resource and is about to start the load.
 		 *   Note that these resources include all subresources of a page such as images
 		 *   and stylesheets as well as main documents. Appropriate policy responses to
-		 *   this decision are webkit_policy_decision_use(), webkit_policy_decision_ignore(),
+		 *   this decision are {@link Webkit.policy_decision_use}, webkit_policy_decision_ignore(),
 		 *   or webkit_policy_decision_download(). This type of policy decision is always
 		 *   a #WebKitResponsePolicyDecision. This decision is useful for forcing
 		 *   some types of resources to be downloaded rather than rendered in the WebView
@@ -9744,7 +8938,7 @@ declare namespace imports.gi.WebKit2 {
 
 	/**
 	 * Enum values representing the response of the print dialog shown with
-	 * webkit_print_operation_run_dialog().
+	 * {@link Webkit.print_operation_run_dialog}.
 	 */
 	enum PrintOperationResponse {
 		/**
@@ -10256,13 +9450,13 @@ declare namespace imports.gi.WebKit2 {
 	 * The copy clipboard command. Copies the current selection inside
 	 * a #WebKitWebView to the clipboard.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's
 	 * possible to copy to the clipboard when there is an active selection
 	 * inside the #WebKitWebView.
 	 * @returns The copy clipboard command. Copies the current selection inside
 	 * a #WebKitWebView to the clipboard.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's
 	 * possible to copy to the clipboard when there is an active selection
 	 * inside the #WebKitWebView.
 	 */
@@ -10273,12 +9467,12 @@ declare namespace imports.gi.WebKit2 {
 	 * the current cursor position. If there's a selection, the selected text
 	 * will be used as the link text, otherwise the URL itself will be used.
 	 * It receives the link URL as argument. This command should be executed
-	 * with webkit_web_view_execute_editing_command_with_argument()
+	 * with {@link Webkit.web_view_execute_editing_command_with_argument}
 	 * @returns The create link command. Creates a link element that is inserted at
 	 * the current cursor position. If there's a selection, the selected text
 	 * will be used as the link text, otherwise the URL itself will be used.
 	 * It receives the link URL as argument. This command should be executed
-	 * with webkit_web_view_execute_editing_command_with_argument()
+	 * with {@link Webkit.web_view_execute_editing_command_with_argument}
 	 */
 	const EDITING_COMMAND_CREATE_LINK: string;
 
@@ -10286,13 +9480,13 @@ declare namespace imports.gi.WebKit2 {
 	 * The cut clipboard command. Copies the current selection inside
 	 * a #WebKitWebView to the clipboard and deletes the selected content.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's
 	 * possible to cut to the clipboard when the #WebKitWebView content is
 	 * editable and there is an active selection.
 	 * @returns The cut clipboard command. Copies the current selection inside
 	 * a #WebKitWebView to the clipboard and deletes the selected content.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's
 	 * possible to cut to the clipboard when the #WebKitWebView content is
 	 * editable and there is an active selection.
 	 */
@@ -10302,11 +9496,11 @@ declare namespace imports.gi.WebKit2 {
 	 * The insert image command. Creates an image element that is inserted at
 	 * the current cursor position. It receives an URI as argument,
 	 * that is used as the image source. This command should be executed with
-	 * webkit_web_view_execute_editing_command_with_argument().
+	 * {@link Webkit.web_view_execute_editing_command_with_argument}.
 	 * @returns The insert image command. Creates an image element that is inserted at
 	 * the current cursor position. It receives an URI as argument,
 	 * that is used as the image source. This command should be executed with
-	 * webkit_web_view_execute_editing_command_with_argument().
+	 * {@link Webkit.web_view_execute_editing_command_with_argument}.
 	 */
 	const EDITING_COMMAND_INSERT_IMAGE: string;
 
@@ -10314,13 +9508,13 @@ declare namespace imports.gi.WebKit2 {
 	 * The paste clipboard command. Pastes the contents of the clipboard to
 	 * a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's possible
 	 * to paste from the clipboard when the #WebKitWebView content is editable
 	 * and clipboard is not empty.
 	 * @returns The paste clipboard command. Pastes the contents of the clipboard to
 	 * a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's possible
 	 * to paste from the clipboard when the #WebKitWebView content is editable
 	 * and clipboard is not empty.
 	 */
@@ -10330,13 +9524,13 @@ declare namespace imports.gi.WebKit2 {
 	 * The paste as plaintext clipboard command. Pastes the contents of the
 	 * clipboard to a #WebKitWebView, with formatting removed.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's possible
 	 * to paste from the clipboard when the #WebKitWebView content is editable
 	 * and clipboard is not empty.
 	 * @returns The paste as plaintext clipboard command. Pastes the contents of the
 	 * clipboard to a #WebKitWebView, with formatting removed.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). In general it's possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. In general it's possible
 	 * to paste from the clipboard when the #WebKitWebView content is editable
 	 * and clipboard is not empty.
 	 */
@@ -10346,12 +9540,12 @@ declare namespace imports.gi.WebKit2 {
 	 * The redo command. Redoes a previously undone editing command in
 	 * a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. It's only possible
 	 * to redo a command when it has been previously undone.
 	 * @returns The redo command. Redoes a previously undone editing command in
 	 * a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. It's only possible
 	 * to redo a command when it has been previously undone.
 	 */
 	const EDITING_COMMAND_REDO: string;
@@ -10361,52 +9555,52 @@ declare namespace imports.gi.WebKit2 {
 	 * a #WebKitWebView.
 	 * It is always possible to select all text, no matter whether the
 	 * #WebKitWebView content is editable or not. You can still check it
-	 * with webkit_web_view_can_execute_editing_command().
+	 * with {@link Webkit.web_view_can_execute_editing_command}.
 	 * @returns The select all command. Selects all the content of the current text field in
 	 * a #WebKitWebView.
 	 * It is always possible to select all text, no matter whether the
 	 * #WebKitWebView content is editable or not. You can still check it
-	 * with webkit_web_view_can_execute_editing_command().
+	 * with {@link Webkit.web_view_can_execute_editing_command}.
 	 */
 	const EDITING_COMMAND_SELECT_ALL: string;
 
 	/**
 	 * The undo command. Undoes the last editing command in a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. It's only possible
 	 * to undo a command after a previously executed editing operation.
 	 * @returns The undo command. Undoes the last editing command in a #WebKitWebView.
 	 * You can check whether it's possible to execute the command with
-	 * webkit_web_view_can_execute_editing_command(). It's only possible
+	 * {@link Webkit.web_view_can_execute_editing_command}. It's only possible
 	 * to undo a command after a previously executed editing operation.
 	 */
 	const EDITING_COMMAND_UNDO: string;
 
 	/**
-	 * Like webkit_get_major_version(), but from the headers used at
+	 * Like {@link Webkit.get_major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like webkit_get_major_version(), but from the headers used at
+	 * @returns Like {@link Webkit.get_major_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const MAJOR_VERSION: number;
 
 	/**
-	 * Like webkit_get_micro_version(), but from the headers used at
+	 * Like {@link Webkit.get_micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like webkit_get_micro_version(), but from the headers used at
+	 * @returns Like {@link Webkit.get_micro_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */
 	const MICRO_VERSION: number;
 
 	/**
-	 * Like webkit_get_minor_version(), but from the headers used at
+	 * Like {@link Webkit.get_minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
-	 * @returns Like webkit_get_minor_version(), but from the headers used at
+	 * @returns Like {@link Webkit.get_minor_version}, but from the headers used at
 	 * application compile time, rather than from the library linked
 	 * against at application run time.
 	 */

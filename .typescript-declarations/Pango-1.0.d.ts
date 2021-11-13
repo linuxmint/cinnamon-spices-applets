@@ -121,7 +121,7 @@ declare namespace imports.gi.Pango {
 		 * List all families for a context.
 		 * @returns location
 		 *   to store a pointer to an array of `PangoFontFamily`. This array should
-		 *   be freed with g_free().
+		 *   be freed with {@link G.free}.
 		 * 
 		 * location to store the number of elements in #descs
 		 */
@@ -256,9 +256,9 @@ declare namespace imports.gi.Pango {
 		 * If you are using Pango as part of a higher-level system,
 		 * that system may have it's own way of create a `PangoContext`.
 		 * For instance, the GTK toolkit has, among others,
-		 * `gtk_widget_get_pango_context()`. Use those instead.
+		 * {@link `gtk.widget_get_pango_context}`. Use those instead.
 		 * @returns the newly allocated `PangoContext`, which should
-		 *   be freed with g_object_unref().
+		 *   be freed with {@link GObject.unref}.
 		 */
 		public static new(): Context;
 	}
@@ -307,7 +307,7 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * Convert a `PangoCoverage` structure into a flat binary format.
 		 * @returns 
-		 *   location to store result (must be freed with g_free())
+		 *   location to store result (must be freed with {@link G.free})
 		 * 
 		 * location to store size of result
 		 */
@@ -353,7 +353,7 @@ declare namespace imports.gi.Pango {
 		 * @deprecated
 		 * This returns %NULL
 		 * 
-		 * Convert data generated from pango_coverage_to_bytes()
+		 * Convert data generated from {@link Pango.Coverage.to_bytes}
 		 * back to a `PangoCoverage`.
 		 * @param bytes binary data
 		 *   representing a `PangoCoverage`
@@ -429,7 +429,7 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * The coordinate system for each rectangle has its origin at the
 		 * base line and horizontal origin of the character with increasing
-		 * coordinates extending to the right and down. The macros PANGO_ASCENT(),
+		 * coordinates extending to the right and down. The macros {@link PANGO.ASCENT},
 		 * PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
 		 * from the extents rectangle to more traditional font metrics. The units
 		 * of the rectangles are in 1/PANGO_SCALE of a device unit.
@@ -447,7 +447,7 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * Note that the objects returned by this function are cached
 		 * and immutable. If you need to make changes to the `hb_font_t`,
-		 * use hb_font_create_sub_font().
+		 * use {@link Hb.font_create_sub_font}.
 		 * @returns the `hb_font_t` object
 		 *   backing the font
 		 */
@@ -545,7 +545,7 @@ declare namespace imports.gi.Pango {
 		 * in ascending order.
 		 * @returns 
 		 *   location to store a pointer to an array of int. This array
-		 *   should be freed with g_free().
+		 *   should be freed with {@link G.free}.
 		 * 
 		 * location to store the number of elements in #sizes
 		 */
@@ -601,7 +601,7 @@ declare namespace imports.gi.Pango {
 		 * mean that the advance width of all characters are the same, but
 		 * this categorization also includes Asian fonts which include
 		 * double-width characters: characters that occupy two grid cells.
-		 * g_unichar_iswide() returns a result that indicates whether a
+		 * {@link G.unichar_iswide} returns a result that indicates whether a
 		 * character is typically double-width in a monospace font.
 		 * 
 		 * The best way to find out the grid-cell size is to call
@@ -624,7 +624,7 @@ declare namespace imports.gi.Pango {
 		 * width and other aspects.
 		 * @returns 
 		 *   location to store an array of pointers to `PangoFontFace` objects,
-		 *   or %NULL. This array should be freed with g_free() when it is no
+		 *   or %NULL. This array should be freed with {@link G.free} when it is no
 		 *   longer needed.
 		 * 
 		 * location to store number of elements in #faces.
@@ -676,9 +676,9 @@ declare namespace imports.gi.Pango {
 		 * If you are using Pango as part of a higher-level system,
 		 * that system may have it's own way of create a `PangoContext`.
 		 * For instance, the GTK toolkit has, among others,
-		 * gtk_widget_get_pango_context(). Use those instead.
+		 * {@link Gtk.Widget.get_pango_context}. Use those instead.
 		 * @returns the newly allocated `PangoContext`,
-		 *   which should be freed with g_object_unref().
+		 *   which should be freed with {@link GObject.unref}.
 		 */
 		create_context(): Context;
 		/**
@@ -707,7 +707,7 @@ declare namespace imports.gi.Pango {
 		 * List all families for a fontmap.
 		 * @returns location to
 		 *   store a pointer to an array of `PangoFontFamily` *.
-		 *   This array should be freed with g_free().
+		 *   This array should be freed with {@link G.free}.
 		 * 
 		 * location to store the number of elements in #families
 		 */
@@ -1052,7 +1052,7 @@ declare namespace imports.gi.Pango {
 		 * the #layout.
 		 * @returns 
 		 *   location to store a pointer to an array of logical attributes.
-		 *   This value must be freed with g_free().
+		 *   This value must be freed with {@link G.free}.
 		 * 
 		 * location to store the number of the attributes in the
 		 *   array. (The stored value will be one more than the total number
@@ -1658,7 +1658,7 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * Note that this method does not handle attributes in #glyph_item.
 		 * If you want colors, shapes and lines handled automatically according
-		 * to those attributes, you need to use pango_renderer_draw_layout_line()
+		 * to those attributes, you need to use {@link Pango.Renderer.draw_layout_line}
 		 * or pango_renderer_draw_layout().
 		 * 
 		 * Note that #text is the start of the text for layout, which is then
@@ -2058,7 +2058,7 @@ declare namespace imports.gi.Pango {
 		 * @returns 
 		 *   a list of all attributes for the current range. To free
 		 *   this value, call [method#Pango.Attribute.destroy] on each
-		 *   value and g_slist_free() on the list.
+		 *   value and {@link G.slist_free} on the list.
 		 */
 		public get_attrs(): GLib.SList;
 		/**
@@ -2198,7 +2198,7 @@ declare namespace imports.gi.Pango {
 		 * @returns 
 		 *   a list of all attributes in #list. To free this value,
 		 *   call [method#Pango.Attribute.destroy] on each value and
-		 *   g_slist_free() on the list.
+		 *   {@link G.slist_free} on the list.
 		 */
 		public get_attributes(): GLib.SList;
 		/**
@@ -2498,29 +2498,9 @@ declare namespace imports.gi.Pango {
 		 * where `r`, `g` and `b` are hex digits representing the
 		 * red, green, and blue components respectively.
 		 * @returns a newly-allocated text string that must
-		 *   be freed with g_free().
+		 *   be freed with {@link G.free}.
 		 */
 		public to_string(): string;
-	}
-
-	export interface ContextClassInitOptions {}
-	interface ContextClass {}
-	class ContextClass {
-		public constructor(options?: Partial<ContextClassInitOptions>);
-	}
-
-	export interface FontClassInitOptions {}
-	interface FontClass {}
-	class FontClass {
-		public constructor(options?: Partial<FontClassInitOptions>);
-		public describe: {(font: Font): FontDescription;};
-		public get_coverage: {(font: Font, language: Language): Coverage;};
-		public get_glyph_extents: {(font: Font | null, glyph: Glyph): [ ink_rect: Rectangle | null, logical_rect: Rectangle | null ];};
-		public get_metrics: {(font: Font | null, language: Language | null): FontMetrics;};
-		public get_font_map: {(font: Font | null): FontMap | null;};
-		public describe_absolute: {(font: Font): FontDescription;};
-		public get_features: {(font: Font): [ HarfBuzz.feature_t[], number ];};
-		public create_hb_font: {(font: Font): HarfBuzz.font_t;};
 	}
 
 	export interface FontDescriptionInitOptions {}
@@ -2692,7 +2672,7 @@ declare namespace imports.gi.Pango {
 		 * Computes a hash of a `PangoFontDescription` structure.
 		 * 
 		 * This is suitable to be used, for example, as an argument
-		 * to g_hash_table_new(). The hash value is independent of #desc->mask.
+		 * to {@link G.hash_table_new}. The hash value is independent of #desc->mask.
 		 * @returns the hash value.
 		 */
 		public hash(): number;
@@ -2864,7 +2844,7 @@ declare namespace imports.gi.Pango {
 		 * [method#Pango.FontDescription.to_string], but with underscores
 		 * instead of characters that are untypical in filenames, and in
 		 * lower case only.
-		 * @returns a new string that must be freed with g_free().
+		 * @returns a new string that must be freed with {@link G.free}.
 		 */
 		public to_filename(): string;
 		/**
@@ -2874,7 +2854,7 @@ declare namespace imports.gi.Pango {
 		 * of the format of the string representation. The family list in
 		 * the string description will only have a terminating comma if
 		 * the last word of the list is a valid style option.
-		 * @returns a new string that must be freed with g_free().
+		 * @returns a new string that must be freed with {@link G.free}.
 		 */
 		public to_string(): string;
 		/**
@@ -2884,53 +2864,6 @@ declare namespace imports.gi.Pango {
 		 * @param to_unset bitmask of fields in the #desc to unset.
 		 */
 		public unset_fields(to_unset: FontMask): void;
-	}
-
-	export interface FontFaceClassInitOptions {}
-	interface FontFaceClass {}
-	class FontFaceClass {
-		public constructor(options?: Partial<FontFaceClassInitOptions>);
-		public get_face_name: {(face: FontFace): string;};
-		public describe: {(face: FontFace): FontDescription;};
-		public list_sizes: {(face: FontFace): [ number[] | null, number ];};
-		public is_synthesized: {(face: FontFace): boolean;};
-		public get_family: {(face: FontFace): FontFamily;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface FontFamilyClassInitOptions {}
-	interface FontFamilyClass {}
-	class FontFamilyClass {
-		public constructor(options?: Partial<FontFamilyClassInitOptions>);
-		public list_faces: {(family: FontFamily): [ FontFace[] | null, number ];};
-		public get_name: {(family: FontFamily): string;};
-		public is_monospace: {(family: FontFamily): boolean;};
-		public is_variable: {(family: FontFamily): boolean;};
-		public get_face: {(family: FontFamily, name: string | null): FontFace | null;};
-		public _pango_reserved2: {(): void;};
-	}
-
-	export interface FontMapClassInitOptions {}
-	/**
-	 * The `PangoFontMapClass` structure holds the virtual functions for
-	 * a particular `PangoFontMap` implementation.
-	 */
-	interface FontMapClass {}
-	class FontMapClass {
-		public constructor(options?: Partial<FontMapClassInitOptions>);
-		/**
-		 * the type of rendering-system-dependent engines that
-		 * can handle fonts of this fonts loaded with this fontmap.
-		 */
-		public readonly shape_engine_type: string;
-		public load_font: {(fontmap: FontMap, context: Context, desc: FontDescription): Font | null;};
-		public list_families: {(fontmap: FontMap): [ FontFamily[], number ];};
-		public load_fontset: {(fontmap: FontMap, context: Context, desc: FontDescription, language: Language): Fontset | null;};
-		public get_serial: {(fontmap: FontMap): number;};
-		public changed: {(fontmap: FontMap): void;};
-		public get_family: {(fontmap: FontMap, name: string): FontFamily;};
-		public get_face: {(fontmap: FontMap, font: Font): FontFace;};
 	}
 
 	export interface FontMetricsInitOptions {}
@@ -2972,7 +2905,7 @@ declare namespace imports.gi.Pango {
 		 * determining the initial size for a window. Actual digits in
 		 * text can be wider or narrower than this, though this value
 		 * is generally somewhat more accurate than the result of
-		 * pango_font_metrics_get_approximate_char_width() for digits.
+		 * {@link Pango.FontMetrics.get_approximate_char_width} for digits.
 		 * @returns the digit width, in Pango units.
 		 */
 		public get_approximate_digit_width(): number;
@@ -3043,30 +2976,6 @@ declare namespace imports.gi.Pango {
 		 * If the result is zero, frees the structure and any associated memory.
 		 */
 		public unref(): void;
-	}
-
-	export interface FontsetClassInitOptions {}
-	/**
-	 * The `PangoFontsetClass` structure holds the virtual functions for
-	 * a particular `PangoFontset` implementation.
-	 */
-	interface FontsetClass {}
-	class FontsetClass {
-		public constructor(options?: Partial<FontsetClassInitOptions>);
-		public get_font: {(fontset: Fontset, wc: number): Font;};
-		public get_metrics: {(fontset: Fontset): FontMetrics;};
-		public get_language: {(fontset: Fontset): Language;};
-		public foreach: {(fontset: Fontset, func: FontsetForeachFunc, data: any | null): void;};
-		public _pango_reserved1: {(): void;};
-		public _pango_reserved2: {(): void;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface FontsetSimpleClassInitOptions {}
-	interface FontsetSimpleClass {}
-	class FontsetSimpleClass {
-		public constructor(options?: Partial<FontsetSimpleClassInitOptions>);
 	}
 
 	export interface GlyphGeometryInitOptions {}
@@ -3156,7 +3065,7 @@ declare namespace imports.gi.Pango {
 		 * @returns a
 		 *   list of glyph items resulting from splitting #glyph_item. Free
 		 *   the elements using [method#Pango.GlyphItem.free], the list using
-		 *   g_slist_free().
+		 *   {@link G.slist_free}.
 		 */
 		public apply_attrs(text: string, list: AttrList): GLib.SList;
 		/**
@@ -3208,14 +3117,14 @@ declare namespace imports.gi.Pango {
 		 * to the length of #orig (that is, there must be at least one byte
 		 * assigned to each item, you can't create a zero-length item).
 		 * 
-		 * This function is similar in function to pango_item_split() (and uses
+		 * This function is similar in function to {@link Pango.Item.split} (and uses
 		 * it internally.)
 		 * @param text text to which positions in #orig apply
 		 * @param split_index byte index of position to split item, relative to the
 		 *   start of the item
 		 * @returns the newly allocated item representing text before
 		 *   #split_index, which should be freed
-		 *   with pango_glyph_item_free().
+		 *   with {@link Pango.GlyphItem.free}.
 		 */
 		public split(text: string, split_index: number): GlyphItem;
 	}
@@ -3232,7 +3141,7 @@ declare namespace imports.gi.Pango {
 	 * in right-to-left cases, #start_glyph is greater than #end_glyph.
 	 * 
 	 * An iterator should be initialized using either
-	 * pango_glyph_item_iter_init_start() or
+	 * {@link Pango.GlyphItemIter.init_start} or
 	 * pango_glyph_item_iter_init_end(), for forward and backward iteration
 	 * respectively, and walked over using any desired mixture of
 	 * pango_glyph_item_iter_next_cluster() and
@@ -3547,7 +3456,7 @@ declare namespace imports.gi.Pango {
 		 * assigned to each item, you can't create a zero-length item).
 		 * #split_offset is the length of the first item in chars, and must be
 		 * provided because the text used to generate the item isn't available,
-		 * so `pango_item_split()` can't count the char length of the split items
+		 * so {@link `pango.item_split}` can't count the char length of the split items
 		 * itself.
 		 * @param split_index byte index of position to split item, relative to the
 		 *   start of the item
@@ -3667,12 +3576,6 @@ declare namespace imports.gi.Pango {
 		 * @returns 
 		 */
 		public to_string(): string;
-	}
-
-	export interface LayoutClassInitOptions {}
-	interface LayoutClass {}
-	class LayoutClass {
-		public constructor(options?: Partial<LayoutClassInitOptions>);
 	}
 
 	export interface LayoutIterInitOptions {}
@@ -3954,7 +3857,7 @@ declare namespace imports.gi.Pango {
 		 *   store a pointer to an array of ranges. The array will be of length
 		 *   `2*n_ranges`, with each range starting at `(*ranges)[2*n]` and of
 		 *   width `(*ranges)[2*n + 1] - (*ranges)[2*n]`. This array must be freed
-		 *   with g_free(). The coordinates are relative to the layout and are in
+		 *   with {@link G.free}. The coordinates are relative to the layout and are in
 		 *   Pango units.
 		 * 
 		 * The number of ranges stored in #ranges
@@ -4237,7 +4140,7 @@ declare namespace imports.gi.Pango {
 		 * 
 		 * If you have the rectangle in Pango units and want to convert to
 		 * transformed pixel bounding box, it is more accurate to transform it first
-		 * (using this function) and pass the result to pango_extents_to_pixels(),
+		 * (using this function) and pass the result to {@link Pango.extents.to_pixels},
 		 * first argument, for an inclusive rounded rectangle.
 		 * However, there are valid reasons that you may want to convert
 		 * to pixels first and then transform, for example when the transformed
@@ -4282,50 +4185,6 @@ declare namespace imports.gi.Pango {
 		 * height of the rectangle.
 		 */
 		public height: number;
-	}
-
-	export interface RendererClassInitOptions {}
-	/**
-	 * Class structure for `PangoRenderer`.
-	 * 
-	 * The following vfuncs take user space coordinates in Pango units
-	 * and have default implementations:
-	 * - draw_glyphs
-	 * - draw_rectangle
-	 * - draw_error_underline
-	 * - draw_shape
-	 * - draw_glyph_item
-	 * 
-	 * The default draw_shape implementation draws nothing.
-	 * 
-	 * The following vfuncs take device space coordinates as doubles
-	 * and must be implemented:
-	 * - draw_trapezoid
-	 * - draw_glyph
-	 */
-	interface RendererClass {}
-	class RendererClass {
-		public constructor(options?: Partial<RendererClassInitOptions>);
-		public draw_glyphs: {(renderer: Renderer, font: Font, glyphs: GlyphString, x: number, y: number): void;};
-		public draw_rectangle: {(renderer: Renderer, part: RenderPart, x: number, y: number, width: number, height: number): void;};
-		public draw_error_underline: {(renderer: Renderer, x: number, y: number, width: number, height: number): void;};
-		public draw_shape: {(renderer: Renderer, attr: AttrShape, x: number, y: number): void;};
-		public draw_trapezoid: {(renderer: Renderer, part: RenderPart, y1_: number, x11: number, x21: number, y2: number, x12: number, x22: number): void;};
-		public draw_glyph: {(renderer: Renderer, font: Font, glyph: Glyph, x: number, y: number): void;};
-		public part_changed: {(renderer: Renderer, part: RenderPart): void;};
-		public begin: {(renderer: Renderer): void;};
-		public end: {(renderer: Renderer): void;};
-		public prepare_run: {(renderer: Renderer, run: LayoutRun): void;};
-		public draw_glyph_item: {(renderer: Renderer, text: string | null, glyph_item: GlyphItem, x: number, y: number): void;};
-		public _pango_reserved2: {(): void;};
-		public _pango_reserved3: {(): void;};
-		public _pango_reserved4: {(): void;};
-	}
-
-	export interface RendererPrivateInitOptions {}
-	interface RendererPrivate {}
-	class RendererPrivate {
-		public constructor(options?: Partial<RendererPrivateInitOptions>);
 	}
 
 	export interface ScriptIterInitOptions {}
@@ -4971,7 +4830,7 @@ declare namespace imports.gi.Pango {
 	 */
 	enum Script {
 		/**
-		 * a value never returned from pango_script_for_unichar()
+		 * a value never returned from {@link Pango.script.for_unichar}
 		 */
 		INVALID_CODE = -1,
 		/**
@@ -5777,12 +5636,12 @@ declare namespace imports.gi.Pango {
 	}
 
 	/**
-	 * Callback used by pango_fontset_foreach() when enumerating
+	 * Callback used by {@link Pango.Fontset.foreach} when enumerating
 	 * fonts in a fontset.
 	 */
 	interface FontsetForeachFunc {
 		/**
-		 * Callback used by pango_fontset_foreach() when enumerating
+		 * Callback used by {@link Pango.Fontset.foreach} when enumerating
 		 * fonts in a fontset.
 		 * @param fontset a `PangoFontset`
 		 * @param font a font from #fontset
@@ -5804,7 +5663,7 @@ declare namespace imports.gi.Pango {
 	 * (A device unit might be a pixel for screen display, or
 	 * a point on a printer.) %PANGO_SCALE is currently 1024, and
 	 * may change in the future (unlikely though), but you should not
-	 * depend on its exact value. The PANGO_PIXELS() macro can be used
+	 * depend on its exact value. The {@link PANGO.PIXELS} macro can be used
 	 * to convert from glyph units into device units with correct rounding.
 	 */
 	type GlyphUnit = number;
@@ -6125,7 +5984,7 @@ declare namespace imports.gi.Pango {
 	 * [func#Pango.AttrType.register].
 	 * 
 	 * The returned value is an interned string (see
-	 * g_intern_string() for what that means) that should
+	 * {@link G.intern_string} for what that means) that should
 	 * not be modified or freed.
 	 * @param type an attribute type ID to fetch the name for
 	 * @returns the type ID name (which
@@ -6406,7 +6265,7 @@ declare namespace imports.gi.Pango {
 	 * If #base_gravity is %PANGO_GRAVITY_AUTO, it is first replaced with the
 	 * preferred gravity of #script.
 	 * @param script `PangoScript` to query
-	 * @param wide %TRUE for wide characters as returned by g_unichar_iswide()
+	 * @param wide %TRUE for wide characters as returned by {@link G.unichar_iswide}
 	 * @param base_gravity base gravity of the paragraph
 	 * @param hint orientation hint
 	 * @returns resolved gravity suitable to use for a run of text
@@ -6430,7 +6289,7 @@ declare namespace imports.gi.Pango {
 	 * 
 	 * This includes all Unicode characters with "ZERO WIDTH" in their name,
 	 * as well as *bidi* formatting characters, and a few other ones.  This is
-	 * totally different from g_unichar_iszerowidth() and is at best misnamed.
+	 * totally different from {@link G.unichar_iszerowidth} and is at best misnamed.
 	 * @param ch a Unicode character
 	 * @returns %TRUE if #ch is a zero-width character, %FALSE otherwise
 	 */
@@ -6459,12 +6318,12 @@ declare namespace imports.gi.Pango {
 	 * @param cached_iter Cached attribute iterator
 	 * @returns a `GList` of
 	 *   [struct#Pango.Item] structures. The items should be freed using
-	 *   [method#Pango.Item.free] probably in combination with g_list_free_full().
+	 *   [method#Pango.Item.free] probably in combination with {@link G.list_free_full}.
 	 */
 	function itemize(context: Context, text: string, start_index: number, length: number, attrs: AttrList, cached_iter: AttrIterator | null): GLib.List;
 
 	/**
-	 * Like `pango_itemize()`, but with an explicitly specified base direction.
+	 * Like {@link `pango.itemize}`, but with an explicitly specified base direction.
 	 * 
 	 * The base direction is used when computing bidirectional levels.
 	 * (see [method#Pango.Context.set_base_dir]). [func#itemize] gets the
@@ -6480,7 +6339,7 @@ declare namespace imports.gi.Pango {
 	 * @param cached_iter Cached attribute iterator
 	 * @returns a `GList` of
 	 *   [struct#Pango.Item] structures. The items should be freed using
-	 *   [method#Pango.Item.free] probably in combination with g_list_free_full().
+	 *   [method#Pango.Item.free] probably in combination with {@link G.list_free_full}.
 	 */
 	function itemize_with_base_dir(context: Context, base_dir: Direction, text: string, start_index: number, length: number, attrs: AttrList, cached_iter: AttrIterator | null): GLib.List;
 
@@ -6566,14 +6425,14 @@ declare namespace imports.gi.Pango {
 	 *   if #text is nul-terminated and the length should be calculated.
 	 * @param pbase_dir input base direction, and output resolved direction.
 	 * @returns a newly allocated array of embedding levels, one item per
-	 *   character (not byte), that should be freed using g_free().
+	 *   character (not byte), that should be freed using {@link G.free}.
 	 */
 	function log2vis_get_embedding_levels(text: string, length: number, pbase_dir: Direction): number;
 
 	/**
 	 * Finishes parsing markup.
 	 * 
-	 * After feeding a Pango markup parser some data with g_markup_parse_context_parse(),
+	 * After feeding a Pango markup parser some data with {@link G.markup_parse_context_parse},
 	 * use this function to get the list of attributes and text out of the
 	 * markup. This function will not free #context, use g_markup_parse_context_free()
 	 * to do so.
@@ -6603,7 +6462,7 @@ declare namespace imports.gi.Pango {
 	 * when calling [func#markup_parser_finish]. Two #accel_marker characters
 	 * following each other produce a single literal #accel_marker character.
 	 * 
-	 * To feed markup to the parser, use g_markup_parse_context_parse()
+	 * To feed markup to the parser, use {@link G.markup_parse_context_parse}
 	 * on the returned `GMarkupParseContext`. When done with feeding markup
 	 * to the parser, use [func#markup_parser_finish] to get the data out
 	 * of it, and then use g_markup_parse_context_free() to free it.
@@ -6613,7 +6472,7 @@ declare namespace imports.gi.Pango {
 	 * the [func#parse_markup] API is recommended instead.
 	 * @param accel_marker character that precedes an accelerator, or 0 for none
 	 * @returns a `GMarkupParseContext` that should be
-	 * destroyed with g_markup_parse_context_free().
+	 * destroyed with {@link G.markup_parse_context_free}.
 	 */
 	function markup_parser_new(accel_marker: string): GLib.MarkupParseContext;
 
@@ -6627,10 +6486,10 @@ declare namespace imports.gi.Pango {
 	 * slash-separated, eg. "none/start/middle/end".
 	 * 
 	 * If failed and #possible_values is not %NULL, returned string should
-	 * be freed using g_free().
+	 * be freed using {@link G.free}.
 	 * @param type enum type to parse, eg. %PANGO_TYPE_ELLIPSIZE_MODE
 	 * @param str string to parse
-	 * @param warn if %TRUE, issue a g_warning() on bad input
+	 * @param warn if %TRUE, issue a {@link G.warning} on bad input
 	 * @returns %TRUE if #str was successfully parsed
 	 * 
 	 * integer to store the result in
@@ -6680,7 +6539,7 @@ declare namespace imports.gi.Pango {
 	 * "extra_expanded" and "ultra_expanded". Case variations are
 	 * ignored and the '_' characters may be omitted.
 	 * @param str a string to parse.
-	 * @param warn if %TRUE, issue a g_warning() on bad input.
+	 * @param warn if %TRUE, issue a {@link G.warning} on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 * 
 	 * a `PangoStretch` to store the result in.
@@ -6694,7 +6553,7 @@ declare namespace imports.gi.Pango {
 	 * variations being
 	 * ignored.
 	 * @param str a string to parse.
-	 * @param warn if %TRUE, issue a g_warning() on bad input.
+	 * @param warn if %TRUE, issue a {@link G.warning} on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 * 
 	 * a `PangoStyle` to store the result in.
@@ -6707,7 +6566,7 @@ declare namespace imports.gi.Pango {
 	 * The allowed values are "normal" and "smallcaps" or "small_caps",
 	 * case variations being ignored.
 	 * @param str a string to parse.
-	 * @param warn if %TRUE, issue a g_warning() on bad input.
+	 * @param warn if %TRUE, issue a {@link G.warning} on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 * 
 	 * a `PangoVariant` to store the result in.
@@ -6721,7 +6580,7 @@ declare namespace imports.gi.Pango {
 	 * "ultrabold", "bold", "normal", "light", "ultraleight"
 	 * and integers. Case variations are ignored.
 	 * @param str a string to parse.
-	 * @param warn if %TRUE, issue a g_warning() on bad input.
+	 * @param warn if %TRUE, issue a {@link G.warning} on bad input.
 	 * @returns %TRUE if #str was successfully parsed.
 	 * 
 	 * a `PangoWeight` to store the result in.
@@ -6813,7 +6672,7 @@ declare namespace imports.gi.Pango {
 	 * 
 	 * Note that while the return type of this function is declared
 	 * as `PangoScript`, as of Pango 1.18, this function simply returns
-	 * the return value of g_unichar_get_script(). Callers must be
+	 * the return value of {@link G.unichar_get_script}. Callers must be
 	 * prepared to handle unknown values.
 	 * @param ch a Unicode character
 	 * @returns the `PangoScript` for the character.
@@ -6944,7 +6803,7 @@ declare namespace imports.gi.Pango {
 	 * white space and substituting ~/ with $HOME/.
 	 * @param str a %G_SEARCHPATH_SEPARATOR separated list of filenames
 	 * @returns a list of
-	 *   strings to be freed with g_strfreev()
+	 *   strings to be freed with {@link G.strfreev}
 	 */
 	function split_file_list(str: string): string[];
 
@@ -6971,7 +6830,7 @@ declare namespace imports.gi.Pango {
 	/**
 	 * Trims leading and trailing whitespace from a string.
 	 * @param str a string
-	 * @returns A newly-allocated string that must be freed with g_free()
+	 * @returns A newly-allocated string that must be freed with {@link G.free}
 	 */
 	function trim_string(str: string): string;
 
@@ -7014,7 +6873,7 @@ declare namespace imports.gi.Pango {
 	 * 
 	 * This is similar to the macro %PANGO_VERSION except that the macro
 	 * returns the encoded version available at compile-time. A version
-	 * number can be encoded into an integer using PANGO_VERSION_ENCODE().
+	 * number can be encoded into an integer using {@link PANGO.VERSION_ENCODE}.
 	 * @returns The encoded version of Pango library available at run time.
 	 */
 	function version(): number;
@@ -7036,7 +6895,7 @@ declare namespace imports.gi.Pango {
 	 * version #required_major.required_minor.#required_micro
 	 * (same major version.)
 	 * 
-	 * For compile-time version checking use PANGO_VERSION_CHECK().
+	 * For compile-time version checking use {@link PANGO.VERSION_CHECK}.
 	 * @param required_major the required major version
 	 * @param required_minor the required minor version
 	 * @param required_micro the required major version

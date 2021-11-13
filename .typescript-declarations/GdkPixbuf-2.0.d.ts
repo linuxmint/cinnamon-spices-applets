@@ -120,7 +120,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * If the source image has no alpha channel, and #overall_alpha is 255, a fast
 		 * path is used which omits the alpha blending and just performs the scaling.
 		 * 
-		 * See gdk_pixbuf_composite_color_simple() for a simpler variant of this
+		 * See {@link GdkPixbuf.composite_color_simple} for a simpler variant of this
 		 * function suitable for many tasks.
 		 * @param dest the #GdkPixbuf into which to render the results
 		 * @param dest_x the left coordinate for region to render
@@ -159,7 +159,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * `pixbuf`.
 		 * 
 		 * Note that this does not copy the options set on the original `GdkPixbuf`,
-		 * use gdk_pixbuf_copy_options() for this.
+		 * use {@link GdkPixbuf.copy_options} for this.
 		 * @returns A newly-created pixbuf
 		 */
 		copy(): Pixbuf | null;
@@ -241,7 +241,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Looks up #key in the list of options that may have been attached to the
 		 * #pixbuf when it was loaded, or that may have been attached by another
-		 * function using gdk_pixbuf_set_option().
+		 * function using {@link GdkPixbuf.set_option}.
 		 * 
 		 * For instance, the ANI loader provides "Title" and "Artist" options.
 		 * The ICO, XBM, and XPM loaders provide "x_hot" and "y_hot" hot-spot
@@ -324,7 +324,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * must not be modified.
 		 * 
 		 * This function allows skipping the implicit copy that must be made
-		 * if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
+		 * if {@link GdkPixbuf.get_pixels} is called on a read-only pixbuf.
 		 * @returns A new reference to a read-only copy of
 		 *   the pixel data.  Note that for mutable pixbufs, this function will
 		 *   incur a one-time copy of the pixel data for conversion into the
@@ -335,13 +335,13 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Provides a read-only pointer to the raw pixel data.
 		 * 
 		 * This function allows skipping the implicit copy that must be made
-		 * if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
+		 * if {@link GdkPixbuf.get_pixels} is called on a read-only pixbuf.
 		 * @returns a read-only pointer to the raw pixel data
 		 */
 		read_pixels(): number;
 		/**
 		 * @deprecated
-		 * Use g_object_ref().
+		 * Use {@link GObject.ref}.
 		 * 
 		 * Adds a reference to a pixbuf.
 		 * @returns The same as the #pixbuf argument.
@@ -464,7 +464,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Saves pixbuf to a new buffer in format `type`, which is currently "jpeg",
 		 * "png", "tiff", "ico" or "bmp".
 		 * 
-		 * This is a convenience function that uses `gdk_pixbuf_save_to_callback()`
+		 * This is a convenience function that uses {@link `gdk.pixbuf_save_to_callback}`
 		 * to do the real work.
 		 * 
 		 * Note that the buffer is not `NUL`-terminated and may contain embedded `NUL`
@@ -486,7 +486,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		save_to_buffer(type: string, error: GLib.Error | null): [ boolean, number[], number ];
 		/**
-		 * Vector version of `gdk_pixbuf_save_to_buffer()`.
+		 * Vector version of {@link `gdk.pixbuf_save_to_buffer}`.
 		 * 
 		 * Saves pixbuf to a new buffer in format #type, which is currently "jpeg",
 		 * "tiff", "png", "ico" or "bmp".
@@ -523,7 +523,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		save_to_callback(save_func: PixbufSaveFunc, type: string, error: GLib.Error | null): boolean;
 		/**
-		 * Vector version of `gdk_pixbuf_save_to_callback()`.
+		 * Vector version of {@link `gdk.pixbuf_save_to_callback}`.
 		 * 
 		 * Saves pixbuf to a callback in format #type, which is currently "jpeg",
 		 * "png", "tiff", "ico" or "bmp".
@@ -543,7 +543,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Saves `pixbuf` to an output stream.
 		 * 
 		 * Supported file formats are currently "jpeg", "tiff", "png", "ico" or
-		 * "bmp". See `gdk_pixbuf_save_to_buffer()` for more details.
+		 * "bmp". See {@link `gdk.pixbuf_save_to_buffer}` for more details.
 		 * 
 		 * The `cancellable` can be used to abort the operation from another
 		 * thread. If the operation was cancelled, the error `G_IO_ERROR_CANCELLED`
@@ -562,7 +562,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
-		 * For more details see gdk_pixbuf_save_to_stream(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.save_to_stream}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, `callback` will be called in the main thread.
@@ -594,7 +594,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Saves `pixbuf` to an output stream asynchronously.
 		 * 
-		 * For more details see gdk_pixbuf_save_to_streamv(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.save_to_streamv}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, `callback` will be called in the main thread.
@@ -610,7 +610,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		save_to_streamv_async(stream: Gio.OutputStream, type: string, option_keys: string[] | null, option_values: string[] | null, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
-		 * Vector version of `gdk_pixbuf_save()`.
+		 * Vector version of {@link `gdk.pixbuf_save}`.
 		 * 
 		 * Saves pixbuf to a file in `type`, which is currently "jpeg", "png", "tiff", "ico" or "bmp".
 		 * 
@@ -631,7 +631,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * #dest_height) of the resulting image onto the destination image
 		 * replacing the previous contents.
 		 * 
-		 * Try to use gdk_pixbuf_scale_simple() first; this function is
+		 * Try to use {@link GdkPixbuf.scale_simple} first; this function is
 		 * the industrial-strength power tool you can fall back to, if
 		 * gdk_pixbuf_scale_simple() isn't powerful enough.
 		 * 
@@ -687,7 +687,7 @@ declare namespace imports.gi.GdkPixbuf {
 		set_option(key: string, value: string): boolean;
 		/**
 		 * @deprecated
-		 * Use g_object_unref().
+		 * Use {@link GObject.unref}.
 		 * 
 		 * Removes a reference from a pixbuf.
 		 */
@@ -884,7 +884,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * Currently only RGB images with 8 bits per sample are supported.
 		 * 
-		 * This is the `GBytes` variant of gdk_pixbuf_new_from_data(), useful
+		 * This is the `GBytes` variant of {@link GdkPixbuf.new_from_data}, useful
 		 * for language bindings.
 		 * @param data Image data in 8-bit/sample packed format inside a #GBytes
 		 * @param colorspace Colorspace for the image data
@@ -1122,7 +1122,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public static new_from_stream_at_scale(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null): Pixbuf | null;
 		/**
 		 * Finishes an asynchronous pixbuf creation operation started with
-		 * gdk_pixbuf_new_from_stream_async().
+		 * {@link GdkPixbuf.new_from_stream_async}.
 		 * @param async_result a `GAsyncResult`
 		 * @returns the newly created pixbuf
 		 */
@@ -1165,7 +1165,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Asynchronously parses an image file far enough to determine its
 		 * format and size.
 		 * 
-		 * For more details see gdk_pixbuf_get_file_info(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.get_file_info}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, #callback will be called in the
@@ -1178,7 +1178,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public static get_file_info_async(filename: string, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous pixbuf parsing operation started with
-		 * gdk_pixbuf_get_file_info_async().
+		 * {@link GdkPixbuf.get_file_info_async}.
 		 * @param async_result a `GAsyncResult`
 		 * @returns A `GdkPixbufFormat` describing the
 		 *   image format of the file
@@ -1216,7 +1216,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Creates a new pixbuf by asynchronously loading an image from an input stream.
 		 * 
-		 * For more details see gdk_pixbuf_new_from_stream(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.new_from_stream}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, #callback will be called in the main thread.
@@ -1230,7 +1230,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Creates a new pixbuf by asynchronously loading an image from an input stream.
 		 * 
-		 * For more details see gdk_pixbuf_new_from_stream_at_scale(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.new_from_stream_at_scale}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, #callback will be called in the main thread.
@@ -1245,7 +1245,7 @@ declare namespace imports.gi.GdkPixbuf {
 		public static new_from_stream_at_scale_async(stream: Gio.InputStream, width: number, height: number, preserve_aspect_ratio: boolean, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous pixbuf save operation started with
-		 * gdk_pixbuf_save_to_stream_async().
+		 * {@link GdkPixbuf.save_to_stream_async}.
 		 * @param async_result a `GAsyncResult`
 		 * @returns `TRUE` if the pixbuf was saved successfully, `FALSE` if an error was set.
 		 */
@@ -1267,7 +1267,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * The iterator provides the frames that should be displayed at a
 		 * given time.
 		 * 
-		 * #start_time would normally come from g_get_current_time(), and marks
+		 * #start_time would normally come from {@link G.get_current_time}, and marks
 		 * the beginning of animation playback. After creating an iterator, you
 		 * should immediately display the pixbuf returned by
 		 * gdk_pixbuf_animation_iter_get_pixbuf(). Then, you should install
@@ -1323,7 +1323,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Checks whether the animation is a static image.
 		 * 
-		 * If you load a file with gdk_pixbuf_animation_new_from_file() and it
+		 * If you load a file with {@link GdkPixbuf.animation_new_from_file} and it
 		 * turns out to be a plain, unanimated image, then this function will
 		 * return `TRUE`. Use gdk_pixbuf_animation_get_static_image() to retrieve
 		 * the image.
@@ -1332,7 +1332,7 @@ declare namespace imports.gi.GdkPixbuf {
 		is_static_image(): boolean;
 		/**
 		 * @deprecated
-		 * Use g_object_ref().
+		 * Use {@link GObject.ref}.
 		 * 
 		 * Adds a reference to an animation.
 		 * @returns The same as the #animation argument.
@@ -1340,7 +1340,7 @@ declare namespace imports.gi.GdkPixbuf {
 		ref(): PixbufAnimation;
 		/**
 		 * @deprecated
-		 * Use g_object_unref().
+		 * Use {@link GObject.unref}.
 		 * 
 		 * Removes a reference from an animation.
 		 */
@@ -1425,7 +1425,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Creates a new animation by asynchronously loading an image from an input stream.
 		 * 
-		 * For more details see gdk_pixbuf_new_from_stream(), which is the synchronous
+		 * For more details see {@link GdkPixbuf.new_from_stream}, which is the synchronous
 		 * version of this function.
 		 * 
 		 * When the operation is finished, `callback` will be called in the main thread.
@@ -1446,7 +1446,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Possibly advances an animation to a new frame.
 		 * 
 		 * Chooses the frame based on the start time passed to
-		 * gdk_pixbuf_animation_get_iter().
+		 * {@link GdkPixbuf.animation_get_iter}.
 		 * 
 		 * #current_time would normally come from g_get_current_time(), and
 		 * must be greater than or equal to the time passed to
@@ -1472,7 +1472,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Gets the number of milliseconds the current pixbuf should be displayed,
 		 * or -1 if the current pixbuf should be displayed forever.
 		 * 
-		 * The `g_timeout_add()` function conveniently takes a timeout in milliseconds,
+		 * The {@link `g.timeout_add}` function conveniently takes a timeout in milliseconds,
 		 * so you can use a timeout to schedule the next update.
 		 * 
 		 * Note that some formats, like GIF, might clamp the timeout values in the
@@ -1485,7 +1485,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Gets the current pixbuf which should be displayed.
 		 * 
 		 * The pixbuf might not be the same size as the animation itself
-		 * (gdk_pixbuf_animation_get_width(), gdk_pixbuf_animation_get_height()).
+		 * {@link (gdk.pixbuf_animation_get_width}, gdk_pixbuf_animation_get_height()).
 		 * 
 		 * This pixbuf should be displayed for gdk_pixbuf_animation_iter_get_delay_time()
 		 * milliseconds.
@@ -1536,7 +1536,7 @@ declare namespace imports.gi.GdkPixbuf {
 	interface IPixbufLoader {
 		/**
 		 * Informs a pixbuf loader that no further writes with
-		 * gdk_pixbuf_loader_write() will occur, so that it can free its
+		 * {@link GdkPixbuf.loader_write} will occur, so that it can free its
 		 * internal loading structures.
 		 * 
 		 * This function also tries to parse any data that hasn't yet been parsed;
@@ -1581,7 +1581,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * emitted by the loader; this means that enough data has been read
 		 * to know the size of the image that will be allocated.
 		 * 
-		 * If the loader has not received enough data via gdk_pixbuf_loader_write(),
+		 * If the loader has not received enough data via {@link GdkPixbuf.loader_write},
 		 * then this function returns `NULL`.
 		 * 
 		 * The returned pixbuf will be the same in all future calls to the loader,
@@ -1597,7 +1597,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Causes the image to be scaled while it is loaded.
 		 * 
 		 * The desired image size can be determined relative to the original
-		 * size of the image by calling gdk_pixbuf_loader_set_size() from a
+		 * size of the image by calling {@link GdkPixbuf.loader_set_size} from a
 		 * signal handler for the ::size-prepared signal.
 		 * 
 		 * Attempts to set the desired image size  are ignored after the
@@ -1626,7 +1626,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * pixbuf in the desired size.
 		 * 
 		 * After this signal is emitted, applications can call
-		 * gdk_pixbuf_loader_get_pixbuf() to fetch the partially-loaded
+		 * {@link GdkPixbuf.loader_get_pixbuf} to fetch the partially-loaded
 		 * pixbuf.
 		 * @param signal 
 		 * @param callback Callback function
@@ -1656,7 +1656,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 */
 		connect(signal: "area-updated", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 		/**
-		 * This signal is emitted when gdk_pixbuf_loader_close() is called.
+		 * This signal is emitted when {@link GdkPixbuf.loader_close} is called.
 		 * 
 		 * It can be used by different parts of an application to receive
 		 * notification when an image loader is closed by the code that
@@ -1673,7 +1673,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * initial amount of data that is required to figure out the size
 		 * of the image that it will create.
 		 * 
-		 * Applications can call gdk_pixbuf_loader_set_size() in response
+		 * Applications can call {@link GdkPixbuf.loader_set_size} in response
 		 * to this signal to set the desired size to which the image
 		 * should be scaled.
 		 * @param signal 
@@ -1703,7 +1703,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 * process of loading an image, by letting them send the image data
 	 * directly to the loader instead of having the loader read the data
 	 * from a file. Applications can use this functionality instead of
-	 * `gdk_pixbuf_new_from_file()` or `gdk_pixbuf_animation_new_from_file()`
+	 * {@link `gdk.pixbuf_new_from_file}` or `gdk_pixbuf_animation_new_from_file()`
 	 * when they need to parse image data in small chunks. For example,
 	 * it should be used when reading an image from a (potentially) slow
 	 * network connection, or when loading an extremely large file.
@@ -1766,7 +1766,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * are installed, but typically "image/png", "image/jpeg", "image/gif",
 		 * "image/tiff" and "image/x-xpixmap" are among the supported mime types.
 		 * To obtain the full list of supported mime types, call
-		 * gdk_pixbuf_format_get_mime_types() on each of the {@link Format}
+		 * {@link GdkPixbuf.format_get_mime_types} on each of the {@link Format}
 		 * structs returned by gdk_pixbuf_get_formats().
 		 * @param mime_type the mime type to be loaded
 		 * @returns A newly-created pixbuf loader.
@@ -1785,7 +1785,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * The list of supported image formats depends on what image loaders
 		 * are installed, but typically "png", "jpeg", "gif", "tiff" and
 		 * "xpm" are among the supported formats. To obtain the full list of
-		 * supported image formats, call gdk_pixbuf_format_get_name() on each
+		 * supported image formats, call {@link GdkPixbuf.format_get_name} on each
 		 * of the {@link Format} structs returned by gdk_pixbuf_get_formats().
 		 * @param image_type name of the image format to be loaded with the image
 		 * @returns A newly-created pixbuf loader.
@@ -1893,36 +1893,6 @@ declare namespace imports.gi.GdkPixbuf {
 		public constructor(options?: Partial<PixbufSimpleAnimIterInitOptions>);
 	}
 
-	export interface PixbufAnimationClassInitOptions {}
-	/**
-	 * Modules supporting animations must derive a type from
-	 * {@link Animation}, providing suitable implementations of the
-	 * virtual functions.
-	 */
-	interface PixbufAnimationClass {}
-	class PixbufAnimationClass {
-		public constructor(options?: Partial<PixbufAnimationClassInitOptions>);
-		public is_static_image: {(animation: PixbufAnimation): boolean;};
-		public get_static_image: {(animation: PixbufAnimation): Pixbuf;};
-		public get_size: {(animation: PixbufAnimation, width: number, height: number): void;};
-		public get_iter: {(animation: PixbufAnimation, start_time: GLib.TimeVal | null): PixbufAnimationIter;};
-	}
-
-	export interface PixbufAnimationIterClassInitOptions {}
-	/**
-	 * Modules supporting animations must derive a type from
-	 * {@link AnimationIter}, providing suitable implementations of the
-	 * virtual functions.
-	 */
-	interface PixbufAnimationIterClass {}
-	class PixbufAnimationIterClass {
-		public constructor(options?: Partial<PixbufAnimationIterClassInitOptions>);
-		public get_delay_time: {(iter: PixbufAnimationIter): number;};
-		public get_pixbuf: {(iter: PixbufAnimationIter): Pixbuf;};
-		public on_currently_loading_frame: {(iter: PixbufAnimationIter): boolean;};
-		public advance: {(iter: PixbufAnimationIter, current_time: GLib.TimeVal | null): boolean;};
-	}
-
 	export interface PixbufFormatInitOptions {}
 	/**
 	 * A `GdkPixbufFormat` contains information about the image format accepted
@@ -1975,12 +1945,12 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Creates a copy of `format`.
 		 * @returns the newly allocated copy of a `GdkPixbufFormat`. Use
-		 *   gdk_pixbuf_format_free() to free the resources when done
+		 *   {@link GdkPixbuf.format_free} to free the resources when done
 		 */
 		public copy(): PixbufFormat;
 		/**
 		 * Frees the resources allocated when copying a `GdkPixbufFormat`
-		 * using gdk_pixbuf_format_copy()
+		 * using {@link GdkPixbuf.format_copy}
 		 */
 		public free(): void;
 		/**
@@ -2016,7 +1986,7 @@ declare namespace imports.gi.GdkPixbuf {
 		/**
 		 * Returns whether this image format is disabled.
 		 * 
-		 * See gdk_pixbuf_format_set_disabled().
+		 * See {@link GdkPixbuf.format_set_disabled}.
 		 * @returns whether this image format is disabled.
 		 */
 		public is_disabled(): boolean;
@@ -2024,7 +1994,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Returns `TRUE` if the save option specified by #option_key is supported when
 		 * saving a pixbuf using the module implementing #format.
 		 * 
-		 * See gdk_pixbuf_save() for more information about option keys.
+		 * See {@link GdkPixbuf.save} for more information about option keys.
 		 * @param option_key the name of an option
 		 * @returns `TRUE` if the specified option is supported
 		 */
@@ -2050,20 +2020,10 @@ declare namespace imports.gi.GdkPixbuf {
 		 * this format to load images.
 		 * 
 		 * Applications can use this to avoid using image loaders with an
-		 * inappropriate license, see gdk_pixbuf_format_get_license().
+		 * inappropriate license, see {@link GdkPixbuf.format_get_license}.
 		 * @param disabled `TRUE` to disable the format #format
 		 */
 		public set_disabled(disabled: boolean): void;
-	}
-
-	export interface PixbufLoaderClassInitOptions {}
-	interface PixbufLoaderClass {}
-	class PixbufLoaderClass {
-		public constructor(options?: Partial<PixbufLoaderClassInitOptions>);
-		public size_prepared: {(loader: PixbufLoader, width: number, height: number): void;};
-		public area_prepared: {(loader: PixbufLoader): void;};
-		public area_updated: {(loader: PixbufLoader, x: number, y: number, width: number, height: number): void;};
-		public closed: {(loader: PixbufLoader): void;};
 	}
 
 	export interface PixbufModuleInitOptions {}
@@ -2200,12 +2160,6 @@ declare namespace imports.gi.GdkPixbuf {
 		public relevance: number;
 	}
 
-	export interface PixbufSimpleAnimClassInitOptions {}
-	interface PixbufSimpleAnimClass {}
-	class PixbufSimpleAnimClass {
-		public constructor(options?: Partial<PixbufSimpleAnimClassInitOptions>);
-	}
-
 	/**
 	 * This enumeration defines the color spaces that are supported by
 	 * the gdk-pixbuf library.
@@ -2269,7 +2223,7 @@ declare namespace imports.gi.GdkPixbuf {
 	/**
 	 * Control the alpha channel for drawables.
 	 * 
-	 * These values can be passed to gdk_pixbuf_xlib_render_to_drawable_alpha()
+	 * These values can be passed to {@link GdkPixbuf.xlib_render_to_drawable_alpha}
 	 * in gdk-pixbuf-xlib to control how the alpha channel of an image should
 	 * be handled.
 	 * 
@@ -2334,7 +2288,7 @@ declare namespace imports.gi.GdkPixbuf {
 	}
 
 	/**
-	 * The possible rotations which can be passed to gdk_pixbuf_rotate_simple().
+	 * The possible rotations which can be passed to {@link GdkPixbuf.rotate_simple}.
 	 * 
 	 * To make them easier to use, their numerical values are the actual degrees.
 	 */
@@ -2381,7 +2335,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 * A function of this type is responsible for freeing the pixel array
 	 * of a pixbuf.
 	 * 
-	 * The gdk_pixbuf_new_from_data() function lets you pass in a pre-allocated
+	 * The {@link GdkPixbuf.new_from_data} function lets you pass in a pre-allocated
 	 * pixel array so that a pixbuf can be created from it; in this case you
 	 * will need to pass in a function of type `GdkPixbufDestroyNotify` so that
 	 * the pixel data can be freed when the pixbuf is finalized.
@@ -2391,7 +2345,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * A function of this type is responsible for freeing the pixel array
 		 * of a pixbuf.
 		 * 
-		 * The gdk_pixbuf_new_from_data() function lets you pass in a pre-allocated
+		 * The {@link GdkPixbuf.new_from_data} function lets you pass in a pre-allocated
 		 * pixel array so that a pixbuf can be created from it; in this case you
 		 * will need to pass in a function of type `GdkPixbufDestroyNotify` so that
 		 * the pixel data can be freed when the pixbuf is finalized.
@@ -2462,7 +2416,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 * 
 	 * If the function sets #width or #height to zero, the module should interpret
 	 * this as a hint that it will be closed soon and shouldn't allocate further
-	 * resources. This convention is used to implement gdk_pixbuf_get_file_info()
+	 * resources. This convention is used to implement {@link GdkPixbuf.get_file_info}
 	 * efficiently.
 	 */
 	interface PixbufModuleSizeFunc {
@@ -2478,7 +2432,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * 
 		 * If the function sets #width or #height to zero, the module should interpret
 		 * this as a hint that it will be closed soon and shouldn't allocate further
-		 * resources. This convention is used to implement gdk_pixbuf_get_file_info()
+		 * resources. This convention is used to implement {@link GdkPixbuf.get_file_info}
 		 * efficiently.
 		 * @param width pointer to a location containing the current image width
 		 * @param height pointer to a location containing the current image height
@@ -2515,7 +2469,7 @@ declare namespace imports.gi.GdkPixbuf {
 	 * Save functions used by [method#GdkPixbuf.Pixbuf.save_to_callback].
 	 * 
 	 * This function is called once for each block of bytes that is "written"
-	 * by `gdk_pixbuf_save_to_callback()`.
+	 * by {@link `gdk.pixbuf_save_to_callback}`.
 	 * 
 	 * If successful it should return `TRUE`; if an error occurs it should set
 	 * `error` and return `FALSE`, in which case `gdk_pixbuf_save_to_callback()`
@@ -2526,14 +2480,14 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Save functions used by [method#GdkPixbuf.Pixbuf.save_to_callback].
 		 * 
 		 * This function is called once for each block of bytes that is "written"
-		 * by `gdk_pixbuf_save_to_callback()`.
+		 * by {@link `gdk.pixbuf_save_to_callback}`.
 		 * 
 		 * If successful it should return `TRUE`; if an error occurs it should set
 		 * `error` and return `FALSE`, in which case `gdk_pixbuf_save_to_callback()`
 		 * will fail with the same error.
 		 * @param buf bytes to be written.
 		 * @param count number of bytes in #buf.
-		 * @param data user data passed to gdk_pixbuf_save_to_callback().
+		 * @param data user data passed to {@link GdkPixbuf.save_to_callback}.
 		 * @returns `TRUE` if successful, `FALSE` otherwise
 		 * 
 		 * A location to return an error.

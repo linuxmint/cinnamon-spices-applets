@@ -24,14 +24,14 @@ declare namespace imports.gi.Cally {
 		 */
 		add_action_full(action_name: string, action_description: string, action_keybinding: string, callback: ActionCallback, notify: GLib.DestroyNotify): number;
 		/**
-		 * Removes a action, using the #action_id returned by cally_actor_add_action()
+		 * Removes a action, using the #action_id returned by {@link Cally.Actor.add_action}
 		 * @param action_id the action id
 		 * @returns %TRUE if the operation was succesful, %FALSE otherwise
 		 */
 		remove_action(action_id: number): boolean;
 		/**
 		 * Removes an action, using the #action_name used when the action was added
-		 * with cally_actor_add_action()
+		 * with {@link Cally.Actor.add_action}
 		 * @param action_name the name of the action to remove
 		 * @returns %TRUE if the operation was succesful, %FALSE otherwise
 		 */
@@ -308,173 +308,16 @@ declare namespace imports.gi.Cally {
 		public constructor(options?: Partial<UtilInitOptions>);
 	}
 
-	export interface ActorClassInitOptions {}
-	/**
-	 * The <structname>CallyActorClass</structname> structure contains
-	 * only private data
-	 */
-	interface ActorClass {}
-	class ActorClass {
-		public constructor(options?: Partial<ActorClassInitOptions>);
-		public readonly _padding_dummy: any[];
-		public notify_clutter: {(object: GObject.Object, pspec: GObject.ParamSpec): void;};
-		public focus_clutter: {(actor: Clutter.Actor, data: any): boolean;};
-		public add_actor: {(container: Clutter.Actor, actor: Clutter.Actor, data: any): number;};
-		public remove_actor: {(container: Clutter.Actor, actor: Clutter.Actor, data: any): number;};
-	}
-
-	export interface ActorPrivateInitOptions {}
-	interface ActorPrivate {}
-	class ActorPrivate {
-		public constructor(options?: Partial<ActorPrivateInitOptions>);
-	}
-
-	export interface CloneClassInitOptions {}
-	/**
-	 * The <structname>CallyCloneClass</structname> structure contains only
-	 * private data
-	 */
-	interface CloneClass {}
-	class CloneClass {
-		public constructor(options?: Partial<CloneClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface ClonePrivateInitOptions {}
-	interface ClonePrivate {}
-	class ClonePrivate {
-		public constructor(options?: Partial<ClonePrivateInitOptions>);
-	}
-
-	export interface GroupClassInitOptions {}
-	/**
-	 * The <structname>CallyGroupClass</structname> structure contains only
-	 * private data
-	 */
-	interface GroupClass {}
-	class GroupClass {
-		public constructor(options?: Partial<GroupClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface GroupPrivateInitOptions {}
-	interface GroupPrivate {}
-	class GroupPrivate {
-		public constructor(options?: Partial<GroupPrivateInitOptions>);
-	}
-
-	export interface RectangleClassInitOptions {}
-	/**
-	 * The <structname>CallyRectangleClass</structname> structure contains
-	 * only private data
-	 */
-	interface RectangleClass {}
-	class RectangleClass {
-		public constructor(options?: Partial<RectangleClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface RectanglePrivateInitOptions {}
-	interface RectanglePrivate {}
-	class RectanglePrivate {
-		public constructor(options?: Partial<RectanglePrivateInitOptions>);
-	}
-
-	export interface RootClassInitOptions {}
-	/**
-	 * The <structname>CallyRootClass</structname> structure contains only
-	 * private data
-	 */
-	interface RootClass {}
-	class RootClass {
-		public constructor(options?: Partial<RootClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface RootPrivateInitOptions {}
-	interface RootPrivate {}
-	class RootPrivate {
-		public constructor(options?: Partial<RootPrivateInitOptions>);
-	}
-
-	export interface StageClassInitOptions {}
-	/**
-	 * The <structname>CallyStageClass</structname> structure contains only
-	 * private data
-	 */
-	interface StageClass {}
-	class StageClass {
-		public constructor(options?: Partial<StageClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface StagePrivateInitOptions {}
-	interface StagePrivate {}
-	class StagePrivate {
-		public constructor(options?: Partial<StagePrivateInitOptions>);
-	}
-
-	export interface TextClassInitOptions {}
-	/**
-	 * The <structname>CallyTextClass</structname> structure contains only
-	 * private data
-	 */
-	interface TextClass {}
-	class TextClass {
-		public constructor(options?: Partial<TextClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface TextPrivateInitOptions {}
-	interface TextPrivate {}
-	class TextPrivate {
-		public constructor(options?: Partial<TextPrivateInitOptions>);
-	}
-
-	export interface TextureClassInitOptions {}
-	/**
-	 * The <structname>CallyTextureClass</structname> structure contains
-	 * only private data
-	 */
-	interface TextureClass {}
-	class TextureClass {
-		public constructor(options?: Partial<TextureClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface TexturePrivateInitOptions {}
-	interface TexturePrivate {}
-	class TexturePrivate {
-		public constructor(options?: Partial<TexturePrivateInitOptions>);
-	}
-
-	export interface UtilClassInitOptions {}
-	/**
-	 * The <structname>CallyUtilClass</structname> structure contains only
-	 * private data
-	 */
-	interface UtilClass {}
-	class UtilClass {
-		public constructor(options?: Partial<UtilClassInitOptions>);
-		public readonly _padding_dummy: any[];
-	}
-
-	export interface UtilPrivateInitOptions {}
-	interface UtilPrivate {}
-	class UtilPrivate {
-		public constructor(options?: Partial<UtilPrivateInitOptions>);
-	}
-
 	/**
 	 * Action function, to be used on #AtkAction implementations as
 	 * an individual action. Unlike {@link ActionFunc}, this function
-	 * uses the #user_data argument passed to cally_actor_add_action_full().
+	 * uses the #user_data argument passed to {@link Cally.Actor.add_action_full}.
 	 */
 	interface ActionCallback {
 		/**
 		 * Action function, to be used on #AtkAction implementations as
 		 * an individual action. Unlike {@link ActionFunc}, this function
-		 * uses the #user_data argument passed to cally_actor_add_action_full().
+		 * uses the #user_data argument passed to {@link Cally.Actor.add_action_full}.
 		 * @param cally_actor a {@link Actor}
 		 */
 		(cally_actor: Actor): void;

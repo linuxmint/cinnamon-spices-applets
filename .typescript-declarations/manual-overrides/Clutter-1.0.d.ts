@@ -45,6 +45,22 @@ declare namespace imports.gi.Clutter {
     
   }
 
+  interface StageStateEvent extends Event {
+
+  }
+
+  interface TouchpadPinchEvent extends Event {
+
+  }
+
+  interface TouchpadSwipeEvent extends Event {
+
+  }
+
+  interface TouchEvent extends Event {
+
+  }
+
   export enum DebugFlag {
 
   }
