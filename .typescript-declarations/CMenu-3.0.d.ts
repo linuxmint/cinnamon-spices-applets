@@ -11,7 +11,7 @@ declare namespace imports.gi.CMenu {
 		 * This corresponds to the "Name" key within the keyfile group for the
 		 * action.
 		 * @param action_name the name of the action as from
-		 *   gmenu_desktopappinfo_list_actions()
+		 *   {@link CMenu.DesktopAppInfo.list_actions}
 		 * @returns the locale-specific action name
 		 */
 		get_action_name(action_name: string): string;
@@ -33,7 +33,7 @@ declare namespace imports.gi.CMenu {
 		/**
 		 * When #info was created from a known filename, return it.  In some
 		 * situations such as the #GMenuDesktopAppInfo returned from
-		 * gmenu_desktopappinfo_new_from_keyfile(), this function will return %NULL.
+		 * {@link CMenu.DesktopAppInfo.new_from_keyfile}, this function will return %NULL.
 		 * @returns The full path to the file for #info,
 		 *     or %NULL if not known.
 		 */
@@ -74,7 +74,7 @@ declare namespace imports.gi.CMenu {
 		/**
 		 * Gets the value of the NoDisplay key, which helps determine if the
 		 * application info should be shown in menus. See
-		 * #G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and g_app_info_should_show().
+		 * #G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and {@link Gio.AppInfo.should_show}.
 		 * @returns The value of the NoDisplay key
 		 */
 		get_nodisplay(): boolean;
@@ -88,7 +88,7 @@ declare namespace imports.gi.CMenu {
 		 * to override the default mechanism then you may specify #desktop_env,
 		 * but this is not recommended.
 		 * 
-		 * Note that g_app_info_should_show() for #info will include this check (with
+		 * Note that {@link Gio.AppInfo.should_show} for #info will include this check (with
 		 * %NULL for #desktop_env) as well as additional checks.
 		 * @param desktop_env a string specifying a desktop name
 		 * @returns %TRUE if the #info should be shown in #desktop_env according to the
@@ -127,7 +127,7 @@ declare namespace imports.gi.CMenu {
 		 * Activates the named application action.
 		 * 
 		 * You may only call this function on action names that were
-		 * returned from g_desktop_app_info_list_actions().
+		 * returned from {@link Gio.DesktopAppInfo.list_actions}.
 		 * 
 		 * Note that if the main entry of the desktop file indicates that the
 		 * application supports startup notification, and #launch_context is
@@ -140,12 +140,12 @@ declare namespace imports.gi.CMenu {
 		 * As with g_app_info_launch() there is no way to detect failures that
 		 * occur while using this function.
 		 * @param action_name the name of the action as from
-		 *   g_desktop_app_info_list_actions()
+		 *   {@link Gio.DesktopAppInfo.list_actions}
 		 * @param launch_context a #GAppLaunchContext
 		 */
 		launch_action(action_name: string, launch_context: Gio.AppLaunchContext | null): void;
 		/**
-		 * This function performs the equivalent of g_app_info_launch_uris(),
+		 * This function performs the equivalent of {@link Gio.AppInfo.launch_uris},
 		 * but is intended primarily for operating system components that
 		 * launch applications.  Ordinary applications should use
 		 * g_app_info_launch_uris().
@@ -237,7 +237,7 @@ declare namespace imports.gi.CMenu {
 		menu_path: string;
 		/**
 		 * This function is only available if the tree has been loaded via
-		 * gmenu_tree_load_sync() or a variant thereof.
+		 * {@link CMenu.Tree.load_sync} or a variant thereof.
 		 * @returns The absolute and canonicalized path to the loaded menu file
 		 */
 		get_canonical_menu_path(): string;
@@ -250,7 +250,7 @@ declare namespace imports.gi.CMenu {
 		get_entry_by_id(id: string): TreeEntry;
 		/**
 		 * Get the root directory; you must have loaded the tree first (at
-		 * least once) via gmenu_tree_load_sync() or a variant thereof.
+		 * least once) via {@link CMenu.Tree.load_sync} or a variant thereof.
 		 * @returns Root of the tree
 		 */
 		get_root_directory(): TreeDirectory;
@@ -292,12 +292,6 @@ declare namespace imports.gi.CMenu {
 		public static item_unref(item: any | null): void;
 	}
 
-	export interface DesktopAppInfoClassInitOptions {}
-	interface DesktopAppInfoClass {}
-	class DesktopAppInfoClass {
-		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
-	}
-
 	export interface TreeAliasInitOptions {}
 	interface TreeAlias {}
 	class TreeAlias {
@@ -312,12 +306,6 @@ declare namespace imports.gi.CMenu {
 		 * @returns The #GMenuTree
 		 */
 		public get_tree(): Tree;
-	}
-
-	export interface TreeClassInitOptions {}
-	interface TreeClass {}
-	class TreeClass {
-		public constructor(options?: Partial<TreeClassInitOptions>);
 	}
 
 	export interface TreeDirectoryInitOptions {}
@@ -382,31 +370,31 @@ declare namespace imports.gi.CMenu {
 	class TreeIter {
 		public constructor(options?: Partial<TreeIterInitOptions>);
 		/**
-		 * This method may only be called if gmenu_tree_iter_next()
+		 * This method may only be called if {@link CMenu.TreeIter.next}
 		 * returned GMENU_TREE_ITEM_ALIAS.
 		 * @returns An alias
 		 */
 		public get_alias(): TreeAlias;
 		/**
-		 * This method may only be called if gmenu_tree_iter_next()
+		 * This method may only be called if {@link CMenu.TreeIter.next}
 		 * returned GMENU_TREE_ITEM_DIRECTORY.
 		 * @returns A directory
 		 */
 		public get_directory(): TreeDirectory;
 		/**
-		 * This method may only be called if gmenu_tree_iter_next()
+		 * This method may only be called if {@link CMenu.TreeIter.next}
 		 * returned GMENU_TREE_ITEM_ENTRY.
 		 * @returns An entry
 		 */
 		public get_entry(): TreeEntry;
 		/**
-		 * This method may only be called if gmenu_tree_iter_next()
+		 * This method may only be called if {@link CMenu.TreeIter.next}
 		 * returned GMENU_TREE_ITEM_HEADER.
 		 * @returns A header
 		 */
 		public get_header(): TreeHeader;
 		/**
-		 * This method may only be called if gmenu_tree_iter_next()
+		 * This method may only be called if {@link CMenu.TreeIter.next}
 		 * returned #GMENU_TREE_ITEM_SEPARATOR.
 		 * @returns A separator
 		 */

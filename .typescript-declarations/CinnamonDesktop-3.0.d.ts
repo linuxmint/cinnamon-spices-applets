@@ -80,7 +80,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * we won't leak the pixmap if somebody else it setting
 		 * it at the same time. (This assumes that they follow the
 		 * same conventions we do).  #surface should come from a call
-		 * to gnome_bg_create_surface().
+		 * to {@link Gnome.bg_create_surface}.
 		 * @param screen the #GdkScreen to change root background on
 		 * @param surface the #cairo_surface_t to set root background from.
 		 *   Must be an xlib surface backing a pixmap.
@@ -88,7 +88,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static set_surface_as_root(screen: Gdk.Screen, surface: cairo.Surface): void;
 		/**
 		 * Set the root pixmap, and properties pointing to it.
-		 * This function differs from gnome_bg_set_surface_as_root()
+		 * This function differs from {@link Gnome.bg_set_surface_as_root}
 		 * in that it adds a subtle crossfade animation from the
 		 * current root pixmap to the new one.
 		 * @param screen the #GdkScreen to change root background on
@@ -115,13 +115,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		readonly parent_object: GObject.Object;
 		/**
 		 * This function reveals whether or not #fade is currently
-		 * running on a window.  See gnome_bg_crossfade_start() for
+		 * running on a window.  See {@link Gnome.bg_crossfade_start} for
 		 * information on how to initiate a crossfade.
 		 * @returns %TRUE if fading, or %FALSE if not fading
 		 */
 		is_started(): boolean;
 		/**
-		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * Before initiating a crossfade with {@link Gnome.bg_crossfade_start}
 		 * a start and end surface have to be set.  This function sets
 		 * the surface shown at the end of the crossfade effect.
 		 * @param surface The cairo surface to fade to
@@ -130,7 +130,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		set_end_surface(surface: cairo.Surface): boolean;
 		/**
-		 * Before initiating a crossfade with gnome_bg_crossfade_start()
+		 * Before initiating a crossfade with {@link Gnome.bg_crossfade_start}
 		 * a start and end surface have to be set.  This function sets
 		 * the surface shown at the beginning of the crossfade effect.
 		 * @param surface The cairo surface to fade from
@@ -141,7 +141,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		/**
 		 * This function initiates a quick crossfade between two surfaces on
 		 * the background of #window.  Before initiating the crossfade both
-		 * gnome_bg_crossfade_start() and gnome_bg_crossfade_end() need to
+		 * {@link Gnome.bg_crossfade_start} and gnome_bg_crossfade_end() need to
 		 * be called. If animations are disabled, the crossfade is skipped,
 		 * and the window background is set immediately to the end surface.
 		 * @param window The #GdkWindow to draw crossfade on
@@ -742,7 +742,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		get_layout_info(id: string): [ boolean, string | null, string | null, string | null, string | null ];
 		/**
 		 * Retrieves the layout that better fits #language. It also fetches
-		 * information about that layout like gnome_xkb_info_get_layout_info().
+		 * information about that layout like {@link Gnome.xkb_info_get_layout_info}.
 		 * 
 		 * If a layout can't be found the return value is %FALSE and all the
 		 * (out) parameters are set to %NULL.
@@ -797,7 +797,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		public static new(): XkbInfo;
 		/**
 		 * Frees an #XkbRF_VarDefsRec instance allocated by
-		 * gnome_xkb_info_get_var_defs().
+		 * {@link Gnome.xkb_info_get_var_defs}.
 		 * @param var_defs #XkbRF_VarDefsRec instance to free
 		 */
 		public static free_var_defs(var_defs: any): void;
@@ -805,68 +805,13 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * Gets both the XKB rules file path and the current XKB parameters in
 		 * use by the X server.
 		 * @returns location to store the rules file
-		 * path. Use g_free() when it's no longer needed
+		 * path. Use {@link GObject.free} when it's no longer needed
 		 * 
 		 * location to store a
 		 * #XkbRF_VarDefsRec pointer. Use gnome_xkb_info_free_var_defs() to
 		 * free it
 		 */
 		public static get_var_defs(): [ rules: string, var_defs: any ];
-	}
-
-	export interface BGClassInitOptions {}
-	interface BGClass {}
-	class BGClass {
-		public constructor(options?: Partial<BGClassInitOptions>);
-	}
-
-	export interface BGCrossfadeClassInitOptions {}
-	interface BGCrossfadeClass {}
-	class BGCrossfadeClass {
-		public constructor(options?: Partial<BGCrossfadeClassInitOptions>);
-		public finished: {(fade: BGCrossfade, window: Gdk.Window): void;};
-	}
-
-	export interface BGCrossfadePrivateInitOptions {}
-	interface BGCrossfadePrivate {}
-	class BGCrossfadePrivate {
-		public constructor(options?: Partial<BGCrossfadePrivateInitOptions>);
-	}
-
-	export interface DesktopThumbnailFactoryClassInitOptions {}
-	interface DesktopThumbnailFactoryClass {}
-	class DesktopThumbnailFactoryClass {
-		public constructor(options?: Partial<DesktopThumbnailFactoryClassInitOptions>);
-	}
-
-	export interface DesktopThumbnailFactoryPrivateInitOptions {}
-	interface DesktopThumbnailFactoryPrivate {}
-	class DesktopThumbnailFactoryPrivate {
-		public constructor(options?: Partial<DesktopThumbnailFactoryPrivateInitOptions>);
-	}
-
-	export interface PnpIdsClassInitOptions {}
-	interface PnpIdsClass {}
-	class PnpIdsClass {
-		public constructor(options?: Partial<PnpIdsClassInitOptions>);
-	}
-
-	export interface PnpIdsPrivateInitOptions {}
-	interface PnpIdsPrivate {}
-	class PnpIdsPrivate {
-		public constructor(options?: Partial<PnpIdsPrivateInitOptions>);
-	}
-
-	export interface RRConfigClassInitOptions {}
-	interface RRConfigClass {}
-	class RRConfigClass {
-		public constructor(options?: Partial<RRConfigClassInitOptions>);
-	}
-
-	export interface RRConfigPrivateInitOptions {}
-	interface RRConfigPrivate {}
-	class RRConfigPrivate {
-		public constructor(options?: Partial<RRConfigPrivateInitOptions>);
 	}
 
 	export interface RRCrtcInitOptions {}
@@ -884,18 +829,6 @@ declare namespace imports.gi.CinnamonDesktop {
 		public set_config_with_time(timestamp: number, x: number, y: number, mode: RRMode, rotation: RRRotation, outputs: RROutput, n_outputs: number, scale: number, global_scale: number): boolean;
 		public set_gamma(size: number, red: number, green: number, blue: number): void;
 		public supports_rotation(rotation: RRRotation): boolean;
-	}
-
-	export interface RRLabelerClassInitOptions {}
-	interface RRLabelerClass {}
-	class RRLabelerClass {
-		public constructor(options?: Partial<RRLabelerClassInitOptions>);
-	}
-
-	export interface RRLabelerPrivateInitOptions {}
-	interface RRLabelerPrivate {}
-	class RRLabelerPrivate {
-		public constructor(options?: Partial<RRLabelerPrivateInitOptions>);
 	}
 
 	export interface RRModeInitOptions {}
@@ -937,57 +870,6 @@ declare namespace imports.gi.CinnamonDesktop {
 		public list_modes(): RRMode;
 		public set_backlight(value: number): boolean;
 		public supports_mode(mode: RRMode): boolean;
-	}
-
-	export interface RROutputInfoClassInitOptions {}
-	interface RROutputInfoClass {}
-	class RROutputInfoClass {
-		public constructor(options?: Partial<RROutputInfoClassInitOptions>);
-	}
-
-	export interface RROutputInfoPrivateInitOptions {}
-	interface RROutputInfoPrivate {}
-	class RROutputInfoPrivate {
-		public constructor(options?: Partial<RROutputInfoPrivateInitOptions>);
-	}
-
-	export interface RRScreenClassInitOptions {}
-	interface RRScreenClass {}
-	class RRScreenClass {
-		public constructor(options?: Partial<RRScreenClassInitOptions>);
-		public changed: {(): void;};
-		public output_connected: {(output: RROutput): void;};
-		public output_disconnected: {(output: RROutput): void;};
-	}
-
-	export interface RRScreenPrivateInitOptions {}
-	interface RRScreenPrivate {}
-	class RRScreenPrivate {
-		public constructor(options?: Partial<RRScreenPrivateInitOptions>);
-	}
-
-	export interface WallClockClassInitOptions {}
-	interface WallClockClass {}
-	class WallClockClass {
-		public constructor(options?: Partial<WallClockClassInitOptions>);
-	}
-
-	export interface WallClockPrivateInitOptions {}
-	interface WallClockPrivate {}
-	class WallClockPrivate {
-		public constructor(options?: Partial<WallClockPrivateInitOptions>);
-	}
-
-	export interface XkbInfoClassInitOptions {}
-	interface XkbInfoClass {}
-	class XkbInfoClass {
-		public constructor(options?: Partial<XkbInfoClassInitOptions>);
-	}
-
-	export interface XkbInfoPrivateInitOptions {}
-	interface XkbInfoPrivate {}
-	class XkbInfoPrivate {
-		public constructor(options?: Partial<XkbInfoPrivateInitOptions>);
 	}
 
 	enum DesktopThumbnailSize {

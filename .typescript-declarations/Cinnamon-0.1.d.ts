@@ -10,7 +10,7 @@ declare namespace imports.gi.Cinnamon {
 		 */
 		readonly state: AppState;
 		/**
-		 * Like cinnamon_app_activate_full(), but using the default workspace and
+		 * Like {@link Cinnamon.App.activate_full}, but using the default workspace and
 		 * event timestamp.
 		 */
 		activate(): void;
@@ -38,7 +38,7 @@ declare namespace imports.gi.Cinnamon {
 		activate_window(window: Meta.Window | null, timestamp: number): void;
 		/**
 		 * Returns %TRUE if the app supports opening a new window through
-		 * cinnamon_app_open_new_window() (ie, if calling that function will
+		 * {@link Cinnamon.App.open_new_window} (ie, if calling that function will
 		 * result in actually opening a new window and not something else,
 		 * like presenting the most recently active one)
 		 * @returns 
@@ -270,7 +270,7 @@ declare namespace imports.gi.Cinnamon {
 		 * allocate method.
 		 * 
 		 * Note that #box is #self's content box (qv
-		 * st_theme_node_get_content_box()), NOT its allocation.
+		 * {@link St.ThemeNode.get_content_box}), NOT its allocation.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -281,7 +281,7 @@ declare namespace imports.gi.Cinnamon {
 		 */
 		connect(signal: "allocate", callback: (owner: this, box: Clutter.ActorBox, flags: Clutter.AllocationFlags) => void): number;
 		/**
-		 * Emitted when clutter_actor_get_preferred_height() is called
+		 * Emitted when {@link Clutter.Actor.get_preferred_height} is called
 		 * on #self. You should fill in the fields of #alloc with the
 		 * your minimum and natural heights. {@link GenericContainer}
 		 * will deal with taking its borders and padding into account
@@ -293,14 +293,14 @@ declare namespace imports.gi.Cinnamon {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - for_width: as in clutter_actor_get_preferred_height() 
+		 *  - for_width: as in {@link Clutter.Actor.get_preferred_height} 
 		 *  - alloc: a {@link GenericContainerAllocation} to be filled in 
 		 * 
 		 * @returns Callback ID
 		 */
 		connect(signal: "get-preferred-height", callback: (owner: this, for_width: number, alloc: GenericContainerAllocation) => void): number;
 		/**
-		 * Emitted when clutter_actor_get_preferred_width() is called
+		 * Emitted when {@link Clutter.Actor.get_preferred_width} is called
 		 * on #self. You should fill in the fields of #alloc with the
 		 * your minimum and natural widths. {@link GenericContainer}
 		 * will deal with taking its borders and padding into account
@@ -312,7 +312,7 @@ declare namespace imports.gi.Cinnamon {
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
-		 *  - for_height: as in clutter_actor_get_preferred_width() 
+		 *  - for_height: as in {@link Clutter.Actor.get_preferred_width} 
 		 *  - alloc: a {@link GenericContainerAllocation} to be filled in 
 		 * 
 		 * @returns Callback ID
@@ -366,7 +366,7 @@ declare namespace imports.gi.Cinnamon {
 		alloc_leak(mb: number): void;
 		/**
 		 * Grabs the keyboard and mouse to the stage window. The stage will
-		 * receive all keyboard and mouse events until cinnamon_global_end_modal()
+		 * receive all keyboard and mouse events until {@link Cinnamon.Global.end_modal}
 		 * is called. This is used to implement "modes" for Cinnamon, such as the
 		 * overview mode or the "looking glass" debug overlay, that block
 		 * application and normal key shortcuts.
@@ -375,13 +375,13 @@ declare namespace imports.gi.Cinnamon {
 		 * @returns %TRUE if we successfully entered the mode. %FALSE if we couldn't
 		 *  enter the mode. Failure may occur because an application has the pointer
 		 *  or keyboard grabbed, because Muffin is in a mode itself like moving a
-		 *  window or alt-Tab window selection, or because cinnamon_global_begin_modal()
+		 *  window or alt-Tab window selection, or because {@link Cinnamon.Global.begin_modal}
 		 *  was previouly called.
 		 */
 		begin_modal(timestamp: number, options: Meta.ModalOptions): boolean;
 		/**
 		 * Marks that we are currently doing work. This is used to to track
-		 * whether we are busy for the purposes of cinnamon_global_run_at_leisure().
+		 * whether we are busy for the purposes of {@link Cinnamon.Global.run_at_leisure}.
 		 * A count is kept and cinnamon_global_end_work() must be called exactly
 		 * as many times as cinnamon_global_begin_work().
 		 */
@@ -399,11 +399,11 @@ declare namespace imports.gi.Cinnamon {
 		 * @param x2 right X coordinate
 		 * @param y2 bottom Y coordinate
 		 * @param directions The directions we're allowed to pass through
-		 * @returns value you can pass to cinnamon_global_destroy_pointer_barrier()
+		 * @returns value you can pass to {@link Cinnamon.Global.destroy_pointer_barrier}
 		 */
 		create_pointer_barrier(x1: number, y1: number, x2: number, y2: number, directions: number): number;
 		/**
-		 * Destroys the #barrier created by cinnamon_global_create_pointer_barrier().
+		 * Destroys the #barrier created by {@link Cinnamon.Global.create_pointer_barrier}.
 		 * @param barrier a pointer barrier
 		 */
 		destroy_pointer_barrier(barrier: number): void;
@@ -412,12 +412,12 @@ declare namespace imports.gi.Cinnamon {
 		 */
 		dump_gjs_stack(): void;
 		/**
-		 * Undoes the effect of cinnamon_global_begin_modal().
+		 * Undoes the effect of {@link Cinnamon.Global.begin_modal}.
 		 * @param timestamp
 		 */
 		end_modal(timestamp: number): void;
 		/**
-		 * Marks the end of work that we started with cinnamon_global_begin_work().
+		 * Marks the end of work that we started with {@link Cinnamon.Global.begin_work}.
 		 * If no other work is ongoing and functions have been added with
 		 * cinnamon_global_run_at_leisure(), they will be run at the next
 		 * opportunity.
@@ -430,7 +430,7 @@ declare namespace imports.gi.Cinnamon {
 		get_pid(): number;
 		/**
 		 * Gets the pointer coordinates and current modifier key state.
-		 * This is a wrapper around gdk_display_get_pointer() that strips
+		 * This is a wrapper around {@link Gdk.Display.get_pointer} that strips
 		 * out any un-declared modifier flags, to make gjs happy; see
 		 * https://bugzilla.gnome.org/show_bug.cgi?id=597292.
 		 * @returns the X coordinate of the pointer, in global coordinates
@@ -499,7 +499,7 @@ declare namespace imports.gi.Cinnamon {
 		set_cursor(type: Cursor): void;
 		/**
 		 * Sets the pointer coordinates.
-		 * This is a wrapper around gdk_device_warp().
+		 * This is a wrapper around {@link Gdk.Device.warp}.
 		 * @param x the X coordinate of the pointer, in global coordinates
 		 * @param y the Y coordinate of the pointer, in global coordinates
 		 */
@@ -510,7 +510,7 @@ declare namespace imports.gi.Cinnamon {
 		 * any clicks, but just passes them through to underlying windows.
 		 * When it is %CINNAMON_STAGE_INPUT_MODE_NORMAL, then the stage accepts
 		 * clicks in the region defined by
-		 * cinnamon_global_set_stage_input_region() but passes through clicks
+		 * {@link Cinnamon.Global.set_stage_input_region} but passes through clicks
 		 * outside that region. When it is %CINNAMON_STAGE_INPUT_MODE_FULLSCREEN,
 		 * the stage absorbs all input.
 		 * 
@@ -652,7 +652,7 @@ declare namespace imports.gi.Cinnamon {
 		/**
 		 * Adds a function that will be called before statistics are recorded.
 		 * The function would typically compute one or more statistics values
-		 * and call a function such as cinnamon_perf_log_update_statistic_i()
+		 * and call a function such as {@link Cinnamon.PerfLog.update_statistic_i}
 		 * to update the value that will be recorded.
 		 * @param callback function to call before recording statistics
 		 * @param notify function to call when #user_data is no longer needed
@@ -660,7 +660,7 @@ declare namespace imports.gi.Cinnamon {
 		add_statistics_callback(callback: PerfStatisticsCallback, notify: GLib.DestroyNotify): void;
 		/**
 		 * Calls all the update functions added with
-		 * cinnamon_perf_log_add_statistics_callback() and then records events
+		 * {@link Cinnamon.PerfLog.add_statistics_callback} and then records events
 		 * for all statistics, followed by a perf.statisticsCollected event.
 		 */
 		collect_statistics(): void;
@@ -681,7 +681,7 @@ declare namespace imports.gi.Cinnamon {
 		/**
 		 * Defines a statistic. A statistic is a numeric value that is stored
 		 * by the performance log and recorded periodically or when
-		 * cinnamon_perf_log_collect_statistics() is called explicitly.
+		 * {@link Cinnamon.PerfLog.collect_statistics} is called explicitly.
 		 * 
 		 * Code that defines a statistic should update it by calling
 		 * the update function for the particular data type of the statistic,
@@ -690,7 +690,7 @@ declare namespace imports.gi.Cinnamon {
 		 * with cinnamon_perf_log_add_statistics_callback(). These functions
 		 * are called immediately before statistics are recorded.
 		 * @param name name of the statistic and of the corresponding event.
-		 *  This should follow the same guidelines as for cinnamon_perf_log_define_event()
+		 *  This should follow the same guidelines as for {@link Cinnamon.PerfLog.define_event}
 		 * @param description human readable description of the statistic.
 		 * @param signature The type of the data stored for statistic. Must
 		 *  currently be 'i' or 'x'.
@@ -781,7 +781,7 @@ declare namespace imports.gi.Cinnamon {
 		public constructor(options?: Partial<PerfLogInitOptions>);
 		/**
 		 * Gets the global singleton performance log. This is initially disabled
-		 * and must be explicitly enabled with cinnamon_perf_log_set_enabled().
+		 * and must be explicitly enabled with {@link Cinnamon.PerfLog.set_enabled}.
 		 * @returns the global singleton performance log
 		 */
 		public static get_default(): PerfLog;
@@ -796,7 +796,7 @@ declare namespace imports.gi.Cinnamon {
 		pipeline: string;
 		stage: Clutter.Stage;
 		/**
-		 * Stops recording. It's possible to call cinnamon_recorder_record()
+		 * Stops recording. It's possible to call {@link Cinnamon.Recorder.record}
 		 * again to reopen a new recording stream, but unless change the
 		 * recording filename, this may result in the old recording being
 		 * overwritten.
@@ -812,7 +812,7 @@ declare namespace imports.gi.Cinnamon {
 		 * Temporarily stop recording. If the specified filename includes
 		 * the %c escape, then the stream is closed and a new stream with
 		 * an incremented counter will be created. Otherwise the stream
-		 * is paused and will be continued when cinnamon_recorder_record()
+		 * is paused and will be continued when {@link Cinnamon.Recorder.record}
 		 * is next called.
 		 */
 		pause(): void;
@@ -866,7 +866,7 @@ declare namespace imports.gi.Cinnamon {
 		 * should have an unconnected sink pad where the recorded
 		 * video is recorded. It will normally have a unconnected
 		 * source pad; output from that pad will be written into the
-		 * output file. (See cinnamon_recorder_set_filename().) However
+		 * output file. (See {@link Cinnamon.Recorder.set_filename}.) However
 		 * the pipeline can also take care of its own output - this
 		 * might be used to send the output to an icecast server
 		 * via shout2send or similar.
@@ -1246,56 +1246,6 @@ declare namespace imports.gi.Cinnamon {
 		public static get_for_stage(stage: Clutter.Stage): XFixesCursor;
 	}
 
-	export interface AppClassInitOptions {}
-	interface AppClass {}
-	class AppClass {
-		public constructor(options?: Partial<AppClassInitOptions>);
-	}
-
-	export interface AppPrivateInitOptions {}
-	interface AppPrivate {}
-	class AppPrivate {
-		public constructor(options?: Partial<AppPrivateInitOptions>);
-	}
-
-	export interface AppSystemClassInitOptions {}
-	interface AppSystemClass {}
-	class AppSystemClass {
-		public constructor(options?: Partial<AppSystemClassInitOptions>);
-		public installed_changed: {(appsys: AppSystem): void;};
-		public favorites_changed: {(appsys: AppSystem): void;};
-	}
-
-	export interface AppSystemPrivateInitOptions {}
-	interface AppSystemPrivate {}
-	class AppSystemPrivate {
-		public constructor(options?: Partial<AppSystemPrivateInitOptions>);
-	}
-
-	export interface DocSystemClassInitOptions {}
-	interface DocSystemClass {}
-	class DocSystemClass {
-		public constructor(options?: Partial<DocSystemClassInitOptions>);
-	}
-
-	export interface DocSystemPrivateInitOptions {}
-	interface DocSystemPrivate {}
-	class DocSystemPrivate {
-		public constructor(options?: Partial<DocSystemPrivateInitOptions>);
-	}
-
-	export interface EmbeddedWindowClassInitOptions {}
-	interface EmbeddedWindowClass {}
-	class EmbeddedWindowClass {
-		public constructor(options?: Partial<EmbeddedWindowClassInitOptions>);
-	}
-
-	export interface EmbeddedWindowPrivateInitOptions {}
-	interface EmbeddedWindowPrivate {}
-	class EmbeddedWindowPrivate {
-		public constructor(options?: Partial<EmbeddedWindowPrivateInitOptions>);
-	}
-
 	export interface GenericContainerAllocationInitOptions {}
 	interface GenericContainerAllocation {}
 	class GenericContainerAllocation {
@@ -1303,78 +1253,6 @@ declare namespace imports.gi.Cinnamon {
 		public min_size: number;
 		public natural_size: number;
 		public readonly _refcount: number;
-	}
-
-	export interface GenericContainerClassInitOptions {}
-	interface GenericContainerClass {}
-	class GenericContainerClass {
-		public constructor(options?: Partial<GenericContainerClassInitOptions>);
-	}
-
-	export interface GenericContainerPrivateInitOptions {}
-	interface GenericContainerPrivate {}
-	class GenericContainerPrivate {
-		public constructor(options?: Partial<GenericContainerPrivateInitOptions>);
-	}
-
-	export interface GlobalClassInitOptions {}
-	interface GlobalClass {}
-	class GlobalClass {
-		public constructor(options?: Partial<GlobalClassInitOptions>);
-	}
-
-	export interface GtkEmbedClassInitOptions {}
-	interface GtkEmbedClass {}
-	class GtkEmbedClass {
-		public constructor(options?: Partial<GtkEmbedClassInitOptions>);
-	}
-
-	export interface GtkEmbedPrivateInitOptions {}
-	interface GtkEmbedPrivate {}
-	class GtkEmbedPrivate {
-		public constructor(options?: Partial<GtkEmbedPrivateInitOptions>);
-	}
-
-	export interface PerfLogClassInitOptions {}
-	interface PerfLogClass {}
-	class PerfLogClass {
-		public constructor(options?: Partial<PerfLogClassInitOptions>);
-	}
-
-	export interface RecorderClassInitOptions {}
-	interface RecorderClass {}
-	class RecorderClass {
-		public constructor(options?: Partial<RecorderClassInitOptions>);
-	}
-
-	export interface ScreenshotClassInitOptions {}
-	interface ScreenshotClass {}
-	class ScreenshotClass {
-		public constructor(options?: Partial<ScreenshotClassInitOptions>);
-	}
-
-	export interface SlicerClassInitOptions {}
-	interface SlicerClass {}
-	class SlicerClass {
-		public constructor(options?: Partial<SlicerClassInitOptions>);
-	}
-
-	export interface SlicerPrivateInitOptions {}
-	interface SlicerPrivate {}
-	class SlicerPrivate {
-		public constructor(options?: Partial<SlicerPrivateInitOptions>);
-	}
-
-	export interface StackClassInitOptions {}
-	interface StackClass {}
-	class StackClass {
-		public constructor(options?: Partial<StackClassInitOptions>);
-	}
-
-	export interface StackPrivateInitOptions {}
-	interface StackPrivate {}
-	class StackPrivate {
-		public constructor(options?: Partial<StackPrivateInitOptions>);
 	}
 
 	export interface StartupSequenceInitOptions {}
@@ -1386,56 +1264,6 @@ declare namespace imports.gi.Cinnamon {
 		public get_completed(): boolean;
 		public get_id(): string;
 		public get_name(): string;
-	}
-
-	export interface TrayIconClassInitOptions {}
-	interface TrayIconClass {}
-	class TrayIconClass {
-		public constructor(options?: Partial<TrayIconClassInitOptions>);
-	}
-
-	export interface TrayIconPrivateInitOptions {}
-	interface TrayIconPrivate {}
-	class TrayIconPrivate {
-		public constructor(options?: Partial<TrayIconPrivateInitOptions>);
-	}
-
-	export interface TrayManagerClassInitOptions {}
-	interface TrayManagerClass {}
-	class TrayManagerClass {
-		public constructor(options?: Partial<TrayManagerClassInitOptions>);
-		public tray_icon_added: {(manager: TrayManager, icon: Clutter.Actor, lowercase_wm_class: string): void;};
-		public tray_icon_removed: {(manager: TrayManager, icon: Clutter.Actor): void;};
-	}
-
-	export interface TrayManagerPrivateInitOptions {}
-	interface TrayManagerPrivate {}
-	class TrayManagerPrivate {
-		public constructor(options?: Partial<TrayManagerPrivateInitOptions>);
-	}
-
-	export interface WMClassInitOptions {}
-	interface WMClass {}
-	class WMClass {
-		public constructor(options?: Partial<WMClassInitOptions>);
-	}
-
-	export interface WindowTrackerClassInitOptions {}
-	interface WindowTrackerClass {}
-	class WindowTrackerClass {
-		public constructor(options?: Partial<WindowTrackerClassInitOptions>);
-	}
-
-	export interface WindowTrackerPrivateInitOptions {}
-	interface WindowTrackerPrivate {}
-	class WindowTrackerPrivate {
-		public constructor(options?: Partial<WindowTrackerPrivateInitOptions>);
-	}
-
-	export interface XFixesCursorClassInitOptions {}
-	interface XFixesCursorClass {}
-	class XFixesCursorClass {
-		public constructor(options?: Partial<XFixesCursorClassInitOptions>);
 	}
 
 	enum AppState {
@@ -1470,11 +1298,11 @@ declare namespace imports.gi.Cinnamon {
 	}
 
 	/**
-	 * Callback type for cinnamon_get_file_contents_utf8()
+	 * Callback type for {@link Cinnamon.get.file_contents_utf8}
 	 */
 	interface FileContentsCallback {
 		/**
-		 * Callback type for cinnamon_get_file_contents_utf8()
+		 * Callback type for {@link Cinnamon.get.file_contents_utf8}
 		 * @param utf8_contents The contents of the file
 		 */
 		(utf8_contents: string): void;
@@ -1497,7 +1325,7 @@ declare namespace imports.gi.Cinnamon {
 	}
 
 	/**
-	 * Using G_BREAKPOINT(), interrupt the current process.  This is useful
+	 * Using {@link G.BREAKPOINT}, interrupt the current process.  This is useful
 	 * in conjunction with a debugger such as gdb.
 	 */
 	function breakpoint(): void;
@@ -1505,7 +1333,7 @@ declare namespace imports.gi.Cinnamon {
 	/**
 	 * Gets the current state of the event (the set of modifier keys that
 	 * are pressed down). Thhis is a wrapper around
-	 * clutter_event_get_state() that strips out any un-declared modifier
+	 * {@link Clutter.event.get_state} that strips out any un-declared modifier
 	 * flags, to make gjs happy; see
 	 * https://bugzilla.gnome.org/show_bug.cgi?id=597292.
 	 * @param event a #ClutterEvent
@@ -1554,7 +1382,7 @@ declare namespace imports.gi.Cinnamon {
 	 * Unicode format strings:
 	 * https://bugzilla.mozilla.org/show_bug.cgi?id=508783
 	 * @param format a strftime-style string format, as parsed by
-	 *   g_date_time_format()
+	 *   {@link Glib.date_time_format}
 	 * @param time_ms milliseconds since 1970-01-01 00:00:00 UTC; the
 	 *   value returned by Date.getTime()
 	 * @returns the formatted date. If the date is
@@ -1575,7 +1403,7 @@ declare namespace imports.gi.Cinnamon {
 	function util_get_label_for_uri(text_uri: string): string;
 
 	/**
-	 * This function is similar to a combination of clutter_actor_get_transformed_position(),
+	 * This function is similar to a combination of {@link Clutter.Actor.get_transformed_position},
 	 * and clutter_actor_get_transformed_size(), but unlike
 	 * clutter_actor_get_transformed_size(), it always returns a transform
 	 * of the current allocation, while clutter_actor_get_transformed_size() returns

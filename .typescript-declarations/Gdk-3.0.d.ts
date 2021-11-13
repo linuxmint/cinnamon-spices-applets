@@ -19,10 +19,10 @@ declare namespace imports.gi.Gdk {
 		set_desktop(desktop: number): void;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_app_launch_context() instead
+		 * Use {@link Gdk.Display.get_app_launch_context} instead
 		 * 
 		 * Sets the display on which applications will be launched when
-		 * using this context. See also gdk_app_launch_context_set_screen().
+		 * using this context. See also {@link Gdk.AppLaunchContext.set_screen}.
 		 * @param display a {@link Display}
 		 */
 		set_display(display: Display): void;
@@ -33,14 +33,14 @@ declare namespace imports.gi.Gdk {
 		 * Window Managers can use this information when displaying startup
 		 * notification.
 		 * 
-		 * See also gdk_app_launch_context_set_icon_name().
+		 * See also {@link Gdk.AppLaunchContext.set_icon_name}.
 		 * @param icon a #GIcon, or %NULL
 		 */
 		set_icon(icon: Gio.Icon | null): void;
 		/**
 		 * Sets the icon for applications that are launched with this context.
 		 * The #icon_name will be interpreted in the same way as the Icon field
-		 * in desktop files. See also gdk_app_launch_context_set_icon().
+		 * in desktop files. See also {@link Gdk.AppLaunchContext.set_icon}.
 		 * 
 		 * If both #icon and #icon_name are set, the #icon_name takes priority.
 		 * If neither #icon or #icon_name is set, the icon is taken from either
@@ -51,7 +51,7 @@ declare namespace imports.gi.Gdk {
 		set_icon_name(icon_name: string | null): void;
 		/**
 		 * Sets the screen on which applications will be launched when
-		 * using this context. See also gdk_app_launch_context_set_display().
+		 * using this context. See also {@link Gdk.AppLaunchContext.set_display}.
 		 * 
 		 * If both #screen and #display are set, the #screen takes priority.
 		 * If neither #screen or #display are set, the default screen and
@@ -113,7 +113,7 @@ declare namespace imports.gi.Gdk {
 		public constructor(options?: Partial<AppLaunchContextInitOptions>);
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_app_launch_context() instead
+		 * Use {@link Gdk.Display.get_app_launch_context} instead
 		 * 
 		 * Creates a new {@link AppLaunchContext}.
 		 * @returns a new {@link AppLaunchContext}
@@ -165,7 +165,7 @@ declare namespace imports.gi.Gdk {
 		get_surface(): [ cairo.Surface | null, number | null, number | null ];
 		/**
 		 * @deprecated
-		 * Use g_object_ref() instead
+		 * Use {@link GObject.ref} instead
 		 * 
 		 * Adds a reference to #cursor.
 		 * @returns Same #cursor that was passed in
@@ -173,7 +173,7 @@ declare namespace imports.gi.Gdk {
 		ref(): Cursor;
 		/**
 		 * @deprecated
-		 * Use g_object_unref() instead
+		 * Use {@link GObject.unref} instead
 		 * 
 		 * Removes a reference from #cursor, deallocating the cursor
 		 * if no references remain.
@@ -205,10 +205,10 @@ declare namespace imports.gi.Gdk {
 		public constructor(options?: Partial<CursorInitOptions>);
 		/**
 		 * @deprecated
-		 * Use gdk_cursor_new_for_display() instead.
+		 * Use {@link Gdk.Cursor.new_for_display} instead.
 		 * 
 		 * Creates a new cursor from the set of builtin cursors for the default display.
-		 * See gdk_cursor_new_for_display().
+		 * See {@link Gdk.Cursor.new_for_display}.
 		 * 
 		 * To make the cursor invisible, use %GDK_BLANK_CURSOR.
 		 * @param cursor_type cursor to create
@@ -274,7 +274,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Not all GDK backends support RGBA cursors. If they are not
 		 * supported, a monochrome approximation will be displayed.
-		 * The functions gdk_display_supports_cursor_alpha() and
+		 * The functions {@link Gdk.Display.supports_cursor_alpha} and
 		 * gdk_display_supports_cursor_color() can be used to determine
 		 * whether RGBA cursors are supported;
 		 * gdk_display_get_default_cursor_size() and
@@ -300,7 +300,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Not all GDK backends support RGBA cursors. If they are not
 		 * supported, a monochrome approximation will be displayed.
-		 * The functions gdk_display_supports_cursor_alpha() and
+		 * The functions {@link Gdk.Display.supports_cursor_alpha} and
 		 * gdk_display_supports_cursor_color() can be used to determine
 		 * whether RGBA cursors are supported;
 		 * gdk_display_get_default_cursor_size() and
@@ -364,7 +364,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		num_touches: number;
 		/**
-		 * Product ID of this device, see gdk_device_get_product_id().
+		 * Product ID of this device, see {@link Gdk.Device.get_product_id}.
 		 */
 		product_id: string;
 		/**
@@ -377,7 +377,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		type: DeviceType;
 		/**
-		 * Vendor ID of this device, see gdk_device_get_vendor_id().
+		 * Vendor ID of this device, see {@link Gdk.Device.get_vendor_id}.
 		 */
 		vendor_id: string;
 		/**
@@ -418,7 +418,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Interprets an array of double as axis values for a given device,
 		 * and locates the value in the array for a given axis label, as returned
-		 * by gdk_device_list_axes()
+		 * by {@link Gdk.Device.list_axes}
 		 * @param axes pointer to an array of axes
 		 * @param axis_label {@link Atom} with the axis label.
 		 * @returns %TRUE if the given axis use was found, otherwise %FALSE.
@@ -451,7 +451,7 @@ declare namespace imports.gi.Gdk {
 		 * be returned. (This is not distinguishable from the case where
 		 * motion history is supported and no events were found.)
 		 * 
-		 * Note that there is also gdk_window_set_event_compression() to get
+		 * Note that there is also {@link Gdk.Window.set_event_compression} to get
 		 * more motion events delivered directly, independent of the windowing
 		 * system.
 		 * @param window the window with respect to which which the event coordinates will be reported
@@ -512,7 +512,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the current location of #device. As a slave device
 		 * coordinates are those of its master pointer, This function
 		 * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-		 * unless there is an ongoing grab on them, see gdk_device_grab().
+		 * unless there is an ongoing grab on them, see {@link Gdk.Device.grab}.
 		 * @returns location to store the {@link Screen}
 		 *          the #device is on, or %NULL.
 		 * 
@@ -525,7 +525,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the current location of #device in double precision. As a slave device's
 		 * coordinates are those of its master pointer, this function
 		 * may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-		 * unless there is an ongoing grab on them. See gdk_device_grab().
+		 * unless there is an ongoing grab on them. See {@link Gdk.Device.grab}.
 		 * @returns location to store the {@link Screen}
 		 *          the #device is on, or %NULL.
 		 * 
@@ -537,7 +537,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Returns the product ID of this device, or %NULL if this information couldn't
 		 * be obtained. This ID is retrieved from the device, and is thus constant for
-		 * it. See gdk_device_get_vendor_id() for more information.
+		 * it. See {@link Gdk.Device.get_vendor_id} for more information.
 		 * @returns the product ID, or %NULL
 		 */
 		get_product_id(): string | null;
@@ -556,7 +556,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the current state of a pointer device relative to #window. As a slave
 		 * device’s coordinates are those of its master pointer, this
 		 * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-		 * unless there is an ongoing grab on them. See gdk_device_grab().
+		 * unless there is an ongoing grab on them. See {@link Gdk.Device.grab}.
 		 * @param window a {@link Window}.
 		 * @param axes an array of doubles to store the values of
 		 * the axes of #device in, or %NULL.
@@ -568,7 +568,7 @@ declare namespace imports.gi.Gdk {
 		 * be obtained. This ID is retrieved from the device, and is thus constant for
 		 * it.
 		 * 
-		 * This function, together with gdk_device_get_product_id(), can be used to eg.
+		 * This function, together with {@link Gdk.Device.get_product_id}, can be used to eg.
 		 * compose #GSettings paths to store settings for this device.
 		 * 
 		 * |[<!-- language="C" -->
@@ -599,7 +599,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * As a slave device coordinates are those of its master pointer, This
 		 * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-		 * unless there is an ongoing grab on them, see gdk_device_grab().
+		 * unless there is an ongoing grab on them, see {@link Gdk.Device.grab}.
 		 * @returns the {@link Window} under the
 		 * device position, or %NULL.
 		 * 
@@ -617,7 +617,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * As a slave device coordinates are those of its master pointer, This
 		 * function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
-		 * unless there is an ongoing grab on them, see gdk_device_grab().
+		 * unless there is an ongoing grab on them, see {@link Gdk.Device.grab}.
 		 * @returns the {@link Window} under the
 		 *   device position, or %NULL.
 		 * 
@@ -630,10 +630,10 @@ declare namespace imports.gi.Gdk {
 		get_window_at_position_double(): [ Window | null, number | null, number | null ];
 		/**
 		 * @deprecated
-		 * Use gdk_seat_grab() instead.
+		 * Use {@link Gdk.Seat.grab} instead.
 		 * 
 		 * Grabs the device so that all events coming from this device are passed to
-		 * this application until the device is ungrabbed with gdk_device_ungrab(),
+		 * this application until the device is ungrabbed with {@link Gdk.Device.ungrab},
 		 * or the window becomes unviewable. This overrides any previous grab on the device
 		 * by this client.
 		 * 
@@ -677,7 +677,7 @@ declare namespace imports.gi.Gdk {
 		 * Returns a #GList of {@link Atoms}, containing the labels for
 		 * the axes that #device currently has.
 		 * @returns 
-		 *     A #GList of {@link Atoms}, free with g_list_free().
+		 *     A #GList of {@link Atoms}, free with {@link G.list_free}.
 		 */
 		list_axes(): GLib.List;
 		/**
@@ -686,7 +686,7 @@ declare namespace imports.gi.Gdk {
 		 * %NULL
 		 * @returns 
 		 *          the list of slave devices, or %NULL. The list must be
-		 *          freed with g_list_free(), the contents of the list are
+		 *          freed with {@link G.list_free}, the contents of the list are
 		 *          owned by GTK+ and should not be freed.
 		 */
 		list_slave_devices(): GLib.List | null;
@@ -718,7 +718,7 @@ declare namespace imports.gi.Gdk {
 		set_mode(mode: InputMode): boolean;
 		/**
 		 * @deprecated
-		 * Use gdk_seat_ungrab() instead.
+		 * Use {@link Gdk.Seat.ungrab} instead.
 		 * 
 		 * Release any grab on #device.
 		 * @param time_ a timestap (e.g. %GDK_CURRENT_TIME).
@@ -824,7 +824,7 @@ declare namespace imports.gi.Gdk {
 	class Device {
 		public constructor(options?: Partial<DeviceInitOptions>);
 		/**
-		 * Frees an array of {@link TimeCoord} that was returned by gdk_device_get_history().
+		 * Frees an array of {@link TimeCoord} that was returned by {@link Gdk.Device.get_history}.
 		 * @param events an array of {@link TimeCoord}.
 		 * @param n_events the length of the array.
 		 */
@@ -844,7 +844,7 @@ declare namespace imports.gi.Gdk {
 		 * location to store current grab window
 		 * 
 		 * location to store boolean indicating whether
-		 *   the #owner_events flag to gdk_keyboard_grab() or
+		 *   the #owner_events flag to {@link Gdk.keyboard.grab} or
 		 *   gdk_pointer_grab() was %TRUE.
 		 */
 		public static grab_info_libgtk_only(display: Display, device: Device): [ boolean, Window, boolean ];
@@ -857,7 +857,7 @@ declare namespace imports.gi.Gdk {
 		display: Display;
 		/**
 		 * @deprecated
-		 * Use gdk_seat_get_pointer() instead.
+		 * Use {@link Gdk.Seat.get_pointer} instead.
 		 * 
 		 * Returns the client pointer, that is, the master pointer that acts as the core pointer
 		 * for this application. In X11, window managers may change this depending on the interaction
@@ -878,7 +878,7 @@ declare namespace imports.gi.Gdk {
 		get_display(): Display | null;
 		/**
 		 * @deprecated
-		 * , use gdk_seat_get_pointer(), gdk_seat_get_keyboard()
+		 * , use {@link Gdk.Seat.get_pointer}, gdk_seat_get_keyboard()
 		 *             and gdk_seat_get_slaves() instead.
 		 * 
 		 * Returns the list of devices of type #type currently attached to
@@ -910,7 +910,7 @@ declare namespace imports.gi.Gdk {
 		 * a slave device.
 		 * 
 		 * If a slave device is detached from all master devices
-		 * (gdk_device_get_associated_device() returns %NULL), its
+		 * {@link (gdk.device_get_associated_device} returns %NULL), its
 		 * {@link DeviceType} will change to %GDK_DEVICE_TYPE_FLOATING,
 		 * if it's attached, it will change to %GDK_DEVICE_TYPE_SLAVE.
 		 * @param signal 
@@ -964,7 +964,7 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * By default, and if the platform supports it, GDK is aware of multiple
 	 * keyboard/pointer pairs and multitouch devices. This behavior can be
-	 * changed by calling gdk_disable_multidevice() before gdk_display_open().
+	 * changed by calling {@link Gdk.disable.multidevice} before gdk_display_open().
 	 * There should rarely be a need to do that though, since GDK defaults
 	 * to a compatibility mode in which it will emit just one enter/leave
 	 * event pair for all devices on a window. To enable per-device
@@ -1083,7 +1083,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the hardware ID of this tool, or 0 if it's not known. When
 		 * non-zero, the identificator is unique for the given tool model,
 		 * meaning that two identical tools will share the same #hardware_id,
-		 * but will have different serial numbers (see gdk_device_tool_get_serial()).
+		 * but will have different serial numbers (see {@link Gdk.DeviceTool.get_serial}).
 		 * 
 		 * This is a more concrete (and device specific) method to identify
 		 * a {@link DeviceTool} than gdk_device_tool_get_tool_type(), as a tablet
@@ -1166,7 +1166,7 @@ declare namespace imports.gi.Gdk {
 		 * Returns a {@link AppLaunchContext} suitable for launching
 		 * applications on the given display.
 		 * @returns a new {@link AppLaunchContext} for #display.
-		 *     Free with g_object_unref() when done
+		 *     Free with {@link GObject.unref} when done
 		 */
 		get_app_launch_context(): AppLaunchContext;
 		/**
@@ -1177,7 +1177,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Returns the default group leader window for all toplevel windows
 		 * on #display. This window is implicitly created by GDK.
-		 * See gdk_window_set_group().
+		 * See {@link Gdk.Window.set_group}.
 		 * @returns The default group leader window
 		 * for #display
 		 */
@@ -1194,7 +1194,7 @@ declare namespace imports.gi.Gdk {
 		get_default_seat(): Seat;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_default_seat() and {@link Seat} operations.
+		 * Use {@link Gdk.Display.get_default_seat} and {@link Seat} operations.
 		 * 
 		 * Returns the {@link DeviceManager} associated to #display.
 		 * @returns A {@link DeviceManager}, or
@@ -1207,7 +1207,7 @@ declare namespace imports.gi.Gdk {
 		 * windowing system if necessary.
 		 * @returns the next {@link Event} to be processed, or %NULL
 		 * if no events are pending. The returned #GdkEvent should be freed
-		 * with gdk_event_free().
+		 * with {@link Gdk.Event.free}.
 		 */
 		get_event(): Event | null;
 		/**
@@ -1244,7 +1244,7 @@ declare namespace imports.gi.Gdk {
 		 * Gets the number of monitors that belong to #display.
 		 * 
 		 * The returned number is valid until the next emission of the
-		 * {@link Display}::monitor-added or #GdkDisplay::monitor-removed signal.
+		 * {@link Display.monitor_added} or #GdkDisplay::monitor-removed signal.
 		 * @returns the number of monitors
 		 */
 		get_n_monitors(): number;
@@ -1264,7 +1264,7 @@ declare namespace imports.gi.Gdk {
 		get_name(): string;
 		/**
 		 * @deprecated
-		 * Use gdk_device_get_position() instead.
+		 * Use {@link Gdk.Device.get_position} instead.
 		 * 
 		 * Gets the current location of the pointer and the current modifier
 		 * mask for a given display.
@@ -1291,7 +1291,7 @@ declare namespace imports.gi.Gdk {
 		get_primary_monitor(): Monitor | null;
 		/**
 		 * @deprecated
-		 * There is only one screen; use gdk_display_get_default_screen() to get it.
+		 * There is only one screen; use {@link Gdk.Display.get_default_screen} to get it.
 		 * 
 		 * Returns a screen object for one of the screens of the display.
 		 * @param screen_num the screen number
@@ -1300,7 +1300,7 @@ declare namespace imports.gi.Gdk {
 		get_screen(screen_num: number): Screen;
 		/**
 		 * @deprecated
-		 * Use gdk_device_get_window_at_position() instead.
+		 * Use {@link Gdk.Device.get_window_at_position} instead.
 		 * 
 		 * Obtains the window underneath the mouse pointer, returning the location
 		 * of the pointer in that window in #win_x, #win_y for #screen. Returns %NULL
@@ -1329,7 +1329,7 @@ declare namespace imports.gi.Gdk {
 		is_closed(): boolean;
 		/**
 		 * @deprecated
-		 * Use gdk_device_ungrab(), together with gdk_device_grab()
+		 * Use {@link Gdk.Device.ungrab}, together with gdk_device_grab()
 		 *             instead.
 		 * 
 		 * Release any keyboard grab
@@ -1338,7 +1338,7 @@ declare namespace imports.gi.Gdk {
 		keyboard_ungrab(time_: number): void;
 		/**
 		 * @deprecated
-		 * Use gdk_device_manager_list_devices() instead.
+		 * Use {@link Gdk.DeviceManager.list_devices} instead.
 		 * 
 		 * Returns the list of available input devices attached to #display.
 		 * The list is statically allocated and should not be freed.
@@ -1358,7 +1358,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * GTK+ will call this function automatically for #GtkWindow
 		 * with custom startup-notification identifier unless
-		 * gtk_window_set_auto_startup_notification() is called to
+		 * {@link Gtk.Window.set_auto_startup_notification} is called to
 		 * disable that feature.
 		 * @param startup_id a startup-notification identifier, for which
 		 *     notification process should be completed
@@ -1371,12 +1371,12 @@ declare namespace imports.gi.Gdk {
 		 * that have already been moved to the GDK event queue.)
 		 * @returns a copy of the first {@link Event} on the event
 		 * queue, or %NULL if no events are in the queue. The returned
-		 * #GdkEvent should be freed with gdk_event_free().
+		 * #GdkEvent should be freed with {@link Gdk.Event.free}.
 		 */
 		peek_event(): Event | null;
 		/**
 		 * @deprecated
-		 * Use gdk_display_device_is_grabbed() instead.
+		 * Use {@link Gdk.Display.device_is_grabbed} instead.
 		 * 
 		 * Test if the pointer is grabbed.
 		 * @returns %TRUE if an active X pointer grab is in effect
@@ -1384,7 +1384,7 @@ declare namespace imports.gi.Gdk {
 		pointer_is_grabbed(): boolean;
 		/**
 		 * @deprecated
-		 * Use gdk_device_ungrab(), together with gdk_device_grab()
+		 * Use {@link Gdk.Device.ungrab}, together with gdk_device_grab()
 		 *             instead.
 		 * 
 		 * Release any pointer grab.
@@ -1409,7 +1409,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Sets the double click distance (two clicks within this distance
 		 * count as a double click and result in a #GDK_2BUTTON_PRESS event).
-		 * See also gdk_display_set_double_click_time().
+		 * See also {@link Gdk.Display.set_double_click_time}.
 		 * Applications should not set this, it is a global
 		 * user-configured setting.
 		 * @param distance distance in pixels
@@ -1449,7 +1449,7 @@ declare namespace imports.gi.Gdk {
 		 * Compositing is an outdated technology that
 		 *   only ever worked on X11.
 		 * 
-		 * Returns %TRUE if gdk_window_set_composited() can be used
+		 * Returns %TRUE if {@link Gdk.Window.set_composited} can be used
 		 * to redirect drawing on the window using compositing.
 		 * 
 		 * Currently this only works on X11 with XComposite and
@@ -1472,7 +1472,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		supports_cursor_color(): boolean;
 		/**
-		 * Returns %TRUE if gdk_window_input_shape_combine_mask() can
+		 * Returns %TRUE if {@link Gdk.Window.input_shape_combine_mask} can
 		 * be used to modify the input shape of windows on #display.
 		 * @returns %TRUE if windows with modified input shape are supported
 		 */
@@ -1485,7 +1485,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		supports_selection_notification(): boolean;
 		/**
-		 * Returns %TRUE if gdk_window_shape_combine_mask() can
+		 * Returns %TRUE if {@link Gdk.Window.shape_combine_mask} can
 		 * be used to create shaped windows on #display.
 		 * @returns %TRUE if shaped windows are supported
 		 */
@@ -1494,7 +1494,7 @@ declare namespace imports.gi.Gdk {
 		 * Flushes any requests queued for the windowing system and waits until all
 		 * requests have been handled. This is often used for making sure that the
 		 * display is synchronized with the current state of the program. Calling
-		 * gdk_display_sync() before gdk_error_trap_pop() makes sure that any errors
+		 * {@link Gdk.Display.sync} before gdk_error_trap_pop() makes sure that any errors
 		 * generated from earlier requests are handled before the error trap is
 		 * removed.
 		 * 
@@ -1504,7 +1504,7 @@ declare namespace imports.gi.Gdk {
 		sync(): void;
 		/**
 		 * @deprecated
-		 * Use gdk_device_warp() instead.
+		 * Use {@link Gdk.Device.warp} instead.
 		 * 
 		 * Warps the pointer of #display to the point #x,#y on
 		 * the screen #screen, unless the pointer is confined
@@ -1616,7 +1616,7 @@ declare namespace imports.gi.Gdk {
 	 * Most of the input device handling has been factored out into
 	 * the separate #GdkDeviceManager object. Every display has a
 	 * device manager, which you can obtain using
-	 * gdk_display_get_device_manager().
+	 * {@link Gdk.Display.get_device_manager}.
 	 */
 	interface Display extends DisplayMixin {}
 
@@ -1644,7 +1644,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Opens the default display specified by command line arguments or
 		 * environment variables, sets it as the default display, and returns
-		 * it. gdk_parse_args() must have been called first. If the default
+		 * it. {@link Gdk.parse.args} must have been called first. If the default
 		 * display has previously been set, simply returns that. An internal
 		 * function that should not be used by applications.
 		 * @returns the default display, if it
@@ -1667,7 +1667,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * List all currently open displays.
 		 * @returns a newly
-		 *     allocated #GSList of {@link Display} objects. Free with g_slist_free()
+		 *     allocated #GSList of {@link Display} objects. Free with {@link G.slist_free}
 		 *     when you are done with it.
 		 */
 		list_displays(): GLib.SList;
@@ -1714,7 +1714,7 @@ declare namespace imports.gi.Gdk {
 	 * notification when displays appear or disappear or the default display
 	 * changes.
 	 * 
-	 * You can use gdk_display_manager_get() to obtain the #GdkDisplayManager
+	 * You can use {@link Gdk.DisplayManager.get} to obtain the #GdkDisplayManager
 	 * singleton, but that should be rarely necessary. Typically, initializing
 	 * GTK+ opens a display that you can work with without ever accessing the
 	 * #GdkDisplayManager.
@@ -1760,10 +1760,10 @@ declare namespace imports.gi.Gdk {
 		 * When called for the first time, this function consults the
 		 * `GDK_BACKEND` environment variable to find out which
 		 * of the supported GDK backends to use (in case GDK has been compiled
-		 * with multiple backends). Applications can use gdk_set_allowed_backends()
+		 * with multiple backends). Applications can use {@link Gdk.set.allowed_backends}
 		 * to limit what backends can be used.
 		 * @returns The global {@link DisplayManager} singleton;
-		 *     gdk_parse_args(), gdk_init(), or gdk_init_check() must have
+		 *     {@link Gdk.parse.args}, gdk_init(), or gdk_init_check() must have
 		 *     been called first.
 		 */
 		public static get(): DisplayManager;
@@ -1775,7 +1775,7 @@ declare namespace imports.gi.Gdk {
 	interface IDragContext {
 		/**
 		 * Determines the bitmask of actions proposed by the source if
-		 * gdk_drag_context_get_suggested_action() returns %GDK_ACTION_ASK.
+		 * {@link Gdk.DragContext.get_suggested_action} returns %GDK_ACTION_ASK.
 		 * @returns the {@link DragAction} flags
 		 */
 		get_actions(): DragAction;
@@ -1864,7 +1864,7 @@ declare namespace imports.gi.Gdk {
 		 * A new action is being chosen for the drag and drop operation.
 		 * 
 		 * This signal will only be emitted if the {@link DragContext} manages
-		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * the drag and drop operation. See {@link Gdk.DragContext.manage_dnd}
 		 * for more information.
 		 * @param signal 
 		 * @param callback Callback function
@@ -1878,7 +1878,7 @@ declare namespace imports.gi.Gdk {
 		 * The drag and drop operation was cancelled.
 		 * 
 		 * This signal will only be emitted if the {@link DragContext} manages
-		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * the drag and drop operation. See {@link Gdk.DragContext.manage_dnd}
 		 * for more information.
 		 * @param signal 
 		 * @param callback Callback function
@@ -1894,7 +1894,7 @@ declare namespace imports.gi.Gdk {
 		 * miscellaneous data.
 		 * 
 		 * This signal will only be emitted if the {@link DragContext} manages
-		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * the drag and drop operation. See {@link Gdk.DragContext.manage_dnd}
 		 * for more information.
 		 * @param signal 
 		 * @param callback Callback function
@@ -1907,7 +1907,7 @@ declare namespace imports.gi.Gdk {
 		 * The drag and drop operation was performed on an accepting client.
 		 * 
 		 * This signal will only be emitted if the {@link DragContext} manages
-		 * the drag and drop operation. See gdk_drag_context_manage_dnd()
+		 * the drag and drop operation. See {@link Gdk.DragContext.manage_dnd}
 		 * for more information.
 		 * @param signal 
 		 * @param callback Callback function
@@ -1952,7 +1952,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * The returned context is guaranteed to be valid as long as the
 		 * #GdkDrawingContext is valid, that is between a call to
-		 * gdk_window_begin_draw_frame() and gdk_window_end_draw_frame().
+		 * {@link Gdk.Window.begin_draw_frame} and gdk_window_end_draw_frame().
 		 * @returns a Cairo context to be used to draw
 		 *   the contents of the {@link Window}. The context is owned by the
 		 *   #GdkDrawingContext and should not be destroyed
@@ -1997,7 +1997,7 @@ declare namespace imports.gi.Gdk {
 	 * It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
 	 * via rendering API like Cairo or OpenGL.
 	 * 
-	 * A #GdkDrawingContext can only be created by calling gdk_window_begin_draw_frame()
+	 * A #GdkDrawingContext can only be created by calling {@link Gdk.Window.begin_draw_frame}
 	 * and will be valid until a call to gdk_window_end_draw_frame().
 	 * 
 	 * #GdkDrawingContext is available since GDK 3.22
@@ -2014,7 +2014,7 @@ declare namespace imports.gi.Gdk {
 	interface IFrameClock {
 		/**
 		 * Starts updates for an animation. Until a matching call to
-		 * gdk_frame_clock_end_updating() is made, the frame clock will continually
+		 * {@link Gdk.FrameClock.end_updating} is made, the frame clock will continually
 		 * request a new frame with the %GDK_FRAME_CLOCK_PHASE_UPDATE phase.
 		 * This function may be called multiple times and frames will be
 		 * requested until gdk_frame_clock_end_updating() is called the same
@@ -2023,7 +2023,7 @@ declare namespace imports.gi.Gdk {
 		begin_updating(): void;
 		/**
 		 * Stops updates for an animation. See the documentation for
-		 * gdk_frame_clock_begin_updating().
+		 * {@link Gdk.FrameClock.begin_updating}.
 		 */
 		end_updating(): void;
 		/**
@@ -2050,13 +2050,13 @@ declare namespace imports.gi.Gdk {
 		 * the actual previous frame time, or if that’s too old, an updated
 		 * time.
 		 * @returns a timestamp in microseconds, in the timescale of
-		 *  of g_get_monotonic_time().
+		 *  of {@link G.get_monotonic_time}.
 		 */
 		get_frame_time(): number;
 		/**
 		 * {@link FrameClock} internally keeps a history of #GdkFrameTimings
 		 * objects for recent frames that can be retrieved with
-		 * gdk_frame_clock_get_timings(). The set of stored frames
+		 * {@link Gdk.FrameClock.get_timings}. The set of stored frames
 		 * is the set from the counter values given by
 		 * gdk_frame_clock_get_history_start() and
 		 * gdk_frame_clock_get_frame_counter(), inclusive.
@@ -2084,19 +2084,19 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves a {@link FrameTimings} object holding timing information
 		 * for the current frame or a recent frame. The #GdkFrameTimings
-		 * object may not yet be complete: see gdk_frame_timings_get_complete().
+		 * object may not yet be complete: see {@link Gdk.FrameTimings.get_complete}.
 		 * @param frame_counter the frame counter value identifying the frame to
 		 *  be received.
 		 * @returns the {@link FrameTimings} object for
 		 *  the specified frame, or %NULL if it is not available. See
-		 *  gdk_frame_clock_get_history_start().
+		 *  {@link Gdk.FrameClock.get_history_start}.
 		 */
 		get_timings(frame_counter: number): FrameTimings | null;
 		/**
 		 * Asks the frame clock to run a particular phase. The signal
 		 * corresponding the requested phase will be emitted the next
 		 * time the frame clock processes. Multiple calls to
-		 * gdk_frame_clock_request_phase() will be combined together
+		 * {@link Gdk.FrameClock.request_phase} will be combined together
 		 * and only one frame processed. If you are displaying animated
 		 * content and want to continually request the
 		 * %GDK_FRAME_CLOCK_PHASE_UPDATE phase for a period of time,
@@ -2176,7 +2176,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * This signal is emitted as the first step of toolkit and
 		 * application processing of the frame. Animations should
-		 * be updated using gdk_frame_clock_get_frame_time().
+		 * be updated using {@link Gdk.FrameClock.get_frame_time}.
 		 * Applications can connect directly to this signal, or
 		 * use gtk_widget_add_tick_callback() as a more convenient
 		 * interface.
@@ -2213,7 +2213,7 @@ declare namespace imports.gi.Gdk {
 	 * for example.
 	 * 
 	 * A frame clock is idle until someone requests a frame with
-	 * gdk_frame_clock_request_phase(). At some later point that makes
+	 * {@link Gdk.FrameClock.request_phase}. At some later point that makes
 	 * sense for the synchronization being implemented, the clock will
 	 * process a frame and emit signals for each phase that has been
 	 * requested. (See the signals of the #GdkFrameClock class for
@@ -2256,7 +2256,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		window: Window;
 		/**
-		 * Retrieves the value set using gdk_gl_context_set_debug_enabled().
+		 * Retrieves the value set using {@link Gdk.gl_context_set_debug_enabled}.
 		 * @returns %TRUE if debugging is enabled
 		 */
 		get_debug_enabled(): boolean;
@@ -2266,13 +2266,13 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_display(): Display | null;
 		/**
-		 * Retrieves the value set using gdk_gl_context_set_forward_compatible().
+		 * Retrieves the value set using {@link Gdk.gl_context_set_forward_compatible}.
 		 * @returns %TRUE if the context should be forward compatible
 		 */
 		get_forward_compatible(): boolean;
 		/**
 		 * Retrieves the major and minor version requested by calling
-		 * gdk_gl_context_set_required_version().
+		 * {@link Gdk.gl_context_set_required_version}.
 		 * @returns return location for the major version to request
 		 * 
 		 * return location for the minor version to request
@@ -2377,7 +2377,7 @@ declare namespace imports.gi.Gdk {
 		 * underlying GL implementation is OpenGL or OpenGL ES once the #context
 		 * is realized.
 		 * 
-		 * You should check the return value of gdk_gl_context_get_use_es() after
+		 * You should check the return value of {@link Gdk.gl_context_get_use_es} after
 		 * calling gdk_gl_context_realize() to decide whether to use the OpenGL or
 		 * OpenGL ES API, extensions, or shaders.
 		 * @param use_es whether the context should use OpenGL ES instead of OpenGL,
@@ -2408,7 +2408,7 @@ declare namespace imports.gi.Gdk {
 	 * OpenGL drawing context.
 	 * 
 	 * #GdkGLContexts are created for a #GdkWindow using
-	 * gdk_window_create_gl_context(), and the context will match
+	 * {@link Gdk.Window.create_gl_context}, and the context will match
 	 * the #GdkVisual of the window.
 	 * 
 	 * A #GdkGLContext is not tied to any particular normal framebuffer.
@@ -2464,7 +2464,7 @@ declare namespace imports.gi.Gdk {
 		 * Clears the current {@link GLContext}.
 		 * 
 		 * Any OpenGL call after this function returns will be ignored
-		 * until gdk_gl_context_make_current() is called.
+		 * until {@link Gdk.gl_context_make_current} is called.
 		 */
 		public static clear_current(): void;
 		/**
@@ -2506,7 +2506,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Returns the keyvals bound to #hardware_keycode.
 		 * The Nth {@link KeymapKey} in #keys is bound to the Nth
-		 * keyval in #keyvals. Free the returned arrays with g_free().
+		 * keyval in #keyvals. Free the returned arrays with {@link G.free}.
 		 * When a keycode is pressed by the user, the keyval from
 		 * this list of entries is selected by considering the effective
 		 * keyboard group and level. See gdk_keymap_translate_keyboard_state().
@@ -2533,7 +2533,7 @@ declare namespace imports.gi.Gdk {
 		 * {@link EventKey} contains a %group field that indicates the active
 		 * keyboard group. The level is computed from the modifier mask.
 		 * The returned array should be freed
-		 * with g_free().
+		 * with {@link G.free}.
 		 * @param keyval a keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
 		 * @returns %TRUE if keys were found and returned
 		 * 
@@ -2551,7 +2551,7 @@ declare namespace imports.gi.Gdk {
 		 * virtual ones (e.g. it will return #GDK_MOD1_MASK rather than
 		 * #GDK_META_MASK if the backend maps MOD1 to META), so there are use
 		 * cases where the return value of this function has to be transformed
-		 * by gdk_keymap_add_virtual_modifiers() in order to contain the
+		 * by {@link Gdk.Keymap.add_virtual_modifiers} in order to contain the
 		 * expected result.
 		 * @param intent the use case for the modifier mask
 		 * @returns the modifier mask used for #intent.
@@ -2581,7 +2581,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Looks up the keyval mapped to a keycode/group/level triplet.
 		 * If no keyval is bound to #key, returns 0. For normal user input,
-		 * you want to use gdk_keymap_translate_keyboard_state() instead of
+		 * you want to use {@link Gdk.Keymap.translate_keyboard_state} instead of
 		 * this function, since the effective group/level may not be
 		 * the same as the current keyboard state.
 		 * @param key a {@link KeymapKey} with keycode, group, and level initialized
@@ -2688,7 +2688,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * The ::state-changed signal is emitted when the state of the
 		 * keyboard changes, e.g when Caps Lock is turned on or off.
-		 * See gdk_keymap_get_caps_lock_state().
+		 * See {@link Gdk.Keymap.get_caps_lock_state}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -2721,7 +2721,7 @@ declare namespace imports.gi.Gdk {
 		public constructor(options?: Partial<KeymapInitOptions>);
 		/**
 		 * @deprecated
-		 * Use gdk_keymap_get_for_display() instead
+		 * Use {@link Gdk.Keymap.get_for_display} instead
 		 * 
 		 * Returns the {@link Keymap} attached to the default display.
 		 * @returns the {@link Keymap} attached to the default display.
@@ -2757,7 +2757,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves the size and position of an individual monitor within the
 		 * display coordinate space. The returned geometry is in  ”application pixels”,
-		 * not in ”device pixels” (see gdk_monitor_get_scale_factor()).
+		 * not in ”device pixels” (see {@link Gdk.Monitor.get_scale_factor}).
 		 * @returns a {@link Rectangle} to be filled with the monitor geometry
 		 */
 		get_geometry(): Rectangle;
@@ -2796,7 +2796,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * This can be used if you want to create pixel based data for a
 		 * particular monitor, but most of the time you’re drawing to a window
-		 * where it is better to use gdk_window_get_scale_factor() instead.
+		 * where it is better to use {@link Gdk.Window.get_scale_factor} instead.
 		 * @returns the scale factor
 		 */
 		get_scale_factor(): number;
@@ -2815,7 +2815,7 @@ declare namespace imports.gi.Gdk {
 		 * Retrieves the size and position of the “work area” on a monitor
 		 * within the display coordinate space. The returned geometry is in
 		 * ”application pixels”, not in ”device pixels” (see
-		 * gdk_monitor_get_scale_factor()).
+		 * {@link Gdk.Monitor.get_scale_factor}).
 		 * 
 		 * The work area should be considered when positioning menus and
 		 * similar popups, to avoid placing them below panels, docks or other
@@ -2830,7 +2830,7 @@ declare namespace imports.gi.Gdk {
 		get_workarea(): Rectangle;
 		/**
 		 * Gets whether this monitor should be considered primary
-		 * (see gdk_display_get_primary_monitor()).
+		 * (see {@link Gdk.Display.get_primary_monitor}).
 		 * @returns %TRUE if #monitor is primary
 		 */
 		is_primary(): boolean;
@@ -2872,7 +2872,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * GdkMonitor objects represent the individual outputs that are
 	 * associated with a {@link Display}. GdkDisplay has APIs to enumerate
-	 * monitors with gdk_display_get_n_monitors() and gdk_display_get_monitor(), and
+	 * monitors with {@link Gdk.Display.get_n_monitors} and gdk_display_get_monitor(), and
 	 * to find particular monitors with gdk_display_get_primary_monitor() or
 	 * gdk_display_get_monitor_at_window().
 	 * 
@@ -2904,7 +2904,7 @@ declare namespace imports.gi.Gdk {
 		 * On other platforms, this function may return %NULL, depending on whether
 		 * it is implementable on that platform.
 		 * 
-		 * The returned window should be unrefed using g_object_unref() when
+		 * The returned window should be unrefed using {@link GObject.unref} when
 		 * no longer needed.
 		 * @returns the currently active window,
 		 *   or %NULL.
@@ -2916,7 +2916,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_display(): Display;
 		/**
-		 * Gets any options previously set with gdk_screen_set_font_options().
+		 * Gets any options previously set with {@link Gdk.Screen.set_font_options}.
 		 * @returns the current font options, or %NULL if no
 		 *  default font options have been set.
 		 */
@@ -2927,7 +2927,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Gets the height of #screen in pixels. The returned size is in
 		 * ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * @returns the height of #screen in pixels.
 		 */
 		get_height(): number;
@@ -2945,7 +2945,7 @@ declare namespace imports.gi.Gdk {
 		get_height_mm(): number;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_monitor_at_point() instead
+		 * Use {@link Gdk.Display.get_monitor_at_point} instead
 		 * 
 		 * Returns the monitor number in which the point (#x,#y) is located.
 		 * @param x the x coordinate in the virtual screen.
@@ -2956,7 +2956,7 @@ declare namespace imports.gi.Gdk {
 		get_monitor_at_point(x: number, y: number): number;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_monitor_at_window() instead
+		 * Use {@link Gdk.Display.get_monitor_at_window} instead
 		 * 
 		 * Returns the number of the monitor in which the largest area of the
 		 * bounding rectangle of #window resides.
@@ -2968,12 +2968,12 @@ declare namespace imports.gi.Gdk {
 		get_monitor_at_window(window: Window): number;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_geometry() instead
+		 * Use {@link Gdk.Monitor.get_geometry} instead
 		 * 
 		 * Retrieves the {@link Rectangle} representing the size and position of
 		 * the individual monitor within the entire screen area. The returned
 		 * geometry is in ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * 
 		 * Monitor numbers start at 0. To obtain the number of monitors of
 		 * #screen, use gdk_screen_get_n_monitors().
@@ -2987,7 +2987,7 @@ declare namespace imports.gi.Gdk {
 		get_monitor_geometry(monitor_num: number): Rectangle | null;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_height_mm() instead
+		 * Use {@link Gdk.Monitor.get_height_mm} instead
 		 * 
 		 * Gets the height in millimeters of the specified monitor.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -2996,7 +2996,7 @@ declare namespace imports.gi.Gdk {
 		get_monitor_height_mm(monitor_num: number): number;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_model() instead
+		 * Use {@link Gdk.Monitor.get_model} instead
 		 * 
 		 * Returns the output name of the specified monitor.
 		 * Usually something like VGA, DVI, or TV, not the actual
@@ -3008,7 +3008,7 @@ declare namespace imports.gi.Gdk {
 		get_monitor_plug_name(monitor_num: number): string | null;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_scale_factor() instead
+		 * Use {@link Gdk.Monitor.get_scale_factor} instead
 		 * 
 		 * Returns the internal scale factor that maps from monitor coordinates
 		 * to the actual device pixels. On traditional systems this is 1, but
@@ -3016,14 +3016,14 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * This can be used if you want to create pixel based data for a
 		 * particular monitor, but most of the time you’re drawing to a window
-		 * where it is better to use gdk_window_get_scale_factor() instead.
+		 * where it is better to use {@link Gdk.Window.get_scale_factor} instead.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
 		 * @returns the scale factor
 		 */
 		get_monitor_scale_factor(monitor_num: number): number;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_width_mm() instead
+		 * Use {@link Gdk.Monitor.get_width_mm} instead
 		 * 
 		 * Gets the width in millimeters of the specified monitor, if available.
 		 * @param monitor_num number of the monitor, between 0 and gdk_screen_get_n_monitors (screen)
@@ -3032,12 +3032,12 @@ declare namespace imports.gi.Gdk {
 		get_monitor_width_mm(monitor_num: number): number;
 		/**
 		 * @deprecated
-		 * Use gdk_monitor_get_workarea() instead
+		 * Use {@link Gdk.Monitor.get_workarea} instead
 		 * 
 		 * Retrieves the {@link Rectangle} representing the size and position of
 		 * the “work area” on a monitor within the entire screen area. The returned
 		 * geometry is in ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * 
 		 * The work area should be considered when positioning menus and
 		 * similar popups, to avoid placing them below panels, docks or other
@@ -3056,7 +3056,7 @@ declare namespace imports.gi.Gdk {
 		get_monitor_workarea(monitor_num: number): Rectangle | null;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_n_monitors() instead
+		 * Use {@link Gdk.Display.get_n_monitors} instead
 		 * 
 		 * Returns the number of monitors which #screen consists of.
 		 * @returns number of monitors which #screen consists of
@@ -3064,13 +3064,13 @@ declare namespace imports.gi.Gdk {
 		get_n_monitors(): number;
 		/**
 		 * Gets the index of #screen among the screens in the display
-		 * to which it belongs. (See gdk_screen_get_display())
+		 * to which it belongs. (See {@link Gdk.Screen.get_display})
 		 * @returns the index
 		 */
 		get_number(): number;
 		/**
 		 * @deprecated
-		 * Use gdk_display_get_primary_monitor() instead
+		 * Use {@link Gdk.Display.get_primary_monitor} instead
 		 * 
 		 * Gets the primary monitor for #screen.  The primary monitor
 		 * is considered the monitor where the “main desktop” lives.
@@ -3085,7 +3085,7 @@ declare namespace imports.gi.Gdk {
 		get_primary_monitor(): number;
 		/**
 		 * Gets the resolution for font handling on the screen; see
-		 * gdk_screen_set_resolution() for full details.
+		 * {@link Gdk.Screen.set_resolution} for full details.
 		 * @returns the current resolution, or -1 if no resolution
 		 * has been set.
 		 */
@@ -3103,7 +3103,7 @@ declare namespace imports.gi.Gdk {
 		 * This functionality is not implemented in the Windows backend.
 		 * 
 		 * For setting an overall opacity for a top-level window, see
-		 * gdk_window_set_opacity().
+		 * {@link Gdk.Window.set_opacity}.
 		 * @returns a visual to use for windows
 		 *     with an alpha channel or %NULL if the capability is not
 		 *     available.
@@ -3136,12 +3136,12 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Obtains a list of all toplevel windows known to GDK on the screen #screen.
 		 * A toplevel window is a child of the root window (see
-		 * gdk_get_default_root_window()).
+		 * {@link Gdk.get.default_root_window}).
 		 * 
 		 * The returned list should be freed with g_list_free(), but
 		 * its elements need not be freed.
 		 * @returns 
-		 *     list of toplevel windows, free with g_list_free()
+		 *     list of toplevel windows, free with {@link G.list_free}
 		 */
 		get_toplevel_windows(): GLib.List;
 		/**
@@ -3150,7 +3150,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Gets the width of #screen in pixels. The returned size is in
 		 * ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * @returns the width of #screen in pixels.
 		 */
 		get_width(): number;
@@ -3180,7 +3180,7 @@ declare namespace imports.gi.Gdk {
 		 * it is implementable on that platform.
 		 * 
 		 * The returned list is newly allocated and owns references to the
-		 * windows it contains, so it should be freed using g_list_free() and
+		 * windows it contains, so it should be freed using {@link G.list_free} and
 		 * its windows unrefed using g_object_unref() when no longer needed.
 		 * @returns a
 		 *     list of {@link Windows} for the current window stack, or %NULL.
@@ -3203,21 +3203,21 @@ declare namespace imports.gi.Gdk {
 		 * For example, a visual might support 24-bit color, or 8-bit color,
 		 * and might expect pixels to be in a certain format.
 		 * 
-		 * Call g_list_free() on the return value when you’re finished with it.
+		 * Call {@link G.list_free} on the return value when you’re finished with it.
 		 * @returns 
 		 *     a list of visuals; the list must be freed, but not its contents
 		 */
 		list_visuals(): GLib.List;
 		/**
-		 * Determines the name to pass to gdk_display_open() to get
+		 * Determines the name to pass to {@link Gdk.Display.open} to get
 		 * a {@link Display} with this screen as the default screen.
-		 * @returns a newly allocated string, free with g_free()
+		 * @returns a newly allocated string, free with {@link G.free}
 		 */
 		make_display_name(): string;
 		/**
 		 * Sets the default font options for the screen. These
 		 * options will be set on any #PangoContext’s newly created
-		 * with gdk_pango_context_get_for_screen(). Changing the
+		 * with {@link Gdk.pango.context_get_for_screen}. Changing the
 		 * default set of font options does not affect contexts that
 		 * have already been created.
 		 * @param options a #cairo_font_options_t, or %NULL to unset any
@@ -3289,7 +3289,7 @@ declare namespace imports.gi.Gdk {
 	 * which windows can be displayed and on which the pointer moves.
 	 * X originally identified screens with physical screens, but
 	 * nowadays it is more common to have a single #GdkScreen which
-	 * combines several physical monitors (see gdk_screen_get_n_monitors()).
+	 * combines several physical monitors (see {@link Gdk.Screen.get_n_monitors}).
 	 * 
 	 * GdkScreen is used throughout GDK and GTK+ to specify which screen
 	 * the top level windows are to be displayed on. it is also used to
@@ -3314,7 +3314,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Gets the height of the default screen in pixels. The returned
 		 * size is in ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * @returns the height of the default screen in pixels.
 		 */
 		public static height(): number;
@@ -3334,7 +3334,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Gets the width of the default screen in pixels. The returned
 		 * size is in ”application pixels”, not in ”device pixels” (see
-		 * gdk_screen_get_monitor_scale_factor()).
+		 * {@link Gdk.Screen.get_monitor_scale_factor}).
 		 * @returns the width of the default screen in pixels.
 		 */
 		public static width(): number;
@@ -3385,13 +3385,13 @@ declare namespace imports.gi.Gdk {
 		 * Returns the slave devices that match the given capabilities.
 		 * @param capabilities capabilities to get devices for
 		 * @returns A list of {@link Devices}.
-		 *          The list must be freed with g_list_free(), the elements are owned
+		 *          The list must be freed with {@link G.list_free}, the elements are owned
 		 *          by GDK and must not be freed.
 		 */
 		get_slaves(capabilities: SeatCapabilities): GLib.List;
 		/**
 		 * Grabs the seat so that all events corresponding to the given #capabilities
-		 * are passed to this application until the seat is ungrabbed with gdk_seat_ungrab(),
+		 * are passed to this application until the seat is ungrabbed with {@link Gdk.Seat.ungrab},
 		 * or the window becomes hidden. This overrides any previous grab on the
 		 * seat by this client.
 		 * 
@@ -3436,7 +3436,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		grab(window: Window, capabilities: SeatCapabilities, owner_events: boolean, cursor: Cursor | null, event: Event | null, prepare_func: SeatGrabPrepareFunc | null, prepare_func_data: any | null): GrabStatus;
 		/**
-		 * Releases a grab added through gdk_seat_grab().
+		 * Releases a grab added through {@link Gdk.Seat.grab}.
 		 */
 		ungrab(): void;
 		/**
@@ -3465,7 +3465,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::tool-added signal is emitted whenever a new tool
 		 * is made known to the seat. The tool may later be assigned
 		 * to a device (i.e. on proximity with a tablet). The device
-		 * will emit the {@link Device}::tool-changed signal accordingly.
+		 * will emit the {@link Device.tool_changed} signal accordingly.
 		 * 
 		 * A same tool may be used by several devices.
 		 * @param signal 
@@ -3519,7 +3519,7 @@ declare namespace imports.gi.Gdk {
 	interface IVisual {
 		/**
 		 * @deprecated
-		 * Use gdk_visual_get_red_pixel_details() and its variants to
+		 * Use {@link Gdk.Visual.get_red_pixel_details} and its variants to
 		 *     learn about the pixel layout of TrueColor and DirectColor visuals
 		 * 
 		 * Returns the number of significant bits per red, green and blue value.
@@ -3626,7 +3626,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
 		 * Get the visual with the most available colors for the default
 		 * GDK screen. The return value should not be freed.
@@ -3636,7 +3636,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
 		 * Get the best available depth for the default GDK screen.  “Best”
 		 * means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
@@ -3647,7 +3647,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
 		 * Return the best available visual type for the default GDK screen.
 		 * @returns best visual type
@@ -3656,9 +3656,9 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
-		 * Combines gdk_visual_get_best_with_depth() and
+		 * Combines {@link Gdk.Visual.get_best_with_depth} and
 		 * gdk_visual_get_best_with_type().
 		 * @param depth a bit depth
 		 * @param visual_type a visual type
@@ -3669,7 +3669,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
 		 * Get the best visual with depth #depth for the default GDK screen.
 		 * Color visuals and visuals with mutable colormaps are preferred
@@ -3682,7 +3682,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * @deprecated
 		 * Visual selection should be done using
-		 *     gdk_screen_get_system_visual() and gdk_screen_get_rgba_visual()
+		 *     {@link Gdk.Screen.get_system_visual} and gdk_screen_get_rgba_visual()
 		 * 
 		 * Get the best visual of the given #visual_type for the default GDK screen.
 		 * Visuals with higher color depths are considered better. The return value
@@ -3709,7 +3709,7 @@ declare namespace imports.gi.Gdk {
 	 */
 	interface IWindow {
 		/**
-		 * The mouse pointer for a {@link Window}. See gdk_window_set_cursor() and
+		 * The mouse pointer for a {@link Window}. See {@link Gdk.Window.set_cursor} and
 		 * gdk_window_get_cursor() for details.
 		 */
 		cursor: Cursor;
@@ -3730,7 +3730,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Emits a short beep associated to #window in the appropriate
 		 * display, if supported. Otherwise, emits a short beep on
-		 * the display just as gdk_display_beep().
+		 * the display just as {@link Gdk.Display.beep}.
 		 */
 		beep(): void;
 		/**
@@ -3742,7 +3742,7 @@ declare namespace imports.gi.Gdk {
 		 * contain #region will be created. The backing store will be initialized
 		 * with the background color or background surface for #window. Then, all
 		 * drawing operations performed on #window will be diverted to the
-		 * backing store. When you call gdk_window_end_frame(), the contents of
+		 * backing store. When you call {@link Gdk.Window.end_frame}, the contents of
 		 * the backing store will be copied to #window, making it visible
 		 * on screen. Only the part of #window contained in #region will be
 		 * modified; that is, drawing operations are clipped to #region.
@@ -3771,7 +3771,7 @@ declare namespace imports.gi.Gdk {
 		 * Begins a window move operation (for a toplevel window).
 		 * 
 		 * This function assumes that the drag is controlled by the
-		 * client pointer device, use gdk_window_begin_move_drag_for_device()
+		 * client pointer device, use {@link Gdk.Window.begin_move_drag_for_device}
 		 * to begin a drag with a different device.
 		 * @param button the button being used to drag, or 0 for a keyboard-initiated drag
 		 * @param root_x root window X coordinate of mouse click that began the drag
@@ -3794,9 +3794,9 @@ declare namespace imports.gi.Gdk {
 		begin_move_drag_for_device(device: Device, button: number, root_x: number, root_y: number, timestamp: number): void;
 		/**
 		 * @deprecated
-		 * Use gdk_window_begin_draw_frame() instead
+		 * Use {@link Gdk.Window.begin_draw_frame} instead
 		 * 
-		 * A convenience wrapper around gdk_window_begin_paint_region() which
+		 * A convenience wrapper around {@link Gdk.Window.begin_paint_region} which
 		 * creates a rectangular region for you. See
 		 * gdk_window_begin_paint_region() for details.
 		 * @param rectangle rectangle you intend to draw to
@@ -3804,14 +3804,14 @@ declare namespace imports.gi.Gdk {
 		begin_paint_rect(rectangle: Rectangle): void;
 		/**
 		 * @deprecated
-		 * Use gdk_window_begin_draw_frame() instead
+		 * Use {@link Gdk.Window.begin_draw_frame} instead
 		 * 
 		 * Indicates that you are beginning the process of redrawing #region.
 		 * A backing store (offscreen buffer) large enough to contain #region
 		 * will be created. The backing store will be initialized with the
 		 * background color or background surface for #window. Then, all
 		 * drawing operations performed on #window will be diverted to the
-		 * backing store.  When you call gdk_window_end_paint(), the backing
+		 * backing store.  When you call {@link Gdk.Window.end_paint}, the backing
 		 * store will be copied to #window, making it visible onscreen. Only
 		 * the part of #window contained in #region will be modified; that is,
 		 * drawing operations are clipped to #region.
@@ -3851,13 +3851,13 @@ declare namespace imports.gi.Gdk {
 		 * Begins a window resize operation (for a toplevel window).
 		 * 
 		 * This function assumes that the drag is controlled by the
-		 * client pointer device, use gdk_window_begin_resize_drag_for_device()
+		 * client pointer device, use {@link Gdk.Window.begin_resize_drag_for_device}
 		 * to begin a drag with a different device.
 		 * @param edge the edge or corner from which the drag is started
 		 * @param button the button being used to drag, or 0 for a keyboard-initiated drag
 		 * @param root_x root window X coordinate of mouse click that began the drag
 		 * @param root_y root window Y coordinate of mouse click that began the drag
-		 * @param timestamp timestamp of mouse click that began the drag (use gdk_event_get_time())
+		 * @param timestamp timestamp of mouse click that began the drag (use {@link Gdk.event.get_time})
 		 */
 		begin_resize_drag(edge: WindowEdge, button: number, root_x: number, root_y: number, timestamp: number): void;
 		/**
@@ -3872,7 +3872,7 @@ declare namespace imports.gi.Gdk {
 		 * @param button the button being used to drag, or 0 for a keyboard-initiated drag
 		 * @param root_x root window X coordinate of mouse click that began the drag
 		 * @param root_y root window Y coordinate of mouse click that began the drag
-		 * @param timestamp timestamp of mouse click that began the drag (use gdk_event_get_time())
+		 * @param timestamp timestamp of mouse click that began the drag (use {@link Gdk.event.get_time})
 		 */
 		begin_resize_drag_for_device(edge: WindowEdge, device: Device, button: number, root_x: number, root_y: number, timestamp: number): void;
 		/**
@@ -3885,7 +3885,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Transforms window coordinates from a parent window to a child
 		 * window, where the parent window is the normal parent as returned by
-		 * gdk_window_get_parent() for normal windows, and the window's
+		 * {@link Gdk.Window.get_parent} for normal windows, and the window's
 		 * embedder as returned by gdk_offscreen_window_get_embedder() for
 		 * offscreen windows.
 		 * 
@@ -3909,7 +3909,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Transforms window coordinates from a child window to its parent
 		 * window, where the parent window is the normal parent as returned by
-		 * gdk_window_get_parent() for normal windows, and the window's
+		 * {@link Gdk.Window.get_parent} for normal windows, and the window's
 		 * embedder as returned by gdk_offscreen_window_get_embedder() for
 		 * offscreen windows.
 		 * 
@@ -3940,7 +3940,7 @@ declare namespace imports.gi.Gdk {
 		 * If the creation of the #GdkGLContext failed, #error will be set.
 		 * 
 		 * Before using the returned #GdkGLContext, you will need to
-		 * call gdk_gl_context_make_current() or gdk_gl_context_realize().
+		 * call {@link Gdk.gl_context_make_current} or gdk_gl_context_realize().
 		 * @returns the newly created {@link GLContext}, or
 		 * %NULL on error
 		 */
@@ -3971,7 +3971,7 @@ declare namespace imports.gi.Gdk {
 		 *                                              scale);
 		 * ]|
 		 * 
-		 * Note that unlike cairo_surface_create_similar_image(), the new
+		 * Note that unlike {@link Cairo.Surface.create_similar_image}, the new
 		 * surface's device scale is set to #scale, or to the scale factor of
 		 * #window if #scale is 0.
 		 * @param format the format for the new surface
@@ -3979,7 +3979,7 @@ declare namespace imports.gi.Gdk {
 		 * @param height height of the new surface
 		 * @param scale the scale of the new surface, or 0 to use same as #window
 		 * @returns a pointer to the newly allocated surface. The caller
-		 * owns the surface and should call cairo_surface_destroy() when done
+		 * owns the surface and should call {@link Cairo.Surface.destroy} when done
 		 * with it.
 		 * 
 		 * This function always returns a valid pointer, but it will return a
@@ -3993,7 +3993,7 @@ declare namespace imports.gi.Gdk {
 		 * fallback resolution and font options as #window. Generally, the new
 		 * surface will also use the same backend as #window, unless that is
 		 * not possible for some reason. The type of the returned surface may
-		 * be examined with cairo_surface_get_type().
+		 * be examined with {@link Cairo.Surface.get_type}.
 		 * 
 		 * Initially the surface contents are all 0 (transparent if contents
 		 * have transparency, black otherwise.)
@@ -4001,7 +4001,7 @@ declare namespace imports.gi.Gdk {
 		 * @param width width of the new surface
 		 * @param height height of the new surface
 		 * @returns a pointer to the newly allocated surface. The caller
-		 * owns the surface and should call cairo_surface_destroy() when done
+		 * owns the surface and should call {@link Cairo.Surface.destroy} when done
 		 * with it.
 		 * 
 		 * This function always returns a valid pointer, but it will return a
@@ -4012,7 +4012,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Attempt to deiconify (unminimize) #window. On X11 the window manager may
 		 * choose to ignore the request to deiconify. When using GTK+,
-		 * use gtk_window_deiconify() instead of the {@link Window} variant. Or better yet,
+		 * use {@link Gtk.Window.deiconify} instead of the {@link Window} variant. Or better yet,
 		 * you probably want to use gtk_window_present_with_time(), which raises the window, focuses it,
 		 * unminimizes it, and puts it on the current desktop.
 		 */
@@ -4036,18 +4036,18 @@ declare namespace imports.gi.Gdk {
 		enable_synchronized_configure(): void;
 		/**
 		 * Indicates that the drawing of the contents of #window started with
-		 * gdk_window_begin_frame() has been completed.
+		 * {@link Gdk.Window.begin_frame} has been completed.
 		 * 
 		 * This function will take care of destroying the {@link DrawingContext}.
 		 * 
 		 * It is an error to call this function without a matching
 		 * gdk_window_begin_frame() first.
-		 * @param context the {@link DrawingContext} created by gdk_window_begin_draw_frame()
+		 * @param context the {@link DrawingContext} created by {@link Gdk.Window.begin_draw_frame}
 		 */
 		end_draw_frame(context: DrawingContext): void;
 		/**
 		 * Indicates that the backing store created by the most recent call
-		 * to gdk_window_begin_paint_region() should be copied onscreen and
+		 * to {@link Gdk.Window.begin_paint_region} should be copied onscreen and
 		 * deleted, leaving the next-most-recent backing store or no backing
 		 * store at all as the active paint region. See
 		 * gdk_window_begin_paint_region() for full details.
@@ -4071,7 +4071,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		flush(): void;
 		/**
-		 * Sets keyboard focus to #window. In most cases, gtk_window_present_with_time()
+		 * Sets keyboard focus to #window. In most cases, {@link Gtk.Window.present_with_time}
 		 * should be used on a #GtkWindow, rather than calling this function.
 		 * @param timestamp timestamp of the event triggering the window focus
 		 */
@@ -4082,7 +4082,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Temporarily freezes a window and all its descendants such that it won't
 		 * receive expose events.  The window will begin receiving expose events
-		 * again when gdk_window_thaw_toplevel_updates_libgtk_only() is called. If
+		 * again when {@link Gdk.Window.thaw_toplevel_updates_libgtk_only} is called. If
 		 * gdk_window_freeze_toplevel_updates_libgtk_only()
 		 * has been called more than once,
 		 * gdk_window_thaw_toplevel_updates_libgtk_only() must be called
@@ -4095,7 +4095,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Temporarily freezes a window such that it won’t receive expose
 		 * events.  The window will begin receiving expose events again when
-		 * gdk_window_thaw_updates() is called. If gdk_window_freeze_updates()
+		 * {@link Gdk.Window.thaw_updates} is called. If gdk_window_freeze_updates()
 		 * has been called more than once, gdk_window_thaw_updates() must be called
 		 * an equal number of times to begin processing exposes.
 		 */
@@ -4176,7 +4176,7 @@ declare namespace imports.gi.Gdk {
 		 * other factors such as if the window is obscured by other windows,
 		 * but no area outside of this region will be affected by drawing
 		 * primitives.
-		 * @returns a #cairo_region_t. This must be freed with cairo_region_destroy()
+		 * @returns a #cairo_region_t. This must be freed with {@link Cairo.Region.destroy}
 		 *          when you are done.
 		 */
 		get_clip_region(): cairo.Region;
@@ -4187,7 +4187,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Determines whether #window is composited.
 		 * 
-		 * See gdk_window_set_composited().
+		 * See {@link Gdk.Window.set_composited}.
 		 * @returns %TRUE if the window is composited.
 		 */
 		get_composited(): boolean;
@@ -4198,13 +4198,13 @@ declare namespace imports.gi.Gdk {
 		 * using the cursor for its parent window.
 		 * @returns a {@link Cursor}, or %NULL. The
 		 *   returned object is owned by the #GdkWindow and should not be
-		 *   unreferenced directly. Use gdk_window_set_cursor() to unset the
+		 *   unreferenced directly. Use {@link Gdk.Window.set_cursor} to unset the
 		 *   cursor of the window
 		 */
 		get_cursor(): Cursor | null;
 		/**
 		 * Returns the decorations set on the GdkWindow with
-		 * gdk_window_set_decorations().
+		 * {@link Gdk.Window.set_decorations}.
 		 * @returns %TRUE if the window has decorations set, %FALSE otherwise.
 		 * 
 		 * The window decorations will be written here
@@ -4218,7 +4218,7 @@ declare namespace imports.gi.Gdk {
 		 * @param device a master, pointer {@link Device}.
 		 * @returns a {@link Cursor}, or %NULL. The
 		 *   returned object is owned by the #GdkWindow and should not be
-		 *   unreferenced directly. Use gdk_window_set_cursor() to unset the
+		 *   unreferenced directly. Use {@link Gdk.Window.set_cursor} to unset the
 		 *   cursor of the window
 		 */
 		get_device_cursor(device: Device): Cursor | null;
@@ -4233,10 +4233,10 @@ declare namespace imports.gi.Gdk {
 		 * The position is given in coordinates relative to the upper left
 		 * corner of #window.
 		 * 
-		 * Use gdk_window_get_device_position_double() if you need subpixel precision.
+		 * Use {@link Gdk.Window.get_device_position_double} if you need subpixel precision.
 		 * @param device pointer {@link Device} to query to.
 		 * @returns The window underneath #device
-		 * (as with gdk_device_get_window_at_position()), or %NULL if the
+		 * (as with {@link Gdk.Device.get_window_at_position}), or %NULL if the
 		 * window is not known to GDK.
 		 * 
 		 * return location for the X coordinate of #device, or %NULL.
@@ -4252,7 +4252,7 @@ declare namespace imports.gi.Gdk {
 		 * corner of #window.
 		 * @param device pointer {@link Device} to query to.
 		 * @returns The window underneath #device
-		 * (as with gdk_device_get_window_at_position()), or %NULL if the
+		 * (as with {@link Gdk.Device.get_window_at_position}), or %NULL if the
 		 * window is not known to GDK.
 		 * 
 		 * return location for the X coordinate of #device, or %NULL.
@@ -4278,7 +4278,7 @@ declare namespace imports.gi.Gdk {
 		get_drag_protocol(): [ DragProtocol, Window | null ];
 		/**
 		 * Obtains the parent of #window, as known to GDK. Works like
-		 * gdk_window_get_parent() for normal windows, but returns the
+		 * {@link Gdk.Window.get_parent} for normal windows, but returns the
 		 * window’s embedder for offscreen windows.
 		 * 
 		 * See also: gdk_offscreen_window_get_embedder()
@@ -4288,7 +4288,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Gets the toplevel window that’s an ancestor of #window.
 		 * 
-		 * Works like gdk_window_get_toplevel(), but treats an offscreen window's
+		 * Works like {@link Gdk.Window.get_toplevel}, but treats an offscreen window's
 		 * embedder as its parent, using gdk_window_get_effective_parent().
 		 * 
 		 * See also: gdk_offscreen_window_get_embedder()
@@ -4302,7 +4302,7 @@ declare namespace imports.gi.Gdk {
 		get_event_compression(): boolean;
 		/**
 		 * Gets the event mask for #window for all master input devices. See
-		 * gdk_window_set_events().
+		 * {@link Gdk.Window.set_events}.
 		 * @returns event mask for #window
 		 */
 		get_events(): EventMask;
@@ -4324,7 +4324,7 @@ declare namespace imports.gi.Gdk {
 		 * Obtains the bounding box of the window, including window manager
 		 * titlebar/borders if any. The frame position is given in root window
 		 * coordinates. To get the position of the window itself (rather than
-		 * the frame) in root window coordinates, use gdk_window_get_origin().
+		 * the frame) in root window coordinates, use {@link Gdk.Window.get_origin}.
 		 * @returns rectangle to fill with bounding box of the window frame
 		 */
 		get_frame_extents(): Rectangle;
@@ -4345,7 +4345,7 @@ declare namespace imports.gi.Gdk {
 		 * On the X11 platform, the geometry is obtained from the X server,
 		 * so reflects the latest position of #window; this may be out-of-sync
 		 * with the position of #window delivered in the most-recently-processed
-		 * {@link EventConfigure}. gdk_window_get_position() in contrast gets the
+		 * {@link EventConfigure}. {@link Gdk.Window.get_position} in contrast gets the
 		 * position from the most recent configure event.
 		 * 
 		 * Note: If #window is not a toplevel, it is much better
@@ -4364,7 +4364,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		get_geometry(): [ x: number | null, y: number | null, width: number | null, height: number | null ];
 		/**
-		 * Returns the group leader window for #window. See gdk_window_set_group().
+		 * Returns the group leader window for #window. See {@link Gdk.Window.set_group}.
 		 * @returns the group leader window for #window
 		 */
 		get_group(): Window;
@@ -4385,7 +4385,7 @@ declare namespace imports.gi.Gdk {
 		get_modal_hint(): boolean;
 		/**
 		 * Obtains the position of a window in root window coordinates.
-		 * (Compare with gdk_window_get_position() and
+		 * (Compare with {@link Gdk.Window.get_position} and
 		 * gdk_window_get_geometry() which return the position of a window
 		 * relative to its parent window.)
 		 * @returns not meaningful, ignore
@@ -4397,7 +4397,7 @@ declare namespace imports.gi.Gdk {
 		get_origin(): [ number, number | null, number | null ];
 		/**
 		 * Obtains the parent of #window, as known to GDK. Does not query the
-		 * X server; thus this returns the parent as passed to gdk_window_new(),
+		 * X server; thus this returns the parent as passed to {@link Gdk.Window.new},
 		 * not the actual parent. This should never matter unless you’re using
 		 * Xlib calls mixed with GDK calls on the X11 platform. It may also
 		 * matter for toplevel windows, because the window manager may choose
@@ -4414,19 +4414,19 @@ declare namespace imports.gi.Gdk {
 		 * Returns whether input to the window is passed through to the window
 		 * below.
 		 * 
-		 * See gdk_window_set_pass_through() for details
+		 * See {@link Gdk.Window.set_pass_through} for details
 		 * @returns 
 		 */
 		get_pass_through(): boolean;
 		/**
 		 * @deprecated
-		 * Use gdk_window_get_device_position() instead.
+		 * Use {@link Gdk.Window.get_device_position} instead.
 		 * 
 		 * Obtains the current pointer position and modifier state.
 		 * The position is given in coordinates relative to the upper left
 		 * corner of #window.
 		 * @returns the window containing the
-		 * pointer (as with gdk_window_at_pointer()), or %NULL if the window
+		 * pointer (as with {@link Gdk.Window.at_pointer}), or %NULL if the window
 		 * containing the pointer isn’t known to GDK
 		 * 
 		 * return location for X coordinate of pointer or %NULL to not
@@ -4442,7 +4442,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Obtains the position of the window as reported in the
 		 * most-recently-processed {@link EventConfigure}. Contrast with
-		 * gdk_window_get_geometry() which queries the X server for the
+		 * {@link Gdk.Window.get_geometry} which queries the X server for the
 		 * current window position, regardless of which events have been
 		 * received or processed.
 		 * 
@@ -4455,7 +4455,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Obtains the position of a window position in root
 		 * window coordinates. This is similar to
-		 * gdk_window_get_origin() but allows you to pass
+		 * {@link Gdk.Window.get_origin} but allows you to pass
 		 * in any position in the window, not just the origin.
 		 * @param x X coordinate in window
 		 * @param y Y coordinate in window
@@ -4519,7 +4519,7 @@ declare namespace imports.gi.Gdk {
 		 * toplevel window, as is a %GDK_WINDOW_CHILD window that
 		 * has a root window as parent.
 		 * 
-		 * Note that you should use gdk_window_get_effective_toplevel() when
+		 * Note that you should use {@link Gdk.Window.get_effective_toplevel} when
 		 * you want to get to a window’s toplevel as seen on screen, because
 		 * gdk_window_get_toplevel() will most likely not do what you expect
 		 * if there are offscreen windows in the hierarchy.
@@ -4536,14 +4536,14 @@ declare namespace imports.gi.Gdk {
 		 * of the function. That is, after calling this function, #window will
 		 * no longer have an invalid/dirty region; the update area is removed
 		 * from #window and handed to you. If a window has no update area,
-		 * gdk_window_get_update_area() returns %NULL. You are responsible for
+		 * {@link Gdk.Window.get_update_area} returns %NULL. You are responsible for
 		 * calling cairo_region_destroy() on the returned region if it’s non-%NULL.
 		 * @returns the update area for #window
 		 */
 		get_update_area(): cairo.Region;
 		/**
 		 * Retrieves the user data for #window, which is normally the widget
-		 * that #window belongs to. See gdk_window_set_user_data().
+		 * that #window belongs to. See {@link Gdk.Window.set_user_data}.
 		 * @returns return location for user data
 		 */
 		get_user_data(): any | null;
@@ -4552,7 +4552,7 @@ declare namespace imports.gi.Gdk {
 		 * This does not necessarily take into account if the window is
 		 * obscured by other windows, but no area outside of this region
 		 * is visible.
-		 * @returns a #cairo_region_t. This must be freed with cairo_region_destroy()
+		 * @returns a #cairo_region_t. This must be freed with {@link Cairo.Region.destroy}
 		 *          when you are done.
 		 */
 		get_visible_region(): cairo.Region;
@@ -4577,7 +4577,7 @@ declare namespace imports.gi.Gdk {
 		get_window_type(): WindowType;
 		/**
 		 * Checks whether the window has a native window or not. Note that
-		 * you can use gdk_window_ensure_native() if a native window is needed.
+		 * you can use {@link Gdk.Window.ensure_native} if a native window is needed.
 		 * @returns %TRUE if the #window has a native window, %FALSE otherwise.
 		 */
 		has_native(): boolean;
@@ -4585,19 +4585,19 @@ declare namespace imports.gi.Gdk {
 		 * For toplevel windows, withdraws them, so they will no longer be
 		 * known to the window manager; for all windows, unmaps them, so
 		 * they won’t be displayed. Normally done automatically as
-		 * part of gtk_widget_hide().
+		 * part of {@link Gtk.Widget.hide}.
 		 */
 		hide(): void;
 		/**
 		 * Asks to iconify (minimize) #window. The window manager may choose
 		 * to ignore the request, but normally will honor it. Using
-		 * gtk_window_iconify() is preferred, if you have a #GtkWindow widget.
+		 * {@link Gtk.Window.iconify} is preferred, if you have a #GtkWindow widget.
 		 * 
 		 * This function only makes sense when #window is a toplevel window.
 		 */
 		iconify(): void;
 		/**
-		 * Like gdk_window_shape_combine_region(), but the shape applies
+		 * Like {@link Gdk.Window.shape_combine_region}, but the shape applies
 		 * only to event handling. Mouse events which happen while
 		 * the pointer position corresponds to an unset bit in the
 		 * mask will be passed on the window below #window.
@@ -4621,7 +4621,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Adds #region to the update area for #window. The update area is the
 		 * region that needs to be redrawn, or “dirty region.” The call
-		 * gdk_window_process_updates() sends one or more expose events to the
+		 * {@link Gdk.Window.process_updates} sends one or more expose events to the
 		 * window, which together cover the entire update area. An
 		 * application would normally redraw the contents of #window in
 		 * response to those expose events.
@@ -4641,7 +4641,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		invalidate_maybe_recurse(region: cairo.Region, child_func: WindowChildFunc | null): void;
 		/**
-		 * A convenience wrapper around gdk_window_invalidate_region() which
+		 * A convenience wrapper around {@link Gdk.Window.invalidate_region} which
 		 * invalidates a rectangular region. See
 		 * gdk_window_invalidate_region() for details.
 		 * @param rect rectangle to invalidate or %NULL to invalidate the whole
@@ -4652,7 +4652,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Adds #region to the update area for #window. The update area is the
 		 * region that needs to be redrawn, or “dirty region.” The call
-		 * gdk_window_process_updates() sends one or more expose events to the
+		 * {@link Gdk.Window.process_updates} sends one or more expose events to the
 		 * window, which together cover the entire update area. An
 		 * application would normally redraw the contents of #window in
 		 * response to those expose events.
@@ -4695,7 +4695,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		is_viewable(): boolean;
 		/**
-		 * Checks whether the window has been mapped (with gdk_window_show() or
+		 * Checks whether the window has been mapped (with {@link Gdk.Window.show} or
 		 * gdk_window_show_unraised()).
 		 * @returns %TRUE if the window is mapped
 		 */
@@ -4706,7 +4706,7 @@ declare namespace imports.gi.Gdk {
 		 * This is true whether or not the other windows are visible.
 		 * 
 		 * If #window is a toplevel, the window manager may choose to deny the
-		 * request to move the window in the Z-order, gdk_window_lower() only
+		 * request to move the window in the Z-order, {@link Gdk.Window.lower} only
 		 * requests the restack, does not guarantee it.
 		 * 
 		 * Note that gdk_window_show() raises the window again, so don’t call this
@@ -4714,7 +4714,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		lower(): void;
 		/**
-		 * If you call this during a paint (e.g. between gdk_window_begin_paint_region()
+		 * If you call this during a paint (e.g. between {@link Gdk.Window.begin_paint_region}
 		 * and gdk_window_end_paint() then GDK will mark the current clip region of the
 		 * window as being drawn. This is required when mixing GL rendering via
 		 * gdk_cairo_draw_from_gl() and cairo rendering, as otherwise GDK has no way
@@ -4743,7 +4743,7 @@ declare namespace imports.gi.Gdk {
 		 * Merges the input shape masks for any child windows into the
 		 * input shape mask for #window. i.e. the union of all input masks
 		 * for #window and its children will become the new input mask
-		 * for #window. See gdk_window_input_shape_combine_region().
+		 * for #window. See {@link Gdk.Window.input_shape_combine_region}.
 		 * 
 		 * This function is distinct from gdk_window_set_child_input_shapes()
 		 * because it includes #window’s input shape mask in the set of
@@ -4754,7 +4754,7 @@ declare namespace imports.gi.Gdk {
 		 * Merges the shape masks for any child windows into the
 		 * shape mask for #window. i.e. the union of all masks
 		 * for #window and its children will become the new mask
-		 * for #window. See gdk_window_shape_combine_region().
+		 * for #window. See {@link Gdk.Window.shape_combine_region}.
 		 * 
 		 * This function is distinct from gdk_window_set_child_shapes()
 		 * because it includes #window’s shape mask in the set of shapes to
@@ -4764,7 +4764,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Repositions a window relative to its parent window.
 		 * For toplevel windows, window managers may ignore or modify the move;
-		 * you should probably use gtk_window_move() on a #GtkWindow widget
+		 * you should probably use {@link Gtk.Window.move} on a #GtkWindow widget
 		 * anyway, instead of using GDK functions. For child windows,
 		 * the move will reliably succeed.
 		 * 
@@ -4786,7 +4786,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		move_region(region: cairo.Region, dx: number, dy: number): void;
 		/**
-		 * Equivalent to calling gdk_window_move() and gdk_window_resize(),
+		 * Equivalent to calling {@link Gdk.Window.move} and gdk_window_resize(),
 		 * except that both operations are performed at once, avoiding strange
 		 * visual effects. (i.e. the user may be able to see the window first
 		 * move, then resize, if you don’t use gdk_window_move_resize().)
@@ -4810,7 +4810,7 @@ declare namespace imports.gi.Gdk {
 		 * %GDK_GRAVITY_NORTH_WEST with %GDK_GRAVITY_NORTH_EAST and vice versa if
 		 * #window extends beyond the left or right edges of the monitor.
 		 * 
-		 * Connect to the {@link Window}::moved-to-rect signal to find out how it was
+		 * Connect to the {@link Window.moved_to_rect} signal to find out how it was
 		 * actually positioned.
 		 * @param rect the destination {@link Rectangle} to align #window with
 		 * @param rect_anchor the point on #rect to align with #window's anchor point
@@ -4822,7 +4822,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		move_to_rect(rect: Rectangle, rect_anchor: Gravity, window_anchor: Gravity, anchor_hints: AnchorHints, rect_anchor_dx: number, rect_anchor_dy: number): void;
 		/**
-		 * Like gdk_window_get_children(), but does not copy the list of
+		 * Like {@link Gdk.Window.get_children}, but does not copy the list of
 		 * children, so the list does not need to be freed.
 		 * @returns 
 		 *     a reference to the list of child windows in #window
@@ -4831,7 +4831,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Sends one or more expose events to #window. The areas in each
 		 * expose event will cover the entire update area for the window (see
-		 * gdk_window_invalidate_region() for details). Normally GDK calls
+		 * {@link Gdk.Window.invalidate_region} for details). Normally GDK calls
 		 * gdk_window_process_all_updates() on your behalf, so there’s no
 		 * need to call this function unless you want to force expose events
 		 * to be delivered immediately and synchronously (vs. the usual
@@ -4846,7 +4846,7 @@ declare namespace imports.gi.Gdk {
 		 * This is true whether or not the windows are visible.
 		 * 
 		 * If #window is a toplevel, the window manager may choose to deny the
-		 * request to move the window in the Z-order, gdk_window_raise() only
+		 * request to move the window in the Z-order, {@link Gdk.Window.raise} only
 		 * requests the restack, does not guarantee it.
 		 */
 		raise(): void;
@@ -4855,7 +4855,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		register_dnd(): void;
 		/**
-		 * Remove a filter previously added with gdk_window_add_filter().
+		 * Remove a filter previously added with {@link Gdk.Window.add_filter}.
 		 * @param _function previously-added filter function
 		 * @param data user data for previously-added filter function
 		 */
@@ -4871,7 +4871,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Resizes #window; for toplevel windows, asks the window manager to resize
 		 * the window. The window manager may not allow the resize. When using GTK+,
-		 * use gtk_window_resize() instead of this low-level GDK function.
+		 * use {@link Gtk.Window.resize} instead of this low-level GDK function.
 		 * 
 		 * Windows may not be resized below 1x1.
 		 * 
@@ -4890,7 +4890,7 @@ declare namespace imports.gi.Gdk {
 		 * lowers the window.
 		 * 
 		 * If #window is a toplevel, the window manager may choose to deny the
-		 * request to move the window in the Z-order, gdk_window_restack() only
+		 * request to move the window in the Z-order, {@link Gdk.Window.restack} only
 		 * requests the restack, does not guarantee it.
 		 * @param sibling a {@link Window} that is a sibling of #window, or %NULL
 		 * @param above a boolean
@@ -4929,7 +4929,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * However, when using GTK+, influence the background of a widget
 		 * using a style class or CSS — if you’re an application — or with
-		 * gtk_style_context_set_background() — if you're implementing a
+		 * {@link Gtk.StyleContext.set_background} — if you're implementing a
 		 * custom widget.
 		 * @param color a {@link Color}
 		 */
@@ -4942,7 +4942,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * A background of %NULL means that the window won't have any background. On the
 		 * X11 backend it's also possible to inherit the background from the parent
-		 * window using gdk_x11_get_parent_relative_pattern().
+		 * window using {@link Gdk.x11_get_parent_relative_pattern}.
 		 * 
 		 * The windowing system will normally fill a window with its background
 		 * when the window is obscured then exposed.
@@ -4955,21 +4955,21 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Sets the background color of #window.
 		 * 
-		 * See also gdk_window_set_background_pattern().
+		 * See also {@link Gdk.Window.set_background_pattern}.
 		 * @param rgba a {@link RGBA} color
 		 */
 		set_background_rgba(rgba: RGBA): void;
 		/**
 		 * Sets the input shape mask of #window to the union of input shape masks
 		 * for all children of #window, ignoring the input shape mask of #window
-		 * itself. Contrast with gdk_window_merge_child_input_shapes() which includes
+		 * itself. Contrast with {@link Gdk.Window.merge_child_input_shapes} which includes
 		 * the input shape mask of #window in the masks to be merged.
 		 */
 		set_child_input_shapes(): void;
 		/**
 		 * Sets the shape mask of #window to the union of shape masks
 		 * for all children of #window, ignoring the shape mask of #window
-		 * itself. Contrast with gdk_window_merge_child_shapes() which includes
+		 * itself. Contrast with {@link Gdk.Window.merge_child_shapes} which includes
 		 * the shape mask of #window in the masks to be merged.
 		 */
 		set_child_shapes(): void;
@@ -4987,7 +4987,7 @@ declare namespace imports.gi.Gdk {
 		 * whatever way it sees fit.
 		 * 
 		 * It only makes sense for child windows to be composited; see
-		 * gdk_window_set_opacity() if you need translucent toplevel
+		 * {@link Gdk.Window.set_opacity} if you need translucent toplevel
 		 * windows.
 		 * 
 		 * An additional effect of this call is that the area of this
@@ -5008,7 +5008,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Note that #cursor must be for the same display as #window.
 		 * 
-		 * Use gdk_cursor_new_for_display() or gdk_cursor_new_from_pixbuf() to
+		 * Use {@link Gdk.Cursor.new_for_display} or gdk_cursor_new_from_pixbuf() to
 		 * create the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR.
 		 * Passing %NULL for the #cursor argument to gdk_window_set_cursor() means
 		 * that #window will use the cursor of its parent window. Most windows
@@ -5020,7 +5020,7 @@ declare namespace imports.gi.Gdk {
 		 * “Decorations” are the features the window manager adds to a toplevel {@link Window}.
 		 * This function sets the traditional Motif window manager hints that tell the
 		 * window manager which decorations you would like your window to have.
-		 * Usually you should use gtk_window_set_decorated() on a #GtkWindow instead of
+		 * Usually you should use {@link Gtk.Window.set_decorated} on a #GtkWindow instead of
 		 * using the GDK function directly.
 		 * 
 		 * The #decorations argument is the logical OR of the fields in
@@ -5036,7 +5036,7 @@ declare namespace imports.gi.Gdk {
 		set_decorations(decorations: WMDecoration): void;
 		/**
 		 * Sets a specific {@link Cursor} for a given device when it gets inside #window.
-		 * Use gdk_cursor_new_for_display() or gdk_cursor_new_from_pixbuf() to create
+		 * Use {@link Gdk.Cursor.new_for_display} or gdk_cursor_new_from_pixbuf() to create
 		 * the cursor. To make the cursor invisible, use %GDK_BLANK_CURSOR. Passing
 		 * %NULL for the #cursor argument to gdk_window_set_cursor() means that
 		 * #window will use the cursor of its parent window. Most windows should
@@ -5140,7 +5140,7 @@ declare namespace imports.gi.Gdk {
 		 * this is to constrain user resizing, but the windowing system
 		 * will typically  (but is not required to) also constrain the
 		 * current size of the window to the provided values and
-		 * constrain programatic resizing via gdk_window_resize() or
+		 * constrain programatic resizing via {@link Gdk.Window.resize} or
 		 * gdk_window_move_resize().
 		 * 
 		 * Note that on X11, this effect has no effect on windows
@@ -5190,7 +5190,7 @@ declare namespace imports.gi.Gdk {
 		 * idea from a user interface standpoint. But you can set such a name
 		 * with this function, if you like.
 		 * 
-		 * After calling this with a non-%NULL #name, calls to gdk_window_set_title()
+		 * After calling this with a non-%NULL #name, calls to {@link Gdk.Window.set_title}
 		 * will not update the icon title.
 		 * 
 		 * Using %NULL for #name unsets the icon title; further calls to
@@ -5246,7 +5246,7 @@ declare namespace imports.gi.Gdk {
 		 * way.
 		 * 
 		 * You should only use this on windows for which you have
-		 * previously called gdk_window_set_transient_for()
+		 * previously called {@link Gdk.Window.set_transient_for}
 		 * @param modal %TRUE if the window is modal, %FALSE otherwise.
 		 */
 		set_modal_hint(modal: boolean): void;
@@ -5261,7 +5261,7 @@ declare namespace imports.gi.Gdk {
 		 * per-window opacity value that the compositor would apply. Instead, use
 		 * `gdk_window_set_opaque_region (window, NULL)` to tell the compositor
 		 * that the entire window is (potentially) non-opaque, and draw your content
-		 * with alpha, or use gtk_widget_set_opacity() to set an overall opacity
+		 * with alpha, or use {@link Gtk.Widget.set_opacity} to set an overall opacity
 		 * for your widgets.
 		 * 
 		 * For child windows this function only works for non-native windows.
@@ -5325,7 +5325,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_pass_through(pass_through: boolean): void;
 		/**
-		 * When using GTK+, typically you should use gtk_window_set_role() instead
+		 * When using GTK+, typically you should use {@link Gtk.Window.set_role} instead
 		 * of this low-level function.
 		 * 
 		 * The window manager and session manager use a window’s role to
@@ -5360,7 +5360,7 @@ declare namespace imports.gi.Gdk {
 		 * Toggles whether a window should appear in a pager (workspace
 		 * switcher, or other desktop utility program that displays a small
 		 * thumbnail representation of the windows on the desktop). If a
-		 * window’s semantic type as specified with gdk_window_set_type_hint()
+		 * window’s semantic type as specified with {@link Gdk.Window.set_type_hint}
 		 * already fully describes the window, this function should
 		 * not be called in addition, instead you should
 		 * allow the window to be treated according to standard policy for
@@ -5371,7 +5371,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Toggles whether a window should appear in a task list or window
 		 * list. If a window’s semantic type as specified with
-		 * gdk_window_set_type_hint() already fully describes the window, this
+		 * {@link Gdk.Window.set_type_hint} already fully describes the window, this
 		 * function should not be called in addition,
 		 * instead you should allow the window to be treated according to
 		 * standard policy for its semantic type.
@@ -5388,7 +5388,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		set_source_events(source: InputSource, event_mask: EventMask): void;
 		/**
-		 * When using GTK+, typically you should use gtk_window_set_startup_id()
+		 * When using GTK+, typically you should use {@link Gtk.Window.set_startup_id}
 		 * instead of this low-level function.
 		 * @param startup_id a string with startup-notification identifier
 		 */
@@ -5417,7 +5417,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Sets the title of a toplevel window, to be displayed in the titlebar.
 		 * If you haven’t explicitly set the icon name for the window
-		 * (using gdk_window_set_icon_name()), the icon name will be set to
+		 * (using {@link Gdk.Window.set_icon_name}), the icon name will be set to
 		 * #title as well. #title must be in UTF-8 encoding (as with all
 		 * user-readable strings in GDK/GTK+). #title may not be %NULL.
 		 * @param title title of #window
@@ -5429,7 +5429,7 @@ declare namespace imports.gi.Gdk {
 		 * window manager to do things like center #window on #parent and
 		 * keep #window above #parent.
 		 * 
-		 * See gtk_window_set_transient_for() if you’re using #GtkWindow or
+		 * See {@link Gtk.Window.set_transient_for} if you’re using #GtkWindow or
 		 * #GtkDialog.
 		 * @param parent another toplevel {@link Window}
 		 */
@@ -5452,7 +5452,7 @@ declare namespace imports.gi.Gdk {
 		set_urgency_hint(urgent: boolean): void;
 		/**
 		 * For most purposes this function is deprecated in favor of
-		 * g_object_set_data(). However, for historical reasons GTK+ stores
+		 * {@link GObject.set_data}. However, for historical reasons GTK+ stores
 		 * the #GtkWidget that owns a {@link Window} as user data on the
 		 * #GdkWindow. So, custom widget implementations should use
 		 * this function for that. If GTK+ receives an event for a #GdkWindow,
@@ -5481,7 +5481,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		shape_combine_region(shape_region: cairo.Region | null, offset_x: number, offset_y: number): void;
 		/**
-		 * Like gdk_window_show_unraised(), but also raises the window to the
+		 * Like {@link Gdk.Window.show_unraised}, but also raises the window to the
 		 * top of the window stack (moves the window to the front of the
 		 * Z-order).
 		 * 
@@ -5494,7 +5494,7 @@ declare namespace imports.gi.Gdk {
 		show(): void;
 		/**
 		 * Shows a {@link Window} onscreen, but does not modify its stacking
-		 * order. In contrast, gdk_window_show() will raise the window
+		 * order. In contrast, {@link Gdk.Window.show} will raise the window
 		 * to the top of the window stack.
 		 * 
 		 * On the X11 platform, in Xlib terms, this function calls
@@ -5515,7 +5515,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * “Pins” a window such that it’s on all workspaces and does not scroll
 		 * with viewports, for window managers that have scrollable viewports.
-		 * (When using #GtkWindow, gtk_window_stick() may be more useful.)
+		 * (When using #GtkWindow, {@link Gtk.Window.stick} may be more useful.)
 		 * 
 		 * On the X11 platform, this function depends on window manager
 		 * support, so may have no effect with many window managers. However,
@@ -5529,14 +5529,14 @@ declare namespace imports.gi.Gdk {
 		 * This symbol was never meant to be used outside of GTK+
 		 * 
 		 * Thaws a window frozen with
-		 * gdk_window_freeze_toplevel_updates_libgtk_only().
+		 * {@link Gdk.Window.freeze_toplevel_updates_libgtk_only}.
 		 * 
 		 * This function is not part of the GDK public API and is only
 		 * for use by GTK+.
 		 */
 		thaw_toplevel_updates_libgtk_only(): void;
 		/**
-		 * Thaws a window frozen with gdk_window_freeze_updates().
+		 * Thaws a window frozen with {@link Gdk.Window.freeze_updates}.
 		 */
 		thaw_updates(): void;
 		/**
@@ -5567,13 +5567,13 @@ declare namespace imports.gi.Gdk {
 		 */
 		unmaximize(): void;
 		/**
-		 * Reverse operation for gdk_window_stick(); see gdk_window_stick(),
+		 * Reverse operation for {@link Gdk.Window.stick}; see gdk_window_stick(),
 		 * and gtk_window_unstick().
 		 */
 		unstick(): void;
 		/**
 		 * Withdraws a window (unmaps it and asks the window manager to forget about it).
-		 * This function is not really useful as gdk_window_hide() automatically
+		 * This function is not really useful as {@link Gdk.Window.hide} automatically
 		 * withdraws toplevel windows before hiding them.
 		 */
 		withdraw(): void;
@@ -5587,7 +5587,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Note that it is not possible to access the window's previous
 		 * surface from within any callback of this signal. Calling
-		 * gdk_offscreen_window_get_surface() will lead to a crash.
+		 * {@link Gdk.offscreen.window_get_surface} will lead to a crash.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -5602,7 +5602,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::from-embedder signal is emitted to translate coordinates
 		 * in the embedder of an offscreen window to the offscreen window.
 		 * 
-		 * See also {@link Window}::to-embedder.
+		 * See also {@link Window.to_embedder}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -5660,7 +5660,7 @@ declare namespace imports.gi.Gdk {
 		 * The ::to-embedder signal is emitted to translate coordinates
 		 * in an offscreen window to its embedder.
 		 * 
-		 * See also {@link Window}::from-embedder.
+		 * See also {@link Window.from_embedder}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -5710,13 +5710,13 @@ declare namespace imports.gi.Gdk {
 		public static new(parent: Window | null, attributes: WindowAttr, attributes_mask: WindowAttributesType): Window;
 		/**
 		 * @deprecated
-		 * Use gdk_device_get_window_at_position() instead.
+		 * Use {@link Gdk.Device.get_window_at_position} instead.
 		 * 
 		 * Obtains the window underneath the mouse pointer, returning the
 		 * location of that window in #win_x, #win_y. Returns %NULL if the
 		 * window under the mouse pointer is not known to GDK (if the window
 		 * belongs to another application and a {@link Window} hasn’t been created
-		 * for it with gdk_window_foreign_new())
+		 * for it with {@link Gdk.Window.foreign_new})
 		 * 
 		 * NOTE: For multihead-aware widgets or applications use
 		 * gdk_display_get_window_at_pointer() instead.
@@ -5740,13 +5740,13 @@ declare namespace imports.gi.Gdk {
 		 */
 		public static constrain_size(geometry: Geometry, flags: WindowHints, width: number, height: number): [ new_width: number, new_height: number ];
 		/**
-		 * Calls gdk_window_process_updates() for all windows (see {@link Window})
+		 * Calls {@link Gdk.Window.process_updates} for all windows (see {@link Window})
 		 * in the application.
 		 */
 		public static process_all_updates(): void;
 		/**
 		 * With update debugging enabled, calls to
-		 * gdk_window_invalidate_region() clear the invalidated region of the
+		 * {@link Gdk.Window.invalidate_region} clear the invalidated region of the
 		 * screen to a noticeable color, and GDK pauses for a short time
 		 * before sending exposes to windows during
 		 * gdk_window_process_updates().  The net effect is that you can see
@@ -5781,7 +5781,7 @@ declare namespace imports.gi.Gdk {
 		 * Determines the string corresponding to an atom.
 		 * @returns a newly-allocated string containing the string
 		 *   corresponding to #atom. When you are done with the
-		 *   return value, you should free it using g_free().
+		 *   return value, you should free it using {@link G.free}.
 		 */
 		public name(): string;
 	}
@@ -5819,7 +5819,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Makes a copy of a {@link Color}.
 		 * 
-		 * The result must be freed using gdk_color_free().
+		 * The result must be freed using {@link Gdk.Color.free}.
 		 * @returns a copy of #color
 		 */
 		public copy(): Color;
@@ -5836,7 +5836,7 @@ declare namespace imports.gi.Gdk {
 		 * @deprecated
 		 * Use {@link RGBA}
 		 * 
-		 * Frees a {@link Color} created with gdk_color_copy().
+		 * Frees a {@link Color} created with {@link Gdk.Color.copy}.
 		 */
 		public free(): void;
 		/**
@@ -5856,7 +5856,7 @@ declare namespace imports.gi.Gdk {
 		 * form “\#rrrrggggbbbb” where “r”, “g” and “b” are hex digits
 		 * representing the red, green and blue components respectively.
 		 * 
-		 * The returned string can be parsed by gdk_color_parse().
+		 * The returned string can be parsed by {@link Gdk.color.parse}.
 		 * @returns a newly-allocated text string
 		 */
 		public to_string(): string;
@@ -5866,12 +5866,6 @@ declare namespace imports.gi.Gdk {
 	interface DevicePadInterface {}
 	class DevicePadInterface {
 		public constructor(options?: Partial<DevicePadInterfaceInitOptions>);
-	}
-
-	export interface DrawingContextClassInitOptions {}
-	interface DrawingContextClass {}
-	class DrawingContextClass {
-		public constructor(options?: Partial<DrawingContextClassInitOptions>);
 	}
 
 	export interface EventAnyInitOptions {}
@@ -5981,7 +5975,7 @@ declare namespace imports.gi.Gdk {
 		public button: number;
 		/**
 		 * the master device that the event originated from. Use
-		 * gdk_event_get_source_device() to get the slave device.
+		 * {@link Gdk.event.get_source_device} to get the slave device.
 		 */
 		public device: Device;
 		/**
@@ -6291,7 +6285,7 @@ declare namespace imports.gi.Gdk {
 		 *   would result from this keypress. The only correct way to handle text
 		 *   input of text is using input methods (see #GtkIMContext), so this
 		 *   field is deprecated and should never be used.
-		 *   (gdk_unicode_to_keyval() provides a non-deprecated way of getting
+		 *   {@link (gdk.unicode_to_keyval} provides a non-deprecated way of getting
 		 *   an approximate translation for a key.) The string is encoded in the
 		 *   encoding of the current locale (Note: this for backwards compatibility:
 		 *   strings in GTK+ and GDK are typically in UTF-8.) and NUL-terminated.
@@ -6364,7 +6358,7 @@ declare namespace imports.gi.Gdk {
 		public is_hint: number;
 		/**
 		 * the master device that the event originated from. Use
-		 * gdk_event_get_source_device() to get the slave device.
+		 * {@link Gdk.event.get_source_device} to get the slave device.
 		 */
 		public device: Device;
 		/**
@@ -6609,7 +6603,7 @@ declare namespace imports.gi.Gdk {
 		public time: number;
 		/**
 		 * the master device that the event originated from. Use
-		 * gdk_event_get_source_device() to get the slave device.
+		 * {@link Gdk.event.get_source_device} to get the slave device.
 		 */
 		public device: Device;
 	}
@@ -6623,7 +6617,7 @@ declare namespace imports.gi.Gdk {
 	 * Some GDK backends can also generate “smooth” scroll events, which
 	 * can be recognized by the %GDK_SCROLL_SMOOTH scroll direction. For
 	 * these, the scroll deltas can be obtained with
-	 * gdk_event_get_scroll_deltas().
+	 * {@link Gdk.event.get_scroll_deltas}.
 	 */
 	interface EventScroll {}
 	class EventScroll {
@@ -6666,7 +6660,7 @@ declare namespace imports.gi.Gdk {
 		public direction: ScrollDirection;
 		/**
 		 * the master device that the event originated from. Use
-		 * gdk_event_get_source_device() to get the slave device.
+		 * {@link Gdk.event.get_source_device} to get the slave device.
 		 */
 		public device: Device;
 		/**
@@ -6776,7 +6770,7 @@ declare namespace imports.gi.Gdk {
 	 * %GDK_TOUCH_END or %GDK_TOUCH_CANCEL.
 	 * 
 	 * Touch events are grouped into sequences by means of the #sequence
-	 * field, which can also be obtained with gdk_event_get_event_sequence().
+	 * field, which can also be obtained with {@link Gdk.event.get_event_sequence}.
 	 * Each sequence begins with a %GDK_TOUCH_BEGIN event, followed by
 	 * any number of %GDK_TOUCH_UPDATE events, and ends with a %GDK_TOUCH_END
 	 * (or %GDK_TOUCH_CANCEL) event. With multitouch devices, there may be
@@ -6832,7 +6826,7 @@ declare namespace imports.gi.Gdk {
 		public emulating_pointer: boolean;
 		/**
 		 * the master device that the event originated from. Use
-		 * gdk_event_get_source_device() to get the slave device.
+		 * {@link Gdk.event.get_source_device} to get the slave device.
 		 */
 		public device: Device;
 		/**
@@ -7043,23 +7037,11 @@ declare namespace imports.gi.Gdk {
 		public new_window_state: WindowState;
 	}
 
-	export interface FrameClockClassInitOptions {}
-	interface FrameClockClass {}
-	class FrameClockClass {
-		public constructor(options?: Partial<FrameClockClassInitOptions>);
-	}
-
-	export interface FrameClockPrivateInitOptions {}
-	interface FrameClockPrivate {}
-	class FrameClockPrivate {
-		public constructor(options?: Partial<FrameClockPrivateInitOptions>);
-	}
-
 	export interface FrameTimingsInitOptions {}
 	/**
 	 * A {@link FrameTimings} object holds timing information for a single frame
 	 * of the application’s displays. To retrieve #GdkFrameTimings objects,
-	 * use gdk_frame_clock_get_timings() or gdk_frame_clock_get_current_timings().
+	 * use {@link Gdk.FrameClock.get_timings} or gdk_frame_clock_get_current_timings().
 	 * The information in #GdkFrameTimings is useful for precise synchronization
 	 * of video with the event or audio streams, and for measuring
 	 * quality metrics for the application’s display, such as latency and jitter.
@@ -7074,7 +7056,7 @@ declare namespace imports.gi.Gdk {
 		 * accessor functions for #GdkFrameTimings can return 0 to
 		 * indicate an unavailable value for two reasons: either because
 		 * the information is not yet available, or because it isn't
-		 * available at all. Once gdk_frame_timings_get_complete() returns
+		 * available at all. Once {@link Gdk.FrameTimings.get_complete} returns
 		 * %TRUE for a frame, you can be certain that no further values
 		 * will become available and be stored in the #GdkFrameTimings.
 		 * @returns %TRUE if all information that will be available
@@ -7090,23 +7072,23 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Returns the frame time for the frame. This is the time value
 		 * that is typically used to time animations for the frame. See
-		 * gdk_frame_clock_get_frame_time().
+		 * {@link Gdk.FrameClock.get_frame_time}.
 		 * @returns the frame time for the frame, in the timescale
-		 *  of g_get_monotonic_time()
+		 *  of {@link G.get_monotonic_time}
 		 */
 		public get_frame_time(): number;
 		/**
 		 * Gets the predicted time at which this frame will be displayed. Although
 		 * no predicted time may be available, if one is available, it will
 		 * be available while the frame is being generated, in contrast to
-		 * gdk_frame_timings_get_presentation_time(), which is only available
+		 * {@link Gdk.FrameTimings.get_presentation_time}, which is only available
 		 * after the frame has been presented. In general, if you are simply
 		 * animating, you should use gdk_frame_clock_get_frame_time() rather
 		 * than this function, but this function is useful for applications
 		 * that want exact control over latency. For example, a movie player
 		 * may want this information for Audio/Video synchronization.
 		 * @returns The predicted time at which the frame will be presented,
-		 *  in the timescale of g_get_monotonic_time(), or 0 if no predicted
+		 *  in the timescale of {@link G.get_monotonic_time}, or 0 if no predicted
 		 *  presentation time is available.
 		 */
 		public get_predicted_presentation_time(): number;
@@ -7114,7 +7096,7 @@ declare namespace imports.gi.Gdk {
 		 * Reurns the presentation time. This is the time at which the frame
 		 * became visible to the user.
 		 * @returns the time the frame was displayed to the user, in the
-		 *  timescale of g_get_monotonic_time(), or 0 if no presentation
+		 *  timescale of {@link G.get_monotonic_time}, or 0 if no presentation
 		 *  time is available. See gdk_frame_timings_get_complete()
 		 */
 		public get_presentation_time(): number;
@@ -7124,7 +7106,7 @@ declare namespace imports.gi.Gdk {
 		 * usually happens during the “vertical blanking interval”.
 		 * @returns the refresh interval of the display, in microseconds,
 		 *  or 0 if the refresh interval is not available.
-		 *  See gdk_frame_timings_get_complete().
+		 *  See {@link Gdk.FrameTimings.get_complete}.
 		 */
 		public get_refresh_interval(): number;
 		/**
@@ -7143,7 +7125,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * The {@link Geometry} struct gives the window manager information about
 	 * a window’s geometry constraints. Normally you would set these on
-	 * the GTK+ level using gtk_window_set_geometry_hints(). #GtkWindow
+	 * the GTK+ level using {@link Gtk.Window.set_geometry_hints}. #GtkWindow
 	 * then sets the hints on the #GdkWindow it creates.
 	 * 
 	 * gdk_window_set_geometry_hints() expects the hints to be fully valid already
@@ -7247,7 +7229,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		public max_aspect: number;
 		/**
-		 * window gravity, see gtk_window_set_gravity()
+		 * window gravity, see {@link Gtk.Window.set_gravity}
 		 */
 		public win_gravity: Gravity;
 	}
@@ -7280,12 +7262,6 @@ declare namespace imports.gi.Gdk {
 		 *   uppercase letter is printed.
 		 */
 		public level: number;
-	}
-
-	export interface MonitorClassInitOptions {}
-	interface MonitorClass {}
-	class MonitorClass {
-		public constructor(options?: Partial<MonitorClassInitOptions>);
 	}
 
 	export interface PointInitOptions {}
@@ -7333,7 +7309,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Makes a copy of a {@link RGBA}.
 		 * 
-		 * The result must be freed through gdk_rgba_free().
+		 * The result must be freed through {@link Gdk.RGBA.free}.
 		 * @returns A newly allocated {@link RGBA}, with the same contents as #rgba
 		 */
 		public copy(): RGBA;
@@ -7344,7 +7320,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		public equal(p2: RGBA): boolean;
 		/**
-		 * Frees a {@link RGBA} created with gdk_rgba_copy()
+		 * Frees a {@link RGBA} created with {@link Gdk.RGBA.copy}
 		 */
 		public free(): void;
 		/**
@@ -7383,7 +7359,7 @@ declare namespace imports.gi.Gdk {
 		 * is represented as a floating point value in the range 0 to 1.
 		 * 
 		 * These string forms are string forms that are supported by
-		 * the CSS3 colors module, and can be parsed by gdk_rgba_parse().
+		 * the CSS3 colors module, and can be parsed by {@link Gdk.RGBA.parse}.
 		 * 
 		 * Note that this string representation may lose some
 		 * precision, since “r”, “g” and “b” are represented as 8-bit
@@ -7469,15 +7445,15 @@ declare namespace imports.gi.Gdk {
 		 */
 		public title: string;
 		/**
-		 * event mask (see gdk_window_set_events())
+		 * event mask (see {@link Gdk.Window.set_events})
 		 */
 		public event_mask: number;
 		/**
-		 * X coordinate relative to parent window (see gdk_window_move())
+		 * X coordinate relative to parent window (see {@link Gdk.Window.move})
 		 */
 		public x: number;
 		/**
-		 * Y coordinate relative to parent window (see gdk_window_move())
+		 * Y coordinate relative to parent window (see {@link Gdk.Window.move})
 		 */
 		public y: number;
 		/**
@@ -7502,15 +7478,15 @@ declare namespace imports.gi.Gdk {
 		 */
 		public window_type: WindowType;
 		/**
-		 * cursor for the window (see gdk_window_set_cursor())
+		 * cursor for the window (see {@link Gdk.Window.set_cursor})
 		 */
 		public cursor: Cursor;
 		/**
-		 * don’t use (see gtk_window_set_wmclass())
+		 * don’t use (see {@link Gtk.Window.set_wmclass})
 		 */
 		public wmclass_name: string;
 		/**
-		 * don’t use (see gtk_window_set_wmclass())
+		 * don’t use (see {@link Gtk.Window.set_wmclass})
 		 */
 		public wmclass_class: string;
 		/**
@@ -7521,24 +7497,6 @@ declare namespace imports.gi.Gdk {
 		 * a hint of the function of the window
 		 */
 		public type_hint: WindowTypeHint;
-	}
-
-	export interface WindowClassInitOptions {}
-	interface WindowClass {}
-	class WindowClass {
-		public constructor(options?: Partial<WindowClassInitOptions>);
-		public pick_embedded_child: {(window: Window, x: number, y: number): Window;};
-		public to_embedder: {(window: Window, offscreen_x: number, offscreen_y: number, embedder_x: number, embedder_y: number): void;};
-		public from_embedder: {(window: Window, embedder_x: number, embedder_y: number, offscreen_x: number, offscreen_y: number): void;};
-		public create_surface: {(window: Window, width: number, height: number): cairo.Surface;};
-		public _gdk_reserved1: {(): void;};
-		public _gdk_reserved2: {(): void;};
-		public _gdk_reserved3: {(): void;};
-		public _gdk_reserved4: {(): void;};
-		public _gdk_reserved5: {(): void;};
-		public _gdk_reserved6: {(): void;};
-		public _gdk_reserved7: {(): void;};
-		public _gdk_reserved8: {(): void;};
 	}
 
 	export interface WindowRedirectInitOptions {}
@@ -7595,7 +7553,7 @@ declare namespace imports.gi.Gdk {
 	 * by the pad device.
 	 * 
 	 * Tablet pads may contain one or more groups, each containing a subset
-	 * of the buttons/rings/strips available. gdk_device_pad_get_n_groups()
+	 * of the buttons/rings/strips available. {@link Gdk.DevicePad.get_n_groups}
 	 * can be used to obtain the number of groups, gdk_device_pad_get_n_features()
 	 * and gdk_device_pad_get_feature_group() can be combined to find out the
 	 * number of buttons/rings/strips the device has, and how are they grouped.
@@ -7744,7 +7702,7 @@ declare namespace imports.gi.Gdk {
 	 * Note that these IDs are directly taken from the X cursor font, and many
 	 * of these cursors are either not useful, or are not available on other platforms.
 	 * 
-	 * The recommended way to create cursors is to use gdk_cursor_new_from_name().
+	 * The recommended way to create cursors is to use {@link Gdk.Cursor.new_from_name}.
 	 */
 	enum CursorType {
 		/**
@@ -8065,7 +8023,7 @@ declare namespace imports.gi.Gdk {
 		BLANK_CURSOR = -2,
 		/**
 		 * type of cursors constructed with
-		 *   gdk_cursor_new_from_pixbuf()
+		 *   {@link Gdk.Cursor.new_from_pixbuf}
 		 */
 		CURSOR_IS_PIXMAP = -1
 	}
@@ -8524,7 +8482,7 @@ declare namespace imports.gi.Gdk {
 	}
 
 	/**
-	 * Returned by gdk_device_grab(), gdk_pointer_grab() and gdk_keyboard_grab() to
+	 * Returned by {@link Gdk.Device.grab}, gdk_pointer_grab() and gdk_keyboard_grab() to
 	 * indicate success or the reason for the failure of the grab attempt.
 	 */
 	enum GrabStatus {
@@ -8558,7 +8516,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Defines the reference point of a window and the meaning of coordinates
-	 * passed to gtk_window_move(). See gtk_window_move() and the "implementation
+	 * passed to {@link Gtk.Window.move}. See gtk_window_move() and the "implementation
 	 * notes" section of the
 	 * [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 	 * specification for more details.
@@ -8679,7 +8637,7 @@ declare namespace imports.gi.Gdk {
 	}
 
 	/**
-	 * This enum is used with gdk_keymap_get_modifier_mask()
+	 * This enum is used with {@link Gdk.Keymap.get_modifier_mask}
 	 * in order to determine what modifiers the
 	 * currently used windowing system backend uses for particular
 	 * purposes. For example, on X11/Windows, the Control key is used for
@@ -8790,7 +8748,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Describes how existing data is combined with new data when
-	 * using gdk_property_change().
+	 * using {@link Gdk.property.change}.
 	 */
 	enum PropMode {
 		/**
@@ -8843,7 +8801,7 @@ declare namespace imports.gi.Gdk {
 		RIGHT = 3,
 		/**
 		 * the scrolling is determined by the delta values
-		 *   in {@link EventScroll}. See gdk_event_get_scroll_deltas(). Since: 3.4
+		 *   in {@link EventScroll}. See {@link Gdk.event.get_scroll_deltas}. Since: 3.4
 		 */
 		SMOOTH = 4
 	}
@@ -8994,7 +8952,7 @@ declare namespace imports.gi.Gdk {
 		PSEUDO_COLOR = 3,
 		/**
 		 * Each pixel value directly contains red, green,
-		 *     and blue components. Use gdk_visual_get_red_pixel_details(), etc,
+		 *     and blue components. Use {@link Gdk.Visual.get_red_pixel_details}, etc,
 		 *     to obtain information about how the components are assembled into
 		 *     a pixel value.
 		 */
@@ -9069,7 +9027,7 @@ declare namespace imports.gi.Gdk {
 		 */
 		TEMP = 3,
 		/**
-		 * foreign window (see gdk_window_foreign_new())
+		 * foreign window (see {@link Gdk.Window.foreign_new})
 		 */
 		FOREIGN = 4,
 		/**
@@ -9322,7 +9280,7 @@ declare namespace imports.gi.Gdk {
 	 * be sent, some of which are marked as a hint (the is_hint member is
 	 * %TRUE). To receive more motion events after a motion hint event,
 	 * the application needs to asks for more, by calling
-	 * gdk_event_request_motions().
+	 * {@link Gdk.event.request_motions}.
 	 * 
 	 * Since GTK 3.8, motion events are already compressed by default, independent
 	 * of this mechanism. This compression can be disabled with
@@ -9748,7 +9706,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * Used to indicate which fields in the {@link WindowAttr} struct should be honored.
 	 * For example, if you filled in the “cursor” and “x” fields of #GdkWindowAttr,
-	 * pass “#GDK_WA_X | #GDK_WA_CURSOR” to gdk_window_new(). Fields in
+	 * pass “#GDK_WA_X | #GDK_WA_CURSOR” to {@link Gdk.Window.new}. Fields in
 	 * #GdkWindowAttr not covered by a bit in this enum are required; for example,
 	 * the #width/#height, #wclass, and #window_type fields are required, they have
 	 * no corresponding flag in #GdkWindowAttributesType.
@@ -9793,7 +9751,7 @@ declare namespace imports.gi.Gdk {
 	 * attention to. Also, the presence/absence of #GDK_HINT_POS,
 	 * #GDK_HINT_USER_POS, and #GDK_HINT_USER_SIZE is significant, though they don't
 	 * directly refer to #GdkGeometry fields. #GDK_HINT_USER_POS will be set
-	 * automatically by #GtkWindow if you call gtk_window_move().
+	 * automatically by #GtkWindow if you call {@link Gtk.Window.move}.
 	 * #GDK_HINT_USER_POS and #GDK_HINT_USER_SIZE should be set if the user
 	 * specified a size/position using a --geometry command-line argument;
 	 * gtk_window_parse_geometry() automatically sets these flags.
@@ -9916,16 +9874,16 @@ declare namespace imports.gi.Gdk {
 	}
 
 	/**
-	 * Specifies the type of function passed to gdk_event_handler_set() to
+	 * Specifies the type of function passed to {@link Gdk.event.handler_set} to
 	 * handle all GDK events.
 	 */
 	interface EventFunc {
 		/**
-		 * Specifies the type of function passed to gdk_event_handler_set() to
+		 * Specifies the type of function passed to {@link Gdk.event.handler_set} to
 		 * handle all GDK events.
 		 * @param event the {@link Event} to process.
 		 * @param data user data set when the event handler was installed with
-		 *   gdk_event_handler_set().
+		 *   {@link Gdk.event.handler_set}.
 		 */
 		(event: Event, data: any | null): void;
 	}
@@ -9977,13 +9935,13 @@ declare namespace imports.gi.Gdk {
 	}
 
 	/**
-	 * A function of this type is passed to gdk_window_invalidate_maybe_recurse().
+	 * A function of this type is passed to {@link Gdk.Window.invalidate_maybe_recurse}.
 	 * It gets called for each child of the window to determine whether to
 	 * recursively invalidate it or now.
 	 */
 	interface WindowChildFunc {
 		/**
-		 * A function of this type is passed to gdk_window_invalidate_maybe_recurse().
+		 * A function of this type is passed to {@link Gdk.Window.invalidate_maybe_recurse}.
 		 * It gets called for each child of the window to determine whether to
 		 * recursively invalidate it or now.
 		 * @param window a {@link Window}
@@ -10153,13 +10111,13 @@ declare namespace imports.gi.Gdk {
 		 * Copies a {@link Event}, copying or incrementing the reference count of the
 		 * resources associated with it (e.g. #GdkWindow’s and strings).
 		 * @returns a copy of #event. The returned {@link Event} should be freed with
-		 * gdk_event_free().
+		 * {@link Gdk.Event.free}.
 		 */
 		copy(): Event;
 		/**
 		 * Frees a {@link Event}, freeing or decrementing any resources associated with it.
 		 * Note that this function should only be called with events returned from
-		 * functions such as gdk_event_peek(), gdk_event_get(), gdk_event_copy()
+		 * functions such as {@link Gdk.event.peek}, gdk_event_get(), gdk_event_copy()
 		 * and gdk_event_new().
 		 */
 		free(): void;
@@ -10209,7 +10167,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Note: the #GdkDeviceTool<!-- -->s will be constant during
 		 * the application lifetime, if settings must be stored
-		 * persistently across runs, see gdk_device_tool_get_serial()
+		 * persistently across runs, see {@link Gdk.DeviceTool.get_serial}
 		 * @returns The current device tool, or %NULL
 		 */
 		get_device_tool(): DeviceTool;
@@ -10228,7 +10186,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Extracts the hardware keycode from an event.
 		 * 
-		 * Also see gdk_event_get_scancode().
+		 * Also see {@link Gdk.event.get_scancode}.
 		 * @returns %TRUE if the event delivered a hardware keycode
 		 * 
 		 * location to store the keycode
@@ -10280,7 +10238,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Retrieves the scroll deltas from a {@link Event}
 		 * 
-		 * See also: gdk_event_get_scroll_direction()
+		 * See also: {@link Gdk.event.get_scroll_direction}
 		 * @returns %TRUE if the event contains smooth scroll information
 		 *   and %FALSE otherwise
 		 * 
@@ -10297,7 +10255,7 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * If you wish to handle both discrete and smooth scrolling, you
 		 * should check the return value of this function, or of
-		 * gdk_event_get_scroll_deltas(); for instance:
+		 * {@link Gdk.event.get_scroll_deltas}; for instance:
 		 * 
 		 * |[<!-- language="C" -->
 		 *   GdkScrollDirection direction;
@@ -10342,7 +10300,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * This function returns the hardware (slave) {@link Device} that has
 		 * triggered the event, falling back to the virtual (master) device
-		 * (as in gdk_event_get_device()) if the event wasn’t caused by
+		 * (as in {@link Gdk.event.get_device}) if the event wasn’t caused by
 		 * interaction with a hardware device. This may happen for example
 		 * in synthesized crossing events after a #GdkWindow updates its
 		 * geometry or a grab is acquired/released.
@@ -10387,13 +10345,13 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Appends a copy of the given event onto the front of the event
 		 * queue for event->any.window’s display, or the default event
-		 * queue if event->any.window is %NULL. See gdk_display_put_event().
+		 * queue if event->any.window is %NULL. See {@link Gdk.Display.put_event}.
 		 */
 		put(): void;
 		/**
 		 * Sets the device for #event to #device. The event must
 		 * have been allocated by GTK+, for instance, by
-		 * gdk_event_copy().
+		 * {@link Gdk.Event.copy}.
 		 * @param device a {@link Device}
 		 */
 		set_device(device: Device): void;
@@ -10405,7 +10363,7 @@ declare namespace imports.gi.Gdk {
 		/**
 		 * Sets the screen for #event to #screen. The event must
 		 * have been allocated by GTK+, for instance, by
-		 * gdk_event_copy().
+		 * {@link Gdk.Event.copy}.
 		 * @param screen a {@link Screen}
 		 */
 		set_screen(screen: Screen): void;
@@ -10413,7 +10371,7 @@ declare namespace imports.gi.Gdk {
 		 * Sets the slave device for #event to #device.
 		 * 
 		 * The event must have been allocated by GTK+,
-		 * for instance by gdk_event_copy().
+		 * for instance by {@link Gdk.Event.copy}.
 		 * @param device a {@link Device}
 		 */
 		set_source_device(device: Device): void;
@@ -10421,7 +10379,7 @@ declare namespace imports.gi.Gdk {
 		 * This function returns whether a {@link EventButton} should trigger a
 		 * context menu, according to platform conventions. The right mouse
 		 * button always triggers context menus. Additionally, if
-		 * gdk_keymap_get_modifier_mask() returns a non-0 mask for
+		 * {@link Gdk.Keymap.get_modifier_mask} returns a non-0 mask for
 		 * %GDK_MODIFIER_INTENT_CONTEXT_MENU, then the left mouse button will
 		 * also trigger a context menu if this modifier is pressed.
 		 * 
@@ -10532,16 +10490,16 @@ declare namespace imports.gi.Gdk {
 		 * Creates a new event of the given type. All fields are set to 0.
 		 * @param type a {@link EventType}
 		 * @returns a newly-allocated {@link Event}. The returned #GdkEvent
-		 * should be freed with gdk_event_free().
+		 * should be freed with {@link Gdk.Event.free}.
 		 */
 		public static new(type: EventType): Event;
 		/**
 		 * Checks all open displays for a {@link Event} to process,to be processed
 		 * on, fetching events from the windowing system if necessary.
-		 * See gdk_display_get_event().
+		 * See {@link Gdk.Display.get_event}.
 		 * @returns the next {@link Event} to be processed, or %NULL
 		 * if no events are pending. The returned #GdkEvent should be freed
-		 * with gdk_event_free().
+		 * with {@link Gdk.Event.free}.
 		 */
 		public static get(): Event | null;
 		/**
@@ -10549,26 +10507,26 @@ declare namespace imports.gi.Gdk {
 		 * 
 		 * Note that GTK+ uses this to install its own event handler, so it is
 		 * usually not useful for GTK+ applications. (Although an application
-		 * can call this function then call gtk_main_do_event() to pass
+		 * can call this function then call {@link Gtk.main.do_event} to pass
 		 * events to GTK+.)
 		 * @param func the function to call to handle events from GDK.
 		 * @param data user data to pass to the function.
 		 * @param notify the function to call when the handler function is removed, i.e. when
-		 *          gdk_event_handler_set() is called with another event handler.
+		 *          {@link Gdk.event.handler_set} is called with another event handler.
 		 */
 		public static handler_set(func: EventFunc, data: any | null, notify: GLib.DestroyNotify): void;
 		/**
 		 * If there is an event waiting in the event queue of some open
-		 * display, returns a copy of it. See gdk_display_peek_event().
+		 * display, returns a copy of it. See {@link Gdk.Display.peek_event}.
 		 * @returns a copy of the first {@link Event} on some event
 		 * queue, or %NULL if no events are in any queues. The returned
-		 * #GdkEvent should be freed with gdk_event_free().
+		 * #GdkEvent should be freed with {@link Gdk.Event.free}.
 		 */
 		public static peek(): Event | null;
 		/**
 		 * Request more motion notifies if #event is a motion notify hint event.
 		 * 
-		 * This function should be used instead of gdk_window_get_pointer() to
+		 * This function should be used instead of {@link Gdk.Window.get_pointer} to
 		 * request further motion notifies, because it also works for extension
 		 * events where motion notifies are provided for devices other than the
 		 * core pointer. Coordinate extraction, processing and requesting more
@@ -10616,7 +10574,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * Finds or creates an atom corresponding to a given string.
 	 * 
-	 * Note that this function is identical to gdk_atom_intern() except
+	 * Note that this function is identical to {@link Gdk.atom.intern} except
 	 * that if a new {@link Atom} is created the string itself is used rather
 	 * than a copy. This saves memory, but can only be used if the string
 	 * will always exist. It can be used with statically
@@ -10637,7 +10595,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * Creates a Cairo context for drawing to #window.
 	 * 
-	 * Note that calling cairo_reset_clip() on the resulting #cairo_t will
+	 * Note that calling {@link Cairo.reset_clip} on the resulting #cairo_t will
 	 * produce undefined results, so avoid it at all costs.
 	 * 
 	 * Typically, this function is used to draw on a {@link Window} out of the paint
@@ -10649,7 +10607,7 @@ declare namespace imports.gi.Gdk {
 	 * instead. GTK will automatically do this for you when drawing a widget.
 	 * @param window a {@link Window}
 	 * @returns A newly created Cairo context. Free with
-	 *  cairo_destroy() when you are done drawing.
+	 *  {@link Cairo.destroy} when you are done drawing.
 	 */
 	function cairo_create(window: Window): cairo.Context;
 
@@ -10683,7 +10641,7 @@ declare namespace imports.gi.Gdk {
 	function cairo_draw_from_gl(cr: cairo.Context, window: Window, source: number, source_type: number, buffer_scale: number, x: number, y: number, width: number, height: number): void;
 
 	/**
-	 * This is a convenience function around cairo_clip_extents().
+	 * This is a convenience function around {@link Cairo.clip_extents}.
 	 * It rounds the clip extents to integer coordinates and returns
 	 * a boolean indicating if a clip area exists.
 	 * @param cr a cairo context
@@ -10721,9 +10679,9 @@ declare namespace imports.gi.Gdk {
 	 * #surface is more than 50% opaque.
 	 * 
 	 * This function takes into account device offsets that might be
-	 * set with cairo_surface_set_device_offset().
+	 * set with {@link Cairo.Surface.set_device_offset}.
 	 * @param surface a cairo surface
-	 * @returns A #cairo_region_t; must be freed with cairo_region_destroy()
+	 * @returns A #cairo_region_t; must be freed with {@link Cairo.Region.destroy}
 	 */
 	function cairo_region_create_from_surface(surface: cairo.Surface): cairo.Region;
 
@@ -10775,7 +10733,7 @@ declare namespace imports.gi.Gdk {
 	 * @param pixbuf a {@link Pixbuf}
 	 * @param scale the scale of the new surface, or 0 to use same as #window
 	 * @param for_window The window this will be drawn to, or %NULL
-	 * @returns a new cairo surface, must be freed with cairo_surface_destroy()
+	 * @returns a new cairo surface, must be freed with {@link Cairo.Surface.destroy}
 	 */
 	function cairo_surface_create_from_pixbuf(pixbuf: GdkPixbuf.Pixbuf, scale: number, for_window: Window | null): cairo.Surface;
 
@@ -10799,7 +10757,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Disables multidevice support in GDK. This call must happen prior
-	 * to gdk_display_open(), gtk_init(), gtk_init_with_args() or
+	 * to {@link Gdk.Display.open}, gtk_init(), gtk_init_with_args() or
 	 * gtk_init_check() in order to take effect.
 	 * 
 	 * Most common GTK+ applications won’t ever need to call this. Only
@@ -10815,7 +10773,7 @@ declare namespace imports.gi.Gdk {
 	 * This function is called by the drag source.
 	 * 
 	 * This function does not need to be called in managed drag and drop
-	 * operations. See gdk_drag_context_manage_dnd() for more information.
+	 * operations. See {@link Gdk.DragContext.manage_dnd} for more information.
 	 * @param context a {@link DragContext}
 	 * @param time_ the timestamp for this operation
 	 */
@@ -10824,7 +10782,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * Starts a drag and creates a new drag context for it.
 	 * This function assumes that the drag is controlled by the
-	 * client pointer device, use gdk_drag_begin_for_device() to
+	 * client pointer device, use {@link Gdk.drag.begin_for_device} to
 	 * begin a drag with a different device.
 	 * 
 	 * This function is called by the drag source.
@@ -10867,7 +10825,7 @@ declare namespace imports.gi.Gdk {
 	 * This function is called by the drag source.
 	 * 
 	 * This function does not need to be called in managed drag and drop
-	 * operations. See gdk_drag_context_manage_dnd() for more information.
+	 * operations. See {@link Gdk.DragContext.manage_dnd} for more information.
 	 * @param context a {@link DragContext}
 	 * @param time_ the timestamp for this operation
 	 */
@@ -10881,7 +10839,7 @@ declare namespace imports.gi.Gdk {
 	 * be the last call before dropping the reference to the
 	 * #context.
 	 * 
-	 * The {@link DragContext} will only take the first gdk_drag_drop_done()
+	 * The {@link DragContext} will only take the first {@link Gdk.drag.drop_done}
 	 * call as effective, if this function is called multiple times,
 	 * all subsequent calls will be ignored.
 	 * @param context a {@link DragContext}
@@ -10904,7 +10862,7 @@ declare namespace imports.gi.Gdk {
 	 * given pointer position.
 	 * 
 	 * This function is called by the drag source to obtain the
-	 * #dest_window and #protocol parameters for gdk_drag_motion().
+	 * #dest_window and #protocol parameters for {@link Gdk.drag.motion}.
 	 * @param context a {@link DragContext}
 	 * @param drag_window a window which may be at the pointer position, but
 	 *     should be ignored, since it is put up by the drag source as an icon
@@ -10931,11 +10889,11 @@ declare namespace imports.gi.Gdk {
 	 * This function is called by the drag source.
 	 * 
 	 * This function does not need to be called in managed drag and drop
-	 * operations. See gdk_drag_context_manage_dnd() for more information.
+	 * operations. See {@link Gdk.DragContext.manage_dnd} for more information.
 	 * @param context a {@link DragContext}
 	 * @param dest_window the new destination window, obtained by
-	 *     gdk_drag_find_window()
-	 * @param protocol the DND protocol in use, obtained by gdk_drag_find_window()
+	 *     {@link Gdk.drag_find_window}
+	 * @param protocol the DND protocol in use, obtained by {@link Gdk.drag_find_window}
 	 * @param x_root the x position of the pointer in root coordinates
 	 * @param y_root the y position of the pointer in root coordinates
 	 * @param suggested_action the suggested action
@@ -10949,7 +10907,7 @@ declare namespace imports.gi.Gdk {
 	 * Selects one of the actions offered by the drag source.
 	 * 
 	 * This function is called by the drag destination in response to
-	 * gdk_drag_motion() called by the drag source.
+	 * {@link Gdk.drag.motion} called by the drag source.
 	 * @param context a {@link DragContext}
 	 * @param action the selected action which will be taken when a drop happens,
 	 *    or 0 to indicate that a drop will not be accepted
@@ -10979,7 +10937,7 @@ declare namespace imports.gi.Gdk {
 	function drop_reply(context: DragContext, accepted: boolean, time_: number): void;
 
 	/**
-	 * Removes an error trap pushed with gdk_error_trap_push().
+	 * Removes an error trap pushed with {@link Gdk.error.trap_push}.
 	 * May block until an error has been definitively received
 	 * or not received from the X server. gdk_error_trap_pop_ignored()
 	 * is preferred if you don’t need to know whether an error
@@ -10995,7 +10953,7 @@ declare namespace imports.gi.Gdk {
 	function error_trap_pop(): number;
 
 	/**
-	 * Removes an error trap pushed with gdk_error_trap_push(), but
+	 * Removes an error trap pushed with {@link Gdk.error.trap_push}, but
 	 * without bothering to wait and see whether an error occurred.  If an
 	 * error arrives later asynchronously that was triggered while the
 	 * trap was pushed, that error will be ignored.
@@ -11008,7 +10966,7 @@ declare namespace imports.gi.Gdk {
 	 * is not possible to avoid the X error in any other way. Errors are
 	 * ignored on all {@link Display} currently known to the
 	 * #GdkDisplayManager. If you don’t care which error happens and just
-	 * want to ignore everything, pop with gdk_error_trap_pop_ignored().
+	 * want to ignore everything, pop with {@link Gdk.error.trap_pop_ignored}.
 	 * If you need the error code, use gdk_error_trap_pop() which may have
 	 * to block and wait for the error to arrive from the X server.
 	 * 
@@ -11036,10 +10994,10 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * Checks all open displays for a {@link Event} to process,to be processed
 	 * on, fetching events from the windowing system if necessary.
-	 * See gdk_display_get_event().
+	 * See {@link Gdk.Display.get_event}.
 	 * @returns the next {@link Event} to be processed, or %NULL
 	 * if no events are pending. The returned #GdkEvent should be freed
-	 * with gdk_event_free().
+	 * with {@link Gdk.Event.free}.
 	 */
 	function event_get(): Event | null;
 
@@ -11048,28 +11006,28 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * Note that GTK+ uses this to install its own event handler, so it is
 	 * usually not useful for GTK+ applications. (Although an application
-	 * can call this function then call gtk_main_do_event() to pass
+	 * can call this function then call {@link Gtk.main.do_event} to pass
 	 * events to GTK+.)
 	 * @param func the function to call to handle events from GDK.
 	 * @param data user data to pass to the function.
 	 * @param notify the function to call when the handler function is removed, i.e. when
-	 *          gdk_event_handler_set() is called with another event handler.
+	 *          {@link Gdk.event.handler_set} is called with another event handler.
 	 */
 	function event_handler_set(func: EventFunc, data: any | null, notify: GLib.DestroyNotify): void;
 
 	/**
 	 * If there is an event waiting in the event queue of some open
-	 * display, returns a copy of it. See gdk_display_peek_event().
+	 * display, returns a copy of it. See {@link Gdk.Display.peek_event}.
 	 * @returns a copy of the first {@link Event} on some event
 	 * queue, or %NULL if no events are in any queues. The returned
-	 * #GdkEvent should be freed with gdk_event_free().
+	 * #GdkEvent should be freed with {@link Gdk.Event.free}.
 	 */
 	function event_peek(): Event | null;
 
 	/**
 	 * Request more motion notifies if #event is a motion notify hint event.
 	 * 
-	 * This function should be used instead of gdk_window_get_pointer() to
+	 * This function should be used instead of {@link Gdk.Window.get_pointer} to
 	 * request further motion notifies, because it also works for extension
 	 * events where motion notifies are provided for devices other than the
 	 * core pointer. Coordinate extraction, processing and requesting more
@@ -11164,7 +11122,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Gets the program class. Unless the program class has explicitly
-	 * been set with gdk_set_program_class() or with the `--class`
+	 * been set with {@link Gdk.set.program_class} or with the `--class`
 	 * commandline option, the default value is the program name (determined
 	 * with g_get_prgname()) with the first character converted to uppercase.
 	 * @returns the program class.
@@ -11207,7 +11165,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Grabs the keyboard so that all events are passed to this
-	 * application until the keyboard is ungrabbed with gdk_keyboard_ungrab().
+	 * application until the keyboard is ungrabbed with {@link Gdk.keyboard.ungrab}.
 	 * This overrides any previous keyboard grab by this client.
 	 * 
 	 * If you set up anything at the time you take the grab that needs to be cleaned
@@ -11312,7 +11270,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Lists the available visuals for the default screen.
-	 * (See gdk_screen_list_visuals())
+	 * (See {@link Gdk.Screen.list_visuals})
 	 * A visual describes a hardware image data format.
 	 * For example, a visual might support 24-bit color, or 8-bit color,
 	 * and might expect pixels to be in a certain format.
@@ -11330,7 +11288,7 @@ declare namespace imports.gi.Gdk {
 	 * windows.
 	 * 
 	 * GTK+ will call this function automatically after opening the first
-	 * #GtkWindow unless gtk_window_set_auto_startup_notification() is called
+	 * #GtkWindow unless {@link Gtk.Window.set_auto_startup_notification} is called
 	 * to disable that feature.
 	 */
 	function notify_startup_complete(): void;
@@ -11341,7 +11299,7 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * GTK+ will call this function automatically for #GtkWindow
 	 * with custom startup-notification identifier unless
-	 * gtk_window_set_auto_startup_notification() is called to
+	 * {@link Gtk.Window.set_auto_startup_notification} is called to
 	 * disable that feature.
 	 * @param startup_id a startup-notification identifier, for which
 	 *     notification process should be completed
@@ -11370,7 +11328,7 @@ declare namespace imports.gi.Gdk {
 	 * Sets #window to be embedded in #embedder.
 	 * 
 	 * To fully embed an offscreen window, in addition to calling this
-	 * function, it is also necessary to handle the {@link Window}::pick-embedded-child
+	 * function, it is also necessary to handle the {@link Window.pick_embedded_child}
 	 * signal on the #embedder and the #GdkWindow::to-embedder and
 	 * #GdkWindow::from-embedder signals on #window.
 	 * @param window a {@link Window}
@@ -11383,7 +11341,7 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * The context must be freed when you’re finished with it.
 	 * 
-	 * When using GTK+, normally you should use gtk_widget_get_pango_context()
+	 * When using GTK+, normally you should use {@link Gtk.Widget.get_pango_context}
 	 * instead of this function, to get the appropriate context for
 	 * the widget you intend to render text onto.
 	 * 
@@ -11401,7 +11359,7 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * The context must be freed when you’re finished with it.
 	 * 
-	 * When using GTK+, normally you should use gtk_widget_get_pango_context()
+	 * When using GTK+, normally you should use {@link Gtk.Widget.get_pango_context}
 	 * instead of this function, to get the appropriate context for
 	 * the widget you intend to render text onto.
 	 * 
@@ -11420,7 +11378,7 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * The context must be freed when you’re finished with it.
 	 * 
-	 * When using GTK+, normally you should use gtk_widget_get_pango_context()
+	 * When using GTK+, normally you should use {@link Gtk.Widget.get_pango_context}
 	 * instead of this function, to get the appropriate context for
 	 * the widget you intend to render text onto.
 	 * 
@@ -11481,7 +11439,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Parse command line arguments, and store for future
-	 * use by calls to gdk_display_open().
+	 * use by calls to {@link Gdk.Display.open}.
 	 * 
 	 * Any arguments used by GDK are removed from the array and #argc and #argv are
 	 * updated accordingly.
@@ -11495,7 +11453,7 @@ declare namespace imports.gi.Gdk {
 	 * Transfers image data from a #cairo_surface_t and converts it to an RGB(A)
 	 * representation inside a {@link Pixbuf}. This allows you to efficiently read
 	 * individual pixels from cairo surfaces. For #GdkWindows, use
-	 * gdk_pixbuf_get_from_window() instead.
+	 * {@link GdkPixbuf.get_from_window} instead.
 	 * 
 	 * This function will create an RGB pixbuf with 8 bits per channel.
 	 * The pixbuf will contain an alpha channel if the #surface contains one.
@@ -11548,7 +11506,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Grabs the pointer (usually a mouse) so that all events are passed to this
-	 * application until the pointer is ungrabbed with gdk_pointer_ungrab(), or
+	 * application until the pointer is ungrabbed with {@link Gdk.pointer.ungrab}, or
 	 * the grab window becomes unviewable.
 	 * This overrides any previous pointer grab by this client.
 	 * 
@@ -11689,14 +11647,14 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * location
 	 *   to store a pointer to the data. The retrieved data should be
-	 *   freed with g_free() when you are finished using it.
+	 *   freed with {@link G.free} when you are finished using it.
 	 */
 	function property_get(window: Window, property: Atom, type: Atom, offset: number, length: number, pdelete: number): [ boolean, Atom, number, number, number[] ];
 
 	/**
 	 * This function returns the available bit depths for the default
 	 * screen. It’s equivalent to listing the visuals
-	 * (gdk_list_visuals()) and then looking at the depth field in each
+	 * {@link (gdk.list_visuals}) and then looking at the depth field in each
 	 * visual, removing duplicates.
 	 * 
 	 * The array returned by this function should not be freed.
@@ -11710,7 +11668,7 @@ declare namespace imports.gi.Gdk {
 	/**
 	 * This function returns the available visual types for the default
 	 * screen. It’s equivalent to listing the visuals
-	 * (gdk_list_visuals()) and then looking at the type field in each
+	 * {@link (gdk.list_visuals}) and then looking at the type field in each
 	 * visual, removing duplicates.
 	 * 
 	 * The array returned by this function should not be freed.
@@ -11797,13 +11755,13 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Retrieves selection data that was stored by the selection
-	 * data in response to a call to gdk_selection_convert(). This function
+	 * data in response to a call to {@link Gdk.selection.convert}. This function
 	 * will not be used by applications, who should use the #GtkClipboard
 	 * API instead.
 	 * @param requestor the window on which the data is stored
 	 * @param data location to store a pointer to the retrieved data.
 	 *        If the retrieval failed, %NULL we be stored here, otherwise, it
-	 *        will be non-%NULL and the returned data should be freed with g_free()
+	 *        will be non-%NULL and the returned data should be freed with {@link G.free}
 	 *        when you are finished using it. The length of the
 	 *        allocated memory is one more than the length
 	 *        of the returned data, and the final byte will always
@@ -11863,7 +11821,7 @@ declare namespace imports.gi.Gdk {
 	 * broadway, wayland. You can also include a * in the
 	 * list to try all remaining backends.
 	 * 
-	 * This call must happen prior to gdk_display_open(),
+	 * This call must happen prior to {@link Gdk.Display.open},
 	 * gtk_init(), gtk_init_with_args() or gtk_init_check()
 	 * in order to take effect.
 	 * @param backends a comma-separated list of backends
@@ -11872,7 +11830,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Set the double click time for the default display. See
-	 * gdk_display_set_double_click_time().
+	 * {@link Gdk.Display.set_double_click_time}.
 	 * See also gdk_display_set_double_click_distance().
 	 * Applications should not set this, it is a
 	 * global user-configured setting.
@@ -11902,7 +11860,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Obtains a desktop-wide setting, such as the double-click time,
-	 * for the default screen. See gdk_screen_get_setting().
+	 * for the default screen. See {@link Gdk.Screen.get_setting}.
 	 * @param name the name of the setting.
 	 * @param value location to store the value of the setting.
 	 * @returns %TRUE if the setting existed and a value was stored
@@ -11931,7 +11889,7 @@ declare namespace imports.gi.Gdk {
 	 * run in their own virtual windowing system (e.g. Xvfb) is not
 	 * recommended.
 	 * 
-	 * Also, gdk_test_simulate_button() is a fairly low level function,
+	 * Also, {@link Gdk.test.simulate_button} is a fairly low level function,
 	 * for most testing purposes, gtk_test_widget_click() is the right
 	 * function to call which will generate a button press event followed
 	 * by its accompanying button release event.
@@ -11959,7 +11917,7 @@ declare namespace imports.gi.Gdk {
 	 * be warped and #window origin will be used as mouse pointer
 	 * location for the event.
 	 * 
-	 * Also, gdk_test_simulate_key() is a fairly low level function,
+	 * Also, {@link Gdk.test.simulate_key} is a fairly low level function,
 	 * for most testing purposes, gtk_test_widget_send_key() is the
 	 * right function to call which will generate a key press event
 	 * followed by its accompanying key release event.
@@ -11986,12 +11944,12 @@ declare namespace imports.gi.Gdk {
 	 * 
 	 * location to store the list
 	 *            of strings or %NULL. The list should be freed with
-	 *            g_strfreev().
+	 *            {@link G.strfreev}.
 	 */
 	function text_property_to_utf8_list_for_display(display: Display, encoding: Atom, format: number, text: number[], length: number): [ number, string[] ];
 
 	/**
-	 * A wrapper for the common usage of gdk_threads_add_idle_full()
+	 * A wrapper for the common usage of {@link Gdk.threads.add_idle_full}
 	 * assigning the default priority, #G_PRIORITY_DEFAULT_IDLE.
 	 * 
 	 * See gdk_threads_add_idle_full().
@@ -12006,7 +11964,7 @@ declare namespace imports.gi.Gdk {
 	 * events pending.  If the function returns %FALSE it is automatically
 	 * removed from the list of event sources and will not be called again.
 	 * 
-	 * This variant of g_idle_add_full() calls #function with the GDK lock
+	 * This variant of {@link G.idle_add_full} calls #function with the GDK lock
 	 * held. It can be thought of a MT-safe version for GTK+ widgets for the
 	 * following use case, where you have to worry about idle_callback()
 	 * running in thread A and accessing #self after it has been finalized
@@ -12053,7 +12011,7 @@ declare namespace imports.gi.Gdk {
 	function threads_add_idle_full(priority: number, _function: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify | null): number;
 
 	/**
-	 * A wrapper for the common usage of gdk_threads_add_timeout_full()
+	 * A wrapper for the common usage of {@link Gdk.threads.add_timeout_full}
 	 * assigning the default priority, #G_PRIORITY_DEFAULT.
 	 * 
 	 * See gdk_threads_add_timeout_full().
@@ -12079,7 +12037,7 @@ declare namespace imports.gi.Gdk {
 	 * timeout is recalculated based on the current time and the given interval
 	 * (it does not try to “catch up” time lost in delays).
 	 * 
-	 * This variant of g_timeout_add_full() can be thought of a MT-safe version
+	 * This variant of {@link G.timeout_add_full} can be thought of a MT-safe version
 	 * for GTK+ widgets for the following use case:
 	 * 
 	 * |[<!-- language="C" -->
@@ -12121,7 +12079,7 @@ declare namespace imports.gi.Gdk {
 	function threads_add_timeout_full(priority: number, interval: number, _function: GLib.SourceFunc, data: any | null, notify: GLib.DestroyNotify | null): number;
 
 	/**
-	 * A wrapper for the common usage of gdk_threads_add_timeout_seconds_full()
+	 * A wrapper for the common usage of {@link Gdk.threads.add_timeout_seconds_full}
 	 * assigning the default priority, #G_PRIORITY_DEFAULT.
 	 * 
 	 * For details, see gdk_threads_add_timeout_full().
@@ -12133,7 +12091,7 @@ declare namespace imports.gi.Gdk {
 	function threads_add_timeout_seconds(interval: number, _function: GLib.SourceFunc, data: any | null): number;
 
 	/**
-	 * A variant of gdk_threads_add_timeout_full() with second-granularity.
+	 * A variant of {@link Gdk.threads.add_timeout_full} with second-granularity.
 	 * See g_timeout_add_seconds_full() for a discussion of why it is
 	 * a good idea to use this function if you don’t need finer granularity.
 	 * @param priority the priority of the timeout source. Typically this will be in the
@@ -12156,7 +12114,7 @@ declare namespace imports.gi.Gdk {
 
 	/**
 	 * Initializes GDK so that it can be used from multiple threads
-	 * in conjunction with gdk_threads_enter() and gdk_threads_leave().
+	 * in conjunction with {@link Gdk.threads.enter} and gdk_threads_leave().
 	 * 
 	 * This call must be made before any use of the main loop from
 	 * GTK+; to be safe, call it before gtk_init().
@@ -12164,14 +12122,14 @@ declare namespace imports.gi.Gdk {
 	function threads_init(): void;
 
 	/**
-	 * Leaves a critical region begun with gdk_threads_enter().
+	 * Leaves a critical region begun with {@link Gdk.threads.enter}.
 	 */
 	function threads_leave(): void;
 
 	/**
 	 * Allows the application to replace the standard method that
 	 * GDK uses to protect its data structures. Normally, GDK
-	 * creates a single #GMutex that is locked by gdk_threads_enter(),
+	 * creates a single #GMutex that is locked by {@link Gdk.threads.enter},
 	 * and released by gdk_threads_leave(); using this function an
 	 * application provides, instead, a function #enter_fn that is
 	 * called by gdk_threads_enter() and a function #leave_fn that is

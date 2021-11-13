@@ -16,7 +16,7 @@ declare namespace imports.gi.GModule {
 		public close(): boolean;
 		/**
 		 * Ensures that a module will never be unloaded.
-		 * Any future g_module_close() calls on the module will be ignored.
+		 * Any future {@link GModule.close} calls on the module will be ignored.
 		 */
 		public make_resident(): void;
 		/**
@@ -38,7 +38,7 @@ declare namespace imports.gi.GModule {
 	}
 
 	/**
-	 * Errors returned by g_module_open_full().
+	 * Errors returned by {@link GModule.open_full}.
 	 */
 	enum ModuleError {
 		/**
@@ -46,13 +46,13 @@ declare namespace imports.gi.GModule {
 		 */
 		FAILED = 0,
 		/**
-		 * a module returned an error from its `g_module_check_init()` function
+		 * a module returned an error from its {@link `g.module_check_init}` function
 		 */
 		CHECK_FAILED = 1
 	}
 
 	/**
-	 * Flags passed to g_module_open().
+	 * Flags passed to {@link GModule.open}.
 	 * Note that these flags are not supported on all platforms.
 	 */
 	enum ModuleFlags {
@@ -77,7 +77,7 @@ declare namespace imports.gi.GModule {
 
 	/**
 	 * Specifies the type of the module initialization function.
-	 * If a module contains a function named g_module_check_init() it is called
+	 * If a module contains a function named {@link GModule.check_init} it is called
 	 * automatically when the module is loaded. It is passed the #GModule structure
 	 * and should return %NULL on success or a string describing the initialization
 	 * error.
@@ -85,7 +85,7 @@ declare namespace imports.gi.GModule {
 	interface ModuleCheckInit {
 		/**
 		 * Specifies the type of the module initialization function.
-		 * If a module contains a function named g_module_check_init() it is called
+		 * If a module contains a function named {@link GModule.check_init} it is called
 		 * automatically when the module is loaded. It is passed the #GModule structure
 		 * and should return %NULL on success or a string describing the initialization
 		 * error.
@@ -97,14 +97,14 @@ declare namespace imports.gi.GModule {
 
 	/**
 	 * Specifies the type of the module function called when it is unloaded.
-	 * If a module contains a function named g_module_unload() it is called
+	 * If a module contains a function named {@link GModule.unload} it is called
 	 * automatically when the module is unloaded.
 	 * It is passed the #GModule structure.
 	 */
 	interface ModuleUnload {
 		/**
 		 * Specifies the type of the module function called when it is unloaded.
-		 * If a module contains a function named g_module_unload() it is called
+		 * If a module contains a function named {@link GModule.unload} it is called
 		 * automatically when the module is unloaded.
 		 * It is passed the #GModule structure.
 		 * @param module the #GModule about to be unloaded
@@ -122,7 +122,7 @@ declare namespace imports.gi.GModule {
 	 * standard platform-specific directory, though this is not recommended
 	 * since the wrong module may be found.
 	 * 
-	 * For example, calling g_module_build_path() on a Linux system with a
+	 * For example, calling {@link GModule.build_path} on a Linux system with a
 	 * #directory of `/lib` and a #module_name of "mylibrary" will return
 	 * `/lib/libmylibrary.so`. On a Windows system, using `\Windows` as the
 	 * directory it will return `\Windows\mylibrary.dll`.

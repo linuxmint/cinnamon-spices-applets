@@ -490,25 +490,6 @@ declare namespace imports.gi.Cvc {
 		public constructor(options?: Partial<MixerUIDeviceInitOptions>);
 	}
 
-	export interface ChannelMapClassInitOptions {}
-	interface ChannelMapClass {}
-	class ChannelMapClass {
-		public constructor(options?: Partial<ChannelMapClassInitOptions>);
-		public volume_changed: {(channel_map: ChannelMap, set: boolean): void;};
-	}
-
-	export interface ChannelMapPrivateInitOptions {}
-	interface ChannelMapPrivate {}
-	class ChannelMapPrivate {
-		public constructor(options?: Partial<ChannelMapPrivateInitOptions>);
-	}
-
-	export interface MixerCardClassInitOptions {}
-	interface MixerCardClass {}
-	class MixerCardClass {
-		public constructor(options?: Partial<MixerCardClassInitOptions>);
-	}
-
 	export interface MixerCardPortInitOptions {}
 	interface MixerCardPort {}
 	class MixerCardPort {
@@ -520,12 +501,6 @@ declare namespace imports.gi.Cvc {
 		public available: number;
 		public direction: number;
 		public profiles: GLib.List;
-	}
-
-	export interface MixerCardPrivateInitOptions {}
-	interface MixerCardPrivate {}
-	class MixerCardPrivate {
-		public constructor(options?: Partial<MixerCardPrivateInitOptions>);
 	}
 
 	export interface MixerCardProfileInitOptions {}
@@ -541,104 +516,6 @@ declare namespace imports.gi.Cvc {
 		public compare(b: MixerCardProfile): number;
 	}
 
-	export interface MixerControlClassInitOptions {}
-	interface MixerControlClass {}
-	class MixerControlClass {
-		public constructor(options?: Partial<MixerControlClassInitOptions>);
-		public state_changed: {(control: MixerControl, new_state: MixerControlState): void;};
-		public stream_added: {(control: MixerControl, id: number): void;};
-		public stream_changed: {(control: MixerControl, id: number): void;};
-		public stream_removed: {(control: MixerControl, id: number): void;};
-		public card_added: {(control: MixerControl, id: number): void;};
-		public card_removed: {(control: MixerControl, id: number): void;};
-		public default_sink_changed: {(control: MixerControl, id: number): void;};
-		public default_source_changed: {(control: MixerControl, id: number): void;};
-		public active_output_update: {(control: MixerControl, id: number): void;};
-		public active_input_update: {(control: MixerControl, id: number): void;};
-		public output_added: {(control: MixerControl, id: number): void;};
-		public input_added: {(control: MixerControl, id: number): void;};
-		public output_removed: {(control: MixerControl, id: number): void;};
-		public input_removed: {(control: MixerControl, id: number): void;};
-		public audio_device_selection_needed: {(control: MixerControl, id: number, show_dialog: boolean, choices: HeadsetPortChoice): void;};
-	}
-
-	export interface MixerControlPrivateInitOptions {}
-	interface MixerControlPrivate {}
-	class MixerControlPrivate {
-		public constructor(options?: Partial<MixerControlPrivateInitOptions>);
-	}
-
-	export interface MixerEventRoleClassInitOptions {}
-	interface MixerEventRoleClass {}
-	class MixerEventRoleClass {
-		public constructor(options?: Partial<MixerEventRoleClassInitOptions>);
-	}
-
-	export interface MixerEventRolePrivateInitOptions {}
-	interface MixerEventRolePrivate {}
-	class MixerEventRolePrivate {
-		public constructor(options?: Partial<MixerEventRolePrivateInitOptions>);
-	}
-
-	export interface MixerSinkClassInitOptions {}
-	interface MixerSinkClass {}
-	class MixerSinkClass {
-		public constructor(options?: Partial<MixerSinkClassInitOptions>);
-	}
-
-	export interface MixerSinkInputClassInitOptions {}
-	interface MixerSinkInputClass {}
-	class MixerSinkInputClass {
-		public constructor(options?: Partial<MixerSinkInputClassInitOptions>);
-	}
-
-	export interface MixerSinkInputPrivateInitOptions {}
-	interface MixerSinkInputPrivate {}
-	class MixerSinkInputPrivate {
-		public constructor(options?: Partial<MixerSinkInputPrivateInitOptions>);
-	}
-
-	export interface MixerSinkPrivateInitOptions {}
-	interface MixerSinkPrivate {}
-	class MixerSinkPrivate {
-		public constructor(options?: Partial<MixerSinkPrivateInitOptions>);
-	}
-
-	export interface MixerSourceClassInitOptions {}
-	interface MixerSourceClass {}
-	class MixerSourceClass {
-		public constructor(options?: Partial<MixerSourceClassInitOptions>);
-	}
-
-	export interface MixerSourceOutputClassInitOptions {}
-	interface MixerSourceOutputClass {}
-	class MixerSourceOutputClass {
-		public constructor(options?: Partial<MixerSourceOutputClassInitOptions>);
-	}
-
-	export interface MixerSourceOutputPrivateInitOptions {}
-	interface MixerSourceOutputPrivate {}
-	class MixerSourceOutputPrivate {
-		public constructor(options?: Partial<MixerSourceOutputPrivateInitOptions>);
-	}
-
-	export interface MixerSourcePrivateInitOptions {}
-	interface MixerSourcePrivate {}
-	class MixerSourcePrivate {
-		public constructor(options?: Partial<MixerSourcePrivateInitOptions>);
-	}
-
-	export interface MixerStreamClassInitOptions {}
-	interface MixerStreamClass {}
-	class MixerStreamClass {
-		public constructor(options?: Partial<MixerStreamClassInitOptions>);
-		public push_volume: {(stream: MixerStream, operation: any | null): boolean;};
-		public change_is_muted: {(stream: MixerStream, is_muted: boolean): boolean;};
-		public change_port: {(stream: MixerStream, port: string): boolean;};
-		public monitor_update: {(stream: MixerStream, v: number): void;};
-		public monitor_suspend: {(stream: MixerStream): void;};
-	}
-
 	export interface MixerStreamPortInitOptions {}
 	interface MixerStreamPort {}
 	class MixerStreamPort {
@@ -647,24 +524,6 @@ declare namespace imports.gi.Cvc {
 		public human_port: string;
 		public priority: number;
 		public available: boolean;
-	}
-
-	export interface MixerStreamPrivateInitOptions {}
-	interface MixerStreamPrivate {}
-	class MixerStreamPrivate {
-		public constructor(options?: Partial<MixerStreamPrivateInitOptions>);
-	}
-
-	export interface MixerUIDeviceClassInitOptions {}
-	interface MixerUIDeviceClass {}
-	class MixerUIDeviceClass {
-		public constructor(options?: Partial<MixerUIDeviceClassInitOptions>);
-	}
-
-	export interface MixerUIDevicePrivateInitOptions {}
-	interface MixerUIDevicePrivate {}
-	class MixerUIDevicePrivate {
-		public constructor(options?: Partial<MixerUIDevicePrivateInitOptions>);
 	}
 
 	enum MixerControlState {

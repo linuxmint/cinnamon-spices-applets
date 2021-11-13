@@ -31,7 +31,7 @@ declare namespace imports.gi.Gio {
 	 * info database for changes (ie: newly installed or removed
 	 * applications).
 	 * 
-	 * Call g_app_info_monitor_get() to get a #GAppInfoMonitor and connect
+	 * Call {@link G.app_info_monitor_get} to get a #GAppInfoMonitor and connect
 	 * to the "changed" signal.
 	 * 
 	 * In the usual case, applications should try to make note of the change
@@ -55,7 +55,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The #GAppInfoMonitor will emit a "changed" signal in the
 		 * thread-default main context whenever the list of installed
-		 * applications (as reported by g_app_info_get_all()) may have changed.
+		 * applications (as reported by {@link G.app_info_get_all}) may have changed.
 		 * 
 		 * You must only call g_object_unref() on the return value from under
 		 * the same main context as you created it.
@@ -100,8 +100,8 @@ declare namespace imports.gi.Gio {
 		get_startup_notify_id(info: AppInfo, files: GLib.List): string | null;
 		/**
 		 * Called when an application has failed to launch, so that it can cancel
-		 * the application startup notification started in g_app_launch_context_get_startup_notify_id().
-		 * @param startup_notify_id the startup notification id that was returned by g_app_launch_context_get_startup_notify_id().
+		 * the application startup notification started in {@link G.app_launch_context_get_startup_notify_id}.
+		 * @param startup_notify_id the startup notification id that was returned by {@link G.app_launch_context_get_startup_notify_id}.
 		 */
 		launch_failed(startup_notify_id: string): void;
 		/**
@@ -181,7 +181,7 @@ declare namespace imports.gi.Gio {
 		inactivity_timeout: number;
 		/**
 		 * Whether the application is currently marked as busy through
-		 * g_application_mark_busy() or g_application_bind_busy_property().
+		 * {@link G.application_mark_busy} or g_application_bind_busy_property().
 		 */
 		readonly is_busy: boolean;
 		readonly is_registered: boolean;
@@ -200,7 +200,7 @@ declare namespace imports.gi.Gio {
 		 * Add an option to be handled by #application.
 		 * 
 		 * Calling this function is the equivalent of calling
-		 * g_application_add_main_option_entries() with a single #GOptionEntry
+		 * {@link G.application_add_main_option_entries} with a single #GOptionEntry
 		 * that has its arg_data member set to %NULL.
 		 * 
 		 * The parsed arguments will be packed into a #GVariantDict which
@@ -222,7 +222,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Adds main option entries to be handled by #application.
 		 * 
-		 * This function is comparable to g_option_context_add_main_entries().
+		 * This function is comparable to {@link G.option_context_add_main_entries}.
 		 * 
 		 * After the commandline arguments are parsed, the
 		 * #GApplication::handle-local-options signal will be emitted.  At this
@@ -281,7 +281,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Adds a #GOptionGroup to the commandline handling of #application.
 		 * 
-		 * This function is comparable to g_option_context_add_group().
+		 * This function is comparable to {@link G.option_context_add_group}.
 		 * 
 		 * Unlike g_application_add_main_option_entries(), this function does
 		 * not deal with %NULL #arg_data and never transmits options to the
@@ -308,7 +308,7 @@ declare namespace imports.gi.Gio {
 		 */
 		add_option_group(group: GLib.OptionGroup): void;
 		/**
-		 * Marks #application as busy (see g_application_mark_busy()) while
+		 * Marks #application as busy (see {@link G.application_mark_busy}) while
 		 * #property on #object is %TRUE.
 		 * 
 		 * The binding holds a reference to #application while it is active, but
@@ -336,7 +336,7 @@ declare namespace imports.gi.Gio {
 		 * normally be in use but we were unable to connect to the bus.
 		 * 
 		 * This function must not be called before the application has been
-		 * registered.  See g_application_get_is_registered().
+		 * registered.  See {@link G.application_get_is_registered}.
 		 * @returns a #GDBusConnection, or %NULL
 		 */
 		get_dbus_connection(): DBusConnection | null;
@@ -354,7 +354,7 @@ declare namespace imports.gi.Gio {
 		 * normally be in use but we were unable to connect to the bus.
 		 * 
 		 * This function must not be called before the application has been
-		 * registered.  See g_application_get_is_registered().
+		 * registered.  See {@link G.application_get_is_registered}.
 		 * @returns the object path, or %NULL
 		 */
 		get_dbus_object_path(): string | null;
@@ -369,20 +369,20 @@ declare namespace imports.gi.Gio {
 		 * Gets the current inactivity timeout for the application.
 		 * 
 		 * This is the amount of time (in milliseconds) after the last call to
-		 * g_application_release() before the application stops running.
+		 * {@link G.application_release} before the application stops running.
 		 * @returns the timeout, in milliseconds
 		 */
 		get_inactivity_timeout(): number;
 		/**
 		 * Gets the application's current busy state, as set through
-		 * g_application_mark_busy() or g_application_bind_busy_property().
+		 * {@link G.application_mark_busy} or g_application_bind_busy_property().
 		 * @returns %TRUE if #application is currently marked as busy
 		 */
 		get_is_busy(): boolean;
 		/**
 		 * Checks if #application is registered.
 		 * 
-		 * An application is registered if g_application_register() has been
+		 * An application is registered if {@link G.application_register} has been
 		 * successfully called.
 		 * @returns %TRUE if #application is registered
 		 */
@@ -396,7 +396,7 @@ declare namespace imports.gi.Gio {
 		 * performed by the primary instance.
 		 * 
 		 * The value of this property cannot be accessed before
-		 * g_application_register() has been called.  See
+		 * {@link G.application_register} has been called.  See
 		 * g_application_get_is_registered().
 		 * @returns %TRUE if #application is remote
 		 */
@@ -404,7 +404,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the resource base path of #application.
 		 * 
-		 * See g_application_set_resource_base_path() for more information.
+		 * See {@link G.application_set_resource_base_path} for more information.
 		 * @returns the base resource path, if one is set
 		 */
 		get_resource_base_path(): string | null;
@@ -412,7 +412,7 @@ declare namespace imports.gi.Gio {
 		 * Increases the use count of #application.
 		 * 
 		 * Use this function to indicate that the application has a reason to
-		 * continue to run.  For example, g_application_hold() is called by GTK+
+		 * continue to run.  For example, {@link G.application_hold} is called by GTK+
 		 * when a toplevel window is on the screen.
 		 * 
 		 * To cancel the hold, call g_application_release().
@@ -428,7 +428,7 @@ declare namespace imports.gi.Gio {
 		 * use that information to indicate the state to the user (e.g. with a
 		 * spinner).
 		 * 
-		 * To cancel the busy indication, use g_application_unmark_busy().
+		 * To cancel the busy indication, use {@link G.application_unmark_busy}.
 		 * 
 		 * The application must be registered before calling this function.
 		 */
@@ -456,7 +456,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Immediately quits the application.
 		 * 
-		 * Upon return to the mainloop, g_application_run() will return,
+		 * Upon return to the mainloop, {@link G.application_run} will return,
 		 * calling only the 'shutdown' function before doing so.
 		 * 
 		 * The hold count is ignored.
@@ -499,7 +499,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note: the return value of this function is not an indicator that this
 		 * instance is or is not the primary instance of the application.  See
-		 * g_application_get_is_remote() for that.
+		 * {@link G.application_get_is_remote} for that.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns %TRUE if registration succeeded
 		 */
@@ -510,7 +510,7 @@ declare namespace imports.gi.Gio {
 		 * When the use count reaches zero, the application will stop running.
 		 * 
 		 * Never call this function except to cancel the effect of a previous
-		 * call to g_application_hold().
+		 * call to {@link G.application_hold}.
 		 */
 		release(): void;
 		/**
@@ -621,7 +621,7 @@ declare namespace imports.gi.Gio {
 		 * notifications without an id.
 		 * 
 		 * If #notification is no longer relevant, it can be withdrawn with
-		 * g_application_withdraw_notification().
+		 * {@link G.application_withdraw_notification}.
 		 * @param id id of the notification, or %NULL
 		 * @param notification the #GNotification to send
 		 */
@@ -646,13 +646,13 @@ declare namespace imports.gi.Gio {
 		 * been registered.
 		 * 
 		 * If non-%NULL, the application id must be valid.  See
-		 * g_application_id_is_valid().
+		 * {@link G.application_id_is_valid}.
 		 * @param application_id the identifier for #application
 		 */
 		set_application_id(application_id: string | null): void;
 		/**
 		 * Sets or unsets the default application for the process, as returned
-		 * by g_application_get_default().
+		 * by {@link G.application_get_default}.
 		 * 
 		 * This function does not take its own reference on #application.  If
 		 * #application is destroyed then the default application will revert
@@ -673,7 +673,7 @@ declare namespace imports.gi.Gio {
 		 * Sets the current inactivity timeout for the application.
 		 * 
 		 * This is the amount of time (in milliseconds) after the last call to
-		 * g_application_release() before the application stops running.
+		 * {@link G.application_release} before the application stops running.
 		 * 
 		 * This call has no side effects of its own.  The value set here is only
 		 * used for next time g_application_release() drops the use count to
@@ -684,7 +684,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Adds a description to the #application option context.
 		 * 
-		 * See g_option_context_set_description() for more information.
+		 * See {@link G.option_context_set_description} for more information.
 		 * @param description a string to be shown in `--help` output
 		 *  after the list of options, or %NULL
 		 */
@@ -692,7 +692,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the parameter string to be used by the commandline handling of #application.
 		 * 
-		 * This function registers the argument to be passed to g_option_context_new()
+		 * This function registers the argument to be passed to {@link G.option_context_new}
 		 * when the internal #GOptionContext of #application is created.
 		 * 
 		 * See g_option_context_new() for more information about #parameter_string.
@@ -703,7 +703,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Adds a summary to the #application option context.
 		 * 
-		 * See g_option_context_set_summary() for more information.
+		 * See {@link G.option_context_set_summary} for more information.
 		 * @param summary a string to be shown in `--help` output
 		 *  before the list of options, or %NULL
 		 */
@@ -748,7 +748,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Destroys a binding between #property and the busy state of
 		 * #application that was previously created with
-		 * g_application_bind_busy_property().
+		 * {@link G.application_bind_busy_property}.
 		 * @param object a #GObject
 		 * @param property the name of a boolean property of #object
 		 */
@@ -760,12 +760,12 @@ declare namespace imports.gi.Gio {
 		 * to other processes.
 		 * 
 		 * This function must only be called to cancel the effect of a previous
-		 * call to g_application_mark_busy().
+		 * call to {@link G.application_mark_busy}.
 		 */
 		unmark_busy(): void;
 		/**
 		 * Withdraws a notification that was sent with
-		 * g_application_send_notification().
+		 * {@link G.application_send_notification}.
 		 * 
 		 * This call does nothing if a notification with #id doesn't exist or
 		 * the notification was never sent.
@@ -782,7 +782,7 @@ declare namespace imports.gi.Gio {
 		withdraw_notification(id: string): void;
 		/**
 		 * The ::activate signal is emitted on the primary instance when an
-		 * activation occurs. See g_application_activate().
+		 * activation occurs. See {@link G.application_activate}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -792,7 +792,7 @@ declare namespace imports.gi.Gio {
 		connect(signal: "activate", callback: (owner: this) => void): number;
 		/**
 		 * The ::command-line signal is emitted on the primary instance when
-		 * a commandline is not handled locally. See g_application_run() and
+		 * a commandline is not handled locally. See {@link G.application_run} and
 		 * the #GApplicationCommandLine documentation for more information.
 		 * @param signal 
 		 * @param callback Callback function
@@ -800,7 +800,7 @@ declare namespace imports.gi.Gio {
 		 *  - command_line: a #GApplicationCommandLine representing the
 		 *     passed commandline 
 		 *  - returns An integer that is set as the exit status for the calling
-		 *   process. See g_application_command_line_set_exit_status(). 
+		 *   process. See {@link G.application_command_line_set_exit_status}. 
 		 * 
 		 * @returns Callback ID
 		 */
@@ -810,7 +810,7 @@ declare namespace imports.gi.Gio {
 		 * after the parsing of the commandline options has occurred.
 		 * 
 		 * You can add options to be recognised during commandline option
-		 * parsing using g_application_add_main_option_entries() and
+		 * parsing using {@link G.application_add_main_option_entries} and
 		 * g_application_add_option_group().
 		 * 
 		 * Signal handlers can inspect #options (along with values pointed to
@@ -864,7 +864,7 @@ declare namespace imports.gi.Gio {
 		 * when a new instance has taken over. This can only happen if the application
 		 * is using the %G_APPLICATION_ALLOW_REPLACEMENT flag.
 		 * 
-		 * The default handler for this signal calls g_application_quit().
+		 * The default handler for this signal calls {@link G.application_quit}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -875,7 +875,7 @@ declare namespace imports.gi.Gio {
 		connect(signal: "name-lost", callback: (owner: this) => boolean): number;
 		/**
 		 * The ::open signal is emitted on the primary instance when there are
-		 * files to open. See g_application_open() for more information.
+		 * files to open. See {@link G.application_open} for more information.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -898,7 +898,7 @@ declare namespace imports.gi.Gio {
 		connect(signal: "shutdown", callback: (owner: this) => void): number;
 		/**
 		 * The ::startup signal is emitted on the primary instance immediately
-		 * after registration. See g_application_register().
+		 * after registration. See {@link G.application_register}.
 		 * @param signal 
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
@@ -943,7 +943,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * GApplication provides convenient life cycle management by maintaining
 	 * a "use count" for the primary application instance. The use count can
-	 * be changed using g_application_hold() and g_application_release(). If
+	 * be changed using {@link G.application_hold} and g_application_release(). If
 	 * it drops to zero, the application exits. Higher-level classes such as
 	 * #GtkApplication employ the use count to ensure that the application
 	 * stays alive as long as it has any opened windows.
@@ -1058,7 +1058,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GApplication instance.
 		 * 
 		 * If non-%NULL, the application id must be valid.  See
-		 * g_application_id_is_valid().
+		 * {@link G.application_id_is_valid}.
 		 * 
 		 * If no application ID is given then some features of #GApplication
 		 * (most notably application uniqueness) will be disabled.
@@ -1072,7 +1072,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Normally there is only one #GApplication per process and it becomes
 		 * the default when it is created.  You can exercise more control over
-		 * this by using g_application_set_default().
+		 * this by using {@link G.application_set_default}.
 		 * 
 		 * If there is no default application then %NULL is returned.
 		 * @returns the default application for this process, or %NULL
@@ -1081,7 +1081,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Checks if #application_id is a valid application identifier.
 		 * 
-		 * A valid ID is required for calls to g_application_new() and
+		 * A valid ID is required for calls to {@link G.application_new} and
 		 * g_application_set_application_id().
 		 * 
 		 * Application identifiers follow the same format as
@@ -1139,7 +1139,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a #GFile corresponding to a filename that was given as part
 		 * of the invocation of #cmdline.
 		 * 
-		 * This differs from g_file_new_for_commandline_arg() in that it
+		 * This differs from {@link G.file_new_for_commandline_arg} in that it
 		 * resolves relative pathnames using the current working directory of
 		 * the invoking process rather than the local process.
 		 * @param arg an argument from #cmdline
@@ -1154,7 +1154,7 @@ declare namespace imports.gi.Gio {
 		 * UTF-8 on Windows.
 		 * 
 		 * If you wish to use the return value with #GOptionContext, you must
-		 * use g_option_context_parse_strv().
+		 * use {@link G.option_context_parse_strv}.
 		 * 
 		 * The return value is %NULL-terminated and should be freed using
 		 * g_strfreev().
@@ -1178,7 +1178,7 @@ declare namespace imports.gi.Gio {
 		get_cwd(): string | null;
 		/**
 		 * Gets the contents of the 'environ' variable of the command line
-		 * invocation, as would be returned by g_get_environ(), ie as a
+		 * invocation, as would be returned by {@link G.get_environ}, ie as a
 		 * %NULL-terminated list of strings in the form 'NAME=VALUE'.
 		 * The strings may contain non-utf8 data.
 		 * 
@@ -1198,7 +1198,7 @@ declare namespace imports.gi.Gio {
 		get_environ(): string[];
 		/**
 		 * Gets the exit status of #cmdline.  See
-		 * g_application_command_line_set_exit_status() for more information.
+		 * {@link G.application_command_line_set_exit_status} for more information.
 		 * @returns the exit status
 		 */
 		get_exit_status(): number;
@@ -1208,7 +1208,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_is_remote(): boolean;
 		/**
-		 * Gets the options there were passed to g_application_command_line().
+		 * Gets the options there were passed to {@link G.application_command_line}.
 		 * 
 		 * If you did not override local_command_line() then these are the same
 		 * options that were parsed according to the #GOptionEntrys added to the
@@ -1248,7 +1248,7 @@ declare namespace imports.gi.Gio {
 		get_stdin(): InputStream | null;
 		/**
 		 * Gets the value of a particular environment variable of the command
-		 * line invocation, as would be returned by g_getenv().  The strings may
+		 * line invocation, as would be returned by {@link G.getenv}.  The strings may
 		 * contain non-utf8 data.
 		 * 
 		 * The remote application usually does not send an environment.  Use
@@ -1267,7 +1267,7 @@ declare namespace imports.gi.Gio {
 		 * invoking process.
 		 * 
 		 * If #cmdline is a local invocation then this is exactly equivalent to
-		 * g_print().  If #cmdline is remote then this is equivalent to calling
+		 * {@link G.print}.  If #cmdline is remote then this is equivalent to calling
 		 * g_print() in the invoking process.
 		 * @param format a printf-style format string
 		 */
@@ -1277,7 +1277,7 @@ declare namespace imports.gi.Gio {
 		 * invoking process.
 		 * 
 		 * If #cmdline is a local invocation then this is exactly equivalent to
-		 * g_printerr().  If #cmdline is remote then this is equivalent to
+		 * {@link G.printerr}.  If #cmdline is remote then this is equivalent to
 		 * calling g_printerr() in the invoking process.
 		 * @param format a printf-style format string
 		 */
@@ -1335,7 +1335,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * The GApplicationCommandLine object can provide the #argc and #argv
 	 * parameters for use with the #GOptionContext command-line parsing API,
-	 * with the g_application_command_line_get_arguments() function. See
+	 * with the {@link G.application_command_line_get_arguments} function. See
 	 * [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
 	 * for an example.
 	 * 
@@ -1513,7 +1513,7 @@ declare namespace imports.gi.Gio {
 		 * On error -1 is returned and #error is set accordingly.
 		 * 
 		 * For the asynchronous, non-blocking, version of this function, see
-		 * g_buffered_input_stream_fill_async().
+		 * {@link G.buffered_input_stream_fill_async}.
 		 * @param count the number of bytes that will be read from the stream
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @returns the number of bytes read into #stream's buffer, up to #count,
@@ -1523,7 +1523,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Reads data into #stream's buffer asynchronously, up to #count size.
 		 * #io_priority can be used to prioritize reads. For the synchronous
-		 * version of this function, see g_buffered_input_stream_fill().
+		 * version of this function, see {@link G.buffered_input_stream_fill}.
 		 * 
 		 * If #count is -1 then the attempted read size is equal to the number
 		 * of bytes that are required to fill the buffer.
@@ -1615,7 +1615,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * By default, #GBufferedInputStream's buffer size is set at 4 kilobytes.
 	 * 
-	 * To create a buffered input stream, use g_buffered_input_stream_new(),
+	 * To create a buffered input stream, use {@link G.buffered_input_stream_new},
 	 * or g_buffered_input_stream_new_sized() to specify the buffer's size at
 	 * construction.
 	 * 
@@ -1699,7 +1699,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * By default, #GBufferedOutputStream's buffer size is set at 4 kilobytes.
 	 * 
-	 * To create a buffered output stream, use g_buffered_output_stream_new(),
+	 * To create a buffered output stream, use {@link G.buffered_output_stream_new},
 	 * or g_buffered_output_stream_new_sized() to specify the buffer's size
 	 * at construction.
 	 * 
@@ -1768,7 +1768,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new icon for a bytes.
 		 * 
 		 * This cannot fail, but loading and interpreting the bytes may fail later on
-		 * (for example, if g_loadable_icon_load() is called) if the image is invalid.
+		 * (for example, if {@link G.loadable_icon_load} is called) if the image is invalid.
 		 * @param bytes a #GBytes.
 		 * @returns a #GIcon for the given
 		 *   #bytes.
@@ -1817,7 +1817,7 @@ declare namespace imports.gi.Gio {
 		 * Since GLib 2.40, the lock protecting #cancellable is not held when
 		 * #callback is invoked.  This lifts a restriction in place for
 		 * earlier GLib versions which now makes it easier to write cleanup
-		 * code that unconditionally invokes e.g. g_cancellable_cancel().
+		 * code that unconditionally invokes e.g. {@link G.cancellable_cancel}.
 		 * @param callback The #GCallback to connect.
 		 * @param data Data to pass to #callback.
 		 * @param data_destroy_func Free function for #data or %NULL.
@@ -1827,7 +1827,7 @@ declare namespace imports.gi.Gio {
 		connect(callback: GObject.Callback, data: any | null, data_destroy_func: GLib.DestroyNotify | null): number;
 		/**
 		 * Disconnects a handler from a cancellable instance similar to
-		 * g_signal_handler_disconnect().  Additionally, in the event that a
+		 * {@link G.signal_handler_disconnect}.  Additionally, in the event that a
 		 * signal handler is currently running, this call will block until the
 		 * handler has finished.  Calling this function from a
 		 * #GCancellable::cancelled signal handler will therefore result in a
@@ -1850,7 +1850,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * You are not supposed to read from the fd yourself, just check for
 		 * readable status. Reading to unset the readable status is done
-		 * with g_cancellable_reset().
+		 * with {@link G.cancellable_reset}.
 		 * 
 		 * After a successful return from this function, you should use
 		 * g_cancellable_release_fd() to free up resources allocated for
@@ -1869,7 +1869,7 @@ declare namespace imports.gi.Gio {
 		is_cancelled(): boolean;
 		/**
 		 * Creates a #GPollFD corresponding to #cancellable; this can be passed
-		 * to g_poll() and used to poll for cancellation. This is useful both
+		 * to {@link G.poll} and used to poll for cancellation. This is useful both
 		 * for unix systems without a native poll and for portability to
 		 * windows.
 		 * 
@@ -1898,7 +1898,7 @@ declare namespace imports.gi.Gio {
 		pop_current(): void;
 		/**
 		 * Pushes #cancellable onto the cancellable stack. The current
-		 * cancellable can then be received using g_cancellable_get_current().
+		 * cancellable can then be received using {@link G.cancellable_get_current}.
 		 * 
 		 * This is useful when implementing cancellable operations in
 		 * code that does not allow you to pass down the cancellable object.
@@ -1908,7 +1908,7 @@ declare namespace imports.gi.Gio {
 		 */
 		push_current(): void;
 		/**
-		 * Releases a resources previously allocated by g_cancellable_get_fd()
+		 * Releases a resources previously allocated by {@link G.cancellable_get_fd}
 		 * or g_cancellable_make_pollfd().
 		 * 
 		 * For compatibility reasons with older releases, calling this function
@@ -1943,7 +1943,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a source that triggers if #cancellable is cancelled and
 		 * calls its callback of type #GCancellableSourceFunc. This is
 		 * primarily useful for attaching to another (non-cancellable) source
-		 * with g_source_add_child_source() to add cancellability to it.
+		 * with {@link G.source_add_child_source} to add cancellability to it.
 		 * 
 		 * For convenience, you can call this with a %NULL #GCancellable,
 		 * in which case the source will never trigger.
@@ -1963,7 +1963,7 @@ declare namespace imports.gi.Gio {
 		 * Note that disconnecting from this signal (or any signal) in a
 		 * multi-threaded program is prone to race conditions. For instance
 		 * it is possible that a signal handler may be invoked even after
-		 * a call to g_signal_handler_disconnect() for that handler has
+		 * a call to {@link G.signal_handler_disconnect} for that handler has
 		 * already returned.
 		 * 
 		 * There is also a problem when cancellation happens right before
@@ -2275,7 +2275,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a human-readable textual representation of #credentials
 		 * that can be used in logging and debug messages. The format of the
 		 * returned string may change in future GLib release.
-		 * @returns A string that should be freed with g_free().
+		 * @returns A string that should be freed with {@link G.free}.
 		 */
 		to_string(): string;
 	}
@@ -2295,7 +2295,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Some operating systems supports looking up the credentials of the
 	 * remote peer of a communication endpoint - see e.g.
-	 * g_socket_get_credentials().
+	 * {@link G.socket_get_credentials}.
 	 * 
 	 * Some operating systems supports securely sending and receiving
 	 * credentials over a Unix Domain Socket, see
@@ -2331,7 +2331,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GCredentials object with credentials matching the
 		 * the current process.
-		 * @returns A #GCredentials. Free with g_object_unref().
+		 * @returns A #GCredentials. Free with {@link GObject.unref}.
 		 */
 		public static new(): Credentials;
 	}
@@ -2354,7 +2354,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GDBusActionGroup is an implementation of the #GActionGroup
 	 * interface that can be used as a proxy for an action group
-	 * that is exported over D-Bus with g_dbus_connection_export_action_group().
+	 * that is exported over D-Bus with {@link G.dbus_connection_export_action_group}.
 	 */
 	interface DBusActionGroup extends DBusActionGroupMixin {}
 
@@ -2373,7 +2373,7 @@ declare namespace imports.gi.Gio {
 		 * This call is non-blocking.  The returned action group may or may not
 		 * already be filled in.  The correct thing to do is connect the signals
 		 * for the action group to monitor for changes and then to call
-		 * g_action_group_list_actions() to get the initial list.
+		 * {@link G.action_group_list_actions} to get the initial list.
 		 * @param connection A #GDBusConnection
 		 * @param bus_name the bus name which exports the action
 		 *     group or %NULL if #connection is not a message bus connection
@@ -2505,7 +2505,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<DBusAuthObserverInitOptions>);
 		/**
 		 * Creates a new #GDBusAuthObserver object.
-		 * @returns A #GDBusAuthObserver. Free with g_object_unref().
+		 * @returns A #GDBusAuthObserver. Free with {@link GObject.unref}.
 		 */
 		public static new(): DBusAuthObserver;
 	}
@@ -2528,7 +2528,7 @@ declare namespace imports.gi.Gio {
 		 * calling `raise(SIGTERM)`) if the connection is closed by the
 		 * remote peer.
 		 * 
-		 * Note that #GDBusConnection objects returned by g_bus_get_finish()
+		 * Note that #GDBusConnection objects returned by {@link G.bus_get_finish}
 		 * and g_bus_get_sync() will (usually) have this property set to %TRUE.
 		 */
 		exit_on_close: boolean;
@@ -2589,7 +2589,7 @@ declare namespace imports.gi.Gio {
 		 * Note that filters are run in a dedicated message handling thread so
 		 * they can't block and, generally, can't do anything but signal a
 		 * worker thread. Also note that filters are rarely needed - use API
-		 * such as g_dbus_connection_send_message_with_reply(),
+		 * such as {@link G.dbus_connection_send_message_with_reply},
 		 * g_dbus_connection_signal_subscribe() or g_dbus_connection_call() instead.
 		 * 
 		 * If a filter consumes an incoming message the message is not
@@ -2609,7 +2609,7 @@ declare namespace imports.gi.Gio {
 		 * @param user_data_free_func function to free #user_data with when filter
 		 *     is removed or %NULL
 		 * @returns a filter identifier that can be used with
-		 *     g_dbus_connection_remove_filter()
+		 *     {@link G.dbus_connection_remove_filter}
 		 */
 		add_filter(filter_function: DBusMessageFilterFunction, user_data_free_func: GLib.DestroyNotify): number;
 		/**
@@ -2630,7 +2630,7 @@ declare namespace imports.gi.Gio {
 		 * values.
 		 * 
 		 * If the #parameters #GVariant is floating, it is consumed. This allows
-		 * convenient 'inline' use of g_variant_new(), e.g.:
+		 * convenient 'inline' use of {@link G.variant_new}, e.g.:
 		 * |[<!-- language="C" -->
 		 *  g_dbus_connection_call (connection,
 		 *                          "org.freedesktop.StringThings",
@@ -2677,10 +2677,10 @@ declare namespace imports.gi.Gio {
 		 */
 		call(bus_name: string | null, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant | null, reply_type: GLib.VariantType | null, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_connection_call().
-		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_connection_call()
+		 * Finishes an operation started with {@link G.dbus_connection_call}.
+		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link G.dbus_connection_call}
 		 * @returns %NULL if #error is set. Otherwise a non-floating
-		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 *     #GVariant tuple with return values. Free with {@link G.variant_unref}.
 		 */
 		call_finish(res: AsyncResult): GLib.Variant;
 		/**
@@ -2700,7 +2700,7 @@ declare namespace imports.gi.Gio {
 		 * value will be of this type.
 		 * 
 		 * If the #parameters #GVariant is floating, it is consumed.
-		 * This allows convenient 'inline' use of g_variant_new(), e.g.:
+		 * This allows convenient 'inline' use of {@link G.variant_new}, e.g.:
 		 * |[<!-- language="C" -->
 		 *  g_dbus_connection_call_sync (connection,
 		 *                               "org.freedesktop.StringThings",
@@ -2733,11 +2733,11 @@ declare namespace imports.gi.Gio {
 		 *     timeout or %G_MAXINT for no timeout
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns %NULL if #error is set. Otherwise a non-floating
-		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 *     #GVariant tuple with return values. Free with {@link G.variant_unref}.
 		 */
 		call_sync(bus_name: string | null, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant | null, reply_type: GLib.VariantType | null, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable | null): GLib.Variant;
 		/**
-		 * Like g_dbus_connection_call() but also takes a #GUnixFDList object.
+		 * Like {@link G.dbus_connection_call} but also takes a #GUnixFDList object.
 		 * 
 		 * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
 		 * values in the body of the message. For example, if a message contains
@@ -2771,7 +2771,7 @@ declare namespace imports.gi.Gio {
 		 */
 		call_with_unix_fd_list(bus_name: string | null, object_path: string, interface_name: string, method_name: string, parameters: GLib.Variant | null, reply_type: GLib.VariantType | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_connection_call_with_unix_fd_list().
+		 * Finishes an operation started with {@link G.dbus_connection_call_with_unix_fd_list}.
 		 * 
 		 * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
 		 * values in the body of the message. For example,
@@ -2784,15 +2784,15 @@ declare namespace imports.gi.Gio {
 		 * access file descriptors if they are referenced in this way by a
 		 * value of type %G_VARIANT_TYPE_HANDLE in the body of the message.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-		 *     g_dbus_connection_call_with_unix_fd_list()
+		 *     {@link G.dbus_connection_call_with_unix_fd_list}
 		 * @returns %NULL if #error is set. Otherwise a non-floating
-		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 *     #GVariant tuple with return values. Free with {@link G.variant_unref}.
 		 * 
 		 * return location for a #GUnixFDList or %NULL
 		 */
 		call_with_unix_fd_list_finish(res: AsyncResult): [ GLib.Variant, UnixFDList | null ];
 		/**
-		 * Like g_dbus_connection_call_sync() but also takes and returns #GUnixFDList objects.
+		 * Like {@link G.dbus_connection_call_sync} but also takes and returns #GUnixFDList objects.
 		 * See g_dbus_connection_call_with_unix_fd_list() and
 		 * g_dbus_connection_call_with_unix_fd_list_finish() for more details.
 		 * 
@@ -2811,7 +2811,7 @@ declare namespace imports.gi.Gio {
 		 * @param fd_list a #GUnixFDList or %NULL
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns %NULL if #error is set. Otherwise a non-floating
-		 *     #GVariant tuple with return values. Free with g_variant_unref().
+		 *     #GVariant tuple with return values. Free with {@link G.variant_unref}.
 		 * 
 		 * return location for a #GUnixFDList or %NULL
 		 */
@@ -2824,7 +2824,7 @@ declare namespace imports.gi.Gio {
 		 * Once the connection is closed, operations such as sending a message
 		 * will return with the error %G_IO_ERROR_CLOSED. Closing a connection
 		 * will not automatically flush the connection so queued messages may
-		 * be lost. Use g_dbus_connection_flush() if you need such guarantees.
+		 * be lost. Use {@link G.dbus_connection_flush} if you need such guarantees.
 		 * 
 		 * If #connection is already closed, this method fails with
 		 * %G_IO_ERROR_CLOSED.
@@ -2847,15 +2847,15 @@ declare namespace imports.gi.Gio {
 		 */
 		close(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_connection_close().
+		 * Finishes an operation started with {@link G.dbus_connection_close}.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-		 *     to g_dbus_connection_close()
+		 *     to {@link G.dbus_connection_close}
 		 * @returns %TRUE if the operation succeeded, %FALSE if #error is set
 		 */
 		close_finish(res: AsyncResult): boolean;
 		/**
 		 * Synchronously closes #connection. The calling thread is blocked
-		 * until this is done. See g_dbus_connection_close() for the
+		 * until this is done. See {@link G.dbus_connection_close} for the
 		 * asynchronous version of this method and more details about what it
 		 * does.
 		 * @param cancellable a #GCancellable or %NULL
@@ -2891,7 +2891,7 @@ declare namespace imports.gi.Gio {
 		 * returned (with #error set accordingly).
 		 * 
 		 * You can unexport the action group using
-		 * g_dbus_connection_unexport_action_group() with the return value of
+		 * {@link G.dbus_connection_unexport_action_group} with the return value of
 		 * this function.
 		 * 
 		 * The thread default main context is taken at the time of this call.
@@ -2918,7 +2918,7 @@ declare namespace imports.gi.Gio {
 		 * returned (with #error set accordingly).
 		 * 
 		 * You can unexport the menu model using
-		 * g_dbus_connection_unexport_menu_model() with the return value of
+		 * {@link G.dbus_connection_unexport_menu_model} with the return value of
 		 * this function.
 		 * @param object_path a D-Bus object path
 		 * @param menu a #GMenuModel
@@ -2928,7 +2928,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously flushes #connection, that is, writes all queued
 		 * outgoing message to the transport and then flushes the transport
-		 * (using g_output_stream_flush_async()). This is useful in programs
+		 * (using {@link G.output_stream_flush_async}). This is useful in programs
 		 * that wants to emit a D-Bus signal and then exit immediately. Without
 		 * flushing the connection, there is no guaranteed that the message has
 		 * been sent to the networking buffers in the OS kernel.
@@ -2946,15 +2946,15 @@ declare namespace imports.gi.Gio {
 		 */
 		flush(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_connection_flush().
+		 * Finishes an operation started with {@link G.dbus_connection_flush}.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-		 *     to g_dbus_connection_flush()
+		 *     to {@link G.dbus_connection_flush}
 		 * @returns %TRUE if the operation succeeded, %FALSE if #error is set
 		 */
 		flush_finish(res: AsyncResult): boolean;
 		/**
 		 * Synchronously flushes #connection. The calling thread is blocked
-		 * until this is done. See g_dbus_connection_flush() for the
+		 * until this is done. See {@link G.dbus_connection_flush} for the
 		 * asynchronous version of this method and more details about what it
 		 * does.
 		 * @param cancellable a #GCancellable or %NULL
@@ -2989,7 +2989,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Retrieves the last serial number assigned to a #GDBusMessage on
 		 * the current thread. This includes messages sent via both low-level
-		 * API such as g_dbus_connection_send_message() as well as
+		 * API such as {@link G.dbus_connection_send_message} as well as
 		 * high-level API such as g_dbus_connection_emit_signal(),
 		 * g_dbus_connection_call() or g_dbus_proxy_call().
 		 * @returns the last used serial or zero when no message has been sent
@@ -3068,7 +3068,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that the reference count on #interface_info will be
 		 * incremented by 1 (unless allocated statically, e.g. if the
-		 * reference count is -1, see g_dbus_interface_info_ref()) for as long
+		 * reference count is -1, see {@link G.dbus_interface_info_ref}) for as long
 		 * as the object is exported. Also note that #vtable will be copied.
 		 * 
 		 * See this [server][gdbus-server] for an example of how to use this method.
@@ -3077,11 +3077,11 @@ declare namespace imports.gi.Gio {
 		 * @param vtable a #GDBusInterfaceVTable to call into or %NULL
 		 * @param user_data_free_func function to call when the object path is unregistered
 		 * @returns 0 if #error is set, otherwise a registration id (never 0)
-		 *     that can be used with g_dbus_connection_unregister_object()
+		 *     that can be used with {@link G.dbus_connection_unregister_object}
 		 */
 		register_object(object_path: string, interface_info: DBusInterfaceInfo, vtable: DBusInterfaceVTable | null, user_data_free_func: GLib.DestroyNotify): number;
 		/**
-		 * Version of g_dbus_connection_register_object() using closures instead of a
+		 * Version of {@link G.dbus_connection_register_object} using closures instead of a
 		 * #GDBusInterfaceVTable for easier binding in other languages.
 		 * @param object_path The object path to register at.
 		 * @param interface_info Introspection data for the interface.
@@ -3089,7 +3089,7 @@ declare namespace imports.gi.Gio {
 		 * @param get_property_closure #GClosure for getting a property.
 		 * @param set_property_closure #GClosure for setting a property.
 		 * @returns 0 if #error is set, otherwise a registration ID (never 0)
-		 * that can be used with g_dbus_connection_unregister_object() .
+		 * that can be used with {@link G.dbus_connection_unregister_object} .
 		 */
 		register_object_with_closures(object_path: string, interface_info: DBusInterfaceInfo, method_call_closure: GObject.Closure | null, get_property_closure: GObject.Closure | null, set_property_closure: GObject.Closure | null): number;
 		/**
@@ -3116,7 +3116,7 @@ declare namespace imports.gi.Gio {
 		 * then #error is set to #G_IO_ERROR_EXISTS.
 		 * 
 		 * Note that it is valid to register regular objects (using
-		 * g_dbus_connection_register_object()) in a subtree registered with
+		 * {@link G.dbus_connection_register_object}) in a subtree registered with
 		 * g_dbus_connection_register_subtree() - if so, the subtree handler
 		 * is tried as the last resort. One way to think about a subtree
 		 * handler is to consider it a fallback handler for object paths not
@@ -3133,7 +3133,7 @@ declare namespace imports.gi.Gio {
 		 * @param flags flags used to fine tune the behavior of the subtree
 		 * @param user_data_free_func function to call when the subtree is unregistered
 		 * @returns 0 if #error is set, otherwise a subtree registration ID (never 0)
-		 * that can be used with g_dbus_connection_unregister_subtree()
+		 * that can be used with {@link G.dbus_connection_unregister_subtree}
 		 */
 		register_subtree(object_path: string, vtable: DBusSubtreeVTable, flags: DBusSubtreeFlags, user_data_free_func: GLib.DestroyNotify): number;
 		/**
@@ -3141,11 +3141,11 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that since filters run in a different thread, there is a race
 		 * condition where it is possible that the filter will be running even
-		 * after calling g_dbus_connection_remove_filter(), so you cannot just
+		 * after calling {@link G.dbus_connection_remove_filter}, so you cannot just
 		 * free data that the filter might be using. Instead, you should pass
 		 * a #GDestroyNotify to g_dbus_connection_add_filter(), which will be
 		 * called when it is guaranteed that the data is no longer needed.
-		 * @param filter_id an identifier obtained from g_dbus_connection_add_filter()
+		 * @param filter_id an identifier obtained from {@link G.dbus_connection_add_filter}
 		 */
 		remove_filter(filter_id: number): void;
 		/**
@@ -3154,7 +3154,7 @@ declare namespace imports.gi.Gio {
 		 * Unless #flags contain the
 		 * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
 		 * will be assigned by #connection and set on #message via
-		 * g_dbus_message_set_serial(). If #out_serial is not %NULL, then the
+		 * {@link G.dbus_message_set_serial}. If #out_serial is not %NULL, then the
 		 * serial number used will be written to this location prior to
 		 * submitting the message to the underlying transport. While it has a `volatile`
 		 * qualifier, this is a historical artifact and the argument passed to it should
@@ -3185,7 +3185,7 @@ declare namespace imports.gi.Gio {
 		 * Unless #flags contain the
 		 * %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
 		 * will be assigned by #connection and set on #message via
-		 * g_dbus_message_set_serial(). If #out_serial is not %NULL, then the
+		 * {@link G.dbus_message_set_serial}. If #out_serial is not %NULL, then the
 		 * serial number used will be written to this location prior to
 		 * submitting the message to the underlying transport. While it has a `volatile`
 		 * qualifier, this is a historical artifact and the argument passed to it should
@@ -3221,7 +3221,7 @@ declare namespace imports.gi.Gio {
 		 */
 		send_message_with_reply(message: DBusMessage, flags: DBusSendMessageFlags, timeout_msec: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number | null;
 		/**
-		 * Finishes an operation started with g_dbus_connection_send_message_with_reply().
+		 * Finishes an operation started with {@link G.dbus_connection_send_message_with_reply}.
 		 * 
 		 * Note that #error is only set if a local in-process error
 		 * occurred. That is to say that the returned #GDBusMessage object may
@@ -3232,14 +3232,14 @@ declare namespace imports.gi.Gio {
 		 * for an example of how to use this low-level API to send and receive
 		 * UNIX file descriptors.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-		 *     g_dbus_connection_send_message_with_reply()
+		 *     {@link G.dbus_connection_send_message_with_reply}
 		 * @returns a locked #GDBusMessage or %NULL if #error is set
 		 */
 		send_message_with_reply_finish(res: AsyncResult): DBusMessage;
 		/**
 		 * Synchronously sends #message to the peer represented by #connection
 		 * and blocks the calling thread until a reply is received or the
-		 * timeout is reached. See g_dbus_connection_send_message_with_reply()
+		 * timeout is reached. See {@link G.dbus_connection_send_message_with_reply}
 		 * for the asynchronous version of this method.
 		 * 
 		 * Unless #flags contain the
@@ -3324,7 +3324,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * As #callback is potentially invoked in a different thread from where it’s
 		 * emitted, it’s possible for this to happen after
-		 * g_dbus_connection_signal_unsubscribe() has been called in another thread.
+		 * {@link G.dbus_connection_signal_unsubscribe} has been called in another thread.
 		 * Due to this, #user_data should have a strong reference which is freed with
 		 * #user_data_free_func, rather than pointing to data whose lifecycle is tied
 		 * to the signal subscription. For example, if a #GObject is used to store the
@@ -3359,7 +3359,7 @@ declare namespace imports.gi.Gio {
 		 * @param callback callback to invoke when there is a signal matching the requested data
 		 * @param user_data_free_func function to free #user_data with when
 		 *     subscription is removed or %NULL
-		 * @returns a subscription identifier that can be used with g_dbus_connection_signal_unsubscribe()
+		 * @returns a subscription identifier that can be used with {@link G.dbus_connection_signal_unsubscribe}
 		 */
 		signal_subscribe(sender: string | null, interface_name: string | null, member: string | null, object_path: string | null, arg0: string | null, flags: DBusSignalFlags, callback: DBusSignalCallback, user_data_free_func: GLib.DestroyNotify | null): number;
 		/**
@@ -3369,14 +3369,14 @@ declare namespace imports.gi.Gio {
 		 * signal subscription) in the current thread-default #GMainContext after this
 		 * function has returned. You should continue to iterate the #GMainContext
 		 * until the #GDestroyNotify function passed to
-		 * g_dbus_connection_signal_subscribe() is called, in order to avoid memory
+		 * {@link G.dbus_connection_signal_subscribe} is called, in order to avoid memory
 		 * leaks through callbacks queued on the #GMainContext after it’s stopped being
 		 * iterated.
 		 * Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT
 		 * that was scheduled after unsubscription, also indicates that all resources
 		 * of this subscription are released.
 		 * @param subscription_id a subscription id obtained from
-		 *     g_dbus_connection_signal_subscribe()
+		 *     {@link G.dbus_connection_signal_subscribe}
 		 */
 		signal_unsubscribe(subscription_id: number): void;
 		/**
@@ -3388,35 +3388,35 @@ declare namespace imports.gi.Gio {
 		start_message_processing(): void;
 		/**
 		 * Reverses the effect of a previous call to
-		 * g_dbus_connection_export_action_group().
+		 * {@link G.dbus_connection_export_action_group}.
 		 * 
 		 * It is an error to call this function with an ID that wasn't returned
 		 * from g_dbus_connection_export_action_group() or to call it with the
 		 * same ID more than once.
-		 * @param export_id the ID from g_dbus_connection_export_action_group()
+		 * @param export_id the ID from {@link G.dbus_connection_export_action_group}
 		 */
 		unexport_action_group(export_id: number): void;
 		/**
 		 * Reverses the effect of a previous call to
-		 * g_dbus_connection_export_menu_model().
+		 * {@link G.dbus_connection_export_menu_model}.
 		 * 
 		 * It is an error to call this function with an ID that wasn't returned
 		 * from g_dbus_connection_export_menu_model() or to call it with the
 		 * same ID more than once.
-		 * @param export_id the ID from g_dbus_connection_export_menu_model()
+		 * @param export_id the ID from {@link G.dbus_connection_export_menu_model}
 		 */
 		unexport_menu_model(export_id: number): void;
 		/**
 		 * Unregisters an object.
 		 * @param registration_id a registration id obtained from
-		 *     g_dbus_connection_register_object()
+		 *     {@link G.dbus_connection_register_object}
 		 * @returns %TRUE if the object was unregistered, %FALSE otherwise
 		 */
 		unregister_object(registration_id: number): boolean;
 		/**
 		 * Unregisters a subtree.
 		 * @param registration_id a subtree registration id obtained from
-		 *     g_dbus_connection_register_subtree()
+		 *     {@link G.dbus_connection_register_subtree}
 		 * @returns %TRUE if the subtree was unregistered, %FALSE otherwise
 		 */
 		unregister_subtree(registration_id: number): boolean;
@@ -3425,7 +3425,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The cause of this event can be
 		 * 
-		 * - If g_dbus_connection_close() is called. In this case
+		 * - If {@link G.dbus_connection_close} is called. In this case
 		 *   #remote_peer_vanished is set to %FALSE and #error is %NULL.
 		 * 
 		 * - If the remote peer closes the connection. In this case
@@ -3482,7 +3482,7 @@ declare namespace imports.gi.Gio {
 	 * over any transport that can by represented as a #GIOStream.
 	 * 
 	 * This class is rarely used directly in D-Bus clients. If you are writing
-	 * a D-Bus client, it is often easier to use the g_bus_own_name(),
+	 * a D-Bus client, it is often easier to use the {@link G.bus_own_name},
 	 * g_bus_watch_name() or g_dbus_proxy_new_for_bus() APIs.
 	 * 
 	 * As an exception to the usual GLib rule that a particular object must not
@@ -3531,19 +3531,19 @@ declare namespace imports.gi.Gio {
 	class DBusConnection {
 		public constructor(options?: Partial<DBusConnectionInitOptions>);
 		/**
-		 * Finishes an operation started with g_dbus_connection_new().
+		 * Finishes an operation started with {@link G.dbus_connection_new}.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback
-		 *     passed to g_dbus_connection_new().
+		 *     passed to {@link G.dbus_connection_new}.
 		 * @returns a #GDBusConnection or %NULL if #error is set. Free
-		 *     with g_object_unref().
+		 *     with {@link GObject.unref}.
 		 */
 		public static new_finish(res: AsyncResult): DBusConnection;
 		/**
-		 * Finishes an operation started with g_dbus_connection_new_for_address().
+		 * Finishes an operation started with {@link G.dbus_connection_new_for_address}.
 		 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-		 *     to g_dbus_connection_new()
+		 *     to {@link G.dbus_connection_new}
 		 * @returns a #GDBusConnection or %NULL if #error is set.
-		 *     Free with g_object_unref().
+		 *     Free with {@link GObject.unref}.
 		 */
 		public static new_for_address_finish(res: AsyncResult): DBusConnection;
 		/**
@@ -3553,7 +3553,7 @@ declare namespace imports.gi.Gio {
 		 * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
 		 * 
 		 * This constructor can only be used to initiate client-side
-		 * connections - use g_dbus_connection_new_sync() if you need to act
+		 * connections - use {@link G.dbus_connection_new_sync} if you need to act
 		 * as the server. In particular, #flags cannot contain the
 		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
 		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
@@ -3569,7 +3569,7 @@ declare namespace imports.gi.Gio {
 		 * @param observer a #GDBusAuthObserver or %NULL
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns a #GDBusConnection or %NULL if #error is set.
-		 *     Free with g_object_unref().
+		 *     Free with {@link GObject.unref}.
 		 */
 		public static new_for_address_sync(address: string, flags: DBusConnectionFlags, observer: DBusAuthObserver | null, cancellable: Cancellable | null): DBusConnection;
 		/**
@@ -3581,7 +3581,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The D-Bus connection will interact with #stream from a worker thread.
 		 * As a result, the caller should not interact with #stream after this
-		 * method has been called, except by calling g_object_unref() on it.
+		 * method has been called, except by calling {@link GObject.unref} on it.
 		 * 
 		 * If #observer is not %NULL it may be used to control the
 		 * authentication process.
@@ -3594,7 +3594,7 @@ declare namespace imports.gi.Gio {
 		 * @param observer a #GDBusAuthObserver or %NULL
 		 * @param cancellable a #GCancellable or %NULL
 		 * @returns a #GDBusConnection or %NULL if #error is set.
-		 *     Free with g_object_unref().
+		 *     Free with {@link GObject.unref}.
 		 */
 		public static new_sync(stream: IOStream, guid: string | null, flags: DBusConnectionFlags, observer: DBusAuthObserver | null, cancellable: Cancellable | null): DBusConnection;
 		/**
@@ -3606,7 +3606,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The D-Bus connection will interact with #stream from a worker thread.
 		 * As a result, the caller should not interact with #stream after this
-		 * method has been called, except by calling g_object_unref() on it.
+		 * method has been called, except by calling {@link GObject.unref} on it.
 		 * 
 		 * If #observer is not %NULL it may be used to control the
 		 * authentication process.
@@ -3633,7 +3633,7 @@ declare namespace imports.gi.Gio {
 		 * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
 		 * 
 		 * This constructor can only be used to initiate client-side
-		 * connections - use g_dbus_connection_new() if you need to act as the
+		 * connections - use {@link G.dbus_connection_new} if you need to act as the
 		 * server. In particular, #flags cannot contain the
 		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
 		 * %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
@@ -3673,7 +3673,7 @@ declare namespace imports.gi.Gio {
 		 * onto multiple connections however the #object_path provided must be
 		 * the same for all connections.
 		 * 
-		 * Use g_dbus_interface_skeleton_unexport() to unexport the object.
+		 * Use {@link G.dbus_interface_skeleton_unexport} to unexport the object.
 		 * @param connection A #GDBusConnection to export #interface_ on.
 		 * @param object_path The path to export the interface at.
 		 * @returns %TRUE if the interface was exported on #connection, otherwise %FALSE with
@@ -3701,7 +3701,7 @@ declare namespace imports.gi.Gio {
 		 * Gets a list of the connections that #interface_ is exported on.
 		 * @returns A list of
 		 *   all the connections that #interface_ is exported on. The returned
-		 *   list should be freed with g_list_free() after each element has
+		 *   list should be freed with {@link G.list_free} after each element has
 		 *   been freed with g_object_unref().
 		 */
 		get_connections(): GLib.List;
@@ -3727,7 +3727,7 @@ declare namespace imports.gi.Gio {
 		 * Gets all D-Bus properties for #interface_.
 		 * @returns A #GVariant of type
 		 * ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
-		 * Free with g_variant_unref().
+		 * Free with {@link G.variant_unref}.
 		 */
 		get_properties(): GLib.Variant;
 		/**
@@ -3752,14 +3752,14 @@ declare namespace imports.gi.Gio {
 		 * Stops exporting #interface_ on all connections it is exported on.
 		 * 
 		 * To unexport #interface_ from only a single connection, use
-		 * g_dbus_interface_skeleton_unexport_from_connection()
+		 * {@link G.dbus_interface_skeleton_unexport_from_connection}
 		 */
 		unexport(): void;
 		/**
 		 * Stops exporting #interface_ on #connection.
 		 * 
 		 * To stop exporting on all connections the interface is exported on,
-		 * use g_dbus_interface_skeleton_unexport().
+		 * use {@link G.dbus_interface_skeleton_unexport}.
 		 * @param connection A #GDBusConnection.
 		 */
 		unexport_from_connection(connection: DBusConnection): void;
@@ -3770,7 +3770,7 @@ declare namespace imports.gi.Gio {
 		 * Note that this signal is emitted in a thread dedicated to
 		 * handling the method call so handlers are allowed to perform
 		 * blocking IO. This means that it is appropriate to call e.g.
-		 * [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
+		 * {@link [polkit.authority_check_authorization_sync}](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
 		 * with the
 		 * [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
 		 * flag set.
@@ -3849,7 +3849,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GDBusMenuModel is an implementation of #GMenuModel that can be used
 	 * as a proxy for a menu model that is exported over D-Bus with
-	 * g_dbus_connection_export_menu_model().
+	 * {@link G.dbus_connection_export_menu_model}.
 	 */
 	interface DBusMenuModel extends DBusMenuModelMixin {}
 
@@ -3869,7 +3869,7 @@ declare namespace imports.gi.Gio {
 		 *     or %NULL if #connection is not a message bus connection
 		 * @param object_path the object path at which the menu model is exported
 		 * @returns a #GDBusMenuModel object. Free with
-		 *     g_object_unref().
+		 *     {@link GObject.unref}.
 		 */
 		public static get(connection: DBusConnection, bus_name: string | null, object_path: string): DBusMenuModel;
 	}
@@ -3887,7 +3887,7 @@ declare namespace imports.gi.Gio {
 		 * This operation can fail if e.g. #message contains file descriptors
 		 * and the per-process or system-wide open files limit is reached.
 		 * @returns A new #GDBusMessage or %NULL if #error is set.
-		 *     Free with g_object_unref().
+		 *     Free with {@link GObject.unref}.
 		 */
 		copy(): DBusMessage;
 		/**
@@ -3936,7 +3936,7 @@ declare namespace imports.gi.Gio {
 		 * Gets an array of all header fields on #message that are set.
 		 * @returns An array of header fields
 		 * terminated by %G_DBUS_MESSAGE_HEADER_FIELD_INVALID.  Each element
-		 * is a #guchar. Free with g_free().
+		 * is a #guchar. Free with {@link G.free}.
 		 */
 		get_header_fields(): number[];
 		/**
@@ -4000,7 +4000,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The file descriptors normally correspond to %G_VARIANT_TYPE_HANDLE
 		 * values in the body of the message. For example,
-		 * if g_variant_get_handle() returns 5, that is intended to be a reference
+		 * if {@link G.variant_get_handle} returns 5, that is intended to be a reference
 		 * to the file descriptor that can be accessed by
 		 * `g_unix_fd_list_get (list, 5, ...)`.
 		 * @returns A #GUnixFDList or %NULL if no file descriptors are
@@ -4015,27 +4015,27 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GDBusMessage that is an error reply to #method_call_message.
 		 * @param error_name A valid D-Bus error name.
 		 * @param error_message_format The D-Bus error message in a printf() format.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		new_method_error(error_name: string, error_message_format: string): DBusMessage;
 		/**
 		 * Creates a new #GDBusMessage that is an error reply to #method_call_message.
 		 * @param error_name A valid D-Bus error name.
 		 * @param error_message The D-Bus error message.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		new_method_error_literal(error_name: string, error_message: string): DBusMessage;
 		/**
-		 * Like g_dbus_message_new_method_error() but intended for language bindings.
+		 * Like {@link G.dbus_message_new_method_error} but intended for language bindings.
 		 * @param error_name A valid D-Bus error name.
 		 * @param error_message_format The D-Bus error message in a printf() format.
 		 * @param var_args Arguments for #error_message_format.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		new_method_error_valist(error_name: string, error_message_format: string, var_args: any[]): DBusMessage;
 		/**
 		 * Creates a new #GDBusMessage that is a reply to #method_call_message.
-		 * @returns #GDBusMessage. Free with g_object_unref().
+		 * @returns #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		new_method_reply(): DBusMessage;
 		/**
@@ -4072,7 +4072,7 @@ declare namespace imports.gi.Gio {
 		 *   fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
 		 * ]|
 		 * @param indent Indentation level.
-		 * @returns A string that should be freed with g_free().
+		 * @returns A string that should be freed with {@link G.free}.
 		 */
 		print(indent: number): string;
 		/**
@@ -4175,11 +4175,11 @@ declare namespace imports.gi.Gio {
 		set_unix_fd_list(fd_list: UnixFDList | null): void;
 		/**
 		 * Serializes #message to a blob. The byte order returned by
-		 * g_dbus_message_get_byte_order() will be used.
+		 * {@link G.dbus_message_get_byte_order} will be used.
 		 * @param capabilities A #GDBusCapabilityFlags describing what protocol features are supported.
 		 * @returns A pointer to a
 		 * valid binary D-Bus message of #out_size bytes generated by #message
-		 * or %NULL if #error is set. Free with g_free().
+		 * or %NULL if #error is set. Free with {@link G.free}.
 		 * 
 		 * Return location for size of generated blob.
 		 */
@@ -4189,7 +4189,7 @@ declare namespace imports.gi.Gio {
 		 * nothing and returns %FALSE.
 		 * 
 		 * Otherwise this method encodes the error in #message as a #GError
-		 * using g_dbus_error_set_dbus_error() using the information in the
+		 * using {@link G.dbus_error_set_dbus_error} using the information in the
 		 * %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of #message as
 		 * well as the first string item in #message's body.
 		 * @returns %TRUE if #error was set, %FALSE otherwise.
@@ -4220,13 +4220,13 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<DBusMessageInitOptions>);
 		/**
 		 * Creates a new empty #GDBusMessage.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		public static new(): DBusMessage;
 		/**
 		 * Creates a new #GDBusMessage from the data stored at #blob. The byte
 		 * order that the message was in can be retrieved using
-		 * g_dbus_message_get_byte_order().
+		 * {@link G.dbus_message_get_byte_order}.
 		 * 
 		 * If the #blob cannot be parsed, contains invalid fields, or contains invalid
 		 * headers, %G_IO_ERROR_INVALID_ARGUMENT will be returned.
@@ -4234,7 +4234,7 @@ declare namespace imports.gi.Gio {
 		 * @param blob_len The length of #blob.
 		 * @param capabilities A #GDBusCapabilityFlags describing what protocol features are supported.
 		 * @returns A new #GDBusMessage or %NULL if #error is set. Free with
-		 * g_object_unref().
+		 * {@link GObject.unref}.
 		 */
 		public static new_from_blob(blob: number[], blob_len: number, capabilities: DBusCapabilityFlags): DBusMessage;
 		/**
@@ -4243,7 +4243,7 @@ declare namespace imports.gi.Gio {
 		 * @param path A valid object path.
 		 * @param interface_ A valid D-Bus interface name or %NULL.
 		 * @param method A valid method name.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		public static new_method_call(name: string | null, path: string, interface_: string | null, method: string): DBusMessage;
 		/**
@@ -4251,7 +4251,7 @@ declare namespace imports.gi.Gio {
 		 * @param path A valid object path.
 		 * @param interface_ A valid D-Bus interface name.
 		 * @param signal A valid signal name.
-		 * @returns A #GDBusMessage. Free with g_object_unref().
+		 * @returns A #GDBusMessage. Free with {@link GObject.unref}.
 		 */
 		public static new_signal(path: string, interface_: string, signal: string): DBusMessage;
 		/**
@@ -4302,7 +4302,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If this method invocation is a property Get, Set or GetAll call that
 		 * has been redirected to the method call handler then %NULL will be
-		 * returned.  See g_dbus_method_invocation_get_property_info() and
+		 * returned.  See {@link G.dbus_method_invocation_get_property_info} and
 		 * #GDBusInterfaceVTable for more information.
 		 * @returns A #GDBusMethodInfo or %NULL. Do not free, it is owned by #invocation.
 		 */
@@ -4329,7 +4329,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This will only be set in the case of an invocation in response to a
 		 * property Get or Set call that has been directed to the method call
-		 * handler for an object on account of its property_get() or
+		 * handler for an object on account of its {@link Property.get} or
 		 * property_set() vtable pointers being unset.
 		 * 
 		 * See #GDBusInterfaceVTable for more information.
@@ -4344,7 +4344,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_sender(): string;
 		/**
-		 * Gets the #user_data #gpointer passed to g_dbus_connection_register_object().
+		 * Gets the #user_data #gpointer passed to {@link G.dbus_connection_register_object}.
 		 * @returns A #gpointer.
 		 */
 		get_user_data(): any | null;
@@ -4361,7 +4361,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Finishes handling a D-Bus method call by returning an error.
 		 * 
-		 * See g_dbus_error_encode_gerror() for details about what error name
+		 * See {@link G.dbus_error_encode_gerror} for details about what error name
 		 * will be returned on the wire. In a nutshell, if the given error is
 		 * registered using g_dbus_error_register_error() the name given
 		 * during registration is used. Otherwise, a name of the form
@@ -4385,7 +4385,7 @@ declare namespace imports.gi.Gio {
 		 */
 		return_error(domain: GLib.Quark, code: number, format: string): void;
 		/**
-		 * Like g_dbus_method_invocation_return_error() but without printf()-style formatting.
+		 * Like {@link G.dbus_method_invocation_return_error} but without printf()-style formatting.
 		 * 
 		 * This method will take ownership of #invocation. See
 		 * #GDBusInterfaceVTable for more information about the ownership of
@@ -4396,7 +4396,7 @@ declare namespace imports.gi.Gio {
 		 */
 		return_error_literal(domain: GLib.Quark, code: number, message: string): void;
 		/**
-		 * Like g_dbus_method_invocation_return_error() but intended for
+		 * Like {@link G.dbus_method_invocation_return_error} but intended for
 		 * language bindings.
 		 * 
 		 * This method will take ownership of #invocation. See
@@ -4409,7 +4409,7 @@ declare namespace imports.gi.Gio {
 		 */
 		return_error_valist(domain: GLib.Quark, code: number, format: string, var_args: any[]): void;
 		/**
-		 * Like g_dbus_method_invocation_return_error() but takes a #GError
+		 * Like {@link G.dbus_method_invocation_return_error} but takes a #GError
 		 * instead of the error domain, error code and message.
 		 * 
 		 * This method will take ownership of #invocation. See
@@ -4455,7 +4455,7 @@ declare namespace imports.gi.Gio {
 		 */
 		return_value(parameters: GLib.Variant | null): void;
 		/**
-		 * Like g_dbus_method_invocation_return_value() but also takes a #GUnixFDList.
+		 * Like {@link G.dbus_method_invocation_return_value} but also takes a #GUnixFDList.
 		 * 
 		 * This method is only available on UNIX.
 		 * 
@@ -4467,7 +4467,7 @@ declare namespace imports.gi.Gio {
 		 */
 		return_value_with_unix_fd_list(parameters: GLib.Variant | null, fd_list: UnixFDList | null): void;
 		/**
-		 * Like g_dbus_method_invocation_return_gerror() but takes ownership
+		 * Like {@link G.dbus_method_invocation_return_gerror} but takes ownership
 		 * of #error so the caller does not need to free it.
 		 * 
 		 * This method will take ownership of #invocation. See
@@ -4492,7 +4492,7 @@ declare namespace imports.gi.Gio {
 	 * return results and errors.
 	 * 
 	 * The normal way to obtain a #GDBusMethodInvocation object is to receive
-	 * it as an argument to the handle_method_call() function in a
+	 * it as an argument to the {@link Handle.method_call} function in a
 	 * #GDBusInterfaceVTable that was passed to g_dbus_connection_register_object().
 	 */
 	interface DBusMethodInvocation extends DBusMethodInvocationMixin {}
@@ -4565,7 +4565,7 @@ declare namespace imports.gi.Gio {
 		 * #GObject::notify signal to track changes to the
 		 * #GDBusObjectManagerClient:name-owner property.
 		 * @returns The name owner or %NULL if no name owner
-		 * exists. Free with g_free().
+		 * exists. Free with {@link G.free}.
 		 */
 		get_name_owner(): string | null;
 		/**
@@ -4654,7 +4654,7 @@ declare namespace imports.gi.Gio {
 	 * the #GDBusObjectManager::object-added and
 	 * #GDBusObjectManager::object-removed signals and inspect the
 	 * #GDBusObjectProxy objects returned by
-	 * g_dbus_object_manager_get_objects().
+	 * {@link G.dbus_object_manager_get_objects}.
 	 * 
 	 * If the name for a #GDBusObjectManagerClient is not owned by anyone at
 	 * object construction time, the default behavior is to request the
@@ -4725,23 +4725,23 @@ declare namespace imports.gi.Gio {
 	class DBusObjectManagerClient {
 		public constructor(options?: Partial<DBusObjectManagerClientInitOptions>);
 		/**
-		 * Finishes an operation started with g_dbus_object_manager_client_new().
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new().
+		 * Finishes an operation started with {@link G.dbus_object_manager_client_new}.
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link G.dbus_object_manager_client_new}.
 		 * @returns A
 		 *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
-		 *   with g_object_unref().
+		 *   with {@link GObject.unref}.
 		 */
 		public static new_finish(res: AsyncResult): DBusObjectManagerClient;
 		/**
-		 * Finishes an operation started with g_dbus_object_manager_client_new_for_bus().
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new_for_bus().
+		 * Finishes an operation started with {@link G.dbus_object_manager_client_new_for_bus}.
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link G.dbus_object_manager_client_new_for_bus}.
 		 * @returns A
 		 *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
-		 *   with g_object_unref().
+		 *   with {@link GObject.unref}.
 		 */
 		public static new_for_bus_finish(res: AsyncResult): DBusObjectManagerClient;
 		/**
-		 * Like g_dbus_object_manager_client_new_sync() but takes a #GBusType instead
+		 * Like {@link G.dbus_object_manager_client_new_sync} but takes a #GBusType instead
 		 * of a #GDBusConnection.
 		 * 
 		 * This is a synchronous failable constructor - the calling thread is
@@ -4757,14 +4757,14 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable A #GCancellable or %NULL
 		 * @returns A
 		 *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
-		 *   with g_object_unref().
+		 *   with {@link GObject.unref}.
 		 */
 		public static new_for_bus_sync(bus_type: BusType, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc | null, get_proxy_type_user_data: any | null, get_proxy_type_destroy_notify: GLib.DestroyNotify | null, cancellable: Cancellable | null): DBusObjectManagerClient;
 		/**
 		 * Creates a new #GDBusObjectManagerClient object.
 		 * 
 		 * This is a synchronous failable constructor - the calling thread is
-		 * blocked until a reply is received. See g_dbus_object_manager_client_new()
+		 * blocked until a reply is received. See {@link G.dbus_object_manager_client_new}
 		 * for the asynchronous version.
 		 * @param connection A #GDBusConnection.
 		 * @param flags Zero or more flags from the #GDBusObjectManagerClientFlags enumeration.
@@ -4776,7 +4776,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable A #GCancellable or %NULL
 		 * @returns A
 		 *   #GDBusObjectManagerClient object or %NULL if #error is set. Free
-		 *   with g_object_unref().
+		 *   with {@link GObject.unref}.
 		 */
 		public static new_sync(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string | null, object_path: string, get_proxy_type_func: DBusProxyTypeFunc | null, get_proxy_type_user_data: any | null, get_proxy_type_destroy_notify: GLib.DestroyNotify | null, cancellable: Cancellable | null): DBusObjectManagerClient;
 		/**
@@ -4786,7 +4786,7 @@ declare namespace imports.gi.Gio {
 		 * ready, #callback will be invoked in the
 		 * [thread-default main context][g-main-context-push-thread-default]
 		 * of the thread you are calling this method from. You can
-		 * then call g_dbus_object_manager_client_new_finish() to get the result. See
+		 * then call {@link G.dbus_object_manager_client_new_finish} to get the result. See
 		 * g_dbus_object_manager_client_new_sync() for the synchronous version.
 		 * @param connection A #GDBusConnection.
 		 * @param flags Zero or more flags from the #GDBusObjectManagerClientFlags enumeration.
@@ -4800,7 +4800,7 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(connection: DBusConnection, flags: DBusObjectManagerClientFlags, name: string, object_path: string, get_proxy_type_func: DBusProxyTypeFunc | null, get_proxy_type_user_data: any | null, get_proxy_type_destroy_notify: GLib.DestroyNotify | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Like g_dbus_object_manager_client_new() but takes a #GBusType instead of a
+		 * Like {@link G.dbus_object_manager_client_new} but takes a #GBusType instead of a
 		 * #GDBusConnection.
 		 * 
 		 * This is an asynchronous failable constructor. When the result is
@@ -4849,7 +4849,7 @@ declare namespace imports.gi.Gio {
 		 */
 		export(object: DBusObjectSkeleton): void;
 		/**
-		 * Like g_dbus_object_manager_server_export() but appends a string of
+		 * Like {@link G.dbus_object_manager_server_export} but appends a string of
 		 * the form _N (with N being a natural number) to #object's object path
 		 * if an object with the given path already exists. As such, the
 		 * #GDBusObjectProxy:g-object-path property of #object may be modified.
@@ -4860,7 +4860,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the #GDBusConnection used by #manager.
 		 * @returns A #GDBusConnection object or %NULL if
 		 *   #manager isn't exported on a connection. The returned object should
-		 *   be freed with g_object_unref().
+		 *   be freed with {@link GObject.unref}.
 		 */
 		get_connection(): DBusConnection | null;
 		/**
@@ -4934,12 +4934,12 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GDBusObjectManagerServer object.
 		 * 
 		 * The returned server isn't yet exported on any connection. To do so,
-		 * use g_dbus_object_manager_server_set_connection(). Normally you
+		 * use {@link G.dbus_object_manager_server_set_connection}. Normally you
 		 * want to export all of your objects before doing so to avoid
 		 * [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
 		 * signals being emitted.
 		 * @param object_path The object path to export the manager object at.
-		 * @returns A #GDBusObjectManagerServer object. Free with g_object_unref().
+		 * @returns A #GDBusObjectManagerServer object. Free with {@link GObject.unref}.
 		 */
 		public static new(object_path: string): DBusObjectManagerServer;
 	}
@@ -5019,7 +5019,7 @@ declare namespace imports.gi.Gio {
 		 */
 		add_interface(interface_: DBusInterfaceSkeleton): void;
 		/**
-		 * This method simply calls g_dbus_interface_skeleton_flush() on all
+		 * This method simply calls {@link G.dbus_interface_skeleton_flush} on all
 		 * interfaces belonging to #object. See that method for when flushing
 		 * is useful.
 		 */
@@ -5091,7 +5091,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GDBusObjectSkeleton.
 		 * @param object_path An object path.
-		 * @returns A #GDBusObjectSkeleton. Free with g_object_unref().
+		 * @returns A #GDBusObjectSkeleton. Free with {@link GObject.unref}.
 		 */
 		public static new(object_path: string): DBusObjectSkeleton;
 	}
@@ -5106,7 +5106,7 @@ declare namespace imports.gi.Gio {
 		g_connection: DBusConnection;
 		/**
 		 * The timeout to use if -1 (specifying default timeout) is passed
-		 * as #timeout_msec in the g_dbus_proxy_call() and
+		 * as #timeout_msec in the {@link G.dbus_proxy_call} and
 		 * g_dbus_proxy_call_sync() functions.
 		 * 
 		 * This allows applications to set a proxy-wide timeout for all
@@ -5131,7 +5131,7 @@ declare namespace imports.gi.Gio {
 		 *   discarded and the #GError is set to %G_IO_ERROR_INVALID_ARGUMENT.
 		 * 
 		 * - Received signals that have a type signature mismatch are dropped and
-		 *   a warning is logged via g_warning().
+		 *   a warning is logged via {@link G.warning}.
 		 * 
 		 * - Properties received via the initial `GetAll()` call or via the
 		 *   `::PropertiesChanged` signal (on the
@@ -5179,7 +5179,7 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_ERROR_INVALID_ARGUMENT.
 		 * 
 		 * If the #parameters #GVariant is floating, it is consumed. This allows
-		 * convenient 'inline' use of g_variant_new(), e.g.:
+		 * convenient 'inline' use of {@link G.variant_new}, e.g.:
 		 * |[<!-- language="C" -->
 		 *  g_dbus_proxy_call (proxy,
 		 *                     "TwoStrings",
@@ -5218,10 +5218,10 @@ declare namespace imports.gi.Gio {
 		 */
 		call(method_name: string, parameters: GLib.Variant | null, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_proxy_call().
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call().
+		 * Finishes an operation started with {@link G.dbus_proxy_call}.
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link G.dbus_proxy_call}.
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
-		 * return values. Free with g_variant_unref().
+		 * return values. Free with {@link G.variant_unref}.
 		 */
 		call_finish(res: AsyncResult): GLib.Variant;
 		/**
@@ -5239,7 +5239,7 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_ERROR_INVALID_ARGUMENT.
 		 * 
 		 * If the #parameters #GVariant is floating, it is consumed. This allows
-		 * convenient 'inline' use of g_variant_new(), e.g.:
+		 * convenient 'inline' use of {@link G.variant_new}, e.g.:
 		 * |[<!-- language="C" -->
 		 *  g_dbus_proxy_call_sync (proxy,
 		 *                          "TwoStrings",
@@ -5267,11 +5267,11 @@ declare namespace imports.gi.Gio {
 		 *                "infinite") or -1 to use the proxy default timeout.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
-		 * return values. Free with g_variant_unref().
+		 * return values. Free with {@link G.variant_unref}.
 		 */
 		call_sync(method_name: string, parameters: GLib.Variant | null, flags: DBusCallFlags, timeout_msec: number, cancellable: Cancellable | null): GLib.Variant;
 		/**
-		 * Like g_dbus_proxy_call() but also takes a #GUnixFDList object.
+		 * Like {@link G.dbus_proxy_call} but also takes a #GUnixFDList object.
 		 * 
 		 * This method is only available on UNIX.
 		 * @param method_name Name of method to invoke.
@@ -5286,16 +5286,16 @@ declare namespace imports.gi.Gio {
 		 */
 		call_with_unix_fd_list(method_name: string, parameters: GLib.Variant | null, flags: DBusCallFlags, timeout_msec: number, fd_list: UnixFDList | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_dbus_proxy_call_with_unix_fd_list().
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_proxy_call_with_unix_fd_list().
+		 * Finishes an operation started with {@link G.dbus_proxy_call_with_unix_fd_list}.
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback passed to {@link G.dbus_proxy_call_with_unix_fd_list}.
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
-		 * return values. Free with g_variant_unref().
+		 * return values. Free with {@link G.variant_unref}.
 		 * 
 		 * Return location for a #GUnixFDList or %NULL.
 		 */
 		call_with_unix_fd_list_finish(res: AsyncResult): [ GLib.Variant, UnixFDList | null ];
 		/**
-		 * Like g_dbus_proxy_call_sync() but also takes and returns #GUnixFDList objects.
+		 * Like {@link G.dbus_proxy_call_sync} but also takes and returns #GUnixFDList objects.
 		 * 
 		 * This method is only available on UNIX.
 		 * @param method_name Name of method to invoke.
@@ -5307,7 +5307,7 @@ declare namespace imports.gi.Gio {
 		 * @param fd_list A #GUnixFDList or %NULL.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns %NULL if #error is set. Otherwise a #GVariant tuple with
-		 * return values. Free with g_variant_unref().
+		 * return values. Free with {@link G.variant_unref}.
 		 * 
 		 * Return location for a #GUnixFDList or %NULL.
 		 */
@@ -5322,7 +5322,7 @@ declare namespace imports.gi.Gio {
 		 * @param property_name Property name.
 		 * @returns A reference to the #GVariant instance
 		 *    that holds the value for #property_name or %NULL if the value is not in
-		 *    the cache. The returned reference must be freed with g_variant_unref().
+		 *    the cache. The returned reference must be freed with {@link G.variant_unref}.
 		 */
 		get_cached_property(property_name: string): GLib.Variant | null;
 		/**
@@ -5330,7 +5330,7 @@ declare namespace imports.gi.Gio {
 		 * @returns A
 		 *          %NULL-terminated array of strings or %NULL if
 		 *          #proxy has no cached properties. Free the returned array with
-		 *          g_strfreev().
+		 *          {@link G.strfreev}.
 		 */
 		get_cached_property_names(): string[] | null;
 		/**
@@ -5340,7 +5340,7 @@ declare namespace imports.gi.Gio {
 		get_connection(): DBusConnection;
 		/**
 		 * Gets the timeout to use if -1 (specifying default timeout) is
-		 * passed as #timeout_msec in the g_dbus_proxy_call() and
+		 * passed as #timeout_msec in the {@link G.dbus_proxy_call} and
 		 * g_dbus_proxy_call_sync() functions.
 		 * 
 		 * See the #GDBusProxy:g-default-timeout property for more details.
@@ -5380,7 +5380,7 @@ declare namespace imports.gi.Gio {
 		 * #GObject::notify signal to track changes to the
 		 * #GDBusProxy:g-name-owner property.
 		 * @returns The name owner or %NULL if no name
-		 *    owner exists. Free with g_free().
+		 *    owner exists. Free with {@link G.free}.
 		 */
 		get_name_owner(): string | null;
 		/**
@@ -5400,7 +5400,7 @@ declare namespace imports.gi.Gio {
 		 * it, then #value is checked against the type of the property.
 		 * 
 		 * If the #value #GVariant is floating, it is consumed. This allows
-		 * convenient 'inline' use of g_variant_new(), e.g.
+		 * convenient 'inline' use of {@link G.variant_new}, e.g.
 		 * |[<!-- language="C" -->
 		 *  g_dbus_proxy_set_cached_property (proxy,
 		 *                                    "SomeProperty",
@@ -5428,7 +5428,7 @@ declare namespace imports.gi.Gio {
 		set_cached_property(property_name: string, value: GLib.Variant | null): void;
 		/**
 		 * Sets the timeout to use if -1 (specifying default timeout) is
-		 * passed as #timeout_msec in the g_dbus_proxy_call() and
+		 * passed as #timeout_msec in the {@link G.dbus_proxy_call} and
 		 * g_dbus_proxy_call_sync() functions.
 		 * 
 		 * See the #GDBusProxy:g-default-timeout property for more details.
@@ -5559,20 +5559,20 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<DBusProxyInitOptions>);
 		/**
 		 * Finishes creating a #GDBusProxy.
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new().
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to {@link G.dbus_proxy_new}.
 		 * @returns A #GDBusProxy or %NULL if #error is set.
-		 *    Free with g_object_unref().
+		 *    Free with {@link GObject.unref}.
 		 */
 		public static new_finish(res: AsyncResult): DBusProxy;
 		/**
 		 * Finishes creating a #GDBusProxy.
-		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new_for_bus().
+		 * @param res A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to {@link G.dbus_proxy_new_for_bus}.
 		 * @returns A #GDBusProxy or %NULL if #error is set.
-		 *    Free with g_object_unref().
+		 *    Free with {@link GObject.unref}.
 		 */
 		public static new_for_bus_finish(res: AsyncResult): DBusProxy;
 		/**
-		 * Like g_dbus_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
+		 * Like {@link G.dbus_proxy_new_sync} but takes a #GBusType instead of a #GDBusConnection.
 		 * 
 		 * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
 		 * @param bus_type A #GBusType.
@@ -5584,7 +5584,7 @@ declare namespace imports.gi.Gio {
 		 * @param interface_name A D-Bus interface name.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns A #GDBusProxy or %NULL if error is set.
-		 *    Free with g_object_unref().
+		 *    Free with {@link GObject.unref}.
 		 */
 		public static new_for_bus_sync(bus_type: BusType, flags: DBusProxyFlags, info: DBusInterfaceInfo | null, name: string, object_path: string, interface_name: string, cancellable: Cancellable | null): DBusProxy;
 		/**
@@ -5606,7 +5606,7 @@ declare namespace imports.gi.Gio {
 		 * flags aren't set and no name owner currently exists, the message bus
 		 * will be requested to launch a name owner for the name.
 		 * 
-		 * This is a synchronous failable constructor. See g_dbus_proxy_new()
+		 * This is a synchronous failable constructor. See {@link G.dbus_proxy_new}
 		 * and g_dbus_proxy_new_finish() for the asynchronous version.
 		 * 
 		 * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
@@ -5618,7 +5618,7 @@ declare namespace imports.gi.Gio {
 		 * @param interface_name A D-Bus interface name.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns A #GDBusProxy or %NULL if error is set.
-		 *    Free with g_object_unref().
+		 *    Free with {@link GObject.unref}.
 		 */
 		public static new_sync(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo | null, name: string | null, object_path: string, interface_name: string, cancellable: Cancellable | null): DBusProxy;
 		/**
@@ -5644,7 +5644,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This is a failable asynchronous constructor - when the proxy is
 		 * ready, #callback will be invoked and you can use
-		 * g_dbus_proxy_new_finish() to get the result.
+		 * {@link G.dbus_proxy_new_finish} to get the result.
 		 * 
 		 * See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.
 		 * 
@@ -5660,7 +5660,7 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(connection: DBusConnection, flags: DBusProxyFlags, info: DBusInterfaceInfo | null, name: string | null, object_path: string, interface_name: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Like g_dbus_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
+		 * Like {@link G.dbus_proxy_new} but takes a #GBusType instead of a #GDBusConnection.
 		 * 
 		 * #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
 		 * @param bus_type A #GBusType.
@@ -5721,7 +5721,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_flags(): DBusServerFlags;
 		/**
-		 * Gets the GUID for #server, as provided to g_dbus_server_new_sync().
+		 * Gets the GUID for #server, as provided to {@link G.dbus_server_new_sync}.
 		 * @returns A D-Bus GUID. Do not free this string, it is owned by #server.
 		 */
 		get_guid(): string;
@@ -5740,7 +5740,7 @@ declare namespace imports.gi.Gio {
 		stop(): void;
 		/**
 		 * Emitted when a new authenticated connection has been made. Use
-		 * g_dbus_connection_get_peer_credentials() to figure out what
+		 * {@link G.dbus_connection_get_peer_credentials} to figure out what
 		 * identity (if any), was authenticated.
 		 * 
 		 * If you want to accept the connection, take a reference to the
@@ -5804,7 +5804,7 @@ declare namespace imports.gi.Gio {
 	 * implement the org.freedesktop.DBus interface.
 	 * 
 	 * To just export an object on a well-known name on a message bus, such as the
-	 * session or system bus, you should instead use g_bus_own_name().
+	 * session or system bus, you should instead use {@link G.bus_own_name}.
 	 * 
 	 * An example of peer-to-peer communication with GDBus can be found
 	 * in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
@@ -5824,7 +5824,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new D-Bus server that listens on the first address in
 		 * #address that works.
 		 * 
-		 * Once constructed, you can use g_dbus_server_get_client_address() to
+		 * Once constructed, you can use {@link G.dbus_server_get_client_address} to
 		 * get a D-Bus address string that clients can use to connect.
 		 * 
 		 * To have control over the available authentication mechanisms and
@@ -5847,7 +5847,7 @@ declare namespace imports.gi.Gio {
 		 * @param observer A #GDBusAuthObserver or %NULL.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns A #GDBusServer or %NULL if #error is set. Free with
-		 * g_object_unref().
+		 * {@link GObject.unref}.
 		 */
 		public static new_sync(address: string, flags: DBusServerFlags, guid: string, observer: DBusAuthObserver | null, cancellable: Cancellable | null): DBusServer;
 	}
@@ -5888,7 +5888,7 @@ declare namespace imports.gi.Gio {
 		 * Reads a 16-bit/2-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order} and g_data_input_stream_set_byte_order().
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns a signed 16-bit/2-byte value read from #stream or `0` if
 		 * an error occurred.
@@ -5898,7 +5898,7 @@ declare namespace imports.gi.Gio {
 		 * Reads a signed 32-bit/4-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order} and g_data_input_stream_set_byte_order().
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -5912,7 +5912,7 @@ declare namespace imports.gi.Gio {
 		 * Reads a 64-bit/8-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order} and g_data_input_stream_set_byte_order().
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -5942,7 +5942,7 @@ declare namespace imports.gi.Gio {
 		 */
 		read_line(cancellable: Cancellable | null): [ number[] | null, number | null ];
 		/**
-		 * The asynchronous version of g_data_input_stream_read_line().  It is
+		 * The asynchronous version of {@link G.data_input_stream_read_line}.  It is
 		 * an error to have two outstanding calls to this function.
 		 * 
 		 * When the operation is finished, #callback will be called. You
@@ -5955,7 +5955,7 @@ declare namespace imports.gi.Gio {
 		read_line_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous call started by
-		 * g_data_input_stream_read_line_async().  Note the warning about
+		 * {@link G.data_input_stream_read_line_async}.  Note the warning about
 		 * string encoding in g_data_input_stream_read_line() applies here as
 		 * well.
 		 * @param result the #GAsyncResult that was provided to the callback.
@@ -5971,7 +5971,7 @@ declare namespace imports.gi.Gio {
 		read_line_finish(result: AsyncResult): [ number[] | null, number | null ];
 		/**
 		 * Finish an asynchronous call started by
-		 * g_data_input_stream_read_line_async().
+		 * {@link G.data_input_stream_read_line_async}.
 		 * @param result the #GAsyncResult that was provided to the callback.
 		 * @returns a string with the line that
 		 *  was read in (without the newlines).  Set #length to a #gsize to
@@ -6005,7 +6005,7 @@ declare namespace imports.gi.Gio {
 		 * Reads an unsigned 16-bit/2-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order} and g_data_input_stream_set_byte_order().
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns an unsigned 16-bit/2-byte value read from the #stream or `0` if
 		 * an error occurred.
@@ -6015,7 +6015,7 @@ declare namespace imports.gi.Gio {
 		 * Reads an unsigned 32-bit/4-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order() and g_data_input_stream_set_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order} and g_data_input_stream_set_byte_order().
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -6029,7 +6029,7 @@ declare namespace imports.gi.Gio {
 		 * Reads an unsigned 64-bit/8-byte value from #stream.
 		 * 
 		 * In order to get the correct byte order for this read operation,
-		 * see g_data_input_stream_get_byte_order().
+		 * see {@link G.data_input_stream_get_byte_order}.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -6041,13 +6041,13 @@ declare namespace imports.gi.Gio {
 		read_uint64(cancellable: Cancellable | null): number;
 		/**
 		 * @deprecated
-		 * Use g_data_input_stream_read_upto() instead, which has more
+		 * Use {@link G.data_input_stream_read_upto} instead, which has more
 		 *     consistent behaviour regarding the stop character.
 		 * 
 		 * Reads a string from the data input stream, up to the first
 		 * occurrence of any of the stop characters.
 		 * 
-		 * Note that, in contrast to g_data_input_stream_read_until_async(),
+		 * Note that, in contrast to {@link G.data_input_stream_read_until_async},
 		 * this function consumes the stop character that it finds.
 		 * 
 		 * Don't use this function in new code.  Its functionality is
@@ -6067,10 +6067,10 @@ declare namespace imports.gi.Gio {
 		read_until(stop_chars: string, cancellable: Cancellable | null): [ string, number | null ];
 		/**
 		 * @deprecated
-		 * Use g_data_input_stream_read_upto_async() instead, which
+		 * Use {@link G.data_input_stream_read_upto_async} instead, which
 		 *     has more consistent behaviour regarding the stop character.
 		 * 
-		 * The asynchronous version of g_data_input_stream_read_until().
+		 * The asynchronous version of {@link G.data_input_stream_read_until}.
 		 * It is an error to have two outstanding calls to this function.
 		 * 
 		 * Note that, in contrast to g_data_input_stream_read_until(),
@@ -6093,11 +6093,11 @@ declare namespace imports.gi.Gio {
 		read_until_async(stop_chars: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_data_input_stream_read_upto_finish() instead, which
+		 * Use {@link G.data_input_stream_read_upto_finish} instead, which
 		 *     has more consistent behaviour regarding the stop character.
 		 * 
 		 * Finish an asynchronous call started by
-		 * g_data_input_stream_read_until_async().
+		 * {@link G.data_input_stream_read_until_async}.
 		 * @param result the #GAsyncResult that was provided to the callback.
 		 * @returns a string with the data that was read
 		 *     before encountering any of the stop characters. Set #length to
@@ -6111,7 +6111,7 @@ declare namespace imports.gi.Gio {
 		 * Reads a string from the data input stream, up to the first
 		 * occurrence of any of the stop characters.
 		 * 
-		 * In contrast to g_data_input_stream_read_until(), this function
+		 * In contrast to {@link G.data_input_stream_read_until}, this function
 		 * does not consume the stop character. You have to use
 		 * g_data_input_stream_read_byte() to get it before calling
 		 * g_data_input_stream_read_upto() again.
@@ -6133,7 +6133,7 @@ declare namespace imports.gi.Gio {
 		 */
 		read_upto(stop_chars: string, stop_chars_len: number, cancellable: Cancellable | null): [ string, number | null ];
 		/**
-		 * The asynchronous version of g_data_input_stream_read_upto().
+		 * The asynchronous version of {@link G.data_input_stream_read_upto}.
 		 * It is an error to have two outstanding calls to this function.
 		 * 
 		 * In contrast to g_data_input_stream_read_until(), this function
@@ -6157,7 +6157,7 @@ declare namespace imports.gi.Gio {
 		read_upto_async(stop_chars: string, stop_chars_len: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous call started by
-		 * g_data_input_stream_read_upto_async().
+		 * {@link G.data_input_stream_read_upto_async}.
 		 * 
 		 * Note that this function does not consume the stop character. You
 		 * have to use g_data_input_stream_read_byte() to get it before calling
@@ -6342,7 +6342,7 @@ declare namespace imports.gi.Gio {
 		 * This corresponds to the "Name" key within the keyfile group for the
 		 * action.
 		 * @param action_name the name of the action as from
-		 *   g_desktop_app_info_list_actions()
+		 *   {@link G.desktop_app_info_list_actions}
 		 * @returns the locale-specific action name
 		 */
 		get_action_name(action_name: string): string;
@@ -6364,7 +6364,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * When #info was created from a known filename, return it.  In some
 		 * situations such as the #GDesktopAppInfo returned from
-		 * g_desktop_app_info_new_from_keyfile(), this function will return %NULL.
+		 * {@link G.desktop_app_info_new_from_keyfile}, this function will return %NULL.
 		 * @returns The full path to the file for #info,
 		 *     or %NULL if not known.
 		 */
@@ -6398,7 +6398,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value of the NoDisplay key, which helps determine if the
 		 * application info should be shown in menus. See
-		 * #G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and g_app_info_should_show().
+		 * #G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY and {@link G.app_info_should_show}.
 		 * @returns The value of the NoDisplay key
 		 */
 		get_nodisplay(): boolean;
@@ -6412,7 +6412,7 @@ declare namespace imports.gi.Gio {
 		 * to override the default mechanism then you may specify #desktop_env,
 		 * but this is not recommended.
 		 * 
-		 * Note that g_app_info_should_show() for #info will include this check (with
+		 * Note that {@link G.app_info_should_show} for #info will include this check (with
 		 * %NULL for #desktop_env) as well as additional checks.
 		 * @param desktop_env a string specifying a desktop name
 		 * @returns %TRUE if the #info should be shown in #desktop_env according to the
@@ -6444,7 +6444,7 @@ declare namespace imports.gi.Gio {
 		 * @param key the key to look up
 		 * @returns 
 		 *  a %NULL-terminated string array or %NULL if the specified
-		 *  key cannot be found. The array should be freed with g_strfreev().
+		 *  key cannot be found. The array should be freed with {@link G.strfreev}.
 		 * 
 		 * return location for the number of returned strings, or %NULL
 		 */
@@ -6460,7 +6460,7 @@ declare namespace imports.gi.Gio {
 		 * Activates the named application action.
 		 * 
 		 * You may only call this function on action names that were
-		 * returned from g_desktop_app_info_list_actions().
+		 * returned from {@link G.desktop_app_info_list_actions}.
 		 * 
 		 * Note that if the main entry of the desktop file indicates that the
 		 * application supports startup notification, and #launch_context is
@@ -6473,12 +6473,12 @@ declare namespace imports.gi.Gio {
 		 * As with g_app_info_launch() there is no way to detect failures that
 		 * occur while using this function.
 		 * @param action_name the name of the action as from
-		 *   g_desktop_app_info_list_actions()
+		 *   {@link G.desktop_app_info_list_actions}
 		 * @param launch_context a #GAppLaunchContext
 		 */
 		launch_action(action_name: string, launch_context: AppLaunchContext | null): void;
 		/**
-		 * This function performs the equivalent of g_app_info_launch_uris(),
+		 * This function performs the equivalent of {@link G.app_info_launch_uris},
 		 * but is intended primarily for operating system components that
 		 * launch applications.  Ordinary applications should use
 		 * g_app_info_launch_uris().
@@ -6505,7 +6505,7 @@ declare namespace imports.gi.Gio {
 		 */
 		launch_uris_as_manager(uris: GLib.List, launch_context: AppLaunchContext | null, spawn_flags: GLib.SpawnFlags, user_setup: GLib.SpawnChildSetupFunc | null, user_setup_data: any | null, pid_callback: DesktopAppLaunchCallback | null, pid_callback_data: any | null): boolean;
 		/**
-		 * Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows
+		 * Equivalent to {@link G.desktop_app_info_launch_uris_as_manager} but allows
 		 * you to pass in file descriptors for the stdin, stdout and stderr streams
 		 * of the launched process.
 		 * 
@@ -6612,7 +6612,7 @@ declare namespace imports.gi.Gio {
 		 * any time.
 		 * 
 		 * None of the search results are subjected to the normal validation
-		 * checks performed by g_desktop_app_info_new() (for example, checking that
+		 * checks performed by {@link G.desktop_app_info_new} (for example, checking that
 		 * the executable referenced by a result exists), and so it is possible for
 		 * g_desktop_app_info_new() to return %NULL when passed an app ID returned by
 		 * this function. It is expected that calling code will do this when
@@ -6627,7 +6627,7 @@ declare namespace imports.gi.Gio {
 		 * `XDG_CURRENT_DESKTOP` environment variable will be used.
 		 * 
 		 * Sets the name of the desktop that the application is running in.
-		 * This is used by g_app_info_should_show() and
+		 * This is used by {@link G.app_info_should_show} and
 		 * g_desktop_app_info_get_show_in() to evaluate the
 		 * `OnlyShowIn` and `NotShowIn`
 		 * desktop entry fields.
@@ -6742,7 +6742,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GEmblemedIcon is an implementation of #GIcon that supports
 	 * adding an emblem to an icon. Adding multiple emblems to an
-	 * icon is ensured via g_emblemed_icon_add_emblem().
+	 * icon is ensured via {@link G.emblemed_icon_add_emblem}.
 	 * 
 	 * Note that #GEmblemedIcon allows no control over the position
 	 * of the emblems. See also #GEmblem for more information.
@@ -6781,14 +6781,14 @@ declare namespace imports.gi.Gio {
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in
-		 * g_file_enumerator_close_finish().
+		 * {@link G.file_enumerator_close_finish}.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @param callback a #GAsyncReadyCallback to call when the request is satisfied
 		 */
 		close_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes closing a file enumerator, started from g_file_enumerator_close_async().
+		 * Finishes closing a file enumerator, started from {@link G.file_enumerator_close_async}.
 		 * 
 		 * If the file enumerator was already closed when g_file_enumerator_close_async()
 		 * was called, then this function will report %G_IO_ERROR_CLOSED in #error, and
@@ -6805,7 +6805,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Return a new #GFile which refers to the file named by #info in the source
 		 * directory of #enumerator.  This function is primarily intended to be used
-		 * inside loops with g_file_enumerator_next_file().
+		 * inside loops with {@link G.file_enumerator_next_file}.
 		 * 
 		 * This is a convenience method that's equivalent to:
 		 * |[<!-- language="C" -->
@@ -6813,7 +6813,7 @@ declare namespace imports.gi.Gio {
 		 *   GFile *child = g_file_get_child (g_file_enumerator_get_container (enumr),
 		 *                                    name);
 		 * ]|
-		 * @param info a #GFileInfo gotten from g_file_enumerator_next_file()
+		 * @param info a #GFileInfo gotten from {@link G.file_enumerator_next_file}
 		 *   or the async equivalents.
 		 * @returns a #GFile for the #GFileInfo passed it.
 		 */
@@ -6834,7 +6834,7 @@ declare namespace imports.gi.Gio {
 		 */
 		is_closed(): boolean;
 		/**
-		 * This is a version of g_file_enumerator_next_file() that's easier to
+		 * This is a version of {@link G.file_enumerator_next_file} that's easier to
 		 * use correctly from C programs.  With g_file_enumerator_next_file(),
 		 * the gboolean return value signifies "end of iteration or error", which
 		 * requires allocation of a temporary #GError.
@@ -6895,7 +6895,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @returns A #GFileInfo or %NULL on error
 		 *    or end of enumerator.  Free the returned object with
-		 *    g_object_unref() when no longer needed.
+		 *    {@link GObject.unref} when no longer needed.
 		 */
 		next_file(cancellable: Cancellable | null): FileInfo | null;
 		/**
@@ -6925,10 +6925,10 @@ declare namespace imports.gi.Gio {
 		 */
 		next_files_async(num_files: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes the asynchronous operation started with g_file_enumerator_next_files_async().
+		 * Finishes the asynchronous operation started with {@link G.file_enumerator_next_files_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns a #GList of #GFileInfos. You must free the list with
-		 *     g_list_free() and unref the infos with g_object_unref() when you're
+		 *     {@link G.list_free} and unref the infos with g_object_unref() when you're
 		 *     done with them.
 		 */
 		next_files_finish(result: AsyncResult): GLib.List;
@@ -6950,7 +6950,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GFileEnumerator allows you to operate on a set of #GFiles,
 	 * returning a #GFileInfo structure for each file enumerated (e.g.
-	 * g_file_enumerate_children() will return a #GFileEnumerator for each
+	 * {@link G.file_enumerate_children} will return a #GFileEnumerator for each
 	 * of the children within a directory).
 	 * 
 	 * To get the next file's information from a #GFileEnumerator, use
@@ -6995,7 +6995,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Queries a file io stream for the given #attributes.
 		 * This function blocks while querying the stream. For the asynchronous
-		 * version of this function, see g_file_io_stream_query_info_async().
+		 * version of this function, see {@link G.file_io_stream_query_info_async}.
 		 * While the stream is blocked, the stream will set the pending flag
 		 * internally, and any other operations on the stream will fail with
 		 * %G_IO_ERROR_PENDING.
@@ -7018,7 +7018,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously queries the #stream for a #GFileInfo. When completed,
 		 * #callback will be called with a #GAsyncResult which can be used to
-		 * finish the operation with g_file_io_stream_query_info_finish().
+		 * finish the operation with {@link G.file_io_stream_query_info_finish}.
 		 * 
 		 * For the synchronous version of this function, see
 		 * g_file_io_stream_query_info().
@@ -7030,7 +7030,7 @@ declare namespace imports.gi.Gio {
 		query_info_async(attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finalizes the asynchronous query started
-		 * by g_file_io_stream_query_info_async().
+		 * by {@link G.file_io_stream_query_info_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns A #GFileInfo for the finished query.
 		 */
@@ -7055,7 +7055,7 @@ declare namespace imports.gi.Gio {
 	 * operations.
 	 * 
 	 * To find the position of a file io stream, use
-	 * g_seekable_tell().
+	 * {@link G.seekable_tell}.
 	 * 
 	 * To find out if a file io stream supports seeking, use g_seekable_can_seek().
 	 * To position a file io stream, use g_seekable_seek().
@@ -7154,7 +7154,7 @@ declare namespace imports.gi.Gio {
 		 * @param attribute a file attribute key.
 		 * @returns a UTF-8 string associated with the given #attribute, or
 		 *    %NULL if the attribute wasn’t set.
-		 *    When you're done with the string it must be freed with g_free().
+		 *    When you're done with the string it must be freed with {@link G.free}.
 		 */
 		get_attribute_as_string(attribute: string): string | null;
 		/**
@@ -7297,7 +7297,7 @@ declare namespace imports.gi.Gio {
 		get_etag(): string | null;
 		/**
 		 * Gets a file's type (whether it is a regular file, symlink, etc).
-		 * This is different from the file's content type, see g_file_info_get_content_type().
+		 * This is different from the file's content type, see {@link G.file_info_get_content_type}.
 		 * @returns a #GFileType for the given file.
 		 */
 		get_file_type(): FileType;
@@ -7333,7 +7333,7 @@ declare namespace imports.gi.Gio {
 		get_modification_date_time(): GLib.DateTime | null;
 		/**
 		 * @deprecated
-		 * Use g_file_info_get_modification_date_time() instead, as
+		 * Use {@link G.file_info_get_modification_date_time} instead, as
 		 *    #GTimeVal is deprecated due to the year 2038 problem.
 		 * 
 		 * Gets the modification time of the current #info and sets it
@@ -7455,7 +7455,7 @@ declare namespace imports.gi.Gio {
 		set_attribute_object(attribute: string, attr_value: GObject.Object): void;
 		/**
 		 * Sets the attribute status for an attribute key. This is only
-		 * needed by external code that implement g_file_set_attributes_from_info()
+		 * needed by external code that implement {@link G.file_set_attributes_from_info}
 		 * or similar functions.
 		 * 
 		 * The attribute must exist in #info for this to work. Otherwise %FALSE
@@ -7554,7 +7554,7 @@ declare namespace imports.gi.Gio {
 		set_modification_date_time(mtime: GLib.DateTime): void;
 		/**
 		 * @deprecated
-		 * Use g_file_info_set_modification_date_time() instead, as
+		 * Use {@link G.file_info_set_modification_date_time} instead, as
 		 *    #GTimeVal is deprecated due to the year 2038 problem.
 		 * 
 		 * Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
@@ -7594,7 +7594,7 @@ declare namespace imports.gi.Gio {
 		 */
 		set_symlink_target(symlink_target: string): void;
 		/**
-		 * Unsets a mask set by g_file_info_set_attribute_mask(), if one
+		 * Unsets a mask set by {@link G.file_info_set_attribute_mask}, if one
 		 * is set.
 		 */
 		unset_attribute_mask(): void;
@@ -7616,7 +7616,7 @@ declare namespace imports.gi.Gio {
 	 * See [GFileAttribute][gio-GFileAttribute] for more information on how
 	 * GIO handles file attributes.
 	 * 
-	 * To obtain a #GFileInfo for a #GFile, use g_file_query_info() (or its
+	 * To obtain a #GFileInfo for a #GFile, use {@link G.file_query_info} (or its
 	 * async variant). To obtain a #GFileInfo for a file input or output
 	 * stream, use g_file_input_stream_query_info() or
 	 * g_file_output_stream_query_info() (or their async variants).
@@ -7657,7 +7657,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Queries a file input stream the given #attributes. This function blocks
 		 * while querying the stream. For the asynchronous (non-blocking) version
-		 * of this function, see g_file_input_stream_query_info_async(). While the
+		 * of this function, see {@link G.file_input_stream_query_info_async}. While the
 		 * stream is blocked, the stream will set the pending flag internally, and
 		 * any other operations on the stream will fail with %G_IO_ERROR_PENDING.
 		 * @param attributes a file attribute query string.
@@ -7668,7 +7668,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Queries the stream information asynchronously.
 		 * When the operation is finished #callback will be called.
-		 * You can then call g_file_input_stream_query_info_finish()
+		 * You can then call {@link G.file_input_stream_query_info_finish}
 		 * to get the result of the operation.
 		 * 
 		 * For the synchronous version of this function,
@@ -7706,7 +7706,7 @@ declare namespace imports.gi.Gio {
 	 * GFileInputStream implements #GSeekable, which allows the input
 	 * stream to jump to arbitrary positions in the file, provided the
 	 * filesystem of the file allows it. To find the position of a file
-	 * input stream, use g_seekable_tell(). To find out if a file input
+	 * input stream, use {@link G.seekable_tell}. To find out if a file input
 	 * stream supports seeking, use g_seekable_can_seek().
 	 * To position a file input stream, use g_seekable_seek().
 	 */
@@ -7813,7 +7813,7 @@ declare namespace imports.gi.Gio {
 	 * Monitors a file or directory for changes.
 	 * 
 	 * To obtain a #GFileMonitor for a file or directory, use
-	 * g_file_monitor(), g_file_monitor_file(), or
+	 * {@link G.file_monitor}, g_file_monitor_file(), or
 	 * g_file_monitor_directory().
 	 * 
 	 * To get informed about changes to the file or directory you are
@@ -7845,7 +7845,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Queries a file output stream for the given #attributes.
 		 * This function blocks while querying the stream. For the asynchronous
-		 * version of this function, see g_file_output_stream_query_info_async().
+		 * version of this function, see {@link G.file_output_stream_query_info_async}.
 		 * While the stream is blocked, the stream will set the pending flag
 		 * internally, and any other operations on the stream will fail with
 		 * %G_IO_ERROR_PENDING.
@@ -7868,7 +7868,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously queries the #stream for a #GFileInfo. When completed,
 		 * #callback will be called with a #GAsyncResult which can be used to
-		 * finish the operation with g_file_output_stream_query_info_finish().
+		 * finish the operation with {@link G.file_output_stream_query_info_finish}.
 		 * 
 		 * For the synchronous version of this function, see
 		 * g_file_output_stream_query_info().
@@ -7880,7 +7880,7 @@ declare namespace imports.gi.Gio {
 		query_info_async(attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finalizes the asynchronous query started
-		 * by g_file_output_stream_query_info_async().
+		 * by {@link G.file_output_stream_query_info_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns A #GFileInfo for the finished query.
 		 */
@@ -7904,7 +7904,7 @@ declare namespace imports.gi.Gio {
 	 * the file, provided the filesystem of the file supports these
 	 * operations.
 	 * 
-	 * To find the position of a file output stream, use g_seekable_tell().
+	 * To find the position of a file output stream, use {@link G.seekable_tell}.
 	 * To find out if a file output stream supports seeking, use
 	 * g_seekable_can_seek().To position a file output stream, use
 	 * g_seekable_seek(). To find out if a file output stream supports
@@ -7925,7 +7925,7 @@ declare namespace imports.gi.Gio {
 		 * Obtains a completion for #initial_text from #completer.
 		 * @param initial_text text to be completed.
 		 * @returns a completed string, or %NULL if no
-		 *     completion exists. This string is not owned by GIO, so remember to g_free()
+		 *     completion exists. This string is not owned by GIO, so remember to {@link G.free}
 		 *     it when finished.
 		 */
 		get_completion_suffix(initial_text: string): string | null;
@@ -7933,7 +7933,7 @@ declare namespace imports.gi.Gio {
 		 * Gets an array of completion strings for a given initial text.
 		 * @param initial_text text to be completed.
 		 * @returns array of strings with possible completions for #initial_text.
-		 * This array must be freed by g_strfreev() when finished.
+		 * This array must be freed by {@link G.strfreev} when finished.
 		 */
 		get_completions(initial_text: string): string[];
 		/**
@@ -8095,7 +8095,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This function is run after the module has been loaded into GIO,
 		 * to initialize the module. Typically, this function will call
-		 * g_io_extension_point_implement().
+		 * {@link G.io_extension_point_implement}.
 		 * 
 		 * Since 2.56, this function should be named `g_io_<modulename>_load`, where
 		 * `modulename` is the plugin’s filename with the `lib` or `libgio` prefix and
@@ -8164,7 +8164,7 @@ declare namespace imports.gi.Gio {
 		 * startup so that it can register its extension points during init.
 		 * 
 		 * Note that a module need not actually implement all the extension
-		 * points that g_io_module_query() returns, since the exact list of
+		 * points that {@link G.io_module_query} returns, since the exact list of
 		 * extension may depend on runtime issues. However all extension
 		 * points actually implemented must be returned by g_io_module_query()
 		 * (if defined).
@@ -8182,7 +8182,7 @@ declare namespace imports.gi.Gio {
 		 * for static builds.
 		 * @returns A %NULL-terminated array of strings,
 		 *     listing the supported extension points of the module. The array
-		 *     must be suitable for freeing with g_strfreev().
+		 *     must be suitable for freeing with {@link G.strfreev}.
 		 */
 		public static query(): string[];
 	}
@@ -8239,7 +8239,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Requests an asynchronous close of the stream, releasing resources
 		 * related to it. When the operation is finished #callback will be
-		 * called. You can then call g_io_stream_close_finish() to get
+		 * called. You can then call {@link G.io_stream_close_finish} to get
 		 * the result of the operation.
 		 * 
 		 * For behaviour details see g_io_stream_close().
@@ -8295,7 +8295,7 @@ declare namespace imports.gi.Gio {
 		 * #stream1.
 		 * 
 		 * When the operation is finished #callback will be called.
-		 * You can then call g_io_stream_splice_finish() to get the
+		 * You can then call {@link G.io_stream_splice_finish} to get the
 		 * result of the operation.
 		 * @param stream2 a #GIOStream.
 		 * @param flags a set of #GIOStreamSpliceFlags.
@@ -8334,7 +8334,7 @@ declare namespace imports.gi.Gio {
 	 * file handle opened in read-write mode.
 	 * 
 	 * To do the actual reading and writing you need to get the substreams
-	 * with g_io_stream_get_input_stream() and g_io_stream_get_output_stream().
+	 * with {@link G.io_stream_get_input_stream} and g_io_stream_get_output_stream().
 	 * 
 	 * The #GIOStream object owns the input and the output streams, not the other
 	 * way around, so keeping the substreams alive will not keep the #GIOStream
@@ -8391,52 +8391,52 @@ declare namespace imports.gi.Gio {
 		family: SocketFamily;
 		/**
 		 * Whether this is the "any" address for its family.
-		 * See g_inet_address_get_is_any().
+		 * See {@link G.inet_address_get_is_any}.
 		 */
 		readonly is_any: boolean;
 		/**
 		 * Whether this is a link-local address.
-		 * See g_inet_address_get_is_link_local().
+		 * See {@link G.inet_address_get_is_link_local}.
 		 */
 		readonly is_link_local: boolean;
 		/**
 		 * Whether this is the loopback address for its family.
-		 * See g_inet_address_get_is_loopback().
+		 * See {@link G.inet_address_get_is_loopback}.
 		 */
 		readonly is_loopback: boolean;
 		/**
 		 * Whether this is a global multicast address.
-		 * See g_inet_address_get_is_mc_global().
+		 * See {@link G.inet_address_get_is_mc_global}.
 		 */
 		readonly is_mc_global: boolean;
 		/**
 		 * Whether this is a link-local multicast address.
-		 * See g_inet_address_get_is_mc_link_local().
+		 * See {@link G.inet_address_get_is_mc_link_local}.
 		 */
 		readonly is_mc_link_local: boolean;
 		/**
 		 * Whether this is a node-local multicast address.
-		 * See g_inet_address_get_is_mc_node_local().
+		 * See {@link G.inet_address_get_is_mc_node_local}.
 		 */
 		readonly is_mc_node_local: boolean;
 		/**
 		 * Whether this is an organization-local multicast address.
-		 * See g_inet_address_get_is_mc_org_local().
+		 * See {@link G.inet_address_get_is_mc_org_local}.
 		 */
 		readonly is_mc_org_local: boolean;
 		/**
 		 * Whether this is a site-local multicast address.
-		 * See g_inet_address_get_is_mc_site_local().
+		 * See {@link G.inet_address_get_is_mc_site_local}.
 		 */
 		readonly is_mc_site_local: boolean;
 		/**
 		 * Whether this is a multicast address.
-		 * See g_inet_address_get_is_multicast().
+		 * See {@link G.inet_address_get_is_multicast}.
 		 */
 		readonly is_multicast: boolean;
 		/**
 		 * Whether this is a site-local address.
-		 * See g_inet_address_get_is_loopback().
+		 * See {@link G.inet_address_get_is_loopback}.
 		 */
 		readonly is_site_local: boolean;
 		/**
@@ -8507,7 +8507,7 @@ declare namespace imports.gi.Gio {
 		get_is_site_local(): boolean;
 		/**
 		 * Gets the size of the native raw binary address for #address. This
-		 * is the size of the data that you get from g_inet_address_to_bytes().
+		 * is the size of the data that you get from {@link G.inet_address_to_bytes}.
 		 * @returns the number of bytes used for the native version of #address.
 		 */
 		get_native_size(): number;
@@ -8515,7 +8515,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the raw binary address data from #address.
 		 * @returns a pointer to an internal array of the bytes in #address,
 		 * which should not be modified, stored, or freed. The size of this
-		 * array can be gotten with g_inet_address_get_native_size().
+		 * array can be gotten with {@link G.inet_address_get_native_size}.
 		 */
 		to_bytes(): number;
 		/**
@@ -8563,7 +8563,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * #GInetAddress represents an IPv4 or IPv6 internet address. Use
-	 * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_async() to
+	 * {@link G.resolver_lookup_by_name} or g_resolver_lookup_by_name_async() to
 	 * look up the #GInetAddress for a hostname. Use
 	 * g_resolver_lookup_by_address() or
 	 * g_resolver_lookup_by_address_async() to look up the hostname for a
@@ -8583,7 +8583,7 @@ declare namespace imports.gi.Gio {
 		 * @param family the address family
 		 * @returns a new #GInetAddress corresponding to the "any" address
 		 * for #family.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_any(family: SocketFamily): InetAddress;
 		/**
@@ -8593,7 +8593,7 @@ declare namespace imports.gi.Gio {
 		 * @param bytes raw address data
 		 * @param family the address family of #bytes
 		 * @returns a new #GInetAddress corresponding to #family and #bytes.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_from_bytes(bytes: number[], family: SocketFamily): InetAddress;
 		/**
@@ -8601,7 +8601,7 @@ declare namespace imports.gi.Gio {
 		 * @param string a string representation of an IP address
 		 * @returns a new #GInetAddress corresponding
 		 * to #string, or %NULL if #string could not be parsed.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_from_string(string: string): InetAddress | null;
 		/**
@@ -8609,7 +8609,7 @@ declare namespace imports.gi.Gio {
 		 * @param family the address family
 		 * @returns a new #GInetAddress corresponding to the loopback address
 		 * for #family.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_loopback(family: SocketFamily): InetAddress;
 	}
@@ -8717,7 +8717,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets #address's #GInetAddress.
 		 * @returns the #GInetAddress for #address, which must be
-		 * g_object_ref()'d if it will be stored
+		 * {@link GObject.ref}'d if it will be stored
 		 */
 		get_address(): InetAddress;
 		/**
@@ -8825,7 +8825,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Requests an asynchronous closes of the stream, releasing resources related to it.
 		 * When the operation is finished #callback will be called.
-		 * You can then call g_input_stream_close_finish() to get the result of the
+		 * You can then call {@link G.input_stream_close_finish} to get the result of the
 		 * operation.
 		 * 
 		 * For behaviour details see g_input_stream_close().
@@ -8839,7 +8839,7 @@ declare namespace imports.gi.Gio {
 		 */
 		close_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes closing a stream asynchronously, started from g_input_stream_close_async().
+		 * Finishes closing a stream asynchronously, started from {@link G.input_stream_close_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE if the stream was closed successfully.
 		 */
@@ -8888,7 +8888,7 @@ declare namespace imports.gi.Gio {
 		 * Tries to read #count bytes from the stream into the buffer starting at
 		 * #buffer. Will block during this read.
 		 * 
-		 * This function is similar to g_input_stream_read(), except it tries to
+		 * This function is similar to {@link G.input_stream_read}, except it tries to
 		 * read as many bytes as requested, only stopping on an error or end of stream.
 		 * 
 		 * On a successful read of #count bytes, or if we reached the end of the
@@ -8918,7 +8918,7 @@ declare namespace imports.gi.Gio {
 		 * Request an asynchronous read of #count bytes from the stream into the
 		 * buffer starting at #buffer.
 		 * 
-		 * This is the asynchronous equivalent of g_input_stream_read_all().
+		 * This is the asynchronous equivalent of {@link G.input_stream_read_all}.
 		 * 
 		 * Call g_input_stream_read_all_finish() to collect the result.
 		 * 
@@ -8935,7 +8935,7 @@ declare namespace imports.gi.Gio {
 		read_all_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[];
 		/**
 		 * Finishes an asynchronous stream read operation started with
-		 * g_input_stream_read_all_async().
+		 * {@link G.input_stream_read_all_async}.
 		 * 
 		 * As a special exception to the normal conventions for functions that
 		 * use #GError, if this function returns %FALSE (and sets #error) then
@@ -8952,7 +8952,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous read of #count bytes from the stream into the buffer
 		 * starting at #buffer. When the operation is finished #callback will be called.
-		 * You can then call g_input_stream_read_finish() to get the result of the
+		 * You can then call {@link G.input_stream_read_finish} to get the result of the
 		 * operation.
 		 * 
 		 * During an async request no other sync and async calls are allowed on #stream, and will
@@ -8983,7 +8983,7 @@ declare namespace imports.gi.Gio {
 		 */
 		read_async(count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[];
 		/**
-		 * Like g_input_stream_read(), this tries to read #count bytes from
+		 * Like {@link G.input_stream_read}, this tries to read #count bytes from
 		 * the stream in a blocking fashion. However, rather than reading into
 		 * a user-supplied buffer, this will create a new #GBytes containing
 		 * the data that was read. This may be easier to use from language
@@ -9015,7 +9015,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous read of #count bytes from the stream into a
 		 * new #GBytes. When the operation is finished #callback will be
-		 * called. You can then call g_input_stream_read_bytes_finish() to get the
+		 * called. You can then call {@link G.input_stream_read_bytes_finish} to get the
 		 * result of the operation.
 		 * 
 		 * During an async request no other sync and async calls are allowed
@@ -9061,7 +9061,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Tries to skip #count bytes from the stream. Will block during the operation.
 		 * 
-		 * This is identical to g_input_stream_read(), from a behaviour standpoint,
+		 * This is identical to {@link G.input_stream_read}, from a behaviour standpoint,
 		 * but the bytes that are skipped are not returned to the user. Some
 		 * streams have an implementation that is more efficient than reading the data.
 		 * 
@@ -9081,7 +9081,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous skip of #count bytes from the stream.
 		 * When the operation is finished #callback will be called.
-		 * You can then call g_input_stream_skip_finish() to get the result
+		 * You can then call {@link G.input_stream_skip_finish} to get the result
 		 * of the operation.
 		 * 
 		 * During an async request no other sync and async calls are allowed,
@@ -9125,7 +9125,7 @@ declare namespace imports.gi.Gio {
 	type InputStreamMixin = IInputStream & GObject.Object;
 
 	/**
-	 * #GInputStream has functions to read from a stream (g_input_stream_read()),
+	 * #GInputStream has functions to read from a stream {@link (g.input_stream_read}),
 	 * to close a stream (g_input_stream_close()) and to skip some content
 	 * (g_input_stream_skip()).
 	 * 
@@ -9157,7 +9157,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This function takes a ref on #item.
 		 * 
-		 * Use g_list_store_splice() to append multiple items at the same time
+		 * Use {@link G.list_store_splice} to append multiple items at the same time
 		 * efficiently.
 		 * @param item the new item
 		 */
@@ -9168,7 +9168,7 @@ declare namespace imports.gi.Gio {
 		 * not be set, and this method will return %FALSE.
 		 * 
 		 * If you need to compare the two items with a custom comparison function, use
-		 * g_list_store_find_with_equal_func() with a custom #GEqualFunc instead.
+		 * {@link G.list_store_find_with_equal_func} with a custom #GEqualFunc instead.
 		 * @param item an item
 		 * @returns Whether #store contains #item. If it was found, #position will be
 		 * set to the position where #item occurred for the first time.
@@ -9196,7 +9196,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This function takes a ref on #item.
 		 * 
-		 * Use g_list_store_splice() to insert multiple items at the same time
+		 * Use {@link G.list_store_splice} to insert multiple items at the same time
 		 * efficiently.
 		 * @param position the position at which to insert the new item
 		 * @param item the new item
@@ -9220,7 +9220,7 @@ declare namespace imports.gi.Gio {
 		 * Removes the item from #store that is at #position. #position must be
 		 * smaller than the current length of the list.
 		 * 
-		 * Use g_list_store_splice() to remove multiple items at the same time
+		 * Use {@link G.list_store_splice} to remove multiple items at the same time
 		 * efficiently.
 		 * @param position the position of the item that is to be removed
 		 */
@@ -9239,7 +9239,7 @@ declare namespace imports.gi.Gio {
 		 * items to it. #additions must contain #n_additions items of type
 		 * #GListStore:item-type.  %NULL is not permitted.
 		 * 
-		 * This function is more efficient than g_list_store_insert() and
+		 * This function is more efficient than {@link G.list_store_insert} and
 		 * g_list_store_remove(), because it only emits
 		 * #GListModel::items-changed once for the change.
 		 * 
@@ -9388,7 +9388,7 @@ declare namespace imports.gi.Gio {
 		get_data_size(): number;
 		/**
 		 * Gets the size of the currently allocated data area (available from
-		 * g_memory_output_stream_get_data()).
+		 * {@link G.memory_output_stream_get_data}).
 		 * 
 		 * You probably don't want to use this function on resizable streams.
 		 * See g_memory_output_stream_get_data_size() instead.  For resizable
@@ -9460,7 +9460,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GMemoryOutputStream.
 		 * 
 		 * In most cases this is not the function you want.  See
-		 * g_memory_output_stream_new_resizable() instead.
+		 * {@link G.memory_output_stream_new_resizable} instead.
 		 * 
 		 * If #data is non-%NULL, the stream will use that for its internal storage.
 		 * 
@@ -9508,7 +9508,7 @@ declare namespace imports.gi.Gio {
 		 */
 		public static new(data: any | null, size: number, realloc_function: ReallocFunc | null, destroy_function: GLib.DestroyNotify | null): OutputStream;
 		/**
-		 * Creates a new #GMemoryOutputStream, using g_realloc() and g_free()
+		 * Creates a new #GMemoryOutputStream, using {@link G.realloc} and g_free()
 		 * for memory allocation.
 		 * @returns 
 		 */
@@ -9521,7 +9521,7 @@ declare namespace imports.gi.Gio {
 	interface IMenu {
 		/**
 		 * Convenience function for appending a normal menu item to the end of
-		 * #menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
+		 * #menu.  Combine {@link G.menu_item_new} and g_menu_insert_item() for a more
 		 * flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param detailed_action the detailed action string, or %NULL
@@ -9530,13 +9530,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Appends #item to the end of #menu.
 		 * 
-		 * See g_menu_insert_item() for more information.
+		 * See {@link G.menu_insert_item} for more information.
 		 * @param item a #GMenuItem to append
 		 */
 		append_item(item: MenuItem): void;
 		/**
 		 * Convenience function for appending a section menu item to the end of
-		 * #menu.  Combine g_menu_item_new_section() and g_menu_insert_item() for a
+		 * #menu.  Combine {@link G.menu_item_new_section} and g_menu_insert_item() for a
 		 * more flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param section a #GMenuModel with the items of the section
@@ -9544,7 +9544,7 @@ declare namespace imports.gi.Gio {
 		append_section(label: string | null, section: MenuModel): void;
 		/**
 		 * Convenience function for appending a submenu menu item to the end of
-		 * #menu.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for a
+		 * #menu.  Combine {@link G.menu_item_new_submenu} and g_menu_insert_item() for a
 		 * more flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param submenu a #GMenuModel with the items of the submenu
@@ -9557,13 +9557,13 @@ declare namespace imports.gi.Gio {
 		 * changes to it.  In effect this means that the #GMenu API must no
 		 * longer be used.
 		 * 
-		 * This function causes g_menu_model_is_mutable() to begin returning
+		 * This function causes {@link G.menu_model_is_mutable} to begin returning
 		 * %FALSE, which has some positive performance implications.
 		 */
 		freeze(): void;
 		/**
 		 * Convenience function for inserting a normal menu item into #menu.
-		 * Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
+		 * Combine {@link G.menu_item_new} and g_menu_insert_item() for a more flexible
 		 * alternative.
 		 * @param position the position at which to insert the item
 		 * @param label the section label, or %NULL
@@ -9585,7 +9585,7 @@ declare namespace imports.gi.Gio {
 		 * You should probably just free #item once you're done.
 		 * 
 		 * There are many convenience functions to take care of common cases.
-		 * See g_menu_insert(), g_menu_insert_section() and
+		 * See {@link G.menu_insert}, g_menu_insert_section() and
 		 * g_menu_insert_submenu() as well as "prepend" and "append" variants of
 		 * each of these functions.
 		 * @param position the position at which to insert the item
@@ -9594,7 +9594,7 @@ declare namespace imports.gi.Gio {
 		insert_item(position: number, item: MenuItem): void;
 		/**
 		 * Convenience function for inserting a section menu item into #menu.
-		 * Combine g_menu_item_new_section() and g_menu_insert_item() for a more
+		 * Combine {@link G.menu_item_new_section} and g_menu_insert_item() for a more
 		 * flexible alternative.
 		 * @param position the position at which to insert the item
 		 * @param label the section label, or %NULL
@@ -9603,7 +9603,7 @@ declare namespace imports.gi.Gio {
 		insert_section(position: number, label: string | null, section: MenuModel): void;
 		/**
 		 * Convenience function for inserting a submenu menu item into #menu.
-		 * Combine g_menu_item_new_submenu() and g_menu_insert_item() for a more
+		 * Combine {@link G.menu_item_new_submenu} and g_menu_insert_item() for a more
 		 * flexible alternative.
 		 * @param position the position at which to insert the item
 		 * @param label the section label, or %NULL
@@ -9612,7 +9612,7 @@ declare namespace imports.gi.Gio {
 		insert_submenu(position: number, label: string | null, submenu: MenuModel): void;
 		/**
 		 * Convenience function for prepending a normal menu item to the start
-		 * of #menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
+		 * of #menu.  Combine {@link G.menu_item_new} and g_menu_insert_item() for a more
 		 * flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param detailed_action the detailed action string, or %NULL
@@ -9621,13 +9621,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Prepends #item to the start of #menu.
 		 * 
-		 * See g_menu_insert_item() for more information.
+		 * See {@link G.menu_insert_item} for more information.
 		 * @param item a #GMenuItem to prepend
 		 */
 		prepend_item(item: MenuItem): void;
 		/**
 		 * Convenience function for prepending a section menu item to the start
-		 * of #menu.  Combine g_menu_item_new_section() and g_menu_insert_item() for
+		 * of #menu.  Combine {@link G.menu_item_new_section} and g_menu_insert_item() for
 		 * a more flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param section a #GMenuModel with the items of the section
@@ -9635,7 +9635,7 @@ declare namespace imports.gi.Gio {
 		prepend_section(label: string | null, section: MenuModel): void;
 		/**
 		 * Convenience function for prepending a submenu menu item to the start
-		 * of #menu.  Combine g_menu_item_new_submenu() and g_menu_insert_item() for
+		 * of #menu.  Combine {@link G.menu_item_new_submenu} and g_menu_insert_item() for
 		 * a more flexible alternative.
 		 * @param label the section label, or %NULL
 		 * @param submenu a #GMenuModel with the items of the submenu
@@ -9675,7 +9675,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * There are some convenience functions to allow you to directly
 	 * add items (avoiding #GMenuItem) for the common cases. To add
-	 * a regular item, use g_menu_insert(). To add a section, use
+	 * a regular item, use {@link G.menu_insert}. To add a section, use
 	 * g_menu_insert_section(). To add a submenu, use
 	 * g_menu_insert_submenu().
 	 */
@@ -9705,7 +9705,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_name(): string;
 		/**
-		 * This function combines g_menu_attribute_iter_next() with
+		 * This function combines {@link G.menu_attribute_iter_next} with
 		 * g_menu_attribute_iter_get_name() and g_menu_attribute_iter_get_value().
 		 * 
 		 * First the iterator is advanced to the next (possibly first) attribute.
@@ -9818,7 +9818,7 @@ declare namespace imports.gi.Gio {
 		 * use as the target value.  If it is %NULL then the positional
 		 * parameters are ignored and the "target" attribute is unset.
 		 * 
-		 * See also g_menu_item_set_action_and_target_value() for an equivalent
+		 * See also {@link G.menu_item_set_action_and_target_value} for an equivalent
 		 * call that directly accepts a #GVariant.  See
 		 * g_menu_item_set_detailed_action() for a more convenient version that
 		 * works with string-typed targets.
@@ -9863,7 +9863,7 @@ declare namespace imports.gi.Gio {
 		 * indication).  The item should be marked as 'selected' when the string
 		 * state is equal to the value of the #target property.
 		 * 
-		 * See g_menu_item_set_action_and_target() or
+		 * See {@link G.menu_item_set_action_and_target} or
 		 * g_menu_item_set_detailed_action() for two equivalent calls that are
 		 * probably more convenient for most uses.
 		 * @param action the name of the action for this item
@@ -9886,7 +9886,7 @@ declare namespace imports.gi.Gio {
 		 * value.  If it is %NULL then the positional parameterrs are ignored
 		 * and the named attribute is unset.
 		 * 
-		 * See also g_menu_item_set_attribute_value() for an equivalent call
+		 * See also {@link G.menu_item_set_attribute_value} for an equivalent call
 		 * that directly accepts a #GVariant.
 		 * @param attribute the attribute to set
 		 * @param format_string a #GVariant format string, or %NULL
@@ -9910,7 +9910,7 @@ declare namespace imports.gi.Gio {
 		 * attribute.  If #value is %NULL then the attribute is unset. If
 		 * the #value #GVariant is floating, it is consumed.
 		 * 
-		 * See also g_menu_item_set_attribute() for a more convenient way to do
+		 * See also {@link G.menu_item_set_attribute} for a more convenient way to do
 		 * the same.
 		 * @param attribute the attribute to set
 		 * @param value a #GVariant to use as the value, or %NULL
@@ -9920,7 +9920,7 @@ declare namespace imports.gi.Gio {
 		 * Sets the "action" and possibly the "target" attribute of #menu_item.
 		 * 
 		 * The format of #detailed_action is the same format parsed by
-		 * g_action_parse_detailed_name().
+		 * {@link G.action_parse_detailed_name}.
 		 * 
 		 * See g_menu_item_set_action_and_target() or
 		 * g_menu_item_set_action_and_target_value() for more flexible (but
@@ -9934,7 +9934,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets (or unsets) the icon on #menu_item.
 		 * 
-		 * This call is the same as calling g_icon_serialize() and using the
+		 * This call is the same as calling {@link G.icon_serialize} and using the
 		 * result as the value to g_menu_item_set_attribute_value() for
 		 * %G_MENU_ATTRIBUTE_ICON.
 		 * 
@@ -9975,7 +9975,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The effect of having one menu appear as a section of another is
 		 * exactly as it sounds: the items from #section become a direct part of
-		 * the menu that #menu_item is added to.  See g_menu_item_new_section()
+		 * the menu that #menu_item is added to.  See {@link G.menu_item_new_section}
 		 * for more information about what it means for a menu item to be a
 		 * section.
 		 * @param section a #GMenuModel, or %NULL
@@ -10018,7 +10018,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #detailed_action is non-%NULL it is used to set the "action" and
 		 * possibly the "target" attribute of the new item.  See
-		 * g_menu_item_set_detailed_action() for more information.
+		 * {@link G.menu_item_set_detailed_action} for more information.
 		 * @param label the section label, or %NULL
 		 * @param detailed_action the detailed action string, or %NULL
 		 * @returns a new #GMenuItem
@@ -10029,7 +10029,7 @@ declare namespace imports.gi.Gio {
 		 * #GMenuModel.
 		 * 
 		 * #item_index must be valid (ie: be sure to call
-		 * g_menu_model_get_n_items() first).
+		 * {@link G.menu_model_get_n_items} first).
 		 * @param model a #GMenuModel
 		 * @param item_index the index of an item in #model
 		 * @returns a new #GMenuItem.
@@ -10038,7 +10038,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GMenuItem representing a section.
 		 * 
-		 * This is a convenience API around g_menu_item_new() and
+		 * This is a convenience API around {@link G.menu_item_new} and
 		 * g_menu_item_set_section().
 		 * 
 		 * The effect of having one menu appear as a section of another is
@@ -10104,7 +10104,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GMenuItem representing a submenu.
 		 * 
-		 * This is a convenience API around g_menu_item_new() and
+		 * This is a convenience API around {@link G.menu_item_new} and
 		 * g_menu_item_set_submenu().
 		 * @param label the section label, or %NULL
 		 * @param submenu a #GMenuModel with the items of the submenu
@@ -10125,7 +10125,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_name(): string;
 		/**
-		 * This function combines g_menu_link_iter_next() with
+		 * This function combines {@link G.menu_link_iter_next} with
 		 * g_menu_link_iter_get_name() and g_menu_link_iter_get_value().
 		 * 
 		 * First the iterator is advanced to the next (possibly first) link.
@@ -10201,7 +10201,7 @@ declare namespace imports.gi.Gio {
 		 * type, then the positional parameters are ignored and %FALSE is
 		 * returned.
 		 * 
-		 * This function is a mix of g_menu_model_get_item_attribute_value() and
+		 * This function is a mix of {@link G.menu_model_get_item_attribute_value} and
 		 * g_variant_get(), followed by a g_variant_unref().  As such,
 		 * #format_string must make a complete copy of the data (since the
 		 * #GVariant may go away after the call to g_variant_unref()).  In
@@ -10282,7 +10282,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a #GMenuAttributeIter to iterate over the attributes of
 		 * the item at position #item_index in #model.
 		 * 
-		 * You must free the iterator with g_object_unref() when you are done.
+		 * You must free the iterator with {@link GObject.unref} when you are done.
 		 * @param item_index the index of the item
 		 * @returns a new #GMenuAttributeIter
 		 */
@@ -10291,7 +10291,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a #GMenuLinkIter to iterate over the links of the item at
 		 * position #item_index in #model.
 		 * 
-		 * You must free the iterator with g_object_unref() when you are done.
+		 * You must free the iterator with {@link GObject.unref} when you are done.
 		 * @param item_index the index of the item
 		 * @returns a new #GMenuLinkIter
 		 */
@@ -10400,7 +10400,7 @@ declare namespace imports.gi.Gio {
 	 * #GDBusMenuModel.
 	 * 
 	 * The API of #GMenuModel is very generic, with iterators for the
-	 * attributes and links of an item, see g_menu_model_iterate_item_attributes()
+	 * attributes and links of an item, see {@link G.menu_model_iterate_item_attributes}
 	 * and g_menu_model_iterate_item_links(). The 'standard' attributes and
 	 * link types have predefined names: %G_MENU_ATTRIBUTE_LABEL,
 	 * %G_MENU_ATTRIBUTE_ACTION, %G_MENU_ATTRIBUTE_TARGET, %G_MENU_LINK_SECTION
@@ -10669,7 +10669,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that this signal may be emitted several times to update the
 		 * list of blocking processes as processes close files. The
-		 * application should only respond with g_mount_operation_reply() to
+		 * application should only respond with {@link G.mount_operation_reply} to
 		 * the latest signal (setting #GMountOperation:choice to the choice
 		 * the user made).
 		 * 
@@ -10757,7 +10757,7 @@ declare namespace imports.gi.Gio {
 	 * preventing unmount or eject operations from completing.
 	 * 
 	 * Note that #GMountOperation is used for more than just #GMount
-	 * objects – for example it is also used in g_drive_start() and
+	 * objects – for example it is also used in {@link G.drive_start} and
 	 * g_drive_stop().
 	 * 
 	 * Users should instantiate a subclass of this that implements all the
@@ -10900,7 +10900,7 @@ declare namespace imports.gi.Gio {
 		 * Note that depending on the configuration of the machine, a
 		 * #hostname of `localhost` may refer to the IPv4 loopback address
 		 * only, or to both IPv4 and IPv6; use
-		 * g_network_address_new_loopback() to create a #GNetworkAddress that
+		 * {@link G.network_address_new_loopback} to create a #GNetworkAddress that
 		 * is guaranteed to resolve to both addresses.
 		 * @param hostname the hostname
 		 * @param port the port
@@ -10915,7 +10915,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The connectable will return IPv4 and IPv6 loopback addresses,
 		 * regardless of how the host resolves `localhost`. By contrast,
-		 * g_network_address_new() will often only return an IPv4 address when
+		 * {@link G.network_address_new} will often only return an IPv4 address when
 		 * resolving `localhost`, and an IPv6 address for `localhost6`.
 		 * 
 		 * g_network_address_get_hostname() will always return `localhost` for
@@ -10956,7 +10956,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GSocketConnectable for connecting to the given
 		 * #uri. May fail and return %NULL in case parsing #uri fails.
 		 * 
-		 * Using this rather than g_network_address_new() or
+		 * Using this rather than {@link G.network_address_new} or
 		 * g_network_address_parse() allows #GSocketClient to determine
 		 * when to use application-specific proxy protocols.
 		 * @param uri the hostname and optionally a port
@@ -11062,7 +11062,7 @@ declare namespace imports.gi.Gio {
 		 * contains a target, the action will be activated with that target as
 		 * its parameter.
 		 * 
-		 * See g_action_parse_detailed_name() for a description of the format
+		 * See {@link G.action_parse_detailed_name} for a description of the format
 		 * for #detailed_action.
 		 * @param label label of the button
 		 * @param detailed_action a detailed action name
@@ -11074,7 +11074,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #target_format is given, it is used to collect remaining
 		 * positional parameters into a #GVariant instance, similar to
-		 * g_variant_new(). #action will be activated with that #GVariant as its
+		 * {@link G.variant_new}. #action will be activated with that #GVariant as its
 		 * parameter.
 		 * @param label label of the button
 		 * @param action an action name
@@ -11114,7 +11114,7 @@ declare namespace imports.gi.Gio {
 		 * The action in #detailed_action must be an application-wide action (it
 		 * must start with "app."). If #detailed_action contains a target, the
 		 * given action will be activated with that target as its parameter.
-		 * See g_action_parse_detailed_name() for a description of the format
+		 * See {@link G.action_parse_detailed_name} for a description of the format
 		 * for #detailed_action.
 		 * 
 		 * When no default action is set, the application that the notification
@@ -11129,7 +11129,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #target_format is given, it is used to collect remaining
 		 * positional parameters into a #GVariant instance, similar to
-		 * g_variant_new(). #action will be activated with that #GVariant as its
+		 * {@link G.variant_new}. #action will be activated with that #GVariant as its
 		 * parameter.
 		 * 
 		 * When no default action is set, the application that the notification
@@ -11171,9 +11171,9 @@ declare namespace imports.gi.Gio {
 		/**
 		 * @deprecated
 		 * Since 2.42, this has been deprecated in favour of
-		 *    g_notification_set_priority().
+		 *    {@link G.notification_set_priority}.
 		 * 
-		 * Deprecated in favor of g_notification_set_priority().
+		 * Deprecated in favor of {@link G.notification_set_priority}.
 		 * @param urgent %TRUE if #notification is urgent
 		 */
 		set_urgent(urgent: boolean): void;
@@ -11222,7 +11222,7 @@ declare namespace imports.gi.Gio {
 	 * Control Center’s ‘Notifications’ panel.
 	 * 
 	 * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
-	 * where `org.gnome.TestApplication` is the ID passed to g_application_new().
+	 * where `org.gnome.TestApplication` is the ID passed to {@link G.application_new}.
 	 * 
 	 * User interaction with a notification (either the default action, or
 	 * buttons) must be associated with actions on the application (ie:
@@ -11241,7 +11241,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GNotification with #title as its title.
 		 * 
 		 * After populating #notification with more details, it can be sent to
-		 * the desktop shell with g_application_send_notification(). Changing
+		 * the desktop shell with {@link G.application_send_notification}. Changing
 		 * any properties after this call will not have any effect until
 		 * resending #notification.
 		 * @param title the title of the notification
@@ -11295,7 +11295,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Requests an asynchronous close of the stream, releasing resources
 		 * related to it. When the operation is finished #callback will be
-		 * called. You can then call g_output_stream_close_finish() to get
+		 * called. You can then call {@link G.output_stream_close_finish} to get
 		 * the result of the operation.
 		 * 
 		 * For behaviour details see g_output_stream_close().
@@ -11331,7 +11331,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Forces an asynchronous write of all user-space buffered data for
 		 * the given #stream.
-		 * For behaviour details see g_output_stream_flush().
+		 * For behaviour details see {@link G.output_stream_flush}.
 		 * 
 		 * When the operation is finished #callback will be
 		 * called. You can then call g_output_stream_flush_finish() to get the
@@ -11366,7 +11366,7 @@ declare namespace imports.gi.Gio {
 		 */
 		is_closing(): boolean;
 		/**
-		 * This is a utility function around g_output_stream_write_all(). It
+		 * This is a utility function around {@link G.output_stream_write_all}. It
 		 * uses g_strdup_vprintf() to turn #format and #... into a string that
 		 * is then written to #stream.
 		 * 
@@ -11409,7 +11409,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Splices a stream asynchronously.
 		 * When the operation is finished #callback will be called.
-		 * You can then call g_output_stream_splice_finish() to get the
+		 * You can then call {@link G.output_stream_splice_finish} to get the
 		 * result of the operation.
 		 * 
 		 * For the synchronous, blocking version of this function, see
@@ -11431,7 +11431,7 @@ declare namespace imports.gi.Gio {
 		 */
 		splice_finish(result: AsyncResult): number;
 		/**
-		 * This is a utility function around g_output_stream_write_all(). It
+		 * This is a utility function around {@link G.output_stream_write_all}. It
 		 * uses g_strdup_vprintf() to turn #format and #args into a string that
 		 * is then written to #stream.
 		 * 
@@ -11483,7 +11483,7 @@ declare namespace imports.gi.Gio {
 		 * Tries to write #count bytes from #buffer into the stream. Will block
 		 * during the operation.
 		 * 
-		 * This function is similar to g_output_stream_write(), except it tries to
+		 * This function is similar to {@link G.output_stream_write}, except it tries to
 		 * write as many bytes as requested, only stopping on an error.
 		 * 
 		 * On a successful write of #count bytes, %TRUE is returned, and #bytes_written
@@ -11510,7 +11510,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous write of #count bytes from #buffer into
 		 * the stream. When the operation is finished #callback will be called.
-		 * You can then call g_output_stream_write_all_finish() to get the result of the
+		 * You can then call {@link G.output_stream_write_all_finish} to get the result of the
 		 * operation.
 		 * 
 		 * This is the asynchronous version of g_output_stream_write_all().
@@ -11531,7 +11531,7 @@ declare namespace imports.gi.Gio {
 		write_all_async(buffer: number[], io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous stream write operation started with
-		 * g_output_stream_write_all_async().
+		 * {@link G.output_stream_write_all_async}.
 		 * 
 		 * As a special exception to the normal conventions for functions that
 		 * use #GError, if this function returns %FALSE (and sets #error) then
@@ -11549,7 +11549,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous write of #count bytes from #buffer into
 		 * the stream. When the operation is finished #callback will be called.
-		 * You can then call g_output_stream_write_finish() to get the result of the
+		 * You can then call {@link G.output_stream_write_finish} to get the result of the
 		 * operation.
 		 * 
 		 * During an async request no other sync and async calls are allowed,
@@ -11589,7 +11589,7 @@ declare namespace imports.gi.Gio {
 		 */
 		write_async(buffer: number[], io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * A wrapper function for g_output_stream_write() which takes a
+		 * A wrapper function for {@link G.output_stream_write} which takes a
 		 * #GBytes as input.  This can be more convenient for use by language
 		 * bindings or in other cases where the refcounted nature of #GBytes
 		 * is helpful over a bare pointer interface.
@@ -11606,7 +11606,7 @@ declare namespace imports.gi.Gio {
 		 */
 		write_bytes(bytes: GLib.Bytes, cancellable: Cancellable | null): number;
 		/**
-		 * This function is similar to g_output_stream_write_async(), but
+		 * This function is similar to {@link G.output_stream_write_async}, but
 		 * takes a #GBytes as input.  Due to the refcounted nature of #GBytes,
 		 * this allows the stream to avoid taking a copy of the data.
 		 * 
@@ -11657,7 +11657,7 @@ declare namespace imports.gi.Gio {
 		 * operation was partially finished when the operation was cancelled the
 		 * partial result will be returned, without an error.
 		 * 
-		 * Some implementations of g_output_stream_writev() may have limitations on the
+		 * Some implementations of {@link G.output_stream_writev} may have limitations on the
 		 * aggregate buffer size, and will return %G_IO_ERROR_INVALID_ARGUMENT if these
 		 * are exceeded. For example, when writing to a local file on UNIX platforms,
 		 * the aggregate buffer size must not exceed %G_MAXSSIZE bytes.
@@ -11674,7 +11674,7 @@ declare namespace imports.gi.Gio {
 		 * Tries to write the bytes contained in the #n_vectors #vectors into the
 		 * stream. Will block during the operation.
 		 * 
-		 * This function is similar to g_output_stream_writev(), except it tries to
+		 * This function is similar to {@link G.output_stream_writev}, except it tries to
 		 * write as many bytes as requested, only stopping on an error.
 		 * 
 		 * On a successful write of all #n_vectors vectors, %TRUE is returned, and
@@ -11705,7 +11705,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous write of the bytes contained in the #n_vectors #vectors into
 		 * the stream. When the operation is finished #callback will be called.
-		 * You can then call g_output_stream_writev_all_finish() to get the result of the
+		 * You can then call {@link G.output_stream_writev_all_finish} to get the result of the
 		 * operation.
 		 * 
 		 * This is the asynchronous version of g_output_stream_writev_all().
@@ -11728,7 +11728,7 @@ declare namespace imports.gi.Gio {
 		writev_all_async(vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous stream write operation started with
-		 * g_output_stream_writev_all_async().
+		 * {@link G.output_stream_writev_all_async}.
 		 * 
 		 * As a special exception to the normal conventions for functions that
 		 * use #GError, if this function returns %FALSE (and sets #error) then
@@ -11746,7 +11746,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Request an asynchronous write of the bytes contained in #n_vectors #vectors into
 		 * the stream. When the operation is finished #callback will be called.
-		 * You can then call g_output_stream_writev_finish() to get the result of the
+		 * You can then call {@link G.output_stream_writev_finish} to get the result of the
 		 * operation.
 		 * 
 		 * During an async request no other sync and async calls are allowed,
@@ -11800,7 +11800,7 @@ declare namespace imports.gi.Gio {
 	type OutputStreamMixin = IOutputStream & GObject.Object;
 
 	/**
-	 * #GOutputStream has functions to write to a stream (g_output_stream_write()),
+	 * #GOutputStream has functions to write to a stream {@link (g.output_stream_write}),
 	 * to close a stream (g_output_stream_close()) and to flush pending writes
 	 * (g_output_stream_flush()).
 	 * 
@@ -11829,12 +11829,12 @@ declare namespace imports.gi.Gio {
 		readonly allowed: boolean;
 		/**
 		 * %TRUE if it is generally possible to acquire the permission by calling
-		 * g_permission_acquire().
+		 * {@link G.permission_acquire}.
 		 */
 		readonly can_acquire: boolean;
 		/**
 		 * %TRUE if it is generally possible to release the permission by calling
-		 * g_permission_release().
+		 * {@link G.permission_release}.
 		 */
 		readonly can_release: boolean;
 		/**
@@ -11844,7 +11844,7 @@ declare namespace imports.gi.Gio {
 		 * and the underlying authentication mechanism.  A simple example is
 		 * that a dialog may appear asking the user to enter their password.
 		 * 
-		 * You should check with g_permission_get_can_acquire() before calling
+		 * You should check with {@link G.permission_get_can_acquire} before calling
 		 * this function.
 		 * 
 		 * If the permission is acquired then %TRUE is returned.  Otherwise,
@@ -11861,7 +11861,7 @@ declare namespace imports.gi.Gio {
 		 * Attempts to acquire the permission represented by #permission.
 		 * 
 		 * This is the first half of the asynchronous version of
-		 * g_permission_acquire().
+		 * {@link G.permission_acquire}.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback the #GAsyncReadyCallback to call when done
 		 */
@@ -11871,7 +11871,7 @@ declare namespace imports.gi.Gio {
 		 * represented by #permission.
 		 * 
 		 * This is the second half of the asynchronous version of
-		 * g_permission_acquire().
+		 * {@link G.permission_acquire}.
 		 * @param result the #GAsyncResult given to the #GAsyncReadyCallback
 		 * @returns %TRUE if the permission was successfully acquired
 		 */
@@ -11886,14 +11886,14 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value of the 'can-acquire' property.  This property is %TRUE
 		 * if it is generally possible to acquire the permission by calling
-		 * g_permission_acquire().
+		 * {@link G.permission_acquire}.
 		 * @returns the value of the 'can-acquire' property
 		 */
 		get_can_acquire(): boolean;
 		/**
 		 * Gets the value of the 'can-release' property.  This property is %TRUE
 		 * if it is generally possible to release the permission by calling
-		 * g_permission_release().
+		 * {@link G.permission_release}.
 		 * @returns the value of the 'can-release' property
 		 */
 		get_can_release(): boolean;
@@ -11915,7 +11915,7 @@ declare namespace imports.gi.Gio {
 		 * and the underlying authentication mechanism.  In most cases the
 		 * permission will be dropped immediately without further action.
 		 * 
-		 * You should check with g_permission_get_can_release() before calling
+		 * You should check with {@link G.permission_get_can_release} before calling
 		 * this function.
 		 * 
 		 * If the permission is released then %TRUE is returned.  Otherwise,
@@ -11932,7 +11932,7 @@ declare namespace imports.gi.Gio {
 		 * Attempts to release the permission represented by #permission.
 		 * 
 		 * This is the first half of the asynchronous version of
-		 * g_permission_release().
+		 * {@link G.permission_release}.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback the #GAsyncReadyCallback to call when done
 		 */
@@ -11942,7 +11942,7 @@ declare namespace imports.gi.Gio {
 		 * represented by #permission.
 		 * 
 		 * This is the second half of the asynchronous version of
-		 * g_permission_release().
+		 * {@link G.permission_release}.
 		 * @param result the #GAsyncResult given to the #GAsyncReadyCallback
 		 * @returns %TRUE if the permission was successfully released
 		 */
@@ -11996,7 +11996,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * If #action is currently enabled.
 		 * 
-		 * If the action is disabled then calls to g_action_activate() and
+		 * If the action is disabled then calls to {@link G.action_activate} and
 		 * g_action_change_state() have no effect.
 		 */
 		readonly enabled: boolean;
@@ -12100,7 +12100,7 @@ declare namespace imports.gi.Gio {
 	 * property of a #GtkStack if this value is actually stored in
 	 * #GSettings.  In that case, the real source of the value is
 	 * #GSettings.  If you want a #GAction to control a setting stored in
-	 * #GSettings, see g_settings_create_action() instead, and possibly
+	 * #GSettings, see {@link G.settings_create_action} instead, and possibly
 	 * combine its use with g_settings_bind().
 	 */
 	interface PropertyAction extends PropertyActionMixin {}
@@ -12223,7 +12223,7 @@ declare namespace imports.gi.Gio {
 		 * tunnel through #dest_hostname and #dest_port.
 		 * 
 		 * (Note that this method doesn't set the #GProxyAddress:uri or
-		 * #GProxyAddress:destination-protocol fields; use g_object_new()
+		 * #GProxyAddress:destination-protocol fields; use {@link GObject.new}
 		 * directly if you want to set those.)
 		 * @param inetaddr The proxy server #GInetAddress.
 		 * @param port The proxy server port.
@@ -12283,7 +12283,7 @@ declare namespace imports.gi.Gio {
 	 * #GProxyAddressEnumerator:proxy-resolver.
 	 * 
 	 * This enumerator will be returned (for example, by
-	 * g_socket_connectable_enumerate()) as appropriate when a proxy is configured;
+	 * {@link G.socket_connectable_enumerate}) as appropriate when a proxy is configured;
 	 * there should be no need to manually wrap a #GSocketAddressEnumerator instance
 	 * with one.
 	 */
@@ -12316,7 +12316,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Begins asynchronously reverse-resolving #address to determine its
 		 * associated hostname, and eventually calls #callback, which must
-		 * call g_resolver_lookup_by_address_finish() to get the final result.
+		 * call {@link G.resolver_lookup_by_address_finish} to get the final result.
 		 * @param address the address to reverse-resolve
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback callback to call after resolution completes
@@ -12324,7 +12324,7 @@ declare namespace imports.gi.Gio {
 		lookup_by_address_async(address: InetAddress, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a previous call to
-		 * g_resolver_lookup_by_address_async().
+		 * {@link G.resolver_lookup_by_address_async}.
 		 * 
 		 * If the DNS resolution failed, #error (if non-%NULL) will be set to
 		 * a value from #GResolverError. If the operation was cancelled,
@@ -12338,7 +12338,7 @@ declare namespace imports.gi.Gio {
 		 * Synchronously resolves #hostname to determine its associated IP
 		 * address(es). #hostname may be an ASCII-only or UTF-8 hostname, or
 		 * the textual form of an IP address (in which case this just becomes
-		 * a wrapper around g_inet_address_new_from_string()).
+		 * a wrapper around {@link G.inet_address_new_from_string}).
 		 * 
 		 * On success, g_resolver_lookup_by_name() will return a non-empty #GList of
 		 * #GInetAddress, sorted in order of preference and guaranteed to not
@@ -12363,13 +12363,13 @@ declare namespace imports.gi.Gio {
 		 * @returns a non-empty #GList
 		 * of #GInetAddress, or %NULL on error. You
 		 * must unref each of the addresses and free the list when you are
-		 * done with it. (You can use g_resolver_free_addresses() to do this.)
+		 * done with it. (You can use {@link G.resolver_free_addresses} to do this.)
 		 */
 		lookup_by_name(hostname: string, cancellable: Cancellable | null): GLib.List;
 		/**
 		 * Begins asynchronously resolving #hostname to determine its
 		 * associated IP address(es), and eventually calls #callback, which
-		 * must call g_resolver_lookup_by_name_finish() to get the result.
+		 * must call {@link G.resolver_lookup_by_name_finish} to get the result.
 		 * See g_resolver_lookup_by_name() for more details.
 		 * @param hostname the hostname to look up the address of
 		 * @param cancellable a #GCancellable, or %NULL
@@ -12378,19 +12378,19 @@ declare namespace imports.gi.Gio {
 		lookup_by_name_async(hostname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a call to
-		 * g_resolver_lookup_by_name_async().
+		 * {@link G.resolver_lookup_by_name_async}.
 		 * 
 		 * If the DNS resolution failed, #error (if non-%NULL) will be set to
 		 * a value from #GResolverError. If the operation was cancelled,
 		 * #error will be set to %G_IO_ERROR_CANCELLED.
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns a #GList
-		 * of #GInetAddress, or %NULL on error. See g_resolver_lookup_by_name()
+		 * of #GInetAddress, or %NULL on error. See {@link G.resolver_lookup_by_name}
 		 * for more details.
 		 */
 		lookup_by_name_finish(result: AsyncResult): GLib.List;
 		/**
-		 * This differs from g_resolver_lookup_by_name() in that you can modify
+		 * This differs from {@link G.resolver_lookup_by_name} in that you can modify
 		 * the lookup behavior with #flags. For example this can be used to limit
 		 * results with #G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
 		 * @param hostname the hostname to look up
@@ -12399,13 +12399,13 @@ declare namespace imports.gi.Gio {
 		 * @returns a non-empty #GList
 		 * of #GInetAddress, or %NULL on error. You
 		 * must unref each of the addresses and free the list when you are
-		 * done with it. (You can use g_resolver_free_addresses() to do this.)
+		 * done with it. (You can use {@link G.resolver_free_addresses} to do this.)
 		 */
 		lookup_by_name_with_flags(hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null): GLib.List;
 		/**
 		 * Begins asynchronously resolving #hostname to determine its
 		 * associated IP address(es), and eventually calls #callback, which
-		 * must call g_resolver_lookup_by_name_with_flags_finish() to get the result.
+		 * must call {@link G.resolver_lookup_by_name_with_flags_finish} to get the result.
 		 * See g_resolver_lookup_by_name() for more details.
 		 * @param hostname the hostname to look up the address of
 		 * @param flags extra #GResolverNameLookupFlags for the lookup
@@ -12415,14 +12415,14 @@ declare namespace imports.gi.Gio {
 		lookup_by_name_with_flags_async(hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a call to
-		 * g_resolver_lookup_by_name_with_flags_async().
+		 * {@link G.resolver_lookup_by_name_with_flags_async}.
 		 * 
 		 * If the DNS resolution failed, #error (if non-%NULL) will be set to
 		 * a value from #GResolverError. If the operation was cancelled,
 		 * #error will be set to %G_IO_ERROR_CANCELLED.
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns a #GList
-		 * of #GInetAddress, or %NULL on error. See g_resolver_lookup_by_name()
+		 * of #GInetAddress, or %NULL on error. See {@link G.resolver_lookup_by_name}
 		 * for more details.
 		 */
 		lookup_by_name_with_flags_finish(result: AsyncResult): GLib.List;
@@ -12442,14 +12442,14 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a non-empty #GList of
 		 * #GVariant, or %NULL on error. You must free each of the records and the list
-		 * when you are done with it. (You can use g_list_free_full() with
+		 * when you are done with it. (You can use {@link G.list_free_full} with
 		 * g_variant_unref() to do this.)
 		 */
 		lookup_records(rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null): GLib.List;
 		/**
 		 * Begins asynchronously performing a DNS lookup for the given
 		 * #rrname, and eventually calls #callback, which must call
-		 * g_resolver_lookup_records_finish() to get the final result. See
+		 * {@link G.resolver_lookup_records_finish} to get the final result. See
 		 * g_resolver_lookup_records() for more details.
 		 * @param rrname the DNS name to look up the record for
 		 * @param record_type the type of DNS record to look up
@@ -12459,7 +12459,7 @@ declare namespace imports.gi.Gio {
 		lookup_records_async(rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a previous call to
-		 * g_resolver_lookup_records_async(). Returns a non-empty list of records as
+		 * {@link G.resolver_lookup_records_async}. Returns a non-empty list of records as
 		 * #GVariant tuples. See #GResolverRecordType for information on what the
 		 * records contain.
 		 * 
@@ -12469,7 +12469,7 @@ declare namespace imports.gi.Gio {
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns a non-empty #GList of
 		 * #GVariant, or %NULL on error. You must free each of the records and the list
-		 * when you are done with it. (You can use g_list_free_full() with
+		 * when you are done with it. (You can use {@link G.list_free_full} with
 		 * g_variant_unref() to do this.)
 		 */
 		lookup_records_finish(result: AsyncResult): GLib.List;
@@ -12480,7 +12480,7 @@ declare namespace imports.gi.Gio {
 		 * #service and #protocol arguments do not include the leading underscore
 		 * that appears in the actual DNS entry.
 		 * 
-		 * On success, g_resolver_lookup_service() will return a non-empty #GList of
+		 * On success, {@link G.resolver_lookup_service} will return a non-empty #GList of
 		 * #GSrvTarget, sorted in order of preference. (That is, you should
 		 * attempt to connect to the first target first, then the second if
 		 * the first fails, etc.)
@@ -12501,14 +12501,14 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a non-empty #GList of
 		 * #GSrvTarget, or %NULL on error. You must free each of the targets and the
-		 * list when you are done with it. (You can use g_resolver_free_targets() to do
+		 * list when you are done with it. (You can use {@link G.resolver_free_targets} to do
 		 * this.)
 		 */
 		lookup_service(service: string, protocol: string, domain: string, cancellable: Cancellable | null): GLib.List;
 		/**
 		 * Begins asynchronously performing a DNS SRV lookup for the given
 		 * #service and #protocol in the given #domain, and eventually calls
-		 * #callback, which must call g_resolver_lookup_service_finish() to
+		 * #callback, which must call {@link G.resolver_lookup_service_finish} to
 		 * get the final result. See g_resolver_lookup_service() for more
 		 * details.
 		 * @param service the service type to look up (eg, "ldap")
@@ -12520,21 +12520,21 @@ declare namespace imports.gi.Gio {
 		lookup_service_async(service: string, protocol: string, domain: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a previous call to
-		 * g_resolver_lookup_service_async().
+		 * {@link G.resolver_lookup_service_async}.
 		 * 
 		 * If the DNS resolution failed, #error (if non-%NULL) will be set to
 		 * a value from #GResolverError. If the operation was cancelled,
 		 * #error will be set to %G_IO_ERROR_CANCELLED.
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns a non-empty #GList of
-		 * #GSrvTarget, or %NULL on error. See g_resolver_lookup_service() for more
+		 * #GSrvTarget, or %NULL on error. See {@link G.resolver_lookup_service} for more
 		 * details.
 		 */
 		lookup_service_finish(result: AsyncResult): GLib.List;
 		/**
 		 * Sets #resolver to be the application's default resolver (reffing
 		 * #resolver, and unreffing the previous default resolver, if any).
-		 * Future calls to g_resolver_get_default() will return this resolver.
+		 * Future calls to {@link G.resolver_get_default} will return this resolver.
 		 * 
 		 * This can be used if an application wants to perform any sort of DNS
 		 * caching or "pinning"; it can implement its own #GResolver that
@@ -12566,7 +12566,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * #GResolver provides cancellable synchronous and asynchronous DNS
-	 * resolution, for hostnames (g_resolver_lookup_by_address(),
+	 * resolution, for hostnames {@link (g.resolver_lookup_by_address},
 	 * g_resolver_lookup_by_name() and their async variants) and SRV
 	 * (service) records (g_resolver_lookup_service()).
 	 * 
@@ -12580,7 +12580,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<ResolverInitOptions>);
 		/**
 		 * Frees #addresses (which should be the return value from
-		 * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_finish()).
+		 * {@link G.resolver_lookup_by_name} or g_resolver_lookup_by_name_finish()).
 		 * (This is a convenience method; you can also simply free the results
 		 * by hand.)
 		 * @param addresses a #GList of #GInetAddress
@@ -12588,7 +12588,7 @@ declare namespace imports.gi.Gio {
 		public static free_addresses(addresses: GLib.List): void;
 		/**
 		 * Frees #targets (which should be the return value from
-		 * g_resolver_lookup_service() or g_resolver_lookup_service_finish()).
+		 * {@link G.resolver_lookup_service} or g_resolver_lookup_service_finish()).
 		 * (This is a convenience method; you can also simply free the
 		 * results by hand.)
 		 * @param targets a #GList of #GSrvTarget
@@ -12613,12 +12613,12 @@ declare namespace imports.gi.Gio {
 		backend: SettingsBackend;
 		/**
 		 * Whether the #GSettings object is in 'delay-apply' mode. See
-		 * g_settings_delay() for details.
+		 * {@link G.settings_delay} for details.
 		 */
 		readonly delay_apply: boolean;
 		/**
 		 * If this property is %TRUE, the #GSettings object has outstanding
-		 * changes that will be applied when g_settings_apply() is called.
+		 * changes that will be applied when {@link G.settings_apply} is called.
 		 */
 		readonly has_unapplied: boolean;
 		/**
@@ -12626,6 +12626,10 @@ declare namespace imports.gi.Gio {
 		 */
 		path: string;
 		/**
+		 * @deprecated
+		 * Use the 'schema-id' property instead.  In a future
+		 * version, this property may instead refer to a #GSettingsSchema.
+		 * 
 		 * The name of the schema that describes the types of keys
 		 * for this #GSettings object.
 		 * 
@@ -12655,7 +12659,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Applies any changes that have been made to the settings.  This
 		 * function does nothing unless #settings is in 'delay-apply' mode;
-		 * see g_settings_delay().  In the normal case settings are always
+		 * see {@link G.settings_delay}.  In the normal case settings are always
 		 * applied immediately.
 		 */
 		apply(): void;
@@ -12666,7 +12670,7 @@ declare namespace imports.gi.Gio {
 		 * The binding uses the default GIO mapping functions to map
 		 * between the settings and property values. These functions
 		 * handle booleans, numeric types and string types in a
-		 * straightforward way. Use g_settings_bind_with_mapping() if
+		 * straightforward way. Use {@link G.settings_bind_with_mapping} if
 		 * you need a custom mapping, or map between types that are not
 		 * supported by the default mapping functions.
 		 * 
@@ -12754,13 +12758,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Changes the #GSettings object into 'delay-apply' mode. In this
 		 * mode, changes to #settings are not immediately propagated to the
-		 * backend, but kept locally until g_settings_apply() is called.
+		 * backend, but kept locally until {@link G.settings_apply} is called.
 		 */
 		delay(): void;
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience function that combines g_settings_get_value() with
+		 * A convenience function that combines {@link G.settings_get_value} with
 		 * g_variant_get().
 		 * 
 		 * It is a programmer error to give a #key that isn't contained in the
@@ -12773,7 +12777,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for booleans.
+		 * A convenience variant of {@link G.settings_get} for booleans.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a boolean type in the schema for #settings.
@@ -12795,7 +12799,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the "default value" of a key.
 		 * 
-		 * This is the value that would be read if g_settings_reset() were to be
+		 * This is the value that would be read if {@link G.settings_reset} were to be
 		 * called on the key.
 		 * 
 		 * Note that this may be a different value than returned by
@@ -12821,7 +12825,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for doubles.
+		 * A convenience variant of {@link G.settings_get} for doubles.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a 'double' type in the schema for #settings.
@@ -12872,7 +12876,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for 32-bit integers.
+		 * A convenience variant of {@link G.settings_get} for 32-bit integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a int32 type in the schema for #settings.
@@ -12883,7 +12887,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for 64-bit integers.
+		 * A convenience variant of {@link G.settings_get} for 64-bit integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a int64 type in the schema for #settings.
@@ -12927,7 +12931,7 @@ declare namespace imports.gi.Gio {
 		get_mapped(key: string, mapping: SettingsGetMapping): any | null;
 		/**
 		 * @deprecated
-		 * Use g_settings_schema_key_get_range() instead.
+		 * Use {@link G.settings_schema_key_get_range} instead.
 		 * 
 		 * Queries the range of a key.
 		 * @param key the key to query the range of
@@ -12937,7 +12941,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for strings.
+		 * A convenience variant of {@link G.settings_get} for strings.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a string type in the schema for #settings.
@@ -12946,7 +12950,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_string(key: string): string;
 		/**
-		 * A convenience variant of g_settings_get() for string arrays.
+		 * A convenience variant of {@link G.settings_get} for string arrays.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having an array of strings type in the schema for #settings.
@@ -12959,7 +12963,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for 32-bit unsigned
+		 * A convenience variant of {@link G.settings_get} for 32-bit unsigned
 		 * integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
@@ -12971,7 +12975,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the value that is stored at #key in #settings.
 		 * 
-		 * A convenience variant of g_settings_get() for 64-bit unsigned
+		 * A convenience variant of {@link G.settings_get} for 64-bit unsigned
 		 * integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
@@ -12985,7 +12989,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The user value of a key is the last value that was set by the user.
 		 * 
-		 * After calling g_settings_reset() this function should always return
+		 * After calling {@link G.settings_reset} this function should always return
 		 * %NULL (assuming something is not wrong with the system
 		 * configuration).
 		 * 
@@ -13022,7 +13026,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the list of children on #settings.
 		 * 
 		 * The list is exactly the list of strings for which it is not an error
-		 * to call g_settings_get_child().
+		 * to call {@link G.settings_get_child}.
 		 * 
 		 * There is little reason to call this function from "normal" code, since
 		 * you should already know what children are in your schema. This function
@@ -13036,7 +13040,7 @@ declare namespace imports.gi.Gio {
 		list_children(): string[];
 		/**
 		 * @deprecated
-		 * Use g_settings_schema_list_keys() instead.
+		 * Use {@link G.settings_schema_list_keys} instead.
 		 * 
 		 * Introspects the list of keys on #settings.
 		 * 
@@ -13044,7 +13048,7 @@ declare namespace imports.gi.Gio {
 		 * (since you should already know what keys are in your schema).  This
 		 * function is intended for introspection reasons.
 		 * 
-		 * You should free the return value with g_strfreev() when you are done
+		 * You should free the return value with {@link G.strfreev} when you are done
 		 * with it.
 		 * @returns a list of the keys on
 		 *    #settings, in no defined order
@@ -13052,7 +13056,7 @@ declare namespace imports.gi.Gio {
 		list_keys(): string[];
 		/**
 		 * @deprecated
-		 * Use g_settings_schema_key_range_check() instead.
+		 * Use {@link G.settings_schema_key_range_check} instead.
 		 * 
 		 * Checks if the given #value is of the correct type and within the
 		 * permitted range for #key.
@@ -13073,7 +13077,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Reverts all non-applied changes to the settings.  This function
 		 * does nothing unless #settings is in 'delay-apply' mode; see
-		 * g_settings_delay().  In the normal case settings are always applied
+		 * {@link G.settings_delay}.  In the normal case settings are always applied
 		 * immediately.
 		 * 
 		 * Change notifications will be emitted for affected keys.
@@ -13082,7 +13086,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience function that combines g_settings_set_value() with
+		 * A convenience function that combines {@link G.settings_set_value} with
 		 * g_variant_new().
 		 * 
 		 * It is a programmer error to give a #key that isn't contained in the
@@ -13097,7 +13101,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for booleans.
+		 * A convenience variant of {@link G.settings_set} for booleans.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a boolean type in the schema for #settings.
@@ -13110,7 +13114,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for doubles.
+		 * A convenience variant of {@link G.settings_set} for doubles.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a 'double' type in the schema for #settings.
@@ -13129,7 +13133,7 @@ declare namespace imports.gi.Gio {
 		 * #value not to be a valid value for the named type.
 		 * 
 		 * After performing the write, accessing #key directly with
-		 * g_settings_get_string() will return the 'nick' associated with
+		 * {@link G.settings_get_string} will return the 'nick' associated with
 		 * #value.
 		 * @param key a key, within #settings
 		 * @param value an enumerated value
@@ -13146,7 +13150,7 @@ declare namespace imports.gi.Gio {
 		 * to contain any bits that are not value for the named type.
 		 * 
 		 * After performing the write, accessing #key directly with
-		 * g_settings_get_strv() will return an array of 'nicks'; one for each
+		 * {@link G.settings_get_strv} will return an array of 'nicks'; one for each
 		 * bit in #value.
 		 * @param key a key, within #settings
 		 * @param value a flags value
@@ -13156,7 +13160,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for 32-bit integers.
+		 * A convenience variant of {@link G.settings_set} for 32-bit integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a int32 type in the schema for #settings.
@@ -13169,7 +13173,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for 64-bit integers.
+		 * A convenience variant of {@link G.settings_set} for 64-bit integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a int64 type in the schema for #settings.
@@ -13182,7 +13186,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for strings.
+		 * A convenience variant of {@link G.settings_set} for strings.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
 		 * having a string type in the schema for #settings.
@@ -13195,7 +13199,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for string arrays.  If
+		 * A convenience variant of {@link G.settings_set} for string arrays.  If
 		 * #value is %NULL, then #key is set to be the empty array.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
@@ -13209,7 +13213,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for 32-bit unsigned
+		 * A convenience variant of {@link G.settings_set} for 32-bit unsigned
 		 * integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
@@ -13223,7 +13227,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #key in #settings to #value.
 		 * 
-		 * A convenience variant of g_settings_set() for 64-bit unsigned
+		 * A convenience variant of {@link G.settings_set} for 64-bit unsigned
 		 * integers.
 		 * 
 		 * It is a programmer error to give a #key that isn't specified as
@@ -13278,7 +13282,7 @@ declare namespace imports.gi.Gio {
 		connect(signal: "change-event", callback: (owner: this, keys: GLib.Quark[] | null, n_keys: number) => boolean): number;
 		/**
 		 * The "changed" signal is emitted when a key has potentially changed.
-		 * You should call one of the g_settings_get() calls to check the new
+		 * You should call one of the {@link G.settings_get} calls to check the new
 		 * value.
 		 * 
 		 * This signal supports detailed connections.  You can connect to the
@@ -13327,7 +13331,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The "writable-changed" signal is emitted when the writability of a
 		 * key has potentially changed.  You should call
-		 * g_settings_is_writable() in order to determine the new status.
+		 * {@link G.settings_is_writable} in order to determine the new status.
 		 * 
 		 * This signal supports detailed connections.  You can connect to the
 		 * detailed signal "writable-changed::x" in order to only receive
@@ -13385,7 +13389,7 @@ declare namespace imports.gi.Gio {
 	 * only ever modify #GSettings keys in response to explicit user action.
 	 * Particular care should be paid to ensure that modifications are not
 	 * made during startup -- for example, when setting the initial value
-	 * of preferences widgets.  The built-in g_settings_bind() functionality
+	 * of preferences widgets.  The built-in {@link G.settings_bind} functionality
 	 * is careful not to write settings in response to notify signals as a
 	 * result of modifications that it makes to widgets.
 	 * 
@@ -13668,7 +13672,7 @@ declare namespace imports.gi.Gio {
 		 * It is an error for the schema to not exist: schemas are an
 		 * essential part of a program, as they provide type information.
 		 * If schemas need to be dynamically loaded (for example, from an
-		 * optional runtime dependency), g_settings_schema_source_lookup()
+		 * optional runtime dependency), {@link G.settings_schema_source_lookup}
 		 * can be used to test for their existence before loading them.
 		 * 
 		 * Signals on the newly created #GSettings object will be dispatched
@@ -13695,7 +13699,7 @@ declare namespace imports.gi.Gio {
 		 * This constructor therefore gives you full control over constructing
 		 * #GSettings instances.  The first 3 parameters are given directly as
 		 * #schema, #backend and #path, and the main context is taken from the
-		 * thread-default (as per g_settings_new()).
+		 * thread-default (as per {@link G.settings_new}).
 		 * 
 		 * If #backend is %NULL then the default backend is used.
 		 * 
@@ -13727,7 +13731,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GSettings object with the schema specified by
 		 * #schema_id and a given #GSettingsBackend and path.
 		 * 
-		 * This is a mix of g_settings_new_with_backend() and
+		 * This is a mix of {@link G.settings_new_with_backend} and
 		 * g_settings_new_with_path().
 		 * @param schema_id the id of the schema
 		 * @param backend the #GSettingsBackend to use
@@ -13756,7 +13760,7 @@ declare namespace imports.gi.Gio {
 		public static new_with_path(schema_id: string, path: string): Settings;
 		/**
 		 * @deprecated
-		 * Use g_settings_schema_source_list_schemas() instead
+		 * Use {@link G.settings_schema_source_list_schemas} instead
 		 * 
 		 * Deprecated.
 		 * @returns a list of relocatable
@@ -13766,7 +13770,7 @@ declare namespace imports.gi.Gio {
 		public static list_relocatable_schemas(): string[];
 		/**
 		 * @deprecated
-		 * Use g_settings_schema_source_list_schemas() instead.
+		 * Use {@link G.settings_schema_source_list_schemas} instead.
 		 * If you used g_settings_list_schemas() to check for the presence of
 		 * a particular schema, use g_settings_schema_source_lookup() instead
 		 * of your whole loop.
@@ -13782,7 +13786,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Writes made to a #GSettings are handled asynchronously.  For this
 		 * reason, it is very unlikely that the changes have it to disk by the
-		 * time g_settings_set() returns.
+		 * time {@link G.settings_set} returns.
 		 * 
 		 * This call will block until all of the writes have made it to the
 		 * backend.  Since the mainloop is not running, no change notifications
@@ -13815,7 +13819,7 @@ declare namespace imports.gi.Gio {
 		 * '//', and not ending with a slash).
 		 * 
 		 * The implementation must call this function during any call to
-		 * g_settings_backend_write(), before the call returns (except in the
+		 * {@link G.settings_backend_write}, before the call returns (except in the
 		 * case that no keys are actually changed and it cares to detect this
 		 * fact).  It may not rely on the existence of a mainloop for
 		 * dispatching the signal later.
@@ -13836,7 +13840,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * This call is a convenience wrapper.  It gets the list of changes from
 		 * #tree, computes the longest common prefix and calls
-		 * g_settings_backend_changed().
+		 * {@link G.settings_backend_changed}.
 		 * @param tree a #GTree containing the changes
 		 * @param origin_tag the origin tag
 		 */
@@ -13856,7 +13860,7 @@ declare namespace imports.gi.Gio {
 		 * changed.
 		 * 
 		 * The same rules for when notifications must occur apply as per
-		 * g_settings_backend_changed().  These two calls can be used
+		 * {@link G.settings_backend_changed}.  These two calls can be used
 		 * interchangeably if exactly one item has changed (although in that
 		 * case g_settings_backend_changed() is definitely preferred).
 		 * 
@@ -13880,7 +13884,7 @@ declare namespace imports.gi.Gio {
 		 * starting with #path may have changed.
 		 * 
 		 * The same rules for when notifications must occur apply as per
-		 * g_settings_backend_changed().  This call might be an appropriate
+		 * {@link G.settings_backend_changed}.  This call might be an appropriate
 		 * reasponse to a 'reset' call but implementations are also free to
 		 * explicitly list the keys that were affected by that call if they can
 		 * easily do so.
@@ -13938,7 +13942,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Some of the #GSettingsBackend functions accept or return a #GTree.
 	 * These trees always have strings as keys and #GVariant as values.
-	 * g_settings_backend_create_tree() is a convenience function to create
+	 * {@link G.settings_backend_create_tree} is a convenience function to create
 	 * suitable trees.
 	 * 
 	 * The #GSettingsBackend API is exported to allow third-party
@@ -13957,7 +13961,7 @@ declare namespace imports.gi.Gio {
 		 * optionally, the value to store at each of those keys.
 		 * 
 		 * You must free the value returned in #path, #keys and #values using
-		 * g_free().  You should not attempt to free or unref the contents of
+		 * {@link G.free}.  You should not attempt to free or unref the contents of
 		 * #keys or #values.
 		 * @param tree a #GTree containing the changes
 		 * @returns the location to save the path
@@ -13989,7 +13993,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * If #action is currently enabled.
 		 * 
-		 * If the action is disabled then calls to g_action_activate() and
+		 * If the action is disabled then calls to {@link G.action_activate} and
 		 * g_action_change_state() have no effect.
 		 */
 		enabled: boolean;
@@ -14030,7 +14034,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This should only be called by the implementor of the action.  Users
 		 * of the action should not attempt to directly modify the 'state'
-		 * property.  Instead, they should call g_action_change_state() to
+		 * property.  Instead, they should call {@link G.action_change_state} to
 		 * request the change.
 		 * 
 		 * If the #value GVariant is floating, it is consumed.
@@ -14040,7 +14044,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the state hint for the action.
 		 * 
-		 * See g_action_get_state_hint() for more information about
+		 * See {@link G.action_get_state_hint} for more information about
 		 * action state hints.
 		 * @param state_hint a #GVariant representing the state hint
 		 */
@@ -14073,7 +14077,7 @@ declare namespace imports.gi.Gio {
 		 * state.
 		 * 
 		 * #value will always be of the correct state type, i.e. the type of the
-		 * initial state passed to g_simple_action_new_stateful(). If an incorrect
+		 * initial state passed to {@link G.simple_action_new_stateful}. If an incorrect
 		 * type is given when requesting to change the state, this signal is not
 		 * emitted.
 		 * 
@@ -14148,7 +14152,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new action.
 		 * 
-		 * The created action is stateless. See g_simple_action_new_stateful() to create
+		 * The created action is stateless. See {@link G.simple_action_new_stateful} to create
 		 * an action that has state.
 		 * @param name the name of the action
 		 * @param parameter_type the type of parameter that will be passed to
@@ -14178,7 +14182,7 @@ declare namespace imports.gi.Gio {
 	interface ISimpleActionGroup {
 		/**
 		 * @deprecated
-		 * Use g_action_map_add_action_entries()
+		 * Use {@link G.action_map_add_action_entries}
 		 * 
 		 * A convenience function for creating multiple #GSimpleAction instances
 		 * and adding them to the action group.
@@ -14189,7 +14193,7 @@ declare namespace imports.gi.Gio {
 		add_entries(entries: ActionEntry[], n_entries: number): void;
 		/**
 		 * @deprecated
-		 * Use g_action_map_add_action()
+		 * Use {@link G.action_map_add_action}
 		 * 
 		 * Adds an action to the action group.
 		 * 
@@ -14202,7 +14206,7 @@ declare namespace imports.gi.Gio {
 		insert(action: Action): void;
 		/**
 		 * @deprecated
-		 * Use g_action_map_lookup_action()
+		 * Use {@link G.action_map_lookup_action}
 		 * 
 		 * Looks up the action with the name #action_name in the group.
 		 * 
@@ -14213,7 +14217,7 @@ declare namespace imports.gi.Gio {
 		lookup(action_name: string): Action;
 		/**
 		 * @deprecated
-		 * Use g_action_map_remove_action()
+		 * Use {@link G.action_map_remove_action}
 		 * 
 		 * Removes the named action from the action group.
 		 * 
@@ -14257,7 +14261,7 @@ declare namespace imports.gi.Gio {
 		 * Completes an asynchronous I/O job immediately. Must be called in
 		 * the thread where the asynchronous result was to be delivered, as it
 		 * invokes the callback directly. If you are in a different thread use
-		 * g_simple_async_result_complete_in_idle().
+		 * {@link G.simple_async_result_complete_in_idle}.
 		 * 
 		 * Calling this function takes a reference to #simple for as long as
 		 * is needed to complete the call.
@@ -14278,7 +14282,7 @@ declare namespace imports.gi.Gio {
 		complete_in_idle(): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_propagate_boolean() instead.
+		 * Use #GTask and {@link G.task_propagate_boolean} instead.
 		 * 
 		 * Gets the operation result boolean from within the asynchronous result.
 		 * @returns %TRUE if the operation's result was %TRUE, %FALSE
@@ -14287,7 +14291,7 @@ declare namespace imports.gi.Gio {
 		get_op_res_gboolean(): boolean;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_propagate_pointer() instead.
+		 * Use #GTask and {@link G.task_propagate_pointer} instead.
 		 * 
 		 * Gets a pointer result as returned by the asynchronous function.
 		 * @returns a pointer from the result.
@@ -14295,7 +14299,7 @@ declare namespace imports.gi.Gio {
 		get_op_res_gpointer(): any | null;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_propagate_int() instead.
+		 * Use #GTask and {@link G.task_propagate_int} instead.
 		 * 
 		 * Gets a gssize from the asynchronous result.
 		 * @returns a gssize returned from the asynchronous function.
@@ -14303,7 +14307,7 @@ declare namespace imports.gi.Gio {
 		get_op_res_gssize(): number;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_get_source_tag() instead.
+		 * Use #GTask and {@link G.task_get_source_tag} instead.
 		 * 
 		 * Gets the source tag for the #GSimpleAsyncResult.
 		 * @returns a #gpointer to the source object for the #GSimpleAsyncResult.
@@ -14317,17 +14321,17 @@ declare namespace imports.gi.Gio {
 		 * a given destination.
 		 * 
 		 * If the #GCancellable given to a prior call to
-		 * g_simple_async_result_set_check_cancellable() is cancelled then this
+		 * {@link G.simple_async_result_set_check_cancellable} is cancelled then this
 		 * function will return %TRUE with #dest set appropriately.
 		 * @returns %TRUE if the error was propagated to #dest. %FALSE otherwise.
 		 */
 		propagate_error(): boolean;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_run_in_thread() instead.
+		 * Use #GTask and {@link G.task_run_in_thread} instead.
 		 * 
 		 * Runs the asynchronous job in a separate thread and then calls
-		 * g_simple_async_result_complete_in_idle() on #simple to return
+		 * {@link G.simple_async_result_complete_in_idle} on #simple to return
 		 * the result to the appropriate main loop.
 		 * 
 		 * Calling this function takes a reference to #simple for as long as
@@ -14344,7 +14348,7 @@ declare namespace imports.gi.Gio {
 		 * Sets a #GCancellable to check before dispatching results.
 		 * 
 		 * This function has one very specific purpose: the provided cancellable
-		 * is checked at the time of g_simple_async_result_propagate_error() If
+		 * is checked at the time of {@link G.simple_async_result_propagate_error} If
 		 * it is cancelled, these functions will return an "Operation was
 		 * cancelled" error (%G_IO_ERROR_CANCELLED).
 		 * 
@@ -14361,7 +14365,7 @@ declare namespace imports.gi.Gio {
 		set_check_cancellable(check_cancellable: Cancellable | null): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_new_error() instead.
+		 * Use #GTask and {@link G.task_return_new_error} instead.
 		 * 
 		 * Sets an error within the asynchronous result without a #GError.
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
@@ -14371,10 +14375,10 @@ declare namespace imports.gi.Gio {
 		set_error(domain: GLib.Quark, code: number, format: string): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_error() instead.
+		 * Use #GTask and {@link G.task_return_error} instead.
 		 * 
 		 * Sets an error within the asynchronous result without a #GError.
-		 * Unless writing a binding, see g_simple_async_result_set_error().
+		 * Unless writing a binding, see {@link G.simple_async_result_set_error}.
 		 * @param domain a #GQuark (usually #G_IO_ERROR).
 		 * @param code an error code.
 		 * @param format a formatted error reporting string.
@@ -14383,7 +14387,7 @@ declare namespace imports.gi.Gio {
 		set_error_va(domain: GLib.Quark, code: number, format: string, args: any[]): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_error() instead.
+		 * Use #GTask and {@link G.task_return_error} instead.
 		 * 
 		 * Sets the result from a #GError.
 		 * @param error #GError.
@@ -14393,14 +14397,14 @@ declare namespace imports.gi.Gio {
 		 * Sets whether to handle cancellation within the asynchronous operation.
 		 * 
 		 * This function has nothing to do with
-		 * g_simple_async_result_set_check_cancellable().  It only refers to the
+		 * {@link G.simple_async_result_set_check_cancellable}.  It only refers to the
 		 * #GCancellable passed to g_simple_async_result_run_in_thread().
 		 * @param handle_cancellation a #gboolean.
 		 */
 		set_handle_cancellation(handle_cancellation: boolean): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_boolean() instead.
+		 * Use #GTask and {@link G.task_return_boolean} instead.
 		 * 
 		 * Sets the operation result to a boolean within the asynchronous result.
 		 * @param op_res a #gboolean.
@@ -14408,7 +14412,7 @@ declare namespace imports.gi.Gio {
 		set_op_res_gboolean(op_res: boolean): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_pointer() instead.
+		 * Use #GTask and {@link G.task_return_pointer} instead.
 		 * 
 		 * Sets the operation result within the asynchronous result to a pointer.
 		 * @param op_res a pointer result from an asynchronous function.
@@ -14417,7 +14421,7 @@ declare namespace imports.gi.Gio {
 		set_op_res_gpointer(op_res: any | null, destroy_op_res: GLib.DestroyNotify): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_int() instead.
+		 * Use #GTask and {@link G.task_return_int} instead.
 		 * 
 		 * Sets the operation result within the asynchronous result to
 		 * the given #op_res.
@@ -14426,7 +14430,7 @@ declare namespace imports.gi.Gio {
 		set_op_res_gssize(op_res: number): void;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_return_error() instead.
+		 * Use #GTask and {@link G.task_return_error} instead.
 		 * 
 		 * Sets the result from #error, and takes over the caller's ownership
 		 * of #error, so the caller does not need to free it any more.
@@ -14469,7 +14473,7 @@ declare namespace imports.gi.Gio {
 	 * that asynchronous functions and their finishing functions are used
 	 * together correctly.
 	 * 
-	 * To create a new #GSimpleAsyncResult, call g_simple_async_result_new().
+	 * To create a new #GSimpleAsyncResult, call {@link G.simple_async_result_new}.
 	 * If the result needs to be created for a #GError, use
 	 * g_simple_async_result_new_from_error() or
 	 * g_simple_async_result_new_take_error(). If a #GError is not available
@@ -14616,7 +14620,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<SimpleAsyncResultInitOptions>);
 		/**
 		 * @deprecated
-		 * Use g_task_new() instead.
+		 * Use {@link G.task_new} instead.
 		 * 
 		 * Creates a #GSimpleAsyncResult.
 		 * 
@@ -14626,7 +14630,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If your operation supports cancellation with #GCancellable (which it
 		 * probably should) then you should provide the user's cancellable to
-		 * g_simple_async_result_set_check_cancellable() immediately after
+		 * {@link G.simple_async_result_set_check_cancellable} immediately after
 		 * this function returns.
 		 * @param source_object a #GObject, or %NULL.
 		 * @param callback a #GAsyncReadyCallback.
@@ -14636,7 +14640,7 @@ declare namespace imports.gi.Gio {
 		public static new(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, source_tag: any | null): SimpleAsyncResult;
 		/**
 		 * @deprecated
-		 * Use g_task_new() and g_task_return_new_error() instead.
+		 * Use {@link G.task_new} and g_task_return_new_error() instead.
 		 * 
 		 * Creates a new #GSimpleAsyncResult with a set error.
 		 * @param source_object a #GObject, or %NULL.
@@ -14649,7 +14653,7 @@ declare namespace imports.gi.Gio {
 		public static new_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, domain: GLib.Quark, code: number, format: string): SimpleAsyncResult;
 		/**
 		 * @deprecated
-		 * Use g_task_new() and g_task_return_error() instead.
+		 * Use {@link G.task_new} and g_task_return_error() instead.
 		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition.
 		 * @param source_object a #GObject, or %NULL.
@@ -14660,7 +14664,7 @@ declare namespace imports.gi.Gio {
 		public static new_from_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
 		 * @deprecated
-		 * Use g_task_new() and g_task_return_error() instead.
+		 * Use {@link G.task_new} and g_task_return_error() instead.
 		 * 
 		 * Creates a #GSimpleAsyncResult from an error condition, and takes over the
 		 * caller's ownership of #error, so the caller does not need to free it anymore.
@@ -14672,7 +14676,7 @@ declare namespace imports.gi.Gio {
 		public static new_take_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, error: GLib.Error): SimpleAsyncResult;
 		/**
 		 * @deprecated
-		 * Use #GTask and g_task_is_valid() instead.
+		 * Use #GTask and {@link G.task_is_valid} instead.
 		 * 
 		 * Ensures that the data passed to the _finish function of an async
 		 * operation is consistent.  Three checks are performed.
@@ -14681,7 +14685,7 @@ declare namespace imports.gi.Gio {
 		 * #GSimpleAsyncResult.  Second, #source is checked to ensure that it
 		 * matches the source object of #result.  Third, #source_tag is
 		 * checked to ensure that it is equal to the #source_tag argument given
-		 * to g_simple_async_result_new() (which, by convention, is a pointer
+		 * to {@link G.simple_async_result_new} (which, by convention, is a pointer
 		 * to the _async function corresponding to the _finish function from
 		 * which this function is called).  (Alternatively, if either
 		 * #source_tag or #result's source tag is %NULL, then the source tag
@@ -14725,7 +14729,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * This is useful when you obtained a #GInputStream and a #GOutputStream
 	 * by other means, for instance creating them with platform specific methods as
-	 * g_unix_input_stream_new() or g_win32_input_stream_new(), and you want
+	 * {@link G.unix_input_stream_new} or g_win32_input_stream_new(), and you want
 	 * to take advantage of the methods provided by #GIOStream.
 	 */
 	interface SimpleIOStream extends SimpleIOStreamMixin {}
@@ -14784,7 +14788,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The default proxy URI that will be used for any URI that doesn't
 		 * match #GSimpleProxyResolver:ignore-hosts, and doesn't match any
-		 * of the schemes set with g_simple_proxy_resolver_set_uri_proxy().
+		 * of the schemes set with {@link G.simple_proxy_resolver_set_uri_proxy}.
 		 * 
 		 * Note that as a special case, if this URI starts with
 		 * "socks://", #GSimpleProxyResolver will treat it as referring
@@ -14831,7 +14835,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the default proxy on #resolver, to be used for any URIs that
 		 * don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
-		 * via g_simple_proxy_resolver_set_uri_proxy().
+		 * via {@link G.simple_proxy_resolver_set_uri_proxy}.
 		 * 
 		 * If #default_proxy starts with "socks://",
 		 * #GSimpleProxyResolver will treat it as referring to all three of
@@ -14886,7 +14890,7 @@ declare namespace imports.gi.Gio {
 	 * #GSimpleProxyResolver is never the default proxy resolver, but it
 	 * can be used as the base class for another proxy resolver
 	 * implementation, or it can be created and used manually, such as
-	 * with g_socket_client_set_proxy_resolver().
+	 * with {@link G.socket_client_set_proxy_resolver}.
 	 */
 	interface SimpleProxyResolver extends SimpleProxyResolverMixin {}
 
@@ -14944,7 +14948,7 @@ declare namespace imports.gi.Gio {
 		 * the first outstanding connection request from the listening socket and
 		 * creates a #GSocket object for it.
 		 * 
-		 * The #socket must be bound to a local address with g_socket_bind() and
+		 * The #socket must be bound to a local address with {@link G.socket_bind} and
 		 * must be listening for incoming connections (g_socket_listen()).
 		 * 
 		 * If there are no outstanding connections then the operation will block
@@ -14952,12 +14956,12 @@ declare namespace imports.gi.Gio {
 		 * To be notified of an incoming connection, wait for the %G_IO_IN condition.
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns a new #GSocket, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		accept(cancellable: Cancellable | null): Socket;
 		/**
 		 * When a socket is created it is attached to an address family, but it
-		 * doesn't have an address in this family. g_socket_bind() assigns the
+		 * doesn't have an address in this family. {@link G.socket_bind} assigns the
 		 * address (sometimes called name) of the socket.
 		 * 
 		 * It is generally required to bind to a local address before you can
@@ -14986,7 +14990,7 @@ declare namespace imports.gi.Gio {
 		bind(address: SocketAddress, allow_reuse: boolean): boolean;
 		/**
 		 * Checks and resets the pending connect error for the socket.
-		 * This is used to check for errors when g_socket_connect() is
+		 * This is used to check for errors when {@link G.socket_connect} is
 		 * used in non-blocking mode.
 		 * @returns %TRUE if no error, %FALSE otherwise, setting #error to the error
 		 */
@@ -15014,7 +15018,7 @@ declare namespace imports.gi.Gio {
 		 * way to avoid this problem; the easiest fix is to design the network
 		 * protocol such that the client will never send data "out of turn".
 		 * Another solution is for the server to half-close the connection by
-		 * calling g_socket_shutdown() with only the #shutdown_write flag set,
+		 * calling {@link G.socket_shutdown} with only the #shutdown_write flag set,
 		 * and then wait for the client to notice this and close its side of the
 		 * connection, after which the server can safely call g_socket_close().
 		 * (This is what #GTcpConnection does if you call
@@ -15032,7 +15036,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that on Windows, it is possible for an operation to return
 		 * %G_IO_ERROR_WOULD_BLOCK even immediately after
-		 * g_socket_condition_check() has claimed that the socket is ready for
+		 * {@link G.socket_condition_check} has claimed that the socket is ready for
 		 * writing. Rather than calling g_socket_condition_check() and then
 		 * writing to the socket if it succeeds, it is generally better to
 		 * simply try writing to the socket right away, and try again later if
@@ -15056,7 +15060,7 @@ declare namespace imports.gi.Gio {
 		 * is set to the appropriate value (%G_IO_ERROR_CANCELLED or
 		 * %G_IO_ERROR_TIMED_OUT).
 		 * 
-		 * If you don't want a timeout, use g_socket_condition_wait().
+		 * If you don't want a timeout, use {@link G.socket_condition_wait}.
 		 * (Alternatively, you can pass -1 for #timeout_us.)
 		 * 
 		 * Note that although #timeout_us is in microseconds for consistency with
@@ -15079,7 +15083,7 @@ declare namespace imports.gi.Gio {
 		 * the appropriate value (%G_IO_ERROR_CANCELLED or
 		 * %G_IO_ERROR_TIMED_OUT).
 		 * 
-		 * See also g_socket_condition_timed_wait().
+		 * See also {@link G.socket_condition_timed_wait}.
 		 * @param condition a #GIOCondition mask to wait for
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns %TRUE if the condition was met, %FALSE otherwise
@@ -15090,7 +15094,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * For connection oriented socket this generally means we attempt to make
 		 * a connection to the #address. For a connection-less socket it sets
-		 * the default address for g_socket_send() and discards all incoming datagrams
+		 * the default address for {@link G.socket_send} and discards all incoming datagrams
 		 * from other sources.
 		 * 
 		 * Generally connection oriented sockets can only connect once, but
@@ -15127,7 +15131,7 @@ declare namespace imports.gi.Gio {
 		 * cause the source to trigger, reporting the current condition (which
 		 * is likely 0 unless cancellation happened at the same time as a
 		 * condition change). You can check for this in the callback using
-		 * g_cancellable_is_cancelled().
+		 * {@link G.cancellable_is_cancelled}.
 		 * 
 		 * If #socket has a timeout set, and it is reached before #condition
 		 * occurs, the source will then trigger anyway, reporting %G_IO_IN or
@@ -15136,7 +15140,7 @@ declare namespace imports.gi.Gio {
 		 * you call will then fail with a %G_IO_ERROR_TIMED_OUT.
 		 * @param condition a #GIOCondition mask to monitor
 		 * @param cancellable a %GCancellable or %NULL
-		 * @returns a newly allocated %GSource, free with g_source_unref().
+		 * @returns a newly allocated %GSource, free with {@link G.source_unref}.
 		 */
 		create_source(condition: GLib.IOCondition, cancellable: Cancellable | null): GLib.Source;
 		/**
@@ -15149,7 +15153,7 @@ declare namespace imports.gi.Gio {
 		 * Note that on Windows, this function is rather inefficient in the
 		 * UDP case, and so if you know any plausible upper bound on the size
 		 * of the incoming packet, it is better to just do a
-		 * g_socket_receive() with a buffer of that size, rather than calling
+		 * {@link G.socket_receive} with a buffer of that size, rather than calling
 		 * g_socket_get_available_bytes() first and then doing a receive of
 		 * exactly the right size.
 		 * @returns the number of bytes that can be read from the socket
@@ -15158,7 +15162,7 @@ declare namespace imports.gi.Gio {
 		get_available_bytes(): number;
 		/**
 		 * Gets the blocking mode of the socket. For details on blocking I/O,
-		 * see g_socket_set_blocking().
+		 * see {@link G.socket_set_blocking}.
 		 * @returns %TRUE if blocking I/O is used, %FALSE otherwise.
 		 */
 		get_blocking(): boolean;
@@ -15188,10 +15192,10 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Other ways to obtain credentials from a foreign peer includes the
 		 * #GUnixCredentialsMessage type and
-		 * g_unix_connection_send_credentials() /
+		 * {@link G.unix_connection_send_credentials} /
 		 * g_unix_connection_receive_credentials() functions.
 		 * @returns %NULL if #error is set, otherwise a #GCredentials object
-		 * that must be freed with g_object_unref().
+		 * that must be freed with {@link GObject.unref}.
 		 */
 		get_credentials(): Credentials;
 		/**
@@ -15210,13 +15214,13 @@ declare namespace imports.gi.Gio {
 		get_fd(): number;
 		/**
 		 * Gets the keepalive mode of the socket. For details on this,
-		 * see g_socket_set_keepalive().
+		 * see {@link G.socket_set_keepalive}.
 		 * @returns %TRUE if keepalive is active, %FALSE otherwise.
 		 */
 		get_keepalive(): boolean;
 		/**
 		 * Gets the listen backlog setting of the socket. For details on this,
-		 * see g_socket_set_listen_backlog().
+		 * see {@link G.socket_set_listen_backlog}.
 		 * @returns the maximum number of pending connections.
 		 */
 		get_listen_backlog(): number;
@@ -15225,7 +15229,7 @@ declare namespace imports.gi.Gio {
 		 * useful if the socket has been bound to a local address,
 		 * either explicitly or implicitly when connecting.
 		 * @returns a #GSocketAddress or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_local_address(): SocketAddress;
 		/**
@@ -15237,7 +15241,7 @@ declare namespace imports.gi.Gio {
 		get_multicast_loopback(): boolean;
 		/**
 		 * Gets the multicast time-to-live setting on #socket; see
-		 * g_socket_set_multicast_ttl() for more details.
+		 * {@link G.socket_set_multicast_ttl} for more details.
 		 * @returns the multicast time-to-live setting on #socket
 		 */
 		get_multicast_ttl(): number;
@@ -15274,7 +15278,7 @@ declare namespace imports.gi.Gio {
 		 * Try to get the remote address of a connected socket. This is only
 		 * useful for connection oriented sockets that have been connected.
 		 * @returns a #GSocketAddress or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_remote_address(): SocketAddress;
 		/**
@@ -15284,13 +15288,13 @@ declare namespace imports.gi.Gio {
 		get_socket_type(): SocketType;
 		/**
 		 * Gets the timeout setting of the socket. For details on this, see
-		 * g_socket_set_timeout().
+		 * {@link G.socket_set_timeout}.
 		 * @returns the timeout in seconds
 		 */
 		get_timeout(): number;
 		/**
 		 * Gets the unicast time-to-live setting on #socket; see
-		 * g_socket_set_ttl() for more details.
+		 * {@link G.socket_set_ttl} for more details.
 		 * @returns the time-to-live setting on #socket
 		 */
 		get_ttl(): number;
@@ -15303,7 +15307,7 @@ declare namespace imports.gi.Gio {
 		 * Check whether the socket is connected. This is only useful for
 		 * connection-oriented sockets.
 		 * 
-		 * If using g_socket_shutdown(), this function will return %TRUE until the
+		 * If using {@link G.socket_shutdown}, this function will return %TRUE until the
 		 * socket has been shut down for reading and writing. If you do a non-blocking
 		 * connect, this function will not return %TRUE until after you call
 		 * g_socket_check_connect_result().
@@ -15314,7 +15318,7 @@ declare namespace imports.gi.Gio {
 		 * Registers #socket to receive multicast messages sent to #group.
 		 * #socket must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
 		 * been bound to an appropriate interface and port with
-		 * g_socket_bind().
+		 * {@link G.socket_bind}.
 		 * 
 		 * If #iface is %NULL, the system will automatically pick an interface
 		 * to bind to based on #group.
@@ -15335,7 +15339,7 @@ declare namespace imports.gi.Gio {
 		 * Registers #socket to receive multicast messages sent to #group.
 		 * #socket must be a %G_SOCKET_TYPE_DATAGRAM socket, and must have
 		 * been bound to an appropriate interface and port with
-		 * g_socket_bind().
+		 * {@link G.socket_bind}.
 		 * 
 		 * If #iface is %NULL, the system will automatically pick an interface
 		 * to bind to based on #group.
@@ -15363,7 +15367,7 @@ declare namespace imports.gi.Gio {
 		 * unicast messages after calling this.
 		 * 
 		 * To unbind to a given source-specific multicast address, use
-		 * g_socket_leave_multicast_group_ssm() instead.
+		 * {@link G.socket_leave_multicast_group_ssm} instead.
 		 * @param group a #GInetAddress specifying the group address to leave.
 		 * @param source_specific %TRUE if source-specific multicast was used
 		 * @param iface Interface used
@@ -15386,7 +15390,7 @@ declare namespace imports.gi.Gio {
 		leave_multicast_group_ssm(group: InetAddress, source_specific: InetAddress | null, iface: string | null): boolean;
 		/**
 		 * Marks the socket as a server socket, i.e. a socket that is used
-		 * to accept incoming requests using g_socket_accept().
+		 * to accept incoming requests using {@link G.socket_accept}.
 		 * 
 		 * Before calling this the socket must be bound to a local address using
 		 * g_socket_bind().
@@ -15398,7 +15402,7 @@ declare namespace imports.gi.Gio {
 		listen(): boolean;
 		/**
 		 * Receive data (up to #size bytes) from a socket. This is mainly used by
-		 * connection-oriented sockets; it is identical to g_socket_receive_from()
+		 * connection-oriented sockets; it is identical to {@link G.socket_receive_from}
 		 * with #address set to %NULL.
 		 * 
 		 * For %G_SOCKET_TYPE_DATAGRAM and %G_SOCKET_TYPE_SEQPACKET sockets,
@@ -15437,7 +15441,7 @@ declare namespace imports.gi.Gio {
 		 * source address of the received packet.
 		 * #address is owned by the caller.
 		 * 
-		 * See g_socket_receive() for additional information.
+		 * See {@link G.socket_receive} for additional information.
 		 * @param cancellable a %GCancellable or %NULL
 		 * @returns Number of bytes read, or 0 if the connection was closed by
 		 * the peer, or -1 on error
@@ -15453,7 +15457,7 @@ declare namespace imports.gi.Gio {
 		receive_from(cancellable: Cancellable | null): [ number, SocketAddress | null, number[], number ];
 		/**
 		 * Receive data from a socket.  For receiving multiple messages, see
-		 * g_socket_receive_messages(); for easier use, see
+		 * {@link G.socket_receive_messages}; for easier use, see
 		 * g_socket_receive() and g_socket_receive_from().
 		 * 
 		 * If #address is non-%NULL then #address will be set equal to the
@@ -15530,7 +15534,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Receive multiple data messages from #socket in one go.  This is the most
 		 * complicated and fully-featured version of this call. For easier use, see
-		 * g_socket_receive(), g_socket_receive_from(), and g_socket_receive_message().
+		 * {@link G.socket_receive}, g_socket_receive_from(), and g_socket_receive_message().
 		 * 
 		 * #messages must point to an array of #GInputMessage structs and
 		 * #num_messages must be the length of this array. Each #GInputMessage
@@ -15590,7 +15594,7 @@ declare namespace imports.gi.Gio {
 		 */
 		receive_messages(messages: InputMessage[], num_messages: number, flags: number, cancellable: Cancellable | null): number;
 		/**
-		 * This behaves exactly the same as g_socket_receive(), except that
+		 * This behaves exactly the same as {@link G.socket_receive}, except that
 		 * the choice of blocking or non-blocking behavior is determined by
 		 * the #blocking argument rather than by #socket's properties.
 		 * @param blocking whether to do blocking or non-blocking I/O
@@ -15607,7 +15611,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Tries to send #size bytes from #buffer on the socket. This is
 		 * mainly used by connection-oriented sockets; it is identical to
-		 * g_socket_send_to() with #address set to %NULL.
+		 * {@link G.socket_send_to} with #address set to %NULL.
 		 * 
 		 * If the socket is in blocking mode the call will block until there is
 		 * space for the data in the socket queue. If there is no space available
@@ -15629,7 +15633,7 @@ declare namespace imports.gi.Gio {
 		send(buffer: number[], size: number, cancellable: Cancellable | null): number;
 		/**
 		 * Send data to #address on #socket.  For sending multiple messages see
-		 * g_socket_send_messages(); for easier use, see
+		 * {@link G.socket_send_messages}; for easier use, see
 		 * g_socket_send() and g_socket_send_to().
 		 * 
 		 * If #address is %NULL then the message is sent to the default receiver
@@ -15684,7 +15688,7 @@ declare namespace imports.gi.Gio {
 		 */
 		send_message(address: SocketAddress | null, vectors: OutputVector[], num_vectors: number, messages: SocketControlMessage[] | null, num_messages: number, flags: number, cancellable: Cancellable | null): number;
 		/**
-		 * This behaves exactly the same as g_socket_send_message(), except that
+		 * This behaves exactly the same as {@link G.socket_send_message}, except that
 		 * the choice of timeout behavior is determined by the #timeout_us argument
 		 * rather than by #socket's properties.
 		 * 
@@ -15711,7 +15715,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Send multiple data messages from #socket in one go.  This is the most
 		 * complicated and fully-featured version of this call. For easier use, see
-		 * g_socket_send(), g_socket_send_to(), and g_socket_send_message().
+		 * {@link G.socket_send}, g_socket_send_to(), and g_socket_send_message().
 		 * 
 		 * #messages must point to an array of #GOutputMessage structs and
 		 * #num_messages must be the length of this array. Each #GOutputMessage
@@ -15757,7 +15761,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Tries to send #size bytes from #buffer to #address. If #address is
 		 * %NULL then the message is sent to the default receiver (set by
-		 * g_socket_connect()).
+		 * {@link G.socket_connect}).
 		 * 
 		 * See g_socket_send() for additional information.
 		 * @param address a #GSocketAddress, or %NULL
@@ -15770,7 +15774,7 @@ declare namespace imports.gi.Gio {
 		 */
 		send_to(address: SocketAddress | null, buffer: number[], size: number, cancellable: Cancellable | null): number;
 		/**
-		 * This behaves exactly the same as g_socket_send(), except that
+		 * This behaves exactly the same as {@link G.socket_send}, except that
 		 * the choice of blocking or non-blocking behavior is determined by
 		 * the #blocking argument rather than by #socket's properties.
 		 * @param buffer the buffer
@@ -15827,7 +15831,7 @@ declare namespace imports.gi.Gio {
 		 * connecting to the socket and the application is not handling them
 		 * on time then the new connections will be refused.
 		 * 
-		 * Note that this must be called before g_socket_listen() and has no
+		 * Note that this must be called before {@link G.socket_listen} and has no
 		 * effect if called after that.
 		 * @param backlog the maximum number of pending connections.
 		 */
@@ -15873,7 +15877,7 @@ declare namespace imports.gi.Gio {
 		 * operation will time out after #timeout seconds of inactivity,
 		 * returning %G_IO_ERROR_TIMED_OUT.
 		 * 
-		 * On a non-blocking socket, calls to g_socket_condition_wait() will
+		 * On a non-blocking socket, calls to {@link G.socket_condition_wait} will
 		 * also fail with %G_IO_ERROR_TIMED_OUT after the given time. Sources
 		 * created with g_socket_create_source() will trigger after
 		 * #timeout seconds of inactivity, with the requested condition
@@ -15981,7 +15985,7 @@ declare namespace imports.gi.Gio {
 	 * direct use of #GSocket is useful.
 	 * 
 	 * #GSocket implements the #GInitable interface, so if it is manually constructed
-	 * by e.g. g_object_new() you must call g_initable_init() and check the
+	 * by e.g. {@link GObject.new} you must call g_initable_init() and check the
 	 * results before using the object. This is done automatically in
 	 * g_socket_new() and g_socket_new_from_fd(), so these functions can return
 	 * %NULL.
@@ -16044,7 +16048,7 @@ declare namespace imports.gi.Gio {
 		 * @param type the socket type to use.
 		 * @param protocol the id of the protocol to use, or 0 for default.
 		 * @returns a #GSocket or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new(family: SocketFamily, type: SocketType, protocol: SocketProtocol): Socket;
 		/**
@@ -16063,7 +16067,7 @@ declare namespace imports.gi.Gio {
 		 * descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED
 		 * @param fd a native socket file descriptor.
 		 * @returns a #GSocket or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_from_fd(fd: number): Socket;
 	}
@@ -16081,7 +16085,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the size of #address's native struct sockaddr.
 		 * You can use this to allocate memory to pass to
-		 * g_socket_address_to_native().
+		 * {@link G.socket_address_to_native}.
 		 * @returns the size of the native struct sockaddr that
 		 *     #address represents
 		 */
@@ -16096,7 +16100,7 @@ declare namespace imports.gi.Gio {
 		 * @param dest a pointer to a memory location that will contain the native
 		 * struct sockaddr
 		 * @param destlen the size of #dest. Must be at least as large as
-		 *     g_socket_address_get_native_size()
+		 *     {@link G.socket_address_get_native_size}
 		 * @returns %TRUE if #dest was filled in, %FALSE on error
 		 */
 		to_native(dest: any | null, destlen: number): boolean;
@@ -16143,7 +16147,7 @@ declare namespace imports.gi.Gio {
 		 * Retrieves the next #GSocketAddress from #enumerator. Note that this
 		 * may block for some amount of time. (Eg, a #GNetworkAddress may need
 		 * to do a DNS lookup before it can return an address.) Use
-		 * g_socket_address_enumerator_next_async() if you need to avoid
+		 * {@link G.socket_address_enumerator_next_async} if you need to avoid
 		 * blocking.
 		 * 
 		 * If #enumerator is expected to yield addresses, but for some reason
@@ -16162,7 +16166,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously retrieves the next #GSocketAddress from #enumerator
 		 * and then calls #callback, which must call
-		 * g_socket_address_enumerator_next_finish() to get the result.
+		 * {@link G.socket_address_enumerator_next_finish} to get the result.
 		 * 
 		 * It is an error to call this multiple times before the previous callback has finished.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -16172,7 +16176,7 @@ declare namespace imports.gi.Gio {
 		next_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Retrieves the result of a completed call to
-		 * g_socket_address_enumerator_next_async(). See
+		 * {@link G.socket_address_enumerator_next_async}. See
 		 * g_socket_address_enumerator_next() for more information about
 		 * error handling.
 		 * @param result a #GAsyncResult
@@ -16194,7 +16198,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GSocketAddressEnumerator is an enumerator type for #GSocketAddress
 	 * instances. It is returned by enumeration functions such as
-	 * g_socket_connectable_enumerate(), which returns a #GSocketAddressEnumerator
+	 * {@link G.socket_connectable_enumerate}, which returns a #GSocketAddressEnumerator
 	 * to list each #GSocketAddress which could be used to connect to that
 	 * #GSocketConnectable.
 	 * 
@@ -16235,7 +16239,7 @@ declare namespace imports.gi.Gio {
 		 * #GSocketClient will consider this protocol as supported but will
 		 * not try to find a #GProxy instance to handle handshaking. The
 		 * application must check for this case by calling
-		 * g_socket_connection_get_remote_address() on the returned
+		 * {@link G.socket_connection_get_remote_address} on the returned
 		 * #GSocketConnection, and seeing if it's a #GProxyAddress of the
 		 * appropriate type, to determine whether or not it needs to handle
 		 * the proxy handshaking itself.
@@ -16264,7 +16268,7 @@ declare namespace imports.gi.Gio {
 		 * it will be a #GTcpConnection.
 		 * 
 		 * The socket created will be the same family as the address that the
-		 * #connectable resolves to, unless family is set with g_socket_client_set_family()
+		 * #connectable resolves to, unless family is set with {@link G.socket_client_set_family}
 		 * or indirectly via g_socket_client_set_local_address(). The socket type
 		 * defaults to %G_SOCKET_TYPE_STREAM but can be set with
 		 * g_socket_client_set_socket_type().
@@ -16277,7 +16281,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(connectable: SocketConnectable, cancellable: Cancellable | null): SocketConnection;
 		/**
-		 * This is the asynchronous version of g_socket_client_connect().
+		 * This is the asynchronous version of {@link G.socket_client_connect}.
 		 * 
 		 * You may wish to prefer the asynchronous version even in synchronous
 		 * command line programs because, since 2.60, it implements
@@ -16297,13 +16301,13 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_async(connectable: SocketConnectable, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async connect operation. See g_socket_client_connect_async()
+		 * Finishes an async connect operation. See {@link G.socket_client_connect_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
 		 */
 		connect_finish(result: AsyncResult): SocketConnection;
 		/**
-		 * This is a helper function for g_socket_client_connect().
+		 * This is a helper function for {@link G.socket_client_connect}.
 		 * 
 		 * Attempts to create a TCP connection to the named host.
 		 * 
@@ -16340,7 +16344,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_to_host(host_and_port: string, default_port: number, cancellable: Cancellable | null): SocketConnection;
 		/**
-		 * This is the asynchronous version of g_socket_client_connect_to_host().
+		 * This is the asynchronous version of {@link G.socket_client_connect_to_host}.
 		 * 
 		 * When the operation is finished #callback will be
 		 * called. You can then call g_socket_client_connect_to_host_finish() to get
@@ -16352,7 +16356,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_to_host_async(host_and_port: string, default_port: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async connect operation. See g_socket_client_connect_to_host_async()
+		 * Finishes an async connect operation. See {@link G.socket_client_connect_to_host_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
 		 */
@@ -16380,7 +16384,7 @@ declare namespace imports.gi.Gio {
 		connect_to_service(domain: string, service: string, cancellable: Cancellable | null): SocketConnection;
 		/**
 		 * This is the asynchronous version of
-		 * g_socket_client_connect_to_service().
+		 * {@link G.socket_client_connect_to_service}.
 		 * @param domain a domain name
 		 * @param service the name of the service to connect to
 		 * @param cancellable a #GCancellable, or %NULL
@@ -16388,13 +16392,13 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_to_service_async(domain: string, service: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async connect operation. See g_socket_client_connect_to_service_async()
+		 * Finishes an async connect operation. See {@link G.socket_client_connect_to_service_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
 		 */
 		connect_to_service_finish(result: AsyncResult): SocketConnection;
 		/**
-		 * This is a helper function for g_socket_client_connect().
+		 * This is a helper function for {@link G.socket_client_connect}.
 		 * 
 		 * Attempts to create a TCP connection with a network URI.
 		 * 
@@ -16422,7 +16426,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_to_uri(uri: string, default_port: number, cancellable: Cancellable | null): SocketConnection;
 		/**
-		 * This is the asynchronous version of g_socket_client_connect_to_uri().
+		 * This is the asynchronous version of {@link G.socket_client_connect_to_uri}.
 		 * 
 		 * When the operation is finished #callback will be
 		 * called. You can then call g_socket_client_connect_to_uri_finish() to get
@@ -16434,40 +16438,40 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_to_uri_async(uri: string, default_port: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async connect operation. See g_socket_client_connect_to_uri_async()
+		 * Finishes an async connect operation. See {@link G.socket_client_connect_to_uri_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
 		 */
 		connect_to_uri_finish(result: AsyncResult): SocketConnection;
 		/**
-		 * Gets the proxy enable state; see g_socket_client_set_enable_proxy()
+		 * Gets the proxy enable state; see {@link G.socket_client_set_enable_proxy}
 		 * @returns whether proxying is enabled
 		 */
 		get_enable_proxy(): boolean;
 		/**
 		 * Gets the socket family of the socket client.
 		 * 
-		 * See g_socket_client_set_family() for details.
+		 * See {@link G.socket_client_set_family} for details.
 		 * @returns a #GSocketFamily
 		 */
 		get_family(): SocketFamily;
 		/**
 		 * Gets the local address of the socket client.
 		 * 
-		 * See g_socket_client_set_local_address() for details.
+		 * See {@link G.socket_client_set_local_address} for details.
 		 * @returns a #GSocketAddress or %NULL. Do not free.
 		 */
 		get_local_address(): SocketAddress | null;
 		/**
 		 * Gets the protocol name type of the socket client.
 		 * 
-		 * See g_socket_client_set_protocol() for details.
+		 * See {@link G.socket_client_set_protocol} for details.
 		 * @returns a #GSocketProtocol
 		 */
 		get_protocol(): SocketProtocol;
 		/**
 		 * Gets the #GProxyResolver being used by #client. Normally, this will
-		 * be the resolver returned by g_proxy_resolver_get_default(), but you
+		 * be the resolver returned by {@link G.proxy_resolver_get_default}, but you
 		 * can override it with g_socket_client_set_proxy_resolver().
 		 * @returns The #GProxyResolver being used by
 		 *   #client.
@@ -16476,20 +16480,20 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the socket type of the socket client.
 		 * 
-		 * See g_socket_client_set_socket_type() for details.
+		 * See {@link G.socket_client_set_socket_type} for details.
 		 * @returns a #GSocketFamily
 		 */
 		get_socket_type(): SocketType;
 		/**
 		 * Gets the I/O timeout time for sockets created by #client.
 		 * 
-		 * See g_socket_client_set_timeout() for details.
+		 * See {@link G.socket_client_set_timeout} for details.
 		 * @returns the timeout in seconds
 		 */
 		get_timeout(): number;
 		/**
 		 * Gets whether #client creates TLS connections. See
-		 * g_socket_client_set_tls() for details.
+		 * {@link G.socket_client_set_tls} for details.
 		 * @returns whether #client uses TLS
 		 */
 		get_tls(): boolean;
@@ -16505,7 +16509,7 @@ declare namespace imports.gi.Gio {
 		 * #GProxyResolver to determine if a proxy protocol such as SOCKS is
 		 * needed, and automatically do the necessary proxy negotiation.
 		 * 
-		 * See also g_socket_client_set_proxy_resolver().
+		 * See also {@link G.socket_client_set_proxy_resolver}.
 		 * @param enable whether to enable proxies
 		 */
 		set_enable_proxy(enable: boolean): void;
@@ -16569,7 +16573,7 @@ declare namespace imports.gi.Gio {
 		 * time in seconds, or 0 for no timeout (the default).
 		 * 
 		 * The timeout value affects the initial connection attempt as well,
-		 * so setting this may cause calls to g_socket_client_connect(), etc,
+		 * so setting this may cause calls to {@link G.socket_client_connect}, etc,
 		 * to fail with %G_IO_ERROR_TIMED_OUT.
 		 * @param timeout the timeout
 		 */
@@ -16583,7 +16587,7 @@ declare namespace imports.gi.Gio {
 		 * but #GTlsClientConnection is not a #GSocketConnection, this
 		 * actually wraps the resulting #GTlsClientConnection in a
 		 * #GTcpWrapperConnection when returning it. You can use
-		 * g_tcp_wrapper_connection_get_base_io_stream() on the return value
+		 * {@link G.tcp_wrapper_connection_get_base_io_stream} on the return value
 		 * to extract the #GTlsClientConnection.
 		 * 
 		 * If you need to modify the behavior of the TLS handshake (eg, by
@@ -16618,7 +16622,7 @@ declare namespace imports.gi.Gio {
 		 *   to a remote host; either a proxy server or the destination server
 		 *   itself. #connection is the #GSocketConnection, which is not yet
 		 *   connected.  Since GLib 2.40, you can access the remote
-		 *   address via g_socket_connection_get_remote_address().
+		 *   address via {@link G.socket_connection_get_remote_address}.
 		 * 
 		 * - %G_SOCKET_CLIENT_CONNECTED: #client has successfully connected
 		 *   to a remote host. #connection is the connected #GSocketConnection.
@@ -16716,7 +16720,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a new #GSocketClient with the default options.
 		 * @returns a #GSocketClient.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new(): SocketClient;
 	}
@@ -16739,14 +16743,14 @@ declare namespace imports.gi.Gio {
 		 * This clears the #GSocket:blocking flag on #connection's underlying
 		 * socket if it is currently set.
 		 * 
-		 * Use g_socket_connection_connect_finish() to retrieve the result.
+		 * Use {@link G.socket_connection_connect_finish} to retrieve the result.
 		 * @param address a #GSocketAddress specifying the remote address.
 		 * @param cancellable a %GCancellable or %NULL
 		 * @param callback a #GAsyncReadyCallback
 		 */
 		connect_async(address: SocketAddress, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Gets the result of a g_socket_connection_connect_async() call.
+		 * Gets the result of a {@link G.socket_connection_connect_async} call.
 		 * @param result the #GAsyncResult
 		 * @returns %TRUE if the connection succeeded, %FALSE on error
 		 */
@@ -16754,20 +16758,20 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Try to get the local address of a socket connection.
 		 * @returns a #GSocketAddress or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_local_address(): SocketAddress;
 		/**
 		 * Try to get the remote address of a socket connection.
 		 * 
-		 * Since GLib 2.40, when used with g_socket_client_connect() or
+		 * Since GLib 2.40, when used with {@link G.socket_client_connect} or
 		 * g_socket_client_connect_async(), during emission of
 		 * %G_SOCKET_CLIENT_CONNECTING, this function will return the remote
 		 * address that will be used for the connection.  This allows
 		 * applications to print e.g. "Connecting to example.com
 		 * (10.42.77.3)...".
 		 * @returns a #GSocketAddress or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_remote_address(): SocketAddress;
 		/**
@@ -16779,7 +16783,7 @@ declare namespace imports.gi.Gio {
 		get_socket(): Socket;
 		/**
 		 * Checks if #connection is connected. This is equivalent to calling
-		 * g_socket_is_connected() on #connection's underlying #GSocket.
+		 * {@link G.socket_is_connected} on #connection's underlying #GSocket.
 		 * @returns whether #connection is connected
 		 */
 		is_connected(): boolean;
@@ -16810,7 +16814,7 @@ declare namespace imports.gi.Gio {
 	 * Choosing what type of object to construct is done with the socket
 	 * connection factory, and it is possible for 3rd parties to register
 	 * custom socket connection types for specific combination of socket
-	 * family/type/protocol using g_socket_connection_factory_register_type().
+	 * family/type/protocol using {@link G.socket_connection_factory_register_type}.
 	 * 
 	 * To close a #GSocketConnection, use g_io_stream_close(). Closing both
 	 * substreams of the #GIOStream separately will not close the underlying
@@ -16871,7 +16875,7 @@ declare namespace imports.gi.Gio {
 		 * message.
 		 * 
 		 * #data is guaranteed to have enough space to fit the size
-		 * returned by g_socket_control_message_get_size() on this
+		 * returned by {@link G.socket_control_message_get_size} on this
 		 * object.
 		 * @param data A buffer to write data to
 		 */
@@ -16896,7 +16900,7 @@ declare namespace imports.gi.Gio {
 	 * transfer to the peer (for example, sending a file descriptor over
 	 * a UNIX socket).
 	 * 
-	 * These messages are sent with g_socket_send_message() and received
+	 * These messages are sent with {@link G.socket_send_message} and received
 	 * with g_socket_receive_message().
 	 * 
 	 * To extend the set of control message that can be sent, subclass this
@@ -16953,7 +16957,7 @@ declare namespace imports.gi.Gio {
 		 */
 		accept(cancellable: Cancellable | null): [ SocketConnection, GObject.Object | null ];
 		/**
-		 * This is the asynchronous version of g_socket_listener_accept().
+		 * This is the asynchronous version of {@link G.socket_listener_accept}.
 		 * 
 		 * When the operation is finished #callback will be
 		 * called. You can then call g_socket_listener_accept_finish()
@@ -16963,7 +16967,7 @@ declare namespace imports.gi.Gio {
 		 */
 		accept_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async accept operation. See g_socket_listener_accept_async()
+		 * Finishes an async accept operation. See {@link G.socket_listener_accept_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocketConnection on success, %NULL on error.
 		 * 
@@ -16975,7 +16979,7 @@ declare namespace imports.gi.Gio {
 		 * to the listener. Returns the #GSocket that was accepted.
 		 * 
 		 * If you want to accept the high-level #GSocketConnection, not a #GSocket,
-		 * which is often the case, then you should use g_socket_listener_accept()
+		 * which is often the case, then you should use {@link G.socket_listener_accept}
 		 * instead.
 		 * 
 		 * If #source_object is not %NULL it will be filled out with the source
@@ -16992,7 +16996,7 @@ declare namespace imports.gi.Gio {
 		 */
 		accept_socket(cancellable: Cancellable | null): [ Socket, GObject.Object | null ];
 		/**
-		 * This is the asynchronous version of g_socket_listener_accept_socket().
+		 * This is the asynchronous version of {@link G.socket_listener_accept_socket}.
 		 * 
 		 * When the operation is finished #callback will be
 		 * called. You can then call g_socket_listener_accept_socket_finish()
@@ -17002,7 +17006,7 @@ declare namespace imports.gi.Gio {
 		 */
 		accept_socket_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an async accept operation. See g_socket_listener_accept_socket_async()
+		 * Finishes an async accept operation. See {@link G.socket_listener_accept_socket_async}
 		 * @param result a #GAsyncResult.
 		 * @returns a #GSocket on success, %NULL on error.
 		 * 
@@ -17017,7 +17021,7 @@ declare namespace imports.gi.Gio {
 		 * Note that adding an IPv6 address, depending on the platform,
 		 * may or may not result in a listener that also accepts IPv4
 		 * connections.  For more deterministic behavior, see
-		 * g_socket_listener_add_inet_port().
+		 * {@link G.socket_listener_add_inet_port}.
 		 * 
 		 * #source_object will be passed out in the various calls
 		 * to accept to identify this particular source, which is
@@ -17058,7 +17062,7 @@ declare namespace imports.gi.Gio {
 		 */
 		add_any_inet_port(source_object: GObject.Object | null): number;
 		/**
-		 * Helper function for g_socket_listener_add_address() that
+		 * Helper function for {@link G.socket_listener_add_address} that
 		 * creates a TCP/IP socket listening on IPv4 and IPv6 (if
 		 * supported) on the specified port on all interfaces.
 		 * 
@@ -17101,7 +17105,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the listen backlog on the sockets in the listener. This must be called
 		 * before adding any sockets, addresses or ports to the #GSocketListener (for
-		 * example, by calling g_socket_listener_add_inet_port()) to be effective.
+		 * example, by calling {@link G.socket_listener_add_inet_port}) to be effective.
 		 * 
 		 * See g_socket_set_listen_backlog() for details
 		 * @param listen_backlog an integer
@@ -17142,7 +17146,7 @@ declare namespace imports.gi.Gio {
 	 * of server sockets and helps you accept sockets from any of the
 	 * socket, either sync or async.
 	 * 
-	 * Add addresses and ports to listen on using g_socket_listener_add_address()
+	 * Add addresses and ports to listen on using {@link G.socket_listener_add_address}
 	 * and g_socket_listener_add_inet_port(). These will be listened on until
 	 * g_socket_listener_close() is called. Dropping your final reference to the
 	 * #GSocketListener will not cause g_socket_listener_close() to be called
@@ -17159,7 +17163,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<SocketListenerInitOptions>);
 		/**
 		 * Creates a new #GSocketListener with no sockets to listen for.
-		 * New listeners can be added with e.g. g_socket_listener_add_address()
+		 * New listeners can be added with e.g. {@link G.socket_listener_add_address}
 		 * or g_socket_listener_add_inet_port().
 		 * @returns a new #GSocketListener.
 		 */
@@ -17186,7 +17190,7 @@ declare namespace imports.gi.Gio {
 		 * Restarts the service, i.e. start accepting connections
 		 * from the added sockets when the mainloop runs. This only needs
 		 * to be called after the service has been stopped from
-		 * g_socket_service_stop().
+		 * {@link G.socket_service_stop}.
 		 * 
 		 * This call is thread-safe, so it may be called from a thread
 		 * handling an incoming client request.
@@ -17201,7 +17205,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note that this only stops accepting new connections; it does not
 		 * close the listening sockets, and you can call
-		 * g_socket_service_start() again later to begin listening again. To
+		 * {@link G.socket_service_start} again later to begin listening again. To
 		 * close the listening sockets, call g_socket_listener_close(). (This
 		 * will happen automatically when the #GSocketService is finalized.)
 		 * 
@@ -17223,7 +17227,7 @@ declare namespace imports.gi.Gio {
 		 *  - owner: owner of the emitted event 
 		 *  - connection: a new #GSocketConnection object 
 		 *  - source_object: the source_object passed to
-		 *     g_socket_listener_add_address() 
+		 *     {@link G.socket_listener_add_address} 
 		 *  - returns %TRUE to stop other handlers from being called 
 		 * 
 		 * @returns Callback ID
@@ -17257,7 +17261,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * There are two options for implementing a network service based on
 	 * #GSocketService. The first is to create the service using
-	 * g_socket_service_new() and to connect to the #GSocketService::incoming
+	 * {@link G.socket_service_new} and to connect to the #GSocketService::incoming
 	 * signal. The second is to subclass #GSocketService and override the
 	 * default signal handler implementation.
 	 * 
@@ -17279,7 +17283,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<SocketServiceInitOptions>);
 		/**
 		 * Creates a new #GSocketService with no sockets to listen for.
-		 * New listeners can be added with e.g. g_socket_listener_add_address()
+		 * New listeners can be added with e.g. {@link G.socket_listener_add_address}
 		 * or g_socket_listener_add_inet_port().
 		 * 
 		 * New services are created active, there is no need to call
@@ -17328,7 +17332,7 @@ declare namespace imports.gi.Gio {
 		 * been set to anything in particular and should not be inspected.
 		 * 
 		 * In the case that %TRUE is returned, the subprocess has exited and the
-		 * exit status inspection APIs (eg: g_subprocess_get_if_exited(),
+		 * exit status inspection APIs (eg: {@link G.subprocess_get_if_exited},
 		 * g_subprocess_get_exit_status()) may be used.
 		 * 
 		 * You should not attempt to use any of the subprocess pipes after
@@ -17346,7 +17350,7 @@ declare namespace imports.gi.Gio {
 		 */
 		communicate(stdin_buf: GLib.Bytes | null, cancellable: Cancellable | null): [ boolean, GLib.Bytes | null, GLib.Bytes | null ];
 		/**
-		 * Asynchronous version of g_subprocess_communicate().  Complete
+		 * Asynchronous version of {@link G.subprocess_communicate}.  Complete
 		 * invocation with g_subprocess_communicate_finish().
 		 * @param stdin_buf Input data, or %NULL
 		 * @param cancellable Cancellable
@@ -17354,7 +17358,7 @@ declare namespace imports.gi.Gio {
 		 */
 		communicate_async(stdin_buf: GLib.Bytes | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Complete an invocation of g_subprocess_communicate_async().
+		 * Complete an invocation of {@link G.subprocess_communicate_async}.
 		 * @param result Result
 		 * @returns 
 		 * 
@@ -17364,7 +17368,7 @@ declare namespace imports.gi.Gio {
 		 */
 		communicate_finish(result: AsyncResult): [ boolean, GLib.Bytes | null, GLib.Bytes | null ];
 		/**
-		 * Like g_subprocess_communicate(), but validates the output of the
+		 * Like {@link G.subprocess_communicate}, but validates the output of the
 		 * process as UTF-8, and returns it as a regular NUL terminated string.
 		 * 
 		 * On error, #stdout_buf and #stderr_buf will be set to undefined values and
@@ -17379,7 +17383,7 @@ declare namespace imports.gi.Gio {
 		 */
 		communicate_utf8(stdin_buf: string | null, cancellable: Cancellable | null): [ boolean, string | null, string | null ];
 		/**
-		 * Asynchronous version of g_subprocess_communicate_utf8().  Complete
+		 * Asynchronous version of {@link G.subprocess_communicate_utf8}.  Complete
 		 * invocation with g_subprocess_communicate_utf8_finish().
 		 * @param stdin_buf Input data, or %NULL
 		 * @param cancellable Cancellable
@@ -17387,7 +17391,7 @@ declare namespace imports.gi.Gio {
 		 */
 		communicate_utf8_async(stdin_buf: string | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Complete an invocation of g_subprocess_communicate_utf8_async().
+		 * Complete an invocation of {@link G.subprocess_communicate_utf8_async}.
 		 * @param result Result
 		 * @returns 
 		 * 
@@ -17400,7 +17404,7 @@ declare namespace imports.gi.Gio {
 		 * Use an operating-system specific method to attempt an immediate,
 		 * forceful termination of the process.  There is no mechanism to
 		 * determine whether or not the request itself was successful;
-		 * however, you can use g_subprocess_wait() to monitor the status of
+		 * however, you can use {@link G.subprocess_wait} to monitor the status of
 		 * the process after calling this function.
 		 * 
 		 * On Unix, this function sends %SIGKILL.
@@ -17442,7 +17446,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This is equivalent to the system WIFSIGNALED macro.
 		 * 
-		 * It is an error to call this function before g_subprocess_wait() has
+		 * It is an error to call this function before {@link G.subprocess_wait} has
 		 * returned.
 		 * @returns %TRUE if the case of termination due to a signal
 		 */
@@ -17505,7 +17509,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This is equivalent to the system WTERMSIG macro.
 		 * 
-		 * It is an error to call this function before g_subprocess_wait() and
+		 * It is an error to call this function before {@link G.subprocess_wait} and
 		 * unless g_subprocess_get_if_signaled() returned %TRUE.
 		 * @returns the signal causing termination
 		 */
@@ -17525,7 +17529,7 @@ declare namespace imports.gi.Gio {
 		 * Synchronously wait for the subprocess to terminate.
 		 * 
 		 * After the process terminates you can query its exit status with
-		 * functions such as g_subprocess_get_if_exited() and
+		 * functions such as {@link G.subprocess_get_if_exited} and
 		 * g_subprocess_get_exit_status().
 		 * 
 		 * This function does not fail in the case of the subprocess having
@@ -17540,20 +17544,20 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Wait for the subprocess to terminate.
 		 * 
-		 * This is the asynchronous version of g_subprocess_wait().
+		 * This is the asynchronous version of {@link G.subprocess_wait}.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback a #GAsyncReadyCallback to call when the operation is complete
 		 */
 		wait_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Combines g_subprocess_wait() with g_spawn_check_wait_status().
+		 * Combines {@link G.subprocess_wait} with g_spawn_check_wait_status().
 		 * @param cancellable a #GCancellable
 		 * @returns %TRUE on success, %FALSE if process exited abnormally, or
 		 * #cancellable was cancelled
 		 */
 		wait_check(cancellable: Cancellable | null): boolean;
 		/**
-		 * Combines g_subprocess_wait_async() with g_spawn_check_wait_status().
+		 * Combines {@link G.subprocess_wait_async} with g_spawn_check_wait_status().
 		 * 
 		 * This is the asynchronous version of g_subprocess_wait_check().
 		 * @param cancellable a #GCancellable, or %NULL
@@ -17562,14 +17566,14 @@ declare namespace imports.gi.Gio {
 		wait_check_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Collects the result of a previous call to
-		 * g_subprocess_wait_check_async().
+		 * {@link G.subprocess_wait_check_async}.
 		 * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
 		 * @returns %TRUE if successful, or %FALSE with #error set
 		 */
 		wait_check_finish(result: AsyncResult): boolean;
 		/**
 		 * Collects the result of a previous call to
-		 * g_subprocess_wait_async().
+		 * {@link G.subprocess_wait_async}.
 		 * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
 		 * @returns %TRUE if successful, or %FALSE with #error set
 		 */
@@ -17598,7 +17602,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * One major advantage that GIO brings over the core GLib library is
 	 * comprehensive API for asynchronous I/O, such
-	 * g_output_stream_splice_async().  This makes GSubprocess
+	 * {@link G.output_stream_splice_async}.  This makes GSubprocess
 	 * significantly more powerful and flexible than equivalent APIs in
 	 * some other languages such as the `subprocess.py`
 	 * included with Python.  For example, using #GSubprocess one could
@@ -17646,7 +17650,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<SubprocessInitOptions>);
 		/**
 		 * Create a new process with the given flags and varargs argument
-		 * list.  By default, matching the g_spawn_async() defaults, the
+		 * list.  By default, matching the {@link G.spawn_async} defaults, the
 		 * child's stdin will be set to the system null device, and
 		 * stdout/stderr will be inherited from the parent.  You can use
 		 * #flags to control this behavior.
@@ -17677,7 +17681,7 @@ declare namespace imports.gi.Gio {
 	interface ISubprocessLauncher {
 		/**
 		 * Closes all the file descriptors previously passed to the object with
-		 * g_subprocess_launcher_take_fd(), g_subprocess_launcher_take_stderr_fd(), etc.
+		 * {@link G.subprocess_launcher_take_fd}, g_subprocess_launcher_take_stderr_fd(), etc.
 		 * 
 		 * After calling this method, any subsequent calls to g_subprocess_launcher_spawn() or g_subprocess_launcher_spawnv() will
 		 * return %G_IO_ERROR_CLOSED. This method is idempotent if
@@ -17730,7 +17734,7 @@ declare namespace imports.gi.Gio {
 		 * Replace the entire environment of processes launched from this
 		 * launcher with the given 'environ' variable.
 		 * 
-		 * Typically you will build this variable by using g_listenv() to copy
+		 * Typically you will build this variable by using {@link G.listenv} to copy
 		 * the process 'environ' and using the functions g_environ_setenv(),
 		 * g_environ_unsetenv(), etc.
 		 * 
@@ -17761,7 +17765,7 @@ declare namespace imports.gi.Gio {
 		 * %G_SUBPROCESS_FLAGS_STDIN_INHERIT).
 		 * 
 		 * You may also not set a flag that conflicts with a previous call to a
-		 * function like g_subprocess_launcher_set_stdin_file_path() or
+		 * function like {@link G.subprocess_launcher_set_stdin_file_path} or
 		 * g_subprocess_launcher_take_stdout_fd().
 		 * @param flags #GSubprocessFlags
 		 */
@@ -17971,7 +17975,7 @@ declare namespace imports.gi.Gio {
 	interface ITask {
 		/**
 		 * Whether the task has completed, meaning its callback (if set) has been
-		 * invoked. This can only happen after g_task_return_pointer(),
+		 * invoked. This can only happen after {@link G.task_return_pointer},
 		 * g_task_return_error() or one of the other return functions have been called
 		 * on the task.
 		 * 
@@ -17988,7 +17992,7 @@ declare namespace imports.gi.Gio {
 		 * callback to #callback, with #task as the callback's `user_data`.
 		 * 
 		 * It will set the #source’s name to the task’s name (as set with
-		 * g_task_set_name()), if one has been set.
+		 * {@link G.task_set_name}), if one has been set.
 		 * 
 		 * This takes a reference on #task until #source is destroyed.
 		 * @param source the source to attach
@@ -18002,7 +18006,7 @@ declare namespace imports.gi.Gio {
 		get_cancellable(): Cancellable;
 		/**
 		 * Gets #task's check-cancellable flag. See
-		 * g_task_set_check_cancellable() for more details.
+		 * {@link G.task_set_check_cancellable} for more details.
 		 * @returns 
 		 */
 		get_check_cancellable(): boolean;
@@ -18025,7 +18029,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_context(): GLib.MainContext;
 		/**
-		 * Gets #task’s name. See g_task_set_name().
+		 * Gets #task’s name. See {@link G.task_set_name}.
 		 * @returns #task’s name, or %NULL
 		 */
 		get_name(): string | null;
@@ -18036,18 +18040,18 @@ declare namespace imports.gi.Gio {
 		get_priority(): number;
 		/**
 		 * Gets #task's return-on-cancel flag. See
-		 * g_task_set_return_on_cancel() for more details.
+		 * {@link G.task_set_return_on_cancel} for more details.
 		 * @returns 
 		 */
 		get_return_on_cancel(): boolean;
 		/**
 		 * Gets the source object from #task. Like
-		 * g_async_result_get_source_object(), but does not ref the object.
+		 * {@link G.async_result_get_source_object}, but does not ref the object.
 		 * @returns #task's source object, or %NULL
 		 */
 		get_source_object(): GObject.Object | null;
 		/**
-		 * Gets #task's source tag. See g_task_set_source_tag().
+		 * Gets #task's source tag. See {@link G.task_set_source_tag}.
 		 * @returns #task's source tag
 		 */
 		get_source_tag(): any | null;
@@ -18097,7 +18101,7 @@ declare namespace imports.gi.Gio {
 		propagate_pointer(): any | null;
 		/**
 		 * Gets the result of #task as a #GValue, and transfers ownership of
-		 * that value to the caller. As with g_task_return_value(), this is
+		 * that value to the caller. As with {@link G.task_return_value}, this is
 		 * a generic low-level method; g_task_propagate_pointer() and the like
 		 * will usually be more useful for C code.
 		 * 
@@ -18113,14 +18117,14 @@ declare namespace imports.gi.Gio {
 		propagate_value(): [ boolean, GObject.Value ];
 		/**
 		 * Sets #task's result to #result and completes the task (see
-		 * g_task_return_pointer() for more discussion of exactly what this
+		 * {@link G.task_return_pointer} for more discussion of exactly what this
 		 * means).
 		 * @param result the #gboolean result of a task function.
 		 */
 		return_boolean(result: boolean): void;
 		/**
 		 * Sets #task's result to #error (which #task assumes ownership of)
-		 * and completes the task (see g_task_return_pointer() for more
+		 * and completes the task (see {@link G.task_return_pointer} for more
 		 * discussion of exactly what this means).
 		 * 
 		 * Note that since the task takes ownership of #error, and since the
@@ -18136,14 +18140,14 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Checks if #task's #GCancellable has been cancelled, and if so, sets
 		 * #task's error accordingly and completes the task (see
-		 * g_task_return_pointer() for more discussion of exactly what this
+		 * {@link G.task_return_pointer} for more discussion of exactly what this
 		 * means).
 		 * @returns %TRUE if #task has been cancelled, %FALSE if not
 		 */
 		return_error_if_cancelled(): boolean;
 		/**
 		 * Sets #task's result to #result and completes the task (see
-		 * g_task_return_pointer() for more discussion of exactly what this
+		 * {@link G.task_return_pointer} for more discussion of exactly what this
 		 * means).
 		 * @param result the integer (#gssize) result of a task function.
 		 */
@@ -18151,7 +18155,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets #task's result to a new #GError created from #domain, #code,
 		 * #format, and the remaining arguments, and completes the task (see
-		 * g_task_return_pointer() for more discussion of exactly what this
+		 * {@link G.task_return_pointer} for more discussion of exactly what this
 		 * means).
 		 * 
 		 * See also g_task_return_error().
@@ -18164,7 +18168,7 @@ declare namespace imports.gi.Gio {
 		 * Sets #task's result to #result and completes the task. If #result
 		 * is not %NULL, then #result_destroy will be used to free #result if
 		 * the caller does not take ownership of it with
-		 * g_task_propagate_pointer().
+		 * {@link G.task_propagate_pointer}.
 		 * 
 		 * "Completes the task" means that for an ordinary asynchronous task
 		 * it will either invoke the task's callback, or else queue that
@@ -18191,7 +18195,7 @@ declare namespace imports.gi.Gio {
 		 * with a value of %NULL will be used for the result.
 		 * 
 		 * This is a very generic low-level method intended primarily for use
-		 * by language bindings; for C code, g_task_return_pointer() and the
+		 * by language bindings; for C code, {@link G.task_return_pointer} and the
 		 * like will normally be much easier to use.
 		 * @param result the #GValue result of
 		 *                                      a task function
@@ -18206,7 +18210,7 @@ declare namespace imports.gi.Gio {
 		 * See #GTaskThreadFunc for more details about how #task_func is handled.
 		 * 
 		 * Although GLib currently rate-limits the tasks queued via
-		 * g_task_run_in_thread(), you should not assume that it will always
+		 * {@link G.task_run_in_thread}, you should not assume that it will always
 		 * do this. If you have a very large number of tasks to run (several tens of
 		 * tasks), but don't want them to all run at once, you should only queue a
 		 * limited number of them (around ten) at a time.
@@ -18215,7 +18219,7 @@ declare namespace imports.gi.Gio {
 		run_in_thread(task_func: TaskThreadFunc): void;
 		/**
 		 * Runs #task_func in another thread, and waits for it to return or be
-		 * cancelled. You can use g_task_propagate_pointer(), etc, afterward
+		 * cancelled. You can use {@link G.task_propagate_pointer}, etc, afterward
 		 * to get the result of #task_func.
 		 * 
 		 * See #GTaskThreadFunc for more details about how #task_func is handled.
@@ -18235,7 +18239,7 @@ declare namespace imports.gi.Gio {
 		run_in_thread_sync(task_func: TaskThreadFunc): void;
 		/**
 		 * Sets or clears #task's check-cancellable flag. If this is %TRUE
-		 * (the default), then g_task_propagate_pointer(), etc, and
+		 * (the default), then {@link G.task_propagate_pointer}, etc, and
 		 * g_task_had_error() will check the task's #GCancellable first, and
 		 * if it has been cancelled, then they will consider the task to have
 		 * returned an "Operation was cancelled" error
@@ -18270,7 +18274,7 @@ declare namespace imports.gi.Gio {
 		 * %G_PRIORITY_DEFAULT.
 		 * 
 		 * This will affect the priority of #GSources created with
-		 * g_task_attach_source() and the scheduling of tasks run in threads,
+		 * {@link G.task_attach_source} and the scheduling of tasks run in threads,
 		 * and can also be explicitly retrieved later via
 		 * g_task_get_priority().
 		 * @param priority the [priority][io-priority] of the request
@@ -18278,7 +18282,7 @@ declare namespace imports.gi.Gio {
 		set_priority(priority: number): void;
 		/**
 		 * Sets or clears #task's return-on-cancel flag. This is only
-		 * meaningful for tasks run via g_task_run_in_thread() or
+		 * meaningful for tasks run via {@link G.task_run_in_thread} or
 		 * g_task_run_in_thread_sync().
 		 * 
 		 * If #return_on_cancel is %TRUE, then cancelling #task's
@@ -18316,7 +18320,7 @@ declare namespace imports.gi.Gio {
 		 * Sets #task's source tag. You can use this to tag a task return
 		 * value with a particular pointer (usually a pointer to the function
 		 * doing the tagging) and then later check it using
-		 * g_task_get_source_tag() (or g_async_result_is_tagged()) in the
+		 * {@link G.task_get_source_tag} (or g_async_result_is_tagged()) in the
 		 * task's "finish" function, to figure out if the response came from a
 		 * particular place.
 		 * @param source_tag an opaque pointer indicating the source of this task
@@ -18350,7 +18354,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * The most common usage of #GTask is as a #GAsyncResult, to
 	 * manage data during an asynchronous operation. You call
-	 * g_task_new() in the "start" method, followed by
+	 * {@link G.task_new} in the "start" method, followed by
 	 * g_task_set_task_data() and the like if you need to keep some
 	 * additional data associated with the task, and then pass the
 	 * task object around through your asynchronous operation.
@@ -18851,7 +18855,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Call this in the "start" method of your asynchronous method, and
 		 * pass the #GTask around throughout the asynchronous operation. You
-		 * can use g_task_set_task_data() to attach task-specific data to the
+		 * can use {@link G.task_set_task_data} to attach task-specific data to the
 		 * object, which you can retrieve later via g_task_get_task_data().
 		 * 
 		 * By default, if #cancellable is cancelled, then the return value of
@@ -18872,7 +18876,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Checks that #result is a #GTask, and that #source_object is its
 		 * source object (or that #source_object is %NULL and #result has no
-		 * source object). This can be used in g_return_if_fail() checks.
+		 * source object). This can be used in {@link G.return_if_fail} checks.
 		 * @param result A #GAsyncResult
 		 * @param source_object the source object
 		 *   expected to be associated with the task
@@ -18881,7 +18885,7 @@ declare namespace imports.gi.Gio {
 		 */
 		public static is_valid(result: AsyncResult, source_object: GObject.Object | null): boolean;
 		/**
-		 * Creates a #GTask and then immediately calls g_task_return_error()
+		 * Creates a #GTask and then immediately calls {@link G.task_return_error}
 		 * on it. Use this in the wrapper function of an asynchronous method
 		 * when you want to avoid even calling the virtual method. You can
 		 * then use g_async_result_is_tagged() in the finish method wrapper to
@@ -18899,7 +18903,7 @@ declare namespace imports.gi.Gio {
 		public static report_error(source_object: GObject.Object | null, callback: AsyncReadyCallback | null, callback_data: any | null, source_tag: any | null, error: GLib.Error): void;
 		/**
 		 * Creates a #GTask and then immediately calls
-		 * g_task_return_new_error() on it. Use this in the wrapper function
+		 * {@link G.task_return_new_error} on it. Use this in the wrapper function
 		 * of an asynchronous method when you want to avoid even calling the
 		 * virtual method. You can then use g_async_result_is_tagged() in the
 		 * finish method wrapper to check if the result there is tagged as
@@ -18926,7 +18930,7 @@ declare namespace imports.gi.Gio {
 		graceful_disconnect: boolean;
 		/**
 		 * Checks if graceful disconnects are used. See
-		 * g_tcp_connection_set_graceful_disconnect().
+		 * {@link G.tcp_connection_set_graceful_disconnect}.
 		 * @returns %TRUE if graceful disconnect is used on close, %FALSE otherwise
 		 */
 		get_graceful_disconnect(): boolean;
@@ -19023,12 +19027,12 @@ declare namespace imports.gi.Gio {
 		flags: TestDBusFlags;
 		/**
 		 * Add a path where dbus-daemon will look up .service files. This can't be
-		 * called after g_test_dbus_up().
+		 * called after {@link G.test_dbus_up}.
 		 * @param path path to a directory containing .service files
 		 */
 		add_service_dir(path: string): void;
 		/**
-		 * Stop the session bus started by g_test_dbus_up().
+		 * Stop the session bus started by {@link G.test_dbus_up}.
 		 * 
 		 * This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
 		 * to be destroyed. This is done to ensure that the next unit test won't get a
@@ -19036,7 +19040,7 @@ declare namespace imports.gi.Gio {
 		 */
 		down(): void;
 		/**
-		 * Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
+		 * Get the address on which dbus-daemon is running. If {@link G.test_dbus_up} has not
 		 * been called yet, %NULL is returned. This can be used with
 		 * g_dbus_connection_new_for_address().
 		 * @returns the address of the bus, or %NULL.
@@ -19048,7 +19052,7 @@ declare namespace imports.gi.Gio {
 		 */
 		get_flags(): TestDBusFlags;
 		/**
-		 * Stop the session bus started by g_test_dbus_up().
+		 * Stop the session bus started by {@link G.test_dbus_up}.
 		 * 
 		 * Unlike g_test_dbus_down(), this won't verify the #GDBusConnection
 		 * singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
@@ -19060,7 +19064,7 @@ declare namespace imports.gi.Gio {
 		 * Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
 		 * call, it is safe for unit tests to start sending messages on the session bus.
 		 * 
-		 * If this function is called from setup callback of g_test_add(),
+		 * If this function is called from setup callback of {@link G.test_add},
 		 * g_test_dbus_down() must be called in its teardown callback.
 		 * 
 		 * If this function is called from unit test's main(), then g_test_dbus_down()
@@ -19172,7 +19176,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This is useful for unit tests that want to verify behaviour when no session
 		 * bus is running. It is not necessary to call this if unit test already calls
-		 * g_test_dbus_up() before acquiring the session bus.
+		 * {@link G.test_dbus_up} before acquiring the session bus.
 		 */
 		public static unset(): void;
 	}
@@ -19207,7 +19211,7 @@ declare namespace imports.gi.Gio {
 		 * Append a name to the list of icons from within #icon.
 		 * 
 		 * Note that doing so invalidates the hash computed by prior calls
-		 * to g_icon_hash().
+		 * to {@link G.icon_hash}.
 		 * @param iconname name of icon to append to list of icons from within #icon.
 		 */
 		append_name(iconname: string): void;
@@ -19220,7 +19224,7 @@ declare namespace imports.gi.Gio {
 		 * Prepend a name to the list of icons from within #icon.
 		 * 
 		 * Note that doing so invalidates the hash computed by prior calls
-		 * to g_icon_hash().
+		 * to {@link G.icon_hash}.
 		 * @param iconname name of icon to prepend to list of icons from within #icon.
 		 */
 		prepend_name(iconname: string): void;
@@ -19246,7 +19250,7 @@ declare namespace imports.gi.Gio {
 	 * #GThemedIcon contains a list of all of the icons present in an icon
 	 * theme, so that icons can be looked up quickly. #GThemedIcon does
 	 * not provide actual pixmaps for icons, just the icon names.
-	 * Ideally something like gtk_icon_theme_choose_icon() should be used to
+	 * Ideally something like {@link Gtk.IconTheme.choose_icon} should be used to
 	 * resolve the list of names so that fallback icons work nicely with
 	 * themes that inherit other themes.
 	 */
@@ -19305,7 +19309,7 @@ declare namespace imports.gi.Gio {
 		 * @param callback Callback function
 		 *  - owner: owner of the emitted event 
 		 *  - connection: a new #GSocketConnection object. 
-		 *  - source_object: the source_object passed to g_socket_listener_add_address(). 
+		 *  - source_object: the source_object passed to {@link G.socket_listener_add_address}. 
 		 *  - returns %TRUE to stop further signal handlers from being called 
 		 * 
 		 * @returns Callback ID
@@ -19621,7 +19625,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #file cannot be read or parsed, the function will return %NULL and
 		 * set #error. Otherwise, this behaves like
-		 * g_tls_certificate_new_from_pem().
+		 * {@link G.tls_certificate_new_from_pem}.
 		 * @param file file containing a PEM-encoded certificate to import
 		 * @returns the new certificate, or %NULL on error
 		 */
@@ -19640,7 +19644,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If either file cannot be read or parsed, the function will return
 		 * %NULL and set #error. Otherwise, this behaves like
-		 * g_tls_certificate_new_from_pem().
+		 * {@link G.tls_certificate_new_from_pem}.
 		 * @param cert_file file containing one or more PEM-encoded
 		 *     certificates to import
 		 * @param key_file file containing a PEM-encoded private key
@@ -19719,7 +19723,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The list of application-layer protocols that the connection
 		 * advertises that it is willing to speak. See
-		 * g_tls_connection_set_advertised_protocols().
+		 * {@link G.tls_connection_set_advertised_protocols}.
 		 */
 		advertised_protocols: string[];
 		/**
@@ -19732,17 +19736,17 @@ declare namespace imports.gi.Gio {
 		base_io_stream: IOStream;
 		/**
 		 * The connection's certificate; see
-		 * g_tls_connection_set_certificate().
+		 * {@link G.tls_connection_set_certificate}.
 		 */
 		certificate: TlsCertificate;
 		/**
-		 * The name of the TLS ciphersuite in use. See g_tls_connection_get_ciphersuite_name().
+		 * The name of the TLS ciphersuite in use. See {@link G.tls_connection_get_ciphersuite_name}.
 		 */
 		readonly ciphersuite_name: string;
 		/**
 		 * The certificate database to use when verifying this TLS connection.
 		 * If no certificate database is set, then the default database will be
-		 * used. See g_tls_backend_get_default_database().
+		 * used. See {@link G.tls_backend_get_default_database}.
 		 */
 		database: TlsDatabase;
 		/**
@@ -19753,7 +19757,7 @@ declare namespace imports.gi.Gio {
 		interaction: TlsInteraction;
 		/**
 		 * The application-layer protocol negotiated during the TLS
-		 * handshake. See g_tls_connection_get_negotiated_protocol().
+		 * handshake. See {@link G.tls_connection_get_negotiated_protocol}.
 		 */
 		readonly negotiated_protocol: string;
 		/**
@@ -19775,23 +19779,29 @@ declare namespace imports.gi.Gio {
 		 */
 		readonly peer_certificate_errors: TlsCertificateFlags;
 		/**
-		 * The TLS protocol version in use. See g_tls_connection_get_protocol_version().
+		 * The TLS protocol version in use. See {@link G.tls_connection_get_protocol_version}.
 		 */
 		readonly protocol_version: TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * The rehandshake mode is ignored.
+		 * 
 		 * The rehandshaking mode. See
-		 * g_tls_connection_set_rehandshake_mode().
+		 * {@link G.tls_connection_set_rehandshake_mode}.
 		 */
 		rehandshake_mode: TlsRehandshakeMode;
 		/**
 		 * Whether or not proper TLS close notification is required.
-		 * See g_tls_connection_set_require_close_notify().
+		 * See {@link G.tls_connection_set_require_close_notify}.
 		 */
 		require_close_notify: boolean;
 		/**
+		 * @deprecated
+		 * Use GTlsConnection:database instead
+		 * 
 		 * Whether or not the system certificate database will be used to
 		 * verify peer certificates. See
-		 * g_tls_connection_set_use_system_certdb().
+		 * {@link G.tls_connection_set_use_system_certdb}.
 		 */
 		use_system_certdb: boolean;
 		/**
@@ -19805,7 +19815,7 @@ declare namespace imports.gi.Gio {
 		emit_accept_certificate(peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;
 		/**
 		 * Gets #conn's certificate, as set by
-		 * g_tls_connection_set_certificate().
+		 * {@link G.tls_connection_set_certificate}.
 		 * @returns #conn's certificate, or %NULL
 		 */
 		get_certificate(): TlsCertificate | null;
@@ -19817,7 +19827,7 @@ declare namespace imports.gi.Gio {
 		 * [5929](https://tools.ietf.org/html/rfc5929), and related RFCs.  The
 		 * binding data is returned in #data.  The #data is resized by the callee
 		 * using #GByteArray buffer management and will be freed when the #data
-		 * is destroyed by g_byte_array_unref(). If #data is %NULL, it will only
+		 * is destroyed by {@link G.byte_array_unref}. If #data is %NULL, it will only
 		 * check whether TLS backend is able to fetch the data (e.g. whether #type
 		 * is supported by the TLS backend). It does not guarantee that the data
 		 * will be available though.  That could happen if TLS connection does not
@@ -19844,7 +19854,7 @@ declare namespace imports.gi.Gio {
 		get_ciphersuite_name(): string | null;
 		/**
 		 * Gets the certificate database that #conn uses to verify
-		 * peer certificates. See g_tls_connection_set_database().
+		 * peer certificates. See {@link G.tls_connection_set_database}.
 		 * @returns the certificate database that #conn uses or %NULL
 		 */
 		get_database(): TlsDatabase | null;
@@ -19862,7 +19872,7 @@ declare namespace imports.gi.Gio {
 		 * If the peer did not use the ALPN extension, or did not advertise a
 		 * protocol that matched one of #conn's protocols, or the TLS backend
 		 * does not support ALPN, then this will be %NULL. See
-		 * g_tls_connection_set_advertised_protocols().
+		 * {@link G.tls_connection_set_advertised_protocols}.
 		 * @returns the negotiated protocol, or %NULL
 		 */
 		get_negotiated_protocol(): string | null;
@@ -19895,24 +19905,24 @@ declare namespace imports.gi.Gio {
 		 *   from the TLS protocol in TLS 1.3.
 		 * 
 		 * Gets #conn rehandshaking mode. See
-		 * g_tls_connection_set_rehandshake_mode() for details.
+		 * {@link G.tls_connection_set_rehandshake_mode} for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
 		 */
 		get_rehandshake_mode(): TlsRehandshakeMode;
 		/**
 		 * Tests whether or not #conn expects a proper TLS close notification
 		 * when the connection is closed. See
-		 * g_tls_connection_set_require_close_notify() for details.
+		 * {@link G.tls_connection_set_require_close_notify} for details.
 		 * @returns %TRUE if #conn requires a proper TLS close
 		 * notification.
 		 */
 		get_require_close_notify(): boolean;
 		/**
 		 * @deprecated
-		 * Use g_tls_connection_get_database() instead
+		 * Use {@link G.tls_connection_get_database} instead
 		 * 
 		 * Gets whether #conn uses the system certificate database to verify
-		 * peer certificates. See g_tls_connection_set_use_system_certdb().
+		 * peer certificates. See {@link G.tls_connection_set_use_system_certdb}.
 		 * @returns whether #conn uses the system certificate database
 		 */
 		get_use_system_certdb(): boolean;
@@ -19924,7 +19934,7 @@ declare namespace imports.gi.Gio {
 		 * connecting (or after sending a "STARTTLS"-type command),
 		 * #GTlsConnection will handle this for you automatically when you try
 		 * to send or receive data on the connection. You can call
-		 * g_tls_connection_handshake() manually if you want to know whether
+		 * {@link G.tls_connection_handshake} manually if you want to know whether
 		 * the initial handshake succeeded or failed (as opposed to just
 		 * immediately trying to use #conn to read or write, in which case,
 		 * if it fails, it may not be possible to tell if it failed before or
@@ -19954,7 +19964,7 @@ declare namespace imports.gi.Gio {
 		handshake(cancellable: Cancellable | null): boolean;
 		/**
 		 * Asynchronously performs a TLS handshake on #conn. See
-		 * g_tls_connection_handshake() for more information.
+		 * {@link G.tls_connection_handshake} for more information.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback callback to call when the handshake is complete
@@ -19962,7 +19972,7 @@ declare namespace imports.gi.Gio {
 		handshake_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous TLS handshake operation. See
-		 * g_tls_connection_handshake() for more information.
+		 * {@link G.tls_connection_handshake} for more information.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE on success, %FALSE on failure, in which
 		 * case #error will be set.
@@ -19973,7 +19983,7 @@ declare namespace imports.gi.Gio {
 		 * caller is willing to speak on this connection. The
 		 * Application-Layer Protocol Negotiation (ALPN) extension will be
 		 * used to negotiate a compatible protocol with the peer; use
-		 * g_tls_connection_get_negotiated_protocol() to find the negotiated
+		 * {@link G.tls_connection_get_negotiated_protocol} to find the negotiated
 		 * protocol after the handshake.  Specifying %NULL for the the value
 		 * of #protocols will disable ALPN negotiation.
 		 * 
@@ -19993,7 +20003,7 @@ declare namespace imports.gi.Gio {
 		 * with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server
 		 * requires a certificate, and if you try connecting again, you should
 		 * call this method first. You can call
-		 * g_tls_client_connection_get_accepted_cas() on the failed connection
+		 * {@link G.tls_client_connection_get_accepted_cas} on the failed connection
 		 * to get a list of Certificate Authorities that the server will
 		 * accept certificates from.
 		 * 
@@ -20008,7 +20018,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the certificate database that is used to verify peer certificates.
 		 * This is set to the default database by default. See
-		 * g_tls_backend_get_default_database(). If set to %NULL, then
+		 * {@link G.tls_backend_get_default_database}. If set to %NULL, then
 		 * peer certificate validation will always set the
 		 * %G_TLS_CERTIFICATE_UNKNOWN_CA error (meaning
 		 * #GTlsConnection::accept-certificate will always be emitted on
@@ -20055,7 +20065,7 @@ declare namespace imports.gi.Gio {
 		 * somehow self-delimiting); in this case, the close notify is
 		 * redundant and sometimes omitted. (TLS 1.1 explicitly allows this;
 		 * in TLS 1.0 it is technically an error, but often done anyway.) You
-		 * can use g_tls_connection_set_require_close_notify() to tell #conn
+		 * can use {@link G.tls_connection_set_require_close_notify} to tell #conn
 		 * to allow an "unannounced" connection close, in which case the close
 		 * will show up as a 0-length read, as in a non-TLS
 		 * #GSocketConnection, and it is up to the application to check that
@@ -20073,7 +20083,7 @@ declare namespace imports.gi.Gio {
 		set_require_close_notify(require_close_notify: boolean): void;
 		/**
 		 * @deprecated
-		 * Use g_tls_connection_set_database() instead
+		 * Use {@link G.tls_connection_set_database} instead
 		 * 
 		 * Sets whether #conn uses the system certificate database to verify
 		 * peer certificates. This is %TRUE by default. If set to %FALSE, then
@@ -20088,7 +20098,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Emitted during the TLS handshake after the peer certificate has
 		 * been received. You can examine #peer_cert's certification path by
-		 * calling g_tls_certificate_get_issuer() on it.
+		 * calling {@link G.tls_certificate_get_issuer} on it.
 		 * 
 		 * For a client-side connection, #peer_cert is the server's
 		 * certificate, and the signal will only be emitted if the
@@ -20208,7 +20218,7 @@ declare namespace imports.gi.Gio {
 		 * Look up a certificate by its handle.
 		 * 
 		 * The handle should have been created by calling
-		 * g_tls_database_create_certificate_handle() on a #GTlsDatabase object of
+		 * {@link G.tls_database_create_certificate_handle} on a #GTlsDatabase object of
 		 * the same TLS backend. The handle is designed to remain valid across
 		 * instantiations of the database.
 		 * 
@@ -20222,12 +20232,12 @@ declare namespace imports.gi.Gio {
 		 * @param flags Flags which affect the lookup.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a newly allocated
-		 * #GTlsCertificate, or %NULL. Use g_object_unref() to release the certificate.
+		 * #GTlsCertificate, or %NULL. Use {@link GObject.unref} to release the certificate.
 		 */
 		lookup_certificate_for_handle(handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate | null;
 		/**
 		 * Asynchronously look up a certificate by its handle in the database. See
-		 * g_tls_database_lookup_certificate_for_handle() for more information.
+		 * {@link G.tls_database_lookup_certificate_for_handle} for more information.
 		 * @param handle a certificate handle
 		 * @param interaction used to interact with the user if necessary
 		 * @param flags Flags which affect the lookup.
@@ -20237,13 +20247,13 @@ declare namespace imports.gi.Gio {
 		lookup_certificate_for_handle_async(handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous lookup of a certificate by its handle. See
-		 * g_tls_database_lookup_certificate_for_handle() for more information.
+		 * {@link G.tls_database_lookup_certificate_for_handle} for more information.
 		 * 
 		 * If the handle is no longer valid, or does not point to a certificate in
 		 * this database, then %NULL will be returned.
 		 * @param result a #GAsyncResult.
 		 * @returns a newly allocated #GTlsCertificate object.
-		 * Use g_object_unref() to release the certificate.
+		 * Use {@link GObject.unref} to release the certificate.
 		 */
 		lookup_certificate_for_handle_finish(result: AsyncResult): TlsCertificate;
 		/**
@@ -20251,7 +20261,7 @@ declare namespace imports.gi.Gio {
 		 * #GTlsCertificate:issuer property of #certificate is not modified, and
 		 * the two certificates are not hooked into a chain.
 		 * 
-		 * This function can block. Use g_tls_database_lookup_certificate_issuer_async()
+		 * This function can block. Use {@link G.tls_database_lookup_certificate_issuer_async}
 		 * to perform the lookup operation asynchronously.
 		 * 
 		 * Beware this function cannot be used to build certification paths. The
@@ -20272,12 +20282,12 @@ declare namespace imports.gi.Gio {
 		 * @param flags flags which affect the lookup operation
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a newly allocated issuer #GTlsCertificate,
-		 * or %NULL. Use g_object_unref() to release the certificate.
+		 * or %NULL. Use {@link GObject.unref} to release the certificate.
 		 */
 		lookup_certificate_issuer(certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate;
 		/**
 		 * Asynchronously look up the issuer of #certificate in the database. See
-		 * g_tls_database_lookup_certificate_issuer() for more information.
+		 * {@link G.tls_database_lookup_certificate_issuer} for more information.
 		 * @param certificate a #GTlsCertificate
 		 * @param interaction used to interact with the user if necessary
 		 * @param flags flags which affect the lookup operation
@@ -20287,28 +20297,28 @@ declare namespace imports.gi.Gio {
 		lookup_certificate_issuer_async(certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous lookup issuer operation. See
-		 * g_tls_database_lookup_certificate_issuer() for more information.
+		 * {@link G.tls_database_lookup_certificate_issuer} for more information.
 		 * @param result a #GAsyncResult.
 		 * @returns a newly allocated issuer #GTlsCertificate,
-		 * or %NULL. Use g_object_unref() to release the certificate.
+		 * or %NULL. Use {@link GObject.unref} to release the certificate.
 		 */
 		lookup_certificate_issuer_finish(result: AsyncResult): TlsCertificate;
 		/**
 		 * Look up certificates issued by this issuer in the database.
 		 * 
-		 * This function can block, use g_tls_database_lookup_certificates_issued_by_async() to perform
+		 * This function can block, use {@link G.tls_database_lookup_certificates_issued_by_async} to perform
 		 * the lookup operation asynchronously.
 		 * @param issuer_raw_dn a #GByteArray which holds the DER encoded issuer DN.
 		 * @param interaction used to interact with the user if necessary
 		 * @param flags Flags which affect the lookup operation.
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns a newly allocated list of #GTlsCertificate
-		 * objects. Use g_object_unref() on each certificate, and g_list_free() on the release the list.
+		 * objects. Use {@link GObject.unref} on each certificate, and g_list_free() on the release the list.
 		 */
 		lookup_certificates_issued_by(issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): GLib.List;
 		/**
 		 * Asynchronously look up certificates issued by this issuer in the database. See
-		 * g_tls_database_lookup_certificates_issued_by() for more information.
+		 * {@link G.tls_database_lookup_certificates_issued_by} for more information.
 		 * 
 		 * The database may choose to hold a reference to the issuer byte array for the duration
 		 * of of this asynchronous operation. The byte array should not be modified during
@@ -20322,10 +20332,10 @@ declare namespace imports.gi.Gio {
 		lookup_certificates_issued_by_async(issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous lookup of certificates. See
-		 * g_tls_database_lookup_certificates_issued_by() for more information.
+		 * {@link G.tls_database_lookup_certificates_issued_by} for more information.
 		 * @param result a #GAsyncResult.
 		 * @returns a newly allocated list of #GTlsCertificate
-		 * objects. Use g_object_unref() on each certificate, and g_list_free() on the release the list.
+		 * objects. Use {@link GObject.unref} on each certificate, and g_list_free() on the release the list.
 		 */
 		lookup_certificates_issued_by_finish(result: AsyncResult): GLib.List;
 		/**
@@ -20379,7 +20389,7 @@ declare namespace imports.gi.Gio {
 		 * to the chain. Since GLib 2.70, this may involve HTTP requests to
 		 * download missing certificates.
 		 * 
-		 * This function can block. Use g_tls_database_verify_chain_async() to
+		 * This function can block. Use {@link G.tls_database_verify_chain_async} to
 		 * perform the verification operation asynchronously.
 		 * @param chain a #GTlsCertificate chain
 		 * @param purpose the purpose that this certificate chain will be used for.
@@ -20394,7 +20404,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously determines the validity of a certificate chain after
 		 * looking up and adding any missing certificates to the chain. See
-		 * g_tls_database_verify_chain() for more information.
+		 * {@link G.tls_database_verify_chain} for more information.
 		 * @param chain a #GTlsCertificate chain
 		 * @param purpose the purpose that this certificate chain will be used for.
 		 * @param identity the expected peer identity
@@ -20406,7 +20416,7 @@ declare namespace imports.gi.Gio {
 		verify_chain_async(chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous verify chain operation. See
-		 * g_tls_database_verify_chain() for more information.
+		 * {@link G.tls_database_verify_chain} for more information.
 		 * 
 		 * If #chain is found to be valid, then the return value will be 0. If
 		 * #chain is found to be invalid, then the return value will indicate
@@ -20454,7 +20464,7 @@ declare namespace imports.gi.Gio {
 	interface ITlsInteraction {
 		/**
 		 * Run synchronous interaction to ask the user for a password. In general,
-		 * g_tls_interaction_invoke_ask_password() should be used instead of this
+		 * {@link G.tls_interaction_invoke_ask_password} should be used instead of this
 		 * function.
 		 * 
 		 * Derived subclasses usually implement a password prompt, although they may
@@ -20473,7 +20483,7 @@ declare namespace imports.gi.Gio {
 		ask_password(password: TlsPassword, cancellable: Cancellable | null): TlsInteractionResult;
 		/**
 		 * Run asynchronous interaction to ask the user for a password. In general,
-		 * g_tls_interaction_invoke_ask_password() should be used instead of this
+		 * {@link G.tls_interaction_invoke_ask_password} should be used instead of this
 		 * function.
 		 * 
 		 * Derived subclasses usually implement a password prompt, although they may
@@ -20494,7 +20504,7 @@ declare namespace imports.gi.Gio {
 		ask_password_async(password: TlsPassword, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Complete an ask password user interaction request. This should be once
-		 * the g_tls_interaction_ask_password_async() completion callback is called.
+		 * the {@link G.tls_interaction_ask_password_async} completion callback is called.
 		 * 
 		 * If %G_TLS_INTERACTION_HANDLED is returned, then the #GTlsPassword passed
 		 * to g_tls_interaction_ask_password() will have its password filled in.
@@ -20509,7 +20519,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Invoke the interaction to ask the user for a password. It invokes this
 		 * interaction in the main loop, specifically the #GMainContext returned by
-		 * g_main_context_get_thread_default() when the interaction is created. This
+		 * {@link G.main_context_get_thread_default} when the interaction is created. This
 		 * is called by called by #GTlsConnection or #GTlsDatabase to ask the user
 		 * for a password.
 		 * 
@@ -20535,7 +20545,7 @@ declare namespace imports.gi.Gio {
 		 * Invoke the interaction to ask the user to choose a certificate to
 		 * use with the connection. It invokes this interaction in the main
 		 * loop, specifically the #GMainContext returned by
-		 * g_main_context_get_thread_default() when the interaction is
+		 * {@link G.main_context_get_thread_default} when the interaction is
 		 * created. This is called by called by #GTlsConnection when the peer
 		 * requests a certificate during the handshake.
 		 * 
@@ -20560,7 +20570,7 @@ declare namespace imports.gi.Gio {
 		invoke_request_certificate(connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null): TlsInteractionResult;
 		/**
 		 * Run synchronous interaction to ask the user to choose a certificate to use
-		 * with the connection. In general, g_tls_interaction_invoke_request_certificate()
+		 * with the connection. In general, {@link G.tls_interaction_invoke_request_certificate}
 		 * should be used instead of this function.
 		 * 
 		 * Derived subclasses usually implement a certificate selector, although they may
@@ -20583,7 +20593,7 @@ declare namespace imports.gi.Gio {
 		request_certificate(connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null): TlsInteractionResult;
 		/**
 		 * Run asynchronous interaction to ask the user for a certificate to use with
-		 * the connection. In general, g_tls_interaction_invoke_request_certificate() should
+		 * the connection. In general, {@link G.tls_interaction_invoke_request_certificate} should
 		 * be used instead of this function.
 		 * 
 		 * Derived subclasses usually implement a certificate selector, although they may
@@ -20598,7 +20608,7 @@ declare namespace imports.gi.Gio {
 		request_certificate_async(connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Complete a request certificate user interaction request. This should be once
-		 * the g_tls_interaction_request_certificate_async() completion callback is called.
+		 * the {@link G.tls_interaction_request_certificate_async} completion callback is called.
 		 * 
 		 * If %G_TLS_INTERACTION_HANDLED is returned, then the #GTlsConnection
 		 * passed to g_tls_interaction_request_certificate_async() will have had its
@@ -20626,7 +20636,7 @@ declare namespace imports.gi.Gio {
 	 * code to interact with the user. It can be used to ask the user for passwords.
 	 * 
 	 * To use a #GTlsInteraction with a TLS connection use
-	 * g_tls_connection_set_interaction().
+	 * {@link G.tls_connection_set_interaction}.
 	 * 
 	 * Callers should instantiate a derived class that implements the various
 	 * interaction methods to show the required dialogs.
@@ -20680,7 +20690,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Get a user readable translated warning. Usually this warning is a
 		 * representation of the password flags returned from
-		 * g_tls_password_get_flags().
+		 * {@link G.tls_password_get_flags}.
 		 * @returns The warning.
 		 */
 		get_warning(): string;
@@ -20724,7 +20734,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Set a user readable translated warning. Usually this warning is a
 		 * representation of the password flags returned from
-		 * g_tls_password_get_flags().
+		 * {@link G.tls_password_get_flags}.
 		 * @param warning The user readable warning
 		 */
 		set_warning(warning: string): void;
@@ -20769,7 +20779,7 @@ declare namespace imports.gi.Gio {
 	interface IUnixConnection {
 		/**
 		 * Receives credentials from the sending end of the connection.  The
-		 * sending end has to call g_unix_connection_send_credentials() (or
+		 * sending end has to call {@link G.unix_connection_send_credentials} (or
 		 * similar) for this to work.
 		 * 
 		 * As well as reading the credentials this also reads (and discards) a
@@ -20788,13 +20798,13 @@ declare namespace imports.gi.Gio {
 		 * #GUnixCredentialsMessage type and g_socket_get_credentials() function.
 		 * @param cancellable A #GCancellable or %NULL.
 		 * @returns Received credentials on success (free with
-		 * g_object_unref()), %NULL if #error is set.
+		 * {@link GObject.unref}), %NULL if #error is set.
 		 */
 		receive_credentials(cancellable: Cancellable | null): Credentials;
 		/**
 		 * Asynchronously receive credentials.
 		 * 
-		 * For more details, see g_unix_connection_receive_credentials() which is
+		 * For more details, see {@link G.unix_connection_receive_credentials} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
@@ -20805,15 +20815,15 @@ declare namespace imports.gi.Gio {
 		receive_credentials_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous receive credentials operation started with
-		 * g_unix_connection_receive_credentials_async().
+		 * {@link G.unix_connection_receive_credentials_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns a #GCredentials, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		receive_credentials_finish(result: AsyncResult): Credentials;
 		/**
 		 * Receives a file descriptor from the sending end of the connection.
-		 * The sending end has to call g_unix_connection_send_fd() for this
+		 * The sending end has to call {@link G.unix_connection_send_fd} for this
 		 * to work.
 		 * 
 		 * As well as reading the fd this also reads a single byte from the
@@ -20826,7 +20836,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Passes the credentials of the current user the receiving side
 		 * of the connection. The receiving end has to call
-		 * g_unix_connection_receive_credentials() (or similar) to accept the
+		 * {@link G.unix_connection_receive_credentials} (or similar) to accept the
 		 * credentials.
 		 * 
 		 * As well as sending the credentials this also writes a single NUL
@@ -20850,7 +20860,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously send credentials.
 		 * 
-		 * For more details, see g_unix_connection_send_credentials() which is
+		 * For more details, see {@link G.unix_connection_send_credentials} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called. You can then call
@@ -20861,14 +20871,14 @@ declare namespace imports.gi.Gio {
 		send_credentials_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous send credentials operation started with
-		 * g_unix_connection_send_credentials_async().
+		 * {@link G.unix_connection_send_credentials_async}.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE if the operation was successful, otherwise %FALSE.
 		 */
 		send_credentials_finish(result: AsyncResult): boolean;
 		/**
 		 * Passes a file descriptor to the receiving side of the
-		 * connection. The receiving end has to call g_unix_connection_receive_fd()
+		 * connection. The receiving end has to call {@link G.unix_connection_receive_fd}
 		 * to accept the file descriptor.
 		 * 
 		 * As well as sending the fd this also writes a single byte to the
@@ -20936,7 +20946,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This #GSocketControlMessage contains a #GCredentials instance.  It
-	 * may be sent using g_socket_send_message() and received using
+	 * may be sent using {@link G.socket_send_message} and received using
 	 * g_socket_receive_message() over UNIX sockets (ie: sockets in the
 	 * %G_SOCKET_FAMILY_UNIX family).
 	 * 
@@ -20996,7 +21006,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * #index_ specifies the index of the file descriptor to get.  It is a
 		 * programmer error for #index_ to be out of range; see
-		 * g_unix_fd_list_get_length().
+		 * {@link G.unix_fd_list_get_length}.
 		 * 
 		 * The file descriptor is duplicated using dup() and set as
 		 * close-on-exec before being returned.  You must call close() on it
@@ -21043,7 +21053,7 @@ declare namespace imports.gi.Gio {
 		 * #list. Further calls will return an empty list (unless more
 		 * descriptors have been added).
 		 * 
-		 * The return result of this function must be freed with g_free().
+		 * The return result of this function must be freed with {@link G.free}.
 		 * The caller is also responsible for closing all of the file
 		 * descriptors.  The file descriptors in the array are set to
 		 * close-on-exec.
@@ -21076,7 +21086,7 @@ declare namespace imports.gi.Gio {
 	 * descriptors that it contains, closing them when finalized.
 	 * 
 	 * It may be wrapped in a #GUnixFDMessage and sent over a #GSocket in
-	 * the %G_SOCKET_FAMILY_UNIX family by using g_socket_send_message()
+	 * the %G_SOCKET_FAMILY_UNIX family by using {@link G.socket_send_message}
 	 * and received using g_socket_receive_message().
 	 * 
 	 * Note that `<gio/gunixfdlist.h>` belongs to the UNIX-specific GIO
@@ -21141,7 +21151,7 @@ declare namespace imports.gi.Gio {
 		 * #message. Further calls will return an empty list (unless more
 		 * descriptors have been added).
 		 * 
-		 * The return result of this function must be freed with g_free().
+		 * The return result of this function must be freed with {@link G.free}.
 		 * The caller is also responsible for closing all of the file
 		 * descriptors.
 		 * 
@@ -21175,7 +21185,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This #GSocketControlMessage contains a #GUnixFDList.
-	 * It may be sent using g_socket_send_message() and received using
+	 * It may be sent using {@link G.socket_send_message} and received using
 	 * g_socket_receive_message() over UNIX sockets (ie: sockets in the
 	 * %G_SOCKET_FAMILY_UNIX family). The file descriptors are copied
 	 * between processes by the kernel.
@@ -21336,9 +21346,9 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<UnixMountMonitorInitOptions>);
 		/**
 		 * @deprecated
-		 * Use g_unix_mount_monitor_get() instead.
+		 * Use {@link G.unix_mount_monitor_get} instead.
 		 * 
-		 * Deprecated alias for g_unix_mount_monitor_get().
+		 * Deprecated alias for {@link G.unix_mount_monitor_get}.
 		 * 
 		 * This function was never a true constructor, which is why it was
 		 * renamed.
@@ -21353,7 +21363,7 @@ declare namespace imports.gi.Gio {
 		 * mounted filesystems as well as the list of mount points (ie: fstab
 		 * entries).
 		 * 
-		 * You must only call g_object_unref() on the return value from under
+		 * You must only call {@link GObject.unref} on the return value from under
 		 * the same main context as you called this function.
 		 * @returns the #GUnixMountMonitor.
 		 */
@@ -21438,6 +21448,11 @@ declare namespace imports.gi.Gio {
 	 */
 	interface IUnixSocketAddress {
 		/**
+		 * @deprecated
+		 * Use #GUnixSocketAddress:address-type, which
+		 * distinguishes between zero-padded and non-zero-padded
+		 * abstract addresses.
+		 * 
 		 * Whether or not this is an abstract address
 		 */
 		abstract: boolean;
@@ -21451,7 +21466,7 @@ declare namespace imports.gi.Gio {
 		get_address_type(): UnixSocketAddressType;
 		/**
 		 * @deprecated
-		 * Use g_unix_socket_address_get_address_type()
+		 * Use {@link G.unix_socket_address_get_address_type}
 		 * 
 		 * Tests if #address is abstract.
 		 * @returns %TRUE if the address is abstract, %FALSE otherwise
@@ -21462,7 +21477,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Guaranteed to be zero-terminated, but an abstract socket
 		 * may contain embedded zeros, and thus you should use
-		 * g_unix_socket_address_get_path_len() to get the true length
+		 * {@link G.unix_socket_address_get_path_len} to get the true length
 		 * of this string.
 		 * @returns the path for #address
 		 */
@@ -21470,7 +21485,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the length of #address's path.
 		 * 
-		 * For details, see g_unix_socket_address_get_path().
+		 * For details, see {@link G.unix_socket_address_get_path}.
 		 * @returns the length of the path
 		 */
 		get_path_len(): number;
@@ -21504,7 +21519,7 @@ declare namespace imports.gi.Gio {
 	 * permissions, visibility, etc. Currently this is only supported
 	 * under Linux. If you attempt to use abstract sockets on other
 	 * systems, function calls may return %G_IO_ERROR_NOT_SUPPORTED
-	 * errors. You can use g_unix_socket_address_abstract_names_supported()
+	 * errors. You can use {@link G.unix_socket_address_abstract_names_supported}
 	 * to see if abstract names are supported.
 	 * 
 	 * Note that `<gio/gunixsocketaddress.h>` belongs to the UNIX-specific GIO
@@ -21519,14 +21534,14 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GUnixSocketAddress for #path.
 		 * 
 		 * To create abstract socket addresses, on systems that support that,
-		 * use g_unix_socket_address_new_abstract().
+		 * use {@link G.unix_socket_address_new_abstract}.
 		 * @param path the socket path
 		 * @returns a new #GUnixSocketAddress
 		 */
 		public static new(path: string): SocketAddress;
 		/**
 		 * @deprecated
-		 * Use g_unix_socket_address_new_with_type().
+		 * Use {@link G.unix_socket_address_new_with_type}.
 		 * 
 		 * Creates a new %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
 		 * #GUnixSocketAddress for #path.
@@ -21539,7 +21554,7 @@ declare namespace imports.gi.Gio {
 		 * Creates a new #GUnixSocketAddress of type #type with name #path.
 		 * 
 		 * If #type is %G_UNIX_SOCKET_ADDRESS_PATH, this is equivalent to
-		 * calling g_unix_socket_address_new().
+		 * calling {@link G.unix_socket_address_new}.
 		 * 
 		 * If #type is %G_UNIX_SOCKET_ADDRESS_ANONYMOUS, #path and #path_len will be
 		 * ignored.
@@ -21588,7 +21603,7 @@ declare namespace imports.gi.Gio {
 		 * Gets a #GFile for #path.
 		 * @param path a string containing a VFS path.
 		 * @returns a #GFile.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_file_for_path(path: string): File;
 		/**
@@ -21599,7 +21614,7 @@ declare namespace imports.gi.Gio {
 		 * is malformed or if the URI scheme is not supported.
 		 * @param uri a string containing a URI
 		 * @returns a #GFile.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_file_for_uri(uri: string): File;
 		/**
@@ -21621,7 +21636,7 @@ declare namespace imports.gi.Gio {
 		 * be parsed by the #GVfs module.
 		 * @param parse_name a string to be parsed by the VFS module.
 		 * @returns a #GFile for the given #parse_name.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		parse_name(parse_name: string): File;
 		/**
@@ -21631,7 +21646,7 @@ declare namespace imports.gi.Gio {
 		 * opposed to desktop-wide as it happens with GVfs backends.
 		 * 
 		 * When a #GFile is requested with an URI containing #scheme (e.g. through
-		 * g_file_new_for_uri()), #uri_func will be called to allow a custom
+		 * {@link G.file_new_for_uri}), #uri_func will be called to allow a custom
 		 * constructor. The implementation of #uri_func should not be blocking, and
 		 * must not call g_vfs_register_uri_scheme() or g_vfs_unregister_uri_scheme().
 		 * 
@@ -21663,7 +21678,7 @@ declare namespace imports.gi.Gio {
 		register_uri_scheme(scheme: string, uri_func: VfsFileLookupFunc | null, uri_data: any | null, uri_destroy: GLib.DestroyNotify | null, parse_name_func: VfsFileLookupFunc | null, parse_name_data: any | null, parse_name_destroy: GLib.DestroyNotify | null): boolean;
 		/**
 		 * Unregisters the URI handler for #scheme previously registered with
-		 * g_vfs_register_uri_scheme().
+		 * {@link G.vfs_register_uri_scheme}.
 		 * @param scheme an URI scheme, e.g. "http"
 		 * @returns %TRUE if #scheme was successfully unregistered, or %FALSE if a
 		 *     handler for #scheme does not exist.
@@ -21706,37 +21721,37 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets a list of drives connected to the system.
 		 * 
-		 * The returned list should be freed with g_list_free(), after
+		 * The returned list should be freed with {@link G.list_free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of connected #GDrive objects.
 		 */
 		get_connected_drives(): GLib.List;
 		/**
-		 * Finds a #GMount object by its UUID (see g_mount_get_uuid())
+		 * Finds a #GMount object by its UUID (see {@link G.mount_get_uuid})
 		 * @param uuid the UUID to look for
 		 * @returns a #GMount or %NULL if no such mount is available.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_mount_for_uuid(uuid: string): Mount | null;
 		/**
 		 * Gets a list of the mounts on the system.
 		 * 
-		 * The returned list should be freed with g_list_free(), after
+		 * The returned list should be freed with {@link G.list_free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of #GMount objects.
 		 */
 		get_mounts(): GLib.List;
 		/**
-		 * Finds a #GVolume object by its UUID (see g_volume_get_uuid())
+		 * Finds a #GVolume object by its UUID (see {@link G.volume_get_uuid})
 		 * @param uuid the UUID to look for
 		 * @returns a #GVolume or %NULL if no such volume is available.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_volume_for_uuid(uuid: string): Volume | null;
 		/**
 		 * Gets a list of the volumes on the system.
 		 * 
-		 * The returned list should be freed with g_list_free(), after
+		 * The returned list should be freed with {@link G.list_free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns a #GList of #GVolume objects.
 		 */
@@ -21897,7 +21912,7 @@ declare namespace imports.gi.Gio {
 		 * Instead of using this function, #GVolumeMonitor
 		 * implementations should instead create shadow mounts with the URI of
 		 * the mount they intend to adopt. See the proxy volume monitor in
-		 * gvfs for an example of this. Also see g_mount_is_shadowed(),
+		 * gvfs for an example of this. Also see {@link G.mount_is_shadowed},
 		 * g_mount_shadow() and g_mount_unshadow() functions.
 		 * 
 		 * This function should be called by any #GVolumeMonitor
@@ -21907,7 +21922,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If the return value is not %NULL, the caller must associate the
 		 * returned #GVolume object with the #GMount. This involves returning
-		 * it in its g_mount_get_volume() implementation. The caller must
+		 * it in its {@link G.mount_get_volume} implementation. The caller must
 		 * also listen for the "removed" signal on the returned object
 		 * and give up its reference when handling that signal
 		 * 
@@ -21936,7 +21951,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the volume monitor used by gio.
 		 * @returns a reference to the #GVolumeMonitor used by gio. Call
-		 *    g_object_unref() when done with it.
+		 *    {@link GObject.unref} when done with it.
 		 */
 		public static get(): VolumeMonitor;
 	}
@@ -21966,7 +21981,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Note: it is an error to call this function while a compression is in
 		 * progress; it may only be called immediately after creation of #compressor,
-		 * or after resetting it with g_converter_reset().
+		 * or after resetting it with {@link G.converter_reset}.
 		 * @param file_info a #GFileInfo
 		 */
 		set_file_info(file_info: FileInfo | null): void;
@@ -22063,7 +22078,7 @@ declare namespace imports.gi.Gio {
 	export interface ActionEntryInitOptions {}
 	/**
 	 * This struct defines a single action.  It is for use with
-	 * g_action_map_add_action_entries().
+	 * {@link G.action_map_add_action_entries}.
 	 * 
 	 * The order of the items in the structure are intended to reflect
 	 * frequency of use.  It is permissible to use an incomplete initialiser
@@ -22192,77 +22207,6 @@ declare namespace imports.gi.Gio {
 		public launch_uris_finish: {(appinfo: AppInfo, result: AsyncResult): boolean;};
 	}
 
-	export interface AppLaunchContextClassInitOptions {}
-	interface AppLaunchContextClass {}
-	class AppLaunchContextClass {
-		public constructor(options?: Partial<AppLaunchContextClassInitOptions>);
-		public get_display: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
-		public get_startup_notify_id: {(context: AppLaunchContext, info: AppInfo, files: GLib.List): string | null;};
-		public launch_failed: {(context: AppLaunchContext, startup_notify_id: string): void;};
-		public launched: {(context: AppLaunchContext, info: AppInfo, platform_data: GLib.Variant): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-	}
-
-	export interface AppLaunchContextPrivateInitOptions {}
-	interface AppLaunchContextPrivate {}
-	class AppLaunchContextPrivate {
-		public constructor(options?: Partial<AppLaunchContextPrivateInitOptions>);
-	}
-
-	export interface ApplicationClassInitOptions {}
-	/**
-	 * Virtual function table for #GApplication.
-	 */
-	interface ApplicationClass {}
-	class ApplicationClass {
-		public constructor(options?: Partial<ApplicationClassInitOptions>);
-		public readonly padding: any[];
-		public startup: {(application: Application): void;};
-		public activate: {(application: Application): void;};
-		public open: {(application: Application, files: File[], n_files: number, hint: string): void;};
-		public command_line: {(application: Application, command_line: ApplicationCommandLine): number;};
-		public local_command_line: {(application: Application): [ boolean, number ];};
-		public before_emit: {(application: Application, platform_data: GLib.Variant): void;};
-		public after_emit: {(application: Application, platform_data: GLib.Variant): void;};
-		public add_platform_data: {(application: Application, builder: GLib.VariantBuilder): void;};
-		public quit_mainloop: {(application: Application): void;};
-		public run_mainloop: {(application: Application): void;};
-		public shutdown: {(application: Application): void;};
-		public dbus_register: {(application: Application, connection: DBusConnection, object_path: string): boolean;};
-		public dbus_unregister: {(application: Application, connection: DBusConnection, object_path: string): void;};
-		public handle_local_options: {(application: Application, options: GLib.VariantDict): number;};
-		public name_lost: {(application: Application): boolean;};
-	}
-
-	export interface ApplicationCommandLineClassInitOptions {}
-	/**
-	 * The #GApplicationCommandLineClass-struct
-	 * contains private data only.
-	 */
-	interface ApplicationCommandLineClass {}
-	class ApplicationCommandLineClass {
-		public constructor(options?: Partial<ApplicationCommandLineClassInitOptions>);
-		public readonly padding: any[];
-		public print_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
-		public printerr_literal: {(cmdline: ApplicationCommandLine, message: string): void;};
-		public get_stdin: {(cmdline: ApplicationCommandLine): InputStream | null;};
-	}
-
-	export interface ApplicationCommandLinePrivateInitOptions {}
-	interface ApplicationCommandLinePrivate {}
-	class ApplicationCommandLinePrivate {
-		public constructor(options?: Partial<ApplicationCommandLinePrivateInitOptions>);
-	}
-
-	export interface ApplicationPrivateInitOptions {}
-	interface ApplicationPrivate {}
-	class ApplicationPrivate {
-		public constructor(options?: Partial<ApplicationPrivateInitOptions>);
-	}
-
 	export interface AsyncInitableIfaceInitOptions {}
 	/**
 	 * Provides an interface for asynchronous initializing object such that
@@ -22295,64 +22239,6 @@ declare namespace imports.gi.Gio {
 		public is_tagged: {(res: AsyncResult, source_tag: any | null): boolean;};
 	}
 
-	export interface BufferedInputStreamClassInitOptions {}
-	interface BufferedInputStreamClass {}
-	class BufferedInputStreamClass {
-		public constructor(options?: Partial<BufferedInputStreamClassInitOptions>);
-		public fill: {(stream: BufferedInputStream, count: number, cancellable: Cancellable | null): number;};
-		public fill_async: {(stream: BufferedInputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public fill_finish: {(stream: BufferedInputStream, result: AsyncResult): number;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface BufferedInputStreamPrivateInitOptions {}
-	interface BufferedInputStreamPrivate {}
-	class BufferedInputStreamPrivate {
-		public constructor(options?: Partial<BufferedInputStreamPrivateInitOptions>);
-	}
-
-	export interface BufferedOutputStreamClassInitOptions {}
-	interface BufferedOutputStreamClass {}
-	class BufferedOutputStreamClass {
-		public constructor(options?: Partial<BufferedOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface BufferedOutputStreamPrivateInitOptions {}
-	interface BufferedOutputStreamPrivate {}
-	class BufferedOutputStreamPrivate {
-		public constructor(options?: Partial<BufferedOutputStreamPrivateInitOptions>);
-	}
-
-	export interface CancellableClassInitOptions {}
-	interface CancellableClass {}
-	class CancellableClass {
-		public constructor(options?: Partial<CancellableClassInitOptions>);
-		public cancelled: {(cancellable: Cancellable | null): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface CancellablePrivateInitOptions {}
-	interface CancellablePrivate {}
-	class CancellablePrivate {
-		public constructor(options?: Partial<CancellablePrivateInitOptions>);
-	}
-
-	export interface CharsetConverterClassInitOptions {}
-	interface CharsetConverterClass {}
-	class CharsetConverterClass {
-		public constructor(options?: Partial<CharsetConverterClassInitOptions>);
-	}
-
 	export interface ConverterIfaceInitOptions {}
 	/**
 	 * Provides an interface for converting data from one type
@@ -22368,49 +22254,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 		public convert: {(converter: Converter, inbuf: number[] | null, inbuf_size: number, outbuf: number[] | null, outbuf_size: number, flags: ConverterFlags): [ ConverterResult, number, number ];};
 		public reset: {(converter: Converter): void;};
-	}
-
-	export interface ConverterInputStreamClassInitOptions {}
-	interface ConverterInputStreamClass {}
-	class ConverterInputStreamClass {
-		public constructor(options?: Partial<ConverterInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ConverterInputStreamPrivateInitOptions {}
-	interface ConverterInputStreamPrivate {}
-	class ConverterInputStreamPrivate {
-		public constructor(options?: Partial<ConverterInputStreamPrivateInitOptions>);
-	}
-
-	export interface ConverterOutputStreamClassInitOptions {}
-	interface ConverterOutputStreamClass {}
-	class ConverterOutputStreamClass {
-		public constructor(options?: Partial<ConverterOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ConverterOutputStreamPrivateInitOptions {}
-	interface ConverterOutputStreamPrivate {}
-	class ConverterOutputStreamPrivate {
-		public constructor(options?: Partial<ConverterOutputStreamPrivateInitOptions>);
-	}
-
-	export interface CredentialsClassInitOptions {}
-	/**
-	 * Class structure for #GCredentials.
-	 */
-	interface CredentialsClass {}
-	class CredentialsClass {
-		public constructor(options?: Partial<CredentialsClassInitOptions>);
 	}
 
 	export interface DBusAnnotationInfoInitOptions {}
@@ -22489,7 +22332,7 @@ declare namespace imports.gi.Gio {
 
 	export interface DBusErrorEntryInitOptions {}
 	/**
-	 * Struct used in g_dbus_error_register_error_domain().
+	 * Struct used in {@link G.dbus_error_register_error_domain}.
 	 */
 	interface DBusErrorEntry {}
 	class DBusErrorEntry {
@@ -22554,7 +22397,7 @@ declare namespace imports.gi.Gio {
 		public annotations: DBusAnnotationInfo[];
 		/**
 		 * Builds a lookup-cache to speed up
-		 * g_dbus_interface_info_lookup_method(),
+		 * {@link G.dbus_interface_info_lookup_method},
 		 * g_dbus_interface_info_lookup_signal() and
 		 * g_dbus_interface_info_lookup_property().
 		 * 
@@ -22567,7 +22410,7 @@ declare namespace imports.gi.Gio {
 		public cache_build(): void;
 		/**
 		 * Decrements the usage count for the cache for #info built by
-		 * g_dbus_interface_info_cache_build() (if any) and frees the
+		 * {@link G.dbus_interface_info_cache_build} (if any) and frees the
 		 * resources used by the cache if the usage count drops to zero.
 		 */
 		public cache_release(): void;
@@ -22586,7 +22429,7 @@ declare namespace imports.gi.Gio {
 		 * Looks up information about a method.
 		 * 
 		 * The cost of this function is O(n) in number of methods unless
-		 * g_dbus_interface_info_cache_build() has been used on #info.
+		 * {@link G.dbus_interface_info_cache_build} has been used on #info.
 		 * @param name A D-Bus method name (typically in CamelCase)
 		 * @returns A #GDBusMethodInfo or %NULL if not found. Do not free, it is owned by #info.
 		 */
@@ -22595,7 +22438,7 @@ declare namespace imports.gi.Gio {
 		 * Looks up information about a property.
 		 * 
 		 * The cost of this function is O(n) in number of properties unless
-		 * g_dbus_interface_info_cache_build() has been used on #info.
+		 * {@link G.dbus_interface_info_cache_build} has been used on #info.
 		 * @param name A D-Bus property name (typically in CamelCase).
 		 * @returns A #GDBusPropertyInfo or %NULL if not found. Do not free, it is owned by #info.
 		 */
@@ -22604,7 +22447,7 @@ declare namespace imports.gi.Gio {
 		 * Looks up information about a signal.
 		 * 
 		 * The cost of this function is O(n) in number of signals unless
-		 * g_dbus_interface_info_cache_build() has been used on #info.
+		 * {@link G.dbus_interface_info_cache_build} has been used on #info.
 		 * @param name A D-Bus signal name (typically in CamelCase)
 		 * @returns A #GDBusSignalInfo or %NULL if not found. Do not free, it is owned by #info.
 		 */
@@ -22623,35 +22466,13 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
-	export interface DBusInterfaceSkeletonClassInitOptions {}
-	/**
-	 * Class structure for #GDBusInterfaceSkeleton.
-	 */
-	interface DBusInterfaceSkeletonClass {}
-	class DBusInterfaceSkeletonClass {
-		public constructor(options?: Partial<DBusInterfaceSkeletonClassInitOptions>);
-		public readonly vfunc_padding: any[];
-		public readonly signal_padding: any[];
-		public get_info: {(interface_: DBusInterfaceSkeleton): DBusInterfaceInfo;};
-		public get_vtable: {(interface_: DBusInterfaceSkeleton): DBusInterfaceVTable;};
-		public get_properties: {(interface_: DBusInterfaceSkeleton): GLib.Variant;};
-		public flush: {(interface_: DBusInterfaceSkeleton): void;};
-		public g_authorize_method: {(interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
-	}
-
-	export interface DBusInterfaceSkeletonPrivateInitOptions {}
-	interface DBusInterfaceSkeletonPrivate {}
-	class DBusInterfaceSkeletonPrivate {
-		public constructor(options?: Partial<DBusInterfaceSkeletonPrivateInitOptions>);
-	}
-
 	export interface DBusInterfaceVTableInitOptions {}
 	/**
 	 * Virtual table for handling properties and method calls for a D-Bus
 	 * interface.
 	 * 
 	 * Since 2.38, if you want to handle getting/setting D-Bus properties
-	 * asynchronously, give %NULL as your get_property() or set_property()
+	 * asynchronously, give %NULL as your {@link Get.property} or set_property()
 	 * function. The D-Bus call will be directed to your #method_call function,
 	 * with the provided #interface_name set to "org.freedesktop.DBus.Properties".
 	 * 
@@ -22766,7 +22587,7 @@ declare namespace imports.gi.Gio {
 		 * parser that only accepts a subset of valid XML documents.
 		 * @param xml_data Valid D-Bus introspection XML.
 		 * @returns A #GDBusNodeInfo structure or %NULL if #error is set. Free
-		 * with g_dbus_node_info_unref().
+		 * with {@link G.dbus_node_info_unref}.
 		 */
 		public static new_for_xml(xml_data: string): DBusNodeInfo;
 		/**
@@ -22838,24 +22659,6 @@ declare namespace imports.gi.Gio {
 		public interface_removed: {(object: DBusObject, interface_: DBusInterface): void;};
 	}
 
-	export interface DBusObjectManagerClientClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectManagerClient.
-	 */
-	interface DBusObjectManagerClientClass {}
-	class DBusObjectManagerClientClass {
-		public constructor(options?: Partial<DBusObjectManagerClientClassInitOptions>);
-		public readonly padding: any[];
-		public interface_proxy_signal: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
-		public interface_proxy_properties_changed: {(manager: DBusObjectManagerClient, object_proxy: DBusObjectProxy, interface_proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
-	}
-
-	export interface DBusObjectManagerClientPrivateInitOptions {}
-	interface DBusObjectManagerClientPrivate {}
-	class DBusObjectManagerClientPrivate {
-		public constructor(options?: Partial<DBusObjectManagerClientPrivateInitOptions>);
-	}
-
 	export interface DBusObjectManagerIfaceInitOptions {}
 	/**
 	 * Base type for D-Bus object managers.
@@ -22875,55 +22678,6 @@ declare namespace imports.gi.Gio {
 		public object_removed: {(manager: DBusObjectManager, object: DBusObject): void;};
 		public interface_added: {(manager: DBusObjectManager, object: DBusObject, interface_: DBusInterface): void;};
 		public interface_removed: {(manager: DBusObjectManager, object: DBusObject, interface_: DBusInterface): void;};
-	}
-
-	export interface DBusObjectManagerServerClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectManagerServer.
-	 */
-	interface DBusObjectManagerServerClass {}
-	class DBusObjectManagerServerClass {
-		public constructor(options?: Partial<DBusObjectManagerServerClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface DBusObjectManagerServerPrivateInitOptions {}
-	interface DBusObjectManagerServerPrivate {}
-	class DBusObjectManagerServerPrivate {
-		public constructor(options?: Partial<DBusObjectManagerServerPrivateInitOptions>);
-	}
-
-	export interface DBusObjectProxyClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectProxy.
-	 */
-	interface DBusObjectProxyClass {}
-	class DBusObjectProxyClass {
-		public constructor(options?: Partial<DBusObjectProxyClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface DBusObjectProxyPrivateInitOptions {}
-	interface DBusObjectProxyPrivate {}
-	class DBusObjectProxyPrivate {
-		public constructor(options?: Partial<DBusObjectProxyPrivateInitOptions>);
-	}
-
-	export interface DBusObjectSkeletonClassInitOptions {}
-	/**
-	 * Class structure for #GDBusObjectSkeleton.
-	 */
-	interface DBusObjectSkeletonClass {}
-	class DBusObjectSkeletonClass {
-		public constructor(options?: Partial<DBusObjectSkeletonClassInitOptions>);
-		public readonly padding: any[];
-		public authorize_method: {(object: DBusObjectSkeleton, interface_: DBusInterfaceSkeleton, invocation: DBusMethodInvocation): boolean;};
-	}
-
-	export interface DBusObjectSkeletonPrivateInitOptions {}
-	interface DBusObjectSkeletonPrivate {}
-	class DBusObjectSkeletonPrivate {
-		public constructor(options?: Partial<DBusObjectSkeletonPrivateInitOptions>);
 	}
 
 	export interface DBusPropertyInfoInitOptions {}
@@ -22967,24 +22721,6 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
-	export interface DBusProxyClassInitOptions {}
-	/**
-	 * Class structure for #GDBusProxy.
-	 */
-	interface DBusProxyClass {}
-	class DBusProxyClass {
-		public constructor(options?: Partial<DBusProxyClassInitOptions>);
-		public readonly padding: any[];
-		public g_properties_changed: {(proxy: DBusProxy, changed_properties: GLib.Variant, invalidated_properties: string): void;};
-		public g_signal: {(proxy: DBusProxy, sender_name: string, signal_name: string, parameters: GLib.Variant): void;};
-	}
-
-	export interface DBusProxyPrivateInitOptions {}
-	interface DBusProxyPrivate {}
-	class DBusProxyPrivate {
-		public constructor(options?: Partial<DBusProxyPrivateInitOptions>);
-	}
-
 	export interface DBusSignalInfoInitOptions {}
 	/**
 	 * Information about a signal on a D-Bus interface.
@@ -23024,7 +22760,7 @@ declare namespace imports.gi.Gio {
 
 	export interface DBusSubtreeVTableInitOptions {}
 	/**
-	 * Virtual table for handling subtrees registered with g_dbus_connection_register_subtree().
+	 * Virtual table for handling subtrees registered with {@link G.dbus_connection_register_subtree}.
 	 */
 	interface DBusSubtreeVTable {}
 	class DBusSubtreeVTable {
@@ -23042,40 +22778,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public dispatch: DBusSubtreeDispatchFunc;
 		public readonly padding: any[];
-	}
-
-	export interface DataInputStreamClassInitOptions {}
-	interface DataInputStreamClass {}
-	class DataInputStreamClass {
-		public constructor(options?: Partial<DataInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface DataInputStreamPrivateInitOptions {}
-	interface DataInputStreamPrivate {}
-	class DataInputStreamPrivate {
-		public constructor(options?: Partial<DataInputStreamPrivateInitOptions>);
-	}
-
-	export interface DataOutputStreamClassInitOptions {}
-	interface DataOutputStreamClass {}
-	class DataOutputStreamClass {
-		public constructor(options?: Partial<DataOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface DataOutputStreamPrivateInitOptions {}
-	interface DataOutputStreamPrivate {}
-	class DataOutputStreamPrivate {
-		public constructor(options?: Partial<DataOutputStreamPrivateInitOptions>);
 	}
 
 	export interface DatagramBasedInterfaceInitOptions {}
@@ -23098,12 +22800,6 @@ declare namespace imports.gi.Gio {
 		public create_source: {(datagram_based: DatagramBased, condition: GLib.IOCondition, cancellable: Cancellable | null): GLib.Source;};
 		public condition_check: {(datagram_based: DatagramBased, condition: GLib.IOCondition): GLib.IOCondition;};
 		public condition_wait: {(datagram_based: DatagramBased, condition: GLib.IOCondition, timeout: number, cancellable: Cancellable | null): boolean;};
-	}
-
-	export interface DesktopAppInfoClassInitOptions {}
-	interface DesktopAppInfoClass {}
-	class DesktopAppInfoClass {
-		public constructor(options?: Partial<DesktopAppInfoClassInitOptions>);
 	}
 
 	export interface DesktopAppInfoLookupIfaceInitOptions {}
@@ -23210,24 +22906,6 @@ declare namespace imports.gi.Gio {
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-	}
-
-	export interface EmblemClassInitOptions {}
-	interface EmblemClass {}
-	class EmblemClass {
-		public constructor(options?: Partial<EmblemClassInitOptions>);
-	}
-
-	export interface EmblemedIconClassInitOptions {}
-	interface EmblemedIconClass {}
-	class EmblemedIconClass {
-		public constructor(options?: Partial<EmblemedIconClassInitOptions>);
-	}
-
-	export interface EmblemedIconPrivateInitOptions {}
-	interface EmblemedIconPrivate {}
-	class EmblemedIconPrivate {
-		public constructor(options?: Partial<EmblemedIconPrivateInitOptions>);
 	}
 
 	export interface FileAttributeInfoInitOptions {}
@@ -23389,7 +23067,7 @@ declare namespace imports.gi.Gio {
 		public subtract(subtract: FileAttributeMatcher | null): FileAttributeMatcher | null;
 		/**
 		 * Prints what the matcher is matching against. The format will be
-		 * equal to the format passed to g_file_attribute_matcher_new().
+		 * equal to the format passed to {@link G.file_attribute_matcher_new}.
 		 * The output however, might not be identical, as the matcher may
 		 * decide to use a different order or omit needless parts.
 		 * @returns a string describing the attributes the matcher matches
@@ -23415,63 +23093,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 		public get_fd: {(fd_based: FileDescriptorBased): number;};
-	}
-
-	export interface FileEnumeratorClassInitOptions {}
-	interface FileEnumeratorClass {}
-	class FileEnumeratorClass {
-		public constructor(options?: Partial<FileEnumeratorClassInitOptions>);
-		public next_file: {(enumerator: FileEnumerator, cancellable: Cancellable | null): FileInfo | null;};
-		public close_fn: {(enumerator: FileEnumerator, cancellable: Cancellable | null): boolean;};
-		public next_files_async: {(enumerator: FileEnumerator, num_files: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public next_files_finish: {(enumerator: FileEnumerator, result: AsyncResult): GLib.List;};
-		public close_async: {(enumerator: FileEnumerator, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(enumerator: FileEnumerator, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-	}
-
-	export interface FileEnumeratorPrivateInitOptions {}
-	interface FileEnumeratorPrivate {}
-	class FileEnumeratorPrivate {
-		public constructor(options?: Partial<FileEnumeratorPrivateInitOptions>);
-	}
-
-	export interface FileIOStreamClassInitOptions {}
-	interface FileIOStreamClass {}
-	class FileIOStreamClass {
-		public constructor(options?: Partial<FileIOStreamClassInitOptions>);
-		public tell: {(stream: FileIOStream): number;};
-		public can_seek: {(stream: FileIOStream): boolean;};
-		public seek: {(stream: FileIOStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public can_truncate: {(stream: FileIOStream): boolean;};
-		public truncate_fn: {(stream: FileIOStream, size: number, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileIOStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileIOStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileIOStream, result: AsyncResult): FileInfo;};
-		public get_etag: {(stream: FileIOStream): string | null;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileIOStreamPrivateInitOptions {}
-	interface FileIOStreamPrivate {}
-	class FileIOStreamPrivate {
-		public constructor(options?: Partial<FileIOStreamPrivateInitOptions>);
-	}
-
-	export interface FileIconClassInitOptions {}
-	interface FileIconClass {}
-	class FileIconClass {
-		public constructor(options?: Partial<FileIconClassInitOptions>);
 	}
 
 	export interface FileIfaceInitOptions {}
@@ -23593,108 +23214,6 @@ declare namespace imports.gi.Gio {
 		public measure_disk_usage_finish: {(file: File, result: AsyncResult): [ boolean, number | null, number | null, number | null ];};
 	}
 
-	export interface FileInfoClassInitOptions {}
-	interface FileInfoClass {}
-	class FileInfoClass {
-		public constructor(options?: Partial<FileInfoClassInitOptions>);
-	}
-
-	export interface FileInputStreamClassInitOptions {}
-	interface FileInputStreamClass {}
-	class FileInputStreamClass {
-		public constructor(options?: Partial<FileInputStreamClassInitOptions>);
-		public tell: {(stream: FileInputStream): number;};
-		public can_seek: {(stream: FileInputStream): boolean;};
-		public seek: {(stream: FileInputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileInputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileInputStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileInputStream, result: AsyncResult): FileInfo;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileInputStreamPrivateInitOptions {}
-	interface FileInputStreamPrivate {}
-	class FileInputStreamPrivate {
-		public constructor(options?: Partial<FileInputStreamPrivateInitOptions>);
-	}
-
-	export interface FileMonitorClassInitOptions {}
-	interface FileMonitorClass {}
-	class FileMonitorClass {
-		public constructor(options?: Partial<FileMonitorClassInitOptions>);
-		public changed: {(monitor: FileMonitor, file: File, other_file: File, event_type: FileMonitorEvent): void;};
-		public cancel: {(monitor: FileMonitor): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileMonitorPrivateInitOptions {}
-	interface FileMonitorPrivate {}
-	class FileMonitorPrivate {
-		public constructor(options?: Partial<FileMonitorPrivateInitOptions>);
-	}
-
-	export interface FileOutputStreamClassInitOptions {}
-	interface FileOutputStreamClass {}
-	class FileOutputStreamClass {
-		public constructor(options?: Partial<FileOutputStreamClassInitOptions>);
-		public tell: {(stream: FileOutputStream): number;};
-		public can_seek: {(stream: FileOutputStream): boolean;};
-		public seek: {(stream: FileOutputStream, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
-		public can_truncate: {(stream: FileOutputStream): boolean;};
-		public truncate_fn: {(stream: FileOutputStream, size: number, cancellable: Cancellable | null): boolean;};
-		public query_info: {(stream: FileOutputStream, attributes: string, cancellable: Cancellable | null): FileInfo;};
-		public query_info_async: {(stream: FileOutputStream, attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public query_info_finish: {(stream: FileOutputStream, result: AsyncResult): FileInfo;};
-		public get_etag: {(stream: FileOutputStream): string | null;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface FileOutputStreamPrivateInitOptions {}
-	interface FileOutputStreamPrivate {}
-	class FileOutputStreamPrivate {
-		public constructor(options?: Partial<FileOutputStreamPrivateInitOptions>);
-	}
-
-	export interface FilenameCompleterClassInitOptions {}
-	interface FilenameCompleterClass {}
-	class FilenameCompleterClass {
-		public constructor(options?: Partial<FilenameCompleterClassInitOptions>);
-		public got_completion_data: {(filename_completer: FilenameCompleter): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
-	export interface FilterInputStreamClassInitOptions {}
-	interface FilterInputStreamClass {}
-	class FilterInputStreamClass {
-		public constructor(options?: Partial<FilterInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
-	export interface FilterOutputStreamClassInitOptions {}
-	interface FilterOutputStreamClass {}
-	class FilterOutputStreamClass {
-		public constructor(options?: Partial<FilterOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-	}
-
 	export interface IOExtensionInitOptions {}
 	/**
 	 * #GIOExtension is an opaque data structure and can only be accessed
@@ -23766,18 +23285,12 @@ declare namespace imports.gi.Gio {
 		public set_required_type(type: GObject.Type): void;
 	}
 
-	export interface IOModuleClassInitOptions {}
-	interface IOModuleClass {}
-	class IOModuleClass {
-		public constructor(options?: Partial<IOModuleClassInitOptions>);
-	}
-
 	export interface IOModuleScopeInitOptions {}
 	/**
 	 * Represents a scope for loading IO modules. A scope can be used for blocking
 	 * duplicate modules, or blocking a module you don't want to load.
 	 * 
-	 * The scope can be used with g_io_modules_load_all_in_directory_with_scope()
+	 * The scope can be used with {@link G.io_modules_load_all_in_directory_with_scope}
 	 * or g_io_modules_scan_all_in_directory_with_scope().
 	 */
 	interface IOModuleScope {}
@@ -23785,7 +23298,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<IOModuleScopeInitOptions>);
 		/**
 		 * Block modules with the given #basename from being loaded when
-		 * this scope is used with g_io_modules_scan_all_in_directory_with_scope()
+		 * this scope is used with {@link G.io_modules_scan_all_in_directory_with_scope}
 		 * or g_io_modules_load_all_in_directory_with_scope().
 		 * @param basename the basename to block
 		 */
@@ -23805,7 +23318,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<IOSchedulerJobInitOptions>);
 		/**
 		 * @deprecated
-		 * Use g_main_context_invoke().
+		 * Use {@link G.main_context_invoke}.
 		 * 
 		 * Used from an I/O job to send a callback to be run in the thread
 		 * that the job was started from, waiting for the result (and thus
@@ -23817,14 +23330,14 @@ declare namespace imports.gi.Gio {
 		public send_to_mainloop(func: GLib.SourceFunc, notify: GLib.DestroyNotify | null): boolean;
 		/**
 		 * @deprecated
-		 * Use g_main_context_invoke().
+		 * Use {@link G.main_context_invoke}.
 		 * 
 		 * Used from an I/O job to send a callback to be run asynchronously in
 		 * the thread that the job was started from. The callback will be run
 		 * when the main loop is available, but at that time the I/O job might
 		 * have finished. The return value from the callback is ignored.
 		 * 
-		 * Note that if you are passing the #user_data from g_io_scheduler_push_job()
+		 * Note that if you are passing the #user_data from {@link G.io_scheduler_push_job}
 		 * on to this function you have to ensure that it is not freed before
 		 * #func is called, either by passing %NULL as #notify to
 		 * g_io_scheduler_push_job() or by using refcounting for #user_data.
@@ -23838,33 +23351,6 @@ declare namespace imports.gi.Gio {
 	interface IOStreamAdapter {}
 	class IOStreamAdapter {
 		public constructor(options?: Partial<IOStreamAdapterInitOptions>);
-	}
-
-	export interface IOStreamClassInitOptions {}
-	interface IOStreamClass {}
-	class IOStreamClass {
-		public constructor(options?: Partial<IOStreamClassInitOptions>);
-		public get_input_stream: {(stream: IOStream): InputStream;};
-		public get_output_stream: {(stream: IOStream): OutputStream;};
-		public close_fn: {(stream: IOStream, cancellable: Cancellable | null): boolean;};
-		public close_async: {(stream: IOStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: IOStream, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-		public _g_reserved10: {(): void;};
-	}
-
-	export interface IOStreamPrivateInitOptions {}
-	interface IOStreamPrivate {}
-	class IOStreamPrivate {
-		public constructor(options?: Partial<IOStreamPrivateInitOptions>);
 	}
 
 	export interface IconIfaceInitOptions {}
@@ -23885,44 +23371,6 @@ declare namespace imports.gi.Gio {
 		public to_tokens: {(icon: Icon, tokens: any[], out_version: number): boolean;};
 		public from_tokens: {(tokens: string, num_tokens: number, version: number): Icon;};
 		public serialize: {(icon: Icon): GLib.Variant | null;};
-	}
-
-	export interface InetAddressClassInitOptions {}
-	interface InetAddressClass {}
-	class InetAddressClass {
-		public constructor(options?: Partial<InetAddressClassInitOptions>);
-		public to_string: {(address: InetAddress): string;};
-		public to_bytes: {(address: InetAddress): number;};
-	}
-
-	export interface InetAddressMaskClassInitOptions {}
-	interface InetAddressMaskClass {}
-	class InetAddressMaskClass {
-		public constructor(options?: Partial<InetAddressMaskClassInitOptions>);
-	}
-
-	export interface InetAddressMaskPrivateInitOptions {}
-	interface InetAddressMaskPrivate {}
-	class InetAddressMaskPrivate {
-		public constructor(options?: Partial<InetAddressMaskPrivateInitOptions>);
-	}
-
-	export interface InetAddressPrivateInitOptions {}
-	interface InetAddressPrivate {}
-	class InetAddressPrivate {
-		public constructor(options?: Partial<InetAddressPrivateInitOptions>);
-	}
-
-	export interface InetSocketAddressClassInitOptions {}
-	interface InetSocketAddressClass {}
-	class InetSocketAddressClass {
-		public constructor(options?: Partial<InetSocketAddressClassInitOptions>);
-	}
-
-	export interface InetSocketAddressPrivateInitOptions {}
-	interface InetSocketAddressPrivate {}
-	class InetSocketAddressPrivate {
-		public constructor(options?: Partial<InetSocketAddressPrivateInitOptions>);
 	}
 
 	export interface InitableIfaceInitOptions {}
@@ -24001,32 +23449,6 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
-	export interface InputStreamClassInitOptions {}
-	interface InputStreamClass {}
-	class InputStreamClass {
-		public constructor(options?: Partial<InputStreamClassInitOptions>);
-		public read_fn: {(stream: InputStream, buffer: any | null, count: number, cancellable: Cancellable | null): number;};
-		public skip: {(stream: InputStream, count: number, cancellable: Cancellable | null): number;};
-		public close_fn: {(stream: InputStream, cancellable: Cancellable | null): boolean;};
-		public read_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): number[] | null;};
-		public read_finish: {(stream: InputStream, result: AsyncResult): number;};
-		public skip_async: {(stream: InputStream, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public skip_finish: {(stream: InputStream, result: AsyncResult): number;};
-		public close_async: {(stream: InputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: InputStream, result: AsyncResult): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface InputStreamPrivateInitOptions {}
-	interface InputStreamPrivate {}
-	class InputStreamPrivate {
-		public constructor(options?: Partial<InputStreamPrivateInitOptions>);
-	}
-
 	export interface InputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data input.
@@ -24063,12 +23485,6 @@ declare namespace imports.gi.Gio {
 		public get_item: {(list: ListModel, position: number): GObject.Object | null;};
 	}
 
-	export interface ListStoreClassInitOptions {}
-	interface ListStoreClass {}
-	class ListStoreClass {
-		public constructor(options?: Partial<ListStoreClassInitOptions>);
-	}
-
 	export interface LoadableIconIfaceInitOptions {}
 	/**
 	 * Interface for icons that can be loaded as a stream.
@@ -24085,23 +23501,6 @@ declare namespace imports.gi.Gio {
 		public load_finish: {(icon: LoadableIcon, res: AsyncResult): [ InputStream, string | null ];};
 	}
 
-	export interface MemoryInputStreamClassInitOptions {}
-	interface MemoryInputStreamClass {}
-	class MemoryInputStreamClass {
-		public constructor(options?: Partial<MemoryInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface MemoryInputStreamPrivateInitOptions {}
-	interface MemoryInputStreamPrivate {}
-	class MemoryInputStreamPrivate {
-		public constructor(options?: Partial<MemoryInputStreamPrivateInitOptions>);
-	}
-
 	export interface MemoryMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GMemoryMonitor.
@@ -24114,69 +23513,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 		public low_memory_warning: {(monitor: MemoryMonitor, level: MemoryMonitorWarningLevel): void;};
-	}
-
-	export interface MemoryOutputStreamClassInitOptions {}
-	interface MemoryOutputStreamClass {}
-	class MemoryOutputStreamClass {
-		public constructor(options?: Partial<MemoryOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface MemoryOutputStreamPrivateInitOptions {}
-	interface MemoryOutputStreamPrivate {}
-	class MemoryOutputStreamPrivate {
-		public constructor(options?: Partial<MemoryOutputStreamPrivateInitOptions>);
-	}
-
-	export interface MenuAttributeIterClassInitOptions {}
-	interface MenuAttributeIterClass {}
-	class MenuAttributeIterClass {
-		public constructor(options?: Partial<MenuAttributeIterClassInitOptions>);
-		public get_next: {(iter: MenuAttributeIter): [ boolean, string | null, GLib.Variant | null ];};
-	}
-
-	export interface MenuAttributeIterPrivateInitOptions {}
-	interface MenuAttributeIterPrivate {}
-	class MenuAttributeIterPrivate {
-		public constructor(options?: Partial<MenuAttributeIterPrivateInitOptions>);
-	}
-
-	export interface MenuLinkIterClassInitOptions {}
-	interface MenuLinkIterClass {}
-	class MenuLinkIterClass {
-		public constructor(options?: Partial<MenuLinkIterClassInitOptions>);
-		public get_next: {(iter: MenuLinkIter): [ boolean, string | null, MenuModel | null ];};
-	}
-
-	export interface MenuLinkIterPrivateInitOptions {}
-	interface MenuLinkIterPrivate {}
-	class MenuLinkIterPrivate {
-		public constructor(options?: Partial<MenuLinkIterPrivateInitOptions>);
-	}
-
-	export interface MenuModelClassInitOptions {}
-	interface MenuModelClass {}
-	class MenuModelClass {
-		public constructor(options?: Partial<MenuModelClassInitOptions>);
-		public is_mutable: {(model: MenuModel): boolean;};
-		public get_n_items: {(model: MenuModel): number;};
-		public get_item_attributes: {(model: MenuModel, item_index: number): GLib.HashTable;};
-		public iterate_item_attributes: {(model: MenuModel, item_index: number): MenuAttributeIter;};
-		public get_item_attribute_value: {(model: MenuModel, item_index: number, attribute: string, expected_type: GLib.VariantType | null): GLib.Variant | null;};
-		public get_item_links: {(model: MenuModel, item_index: number): GLib.HashTable;};
-		public iterate_item_links: {(model: MenuModel, item_index: number): MenuLinkIter;};
-		public get_item_link: {(model: MenuModel, item_index: number, link: string): MenuModel | null;};
-	}
-
-	export interface MenuModelPrivateInitOptions {}
-	interface MenuModelPrivate {}
-	class MenuModelPrivate {
-		public constructor(options?: Partial<MenuModelPrivateInitOptions>);
 	}
 
 	export interface MountIfaceInitOptions {}
@@ -24219,64 +23555,6 @@ declare namespace imports.gi.Gio {
 		public get_symbolic_icon: {(mount: Mount): Icon;};
 	}
 
-	export interface MountOperationClassInitOptions {}
-	interface MountOperationClass {}
-	class MountOperationClass {
-		public constructor(options?: Partial<MountOperationClassInitOptions>);
-		public ask_password: {(op: MountOperation, message: string, default_user: string, default_domain: string, flags: AskPasswordFlags): void;};
-		public ask_question: {(op: MountOperation, message: string, choices: string[]): void;};
-		public reply: {(op: MountOperation, result: MountOperationResult): void;};
-		public aborted: {(op: MountOperation): void;};
-		public show_processes: {(op: MountOperation, message: string, processes: GLib.Pid[], choices: string[]): void;};
-		public show_unmount_progress: {(op: MountOperation, message: string, time_left: number, bytes_left: number): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-	}
-
-	export interface MountOperationPrivateInitOptions {}
-	interface MountOperationPrivate {}
-	class MountOperationPrivate {
-		public constructor(options?: Partial<MountOperationPrivateInitOptions>);
-	}
-
-	export interface NativeSocketAddressClassInitOptions {}
-	interface NativeSocketAddressClass {}
-	class NativeSocketAddressClass {
-		public constructor(options?: Partial<NativeSocketAddressClassInitOptions>);
-	}
-
-	export interface NativeSocketAddressPrivateInitOptions {}
-	interface NativeSocketAddressPrivate {}
-	class NativeSocketAddressPrivate {
-		public constructor(options?: Partial<NativeSocketAddressPrivateInitOptions>);
-	}
-
-	export interface NativeVolumeMonitorClassInitOptions {}
-	interface NativeVolumeMonitorClass {}
-	class NativeVolumeMonitorClass {
-		public constructor(options?: Partial<NativeVolumeMonitorClassInitOptions>);
-		public get_mount_for_mount_path: {(mount_path: string, cancellable: Cancellable): Mount;};
-	}
-
-	export interface NetworkAddressClassInitOptions {}
-	interface NetworkAddressClass {}
-	class NetworkAddressClass {
-		public constructor(options?: Partial<NetworkAddressClassInitOptions>);
-	}
-
-	export interface NetworkAddressPrivateInitOptions {}
-	interface NetworkAddressPrivate {}
-	class NetworkAddressPrivate {
-		public constructor(options?: Partial<NetworkAddressPrivateInitOptions>);
-	}
-
 	export interface NetworkMonitorInterfaceInitOptions {}
 	/**
 	 * The virtual function table for #GNetworkMonitor.
@@ -24294,18 +23572,6 @@ declare namespace imports.gi.Gio {
 		public can_reach_finish: {(monitor: NetworkMonitor, result: AsyncResult): boolean;};
 	}
 
-	export interface NetworkServiceClassInitOptions {}
-	interface NetworkServiceClass {}
-	class NetworkServiceClass {
-		public constructor(options?: Partial<NetworkServiceClassInitOptions>);
-	}
-
-	export interface NetworkServicePrivateInitOptions {}
-	interface NetworkServicePrivate {}
-	class NetworkServicePrivate {
-		public constructor(options?: Partial<NetworkServicePrivateInitOptions>);
-	}
-
 	export interface OutputMessageInitOptions {}
 	/**
 	 * Structure used for scatter/gather data output when sending multiple
@@ -24314,7 +23580,7 @@ declare namespace imports.gi.Gio {
 	 * were one buffer.
 	 * 
 	 * If #address is %NULL then the message is sent to the default receiver
-	 * (as previously set by g_socket_connect()).
+	 * (as previously set by {@link G.socket_connect}).
 	 */
 	interface OutputMessage {}
 	class OutputMessage {
@@ -24347,38 +23613,6 @@ declare namespace imports.gi.Gio {
 		public num_control_messages: number;
 	}
 
-	export interface OutputStreamClassInitOptions {}
-	interface OutputStreamClass {}
-	class OutputStreamClass {
-		public constructor(options?: Partial<OutputStreamClassInitOptions>);
-		public write_fn: {(stream: OutputStream, buffer: number[] | null, count: number, cancellable: Cancellable | null): number;};
-		public splice: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable | null): number;};
-		public flush: {(stream: OutputStream, cancellable: Cancellable | null): boolean;};
-		public close_fn: {(stream: OutputStream, cancellable: Cancellable | null): boolean;};
-		public write_async: {(stream: OutputStream, buffer: number[] | null, count: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public write_finish: {(stream: OutputStream, result: AsyncResult): number;};
-		public splice_async: {(stream: OutputStream, source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public splice_finish: {(stream: OutputStream, result: AsyncResult): number;};
-		public flush_async: {(stream: OutputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public flush_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
-		public close_async: {(stream: OutputStream, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public close_finish: {(stream: OutputStream, result: AsyncResult): boolean;};
-		public writev_fn: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, cancellable: Cancellable | null): [ boolean, number | null ];};
-		public writev_async: {(stream: OutputStream, vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public writev_finish: {(stream: OutputStream, result: AsyncResult): [ boolean, number | null ];};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-	}
-
-	export interface OutputStreamPrivateInitOptions {}
-	interface OutputStreamPrivate {}
-	class OutputStreamPrivate {
-		public constructor(options?: Partial<OutputStreamPrivateInitOptions>);
-	}
-
 	export interface OutputVectorInitOptions {}
 	/**
 	 * Structure used for scatter/gather data output.
@@ -24399,25 +23633,6 @@ declare namespace imports.gi.Gio {
 		public size: number;
 	}
 
-	export interface PermissionClassInitOptions {}
-	interface PermissionClass {}
-	class PermissionClass {
-		public constructor(options?: Partial<PermissionClassInitOptions>);
-		public readonly reserved: any[];
-		public acquire: {(permission: Permission, cancellable: Cancellable | null): boolean;};
-		public acquire_async: {(permission: Permission, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public acquire_finish: {(permission: Permission, result: AsyncResult): boolean;};
-		public release: {(permission: Permission, cancellable: Cancellable | null): boolean;};
-		public release_async: {(permission: Permission, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public release_finish: {(permission: Permission, result: AsyncResult): boolean;};
-	}
-
-	export interface PermissionPrivateInitOptions {}
-	interface PermissionPrivate {}
-	class PermissionPrivate {
-		public constructor(options?: Partial<PermissionPrivateInitOptions>);
-	}
-
 	export interface PollableInputStreamInterfaceInitOptions {}
 	/**
 	 * The interface for pollable input streams.
@@ -24425,7 +23640,7 @@ declare namespace imports.gi.Gio {
 	 * The default implementation of #can_poll always returns %TRUE.
 	 * 
 	 * The default implementation of #read_nonblocking calls
-	 * g_pollable_input_stream_is_readable(), and then calls
+	 * {@link G.pollable_input_stream_is_readable}, and then calls
 	 * g_input_stream_read() if it returns %TRUE. This means you only need
 	 * to override it if it is possible that your #is_readable
 	 * implementation may return %TRUE when the stream is not actually
@@ -24451,7 +23666,7 @@ declare namespace imports.gi.Gio {
 	 * The default implementation of #can_poll always returns %TRUE.
 	 * 
 	 * The default implementation of #write_nonblocking calls
-	 * g_pollable_output_stream_is_writable(), and then calls
+	 * {@link G.pollable_output_stream_is_writable}, and then calls
 	 * g_output_stream_write() if it returns %TRUE. This means you only
 	 * need to override it if it is possible that your #is_writable
 	 * implementation may return %TRUE when the stream is not actually
@@ -24488,43 +23703,6 @@ declare namespace imports.gi.Gio {
 		 * The parent interface.
 		 */
 		public readonly g_iface: GObject.TypeInterface;
-	}
-
-	export interface ProxyAddressClassInitOptions {}
-	/**
-	 * Class structure for #GProxyAddress.
-	 */
-	interface ProxyAddressClass {}
-	class ProxyAddressClass {
-		public constructor(options?: Partial<ProxyAddressClassInitOptions>);
-	}
-
-	export interface ProxyAddressEnumeratorClassInitOptions {}
-	/**
-	 * Class structure for #GProxyAddressEnumerator.
-	 */
-	interface ProxyAddressEnumeratorClass {}
-	class ProxyAddressEnumeratorClass {
-		public constructor(options?: Partial<ProxyAddressEnumeratorClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-	}
-
-	export interface ProxyAddressEnumeratorPrivateInitOptions {}
-	interface ProxyAddressEnumeratorPrivate {}
-	class ProxyAddressEnumeratorPrivate {
-		public constructor(options?: Partial<ProxyAddressEnumeratorPrivateInitOptions>);
-	}
-
-	export interface ProxyAddressPrivateInitOptions {}
-	interface ProxyAddressPrivate {}
-	class ProxyAddressPrivate {
-		public constructor(options?: Partial<ProxyAddressPrivateInitOptions>);
 	}
 
 	export interface ProxyInterfaceInitOptions {}
@@ -24571,34 +23749,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 		public activate_action_full: {(remote: RemoteActionGroup, action_name: string, parameter: GLib.Variant | null, platform_data: GLib.Variant): void;};
 		public change_action_state_full: {(remote: RemoteActionGroup, action_name: string, value: GLib.Variant, platform_data: GLib.Variant): void;};
-	}
-
-	export interface ResolverClassInitOptions {}
-	interface ResolverClass {}
-	class ResolverClass {
-		public constructor(options?: Partial<ResolverClassInitOptions>);
-		public reload: {(resolver: Resolver): void;};
-		public lookup_by_name: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null): GLib.List;};
-		public lookup_by_name_async: {(resolver: Resolver, hostname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_name_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_address: {(resolver: Resolver, address: InetAddress, cancellable: Cancellable | null): string;};
-		public lookup_by_address_async: {(resolver: Resolver, address: InetAddress, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_address_finish: {(resolver: Resolver, result: AsyncResult): string;};
-		public lookup_service: {(resolver: Resolver, rrname: string, cancellable: Cancellable | null): GLib.List;};
-		public lookup_service_async: {(resolver: Resolver, rrname: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_service_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_records: {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null): GLib.List;};
-		public lookup_records_async: {(resolver: Resolver, rrname: string, record_type: ResolverRecordType, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_records_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_name_with_flags_async: {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_by_name_with_flags_finish: {(resolver: Resolver, result: AsyncResult): GLib.List;};
-		public lookup_by_name_with_flags: {(resolver: Resolver, hostname: string, flags: ResolverNameLookupFlags, cancellable: Cancellable | null): GLib.List;};
-	}
-
-	export interface ResolverPrivateInitOptions {}
-	interface ResolverPrivate {}
-	class ResolverPrivate {
-		public constructor(options?: Partial<ResolverPrivateInitOptions>);
 	}
 
 	export interface ResourceInitOptions {}
@@ -24685,7 +23835,7 @@ declare namespace imports.gi.Gio {
 	 * path prefixes (like in the above example) to avoid conflicts.
 	 * 
 	 * You can then use [glib-compile-resources][glib-compile-resources] to compile the XML to a
-	 * binary bundle that you can load with g_resource_load(). However, its more common to use the --generate-source and
+	 * binary bundle that you can load with {@link G.resource_load}. However, its more common to use the --generate-source and
 	 * --generate-header arguments to create a source file and header to link directly into your application.
 	 * This will generate `get_resource()`, `register_resource()` and
 	 * `unregister_resource()` functions, prefixed by the `--c-name` argument passed
@@ -24749,7 +23899,7 @@ declare namespace imports.gi.Gio {
 		 * the data should not be modified or freed.
 		 * 
 		 * If you want to use this resource in the global resource namespace you need
-		 * to register it with g_resources_register().
+		 * to register it with {@link G.resources_register}.
 		 * 
 		 * Note: #data must be backed by memory that is at least pointer aligned.
 		 * Otherwise this function will internally create a copy of the memory since
@@ -24763,7 +23913,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Registers the resource with the process-global set of resources.
 		 * Once a resource is registered the files in it can be accessed
-		 * with the global resource lookup functions like g_resources_lookup_data().
+		 * with the global resource lookup functions like {@link G.resources_lookup_data}.
 		 */
 		public _register(): void;
 		/**
@@ -24773,7 +23923,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Returns all the names of children at the specified #path in the resource.
 		 * The return result is a %NULL terminated list of strings which should
-		 * be released with g_strfreev().
+		 * be released with {@link G.strfreev}.
 		 * 
 		 * If #path is invalid or does not exist in the #GResource,
 		 * %G_RESOURCE_ERROR_NOT_FOUND will be returned.
@@ -24818,7 +23968,7 @@ declare namespace imports.gi.Gio {
 		 * @param path A pathname inside the resource
 		 * @param lookup_flags A #GResourceLookupFlags
 		 * @returns #GBytes or %NULL on error.
-		 *     Free the returned object with g_bytes_unref()
+		 *     Free the returned object with {@link G.bytes_unref}
 		 */
 		public lookup_data(path: string, lookup_flags: ResourceLookupFlags): GLib.Bytes;
 		/**
@@ -24829,7 +23979,7 @@ declare namespace imports.gi.Gio {
 		 * @param path A pathname inside the resource
 		 * @param lookup_flags A #GResourceLookupFlags
 		 * @returns #GInputStream or %NULL on error.
-		 *     Free the returned object with g_object_unref()
+		 *     Free the returned object with {@link GObject.unref}
 		 */
 		public open_stream(path: string, lookup_flags: ResourceLookupFlags): InputStream;
 		/**
@@ -24863,49 +24013,6 @@ declare namespace imports.gi.Gio {
 		public seek: {(seekable: Seekable, offset: number, type: GLib.SeekType, cancellable: Cancellable | null): boolean;};
 		public can_truncate: {(seekable: Seekable): boolean;};
 		public truncate_fn: {(seekable: Seekable, offset: number, cancellable: Cancellable | null): boolean;};
-	}
-
-	export interface SettingsBackendClassInitOptions {}
-	/**
-	 * Class structure for #GSettingsBackend.
-	 */
-	interface SettingsBackendClass {}
-	class SettingsBackendClass {
-		public constructor(options?: Partial<SettingsBackendClassInitOptions>);
-		public readonly padding: any[];
-		public read: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType, default_value: boolean): GLib.Variant;};
-		public get_writable: {(backend: SettingsBackend, key: string): boolean;};
-		public write: {(backend: SettingsBackend, key: string, value: GLib.Variant, origin_tag: any | null): boolean;};
-		public write_tree: {(backend: SettingsBackend, tree: GLib.Tree, origin_tag: any | null): boolean;};
-		public reset: {(backend: SettingsBackend, key: string, origin_tag: any | null): void;};
-		public subscribe: {(backend: SettingsBackend, name: string): void;};
-		public unsubscribe: {(backend: SettingsBackend, name: string): void;};
-		public sync: {(backend: SettingsBackend): void;};
-		public get_permission: {(backend: SettingsBackend, path: string): Permission;};
-		public read_user_value: {(backend: SettingsBackend, key: string, expected_type: GLib.VariantType): GLib.Variant;};
-	}
-
-	export interface SettingsBackendPrivateInitOptions {}
-	interface SettingsBackendPrivate {}
-	class SettingsBackendPrivate {
-		public constructor(options?: Partial<SettingsBackendPrivateInitOptions>);
-	}
-
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
-		public readonly padding: any[];
-		public writable_changed: {(settings: Settings, key: string): void;};
-		public changed: {(settings: Settings, key: string): void;};
-		public writable_change_event: {(settings: Settings, key: GLib.Quark): boolean;};
-		public change_event: {(settings: Settings, keys: GLib.Quark, n_keys: number): boolean;};
-	}
-
-	export interface SettingsPrivateInitOptions {}
-	interface SettingsPrivate {}
-	class SettingsPrivate {
-		public constructor(options?: Partial<SettingsPrivateInitOptions>);
 	}
 
 	export interface SettingsSchemaInitOptions {}
@@ -25013,7 +24120,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the key named #name from #schema.
 		 * 
 		 * It is a programmer error to request a key that does not exist.  See
-		 * g_settings_schema_list_keys().
+		 * {@link G.settings_schema_list_keys}.
 		 * @param name the name of a key
 		 * @returns the #GSettingsSchemaKey for #name
 		 */
@@ -25040,7 +24147,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the list of children in #schema.
 		 * 
-		 * You should free the return value with g_strfreev() when you are done
+		 * You should free the return value with {@link G.strfreev} when you are done
 		 * with it.
 		 * @returns a list of the children on
 		 *    #settings, in no defined order
@@ -25141,7 +24248,7 @@ declare namespace imports.gi.Gio {
 		 * format may change in any way in the future -- but particularly, new
 		 * forms may be added to the possibilities described above.
 		 * 
-		 * You should free the returned value with g_variant_unref() when it is
+		 * You should free the returned value with {@link G.variant_unref} when it is
 		 * no longer needed.
 		 * @returns a #GVariant describing the range
 		 */
@@ -25217,7 +24324,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #parent is non-%NULL then there are two effects.
 		 * 
-		 * First, if g_settings_schema_source_lookup() is called with the
+		 * First, if {@link G.settings_schema_source_lookup} is called with the
 		 * #recursive flag set to %TRUE and the schema can not be found in the
 		 * source, the lookup will recurse to the parent.
 		 * 
@@ -25242,7 +24349,7 @@ declare namespace imports.gi.Gio {
 		 * probably want %TRUE.
 		 * 
 		 * Non-relocatable schemas are those for which you can call
-		 * g_settings_new().  Relocatable schemas are those for which you must
+		 * {@link G.settings_new}.  Relocatable schemas are those for which you must
 		 * use g_settings_new_with_path().
 		 * 
 		 * Do not call this function from normal programs.  This is designed for
@@ -25282,96 +24389,6 @@ declare namespace imports.gi.Gio {
 		public unref(): void;
 	}
 
-	export interface SimpleActionGroupClassInitOptions {}
-	interface SimpleActionGroupClass {}
-	class SimpleActionGroupClass {
-		public constructor(options?: Partial<SimpleActionGroupClassInitOptions>);
-		public readonly padding: any[];
-	}
-
-	export interface SimpleActionGroupPrivateInitOptions {}
-	interface SimpleActionGroupPrivate {}
-	class SimpleActionGroupPrivate {
-		public constructor(options?: Partial<SimpleActionGroupPrivateInitOptions>);
-	}
-
-	export interface SimpleAsyncResultClassInitOptions {}
-	interface SimpleAsyncResultClass {}
-	class SimpleAsyncResultClass {
-		public constructor(options?: Partial<SimpleAsyncResultClassInitOptions>);
-	}
-
-	export interface SimpleProxyResolverClassInitOptions {}
-	interface SimpleProxyResolverClass {}
-	class SimpleProxyResolverClass {
-		public constructor(options?: Partial<SimpleProxyResolverClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface SimpleProxyResolverPrivateInitOptions {}
-	interface SimpleProxyResolverPrivate {}
-	class SimpleProxyResolverPrivate {
-		public constructor(options?: Partial<SimpleProxyResolverPrivateInitOptions>);
-	}
-
-	export interface SocketAddressClassInitOptions {}
-	interface SocketAddressClass {}
-	class SocketAddressClass {
-		public constructor(options?: Partial<SocketAddressClassInitOptions>);
-		public get_family: {(address: SocketAddress): SocketFamily;};
-		public get_native_size: {(address: SocketAddress): number;};
-		public to_native: {(address: SocketAddress, dest: any | null, destlen: number): boolean;};
-	}
-
-	export interface SocketAddressEnumeratorClassInitOptions {}
-	/**
-	 * Class structure for #GSocketAddressEnumerator.
-	 */
-	interface SocketAddressEnumeratorClass {}
-	class SocketAddressEnumeratorClass {
-		public constructor(options?: Partial<SocketAddressEnumeratorClassInitOptions>);
-		public next: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null): SocketAddress;};
-		public next_async: {(enumerator: SocketAddressEnumerator, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public next_finish: {(enumerator: SocketAddressEnumerator, result: AsyncResult): SocketAddress;};
-	}
-
-	export interface SocketClassInitOptions {}
-	interface SocketClass {}
-	class SocketClass {
-		public constructor(options?: Partial<SocketClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-		public _g_reserved7: {(): void;};
-		public _g_reserved8: {(): void;};
-		public _g_reserved9: {(): void;};
-		public _g_reserved10: {(): void;};
-	}
-
-	export interface SocketClientClassInitOptions {}
-	interface SocketClientClass {}
-	class SocketClientClass {
-		public constructor(options?: Partial<SocketClientClassInitOptions>);
-		public event: {(client: SocketClient, event: SocketClientEvent, connectable: SocketConnectable, connection: IOStream): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-	}
-
-	export interface SocketClientPrivateInitOptions {}
-	interface SocketClientPrivate {}
-	class SocketClientPrivate {
-		public constructor(options?: Partial<SocketClientPrivateInitOptions>);
-	}
-
 	export interface SocketConnectableIfaceInitOptions {}
 	/**
 	 * Provides an interface for returning a #GSocketAddressEnumerator
@@ -25389,99 +24406,6 @@ declare namespace imports.gi.Gio {
 		public to_string: {(connectable: SocketConnectable): string;};
 	}
 
-	export interface SocketConnectionClassInitOptions {}
-	interface SocketConnectionClass {}
-	class SocketConnectionClass {
-		public constructor(options?: Partial<SocketConnectionClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketConnectionPrivateInitOptions {}
-	interface SocketConnectionPrivate {}
-	class SocketConnectionPrivate {
-		public constructor(options?: Partial<SocketConnectionPrivateInitOptions>);
-	}
-
-	export interface SocketControlMessageClassInitOptions {}
-	/**
-	 * Class structure for #GSocketControlMessage.
-	 */
-	interface SocketControlMessageClass {}
-	class SocketControlMessageClass {
-		public constructor(options?: Partial<SocketControlMessageClassInitOptions>);
-		public get_size: {(message: SocketControlMessage): number;};
-		public get_level: {(message: SocketControlMessage): number;};
-		public get_type: {(message: SocketControlMessage): number;};
-		public serialize: {(message: SocketControlMessage, data: any): void;};
-		public deserialize: {(level: number, type: number, size: number, data: any): SocketControlMessage;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface SocketControlMessagePrivateInitOptions {}
-	interface SocketControlMessagePrivate {}
-	class SocketControlMessagePrivate {
-		public constructor(options?: Partial<SocketControlMessagePrivateInitOptions>);
-	}
-
-	export interface SocketListenerClassInitOptions {}
-	/**
-	 * Class structure for #GSocketListener.
-	 */
-	interface SocketListenerClass {}
-	class SocketListenerClass {
-		public constructor(options?: Partial<SocketListenerClassInitOptions>);
-		public changed: {(listener: SocketListener): void;};
-		public event: {(listener: SocketListener, event: SocketListenerEvent, socket: Socket): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketListenerPrivateInitOptions {}
-	interface SocketListenerPrivate {}
-	class SocketListenerPrivate {
-		public constructor(options?: Partial<SocketListenerPrivateInitOptions>);
-	}
-
-	export interface SocketPrivateInitOptions {}
-	interface SocketPrivate {}
-	class SocketPrivate {
-		public constructor(options?: Partial<SocketPrivateInitOptions>);
-	}
-
-	export interface SocketServiceClassInitOptions {}
-	/**
-	 * Class structure for #GSocketService.
-	 */
-	interface SocketServiceClass {}
-	class SocketServiceClass {
-		public constructor(options?: Partial<SocketServiceClassInitOptions>);
-		public incoming: {(service: SocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface SocketServicePrivateInitOptions {}
-	interface SocketServicePrivate {}
-	class SocketServicePrivate {
-		public constructor(options?: Partial<SocketServicePrivateInitOptions>);
-	}
-
 	export interface SrvTargetInitOptions {}
 	/**
 	 * SRV (service) records are used by some network protocols to provide
@@ -25492,7 +24416,7 @@ declare namespace imports.gi.Gio {
 	 * would look up the "xmpp-client" SRV record for "example.com", and
 	 * then connect to whatever host was pointed to by that record.
 	 * 
-	 * You can use g_resolver_lookup_service() or
+	 * You can use {@link G.resolver_lookup_service} or
 	 * g_resolver_lookup_service_async() to find the #GSrvTargets
 	 * for a given service. However, if you are simply planning to connect
 	 * to the remote service, you can use #GNetworkService's
@@ -25525,7 +24449,7 @@ declare namespace imports.gi.Gio {
 		public free(): void;
 		/**
 		 * Gets #target's hostname (in ASCII form; if you are going to present
-		 * this to the user, you should use g_hostname_is_ascii_encoded() to
+		 * this to the user, you should use {@link G.hostname_is_ascii_encoded} to
 		 * check if it contains encoded Unicode segments, and use
 		 * g_hostname_to_unicode() to convert it if it does.)
 		 * @returns #target's hostname
@@ -25566,7 +24490,7 @@ declare namespace imports.gi.Gio {
 		public readonly next: StaticResource;
 		public readonly padding: any;
 		/**
-		 * Finalized a GResource initialized by g_static_resource_init().
+		 * Finalized a GResource initialized by {@link G.static_resource_init}.
 		 * 
 		 * This is normally used by code generated by
 		 * [glib-compile-resources][glib-compile-resources]
@@ -25574,7 +24498,7 @@ declare namespace imports.gi.Gio {
 		 */
 		public fini(): void;
 		/**
-		 * Gets the GResource that was registered by a call to g_static_resource_init().
+		 * Gets the GResource that was registered by a call to {@link G.static_resource_init}.
 		 * 
 		 * This is normally used by code generated by
 		 * [glib-compile-resources][glib-compile-resources]
@@ -25591,60 +24515,6 @@ declare namespace imports.gi.Gio {
 		 * and is not typically used by other code.
 		 */
 		public init(): void;
-	}
-
-	export interface TaskClassInitOptions {}
-	interface TaskClass {}
-	class TaskClass {
-		public constructor(options?: Partial<TaskClassInitOptions>);
-	}
-
-	export interface TcpConnectionClassInitOptions {}
-	interface TcpConnectionClass {}
-	class TcpConnectionClass {
-		public constructor(options?: Partial<TcpConnectionClassInitOptions>);
-	}
-
-	export interface TcpConnectionPrivateInitOptions {}
-	interface TcpConnectionPrivate {}
-	class TcpConnectionPrivate {
-		public constructor(options?: Partial<TcpConnectionPrivateInitOptions>);
-	}
-
-	export interface TcpWrapperConnectionClassInitOptions {}
-	interface TcpWrapperConnectionClass {}
-	class TcpWrapperConnectionClass {
-		public constructor(options?: Partial<TcpWrapperConnectionClassInitOptions>);
-	}
-
-	export interface TcpWrapperConnectionPrivateInitOptions {}
-	interface TcpWrapperConnectionPrivate {}
-	class TcpWrapperConnectionPrivate {
-		public constructor(options?: Partial<TcpWrapperConnectionPrivateInitOptions>);
-	}
-
-	export interface ThemedIconClassInitOptions {}
-	interface ThemedIconClass {}
-	class ThemedIconClass {
-		public constructor(options?: Partial<ThemedIconClassInitOptions>);
-	}
-
-	export interface ThreadedSocketServiceClassInitOptions {}
-	interface ThreadedSocketServiceClass {}
-	class ThreadedSocketServiceClass {
-		public constructor(options?: Partial<ThreadedSocketServiceClassInitOptions>);
-		public run: {(service: ThreadedSocketService, connection: SocketConnection, source_object: GObject.Object): boolean;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface ThreadedSocketServicePrivateInitOptions {}
-	interface ThreadedSocketServicePrivate {}
-	class ThreadedSocketServicePrivate {
-		public constructor(options?: Partial<ThreadedSocketServicePrivateInitOptions>);
 	}
 
 	export interface TlsBackendInterfaceInitOptions {}
@@ -25669,20 +24539,6 @@ declare namespace imports.gi.Gio {
 		public get_dtls_server_connection_type: {(): GObject.Type;};
 	}
 
-	export interface TlsCertificateClassInitOptions {}
-	interface TlsCertificateClass {}
-	class TlsCertificateClass {
-		public constructor(options?: Partial<TlsCertificateClassInitOptions>);
-		public readonly padding: any[];
-		public verify: {(cert: TlsCertificate, identity: SocketConnectable | null, trusted_ca: TlsCertificate | null): TlsCertificateFlags;};
-	}
-
-	export interface TlsCertificatePrivateInitOptions {}
-	interface TlsCertificatePrivate {}
-	class TlsCertificatePrivate {
-		public constructor(options?: Partial<TlsCertificatePrivateInitOptions>);
-	}
-
 	export interface TlsClientConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsClientConnection implementation.
@@ -25695,59 +24551,6 @@ declare namespace imports.gi.Gio {
 		 */
 		public readonly g_iface: GObject.TypeInterface;
 		public copy_session_state: {(conn: TlsClientConnection, source: TlsClientConnection): void;};
-	}
-
-	export interface TlsConnectionClassInitOptions {}
-	/**
-	 * The class structure for the #GTlsConnection type.
-	 */
-	interface TlsConnectionClass {}
-	class TlsConnectionClass {
-		public constructor(options?: Partial<TlsConnectionClassInitOptions>);
-		public readonly padding: any[];
-		public accept_certificate: {(connection: TlsConnection, peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;};
-		public handshake: {(conn: TlsConnection, cancellable: Cancellable | null): boolean;};
-		public handshake_async: {(conn: TlsConnection, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public handshake_finish: {(conn: TlsConnection, result: AsyncResult): boolean;};
-		public get_binding_data: {(conn: TlsConnection, type: TlsChannelBindingType, data: number[]): boolean;};
-		public get_negotiated_protocol: {(conn: TlsConnection): string | null;};
-	}
-
-	export interface TlsConnectionPrivateInitOptions {}
-	interface TlsConnectionPrivate {}
-	class TlsConnectionPrivate {
-		public constructor(options?: Partial<TlsConnectionPrivateInitOptions>);
-	}
-
-	export interface TlsDatabaseClassInitOptions {}
-	/**
-	 * The class for #GTlsDatabase. Derived classes should implement the various
-	 * virtual methods. _async and _finish methods have a default
-	 * implementation that runs the corresponding sync method in a thread.
-	 */
-	interface TlsDatabaseClass {}
-	class TlsDatabaseClass {
-		public constructor(options?: Partial<TlsDatabaseClassInitOptions>);
-		public readonly padding: any[];
-		public verify_chain: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null): TlsCertificateFlags;};
-		public verify_chain_async: {(self: TlsDatabase, chain: TlsCertificate, purpose: string, identity: SocketConnectable | null, interaction: TlsInteraction | null, flags: TlsDatabaseVerifyFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public verify_chain_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificateFlags;};
-		public create_certificate_handle: {(self: TlsDatabase, certificate: TlsCertificate): string | null;};
-		public lookup_certificate_for_handle: {(self: TlsDatabase, handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate | null;};
-		public lookup_certificate_for_handle_async: {(self: TlsDatabase, handle: string, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificate_for_handle_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificate;};
-		public lookup_certificate_issuer: {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): TlsCertificate;};
-		public lookup_certificate_issuer_async: {(self: TlsDatabase, certificate: TlsCertificate, interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificate_issuer_finish: {(self: TlsDatabase, result: AsyncResult): TlsCertificate;};
-		public lookup_certificates_issued_by: {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null): GLib.List;};
-		public lookup_certificates_issued_by_async: {(self: TlsDatabase, issuer_raw_dn: number[], interaction: TlsInteraction | null, flags: TlsDatabaseLookupFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public lookup_certificates_issued_by_finish: {(self: TlsDatabase, result: AsyncResult): GLib.List;};
-	}
-
-	export interface TlsDatabasePrivateInitOptions {}
-	interface TlsDatabasePrivate {}
-	class TlsDatabasePrivate {
-		public constructor(options?: Partial<TlsDatabasePrivateInitOptions>);
 	}
 
 	export interface TlsFileDatabaseInterfaceInitOptions {}
@@ -25764,60 +24567,6 @@ declare namespace imports.gi.Gio {
 		public readonly padding: any[];
 	}
 
-	export interface TlsInteractionClassInitOptions {}
-	/**
-	 * The class for #GTlsInteraction. Derived classes implement the various
-	 * virtual interaction methods to handle TLS interactions.
-	 * 
-	 * Derived classes can choose to implement whichever interactions methods they'd
-	 * like to support by overriding those virtual methods in their class
-	 * initialization function. If a derived class implements an async method,
-	 * it must also implement the corresponding finish method.
-	 * 
-	 * The synchronous interaction methods should implement to display modal dialogs,
-	 * and the asynchronous methods to display modeless dialogs.
-	 * 
-	 * If the user cancels an interaction, then the result should be
-	 * %G_TLS_INTERACTION_FAILED and the error should be set with a domain of
-	 * %G_IO_ERROR and code of %G_IO_ERROR_CANCELLED.
-	 */
-	interface TlsInteractionClass {}
-	class TlsInteractionClass {
-		public constructor(options?: Partial<TlsInteractionClassInitOptions>);
-		public readonly padding: any[];
-		public ask_password: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null): TlsInteractionResult;};
-		public ask_password_async: {(interaction: TlsInteraction, password: TlsPassword, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public ask_password_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
-		public request_certificate: {(interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null): TlsInteractionResult;};
-		public request_certificate_async: {(interaction: TlsInteraction, connection: TlsConnection, flags: TlsCertificateRequestFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;};
-		public request_certificate_finish: {(interaction: TlsInteraction, result: AsyncResult): TlsInteractionResult;};
-	}
-
-	export interface TlsInteractionPrivateInitOptions {}
-	interface TlsInteractionPrivate {}
-	class TlsInteractionPrivate {
-		public constructor(options?: Partial<TlsInteractionPrivateInitOptions>);
-	}
-
-	export interface TlsPasswordClassInitOptions {}
-	/**
-	 * Class structure for #GTlsPassword.
-	 */
-	interface TlsPasswordClass {}
-	class TlsPasswordClass {
-		public constructor(options?: Partial<TlsPasswordClassInitOptions>);
-		public readonly padding: any[];
-		public get_value: {(password: TlsPassword): [ number[], number ];};
-		public set_value: {(password: TlsPassword, value: number[], length: number, destroy: GLib.DestroyNotify | null): void;};
-		public get_default_warning: {(password: TlsPassword): string;};
-	}
-
-	export interface TlsPasswordPrivateInitOptions {}
-	interface TlsPasswordPrivate {}
-	class TlsPasswordPrivate {
-		public constructor(options?: Partial<TlsPasswordPrivateInitOptions>);
-	}
-
 	export interface TlsServerConnectionInterfaceInitOptions {}
 	/**
 	 * vtable for a #GTlsServerConnection implementation.
@@ -25831,83 +24580,6 @@ declare namespace imports.gi.Gio {
 		public readonly g_iface: GObject.TypeInterface;
 	}
 
-	export interface UnixConnectionClassInitOptions {}
-	interface UnixConnectionClass {}
-	class UnixConnectionClass {
-		public constructor(options?: Partial<UnixConnectionClassInitOptions>);
-	}
-
-	export interface UnixConnectionPrivateInitOptions {}
-	interface UnixConnectionPrivate {}
-	class UnixConnectionPrivate {
-		public constructor(options?: Partial<UnixConnectionPrivateInitOptions>);
-	}
-
-	export interface UnixCredentialsMessageClassInitOptions {}
-	/**
-	 * Class structure for #GUnixCredentialsMessage.
-	 */
-	interface UnixCredentialsMessageClass {}
-	class UnixCredentialsMessageClass {
-		public constructor(options?: Partial<UnixCredentialsMessageClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface UnixCredentialsMessagePrivateInitOptions {}
-	interface UnixCredentialsMessagePrivate {}
-	class UnixCredentialsMessagePrivate {
-		public constructor(options?: Partial<UnixCredentialsMessagePrivateInitOptions>);
-	}
-
-	export interface UnixFDListClassInitOptions {}
-	interface UnixFDListClass {}
-	class UnixFDListClass {
-		public constructor(options?: Partial<UnixFDListClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixFDListPrivateInitOptions {}
-	interface UnixFDListPrivate {}
-	class UnixFDListPrivate {
-		public constructor(options?: Partial<UnixFDListPrivateInitOptions>);
-	}
-
-	export interface UnixFDMessageClassInitOptions {}
-	interface UnixFDMessageClass {}
-	class UnixFDMessageClass {
-		public constructor(options?: Partial<UnixFDMessageClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-	}
-
-	export interface UnixFDMessagePrivateInitOptions {}
-	interface UnixFDMessagePrivate {}
-	class UnixFDMessagePrivate {
-		public constructor(options?: Partial<UnixFDMessagePrivateInitOptions>);
-	}
-
-	export interface UnixInputStreamClassInitOptions {}
-	interface UnixInputStreamClass {}
-	class UnixInputStreamClass {
-		public constructor(options?: Partial<UnixInputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixInputStreamPrivateInitOptions {}
-	interface UnixInputStreamPrivate {}
-	class UnixInputStreamPrivate {
-		public constructor(options?: Partial<UnixInputStreamPrivateInitOptions>);
-	}
-
 	export interface UnixMountEntryInitOptions {}
 	/**
 	 * Defines a Unix mount entry (e.g. <filename>/media/cdrom</filename>).
@@ -25916,12 +24588,6 @@ declare namespace imports.gi.Gio {
 	interface UnixMountEntry {}
 	class UnixMountEntry {
 		public constructor(options?: Partial<UnixMountEntryInitOptions>);
-	}
-
-	export interface UnixMountMonitorClassInitOptions {}
-	interface UnixMountMonitorClass {}
-	class UnixMountMonitorClass {
-		public constructor(options?: Partial<UnixMountMonitorClassInitOptions>);
 	}
 
 	export interface UnixMountPointInitOptions {}
@@ -25982,7 +24648,7 @@ declare namespace imports.gi.Gio {
 		 * Guesses the name of a Unix mount point.
 		 * The result is a translated string.
 		 * @returns A newly allocated string that must
-		 *     be freed with g_free()
+		 *     be freed with {@link G.free}
 		 */
 		public guess_name(): string;
 		/**
@@ -26005,58 +24671,6 @@ declare namespace imports.gi.Gio {
 		 * @returns %TRUE if the mount point is user mountable.
 		 */
 		public is_user_mountable(): boolean;
-	}
-
-	export interface UnixOutputStreamClassInitOptions {}
-	interface UnixOutputStreamClass {}
-	class UnixOutputStreamClass {
-		public constructor(options?: Partial<UnixOutputStreamClassInitOptions>);
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-	}
-
-	export interface UnixOutputStreamPrivateInitOptions {}
-	interface UnixOutputStreamPrivate {}
-	class UnixOutputStreamPrivate {
-		public constructor(options?: Partial<UnixOutputStreamPrivateInitOptions>);
-	}
-
-	export interface UnixSocketAddressClassInitOptions {}
-	interface UnixSocketAddressClass {}
-	class UnixSocketAddressClass {
-		public constructor(options?: Partial<UnixSocketAddressClassInitOptions>);
-	}
-
-	export interface UnixSocketAddressPrivateInitOptions {}
-	interface UnixSocketAddressPrivate {}
-	class UnixSocketAddressPrivate {
-		public constructor(options?: Partial<UnixSocketAddressPrivateInitOptions>);
-	}
-
-	export interface VfsClassInitOptions {}
-	interface VfsClass {}
-	class VfsClass {
-		public constructor(options?: Partial<VfsClassInitOptions>);
-		public is_active: {(vfs: Vfs): boolean;};
-		public get_file_for_path: {(vfs: Vfs, path: string): File;};
-		public get_file_for_uri: {(vfs: Vfs, uri: string): File;};
-		public get_supported_uri_schemes: {(vfs: Vfs): string[];};
-		public parse_name: {(vfs: Vfs, parse_name: string): File;};
-		public local_file_add_info: {(vfs: Vfs, filename: string, device: number, attribute_matcher: FileAttributeMatcher, info: FileInfo, cancellable: Cancellable | null, extra_data: any | null, free_extra_data: GLib.DestroyNotify): void;};
-		public add_writable_namespaces: {(vfs: Vfs, list: FileAttributeInfoList): void;};
-		public local_file_set_attributes: {(vfs: Vfs, filename: string, info: FileInfo, flags: FileQueryInfoFlags, cancellable: Cancellable | null): boolean;};
-		public local_file_removed: {(vfs: Vfs, filename: string): void;};
-		public local_file_moved: {(vfs: Vfs, source: string, dest: string): void;};
-		public deserialize_icon: {(vfs: Vfs, value: GLib.Variant): Icon;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
 	}
 
 	export interface VolumeIfaceInitOptions {}
@@ -26093,49 +24707,6 @@ declare namespace imports.gi.Gio {
 		public get_symbolic_icon: {(volume: Volume): Icon;};
 	}
 
-	export interface VolumeMonitorClassInitOptions {}
-	interface VolumeMonitorClass {}
-	class VolumeMonitorClass {
-		public constructor(options?: Partial<VolumeMonitorClassInitOptions>);
-		public volume_added: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public volume_removed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public volume_changed: {(volume_monitor: VolumeMonitor, volume: Volume): void;};
-		public mount_added: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_removed: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_pre_unmount: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public mount_changed: {(volume_monitor: VolumeMonitor, mount: Mount): void;};
-		public drive_connected: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_disconnected: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_changed: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public is_supported: {(): boolean;};
-		public get_connected_drives: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_volumes: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_mounts: {(volume_monitor: VolumeMonitor): GLib.List;};
-		public get_volume_for_uuid: {(volume_monitor: VolumeMonitor, uuid: string): Volume | null;};
-		public get_mount_for_uuid: {(volume_monitor: VolumeMonitor, uuid: string): Mount | null;};
-		public adopt_orphan_mount: {(mount: Mount, volume_monitor: VolumeMonitor): Volume;};
-		public drive_eject_button: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public drive_stop_button: {(volume_monitor: VolumeMonitor, drive: Drive): void;};
-		public _g_reserved1: {(): void;};
-		public _g_reserved2: {(): void;};
-		public _g_reserved3: {(): void;};
-		public _g_reserved4: {(): void;};
-		public _g_reserved5: {(): void;};
-		public _g_reserved6: {(): void;};
-	}
-
-	export interface ZlibCompressorClassInitOptions {}
-	interface ZlibCompressorClass {}
-	class ZlibCompressorClass {
-		public constructor(options?: Partial<ZlibCompressorClassInitOptions>);
-	}
-
-	export interface ZlibDecompressorClassInitOptions {}
-	interface ZlibDecompressorClass {}
-	class ZlibDecompressorClass {
-		public constructor(options?: Partial<ZlibDecompressorClassInitOptions>);
-	}
-
 	/** This construct is only for enabling class multi-inheritance,
 	 * use {@link Action} instead.
 	 */
@@ -26143,7 +24714,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * If #action is currently enabled.
 		 * 
-		 * If the action is disabled then calls to g_action_activate() and
+		 * If the action is disabled then calls to {@link G.action_activate} and
 		 * g_action_change_state() have no effect.
 		 */
 		readonly enabled: boolean;
@@ -26182,7 +24753,7 @@ declare namespace imports.gi.Gio {
 		 * Request for the state of #action to be changed to #value.
 		 * 
 		 * The action must be stateful and #value must be of the correct type.
-		 * See g_action_get_state_type().
+		 * See {@link G.action_get_state_type}.
 		 * 
 		 * This call merely requests a change.  The action may refuse to change
 		 * its state or may change its state to something other than #value.
@@ -26209,7 +24780,7 @@ declare namespace imports.gi.Gio {
 		 * Queries the type of the parameter that must be given when activating
 		 * #action.
 		 * 
-		 * When activating the action using g_action_activate(), the #GVariant
+		 * When activating the action using {@link G.action_activate}, the #GVariant
 		 * given to that function must be of the type returned by this function.
 		 * 
 		 * In the case that this function returns %NULL, you must not give any
@@ -26222,7 +24793,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If the action is not stateful then %NULL will be returned.  If the
 		 * action is stateful then the type of the return value is the type
-		 * given by g_action_get_state_type().
+		 * given by {@link G.action_get_state_type}.
 		 * 
 		 * The return value (if non-%NULL) should be freed with
 		 * g_variant_unref() when it is no longer required.
@@ -26247,7 +24818,7 @@ declare namespace imports.gi.Gio {
 		 * within the range may fail.
 		 * 
 		 * The return value (if non-%NULL) should be freed with
-		 * g_variant_unref() when it is no longer required.
+		 * {@link G.variant_unref} when it is no longer required.
 		 * @returns the state range hint
 		 */
 		get_state_hint(): GLib.Variant | null;
@@ -26255,7 +24826,7 @@ declare namespace imports.gi.Gio {
 		 * Queries the type of the state of #action.
 		 * 
 		 * If the action is stateful (e.g. created with
-		 * g_simple_action_new_stateful()) then this function returns the
+		 * {@link G.simple_action_new_stateful}) then this function returns the
 		 * #GVariantType of the state.  This is the type of the initial value
 		 * given as the state. All calls to g_action_change_state() must give a
 		 * #GVariant of this type and g_action_get_state() will return a
@@ -26293,7 +24864,7 @@ declare namespace imports.gi.Gio {
 	 * #GAction represents a single named action.
 	 * 
 	 * The main interface to an action is that it can be activated with
-	 * g_action_activate().  This results in the 'activate' signal being
+	 * {@link G.action_activate}.  This results in the 'activate' signal being
 	 * emitted.  An activation has a #GVariant parameter (which may be
 	 * %NULL).  The correct type for the parameter is determined by a static
 	 * parameter type (which is given at construction time).
@@ -26355,7 +24926,7 @@ declare namespace imports.gi.Gio {
 		 * The third format is used to represent an action with any type of
 		 * target value, including strings.  The target value follows the action
 		 * name, surrounded in parens.  For example: "app.action(42)".  The
-		 * target value is parsed using g_variant_parse().  If a tuple-typed
+		 * target value is parsed using {@link G.variant_parse}.  If a tuple-typed
 		 * value is desired, it must be specified in the same way, resulting in
 		 * two sets of parens, for example: "app.action((1,2,3))".  A string
 		 * target can be specified this way as well: "app.action('target')".
@@ -26374,7 +24945,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * It is an error to call this function with an invalid action name.
 		 * 
-		 * This function is the opposite of g_action_parse_detailed_name().
+		 * This function is the opposite of {@link G.action_parse_detailed_name}.
 		 * It will produce a string that can be parsed back to the #action_name
 		 * and #target_value by that function.
 		 * 
@@ -26429,7 +25000,7 @@ declare namespace imports.gi.Gio {
 		 * If the action is expecting a parameter, then the correct type of
 		 * parameter must be given as #parameter.  If the action is expecting no
 		 * parameters then #parameter must be %NULL.  See
-		 * g_action_group_get_action_parameter_type().
+		 * {@link G.action_group_get_action_parameter_type}.
 		 * 
 		 * If the #GActionGroup implementation supports asynchronous remote
 		 * activation over D-Bus, this call may return before the relevant
@@ -26466,7 +25037,7 @@ declare namespace imports.gi.Gio {
 		 * changed to #value.
 		 * 
 		 * The action must be stateful and #value must be of the correct type.
-		 * See g_action_group_get_action_state_type().
+		 * See {@link G.action_group_get_action_state_type}.
 		 * 
 		 * This call merely requests a change.  The action may refuse to change
 		 * its state or may change its state to something other than #value.
@@ -26490,7 +25061,7 @@ declare namespace imports.gi.Gio {
 		 * Queries the type of the parameter that must be given when activating
 		 * the named action within #action_group.
 		 * 
-		 * When activating the action using g_action_group_activate_action(),
+		 * When activating the action using {@link G.action_group_activate_action},
 		 * the #GVariant given to that function must be of the type returned
 		 * by this function.
 		 * 
@@ -26509,7 +25080,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If the action is not stateful then %NULL will be returned.  If the
 		 * action is stateful then the type of the return value is the type
-		 * given by g_action_group_get_action_state_type().
+		 * given by {@link G.action_group_get_action_state_type}.
 		 * 
 		 * The return value (if non-%NULL) should be freed with
 		 * g_variant_unref() when it is no longer required.
@@ -26535,7 +25106,7 @@ declare namespace imports.gi.Gio {
 		 * within the range may fail.
 		 * 
 		 * The return value (if non-%NULL) should be freed with
-		 * g_variant_unref() when it is no longer required.
+		 * {@link G.variant_unref} when it is no longer required.
 		 * @param action_name the name of the action to query
 		 * @returns the state range hint
 		 */
@@ -26546,7 +25117,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If the action is stateful then this function returns the
 		 * #GVariantType of the state.  All calls to
-		 * g_action_group_change_action_state() must give a #GVariant of this
+		 * {@link G.action_group_change_action_state} must give a #GVariant of this
 		 * type and g_action_group_get_action_state() will return a #GVariant
 		 * of the same type.
 		 * 
@@ -26570,7 +25141,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Lists the actions contained within #action_group.
 		 * 
-		 * The caller is responsible for freeing the list with g_strfreev() when
+		 * The caller is responsible for freeing the list with {@link G.strfreev} when
 		 * it is no longer required.
 		 * @returns a %NULL-terminated array of the names of the
 		 * actions in the group
@@ -26580,7 +25151,7 @@ declare namespace imports.gi.Gio {
 		 * Queries all aspects of the named action within an #action_group.
 		 * 
 		 * This function acquires the information available from
-		 * g_action_group_has_action(), g_action_group_get_action_enabled(),
+		 * {@link G.action_group_has_action}, g_action_group_get_action_enabled(),
 		 * g_action_group_get_action_parameter_type(),
 		 * g_action_group_get_action_state_type(),
 		 * g_action_group_get_action_state_hint() and
@@ -26684,7 +25255,7 @@ declare namespace imports.gi.Gio {
 	 * a menu.
 	 * 
 	 * The main way to interact with the actions in a GActionGroup is to
-	 * activate them with g_action_group_activate_action(). Activating an
+	 * activate them with {@link G.action_group_activate_action}. Activating an
 	 * action may require a #GVariant parameter. The required type of the
 	 * parameter can be inquired with g_action_group_get_action_parameter_type().
 	 * Actions may be disabled, see g_action_group_get_action_enabled().
@@ -26844,7 +25415,7 @@ declare namespace imports.gi.Gio {
 		add_supports_type(content_type: string): boolean;
 		/**
 		 * Obtains the information whether the #GAppInfo can be deleted.
-		 * See g_app_info_delete().
+		 * See {@link G.app_info_delete}.
 		 * @returns %TRUE if #appinfo can be deleted
 		 */
 		can_delete(): boolean;
@@ -26859,7 +25430,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * On some platforms, there may be a difference between user-defined
 		 * #GAppInfos which can be deleted, and system-wide ones which cannot.
-		 * See g_app_info_can_delete().
+		 * See {@link G.app_info_can_delete}.
 		 * @returns %TRUE if #appinfo has been deleted
 		 */
 		delete(): boolean;
@@ -26931,7 +25502,7 @@ declare namespace imports.gi.Gio {
 		 * If this information is not provided by the environment, this function
 		 * will return %NULL.
 		 * This function does not take in consideration associations added with
-		 * g_app_info_add_supports_type(), but only those exported directly by
+		 * {@link G.app_info_add_supports_type}, but only those exported directly by
 		 * the application.
 		 * @returns 
 		 *    a list of content types.
@@ -26952,7 +25523,7 @@ declare namespace imports.gi.Gio {
 		 * Some URIs can be changed when passed through a GFile (for instance
 		 * unsupported URIs with strange formats like mailto:), so if you have
 		 * a textual URI you want to pass in as argument, consider using
-		 * g_app_info_launch_uris() instead.
+		 * {@link G.app_info_launch_uris} instead.
 		 * 
 		 * The launched application inherits the environment of the launching
 		 * process, but it can be modified with g_app_launch_context_setenv()
@@ -26987,7 +25558,7 @@ declare namespace imports.gi.Gio {
 		 */
 		launch_uris(uris: GLib.List | null, context: AppLaunchContext | null): boolean;
 		/**
-		 * Async version of g_app_info_launch_uris().
+		 * Async version of {@link G.app_info_launch_uris}.
 		 * 
 		 * The #callback is invoked immediately after the application launch, but it
 		 * waits for activation in case of D-Bus–activated applications and also provides
@@ -27000,7 +25571,7 @@ declare namespace imports.gi.Gio {
 		 */
 		launch_uris_async(uris: GLib.List | null, context: AppLaunchContext | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a g_app_info_launch_uris_async() operation.
+		 * Finishes a {@link G.app_info_launch_uris_async} operation.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on successful launch, %FALSE otherwise.
 		 */
@@ -27027,7 +25598,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the application as the last used application for a given type.
 		 * This will make the application appear as first in the list returned
-		 * by g_app_info_get_recommended_for_type(), regardless of the default
+		 * by {@link G.app_info_get_recommended_for_type}, regardless of the default
 		 * application for that content type.
 		 * @param content_type the content type.
 		 * @returns %TRUE on success, %FALSE on error.
@@ -27064,7 +25635,7 @@ declare namespace imports.gi.Gio {
 	 * applications installed on the system.
 	 * 
 	 * As of GLib 2.20, URIs will always be converted to POSIX paths
-	 * (using g_file_get_path()) when using g_app_info_launch() even if
+	 * (using {@link G.file_get_path}) when using g_app_info_launch() even if
 	 * the application requested an URI and not a POSIX path. For example
 	 * for a desktop-file based application with Exec key `totem
 	 * %U` and a single URI, `sftp://foo/file.avi`, then
@@ -27133,7 +25704,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * For desktop files, this includes applications that have
 		 * `NoDisplay=true` set or are excluded from display by means
-		 * of `OnlyShowIn` or `NotShowIn`. See g_app_info_should_show().
+		 * of `OnlyShowIn` or `NotShowIn`. See {@link G.app_info_should_show}.
 		 * The returned list does not include applications which have
 		 * the `Hidden` key set.
 		 * @returns a newly allocated #GList of references to #GAppInfos.
@@ -27142,7 +25713,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets a list of all #GAppInfos for a given content type,
 		 * including the recommended and fallback #GAppInfos. See
-		 * g_app_info_get_recommended_for_type() and
+		 * {@link G.app_info_get_recommended_for_type} and
 		 * g_app_info_get_fallback_for_type().
 		 * @param content_type the content type to find a #GAppInfo for
 		 * @returns #GList of #GAppInfos
@@ -27182,7 +25753,7 @@ declare namespace imports.gi.Gio {
 		 * those applications which claim to support the given content type exactly,
 		 * and not by MIME type subclassing.
 		 * Note that the first application of the list is the last used one, i.e.
-		 * the last one for which g_app_info_set_as_last_used_for_type() has been
+		 * the last one for which {@link G.app_info_set_as_last_used_for_type} has been
 		 * called.
 		 * @param content_type the content type to find a #GAppInfo for
 		 * @returns #GList of #GAppInfos
@@ -27197,14 +25768,14 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * The D-Bus–activated applications don't have to be started if your application
 		 * terminates too soon after this function. To prevent this, use
-		 * g_app_info_launch_default_for_uri_async() instead.
+		 * {@link G.app_info_launch_default_for_uri_async} instead.
 		 * @param uri the uri to show
 		 * @param context an optional #GAppLaunchContext
 		 * @returns %TRUE on success, %FALSE on error.
 		 */
 		public static launch_default_for_uri(uri: string, context: AppLaunchContext | null): boolean;
 		/**
-		 * Async version of g_app_info_launch_default_for_uri().
+		 * Async version of {@link G.app_info_launch_default_for_uri}.
 		 * 
 		 * This version is useful if you are interested in receiving
 		 * error information in the case where the application is
@@ -27228,7 +25799,7 @@ declare namespace imports.gi.Gio {
 		public static launch_default_for_uri_finish(result: AsyncResult): boolean;
 		/**
 		 * Removes all changes to the type associations done by
-		 * g_app_info_set_as_default_for_type(),
+		 * {@link G.app_info_set_as_default_for_type},
 		 * g_app_info_set_as_default_for_extension(),
 		 * g_app_info_add_supports_type() or
 		 * g_app_info_remove_supports_type().
@@ -27247,7 +25818,7 @@ declare namespace imports.gi.Gio {
 		 * Starts asynchronous initialization of the object implementing the
 		 * interface. This must be done before any real use of the object after
 		 * initial construction. If the object also implements #GInitable you can
-		 * optionally call g_initable_init() instead.
+		 * optionally call {@link G.initable_init} instead.
 		 * 
 		 * This method is intended for language bindings. If writing in C,
 		 * g_async_initable_new_async() should typically be used instead.
@@ -27287,7 +25858,7 @@ declare namespace imports.gi.Gio {
 		init_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes asynchronous initialization and returns the result.
-		 * See g_async_initable_init_async().
+		 * See {@link G.async_initable_init_async}.
 		 * @param res a #GAsyncResult.
 		 * @returns %TRUE if successful. If an error has occurred, this function
 		 * will return %FALSE and set #error appropriately if present.
@@ -27298,7 +25869,7 @@ declare namespace imports.gi.Gio {
 		 * calls, returning the created object or %NULL on error.
 		 * @param res the #GAsyncResult from the callback
 		 * @returns a newly created #GObject,
-		 *      or %NULL on error. Free with g_object_unref().
+		 *      or %NULL on error. Free with {@link GObject.unref}.
 		 */
 		new_finish(res: AsyncResult): GObject.Object;
 	}
@@ -27320,7 +25891,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Users of objects implementing this are not intended to use the interface
 	 * method directly; instead it will be used automatically in various ways.
-	 * For C applications you generally just call g_async_initable_new_async()
+	 * For C applications you generally just call {@link G.async_initable_new_async}
 	 * directly, or indirectly via a foo_thing_new_async() wrapper. This will call
 	 * g_async_initable_init_async() under the cover, calling back with %NULL and
 	 * a set %GError on failure.
@@ -27418,7 +25989,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<AsyncInitableInitOptions>);
 		/**
 		 * Helper function for constructing #GAsyncInitable object. This is
-		 * similar to g_object_new() but also initializes the object asynchronously.
+		 * similar to {@link GObject.new} but also initializes the object asynchronously.
 		 * 
 		 * When the initialization is finished, #callback will be called. You can
 		 * then call g_async_initable_new_finish() to get the new object and check
@@ -27434,7 +26005,7 @@ declare namespace imports.gi.Gio {
 		public static new_async(object_type: GObject.Type, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null, first_property_name: string | null): void;
 		/**
 		 * Helper function for constructing #GAsyncInitable object. This is
-		 * similar to g_object_new_valist() but also initializes the object
+		 * similar to {@link GObject.new_valist} but also initializes the object
 		 * asynchronously.
 		 * 
 		 * When the initialization is finished, #callback will be called. You can
@@ -27452,11 +26023,11 @@ declare namespace imports.gi.Gio {
 		public static new_valist_async(object_type: GObject.Type, first_property_name: string, var_args: any[], io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_object_new_with_properties() and
+		 * Use {@link GObject.new_with_properties} and
 		 * g_async_initable_init_async() instead. See #GParameter for more information.
 		 * 
 		 * Helper function for constructing #GAsyncInitable object. This is
-		 * similar to g_object_newv() but also initializes the object asynchronously.
+		 * similar to {@link GObject.newv} but also initializes the object asynchronously.
 		 * 
 		 * When the initialization is finished, #callback will be called. You can
 		 * then call g_async_initable_new_finish() to get the new object and check
@@ -27499,7 +26070,7 @@ declare namespace imports.gi.Gio {
 		is_tagged(source_tag: any | null): boolean;
 		/**
 		 * If #res is a #GSimpleAsyncResult, this is equivalent to
-		 * g_simple_async_result_propagate_error(). Otherwise it returns
+		 * {@link G.simple_async_result_propagate_error}. Otherwise it returns
 		 * %FALSE.
 		 * 
 		 * This can be used for legacy error handling in async *_finish()
@@ -27535,7 +26106,7 @@ declare namespace imports.gi.Gio {
 	 * #GAsyncResult instance filled with the details of the operation's
 	 * success or failure, the object the asynchronous function was
 	 * started for and any error codes returned. The asynchronous callback
-	 * function is then expected to call the corresponding "_finish()"
+	 * function is then expected to call the corresponding {@link ".finish}"
 	 * function, passing the object the function was called for, the
 	 * #GAsyncResult instance, and (optionally) an #error to grab any
 	 * error conditions that may have occurred.
@@ -27674,7 +26245,7 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_ERROR_PARTIAL_INPUT in e.g. a charset conversion where the
 		 * input is actually partial).
 		 * 
-		 * After g_converter_convert() has returned %G_CONVERTER_FINISHED the
+		 * After {@link G.converter_convert} has returned %G_CONVERTER_FINISHED the
 		 * converter object is in an invalid state where its not allowed
 		 * to call g_converter_convert() anymore. At this time you can only
 		 * free the object or call g_converter_reset() to reset it to the
@@ -27757,7 +26328,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the #GDBusObject that #interface_ belongs to, if any.
 		 * @returns A #GDBusObject or %NULL. The returned
-		 * reference should be freed with g_object_unref().
+		 * reference should be freed with {@link GObject.unref}.
 		 */
 		dup_object(): DBusObject | null;
 		/**
@@ -27771,7 +26342,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * It is not safe to use the returned object if #interface_ or
 		 * the returned object is being used from other threads. See
-		 * g_dbus_interface_dup_object() for a thread-safe alternative.
+		 * {@link G.dbus_interface_dup_object} for a thread-safe alternative.
 		 * @returns A #GDBusObject or %NULL. The returned
 		 *     reference belongs to #interface_ and should not be freed.
 		 */
@@ -27815,13 +26386,13 @@ declare namespace imports.gi.Gio {
 		 * #object, if any.
 		 * @param interface_name A D-Bus interface name.
 		 * @returns %NULL if not found, otherwise a
-		 *   #GDBusInterface that must be freed with g_object_unref().
+		 *   #GDBusInterface that must be freed with {@link GObject.unref}.
 		 */
 		get_interface(interface_name: string): DBusInterface | null;
 		/**
 		 * Gets the D-Bus interfaces associated with #object.
 		 * @returns A list of #GDBusInterface instances.
-		 *   The returned list must be freed by g_list_free() after each element has been freed
+		 *   The returned list must be freed by {@link G.list_free} after each element has been freed
 		 *   with g_object_unref().
 		 */
 		get_interfaces(): GLib.List;
@@ -27885,14 +26456,14 @@ declare namespace imports.gi.Gio {
 		 * @param object_path Object path to look up.
 		 * @param interface_name D-Bus interface name to look up.
 		 * @returns A #GDBusInterface instance or %NULL. Free
-		 *   with g_object_unref().
+		 *   with {@link GObject.unref}.
 		 */
 		get_interface(object_path: string, interface_name: string): DBusInterface | null;
 		/**
 		 * Gets the #GDBusObjectProxy at #object_path, if any.
 		 * @param object_path Object path to look up.
 		 * @returns A #GDBusObject or %NULL. Free with
-		 *   g_object_unref().
+		 *   {@link GObject.unref}.
 		 */
 		get_object(object_path: string): DBusObject | null;
 		/**
@@ -27904,7 +26475,7 @@ declare namespace imports.gi.Gio {
 		 * Gets all #GDBusObject objects known to #manager.
 		 * @returns A list of
 		 *   #GDBusObject objects. The returned list should be freed with
-		 *   g_list_free() after each element has been freed with
+		 *   {@link G.list_free} after each element has been freed with
 		 *   g_object_unref().
 		 */
 		get_objects(): GLib.List;
@@ -27994,7 +26565,7 @@ declare namespace imports.gi.Gio {
 		 * currently-satisfied conditions on #datagram_based. The result is returned.
 		 * 
 		 * %G_IO_IN will be set in the return value if data is available to read with
-		 * g_datagram_based_receive_messages(), or if the connection is closed remotely
+		 * {@link G.datagram_based_receive_messages}, or if the connection is closed remotely
 		 * (EOS); and if the datagram_based has not been closed locally using some
 		 * implementation-specific method (such as g_socket_close() or
 		 * g_socket_shutdown() with #shutdown_read set, if it’s a #GSocket).
@@ -28057,7 +26628,7 @@ declare namespace imports.gi.Gio {
 		 * cause the source to trigger, reporting the current condition (which is
 		 * likely 0 unless cancellation happened at the same time as a condition
 		 * change). You can check for this in the callback using
-		 * g_cancellable_is_cancelled().
+		 * {@link G.cancellable_is_cancelled}.
 		 * @param condition a #GIOCondition mask to monitor
 		 * @param cancellable a #GCancellable
 		 * @returns a newly allocated #GSource
@@ -28157,7 +26728,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * To be notified when messages can be sent, wait for the %G_IO_OUT condition.
 		 * Note though that you may still receive %G_IO_ERROR_WOULD_BLOCK from
-		 * g_datagram_based_send_messages() even if you were previously notified of a
+		 * {@link G.datagram_based_send_messages} even if you were previously notified of a
 		 * %G_IO_OUT condition. (On Windows in particular, this is very common due to
 		 * the way the underlying APIs work.)
 		 * 
@@ -28262,7 +26833,7 @@ declare namespace imports.gi.Gio {
 		 * implementation.
 		 * 
 		 * The #GDesktopAppInfoLookup interface and this function is used
-		 * to implement g_app_info_get_default_for_uri_scheme() backends
+		 * to implement {@link G.app_info_get_default_for_uri_scheme} backends
 		 * in a GIO module. There is no reason for applications to use it
 		 * directly. Applications should use g_app_info_get_default_for_uri_scheme().
 		 * @param uri_scheme a string containing a URI scheme.
@@ -28324,12 +26895,12 @@ declare namespace imports.gi.Gio {
 		can_stop(): boolean;
 		/**
 		 * @deprecated
-		 * Use g_drive_eject_with_operation() instead.
+		 * Use {@link G.drive_eject_with_operation} instead.
 		 * 
 		 * Asynchronously ejects a drive.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_drive_eject_finish() to obtain the
+		 * You can then call {@link G.drive_eject_finish} to obtain the
 		 * result of the operation.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -28338,7 +26909,7 @@ declare namespace imports.gi.Gio {
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_drive_eject_with_operation_finish() instead.
+		 * Use {@link G.drive_eject_with_operation_finish} instead.
 		 * 
 		 * Finishes ejecting a drive.
 		 * @param result a #GAsyncResult.
@@ -28348,7 +26919,7 @@ declare namespace imports.gi.Gio {
 		eject_finish(result: AsyncResult): boolean;
 		/**
 		 * Ejects a drive. This is an asynchronous operation, and is
-		 * finished by calling g_drive_eject_with_operation_finish() with the #drive
+		 * finished by calling {@link G.drive_eject_with_operation_finish} with the #drive
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param mount_operation a #GMountOperation or %NULL to avoid
@@ -28366,17 +26937,17 @@ declare namespace imports.gi.Gio {
 		eject_with_operation_finish(result: AsyncResult): boolean;
 		/**
 		 * Gets the kinds of identifiers that #drive has.
-		 * Use g_drive_get_identifier() to obtain the identifiers
+		 * Use {@link G.drive_get_identifier} to obtain the identifiers
 		 * themselves.
 		 * @returns a %NULL-terminated
-		 *     array of strings containing kinds of identifiers. Use g_strfreev()
+		 *     array of strings containing kinds of identifiers. Use {@link G.strfreev}
 		 *     to free.
 		 */
 		enumerate_identifiers(): string[];
 		/**
 		 * Gets the icon for #drive.
 		 * @returns #GIcon for the #drive.
-		 *    Free the returned object with g_object_unref().
+		 *    Free the returned object with {@link GObject.unref}.
 		 */
 		get_icon(): Icon;
 		/**
@@ -28408,20 +26979,20 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the icon for #drive.
 		 * @returns symbolic #GIcon for the #drive.
-		 *    Free the returned object with g_object_unref().
+		 *    Free the returned object with {@link GObject.unref}.
 		 */
 		get_symbolic_icon(): Icon;
 		/**
 		 * Get a list of mountable volumes for #drive.
 		 * 
-		 * The returned list should be freed with g_list_free(), after
+		 * The returned list should be freed with {@link G.list_free}, after
 		 * its elements have been unreffed with g_object_unref().
 		 * @returns #GList containing any #GVolume objects on the given #drive.
 		 */
 		get_volumes(): GLib.List;
 		/**
 		 * Checks if the #drive has media. Note that the OS may not be polling
-		 * the drive for media changes; see g_drive_is_media_check_automatic()
+		 * the drive for media changes; see {@link G.drive_is_media_check_automatic}
 		 * for more details.
 		 * @returns %TRUE if #drive has media, %FALSE otherwise.
 		 */
@@ -28444,7 +27015,7 @@ declare namespace imports.gi.Gio {
 		is_media_removable(): boolean;
 		/**
 		 * Checks if the #GDrive and/or its media is considered removable by the user.
-		 * See g_drive_is_media_removable().
+		 * See {@link G.drive_is_media_removable}.
 		 * @returns %TRUE if #drive and/or its media is considered removable, %FALSE otherwise.
 		 */
 		is_removable(): boolean;
@@ -28452,14 +27023,14 @@ declare namespace imports.gi.Gio {
 		 * Asynchronously polls #drive to see if media has been inserted or removed.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_drive_poll_for_media_finish() to obtain the
+		 * You can then call {@link G.drive_poll_for_media_finish} to obtain the
 		 * result of the operation.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
 		 * @param callback a #GAsyncReadyCallback, or %NULL.
 		 */
 		poll_for_media(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an operation started with g_drive_poll_for_media() on a drive.
+		 * Finishes an operation started with {@link G.drive_poll_for_media} on a drive.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE if the drive has been poll_for_mediaed successfully,
 		 *     %FALSE otherwise.
@@ -28469,7 +27040,7 @@ declare namespace imports.gi.Gio {
 		 * Asynchronously starts a drive.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_drive_start_finish() to obtain the
+		 * You can then call {@link G.drive_start_finish} to obtain the
 		 * result of the operation.
 		 * @param flags flags affecting the start operation.
 		 * @param mount_operation a #GMountOperation or %NULL to avoid
@@ -28489,7 +27060,7 @@ declare namespace imports.gi.Gio {
 		 * Asynchronously stops a drive.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_drive_stop_finish() to obtain the
+		 * You can then call {@link G.drive_stop_finish} to obtain the
 		 * result of the operation.
 		 * @param flags flags affecting the unmount if required for stopping.
 		 * @param mount_operation a #GMountOperation or %NULL to avoid
@@ -28580,7 +27151,7 @@ declare namespace imports.gi.Gio {
 	 * multi-disk devices such as RAID devices. Note that the actual
 	 * semantics and side-effects of starting/stopping a #GDrive may vary
 	 * according to implementation. To choose the correct verbs in e.g. a
-	 * file manager, use g_drive_get_start_stop_type().
+	 * file manager, use {@link G.drive_get_start_stop_type}.
 	 * 
 	 * For porting from GnomeVFS note that there is no equivalent of
 	 * #GDrive in that API.
@@ -28640,7 +27211,7 @@ declare namespace imports.gi.Gio {
 		 * Each item in the list is a #GByteArray which contains the complete
 		 * subject DN of the certificate authority.
 		 * @returns the list of
-		 * CA DNs. You should unref each element with g_byte_array_unref() and then
+		 * CA DNs. You should unref each element with {@link G.byte_array_unref} and then
 		 * the free the list with g_list_free().
 		 */
 		get_accepted_cas(): GLib.List;
@@ -28717,7 +27288,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The list of application-layer protocols that the connection
 		 * advertises that it is willing to speak. See
-		 * g_dtls_connection_set_advertised_protocols().
+		 * {@link G.dtls_connection_set_advertised_protocols}.
 		 */
 		advertised_protocols: string[];
 		/**
@@ -28727,17 +27298,17 @@ declare namespace imports.gi.Gio {
 		base_socket: DatagramBased;
 		/**
 		 * The connection's certificate; see
-		 * g_dtls_connection_set_certificate().
+		 * {@link G.dtls_connection_set_certificate}.
 		 */
 		certificate: TlsCertificate;
 		/**
-		 * The name of the DTLS ciphersuite in use. See g_dtls_connection_get_ciphersuite_name().
+		 * The name of the DTLS ciphersuite in use. See {@link G.dtls_connection_get_ciphersuite_name}.
 		 */
 		readonly ciphersuite_name: string;
 		/**
 		 * The certificate database to use when verifying this TLS connection.
 		 * If no certificate database is set, then the default database will be
-		 * used. See g_tls_backend_get_default_database().
+		 * used. See {@link G.tls_backend_get_default_database}.
 		 */
 		database: TlsDatabase;
 		/**
@@ -28748,7 +27319,7 @@ declare namespace imports.gi.Gio {
 		interaction: TlsInteraction;
 		/**
 		 * The application-layer protocol negotiated during the TLS
-		 * handshake. See g_dtls_connection_get_negotiated_protocol().
+		 * handshake. See {@link G.dtls_connection_get_negotiated_protocol}.
 		 */
 		readonly negotiated_protocol: string;
 		/**
@@ -28770,22 +27341,25 @@ declare namespace imports.gi.Gio {
 		 */
 		readonly peer_certificate_errors: TlsCertificateFlags;
 		/**
-		 * The DTLS protocol version in use. See g_dtls_connection_get_protocol_version().
+		 * The DTLS protocol version in use. See {@link G.dtls_connection_get_protocol_version}.
 		 */
 		readonly protocol_version: TlsProtocolVersion;
 		/**
+		 * @deprecated
+		 * The rehandshake mode is ignored.
+		 * 
 		 * The rehandshaking mode. See
-		 * g_dtls_connection_set_rehandshake_mode().
+		 * {@link G.dtls_connection_set_rehandshake_mode}.
 		 */
 		rehandshake_mode: TlsRehandshakeMode;
 		/**
 		 * Whether or not proper TLS close notification is required.
-		 * See g_dtls_connection_set_require_close_notify().
+		 * See {@link G.dtls_connection_set_require_close_notify}.
 		 */
 		require_close_notify: boolean;
 		/**
 		 * Close the DTLS connection. This is equivalent to calling
-		 * g_dtls_connection_shutdown() to shut down both sides of the connection.
+		 * {@link G.dtls_connection_shutdown} to shut down both sides of the connection.
 		 * 
 		 * Closing a #GDtlsConnection waits for all buffered but untransmitted data to
 		 * be sent before it completes. It then sends a `close_notify` DTLS alert to the
@@ -28808,7 +27382,7 @@ declare namespace imports.gi.Gio {
 		 */
 		close(cancellable: Cancellable | null): boolean;
 		/**
-		 * Asynchronously close the DTLS connection. See g_dtls_connection_close() for
+		 * Asynchronously close the DTLS connection. See {@link G.dtls_connection_close} for
 		 * more information.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable a #GCancellable, or %NULL
@@ -28816,7 +27390,7 @@ declare namespace imports.gi.Gio {
 		 */
 		close_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finish an asynchronous TLS close operation. See g_dtls_connection_close()
+		 * Finish an asynchronous TLS close operation. See {@link G.dtls_connection_close}
 		 * for more information.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE on failure, in which
@@ -28834,7 +27408,7 @@ declare namespace imports.gi.Gio {
 		emit_accept_certificate(peer_cert: TlsCertificate, errors: TlsCertificateFlags): boolean;
 		/**
 		 * Gets #conn's certificate, as set by
-		 * g_dtls_connection_set_certificate().
+		 * {@link G.dtls_connection_set_certificate}.
 		 * @returns #conn's certificate, or %NULL
 		 */
 		get_certificate(): TlsCertificate | null;
@@ -28846,7 +27420,7 @@ declare namespace imports.gi.Gio {
 		 * [5929](https://tools.ietf.org/html/rfc5929), and related RFCs.  The
 		 * binding data is returned in #data.  The #data is resized by the callee
 		 * using #GByteArray buffer management and will be freed when the #data
-		 * is destroyed by g_byte_array_unref(). If #data is %NULL, it will only
+		 * is destroyed by {@link G.byte_array_unref}. If #data is %NULL, it will only
 		 * check whether TLS backend is able to fetch the data (e.g. whether #type
 		 * is supported by the TLS backend). It does not guarantee that the data
 		 * will be available though.  That could happen if TLS connection does not
@@ -28873,7 +27447,7 @@ declare namespace imports.gi.Gio {
 		get_ciphersuite_name(): string | null;
 		/**
 		 * Gets the certificate database that #conn uses to verify
-		 * peer certificates. See g_dtls_connection_set_database().
+		 * peer certificates. See {@link G.dtls_connection_set_database}.
 		 * @returns the certificate database that #conn uses or %NULL
 		 */
 		get_database(): TlsDatabase | null;
@@ -28891,7 +27465,7 @@ declare namespace imports.gi.Gio {
 		 * If the peer did not use the ALPN extension, or did not advertise a
 		 * protocol that matched one of #conn's protocols, or the TLS backend
 		 * does not support ALPN, then this will be %NULL. See
-		 * g_dtls_connection_set_advertised_protocols().
+		 * {@link G.dtls_connection_set_advertised_protocols}.
 		 * @returns the negotiated protocol, or %NULL
 		 */
 		get_negotiated_protocol(): string | null;
@@ -28924,14 +27498,14 @@ declare namespace imports.gi.Gio {
 		 *   from the TLS protocol in TLS 1.3.
 		 * 
 		 * Gets #conn rehandshaking mode. See
-		 * g_dtls_connection_set_rehandshake_mode() for details.
+		 * {@link G.dtls_connection_set_rehandshake_mode} for details.
 		 * @returns %G_TLS_REHANDSHAKE_SAFELY
 		 */
 		get_rehandshake_mode(): TlsRehandshakeMode;
 		/**
 		 * Tests whether or not #conn expects a proper TLS close notification
 		 * when the connection is closed. See
-		 * g_dtls_connection_set_require_close_notify() for details.
+		 * {@link G.dtls_connection_set_require_close_notify} for details.
 		 * @returns %TRUE if #conn requires a proper TLS close notification.
 		 */
 		get_require_close_notify(): boolean;
@@ -28942,7 +27516,7 @@ declare namespace imports.gi.Gio {
 		 * although the connection needs to perform a handshake after
 		 * connecting, #GDtlsConnection will handle this for you automatically
 		 * when you try to send or receive data on the connection. You can call
-		 * g_dtls_connection_handshake() manually if you want to know whether
+		 * {@link G.dtls_connection_handshake} manually if you want to know whether
 		 * the initial handshake succeeded or failed (as opposed to just
 		 * immediately trying to use #conn to read or write, in which case,
 		 * if it fails, it may not be possible to tell if it failed before
@@ -28968,7 +27542,7 @@ declare namespace imports.gi.Gio {
 		handshake(cancellable: Cancellable | null): boolean;
 		/**
 		 * Asynchronously performs a TLS handshake on #conn. See
-		 * g_dtls_connection_handshake() for more information.
+		 * {@link G.dtls_connection_handshake} for more information.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @param callback callback to call when the handshake is complete
@@ -28976,7 +27550,7 @@ declare namespace imports.gi.Gio {
 		handshake_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous TLS handshake operation. See
-		 * g_dtls_connection_handshake() for more information.
+		 * {@link G.dtls_connection_handshake} for more information.
 		 * @param result a #GAsyncResult.
 		 * @returns %TRUE on success, %FALSE on failure, in which
 		 * case #error will be set.
@@ -28987,7 +27561,7 @@ declare namespace imports.gi.Gio {
 		 * caller is willing to speak on this connection. The
 		 * Application-Layer Protocol Negotiation (ALPN) extension will be
 		 * used to negotiate a compatible protocol with the peer; use
-		 * g_dtls_connection_get_negotiated_protocol() to find the negotiated
+		 * {@link G.dtls_connection_get_negotiated_protocol} to find the negotiated
 		 * protocol after the handshake.  Specifying %NULL for the the value
 		 * of #protocols will disable ALPN negotiation.
 		 * 
@@ -29007,7 +27581,7 @@ declare namespace imports.gi.Gio {
 		 * with %G_TLS_ERROR_CERTIFICATE_REQUIRED, that means that the server
 		 * requires a certificate, and if you try connecting again, you should
 		 * call this method first. You can call
-		 * g_dtls_client_connection_get_accepted_cas() on the failed connection
+		 * {@link G.dtls_client_connection_get_accepted_cas} on the failed connection
 		 * to get a list of Certificate Authorities that the server will
 		 * accept certificates from.
 		 * 
@@ -29022,7 +27596,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Sets the certificate database that is used to verify peer certificates.
 		 * This is set to the default database by default. See
-		 * g_tls_backend_get_default_database(). If set to %NULL, then
+		 * {@link G.tls_backend_get_default_database}. If set to %NULL, then
 		 * peer certificate validation will always set the
 		 * %G_TLS_CERTIFICATE_UNKNOWN_CA error (meaning
 		 * #GDtlsConnection::accept-certificate will always be emitted on
@@ -29068,7 +27642,7 @@ declare namespace imports.gi.Gio {
 		 * (because the application-level data includes a length field, or is
 		 * somehow self-delimiting); in this case, the close notify is
 		 * redundant and may be omitted. You
-		 * can use g_dtls_connection_set_require_close_notify() to tell #conn
+		 * can use {@link G.dtls_connection_set_require_close_notify} to tell #conn
 		 * to allow an "unannounced" connection close, in which case the close
 		 * will show up as a 0-length read, as in a non-TLS
 		 * #GDatagramBased, and it is up to the application to check that
@@ -29088,7 +27662,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #shutdown_read is %TRUE then the receiving side of the connection is shut
 		 * down, and further reading is disallowed. Subsequent calls to
-		 * g_datagram_based_receive_messages() will return %G_IO_ERROR_CLOSED.
+		 * {@link G.datagram_based_receive_messages} will return %G_IO_ERROR_CLOSED.
 		 * 
 		 * If #shutdown_write is %TRUE then the sending side of the connection is shut
 		 * down, and further writing is disallowed. Subsequent calls to
@@ -29108,7 +27682,7 @@ declare namespace imports.gi.Gio {
 		shutdown(shutdown_read: boolean, shutdown_write: boolean, cancellable: Cancellable | null): boolean;
 		/**
 		 * Asynchronously shut down part or all of the DTLS connection. See
-		 * g_dtls_connection_shutdown() for more information.
+		 * {@link G.dtls_connection_shutdown} for more information.
 		 * @param shutdown_read %TRUE to stop reception of incoming datagrams
 		 * @param shutdown_write %TRUE to stop sending outgoing datagrams
 		 * @param io_priority the [I/O priority][io-priority] of the request
@@ -29118,7 +27692,7 @@ declare namespace imports.gi.Gio {
 		shutdown_async(shutdown_read: boolean, shutdown_write: boolean, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finish an asynchronous TLS shutdown operation. See
-		 * g_dtls_connection_shutdown() for more information.
+		 * {@link G.dtls_connection_shutdown} for more information.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE on failure, in which
 		 * case #error will be set
@@ -29127,7 +27701,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Emitted during the TLS handshake after the peer certificate has
 		 * been received. You can examine #peer_cert's certification path by
-		 * calling g_tls_certificate_get_issuer() on it.
+		 * calling {@link G.tls_certificate_get_issuer} on it.
 		 * 
 		 * For a client-side connection, #peer_cert is the server's
 		 * certificate, and the signal will only be emitted if the
@@ -29221,7 +27795,7 @@ declare namespace imports.gi.Gio {
 	 * operates over a base datagram connection, which is also a #GDatagramBased
 	 * (#GDtlsConnection:base-socket).
 	 * 
-	 * To close a DTLS connection, use g_dtls_connection_close().
+	 * To close a DTLS connection, use {@link G.dtls_connection_close}.
 	 * 
 	 * Neither #GDtlsServerConnection or #GDtlsClientConnection set the peer address
 	 * on their base #GDatagramBased if it is a #GSocket — it is up to the caller to
@@ -29243,7 +27817,7 @@ declare namespace imports.gi.Gio {
 	interface IDtlsServerConnection {
 		/**
 		 * The #GTlsAuthenticationMode for the server. This can be changed
-		 * before calling g_dtls_connection_handshake() if you want to
+		 * before calling {@link G.dtls_connection_handshake} if you want to
 		 * rehandshake with a different mode from the initial handshake.
 		 */
 		authentication_mode: TlsAuthenticationMode;
@@ -29308,13 +27882,13 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileOutputStream, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		append_to(flags: FileCreateFlags, cancellable: Cancellable | null): FileOutputStream;
 		/**
 		 * Asynchronously opens #file for appending.
 		 * 
-		 * For more details, see g_file_append_to() which is
+		 * For more details, see {@link G.file_append_to} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -29330,18 +27904,18 @@ declare namespace imports.gi.Gio {
 		append_to_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file append operation started with
-		 * g_file_append_to_async().
+		 * {@link G.file_append_to_async}.
 		 * @param res #GAsyncResult
 		 * @returns a valid #GFileOutputStream
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		append_to_finish(res: AsyncResult): FileOutputStream;
 		/**
 		 * Prepares the file attribute query string for copying to #file.
 		 * 
 		 * This function prepares an attribute query string to be
-		 * passed to g_file_query_info() to get a list of attributes
+		 * passed to {@link G.file_query_info} to get a list of attributes
 		 * normally copied with the file (see g_file_copy_attributes()
 		 * for the detailed description). This function is used by the
 		 * implementation of g_file_copy_attributes() and is useful
@@ -29350,7 +27924,7 @@ declare namespace imports.gi.Gio {
 		 * @param flags a set of #GFileCopyFlags
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
-		 * @returns an attribute query string for g_file_query_info(),
+		 * @returns an attribute query string for {@link G.file_query_info},
 		 *     or %NULL if an error occurs.
 		 */
 		build_attribute_list_for_copy(flags: FileCopyFlags, cancellable: Cancellable | null): string;
@@ -29394,7 +27968,7 @@ declare namespace imports.gi.Gio {
 		 * %G_IO_ERROR_WOULD_RECURSE error is returned.
 		 * 
 		 * If you are interested in copying the #GFile object itself (not the on-disk
-		 * file), see g_file_dup().
+		 * file), see {@link G.file_dup}.
 		 * @param destination destination #GFile
 		 * @param flags set of #GFileCopyFlags
 		 * @param cancellable optional #GCancellable object,
@@ -29407,7 +27981,7 @@ declare namespace imports.gi.Gio {
 		copy(destination: File, flags: FileCopyFlags, cancellable: Cancellable | null, progress_callback: FileProgressCallback | null, progress_callback_data: any | null): boolean;
 		/**
 		 * Copies the file #source to the location specified by #destination
-		 * asynchronously. For details of the behaviour, see g_file_copy().
+		 * asynchronously. For details of the behaviour, see {@link G.file_copy}.
 		 * 
 		 * If #progress_callback is not %NULL, then that function that will be called
 		 * just like in g_file_copy(). The callback will run in the default main context
@@ -29445,7 +28019,7 @@ declare namespace imports.gi.Gio {
 		 */
 		copy_attributes(destination: File, flags: FileCopyFlags, cancellable: Cancellable | null): boolean;
 		/**
-		 * Finishes copying the file started with g_file_copy_async().
+		 * Finishes copying the file started with {@link G.file_copy_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a %TRUE on success, %FALSE on error.
 		 */
@@ -29475,14 +28049,14 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileOutputStream for the newly created
 		 *     file, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		create(flags: FileCreateFlags, cancellable: Cancellable | null): FileOutputStream;
 		/**
 		 * Asynchronously creates a new file and returns an output stream
 		 * for writing to it. The file must not already exist.
 		 * 
-		 * For more details, see g_file_create() which is
+		 * For more details, see {@link G.file_create} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -29498,10 +28072,10 @@ declare namespace imports.gi.Gio {
 		create_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file create operation started with
-		 * g_file_create_async().
+		 * {@link G.file_create_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileOutputStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		create_finish(res: AsyncResult): FileOutputStream;
 		/**
@@ -29533,14 +28107,14 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileIOStream for the newly created
 		 *     file, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		create_readwrite(flags: FileCreateFlags, cancellable: Cancellable | null): FileIOStream;
 		/**
 		 * Asynchronously creates a new file and returns a stream
 		 * for reading and writing to it. The file must not already exist.
 		 * 
-		 * For more details, see g_file_create_readwrite() which is
+		 * For more details, see {@link G.file_create_readwrite} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -29556,15 +28130,15 @@ declare namespace imports.gi.Gio {
 		create_readwrite_async(flags: FileCreateFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file create operation started with
-		 * g_file_create_readwrite_async().
+		 * {@link G.file_create_readwrite_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileIOStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		create_readwrite_finish(res: AsyncResult): FileIOStream;
 		/**
 		 * Deletes a file. If the #file is a directory, it will only be
-		 * deleted if it is empty. This has the same semantics as g_unlink().
+		 * deleted if it is empty. This has the same semantics as {@link G.unlink}.
 		 * 
 		 * If #file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 		 * for deletion to be implemented avoiding
@@ -29592,7 +28166,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously delete a file. If the #file is a directory, it will
 		 * only be deleted if it is empty.  This has the same semantics as
-		 * g_unlink().
+		 * {@link G.unlink}.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
@@ -29601,7 +28175,7 @@ declare namespace imports.gi.Gio {
 		 */
 		delete_async(io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes deleting a file started with g_file_delete_async().
+		 * Finishes deleting a file started with {@link G.file_delete_async}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the file was deleted. %FALSE otherwise.
 		 */
@@ -29609,7 +28183,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Duplicates a #GFile handle. This operation does not duplicate
 		 * the actual file or directory represented by the #GFile; see
-		 * g_file_copy() if attempting to copy a file.
+		 * {@link G.file_copy} if attempting to copy a file.
 		 * 
 		 * g_file_dup() is useful when a second handle is needed to the same underlying
 		 * file, for use in a separate thread (#GFile is not thread-safe). For use
@@ -29623,12 +28197,12 @@ declare namespace imports.gi.Gio {
 		dup(): File;
 		/**
 		 * @deprecated
-		 * Use g_file_eject_mountable_with_operation() instead.
+		 * Use {@link G.file_eject_mountable_with_operation} instead.
 		 * 
 		 * Starts an asynchronous eject on a mountable.
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
-		 * g_file_eject_mountable_finish().
+		 * {@link G.file_eject_mountable_finish}.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -29642,11 +28216,11 @@ declare namespace imports.gi.Gio {
 		eject_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_file_eject_mountable_with_operation_finish()
+		 * Use {@link G.file_eject_mountable_with_operation_finish}
 		 *     instead.
 		 * 
 		 * Finishes an asynchronous eject operation started by
-		 * g_file_eject_mountable().
+		 * {@link G.file_eject_mountable}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the #file was ejected successfully.
 		 *     %FALSE otherwise.
@@ -29656,7 +28230,7 @@ declare namespace imports.gi.Gio {
 		 * Starts an asynchronous eject on a mountable.
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
-		 * g_file_eject_mountable_with_operation_finish().
+		 * {@link G.file_eject_mountable_with_operation_finish}.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -29672,7 +28246,7 @@ declare namespace imports.gi.Gio {
 		eject_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous eject operation started by
-		 * g_file_eject_mountable_with_operation().
+		 * {@link G.file_eject_mountable_with_operation}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the #file was ejected successfully.
 		 *     %FALSE otherwise.
@@ -29707,7 +28281,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns A #GFileEnumerator if successful,
-		 *     %NULL on error. Free the returned object with g_object_unref().
+		 *     %NULL on error. Free the returned object with {@link GObject.unref}.
 		 */
 		enumerate_children(attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable | null): FileEnumerator;
 		/**
@@ -29715,7 +28289,7 @@ declare namespace imports.gi.Gio {
 		 * in a directory. The result is a #GFileEnumerator object that will
 		 * give out #GFileInfo objects for all the files in the directory.
 		 * 
-		 * For more details, see g_file_enumerate_children() which is
+		 * For more details, see {@link G.file_enumerate_children} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
@@ -29732,11 +28306,11 @@ declare namespace imports.gi.Gio {
 		enumerate_children_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an async enumerate children operation.
-		 * See g_file_enumerate_children_async().
+		 * See {@link G.file_enumerate_children_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileEnumerator or %NULL
 		 *     if an error occurred.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		enumerate_children_finish(res: AsyncResult): FileEnumerator;
 		/**
@@ -29765,13 +28339,13 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GMount where the #file is located
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		find_enclosing_mount(cancellable: Cancellable | null): Mount;
 		/**
 		 * Asynchronously gets the mount for the file.
 		 * 
-		 * For more details, see g_file_find_enclosing_mount() which is
+		 * For more details, see {@link G.file_find_enclosing_mount} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -29786,10 +28360,10 @@ declare namespace imports.gi.Gio {
 		find_enclosing_mount_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous find mount request.
-		 * See g_file_find_enclosing_mount_async().
+		 * See {@link G.file_find_enclosing_mount_async}.
 		 * @param res a #GAsyncResult
 		 * @returns #GMount for given #file or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		find_enclosing_mount_finish(res: AsyncResult): Mount;
 		/**
@@ -29803,12 +28377,12 @@ declare namespace imports.gi.Gio {
 		 * or rules other than it may not contain zero bytes.  If you want to use
 		 * filenames in a user interface you should use the display name that you
 		 * can get by requesting the %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME
-		 * attribute with g_file_query_info().
+		 * attribute with {@link G.file_query_info}.
 		 * 
 		 * This call does no blocking I/O.
 		 * @returns string containing the #GFile's
 		 *     base name, or %NULL if given #GFile is invalid. The returned string
-		 *     should be freed with g_free() when no longer needed.
+		 *     should be freed with {@link G.free} when no longer needed.
 		 */
 		get_basename(): string | null;
 		/**
@@ -29821,7 +28395,7 @@ declare namespace imports.gi.Gio {
 		 * This call does no blocking I/O.
 		 * @param name string containing the child's basename
 		 * @returns a #GFile to a child specified by #name.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_child(name: string): File;
 		/**
@@ -29836,7 +28410,7 @@ declare namespace imports.gi.Gio {
 		 * @param display_name string to a possible child
 		 * @returns a #GFile to the specified child, or
 		 *     %NULL if the display name couldn't be converted.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		get_child_for_display_name(display_name: string): File;
 		/**
@@ -29847,14 +28421,14 @@ declare namespace imports.gi.Gio {
 		 * This call does no blocking I/O.
 		 * @returns a #GFile structure to the
 		 *     parent of the given #GFile or %NULL if there is no parent. Free
-		 *     the returned object with g_object_unref().
+		 *     the returned object with {@link GObject.unref}.
 		 */
 		get_parent(): File | null;
 		/**
 		 * Gets the parse name of the #file.
 		 * A parse name is a UTF-8 string that describes the
 		 * file such that one can get the #GFile back using
-		 * g_file_parse_name().
+		 * {@link G.file_parse_name}.
 		 * 
 		 * This is generally used to show the #GFile as a nice
 		 * full-pathname kind of string in a user interface,
@@ -29866,7 +28440,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * This call does no blocking I/O.
 		 * @returns a string containing the #GFile's parse name.
-		 *     The returned string should be freed with g_free()
+		 *     The returned string should be freed with {@link G.free}
 		 *     when no longer needed.
 		 */
 		get_parse_name(): string;
@@ -29877,7 +28451,7 @@ declare namespace imports.gi.Gio {
 		 * This call does no blocking I/O.
 		 * @returns string containing the #GFile's path,
 		 *     or %NULL if no such path exists. The returned string should be freed
-		 *     with g_free() when no longer needed.
+		 *     with {@link G.free} when no longer needed.
 		 */
 		get_path(): string | null;
 		/**
@@ -29887,7 +28461,7 @@ declare namespace imports.gi.Gio {
 		 * @param descendant input #GFile
 		 * @returns string with the relative path from
 		 *     #descendant to #parent, or %NULL if #descendant doesn't have #parent as
-		 *     prefix. The returned string should be freed with g_free() when
+		 *     prefix. The returned string should be freed with {@link G.free} when
 		 *     no longer needed.
 		 */
 		get_relative_path(descendant: File): string | null;
@@ -29897,7 +28471,7 @@ declare namespace imports.gi.Gio {
 		 * This call does no blocking I/O.
 		 * @returns a string containing the #GFile's URI. If the #GFile was constructed
 		 *     with an invalid URI, an invalid URI is returned.
-		 *     The returned string should be freed with g_free()
+		 *     The returned string should be freed with {@link G.free}
 		 *     when no longer needed.
 		 */
 		get_uri(): string;
@@ -29915,7 +28489,7 @@ declare namespace imports.gi.Gio {
 		 * This call does no blocking I/O.
 		 * @returns a string containing the URI scheme for the given
 		 *     #GFile or %NULL if the #GFile was constructed with an invalid URI. The
-		 *     returned string should be freed with g_free() when no longer needed.
+		 *     returned string should be freed with {@link G.free} when no longer needed.
 		 */
 		get_uri_scheme(): string | null;
 		/**
@@ -29938,7 +28512,7 @@ declare namespace imports.gi.Gio {
 		 * of /foo/bar.
 		 * 
 		 * A #GFile is not a prefix of itself. If you want to check for
-		 * equality, use g_file_equal().
+		 * equality, use {@link G.file_equal}.
 		 * 
 		 * This call does no I/O, as it works purely on names. As such it can
 		 * sometimes return %FALSE even if #file is inside a #prefix (from a
@@ -29978,7 +28552,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * On some systems non-native files may be available using the native
 		 * filesystem via a userspace filesystem (FUSE), in these cases this call
-		 * will return %FALSE, but g_file_get_path() will still return a native path.
+		 * will return %FALSE, but {@link G.file_get_path} will still return a native path.
 		 * 
 		 * This call does no blocking I/O.
 		 * @returns %TRUE if #file is native
@@ -29989,7 +28563,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #file is a resource:// based URI, the resulting bytes will reference the
 		 * embedded resource instead of a copy. Otherwise, this is equivalent to calling
-		 * g_file_load_contents() and g_bytes_new_take().
+		 * {@link G.file_load_contents} and g_bytes_new_take().
 		 * 
 		 * For resources, #etag_out will be set to %NULL.
 		 * 
@@ -30008,7 +28582,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * If #file is a resource:// based URI, the resulting bytes will reference the
 		 * embedded resource instead of a copy. Otherwise, this is equivalent to calling
-		 * g_file_load_contents_async() and g_bytes_new_take().
+		 * {@link G.file_load_contents_async} and g_bytes_new_take().
 		 * 
 		 * #callback should call g_file_load_bytes_finish() to get the result of this
 		 * asynchronous operation.
@@ -30020,7 +28594,7 @@ declare namespace imports.gi.Gio {
 		 */
 		load_bytes_async(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Completes an asynchronous request to g_file_load_bytes_async().
+		 * Completes an asynchronous request to {@link G.file_load_bytes_async}.
 		 * 
 		 * For resources, #etag_out will be set to %NULL.
 		 * 
@@ -30039,7 +28613,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Loads the content of the file into memory. The data is always
 		 * zero-terminated, but this is not included in the resultant #length.
-		 * The returned #contents should be freed with g_free() when no longer
+		 * The returned #contents should be freed with {@link G.free} when no longer
 		 * needed.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
@@ -30061,7 +28635,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Starts an asynchronous load of the #file's contents.
 		 * 
-		 * For more details, see g_file_load_contents() which is
+		 * For more details, see {@link G.file_load_contents} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the load operation has completed, #callback will be called
@@ -30080,7 +28654,7 @@ declare namespace imports.gi.Gio {
 		 * Finishes an asynchronous load of the #file's contents.
 		 * The contents are placed in #contents, and #length is set to the
 		 * size of the #contents string. The #contents should be freed with
-		 * g_free() when no longer needed. If #etag_out is present, it will be
+		 * {@link G.free} when no longer needed. If #etag_out is present, it will be
 		 * set to the new entity tag for the #file.
 		 * @param res a #GAsyncResult
 		 * @returns %TRUE if the load was successful. If %FALSE and #error is
@@ -30098,7 +28672,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Reads the partial contents of a file. A #GFileReadMoreCallback should
 		 * be used to stop reading from the file when appropriate, else this
-		 * function will behave exactly as g_file_load_contents_async(). This
+		 * function will behave exactly as {@link G.file_load_contents_async}. This
 		 * operation can be finished by g_file_load_partial_contents_finish().
 		 * 
 		 * Users of this function should be aware that #user_data is passed to
@@ -30117,7 +28691,7 @@ declare namespace imports.gi.Gio {
 		load_partial_contents_async(cancellable: Cancellable | null, read_more_callback: FileReadMoreCallback, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous partial load operation that was started
-		 * with g_file_load_partial_contents_async(). The data is always
+		 * with {@link G.file_load_partial_contents_async}. The data is always
 		 * zero-terminated, but this is not included in the resultant #length.
 		 * The returned #contents should be freed with g_free() when no longer
 		 * needed.
@@ -30137,7 +28711,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Creates a directory. Note that this will only create a child directory
 		 * of the immediate parent directory of the path or URI given by the #GFile.
-		 * To recursively create directories, see g_file_make_directory_with_parents().
+		 * To recursively create directories, see {@link G.file_make_directory_with_parents}.
 		 * This function will fail if the parent directory does not exist, setting
 		 * #error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 		 * creating directories, this function will fail, setting #error to
@@ -30165,7 +28739,7 @@ declare namespace imports.gi.Gio {
 		make_directory_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous directory creation, started with
-		 * g_file_make_directory_async().
+		 * {@link G.file_make_directory_async}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on successful directory creation, %FALSE otherwise.
 		 */
@@ -30176,7 +28750,7 @@ declare namespace imports.gi.Gio {
 		 * creating directories, this function will fail, setting #error to
 		 * %G_IO_ERROR_NOT_SUPPORTED. If the directory itself already exists,
 		 * this function will fail setting #error to %G_IO_ERROR_EXISTS, unlike
-		 * the similar g_mkdir_with_parents().
+		 * the similar {@link G.mkdir_with_parents}.
 		 * 
 		 * For a local #GFile the newly created directories will have the default
 		 * (current) ownership and permissions of the current process.
@@ -30216,7 +28790,7 @@ declare namespace imports.gi.Gio {
 		 * %G_FILE_MEASURE_REPORT_ANY_ERROR is given in #flags.
 		 * 
 		 * The returned size, #disk_usage, is in bytes and should be formatted
-		 * with g_format_size() in order to get something reasonable for showing
+		 * with {@link G.format_size} in order to get something reasonable for showing
 		 * in a user interface.
 		 * 
 		 * #progress_callback and #progress_data can be given to request
@@ -30240,7 +28814,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Recursively measures the disk usage of #file.
 		 * 
-		 * This is the asynchronous version of g_file_measure_disk_usage().  See
+		 * This is the asynchronous version of {@link G.file_measure_disk_usage}.  See
 		 * there for more information.
 		 * @param flags #GFileMeasureFlags
 		 * @param io_priority the [I/O priority][io-priority] of the request
@@ -30252,7 +28826,7 @@ declare namespace imports.gi.Gio {
 		measure_disk_usage_async(flags: FileMeasureFlags, io_priority: number, cancellable: Cancellable | null, progress_callback: FileMeasureProgressCallback | null, progress_data: any | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Collects the results from an earlier call to
-		 * g_file_measure_disk_usage_async().  See g_file_measure_disk_usage() for
+		 * {@link G.file_measure_disk_usage_async}.  See g_file_measure_disk_usage() for
 		 * more information.
 		 * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
 		 * @returns %TRUE if successful, with the out parameters set.
@@ -30277,7 +28851,7 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileMonitor for the given #file,
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		monitor(flags: FileMonitorFlags, cancellable: Cancellable | null): FileMonitor;
 		/**
@@ -30292,13 +28866,13 @@ declare namespace imports.gi.Gio {
 		 * %G_FILE_MONITOR_WATCH_HARD_LINKS, since hard links can not be made to
 		 * directories.  It is not possible to monitor all the files in a
 		 * directory for changes made via hard links; if you want to do this then
-		 * you must register individual watches with g_file_monitor().
+		 * you must register individual watches with {@link G.file_monitor}.
 		 * @param flags a set of #GFileMonitorFlags
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileMonitor for the given #file,
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		monitor_directory(flags: FileMonitorFlags, cancellable: Cancellable | null): FileMonitor;
 		/**
@@ -30321,7 +28895,7 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileMonitor for the given #file,
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		monitor_file(flags: FileMonitorFlags, cancellable: Cancellable | null): FileMonitor;
 		/**
@@ -30330,7 +28904,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
-		 * g_file_mount_enclosing_volume_finish().
+		 * {@link G.file_mount_enclosing_volume_finish}.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -30345,7 +28919,7 @@ declare namespace imports.gi.Gio {
 		 */
 		mount_enclosing_volume(flags: MountMountFlags, mount_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a mount operation started by g_file_mount_enclosing_volume().
+		 * Finishes a mount operation started by {@link G.file_mount_enclosing_volume}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if successful. If an error has occurred,
 		 *     this function will return %FALSE and set #error
@@ -30362,7 +28936,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_mount_mountable_finish() to get
+		 * You can then call {@link G.file_mount_mountable_finish} to get
 		 * the result of the operation.
 		 * @param flags flags affecting the operation
 		 * @param mount_operation a #GMountOperation,
@@ -30374,13 +28948,13 @@ declare namespace imports.gi.Gio {
 		 */
 		mount_mountable(flags: MountMountFlags, mount_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a mount operation. See g_file_mount_mountable() for details.
+		 * Finishes a mount operation. See {@link G.file_mount_mountable} for details.
 		 * 
 		 * Finish an asynchronous mount operation that was started
 		 * with g_file_mount_mountable().
 		 * @param result a #GAsyncResult
 		 * @returns a #GFile or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		mount_mountable_finish(result: AsyncResult): File;
 		/**
@@ -30447,13 +29021,13 @@ declare namespace imports.gi.Gio {
 		 * for reading or writing.
 		 * @param cancellable a #GCancellable
 		 * @returns #GFileIOStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		open_readwrite(cancellable: Cancellable | null): FileIOStream;
 		/**
 		 * Asynchronously opens #file for reading and writing.
 		 * 
-		 * For more details, see g_file_open_readwrite() which is
+		 * For more details, see {@link G.file_open_readwrite} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -30468,14 +29042,14 @@ declare namespace imports.gi.Gio {
 		open_readwrite_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file read operation started with
-		 * g_file_open_readwrite_async().
+		 * {@link G.file_open_readwrite_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileIOStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		open_readwrite_finish(res: AsyncResult): FileIOStream;
 		/**
-		 * Exactly like g_file_get_path(), but caches the result via
+		 * Exactly like {@link G.file_get_path}, but caches the result via
 		 * g_object_set_qdata_full().  This is useful for example in C
 		 * applications which mix `g_file_*` APIs with native ones.  It
 		 * also avoids an extra duplicated string when possible, so will be
@@ -30494,7 +29068,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_mount_mountable_finish() to get
+		 * You can then call {@link G.file_mount_mountable_finish} to get
 		 * the result of the operation.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call
@@ -30502,7 +29076,7 @@ declare namespace imports.gi.Gio {
 		 */
 		poll_mountable(cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a poll operation. See g_file_poll_mountable() for details.
+		 * Finishes a poll operation. See {@link G.file_poll_mountable} for details.
 		 * 
 		 * Finish an asynchronous poll operation that was polled
 		 * with g_file_poll_mountable().
@@ -30521,27 +29095,27 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @returns a #GAppInfo if the handle was found,
 		 *     %NULL if there were errors.
-		 *     When you are done with it, release it with g_object_unref()
+		 *     When you are done with it, release it with {@link GObject.unref}
 		 */
 		query_default_handler(cancellable: Cancellable | null): AppInfo;
 		/**
-		 * Async version of g_file_query_default_handler().
+		 * Async version of {@link G.file_query_default_handler}.
 		 * @param io_priority the [I/O priority][io-priority] of the request
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @param callback a #GAsyncReadyCallback to call when the request is done
 		 */
 		query_default_handler_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a g_file_query_default_handler_async() operation.
+		 * Finishes a {@link G.file_query_default_handler_async} operation.
 		 * @param result a #GAsyncResult
 		 * @returns a #GAppInfo if the handle was found,
 		 *     %NULL if there were errors.
-		 *     When you are done with it, release it with g_object_unref()
+		 *     When you are done with it, release it with {@link GObject.unref}
 		 */
 		query_default_handler_finish(result: AsyncResult): AppInfo;
 		/**
 		 * Utility function to check if a particular file exists. This is
-		 * implemented using g_file_query_info() and as such does blocking I/O.
+		 * implemented using {@link G.file_query_info} and as such does blocking I/O.
 		 * 
 		 * Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
 		 * and then execute something based on the outcome of that, because the
@@ -30570,11 +29144,11 @@ declare namespace imports.gi.Gio {
 		query_exists(cancellable: Cancellable | null): boolean;
 		/**
 		 * Utility function to inspect the #GFileType of a file. This is
-		 * implemented using g_file_query_info() and as such does blocking I/O.
+		 * implemented using {@link G.file_query_info} and as such does blocking I/O.
 		 * 
 		 * The primary use case of this method is to check if a file is
 		 * a regular file, directory, or symlink.
-		 * @param flags a set of #GFileQueryInfoFlags passed to g_file_query_info()
+		 * @param flags a set of #GFileQueryInfoFlags passed to {@link G.file_query_info}
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns The #GFileType of the file and #G_FILE_TYPE_UNKNOWN
@@ -30582,7 +29156,7 @@ declare namespace imports.gi.Gio {
 		 */
 		query_file_type(flags: FileQueryInfoFlags, cancellable: Cancellable | null): FileType;
 		/**
-		 * Similar to g_file_query_info(), but obtains information
+		 * Similar to {@link G.file_query_info}, but obtains information
 		 * about the filesystem the #file is on, rather than the file itself.
 		 * For instance the amount of space available and the type of
 		 * the filesystem.
@@ -30611,7 +29185,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileInfo or %NULL if there was an error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		query_filesystem_info(attributes: string, cancellable: Cancellable | null): FileInfo;
 		/**
@@ -30620,7 +29194,7 @@ declare namespace imports.gi.Gio {
 		 * that contains key-value attributes (such as type or size for the
 		 * file).
 		 * 
-		 * For more details, see g_file_query_filesystem_info() which is the
+		 * For more details, see {@link G.file_query_filesystem_info} which is the
 		 * synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
@@ -30636,11 +29210,11 @@ declare namespace imports.gi.Gio {
 		query_filesystem_info_async(attributes: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous filesystem info query.
-		 * See g_file_query_filesystem_info_async().
+		 * See {@link G.file_query_filesystem_info_async}.
 		 * @param res a #GAsyncResult
 		 * @returns #GFileInfo for given #file
 		 *     or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		query_filesystem_info_finish(res: AsyncResult): FileInfo;
 		/**
@@ -30679,7 +29253,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileInfo for the given #file, or %NULL
-		 *     on error. Free the returned object with g_object_unref().
+		 *     on error. Free the returned object with {@link GObject.unref}.
 		 */
 		query_info(attributes: string, flags: FileQueryInfoFlags, cancellable: Cancellable | null): FileInfo;
 		/**
@@ -30687,7 +29261,7 @@ declare namespace imports.gi.Gio {
 		 * The result is a #GFileInfo object that contains key-value attributes
 		 * (such as type or size for the file).
 		 * 
-		 * For more details, see g_file_query_info() which is the synchronous
+		 * For more details, see {@link G.file_query_info} which is the synchronous
 		 * version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called. You can
@@ -30703,11 +29277,11 @@ declare namespace imports.gi.Gio {
 		query_info_async(attributes: string, flags: FileQueryInfoFlags, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file info query.
-		 * See g_file_query_info_async().
+		 * See {@link G.file_query_info_async}.
 		 * @param res a #GAsyncResult
 		 * @returns #GFileInfo for given #file
 		 *     or %NULL on error. Free the returned object with
-		 *     g_object_unref().
+		 *     {@link GObject.unref}.
 		 */
 		query_info_finish(res: AsyncResult): FileInfo;
 		/**
@@ -30725,7 +29299,7 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileAttributeInfoList describing the settable attributes.
 		 *     When you are done with it, release it with
-		 *     g_file_attribute_info_list_unref()
+		 *     {@link G.file_attribute_info_list_unref}
 		 */
 		query_settable_attributes(cancellable: Cancellable | null): FileAttributeInfoList;
 		/**
@@ -30740,7 +29314,7 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFileAttributeInfoList describing the writable namespaces.
 		 *     When you are done with it, release it with
-		 *     g_file_attribute_info_list_unref()
+		 *     {@link G.file_attribute_info_list_unref}
 		 */
 		query_writable_namespaces(cancellable: Cancellable | null): FileAttributeInfoList;
 		/**
@@ -30757,13 +29331,13 @@ declare namespace imports.gi.Gio {
 		 * on what kind of filesystem the file is on.
 		 * @param cancellable a #GCancellable
 		 * @returns #GFileInputStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		read(cancellable: Cancellable | null): FileInputStream;
 		/**
 		 * Asynchronously opens #file for reading.
 		 * 
-		 * For more details, see g_file_read() which is
+		 * For more details, see {@link G.file_read} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -30778,10 +29352,10 @@ declare namespace imports.gi.Gio {
 		read_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file read operation started with
-		 * g_file_read_async().
+		 * {@link G.file_read_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileInputStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		read_finish(res: AsyncResult): FileInputStream;
 		/**
@@ -30809,7 +29383,7 @@ declare namespace imports.gi.Gio {
 		 * this value is compared to the current entity tag of the file, and if
 		 * they differ an %G_IO_ERROR_WRONG_ETAG error is returned. This
 		 * generally means that the file has been changed since you last read
-		 * it. You can get the new etag from g_file_output_stream_get_etag()
+		 * it. You can get the new etag from {@link G.file_output_stream_get_etag}
 		 * after you've finished writing and closed the #GFileOutputStream. When
 		 * you load a new file you can use g_file_input_stream_query_info() to
 		 * get the etag of the file.
@@ -30833,14 +29407,14 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileOutputStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		replace(etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null): FileOutputStream;
 		/**
 		 * Asynchronously overwrites the file, replacing the contents,
 		 * possibly creating a backup copy of the file first.
 		 * 
-		 * For more details, see g_file_replace() which is
+		 * For more details, see {@link G.file_replace} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -30864,7 +29438,7 @@ declare namespace imports.gi.Gio {
 		 * or the error %G_IO_ERROR_WRONG_ETAG will be returned.
 		 * 
 		 * If #make_backup is %TRUE, this function will attempt to make a backup
-		 * of #file. Internally, it uses g_file_replace(), so will try to replace the
+		 * of #file. Internally, it uses {@link G.file_replace}, so will try to replace the
 		 * file contents in the safest way possible. For example, atomic renames are
 		 * used when replacing local files’ contents.
 		 * 
@@ -30884,7 +29458,7 @@ declare namespace imports.gi.Gio {
 		 *     will return %FALSE and set #error appropriately if present.
 		 * 
 		 * a location to a new [entity tag][gfile-etag]
-		 *      for the document. This should be freed with g_free() when no longer
+		 *      for the document. This should be freed with {@link G.free} when no longer
 		 *      needed, or %NULL
 		 */
 		replace_contents(contents: string, etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null): [ boolean, string | null ];
@@ -30895,7 +29469,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * When this operation has completed, #callback will be called with
 		 * #user_user data, and the operation can be finalized with
-		 * g_file_replace_contents_finish().
+		 * {@link G.file_replace_contents_finish}.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
 		 * triggering the cancellable object from another thread. If the operation
@@ -30918,7 +29492,7 @@ declare namespace imports.gi.Gio {
 		 */
 		replace_contents_async(contents: number[], length: number, etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Same as g_file_replace_contents_async() but takes a #GBytes input instead.
+		 * Same as {@link G.file_replace_contents_async} but takes a #GBytes input instead.
 		 * This function will keep a ref on #contents until the operation is done.
 		 * Unlike g_file_replace_contents_async() this allows forgetting about the
 		 * content without waiting for the callback.
@@ -30936,22 +29510,22 @@ declare namespace imports.gi.Gio {
 		replace_contents_bytes_async(contents: GLib.Bytes, etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous replace of the given #file. See
-		 * g_file_replace_contents_async(). Sets #new_etag to the new entity
+		 * {@link G.file_replace_contents_async}. Sets #new_etag to the new entity
 		 * tag for the document, if present.
 		 * @param res a #GAsyncResult
 		 * @returns %TRUE on success, %FALSE on failure.
 		 * 
 		 * a location of a new [entity tag][gfile-etag]
-		 *     for the document. This should be freed with g_free() when it is no
+		 *     for the document. This should be freed with {@link G.free} when it is no
 		 *     longer needed, or %NULL
 		 */
 		replace_contents_finish(res: AsyncResult): [ boolean, string | null ];
 		/**
 		 * Finishes an asynchronous file replace operation started with
-		 * g_file_replace_async().
+		 * {@link G.file_replace_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileOutputStream, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		replace_finish(res: AsyncResult): FileOutputStream;
 		/**
@@ -30959,7 +29533,7 @@ declare namespace imports.gi.Gio {
 		 * possibly creating a backup copy of the file first. If the file doesn't
 		 * exist, it will be created.
 		 * 
-		 * For details about the behaviour, see g_file_replace() which does the
+		 * For details about the behaviour, see {@link G.file_replace} which does the
 		 * same thing but returns an output stream only.
 		 * 
 		 * Note that in many non-local file cases read and write streams are not
@@ -30972,7 +29546,7 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable optional #GCancellable object,
 		 *     %NULL to ignore
 		 * @returns a #GFileIOStream or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		replace_readwrite(etag: string | null, make_backup: boolean, flags: FileCreateFlags, cancellable: Cancellable | null): FileIOStream;
 		/**
@@ -30980,7 +29554,7 @@ declare namespace imports.gi.Gio {
 		 * replacing the contents, possibly creating a backup copy
 		 * of the file first.
 		 * 
-		 * For more details, see g_file_replace_readwrite() which is
+		 * For more details, see {@link G.file_replace_readwrite} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -30999,10 +29573,10 @@ declare namespace imports.gi.Gio {
 		replace_readwrite_async(etag: string | null, make_backup: boolean, flags: FileCreateFlags | null, io_priority: number | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file replace operation started with
-		 * g_file_replace_readwrite_async().
+		 * {@link G.file_replace_readwrite_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFileIOStream, or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		replace_readwrite_finish(res: AsyncResult): FileIOStream;
 		/**
@@ -31012,7 +29586,7 @@ declare namespace imports.gi.Gio {
 		 * @param relative_path a given relative path string
 		 * @returns #GFile to the resolved path.
 		 *     %NULL if #relative_path is %NULL or if #file is invalid.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		resolve_relative_path(relative_path: string): File;
 		/**
@@ -31132,7 +29706,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Asynchronously sets the attributes of #file with #info.
 		 * 
-		 * For more details, see g_file_set_attributes_from_info(),
+		 * For more details, see {@link G.file_set_attributes_from_info},
 		 * which is the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -31147,7 +29721,7 @@ declare namespace imports.gi.Gio {
 		 */
 		set_attributes_async(info: FileInfo, flags: FileQueryInfoFlags, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes setting an attribute started in g_file_set_attributes_async().
+		 * Finishes setting an attribute started in {@link G.file_set_attributes_async}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if the attributes were set correctly, %FALSE otherwise.
 		 * 
@@ -31183,7 +29757,7 @@ declare namespace imports.gi.Gio {
 		 * If you want to implement a rename operation in the user interface the
 		 * edit name (#G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME) should be used as the
 		 * initial value in the rename widget, and then the result after editing
-		 * should be passed to g_file_set_display_name().
+		 * should be passed to {@link G.file_set_display_name}.
 		 * 
 		 * On success the resulting converted filename is returned.
 		 * 
@@ -31195,13 +29769,13 @@ declare namespace imports.gi.Gio {
 		 *     %NULL to ignore
 		 * @returns a #GFile specifying what #file was renamed to,
 		 *     or %NULL if there was an error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		set_display_name(display_name: string, cancellable: Cancellable | null): File;
 		/**
 		 * Asynchronously sets the display name for a given #GFile.
 		 * 
-		 * For more details, see g_file_set_display_name() which is
+		 * For more details, see {@link G.file_set_display_name} which is
 		 * the synchronous version of this call.
 		 * 
 		 * When the operation is finished, #callback will be called.
@@ -31217,10 +29791,10 @@ declare namespace imports.gi.Gio {
 		set_display_name_async(display_name: string, io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes setting a display name started with
-		 * g_file_set_display_name_async().
+		 * {@link G.file_set_display_name_async}.
 		 * @param res a #GAsyncResult
 		 * @returns a #GFile or %NULL on error.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		set_display_name_finish(res: AsyncResult): File;
 		/**
@@ -31233,7 +29807,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_mount_mountable_finish() to get
+		 * You can then call {@link G.file_mount_mountable_finish} to get
 		 * the result of the operation.
 		 * @param flags flags affecting the operation
 		 * @param start_operation a #GMountOperation, or %NULL to avoid user interaction
@@ -31242,7 +29816,7 @@ declare namespace imports.gi.Gio {
 		 */
 		start_mountable(flags: DriveStartFlags, start_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a start operation. See g_file_start_mountable() for details.
+		 * Finishes a start operation. See {@link G.file_start_mountable} for details.
 		 * 
 		 * Finish an asynchronous start operation that was started
 		 * with g_file_start_mountable().
@@ -31259,7 +29833,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_stop_mountable_finish() to get
+		 * You can then call {@link G.file_stop_mountable_finish} to get
 		 * the result of the operation.
 		 * @param flags flags affecting the operation
 		 * @param mount_operation a #GMountOperation,
@@ -31271,7 +29845,7 @@ declare namespace imports.gi.Gio {
 		 */
 		stop_mountable(flags: MountUnmountFlags, mount_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes a stop operation, see g_file_stop_mountable() for details.
+		 * Finishes a stop operation, see {@link G.file_stop_mountable} for details.
 		 * 
 		 * Finish an asynchronous stop operation that was started
 		 * with g_file_stop_mountable().
@@ -31293,7 +29867,7 @@ declare namespace imports.gi.Gio {
 		 * deleting it, but the user can recover it before emptying the trashcan.
 		 * Not all file systems support trashing, so this call can return the
 		 * %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
-		 * mount option can be used to disable g_file_trash() support for certain
+		 * mount option can be used to disable {@link G.file_trash} support for certain
 		 * mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
 		 * 
 		 * If #cancellable is not %NULL, then the operation can be cancelled by
@@ -31315,14 +29889,14 @@ declare namespace imports.gi.Gio {
 		trash_async(io_priority: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an asynchronous file trashing operation, started with
-		 * g_file_trash_async().
+		 * {@link G.file_trash_async}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE on successful trash, %FALSE otherwise.
 		 */
 		trash_finish(result: AsyncResult): boolean;
 		/**
 		 * @deprecated
-		 * Use g_file_unmount_mountable_with_operation() instead.
+		 * Use {@link G.file_unmount_mountable_with_operation} instead.
 		 * 
 		 * Unmounts a file of type G_FILE_TYPE_MOUNTABLE.
 		 * 
@@ -31331,7 +29905,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_unmount_mountable_finish() to get
+		 * You can then call {@link G.file_unmount_mountable_finish} to get
 		 * the result of the operation.
 		 * @param flags flags affecting the operation
 		 * @param cancellable optional #GCancellable object,
@@ -31342,10 +29916,10 @@ declare namespace imports.gi.Gio {
 		unmount_mountable(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_file_unmount_mountable_with_operation_finish()
+		 * Use {@link G.file_unmount_mountable_with_operation_finish}
 		 *     instead.
 		 * 
-		 * Finishes an unmount operation, see g_file_unmount_mountable() for details.
+		 * Finishes an unmount operation, see {@link G.file_unmount_mountable} for details.
 		 * 
 		 * Finish an asynchronous unmount operation that was started
 		 * with g_file_unmount_mountable().
@@ -31362,7 +29936,7 @@ declare namespace imports.gi.Gio {
 		 * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 		 * 
 		 * When the operation is finished, #callback will be called.
-		 * You can then call g_file_unmount_mountable_finish() to get
+		 * You can then call {@link G.file_unmount_mountable_finish} to get
 		 * the result of the operation.
 		 * @param flags flags affecting the operation
 		 * @param mount_operation a #GMountOperation,
@@ -31375,7 +29949,7 @@ declare namespace imports.gi.Gio {
 		unmount_mountable_with_operation(flags: MountUnmountFlags, mount_operation: MountOperation | null, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an unmount operation,
-		 * see g_file_unmount_mountable_with_operation() for details.
+		 * see {@link G.file_unmount_mountable_with_operation} for details.
 		 * 
 		 * Finish an asynchronous unmount operation that was started
 		 * with g_file_unmount_mountable_with_operation().
@@ -31403,7 +29977,7 @@ declare namespace imports.gi.Gio {
 	 * (see #GInputStream and #GOutputStream).
 	 * 
 	 * To construct a #GFile, you can use:
-	 * - g_file_new_for_path() if you have a path.
+	 * - {@link G.file_new_for_path} if you have a path.
 	 * - g_file_new_for_uri() if you have a URI.
 	 * - g_file_new_for_commandline_arg() for a command line argument.
 	 * - g_file_new_tmp() to create a temporary file from a template.
@@ -31485,7 +30059,7 @@ declare namespace imports.gi.Gio {
 		 * Constructs a #GFile from a series of elements using the correct
 		 * separator for filenames.
 		 * 
-		 * Using this function is equivalent to calling g_build_filename(),
+		 * Using this function is equivalent to calling {@link G.build_filename},
 		 * followed by g_file_new_for_path() on the result.
 		 * @param first_element the first element in the path
 		 * @returns a new #GFile
@@ -31508,13 +30082,13 @@ declare namespace imports.gi.Gio {
 		 * #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
 		 * @param arg a command line string
 		 * @returns a new #GFile.
-		 *    Free the returned object with g_object_unref().
+		 *    Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_for_commandline_arg(arg: string): File;
 		/**
 		 * Creates a #GFile with the given argument from the command line.
 		 * 
-		 * This function is similar to g_file_new_for_commandline_arg() except
+		 * This function is similar to {@link G.file_new_for_commandline_arg} except
 		 * that it allows for passing the current working directory as an
 		 * argument instead of using the current working directory of the
 		 * process.
@@ -31535,7 +30109,7 @@ declare namespace imports.gi.Gio {
 		 * @param path a string containing a relative or absolute path.
 		 *     The string must be encoded in the glib filename encoding.
 		 * @returns a new #GFile for the given #path.
-		 *   Free the returned object with g_object_unref().
+		 *   Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_for_path(path: string): File;
 		/**
@@ -31545,12 +30119,12 @@ declare namespace imports.gi.Gio {
 		 * not supported.
 		 * @param uri a UTF-8 string containing a URI
 		 * @returns a new #GFile for the given #uri.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 */
 		public static new_for_uri(uri: string): File;
 		/**
 		 * Opens a file in the preferred directory for temporary files (as
-		 * returned by g_get_tmp_dir()) and returns a #GFile and
+		 * returned by {@link G.get_tmp_dir}) and returns a #GFile and
 		 * #GFileIOStream pointing to it.
 		 * 
 		 * #tmpl should be a string in the GLib file name encoding
@@ -31560,16 +30134,16 @@ declare namespace imports.gi.Gio {
 		 * Unlike the other #GFile constructors, this will return %NULL if
 		 * a temporary file could not be created.
 		 * @param tmpl Template for the file
-		 *   name, as in g_file_open_tmp(), or %NULL for a default template
+		 *   name, as in {@link G.file_open_tmp}, or %NULL for a default template
 		 * @returns a new #GFile.
-		 *     Free the returned object with g_object_unref().
+		 *     Free the returned object with {@link GObject.unref}.
 		 * 
 		 * on return, a #GFileIOStream for the created file
 		 */
 		public static new_tmp(tmpl: string | null): [ File, FileIOStream ];
 		/**
 		 * Constructs a #GFile with the given #parse_name (i.e. something
-		 * given by g_file_get_parse_name()). This operation never fails,
+		 * given by {@link G.file_get_parse_name}). This operation never fails,
 		 * but the returned object might not support any I/O operation if
 		 * the #parse_name cannot be parsed.
 		 * @param parse_name a file name or path to be parsed
@@ -31627,7 +30201,7 @@ declare namespace imports.gi.Gio {
 		equal(icon2: Icon | null): boolean;
 		/**
 		 * Serializes a #GIcon into a #GVariant. An equivalent #GIcon can be retrieved
-		 * back by calling g_icon_deserialize() on the returned value.
+		 * back by calling {@link G.icon_deserialize} on the returned value.
 		 * As serialization will avoid using raw icon data when possible, it only
 		 * makes sense to transfer the #GVariant between processes on the same machine,
 		 * (as opposed to over the network), and within the same file system namespace.
@@ -31637,7 +30211,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Generates a textual representation of #icon that can be used for
 		 * serialization such as when passing #icon to a different process or
-		 * saving it to persistent storage. Use g_icon_new_for_string() to
+		 * saving it to persistent storage. Use {@link G.icon_new_for_string} to
 		 * get #icon back from the returned string.
 		 * 
 		 * The encoding of the returned string is proprietary to #GIcon except
@@ -31652,7 +30226,7 @@ declare namespace imports.gi.Gio {
 		 * - If #icon is a #GThemedIcon with exactly one name and no fallbacks,
 		 *   the encoding is simply the name (such as `network-server`).
 		 * @returns An allocated NUL-terminated UTF8 string or
-		 * %NULL if #icon can't be serialized. Use g_free() to free.
+		 * %NULL if #icon can't be serialized. Use {@link G.free} to free.
 		 */
 		to_string(): string | null;
 	}
@@ -31674,7 +30248,7 @@ declare namespace imports.gi.Gio {
 	 * of GIO's scope, however implementations of #GIcon may contain the name
 	 * of an icon (see #GThemedIcon), or the path to an icon (see #GLoadableIcon).
 	 * 
-	 * To obtain a hash of a #GIcon, see g_icon_hash().
+	 * To obtain a hash of a #GIcon, see {@link G.icon_hash}.
 	 * 
 	 * To check if two #GIcons are equal, see g_icon_equal().
 	 * 
@@ -31700,8 +30274,8 @@ declare namespace imports.gi.Gio {
 	class Icon {
 		public constructor(options?: Partial<IconInitOptions>);
 		/**
-		 * Deserializes a #GIcon previously serialized using g_icon_serialize().
-		 * @param value a #GVariant created with g_icon_serialize()
+		 * Deserializes a #GIcon previously serialized using {@link G.icon_serialize}.
+		 * @param value a #GVariant created with {@link G.icon_serialize}
 		 * @returns a #GIcon, or %NULL when deserialization fails.
 		 */
 		public static deserialize(value: GLib.Variant): Icon | null;
@@ -31714,12 +30288,12 @@ declare namespace imports.gi.Gio {
 		public static hash(icon: any): number;
 		/**
 		 * Generate a #GIcon instance from #str. This function can fail if
-		 * #str is not valid - see g_icon_to_string() for discussion.
+		 * #str is not valid - see {@link G.icon_to_string} for discussion.
 		 * 
 		 * If your application or library provides one or more #GIcon
 		 * implementations you need to ensure that each #GType is registered
 		 * with the type system prior to calling g_icon_new_for_string().
-		 * @param str A string obtained via g_icon_to_string().
+		 * @param str A string obtained via {@link G.icon_to_string}.
 		 * @returns An object implementing the #GIcon
 		 *          interface or %NULL if #error is set.
 		 */
@@ -31736,7 +30310,7 @@ declare namespace imports.gi.Gio {
 		 * Initializes the object implementing the interface.
 		 * 
 		 * This method is intended for language bindings. If writing in C,
-		 * g_initable_new() should typically be used instead.
+		 * {@link G.initable_new} should typically be used instead.
 		 * 
 		 * The object must be initialized before any real use after initial
 		 * construction, either with this function or g_async_initable_init_async().
@@ -31790,7 +30364,7 @@ declare namespace imports.gi.Gio {
 	 * #GInitable is implemented by objects that can fail during
 	 * initialization. If an object implements this interface then
 	 * it must be initialized as the first thing after construction,
-	 * either via g_initable_init() or g_async_initable_init_async()
+	 * either via {@link G.initable_init} or g_async_initable_init_async()
 	 * (the latter is only available if it also implements #GAsyncInitable).
 	 * 
 	 * If the object is not initialized, or initialization returns with an
@@ -31818,7 +30392,7 @@ declare namespace imports.gi.Gio {
 		public constructor(options?: Partial<InitableInitOptions>);
 		/**
 		 * Helper function for constructing #GInitable object. This is
-		 * similar to g_object_new() but also initializes the object
+		 * similar to {@link GObject.new} but also initializes the object
 		 * and returns %NULL, setting an error on failure.
 		 * @param object_type a #GType supporting #GInitable.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -31832,7 +30406,7 @@ declare namespace imports.gi.Gio {
 		public static new(object_type: GObject.Type, cancellable: Cancellable | null, error: GLib.Error, first_property_name: string | null): GObject.Object;
 		/**
 		 * Helper function for constructing #GInitable object. This is
-		 * similar to g_object_new_valist() but also initializes the object
+		 * similar to {@link GObject.new_valist} but also initializes the object
 		 * and returns %NULL, setting an error on failure.
 		 * @param object_type a #GType supporting #GInitable.
 		 * @param first_property_name the name of the first property, followed by
@@ -31845,11 +30419,11 @@ declare namespace imports.gi.Gio {
 		public static new_valist(object_type: GObject.Type, first_property_name: string, var_args: any[], cancellable: Cancellable | null): GObject.Object;
 		/**
 		 * @deprecated
-		 * Use g_object_new_with_properties() and
+		 * Use {@link GObject.new_with_properties} and
 		 * g_initable_init() instead. See #GParameter for more information.
 		 * 
 		 * Helper function for constructing #GInitable object. This is
-		 * similar to g_object_newv() but also initializes the object
+		 * similar to {@link GObject.newv} but also initializes the object
 		 * and returns %NULL, setting an error on failure.
 		 * @param object_type a #GType supporting #GInitable.
 		 * @param n_parameters the number of parameters in #parameters
@@ -31872,14 +30446,14 @@ declare namespace imports.gi.Gio {
 		 * items in #list, %NULL is returned.
 		 * 
 		 * %NULL is never returned for an index that is smaller than the length
-		 * of the list.  See g_list_model_get_n_items().
+		 * of the list.  See {@link G.list_model_get_n_items}.
 		 * @param position the position of the item to fetch
 		 * @returns the item at #position.
 		 */
 		get_item(position: number): any | null;
 		/**
 		 * Gets the type of the items in #list. All items returned from
-		 * g_list_model_get_type() are of that type or a subtype, or are an
+		 * {@link G.list_model_get_type} are of that type or a subtype, or are an
 		 * implementation of that interface.
 		 * 
 		 * The item type of a #GListModel can not change during the life of the
@@ -31892,7 +30466,7 @@ declare namespace imports.gi.Gio {
 		 * 
 		 * Depending on the model implementation, calling this function may be
 		 * less efficient than iterating the list with increasing values for
-		 * #position until g_list_model_get_item() returns %NULL.
+		 * #position until {@link G.list_model_get_item} returns %NULL.
 		 * @returns the number of items in #list.
 		 */
 		get_n_items(): number;
@@ -31901,7 +30475,7 @@ declare namespace imports.gi.Gio {
 		 * items in #list, %NULL is returned.
 		 * 
 		 * %NULL is never returned for an index that is smaller than the length
-		 * of the list.  See g_list_model_get_n_items().
+		 * of the list.  See {@link G.list_model_get_n_items}.
 		 * @param position the position of the item to fetch
 		 * @returns the object at #position.
 		 */
@@ -31984,7 +30558,7 @@ declare namespace imports.gi.Gio {
 	 * interested in.
 	 * 
 	 * All items in a #GListModel are of (or derived from) the same type.
-	 * g_list_model_get_item_type() returns that type.  The type may be an
+	 * {@link G.list_model_get_item_type} returns that type.  The type may be an
 	 * interface, in which case all objects in the list must implement it.
 	 * 
 	 * The semantics are close to that of an array:
@@ -32023,7 +30597,7 @@ declare namespace imports.gi.Gio {
 	interface ILoadableIcon {
 		/**
 		 * Loads a loadable icon. For the asynchronous version of this function,
-		 * see g_loadable_icon_load_async().
+		 * see {@link G.loadable_icon_load_async}.
 		 * @param size an integer.
 		 * @param cancellable optional #GCancellable object, %NULL to
 		 * ignore.
@@ -32035,7 +30609,7 @@ declare namespace imports.gi.Gio {
 		load(size: number, cancellable: Cancellable | null): [ InputStream, string | null ];
 		/**
 		 * Loads an icon asynchronously. To finish this function, see
-		 * g_loadable_icon_load_finish(). For the synchronous, blocking
+		 * {@link G.loadable_icon_load_finish}. For the synchronous, blocking
 		 * version of this function, see g_loadable_icon_load().
 		 * @param size an integer.
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -32044,7 +30618,7 @@ declare namespace imports.gi.Gio {
 		 */
 		load_async(size: number, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
+		 * Finishes an asynchronous icon load started in {@link G.loadable_icon_load_async}.
 		 * @param res a #GAsyncResult.
 		 * @returns a #GInputStream to read the icon from.
 		 * 
@@ -32122,7 +30696,7 @@ declare namespace imports.gi.Gio {
 	 *    the kernel (if supported by your libc)
 	 * 
 	 * Note that some actions may not always improve system performance, and so
-	 * should be profiled for your application. `malloc_trim()`, for example, may
+	 * should be profiled for your application. {@link `malloc.trim}`, for example, may
 	 * make future heap allocations slower (due to releasing cached heap pages back
 	 * to the kernel).
 	 * 
@@ -32180,10 +30754,10 @@ declare namespace imports.gi.Gio {
 		can_unmount(): boolean;
 		/**
 		 * @deprecated
-		 * Use g_mount_eject_with_operation() instead.
+		 * Use {@link G.mount_eject_with_operation} instead.
 		 * 
 		 * Ejects a mount. This is an asynchronous operation, and is
-		 * finished by calling g_mount_eject_finish() with the #mount
+		 * finished by calling {@link G.mount_eject_finish} with the #mount
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -32192,7 +30766,7 @@ declare namespace imports.gi.Gio {
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_mount_eject_with_operation_finish() instead.
+		 * Use {@link G.mount_eject_with_operation_finish} instead.
 		 * 
 		 * Finishes ejecting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
@@ -32202,7 +30776,7 @@ declare namespace imports.gi.Gio {
 		eject_finish(result: AsyncResult): boolean;
 		/**
 		 * Ejects a mount. This is an asynchronous operation, and is
-		 * finished by calling g_mount_eject_with_operation_finish() with the #mount
+		 * finished by calling {@link G.mount_eject_with_operation_finish} with the #mount
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param mount_operation a #GMountOperation or %NULL to avoid
@@ -32224,7 +30798,7 @@ declare namespace imports.gi.Gio {
 		 * the home directory, or the root of the volume).
 		 * @returns a #GFile.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_default_location(): File;
 		/**
@@ -32235,20 +30809,20 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GDrive or %NULL if #mount is not
 		 *      associated with a volume or a drive.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_drive(): Drive | null;
 		/**
 		 * Gets the icon for #mount.
 		 * @returns a #GIcon.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_icon(): Icon;
 		/**
 		 * Gets the name of #mount.
 		 * @returns the name for the given #mount.
-		 *     The returned string should be freed with g_free()
+		 *     The returned string should be freed with {@link G.free}
 		 *     when no longer needed.
 		 */
 		get_name(): string;
@@ -32256,7 +30830,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the root directory on #mount.
 		 * @returns a #GFile.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_root(): File;
 		/**
@@ -32268,7 +30842,7 @@ declare namespace imports.gi.Gio {
 		 * Gets the symbolic icon for #mount.
 		 * @returns a #GIcon.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_symbolic_icon(): Icon;
 		/**
@@ -32278,7 +30852,7 @@ declare namespace imports.gi.Gio {
 		 * available.
 		 * @returns the UUID for #mount or %NULL if no UUID
 		 *     can be computed.
-		 *     The returned string should be freed with g_free()
+		 *     The returned string should be freed with {@link G.free}
 		 *     when no longer needed.
 		 */
 		get_uuid(): string | null;
@@ -32287,7 +30861,7 @@ declare namespace imports.gi.Gio {
 		 * @returns a #GVolume or %NULL if #mount is not
 		 *      associated with a volume.
 		 *      The returned object should be unreffed with
-		 *      g_object_unref() when no longer needed.
+		 *      {@link GObject.unref} when no longer needed.
 		 */
 		get_volume(): Volume | null;
 		/**
@@ -32299,7 +30873,7 @@ declare namespace imports.gi.Gio {
 		 * specification for more on x-content types.
 		 * 
 		 * This is an asynchronous operation (see
-		 * g_mount_guess_content_type_sync() for the synchronous version), and
+		 * {@link G.mount_guess_content_type_sync} for the synchronous version), and
 		 * is finished by calling g_mount_guess_content_type_finish() with the
 		 * #mount and #GAsyncResult data returned in the #callback.
 		 * @param force_rescan Whether to force a rescan of the content.
@@ -32316,7 +30890,7 @@ declare namespace imports.gi.Gio {
 		 * guessing.
 		 * @param result a #GAsyncResult
 		 * @returns a %NULL-terminated array of content types or %NULL on error.
-		 *     Caller should free this array with g_strfreev() when done with it.
+		 *     Caller should free this array with {@link G.strfreev} when done with it.
 		 */
 		guess_content_type_finish(result: AsyncResult): string[];
 		/**
@@ -32328,12 +30902,12 @@ declare namespace imports.gi.Gio {
 		 * specification for more on x-content types.
 		 * 
 		 * This is a synchronous operation and as such may block doing IO;
-		 * see g_mount_guess_content_type() for the asynchronous version.
+		 * see {@link G.mount_guess_content_type} for the asynchronous version.
 		 * @param force_rescan Whether to force a rescan of the content.
 		 *     Otherwise a cached result will be used if available
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
 		 * @returns a %NULL-terminated array of content types or %NULL on error.
-		 *     Caller should free this array with g_strfreev() when done with it.
+		 *     Caller should free this array with {@link G.strfreev} when done with it.
 		 */
 		guess_content_type_sync(force_rescan: boolean, cancellable: Cancellable | null): string[];
 		/**
@@ -32365,7 +30939,7 @@ declare namespace imports.gi.Gio {
 		is_shadowed(): boolean;
 		/**
 		 * Remounts a mount. This is an asynchronous operation, and is
-		 * finished by calling g_mount_remount_finish() with the #mount
+		 * finished by calling {@link G.mount_remount_finish} with the #mount
 		 * and #GAsyncResults data returned in the #callback.
 		 * 
 		 * Remounting is useful when some setting affecting the operation
@@ -32390,16 +30964,16 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Increments the shadow count on #mount. Usually used by
 		 * #GVolumeMonitor implementations when creating a shadow mount for
-		 * #mount, see g_mount_is_shadowed() for more information. The caller
+		 * #mount, see {@link G.mount_is_shadowed} for more information. The caller
 		 * will need to emit the #GMount::changed signal on #mount manually.
 		 */
 		shadow(): void;
 		/**
 		 * @deprecated
-		 * Use g_mount_unmount_with_operation() instead.
+		 * Use {@link G.mount_unmount_with_operation} instead.
 		 * 
 		 * Unmounts a mount. This is an asynchronous operation, and is
-		 * finished by calling g_mount_unmount_finish() with the #mount
+		 * finished by calling {@link G.mount_unmount_finish} with the #mount
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the operation
 		 * @param cancellable optional #GCancellable object, %NULL to ignore.
@@ -32408,7 +30982,7 @@ declare namespace imports.gi.Gio {
 		unmount(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_mount_unmount_with_operation_finish() instead.
+		 * Use {@link G.mount_unmount_with_operation_finish} instead.
 		 * 
 		 * Finishes unmounting a mount. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
@@ -32418,7 +30992,7 @@ declare namespace imports.gi.Gio {
 		unmount_finish(result: AsyncResult): boolean;
 		/**
 		 * Unmounts a mount. This is an asynchronous operation, and is
-		 * finished by calling g_mount_unmount_with_operation_finish() with the #mount
+		 * finished by calling {@link G.mount_unmount_with_operation_finish} with the #mount
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the operation
 		 * @param mount_operation a #GMountOperation or %NULL to avoid
@@ -32437,7 +31011,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Decrements the shadow count on #mount. Usually used by
 		 * #GVolumeMonitor implementations when destroying a shadow mount for
-		 * #mount, see g_mount_is_shadowed() for more information. The caller
+		 * #mount, see {@link G.mount_is_shadowed} for more information. The caller
 		 * will need to emit the #GMount::changed signal on #mount manually.
 		 */
 		unshadow(): void;
@@ -32498,7 +31072,7 @@ declare namespace imports.gi.Gio {
 	 * Unmounting a #GMount instance is an asynchronous operation. For
 	 * more information about asynchronous operations, see #GAsyncResult
 	 * and #GTask. To unmount a #GMount instance, first call
-	 * g_mount_unmount_with_operation() with (at least) the #GMount instance and a
+	 * {@link G.mount_unmount_with_operation} with (at least) the #GMount instance and a
 	 * #GAsyncReadyCallback.  The callback will be fired when the
 	 * operation has resolved (either with success or failure), and a
 	 * #GAsyncResult structure will be passed to the callback.  That
@@ -32521,7 +31095,7 @@ declare namespace imports.gi.Gio {
 	interface INetworkMonitor {
 		/**
 		 * More detailed information about the host's network connectivity.
-		 * See g_network_monitor_get_connectivity() and
+		 * See {@link G.network_monitor_get_connectivity} and
 		 * #GNetworkConnectivity for more details.
 		 */
 		readonly connectivity: NetworkConnectivity;
@@ -32535,7 +31109,7 @@ declare namespace imports.gi.Gio {
 		 * connected to a functioning router that has lost its own upstream
 		 * connectivity. Some hosts might only be accessible when a VPN is
 		 * active. Other hosts might only be accessible when the VPN is
-		 * not active. Thus, it is best to use g_network_monitor_can_reach()
+		 * not active. Thus, it is best to use {@link G.network_monitor_can_reach}
 		 * or g_network_monitor_can_reach_async() to test for reachability
 		 * on a host-by-host basis. (On the other hand, when the property is
 		 * %FALSE, the application can reasonably expect that no remote
@@ -32582,7 +31156,7 @@ declare namespace imports.gi.Gio {
 		 * Note that although this does not attempt to connect to
 		 * #connectable, it may still block for a brief period of time (eg,
 		 * trying to do multicast DNS on the local network), so if you do not
-		 * want to block, you should use g_network_monitor_can_reach_async().
+		 * want to block, you should use {@link G.network_monitor_can_reach_async}.
 		 * @param connectable a #GSocketConnectable
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns %TRUE if #connectable is reachable, %FALSE if not.
@@ -32593,7 +31167,7 @@ declare namespace imports.gi.Gio {
 		 * pointed to by #connectable can be reached, without actually
 		 * trying to connect to it.
 		 * 
-		 * For more details, see g_network_monitor_can_reach().
+		 * For more details, see {@link G.network_monitor_can_reach}.
 		 * 
 		 * When the operation is finished, #callback will be called.
 		 * You can then call g_network_monitor_can_reach_finish()
@@ -32606,14 +31180,14 @@ declare namespace imports.gi.Gio {
 		can_reach_async(connectable: SocketConnectable, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Finishes an async network connectivity test.
-		 * See g_network_monitor_can_reach_async().
+		 * See {@link G.network_monitor_can_reach_async}.
 		 * @param result a #GAsyncResult
 		 * @returns %TRUE if network is reachable, %FALSE if not.
 		 */
 		can_reach_finish(result: AsyncResult): boolean;
 		/**
 		 * Gets a more detailed networking state than
-		 * g_network_monitor_get_network_available().
+		 * {@link G.network_monitor_get_network_available}.
 		 * 
 		 * If #GNetworkMonitor:network-available is %FALSE, then the
 		 * connectivity state will be %G_NETWORK_CONNECTIVITY_LOCAL.
@@ -32719,7 +31293,7 @@ declare namespace imports.gi.Gio {
 		 * #cancellable is triggered or an error occurs. The callback on the
 		 * source is of the #GPollableSourceFunc type.
 		 * 
-		 * As with g_pollable_input_stream_is_readable(), it is possible that
+		 * As with {@link G.pollable_input_stream_is_readable}, it is possible that
 		 * the stream may not actually be readable even after the source
 		 * triggers, so you should use g_pollable_input_stream_read_nonblocking()
 		 * rather than g_input_stream_read() from the callback.
@@ -32731,20 +31305,20 @@ declare namespace imports.gi.Gio {
 		 * Checks if #stream can be read.
 		 * 
 		 * Note that some stream types may not be able to implement this 100%
-		 * reliably, and it is possible that a call to g_input_stream_read()
+		 * reliably, and it is possible that a call to {@link G.input_stream_read}
 		 * after this returns %TRUE would still block. To guarantee
 		 * non-blocking behavior, you should always use
 		 * g_pollable_input_stream_read_nonblocking(), which will return a
 		 * %G_IO_ERROR_WOULD_BLOCK error rather than blocking.
 		 * @returns %TRUE if #stream is readable, %FALSE if not. If an error
 		 *   has occurred on #stream, this will result in
-		 *   g_pollable_input_stream_is_readable() returning %TRUE, and the
+		 *   {@link G.pollable_input_stream_is_readable} returning %TRUE, and the
 		 *   next attempt to read will return the error.
 		 */
 		is_readable(): boolean;
 		/**
 		 * Attempts to read up to #count bytes from #stream into #buffer, as
-		 * with g_input_stream_read(). If #stream is not currently readable,
+		 * with {@link G.input_stream_read}. If #stream is not currently readable,
 		 * this will immediately return %G_IO_ERROR_WOULD_BLOCK, and you can
 		 * use g_pollable_input_stream_create_source() to create a #GSource
 		 * that will be triggered when #stream is readable.
@@ -32807,7 +31381,7 @@ declare namespace imports.gi.Gio {
 		 * #cancellable is triggered or an error occurs. The callback on the
 		 * source is of the #GPollableSourceFunc type.
 		 * 
-		 * As with g_pollable_output_stream_is_writable(), it is possible that
+		 * As with {@link G.pollable_output_stream_is_writable}, it is possible that
 		 * the stream may not actually be writable even after the source
 		 * triggers, so you should use g_pollable_output_stream_write_nonblocking()
 		 * rather than g_output_stream_write() from the callback.
@@ -32819,20 +31393,20 @@ declare namespace imports.gi.Gio {
 		 * Checks if #stream can be written.
 		 * 
 		 * Note that some stream types may not be able to implement this 100%
-		 * reliably, and it is possible that a call to g_output_stream_write()
+		 * reliably, and it is possible that a call to {@link G.output_stream_write}
 		 * after this returns %TRUE would still block. To guarantee
 		 * non-blocking behavior, you should always use
 		 * g_pollable_output_stream_write_nonblocking(), which will return a
 		 * %G_IO_ERROR_WOULD_BLOCK error rather than blocking.
 		 * @returns %TRUE if #stream is writable, %FALSE if not. If an error
 		 *   has occurred on #stream, this will result in
-		 *   g_pollable_output_stream_is_writable() returning %TRUE, and the
+		 *   {@link G.pollable_output_stream_is_writable} returning %TRUE, and the
 		 *   next attempt to write will return the error.
 		 */
 		is_writable(): boolean;
 		/**
 		 * Attempts to write up to #count bytes from #buffer to #stream, as
-		 * with g_output_stream_write(). If #stream is not currently writable,
+		 * with {@link G.output_stream_write}. If #stream is not currently writable,
 		 * this will immediately return %G_IO_ERROR_WOULD_BLOCK, and you can
 		 * use g_pollable_output_stream_create_source() to create a #GSource
 		 * that will be triggered when #stream is writable.
@@ -32856,7 +31430,7 @@ declare namespace imports.gi.Gio {
 		write_nonblocking(buffer: number[], count: number, cancellable: Cancellable | null): number;
 		/**
 		 * Attempts to write the bytes contained in the #n_vectors #vectors to #stream,
-		 * as with g_output_stream_writev(). If #stream is not currently writable,
+		 * as with {@link G.output_stream_writev}. If #stream is not currently writable,
 		 * this will immediately return %#G_POLLABLE_RETURN_WOULD_BLOCK, and you can
 		 * use g_pollable_output_stream_create_source() to create a #GSource
 		 * that will be triggered when #stream is writable. #error will *not* be
@@ -32993,7 +31567,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect(connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable | null): IOStream;
 		/**
-		 * Asynchronous version of g_proxy_connect().
+		 * Asynchronous version of {@link G.proxy_connect}.
 		 * @param connection a #GIOStream
 		 * @param proxy_address a #GProxyAddress
 		 * @param cancellable a #GCancellable
@@ -33001,7 +31575,7 @@ declare namespace imports.gi.Gio {
 		 */
 		connect_async(connection: IOStream, proxy_address: ProxyAddress, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
-		 * See g_proxy_connect().
+		 * See {@link G.proxy_connect}.
 		 * @param result a #GAsyncResult
 		 * @returns a #GIOStream.
 		 */
@@ -33013,7 +31587,7 @@ declare namespace imports.gi.Gio {
 		 * implementing such a protocol. When %FALSE is returned, the caller
 		 * should resolve the destination hostname first, and then pass a
 		 * #GProxyAddress containing the stringified IP address to
-		 * g_proxy_connect() or g_proxy_connect_async().
+		 * {@link G.proxy_connect} or g_proxy_connect_async().
 		 * @returns %TRUE if hostname resolution is supported.
 		 */
 		supports_hostname(): boolean;
@@ -33033,7 +31607,7 @@ declare namespace imports.gi.Gio {
 	 * The extensions are named after their proxy protocol name. As an
 	 * example, a SOCKS5 proxy implementation can be retrieved with the
 	 * name 'socks5' using the function
-	 * g_io_extension_point_get_extension_by_name().
+	 * {@link G.io_extension_point_get_extension_by_name}.
 	 */
 	interface Proxy extends ProxyMixin {}
 
@@ -33057,7 +31631,7 @@ declare namespace imports.gi.Gio {
 	interface IProxyResolver {
 		/**
 		 * Checks if #resolver can be used on this system. (This is used
-		 * internally; g_proxy_resolver_get_default() will only return a proxy
+		 * internally; {@link G.proxy_resolver_get_default} will only return a proxy
 		 * resolver that returns %TRUE for this method.)
 		 * @returns %TRUE if #resolver is supported.
 		 */
@@ -33082,11 +31656,11 @@ declare namespace imports.gi.Gio {
 		 * @param cancellable a #GCancellable, or %NULL
 		 * @returns A
 		 *               NULL-terminated array of proxy URIs. Must be freed
-		 *               with g_strfreev().
+		 *               with {@link G.strfreev}.
 		 */
 		lookup(uri: string, cancellable: Cancellable | null): string[];
 		/**
-		 * Asynchronous lookup of proxy. See g_proxy_resolver_lookup() for more
+		 * Asynchronous lookup of proxy. See {@link G.proxy_resolver_lookup} for more
 		 * details.
 		 * @param uri a URI representing the destination to connect to
 		 * @param cancellable a #GCancellable, or %NULL
@@ -33095,12 +31669,12 @@ declare namespace imports.gi.Gio {
 		lookup_async(uri: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * Call this function to obtain the array of proxy URIs when
-		 * g_proxy_resolver_lookup_async() is complete. See
+		 * {@link G.proxy_resolver_lookup_async} is complete. See
 		 * g_proxy_resolver_lookup() for more details.
 		 * @param result the result passed to your #GAsyncReadyCallback
 		 * @returns A
 		 *               NULL-terminated array of proxy URIs. Must be freed
-		 *               with g_strfreev().
+		 *               with {@link G.strfreev}.
 		 */
 		lookup_finish(result: AsyncResult): string[];
 	}
@@ -33116,7 +31690,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * #GProxyResolver provides synchronous and asynchronous network proxy
 	 * resolution. #GProxyResolver is used within #GSocketClient through
-	 * the method g_socket_connectable_proxy_enumerate().
+	 * the method {@link G.socket_connectable_proxy_enumerate}.
 	 * 
 	 * Implementations of #GProxyResolver based on libproxy and GNOME settings can
 	 * be found in glib-networking. GIO comes with an implementation for use inside
@@ -33143,7 +31717,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Activates the remote action.
 		 * 
-		 * This is the same as g_action_group_activate_action() except that it
+		 * This is the same as {@link G.action_group_activate_action} except that it
 		 * allows for provision of "platform data" to be sent along with the
 		 * activation request.  This typically contains details such as the user
 		 * interaction timestamp or startup notification information.
@@ -33158,7 +31732,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Changes the state of a remote action.
 		 * 
-		 * This is the same as g_action_group_change_action_state() except that
+		 * This is the same as {@link G.action_group_change_action_state} except that
 		 * it allows for provision of "platform data" to be sent along with the
 		 * state change request.  This typically contains details such as the
 		 * user interaction timestamp or startup notification information.
@@ -33188,7 +31762,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * The interface has `_full` variants of the two
 	 * methods on #GActionGroup used to activate actions:
-	 * g_action_group_activate_action() and
+	 * {@link G.action_group_activate_action} and
 	 * g_action_group_change_action_state(). These variants allow a
 	 * "platform data" #GVariant to be specified: a dictionary providing
 	 * context for the action invocation (for example: timestamps, startup
@@ -33222,7 +31796,7 @@ declare namespace imports.gi.Gio {
 		can_seek(): boolean;
 		/**
 		 * Tests if the length of the stream can be adjusted with
-		 * g_seekable_truncate().
+		 * {@link G.seekable_truncate}.
 		 * @returns %TRUE if the stream can be truncated, %FALSE otherwise.
 		 */
 		can_truncate(): boolean;
@@ -33321,7 +31895,7 @@ declare namespace imports.gi.Gio {
 		 * to via a proxy.
 		 * 
 		 * If #connectable does not implement
-		 * g_socket_connectable_proxy_enumerate(), this will fall back to
+		 * {@link G.socket_connectable_proxy_enumerate}, this will fall back to
 		 * calling g_socket_connectable_enumerate().
 		 * @returns a new #GSocketAddressEnumerator.
 		 */
@@ -33350,7 +31924,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Objects that describe one or more potential socket endpoints
 	 * implement #GSocketConnectable. Callers can then use
-	 * g_socket_connectable_enumerate() to get a #GSocketAddressEnumerator
+	 * {@link G.socket_connectable_enumerate} to get a #GSocketAddressEnumerator
 	 * to try out each socket address in turn until one succeeds, as shown
 	 * in the sample code below.
 	 * 
@@ -33462,7 +32036,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Set the default #GTlsDatabase used to verify TLS connections
 		 * 
-		 * Any subsequent call to g_tls_backend_get_default_database() will return
+		 * Any subsequent call to {@link G.tls_backend_get_default_database} will return
 		 * the database set in this call.  Existing databases and connections are not
 		 * modified.
 		 * 
@@ -33542,8 +32116,11 @@ declare namespace imports.gi.Gio {
 		 */
 		server_identity: SocketConnectable;
 		/**
+		 * @deprecated
+		 * SSL 3.0 is insecure.
+		 * 
 		 * SSL 3.0 is no longer supported. See
-		 * g_tls_client_connection_set_use_ssl3() for details.
+		 * {@link G.tls_client_connection_set_use_ssl3} for details.
 		 */
 		use_ssl3: boolean;
 		/**
@@ -33594,7 +32171,7 @@ declare namespace imports.gi.Gio {
 		 * Each item in the list is a #GByteArray which contains the complete
 		 * subject DN of the certificate authority.
 		 * @returns the list of
-		 * CA DNs. You should unref each element with g_byte_array_unref() and then
+		 * CA DNs. You should unref each element with {@link G.byte_array_unref} and then
 		 * the free the list with g_list_free().
 		 */
 		get_accepted_cas(): GLib.List;
@@ -33610,7 +32187,7 @@ declare namespace imports.gi.Gio {
 		 * SSL 3.0 is insecure.
 		 * 
 		 * SSL 3.0 is no longer supported. See
-		 * g_tls_client_connection_set_use_ssl3() for details.
+		 * {@link G.tls_client_connection_set_use_ssl3} for details.
 		 * @returns %FALSE
 		 */
 		get_use_ssl3(): boolean;
@@ -33705,7 +32282,7 @@ declare namespace imports.gi.Gio {
 		 * The path to a file containing PEM encoded certificate authority
 		 * root anchors. The certificates in this file will be treated as
 		 * root authorities for the purpose of verifying other certificates
-		 * via the g_tls_database_verify_chain() operation.
+		 * via the {@link G.tls_database_verify_chain} operation.
 		 */
 		anchors: string;
 
@@ -33752,7 +32329,7 @@ declare namespace imports.gi.Gio {
 	interface ITlsServerConnection {
 		/**
 		 * The #GTlsAuthenticationMode for the server. This can be changed
-		 * before calling g_tls_connection_handshake() if you want to
+		 * before calling {@link G.tls_connection_handshake} if you want to
 		 * rehandshake with a different mode from the initial handshake.
 		 */
 		authentication_mode: TlsAuthenticationMode;
@@ -33812,10 +32389,10 @@ declare namespace imports.gi.Gio {
 		can_mount(): boolean;
 		/**
 		 * @deprecated
-		 * Use g_volume_eject_with_operation() instead.
+		 * Use {@link G.volume_eject_with_operation} instead.
 		 * 
 		 * Ejects a volume. This is an asynchronous operation, and is
-		 * finished by calling g_volume_eject_finish() with the #volume
+		 * finished by calling {@link G.volume_eject_finish} with the #volume
 		 * and #GAsyncResult returned in the #callback.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param cancellable optional #GCancellable object, %NULL to ignore
@@ -33824,7 +32401,7 @@ declare namespace imports.gi.Gio {
 		eject(flags: MountUnmountFlags, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 		/**
 		 * @deprecated
-		 * Use g_volume_eject_with_operation_finish() instead.
+		 * Use {@link G.volume_eject_with_operation_finish} instead.
 		 * 
 		 * Finishes ejecting a volume. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
@@ -33834,7 +32411,7 @@ declare namespace imports.gi.Gio {
 		eject_finish(result: AsyncResult): boolean;
 		/**
 		 * Ejects a volume. This is an asynchronous operation, and is
-		 * finished by calling g_volume_eject_with_operation_finish() with the #volume
+		 * finished by calling {@link G.volume_eject_with_operation_finish} with the #volume
 		 * and #GAsyncResult data returned in the #callback.
 		 * @param flags flags affecting the unmount if required for eject
 		 * @param mount_operation a #GMountOperation or %NULL to
@@ -33852,15 +32429,15 @@ declare namespace imports.gi.Gio {
 		eject_with_operation_finish(result: AsyncResult): boolean;
 		/**
 		 * Gets the kinds of [identifiers][volume-identifier] that #volume has.
-		 * Use g_volume_get_identifier() to obtain the identifiers themselves.
+		 * Use {@link G.volume_get_identifier} to obtain the identifiers themselves.
 		 * @returns a %NULL-terminated array
-		 *   of strings containing kinds of identifiers. Use g_strfreev() to free.
+		 *   of strings containing kinds of identifiers. Use {@link G.strfreev} to free.
 		 */
 		enumerate_identifiers(): string[];
 		/**
 		 * Gets the activation root for a #GVolume if it is known ahead of
 		 * mount time. Returns %NULL otherwise. If not %NULL and if #volume
-		 * is mounted, then the result of g_mount_get_root() on the
+		 * is mounted, then the result of {@link G.mount_get_root} on the
 		 * #GMount object obtained from g_volume_get_mount() will always
 		 * either be equal or a prefix of what this function returns. In
 		 * other words, in code
@@ -33885,20 +32462,20 @@ declare namespace imports.gi.Gio {
 		 * implementations to find the underlying mount to shadow, see
 		 * g_mount_is_shadowed() for more details.
 		 * @returns the activation root of #volume
-		 *     or %NULL. Use g_object_unref() to free.
+		 *     or %NULL. Use {@link GObject.unref} to free.
 		 */
 		get_activation_root(): File | null;
 		/**
 		 * Gets the drive for the #volume.
 		 * @returns a #GDrive or %NULL if #volume is not
 		 *     associated with a drive. The returned object should be unreffed
-		 *     with g_object_unref() when no longer needed.
+		 *     with {@link GObject.unref} when no longer needed.
 		 */
 		get_drive(): Drive | null;
 		/**
 		 * Gets the icon for #volume.
 		 * @returns a #GIcon.
-		 *     The returned object should be unreffed with g_object_unref()
+		 *     The returned object should be unreffed with {@link GObject.unref}
 		 *     when no longer needed.
 		 */
 		get_icon(): Icon;
@@ -33915,14 +32492,14 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the mount for the #volume.
 		 * @returns a #GMount or %NULL if #volume isn't mounted.
-		 *     The returned object should be unreffed with g_object_unref()
+		 *     The returned object should be unreffed with {@link GObject.unref}
 		 *     when no longer needed.
 		 */
 		get_mount(): Mount | null;
 		/**
 		 * Gets the name of #volume.
 		 * @returns the name for the given #volume. The returned string should
-		 *     be freed with g_free() when no longer needed.
+		 *     be freed with {@link G.free} when no longer needed.
 		 */
 		get_name(): string;
 		/**
@@ -33933,7 +32510,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * Gets the symbolic icon for #volume.
 		 * @returns a #GIcon.
-		 *     The returned object should be unreffed with g_object_unref()
+		 *     The returned object should be unreffed with {@link GObject.unref}
 		 *     when no longer needed.
 		 */
 		get_symbolic_icon(): Icon;
@@ -33944,13 +32521,13 @@ declare namespace imports.gi.Gio {
 		 * available.
 		 * @returns the UUID for #volume or %NULL if no UUID
 		 *     can be computed.
-		 *     The returned string should be freed with g_free()
+		 *     The returned string should be freed with {@link G.free}
 		 *     when no longer needed.
 		 */
 		get_uuid(): string | null;
 		/**
 		 * Mounts a volume. This is an asynchronous operation, and is
-		 * finished by calling g_volume_mount_finish() with the #volume
+		 * finished by calling {@link G.volume_mount_finish} with the #volume
 		 * and #GAsyncResult returned in the #callback.
 		 * @param flags flags affecting the operation
 		 * @param mount_operation a #GMountOperation or %NULL to avoid user interaction
@@ -33962,7 +32539,7 @@ declare namespace imports.gi.Gio {
 		 * Finishes mounting a volume. If any errors occurred during the operation,
 		 * #error will be set to contain the errors and %FALSE will be returned.
 		 * 
-		 * If the mount operation succeeded, g_volume_get_mount() on #volume
+		 * If the mount operation succeeded, {@link G.volume_get_mount} on #volume
 		 * is guaranteed to return the mount right after calling this
 		 * function; there's no need to listen for the 'mount-added' signal on
 		 * #GVolumeMonitor.
@@ -34013,7 +32590,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Mounting a #GVolume instance is an asynchronous operation. For more
 	 * information about asynchronous operations, see #GAsyncResult and
-	 * #GTask. To mount a #GVolume, first call g_volume_mount() with (at
+	 * #GTask. To mount a #GVolume, first call {@link G.volume_mount} with (at
 	 * least) the #GVolume instance, optionally a #GMountOperation object
 	 * and a #GAsyncReadyCallback.
 	 * 
@@ -34080,7 +32657,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Results returned from g_converter_convert().
+	 * Results returned from {@link G.converter_convert}.
 	 */
 	enum ConverterResult {
 		/**
@@ -34516,7 +33093,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Used by g_file_set_attributes_from_info() when setting file attributes.
+	 * Used by {@link G.file_set_attributes_from_info} when setting file attributes.
 	 */
 	enum FileAttributeStatus {
 		/**
@@ -34873,7 +33450,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * A remote object generated an error that
 		 *     doesn't correspond to a locally registered #GError error
-		 *     domain. Use g_dbus_error_get_remote_error() to extract the D-Bus
+		 *     domain. Use {@link G.dbus_error_get_remote_error} to extract the D-Bus
 		 *     error name and g_dbus_error_strip_remote_error() to fix up the
 		 *     message so it matches what was received on the wire. Since 2.26.
 		 */
@@ -34930,7 +33507,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags for use with g_io_module_scope_new().
+	 * Flags for use with {@link G.io_module_scope_new}.
 	 */
 	enum IOModuleScopeFlags {
 		/**
@@ -35125,7 +33702,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * The type of record that g_resolver_lookup_records() or
+	 * The type of record that {@link G.resolver_lookup_records} or
 	 * g_resolver_lookup_records_async() should retrieve. The records are returned
 	 * as lists of #GVariant tuples. Each record type has different values in
 	 * the variant tuples returned.
@@ -35373,7 +33950,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags for g_tls_interaction_request_certificate(),
+	 * Flags for {@link G.tls_interaction_request_certificate},
 	 * g_tls_interaction_request_certificate_async(), and
 	 * g_tls_interaction_invoke_request_certificate().
 	 */
@@ -35442,7 +34019,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags for g_tls_database_lookup_certificate_for_handle(),
+	 * Flags for {@link G.tls_database_lookup_certificate_for_handle},
 	 * g_tls_database_lookup_certificate_issuer(),
 	 * and g_tls_database_lookup_certificates_issued_by().
 	 */
@@ -35489,13 +34066,13 @@ declare namespace imports.gi.Gio {
 		/**
 		 * The TLS handshake failed because
 		 *   the server requested a client-side certificate, but none was
-		 *   provided. See g_tls_connection_set_certificate().
+		 *   provided. See {@link G.tls_connection_set_certificate}.
 		 */
 		CERTIFICATE_REQUIRED = 5,
 		/**
 		 * The TLS connection was closed without proper
 		 *   notice, which may indicate an attack. See
-		 *   g_tls_connection_set_require_close_notify().
+		 *   {@link G.tls_connection_set_require_close_notify}.
 		 */
 		EOF = 6,
 		/**
@@ -35576,7 +34153,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * When to allow rehandshaking. See
-	 * g_tls_connection_set_rehandshake_mode().
+	 * {@link G.tls_connection_set_rehandshake_mode}.
 	 */
 	enum TlsRehandshakeMode {
 		/**
@@ -35695,7 +34272,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * This application handles opening files (in
 		 *     the primary instance). Note that this flag only affects the default
-		 *     implementation of local_command_line(), and has no effect if
+		 *     implementation of {@link Local.command_line}, and has no effect if
 		 *     %G_APPLICATION_HANDLES_COMMAND_LINE is given.
 		 *     See g_application_run() for details.
 		 */
@@ -35703,7 +34280,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * This application handles command line
 		 *     arguments (in the primary instance). Note that this flag only affect
-		 *     the default implementation of local_command_line().
+		 *     the default implementation of {@link Local.command_line}.
 		 *     See g_application_run() for details.
 		 */
 		HANDLES_COMMAND_LINE = 8,
@@ -35715,7 +34292,7 @@ declare namespace imports.gi.Gio {
 		 *     to use the `GIT_COMMITTER_NAME` environment variable
 		 *     when editing a git commit message. The environment is available
 		 *     to the #GApplication::command-line signal handler, via
-		 *     g_application_command_line_getenv().
+		 *     {@link G.application_command_line_getenv}.
 		 */
 		SEND_ENVIRONMENT = 16,
 		/**
@@ -35779,7 +34356,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags used in g_bus_own_name().
+	 * Flags used in {@link G.bus_own_name}.
 	 */
 	enum BusNameOwnerFlags {
 		/**
@@ -35797,13 +34374,13 @@ declare namespace imports.gi.Gio {
 		REPLACE = 2,
 		/**
 		 * If another message bus connection owns the name, immediately
-		 * return an error from g_bus_own_name() rather than entering the waiting queue for that name. (Since 2.54)
+		 * return an error from {@link G.bus_own_name} rather than entering the waiting queue for that name. (Since 2.54)
 		 */
 		DO_NOT_QUEUE = 4
 	}
 
 	/**
-	 * Flags used in g_bus_watch_name().
+	 * Flags used in {@link G.bus_watch_name}.
 	 */
 	enum BusNameWatcherFlags {
 		/**
@@ -35819,7 +34396,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags used when calling a g_converter_convert().
+	 * Flags used when calling a {@link G.converter_convert}.
 	 */
 	enum ConverterFlags {
 		/**
@@ -35837,7 +34414,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags used in g_dbus_connection_call() and similar APIs.
+	 * Flags used in {@link G.dbus_connection_call} and similar APIs.
 	 */
 	enum DBusCallFlags {
 		/**
@@ -35901,7 +34478,7 @@ declare namespace imports.gi.Gio {
 		MESSAGE_BUS_CONNECTION = 8,
 		/**
 		 * If set, processing of D-Bus messages is
-		 * delayed until g_dbus_connection_start_message_processing() is called.
+		 * delayed until {@link G.dbus_connection_start_message_processing} is called.
 		 */
 		DELAY_MESSAGE_PROCESSING = 16,
 		/**
@@ -36066,7 +34643,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags used when subscribing to signals via g_dbus_connection_signal_subscribe().
+	 * Flags used when subscribing to signals via {@link G.dbus_connection_signal_subscribe}.
 	 */
 	enum DBusSignalFlags {
 		/**
@@ -36093,7 +34670,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags passed to g_dbus_connection_register_subtree().
+	 * Flags passed to {@link G.dbus_connection_register_subtree}.
 	 */
 	enum DBusSubtreeFlags {
 		/**
@@ -36192,14 +34769,14 @@ declare namespace imports.gi.Gio {
 		 *    You can think of it as "unlink destination" before
 		 *    writing to it, although the implementation may not
 		 *    be exactly like that. This flag can only be used with
-		 *    g_file_replace() and its variants, including g_file_replace_contents().
+		 *    {@link G.file_replace} and its variants, including g_file_replace_contents().
 		 *    Since 2.20
 		 */
 		REPLACE_DESTINATION = 2
 	}
 
 	/**
-	 * Flags that can be used with g_file_measure_disk_usage().
+	 * Flags that can be used with {@link G.file_measure_disk_usage}.
 	 */
 	enum FileMeasureFlags {
 		/**
@@ -36350,7 +34927,7 @@ declare namespace imports.gi.Gio {
 	 */
 	enum ResolverNameLookupFlags {
 		/**
-		 * default behavior (same as g_resolver_lookup_by_name())
+		 * default behavior (same as {@link G.resolver_lookup_by_name})
 		 */
 		DEFAULT = 0,
 		/**
@@ -36418,7 +34995,7 @@ declare namespace imports.gi.Gio {
 		 */
 		GET_NO_CHANGES = 8,
 		/**
-		 * When passed to g_settings_bind(), uses a pair of mapping functions that invert
+		 * When passed to {@link G.settings_bind}, uses a pair of mapping functions that invert
 		 *     the boolean value when mapping between the setting and the property.  The setting and property must both
 		 *     be booleans.  You cannot pass this flag to g_settings_bind_with_mapping().
 		 */
@@ -36426,7 +35003,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags used in g_socket_receive_message() and g_socket_send_message().
+	 * Flags used in {@link G.socket_receive_message} and g_socket_send_message().
 	 * The flags listed in the enum are some commonly available flags, but the
 	 * values used for them are the same as on the platform, and any other flags
 	 * are passed in/out as is. So to use a platform specific flag, just include
@@ -36472,7 +35049,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * create a pipe for the stdin of the
 		 *   spawned process that can be accessed with
-		 *   g_subprocess_get_stdin_pipe().
+		 *   {@link G.subprocess_get_stdin_pipe}.
 		 */
 		STDIN_PIPE = 1,
 		/**
@@ -36483,7 +35060,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * create a pipe for the stdout of the
 		 *   spawned process that can be accessed with
-		 *   g_subprocess_get_stdout_pipe().
+		 *   {@link G.subprocess_get_stdout_pipe}.
 		 */
 		STDOUT_PIPE = 4,
 		/**
@@ -36494,7 +35071,7 @@ declare namespace imports.gi.Gio {
 		/**
 		 * create a pipe for the stderr of the
 		 *   spawned process that can be accessed with
-		 *   g_subprocess_get_stderr_pipe().
+		 *   {@link G.subprocess_get_stderr_pipe}.
 		 */
 		STDERR_PIPE = 16,
 		/**
@@ -36530,7 +35107,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * A set of flags describing TLS certification validation. This can be
 	 * used to set which validation steps to perform (eg, with
-	 * g_tls_client_connection_set_validation_flags()), or to describe why
+	 * {@link G.tls_client_connection_set_validation_flags}), or to describe why
 	 * a particular certificate was rejected (eg, in
 	 * #GTlsConnection::accept-certificate).
 	 */
@@ -36577,7 +35154,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Flags for g_tls_database_verify_chain().
+	 * Flags for {@link G.tls_database_verify_chain}.
 	 */
 	enum TlsDatabaseVerifyFlags {
 		/**
@@ -36636,7 +35213,7 @@ declare namespace imports.gi.Gio {
 	 * later iteration of the main context.
 	 * 
 	 * The asynchronous operation is guaranteed to have held a reference to
-	 * #source_object from the time when the `*_async()` function was called, until
+	 * #source_object from the time when the {@link `*.async}` function was called, until
 	 * after this callback returns.
 	 */
 	interface AsyncReadyCallback {
@@ -36651,7 +35228,7 @@ declare namespace imports.gi.Gio {
 		 * later iteration of the main context.
 		 * 
 		 * The asynchronous operation is guaranteed to have held a reference to
-		 * #source_object from the time when the `*_async()` function was called, until
+		 * #source_object from the time when the {@link `*.async}` function was called, until
 		 * after this callback returns.
 		 * @param source_object the object the asynchronous operation was started with.
 		 * @param res a #GAsyncResult.
@@ -36732,12 +35309,12 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This is the function type of the callback used for the #GSource
-	 * returned by g_cancellable_source_new().
+	 * returned by {@link G.cancellable_source_new}.
 	 */
 	interface CancellableSourceFunc {
 		/**
 		 * This is the function type of the callback used for the #GSource
-		 * returned by g_cancellable_source_new().
+		 * returned by {@link G.cancellable_source_new}.
 		 * @param cancellable the #GCancellable
 		 * @returns it should return %FALSE if the source should be removed.
 		 */
@@ -36799,7 +35376,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Signature for function used in g_dbus_connection_add_filter().
+	 * Signature for function used in {@link G.dbus_connection_add_filter}.
 	 * 
 	 * A filter function is passed a #GDBusMessage and expected to return
 	 * a #GDBusMessage too. Passive filter functions that don't modify the
@@ -36861,7 +35438,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface DBusMessageFilterFunction {
 		/**
-		 * Signature for function used in g_dbus_connection_add_filter().
+		 * Signature for function used in {@link G.dbus_connection_add_filter}.
 		 * 
 		 * A filter function is passed a #GDBusMessage and expected to return
 		 * a #GDBusMessage too. Passive filter functions that don't modify the
@@ -36925,7 +35502,7 @@ declare namespace imports.gi.Gio {
 		 * @param incoming %TRUE if it is a message received from the other peer, %FALSE if it is
 		 * a message to be sent to the other peer.
 		 * @returns A #GDBusMessage that will be freed with
-		 * g_object_unref() or %NULL to drop the message. Passive filter
+		 * {@link GObject.unref} or %NULL to drop the message. Passive filter
 		 * functions can simply return the passed #message object.
 		 */
 		(connection: DBusConnection, message: DBusMessage, incoming: boolean): DBusMessage | null;
@@ -36960,11 +35537,11 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * Signature for callback function used in g_dbus_connection_signal_subscribe().
+	 * Signature for callback function used in {@link G.dbus_connection_signal_subscribe}.
 	 */
 	interface DBusSignalCallback {
 		/**
-		 * Signature for callback function used in g_dbus_connection_signal_subscribe().
+		 * Signature for callback function used in {@link G.dbus_connection_signal_subscribe}.
 		 * @param connection A #GDBusConnection.
 		 * @param sender_name The unique bus name of the sender of the signal,
 		 *    or %NULL on a peer-to-peer D-Bus connection.
@@ -36990,7 +35567,7 @@ declare namespace imports.gi.Gio {
 		 * segment of the object path (ie: it never contains a slash).
 		 * @param connection A #GDBusConnection.
 		 * @param sender The unique bus name of the remote caller.
-		 * @param object_path The object path that was registered with g_dbus_connection_register_subtree().
+		 * @param object_path The object path that was registered with {@link G.dbus_connection_register_subtree}.
 		 * @param interface_name The D-Bus interface name that the method call or property access is for.
 		 * @param node A node that is a child of #object_path (relative to #object_path) or %NULL for the root of the subtree.
 		 * @param out_user_data Return location for user data to pass to functions in the returned #GDBusInterfaceVTable.
@@ -37010,7 +35587,7 @@ declare namespace imports.gi.Gio {
 	 * Hierarchies are not supported; the items that you return should not
 	 * contain the `/` character.
 	 * 
-	 * The return value will be freed with g_strfreev().
+	 * The return value will be freed with {@link G.strfreev}.
 	 */
 	interface DBusSubtreeEnumerateFunc {
 		/**
@@ -37024,10 +35601,10 @@ declare namespace imports.gi.Gio {
 		 * Hierarchies are not supported; the items that you return should not
 		 * contain the `/` character.
 		 * 
-		 * The return value will be freed with g_strfreev().
+		 * The return value will be freed with {@link G.strfreev}.
 		 * @param connection A #GDBusConnection.
 		 * @param sender The unique bus name of the remote caller.
-		 * @param object_path The object path that was registered with g_dbus_connection_register_subtree().
+		 * @param object_path The object path that was registered with {@link G.dbus_connection_register_subtree}.
 		 * @returns A newly allocated array of strings for node names that are children of #object_path.
 		 */
 		(connection: DBusConnection, sender: string, object_path: string): string[];
@@ -37045,7 +35622,7 @@ declare namespace imports.gi.Gio {
 	 * If this function returns non-%NULL, the return value is expected to
 	 * be a %NULL-terminated array of pointers to #GDBusInterfaceInfo
 	 * structures describing the interfaces implemented by #node.  This
-	 * array will have g_dbus_interface_info_unref() called on each item
+	 * array will have {@link G.dbus_interface_info_unref} called on each item
 	 * before being freed with g_free().
 	 * 
 	 * The difference between returning %NULL and an array containing zero
@@ -37066,7 +35643,7 @@ declare namespace imports.gi.Gio {
 		 * If this function returns non-%NULL, the return value is expected to
 		 * be a %NULL-terminated array of pointers to #GDBusInterfaceInfo
 		 * structures describing the interfaces implemented by #node.  This
-		 * array will have g_dbus_interface_info_unref() called on each item
+		 * array will have {@link G.dbus_interface_info_unref} called on each item
 		 * before being freed with g_free().
 		 * 
 		 * The difference between returning %NULL and an array containing zero
@@ -37075,7 +35652,7 @@ declare namespace imports.gi.Gio {
 		 * case.
 		 * @param connection A #GDBusConnection.
 		 * @param sender The unique bus name of the remote caller.
-		 * @param object_path The object path that was registered with g_dbus_connection_register_subtree().
+		 * @param object_path The object path that was registered with {@link G.dbus_connection_register_subtree}.
 		 * @param node A node that is a child of #object_path (relative to #object_path) or %NULL for the root of the subtree.
 		 * @returns A %NULL-terminated array of pointers to #GDBusInterfaceInfo, or %NULL.
 		 */
@@ -37084,12 +35661,12 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This is the function type of the callback used for the #GSource
-	 * returned by g_datagram_based_create_source().
+	 * returned by {@link G.datagram_based_create_source}.
 	 */
 	interface DatagramBasedSourceFunc {
 		/**
 		 * This is the function type of the callback used for the #GSource
-		 * returned by g_datagram_based_create_source().
+		 * returned by {@link G.datagram_based_create_source}.
 		 * @param datagram_based the #GDatagramBased
 		 * @param condition the current condition at the source fired
 		 * @returns %G_SOURCE_REMOVE if the source should be removed,
@@ -37099,13 +35676,13 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * During invocation, g_desktop_app_info_launch_uris_as_manager() may
+	 * During invocation, {@link G.desktop_app_info_launch_uris_as_manager} may
 	 * create one or more child processes.  This callback is invoked once
 	 * for each, providing the process ID.
 	 */
 	interface DesktopAppLaunchCallback {
 		/**
-		 * During invocation, g_desktop_app_info_launch_uris_as_manager() may
+		 * During invocation, {@link G.desktop_app_info_launch_uris_as_manager} may
 		 * create one or more child processes.  This callback is invoked once
 		 * for each, providing the process ID.
 		 * @param appinfo a #GDesktopAppInfo
@@ -37115,7 +35692,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * This callback type is used by g_file_measure_disk_usage() to make
+	 * This callback type is used by {@link G.file_measure_disk_usage} to make
 	 * periodic progress reports when measuring the amount of disk spaced
 	 * used by a directory.
 	 * 
@@ -37145,7 +35722,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface FileMeasureProgressCallback {
 		/**
-		 * This callback type is used by g_file_measure_disk_usage() to make
+		 * This callback type is used by {@link G.file_measure_disk_usage} to make
 		 * periodic progress reports when measuring the amount of disk spaced
 		 * used by a directory.
 		 * 
@@ -37197,14 +35774,14 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * When loading the partial contents of a file with g_file_load_partial_contents_async(),
+	 * When loading the partial contents of a file with {@link G.file_load_partial_contents_async},
 	 * it may become necessary to determine if any more data from the file should be loaded.
 	 * A #GFileReadMoreCallback function facilitates this by returning %TRUE if more data
 	 * should be read, or %FALSE otherwise.
 	 */
 	interface FileReadMoreCallback {
 		/**
-		 * When loading the partial contents of a file with g_file_load_partial_contents_async(),
+		 * When loading the partial contents of a file with {@link G.file_load_partial_contents_async},
 		 * it may become necessary to determine if any more data from the file should be loaded.
 		 * A #GFileReadMoreCallback function facilitates this by returning %TRUE if more data
 		 * should be read, or %FALSE otherwise.
@@ -37238,13 +35815,13 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This is the function type of the callback used for the #GSource
-	 * returned by g_pollable_input_stream_create_source() and
+	 * returned by {@link G.pollable_input_stream_create_source} and
 	 * g_pollable_output_stream_create_source().
 	 */
 	interface PollableSourceFunc {
 		/**
 		 * This is the function type of the callback used for the #GSource
-		 * returned by g_pollable_input_stream_create_source() and
+		 * returned by {@link G.pollable_input_stream_create_source} and
 		 * g_pollable_output_stream_create_source().
 		 * @param pollable_stream the #GPollableInputStream or #GPollableOutputStream
 		 * @returns it should return %FALSE if the source should be removed.
@@ -37353,12 +35930,12 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * This is the function type of the callback used for the #GSource
-	 * returned by g_socket_create_source().
+	 * returned by {@link G.socket_create_source}.
 	 */
 	interface SocketSourceFunc {
 		/**
 		 * This is the function type of the callback used for the #GSource
-		 * returned by g_socket_create_source().
+		 * returned by {@link G.socket_create_source}.
 		 * @param socket the #GSocket
 		 * @param condition the current condition at the source fired.
 		 * @returns it should return %FALSE if the source should be removed.
@@ -37368,7 +35945,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * The prototype for a task function to be run in a thread via
-	 * g_task_run_in_thread() or g_task_run_in_thread_sync().
+	 * {@link G.task_run_in_thread} or g_task_run_in_thread_sync().
 	 * 
 	 * If the return-on-cancel flag is set on #task, and #cancellable gets
 	 * cancelled, then the #GTask will be completed immediately (as though
@@ -37386,7 +35963,7 @@ declare namespace imports.gi.Gio {
 	interface TaskThreadFunc {
 		/**
 		 * The prototype for a task function to be run in a thread via
-		 * g_task_run_in_thread() or g_task_run_in_thread_sync().
+		 * {@link G.task_run_in_thread} or g_task_run_in_thread_sync().
 		 * 
 		 * If the return-on-cancel flag is set on #task, and #cancellable gets
 		 * cancelled, then the #GTask will be completed immediately (as though
@@ -37409,7 +35986,7 @@ declare namespace imports.gi.Gio {
 	}
 
 	/**
-	 * This function type is used by g_vfs_register_uri_scheme() to make it
+	 * This function type is used by {@link G.vfs_register_uri_scheme} to make it
 	 * possible for a client to associate an URI scheme to a different #GFile
 	 * implementation.
 	 * 
@@ -37418,7 +35995,7 @@ declare namespace imports.gi.Gio {
 	 */
 	interface VfsFileLookupFunc {
 		/**
-		 * This function type is used by g_vfs_register_uri_scheme() to make it
+		 * This function type is used by {@link G.vfs_register_uri_scheme} to make it
 		 * possible for a client to associate an URI scheme to a different #GFile
 		 * implementation.
 		 * 
@@ -37426,7 +36003,7 @@ declare namespace imports.gi.Gio {
 		 * created for #uri, or %NULL to continue with the default implementation.
 		 * @param vfs a #GVfs
 		 * @param identifier the identifier to look up a #GFile for. This can either
-		 *     be an URI or a parse name as returned by g_file_get_parse_name()
+		 *     be an URI or a parse name as returned by {@link G.file_get_parse_name}
 		 * @returns a #GFile for #identifier.
 		 */
 		(vfs: Vfs, identifier: string): File;
@@ -37464,7 +36041,7 @@ declare namespace imports.gi.Gio {
 	 * The third format is used to represent an action with any type of
 	 * target value, including strings.  The target value follows the action
 	 * name, surrounded in parens.  For example: "app.action(42)".  The
-	 * target value is parsed using g_variant_parse().  If a tuple-typed
+	 * target value is parsed using {@link G.variant_parse}.  If a tuple-typed
 	 * value is desired, it must be specified in the same way, resulting in
 	 * two sets of parens, for example: "app.action((1,2,3))".  A string
 	 * target can be specified this way as well: "app.action('target')".
@@ -37484,7 +36061,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * It is an error to call this function with an invalid action name.
 	 * 
-	 * This function is the opposite of g_action_parse_detailed_name().
+	 * This function is the opposite of {@link G.action_parse_detailed_name}.
 	 * It will produce a string that can be parsed back to the #action_name
 	 * and #target_value by that function.
 	 * 
@@ -37517,7 +36094,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * For desktop files, this includes applications that have
 	 * `NoDisplay=true` set or are excluded from display by means
-	 * of `OnlyShowIn` or `NotShowIn`. See g_app_info_should_show().
+	 * of `OnlyShowIn` or `NotShowIn`. See {@link G.app_info_should_show}.
 	 * The returned list does not include applications which have
 	 * the `Hidden` key set.
 	 * @returns a newly allocated #GList of references to #GAppInfos.
@@ -37527,7 +36104,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Gets a list of all #GAppInfos for a given content type,
 	 * including the recommended and fallback #GAppInfos. See
-	 * g_app_info_get_recommended_for_type() and
+	 * {@link G.app_info_get_recommended_for_type} and
 	 * g_app_info_get_fallback_for_type().
 	 * @param content_type the content type to find a #GAppInfo for
 	 * @returns #GList of #GAppInfos
@@ -37571,7 +36148,7 @@ declare namespace imports.gi.Gio {
 	 * those applications which claim to support the given content type exactly,
 	 * and not by MIME type subclassing.
 	 * Note that the first application of the list is the last used one, i.e.
-	 * the last one for which g_app_info_set_as_last_used_for_type() has been
+	 * the last one for which {@link G.app_info_set_as_last_used_for_type} has been
 	 * called.
 	 * @param content_type the content type to find a #GAppInfo for
 	 * @returns #GList of #GAppInfos
@@ -37587,7 +36164,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * The D-Bus–activated applications don't have to be started if your application
 	 * terminates too soon after this function. To prevent this, use
-	 * g_app_info_launch_default_for_uri_async() instead.
+	 * {@link G.app_info_launch_default_for_uri_async} instead.
 	 * @param uri the uri to show
 	 * @param context an optional #GAppLaunchContext
 	 * @returns %TRUE on success, %FALSE on error.
@@ -37595,7 +36172,7 @@ declare namespace imports.gi.Gio {
 	function app_info_launch_default_for_uri(uri: string, context: AppLaunchContext | null): boolean;
 
 	/**
-	 * Async version of g_app_info_launch_default_for_uri().
+	 * Async version of {@link G.app_info_launch_default_for_uri}.
 	 * 
 	 * This version is useful if you are interested in receiving
 	 * error information in the case where the application is
@@ -37621,7 +36198,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Removes all changes to the type associations done by
-	 * g_app_info_set_as_default_for_type(),
+	 * {@link G.app_info_set_as_default_for_type},
 	 * g_app_info_set_as_default_for_extension(),
 	 * g_app_info_add_supports_type() or
 	 * g_app_info_remove_supports_type().
@@ -37631,7 +36208,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Helper function for constructing #GAsyncInitable object. This is
-	 * similar to g_object_newv() but also initializes the object asynchronously.
+	 * similar to {@link GObject.newv} but also initializes the object asynchronously.
 	 * 
 	 * When the initialization is finished, #callback will be called. You can
 	 * then call g_async_initable_new_finish() to get the new object and check
@@ -37650,7 +36227,7 @@ declare namespace imports.gi.Gio {
 	 * Asynchronously connects to the message bus specified by #bus_type.
 	 * 
 	 * When the operation is finished, #callback will be invoked. You can
-	 * then call g_bus_get_finish() to get the result of the operation.
+	 * then call {@link G.bus_get_finish} to get the result of the operation.
 	 * 
 	 * This is an asynchronous failable function. See g_bus_get_sync() for
 	 * the synchronous version.
@@ -37661,7 +36238,7 @@ declare namespace imports.gi.Gio {
 	function bus_get(bus_type: BusType, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 
 	/**
-	 * Finishes an operation started with g_bus_get().
+	 * Finishes an operation started with {@link G.bus_get}.
 	 * 
 	 * The returned object is a singleton, that is, shared with other
 	 * callers of g_bus_get() and g_bus_get_sync() for #bus_type. In the
@@ -37672,9 +36249,9 @@ declare namespace imports.gi.Gio {
 	 * Note that the returned #GDBusConnection object will (usually) have
 	 * the #GDBusConnection:exit-on-close property set to %TRUE.
 	 * @param res a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-	 *     to g_bus_get()
+	 *     to {@link G.bus_get}
 	 * @returns a #GDBusConnection or %NULL if #error is set.
-	 *     Free with g_object_unref().
+	 *     Free with {@link GObject.unref}.
 	 */
 	function bus_get_finish(res: AsyncResult): DBusConnection;
 
@@ -37684,7 +36261,7 @@ declare namespace imports.gi.Gio {
 	 * e.g. if two separate parts of a process calls this function with
 	 * the same #bus_type, they will share the same object.
 	 * 
-	 * This is a synchronous failable function. See g_bus_get() and
+	 * This is a synchronous failable function. See {@link G.bus_get} and
 	 * g_bus_get_finish() for the asynchronous version.
 	 * 
 	 * The returned object is a singleton, that is, shared with other
@@ -37698,7 +36275,7 @@ declare namespace imports.gi.Gio {
 	 * @param bus_type a #GBusType
 	 * @param cancellable a #GCancellable or %NULL
 	 * @returns a #GDBusConnection or %NULL if #error is set.
-	 *     Free with g_object_unref().
+	 *     Free with {@link GObject.unref}.
 	 */
 	function bus_get_sync(bus_type: BusType, cancellable: Cancellable | null): DBusConnection;
 
@@ -37722,7 +36299,7 @@ declare namespace imports.gi.Gio {
 	 * - #bus_acquired_handler then #name_acquired_handler (if the name was
 	 *   obtained).
 	 * 
-	 * When you are done owning the name, just call g_bus_unown_name()
+	 * When you are done owning the name, just call {@link G.bus_unown_name}
 	 * with the owner id this function returns.
 	 * 
 	 * If the name is acquired or lost (for example another application
@@ -37760,12 +36337,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_lost_handler handler to invoke when #name is lost or %NULL
 	 * @param user_data_free_func function for freeing #user_data or %NULL
 	 * @returns an identifier (never 0) that can be used with
-	 *     g_bus_unown_name() to stop owning the name.
+	 *     {@link G.bus_unown_name} to stop owning the name.
 	 */
 	function bus_own_name(bus_type: BusType, name: string, flags: BusNameOwnerFlags, bus_acquired_handler: BusAcquiredCallback | null, name_acquired_handler: BusNameAcquiredCallback | null, name_lost_handler: BusNameLostCallback | null, user_data_free_func: GLib.DestroyNotify | null): number;
 
 	/**
-	 * Like g_bus_own_name() but takes a #GDBusConnection instead of a
+	 * Like {@link G.bus_own_name} but takes a #GDBusConnection instead of a
 	 * #GBusType.
 	 * @param connection a #GDBusConnection
 	 * @param name the well-known name to own
@@ -37774,12 +36351,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_lost_handler handler to invoke when #name is lost or %NULL
 	 * @param user_data_free_func function for freeing #user_data or %NULL
 	 * @returns an identifier (never 0) that can be used with
-	 *     g_bus_unown_name() to stop owning the name
+	 *     {@link G.bus_unown_name} to stop owning the name
 	 */
 	function bus_own_name_on_connection(connection: DBusConnection, name: string, flags: BusNameOwnerFlags, name_acquired_handler: BusNameAcquiredCallback | null, name_lost_handler: BusNameLostCallback | null, user_data_free_func: GLib.DestroyNotify | null): number;
 
 	/**
-	 * Version of g_bus_own_name_on_connection() using closures instead of
+	 * Version of {@link G.bus_own_name_on_connection} using closures instead of
 	 * callbacks for easier binding in other languages.
 	 * @param connection a #GDBusConnection
 	 * @param name the well-known name to own
@@ -37789,12 +36366,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_lost_closure #GClosure to invoke when #name is lost
 	 *     or %NULL
 	 * @returns an identifier (never 0) that can be used with
-	 *     g_bus_unown_name() to stop owning the name.
+	 *     {@link G.bus_unown_name} to stop owning the name.
 	 */
 	function bus_own_name_on_connection_with_closures(connection: DBusConnection, name: string, flags: BusNameOwnerFlags, name_acquired_closure: GObject.Closure | null, name_lost_closure: GObject.Closure | null): number;
 
 	/**
-	 * Version of g_bus_own_name() using closures instead of callbacks for
+	 * Version of {@link G.bus_own_name} using closures instead of callbacks for
 	 * easier binding in other languages.
 	 * @param bus_type the type of bus to own a name on
 	 * @param name the well-known name to own
@@ -37806,7 +36383,7 @@ declare namespace imports.gi.Gio {
 	 * @param name_lost_closure #GClosure to invoke when #name is lost or
 	 *     %NULL
 	 * @returns an identifier (never 0) that can be used with
-	 *     g_bus_unown_name() to stop owning the name.
+	 *     {@link G.bus_unown_name} to stop owning the name.
 	 */
 	function bus_own_name_with_closures(bus_type: BusType, name: string, flags: BusNameOwnerFlags, bus_acquired_closure: GObject.Closure | null, name_acquired_closure: GObject.Closure | null, name_lost_closure: GObject.Closure | null): number;
 
@@ -37816,10 +36393,10 @@ declare namespace imports.gi.Gio {
 	 * Note that there may still be D-Bus traffic to process (relating to owning
 	 * and unowning the name) in the current thread-default #GMainContext after
 	 * this function has returned. You should continue to iterate the #GMainContext
-	 * until the #GDestroyNotify function passed to g_bus_own_name() is called, in
+	 * until the #GDestroyNotify function passed to {@link G.bus_own_name} is called, in
 	 * order to avoid memory leaks through callbacks queued on the #GMainContext
 	 * after it’s stopped being iterated.
-	 * @param owner_id an identifier obtained from g_bus_own_name()
+	 * @param owner_id an identifier obtained from {@link G.bus_own_name}
 	 */
 	function bus_unown_name(owner_id: number): void;
 
@@ -37829,10 +36406,10 @@ declare namespace imports.gi.Gio {
 	 * Note that there may still be D-Bus traffic to process (relating to watching
 	 * and unwatching the name) in the current thread-default #GMainContext after
 	 * this function has returned. You should continue to iterate the #GMainContext
-	 * until the #GDestroyNotify function passed to g_bus_watch_name() is called, in
+	 * until the #GDestroyNotify function passed to {@link G.bus_watch_name} is called, in
 	 * order to avoid memory leaks through callbacks queued on the #GMainContext
 	 * after it’s stopped being iterated.
-	 * @param watcher_id An identifier obtained from g_bus_watch_name()
+	 * @param watcher_id An identifier obtained from {@link G.bus_watch_name}
 	 */
 	function bus_unwatch_name(watcher_id: number): void;
 
@@ -37846,7 +36423,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * You are guaranteed that one of the handlers will be invoked after
 	 * calling this function. When you are done watching the name, just
-	 * call g_bus_unwatch_name() with the watcher id this function
+	 * call {@link G.bus_unwatch_name} with the watcher id this function
 	 * returns.
 	 * 
 	 * If the name vanishes or appears (for example the application owning
@@ -37873,12 +36450,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_vanished_handler Handler to invoke when #name is known to not exist or %NULL.
 	 * @param user_data_free_func Function for freeing #user_data or %NULL.
 	 * @returns An identifier (never 0) that can be used with
-	 * g_bus_unwatch_name() to stop watching the name.
+	 * {@link G.bus_unwatch_name} to stop watching the name.
 	 */
 	function bus_watch_name(bus_type: BusType, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback | null, name_vanished_handler: BusNameVanishedCallback | null, user_data_free_func: GLib.DestroyNotify | null): number;
 
 	/**
-	 * Like g_bus_watch_name() but takes a #GDBusConnection instead of a
+	 * Like {@link G.bus_watch_name} but takes a #GDBusConnection instead of a
 	 * #GBusType.
 	 * @param connection A #GDBusConnection.
 	 * @param name The name (well-known or unique) to watch.
@@ -37887,12 +36464,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_vanished_handler Handler to invoke when #name is known to not exist or %NULL.
 	 * @param user_data_free_func Function for freeing #user_data or %NULL.
 	 * @returns An identifier (never 0) that can be used with
-	 * g_bus_unwatch_name() to stop watching the name.
+	 * {@link G.bus_unwatch_name} to stop watching the name.
 	 */
 	function bus_watch_name_on_connection(connection: DBusConnection, name: string, flags: BusNameWatcherFlags, name_appeared_handler: BusNameAppearedCallback | null, name_vanished_handler: BusNameVanishedCallback | null, user_data_free_func: GLib.DestroyNotify | null): number;
 
 	/**
-	 * Version of g_bus_watch_name_on_connection() using closures instead of callbacks for
+	 * Version of {@link G.bus_watch_name_on_connection} using closures instead of callbacks for
 	 * easier binding in other languages.
 	 * @param connection A #GDBusConnection.
 	 * @param name The name (well-known or unique) to watch.
@@ -37902,12 +36479,12 @@ declare namespace imports.gi.Gio {
 	 * @param name_vanished_closure #GClosure to invoke when #name is known
 	 * to not exist or %NULL.
 	 * @returns An identifier (never 0) that can be used with
-	 * g_bus_unwatch_name() to stop watching the name.
+	 * {@link G.bus_unwatch_name} to stop watching the name.
 	 */
 	function bus_watch_name_on_connection_with_closures(connection: DBusConnection, name: string, flags: BusNameWatcherFlags, name_appeared_closure: GObject.Closure | null, name_vanished_closure: GObject.Closure | null): number;
 
 	/**
-	 * Version of g_bus_watch_name() using closures instead of callbacks for
+	 * Version of {@link G.bus_watch_name} using closures instead of callbacks for
 	 * easier binding in other languages.
 	 * @param bus_type The type of bus to watch a name on.
 	 * @param name The name (well-known or unique) to watch.
@@ -37917,7 +36494,7 @@ declare namespace imports.gi.Gio {
 	 * @param name_vanished_closure #GClosure to invoke when #name is known
 	 * to not exist or %NULL.
 	 * @returns An identifier (never 0) that can be used with
-	 * g_bus_unwatch_name() to stop watching the name.
+	 * {@link G.bus_unwatch_name} to stop watching the name.
 	 */
 	function bus_watch_name_with_closures(bus_type: BusType, name: string, flags: BusNameWatcherFlags, name_appeared_closure: GObject.Closure | null, name_vanished_closure: GObject.Closure | null): number;
 
@@ -37943,7 +36520,7 @@ declare namespace imports.gi.Gio {
 	 * Tries to find a content type based on the mime type name.
 	 * @param mime_type a mime type string
 	 * @returns Newly allocated string with content type or
-	 *     %NULL. Free with g_free()
+	 *     %NULL. Free with {@link G.free}
 	 */
 	function content_type_from_mime_type(mime_type: string): string | null;
 
@@ -37951,7 +36528,7 @@ declare namespace imports.gi.Gio {
 	 * Gets the human readable description of the content type.
 	 * @param type a content type string
 	 * @returns a short description of the content type #type. Free the
-	 *     returned string with g_free()
+	 *     returned string with {@link G.free}
 	 */
 	function content_type_get_description(type: string): string;
 
@@ -37963,7 +36540,7 @@ declare namespace imports.gi.Gio {
 	 * specification for more on the generic icon name.
 	 * @param type a content type string
 	 * @returns the registered generic icon name for the given #type,
-	 *     or %NULL if unknown. Free with g_free()
+	 *     or %NULL if unknown. Free with {@link G.free}
 	 */
 	function content_type_get_generic_icon_name(type: string): string | null;
 
@@ -37971,13 +36548,13 @@ declare namespace imports.gi.Gio {
 	 * Gets the icon for a content type.
 	 * @param type a content type string
 	 * @returns #GIcon corresponding to the content type. Free the returned
-	 *     object with g_object_unref()
+	 *     object with {@link GObject.unref}
 	 */
 	function content_type_get_icon(type: string): Icon;
 
 	/**
 	 * Get the list of directories which MIME data is loaded from. See
-	 * g_content_type_set_mime_dirs() for details.
+	 * {@link G.content_type_set_mime_dirs} for details.
 	 * @returns %NULL-terminated list of
 	 *    directories to load MIME data from, including any `mime/` subdirectory,
 	 *    and with the first directory to try listed first
@@ -37988,7 +36565,7 @@ declare namespace imports.gi.Gio {
 	 * Gets the mime type for the content type, if one is registered.
 	 * @param type a content type string
 	 * @returns the registered mime type for the
-	 *     given #type, or %NULL if unknown; free with g_free().
+	 *     given #type, or %NULL if unknown; free with {@link G.free}.
 	 */
 	function content_type_get_mime_type(type: string): string | null;
 
@@ -37996,7 +36573,7 @@ declare namespace imports.gi.Gio {
 	 * Gets the symbolic icon for a content type.
 	 * @param type a content type string
 	 * @returns symbolic #GIcon corresponding to the content type.
-	 *     Free the returned object with g_object_unref()
+	 *     Free the returned object with {@link GObject.unref}
 	 */
 	function content_type_get_symbolic_icon(type: string): Icon;
 
@@ -38009,7 +36586,7 @@ declare namespace imports.gi.Gio {
 	 * @param data a stream of data, or %NULL
 	 * @param data_size the size of #data
 	 * @returns a string indicating a guessed content type for the
-	 *     given data. Free with g_free()
+	 *     given data. Free with {@link G.free}
 	 * 
 	 * return location for the certainty
 	 *     of the result, or %NULL
@@ -38028,10 +36605,10 @@ declare namespace imports.gi.Gio {
 	 * specification for more on x-content types.
 	 * 
 	 * This function is useful in the implementation of
-	 * g_mount_guess_content_type().
+	 * {@link G.mount_guess_content_type}.
 	 * @param root the root of the tree to guess a type for
 	 * @returns an %NULL-terminated
-	 *     array of zero or more content types. Free with g_strfreev()
+	 *     array of zero or more content types. Free with {@link G.strfreev}
 	 */
 	function content_type_guess_for_tree(root: File): string[];
 
@@ -38046,7 +36623,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Determines if #type is a subset of #mime_type.
-	 * Convenience wrapper around g_content_type_is_a().
+	 * Convenience wrapper around {@link G.content_type_is_a}.
 	 * @param type a content type string
 	 * @param mime_type a mime type string
 	 * @returns %TRUE if #type is a kind of #mime_type,
@@ -38076,7 +36653,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Typically, in case your tests use %G_TEST_OPTION_ISOLATE_DIRS, but they
 	 * depend on the system’s MIME database, you should call this function
-	 * with #dirs set to %NULL before calling g_test_init(), for instance:
+	 * with #dirs set to %NULL before calling {@link G.test_init}, for instance:
 	 * 
 	 * |[<!-- language="C" -->
 	 *   // Load MIME data from the system
@@ -38139,7 +36716,7 @@ declare namespace imports.gi.Gio {
 	 * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
 	 * 
 	 * When the operation is finished, #callback will be invoked. You can
-	 * then call g_dbus_address_get_stream_finish() to get the result of
+	 * then call {@link G.dbus_address_get_stream_finish} to get the result of
 	 * the operation.
 	 * 
 	 * This is an asynchronous failable function. See
@@ -38151,11 +36728,11 @@ declare namespace imports.gi.Gio {
 	function dbus_address_get_stream(address: string, cancellable: Cancellable | null, callback: AsyncReadyCallback | null): void;
 
 	/**
-	 * Finishes an operation started with g_dbus_address_get_stream().
+	 * Finishes an operation started with {@link G.dbus_address_get_stream}.
 	 * 
 	 * A server is not required to set a GUID, so #out_guid may be set to %NULL
 	 * even on success.
-	 * @param res A #GAsyncResult obtained from the GAsyncReadyCallback passed to g_dbus_address_get_stream().
+	 * @param res A #GAsyncResult obtained from the GAsyncReadyCallback passed to {@link G.dbus_address_get_stream}.
 	 * @returns A #GIOStream or %NULL if #error is set.
 	 * 
 	 * %NULL or return location to store the GUID extracted from #address, if any.
@@ -38172,7 +36749,7 @@ declare namespace imports.gi.Gio {
 	 * even on success.
 	 * 
 	 * This is a synchronous failable function. See
-	 * g_dbus_address_get_stream() for the asynchronous version.
+	 * {@link G.dbus_address_get_stream} for the asynchronous version.
 	 * @param address A valid D-Bus address.
 	 * @param cancellable A #GCancellable or %NULL.
 	 * @returns A #GIOStream or %NULL if #error is set.
@@ -38193,7 +36770,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Creates a D-Bus error name to use for #error. If #error matches
-	 * a registered error (cf. g_dbus_error_register_error()), the corresponding
+	 * a registered error (cf. {@link G.dbus_error_register_error}), the corresponding
 	 * D-Bus error name will be returned.
 	 * 
 	 * Otherwise the a name of the form
@@ -38205,7 +36782,7 @@ declare namespace imports.gi.Gio {
 	 * #GError on the wire. Regular applications should not use it.
 	 * @param error A #GError.
 	 * @returns A D-Bus error name (never %NULL).
-	 *     Free with g_free().
+	 *     Free with {@link G.free}.
 	 */
 	function dbus_error_encode_gerror(error: GLib.Error): string;
 
@@ -38214,17 +36791,17 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * This function is guaranteed to return a D-Bus error name for all
 	 * #GErrors returned from functions handling remote method calls
-	 * (e.g. g_dbus_connection_call_finish()) unless
+	 * (e.g. {@link G.dbus_connection_call_finish}) unless
 	 * g_dbus_error_strip_remote_error() has been used on #error.
 	 * @param error a #GError
 	 * @returns an allocated string or %NULL if the
-	 *     D-Bus error name could not be found. Free with g_free().
+	 *     D-Bus error name could not be found. Free with {@link G.free}.
 	 */
 	function dbus_error_get_remote_error(error: GLib.Error): string | null;
 
 	/**
 	 * Checks if #error represents an error received via D-Bus from a remote peer. If so,
-	 * use g_dbus_error_get_remote_error() to get the name of the error.
+	 * use {@link G.dbus_error_get_remote_error} to get the name of the error.
 	 * @param error A #GError.
 	 * @returns %TRUE if #error represents an error from a remote peer,
 	 * %FALSE otherwise.
@@ -38235,7 +36812,7 @@ declare namespace imports.gi.Gio {
 	 * Creates a #GError based on the contents of #dbus_error_name and
 	 * #dbus_error_message.
 	 * 
-	 * Errors registered with g_dbus_error_register_error() will be looked
+	 * Errors registered with {@link G.dbus_error_register_error} will be looked
 	 * up using #dbus_error_name and if a match is found, the error domain
 	 * and code is used. Applications can use g_dbus_error_get_remote_error()
 	 * to recover #dbus_error_name.
@@ -38260,7 +36837,7 @@ declare namespace imports.gi.Gio {
 	 * it.
 	 * @param dbus_error_name D-Bus error name.
 	 * @param dbus_error_message D-Bus error message.
-	 * @returns An allocated #GError. Free with g_error_free().
+	 * @returns An allocated #GError. Free with {@link G.error_free}.
 	 */
 	function dbus_error_new_for_dbus_error(dbus_error_name: string, dbus_error_message: string): GLib.Error;
 
@@ -38305,7 +36882,7 @@ declare namespace imports.gi.Gio {
 	function dbus_error_strip_remote_error(error: GLib.Error): boolean;
 
 	/**
-	 * Destroys an association previously set up with g_dbus_error_register_error().
+	 * Destroys an association previously set up with {@link G.dbus_error_register_error}.
 	 * @param error_domain A #GQuark for an error domain.
 	 * @param error_code An error code.
 	 * @param dbus_error_name A D-Bus error name.
@@ -38314,9 +36891,9 @@ declare namespace imports.gi.Gio {
 	function dbus_error_unregister_error(error_domain: GLib.Quark, error_code: number, dbus_error_name: string): boolean;
 
 	/**
-	 * This is a language binding friendly version of g_dbus_escape_object_path_bytestring().
+	 * This is a language binding friendly version of {@link G.dbus_escape_object_path_bytestring}.
 	 * @param s the string to escape
-	 * @returns an escaped version of #s. Free with g_free().
+	 * @returns an escaped version of #s. Free with {@link G.free}.
 	 */
 	function dbus_escape_object_path(s: string): string;
 
@@ -38326,7 +36903,7 @@ declare namespace imports.gi.Gio {
 	 * unspecified encoding, followed by a single zero byte.
 	 * 
 	 * The escaping method consists of replacing all non-alphanumeric
-	 * characters (see g_ascii_isalnum()) with their hexadecimal value
+	 * characters (see {@link G.ascii_isalnum}) with their hexadecimal value
 	 * preceded by an underscore (`_`). For example:
 	 * `foo.bar.baz` will become `foo_2ebar_2ebaz`.
 	 * 
@@ -38338,13 +36915,13 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * This can be reversed with g_dbus_unescape_object_path().
 	 * @param bytes the string of bytes to escape
-	 * @returns an escaped version of #bytes. Free with g_free().
+	 * @returns an escaped version of #bytes. Free with {@link G.free}.
 	 */
 	function dbus_escape_object_path_bytestring(bytes: number[]): string;
 
 	/**
 	 * Generate a D-Bus GUID that can be used with
-	 * e.g. g_dbus_connection_new().
+	 * e.g. {@link G.dbus_connection_new}.
 	 * 
 	 * See the
 	 * [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#uuids)
@@ -38354,7 +36931,7 @@ declare namespace imports.gi.Gio {
 	 * 
 	 * Note that D-Bus GUIDs do not follow
 	 * [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
-	 * @returns A valid D-Bus GUID. Free with g_free().
+	 * @returns A valid D-Bus GUID. Free with {@link G.free}.
 	 */
 	function dbus_generate_guid(): string;
 
@@ -38385,20 +36962,20 @@ declare namespace imports.gi.Gio {
 	 * returned (e.g. 0 for scalar types, the empty string for string types,
 	 * '/' for object path types, the empty array for any array type and so on).
 	 * 
-	 * See the g_dbus_gvariant_to_gvalue() function for how to convert a
+	 * See the {@link G.dbus_gvariant_to_gvalue} function for how to convert a
 	 * #GVariant to a #GValue.
 	 * @param gvalue A #GValue to convert to a #GVariant
 	 * @param type A #GVariantType
 	 * @returns A #GVariant (never floating) of
 	 *     #GVariantType #type holding the data from #gvalue or an empty #GVariant
-	 *     in case of failure. Free with g_variant_unref().
+	 *     in case of failure. Free with {@link G.variant_unref}.
 	 */
 	function dbus_gvalue_to_gvariant(gvalue: GObject.Value, type: GLib.VariantType): GLib.Variant;
 
 	/**
 	 * Converts a #GVariant to a #GValue. If #value is floating, it is consumed.
 	 * 
-	 * The rules specified in the g_dbus_gvalue_to_gvariant() function are
+	 * The rules specified in the {@link G.dbus_gvalue_to_gvariant} function are
 	 * used - this function is essentially its reverse form. So, a #GVariant
 	 * containing any basic or string array type will be converted to a #GValue
 	 * containing a basic value or string array. Any other #GVariant (handle,
@@ -38417,7 +36994,7 @@ declare namespace imports.gi.Gio {
 	 * [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
 	 * 
 	 * This doesn't check if #string is actually supported by #GDBusServer
-	 * or #GDBusConnection - use g_dbus_is_supported_address() to do more
+	 * or #GDBusConnection - use {@link G.dbus_is_supported_address} to do more
 	 * checks.
 	 * @param string A string.
 	 * @returns %TRUE if #string is a valid D-Bus address, %FALSE otherwise.
@@ -38427,7 +37004,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Check whether #string is a valid D-Bus error name.
 	 * 
-	 * This function returns the same result as g_dbus_is_interface_name(),
+	 * This function returns the same result as {@link G.dbus_is_interface_name},
 	 * because D-Bus error names are defined to have exactly the
 	 * same syntax as interface names.
 	 * @param string The string to check.
@@ -38438,7 +37015,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Checks if #string is a D-Bus GUID.
 	 * 
-	 * See the documentation for g_dbus_generate_guid() for more information about
+	 * See the documentation for {@link G.dbus_generate_guid} for more information about
 	 * the format of a GUID.
 	 * @param string The string to check.
 	 * @returns %TRUE if #string is a GUID, %FALSE otherwise.
@@ -38467,7 +37044,7 @@ declare namespace imports.gi.Gio {
 	function dbus_is_name(string: string): boolean;
 
 	/**
-	 * Like g_dbus_is_address() but also checks if the library supports the
+	 * Like {@link G.dbus_is_address} but also checks if the library supports the
 	 * transports in #string and that key/value pairs for each transport
 	 * are valid. See the specification of the
 	 * [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
@@ -38486,7 +37063,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Unescapes an string that was previously escaped with
-	 * g_dbus_escape_object_path(). If the string is in a format that could
+	 * {@link G.dbus_escape_object_path}. If the string is in a format that could
 	 * not have been returned by g_dbus_escape_object_path(), this function
 	 * returns %NULL.
 	 * 
@@ -38496,7 +37073,7 @@ declare namespace imports.gi.Gio {
 	 * @param s the string to unescape
 	 * @returns an
 	 *   unescaped version of #s, or %NULL if #s is not a string returned
-	 *   from g_dbus_escape_object_path(). Free with g_free().
+	 *   from {@link G.dbus_escape_object_path}. Free with g_free().
 	 */
 	function dbus_unescape_object_path(s: string): number[] | null;
 
@@ -38536,14 +37113,14 @@ declare namespace imports.gi.Gio {
 	 * #GOptionContext arguments of type %G_OPTION_ARG_FILENAME.
 	 * @param arg a command line string
 	 * @returns a new #GFile.
-	 *    Free the returned object with g_object_unref().
+	 *    Free the returned object with {@link GObject.unref}.
 	 */
 	function file_new_for_commandline_arg(arg: string): File;
 
 	/**
 	 * Creates a #GFile with the given argument from the command line.
 	 * 
-	 * This function is similar to g_file_new_for_commandline_arg() except
+	 * This function is similar to {@link G.file_new_for_commandline_arg} except
 	 * that it allows for passing the current working directory as an
 	 * argument instead of using the current working directory of the
 	 * process.
@@ -38565,7 +37142,7 @@ declare namespace imports.gi.Gio {
 	 * @param path a string containing a relative or absolute path.
 	 *     The string must be encoded in the glib filename encoding.
 	 * @returns a new #GFile for the given #path.
-	 *   Free the returned object with g_object_unref().
+	 *   Free the returned object with {@link GObject.unref}.
 	 */
 	function file_new_for_path(path: string): File;
 
@@ -38576,13 +37153,13 @@ declare namespace imports.gi.Gio {
 	 * not supported.
 	 * @param uri a UTF-8 string containing a URI
 	 * @returns a new #GFile for the given #uri.
-	 *     Free the returned object with g_object_unref().
+	 *     Free the returned object with {@link GObject.unref}.
 	 */
 	function file_new_for_uri(uri: string): File;
 
 	/**
 	 * Opens a file in the preferred directory for temporary files (as
-	 * returned by g_get_tmp_dir()) and returns a #GFile and
+	 * returned by {@link G.get_tmp_dir}) and returns a #GFile and
 	 * #GFileIOStream pointing to it.
 	 * 
 	 * #tmpl should be a string in the GLib file name encoding
@@ -38592,9 +37169,9 @@ declare namespace imports.gi.Gio {
 	 * Unlike the other #GFile constructors, this will return %NULL if
 	 * a temporary file could not be created.
 	 * @param tmpl Template for the file
-	 *   name, as in g_file_open_tmp(), or %NULL for a default template
+	 *   name, as in {@link G.file_open_tmp}, or %NULL for a default template
 	 * @returns a new #GFile.
-	 *     Free the returned object with g_object_unref().
+	 *     Free the returned object with {@link GObject.unref}.
 	 * 
 	 * on return, a #GFileIOStream for the created file
 	 */
@@ -38602,7 +37179,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Constructs a #GFile with the given #parse_name (i.e. something
-	 * given by g_file_get_parse_name()). This operation never fails,
+	 * given by {@link G.file_get_parse_name}). This operation never fails,
 	 * but the returned object might not support any I/O operation if
 	 * the #parse_name cannot be parsed.
 	 * @param parse_name a file name or path to be parsed
@@ -38611,8 +37188,8 @@ declare namespace imports.gi.Gio {
 	function file_parse_name(parse_name: string): File;
 
 	/**
-	 * Deserializes a #GIcon previously serialized using g_icon_serialize().
-	 * @param value a #GVariant created with g_icon_serialize()
+	 * Deserializes a #GIcon previously serialized using {@link G.icon_serialize}.
+	 * @param value a #GVariant created with {@link G.icon_serialize}
 	 * @returns a #GIcon, or %NULL when deserialization fails.
 	 */
 	function icon_deserialize(value: GLib.Variant): Icon | null;
@@ -38627,12 +37204,12 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Generate a #GIcon instance from #str. This function can fail if
-	 * #str is not valid - see g_icon_to_string() for discussion.
+	 * #str is not valid - see {@link G.icon_to_string} for discussion.
 	 * 
 	 * If your application or library provides one or more #GIcon
 	 * implementations you need to ensure that each #GType is registered
 	 * with the type system prior to calling g_icon_new_for_string().
-	 * @param str A string obtained via g_icon_to_string().
+	 * @param str A string obtained via {@link G.icon_to_string}.
 	 * @returns An object implementing the #GIcon
 	 *          interface or %NULL if #error is set.
 	 */
@@ -38640,7 +37217,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Helper function for constructing #GInitable object. This is
-	 * similar to g_object_newv() but also initializes the object
+	 * similar to {@link GObject.newv} but also initializes the object
 	 * and returns %NULL, setting an error on failure.
 	 * @param object_type a #GType supporting #GInitable.
 	 * @param n_parameters the number of parameters in #parameters
@@ -38704,7 +37281,7 @@ declare namespace imports.gi.Gio {
 	 * Loads all the modules in the specified directory.
 	 * 
 	 * If don't require all modules to be initialized (and thus registering
-	 * all gtypes) then you can use g_io_modules_scan_all_in_directory()
+	 * all gtypes) then you can use {@link G.io_modules_scan_all_in_directory}
 	 * which allows delayed/lazy loading of modules.
 	 * @param dirname pathname for a directory containing modules
 	 *     to load.
@@ -38712,7 +37289,7 @@ declare namespace imports.gi.Gio {
 	 *      from the directory,
 	 *      All the modules are loaded into memory, if you want to
 	 *      unload them (enabling on-demand loading) you must call
-	 *      g_type_module_unuse() on all the modules. Free the list
+	 *      {@link G.type_module_unuse} on all the modules. Free the list
 	 *      with g_list_free().
 	 */
 	function io_modules_load_all_in_directory(dirname: string): GLib.List;
@@ -38721,7 +37298,7 @@ declare namespace imports.gi.Gio {
 	 * Loads all the modules in the specified directory.
 	 * 
 	 * If don't require all modules to be initialized (and thus registering
-	 * all gtypes) then you can use g_io_modules_scan_all_in_directory()
+	 * all gtypes) then you can use {@link G.io_modules_scan_all_in_directory}
 	 * which allows delayed/lazy loading of modules.
 	 * @param dirname pathname for a directory containing modules
 	 *     to load.
@@ -38730,7 +37307,7 @@ declare namespace imports.gi.Gio {
 	 *      from the directory,
 	 *      All the modules are loaded into memory, if you want to
 	 *      unload them (enabling on-demand loading) you must call
-	 *      g_type_module_unuse() on all the modules. Free the list
+	 *      {@link G.type_module_unuse} on all the modules. Free the list
 	 *      with g_list_free().
 	 */
 	function io_modules_load_all_in_directory_with_scope(dirname: string, scope: IOModuleScope): GLib.List;
@@ -38742,7 +37319,7 @@ declare namespace imports.gi.Gio {
 	 * This may not actually load and initialize all the types in each
 	 * module, some modules may be lazily loaded and initialized when
 	 * an extension point it implements is used with e.g.
-	 * g_io_extension_point_get_extensions() or
+	 * {@link G.io_extension_point_get_extensions} or
 	 * g_io_extension_point_get_extension_by_name().
 	 * 
 	 * If you need to guarantee that all types are loaded in all the modules,
@@ -38759,7 +37336,7 @@ declare namespace imports.gi.Gio {
 	 * This may not actually load and initialize all the types in each
 	 * module, some modules may be lazily loaded and initialized when
 	 * an extension point it implements is used with e.g.
-	 * g_io_extension_point_get_extensions() or
+	 * {@link G.io_extension_point_get_extensions} or
 	 * g_io_extension_point_get_extension_by_name().
 	 * 
 	 * If you need to guarantee that all types are loaded in all the modules,
@@ -38774,7 +37351,7 @@ declare namespace imports.gi.Gio {
 	 * Cancels all cancellable I/O jobs.
 	 * 
 	 * A job is cancellable if a #GCancellable was passed into
-	 * g_io_scheduler_push_job().
+	 * {@link G.io_scheduler_push_job}.
 	 */
 	function io_scheduler_cancel_all_jobs(): void;
 
@@ -38785,7 +37362,7 @@ declare namespace imports.gi.Gio {
 	 * regardless whether the job was cancelled or has run to completion.
 	 * 
 	 * If #cancellable is not %NULL, it can be used to cancel the I/O job
-	 * by calling g_cancellable_cancel() or by calling
+	 * by calling {@link G.cancellable_cancel} or by calling
 	 * g_io_scheduler_cancel_all_jobs().
 	 * @param job_func a #GIOSchedulerJobFunc.
 	 * @param notify a #GDestroyNotify for #user_data, or %NULL
@@ -38897,7 +37474,7 @@ declare namespace imports.gi.Gio {
 	 * Utility method for #GPollableInputStream and #GPollableOutputStream
 	 * implementations. Creates a new #GSource that expects a callback of
 	 * type #GPollableSourceFunc. The new source does not actually do
-	 * anything on its own; use g_source_add_child_source() to add other
+	 * anything on its own; use {@link G.source_add_child_source} to add other
 	 * sources to it to cause it to trigger.
 	 * @param pollable_stream the stream associated with the new source
 	 * @returns the new #GSource.
@@ -38907,7 +37484,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Utility method for #GPollableInputStream and #GPollableOutputStream
 	 * implementations. Creates a new #GSource, as with
-	 * g_pollable_source_new(), but also attaching #child_source (with a
+	 * {@link G.pollable_source_new}, but also attaching #child_source (with a
 	 * dummy callback), and #cancellable, if they are non-%NULL.
 	 * @param pollable_stream the stream associated with the
 	 *   new source
@@ -38918,7 +37495,7 @@ declare namespace imports.gi.Gio {
 	function pollable_source_new_full(pollable_stream: GObject.Object, child_source: GLib.Source | null, cancellable: Cancellable | null): GLib.Source;
 
 	/**
-	 * Tries to read from #stream, as with g_input_stream_read() (if
+	 * Tries to read from #stream, as with {@link G.input_stream_read} (if
 	 * #blocking is %TRUE) or g_pollable_input_stream_read_nonblocking()
 	 * (if #blocking is %FALSE). This can be used to more easily share
 	 * code between blocking and non-blocking implementations of a method.
@@ -38938,7 +37515,7 @@ declare namespace imports.gi.Gio {
 	function pollable_stream_read(stream: InputStream, buffer: number[], count: number, blocking: boolean, cancellable: Cancellable | null): number;
 
 	/**
-	 * Tries to write to #stream, as with g_output_stream_write() (if
+	 * Tries to write to #stream, as with {@link G.output_stream_write} (if
 	 * #blocking is %TRUE) or g_pollable_output_stream_write_nonblocking()
 	 * (if #blocking is %FALSE). This can be used to more easily share
 	 * code between blocking and non-blocking implementations of a method.
@@ -38960,7 +37537,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Tries to write #count bytes to #stream, as with
-	 * g_output_stream_write_all(), but using g_pollable_stream_write()
+	 * {@link G.output_stream_write_all}, but using g_pollable_stream_write()
 	 * rather than g_output_stream_write().
 	 * 
 	 * On a successful write of #count bytes, %TRUE is returned, and
@@ -39029,7 +37606,7 @@ declare namespace imports.gi.Gio {
 	 * you to query it for data.
 	 * 
 	 * If you want to use this resource in the global resource namespace you need
-	 * to register it with g_resources_register().
+	 * to register it with {@link G.resources_register}.
 	 * 
 	 * If #filename is empty or the data in it is corrupt,
 	 * %G_RESOURCE_ERROR_INTERNAL will be returned. If #filename doesn’t exist, or
@@ -39044,7 +37621,7 @@ declare namespace imports.gi.Gio {
 	 * Returns all the names of children at the specified #path in the set of
 	 * globally registered resources.
 	 * The return result is a %NULL terminated list of strings which should
-	 * be released with g_strfreev().
+	 * be released with {@link G.strfreev}.
 	 * 
 	 * #lookup_flags controls the behaviour of the lookup.
 	 * @param path A pathname inside the resource
@@ -39088,7 +37665,7 @@ declare namespace imports.gi.Gio {
 	 * @param path A pathname inside the resource
 	 * @param lookup_flags A #GResourceLookupFlags
 	 * @returns #GBytes or %NULL on error.
-	 *     Free the returned object with g_bytes_unref()
+	 *     Free the returned object with {@link G.bytes_unref}
 	 */
 	function resources_lookup_data(path: string, lookup_flags: ResourceLookupFlags): GLib.Bytes;
 
@@ -39101,14 +37678,14 @@ declare namespace imports.gi.Gio {
 	 * @param path A pathname inside the resource
 	 * @param lookup_flags A #GResourceLookupFlags
 	 * @returns #GInputStream or %NULL on error.
-	 *     Free the returned object with g_object_unref()
+	 *     Free the returned object with {@link GObject.unref}
 	 */
 	function resources_open_stream(path: string, lookup_flags: ResourceLookupFlags): InputStream;
 
 	/**
 	 * Registers the resource with the process-global set of resources.
 	 * Once a resource is registered the files in it can be accessed
-	 * with the global resource lookup functions like g_resources_lookup_data().
+	 * with the global resource lookup functions like {@link G.resources_lookup_data}.
 	 * @param resource A #GResource
 	 */
 	function resources_register(resource: Resource): void;
@@ -39151,7 +37728,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Reports an error in an idle function. Similar to
-	 * g_simple_async_report_error_in_idle(), but takes a #GError rather
+	 * {@link G.simple_async_report_error_in_idle}, but takes a #GError rather
 	 * than building a new one.
 	 * @param object a #GObject, or %NULL
 	 * @param callback a #GAsyncReadyCallback.
@@ -39161,7 +37738,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Reports an error in an idle function. Similar to
-	 * g_simple_async_report_gerror_in_idle(), but takes over the caller's
+	 * {@link G.simple_async_report_gerror_in_idle}, but takes over the caller's
 	 * ownership of #error, so the caller does not have to free it any more.
 	 * @param object a #GObject, or %NULL
 	 * @param callback a #GAsyncReadyCallback.
@@ -39276,7 +37853,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Gets a #GUnixMountEntry for a given mount path. If #time_read
 	 * is set, it will be filled with a unix timestamp for checking
-	 * if the mounts have changed since with g_unix_mounts_changed_since().
+	 * if the mounts have changed since with {@link G.unix_mounts_changed_since}.
 	 * 
 	 * If more mounts have the same mount path, the last matching mount
 	 * is returned.
@@ -39308,7 +37885,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Gets a #GUnixMountEntry for a given file path. If #time_read
 	 * is set, it will be filled with a unix timestamp for checking
-	 * if the mounts have changed since with g_unix_mounts_changed_since().
+	 * if the mounts have changed since with {@link G.unix_mounts_changed_since}.
 	 * 
 	 * If more mounts have the same mount path, the last matching mount
 	 * is returned.
@@ -39353,7 +37930,7 @@ declare namespace imports.gi.Gio {
 	 * Gets a comma-separated list of mount options for the unix mount. For example,
 	 * `rw,relatime,seclabel,data=ordered`.
 	 * 
-	 * This is similar to g_unix_mount_point_get_options(), but it takes
+	 * This is similar to {@link G.unix_mount_point_get_options}, but it takes
 	 * a #GUnixMountEntry as an argument.
 	 * @param mount_entry a #GUnixMountEntry.
 	 * @returns a string containing the options, or %NULL if not
@@ -39392,7 +37969,7 @@ declare namespace imports.gi.Gio {
 	 * The result is a translated string.
 	 * @param mount_entry a #GUnixMountEntry
 	 * @returns A newly allocated string that must
-	 *     be freed with g_free()
+	 *     be freed with {@link G.free}
 	 */
 	function unix_mount_guess_name(mount_entry: UnixMountEntry): string;
 
@@ -39419,7 +37996,7 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * Checks if a Unix mount is a system mount. This is the Boolean OR of
-	 * g_unix_is_system_fs_type(), g_unix_is_system_device_path() and
+	 * {@link G.unix_is_system_fs_type}, g_unix_is_system_device_path() and
 	 * g_unix_is_mount_path_system_internal() on #mount_entry’s properties.
 	 * 
 	 * The definition of what a ‘system’ mount entry is may change over time as new
@@ -39432,7 +38009,7 @@ declare namespace imports.gi.Gio {
 	/**
 	 * Gets a #GUnixMountPoint for a given mount path. If #time_read is set, it
 	 * will be filled with a unix timestamp for checking if the mount points have
-	 * changed since with g_unix_mount_points_changed_since().
+	 * changed since with {@link G.unix_mount_points_changed_since}.
 	 * 
 	 * If more mount points have the same mount path, the last matching mount point
 	 * is returned.
@@ -39455,7 +38032,7 @@ declare namespace imports.gi.Gio {
 	 * Gets a #GList of #GUnixMountPoint containing the unix mount points.
 	 * If #time_read is set, it will be filled with the mount timestamp,
 	 * allowing for checking if the mounts have changed with
-	 * g_unix_mount_points_changed_since().
+	 * {@link G.unix_mount_points_changed_since}.
 	 * @returns 
 	 *     a #GList of the UNIX mountpoints.
 	 * 
@@ -39474,7 +38051,7 @@ declare namespace imports.gi.Gio {
 	 * Gets a #GList of #GUnixMountEntry containing the unix mounts.
 	 * If #time_read is set, it will be filled with the mount
 	 * timestamp, allowing for checking if the mounts have changed
-	 * with g_unix_mounts_changed_since().
+	 * with {@link G.unix_mounts_changed_since}.
 	 * @returns 
 	 *     a #GList of the UNIX mounts.
 	 * 
@@ -39537,8 +38114,8 @@ declare namespace imports.gi.Gio {
 	const DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME: string;
 
 	/**
-	 * The string used to obtain a Unix device path with g_drive_get_identifier().
-	 * @returns The string used to obtain a Unix device path with g_drive_get_identifier().
+	 * The string used to obtain a Unix device path with {@link G.drive_get_identifier}.
+	 * @returns The string used to obtain a Unix device path with {@link G.drive_get_identifier}.
 	 */
 	const DRIVE_IDENTIFIER_KIND_UNIX_DEVICE: string;
 
@@ -39768,11 +38345,11 @@ declare namespace imports.gi.Gio {
 
 	/**
 	 * A key in the "filesystem" namespace for getting the total size (in
-	 * bytes) of the file system, used in g_file_query_filesystem_info().
+	 * bytes) of the file system, used in {@link G.file_query_filesystem_info}.
 	 * 
 	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
 	 * @returns A key in the "filesystem" namespace for getting the total size (in
-	 * bytes) of the file system, used in g_file_query_filesystem_info().
+	 * bytes) of the file system, used in {@link G.file_query_filesystem_info}.
 	 * 
 	 * Corresponding #GFileAttributeType is %G_FILE_ATTRIBUTE_TYPE_UINT64.
 	 */
@@ -40812,13 +39389,13 @@ declare namespace imports.gi.Gio {
 	 * action resides. For example, "win." for window-specific actions and "app."
 	 * for application-wide actions.
 	 * 
-	 * See also g_menu_model_get_item_attribute() and g_menu_item_set_attribute().
+	 * See also {@link G.menu_model_get_item_attribute} and g_menu_item_set_attribute().
 	 * @returns The menu item attribute which holds the action name of the item.  Action
 	 * names are namespaced with an identifier for the action group in which the
 	 * action resides. For example, "win." for window-specific actions and "app."
 	 * for application-wide actions.
 	 * 
-	 * See also g_menu_model_get_item_attribute() and g_menu_item_set_attribute().
+	 * See also {@link G.menu_model_get_item_attribute} and g_menu_item_set_attribute().
 	 */
 	const MENU_ATTRIBUTE_ACTION: string;
 
@@ -40833,14 +39410,14 @@ declare namespace imports.gi.Gio {
 	/**
 	 * The menu item attribute which holds the icon of the item.
 	 * 
-	 * The icon is stored in the format returned by g_icon_serialize().
+	 * The icon is stored in the format returned by {@link G.icon_serialize}.
 	 * 
 	 * This attribute is intended only to represent 'noun' icons such as
 	 * favicons for a webpage, or application icons.  It should not be used
 	 * for 'verbs' (ie: stock icons).
 	 * @returns The menu item attribute which holds the icon of the item.
 	 * 
-	 * The icon is stored in the format returned by g_icon_serialize().
+	 * The icon is stored in the format returned by {@link G.icon_serialize}.
 	 * 
 	 * This attribute is intended only to represent 'noun' icons such as
 	 * favicons for a webpage, or application icons.  It should not be used
@@ -40858,11 +39435,11 @@ declare namespace imports.gi.Gio {
 	 * The menu item attribute which holds the target with which the item's action
 	 * will be activated.
 	 * 
-	 * See also g_menu_item_set_action_and_target()
+	 * See also {@link G.menu_item_set_action_and_target}
 	 * @returns The menu item attribute which holds the target with which the item's action
 	 * will be activated.
 	 * 
-	 * See also g_menu_item_set_action_and_target()
+	 * See also {@link G.menu_item_set_action_and_target}
 	 */
 	const MENU_ATTRIBUTE_TARGET: string;
 
@@ -40871,22 +39448,22 @@ declare namespace imports.gi.Gio {
 	 * menu will usually be shown in place of the menu item, using the item's label
 	 * as a header.
 	 * 
-	 * See also g_menu_item_set_link().
+	 * See also {@link G.menu_item_set_link}.
 	 * @returns The name of the link that associates a menu item with a section.  The linked
 	 * menu will usually be shown in place of the menu item, using the item's label
 	 * as a header.
 	 * 
-	 * See also g_menu_item_set_link().
+	 * See also {@link G.menu_item_set_link}.
 	 */
 	const MENU_LINK_SECTION: string;
 
 	/**
 	 * The name of the link that associates a menu item with a submenu.
 	 * 
-	 * See also g_menu_item_set_link().
+	 * See also {@link G.menu_item_set_link}.
 	 * @returns The name of the link that associates a menu item with a submenu.
 	 * 
-	 * See also g_menu_item_set_link().
+	 * See also {@link G.menu_item_set_link}.
 	 */
 	const MENU_LINK_SUBMENU: string;
 
@@ -40963,7 +39540,7 @@ declare namespace imports.gi.Gio {
 	const VFS_EXTENSION_POINT_NAME: string;
 
 	/**
-	 * The string used to obtain the volume class with g_volume_get_identifier().
+	 * The string used to obtain the volume class with {@link G.volume_get_identifier}.
 	 * 
 	 * Known volume classes include `device`, `network`, and `loop`. Other
 	 * classes may be added in the future.
@@ -40972,7 +39549,7 @@ declare namespace imports.gi.Gio {
 	 * instances into different sections - for example a file manager or
 	 * file chooser can use this information to show `network` volumes under
 	 * a "Network" heading and `device` volumes under a "Devices" heading.
-	 * @returns The string used to obtain the volume class with g_volume_get_identifier().
+	 * @returns The string used to obtain the volume class with {@link G.volume_get_identifier}.
 	 * 
 	 * Known volume classes include `device`, `network`, and `loop`. Other
 	 * classes may be added in the future.
@@ -40985,32 +39562,32 @@ declare namespace imports.gi.Gio {
 	const VOLUME_IDENTIFIER_KIND_CLASS: string;
 
 	/**
-	 * The string used to obtain a Hal UDI with g_volume_get_identifier().
-	 * @returns The string used to obtain a Hal UDI with g_volume_get_identifier().
+	 * The string used to obtain a Hal UDI with {@link G.volume_get_identifier}.
+	 * @returns The string used to obtain a Hal UDI with {@link G.volume_get_identifier}.
 	 */
 	const VOLUME_IDENTIFIER_KIND_HAL_UDI: string;
 
 	/**
-	 * The string used to obtain a filesystem label with g_volume_get_identifier().
-	 * @returns The string used to obtain a filesystem label with g_volume_get_identifier().
+	 * The string used to obtain a filesystem label with {@link G.volume_get_identifier}.
+	 * @returns The string used to obtain a filesystem label with {@link G.volume_get_identifier}.
 	 */
 	const VOLUME_IDENTIFIER_KIND_LABEL: string;
 
 	/**
-	 * The string used to obtain a NFS mount with g_volume_get_identifier().
-	 * @returns The string used to obtain a NFS mount with g_volume_get_identifier().
+	 * The string used to obtain a NFS mount with {@link G.volume_get_identifier}.
+	 * @returns The string used to obtain a NFS mount with {@link G.volume_get_identifier}.
 	 */
 	const VOLUME_IDENTIFIER_KIND_NFS_MOUNT: string;
 
 	/**
-	 * The string used to obtain a Unix device path with g_volume_get_identifier().
-	 * @returns The string used to obtain a Unix device path with g_volume_get_identifier().
+	 * The string used to obtain a Unix device path with {@link G.volume_get_identifier}.
+	 * @returns The string used to obtain a Unix device path with {@link G.volume_get_identifier}.
 	 */
 	const VOLUME_IDENTIFIER_KIND_UNIX_DEVICE: string;
 
 	/**
-	 * The string used to obtain a UUID with g_volume_get_identifier().
-	 * @returns The string used to obtain a UUID with g_volume_get_identifier().
+	 * The string used to obtain a UUID with {@link G.volume_get_identifier}.
+	 * @returns The string used to obtain a UUID with {@link G.volume_get_identifier}.
 	 */
 	const VOLUME_IDENTIFIER_KIND_UUID: string;
 

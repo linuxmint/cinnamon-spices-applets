@@ -13,7 +13,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * @returns the newly allocated #graphene_box_t structure.
-		 *   Use graphene_box_free() to free the resources allocated by this function
+		 *   Use {@link Graphene.Box.free} to free the resources allocated by this function
 		 */
 		public static alloc(): Box;
 		public readonly min: Vec3;
@@ -60,7 +60,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public expand_vec3(vec: Vec3): Box;
 		/**
-		 * Frees the resources allocated by graphene_box_alloc().
+		 * Frees the resources allocated by {@link Graphene.Box.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -133,7 +133,7 @@ declare namespace imports.gi.Graphene {
 		 * of vertices.
 		 * 
 		 * If #n_points is 0, the returned box is initialized with
-		 * graphene_box_empty().
+		 * {@link Graphene.box.empty}.
 		 * @param n_points the number #graphene_point3d_t in the #points array
 		 * @param points an array of #graphene_point3d_t
 		 * @returns the initialized #graphene_box_t
@@ -152,7 +152,7 @@ declare namespace imports.gi.Graphene {
 		 * of vertices.
 		 * 
 		 * If #n_vectors is 0, the returned box is initialized with
-		 * graphene_box_empty().
+		 * {@link Graphene.box.empty}.
 		 * @param n_vectors the number #graphene_point3d_t in the #vectors array
 		 * @param vectors an array of #graphene_vec3_t
 		 * @returns the initialized #graphene_box_t
@@ -162,7 +162,7 @@ declare namespace imports.gi.Graphene {
 		 * Intersects the two given #graphene_box_t.
 		 * 
 		 * If the two boxes do not intersect, #res will contain a degenerate box
-		 * initialized with graphene_box_empty().
+		 * initialized with {@link Graphene.box.empty}.
 		 * @param b a #graphene_box_t
 		 * @returns true if the two boxes intersect
 		 * 
@@ -203,14 +203,14 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Euler): boolean;
 		/**
-		 * Frees the resources allocated by graphene_euler_alloc().
+		 * Frees the resources allocated by {@link Graphene.Euler.alloc}.
 		 */
 		public free(): void;
 		/**
 		 * Retrieves the first component of the Euler angle vector,
 		 * depending on the order of rotation.
 		 * 
-		 * See also: graphene_euler_get_x()
+		 * See also: {@link Graphene.Euler.get_x}
 		 * @returns the first component of the Euler angle vector, in radians
 		 */
 		public get_alpha(): number;
@@ -218,7 +218,7 @@ declare namespace imports.gi.Graphene {
 		 * Retrieves the second component of the Euler angle vector,
 		 * depending on the order of rotation.
 		 * 
-		 * See also: graphene_euler_get_y()
+		 * See also: {@link Graphene.Euler.get_y}
 		 * @returns the second component of the Euler angle vector, in radians
 		 */
 		public get_beta(): number;
@@ -226,7 +226,7 @@ declare namespace imports.gi.Graphene {
 		 * Retrieves the third component of the Euler angle vector,
 		 * depending on the order of rotation.
 		 * 
-		 * See also: graphene_euler_get_z()
+		 * See also: {@link Graphene.Euler.get_z}
 		 * @returns the third component of the Euler angle vector, in radians
 		 */
 		public get_gamma(): number;
@@ -271,7 +271,7 @@ declare namespace imports.gi.Graphene {
 		 * another #graphene_euler_t.
 		 * 
 		 * If the #graphene_euler_t #src is %NULL, this function is equivalent
-		 * to calling graphene_euler_init() with all angles set to 0.
+		 * to calling {@link Graphene.Euler.init} with all angles set to 0.
 		 * @param src a #graphene_euler_t
 		 * @returns the initialized #graphene_euler_t
 		 */
@@ -386,7 +386,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * @returns the newly allocated #graphene_frustum_t
-		 *   structure. Use graphene_frustum_free() to free the resources
+		 *   structure. Use {@link Graphene.Frustum.free} to free the resources
 		 *   allocated by this function.
 		 */
 		public static alloc(): Frustum;
@@ -405,7 +405,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Frustum): boolean;
 		/**
-		 * Frees the resources allocated by graphene_frustum_alloc().
+		 * Frees the resources allocated by {@link Graphene.Frustum.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -507,7 +507,7 @@ declare namespace imports.gi.Graphene {
 		 * Checks whether the two given #graphene_matrix_t matrices are
 		 * byte-by-byte equal.
 		 * 
-		 * While this function is faster than graphene_matrix_equal(), it
+		 * While this function is faster than {@link Graphene.Matrix.equal}, it
 		 * can also return false negatives, so it should be used in
 		 * conjuction with either graphene_matrix_equal() or
 		 * graphene_matrix_near(). For instance:
@@ -532,7 +532,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal_fast(b: Matrix): boolean;
 		/**
-		 * Frees the resources allocated by graphene_matrix_alloc().
+		 * Frees the resources allocated by {@link Graphene.Matrix.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -630,7 +630,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Initializes a #graphene_matrix_t compatible with #graphene_frustum_t.
 		 * 
-		 * See also: graphene_frustum_init_from_matrix()
+		 * See also: {@link Graphene.Frustum.init_from_matrix}
 		 * @param left distance of the left clipping plane
 		 * @param right distance of the right clipping plane
 		 * @param bottom distance of the bottom clipping plane
@@ -665,7 +665,7 @@ declare namespace imports.gi.Graphene {
 		 * @param eye the vector describing the position to look from
 		 * @param center the vector describing the position to look at
 		 * @param up the vector describing the world's upward direction; usually,
-		 *   this is the graphene_vec3_y_axis() vector
+		 *   this is the {@link Graphene.vec3.y_axis} vector
 		 * @returns the initialized matrix
 		 */
 		public init_look_at(eye: Vec3, center: Vec3, up: Vec3): Matrix;
@@ -812,7 +812,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Projects all corners of a #graphene_rect_t using the given matrix.
 		 * 
-		 * See also: graphene_matrix_project_point()
+		 * See also: {@link Graphene.Matrix.project_point}
 		 * @param r a #graphene_rect_t
 		 * @returns return location for the projected
 		 *   rectangle
@@ -832,7 +832,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a rotation transformation to #m, using the given #angle
 		 * and #axis vector.
 		 * 
-		 * This is the equivalent of calling graphene_matrix_init_rotate() and
+		 * This is the equivalent of calling {@link Graphene.Matrix.init_rotate} and
 		 * then multiplying the matrix #m with the rotation matrix.
 		 * @param angle the rotation angle, in degrees
 		 * @param axis the rotation axis, as a #graphene_vec3_t
@@ -848,7 +848,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a rotation transformation to #m, using the given
 		 * #graphene_quaternion_t.
 		 * 
-		 * This is the equivalent of calling graphene_quaternion_to_matrix() and
+		 * This is the equivalent of calling {@link Graphene.Quaternion.to_matrix} and
 		 * then multiplying #m with the rotation matrix.
 		 * @param q a rotation described by a #graphene_quaternion_t
 		 */
@@ -857,7 +857,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a rotation transformation around the X axis to #m, using
 		 * the given #angle.
 		 * 
-		 * See also: graphene_matrix_rotate()
+		 * See also: {@link Graphene.Matrix.rotate}
 		 * @param angle the rotation angle, in degrees
 		 */
 		public rotate_x(angle: number): void;
@@ -865,7 +865,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a rotation transformation around the Y axis to #m, using
 		 * the given #angle.
 		 * 
-		 * See also: graphene_matrix_rotate()
+		 * See also: {@link Graphene.Matrix.rotate}
 		 * @param angle the rotation angle, in degrees
 		 */
 		public rotate_y(angle: number): void;
@@ -873,7 +873,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a rotation transformation around the Z axis to #m, using
 		 * the given #angle.
 		 * 
-		 * See also: graphene_matrix_rotate()
+		 * See also: {@link Graphene.Matrix.rotate}
 		 * @param angle the rotation angle, in degrees
 		 */
 		public rotate_z(angle: number): void;
@@ -881,7 +881,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a scaling transformation to #m, using the three
 		 * given factors.
 		 * 
-		 * This is the equivalent of calling graphene_matrix_init_scale() and then
+		 * This is the equivalent of calling {@link Graphene.Matrix.init_scale} and then
 		 * multiplying the matrix #m with the scale matrix.
 		 * @param factor_x scaling factor on the X axis
 		 * @param factor_y scaling factor on the Y axis
@@ -947,7 +947,7 @@ declare namespace imports.gi.Graphene {
 		 * The result is the axis aligned bounding rectangle containing the coplanar
 		 * quadrilateral.
 		 * 
-		 * See also: graphene_matrix_transform_point()
+		 * See also: {@link Graphene.Matrix.transform_point}
 		 * @param r a #graphene_rect_t
 		 * @returns return location for the bounds
 		 *   of the transformed rectangle
@@ -966,7 +966,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Transforms the given #graphene_point_t using the matrix #m.
 		 * 
-		 * Unlike graphene_matrix_transform_vec3(), this function will take into
+		 * Unlike {@link Graphene.Matrix.transform_vec3}, this function will take into
 		 * account the fourth row vector of the #graphene_matrix_t when computing
 		 * the dot product of each row vector of the matrix.
 		 * 
@@ -979,7 +979,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Transforms the given #graphene_point3d_t using the matrix #m.
 		 * 
-		 * Unlike graphene_matrix_transform_vec3(), this function will take into
+		 * Unlike {@link Graphene.Matrix.transform_vec3}, this function will take into
 		 * account the fourth row vector of the #graphene_matrix_t when computing
 		 * the dot product of each row vector of the matrix.
 		 * 
@@ -1000,7 +1000,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The result is a coplanar quadrilateral.
 		 * 
-		 * See also: graphene_matrix_transform_point()
+		 * See also: {@link Graphene.Matrix.transform_point}
 		 * @param r a #graphene_rect_t
 		 * @returns return location for the
 		 *   transformed quad
@@ -1021,7 +1021,7 @@ declare namespace imports.gi.Graphene {
 		 * with the corresponding components of the vector #v. The W row vector will
 		 * be ignored.
 		 * 
-		 * See also: graphene_simd4x4f_vec3_mul()
+		 * See also: {@link Graphene.Simd4X4F.vec3_mul}
 		 * @param v a #graphene_vec3_t
 		 * @returns return location for a #graphene_vec3_t
 		 */
@@ -1029,7 +1029,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Transforms the given #graphene_vec4_t using the matrix #m.
 		 * 
-		 * See also: graphene_simd4x4f_vec4_mul()
+		 * See also: {@link Graphene.Simd4X4F.vec4_mul}
 		 * @param v a #graphene_vec4_t
 		 * @returns return location for a #graphene_vec4_t
 		 */
@@ -1038,7 +1038,7 @@ declare namespace imports.gi.Graphene {
 		 * Adds a translation transformation to #m using the coordinates
 		 * of the given #graphene_point3d_t.
 		 * 
-		 * This is the equivalent of calling graphene_matrix_init_translate() and
+		 * This is the equivalent of calling {@link Graphene.Matrix.init_translate} and
 		 * then multiplying #m with the translation matrix.
 		 * @param pos a #graphene_point3d_t
 		 */
@@ -1096,7 +1096,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * @returns the newly allocated #graphene_plane_t.
-		 *   Use graphene_plane_free() to free the resources allocated by
+		 *   Use {@link Graphene.Plane.free} to free the resources allocated by
 		 *   this function
 		 */
 		public static alloc(): Plane;
@@ -1115,7 +1115,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Plane): boolean;
 		/**
-		 * Frees the resources allocated by graphene_plane_alloc().
+		 * Frees the resources allocated by {@link Graphene.Plane.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -1216,7 +1216,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The coordinates of the returned point are (0, 0).
 		 * 
-		 * It's possible to chain this function with graphene_point_init()
+		 * It's possible to chain this function with {@link Graphene.Point.init}
 		 * or graphene_point_init_from_point(), e.g.:
 		 * 
 		 * |[<!-- language="C" -->
@@ -1233,7 +1233,7 @@ declare namespace imports.gi.Graphene {
 		 *   }
 		 * ]|
 		 * @returns the newly allocated #graphene_point_t.
-		 *   Use graphene_point_free() to free the resources allocated by
+		 *   Use {@link Graphene.Point.free} to free the resources allocated by
 		 *   this function.
 		 */
 		public static alloc(): Point;
@@ -1261,13 +1261,13 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * This function accounts for floating point fluctuations; if
 		 * you want to control the fuzziness of the match, you can use
-		 * graphene_point_near() instead.
+		 * {@link Graphene.Point.near} instead.
 		 * @param b a #graphene_point_t
 		 * @returns `true` if the points have the same coordinates
 		 */
 		public equal(b: Point): boolean;
 		/**
-		 * Frees the resources allocated by graphene_point_alloc().
+		 * Frees the resources allocated by {@link Graphene.Point.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -1326,7 +1326,7 @@ declare namespace imports.gi.Graphene {
 		/**
 		 * Allocates a #graphene_point3d_t structure.
 		 * @returns the newly allocated structure.
-		 *   Use graphene_point3d_free() to free the resources
+		 *   Use {@link Graphene.Point3D.free} to free the resources
 		 *   allocated by this function.
 		 */
 		public static alloc(): Point3D;
@@ -1371,7 +1371,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Point3D): boolean;
 		/**
-		 * Frees the resources allocated via graphene_point3d_alloc().
+		 * Frees the resources allocated via {@link Graphene.Point3D.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -1486,7 +1486,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public contains(p: Point): boolean;
 		/**
-		 * Frees the resources allocated by graphene_quad_alloc()
+		 * Frees the resources allocated by {@link Graphene.Quad.alloc}
 		 */
 		public free(): void;
 		/**
@@ -1559,7 +1559,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Quaternion): boolean;
 		/**
-		 * Releases the resources allocated by graphene_quaternion_alloc().
+		 * Releases the resources allocated by {@link Graphene.Quaternion.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -1584,7 +1584,7 @@ declare namespace imports.gi.Graphene {
 		 * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 		 * on each axis.
 		 * 
-		 * See also: graphene_quaternion_init_from_euler()
+		 * See also: {@link Graphene.Quaternion.init_from_euler}
 		 * @param deg_x rotation angle on the X axis (yaw), in degrees
 		 * @param deg_y rotation angle on the Y axis (pitch), in degrees
 		 * @param deg_z rotation angle on the Z axis (roll), in degrees
@@ -1615,7 +1615,7 @@ declare namespace imports.gi.Graphene {
 		 * the [Euler angles](http://en.wikipedia.org/wiki/Euler_angles)
 		 * on each axis.
 		 * 
-		 * See also: graphene_quaternion_init_from_euler()
+		 * See also: {@link Graphene.Quaternion.init_from_euler}
 		 * @param rad_x rotation angle on the X axis (yaw), in radians
 		 * @param rad_y rotation angle on the Y axis (pitch), in radians
 		 * @param rad_z rotation angle on the Z axis (roll), in radians
@@ -1735,7 +1735,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * @returns the newly allocated #graphene_ray_t.
-		 *   Use graphene_ray_free() to free the resources allocated by
+		 *   Use {@link Graphene.Ray.free} to free the resources allocated by
 		 *   this function
 		 */
 		public static alloc(): Ray;
@@ -1748,7 +1748,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Ray): boolean;
 		/**
-		 * Frees the resources allocated by graphene_ray_alloc().
+		 * Frees the resources allocated by {@link Graphene.Ray.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -1848,7 +1848,7 @@ declare namespace imports.gi.Graphene {
 		 * Checks whether the given #graphene_ray_t #r intersects the
 		 * given #graphene_box_t #b.
 		 * 
-		 * See also: graphene_ray_intersect_box()
+		 * See also: {@link Graphene.Ray.intersect_box}
 		 * @param b a #graphene_box_t
 		 * @returns `true` if the ray intersects the box
 		 */
@@ -1857,7 +1857,7 @@ declare namespace imports.gi.Graphene {
 		 * Checks if the given #graphene_ray_t #r intersects the
 		 * given #graphene_sphere_t #s.
 		 * 
-		 * See also: graphene_ray_intersect_sphere()
+		 * See also: {@link Graphene.Ray.intersect_sphere}
 		 * @param s a #graphene_sphere_t
 		 * @returns `true` if the ray intersects the sphere
 		 */
@@ -1866,7 +1866,7 @@ declare namespace imports.gi.Graphene {
 		 * Checks whether the given #graphene_ray_t #r intersects the
 		 * given #graphene_triangle_t #b.
 		 * 
-		 * See also: graphene_ray_intersect_triangle()
+		 * See also: {@link Graphene.Ray.intersect_triangle}
 		 * @param t a #graphene_triangle_t
 		 * @returns `true` if the ray intersects the triangle
 		 */
@@ -1882,7 +1882,7 @@ declare namespace imports.gi.Graphene {
 	 * equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
 	 * of [ -10, -10 ].
 	 * 
-	 * Application code can normalize rectangles using graphene_rect_normalize();
+	 * Application code can normalize rectangles using {@link Graphene.Rect.normalize};
 	 * this function will ensure that the width and height of a rectangle are
 	 * positive values. All functions taking a #graphene_rect_t as an argument
 	 * will internally operate on a normalized copy; all functions returning a
@@ -1925,7 +1925,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public expand(p: Point): Rect;
 		/**
-		 * Frees the resources allocated by graphene_rect_alloc().
+		 * Frees the resources allocated by {@link Graphene.rect.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -2112,13 +2112,13 @@ declare namespace imports.gi.Graphene {
 		public offset_r(d_x: number, d_y: number): Rect;
 		/**
 		 * @deprecated
-		 * Use graphene_rect_round_extents() instead
+		 * Use {@link Graphene.Rect.round_extents} instead
 		 * 
 		 * Rounds the origin and size of the given rectangle to
 		 * their nearest integer values; the rounding is guaranteed
 		 * to be large enough to have an area bigger or equal to the
 		 * original rectangle, but might not fully contain its extents.
-		 * Use graphene_rect_round_extents() in case you need to round
+		 * Use {@link Graphene.Rect.round_extents} in case you need to round
 		 * to a rectangle that covers fully the original one.
 		 * 
 		 * This function is the equivalent of calling `floor` on
@@ -2155,7 +2155,7 @@ declare namespace imports.gi.Graphene {
 		public round_extents(): Rect;
 		/**
 		 * @deprecated
-		 * Use graphene_rect_round() instead
+		 * Use {@link Graphene.Rect.round} instead
 		 * 
 		 * Rounds the origin and the size of the given rectangle to
 		 * their nearest integer values; the rounding is guaranteed
@@ -2233,7 +2233,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Size): boolean;
 		/**
-		 * Frees the resources allocated by graphene_size_alloc().
+		 * Frees the resources allocated by {@link Graphene.Size.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -2278,7 +2278,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the newly allocated structure are undefined.
 		 * @returns the newly allocated #graphene_sphere_t. Use
-		 *   graphene_sphere_free() to free the resources allocated by this function
+		 *   {@link Graphene.Sphere.free} to free the resources allocated by this function
 		 */
 		public static alloc(): Sphere;
 		public readonly center: Vec3;
@@ -2304,7 +2304,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Sphere): boolean;
 		/**
-		 * Frees the resources allocated by graphene_sphere_alloc().
+		 * Frees the resources allocated by {@link Graphene.Sphere.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -2382,7 +2382,7 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * @returns the newly allocated #graphene_triangle_t
-		 *   structure. Use graphene_triangle_free() to free the resources
+		 *   structure. Use {@link Graphene.Triangle.free} to free the resources
 		 *   allocated by this function
 		 */
 		public static alloc(): Triangle;
@@ -2402,7 +2402,7 @@ declare namespace imports.gi.Graphene {
 		 */
 		public equal(b: Triangle): boolean;
 		/**
-		 * Frees the resources allocated by graphene_triangle_alloc().
+		 * Frees the resources allocated by {@link Graphene.Triangle.alloc}.
 		 */
 		public free(): void;
 		/**
@@ -2483,7 +2483,7 @@ declare namespace imports.gi.Graphene {
 		 *  - `res.x = u`
 		 *  - `res.y = v`
 		 * 
-		 * See also: graphene_triangle_get_barycoords()
+		 * See also: {@link Graphene.Triangle.get_barycoords}
 		 * @param p a #graphene_point3d_t
 		 * @param uv_a the UV coordinates of the first point
 		 * @param uv_b the UV coordinates of the second point
@@ -2546,9 +2546,9 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * 
-		 * Use graphene_vec2_init() to initialize the vector.
+		 * Use {@link Graphene.Vec2.init} to initialize the vector.
 		 * @returns the newly allocated #graphene_vec2_t
-		 *   structure. Use graphene_vec2_free() to free the resources allocated
+		 *   structure. Use {@link Graphene.Vec2.free} to free the resources allocated
 		 *   by this function.
 		 */
 		public static alloc(): Vec2;
@@ -2705,9 +2705,9 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * 
-		 * Use graphene_vec3_init() to initialize the vector.
+		 * Use {@link Graphene.Vec3.init} to initialize the vector.
 		 * @returns the newly allocated #graphene_vec3_t
-		 *   structure. Use graphene_vec3_free() to free the resources allocated
+		 *   structure. Use {@link Graphene.Vec3.free} to free the resources allocated
 		 *   by this function.
 		 */
 		public static alloc(): Vec3;
@@ -2905,9 +2905,9 @@ declare namespace imports.gi.Graphene {
 		 * 
 		 * The contents of the returned structure are undefined.
 		 * 
-		 * Use graphene_vec4_init() to initialize the vector.
+		 * Use {@link Graphene.Vec4.init} to initialize the vector.
 		 * @returns the newly allocated #graphene_vec4_t
-		 *   structure. Use graphene_vec4_free() to free the resources allocated
+		 *   structure. Use {@link Graphene.Vec4.free} to free the resources allocated
 		 *   by this function.
 		 */
 		public static alloc(): Vec4;
@@ -3444,7 +3444,7 @@ declare namespace imports.gi.Graphene {
 	 * Evaluates to the number of components of a #graphene_vec2_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec2_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec2.init_from_float} and
 	 * graphene_vec2_to_float(), e.g.
 	 * 
 	 * |[
@@ -3459,7 +3459,7 @@ declare namespace imports.gi.Graphene {
 	 * @returns Evaluates to the number of components of a #graphene_vec2_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec2_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec2.init_from_float} and
 	 * graphene_vec2_to_float(), e.g.
 	 * 
 	 * |[
@@ -3478,7 +3478,7 @@ declare namespace imports.gi.Graphene {
 	 * Evaluates to the number of components of a #graphene_vec3_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec3_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec3.init_from_float} and
 	 * graphene_vec3_to_float(), e.g.
 	 * 
 	 * |[
@@ -3493,7 +3493,7 @@ declare namespace imports.gi.Graphene {
 	 * @returns Evaluates to the number of components of a #graphene_vec3_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec3_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec3.init_from_float} and
 	 * graphene_vec3_to_float(), e.g.
 	 * 
 	 * |[
@@ -3512,7 +3512,7 @@ declare namespace imports.gi.Graphene {
 	 * Evaluates to the number of components of a #graphene_vec4_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec4_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec4.init_from_float} and
 	 * graphene_vec4_to_float(), e.g.
 	 * 
 	 * |[
@@ -3527,7 +3527,7 @@ declare namespace imports.gi.Graphene {
 	 * @returns Evaluates to the number of components of a #graphene_vec4_t.
 	 * 
 	 * This symbol is useful when declaring a C array of floating
-	 * point values to be used with graphene_vec4_init_from_float() and
+	 * point values to be used with {@link Graphene.Vec4.init_from_float} and
 	 * graphene_vec4_to_float(), e.g.
 	 * 
 	 * |[

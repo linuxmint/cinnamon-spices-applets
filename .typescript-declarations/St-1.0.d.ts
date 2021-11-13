@@ -217,7 +217,7 @@ declare namespace imports.gi.St {
 		y_fill: boolean;
 		/**
 		 * Retrieves the horizontal and vertical alignment of the child
-		 * inside a {@link Bin}, as set by st_bin_set_alignment().
+		 * inside a {@link Bin}, as set by {@link St.Bin.set_alignment}.
 		 * @param x_align return location for the horizontal alignment, or %NULL
 		 * @param y_align return location for the vertical alignment, or %NULL
 		 */
@@ -328,12 +328,12 @@ declare namespace imports.gi.St {
 		pack_start: boolean;
 		vertical: boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::pack-start property.
+		 * Get the value of the {@link BoxLayout.pack_start} property.
 		 * @returns %TRUE if pack-start is enabled
 		 */
 		get_pack_start(): boolean;
 		/**
-		 * Get the value of the {@link BoxLayout}::vertical property.
+		 * Get the value of the {@link BoxLayout.vertical} property.
 		 * @returns %TRUE if the layout is vertical
 		 */
 		get_vertical(): boolean;
@@ -355,12 +355,12 @@ declare namespace imports.gi.St {
 		 */
 		insert_before(actor: Clutter.Actor, sibling: Clutter.Actor): void;
 		/**
-		 * Set the value of the {@link BoxLayout}::pack-start property.
+		 * Set the value of the {@link BoxLayout.pack_start} property.
 		 * @param pack_start %TRUE if the layout should use pack-start
 		 */
 		set_pack_start(pack_start: boolean): void;
 		/**
-		 * Set the value of the {@link BoxLayout}::vertical property
+		 * Set the value of the {@link BoxLayout.vertical} property
 		 * @param vertical %TRUE if the layout should be vertical
 		 */
 		set_vertical(vertical: boolean): void;
@@ -461,9 +461,9 @@ declare namespace imports.gi.St {
 		fake_release(): void;
 		/**
 		 * Gets the mask of mouse buttons that #button emits the
-		 * {@link Button}::clicked signal for.
+		 * {@link Button.clicked} signal for.
 		 * @returns the mask of mouse buttons that #button emits the
-		 * {@link Button}::clicked signal for.
+		 * {@link Button.clicked} signal for.
 		 */
 		get_button_mask(): ButtonMask;
 		/**
@@ -482,7 +482,7 @@ declare namespace imports.gi.St {
 		 */
 		get_toggle_mode(): boolean;
 		/**
-		 * Sets which mouse buttons #button emits {@link Button}::clicked for.
+		 * Sets which mouse buttons #button emits {@link Button.clicked} for.
 		 * @param mask the mask of mouse buttons that #button responds to
 		 */
 		set_button_mask(mask: ButtonMask): void;
@@ -625,7 +625,7 @@ declare namespace imports.gi.St {
 		 * Will cause the actor to emit a ::repaint signal before it is next
 		 * drawn to the scene. Useful if some parameters for the area being
 		 * drawn other than the size or style have changed. Note that
-		 * clutter_actor_queue_redraw() will simply result in the same
+		 * {@link Clutter.Actor.queue_redraw} will simply result in the same
 		 * contents being drawn to the scene again.
 		 */
 		queue_repaint(): void;
@@ -830,7 +830,7 @@ declare namespace imports.gi.St {
 		public constructor(options?: Partial<GroupInitOptions>);
 		/**
 		 * @deprecated
-		 * Use st_widget_new() instead.
+		 * Use {@link St.Widget.new} instead.
 		 * 
 		 * Create a new  {@link Group}.
 		 * @returns the newly created {@link Group} actor
@@ -883,7 +883,7 @@ declare namespace imports.gi.St {
 		get_icon_size(): number;
 		/**
 		 * Gets the type of icon we'll look up to display in the actor.
-		 * See st_icon_set_icon_type().
+		 * See {@link St.Icon.set_icon_type}.
 		 * @returns the icon type.
 		 */
 		get_icon_type(): IconType;
@@ -1011,7 +1011,7 @@ declare namespace imports.gi.St {
 		 * Will cause the actor to emit a ::repaint signal before it is next
 		 * drawn to the scene. Useful if some parameters for the area being
 		 * drawn other than the size or style have changed. Note that
-		 * clutter_actor_queue_redraw() will simply result in the same
+		 * {@link Clutter.Actor.queue_redraw} will simply result in the same
 		 * contents being drawn to the scene again.
 		 */
 		queue_repaint(): void;
@@ -1676,7 +1676,7 @@ declare namespace imports.gi.St {
 		 */
 		scale_factor: number;
 		/**
-		 * Gets the default font for the theme context. See st_theme_context_set_font().
+		 * Gets the default font for the theme context. See {@link St.ThemeContext.set_font}.
 		 * @returns the default font for the theme context.
 		 */
 		get_font(): Pango.FontDescription;
@@ -1688,7 +1688,7 @@ declare namespace imports.gi.St {
 		 */
 		get_root_node(): ThemeNode;
 		/**
-		 * Gets the default theme for the context. See st_theme_context_set_theme()
+		 * Gets the default theme for the context. See {@link St.ThemeContext.set_theme}
 		 * @returns the default theme for the context
 		 */
 		get_theme(): Theme;
@@ -1740,7 +1740,7 @@ declare namespace imports.gi.St {
 		 * Create a new theme context not associated with any #ClutterStage.
 		 * This can be useful in testing scenarios, or if using StThemeContext
 		 * with something other than #ClutterActor objects, but you generally
-		 * should use st_theme_context_get_for_stage() instead.
+		 * should use {@link St.ThemeContext.get_for_stage} instead.
 		 * @returns 
 		 */
 		public static new(): ThemeContext;
@@ -1757,7 +1757,7 @@ declare namespace imports.gi.St {
 	 */
 	interface IThemeNode {
 		/**
-		 * Adjusts a "for height" passed to clutter_actor_get_preferred_width() to
+		 * Adjusts a "for height" passed to {@link Clutter.Actor.get_preferred_width} to
 		 * account for borders and padding. This is a convenience function meant
 		 * to be called from a get_preferred_width() method of a #ClutterActor
 		 * subclass. The value after adjustment is the height available for the actor's
@@ -1765,7 +1765,7 @@ declare namespace imports.gi.St {
 		 */
 		adjust_for_height(): void;
 		/**
-		 * Adjusts a "for width" passed to clutter_actor_get_preferred_height() to
+		 * Adjusts a "for width" passed to {@link Clutter.Actor.get_preferred_height} to
 		 * account for borders and padding. This is a convenience function meant
 		 * to be called from a get_preferred_height() method of a #ClutterActor
 		 * subclass. The value after adjustment is the width available for the actor's
@@ -1776,7 +1776,7 @@ declare namespace imports.gi.St {
 		 * Adjusts the minimum and natural height computed for an actor by
 		 * adding on the necessary space for borders and padding and taking
 		 * into account any minimum or maximum height. This is a convenience
-		 * function meant to be called from the get_preferred_height() method
+		 * function meant to be called from the {@link Get.preferred_height} method
 		 * of a #ClutterActor subclass
 		 */
 		adjust_preferred_height(): void;
@@ -1784,7 +1784,7 @@ declare namespace imports.gi.St {
 		 * Adjusts the minimum and natural width computed for an actor by
 		 * adding on the necessary space for borders and padding and taking
 		 * into account any minimum or maximum width. This is a convenience
-		 * function meant to be called from the get_preferred_width() method
+		 * function meant to be called from the {@link Get.preferred_width} method
 		 * of a #ClutterActor subclass
 		 */
 		adjust_preferred_width(): void;
@@ -1887,7 +1887,7 @@ declare namespace imports.gi.St {
 		get_box_shadow(): Shadow;
 		/**
 		 * Generically looks up a property containing a single color value. When
-		 * specific getters (like st_theme_node_get_background_color()) exist, they
+		 * specific getters (like {@link St.ThemeNode.get_background_color}) exist, they
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
@@ -1915,7 +1915,7 @@ declare namespace imports.gi.St {
 		 * Generically looks up a property containing a single numeric value
 		 *  without units.
 		 * 
-		 * See also st_theme_node_lookup_double(), which provides more options,
+		 * See also {@link St.ThemeNode.lookup_double}, which provides more options,
 		 * and lets you handle the case where the theme does not specify the
 		 * indicated value.
 		 * @param property_name The name of the numeric property
@@ -1947,7 +1947,7 @@ declare namespace imports.gi.St {
 		get_icon_colors(): IconColors;
 		/**
 		 * Generically looks up a property containing a single length value. When
-		 * specific getters (like st_theme_node_get_border_width()) exist, they
+		 * specific getters (like {@link St.ThemeNode.get_border_width}) exist, they
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
@@ -1990,7 +1990,7 @@ declare namespace imports.gi.St {
 		get_pseudo_classes(): string[];
 		/**
 		 * Generically looks up a property containing a set of shadow values. When
-		 * specific getters (like st_theme_node_get_box_shadow()) exist, they
+		 * specific getters (like {@link St.ThemeNode.get_box_shadow}) exist, they
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
@@ -2032,7 +2032,7 @@ declare namespace imports.gi.St {
 		hash(): number;
 		/**
 		 * Generically looks up a property containing a single color value. When
-		 * specific getters (like st_theme_node_get_background_color()) exist, they
+		 * specific getters (like {@link St.ThemeNode.get_background_color}) exist, they
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
@@ -2055,7 +2055,7 @@ declare namespace imports.gi.St {
 		 * Generically looks up a property containing a single numeric value
 		 *  without units.
 		 * 
-		 * See also st_theme_node_get_double(), which provides a simpler API.
+		 * See also {@link St.ThemeNode.get_double}, which provides a simpler API.
 		 * @param property_name The name of the numeric property
 		 * @param inherit if %TRUE, if a value is not found for the property on the
 		 *   node, then it will be looked up on the parent node, and then on the
@@ -2072,7 +2072,7 @@ declare namespace imports.gi.St {
 		lookup_double(property_name: string, inherit: boolean): [ boolean, number ];
 		/**
 		 * Generically looks up a property containing a single length value. When
-		 * specific getters (like st_theme_node_get_border_width()) exist, they
+		 * specific getters (like {@link St.ThemeNode.get_border_width}) exist, they
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
@@ -2101,7 +2101,7 @@ declare namespace imports.gi.St {
 		 * should be used instead. They are cached, so more efficient, and have
 		 * handling for shortcut properties and other details of CSS.
 		 * 
-		 * See also st_theme_node_get_shadow(), which provides a simpler API.
+		 * See also {@link St.ThemeNode.get_shadow}, which provides a simpler API.
 		 * @param property_name The name of the shadow property
 		 * @param inherit if %TRUE, if a value is not found for the property on the
 		 *   node, then it will be looked up on the parent node, and then on the
@@ -2117,7 +2117,7 @@ declare namespace imports.gi.St {
 		lookup_shadow(property_name: string, inherit: boolean): [ boolean, Shadow ];
 		paint(framebuffer: any, box: Clutter.ActorBox, paint_opacity: number): void;
 		/**
-		 * Check if st_theme_node_paint() will paint identically for #node as it does
+		 * Check if {@link St.ThemeNode.paint} will paint identically for #node as it does
 		 * for #other. Note that in some cases this function may return %TRUE even
 		 * if there is no visible difference in the painting.
 		 * @param other a different {@link ThemeNode}
@@ -2181,7 +2181,7 @@ declare namespace imports.gi.St {
 		can_focus: boolean;
 		/**
 		 * Whether or not the pointer is currently hovering over the widget. This is
-		 * only tracked automatically if {@link Widget}:track-hover is %TRUE, but you can
+		 * only tracked automatically if {@link Widget.track_hover} is %TRUE, but you can
 		 * adjust it manually in any case.
 		 */
 		hover: boolean;
@@ -2212,7 +2212,7 @@ declare namespace imports.gi.St {
 		/**
 		 * Determines whether the widget tracks pointer hover state. If
 		 * %TRUE (and the widget is visible and reactive), the
-		 * {@link Widget}:hover property and "hover" style pseudo class will be
+		 * {@link Widget.hover} property and "hover" style pseudo class will be
 		 * adjusted automatically as the pointer moves in and out of the
 		 * widget.
 		 */
@@ -2265,20 +2265,20 @@ declare namespace imports.gi.St {
 		ensure_style(): void;
 		/**
 		 * Gets the accessible name for this widget. See
-		 * st_widget_set_accessible_name() for more information.
+		 * {@link St.Widget.set_accessible_name} for more information.
 		 * @returns a character string representing the accessible name
 		 * of the widget.
 		 */
 		get_accessible_name(): string;
 		/**
 		 * Gets the #AtkRole for this widget. See
-		 * st_widget_set_accessible_role() for more information.
+		 * {@link St.Widget.set_accessible_role} for more information.
 		 * @returns accessible #AtkRole for this widget
 		 */
 		get_accessible_role(): Atk.Role;
 		/**
 		 * Returns the current value of the can-focus property. See
-		 * st_widget_set_can_focus() for more information.
+		 * {@link St.Widget.set_can_focus} for more information.
 		 * @returns current value of can-focus on #widget
 		 */
 		get_can_focus(): boolean;
@@ -2286,13 +2286,13 @@ declare namespace imports.gi.St {
 		/**
 		 * Gets a list of the focusable children of #widget, in "Tab"
 		 * order. By default, this returns all visible
-		 * (as in clutter_actor_is_visible()) children of #widget.
+		 * (as in {@link Clutter.Actor.is_visible}) children of #widget.
 		 * @returns 
 		 *   #widget's focusable children
 		 */
 		get_focus_chain(): GLib.List;
 		/**
-		 * If {@link Widget}:track-hover is set, this returns whether the pointer
+		 * If {@link Widget.track_hover} is set, this returns whether the pointer
 		 * is currently over the widget.
 		 * @returns current value of hover on #widget
 		 */
@@ -2308,7 +2308,7 @@ declare namespace imports.gi.St {
 		 */
 		get_label_actor(): Clutter.Actor;
 		/**
-		 * Get the current inline style string. See st_widget_set_style().
+		 * Get the current inline style string. See {@link St.Widget.set_style}.
 		 * @returns The inline style string, or %NULL. The string is owned by the
 		 * {@link Widget} and should not be modified or freed.
 		 */
@@ -2324,13 +2324,13 @@ declare namespace imports.gi.St {
 		 * 
 		 * Note that an actor can have multiple pseudo classes; if you just
 		 * want to test for the presence of a specific pseudo class, use
-		 * st_widget_has_style_pseudo_class().
+		 * {@link St.Widget.has_style_pseudo_class}.
 		 * @returns the pseudo class list string. The string is owned by the
 		 * {@link Widget} and should not be modified or freed.
 		 */
 		get_style_pseudo_class(): string;
 		/**
-		 * Gets the overriding theme set on the actor. See st_widget_set_theme()
+		 * Gets the overriding theme set on the actor. See {@link St.Widget.set_theme}
 		 * @returns the overriding theme, or %NULL
 		 */
 		get_theme(): Theme;
@@ -2350,7 +2350,7 @@ declare namespace imports.gi.St {
 		get_theme_node(): ThemeNode;
 		/**
 		 * Returns the current value of the track-hover property. See
-		 * st_widget_set_track_hover() for more information.
+		 * {@link St.Widget.set_track_hover} for more information.
 		 * @returns current value of track-hover on #widget
 		 */
 		get_track_hover(): boolean;
@@ -2376,7 +2376,7 @@ declare namespace imports.gi.St {
 		 * 
 		 * If #from is a descendant of #widget, this attempts to move the
 		 * keyboard focus to the next descendant of #widget (in the order
-		 * implied by #direction) that has the {@link Widget}:can-focus property
+		 * implied by #direction) that has the {@link Widget.can_focus} property
 		 * set. If #from is %NULL, or outside of #widget, this attempts to
 		 * focus either #widget itself, or its first descendant in the order
 		 * implied by #direction.
@@ -2392,13 +2392,13 @@ declare namespace imports.gi.St {
 		 * 
 		 * If #wrap_around is %TRUE and #from is a child of #widget, but the
 		 * widget has no further children that can accept the focus in the
-		 * given direction, then st_widget_navigate_focus() will try a second
+		 * given direction, then {@link St.Widget.navigate_focus} will try a second
 		 * time, using a %NULL #from, which should cause it to reset the focus
 		 * to the first available widget in the given direction.
 		 * @param from the actor that the focus is coming from
 		 * @param direction the direction focus is moving in
 		 * @param wrap_around whether focus should wrap around
-		 * @returns %TRUE if clutter_actor_grab_key_focus() has been
+		 * @returns %TRUE if {@link Clutter.Actor.grab_key_focus} has been
 		 * called on an actor. %FALSE if not.
 		 */
 		navigate_focus(from: Clutter.Actor | null, direction: Gtk.DirectionType, wrap_around: boolean): boolean;
@@ -2426,7 +2426,7 @@ declare namespace imports.gi.St {
 		popup_menu(): void;
 		/**
 		 * This method removes #state as on of the accessible states for
-		 * #widget. See st_widget_add_accessible_state() for more information.
+		 * #widget. See {@link St.Widget.add_accessible_state} for more information.
 		 * @param state #AtkState state to remove
 		 */
 		remove_accessible_state(state: Atk.StateType): void;
@@ -2448,7 +2448,7 @@ declare namespace imports.gi.St {
 		 * 
 		 * NULL is a valid value for #accessible. That contemplates the
 		 * hypothetical case of not needing anymore a custom accessible object
-		 * for the widget. Next call of st_widget_get_accessible() would
+		 * for the widget. Next call of {@link St.Widget.get_accessible} would
 		 * create and return a default accessible.
 		 * 
 		 * It assumes that the call to atk_object_initialize that bound the
@@ -2501,8 +2501,8 @@ declare namespace imports.gi.St {
 		 * Sets #widget's hover property and adds or removes "hover" from its
 		 * pseudo class accordingly
 		 * 
-		 * If you have set {@link Widget}:track-hover, you should not need to call
-		 * this directly. You can call st_widget_sync_hover() if the hover
+		 * If you have set {@link Widget.track_hover}, you should not need to call
+		 * this directly. You can call {@link St.Widget.sync_hover} if the hover
 		 * state might be out of sync due to another actor's pointer grab.
 		 * @param hover whether the pointer is hovering over the widget
 		 */
@@ -2534,7 +2534,7 @@ declare namespace imports.gi.St {
 		/**
 		 * Set the style class name list. #style_class_list can either be
 		 * %NULL, for no classes, or a space-separated list of style class
-		 * names. See also st_widget_add_style_class_name() and
+		 * names. See also {@link St.Widget.add_style_class_name} and
 		 * st_widget_remove_style_class_name().
 		 * @param style_class_list a new style class list string
 		 */
@@ -2542,7 +2542,7 @@ declare namespace imports.gi.St {
 		/**
 		 * Set the style pseudo class list. #pseudo_class_list can either be
 		 * %NULL, for no classes, or a space-separated list of pseudo class
-		 * names. See also st_widget_add_style_pseudo_class() and
+		 * names. See also {@link St.Widget.add_style_pseudo_class} and
 		 * st_widget_remove_style_pseudo_class().
 		 * @param pseudo_class_list a new pseudo class list string
 		 */
@@ -2564,7 +2564,7 @@ declare namespace imports.gi.St {
 		 * 
 		 * Note that currently it is not possible to correctly track the hover
 		 * state when another actor has a pointer grab. You can use
-		 * st_widget_sync_hover() to update the property manually in this
+		 * {@link St.Widget.sync_hover} to update the property manually in this
 		 * case.
 		 * @param track_hover %TRUE if the widget should track the pointer hover state
 		 */
@@ -2666,180 +2666,6 @@ declare namespace imports.gi.St {
 		public constructor(options?: Partial<WidgetAccessibleInitOptions>);
 	}
 
-	export interface AdjustmentClassInitOptions {}
-	/**
-	 * Base class for {@link Adjustment}.
-	 */
-	interface AdjustmentClass {}
-	class AdjustmentClass {
-		public constructor(options?: Partial<AdjustmentClassInitOptions>);
-		public changed: {(adjustment: Adjustment): void;};
-	}
-
-	export interface AdjustmentPrivateInitOptions {}
-	interface AdjustmentPrivate {}
-	class AdjustmentPrivate {
-		public constructor(options?: Partial<AdjustmentPrivateInitOptions>);
-	}
-
-	export interface BackgroundEffectClassInitOptions {}
-	interface BackgroundEffectClass {}
-	class BackgroundEffectClass {
-		public constructor(options?: Partial<BackgroundEffectClassInitOptions>);
-		public readonly base_pipeline: any;
-	}
-
-	export interface BinClassInitOptions {}
-	/**
-	 * The {@link BinClass} struct contains only private data
-	 */
-	interface BinClass {}
-	class BinClass {
-		public constructor(options?: Partial<BinClassInitOptions>);
-	}
-
-	export interface BinPrivateInitOptions {}
-	interface BinPrivate {}
-	class BinPrivate {
-		public constructor(options?: Partial<BinPrivateInitOptions>);
-	}
-
-	export interface BorderImageClassInitOptions {}
-	interface BorderImageClass {}
-	class BorderImageClass {
-		public constructor(options?: Partial<BorderImageClassInitOptions>);
-	}
-
-	export interface BoxLayoutChildClassInitOptions {}
-	interface BoxLayoutChildClass {}
-	class BoxLayoutChildClass {
-		public constructor(options?: Partial<BoxLayoutChildClassInitOptions>);
-	}
-
-	export interface BoxLayoutChildPrivateInitOptions {}
-	interface BoxLayoutChildPrivate {}
-	class BoxLayoutChildPrivate {
-		public constructor(options?: Partial<BoxLayoutChildPrivateInitOptions>);
-	}
-
-	export interface BoxLayoutClassInitOptions {}
-	interface BoxLayoutClass {}
-	class BoxLayoutClass {
-		public constructor(options?: Partial<BoxLayoutClassInitOptions>);
-	}
-
-	export interface BoxLayoutPrivateInitOptions {}
-	interface BoxLayoutPrivate {}
-	class BoxLayoutPrivate {
-		public constructor(options?: Partial<BoxLayoutPrivateInitOptions>);
-	}
-
-	export interface ButtonClassInitOptions {}
-	interface ButtonClass {}
-	class ButtonClass {
-		public constructor(options?: Partial<ButtonClassInitOptions>);
-		public transition: {(button: Button): void;};
-		public clicked: {(button: Button): void;};
-	}
-
-	export interface ButtonPrivateInitOptions {}
-	interface ButtonPrivate {}
-	class ButtonPrivate {
-		public constructor(options?: Partial<ButtonPrivateInitOptions>);
-	}
-
-	export interface ClipboardClassInitOptions {}
-	interface ClipboardClass {}
-	class ClipboardClass {
-		public constructor(options?: Partial<ClipboardClassInitOptions>);
-	}
-
-	export interface ClipboardPrivateInitOptions {}
-	interface ClipboardPrivate {}
-	class ClipboardPrivate {
-		public constructor(options?: Partial<ClipboardPrivateInitOptions>);
-	}
-
-	export interface DrawingAreaClassInitOptions {}
-	interface DrawingAreaClass {}
-	class DrawingAreaClass {
-		public constructor(options?: Partial<DrawingAreaClassInitOptions>);
-		public repaint: {(area: DrawingArea): void;};
-	}
-
-	export interface DrawingAreaPrivateInitOptions {}
-	interface DrawingAreaPrivate {}
-	class DrawingAreaPrivate {
-		public constructor(options?: Partial<DrawingAreaPrivateInitOptions>);
-	}
-
-	export interface EntryClassInitOptions {}
-	interface EntryClass {}
-	class EntryClass {
-		public constructor(options?: Partial<EntryClassInitOptions>);
-		public primary_icon_clicked: {(entry: Entry): void;};
-		public secondary_icon_clicked: {(entry: Entry): void;};
-	}
-
-	export interface EntryPrivateInitOptions {}
-	interface EntryPrivate {}
-	class EntryPrivate {
-		public constructor(options?: Partial<EntryPrivateInitOptions>);
-	}
-
-	export interface FocusManagerClassInitOptions {}
-	/**
-	 * The {@link FocusManagerClass} struct contains only private data
-	 */
-	interface FocusManagerClass {}
-	class FocusManagerClass {
-		public constructor(options?: Partial<FocusManagerClassInitOptions>);
-	}
-
-	export interface FocusManagerPrivateInitOptions {}
-	interface FocusManagerPrivate {}
-	class FocusManagerPrivate {
-		public constructor(options?: Partial<FocusManagerPrivateInitOptions>);
-	}
-
-	export interface GroupClassInitOptions {}
-	/**
-	 * The {@link GroupClass} struct contains only private data
-	 */
-	interface GroupClass {}
-	class GroupClass {
-		public constructor(options?: Partial<GroupClassInitOptions>);
-	}
-
-	export interface GroupPrivateInitOptions {}
-	interface GroupPrivate {}
-	class GroupPrivate {
-		public constructor(options?: Partial<GroupPrivateInitOptions>);
-	}
-
-	export interface IMTextClassInitOptions {}
-	interface IMTextClass {}
-	class IMTextClass {
-		public constructor(options?: Partial<IMTextClassInitOptions>);
-	}
-
-	export interface IMTextPrivateInitOptions {}
-	interface IMTextPrivate {}
-	class IMTextPrivate {
-		public constructor(options?: Partial<IMTextPrivateInitOptions>);
-	}
-
-	export interface IconClassInitOptions {}
-	interface IconClass {}
-	class IconClass {
-		public constructor(options?: Partial<IconClassInitOptions>);
-		public _padding_0: {(): void;};
-		public _padding_1: {(): void;};
-		public _padding_2: {(): void;};
-		public _padding_3: {(): void;};
-		public _padding_4: {(): void;};
-	}
-
 	export interface IconColorsInitOptions {}
 	/**
 	 * The {@link IconColors} structure encapsulates colors for colorizing a symbolic
@@ -2850,7 +2676,7 @@ declare namespace imports.gi.St {
 		public constructor(options?: Partial<IconColorsInitOptions>);
 		/**
 		 * Creates a new {@link IconColors}. All colors are initialized to transparent black.
-		 * @returns a newly created {@link IconColors}. Free with st_icon_colors_unref()
+		 * @returns a newly created {@link IconColors}. Free with {@link St.IconColors.unref}
 		 */
 		public static new(): IconColors;
 		public ref_count: number;
@@ -2872,7 +2698,7 @@ declare namespace imports.gi.St {
 		public success: Clutter.Color;
 		/**
 		 * Creates a new StIconColors structure that is a copy of the passed
-		 * in #colors. You would use this function instead of st_icon_colors_ref()
+		 * in #colors. You would use this function instead of {@link St.IconColors.ref}
 		 * if you were planning to change colors in the result.
 		 * @returns a newly created {@link IconColors}.
 		 */
@@ -2890,75 +2716,12 @@ declare namespace imports.gi.St {
 		public unref(): void;
 	}
 
-	export interface IconPrivateInitOptions {}
-	interface IconPrivate {}
-	class IconPrivate {
-		public constructor(options?: Partial<IconPrivateInitOptions>);
-	}
-
-	export interface LabelClassInitOptions {}
-	interface LabelClass {}
-	class LabelClass {
-		public constructor(options?: Partial<LabelClassInitOptions>);
-	}
-
-	export interface LabelPrivateInitOptions {}
-	interface LabelPrivate {}
-	class LabelPrivate {
-		public constructor(options?: Partial<LabelPrivateInitOptions>);
-	}
-
-	export interface PolygonClassInitOptions {}
-	interface PolygonClass {}
-	class PolygonClass {
-		public constructor(options?: Partial<PolygonClassInitOptions>);
-		public repaint: {(area: Polygon): void;};
-	}
-
-	export interface PolygonPrivateInitOptions {}
-	interface PolygonPrivate {}
-	class PolygonPrivate {
-		public constructor(options?: Partial<PolygonPrivateInitOptions>);
-	}
-
-	export interface ScrollBarClassInitOptions {}
-	interface ScrollBarClass {}
-	class ScrollBarClass {
-		public constructor(options?: Partial<ScrollBarClassInitOptions>);
-		public scroll_start: {(bar: ScrollBar): void;};
-		public scroll_stop: {(bar: ScrollBar): void;};
-	}
-
-	export interface ScrollBarPrivateInitOptions {}
-	interface ScrollBarPrivate {}
-	class ScrollBarPrivate {
-		public constructor(options?: Partial<ScrollBarPrivateInitOptions>);
-	}
-
-	export interface ScrollViewClassInitOptions {}
-	interface ScrollViewClass {}
-	class ScrollViewClass {
-		public constructor(options?: Partial<ScrollViewClassInitOptions>);
-	}
-
-	export interface ScrollViewPrivateInitOptions {}
-	interface ScrollViewPrivate {}
-	class ScrollViewPrivate {
-		public constructor(options?: Partial<ScrollViewPrivateInitOptions>);
-	}
-
 	export interface ScrollableInterfaceInitOptions {}
 	interface ScrollableInterface {}
 	class ScrollableInterface {
 		public constructor(options?: Partial<ScrollableInterfaceInitOptions>);
 		public set_adjustments: {(scrollable: Scrollable, hadjustment: Adjustment, vadjustment: Adjustment): void;};
 		public get_adjustments: {(scrollable: Scrollable, hadjustment: Adjustment, vadjustment: Adjustment): void;};
-	}
-
-	export interface SettingsClassInitOptions {}
-	interface SettingsClass {}
-	class SettingsClass {
-		public constructor(options?: Partial<SettingsClassInitOptions>);
 	}
 
 	export interface ShadowInitOptions {}
@@ -2976,7 +2739,7 @@ declare namespace imports.gi.St {
 		 * @param blur blur radius
 		 * @param spread spread radius
 		 * @param inset whether the shadow should be inset
-		 * @returns the newly allocated shadow. Use st_shadow_free() when done
+		 * @returns the newly allocated shadow. Use {@link St.Shadow.free} when done
 		 */
 		public static new(color: Clutter.Color, xoffset: number, yoffset: number, blur: number, spread: number, inset: boolean): Shadow;
 		/**
@@ -3030,86 +2793,6 @@ declare namespace imports.gi.St {
 		 * {@link Shadow} is released.
 		 */
 		public unref(): void;
-	}
-
-	export interface TableChildClassInitOptions {}
-	interface TableChildClass {}
-	class TableChildClass {
-		public constructor(options?: Partial<TableChildClassInitOptions>);
-	}
-
-	export interface TableClassInitOptions {}
-	interface TableClass {}
-	class TableClass {
-		public constructor(options?: Partial<TableClassInitOptions>);
-	}
-
-	export interface TablePrivateInitOptions {}
-	interface TablePrivate {}
-	class TablePrivate {
-		public constructor(options?: Partial<TablePrivateInitOptions>);
-	}
-
-	export interface TextureCacheClassInitOptions {}
-	interface TextureCacheClass {}
-	class TextureCacheClass {
-		public constructor(options?: Partial<TextureCacheClassInitOptions>);
-	}
-
-	export interface TextureCachePrivateInitOptions {}
-	interface TextureCachePrivate {}
-	class TextureCachePrivate {
-		public constructor(options?: Partial<TextureCachePrivateInitOptions>);
-	}
-
-	export interface ThemeClassInitOptions {}
-	interface ThemeClass {}
-	class ThemeClass {
-		public constructor(options?: Partial<ThemeClassInitOptions>);
-	}
-
-	export interface ThemeContextClassInitOptions {}
-	interface ThemeContextClass {}
-	class ThemeContextClass {
-		public constructor(options?: Partial<ThemeContextClassInitOptions>);
-	}
-
-	export interface ThemeNodeClassInitOptions {}
-	interface ThemeNodeClass {}
-	class ThemeNodeClass {
-		public constructor(options?: Partial<ThemeNodeClassInitOptions>);
-	}
-
-	export interface WidgetAccessibleClassInitOptions {}
-	interface WidgetAccessibleClass {}
-	class WidgetAccessibleClass {
-		public constructor(options?: Partial<WidgetAccessibleClassInitOptions>);
-	}
-
-	export interface WidgetAccessiblePrivateInitOptions {}
-	interface WidgetAccessiblePrivate {}
-	class WidgetAccessiblePrivate {
-		public constructor(options?: Partial<WidgetAccessiblePrivateInitOptions>);
-	}
-
-	export interface WidgetClassInitOptions {}
-	/**
-	 * Base class for stylable actors.
-	 */
-	interface WidgetClass {}
-	class WidgetClass {
-		public constructor(options?: Partial<WidgetClassInitOptions>);
-		public style_changed: {(self: Widget): void;};
-		public popup_menu: {(self: Widget): void;};
-		public navigate_focus: {(self: Widget, from: Clutter.Actor | null, direction: Gtk.DirectionType): boolean;};
-		public get_accessible_type: {(): GObject.Type;};
-		public get_focus_chain: {(widget: Widget): GLib.List;};
-	}
-
-	export interface WidgetPrivateInitOptions {}
-	interface WidgetPrivate {}
-	class WidgetPrivate {
-		public constructor(options?: Partial<WidgetPrivateInitOptions>);
 	}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3178,7 +2861,7 @@ declare namespace imports.gi.St {
 
 	/**
 	 * Describes what style of icon is desired in a call to
-	 * st_texture_cache_load_icon_name() or st_texture_cache_load_gicon().
+	 * {@link St.TextureCache.load_icon_name} or st_texture_cache_load_gicon().
 	 * Use %ST_ICON_SYMBOLIC for symbolic icons (eg, for the panel and
 	 * much of the rest of Cinnamon chrome) or %ST_ICON_FULLCOLOR for a
 	 * full-color icon.
@@ -3311,12 +2994,12 @@ declare namespace imports.gi.St {
 	}
 
 	/**
-	 * See st_texture_cache_load().  Implementations should return a
+	 * See {@link St.TextureCache.load}.  Implementations should return a
 	 * texture handle for the given key, or set #error.
 	 */
 	interface TextureCacheLoader {
 		/**
-		 * See st_texture_cache_load().  Implementations should return a
+		 * See {@link St.TextureCache.load}.  Implementations should return a
 		 * texture handle for the given key, or set #error.
 		 * @param cache a {@link TextureCache}
 		 * @param key Unique identifier for this texture
