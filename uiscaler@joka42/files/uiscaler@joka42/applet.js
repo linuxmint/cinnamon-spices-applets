@@ -1,4 +1,4 @@
-// UI Scaling appley by joka42 
+// UI Scaling applet by joka42 
 // based on Resolution Switcher applet by dennis@nixdev.com
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
@@ -34,14 +34,6 @@ MyApplet.prototype = {
             this.menu.addAction(_("Scale 200%"), function (event) {
                 Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 200`);
             });
-            //HiDPI 175% Scaling
-            // this.menu.addAction(_("Scale 175%"), function (event) {
-            //     Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 175`);
-            // });
-            // //HiDPI 150% Scaling
-            // this.menu.addAction(_("Scale 150%"), function (event) {
-            //     Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 150`);
-            // });
             //HiDPI 125% Scale
             this.menu.addAction(_("Scale 125%"), function (event) {
                 Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 125`);
