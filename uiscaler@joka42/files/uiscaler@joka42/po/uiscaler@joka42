@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2021 joka42
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# joka42 jas_nombre@web.de, 2021.
 #
 #, fuzzy
 msgid ""
@@ -17,28 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:23
-msgid "Switch resolution on-the-fly, with HiDPI support"
+#: applet.js:24
+msgid "Scale User Interface with one click"
 msgstr ""
 
-#: applet.js:33
-msgid "HiDPI 200%"
+#: applet.js:34
+msgid "Scale 200%"
 msgstr ""
 
-#: applet.js:41
-msgid "HiDPI 150%"
+#: applet.js:464
+msgid "Scale 125%"
 msgstr ""
 
-#: applet.js:49
-msgid "2160p"
-msgstr ""
-
-#: applet.js:57
-msgid "1080p"
+#: applet.js:50
+msgid "Reset 100%"
 msgstr ""
 
 #. metadata.json->name
-msgid "Resolution Switcher"
+msgid "UI Scaler"
 msgstr ""
 
 #. metadata.json->description
