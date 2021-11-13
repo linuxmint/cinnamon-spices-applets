@@ -3,14 +3,14 @@
 
 [[ -z $1 ]] && (echo "No arguments given, exiting" ; exit)
 
-switch_to_lowdpi_display () {
+scaling_100 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.0
 	dconf write /org/cinnamon/panels-height "['1:32']"
 	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":24, \"center\":0, \"right\":16}]'"
 	dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":18, \"center\":0, \"right\":16}]'"
 }
 
-switch_to_hidpi_display () {
+scaling_125 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.25
 	dconf write /org/cinnamon/panels-height "['1:48']"
 	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":34, \"center\":0, \"right\":22}]'"
@@ -20,12 +20,12 @@ switch_to_hidpi_display () {
 
 case $1 in
     "100")
-        switch_to_lowdpi_display
+        scaling_100
         gsettings set org.cinnamon.desktop.interface scaling-factor 1
         exit
     ;;
     "125")
-        switch_to_hidpi_display
+        scaling_125
         exit
     ;;
     # '150'| '--scalingfactor')
@@ -37,6 +37,7 @@ case $1 in
     #     exit
     # ;;
     "200")
+        scaling_100
         gsettings set org.cinnamon.desktop.interface scaling-factor 2
         exit
     ;;
