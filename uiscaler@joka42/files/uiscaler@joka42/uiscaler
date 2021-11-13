@@ -28,14 +28,6 @@ case $1 in
         scaling_125
         exit
     ;;
-    # '150'| '--scalingfactor')
-    #     switch_to_hidpi_display
-    #     exit
-    # ;;
-    # '175' | '--fractionalscaling')
-    #     switch_to_hidpi_display
-    #     exit
-    # ;;
     "200")
         scaling_100
         gsettings set org.cinnamon.desktop.interface scaling-factor 2
