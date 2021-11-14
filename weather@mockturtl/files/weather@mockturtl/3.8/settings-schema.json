@@ -519,12 +519,13 @@
         "type" : "custom",
         "file" : "LogSaver.py",
         "widget" : "FileSaver",
-        "description" : "Click Save to save logs to file"
+        "description" : "Click Save to save debug information to a file",
+		"tooltip": "This includes logs for the applet and the current settings with your API key redacted."
     },
 	"selectedLogPath" : {
         "type": "entry",
 		"default": "",
-		"description": "Override label on panel",
+		"description": "Selected path to save Logs",
 		"value": ""
     }
 }
