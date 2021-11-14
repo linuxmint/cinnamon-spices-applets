@@ -25,6 +25,7 @@ import { ClimacellV4 } from "./providers/climacellV4";
 import { DanishMI } from "./providers/danishMI";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
+import { SpawnProcess } from "./lib/commandRunner";
 
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
@@ -51,6 +52,8 @@ export class WeatherApplet extends TextIconApplet {
 	public readonly config: Config;
 	public readonly ui: UI;
 
+	private readonly metadata: any; 
+
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
 	 */
@@ -58,6 +61,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
+		this.metadata = metadata;
 		this.AppletDir = metadata.path;
 		Logger.Debug("Applet created with instanceID " + instanceId);
 		Logger.Debug("AppletDir is: " + this.AppletDir);
@@ -317,8 +321,37 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private async submitIssue(): Promise<void> {
-		let command = "xdg-open ";
-		spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+		let command = "xdg-open";
+		const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
+		const title = "weather@mockturl - ";
+
+		const distribution: string = (await SpawnProcess(["uname", "-vrosmi"]))?.Data?.trim();
+		const appletVersion = this.metadata.version;
+		const cinnamonVersion = imports.misc.config.PACKAGE_VERSION;
+		const vgaInfo = (await SpawnProcess(["lspci"])).Data?.split("\n").filter(x => x.includes("VGA"));
+
+		let body = "```\n";
+		body+= ` * Applet version - ${appletVersion}\n`;
+		body+= ` * Cinnamon version - ${cinnamonVersion}\n`;
+		body+= ` * Distribution - ${distribution}\n`;
+		body+= ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+		body+= "```\n\n";
+
+		body+= `**Notify author of applet**\n@Gr3q\n\n`;
+
+		body+= "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+
+		body+= `<details>
+<summary>Relevant Logs</summary>
+
+\`\`\`
+The contents of the file saved from the applet help page goes here
+\`\`\`
+
+</details>\n\n`;
+
+		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+		spawnCommandLine(`${command} ${finalUrl}`);
 	}
 
 	private async saveCurrentLocation(): Promise<void> {
@@ -336,16 +369,32 @@ export class WeatherApplet extends TextIconApplet {
 		}
 		catch(e) {
 			if (e instanceof Error) {
-				NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
+				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
 			return;
+		}
+
+		let settings: Record<string, any> | null = null;
+		try {
+			settings = await this.config.GetAppletConfigJson();
+		}
+		catch(e) {
+			if (e instanceof Error) {
+				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+			}
 		}
 
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
 		await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+		
+		if (settings != null) {
+			await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
+			await WriteAsync(stream.get_output_stream(), JSON.stringify(settings, null, 2));
+		}
+		
 		await CloseStream(stream.get_output_stream());
-		NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", {filePath: this.config._selectedLogPath}));
+		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
 	}
 
 	// -------------------------------------------------------------------

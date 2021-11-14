@@ -9586,6 +9586,9 @@ class GeoLocation {
 
 
 
+
+const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
+const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -9884,6 +9887,23 @@ class Config {
         let size = parseFloat(elements[elements.length - 1]);
         logger_Logger.Debug("Font size changed to " + size.toString());
         return size;
+    }
+    async GetAppletConfigJson() {
+        var _a, _b;
+        const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        const configFile = config_File.new_for_path(configFilePath);
+        if (!await FileExists(configFile)) {
+            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const confString = await LoadContents(configFile);
+        if (confString == null) {
+            throw new Error(_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const conf = JSON.parse(confString);
+        if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
+            conf.apiKey.value = "Redacted";
+        return conf;
     }
 }
 
@@ -15180,6 +15200,7 @@ class DanishMI {
 
 
 
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
@@ -15201,15 +15222,28 @@ class WeatherApplet extends TextIconApplet {
             }
             catch (e) {
                 if (e instanceof Error) {
-                    NotificationService.Instance.Send(_("Error Saving Logs"), e.message);
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
                 }
                 return;
+            }
+            let settings = null;
+            try {
+                settings = await this.config.GetAppletConfigJson();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+                }
             }
             const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
             const stream = await OverwriteAndGetIOStream(appletLogFile);
             await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+            if (settings != null) {
+                await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
+                await WriteAsync(stream.get_output_stream(), JSON.stringify(settings, null, 2));
+            }
             await CloseStream(stream.get_output_stream());
-            NotificationService.Instance.Send(_("Logs saved successfully"), _("Logs are saved to {filePath}", { filePath: this.config._selectedLogPath }));
+            NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
         };
         this.errMsg = {
             unknown: _("Error"),
@@ -15230,6 +15264,7 @@ class WeatherApplet extends TextIconApplet {
             "import error": _("Missing Packages"),
             "location not covered": _("Location not covered"),
         };
+        this.metadata = metadata;
         this.AppletDir = metadata.path;
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
@@ -15421,8 +15456,32 @@ class WeatherApplet extends TextIconApplet {
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
     async submitIssue() {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+        var _a, _b, _c;
+        let command = "xdg-open";
+        const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
+        const title = "weather@mockturl - ";
+        const distribution = (_b = (_a = (await SpawnProcess(["uname", "-vrosmi"]))) === null || _a === void 0 ? void 0 : _a.Data) === null || _b === void 0 ? void 0 : _b.trim();
+        const appletVersion = this.metadata.version;
+        const cinnamonVersion = imports.misc.config.PACKAGE_VERSION;
+        const vgaInfo = (_c = (await SpawnProcess(["lspci"])).Data) === null || _c === void 0 ? void 0 : _c.split("\n").filter(x => x.includes("VGA"));
+        let body = "```\n";
+        body += ` * Applet version - ${appletVersion}\n`;
+        body += ` * Cinnamon version - ${cinnamonVersion}\n`;
+        body += ` * Distribution - ${distribution}\n`;
+        body += ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+        body += "```\n\n";
+        body += `**Notify author of applet**\n@Gr3q\n\n`;
+        body += "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+        body += `<details>
+<summary>Relevant Logs</summary>
+
+\`\`\`
+The contents of the file saved from the applet help page goes here
+\`\`\`
+
+</details>\n\n`;
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+        spawnCommandLine(`${command} ${finalUrl}`);
     }
     async saveCurrentLocation() {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);

@@ -7,7 +7,10 @@ import { LogLevel, UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
+import { FileExists, LoadContents } from "./lib/io_lib";
 
+const { get_home_dir } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -479,6 +482,33 @@ export class Config {
 		let size = parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
+	}
+
+	public async GetAppletConfigJson(): Promise<Record<string, any>> {
+		const home = get_home_dir() ?? "~";
+		let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		const configFile = File.new_for_path(configFilePath);
+
+		// Check if file exists
+		if (!await FileExists(configFile)) {
+			throw new Error(
+				_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath })
+			);
+		}
+
+		// Load file contents
+		const confString = await LoadContents(configFile);
+		if (confString == null) {
+			throw new Error(
+				_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath })
+			);
+		}
+
+		const conf = JSON.parse(confString);
+		if (conf?.apiKey?.value != null)
+			conf.apiKey.value = "Redacted";
+
+		return conf;
 	}
 }
 
