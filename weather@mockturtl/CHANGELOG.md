@@ -3,7 +3,9 @@
 ## 3.1.6
 
 * Support changing logging level from settings
-* Support saving logs specific to logs into file
+* Support saving logs specific to the applet into file along with the applet's settings
+* Prefill the Github issue form on opening a new issue from the applet
+* Update with new declarations
 
 ## 3.1.5
 
