@@ -379,51 +379,6 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 
-;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
-
-class Log {
-    constructor(_instanceId) {
-        this.debug = false;
-        this.level = 1;
-        this.ID = _instanceId;
-        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
-        this.debug = this.DEBUG();
-    }
-    DEBUG() {
-        let path = this.appletDir + "/../DEBUG";
-        let _debug = imports.gi.Gio.file_new_for_path(path);
-        let result = _debug.query_exists(null);
-        if (result)
-            this.Info("DEBUG file found in " + path + ", enabling Debug mode");
-        return result;
-    }
-    ;
-    Info(message) {
-        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
-        global.log(msg);
-    }
-    Error(error, e) {
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
-        if (!!(e === null || e === void 0 ? void 0 : e.stack))
-            global.logError(e.stack);
-    }
-    ;
-    Debug(message) {
-        if (this.debug) {
-            this.Info(message);
-        }
-    }
-    Debug2(message) {
-        if (this.debug && this.level > 1) {
-            this.Info(message);
-        }
-    }
-    UpdateInstanceID(instanceID) {
-        this.ID = instanceID;
-    }
-}
-const logger_Logger = new Log();
-
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -8978,10 +8933,7 @@ function GetDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 function GetFuncName(func) {
-    if (!!func.name)
-        return func.name;
-    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
-    return result ? result[1] : '';
+    return func.name;
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -8992,6 +8944,39 @@ function Guid() {
 const isFinalized = function (obj) {
     return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 };
+function CompareVersion(v1, v2, options) {
+    let zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
+    function isValidPart(x) {
+        return (/^\d+$/).test(x);
+    }
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length)
+            v1parts.push("0");
+        while (v2parts.length < v1parts.length)
+            v2parts.push("0");
+    }
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        }
+        else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+    return 0;
+}
 function utils_setTimeout(func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -9027,6 +9012,197 @@ function utils_setInterval(func, ms) {
     return id;
 }
 ;
+
+;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
+async function GetFileInfo(file) {
+    return new Promise((resolve, reject) => {
+        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+            let result = file.query_info_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+async function FileExists(file, dictionary = false) {
+    try {
+        return file.query_exists(null);
+    }
+    catch (e) {
+        logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        return false;
+    }
+}
+async function LoadContents(file) {
+    return new Promise((resolve, reject) => {
+        file.load_contents_async(null, (obj, res) => {
+            let result, contents = null;
+            try {
+                [result, contents] = file.load_contents_finish(res);
+            }
+            catch (e) {
+                reject(e);
+                return e;
+            }
+            if (result != true) {
+                resolve(null);
+                return null;
+            }
+            if (contents instanceof Uint8Array)
+                contents = ByteArray.toString(contents);
+            resolve(contents.toString());
+            return contents.toString();
+        });
+    });
+}
+async function DeleteFile(file) {
+    let result = await new Promise((resolve, reject) => {
+        file.delete_async(null, null, (obj, res) => {
+            let result = null;
+            try {
+                result = file.delete_finish(res);
+            }
+            catch (e) {
+                let error = e;
+                if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                    resolve(true);
+                    return true;
+                }
+                Logger.Error("Can't delete file, reason: ", e);
+                resolve(false);
+                return false;
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return result;
+}
+async function OverwriteAndGetIOStream(file) {
+    const parent = file.get_parent();
+    if (parent != null && !FileExists(parent))
+        parent.make_directory_with_parents(null);
+    return new Promise((resolve, reject) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
+            let ioStream = file.replace_readwrite_finish(result);
+            resolve(ioStream);
+            return ioStream;
+        });
+    });
+}
+async function WriteAsync(outputStream, buffer) {
+    let text = ByteArray.fromString(buffer);
+    if (outputStream.is_closed())
+        return false;
+    return new Promise((resolve, reject) => {
+        outputStream.write_bytes_async(text, null, null, (obj, res) => {
+            let ioStream = outputStream.write_bytes_finish(res);
+            resolve(true);
+            return true;
+        });
+    });
+}
+async function CloseStream(stream) {
+    return new Promise((resolve, reject) => {
+        stream.close_async(null, null, (obj, res) => {
+            let result = stream.close_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
+
+
+
+const { File } = imports.gi.Gio;
+const { get_home_dir } = imports.gi.GLib;
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
+class Log {
+    constructor(_instanceId) {
+        this.logLevel = "info";
+        this.ID = _instanceId;
+    }
+    ChangeLevel(level) {
+        this.logLevel = level;
+    }
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
+    Info(message) {
+        if (!this.CanLog("info"))
+            return;
+        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        global.log(msg);
+    }
+    Error(error, e) {
+        if (!this.CanLog("error"))
+            return;
+        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+        if (!!(e === null || e === void 0 ? void 0 : e.stack))
+            global.logError(e.stack);
+    }
+    ;
+    Debug(message) {
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message);
+    }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message);
+    }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
+    async GetAppletLogs() {
+        var _a, _b, _c;
+        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logFilePath = `${home}/`;
+        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+            logFilePath += ".cinnamon/glass.log";
+        }
+        else {
+            logFilePath += ".xsession-errors";
+        }
+        const logFile = File.new_for_path(logFilePath);
+        if (!await FileExists(logFile)) {
+            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logs = await LoadContents(logFile);
+        if (logs == null) {
+            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logLines = logs.split("\n");
+        const filteredLines = [];
+        let lastWasCinnamonLog = false;
+        for (const line of logLines) {
+            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
+                filteredLines.push(line);
+            }
+            else if (line.includes("LookingGlass") && line.includes(UUID)) {
+                filteredLines.push(line);
+                lastWasCinnamonLog = true;
+            }
+            else {
+                lastWasCinnamonLog = false;
+            }
+        }
+        return filteredLines;
+    }
+}
+const logger_Logger = new Log();
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/ipApi.ts
 
@@ -9410,6 +9586,9 @@ class GeoLocation {
 
 
 
+
+const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
+const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -9465,6 +9644,30 @@ class Config {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.timezone = undefined;
+        this.OnKeySettingsUpdated = () => {
+            if (this.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+            }
+        };
+        this.onLogLevelUpdated = () => {
+            logger_Logger.ChangeLevel(this._logLevel);
+        };
+        this.OnLocationChanged = () => {
+            logger_Logger.Debug("User changed location, waiting 3 seconds...");
+            if (this.doneTypingLocation != null)
+                utils_clearTimeout(this.doneTypingLocation);
+            this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+        };
+        this.OnLocationStoreChanged = () => {
+            this.LocStore.OnLocationChanged(this._locationList);
+        };
+        this.OnFontChanged = () => {
+            this.currentFontSize = this.GetCurrentFontSize();
+            this.app.RefreshAndRebuild();
+        };
+        this.OnSettingChanged = () => {
+            this.app.RefreshAndRebuild();
+        };
         this.app = app;
         this.currentLocale = ConstructJsLocale(get_language_names()[0]);
         logger_Logger.Debug("System locale is " + this.currentLocale);
@@ -9477,6 +9680,7 @@ class Config {
         this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
         this.LocStore = new LocationStore(this.app, this);
+        this.onLogLevelUpdated();
     }
     get Timezone() {
         return this.timezone;
@@ -9491,12 +9695,14 @@ class Config {
         for (k in Keys) {
             let key = Keys[k];
             let keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
-        keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -9625,30 +9831,9 @@ class Config {
         if (switchToManual == true)
             this.settings.setValue(Keys.MANUAL_LOCATION, true);
     }
-    OnKeySettingsUpdated() {
-        if (this.keybinding != null) {
-            keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        }
-    }
-    OnLocationChanged() {
-        logger_Logger.Debug("User changed location, waiting 3 seconds...");
-        if (this.doneTypingLocation != null)
-            utils_clearTimeout(this.doneTypingLocation);
-        this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-    }
-    OnLocationStoreChanged() {
-        this.LocStore.OnLocationChanged(this._locationList);
-    }
-    OnFontChanged() {
-        this.currentFontSize = this.GetCurrentFontSize();
-        this.app.RefreshAndRebuild();
-    }
     DoneTypingLocation() {
         logger_Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        this.app.RefreshAndRebuild();
-    }
-    OnSettingChanged() {
         this.app.RefreshAndRebuild();
     }
     SetLocation(value) {
@@ -9702,6 +9887,23 @@ class Config {
         let size = parseFloat(elements[elements.length - 1]);
         logger_Logger.Debug("Font size changed to " + size.toString());
         return size;
+    }
+    async GetAppletConfigJson() {
+        var _a, _b;
+        const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        const configFile = config_File.new_for_path(configFilePath);
+        if (!await FileExists(configFile)) {
+            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const confString = await LoadContents(configFile);
+        if (confString == null) {
+            throw new Error(_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const conf = JSON.parse(confString);
+        if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
+            conf.apiKey.value = "Redacted";
+        return conf;
     }
 }
 
@@ -10511,20 +10713,22 @@ const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {
     constructor(options, doNotAddPadding = false) {
-        this.signals = new SignalManager();
         this.disabled = false;
         this.Hovered = new Event();
         this.Clicked = new Event();
+        this.onHoverLeave = (event) => {
+            this.handleLeave();
+            return false;
+        };
         this.actor = new Button(options);
         this.actor.add_style_class_name("popup-menu-item");
         if (doNotAddPadding)
             this.actor.set_style('padding: 0px; border-radius: 2px;');
         else
             this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
-        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
-        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
         this.actor.connect("clicked", () => this.clicked());
-        this.actor.connect("enter-event", (actor, event) => this.hovered(event));
+        this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
+        this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
     }
     handleEnter(actor) {
         if (!this.disabled)
@@ -10547,8 +10751,10 @@ class WeatherButton {
             this.Clicked.Invoke(this, null);
         }
     }
-    hovered(event) {
+    onHoverEnter(event) {
+        this.handleEnter();
         this.Hovered.Invoke(this, event);
+        return false;
     }
 }
 
@@ -10911,7 +11117,7 @@ class CurrentWeather {
 
 
 const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Orientation } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
 const STYLE_FORECAST_DAY = 'weather-forecast-day';
@@ -10995,7 +11201,7 @@ class UIForecasts {
         this.Destroy();
         this.forecasts = [];
         this.grid = new GridLayout({
-            orientation: config._verticalOrientation
+            orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
         });
         this.grid.set_column_homogeneous(true);
         let table = new Widget({
@@ -11096,7 +11302,6 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        this.actor.overlay_scrollbars = true;
         let vScroll = this.actor.get_vscroll_bar();
         vScroll.connect("scroll-start", () => { menu.passEvents = true; });
         vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
@@ -11165,27 +11370,34 @@ class UIHourlyForecasts {
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth();
         let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+        if (minWidth == null)
+            return;
         let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+        if (naturalHeight == null)
+            return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this.actor.set_width(minWidth);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
         return new Promise((resolve, reject) => {
+            if (naturalHeight == null)
+                return;
+            let height = naturalHeight;
             if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 this.actor.height = 0;
                 addTween(this.actor, {
-                    height: naturalHeight,
+                    height: height,
                     time: 0.25,
                     onUpdate: () => { },
                     onComplete: () => {
-                        this.actor.set_height(naturalHeight);
+                        this.actor.set_height(height);
                         resolve();
                     }
                 });
             }
             else {
-                this.actor.set_height(naturalHeight);
+                this.actor.set_height(height);
                 resolve();
             }
         });
@@ -11234,6 +11446,9 @@ class UIHourlyForecasts {
             let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
             let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth == null || temperatureWidth == null ||
+                hourWidth == null || iconWidth == null || summaryWidth == null)
+                continue;
             if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
                 if (precipitationWidth > summaryWidth)
                     precipitationWidth += 10;
@@ -11316,6 +11531,9 @@ class UIHourlyForecasts {
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
             let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
             let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            if (precipitationHeight == null || temperatureHeight == null ||
+                hourHeight == null || iconHeight == null || summaryHeight == null)
+                continue;
             let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemHeight)
                 boxItemHeight = itemHeight;
@@ -11326,7 +11544,7 @@ class UIHourlyForecasts {
         let theme = this.container.get_theme_node();
         let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
         logger_Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
-        return (boxItemHeight + scrollBarHeight + styling);
+        return (boxItemHeight + (scrollBarHeight !== null && scrollBarHeight !== void 0 ? scrollBarHeight : 0) + styling);
     }
 }
 
@@ -13909,7 +14127,7 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f, _g;
         let message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -13952,15 +14170,15 @@ class HttpLib {
                 response: message
             };
         }
-        if ((message === null || message === void 0 ? void 0 : message.status_code) > 200 && (message === null || message === void 0 ? void 0 : message.status_code) < 300) {
+        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
+        logger_Logger.Verbose("API full response: " + ((_d = (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = (_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data));
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) === null || _f === void 0 ? void 0 : _f.data));
         return {
             Success: (error == null),
-            Data: (_e = message === null || message === void 0 ? void 0 : message.response_body) === null || _e === void 0 ? void 0 : _e.data,
+            Data: (_g = message === null || message === void 0 ? void 0 : message.response_body) === null || _g === void 0 ? void 0 : _g.data,
             ErrorData: error
         };
     }
@@ -13977,14 +14195,19 @@ class HttpLib {
         logger_Logger.Debug("URL called: " + query);
         let data = await new Promise((resolve, reject) => {
             let message = Message.new(method, query);
-            if (headers != null) {
-                for (const key in headers) {
-                    message.request_headers.append(key, headers[key]);
-                }
+            if (message == null) {
+                resolve(null);
             }
-            this._httpSession.queue_message(message, (session, message) => {
-                resolve(message);
-            });
+            else {
+                if (headers != null) {
+                    for (const key in headers) {
+                        message.request_headers.append(key, headers[key]);
+                    }
+                }
+                this._httpSession.queue_message(message, (session, message) => {
+                    resolve(message);
+                });
+            }
         });
         return data;
     }
@@ -14975,15 +15198,53 @@ class DanishMI {
 
 
 
+
+
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
+const { File: main_File } = imports.gi.Gio;
+const { get_home_dir: main_get_home_dir } = imports.gi.GLib;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
+        this.saveLog = async () => {
+            var _a;
+            if (!(((_a = this.config._selectedLogPath) === null || _a === void 0 ? void 0 : _a.length) > 0))
+                return;
+            let logLines = [];
+            try {
+                logLines = await logger_Logger.GetAppletLogs();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+                }
+                return;
+            }
+            let settings = null;
+            try {
+                settings = await this.config.GetAppletConfigJson();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+                }
+            }
+            const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
+            const stream = await OverwriteAndGetIOStream(appletLogFile);
+            await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+            if (settings != null) {
+                await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
+                await WriteAsync(stream.get_output_stream(), JSON.stringify(settings, null, 2));
+            }
+            await CloseStream(stream.get_output_stream());
+            NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
+        };
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -15003,6 +15264,7 @@ class WeatherApplet extends TextIconApplet {
             "import error": _("Missing Packages"),
             "location not covered": _("Location not covered"),
         };
+        this.metadata = metadata;
         this.AppletDir = metadata.path;
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
@@ -15194,8 +15456,32 @@ class WeatherApplet extends TextIconApplet {
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
     async submitIssue() {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+        var _a, _b, _c;
+        let command = "xdg-open";
+        const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
+        const title = "weather@mockturl - ";
+        const distribution = (_b = (_a = (await SpawnProcess(["uname", "-vrosmi"]))) === null || _a === void 0 ? void 0 : _a.Data) === null || _b === void 0 ? void 0 : _b.trim();
+        const appletVersion = this.metadata.version;
+        const cinnamonVersion = imports.misc.config.PACKAGE_VERSION;
+        const vgaInfo = (_c = (await SpawnProcess(["lspci"])).Data) === null || _c === void 0 ? void 0 : _c.split("\n").filter(x => x.includes("VGA"));
+        let body = "```\n";
+        body += ` * Applet version - ${appletVersion}\n`;
+        body += ` * Cinnamon version - ${cinnamonVersion}\n`;
+        body += ` * Distribution - ${distribution}\n`;
+        body += ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+        body += "```\n\n";
+        body += `**Notify author of applet**\n@Gr3q\n\n`;
+        body += "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+        body += `<details>
+<summary>Relevant Logs</summary>
+
+\`\`\`
+The contents of the file saved from the applet help page goes here
+\`\`\`
+
+</details>\n\n`;
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+        spawnCommandLine(`${command} ${finalUrl}`);
     }
     async saveCurrentLocation() {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);

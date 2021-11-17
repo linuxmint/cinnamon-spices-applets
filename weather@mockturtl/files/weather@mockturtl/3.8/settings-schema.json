@@ -47,7 +47,8 @@
 			"title": "Help",
 			"sections": [
 				"more-info",
-				"submit-issue"
+				"submit-issue",
+				"debug-options"
 			]
 		},
 		"location-section": {
@@ -161,6 +162,14 @@
 				"issue-reporting-explanation",
 				"submitIssue",
 				"maintainer"
+			]
+		},
+		"debug-options": {
+			"type": "section",
+			"title": "Debug",
+			"keys": [
+				"logLevel",
+				"fileSelect"
 			]
 		}
 	},
@@ -489,10 +498,34 @@
 	},
 	"issue-reporting-explanation": {
 		"type": "label",
-		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Before you start writing please make sure that the issue is not already submitted in the issues section. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
+		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account.\n\nBefore you start writing please make sure that the issue is not already submitted in the issues section and review your prefilled details in the issue description. Don't forget to add a short description in the top Title field next to the applet's name to make it easier for everyone to know what the issue is about. Logs with Debug level (which can be saved to a file below) are also appreciated."
 	},
 	"loc-info": {
 		"type": "label",
 		"description": "Your location in most cases work automatically but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
-	}
+	},
+	"logLevel": {
+		"type": "combobox",
+		"default": "info",
+		"description": "Log Level",
+		"tooltip": "Info is the regular logging, Debug is debug, and Verbose also logs network request payloads. Changing this will only be effective on future logs. Only change it you are instructed or you know what you are doing.",
+		"options": {
+			"Info": "info",
+			"Debug": "debug",
+			"Verbose": "verbose"
+		}
+	},
+	"fileSelect" : {
+        "type" : "custom",
+        "file" : "LogSaver.py",
+        "widget" : "FileSaver",
+        "description" : "Click Save to save debug information to a file",
+		"tooltip": "This includes logs for the applet and the current settings with your API key redacted."
+    },
+	"selectedLogPath" : {
+        "type": "entry",
+		"default": "",
+		"description": "Selected path to save Logs",
+		"value": ""
+    }
 }
