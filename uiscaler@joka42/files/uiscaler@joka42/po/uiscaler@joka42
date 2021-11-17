@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021 joka42
+# This file is distributed under the same license as the PACKAGE package.
+# joka42 jas_nombre@web.de, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 14:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:24
+msgid "Scale User Interface with one click"
+msgstr ""
+
+#: applet.js:34
+msgid "Scale 200%"
+msgstr ""
+
+#: applet.js:464
+msgid "Scale 125%"
+msgstr ""
+
+#: applet.js:50
+msgid "Reset 100%"
+msgstr ""
+
+#. metadata.json->name
+msgid "UI Scaler"
+msgstr ""
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr ""
