@@ -106,11 +106,10 @@ class Monitor {
 }
 
 class DDCMultiMonitor extends Applet.IconApplet {
-    detecting = false;
 
     constructor(metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
-
+        this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
         this.set_applet_tooltip("Adjust monitor brightness via DDC/CI");
 
