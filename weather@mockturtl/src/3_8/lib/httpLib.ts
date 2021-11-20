@@ -101,11 +101,11 @@ export class HttpLib {
 			}
 		}
 
-		if (message?.status_code > 200 && message?.status_code < 300) {
+		if ((message?.status_code ?? -1) > 200 && (message?.status_code ?? -1) < 300) {
 			Logger.Info("Warning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
-		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Logger.Verbose("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
 			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
 		return {
@@ -121,7 +121,7 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message | null> {
 		// Add params to url
 		if (params != null) {
 			let items = Object.keys(params);
@@ -134,16 +134,21 @@ export class HttpLib {
 
 		let query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
-		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
+		let data: imports.gi.Soup.Message | null = await new Promise((resolve, reject) => {
 			let message = Message.new(method, query);
-			if (headers != null) {
-				for (const key in headers) {
-					message.request_headers.append(key, headers[key]);
-				}
+			if (message == null) {
+				resolve(null);
 			}
-			this._httpSession.queue_message(message, (session, message) => {
-				resolve(message);
-			});
+			else {
+				if (headers != null) {
+					for (const key in headers) {
+						message.request_headers.append(key, headers[key]);
+					}
+				}
+				this._httpSession.queue_message(message, (session, message) => {
+					resolve(message);
+				});
+			}
 		});
 
 		return data;

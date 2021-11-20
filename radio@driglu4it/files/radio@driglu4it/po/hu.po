@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2021-09-26 08:05+0200\n"
+"PO-Revision-Date: 2021-11-08 12:37+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: 4.6/utils.js:61
 #, javascript-format
 msgid "Please also install the '%s' package."
-msgstr "Telepítse az „%s” csomagot."
+msgstr "Telepítse a(z) „%s” csomagot."
 
 #: 4.6/applet.js:159
 #, javascript-format
@@ -67,7 +67,7 @@ msgstr ""
 
 #: 4.6/applet.js:238
 msgid "See Logs for more information"
-msgstr ""
+msgstr "További információkért tekintse meg a naplófájlokat"
 
 #: 4.6/applet.js:304
 msgid ""
@@ -246,7 +246,7 @@ msgstr ""
 
 #. 4.6->settings-schema.json->channel-on-panel->description
 msgid "Show current radio station on the panel"
-msgstr ""
+msgstr "Aktuális rádióállomás nevének megjelenítése a Panel-on"
 
 #. 4.6->settings-schema.json->keep-volume-between-sessions->description
 msgid "Remember volume after stopping the radio"

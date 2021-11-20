@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.1.6
+
+* Support changing logging level from settings
+* Support saving logs specific to the applet into file along with the applet's settings
+* Prefill the Github issue form on opening a new issue from the applet
+* Update with new declarations
+
+## 3.1.5
+
+* Add Fixes to README by @jorgenqv
+* Resolves [#3975](https://github.com/linuxmint/cinnamon-spices-applets/issues/3975) Add option to make hourly weather always visible #3975
+* Resolves [#3976](https://github.com/linuxmint/cinnamon-spices-applets/issues/3976) Add dew point as a metric #3976
+
 ## 3.1.4
 
 * Update translations file

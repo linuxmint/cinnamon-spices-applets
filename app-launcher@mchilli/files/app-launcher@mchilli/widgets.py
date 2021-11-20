@@ -27,18 +27,21 @@ HEADER_COLUMS = [
     {
         "title": _("Icon"),
         "type": "icon",
+        "attribute": "gicon",
         "align": "center",
         "properties": {}
     },
     {
         "title": _("Name"),
         "type": "string",
+        "attribute": "markup",
         "align": "left",
         "properties": {}
     },
     {
         "title": _("Command"),
         "type": "string",
+        "attribute": "text",
         "align": "left",
         "properties": {
             "style": 2
@@ -84,18 +87,18 @@ class CustomAppList(SettingsWidget):
         for i, column in enumerate(HEADER_COLUMS):
             if column["type"] == 'boolean':
                 renderer = Gtk.CellRendererToggle()
-                prop_name = 'active'
+                attribute = 'active'
             elif column["type"] == 'icon':
                 renderer = Gtk.CellRendererPixbuf()
-                prop_name = 'gicon'
+                attribute = column["attribute"]
             else:
                 renderer = Gtk.CellRendererText()
-                prop_name = 'markup'
+                attribute = column["attribute"]
             renderer.set_alignment(ALIGNMENT_MAP[column["align"]], 0.5)
             for property in column["properties"]:
                 renderer.set_property(property, column["properties"][property])
             column = Gtk.TreeViewColumn(column["title"], renderer)
-            column.add_attribute(renderer, prop_name, i+1)
+            column.add_attribute(renderer, attribute, i+1)
             column.set_alignment(0)
             column.set_resizable(True)
             self.tree_view.append_column(column)

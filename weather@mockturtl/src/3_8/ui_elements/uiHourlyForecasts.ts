@@ -43,7 +43,6 @@ export class UIHourlyForecasts {
 				x_align: Align.MIDDLE
 			}
 		);
-		this.actor.overlay_scrollbars = true;
 
 		// Stop event passing while scrolling to allow scrolling
 		let vScroll = this.actor.get_vscroll_bar();
@@ -142,7 +141,15 @@ export class UIHourlyForecasts {
 		this.AdjustHourlyBoxItemWidth();
 
 		let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+
+		if (minWidth == null)
+			return;
+
 		let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+
+		if (naturalHeight == null)
+			return;
+
 		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
 		this.actor.set_width(minWidth);
 		this.actor.show();
@@ -154,15 +161,19 @@ export class UIHourlyForecasts {
 		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
 		this.hourlyToggled = true;
 		return new Promise((resolve, reject) => {
+			if (naturalHeight == null)
+				return;
+
+			let height = naturalHeight;
 			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
 					{
-						height: naturalHeight,
+						height: height,
 						time: 0.25,
 						onUpdate: () => { },
 						onComplete: () => {
-							this.actor.set_height(naturalHeight);
+							this.actor.set_height(height);
 							resolve();
 						}
 					});
@@ -170,7 +181,7 @@ export class UIHourlyForecasts {
 			else {
 				// We must set naturalHeight here as well because integer
 				// scaling doesn't work properly.
-				this.actor.set_height(naturalHeight);
+				this.actor.set_height(height);
 				resolve();
 			}
 		});
@@ -238,6 +249,10 @@ export class UIHourlyForecasts {
 			let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
 			let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
 			let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+
+			if (precipitationWidth == null || temperatureWidth == null || 
+				hourWidth == null || iconWidth == null || summaryWidth == null)
+				continue;
 
 			// If text is bigger than icon we add some artificial padding
 			// so text doesn't look too close
@@ -337,17 +352,23 @@ export class UIHourlyForecasts {
 			let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
 			let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
 			let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+
+			if (precipitationHeight == null || temperatureHeight == null || 
+				hourHeight == null || iconHeight == null || summaryHeight == null)
+				continue;
+
 			let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
 			if (boxItemHeight < itemHeight) boxItemHeight = itemHeight;
 		}
 		Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
 		let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
+
 		Logger.Debug("Scrollbar height is " + scrollBarHeight);
 		let theme = this.container.get_theme_node();
 		let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
 		Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
 
-		return (boxItemHeight + scrollBarHeight + styling);
+		return (boxItemHeight + (scrollBarHeight ?? 0) + styling);
 	}
 }
 

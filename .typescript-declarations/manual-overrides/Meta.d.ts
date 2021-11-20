@@ -1,5 +1,3 @@
-
-
 declare namespace imports.gi.Meta {
 
 	export class Backend {
@@ -310,9 +308,17 @@ declare namespace imports.gi.Meta {
 	export class RemoteAccessHandle {
 
 	}
-	export class Selection extends GObject.Object {
+
+	interface ISelection {
+		connect(signal: "owner-changed", callback: (object: number, p0: SelectionSource) => void): void;
+	}
+
+	type SelectionMixin = ISelection & GObject.Object;
+
+	interface Selection extends SelectionMixin { }
+
+	export class Selection {
 		public static new(display: Display): Selection;
-		public connect(signal: "owner-changed", callback: (object: number, p0: SelectionSource) => void): void;
 
 		/**
 		 * Returns the list of supported mimetypes for the given selection type.
@@ -809,12 +815,18 @@ declare namespace imports.gi.Meta {
 	export class WindowGroup {
 
 	}
-	export class Workspace extends GObject.Object {
+	interface IWorkspace {
+		connect(signal: "window-added" | "window-removed", callback: (object: Window) => void): void;
+	}
+
+	type WorkspaceMixin = IWorkspace & GObject.Object;
+
+	interface Workspace extends WorkspaceMixin { }
+
+	export class Workspace {
 		public readonly active: boolean;
 		public readonly n_windows: number;
 		public readonly workspace_index: number;
-
-		public connect(signal: "window-added" | "window-removed", callback: (object: Window) => void): void;
 
 		public activate(timestamp: number): void;
 
