@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 06:50-0400\n"
+"POT-Creation-Date: 2021-11-21 17:15-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. metadata.json->name
 #. settings-schema.json->page_dark_mode->title
-#: applet.js:75 applet.js:157
+#: applet.js:75 applet.js:177
 msgid "Dark Mode"
 msgstr ""
 
@@ -69,6 +69,21 @@ msgstr ""
 #. settings-schema.json->light_icon_theme->description
 #. settings-schema.json->dark_icon_theme->description
 msgid "Icon theme"
+msgstr ""
+
+#. settings-schema.json->enable_light_background_switch->description
+#. settings-schema.json->enable_dark_background_switch->description
+msgid "Change desktop background"
+msgstr ""
+
+#. settings-schema.json->light_background_dir->description
+#. settings-schema.json->dark_background_dir->description
+msgid "Desktop background location"
+msgstr ""
+
+#. settings-schema.json->light_background_dir->tooltip
+#. settings-schema.json->dark_background_dir->tooltip
+msgid "A picture from this folder will be randomly chosen."
 msgstr ""
 
 #. settings-schema.json->postpone_auto_mode_until->description
