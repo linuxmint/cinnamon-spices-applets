@@ -181,14 +181,14 @@ CPUTemperatureApplet.prototype = {
 
 		if (this.sensorsPath && !this.waitForCmd) {
 			this.waitForCmd = true;
-			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateWattUsage));
+			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
 		}
 
 		return true;
 	},
 
 
-	_updateWattUsage: function (sensorsOutput) {
+	_updateTemperature: function (sensorsOutput) {
 		let current = 0;
 		let voltage = 0;
 
@@ -203,6 +203,15 @@ CPUTemperatureApplet.prototype = {
 			voltage = parseInt(content[1]) / 1000000.0;
 		}
 		let wattUsage = Math.round(current * voltage * 10) / 10;
+
+
+		let items = [];
+		let tempInfo = null;
+		let temp = 0;
+
+		if (sensorsOutput != "") {
+			tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
+		}
 
 		if (this.state.showLabelPrefix) {
 			this.title = "%s %s".format(this.state.labelPrefix, this.title);
