@@ -22,7 +22,7 @@ export function createActivWidget(args: Arguments) {
 
     widget.connect('button-release-event', () => { 
         onActivated?.()
-        return true
+        return false
     })
 
 
@@ -43,6 +43,6 @@ export function createActivWidget(args: Arguments) {
         if (relevantKeys.includes(symbol) && widget.hover)
             onActivated?.()
         
-        return true
+        return false
     })
 }
