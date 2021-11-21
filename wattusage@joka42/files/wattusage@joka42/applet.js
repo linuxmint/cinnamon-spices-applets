@@ -209,9 +209,6 @@ CPUTemperatureApplet.prototype = {
 		let tempInfo = null;
 		let temp = 0;
 
-		if (sensorsOutput != "") {
-			tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
-		}
 
 		if (this.state.showLabelPrefix) {
 			this.title = "%s %s".format(this.state.labelPrefix, this.title);
@@ -233,90 +230,6 @@ CPUTemperatureApplet.prototype = {
 		this.waitForCmd = false;
 
 		return true;
-	},
-
-	_findTemperatureFromFiles: function () {
-		let info = {};
-		let tempFiles = [
-			// hwmon for new 2.6.39, 3.x linux kernels
-			'/sys/class/hwmon/hwmon0/temp1_input',
-			'/sys/devices/platform/coretemp.0/temp1_input',
-			'/sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp',
-			'/sys/devices/virtual/thermal/thermal_zone0/temp',
-			'/sys/bus/acpi/drivers/ATK0110/ATK0110:00/hwmon/hwmon0/temp1_input',
-			// old kernels with proc fs
-			'/proc/acpi/thermal_zone/THM0/temperature',
-			'/proc/acpi/thermal_zone/THRM/temperature',
-			'/proc/acpi/thermal_zone/THR0/temperature',
-			'/proc/acpi/thermal_zone/TZ0/temperature',
-			// Debian Sid/Experimental on AMD-64
-			'/sys/class/hwmon/hwmon0/device/temp1_input'
-		];
-		for (let i = 0; i < tempFiles.length; i++) {
-			if (GLib.file_test(tempFiles[i], 1 << 4)) {
-				let temperature = GLib.file_get_contents(tempFiles[i]);
-				if (temperature[0]) {
-					info.temp = parseInt(temperature[1]) / 1000;
-					break;
-				}
-			}
-		}
-		let critFiles = [
-			'/sys/devices/platform/coretemp.0/temp1_crit',
-			'/sys/bus/acpi/drivers/ATK0110/ATK0110:00/hwmon/hwmon0/temp1_crit',
-			// hwmon for new 2.6.39, 3.0 linux kernels
-			'/sys/class/hwmon/hwmon0/temp1_crit',
-			// Debian Sid/Experimental on AMD-64
-			'/sys/class/hwmon/hwmon0/device/temp1_crit'
-		];
-		for (let i = 0; i < critFiles.length; i++) {
-			if (GLib.file_test(critFiles[i], 1 << 4)) {
-				let temperature = GLib.file_get_contents(critFiles[i]);
-				if (temperature[0]) {
-					info.crit = parseInt(temperature[1]) / 1000;
-				}
-			}
-		}
-		return info;
-	},
-
-	_findTemperatureFromSensorsOutput: function (txt) {
-		let match;
-		let entries = [];
-		while ((match = sensorRegex.exec(txt)) !== null) {
-			if (match.index === sensorRegex.lastIndex) {
-				sensorRegex.lastIndex++;
-			}
-			let entry = {};
-			for (let i = 0; i < match.length; i++) {
-				if (!match[i]) {
-					continue;
-				}
-				if (i % 2) {
-					match[i] = match[i].trim();
-					if (match[i].indexOf(':') > -1) {
-						entry.label = match[i].replace(/:/, '').trim();
-					}
-				} else {
-					match[i] = parseFloat(match[i].trim());
-					if (isNaN(match[i])) {
-						continue;
-					}
-					if (match[i - 1].indexOf(':') > -1) {
-						entry.value = match[i];
-					} else if (entries.length > 0 && entries[entries.length - 1].value) {
-						entries[entries.length - 1][match[i - 1]] = match[i];
-					} else {
-						continue;
-					}
-				}
-			}
-			if (!entry.label || !entry.value) {
-				continue;
-			}
-			if (entry != {}) entries.push(entry);
-		}
-		return entries;
 	},
 
 	_toFahrenheit: function (c) {
