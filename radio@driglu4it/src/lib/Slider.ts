@@ -86,16 +86,19 @@ export function createSlider(args: SliderArguments) {
 
         const motionId = drawing.connect('motion-event', (actor, event) => {
             moveHandle(event)
+            return true
         })
 
         const buttonReleaseId = drawing.connect('button-release-event', () => {
             drawing.disconnect(buttonReleaseId)
             drawing.disconnect(motionId)
             ungrab_pointer()
+            return true
         })
 
         moveHandle(event)
 
+        return true
     })
 
     function moveHandle(event: imports.gi.Clutter.Event) {
