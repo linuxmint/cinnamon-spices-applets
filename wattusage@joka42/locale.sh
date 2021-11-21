@@ -1,12 +1,12 @@
 #!/bin/sh
 
-cd "files/temperature@fevimu"
-cinnamon-json-makepot --js ./po/temperature@fevimu.pot
+cd "files/wattusage@joka42"
+cinnamon-json-makepot --js ./po/wattusage@joka42.pot
 cd "po"
 
 for f in *.po
 do
- msgmerge -U $f ./temperature@fevimu.pot
+ msgmerge -U $f ./wattusage@joka42.pot
  echo "Updated $f with new definitions"
  rm "$f~"
 done

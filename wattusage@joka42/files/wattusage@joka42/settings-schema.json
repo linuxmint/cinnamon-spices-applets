@@ -15,13 +15,6 @@
     "description": "Show unit",
     "tooltip": "Whether or not show the unit after the temperature value."
   },
-  "show-unit-letter": {
-    "type": "switch",
-    "default": false,
-    "description": "Show unit letter",
-    "tooltip": "Whether or not show the unit letter (C or F).",
-    "dependency": "show-unit"
-  },
   "show-label-prefix": {
     "type": "switch",
     "default": false,
@@ -38,23 +31,10 @@
   "interval": {
     "type": "spinbutton",
     "default": 5000,
-    "min": 2000,
+    "min": 1000,
     "max": 30000,
-    "step": 100,
+    "step": 1000,
     "units": "ms",
     "description": "Update interval"
-  },
-  "change-color": {
-    "type": "switch",
-    "default": true,
-    "description": "Change color when the temperature becomes High or Critical",
-    "tooltip": "Selecting this option, this applet becomes\n orange when the High Temperature Threshold is reached,\n red when the Critical Temperature Threshold is reached."
-  },
-  "only-colors": {
-    "type": "switch",
-    "default": false,
-    "dependency": "change-color",
-    "description": "Only use colors to alert me",
-    "tooltip": "Select this option to not display text alerts in horizontal panels.\n(No text alert is ever displayed on vertical panels.)"
   }
 }

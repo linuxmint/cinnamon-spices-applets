@@ -49,15 +49,12 @@ CPUTemperatureApplet.prototype = {
 		this.state = {};
 		this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
 
-		this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showUnit', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit-letter', 'showUnitLetter', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-label-prefix', 'showLabelPrefix', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'label-prefix', 'labelPrefix', () => this.on_settings_changed(), null);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
-		this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
-		this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
 
 		this.lang = {
 			acpi: 'ACPI Adapter',
@@ -216,7 +213,7 @@ CPUTemperatureApplet.prototype = {
 
 		if (wattUsage !== 0) {
 			// this.set_applet_label(this.title);
-			this.set_applet_label(this._formatTemp(wattUsage));
+			this.set_applet_label(this._formatText(wattUsage));
 		} else {
 			this.set_applet_label("");
 		}
@@ -232,7 +229,7 @@ CPUTemperatureApplet.prototype = {
 		return true;
 	},
 
-	_formatTemp: function (t, line_feed = false) {
+	_formatText: function (value_raw) {
 		let precisionDigits;
 		precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
 		let value;
@@ -240,14 +237,10 @@ CPUTemperatureApplet.prototype = {
 		let separator = "";
 		if (this.state.showUnit) {
 			unit = "W";
-			separator = (this.isHorizontal || !line_feed) ? " " : (this.state.showUnitLetter) ? "\n" : "";
-		} else if (!line_feed) {
-			separator = " ";
-			unit = "°";
+			separator = (this.isHorizontal) ? " " : "\n";
 		}
 
-		if (this.state.showUnit && this.state.showUnitLetter) unit = "°C";
-		value = ((Math.round(t * 10) / 10)
+		value = ((Math.round(value_raw * 10) / 10)
 			.toFixed(precisionDigits)
 			.toString()
 		);
