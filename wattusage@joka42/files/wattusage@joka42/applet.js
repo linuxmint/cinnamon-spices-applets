@@ -216,7 +216,7 @@ CPUTemperatureApplet.prototype = {
 
 		if (wattUsage !== 0) {
 			// this.set_applet_label(this.title);
-			this.set_applet_label(wattUsage.toString() + " W");
+			this.set_applet_label(this._formatTemp(wattUsage));
 		} else {
 			this.set_applet_label("");
 		}
@@ -232,10 +232,6 @@ CPUTemperatureApplet.prototype = {
 		return true;
 	},
 
-	_toFahrenheit: function (c) {
-		return 9 / 5 * c + 32;
-	},
-
 	_formatTemp: function (t, line_feed = false) {
 		let precisionDigits;
 		precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
@@ -243,27 +239,19 @@ CPUTemperatureApplet.prototype = {
 		let unit = "";
 		let separator = "";
 		if (this.state.showUnit) {
-			unit = "°";
+			unit = "W";
 			separator = (this.isHorizontal || !line_feed) ? " " : (this.state.showUnitLetter) ? "\n" : "";
 		} else if (!line_feed) {
 			separator = " ";
 			unit = "°";
 		}
 
-		if (this.state.useFahrenheit) {
-			if (this.state.showUnit && this.state.showUnitLetter) unit = "°F";
-			value = (
-				this._toFahrenheit(t)
-					.toFixed(precisionDigits)
-					.toString()
-			);
-		} else {
-			if (this.state.showUnit && this.state.showUnitLetter) unit = "°C";
-			value = ((Math.round(t * 10) / 10)
-				.toFixed(precisionDigits)
-				.toString()
-			);
-		}
+		if (this.state.showUnit && this.state.showUnitLetter) unit = "°C";
+		value = ((Math.round(t * 10) / 10)
+			.toFixed(precisionDigits)
+			.toString()
+		);
+
 		return '%s%s%s'.format(value, separator, unit)
 	}
 };
