@@ -181,14 +181,14 @@ CPUTemperatureApplet.prototype = {
 
 		if (this.sensorsPath && !this.waitForCmd) {
 			this.waitForCmd = true;
-			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
+			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateWattUsage));
 		}
 
 		return true;
 	},
 
 
-	_updateTemperature: function (sensorsOutput) {
+	_updateWattUsage: function (sensorsOutput) {
 		let current = 0;
 		let voltage = 0;
 
@@ -203,76 +203,6 @@ CPUTemperatureApplet.prototype = {
 			voltage = parseInt(content[1]) / 1000000.0;
 		}
 		let wattUsage = Math.round(current * voltage * 10) / 10;
-
-
-		let items = [];
-		let tempInfo = null;
-		let temp = 0;
-
-		if (sensorsOutput != "") {
-			tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
-		}
-
-		if (tempInfo) {
-			let critical = 0;
-			let high = 0;
-			let packageIds = 0;
-			let packageCount = 0;
-			let s = 0;
-			let n = 0; //sum and count
-
-			for (let i = 0; i < tempInfo.length; i++) {
-				if (tempInfo[i].label.indexOf('Package') > -1) {
-					critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
-					high = tempInfo[i].high ? tempInfo[i].high : 0;
-					packageIds += tempInfo[i].value;
-					packageCount++;
-				} else if (tempInfo[i].label.indexOf('Core') > -1) {
-					s += tempInfo[i].value;
-					n++;
-				}
-				if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
-					temp = tempInfo[i].value;
-				}
-				items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
-			}
-			if (high > 0 || critical > 0) {
-				items.push("");
-				items.push(_("Thresholds Info") + ":")
-				if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
-				if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
-			}
-			if (packageCount > 0) {
-				temp = packageIds / packageCount;
-			} else if (n > 0) {
-				temp = s / n;
-			}
-			let label = this._formatTemp(temp);
-			if (DEBUG === true) { critical = 53; high = 49; } // <- For tests only.
-			if (this.state.changeColor === false) this.state.onlyColors = false;
-			if (critical && temp >= critical) {
-				this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
-				this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "background: transparent;";
-			} else if (high && temp >= high) {
-				this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
-				this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "background: transparent;";
-			} else {
-				this.title = this._formatTemp(temp, true);
-				this.actor.style = "background: transparent;";
-			}
-		}
-
-		if (!tempInfo || !temp) {
-			// if we don't have the temperature yet, use some known files
-			tempInfo = this._findTemperatureFromFiles();
-			if (tempInfo.temp) {
-				this.title = this._formatTemp(tempInfo.temp, true);
-				items.push(_('Current Temperature') + ': ' + this._formatTemp(tempInfo.temp));
-				if (tempInfo.crit) {
-					items.push(_('Critical Temperature') + ': ' + this._formatTemp(tempInfo.crit));
-				}
-			}
-		}
 
 		if (this.state.showLabelPrefix) {
 			this.title = "%s %s".format(this.state.labelPrefix, this.title);
