@@ -52,7 +52,7 @@ export function createVolumeSlider(args: Arguments) {
             deltaChange(direction)
         }
 
-        return true
+        return false
     })
 
     container.connect('scroll-event', (actor, event) => {
@@ -60,13 +60,13 @@ export function createVolumeSlider(args: Arguments) {
         const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease'
         deltaChange(direction)
 
-        return true
+        return false
     })
 
     icon.connect('button-press-event', () => {
         slider.setValue(0)
 
-        return true
+        return false
     })
 
     /**

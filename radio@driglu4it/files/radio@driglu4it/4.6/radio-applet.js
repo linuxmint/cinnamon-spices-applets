@@ -296,8 +296,6 @@ function createActivWidget(args) {
         widget.change_style_pseudo_class('active', widget.hover);
         if (widget.hover)
             widget.grab_key_focus();
-        // TODO: why do I have to return a number??
-        return 1;
     });
     widget.connect('key-press-event', (actor, event) => {
         const symbol = event.get_key_symbol();
@@ -586,7 +584,6 @@ function createMpvHandler(args) {
         if ((addedStream === null || addedStream === void 0 ? void 0 : addedStream.name) !== MPV_CVC_NAME)
             return;
         cvcStream = addedStream;
-        // @ts-ignore // TODO: why is a number needed?
         cvcStream.connect('notify::volume', () => {
             handleCvcVolumeChanged();
         });
@@ -906,16 +903,16 @@ function createSlider(args) {
         grab_pointer(drawing);
         const motionId = drawing.connect('motion-event', (actor, event) => {
             moveHandle(event);
-            return true;
+            return false;
         });
         const buttonReleaseId = drawing.connect('button-release-event', () => {
             drawing.disconnect(buttonReleaseId);
             drawing.disconnect(motionId);
             ungrab_pointer();
-            return true;
+            return false;
         });
         moveHandle(event);
-        return true;
+        return false;
     });
     function moveHandle(event) {
         const [absX, absY] = event.get_coords();
@@ -984,17 +981,17 @@ function createVolumeSlider(args) {
             const direction = (key === KEY_Right) ? 'increase' : 'decrease';
             deltaChange(direction);
         }
-        return true;
+        return false;
     });
     container.connect('scroll-event', (actor, event) => {
         const scrollDirection = event.get_scroll_direction();
         const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease';
         deltaChange(direction);
-        return true;
+        return false;
     });
     icon.connect('button-press-event', () => {
         slider.setValue(0);
-        return true;
+        return false;
     });
     /**
      *
@@ -1425,7 +1422,6 @@ function createApplet(args) {
         appletReloaded = false;
     };
     applet.actor.connect('event', (actor, event) => {
-        // @ts-ignore
         if (event.type() !== EventType.BUTTON_PRESS)
             return;
         if (event.get_button() === 3) {
@@ -1435,7 +1431,7 @@ function createApplet(args) {
     });
     applet.actor.connect('scroll-event', (actor, event) => {
         onScroll(event.get_scroll_direction());
-        return true;
+        return false;
     });
     return applet;
 }

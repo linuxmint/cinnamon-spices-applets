@@ -60,7 +60,6 @@ export function createMpvHandler(args: Arguments) {
 
         cvcStream = addedStream
 
-        // @ts-ignore // TODO: why is a number needed?
         cvcStream.connect('notify::volume', () => {
             handleCvcVolumeChanged()
         })

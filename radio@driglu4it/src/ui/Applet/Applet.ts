@@ -54,7 +54,6 @@ export function createApplet(args: Arguments) {
     }
 
     applet.actor.connect('event', (actor, event) => {
-        // @ts-ignore
         if (event.type() !== EventType.BUTTON_PRESS) return
 
         if (event.get_button() === 3) {
@@ -68,7 +67,7 @@ export function createApplet(args: Arguments) {
     applet.actor.connect('scroll-event', (actor, event) => {
         onScroll(event.get_scroll_direction())
 
-        return true
+        return false
     })
 
     return applet

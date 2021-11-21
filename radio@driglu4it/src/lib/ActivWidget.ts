@@ -31,9 +31,6 @@ export function createActivWidget(args: Arguments) {
         widget.change_style_pseudo_class('active', widget.hover)
 
         if (widget.hover) widget.grab_key_focus()
-
-        // TODO: why do I have to return a number??
-        return 1
     })
 
     widget.connect('key-press-event', (actor, event) => {
