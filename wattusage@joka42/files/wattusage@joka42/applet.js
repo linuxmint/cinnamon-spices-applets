@@ -79,8 +79,8 @@ CPUTemperatureApplet.prototype = {
 
 		this.set_applet_tooltip(_('Temperature'));
 
-		this.updateTemperature();
-		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+		this.updateWattUsage();
+		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateWattUsage());
 	},
 
 	on_settings_changed: function () {
@@ -88,8 +88,8 @@ CPUTemperatureApplet.prototype = {
 			Mainloop.source_remove(this.loopId);
 		}
 		this.loopId = 0;
-		this.updateTemperature();
-		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+		this.updateWattUsage();
+		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateWattUsage());
 	},
 
 	on_orientation_changed: function (orientation) {
@@ -174,21 +174,21 @@ CPUTemperatureApplet.prototype = {
 		}
 	},
 
-	updateTemperature: function () {
+	updateWattUsage: function () {
 		if (!this.isLooping) {
 			return false;
 		}
 
 		if (this.sensorsPath && !this.waitForCmd) {
 			this.waitForCmd = true;
-			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
+			Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateWattUsage));
 		}
 
 		return true;
 	},
 
 
-	_updateTemperature: function (sensorsOutput) {
+	_updateWattUsage: function (sensorsOutput) {
 		let current = 0;
 		let voltage = 0;
 
