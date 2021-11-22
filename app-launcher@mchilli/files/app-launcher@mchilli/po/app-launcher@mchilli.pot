@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-31 14:27+0100\n"
+"POT-Creation-Date: 2021-11-22 22:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:99
+#: applet.js:102
 msgid "Edit Applications"
 msgstr ""
 
-#: applet.js:672 applet.js:926
+#: applet.js:694 applet.js:948
 msgid "Delete"
 msgstr ""
 
-#: applet.js:673 applet.js:927
+#: applet.js:695 applet.js:949
 msgid "Edit"
 msgstr ""
 
-#: applet.js:674 applet.js:928
+#: applet.js:696 applet.js:950
 msgid "Cancel"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:34
+#: dialogs.py:35 widgets.py:35
 msgid "Name"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgid "Group"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:40
+#: dialogs.py:42 widgets.py:42
 msgid "Command"
 msgstr ""
 
@@ -84,35 +84,35 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: widgets.py:113
+#: widgets.py:116
 msgid "Add application"
 msgstr ""
 
-#: widgets.py:114
+#: widgets.py:117
 msgid "Add new entry"
 msgstr ""
 
-#: widgets.py:118
+#: widgets.py:121
 msgid "Add separator"
 msgstr ""
 
-#: widgets.py:126
+#: widgets.py:129
 msgid "Remove selected entry"
 msgstr ""
 
-#: widgets.py:132
+#: widgets.py:135
 msgid "Edit selected entry"
 msgstr ""
 
-#: widgets.py:138
+#: widgets.py:141
 msgid "Move selected entry up"
 msgstr ""
 
-#: widgets.py:144
+#: widgets.py:147
 msgid "Move selected entry down"
 msgstr ""
 
-#: widgets.py:301
+#: widgets.py:304
 msgid "Separator"
 msgstr ""
 
@@ -167,6 +167,14 @@ msgstr ""
 
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
+msgstr ""
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
 msgstr ""
 
 #. settings-schema.json->fixed-menu-width->description

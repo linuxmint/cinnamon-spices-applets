@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-31 14:27+0100\n"
-"PO-Revision-Date: 2021-10-31 14:33+0100\n"
+"POT-Creation-Date: 2021-11-22 22:11+0100\n"
+"PO-Revision-Date: 2021-11-22 22:14+0100\n"
 "Last-Translator: MCHilli\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,25 +18,25 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:99
+#: applet.js:102
 msgid "Edit Applications"
 msgstr "Anwendungen bearbeiten"
 
-#: applet.js:672 applet.js:926
+#: applet.js:694 applet.js:948
 msgid "Delete"
 msgstr "Löschen"
 
-#: applet.js:673 applet.js:927
+#: applet.js:695 applet.js:949
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: applet.js:674 applet.js:928
+#: applet.js:696 applet.js:950
 msgid "Cancel"
 msgstr "Abbruch"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:34
+#: dialogs.py:35 widgets.py:35
 msgid "Name"
 msgstr "Name"
 
@@ -46,7 +46,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:40
+#: dialogs.py:42 widgets.py:42
 msgid "Command"
 msgstr "Befehl"
 
@@ -85,35 +85,35 @@ msgstr "wirklich löschen?"
 msgid "Icon"
 msgstr "Symbol"
 
-#: widgets.py:113
+#: widgets.py:116
 msgid "Add application"
 msgstr "Anwendungen hinzufügen"
 
-#: widgets.py:114
+#: widgets.py:117
 msgid "Add new entry"
 msgstr "Neuer Eintrag"
 
-#: widgets.py:118
+#: widgets.py:121
 msgid "Add separator"
 msgstr "Trenner hinzufügen"
 
-#: widgets.py:126
+#: widgets.py:129
 msgid "Remove selected entry"
 msgstr "Ausgewählten Eintrag löschen"
 
-#: widgets.py:132
+#: widgets.py:135
 msgid "Edit selected entry"
 msgstr "Ausgewählten Eintrag bearbeiten"
 
-#: widgets.py:138
+#: widgets.py:141
 msgid "Move selected entry up"
 msgstr "Ausgewählten Eintrag nach oben bewegen"
 
-#: widgets.py:144
+#: widgets.py:147
 msgid "Move selected entry down"
 msgstr "Ausgewählten Eintrag nach unten bewegen"
 
-#: widgets.py:301
+#: widgets.py:304
 msgid "Separator"
 msgstr "Trenner"
 
@@ -169,6 +169,14 @@ msgstr "Benachrichtigungstext"
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
 msgstr "%s wird durch den Anwendungsnamen ersetzt"
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr "Menü anzeigen"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Tastenkombination(en) festlegen, um das Menü anzuzeigen"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
