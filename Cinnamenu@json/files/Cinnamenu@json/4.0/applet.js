@@ -889,6 +889,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.currentCategory = categoryId;
         this.categoriesView.setSelectedCategoryStyle(categoryId);
         this.appsView.buttonStoreCleanup();
+
         switch (categoryId) {
         case 'places':
             this.appsView.populate(this.listPlaces());
@@ -1034,6 +1035,10 @@ class CinnamenuApplet extends TextIconApplet {
 
         //---------------------------
         const finish = () => {//sort and display primaryResults[] and otherResults[]
+            if (!this.searchActive || thisSearchId != this.currentSearchId){
+                return; //Search mode has ended or search string has changed
+            }
+
             //sort primaryResults[]
             primaryResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
             //Limit primaryResults to 10
@@ -1060,14 +1065,12 @@ class CinnamenuApplet extends TextIconApplet {
 
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+            this.appsView.highlightFirstItem();
 
-            //ensure first item in app list is selected
+            //In case mouse is hovering a different item (thus selecting it) ensure first result
+            //is highlighted again after drawing.
             Meta.later_add(Meta.LaterType.IDLE, () => {
-                                        const buttons = this.appsView.getActiveButtons();
-                                        if (buttons[0] && !buttons[0].entered) {
-                                            this.clearEnteredActors();
-                                            buttons[0].handleEnter();
-                                        }
+                                        this.appsView.highlightFirstItem();
                                     });
         };
 
@@ -2019,6 +2022,16 @@ class AppsView {
         }
 
         this.currentGridViewColumnCount = this.getGridValues().columns;
+    }
+
+    highlightFirstItem() {
+        //When displying search results, ensure first item is highlighted so that pressing
+        //return selects top result.
+        const buttons = this.getActiveButtons();
+        if (buttons[0] && !buttons[0].entered) {
+            this.appThis.clearEnteredActors();
+            buttons[0].handleEnter();
+        }
     }
 
     resizeGrid() {
