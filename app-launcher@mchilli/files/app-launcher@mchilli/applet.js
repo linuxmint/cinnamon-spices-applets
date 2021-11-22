@@ -11,6 +11,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -964,6 +965,19 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 break;
         }
         return true;
+    }
+
+    _onKeyPressEvent(actor, event) {
+        let symbol = event.get_key_symbol();
+        if (
+            symbol === Clutter.KEY_space ||
+            symbol === Clutter.KEY_Return ||
+            symbol === Clutter.KEY_KP_Enter
+        ) {
+            this._onItemClicked(1);
+            return true;
+        }
+        return false;
     }
 
     _onButtonHoverEvent(actor, event) {
