@@ -4120,12 +4120,12 @@ declare namespace imports.gi.HarfBuzz {
 		u8: number[];
 		i8: number[];
 
-		connect(signal: "notify::u32", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::i32", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::u16", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::i16", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::u8", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::i8", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::u32", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::i32", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::u16", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::i16", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::u8", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::i8", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

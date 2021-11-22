@@ -124,10 +124,10 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "link-activated", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::end_index", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::number_of_anchors", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selected_link", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::start_index", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::end_index", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::number_of_anchors", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selected_link", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::start_index", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -643,27 +643,27 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "visible-data-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::accessible_component_layer", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_component_mdi_zorder", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_description", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_hypertext_nlinks", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_role", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_caption", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_caption_object", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_column_description", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_column_header", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_row_description", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_row_header", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_table_summary", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::description", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::role", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::relation_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::layer", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accessible_component_layer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_component_mdi_zorder", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_hypertext_nlinks", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_role", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_caption", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_caption_object", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_column_description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_column_header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_row_description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_row_header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_table_summary", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::role", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::relation_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::layer", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -860,8 +860,8 @@ declare namespace imports.gi.Atk {
 		 * implement AtkObject appropriate for #type.
 		 */
 		set_factory_type(type: GObject.Type, factory_type: GObject.Type): void;
-		connect(signal: "notify::factory_type_registry", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::factory_singleton_cache", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::factory_type_registry", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::factory_singleton_cache", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -921,10 +921,10 @@ declare namespace imports.gi.Atk {
 		 * @returns TRUE if the removal is successful.
 		 */
 		remove_target(target: Object): boolean;
-		connect(signal: "notify::relation_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::target", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::target", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::relationship", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::relation_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::target", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::target", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::relationship", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1032,7 +1032,7 @@ declare namespace imports.gi.Atk {
 		 * @param relation an {@link Relation}
 		 */
 		remove(relation: Relation): void;
-		connect(signal: "notify::relations", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::relations", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
