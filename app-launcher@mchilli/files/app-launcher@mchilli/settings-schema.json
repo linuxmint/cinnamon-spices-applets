@@ -27,7 +27,8 @@
                 "custom-launcher-icon",
                 "launcher-icon",
                 "notification-enabled",
-                "notification-text"
+                "notification-text",
+                "hotkey-binding"
             ]
         },
         "section-settings-applications": {
@@ -100,6 +101,12 @@
         "default": "Launch '%s'.",
         "dependency": "notification-enabled",
         "tooltip": "%s will be your application name"
+    },
+    "hotkey-binding": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu"
     },
     "fixed-menu-width": {
         "type": "switch",
