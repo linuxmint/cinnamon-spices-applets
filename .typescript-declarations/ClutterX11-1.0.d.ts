@@ -94,18 +94,18 @@ declare namespace imports.gi.ClutterX11 {
 		 */
 		connect(signal: "update-area", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 
-		connect(signal: "notify::automatic_updates", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::destroyed", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixmap", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixmap_depth", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixmap_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixmap_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_mapped", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_override_redirect", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_redirect_automatic", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_x", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_y", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::automatic_updates", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::destroyed", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap_depth", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_mapped", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_override_redirect", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_redirect_automatic", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_y", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

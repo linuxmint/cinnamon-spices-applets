@@ -1830,7 +1830,7 @@ declare namespace imports.gi.Pango {
 		 *  (No matrix set is the same as setting the identity matrix.)
 		 */
 		set_matrix(matrix: Matrix | null): void;
-		connect(signal: "notify::matrix", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::matrix", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
