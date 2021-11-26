@@ -60,10 +60,14 @@ export function createApplet(args: Arguments) {
             onRightClick()
         }
 
+        return false
+
     })
 
     applet.actor.connect('scroll-event', (actor, event) => {
         onScroll(event.get_scroll_direction())
+
+        return false
     })
 
     return applet
