@@ -54,7 +54,7 @@ export function createApplet(args: Arguments) {
     }
 
     applet.actor.connect('event', (actor, event) => {
-        if (event.type() !== EventType.BUTTON_PRESS) return
+        if (event.type() !== EventType.BUTTON_PRESS) return false
 
         if (event.get_button() === 3) {
             onRightClick()

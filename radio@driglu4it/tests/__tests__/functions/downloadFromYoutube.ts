@@ -32,12 +32,14 @@ function spawnCommandLineAsyncIO(command: string, cb: (stdout: string, stderr: s
         throw new RangeError('spawnCommandLineAsyncIo not called with youtube-dl')
 
     const timer = setTimeout(() => {
+        // @ts-ignore
         youtubeInstalled ? cb(workingExample.stdOut, null, 0) : cb(null, 'line 1: youtube-dl: command not found', 127)
     }, mockedDownloadtime);
 
     return {
         force_exit: () => {
             clearTimeout(timer)
+            // @ts-ignore
             cb(null, null, 1)
         }
     }
@@ -66,7 +68,7 @@ function spawnCommandLineAsyncIO(command: string, cb: (stdout: string, stderr: s
 
 imports.misc.util = {
     // @ts-ignore
-   spawnCommandLineAsyncIO
+    spawnCommandLineAsyncIO
 }
 
 import { initPolyfills } from 'polyfill';
@@ -144,7 +146,7 @@ it('youtubeDl called with correct arguments', done => {
             expect(youtubeDlOptions.find(option => option.command === command)).toBeTruthy()
         })
 
-        const audioFormat = youtubeDlOptions.find(option => option.command === '--audio-format').value
+        const audioFormat = youtubeDlOptions?.find(option => option.command === '--audio-format')?.value
         expect(audioFormat).toBe('mp3')
         done()
     }, mockedDownloadtime);
@@ -203,9 +205,9 @@ it('double quotes are correctly escaped', () => {
 
     const searchPrefix = 'ytsearch1:'
 
-    const searchTerm = youtubeDlOptions.find(
+    const searchTerm = youtubeDlOptions?.find(
         option => option.command.startsWith(searchPrefix)
-    ).command.split(searchPrefix)[1].substr(1).slice(0, -1)
+    )?.command.split(searchPrefix)[1].substr(1).slice(0, -1)
 
     expect(title.replaceAll('"', '\\"')).toBe(searchTerm)
 

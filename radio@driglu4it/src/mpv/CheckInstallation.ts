@@ -54,7 +54,7 @@ function downloadMrisPluginInteractive() {
             `python3  ${__meta.path}/download-dialog-mpris.py`
         )
 
-        if (stdout.trim() !== 'Continue') { return reject() }
+        if (stdout?.trim() !== 'Continue') { return reject() }
 
         [stderr, stdout, exitCode] = await spawnCommandLinePromise(`
             wget ${MPRIS_PLUGIN_URL} -O ${MPRIS_PLUGIN_PATH}`);

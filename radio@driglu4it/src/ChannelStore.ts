@@ -4,7 +4,7 @@ export class ChannelStore {
     private _channelList: Channel[]
 
     constructor(channelList: Channel[]) {
-        this.channelList = channelList
+        this._channelList = channelList
 
     }
 
@@ -42,7 +42,10 @@ export class ChannelStore {
             false : true
     }
 
-    public checkUrlValid(channelUrl: string) {
+    public checkUrlValid(channelUrl: string | null) {
+
+        if (!channelUrl) return false
+
         return this._channelList.some(cnl => cnl.url === channelUrl)
     }
 

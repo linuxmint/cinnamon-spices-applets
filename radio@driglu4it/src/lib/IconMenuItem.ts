@@ -20,17 +20,17 @@ export function createIconMenuItem(args: Arguments) {
     } = args
 
 
-    let icon: imports.gi.St.Icon
+    let icon: imports.gi.St.Icon | null
     let label: imports.gi.St.Label
 
     const container = new BoxLayout({
         style_class: 'popup-menu-item'
     })
 
-    setIconName(iconName)
-    setText(text)
+    iconName && setIconName(iconName)
+    text && setText(text)
 
-    function setIconName(name: string | null) {
+    function setIconName(name: string | null | undefined) {
 
         if (icon && !name) {
             container.remove_child(icon)
@@ -42,9 +42,10 @@ export function createIconMenuItem(args: Arguments) {
 
         initIcon()
 
-        icon.icon_name = name
+        if (icon)
+            icon.icon_name = name
 
-        if (container.get_child_at_index(0) !== icon)
+        if (icon && container.get_child_at_index(0) !== icon)
             container.insert_child_at_index(icon, 0)
     }
 

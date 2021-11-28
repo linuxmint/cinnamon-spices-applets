@@ -1,7 +1,5 @@
 
-export function limitString(text: string, maxCharNumber: number) {
-
-    if (!text) return
+export function limitString(text: string, maxCharNumber: number): string {
 
     if (text.length <= maxCharNumber) return text
 

@@ -74,6 +74,7 @@ export function initPolyfills() {
       configurable: true,
       writable: true,
       value: function () {
+        // @ts-ignore
         return Array.prototype.map.apply(this, arguments).flat(1);
       },
     });

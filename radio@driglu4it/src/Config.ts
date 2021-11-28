@@ -22,7 +22,7 @@ interface Settings {
     lastVolume: number,
     initialVolume: number,
     userStations: Channel[]
-    lastUrl: string,
+    lastUrl: string | null,
     musicDownloadDir: string
 }
 
@@ -46,15 +46,19 @@ export const createConfig = (args: Arguments) => {
     const appletSettings = new AppletSettings(settingsObject, uuid, instanceId)
 
     appletSettings.bind('icon-type', 'iconType',
+        // @ts-ignore
         (iconType: AppletIcon) => onIconChanged(iconType))
 
     appletSettings.bind('color-on', 'symbolicIconColorWhenPlaying',
+        // @ts-ignore
         (newColor: string) => onIconColorPlayingChanged(newColor))
 
     appletSettings.bind('color-paused', 'symbolicIconColorWhenPaused',
+        // @ts-ignore
         (newColor: string) => onIconColorPausedChanged(newColor))
 
     appletSettings.bind('channel-on-panel', 'channelNameOnPanel',
+        // @ts-ignore
         (channelOnPanel: boolean) => onChannelOnPanelChanged(channelOnPanel))
 
     appletSettings.bind('keep-volume-between-sessions', "keepVolume")
@@ -63,8 +67,8 @@ export const createConfig = (args: Arguments) => {
 
     appletSettings.bind('last-volume', 'lastVolume')
 
-    appletSettings.bind('tree', "userStations",
-        onMyStationsChanged)
+    // @ts-ignore
+    appletSettings.bind('tree', "userStations", onMyStationsChanged)
 
     appletSettings.bind('last-url', 'lastUrl')
 

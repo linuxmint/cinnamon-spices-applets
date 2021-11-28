@@ -17,7 +17,7 @@ export function createAppletLabel() {
     label.clutter_text.ellipsize = EllipsizeMode.NONE
 
     let visible: boolean
-    let text: string
+    let text: string | null
 
 
     /**

@@ -16,7 +16,7 @@ export function createChannelList(args: Arguments) {
 
     const subMenu = createSubMenu({ text: 'My Stations' })
 
-    let currentChannelName: string
+    let currentChannelName: string | null
     let playbackStatus: AdvancedPlaybackStatus = 'Stopped'
 
     // the channelItems are saved here to the map and to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
@@ -56,8 +56,10 @@ export function createChannelList(args: Arguments) {
 
     function setCurrentChannel(name: string) {
 
-        const currentChannelItem = channelItems.get(currentChannelName)
-        currentChannelItem?.setPlaybackStatus('Stopped')
+        if(currentChannelName){
+            const currentChannelItem = channelItems.get(currentChannelName)
+            currentChannelItem?.setPlaybackStatus('Stopped')
+        }
 
         if (name) {
             const newChannelItem = channelItems.get(name)

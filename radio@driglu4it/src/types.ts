@@ -361,6 +361,7 @@ interface MprisMetadataUnpacked {
 }
 
 type MprisMetadataDeepUnpacked = {
+    // @ts-ignore
     [P in keyof MprisMetadataUnpacked]: ReturnType<MprisMetadataUnpacked[P]['unpack']>
 }
 
