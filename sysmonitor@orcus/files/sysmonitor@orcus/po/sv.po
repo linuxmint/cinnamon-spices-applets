@@ -2,20 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sysmonitor@orcus\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-30 20:10+0200\n"
-"PO-Revision-Date: 2019-02-10 08:34+0100\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"PO-Revision-Date: 2021-11-29 18:50+0100\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: providers.js:46
@@ -40,7 +41,7 @@ msgstr " KB/s"
 
 #: providers.js:140
 msgid "Network D/U:"
-msgstr "Nätverk U/N:"
+msgstr "Nätverk N/U:"
 
 #: providers.js:179
 msgid "Load average:"
@@ -183,7 +184,7 @@ msgstr "Användarfärg"
 
 #. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
 msgid "Nice color"
-msgstr "Fin färg"
+msgstr "Nice-färg"
 
 #. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
 msgid "Kernel color"
