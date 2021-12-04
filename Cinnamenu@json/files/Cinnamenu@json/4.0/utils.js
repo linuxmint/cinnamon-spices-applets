@@ -80,7 +80,8 @@ const hideTooltipIfVisible = () => {
 };
 
 class NewTooltip {
-    constructor(actor, xpos, ypos, center_x, text) {
+    constructor(actor, xpos, ypos, center_x /*boolean*/, text) {
+        //if center_x then tooltip should be centered on xpos
         this.actor = actor;
         this.xpos = xpos;
         this.ypos = ypos;
@@ -93,7 +94,7 @@ class NewTooltip {
 
     show() {
         this.showTimer = null;
-
+        
         this.tooltip = new St.Label({
             name: 'Tooltip'
         });
