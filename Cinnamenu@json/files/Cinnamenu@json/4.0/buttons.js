@@ -31,6 +31,7 @@ class CategoryButton {
         this.id = category_id;
         this.actor = new St.BoxLayout({ style_class: 'menu-category-button', reactive: true,
                                                                 accessible_role: Atk.Role.MENU_ITEM});
+
         //----icon
         if (icon_name) {
             this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
@@ -42,10 +43,12 @@ class CategoryButton {
         if (this.appThis.settings.categoryIconSize > 0) {
             this.actor.add(this.icon, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
         }
+
         //---label
         category_name = category_name ? category_name : '';//is this needed?
         this.label = new St.Label({ text: category_name, style_class: 'menu-category-button-label' });
         this.actor.add(this.label, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
+
         //---dnd
         this.actor._delegate = {
                 handleDragOver: (source) => {
@@ -212,6 +215,7 @@ class CategoryButton {
         if (this.disabled) {
             return Clutter.EVENT_STOP;
         }
+        
         const button = event.get_button();
         if (button === 1 && this.appThis.settings.categoryClick) {
             this.selectCategory();
@@ -372,9 +376,10 @@ class ContextMenu {
             return;
         }
 
+        //----Position and open menu----
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
-        //----Position and open menu----
+
         const contextMenuWidth = this.menu.actor.width;
         const contextMenuHeight = this.menu.actor.height;
 
@@ -402,8 +407,9 @@ class ContextMenu {
         this.menu.actor.anchor_y = -cy;
 
         //This context menu doesn't have an St.Side and so produces errors in .xsession-errors
-        //enable animation for the sole reason that it spams .xsession-errors less. Can't add an
+        //enable animation here for the sole reason that it spams .xsession-errors less. Can't add an
         //St.Side because in some themes it looks like it should be attached to a panel but isn't.
+        //Ideally, a proper floating popup menu should be coded.
         this.menu.open(true);
         return;
     }
@@ -413,6 +419,7 @@ class ContextMenu {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
         };
+
         if (this.appThis.gpu_offload_supported) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
                                 () => { try {
@@ -426,6 +433,7 @@ class ContextMenu {
                                 () => { spawnCommandLine('optirun gtk-launch ' + app.id);
                                         this.appThis.closeMenu(); } ));
         }
+
         addMenuItem( new ContextMenuItem(this.appThis, _('Add to panel'), 'list-add',
             () => {
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
@@ -440,6 +448,7 @@ class ContextMenu {
                     launcherApplet.acceptNewLauncher(app.id);
                 }
                 this.close(); } ));
+
         const userDesktopPath = getUserDesktopDir();
         if (userDesktopPath) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
@@ -453,6 +462,7 @@ class ContextMenu {
                         }
                         this.close(); } ));
         }
+
         if (this.appThis.appFavorites.isFavorite(app.id)) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                             () => { this.appThis.appFavorites.removeFavorite(app.id);
@@ -462,6 +472,13 @@ class ContextMenu {
                                         () => { this.appThis.appFavorites.addFavorite(app.id);
                                                 this.close(); } ));
         }
+
+        if (this.appThis._canUninstallApps) {
+            addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
+                                () => { spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
+                                            app.get_app_info().get_filename() + "'");
+                                        this.appThis.closeMenu(); } ));
+        }
     }
 
     _populateContextMenu_files(app) {
@@ -469,6 +486,7 @@ class ContextMenu {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
         };
+
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
         const file = Gio.File.new_for_uri(app.uri);
         const fileExists = file.query_exists(null);
@@ -478,6 +496,8 @@ class ContextMenu {
         }
         //Note: a file can be an isFavoriteFile and also not exist so continue below and add option to
         //remove from favorites.
+
+        //Open with...
         if (fileExists) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null ));
             const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
@@ -499,6 +519,7 @@ class ContextMenu {
                                                         this.appThis.closeMenu(); } ));
         }
 
+        //add/remove favorite
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
@@ -524,6 +545,8 @@ class ContextMenu {
                                 } ));
             }
         }
+
+        //Open containing folder
         const folder = file.get_parent();
         if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
@@ -532,6 +555,8 @@ class ContextMenu {
                                 fileBrowser.launch([folder], null);
                                 this.appThis.closeMenu(); } ));
         }
+
+        //Move to trash
         if (!app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
 
