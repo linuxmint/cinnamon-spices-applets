@@ -15204,14 +15204,35 @@ class DanishMI {
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
-const { File: main_File } = imports.gi.Gio;
-const { get_home_dir: main_get_home_dir } = imports.gi.GLib;
+const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
+        this.online = null;
+        this.OnNetworkConnectivityChanged = () => {
+            switch (NetworkMonitor.get_default().connectivity) {
+                case NetworkConnectivity.FULL:
+                    if (this.online === true)
+                        break;
+                    logger_Logger.Info("Internet access now available, resuming operations.");
+                    this.RefreshAndRebuild();
+                    this.loop.Resume();
+                    this.online = true;
+                    break;
+                case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.LOCAL:
+                case NetworkConnectivity.PORTAL:
+                    if (this.online === false)
+                        break;
+                    logger_Logger.Info("Internet access now down, pausing refresh.");
+                    this.loop.Pause();
+                    this.online = false;
+                    break;
+            }
+        };
         this.saveLog = async () => {
             var _a;
             if (!(((_a = this.config._selectedLogPath) === null || _a === void 0 ? void 0 : _a.length) > 0))
@@ -15282,6 +15303,8 @@ class WeatherApplet extends TextIconApplet {
         catch (e) {
         }
         this.loop.Start();
+        this.OnNetworkConnectivityChanged();
+        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
     }
     get Orientation() {
         return this.orientation;
