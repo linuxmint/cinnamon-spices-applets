@@ -166,9 +166,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		connect(signal: "finished", callback: (owner: this, window: GObject.Object) => void): number;
 
-		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -570,7 +570,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
 
-		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -653,9 +653,9 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * @returns Whether or not the format string was valid and accepted.
 		 */
 		set_format_string(format_string: string | null): boolean;
-		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -775,7 +775,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 * be modified.
 		 */
 		get_options_for_group(group_id: string): GLib.List;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

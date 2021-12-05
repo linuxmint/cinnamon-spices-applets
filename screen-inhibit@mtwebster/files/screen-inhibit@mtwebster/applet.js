@@ -127,9 +127,7 @@ MyApplet.prototype = {
     },
 
     _screen_menu: function() {
-        if (GLib.find_program_in_path("cinnamon-control-center")) {
-            Util.spawn(['cinnamon-settings', 'screensaver']);
-        }
+        Util.spawn(['cinnamon-settings', 'screensaver']);
     },
 
     on_applet_clicked: function(event) {

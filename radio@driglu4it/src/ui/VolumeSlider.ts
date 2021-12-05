@@ -51,16 +51,22 @@ export function createVolumeSlider(args: Arguments) {
             const direction = (key === KEY_Right) ? 'increase' : 'decrease'
             deltaChange(direction)
         }
+
+        return false
     })
 
     container.connect('scroll-event', (actor, event) => {
         const scrollDirection = event.get_scroll_direction()
         const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease'
         deltaChange(direction)
+
+        return false
     })
 
     icon.connect('button-press-event', () => {
         slider.setValue(0)
+
+        return false
     })
 
     /**

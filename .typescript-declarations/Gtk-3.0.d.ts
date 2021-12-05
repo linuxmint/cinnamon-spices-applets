@@ -324,21 +324,21 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "activate-link", callback: (owner: this, uri: string) => boolean): number;
 
-		connect(signal: "notify::artists", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::authors", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::comments", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::copyright", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::documenters", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::license", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::license_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::logo", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::logo_icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::program_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::translator_credits", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::version", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::website", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::website_label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_license", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::artists", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::authors", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::comments", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::copyright", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::documenters", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::license", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::license_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::logo", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::logo_icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::program_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::translator_credits", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::version", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::website", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::website_label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_license", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -571,8 +571,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "accel-changed", callback: (owner: this, keyval: number, modifier: Gdk.ModifierType, accel_closure: GObject.Closure) => void): number;
 
-		connect(signal: "notify::is_locked", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::modifier_mask", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_locked", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::modifier_mask", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -686,9 +686,9 @@ declare namespace imports.gi.Gtk {
 		 * @param accel_widget the widget to be monitored, or %NULL
 		 */
 		set_accel_widget(accel_widget: Widget | null): void;
-		connect(signal: "notify::accel_closure", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accel_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accel_closure", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accel_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1050,7 +1050,7 @@ declare namespace imports.gi.Gtk {
 		 * @param widget a {@link Widget} or %NULL to unset
 		 */
 		set_widget(widget: Widget | null): void;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1672,23 +1672,23 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::action_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hide_if_empty", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_important", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::short_label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_horizontal", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_overflown", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_vertical", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::action_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hide_if_empty", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_important", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::short_label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_horizontal", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_overflown", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_vertical", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2113,10 +2113,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
 
-		connect(signal: "notify::accel_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accel_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2403,12 +2403,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "value-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::lower", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::page_increment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::page_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::step_increment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::upper", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::lower", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::page_increment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::page_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::step_increment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::upper", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2574,15 +2574,15 @@ declare namespace imports.gi.Gtk {
 		 * @param padding_right the padding at the right of the widget.
 		 */
 		set_padding(padding_top: number, padding_bottom: number, padding_left: number, padding_right: number): void;
-		connect(signal: "notify::bottom_padding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::left_padding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::right_padding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::top_padding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xscale", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yscale", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::bottom_padding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::left_padding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::right_padding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::top_padding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xscale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yscale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2745,9 +2745,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "custom-item-activated", callback: (owner: this, item_name: string) => void): number;
 
-		connect(signal: "notify::heading", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_default_item", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_dialog_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::heading", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_default_item", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_dialog_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2833,8 +2833,8 @@ declare namespace imports.gi.Gtk {
 		 * @param heading a string containing Pango markup
 		 */
 		set_heading(heading: string): void;
-		connect(signal: "notify::gfile", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::heading", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::gfile", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::heading", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3039,12 +3039,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, menu: Menu, application: Gio.AppInfo) => void): number;
 
-		connect(signal: "notify::default_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_all", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_default", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_fallback", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_other", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_recommended", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::default_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_default", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_fallback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_other", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_recommended", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3461,11 +3461,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "window-removed", callback: (owner: this, window: Window) => void): number;
 
-		connect(signal: "notify::active_window", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::app_menu", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menubar", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::register_session", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screensaver_active", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active_window", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::app_menu", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menubar", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::register_session", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screensaver_active", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3646,7 +3646,7 @@ declare namespace imports.gi.Gtk {
 		 * @param show_menubar whether to show a menubar when needed
 		 */
 		set_show_menubar(show_menubar: boolean): void;
-		connect(signal: "notify::show_menubar", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::show_menubar", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3794,9 +3794,9 @@ declare namespace imports.gi.Gtk {
 		 * @param shadow_type a valid {@link ShadowType}.
 		 */
 		set(arrow_type: ArrowType, shadow_type: ShadowType): void;
-		connect(signal: "notify::arrow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::arrow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3894,11 +3894,11 @@ declare namespace imports.gi.Gtk {
 		 *  ratio is taken from the requistion of the child.
 		 */
 		set(xalign: number, yalign: number, ratio: number, obey_child: boolean): void;
-		connect(signal: "notify::obey_child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ratio", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::frame", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::obey_child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ratio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::frame", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4246,7 +4246,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "prepare", callback: (owner: this, page: Widget) => void): number;
 
-		connect(signal: "notify::use_header_bar", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_header_bar", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4315,7 +4315,7 @@ declare namespace imports.gi.Gtk {
 		 * not have a child.
 		 */
 		get_child(): Widget | null;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4508,10 +4508,10 @@ declare namespace imports.gi.Gtk {
 		 * @param spacing the number of pixels to put between children
 		 */
 		set_spacing(spacing: number): void;
-		connect(signal: "notify::baseline_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::baseline_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4881,7 +4881,7 @@ declare namespace imports.gi.Gtk {
 		 * the #GValue to store the result in
 		 */
 		value_from_string_type(type: GObject.Type, string: string): [ boolean, GObject.Value ];
-		connect(signal: "notify::translation_domain", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::translation_domain", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5422,15 +5422,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "released", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::image_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::relief", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::image_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::relief", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5612,8 +5612,8 @@ declare namespace imports.gi.Gtk {
 		 * @param layout_style the new layout style
 		 */
 		set_layout(layout_style: ButtonBoxStyle): void;
-		connect(signal: "notify::layout_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::box", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::layout_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::box", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5854,17 +5854,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "prev-year", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::day", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::detail_height_rows", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::detail_width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::month", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::no_month_change", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_day_names", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_details", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_heading", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_week_numbers", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::year", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::day", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::detail_height_rows", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::detail_width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::month", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::no_month_change", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_day_names", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_details", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_heading", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_week_numbers", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::year", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6464,9 +6464,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "remove-editable", callback: (owner: this, renderer: CellRenderer, editable: CellEditable) => void): number;
 
-		connect(signal: "notify::edit_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::edited_cell", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::focus_cell", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::edit_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::edited_cell", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus_cell", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6846,7 +6846,7 @@ declare namespace imports.gi.Gtk {
 		 * @param spacing the space to add between {@link CellRenderers}
 		 */
 		set_spacing(spacing: number): void;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7072,11 +7072,11 @@ declare namespace imports.gi.Gtk {
 		 * Since 3.0
 		 */
 		reset(): void;
-		connect(signal: "notify::area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::minimum_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::minimum_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::natural_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::natural_width", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::minimum_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::minimum_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural_width", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7405,21 +7405,21 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "editing-started", callback: (owner: this, editable: CellEditable, path: string) => void): number;
 
-		connect(signal: "notify::cell_background_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_background_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_background_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_expanded", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_expander", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xpad", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ypad", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cell_background_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_background_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_background_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_expanded", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_expander", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xpad", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ypad", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7541,10 +7541,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "accel-edited", callback: (owner: this, path_string: string, accel_key: number, accel_mods: Gdk.ModifierType, hardware_keycode: number) => void): number;
 
-		connect(signal: "notify::accel_key", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accel_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accel_mods", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::keycode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accel_key", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accel_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accel_mods", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keycode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7631,9 +7631,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "changed", callback: (owner: this, path_string: string, new_iter: TreeIter) => void): number;
 
-		connect(signal: "notify::has_entry", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::has_entry", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7716,16 +7716,16 @@ declare namespace imports.gi.Gtk {
 		stock_size: number;
 		surface: cairo.Surface;
 
-		connect(signal: "notify::follow_state", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf_expander_closed", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf_expander_open", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock_detail", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::surface", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::follow_state", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf_expander_closed", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf_expander_open", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock_detail", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::surface", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7823,12 +7823,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		value: number;
 
-		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pulse", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pulse", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7883,9 +7883,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		digits: number;
 
-		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::climb_rate", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::climb_rate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7946,9 +7946,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		size: IconSize;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pulse", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pulse", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8126,51 +8126,51 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "edited", callback: (owner: this, path: string, new_text: string) => void): number;
 
-		connect(signal: "notify::align_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::alignment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ellipsize_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::family_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::language", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::language_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::placeholder_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rise", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rise_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scale_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::single_paragraph_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size_points", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stretch", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stretch_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::variant", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::variant_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::weight", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::weight_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_width", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::align_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::alignment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ellipsize_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::family_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::language", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::language_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::placeholder_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rise", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rise_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::single_paragraph_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size_points", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stretch", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stretch_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::variant", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::variant_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::weight", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::weight_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_width", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8317,11 +8317,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggled", callback: (owner: this, path: string) => void): number;
 
-		connect(signal: "notify::activatable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::indicator_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::radio", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activatable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::indicator_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::radio", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8515,14 +8515,14 @@ declare namespace imports.gi.Gtk {
 		 * @param model a {@link TreeModel}
 		 */
 		set_model(model: TreeModel | null): void;
-		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_area_context", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fit_model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_area_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fit_model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8615,7 +8615,7 @@ declare namespace imports.gi.Gtk {
 	interface ICheckButton {
 		readonly toggle_button: ToggleButton;
 
-		connect(signal: "notify::toggle_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::toggle_button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8748,10 +8748,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_as_radio", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_as_radio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9433,13 +9433,13 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "color-set", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::alpha", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::color", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_alpha", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9508,7 +9508,7 @@ declare namespace imports.gi.Gtk {
 	interface IColorChooserDialog {
 		show_editor: boolean;
 
-		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9551,7 +9551,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		show_editor: boolean;
 
-		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::show_editor", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9749,11 +9749,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "color-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::current_alpha", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::current_color", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::current_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_opacity_control", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_palette", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::current_alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::current_color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::current_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_opacity_control", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_palette", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9826,10 +9826,10 @@ declare namespace imports.gi.Gtk {
 		 * @returns the embedded {@link ColorSelection}
 		 */
 		get_color_selection(): Widget;
-		connect(signal: "notify::cancel_button", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::color_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::help_button", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ok_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cancel_button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::color_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::help_button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ok_button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -10318,22 +10318,22 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "popup", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::active_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::add_tearoffs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::button_sensitivity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::column_span_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::entry_text_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_entry", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_frame", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::id_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup_fixed_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup_shown", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_span_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tearoff_title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_width", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::active_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::add_tearoffs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::button_sensitivity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column_span_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::entry_text_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_entry", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_frame", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::id_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup_fixed_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup_shown", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_span_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tearoff_title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_width", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -10998,9 +10998,9 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "remove", callback: (owner: this, object: Widget) => void): number;
 		connect(signal: "set-focus-child", callback: (owner: this, object: Widget) => void): number;
 
-		connect(signal: "notify::border_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resize_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::border_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resize_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -11659,8 +11659,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
-		connect(signal: "notify::use_header_bar", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_header_bar", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -11856,7 +11856,7 @@ declare namespace imports.gi.Gtk {
 	interface IDrawingArea {
 		readonly widget: Widget;
 
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13108,57 +13108,57 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::activates_default", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::buffer", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::caps_lock_warning", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::completion", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_emoji_completion", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_frame", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::im_module", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inner_border", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::invisible_char", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::invisible_char_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::overwrite_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::placeholder_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_activatable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_pixbuf", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_storage_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_tooltip_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::primary_icon_tooltip_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::progress_fraction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::progress_pulse_step", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scroll_offset", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_activatable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_pixbuf", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_storage_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_tooltip_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_icon_tooltip_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selection_bound", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_emoji_icon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::truncate_multiline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visibility", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activates_default", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::buffer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::caps_lock_warning", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::completion", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_emoji_completion", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_frame", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::im_module", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inner_border", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::invisible_char", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::invisible_char_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::overwrite_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::placeholder_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_activatable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_pixbuf", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_storage_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_tooltip_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::primary_icon_tooltip_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::progress_fraction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::progress_pulse_step", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scroll_offset", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_activatable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_pixbuf", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_storage_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_tooltip_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_icon_tooltip_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection_bound", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_emoji_icon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::truncate_multiline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visibility", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13467,9 +13467,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
 
-		connect(signal: "notify::length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13811,15 +13811,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "no-matches", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inline_completion", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inline_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::minimum_key_length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup_completion", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup_set_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup_single_match", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inline_completion", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inline_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::minimum_key_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup_completion", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup_set_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup_single_match", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13993,9 +13993,9 @@ declare namespace imports.gi.Gtk {
 		 * @param visible_window %TRUE to make the event box have a visible window
 		 */
 		set_visible_window(visible_window: boolean): void;
-		connect(signal: "notify::above_child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_window", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::above_child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_window", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -14073,8 +14073,8 @@ declare namespace imports.gi.Gtk {
 		 * @param phase a propagation phase
 		 */
 		set_propagation_phase(phase: PropagationPhase): void;
-		connect(signal: "notify::propagation_phase", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::propagation_phase", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -14297,7 +14297,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "scroll-end", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -14517,15 +14517,15 @@ declare namespace imports.gi.Gtk {
 		set_use_underline(use_underline: boolean): void;
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::expanded", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_fill", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resize_toplevel", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::expanded", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_fill", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resize_toplevel", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -14744,8 +14744,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "file-set", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -15061,8 +15061,8 @@ declare namespace imports.gi.Gtk {
 		 * @param cancel_label custom label or %NULL for the default
 		 */
 		set_cancel_label(cancel_label: string | null): void;
-		connect(signal: "notify::accept_label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cancel_label", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accept_label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cancel_label", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -15450,8 +15450,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "up-folder", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::search_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::search_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -15686,7 +15686,7 @@ declare namespace imports.gi.Gtk {
 		 * @param y the vertical position to place the widget at.
 		 */
 		put(widget: Widget, x: number, y: number): void;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16155,14 +16155,14 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_children_per_line", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_children_per_line", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_children_per_line", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_children_per_line", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16481,13 +16481,13 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "font-set", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_font", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_font", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16586,7 +16586,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		readonly tweak_action: Gio.Action;
 
-		connect(signal: "notify::tweak_action", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::tweak_action", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16761,8 +16761,8 @@ declare namespace imports.gi.Gtk {
 		 * @param text the text to display in the preview area
 		 */
 		set_preview_text(text: string): void;
-		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::preview_text", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::preview_text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16967,12 +16967,12 @@ declare namespace imports.gi.Gtk {
 		 * @param type the new {@link ShadowType}
 		 */
 		set_shadow_type(type: ShadowType): void;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -17309,12 +17309,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "resize", callback: (owner: this, width: number, height: number) => void): number;
 
-		connect(signal: "notify::auto_render", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::context", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_alpha", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_depth_buffer", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_stencil_buffer", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_es", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::auto_render", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_depth_buffer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_stencil_buffer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_es", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -17735,8 +17735,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "update", callback: (owner: this, sequence: Gdk.EventSequence | null) => void): number;
 
-		connect(signal: "notify::n_points", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::n_points", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -17968,7 +17968,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "pressed", callback: (owner: this, x: number, y: number) => void): number;
 
-		connect(signal: "notify::delay_factor", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::delay_factor", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18135,7 +18135,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "pan", callback: (owner: this, direction: PanDirection, offset: number) => void): number;
 
-		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18299,9 +18299,9 @@ declare namespace imports.gi.Gtk {
 		 * @param touch_only whether #gesture handles only touch events
 		 */
 		set_touch_only(touch_only: boolean): void;
-		connect(signal: "notify::button", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::exclusive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::touch_only", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::exclusive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::touch_only", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18683,11 +18683,11 @@ declare namespace imports.gi.Gtk {
 		 * @param spacing the amount of space to insert between rows
 		 */
 		set_row_spacing(spacing: number): void;
-		connect(signal: "notify::baseline_row", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::column_homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::baseline_row", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column_homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18741,7 +18741,7 @@ declare namespace imports.gi.Gtk {
 	interface IHBox {
 		readonly box: Box;
 
-		connect(signal: "notify::box", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::box", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18799,7 +18799,7 @@ declare namespace imports.gi.Gtk {
 	interface IHButtonBox {
 		readonly button_box: ButtonBox;
 
-		connect(signal: "notify::button_box", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::button_box", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18834,7 +18834,7 @@ declare namespace imports.gi.Gtk {
 	interface IHPaned {
 		readonly paned: Paned;
 
-		connect(signal: "notify::paned", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::paned", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -18971,7 +18971,7 @@ declare namespace imports.gi.Gtk {
 	interface IHScale {
 		readonly scale: Scale;
 
-		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19035,7 +19035,7 @@ declare namespace imports.gi.Gtk {
 	interface IHScrollbar {
 		readonly scrollbar: Scrollbar;
 
-		connect(signal: "notify::scrollbar", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scrollbar", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19081,7 +19081,7 @@ declare namespace imports.gi.Gtk {
 	interface IHSeparator {
 		readonly separator: Separator;
 
-		connect(signal: "notify::separator", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::separator", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19235,12 +19235,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "child-detached", callback: (owner: this, widget: Widget) => void): number;
 
-		connect(signal: "notify::child_detached", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::handle_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::snap_edge", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::snap_edge_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::child_detached", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::handle_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::snap_edge", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::snap_edge_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19454,15 +19454,15 @@ declare namespace imports.gi.Gtk {
 		 * @param title a title, or %NULL
 		 */
 		set_title(title: string | null): void;
-		connect(signal: "notify::custom_title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::decoration_layout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::decoration_layout_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_subtitle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::custom_title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::decoration_layout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::decoration_layout_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_subtitle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19741,8 +19741,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "retrieve-surrounding", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19857,7 +19857,7 @@ declare namespace imports.gi.Gtk {
 		 * @param n_seqs number of sequences in the table
 		 */
 		add_table(data: number[], max_seq_len: number, n_seqs: number): void;
-		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -19932,7 +19932,7 @@ declare namespace imports.gi.Gtk {
 		 * @param context_id the id to use
 		 */
 		set_context_id(context_id: string): void;
-		connect(signal: "notify::object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -21675,23 +21675,23 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::columns", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::item_orientation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::item_padding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::item_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::markup_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_column", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::columns", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::item_orientation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::item_padding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::item_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::markup_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_column", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -21986,20 +21986,20 @@ declare namespace imports.gi.Gtk {
 		 * @param pixel_size the new pixel size
 		 */
 		set_pixel_size(pixel_size: number): void;
-		connect(signal: "notify::file", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf_animation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixel_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resource", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::storage_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::surface", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_fallback", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf_animation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixel_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resource", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::storage_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::surface", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_fallback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -22383,10 +22383,10 @@ declare namespace imports.gi.Gtk {
 		 * @param use_stock %TRUE if the menuitem should use a stock item
 		 */
 		set_use_stock(use_stock: boolean): void;
-		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::always_show_image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -22658,9 +22658,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
-		connect(signal: "notify::message_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::revealed", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::message_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::revealed", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -22788,8 +22788,8 @@ declare namespace imports.gi.Gtk {
 		 * @param screen a #GdkScreen.
 		 */
 		set_screen(screen: Gdk.Screen): void;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -23422,28 +23422,28 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "populate-popup", callback: (owner: this, menu: Menu) => void): number;
 
-		connect(signal: "notify::angle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::justify", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mnemonic_keyval", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mnemonic_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selectable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selection_bound", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::single_line_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::track_visited_links", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::angle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::justify", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mnemonic_keyval", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mnemonic_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selectable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection_bound", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::single_line_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::track_visited_links", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width_chars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::misc", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -23802,9 +23802,9 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment new scroll adjustment
 		 */
 		set_vadjustment(adjustment: Adjustment | null): void;
-		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -23986,11 +23986,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "offset-changed", callback: (owner: this, name: string) => void): number;
 
-		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -24203,8 +24203,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "activate-link", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visited", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visited", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -24584,8 +24584,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "unselect-all", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection_mode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -24765,8 +24765,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "activate", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::activatable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selectable", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activatable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selectable", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -25202,12 +25202,12 @@ declare namespace imports.gi.Gtk {
 		 * @param permission a #GPermission object, or %NULL
 		 */
 		set_permission(permission: Gio.Permission | null): void;
-		connect(signal: "notify::permission", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_lock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_unlock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_lock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_not_authorized", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_unlock", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::permission", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_lock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_unlock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_lock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_not_authorized", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_unlock", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -25765,19 +25765,19 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "popped-up", callback: (owner: this, flipped_rect: any | null, final_rect: any | null, flipped_x: boolean, flipped_y: boolean) => void): number;
 
-		connect(signal: "notify::accel_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::anchor_hints", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::attach_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_type_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::monitor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rect_anchor_dx", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rect_anchor_dy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::reserve_toggle_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tearoff_state", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tearoff_title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_shell", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accel_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::anchor_hints", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::attach_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_type_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::monitor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rect_anchor_dx", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rect_anchor_dy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reserve_toggle_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tearoff_state", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tearoff_title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_shell", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -25968,9 +25968,9 @@ declare namespace imports.gi.Gtk {
 		 * @param pack_dir a new {@link PackDirection}
 		 */
 		set_pack_direction(pack_dir: PackDirection): void;
-		connect(signal: "notify::child_pack_direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pack_direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_shell", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::child_pack_direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pack_direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_shell", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -26155,12 +26155,12 @@ declare namespace imports.gi.Gtk {
 		 * @param use_popover %TRUE to construct a popover from the menu model
 		 */
 		set_use_popover(use_popover: boolean): void;
-		connect(signal: "notify::align_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popover", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::popup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_popover", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::align_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popover", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::popup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_popover", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -26483,12 +26483,12 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "toggle-size-allocate", callback: (owner: this, object: number) => void): number;
 		connect(signal: "toggle-size-request", callback: (owner: this, object: any | null) => void): number;
 
-		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::right_justified", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::submenu", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accel_path", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::right_justified", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::submenu", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -26857,8 +26857,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "selection-done", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::take_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::take_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -26978,7 +26978,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "show-menu", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::menu", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::menu", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -27142,13 +27142,13 @@ declare namespace imports.gi.Gtk {
 		 * @param str markup string (see [Pango markup format][PangoMarkupFormat])
 		 */
 		set_markup(str: string): void;
-		connect(signal: "notify::image", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::message_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::message_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::secondary_use_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::image", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::message_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::message_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::secondary_use_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -27362,11 +27362,11 @@ declare namespace imports.gi.Gtk {
 		 *   in pixels.
 		 */
 		set_padding(xpad: number, ypad: number): void;
-		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xpad", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ypad", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::xalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xpad", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::yalign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ypad", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -27461,15 +27461,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		use_markup: boolean;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::centered", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::iconic", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menu_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::role", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::centered", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::iconic", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::role", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -27638,8 +27638,8 @@ declare namespace imports.gi.Gtk {
 		 * @param screen a #GdkScreen
 		 */
 		set_screen(screen: Gdk.Screen): void;
-		connect(signal: "notify::is_showing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_showing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -27818,10 +27818,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "response", callback: (owner: this, response_id: number) => void): number;
 
-		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transient_for", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transient_for", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -28345,13 +28345,13 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "switch-page", callback: (owner: this, page: Widget, page_num: number) => void): number;
 
-		connect(signal: "notify::enable_popup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::group_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::page", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scrollable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_border", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_tabs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tab_pos", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::enable_popup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::group_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::page", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scrollable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_border", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_tabs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tab_pos", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -28609,11 +28609,11 @@ declare namespace imports.gi.Gtk {
 		 * @param style a {@link StyleContext}
 		 */
 		set_style_context(style: StyleContext): void;
-		connect(signal: "notify::background_icon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::count", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style_context", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::background_icon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::count", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style_context", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -28687,7 +28687,7 @@ declare namespace imports.gi.Gtk {
 		 *     surface, or %NULL.
 		 */
 		get_surface(): cairo.Surface | null;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -28883,8 +28883,8 @@ declare namespace imports.gi.Gtk {
 		 * @param n_entries the number of elements in #entries
 		 */
 		set_action_entries(entries: PadActionEntry[], n_entries: number): void;
-		connect(signal: "notify::action_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pad", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::action_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pad", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -29400,12 +29400,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggle-handle-focus", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::max_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::position_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wide_handle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::max_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::position_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wide_handle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -29972,17 +29972,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "unmount", callback: (owner: this, mount_operation: Gio.MountOperation) => void): number;
 
-		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::location", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::open_flags", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_connect_to_server", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_desktop", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_enter_location", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_other_locations", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_recent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_starred_location", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_trash", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::location", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::open_flags", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_connect_to_server", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_desktop", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_enter_location", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_other_locations", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_recent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_starred_location", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_trash", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -30112,9 +30112,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "embedded", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::embedded", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::socket_window", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::embedded", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::socket_window", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -30392,12 +30392,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::constrain_to", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pointing_to", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::relative_to", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transitions_enabled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::constrain_to", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pointing_to", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::relative_to", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transitions_enabled", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -30547,7 +30547,7 @@ declare namespace imports.gi.Gtk {
 		 * @param name the name of the menu to switch to
 		 */
 		open_submenu(name: string): void;
-		connect(signal: "notify::visible_submenu", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::visible_submenu", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -31495,24 +31495,24 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "update-custom-widget", callback: (owner: this, widget: Widget, setup: PageSetup, settings: PrintSettings) => void): number;
 
-		connect(signal: "notify::allow_async", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::current_page", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::custom_tab_label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_page_setup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::embed_page_setup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::export_filename", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::job_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::n_pages", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::n_pages_to_print", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::print_settings", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_progress", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::status", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::status_string", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::support_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::track_print_status", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::unit", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_full_page", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::allow_async", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::current_page", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::custom_tab_label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_page_setup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::embed_page_setup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::export_filename", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::job_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n_pages", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n_pages_to_print", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::print_settings", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_progress", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::status", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::status_string", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::support_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::track_print_status", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::unit", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_full_page", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -32237,12 +32237,12 @@ declare namespace imports.gi.Gtk {
 		 * @param text a UTF-8 string, or %NULL
 		 */
 		set_text(text: string | null): void;
-		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fraction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pulse_step", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fraction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pulse_step", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -32426,8 +32426,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "changed", callback: (owner: this, current: RadioAction) => void): number;
 
-		connect(signal: "notify::current_value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::current_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -32529,7 +32529,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "group-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::check_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::check_button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -32758,7 +32758,7 @@ declare namespace imports.gi.Gtk {
 		set_group(group: GLib.SList | null): void;
 		connect(signal: "group-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::check_menu_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::check_menu_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -33274,15 +33274,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "value-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fill_level", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::lower_stepper_sensitivity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::restrict_to_fill_level", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::round_digits", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_fill_level", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::upper_stepper_sensitivity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fill_level", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inverted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::lower_stepper_sensitivity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::restrict_to_fill_level", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::round_digits", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_fill_level", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::upper_stepper_sensitivity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -33395,16 +33395,16 @@ declare namespace imports.gi.Gtk {
 		 * @returns the resulting {@link RcStyle}
 		 */
 		copy(): RcStyle;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bg_pixmap_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::color_flags", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fg", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bg", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::base", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xthickness", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ythickness", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bg_pixmap_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::color_flags", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fg", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bg", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::base", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xthickness", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ythickness", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -33470,7 +33470,7 @@ declare namespace imports.gi.Gtk {
 		 * @param show_numbers %TRUE if the shown items should be numbered
 		 */
 		set_show_numbers(show_numbers: boolean): void;
-		connect(signal: "notify::show_numbers", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::show_numbers", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -33636,7 +33636,7 @@ declare namespace imports.gi.Gtk {
 		 * @param show_numbers whether to show numbers
 		 */
 		set_show_numbers(show_numbers: boolean): void;
-		connect(signal: "notify::show_numbers", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::show_numbers", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34041,8 +34041,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34150,7 +34150,7 @@ declare namespace imports.gi.Gtk {
 	interface IRendererCellAccessible {
 		renderer: CellRenderer;
 
-		connect(signal: "notify::renderer", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::renderer", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34229,10 +34229,10 @@ declare namespace imports.gi.Gtk {
 		 * @param transition the new transition type
 		 */
 		set_transition_type(transition: RevealerTransitionType): void;
-		connect(signal: "notify::child_revealed", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::reveal_child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transition_duration", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transition_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::child_revealed", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reveal_child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transition_duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transition_type", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34413,11 +34413,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "format-value", callback: (owner: this, value: number) => string): number;
 
-		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_origin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value_pos", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::range", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_origin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value_pos", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::range", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34672,10 +34672,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "value-changed", callback: (owner: this, value: number) => void): number;
 
-		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icons", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icons", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -34753,7 +34753,7 @@ declare namespace imports.gi.Gtk {
 	interface IScrollbar {
 		readonly range: Range;
 
-		connect(signal: "notify::range", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::range", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -35211,22 +35211,22 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "scroll-child", callback: (owner: this, scroll: ScrollType, horizontal: boolean) => boolean): number;
 
-		connect(signal: "notify::hadjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hscrollbar_policy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::kinetic_scrolling", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_content_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_content_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_content_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_content_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::overlay_scrolling", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::propagate_natural_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::propagate_natural_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vadjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vscrollbar_policy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_placement", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_placement_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::hadjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hscrollbar_policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::kinetic_scrolling", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_content_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_content_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_content_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_content_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::overlay_scrolling", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::propagate_natural_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::propagate_natural_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vadjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vscrollbar_policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_placement", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_placement_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -35456,8 +35456,8 @@ declare namespace imports.gi.Gtk {
 		 * @param visible whether the close button will be shown or not
 		 */
 		set_show_close_button(visible: boolean): void;
-		connect(signal: "notify::search_mode_enabled", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::search_mode_enabled", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_close_button", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -35645,7 +35645,7 @@ declare namespace imports.gi.Gtk {
 	interface ISeparator {
 		readonly widget: Widget;
 
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -35689,7 +35689,7 @@ declare namespace imports.gi.Gtk {
 	interface ISeparatorMenuItem {
 		readonly menu_item: MenuItem;
 
-		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -35742,7 +35742,7 @@ declare namespace imports.gi.Gtk {
 		 * @param draw whether #item is drawn as a vertical line
 		 */
 		set_draw(draw: boolean): void;
-		connect(signal: "notify::draw", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::draw", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36314,91 +36314,91 @@ declare namespace imports.gi.Gtk {
 		set_long_property(name: string, v_long: number, origin: string): void;
 		set_property_value(name: string, svalue: SettingsValue): void;
 		set_string_property(name: string, v_string: string, origin: string): void;
-		connect(signal: "notify::color_hash", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_alternative_button_order", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_alternative_sort_arrows", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_application_prefer_dark_theme", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_auto_mnemonics", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_button_images", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_can_change_accels", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_color_palette", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_color_scheme", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_aspect_ratio", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_blink", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_blink_time", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_blink_timeout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_theme_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_cursor_theme_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_decoration_layout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_dialogs_use_header", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_dnd_drag_threshold", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_double_click_distance", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_double_click_time", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_accels", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_animations", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_event_sounds", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_input_feedback_sounds", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_mnemonics", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_primary_paste", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_enable_tooltips", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_entry_password_hint_timeout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_entry_select_on_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_error_bell", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_fallback_icon_theme", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_file_chooser_backend", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_font_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_fontconfig_timestamp", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_icon_sizes", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_icon_theme_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_im_module", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_im_preedit_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_im_status_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_key_theme_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_keynav_cursor_only", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_keynav_use_caret", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_keynav_wrap_around", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_label_select_on_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_long_press_time", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_menu_bar_accel", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_menu_bar_popup_delay", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_menu_images", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_menu_popdown_delay", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_menu_popup_delay", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_modules", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_overlay_scrolling", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_primary_button_warps_slider", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_print_backends", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_print_preview_command", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_recent_files_enabled", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_recent_files_limit", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_recent_files_max_age", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_scrolled_window_placement", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_shell_shows_app_menu", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_shell_shows_desktop", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_shell_shows_menubar", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_show_input_method_menu", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_show_unicode_menu", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_sound_theme_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_split_cursor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_theme_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_timeout_expand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_timeout_initial", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_timeout_repeat", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_titlebar_double_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_titlebar_middle_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_titlebar_right_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_toolbar_icon_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_toolbar_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_tooltip_browse_mode_timeout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_tooltip_browse_timeout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_tooltip_timeout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_touchscreen_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_visible_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_xft_antialias", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_xft_dpi", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_xft_hinting", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_xft_hintstyle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gtk_xft_rgba", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::color_hash", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_alternative_button_order", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_alternative_sort_arrows", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_application_prefer_dark_theme", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_auto_mnemonics", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_button_images", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_can_change_accels", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_color_palette", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_color_scheme", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_aspect_ratio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_blink", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_blink_time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_blink_timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_theme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_cursor_theme_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_decoration_layout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_dialogs_use_header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_dnd_drag_threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_double_click_distance", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_double_click_time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_accels", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_animations", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_event_sounds", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_input_feedback_sounds", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_mnemonics", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_primary_paste", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_enable_tooltips", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_entry_password_hint_timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_entry_select_on_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_error_bell", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_fallback_icon_theme", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_file_chooser_backend", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_font_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_fontconfig_timestamp", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_icon_sizes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_icon_theme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_im_module", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_im_preedit_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_im_status_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_key_theme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_keynav_cursor_only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_keynav_use_caret", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_keynav_wrap_around", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_label_select_on_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_long_press_time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_menu_bar_accel", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_menu_bar_popup_delay", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_menu_images", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_menu_popdown_delay", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_menu_popup_delay", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_modules", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_overlay_scrolling", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_primary_button_warps_slider", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_print_backends", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_print_preview_command", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_recent_files_enabled", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_recent_files_limit", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_recent_files_max_age", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_scrolled_window_placement", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_shell_shows_app_menu", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_shell_shows_desktop", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_shell_shows_menubar", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_show_input_method_menu", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_show_unicode_menu", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_sound_theme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_split_cursor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_theme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_timeout_expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_timeout_initial", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_timeout_repeat", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_titlebar_double_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_titlebar_middle_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_titlebar_right_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_toolbar_icon_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_toolbar_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_tooltip_browse_mode_timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_tooltip_browse_timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_tooltip_timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_touchscreen_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_visible_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_xft_antialias", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_xft_dpi", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_xft_hinting", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_xft_hintstyle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gtk_xft_rgba", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36590,8 +36590,8 @@ declare namespace imports.gi.Gtk {
 		 * @param disabled_text the text to be displayed when no accelerator is set
 		 */
 		set_disabled_text(disabled_text: string): void;
-		connect(signal: "notify::accelerator", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::disabled_text", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accelerator", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::disabled_text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36646,9 +36646,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		view: string;
 
-		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::view", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::view", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36714,10 +36714,10 @@ declare namespace imports.gi.Gtk {
 
 		connect(signal: "change-current-page", callback: (owner: this, object: number) => boolean): number;
 
-		connect(signal: "notify::max_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::section_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::view_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::max_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::section_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::view_name", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36828,15 +36828,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		title: string;
 
-		connect(signal: "notify::accelerator", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::action_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::shortcut_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::subtitle_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accelerator", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::action_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::shortcut_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -36919,9 +36919,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "search", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::section_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::view_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::section_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::view_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -37070,8 +37070,8 @@ declare namespace imports.gi.Gtk {
 		 * @param mode the mode to set for the size group.
 		 */
 		set_mode(mode: SizeGroupMode): void;
-		connect(signal: "notify::ignore_hidden", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::ignore_hidden", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -37228,7 +37228,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "plug-removed", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -37567,15 +37567,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "wrapped", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::climb_rate", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::numeric", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::snap_to_ticks", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::update_policy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::value", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::entry", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::adjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::climb_rate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::digits", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::numeric", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::snap_to_ticks", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::update_policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::entry", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -37773,7 +37773,7 @@ declare namespace imports.gi.Gtk {
 		 * Stops the animation of the spinner.
 		 */
 		stop(): void;
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -38023,15 +38023,15 @@ declare namespace imports.gi.Gtk {
 		 * @param name the name of the child to make visible
 		 */
 		set_visible_child_name(name: string): void;
-		connect(signal: "notify::hhomogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::interpolate_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transition_duration", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transition_running", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transition_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vhomogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_child_name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::hhomogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::interpolate_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transition_duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transition_running", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transition_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vhomogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_child_name", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -38124,7 +38124,7 @@ declare namespace imports.gi.Gtk {
 		 * @param stack a {@link Stack}
 		 */
 		set_stack(stack: Stack): void;
-		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -38191,9 +38191,9 @@ declare namespace imports.gi.Gtk {
 		 * @param stack a {@link Stack}
 		 */
 		set_stack(stack: Stack | null): void;
-		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stack", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -38823,20 +38823,20 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "size-changed", callback: (owner: this, size: number) => boolean): number;
 
-		connect(signal: "notify::embedded", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_tooltip", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::storage_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::embedded", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_tooltip", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixbuf", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::storage_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -39064,7 +39064,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "text-pushed", callback: (owner: this, context_id: number, text: string) => void): number;
 
-		connect(signal: "notify::parent_widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parent_widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -39355,21 +39355,21 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "unrealize", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::context", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fg", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bg", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::light", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::dark", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mid", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::base", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text_aa", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::black", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::white", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::xthickness", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ythickness", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fg", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bg", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::light", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::dark", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mid", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::base", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text_aa", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::black", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::white", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::xthickness", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ythickness", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -40044,10 +40044,10 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::paint_clock", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::paint_clock", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -40428,8 +40428,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "state-set", callback: (owner: this, state: boolean) => boolean): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -40677,12 +40677,12 @@ declare namespace imports.gi.Gtk {
 		 * @param spacing the number of pixels of space to place between every row in the table.
 		 */
 		set_row_spacings(spacing: number): void;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::n_columns", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::n_rows", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n_columns", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n_rows", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -40756,7 +40756,7 @@ declare namespace imports.gi.Gtk {
 	interface ITearoffMenuItem {
 		readonly menu_item: MenuItem;
 
-		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::menu_item", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -41845,12 +41845,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "remove-tag", callback: (owner: this, tag: TextTag, start: TextIter, end: TextIter) => void): number;
 
-		connect(signal: "notify::copy_target_list", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::paste_target_list", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tag_table", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::copy_target_list", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::paste_target_list", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tag_table", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -42010,8 +42010,8 @@ declare namespace imports.gi.Gtk {
 		 * @param setting visibility of mark
 		 */
 		set_visible(setting: boolean): void;
-		connect(signal: "notify::left_gravity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::left_gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -42292,77 +42292,77 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "event", callback: (owner: this, object: GObject.Object, event: Gdk.Event, iter: TextIter) => boolean): number;
 
-		connect(signal: "notify::accumulative_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_full_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_full_height_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fallback", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fallback_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::family_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_features", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_features_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::foreground_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::indent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::indent_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::invisible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::invisible_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::justification", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::justification_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::language", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::language_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::left_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::left_margin_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::letter_spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::letter_spacing_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::paragraph_background_gdk", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::paragraph_background_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::paragraph_background_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_above_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_above_lines_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_below_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_below_lines_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_inside_wrap", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_inside_wrap_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::right_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::right_margin_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rise", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rise_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scale_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size_points", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::size_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stretch", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stretch_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough_rgba_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::strikethrough_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tabs_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline_rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline_rgba_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::underline_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::variant", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::variant_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::weight", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::weight_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_mode_set", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accumulative_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_full_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_full_height_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fallback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fallback_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::family_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_features", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_features_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::foreground_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::indent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::indent_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::invisible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::invisible_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::justification", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::justification_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::language", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::language_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::left_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::left_margin_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::letter_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::letter_spacing_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::paragraph_background_gdk", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::paragraph_background_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::paragraph_background_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_above_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_above_lines_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_below_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_below_lines_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_inside_wrap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_inside_wrap_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::right_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::right_margin_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rise", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rise_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size_points", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::size_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stretch", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stretch_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough_rgba_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::strikethrough_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tabs_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline_rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline_rgba_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::underline_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::variant", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::variant_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::weight", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::weight_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_mode_set", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -43587,27 +43587,27 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggle-overwrite", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::accepts_tab", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bottom_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::buffer", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cursor_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::im_module", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::indent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::justification", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::left_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::monospace", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::overwrite", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_above_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_below_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels_inside_wrap", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::right_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::top_margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accepts_tab", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bottom_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::buffer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::im_module", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::indent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::justification", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::left_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::monospace", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::overwrite", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_above_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_below_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels_inside_wrap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::populate_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::right_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tabs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::top_margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wrap_mode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -43893,8 +43893,8 @@ declare namespace imports.gi.Gtk {
 		 * return location for the transition progress
 		 */
 		state_is_running(state: StateType): [ boolean, number ];
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44022,8 +44022,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_as_radio", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_as_radio", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44139,9 +44139,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_indicator", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_indicator", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inconsistent", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44298,7 +44298,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toggled", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::active", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::active", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44475,12 +44475,12 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stock_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_underline", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44822,9 +44822,9 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "toolbar-reconfigured", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::is_important", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_horizontal", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible_vertical", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_important", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_horizontal", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible_vertical", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -44969,11 +44969,11 @@ declare namespace imports.gi.Gtk {
 		 * @param label_widget the widget to be displayed in place of the usual label
 		 */
 		set_label_widget(label_widget: Widget): void;
-		connect(signal: "notify::collapsed", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::header_relief", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::collapsed", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::header_relief", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::label_widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -45168,9 +45168,9 @@ declare namespace imports.gi.Gtk {
 		 * so that user preferences will be used to determine the toolbar style.
 		 */
 		unset_style(): void;
-		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_size_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::toolbar_style", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_size_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::toolbar_style", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -45467,11 +45467,11 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "style-changed", callback: (owner: this, style: ToolbarStyle) => void): number;
 
-		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_size_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_arrow", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::toolbar_style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::container", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::icon_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_size_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_arrow", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::toolbar_style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::container", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -45811,8 +45811,8 @@ declare namespace imports.gi.Gtk {
 		 * @param destroy Destroy notifier of #data, or %NULL
 		 */
 		set_visible_func(func: TreeModelFilterVisibleFunc, data: any | null, destroy: GLib.DestroyNotify | null): void;
-		connect(signal: "notify::child_model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::virtual_root", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::child_model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::virtual_root", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -45972,7 +45972,7 @@ declare namespace imports.gi.Gtk {
 		 * is in “unsorted” state.
 		 */
 		reset_default_sort_func(): void;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -46254,7 +46254,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::mode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -47698,24 +47698,24 @@ declare namespace imports.gi.Gtk {
 		connect(signal: "toggle-cursor-row", callback: (owner: this) => boolean): number;
 		connect(signal: "unselect-all", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_grid_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_search", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_tree_lines", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::expander_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fixed_height_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::headers_clickable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::headers_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hover_expand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hover_selection", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::level_indentation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::model", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rubber_banding", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rules_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::search_column", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_expanders", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_column", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::activate_on_single_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_grid_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_search", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_tree_lines", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::expander_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fixed_height_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::headers_clickable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::headers_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hover_expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hover_selection", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::level_indentation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::model", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rubber_banding", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rules_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::search_column", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_expanders", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_column", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -48253,25 +48253,25 @@ declare namespace imports.gi.Gtk {
 		set_widget(widget: Widget | null): void;
 		connect(signal: "clicked", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::alignment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::clickable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::expand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fixed_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::max_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::min_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sizing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sort_column_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sort_indicator", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sort_order", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::x_offset", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::alignment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cell_area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::clickable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fixed_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reorderable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sizing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sort_column_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sort_indicator", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sort_order", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x_offset", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -48625,8 +48625,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "pre-activate", callback: (owner: this, action: Action) => void): number;
 
-		connect(signal: "notify::add_tearoffs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ui", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::add_tearoffs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ui", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -48886,7 +48886,7 @@ declare namespace imports.gi.Gtk {
 	interface IVBox {
 		readonly box: Box;
 
-		connect(signal: "notify::box", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::box", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -48951,7 +48951,7 @@ declare namespace imports.gi.Gtk {
 	interface IVButtonBox {
 		readonly button_box: ButtonBox;
 
-		connect(signal: "notify::button_box", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::button_box", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -48986,7 +48986,7 @@ declare namespace imports.gi.Gtk {
 	interface IVPaned {
 		readonly paned: Paned;
 
-		connect(signal: "notify::paned", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::paned", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -49029,7 +49029,7 @@ declare namespace imports.gi.Gtk {
 	interface IVScale {
 		readonly scale: Scale;
 
-		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scale", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -49092,7 +49092,7 @@ declare namespace imports.gi.Gtk {
 	interface IVScrollbar {
 		readonly scrollbar: Scrollbar;
 
-		connect(signal: "notify::scrollbar", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::scrollbar", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -49138,7 +49138,7 @@ declare namespace imports.gi.Gtk {
 	interface IVSeparator {
 		readonly separator: Separator;
 
-		connect(signal: "notify::separator", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::separator", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -49233,8 +49233,8 @@ declare namespace imports.gi.Gtk {
 		 * @param adjustment a {@link Adjustment}.
 		 */
 		set_vadjustment(adjustment: Adjustment | null): void;
-		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::shadow_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -49297,7 +49297,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		use_symbolic: boolean;
 
-		connect(signal: "notify::use_symbolic", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::use_symbolic", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -53719,44 +53719,44 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "window-state-event", callback: (owner: this, event: Gdk.EventWindowState) => boolean): number;
 
-		connect(signal: "notify::app_paintable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::can_default", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::can_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::composite_child", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::double_buffered", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::events", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::expand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::focus_on_click", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::halign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_default", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_tooltip", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::height_request", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hexpand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hexpand_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_bottom", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_end", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_left", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_right", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_start", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::margin_top", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::no_show_all", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::opacity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::receives_default", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scale_factor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::style", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tooltip_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::valign", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vexpand", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vexpand_set", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width_request", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::app_paintable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::can_default", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::can_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::composite_child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::double_buffered", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::events", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus_on_click", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::halign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_default", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_tooltip", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::height_request", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hexpand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hexpand_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_bottom", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_left", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_right", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin_top", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::no_show_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::opacity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::receives_default", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale_factor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sensitive", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tooltip_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::valign", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vexpand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vexpand_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width_request", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -55789,39 +55789,39 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "set-focus", callback: (owner: this, widget: Widget | null) => void): number;
 
-		connect(signal: "notify::accept_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::application", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::attached_to", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::decorated", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::deletable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::destroy_with_parent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::focus_on_map", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::focus_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gravity", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_resize_grip", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_toplevel_focus", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hide_titlebar_when_maximized", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_maximized", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mnemonics_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resize_grip_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::role", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::skip_pager_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::skip_taskbar_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::transient_for", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::type_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::urgency_hint", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_position", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::accept_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::application", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::attached_to", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::decorated", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::deletable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::destroy_with_parent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus_on_map", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_resize_grip", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_toplevel_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hide_titlebar_when_maximized", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_maximized", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mnemonics_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::modal", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resize_grip_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::role", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::skip_pager_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::skip_taskbar_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transient_for", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::type_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::urgency_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -60499,8 +60499,8 @@ declare namespace imports.gi.Gtk {
 		 * @param detailed_action_name the detailed action name
 		 */
 		set_detailed_action_name(detailed_action_name: string): void;
-		connect(signal: "notify::action_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::action_target", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::action_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::action_target", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -60620,8 +60620,8 @@ declare namespace imports.gi.Gtk {
 		 * @param action the related {@link Action} or %NULL
 		 */
 		sync_action_properties(action: Action | null): void;
-		connect(signal: "notify::related_action", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_action_appearance", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::related_action", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_action_appearance", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -60906,7 +60906,7 @@ declare namespace imports.gi.Gtk {
 		 * Reloads the list of applications.
 		 */
 		refresh(): void;
-		connect(signal: "notify::content_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::content_type", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -61175,7 +61175,7 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "remove-widget", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::editing_canceled", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::editing_canceled", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -61501,8 +61501,8 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "color-activated", callback: (owner: this, color: Gdk.RGBA) => void): number;
 
-		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_alpha", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_alpha", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -62591,17 +62591,17 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "update-preview", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::action", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::create_folders", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::do_overwrite_confirmation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::extra_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::preview_widget", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::preview_widget_active", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_hidden", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_preview_label", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::action", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::create_folders", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::do_overwrite_confirmation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::extra_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::preview_widget", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::preview_widget_active", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_hidden", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_preview_label", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -62964,13 +62964,13 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "font-activated", callback: (owner: this, fontname: string) => void): number;
 
-		connect(signal: "notify::font", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::font_features", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::language", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::level", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::preview_text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_preview_entry", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::font", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_desc", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font_features", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::language", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::level", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::preview_text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_preview_entry", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -63023,7 +63023,7 @@ declare namespace imports.gi.Gtk {
 		 * @param orientation the orientable’s new orientation.
 		 */
 		set_orientation(orientation: Orientation): void;
-		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -63408,15 +63408,15 @@ declare namespace imports.gi.Gtk {
 		 */
 		connect(signal: "selection-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::limit", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_icons", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_not_found", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_private", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::show_tips", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sort_type", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::limit", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::local_only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_icons", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_not_found", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_private", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show_tips", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sort_type", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -63533,10 +63533,10 @@ declare namespace imports.gi.Gtk {
 		 * @param policy the vertical {@link ScrollablePolicy}
 		 */
 		set_vscroll_policy(policy: ScrollablePolicy): void;
-		connect(signal: "notify::hadjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hscroll_policy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vadjustment", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::vscroll_policy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::hadjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hscroll_policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vadjustment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vscroll_policy", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

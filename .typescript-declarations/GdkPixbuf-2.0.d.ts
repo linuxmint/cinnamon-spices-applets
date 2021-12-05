@@ -692,15 +692,15 @@ declare namespace imports.gi.GdkPixbuf {
 		 * Removes a reference from a pixbuf.
 		 */
 		unref(): void;
-		connect(signal: "notify::bits_per_sample", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::colorspace", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::has_alpha", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::n_channels", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixel_bytes", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pixels", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::rowstride", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::width", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::bits_per_sample", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::colorspace", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has_alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n_channels", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixel_bytes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixels", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rowstride", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1840,7 +1840,7 @@ declare namespace imports.gi.GdkPixbuf {
 		 * @param loop whether to loop the animation
 		 */
 		set_loop(loop: boolean): void;
-		connect(signal: "notify::loop", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::loop", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

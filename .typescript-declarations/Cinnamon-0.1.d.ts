@@ -116,7 +116,7 @@ declare namespace imports.gi.Cinnamon {
 		request_quit(): boolean;
 		connect(signal: "windows-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::state", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::state", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -552,26 +552,26 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "xdnd-leave", callback: (owner: this) => void): number;
 		connect(signal: "xdnd-position-changed", callback: (owner: this, object: number, p0: number) => void): number;
 
-		connect(signal: "notify::background_actor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::bottom_window_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::datadir", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::display", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::focus_manager", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::imagedir", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::overlay_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::screen_width", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::session_running", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::settings", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stage_input_mode", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::top_window_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::ui_scale", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::userdatadir", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_group", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::window_manager", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::background_actor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bottom_window_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::datadir", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::display", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus_manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::imagedir", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::overlay_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::session_running", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::settings", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stage_input_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::top_window_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ui_scale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::userdatadir", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window_manager", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -623,7 +623,7 @@ declare namespace imports.gi.Cinnamon {
 	interface IGtkEmbed {
 		window: EmbeddedWindow;
 
-		connect(signal: "notify::window", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -876,10 +876,10 @@ declare namespace imports.gi.Cinnamon {
 		 *            or %NULL for the default value.
 		 */
 		set_pipeline(pipeline: string | null): void;
-		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::framerate", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pipeline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::framerate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pipeline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1019,9 +1019,9 @@ declare namespace imports.gi.Cinnamon {
 		 * @param event the #ClutterEvent triggering the fake click
 		 */
 		click(event: Clutter.Event): void;
-		connect(signal: "notify::pid", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::wm_class", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::pid", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wm_class", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1056,7 +1056,7 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "tray-icon-added", callback: (owner: this, object: Clutter.Actor) => void): number;
 		connect(signal: "tray-icon-removed", callback: (owner: this, object: Clutter.Actor) => void): number;
 
-		connect(signal: "notify::bg_color", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::bg_color", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1184,7 +1184,7 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "startup-sequence-changed", callback: (owner: this, object: StartupSequence) => void): number;
 		connect(signal: "window-app-changed", callback: (owner: this, object: Meta.Window) => void): number;
 
-		connect(signal: "notify::focus_app", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::focus_app", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1224,7 +1224,7 @@ declare namespace imports.gi.Cinnamon {
 		update_texture_image(texture: Clutter.Texture): void;
 		connect(signal: "cursor-change", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 06:50-0400\n"
-"PO-Revision-Date: 2021-10-28 18:51+0300\n"
+"POT-Creation-Date: 2021-11-21 17:15-0500\n"
+"PO-Revision-Date: 2021-11-23 00:35+0300\n"
 "Last-Translator: Gökhan Gökkaya <wirelessanten@gmail.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #. metadata.json->name
 #. settings-schema.json->page_dark_mode->title
-#: applet.js:75 applet.js:157
+#: applet.js:75 applet.js:177
 msgid "Dark Mode"
 msgstr "Koyu Tema"
 
@@ -71,6 +71,21 @@ msgstr "Masaüstü teması"
 #. settings-schema.json->dark_icon_theme->description
 msgid "Icon theme"
 msgstr "Simge teması"
+
+#. settings-schema.json->enable_light_background_switch->description
+#. settings-schema.json->enable_dark_background_switch->description
+msgid "Change desktop background"
+msgstr "Masaüstü arkaplan resmini değiştir"
+
+#. settings-schema.json->light_background_dir->description
+#. settings-schema.json->dark_background_dir->description
+msgid "Desktop background location"
+msgstr "Masaüstü arkaplan konumu"
+
+#. settings-schema.json->light_background_dir->tooltip
+#. settings-schema.json->dark_background_dir->tooltip
+msgid "A picture from this folder will be randomly chosen."
+msgstr "Bu dizinden rastgele bir resim seçilecektir."
 
 #. settings-schema.json->postpone_auto_mode_until->description
 msgid "Internal use"

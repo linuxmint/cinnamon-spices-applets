@@ -287,7 +287,10 @@ function createActivWidget(args) {
     widget.can_focus = true;
     widget.reactive = true;
     widget.track_hover = true;
-    widget.connect('button-release-event', () => onActivated === null || onActivated === void 0 ? void 0 : onActivated());
+    widget.connect('button-release-event', () => {
+        onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        return false;
+    });
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
     widget.connect('notify::hover', () => {
         widget.change_style_pseudo_class('active', widget.hover);
@@ -299,6 +302,7 @@ function createActivWidget(args) {
         const relevantKeys = [KEY_space, KEY_KP_Enter, KEY_Return];
         if (relevantKeys.includes(symbol) && widget.hover)
             onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        return false;
     });
 }
 
@@ -899,13 +903,16 @@ function createSlider(args) {
         grab_pointer(drawing);
         const motionId = drawing.connect('motion-event', (actor, event) => {
             moveHandle(event);
+            return false;
         });
         const buttonReleaseId = drawing.connect('button-release-event', () => {
             drawing.disconnect(buttonReleaseId);
             drawing.disconnect(motionId);
             ungrab_pointer();
+            return false;
         });
         moveHandle(event);
+        return false;
     });
     function moveHandle(event) {
         const [absX, absY] = event.get_coords();
@@ -974,14 +981,17 @@ function createVolumeSlider(args) {
             const direction = (key === KEY_Right) ? 'increase' : 'decrease';
             deltaChange(direction);
         }
+        return false;
     });
     container.connect('scroll-event', (actor, event) => {
         const scrollDirection = event.get_scroll_direction();
         const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease';
         deltaChange(direction);
+        return false;
     });
     icon.connect('button-press-event', () => {
         slider.setValue(0);
+        return false;
     });
     /**
      *
@@ -1417,9 +1427,11 @@ function createApplet(args) {
         if (event.get_button() === 3) {
             onRightClick();
         }
+        return false;
     });
     applet.actor.connect('scroll-event', (actor, event) => {
         onScroll(event.get_scroll_direction());
+        return false;
     });
     return applet;
 }

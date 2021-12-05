@@ -29,7 +29,7 @@ function GPUMenu(launcher, orientation)
 	this._init(launcher, orientation);
 }
 
-GPUMenu.prototype = 
+GPUMenu.prototype =
 {
 		__proto__: PopupMenu.PopupMenu.prototype,
 		_init: function(launcher, orientation)
@@ -42,25 +42,25 @@ GPUMenu.prototype =
 }
 
 /* The Applet */
-function GPUTemp(orientation) 
+function GPUTemp(orientation)
 {
 	this._init(orientation);
 }
 
-GPUTemp.prototype = 
+GPUTemp.prototype =
 {
 	__proto__: Applet.TextApplet.prototype,
-	_init: function(orientation) 
+	_init: function(orientation)
 	{
 		Applet.TextApplet.prototype._init.call(this, orientation);
-		try 
+		try
 		{
 			this.set_applet_label(_("GPU: ?? \u00B0C"));
-			
+
 			this.menuManager = new PopupMenu.PopupMenuManager(this);
 			this.menu = new GPUMenu(this, orientation);
-			this.menuManager.addMenu(this.menu);			
-			
+			this.menuManager.addMenu(this.menu);
+
 			//has_nvidia_smi=this._hasCommand("which nvidia-smi", ".*/nvidia-smi");
 			has_nvidia_settings=this._hasCommand("which nvidia-settings", ".*/nvidia-settings");
 			has_sensors=this._hasCommand("which sensors", ".*/sensors");
@@ -81,7 +81,7 @@ GPUTemp.prototype =
 				this._noGpuSource();
 			}
 		}
-		catch (initerror) 
+		catch (initerror)
 		{
 			global.logError("init error:");
 			global.logError(initerror);
@@ -90,20 +90,20 @@ GPUTemp.prototype =
 	_getAtiGpuTemperature: function()
 	{
 		this.menu.removeAll();
-		
+
 		let items = new Array();
 		let gpu_command = "sensors ";
 
 		let gpuGPUTest = new RegExp("^radeon-pci");
 		let gpuTemperatureTest = new RegExp("temp1:[ 	+]*[0-9]{1,3}\.[0-9]","g");
 		let gpuTemperatureExtract = new RegExp("[0-9]{1,3}\.[0-9]");
-		
+
 		try
 		{
-			// synchronous call, but appears to run fast enough to not cause a (visible) problem... 
+			// synchronous call, but appears to run fast enough to not cause a (visible) problem...
 			let gpu_sensors_output = GLib.spawn_command_line_sync(gpu_command);//get the output of the (lm)sensors command
 			let gpu_lines=gpu_sensors_output[1].toString().split("\n");
-			
+
 			let currentTemperature = "";
 			let totalTemperature = 0.0;
 			let totalGpus = 0.0;
@@ -112,7 +112,7 @@ GPUTemp.prototype =
 			let line = "";
 			let gpuFound=false;
 
-			for(let i = 0; i < gpu_lines.length; i++) 
+			for(let i = 0; i < gpu_lines.length; i++)
 			{
 				let line = gpu_lines[i];
 				if(gpuGPUTest.test(line))
@@ -142,12 +142,12 @@ GPUTemp.prototype =
 							this.menu.addMenuItem(new PopupMenu.PopupMenuItem("E2:" + line, {reactive:false}));
 
 					}
-					gpuFound=false;		
+					gpuFound=false;
 				}
 			}
 
 			totalTemperature = totalTemperature / totalGpus;
-			
+
 			formattedTemperature = this._formatTemperature(totalTemperature.toString());
 			this.set_applet_label(" " + _("GPU:") + " " + formattedTemperature + " ");
 		}
@@ -158,7 +158,7 @@ GPUTemp.prototype =
 		}
 		Mainloop.timeout_add(2000, Lang.bind(this, this._getAtiGpuTemperature));
 	},
-	_getNvidiaGpuTemperature: function() 
+	_getNvidiaGpuTemperature: function()
 	{
 		let d = new Date();
 		//global.logError("start _getNvidiaGPUTemperature() " + d.toString());
@@ -228,12 +228,12 @@ GPUTemp.prototype =
 			let nlines = new Array();
 			try
 			{
-				// now, originally with the async version, I tried to spawn_async... and then read from stdout, but that 
-				//		a) looped for ever, and 
+				// now, originally with the async version, I tried to spawn_async... and then read from stdout, but that
+				//		a) looped for ever, and
 				//		b) didn't seem to get any output from the command.
-				//	So, in stead I arranged this clusterf*, er, jerry-rig that spawns a shell which then runs sh which runs the actual settings 
+				//	So, in stead I arranged this clusterf*, er, jerry-rig that spawns a shell which then runs sh which runs the actual settings
 				//	command but then redirects that output to a file (the first sh runst the second sh and redirects stdout to file). Had to do
-				//	it this way as the redirect is a feature fo the shell and not the spawn_async call. 
+				//	it this way as the redirect is a feature fo the shell and not the spawn_async call.
 				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q all" > /tmp/gputmp_prop.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
 				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q gpus" > /tmp/gputmp_name.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
 				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q dpys" > /tmp/gputmp_dpys.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
@@ -297,7 +297,7 @@ GPUTemp.prototype =
 			{
 				let gpu_settings_lines=fn.toString().split("\n");
 				this._processNvidiaGpuNames(gpu_settings_lines, SettingsObject);
-			}					
+			}
 		}
 		catch (en)
 		{
@@ -312,7 +312,7 @@ GPUTemp.prototype =
 			{
 				let gpu_settings_lines=fn.toString().split("\n");
 				this._processNvidiaDpyNames(gpu_settings_lines, SettingsObject);
-			}		
+			}
 		}
 		catch (en)
 		{
@@ -334,7 +334,7 @@ GPUTemp.prototype =
 				{
 					//this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 					//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("GPU count: " + SettingsObject.totalGpus, {reactive:false}));
-					//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("GPUs:" + SettingsObject.gpus.length, {reactive:false}));					
+					//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("GPUs:" + SettingsObject.gpus.length, {reactive:false}));
 					for(let n=0;n<SettingsObject.gpus.length;n++)
 					{
 						if(SettingsObject.gpus[n]!=null)
@@ -432,7 +432,7 @@ GPUTemp.prototype =
 							global.logError("Display Error:"+de.toString());
 						}
 					}
-				}				
+				}
 				else
 				{
 					this.menu.addMenuItem(new PopupMenu.PopupMenuItem("SettingsObject.dpys is null", {reactive:false}));
@@ -475,7 +475,7 @@ GPUTemp.prototype =
 		// DPY 0
 		let resolutionTest = new RegExp("FlatpanelNativeResolution:");
 		let refreshRateTest = new RegExp("RefreshRate:");
-		
+
 		try
 		{
 			let bMain=false;
@@ -498,7 +498,7 @@ GPUTemp.prototype =
 			//for(let k=0;k<4;k++)
 			//{
 			//global.logError("_processNvidiaSettings gpu_lines count:" + gpu_lines.length);
-			for(let i = 0; i < gpu_lines.length; i++) 
+			for(let i = 0; i < gpu_lines.length; i++)
 			{
 				let line = gpu_lines[i];
 				//global.logError(line);
@@ -558,7 +558,7 @@ GPUTemp.prototype =
 				if(bMain)
 				{
 					// we're in the main section, so test for global things.
-					// which is , currently, nothing					
+					// which is , currently, nothing
 				}
 				else if (bDisplay)
 				{
@@ -631,11 +631,11 @@ GPUTemp.prototype =
 						else if(memoryInterfaceTest.test(line))
 						{
 							SettingsSettings.gpus[SettingsSettings.totalGpus-1].memoryInterface = this._genericExtract(line) + " bit";
-						}	
+						}
 						else if(cudaCoresTest.test(line))
 						{
 							SettingsSettings.gpus[SettingsSettings.totalGpus-1].cudaCores = this._genericExtract(line) ;
-						}	
+						}
 						else if(gpuCoreTempTest.test(line))
 						{
 							let coreTemp1 = this._genericExtract(line);
@@ -644,7 +644,7 @@ GPUTemp.prototype =
 								SettingsSettings.totalTemperature = SettingsSettings.totalTemperature + parseInt(coreTemp1);
 								SettingsSettings.gpus[SettingsSettings.totalGpus-1].gpuCoreTemp = coreTemp1 + "\u1d3cC";
 							}
-						}					
+						}
 						else if(gpuClockTest.test(line))
 						{
 							let clock = this._genericExtract(line);
@@ -657,19 +657,19 @@ GPUTemp.prototype =
 									SettingsSettings.gpus[SettingsSettings.totalGpus-1].memoryClock = clockParts[1] + "MHz";
 								}
 							}
-						}	
+						}
 						/*else if(Test.test(line))
 						{
 							SettingsSettings.gpus[SettingsSettings.totalGpus-1]. = genericExtract(line) + " MB";
-						}	
+						}
 						else if(Test.test(line))
 						{
 							SettingsSettings.gpus[SettingsSettings.totalGpus-1]. = genericExtract(line) + " MB";
-						}	
+						}
 						else if(Test.test(line))
 						{
 							SettingsSettings.gpus[SettingsSettings.totalGpus-1]. = genericExtract(line) + " MB";
-						}	
+						}
 						*/
 					}
 					catch (ne2)
@@ -679,12 +679,12 @@ GPUTemp.prototype =
 						//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("E2:" + line, {reactive:false}));
 					}
 				}
-					
+
 			}
 			//}
 
 			SettingsSettings.totalTemperature = SettingsSettings.totalTemperature / SettingsSettings.totalGpus;
-			
+
 			SettingsSettings.formattedTemperature = this._formatTemperature(SettingsSettings.totalTemperature.toString());
 		}
 		catch (ne)
@@ -701,7 +701,7 @@ GPUTemp.prototype =
 		//global.logError("processNvidiaGpuNames with " + gpu_lines.length + " lines");
 		try
 		{
-			for(let i = 0; i < gpu_lines.length; i++) 
+			for(let i = 0; i < gpu_lines.length; i++)
 			{
 				let line = gpu_lines[i];
 				//global.logError("\"" + line + "\"");
@@ -749,7 +749,7 @@ GPUTemp.prototype =
 						//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("E2:" + line, {reactive:false}));
 					}
 				}
-					
+
 			}
 		}
 		catch (ne)
@@ -766,7 +766,7 @@ GPUTemp.prototype =
 		//global.logError("processNvidiaGpuNames with " + gpu_lines.length + " lines");
 		try
 		{
-			for(let i = 0; i < dpy_lines.length; i++) 
+			for(let i = 0; i < dpy_lines.length; i++)
 			{
 				let line = dpy_lines[i];
 				//global.logError("\"" + line + "\"");
@@ -814,7 +814,7 @@ GPUTemp.prototype =
 						//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("E2:" + line, {reactive:false}));
 					}
 				}
-					
+
 			}
 		}
 		catch (ne)
@@ -852,7 +852,7 @@ GPUTemp.prototype =
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("If you have an ATI GPU, please install the LM-SENSORS")), {reactive:false});
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("packages for your distribution.")), {reactive:false});
 	},
-	_formatTemperature: function(t) 
+	_formatTemperature: function(t)
 	{
 		return (Math.round(t)).toString()+" \u00B0C";
 		//return ((t*100)/100).toString()+"\u1d3cC";
@@ -874,14 +874,14 @@ GPUTemp.prototype =
 		//global.logError("NOT FOUND!");
 		return false;
 	},
-	on_applet_clicked: function(event) 
+	on_applet_clicked: function(event)
 	{
 		this.menu.toggle();
 		//this._getNvidiaGpuTemperature();
 	}
 };
 
-function main(metadata, orientation) 
+function main(metadata, orientation)
 {
 	let gpuTemp = new GPUTemp(orientation);
 	return gpuTemp;

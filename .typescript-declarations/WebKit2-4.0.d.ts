@@ -179,7 +179,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "create-web-view", callback: (owner: this) => WebView): number;
 
-		connect(signal: "notify::id", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::id", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -348,7 +348,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::rgba", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -965,10 +965,10 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "received-data", callback: (owner: this, data_length: number) => void): number;
 
-		connect(signal: "notify::allow_overwrite", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::destination", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::estimated_progress", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::response", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::allow_overwrite", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::destination", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::estimated_progress", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::response", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1035,7 +1035,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns %TRUE if undo is currently available
 		 */
 		is_undo_available(): boolean;
-		connect(signal: "notify::typing_attributes", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::typing_attributes", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1227,10 +1227,10 @@ declare namespace imports.gi.WebKit2 {
 		 * %NULL-terminated array of strings, containing paths to local files.
 		 */
 		select_files(files: string[]): void;
-		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mime_types", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::selected_files", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mime_types", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::select_multiple", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selected_files", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1402,10 +1402,10 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "found-text", callback: (owner: this, match_count: number) => void): number;
 
-		connect(signal: "notify::max_match_count", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::options", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::text", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::web_view", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::max_match_count", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::options", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::web_view", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1535,7 +1535,7 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "stop", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::enable_high_accuracy", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::enable_high_accuracy", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1690,12 +1690,12 @@ declare namespace imports.gi.WebKit2 {
 		 *    or %NULL if there isn't a media element in #hit_test_result context
 		 */
 		get_media_uri(): string;
-		connect(signal: "notify::context", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::image_uri", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::link_label", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::link_title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::link_uri", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::media_uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::image_uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::link_label", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::link_title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::link_uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::media_uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1848,8 +1848,8 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "preedit-started", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::input_hints", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::input_purpose", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2013,12 +2013,12 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns The URI request that is associated with this navigation
 		 */
 		get_request(): URIRequest;
-		connect(signal: "notify::frame_name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::modifiers", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mouse_button", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::navigation_action", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::navigation_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::request", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::frame_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::modifiers", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mouse_button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::navigation_action", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::navigation_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::request", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2115,10 +2115,10 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "closed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::body", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::tag", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::body", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tag", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2376,8 +2376,8 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "update", callback: (owner: this, page_setup: Gtk.PageSetup, print_settings: Gtk.PrintSettings) => void): number;
 
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::widget", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2515,9 +2515,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "finished", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::page_setup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::print_settings", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::web_view", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::page_setup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::print_settings", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::web_view", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2581,8 +2581,8 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns %TRUE if the MIME type of the response is supported or %FALSE otherwise
 		 */
 		is_mime_type_supported(): boolean;
-		connect(signal: "notify::request", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::response", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::request", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::response", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3682,65 +3682,65 @@ declare namespace imports.gi.WebKit2 {
 		 * @param zoom_text_only Value to be set
 		 */
 		set_zoom_text_only(zoom_text_only: boolean): void;
-		connect(signal: "notify::allow_file_access_from_file_urls", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::allow_modal_dialogs", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::allow_top_navigation_to_data_urls", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::allow_universal_access_from_file_urls", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::auto_load_images", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::cursive_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_charset", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_font_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::default_monospace_font_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::draw_compositing_indicators", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_accelerated_2d_canvas", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_back_forward_navigation_gestures", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_caret_browsing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_developer_extras", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_dns_prefetching", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_encrypted_media", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_frame_flattening", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_fullscreen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_html5_database", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_html5_local_storage", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_hyperlink_auditing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_java", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_javascript", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_javascript_markup", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_media", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_media_capabilities", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_media_stream", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_mediasource", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_mock_capture_devices", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_offline_web_application_cache", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_page_cache", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_plugins", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_private_browsing", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_resizable_text_areas", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_site_specific_quirks", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_smooth_scrolling", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_spatial_navigation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_tabs_to_links", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_webaudio", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_webgl", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_write_console_messages_to_stdout", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::enable_xss_auditor", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::fantasy_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hardware_acceleration_policy", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::javascript_can_access_clipboard", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::javascript_can_open_windows_automatically", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::load_icons_ignoring_image_load_setting", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::media_content_types_requiring_hardware_support", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::media_playback_allows_inline", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::media_playback_requires_user_gesture", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::minimum_font_size", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::monospace_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::pictograph_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::print_backgrounds", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::sans_serif_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::serif_font_family", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::user_agent", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::zoom_text_only", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::allow_file_access_from_file_urls", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::allow_modal_dialogs", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::allow_top_navigation_to_data_urls", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::allow_universal_access_from_file_urls", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auto_load_images", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursive_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_charset", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_font_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default_monospace_font_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::draw_compositing_indicators", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_accelerated_2d_canvas", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_back_forward_navigation_gestures", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_caret_browsing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_developer_extras", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_dns_prefetching", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_encrypted_media", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_frame_flattening", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_fullscreen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_html5_database", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_html5_local_storage", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_hyperlink_auditing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_java", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_javascript", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_javascript_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_media", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_media_capabilities", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_media_stream", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_mediasource", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_mock_capture_devices", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_offline_web_application_cache", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_page_cache", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_plugins", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_private_browsing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_resizable_text_areas", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_site_specific_quirks", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_smooth_scrolling", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_spatial_navigation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_tabs_to_links", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_webaudio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_webgl", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_write_console_messages_to_stdout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::enable_xss_auditor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fantasy_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hardware_acceleration_policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::javascript_can_access_clipboard", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::javascript_can_open_windows_automatically", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::load_icons_ignoring_image_load_setting", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::media_content_types_requiring_hardware_support", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::media_playback_allows_inline", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::media_playback_requires_user_gesture", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::minimum_font_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::monospace_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pictograph_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::print_backgrounds", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sans_serif_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::serif_font_family", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::user_agent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::zoom_text_only", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3877,7 +3877,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @param uri an URI
 		 */
 		set_uri(uri: string): void;
-		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -3962,12 +3962,12 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		get_suggested_filename(): string;
 		get_uri(): string;
-		connect(signal: "notify::content_length", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::http_headers", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::mime_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::status_code", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::suggested_filename", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::content_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::http_headers", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mime_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::status_code", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::suggested_filename", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4152,7 +4152,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns a #WebKitUserContentFilter, or %NULL if saving failed.
 		 */
 		save_from_file_finish(result: Gio.AsyncResult): UserContentFilter;
-		connect(signal: "notify::path", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::path", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4351,8 +4351,8 @@ declare namespace imports.gi.WebKit2 {
 		readonly is_for_audio_device: boolean;
 		readonly is_for_video_device: boolean;
 
-		connect(signal: "notify::is_for_audio_device", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_for_video_device", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::is_for_audio_device", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_for_video_device", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4414,9 +4414,9 @@ declare namespace imports.gi.WebKit2 {
 		 * @param reply a #WebKitUserMessage to send as reply
 		 */
 		send_reply(reply: UserMessage): void;
-		connect(signal: "notify::fd_list", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::name", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::parameters", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fd_list", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::parameters", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4968,10 +4968,10 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "user-message-received", callback: (owner: this, message: UserMessage) => boolean): number;
 
-		connect(signal: "notify::local_storage_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::process_swap_on_cross_site_navigation_enabled", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::use_system_appearance_for_scrollbars", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::website_data_manager", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::local_storage_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::process_swap_on_cross_site_navigation_enabled", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use_system_appearance_for_scrollbars", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::website_data_manager", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5181,9 +5181,9 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "open-window", callback: (owner: this) => boolean): number;
 
-		connect(signal: "notify::attached_height", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::can_attach", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::inspected_uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::attached_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::can_attach", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inspected_uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5338,8 +5338,8 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "sent-request", callback: (owner: this, request: URIRequest, redirected_response: URIResponse) => void): number;
 
-		connect(signal: "notify::response", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::response", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6808,22 +6808,22 @@ declare namespace imports.gi.WebKit2 {
 		 */
 		connect(signal: "web-process-terminated", callback: (owner: this, reason: WebProcessTerminationReason) => void): number;
 
-		connect(signal: "notify::automation_presentation_type", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::estimated_load_progress", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::favicon", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_controlled_by_automation", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_ephemeral", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_loading", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_muted", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_playing_audio", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::page_id", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::title", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::user_content_manager", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::web_context", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::website_policies", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::zoom_level", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::automation_presentation_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::estimated_load_progress", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::favicon", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_controlled_by_automation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_ephemeral", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_loading", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_muted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_playing_audio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::page_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::user_content_manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::web_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::website_policies", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::zoom_level", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6914,7 +6914,7 @@ declare namespace imports.gi.WebKit2 {
 	interface IWebViewBase {
 		readonly parentInstance: Gtk.Container;
 
-		connect(signal: "notify::parentInstance", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::parentInstance", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7219,18 +7219,18 @@ declare namespace imports.gi.WebKit2 {
 		 * @param policy a #WebKitTLSErrorsPolicy
 		 */
 		set_tls_errors_policy(policy: TLSErrorsPolicy): void;
-		connect(signal: "notify::base_cache_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::base_data_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::disk_cache_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::dom_cache_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::hsts_cache_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::indexeddb_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::is_ephemeral", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::itp_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::local_storage_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::offline_application_cache_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::service_worker_registrations_directory", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::websql_directory", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::base_cache_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::base_data_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::disk_cache_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::dom_cache_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::hsts_cache_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::indexeddb_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is_ephemeral", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::itp_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::local_storage_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::offline_application_cache_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::service_worker_registrations_directory", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::websql_directory", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7287,7 +7287,7 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns #WebKitAutoplayPolicy
 		 */
 		get_autoplay_policy(): AutoplayPolicy;
-		connect(signal: "notify::autoplay", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::autoplay", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7386,14 +7386,14 @@ declare namespace imports.gi.WebKit2 {
 		 * @returns %TRUE if toolbar should be visible or %FALSE otherwise.
 		 */
 		get_toolbar_visible(): boolean;
-		connect(signal: "notify::fullscreen", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::geometry", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::locationbar_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::menubar_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::scrollbars_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::statusbar_visible", callback: (owner: this, ...args: any) => number): number;
-		connect(signal: "notify::toolbar_visible", callback: (owner: this, ...args: any) => number): number;
+		connect(signal: "notify::fullscreen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::geometry", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::locationbar_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menubar_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::resizable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scrollbars_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::statusbar_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::toolbar_visible", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

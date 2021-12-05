@@ -1498,7 +1498,7 @@ msgstr "La précipitation ne s'arrêtera pas dans l'heure"
 
 #: 3.8/weather-applet.js:10990
 msgid "Precipitation will start within {precipStart} minutes"
-msgstr "La précipitation commencera dans les {precipEnd} minutes"
+msgstr "La précipitation commencera dans les {precipStart} minutes"
 
 #: 3.8/weather-applet.js:11586 3.8/weather-applet.js:15364
 msgid "As of {lastUpdatedTime}"
