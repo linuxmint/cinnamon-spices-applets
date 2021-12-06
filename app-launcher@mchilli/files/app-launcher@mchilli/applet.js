@@ -11,6 +11,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -46,6 +47,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.bindSettings();
             this.initMenu();
             this.connectSignals();
+            this.addHotkey();
             this.initIcons();
             this.initLabel();
         } catch (e) {
@@ -65,6 +67,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('launcher-icon', 'launcherIcon', this.initIcons);
         this.settings.bind('notification-enabled', 'notificationEnabled');
         this.settings.bind('notification-text', 'notificationText');
+        this.settings.bind('hotkey-binding', 'hotkeyBinding', this.addHotkey);
 
         this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
@@ -341,6 +344,20 @@ class MyApplet extends Applet.TextIconApplet {
         return icon;
     }
 
+    addHotkey() {
+        Main.keybindingManager.addHotKey(
+            `app-launcher-${this.instanceId}`,
+            this.hotkeyBinding,
+            () => {
+                this.menu.toggle();
+            }
+        );
+    }
+
+    removeHotkey() {
+        Main.keybindingManager.removeHotKey(`app-launcher-${this.instanceId}`);
+    }
+
     run(name, icon, command) {
         if (this.notificationEnabled) {
             let text = this._replaceAll(this.notificationText, '%s', name);
@@ -372,6 +389,11 @@ class MyApplet extends Applet.TextIconApplet {
     on_applet_reloaded() {
         this.settings.finalize();
         this.signalManager.disconnectAllSignals();
+        this.removeHotkey();
+    }
+
+    on_applet_removed_from_panel() {
+        this.removeHotkey();
     }
 
     on_menu_state_changed(menu, isOpen, sourceActor) {
@@ -966,6 +988,19 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
         return true;
     }
 
+    _onKeyPressEvent(actor, event) {
+        let symbol = event.get_key_symbol();
+        if (
+            symbol === Clutter.KEY_space ||
+            symbol === Clutter.KEY_Return ||
+            symbol === Clutter.KEY_KP_Enter
+        ) {
+            this._onItemClicked(1);
+            return true;
+        }
+        return false;
+    }
+
     _onButtonHoverEvent(actor, event) {
         actor.set_opacity(actor.hover ? 255 : 125);
         actor.hover ? global.set_cursor(Cinnamon.Cursor.POINTING_HAND) : global.unset_cursor();
@@ -982,6 +1017,11 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 } else {
                     this.applet.run(this.name, this.icon, this.command);
                     this.applet.menu.close(true);
+                }
+                break;
+            case 2:
+                if (!this.applet.menu.isContextOpen()) {
+                    this.applet.run(this.name, this.icon, this.command);
                 }
                 break;
             case 3:

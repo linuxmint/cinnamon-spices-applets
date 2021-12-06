@@ -68,99 +68,88 @@ declare namespace imports.ui.settings {
 		public constructor(bindObject: any, uuid: string, instanceId: number)
 
 		/**
-		 * bindWithObject:
-		 * @bindObject (object): (optional) the object to which the setting will be bound
-		 * or null to use the bindObject passed to %_init
-		 * @key (string): the id of the setting
-		 * @applet_prop (string): the variable name that is used to hold the
-		 * setting (eg. `this.value` passes as `"value`")
-		 * @callback (function): (optional) the function to call when the setting changes
-		 * @user_data: (optional) any extra data/object you wish to pass to the callback
-		 *
 		 * Like bind this allows you to bind a setting to a property on an object. But unlike
-		 * %bind, this function allows you to specify the bindObject to which the property will
+		 * {@link bind}, this function allows you to specify the bindObject to which the property will
 		 * be bound.
+		 * 
+		 * @param bindObject the object to which the setting will be bound
+		 * or null to use the bindObject passed to %_init
+		 * @param key the id of the setting
+		 * @param applet_prop the variable name that is used to hold the
+		 * setting (eg. `this.value` passes as `"value`")
+		 * @param callback the function to call when the setting changes
+		 * @param user_data any extra data/object you wish to pass to the callback
 		 *
-		 * Returns (boolean): Whether the bind was successful
+		 * @returns Whether the bind was successful
 		 */
-		public bindWithObject<T>(bindObject: any, key: string, applet_prop: string, callback?: (arg?: T) => any, user_data?: T): boolean;
+		public bindWithObject<T>(bindObject: any | null, key: string, applet_prop: string, callback?: (arg?: T) => any, user_data?: T): boolean;
 
 		/**
-		 * bind:
-		 * @key (string): the id of the setting
-		 * @applet_prop (string): the variable name that is used to hold the
+		 * Bind a setting to a property on the bindObject passed to %_init.
+		 * @param key the id of the setting
+		 * @param applet_prop the variable name that is used to hold the
 		 * setting (eg. `this.value` passes as `"value`")
-		 * @callback (function): (optional) the function to call when the setting changes
-		 * @user_data: (optional) any extra data/object you wish to pass to the callback
+		 * @param callback the function to call when the setting changes
+		 * @param user_data any extra data/object you wish to pass to the callback
 		 *
-		 * Bind a setting to a property on the @bindObject passed to %_init.
-		 *
-		 * Returns (boolean): Whether the bind was successful
+		 * @returns Whether the bind was successful
 		 */
 		public bind<T>(key: string, applet_prop: string, callback?: (arg?: T) => any, user_data?: T): boolean;
 
 		/**
-		 * bindProperty:
-		 * @direction (Settings.BindingDirection): the direction of the binding
-		 * @key (string): the id of the setting
-		 * @applet_prop (string): the variable name that is used to hold the
+		 * @deprecated
+		 * Bind a setting to a property on the object passed to %_init. This
+		 * function is deprecated and is now only a wrapper around {@link bind} for backward
+		 * compatibility. Please use {@link bind} instead.
+		 * 
+		 * @param direction the direction of the binding
+		 * @param key the id of the setting
+		 * @param applet_prop the variable name that is used to hold the
 		 * setting (eg. `this.value` passes as `"value`")
-		 * @callback (function): (optional) the function to call when the setting changes
-		 * @user_data: (optional) any extra data/object you wish to pass to the callback
+		 * @param callback the function to call when the setting changes
+		 * @param user_data any extra data/object you wish to pass to the callback
 		 *
-		 * Bind a setting to a property on the object @bindObject passed to %_init. This
-		 * function is deprecaed and is now only a wrapper around %bind for backward
-		 * compatibility. Please use %bind instead.
-		 *
-		 * Returns (boolean): Whether the bind was successful
+		 * @returns Whether the bind was successful
 		 */
 		public bindProperty<T>(direction: BindingDirection, key: string, applet_prop: string, callback?: (arg?: T) => any, user_data?: T): boolean;
 
 		/**
-		 * unbindWithObject:
-		 * @bindObject (object): (optional) the object from which the setting will be unbound
-		 * @key (string): the previously bound key to remove
-		 *
-		 * Removes the binding on an object. If you have bound @key to multiple objects, this will
-		 * only remove the one bound to @bindObject. If you wish to remove all bindings, or you used
-		 * %bind or %bindProperty to bind the setting, it is recommended that you use %unbindPropery
+		 * Removes the binding on an object. If you have bound {@link key} to multiple objects, this will
+		 * only remove the one bound to {@link bindObject}. If you wish to remove all bindings, or you used
+		 * {@link bind} or {@link bindProperty} to bind the setting, it is recommended that you use {@link unbindProperty}
 		 * instead.
-		 *
-		 * Returns (boolean): Whether the unbind was successful.
+		 * 
+		 * @param bindObject the object from which the setting will be unbound
+		 * @param key the previously bound key to remove
+		 *		 *
+		 * @returns Whether the unbind was successful.
 		 */
 		public unbindWithObject(bindObject: any, key: string): boolean;
 
 		/**
-		 * unbind:
-		 * @key (string): the previously bound key to remove
-		 *
-		 * Removes the binding on an object that was bound using the %bind function. If you have bound
-		 * @key to multiple objects using %bindWithObject, you should use %unbindWithObject or %unbindAll
+		 * Removes the binding on an object that was bound using the {@link bind} function. If you have bound
+		 * {@link key} to multiple objects using {@link bindWithObject}, you should use {@link unbindWithObject} or {@link unbindAll}
 		 * instead.
+		 * @param key the previously bound key to remove
 		 *
-		 * Returns (boolean): Whether the unbind was successful.
+		 * @returns Whether the unbind was successful.
 		 */
 		public unbind(key: string): boolean;
 
 		/**
-		 * unbindProperty:
-		 * @key (string): the previously bound key to remove
-		 *
-		 * Removes the binding of a key that was bound using %bind, or %bindProperty. This
-		 * function is deprecaed and is now only a wrapper around %unbind for backward
-		 * compatibility. Please use %unbind instead.
-		 *
-		 * Returns (boolean): Whether the unbind was successful.
+		 * @deprecated
+		 * Removes the binding of a key that was bound using {@link bind}, or {@link bindProperty}. This
+		 * function is deprecated and is now only a wrapper around {@link unbind} for backward
+		 * compatibility. Please use {@link unbind} instead.
+		 * @param key the previously bound key to remove
+		 * @returns Whether the unbind was successful.
 		 */
 		public unbindProperty(key: string): boolean;
 
 		/**
-		 * unbindAll:
-		 * @key (string): the previously bound key to remove
-		 *
-		 * Removes all bindings of a key that were bound using %bind, %bindWithObject, or %bindProperty.
-		 *
-		 * Returns (boolean): Whether the unbind was successful.
+		 * Removes all bindings of a key that were bound using {@link bind}, {@link bindWithObject}, or {@link bindProperty}.
+		 * @param key the previously bound key to remove
+		 * @returns Whether the unbind was successful.
 		 */
 		public unbindAll(key: string): boolean;
 
@@ -169,52 +158,40 @@ declare namespace imports.ui.settings {
 		protected _setValue(value: any, key: string): void;
 
 		/**
-		 * getValue:
-		 * @key (string): the name of the settings key
-		 *
 		 * Gets the value of the setting @key.
-		 *
-		 * Returns: The current value of the setting
+		 * @param key (string): the name of the settings key
+		 * @returns: The current value of the setting
 		 */
 		public getValue<T = any>(key: string): T;
 
 		/**
-		 * setValue:
-		 * @key (string): the name of the settings key
-		 * @value: the new value
-		 *
 		 * Sets the value of the setting @key to @value.
+		 * @param key the name of the settings key
+		 * @param value the new value
+		 *
 		 */
 		public setValue<T = any>(key: string, value: T): void;
 
 		/**
-		 * getDefaultValue:
-		 * @key (string): the name of the settings key
-		 *
 		 * Gets the default value of the setting @key.
-		 *
-		 * Returns: The default value of the setting
+		 * @param key the name of the settings key
+		 * @returns The default value of the setting
 		 */
 		public getDefaultValue<T = any>(key: string): T;
 
 		/**
-		 * getOptions:
-		 * @key (String): the name of the settings key
-		 *
 		 * Gets the current available options for the setting @key.
-		 *
-		 * Returns: The currently stored options of the key (or undefined if the key does
+		 * @param key the name of the settings key
+		 * @returns The currently stored options of the key (or undefined if the key does
 		 * not support options)
 		 */
 		public getOptions(key: string): any | null;
 
 		/**
-		 * setOptions:
-		 * @key (string): the name of the settings key
-		 * @options: the new options to set
-		 *
-		 * Sets the available options of @key to @options. An error is given if the setting
+		 * Sets the available options of {@link key} to {@link options}. An error is given if the setting
 		 * does not support options.
+		 * @param key the name of the settings key
+		 * @param options the new options to set
 		 */
 		public setOptions(key: string, options: any): void;
 
@@ -239,7 +216,6 @@ declare namespace imports.ui.settings {
 		protected remoteUpdate(key: string, payload: any): void;
 
 		/**
-		 * finalize:
 		 *
 		 * Removes all bindings and disconnects all signals. This function should be called prior
 		 * to deleting the object.

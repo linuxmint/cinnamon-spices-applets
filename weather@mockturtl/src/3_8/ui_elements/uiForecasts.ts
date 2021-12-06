@@ -9,7 +9,7 @@ import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Orientation } = imports.gi.Clutter;
 
 // stylesheet.css
 const STYLE_FORECAST_ICON = 'weather-forecast-icon'
@@ -33,8 +33,8 @@ export class UIForecasts {
 	public DayHovered: Event<WeatherButton, DateTime> = new Event();
 
 	// Callbacks with bound context, which has constant signature for event Subscription/unSubscription
-	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event | null) => void;
-	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
+	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null) => void;
+	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent) => void;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
@@ -124,7 +124,7 @@ export class UIForecasts {
 
 		this.forecasts = [];
 		this.grid = new GridLayout({
-			orientation: config._verticalOrientation
+			orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
 		});
 		this.grid.set_column_homogeneous(true);
 
@@ -222,12 +222,12 @@ export class UIForecasts {
 			this.actor.get_child().destroy()
 	}
 
-	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent): void {
 		Logger.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
 		this.DayHovered.Invoke(sender, sender.ID as DateTime);
 	}
 
-	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event | null): void {
+	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null): void {
 		Logger.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
 		this.DayClicked.Invoke(sender, sender.ID as DateTime);
 	}

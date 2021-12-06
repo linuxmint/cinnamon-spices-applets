@@ -54,6 +54,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.setCustomStyleClass('menu-background cinnamenu');//starkmenu-background');
         this.signals = new SignalManager(null);
         this.appSystem = Cinnamon.AppSystem.get_default();
+        this._canUninstallApps = GLib.file_test("/usr/bin/cinnamon-remove-application", GLib.FileTest.EXISTS);
         const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
                                                                         St.IconType.SYMBOLIC, false);
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
@@ -889,6 +890,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.currentCategory = categoryId;
         this.categoriesView.setSelectedCategoryStyle(categoryId);
         this.appsView.buttonStoreCleanup();
+
         switch (categoryId) {
         case 'places':
             this.appsView.populate(this.listPlaces());
@@ -1034,6 +1036,10 @@ class CinnamenuApplet extends TextIconApplet {
 
         //---------------------------
         const finish = () => {//sort and display primaryResults[] and otherResults[]
+            if (!this.searchActive || thisSearchId != this.currentSearchId){
+                return; //Search mode has ended or search string has changed
+            }
+
             //sort primaryResults[]
             primaryResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in existing order
             //Limit primaryResults to 10
@@ -1060,15 +1066,13 @@ class CinnamenuApplet extends TextIconApplet {
 
             //Display results
             this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+            this.appsView.highlightFirstItem();
 
-            const buttons = this.appsView.getActiveButtons();//todo
-            if (buttons.length > 0) {
-                Meta.later_add(Meta.LaterType.IDLE, () => {
-                                          if (!buttons[0].entered) {
-                                              this.clearEnteredActors();
-                                              buttons[0].handleEnter();
-                                          } });
-            }
+            //In case mouse is hovering a different item (thus selecting it) ensure first result
+            //is highlighted again after drawing.
+            Meta.later_add(Meta.LaterType.IDLE, () => {
+                                        this.appsView.highlightFirstItem();
+                                    });
         };
 
         //---Wikipedia search----
@@ -1936,7 +1940,7 @@ class CategoriesView {
 
 /*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
  *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
- *otherwise new AppButton's would need to created each time a category is clicked on.*/
+ *otherwise new AppButton's would need to be created each time a category is clicked on.*/
 class AppsView {
     constructor(appThis) {
         this.appThis = appThis;
@@ -1970,24 +1974,26 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
-        let column = 0;
-        let rownum = 0;
-
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
 
         this.clearApps();
+
         //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
         if (appList.length > 1000) {
             appList.length = 1000; //truncate array
             headerText = _('Too many entries - showing first 1000 entries only');
         }
+
         if (headerText) {
             this.headerText.set_text(headerText);
             this.headerText.show();
         } else {
             this.headerText.hide();
         }
+
+        let column = 0;
+        let rownum = 0;
         appList.forEach(app => {
             let appButton = this.buttonStore.find(button => button.app === app);
 
@@ -2009,6 +2015,7 @@ class AppsView {
                 }
             }
         });
+
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.applicationsListBox.show();
         } else {
@@ -2018,8 +2025,19 @@ class AppsView {
         this.currentGridViewColumnCount = this.getGridValues().columns;
     }
 
+    highlightFirstItem() {
+        //When displying search results, ensure first item is highlighted so that pressing
+        //return selects top result.
+        const buttons = this.getActiveButtons();
+        if (buttons[0] && !buttons[0].entered) {
+            this.appThis.clearEnteredActors();
+            buttons[0].handleEnter();
+        }
+    }
+
     resizeGrid() {
         this.applicationsGridBox.hide();//for performance
+
         const newcolumnCount = this.getGridValues().columns;
         if (this.currentGridViewColumnCount === newcolumnCount) {
             //Number of columns are the same so just adjust button widths only.
@@ -2042,6 +2060,7 @@ class AppsView {
                 }
             });
         }
+
         this.applicationsGridBox.show();
         this.currentGridViewColumnCount = newcolumnCount;
     }

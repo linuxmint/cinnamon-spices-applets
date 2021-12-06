@@ -59,6 +59,7 @@ export function createMpvHandler(args: Arguments) {
             return
 
         cvcStream = addedStream
+
         cvcStream.connect('notify::volume', () => {
             handleCvcVolumeChanged()
         })

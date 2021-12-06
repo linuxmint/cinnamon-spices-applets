@@ -5,16 +5,15 @@ const { SignalManager } = imports.misc.signalManager;
 
 export class WeatherButton {
 	public actor: imports.gi.St.Button;
-	private signals = new SignalManager();
 	private disabled = false;
 
 	public ID: any;
 	public url?: string;
 
-	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
-	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event | null> = new Event();
+	public Hovered: Event<WeatherButton, imports.gi.Clutter.CrossingEvent> = new Event();
+	public Clicked: Event<WeatherButton, imports.gi.Clutter.CrossingEvent | null> = new Event();
 
-	constructor(options: Partial<imports.gi.St.ButtonOptions>, doNotAddPadding: boolean = false) {
+	constructor(options: Partial<imports.gi.St.ButtonInitOptions>, doNotAddPadding: boolean = false) {
 		this.actor = new Button(options);
 		this.actor.add_style_class_name("popup-menu-item");
 
@@ -23,10 +22,9 @@ export class WeatherButton {
 		else
 			this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
 
-		this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
-		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
 		this.actor.connect("clicked", () => this.clicked());
-		this.actor.connect("enter-event", (actor, event) => this.hovered(event));
+		this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
+		this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
 	}
 
 	handleEnter(actor?: WeatherButton) {
@@ -57,7 +55,14 @@ export class WeatherButton {
 		}
 	}
 
-	private hovered(event: imports.gi.Clutter.Event) {
+	private onHoverEnter(event: imports.gi.Clutter.CrossingEvent) {
+		this.handleEnter();
 		this.Hovered.Invoke(this, event);
+		return false;
+	}
+
+	private onHoverLeave = (event: imports.gi.Clutter.CrossingEvent) => {
+		this.handleLeave();
+		return false;
 	}
 }

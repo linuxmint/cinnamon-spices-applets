@@ -269,7 +269,7 @@ export class CurrentWeather {
 			sunsetBox.add_actor(sunsetIcon);
 		}
 
-		let textOptions: imports.gi.St.AddOptions = {
+		let textOptions: Partial<imports.gi.St.BoxLayoutChildInitOptions> = {
 			x_fill: false,
 			x_align: Align.START,
 			y_align: Align.MIDDLE,

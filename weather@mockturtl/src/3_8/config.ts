@@ -3,11 +3,14 @@ import { IpApi } from "./location_services/ipApi";
 import { LocationData } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
-import { UUID } from "./consts";
+import { LogLevel, UUID } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
+import { FileExists, LoadContents } from "./lib/io_lib";
 
+const { get_home_dir } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -130,6 +133,8 @@ export class Config {
 	public readonly _showBothTempUnits!: boolean;
 	public readonly _displayWindAsText!: boolean;
 	public readonly _alwaysShowHourlyWeather!: boolean;
+	public readonly _logLevel!: LogLevel;
+	public readonly _selectedLogPath!: string;
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -175,6 +180,7 @@ export class Config {
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.BindSettings();
 		this.LocStore = new LocationStore(this.app, this);
+		this.onLogLevelUpdated();
 	}
 
 	/** Attaches settings to functions */
@@ -184,21 +190,27 @@ export class Config {
 			let key = Keys[k];
 			let keyProp = "_" + key;
 			this.settings.bindProperty(BindingDirection.IN,
-				key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
+				key, keyProp, this.OnSettingChanged, null);
 		}
 
 		// Settings what need special care
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
+			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
+			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
+			"keybinding", this.OnKeySettingsUpdated, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "logLevel",
+			"_logLevel", this.onLogLevelUpdated, null);
+
+		this.settings.bind("selectedLogPath",
+			"_selectedLogPath", this.app.saveLog);
 
 		keybindingManager.addHotKey(
-			UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
 	}
 
 	public get CurrentFontSize(): number {
@@ -372,7 +384,7 @@ export class Config {
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
 	}
 
-	private OnKeySettingsUpdated(): void {
+	private OnKeySettingsUpdated = (): void => {
 		if (this.keybinding != null) {
 			keybindingManager.addHotKey(
 				UUID,
@@ -382,18 +394,22 @@ export class Config {
 		}
 	}
 
+	private onLogLevelUpdated = () => {
+		Logger.ChangeLevel(this._logLevel);
+	}
+
 	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
-	private OnLocationChanged() {
+	private OnLocationChanged = () => {
 		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
 		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
 	}
 
-	private OnLocationStoreChanged() {
+	private OnLocationStoreChanged = () => {
 		this.LocStore.OnLocationChanged(this._locationList)
 	}
 
-	private OnFontChanged() {
+	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.app.RefreshAndRebuild();
 	}
@@ -405,7 +421,7 @@ export class Config {
 		this.app.RefreshAndRebuild();
 	}
 
-	private OnSettingChanged() {
+	private OnSettingChanged = () => {
 		this.app.RefreshAndRebuild();
 	}
 
@@ -466,6 +482,33 @@ export class Config {
 		let size = parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
+	}
+
+	public async GetAppletConfigJson(): Promise<Record<string, any>> {
+		const home = get_home_dir() ?? "~";
+		let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		const configFile = File.new_for_path(configFilePath);
+
+		// Check if file exists
+		if (!await FileExists(configFile)) {
+			throw new Error(
+				_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath })
+			);
+		}
+
+		// Load file contents
+		const confString = await LoadContents(configFile);
+		if (confString == null) {
+			throw new Error(
+				_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath })
+			);
+		}
+
+		const conf = JSON.parse(confString);
+		if (conf?.apiKey?.value != null)
+			conf.apiKey.value = "Redacted";
+
+		return conf;
 	}
 }
 

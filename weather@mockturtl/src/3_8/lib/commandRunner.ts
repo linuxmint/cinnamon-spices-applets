@@ -7,9 +7,9 @@ const { spawnCommandLineAsyncIO } = imports.misc.util;
  * Doesn't do JSON typechecking, you have to do that manually
  * @param command 
  */
-export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData>> {
+export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
 	let response = await SpawnProcess(command);
-	if (!response.Success) return response;
+	if (!response.Success) return response as TypedFailResponse;
 
 	try {
 		response.Data = JSON.parse(response.Data);
@@ -24,7 +24,7 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 		}
 	}
 	finally {
-		return response;
+		return response as TypedFailResponse;
 	}
 }
 
@@ -68,14 +68,24 @@ export function OpenUrl(element: WeatherButton) {
 	)
 }
 
-interface GenericResponse {
+interface GenericResponse extends ProcessResponse {
+	Data: string;
+}
+
+interface TypedResponse<TData> extends ProcessResponse {
+	Success: true;
+	Data: TData;
+}
+
+interface TypedFailResponse extends ProcessResponse {
+	Success: false;
+	Data: string;
+}
+
+interface ProcessResponse {
 	Success: boolean;
 	Data: any;
 	ErrorData?: ErrorData;
-}
-
-interface TypedResponse<TData> extends GenericResponse {
-	Data: TData;
 }
 
 interface ErrorData {

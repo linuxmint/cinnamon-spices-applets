@@ -121,6 +121,26 @@ MyApplet.prototype = {
             this.on_settings_changed,
             null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
+            "enable_light_background_switch",
+            "enable_light_background_switch",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "enable_dark_background_switch",
+            "enable_dark_background_switch",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "light_background_dir",
+            "light_background_dir",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "dark_background_dir",
+            "dark_background_dir",
+            this.on_settings_changed,
+            null);
+        this.settings.bindProperty(Settings.BindingDirection.IN,
             "enable_auto_mode_switch",
             "enable_auto_mode_switch",
             this.on_settings_changed,
@@ -181,6 +201,10 @@ MyApplet.prototype = {
         this.dark_win_border_theme = this.settings.getValue("dark_win_border_theme");
         this.light_icon_theme = this.settings.getValue("light_icon_theme");
         this.dark_icon_theme = this.settings.getValue("dark_icon_theme");
+        this.enable_light_background_switch = this.settings.getValue("enable_light_background_switch");
+        this.enable_dark_background_switch = this.settings.getValue("enable_dark_background_switch");
+        this.light_background_dir = this.settings.getValue("light_background_dir");
+        this.dark_background_dir = this.settings.getValue("dark_background_dir");
         this.enable_auto_mode_switch = this.settings.getValue("enable_auto_mode_switch");
         this.postpone_auto_mode_until = this.settings.getValue("postpone_auto_mode_until");
 
@@ -238,6 +262,12 @@ MyApplet.prototype = {
         }
         if (this.is_valid_theme_name(icon_theme)) {
             Util.spawnCommandLine('gsettings set org.cinnamon.desktop.interface icon-theme ' + icon_theme);
+        }
+        // Change the wallpaper at last
+        if (dark_mode && this.enable_dark_background_switch) {
+            this.set_random_dark_wallpaper();
+        } else if (!dark_mode && this.enable_light_background_switch) {
+            this.set_random_light_wallpaper();
         }
     },
 
@@ -413,6 +443,53 @@ MyApplet.prototype = {
         } else {
             this.settings.setOptions("light_icon_theme", this.icons);
             this.settings.setOptions("dark_icon_theme", this.icons);
+        }
+    },
+
+    set_random_light_wallpaper: function () {
+        if (this.light_background_dir != null && this.light_background_dir != "") {
+            let absolute_path = decodeURIComponent(this.light_background_dir.replace("file://", ""));
+            if (absolute_path != "") {
+                let path = Gio.File.new_for_path(absolute_path);
+                FileUtils.listDirAsync(path, Lang.bind(this, this.collect_light_pictures));
+            }
+        }
+    },
+
+    set_random_dark_wallpaper: function () {
+        if (this.dark_background_dir != null && this.dark_background_dir != "") {
+            let absolute_path = decodeURIComponent(this.dark_background_dir.replace("file://", ""));
+            if (absolute_path != "") {
+                let path = Gio.File.new_for_path(absolute_path);
+                FileUtils.listDirAsync(path, Lang.bind(this, this.collect_dark_pictures));
+            }
+        }
+    },
+
+    collect_light_pictures: function (files) {
+        this.set_random_wallpaper(this.light_background_dir, files);
+    },
+
+    collect_dark_pictures: function (files) {
+        this.set_random_wallpaper(this.dark_background_dir, files);
+    },
+
+    set_random_wallpaper: function (parent, files) {
+        let pictures = [];
+        for (let i in files) {
+            let file = files[i].get_name();
+            let file_name = file.toLowerCase();
+            if (file_name.endsWith(".jpg") || file_name.endsWith(".jpeg") || file_name.endsWith(".png")) {
+                pictures.push(file);
+            }
+        }
+        if (pictures.length > 0) {
+            let random_picture = pictures[Math.floor(Math.random() * pictures.length)];
+            if (parent.length > 1 && !parent.endsWith("/")) {
+                parent = parent + "/";
+            }
+            let wallpaper = parent + random_picture;
+            Util.spawnCommandLine('gsettings set org.cinnamon.desktop.background picture-uri "' + wallpaper + '"');
         }
     },
 
