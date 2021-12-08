@@ -1,0 +1,23 @@
+.calc-main-box {
+    min-width: 100px;
+    background-color: darkslategray;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.calc-main-box.light {
+    background-color: lightgray;
+}
+
+.expression-box {
+    background-color: lightslategray;
+    color: black;
+    border-radius: 4px;
+    width: 100%;
+    padding: 4px;
+}
+
+.collapse-expand-button {
+    color: gray;
+    font-style: italic;
+}
