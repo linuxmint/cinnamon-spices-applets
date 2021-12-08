@@ -3,7 +3,7 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-const ICON = "icon.png";
+const ICON = "icon.svg";
 
 function formatLog(...data) {
     let str = "";
@@ -71,8 +71,9 @@ class MiniCalc extends Applet.TextIconApplet {
         // applet setup
 
         this.set_applet_icon_symbolic_path('');
-        this.set_applet_icon_symbolic_path(this.metadata.path + ICON);
-        this.set_applet_label("Mini-Calc");
+        logInfo("MiniCalc.constructor icon path: ", this.metadata.path + "/" + ICON);
+        this.set_applet_icon_symbolic_path(this.metadata.path + "/" + ICON);
+        this.set_applet_label("");
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
