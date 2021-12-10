@@ -344,7 +344,7 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Searching for ISP settings", 2);
         for (let i = 0; i < this.ispsSettings.length; i++) {
             const ispSetting = this.ispsSettings[i];
-            if (isp === ispSetting.name) {
+            if (ispSetting.name != "" && isp.toLowerCase().includes(ispSetting.name.toLowerCase())) {
                 Debugger.log("ISP setting found: " + ispSetting.name, 2);
                 if (ispSetting.icon) {
                     iconName = ispSetting.icon;
