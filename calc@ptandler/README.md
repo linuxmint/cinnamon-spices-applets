@@ -89,6 +89,7 @@ Kind of useful Documentation:
 - I had to restart Cinnamon in order to get the CSS reloaded, not sure if there is another possibility.
 - The directory of the desklets listed on https://cinnamon-spices.linuxmint.com/ is based on https://github.com/linuxmint/cinnamon-spices-desklets
 - The [scollin's developer's tools desklet](https://cinnamon-spices.linuxmint.com/desklets/view/17) is quite helpful!
+- CJS in GitHub https://github.com/linuxmint/cjs including [docs](https://github.com/linuxmint/cjs/blob/master/doc/Home.md) and [examples](https://github.com/linuxmint/cjs/tree/master/examples)
 
 #### Documentation:
 
