@@ -353,7 +353,6 @@ IpIndicatorApplet.prototype = {
                 }
                 Debugger.log("iconName: " + iconName, 2);
                 if (ispSetting.nickname) {
-                    tooltip = ispSetting.nickname;
                     ispName = ispSetting.nickname;
                     Debugger.log("nickname: " + ispSetting.nickname, 2);
                 }
