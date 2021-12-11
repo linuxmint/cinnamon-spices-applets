@@ -42,7 +42,7 @@ const IpGateway = {
             }
         });
         this._services.push({
-            url: "https://bot.whatismyipaddress.com/",
+            url: "https://api.my-ip.io/ip",
             parse: function (response) {
                 return response.trim();
             }
@@ -67,6 +67,19 @@ const IpGateway = {
                 return response.ip.trim();
             }
         });
+        this._services.push({
+            url: "https://ip.seeip.org/",
+            parse: function (response) {
+                return response.ip.trim();
+            }
+        });
+        this._services.push({
+            url: "https://api.myip.com/",
+            parse: function (jsonResponse) {
+                let response = JSON.parse(jsonResponse);
+                return response.ip.trim();
+            }
+        });        
 
         // ISP Service should be only one, because different services return different ISPs
         this._ispServices.push({
