@@ -72,7 +72,8 @@ export class WeatherLoop {
 				}
 
 			} catch (e) {
-				Logger.Error("Error in Main loop: " + e, e);
+				if (e instanceof Error)
+					Logger.Error("Error in Main loop: " + e, e);
 				this.app.encounteredError = true;
 			}
 

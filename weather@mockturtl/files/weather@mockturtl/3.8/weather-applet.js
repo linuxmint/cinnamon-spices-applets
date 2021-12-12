@@ -9958,7 +9958,6 @@ class WeatherLoop {
                 }
             }
             catch (e) {
-                global.log(e.constructor.name);
                 if (e instanceof Error)
                     logger_Logger.Error("Error in Main loop: " + e, e);
                 this.app.encounteredError = true;
