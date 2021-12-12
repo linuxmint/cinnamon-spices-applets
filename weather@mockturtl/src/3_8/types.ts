@@ -36,8 +36,8 @@ export interface WeatherData {
 		lon: number,
 	};
 	location: {
-		city?: string,
-		country?: string,
+		city?: string | undefined,
+		country?: string | undefined,
 		timeZone?: string,
 		url?: string,
 		/** in metres */
