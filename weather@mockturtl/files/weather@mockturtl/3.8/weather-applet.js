@@ -12187,6 +12187,7 @@ class DarkSky {
 
 
 
+const IDCache = {};
 class OpenWeatherMap {
     constructor(_app) {
         this.prettyName = _("OpenWeatherMap");
@@ -12199,7 +12200,8 @@ class OpenWeatherMap {
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
         ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
+        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
         this.HandleError = (error) => {
             if (error.code == 404) {
                 this.app.ShowError({
@@ -12215,14 +12217,20 @@ class OpenWeatherMap {
         this.app = _app;
     }
     async GetWeather(loc) {
-        let query = this.ConstructQuery(this.base_url, loc);
-        if (query == null)
-            return null;
-        let json = await this.app.LoadJsonAsync(query, {}, this.HandleError);
+        const params = this.ConstructParams(loc);
+        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+        let promises = [];
+        promises.push(this.app.LoadJsonAsync(this.base_url, params, this.HandleError));
+        if (cachedID == null)
+            promises.push(this.app.LoadJsonAsync(this.id_irl, params));
+        const [json, idPayload] = await Promise.all(promises);
+        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
+            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
         if (!json)
             return null;
         if (this.HadErrors(json))
             return null;
+        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
         return this.ParseWeather(json, loc);
     }
     ;
@@ -12235,7 +12243,7 @@ class OpenWeatherMap {
                     lon: json.lon
                 },
                 location: {
-                    url: "https://openweathermap.org/city/",
+                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
                     timeZone: json.timezone
                 },
                 date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
@@ -12342,15 +12350,17 @@ class OpenWeatherMap {
         }
     }
     ;
-    ConstructQuery(baseUrl, loc) {
-        let query = baseUrl;
-        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
-        query += "1c73f8259a86c6fd43c7163b543c8640";
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
         let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-            query = query + "&lang=" + locale;
+            params.lang = locale;
         }
-        return query;
+        return params;
     }
     ;
     ConvertToAPILocale(systemLocale) {
