@@ -22,6 +22,7 @@ export class WeatherLoop {
 	private readonly LOOP_INTERVAL: number = 15;
 	private app: WeatherApplet;
 	private appletRemoved = false;
+	private updating: boolean = false;
 	private GUID: string;
 	private instanceID: number;
 	/** Slows main loop down on consecutive errors.
@@ -47,39 +48,50 @@ export class WeatherLoop {
 	/** Main loop */
 	public async Start(): Promise<void> {
 		while (true) {
-			try {
-				if (this.IsStray()) return;
-				if (this.app.encounteredError == true) this.IncrementErrorCount();
-				this.ValidateLastUpdate();
-
-				if (this.pauseRefresh) {
-					Logger.Debug("Configuration error, updating paused")
-					await delay(this.LoopInterval());
-					continue;
-				}
-
-				if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-					Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-						+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-						+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-					// loop can skip 1 cycle if needed 
-					let state = await this.app.RefreshWeather(false);
-					if (state == RefreshState.Error) Logger.Info("App is currently refreshing, refresh skipped in main loop");
-					if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
-				}
-				else {
-					Logger.Debug("No need to update yet, skipping")
-				}
-
-			} catch (e) {
-				if (e instanceof Error)
-					Logger.Error("Error in Main loop: " + e, e);
-				this.app.encounteredError = true;
-			}
-
+			if (this.IsStray()) return;
+			await this.DoCheck();
 			await delay(this.LoopInterval());
 		}
 	};
+
+	public DoCheck = async () => {
+		// We are in the middle of an update, just skip
+		if (this.updating)
+			return;
+
+		try {
+			this.updating = true;
+			if (this.app.encounteredError == true) this.IncrementErrorCount();
+			this.ValidateLastUpdate();
+
+			if (this.pauseRefresh) {
+				Logger.Debug("Configuration error, updating paused")
+				return;
+			}
+
+			if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
+				Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+				// loop can skip 1 cycle if needed 
+				let state = await this.app.RefreshWeather(false);
+				if (state == RefreshState.Error) Logger.Info("App is currently refreshing, refresh skipped in main loop");
+				if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
+			}
+			else {
+				Logger.Debug("No need to update yet, skipping")
+			}
+
+		}
+		catch (e) {
+			if (e instanceof Error)
+				Logger.Error("Error in Main loop: " + e, e);
+			this.app.encounteredError = true;
+		}
+		finally {
+			this.updating = false;
+		}
+	}
 
 	/** Stops loop. If called, the loop cannot be started again. */
 	public Stop(): void {
@@ -92,8 +104,9 @@ export class WeatherLoop {
 	}
 
 	/** Resumes periodic refreshing, call after Pause. */
-	public Resume(): void {
+	public async Resume(): Promise<void> {
 		this.pauseRefresh = false;
+		await this.DoCheck();
 	}
 
 	/** Used after a successful weather refresh. */

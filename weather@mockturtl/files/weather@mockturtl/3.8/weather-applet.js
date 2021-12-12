@@ -9917,31 +9917,19 @@ class WeatherLoop {
         this.pauseRefresh = false;
         this.LOOP_INTERVAL = 15;
         this.appletRemoved = false;
+        this.updating = false;
         this.errorCount = 0;
-        this.app = app;
-        this.instanceID = instanceID;
-        this.GUID = Guid();
-        weatherAppletGUIDs[instanceID] = this.GUID;
-    }
-    IsDataTooOld() {
-        if (!this.lastUpdated)
-            return true;
-        let oldDate = this.lastUpdated;
-        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
-        return (this.lastUpdated > oldDate);
-    }
-    async Start() {
-        while (true) {
+        this.DoCheck = async () => {
+            if (this.updating)
+                return;
             try {
-                if (this.IsStray())
-                    return;
+                this.updating = true;
                 if (this.app.encounteredError == true)
                     this.IncrementErrorCount();
                 this.ValidateLastUpdate();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration error, updating paused");
-                    await delay(this.LoopInterval());
-                    continue;
+                    return;
                 }
                 if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
                     logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
@@ -9962,6 +9950,27 @@ class WeatherLoop {
                     logger_Logger.Error("Error in Main loop: " + e, e);
                 this.app.encounteredError = true;
             }
+            finally {
+                this.updating = false;
+            }
+        };
+        this.app = app;
+        this.instanceID = instanceID;
+        this.GUID = Guid();
+        weatherAppletGUIDs[instanceID] = this.GUID;
+    }
+    IsDataTooOld() {
+        if (!this.lastUpdated)
+            return true;
+        let oldDate = this.lastUpdated;
+        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
+        return (this.lastUpdated > oldDate);
+    }
+    async Start() {
+        while (true) {
+            if (this.IsStray())
+                return;
+            await this.DoCheck();
             await delay(this.LoopInterval());
         }
     }
@@ -9972,8 +9981,9 @@ class WeatherLoop {
     Pause() {
         this.pauseRefresh = true;
     }
-    Resume() {
+    async Resume() {
         this.pauseRefresh = false;
+        await this.DoCheck();
     }
     ResetErrorCount() {
         this.errorCount = 0;
@@ -15239,7 +15249,6 @@ class WeatherApplet extends TextIconApplet {
                     if (this.online === true)
                         break;
                     logger_Logger.Info("Internet access now available, resuming operations.");
-                    this.RefreshAndRebuild();
                     this.loop.Resume();
                     this.online = true;
                     break;
