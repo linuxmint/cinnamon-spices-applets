@@ -43,7 +43,7 @@ export class UI {
 	private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
 	private readonly signals: imports.misc.signalManager.SignalManager;
 
-	private lastDateToggled?: DateTime = undefined;
+	private lastDateToggled: DateTime | undefined = undefined;
 
 	private noHourlyWeather: boolean = false;
 

@@ -277,7 +277,8 @@ export class USWeather implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Logger.Error("US Weather Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("US Weather Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -364,7 +365,8 @@ export class USWeather implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("US Weather Forecast Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("US Weather Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -381,14 +383,15 @@ export class USWeather implements WeatherProvider {
 					date: timestamp,
 					temp: CelsiusToKelvin(hour.temperature),
 					condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
-					precipitation: undefined
+					//precipitation: undefined
 				}
 				forecasts.push(forecast);
 			}
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("US Weather service Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}

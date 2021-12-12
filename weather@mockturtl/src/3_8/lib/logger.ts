@@ -15,7 +15,7 @@ const LogLevelSeverity: Record<LogLevel, number> = {
 }
 
 class Log {
-	private ID?: number;
+	private ID: number | undefined;
 	private logLevel: LogLevel = "info";
 
 	public constructor(_instanceId?: number) {

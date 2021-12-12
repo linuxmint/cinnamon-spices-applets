@@ -8566,7 +8566,6 @@ function NormalizeTimezone(tz) {
 function GetDayName(date, locale, showDate = false, tz) {
     let params = {
         weekday: "long",
-        timeZone: tz
     };
     params.timeZone = NormalizeTimezone(tz);
     if (showDate) {
@@ -8596,7 +8595,6 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
     let params = {
         hour: "numeric",
         hour12: !hours24Format,
-        timeZone: tz
     };
     params.timeZone = NormalizeTimezone(tz);
     if (!onlyHours)
@@ -8614,7 +8612,6 @@ function AwareDateString(date, locale, hours24Format, tz) {
         hour: "numeric",
         minute: "2-digit",
         hour12: !hours24Format,
-        timeZone: tz
     };
     if (!date.hasSame(now, "day")) {
         params.month = "short";
@@ -9031,7 +9028,8 @@ async function FileExists(file, dictionary = false) {
         return file.query_exists(null);
     }
     catch (e) {
-        logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        if (e instanceof Error)
+            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
         return false;
     }
 }
@@ -9065,12 +9063,14 @@ async function DeleteFile(file) {
                 result = file.delete_finish(res);
             }
             catch (e) {
-                let error = e;
-                if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                    resolve(true);
-                    return true;
+                if (e instanceof Error) {
+                    let error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+                    Logger.Error("Can't delete file, reason: ", e);
                 }
-                Logger.Error("Can't delete file, reason: ", e);
                 resolve(false);
                 return false;
             }
@@ -9958,7 +9958,9 @@ class WeatherLoop {
                 }
             }
             catch (e) {
-                logger_Logger.Error("Error in Main loop: " + e, e);
+                global.log(e.constructor.name);
+                if (e instanceof Error)
+                    logger_Logger.Error("Error in Main loop: " + e, e);
                 this.app.encounteredError = true;
             }
             await delay(this.LoopInterval());
@@ -10056,7 +10058,8 @@ class MetUk {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -10081,7 +10084,6 @@ class MetUk {
                             condition: this.ResolveCondition(hour.W),
                             precipitation: {
                                 type: "rain",
-                                volume: undefined,
                                 chance: parseFloat(hour.Pp)
                             }
                         };
@@ -10091,7 +10093,8 @@ class MetUk {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -10218,7 +10221,6 @@ class MetUk {
                 location: {
                     city: undefined,
                     country: undefined,
-                    url: undefined,
                     timeZone: undefined,
                     distanceFrom: this.observationSites[dataIndex].dist
                 },
@@ -10264,7 +10266,8 @@ class MetUk {
             return weather;
         }
         catch (e) {
-            logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
             this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
@@ -10663,7 +10666,8 @@ async function SpawnProcessJson(command) {
         response.Data = JSON.parse(response.Data);
     }
     catch (e) {
-        Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
+        if (e instanceof Error)
+            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
         response.Success = false;
         response.ErrorData = {
             Code: -1,
@@ -10805,7 +10809,8 @@ class CurrentWeather {
             return true;
         }
         catch (e) {
-            logger_Logger.Error("DisplayWeatherError: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("DisplayWeatherError: " + e, e);
             return false;
         }
     }
@@ -11189,10 +11194,11 @@ class UIForecasts {
             this.app.ShowError({
                 type: "hard",
                 detail: "unknown",
-                message: "Forecast parsing failed: " + e.toString(),
+                message: _("Forecast parsing failed, see logs for more details."),
                 userError: false
             });
-            logger_Logger.Error("DisplayForecastError " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("DisplayForecastError: " + e, e);
             return false;
         }
     }
@@ -11976,7 +11982,8 @@ class DarkSky {
             return result;
         }
         catch (e) {
-            logger_Logger.Error("DarkSky payload parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("DarkSky payload parsing error: " + e, e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -12308,7 +12315,6 @@ class OpenWeatherMap {
                     forecast.precipitation = {
                         chance: hour.pop * 100,
                         type: "none",
-                        volume: undefined
                     };
                 }
                 if (!!hour.rain && forecast.precipitation != null) {
@@ -12325,7 +12331,8 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
             this.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
@@ -12627,7 +12634,8 @@ class USWeather {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -12642,14 +12650,14 @@ class USWeather {
                         date: timestamp,
                         temp: CelsiusToKelvin(hour.temperature),
                         condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
-                        precipitation: undefined
                     };
                     forecasts.push(forecast);
                 }
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
                 return null;
             }
@@ -12824,7 +12832,8 @@ class USWeather {
             return weather;
         }
         catch (e) {
-            logger_Logger.Error("US Weather Parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("US Weather Parsing error: " + e, e);
             this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
@@ -13146,7 +13155,6 @@ class Weatherbit {
                     location: {
                         city: json.city_name,
                         country: json.country_code,
-                        url: undefined,
                         timeZone: json.timezone
                     },
                     date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
@@ -13176,7 +13184,8 @@ class Weatherbit {
                 return weather;
             }
             catch (e) {
-                logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
                 return null;
             }
@@ -13202,7 +13211,8 @@ class Weatherbit {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -13236,7 +13246,8 @@ class Weatherbit {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -13604,9 +13615,7 @@ class MetNorway {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
-            location: {
-                url: undefined,
-            },
+            location: {},
             forecasts: []
         };
         let hourlyForecasts = [];
@@ -14114,7 +14123,8 @@ class HttpLib {
             response.Data = payload;
         }
         catch (e) {
-            logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
+            if (e instanceof Error)
+                logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
             response.Success = false;
             response.ErrorData = {
                 code: -1,
@@ -14949,6 +14959,8 @@ class DanishMI {
             WindDirection: undefined,
             RelativeHumidity: undefined,
             WindSpeed10m: undefined,
+            PrecAmount10Min: undefined,
+            WindGustLast10Min: undefined
         };
         for (let index = 0; index < observations.length; index++) {
             const element = observations[index];
@@ -15375,7 +15387,8 @@ class WeatherApplet extends TextIconApplet {
             return "success";
         }
         catch (e) {
-            logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+            if (e instanceof Error)
+                logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "fail";

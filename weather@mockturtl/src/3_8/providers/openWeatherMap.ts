@@ -148,7 +148,7 @@ export class OpenWeatherMap implements WeatherProvider {
 					forecast.precipitation = {
 						chance: hour.pop * 100,
 						type: "none",
-						volume: undefined
+						//volume: undefined
 					}
 				}
 
@@ -169,7 +169,8 @@ export class OpenWeatherMap implements WeatherProvider {
 			weather.hourlyForecasts = hourly;
 			return weather;
 		} catch (e) {
-			Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
 			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",

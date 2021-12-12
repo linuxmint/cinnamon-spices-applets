@@ -200,7 +200,6 @@ export class MetUk implements WeatherProvider {
 				location: {
 					city: undefined,
 					country: undefined,
-					url: undefined,
 					timeZone: undefined,
 					distanceFrom: this.observationSites[dataIndex].dist
 				},
@@ -249,7 +248,8 @@ export class MetUk implements WeatherProvider {
 			return weather;
 		}
 		catch (e) {
-			Logger.Error("Met UK Weather Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("Met UK Weather Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -277,7 +277,8 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("MET UK Forecast Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("MET UK Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -307,7 +308,7 @@ export class MetUk implements WeatherProvider {
 						condition: this.ResolveCondition(hour.W),
 						precipitation: {
 							type: "rain",
-							volume: undefined,
+							//volume: undefined,
 							chance: parseFloat(hour.Pp)
 						}
 					};
@@ -317,7 +318,8 @@ export class MetUk implements WeatherProvider {
 			return forecasts;
 		}
 		catch (e) {
-			Logger.Error("MET UK Forecast Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("MET UK Forecast Parsing error: " + e, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -769,25 +771,25 @@ interface Period {
 
 interface ObservationPayload {
 	/** Wind Gust, mph? */
-	G?: string;
+	G?: string | undefined;
 	/** Wind direction, Compass? e.g. NW */
-	D?: string;
+	D?: string | undefined;
 	/** Humidity, %? */
-	H?: string;
+	H?: string | undefined;
 	/** Pressure, hpa? */
-	P?: string;
+	P?: string | undefined;
 	/** Wind speed, mph? */
-	S?: string;
+	S?: string | undefined;
 	/** Temperature, C? */
-	T?: string;
+	T?: string | undefined;
 	/** Visibility, m? */
-	V?: string;
+	V?: string | undefined;
 	/** Weather type, https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
-	W?: string;
+	W?: string | undefined;
 	/** Pressure tendency, Pa/s? */
-	Pt?: string;
+	Pt?: string | undefined;
 	/** Dew Point, C? */
-	Dp?: string;
+	Dp?: string | undefined;
 	/** Minutes after midnight on the day */
 	$: string;
 }

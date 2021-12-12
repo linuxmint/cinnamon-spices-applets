@@ -29,7 +29,8 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
 		return true;*/
 	}
 	catch (e) {
-		Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+		if (e instanceof Error)
+			Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
 		return false;
 	}
 }
@@ -70,13 +71,15 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
 				result = file.delete_finish(res);
 			}
 			catch (e) {
-				let error: GJSError = e;
-				if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-					resolve(true);
-					return true;
-				}
+				if (e instanceof Error) {
+					let error: GJSError = <GJSError>e;
+					if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+						resolve(true);
+						return true;
+					}
 
-				Logger.Error("Can't delete file, reason: ", e);
+					Logger.Error("Can't delete file, reason: ", e);
+				}
 				resolve(false);
 				return false;
 			}

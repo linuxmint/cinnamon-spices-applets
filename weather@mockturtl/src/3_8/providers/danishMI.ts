@@ -136,6 +136,8 @@ export class DanishMI implements WeatherProvider {
 			WindDirection: undefined,
 			RelativeHumidity: undefined,
 			WindSpeed10m: undefined,
+			PrecAmount10Min: undefined,
+			WindGustLast10Min: undefined
 		}
 		for (let index = 0; index < observations.length; index++) {
 			const element = observations[index];
@@ -415,18 +417,18 @@ interface DanishObservationPayloads {
 
 interface DanishObservationData {
 	/** last observations ascending (last is freshest), C */
-	Temperature2m?: number;
+	Temperature2m: number | undefined;
 	/** last observations ascending (last is freshest), % */
-	RelativeHumidity?: number;
+	RelativeHumidity: number | undefined;
 	/** mm? */
-	PrecAmount10Min?: number;
-	PressureMSL?: number;
-	WindDirection?: number;
+	PrecAmount10Min: number | undefined;
+	PressureMSL: number | undefined;
+	WindDirection: number | undefined;
 	/** m/s? */
-	WindSpeed10m?: number;
+	WindSpeed10m: number | undefined;
 	/** m/s? */
-	WindGustLast10Min?: number;
-	symbol?: number;
+	WindGustLast10Min: number | undefined;
+	symbol: number | undefined;
 }
 
 interface DanishObservationPayload {

@@ -63,7 +63,7 @@ declare class __meta {
     static "force-loaded": boolean
 }
 
-declare class GJSError {
+declare class GJSError extends Error {
     stack: any;
     fileName: string;
     lineNumber: number;
