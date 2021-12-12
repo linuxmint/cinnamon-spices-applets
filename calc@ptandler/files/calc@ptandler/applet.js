@@ -77,15 +77,13 @@ class MiniCalc extends Applet.TextIconApplet {
         // applet setup
 
         this.set_applet_icon_symbolic_path('');
-        logInfo("MiniCalc.constructor icon path: ", this.metadata.path + "/" + ICON);
+        // logInfo("MiniCalc.constructor icon path: ", this.metadata.path + "/" + ICON);
         this.set_applet_icon_symbolic_path(this.metadata.path + "/" + ICON);
         this.set_applet_label("");
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-
-        // todo register keyboard shortcut #### and make it configurable!
 
         // setup settings
         this.settings = new Settings.AppletSettings(this.opt, metadata.uuid, instance_id);
@@ -154,7 +152,7 @@ class MiniCalc extends Applet.TextIconApplet {
         if (!this.history) return;
 
         const histList = [...this.history]
-        logInfo("MiniCalc.buildHistory: length = ", histList.length);
+        // logInfo("MiniCalc.buildHistory: length = ", histList.length);
 
         const first = histList.shift();
         if (!first) return;
@@ -212,7 +210,7 @@ class MiniCalc extends Applet.TextIconApplet {
     pushToHistory(input, result) {
         if (!input) return;
         if (result instanceof EvalError) return;
-        logInfo("MiniCalc: pushToHistory: " + input + " -> " + result);
+        // logInfo("MiniCalc: pushToHistory: " + input + " -> " + result);
         const item = {input, result};
         this.history.unshift(item);
         this.buildHistory();
@@ -225,7 +223,8 @@ class MiniCalc extends Applet.TextIconApplet {
 
     toggleCalcUI() {
         this.menu.toggle();
-        // todo set keyboard focus to input field! #####
+        // set keyboard focus to input field to be able to immediately start typing
+        this.widgets.input.grab_key_focus();
     }
 
 

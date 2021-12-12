@@ -35,7 +35,6 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## ToDo: Ideas for Further Development
 
-- [ ] automatically set the keyboard focus as soon as the mini-calc is shown (e.g. click on icon)
 - [ ] add scrollbar to historyBox if it gets longer _(how does this work with St?)_ I might want to use a sub menu as well?
 - [ ] make max number of history entries configurable & ensure not to store more entries in the list
 - [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window so it's easier to switch to another window etc!??!
@@ -51,6 +50,10 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [ ] add option to turn off to use `JSON.stringify()` to display results
 
 ## Changelog
+
+### version 0.4, xxx
+
+- [ ] automatically set the keyboard focus as soon as the mini-calc is shown (e.g. click on icon)
 
 ### version 0.3, 2021-12-12
 
