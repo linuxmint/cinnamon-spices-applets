@@ -57,7 +57,7 @@ function evalExpression(input) {
     }
 }
 
-class MiniCalc extends Applet.TextIconApplet {
+class MiniCalc extends Applet.IconApplet {
 
     constructor(metadata, orientation, panel_height, instance_id) {
         logInfo("MiniCalc.constructor");
@@ -67,11 +67,14 @@ class MiniCalc extends Applet.TextIconApplet {
         // private properties
 
         this.history = [];
-        this.historyExpanded = false;
+        // this.historyExpanded = false;
         this.currentResult = "";
 
         this.opt = {
             keyToggle: 'Calculator::<Primary><Alt><Super>c',
+            recentHistoryMaxLength: 2,
+            historyMaxDisplayLength: 6,
+            historyMaxStoreLength: 16,
         }
 
         // applet setup
@@ -79,7 +82,7 @@ class MiniCalc extends Applet.TextIconApplet {
         this.set_applet_icon_symbolic_path('');
         // logInfo("MiniCalc.constructor icon path: ", this.metadata.path + "/" + ICON);
         this.set_applet_icon_symbolic_path(this.metadata.path + "/" + ICON);
-        this.set_applet_label("");
+        // this.set_applet_label("");
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -116,13 +119,12 @@ class MiniCalc extends Applet.TextIconApplet {
         this.buildExpression();
         this.updateExpression("1 + 2")
 
-        this.widgets.historyItem = new PopupMenu.PopupBaseMenuItem({reactive: false});
-        this.menu.addMenuItem(this.widgets.historyItem);
-        this.widgets.historyBox = new St.BoxLayout({
-            vertical: true,
-            style_class: "history-box"
-        })
-        this.widgets.historyItem.addActor(this.widgets.historyBox);
+        this.widgets.recentHistoryBox = new PopupMenu.PopupMenuSection();
+        this.menu.addMenuItem(this.widgets.recentHistoryBox);
+
+        this.widgets.historySubMenu = new PopupMenu.PopupSubMenuMenuItem("History");
+        this.menu.addMenuItem(this.widgets.historySubMenu);
+
         this.buildHistory();
     }
 
@@ -148,63 +150,61 @@ class MiniCalc extends Applet.TextIconApplet {
     buildHistory() {
         // logInfo("MiniCalc.buildHistory: ", this.history);
 
-        this.widgets.historyBox.remove_all_children();
-        if (!this.history) return;
+        // cleanup old elements before (re-)building
+        this.widgets.recentHistoryBox.removeAll();
+        this.widgets.historySubMenu.menu.removeAll();
 
         const histList = [...this.history]
         // logInfo("MiniCalc.buildHistory: length = ", histList.length);
 
-        const first = histList.shift();
-        if (!first) return;
-        // logInfo("MiniCalc.buildHistory: first = ", first);
-        this.addHistoryItemUI(first, this.widgets.historyBox);
+        for (let i = 0; i < this.opt.recentHistoryMaxLength; i++) {
+            const item = histList.shift();
+            if (!item) break;
+            // logInfo("MiniCalc.buildHistory: recent item = ", item);
+            this.addHistoryItemUI(item, this.widgets.recentHistoryBox, i);
+        }
 
         // logInfo("MiniCalc.buildHistory: remaining length = ", histList.length);
 
-        if (!histList.length) return;
+        if (!histList.length) {
+            this.widgets.historySubMenu.setSensitive(false);
+            return;
+        }
 
         // logInfo("MiniCalc.buildHistory: remaining length = ", histList.length);
 
-        const button = new St.Button({style_class: "collapse-expand-button"});
-        this.widgets.historyBox.add_actor(button)
-        button.connect("clicked", (/*widget, event*/) => {
-            this.toggleHistoryExpanded()
-            return true; // event has been handled
-        });
-
-        if (!this.historyExpanded) {
-            // button.set_child(new St.Icon({icon_name: "go-up"}))
-            button.set_child(new St.Label({text: "expand history", style_class: "calc-displayText-primary"}))
-            return
+        for (let i = 0; i < this.opt.historyMaxDisplayLength; i++) {
+            const item = histList.shift();
+            if (!item) break;
+            // logInfo("MiniCalc.buildHistory: item = ", item);
+            this.addHistoryItemUI(item, this.widgets.historySubMenu.menu, i)
         }
-        // button.set_child(new St.Icon({icon_name: "go-down"}))
-        button.set_child(new St.Label({text: "hide history", style_class: "calc-displayText-primary"}))
-
-        let count = 0;
-        for (const item of histList) {
-            if (count++ > 10) break;
-            this.addHistoryItemUI(item, this.widgets.historyBox)
-        }
+        this.widgets.historySubMenu.setSensitive(true);
     }
 
-    addHistoryItemUI(item, historyBox) {
-        const inputButton = new St.Button({
-            label: item.input
-        });
-        inputButton.connect('clicked', (/*widget, event*/) => {
+    addHistoryItemUI(item, menu, index) {
+        // if it's not the first item, add a separator
+        if (index) {
+            menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem({style_class: "history-separator"}));
+        }
+
+        this.addMenuItemWithCallback(menu, item.input, "history-input",
+            (/*widget, event*/) => {
             this.appendExpression(item.input);
             return true; // event has been handled
         });
-        historyBox.add_actor(inputButton);
 
-        const resultButton = new St.Button({
-            label: "= " + item.result
-        });
-        resultButton.connect('clicked', (/*widget, event*/) => {
+        this.addMenuItemWithCallback(menu, "= " + item.result, "history-result",
+            (/*widget, event*/) => {
             this.appendExpression(item.result);
             return true; // event has been handled
         });
-        historyBox.add_actor(resultButton);
+    }
+
+    addMenuItemWithCallback(menu, text, style_class, callback) {
+        const menuItem = new PopupMenu.PopupMenuItem(text, {style_class, focusOnHover: false});
+        menuItem.connect('activate', callback);
+        menu.addMenuItem(menuItem);
     }
 
     pushToHistory(input, result) {
@@ -212,14 +212,25 @@ class MiniCalc extends Applet.TextIconApplet {
         if (result instanceof EvalError) return;
         // logInfo("MiniCalc: pushToHistory: " + input + " -> " + result);
         const item = {input, result};
+
+        // push new entry to history
         this.history.unshift(item);
+
+        // truncate history length if required
+        if (this.history.length > this.opt.historyMaxStoreLength) {
+            this.history = this.history.slice(0, this.opt.historyMaxStoreLength);
+        }
+
+        // rebuild history UI
         this.buildHistory();
     }
 
-    toggleHistoryExpanded() {
-        this.historyExpanded = !this.historyExpanded
-        this.buildHistory()
-    }
+    /*
+        toggleHistoryExpanded() {
+            this.historyExpanded = !this.historyExpanded
+            this.buildHistory()
+        }
+    */
 
     toggleCalcUI() {
         this.menu.toggle();
@@ -248,6 +259,8 @@ class MiniCalc extends Applet.TextIconApplet {
 
     setupSettings() {
         this.settings.bind("keyToggle", "keyToggle", () => this.onKeyChanged());
+        this.settings.bind("recentHistoryMaxLength", "recentHistoryMaxLength", () => this.buildHistory());
+        this.settings.bind("historyMaxDisplayLength", "historyMaxDisplayLength", () => this.buildHistory());
 
         // and initially setup keys
         this.onKeyChanged();
@@ -278,6 +291,7 @@ class MiniCalc extends Applet.TextIconApplet {
     updateExpression(newInput) {
         this.widgets.input.set_text(newInput);
         this.updateResult(newInput);
+        this.widgets.input.grab_key_focus();
     }
 
     appendExpression(newInput) {
