@@ -1,4 +1,6 @@
 const Applet = imports.ui.applet;
+const Settings = imports.ui.settings;
+const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -68,6 +70,10 @@ class MiniCalc extends Applet.TextIconApplet {
         this.historyExpanded = false;
         this.currentResult = "";
 
+        this.opt = {
+            keyToggle: 'Calculator::<Primary><Alt><Super>c',
+        }
+
         // applet setup
 
         this.set_applet_icon_symbolic_path('');
@@ -80,6 +86,10 @@ class MiniCalc extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
 
         // todo register keyboard shortcut #### and make it configurable!
+
+        // setup settings
+        this.settings = new Settings.AppletSettings(this.opt, metadata.uuid, instance_id);
+        this.setupSettings();
 
         this.buildLayout();
     }
@@ -99,11 +109,12 @@ class MiniCalc extends Applet.TextIconApplet {
         this.menu.addMenuItem(this.widgets.expressionItem);
         this.widgets.expressionBox = new St.BoxLayout({
             style_class: "expression-box",
-            vertical: true,
-            x_align: Clutter.ActorAlign.FILL,
-            x_expand: true
+            vertical: true
         })
-        this.widgets.expressionItem.addActor(this.widgets.expressionBox);
+        this.widgets.expressionItem.addActor(this.widgets.expressionBox, {
+            expand: true,
+            span: -1,
+        });
         this.buildExpression();
         this.updateExpression("1 + 2")
 
@@ -212,22 +223,49 @@ class MiniCalc extends Applet.TextIconApplet {
         this.buildHistory()
     }
 
+    toggleCalcUI() {
+        this.menu.toggle();
+        // todo set keyboard focus to input field! #####
+    }
+
+
+    // applet events
 
     on_applet_added_to_panel() {
         logInfo("MiniCalc: added to panel");
     }
 
-
     on_applet_clicked(/*event*/) {
-        this.menu.toggle();
+        this.toggleCalcUI();
     }
 
     on_applet_removed_from_panel() {
         logInfo("MiniCalc: removed from panel");
         // this.settings.finalize();
-        // Main.keybindingManager.removeHotKey("keyToggle");
+        Main.keybindingManager.removeHotKey("keyToggle");
     }
 
+    // settings & key binding
+
+    setupSettings() {
+        this.settings.bind("keyToggle", "keyToggle", () => this.onKeyChanged());
+
+        // and initially setup keys
+        this.onKeyChanged();
+    }
+
+    onKeyChanged() {
+        // Main.keybindingManager.addHotKey("must-be-unique-id", this.keybinding, Lang.bind(this, this.on_hotkey_triggered));
+        logInfo("toggle key changed to '", this.opt.keyToggle + "' - ", typeof this.opt.keyToggle);
+
+        Main.keybindingManager.addHotKey("keyToggle", this.opt.keyToggle, (/*event*/) => {
+            // logInfo("toggle key pressed '", this.opt.keyToggle + "' - ", typeof this.opt.keyToggle);
+            this.toggleCalcUI();
+        });
+    }
+
+
+    // calculator functions
 
     handleKeyPress(event, input) {
         const result = this.updateResult(input);

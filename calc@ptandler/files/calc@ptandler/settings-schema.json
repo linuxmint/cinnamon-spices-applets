@@ -1,0 +1,7 @@
+{
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "Show / hide mini calculator",
+    "default": "Calculator::<Primary><Alt><Super>c"
+  }
+}

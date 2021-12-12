@@ -2,6 +2,8 @@
 
 Very simple and minimalistic but yet quite powerful calculator that evaluates [JavaScript expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators). The complete power of JS directly at your hand! ;-)
 
+You can define a global keyboard shortcut to open / close the calc's popup. The default is the <kbd>Calculator</kbd> key (for those keyboard that have it) and <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>. You can chane these key in the applet's settings (e.g. right-click on the icon).
+
 Original repository: [https://github.com/ptandler/cinnamon-spices-applets](https://github.com/ptandler/cinnamon-spices-applets/tree/calc%40ptandler/calc%40ptandler)
 
 This is actually the new version of the [Mini-Calc _desklet_](https://github.com/ptandler/cinnamon-spices-desklets/tree/calc%40ptandler/calc%40ptandler). As getting the keyboard focus is a bit tricky for a desklet, I decided to go for an applet.
@@ -36,6 +38,7 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [ ] automatically set the keyboard focus as soon as the mini-calc is shown (e.g. click on icon)
 - [ ] add scrollbar to historyBox if it gets longer _(how does this work with St?)_ I might want to use a sub menu as well?
 - [ ] make max number of history entries configurable & ensure not to store more entries in the list
+- [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window so it's easier to switch to another window etc!??!
 - [ ] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats!
 - [ ] add button and keyboard shortcut for "copy value to **clipboard**"
 - [ ] add icon to open message box for documentation and introduction that **explains some JS expression syntax** (e.g. the examples above)
@@ -49,9 +52,10 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## Changelog
 
-### version 0.3, xxx
+### version 0.3, 2021-12-12
 
-- migrated the desklet to an applet, hope that's more convenient w.r.t. getting the keyboard focus
+- [x] migrated the desklet to an applet, hope that's more convenient w.r.t. getting the keyboard focus
+- [x] add keyboard shortcut to open / close calc's popup.
 
 ### version 0.2, 2021-12-08
 
@@ -83,12 +87,12 @@ Kind of useful Documentation:
 ### Cinnamon
 
 - source can be directly put in .local/share/cinnamon/uuid (where `uuid` is the UUID of you desklet)
-- use `Cinnamon Looking Glass` ("Melange") to
+- use `Cinnamon Looking Glass` ("Melange") to (see also https://stackoverflow.com/questions/14025722/how-to-debug-cinnamon-applet)
     - reload code after changes!! (tab "Extension")
-    - see log messages
-- I had to restart Cinnamon in order to get the CSS reloaded, not sure if there is another possibility.
+    - see log messages in Looking Glass, `~/.xsession-errors` and `~/.cinnamon/glass.log`
+- I had to restart Cinnamon in order to get the CSS reloaded, not sure if there is another possibility. Sometimes, CSS seems to get updated when I relaod via Looking Glass.
 - The directory of the desklets listed on https://cinnamon-spices.linuxmint.com/ is based on https://github.com/linuxmint/cinnamon-spices-desklets
-- The [scollin's developer's tools desklet](https://cinnamon-spices.linuxmint.com/desklets/view/17) is quite helpful!
+- The [scollin's developer's tools desklet](https://cinnamon-spices.linuxmint.com/desklets/view/17) is quite helpful e.g. an easy way to restart cinnamon, reload themes, open Looking Glass and more.
 - CJS in GitHub https://github.com/linuxmint/cjs including [docs](https://github.com/linuxmint/cjs/blob/master/doc/Home.md) and [examples](https://github.com/linuxmint/cjs/tree/master/examples)
 
 #### Documentation:
