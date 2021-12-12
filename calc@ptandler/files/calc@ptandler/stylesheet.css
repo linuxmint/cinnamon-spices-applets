@@ -5,6 +5,21 @@
     padding: 8px;
 }
 
+.header {
+    font-size: 1.1em;
+    font-weight: bolder;
+}
+
+.header-smaller {
+    font-size: 0.9em;
+}
+
+.help-button {
+    font-size: 0.9em;
+    border: lightgrey 2px solid;
+    border-radius: 1em;
+}
+
 .expression-box {
     background-color: lightslategray;
     color: black;
@@ -12,9 +27,12 @@
     padding: 4px;
 }
 
-.collapse-expand-button {
-    color: gray;
-    font-style: italic;
+.input {
+    font-weight: normal;
+}
+
+.result {
+    font-weight: bold;
 }
 
 .history-separator {
@@ -22,11 +40,11 @@
     padding: 0;
 }
 
-.history-input {
+.history.input {
     margin-bottom: 0;
     padding-bottom: 0;
 }
-.history-result {
+.history.result {
     margin-top: 0;
     padding-top: 0;
 }

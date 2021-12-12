@@ -2,8 +2,11 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
+const ModalDialog = imports.ui.modalDialog;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
+
+const helpText = require("./helpText.js").helpText;
 
 const ICON = "icon.svg";
 
@@ -21,6 +24,7 @@ function logInfo(...data) {
     global.log(formatLog(...data));
 }
 
+/*
 function logWarn(...data) {
     global.logWarning(formatLog(...data));
 }
@@ -28,6 +32,7 @@ function logWarn(...data) {
 function logError(...data) {
     global.logError(formatLog(...data));
 }
+*/
 
 class EvalError {
     constructor(message) {
@@ -102,19 +107,25 @@ class MiniCalc extends Applet.IconApplet {
 
         this.widgets.headerItem = new PopupMenu.PopupBaseMenuItem({reactive: false});
         this.menu.addMenuItem(this.widgets.headerItem);
-        this.widgets.headerItem.addActor(new St.Label({text: "Mini-Calc _ V" + this.metadata.version}));
-
-        // this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.widgets.headerItem.addActor(new St.Label({text: "Mini-Calc", style_class: "header"}), {
+            span: 0, expand: false
+        });
+        this.widgets.headerItem.addActor(new St.Label({
+            text: this.metadata.version, style_class: "header-smaller"
+        }), {span: 0, expand: false});
+        this.widgets.helpDialogButton = new St.Button({label: "  ?  ", style_class: "help-button"});
+        this.widgets.helpDialogButton.connect("clicked", (/*widget, event*/) => {
+            this.showHelpDialog();
+        });
+        this.widgets.headerItem.addActor(this.widgets.helpDialogButton, {span: -1, expand: false, align: St.Align.END});
 
         this.widgets.expressionItem = new PopupMenu.PopupBaseMenuItem({reactive: false, focusOnHover: true});
         this.menu.addMenuItem(this.widgets.expressionItem);
         this.widgets.expressionBox = new St.BoxLayout({
-            style_class: "expression-box",
-            vertical: true
+            style_class: "expression-box", vertical: true
         })
         this.widgets.expressionItem.addActor(this.widgets.expressionBox, {
-            expand: true,
-            span: -1,
+            expand: true, span: -1,
         });
         this.buildExpression();
         this.updateExpression("1 + 2")
@@ -129,7 +140,7 @@ class MiniCalc extends Applet.IconApplet {
     }
 
     buildExpression() {
-        this.widgets.input = new St.Entry();
+        this.widgets.input = new St.Entry({ style_class: "current input" });
         this.widgets.input.connect('key-release-event', (widget, event) => {
             const input = widget.get_text();
             this.handleKeyPress(event, input);
@@ -137,7 +148,7 @@ class MiniCalc extends Applet.IconApplet {
         });
         this.widgets.expressionBox.add_actor(this.widgets.input);
 
-        this.widgets.result = new St.Label();
+        this.widgets.result = new St.Label({ style_class: "current result" });
         this.widgets.resultButton = new St.Button({});
         this.widgets.resultButton.set_child(this.widgets.result);
         this.widgets.resultButton.connect("clicked", (/*widget, event*/) => {
@@ -188,14 +199,12 @@ class MiniCalc extends Applet.IconApplet {
             menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem({style_class: "history-separator"}));
         }
 
-        this.addMenuItemWithCallback(menu, item.input, "history-input",
-            (/*widget, event*/) => {
+        this.addMenuItemWithCallback(menu, item.input, "history input", (/*widget, event*/) => {
             this.appendExpression(item.input);
             return true; // event has been handled
         });
 
-        this.addMenuItemWithCallback(menu, "= " + item.result, "history-result",
-            (/*widget, event*/) => {
+        this.addMenuItemWithCallback(menu, "= " + item.result, "history result", (/*widget, event*/) => {
             this.appendExpression(item.result);
             return true; // event has been handled
         });
@@ -236,6 +245,10 @@ class MiniCalc extends Applet.IconApplet {
         this.menu.toggle();
         // set keyboard focus to input field to be able to immediately start typing
         this.widgets.input.grab_key_focus();
+    }
+
+    showHelpDialog() {
+        new ModalDialog.NotifyDialog(helpText).open();
     }
 
 

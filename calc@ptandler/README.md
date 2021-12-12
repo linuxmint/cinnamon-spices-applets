@@ -37,14 +37,16 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## ToDo: Ideas for Further Development
 
-- [ ] add option to clear history (e.g. in right-click context menu)
+- [ ] fix selection text color to be somehow readable
+- [ ] add action to clear history in right-click context menu
+- [ ] add action to clear history via Ctrl-Esc
+- [ ] add action to open help dialog via Ctrl-? or F1
 - [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window, so it's easier to switch to another window etc!??!
 - [ ] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats!
 - [ ] add button and keyboard shortcut for "copy value to **clipboard**"
-- [ ] add icon to open message box for documentation and introduction that **explains some JS expression syntax** (e.g. the examples above)
 - [ ] add **translations** (i18n)
 - [ ] add keyboard shortcuts to show / hide history (e.g. Ctrl H)
-- [ ] add keyboard shortcuts to navigate in history (e.g. Ctrl arrow up / down) - should also show history if hidden (is this possible with a popup menu?)
+- [ ] add keyboard shortcuts to navigate in history (e.g. Ctrl or Alt arrow up / down) - in fact this works somehow in the popup menu already. Not 100% nice though.
 - [ ] add option to make history persistent and save it to some sensible place (where? settings?)
 - [ ] add option to turn off to use `JSON.stringify()` to display results
 - [ ] add option for expressions executed at startup in order to define custom functions and variables
@@ -57,6 +59,7 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [x] automatically set the keyboard focus as soon as the mini-calc is shown (e.g. click on icon)
 - [x] make max number of history entries configurable & ensure not to store more entries in the list
 - [x] add scrollbar to historyBox if it gets longer (menu might need to close / open once; PopupSubMenu automatically adds a `St.ScrollView`)
+- [x] add icon to open message box for documentation and introduction that **explains some JS expression syntax** (e.g. the examples above)
 
 ### version 0.3, 2021-12-12
 
@@ -75,6 +78,8 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 ## Development Hints
 
 This is the first ~~desklet~~ applet and also first Gnome app I developed. It was a bit tricky for me to find helpful documentation. Here some things that were helpful for me.
+
+A good starting point is to install the official dev documentation offline via `sudo apt install cinnamon-doc`. [This adds the Devhelp program in the "Programming" category of your menu and it has reference manuals for Cinnamon components and for libraries it uses](https://forums.linuxmint.com/viewtopic.php?p=2013949).
 
 You might also want to check [my question about introduction documentation at StackOverflow](https://stackoverflow.com/questions/69312633/introduction-in-developing-cinnamon-shell-extension-desklet-in-cjs-gjs-gnom).
 
