@@ -68,7 +68,7 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## Development Hints
 
-This is the first desklet and also first Gnome app I developed. It was a bit tricky for me to find helpful documentation. Here some things that were helpful for me.
+This is the first ~~desklet~~ applet and also first Gnome app I developed. It was a bit tricky for me to find helpful documentation. Here some things that were helpful for me.
 
 You might also want to check [my question about introduction documentation at StackOverflow](https://stackoverflow.com/questions/69312633/introduction-in-developing-cinnamon-shell-extension-desklet-in-cjs-gjs-gnom).
 
