@@ -54,7 +54,7 @@ export class WeatherLoop {
 		}
 	};
 
-	public DoCheck = async () => {
+	private DoCheck = async () => {
 		// We are in the middle of an update, just skip
 		if (this.updating)
 			return;
@@ -62,13 +62,14 @@ export class WeatherLoop {
 		try {
 			this.updating = true;
 			if (this.app.encounteredError == true) this.IncrementErrorCount();
-			this.ValidateLastUpdate();
+			this.ValidateLastUpdateTime();
 
 			if (this.pauseRefresh) {
 				Logger.Debug("Configuration error, updating paused")
 				return;
 			}
 
+			// Last pass had errors or it's time to update
 			if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
 				Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
@@ -142,7 +143,14 @@ export class WeatherLoop {
 		return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
 	}
 
-	private ValidateLastUpdate(): void {
+	/**
+	 * On timezone changes for the system it can occur that the lastUpdated timestamp
+	 * moves to the future (when switching back an hour on DST boundary).
+	 * 
+	 * In that case we invalidate the timestamp because it's not trustworthy.
+	 * Keeping it would mean there is a chance we don't update for an hour or more. 
+	 */
+	private ValidateLastUpdateTime(): void {
 		// System time was probably changed back, reset lastUpdated value
 		if (this.lastUpdated > new Date()) this.lastUpdated = new Date(0);
 	}

@@ -9926,7 +9926,7 @@ class WeatherLoop {
                 this.updating = true;
                 if (this.app.encounteredError == true)
                     this.IncrementErrorCount();
-                this.ValidateLastUpdate();
+                this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration error, updating paused");
                     return;
@@ -10012,7 +10012,7 @@ class WeatherLoop {
     NextUpdate() {
         return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
     }
-    ValidateLastUpdate() {
+    ValidateLastUpdateTime() {
         if (this.lastUpdated > new Date())
             this.lastUpdated = new Date(0);
     }
