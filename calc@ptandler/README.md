@@ -54,7 +54,7 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## Changelog
 
-### version 0.4, xxx
+### version 0.4, 2021-12-12
 
 - [x] automatically set the keyboard focus as soon as the mini-calc is shown (e.g. click on icon)
 - [x] make max number of history entries configurable & ensure not to store more entries in the list
