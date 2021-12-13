@@ -215,7 +215,7 @@ class CategoryButton {
         if (this.disabled) {
             return Clutter.EVENT_STOP;
         }
-        
+
         const button = event.get_button();
         if (button === 1 && this.appThis.settings.categoryClick) {
             this.selectCategory();
@@ -420,6 +420,7 @@ class ContextMenu {
             this.contextMenuButtons.push(item);
         };
 
+        //Run with NVIDIA GPU
         if (this.appThis.gpu_offload_supported) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
                                 () => { try {
@@ -434,6 +435,7 @@ class ContextMenu {
                                         this.appThis.closeMenu(); } ));
         }
 
+        //Add to panel
         addMenuItem( new ContextMenuItem(this.appThis, _('Add to panel'), 'list-add',
             () => {
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
@@ -449,6 +451,7 @@ class ContextMenu {
                 }
                 this.close(); } ));
 
+        //Add to desktop
         const userDesktopPath = getUserDesktopDir();
         if (userDesktopPath) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
@@ -463,6 +466,7 @@ class ContextMenu {
                         this.close(); } ));
         }
 
+        //add/remove favorite
         if (this.appThis.appFavorites.isFavorite(app.id)) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                             () => { this.appThis.appFavorites.removeFavorite(app.id);
@@ -473,9 +477,10 @@ class ContextMenu {
                                                 this.close(); } ));
         }
 
+        //uninstall
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
-                                () => { spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
+                                () => { spawnCommandLine(__meta.path + "/mint-remove-application.py '" +
                                             app.get_app_info().get_filename() + "'");
                                         this.appThis.closeMenu(); } ));
         }

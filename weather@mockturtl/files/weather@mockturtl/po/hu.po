@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-19 21:37+0100\n"
-"PO-Revision-Date: 2021-11-07 20:01+0100\n"
+"PO-Revision-Date: 2021-12-06 13:30+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -1449,7 +1449,7 @@ msgstr "Nagyon jó"
 
 #: 3.8/weather-applet.js:10653
 msgid "Dew Point"
-msgstr ""
+msgstr "Harmatpont"
 
 #: 3.8/weather-applet.js:10779
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -1939,6 +1939,10 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
+"Lehetséges értékek: {c} = időjárási viszony, {t} = hőmérséklet {u} = "
+"mértékegység.\n"
+"Akkor használható, ha a címke nem fér el a függőleges panelen, vagy egyéb "
+"esetekben is."
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
@@ -2120,6 +2124,13 @@ msgid ""
 "The options are described in detail on the Cinnamon Spices Website which you "
 "can access with the button on the Help tab."
 msgstr ""
+"Számtalan időjárás-előrejelzési szolgáltató adatait használhatja. Néhány "
+"szolgáltató adatainak használatához  API-kulcs szükséges, néhánynál területi "
+"korlátozás van érvényben. Az előrejelzések eltérnek a szolgáltatott "
+"előrejelzés hosszában, és mindegyikhez működő internet-kapcsolatra van "
+"szükség. A lehetséges beállítások a Cinnamon Spices weboldalon részletesen "
+"bemutatásra kerülnek, amelyet könnyen elérhet a Súgó lapon található gombra "
+"kattintva."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -2145,6 +2156,13 @@ msgid ""
 "the format. After 3 seconds without typing the address you entered is "
 "replaced automatically for validating your choice."
 msgstr ""
+"Megadhatja a koordinátákat „szélesség,hosszúság” formátumban (például: "
+"51.5085,-0.1257) vagy használhatja a „Város,Országkód” formátumot (például: "
+"„Tárnok,HU”, illetve kipróbálhatja a cím megadását is „{Házszám} "
+"{Közterület} {Település} {Irányítószám} {Ország}” formátumban. A megadás "
+"formáját tekintve a keresőalgoritmus nagyon rugalmas. Három másodperc "
+"gépelés nélküli várakozással töltött idő után behelyettesítésre kerül a "
+"találat."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2189,13 +2207,15 @@ msgstr "Hőmérséklet megjelenítése mindkét mértékegységben"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "Mindig jelenjen meg az óránkénti előrejelzés"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
 "Hide/Show button will be hidden and Hourly weather will be permanently "
 "visible."
 msgstr ""
+"Az elrejtés/megjelenítés gomb el lesz rejtve és az óránkénti előrejelzés "
+"lesz látható."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -2212,6 +2232,8 @@ msgid ""
 "You have to make sure the Search entry field is unique and your Timezone is "
 "in the IANA time zone format (e.g. 'Europe/London')"
 msgstr ""
+"Bizonyosodjon meg róla, hogy a Keresési mező egyedi értéket tartalmaz és az "
+"időzóna az IANA időzóna-formátumnak megfelelő (példul: „Europe/Budapest)”."
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"

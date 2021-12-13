@@ -400,11 +400,11 @@ OctoPussy.prototype = {
 	},
 
 	openCamera: function() {
-		Main.Util.spawnCommandLine(this.video_cmd.replace("%s", OCTOPRINT_URL + "webcam/?action=stream"));
+		Main.Util.spawnCommandLine(this.video_cmd.replace("%s", this.octoprint_url + "webcam/?action=stream"));
 	},
 
 	openOctoPrint: function() {
-		Main.Util.spawnCommandLine("xdg-open " + OCTOPRINT_URL);
+		Main.Util.spawnCommandLine("xdg-open " + this.octoprint_url);
 	},
 
 	openConfiguration: function() {

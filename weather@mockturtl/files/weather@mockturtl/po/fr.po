@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-14 18:50+0000\n"
-"PO-Revision-Date: 2021-11-17 15:02+0100\n"
+"PO-Revision-Date: 2021-12-11 12:28+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1758,7 +1758,6 @@ msgstr "DarkSky (clé requise)"
 msgid "Weatherbit (key needed)"
 msgstr "WeatherBit (clé requise)"
 
-# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
 msgstr "Yahoo!"
@@ -2065,7 +2064,7 @@ msgstr "Afficher uniquement les heures pour les prévisions horaires"
 # Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
-msgstr "Au lieu de 15:00 ou 3 pm, apparaîtra comme 15 ou 3 pm."
+msgstr ""
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
@@ -2335,9 +2334,10 @@ msgstr "Afficher la direction du vent sous forme de texte"
 msgid "Like SE, N instead of direction icons."
 msgstr "Comme SE, N au lieu d'icônes de direction."
 
+# Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
-msgstr "Au lieu de 15:00 ou 3:00 pm, apparaîtra comme 15 ou 3 pm"
+msgstr "Au lieu de 15:00 ou 3:00 pm, apparaîtra comme 15 ou 3 pm."
 
 # Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip

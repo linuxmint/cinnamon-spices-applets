@@ -117,7 +117,7 @@ msgstr "Menu"
 
 #: 3.4/applet.js:3469 2.6/applet.js:3359 3.2/applet.js:3513
 msgid "No recent documents"
-msgstr "Brak ostatnio używanych dokumantów"
+msgstr "Brak ostatnio używanych dokumentów"
 
 #: 3.4/applet.js:3849 2.6/applet.js:3670 3.2/applet.js:3899
 msgid "Type to search..."
@@ -177,7 +177,7 @@ msgstr "Muzyka"
 
 #: 3.2/applet.js:2054
 msgid "nemo Music"
-msgstr "Obrazy"
+msgstr "Muzyka nemo"
 
 #: 3.2/applet.js:2055
 msgid "Videos"
@@ -389,7 +389,7 @@ msgstr "Wpisz własny tekst przycisku 'Ulubione'."
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application's description under their titles"
-msgstr "Pokaż opisy aplikacji ich tytułami"
+msgstr "Pokaż opisy aplikacji pod ich tytułami"
 
 #. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 4.2->settings-schema.json->show-apps-description-on-buttons->tooltip
