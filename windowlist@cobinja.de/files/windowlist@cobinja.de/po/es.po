@@ -45,7 +45,7 @@ msgstr "Anclar a esta área de trabajo"
 
 #: 3.2/applet.js:1327 4.0/applet.js:1434
 msgid "Pin to other workspaces"
-msgstr "Anclaje a otras áreas de trabajo"
+msgstr "Anclar a otras áreas de trabajo"
 
 #: 3.2/applet.js:1359 4.0/applet.js:1507
 msgid "Only on this workspace"
@@ -57,7 +57,7 @@ msgstr "Visible en todas las áreas de trabajo"
 
 #: 3.2/applet.js:1364 4.0/applet.js:1511
 msgid "Move to another workspace"
-msgstr "Move to another workspace"
+msgstr "Mover a otra área de trabajo"
 
 #: 3.2/applet.js:1384 4.0/applet.js:1530
 msgid "Move to another monitor"
@@ -148,7 +148,7 @@ msgstr "Ventana enfocada"
 #. 3.2->settings-schema.json->display-caption-for->description
 #. 4.0->settings-schema.json->display-caption-for->description
 msgid "Display Caption For"
-msgstr "Mostrar el etiqueta para"
+msgstr "Mostrar etiqueta para"
 
 #. 3.2->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->label-width->units
