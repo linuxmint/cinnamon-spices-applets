@@ -480,7 +480,7 @@ class ContextMenu {
         //uninstall
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
-                                () => { spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
+                                () => { spawnCommandLine(__meta.path + "/mint-remove-application.py '" +
                                             app.get_app_info().get_filename() + "'");
                                         this.appThis.closeMenu(); } ));
         }
