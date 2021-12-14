@@ -1,3 +1,4 @@
+
 const helpText = "Help: Some Example Expressions\n" +
     "\n" +
     "- `1 + 2` = `3`\n" +
@@ -22,4 +23,14 @@ const helpText = "Help: Some Example Expressions\n" +
     "    - `fib = (n) => n <= 0 ? 0 : (n <= 1 ? 1 : (fib(n - 1) + fib(n - 2))), fib(7)` = `13`\n" +
     "      CAUTION: Be careful with recursive functions, I'm not sure if there is a timeout for the evaluation of the expression and if it's quite long.\n" +
     "               So you can crash your desktop if evaluation hangs ... believe me, I tried ;-)\n" +
-    "- You can use all **builtin JavaScript** functions and global objects (available in GJS / CJS), such as `JSON.stringify`\n";
+    "- You can use all **builtin JavaScript** functions and global objects (available in GJS / CJS), such as `JSON.stringify`\n" +
+    "\n" +
+    "Global Keyboard Shortcut:\n" +
+    "\n" +
+    "- <kbd>Calculator</kbd> or <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd> - Show / hide Mini-Calc\n" +
+    "\n" +
+    "Keyboard Shortcuts in input field:\n" +
+    "\n" +
+    "- <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>Del</kbd> - Clear expression history\n" +
+    "- <kbd>Ctrl</kbd>-<kbd>h</kbd> - Show / hide history submenu\n" +
+    "- <kbd>Ctrl</kbd>-<kbd>?</kbd> or <kbd>F1</kbd> - Show help dialog\n";

@@ -2,9 +2,19 @@
 
 Very simple and minimalistic but yet quite powerful calculator that evaluates [JavaScript expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators). The complete power of JS directly at your hand! ;-)
 
+## Keyboard Shortcuts
+
 You can define a global keyboard shortcut to open / close the calc's popup. The default is the <kbd>Calculator</kbd> key (for those keyboard that have it) and <kbd>Ctrl</kbd>+<kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd>. You can chane these key in the applet's settings (e.g. right-click on the icon).
 
 INFO: You might need to remove an existing key binding for the <kbd>Calculator</kbd> key to the system calculator app in order to use it for Mini-Calc.
+
+Keyboard Shortcuts in input field:
+
+- <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>Del</kbd> - Clear expression history
+- <kbd>Ctrl</kbd>-<kbd>h</kbd> - Show / hide history submenu
+- <kbd>Ctrl</kbd>-<kbd>?</kbd> or <kbd>F1</kbd> - Show help dialog
+
+## Source & Bugreports
 
 Original repository: [https://github.com/ptandler/cinnamon-spices-applets](https://github.com/ptandler/cinnamon-spices-applets/tree/calc%40ptandler/calc%40ptandler)
 
@@ -39,13 +49,11 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 - [ ] fix selection text color to be somehow readable
 - [ ] add action to clear history in right-click context menu
-- [ ] add action to clear history via Ctrl-Esc
 - [ ] add action to open help dialog via Ctrl-? or F1
 - [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window, so it's easier to switch to another window etc!??!
 - [ ] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats!
 - [ ] add button and keyboard shortcut for "copy value to **clipboard**"
 - [ ] add **translations** (i18n)
-- [ ] add keyboard shortcuts to show / hide history (e.g. Ctrl H)
 - [ ] add keyboard shortcuts to navigate in history (e.g. Ctrl or Alt arrow up / down) - in fact this works somehow in the popup menu already. Not 100% nice though.
 - [ ] add option to make history persistent and save it to some sensible place (where? settings?)
 - [ ] add option to turn off to use `JSON.stringify()` to display results
@@ -53,6 +61,13 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [ ] option to show the last result as applet text next to the icon
 
 ## Changelog
+
+### version 0.5, xxxx
+
+- [x] add action to clear history via Ctrl-Shift-Del
+- [x] add keyboard shortcuts to show / hide history (Ctrl-h and Ctrl-Shift-H)
+- [x] add keyboard shortcuts to show help dialog (F1 and Ctrl-?)
+
 
 ### version 0.4, 2021-12-12
 

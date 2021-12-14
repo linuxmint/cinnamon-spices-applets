@@ -140,7 +140,7 @@ class MiniCalc extends Applet.IconApplet {
     }
 
     buildExpression() {
-        this.widgets.input = new St.Entry({ style_class: "current input" });
+        this.widgets.input = new St.Entry({style_class: "current input"});
         this.widgets.input.connect('key-release-event', (widget, event) => {
             const input = widget.get_text();
             this.handleKeyPress(event, input);
@@ -148,7 +148,7 @@ class MiniCalc extends Applet.IconApplet {
         });
         this.widgets.expressionBox.add_actor(this.widgets.input);
 
-        this.widgets.result = new St.Label({ style_class: "current result" });
+        this.widgets.result = new St.Label({style_class: "current result"});
         this.widgets.resultButton = new St.Button({});
         this.widgets.resultButton.set_child(this.widgets.result);
         this.widgets.resultButton.connect("clicked", (/*widget, event*/) => {
@@ -234,12 +234,16 @@ class MiniCalc extends Applet.IconApplet {
         this.buildHistory();
     }
 
-    /*
-        toggleHistoryExpanded() {
-            this.historyExpanded = !this.historyExpanded
-            this.buildHistory()
-        }
-    */
+    clearHistory() {
+        this.history = [];
+        this.buildHistory();
+    }
+
+    toggleHistoryExpanded() {
+        this.widgets.historySubMenu.menu.toggle();
+        // this.buildHistory()
+    }
+
 
     toggleCalcUI() {
         this.menu.toggle();
@@ -295,9 +299,33 @@ class MiniCalc extends Applet.IconApplet {
     handleKeyPress(event, input) {
         const result = this.updateResult(input);
         const keySymbol = event.get_key_symbol();
-        if (keySymbol === Clutter.Return || keySymbol === Clutter.KP_Enter) {
-            this.pushToHistory(input, result);
-            this.updateExpression(result);
+        // logInfo("keySymbol = ", keySymbol, " control = ", event.has_control_modifier());
+        switch (keySymbol) {
+            case Clutter.Return:
+            case Clutter.KP_Enter:
+                this.pushToHistory(input, result);
+                this.updateExpression(result);
+                break;
+            case Clutter.KEY_Delete:
+            case Clutter.KEY_KP_Delete:
+                if (event.has_control_modifier() && event.has_shift_modifier()) {
+                    this.clearHistory();
+                }
+                break;
+            case Clutter.KEY_H:
+            case Clutter.KEY_h:
+                if (event.has_control_modifier()) {
+                    this.toggleHistoryExpanded();
+                }
+                break;
+            case Clutter.KEY_question:
+                if (event.has_control_modifier()) {
+                    this.showHelpDialog();
+                }
+                break;
+            case Clutter.KEY_F1:
+                this.showHelpDialog();
+                break;
         }
     }
 
