@@ -35,6 +35,14 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
     - `random()` returns a pseudo-random number between 0 and 1.
     - Euler's constant: `E` = approx. `2.718`
     - `PI` = approx. `3.14159`
+- You can use decimal, hex, octal, or binary number constants, as provided by JavaScript: 17 === 0x11 === 021 === 0b10001
+  - Helper functions to convert a number to a hex / oct / bin _string_: `toHex(num)`, `toOct(num)`, `toBin(num)`,
+    e.g. `toHex(17)` = `"0x11"`, `toOct(0x11)` = `"021"`, `toBin(021)` = `"0b10001"`  
+  - Helper functions to convert a hex / oct / bin _string_ to a number: `fromHex(str)`, `fromOct(str)`, `fromBin(str)`  
+    Note that the strings may (but don't need to) start with `0x` / `0` / `0b`    
+    e.g. `fromHex("0x11")` = `17`, `fromHex("11")` = `17`,  `fromOct("021")` = `17`, `fromBin("0b10001")` = `17`,  
+    the argument is converted to a string before: `fromHex("11")` = `17` _this might be confusing!_ 
+    For example `fromOct(021)` = `15` because `021` is converted by JS to the number `17` and this is interpreted as the string `"017"` (and oct `017` == `15`). 
 - You can define **variables**; this expression will return the assigned value. The variables will keep their value until the desklet is restarted:
     - `a=2` = `2`
 - You can use the **comma `,` operator** to evaluate several expressions and return just the value of the last one. Can be used to define variables:
@@ -47,23 +55,25 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## ToDo: Ideas for Further Development
 
-- [ ] fix selection text color to be somehow readable
 - [ ] add action to clear history in right-click context menu
-- [ ] add action to open help dialog via Ctrl-? or F1
+- [ ] idea: move help dialog to applet settings dialog as a new panel. Can this contain formatting? Or is there another and yet simple way? Ideally with MarkDown support?
 - [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window, so it's easier to switch to another window etc!??!
 - [ ] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats!
 - [ ] add button and keyboard shortcut for "copy value to **clipboard**"
 - [ ] add **translations** (i18n)
 - [ ] add keyboard shortcuts to navigate in history (e.g. Ctrl or Alt arrow up / down) - in fact this works somehow in the popup menu already. Not 100% nice though.
 - [ ] add option to make history persistent and save it to some sensible place (where? settings?)
-- [ ] add option to turn off to use `JSON.stringify()` to display results
+- [ ] add option to turn off to use `JSON.stringify()` to display results (mainly to string quotes around strings)
 - [ ] add option for expressions executed at startup in order to define custom functions and variables
-- [ ] option to show the last result as applet text next to the icon
+- [ ] option to show the last result as applet text next to the icon (well, only the first up to x chars)
 
 ## Changelog
 
-### version 0.5, xxxx
+### version 1.0, xxxx
 
+New
+
+- [x] add builtin functions to display numbers as hex, binary, or octal
 - [x] add action to clear history via Ctrl-Shift-Del
 - [x] add keyboard shortcuts to show / hide history (Ctrl-h and Ctrl-Shift-H)
 - [x] add keyboard shortcuts to show help dialog (F1 and Ctrl-?)

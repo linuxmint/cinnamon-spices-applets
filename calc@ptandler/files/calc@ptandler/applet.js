@@ -50,7 +50,14 @@ class EvalError {
  */
 function evalExpression(input) {
     try {
+        // todo to speed up a wee bit: clone the Math object and add these functions to the clone
         const helper_functions =
+            "var toHex = (num) => '0x' + Number(num).toString(16);" +
+            "var toOct = (num) => '0' + Number(num).toString(8);" +
+            "var toBin = (num) => '0b' + Number(num).toString(2);" +
+            "var fromHex = (str) => parseInt(String(str).replace(/^0x/i, ''), 16);" +
+            "var fromOct = (str) => parseInt(String(str).replace(/^0/, ''), 8);" +
+            "var fromBin = (str) => parseInt(String(str).replace(/^0b/i, ''), 2);" +
             "var degToRad = (degrees) => degrees * (Math.PI / 180);" +
             "var radToDeg = (rad) => rad / (Math.PI / 180);"
         const result = Function(helper_functions + "with (Math) return " + input)();
@@ -357,6 +364,7 @@ class MiniCalc extends Applet.IconApplet {
     }
 }
 
+// noinspection JSUnusedLocalSymbols
 function main(metadata, orientation, panel_height, instance_id) {
     return new MiniCalc(metadata, orientation, panel_height, instance_id);
 }
