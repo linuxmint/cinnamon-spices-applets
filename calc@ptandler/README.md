@@ -69,7 +69,7 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## Changelog
 
-### version 1.0, xxxx
+### version 1.0, 2021-12-14
 
 New
 
