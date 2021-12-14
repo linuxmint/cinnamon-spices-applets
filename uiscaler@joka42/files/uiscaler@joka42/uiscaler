@@ -5,14 +5,14 @@
 
 scaling_100 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.0
-	dconf write /org/cinnamon/panels-height "['1:32']"
-	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":24, \"center\":0, \"right\":16}]'"
+	dconf write /org/cinnamon/panels-height "['1:40']"
+	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":0, \"center\":0, \"right\":24}]'"
 	dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":18, \"center\":0, \"right\":16}]'"
 }
 
 scaling_125 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.25
-	dconf write /org/cinnamon/panels-height "['1:48']"
+	dconf write /org/cinnamon/panels-height "['1:50']"
 	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":34, \"center\":0, \"right\":22}]'"
     dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":26, \"center\":0, \"right\":22}]'"
 }
@@ -25,6 +25,7 @@ case $1 in
         exit
     ;;
     "125")
+        scaling_100
         scaling_125
         exit
     ;;
