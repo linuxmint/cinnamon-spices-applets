@@ -30,6 +30,9 @@
 .input {
     font-weight: normal;
 }
+.current.input {
+    selected-color: white;
+}
 
 .result {
     font-weight: bold;

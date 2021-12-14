@@ -68,6 +68,10 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [x] add keyboard shortcuts to show / hide history (Ctrl-h and Ctrl-Shift-H)
 - [x] add keyboard shortcuts to show help dialog (F1 and Ctrl-?)
 
+Fixed
+
+- [x] fix selection text color to be somehow readable
+
 
 ### version 0.4, 2021-12-12
 
