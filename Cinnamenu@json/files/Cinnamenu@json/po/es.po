@@ -5,15 +5,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-22 07:17+0100\n"
-"PO-Revision-Date: 2021-03-22 16:13+0000\n"
+"PO-Revision-Date: 2021-12-16 12:11-0300\n"
 "Last-Translator: Germán Franco\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Escribe para buscar..."
@@ -25,7 +25,7 @@ msgid "No description available"
 msgstr "Descripción no disponible"
 
 msgid "All applications"
-msgstr "Todas las apps"
+msgstr "Todas las aplicaciones"
 
 msgid "Places"
 msgstr "Lugares"
@@ -40,15 +40,13 @@ msgid "Favorite apps"
 msgstr "Aplicaciones favoritas"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
-"el paquete gir1.2-gda-5.0 es necesario para los marcadores de Firefox y "
-"Midori."
+msgstr "el paquete gir1.2-gda-5.0 es necesario para los marcadores de Firefox y Midori."
 
 msgid "Clear List"
 msgstr "Vaciar lista"
 
 msgid "No recent files"
-msgstr "No hay archivos recientes."
+msgstr "No hay archivos recientes"
 
 msgid "Account details"
 msgstr "Detalles de la cuenta"
@@ -84,7 +82,7 @@ msgid "Shutdown the computer"
 msgstr "Apaga el ordenador"
 
 msgid "Run with NVIDIA GPU"
-msgstr "Ejecutar con la GPU NVIDIA"
+msgstr "Ejecutar con la GPU de NVIDIA"
 
 msgid "Add to panel"
 msgstr "Añadir al panel"
@@ -132,7 +130,7 @@ msgid "Recent"
 msgstr "Reciente"
 
 msgid "Home folder"
-msgstr "Carpeta de inicio"
+msgstr "Directorio de inicio"
 
 msgid "Too many entries - showing first 1000 entries only"
 msgstr "Demasiadas entradas: solo se muestran las primeras 1000 entradas"
@@ -156,10 +154,10 @@ msgid "dark skin tone"
 msgstr "tono de piel oscuro"
 
 msgid "This file is no longer available"
-msgstr "este archivo no está disponible"
+msgstr "Este archivo no está disponible"
 
 msgid "Open with"
-msgstr "Abierta con"
+msgstr "Abrir con"
 
 msgid "Other application..."
 msgstr "Otra aplicación ..."
@@ -230,9 +228,7 @@ msgstr " - directorio ya buscado"
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
 msgstr "Un menú flexible con opciones de diseño de cuadrícula o lista, navegador de archivos y búsqueda de emojis."
 
 msgid "Behavior"
@@ -283,15 +279,12 @@ msgstr "Texto del panel"
 msgid "Text to show beside the panel icon"
 msgstr "Texto para mostrar al lado del icono del panel"
 
-#, fuzzy
 msgid "Category icon size (pixels)"
 msgstr "Tamaño de los iconos de las categorías"
 
-#, fuzzy
 msgid "Applications list icon size (pixels)"
 msgstr "Tamaño de icono de las aplicaciones de la lista"
 
-#, fuzzy
 msgid "Applications grid icon size (pixels)"
 msgstr "Tamaño de icono de las aplicaciones de la cuadrícula"
 
@@ -320,8 +313,7 @@ msgid "Activate categories on click"
 msgstr "Activar categorías con un click"
 
 msgid "Activate categories on click instead of on hover"
-msgstr ""
-"Active las categorías al hacer clic en lugar de al pasar el ratón por encima"
+msgstr "Active las categorías al hacer clic en lugar de al pasar el ratón por encima"
 
 msgid "Enable autoscrolling"
 msgstr "Habilitar desplazamiento automático"
@@ -346,12 +338,10 @@ msgid "Enable search providers"
 msgstr "Activar proveedores de búsqueda"
 
 msgid "Include search provider results in searches"
-msgstr ""
-"Elige si los resultados de los proveedores de búsqueda aparecerán listados "
-"en las búsquedas"
+msgstr "Elige si los resultados de los proveedores de búsqueda aparecerán listados en las búsquedas"
 
 msgid "Example Search Providers"
-msgstr "Proveedores de búsqueda de ejemplo"
+msgstr "Ejemplo de proveedor de búsqueda"
 
 msgid "Open menu on category:"
 msgstr "Abrir menú en categoría:"
@@ -395,7 +385,6 @@ msgstr "Retraso del cosejo"
 msgid "Use a custom menu height"
 msgstr "Usar altura del menú personalizada"
 
-#, fuzzy
 msgid "Custom menu height (pixels)"
 msgstr "Altura del menú personalizada"
 
@@ -406,39 +395,37 @@ msgid "View applications as list or grid"
 msgstr "Ver aplicaciones como lista o cuadrícula"
 
 msgid "Application description placement"
-msgstr "Ubicación de la descripción de la aplicación"
+msgstr "Manera de mostrar la descripción de la aplicación"
 
 msgid "Tooltips"
-msgstr "Consejos"
+msgstr "Al pasar el mouse sobre la aplicación"
 
 msgid "Under titles"
 msgstr "Bajo títulos"
 
 msgid "None"
-msgstr "Ninguna"
+msgstr "No mostrar"
 
 msgid "Choose where to show application descriptions"
 msgstr "Elija dónde mostrar las descripciones de las aplicaciones"
 
-#, fuzzy
 msgid "Sidebar location"
-msgstr "Opción de búsqueda web"
+msgstr "Ubicación de la barra lateral"
 
 msgid "Top"
-msgstr "Parte superior"
+msgstr "En la parte superior"
 
 msgid "Bottom"
-msgstr "Fondo"
+msgstr "En la parte inferior"
 
 msgid "Left"
-msgstr "Izquierdo"
+msgstr "Izquierda"
 
 msgid "Right"
 msgstr "Derecha"
 
-#, fuzzy
 msgid "Choose where to show the sidebar"
-msgstr "Elija dónde mostrar las descripciones de las aplicaciones"
+msgstr "Elija dónde mostrar la barra lateral"
 
 msgid ""
 "\n"
@@ -447,19 +434,15 @@ msgstr ""
 "\n"
 "Información/sugerencia: arrastre en el borde del menú para cambiar el tamaño del menú.\n"
 
-#, fuzzy
 msgid "Show favorites on sidebar"
-msgstr "Mostrar categoría de aplicaciones favoritas"
+msgstr "Mostrar categoría de aplicaciones favoritas en el menú"
 
-#, fuzzy
 msgid "Show your favorite app and file icons on the sidebar"
 msgstr "Muestra tu categoría de aplicaciones favoritas en el menú"
 
-#, fuzzy
 msgid "Show recent items"
 msgstr "Mostrar elementos recientes"
 
-#, fuzzy
 msgid "Show recent items category in the menu"
 msgstr "Mostrar categoría de elementos recientes en el menú"
 
@@ -487,7 +470,6 @@ msgstr "Mostrar archivos ocultos"
 msgid "Show hidden files in folder view"
 msgstr "Mostrar archivos ocultos en la vista de carpeta"
 
-#, fuzzy
 msgid "Emoji search"
 msgstr "Habilitar la búsqueda de emojis"
 
@@ -498,38 +480,31 @@ msgid "Web search option"
 msgstr "Opción de búsqueda web"
 
 msgid "Show an internet search option in search results"
-msgstr ""
-"Mostrar una opción de búsqueda en Internet en los resultados de búsqueda"
+msgstr "Mostrar una opción de búsqueda en Internet en los resultados de búsqueda"
 
 msgid "Search home folder"
 msgstr "Buscar carpeta de inicio"
 
-#, fuzzy
 msgid "When searching, also search my home folder for files"
 msgstr "Al buscar, también busque archivos en la carpeta de inicio"
 
-#, fuzzy
 msgid "Web bookmarks search"
-msgstr "Mostrar marcadores web"
+msgstr "Búsqueda de marcadores web"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions "
+"inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Al realizar una búsqueda, también busque en los marcadores web de mi navegador (Google Chrome, "
-"Firefox, Chromium, Opera, Brave)\n"
-"Nota: Para buscar los marcadores de Firefox necesitará instalar el paquete gir1.2-"
-"gda-5.0 (distribuciones basadas en Debian, incluyendo Ubuntu y Linux Mint) o el paquete "
-"libgda (distribuciones basadas en Arch) y reiniciar su ordenador."
-
+"Al realizar una búsqueda, también busque en los marcadores web de mi navegador (Google Chrome, Firefox, "
+"Chromium, Opera, Brave)\n"
+"Nota: Para buscar los marcadores de Firefox necesitará instalar el paquete gir1.2-gda-5.0 (distribuciones "
+"basadas en Debian, incluyendo Ubuntu y Linux Mint) o el paquete libgda (distribuciones basadas en Arch) y "
+"reiniciar su ordenador."
 
 msgid "Wikipedia search"
 msgstr "Búsqueda en Wikipedia"
 
-#, fuzzy
 msgid "Show some Wikipedia results"
 msgstr "Mostrar algunos resultados de Wikipedia"
 
@@ -542,9 +517,8 @@ msgstr "Utilice un tamaño de icono personalizado"
 msgid "Use a custom size for the panel icon"
 msgstr "Utilice un tamaño personalizado para el icono del panel"
 
-#, fuzzy
 msgid "Panel icon size (pixels)"
-msgstr "Tamaño del icono del panel"
+msgstr "Tamaño del icono del panel (pixeles)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Elija un tamaño personalizado para el icono del panel"
@@ -552,22 +526,18 @@ msgstr "Elija un tamaño personalizado para el icono del panel"
 msgid "Sidebar icon size (pixels)"
 msgstr "Tamaño del icono de la barra lateral"
 
-#, fuzzy
 msgid "Use sidebar box style"
 msgstr "Usar estilo de cuadro de botones de sesión"
 
-#, fuzzy
 msgid "Use a sidebar box style"
 msgstr "Usar estilo de cuadro de botones de sesión"
 
 msgid "Use tile style"
 msgstr "Usar estilo de mosaico"
 
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr "Utilice un estilo de mosaico para los botones de la aplicación (Nota: puede que no funcione en algunos"
-" temas)"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr ""
+"Utilice un estilo de mosaico para los botones de la aplicación (Nota: puede que no funcione en algunos temas)"
 
 #~ msgid "Solution:"
 #~ msgstr "Solución:"
@@ -576,11 +546,10 @@ msgstr "Utilice un estilo de mosaico para los botones de la aplicación (Nota: p
 #~ msgstr "Buscar en la web"
 
 #~ msgid ""
-#~ "A flexible menu providing formatting options, web bookmarks, search "
-#~ "provider support and fuzzy searching."
+#~ "A flexible menu providing formatting options, web bookmarks, search provider support and fuzzy searching."
 #~ msgstr ""
-#~ "Un menú flexible con opciones de formato, marcadores web, soporte para "
-#~ "proveedores de búsqueda y búsqueda difusa."
+#~ "Un menú flexible con opciones de formato, marcadores web, soporte para proveedores de búsqueda y búsqueda "
+#~ "difusa."
 
 #~ msgid "pixels"
 #~ msgstr "pixels"
@@ -589,16 +558,13 @@ msgstr "Utilice un estilo de mosaico para los botones de la aplicación (Nota: p
 #~ msgstr "Ubicación de botones de sesión"
 
 #~ msgid "Choose where to show the session buttons (quit, logout, etc.)"
-#~ msgstr ""
-#~ "Elija dónde mostrar los botones de sesión (salir, cerrar sesión, etc.)"
+#~ msgstr "Elija dónde mostrar los botones de sesión (salir, cerrar sesión, etc.)"
 
 #~ msgid "Add favorites to session buttons"
 #~ msgstr "Agregar favoritos a los botones de sesión"
 
 #~ msgid "Show your favorite app icons next to the session buttons"
-#~ msgstr ""
-#~ "Muestra los íconos de tus aplicaciones favoritas junto a los botones de "
-#~ "sesión"
+#~ msgstr "Muestra los íconos de tus aplicaciones favoritas junto a los botones de sesión"
 
 #~ msgid "Yahoo"
 #~ msgstr "Yahoo"
