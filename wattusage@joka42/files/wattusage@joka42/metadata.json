@@ -1,6 +1,0 @@
-{
-  "uuid": "wattusage@joka42",
-  "name": "Power Consumption Display",
-  "description": "Shows Power Consumption when in battery mode",
-  "cinnamon-version": ["3.6", "3.8", "4.0", "4.2", "4.4", "4.6", "5.0"]
-}
