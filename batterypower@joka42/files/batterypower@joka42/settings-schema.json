@@ -3,7 +3,7 @@
     "type": "switch",
     "default": true,
     "description": "Show unit",
-    "tooltip": "Whether or not show the unit after the temperature value."
+    "tooltip": "Show Watt symbol after the value."
   },
   "interval": {
     "type": "spinbutton",

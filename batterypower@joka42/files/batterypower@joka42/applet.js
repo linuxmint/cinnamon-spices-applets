@@ -44,11 +44,18 @@ BatteryPowerApplet.prototype = {
 		
 		this.set_applet_label(charging_indicator + value + unit_string);
 		
-		if (status == "Charging"){
-			this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
-		}
-		else {
-			this.set_applet_tooltip('Battery is discharging. Power drawn from battery is displayed.');
+		switch (status){
+			case "Charging":
+				this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
+				break;
+			case "Discharging":
+				this.set_applet_tooltip('Battery is discharging. Power drawn from battery is displayed.');
+				break;
+			case "Unknown":
+				this.set_applet_tooltip('Battery is fully charged. AC is plugged in.');
+				break;
+			default:
+				this.set_applet_tooltip('Status unknown, please contact the maintainer https://github.com/linuxmint/cinnamon-spices-applets/issues');
 		}
 		return true;
 	},
