@@ -78,19 +78,18 @@ export function CapitalizeEveryWord(description: string): string {
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
-function NormalizeTimezone(tz?: string) {
+function NormalizeTimezone(tz?: string | undefined) {
 	if (!tz || tz == "" || tz == "UTC")
 		tz = undefined;
 	return tz;
 }
 
-export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string): string {
+export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string | undefined): string {
 	let params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
-		timeZone: tz
 	}
 
-	params.timeZone = NormalizeTimezone(tz);
+	params.timeZone = <string>NormalizeTimezone(tz);
 
 	if (showDate) {
 		params.day = 'numeric';
@@ -128,10 +127,9 @@ export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Fo
 	let params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
-		timeZone: tz
 	}
 
-	params.timeZone = NormalizeTimezone(tz);
+	params.timeZone = <string>NormalizeTimezone(tz);
 
 	if (!onlyHours)
 		params.minute = "2-digit";
@@ -149,7 +147,6 @@ export function AwareDateString(date: DateTime, locale: string | null, hours24Fo
 		hour: "numeric",
 		minute: "2-digit",
 		hour12: !hours24Format,
-		timeZone: tz
 	};
 
 	if (!date.hasSame(now, "day")) {
@@ -161,7 +158,7 @@ export function AwareDateString(date: DateTime, locale: string | null, hours24Fo
 		params.year = "numeric";
 	}
 
-	params.timeZone = NormalizeTimezone(tz);
+	params.timeZone = <string>NormalizeTimezone(tz);
 
 	if (!!locale)
 		date = date.setLocale(locale);

@@ -36,12 +36,12 @@ export interface WeatherData {
 		lon: number,
 	};
 	location: {
-		city?: string,
-		country?: string,
-		timeZone?: string,
+		city?: string | undefined,
+		country?: string | undefined,
+		timeZone?: string | undefined,
 		url?: string,
 		/** in metres */
-		distanceFrom?: number,
+		distanceFrom?: number | undefined,
 		tzOffset?: number
 	},
 	/** preferably in UTC */
@@ -64,7 +64,7 @@ export interface WeatherData {
 	dewPoint: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
-	hourlyForecasts?: HourlyForecastData[]
+	hourlyForecasts?: HourlyForecastData[] | undefined
 	extra_field?: APIUniqueField;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
@@ -120,8 +120,8 @@ type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city?: string;
-	country?: string;
+	city?: string | undefined;
+	country?: string | undefined;
 	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;

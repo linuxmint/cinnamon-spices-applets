@@ -37,7 +37,8 @@ export class HttpLib {
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
+			if (e instanceof Error)
+				Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 			response.Success = false;
 			response.ErrorData = {
 				code: -1,
@@ -165,8 +166,8 @@ export interface Response<T> extends GenericResponse {
 
 interface GenericResponse {
 	Success: boolean;
-	Data: any;
-	ErrorData?: HttpError;
+	Data: any | undefined;
+	ErrorData: HttpError | undefined;
 }
 
 export interface HTTPParams {
@@ -182,5 +183,5 @@ export interface HttpError {
 	message: ErrorDetail;
 	reason_phrase: string;
 	data?: any;
-	response?: imports.gi.Soup.Message
+	response?: imports.gi.Soup.Message | undefined
 }

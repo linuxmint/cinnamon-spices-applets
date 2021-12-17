@@ -7,11 +7,14 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { HttpError } from "../lib/httpLib";
+import { HttpError, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
 import { _, IsLangSupported } from "../utils";
+
+/** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
+const IDCache: Record<string, number> = {};
 
 export class OpenWeatherMap implements WeatherProvider {
 	//--------------------------------------------------------
@@ -29,7 +32,8 @@ export class OpenWeatherMap implements WeatherProvider {
 		"pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
 	];
 
-	private base_url = "https://api.openweathermap.org/data/2.5/onecall?" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
+	private base_url = "https://api.openweathermap.org/data/2.5/onecall" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
+	private id_irl  = "https://api.openweathermap.org/data/2.5/weather";
 
 	private app: WeatherApplet
 	constructor(_app: WeatherApplet) {
@@ -41,16 +45,31 @@ export class OpenWeatherMap implements WeatherProvider {
 	//--------------------------------------------------------
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		let query = this.ConstructQuery(this.base_url, loc);
-		if (query == null)
-			return null;
+		const params = this.ConstructParams(loc);
 
-		let json = await this.app.LoadJsonAsync<any>(query, {}, this.HandleError);
+		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+
+		let promises: Promise<any>[] = [];
+		promises.push(this.app.LoadJsonAsync<any>(this.base_url, params, this.HandleError));
+
+		// If we don't have the ID we push a call to get it
+		if (cachedID == null)
+			promises.push(this.app.LoadJsonAsync<any>(this.id_irl, params));
+
+		// Await both of them, if already have it idPayload will be null
+		const [ json, idPayload ] = await Promise.all(promises);
+
+		// We store the newly gotten ID if we got it
+		if (cachedID == null && idPayload?.id != null)
+			IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
+		
 		if (!json)
 			return null;
 
 		if (this.HadErrors(json)) return null;
 
+		// Put id to the parsable object, even if it ends up undefined
+		json.id = cachedID ?? idPayload?.id;
 		return this.ParseWeather(json, loc);
 	};
 
@@ -64,7 +83,7 @@ export class OpenWeatherMap implements WeatherProvider {
 				location: {
 					//city: json.name,
 					//country: json.sys.country,
-					url: "https://openweathermap.org/city/",
+					url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
 					timeZone: json.timezone
 				},
 				date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
@@ -148,7 +167,7 @@ export class OpenWeatherMap implements WeatherProvider {
 					forecast.precipitation = {
 						chance: hour.pop * 100,
 						type: "none",
-						volume: undefined
+						//volume: undefined
 					}
 				}
 
@@ -169,7 +188,8 @@ export class OpenWeatherMap implements WeatherProvider {
 			weather.hourlyForecasts = hourly;
 			return weather;
 		} catch (e) {
-			Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+			if (e instanceof Error)
+				Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
 			this.app.ShowError({
 				type: "soft",
 				service: "openweathermap",
@@ -181,16 +201,19 @@ export class OpenWeatherMap implements WeatherProvider {
 	};
 
 
-	private ConstructQuery(baseUrl: string, loc: LocationData): string {
-		let query = baseUrl;
-		query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
-		query += "1c73f8259a86c6fd43c7163b543c8640";
+	private ConstructParams(loc: LocationData): HTTPParams {
+		const params: HTTPParams = {
+			lat: loc.lat,
+			lon: loc.lon,
+			appid: "1c73f8259a86c6fd43c7163b543c8640"
+		};
+
 		// Append Language if supported and enabled
 		let locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
 		if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-			query = query + "&lang=" + locale;
+			params.lang = locale;
 		}
-		return query;
+		return params;
 	};
 
 	private ConvertToAPILocale(systemLocale: string | null) {

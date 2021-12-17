@@ -164,7 +164,8 @@ export class DarkSky implements WeatherProvider {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("DarkSky payload parsing error: " + e, e)
+			if (e instanceof Error)
+				Logger.Error("DarkSky payload parsing error: " + e, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
 			return null;
 		}
