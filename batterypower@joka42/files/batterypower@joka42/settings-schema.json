@@ -1,0 +1,17 @@
+{
+  "show-unit": {
+    "type": "switch",
+    "default": true,
+    "description": "Show unit",
+    "tooltip": "Whether or not show the unit after the temperature value."
+  },
+  "interval": {
+    "type": "spinbutton",
+    "default": 5000,
+    "min": 1000,
+    "max": 30000,
+    "step": 1000,
+    "units": "ms",
+    "description": "Update interval"
+  }
+}
