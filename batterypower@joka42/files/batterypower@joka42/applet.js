@@ -38,24 +38,27 @@ BatteryPowerApplet.prototype = {
 		);
 		const separator = (this.isHorizontal) ? " " : "\n";
 		const unit_string = (this.state.showunit) ? separator + "W" : "";
+		const charging_indicator = "⚡";
 		
 		const status = this._getBatteryStatus();
-		const charging_indicator = (status == "Charging") ? "⚡" + separator : "";
-		
-		this.set_applet_label(charging_indicator + value + unit_string);
-		
+			
 		switch (status){
 			case "Charging":
+				charging_indicator = "⚡";
 				this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
+				this.set_applet_label(charging_indicator + separator + value + unit_string);
 				break;
 			case "Discharging":
 				this.set_applet_tooltip('Battery is discharging. Power drawn from battery is displayed.');
+				this.set_applet_label(value + unit_string);
 				break;
 			case "Unknown":
 				this.set_applet_tooltip('Battery is fully charged. AC is plugged in.');
+				this.set_applet_label(charging_indicator);
 				break;
 			default:
 				this.set_applet_tooltip('Status unknown, please contact the maintainer https://github.com/linuxmint/cinnamon-spices-applets/issues');
+				this.set_applet_label(charging_indicator);
 		}
 		return true;
 	},
