@@ -21,37 +21,64 @@ BatteryPowerApplet.prototype = {
 		} else {
 			this.isHorizontal = true;
 		}
+		this.state = {};
+		this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
+		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showunit', () => this.on_settings_changed(), null);
+    	this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
 
-		this.set_applet_tooltip(_('Current power drawn from battery'));
-		this.loopId = Mainloop.timeout_add(1000, () => this.mainloop());
+		this.update()
+		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.update());
 	},
 
-	mainloop: function() {
-		let power = this._getBatteryPower();
-		let value = ((Math.round(power * 10) / 10)
+	update: function() {
+		const power = this._getBatteryPower();
+		const value = ((Math.round(power * 10) / 10)
 			.toFixed(1)
 			.toString()
 		);
-		let separator = (this.isHorizontal) ? " " : "\n"
-		this.set_applet_label(value + separator + "W");
+		const separator = (this.isHorizontal) ? " " : "\n";
+		const unit_string = (this.state.showunit) ? separator + "W" : "";
+		
+		const status = this._getBatteryStatus();
+		let status_indicator = (status == "Charging") ? "⚡" + separator : "";
+		
+		this.set_applet_label(status_indicator + value + unit_string);
+		
+		if (status == "Charging"){
+			this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
+		}
+		else {
+			this.set_applet_tooltip('Battery is discharging. Power drawn from battery is displayed.');
+		}
 		return true;
 	},
 
-	_getBatteryPower: function () {
-		let current = 0;
-		let voltage = 0;
+	_getBatteryStatus: function () {
+		const statusFile = "/sys/class/power_supply/BAT0/status";
+		if (!GLib.file_test(statusFile, 1 << 4)) {
+			return null
+		}
+		return String(GLib.file_get_contents(statusFile)[1]).trim();
+	},
 
-		let currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
-		let voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
-		if (GLib.file_test(currentDrawFile, 1 << 4)) {
-			let content = GLib.file_get_contents(currentDrawFile);
-			current = parseInt(content[1]) / 1000000.0;
+	_getBatteryPower: function () {
+		const currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
+		const voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
+		if (! GLib.file_test(currentDrawFile, 1 << 4) || !GLib.file_test(voltageDrawFile, 1 << 4)) {
+			return NaN
 		}
-		if (GLib.file_test(voltageDrawFile, 1 << 4)) {
-			let content = GLib.file_get_contents(voltageDrawFile);
-			voltage = parseInt(content[1]) / 1000000.0;
+		const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
+		const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
+		
+		return current * voltage;
+	},
+
+	on_settings_changed: function() {
+		if (this.loopId > 0) {
+			Mainloop.source_remove(this.loopId);
 		}
-		return Math.round(current * voltage * 10) / 10;
+		this.loopId = 0;
+		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.mainloop());
 	},
 };
 
