@@ -1,13 +1,8 @@
 const St = imports.gi.St;
-const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio; // Needed for file infos
-const Util = imports.misc.util;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
-const Gettext = imports.gettext;
 
 const UUID = "batterypower@joka42";
 
