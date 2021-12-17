@@ -40,9 +40,9 @@ BatteryPowerApplet.prototype = {
 		const unit_string = (this.state.showunit) ? separator + "W" : "";
 		
 		const status = this._getBatteryStatus();
-		let status_indicator = (status == "Charging") ? "⚡" + separator : "";
+		const charging_indicator = (status == "Charging") ? "⚡" + separator : "";
 		
-		this.set_applet_label(status_indicator + value + unit_string);
+		this.set_applet_label(charging_indicator + value + unit_string);
 		
 		if (status == "Charging"){
 			this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
@@ -83,6 +83,5 @@ BatteryPowerApplet.prototype = {
 };
 
 function main(metadata, orientation, instance_id) {
-	// return new CPUTemperatureApplet(metadata, orientation, instance_id);
 	return new BatteryPowerApplet(metadata, orientation, instance_id);
 }
