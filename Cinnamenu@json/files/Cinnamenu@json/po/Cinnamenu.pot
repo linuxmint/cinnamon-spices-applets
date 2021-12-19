@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-22 07:17+0100\n"
+"POT-Creation-Date: 2021-12-18 21:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,97 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Type to search..."
-msgstr ""
-
 msgid "Initializing"
-msgstr ""
-
-msgid "No description available"
-msgstr ""
-
-msgid "All applications"
-msgstr ""
-
-msgid "Places"
-msgstr ""
-
-msgid "Recent files"
-msgstr ""
-
-msgid "Bookmarks"
-msgstr ""
-
-msgid "Favorite apps"
-msgstr ""
-
-msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
-
-msgid "Clear List"
-msgstr ""
-
-msgid "No recent files"
-msgstr ""
-
-msgid "Account details"
-msgstr ""
-
-msgid "Grid View"
-msgstr ""
-
-msgid "List View"
-msgstr ""
-
-msgid "Switch to grid view"
-msgstr ""
-
-msgid "Switch to list view"
-msgstr ""
-
-msgid "Lock screen"
-msgstr ""
-
-msgid "Lock the screen"
-msgstr ""
-
-msgid "Logout"
-msgstr ""
-
-msgid "Leave the session"
-msgstr ""
-
-msgid "Quit"
-msgstr ""
-
-msgid "Shutdown the computer"
-msgstr ""
-
-msgid "Run with NVIDIA GPU"
-msgstr ""
-
-msgid "Add to panel"
-msgstr ""
-
-msgid "Add to desktop"
-msgstr ""
-
-msgid "Remove from favorites"
-msgstr ""
-
-msgid "Add to favorites"
-msgstr ""
-
-msgid "Uninstall"
-msgstr ""
-
-msgid "Home"
-msgstr ""
-
-msgid "Computer"
-msgstr ""
-
-msgid "Browse network"
 msgstr ""
 
 msgid "Find files..."
@@ -122,19 +32,49 @@ msgstr ""
 msgid "Click to copy"
 msgstr ""
 
+msgid "Clear List"
+msgstr ""
+
 msgid "Trash"
+msgstr ""
+
+msgid "All applications"
 msgstr ""
 
 msgid "Favorites"
 msgstr ""
 
+msgid "Places"
+msgstr ""
+
 msgid "Recent"
+msgstr ""
+
+msgid "Favorite apps"
 msgstr ""
 
 msgid "Home folder"
 msgstr ""
 
 msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Shutdown the computer"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Leave the session"
+msgstr ""
+
+msgid "Lock screen"
+msgstr ""
+
+msgid "Lock the screen"
 msgstr ""
 
 msgid "Reset category order"
@@ -153,6 +93,24 @@ msgid "medium-dark skin tone"
 msgstr ""
 
 msgid "dark skin tone"
+msgstr ""
+
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+msgid "Add to panel"
+msgstr ""
+
+msgid "Add to desktop"
+msgstr ""
+
+msgid "Remove from favorites"
+msgstr ""
+
+msgid "Add to favorites"
+msgstr ""
+
+msgid "Uninstall"
 msgstr ""
 
 msgid "This file is no longer available"
@@ -174,6 +132,67 @@ msgid "Error while moving file to trash:"
 msgstr ""
 
 msgid "Error while opening file:"
+msgstr ""
+
+msgid "Type to search..."
+msgstr ""
+
+msgid "No description available"
+msgstr ""
+
+msgid "Recent files"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+
+msgid "No recent files"
+msgstr ""
+
+msgid "Account details"
+msgstr ""
+
+msgid "Grid View"
+msgstr ""
+
+msgid "List View"
+msgstr ""
+
+msgid "Switch to grid view"
+msgstr ""
+
+msgid "Switch to list view"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Computer"
+msgstr ""
+
+msgid "Browse network"
+msgstr ""
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
 msgid "Open"
@@ -235,25 +254,13 @@ msgid ""
 "search."
 msgstr ""
 
+msgid "Layout and Content"
+msgstr ""
+
 msgid "Behavior"
 msgstr ""
 
 msgid "Appearance"
-msgstr ""
-
-msgid "Layout and Content"
-msgstr ""
-
-msgid "Search Providers"
-msgstr ""
-
-msgid "No search provider extensions found"
-msgstr ""
-
-msgid "Panel"
-msgstr ""
-
-msgid "Menu"
 msgstr ""
 
 msgid "Layout"
@@ -262,135 +269,19 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-msgid "Recent files settings"
+msgid "Panel"
 msgstr ""
 
-msgid "Open the menu editor"
+msgid "Menu"
 msgstr ""
 
-msgid "Use a custom icon"
-msgstr ""
-
-msgid "Use a custom icon in the panel"
-msgstr ""
-
-msgid "Panel icon"
-msgstr ""
-
-msgid "Panel text"
-msgstr ""
-
-msgid "Text to show beside the panel icon"
-msgstr ""
-
-msgid "Category icon size (pixels)"
-msgstr ""
-
-msgid "Applications list icon size (pixels)"
-msgstr ""
-
-msgid "Applications grid icon size (pixels)"
-msgstr ""
-
-msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
-
-msgid "Open menu on hover"
-msgstr ""
-
-msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
-
-msgid "milliseconds"
-msgstr ""
-
-msgid "Menu hover delay"
-msgstr ""
-
-msgid "Use menu animations"
-msgstr ""
-
-msgid "Animate the menu on open and close"
-msgstr ""
-
-msgid "Activate categories on click"
-msgstr ""
-
-msgid "Activate categories on click instead of on hover"
-msgstr ""
-
-msgid "Enable autoscrolling"
-msgstr ""
-
-msgid "Enable autoscrolling in application list"
-msgstr ""
-
-msgid "Show web bookmarks"
-msgstr ""
-
-msgid ""
-"Show your browser's web bookmarks in the menu.\n"
-"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
-msgstr ""
-
-msgid "Enable searching of open windows"
-msgstr ""
-
-msgid "Enable search providers"
-msgstr ""
-
-msgid "Include search provider results in searches"
-msgstr ""
-
-msgid "Example Search Providers"
-msgstr ""
-
-msgid "Open menu on category:"
+msgid "Applications view mode"
 msgstr ""
 
 msgid "List"
 msgstr ""
 
 msgid "Grid"
-msgstr ""
-
-msgid "Always open the menu with this category selected"
-msgstr ""
-
-msgid "columns"
-msgstr ""
-
-msgid "Number of columns in apps grid"
-msgstr ""
-
-msgid "Show bookmarks and places"
-msgstr ""
-
-msgid "Show bookmarks and places category in the menu"
-msgstr ""
-
-msgid "Show application icons"
-msgstr ""
-
-msgid "Show category icons"
-msgstr ""
-
-msgid "Show application descriptions under titles"
-msgstr ""
-
-msgid "Show tooltips"
-msgstr ""
-
-msgid "Tooltip delay"
-msgstr ""
-
-msgid "Use a custom menu height"
-msgstr ""
-
-msgid "Custom menu height (pixels)"
-msgstr ""
-
-msgid "Applications view mode"
 msgstr ""
 
 msgid "View applications as list or grid"
@@ -440,6 +331,12 @@ msgstr ""
 msgid "Show your favorite app and file icons on the sidebar"
 msgstr ""
 
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Show bookmarks and places category in the menu"
+msgstr ""
+
 msgid "Show recent items"
 msgstr ""
 
@@ -458,7 +355,46 @@ msgstr ""
 msgid "Show home folder category in the menu"
 msgstr ""
 
+msgid "Open the menu editor"
+msgstr ""
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+msgid "Open menu on hover"
+msgstr ""
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr ""
+
+msgid "milliseconds"
+msgstr ""
+
+msgid "Menu hover delay"
+msgstr ""
+
+msgid "Use menu animations"
+msgstr ""
+
+msgid "Animate the menu on open and close"
+msgstr ""
+
+msgid "Activate categories on click"
+msgstr ""
+
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+
+msgid "Open menu on category:"
+msgstr ""
+
+msgid "Always open the menu with this category selected"
+msgstr ""
+
 msgid "Last used category"
+msgstr ""
+
+msgid "Enable autoscrolling"
 msgstr ""
 
 msgid "Autoscroll the application list on mouse hover"
@@ -505,6 +441,15 @@ msgstr ""
 msgid "Wikipedia language"
 msgstr ""
 
+msgid "Use a custom icon"
+msgstr ""
+
+msgid "Use a custom icon in the panel"
+msgstr ""
+
+msgid "Panel icon"
+msgstr ""
+
 msgid "Use a custom icon size"
 msgstr ""
 
@@ -515,6 +460,21 @@ msgid "Panel icon size (pixels)"
 msgstr ""
 
 msgid "Choose a custom size for the panel icon"
+msgstr ""
+
+msgid "Panel text"
+msgstr ""
+
+msgid "Text to show beside the panel icon"
+msgstr ""
+
+msgid "Category icon size (pixels)"
+msgstr ""
+
+msgid "Applications list icon size (pixels)"
+msgstr ""
+
+msgid "Applications grid icon size (pixels)"
 msgstr ""
 
 msgid "Sidebar icon size (pixels)"
@@ -532,4 +492,63 @@ msgstr ""
 msgid ""
 "Use a tile style for the application buttons (Note: may not work on some "
 "themes)"
+msgstr ""
+
+msgid "Search Providers"
+msgstr ""
+
+msgid "No search provider extensions found"
+msgstr ""
+
+msgid "Recent files settings"
+msgstr ""
+
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+msgid "Show web bookmarks"
+msgstr ""
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+msgid "Enable searching of open windows"
+msgstr ""
+
+msgid "Enable search providers"
+msgstr ""
+
+msgid "Include search provider results in searches"
+msgstr ""
+
+msgid "Example Search Providers"
+msgstr ""
+
+msgid "columns"
+msgstr ""
+
+msgid "Number of columns in apps grid"
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Show application descriptions under titles"
+msgstr ""
+
+msgid "Show tooltips"
+msgstr ""
+
+msgid "Tooltip delay"
+msgstr ""
+
+msgid "Use a custom menu height"
+msgstr ""
+
+msgid "Custom menu height (pixels)"
 msgstr ""
