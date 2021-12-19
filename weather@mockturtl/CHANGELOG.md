@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.8
+
+
 ## 3.1.7
 
 * Switch to stricter typechecking
