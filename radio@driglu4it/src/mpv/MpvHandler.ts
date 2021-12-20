@@ -18,7 +18,7 @@ export interface Arguments {
     onPositionChanged: (position: number) => void,
     checkUrlValid: (url: string) => boolean,
     /** the lastUrl is used to determine if mpv is initially (i.e. on cinnamon restart) running for radio purposes and not for something else. It is not sufficient to get the url from a dbus interface and check if the url is valid because some streams (such as .pls streams) change their url dynamically. This approach in not 100% foolproof but probably the best possible approach */
-    lastUrl: string,
+    lastUrl: string | null,
 
     // TODO make as setter
     getInitialVolume: { (): number }
@@ -70,21 +70,26 @@ export function createMpvHandler(args: Arguments) {
 
     let currentUrl = initialPlaybackStatus !== "Stopped" ? lastUrl : null
     let currentLength: number = getLength() // in seconds
-    let positionTimerId: ReturnType<typeof setInterval>
+    let positionTimerId: ReturnType<typeof setInterval> | null
 
     let bufferExceeded = false
 
-    let mediaPropsListenerId: number
-    let seekListenerId: number
+    let mediaPropsListenerId: number | null
+    let seekListenerId: number | null
 
     if (initialPlaybackStatus !== "Stopped") {
         activateMprisPropsListener();
         activeSeekListener()
 
-        onUrlChanged(currentUrl)
+        currentUrl && onUrlChanged(currentUrl)
         onPlaybackstatusChanged(initialPlaybackStatus)
-        onVolumeChanged(getVolume())
-        onTitleChanged(getCurrentTitle())
+
+        const currentVolulume = getVolume()
+        currentVolulume && onVolumeChanged(currentVolulume)
+
+        const currentTitle = getCurrentTitle()
+        currentTitle && onTitleChanged(currentTitle)
+
         onLengthChanged(currentLength)
         onPositionChanged(getPosition())
 
@@ -108,8 +113,8 @@ export function createMpvHandler(args: Arguments) {
         if (oldOwner) {
             currentLength = 0
             stopPositionTimer()
-            mediaProps.disconnectSignal(mediaPropsListenerId)
-            mediaServerPlayer.disconnectSignal(seekListenerId)
+            mediaPropsListenerId && mediaProps.disconnectSignal(mediaPropsListenerId)
+            seekListenerId && mediaServerPlayer.disconnectSignal(seekListenerId)
             mediaPropsListenerId = seekListenerId = currentUrl = null
             onPlaybackstatusChanged('Stopped')
         }
@@ -292,11 +297,15 @@ export function createMpvHandler(args: Arguments) {
 
     function increaseDecreaseVolume(volumeChange: number) {
 
+        const currentVolulume = getVolume()
+
+        if (!currentVolulume) return
+
         // newVolume is the current Volume plus(or minus) volumeChange 
         // but at least 0 and maximum Max_Volume
         const newVolume = Math.min(
             MAX_VOLUME,
-            Math.max(0, getVolume() + volumeChange)
+            Math.max(0, currentVolulume + volumeChange)
         )
 
         setMprisVolume(newVolume)
@@ -335,7 +344,7 @@ export function createMpvHandler(args: Arguments) {
         mediaServerPlayer.StopSync()
     }
 
-    function getCurrentTitle(): string {
+    function getCurrentTitle(): string | undefined {
         if (getPlaybackStatus() === "Stopped") return
 
         return mediaServerPlayer.Metadata["xesam:title"].unpack()
