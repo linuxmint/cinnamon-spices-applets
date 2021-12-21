@@ -2,6 +2,8 @@
 
 ## 3.1.8
 
+* Fixes [#4136](https://github.com/linuxmint/cinnamon-spices-applets/issues/4136) - Fix custom widget not applying translations
+* Fixes [#4147](https://github.com/linuxmint/cinnamon-spices-applets/issues/4147)
 
 ## 3.1.7
 
