@@ -35,7 +35,7 @@ BatteryPowerApplet.prototype = {
 		if (isNaN(power)){
 			this.set_applet_label("ERROR");
 			this.set_applet_tooltip("ERROR: Your system is not supported, yet.\nConsider reporting an issue on github: https://github.com/linuxmint/cinnamon-spices-applets");
-			return;
+			return false;
 		}
 
 		const value = ((Math.round(power * 10) / 10)
@@ -66,7 +66,7 @@ BatteryPowerApplet.prototype = {
 				this.set_applet_tooltip('Status unknown, please contact the maintainer https://github.com/linuxmint/cinnamon-spices-applets/issues');
 				this.set_applet_label(charging_indicator);
 		}
-		return;
+		return true;
 	},
 
 	_getBatteryStatus: function () {
