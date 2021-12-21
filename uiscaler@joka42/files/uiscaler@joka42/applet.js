@@ -34,6 +34,14 @@ MyApplet.prototype = {
             this.menu.addAction(_("Scale 200%"), function (event) {
                 Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 200`);
             });
+            //HiDPI 175% Scale
+            this.menu.addAction(_("Scale 175%"), function (event) {
+                Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 175`);
+            });
+            //HiDPI 150% Scale
+            this.menu.addAction(_("Scale 150%"), function (event) {
+                Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 150`);
+            });
             //HiDPI 125% Scale
             this.menu.addAction(_("Scale 125%"), function (event) {
                 Main.Util.spawnCommandLine(`${__meta.path}/uiscaler 125`);

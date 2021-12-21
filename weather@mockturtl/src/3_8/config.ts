@@ -144,7 +144,7 @@ export class Config {
 	private app: WeatherApplet;
 	private countryCode: string | null;
 
-	private timezone?: string = undefined;
+	private timezone: string | undefined = undefined;
 
 	public get Timezone() {
 		return this.timezone;

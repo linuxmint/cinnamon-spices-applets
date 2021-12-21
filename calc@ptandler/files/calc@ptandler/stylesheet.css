@@ -1,0 +1,53 @@
+.calc-main-box {
+    min-width: 100px;
+    background-color: darkslategray;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.header {
+    font-size: 1.1em;
+    font-weight: bolder;
+}
+
+.header-smaller {
+    font-size: 0.9em;
+}
+
+.help-button {
+    font-size: 0.9em;
+    border: lightgrey 2px solid;
+    border-radius: 1em;
+}
+
+.expression-box {
+    background-color: lightslategray;
+    color: black;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.input {
+    font-weight: normal;
+}
+.current.input {
+    selected-color: white;
+}
+
+.result {
+    font-weight: bold;
+}
+
+.history-separator {
+    margin: 0;
+    padding: 0;
+}
+
+.history.input {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.history.result {
+    margin-top: 0;
+    padding-top: 0;
+}

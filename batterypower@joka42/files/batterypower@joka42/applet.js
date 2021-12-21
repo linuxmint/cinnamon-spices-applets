@@ -74,6 +74,7 @@ BatteryPowerApplet.prototype = {
 		if (!GLib.file_test(statusFile, 1 << 4)) {
 			return null;
 		}
+		
 		return String(GLib.file_get_contents(statusFile)[1]).trim();
 	},
 
@@ -88,14 +89,12 @@ BatteryPowerApplet.prototype = {
 		
 		const currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
 		const voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
-
 		if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
 			const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
 			const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
 			
 			return current * voltage;
 		}
-		
 		
 		return NaN
 	},

@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-17 19:44+0100\n"
+"PO-Revision-Date: 2021-12-17 12:48-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:102
+msgid "desktop"
+msgstr "escritorio"
+
+#: applet.js:320
+msgid "No open windows"
+msgstr "No abrir ventanas"
+
+#: applet.js:330
+msgid "Expo"
+msgstr "Mostrar áreas de trabajo"
+
+#. SW++@mohammad-sn->settings-schema.json->alsoopacifyskiptaskbar->description
+msgid "Opacify the icons on the desktop"
+msgstr "Opacar los iconos en el escritorio"
+
+#. SW++@mohammad-sn->settings-schema.json->head->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. SW++@mohammad-sn->settings-schema.json->closeallbuttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr ""
+"Mostrar los botones de cierre de todas las ventanas para las áreas de trabajo"
+
+#. SW++@mohammad-sn->settings-schema.json->head2->description
+msgid "Peek at desktop"
+msgstr "Efectos al mostrar el escritorio"
+
+#. SW++@mohammad-sn->settings-schema.json->head1->description
+msgid "Menu options"
+msgstr "Menú de Opciones"
+
+#. SW++@mohammad-sn->settings-schema.json->color->description
+msgid "The background color for the applet hover:"
+msgstr "Color de relleno al pasar el ratón por encima del applet:"
+
+#. SW++@mohammad-sn->settings-schema.json->color->tooltip
+msgid "Click the button to select a new background color for applet"
+msgstr ""
+"Haga clic en el botón para seleccionar un nuevo color de fondo para el applet"
+
+#. SW++@mohammad-sn->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr "Ícono a usar en la barra de tareas:"
+
+#. SW++@mohammad-sn->settings-schema.json->icon-name->tooltip
+msgid ""
+"Select an icon file, or you can type an icon name into the entry box, for "
+"example: desktop"
+msgstr ""
+"Seleccione un archivo de icono, o escriba el nombre de un icono en el cuadro "
+"de entrada, por ejemplo: escritorio"
+
+#. SW++@mohammad-sn->settings-schema.json->peekopacity->description
+msgid "Opacity on hover:"
+msgstr "Opacidad al pasar el ratón por encima:"
+
+#. SW++@mohammad-sn->settings-schema.json->SHOW-MENU-ON-CLOSE->description
+msgid "Keep menu open while closing windows"
+msgstr "Mantener el menú abierto mientras se cierran las ventanas"
+
+#. SW++@mohammad-sn->settings-schema.json->width->description
+msgid "Applet width in the panel:"
+msgstr "Anchura del applet en la barra de tareas:"
+
+#. SW++@mohammad-sn->settings-schema.json->width->tooltip
+msgid ""
+"Increase or decrease this spinner value to make the applet wider or narrower "
+"in the panel"
+msgstr ""
+"Aumentar o disminuir el valor para que el applet sea más ancho o más "
+"estrecho en la barra de tareas"
+
+#. SW++@mohammad-sn->settings-schema.json->width->units
+msgid "pixels"
+msgstr "píxeles"
+
+#. SW++@mohammad-sn->settings-schema.json->peekatdesktop->description
+msgid "Opacify windows on hover"
+msgstr "Opacidad de las ventanas al pasar el ratón por encima"
+
+#. SW++@mohammad-sn->settings-schema.json->peekatdesktop->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "Echar un vistazo a tu escritorio y a los desklets."
+
+#. SW++@mohammad-sn->settings-schema.json->alsoopacifydesklets->description
+msgid "Opacify desklets"
+msgstr "Opacar los desklets"
+
+#. SW++@mohammad-sn->settings-schema.json->blur->description
+msgid "Blur windows on hover"
+msgstr "Desenfocar las ventanas al pasar el ratón por encima"
+
+#. SW++@mohammad-sn->settings-schema.json->highlight->description
+msgid "Highlight applet next time it is added to the panel"
+msgstr "Resaltar el applet la próxima vez que se añada al panel"
+
+#. SW++@mohammad-sn->settings-schema.json->closebuttons->description
+msgid "Show close buttons"
+msgstr "Mostrar botones de cierre"
+
+#. SW++@mohammad-sn->metadata.json->description
+msgid ""
+"click to show/hide desktop, scroll to switch workspace and windows quick "
+"list by right click"
+msgstr ""
+"haga clic para mostrar/ocultar el escritorio, desplácese para cambiar la "
+"área de trabajo y la lista rápida de ventanas haciendo clic con el botón "
+"derecho"
+
+#. SW++@mohammad-sn->metadata.json->name
+msgid "Show desktop ++"
+msgstr "Mostrar Escritorio ++"

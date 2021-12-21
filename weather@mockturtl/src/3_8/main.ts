@@ -31,8 +31,7 @@ import { SpawnProcess } from "./lib/commandRunner";
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
-const { File } = imports.gi.Gio;
-const { get_home_dir } = imports.gi.GLib;
+const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
@@ -59,6 +58,8 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public encounteredError: boolean = false;
 
+	private online: boolean | null = null;
+
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
@@ -81,10 +82,33 @@ export class WeatherApplet extends TextIconApplet {
 			// vertical panel not supported
 		}
 		this.loop.Start();
+		this.OnNetworkConnectivityChanged();
+		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
 	}
 
 	public Locked(): boolean {
 		return this.lock;
+	}
+
+	private OnNetworkConnectivityChanged = () => {
+		switch (NetworkMonitor.get_default().connectivity) {
+			case NetworkConnectivity.FULL:
+				if (this.online === true)
+					break;
+				Logger.Info("Internet access now available, resuming operations.");
+				this.loop.Resume();
+				this.online = true;
+				break;
+			case NetworkConnectivity.LIMITED:
+			case NetworkConnectivity.LOCAL:
+			case NetworkConnectivity.PORTAL:
+				if (this.online === false)
+					break;
+				Logger.Info("Internet access now down, pausing refresh.");
+				this.loop.Pause();
+				this.online = false;
+				break;
+		}
 	}
 
 	/**
@@ -164,7 +188,8 @@ export class WeatherApplet extends TextIconApplet {
 			return RefreshState.Success;
 		}
 		catch (e) {
-			Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+			if (e instanceof Error)
+				Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
 			return RefreshState.Failure;

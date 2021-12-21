@@ -216,13 +216,22 @@ const createConfig = (args) => {
         get initialVolume() { return getInitialVolume(); }
     };
     const appletSettings = new AppletSettings(settingsObject, uuid, instanceId);
-    appletSettings.bind('icon-type', 'iconType', (iconType) => onIconChanged(iconType));
-    appletSettings.bind('color-on', 'symbolicIconColorWhenPlaying', (newColor) => onIconColorPlayingChanged(newColor));
-    appletSettings.bind('color-paused', 'symbolicIconColorWhenPaused', (newColor) => onIconColorPausedChanged(newColor));
-    appletSettings.bind('channel-on-panel', 'channelNameOnPanel', (channelOnPanel) => onChannelOnPanelChanged(channelOnPanel));
+    appletSettings.bind('icon-type', 'iconType', 
+    // @ts-ignore
+    (iconType) => onIconChanged(iconType));
+    appletSettings.bind('color-on', 'symbolicIconColorWhenPlaying', 
+    // @ts-ignore
+    (newColor) => onIconColorPlayingChanged(newColor));
+    appletSettings.bind('color-paused', 'symbolicIconColorWhenPaused', 
+    // @ts-ignore
+    (newColor) => onIconColorPausedChanged(newColor));
+    appletSettings.bind('channel-on-panel', 'channelNameOnPanel', 
+    // @ts-ignore
+    (channelOnPanel) => onChannelOnPanelChanged(channelOnPanel));
     appletSettings.bind('keep-volume-between-sessions', "keepVolume");
     appletSettings.bind('initial-volume', 'customInitVolume');
     appletSettings.bind('last-volume', 'lastVolume');
+    // @ts-ignore
     appletSettings.bind('tree', "userStations", onMyStationsChanged);
     appletSettings.bind('last-url', 'lastUrl');
     appletSettings.bind('music-download-dir-select', 'musicDownloadDir', () => handleMusicDirChanged());
@@ -248,7 +257,7 @@ const createConfig = (args) => {
 ;// CONCATENATED MODULE: ./src/ChannelStore.ts
 class ChannelStore {
     constructor(channelList) {
-        this.channelList = channelList;
+        this._channelList = channelList;
     }
     set channelList(channelList) {
         this._channelList = channelList.flatMap(channel => {
@@ -275,6 +284,8 @@ class ChannelStore {
             false : true;
     }
     checkUrlValid(channelUrl) {
+        if (!channelUrl)
+            return false;
         return this._channelList.some(cnl => cnl.url === channelUrl);
     }
 }
@@ -428,8 +439,6 @@ const LOADING_ICON_NAME = 'view-refresh-symbolic';
 
 ;// CONCATENATED MODULE: ./src/functions/limitString.ts
 function limitString(text, maxCharNumber) {
-    if (!text)
-        return;
     if (text.length <= maxCharNumber)
         return text;
     return [...text].slice(0, maxCharNumber - 3).join('') + '...';
@@ -446,8 +455,8 @@ function createIconMenuItem(args) {
     const container = new IconMenuItem_BoxLayout({
         style_class: 'popup-menu-item'
     });
-    setIconName(iconName);
-    setText(text);
+    iconName && setIconName(iconName);
+    text && setText(text);
     function setIconName(name) {
         if (icon && !name) {
             container.remove_child(icon);
@@ -457,8 +466,9 @@ function createIconMenuItem(args) {
         if (!name)
             return;
         initIcon();
-        icon.icon_name = name;
-        if (container.get_child_at_index(0) !== icon)
+        if (icon)
+            icon.icon_name = name;
+        if (icon && container.get_child_at_index(0) !== icon)
             container.insert_child_at_index(icon, 0);
     }
     function initIcon() {
@@ -546,8 +556,10 @@ function createChannelList(args) {
             currentChannelName = null;
     }
     function setCurrentChannel(name) {
-        const currentChannelItem = channelItems.get(currentChannelName);
-        currentChannelItem === null || currentChannelItem === void 0 ? void 0 : currentChannelItem.setPlaybackStatus('Stopped');
+        if (currentChannelName) {
+            const currentChannelItem = channelItems.get(currentChannelName);
+            currentChannelItem === null || currentChannelItem === void 0 ? void 0 : currentChannelItem.setPlaybackStatus('Stopped');
+        }
         if (name) {
             const newChannelItem = channelItems.get(name);
             if (!newChannelItem)
@@ -599,10 +611,12 @@ function createMpvHandler(args) {
     if (initialPlaybackStatus !== "Stopped") {
         activateMprisPropsListener();
         activeSeekListener();
-        onUrlChanged(currentUrl);
+        currentUrl && onUrlChanged(currentUrl);
         onPlaybackstatusChanged(initialPlaybackStatus);
-        onVolumeChanged(getVolume());
-        onTitleChanged(getCurrentTitle());
+        const currentVolulume = getVolume();
+        currentVolulume && onVolumeChanged(currentVolulume);
+        const currentTitle = getCurrentTitle();
+        currentTitle && onTitleChanged(currentTitle);
         onLengthChanged(currentLength);
         onPositionChanged(getPosition());
         startPositionTimer();
@@ -621,8 +635,8 @@ function createMpvHandler(args) {
         if (oldOwner) {
             currentLength = 0;
             stopPositionTimer();
-            mediaProps.disconnectSignal(mediaPropsListenerId);
-            mediaServerPlayer.disconnectSignal(seekListenerId);
+            mediaPropsListenerId && mediaProps.disconnectSignal(mediaPropsListenerId);
+            seekListenerId && mediaServerPlayer.disconnectSignal(seekListenerId);
             mediaPropsListenerId = seekListenerId = currentUrl = null;
             onPlaybackstatusChanged('Stopped');
         }
@@ -762,9 +776,12 @@ function createMpvHandler(args) {
         mediaServerPlayer.PlaySync();
     }
     function increaseDecreaseVolume(volumeChange) {
+        const currentVolulume = getVolume();
+        if (!currentVolulume)
+            return;
         // newVolume is the current Volume plus(or minus) volumeChange 
         // but at least 0 and maximum Max_Volume
-        const newVolume = Math.min(MAX_VOLUME, Math.max(0, getVolume() + volumeChange));
+        const newVolume = Math.min(MAX_VOLUME, Math.max(0, currentVolulume + volumeChange));
         setMprisVolume(newVolume);
     }
     /** @param newVolume volume in percent */
@@ -917,7 +934,7 @@ function createSlider(args) {
     function moveHandle(event) {
         const [absX, absY] = event.get_coords();
         const [sliderX, sliderY] = drawing.get_transformed_position();
-        const relX = absX - sliderX;
+        const relX = absX - (sliderX || 0);
         const width = drawing.width;
         const handleRadius = drawing.get_theme_node().get_length('-slider-handle-radius');
         const newValue = (relX - handleRadius) / (width - 2 * handleRadius);
@@ -1152,8 +1169,9 @@ function createPlayPauseButton(args) {
             tooltipTxt = 'Play';
             iconName = PLAY_ICON_NAME;
         }
-        controlBtn.tooltip.set_text(tooltipTxt);
-        controlBtn.icon.icon_name = iconName;
+        tooltipTxt && controlBtn.tooltip.set_text(tooltipTxt);
+        if (iconName)
+            controlBtn.icon.icon_name = iconName;
     }
     return {
         actor: controlBtn.actor,
@@ -1294,11 +1312,11 @@ function downloadSongFromYoutube(args) {
     return { cancel };
 }
 function getDownloadPath(stdout) {
+    var _a;
     const arrayOfLines = stdout.match(/[^\r\n]+/g);
     // there is only one line in stdout which gives the path of the downloaded mp3. This start with [ffmpeg] Destination ...
     const searchString = '[ffmpeg] Destination: ';
-    return arrayOfLines.find(line => line.includes(searchString))
-        .split(searchString)[1];
+    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
 }
 
 ;// CONCATENATED MODULE: ./src/functions/promiseHelpers.ts
@@ -1382,7 +1400,7 @@ function downloadMrisPluginInteractive() {
             return resolve();
         }
         let [stderr, stdout, exitCode] = await spawnCommandLinePromise(`python3  ${__meta.path}/download-dialog-mpris.py`);
-        if (stdout.trim() !== 'Continue') {
+        if ((stdout === null || stdout === void 0 ? void 0 : stdout.trim()) !== 'Continue') {
             return reject();
         }
         [stderr, stdout, exitCode] = await spawnCommandLinePromise(`
@@ -1423,7 +1441,7 @@ function createApplet(args) {
     };
     applet.actor.connect('event', (actor, event) => {
         if (event.type() !== EventType.BUTTON_PRESS)
-            return;
+            return false;
         if (event.get_button() === 3) {
             onRightClick();
         }
@@ -1558,6 +1576,7 @@ function createAppletLabel() {
 const { PanelItemTooltip } = imports.ui.tooltips;
 function createAppletTooltip(args) {
     const { orientation, applet } = args;
+    // @ts-ignore
     const tooltip = new PanelItemTooltip(applet, null, orientation);
     setDefaultTooltip();
     function setVolume(volume) {
@@ -5138,6 +5157,7 @@ function initPolyfills() {
             configurable: true,
             writable: true,
             value: function () {
+                // @ts-ignore
                 return Array.prototype.map.apply(this, arguments).flat(1);
             },
         });
@@ -5197,20 +5217,35 @@ const { BoxLayout: src_BoxLayout } = imports.gi.St;
 function main(args) {
     const { orientation, panelHeight, instanceId } = args;
     initPolyfills();
-    // this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
-    let lastVolume;
-    let mpvHandler;
-    let installationInProgress = false;
     const appletDefinition = getAppletDefinition({
         applet_id: instanceId,
     });
     const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
-    panel.connect('icon-size-changed', () => appletIcon.updateIconSize());
     const appletIcon = createAppletIcon({
         locationLabel: appletDefinition.location_label,
         panel
     });
+    panel.connect('icon-size-changed', () => appletIcon.updateIconSize());
     const appletLabel = createAppletLabel();
+    const configs = createConfig({
+        uuid: __meta.uuid,
+        instanceId,
+        onIconChanged: handleIconTypeChanged,
+        onIconColorPlayingChanged: (color) => {
+            appletIcon.setColorWhenPlaying(color);
+        },
+        onIconColorPausedChanged: (color) => {
+            appletIcon.setColorWhenPaused(color);
+        },
+        onChannelOnPanelChanged: (channelOnPanel) => {
+            appletLabel.setVisibility(channelOnPanel);
+        },
+        onMyStationsChanged: handleStationsUpdated,
+    });
+    // this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
+    let lastVolume;
+    let mpvHandler;
+    let installationInProgress = false;
     const applet = createApplet({
         icon: appletIcon.actor,
         label: appletLabel.actor,
@@ -5227,21 +5262,6 @@ function main(args) {
     const appletTooltip = createAppletTooltip({
         applet,
         orientation
-    });
-    const configs = createConfig({
-        uuid: __meta.uuid,
-        instanceId,
-        onIconChanged: handleIconTypeChanged,
-        onIconColorPlayingChanged: (color) => {
-            appletIcon.setColorWhenPlaying(color);
-        },
-        onIconColorPausedChanged: (color) => {
-            appletIcon.setColorWhenPaused(color);
-        },
-        onChannelOnPanelChanged: (channelOnPanel) => {
-            appletLabel.setVisibility(channelOnPanel);
-        },
-        onMyStationsChanged: handleStationsUpdated,
     });
     const channelStore = new ChannelStore(configs.userStations);
     const channelList = createChannelList({
@@ -5264,7 +5284,10 @@ function main(args) {
         onClick: handleDownloadBtnClicked
     });
     const copyBtn = createCopyButton({
-        onClick: () => copyText(mpvHandler.getCurrentTitle())
+        onClick: () => {
+            const currentTitle = mpvHandler.getCurrentTitle();
+            currentTitle && copyText(currentTitle);
+        }
     });
     const mediaControlToolbar = createMediaControlToolbar({
         controlBtns: [playPauseBtn.actor, downloadBtn.actor, copyBtn.actor, stopBtn.actor]
@@ -5326,6 +5349,8 @@ function main(args) {
     }
     function handleChannelClicked(name) {
         const channelUrl = channelStore.getChannelUrl(name);
+        if (!channelUrl)
+            return;
         mpvHandler.setUrl(channelUrl);
     }
     function handleTitleChanged(title) {
@@ -5369,8 +5394,8 @@ function main(args) {
     function handleUrlChanged(url) {
         const channelName = url ? channelStore.getChannelName(url) : null;
         appletLabel.setText(channelName);
-        channelList.setCurrentChannel(channelName);
-        infoSection.setChannel(channelName);
+        channelName && channelList.setCurrentChannel(channelName);
+        channelName && infoSection.setChannel(channelName);
         configs.lastUrl = url;
     }
     function hanldeLengthChanged(length) {
@@ -5381,6 +5406,8 @@ function main(args) {
     }
     function handleDownloadBtnClicked() {
         const title = mpvHandler.getCurrentTitle();
+        if (!title)
+            return;
         const downloadProcess = downloadSongFromYoutube({
             downloadDir: configs.musicDownloadDir,
             title,

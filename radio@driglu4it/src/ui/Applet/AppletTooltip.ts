@@ -14,6 +14,7 @@ export function createAppletTooltip(args: Arguments) {
         applet
     } = args
 
+    // @ts-ignore
     const tooltip = new PanelItemTooltip(applet, null, orientation)
 
     setDefaultTooltip()

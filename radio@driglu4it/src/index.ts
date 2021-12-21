@@ -48,28 +48,47 @@ export function main(args: Arguments): imports.ui.applet.Applet {
 
     initPolyfills()
 
-    // this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
-    let lastVolume: number
-    let mpvHandler: ReturnType<typeof createMpvHandler>
-
-    let installationInProgress = false
-
     const appletDefinition = getAppletDefinition({
         applet_id: instanceId,
     })
 
     const panel = panelManager.panels.find(panel =>
         panel?.panelId === appletDefinition.panelId
-    )
-
-    panel.connect('icon-size-changed', () => appletIcon.updateIconSize())
+    ) as imports.ui.panel.Panel
 
     const appletIcon = createAppletIcon({
         locationLabel: appletDefinition.location_label,
         panel
     })
 
+    panel.connect('icon-size-changed', () => appletIcon.updateIconSize())
+
     const appletLabel = createAppletLabel()
+
+
+    const configs = createConfig({
+        uuid: __meta.uuid,
+        instanceId,
+
+        onIconChanged: handleIconTypeChanged,
+        onIconColorPlayingChanged: (color) => {
+            appletIcon.setColorWhenPlaying(color)
+        },
+        onIconColorPausedChanged: (color) => {
+            appletIcon.setColorWhenPaused(color)
+        },
+        onChannelOnPanelChanged: (channelOnPanel) => {
+            appletLabel.setVisibility(channelOnPanel)
+        },
+        onMyStationsChanged: handleStationsUpdated,
+    })
+
+
+    // this is a workaround for now. Optimally the lastVolume should be saved persistently each time the volume is changed but this lead to significant performance issue on scrolling at the moment. However this shouldn't be the case as it is no problem to log the volume each time the volume changes (so it is a problem in the config implementation). As a workaround the volume is only saved persistently when the radio stops but the volume obviously can't be received anymore from dbus when the player has been already stopped ... 
+    let lastVolume: number
+    let mpvHandler: ReturnType<typeof createMpvHandler>
+
+    let installationInProgress = false
 
     const applet = createApplet({
         icon: appletIcon.actor,
@@ -90,22 +109,7 @@ export function main(args: Arguments): imports.ui.applet.Applet {
         orientation
     })
 
-    const configs = createConfig({
-        uuid: __meta.uuid,
-        instanceId,
 
-        onIconChanged: handleIconTypeChanged,
-        onIconColorPlayingChanged: (color) => {
-            appletIcon.setColorWhenPlaying(color)
-        },
-        onIconColorPausedChanged: (color) => {
-            appletIcon.setColorWhenPaused(color)
-        },
-        onChannelOnPanelChanged: (channelOnPanel) => {
-            appletLabel.setVisibility(channelOnPanel)
-        },
-        onMyStationsChanged: handleStationsUpdated,
-    })
 
     const channelStore = new ChannelStore(configs.userStations)
 
@@ -135,7 +139,10 @@ export function main(args: Arguments): imports.ui.applet.Applet {
     })
 
     const copyBtn = createCopyButton({
-        onClick: () => copyText(mpvHandler.getCurrentTitle())
+        onClick: () => {
+            const currentTitle = mpvHandler.getCurrentTitle()
+            currentTitle && copyText(currentTitle)
+        }
     })
 
     const mediaControlToolbar = createMediaControlToolbar({
@@ -209,6 +216,10 @@ export function main(args: Arguments): imports.ui.applet.Applet {
 
     function handleChannelClicked(name: string) {
         const channelUrl = channelStore.getChannelUrl(name)
+
+        if (!channelUrl)
+            return
+
         mpvHandler.setUrl(channelUrl)
     }
 
@@ -216,7 +227,7 @@ export function main(args: Arguments): imports.ui.applet.Applet {
         infoSection.setSongTitle(title)
     }
 
-    function handleVolumeChanged(volume: number | null) {
+    function handleVolumeChanged(volume: number) {
         volumeSlider.setVolume(volume)
         appletTooltip.setVolume(volume)
 
@@ -269,8 +280,8 @@ export function main(args: Arguments): imports.ui.applet.Applet {
 
         appletLabel.setText(channelName)
 
-        channelList.setCurrentChannel(channelName)
-        infoSection.setChannel(channelName)
+        channelName && channelList.setCurrentChannel(channelName)
+        channelName && infoSection.setChannel(channelName)
         configs.lastUrl = url
     }
 
@@ -285,6 +296,8 @@ export function main(args: Arguments): imports.ui.applet.Applet {
     function handleDownloadBtnClicked() {
 
         const title = mpvHandler.getCurrentTitle()
+
+        if (!title) return
 
         const downloadProcess = downloadSongFromYoutube({
             downloadDir: configs.musicDownloadDir,

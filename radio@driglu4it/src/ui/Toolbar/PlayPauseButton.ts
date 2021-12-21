@@ -25,8 +25,8 @@ export function createPlayPauseButton(args: Arguments) {
      */
     function setPlaybackStatus(playPause: PlayPause) {
 
-        let tooltipTxt: string
-        let iconName: string
+        let tooltipTxt: string | undefined
+        let iconName: string | undefined
 
         if (playPause === 'Playing') {
             tooltipTxt = 'Pause'
@@ -38,8 +38,8 @@ export function createPlayPauseButton(args: Arguments) {
             iconName = PLAY_ICON_NAME
         }
 
-        controlBtn.tooltip.set_text(tooltipTxt)
-        controlBtn.icon.icon_name = iconName
+        tooltipTxt && controlBtn.tooltip.set_text(tooltipTxt)
+        if (iconName) controlBtn.icon.icon_name = iconName
 
     }
 
