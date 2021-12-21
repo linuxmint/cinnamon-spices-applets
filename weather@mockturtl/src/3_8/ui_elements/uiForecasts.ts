@@ -111,10 +111,11 @@ export class UIForecasts {
 			this.app.ShowError({
 				type: "hard",
 				detail: "unknown",
-				message: "Forecast parsing failed: " + e.toString(),
+				message: _("Forecast parsing failed, see logs for more details."),
 				userError: false
 			})
-			Logger.Error("DisplayForecastError " + e, e);
+			if (e instanceof Error)
+				Logger.Error("DisplayForecastError: " + e, e);
 			return false;
 		}
 	};

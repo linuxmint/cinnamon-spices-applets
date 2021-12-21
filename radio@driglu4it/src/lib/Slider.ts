@@ -106,7 +106,7 @@ export function createSlider(args: SliderArguments) {
         const [absX, absY] = event.get_coords()
 
         const [sliderX, sliderY] = drawing.get_transformed_position();
-        const relX = absX - sliderX;
+        const relX = absX - (sliderX || 0);
 
         const width = drawing.width;
         const handleRadius = drawing.get_theme_node().get_length('-slider-handle-radius');

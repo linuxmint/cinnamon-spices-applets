@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.7
+
+* Switch to stricter typechecking
+* Resolves [#4096](https://github.com/linuxmint/cinnamon-spices-applets/issues/4096) - Change old translated string to new version
+* Resolves [#3916](https://github.com/linuxmint/cinnamon-spices-applets/issues/3916)
+* Applet now detects if network is down and pauses/resumes accordingly
+
 ## 3.1.6
 
 * Support changing logging level from settings

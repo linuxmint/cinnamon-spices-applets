@@ -172,7 +172,6 @@
 	"radio-search-widget": {
 		"type": "custom",
 		"file": "RadioSearchWidget.py",
-		"widget": "RadioSearchWidget",
-		"description": "Try out this custom widget!"
+		"widget": "RadioSearchWidget"
 	}
 }

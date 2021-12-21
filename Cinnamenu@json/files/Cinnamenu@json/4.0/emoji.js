@@ -538,7 +538,7 @@ const EMOJI = [
 'mending heart',
 'healthier improving mending recovering recuperating well'
 ],[
-'❤',
+'❤️',
 'red heart',
 'heart love like valentines'
 ],[

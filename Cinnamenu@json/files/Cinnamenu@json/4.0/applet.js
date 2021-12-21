@@ -1145,7 +1145,14 @@ class CinnamenuApplet extends TextIconApplet {
 
         //----home folder search--------
         if (pattern.length > 1 && this.settings.searchHomeFolder) {
-            let updateInterval = 100;
+            //Call function searchNextDir() consecutively and asynchronously on each folder to be searched so
+            //that search can be interupted at any time. Starting with home folder, all folders to be
+            //searched are added to foldersToDo[] with currentFolderIndex being the folder currently
+            //being searched. Searching is cancelled when the search string has changed (thisSearchId !==
+            //this.currentSearchId). Searching is completed when all folders have been searched
+            //(currentFolderIndex === foldersToDo.length - 1)
+
+            let updateInterval = 100;//update the results after the first 100ms even if search hasn't finished
             const MAX_FOLDERS_TODO = 200;
             const results = [];
             const foldersToDo = [];
@@ -1172,11 +1179,17 @@ class CinnamenuApplet extends TextIconApplet {
                         }
                         return;
                     }
+
+                    //find matching files and folders in directory
                     let next;
                     if (enumerator) {
                         next = enumerator.next_file(null);
                     }
-                    while (next) {
+
+                    let searchTimeLimit = Date.now() + 200; // allow max 200ms to search each folder to
+                    //prevent freezing if a folder has a large number of files.
+                    while (next && Date.now() < searchTimeLimit) {
+
                         const filename = next.get_name();
                         const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
                         const filePath = folder + (folder === '/' ? '' : '/') + filename;

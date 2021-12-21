@@ -1,0 +1,52 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "panel-options"
+    ],
+    "panel-options": {
+      "type": "page",
+      "title": "Settings",
+      "sections": [
+        "keyboard-section",
+        "history-section"
+      ]
+    },
+    "keyboard-section": {
+      "type": "section",
+      "title": "Keyboard",
+      "keys": [
+        "keyToggle"
+      ]
+    },
+    "history-section": {
+      "type": "section",
+      "title": "Expression and Result History",
+      "keys": [
+        "recentHistoryMaxLength",
+        "historyMaxDisplayLength"
+      ]
+    }
+  },
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "Show / hide mini calculator",
+    "default": "Calculator::<Primary><Alt><Super>c"
+  },
+  "recentHistoryMaxLength": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 0,
+    "max": 5,
+    "step": 1,
+    "description": "Max number of recent expressions"
+  },
+  "historyMaxDisplayLength": {
+    "type": "spinbutton",
+    "default": 6,
+    "min": 0,
+    "max": 16,
+    "step": 1,
+    "description": "Max length of expression history"
+  }
+}

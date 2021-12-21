@@ -66,6 +66,6 @@ function getDownloadPath(stdout: string) {
     // there is only one line in stdout which gives the path of the downloaded mp3. This start with [ffmpeg] Destination ...
     const searchString = '[ffmpeg] Destination: '
 
-    return arrayOfLines.find(line => line.includes(searchString))
-        .split(searchString)[1]
+    return arrayOfLines?.find(line => line.includes(searchString))
+        ?.split(searchString)[1]
 }

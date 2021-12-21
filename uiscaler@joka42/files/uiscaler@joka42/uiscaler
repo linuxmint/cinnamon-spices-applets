@@ -5,27 +5,52 @@
 
 scaling_100 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.0
-	dconf write /org/cinnamon/panels-height "['1:32']"
-	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":24, \"center\":0, \"right\":16}]'"
+	dconf write /org/cinnamon/panels-height "['1:40']"
+	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":0, \"center\":0, \"right\":24}]'"
 	dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":18, \"center\":0, \"right\":16}]'"
 }
 
 scaling_125 () {
 	dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.25
-	dconf write /org/cinnamon/panels-height "['1:48']"
+	dconf write /org/cinnamon/panels-height "['1:50']"
 	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":34, \"center\":0, \"right\":22}]'"
     dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":26, \"center\":0, \"right\":22}]'"
+}
+
+scaling_150 () {
+    dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.5
+	dconf write /org/cinnamon/panels-height "['1:60']"
+	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":40, \"center\":0, \"right\":28}]'"
+    dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":32, \"center\":0, \"right\":28}]'"
+}
+
+scaling_175 () {
+    dconf write /org/cinnamon/desktop/interface/text-scaling-factor 1.75
+	dconf write /org/cinnamon/panels-height "['1:70']"
+	dconf write /org/cinnamon/panel-zone-icon-sizes "'[{\"panelId\":1, \"left\":46, \"center\":0, \"right\":32}]'"
+    dconf write /org/cinnamon/panel-zone-symbolic-icon-sizes "'[{\"panelId\":1, \"left\":38, \"center\":0, \"right\":32}]'"
 }
 
 
 case $1 in
     "100")
-        scaling_100
         gsettings set org.cinnamon.desktop.interface scaling-factor 1
+        scaling_100
         exit
     ;;
     "125")
+        gsettings set org.cinnamon.desktop.interface scaling-factor 1
         scaling_125
+        exit
+    ;;
+    "150")
+        gsettings set org.cinnamon.desktop.interface scaling-factor 1
+        scaling_150
+        exit
+    ;;
+    "175")
+        gsettings set org.cinnamon.desktop.interface scaling-factor 1
+        scaling_175
         exit
     ;;
     "200")

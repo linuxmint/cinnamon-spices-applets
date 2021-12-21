@@ -177,12 +177,6 @@ msgstr "Menü megjelenítése"
 msgid "Set keybinding(s) to show the menu"
 msgstr "Menüt megjelenítő billentyűkombináció beállítása"
 
-#. settings-schema.json->fixed-menu-width->description
-msgid "Fixed Menu Width"
-msgstr "Rögzített szélességű menü"
-
-#. settings-schema.json->fixed-menu-width->tooltip
-msgid "Based on the largest submenu item, to prevent menu width flickering"
 msgstr ""
 "A legszélesebb almenü alapján kiválasztott szélességgel elkerülhető menü "
 "urgálása"

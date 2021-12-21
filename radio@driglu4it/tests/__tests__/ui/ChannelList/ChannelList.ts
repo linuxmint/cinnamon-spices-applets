@@ -22,6 +22,7 @@ const createChannelMenuItem = jest.fn((args: ChannelMenuItemArguments) => {
 
     function saveStateToLabel() {
 
+        // @ts-ignore
         const state: ChannelState = { channelName, playbackStatus }
         label.set_text(JSON.stringify(state))
     }
@@ -67,7 +68,7 @@ const { BoxLayout } = imports.gi.St
 
 
 interface CheckChannelListArgs {
-    currentChannel: string,
+    currentChannel: string | null,
     playbackStatus: AdvancedPlaybackStatus,
     channelList: ReturnType<typeof createChannelList>
 }
@@ -195,15 +196,6 @@ describe('Setting CurrentChannel is working', () => {
             playbackStatus
         })
     });
-
-    it('setting currentChannel to null throws no error', () => {
-        const channelList = createChannelList({
-            stationNames: stationNames1, onChannelClicked
-        })
-
-        expect(() => channelList.setCurrentChannel(null)).not.toThrowError()
-
-    })
 
     it('setting currentChannel to invalid value throws an error', () => {
         const channelList = createChannelList({
