@@ -32,6 +32,12 @@ BatteryPowerApplet.prototype = {
 
 	update: function() {
 		const power = this._getBatteryPower();
+		if (isNaN(power)){
+			this.set_applet_label("ERROR");
+			this.set_applet_tooltip("ERROR: Your system is not supported, yet.\nConsider reporting an issue on github: https://github.com/linuxmint/cinnamon-spices-applets");
+			return;
+		}
+
 		const value = ((Math.round(power * 10) / 10)
 			.toFixed(1)
 			.toString()
@@ -60,7 +66,7 @@ BatteryPowerApplet.prototype = {
 				this.set_applet_tooltip('Status unknown, please contact the maintainer https://github.com/linuxmint/cinnamon-spices-applets/issues');
 				this.set_applet_label(charging_indicator);
 		}
-		return true;
+		return;
 	},
 
 	_getBatteryStatus: function () {
@@ -72,15 +78,26 @@ BatteryPowerApplet.prototype = {
 	},
 
 	_getBatteryPower: function () {
+		// Depending on the files that are present in /sys/class/power_supply/BAT0/ the power that is drawn from the
+		// battery, or that is used to charge the battery is returned.
+		// NaN, if no file is found.
+		const powerDrawFile = "/sys/class/power_supply/BAT0/power_now";
+		if(GLib.file_test(powerDrawFile, 1 << 4)) {
+			return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
+		}
+		
 		const currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
 		const voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
-		if (! GLib.file_test(currentDrawFile, 1 << 4) || !GLib.file_test(voltageDrawFile, 1 << 4)) {
-			return NaN
+
+		if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
+			const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
+			const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
+			
+			return current * voltage;
 		}
-		const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
-		const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
 		
-		return current * voltage;
+		
+		return NaN
 	},
 
 	on_settings_changed: function() {
