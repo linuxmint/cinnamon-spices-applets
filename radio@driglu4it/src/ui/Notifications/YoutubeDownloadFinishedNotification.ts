@@ -3,19 +3,30 @@ import { createBasicNotification } from "./NotificationBase";
 const { spawnCommandLine } = imports.misc.util
 
 interface Arguments {
-    downloadPath: string
+    downloadPath: string,
+    fileAlreadExist?: boolean
 }
 
 export function notifyYoutubeDownloadFinished(args: Arguments) {
 
     const {
-        downloadPath
+        downloadPath,
+        fileAlreadExist = false
     } = args
+
+    const notificationText = fileAlreadExist ?
+        'Downloaded Song not saved as a file with the same name already exists' :
+        `Download finished. File saved to ${downloadPath}`
 
 
     const notification = createBasicNotification({
-        notificationText: `Download finished. File saved to ${downloadPath}`
+        notificationText,
+        isMarkup: false,
+        transient: false
     })
+
+    // workaround to remove the underline of the downloadPath
+    notification["_bodyUrlHighlighter"].actor.clutter_text.set_markup(notificationText)
 
     const playBtnId = 'openBtn'
 
