@@ -2694,6 +2694,7 @@ const initConfig = () => {
 const createConfig = () => {
     // all settings are saved to this object
     const settingsObject = {};
+    // @ts-ignore
     const appletSettings = new AppletSettings(settingsObject, __meta.uuid, __meta.instanceId);
     const iconTypeChangeHandler = [];
     const colorPlayingChangeHander = [];
@@ -4205,9 +4206,11 @@ const { getAppletDefinition } = imports.ui.appletManager;
 function createAppletContainer(args) {
     const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } = args;
     const appletDefinition = getAppletDefinition({
+        // @ts-ignore
         applet_id: __meta.instanceId,
     });
     const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
+    // @ts-ignore
     const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
     let appletReloaded = false;
     applet.on_applet_clicked = onClick;
@@ -4517,6 +4520,7 @@ const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
     const { appletContainer, } = args;
+    // @ts-ignore
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation);
     tooltip['_tooltip'].set_style("text-align: left;");
     const setRefreshTooltip = () => {
@@ -4563,6 +4567,7 @@ const { Point } = imports.gi.Clutter;
 function createAppletIcon(props) {
     const icon_type = (props === null || props === void 0 ? void 0 : props.icon_type) || AppletIcon_IconType.SYMBOLIC;
     const appletDefinition = AppletIcon_getAppletDefinition({
+        // @ts-ignore
         applet_id: __meta.instanceId,
     });
     const panel = AppletIcon_panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
@@ -4577,7 +4582,7 @@ function createAppletIcon(props) {
     panel.connect('icon-size-changed', () => {
         icon.set_icon_size(getIconSize());
     });
-    icon.connect('notify::icon-type', () => {
+    icon.connect('notify::icon_type', () => {
         icon.style_class = getStyleClass();
     });
     return icon;
