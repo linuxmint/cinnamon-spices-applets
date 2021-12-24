@@ -15,7 +15,6 @@ export function createRadioAppletTooltip(args: Arguments) {
         appletContainer,
     } = args
 
-    // @ts-ignore
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation)
     tooltip['_tooltip'].set_style("text-align: left;")
 

@@ -28,7 +28,6 @@ const createConfig = () => {
 
     // all settings are saved to this object
     const settingsObject = {} as Omit<Settings, 'initialVolume'>
-    // @ts-ignore
     const appletSettings = new AppletSettings(settingsObject, __meta.uuid, __meta.instanceId)
 
     const iconTypeChangeHandler: ChangeHandler<AppletIcon>[] = []

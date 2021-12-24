@@ -24,7 +24,6 @@ export function createAppletContainer(args: Arguments) {
     } = args
 
     const appletDefinition = getAppletDefinition({
-        // @ts-ignore
         applet_id: __meta.instanceId,
     })
 
@@ -32,7 +31,6 @@ export function createAppletContainer(args: Arguments) {
         panel?.panelId === appletDefinition.panelId
     ) as imports.ui.panel.Panel
 
-    // @ts-ignore
     const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
 
     let appletReloaded = false;
