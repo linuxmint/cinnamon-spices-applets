@@ -29,9 +29,13 @@ export function createRadioAppletContainer() {
         appletContainer.actor.add_child(widget)
     })
 
-    createRadioAppletTooltip({ appletContainer })
+    const tooltip = createRadioAppletTooltip({ appletContainer })
 
     const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor })
+
+    popupMenu.connect('notify::visible', () => {
+        popupMenu.visible && tooltip.hide()
+    })
 
     function handleAppletRemoved() {
         mpvHandler?.deactivateAllListener()

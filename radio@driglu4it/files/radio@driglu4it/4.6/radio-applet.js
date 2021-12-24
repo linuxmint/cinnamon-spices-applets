@@ -2694,7 +2694,6 @@ const initConfig = () => {
 const createConfig = () => {
     // all settings are saved to this object
     const settingsObject = {};
-    // @ts-ignore
     const appletSettings = new AppletSettings(settingsObject, __meta.uuid, __meta.instanceId);
     const iconTypeChangeHandler = [];
     const colorPlayingChangeHander = [];
@@ -4206,11 +4205,9 @@ const { getAppletDefinition } = imports.ui.appletManager;
 function createAppletContainer(args) {
     const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } = args;
     const appletDefinition = getAppletDefinition({
-        // @ts-ignore
         applet_id: __meta.instanceId,
     });
     const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
-    // @ts-ignore
     const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
     let appletReloaded = false;
     applet.on_applet_clicked = onClick;
@@ -4520,7 +4517,6 @@ const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
     const { appletContainer, } = args;
-    // @ts-ignore
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation);
     tooltip['_tooltip'].set_style("text-align: left;");
     const setRefreshTooltip = () => {
@@ -4557,6 +4553,7 @@ function createRadioAppletTooltip(args) {
         addDownloadingSongsChangeListener
     ].forEach(cb => cb(setRefreshTooltip));
     setRefreshTooltip();
+    return tooltip;
 }
 
 ;// CONCATENATED MODULE: ./src/lib/AppletIcon.ts
@@ -4582,7 +4579,7 @@ function createAppletIcon(props) {
     panel.connect('icon-size-changed', () => {
         icon.set_icon_size(getIconSize());
     });
-    icon.connect('notify::icon_type', () => {
+    icon.connect('notify::icon-type', () => {
         icon.style_class = getStyleClass();
     });
     return icon;
@@ -5496,8 +5493,11 @@ function createRadioAppletContainer() {
     [createRadioAppletIcon(), createYoutubeDownloadIcon(), createRadioAppletLabel()].forEach(widget => {
         appletContainer.actor.add_child(widget);
     });
-    createRadioAppletTooltip({ appletContainer });
+    const tooltip = createRadioAppletTooltip({ appletContainer });
     const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
+    popupMenu.connect('notify::visible', () => {
+        popupMenu.visible && tooltip.hide();
+    });
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();

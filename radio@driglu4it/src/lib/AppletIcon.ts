@@ -40,7 +40,7 @@ export function createAppletIcon(props?: ConstructorParameters<typeof Icon>[0]) 
         icon.set_icon_size(getIconSize())
     })
 
-    icon.connect('notify::icon_type', () => {
+    icon.connect('notify::icon-type', () => {
         icon.style_class = getStyleClass()
     })
 

@@ -58,4 +58,6 @@ export function createRadioAppletTooltip(args: Arguments) {
     ].forEach(cb => cb(setRefreshTooltip))
 
     setRefreshTooltip()
+
+    return tooltip
 }
