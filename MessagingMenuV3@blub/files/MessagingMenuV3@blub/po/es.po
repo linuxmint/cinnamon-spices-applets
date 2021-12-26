@@ -18,18 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: es\n"
 
-#: applet.js:181
+#: applet.js:182
 msgid "Compose New Message..."
-msgstr "Componer Nuevo Mensaje..."
+msgstr "Redactar un nuevo mensaje..."
 
-#: applet.js:183
+#: applet.js:184
 msgid "Contacts"
 msgstr "Contactos"
 
-#. MessagingMenuV3@blub->metadata.json->description
-msgid "Messaging Menu applet now compatible with Cinnamon 2.4"
-msgstr "Applet de Mensajería ahora compatible con Cinnamon 2.4"
+#. metadata.json->name
+msgid "Messaging Menu"
+msgstr "Menú de mensajería"
 
-#. MessagingMenuV3@blub->metadata.json->name
-msgid "Messaging Menu V3"
-msgstr "Menú de Mensajería V3"
+#. metadata.json->description
+msgid "Messaging Menu applet"
+msgstr "Applet de Menú de mensajería"
