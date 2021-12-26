@@ -1,44 +1,39 @@
 const { Applet, AllowedLayout } = imports.ui.applet
-const { Bin } = imports.gi.St
 const { EventType } = imports.gi.Clutter
+const { panelManager } = imports.ui.main
+const { getAppletDefinition } = imports.ui.appletManager;
 
 interface Arguments {
-    icon: imports.gi.St.Icon,
-    label: imports.gi.St.Label,
-    orientation: imports.gi.St.Side,
-    panelHeight: number,
-    instanceId: number,
     onClick: () => void,
     onScroll: (scrollDirection: imports.gi.Clutter.ScrollDirection) => void,
     onMiddleClick: () => void,
     onRightClick: () => void,
-    onAppletMoved: () => void,
-    onAppletRemoved: () => void
+    onMoved: () => void,
+    onRemoved: () => void
 }
 
-export function createApplet(args: Arguments) {
+export function createAppletContainer(args: Arguments) {
 
     const {
-        orientation,
-        panelHeight,
-        instanceId,
-        icon,
-        label,
         onClick,
         onScroll,
         onMiddleClick,
-        onAppletMoved,
-        onAppletRemoved,
+        onMoved,
+        onRemoved,
         onRightClick
     } = args
 
-    const applet = new Applet(orientation, panelHeight, instanceId);
+    const appletDefinition = getAppletDefinition({
+        applet_id: __meta.instanceId,
+    })
+
+    const panel = panelManager.panels.find(panel =>
+        panel?.panelId === appletDefinition.panelId
+    ) as imports.ui.panel.Panel
+
+    const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
 
     let appletReloaded = false;
-
-    [icon, label].forEach(widget => {
-        applet.actor.add_child(widget)
-    })
 
     applet.on_applet_clicked = onClick
     applet.on_applet_middle_clicked = onMiddleClick
@@ -49,7 +44,7 @@ export function createApplet(args: Arguments) {
     }
 
     applet.on_applet_removed_from_panel = function () {
-        appletReloaded ? onAppletMoved() : onAppletRemoved()
+        appletReloaded ? onMoved() : onRemoved()
         appletReloaded = false
     }
 
@@ -59,7 +54,6 @@ export function createApplet(args: Arguments) {
         if (event.get_button() === 3) {
             onRightClick()
         }
-
         return false
 
     })

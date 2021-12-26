@@ -1,11 +1,11 @@
-import { createActivWidget } from "../../lib/ActivWidget";
+import { createActivWidget } from "../../../lib/ActivWidget";
 
 const { Button, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
 interface Arguments {
-    iconName: string,
-    tooltipTxt: string,
+    iconName?: string,
+    tooltipTxt?: string,
     onClick: { (): void },
 }
 
@@ -19,7 +19,7 @@ export function createControlBtn(args: Arguments) {
 
     const icon = new Icon({
         icon_type: IconType.SYMBOLIC,
-        icon_name: iconName,
+        icon_name: iconName || '',
         style_class: 'popup-menu-icon' // this specifies the icon-size
     })
 
@@ -37,7 +37,7 @@ export function createControlBtn(args: Arguments) {
         onActivated: onClick
     })
 
-    const tooltip = new Tooltip(btn, tooltipTxt)
+    const tooltip = new Tooltip(btn, tooltipTxt || '')
 
     return {
         actor: btn,

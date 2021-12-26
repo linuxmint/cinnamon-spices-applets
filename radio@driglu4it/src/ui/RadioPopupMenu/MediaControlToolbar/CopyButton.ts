@@ -1,15 +1,12 @@
-import { COPY_ICON_NAME } from "../../consts";
+import { COPY_ICON_NAME } from "../../../consts";
+import { mpvHandler } from "../../../services/mpv/MpvHandler";
 import { createControlBtn } from "./ControlBtn";
+const { Clipboard, ClipboardType } = imports.gi.St
 
-interface Arguments {
-    onClick: { (): void }
-}
 
-export function createCopyButton(args: Arguments) {
 
-    const {
-        onClick
-    } = args
+export function createCopyButton() {
+    const { getCurrentTitle } = mpvHandler
 
     const defaultTooltipTxt = "Copy current song title to Clipboard"
 
@@ -21,8 +18,12 @@ export function createCopyButton(args: Arguments) {
 
     function handleClick() {
         controlBtn.tooltip.show()
-        onClick()
-        // showCopyInTooltip()
+
+        const currentTitle = getCurrentTitle()
+        if (!currentTitle) return
+
+        Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentTitle)
+        //showCopyInTooltip()
     }
 
     // For some reasons I don't understand, this function has stopped working after refactoring the popup Menu. No idea how to debug this. Therefore deactivating this for now :-(. It is thrown an  warning when clicking on the button but this has nothing to do with the tooltip
@@ -37,7 +38,6 @@ export function createCopyButton(args: Arguments) {
         }, 500)
     }
 
-    return {
-        actor: controlBtn.actor,
-    }
+    return controlBtn.actor
+
 }
