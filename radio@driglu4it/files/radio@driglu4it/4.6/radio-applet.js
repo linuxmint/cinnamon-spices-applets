@@ -2744,7 +2744,7 @@ const createConfig = () => {
     let previousChannelOnPanel = settingsObject.channelNameOnPanel;
     function getInitialVolume() {
         const { keepVolume, lastVolume, customInitVolume } = settingsObject;
-        let initialVolume = keepVolume ? lastVolume : customInitVolume;
+        const initialVolume = keepVolume ? lastVolume : customInitVolume;
         return initialVolume;
     }
     return {
@@ -4564,7 +4564,6 @@ const { Point } = imports.gi.Clutter;
 function createAppletIcon(props) {
     const icon_type = (props === null || props === void 0 ? void 0 : props.icon_type) || AppletIcon_IconType.SYMBOLIC;
     const appletDefinition = AppletIcon_getAppletDefinition({
-        // @ts-ignore
         applet_id: __meta.instanceId,
     });
     const panel = AppletIcon_panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
@@ -4987,29 +4986,21 @@ const { BoxLayout: VolumeSlider_BoxLayout, Icon: VolumeSlider_Icon, IconType: Vo
 const { Tooltip } = imports.ui.tooltips;
 const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter;
 function createVolumeSlider() {
-    const { getVolume, setVolume, addVolumeChangeHandler } = mpvHandler;
+    const { getVolume, setVolume, addVolumeChangeHandler, addPlaybackStatusChangeHandler } = mpvHandler;
     const container = new VolumeSlider_BoxLayout({
         style_class: POPUP_MENU_ITEM_CLASS,
     });
     createActivWidget({
         widget: container
     });
-    /** in Percent and rounded! */
-    // let volume: number
     const slider = createSlider({
-        initialValue: getVolume({ dimension: 'fraction' }) || 0,
         onValueChanged: (newValue) => setVolume(newValue * 100)
     });
-    const getTooltipTxt = () => {
-        var _a;
-        return `Volume: ${(_a = getVolume()) === null || _a === void 0 ? void 0 : _a.toString()} %`;
-    };
-    const tooltip = new Tooltip(slider.actor, getTooltipTxt());
-    tooltip.show();
+    // @ts-ignore
+    const tooltip = new Tooltip(slider.actor, null);
     const icon = new VolumeSlider_Icon({
         icon_type: VolumeSlider_IconType.SYMBOLIC,
         style_class: POPUP_ICON_CLASS,
-        icon_name: getVolumeIcon({ volume: getVolume() || 0 }),
         reactive: true
     });
     [icon, slider.actor].forEach(widget => {
@@ -5038,11 +5029,17 @@ function createVolumeSlider() {
         const newValue = slider.getValue() + delta / 100;
         slider.setValue(newValue);
     }
-    addVolumeChangeHandler((newVolume) => {
-        tooltip.set_text(getTooltipTxt());
-        slider.setValue(newVolume / 100, true);
-        icon.set_icon_name(getVolumeIcon({ volume: newVolume }));
-    });
+    const setRefreshVolumeSlider = () => {
+        const volume = getVolume();
+        if (volume) {
+            tooltip.set_text(`Volume: ${volume.toString()} %`);
+            tooltip.show();
+            slider.setValue(volume / 100, true);
+            icon.set_icon_name(getVolumeIcon({ volume }));
+        }
+    };
+    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach(cb => cb(setRefreshVolumeSlider));
+    setRefreshVolumeSlider();
     return container;
 }
 

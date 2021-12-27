@@ -12,7 +12,8 @@ export function createVolumeSlider() {
     const {
         getVolume,
         setVolume,
-        addVolumeChangeHandler
+        addVolumeChangeHandler,
+        addPlaybackStatusChangeHandler
     } = mpvHandler
 
     const container = new BoxLayout({
@@ -23,25 +24,16 @@ export function createVolumeSlider() {
         widget: container
     })
 
-    /** in Percent and rounded! */
-    // let volume: number
-
     const slider = createSlider({
-        initialValue: getVolume({ dimension: 'fraction' }) || 0,
         onValueChanged: (newValue) => setVolume(newValue * 100)
     })
 
-    const getTooltipTxt = () => {
-        return `Volume: ${getVolume()?.toString()} %`
-    }
-
-    const tooltip = new Tooltip(slider.actor, getTooltipTxt())
-    tooltip.show()
+    // @ts-ignore
+    const tooltip = new Tooltip(slider.actor, null)
 
     const icon = new Icon({
         icon_type: IconType.SYMBOLIC,
         style_class: POPUP_ICON_CLASS,
-        icon_name: getVolumeIcon({ volume: getVolume() || 0 }),
         reactive: true
     });
 
@@ -80,12 +72,22 @@ export function createVolumeSlider() {
         slider.setValue(newValue)
     }
 
-    addVolumeChangeHandler((newVolume) => {
 
-        tooltip.set_text(getTooltipTxt())
-        slider.setValue(newVolume / 100 , true)
-        icon.set_icon_name(getVolumeIcon({ volume: newVolume }))
-    })
+    const setRefreshVolumeSlider = () => {
+        const volume = getVolume()
+
+        if (volume) {
+            tooltip.set_text(`Volume: ${volume.toString()} %`)
+            tooltip.show()
+
+            slider.setValue(volume / 100, true)
+            icon.set_icon_name(getVolumeIcon({ volume }))
+        }
+    }
+
+    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach(cb => cb(setRefreshVolumeSlider))
+
+    setRefreshVolumeSlider();
 
     return container
 }
