@@ -11,6 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-19 18:04+0000\n"
 "PO-Revision-Date: 2021-12-27 06:57+0100\n"
+"PO-Revision-Date: 2021-12-27 09:52+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1714,7 +1715,7 @@ msgstr "Enregistrer dans un fichier"
 
 #: 3.8/LogSaver.py:29
 msgid "Select a destination"
-msgstr "Choisissez une destination"
+msgstr "Sélectionner une destination"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -2458,8 +2459,8 @@ msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
-"Cela inclut les journaux de l'applet et les paramètres actuels avec votre "
-"clé API expurgée."
+"Cela inclut les journaux de l'applet et les paramètres actuels expurgés de "
+"votre clé API."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"

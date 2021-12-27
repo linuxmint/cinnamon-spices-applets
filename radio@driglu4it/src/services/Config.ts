@@ -92,7 +92,7 @@ const createConfig = () => {
             customInitVolume
         } = settingsObject
 
-        let initialVolume = keepVolume ? lastVolume : customInitVolume
+        const initialVolume = keepVolume ? lastVolume : customInitVolume
 
         return initialVolume
     }

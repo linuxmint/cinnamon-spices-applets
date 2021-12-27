@@ -9,7 +9,6 @@ export function createAppletIcon(props?: ConstructorParameters<typeof Icon>[0]) 
     const icon_type = props?.icon_type || IconType.SYMBOLIC
 
     const appletDefinition = getAppletDefinition({
-        // @ts-ignore
         applet_id: __meta.instanceId,
     })
 
