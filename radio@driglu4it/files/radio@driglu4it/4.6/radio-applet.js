@@ -5033,7 +5033,6 @@ function createVolumeSlider() {
         const volume = getVolume();
         if (volume) {
             tooltip.set_text(`Volume: ${volume.toString()} %`);
-            tooltip.show();
             slider.setValue(volume / 100, true);
             icon.set_icon_name(getVolumeIcon({ volume }));
         }
