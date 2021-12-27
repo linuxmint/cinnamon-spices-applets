@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2021-11-13 15:46-0300\n"
+"PO-Revision-Date: 2021-12-27 15:14-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
@@ -103,12 +103,8 @@ msgid "QRedshift"
 msgstr "QRedshift"
 
 #. metadata.json->description
-msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift. This "
-"applet conflicts with redshift-gtk, make sure you remove it."
-msgstr ""
-"Establecer el brillo, nivel de gama y temperatura de color con Redhsift. "
-"Este applet es incompatible con redshift-gtk, asegúrese de removerlo."
+msgid "Sets brightness, gamma levels and color temperature with Redshift. This applet conflicts with redshift-gtk, make sure you remove it."
+msgstr "Establece el brillo, nivel de gama y temperatura de color con Redhsift. Este applet es incompatible con redshift-gtk, asegúrese de removerlo."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
@@ -273,15 +269,32 @@ msgstr ""
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
-msgstr ""
-"* Haga clic con el botón derecho en los controles deslizantes para "
-"restablecer el valor predeterminado (neutro)."
+msgstr "* Haga clic con el botón derecho en los controles deslizantes para restablecer el valor predeterminado (neutro)."
+
+#. settings-schema.json->textInfo->description
+msgid "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
+msgstr "Si te gusta y usas este applet tómate el tiempo de visitar su página en Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github para hacerlo."
 
 #. settings-schema.json->textInfo->description
 msgid ""
-"If you like and use this applet take the time to visit it's page on Cinnamon "
-"Spices and give it a star. You only need a github account to do this."
+"When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+" You will lost all your configs."
 msgstr ""
-"Si te gusta y usas este applet tómate el tiempo de visitar su página en "
-"Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github "
-"para hacerlo."
+"Cuando actualice a una nueva versión, asegúrese de restablecer la configuración por defecto borrando el archivo ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+" Perderá todas sus configuraciones."
+
+#. settings-schema.json->textInfo->description
+msgid "Use symbolic icon"
+msgstr "Usar iconos simbólicos"
+
+#. settings-schema.json->textInfo->description
+msgid "Choose Start Time"
+msgstr "Seleccione hora de inicio"
+
+#. settings-schema.json->textInfo->description
+msgid "Choose End Time"
+msgstr "Seleccione hora de término"
+
+#. settings-schema.json->textInfo->description
+msgid "Use Manual Night Time"
+msgstr "Usar horario nocturno manual"
