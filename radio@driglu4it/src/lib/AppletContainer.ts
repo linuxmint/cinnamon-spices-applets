@@ -35,8 +35,16 @@ export function createAppletContainer(args: Arguments) {
 
     let appletReloaded = false;
 
-    applet.on_applet_clicked = onClick
-    applet.on_applet_middle_clicked = onMiddleClick
+    applet.on_applet_clicked = () => {
+        onClick()
+        return true
+    }
+    
+    applet.on_applet_middle_clicked = () => {
+        onMiddleClick()
+        return true
+    }
+
     applet.setAllowedLayout(AllowedLayout.BOTH)
 
     applet.on_applet_reloaded = function () {
