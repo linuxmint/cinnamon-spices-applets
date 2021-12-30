@@ -28,7 +28,6 @@ export function createVolumeSlider() {
         onValueChanged: (newValue) => setVolume(newValue * 100)
     })
 
-    // @ts-ignore
     const tooltip = new Tooltip(slider.actor, null)
 
     const icon = new Icon({
@@ -76,7 +75,7 @@ export function createVolumeSlider() {
     const setRefreshVolumeSlider = () => {
         const volume = getVolume()
 
-        if (volume) {
+        if (volume != null) {
             tooltip.set_text(`Volume: ${volume.toString()} %`)
             slider.setValue(volume / 100, true)
             icon.set_icon_name(getVolumeIcon({ volume }))

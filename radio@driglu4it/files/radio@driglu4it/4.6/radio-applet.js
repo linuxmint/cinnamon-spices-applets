@@ -4210,8 +4210,14 @@ function createAppletContainer(args) {
     const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
     const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
     let appletReloaded = false;
-    applet.on_applet_clicked = onClick;
-    applet.on_applet_middle_clicked = onMiddleClick;
+    applet.on_applet_clicked = () => {
+        onClick();
+        return true;
+    };
+    applet.on_applet_middle_clicked = () => {
+        onMiddleClick();
+        return true;
+    };
     applet.setAllowedLayout(AllowedLayout.BOTH);
     applet.on_applet_reloaded = function () {
         appletReloaded = true;
@@ -4996,7 +5002,6 @@ function createVolumeSlider() {
     const slider = createSlider({
         onValueChanged: (newValue) => setVolume(newValue * 100)
     });
-    // @ts-ignore
     const tooltip = new Tooltip(slider.actor, null);
     const icon = new VolumeSlider_Icon({
         icon_type: VolumeSlider_IconType.SYMBOLIC,
@@ -5031,7 +5036,7 @@ function createVolumeSlider() {
     }
     const setRefreshVolumeSlider = () => {
         const volume = getVolume();
-        if (volume) {
+        if (volume != null) {
             tooltip.set_text(`Volume: ${volume.toString()} %`);
             slider.setValue(volume / 100, true);
             icon.set_icon_name(getVolumeIcon({ volume }));
