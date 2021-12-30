@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-19 18:04+0000\n"
-"PO-Revision-Date: 2021-12-27 09:52+0100\n"
+"PO-Revision-Date: 2021-12-28 08:20+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -116,7 +116,7 @@ msgid ""
 "are you connected to the internet?"
 msgstr ""
 "Impossible de mettre à jour la météo depuis un certain temps...\n"
-"vérifier la connexion à Internet ?"
+"êtes-vous connecté·e à internet ?"
 
 #: 3.0/applet.js:684
 msgid "Network Error, please check logs in Looking Glass"
@@ -1512,7 +1512,7 @@ msgstr "À {lastUpdatedTime}"
 
 #: 3.8/weather-applet.js:11606
 msgid "{distance}{distanceUnit} from you"
-msgstr "{distance}{distanceUnit} de vous"
+msgstr "{distance} {distanceUnit} de vous"
 
 #: 3.8/weather-applet.js:11874
 msgid "DarkSky"
@@ -1809,8 +1809,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Les entrées acceptables sont Latitude, Longitude. Par ex. : 68.1932, 17.1426 "
-"ou une adresse.\n"
+"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : « "
+"68.1932, 17.1426 » ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -2075,7 +2075,8 @@ msgstr "Afficher uniquement les heures pour les prévisions horaires"
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
-msgstr "Au lieu de 15:00 ou 3:00 pm, apparaîtra comme 15 ou 3 pm."
+msgstr ""
+"Au lieu de « 15:00 » ou « 3:00 pm », apparaîtra comme « 15 » ou « 3 pm »."
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
@@ -2199,7 +2200,7 @@ msgstr ""
 "des prévisions et ils ont tous besoin d'une connexion Internet "
 "opérationnelle pour fonctionner. Les options sont décrites en détail sur le "
 "site web Cinnamon Spices, auquel vous pouvez accéder avec le bouton sur "
-"l'onglet Aide."
+"l'onglet « Aide »."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -2226,8 +2227,8 @@ msgid ""
 "replaced automatically for validating your choice."
 msgstr ""
 "Vous pouvez entrer les coordonnées « Latitude, Longitude » (par ex. 51,5085, "
-"-0,1257) ou utiliser « Ville, Code du pays » (par exemple Paris, FR) ou "
-"essayer d'entrer {Numéro de maison} {Rue} {Ville} {Code postal} {Pays}. "
+"-0,1257) ou utiliser « Ville, Code du pays » (par exemple « Paris, FR ») ou "
+"essayer d'entrer « {Numéro de maison} {Rue} {Ville} {Code postal} {Pays} ». "
 "L'algorithme de recherche est très flexible avec le format. Après 3 secondes "
 "sans saisie, l'adresse que vous avez entrée est automatiquement remplacée "
 "pour valider votre choix."
@@ -2243,7 +2244,7 @@ msgid ""
 msgstr ""
 "Enregistre les informations de localisation dans un fichier, afin que vous "
 "puissiez basculer entre elles avec des boutons dans l'applet (qui apparaîtra "
-"si vous en avez plus d'un)."
+"si vous en avez plus d'une)."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
@@ -2263,7 +2264,7 @@ msgid ""
 "setting in the Presentation tab will affect the final number."
 msgstr ""
 "Nombre maximal de jours qui peuvent être affichés. Le maximum de lignes et "
-"de colonnes défini dans l'onglet Affichage affectera le nombre final de "
+"de colonnes défini dans l'onglet « Affichage » affectera le nombre final de "
 "jours."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
@@ -2309,7 +2310,7 @@ msgid ""
 "You have to make sure the Search entry field is unique and your Timezone is "
 "in the IANA time zone format (e.g. 'Europe/London')"
 msgstr ""
-"Vous devez vous assurer que le champ de saisie Requête de recherche est "
+"Vous devez vous assurer que le champ de saisie « Requête de recherche » est "
 "unique et que votre fuseau horaire est au format IANA (par ex. 'Europe/"
 "Londres')."
 
@@ -2343,7 +2344,7 @@ msgstr "Afficher la direction du vent sous forme de texte"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
-msgstr "Comme SE, N au lieu d'icônes de direction."
+msgstr "Comme « SE, N » au lieu d'icônes de direction."
 
 # Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
@@ -2407,8 +2408,8 @@ msgstr ""
 "soumis dans la section « Issues ». N'oubliez pas d'ajouter une brève "
 "description dans le champ « Title » en plus du nom de l'applet "
 "(weather@mockturtl) pour permettre à tout le monde de savoir plus facilement "
-"de quoi il s'agit. Les journaux avec un niveau « Debug » (qui peuvent être "
-"enregistrés dans un fichier ci-dessous) sont également appréciés."
+"de quoi il s'agit. Les journaux avec un niveau « Debogage » (qui peuvent "
+"être enregistrés dans un fichier ci-dessous) sont également appréciés."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2421,11 +2422,11 @@ msgid ""
 msgstr ""
 "Dans la plupart des cas, votre emplacement fonctionne automatiquement, mais "
 "vous pouvez l'entrer manuellement par les coordonnées « Latitude, Longitude "
-"» (par ex. 51, 5085, -0,1257) ou utiliser « Ville, Code du pays » (par "
-"exemple Paris, FR) ou essayer d'entrer {Numéro de maison} {Rue} {Ville} "
-"{Code postal} {Pays}. L'algorithme de recherche est très flexible avec le "
-"format. Au bout de 3 secondes sans saisie, l'adresse que vous avez entrée "
-"est automatiquement remplacée pour valider votre choix."
+"» (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du pays "
+"» (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} {Rue} "
+"{Ville} {Code postal} {Pays} ». L'algorithme de recherche est très flexible "
+"avec le format. Au bout de 3 secondes sans saisie, l'adresse que vous avez "
+"entrée est automatiquement remplacée pour valider votre choix."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
@@ -2440,8 +2441,8 @@ msgstr ""
 "« Information » est le niveau de journalisation normal, « Debogage » est le "
 "niveau de débogage et « Verbeux » enregistre également les charges utiles "
 "des requêtes réseau. La modification ne sera effective que pour les futurs "
-"journaux. Changez-le seulement cela vous est demandé ou si vous savez ce que "
-"vous faites."
+"journaux. Changez-le seulement si cela vous est demandé ou si vous savez ce "
+"que vous faites."
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
@@ -2450,8 +2451,8 @@ msgstr "Verbeux"
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
 msgstr ""
-"Cliquez sur Enregistrer pour enregistrer les informations de débogage dans "
-"un fichier"
+"Cliquez sur « Enregistrer dans un fichier » pour enregistrer les "
+"informations de débogage dans un fichier"
 
 #. 3.8->settings-schema.json->fileSelect->tooltip
 msgid ""
