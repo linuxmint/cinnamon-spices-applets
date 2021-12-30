@@ -5,33 +5,35 @@ const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
 const XApp = imports.gi.XApp;
-const Util = imports.misc.util;
 const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
+const Util = imports.misc.util;
 const {getDocManager} = imports.misc.docInfo;
-const Mainloop = imports.mainloop;
-const {heightsUsedMonitor} = imports.ui.panel;
 //const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
-const {PopupResizeHandler} = require('./resizer');
-const {AppletSettings} = require('./settings');
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {addTween} = imports.ui.tweener;
+
+const {PopupResizeHandler} = require('./resizer');
+const {AppletSettings} = require('./settings');
 const {_, getThumbnail_gicon, searchStr} = require('./utils');
-const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const REMEMBER_RECENT_KEY = 'remember-recent-files';
-const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
+const {ContextMenu} = require('./contextmenu');
+const {AppsView} = require('./appsview');
+const {CategoriesView} = require('./categoriesview');
+const {Sidebar} = require('./sidebar');
 const {BookmarksManager} = require('./browserBookmarks');
+const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const {EMOJI} = require('./emoji');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
-const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
+const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
+//const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const SEARCH_THRESHOLD = 0.45;
-const PlacementTOP = 0, PlacementBOTTOM = 1, PlacementLEFT = 2, PlacementRIGHT = 3;
+const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -530,16 +532,16 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //find minimum width for categoriesView + sidebar (if present)
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
-        if (this.settings.sidebarPlacement === PlacementLEFT ||
-                                                this.settings.sidebarPlacement === PlacementRIGHT) {
+        if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
+                                                this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
             leftSideWidth += this.sidebar.sidebarOuterBox.width;
         }
         //find minimum width of bottomPane
         this.searchView.searchEntry.width = 5;  //Set to something small so that it gets set to its
                                                 //minimum value.
         let bottomPaneMinWidth = 0;
-        if (this.settings.sidebarPlacement === PlacementTOP ||
-                                                this.settings.sidebarPlacement === PlacementBOTTOM) {
+        if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
+                                                this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
             bottomPaneMinWidth = this.bottomPane.width;
         }
         //find minimum menu width
@@ -667,8 +669,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else if (enteredSidebarItemExists) {
-                if (this.settings.sidebarPlacement === PlacementLEFT ||
-                                                this.settings.sidebarPlacement === PlacementRIGHT) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
+                                                this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     previousSidebarItem();
@@ -692,8 +694,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else if (enteredSidebarItemExists) {
-                if (this.settings.sidebarPlacement === PlacementLEFT ||
-                                                    this.settings.sidebarPlacement === PlacementRIGHT) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
+                                                    this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     nextSidebarItem();
@@ -729,8 +731,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else if (enteredSidebarItemExists) {
-                if (this.settings.sidebarPlacement === PlacementTOP ||
-                                                    this.settings.sidebarPlacement === PlacementBOTTOM) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
+                                                    this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     nextSidebarItem();
@@ -770,8 +772,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else if (enteredSidebarItemExists) {
-                if (this.settings.sidebarPlacement === PlacementTOP ||
-                                                this.settings.sidebarPlacement === PlacementBOTTOM) {
+                if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
+                                                this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     previousSidebarItem();
@@ -1002,7 +1004,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
         if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != pattern_raw ) {
             if (!this.calcGIcon) {
-                this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/calc.png') });
+                this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png') });
             }
             otherResults.push({  isSearchResult: true,
                             name: ans.toString(),//('Solution:') + ' ' + ans,
@@ -1103,7 +1105,7 @@ class CinnamenuApplet extends TextIconApplet {
             const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
                             'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
 
-            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/' + iconName)});
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
 
             otherResults.push({
                         isSearchResult: true,
@@ -1303,7 +1305,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
                                                             (...args) => this._onMenuKeyPress(...args));
         this.bottomPane = new St.BoxLayout({});
-        if (sidebarPlacement === PlacementTOP || sidebarPlacement === PlacementBOTTOM) {
+        if (sidebarPlacement === SidebarPlacement.TOP || sidebarPlacement === SidebarPlacement.BOTTOM) {
             this.bottomPane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                   x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
@@ -1313,7 +1315,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.appsView = new AppsView(this);
         this.categoriesView = new CategoriesView(this);
         this.middlePane = new St.BoxLayout();
-        if (sidebarPlacement === PlacementLEFT) {
+        if (sidebarPlacement === SidebarPlacement.LEFT) {
             this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
@@ -1321,7 +1323,7 @@ class CinnamenuApplet extends TextIconApplet {
                                                     x_align: St.Align.START, y_align: St.Align.START });
         this.middlePane.add(this.appsView.applicationsScrollBox, { x_fill: false, y_fill: false,
                                             x_align: St.Align.START, y_align: St.Align.START, expand: false });
-        if (sidebarPlacement === PlacementRIGHT) {
+        if (sidebarPlacement === SidebarPlacement.RIGHT) {
             this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
@@ -1332,11 +1334,11 @@ class CinnamenuApplet extends TextIconApplet {
                                         vertical: true, reactive: true,
                                         show_on_set_parent: false });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-        if (sidebarPlacement === PlacementTOP) {
+        if (sidebarPlacement === SidebarPlacement.TOP) {
             this.mainBox.add(this.bottomPane);
         }
         this.mainBox.add_actor(this.middlePane);
-        if (sidebarPlacement !== PlacementTOP) {
+        if (sidebarPlacement !== SidebarPlacement.TOP) {
             this.mainBox.add(this.bottomPane);
         }
 
@@ -1375,7 +1377,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
-        if (sidebarPlacement !== PlacementLEFT) {
+        if (sidebarPlacement !== SidebarPlacement.LEFT) {
             const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(3);
             const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(3);
             const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
@@ -1829,309 +1831,6 @@ class RecentApps {// simple class to remember the last 3 used apps which are sho
     }
 }
 
-/* Creates the categories box and array of CategoryButtons (buttons[]). Updates the categories and
- * populates the categoriesBox. */
-class CategoriesView {
-    constructor(appThis) {
-        this.appThis = appThis;
-        this.buttons = [];
-
-        this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
-        this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
-        this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, {
-                                              x_fill: false, y_fill: true,
-                                              x_align: St.Align.START, y_align: St.Align.END,
-                                              y_expand: true, expand: false });
-        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false,
-                                    y_align: St.Align.START, style_class: 'vfade menu-categories-scrollbox' });
-
-        //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
-        this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
-        this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
-        this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
-        this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
-    }
-
-    update() {
-        //Put all enabled categories into newButtons[] in default order by reusing the
-        //buttons in this.buttons[] or creating new button.
-        const newButtons = [];
-
-        let button = this.buttons.find(button => button.id === 'all');
-        if (!button) {
-            button = new CategoryButton(this.appThis, 'all', _('All applications'), 'computer');
-        }
-        newButtons.push(button);
-
-        const dirs = [];
-        const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
-        let nextType;
-        while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
-            if (nextType === CMenu.TreeItemType.DIRECTORY) {
-                dirs.push(iter.get_directory());
-            }
-        }
-        dirs.sort((a, b) => {
-                        const prefCats = ['ADMINISTRATION', 'PREFERENCES'];
-                        const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
-                        const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
-                        if (prefIdA < 0 && prefIdB >= 0) return -1;
-                        if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        const nameA = a.get_name().toUpperCase();
-                        const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
-        dirs.forEach(dir => {
-                if (!dir.get_is_nodisplay()) {
-                    const dirId = dir.get_menu_id();
-                    const categoryApps = this.appThis.apps.listApplications(dirId);
-                    if (categoryApps.length > 0) {
-                        let button = this.buttons.find(button => button.id === dirId);
-                        if (!button) {
-                            button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
-                        }
-                        const newAppIndex = categoryApps.findIndex(app => !!app.newAppShouldHighlight);
-                        button.setHighlight(newAppIndex >= 0);//highlight category if it contains a new app
-                        newButtons.push(button);
-                    }
-                } });
-
-        const enableFavFiles = XApp.Favorites && XApp.Favorites.get_default().get_favorites(null).length > 0;
-        const homeDir = GLib.get_home_dir();
-        [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
-            [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
-            [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
-            [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
-            [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home']
-        ].forEach(param => {
-                if (param[0]) {
-                    let button = this.buttons.find(button => button.id === param[1]);
-                    if (!button) {
-                        button = new CategoryButton(this.appThis, param[1], param[2], param[3]);
-                    }
-                    newButtons.push(button);
-                } });
-        //set user category order to default if none already
-        if (this.appThis.settings.categories.length === 0) {
-            this.appThis.settings.categories = newButtons.map( button => button.id);
-        }
-        //add new found categories to end of user category order
-        newButtons.forEach(newButton => {
-            if (this.appThis.settings.categories.indexOf(newButton.id) === -1) {
-                this.appThis.settings.categories.push(newButton.id);
-            }
-        });
-        //set this.buttons[] to newButtons[] in user prefered order
-        this.buttons = [];
-        this.appThis.settings.categories.forEach(buttonId => {
-            const foundButton = newButtons.find(newButton => newButton.id === buttonId);
-            if (foundButton) {
-                this.buttons.push(foundButton);
-            }
-        });
-        //populate categoriesBox with buttons
-        this.categoriesBox.remove_all_children();
-        this.buttons.forEach((button) => this.categoriesBox.add_actor(button.actor));
-    }
-
-    setSelectedCategoryStyle(categoryId) {
-        this.buttons.forEach(categoryButton => {
-                    if (categoryButton.id === categoryId) {
-                        categoryButton.setButtonStyleSelected();
-                    } else {
-                        categoryButton.setButtonStyleNormal();
-                    } });
-    }
-
-    destroy() {
-        this.buttons.forEach(button => button.destroy());
-        this.buttons = [];
-        this.categoriesBox.destroy();
-        this.groupCategoriesWorkspacesWrapper.destroy();
-        this.groupCategoriesWorkspacesScrollBox.destroy();
-    }
-}
-
-/*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
- *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
- *otherwise new AppButton's would need to be created each time a category is clicked on.*/
-class AppsView {
-    constructor(appThis) {
-        this.appThis = appThis;
-        this.buttonStore = [];
-        this.appsViewSignals = new SignalManager(null);
-
-        this.applicationsListBox = new St.BoxLayout({ vertical: true });
-        this.applicationsGridBox = new Clutter.Actor({ layout_manager: new Clutter.GridLayout() });
-        this.headerText = new St.Label({ style_class: 'menu-applications-header-text' });
-        this.applicationsBoxWrapper = new St.BoxLayout({ style_class: 'menu-applications-inner-box',
-                                                                                            vertical: true});
-        this.applicationsBoxWrapper.add_style_class_name('menu-applications-box'); //this is to support old themes
-
-        this.applicationsBoxWrapper.add(this.headerText, {  x_fill: false, y_fill: false,
-                                                            x_align: St.Align.MIDDLE, y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsGridBox, { x_fill: false, y_fill: false,
-                                                            x_align: St.Align.START, y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsListBox, { x_fill: true, y_fill: false,
-                                                            x_align: St.Align.START, y_align: St.Align.START });
-        this.applicationsScrollBox = new St.ScrollView({  x_fill: true, y_fill: false,
-                            y_align: St.Align.START, style_class: 'vfade menu-applications-scrollbox' });
-        const vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
-        this.appsViewSignals.connect(vscrollApplications, 'scroll-start',
-                                                                () => { this.appThis.menu.passEvents = true; });
-        this.appsViewSignals.connect(vscrollApplications, 'scroll-stop',
-                                                                () => { this.appThis.menu.passEvents = false; });
-        this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
-        this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-        this.applicationsScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
-        this.applicationsScrollBox.set_mouse_scrolling(true);
-    }
-
-    populate(appList, headerText = null) {
-        this.applicationsListBox.hide();//hide while populating for performance.
-        this.applicationsGridBox.hide();//
-
-        this.clearApps();
-
-        //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
-        if (appList.length > 1000) {
-            appList.length = 1000; //truncate array
-            headerText = _('Too many entries - showing first 1000 entries only');
-        }
-
-        if (headerText) {
-            this.headerText.set_text(headerText);
-            this.headerText.show();
-        } else {
-            this.headerText.hide();
-        }
-
-        let column = 0;
-        let rownum = 0;
-        appList.forEach(app => {
-            let appButton = this.buttonStore.find(button => button.app === app);
-
-            if (!appButton) {
-                appButton = new AppButton(this.appThis, app);
-                this.buttonStore.push(appButton);
-            }
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                this.applicationsListBox.add_actor(appButton.actor);
-            } else {
-                const gridLayout = this.applicationsGridBox.layout_manager;
-                appButton.setGridButtonWidth();// In case menu has been resized.
-                gridLayout.attach(appButton.actor, column, rownum, 1, 1);
-                column++;
-
-                if (column > this.getGridValues().columns - 1) {
-                    column = 0;
-                    rownum++;
-                }
-            }
-        });
-
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            this.applicationsListBox.show();
-        } else {
-            this.applicationsGridBox.show();
-        }
-
-        this.currentGridViewColumnCount = this.getGridValues().columns;
-    }
-
-    highlightFirstItem() {
-        //When displying search results, ensure first item is highlighted so that pressing
-        //return selects top result.
-        const buttons = this.getActiveButtons();
-        if (buttons[0] && !buttons[0].entered) {
-            this.appThis.clearEnteredActors();
-            buttons[0].handleEnter();
-        }
-    }
-
-    resizeGrid() {
-        this.applicationsGridBox.hide();//for performance
-
-        const newcolumnCount = this.getGridValues().columns;
-        if (this.currentGridViewColumnCount === newcolumnCount) {
-            //Number of columns are the same so just adjust button widths only.
-            this.applicationsGridBox.get_children().forEach(actor =>
-                                                    actor.width = this.getGridValues().columnWidth );
-        } else {//Rearrange buttons to fit new number of columns.
-            const buttons = this.applicationsGridBox.get_children();
-            this.applicationsGridBox.remove_all_children();
-            let column = 0;
-            let rownum = 0;
-            const gridLayout = this.applicationsGridBox.layout_manager;
-            const newColumnWidth = this.getGridValues().columnWidth;
-            buttons.forEach(actor => {
-                actor.width = newColumnWidth;
-                gridLayout.attach(actor, column, rownum, 1, 1);
-                column++;
-                if (column > newcolumnCount - 1) {
-                    column = 0;
-                    rownum++;
-                }
-            });
-        }
-
-        this.applicationsGridBox.show();
-        this.currentGridViewColumnCount = newcolumnCount;
-    }
-
-    getGridValues() {
-        const appsBoxWidth = this.applicationsGridBox.width;
-        const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
-        const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
-        const columnWidth = Math.floor(appsBoxWidth / columns);
-
-        return {columnWidth: columnWidth, columns: columns};
-    }
-
-    getActiveButtons() {
-        const buttons = [];
-        this.getActiveContainer().get_children().forEach(child =>
-            buttons.push(this.buttonStore.find(button => button.actor === child) ));
-        return buttons;
-    }
-
-    clearApps() {
-        this.clearAppsViewEnteredActors();
-        this.getActiveContainer().remove_all_children();
-    }
-
-    clearAppsViewEnteredActors() {
-        this.getActiveButtons().forEach(button => { if (button.entered) button.handleLeave(); });
-    }
-
-    getActiveContainer() {
-        return this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST ?
-                                                this.applicationsListBox : this.applicationsGridBox;
-    }
-
-    buttonStoreCleanup() {
-        //delete all buttons which won't be reused
-        const buttonStore = this.buttonStore.filter(button => {
-            if (button.app.deleteAfterUse) {
-                button.destroy();
-                return false;
-            } else {
-                return true;
-            } });
-        this.buttonStore = buttonStore;
-    }
-
-    destroy() {
-        this.appsViewSignals.disconnectAllSignals();
-        this.headerText.destroy();
-        this.applicationsListBox.destroy();
-        this.applicationsGridBox.destroy();
-        this.applicationsBoxWrapper.destroy();
-        this.applicationsScrollBox.destroy();
-        this.buttonStore.forEach(button => { if (button) button.destroy(); });
-        this.buttonStore = [];
-    }
-}
-
 class SearchView {
     constructor(appThis) {
         this.appThis = appThis;
@@ -2161,8 +1860,8 @@ class SearchView {
         this.searchBox.style = 'min-width: 160px; ';
 
         //make searchBox l/r padding & margin symmetrical when it uses the full width of the menu.
-        if (this.appThis.settings.sidebarPlacement === PlacementRIGHT ||
-                                        this.appThis.settings.sidebarPlacement === PlacementLEFT) {
+        if (this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT ||
+                                        this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT) {
             //set left padding of searchBox to match right padding
             const searchBoxNode = this.searchBox.get_theme_node();
             const searchBoxPaddingRight = searchBoxNode.get_padding(1);
@@ -2186,137 +1885,6 @@ class SearchView {
         this.searchBox.destroy();
     }
 
-}
-
-class Sidebar {//Creates the sidebar. Creates SidebarButtons and populates the sidebar.
-    constructor (appThis, sidebarPlacement) {
-        this.appThis = appThis;
-        this.items = [];
-        this.innerBox = new St.BoxLayout({
-                        vertical: (sidebarPlacement === PlacementLEFT || sidebarPlacement === PlacementRIGHT) });
-
-        //Cinnamox themes draw a border at the bottom of sidebarScrollBox so remove menu-favorites-scrollbox class.
-        let themePath = Main.getThemeStylesheet();
-        if (!themePath) themePath = '';
-        const scroll_style = themePath.includes('Cinnamox') ? 'vfade' : 'vfade menu-favorites-scrollbox';
-        this.sidebarScrollBox = new St.ScrollView({x_fill: true, y_fill: false, x_align: St.Align.MIDDLE,
-                                                        y_align: St.Align.MIDDLE, style_class: scroll_style });
-
-        //const vscroll_bar = this.sidebarScrollBox.get_vscroll_bar();
-        this.sidebarScrollBox.add_actor(this.innerBox);
-        this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
-        this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
-        this.sidebarScrollBox.set_mouse_scrolling(true);
-        const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
-        this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
-        this.sidebarOuterBox.add(this.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
-                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
-
-        this.separator = new St.BoxLayout({x_expand: false, y_expand: false});
-    }
-
-    populate () {
-        this.innerBox.remove_all_children();
-        this.items.forEach(item => item.destroy());
-        this.items = [];
-        //----add sidebar buttons to this.items[]
-        const newSidebarIcon = (iconName) => {
-            return new St.Icon( { icon_name: iconName, icon_size: this.appThis.settings.sidebarIconSize,
-                          icon_type: this.appThis.settings.sidebarIconSize <= 24 ? St.IconType.SYMBOLIC :
-                                                                                    St.IconType.FULLCOLOR });
-        };
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-shutdown'), null, _('Quit'),
-                    _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
-                                                                this.appThis.closeMenu(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-log-out'), null, _('Logout'),
-                                    _('Leave the session'), () => { Util.spawnCommandLine('cinnamon-session-quit');
-                                                                        this.appThis.closeMenu(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-lock-screen'), null, _('Lock screen'),
-                    _('Lock the screen'), () => {
-                        const screensaver_settings = new Gio.Settings({
-                                                    schema_id: 'org.cinnamon.desktop.screensaver' });
-                        const screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
-                        if (screensaver_dialog.query_exists(null)) {
-                            if (screensaver_settings.get_boolean('ask-for-away-message')) {
-                                Util.spawnCommandLine('cinnamon-screensaver-lock-dialog');
-                            } else {
-                                Util.spawnCommandLine('cinnamon-screensaver-command --lock');//
-                            }
-                        } else {
-                            this.screenSaverProxy.LockRemote('');
-                        }
-                        this.appThis.closeMenu(); }));
-        //----add favorite apps and favorite files to this.items[]
-        if (this.appThis.settings.addFavorites) {
-            this.appThis.listFavoriteApps().forEach(fav => {
-                this.items.push(new SidebarButton( this.appThis,
-                                fav.create_icon_texture(this.appThis.settings.sidebarIconSize),
-                                        fav, fav.name, fav.description, null));
-            });
-            this.appThis.listFavoriteFiles().forEach(fav => {
-                let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
-                this.items.push(new SidebarButton( this.appThis,
-                                new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
-                                fav, fav.name, fav.description, null));
-            });
-        }
-        //----change order of all items depending on buttons placement
-        const reverseOrder = this.appThis.settings.sidebarPlacement === PlacementLEFT ||
-                                                this.appThis.settings.sidebarPlacement === PlacementRIGHT;
-        if (reverseOrder) {
-            this.items.reverse();
-        }
-        //----populate box with items[]
-        for (let i = 0; i < this.items.length; i++) {
-            if ((reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
-                        (!reverseOrder && i === 3 && this.items.length > 3)){
-                this._addSeparator();
-            }
-            this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
-                                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
-        }
-
-        return;
-    }
-
-    scrollToQuitButton() {
-        //Scroll to quit button so that it's visible when the menu is opened.
-        this.appThis.scrollToButton(this.items[this.items.length - 1], false);
-    }
-
-    _addSeparator() {
-        this.innerBox.add(this.separator, { x_fill: false, y_fill: false, x_align: St.Align.MIDDLE,
-                                                                                y_align: St.Align.MIDDLE });
-        let width = this.appThis.settings.sidebarIconSize + 8;
-        let height = 2;
-        if (this.appThis.settings.sidebarPlacement === PlacementTOP ||
-                                        this.appThis.settings.sidebarPlacement === PlacementBOTTOM) {
-            [width, height] = [height, width];
-        }
-        this.separator.style = `width: ${width}px; height: ${height}px; background-color: ${
-                    this.appThis.getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
-        this.separator.set_opacity(35);
-    }
-
-    getButtons() {
-        return this.items;
-    }
-
-    clearSidebarEnteredActors() {
-        const foundItem = this.items.findIndex(button => button.entered);
-        if (foundItem > -1) {
-            this.items[foundItem].handleLeave();
-        }
-    }
-
-    destroy() {
-        this.items.forEach(item => item.destroy());
-        this.items = null;
-        this.separator.destroy();
-        this.innerBox.destroy();
-        this.sidebarScrollBox.destroy();
-        this.sidebarOuterBox.destroy();
-    }
 }
 
 function main(metadata, orientation, panel_height, instance_id) {

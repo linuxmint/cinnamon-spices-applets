@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-
+#This is a modified version of /usr/lib/linuxmint/common/mint-remove-application.py it can
+#be removed once these changes have been merged into cinnamon.
 import gettext
 import os
 import subprocess
