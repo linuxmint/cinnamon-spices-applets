@@ -56,7 +56,7 @@ export class UIBar {
 				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
 				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
 			}
-			this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
+			this._timestamp.text += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
 		}
 
 		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
