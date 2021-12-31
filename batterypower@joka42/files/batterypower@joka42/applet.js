@@ -50,7 +50,6 @@ BatteryPowerApplet.prototype = {
 			
 		switch (status){
 			case "Charging":
-				charging_indicator = "⚡";
 				this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
 				this.set_applet_label(charging_indicator + separator + value + unit_string);
 				break;
@@ -72,7 +71,7 @@ BatteryPowerApplet.prototype = {
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (!GLib.file_test(statusFile, 1 << 4)) {
-			return null;
+			return "";
 		}
 		
 		return String(GLib.file_get_contents(statusFile)[1]).trim();
