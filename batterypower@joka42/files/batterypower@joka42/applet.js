@@ -71,7 +71,7 @@ BatteryPowerApplet.prototype = {
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (!GLib.file_test(statusFile, 1 << 4)) {
-			return "";
+			return null;
 		}
 		
 		return String(GLib.file_get_contents(statusFile)[1]).trim();

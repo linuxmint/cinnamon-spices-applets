@@ -1,11 +1,29 @@
-import * as consts from "../consts";
+import { RADIO_SYMBOLIC_ICON_NAME, MAX_STRING_LENGTH, SONG_INFO_ICON_NAME } from "../consts";
 import { createIconMenuItem } from "../lib/IconMenuItem";
+import { mpvHandler } from "../services/mpv/MpvHandler";
 const { BoxLayout } = imports.gi.St
+
 
 export function createInfoSection() {
 
-    const channelInfoItem = createInfoItem(consts.RADIO_SYMBOLIC_ICON_NAME)
-    const songInfoItem = createInfoItem(consts.SONG_INFO_ICON_NAME)
+    const {
+        addChannelChangeHandler,
+        addTitleChangeHandler,
+        getCurrentChannelName,
+        getCurrentTitle
+    } = mpvHandler
+
+    const channelInfoItem = createIconMenuItem({
+        iconName: RADIO_SYMBOLIC_ICON_NAME,
+        initialText: getCurrentChannelName(),
+        maxCharNumber: MAX_STRING_LENGTH
+    })
+
+    const songInfoItem = createIconMenuItem({
+        iconName: SONG_INFO_ICON_NAME,
+        initialText: getCurrentTitle(),
+        maxCharNumber: MAX_STRING_LENGTH
+    })
 
     const infoSection = new BoxLayout({
         vertical: true
@@ -15,27 +33,14 @@ export function createInfoSection() {
         infoSection.add_child(infoItem.actor)
     })
 
-    function createInfoItem(iconName: string) {
-        const iconMenuItem = createIconMenuItem({
-            iconName,
-            maxCharNumber: consts.MAX_STRING_LENGTH,
-        })
+    addChannelChangeHandler((newChannel) => {
+        channelInfoItem.setText(newChannel)
+    })
 
-        return iconMenuItem
-    }
+    addTitleChangeHandler((newTitle) => {
+        songInfoItem.setText(newTitle)
+    })
 
-    function setChannel(channeName: string) {
-        channelInfoItem.setText(channeName)
-    }
-
-    function setSongTitle(songTitle: string) {
-        songInfoItem.setText(songTitle)
-    }
-
-    return {
-        actor: infoSection,
-        setSongTitle,
-        setChannel
-    }
+    return infoSection
 
 }

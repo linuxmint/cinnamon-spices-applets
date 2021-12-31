@@ -12,6 +12,7 @@ A simple radio applet for Cinnamon. The radio-applet has been totally rewritten 
 - The volume can be controlled by using the mouse wheel while the cursor is placed on the icon in the panel. Also it is possible to toggle the play/pause status by middleclicking on the icon
 - The title of the radio channel can be shown in the panel
 - The icon color changes when a radio channel is playing
+- Seek backward/forward
 
 ## Dependencies
 
@@ -19,7 +20,7 @@ The [mpv media player](https://mpv.io) is used for playing the radio channel. As
 
 **TLDR** Run this [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) as sudo to install `youtube-dl`
 
-`youtube-dl` is needed for the youtube-download feature. As google frequently makes technical changes to Youtube, it is highly recommended to always have the newest version of youtube-dl installed as otherwise the feature will most likely stop working after a short time. Unfortunately, the newest version in the official linux mint apt repository is usually not even close to sufficiently up to date. Therefore I highly recommend installing `youtube-dl` by following the [official installation instructions](https://github.com/ytdl-org/youtube-dl#installation). However as the `mpv` package already includes an outdated youtube-dl version, it first needs to be removed to prevent conflicts which may occur when different versions of youtube-dl are installed on your system. In order to automatically update `youtube-dl`, I furthermore recommend creating a script in `/etc/cron.daily` (which needs to be without extension). I have created a [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) for this purpose.
+For the youtube download feature you can either use [youtube-dl](https://github.com/ytdl-org/youtube-dl) or [yt-dlp](https://github.com/yt-dlp/yt-dlp). By default youtube-dl is selected. As google frequently makes technical changes to Youtube, it is highly recommended to always have the newest version of the download cli tool installed as otherwise the feature will most likely stop working after a short time. Unfortunately, the newest version in the official linux mint apt repository is usually not even close to sufficiently up to date. Therefore I highly recommend installing the software by following the official installstion instruction which can be found on the respective github page and adding a script in `/etc/cron.daily` to automate the update. I have created a gist for both [youtube-dl](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) and [yt-dlp](https://gist.github.com/jonath92/039e998b3d3f6ba4afd5d5c671eaedf1) for this purpose.
 
 ## Known Issues
 

@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 06:50-0400\n"
-"PO-Revision-Date: 2021-11-07 19:49+0100\n"
+"POT-Creation-Date: 2021-11-21 17:15-0500\n"
+"PO-Revision-Date: 2021-12-23 09:03+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.3\n"
 
 #. metadata.json->name
 #. settings-schema.json->page_dark_mode->title
-#: applet.js:75 applet.js:157
+#: applet.js:75 applet.js:177
 msgid "Dark Mode"
 msgstr "Éjszakai üzemmód"
 
@@ -70,6 +70,21 @@ msgstr "Asztaltéma"
 #. settings-schema.json->dark_icon_theme->description
 msgid "Icon theme"
 msgstr "Ikontéma"
+
+#. settings-schema.json->enable_light_background_switch->description
+#. settings-schema.json->enable_dark_background_switch->description
+msgid "Change desktop background"
+msgstr "Asztal hátterének módosítása"
+
+#. settings-schema.json->light_background_dir->description
+#. settings-schema.json->dark_background_dir->description
+msgid "Desktop background location"
+msgstr "Asztal hátterének helye"
+
+#. settings-schema.json->light_background_dir->tooltip
+#. settings-schema.json->dark_background_dir->tooltip
+msgid "A picture from this folder will be randomly chosen."
+msgstr "Ebből a mappából a háttérkép véletlenszerűen lesz kiválasztva."
 
 #. settings-schema.json->postpone_auto_mode_until->description
 msgid "Internal use"

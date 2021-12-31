@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2021-12-06 10:56+0100\n"
+"PO-Revision-Date: 2021-12-23 09:06+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -77,8 +77,7 @@ msgstr ""
 
 #: 4.6/applet.js:319
 msgid "Can't increase Volume. Volume already at maximum."
-msgstr ""
-"A hangerő már nem növelhető, mert a hangerő már a lehető leghangosabb."
+msgstr "A hangerő már nem növelhető, mert a hangerő már a lehető leghangosabb."
 
 #. metadata.json->name
 #: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -204,7 +203,7 @@ msgstr "URL"
 #. 4.6->settings-schema.json->streamurl-button->description
 #. 3.0->settings-schema.json->streamurl-button->description
 msgid "Open radio stream URL search engine"
-msgstr ""
+msgstr "Rádióállomás keresőmotor megnyitása"
 
 #. 4.6->settings-schema.json->streamurl-button->tooltip
 #. 3.0->settings-schema.json->streamurl-button->tooltip
@@ -214,7 +213,7 @@ msgstr ""
 #. 4.6->settings-schema.json->radiolist-button->description
 #. 3.0->settings-schema.json->radiolist-button->description
 msgid "Show URL-list of radio stations"
-msgstr ""
+msgstr "Rádióállomások URL-listájának megjelenítése"
 
 #. 4.6->settings-schema.json->radiolist-button->tooltip
 #. 3.0->settings-schema.json->radiolist-button->tooltip
@@ -252,7 +251,7 @@ msgstr "Aktuális rádióállomás nevének megjelenítése a Panel-on"
 
 #. 4.6->settings-schema.json->keep-volume-between-sessions->description
 msgid "Remember volume after stopping the radio"
-msgstr ""
+msgstr "Hangerő eltárolása"
 
 #. 4.6->settings-schema.json->initial-volume->description
 msgid "Initial volume"

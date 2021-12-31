@@ -8583,8 +8583,7 @@ function GetDayName(date, locale, showDate = false, tz) {
     if (!!locale)
         date = date.setLocale(locale);
     let dateString = date.toLocaleString(params);
-    if (locale === null || locale === void 0 ? void 0 : locale.startsWith("fr"))
-        dateString = CapitalizeFirstLetter(dateString);
+    dateString = CapitalizeFirstLetter(dateString);
     if (date.hasSame(now, "day"))
         dateString = _("Today");
     if (date.hasSame(tomorrow, "day"))
