@@ -24,6 +24,12 @@ declare global {
       thisArg?: This
     ): U[]
   }
+
+  // added during build (see webpack.config.js)
+  interface Meta {
+    instanceId: number
+    orientation: imports.gi.St.Side
+  }
 }
 
 export function initPolyfills() {

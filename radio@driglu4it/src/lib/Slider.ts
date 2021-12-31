@@ -2,7 +2,7 @@ const { DrawingArea } = imports.gi.St
 const { cairo_set_source_color, grab_pointer, ungrab_pointer } = imports.gi.Clutter
 
 interface SliderArguments {
-    /** the value initally applied when between 0 and 1. If the value is below 0, the slider value is set to 0. If the value is above 1, the slider value is set to 1 */
+    /** The value initally applied. Should be between 0 and 1. If the value is below 0, the slider value is set to 0. If the value is above 1, the slider value is set to 1 */
     initialValue?: number,
     /**
      * @param newValue value between 0 and 1
@@ -20,7 +20,7 @@ export function createSlider(args: SliderArguments) {
     } = args
 
     let value: number
-    if (initialValue) value = limitToMinMax(initialValue)
+    if (initialValue != null) value = limitToMinMax(initialValue)
 
     const drawing = new DrawingArea({
         style_class,

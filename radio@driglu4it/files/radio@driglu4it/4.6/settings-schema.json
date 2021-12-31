@@ -67,6 +67,7 @@
 			"type": "section",
 			"title": "Youtube Download",
 			"keys": [
+				"youtube-download-cli",
 				"music-download-dir-select"
 			]
 		}
@@ -160,7 +161,17 @@
 	"last-url": {
 		"type": "generic",
 		"value": null,
-		"dfault": null
+		"default": null
+	},
+	"youtube-download-cli": {
+		"type": "combobox", 
+		"description": "Youtube Download CLI tool", 
+		"tooltip": "The CLI tool used to download songs from Youtube", 
+		"default": "youtube-dl",
+		"options": {
+			"yt-dlp": "yt-dlp", 
+			"youtube-dl": "youtube-dl"
+		}
 	},
 	"music-download-dir-select": {
 		"type": "filechooser",

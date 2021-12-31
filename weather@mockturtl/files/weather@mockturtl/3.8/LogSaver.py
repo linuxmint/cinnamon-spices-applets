@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
 from JsonSettingsWidgets import *
-from gi.repository import Gio, Gtk
+import gettext
+from gi.repository import GLib, Gio, Gtk
+# i18n
+gettext.install("weather@mockturtl", GLib.get_home_dir() + '/.local/share/locale')
 
 class FileSaver(SettingsWidget):
     def __init__(self, info, key, settings):
@@ -23,7 +26,7 @@ class FileSaver(SettingsWidget):
 
     def button_pressed(self, *args):
         saver = Gtk.FileChooserDialog(
-            'Select a destination',
+            _('Select a destination'),
             None,
             Gtk.FileChooserAction.SAVE,
             (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,

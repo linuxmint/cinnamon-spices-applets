@@ -112,10 +112,7 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 		date = date.setLocale(locale);
 
 	let dateString = date.toLocaleString(params);
-
-	// Make sure French days are capitalized (they are not by default)
-	if (locale?.startsWith("fr"))
-		dateString = CapitalizeFirstLetter(dateString);
+	dateString = CapitalizeFirstLetter(dateString);
 
 	if (date.hasSame(now, "day")) dateString = _("Today");
 	if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");

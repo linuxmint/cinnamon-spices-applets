@@ -6,9 +6,8 @@
         "moduleResolution": "Node",
         "sourceMap": true,
         "target": "es2017",
-        "baseUrl": "./src/",
-
         "strict": true,
         "noImplicitAny": true,
+        "exactOptionalPropertyTypes": true, 
     }
 }
