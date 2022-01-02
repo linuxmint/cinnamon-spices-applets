@@ -39,6 +39,6 @@ def main():
     run_dbus_method(*call)
     # Call upower, parse the output and write the energy rate without context to a file
     # The energy rate uses a "," as decimal separator for certain locales which needs to be replaced for parsing.
-    os.system("upower -i $(upower -e | grep BAT) | grep energy-rate | grep -Eo '[0-9]+([,|.][0-9]+)?' | sed 's/,/./' > .energyrate")
+    # os.system("upower -i $(upower -e | grep BAT) | grep energy-rate | grep -Eo '[0-9]+([,|.][0-9]+)?' | sed 's/,/./' > .energyrate")
 
 if __name__ == '__main__': main()

@@ -26,12 +26,14 @@ BatteryPowerApplet.prototype = {
 		this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showunit', () => this.on_settings_changed(), null);
     	this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
+		this.UPowerRefreshed = false;
 
 		this.update()
 		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.update());
 	},
 
 	update: function() {
+		this.UPowerRefreshed = false;
 		const power = this._getBatteryPower();
 		if (isNaN(power)){
 			this.set_applet_label("ERROR");
@@ -71,11 +73,19 @@ BatteryPowerApplet.prototype = {
 
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
-		if (!GLib.file_test(statusFile, 1 << 4)) {
-			return null;
+		if (GLib.file_test(statusFile, 1 << 4)) {
+			return String(GLib.file_get_contents(statusFile)[1]).trim();
+		}
+
+		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+		this.UPowerRefreshed = true;
+		const stateFile = ".batterystate";
+		Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep state | rev | cut -d ' ' -f 1 | rev > ${__meta.path}/${stateFile}`);
+		if (GLib.file_test(stateFile, 1 << 4)) {
+			return String(GLib.file_get_contents(stateFile)[1]).trim();
 		}
 		
-		return String(GLib.file_get_contents(statusFile)[1]).trim();
+		return "" 
 	},
 
 	_getBatteryPower: function () {
@@ -103,7 +113,9 @@ BatteryPowerApplet.prototype = {
 		// If the files could not be used, we need to update upower information and use info
 		// from there.
 		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+		this.UPowerRefreshed = true;
 		const upowerEnergyRateFile = ".energyrate"
+		Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep energy-rate | grep -Eo '[0-9]+([,|.][0-9]+)?' | sed 's/,/./' > ${__meta.path}/${upowerEnergyRateFile}`)
 		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
 			return parseFloat(GLib.file_get_contents(upowerEnergyRateFile)[1]);
 		}
