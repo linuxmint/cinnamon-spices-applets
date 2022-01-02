@@ -232,7 +232,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public get TemperatureUnit(): WeatherUnits {
+	public get TemperatureUnit(): Exclude<WeatherUnits, "automatic"> {
 		if (this._temperatureUnit == "automatic")
 			return this.GetLocaleTemperateUnit(this.countryCode);
 		return this._temperatureUnit;
@@ -433,7 +433,7 @@ export class Config {
 		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
-	private GetLocaleTemperateUnit(code: string | null): WeatherUnits {
+	private GetLocaleTemperateUnit(code: string | null): Exclude<WeatherUnits, "automatic"> {
 		if (code == null || !this.fahrenheitCountries.includes(code)) return "celsius";
 		return "fahrenheit";
 	}

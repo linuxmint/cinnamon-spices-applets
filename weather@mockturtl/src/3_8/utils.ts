@@ -32,8 +32,9 @@ export function format(str: string, args: KeysValuePairs) {
 	return str;
 }
 
-export function UnitToUnicode(unit: WeatherUnits): string {
-	return unit == "fahrenheit" ? '\u2109' : '\u2103'
+export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string {
+	return unit == "fahrenheit" ? '\u2109' : '\u2103';
+	//return unit == "fahrenheit" ? '°F' : '°C';	
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
