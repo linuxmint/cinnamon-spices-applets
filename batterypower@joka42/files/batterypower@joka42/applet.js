@@ -91,7 +91,7 @@ BatteryPowerApplet.prototype = {
 	},
 
 	_getBatteryPower: function () {
-		// Return: currntly drawn power from the battery, or charging rate. NaN on failure
+		// Return: Currently drawn power from the battery, or charging rate. NaN on failure
 
 		// Depending on the System setup files from /sys/class/power_supply/ can be used.
 		// I assume that reading these files is the most efficient way to get the energy rate.
