@@ -33,8 +33,10 @@ export function format(str: string, args: KeysValuePairs) {
 }
 
 export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string {
-	return unit == "fahrenheit" ? '\u2109' : '\u2103';
-	//return unit == "fahrenheit" ? '°F' : '°C';	
+	//return unit == "fahrenheit" ? '\u2109' : '\u2103';
+	// Use the not dedicated characters, it exists in more fonts fixing some alignment issues with
+	// fallbacks
+	return unit == "fahrenheit" ? '°F' : '°C';	
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */

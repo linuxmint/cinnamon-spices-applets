@@ -8522,7 +8522,7 @@ function format(str, args) {
     return str;
 }
 function UnitToUnicode(unit) {
-    return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    return unit == "fahrenheit" ? '°F' : '°C';
 }
 function GenerateLocationText(weather, config) {
     let location = "";
