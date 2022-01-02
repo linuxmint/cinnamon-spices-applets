@@ -49,18 +49,18 @@ BatteryPowerApplet.prototype = {
 		const unit_string = (this.state.showunit) ? separator + "W" : "";
 		const charging_indicator = "⚡";
 		
-		const status = this._getBatteryStatus();
+		const status = this._getBatteryStatus().toLowerCase();
 			
 		switch (status){
-			case "Charging":
+			case "charging":
 				this.set_applet_tooltip('Battery is charging. Battery charging power is displayed.\nThis is not the power consumption of the system!');
 				this.set_applet_label(charging_indicator + separator + value + unit_string);
 				break;
-			case "Discharging":
+			case "discharging":
 				this.set_applet_tooltip('Battery is discharging. Power drawn from battery is displayed.');
 				this.set_applet_label(value + unit_string);
 				break;
-			case "Unknown":
+			case "unknown":
 				this.set_applet_tooltip('Battery is fully charged. AC is plugged in.');
 				this.set_applet_label(charging_indicator);
 				break;
@@ -77,10 +77,12 @@ BatteryPowerApplet.prototype = {
 			return String(GLib.file_get_contents(statusFile)[1]).trim();
 		}
 
-		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
-		this.UPowerRefreshed = true;
+		if (!this.UPowerRefreshed){
+			Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+			this.UPowerRefreshed = true;
+		}
 		const stateFile = ".batterystate";
-		Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep state | rev | cut -d ' ' -f 1 | rev > ${__meta.path}/${stateFile}`);
+		//Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep state | rev | cut -d ' ' -f 1 | rev > ${__meta.path}/${stateFile}`);
 		if (GLib.file_test(stateFile, 1 << 4)) {
 			return String(GLib.file_get_contents(stateFile)[1]).trim();
 		}
@@ -112,8 +114,10 @@ BatteryPowerApplet.prototype = {
 
 		// If the files could not be used, we need to update upower information and use info
 		// from there.
-		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
-		this.UPowerRefreshed = true;
+		if (!this.UPowerRefreshed){
+			Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+			this.UPowerRefreshed = true;
+		}
 		const upowerEnergyRateFile = ".energyrate"
 		Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep energy-rate | grep -Eo '[0-9]+([,|.][0-9]+)?' | sed 's/,/./' > ${__meta.path}/${upowerEnergyRateFile}`)
 		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
