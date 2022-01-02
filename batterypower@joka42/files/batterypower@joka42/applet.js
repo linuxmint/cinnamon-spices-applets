@@ -1,5 +1,6 @@
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
@@ -68,6 +69,14 @@ BatteryPowerApplet.prototype = {
 		return true;
 	},
 
+	// use upower as source for battery information:
+	//  - checkout the cinnamon power applet, it uses upower
+	//    /home/jonas/Projects/cinnamon/files/usr/share/cinnamon/applets/power@cinnamon.org
+	//  - upower update rate is low, approx 90 sec, a fix is here: 
+	//    https://askubuntu.com/questions/878556/get-battery-status-to-update-more-often-or-on-ac-power-wake
+	//  - is upower already installed on all systems, or is a dependency necessary?
+	//    > probably installed, since all battery applets are using it.
+
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (!GLib.file_test(statusFile, 1 << 4)) {
@@ -93,6 +102,12 @@ BatteryPowerApplet.prototype = {
 			const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
 			
 			return current * voltage;
+		}
+
+		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+		const upowerEnergyRateFile = ".energyrate"
+		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
+			return parseFloat(String(GLib.file_get_contents(upowerEnergyRateFile)[1]).replace(",","."));
 		}
 		
 		return NaN
