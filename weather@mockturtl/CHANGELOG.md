@@ -16,7 +16,7 @@
 
 * Support changing logging level from settings
 * Support saving logs specific to the applet into file along with the applet's settings
-* Prefill the Github issue form on opening a new issue from the applet
+* Pre-fill the Github issue form on opening a new issue from the applet
 * Update with new declarations
 
 ## 3.1.5
@@ -101,7 +101,7 @@
 * Add minutely precipitation under current condition, when there is any (and the setting is on)
 * Add more tooltips to settings
 * OpenWeatherMap can also display Precipitation chance if there is no volume specified
-* Autoformat 3.8 and new declaration files
+* Auto-format 3.8 and new declaration files
 * Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
 
 ## 3.0.3
@@ -138,7 +138,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new sign-ups.
 
 * Make network and DNS related errors soft errors again
 
@@ -240,7 +240,7 @@ Fixes:
 
 * Custom icons changed to fit their bounding boxes
 
-* Make Daily forecasts tileable
+* Make Daily forecasts tile-able
 
 * Fix [#2892](https://github.com/linuxmint/cinnamon-spices-applets/issues/2892), buttons adhere to current theme
 
