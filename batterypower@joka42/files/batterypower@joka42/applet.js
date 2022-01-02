@@ -68,15 +68,7 @@ BatteryPowerApplet.prototype = {
 		}
 		return true;
 	},
-
-	// use upower as source for battery information:
-	//  - checkout the cinnamon power applet, it uses upower
-	//    /home/jonas/Projects/cinnamon/files/usr/share/cinnamon/applets/power@cinnamon.org
-	//  - upower update rate is low, approx 90 sec, a fix is here: 
-	//    https://askubuntu.com/questions/878556/get-battery-status-to-update-more-often-or-on-ac-power-wake
-	//  - is upower already installed on all systems, or is a dependency necessary?
-	//    > probably installed, since all battery applets are using it.
-
+	
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (!GLib.file_test(statusFile, 1 << 4)) {
