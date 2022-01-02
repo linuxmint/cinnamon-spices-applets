@@ -119,7 +119,6 @@ BatteryPowerApplet.prototype = {
 			this.UPowerRefreshed = true;
 		}
 		const upowerEnergyRateFile = ".energyrate"
-		Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep energy-rate | grep -Eo '[0-9]+([,|.][0-9]+)?' | sed 's/,/./' > ${__meta.path}/${upowerEnergyRateFile}`)
 		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
 			return parseFloat(GLib.file_get_contents(upowerEnergyRateFile)[1]);
 		}
