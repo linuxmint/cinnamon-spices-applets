@@ -126,7 +126,7 @@ export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Fo
 		hour12: !hours24Format,
 	}
 
-	params.timeZone = <string>NormalizeTimezone(tz);
+	params.timeZone = NormalizeTimezone(tz);
 
 	if (!onlyHours)
 		params.minute = "2-digit";
@@ -155,7 +155,7 @@ export function AwareDateString(date: DateTime, locale: string | null, hours24Fo
 		params.year = "numeric";
 	}
 
-	params.timeZone = <string>NormalizeTimezone(tz);
+	params.timeZone = NormalizeTimezone(tz);
 
 	if (!!locale)
 		date = date.setLocale(locale);
