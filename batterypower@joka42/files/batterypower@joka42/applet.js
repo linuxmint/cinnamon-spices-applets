@@ -28,7 +28,6 @@ BatteryPowerApplet.prototype = {
     	this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
 		this.UPowerRefreshed = false;
 
-		this.update()
 		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.update());
 	},
 
