@@ -68,7 +68,7 @@ BatteryPowerApplet.prototype = {
 		}
 		return true;
 	},
-	
+
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (!GLib.file_test(statusFile, 1 << 4)) {
@@ -79,9 +79,13 @@ BatteryPowerApplet.prototype = {
 	},
 
 	_getBatteryPower: function () {
-		// Depending on the files that are present in /sys/class/power_supply/BAT0/ the power that is drawn from the
-		// battery, or that is used to charge the battery is returned.
-		// NaN, if no file is found.
+		// Return: currntly drawn power from the battery, or charging rate. NaN on failure
+
+		// Depending on the System setup files from /sys/class/power_supply/ can be used.
+		// I assume that reading these files is the most efficient way to get the energy rate.
+		// If the files cannot be found, upower is used to update the power draw from the 
+		// battery.
+
 		const powerDrawFile = "/sys/class/power_supply/BAT0/power_now";
 		if(GLib.file_test(powerDrawFile, 1 << 4)) {
 			return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
@@ -96,10 +100,12 @@ BatteryPowerApplet.prototype = {
 			return current * voltage;
 		}
 
+		// If the files could not be used, we need to update upower information and use info
+		// from there.
 		Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
 		const upowerEnergyRateFile = ".energyrate"
 		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
-			return parseFloat(String(GLib.file_get_contents(upowerEnergyRateFile)[1]).replace(",","."));
+			return parseFloat(GLib.file_get_contents(upowerEnergyRateFile)[1]);
 		}
 		
 		return NaN
