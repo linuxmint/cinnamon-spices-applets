@@ -12,10 +12,11 @@ import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
 import { DateTime } from "luxon";
+import { BaseProvider } from "./BaseProvider";
 
 const Lang: typeof imports.lang = imports.lang;
 
-export class DarkSky implements WeatherProvider {
+export class DarkSky extends BaseProvider {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -41,10 +42,8 @@ export class DarkSky implements WeatherProvider {
 
 	private unit: queryUnits = "si";
 
-	private app: WeatherApplet
-
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------

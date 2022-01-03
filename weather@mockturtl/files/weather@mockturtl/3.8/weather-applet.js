@@ -9577,458 +9577,24 @@ class GeoLocation {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/config.ts
-
-
-
-
-
-
-
-
-const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
-const { File: config_File } = imports.gi.Gio;
-const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang = imports.lang;
-const keybindingManager = imports.ui.main.keybindingManager;
-const { IconType: config_IconType } = imports.gi.St;
-const { get_language_names } = imports.gi.GLib;
-const { Settings: config_Settings } = imports.gi.Gio;
-const Keys = {
-    DATA_SERVICE: "dataService",
-    API_KEY: "apiKey",
-    TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-    WIND_SPEED_UNIT: "windSpeedUnit",
-    DISTANCE_UNIT: "distanceUnit",
-    CITY: "locationLabelOverride",
-    TRANSLATE_CONDITION: "translateCondition",
-    VERTICAL_ORIENTATION: "verticalOrientation",
-    SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    TEMP_TEXT_OVERRIDE: "tempTextOverride",
-    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-    SHOW_SUNRISE: "showSunrise",
-    SHOW_24HOURS: "show24Hours",
-    FORECAST_DAYS: "forecastDays",
-    FORECAST_HOURS: "forecastHours",
-    FORECAST_COLS: "forecastColumns",
-    FORECAST_ROWS: "forecastRows",
-    REFRESH_INTERVAL: "refreshInterval",
-    PRESSURE_UNIT: "pressureUnit",
-    SHORT_CONDITIONS: "shortConditions",
-    MANUAL_LOCATION: "manualLocation",
-    USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
-    USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
-    RUSSIAN_STYLE: "tempRussianStyle",
-    SHORT_HOURLY_TIME: "shortHourlyTime",
-    SHOW_FORECAST_DATES: "showForecastDates",
-    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-    IMMEDIATE_PRECIP: "immediatePrecip",
-    SHOW_BOTH_TEMP: "showBothTempUnits",
-    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
-    ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
-};
-class Config {
-    constructor(app, instanceID) {
-        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-        this.windSpeedUnitLocales = {
-            "fi kr no pl ru se": "m/s",
-            "us gb": "mph"
-        };
-        this.distanceUnitLocales = {
-            "us gb": "imperial"
-        };
-        this.WEATHER_LOCATION = "location";
-        this.WEATHER_LOCATION_LIST = "locationList";
-        this.doneTypingLocation = null;
-        this.currentLocation = null;
-        this.timezone = undefined;
-        this.OnKeySettingsUpdated = () => {
-            if (this.keybinding != null) {
-                keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-            }
-        };
-        this.onLogLevelUpdated = () => {
-            logger_Logger.ChangeLevel(this._logLevel);
-        };
-        this.OnLocationChanged = () => {
-            logger_Logger.Debug("User changed location, waiting 3 seconds...");
-            if (this.doneTypingLocation != null)
-                utils_clearTimeout(this.doneTypingLocation);
-            this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-        };
-        this.OnLocationStoreChanged = () => {
-            this.LocStore.OnLocationChanged(this._locationList);
-        };
-        this.OnFontChanged = () => {
-            this.currentFontSize = this.GetCurrentFontSize();
-            this.app.RefreshAndRebuild();
-        };
-        this.OnSettingChanged = () => {
-            this.app.RefreshAndRebuild();
-        };
-        this.app = app;
-        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-        logger_Logger.Debug("System locale is " + this.currentLocale);
-        this.autoLocProvider = new IpApi(app);
-        this.geoLocationService = new GeoLocation(app);
-        this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.settings = new AppletSettings(this, UUID, instanceID);
-        this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
-        this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
-        this.currentFontSize = this.GetCurrentFontSize();
-        this.BindSettings();
-        this.LocStore = new LocationStore(this.app, this);
-        this.onLogLevelUpdated();
-    }
-    get Timezone() {
-        return this.timezone;
-    }
-    set Timezone(value) {
-        if (!value || value == "")
-            value = undefined;
-        this.timezone = value;
-    }
-    BindSettings() {
-        let k;
-        for (k in Keys) {
-            const key = Keys[k];
-            const keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
-        }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
-        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
-        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
-        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
-    }
-    get CurrentFontSize() {
-        return this.currentFontSize;
-    }
-    get CurrentLocation() {
-        return this.currentLocation;
-    }
-    get ApiKey() {
-        return this._apiKey.replace(" ", "");
-    }
-    get Language() {
-        return this.GetLanguage(this.currentLocale);
-    }
-    get TemperatureUnit() {
-        if (this._temperatureUnit == "automatic")
-            return this.GetLocaleTemperateUnit(this.countryCode);
-        return this._temperatureUnit;
-    }
-    get WindSpeedUnit() {
-        if (this._windSpeedUnit == "automatic")
-            return this.GetLocaleWindSpeedUnit(this.countryCode);
-        return this._windSpeedUnit;
-    }
-    get DistanceUnit() {
-        if (this._distanceUnit == "automatic")
-            return this.GetLocaleDistanceUnit(this.countryCode);
-        return this._distanceUnit;
-    }
-    get IconType() {
-        if (this._useCustomMenuIcons)
-            return config_IconType.SYMBOLIC;
-        return this._useSymbolicIcons ?
-            config_IconType.SYMBOLIC :
-            config_IconType.FULLCOLOR;
-    }
-    ;
-    get AppletIconType() {
-        if (this._useCustomAppletIcons)
-            return config_IconType.SYMBOLIC;
-        return this._useSymbolicIcons ?
-            config_IconType.SYMBOLIC :
-            config_IconType.FULLCOLOR;
-    }
-    SwitchToNextLocation() {
-        const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
-        if (nextLoc == null)
-            return null;
-        this.InjectLocationToConfig(nextLoc, true);
-        return nextLoc;
-    }
-    SwitchToPreviousLocation() {
-        const previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
-        if (previousLoc == null)
-            return null;
-        this.InjectLocationToConfig(previousLoc, true);
-        return previousLoc;
-    }
-    NoApiKey() {
-        var _a;
-        const key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
-        return (!key || key == "");
-    }
-    ;
-    async EnsureLocation() {
-        this.currentLocation = null;
-        if (!this._manualLocation) {
-            const location = await this.autoLocProvider.GetLocation();
-            if (!location)
-                return null;
-            this.InjectLocationToConfig(location);
-            return location;
-        }
-        let loc = this._location;
-        if (loc == undefined || loc.trim() == "") {
-            this.app.ShowError({
-                type: "hard",
-                detail: "no location",
-                userError: true,
-                message: _("Make sure you entered a location or use Automatic location instead")
-            });
-            return null;
-        }
-        let location = this.LocStore.FindLocation(this._location);
-        if (location != null) {
-            logger_Logger.Debug("location exist in locationstore, retrieve");
-            this.LocStore.SwitchToLocation(location);
-            this.InjectLocationToConfig(location, true);
-            return location;
-        }
-        else if (IsCoordinate(loc)) {
-            loc = loc.replace(" ", "");
-            const latLong = loc.split(",");
-            const location = {
-                lat: parseFloat(latLong[0]),
-                lon: parseFloat(latLong[1]),
-                timeZone: DateTime.now().zoneName,
-                entryText: loc,
-            };
-            this.InjectLocationToConfig(location);
-            return location;
-        }
-        logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc);
-        if (locationData == null)
-            return null;
-        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
-            logger_Logger.Debug("Address found via address search");
-        }
-        location = this.LocStore.FindLocation(locationData.entryText);
-        if (location != null) {
-            logger_Logger.Debug("Found location was found in locationStore, return that instead");
-            this.InjectLocationToConfig(location);
-            this.LocStore.SwitchToLocation(location);
-            return location;
-        }
-        else {
-            this.InjectLocationToConfig(locationData);
-            return locationData;
-        }
-    }
-    InjectLocationToConfig(loc, switchToManual = false) {
-        logger_Logger.Debug("Location setting is now: " + loc.entryText);
-        const text = (loc.entryText + "");
-        this.SetLocation(text);
-        this.currentLocation = loc;
-        if (switchToManual == true)
-            this.settings.setValue(Keys.MANUAL_LOCATION, true);
-    }
-    DoneTypingLocation() {
-        logger_Logger.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.RefreshAndRebuild();
-    }
-    SetLocation(value) {
-        this.settings.setValue(this.WEATHER_LOCATION, value);
-    }
-    SetLocationList(list) {
-        this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
-    }
-    GetLocaleTemperateUnit(code) {
-        if (code == null || !this.fahrenheitCountries.includes(code))
-            return "celsius";
-        return "fahrenheit";
-    }
-    GetLocaleWindSpeedUnit(code) {
-        if (code == null)
-            return "kph";
-        for (const key in this.windSpeedUnitLocales) {
-            if (key.includes(code))
-                return this.windSpeedUnitLocales[key];
-        }
-        return "kph";
-    }
-    GetLocaleDistanceUnit(code) {
-        if (code == null)
-            return "metric";
-        for (const key in this.distanceUnitLocales) {
-            if (key.includes(code))
-                return this.distanceUnitLocales[key];
-        }
-        return "metric";
-    }
-    GetCountryCode(locale) {
-        if (locale == null)
-            return null;
-        const split = locale.split("-");
-        if (split.length < 2)
-            return null;
-        return split[1];
-    }
-    GetLanguage(locale) {
-        if (locale == null)
-            return null;
-        const split = locale.split("-");
-        if (split.length < 1)
-            return null;
-        return split[0];
-    }
-    GetCurrentFontSize() {
-        const nameString = this.InterfaceSettings.get_string("font-name");
-        const elements = nameString.split(" ");
-        const size = parseFloat(elements[elements.length - 1]);
-        logger_Logger.Debug("Font size changed to " + size.toString());
-        return size;
-    }
-    async GetAppletConfigJson() {
-        var _a, _b;
-        const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
-        const configFile = config_File.new_for_path(configFilePath);
-        if (!await FileExists(configFile)) {
-            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
-        }
-        const confString = await LoadContents(configFile);
-        if (confString == null) {
-            throw new Error(_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath }));
-        }
-        const conf = JSON.parse(confString);
-        if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
-            conf.apiKey.value = "Redacted";
-        return conf;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/loop.ts
-
-
-var weatherAppletGUIDs = {};
-class WeatherLoop {
-    constructor(app, instanceID) {
-        this.lastUpdated = new Date(0);
-        this.pauseRefresh = false;
-        this.LOOP_INTERVAL = 15;
-        this.appletRemoved = false;
-        this.updating = false;
-        this.errorCount = 0;
-        this.DoCheck = async () => {
-            if (this.updating)
-                return;
-            try {
-                this.updating = true;
-                if (this.app.encounteredError == true)
-                    this.IncrementErrorCount();
-                this.ValidateLastUpdateTime();
-                if (this.pauseRefresh) {
-                    logger_Logger.Debug("Configuration error, updating paused");
-                    return;
-                }
-                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    const state = await this.app.RefreshWeather(false);
-                    if (state == "error")
-                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || "locked")
-                        this.lastUpdated = new Date();
-                }
-                else {
-                    logger_Logger.Debug("No need to update yet, skipping");
-                }
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Error in Main loop: " + e, e);
-                this.app.encounteredError = true;
-            }
-            finally {
-                this.updating = false;
-            }
-        };
-        this.app = app;
-        this.instanceID = instanceID;
-        this.GUID = Guid();
-        weatherAppletGUIDs[instanceID] = this.GUID;
-    }
-    IsDataTooOld() {
-        if (!this.lastUpdated)
-            return true;
-        const oldDate = this.lastUpdated;
-        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
-        return (this.lastUpdated > oldDate);
-    }
-    async Start() {
-        while (true) {
-            if (this.IsStray())
-                return;
-            await this.DoCheck();
-            await delay(this.LoopInterval());
-        }
-    }
-    ;
-    Stop() {
-        this.appletRemoved = true;
-    }
-    Pause() {
-        this.pauseRefresh = true;
-    }
-    async Resume() {
-        this.pauseRefresh = false;
-        await this.DoCheck();
-    }
-    ResetErrorCount() {
-        this.errorCount = 0;
-    }
-    GetSecondsUntilNextRefresh() {
-        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
-    }
-    IsStray() {
-        if (this.appletRemoved == true)
-            return true;
-        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-            logger_Logger.Debug("Applet GUID: " + this.GUID);
-            logger_Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-            logger_Logger.Info("GUID mismatch, terminating applet");
-            return true;
-        }
-        return false;
-    }
-    IncrementErrorCount() {
-        this.app.encounteredError = false;
-        this.errorCount++;
-        logger_Logger.Debug("Encountered error in previous loop");
-        if (this.errorCount > 60)
-            this.errorCount = 60;
-    }
-    NextUpdate() {
-        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
-    }
-    ValidateLastUpdateTime() {
-        if (this.lastUpdated > new Date())
-            this.lastUpdated = new Date(0);
-    }
-    LoopInterval() {
-        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
-    }
-}
-
 // EXTERNAL MODULE: ./node_modules/suncalc/suncalc.js
 var suncalc = __webpack_require__(969);
+;// CONCATENATED MODULE: ./src/3_8/providers/BaseProvider.ts
+class BaseProvider {
+    constructor(app) {
+        this.app = app;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
 
 
 
 
-class MetUk {
+
+class MetUk extends BaseProvider {
     constructor(_app) {
+        super(_app);
         this.prettyName = _("Met Office UK");
         this.name = "Met Office UK";
         this.maxForecastSupport = 5;
@@ -10107,7 +9673,6 @@ class MetUk {
                 return null;
             }
         };
-        this.app = _app;
     }
     async GetWeather(newLoc) {
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
@@ -10662,6 +10227,3698 @@ class MetUk {
     ;
 }
 ;
+
+;// CONCATENATED MODULE: ./src/3_8/providers/darkSky.ts
+
+
+
+
+const Lang = imports.lang;
+class DarkSky extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("DarkSky");
+        this.name = "DarkSky";
+        this.maxForecastSupport = 8;
+        this.website = "https://darksky.net/poweredby/";
+        this.maxHourlyForecastSupport = 168;
+        this.needsApiKey = true;
+        this.descriptionLineLength = 25;
+        this.supportedLanguages = [
+            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
+            'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
+            'kw', 'lv', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
+            'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
+        ];
+        this.query = "https://api.darksky.net/forecast/";
+        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
+        this.unit = "si";
+    }
+    async GetWeather(loc) {
+        const now = new Date(Date.now());
+        if (now.getUTCFullYear() > 2022) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no api response",
+                message: _("This API has ceased to function, please use another one.")
+            });
+            return null;
+        }
+        const query = this.ConstructQuery(loc);
+        if (query == "" && query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query, {}, Lang.bind(this, this.HandleError));
+        if (!json)
+            return null;
+        if (!json.code) {
+            return this.ParseWeather(json);
+        }
+        else {
+            this.HandleResponseErrors(json);
+            return null;
+        }
+    }
+    ;
+    ParseWeather(json) {
+        try {
+            const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+            const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+            const result = {
+                date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
+                coord: {
+                    lat: json.latitude,
+                    lon: json.longitude
+                },
+                location: {
+                    url: "https://darksky.net/forecast/" + json.latitude + "," + json.longitude,
+                    timeZone: json.timezone,
+                },
+                sunrise: sunrise,
+                sunset: sunset,
+                wind: {
+                    speed: this.ToMPS(json.currently.windSpeed),
+                    degree: json.currently.windBearing
+                },
+                temperature: this.ToKelvin(json.currently.temperature),
+                pressure: json.currently.pressure,
+                humidity: json.currently.humidity * 100,
+                dewPoint: this.ToKelvin(json.currently.dewPoint),
+                condition: {
+                    main: this.GetShortCurrentSummary(json.currently.summary),
+                    description: json.currently.summary,
+                    icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
+                    customIcon: this.ResolveCustomIcon(json.currently.icon)
+                },
+                extra_field: {
+                    name: _("Feels Like"),
+                    value: this.ToKelvin(json.currently.apparentTemperature),
+                    type: "temperature"
+                },
+                forecasts: [],
+                hourlyForecasts: []
+            };
+            for (let i = 0; i < json.daily.data.length; i++) {
+                const day = json.daily.data[i];
+                const forecast = {
+                    date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
+                    temp_min: this.ToKelvin(day.temperatureLow),
+                    temp_max: this.ToKelvin(day.temperatureHigh),
+                    condition: {
+                        main: this.GetShortSummary(day.summary),
+                        description: this.ProcessSummary(day.summary),
+                        icons: this.ResolveIcon(day.icon),
+                        customIcon: this.ResolveCustomIcon(day.icon)
+                    },
+                };
+                forecast.date = forecast.date.set({ hour: 12 });
+                result.forecasts.push(forecast);
+            }
+            for (let i = 0; i < json.hourly.data.length; i++) {
+                const hour = json.hourly.data[i];
+                const forecast = {
+                    date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipitation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
+            }
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("DarkSky payload parsing error: " + e, e);
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            return null;
+        }
+    }
+    ;
+    ConvertToAPILocale(systemLocale) {
+        if (systemLocale == null)
+            return "en";
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
+        }
+        const lang = systemLocale.split("-")[0];
+        return lang;
+    }
+    ConstructQuery(loc) {
+        this.SetQueryUnit();
+        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
+        }
+        return query;
+    }
+    HandleError(message) {
+        if (message.code == 403) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            });
+            return false;
+        }
+        else if (message.code == 401) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+            });
+            return false;
+        }
+        return true;
+    }
+    HandleResponseErrors(json) {
+        const code = json.code;
+        const error = json.error;
+        const errorMsg = "DarkSky API: ";
+        logger_Logger.Debug("DarksSky API error payload: " + json);
+        switch (code) {
+            case "400":
+                logger_Logger.Error(errorMsg + error);
+                break;
+            default:
+                logger_Logger.Error(errorMsg + error);
+                break;
+        }
+    }
+    ;
+    ProcessSummary(summary) {
+        const processed = summary.split(" ");
+        let result = "";
+        let lineLength = 0;
+        for (let i = 0; i < processed.length; i++) {
+            if (lineLength + processed[i].length > this.descriptionLineLength) {
+                result = result + "\n";
+                lineLength = 0;
+            }
+            result = result + processed[i] + " ";
+            lineLength = lineLength + processed[i].length + 1;
+        }
+        return result;
+    }
+    ;
+    GetShortSummary(summary) {
+        const processed = summary.split(" ");
+        if (processed.length == 1)
+            return processed[0];
+        const result = [];
+        for (let i = 0; i < processed.length; i++) {
+            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
+                result.push(processed[i]) + " ";
+            }
+            if (result.length == 2)
+                break;
+        }
+        return result.join(" ");
+    }
+    ;
+    GetShortCurrentSummary(summary) {
+        const processed = summary.split(" ");
+        let result = "";
+        let maxLoop;
+        (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
+        for (let i = 0; i < maxLoop; i++) {
+            if (processed[i] != "and") {
+                result = result + processed[i] + " ";
+            }
+        }
+        return result;
+    }
+    WordBanned(word) {
+        return this.DarkSkyFilterWords.includes(word);
+    }
+    ResolveIcon(icon, sunTimes, date) {
+        switch (icon) {
+            case "rain":
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+            case "snow":
+                return ["weather-snow"];
+            case "sleet":
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
+            case "fog":
+                return ["weather-fog"];
+            case "wind":
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
+            case "cloudy":
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+            case "partly-cloudy-night":
+                return ["weather-few-clouds-night"];
+            case "partly-cloudy-day":
+                return ["weather-few-clouds"];
+            case "clear-night":
+                return ["weather-clear-night"];
+            case "clear-day":
+                return ["weather-clear"];
+            case "storm":
+                return ["weather-storm"];
+            case "showers":
+                return ["weather-showers", "weather-showers-scattered"];
+            default:
+                return ["weather-severe-alert"];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "rain":
+                return "rain-symbolic";
+            case "snow":
+                return "snow-symbolic";
+            case "fog":
+                return "fog-symbolic";
+            case "cloudy":
+                return "cloudy-symbolic";
+            case "partly-cloudy-night":
+                return "night-alt-cloudy-symbolic";
+            case "partly-cloudy-day":
+                return "day-cloudy-symbolic";
+            case "clear-night":
+                return "night-clear-symbolic";
+            case "clear-day":
+                return "day-sunny-symbolic";
+            case "storm":
+                return "thunderstorm-symbolic";
+            case "showers":
+                return "showers-symbolic";
+            case "wind":
+                return "strong-wind-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
+    SetQueryUnit() {
+        if (this.app.config.TemperatureUnit == "celsius") {
+            if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+                this.unit = 'si';
+            }
+            else {
+                this.unit = 'uk2';
+            }
+        }
+        else {
+            this.unit = 'us';
+        }
+    }
+    ;
+    ToKelvin(temp) {
+        if (this.unit == 'us') {
+            return FahrenheitToKelvin(temp);
+        }
+        else {
+            return CelsiusToKelvin(temp);
+        }
+    }
+    ;
+    ToMPS(speed) {
+        if (this.unit == 'si') {
+            return speed;
+        }
+        else {
+            return MPHtoMPS(speed);
+        }
+    }
+    ;
+}
+;
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openWeatherMap.ts
+
+
+
+
+const IDCache = {};
+class OpenWeatherMap extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 8;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = false;
+        this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+        ];
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
+        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
+        this.HandleError = (error) => {
+            if (error.code == 404) {
+                this.app.ShowError({
+                    detail: "location not found",
+                    message: _("Location not found, make sure location is available or it is in the correct format"),
+                    userError: true,
+                    type: "hard"
+                });
+                return false;
+            }
+            return true;
+        };
+    }
+    async GetWeather(loc) {
+        const params = this.ConstructParams(loc);
+        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+        const promises = [];
+        promises.push(this.app.LoadJsonAsync(this.base_url, params, this.HandleError));
+        if (cachedID == null)
+            promises.push(this.app.LoadJsonAsync(this.id_irl, params));
+        const [json, idPayload] = await Promise.all(promises);
+        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
+            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
+        if (!json)
+            return null;
+        if (this.HadErrors(json))
+            return null;
+        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
+        return this.ParseWeather(json, loc);
+    }
+    ;
+    ParseWeather(json, loc) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        try {
+            const weather = {
+                coord: {
+                    lat: json.lat,
+                    lon: json.lon
+                },
+                location: {
+                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
+                    timeZone: json.timezone
+                },
+                date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
+                sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
+                sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
+                wind: {
+                    speed: json.current.wind_speed,
+                    degree: json.current.wind_deg
+                },
+                temperature: json.current.temp,
+                pressure: json.current.pressure,
+                humidity: json.current.humidity,
+                dewPoint: json.current.dew_point,
+                condition: {
+                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
+                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
+                    icons: this.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
+                    customIcon: this.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
+                },
+                extra_field: {
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
+                },
+                forecasts: []
+            };
+            if (json.minutely != null) {
+                const immediate = {
+                    start: -1,
+                    end: -1
+                };
+                for (let index = 0; index < json.minutely.length; index++) {
+                    const element = json.minutely[index];
+                    if (element.precipitation > 0 && immediate.start == -1) {
+                        immediate.start = index;
+                        continue;
+                    }
+                    else if (element.precipitation == 0 && immediate.start != -1) {
+                        immediate.end = index;
+                        break;
+                    }
+                }
+                weather.immediatePrecipitation = immediate;
+            }
+            const forecasts = [];
+            for (let i = 0; i < json.daily.length; i++) {
+                const day = json.daily[i];
+                const forecast = {
+                    date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
+                    temp_min: day.temp.min,
+                    temp_max: day.temp.max,
+                    condition: {
+                        main: day.weather[0].main,
+                        description: day.weather[0].description,
+                        icons: this.ResolveIcon(day.weather[0].icon),
+                        customIcon: this.ResolveCustomIcon(day.weather[0].icon)
+                    },
+                };
+                forecasts.push(forecast);
+            }
+            weather.forecasts = forecasts;
+            const hourly = [];
+            for (let index = 0; index < json.hourly.length; index++) {
+                const hour = json.hourly[index];
+                const forecast = {
+                    date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather[0].main,
+                        description: hour.weather[0].description,
+                        icons: this.ResolveIcon(hour.weather[0].icon),
+                        customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
+                    },
+                };
+                if (hour.pop >= 0.1) {
+                    forecast.precipitation = {
+                        chance: hour.pop * 100,
+                        type: "none",
+                    };
+                }
+                if (!!hour.rain && forecast.precipitation != null) {
+                    forecast.precipitation.volume = hour.rain["1h"];
+                    forecast.precipitation.type = "rain";
+                }
+                if (!!hour.snow && forecast.precipitation != null) {
+                    forecast.precipitation.volume = hour.snow["1h"];
+                    forecast.precipitation.type = "snow";
+                }
+                hourly.push(forecast);
+            }
+            weather.hourlyForecasts = hourly;
+            return weather;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+            this.app.ShowError({
+                type: "soft",
+                service: "openweathermap",
+                detail: "unusual payload",
+                message: _("Failed to Process Current Weather Info")
+            });
+            return null;
+        }
+    }
+    ;
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+    ConvertToAPILocale(systemLocale) {
+        if (systemLocale == null)
+            return "en";
+        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+            return systemLocale;
+        }
+        const lang = systemLocale.split("-")[0];
+        if (lang == "sv") {
+            return "se";
+        }
+        else if (lang == "cs") {
+            return "cz";
+        }
+        else if (lang == "ko") {
+            return "kr";
+        }
+        else if (lang == "lv") {
+            return "la";
+        }
+        else if (lang == "nn" || lang == "nb") {
+            return "no";
+        }
+        return lang;
+    }
+    HadErrors(json) {
+        if (!this.HasReturnedError(json))
+            return false;
+        const errorMsg = "OpenWeatherMap Response: ";
+        const error = {
+            service: "openweathermap",
+            type: "hard",
+        };
+        const errorPayload = json;
+        switch (errorPayload.cod) {
+            case ("400"):
+                error.detail = "bad location format";
+                error.message = _("Please make sure Location is in the correct format in the Settings");
+                break;
+            case ("401"):
+                error.detail = "bad key";
+                error.message = _("Make sure you entered the correct key in settings");
+                break;
+            case ("404"):
+                error.detail = "location not found";
+                error.message = _("Location not found, make sure location is available or it is in the correct format");
+                break;
+            case ("429"):
+                error.detail = "key blocked";
+                error.message = _("If this problem persists, please contact the Author of this applet");
+                break;
+            default:
+                error.detail = "unknown";
+                error.message = _("Unknown Error, please see the logs in Looking Glass");
+                break;
+        }
+        ;
+        this.app.ShowError(error);
+        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_Logger.Error(errorMsg + errorPayload.message);
+        return true;
+    }
+    ;
+    HasReturnedError(json) {
+        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+    }
+    ResolveIcon(icon) {
+        switch (icon) {
+            case "10d":
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+            case "10n":
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+            case "09n":
+                return ["weather-showers"];
+            case "09d":
+                return ["weather-showers"];
+            case "13d":
+                return ["weather-snow"];
+            case "13n":
+                return ["weather-snow"];
+            case "50d":
+                return ["weather-fog"];
+            case "50n":
+                return ["weather-fog"];
+            case "04d":
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+            case "04n":
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+            case "03n":
+                return ['weather-clouds-night', "weather-few-clouds-night"];
+            case "03d":
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+            case "02n":
+                return ["weather-few-clouds-night"];
+            case "02d":
+                return ["weather-few-clouds"];
+            case "01n":
+                return ["weather-clear-night"];
+            case "01d":
+                return ["weather-clear"];
+            case "11d":
+                return ["weather-storm"];
+            case "11n":
+                return ["weather-storm"];
+            default:
+                return ["weather-severe-alert"];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "10d":
+                return "day-rain-symbolic";
+            case "10n":
+                return "night-rain-symbolic";
+            case "09n":
+                return "night-showers-symbolic";
+            case "09d":
+                return "day-showers-symbolic";
+            case "13d":
+                return "day-snow-symbolic";
+            case "13n":
+                return "night-alt-snow-symbolic";
+            case "50d":
+                return "day-fog-symbolic";
+            case "50n":
+                return "night-fog-symbolic";
+            case "04d":
+                return "day-cloudy-symbolic";
+            case "04n":
+                return "night-alt-cloudy-symbolic";
+            case "03n":
+                return "night-alt-cloudy-symbolic";
+            case "03d":
+                return "day-cloudy-symbolic";
+            case "02n":
+                return "night-alt-cloudy-symbolic";
+            case "02d":
+                return "day-cloudy-symbolic";
+            case "01n":
+                return "night-clear-symbolic";
+            case "01d":
+                return "day-sunny-symbolic";
+            case "11d":
+                return "day-thunderstorm-symbolic";
+            case "11n":
+                return "night-alt-thunderstorm-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
+    ;
+}
+;
+const openWeatherMapConditionLibrary = [
+    _("Thunderstorm with light rain"),
+    _("Thunderstorm with rain"),
+    _("Thunderstorm with heavy rain"),
+    _("Light thunderstorm"),
+    _("Thunderstorm"),
+    _("Heavy thunderstorm"),
+    _("Ragged thunderstorm"),
+    _("Thunderstorm with light drizzle"),
+    _("Thunderstorm with drizzle"),
+    _("Thunderstorm with heavy drizzle"),
+    _("Light intensity drizzle"),
+    _("Drizzle"),
+    _("Heavy intensity drizzle"),
+    _("Light intensity drizzle rain"),
+    _("Drizzle rain"),
+    _("Heavy intensity drizzle rain"),
+    _("Shower rain and drizzle"),
+    _("Heavy shower rain and drizzle"),
+    _("Shower drizzle"),
+    _("Light rain"),
+    _("Moderate rain"),
+    _("Heavy intensity rain"),
+    _("Very heavy rain"),
+    _("Extreme rain"),
+    _("Freezing rain"),
+    _("Light intensity shower rain"),
+    _("Shower rain"),
+    _("Heavy intensity shower rain"),
+    _("Ragged shower rain"),
+    _("Light snow"),
+    _("Snow"),
+    _("Heavy snow"),
+    _("Sleet"),
+    _("Shower sleet"),
+    _("Light rain and snow"),
+    _("Rain and snow"),
+    _("Light shower snow"),
+    _("Shower snow"),
+    _("Heavy shower snow"),
+    _("Mist"),
+    _("Smoke"),
+    _("Haze"),
+    _("Sand, dust whirls"),
+    _("Fog"),
+    _("Sand"),
+    _("Dust"),
+    _("Volcanic ash"),
+    _("Squalls"),
+    _("Tornado"),
+    _("Clear"),
+    _("Clear sky"),
+    _("Sky is clear"),
+    _("Clouds"),
+    _("Few clouds"),
+    _("Scattered clouds"),
+    _("Broken clouds"),
+    _("Overcast clouds")
+];
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway.ts
+
+
+
+
+
+class MetNorway extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.prettyName = _("MET Norway");
+        this.name = "MetNorway";
+        this.maxForecastSupport = 10;
+        this.website = "https://www.met.no/en";
+        this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = false;
+        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
+    }
+    async GetWeather(loc) {
+        const query = this.GetUrl(loc);
+        if (query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query);
+        if (!json) {
+            logger_Logger.Error("MET Norway: Empty response from API");
+            return null;
+        }
+        return this.ParseWeather(json, loc);
+    }
+    RemoveEarlierElements(json, loc) {
+        const now = DateTime.now().setZone(loc.timeZone);
+        let startIndex = -1;
+        for (let i = 0; i < json.properties.timeseries.length; i++) {
+            const element = json.properties.timeseries[i];
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+            if (timestamp < now && now.hour != timestamp.hour) {
+                startIndex = i;
+            }
+            else {
+                break;
+            }
+        }
+        if (startIndex != -1) {
+            logger_Logger.Debug("Removing outdated weather information...");
+            json.properties.timeseries.splice(0, startIndex + 1);
+        }
+        return json;
+    }
+    ParseWeather(json, loc) {
+        var _a, _b;
+        json = this.RemoveEarlierElements(json, loc);
+        const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+        const suntimes = {
+            sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
+            sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
+        };
+        const current = json.properties.timeseries[0];
+        const result = {
+            temperature: CelsiusToKelvin(current.data.instant.details.air_temperature),
+            coord: {
+                lat: json.geometry.coordinates[1],
+                lon: json.geometry.coordinates[0]
+            },
+            date: DateTime.fromISO(current.time, { zone: loc.timeZone }),
+            condition: this.ResolveCondition((_b = (_a = current.data.next_1_hours) === null || _a === void 0 ? void 0 : _a.summary) === null || _b === void 0 ? void 0 : _b.symbol_code, IsNight(suntimes)),
+            humidity: current.data.instant.details.relative_humidity,
+            pressure: current.data.instant.details.air_pressure_at_sea_level,
+            dewPoint: CelsiusToKelvin(current.data.instant.details.dew_point_temperature),
+            extra_field: {
+                name: _("Cloudiness"),
+                type: "percent",
+                value: current.data.instant.details.cloud_area_fraction
+            },
+            sunrise: suntimes.sunrise,
+            sunset: suntimes.sunset,
+            wind: {
+                degree: current.data.instant.details.wind_from_direction,
+                speed: current.data.instant.details.wind_speed
+            },
+            location: {},
+            forecasts: []
+        };
+        const hourlyForecasts = [];
+        for (let i = 0; i < json.properties.timeseries.length; i++) {
+            const element = json.properties.timeseries[i];
+            if (!!element.data.next_1_hours) {
+                hourlyForecasts.push({
+                    date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
+                    temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
+                    precipitation: {
+                        type: "rain",
+                        volume: element.data.next_1_hours.details.precipitation_amount
+                    },
+                    condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, { zone: loc.timeZone })))
+                });
+            }
+        }
+        result.hourlyForecasts = hourlyForecasts;
+        result.forecasts = this.BuildForecasts(json.properties.timeseries, loc);
+        return result;
+    }
+    BuildForecasts(forecastsData, loc) {
+        const forecasts = [];
+        const days = this.SortDataByDay(forecastsData, loc);
+        for (let i = 0; i < days.length; i++) {
+            const forecast = {
+                condition: {
+                    customIcon: "cloudy-symbolic",
+                    description: "",
+                    icons: [],
+                    main: ""
+                },
+                date: null,
+                temp_max: Number.NEGATIVE_INFINITY,
+                temp_min: Number.POSITIVE_INFINITY
+            };
+            const conditionCounter = {};
+            for (let j = 0; j < days[i].length; j++) {
+                const element = days[i][j];
+                if (!element.data.next_6_hours)
+                    continue;
+                forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
+                if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max)
+                    forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
+                if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min)
+                    forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
+                const [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
+                const severity = conditionSeverity[symbol];
+                if (!conditionCounter[severity])
+                    conditionCounter[severity] = { count: 0, name: symbol };
+                conditionCounter[severity].count = conditionCounter[severity].count + 1;
+            }
+            forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
+            forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
+            forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
+            forecasts.push(forecast);
+        }
+        return forecasts;
+    }
+    GetEarliestDataForToday(events, loc) {
+        let earliest = 0;
+        for (let i = 0; i < events.length; i++) {
+            const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
+            const timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
+            if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day"))
+                continue;
+            if (earliestElementTime < timestamp)
+                continue;
+            earliest = i;
+        }
+        return events[earliest];
+    }
+    SortDataByDay(data, loc) {
+        const days = [];
+        let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
+        let dayIndex = 0;
+        days.push([]);
+        for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+            if (OnSameDay(timestamp, currentDay)) {
+                days[dayIndex].push(element);
+            }
+            else if (!OnSameDay(timestamp, currentDay)) {
+                dayIndex++;
+                currentDay = timestamp;
+                days.push([]);
+                days[dayIndex].push(element);
+            }
+        }
+        return days;
+    }
+    GetMostCommonCondition(count) {
+        let result = -1;
+        for (const key in count) {
+            if (result == -1)
+                result = parseInt(key);
+            if (count[result].count < count[key].count)
+                result = parseInt(key);
+        }
+        return count[result].name;
+    }
+    GetMostSevereCondition(conditions) {
+        let result = -1;
+        for (const key in conditions) {
+            const conditionID = parseInt(key);
+            const resultStripped = (result > 100) ? result - 100 : result;
+            const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
+            if (conditionIDStripped > resultStripped)
+                result = conditionID;
+        }
+        if (result <= 4) {
+            return this.GetMostCommonCondition(conditions);
+        }
+        return conditions[result].name;
+    }
+    GetUrl(loc) {
+        let url = this.baseUrl + "lat=";
+        url += (loc.lat + "&lon=" + loc.lon);
+        return url;
+    }
+    DeconstructCondition(icon) {
+        const condition = icon.split("_");
+        return {
+            timeOfDay: condition[1],
+            condition: condition[0]
+        };
+    }
+    ResolveCondition(icon, isNight = false) {
+        if (icon == null) {
+            logger_Logger.Error("Icon was not found");
+            return {
+                customIcon: "cloud-refresh-symbolic",
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: ["weather-severe-alert"]
+            };
+        }
+        const weather = this.DeconstructCondition(icon);
+        switch (weather.condition) {
+            case "clearsky":
+                return {
+                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    main: _("Clear sky"),
+                    description: _("Clear sky"),
+                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
+                };
+            case "cloudy":
+                return {
+                    customIcon: "cloudy-symbolic",
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    icons: (isNight) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"]
+                };
+            case "fair":
+                return {
+                    customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
+                    main: _("Fair"),
+                    description: _("Fair"),
+                    icons: (isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"]
+                };
+            case "fog":
+                return {
+                    customIcon: "fog-symbolic",
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "heavyrain":
+                return {
+                    customIcon: "rain-symbolic",
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain"),
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+                };
+            case "heavyrainandthunder":
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain and thunder"),
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+                };
+            case "heavyrainshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain showers"),
+                    icons: ["weather-showers", "weather-showers-scattered"]
+                };
+            case "heavyrainshowersandthunder":
+                return {
+                    customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain showers and thunder"),
+                    icons: ["weather-showers", "weather-showers-scattered"]
+                };
+            case "heavysleet":
+                return {
+                    customIcon: "sleet-symbolic",
+                    main: _("Heavy sleet"),
+                    description: _("Heavy sleet"),
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+                };
+            case "heavysleetandthunder":
+                return {
+                    customIcon: "sleet-storm-symbolic",
+                    main: _("Heavy sleet"),
+                    description: _("Heavy sleet and thunder"),
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+                };
+            case "heavysleetshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    main: _("Heavy sleet"),
+                    description: _("Heavy sleet showers"),
+                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+                };
+            case "heavysleetshowersandthunder":
+                return {
+                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    main: _("Heavy sleet"),
+                    description: _("Heavy sleet showers and thunder"),
+                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+                };
+            case "heavysnow":
+                return {
+                    customIcon: "snow-symbolic",
+                    main: _("Heavy snow"),
+                    description: _("Heavy snow"),
+                    icons: ["weather-snow"]
+                };
+            case "heavysnowandthunder":
+                return {
+                    customIcon: "snow-symbolic",
+                    main: _("Heavy snow"),
+                    description: _("Heavy snow and thunder"),
+                    icons: ["weather-snow"]
+                };
+            case "heavysnowshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    main: _("Heavy snow"),
+                    description: _("Heavy snow showers"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            case "heavysnowshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    main: _("Heavy snow"),
+                    description: _("Heavy snow showers and thunder"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            case "lightrain":
+                return {
+                    customIcon: "rain-mix-symbolic",
+                    main: _("Light rain"),
+                    description: _("Light rain"),
+                    icons: ["weather-showers-scattered", "weather-rain"]
+                };
+            case "lightrainandthunder":
+                return {
+                    customIcon: "rain-mix-storm-symbolic",
+                    main: _("Light rain"),
+                    description: _("Light rain and thunder"),
+                    icons: ["weather-showers-scattered", "weather-rain"]
+                };
+            case "lightrainshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
+                    main: _("Light rain"),
+                    description: _("Light rain showers"),
+                    icons: ["weather-showers-scattered", "weather-rain"]
+                };
+            case "lightrainshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
+                    main: _("Light rain"),
+                    description: _("Light rain showers and thunder"),
+                    icons: ["weather-showers-scattered", "weather-rain"]
+                };
+            case "lightsleet":
+                return {
+                    customIcon: "sleet-symbolic",
+                    main: _("Light sleet"),
+                    description: _("Light sleet"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "lightsleetandthunder":
+                return {
+                    customIcon: "sleet-storm-symbolic",
+                    main: _("Light sleet"),
+                    description: _("Light sleet and thunder"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "lightsleetshowers":
+                return {
+                    customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    main: _("Light sleet"),
+                    description: _("Light sleet showers"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "lightssleetshowersandthunder":
+                return {
+                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    main: _("Light sleet"),
+                    description: _("Light sleet showers and thunder"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "lightsnow":
+                return {
+                    customIcon: "snow-symbolic",
+                    main: _("Light snow"),
+                    description: _("Light snow"),
+                    icons: ["weather-snow"]
+                };
+            case "lightsnowandthunder":
+                return {
+                    customIcon: "snow-storm-symbolic",
+                    main: _("Light snow"),
+                    description: _("Light snow and thunder"),
+                    icons: ["weather-snow"]
+                };
+            case "lightsnowshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    main: _("Light snow"),
+                    description: _("Light snow showers"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            case "lightssnowshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    main: _("Light snow"),
+                    description: _("Light snow showers and thunder"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            case "partlycloudy":
+                return {
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
+                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"]
+                };
+            case "rain":
+                return {
+                    customIcon: "rain-symbolic",
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+                };
+            case "rainandthunder":
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    main: _("Rain"),
+                    description: _("Rain and thunder"),
+                    icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+                };
+            case "rainshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
+                    main: _("Rain showers"),
+                    description: _("Rain showers"),
+                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
+                };
+            case "rainshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
+                    main: _("Rain showers"),
+                    description: _("Rain showers and thunder"),
+                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
+                };
+            case "sleet":
+                return {
+                    customIcon: "sleet-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "sleetandthunder":
+                return {
+                    customIcon: "sleet-storm-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet and thunder"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "sleetshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet showers"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "sleetshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet showers and thunder"),
+                    icons: ["weather-freezing-rain", "weather-showers"]
+                };
+            case "snow":
+                return {
+                    customIcon: "snow-symbolic",
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    icons: ["weather-snow"]
+                };
+            case "snowandthunder":
+                return {
+                    customIcon: "snow-storm-symbolic",
+                    main: _("Snow"),
+                    description: _("Snow and thunder"),
+                    icons: ["weather-snow"]
+                };
+            case "snowshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    main: _("Snow showers"),
+                    description: _("Snow showers"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            case "snowshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    main: _("Snow showers"),
+                    description: _("Snow showers and thunder"),
+                    icons: ["weather-snow-scattered", "weather-snow"]
+                };
+            default:
+                logger_Logger.Error("condition code not found: " + weather.condition);
+                return {
+                    customIcon: "cloud-refresh-symbolic",
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    icons: ["weather-severe-alert"]
+                };
+        }
+    }
+}
+const conditionSeverity = {
+    clearsky: 1,
+    cloudy: 4,
+    fair: 2,
+    fog: 15,
+    heavyrain: 10,
+    heavyrainandthunder: 11,
+    heavyrainshowers: 41,
+    heavyrainshowersandthunder: 25,
+    heavysleet: 48,
+    heavysleetandthunder: 32,
+    heavysleetshowers: 43,
+    heavysleetshowersandthunder: 27,
+    heavysnow: 50,
+    heavysnowandthunder: 34,
+    heavysnowshowers: 45,
+    heavysnowshowersandthunder: 29,
+    lightrain: 46,
+    lightrainandthunder: 30,
+    lightrainshowers: 40,
+    lightrainshowersandthunder: 24,
+    lightsleet: 47,
+    lightsleetandthunder: 31,
+    lightsleetshowers: 42,
+    lightsnow: 49,
+    lightsnowandthunder: 33,
+    lightsnowshowers: 44,
+    lightssleetshowersandthunder: 26,
+    lightssnowshowersandthunder: 28,
+    partlycloudy: 3,
+    rain: 9,
+    rainandthunder: 22,
+    rainshowers: 5,
+    rainshowersandthunder: 6,
+    sleet: 12,
+    sleetandthunder: 23,
+    sleetshowers: 7,
+    sleetshowersandthunder: 20,
+    snow: 13,
+    snowandthunder: 14,
+    snowshowers: 8,
+    snowshowersandthunder: 21
+};
+
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
+
+
+
+
+class Weatherbit extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("WeatherBit");
+        this.name = "Weatherbit";
+        this.maxForecastSupport = 16;
+        this.website = "https://www.weatherbit.io/";
+        this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = true;
+        this.supportedLanguages = [
+            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
+            'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
+            'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
+            'sv', 'tr', 'uk', 'zh', 'zh-tw'
+        ];
+        this.current_url = "https://api.weatherbit.io/v2.0/current?";
+        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.hourlyAccess = true;
+        this.ParseCurrent = (json) => {
+            json = json.data[0];
+            const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
+            if (hourDiff != 0)
+                logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+            try {
+                const weather = {
+                    coord: {
+                        lat: json.lat,
+                        lon: json.lon
+                    },
+                    location: {
+                        city: json.city_name,
+                        country: json.country_code,
+                        timeZone: json.timezone
+                    },
+                    date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
+                    sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
+                    sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
+                    wind: {
+                        speed: json.wind_spd,
+                        degree: json.wind_dir
+                    },
+                    temperature: json.temp,
+                    pressure: json.pres,
+                    humidity: json.rh,
+                    dewPoint: json.dewpt,
+                    condition: {
+                        main: json.weather.description,
+                        description: json.weather.description,
+                        icons: this.ResolveIcon(json.weather.icon),
+                        customIcon: this.ResolveCustomIcon(json.weather.icon)
+                    },
+                    extra_field: {
+                        name: _("Feels Like"),
+                        value: json.app_temp,
+                        type: "temperature"
+                    },
+                    forecasts: []
+                };
+                return weather;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+                return null;
+            }
+        };
+        this.ParseForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (let i = 0; i < json.data.length; i++) {
+                    const day = json.data[i];
+                    const forecast = {
+                        date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
+                        temp_min: day.min_temp,
+                        temp_max: day.max_temp,
+                        condition: {
+                            main: day.weather.description,
+                            description: day.weather.description,
+                            icons: this.ResolveIcon(day.weather.icon),
+                            customIcon: this.ResolveCustomIcon(day.weather.icon)
+                        },
+                    };
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
+        this.ParseHourlyForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (let i = 0; i < json.data.length; i++) {
+                    const hour = json.data[i];
+                    const forecast = {
+                        date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
+                        temp: hour.temp,
+                        condition: {
+                            main: hour.weather.description,
+                            description: hour.weather.description,
+                            icons: this.ResolveIcon(hour.weather.icon),
+                            customIcon: this.ResolveCustomIcon(hour.weather.icon)
+                        },
+                        precipitation: {
+                            type: "rain",
+                            volume: hour.precip,
+                            chance: hour.pop
+                        }
+                    };
+                    if (!!forecast.precipitation && hour.snow != 0) {
+                        forecast.precipitation.type = "snow";
+                        forecast.precipitation.volume = hour.snow;
+                    }
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
+    }
+    async GetWeather(loc) {
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+        let hourlyPromise = null;
+        if (!!this.hourlyAccess)
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
+        if (!currentResult)
+            return null;
+        const forecastResult = await forecastPromise;
+        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        const hourlyResult = await hourlyPromise;
+        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        return currentResult;
+    }
+    ;
+    async GetData(baseUrl, loc, ParseFunction) {
+        const query = this.ConstructQuery(baseUrl, loc);
+        if (query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+        if (json == null)
+            return null;
+        return ParseFunction(json);
+    }
+    async GetHourlyData(baseUrl, loc) {
+        const query = this.ConstructQuery(baseUrl, loc);
+        if (query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
+        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
+            return null;
+        }
+        if (json == null)
+            return null;
+        return this.ParseHourlyForecast(json);
+    }
+    ;
+    TimeToDate(time, hourDiff, tz) {
+        const hoursMinutes = time.split(":");
+        const date = DateTime.utc().set({
+            hour: parseInt(hoursMinutes[0]) - hourDiff,
+            minute: parseInt(hoursMinutes[1]),
+        }).setZone(tz);
+        return date;
+    }
+    HourDifference(correctTime, incorrectTime) {
+        if (incorrectTime == null)
+            return 0;
+        return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
+    }
+    ParseStringTime(last_ob_time, tz) {
+        const split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5)
+            return null;
+        return DateTime.fromObject({
+            year: parseInt(split[0]),
+            month: parseInt(split[1]) - 1,
+            day: parseInt(split[2]),
+            hour: parseInt(split[3]),
+            minute: parseInt(split[4])
+        }).setZone(tz);
+    }
+    ConvertToAPILocale(systemLocale) {
+        if (!systemLocale)
+            return null;
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
+        }
+        const lang = systemLocale.split("-")[0];
+        if (lang == "cs") {
+            return "cz";
+        }
+        return lang;
+    }
+    ConstructQuery(query, loc) {
+        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+        const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
+        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + lang;
+        }
+        return query;
+    }
+    ;
+    HandleError(message) {
+        if (message.code == 403) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            });
+        }
+        return true;
+    }
+    HandleHourlyError(message) {
+        if (message.code == 403) {
+            this.hourlyAccess = false;
+            logger_Logger.Info("Hourly forecast is inaccessible, skipping");
+            return false;
+        }
+        return true;
+    }
+    ResolveIcon(icon) {
+        switch (icon) {
+            case "t01n":
+            case "t01d":
+            case "t02n":
+            case "t02d":
+            case "t03n":
+            case "t03d":
+            case "t04n":
+            case "t04d":
+            case "t05n":
+            case "t05d":
+                return ["weather-storm"];
+            case "d01d":
+            case "d01n":
+            case "d02d":
+            case "d02n":
+            case "d03d":
+            case "d03n":
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
+            case "r01d":
+            case "r01n":
+            case "r02d":
+            case "r02n":
+            case "r03d":
+            case "r03n":
+            case "r04d":
+            case "r04n":
+            case "r05d":
+            case "r05n":
+            case "r06d":
+            case "r06n":
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
+            case "s01d":
+            case "s01n":
+            case "s02d":
+            case "s02n":
+            case "s03d":
+            case "s03n":
+            case "s04d":
+            case "s04n":
+            case "s06d":
+            case "s06n":
+                return ["weather-snow"];
+            case "s05d":
+            case "s05n":
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
+            case "a01d":
+            case "a01n":
+            case "a02d":
+            case "a02n":
+            case "a03d":
+            case "a03n":
+            case "a04d":
+            case "a04n":
+            case "a05d":
+            case "a05n":
+            case "a06d":
+            case "a06n":
+                return ["weather-fog"];
+            case "c02d":
+                return ["weather-few-clouds"];
+            case "c02n":
+                return ["weather-few-clouds-night"];
+            case "c01n":
+                return ["weather-clear-night"];
+            case "c01d":
+                return ["weather-clear"];
+            case "c03d":
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+            case "c03n":
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
+            case "c04n":
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+            case "c04d":
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+            case "u00d":
+            case "u00n":
+                return ["weather-severe-alert"];
+            default:
+                return ["weather-severe-alert"];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "t01d":
+            case "t02d":
+            case "t03d":
+                return "day-thunderstorm-symbolic";
+            case "t04d":
+            case "t05d":
+                return "thunderstorm-symbolic";
+            case "t01n":
+            case "t02n":
+            case "t03n":
+                return "night-alt-thunderstorm-symbolic";
+            case "t04n":
+            case "t05n":
+                return "thunderstorm-symbolic";
+            case "d01d":
+            case "d02d":
+            case "d03d":
+            case "d01n":
+            case "d02n":
+            case "d03n":
+                return "showers-symbolic";
+            case "r01d":
+            case "r02d":
+            case "r03d":
+            case "r01n":
+            case "r02n":
+            case "r03n":
+                return "rain-symbolic";
+            case "r04d":
+            case "r05d":
+                return "day-rain-symbolic";
+            case "r06d":
+                return "rain-symbolic";
+            case "r04n":
+            case "r05n":
+                return "night-alt-rain-symbolic";
+            case "r06n":
+                return "rain-symbolic";
+            case "s01d":
+            case "s04d":
+                return "day-snow-symbolic";
+            case "s02d":
+            case "s03d":
+            case "s06d":
+                return "snow-symbolic";
+            case "s01n":
+            case "s04n":
+                return "night-alt-snow-symbolic";
+            case "s02n":
+            case "s03n":
+            case "s06n":
+                return "snow-symbolic";
+            case "s05d":
+            case "s05n":
+                return "sleet-symbolic";
+            case "a01d":
+            case "a02d":
+            case "a03d":
+            case "a04d":
+            case "a05d":
+            case "a06d":
+                return "day-fog-symbolic";
+            case "a01n":
+            case "a02n":
+            case "a03n":
+            case "a04n":
+            case "a05n":
+            case "a06n":
+                return "night-fog-symbolic";
+            case "c02d":
+                return "day-cloudy-symbolic";
+            case "c02n":
+                return "night-alt-cloudy-symbolic";
+            case "c01n":
+                return "night-clear-symbolic";
+            case "c01d":
+                return "day-sunny-symbolic";
+            case "c03d":
+                return "day-cloudy-symbolic";
+            case "c03n":
+                return "night-alt-cloudy-symbolic";
+            case "c04n":
+                return "cloudy-symbolic";
+            case "c04d":
+                return "cloudy-symbolic";
+            case "u00d":
+            case "u00n":
+                return "cloud-refresh-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
+}
+;
+
+;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
+
+
+
+class ClimacellV4 extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.needsApiKey = true;
+        this.prettyName = _("Tomorrow.io");
+        this.name = "Tomorrow.io";
+        this.maxForecastSupport = 15;
+        this.maxHourlyForecastSupport = 108;
+        this.website = "https://www.tomorrow.io/";
+        this.url = "https://data.climacell.co/v4/timelines";
+        this.params = {
+            apikey: null,
+            location: null,
+            timesteps: "current,1h,1d",
+            units: "metric",
+            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
+        };
+    }
+    async GetWeather(loc) {
+        if (loc == null)
+            return null;
+        this.params.apikey = this.app.config.ApiKey;
+        this.params.location = loc.lat + "," + loc.lon;
+        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
+        if (response == null)
+            return null;
+        return this.ParseWeather(loc, response);
+    }
+    HandleHTTPError(message) {
+        if (message.code == 401) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key that you have from Climacell")
+            });
+            return false;
+        }
+        return true;
+    }
+    ParseWeather(loc, data) {
+        var _a, _b, _c, _d, _e;
+        const current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
+        const hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
+        const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
+        if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
+            return null;
+        const result = {
+            coord: {
+                lat: loc.lat,
+                lon: loc.lon
+            },
+            date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
+            condition: this.ResolveCondition(current.values.weatherCode),
+            humidity: current.values.humidity,
+            pressure: current.values.pressureSurfaceLevel,
+            temperature: CelsiusToKelvin(current.values.temperature),
+            wind: {
+                degree: current.values.windDirection,
+                speed: current.values.windSpeed
+            },
+            dewPoint: CelsiusToKelvin(current.values.dewPoint),
+            sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
+            sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
+            location: {
+                url: "https://www.tomorrow.io/weather"
+            },
+            extra_field: {
+                name: _("Feels Like"),
+                type: "temperature",
+                value: CelsiusToKelvin(current.values.temperatureApparent)
+            },
+            forecasts: []
+        };
+        const hours = [];
+        const days = [];
+        for (let index = 0; index < daily.length; index++) {
+            const element = daily[index];
+            days.push({
+                condition: this.ResolveCondition(element.values.weatherCode),
+                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                temp_max: CelsiusToKelvin(element.values.temperatureMax),
+                temp_min: CelsiusToKelvin(element.values.temperatureMin)
+            });
+        }
+        for (let index = 0; index < hourly.length; index++) {
+            const element = hourly[index];
+            const hour = {
+                condition: this.ResolveCondition(element.values.weatherCode),
+                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                temp: CelsiusToKelvin(element.values.temperature)
+            };
+            hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
+            if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
+                hour.precipitation = {
+                    chance: element.values.precipitationProbability,
+                    volume: element.values.precipitationIntensity,
+                    type: this.PrecipTypeToAppletType(element.values.precipitationType)
+                };
+            }
+            hours.push(hour);
+        }
+        result.forecasts = days;
+        result.hourlyForecasts = hours;
+        return result;
+    }
+    ResolveCondition(weatherCode, isNight = false) {
+        const result = {
+            customIcon: "refresh-symbolic",
+            icons: ["weather-severe-alert"],
+            main: _("Unknown"),
+            description: _("Unknown")
+        };
+        switch (weatherCode) {
+            case 0:
+                return result;
+            case 1000:
+                return {
+                    main: isNight ? _("Clear") : _("Sunny"),
+                    description: isNight ? _("Clear") : _("Sunny"),
+                    customIcon: isNight ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    icons: isNight ? ["weather-clear-night"] : ["weather-clear"]
+                };
+            case 1001:
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-overcast", "weather-many-clouds", isNight ? "weather-clouds-night" : "weather-clouds"]
+                };
+            case 1100:
+                return {
+                    main: _("Mostly clear"),
+                    description: _("Mostly clear"),
+                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: isNight ? ["weather-few-clouds-night", "weather-clouds-night"] : ["weather-few-clouds", "weather-clouds"]
+                };
+            case 1101:
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
+                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: isNight ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
+                };
+            case 1102:
+                return {
+                    main: _("Mostly cloudy"),
+                    description: _("Mostly cloudy"),
+                    customIcon: "cloud-symbolic",
+                    icons: ["weather-overcast", "weather-many-clouds", isNight ? "weather-clouds-night" : "weather-clouds"]
+                };
+            case 2000:
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 2100:
+                return {
+                    main: _("Fog"),
+                    description: _("Light fog"),
+                    customIcon: isNight ? "night-fog-symbolic" : "day-fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 3000:
+                return {
+                    main: _("Wind"),
+                    description: _("Light wind"),
+                    customIcon: isNight ? "night-alt-wind-symbolic" : "day-windy-symbolic",
+                    icons: ["weather-windy"]
+                };
+            case 3001:
+                return {
+                    main: _("Wind"),
+                    description: _("Wind"),
+                    customIcon: "windy-symbolic",
+                    icons: ["weather-windy"]
+                };
+            case 3002:
+                return {
+                    main: _("Wind"),
+                    description: _("Strong wind"),
+                    customIcon: "windy-symbolic",
+                    icons: ["weather-windy"]
+                };
+            case 4000:
+                return {
+                    main: _("Drizzle"),
+                    description: _("Drizzle"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain"]
+                };
+            case 4001:
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain", "weather-showers-scattered"]
+                };
+            case 4200:
+                return {
+                    main: _("Rain"),
+                    description: _("Light rain"),
+                    customIcon: isNight ? "night-alt-rain-symbolic" : "day-rain-symbolic",
+                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+                };
+            case 4201:
+                return {
+                    main: _("Rain"),
+                    description: _("Heavy rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain", "weather-showers-scattered"]
+                };
+            case 5000:
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-snow-scattered", isNight ? "weather-snow-night" : "weather-snow-day"]
+                };
+            case 5001:
+                return {
+                    main: _("Flurries"),
+                    description: _("Flurries"),
+                    customIcon: "snow-wind-symbolic",
+                    icons: ["weather-snow", "weather-snow-scattered", isNight ? "weather-snow-night" : "weather-snow-day"]
+                };
+            case 5100:
+                return {
+                    main: _("Snow"),
+                    description: _("Light snow"),
+                    customIcon: isNight ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    icons: isNight ? ["weather-snow-scattered-night", "weather-snow-night", "weather-snow"] : ["weather-snow-scattered-day", "weather-snow-day", "weather-snow"]
+                };
+            case 5101:
+                return {
+                    main: _("Snow"),
+                    description: _("Heavy snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-snow-scattered"]
+                };
+            case 6000:
+                return {
+                    main: _("Drizzle"),
+                    description: _("Freezing drizzle"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 6001:
+                return {
+                    main: _("Rain"),
+                    description: _("Freezing rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 6200:
+                return {
+                    main: _("Rain"),
+                    description: _("Light freezing rain"),
+                    customIcon: isNight ? "night-alt-rain-symbolic" : "day-rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 6201:
+                return {
+                    main: _("Rain"),
+                    description: _("Heavy freezing rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 7000:
+                return {
+                    main: _("Ice pellets"),
+                    description: _("Ice pellets"),
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 7101:
+                return {
+                    main: _("Ice pellets"),
+                    description: _("Heavy ice pellets"),
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 7102:
+                return {
+                    main: _("Ice pellets"),
+                    description: _("Light ice pellets"),
+                    customIcon: isNight ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
+                };
+            case 8000:
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            default:
+                return result;
+        }
+    }
+    PrecipTypeToAppletType(type) {
+        switch (type) {
+            case 0:
+                return "none";
+            case 1:
+                return "rain";
+            case 2:
+                return "snow";
+            case 3:
+                return "freezing rain";
+            case 4:
+                return "ice pellets";
+            default:
+                return "none";
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
+
+
+
+
+
+class USWeather extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("US Weather");
+        this.name = "US Weather";
+        this.maxForecastSupport = 7;
+        this.website = "https://www.weather.gov/";
+        this.maxHourlyForecastSupport = 156;
+        this.needsApiKey = false;
+        this.sitesUrl = "https://api.weather.gov/points/";
+        this.MAX_STATION_DIST = 50000;
+        this.observationStations = [];
+        this.OnObtainingGridData = (message) => {
+            var _a, _b, _c, _d;
+            if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
+                const data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
+                if (data.title == "Data Unavailable For Requested Point") {
+                    this.app.ShowError({
+                        type: "hard",
+                        userError: true,
+                        detail: "location not covered",
+                        service: "us-weather",
+                        message: _("Location is outside US, please use a different provider.")
+                    });
+                }
+                return false;
+            }
+            return true;
+        };
+        this.ParseForecast = (json) => {
+            const forecasts = [];
+            try {
+                let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
+                startIndex = this.FindTodayIndex(json, startIndex);
+                if (startIndex == -1)
+                    return null;
+                if (json.properties.periods[startIndex].isDaytime == false) {
+                    startIndex++;
+                    const today = json.properties.periods[0];
+                    const forecast = {
+                        date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
+                        temp_min: FahrenheitToKelvin(today.temperature),
+                        temp_max: FahrenheitToKelvin(today.temperature),
+                        condition: this.ResolveCondition(today.icon),
+                    };
+                    forecasts.push(forecast);
+                }
+                for (let i = startIndex; i < json.properties.periods.length; i += 2) {
+                    const day = json.properties.periods[i];
+                    let night = json.properties.periods[i + 1];
+                    if (!night)
+                        night = day;
+                    const forecast = {
+                        date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
+                        temp_min: FahrenheitToKelvin(night.temperature),
+                        temp_max: FahrenheitToKelvin(day.temperature),
+                        condition: this.ResolveCondition(day.icon),
+                    };
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
+        this.ParseHourlyForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (let i = 0; i < json.properties.periods.length; i++) {
+                    const hour = json.properties.periods[i];
+                    const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
+                    const forecast = {
+                        date: timestamp,
+                        temp: CelsiusToKelvin(hour.temperature),
+                        condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
+                    };
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
+                return null;
+            }
+        };
+    }
+    async GetWeather(loc) {
+        var _a, _b;
+        const locID = loc.lat.toString() + "," + loc.lon.toString();
+        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
+            logger_Logger.Info("Downloading new site data");
+            this.currentLoc = loc;
+            this.currentLocID = locID;
+            const grid = await this.GetGridData(loc);
+            if (grid == null)
+                return null;
+            logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
+            const observationStations = await this.GetStationData(grid.properties.observationStations);
+            if (observationStations == null)
+                return null;
+            this.grid = grid;
+            this.observationStations = observationStations;
+        }
+        else {
+            logger_Logger.Debug("Site data downloading skipped");
+        }
+        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
+        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
+        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+        const hourly = await hourlyForecastPromise;
+        const forecast = await forecastPromise;
+        if (!hourly || !forecast) {
+            logger_Logger.Error("Failed to obtain forecast Data");
+            return null;
+        }
+        const weather = this.ParseCurrent(observations, hourly, loc);
+        if (!!weather) {
+            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
+            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        }
+        return weather;
+    }
+    ;
+    async GetGridData(loc) {
+        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+        return siteData;
+    }
+    async GetStationData(stationListUrl) {
+        const stations = await this.app.LoadJsonAsync(stationListUrl);
+        return stations === null || stations === void 0 ? void 0 : stations.features;
+    }
+    async GetObservationsInRange(range, loc, stations) {
+        const observations = [];
+        for (let index = 0; index < stations.length; index++) {
+            const element = stations[index];
+            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
+            if (element.dist > range)
+                break;
+            const observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
+            if (observation == null) {
+                logger_Logger.Debug("Failed to get observations from " + stations[index].id);
+            }
+            else {
+                observations.push(observation);
+            }
+        }
+        return observations;
+    }
+    MeshObservationData(observations) {
+        if (observations.length < 1)
+            return null;
+        const result = observations[0];
+        if (observations.length == 1)
+            return result;
+        for (let index = 1; index < observations.length; index++) {
+            const element = observations[index];
+            const debugText = " Observation data missing, plugged in from ID " +
+                element.id + ", index " + index +
+                ", distance "
+                + Math.round(GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], this.currentLoc.lat, this.currentLoc.lon))
+                + " metres";
+            if (result.properties.icon == null) {
+                result.properties.icon = element.properties.icon;
+                result.properties.textDescription = element.properties.textDescription;
+                logger_Logger.Debug("Weather condition" + debugText);
+            }
+            if (result.properties.temperature.value == null) {
+                result.properties.temperature.value = element.properties.temperature.value;
+                logger_Logger.Debug("Temperature" + debugText);
+            }
+            if (result.properties.windSpeed.value == null) {
+                result.properties.windSpeed.value = element.properties.windSpeed.value;
+                logger_Logger.Debug("Wind Speed" + debugText);
+            }
+            if (result.properties.windDirection.value == null) {
+                result.properties.windDirection.value = element.properties.windDirection.value;
+                logger_Logger.Debug("Wind degree" + debugText);
+            }
+            if (result.properties.barometricPressure.value == null) {
+                result.properties.barometricPressure.value = element.properties.barometricPressure.value;
+                logger_Logger.Debug("Pressure" + debugText);
+            }
+            if (result.properties.relativeHumidity.value == null) {
+                result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
+                logger_Logger.Debug("Humidity" + debugText);
+            }
+            if (result.properties.windChill.value == null) {
+                result.properties.windChill.value = element.properties.windChill.value;
+                logger_Logger.Debug("WindChill" + debugText);
+            }
+            if (result.properties.visibility.value == null) {
+                result.properties.visibility.value = element.properties.visibility.value;
+                logger_Logger.Debug("Visibility" + debugText);
+            }
+            if (result.properties.dewpoint.value == null) {
+                result.properties.dewpoint.value = element.properties.dewpoint.value;
+                logger_Logger.Debug("Dew Point" + debugText);
+            }
+        }
+        return result;
+    }
+    ParseCurrent(json, hourly, loc) {
+        var _a, _b;
+        const observation = this.MeshObservationData(json);
+        if (observation == null || !this.observationStations[0]) {
+            logger_Logger.Error("No observation stations/data are available");
+            return null;
+        }
+        const timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
+        const times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+        const suntimes = {
+            sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
+            sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
+        };
+        try {
+            const weather = {
+                coord: {
+                    lat: (_a = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _a === void 0 ? void 0 : _a.coordinates[1],
+                    lon: (_b = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _b === void 0 ? void 0 : _b.coordinates[0]
+                },
+                location: {
+                    city: undefined,
+                    country: undefined,
+                    url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
+                    timeZone: this.observationStations[0].properties.timeZone,
+                    distanceFrom: this.observationStations[0].dist
+                },
+                date: timestamp,
+                sunrise: suntimes.sunrise,
+                sunset: suntimes.sunset,
+                wind: {
+                    speed: KPHtoMPS(observation.properties.windSpeed.value),
+                    degree: observation.properties.windDirection.value
+                },
+                temperature: CelsiusToKelvin(observation.properties.temperature.value),
+                pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
+                humidity: observation.properties.relativeHumidity.value,
+                dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+                condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
+                forecasts: []
+            };
+            if (observation.properties.windChill.value != null) {
+                weather.extra_field = {
+                    name: _("Feels Like"),
+                    value: CelsiusToKelvin(observation.properties.windChill.value),
+                    type: "temperature"
+                };
+            }
+            if (weather.condition == null && hourly != null) {
+                weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
+            }
+            return weather;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("US Weather Parsing error: " + e, e);
+            this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            return null;
+        }
+    }
+    ;
+    CheckIfHasThreeElementsForDay(json) {
+        var _a, _b, _c;
+        if (((_b = (_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods) === null || _b === void 0 ? void 0 : _b.length) < 3 || ((_c = this.observationStations[0]) === null || _c === void 0 ? void 0 : _c.properties))
+            return false;
+        let counter = 0;
+        for (let index = 1; index < 3; index++) {
+            const element = json.properties.periods[index];
+            const prevElement = json.properties.periods[index - 1];
+            const prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            if (OnSameDay(prevDate, curDate))
+                counter++;
+            else
+                counter = 0;
+            if (counter > 1) {
+                global.log("3 elements");
+                return true;
+            }
+        }
+        return false;
+    }
+    FindTodayIndex(json, startIndex = 0) {
+        var _a;
+        if (!this.observationStations[0] || !((_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods)) {
+            return -1;
+        }
+        const today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
+        for (let index = startIndex; index < json.properties.periods.length; index++) {
+            const element = json.properties.periods[index];
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            if (!OnSameDay(today, curDate))
+                continue;
+            global.log(index);
+            return index;
+        }
+        return -1;
+    }
+    ResolveCondition(icon, isNight = false) {
+        if (icon == null)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                customIcon: "cloud-refresh-symbolic",
+                icons: ["weather-severe-alert"]
+            };
+        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
+        switch (code === null || code === void 0 ? void 0 : code[0]) {
+            case "skc":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    icons: (isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"]
+                };
+            case "few":
+                return {
+                    main: _("Few clouds"),
+                    description: _("Few clouds"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clear-night", "weather-severe-alert"]
+                };
+            case "sct":
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clear", "weather-severe-alert"]
+                };
+            case "bkn":
+                return {
+                    main: _("Mostly cloudy"),
+                    description: _("Mostly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
+                };
+            case "ovc":
+                return {
+                    main: _("Overcast"),
+                    description: _("Overcast"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
+                };
+            case "wind_skc":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear and windy"),
+                    customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
+                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
+                };
+            case "wind_few":
+                return {
+                    main: _("Few clouds"),
+                    description: _("Few clouds and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
+                };
+            case "wind_sct":
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
+                };
+            case "wind_bkn":
+                return {
+                    main: _("Mostly cloudy"),
+                    description: _("Mostly cloudy and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
+                };
+            case "wind_ovc":
+                return {
+                    main: _("Overcast"),
+                    description: _("Overcast and windy"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
+                };
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-severe-alert"]
+                };
+            case "rain_snow":
+                return {
+                    main: _("Rain"),
+                    description: _("Snowy rain"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-snow", "weather-severe-alert"]
+                };
+            case "rain_sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-severe-alert"]
+                };
+            case "snow_sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "rain_fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "snow_fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain and snow"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-severe-alert"]
+                };
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
+                };
+            case "rain_showers":
+            case "rain_showers_hi":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain showers"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
+                };
+            case "tsra":
+            case "tsra_sct":
+            case "tsra_hi":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "tornado":
+                return {
+                    main: _("Tornado"),
+                    description: _("Tornado"),
+                    customIcon: "tornado-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "hurricane":
+                return {
+                    main: _("Hurricane"),
+                    description: _("Hurricane"),
+                    customIcon: "hurricane-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "tropical_storm":
+                return {
+                    main: _("Storm"),
+                    description: _("Tropical storm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "dust":
+                return {
+                    main: _("Dust"),
+                    description: _("Dust"),
+                    customIcon: "dust-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "smoke":
+                return {
+                    main: _("Smoke"),
+                    description: _("Smoke"),
+                    customIcon: "smoke-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "haze":
+                return {
+                    main: _("Haze"),
+                    description: _("Haze"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "hot":
+                return {
+                    main: _("Hot"),
+                    description: _("Hot"),
+                    customIcon: "hot-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "cold":
+                return {
+                    main: _("Cold"),
+                    description: _("Cold"),
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "blizzard":
+                return {
+                    main: _("Blizzard"),
+                    description: _("Blizzard"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            default:
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    customIcon: "cloud-refresh-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+        }
+    }
+    ;
+}
+;
+
+;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+
+
+
+class VisualCrossing extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.prettyName = _("Visual Crossing");
+        this.name = "Visual Crossing";
+        this.maxForecastSupport = 15;
+        this.maxHourlyForecastSupport = 336;
+        this.website = "https://weather.visualcrossing.com/";
+        this.needsApiKey = true;
+        this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
+        this.params = {
+            unitGroup: "metric",
+            key: null,
+            include: "fcst,hours,current",
+            lang: "id"
+        };
+        this.supportedLangs = ["en", "de", "fr", "es"];
+    }
+    async GetWeather(loc) {
+        if (loc == null)
+            return null;
+        this.params['key'] = this.app.config.ApiKey;
+        let translate = true;
+        if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
+            this.params['lang'] = this.app.config.Language;
+            translate = false;
+        }
+        const url = this.url + loc.lat + "," + loc.lon;
+        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
+        if (!json)
+            return null;
+        return this.ParseWeather(json, translate);
+    }
+    ParseWeather(weather, translate) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
+        const result = {
+            date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
+            location: {
+                url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
+                timeZone: weather.timezone,
+                tzOffset: weather.tzoffset,
+            },
+            coord: {
+                lat: weather.latitude,
+                lon: weather.longitude,
+            },
+            humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
+            pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
+            dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
+            wind: {
+                degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
+                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
+            },
+            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
+            sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
+            sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
+            condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
+            extra_field: {
+                name: _("Feels Like"),
+                type: "temperature",
+                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
+            },
+            forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
+            hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
+        };
+        return result;
+    }
+    ParseForecasts(forecasts, translate, tz) {
+        const result = [];
+        if (!!forecasts) {
+            for (let index = 0; index < forecasts.length; index++) {
+                const element = forecasts[index];
+                result.push({
+                    date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
+                    condition: this.GenerateCondition(element.icon, element.conditions, translate),
+                    temp_max: CelsiusToKelvin(element.tempmax),
+                    temp_min: CelsiusToKelvin(element.tempmin)
+                });
+            }
+        }
+        return result;
+    }
+    ParseHourlyForecasts(forecasts, translate, tz) {
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
+        if (!!forecasts) {
+            for (let index = 0; index < forecasts.length; index++) {
+                const element = forecasts[index];
+                if (!element.hours)
+                    continue;
+                for (let index = 0; index < element.hours.length; index++) {
+                    const hour = element.hours[index];
+                    const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+                    if (time < currentHour)
+                        continue;
+                    const item = {
+                        date: time,
+                        temp: CelsiusToKelvin(hour.temp),
+                        condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
+                    };
+                    if (hour.preciptype != null) {
+                        item.precipitation = {
+                            type: hour.preciptype[0],
+                            chance: hour.precipprob,
+                            volume: hour.precip
+                        };
+                    }
+                    result.push(item);
+                }
+            }
+        }
+        return result;
+    }
+    GetCurrentHour(forecasts, tz) {
+        if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
+            return null;
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        for (let index = 0; index < forecasts[0].hours.length; index++) {
+            const hour = forecasts[0].hours[index];
+            const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+            if (time < currentHour)
+                continue;
+            return hour;
+        }
+        return null;
+    }
+    GenerateCondition(icon, condition, translate) {
+        const result = {
+            main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
+            description: (translate) ? this.ResolveTypeIDs(condition) : condition,
+            icons: [],
+            customIcon: "refresh-symbolic"
+        };
+        switch (icon) {
+            case "clear-day":
+                result.icons = ["weather-clear"];
+                result.customIcon = "day-sunny-symbolic";
+                break;
+            case "clear-night":
+                result.icons = ["weather-clear-night"];
+                result.customIcon = "night-clear-symbolic";
+                break;
+            case "partly-cloudy-day":
+                result.icons = ["weather-few-clouds"];
+                result.customIcon = "day-cloudy-symbolic";
+                break;
+            case "partly-cloudy-night":
+                result.icons = ["weather-few-clouds-night"];
+                result.customIcon = "night-alt-cloudy-symbolic";
+                break;
+            case "cloudy":
+                result.icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
+                result.customIcon = "cloudy-symbolic";
+                break;
+            case "wind":
+                result.icons = ["weather-windy", "weather-breeze"];
+                result.customIcon = "windy-symbolic";
+                break;
+            case "fog":
+                result.icons = ["weather-fog"];
+                result.customIcon = "fog-symbolic";
+                break;
+            case "rain":
+                result.icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain", "weather-showers"];
+                result.customIcon = "rain-symbolic";
+                break;
+            case "snow":
+                result.icons = ["weather-snow"];
+                result.customIcon = "snow-symbolic";
+                break;
+        }
+        return result;
+    }
+    GetFirstCondition(condition) {
+        const split = condition.split(", ");
+        return split[0];
+    }
+    ResolveTypeID(condition) {
+        switch (condition.toLowerCase()) {
+            case "type_1":
+                return _("Blowing or drifting snow");
+            case "type_2":
+                return _("Drizzle");
+            case "type_3":
+                return _("Heavy drizzle");
+            case "type_4":
+                return _("Light drizzle");
+            case "type_5":
+                return _("Heavy drizzle/rain");
+            case "type_6":
+                return _("Light drizzle/rain");
+            case "type_7":
+                return _("Dust Storm");
+            case "type_8":
+                return _("Fog");
+            case "type_9":
+                return _("Freezing drizzle/freezing rain");
+            case "type_10":
+                return _("Heavy freezing drizzle/freezing rain");
+            case "type_11":
+                return _("Light freezing drizzle/freezing rain");
+            case "type_12":
+                return _("Freezing fog");
+            case "type_13":
+                return _("Heavy freezing rain");
+            case "type_14":
+                return _("Light freezing rain");
+            case "type_15":
+                return _("Funnel cloud/tornado");
+            case "type_16":
+                return _("Hail showers");
+            case "type_17":
+                return _("Ice");
+            case "type_18":
+                return _("Lightning without thunder");
+            case "type_19":
+                return _("Mist");
+            case "type_20":
+                return _("Precipitation in vicinity");
+            case "type_21":
+                return _("Rain");
+            case "type_22":
+                return _("Heavy rain and snow");
+            case "type_23":
+                return _("Light rain And snow");
+            case "type_24":
+                return _("Rain showers");
+            case "type_25":
+                return _("Heavy rain");
+            case "type_26":
+                return _("Light rain");
+            case "type_27":
+                return _("Sky coverage decreasing");
+            case "type_28":
+                return _("Sky coverage increasing");
+            case "type_29":
+                return _("Sky unchanged");
+            case "type_30":
+                return _("Smoke or haze");
+            case "type_31":
+                return _("Snow");
+            case "type_32":
+                return _("Snow and rain showers");
+            case "type_33":
+                return _("Snow showers");
+            case "type_34":
+                return _("Heavy snow");
+            case "type_35":
+                return _("Light snow");
+            case "type_36":
+                return _("Squalls");
+            case "type_37":
+                return _("Thunderstorm");
+            case "type_38":
+                return _("Thunderstorm without precipitation");
+            case "type_39":
+                return _("Diamond dust");
+            case "type_40":
+                return _("Hail");
+            case "type_41":
+                return _("Overcast");
+            case "type_42":
+                return _("Partially cloudy");
+            case "type_43":
+                return _("Clear");
+        }
+        return condition;
+    }
+    ResolveTypeIDs(condition) {
+        let result = "";
+        let split = condition.split(", ");
+        for (let index = 0; index < split.length; index++) {
+            const element = split[index];
+            result += this.ResolveTypeID(element);
+            if (index < split.length - 1)
+                result += ", ";
+        }
+        return result;
+    }
+    HandleHttpError(error) {
+        if ((error === null || error === void 0 ? void 0 : error.code) == 401) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                message: _("Please make sure you entered the API key correctly")
+            });
+            return false;
+        }
+        return true;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/danishMI.ts
+
+
+
+class DanishMI extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.needsApiKey = false;
+        this.prettyName = _("DMI Denmark");
+        this.name = "DanishMI";
+        this.maxForecastSupport = 10;
+        this.maxHourlyForecastSupport = 48;
+        this.website = "https://www.dmi.dk/";
+        this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
+        this.forecastParams = {
+            cmd: "llj",
+            lon: null,
+            lat: null,
+            tz: "UTC"
+        };
+        this.observationParams = {
+            cmd: "obj",
+            east: null,
+            west: null,
+            south: null,
+            north: null
+        };
+    }
+    async GetWeather(loc) {
+        if (loc == null)
+            return null;
+        this.GetLocationBoundingBox(loc);
+        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
+        this.forecastParams.lat = loc.lat;
+        this.forecastParams.lon = loc.lon;
+        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
+        if (forecasts == null)
+            return null;
+        return this.ParseWeather(observations, forecasts, loc);
+    }
+    ParseWeather(observations, forecasts, loc) {
+        var _a, _b, _c, _d, _e, _f;
+        const observation = this.MergeObservations(observations);
+        const result = {
+            temperature: CelsiusToKelvin((_a = observation.Temperature2m) !== null && _a !== void 0 ? _a : null),
+            condition: this.ResolveCondition(observation.symbol),
+            humidity: observation.RelativeHumidity,
+            pressure: (!observation.PressureMSL) ? null : observation.PressureMSL / 100,
+            wind: {
+                degree: observation.WindDirection,
+                speed: observation.WindSpeed10m
+            },
+            dewPoint: null,
+        };
+        result.location = {
+            city: forecasts.city,
+            country: forecasts.country,
+            timeZone: undefined,
+            url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}`
+        };
+        result.coord = {
+            lon: forecasts.longitude,
+            lat: forecasts.latitude
+        };
+        result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), { zone: loc.timeZone });
+        result.humidity = (_b = result.humidity) !== null && _b !== void 0 ? _b : forecasts.timeserie[0].humidity;
+        result.pressure = (_c = result.pressure) !== null && _c !== void 0 ? _c : forecasts.timeserie[0].pressure;
+        result.temperature = (_d = result.temperature) !== null && _d !== void 0 ? _d : CelsiusToKelvin(forecasts.timeserie[0].temp);
+        result.wind.degree = (_e = result.wind.degree) !== null && _e !== void 0 ? _e : forecasts.timeserie[0].windDegree;
+        result.wind.speed = (_f = result.wind.speed) !== null && _f !== void 0 ? _f : forecasts.timeserie[0].windSpeed;
+        result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), { zone: loc.timeZone });
+        result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), { zone: loc.timeZone });
+        if (result.condition.customIcon == "alien-symbolic") {
+            result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
+        }
+        const forecastData = [];
+        for (let index = 0; index < forecasts.aggData.length - 1; index++) {
+            const element = forecasts.aggData[index];
+            forecastData.push({
+                date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }),
+                temp_max: CelsiusToKelvin(element.maxTemp),
+                temp_min: CelsiusToKelvin(element.minTemp),
+                condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }))
+            });
+        }
+        result.forecasts = forecastData;
+        const hourlyData = [];
+        for (let index = 0; index < forecasts.timeserie.length; index++) {
+            const element = forecasts.timeserie[index];
+            if (element.time == null)
+                continue;
+            const hour = {
+                date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
+                temp: CelsiusToKelvin(element.temp),
+                condition: this.ResolveCondition(element.symbol)
+            };
+            if (element.precip1 > 0.01 && element.precipType != null) {
+                hour.precipitation = {
+                    type: this.DanishPrecipToType(element.precipType),
+                    volume: element.precip1
+                };
+            }
+            hourlyData.push(hour);
+        }
+        result.hourlyForecasts = hourlyData;
+        return result;
+    }
+    MergeObservations(observations) {
+        var _a, _b, _c, _d, _e, _f;
+        const result = {
+            symbol: undefined,
+            PressureMSL: undefined,
+            Temperature2m: undefined,
+            WindDirection: undefined,
+            RelativeHumidity: undefined,
+            WindSpeed10m: undefined,
+            PrecAmount10Min: undefined,
+            WindGustLast10Min: undefined
+        };
+        for (let index = 0; index < observations.length; index++) {
+            const element = observations[index];
+            result.symbol = (_a = result.symbol) !== null && _a !== void 0 ? _a : element.values.symbol;
+            result.PressureMSL = (_b = result.PressureMSL) !== null && _b !== void 0 ? _b : element.values.PressureMSL;
+            result.Temperature2m = (_c = result.Temperature2m) !== null && _c !== void 0 ? _c : element.values.Temperature2m;
+            result.WindDirection = (_d = result.WindDirection) !== null && _d !== void 0 ? _d : element.values.WindDirection;
+            result.RelativeHumidity = (_e = result.RelativeHumidity) !== null && _e !== void 0 ? _e : element.values.RelativeHumidity;
+            result.WindSpeed10m = (_f = result.WindSpeed10m) !== null && _f !== void 0 ? _f : element.values.WindSpeed10m;
+        }
+        return result;
+    }
+    ResolveDailyCondition(hourlyData, date) {
+        const target = date.set({ hour: 6 });
+        const upto = target.plus({ days: 1 });
+        const relevantHours = hourlyData.filter((x) => {
+            const hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
+            if (hour >= target && hour < upto)
+                return true;
+            return false;
+        });
+        const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+        let resultSymbol;
+        if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+            resultSymbol = Math.max(...normalizedSymbols);
+        else
+            resultSymbol = mode(normalizedSymbols);
+        return this.ResolveCondition(resultSymbol);
+    }
+    ResolveCondition(symbol) {
+        if (symbol == null)
+            return {
+                main: _("NOT FOUND"),
+                description: _("NOT FOUND"),
+                customIcon: "alien-symbolic",
+                icons: ["weather-severe-alert"]
+            };
+        const isNight = (symbol > 100);
+        if (isNight)
+            symbol = symbol - 100;
+        switch (symbol) {
+            case 1:
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    customIcon: isNight ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    icons: isNight ? ["weather-clear-night"] : ["weather-clear"]
+                };
+            case 2:
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
+                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: isNight ? ["weather-few-clouds-night", "weather-clouds-night"] : ["weather-few-clouds", "weather-clouds"]
+                };
+            case 3:
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-overcast", "weather-many-clouds", "weather-clouds", "weather-few-clouds"]
+                };
+            case 38:
+                return {
+                    main: _("Snow"),
+                    description: _("Blowing snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow"]
+                };
+            case 45:
+                return {
+                    main: _("Foggy"),
+                    description: _("Foggy"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 60:
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+                };
+            case 63:
+                return {
+                    main: _("Moderate rain"),
+                    description: _("Moderate rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
+                };
+            case 68:
+                return {
+                    main: _("Rain and snow"),
+                    description: _("Rain and snow"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-rain"]
+                };
+            case 69:
+                return {
+                    main: _("Rain and snow"),
+                    description: _("Heavy rain and snow"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-rain"]
+                };
+            case 70:
+                return {
+                    main: _("Slight snow"),
+                    description: _("Slight snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-snow-scattered"]
+                };
+            case 73:
+                return {
+                    main: _("Moderate snow"),
+                    description: _("Moderate snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-snow-scattered"]
+                };
+            case 80:
+                return {
+                    main: _("Rain"),
+                    description: _("Rain showers"),
+                    customIcon: "showers-symbolic",
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+                };
+            case 81:
+                return {
+                    main: _("Rain showers"),
+                    description: _("Moderate rain showers"),
+                    customIcon: isNight ? "night-alt-showers-symbolic" : "day-showers-symbolic",
+                    icons: isNight ? ["weather-showers-night", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers"] : ["weather-showers-day", "weather-showers-scattered-day", "weather-showers"]
+                };
+            case 83:
+                return {
+                    main: _("Rain and snow"),
+                    description: _("Mixed rain and snow"),
+                    customIcon: isNight ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-snow-day", "weather-snow"]
+                };
+            case 84:
+                return {
+                    main: _("Rain and snow"),
+                    description: _("Heavy mixed rain and snow"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-snow-day", "weather-snow"]
+                };
+            case 85:
+                return {
+                    main: _("Snow"),
+                    description: _("Snow showers"),
+                    customIcon: isNight ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    icons: isNight ? ["weather-snow-night", "weather-snow"] : ["weather-snow-day", "weather-snow"]
+                };
+            case 86:
+                return {
+                    main: _("Heavy snow"),
+                    description: _("Heavy snow showers"),
+                    customIcon: "day-snow-symbolic",
+                    icons: ["weather-snow-day", "weather-snow"]
+                };
+            case 95:
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            default: {
+                return {
+                    main: _("NOT FOUND"),
+                    description: _("NOT FOUND"),
+                    customIcon: "alien-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            }
+        }
+    }
+    DanishPrecipToType(type) {
+        switch (type) {
+            case "sne":
+                return "snow";
+            case "regn":
+                return "rain";
+            case "slud":
+                return "ice pellets";
+            default:
+                return "none";
+        }
+    }
+    GetLocationBoundingBox(loc) {
+        this.observationParams.west = loc.lon + 0.075;
+        this.observationParams.east = loc.lon - 0.075;
+        this.observationParams.north = loc.lat + 0.045;
+        this.observationParams.south = loc.lat - 0.04;
+    }
+    OrderObservations(observations, loc) {
+        const result = [];
+        for (const key in observations) {
+            const element = observations[key];
+            result.push(Object.assign(Object.assign({}, element), { dist: GetDistance(loc.lat, loc.lon, element.latitude, element.longitude) }));
+        }
+        return this.SortObservationSites(result);
+    }
+    SortObservationSites(observations) {
+        observations = observations.sort((a, b) => {
+            if (a.dist < b.dist)
+                return -1;
+            if (a.dist == b.dist)
+                return 0;
+            return 1;
+        });
+        return observations;
+    }
+    DateStringToDate(str) {
+        if (str.length == 14) {
+            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), parseInt(str.substring(8, 10)), parseInt(str.substring(10, 12)), parseInt(str.substring(12, 14))));
+        }
+        else if (str.length == 8) {
+            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), 0, 0, 0, 0));
+        }
+        else {
+            if (str.length == 3) {
+                str = ("0000" + str).substr(-4, 4);
+            }
+            const today = new Date();
+            today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+            return today;
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/config.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
+const { File: config_File } = imports.gi.Gio;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const config_Lang = imports.lang;
+const keybindingManager = imports.ui.main.keybindingManager;
+const { IconType: config_IconType } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
+const { Settings: config_Settings } = imports.gi.Gio;
+const ServiceClassMapping = {
+    "DarkSky": (app) => new DarkSky(app),
+    "OpenWeatherMap": (app) => new OpenWeatherMap(app),
+    "MetNorway": (app) => new MetNorway(app),
+    "Weatherbit": (app) => new Weatherbit(app),
+    "Tomorrow.io": (app) => new ClimacellV4(app),
+    "Met Office UK": (app) => new MetUk(app),
+    "US Weather": (app) => new USWeather(app),
+    "Visual Crossing": (app) => new VisualCrossing(app),
+    "DanishMI": (app) => new DanishMI(app)
+};
+const Keys = {
+    DATA_SERVICE: "dataService",
+    API_KEY: "apiKey",
+    TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+    WIND_SPEED_UNIT: "windSpeedUnit",
+    DISTANCE_UNIT: "distanceUnit",
+    CITY: "locationLabelOverride",
+    TRANSLATE_CONDITION: "translateCondition",
+    VERTICAL_ORIENTATION: "verticalOrientation",
+    SHOW_TEXT_IN_PANEL: "showTextInPanel",
+    TEMP_TEXT_OVERRIDE: "tempTextOverride",
+    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+    SHOW_SUNRISE: "showSunrise",
+    SHOW_24HOURS: "show24Hours",
+    FORECAST_DAYS: "forecastDays",
+    FORECAST_HOURS: "forecastHours",
+    FORECAST_COLS: "forecastColumns",
+    FORECAST_ROWS: "forecastRows",
+    REFRESH_INTERVAL: "refreshInterval",
+    PRESSURE_UNIT: "pressureUnit",
+    SHORT_CONDITIONS: "shortConditions",
+    MANUAL_LOCATION: "manualLocation",
+    USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
+    RUSSIAN_STYLE: "tempRussianStyle",
+    SHORT_HOURLY_TIME: "shortHourlyTime",
+    SHOW_FORECAST_DATES: "showForecastDates",
+    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
+    IMMEDIATE_PRECIP: "immediatePrecip",
+    SHOW_BOTH_TEMP: "showBothTempUnits",
+    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
+    ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
+};
+class Config {
+    constructor(app, instanceID) {
+        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+        this.windSpeedUnitLocales = {
+            "fi kr no pl ru se": "m/s",
+            "us gb": "mph"
+        };
+        this.distanceUnitLocales = {
+            "us gb": "imperial"
+        };
+        this.WEATHER_LOCATION = "location";
+        this.WEATHER_LOCATION_LIST = "locationList";
+        this.doneTypingLocation = null;
+        this.currentLocation = null;
+        this.timezone = undefined;
+        this.OnKeySettingsUpdated = () => {
+            if (this.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.keybinding, config_Lang.bind(this.app, this.app.on_applet_clicked));
+            }
+        };
+        this.onLogLevelUpdated = () => {
+            logger_Logger.ChangeLevel(this._logLevel);
+        };
+        this.OnLocationChanged = () => {
+            logger_Logger.Debug("User changed location, waiting 3 seconds...");
+            if (this.doneTypingLocation != null)
+                utils_clearTimeout(this.doneTypingLocation);
+            this.doneTypingLocation = utils_setTimeout(config_Lang.bind(this, this.DoneTypingLocation), 3000);
+        };
+        this.OnLocationStoreChanged = () => {
+            this.LocStore.OnLocationChanged(this._locationList);
+        };
+        this.OnFontChanged = () => {
+            this.currentFontSize = this.GetCurrentFontSize();
+            this.app.RefreshAndRebuild();
+        };
+        this.OnSettingChanged = () => {
+            this.app.RefreshAndRebuild();
+        };
+        this.app = app;
+        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
+        logger_Logger.Debug("System locale is " + this.currentLocale);
+        this.autoLocProvider = new IpApi(app);
+        this.geoLocationService = new GeoLocation(app);
+        this.countryCode = this.GetCountryCode(this.currentLocale);
+        this.settings = new AppletSettings(this, UUID, instanceID);
+        this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
+        this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
+        this.currentFontSize = this.GetCurrentFontSize();
+        this.BindSettings();
+        this.LocStore = new LocationStore(this.app, this);
+        this.onLogLevelUpdated();
+    }
+    get Timezone() {
+        return this.timezone;
+    }
+    set Timezone(value) {
+        if (!value || value == "")
+            value = undefined;
+        this.timezone = value;
+    }
+    BindSettings() {
+        let k;
+        for (k in Keys) {
+            const key = Keys[k];
+            const keyProp = "_" + key;
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
+        }
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+    }
+    get CurrentFontSize() {
+        return this.currentFontSize;
+    }
+    get CurrentLocation() {
+        return this.currentLocation;
+    }
+    get ApiKey() {
+        return this._apiKey.replace(" ", "");
+    }
+    get Language() {
+        return this.GetLanguage(this.currentLocale);
+    }
+    get TemperatureUnit() {
+        if (this._temperatureUnit == "automatic")
+            return this.GetLocaleTemperateUnit(this.countryCode);
+        return this._temperatureUnit;
+    }
+    get WindSpeedUnit() {
+        if (this._windSpeedUnit == "automatic")
+            return this.GetLocaleWindSpeedUnit(this.countryCode);
+        return this._windSpeedUnit;
+    }
+    get DistanceUnit() {
+        if (this._distanceUnit == "automatic")
+            return this.GetLocaleDistanceUnit(this.countryCode);
+        return this._distanceUnit;
+    }
+    get IconType() {
+        if (this._useCustomMenuIcons)
+            return config_IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
+            config_IconType.SYMBOLIC :
+            config_IconType.FULLCOLOR;
+    }
+    ;
+    get AppletIconType() {
+        if (this._useCustomAppletIcons)
+            return config_IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
+            config_IconType.SYMBOLIC :
+            config_IconType.FULLCOLOR;
+    }
+    SwitchToNextLocation() {
+        const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
+        if (nextLoc == null)
+            return null;
+        this.InjectLocationToConfig(nextLoc, true);
+        return nextLoc;
+    }
+    SwitchToPreviousLocation() {
+        const previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
+        if (previousLoc == null)
+            return null;
+        this.InjectLocationToConfig(previousLoc, true);
+        return previousLoc;
+    }
+    NoApiKey() {
+        var _a;
+        const key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
+        return (!key || key == "");
+    }
+    ;
+    async EnsureLocation() {
+        this.currentLocation = null;
+        if (!this._manualLocation) {
+            const location = await this.autoLocProvider.GetLocation();
+            if (!location)
+                return null;
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        let loc = this._location;
+        if (loc == undefined || loc.trim() == "") {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no location",
+                userError: true,
+                message: _("Make sure you entered a location or use Automatic location instead")
+            });
+            return null;
+        }
+        let location = this.LocStore.FindLocation(this._location);
+        if (location != null) {
+            logger_Logger.Debug("location exist in locationstore, retrieve");
+            this.LocStore.SwitchToLocation(location);
+            this.InjectLocationToConfig(location, true);
+            return location;
+        }
+        else if (IsCoordinate(loc)) {
+            loc = loc.replace(" ", "");
+            const latLong = loc.split(",");
+            const location = {
+                lat: parseFloat(latLong[0]),
+                lon: parseFloat(latLong[1]),
+                timeZone: DateTime.now().zoneName,
+                entryText: loc,
+            };
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        logger_Logger.Debug("Location is text, geo locating...");
+        const locationData = await this.geoLocationService.GetLocation(loc);
+        if (locationData == null)
+            return null;
+        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
+            logger_Logger.Debug("Address found via address search");
+        }
+        location = this.LocStore.FindLocation(locationData.entryText);
+        if (location != null) {
+            logger_Logger.Debug("Found location was found in locationStore, return that instead");
+            this.InjectLocationToConfig(location);
+            this.LocStore.SwitchToLocation(location);
+            return location;
+        }
+        else {
+            this.InjectLocationToConfig(locationData);
+            return locationData;
+        }
+    }
+    InjectLocationToConfig(loc, switchToManual = false) {
+        logger_Logger.Debug("Location setting is now: " + loc.entryText);
+        const text = (loc.entryText + "");
+        this.SetLocation(text);
+        this.currentLocation = loc;
+        if (switchToManual == true)
+            this.settings.setValue(Keys.MANUAL_LOCATION, true);
+    }
+    DoneTypingLocation() {
+        logger_Logger.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.RefreshAndRebuild();
+    }
+    SetLocation(value) {
+        this.settings.setValue(this.WEATHER_LOCATION, value);
+    }
+    SetLocationList(list) {
+        this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
+    }
+    GetLocaleTemperateUnit(code) {
+        if (code == null || !this.fahrenheitCountries.includes(code))
+            return "celsius";
+        return "fahrenheit";
+    }
+    GetLocaleWindSpeedUnit(code) {
+        if (code == null)
+            return "kph";
+        for (const key in this.windSpeedUnitLocales) {
+            if (key.includes(code))
+                return this.windSpeedUnitLocales[key];
+        }
+        return "kph";
+    }
+    GetLocaleDistanceUnit(code) {
+        if (code == null)
+            return "metric";
+        for (const key in this.distanceUnitLocales) {
+            if (key.includes(code))
+                return this.distanceUnitLocales[key];
+        }
+        return "metric";
+    }
+    GetCountryCode(locale) {
+        if (locale == null)
+            return null;
+        const split = locale.split("-");
+        if (split.length < 2)
+            return null;
+        return split[1];
+    }
+    GetLanguage(locale) {
+        if (locale == null)
+            return null;
+        const split = locale.split("-");
+        if (split.length < 1)
+            return null;
+        return split[0];
+    }
+    GetCurrentFontSize() {
+        const nameString = this.InterfaceSettings.get_string("font-name");
+        const elements = nameString.split(" ");
+        const size = parseFloat(elements[elements.length - 1]);
+        logger_Logger.Debug("Font size changed to " + size.toString());
+        return size;
+    }
+    async GetAppletConfigJson() {
+        var _a, _b;
+        const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        const configFile = config_File.new_for_path(configFilePath);
+        if (!await FileExists(configFile)) {
+            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const confString = await LoadContents(configFile);
+        if (confString == null) {
+            throw new Error(_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const conf = JSON.parse(confString);
+        if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
+            conf.apiKey.value = "Redacted";
+        return conf;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/loop.ts
+
+
+var weatherAppletGUIDs = {};
+class WeatherLoop {
+    constructor(app, instanceID) {
+        this.lastUpdated = new Date(0);
+        this.pauseRefresh = false;
+        this.LOOP_INTERVAL = 15;
+        this.appletRemoved = false;
+        this.updating = false;
+        this.errorCount = 0;
+        this.DoCheck = async () => {
+            if (this.updating)
+                return;
+            try {
+                this.updating = true;
+                if (this.app.encounteredError == true)
+                    this.IncrementErrorCount();
+                this.ValidateLastUpdateTime();
+                if (this.pauseRefresh) {
+                    logger_Logger.Debug("Configuration error, updating paused");
+                    return;
+                }
+                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
+                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                    const state = await this.app.RefreshWeather(false);
+                    if (state == "error")
+                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
+                    if (state == "success" || "locked")
+                        this.lastUpdated = new Date();
+                }
+                else {
+                    logger_Logger.Debug("No need to update yet, skipping");
+                }
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Error in Main loop: " + e, e);
+                this.app.encounteredError = true;
+            }
+            finally {
+                this.updating = false;
+            }
+        };
+        this.app = app;
+        this.instanceID = instanceID;
+        this.GUID = Guid();
+        weatherAppletGUIDs[instanceID] = this.GUID;
+    }
+    IsDataTooOld() {
+        if (!this.lastUpdated)
+            return true;
+        const oldDate = this.lastUpdated;
+        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
+        return (this.lastUpdated > oldDate);
+    }
+    async Start() {
+        while (true) {
+            if (this.IsStray())
+                return;
+            await this.DoCheck();
+            await delay(this.LoopInterval());
+        }
+    }
+    ;
+    Stop() {
+        this.appletRemoved = true;
+    }
+    Pause() {
+        this.pauseRefresh = true;
+    }
+    async Resume() {
+        this.pauseRefresh = false;
+        await this.DoCheck();
+    }
+    ResetErrorCount() {
+        this.errorCount = 0;
+    }
+    GetSecondsUntilNextRefresh() {
+        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    }
+    IsStray() {
+        if (this.appletRemoved == true)
+            return true;
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+            logger_Logger.Debug("Applet GUID: " + this.GUID);
+            logger_Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+            logger_Logger.Info("GUID mismatch, terminating applet");
+            return true;
+        }
+        return false;
+    }
+    IncrementErrorCount() {
+        this.app.encounteredError = false;
+        this.errorCount++;
+        logger_Logger.Debug("Encountered error in previous loop");
+        if (this.errorCount > 60)
+            this.errorCount = 60;
+    }
+    NextUpdate() {
+        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
+    }
+    ValidateLastUpdateTime() {
+        if (this.lastUpdated > new Date())
+            this.lastUpdated = new Date(0);
+    }
+    LoopInterval() {
+        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
+    }
+}
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
 
@@ -11864,2258 +15121,6 @@ class UI {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/darkSky.ts
-
-
-
-const darkSky_Lang = imports.lang;
-class DarkSky {
-    constructor(_app) {
-        this.prettyName = _("DarkSky");
-        this.name = "DarkSky";
-        this.maxForecastSupport = 8;
-        this.website = "https://darksky.net/poweredby/";
-        this.maxHourlyForecastSupport = 168;
-        this.needsApiKey = true;
-        this.descriptionLineLength = 25;
-        this.supportedLanguages = [
-            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
-            'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
-            'kw', 'lv', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
-            'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
-        ];
-        this.query = "https://api.darksky.net/forecast/";
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
-        this.unit = "si";
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        const now = new Date(Date.now());
-        if (now.getUTCFullYear() > 2022) {
-            this.app.ShowError({
-                type: "hard",
-                detail: "no api response",
-                message: _("This API has ceased to function, please use another one.")
-            });
-            return null;
-        }
-        const query = this.ConstructQuery(loc);
-        if (query == "" && query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query, {}, darkSky_Lang.bind(this, this.HandleError));
-        if (!json)
-            return null;
-        if (!json.code) {
-            return this.ParseWeather(json);
-        }
-        else {
-            this.HandleResponseErrors(json);
-            return null;
-        }
-    }
-    ;
-    ParseWeather(json) {
-        try {
-            const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
-            const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
-            const result = {
-                date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
-                coord: {
-                    lat: json.latitude,
-                    lon: json.longitude
-                },
-                location: {
-                    url: "https://darksky.net/forecast/" + json.latitude + "," + json.longitude,
-                    timeZone: json.timezone,
-                },
-                sunrise: sunrise,
-                sunset: sunset,
-                wind: {
-                    speed: this.ToMPS(json.currently.windSpeed),
-                    degree: json.currently.windBearing
-                },
-                temperature: this.ToKelvin(json.currently.temperature),
-                pressure: json.currently.pressure,
-                humidity: json.currently.humidity * 100,
-                dewPoint: this.ToKelvin(json.currently.dewPoint),
-                condition: {
-                    main: this.GetShortCurrentSummary(json.currently.summary),
-                    description: json.currently.summary,
-                    icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
-                    customIcon: this.ResolveCustomIcon(json.currently.icon)
-                },
-                extra_field: {
-                    name: _("Feels Like"),
-                    value: this.ToKelvin(json.currently.apparentTemperature),
-                    type: "temperature"
-                },
-                forecasts: [],
-                hourlyForecasts: []
-            };
-            for (let i = 0; i < json.daily.data.length; i++) {
-                const day = json.daily.data[i];
-                const forecast = {
-                    date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
-                    temp_min: this.ToKelvin(day.temperatureLow),
-                    temp_max: this.ToKelvin(day.temperatureHigh),
-                    condition: {
-                        main: this.GetShortSummary(day.summary),
-                        description: this.ProcessSummary(day.summary),
-                        icons: this.ResolveIcon(day.icon),
-                        customIcon: this.ResolveCustomIcon(day.icon)
-                    },
-                };
-                forecast.date = forecast.date.set({ hour: 12 });
-                result.forecasts.push(forecast);
-            }
-            for (let i = 0; i < json.hourly.data.length; i++) {
-                const hour = json.hourly.data[i];
-                const forecast = {
-                    date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
-                    temp: this.ToKelvin(hour.temperature),
-                    condition: {
-                        main: this.GetShortSummary(hour.summary),
-                        description: this.ProcessSummary(hour.summary),
-                        icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
-                        customIcon: this.ResolveCustomIcon(hour.icon)
-                    },
-                    precipitation: {
-                        type: hour.precipType,
-                        volume: hour.precipProbability,
-                        chance: hour.precipProbability * 100
-                    }
-                };
-                result.hourlyForecasts.push(forecast);
-            }
-            return result;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("DarkSky payload parsing error: " + e, e);
-            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
-            return null;
-        }
-    }
-    ;
-    ConvertToAPILocale(systemLocale) {
-        if (systemLocale == null)
-            return "en";
-        if (systemLocale == "zh-tw") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        return lang;
-    }
-    ConstructQuery(loc) {
-        this.SetQueryUnit();
-        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + locale;
-        }
-        return query;
-    }
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-            return false;
-        }
-        else if (message.code == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
-            });
-            return false;
-        }
-        return true;
-    }
-    HandleResponseErrors(json) {
-        const code = json.code;
-        const error = json.error;
-        const errorMsg = "DarkSky API: ";
-        logger_Logger.Debug("DarksSky API error payload: " + json);
-        switch (code) {
-            case "400":
-                logger_Logger.Error(errorMsg + error);
-                break;
-            default:
-                logger_Logger.Error(errorMsg + error);
-                break;
-        }
-    }
-    ;
-    ProcessSummary(summary) {
-        const processed = summary.split(" ");
-        let result = "";
-        let lineLength = 0;
-        for (let i = 0; i < processed.length; i++) {
-            if (lineLength + processed[i].length > this.descriptionLineLength) {
-                result = result + "\n";
-                lineLength = 0;
-            }
-            result = result + processed[i] + " ";
-            lineLength = lineLength + processed[i].length + 1;
-        }
-        return result;
-    }
-    ;
-    GetShortSummary(summary) {
-        const processed = summary.split(" ");
-        if (processed.length == 1)
-            return processed[0];
-        const result = [];
-        for (let i = 0; i < processed.length; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result.push(processed[i]) + " ";
-            }
-            if (result.length == 2)
-                break;
-        }
-        return result.join(" ");
-    }
-    ;
-    GetShortCurrentSummary(summary) {
-        const processed = summary.split(" ");
-        let result = "";
-        let maxLoop;
-        (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
-        for (let i = 0; i < maxLoop; i++) {
-            if (processed[i] != "and") {
-                result = result + processed[i] + " ";
-            }
-        }
-        return result;
-    }
-    WordBanned(word) {
-        return this.DarkSkyFilterWords.includes(word);
-    }
-    ResolveIcon(icon, sunTimes, date) {
-        switch (icon) {
-            case "rain":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "snow":
-                return ["weather-snow"];
-            case "sleet":
-                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
-            case "fog":
-                return ["weather-fog"];
-            case "wind":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
-            case "cloudy":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "partly-cloudy-night":
-                return ["weather-few-clouds-night"];
-            case "partly-cloudy-day":
-                return ["weather-few-clouds"];
-            case "clear-night":
-                return ["weather-clear-night"];
-            case "clear-day":
-                return ["weather-clear"];
-            case "storm":
-                return ["weather-storm"];
-            case "showers":
-                return ["weather-showers", "weather-showers-scattered"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "rain":
-                return "rain-symbolic";
-            case "snow":
-                return "snow-symbolic";
-            case "fog":
-                return "fog-symbolic";
-            case "cloudy":
-                return "cloudy-symbolic";
-            case "partly-cloudy-night":
-                return "night-alt-cloudy-symbolic";
-            case "partly-cloudy-day":
-                return "day-cloudy-symbolic";
-            case "clear-night":
-                return "night-clear-symbolic";
-            case "clear-day":
-                return "day-sunny-symbolic";
-            case "storm":
-                return "thunderstorm-symbolic";
-            case "showers":
-                return "showers-symbolic";
-            case "wind":
-                return "strong-wind-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-    SetQueryUnit() {
-        if (this.app.config.TemperatureUnit == "celsius") {
-            if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
-                this.unit = 'si';
-            }
-            else {
-                this.unit = 'uk2';
-            }
-        }
-        else {
-            this.unit = 'us';
-        }
-    }
-    ;
-    ToKelvin(temp) {
-        if (this.unit == 'us') {
-            return FahrenheitToKelvin(temp);
-        }
-        else {
-            return CelsiusToKelvin(temp);
-        }
-    }
-    ;
-    ToMPS(speed) {
-        if (this.unit == 'si') {
-            return speed;
-        }
-        else {
-            return MPHtoMPS(speed);
-        }
-    }
-    ;
-}
-;
-
-;// CONCATENATED MODULE: ./src/3_8/providers/openWeatherMap.ts
-
-
-
-const IDCache = {};
-class OpenWeatherMap {
-    constructor(_app) {
-        this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
-        this.maxForecastSupport = 8;
-        this.website = "https://openweathermap.org/";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = false;
-        this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
-            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
-        ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
-        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
-        this.HandleError = (error) => {
-            if (error.code == 404) {
-                this.app.ShowError({
-                    detail: "location not found",
-                    message: _("Location not found, make sure location is available or it is in the correct format"),
-                    userError: true,
-                    type: "hard"
-                });
-                return false;
-            }
-            return true;
-        };
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        const params = this.ConstructParams(loc);
-        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
-        const promises = [];
-        promises.push(this.app.LoadJsonAsync(this.base_url, params, this.HandleError));
-        if (cachedID == null)
-            promises.push(this.app.LoadJsonAsync(this.id_irl, params));
-        const [json, idPayload] = await Promise.all(promises);
-        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
-            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
-        if (!json)
-            return null;
-        if (this.HadErrors(json))
-            return null;
-        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
-        return this.ParseWeather(json, loc);
-    }
-    ;
-    ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-        try {
-            const weather = {
-                coord: {
-                    lat: json.lat,
-                    lon: json.lon
-                },
-                location: {
-                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
-                    timeZone: json.timezone
-                },
-                date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
-                sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
-                sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
-                wind: {
-                    speed: json.current.wind_speed,
-                    degree: json.current.wind_deg
-                },
-                temperature: json.current.temp,
-                pressure: json.current.pressure,
-                humidity: json.current.humidity,
-                dewPoint: json.current.dew_point,
-                condition: {
-                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
-                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
-                    icons: this.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
-                    customIcon: this.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
-                },
-                extra_field: {
-                    name: _("Feels Like"),
-                    value: json.current.feels_like,
-                    type: "temperature"
-                },
-                forecasts: []
-            };
-            if (json.minutely != null) {
-                const immediate = {
-                    start: -1,
-                    end: -1
-                };
-                for (let index = 0; index < json.minutely.length; index++) {
-                    const element = json.minutely[index];
-                    if (element.precipitation > 0 && immediate.start == -1) {
-                        immediate.start = index;
-                        continue;
-                    }
-                    else if (element.precipitation == 0 && immediate.start != -1) {
-                        immediate.end = index;
-                        break;
-                    }
-                }
-                weather.immediatePrecipitation = immediate;
-            }
-            const forecasts = [];
-            for (let i = 0; i < json.daily.length; i++) {
-                const day = json.daily[i];
-                const forecast = {
-                    date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
-                    temp_min: day.temp.min,
-                    temp_max: day.temp.max,
-                    condition: {
-                        main: day.weather[0].main,
-                        description: day.weather[0].description,
-                        icons: this.ResolveIcon(day.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(day.weather[0].icon)
-                    },
-                };
-                forecasts.push(forecast);
-            }
-            weather.forecasts = forecasts;
-            const hourly = [];
-            for (let index = 0; index < json.hourly.length; index++) {
-                const hour = json.hourly[index];
-                const forecast = {
-                    date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
-                    temp: hour.temp,
-                    condition: {
-                        main: hour.weather[0].main,
-                        description: hour.weather[0].description,
-                        icons: this.ResolveIcon(hour.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
-                    },
-                };
-                if (hour.pop >= 0.1) {
-                    forecast.precipitation = {
-                        chance: hour.pop * 100,
-                        type: "none",
-                    };
-                }
-                if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.rain["1h"];
-                    forecast.precipitation.type = "rain";
-                }
-                if (!!hour.snow && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.snow["1h"];
-                    forecast.precipitation.type = "snow";
-                }
-                hourly.push(forecast);
-            }
-            weather.hourlyForecasts = hourly;
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
-            this.app.ShowError({
-                type: "soft",
-                service: "openweathermap",
-                detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
-            });
-            return null;
-        }
-    }
-    ;
-    ConstructParams(loc) {
-        const params = {
-            lat: loc.lat,
-            lon: loc.lon,
-            appid: "1c73f8259a86c6fd43c7163b543c8640"
-        };
-        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-            params.lang = locale;
-        }
-        return params;
-    }
-    ;
-    ConvertToAPILocale(systemLocale) {
-        if (systemLocale == null)
-            return "en";
-        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        if (lang == "sv") {
-            return "se";
-        }
-        else if (lang == "cs") {
-            return "cz";
-        }
-        else if (lang == "ko") {
-            return "kr";
-        }
-        else if (lang == "lv") {
-            return "la";
-        }
-        else if (lang == "nn" || lang == "nb") {
-            return "no";
-        }
-        return lang;
-    }
-    HadErrors(json) {
-        if (!this.HasReturnedError(json))
-            return false;
-        const errorMsg = "OpenWeatherMap Response: ";
-        const error = {
-            service: "openweathermap",
-            type: "hard",
-        };
-        const errorPayload = json;
-        switch (errorPayload.cod) {
-            case ("400"):
-                error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
-                break;
-            case ("401"):
-                error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
-                break;
-            case ("404"):
-                error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
-                break;
-            case ("429"):
-                error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
-                break;
-            default:
-                error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
-                break;
-        }
-        ;
-        this.app.ShowError(error);
-        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_Logger.Error(errorMsg + errorPayload.message);
-        return true;
-    }
-    ;
-    HasReturnedError(json) {
-        return (!!(json === null || json === void 0 ? void 0 : json.cod));
-    }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "10n":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "09n":
-                return ["weather-showers"];
-            case "09d":
-                return ["weather-showers"];
-            case "13d":
-                return ["weather-snow"];
-            case "13n":
-                return ["weather-snow"];
-            case "50d":
-                return ["weather-fog"];
-            case "50n":
-                return ["weather-fog"];
-            case "04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "03n":
-                return ['weather-clouds-night', "weather-few-clouds-night"];
-            case "03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "02n":
-                return ["weather-few-clouds-night"];
-            case "02d":
-                return ["weather-few-clouds"];
-            case "01n":
-                return ["weather-clear-night"];
-            case "01d":
-                return ["weather-clear"];
-            case "11d":
-                return ["weather-storm"];
-            case "11n":
-                return ["weather-storm"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return "day-rain-symbolic";
-            case "10n":
-                return "night-rain-symbolic";
-            case "09n":
-                return "night-showers-symbolic";
-            case "09d":
-                return "day-showers-symbolic";
-            case "13d":
-                return "day-snow-symbolic";
-            case "13n":
-                return "night-alt-snow-symbolic";
-            case "50d":
-                return "day-fog-symbolic";
-            case "50n":
-                return "night-fog-symbolic";
-            case "04d":
-                return "day-cloudy-symbolic";
-            case "04n":
-                return "night-alt-cloudy-symbolic";
-            case "03n":
-                return "night-alt-cloudy-symbolic";
-            case "03d":
-                return "day-cloudy-symbolic";
-            case "02n":
-                return "night-alt-cloudy-symbolic";
-            case "02d":
-                return "day-cloudy-symbolic";
-            case "01n":
-                return "night-clear-symbolic";
-            case "01d":
-                return "day-sunny-symbolic";
-            case "11d":
-                return "day-thunderstorm-symbolic";
-            case "11n":
-                return "night-alt-thunderstorm-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-    ;
-}
-;
-const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Clouds"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
-];
-
-;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
-
-
-
-
-class USWeather {
-    constructor(_app) {
-        this.prettyName = _("US Weather");
-        this.name = "US Weather";
-        this.maxForecastSupport = 7;
-        this.website = "https://www.weather.gov/";
-        this.maxHourlyForecastSupport = 156;
-        this.needsApiKey = false;
-        this.sitesUrl = "https://api.weather.gov/points/";
-        this.MAX_STATION_DIST = 50000;
-        this.observationStations = [];
-        this.OnObtainingGridData = (message) => {
-            var _a, _b, _c, _d;
-            if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
-                const data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
-                if (data.title == "Data Unavailable For Requested Point") {
-                    this.app.ShowError({
-                        type: "hard",
-                        userError: true,
-                        detail: "location not covered",
-                        service: "us-weather",
-                        message: _("Location is outside US, please use a different provider.")
-                    });
-                }
-                return false;
-            }
-            return true;
-        };
-        this.ParseForecast = (json) => {
-            const forecasts = [];
-            try {
-                let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
-                startIndex = this.FindTodayIndex(json, startIndex);
-                if (startIndex == -1)
-                    return null;
-                if (json.properties.periods[startIndex].isDaytime == false) {
-                    startIndex++;
-                    const today = json.properties.periods[0];
-                    const forecast = {
-                        date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
-                        temp_min: FahrenheitToKelvin(today.temperature),
-                        temp_max: FahrenheitToKelvin(today.temperature),
-                        condition: this.ResolveCondition(today.icon),
-                    };
-                    forecasts.push(forecast);
-                }
-                for (let i = startIndex; i < json.properties.periods.length; i += 2) {
-                    const day = json.properties.periods[i];
-                    let night = json.properties.periods[i + 1];
-                    if (!night)
-                        night = day;
-                    const forecast = {
-                        date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
-                        temp_min: FahrenheitToKelvin(night.temperature),
-                        temp_max: FahrenheitToKelvin(day.temperature),
-                        condition: this.ResolveCondition(day.icon),
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.ParseHourlyForecast = (json) => {
-            const forecasts = [];
-            try {
-                for (let i = 0; i < json.properties.periods.length; i++) {
-                    const hour = json.properties.periods[i];
-                    const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
-                    const forecast = {
-                        date: timestamp,
-                        temp: CelsiusToKelvin(hour.temperature),
-                        condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
-                return null;
-            }
-        };
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        var _a, _b;
-        const locID = loc.lat.toString() + "," + loc.lon.toString();
-        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
-            logger_Logger.Info("Downloading new site data");
-            this.currentLoc = loc;
-            this.currentLocID = locID;
-            const grid = await this.GetGridData(loc);
-            if (grid == null)
-                return null;
-            logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
-            const observationStations = await this.GetStationData(grid.properties.observationStations);
-            if (observationStations == null)
-                return null;
-            this.grid = grid;
-            this.observationStations = observationStations;
-        }
-        else {
-            logger_Logger.Debug("Site data downloading skipped");
-        }
-        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
-        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
-        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
-        const hourly = await hourlyForecastPromise;
-        const forecast = await forecastPromise;
-        if (!hourly || !forecast) {
-            logger_Logger.Error("Failed to obtain forecast Data");
-            return null;
-        }
-        const weather = this.ParseCurrent(observations, hourly, loc);
-        if (!!weather) {
-            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
-            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
-        }
-        return weather;
-    }
-    ;
-    async GetGridData(loc) {
-        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
-        return siteData;
-    }
-    async GetStationData(stationListUrl) {
-        const stations = await this.app.LoadJsonAsync(stationListUrl);
-        return stations === null || stations === void 0 ? void 0 : stations.features;
-    }
-    async GetObservationsInRange(range, loc, stations) {
-        const observations = [];
-        for (let index = 0; index < stations.length; index++) {
-            const element = stations[index];
-            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
-            if (element.dist > range)
-                break;
-            const observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
-            if (observation == null) {
-                logger_Logger.Debug("Failed to get observations from " + stations[index].id);
-            }
-            else {
-                observations.push(observation);
-            }
-        }
-        return observations;
-    }
-    MeshObservationData(observations) {
-        if (observations.length < 1)
-            return null;
-        const result = observations[0];
-        if (observations.length == 1)
-            return result;
-        for (let index = 1; index < observations.length; index++) {
-            const element = observations[index];
-            const debugText = " Observation data missing, plugged in from ID " +
-                element.id + ", index " + index +
-                ", distance "
-                + Math.round(GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], this.currentLoc.lat, this.currentLoc.lon))
-                + " metres";
-            if (result.properties.icon == null) {
-                result.properties.icon = element.properties.icon;
-                result.properties.textDescription = element.properties.textDescription;
-                logger_Logger.Debug("Weather condition" + debugText);
-            }
-            if (result.properties.temperature.value == null) {
-                result.properties.temperature.value = element.properties.temperature.value;
-                logger_Logger.Debug("Temperature" + debugText);
-            }
-            if (result.properties.windSpeed.value == null) {
-                result.properties.windSpeed.value = element.properties.windSpeed.value;
-                logger_Logger.Debug("Wind Speed" + debugText);
-            }
-            if (result.properties.windDirection.value == null) {
-                result.properties.windDirection.value = element.properties.windDirection.value;
-                logger_Logger.Debug("Wind degree" + debugText);
-            }
-            if (result.properties.barometricPressure.value == null) {
-                result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-                logger_Logger.Debug("Pressure" + debugText);
-            }
-            if (result.properties.relativeHumidity.value == null) {
-                result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-                logger_Logger.Debug("Humidity" + debugText);
-            }
-            if (result.properties.windChill.value == null) {
-                result.properties.windChill.value = element.properties.windChill.value;
-                logger_Logger.Debug("WindChill" + debugText);
-            }
-            if (result.properties.visibility.value == null) {
-                result.properties.visibility.value = element.properties.visibility.value;
-                logger_Logger.Debug("Visibility" + debugText);
-            }
-            if (result.properties.dewpoint.value == null) {
-                result.properties.dewpoint.value = element.properties.dewpoint.value;
-                logger_Logger.Debug("Dew Point" + debugText);
-            }
-        }
-        return result;
-    }
-    ParseCurrent(json, hourly, loc) {
-        var _a, _b;
-        const observation = this.MeshObservationData(json);
-        if (observation == null || !this.observationStations[0]) {
-            logger_Logger.Error("No observation stations/data are available");
-            return null;
-        }
-        const timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
-        const times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
-        const suntimes = {
-            sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
-            sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
-        };
-        try {
-            const weather = {
-                coord: {
-                    lat: (_a = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _a === void 0 ? void 0 : _a.coordinates[1],
-                    lon: (_b = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _b === void 0 ? void 0 : _b.coordinates[0]
-                },
-                location: {
-                    city: undefined,
-                    country: undefined,
-                    url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-                    timeZone: this.observationStations[0].properties.timeZone,
-                    distanceFrom: this.observationStations[0].dist
-                },
-                date: timestamp,
-                sunrise: suntimes.sunrise,
-                sunset: suntimes.sunset,
-                wind: {
-                    speed: KPHtoMPS(observation.properties.windSpeed.value),
-                    degree: observation.properties.windDirection.value
-                },
-                temperature: CelsiusToKelvin(observation.properties.temperature.value),
-                pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
-                humidity: observation.properties.relativeHumidity.value,
-                dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
-                condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
-                forecasts: []
-            };
-            if (observation.properties.windChill.value != null) {
-                weather.extra_field = {
-                    name: _("Feels Like"),
-                    value: CelsiusToKelvin(observation.properties.windChill.value),
-                    type: "temperature"
-                };
-            }
-            if (weather.condition == null && hourly != null) {
-                weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
-            }
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("US Weather Parsing error: " + e, e);
-            this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
-            return null;
-        }
-    }
-    ;
-    CheckIfHasThreeElementsForDay(json) {
-        var _a, _b, _c;
-        if (((_b = (_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods) === null || _b === void 0 ? void 0 : _b.length) < 3 || ((_c = this.observationStations[0]) === null || _c === void 0 ? void 0 : _c.properties))
-            return false;
-        let counter = 0;
-        for (let index = 1; index < 3; index++) {
-            const element = json.properties.periods[index];
-            const prevElement = json.properties.periods[index - 1];
-            const prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
-            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
-            if (OnSameDay(prevDate, curDate))
-                counter++;
-            else
-                counter = 0;
-            if (counter > 1) {
-                global.log("3 elements");
-                return true;
-            }
-        }
-        return false;
-    }
-    FindTodayIndex(json, startIndex = 0) {
-        var _a;
-        if (!this.observationStations[0] || !((_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods)) {
-            return -1;
-        }
-        const today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
-        for (let index = startIndex; index < json.properties.periods.length; index++) {
-            const element = json.properties.periods[index];
-            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
-            if (!OnSameDay(today, curDate))
-                continue;
-            global.log(index);
-            return index;
-        }
-        return -1;
-    }
-    ResolveCondition(icon, isNight = false) {
-        if (icon == null)
-            return {
-                main: _("Unknown"),
-                description: _("Unknown"),
-                customIcon: "cloud-refresh-symbolic",
-                icons: ["weather-severe-alert"]
-            };
-        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
-        switch (code === null || code === void 0 ? void 0 : code[0]) {
-            case "skc":
-                return {
-                    main: _("Clear"),
-                    description: _("Clear"),
-                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icons: (isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"]
-                };
-            case "few":
-                return {
-                    main: _("Few clouds"),
-                    description: _("Few clouds"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear-night", "weather-severe-alert"]
-                };
-            case "sct":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear", "weather-severe-alert"]
-                };
-            case "bkn":
-                return {
-                    main: _("Mostly cloudy"),
-                    description: _("Mostly cloudy"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
-                };
-            case "ovc":
-                return {
-                    main: _("Overcast"),
-                    description: _("Overcast"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
-                };
-            case "wind_skc":
-                return {
-                    main: _("Clear"),
-                    description: _("Clear and windy"),
-                    customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
-                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
-                };
-            case "wind_few":
-                return {
-                    main: _("Few clouds"),
-                    description: _("Few clouds and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
-                };
-            case "wind_sct":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
-                };
-            case "wind_bkn":
-                return {
-                    main: _("Mostly cloudy"),
-                    description: _("Mostly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
-                };
-            case "wind_ovc":
-                return {
-                    main: _("Overcast"),
-                    description: _("Overcast and windy"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
-                };
-            case "snow":
-                return {
-                    main: _("Snow"),
-                    description: _("Snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-severe-alert"]
-                };
-            case "rain_snow":
-                return {
-                    main: _("Rain"),
-                    description: _("Snowy rain"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-snow", "weather-severe-alert"]
-                };
-            case "rain_sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "snow_sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "sleet-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "rain_fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "snow_fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain and snow"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-severe-alert"]
-                };
-            case "rain":
-                return {
-                    main: _("Rain"),
-                    description: _("Rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "rain_showers":
-            case "rain_showers_hi":
-                return {
-                    main: _("Rain"),
-                    description: _("Rain showers"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "tsra":
-            case "tsra_sct":
-            case "tsra_hi":
-                return {
-                    main: _("Thunderstorm"),
-                    description: _("Thunderstorm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "tornado":
-                return {
-                    main: _("Tornado"),
-                    description: _("Tornado"),
-                    customIcon: "tornado-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "hurricane":
-                return {
-                    main: _("Hurricane"),
-                    description: _("Hurricane"),
-                    customIcon: "hurricane-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "tropical_storm":
-                return {
-                    main: _("Storm"),
-                    description: _("Tropical storm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "dust":
-                return {
-                    main: _("Dust"),
-                    description: _("Dust"),
-                    customIcon: "dust-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "smoke":
-                return {
-                    main: _("Smoke"),
-                    description: _("Smoke"),
-                    customIcon: "smoke-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "haze":
-                return {
-                    main: _("Haze"),
-                    description: _("Haze"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "hot":
-                return {
-                    main: _("Hot"),
-                    description: _("Hot"),
-                    customIcon: "hot-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "cold":
-                return {
-                    main: _("Cold"),
-                    description: _("Cold"),
-                    customIcon: "snowflake-cold-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "blizzard":
-                return {
-                    main: _("Blizzard"),
-                    description: _("Blizzard"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "fog":
-                return {
-                    main: _("Fog"),
-                    description: _("Fog"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            default:
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-        }
-    }
-    ;
-}
-;
-
-;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
-
-
-
-class Weatherbit {
-    constructor(_app) {
-        this.prettyName = _("WeatherBit");
-        this.name = "Weatherbit";
-        this.maxForecastSupport = 16;
-        this.website = "https://www.weatherbit.io/";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = true;
-        this.supportedLanguages = [
-            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
-            'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
-            'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
-            'sv', 'tr', 'uk', 'zh', 'zh-tw'
-        ];
-        this.current_url = "https://api.weatherbit.io/v2.0/current?";
-        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
-        this.hourlyAccess = true;
-        this.ParseCurrent = (json) => {
-            json = json.data[0];
-            const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
-            if (hourDiff != 0)
-                logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
-            try {
-                const weather = {
-                    coord: {
-                        lat: json.lat,
-                        lon: json.lon
-                    },
-                    location: {
-                        city: json.city_name,
-                        country: json.country_code,
-                        timeZone: json.timezone
-                    },
-                    date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
-                    sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
-                    sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
-                    wind: {
-                        speed: json.wind_spd,
-                        degree: json.wind_dir
-                    },
-                    temperature: json.temp,
-                    pressure: json.pres,
-                    humidity: json.rh,
-                    dewPoint: json.dewpt,
-                    condition: {
-                        main: json.weather.description,
-                        description: json.weather.description,
-                        icons: this.ResolveIcon(json.weather.icon),
-                        customIcon: this.ResolveCustomIcon(json.weather.icon)
-                    },
-                    extra_field: {
-                        name: _("Feels Like"),
-                        value: json.app_temp,
-                        type: "temperature"
-                    },
-                    forecasts: []
-                };
-                return weather;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
-                return null;
-            }
-        };
-        this.ParseForecast = (json) => {
-            const forecasts = [];
-            try {
-                for (let i = 0; i < json.data.length; i++) {
-                    const day = json.data[i];
-                    const forecast = {
-                        date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
-                        temp_min: day.min_temp,
-                        temp_max: day.max_temp,
-                        condition: {
-                            main: day.weather.description,
-                            description: day.weather.description,
-                            icons: this.ResolveIcon(day.weather.icon),
-                            customIcon: this.ResolveCustomIcon(day.weather.icon)
-                        },
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.ParseHourlyForecast = (json) => {
-            const forecasts = [];
-            try {
-                for (let i = 0; i < json.data.length; i++) {
-                    const hour = json.data[i];
-                    const forecast = {
-                        date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
-                        temp: hour.temp,
-                        condition: {
-                            main: hour.weather.description,
-                            description: hour.weather.description,
-                            icons: this.ResolveIcon(hour.weather.icon),
-                            customIcon: this.ResolveCustomIcon(hour.weather.icon)
-                        },
-                        precipitation: {
-                            type: "rain",
-                            volume: hour.precip,
-                            chance: hour.pop
-                        }
-                    };
-                    if (!!forecast.precipitation && hour.snow != 0) {
-                        forecast.precipitation.type = "snow";
-                        forecast.precipitation.volume = hour.snow;
-                    }
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
-        let hourlyPromise = null;
-        if (!!this.hourlyAccess)
-            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
-        if (!currentResult)
-            return null;
-        const forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        const hourlyResult = await hourlyPromise;
-        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
-        return currentResult;
-    }
-    ;
-    async GetData(baseUrl, loc, ParseFunction) {
-        const query = this.ConstructQuery(baseUrl, loc);
-        if (query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
-        if (json == null)
-            return null;
-        return ParseFunction(json);
-    }
-    async GetHourlyData(baseUrl, loc) {
-        const query = this.ConstructQuery(baseUrl, loc);
-        if (query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
-        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
-            return null;
-        }
-        if (json == null)
-            return null;
-        return this.ParseHourlyForecast(json);
-    }
-    ;
-    TimeToDate(time, hourDiff, tz) {
-        const hoursMinutes = time.split(":");
-        const date = DateTime.utc().set({
-            hour: parseInt(hoursMinutes[0]) - hourDiff,
-            minute: parseInt(hoursMinutes[1]),
-        }).setZone(tz);
-        return date;
-    }
-    HourDifference(correctTime, incorrectTime) {
-        if (incorrectTime == null)
-            return 0;
-        return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
-    }
-    ParseStringTime(last_ob_time, tz) {
-        const split = last_ob_time.split(/[T\-\s:]/);
-        if (split.length != 5)
-            return null;
-        return DateTime.fromObject({
-            year: parseInt(split[0]),
-            month: parseInt(split[1]) - 1,
-            day: parseInt(split[2]),
-            hour: parseInt(split[3]),
-            minute: parseInt(split[4])
-        }).setZone(tz);
-    }
-    ConvertToAPILocale(systemLocale) {
-        if (!systemLocale)
-            return null;
-        if (systemLocale == "zh-tw") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        if (lang == "cs") {
-            return "cz";
-        }
-        return lang;
-    }
-    ConstructQuery(query, loc) {
-        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
-        const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + lang;
-        }
-        return query;
-    }
-    ;
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "weatherbit",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-        }
-        return true;
-    }
-    HandleHourlyError(message) {
-        if (message.code == 403) {
-            this.hourlyAccess = false;
-            logger_Logger.Info("Hourly forecast is inaccessible, skipping");
-            return false;
-        }
-        return true;
-    }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "t01n":
-            case "t01d":
-            case "t02n":
-            case "t02d":
-            case "t03n":
-            case "t03d":
-            case "t04n":
-            case "t04d":
-            case "t05n":
-            case "t05d":
-                return ["weather-storm"];
-            case "d01d":
-            case "d01n":
-            case "d02d":
-            case "d02n":
-            case "d03d":
-            case "d03n":
-                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
-            case "r01d":
-            case "r01n":
-            case "r02d":
-            case "r02n":
-            case "r03d":
-            case "r03n":
-            case "r04d":
-            case "r04n":
-            case "r05d":
-            case "r05n":
-            case "r06d":
-            case "r06n":
-                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
-            case "s01d":
-            case "s01n":
-            case "s02d":
-            case "s02n":
-            case "s03d":
-            case "s03n":
-            case "s04d":
-            case "s04n":
-            case "s06d":
-            case "s06n":
-                return ["weather-snow"];
-            case "s05d":
-            case "s05n":
-                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
-            case "a01d":
-            case "a01n":
-            case "a02d":
-            case "a02n":
-            case "a03d":
-            case "a03n":
-            case "a04d":
-            case "a04n":
-            case "a05d":
-            case "a05n":
-            case "a06d":
-            case "a06n":
-                return ["weather-fog"];
-            case "c02d":
-                return ["weather-few-clouds"];
-            case "c02n":
-                return ["weather-few-clouds-night"];
-            case "c01n":
-                return ["weather-clear-night"];
-            case "c01d":
-                return ["weather-clear"];
-            case "c03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "c03n":
-                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
-            case "c04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "c04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "u00d":
-            case "u00n":
-                return ["weather-severe-alert"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "t01d":
-            case "t02d":
-            case "t03d":
-                return "day-thunderstorm-symbolic";
-            case "t04d":
-            case "t05d":
-                return "thunderstorm-symbolic";
-            case "t01n":
-            case "t02n":
-            case "t03n":
-                return "night-alt-thunderstorm-symbolic";
-            case "t04n":
-            case "t05n":
-                return "thunderstorm-symbolic";
-            case "d01d":
-            case "d02d":
-            case "d03d":
-            case "d01n":
-            case "d02n":
-            case "d03n":
-                return "showers-symbolic";
-            case "r01d":
-            case "r02d":
-            case "r03d":
-            case "r01n":
-            case "r02n":
-            case "r03n":
-                return "rain-symbolic";
-            case "r04d":
-            case "r05d":
-                return "day-rain-symbolic";
-            case "r06d":
-                return "rain-symbolic";
-            case "r04n":
-            case "r05n":
-                return "night-alt-rain-symbolic";
-            case "r06n":
-                return "rain-symbolic";
-            case "s01d":
-            case "s04d":
-                return "day-snow-symbolic";
-            case "s02d":
-            case "s03d":
-            case "s06d":
-                return "snow-symbolic";
-            case "s01n":
-            case "s04n":
-                return "night-alt-snow-symbolic";
-            case "s02n":
-            case "s03n":
-            case "s06n":
-                return "snow-symbolic";
-            case "s05d":
-            case "s05n":
-                return "sleet-symbolic";
-            case "a01d":
-            case "a02d":
-            case "a03d":
-            case "a04d":
-            case "a05d":
-            case "a06d":
-                return "day-fog-symbolic";
-            case "a01n":
-            case "a02n":
-            case "a03n":
-            case "a04n":
-            case "a05n":
-            case "a06n":
-                return "night-fog-symbolic";
-            case "c02d":
-                return "day-cloudy-symbolic";
-            case "c02n":
-                return "night-alt-cloudy-symbolic";
-            case "c01n":
-                return "night-clear-symbolic";
-            case "c01d":
-                return "day-sunny-symbolic";
-            case "c03d":
-                return "day-cloudy-symbolic";
-            case "c03n":
-                return "night-alt-cloudy-symbolic";
-            case "c04n":
-                return "cloudy-symbolic";
-            case "c04d":
-                return "cloudy-symbolic";
-            case "u00d":
-            case "u00n":
-                return "cloud-refresh-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-}
-;
-
-;// CONCATENATED MODULE: ./src/3_8/providers/met_norway.ts
-
-
-
-
-class MetNorway {
-    constructor(app) {
-        this.prettyName = _("MET Norway");
-        this.name = "MetNorway";
-        this.maxForecastSupport = 10;
-        this.website = "https://www.met.no/en";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = false;
-        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
-        this.app = app;
-    }
-    async GetWeather(loc) {
-        const query = this.GetUrl(loc);
-        if (query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query);
-        if (!json) {
-            logger_Logger.Error("MET Norway: Empty response from API");
-            return null;
-        }
-        return this.ParseWeather(json, loc);
-    }
-    RemoveEarlierElements(json, loc) {
-        const now = DateTime.now().setZone(loc.timeZone);
-        let startIndex = -1;
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
-            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
-            if (timestamp < now && now.hour != timestamp.hour) {
-                startIndex = i;
-            }
-            else {
-                break;
-            }
-        }
-        if (startIndex != -1) {
-            logger_Logger.Debug("Removing outdated weather information...");
-            json.properties.timeseries.splice(0, startIndex + 1);
-        }
-        return json;
-    }
-    ParseWeather(json, loc) {
-        var _a, _b;
-        json = this.RemoveEarlierElements(json, loc);
-        const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
-        const suntimes = {
-            sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
-            sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
-        };
-        const current = json.properties.timeseries[0];
-        const result = {
-            temperature: CelsiusToKelvin(current.data.instant.details.air_temperature),
-            coord: {
-                lat: json.geometry.coordinates[1],
-                lon: json.geometry.coordinates[0]
-            },
-            date: DateTime.fromISO(current.time, { zone: loc.timeZone }),
-            condition: this.ResolveCondition((_b = (_a = current.data.next_1_hours) === null || _a === void 0 ? void 0 : _a.summary) === null || _b === void 0 ? void 0 : _b.symbol_code, IsNight(suntimes)),
-            humidity: current.data.instant.details.relative_humidity,
-            pressure: current.data.instant.details.air_pressure_at_sea_level,
-            dewPoint: CelsiusToKelvin(current.data.instant.details.dew_point_temperature),
-            extra_field: {
-                name: _("Cloudiness"),
-                type: "percent",
-                value: current.data.instant.details.cloud_area_fraction
-            },
-            sunrise: suntimes.sunrise,
-            sunset: suntimes.sunset,
-            wind: {
-                degree: current.data.instant.details.wind_from_direction,
-                speed: current.data.instant.details.wind_speed
-            },
-            location: {},
-            forecasts: []
-        };
-        const hourlyForecasts = [];
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
-            if (!!element.data.next_1_hours) {
-                hourlyForecasts.push({
-                    date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
-                    temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-                    precipitation: {
-                        type: "rain",
-                        volume: element.data.next_1_hours.details.precipitation_amount
-                    },
-                    condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(suntimes, DateTime.fromISO(element.time, { zone: loc.timeZone })))
-                });
-            }
-        }
-        result.hourlyForecasts = hourlyForecasts;
-        result.forecasts = this.BuildForecasts(json.properties.timeseries, loc);
-        return result;
-    }
-    BuildForecasts(forecastsData, loc) {
-        const forecasts = [];
-        const days = this.SortDataByDay(forecastsData, loc);
-        for (let i = 0; i < days.length; i++) {
-            const forecast = {
-                condition: {
-                    customIcon: "cloudy-symbolic",
-                    description: "",
-                    icons: [],
-                    main: ""
-                },
-                date: null,
-                temp_max: Number.NEGATIVE_INFINITY,
-                temp_min: Number.POSITIVE_INFINITY
-            };
-            const conditionCounter = {};
-            for (let j = 0; j < days[i].length; j++) {
-                const element = days[i][j];
-                if (!element.data.next_6_hours)
-                    continue;
-                forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
-                if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max)
-                    forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
-                if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min)
-                    forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
-                const [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
-                const severity = conditionSeverity[symbol];
-                if (!conditionCounter[severity])
-                    conditionCounter[severity] = { count: 0, name: symbol };
-                conditionCounter[severity].count = conditionCounter[severity].count + 1;
-            }
-            forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
-            forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
-            forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
-            forecasts.push(forecast);
-        }
-        return forecasts;
-    }
-    GetEarliestDataForToday(events, loc) {
-        let earliest = 0;
-        for (let i = 0; i < events.length; i++) {
-            const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
-            const timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
-            if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day"))
-                continue;
-            if (earliestElementTime < timestamp)
-                continue;
-            earliest = i;
-        }
-        return events[earliest];
-    }
-    SortDataByDay(data, loc) {
-        const days = [];
-        let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
-        let dayIndex = 0;
-        days.push([]);
-        for (let i = 0; i < data.length; i++) {
-            const element = data[i];
-            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
-            if (OnSameDay(timestamp, currentDay)) {
-                days[dayIndex].push(element);
-            }
-            else if (!OnSameDay(timestamp, currentDay)) {
-                dayIndex++;
-                currentDay = timestamp;
-                days.push([]);
-                days[dayIndex].push(element);
-            }
-        }
-        return days;
-    }
-    GetMostCommonCondition(count) {
-        let result = -1;
-        for (const key in count) {
-            if (result == -1)
-                result = parseInt(key);
-            if (count[result].count < count[key].count)
-                result = parseInt(key);
-        }
-        return count[result].name;
-    }
-    GetMostSevereCondition(conditions) {
-        let result = -1;
-        for (const key in conditions) {
-            const conditionID = parseInt(key);
-            const resultStripped = (result > 100) ? result - 100 : result;
-            const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
-            if (conditionIDStripped > resultStripped)
-                result = conditionID;
-        }
-        if (result <= 4) {
-            return this.GetMostCommonCondition(conditions);
-        }
-        return conditions[result].name;
-    }
-    GetUrl(loc) {
-        let url = this.baseUrl + "lat=";
-        url += (loc.lat + "&lon=" + loc.lon);
-        return url;
-    }
-    DeconstructCondition(icon) {
-        const condition = icon.split("_");
-        return {
-            timeOfDay: condition[1],
-            condition: condition[0]
-        };
-    }
-    ResolveCondition(icon, isNight = false) {
-        if (icon == null) {
-            logger_Logger.Error("Icon was not found");
-            return {
-                customIcon: "cloud-refresh-symbolic",
-                main: _("Unknown"),
-                description: _("Unknown"),
-                icons: ["weather-severe-alert"]
-            };
-        }
-        const weather = this.DeconstructCondition(icon);
-        switch (weather.condition) {
-            case "clearsky":
-                return {
-                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    main: _("Clear sky"),
-                    description: _("Clear sky"),
-                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
-                };
-            case "cloudy":
-                return {
-                    customIcon: "cloudy-symbolic",
-                    main: _("Cloudy"),
-                    description: _("Cloudy"),
-                    icons: (isNight) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"]
-                };
-            case "fair":
-                return {
-                    customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
-                    main: _("Fair"),
-                    description: _("Fair"),
-                    icons: (isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"]
-                };
-            case "fog":
-                return {
-                    customIcon: "fog-symbolic",
-                    main: _("Fog"),
-                    description: _("Fog"),
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "heavyrain":
-                return {
-                    customIcon: "rain-symbolic",
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
-                };
-            case "heavyrainandthunder":
-                return {
-                    customIcon: "thunderstorm-symbolic",
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain and thunder"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
-                };
-            case "heavyrainshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain showers"),
-                    icons: ["weather-showers", "weather-showers-scattered"]
-                };
-            case "heavyrainshowersandthunder":
-                return {
-                    customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
-                    main: _("Heavy rain"),
-                    description: _("Heavy rain showers and thunder"),
-                    icons: ["weather-showers", "weather-showers-scattered"]
-                };
-            case "heavysleet":
-                return {
-                    customIcon: "sleet-symbolic",
-                    main: _("Heavy sleet"),
-                    description: _("Heavy sleet"),
-                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
-                };
-            case "heavysleetandthunder":
-                return {
-                    customIcon: "sleet-storm-symbolic",
-                    main: _("Heavy sleet"),
-                    description: _("Heavy sleet and thunder"),
-                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
-                };
-            case "heavysleetshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    main: _("Heavy sleet"),
-                    description: _("Heavy sleet showers"),
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
-                };
-            case "heavysleetshowersandthunder":
-                return {
-                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: _("Heavy sleet"),
-                    description: _("Heavy sleet showers and thunder"),
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
-                };
-            case "heavysnow":
-                return {
-                    customIcon: "snow-symbolic",
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow"),
-                    icons: ["weather-snow"]
-                };
-            case "heavysnowandthunder":
-                return {
-                    customIcon: "snow-symbolic",
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow and thunder"),
-                    icons: ["weather-snow"]
-                };
-            case "heavysnowshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow showers"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            case "heavysnowshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow showers and thunder"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            case "lightrain":
-                return {
-                    customIcon: "rain-mix-symbolic",
-                    main: _("Light rain"),
-                    description: _("Light rain"),
-                    icons: ["weather-showers-scattered", "weather-rain"]
-                };
-            case "lightrainandthunder":
-                return {
-                    customIcon: "rain-mix-storm-symbolic",
-                    main: _("Light rain"),
-                    description: _("Light rain and thunder"),
-                    icons: ["weather-showers-scattered", "weather-rain"]
-                };
-            case "lightrainshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
-                    main: _("Light rain"),
-                    description: _("Light rain showers"),
-                    icons: ["weather-showers-scattered", "weather-rain"]
-                };
-            case "lightrainshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: _("Light rain"),
-                    description: _("Light rain showers and thunder"),
-                    icons: ["weather-showers-scattered", "weather-rain"]
-                };
-            case "lightsleet":
-                return {
-                    customIcon: "sleet-symbolic",
-                    main: _("Light sleet"),
-                    description: _("Light sleet"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "lightsleetandthunder":
-                return {
-                    customIcon: "sleet-storm-symbolic",
-                    main: _("Light sleet"),
-                    description: _("Light sleet and thunder"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "lightsleetshowers":
-                return {
-                    customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    main: _("Light sleet"),
-                    description: _("Light sleet showers"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "lightssleetshowersandthunder":
-                return {
-                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: _("Light sleet"),
-                    description: _("Light sleet showers and thunder"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "lightsnow":
-                return {
-                    customIcon: "snow-symbolic",
-                    main: _("Light snow"),
-                    description: _("Light snow"),
-                    icons: ["weather-snow"]
-                };
-            case "lightsnowandthunder":
-                return {
-                    customIcon: "snow-storm-symbolic",
-                    main: _("Light snow"),
-                    description: _("Light snow and thunder"),
-                    icons: ["weather-snow"]
-                };
-            case "lightsnowshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: _("Light snow"),
-                    description: _("Light snow showers"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            case "lightssnowshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: _("Light snow"),
-                    description: _("Light snow showers and thunder"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            case "partlycloudy":
-                return {
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"]
-                };
-            case "rain":
-                return {
-                    customIcon: "rain-symbolic",
-                    main: _("Rain"),
-                    description: _("Rain"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
-                };
-            case "rainandthunder":
-                return {
-                    customIcon: "thunderstorm-symbolic",
-                    main: _("Rain"),
-                    description: _("Rain and thunder"),
-                    icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
-                };
-            case "rainshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
-                    main: _("Rain showers"),
-                    description: _("Rain showers"),
-                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
-                };
-            case "rainshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: _("Rain showers"),
-                    description: _("Rain showers and thunder"),
-                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
-                };
-            case "sleet":
-                return {
-                    customIcon: "sleet-symbolic",
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "sleetandthunder":
-                return {
-                    customIcon: "sleet-storm-symbolic",
-                    main: _("Sleet"),
-                    description: _("Sleet and thunder"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "sleetshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    main: _("Sleet"),
-                    description: _("Sleet showers"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "sleetshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: _("Sleet"),
-                    description: _("Sleet showers and thunder"),
-                    icons: ["weather-freezing-rain", "weather-showers"]
-                };
-            case "snow":
-                return {
-                    customIcon: "snow-symbolic",
-                    main: _("Snow"),
-                    description: _("Snow"),
-                    icons: ["weather-snow"]
-                };
-            case "snowandthunder":
-                return {
-                    customIcon: "snow-storm-symbolic",
-                    main: _("Snow"),
-                    description: _("Snow and thunder"),
-                    icons: ["weather-snow"]
-                };
-            case "snowshowers":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: _("Snow showers"),
-                    description: _("Snow showers"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            case "snowshowersandthunder":
-                return {
-                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: _("Snow showers"),
-                    description: _("Snow showers and thunder"),
-                    icons: ["weather-snow-scattered", "weather-snow"]
-                };
-            default:
-                logger_Logger.Error("condition code not found: " + weather.condition);
-                return {
-                    customIcon: "cloud-refresh-symbolic",
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    icons: ["weather-severe-alert"]
-                };
-        }
-    }
-}
-const conditionSeverity = {
-    clearsky: 1,
-    cloudy: 4,
-    fair: 2,
-    fog: 15,
-    heavyrain: 10,
-    heavyrainandthunder: 11,
-    heavyrainshowers: 41,
-    heavyrainshowersandthunder: 25,
-    heavysleet: 48,
-    heavysleetandthunder: 32,
-    heavysleetshowers: 43,
-    heavysleetshowersandthunder: 27,
-    heavysnow: 50,
-    heavysnowandthunder: 34,
-    heavysnowshowers: 45,
-    heavysnowshowersandthunder: 29,
-    lightrain: 46,
-    lightrainandthunder: 30,
-    lightrainshowers: 40,
-    lightrainshowersandthunder: 24,
-    lightsleet: 47,
-    lightsleetandthunder: 31,
-    lightsleetshowers: 42,
-    lightsnow: 49,
-    lightsnowandthunder: 33,
-    lightsnowshowers: 44,
-    lightssleetshowersandthunder: 26,
-    lightssnowshowersandthunder: 28,
-    partlycloudy: 3,
-    rain: 9,
-    rainandthunder: 22,
-    rainshowers: 5,
-    rainshowersandthunder: 6,
-    sleet: 12,
-    sleetandthunder: 23,
-    sleetshowers: 7,
-    sleetshowersandthunder: 20,
-    snow: 13,
-    snowandthunder: 14,
-    snowshowers: 8,
-    snowshowersandthunder: 21
-};
-
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 
 const { Message, ProxyResolverDefault, SessionAsync, MessageHeaders, MessageHeadersType } = imports.gi.Soup;
@@ -14241,985 +15246,7 @@ class HttpLib {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
-
-
-class VisualCrossing {
-    constructor(app) {
-        this.prettyName = _("Visual Crossing");
-        this.name = "Visual Crossing";
-        this.maxForecastSupport = 15;
-        this.maxHourlyForecastSupport = 336;
-        this.website = "https://weather.visualcrossing.com/";
-        this.needsApiKey = true;
-        this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-        this.params = {
-            unitGroup: "metric",
-            key: null,
-            include: "fcst,hours,current",
-            lang: "id"
-        };
-        this.supportedLangs = ["en", "de", "fr", "es"];
-        this.app = app;
-    }
-    async GetWeather(loc) {
-        if (loc == null)
-            return null;
-        this.params['key'] = this.app.config.ApiKey;
-        let translate = true;
-        if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
-            this.params['lang'] = this.app.config.Language;
-            translate = false;
-        }
-        const url = this.url + loc.lat + "," + loc.lon;
-        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
-        if (!json)
-            return null;
-        return this.ParseWeather(json, translate);
-    }
-    ParseWeather(weather, translate) {
-        var _a, _b, _c, _d, _e, _f, _g;
-        const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
-        const result = {
-            date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
-            location: {
-                url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
-                timeZone: weather.timezone,
-                tzOffset: weather.tzoffset,
-            },
-            coord: {
-                lat: weather.latitude,
-                lon: weather.longitude,
-            },
-            humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
-            pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
-            dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
-            wind: {
-                degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
-                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
-            },
-            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
-            sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
-            sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
-            condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
-            extra_field: {
-                name: _("Feels Like"),
-                type: "temperature",
-                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
-            },
-            forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
-            hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
-        };
-        return result;
-    }
-    ParseForecasts(forecasts, translate, tz) {
-        const result = [];
-        if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
-                result.push({
-                    date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
-                    condition: this.GenerateCondition(element.icon, element.conditions, translate),
-                    temp_max: CelsiusToKelvin(element.tempmax),
-                    temp_min: CelsiusToKelvin(element.tempmin)
-                });
-            }
-        }
-        return result;
-    }
-    ParseHourlyForecasts(forecasts, translate, tz) {
-        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        const result = [];
-        if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
-                if (!element.hours)
-                    continue;
-                for (let index = 0; index < element.hours.length; index++) {
-                    const hour = element.hours[index];
-                    const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
-                    if (time < currentHour)
-                        continue;
-                    const item = {
-                        date: time,
-                        temp: CelsiusToKelvin(hour.temp),
-                        condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
-                    };
-                    if (hour.preciptype != null) {
-                        item.precipitation = {
-                            type: hour.preciptype[0],
-                            chance: hour.precipprob,
-                            volume: hour.precip
-                        };
-                    }
-                    result.push(item);
-                }
-            }
-        }
-        return result;
-    }
-    GetCurrentHour(forecasts, tz) {
-        if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
-            return null;
-        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        for (let index = 0; index < forecasts[0].hours.length; index++) {
-            const hour = forecasts[0].hours[index];
-            const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
-            if (time < currentHour)
-                continue;
-            return hour;
-        }
-        return null;
-    }
-    GenerateCondition(icon, condition, translate) {
-        const result = {
-            main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
-            description: (translate) ? this.ResolveTypeIDs(condition) : condition,
-            icons: [],
-            customIcon: "refresh-symbolic"
-        };
-        switch (icon) {
-            case "clear-day":
-                result.icons = ["weather-clear"];
-                result.customIcon = "day-sunny-symbolic";
-                break;
-            case "clear-night":
-                result.icons = ["weather-clear-night"];
-                result.customIcon = "night-clear-symbolic";
-                break;
-            case "partly-cloudy-day":
-                result.icons = ["weather-few-clouds"];
-                result.customIcon = "day-cloudy-symbolic";
-                break;
-            case "partly-cloudy-night":
-                result.icons = ["weather-few-clouds-night"];
-                result.customIcon = "night-alt-cloudy-symbolic";
-                break;
-            case "cloudy":
-                result.icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
-                result.customIcon = "cloudy-symbolic";
-                break;
-            case "wind":
-                result.icons = ["weather-windy", "weather-breeze"];
-                result.customIcon = "windy-symbolic";
-                break;
-            case "fog":
-                result.icons = ["weather-fog"];
-                result.customIcon = "fog-symbolic";
-                break;
-            case "rain":
-                result.icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain", "weather-showers"];
-                result.customIcon = "rain-symbolic";
-                break;
-            case "snow":
-                result.icons = ["weather-snow"];
-                result.customIcon = "snow-symbolic";
-                break;
-        }
-        return result;
-    }
-    GetFirstCondition(condition) {
-        const split = condition.split(", ");
-        return split[0];
-    }
-    ResolveTypeID(condition) {
-        switch (condition.toLowerCase()) {
-            case "type_1":
-                return _("Blowing or drifting snow");
-            case "type_2":
-                return _("Drizzle");
-            case "type_3":
-                return _("Heavy drizzle");
-            case "type_4":
-                return _("Light drizzle");
-            case "type_5":
-                return _("Heavy drizzle/rain");
-            case "type_6":
-                return _("Light drizzle/rain");
-            case "type_7":
-                return _("Dust Storm");
-            case "type_8":
-                return _("Fog");
-            case "type_9":
-                return _("Freezing drizzle/freezing rain");
-            case "type_10":
-                return _("Heavy freezing drizzle/freezing rain");
-            case "type_11":
-                return _("Light freezing drizzle/freezing rain");
-            case "type_12":
-                return _("Freezing fog");
-            case "type_13":
-                return _("Heavy freezing rain");
-            case "type_14":
-                return _("Light freezing rain");
-            case "type_15":
-                return _("Funnel cloud/tornado");
-            case "type_16":
-                return _("Hail showers");
-            case "type_17":
-                return _("Ice");
-            case "type_18":
-                return _("Lightning without thunder");
-            case "type_19":
-                return _("Mist");
-            case "type_20":
-                return _("Precipitation in vicinity");
-            case "type_21":
-                return _("Rain");
-            case "type_22":
-                return _("Heavy rain and snow");
-            case "type_23":
-                return _("Light rain And snow");
-            case "type_24":
-                return _("Rain showers");
-            case "type_25":
-                return _("Heavy rain");
-            case "type_26":
-                return _("Light rain");
-            case "type_27":
-                return _("Sky coverage decreasing");
-            case "type_28":
-                return _("Sky coverage increasing");
-            case "type_29":
-                return _("Sky unchanged");
-            case "type_30":
-                return _("Smoke or haze");
-            case "type_31":
-                return _("Snow");
-            case "type_32":
-                return _("Snow and rain showers");
-            case "type_33":
-                return _("Snow showers");
-            case "type_34":
-                return _("Heavy snow");
-            case "type_35":
-                return _("Light snow");
-            case "type_36":
-                return _("Squalls");
-            case "type_37":
-                return _("Thunderstorm");
-            case "type_38":
-                return _("Thunderstorm without precipitation");
-            case "type_39":
-                return _("Diamond dust");
-            case "type_40":
-                return _("Hail");
-            case "type_41":
-                return _("Overcast");
-            case "type_42":
-                return _("Partially cloudy");
-            case "type_43":
-                return _("Clear");
-        }
-        return condition;
-    }
-    ResolveTypeIDs(condition) {
-        let result = "";
-        let split = condition.split(", ");
-        for (let index = 0; index < split.length; index++) {
-            const element = split[index];
-            result += this.ResolveTypeID(element);
-            if (index < split.length - 1)
-                result += ", ";
-        }
-        return result;
-    }
-    HandleHttpError(error) {
-        if ((error === null || error === void 0 ? void 0 : error.code) == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                message: _("Please make sure you entered the API key correctly")
-            });
-            return false;
-        }
-        return true;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
-
-
-class ClimacellV4 {
-    constructor(app) {
-        this.needsApiKey = true;
-        this.prettyName = _("Tomorrow.io");
-        this.name = "Tomorrow.io";
-        this.maxForecastSupport = 15;
-        this.maxHourlyForecastSupport = 108;
-        this.website = "https://www.tomorrow.io/";
-        this.url = "https://data.climacell.co/v4/timelines";
-        this.params = {
-            apikey: null,
-            location: null,
-            timesteps: "current,1h,1d",
-            units: "metric",
-            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
-        };
-        this.app = app;
-    }
-    async GetWeather(loc) {
-        if (loc == null)
-            return null;
-        this.params.apikey = this.app.config.ApiKey;
-        this.params.location = loc.lat + "," + loc.lon;
-        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
-        if (response == null)
-            return null;
-        return this.ParseWeather(loc, response);
-    }
-    HandleHTTPError(message) {
-        if (message.code == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "no key",
-                service: "climacell",
-                message: _("Please Make sure you\nentered the API key that you have from Climacell")
-            });
-            return false;
-        }
-        return true;
-    }
-    ParseWeather(loc, data) {
-        var _a, _b, _c, _d, _e;
-        const current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
-        const hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
-        const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
-        if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
-            return null;
-        const result = {
-            coord: {
-                lat: loc.lat,
-                lon: loc.lon
-            },
-            date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
-            condition: this.ResolveCondition(current.values.weatherCode),
-            humidity: current.values.humidity,
-            pressure: current.values.pressureSurfaceLevel,
-            temperature: CelsiusToKelvin(current.values.temperature),
-            wind: {
-                degree: current.values.windDirection,
-                speed: current.values.windSpeed
-            },
-            dewPoint: CelsiusToKelvin(current.values.dewPoint),
-            sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
-            sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
-            location: {
-                url: "https://www.tomorrow.io/weather"
-            },
-            extra_field: {
-                name: _("Feels Like"),
-                type: "temperature",
-                value: CelsiusToKelvin(current.values.temperatureApparent)
-            },
-            forecasts: []
-        };
-        const hours = [];
-        const days = [];
-        for (let index = 0; index < daily.length; index++) {
-            const element = daily[index];
-            days.push({
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
-                temp_max: CelsiusToKelvin(element.values.temperatureMax),
-                temp_min: CelsiusToKelvin(element.values.temperatureMin)
-            });
-        }
-        for (let index = 0; index < hourly.length; index++) {
-            const element = hourly[index];
-            const hour = {
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
-                temp: CelsiusToKelvin(element.values.temperature)
-            };
-            hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
-            if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
-                hour.precipitation = {
-                    chance: element.values.precipitationProbability,
-                    volume: element.values.precipitationIntensity,
-                    type: this.PrecipTypeToAppletType(element.values.precipitationType)
-                };
-            }
-            hours.push(hour);
-        }
-        result.forecasts = days;
-        result.hourlyForecasts = hours;
-        return result;
-    }
-    ResolveCondition(weatherCode, isNight = false) {
-        const result = {
-            customIcon: "refresh-symbolic",
-            icons: ["weather-severe-alert"],
-            main: _("Unknown"),
-            description: _("Unknown")
-        };
-        switch (weatherCode) {
-            case 0:
-                return result;
-            case 1000:
-                return {
-                    main: isNight ? _("Clear") : _("Sunny"),
-                    description: isNight ? _("Clear") : _("Sunny"),
-                    customIcon: isNight ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icons: isNight ? ["weather-clear-night"] : ["weather-clear"]
-                };
-            case 1001:
-                return {
-                    main: _("Cloudy"),
-                    description: _("Cloudy"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", isNight ? "weather-clouds-night" : "weather-clouds"]
-                };
-            case 1100:
-                return {
-                    main: _("Mostly clear"),
-                    description: _("Mostly clear"),
-                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: isNight ? ["weather-few-clouds-night", "weather-clouds-night"] : ["weather-few-clouds", "weather-clouds"]
-                };
-            case 1101:
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: isNight ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
-                };
-            case 1102:
-                return {
-                    main: _("Mostly cloudy"),
-                    description: _("Mostly cloudy"),
-                    customIcon: "cloud-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", isNight ? "weather-clouds-night" : "weather-clouds"]
-                };
-            case 2000:
-                return {
-                    main: _("Fog"),
-                    description: _("Fog"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog"]
-                };
-            case 2100:
-                return {
-                    main: _("Fog"),
-                    description: _("Light fog"),
-                    customIcon: isNight ? "night-fog-symbolic" : "day-fog-symbolic",
-                    icons: ["weather-fog"]
-                };
-            case 3000:
-                return {
-                    main: _("Wind"),
-                    description: _("Light wind"),
-                    customIcon: isNight ? "night-alt-wind-symbolic" : "day-windy-symbolic",
-                    icons: ["weather-windy"]
-                };
-            case 3001:
-                return {
-                    main: _("Wind"),
-                    description: _("Wind"),
-                    customIcon: "windy-symbolic",
-                    icons: ["weather-windy"]
-                };
-            case 3002:
-                return {
-                    main: _("Wind"),
-                    description: _("Strong wind"),
-                    customIcon: "windy-symbolic",
-                    icons: ["weather-windy"]
-                };
-            case 4000:
-                return {
-                    main: _("Drizzle"),
-                    description: _("Drizzle"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain"]
-                };
-            case 4001:
-                return {
-                    main: _("Rain"),
-                    description: _("Rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain", "weather-showers-scattered"]
-                };
-            case 4200:
-                return {
-                    main: _("Rain"),
-                    description: _("Light rain"),
-                    customIcon: isNight ? "night-alt-rain-symbolic" : "day-rain-symbolic",
-                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
-                };
-            case 4201:
-                return {
-                    main: _("Rain"),
-                    description: _("Heavy rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain", "weather-showers-scattered"]
-                };
-            case 5000:
-                return {
-                    main: _("Snow"),
-                    description: _("Snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered", isNight ? "weather-snow-night" : "weather-snow-day"]
-                };
-            case 5001:
-                return {
-                    main: _("Flurries"),
-                    description: _("Flurries"),
-                    customIcon: "snow-wind-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered", isNight ? "weather-snow-night" : "weather-snow-day"]
-                };
-            case 5100:
-                return {
-                    main: _("Snow"),
-                    description: _("Light snow"),
-                    customIcon: isNight ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    icons: isNight ? ["weather-snow-scattered-night", "weather-snow-night", "weather-snow"] : ["weather-snow-scattered-day", "weather-snow-day", "weather-snow"]
-                };
-            case 5101:
-                return {
-                    main: _("Snow"),
-                    description: _("Heavy snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered"]
-                };
-            case 6000:
-                return {
-                    main: _("Drizzle"),
-                    description: _("Freezing drizzle"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 6001:
-                return {
-                    main: _("Rain"),
-                    description: _("Freezing rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 6200:
-                return {
-                    main: _("Rain"),
-                    description: _("Light freezing rain"),
-                    customIcon: isNight ? "night-alt-rain-symbolic" : "day-rain-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 6201:
-                return {
-                    main: _("Rain"),
-                    description: _("Heavy freezing rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 7000:
-                return {
-                    main: _("Ice pellets"),
-                    description: _("Ice pellets"),
-                    customIcon: "sleet-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 7101:
-                return {
-                    main: _("Ice pellets"),
-                    description: _("Heavy ice pellets"),
-                    customIcon: "sleet-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 7102:
-                return {
-                    main: _("Ice pellets"),
-                    description: _("Light ice pellets"),
-                    customIcon: isNight ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers", "weather-showers-scattered"]
-                };
-            case 8000:
-                return {
-                    main: _("Thunderstorm"),
-                    description: _("Thunderstorm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm"]
-                };
-            default:
-                return result;
-        }
-    }
-    PrecipTypeToAppletType(type) {
-        switch (type) {
-            case 0:
-                return "none";
-            case 1:
-                return "rain";
-            case 2:
-                return "snow";
-            case 3:
-                return "freezing rain";
-            case 4:
-                return "ice pellets";
-            default:
-                return "none";
-        }
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/providers/danishMI.ts
-
-
-class DanishMI {
-    constructor(app) {
-        this.needsApiKey = false;
-        this.prettyName = _("DMI Denmark");
-        this.name = "DanishMI";
-        this.maxForecastSupport = 10;
-        this.maxHourlyForecastSupport = 48;
-        this.website = "https://www.dmi.dk/";
-        this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
-        this.forecastParams = {
-            cmd: "llj",
-            lon: null,
-            lat: null,
-            tz: "UTC"
-        };
-        this.observationParams = {
-            cmd: "obj",
-            east: null,
-            west: null,
-            south: null,
-            north: null
-        };
-        this.app = app;
-    }
-    async GetWeather(loc) {
-        if (loc == null)
-            return null;
-        this.GetLocationBoundingBox(loc);
-        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
-        this.forecastParams.lat = loc.lat;
-        this.forecastParams.lon = loc.lon;
-        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
-        if (forecasts == null)
-            return null;
-        return this.ParseWeather(observations, forecasts, loc);
-    }
-    ParseWeather(observations, forecasts, loc) {
-        var _a, _b, _c, _d, _e, _f;
-        const observation = this.MergeObservations(observations);
-        const result = {
-            temperature: CelsiusToKelvin((_a = observation.Temperature2m) !== null && _a !== void 0 ? _a : null),
-            condition: this.ResolveCondition(observation.symbol),
-            humidity: observation.RelativeHumidity,
-            pressure: (!observation.PressureMSL) ? null : observation.PressureMSL / 100,
-            wind: {
-                degree: observation.WindDirection,
-                speed: observation.WindSpeed10m
-            },
-            dewPoint: null,
-        };
-        result.location = {
-            city: forecasts.city,
-            country: forecasts.country,
-            timeZone: undefined,
-            url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}`
-        };
-        result.coord = {
-            lon: forecasts.longitude,
-            lat: forecasts.latitude
-        };
-        result.date = DateTime.fromJSDate(this.DateStringToDate(forecasts.lastupdate), { zone: loc.timeZone });
-        result.humidity = (_b = result.humidity) !== null && _b !== void 0 ? _b : forecasts.timeserie[0].humidity;
-        result.pressure = (_c = result.pressure) !== null && _c !== void 0 ? _c : forecasts.timeserie[0].pressure;
-        result.temperature = (_d = result.temperature) !== null && _d !== void 0 ? _d : CelsiusToKelvin(forecasts.timeserie[0].temp);
-        result.wind.degree = (_e = result.wind.degree) !== null && _e !== void 0 ? _e : forecasts.timeserie[0].windDegree;
-        result.wind.speed = (_f = result.wind.speed) !== null && _f !== void 0 ? _f : forecasts.timeserie[0].windSpeed;
-        result.sunrise = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunrise), { zone: loc.timeZone });
-        result.sunset = DateTime.fromJSDate(this.DateStringToDate(forecasts.sunset), { zone: loc.timeZone });
-        if (result.condition.customIcon == "alien-symbolic") {
-            result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
-        }
-        const forecastData = [];
-        for (let index = 0; index < forecasts.aggData.length - 1; index++) {
-            const element = forecasts.aggData[index];
-            forecastData.push({
-                date: DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }),
-                temp_max: CelsiusToKelvin(element.maxTemp),
-                temp_min: CelsiusToKelvin(element.minTemp),
-                condition: this.ResolveDailyCondition(forecasts.timeserie, DateTime.fromJSDate(this.DateStringToDate(element.time)).setZone(loc.timeZone, { keepLocalTime: true }))
-            });
-        }
-        result.forecasts = forecastData;
-        const hourlyData = [];
-        for (let index = 0; index < forecasts.timeserie.length; index++) {
-            const element = forecasts.timeserie[index];
-            if (element.time == null)
-                continue;
-            const hour = {
-                date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
-                temp: CelsiusToKelvin(element.temp),
-                condition: this.ResolveCondition(element.symbol)
-            };
-            if (element.precip1 > 0.01 && element.precipType != null) {
-                hour.precipitation = {
-                    type: this.DanishPrecipToType(element.precipType),
-                    volume: element.precip1
-                };
-            }
-            hourlyData.push(hour);
-        }
-        result.hourlyForecasts = hourlyData;
-        return result;
-    }
-    MergeObservations(observations) {
-        var _a, _b, _c, _d, _e, _f;
-        const result = {
-            symbol: undefined,
-            PressureMSL: undefined,
-            Temperature2m: undefined,
-            WindDirection: undefined,
-            RelativeHumidity: undefined,
-            WindSpeed10m: undefined,
-            PrecAmount10Min: undefined,
-            WindGustLast10Min: undefined
-        };
-        for (let index = 0; index < observations.length; index++) {
-            const element = observations[index];
-            result.symbol = (_a = result.symbol) !== null && _a !== void 0 ? _a : element.values.symbol;
-            result.PressureMSL = (_b = result.PressureMSL) !== null && _b !== void 0 ? _b : element.values.PressureMSL;
-            result.Temperature2m = (_c = result.Temperature2m) !== null && _c !== void 0 ? _c : element.values.Temperature2m;
-            result.WindDirection = (_d = result.WindDirection) !== null && _d !== void 0 ? _d : element.values.WindDirection;
-            result.RelativeHumidity = (_e = result.RelativeHumidity) !== null && _e !== void 0 ? _e : element.values.RelativeHumidity;
-            result.WindSpeed10m = (_f = result.WindSpeed10m) !== null && _f !== void 0 ? _f : element.values.WindSpeed10m;
-        }
-        return result;
-    }
-    ResolveDailyCondition(hourlyData, date) {
-        const target = date.set({ hour: 6 });
-        const upto = target.plus({ days: 1 });
-        const relevantHours = hourlyData.filter((x) => {
-            const hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
-            if (hour >= target && hour < upto)
-                return true;
-            return false;
-        });
-        const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
-        let resultSymbol;
-        if (!!normalizedSymbols.find(x => x > 10 && x != 45))
-            resultSymbol = Math.max(...normalizedSymbols);
-        else
-            resultSymbol = mode(normalizedSymbols);
-        return this.ResolveCondition(resultSymbol);
-    }
-    ResolveCondition(symbol) {
-        if (symbol == null)
-            return {
-                main: _("NOT FOUND"),
-                description: _("NOT FOUND"),
-                customIcon: "alien-symbolic",
-                icons: ["weather-severe-alert"]
-            };
-        const isNight = (symbol > 100);
-        if (isNight)
-            symbol = symbol - 100;
-        switch (symbol) {
-            case 1:
-                return {
-                    main: _("Clear"),
-                    description: _("Clear"),
-                    customIcon: isNight ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icons: isNight ? ["weather-clear-night"] : ["weather-clear"]
-                };
-            case 2:
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: isNight ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: isNight ? ["weather-few-clouds-night", "weather-clouds-night"] : ["weather-few-clouds", "weather-clouds"]
-                };
-            case 3:
-                return {
-                    main: _("Cloudy"),
-                    description: _("Cloudy"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", "weather-clouds", "weather-few-clouds"]
-                };
-            case 38:
-                return {
-                    main: _("Snow"),
-                    description: _("Blowing snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow"]
-                };
-            case 45:
-                return {
-                    main: _("Foggy"),
-                    description: _("Foggy"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog"]
-                };
-            case 60:
-                return {
-                    main: _("Rain"),
-                    description: _("Rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
-                };
-            case 63:
-                return {
-                    main: _("Moderate rain"),
-                    description: _("Moderate rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
-                };
-            case 68:
-                return {
-                    main: _("Rain and snow"),
-                    description: _("Rain and snow"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-rain"]
-                };
-            case 69:
-                return {
-                    main: _("Rain and snow"),
-                    description: _("Heavy rain and snow"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-rain"]
-                };
-            case 70:
-                return {
-                    main: _("Slight snow"),
-                    description: _("Slight snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered"]
-                };
-            case 73:
-                return {
-                    main: _("Moderate snow"),
-                    description: _("Moderate snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-snow-scattered"]
-                };
-            case 80:
-                return {
-                    main: _("Rain"),
-                    description: _("Rain showers"),
-                    customIcon: "showers-symbolic",
-                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
-                };
-            case 81:
-                return {
-                    main: _("Rain showers"),
-                    description: _("Moderate rain showers"),
-                    customIcon: isNight ? "night-alt-showers-symbolic" : "day-showers-symbolic",
-                    icons: isNight ? ["weather-showers-night", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers"] : ["weather-showers-day", "weather-showers-scattered-day", "weather-showers"]
-                };
-            case 83:
-                return {
-                    main: _("Rain and snow"),
-                    description: _("Mixed rain and snow"),
-                    customIcon: isNight ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-snow-day", "weather-snow"]
-                };
-            case 84:
-                return {
-                    main: _("Rain and snow"),
-                    description: _("Heavy mixed rain and snow"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-freezing-rain", "weather-snow-day", "weather-snow"]
-                };
-            case 85:
-                return {
-                    main: _("Snow"),
-                    description: _("Snow showers"),
-                    customIcon: isNight ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    icons: isNight ? ["weather-snow-night", "weather-snow"] : ["weather-snow-day", "weather-snow"]
-                };
-            case 86:
-                return {
-                    main: _("Heavy snow"),
-                    description: _("Heavy snow showers"),
-                    customIcon: "day-snow-symbolic",
-                    icons: ["weather-snow-day", "weather-snow"]
-                };
-            case 95:
-                return {
-                    main: _("Thunderstorm"),
-                    description: _("Thunderstorm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm"]
-                };
-            default: {
-                return {
-                    main: _("NOT FOUND"),
-                    description: _("NOT FOUND"),
-                    customIcon: "alien-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            }
-        }
-    }
-    DanishPrecipToType(type) {
-        switch (type) {
-            case "sne":
-                return "snow";
-            case "regn":
-                return "rain";
-            case "slud":
-                return "ice pellets";
-            default:
-                return "none";
-        }
-    }
-    GetLocationBoundingBox(loc) {
-        this.observationParams.west = loc.lon + 0.075;
-        this.observationParams.east = loc.lon - 0.075;
-        this.observationParams.north = loc.lat + 0.045;
-        this.observationParams.south = loc.lat - 0.04;
-    }
-    OrderObservations(observations, loc) {
-        const result = [];
-        for (const key in observations) {
-            const element = observations[key];
-            result.push(Object.assign(Object.assign({}, element), { dist: GetDistance(loc.lat, loc.lon, element.latitude, element.longitude) }));
-        }
-        return this.SortObservationSites(result);
-    }
-    SortObservationSites(observations) {
-        observations = observations.sort((a, b) => {
-            if (a.dist < b.dist)
-                return -1;
-            if (a.dist == b.dist)
-                return 0;
-            return 1;
-        });
-        return observations;
-    }
-    DateStringToDate(str) {
-        if (str.length == 14) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), parseInt(str.substring(8, 10)), parseInt(str.substring(10, 12)), parseInt(str.substring(12, 14))));
-        }
-        else if (str.length == 8) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), 0, 0, 0, 0));
-        }
-        else {
-            if (str.length == 3) {
-                str = ("0000" + str).substr(-4, 4);
-            }
-            const today = new Date();
-            today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
-            return today;
-        }
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/main.ts
-
-
-
-
-
-
-
-
-
 
 
 
@@ -15594,47 +15621,8 @@ The contents of the file saved from the applet help page goes here
     EnsureProvider(force = false) {
         var _a;
         const currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
-        switch (this.config._dataService) {
-            case "DarkSky":
-                if (currentName != "DarkSky" || force)
-                    this.provider = new DarkSky(this);
-                break;
-            case "OpenWeatherMap":
-                if (currentName != "OpenWeatherMap" || force)
-                    this.provider = new OpenWeatherMap(this);
-                break;
-            case "MetNorway":
-                if (currentName != "MetNorway" || force)
-                    this.provider = new MetNorway(this);
-                break;
-            case "Weatherbit":
-                if (currentName != "Weatherbit" || force)
-                    this.provider = new Weatherbit(this);
-                break;
-            case "Tomorrow.io":
-                if (currentName != "Tomorrow.io" || force)
-                    this.provider = new ClimacellV4(this);
-                break;
-            case "Met Office UK":
-                if (currentName != "Met Office UK" || force)
-                    this.provider = new MetUk(this);
-                break;
-            case "US Weather":
-                if (currentName != "US Weather" || force)
-                    this.provider = new USWeather(this);
-                break;
-            case "Visual Crossing":
-                if (currentName != "Visual Crossing" || force)
-                    this.provider = new VisualCrossing(this);
-                break;
-            case "DanishMI":
-                if (currentName != "DanishMI" || force)
-                    this.provider = new DanishMI(this);
-                break;
-            default:
-                logger_Logger.Error(`Provider string "${currentName}" from settings doesn't exist, please contact the developer!`);
-                this.DisplayHardError("Critical Error", "Please see logs and contact developer");
-        }
+        if (currentName != this.config._dataService || force)
+            this.provider = ServiceClassMapping[this.config._dataService](this);
     }
     MergeWeatherData(weatherInfo, locationData) {
         if (weatherInfo.location.city == null)

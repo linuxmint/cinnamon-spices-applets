@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config } from "./config";
+import { Config, ServiceClassMapping } from "./config";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./providers/met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
@@ -506,38 +506,8 @@ The contents of the file saved from the applet help page goes here
 	 */
 	private EnsureProvider(force: boolean = false): void {
 		const currentName = this.provider?.name;
-		switch (this.config._dataService) {
-			case "DarkSky":           // No City Info
-				if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);
-				break;
-			case "OpenWeatherMap":   // No City Info
-				if (currentName != "OpenWeatherMap" || force) this.provider = new OpenWeatherMap(this);
-				break;
-			case "MetNorway":         // No TZ or city info
-				if (currentName != "MetNorway" || force) this.provider = new MetNorway(this);
-				break;
-			case "Weatherbit":
-				if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
-				break;
-			case "Tomorrow.io":
-				if (currentName != "Tomorrow.io" || force) this.provider = new ClimacellV4(this);
-				break;
-			case "Met Office UK":
-				if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);
-				break;
-			case "US Weather":
-				if (currentName != "US Weather" || force) this.provider = new USWeather(this);
-				break;
-			case "Visual Crossing":
-				if (currentName != "Visual Crossing" || force) this.provider = new VisualCrossing(this);
-				break;
-			case "DanishMI":
-				if (currentName != "DanishMI" || force) this.provider = new DanishMI(this);
-				break;
-			default:
-				Logger.Error(`Provider string "${currentName}" from settings doesn't exist, please contact the developer!`);
-				this.DisplayHardError("Critical Error", "Please see logs and contact developer");
-		}
+		if (currentName != this.config._dataService || force)
+			this.provider = ServiceClassMapping[this.config._dataService](this);
 	}
 
 	/** Fills in missing weather info from location Data

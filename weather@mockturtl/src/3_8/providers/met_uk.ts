@@ -13,8 +13,9 @@ import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
+import { BaseProvider } from "./BaseProvider";
 
-export class MetUk implements WeatherProvider {
+export class MetUk extends BaseProvider {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -36,7 +37,6 @@ export class MetUk implements WeatherProvider {
 	private sitesUrl = "sitelist";
 	private key = "key=05de1ee8-de70-46aa-9b41-299d4cc60219";
 
-	private app: WeatherApplet;
 	private forecastSite: WeatherSite | null = null;
 	private observationSites: WeatherSite[] = [];
 
@@ -46,7 +46,7 @@ export class MetUk implements WeatherProvider {
 	private readonly MAX_STATION_DIST = 50000;
 
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------

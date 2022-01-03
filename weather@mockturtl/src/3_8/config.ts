@@ -1,6 +1,6 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./location_services/ipApi";
-import { LocationData } from "./types";
+import { LocationData, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
 import { LogLevel, UUID } from "./consts";
@@ -8,6 +8,16 @@ import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
+import { MetUk } from "./providers/met_uk";
+import { BaseProvider } from "./providers/BaseProvider";
+import { DarkSky } from "./providers/darkSky";
+import { OpenWeatherMap } from "./providers/openWeatherMap";
+import { MetNorway } from "./providers/met_norway";
+import { Weatherbit } from "./providers/weatherbit";
+import { ClimacellV4 } from "./providers/climacellV4";
+import { USWeather } from "./providers/us_weather";
+import { VisualCrossing } from "./providers/visualcrossing";
+import { DanishMI } from "./providers/danishMI";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -38,6 +48,18 @@ export type Services =
 	"US Weather" |
 	"Visual Crossing" |
 	"DanishMI";
+
+export const ServiceClassMapping: ServiceClassMappingType = {
+	"DarkSky": (app) => new DarkSky(app),
+	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
+	"MetNorway": (app) => new MetNorway(app),
+	"Weatherbit": (app) => new Weatherbit(app),
+	"Tomorrow.io": (app) => new ClimacellV4(app),
+	"Met Office UK": (app) => new MetUk(app),
+	"US Weather": (app) => new USWeather(app),
+	"Visual Crossing": (app) => new VisualCrossing(app),
+	"DanishMI": (app) => new DanishMI(app)
+}
 
 /**
  * Keys matching the ones in settings-schema.json
@@ -517,4 +539,8 @@ interface WindSpeedLocalePrefs {
 }
 interface DistanceUnitLocalePrefs {
 	[key: string]: DistanceUnits;
+}
+
+type ServiceClassMappingType = {
+	[key in Services]: (app: WeatherApplet) => BaseProvider;
 }

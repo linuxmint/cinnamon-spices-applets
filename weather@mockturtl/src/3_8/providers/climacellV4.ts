@@ -4,16 +4,15 @@ import { HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, _ } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
-export class ClimacellV4 implements WeatherProvider {
+export class ClimacellV4 extends BaseProvider {
 	needsApiKey: boolean = true;
 	prettyName: string = _("Tomorrow.io");
 	name: Services = "Tomorrow.io";
 	maxForecastSupport: number = 15;
 	maxHourlyForecastSupport: number = 108;
 	website: string = "https://www.tomorrow.io/";
-
-	private app: WeatherApplet;
 
 	private url = "https://data.climacell.co/v4/timelines";
 
@@ -26,7 +25,7 @@ export class ClimacellV4 implements WeatherProvider {
 	}
 
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {

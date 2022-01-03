@@ -12,8 +12,9 @@ import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
 import { _, IsLangSupported } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
-export class Weatherbit implements WeatherProvider {
+export class Weatherbit extends BaseProvider {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -35,11 +36,10 @@ export class Weatherbit implements WeatherProvider {
 	private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
 	private hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
 
-	private app: WeatherApplet;
 	private hourlyAccess = true;
 
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------

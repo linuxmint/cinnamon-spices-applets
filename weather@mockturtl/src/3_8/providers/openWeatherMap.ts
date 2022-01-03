@@ -12,11 +12,12 @@ import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
 import { _, IsLangSupported } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};
 
-export class OpenWeatherMap implements WeatherProvider {
+export class OpenWeatherMap extends BaseProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
@@ -35,9 +36,8 @@ export class OpenWeatherMap implements WeatherProvider {
 	private base_url = "https://api.openweathermap.org/data/2.5/onecall" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
 	private id_irl  = "https://api.openweathermap.org/data/2.5/weather";
 
-	private app: WeatherApplet
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------

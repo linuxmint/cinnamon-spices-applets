@@ -13,8 +13,9 @@ import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
+import { BaseProvider } from "./BaseProvider";
 
-export class USWeather implements WeatherProvider {
+export class USWeather extends BaseProvider {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -28,7 +29,6 @@ export class USWeather implements WeatherProvider {
 
 	private sitesUrl = "https://api.weather.gov/points/";
 
-	private app: WeatherApplet;
 	private grid?: GridPayload;
 	/** In metres */
 	private readonly MAX_STATION_DIST = 50000;
@@ -38,7 +38,7 @@ export class USWeather implements WeatherProvider {
 	private currentLocID!: string;
 
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------

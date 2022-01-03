@@ -4,9 +4,10 @@ import { HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
 
-export class VisualCrossing implements WeatherProvider {
+export class VisualCrossing extends BaseProvider {
 	readonly prettyName: string = _("Visual Crossing");
 	readonly name: Services = "Visual Crossing";
 	readonly maxForecastSupport: number = 15;
@@ -25,10 +26,8 @@ export class VisualCrossing implements WeatherProvider {
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
 
-	private app: WeatherApplet;
-
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {

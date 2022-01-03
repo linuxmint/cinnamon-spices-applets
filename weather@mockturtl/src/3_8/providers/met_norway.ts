@@ -4,8 +4,9 @@ import { getTimes } from "suncalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../utils";
 import { DateTime } from "luxon";
+import { BaseProvider } from "./BaseProvider";
 
-export class MetNorway implements WeatherProvider {
+export class MetNorway extends BaseProvider {
 	public readonly prettyName = _("MET Norway");
 	public readonly name = "MetNorway";
 	public readonly maxForecastSupport = 10;
@@ -13,11 +14,10 @@ export class MetNorway implements WeatherProvider {
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
 
-	private app: WeatherApplet
 	private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
 
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {

@@ -4,8 +4,9 @@ import { HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
-export class DanishMI implements WeatherProvider {
+export class DanishMI extends BaseProvider {
 	needsApiKey: boolean = false;
 	prettyName: string = _("DMI Denmark");
 	name: Services = "DanishMI";
@@ -13,7 +14,6 @@ export class DanishMI implements WeatherProvider {
 	maxHourlyForecastSupport: number = 48;
 	website: string = "https://www.dmi.dk/";
 
-	private app: WeatherApplet;
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
 		cmd: "llj", // lat long json
@@ -32,7 +32,7 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
 	async GetWeather(loc: LocationData): Promise<WeatherData | null> {
