@@ -81,7 +81,7 @@ export class LocationStore {
 	 * @param loc preferably obtained from storage
 	 */
 	public SwitchToLocation(loc: LocationData): boolean {
-		let index = this.FindIndex(loc);
+		const index = this.FindIndex(loc);
 		if (index == -1) return false;
 
 		this.currentIndex = index;
@@ -109,7 +109,7 @@ export class LocationStore {
 	}
 
 	private NormalizeTZ(tz: string): string {
-		let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+		const valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
 		if (!valid)
 			Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
 		return valid;
@@ -198,7 +198,7 @@ export class LocationStore {
 		if (currentLoc == null)
 			return false;
 
-		let threshold = this.InStorage(currentLoc) ? 2 : 1;
+		const threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;
 		else
@@ -260,7 +260,7 @@ export class LocationStore {
 			return false;
 		if (newLoc == null)
 			return false;
-		for (let key in newLoc) {
+		for (const key in newLoc) {
 			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
 				return false
 			}

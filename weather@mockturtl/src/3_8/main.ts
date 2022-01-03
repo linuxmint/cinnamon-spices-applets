@@ -201,9 +201,9 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Displays weather info in applet's panel */
 	private DisplayWeather(weather: WeatherData): boolean {
-		let location = GenerateLocationText(weather, this.config);
+		const location = GenerateLocationText(weather, this.config);
 
-		let lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+		const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
 		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
 		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
 		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
@@ -258,7 +258,7 @@ export class WeatherApplet extends TextIconApplet {
 			this.SetCustomIcon(customIcon);
 		}
 		else {
-			let icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
+			const icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
 			this.config.AppletIconType == IconType.SYMBOLIC ?
 				this.set_applet_icon_symbolic_name(icon) :
 				this.set_applet_icon_name(icon);
@@ -297,7 +297,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param method default is GET
 	 */
 	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
-		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, headers, method);
+		const response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
@@ -321,7 +321,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param method default is GET
 	 */
 	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<string | null> {
-		let response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
+		const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
@@ -341,12 +341,12 @@ export class WeatherApplet extends TextIconApplet {
 	// Config Callbacks, do not delete
 
 	private async locationLookup(): Promise<void> {
-		let command = "xdg-open ";
+		const command = "xdg-open ";
 		spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
 	}
 
 	private async submitIssue(): Promise<void> {
-		let command = "xdg-open";
+		const command = "xdg-open";
 		const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
 		const title = "weather@mockturl - ";
 
@@ -469,9 +469,8 @@ The contents of the file saved from the applet help page goes here
 
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
-		let itemLabel = _("Refresh")
-		// () => functions do not need to bind context
-		let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
+		const itemLabel = _("Refresh")
+		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 
@@ -480,7 +479,7 @@ The contents of the file saved from the applet help page goes here
 	 * @param error 
 	 */
 	private HandleHTTPError(error: HttpError): void {
-		let appletError: AppletError = {
+		const appletError: AppletError = {
 			detail: error.message,
 			userError: false,
 			code: error.code,
@@ -506,7 +505,7 @@ The contents of the file saved from the applet help page goes here
 	 * @param force Force provider re initialization
 	 */
 	private EnsureProvider(force: boolean = false): void {
-		let currentName = this.provider?.name;
+		const currentName = this.provider?.name;
 		switch (this.config._dataService) {
 			case "DarkSky":           // No City Info
 				if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);
@@ -633,7 +632,7 @@ The contents of the file saved from the applet help page goes here
 			return;
 		}
 
-		let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
+		const nextRefresh = this.loop.GetSecondsUntilNextRefresh();
 		Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
 	}
 

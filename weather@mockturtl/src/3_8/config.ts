@@ -187,8 +187,8 @@ export class Config {
 	private BindSettings() {
 		let k: keyof typeof Keys;
 		for (k in Keys) {
-			let key = Keys[k];
-			let keyProp = "_" + key;
+			const key = Keys[k];
+			const keyProp = "_" + key;
 			this.settings.bindProperty(BindingDirection.IN,
 				key, keyProp, this.OnSettingChanged, null);
 		}
@@ -278,7 +278,7 @@ export class Config {
 
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToNextLocation(): LocationData | null {
-		let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
+		const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
 		if (nextLoc == null) return null;
 		this.InjectLocationToConfig(nextLoc, true);
 		return nextLoc;
@@ -286,14 +286,14 @@ export class Config {
 
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToPreviousLocation(): LocationData | null {
-		let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
+		const previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
 		if (previousLoc == null) return null;
 		this.InjectLocationToConfig(previousLoc, true);
 		return previousLoc;
 	}
 
 	public NoApiKey(): boolean {
-		let key = this._apiKey?.replace(" ", "");
+		const key = this._apiKey?.replace(" ", "");
 		return (!key || key == "");
 	};
 
@@ -308,7 +308,7 @@ export class Config {
 
 		// Automatic location
 		if (!this._manualLocation) {
-			let location = await this.autoLocProvider.GetLocation();
+			const location = await this.autoLocProvider.GetLocation();
 			// User facing errors handled by provider
 			if (!location) return null;
 
@@ -341,8 +341,8 @@ export class Config {
 		else if (IsCoordinate(loc)) {
 			// Get Location
 			loc = loc.replace(" ", "");
-			let latLong = loc.split(",");
-			let location: LocationData = {
+			const latLong = loc.split(",");
+			const location: LocationData = {
 				lat: parseFloat(latLong[0]),
 				lon: parseFloat(latLong[1]),
 				timeZone: DateTime.now().zoneName,
@@ -353,7 +353,7 @@ export class Config {
 		}
 
 		Logger.Debug("Location is text, geo locating...")
-		let locationData = await this.geoLocationService.GetLocation(loc);
+		const locationData = await this.geoLocationService.GetLocation(loc);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (!!locationData?.entryText) {
@@ -378,7 +378,7 @@ export class Config {
 
 	private InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
 		Logger.Debug("Location setting is now: " + loc.entryText);
-		let text = (loc.entryText + ""); // Only values can be injected into settings and not references, so we add empty string to it.
+		const text = (loc.entryText + ""); // Only values can be injected into settings and not references, so we add empty string to it.
 		this.SetLocation(text);
 		this.currentLocation = loc;
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
@@ -460,7 +460,7 @@ export class Config {
 		if (locale == null)
 			return null;
 
-		let split = locale.split("-");
+		const split = locale.split("-");
 		// There is no country code
 		if (split.length < 2) return null;
 
@@ -470,23 +470,23 @@ export class Config {
 	private GetLanguage(locale: string | null) {
 		if (locale == null)
 			return null;
-		let split = locale.split("-");
+		const split = locale.split("-");
 		if (split.length < 1) return null;
 
 		return split[0];
 	}
 
 	private GetCurrentFontSize() {
-		let nameString = this.InterfaceSettings.get_string("font-name");
-		let elements = nameString.split(" ");
-		let size = parseFloat(elements[elements.length - 1]);
+		const nameString = this.InterfaceSettings.get_string("font-name");
+		const elements = nameString.split(" ");
+		const size = parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
 	}
 
 	public async GetAppletConfigJson(): Promise<Record<string, any>> {
 		const home = get_home_dir() ?? "~";
-		let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
 		const configFile = File.new_for_path(configFilePath);
 
 		// Check if file exists

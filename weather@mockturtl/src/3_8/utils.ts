@@ -26,7 +26,7 @@ interface KeysValuePairs {
 }
 
 export function format(str: string, args: KeysValuePairs) {
-	for (let key in args) {
+	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
 	return str;
@@ -67,7 +67,7 @@ export function CapitalizeEveryWord(description: string): string {
 	if ((description == undefined || description == null)) {
 		return "";
 	}
-	let split = description.split(" ");
+	const split = description.split(" ");
 	let result = "";
 	for (let index = 0; index < split.length; index++) {
 		const element = split[index];
@@ -88,7 +88,7 @@ function NormalizeTimezone(tz?: string | undefined) {
 }
 
 export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string | undefined): string {
-	let params: Intl.DateTimeFormatOptions = {
+	const params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
 	}
 
@@ -124,7 +124,7 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 }
 
 export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
-	let params: Intl.DateTimeFormatOptions = {
+	const params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
 	}
@@ -141,9 +141,9 @@ export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Fo
 }
 
 export function AwareDateString(date: DateTime, locale: string | null, hours24Format: boolean, tz: string): string {
-	let now = DateTime.utc().setZone(tz);
+	const now = DateTime.utc().setZone(tz);
 	date = date.setZone(tz)
-	let params: Intl.DateTimeFormatOptions = {
+	const params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		minute: "2-digit",
 		hour12: !hours24Format,
@@ -283,7 +283,7 @@ export function TempToUserConfig(kelvin: number | null, config: Config, withUnit
 		temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
 
 	if (config._showBothTempUnits) {
-		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		const secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
 		let secondTemp: number | string = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
 		secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
 		if (withUnit)
@@ -305,11 +305,11 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 }
 
 export function TempRangeToUserConfig(min: number | null, max: number | null, config: Config): string {
-	let t_low = TempToUserConfig(min, config, false);
-	let t_high = TempToUserConfig(max, config, false);
+	const t_low = TempToUserConfig(min, config, false);
+	const t_high = TempToUserConfig(max, config, false);
 
-	let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-	let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+	const first_temperature = config._temperatureHighFirst ? t_high : t_low;
+	const second_temperature = config._temperatureHighFirst ? t_low : t_high;
 
 	let result = "";
 	if (first_temperature != null)
@@ -321,7 +321,7 @@ export function TempRangeToUserConfig(min: number | null, max: number | null, co
 		result += `${second_temperature} `;
 	result += `${UnitToUnicode(config.TemperatureUnit)}`;
 	if (config._showBothTempUnits) {
-		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		const secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
 		result += ` (${UnitToUnicode(secondUnit)})`;
 	}
 	return result;
@@ -421,7 +421,7 @@ export function CompassToDeg(compass: string): number | null {
 }
 
 export function CompassDirection(deg: number): ArrowIcons {
-	let directions: ArrowIcons[] = [
+	const directions: ArrowIcons[] = [
 		'south-arrow-weather-symbolic',
 		'south-west-arrow-weather-symbolic',
 		'west-arrow-weather-symbolic',
@@ -437,7 +437,7 @@ export function CompassDirection(deg: number): ArrowIcons {
 export function CompassDirectionText(deg: number): string | null {
 	if (!deg)
 		return null;
-	let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
@@ -452,9 +452,9 @@ export function CompassDirectionText(deg: number): string | null {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
-	let sunrise = MilitaryTime(sunTimes.sunrise);
-	let sunset = MilitaryTime(sunTimes.sunset);
+	const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	const sunrise = MilitaryTime(sunTimes.sunrise);
+	const sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
 	return true;
 }
@@ -521,7 +521,7 @@ export function ShadeHexColor(color: string, percent: number): string {
  */
 export function ConstructJsLocale(locale: string): string | null {
 	let jsLocale: string | null = locale.split(".")[0];
-	let tmp: string[] = jsLocale.split("_");
+	const tmp: string[] = jsLocale.split("_");
 	jsLocale = "";
 	for (let i = 0; i < tmp.length; i++) {
 		if (i != 0) jsLocale += "-";
@@ -589,7 +589,7 @@ interface CompareVersionOptions {
  *   - NaN if either version string is in the wrong format
  */
 export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions) {
-	let zeroExtend = options && options.zeroExtend,
+	const zeroExtend = options && options.zeroExtend,
 		v1parts = v1.split('.'),
 		v2parts = v2.split('.');
 
@@ -638,7 +638,7 @@ export function setTimeout(func: Function, ms: number) {
 		args = args.slice.call(arguments, 2);
 	}
 
-	let id = timeout_add(ms, () => {
+	const id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return false; // Stop repeating
 	});
@@ -664,7 +664,7 @@ export function setInterval(func: Function, ms: number) {
 		args = args.slice.call(arguments, 2);
 	}
 
-	let id = timeout_add(ms, () => {
+	const id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return true; // Repeat
 	});

@@ -48,11 +48,11 @@ export class UIBar {
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
 		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
 		this.providerCreditButton.url = provider.website;
-		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
 		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
 		if (weather.location.distanceFrom != null) {
-			let stringFormat = {
+			const stringFormat = {
 				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
 				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
 			}

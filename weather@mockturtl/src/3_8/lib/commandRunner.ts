@@ -8,7 +8,7 @@ const { spawnCommandLineAsyncIO } = imports.misc.util;
  * @param command 
  */
 export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
-	let response = await SpawnProcess(command);
+	const response = await SpawnProcess(command);
 	if (!response.Success) return response as TypedFailResponse;
 
 	try {
@@ -39,7 +39,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 		cmd += "'" + element + "' ";
 	}
 
-	let response = await new Promise((resolve, reject) => {
+	const response = await new Promise((resolve, reject) => {
 		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
 			let result: GenericResponse = {
 				Success: exitCode == 0,

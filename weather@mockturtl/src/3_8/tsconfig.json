@@ -11,6 +11,7 @@
         "exactOptionalPropertyTypes": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
+		"noImplicitAny": true,
         "experimentalDecorators": true,
 	},
 	"include": [

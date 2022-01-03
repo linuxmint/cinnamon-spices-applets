@@ -27,13 +27,13 @@ export class HttpLib {
 	 * Handles obtaining JSON over http. 
 	 */
 	public async LoadJsonAsync<T>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T>> {
-		let response = await this.LoadAsync(url, params, headers, method);
+		const response = await this.LoadAsync(url, params, headers, method);
 
 		if (!response.Success)
 			return response;
 
 		try {
-			let payload = JSON.parse(response.Data);
+			const payload = JSON.parse(response.Data);
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
@@ -55,7 +55,7 @@ export class HttpLib {
 	 * Handles obtaining data over http. 
 	 */
 	public async LoadAsync(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<GenericResponse> {
-		let message = await this.Send(url, params, headers, method);
+		const message = await this.Send(url, params, headers, method);
 
 		let error: HttpError | undefined = undefined;
 
@@ -125,7 +125,7 @@ export class HttpLib {
 	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message | null> {
 		// Add params to url
 		if (params != null) {
-			let items = Object.keys(params);
+			const items = Object.keys(params);
 			for (let index = 0; index < items.length; index++) {
 				const item = items[index];
 				url += (index == 0) ? "?" : "&";
@@ -133,10 +133,10 @@ export class HttpLib {
 			}
 		}
 
-		let query = encodeURI(url);
+		const query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
-		let data: imports.gi.Soup.Message | null = await new Promise((resolve, reject) => {
-			let message = Message.new(method, query);
+		const data: imports.gi.Soup.Message | null = await new Promise((resolve, reject) => {
+			const message = Message.new(method, query);
 			if (message == null) {
 				resolve(null);
 			}

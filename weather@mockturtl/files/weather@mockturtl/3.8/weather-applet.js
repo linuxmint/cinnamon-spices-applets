@@ -8516,7 +8516,7 @@ function _(str, args) {
     return result;
 }
 function format(str, args) {
-    for (let key in args) {
+    for (const key in args) {
         str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
     }
     return str;
@@ -8548,7 +8548,7 @@ function CapitalizeEveryWord(description) {
     if ((description == undefined || description == null)) {
         return "";
     }
-    let split = description.split(" ");
+    const split = description.split(" ");
     let result = "";
     for (let index = 0; index < split.length; index++) {
         const element = split[index];
@@ -8564,7 +8564,7 @@ function NormalizeTimezone(tz) {
     return tz;
 }
 function GetDayName(date, locale, showDate = false, tz) {
-    let params = {
+    const params = {
         weekday: "long",
     };
     params.timeZone = NormalizeTimezone(tz);
@@ -8591,7 +8591,7 @@ function GetDayName(date, locale, showDate = false, tz) {
     return dateString;
 }
 function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
-    let params = {
+    const params = {
         hour: "numeric",
         hour12: !hours24Format,
     };
@@ -8605,9 +8605,9 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
     return date.toLocaleString(params);
 }
 function AwareDateString(date, locale, hours24Format, tz) {
-    let now = DateTime.utc().setZone(tz);
+    const now = DateTime.utc().setZone(tz);
     date = date.setZone(tz);
-    let params = {
+    const params = {
         hour: "numeric",
         minute: "2-digit",
         hour12: !hours24Format,
@@ -8712,7 +8712,7 @@ function TempToUserConfig(kelvin, config, withUnit = true) {
     if (withUnit)
         temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
     if (config._showBothTempUnits) {
-        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        const secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
         let secondTemp = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
         secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
         if (withUnit)
@@ -8732,10 +8732,10 @@ function RussianTransform(temp, russianStyle) {
     return temp.toString();
 }
 function TempRangeToUserConfig(min, max, config) {
-    let t_low = TempToUserConfig(min, config, false);
-    let t_high = TempToUserConfig(max, config, false);
-    let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-    let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+    const t_low = TempToUserConfig(min, config, false);
+    const t_high = TempToUserConfig(max, config, false);
+    const first_temperature = config._temperatureHighFirst ? t_high : t_low;
+    const second_temperature = config._temperatureHighFirst ? t_low : t_high;
     let result = "";
     if (first_temperature != null)
         result = first_temperature;
@@ -8744,7 +8744,7 @@ function TempRangeToUserConfig(min, max, config) {
         result += `${second_temperature} `;
     result += `${UnitToUnicode(config.TemperatureUnit)}`;
     if (config._showBothTempUnits) {
-        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        const secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
         result += ` (${UnitToUnicode(secondUnit)})`;
     }
     return result;
@@ -8834,7 +8834,7 @@ function CompassToDeg(compass) {
     }
 }
 function CompassDirection(deg) {
-    let directions = [
+    const directions = [
         'south-arrow-weather-symbolic',
         'south-west-arrow-weather-symbolic',
         'west-arrow-weather-symbolic',
@@ -8849,15 +8849,15 @@ function CompassDirection(deg) {
 function CompassDirectionText(deg) {
     if (!deg)
         return null;
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
+    const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 }
 function IsNight(sunTimes, date) {
     if (!sunTimes)
         return false;
-    let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
-    let sunrise = MilitaryTime(sunTimes.sunrise);
-    let sunset = MilitaryTime(sunTimes.sunset);
+    const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+    const sunrise = MilitaryTime(sunTimes.sunrise);
+    const sunset = MilitaryTime(sunTimes.sunset);
     if (time >= sunrise && time < sunset)
         return false;
     return true;
@@ -8905,7 +8905,7 @@ function ShadeHexColor(color, percent) {
 }
 function ConstructJsLocale(locale) {
     let jsLocale = locale.split(".")[0];
-    let tmp = jsLocale.split("_");
+    const tmp = jsLocale.split("_");
     jsLocale = "";
     for (let i = 0; i < tmp.length; i++) {
         if (i != 0)
@@ -8941,7 +8941,7 @@ const isFinalized = function (obj) {
     return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 };
 function CompareVersion(v1, v2, options) {
-    let zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
+    const zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
     function isValidPart(x) {
         return (/^\d+$/).test(x);
     }
@@ -8978,7 +8978,7 @@ function utils_setTimeout(func, ms) {
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = timeout_add(ms, () => {
+    const id = timeout_add(ms, () => {
         func.apply(null, args);
         return false;
     });
@@ -9001,7 +9001,7 @@ function utils_setInterval(func, ms) {
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = timeout_add(ms, () => {
+    const id = timeout_add(ms, () => {
         func.apply(null, args);
         return true;
     });
@@ -9016,7 +9016,7 @@ const ByteArray = imports.byteArray;
 async function GetFileInfo(file) {
     return new Promise((resolve, reject) => {
         file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
-            let result = file.query_info_finish(res);
+            const result = file.query_info_finish(res);
             resolve(result);
             return result;
         });
@@ -9055,7 +9055,7 @@ async function LoadContents(file) {
     });
 }
 async function DeleteFile(file) {
-    let result = await new Promise((resolve, reject) => {
+    const result = await new Promise((resolve, reject) => {
         file.delete_async(null, null, (obj, res) => {
             let result = null;
             try {
@@ -9085,19 +9085,19 @@ async function OverwriteAndGetIOStream(file) {
         parent.make_directory_with_parents(null);
     return new Promise((resolve, reject) => {
         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
-            let ioStream = file.replace_readwrite_finish(result);
+            const ioStream = file.replace_readwrite_finish(result);
             resolve(ioStream);
             return ioStream;
         });
     });
 }
 async function WriteAsync(outputStream, buffer) {
-    let text = ByteArray.fromString(buffer);
+    const text = ByteArray.fromString(buffer);
     if (outputStream.is_closed())
         return false;
     return new Promise((resolve, reject) => {
         outputStream.write_bytes_async(text, null, null, (obj, res) => {
-            let ioStream = outputStream.write_bytes_finish(res);
+            const ioStream = outputStream.write_bytes_finish(res);
             resolve(true);
             return true;
         });
@@ -9106,7 +9106,7 @@ async function WriteAsync(outputStream, buffer) {
 async function CloseStream(stream) {
     return new Promise((resolve, reject) => {
         stream.close_async(null, null, (obj, res) => {
-            let result = stream.close_finish(res);
+            const result = stream.close_finish(res);
             resolve(result);
             return result;
         });
@@ -9141,7 +9141,7 @@ class Log {
     Info(message) {
         if (!this.CanLog("info"))
             return;
-        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
         global.log(msg);
     }
     Error(error, e) {
@@ -9212,7 +9212,7 @@ class IpApi {
         this.app = _app;
     }
     async GetLocation() {
-        let json = await this.app.LoadJsonAsync(this.query);
+        const json = await this.app.LoadJsonAsync(this.query);
         if (!json) {
             return null;
         }
@@ -9225,7 +9225,7 @@ class IpApi {
     ;
     ParseInformation(json) {
         try {
-            let result = {
+            const result = {
                 lat: json.lat,
                 lon: json.lon,
                 city: json.city,
@@ -9297,7 +9297,7 @@ class NotificationService {
         return this.instance;
     }
     Send(title, message, transient) {
-        let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
+        const notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.MessageSource.notify(notification);
@@ -9354,7 +9354,7 @@ class LocationStore {
         this.InvokeStorageChanged();
     }
     SwitchToLocation(loc) {
-        let index = this.FindIndex(loc);
+        const index = this.FindIndex(loc);
         if (index == -1)
             return false;
         this.currentIndex = index;
@@ -9376,7 +9376,7 @@ class LocationStore {
         return null;
     }
     NormalizeTZ(tz) {
-        let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+        const valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
         if (!valid)
             logger_Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`);
         return valid;
@@ -9446,7 +9446,7 @@ class LocationStore {
     ShouldShowLocationSelectors(currentLoc) {
         if (currentLoc == null)
             return false;
-        let threshold = this.InStorage(currentLoc) ? 2 : 1;
+        const threshold = this.InStorage(currentLoc) ? 2 : 1;
         if (this.locations.length >= threshold)
             return true;
         else
@@ -9498,7 +9498,7 @@ class LocationStore {
             return false;
         if (newLoc == null)
             return false;
-        for (let key in newLoc) {
+        for (const key in newLoc) {
             if (oldLoc[key] != newLoc[key]) {
                 return false;
             }
@@ -9522,12 +9522,12 @@ class GeoLocation {
         var _a;
         try {
             searchText = searchText.trim();
-            let cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
+            const cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
             if (cached != null) {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            let locationData = await this.App.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
+            const locationData = await this.App.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData == null)
                 return null;
             if (locationData.length == 0) {
@@ -9539,7 +9539,7 @@ class GeoLocation {
                 return null;
             }
             logger_Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-            let result = {
+            const result = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
@@ -9563,8 +9563,8 @@ class GeoLocation {
     BuildEntryText(locationData) {
         if (locationData.address == null)
             return locationData.display_name;
-        let entryText = [];
-        for (let key in locationData.address) {
+        const entryText = [];
+        for (const key in locationData.address) {
             if (key == "state_district")
                 continue;
             if (key == "county")
@@ -9692,8 +9692,8 @@ class Config {
     BindSettings() {
         let k;
         for (k in Keys) {
-            let key = Keys[k];
-            let keyProp = "_" + key;
+            const key = Keys[k];
+            const keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
@@ -9746,14 +9746,14 @@ class Config {
             config_IconType.FULLCOLOR;
     }
     SwitchToNextLocation() {
-        let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
+        const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
         if (nextLoc == null)
             return null;
         this.InjectLocationToConfig(nextLoc, true);
         return nextLoc;
     }
     SwitchToPreviousLocation() {
-        let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
+        const previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
         if (previousLoc == null)
             return null;
         this.InjectLocationToConfig(previousLoc, true);
@@ -9761,14 +9761,14 @@ class Config {
     }
     NoApiKey() {
         var _a;
-        let key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
+        const key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
         return (!key || key == "");
     }
     ;
     async EnsureLocation() {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            let location = await this.autoLocProvider.GetLocation();
+            const location = await this.autoLocProvider.GetLocation();
             if (!location)
                 return null;
             this.InjectLocationToConfig(location);
@@ -9793,8 +9793,8 @@ class Config {
         }
         else if (IsCoordinate(loc)) {
             loc = loc.replace(" ", "");
-            let latLong = loc.split(",");
-            let location = {
+            const latLong = loc.split(",");
+            const location = {
                 lat: parseFloat(latLong[0]),
                 lon: parseFloat(latLong[1]),
                 timeZone: DateTime.now().zoneName,
@@ -9804,7 +9804,7 @@ class Config {
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        let locationData = await this.geoLocationService.GetLocation(loc);
+        const locationData = await this.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
@@ -9824,7 +9824,7 @@ class Config {
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);
-        let text = (loc.entryText + "");
+        const text = (loc.entryText + "");
         this.SetLocation(text);
         this.currentLocation = loc;
         if (switchToManual == true)
@@ -9867,7 +9867,7 @@ class Config {
     GetCountryCode(locale) {
         if (locale == null)
             return null;
-        let split = locale.split("-");
+        const split = locale.split("-");
         if (split.length < 2)
             return null;
         return split[1];
@@ -9875,22 +9875,22 @@ class Config {
     GetLanguage(locale) {
         if (locale == null)
             return null;
-        let split = locale.split("-");
+        const split = locale.split("-");
         if (split.length < 1)
             return null;
         return split[0];
     }
     GetCurrentFontSize() {
-        let nameString = this.InterfaceSettings.get_string("font-name");
-        let elements = nameString.split(" ");
-        let size = parseFloat(elements[elements.length - 1]);
+        const nameString = this.InterfaceSettings.get_string("font-name");
+        const elements = nameString.split(" ");
+        const size = parseFloat(elements[elements.length - 1]);
         logger_Logger.Debug("Font size changed to " + size.toString());
         return size;
     }
     async GetAppletConfigJson() {
         var _a, _b;
         const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
         const configFile = config_File.new_for_path(configFilePath);
         if (!await FileExists(configFile)) {
             throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
@@ -9934,7 +9934,7 @@ class WeatherLoop {
                     logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    let state = await this.app.RefreshWeather(false);
+                    const state = await this.app.RefreshWeather(false);
                     if (state == "error")
                         logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
                     if (state == "success" || "locked")
@@ -9961,7 +9961,7 @@ class WeatherLoop {
     IsDataTooOld() {
         if (!this.lastUpdated)
             return true;
-        let oldDate = this.lastUpdated;
+        const oldDate = this.lastUpdated;
         oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
         return (this.lastUpdated > oldDate);
     }
@@ -10047,15 +10047,15 @@ class MetUk {
         this.MAX_STATION_DIST = 50000;
         this.ParseForecast = (json, loc) => {
             var _a, _b;
-            let forecasts = [];
+            const forecasts = [];
             try {
                 for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    let element = json.SiteRep.DV.Location.Period[i];
+                    const element = json.SiteRep.DV.Location.Period[i];
                     if (!Array.isArray(element.Rep))
                         continue;
-                    let day = element.Rep[0];
-                    let night = element.Rep[1];
-                    let forecast = {
+                    const day = element.Rep[0];
+                    const night = element.Rep[1];
+                    const forecast = {
                         date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
                         temp_min: CelsiusToKelvin(parseFloat((_a = night.Nm) !== null && _a !== void 0 ? _a : "0")),
                         temp_max: CelsiusToKelvin(parseFloat((_b = day.Dm) !== null && _b !== void 0 ? _b : "0")),
@@ -10073,20 +10073,20 @@ class MetUk {
             }
         };
         this.ParseHourlyForecast = (json, loc) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
                 for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    let day = json.SiteRep.DV.Location.Period[i];
-                    let date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
+                    const day = json.SiteRep.DV.Location.Period[i];
+                    const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
                     for (let index = 0; index < day.Rep.length; index++) {
                         const hour = day.Rep[index];
-                        let timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
-                        let threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
+                        const timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
+                        const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
                         if (timestamp < threshold)
                             continue;
-                        let forecast = {
+                        const forecast = {
                             date: timestamp,
                             temp: CelsiusToKelvin(parseFloat(hour.T)),
                             condition: this.ResolveCondition(hour.W),
@@ -10110,15 +10110,15 @@ class MetUk {
         this.app = _app;
     }
     async GetWeather(newLoc) {
-        let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
+        const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = newLoc;
             this.currentLocID = loc;
-            let forecastSite = await this.GetClosestForecastSite(newLoc);
+            const forecastSite = await this.GetClosestForecastSite(newLoc);
             if (forecastSite == null)
                 return null;
-            let observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
             if (observationSites == null)
                 return null;
             this.forecastSite = forecastSite;
@@ -10138,27 +10138,27 @@ class MetUk {
             });
             return null;
         }
-        let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
-        let hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
-        let observations = await this.GetObservationData(this.observationSites);
-        let currentResult = this.ParseCurrent(observations, newLoc);
+        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
+        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
+        const observations = await this.GetObservationData(this.observationSites);
+        const currentResult = this.ParseCurrent(observations, newLoc);
         if (!currentResult)
             return null;
-        let forecastResult = await forecastPromise;
+        const forecastResult = await forecastPromise;
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        let threeHourlyForecast = await hourlyPayload;
+        const threeHourlyForecast = await hourlyPayload;
         currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
         return currentResult;
     }
     ;
     async GetClosestForecastSite(loc) {
-        let forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+        const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
         if (forecastSitelist == null)
             return null;
         return this.GetClosestSite(forecastSitelist, loc);
     }
     async GetObservationSitesInRange(loc, range) {
-        let observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+        const observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         if (observationSiteList == null)
             return null;
         let observationSites = [];
@@ -10174,11 +10174,11 @@ class MetUk {
         return observationSites;
     }
     async GetObservationData(observationSites) {
-        let observations = [];
+        const observations = [];
         for (let index = 0; index < observationSites.length; index++) {
             const element = observationSites[index];
             logger_Logger.Debug("Getting observation data from station: " + element.id);
-            let payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+            const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
             if (!!payload)
                 observations.push(payload);
             else {
@@ -10191,14 +10191,14 @@ class MetUk {
         if (query == null)
             return null;
         logger_Logger.Debug("Query: " + query);
-        let json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(query);
         if (json == null)
             return null;
         return ParseFunction(json, loc);
     }
     ;
     ParseCurrent(json, loc) {
-        let observation = this.MeshObservations(json, loc);
+        const observation = this.MeshObservations(json, loc);
         if (!observation) {
             return null;
         }
@@ -10219,9 +10219,9 @@ class MetUk {
             });
             return null;
         }
-        let times = (0,suncalc.getTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
+        const times = (0,suncalc.getTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
         try {
-            let weather = {
+            const weather = {
                 coord: {
                     lat: parseFloat(json[dataIndex].SiteRep.DV.Location.lat),
                     lon: parseFloat(json[dataIndex].SiteRep.DV.Location.lon)
@@ -10282,9 +10282,9 @@ class MetUk {
     }
     ;
     VisibilityToText(dist) {
-        let distance = parseInt(dist);
-        let unit = this.app.config.DistanceUnit;
-        let stringFormat = {
+        const distance = parseInt(dist);
+        const unit = this.app.config.DistanceUnit;
+        const stringFormat = {
             distanceUnit: this.DistanceUnitFor(unit)
         };
         if (distance < 1000) {
@@ -10348,10 +10348,10 @@ class MetUk {
         for (let index = 0; index < observations.length; index++) {
             if (((_h = (_g = (_f = (_e = observations[index]) === null || _e === void 0 ? void 0 : _e.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
                 continue;
-            let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
+            const nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
             if (result == null)
                 result = nextObservation;
-            let debugText = " Observation data missing, plugged in from ID " +
+            const debugText = " Observation data missing, plugged in from ID " +
                 observations[index].SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
                 + Math.round(GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
@@ -10398,7 +10398,7 @@ class MetUk {
             return null;
         for (let index = 0; index < observations.length; index++) {
             const element = observations[index];
-            let date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
+            const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
             if (!OnSameDay(date, day))
                 continue;
             if (Array.isArray(element.Rep))
@@ -10412,7 +10412,7 @@ class MetUk {
         return (date.replace("Z", "")) + "T00:00:00Z";
     }
     GetClosestSite(siteList, loc) {
-        let sites = siteList.Locations.Location;
+        const sites = siteList.Locations.Location;
         let closest = sites[0];
         closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
         for (let index = 0; index < sites.length; index++) {
@@ -10667,7 +10667,7 @@ class MetUk {
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 async function SpawnProcessJson(command) {
-    let response = await SpawnProcess(command);
+    const response = await SpawnProcess(command);
     if (!response.Success)
         return response;
     try {
@@ -10693,7 +10693,7 @@ async function SpawnProcess(command) {
         const element = command[index];
         cmd += "'" + element + "' ";
     }
-    let response = await new Promise((resolve, reject) => {
+    const response = await new Promise((resolve, reject) => {
         spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
             let result = {
                 Success: exitCode == 0,
@@ -10801,7 +10801,7 @@ class CurrentWeather {
                 this.ShowLocationSelectors();
             else
                 this.HideLocationSelectors();
-            let location = GenerateLocationText(weather, config);
+            const location = GenerateLocationText(weather, config);
             this.SetLocation(location, weather.location.url);
             this.SetConditionText(weather.condition.description);
             this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
@@ -10838,7 +10838,7 @@ class CurrentWeather {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        let box = new BoxLayout({ style_class: STYLE_ICONBOX });
+        const box = new BoxLayout({ style_class: STYLE_ICONBOX });
         box.add_actor(this.weatherIcon);
         box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
         box.add_actor(this.BuildRightColumn(textColorStyle, config));
@@ -10847,7 +10847,7 @@ class CurrentWeather {
     ;
     BuildMiddleColumn(config, textColorStyle) {
         this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this.BuildLocationSection());
         middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
         this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
@@ -10860,7 +10860,7 @@ class CurrentWeather {
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
-        let textOb = {
+        const textOb = {
             text: ELLIPSIS
         };
         this.temperatureLabel = new Label(textOb);
@@ -10870,8 +10870,8 @@ class CurrentWeather {
         this.apiUniqueLabel = new Label({ text: '' });
         this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
         this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
-        let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
         rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
@@ -10884,16 +10884,16 @@ class CurrentWeather {
         rb_values.add_actor(this.BuildWind(config));
         rb_values.add_actor(this.dewPointLabel);
         rb_values.add_actor(this.apiUniqueLabel);
-        let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+        const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
         rightColumn.add_actor(rb_values);
         return rightColumn;
     }
     BuildWind(config) {
-        let windBox = new BoxLayout({ vertical: false });
-        let iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-        let iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
-        let iconSize = Math.round(config.CurrentFontSize * 0.8);
+        const windBox = new BoxLayout({ vertical: false });
+        const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+        const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+        const iconSize = Math.round(config.CurrentFontSize * 0.8);
         this.windLabel = new Label({ text: ELLIPSIS });
         this.windDirectionIcon = new Icon({
             icon_type: uiCurrentWeather_IconType.SYMBOLIC,
@@ -10939,26 +10939,26 @@ class CurrentWeather {
             }),
         });
         this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
-        let box = new BoxLayout();
+        const box = new BoxLayout();
         box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
         box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
         box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
         return box;
     }
     BuildSunBox(config, textColorStyle) {
-        let sunBin = new Bin();
+        const sunBin = new Bin();
         this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
         this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
-        let sunriseBox = new BoxLayout();
-        let sunsetBox = new BoxLayout();
+        const sunriseBox = new BoxLayout();
+        const sunsetBox = new BoxLayout();
         if (config._showSunrise) {
-            let sunsetIcon = new Icon({
+            const sunsetIcon = new Icon({
                 icon_name: "sunset-symbolic",
                 icon_type: uiCurrentWeather_IconType.SYMBOLIC,
                 icon_size: 25,
                 style: textColorStyle
             });
-            let sunriseIcon = new Icon({
+            const sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: uiCurrentWeather_IconType.SYMBOLIC,
                 icon_size: 25,
@@ -10967,7 +10967,7 @@ class CurrentWeather {
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
         }
-        let textOptions = {
+        const textOptions = {
             x_fill: false,
             x_align: Align.START,
             y_align: Align.MIDDLE,
@@ -10976,8 +10976,8 @@ class CurrentWeather {
         };
         sunriseBox.add(this.sunriseLabel, textOptions);
         sunsetBox.add(this.sunsetLabel, textOptions);
-        let ab_spacerLabel = new Label({ text: BLANK });
-        let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
+        const ab_spacerLabel = new Label({ text: BLANK });
+        const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(ab_spacerLabel);
         sunBox.add_actor(sunsetBox);
@@ -11018,7 +11018,7 @@ class CurrentWeather {
         this.apiUniqueCaptionLabel.text = "";
         if (!!extra_field) {
             this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
-            let value;
+            let value = null;
             switch (extra_field.type) {
                 case "percent":
                     value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
@@ -11034,7 +11034,7 @@ class CurrentWeather {
         }
     }
     SetDewPointField(dewPoint) {
-        let temp = TempToUserConfig(dewPoint, this.app.config);
+        const temp = TempToUserConfig(dewPoint, this.app.config);
         if (temp == null) {
             this.dewPointCaption.set_style_class_name("weather-hidden");
             this.dewPointLabel.set_style_class_name("weather-hidden");
@@ -11050,7 +11050,7 @@ class CurrentWeather {
             this.UpdateIconType(uiCurrentWeather_IconType.SYMBOLIC);
         }
         else {
-            let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
+            const icon = WeatherIconSafely(iconNames, this.app.config.IconType);
             this.weatherIcon.icon_name = icon;
             this.UpdateIconType(this.app.config.IconType);
         }
@@ -11059,7 +11059,7 @@ class CurrentWeather {
         this.weatherSummary.text = condition;
     }
     SetTemperature(temperature) {
-        let temp = TempToUserConfig(temperature, this.app.config);
+        const temp = TempToUserConfig(temperature, this.app.config);
         if (temp == null)
             return;
         this.temperatureLabel.text = temp;
@@ -11072,10 +11072,10 @@ class CurrentWeather {
     async SetWind(windSpeed, windDegree) {
         if (windSpeed == null || windDegree == null)
             return;
-        let wind_direction = CompassDirection(windDegree);
+        const wind_direction = CompassDirection(windDegree);
         this.windDirectionIcon.icon_name = wind_direction;
         if (this.app.config._displayWindAsText) {
-            let dirText = CompassDirectionText(windDegree);
+            const dirText = CompassDirectionText(windDegree);
             this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
         }
         else {
@@ -11097,11 +11097,11 @@ class CurrentWeather {
             this.locationButton.url = url;
     }
     NextLocationClicked() {
-        let loc = this.app.config.SwitchToNextLocation();
+        const loc = this.app.config.SwitchToNextLocation();
         this.app.RefreshAndRebuild(loc);
     }
     PreviousLocationClicked() {
-        let loc = this.app.config.SwitchToPreviousLocation();
+        const loc = this.app.config.SwitchToPreviousLocation();
         this.app.RefreshAndRebuild(loc);
     }
     onLocationStorageChanged(sender, itemCount) {
@@ -11162,12 +11162,12 @@ class UIForecasts {
         try {
             if (!weather.forecasts)
                 return false;
-            let len = Math.min(this.forecasts.length, weather.forecasts.length);
+            const len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
-                let forecastData = weather.forecasts[i];
-                let forecastUi = this.forecasts[i];
-                let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                let dayName = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+                const forecastData = weather.forecasts[i];
+                const forecastUi = this.forecasts[i];
+                const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                const dayName = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.actor.label = dayName;
                 forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
                 forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
@@ -11218,12 +11218,12 @@ class UIForecasts {
             orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
         });
         this.grid.set_column_homogeneous(true);
-        let table = new Widget({
+        const table = new Widget({
             layout_manager: this.grid,
             style_class: STYLE_FORECAST_CONTAINER
         });
         this.actor.set_child(table);
-        let maxDays = this.app.GetMaxForecastDays();
+        const maxDays = this.app.GetMaxForecastDays();
         let maxRow = config._forecastRows;
         let maxCol = config._forecastColumns;
         if (config._verticalOrientation) {
@@ -11232,7 +11232,7 @@ class UIForecasts {
         let curRow = 0;
         let curCol = 0;
         for (let i = 0; i < maxDays; i++) {
-            let forecastWeather = {};
+            const forecastWeather = {};
             if (curCol >= maxCol) {
                 curRow++;
                 curCol = 0;
@@ -11259,14 +11259,14 @@ class UIForecasts {
             forecastWeather.Temperature = new uiForecasts_Label({
                 style_class: STYLE_FORECAST_TEMPERATURE
             });
-            let by = new uiForecasts_BoxLayout({
+            const by = new uiForecasts_BoxLayout({
                 vertical: true,
                 style_class: STYLE_FORECAST_DATABOX
             });
             by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
             by.add_actor(forecastWeather.Summary);
             by.add_actor(forecastWeather.Temperature);
-            let bb = new uiForecasts_BoxLayout({
+            const bb = new uiForecasts_BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
             bb.add_actor(forecastWeather.Icon);
@@ -11316,10 +11316,10 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        let vScroll = this.actor.get_vscroll_bar();
+        const vScroll = this.actor.get_vscroll_bar();
         vScroll.connect("scroll-start", () => { menu.passEvents = true; });
         vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
-        let hScroll = this.actor.get_hscroll_bar();
+        const hScroll = this.actor.get_hscroll_bar();
         hScroll.connect("scroll-start", () => { menu.passEvents = true; });
         hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
         this.actor.hide();
@@ -11333,7 +11333,7 @@ class UIHourlyForecasts {
     ScrollTo(date) {
         if (this.hourlyForecastDates == null)
             return;
-        let itemWidth = this.GetHourlyBoxItemWidth();
+        const itemWidth = this.GetHourlyBoxItemWidth();
         let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
             if (OnSameDay(this.hourlyForecastDates[index], date))
@@ -11361,7 +11361,7 @@ class UIHourlyForecasts {
         if (!forecasts || !this.hourlyForecasts)
             return true;
         this.hourlyForecastDates = [];
-        let max = Math.min(forecasts.length, this.hourlyForecasts.length);
+        const max = Math.min(forecasts.length, this.hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this.hourlyForecasts[index];
@@ -11376,17 +11376,17 @@ class UIHourlyForecasts {
         return !(max <= 0);
     }
     ResetScroll() {
-        let hscroll = this.actor.get_hscroll_bar();
+        const hscroll = this.actor.get_hscroll_bar();
         hscroll.get_adjustment().set_value(0);
     }
     async Show(animate = true) {
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth();
-        let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+        const [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
         if (minWidth == null)
             return;
-        let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+        const [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
         if (naturalHeight == null)
             return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
@@ -11397,7 +11397,7 @@ class UIHourlyForecasts {
         return new Promise((resolve, reject) => {
             if (naturalHeight == null)
                 return;
-            let height = naturalHeight;
+            const height = naturalHeight;
             if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 this.actor.height = 0;
                 addTween(this.actor, {
@@ -11443,7 +11443,7 @@ class UIHourlyForecasts {
         });
     }
     AdjustHourlyBoxItemWidth() {
-        let requiredWidth = this.GetHourlyBoxItemWidth();
+        const requiredWidth = this.GetHourlyBoxItemWidth();
         for (let index = 0; index < this.hourlyContainers.length; index++) {
             const element = this.hourlyContainers[index];
             element.set_width(requiredWidth);
@@ -11455,10 +11455,10 @@ class UIHourlyForecasts {
             return requiredWidth;
         for (let index = 0; index < this.hourlyContainers.length; index++) {
             const ui = this.hourlyForecasts[index];
-            let hourWidth = ui.Hour.get_preferred_width(-1)[1];
-            let iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            const hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            const iconWidth = ui.Icon.get_preferred_width(-1)[1];
             let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
-            let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+            const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
             let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
             if (precipitationWidth == null || temperatureWidth == null ||
                 hourWidth == null || iconWidth == null || summaryWidth == null)
@@ -11487,11 +11487,11 @@ class UIHourlyForecasts {
     }
     Rebuild(config, textColorStyle) {
         this.Destroy();
-        let hours = this.app.GetMaxHourlyForecasts();
+        const hours = this.app.GetMaxHourlyForecasts();
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
         for (let index = 0; index < hours; index++) {
-            let box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
             this.hourlyContainers.push(box);
             this.hourlyForecasts.push({
                 Hour: new uiHourlyForecasts_Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
@@ -11540,23 +11540,23 @@ class UIHourlyForecasts {
         for (let index = 0; index < this.hourlyContainers.length; index++) {
             const ui = this.hourlyForecasts[index];
             logger_Logger.Debug("Height requests of Hourly box Items: " + index);
-            let hourHeight = ui.Hour.get_preferred_height(-1)[1];
-            let iconHeight = ui.Icon.get_preferred_height(-1)[1];
-            let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
-            let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
-            let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            const hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            const iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            const summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            const precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
             if (precipitationHeight == null || temperatureHeight == null ||
                 hourHeight == null || iconHeight == null || summaryHeight == null)
                 continue;
-            let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            const itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemHeight)
                 boxItemHeight = itemHeight;
         }
         logger_Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
-        let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
+        const scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
         logger_Logger.Debug("Scrollbar height is " + scrollBarHeight);
-        let theme = this.container.get_theme_node();
-        let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        const theme = this.container.get_theme_node();
+        const styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
         logger_Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
         return (boxItemHeight + (scrollBarHeight !== null && scrollBarHeight !== void 0 ? scrollBarHeight : 0) + styling);
     }
@@ -11596,10 +11596,10 @@ class UIBar {
     Display(weather, provider, config, shouldShowToggle) {
         this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
         this.providerCreditButton.url = provider.website;
-        let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+        const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (weather.location.distanceFrom != null) {
-            let stringFormat = {
+            const stringFormat = {
                 distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
@@ -11742,7 +11742,7 @@ class UI {
     }
     Rebuild(config) {
         this.ShowLoadingUi();
-        let textColorStyle = this.GetTextColorStyle();
+        const textColorStyle = this.GetTextColorStyle();
         this.CurrentWeather.Rebuild(config, textColorStyle);
         this.HourlyWeather.Rebuild(config, textColorStyle);
         this.FutureWeather.Rebuild(config, textColorStyle);
@@ -11761,7 +11761,7 @@ class UI {
     Display(weather, config, provider) {
         this.CurrentWeather.Display(weather, config);
         this.FutureWeather.Display(weather, config);
-        let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+        const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
         this.noHourlyWeather = !shouldShowToggle;
         if (!shouldShowToggle)
             this.ForceHideHourlyWeather();
@@ -11770,7 +11770,7 @@ class UI {
     }
     OnThemeChanged() {
         this.HideHourlyWeather();
-        let newThemeIsLight = this.IsLightTheme();
+        const newThemeIsLight = this.IsLightTheme();
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
@@ -11783,14 +11783,14 @@ class UI {
         }
     }
     IsLightTheme() {
-        let color = this.menu.actor.get_theme_node().get_color("color");
+        const color = this.menu.actor.get_theme_node().get_color("color");
         let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
         luminance = Math.abs(1 - luminance);
         logger_Logger.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     }
     ForegroundColor() {
-        let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
         return hex;
     }
     GetTextColorStyle() {
@@ -11811,7 +11811,7 @@ class UI {
         this.HourlySeparator = new UISeparator();
         this.BarSeparator = new UISeparator();
         this.HourlySeparator.Hide();
-        let mainBox = new ui_BoxLayout({ vertical: true });
+        const mainBox = new ui_BoxLayout({ vertical: true });
         mainBox.add_actor(this.CurrentWeather.actor);
         mainBox.add_actor(this.HourlySeparator.Actor);
         mainBox.add_actor(this.HourlyWeather.actor);
@@ -11890,7 +11890,7 @@ class DarkSky {
         this.app = _app;
     }
     async GetWeather(loc) {
-        let now = new Date(Date.now());
+        const now = new Date(Date.now());
         if (now.getUTCFullYear() > 2022) {
             this.app.ShowError({
                 type: "hard",
@@ -11899,10 +11899,10 @@ class DarkSky {
             });
             return null;
         }
-        let query = this.ConstructQuery(loc);
+        const query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, {}, darkSky_Lang.bind(this, this.HandleError));
+        const json = await this.app.LoadJsonAsync(query, {}, darkSky_Lang.bind(this, this.HandleError));
         if (!json)
             return null;
         if (!json.code) {
@@ -11916,9 +11916,9 @@ class DarkSky {
     ;
     ParseWeather(json) {
         try {
-            let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
-            let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
-            let result = {
+            const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+            const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+            const result = {
                 date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
                 coord: {
                     lat: json.latitude,
@@ -11953,8 +11953,8 @@ class DarkSky {
                 hourlyForecasts: []
             };
             for (let i = 0; i < json.daily.data.length; i++) {
-                let day = json.daily.data[i];
-                let forecast = {
+                const day = json.daily.data[i];
+                const forecast = {
                     date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
                     temp_min: this.ToKelvin(day.temperatureLow),
                     temp_max: this.ToKelvin(day.temperatureHigh),
@@ -11969,8 +11969,8 @@ class DarkSky {
                 result.forecasts.push(forecast);
             }
             for (let i = 0; i < json.hourly.data.length; i++) {
-                let hour = json.hourly.data[i];
-                let forecast = {
+                const hour = json.hourly.data[i];
+                const forecast = {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature),
                     condition: {
@@ -12003,13 +12003,13 @@ class DarkSky {
         if (systemLocale == "zh-tw") {
             return systemLocale;
         }
-        let lang = systemLocale.split("-")[0];
+        const lang = systemLocale.split("-")[0];
         return lang;
     }
     ConstructQuery(loc) {
         this.SetQueryUnit();
         let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }
@@ -12039,9 +12039,9 @@ class DarkSky {
         return true;
     }
     HandleResponseErrors(json) {
-        let code = json.code;
-        let error = json.error;
-        let errorMsg = "DarkSky API: ";
+        const code = json.code;
+        const error = json.error;
+        const errorMsg = "DarkSky API: ";
         logger_Logger.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
@@ -12054,7 +12054,7 @@ class DarkSky {
     }
     ;
     ProcessSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         let result = "";
         let lineLength = 0;
         for (let i = 0; i < processed.length; i++) {
@@ -12069,10 +12069,10 @@ class DarkSky {
     }
     ;
     GetShortSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         if (processed.length == 1)
             return processed[0];
-        let result = [];
+        const result = [];
         for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
                 result.push(processed[i]) + " ";
@@ -12084,7 +12084,7 @@ class DarkSky {
     }
     ;
     GetShortCurrentSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         let result = "";
         let maxLoop;
         (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
@@ -12228,7 +12228,7 @@ class OpenWeatherMap {
     async GetWeather(loc) {
         const params = this.ConstructParams(loc);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
-        let promises = [];
+        const promises = [];
         promises.push(this.app.LoadJsonAsync(this.base_url, params, this.HandleError));
         if (cachedID == null)
             promises.push(this.app.LoadJsonAsync(this.id_irl, params));
@@ -12246,7 +12246,7 @@ class OpenWeatherMap {
     ParseWeather(json, loc) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
-            let weather = {
+            const weather = {
                 coord: {
                     lat: json.lat,
                     lon: json.lon
@@ -12280,7 +12280,7 @@ class OpenWeatherMap {
                 forecasts: []
             };
             if (json.minutely != null) {
-                let immediate = {
+                const immediate = {
                     start: -1,
                     end: -1
                 };
@@ -12297,10 +12297,10 @@ class OpenWeatherMap {
                 }
                 weather.immediatePrecipitation = immediate;
             }
-            let forecasts = [];
+            const forecasts = [];
             for (let i = 0; i < json.daily.length; i++) {
-                let day = json.daily[i];
-                let forecast = {
+                const day = json.daily[i];
+                const forecast = {
                     date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
                     temp_min: day.temp.min,
                     temp_max: day.temp.max,
@@ -12314,10 +12314,10 @@ class OpenWeatherMap {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
-            let hourly = [];
+            const hourly = [];
             for (let index = 0; index < json.hourly.length; index++) {
                 const hour = json.hourly[index];
-                let forecast = {
+                const forecast = {
                     date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
                     temp: hour.temp,
                     condition: {
@@ -12365,7 +12365,7 @@ class OpenWeatherMap {
             lon: loc.lon,
             appid: "1c73f8259a86c6fd43c7163b543c8640"
         };
-        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
             params.lang = locale;
         }
@@ -12378,7 +12378,7 @@ class OpenWeatherMap {
         if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
             return systemLocale;
         }
-        let lang = systemLocale.split("-")[0];
+        const lang = systemLocale.split("-")[0];
         if (lang == "sv") {
             return "se";
         }
@@ -12399,12 +12399,12 @@ class OpenWeatherMap {
     HadErrors(json) {
         if (!this.HasReturnedError(json))
             return false;
-        let errorMsg = "OpenWeatherMap Response: ";
-        let error = {
+        const errorMsg = "OpenWeatherMap Response: ";
+        const error = {
             service: "openweathermap",
             type: "hard",
         };
-        let errorPayload = json;
+        const errorPayload = json;
         switch (errorPayload.cod) {
             case ("400"):
                 error.detail = "bad location format";
@@ -12604,7 +12604,7 @@ class USWeather {
         this.OnObtainingGridData = (message) => {
             var _a, _b, _c, _d;
             if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
-                let data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
+                const data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
                 if (data.title == "Data Unavailable For Requested Point") {
                     this.app.ShowError({
                         type: "hard",
@@ -12619,7 +12619,7 @@ class USWeather {
             return true;
         };
         this.ParseForecast = (json) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
                 let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
                 startIndex = this.FindTodayIndex(json, startIndex);
@@ -12627,8 +12627,8 @@ class USWeather {
                     return null;
                 if (json.properties.periods[startIndex].isDaytime == false) {
                     startIndex++;
-                    let today = json.properties.periods[0];
-                    let forecast = {
+                    const today = json.properties.periods[0];
+                    const forecast = {
                         date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
                         temp_min: FahrenheitToKelvin(today.temperature),
                         temp_max: FahrenheitToKelvin(today.temperature),
@@ -12637,11 +12637,11 @@ class USWeather {
                     forecasts.push(forecast);
                 }
                 for (let i = startIndex; i < json.properties.periods.length; i += 2) {
-                    let day = json.properties.periods[i];
+                    const day = json.properties.periods[i];
                     let night = json.properties.periods[i + 1];
                     if (!night)
                         night = day;
-                    let forecast = {
+                    const forecast = {
                         date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
                         temp_min: FahrenheitToKelvin(night.temperature),
                         temp_max: FahrenheitToKelvin(day.temperature),
@@ -12659,12 +12659,12 @@ class USWeather {
             }
         };
         this.ParseHourlyForecast = (json) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
                 for (let i = 0; i < json.properties.periods.length; i++) {
-                    let hour = json.properties.periods[i];
-                    let timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
-                    let forecast = {
+                    const hour = json.properties.periods[i];
+                    const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
+                    const forecast = {
                         date: timestamp,
                         temp: CelsiusToKelvin(hour.temperature),
                         condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
@@ -12684,16 +12684,16 @@ class USWeather {
     }
     async GetWeather(loc) {
         var _a, _b;
-        let locID = loc.lat.toString() + "," + loc.lon.toString();
+        const locID = loc.lat.toString() + "," + loc.lon.toString();
         if (!this.grid || !this.observationStations || this.currentLocID != locID) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = loc;
             this.currentLocID = locID;
-            let grid = await this.GetGridData(loc);
+            const grid = await this.GetGridData(loc);
             if (grid == null)
                 return null;
             logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
-            let observationStations = await this.GetStationData(grid.properties.observationStations);
+            const observationStations = await this.GetStationData(grid.properties.observationStations);
             if (observationStations == null)
                 return null;
             this.grid = grid;
@@ -12702,16 +12702,16 @@ class USWeather {
         else {
             logger_Logger.Debug("Site data downloading skipped");
         }
-        let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
-        let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
-        let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
-        let hourly = await hourlyForecastPromise;
-        let forecast = await forecastPromise;
+        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
+        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
+        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+        const hourly = await hourlyForecastPromise;
+        const forecast = await forecastPromise;
         if (!hourly || !forecast) {
             logger_Logger.Error("Failed to obtain forecast Data");
             return null;
         }
-        let weather = this.ParseCurrent(observations, hourly, loc);
+        const weather = this.ParseCurrent(observations, hourly, loc);
         if (!!weather) {
             weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
             weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
@@ -12720,21 +12720,21 @@ class USWeather {
     }
     ;
     async GetGridData(loc) {
-        let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
         return siteData;
     }
     async GetStationData(stationListUrl) {
-        let stations = await this.app.LoadJsonAsync(stationListUrl);
+        const stations = await this.app.LoadJsonAsync(stationListUrl);
         return stations === null || stations === void 0 ? void 0 : stations.features;
     }
     async GetObservationsInRange(range, loc, stations) {
-        let observations = [];
+        const observations = [];
         for (let index = 0; index < stations.length; index++) {
             const element = stations[index];
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            let observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
+            const observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
             if (observation == null) {
                 logger_Logger.Debug("Failed to get observations from " + stations[index].id);
             }
@@ -12747,12 +12747,12 @@ class USWeather {
     MeshObservationData(observations) {
         if (observations.length < 1)
             return null;
-        let result = observations[0];
+        const result = observations[0];
         if (observations.length == 1)
             return result;
         for (let index = 1; index < observations.length; index++) {
             const element = observations[index];
-            let debugText = " Observation data missing, plugged in from ID " +
+            const debugText = " Observation data missing, plugged in from ID " +
                 element.id + ", index " + index +
                 ", distance "
                 + Math.round(GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], this.currentLoc.lat, this.currentLoc.lon))
@@ -12799,19 +12799,19 @@ class USWeather {
     }
     ParseCurrent(json, hourly, loc) {
         var _a, _b;
-        let observation = this.MeshObservationData(json);
+        const observation = this.MeshObservationData(json);
         if (observation == null || !this.observationStations[0]) {
             logger_Logger.Error("No observation stations/data are available");
             return null;
         }
-        let timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
-        let times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
-        let suntimes = {
+        const timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
+        const times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+        const suntimes = {
             sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
             sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
         };
         try {
-            let weather = {
+            const weather = {
                 coord: {
                     lat: (_a = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _a === void 0 ? void 0 : _a.coordinates[1],
                     lon: (_b = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _b === void 0 ? void 0 : _b.coordinates[0]
@@ -12865,8 +12865,8 @@ class USWeather {
         for (let index = 1; index < 3; index++) {
             const element = json.properties.periods[index];
             const prevElement = json.properties.periods[index - 1];
-            let prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
-            let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            const prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
             if (OnSameDay(prevDate, curDate))
                 counter++;
             else
@@ -12883,10 +12883,10 @@ class USWeather {
         if (!this.observationStations[0] || !((_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods)) {
             return -1;
         }
-        let today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
+        const today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
         for (let index = startIndex; index < json.properties.periods.length; index++) {
             const element = json.properties.periods[index];
-            let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
             if (!OnSameDay(today, curDate))
                 continue;
             global.log(index);
@@ -12902,7 +12902,7 @@ class USWeather {
                 customIcon: "cloud-refresh-symbolic",
                 icons: ["weather-severe-alert"]
             };
-        let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
+        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
         switch (code === null || code === void 0 ? void 0 : code[0]) {
             case "skc":
                 return {
@@ -13161,11 +13161,11 @@ class Weatherbit {
         this.hourlyAccess = true;
         this.ParseCurrent = (json) => {
             json = json.data[0];
-            let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
+            const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
             if (hourDiff != 0)
                 logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
             try {
-                let weather = {
+                const weather = {
                     coord: {
                         lat: json.lat,
                         lon: json.lon
@@ -13209,11 +13209,11 @@ class Weatherbit {
             }
         };
         this.ParseForecast = (json) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
                 for (let i = 0; i < json.data.length; i++) {
-                    let day = json.data[i];
-                    let forecast = {
+                    const day = json.data[i];
+                    const forecast = {
                         date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
                         temp_min: day.min_temp,
                         temp_max: day.max_temp,
@@ -13236,11 +13236,11 @@ class Weatherbit {
             }
         };
         this.ParseHourlyForecast = (json) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
                 for (let i = 0; i < json.data.length; i++) {
-                    let hour = json.data[i];
-                    let forecast = {
+                    const hour = json.data[i];
+                    const forecast = {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
                         condition: {
@@ -13273,34 +13273,34 @@ class Weatherbit {
         this.app = _app;
     }
     async GetWeather(loc) {
-        let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
         let hourlyPromise = null;
         if (!!this.hourlyAccess)
             hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
         if (!currentResult)
             return null;
-        let forecastResult = await forecastPromise;
+        const forecastResult = await forecastPromise;
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        let hourlyResult = await hourlyPromise;
+        const hourlyResult = await hourlyPromise;
         currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
         return currentResult;
     }
     ;
     async GetData(baseUrl, loc, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
         if (json == null)
             return null;
         return ParseFunction(json);
     }
     async GetHourlyData(baseUrl, loc) {
-        let query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
         if (!!(json === null || json === void 0 ? void 0 : json.error)) {
             return null;
         }
@@ -13310,8 +13310,8 @@ class Weatherbit {
     }
     ;
     TimeToDate(time, hourDiff, tz) {
-        let hoursMinutes = time.split(":");
-        let date = DateTime.utc().set({
+        const hoursMinutes = time.split(":");
+        const date = DateTime.utc().set({
             hour: parseInt(hoursMinutes[0]) - hourDiff,
             minute: parseInt(hoursMinutes[1]),
         }).setZone(tz);
@@ -13323,7 +13323,7 @@ class Weatherbit {
         return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
     }
     ParseStringTime(last_ob_time, tz) {
-        let split = last_ob_time.split(/[T\-\s:]/);
+        const split = last_ob_time.split(/[T\-\s:]/);
         if (split.length != 5)
             return null;
         return DateTime.fromObject({
@@ -13340,7 +13340,7 @@ class Weatherbit {
         if (systemLocale == "zh-tw") {
             return systemLocale;
         }
-        let lang = systemLocale.split("-")[0];
+        const lang = systemLocale.split("-")[0];
         if (lang == "cs") {
             return "cz";
         }
@@ -13348,7 +13348,7 @@ class Weatherbit {
     }
     ConstructQuery(query, loc) {
         query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
-        let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
+        const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }
@@ -13573,10 +13573,10 @@ class MetNorway {
         this.app = app;
     }
     async GetWeather(loc) {
-        let query = this.GetUrl(loc);
+        const query = this.GetUrl(loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(query);
         if (!json) {
             logger_Logger.Error("MET Norway: Empty response from API");
             return null;
@@ -13584,11 +13584,11 @@ class MetNorway {
         return this.ParseWeather(json, loc);
     }
     RemoveEarlierElements(json, loc) {
-        let now = DateTime.now().setZone(loc.timeZone);
+        const now = DateTime.now().setZone(loc.timeZone);
         let startIndex = -1;
         for (let i = 0; i < json.properties.timeseries.length; i++) {
             const element = json.properties.timeseries[i];
-            let timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (timestamp < now && now.hour != timestamp.hour) {
                 startIndex = i;
             }
@@ -13605,13 +13605,13 @@ class MetNorway {
     ParseWeather(json, loc) {
         var _a, _b;
         json = this.RemoveEarlierElements(json, loc);
-        let times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
-        let suntimes = {
+        const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+        const suntimes = {
             sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
             sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
         };
-        let current = json.properties.timeseries[0];
-        let result = {
+        const current = json.properties.timeseries[0];
+        const result = {
             temperature: CelsiusToKelvin(current.data.instant.details.air_temperature),
             coord: {
                 lat: json.geometry.coordinates[1],
@@ -13636,7 +13636,7 @@ class MetNorway {
             location: {},
             forecasts: []
         };
-        let hourlyForecasts = [];
+        const hourlyForecasts = [];
         for (let i = 0; i < json.properties.timeseries.length; i++) {
             const element = json.properties.timeseries[i];
             if (!!element.data.next_1_hours) {
@@ -13656,10 +13656,10 @@ class MetNorway {
         return result;
     }
     BuildForecasts(forecastsData, loc) {
-        let forecasts = [];
-        let days = this.SortDataByDay(forecastsData, loc);
+        const forecasts = [];
+        const days = this.SortDataByDay(forecastsData, loc);
         for (let i = 0; i < days.length; i++) {
-            let forecast = {
+            const forecast = {
                 condition: {
                     customIcon: "cloudy-symbolic",
                     description: "",
@@ -13670,7 +13670,7 @@ class MetNorway {
                 temp_max: Number.NEGATIVE_INFINITY,
                 temp_min: Number.POSITIVE_INFINITY
             };
-            let conditionCounter = {};
+            const conditionCounter = {};
             for (let j = 0; j < days[i].length; j++) {
                 const element = days[i][j];
                 if (!element.data.next_6_hours)
@@ -13680,8 +13680,8 @@ class MetNorway {
                     forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
                 if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min)
                     forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
-                let [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
-                let severity = conditionSeverity[symbol];
+                const [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
+                const severity = conditionSeverity[symbol];
                 if (!conditionCounter[severity])
                     conditionCounter[severity] = { count: 0, name: symbol };
                 conditionCounter[severity].count = conditionCounter[severity].count + 1;
@@ -13697,7 +13697,7 @@ class MetNorway {
         let earliest = 0;
         for (let i = 0; i < events.length; i++) {
             const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
-            let timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
+            const timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
             if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day"))
                 continue;
             if (earliestElementTime < timestamp)
@@ -13707,7 +13707,7 @@ class MetNorway {
         return events[earliest];
     }
     SortDataByDay(data, loc) {
-        let days = [];
+        const days = [];
         let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
         let dayIndex = 0;
         days.push([]);
@@ -13728,7 +13728,7 @@ class MetNorway {
     }
     GetMostCommonCondition(count) {
         let result = -1;
-        for (let key in count) {
+        for (const key in count) {
             if (result == -1)
                 result = parseInt(key);
             if (count[result].count < count[key].count)
@@ -13738,10 +13738,10 @@ class MetNorway {
     }
     GetMostSevereCondition(conditions) {
         let result = -1;
-        for (let key in conditions) {
-            let conditionID = parseInt(key);
-            let resultStripped = (result > 100) ? result - 100 : result;
-            let conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
+        for (const key in conditions) {
+            const conditionID = parseInt(key);
+            const resultStripped = (result > 100) ? result - 100 : result;
+            const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
         }
@@ -13756,7 +13756,7 @@ class MetNorway {
         return url;
     }
     DeconstructCondition(icon) {
-        let condition = icon.split("_");
+        const condition = icon.split("_");
         return {
             timeOfDay: condition[1],
             condition: condition[0]
@@ -13772,7 +13772,7 @@ class MetNorway {
                 icons: ["weather-severe-alert"]
             };
         }
-        let weather = this.DeconstructCondition(icon);
+        const weather = this.DeconstructCondition(icon);
         switch (weather.condition) {
             case "clearsky":
                 return {
@@ -14133,11 +14133,11 @@ class HttpLib {
         return this.instance;
     }
     async LoadJsonAsync(url, params, headers, method = "GET") {
-        let response = await this.LoadAsync(url, params, headers, method);
+        const response = await this.LoadAsync(url, params, headers, method);
         if (!response.Success)
             return response;
         try {
-            let payload = JSON.parse(response.Data);
+            const payload = JSON.parse(response.Data);
             response.Data = payload;
         }
         catch (e) {
@@ -14156,7 +14156,7 @@ class HttpLib {
     }
     async LoadAsync(url, params, headers, method = "GET") {
         var _a, _b, _c, _d, _e, _f, _g;
-        let message = await this.Send(url, params, headers, method);
+        const message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
             error = {
@@ -14212,17 +14212,17 @@ class HttpLib {
     }
     async Send(url, params, headers, method = "GET") {
         if (params != null) {
-            let items = Object.keys(params);
+            const items = Object.keys(params);
             for (let index = 0; index < items.length; index++) {
                 const item = items[index];
                 url += (index == 0) ? "?" : "&";
                 url += (item) + "=" + params[item];
             }
         }
-        let query = encodeURI(url);
+        const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
-        let data = await new Promise((resolve, reject) => {
-            let message = Message.new(method, query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
             if (message == null) {
                 resolve(null);
             }
@@ -14271,16 +14271,16 @@ class VisualCrossing {
             this.params['lang'] = this.app.config.Language;
             translate = false;
         }
-        let url = this.url + loc.lat + "," + loc.lon;
-        let json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
+        const url = this.url + loc.lat + "," + loc.lon;
+        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
         if (!json)
             return null;
         return this.ParseWeather(json, translate);
     }
     ParseWeather(weather, translate) {
         var _a, _b, _c, _d, _e, _f, _g;
-        let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
-        let result = {
+        const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
+        const result = {
             date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
             location: {
                 url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
@@ -14313,7 +14313,7 @@ class VisualCrossing {
         return result;
     }
     ParseForecasts(forecasts, translate, tz) {
-        let result = [];
+        const result = [];
         if (!!forecasts) {
             for (let index = 0; index < forecasts.length; index++) {
                 const element = forecasts[index];
@@ -14328,8 +14328,8 @@ class VisualCrossing {
         return result;
     }
     ParseHourlyForecasts(forecasts, translate, tz) {
-        let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        let result = [];
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
         if (!!forecasts) {
             for (let index = 0; index < forecasts.length; index++) {
                 const element = forecasts[index];
@@ -14337,10 +14337,10 @@ class VisualCrossing {
                     continue;
                 for (let index = 0; index < element.hours.length; index++) {
                     const hour = element.hours[index];
-                    let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+                    const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
                     if (time < currentHour)
                         continue;
-                    let item = {
+                    const item = {
                         date: time,
                         temp: CelsiusToKelvin(hour.temp),
                         condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
@@ -14361,10 +14361,10 @@ class VisualCrossing {
     GetCurrentHour(forecasts, tz) {
         if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
             return null;
-        let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
         for (let index = 0; index < forecasts[0].hours.length; index++) {
             const hour = forecasts[0].hours[index];
-            let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+            const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
             if (time < currentHour)
                 continue;
             return hour;
@@ -14372,7 +14372,7 @@ class VisualCrossing {
         return null;
     }
     GenerateCondition(icon, condition, translate) {
-        let result = {
+        const result = {
             main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
             description: (translate) ? this.ResolveTypeIDs(condition) : condition,
             icons: [],
@@ -14419,7 +14419,7 @@ class VisualCrossing {
         return result;
     }
     GetFirstCondition(condition) {
-        let split = condition.split(", ");
+        const split = condition.split(", ");
         return split[0];
     }
     ResolveTypeID(condition) {
@@ -14564,7 +14564,7 @@ class ClimacellV4 {
             return null;
         this.params.apikey = this.app.config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
-        let response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
+        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
         if (response == null)
             return null;
         return this.ParseWeather(loc, response);
@@ -14584,12 +14584,12 @@ class ClimacellV4 {
     }
     ParseWeather(loc, data) {
         var _a, _b, _c, _d, _e;
-        let current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
-        let hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
-        let daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
+        const current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
+        const hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
+        const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
         if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
             return null;
-        let result = {
+        const result = {
             coord: {
                 lat: loc.lat,
                 lon: loc.lon
@@ -14616,8 +14616,8 @@ class ClimacellV4 {
             },
             forecasts: []
         };
-        let hours = [];
-        let days = [];
+        const hours = [];
+        const days = [];
         for (let index = 0; index < daily.length; index++) {
             const element = daily[index];
             days.push({
@@ -14629,7 +14629,7 @@ class ClimacellV4 {
         }
         for (let index = 0; index < hourly.length; index++) {
             const element = hourly[index];
-            let hour = {
+            const hour = {
                 condition: this.ResolveCondition(element.values.weatherCode),
                 date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
                 temp: CelsiusToKelvin(element.values.temperature)
@@ -14649,7 +14649,7 @@ class ClimacellV4 {
         return result;
     }
     ResolveCondition(weatherCode, isNight = false) {
-        let result = {
+        const result = {
             customIcon: "refresh-symbolic",
             icons: ["weather-severe-alert"],
             main: _("Unknown"),
@@ -14893,18 +14893,18 @@ class DanishMI {
         if (loc == null)
             return null;
         this.GetLocationBoundingBox(loc);
-        let observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
+        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
         this.forecastParams.lat = loc.lat;
         this.forecastParams.lon = loc.lon;
-        let forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
+        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
         if (forecasts == null)
             return null;
         return this.ParseWeather(observations, forecasts, loc);
     }
     ParseWeather(observations, forecasts, loc) {
         var _a, _b, _c, _d, _e, _f;
-        let observation = this.MergeObservations(observations);
-        let result = {
+        const observation = this.MergeObservations(observations);
+        const result = {
             temperature: CelsiusToKelvin((_a = observation.Temperature2m) !== null && _a !== void 0 ? _a : null),
             condition: this.ResolveCondition(observation.symbol),
             humidity: observation.RelativeHumidity,
@@ -14936,7 +14936,7 @@ class DanishMI {
         if (result.condition.customIcon == "alien-symbolic") {
             result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
         }
-        let forecastData = [];
+        const forecastData = [];
         for (let index = 0; index < forecasts.aggData.length - 1; index++) {
             const element = forecasts.aggData[index];
             forecastData.push({
@@ -14947,12 +14947,12 @@ class DanishMI {
             });
         }
         result.forecasts = forecastData;
-        let hourlyData = [];
+        const hourlyData = [];
         for (let index = 0; index < forecasts.timeserie.length; index++) {
             const element = forecasts.timeserie[index];
             if (element.time == null)
                 continue;
-            let hour = {
+            const hour = {
                 date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
                 temp: CelsiusToKelvin(element.temp),
                 condition: this.ResolveCondition(element.symbol)
@@ -14970,7 +14970,7 @@ class DanishMI {
     }
     MergeObservations(observations) {
         var _a, _b, _c, _d, _e, _f;
-        let result = {
+        const result = {
             symbol: undefined,
             PressureMSL: undefined,
             Temperature2m: undefined,
@@ -14992,15 +14992,15 @@ class DanishMI {
         return result;
     }
     ResolveDailyCondition(hourlyData, date) {
-        let target = date.set({ hour: 6 });
-        let upto = target.plus({ days: 1 });
-        let relevantHours = hourlyData.filter((x) => {
-            let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
+        const target = date.set({ hour: 6 });
+        const upto = target.plus({ days: 1 });
+        const relevantHours = hourlyData.filter((x) => {
+            const hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
             if (hour >= target && hour < upto)
                 return true;
             return false;
         });
-        let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+        const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
         if (!!normalizedSymbols.find(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
@@ -15016,7 +15016,7 @@ class DanishMI {
                 customIcon: "alien-symbolic",
                 icons: ["weather-severe-alert"]
             };
-        let isNight = (symbol > 100);
+        const isNight = (symbol > 100);
         if (isNight)
             symbol = symbol - 100;
         switch (symbol) {
@@ -15175,7 +15175,7 @@ class DanishMI {
         this.observationParams.south = loc.lat - 0.04;
     }
     OrderObservations(observations, loc) {
-        let result = [];
+        const result = [];
         for (const key in observations) {
             const element = observations[key];
             result.push(Object.assign(Object.assign({}, element), { dist: GetDistance(loc.lat, loc.lon, element.latitude, element.longitude) }));
@@ -15203,7 +15203,7 @@ class DanishMI {
             if (str.length == 3) {
                 str = ("0000" + str).substr(-4, 4);
             }
-            let today = new Date();
+            const today = new Date();
             today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
             return today;
         }
@@ -15412,8 +15412,8 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     DisplayWeather(weather) {
-        let location = GenerateLocationText(weather, this.config);
-        let lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+        const location = GenerateLocationText(weather, this.config);
+        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
         this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
         this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
         this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
@@ -15458,7 +15458,7 @@ class WeatherApplet extends TextIconApplet {
             this.SetCustomIcon(customIcon);
         }
         else {
-            let icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
+            const icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
             this.config.AppletIconType == main_IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(icon) :
                 this.set_applet_icon_name(icon);
@@ -15481,7 +15481,7 @@ class WeatherApplet extends TextIconApplet {
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
     async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
-        let response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
+        const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -15493,7 +15493,7 @@ class WeatherApplet extends TextIconApplet {
         return response.Data;
     }
     async LoadAsync(url, params, HandleError, headers, method = "GET") {
-        let response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
+        const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -15505,12 +15505,12 @@ class WeatherApplet extends TextIconApplet {
         return response.Data;
     }
     async locationLookup() {
-        let command = "xdg-open ";
+        const command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
     async submitIssue() {
         var _a, _b, _c;
-        let command = "xdg-open";
+        const command = "xdg-open";
         const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
         const title = "weather@mockturl - ";
         const distribution = (_b = (_a = (await SpawnProcess(["uname", "-vrosmi"]))) === null || _a === void 0 ? void 0 : _a.Data) === null || _b === void 0 ? void 0 : _b.trim();
@@ -15569,12 +15569,12 @@ The contents of the file saved from the applet help page goes here
         }
     }
     AddRefreshButton() {
-        let itemLabel = _("Refresh");
-        let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
+        const itemLabel = _("Refresh");
+        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {
-        let appletError = {
+        const appletError = {
             detail: error.message,
             userError: false,
             code: error.code,
@@ -15593,7 +15593,7 @@ The contents of the file saved from the applet help page goes here
     }
     EnsureProvider(force = false) {
         var _a;
-        let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
+        const currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
         switch (this.config._dataService) {
             case "DarkSky":
                 if (currentName != "DarkSky" || force)
@@ -15694,7 +15694,7 @@ The contents of the file saved from the applet help page goes here
             this.loop.Pause();
             return;
         }
-        let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
+        const nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         logger_Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
 }

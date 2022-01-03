@@ -36,7 +36,7 @@ export class ClimacellV4 implements WeatherProvider {
 		this.params.apikey = this.app.config.ApiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
-		let response = await this.app.LoadJsonAsync<ClimacellV4Payload>(this.url, this.params, (m) => this.HandleHTTPError(m));
+		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>(this.url, this.params, (m) => this.HandleHTTPError(m));
 
 		if (response == null)
 			return null;
@@ -59,14 +59,14 @@ export class ClimacellV4 implements WeatherProvider {
 	}
 
 	private ParseWeather(loc: LocationData, data: ClimacellV4Payload): WeatherData | null {
-		let current = data.data.timelines.find(x => x.timestep == "current")?.intervals?.[0];
-		let hourly = data.data.timelines.find(x => x.timestep == "1h")?.intervals;
-		let daily = data.data.timelines.find(x => x.timestep == "1d")?.intervals;
+		const current = data.data.timelines.find(x => x.timestep == "current")?.intervals?.[0];
+		const hourly = data.data.timelines.find(x => x.timestep == "1h")?.intervals;
+		const daily = data.data.timelines.find(x => x.timestep == "1d")?.intervals;
 
 		if (!current || !daily || !hourly || !daily[0]?.values)
 			return null;
 
-		let result: WeatherData = {
+		const result: WeatherData = {
 			coord: {
 				lat: loc.lat,
 				lon: loc.lon
@@ -95,8 +95,8 @@ export class ClimacellV4 implements WeatherProvider {
 			forecasts: []
 		}
 
-		let hours: HourlyForecastData[] = [];
-		let days: ForecastData[] = [];
+		const hours: HourlyForecastData[] = [];
+		const days: ForecastData[] = [];
 
 		for (let index = 0; index < daily.length; index++) {
 			const element = daily[index];
@@ -110,7 +110,7 @@ export class ClimacellV4 implements WeatherProvider {
 
 		for (let index = 0; index < hourly.length; index++) {
 			const element = hourly[index];
-			let hour: HourlyForecastData = {
+			const hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
 				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.values.temperature)
@@ -137,7 +137,7 @@ export class ClimacellV4 implements WeatherProvider {
 	}
 
 	private ResolveCondition(weatherCode: number, isNight: boolean = false): Condition {
-		let result: Condition = {
+		const result: Condition = {
 			customIcon: "refresh-symbolic",
 			icons: ["weather-severe-alert"],
 			main: _("Unknown"),

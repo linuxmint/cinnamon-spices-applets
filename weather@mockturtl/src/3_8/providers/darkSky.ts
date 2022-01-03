@@ -51,7 +51,7 @@ export class DarkSky implements WeatherProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		let now = new Date(Date.now());
+		const now = new Date(Date.now());
 		if (now.getUTCFullYear() > 2022) {
 			this.app.ShowError(
 				{
@@ -62,10 +62,10 @@ export class DarkSky implements WeatherProvider {
 			)
 			return null;
 		}
-		let query = this.ConstructQuery(loc);
+		const query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		let json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
+		const json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
 		if (!json) return null;
 
 		if (!(json as any).code) {                   // No code, Request Success
@@ -80,9 +80,9 @@ export class DarkSky implements WeatherProvider {
 
 	private ParseWeather(json: DarkSkyPayload): WeatherData | null {
 		try {
-			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
-			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
-			let result: WeatherData = {
+			const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+			const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+			const result: WeatherData = {
 				date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
 				coord: {
 					lat: json.latitude,
@@ -119,8 +119,8 @@ export class DarkSky implements WeatherProvider {
 
 			// Forecast
 			for (let i = 0; i < json.daily.data.length; i++) {
-				let day = json.daily.data[i];
-				let forecast: ForecastData = {
+				const day = json.daily.data[i];
+				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
 					temp_min: this.ToKelvin(day.temperatureLow),
 					temp_max: this.ToKelvin(day.temperatureHigh),
@@ -141,8 +141,8 @@ export class DarkSky implements WeatherProvider {
 			}
 
 			for (let i = 0; i < json.hourly.data.length; i++) {
-				let hour = json.hourly.data[i];
-				let forecast: HourlyForecastData = {
+				const hour = json.hourly.data[i];
+				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature),
 					condition: {
@@ -178,14 +178,14 @@ export class DarkSky implements WeatherProvider {
 		if (systemLocale == "zh-tw") {
 			return systemLocale;
 		}
-		let lang = systemLocale.split("-")[0];
+		const lang = systemLocale.split("-")[0];
 		return lang;
 	}
 
 	private ConstructQuery(loc: LocationData): string {
 		this.SetQueryUnit();
 		let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-		let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+		const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
 		if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
 			query = query + "&lang=" + locale;
 		}
@@ -222,9 +222,9 @@ export class DarkSky implements WeatherProvider {
 	}
 
 	private HandleResponseErrors(json: any): void {
-		let code = json.code;
-		let error = json.error;
-		let errorMsg = "DarkSky API: "
+		const code = json.code;
+		const error = json.error;
+		const errorMsg = "DarkSky API: "
 		Logger.Debug("DarksSky API error payload: " + json);
 		switch (code) {
 			case "400":
@@ -237,7 +237,7 @@ export class DarkSky implements WeatherProvider {
 	};
 
 	private ProcessSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		let result = "";
 		let lineLength = 0;
 		for (let i = 0; i < processed.length; i++) {
@@ -252,9 +252,9 @@ export class DarkSky implements WeatherProvider {
 	};
 
 	private GetShortSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		if (processed.length == 1) return processed[0];
-		let result: string[] = [];
+		const result: string[] = [];
 		for (let i = 0; i < processed.length; i++) {
 			if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
 				result.push(processed[i]) + " ";
@@ -265,7 +265,7 @@ export class DarkSky implements WeatherProvider {
 	};
 
 	private GetShortCurrentSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		let result = "";
 		let maxLoop;
 		(processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;

@@ -60,16 +60,16 @@ export class UIForecasts {
 	public Display(weather: WeatherData, config: Config): boolean {
 		try {
 			if (!weather.forecasts) return false;
-			let len = Math.min(this.forecasts.length, weather.forecasts.length);
+			const len = Math.min(this.forecasts.length, weather.forecasts.length);
 			for (let i = 0; i < len; i++) {
-				let forecastData = weather.forecasts[i];
-				let forecastUi = this.forecasts[i];
+				const forecastData = weather.forecasts[i];
+				const forecastUi = this.forecasts[i];
 
 				// Weather Condition
-				let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+				const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
 
 				// Day Names
-				let dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+				const dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
 				forecastUi.Day.actor.label = dayName;
 
 				forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
@@ -129,14 +129,14 @@ export class UIForecasts {
 		});
 		this.grid.set_column_homogeneous(true);
 
-		let table = new Widget({
+		const table = new Widget({
 			layout_manager: this.grid,
 			style_class: STYLE_FORECAST_CONTAINER
 		});
 
 		this.actor.set_child(table);
 
-		let maxDays = this.app.GetMaxForecastDays();
+		const maxDays = this.app.GetMaxForecastDays();
 		// User settings
 		let maxRow = config._forecastRows;
 		let maxCol = config._forecastColumns;
@@ -150,7 +150,7 @@ export class UIForecasts {
 		let curCol = 0;
 
 		for (let i = 0; i < maxDays; i++) {
-			let forecastWeather: ForecastUI = {} as ForecastUI;
+			const forecastWeather: ForecastUI = {} as ForecastUI;
 
 			// proceed to next row
 			if (curCol >= maxCol) {
@@ -189,7 +189,7 @@ export class UIForecasts {
 				style_class: STYLE_FORECAST_TEMPERATURE
 			});
 
-			let by = new BoxLayout({
+			const by = new BoxLayout({
 				vertical: true,
 				style_class: STYLE_FORECAST_DATABOX
 			});
@@ -197,7 +197,7 @@ export class UIForecasts {
 			by.add_actor(forecastWeather.Summary);
 			by.add_actor(forecastWeather.Temperature);
 
-			let bb = new BoxLayout({
+			const bb = new BoxLayout({
 				style_class: STYLE_FORECAST_BOX
 			});
 

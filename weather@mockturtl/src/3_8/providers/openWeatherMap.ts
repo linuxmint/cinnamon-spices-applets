@@ -49,7 +49,7 @@ export class OpenWeatherMap implements WeatherProvider {
 
 		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
 
-		let promises: Promise<any>[] = [];
+		const promises: Promise<any>[] = [];
 		promises.push(this.app.LoadJsonAsync<any>(this.base_url, params, this.HandleError));
 
 		// If we don't have the ID we push a call to get it
@@ -75,7 +75,7 @@ export class OpenWeatherMap implements WeatherProvider {
 
 	private ParseWeather(json: any, loc: LocationData): WeatherData | null {
 		try {
-			let weather: WeatherData = {
+			const weather: WeatherData = {
 				coord: {
 					lat: json.lat,
 					lon: json.lon
@@ -112,7 +112,7 @@ export class OpenWeatherMap implements WeatherProvider {
 			};
 
 			if (json.minutely != null) {
-				let immediate: ImmediatePrecipitation = {
+				const immediate: ImmediatePrecipitation = {
 					start: -1,
 					end: -1
 				}
@@ -131,10 +131,10 @@ export class OpenWeatherMap implements WeatherProvider {
 				weather.immediatePrecipitation = immediate;
 			}
 
-			let forecasts: ForecastData[] = [];
+			const forecasts: ForecastData[] = [];
 			for (let i = 0; i < json.daily.length; i++) {
-				let day = json.daily[i];
-				let forecast: ForecastData = {
+				const day = json.daily[i];
+				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
@@ -149,10 +149,10 @@ export class OpenWeatherMap implements WeatherProvider {
 			}
 			weather.forecasts = forecasts;
 
-			let hourly: HourlyForecastData[] = [];
+			const hourly: HourlyForecastData[] = [];
 			for (let index = 0; index < json.hourly.length; index++) {
 				const hour = json.hourly[index];
-				let forecast: HourlyForecastData = {
+				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
 					temp: hour.temp,
 					condition: {
@@ -209,7 +209,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		};
 
 		// Append Language if supported and enabled
-		let locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
+		const locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
 		if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
 			params.lang = locale;
 		}
@@ -224,7 +224,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
 			return systemLocale;
 		}
-		let lang = systemLocale.split("-")[0];
+		const lang = systemLocale.split("-")[0];
 		// OWM uses different language code for Swedish, Czech, Korean, Latvian, Norwegian
 		if (lang == "sv") {
 			return "se";
@@ -242,12 +242,12 @@ export class OpenWeatherMap implements WeatherProvider {
 
 	private HadErrors(json: any): boolean {
 		if (!this.HasReturnedError(json)) return false;
-		let errorMsg = "OpenWeatherMap Response: ";
-		let error = {
+		const errorMsg = "OpenWeatherMap Response: ";
+		const error = {
 			service: "openweathermap",
 			type: "hard",
 		} as AppletError;
-		let errorPayload: OpenWeatherMapError = json;
+		const errorPayload: OpenWeatherMapError = json;
 		switch (errorPayload.cod) {
 			case ("400"):
 				error.detail = "bad location format";
