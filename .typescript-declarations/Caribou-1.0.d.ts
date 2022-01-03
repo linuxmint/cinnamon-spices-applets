@@ -102,9 +102,9 @@ declare namespace imports.gi.Caribou {
 		connect(signal: "group-added", callback: (owner: this, name: string) => void): number;
 		connect(signal: "group-removed", callback: (owner: this, name: string) => void): number;
 
-		connect(signal: "notify::active_group", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::keyboard_type", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::keyboard_file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::active-group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keyboard-type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keyboard-file", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -164,7 +164,7 @@ declare namespace imports.gi.Caribou {
 		get_levels(): [ string[], number ];
 		get_level(level_name: string): Caribou.LevelModel;
 		get_active_level(): string;
-		connect(signal: "notify::active_level", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::active-level", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::group", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::variant", callback: (owner: this, ...args: any) => void): number;
 
@@ -172,9 +172,7 @@ declare namespace imports.gi.Caribou {
 
 	type GroupModelInitOptionsMixin = GObject.ObjectInitOptions & Caribou.IKeyboardObjectInitOptions & 
 	Pick<IGroupModel,
-		"active_level" |
-		"group" |
-		"variant">;
+		"active_level">;
 
 	export interface GroupModelInitOptions extends GroupModelInitOptionsMixin {}
 
@@ -286,8 +284,8 @@ declare namespace imports.gi.Caribou {
 		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::toggle", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::repeatable", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_modifier", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::show_subkeys", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-modifier", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show-subkeys", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::keyval", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
@@ -307,8 +305,7 @@ declare namespace imports.gi.Caribou {
 		"name" |
 		"keyval" |
 		"text" |
-		"label" |
-		"modifier_state">;
+		"label">;
 
 	export interface KeyModelInitOptions extends KeyModelInitOptionsMixin {}
 
@@ -382,16 +379,16 @@ declare namespace imports.gi.Caribou {
 		set_autorestart(value: boolean): void;
 		get_inverse_scanning(): boolean;
 		set_inverse_scanning(value: boolean): void;
-		connect(signal: "notify::bind_settings", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scan_grouping", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scan_enabled", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::step_time", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::switch_device", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::keyboard_key", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::mouse_button", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scan_cycles", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bind-settings", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-grouping", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-enabled", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::step-time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::switch-device", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keyboard-key", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::mouse-button", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-cycles", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::autorestart", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::inverse_scanning", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::inverse-scanning", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -489,8 +486,8 @@ declare namespace imports.gi.Caribou {
 		set_scan_stepping(value: boolean): void;
 		get_scan_selected(): boolean;
 		set_scan_selected(value: boolean): void;
-		connect(signal: "notify::scan_stepping", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scan_selected", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-stepping", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-selected", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -530,7 +527,7 @@ declare namespace imports.gi.Caribou {
 		connect(signal: "step-item-changed", callback: (owner: this, step_item: Caribou.IScannableItem | null) => void): number;
 		connect(signal: "scan-cleared", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::scan_grouping", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scan-grouping", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

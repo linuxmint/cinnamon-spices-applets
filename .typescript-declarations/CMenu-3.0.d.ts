@@ -264,8 +264,8 @@ declare namespace imports.gi.CMenu {
 		connect(signal: "changed", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::menu_basename", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::menu_path", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu-basename", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::menu-path", callback: (owner: this, ...args: any) => void): number;
 
 	}
 

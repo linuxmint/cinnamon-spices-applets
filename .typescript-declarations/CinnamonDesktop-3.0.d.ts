@@ -175,8 +175,7 @@ declare namespace imports.gi.CinnamonDesktop {
 	type BGCrossfadeInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IBGCrossfade,
 		"height" |
-		"width" |
-		"parent_object">;
+		"width">;
 
 	export interface BGCrossfadeInitOptions extends BGCrossfadeInitOptionsMixin {}
 
@@ -570,7 +569,7 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		connect(signal: "output-disconnected", callback: (owner: this, output: any | null) => void): number;
 
-		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gdk-screen", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -654,16 +653,14 @@ declare namespace imports.gi.CinnamonDesktop {
 		 */
 		set_format_string(format_string: string | null): boolean;
 		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::format_string", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::format-string", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::parent_object", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type WallClockInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IWallClock,
-		"clock" |
-		"format_string" |
-		"parent_object">;
+		"format_string">;
 
 	export interface WallClockInitOptions extends WallClockInitOptionsMixin {}
 
@@ -779,10 +776,7 @@ declare namespace imports.gi.CinnamonDesktop {
 
 	}
 
-	type XkbInfoInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IXkbInfo,
-		"parent_object">;
-
+	type XkbInfoInitOptionsMixin = GObject.ObjectInitOptions
 	export interface XkbInfoInitOptions extends XkbInfoInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,

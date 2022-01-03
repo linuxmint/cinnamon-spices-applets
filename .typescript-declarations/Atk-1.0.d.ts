@@ -124,20 +124,14 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "link-activated", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::end_index", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::number_of_anchors", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selected_link", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::start_index", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::end-index", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::number-of-anchors", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selected-link", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::start-index", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
-	type HyperlinkInitOptionsMixin = GObject.ObjectInitOptions & ActionInitOptions & 
-	Pick<IHyperlink,
-		"end_index" |
-		"number_of_anchors" |
-		"selected_link" |
-		"start_index">;
-
+	type HyperlinkInitOptionsMixin = GObject.ObjectInitOptions & ActionInitOptions
 	export interface HyperlinkInitOptions extends HyperlinkInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -643,21 +637,21 @@ declare namespace imports.gi.Atk {
 		 */
 		connect(signal: "visible-data-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::accessible_component_layer", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_component_mdi_zorder", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_hypertext_nlinks", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_role", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_caption", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_caption_object", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_column_description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_column_header", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_row_description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_row_header", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_table_summary", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accessible_value", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-component-layer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-component-mdi-zorder", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-hypertext-nlinks", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-parent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-role", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-caption", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-caption-object", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-column-description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-column-header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-row-description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-row-header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-table-summary", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accessible-value", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::description", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::accessible_parent", callback: (owner: this, ...args: any) => void): number;
@@ -669,10 +663,7 @@ declare namespace imports.gi.Atk {
 
 	type ObjectInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IObject,
-		"accessible_component_layer" |
-		"accessible_component_mdi_zorder" |
 		"accessible_description" |
-		"accessible_hypertext_nlinks" |
 		"accessible_name" |
 		"accessible_parent" |
 		"accessible_role" |
@@ -683,13 +674,7 @@ declare namespace imports.gi.Atk {
 		"accessible_table_row_description" |
 		"accessible_table_row_header" |
 		"accessible_table_summary" |
-		"accessible_value" |
-		"description" |
-		"name" |
-		"accessible_parent" |
-		"role" |
-		"relation_set" |
-		"layer">;
+		"accessible_value">;
 
 	export interface ObjectInitOptions extends ObjectInitOptionsMixin {}
 
@@ -865,11 +850,7 @@ declare namespace imports.gi.Atk {
 
 	}
 
-	type RegistryInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IRegistry,
-		"factory_type_registry" |
-		"factory_singleton_cache">;
-
+	type RegistryInitOptionsMixin = GObject.ObjectInitOptions
 	export interface RegistryInitOptions extends RegistryInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -921,7 +902,7 @@ declare namespace imports.gi.Atk {
 		 * @returns TRUE if the removal is successful.
 		 */
 		remove_target(target: Object): boolean;
-		connect(signal: "notify::relation_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::relation-type", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::target", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::target", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::relationship", callback: (owner: this, ...args: any) => void): number;
@@ -931,9 +912,7 @@ declare namespace imports.gi.Atk {
 	type RelationInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IRelation,
 		"relation_type" |
-		"target" |
-		"target" |
-		"relationship">;
+		"target">;
 
 	export interface RelationInitOptions extends RelationInitOptionsMixin {}
 
@@ -1036,10 +1015,7 @@ declare namespace imports.gi.Atk {
 
 	}
 
-	type RelationSetInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IRelationSet,
-		"relations">;
-
+	type RelationSetInitOptionsMixin = GObject.ObjectInitOptions
 	export interface RelationSetInitOptions extends RelationSetInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
