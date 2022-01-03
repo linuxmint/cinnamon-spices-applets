@@ -242,7 +242,7 @@ export class Weatherbit extends BaseProvider {
 		if (split.length != 5) return null;
 		return DateTime.fromObject({
 			year: parseInt(split[0]),
-			month: parseInt(split[1]) - 1,
+			month: parseInt(split[1]),
 			day: parseInt(split[2]),
 			hour: parseInt(split[3]),
 			minute: parseInt(split[4])
