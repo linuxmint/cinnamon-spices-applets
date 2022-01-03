@@ -126,8 +126,7 @@ export class HttpLib {
 		// Add params to url
 		if (params != null) {
 			const items = Object.keys(params);
-			for (let index = 0; index < items.length; index++) {
-				const item = items[index];
+			for (const [index, item] of items.entries()) {
 				url += (index == 0) ? "?" : "&";
 				url += (item) + "=" + params[item]
 			}

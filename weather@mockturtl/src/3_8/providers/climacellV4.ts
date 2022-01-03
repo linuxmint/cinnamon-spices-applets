@@ -97,8 +97,7 @@ export class ClimacellV4 extends BaseProvider {
 		const hours: HourlyForecastData[] = [];
 		const days: ForecastData[] = [];
 
-		for (let index = 0; index < daily.length; index++) {
-			const element = daily[index];
+		for (const element of daily) {
 			days.push({
 				condition: this.ResolveCondition(element.values.weatherCode),
 				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
@@ -107,8 +106,7 @@ export class ClimacellV4 extends BaseProvider {
 			});
 		}
 
-		for (let index = 0; index < hourly.length; index++) {
-			const element = hourly[index];
+		for (const element of hourly) {
 			const hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode),
 				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),

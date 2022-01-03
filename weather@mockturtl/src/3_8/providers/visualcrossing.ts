@@ -86,8 +86,7 @@ export class VisualCrossing extends BaseProvider {
 	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
 		const result: ForecastData[] = [];
 		if (!!forecasts) {
-			for (let index = 0; index < forecasts.length; index++) {
-				const element = forecasts[index];
+			for (const element of forecasts) {
 				result.push({
 					date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
 					condition: this.GenerateCondition(element.icon, element.conditions, translate),
@@ -105,13 +104,11 @@ export class VisualCrossing extends BaseProvider {
 
 		const result: HourlyForecastData[] = [];
 		if (!!forecasts) {
-			for (let index = 0; index < forecasts.length; index++) {
-				const element = forecasts[index];
+			for (const element of forecasts) {
 				if (!element.hours)
 					continue;
 
-				for (let index = 0; index < element.hours.length; index++) {
-					const hour = element.hours[index];
+				for (const hour of element.hours) {
 					const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 					if (time < currentHour) continue;
 					const item: HourlyForecastData = {
@@ -144,8 +141,7 @@ export class VisualCrossing extends BaseProvider {
 
 		const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
-		for (let index = 0; index < forecasts[0].hours.length; index++) {
-			const hour = forecasts[0].hours[index];
+		for (const hour of forecasts[0].hours) {
 			const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 			if (time < currentHour) continue;
 			return hour;
@@ -303,8 +299,7 @@ export class VisualCrossing extends BaseProvider {
 	private ResolveTypeIDs(condition: string): string {
 		let result = "";
 		let split = condition.split(", ");
-		for (let index = 0; index < split.length; index++) {
-			const element = split[index];
+		for (const [index, element] of split.entries()) {
 			result += this.ResolveTypeID(element);
 			// not the last
 			if (index < split.length - 1)

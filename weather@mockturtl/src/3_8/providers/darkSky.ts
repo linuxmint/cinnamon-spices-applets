@@ -117,8 +117,7 @@ export class DarkSky extends BaseProvider {
 			}
 
 			// Forecast
-			for (let i = 0; i < json.daily.data.length; i++) {
-				const day = json.daily.data[i];
+			for (const day of json.daily.data) {
 				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
 					temp_min: this.ToKelvin(day.temperatureLow),
@@ -139,8 +138,7 @@ export class DarkSky extends BaseProvider {
 				result.forecasts.push(forecast);
 			}
 
-			for (let i = 0; i < json.hourly.data.length; i++) {
-				const hour = json.hourly.data[i];
+			for (const hour of json.hourly.data) {
 				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature),
@@ -239,13 +237,13 @@ export class DarkSky extends BaseProvider {
 		const processed = summary.split(" ");
 		let result = "";
 		let lineLength = 0;
-		for (let i = 0; i < processed.length; i++) {
-			if (lineLength + processed[i].length > this.descriptionLineLength) {
+		for (const elem of processed) {
+			if (lineLength + elem.length > this.descriptionLineLength) {
 				result = result + "\n";
 				lineLength = 0;
 			}
-			result = result + processed[i] + " ";
-			lineLength = lineLength + processed[i].length + 1;
+			result = result + elem + " ";
+			lineLength = lineLength + elem.length + 1;
 		}
 		return result;
 	};
@@ -254,9 +252,9 @@ export class DarkSky extends BaseProvider {
 		const processed = summary.split(" ");
 		if (processed.length == 1) return processed[0];
 		const result: string[] = [];
-		for (let i = 0; i < processed.length; i++) {
-			if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-				result.push(processed[i]) + " ";
+		for (const elem of processed) {
+			if (!/[\(\)]/.test(elem) && !this.WordBanned(elem)) {
+				result.push(elem);
 			}
 			if (result.length == 2) break;
 		}

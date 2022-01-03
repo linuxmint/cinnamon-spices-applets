@@ -69,8 +69,7 @@ export function CapitalizeEveryWord(description: string): string {
 	}
 	const split = description.split(" ");
 	let result = "";
-	for (let index = 0; index < split.length; index++) {
-		const element = split[index];
+	for (const [index, element] of split.entries()) {
 		result += CapitalizeFirstLetter(element);
 		if (index != split.length - 1)
 			result += " ";
@@ -497,10 +496,10 @@ export function mode<T>(arr: T[]): T | null {
 };
 
 // Passing appropriate resolver function for the API, and the code
-export function WeatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
-	for (let i = 0; i < code.length; i++) {
-		if (HasIcon(code[i], icon_type))
-			return code[i];
+export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
+	for (const icon of icons) {
+		if (HasIcon(icon, icon_type))
+			return icon;
 	}
 	return 'weather-severe-alert';
 }
@@ -523,9 +522,9 @@ export function ConstructJsLocale(locale: string): string | null {
 	let jsLocale: string | null = locale.split(".")[0];
 	const tmp: string[] = jsLocale.split("_");
 	jsLocale = "";
-	for (let i = 0; i < tmp.length; i++) {
+	for (const [i, item] of tmp.entries()) {
 		if (i != 0) jsLocale += "-";
-		jsLocale += tmp[i].toLowerCase();
+		jsLocale += item.toLowerCase();
 	}
 
 	if (locale == "c" || locale == null) jsLocale = null;

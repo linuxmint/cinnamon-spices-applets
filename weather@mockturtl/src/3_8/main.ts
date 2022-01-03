@@ -525,14 +525,14 @@ The contents of the file saved from the applet help page goes here
 		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
 		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
 
-		for (let index = 0; index < weatherInfo.forecasts.length; index++) {
-			const condition = weatherInfo.forecasts[index].condition;
+		for (const forecast of weatherInfo.forecasts) {
+			const condition = forecast.condition;
 			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
 			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
 		}
 
-		for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
-			const condition = weatherInfo.hourlyForecasts[index].condition;
+		for (const forecast of weatherInfo.hourlyForecasts) {
+			const condition = forecast.condition;
 			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
 			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
 		}

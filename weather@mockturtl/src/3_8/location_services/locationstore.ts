@@ -93,16 +93,15 @@ export class LocationStore {
 	 * @param entryText 
 	 */
 	public FindLocation(entryText: string): LocationData | null {
-		for (let index = 0; index < this.locations.length; index++) {
-			const element = this.locations[index];
-			if (element.entryText == entryText)
+		for (const location of this.locations) {
+			if (location.entryText == entryText)
 				return {
-					country: element.country,
-					city: element.city,
-					entryText: element.entryText,
-					lat: element.lat,
-					lon: element.lon,
-					timeZone: this.NormalizeTZ(element.timeZone),
+					country: location.country,
+					city: location.city,
+					entryText: location.entryText,
+					lat: location.lat,
+					lon: location.lon,
+					timeZone: this.NormalizeTZ(location.timeZone),
 				};
 		}
 		return null;
@@ -243,8 +242,7 @@ export class LocationStore {
 	private FindIndex(loc: LocationData | null, locations: LocationData[] | null = null): number {
 		if (loc == null) return -1;
 		if (locations == null) locations = this.locations
-		for (let index = 0; index < locations.length; index++) {
-			const element = locations[index];
+		for (const [index, element] of locations.entries()) {
 			if (element.entryText == loc.entryText) return index;
 		}
 		return -1;
@@ -260,8 +258,9 @@ export class LocationStore {
 			return false;
 		if (newLoc == null)
 			return false;
-		for (const key in newLoc) {
-			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
+		let key: keyof LocationData;
+		for (key in newLoc) {
+			if (oldLoc[key] != newLoc[key]) {
 				return false
 			}
 		}

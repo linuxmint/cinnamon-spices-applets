@@ -150,8 +150,7 @@ export class Weatherbit extends BaseProvider {
 	private ParseForecast = (json: any): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
-			for (let i = 0; i < json.data.length; i++) {
-				const day = json.data[i];
+			for (const day of json.data) {
 				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
 					temp_min: day.min_temp,
@@ -178,8 +177,7 @@ export class Weatherbit extends BaseProvider {
 	private ParseHourlyForecast = (json: any): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
-			for (let i = 0; i < json.data.length; i++) {
-				const hour = json.data[i];
+			for (const hour of json.data.length) {
 				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
 					temp: hour.temp,

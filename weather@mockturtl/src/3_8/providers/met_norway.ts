@@ -38,8 +38,7 @@ export class MetNorway extends BaseProvider {
 	private RemoveEarlierElements(json: MetNorwayPayload, loc: LocationData): MetNorwayPayload {
 		const now = DateTime.now().setZone(loc.timeZone);
 		let startIndex = -1;
-		for (let i = 0; i < json.properties.timeseries.length; i++) {
-			const element = json.properties.timeseries[i];
+		for (const [i, element] of json.properties.timeseries.entries()) {
 			const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
 			if (timestamp < now && now.hour != timestamp.hour) {
 				startIndex = i;
@@ -94,8 +93,7 @@ export class MetNorway extends BaseProvider {
 		};
 
 		const hourlyForecasts: HourlyForecastData[] = [];
-		for (let i = 0; i < json.properties.timeseries.length; i++) {
-			const element = json.properties.timeseries[i];
+		for (const element of json.properties.timeseries) {
 
 			// Hourly forecast
 			if (!!element.data.next_1_hours) {
@@ -119,7 +117,7 @@ export class MetNorway extends BaseProvider {
 		const forecasts: ForecastData[] = [];
 		const days = this.SortDataByDay(forecastsData, loc);
 
-		for (let i = 0; i < days.length; i++) {
+		for (const day of days) {
 			const forecast: ForecastData = {
 				condition: {
 					customIcon: "cloudy-symbolic",
@@ -135,8 +133,7 @@ export class MetNorway extends BaseProvider {
 			// Get min/max temp from 6-hourly data
 			// get condition from hourly data
 			const conditionCounter: ConditionCount = {};
-			for (let j = 0; j < days[i].length; j++) {
-				const element = days[i][j];
+			for (const element of day) {
 				if (!element.data.next_6_hours) continue;
 				forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
 				if (element.data.next_6_hours.details.air_temperature_max > <number>forecast.temp_max) forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
@@ -166,9 +163,9 @@ export class MetNorway extends BaseProvider {
 
 	private GetEarliestDataForToday(events: MetNorwayData[], loc: LocationData): MetNorwayData {
 		let earliest: number = 0;
-		for (let i = 0; i < events.length; i++) {
-			const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
-			const timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
+		for (const [i, element] of events.entries()) {
+			const earliestElementTime = DateTime.fromISO(element.time, { zone: loc.timeZone });
+			const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
 
 			// not same date
 			if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day")) continue;
@@ -185,8 +182,7 @@ export class MetNorway extends BaseProvider {
 		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
 		let dayIndex = 0;
 		days.push([]);
-		for (let i = 0; i < data.length; i++) {
-			const element = data[i];
+		for (const element of data) {
 			const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
 			if (OnSameDay(timestamp, currentDay)) {
 				days[dayIndex].push(element);

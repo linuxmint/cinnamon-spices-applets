@@ -103,8 +103,7 @@ export class DanishMI extends BaseProvider {
 		result.forecasts = forecastData;
 
 		const hourlyData: HourlyForecastData[] = [];
-		for (let index = 0; index < forecasts.timeserie.length; index++) {
-			const element = forecasts.timeserie[index];
+		for (const element of forecasts.timeserie) {
 			if (element.time == null)
 				continue
 
@@ -139,8 +138,7 @@ export class DanishMI extends BaseProvider {
 			PrecAmount10Min: undefined,
 			WindGustLast10Min: undefined
 		}
-		for (let index = 0; index < observations.length; index++) {
-			const element = observations[index];
+		for (const element of observations) {
 			result.symbol = result.symbol ?? element.values.symbol;
 			result.PressureMSL = result.PressureMSL ?? element.values.PressureMSL;
 			result.Temperature2m = result.Temperature2m ?? element.values.Temperature2m;

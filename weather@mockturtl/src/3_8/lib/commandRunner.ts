@@ -34,8 +34,7 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 export async function SpawnProcess(command: string[]): Promise<GenericResponse> {
 	// prepare command
 	let cmd = "";
-	for (let index = 0; index < command.length; index++) {
-		const element = command[index];
+	for (const element of command) {
 		cmd += "'" + element + "' ";
 	}
 

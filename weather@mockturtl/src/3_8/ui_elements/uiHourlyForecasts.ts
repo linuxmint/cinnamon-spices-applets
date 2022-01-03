@@ -95,11 +95,11 @@ export class UIHourlyForecasts {
 		if (!this.hourlyForecasts)
 			return;
 
-		for (let i = 0; i < this.hourlyForecasts.length; i++) {
-			if (!this.hourlyForecasts[i]?.Icon)
+		for (const hourly of this.hourlyForecasts) {
+			if (!hourly?.Icon)
 				continue;
 
-			this.hourlyForecasts[i].Icon.icon_type = iconType;
+			hourly.Icon.icon_type = iconType;
 		}
 	}
 
@@ -228,8 +228,7 @@ export class UIHourlyForecasts {
 	private AdjustHourlyBoxItemWidth(): void {
 		const requiredWidth = this.GetHourlyBoxItemWidth();
 
-		for (let index = 0; index < this.hourlyContainers.length; index++) {
-			const element = this.hourlyContainers[index];
+		for (const element of this.hourlyContainers) {
 			element.set_width(requiredWidth);
 		}
 	}

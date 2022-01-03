@@ -48,11 +48,11 @@ export class UIForecasts {
 		if (!this.forecasts)
 			return;
 
-		for (let i = 0; i < this.forecasts.length; i++) {
-			if (!this.forecasts[i]?.Icon)
+		for (const forecast of this.forecasts) {
+			if (!forecast?.Icon)
 				continue;
 
-			this.forecasts[i].Icon.icon_type = iconType;
+			forecast.Icon.icon_type = iconType;
 		}
 	}
 

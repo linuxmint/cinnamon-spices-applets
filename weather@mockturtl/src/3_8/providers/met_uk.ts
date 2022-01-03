@@ -120,8 +120,7 @@ export class MetUk extends BaseProvider {
 
 		// Sort out close observation sites
 		let observationSites: WeatherSite[] = [];
-		for (let index = 0; index < observationSiteList.Locations.Location.length; index++) {
-			const element = observationSiteList.Locations.Location[index];
+		for (const element of observationSiteList.Locations.Location) {
 			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
 			if (element.dist > range) continue; // do not include stations outside area
 			observationSites.push(element);
@@ -135,8 +134,7 @@ export class MetUk extends BaseProvider {
 
 	private async GetObservationData(observationSites: WeatherSite[]) {
 		const observations: METPayload[] = [];
-		for (let index = 0; index < observationSites.length; index++) {
-			const element = observationSites[index];
+		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
 			const payload = await this.app.LoadJsonAsync<METPayload>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
 			if (!!payload)
@@ -174,8 +172,7 @@ export class MetUk extends BaseProvider {
 			return null;
 		}
 		let dataIndex: number = -1;
-		for (let index = 0; index < json.length; index++) {
-			const element = json[index];
+		for (const [index, element] of json.entries()) {
 			if (element.SiteRep.DV.Location == null) continue;
 			dataIndex = index;
 			break;
@@ -258,8 +255,7 @@ export class MetUk extends BaseProvider {
 	private ParseForecast = (json: METPayload, loc: LocationData): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
-			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-				const element = json.SiteRep.DV.Location.Period[i];
+			for (const element of json.SiteRep.DV.Location.Period) {
 				if (!Array.isArray(element.Rep))
 					continue;
 
@@ -287,14 +283,13 @@ export class MetUk extends BaseProvider {
 	private ParseHourlyForecast = (json: METPayload, loc: LocationData): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
-			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-				const day = json.SiteRep.DV.Location.Period[i];
+			for (const day of json.SiteRep.DV.Location.Period) {
 				const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
 				if (!Array.isArray(day.Rep))
 					continue;
 
-				for (let index = 0; index < day.Rep.length; index++) {
-					const hour = day.Rep[index] as ThreeHourPayload;
+				for (const element of day.Rep) {
+					const hour = element as ThreeHourPayload;
 					const timestamp = date.plus({ hours: parseInt(hour.$) / 60 })
 
 					// Show the previous 3-hour forecast until it reaches the next one
@@ -395,18 +390,18 @@ export class MetUk extends BaseProvider {
 		// Sometimes Location property is missing
 		let result = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, DateTime.utc().setZone(loc.timeZone), loc);
 		if (observations.length == 1) return result;
-		for (let index = 0; index < observations.length; index++) {
-			if (observations[index]?.SiteRep?.DV?.Location?.Period == null) continue;
-			const nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
+		for (const [index, observation] of observations.entries()) {
+			if (observation?.SiteRep?.DV?.Location?.Period == null) continue;
+			const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
 			if (result == null)
 				result = nextObservation;
 			const debugText =
 				" Observation data missing, plugged in from ID " +
-				observations[index].SiteRep.DV.Location.i + ", index " + index +
+				observation.SiteRep.DV.Location.i + ", index " + index +
 				", distance "
 				+ Math.round(GetDistance(
-					parseFloat(observations[index].SiteRep.DV.Location.lat),
-					parseFloat(observations[index].SiteRep.DV.Location.lon),
+					parseFloat(observation.SiteRep.DV.Location.lat),
+					parseFloat(observation.SiteRep.DV.Location.lon),
 					this.currentLoc.lat,
 					this.currentLoc.lon
 				))
@@ -456,8 +451,7 @@ export class MetUk extends BaseProvider {
 	 */
 	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload | null {
 		if (observations == null) return null;
-		for (let index = 0; index < observations.length; index++) {
-			const element = observations[index];
+		for (const element of observations) {
 			const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
 			if (!OnSameDay(date, day)) continue;
 			if (Array.isArray(element.Rep))
@@ -480,8 +474,7 @@ export class MetUk extends BaseProvider {
 		const sites = siteList.Locations.Location as WeatherSite[];
 		let closest = sites[0];
 		closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
-		for (let index = 0; index < sites.length; index++) {
-			const element = sites[index];
+		for (const element of sites) {
 			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
 			if (element.dist < closest.dist) {
 				closest = element;

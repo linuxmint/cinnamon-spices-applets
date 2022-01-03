@@ -8550,8 +8550,7 @@ function CapitalizeEveryWord(description) {
     }
     const split = description.split(" ");
     let result = "";
-    for (let index = 0; index < split.length; index++) {
-        const element = split[index];
+    for (const [index, element] of split.entries()) {
         result += CapitalizeFirstLetter(element);
         if (index != split.length - 1)
             result += " ";
@@ -8892,10 +8891,10 @@ function mode(arr) {
     }, { mode: null, greatestFreq: -Infinity, numMapping: {} }).mode;
 }
 ;
-function WeatherIconSafely(code, icon_type) {
-    for (let i = 0; i < code.length; i++) {
-        if (HasIcon(code[i], icon_type))
-            return code[i];
+function WeatherIconSafely(icons, icon_type) {
+    for (const icon of icons) {
+        if (HasIcon(icon, icon_type))
+            return icon;
     }
     return 'weather-severe-alert';
 }
@@ -8907,10 +8906,10 @@ function ConstructJsLocale(locale) {
     let jsLocale = locale.split(".")[0];
     const tmp = jsLocale.split("_");
     jsLocale = "";
-    for (let i = 0; i < tmp.length; i++) {
+    for (const [i, item] of tmp.entries()) {
         if (i != 0)
             jsLocale += "-";
-        jsLocale += tmp[i].toLowerCase();
+        jsLocale += item.toLowerCase();
     }
     if (locale == "c" || locale == null)
         jsLocale = null;
@@ -9271,8 +9270,7 @@ class Event {
     Invoke(sender, args) {
         if (this.subscribers.length == 0)
             return;
-        for (let index = 0; index < this.subscribers.length; index++) {
-            const element = this.subscribers[index];
+        for (const element of this.subscribers) {
             element(sender, args);
         }
     }
@@ -9361,16 +9359,15 @@ class LocationStore {
         return true;
     }
     FindLocation(entryText) {
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.entryText == entryText)
+        for (const location of this.locations) {
+            if (location.entryText == entryText)
                 return {
-                    country: element.country,
-                    city: element.city,
-                    entryText: element.entryText,
-                    lat: element.lat,
-                    lon: element.lon,
-                    timeZone: this.NormalizeTZ(element.timeZone),
+                    country: location.country,
+                    city: location.city,
+                    entryText: location.entryText,
+                    lat: location.lat,
+                    lon: location.lon,
+                    timeZone: this.NormalizeTZ(location.timeZone),
                 };
         }
         return null;
@@ -9486,8 +9483,7 @@ class LocationStore {
             return -1;
         if (locations == null)
             locations = this.locations;
-        for (let index = 0; index < locations.length; index++) {
-            const element = locations[index];
+        for (const [index, element] of locations.entries()) {
             if (element.entryText == loc.entryText)
                 return index;
         }
@@ -9498,7 +9494,8 @@ class LocationStore {
             return false;
         if (newLoc == null)
             return false;
-        for (const key in newLoc) {
+        let key;
+        for (key in newLoc) {
             if (oldLoc[key] != newLoc[key]) {
                 return false;
             }
@@ -9615,8 +9612,7 @@ class MetUk extends BaseProvider {
             var _a, _b;
             const forecasts = [];
             try {
-                for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    const element = json.SiteRep.DV.Location.Period[i];
+                for (const element of json.SiteRep.DV.Location.Period) {
                     if (!Array.isArray(element.Rep))
                         continue;
                     const day = element.Rep[0];
@@ -9641,13 +9637,12 @@ class MetUk extends BaseProvider {
         this.ParseHourlyForecast = (json, loc) => {
             const forecasts = [];
             try {
-                for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    const day = json.SiteRep.DV.Location.Period[i];
+                for (const day of json.SiteRep.DV.Location.Period) {
                     const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
-                    for (let index = 0; index < day.Rep.length; index++) {
-                        const hour = day.Rep[index];
+                    for (const element of day.Rep) {
+                        const hour = element;
                         const timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
                         const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
                         if (timestamp < threshold)
@@ -9727,8 +9722,7 @@ class MetUk extends BaseProvider {
         if (observationSiteList == null)
             return null;
         let observationSites = [];
-        for (let index = 0; index < observationSiteList.Locations.Location.length; index++) {
-            const element = observationSiteList.Locations.Location[index];
+        for (const element of observationSiteList.Locations.Location) {
             element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist > range)
                 continue;
@@ -9740,8 +9734,7 @@ class MetUk extends BaseProvider {
     }
     async GetObservationData(observationSites) {
         const observations = [];
-        for (let index = 0; index < observationSites.length; index++) {
-            const element = observationSites[index];
+        for (const element of observationSites) {
             logger_Logger.Debug("Getting observation data from station: " + element.id);
             const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
             if (!!payload)
@@ -9768,8 +9761,7 @@ class MetUk extends BaseProvider {
             return null;
         }
         let dataIndex = -1;
-        for (let index = 0; index < json.length; index++) {
-            const element = json[index];
+        for (const [index, element] of json.entries()) {
             if (element.SiteRep.DV.Location == null)
                 continue;
             dataIndex = index;
@@ -9902,7 +9894,7 @@ class MetUk extends BaseProvider {
         return observations;
     }
     MeshObservations(observations, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         if (!observations)
             return null;
         if (observations.length == 0)
@@ -9910,16 +9902,16 @@ class MetUk extends BaseProvider {
         let result = this.GetLatestObservation((_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period, DateTime.utc().setZone(loc.timeZone), loc);
         if (observations.length == 1)
             return result;
-        for (let index = 0; index < observations.length; index++) {
-            if (((_h = (_g = (_f = (_e = observations[index]) === null || _e === void 0 ? void 0 : _e.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
+        for (const [index, observation] of observations.entries()) {
+            if (((_g = (_f = (_e = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _e === void 0 ? void 0 : _e.DV) === null || _f === void 0 ? void 0 : _f.Location) === null || _g === void 0 ? void 0 : _g.Period) == null)
                 continue;
-            const nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
+            const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
             if (result == null)
                 result = nextObservation;
             const debugText = " Observation data missing, plugged in from ID " +
-                observations[index].SiteRep.DV.Location.i + ", index " + index +
+                observation.SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + Math.round(GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + Math.round(GetDistance(parseFloat(observation.SiteRep.DV.Location.lat), parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
             if (result != null) {
                 if ((result === null || result === void 0 ? void 0 : result.V) == null) {
@@ -9961,8 +9953,7 @@ class MetUk extends BaseProvider {
     GetLatestObservation(observations, day, loc) {
         if (observations == null)
             return null;
-        for (let index = 0; index < observations.length; index++) {
-            const element = observations[index];
+        for (const element of observations) {
             const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
             if (!OnSameDay(date, day))
                 continue;
@@ -9980,8 +9971,7 @@ class MetUk extends BaseProvider {
         const sites = siteList.Locations.Location;
         let closest = sites[0];
         closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
-        for (let index = 0; index < sites.length; index++) {
-            const element = sites[index];
+        for (const element of sites) {
             element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
@@ -10317,8 +10307,7 @@ class DarkSky extends BaseProvider {
                 forecasts: [],
                 hourlyForecasts: []
             };
-            for (let i = 0; i < json.daily.data.length; i++) {
-                const day = json.daily.data[i];
+            for (const day of json.daily.data) {
                 const forecast = {
                     date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
                     temp_min: this.ToKelvin(day.temperatureLow),
@@ -10333,8 +10322,7 @@ class DarkSky extends BaseProvider {
                 forecast.date = forecast.date.set({ hour: 12 });
                 result.forecasts.push(forecast);
             }
-            for (let i = 0; i < json.hourly.data.length; i++) {
-                const hour = json.hourly.data[i];
+            for (const hour of json.hourly.data) {
                 const forecast = {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature),
@@ -10422,13 +10410,13 @@ class DarkSky extends BaseProvider {
         const processed = summary.split(" ");
         let result = "";
         let lineLength = 0;
-        for (let i = 0; i < processed.length; i++) {
-            if (lineLength + processed[i].length > this.descriptionLineLength) {
+        for (const elem of processed) {
+            if (lineLength + elem.length > this.descriptionLineLength) {
                 result = result + "\n";
                 lineLength = 0;
             }
-            result = result + processed[i] + " ";
-            lineLength = lineLength + processed[i].length + 1;
+            result = result + elem + " ";
+            lineLength = lineLength + elem.length + 1;
         }
         return result;
     }
@@ -10438,9 +10426,9 @@ class DarkSky extends BaseProvider {
         if (processed.length == 1)
             return processed[0];
         const result = [];
-        for (let i = 0; i < processed.length; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result.push(processed[i]) + " ";
+        for (const elem of processed) {
+            if (!/[\(\)]/.test(elem) && !this.WordBanned(elem)) {
+                result.push(elem);
             }
             if (result.length == 2)
                 break;
@@ -10650,8 +10638,7 @@ class OpenWeatherMap extends BaseProvider {
                     start: -1,
                     end: -1
                 };
-                for (let index = 0; index < json.minutely.length; index++) {
-                    const element = json.minutely[index];
+                for (const [index, element] of json.minutely.entries()) {
                     if (element.precipitation > 0 && immediate.start == -1) {
                         immediate.start = index;
                         continue;
@@ -10664,8 +10651,7 @@ class OpenWeatherMap extends BaseProvider {
                 weather.immediatePrecipitation = immediate;
             }
             const forecasts = [];
-            for (let i = 0; i < json.daily.length; i++) {
-                const day = json.daily[i];
+            for (const day of json.daily) {
                 const forecast = {
                     date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
                     temp_min: day.temp.min,
@@ -10681,8 +10667,7 @@ class OpenWeatherMap extends BaseProvider {
             }
             weather.forecasts = forecasts;
             const hourly = [];
-            for (let index = 0; index < json.hourly.length; index++) {
-                const hour = json.hourly[index];
+            for (const hour of json.hourly) {
                 const forecast = {
                     date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
                     temp: hour.temp,
@@ -10982,8 +10967,7 @@ class MetNorway extends BaseProvider {
     RemoveEarlierElements(json, loc) {
         const now = DateTime.now().setZone(loc.timeZone);
         let startIndex = -1;
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
+        for (const [i, element] of json.properties.timeseries.entries()) {
             const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (timestamp < now && now.hour != timestamp.hour) {
                 startIndex = i;
@@ -11033,8 +11017,7 @@ class MetNorway extends BaseProvider {
             forecasts: []
         };
         const hourlyForecasts = [];
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
+        for (const element of json.properties.timeseries) {
             if (!!element.data.next_1_hours) {
                 hourlyForecasts.push({
                     date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
@@ -11054,7 +11037,7 @@ class MetNorway extends BaseProvider {
     BuildForecasts(forecastsData, loc) {
         const forecasts = [];
         const days = this.SortDataByDay(forecastsData, loc);
-        for (let i = 0; i < days.length; i++) {
+        for (const day of days) {
             const forecast = {
                 condition: {
                     customIcon: "cloudy-symbolic",
@@ -11067,8 +11050,7 @@ class MetNorway extends BaseProvider {
                 temp_min: Number.POSITIVE_INFINITY
             };
             const conditionCounter = {};
-            for (let j = 0; j < days[i].length; j++) {
-                const element = days[i][j];
+            for (const element of day) {
                 if (!element.data.next_6_hours)
                     continue;
                 forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
@@ -11091,9 +11073,9 @@ class MetNorway extends BaseProvider {
     }
     GetEarliestDataForToday(events, loc) {
         let earliest = 0;
-        for (let i = 0; i < events.length; i++) {
-            const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
-            const timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
+        for (const [i, element] of events.entries()) {
+            const earliestElementTime = DateTime.fromISO(element.time, { zone: loc.timeZone });
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day"))
                 continue;
             if (earliestElementTime < timestamp)
@@ -11107,8 +11089,7 @@ class MetNorway extends BaseProvider {
         let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
         let dayIndex = 0;
         days.push([]);
-        for (let i = 0; i < data.length; i++) {
-            const element = data[i];
+        for (const element of data) {
             const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (OnSameDay(timestamp, currentDay)) {
                 days[dayIndex].push(element);
@@ -11588,8 +11569,7 @@ class Weatherbit extends BaseProvider {
         this.ParseForecast = (json) => {
             const forecasts = [];
             try {
-                for (let i = 0; i < json.data.length; i++) {
-                    const day = json.data[i];
+                for (const day of json.data) {
                     const forecast = {
                         date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
                         temp_min: day.min_temp,
@@ -11615,8 +11595,7 @@ class Weatherbit extends BaseProvider {
         this.ParseHourlyForecast = (json) => {
             const forecasts = [];
             try {
-                for (let i = 0; i < json.data.length; i++) {
-                    const hour = json.data[i];
+                for (const hour of json.data.length) {
                     const forecast = {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
@@ -11704,7 +11683,7 @@ class Weatherbit extends BaseProvider {
             return null;
         return DateTime.fromObject({
             year: parseInt(split[0]),
-            month: parseInt(split[1]) - 1,
+            month: parseInt(split[1]),
             day: parseInt(split[2]),
             hour: parseInt(split[3]),
             minute: parseInt(split[4])
@@ -12013,8 +11992,7 @@ class ClimacellV4 extends BaseProvider {
         };
         const hours = [];
         const days = [];
-        for (let index = 0; index < daily.length; index++) {
-            const element = daily[index];
+        for (const element of daily) {
             days.push({
                 condition: this.ResolveCondition(element.values.weatherCode),
                 date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
@@ -12022,8 +12000,7 @@ class ClimacellV4 extends BaseProvider {
                 temp_min: CelsiusToKelvin(element.values.temperatureMin)
             });
         }
-        for (let index = 0; index < hourly.length; index++) {
-            const element = hourly[index];
+        for (const element of hourly) {
             const hour = {
                 condition: this.ResolveCondition(element.values.weatherCode),
                 date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
@@ -12335,8 +12312,7 @@ class USWeather extends BaseProvider {
         this.ParseHourlyForecast = (json) => {
             const forecasts = [];
             try {
-                for (let i = 0; i < json.properties.periods.length; i++) {
-                    const hour = json.properties.periods[i];
+                for (const hour of json.properties.periods) {
                     const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
                     const forecast = {
                         date: timestamp,
@@ -12402,14 +12378,13 @@ class USWeather extends BaseProvider {
     }
     async GetObservationsInRange(range, loc, stations) {
         const observations = [];
-        for (let index = 0; index < stations.length; index++) {
-            const element = stations[index];
+        for (const element of stations) {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            const observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
+            const observation = await this.app.LoadJsonAsync(element.id + "/observations/latest", {}, (msg) => false);
             if (observation == null) {
-                logger_Logger.Debug("Failed to get observations from " + stations[index].id);
+                logger_Logger.Debug("Failed to get observations from " + element.id);
             }
             else {
                 observations.push(observation);
@@ -12885,8 +12860,7 @@ class VisualCrossing extends BaseProvider {
     ParseForecasts(forecasts, translate, tz) {
         const result = [];
         if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
+            for (const element of forecasts) {
                 result.push({
                     date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
                     condition: this.GenerateCondition(element.icon, element.conditions, translate),
@@ -12901,12 +12875,10 @@ class VisualCrossing extends BaseProvider {
         const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
         const result = [];
         if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
+            for (const element of forecasts) {
                 if (!element.hours)
                     continue;
-                for (let index = 0; index < element.hours.length; index++) {
-                    const hour = element.hours[index];
+                for (const hour of element.hours) {
                     const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
                     if (time < currentHour)
                         continue;
@@ -12932,8 +12904,7 @@ class VisualCrossing extends BaseProvider {
         if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
             return null;
         const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        for (let index = 0; index < forecasts[0].hours.length; index++) {
-            const hour = forecasts[0].hours[index];
+        for (const hour of forecasts[0].hours) {
             const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
             if (time < currentHour)
                 continue;
@@ -13086,8 +13057,7 @@ class VisualCrossing extends BaseProvider {
     ResolveTypeIDs(condition) {
         let result = "";
         let split = condition.split(", ");
-        for (let index = 0; index < split.length; index++) {
-            const element = split[index];
+        for (const [index, element] of split.entries()) {
             result += this.ResolveTypeID(element);
             if (index < split.length - 1)
                 result += ", ";
@@ -13195,8 +13165,7 @@ class DanishMI extends BaseProvider {
         }
         result.forecasts = forecastData;
         const hourlyData = [];
-        for (let index = 0; index < forecasts.timeserie.length; index++) {
-            const element = forecasts.timeserie[index];
+        for (const element of forecasts.timeserie) {
             if (element.time == null)
                 continue;
             const hour = {
@@ -13227,8 +13196,7 @@ class DanishMI extends BaseProvider {
             PrecAmount10Min: undefined,
             WindGustLast10Min: undefined
         };
-        for (let index = 0; index < observations.length; index++) {
-            const element = observations[index];
+        for (const element of observations) {
             result.symbol = (_a = result.symbol) !== null && _a !== void 0 ? _a : element.values.symbol;
             result.PressureMSL = (_b = result.PressureMSL) !== null && _b !== void 0 ? _b : element.values.PressureMSL;
             result.Temperature2m = (_c = result.Temperature2m) !== null && _c !== void 0 ? _c : element.values.Temperature2m;
@@ -13946,8 +13914,7 @@ async function SpawnProcessJson(command) {
 }
 async function SpawnProcess(command) {
     let cmd = "";
-    for (let index = 0; index < command.length; index++) {
-        const element = command[index];
+    for (const element of command) {
         cmd += "'" + element + "' ";
     }
     const response = await new Promise((resolve, reject) => {
@@ -14406,13 +14373,12 @@ class UIForecasts {
         this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
     }
     UpdateIconType(iconType) {
-        var _a;
         if (!this.forecasts)
             return;
-        for (let i = 0; i < this.forecasts.length; i++) {
-            if (!((_a = this.forecasts[i]) === null || _a === void 0 ? void 0 : _a.Icon))
+        for (const forecast of this.forecasts) {
+            if (!(forecast === null || forecast === void 0 ? void 0 : forecast.Icon))
                 continue;
-            this.forecasts[i].Icon.icon_type = iconType;
+            forecast.Icon.icon_type = iconType;
         }
     }
     Display(weather, config) {
@@ -14604,13 +14570,12 @@ class UIHourlyForecasts {
             this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
     }
     UpdateIconType(iconType) {
-        var _a;
         if (!this.hourlyForecasts)
             return;
-        for (let i = 0; i < this.hourlyForecasts.length; i++) {
-            if (!((_a = this.hourlyForecasts[i]) === null || _a === void 0 ? void 0 : _a.Icon))
+        for (const hourly of this.hourlyForecasts) {
+            if (!(hourly === null || hourly === void 0 ? void 0 : hourly.Icon))
                 continue;
-            this.hourlyForecasts[i].Icon.icon_type = iconType;
+            hourly.Icon.icon_type = iconType;
         }
     }
     Display(forecasts, config, tz) {
@@ -14701,8 +14666,7 @@ class UIHourlyForecasts {
     }
     AdjustHourlyBoxItemWidth() {
         const requiredWidth = this.GetHourlyBoxItemWidth();
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const element = this.hourlyContainers[index];
+        for (const element of this.hourlyContainers) {
             element.set_width(requiredWidth);
         }
     }
@@ -15218,8 +15182,7 @@ class HttpLib {
     async Send(url, params, headers, method = "GET") {
         if (params != null) {
             const items = Object.keys(params);
-            for (let index = 0; index < items.length; index++) {
-                const item = items[index];
+            for (const [index, item] of items.entries()) {
                 url += (index == 0) ? "?" : "&";
                 url += (item) + "=" + params[item];
             }
@@ -15639,13 +15602,13 @@ The contents of the file saved from the applet help page goes here
             weatherInfo.hourlyForecasts = [];
         weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
         weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
-        for (let index = 0; index < weatherInfo.forecasts.length; index++) {
-            const condition = weatherInfo.forecasts[index].condition;
+        for (const forecast of weatherInfo.forecasts) {
+            const condition = forecast.condition;
             condition.main = ProcessCondition(condition.main, this.config._translateCondition);
             condition.description = ProcessCondition(condition.description, this.config._translateCondition);
         }
-        for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
-            const condition = weatherInfo.hourlyForecasts[index].condition;
+        for (const forecast of weatherInfo.hourlyForecasts) {
+            const condition = forecast.condition;
             condition.main = ProcessCondition(condition.main, this.config._translateCondition);
             condition.description = ProcessCondition(condition.description, this.config._translateCondition);
         }

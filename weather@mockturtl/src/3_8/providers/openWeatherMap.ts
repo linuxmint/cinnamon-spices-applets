@@ -117,8 +117,7 @@ export class OpenWeatherMap extends BaseProvider {
 					end: -1
 				}
 
-				for (let index = 0; index < json.minutely.length; index++) {
-					const element = json.minutely[index];
+				for (const [index, element] of json.minutely.entries()) {
 					if (element.precipitation > 0 && immediate.start == -1) {
 						immediate.start = index;
 						continue
@@ -132,8 +131,7 @@ export class OpenWeatherMap extends BaseProvider {
 			}
 
 			const forecasts: ForecastData[] = [];
-			for (let i = 0; i < json.daily.length; i++) {
-				const day = json.daily[i];
+			for (const day of json.daily) {
 				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
 					temp_min: day.temp.min,
@@ -150,8 +148,7 @@ export class OpenWeatherMap extends BaseProvider {
 			weather.forecasts = forecasts;
 
 			const hourly: HourlyForecastData[] = [];
-			for (let index = 0; index < json.hourly.length; index++) {
-				const hour = json.hourly[index];
+			for (const hour of json.hourly) {
 				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
 					temp: hour.temp,

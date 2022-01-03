@@ -117,14 +117,13 @@ export class USWeather extends BaseProvider {
 	 */
 	private async GetObservationsInRange(range: number, loc: LocationData, stations: StationPayload[]): Promise<ObservationPayload[]> {
 		const observations = [];
-		for (let index = 0; index < stations.length; index++) {
-			const element = stations[index];
+		for (const element of stations) {
 			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
 			if (element.dist > range) break;
 			// do not show errors here, we call multiple observation sites
-			const observation = await this.app.LoadJsonAsync<ObservationPayload>(stations[index].id + "/observations/latest", {}, (msg) => false);
+			const observation = await this.app.LoadJsonAsync<ObservationPayload>(element.id + "/observations/latest", {}, (msg) => false);
 			if (observation == null) {
-				Logger.Debug("Failed to get observations from " + stations[index].id);
+				Logger.Debug("Failed to get observations from " + element.id);
 			}
 			else {
 				observations.push(observation);
@@ -375,8 +374,7 @@ export class USWeather extends BaseProvider {
 	private ParseHourlyForecast = (json: ForecastsPayload): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
-			for (let i = 0; i < json.properties.periods.length; i++) {
-				const hour = json.properties.periods[i];
+			for (const hour of json.properties.periods) {
 				const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
 
 				const forecast: HourlyForecastData = {
