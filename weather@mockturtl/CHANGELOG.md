@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.9
+
+* Fixes [#4184](https://github.com/linuxmint/cinnamon-spices-applets/issues/4184) - missing space in .pot file
+* Fixes [#4127](https://github.com/linuxmint/cinnamon-spices-applets/issues/4127) - Text is at an abnormal height
+* Fix issue in WeatherBit provider where it would break if it tries to parse a date with January for month
+* Various minor syntax improvements (usage of consts and for-of loops)
+* Use mapping for getting provider classes instead of a big switch statement
+
 ## 3.1.8
 
 * Fixes [#4136](https://github.com/linuxmint/cinnamon-spices-applets/issues/4136) - Fix custom widget not applying translations
