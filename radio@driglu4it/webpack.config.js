@@ -8,12 +8,12 @@ const { exec } = require("child_process");
 const DESCRIPTION = 'A simple radio applet for Cinnamon'
 const NAME = 'Radio++'
 const MAX_INSTANCES = 1
-const CINNAMON_VERSION = '4.6' // When set to null, the build output path is set to the files applet folder, elso to a sub folder inside the applet 
+const CINNAMON_VERSION = '4.6' // When set to null, the build output path is set to the files applet folder, else to a sub dir inside the applet files dir
+const APPLET_VERSION = '2.0.1'
 
 // Automatic calculated constants
 const UUID = __dirname.split('/').slice(-1)[0]
 const APPLET_SHORT_NAME = UUID.split('@')[0]
-// could both also be any other name
 const BUNDLED_FILE_NAME = `${APPLET_SHORT_NAME}-applet.js`
 const LIBRARY_NAME = `${APPLET_SHORT_NAME}Applet`
 const FILES_DIR = `${__dirname}/files/${UUID}`
@@ -95,7 +95,8 @@ function createMetadata() {
         name: NAME,
         description: DESCRIPTION,
         "max-instances": MAX_INSTANCES,
-        multiversion: Boolean(CINNAMON_VERSION)
+        multiversion: Boolean(CINNAMON_VERSION), 
+        version: APPLET_VERSION
     }
 
     const METADA_PATH = FILES_DIR + '/metadata.json'

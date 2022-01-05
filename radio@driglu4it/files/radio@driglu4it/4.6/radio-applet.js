@@ -3046,7 +3046,7 @@ function createMpvHandler() {
                 global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working');
                 initialVolume = 50;
             }
-            const command = `mpv --script=${MPRIS_PLUGIN_PATH} ${url} 
+            const command = `mpv --config=no --script=${MPRIS_PLUGIN_PATH} ${url} 
                 --volume=${initialVolume}`;
             spawnCommandLine(command);
             return;
