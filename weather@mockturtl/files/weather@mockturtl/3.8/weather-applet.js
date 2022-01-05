@@ -10582,11 +10582,10 @@ class OpenWeatherMap extends BaseProvider {
     async GetWeather(loc) {
         const params = this.ConstructParams(loc);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
-        const promises = [];
-        promises.push(this.app.LoadJsonAsync(this.base_url, params, this.HandleError));
-        if (cachedID == null)
-            promises.push(this.app.LoadJsonAsync(this.id_irl, params));
-        const [json, idPayload] = await Promise.all(promises);
+        const [json, idPayload] = await Promise.all([
+            this.app.LoadJsonAsync(this.base_url, params, this.HandleError),
+            (cachedID == null) ? this.app.LoadJsonAsync(this.id_irl, params) : Promise.resolve()
+        ]);
         if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
             IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
         if (!json)
@@ -10685,7 +10684,7 @@ class OpenWeatherMap extends BaseProvider {
                     };
                 }
                 if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.rain["1h"];
+                    forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
                     forecast.precipitation.type = "rain";
                 }
                 if (!!hour.snow && forecast.precipitation != null) {

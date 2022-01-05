@@ -111,9 +111,9 @@ export interface HourlyForecastData {
 export interface Precipitation {
 	type: PrecipitationType,
 	/** in mm */
-	volume?: number,
+	volume?: number | undefined,
 	/** % */
-	chance?: number
+	chance?: number | undefined
 }
 
 type LocationSource = "ip-api" | "address-search" | "manual";
