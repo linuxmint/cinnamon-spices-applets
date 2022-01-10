@@ -18,6 +18,7 @@ import { ClimacellV4 } from "./providers/climacellV4";
 import { USWeather } from "./providers/us_weather";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
+import { AccuWeather } from "./providers/accuWeather";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -47,7 +48,8 @@ export type Services =
 	"Met Office UK" |
 	"US Weather" |
 	"Visual Crossing" |
-	"DanishMI";
+	"DanishMI" |
+	"AccuWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -58,7 +60,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"Met Office UK": (app) => new MetUk(app),
 	"US Weather": (app) => new USWeather(app),
 	"Visual Crossing": (app) => new VisualCrossing(app),
-	"DanishMI": (app) => new DanishMI(app)
+	"DanishMI": (app) => new DanishMI(app),
+	"AccuWeather": (app) => new AccuWeather(app)
 }
 
 /**
