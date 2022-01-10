@@ -121,9 +121,9 @@ declare namespace imports.gi.GObject {
 		unbind(): void;
 		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::source", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::source_property", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::source-property", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::target", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::target_property", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::target-property", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1303,12 +1303,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecInitOptionsMixin = Pick<IParamSpec,
-		"name" |
-		"flags" |
-		"value_type" |
-		"owner_type">;
-
+	type ParamSpecInitOptionsMixin  = {};
 	export interface ParamSpecInitOptions extends ParamSpecInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1382,10 +1377,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecBooleanInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecBoolean,
-		"default_value">;
-
+	type ParamSpecBooleanInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecBooleanInitOptions extends ParamSpecBooleanInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1449,12 +1441,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecCharInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecChar,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecCharInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecCharInitOptions extends ParamSpecCharInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1500,13 +1487,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecDoubleInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecDouble,
-		"minimum" |
-		"maximum" |
-		"default_value" |
-		"epsilon">;
-
+	type ParamSpecDoubleInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecDoubleInitOptions extends ParamSpecDoubleInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1541,11 +1522,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecEnumInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecEnum,
-		"enum_class" |
-		"default_value">;
-
+	type ParamSpecEnumInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecEnumInitOptions extends ParamSpecEnumInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1581,11 +1558,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecFlagsInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecFlags,
-		"flags_class" |
-		"default_value">;
-
+	type ParamSpecFlagsInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecFlagsInitOptions extends ParamSpecFlagsInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1632,13 +1605,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecFloatInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecFloat,
-		"minimum" |
-		"maximum" |
-		"default_value" |
-		"epsilon">;
-
+	type ParamSpecFloatInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecFloatInitOptions extends ParamSpecFloatInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1668,10 +1635,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecGTypeInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecGType,
-		"is_a_type">;
-
+	type ParamSpecGTypeInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecGTypeInitOptions extends ParamSpecGTypeInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1711,12 +1675,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecIntInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecInt,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecIntInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecIntInitOptions extends ParamSpecIntInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1756,12 +1715,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecInt64InitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecInt64,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecInt64InitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecInt64InitOptions extends ParamSpecInt64InitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1801,12 +1755,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecLongInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecLong,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecLongInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecLongInitOptions extends ParamSpecLongInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1968,15 +1917,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecStringInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecString,
-		"default_value" |
-		"cset_first" |
-		"cset_nth" |
-		"substitutor" |
-		"null_fold_if_empty" |
-		"ensure_non_null">;
-
+	type ParamSpecStringInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecStringInitOptions extends ParamSpecStringInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2017,12 +1958,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecUCharInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecUChar,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecUCharInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecUCharInitOptions extends ParamSpecUCharInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2062,12 +1998,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecUIntInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecUInt,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecUIntInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecUIntInitOptions extends ParamSpecUIntInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2107,12 +2038,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecUInt64InitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecUInt64,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecUInt64InitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecUInt64InitOptions extends ParamSpecUInt64InitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2152,12 +2078,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecULongInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecULong,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecULongInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecULongInitOptions extends ParamSpecULongInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2187,10 +2108,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecUnicharInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecUnichar,
-		"default_value">;
-
+	type ParamSpecUnicharInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecUnicharInitOptions extends ParamSpecUnicharInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2225,11 +2143,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecValueArrayInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecValueArray,
-		"element_spec" |
-		"fixed_n_elements">;
-
+	type ParamSpecValueArrayInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecValueArrayInitOptions extends ParamSpecValueArrayInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2264,11 +2178,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type ParamSpecVariantInitOptionsMixin = ParamSpecInitOptions & 
-	Pick<IParamSpecVariant,
-		"type" |
-		"default_value">;
-
+	type ParamSpecVariantInitOptionsMixin = ParamSpecInitOptions
 	export interface ParamSpecVariantInitOptions extends ParamSpecVariantInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2406,13 +2316,7 @@ declare namespace imports.gi.GObject {
 
 	}
 
-	type TypeModuleInitOptionsMixin = ObjectInitOptions & TypePluginInitOptions & 
-	Pick<ITypeModule,
-		"use_count" |
-		"type_infos" |
-		"interface_infos" |
-		"name">;
-
+	type TypeModuleInitOptionsMixin = ObjectInitOptions & TypePluginInitOptions
 	export interface TypeModuleInitOptions extends TypeModuleInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,

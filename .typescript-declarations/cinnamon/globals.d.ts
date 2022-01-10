@@ -1,9 +1,9 @@
 declare function require(path: string): any;
 
-declare function setInterval(callback: { (): void }, delay: number): number;
-declare function clearInterval(intervalID: number): void;
-declare function setTimeout(callback: { (): void }, delay: number): number;
-declare function clearTimeout(timeoutID: number): void;
+declare const setInterval: typeof imports.misc.util.setInterval
+declare const clearInterval: typeof imports.misc.util.clearInterval
+declare const setTimeout: typeof imports.misc.util.setTimeout
+declare const clearTimeout: typeof imports.misc.util.clearTimeout
 
 /** Interface typing for the global variable.
  * Extendable, for example overloading in a d.ts file:
@@ -23,7 +23,7 @@ declare interface Global {
     set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
     unset_cursor(): void;
     /** equivalent to imports.gi.Meta */
-    screen: any;
+    screen: imports.gi.Meta.Screen;
     display: imports.gi.Meta.Display;
     stage: imports.gi.Clutter.Stage;
     /** Gets the pointer coordinates and current modifier key state */
@@ -50,18 +50,23 @@ interface String {
     format(...args: string[]): string
 }
 
-declare class __meta {
-    static uuid: string;
-    static path: string;
-    static name: string;
-    static description: string;
-    static "max-instances": number;
-    static multiversion: boolean;
-    static author: string;
-    static "last-edited": number;
-    static error: any;
-    static "force-loaded": boolean
+declare interface  Meta {
+    uuid: string;
+    path: string;
+    name: string;
+    description: string;
+    "max-instances": number;
+    multiversion: boolean;
+    author: string;
+    "last-edited": number;
+    error: any;
+    "force-loaded": boolean
 }
+
+declare const __meta: Meta
+
+declare const __dirname: string
+declare const __filename: string
 
 declare class GJSError extends Error {
     stack: any;
@@ -84,7 +89,7 @@ declare namespace imports.cairo {
     }
 }
 
-/** DEPRECATED. Mainloop is simply a layer of convenience and backwards-compatibility over some GLib functions (such as `GLib.timeout_add()` which in GJS is mapped to `g_timeout_add_full()`). It's use is not generally recommended anymore */
+/** @deprecated Mainloop is simply a layer of convenience and backwards-compatibility over some GLib functions (such as `GLib.timeout_add()` which in GJS is mapped to `g_timeout_add_full()`). It's use is not generally recommended anymore */
 declare namespace imports.mainloop {
     /**
      * Calls callback function after given seconds
