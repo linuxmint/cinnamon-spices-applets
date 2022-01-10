@@ -1,170 +1,8 @@
 var radioApplet;
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
-
-/***/ 447:
-/***/ ((__unused_webpack_module, exports) => {
-
-var __webpack_unused_export__;
-
-__webpack_unused_export__ = true;
-var _a = imports.gi.St, BoxLayout = _a.BoxLayout, Bin = _a.Bin, Side = _a.Side;
-var _b = imports.ui.main, uiGroup = _b.uiGroup, layoutManager = _b.layoutManager, panelManager = _b.panelManager, pushModal = _b.pushModal, popModal = _b.popModal;
-var KEY_Escape = imports.gi.Clutter.KEY_Escape;
-var util_get_transformed_allocation = imports.gi.Cinnamon.util_get_transformed_allocation;
-var PanelLoc = imports.ui.popupMenu.PanelLoc;
-function createPopupMenu(args) {
-    var launcher = args.launcher;
-    var box = new BoxLayout({
-        style_class: 'popup-menu-content',
-        vertical: true,
-        visible: false
-    });
-    // only for styling purposes
-    var bin = new Bin({
-        style_class: 'menu',
-        child: box,
-        visible: false
-    });
-    uiGroup.add_child(bin);
-    box.connect('key-press-event', function (actor, event) {
-        event.get_key_symbol() === KEY_Escape && close();
-    });
-    launcher.connect('queue-relayout', function () {
-        if (!box.visible)
-            return;
-        setTimeout(function () {
-            setLayout();
-        }, 0);
-    });
-    bin.connect('queue-relayout', function () {
-        if (!box.visible)
-            return;
-        setTimeout(function () {
-            setLayout();
-        }, 0);
-    });
-    function setLayout() {
-        var freeSpace = calculateFreeSpace();
-        var maxHeight = calculateMaxHeight(freeSpace);
-        box.style = "max-height: " + maxHeight + "px;";
-        var _a = calculatePosition(maxHeight, freeSpace), xPos = _a[0], yPos = _a[1];
-        // Without Math.floor, the popup menu gets for some reason blurred on some themes (e.g. Adapta Nokto)!
-        bin.set_position(Math.floor(xPos), Math.floor(yPos));
-    }
-    function calculateFreeSpace() {
-        var _a, _b, _c, _d;
-        var monitor = layoutManager.findMonitorForActor(launcher);
-        var visiblePanels = panelManager.getPanelsInMonitor(monitor.index);
-        var panelSizes = new Map(visiblePanels.map(function (panel) {
-            var width = 0, height = 0;
-            if (panel.getIsVisible()) {
-                width = panel.actor.width;
-                height = panel.actor.height;
-            }
-            return [panel.panelPosition, { width: width, height: height }];
-        }));
-        return {
-            left: monitor.x + (((_a = panelSizes.get(PanelLoc.left)) === null || _a === void 0 ? void 0 : _a.width) || 0),
-            bottom: monitor.y + monitor.height - (((_b = panelSizes.get(PanelLoc.bottom)) === null || _b === void 0 ? void 0 : _b.height) || 0),
-            top: monitor.y + (((_c = panelSizes.get(PanelLoc.top)) === null || _c === void 0 ? void 0 : _c.height) || 0),
-            right: monitor.x + monitor.width - (((_d = panelSizes.get(PanelLoc.right)) === null || _d === void 0 ? void 0 : _d.width) || 0)
-        };
-    }
-    function calculateMaxHeight(freeSpace) {
-        var freeSpaceHeight = (freeSpace.bottom - freeSpace.top) / global.ui_scale;
-        var boxThemeNode = box.get_theme_node();
-        var binThemeNode = bin.get_theme_node();
-        var paddingTopBox = boxThemeNode.get_padding(Side.TOP);
-        var paddingBottomBox = boxThemeNode.get_padding(Side.BOTTOM);
-        var borderWidthTopBin = binThemeNode.get_border_width(Side.TOP);
-        var borderWidthBottomBIN = binThemeNode.get_border_width(Side.BOTTOM);
-        var paddingTopBin = binThemeNode.get_padding(Side.TOP);
-        var paddingBottomBin = binThemeNode.get_padding(Side.BOTTOM);
-        var maxHeight = freeSpaceHeight - paddingBottomBox - paddingTopBox - borderWidthTopBin - borderWidthBottomBIN - paddingTopBin - paddingBottomBin;
-        return maxHeight;
-    }
-    function calculatePosition(maxHeight, freeSpace) {
-        var appletBox = util_get_transformed_allocation(launcher);
-        var _a = box.get_preferred_size(), minWidth = _a[0], minHeight = _a[1], natWidth = _a[2], natHeight = _a[3];
-        var margin = (natWidth - appletBox.get_width()) / 2;
-        var xLeftNormal = Math.max(freeSpace.left, appletBox.x1 - margin);
-        var xRightNormal = appletBox.x2 + margin;
-        var xLeftMax = freeSpace.right - appletBox.get_width() - margin * 2;
-        var xLeft = (xRightNormal < freeSpace.right) ? xLeftNormal : xLeftMax;
-        var yTopNormal = Math.max(appletBox.y1, freeSpace.top);
-        var yBottomNormal = yTopNormal + natHeight;
-        var yTopMax = freeSpace.bottom - box.height;
-        var yTop = (yBottomNormal < freeSpace.bottom) ? yTopNormal : yTopMax;
-        return [xLeft, yTop];
-    }
-    function toggle() {
-        box.visible ? close() : open();
-    }
-    // no idea why it sometimes needs to be bin and sometimes box ...
-    function open() {
-        setLayout();
-        bin.show();
-        box.show();
-        launcher.add_style_pseudo_class('checked');
-        pushModal(box);
-        // For some reason, it is emmited the button-press event when clicking e.g on the desktop but the button-release-event when clicking on another applet
-        global.stage.connect('button-press-event', handleClick);
-        global.stage.connect('button-release-event', handleClick);
-    }
-    function close() {
-        if (!box.visible)
-            return;
-        bin.hide();
-        box.hide();
-        launcher.remove_style_pseudo_class('checked');
-        popModal(box);
-    }
-    function handleClick(actor, event) {
-        if (!box.visible) {
-            return;
-        }
-        var clickedActor = event.get_source();
-        var binClicked = box.contains(clickedActor);
-        var appletClicked = launcher.contains(clickedActor);
-        (!binClicked && !appletClicked) && close();
-    }
-    box.toggle = toggle;
-    // TODO: remove close
-    box.close = close;
-    return box;
-}
-exports.S = createPopupMenu;
-
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
@@ -197,8 +35,6 @@ exports.S = createPopupMenu;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
@@ -4677,13 +4513,146 @@ function createRadioAppletIcon() {
     return icon;
 }
 
-// EXTERNAL MODULE: ./node_modules/cinnamonpopup/index.js
-var cinnamonpopup = __webpack_require__(447);
+;// CONCATENATED MODULE: ./src/lib/PopupMenu.ts
+const { BoxLayout, Bin, Side } = imports.gi.St;
+const { uiGroup, layoutManager, panelManager: PopupMenu_panelManager, pushModal, popModal } = imports.ui.main;
+const { KEY_Escape } = imports.gi.Clutter;
+const { util_get_transformed_allocation } = imports.gi.Cinnamon;
+const { PanelLoc } = imports.ui.popupMenu;
+function createPopupMenu(args) {
+    const { launcher } = args;
+    const box = new BoxLayout({
+        style_class: 'popup-menu-content',
+        vertical: true,
+        visible: false,
+    });
+    // only for styling purposes
+    const bin = new Bin({
+        style_class: 'menu',
+        child: box,
+        visible: false
+    });
+    uiGroup.add_child(bin);
+    box.connect('key-press-event', (actor, event) => {
+        event.get_key_symbol() === KEY_Escape && close();
+        return false;
+    });
+    launcher.connect('queue-relayout', () => {
+        if (!box.visible)
+            return;
+        setTimeout(() => {
+            setLayout();
+        }, 0);
+    });
+    bin.connect('queue-relayout', () => {
+        if (!box.visible)
+            return;
+        setTimeout(() => {
+            setLayout();
+        }, 0);
+    });
+    function setLayout() {
+        const freeSpace = calculateFreeSpace();
+        const maxHeight = calculateMaxHeight(freeSpace);
+        box.style = `max-height: ${maxHeight}px;`;
+        const [xPos, yPos] = calculatePosition(maxHeight, freeSpace);
+        // Without Math.floor, the popup menu gets for some reason blurred on some themes (e.g. Adapta Nokto)!
+        bin.set_position(Math.floor(xPos), Math.floor(yPos));
+    }
+    function calculateFreeSpace() {
+        var _a, _b, _c, _d;
+        const monitor = layoutManager.findMonitorForActor(launcher);
+        const visiblePanels = PopupMenu_panelManager.getPanelsInMonitor(monitor.index);
+        const panelSizes = new Map(visiblePanels.map(panel => {
+            let width = 0, height = 0;
+            if (panel.getIsVisible()) {
+                width = panel.actor.width;
+                height = panel.actor.height;
+            }
+            return [panel.panelPosition, { width, height }];
+        }));
+        return {
+            left: monitor.x + (((_a = panelSizes.get(PanelLoc.left)) === null || _a === void 0 ? void 0 : _a.width) || 0),
+            bottom: monitor.y + monitor.height - (((_b = panelSizes.get(PanelLoc.bottom)) === null || _b === void 0 ? void 0 : _b.height) || 0),
+            top: monitor.y + (((_c = panelSizes.get(PanelLoc.top)) === null || _c === void 0 ? void 0 : _c.height) || 0),
+            right: monitor.x + monitor.width - (((_d = panelSizes.get(PanelLoc.right)) === null || _d === void 0 ? void 0 : _d.width) || 0)
+        };
+    }
+    function calculateMaxHeight(freeSpace) {
+        const freeSpaceHeight = (freeSpace.bottom - freeSpace.top) / global.ui_scale;
+        const boxThemeNode = box.get_theme_node();
+        const binThemeNode = bin.get_theme_node();
+        const paddingTopBox = boxThemeNode.get_padding(Side.TOP);
+        const paddingBottomBox = boxThemeNode.get_padding(Side.BOTTOM);
+        const borderWidthTopBin = binThemeNode.get_border_width(Side.TOP);
+        const borderWidthBottomBIN = binThemeNode.get_border_width(Side.BOTTOM);
+        const paddingTopBin = binThemeNode.get_padding(Side.TOP);
+        const paddingBottomBin = binThemeNode.get_padding(Side.BOTTOM);
+        const maxHeight = freeSpaceHeight - paddingBottomBox - paddingTopBox - borderWidthTopBin - borderWidthBottomBIN - paddingTopBin - paddingBottomBin;
+        return maxHeight;
+    }
+    function calculatePosition(maxHeight, freeSpace) {
+        const appletBox = util_get_transformed_allocation(launcher);
+        const [minWidth, minHeight, natWidth, natHeight] = box.get_preferred_size();
+        const margin = ((natWidth || 0) - appletBox.get_width()) / 2;
+        const xLeftNormal = Math.max(freeSpace.left, appletBox.x1 - margin);
+        const xRightNormal = appletBox.x2 + margin;
+        const xLeftMax = freeSpace.right - appletBox.get_width() - margin * 2;
+        const xLeft = (xRightNormal < freeSpace.right) ? xLeftNormal : xLeftMax;
+        const yTopNormal = Math.max(appletBox.y1, freeSpace.top);
+        const yBottomNormal = yTopNormal + (natHeight || 0);
+        const yTopMax = freeSpace.bottom - box.height;
+        const yTop = (yBottomNormal < freeSpace.bottom) ? yTopNormal : yTopMax;
+        return [xLeft, yTop];
+    }
+    function toggle() {
+        box.visible ? close() : open();
+    }
+    // no idea why it sometimes needs to be bin and sometimes box ...
+    function open() {
+        setLayout();
+        bin.show();
+        box.show();
+        launcher.add_style_pseudo_class('checked');
+        pushModal(box);
+        // For some reason, it is emmited the button-press event when clicking e.g on the desktop but the button-release-event when clicking on another applet
+        global.stage.connect('button-press-event', (actor, event) => {
+            handleClick(actor, event);
+            return false;
+        });
+        global.stage.connect('button-release-event', (actor, event) => {
+            handleClick(actor, event);
+            return false;
+        });
+    }
+    function close() {
+        if (!box.visible)
+            return;
+        bin.hide();
+        box.hide();
+        launcher.remove_style_pseudo_class('checked');
+        popModal(box);
+    }
+    function handleClick(actor, event) {
+        if (!box.visible) {
+            return;
+        }
+        const clickedActor = event.get_source();
+        const binClicked = box.contains(clickedActor);
+        const appletClicked = launcher.contains(clickedActor);
+        (!binClicked && !appletClicked) && close();
+    }
+    box.toggle = toggle;
+    // TODO: remove close
+    box.close = close;
+    return box;
+}
+
 ;// CONCATENATED MODULE: ./src/lib/PopupSeperator.ts
-const { BoxLayout, DrawingArea } = imports.gi.St;
+const { BoxLayout: PopupSeperator_BoxLayout, DrawingArea } = imports.gi.St;
 const { LinearGradient } = imports.gi.cairo;
 function createSeparatorMenuItem() {
-    const container = new BoxLayout({
+    const container = new PopupSeperator_BoxLayout({
         style_class: 'popup-menu-item'
     });
     const drawingArea = new DrawingArea({
@@ -5367,7 +5336,7 @@ const { BoxLayout: RadioPopupMenu_BoxLayout } = imports.gi.St;
 function createRadioPopupMenu(props) {
     const { launcher, } = props;
     const { getPlaybackStatus, addPlaybackStatusChangeHandler } = mpvHandler;
-    const popupMenu = (0,cinnamonpopup/* createPopupMenu */.S)({ launcher });
+    const popupMenu = createPopupMenu({ launcher });
     const radioActiveSection = new RadioPopupMenu_BoxLayout({
         vertical: true,
         visible: getPlaybackStatus() !== 'Stopped'
@@ -5539,8 +5508,6 @@ function main() {
     initMpvHandler();
     return createRadioAppletContainer();
 }
-
-})();
 
 radioApplet = __webpack_exports__;
 /******/ })()
