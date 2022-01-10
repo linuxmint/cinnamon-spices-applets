@@ -16,7 +16,7 @@ A simple radio applet for Cinnamon. The radio-applet has been totally rewritten 
 
 ## Dependencies
 
-The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet. A limitation currently is 
+The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet. 
 
 **TLDR** Run this [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) as sudo to install `youtube-dl`
 
