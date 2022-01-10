@@ -23,11 +23,13 @@ export class AccuWeather extends BaseProvider {
 
     public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
         const locationID = `${loc.lat},${loc.lon}`;
+        const locale = this.app.config._translateCondition ? this.app.config.currentLocale?.toLowerCase() ?? "en-us" : "en-us";
+
         let location: LocationPayload | null;
         if (this.locationCache[locationID] != null)
             location = this.locationCache[locationID];
         else
-            location = await this.app.LoadJsonAsync<LocationPayload>(this.locSearchUrl, { q: locationID, details: false, /*language: "",*/ apikey: this.app.config.ApiKey }, this.HandleErrors);
+            location = await this.app.LoadJsonAsync<LocationPayload>(this.locSearchUrl, { q: locationID, details: false, language: locale, apikey: this.app.config.ApiKey }, this.HandleErrors);
 
         if (location == null) {
             /** Error, probably handled already */
@@ -35,9 +37,9 @@ export class AccuWeather extends BaseProvider {
         }
 
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentPayload>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, /*language: "",*/ }, this.HandleErrors),
-            this.app.LoadJsonAsync<DailyPayload>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, /*language: "",*/ }, this.HandleErrors),
-            this.app.LoadJsonAsync<HourlyPayload>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, /*language: "",*/ }, this.HandleErrors)
+            this.app.LoadJsonAsync<CurrentPayload>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsync<DailyPayload[]>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsync<HourlyPayloadShort[]>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: false, metric: true, language: locale, }, this.HandleErrors)
         ])
         return null;
     }
@@ -47,20 +49,477 @@ export class AccuWeather extends BaseProvider {
     }
 
     private HandleErrors = (e: HttpError) => {
+        switch (e.code) {
+            /** Request had bad syntax or the parameters supplied were invalid */
+            case 400:
+                return true;
+            /** Unauthorized. API authorization failed */
+            case 401:
+                return true;
+            /** Unauthorized. You do not have permission to access this endpoint */
+            case 403:
+                return true;
+            /** Server has not found a route matching the given URI */
+            case 404:
+                return true;
+        }
         return false;
     }
 }
 
-interface CurrentPayload {
+interface GenericValue {
+    /** Rounded value in specified units. May be NULL. */
+    Value: number | null;
+    /** Type of unit. */
+    Unit: string;
+    /** Numeric ID associated with the type of unit being displayed. */
+    UnitType: number;
+}
 
+interface MetricImperialValues {
+    Metric: GenericValue;
+    Imperial: GenericValue;
+}
+
+interface WindDirectionInfo {
+    /** Wind direction in azimuth degrees (for example, 180° indicates wind coming from the south). */
+    Degrees: number;
+    /** Direction abbreviation in the specified language. */
+    Localized: string;
+    /** Direction abbreviation in English. */
+    English: string;
+}
+
+interface CurrentPayload {
+    /** DateTime of the current observation, displayed in ISO8601 format. */
+    LocalObservationDateTime: string;
+    /** DateTime of the current observation, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+    EpochTime: number;
+    /** Phrase description of the current weather condition. Displayed in the language set with language code in URL. */
+    WeatherText: string;
+    /** Numeric value representing an image that displays the current condition described by WeatherText. May be NULL. */
+    WeatherIcon: number | null;
+    LocalSource: {
+        /** Numeric identifier unique to the local data provider. This parameter is not shown if there is not local source information to display. */
+        Id: number,
+        /** Name of the local data provider, displayed in the language set with language code in URL, if available. Otherwise, Name is displayed in English or the language in which the name was provided. This parameter is not shown if there is no local source information to display. */
+        Name: string;
+        /** Weather code provided by the local data provider. This weather code allows the current condition to be matched to icons provided by the local data provider instead of AccuWeather icons. This parameter is not shown if there is no local source information to display. */
+        WeatherCode: string;
+    }
+    /** Flag indicating the time of day (true=day, false=night) */
+    IsDayTime: boolean;
+    Temperature: MetricImperialValues;
+    /** Patented AccuWeather RealFeel Temperature. Contains Metric and Imperial Values. */
+    RealFeelTemperature: MetricImperialValues;
+    /** Patented AccuWeather RealFeel Temperature in the shade. Contains Metric and Imperial Values. */
+    RealFeelTemperatureShade: MetricImperialValues;
+    /** Relative humidity. May be NULL. */
+    RelativeHumidity: number | null;
+    /** Dew point temperature. Contains Metric and Imperial Values. */
+    DewPoint: MetricImperialValues;
+    Wind: {
+        Direction: {
+            /** Wind direction in Azimuth degrees (e.g. 180 degrees is a wind coming from the south). May be NULL. */
+            Degrees: number | null;
+            /** Direction abbreviated in English. */
+            English: string;
+            /** Direction abbreviated in the language specified by language code in URL. */
+            Localized: string;
+        }
+        /** Wind Speed. Contains Metric and Imperial Values. */
+        Speed: MetricImperialValues;
+    }
+    WindGust: {
+        /** Wind gust speed. Contains Metric and Imperial Values. */
+        Speed: MetricImperialValues;
+    }
+    /** Measure of the strength of the ultraviolet radiation from the sun. May be NULL. */
+    UVIndex: number | null;
+    /** Text associated with the UVIndex. */
+    UVIndexText: string;
+    /** Visibility. Contains Metric and Imperial Values. */
+    Visibility: MetricImperialValues;
+    /** Cause of limited visibility. */
+    ObstructionsToVisibility: string;
+    /** Number representing the percentage of the sky that is covered by clouds. May be NULL. */
+    CloudCover: number | null;
+    /** Cloud ceiling. Contains Metric and Imperial Values. */
+    Ceiling: MetricImperialValues;
+    /** Atmospheric pressure. Contains Metric and Imperial Values. */
+    Pressure: MetricImperialValues;
+    PressureTendency: {
+        /** Description of the pressure tendency in the language specified by language code in the URL. */
+        LocalizedText: string;
+        /** Pressure tendency code regardless of language. (F=falling, S=steady, R=rising) */
+        Code: string;
+    }
+    /** Departure from the temperature observed 24 hours ago. Contains Metric and Imperial Values. */
+    Past24HourTemperatureDeparture: MetricImperialValues;
+    /** Perceived outdoor temperature caused by the combination of air temperature, relative humidity, and wind speed. Contains Metric and Imperial Values. */
+    ApparentTemperature: MetricImperialValues;
+    /** Perceived air temperature on exposed skin due to wind. Contains Metric and Imperial Values. */
+    WindChillTemperature: MetricImperialValues;
+    /** The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation. Contains Metric and Imperial Values. */
+    WetBulbTemperature: MetricImperialValues;
+    /** Amount of precipitation (liquid water equivalent) that has fallen in the past hour. Contains Metric and Imperial Values. */
+    Precip1hr: MetricImperialValues;
+    PrecipitationSummary: {
+        /** Deprecated. Please use the precipitation summary for a specific time span. */
+        Precipitation: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past hour. Contains Metric and Imperial Values. */
+        PastHour: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 3 hours. Contains Metric and Imperial Values. */
+        Past3Hours: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 6 hours. Contains Metric and Imperial Values. */
+        Past6Hours: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 9 hours. Contains Metric and Imperial Values. */
+        Past9Hours: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours. Contains Metric and Imperial Values. */
+        Past12Hours: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours. Contains Metric and Imperial Values. */
+        Past18Hours: MetricImperialValues;
+        /** The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours. Contains Metric and Imperial Values. */
+        Past24Hours: MetricImperialValues;
+    }
+    TemperatureSummary: {
+        Past6HourRange: {
+            /** The minimum temperature observed over the past 6 hours. Contains Metric and Imperial Values. */
+            Minimum: MetricImperialValues;
+            /** The maximum temperature observed over the past 6 hours. Contains Metric and Imperial Values. */
+            Maximum: MetricImperialValues;
+        }
+        Past12HourRange: {
+            /** The minimum temperature observed over the past 12 hours. Contains Metric and Imperial Values. */
+            Minimum: MetricImperialValues;
+            /** The maximum temperature observed over the past 12 hours. Contains Metric and Imperial Values. */
+            Maximum: MetricImperialValues;
+        }
+        Past24HourRange: {
+            /** The minimum temperature observed over the past 24 hours. Contains Metric and Imperial Values. */
+            Minimum: MetricImperialValues;
+            /** The maximum temperature observed over the past 24 hours. Contains Metric and Imperial Values. */
+            Maximum: MetricImperialValues;
+        }
+    }
+    /** Link to current conditions for the requested location on AccuWeather`s mobile site. */
+    MobileLink: string;
+    /** Link to current conditions for the requested location on AccuWeather`s web site. */
+    Link: string;
+    /** Flag indicating the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation. */
+    HasPrecipitation: boolean;
+    /** If precipitation is present, the type of precipitation will be returned. Possible values are Rain, Snow, Ice, or Mixed. Null in the absence of precipitation. */
+    PrecipitationType: string;
+    /** The relative humidity in the user's home or building.  */
+    IndoorRelativeHumidity: boolean;
 }
 
 interface DailyPayload {
+    Headline: {
+        /** DateTime, displayed in ISO8601 format, when the Headline is in effect. */
+        EffectiveDate: string;
+        /** Effective Date of the headline, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EffectiveEpochDate: number;
+        /** Severity of the headline, displayed as an integer. The lower the number, the greater the severity. 0 = Unknown 1 = Significant 2 = Major 3 = Moderate 4 = Minor 5 = Minimal 6 = Insignificant 7 = Informational */
+        Severity: number;
+        /** Text of the headline, which represents the most significant weather event over the next 5 days. Displayed in the language specified by language code in URL. */
+        Text: string;
+        /** Category of the headline. */
+        Category: string;
+        /** DateTime, displayed in ISO8601 format, when the Headline expires. May be NULL. */
+        EndDate: string | null;
+        /** End Date of the headline, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EndEpochDate: number;
+        /** Link to the extended forecast for the requested location on AccuWeather`s mobile site. */
+        MobileLink: string;
+        /** Link to the extended forecast for the requested location on AccuWeather`s web site. */
+        Link: string;
+    }
+    DailyForecasts: DailyForecast[]
+}
 
+interface DailyForecast {
+    /** DateTime of the forecast, displayed in ISO8601 format. */
+    Date: string;
+    /** Date of the forecast, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+    EpochDate: number;
+    Sun: {
+        /** Sun rise displayed in ISO8601 format. */
+        Rise: string;
+        /** Sun rise displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EpochRise: number;
+        /** Sun set displayed in ISO8601 format. */
+        Set: string;
+        /** Sun set displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EpochSet: number;
+    }
+    Moon: {
+        /** Moon rise displayed in ISO8601 format. */
+        Rise: string;
+        /** Moon rise displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EpochRise: number;
+        /** Moon set displayed in ISO8601 format. */
+        Set: string;
+        /** Moon set displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+        EpochSet: number;
+        /** Moon phase. */
+        Phase: string;
+        /** The number of days since the new moon. */
+        Age: number;
+    }
+    Temperature: {
+        Minimum: GenericValue;
+        Maximum: GenericValue;
+    }
+    RealFeelTemperature: {
+        Minimum: GenericValue;
+        Maximum: GenericValue;
+    }
+    RealFeelTemperatureShade: {
+        Minimum: GenericValue;
+        Maximum: GenericValue;
+    }
+    /** Number of hours of sun. */
+    HoursOfSun: number;
+    DegreeDaySummary: {
+        Heating: {
+            /** Number of degrees that the mean temperature is below 65 degrees F. Displayed in specified units. May be NULL. */
+            Value: number | null;
+            /** Type of unit. */
+            Unit: string;
+            /** Numeric ID associated with the type of unit being displayed. */
+            UnitType: number;
+        }
+        Cooling: {
+            /** Number of degrees that the mean temperature is above 65 degrees F. Displayed in specified units. May be NULL. */
+            Value: number | null;
+            /** Type of unit. */
+            Unit: string;
+            /** Numeric ID associated with the type of unit being displayed. */
+            UnitType: number;
+        }
+    }
+    AirAndPollen: {
+        /** Name of the pollen or air pollutant. */
+        Name: string;
+        /** Value of the pollutant. Values associated with mold, grass, weed, and tree are displayed in parts per cubic meter. Air quality and UV index are indices and are unitless. May be NULL. */
+        Value: number | null;
+        /** Category of the pollution. (low, high, good, moderate, unhealthy, hazardous) */
+        Category: string;
+        /** Value associated with the category. These values range from 1 to 6, with 1 implying good conditions and 6 implying hazardous conditions. */
+        CategoryValue: number;
+        /** Only exists for air quality. Examples include ozone and particle pollution. */
+        Type: string;
+    }
+    Day: {
+        /** Numeric value representing an icon that matches the forecast. */
+        Icon: number;
+        /** Phrase description of the icon. */
+        IconPhrase: string;
+        LocalSource: {
+            /** Numeric identifier, unique to the local data provider. */
+            Id: number;
+            /** Name of the local data provider. Name is displayed in the language specified by language code in URL, if available. Otherwise, Name is displayed in English or the language in which the name was provided. */
+            Name: string;
+            /** Weather code provided by the local data provider. This weather code allows the forecast to be matched to icons provided by the local data provider instead of AccuWeather icons. */
+            WeatherCode: string;
+        }
+        /** boolean value that indicates the presence of any type of precipitation for a given day. Displays true if precipitation is present. */
+        HasPrecipitation: boolean;
+        /** Indicates if the precipitation is rain, snow, ice, or mixed. Only returned if HasPrecipitation is true. */
+        PrecipitationType?: string;
+        /** Indicates if the precipitation strength is light, moderate, or heavy. Only returned if HasPrecipitation is true. */
+        PrecipitationIntensity?: string;
+        /** Phrase description of the forecast. AccuWeather attempts to keep this phrase under 30 characters in length, but some languages/weather events may result in a phrase exceeding 30 characters. */
+        ShortPhrase: string;
+        /** Phrase description of the forecast. AccuWeather attempts to keep this phrase under 100 characters in length, but some languages/weather events may result in a phrase exceeding 100 characters. */
+        LongPhrase: string;
+        /** Percent representing the probability of precipitation. May be NULL. */
+        PrecipitationProbability: number | null;
+        /** Percent representing the probability of a thunderstorm. May be NULL. */
+        ThunderstormProbability: number | null;
+        /** Percent representing the probability of rain. May be NULL. */
+        RainProbability: number | null;
+        /** Percent representing the probability of snow. May be NULL. */
+        SnowProbability: number | null;
+        /** Percent representing the probability of ice. May be NULL. */
+        IceProbability: number | null;
+        Wind: {
+            Speed: GenericValue;
+            Direction: WindDirectionInfo;
+        }
+        WindGust: {
+            Speed: GenericValue;
+        }
+        TotalLiquid: GenericValue;
+        Rain: GenericValue;
+        Snow: GenericValue;
+        Ice: GenericValue;
+        /** Number of hours of precipitation of any type. */
+        HoursOfPrecipitation: number;
+        /** Number of hours of rain. */
+        HoursOfRain: number;
+        /** Percent representing cloud cover. */
+        CloudCover: number;
+        Evapotranspiration: GenericValue;
+        SolarIrradiance: GenericValue;
+    }
+    Night: {
+        /** Numeric value representing an icon that matches the forecast. */
+        Icon: number;
+        /** Phrase description of the icon. */
+        IconPhrase: string;
+        LocalSource: {
+            /** Numeric identifier, unique to the local data provider. */
+            Id: number;
+            /** Name of the local data provider. Name is displayed in the language specified by language code in URL, if available. Otherwise, Name is displayed in English or the language in which the name was provided. */
+            Name: string;
+            /** Weather code provided by the local data provider. This weather code allows the forecast to be matched to icons provided by the local data provider instead of AccuWeather icons. */
+            WeatherCode: string;
+        }
+        /** boolean value that indicates the presence of any type of precipitation for a given night. Displays true if precipitation is present. */
+        HasPrecipitation: boolean;
+        /** Indicates if the precipitation is rain, snow, ice, or mixed. Only returned if HasPrecipitation is true. */
+        PrecipitationType: string;
+        /** Indicates if the precipitation strength is light, moderate, or heavy. Only returned if HasPrecipitation is true. */
+        PrecipitationIntensity: string;
+        /** Phrase description of the forecast. AccuWeather attempts to keep this phrase under 30 characters in length, but some languages/weather events may result in a phrase exceeding 30 characters. */
+        ShortPhrase: string;
+        /** Phrase description of the forecast. AccuWeather attempts to keep this phrase under 100 characters in length, but some languages/weather events may result in a phrase exceeding 100 characters. */
+        LongPhrase: string;
+        /** Percent representing the probability of precipitation. May be NULL. */
+        PrecipitationProbability: number | null;
+        /** Percent representing the probability of a thunderstorm. May be NULL. */
+        ThunderstormProbability: number | null;
+        /** Percent representing the probability of rain. May be NULL. */
+        RainProbability: number | null;
+        /** Percent representing the probability of snow. May be NULL. */
+        SnowProbability: number | null;
+        /** Percent representing the probability of ice. May be NULL. */
+        IceProbability: number | null;
+        Wind: {
+            /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.Wind.Speed. */
+            Speed: GenericValue;
+            /** Contains Degrees, Localized, and English. For details, see DailyForecasts.Day.Wind.Direction. */
+            Direction: WindDirectionInfo;
+        }
+        WindGust: {
+            /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.WindGust.Speed. */
+            Speed: GenericValue;
+        }
+        /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.TotalLiquid. */
+        TotalLiquid: GenericValue;
+        /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.Rain. */
+        Rain: GenericValue;
+        /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.Snow. */
+        Snow: GenericValue;
+        /** Contains Value, Unit, and UnitType. For details, see DailyForecasts.Day.Ice. */
+        Ice: GenericValue;
+        /** Number of hours of precipitation of any type. */
+        HoursOfPrecipitation: number;
+        /** Number of hours of rain. */
+        HoursOfRain: number;
+        /** Percent representing cloud cover. */
+        CloudCover: number;
+        Evapotranspiration: {
+            /** Rounded value in specified units. May be NULL. */
+            Value: number | null;
+            /** Type of unit. */
+            Unit: string;
+            /** Numeric ID associated with the type of unit being displayed. */
+            UnitType: number;
+        }
+        SolarIrradiance: {
+            /** Rounded value in specified units. May be NULL. */
+            Value: number | null;
+            /** Type of unit. */
+            Unit: string;
+            /** Numeric ID associated with the type of unit being displayed. */
+            UnitType: number;
+        }
+    }
+    /** Forecast sources. */
+    Sources: string;
+    /** Link to the daily forecast for the requested location on AccuWeather`s mobile site. */
+    MobileLink: string;
+    /** Link to the daily forecast for the requested location on AccuWeather`s web site.  */
+    Link: string;
+}
+
+interface HourlyPayloadShort extends Pick<HourlyPayload, 
+    "DateTime" |
+    "EpochTime" |
+    "WeatherIcon" |
+    "HasPrecipitation" |
+    "PrecipitationType" |
+    "PrecipitationIntensity" |
+    "IsDaylight" |
+    "Temperature" |
+    "PrecipitationProbability" |
+    "MobileLink" |
+    "Link"
+    > {
 }
 
 interface HourlyPayload {
-
+    /** DateTime of the forecast, displayed in ISO8601 format. */
+    DateTime: string;
+    /** DateTime of the forecast, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). */
+    EpochTime: number;
+    /** Numeric value representing an image that displays the current condition described by WeatherText. May be NULL. */
+    WeatherIcon: number;
+    /** Phrase description of the forecast associated with the WeatherIcon. Displayed in language specified by language code in URL. */
+    IconPhrase: string;
+    /** boolean value that indicates the presence of any type of precipitation for a given night. Displays true if precipitation is present. */
+    HasPrecipitation: boolean;
+    /** Indicates if the precipitation strength is light, moderate, or heavy. Only returned if HasPrecipitation is true. */
+    PrecipitationType?: string;
+    /** Indicates if the precipitation strength is light, moderate, or heavy. Only returned if HasPrecipitation is true. */
+    PrecipitationIntensity?: string;
+    /** Specifies whether or not it is daylight (true=daylight, false=not daylight). */
+    IsDaylight: boolean;
+    Temperature: GenericValue;
+    RealFeelTemperature: GenericValue;
+    RealFeelTemperatureShade: GenericValue;
+    /** The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation */
+    WetBulbTemperature: GenericValue;
+    /** Dew Point temperature */
+    DewPoint: GenericValue;
+    Wind: {
+        Speed: GenericValue;
+        Direction: GenericValue;
+    }
+    WindGust: {
+        Speed: GenericValue;
+    }
+    /** Relative humidity. May be NULL. */
+    RelativeHumidity: number | null;
+    Visibility: GenericValue;
+    Ceiling: GenericValue;
+    /** Measure of the strength of the ultraviolet radiation from the sun. May be NULL. */
+    UVIndex: number | null;
+    /** Text associated with the UVIndex. */
+    UVIndexText: string;
+    /** Percent representing the probability of precipitation. May be NULL. */
+    PrecipitationProbability: number | null;
+    /** Percent representing the probability of rain. May be NULL. */
+    RainProbability: number | null;
+    /** Percent representing the probability of snow. May be NULL. */
+    SnowProbability: number | null;
+    /** Percent representing the probability of ice. May be NULL. */
+    IceProbability: number | null;
+    TotalLiquid: GenericValue;
+    Rain: GenericValue;
+    Snow: GenericValue;
+    Ice: GenericValue;
+    /** Number representing the percentage of the sky that is covered by clouds. May be NULL. */
+    CloudCover: number | null;
+    Evapotranspiration: GenericValue;
+    SolarIrradiance: GenericValue;
+    /** Link to the hourly forecast for the requested location on AccuWeather`s mobile site. */
+    MobileLink: string;
+    /** Link to the hourly forecast for the requested location on AccuWeather`s web site.  */
+    Link: string;
 }
 
 interface LocationPayload {

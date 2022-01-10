@@ -270,7 +270,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private GetPanelHeight(): number {
-		return this.panel.height;
+		return this.panel?.height ?? 0;
 	}
 
 	// ---------------------------------------------------------------------------
@@ -435,12 +435,13 @@ The contents of the file saved from the applet help page goes here
 		this.loop.Stop();
 	}
 
-	public override on_applet_clicked(event: any): void {
+	public override on_applet_clicked(event: any): boolean {
 		this.ui.Toggle();
+		return false;
 	}
 
 	public override on_applet_middle_clicked(event: any) {
-
+		return false;
 	}
 
 	public override on_panel_height_changed() {
