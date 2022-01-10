@@ -81,7 +81,7 @@ export function createPopupMenu(args: Arguments) {
 
 
     function calculateFreeSpace(): FreeSpaceBox {
-        const monitor = layoutManager.findMonitorForActor(launcher)
+        const monitor = __meta.monitor
         const visiblePanels = panelManager.getPanelsInMonitor(monitor.index)
 
         const panelSizes = new Map(visiblePanels.map(panel => {

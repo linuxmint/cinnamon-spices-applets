@@ -4,7 +4,7 @@ import { mpvHandler } from "../../services/mpv/MpvHandler"
 import { createRadioAppletLabel } from "./RadioAppletLabel"
 import { createRadioAppletTooltip } from "./RadioAppletTooltip"
 import { createRadioAppletIcon } from "./RadioAppletIcon"
-import { MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts"
+import { APPLET_SITE, MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts"
 import { createRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu"
 import { installMpvWithMpris } from "../../services/mpv/CheckInstallation"
 import { notify } from "../Notifications/GenericNotification"
@@ -56,9 +56,10 @@ export function createRadioAppletContainer() {
             await installMpvWithMpris()
             popupMenu?.toggle()
         } catch (error) {
-            const notificationText = 
-            `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at the ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to `
-            notify({ text: notificationText })
+            const notificationText =
+                `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`
+
+            notify({ text: notificationText, transient: false })
             global.logError(error)
         } finally {
             installationInProgress = false

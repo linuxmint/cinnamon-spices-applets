@@ -4036,15 +4036,9 @@ function initPolyfills() {
 ;// CONCATENATED MODULE: ./src/lib/AppletContainer.ts
 const { Applet, AllowedLayout } = imports.ui.applet;
 const { EventType } = imports.gi.Clutter;
-const { panelManager } = imports.ui.main;
-const { getAppletDefinition } = imports.ui.appletManager;
 function createAppletContainer(args) {
     const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } = args;
-    const appletDefinition = getAppletDefinition({
-        applet_id: __meta.instanceId,
-    });
-    const panel = panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
-    const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
+    const applet = new Applet(__meta.orientation, __meta.panel.height, __meta.instanceId);
     let appletReloaded = false;
     applet.on_applet_clicked = () => {
         onClick();
@@ -4399,19 +4393,13 @@ function createRadioAppletTooltip(args) {
 }
 
 ;// CONCATENATED MODULE: ./src/lib/AppletIcon.ts
-const { panelManager: AppletIcon_panelManager } = imports.ui.main;
-const { getAppletDefinition: AppletIcon_getAppletDefinition } = imports.ui.appletManager;
 const { Icon: AppletIcon_Icon, IconType: AppletIcon_IconType } = imports.gi.St;
 const { Point } = imports.gi.Clutter;
 function createAppletIcon(props) {
     const icon_type = (props === null || props === void 0 ? void 0 : props.icon_type) || AppletIcon_IconType.SYMBOLIC;
-    const appletDefinition = AppletIcon_getAppletDefinition({
-        applet_id: __meta.instanceId,
-    });
-    const panel = AppletIcon_panelManager.panels.find(panel => (panel === null || panel === void 0 ? void 0 : panel.panelId) === appletDefinition.panelId);
-    const locationLabel = appletDefinition.location_label;
+    const panel = __meta.panel;
     function getIconSize() {
-        return panel.getPanelZoneIconSize(locationLabel, icon_type);
+        return panel.getPanelZoneIconSize(__meta.locationLabel, icon_type);
     }
     function getStyleClass() {
         return icon_type === AppletIcon_IconType.SYMBOLIC ? 'system-status-icon' : 'applet-icon';
@@ -4515,7 +4503,7 @@ function createRadioAppletIcon() {
 
 ;// CONCATENATED MODULE: ./src/lib/PopupMenu.ts
 const { BoxLayout, Bin, Side } = imports.gi.St;
-const { uiGroup, layoutManager, panelManager: PopupMenu_panelManager, pushModal, popModal } = imports.ui.main;
+const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui.main;
 const { KEY_Escape } = imports.gi.Clutter;
 const { util_get_transformed_allocation } = imports.gi.Cinnamon;
 const { PanelLoc } = imports.ui.popupMenu;
@@ -4561,8 +4549,8 @@ function createPopupMenu(args) {
     }
     function calculateFreeSpace() {
         var _a, _b, _c, _d;
-        const monitor = layoutManager.findMonitorForActor(launcher);
-        const visiblePanels = PopupMenu_panelManager.getPanelsInMonitor(monitor.index);
+        const monitor = __meta.monitor;
+        const visiblePanels = panelManager.getPanelsInMonitor(monitor.index);
         const panelSizes = new Map(visiblePanels.map(panel => {
             let width = 0, height = 0;
             if (panel.getIsVisible()) {
@@ -5366,9 +5354,11 @@ const spawnCommandLinePromise = function (command) {
 ;// CONCATENATED MODULE: ./src/ui/Notifications/GenericNotification.ts
 
 function notify(args) {
-    const { text } = args;
+    const { text, isMarkup = false, transient = true } = args;
     const notification = createBasicNotification({
-        notificationText: text
+        notificationText: text,
+        isMarkup,
+        transient
     });
     notification.notify();
 }
@@ -5485,8 +5475,8 @@ function createRadioAppletContainer() {
             popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.toggle();
         }
         catch (error) {
-            const notificationText = "Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder.";
-            notify({ text: notificationText });
+            const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
+            notify({ text: notificationText, transient: false });
             global.logError(error);
         }
         finally {

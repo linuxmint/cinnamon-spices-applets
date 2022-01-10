@@ -1,7 +1,5 @@
 const { Applet, AllowedLayout } = imports.ui.applet
 const { EventType } = imports.gi.Clutter
-const { panelManager } = imports.ui.main
-const { getAppletDefinition } = imports.ui.appletManager;
 
 interface Arguments {
     onClick: () => void,
@@ -23,15 +21,8 @@ export function createAppletContainer(args: Arguments) {
         onRightClick
     } = args
 
-    const appletDefinition = getAppletDefinition({
-        applet_id: __meta.instanceId,
-    })
 
-    const panel = panelManager.panels.find(panel =>
-        panel?.panelId === appletDefinition.panelId
-    ) as imports.ui.panel.Panel
-
-    const applet = new Applet(__meta.orientation, panel.height, __meta.instanceId);
+    const applet = new Applet(__meta.orientation, __meta.panel.height, __meta.instanceId);
 
     let appletReloaded = false;
 
