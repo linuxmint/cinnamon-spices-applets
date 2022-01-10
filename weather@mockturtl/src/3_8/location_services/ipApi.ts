@@ -20,7 +20,7 @@ export class IpApi {
 	}
 
 	public async GetLocation(): Promise<LocationData | null> {
-		let json = await this.app.LoadJsonAsync<IpApiPayload>(this.query);
+		const json = await this.app.LoadJsonAsync<IpApiPayload>(this.query);
 
 		if (!json) {
 			return null;
@@ -37,7 +37,7 @@ export class IpApi {
 
 	private ParseInformation(json: IpApiPayload): LocationData | null {
 		try {
-			let result: LocationData = {
+			const result: LocationData = {
 				lat: json.lat,
 				lon: json.lon,
 				city: json.city,

@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.9
+
+* Fixes [#4184](https://github.com/linuxmint/cinnamon-spices-applets/issues/4184) - missing space in .pot file
+* Fixes [#4127](https://github.com/linuxmint/cinnamon-spices-applets/issues/4127) - Text is at an abnormal height
+* Fix issue in WeatherBit provider where it would break if it tries to parse a date with January for month
+* Various minor syntax improvements (usage of consts and for-of loops)
+* Use mapping for getting provider classes instead of a big switch statement
+
 ## 3.1.8
 
 * Fixes [#4136](https://github.com/linuxmint/cinnamon-spices-applets/issues/4136) - Fix custom widget not applying translations
@@ -16,7 +24,7 @@
 
 * Support changing logging level from settings
 * Support saving logs specific to the applet into file along with the applet's settings
-* Prefill the Github issue form on opening a new issue from the applet
+* Pre-fill the Github issue form on opening a new issue from the applet
 * Update with new declarations
 
 ## 3.1.5
@@ -101,7 +109,7 @@
 * Add minutely precipitation under current condition, when there is any (and the setting is on)
 * Add more tooltips to settings
 * OpenWeatherMap can also display Precipitation chance if there is no volume specified
-* Autoformat 3.8 and new declaration files
+* Auto-format 3.8 and new declaration files
 * Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
 
 ## 3.0.3
@@ -138,7 +146,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new sign-ups.
 
 * Make network and DNS related errors soft errors again
 
@@ -240,7 +248,7 @@ Fixes:
 
 * Custom icons changed to fit their bounding boxes
 
-* Make Daily forecasts tileable
+* Make Daily forecasts tile-able
 
 * Fix [#2892](https://github.com/linuxmint/cinnamon-spices-applets/issues/2892), buttons adhere to current theme
 

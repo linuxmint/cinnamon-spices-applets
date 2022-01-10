@@ -34,7 +34,7 @@ class Log {
 		if (!this.CanLog("info"))
 			return;
 
-		let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+		const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
 		global.log(msg);
 	}
 
