@@ -16,7 +16,7 @@ Keyboard Shortcuts in input field:
 
 ## Source & Bugreports
 
-Original repository: [https://github.com/ptandler/cinnamon-spices-applets](https://github.com/ptandler/cinnamon-spices-applets/tree/calc%40ptandler/calc%40ptandler)
+Original repository: [https://github.com/ptandler/cinnamon-spices-applets](https://github.com/ptandler/cinnamon-spices-applets/tree/calc%40ptandler/calc-js%40ptandler)
 
 This is actually the new version of the [Mini-Calc _desklet_](https://github.com/ptandler/cinnamon-spices-desklets/tree/calc%40ptandler/calc%40ptandler). As getting the keyboard focus is a bit tricky for a desklet, I decided to go for an applet.
 
@@ -25,6 +25,8 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 - `1 + 2` = `3`
 - `(1 + 2) * (3 + 4)` = `21`
+- if the option is enabled (default), numbers that use the current locale's decimal separator (e.g. `1,23`) are converted to JS notation (i.e. `1.23`) 
+  before evaluating. This makes it much easier to past number form other sources as input.
 - All functions defined in the [JavaScript `Math` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) are included using the [`with` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) (knowing that is not generally recommended using `with` in JS, but I think here it's kind of convenient):
     - `min(1,2)` = `1`
     - `max(1,2)` = `2`
@@ -58,7 +60,8 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [ ] add action to clear history in right-click context menu
 - [ ] idea: move help dialog to applet settings dialog as a new panel. Can this contain formatting? Or is there another and yet simple way? Ideally with MarkDown support?
 - [ ] is the PopupMenu the best way to display the mini calc? maybe use something that will stay on screen as more or less normal window, so it's easier to switch to another window etc!??!
-- [ ] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats!
+- [ ] extend the option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) also for grouping separators (e.g. "1.234.567,89")
+      be sure not to remove a `.` in a JS number, i.e. only strip group separators if you can be sure it is one (e.g. it is not a valid JS number literal)
 - [ ] add button and keyboard shortcut for "copy value to **clipboard**"
 - [ ] add **translations** (i18n)
 - [ ] add keyboard shortcuts to navigate in history (e.g. Ctrl or Alt arrow up / down) - in fact this works somehow in the popup menu already. Not 100% nice though.
@@ -66,11 +69,13 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 - [ ] add option to turn off to use `JSON.stringify()` to display results (mainly to string quotes around strings)
 - [ ] add option for expressions executed at startup in order to define custom functions and variables
 - [ ] option to show the last result as applet text next to the icon (well, only the first up to x chars)
+- [ ] what about converting number back to the locale's format ...?
 
 ## Changelog
 
 ### version 1.1, 2022-01-11
 
+- [x] add option to convert locale number format (e.g. `1,23`) to JS notation (i.e. `1.23`) to avoid errors for those used to one of these formats
 - [x] Changed UUID from `calc@ptandler` to `calc-js@ptandler` to be unique
 
 ### version 1.0, 2021-12-14
@@ -142,9 +147,10 @@ Kind of useful Documentation:
 #### Documentation:
 
 - [A bit too short introduction in writing Cinnamon desklets](http://www.erikedrosa.com/2014/12/31/hello-world-desklet-tutorial.html)
-- Cinnamon-specific tutorials https://projects.linuxmint.com/reference/git/cinnamon-tutorials/
+- [Cinnamon-specific tutorials](https://projects.linuxmint.com/reference/git/cinnamon-tutorials/) - also available in `Devhelp`
 - https://nickdurante.github.io/development/Writing-a-Cinnamon-Applet/
 - https://github.com/gustavo-iniguez-goya/arpsentinel-applet/wiki/Collaborating-and-resources
     - "Read the source code (very useful): /usr/share/cinnamon/js/ui/"
 - [Source of the Cinnamon docs](https://github.com/linuxmint/cinnamon/tree/master/docs/reference)
     - but also as [MarkDown version here](https://github.com/linuxmint/linuxmint.github.io/tree/master/reference/git) ... is this generated from the above?
+- [Linux Mint Developer Guide](https://linuxmint-developer-guide.readthedocs.io/en/latest/): [recommended tools](https://linuxmint-developer-guide.readthedocs.io/en/latest/technology.html) 

@@ -69,6 +69,15 @@ function evalExpression(input) {
     }
 }
 
+/**
+ * https://stackoverflow.com/a/17886301/1480587
+ * @param stringToGoIntoTheRegex
+ * @returns {string} with escaped characters
+ */
+function escapeRegExp(stringToGoIntoTheRegex) {
+    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 class MiniCalc extends Applet.IconApplet {
 
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -87,7 +96,11 @@ class MiniCalc extends Applet.IconApplet {
             recentHistoryMaxLength: 2,
             historyMaxDisplayLength: 6,
             historyMaxStoreLength: 16,
+            convertLocaleNumberSeparators: true,
+            // replaceInputWithConvertedNumbers: false,
         }
+
+        this.initializeNumberFormat()
 
         // applet setup
 
@@ -105,6 +118,20 @@ class MiniCalc extends Applet.IconApplet {
         this.setupSettings();
 
         this.buildLayout();
+    }
+
+    initializeNumberFormat() {
+        // see e.g. https://stackoverflow.com/a/51411310/1480587 and https://stackoverflow.com/a/62694190/1480587
+        const numberParts = Intl.NumberFormat().formatToParts(1234.5);
+        // e.g. [{"type":"integer","value":"1"},{"type":"group","value":"."},{"type":"integer","value":"234"},{"type":"decimal","value":","},{"type":"fraction","value":"5"}]
+        // this.numberGroupSeparator = numberParts.find(part => part.type === 'group').value;
+        this.numberDecimalSeparator = numberParts.find(part => part.type === 'decimal').value;
+
+        // helpers for `updateResult()` in case `this.opt.convertLocaleNumberSeparators` is set
+        // build reg exps to search for group separators (should be removed) ...
+        // this.numberGroupRegExp = new RegExp(`\\d${escapeRegExp(this.numberGroupSeparator)}\\d`);
+        /// ... and then for decimal separators (which should be replaced by ".")
+        this.numberDecimalRegExp = new RegExp(`(\\d+)${escapeRegExp(this.numberDecimalSeparator)}(\\d+)`, "g");
     }
 
     buildLayout() {
@@ -349,6 +376,14 @@ class MiniCalc extends Applet.IconApplet {
     }
 
     updateResult(input) {
+        if (input && this.opt.convertLocaleNumberSeparators) {
+            // if the input contains numbers in the current locale's format, convert them to JS before evaluating
+            // remove group separators ... TODO: but only if this is really a group separator and not e.g. the JS decimal separator - how to detect??
+
+            // replace decimal separator in all numbers
+            input = input.replace(this.numberDecimalRegExp, "$1.$2")
+
+        }
         const result = evalExpression(input);
         // logInfo("MiniCalc: updateResult: " + input + " -> " + result);
         if (result instanceof EvalError && result.toString().startsWith("error: expected expression, got '}'")) {

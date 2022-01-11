@@ -9,6 +9,7 @@
       "title": "Settings",
       "sections": [
         "keyboard-section",
+        "input-section",
         "history-section"
       ]
     },
@@ -17,6 +18,14 @@
       "title": "Keyboard",
       "keys": [
         "keyToggle"
+      ]
+    },
+    "input-section": {
+      "type": "section",
+      "title": "Number Format",
+      "keys": [
+        "convertLocaleNumberSeparators",
+        "convertLocaleNumberSeparatorsHelp"
       ]
     },
     "history-section": {
@@ -32,6 +41,15 @@
     "type": "keybinding",
     "description": "Show / hide mini calculator",
     "default": "Calculator::<Primary><Alt><Super>c"
+  },
+  "convertLocaleNumberSeparators": {
+    "type": "switch",
+    "default": true,
+    "description": "Convert numbers in current locale's format to JS numbers"
+  },
+  "convertLocaleNumberSeparatorsHelp": {
+    "type": "label",
+    "description": "e.g. for the German locale convert `1,2 + 3,4` to `1.2 + 3.4`. Makes pasting number easier."
   },
   "recentHistoryMaxLength": {
     "type": "spinbutton",
