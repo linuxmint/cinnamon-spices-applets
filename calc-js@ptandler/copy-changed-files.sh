@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APPLET_ID=calc@ptandler
+APPLET_ID=calc-js@ptandler
 SRC="$(dirname "${BASH_SOURCE[0]}")/files/$APPLET_ID"
 DEST="$HOME/.local/share/cinnamon/applets/$APPLET_ID"
 

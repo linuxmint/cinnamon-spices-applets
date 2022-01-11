@@ -69,6 +69,10 @@ This is actually the new version of the [Mini-Calc _desklet_](https://github.com
 
 ## Changelog
 
+### version 1.1, 2022-01-11
+
+- [x] Changed UUID from `calc@ptandler` to `calc-js@ptandler` to be unique
+
 ### version 1.0, 2021-12-14
 
 New

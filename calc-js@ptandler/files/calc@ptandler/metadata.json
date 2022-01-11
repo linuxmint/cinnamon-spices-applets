@@ -1,9 +1,9 @@
 {
-  "uuid": "calc@ptandler",
+  "uuid": "calc-js@ptandler",
   "name": "Mini-Calc Applet",
   "description": "Very simple and minimalistic but yet powerful calculator that evaluates JavaScript expressions.",
   "author": "ptandler",
-  "version": "1.0",
+  "version": "1.1",
   "cinnamon-version": ["3.8", "4.0", "4.2", "4.3", "4.4", "4.5", "4.6", "4.8"],
   "url": "https://github.com/ptandler/cinnamon-spices-applets/tree/calc%40ptandler/calc%40ptandler"
 }
