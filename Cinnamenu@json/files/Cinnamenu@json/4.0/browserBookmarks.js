@@ -225,6 +225,7 @@ class BookmarksManager {
             readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser'),
             readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome'),
             readChromiumBookmarks(bookmarks, ['opera', 'Bookmarks'], 'opera'),
+            readChromiumBookmarks(bookmarks, ['vivaldi', 'Default', 'Bookmarks'], 'vivaldi-stable'),
             readChromiumBookmarks(bookmarks, ['BraveSoftware', 'Brave-Browser', 'Default', 'Bookmarks'],
                                                                                             'brave-browser')
         ]).then(() => {

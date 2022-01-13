@@ -221,7 +221,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.contextMenu.open(this.id, e, this, true);
+        this.appThis.contextMenu.open(this.id, e, this.actor, true);
     }
 
     disable() {

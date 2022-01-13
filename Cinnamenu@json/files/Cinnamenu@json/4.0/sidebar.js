@@ -67,30 +67,24 @@ class SidebarButton {
     }
 
     _handleButtonRelease(actor, e) {
+        if (this.appThis.contextMenu.isOpen) {
+            this.appThis.contextMenu.close();
+            this.appThis.clearEnteredActors();
+            this.handleEnter();
+            return Clutter.EVENT_STOP;
+        }
+
         const button = e.get_button();
         if (button === 1) {//left click
-            if (this.appThis.contextMenu.isOpen) {
-                //if (this.menuIsOpen && this.menu._activeMenuItem) {
-                //    this.menu._activeMenuItem.activate();
-                this.appThis.contextMenu.close();
-                this.appThis.clearEnteredActors();
-                this.handleEnter();
-            } else {
-                this.activate();
-            }
+            this.activate();
             return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.contextMenu.close();
-                this.appThis.clearEnteredActors();
-                this.handleEnter();
-            } else {
-                if (this.app != null) {
-                    this.openContextMenu(e);
-                }
+            if (this.app != null) {
+                this.openContextMenu(e);
             }
             return Clutter.EVENT_STOP;
         }
+
         return Clutter.EVENT_PROPAGATE;
     }
 
@@ -113,7 +107,7 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this);
+        this.appThis.contextMenu.open(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {
@@ -121,7 +115,7 @@ class SidebarButton {
             return true;
         }
 
-        if (event) {
+        if (event) {//mouse event
             this.appThis.clearEnteredActors();
         } else {//key nav
             this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);

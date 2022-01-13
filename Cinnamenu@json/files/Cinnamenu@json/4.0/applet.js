@@ -500,9 +500,6 @@ class CinnamenuApplet extends TextIconApplet {
         if (!newHeight) {//newHeight is only supplied when risizing
             newHeight = this.settings.customMenuHeight;
         }
-        if (!newWidth) {//newWidth is only supplied when risizing
-            newWidth = this.settings.customMenuWidth;
-        }
 
         //----------height--------
         //Note: the stored menu height value is middlePane + bottomPane which is smaller than the
@@ -530,12 +527,14 @@ class CinnamenuApplet extends TextIconApplet {
         if (!newWidth) {//newWidth is only supplied when risizing
             newWidth = this.settings.customMenuWidth;
         }
+
         //find minimum width for categoriesView + sidebar (if present)
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
         if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
                                                 this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
             leftSideWidth += this.sidebar.sidebarOuterBox.width;
         }
+
         //find minimum width of bottomPane
         this.searchView.searchEntry.width = 5;  //Set to something small so that it gets set to its
                                                 //minimum value.
@@ -544,6 +543,7 @@ class CinnamenuApplet extends TextIconApplet {
                                                 this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
             bottomPaneMinWidth = this.bottomPane.width;
         }
+
         //find minimum menu width
         const minWidthForAppsView = 200;
         let minMenuWidth = Math.max(leftSideWidth + minWidthForAppsView, bottomPaneMinWidth);
@@ -984,7 +984,7 @@ class CinnamenuApplet extends TextIconApplet {
         //=======search providers==========
         //---calculator---
         let calculatorResult = null;
-        const replacefn = (match) => {
+        const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
             if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
             'cosh','exp','floor','fround','log','max','min','pow','random','round','sign','sin',
             'sinh','sqrt','tan','tanh','trunc'].includes(match)) {
@@ -1438,7 +1438,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .isPlace
  *  .isRecentFile
  *  .isClearRecentsButton
- *  .isFavoriteFile
+ *  .isFavoriteFile             //Nemo favorites
  *  .isFolderviewFile
  *  .isFolderviewDirectory
  *  .isBackButton

@@ -182,12 +182,9 @@ class AppButton {
             bgColor.green = 20;
             bgColor.blue = 20;
         }
-        let addedStyle = '';
-        if (this.entered) {
-            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) + ';';
-        } else {
-            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) +
-                        '; background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
+        let addedStyle = 'border:2px; border-color:' + toRgbaString(bgColor) + '; ';
+        if (!this.entered) {
+            addedStyle += 'background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
         }
         this.actor.set_style(addedStyle);
     }
@@ -340,7 +337,7 @@ class AppButton {
     openContextMenu(e) {
         this._setButtonSelected();
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this);
+        this.appThis.contextMenu.open(this.app, e, this.actor);
     }
 
     _resetAllAppsOpacity() {
