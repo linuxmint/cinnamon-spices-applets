@@ -168,6 +168,7 @@ export class Config {
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
 	private countryCode: string | null;
+	public textColorStyle: string | null = null;
 
 	private timezone: string | undefined = undefined;
 

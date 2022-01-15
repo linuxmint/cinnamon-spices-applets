@@ -13866,6 +13866,7 @@ class Config {
         this.WEATHER_LOCATION_LIST = "locationList";
         this.doneTypingLocation = null;
         this.currentLocation = null;
+        this.textColorStyle = null;
         this.timezone = undefined;
         this.OnKeySettingsUpdated = () => {
             if (this.keybinding != null) {
@@ -14938,6 +14939,9 @@ class UIHourlyForecasts {
         var _a;
         if (!forecasts || !this.hourlyForecasts)
             return true;
+        if (this.hourlyForecasts.length > forecasts.length) {
+            this.Rebuild(this.app.config, this.app.config.textColorStyle, forecasts.length);
+        }
         this.hourlyForecastDates = [];
         const max = Math.min(forecasts.length, this.hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
@@ -15062,9 +15066,9 @@ class UIHourlyForecasts {
     Destroy() {
         this.container.destroy_all_children();
     }
-    Rebuild(config, textColorStyle) {
+    Rebuild(config, textColorStyle, availableHours = null) {
         this.Destroy();
-        const hours = this.app.GetMaxHourlyForecasts();
+        const hours = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxHourlyForecasts();
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
         for (let index = 0; index < hours; index++) {
@@ -15319,10 +15323,10 @@ class UI {
     }
     Rebuild(config) {
         this.ShowLoadingUi();
-        const textColorStyle = this.GetTextColorStyle();
-        this.CurrentWeather.Rebuild(config, textColorStyle);
-        this.HourlyWeather.Rebuild(config, textColorStyle);
-        this.FutureWeather.Rebuild(config, textColorStyle);
+        this.App.config.textColorStyle = this.GetTextColorStyle();
+        this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
         this.Bar.Rebuild(config);
     }
     UpdateIconType(iconType) {

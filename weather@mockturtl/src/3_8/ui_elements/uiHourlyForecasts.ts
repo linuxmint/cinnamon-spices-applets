@@ -107,6 +107,10 @@ export class UIHourlyForecasts {
 		if (!forecasts || !this.hourlyForecasts)
 			return true;
 
+		if (this.hourlyForecasts.length > forecasts.length) {
+			this.Rebuild(this.app.config, this.app.config.textColorStyle!, forecasts.length);
+		}
+
 		this.hourlyForecastDates = [];
 		const max = Math.min(forecasts.length, this.hourlyForecasts.length);
 		for (let index = 0; index < max; index++) {
@@ -274,9 +278,9 @@ export class UIHourlyForecasts {
 		this.container.destroy_all_children();
 	}
 
-	public Rebuild(config: Config, textColorStyle: string) {
+	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null) {
 		this.Destroy();
-		const hours = this.app.GetMaxHourlyForecasts();
+		const hours = availableHours ?? this.app.GetMaxHourlyForecasts();
 		this.hourlyForecasts = [];
 		this.hourlyContainers = [];
 

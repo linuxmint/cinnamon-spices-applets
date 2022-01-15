@@ -157,7 +157,7 @@ export class DarkSky extends BaseProvider {
 				};
 
 				// never null here
-				(<HourlyForecastData[]>result.hourlyForecasts).push(forecast);
+				result.hourlyForecasts!.push(forecast);
 			}
 			return result;
 		}
