@@ -10,8 +10,8 @@ export class AccuWeather extends BaseProvider {
     public readonly needsApiKey: boolean = true;
     public readonly prettyName: string = _("AccuWeather");
     public readonly name: Services = "AccuWeather";
-    public readonly maxForecastSupport: number = 5;
-    public readonly maxHourlyForecastSupport: number = 12;
+    public readonly maxForecastSupport: number = 12;
+    public readonly maxHourlyForecastSupport: number = 120;
     public readonly website: string = "https://www.accuweather.com/";
 
     // Quota

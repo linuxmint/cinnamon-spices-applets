@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-15 15:29+0000\n"
+"POT-Creation-Date: 2022-01-15 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1786,7 +1786,6 @@ msgid "hours"
 msgstr ""
 
 #. 3.0->settings-schema.json->forecastHours->description
-#. 3.8->settings-schema.json->forecastHours->description
 msgid "Hourly Forecast length"
 msgstr ""
 
@@ -2173,8 +2172,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
 msgid ""
-"Maximum number of days that can be displayed, maximum rows and columns "
-"setting in the Presentation tab will affect the final number."
+"Maximum number of days that can be displayed, available number of data, "
+"maximum rows and columns setting in the Presentation tab will affect the "
+"final number."
+msgstr ""
+
+#. 3.8->settings-schema.json->forecastHours->description
+msgid ""
+"Maximum number of hours that can be displayed, available numbers of data "
+"will affect the final number."
 msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description

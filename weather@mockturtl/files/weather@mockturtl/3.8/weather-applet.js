@@ -13446,8 +13446,8 @@ class AccuWeather extends BaseProvider {
         this.needsApiKey = true;
         this.prettyName = _("AccuWeather");
         this.name = "AccuWeather";
-        this.maxForecastSupport = 5;
-        this.maxHourlyForecastSupport = 12;
+        this.maxForecastSupport = 12;
+        this.maxHourlyForecastSupport = 120;
         this.website = "https://www.accuweather.com/";
         this.remainingQuota = null;
         this.tier = "free";
