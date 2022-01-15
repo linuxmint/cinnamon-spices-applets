@@ -26,6 +26,10 @@ export class Weatherbit extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = true;
 
+	public get remainingCalls(): number | null {
+		return null;
+	};
+
 	private supportedLanguages = [
 		'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
 		'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',

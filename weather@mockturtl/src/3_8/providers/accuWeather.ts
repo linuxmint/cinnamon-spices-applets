@@ -3,7 +3,7 @@ import { Services } from "../config";
 import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, Precipitation, WeatherData } from "../types";
-import { CelsiusToKelvin, _ } from "../utils";
+import { CelsiusToKelvin, KPHtoMPS, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 export class AccuWeather extends BaseProvider {
@@ -14,11 +14,43 @@ export class AccuWeather extends BaseProvider {
     public readonly maxHourlyForecastSupport: number = 12;
     public readonly website: string = "https://www.accuweather.com/";
 
+    // Quota
+    private remainingQuota: number | null = null;
+    private tier: "free" | "standard" | "prime" | "elite" = "free";
+
+    public get remainingCalls(): number | null {
+		return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
+	};
+
     private readonly baseUrl = "http://dataservice.accuweather.com/";
     private readonly locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
     private readonly currentConditionUrl = this.baseUrl + "currentconditions/v1/";
-    private readonly dailyForecastUrl = this.baseUrl + "forecasts/v1/daily/5day/";
-    private readonly hourlyForecastUrl = this.baseUrl + "forecasts/v1/hourly/12hour/";
+
+    /** Based on https://developer.accuweather.com/packages */
+    private get dailyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/daily/";
+        if (this.tier == "free" || this.tier == "standard")
+            url+= "5day/";
+        else if (this.tier == "prime")
+            url+= "10day/";
+        else
+            url+= "10day/";
+        
+        return url;
+    }
+
+    /** Based on https://developer.accuweather.com/packages */
+    private get hourlyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/hourly/";
+        if (this.tier == "free" || this.tier == "standard")
+            url+= "12hour/";
+        else if (this.tier == "prime")
+            url+= "72hour/";
+        else
+            url+= "120hour"
+
+        return url;
+    }
 
     private readonly locationCache: {[key: string]: LocationPayload} = {};
 
@@ -39,19 +71,41 @@ export class AccuWeather extends BaseProvider {
         }
 
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentPayload>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsync<DailyPayload>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsync<HourlyPayload[]>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+            this.app.LoadJsonAsyncWithDetails<CurrentPayload>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails<DailyPayload>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails<HourlyPayload[]>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
         ])
 
-        if (current == null || forecast == null || hourly == null)
+        if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
 
-        return this.ParseWeather(current, forecast, hourly, location);
+        this.remainingQuota = Math.min(
+            parseInt(current.ResponseHeaders["RateLimit-Remaining"]),
+            parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]),
+            parseInt(hourly.ResponseHeaders["RateLimit-Remaining"])
+        );
+
+        // Base 
+        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        return this.ParseWeather(current.Data, forecast.Data, hourly.Data, location);
     }
 
     public constructor(app: WeatherApplet) {
         super(app);
+    }
+
+    /**
+     * Sets tier, based on https://developer.accuweather.com/packages
+     */
+    private SetTier(limit: number): void {
+        if (limit > 1800000)
+            this.tier = "elite";
+        else if (limit > 225000)
+            this.tier = "prime";
+        else if (limit > 50)
+            this.tier = "standard";
+        else
+            this.tier = "free";
     }
 
     private ParseWeather(current: CurrentPayload, daily: DailyPayload, hourly: HourlyPayload[], loc: LocationPayload): WeatherData {
@@ -75,7 +129,7 @@ export class AccuWeather extends BaseProvider {
             temperature: CelsiusToKelvin(current.Temperature.Metric.Value),
             wind: {
                 degree: current.Wind.Direction.Degrees,
-                speed: current.Wind.Speed.Metric.Value, // TODO: Km/h to m/s
+                speed: KPHtoMPS(current.Wind.Speed.Metric.Value),
             },
             condition: {
                 ...this.ResolveIcons(current.WeatherIcon, current.IsDayTime),

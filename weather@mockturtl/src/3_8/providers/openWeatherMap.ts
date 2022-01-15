@@ -27,6 +27,7 @@ export class OpenWeatherMap extends BaseProvider {
 	public readonly website = "https://openweathermap.org/";
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
+	public readonly remainingCalls: number | null = null;
 
 	private supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
 		"fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
@@ -69,6 +70,10 @@ export class OpenWeatherMap extends BaseProvider {
 		json.id = cachedID ?? idPayload?.id;
 		return this.ParseWeather(json, loc);
 	};
+
+	public RanOutOfQuota(loc: LocationData): boolean | null {
+		return null;
+	}
 
 	private ParseWeather(json: OWMPayload, loc: LocationData): WeatherData | null {
 		try {

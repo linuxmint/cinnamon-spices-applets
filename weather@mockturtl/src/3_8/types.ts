@@ -18,6 +18,7 @@ export interface WeatherProvider {
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
+	readonly remainingCalls: number | null;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }

@@ -9598,6 +9598,7 @@ class MetUk extends BaseProvider {
         this.website = "https://www.metoffice.gov.uk/";
         this.maxHourlyForecastSupport = 36;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
         this.forecastPrefix = "wxfcs/all/json/";
         this.threeHourlyUrl = "?res=3hourly";
@@ -10233,6 +10234,7 @@ class DarkSky extends BaseProvider {
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
         this.needsApiKey = true;
+        this.remainingQuota = null;
         this.descriptionLineLength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -10267,6 +10269,10 @@ class DarkSky extends BaseProvider {
             return true;
         };
     }
+    get remainingCalls() {
+        return this.remainingQuota;
+    }
+    ;
     async GetWeather(loc) {
         const now = new Date(Date.now());
         if (now.getUTCFullYear() > 2022) {
@@ -10280,16 +10286,11 @@ class DarkSky extends BaseProvider {
         const query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, {}, this.HandleError);
-        if (!json)
+        const response = await this.app.LoadJsonAsyncWithDetails(query, {}, this.HandleError);
+        if (!response.Success)
             return null;
-        if (!json.code) {
-            return this.ParseWeather(json);
-        }
-        else {
-            this.HandleResponseErrors(json);
-            return null;
-        }
+        this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+        return this.ParseWeather(response.Data);
     }
     ;
     ParseWeather(json) {
@@ -10560,6 +10561,7 @@ class OpenWeatherMap extends BaseProvider {
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
@@ -10596,6 +10598,9 @@ class OpenWeatherMap extends BaseProvider {
         return this.ParseWeather(json, loc);
     }
     ;
+    RanOutOfQuota(loc) {
+        return null;
+    }
     ParseWeather(json, loc) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
@@ -10950,6 +10955,7 @@ class MetNorway extends BaseProvider {
         this.website = "https://www.met.no/en";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
     }
     async GetWeather(loc) {
@@ -11626,6 +11632,10 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
         let hourlyPromise = null;
@@ -11917,6 +11927,7 @@ class Weatherbit extends BaseProvider {
 class ClimacellV4 extends BaseProvider {
     constructor(app) {
         super(app);
+        this.remainingCalls = null;
         this.needsApiKey = true;
         this.prettyName = _("Tomorrow.io");
         this.name = "Tomorrow.io";
@@ -12248,6 +12259,7 @@ class USWeather extends BaseProvider {
         this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.MAX_STATION_DIST = 50000;
         this.observationStations = [];
@@ -12795,6 +12807,7 @@ class VisualCrossing extends BaseProvider {
         this.maxHourlyForecastSupport = 336;
         this.website = "https://weather.visualcrossing.com/";
         this.needsApiKey = true;
+        this.remainingCalls = null;
         this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
         this.params = {
             unitGroup: "metric",
@@ -13088,6 +13101,7 @@ class DanishMI extends BaseProvider {
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
+        this.remainingCalls = null;
         this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
         this.forecastParams = {
             cmd: "llj",
@@ -13435,11 +13449,11 @@ class AccuWeather extends BaseProvider {
         this.maxForecastSupport = 5;
         this.maxHourlyForecastSupport = 12;
         this.website = "https://www.accuweather.com/";
+        this.remainingQuota = null;
+        this.tier = "free";
         this.baseUrl = "http://dataservice.accuweather.com/";
         this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
         this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
-        this.dailyForecastUrl = this.baseUrl + "forecasts/v1/daily/5day/";
-        this.hourlyForecastUrl = this.baseUrl + "forecasts/v1/hourly/12hour/";
         this.locationCache = {};
         this.HandleErrors = (e) => {
             switch (e.ErrorData.code) {
@@ -13468,6 +13482,30 @@ class AccuWeather extends BaseProvider {
             return false;
         };
     }
+    get remainingCalls() {
+        return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
+    }
+    ;
+    get dailyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/daily/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "5day/";
+        else if (this.tier == "prime")
+            url += "10day/";
+        else
+            url += "10day/";
+        return url;
+    }
+    get hourlyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/hourly/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "12hour/";
+        else if (this.tier == "prime")
+            url += "72hour/";
+        else
+            url += "120hour";
+        return url;
+    }
     async GetWeather(loc) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
@@ -13482,13 +13520,25 @@ class AccuWeather extends BaseProvider {
             return null;
         }
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsync(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsync(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsync(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
         ]);
-        if (current == null || forecast == null || hourly == null)
+        if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
-        return this.ParseWeather(current, forecast, hourly, location);
+        this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        return this.ParseWeather(current.Data, forecast.Data, hourly.Data, location);
+    }
+    SetTier(limit) {
+        if (limit > 1800000)
+            this.tier = "elite";
+        else if (limit > 225000)
+            this.tier = "prime";
+        else if (limit > 50)
+            this.tier = "standard";
+        else
+            this.tier = "free";
     }
     ParseWeather(current, daily, hourly, loc) {
         return {
@@ -13511,7 +13561,7 @@ class AccuWeather extends BaseProvider {
             temperature: CelsiusToKelvin(current.Temperature.Metric.Value),
             wind: {
                 degree: current.Wind.Direction.Degrees,
-                speed: current.Wind.Speed.Metric.Value,
+                speed: KPHtoMPS(current.Wind.Speed.Metric.Value),
             },
             condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
             hourlyForecasts: this.ParseHourly(hourly),
@@ -15783,17 +15833,21 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+    async LoadJsonAsyncWithDetails(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response))
-                return null;
+                return response;
             else {
                 this.HandleHTTPError(response.ErrorData);
-                return null;
+                return response;
             }
         }
-        return response.Data;
+        return response;
+    }
+    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+        const response = await this.LoadJsonAsyncWithDetails(url, params, HandleError, headers, method);
+        return (response.Success) ? response.Data : null;
     }
     async LoadAsync(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);

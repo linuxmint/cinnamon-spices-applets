@@ -17,7 +17,7 @@ import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { USWeather } from "./providers/us_weather";
 import { Weatherbit } from "./providers/weatherbit";
 import { MetNorway } from "./providers/met_norway";
-import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse } from "./lib/httpLib";
+import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./providers/visualcrossing";
@@ -290,6 +290,30 @@ export class WeatherApplet extends TextIconApplet {
 	// IO Helpers
 
 	/**
+	 * Loads JSON response from specified URL, returns the whole response not just data
+	 * @param url URL without params
+	 * @param params param object
+	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param method default is GET
+	 */
+	public async LoadJsonAsyncWithDetails<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
+		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params, headers, method);
+
+		// We have errorData inside
+		if (!response.Success) {
+			// check if caller wants
+			if (!!HandleError && !HandleError(response))
+				return response;
+			else {
+				this.HandleHTTPError(response.ErrorData);
+				return response;
+			}
+		}
+
+		return response;
+	}
+
+	/**
 	 * Loads JSON response from specified URLs
 	 * @param url URL without params
 	 * @param params param object
@@ -297,20 +321,8 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param method default is GET
 	 */
 	public async LoadJsonAsync<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
-		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params, headers, method);
-
-		// We have errorData inside
-		if (!response.Success) {
-			// check if caller wants
-			if (!!HandleError && !HandleError(response))
-				return null;
-			else {
-				this.HandleHTTPError(response.ErrorData);
-				return null;
-			}
-		}
-
-		return response.Data;
+		const response = await this.LoadJsonAsyncWithDetails<T, E>(url, params, HandleError, headers, method);
+		return (response.Success) ? response.Data : null;
 	}
 
 	/**
@@ -326,10 +338,10 @@ export class WeatherApplet extends TextIconApplet {
 		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
+			if (!!HandleError && !HandleError(response.ErrorData))
 				return null;
 			else {
-				this.HandleHTTPError(<HttpError>response.ErrorData);
+				this.HandleHTTPError(response.ErrorData);
 				return null;
 			}
 		}

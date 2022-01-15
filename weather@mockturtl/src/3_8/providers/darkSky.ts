@@ -28,6 +28,11 @@ export class DarkSky extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 168;
 	public readonly needsApiKey = true;
 
+	private remainingQuota: number | null = null;
+	public get remainingCalls(): number | null {
+		return this.remainingQuota;
+	};
+
 	private descriptionLineLength = 25;
 	private supportedLanguages = [
 		'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -64,16 +69,12 @@ export class DarkSky extends BaseProvider {
 		const query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		const json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, this.HandleError);
-		if (!json) return null;
-
-		if (!(json as any).code) {                   // No code, Request Success
-			return this.ParseWeather(json);
-		}
-		else {
-			this.HandleResponseErrors(json);
+		const response = await this.app.LoadJsonAsyncWithDetails<DarkSkyPayload>(query, {}, this.HandleError);
+		if (!response.Success)
 			return null;
-		}
+
+		this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+		return this.ParseWeather(response.Data);
 	};
 
 

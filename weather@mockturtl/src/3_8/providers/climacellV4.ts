@@ -7,12 +7,13 @@ import { CelsiusToKelvin, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 export class ClimacellV4 extends BaseProvider {
-	needsApiKey: boolean = true;
-	prettyName: string = _("Tomorrow.io");
-	name: Services = "Tomorrow.io";
-	maxForecastSupport: number = 15;
-	maxHourlyForecastSupport: number = 108;
-	website: string = "https://www.tomorrow.io/";
+	public readonly remainingCalls: number | null = null;
+	public readonly needsApiKey: boolean = true;
+	public readonly prettyName: string = _("Tomorrow.io");
+	public readonly name: Services = "Tomorrow.io";
+	public readonly maxForecastSupport: number = 15;
+	public readonly maxHourlyForecastSupport: number = 108;
+	public readonly website: string = "https://www.tomorrow.io/";
 
 	private url = "https://data.climacell.co/v4/timelines";
 
