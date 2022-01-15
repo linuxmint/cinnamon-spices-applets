@@ -10243,6 +10243,29 @@ class DarkSky extends BaseProvider {
         this.query = "https://api.darksky.net/forecast/";
         this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = "si";
+        this.HandleError = (message) => {
+            if (message.ErrorData.code == 403) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "bad key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                });
+                return false;
+            }
+            else if (message.ErrorData.code == 401) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "no key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                });
+                return false;
+            }
+            return true;
+        };
     }
     async GetWeather(loc) {
         const now = new Date(Date.now());
@@ -10257,7 +10280,7 @@ class DarkSky extends BaseProvider {
         const query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, {}, Lang.bind(this, this.HandleError));
+        const json = await this.app.LoadJsonAsync(query, {}, this.HandleError);
         if (!json)
             return null;
         if (!json.code) {
@@ -10367,29 +10390,6 @@ class DarkSky extends BaseProvider {
             query = query + "&lang=" + locale;
         }
         return query;
-    }
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-            return false;
-        }
-        else if (message.code == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
-            });
-            return false;
-        }
-        return true;
     }
     HandleResponseErrors(json) {
         const code = json.code;
@@ -10567,7 +10567,7 @@ class OpenWeatherMap extends BaseProvider {
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
         this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
         this.HandleError = (error) => {
-            if (error.code == 404) {
+            if (error.ErrorData.code == 404) {
                 this.app.ShowError({
                     detail: "location not found",
                     message: _("Location not found, make sure location is available or it is in the correct format"),
@@ -11710,7 +11710,7 @@ class Weatherbit extends BaseProvider {
     }
     ;
     HandleError(message) {
-        if (message.code == 403) {
+        if (message.ErrorData.code == 403) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -11722,7 +11722,7 @@ class Weatherbit extends BaseProvider {
         return true;
     }
     HandleHourlyError(message) {
-        if (message.code == 403) {
+        if (message.ErrorData.code == 403) {
             this.hourlyAccess = false;
             logger_Logger.Info("Hourly forecast is inaccessible, skipping");
             return false;
@@ -11943,7 +11943,7 @@ class ClimacellV4 extends BaseProvider {
         return this.ParseWeather(loc, response);
     }
     HandleHTTPError(message) {
-        if (message.code == 401) {
+        if (message.ErrorData.code == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -12252,10 +12252,8 @@ class USWeather extends BaseProvider {
         this.MAX_STATION_DIST = 50000;
         this.observationStations = [];
         this.OnObtainingGridData = (message) => {
-            var _a, _b, _c, _d;
-            if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
-                const data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
-                if (data.title == "Data Unavailable For Requested Point") {
+            if (message.ErrorData.code == 404 && (message === null || message === void 0 ? void 0 : message.Data) != null) {
+                if (message.Data.title == "Data Unavailable For Requested Point") {
                     this.app.ShowError({
                         type: "hard",
                         userError: true,
@@ -13064,7 +13062,7 @@ class VisualCrossing extends BaseProvider {
         return result;
     }
     HandleHttpError(error) {
-        if ((error === null || error === void 0 ? void 0 : error.code) == 401) {
+        if ((error === null || error === void 0 ? void 0 : error.ErrorData.code) == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -13424,7 +13422,315 @@ class DanishMI extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/accuWeather.ts
+
+
+
+class AccuWeather extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.needsApiKey = true;
+        this.prettyName = _("AccuWeather");
+        this.name = "AccuWeather";
+        this.maxForecastSupport = 5;
+        this.maxHourlyForecastSupport = 12;
+        this.website = "https://www.accuweather.com/";
+        this.baseUrl = "http://dataservice.accuweather.com/";
+        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
+        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
+        this.dailyForecastUrl = this.baseUrl + "forecasts/v1/daily/5day/";
+        this.hourlyForecastUrl = this.baseUrl + "forecasts/v1/hourly/12hour/";
+        this.locationCache = {};
+        this.HandleErrors = (e) => {
+            switch (e.ErrorData.code) {
+                case 400:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad api response",
+                        message: _("")
+                    });
+                    return true;
+                case 401:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad key",
+                        message: _("")
+                    });
+                    return true;
+                case 403:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "key blocked",
+                        message: _("")
+                    });
+                    return true;
+            }
+            return false;
+        };
+    }
+    async GetWeather(loc) {
+        var _a, _b;
+        const locationID = `${loc.lat},${loc.lon}`;
+        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
+        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        let location;
+        if (this.locationCache[locationID] != null)
+            location = this.locationCache[locationID];
+        else
+            location = await this.app.LoadJsonAsync(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+        if (location == null) {
+            return null;
+        }
+        const [current, forecast, hourly] = await Promise.all([
+            this.app.LoadJsonAsync(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsync(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsync(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+        ]);
+        if (current == null || forecast == null || hourly == null)
+            return null;
+        return this.ParseWeather(current, forecast, hourly, location);
+    }
+    ParseWeather(current, daily, hourly, loc) {
+        return {
+            date: DateTime.fromISO(current.LocalObservationDateTime),
+            coord: {
+                lat: loc.GeoPosition.Latitude,
+                lon: loc.GeoPosition.Longitude
+            },
+            dewPoint: CelsiusToKelvin(current.DewPoint.Metric.Value),
+            humidity: current.RelativeHumidity,
+            pressure: current.Pressure.Metric.Value,
+            location: {
+                city: loc.LocalizedName,
+                country: loc.Country.LocalizedName,
+                timeZone: loc.TimeZone.Name,
+                tzOffset: loc.TimeZone.GmtOffset,
+            },
+            sunrise: DateTime.fromISO(daily.DailyForecasts[0].Sun.Rise),
+            sunset: DateTime.fromISO(daily.DailyForecasts[0].Sun.Set),
+            temperature: CelsiusToKelvin(current.Temperature.Metric.Value),
+            wind: {
+                degree: current.Wind.Direction.Degrees,
+                speed: current.Wind.Speed.Metric.Value,
+            },
+            condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
+            hourlyForecasts: this.ParseHourly(hourly),
+            forecasts: this.ParseDaily(daily)
+        };
+    }
+    ParseHourly(hourly) {
+        var _a, _b, _c, _d;
+        const hours = [];
+        for (const hour of hourly) {
+            let precipitation = undefined;
+            if ((_a = hour.PrecipitationProbability) !== null && _a !== void 0 ? _a : 0 > 0) {
+                switch (hour.PrecipitationType) {
+                    case "Rain":
+                        precipitation = {
+                            type: "rain",
+                            chance: hour.RainProbability,
+                            volume: (_b = hour.Rain.Value) !== null && _b !== void 0 ? _b : undefined
+                        };
+                        break;
+                    case "Snow":
+                        precipitation = {
+                            type: "snow",
+                            chance: hour.SnowProbability,
+                            volume: (_c = hour.Snow.Value) !== null && _c !== void 0 ? _c : undefined
+                        };
+                        break;
+                    case "Ice":
+                        precipitation = {
+                            type: "ice pellets",
+                            chance: hour.IceProbability,
+                            volume: (_d = hour.Ice.Value) !== null && _d !== void 0 ? _d : undefined
+                        };
+                        break;
+                }
+            }
+            hours.push({
+                date: DateTime.fromISO(hour.DateTime),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(hour.WeatherIcon, hour.IsDaylight)), { main: hour.IconPhrase, description: hour.IconPhrase }),
+                temp: CelsiusToKelvin(hour.Temperature.Value),
+                precipitation: precipitation
+            });
+        }
+        return hours;
+    }
+    ParseDaily(daysPayload) {
+        const days = [];
+        for (const day of daysPayload.DailyForecasts) {
+            days.push({
+                date: DateTime.fromISO(day.Date),
+                temp_max: CelsiusToKelvin(day.Temperature.Maximum.Value),
+                temp_min: CelsiusToKelvin(day.Temperature.Minimum.Value),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(day.Day.Icon, true)), { main: day.Day.IconPhrase, description: day.Day.ShortPhrase })
+            });
+        }
+        return days;
+    }
+    ResolveIcons(icon, day) {
+        switch (icon) {
+            case 1:
+                return {
+                    customIcon: "alien-symbolic",
+                    icons: []
+                };
+            case 1:
+                return {
+                    customIcon: day ? "day-sunny-symbolic" : "night-clear-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 2:
+            case 3:
+            case 4:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: [day ? "weather-few-clouds" : "weather-few-clouds-night"]
+                };
+            case 5:
+                return {
+                    customIcon: day ? "day-fog-symbolic" : "night-fog-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 6:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: day ? ["weather-clouds", "weather-few-clouds"] : ["weather-clouds-night", "weather-few-clouds-night"]
+                };
+            case 7:
+            case 8:
+                return {
+                    customIcon: "cloud-symbolic",
+                    icons: ["weather-overcast"]
+                };
+            case 11:
+                return {
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 12:
+                return {
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-showers", "weather-rain", "weather-freezing-rain"]
+                };
+            case 13:
+            case 14:
+                return {
+                    customIcon: day ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                    icons: day ? ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers"]
+                };
+            case 15:
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 16:
+            case 17:
+                return {
+                    customIcon: day ? "day-thunderstorm-symbolic" : "night-alt-thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 18:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
+                };
+            case 19:
+            case 22:
+                return {
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow"]
+                };
+            case 20:
+            case 21:
+            case 23:
+                return {
+                    customIcon: day ? "day-snow-symbolic" : "night-alt-snow-symbolic",
+                    icons: day ? ["weather-snow-day", "weather-snow-scattered-day", "weather-snow"] : ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            case 24:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 25:
+                return {
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 26:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 29:
+                return {
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 30:
+                return {
+                    customIcon: "hot-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 31:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 32:
+                return {
+                    customIcon: "windy-symbolic",
+                    icons: ["weather-windy", "weather-breeze"]
+                };
+            case 33:
+                return {
+                    customIcon: "night-clear-symbolic",
+                    icons: ["weather-clear-night"]
+                };
+            case 34:
+            case 35:
+            case 36:
+            case 38:
+                return {
+                    customIcon: "night-alt-cloudy-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 37:
+                return {
+                    customIcon: "night-fog-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 39:
+            case 40:
+                return {
+                    customIcon: "night-alt-showers-symbolic",
+                    icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers"]
+                };
+            case 41:
+            case 42:
+                return {
+                    customIcon: "night-alt-storm-showers-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 43:
+            case 44:
+                return {
+                    customIcon: "night-alt-snow-symbolic",
+                    icons: ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            default:
+                return {
+                    customIcon: "refresh-symbolic",
+                    icons: []
+                };
+        }
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -13459,7 +13765,8 @@ const ServiceClassMapping = {
     "Met Office UK": (app) => new MetUk(app),
     "US Weather": (app) => new USWeather(app),
     "Visual Crossing": (app) => new VisualCrossing(app),
-    "DanishMI": (app) => new DanishMI(app)
+    "DanishMI": (app) => new DanishMI(app),
+    "AccuWeather": (app) => new AccuWeather(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",
@@ -15102,8 +15409,6 @@ class HttpLib {
     }
     async LoadJsonAsync(url, params, headers, method = "GET") {
         const response = await this.LoadAsync(url, params, headers, method);
-        if (!response.Success)
-            return response;
         try {
             const payload = JSON.parse(response.Data);
             response.Data = payload;
@@ -15111,19 +15416,21 @@ class HttpLib {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-            response.Success = false;
-            response.ErrorData = {
-                code: -1,
-                message: "bad api response - non json",
-                reason_phrase: "",
-            };
+            if (response.Success) {
+                response.Success = false;
+                response.ErrorData = {
+                    code: -1,
+                    message: "bad api response - non json",
+                    reason_phrase: "",
+                };
+            }
         }
         finally {
             return response;
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -15166,16 +15473,22 @@ class HttpLib {
                 response: message
             };
         }
-        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
+        const responseHeaders = {};
+        (_a = message === null || message === void 0 ? void 0 : message.response_headers) === null || _a === void 0 ? void 0 : _a.foreach((name, val) => {
+            responseHeaders[name] = val;
+        });
+        if (((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) > 200 && ((_c = message === null || message === void 0 ? void 0 : message.status_code) !== null && _c !== void 0 ? _c : -1) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Verbose("API full response: " + ((_d = (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.toString()));
+        logger_Logger.Verbose("API full response: " + ((_e = (_d = message === null || message === void 0 ? void 0 : message.response_body) === null || _d === void 0 ? void 0 : _d.data) === null || _e === void 0 ? void 0 : _e.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) === null || _f === void 0 ? void 0 : _f.data));
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.response_body) === null || _g === void 0 ? void 0 : _g.data));
         return {
             Success: (error == null),
-            Data: (_g = message === null || message === void 0 ? void 0 : message.response_body) === null || _g === void 0 ? void 0 : _g.data,
-            ErrorData: error
+            Data: (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data,
+            ResponseHeaders: responseHeaders,
+            ErrorData: error,
+            Response: message
         };
     }
     async Send(url, params, headers, method = "GET") {
@@ -15457,7 +15770,8 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(label);
     }
     GetPanelHeight() {
-        return this.panel.height;
+        var _a, _b;
+        return (_b = (_a = this.panel) === null || _a === void 0 ? void 0 : _a.height) !== null && _b !== void 0 ? _b : 0;
     }
     GetMaxForecastDays() {
         if (!this.provider)
@@ -15472,7 +15786,7 @@ class WeatherApplet extends TextIconApplet {
     async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
-            if (!!HandleError && !HandleError(response.ErrorData))
+            if (!!HandleError && !HandleError(response))
                 return null;
             else {
                 this.HandleHTTPError(response.ErrorData);
@@ -15539,8 +15853,10 @@ The contents of the file saved from the applet help page goes here
     }
     on_applet_clicked(event) {
         this.ui.Toggle();
+        return false;
     }
     on_applet_middle_clicked(event) {
+        return false;
     }
     on_panel_height_changed() {
     }

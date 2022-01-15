@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
@@ -64,7 +64,7 @@ export class DarkSky extends BaseProvider {
 		const query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		const json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
+		const json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, this.HandleError);
 		if (!json) return null;
 
 		if (!(json as any).code) {                   // No code, Request Success
@@ -194,8 +194,8 @@ export class DarkSky extends BaseProvider {
 	 * @param message Soup Message object
 	 * @returns null if custom error checking does not find anything
 	 */
-	private HandleError(message: HttpError): boolean {
-		if (message.code == 403) { // DarkSky returns auth error on the http level when key is wrong
+	private HandleError = (message: ErrorResponse): boolean => {
+		if (message.ErrorData.code == 403) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -205,7 +205,7 @@ export class DarkSky extends BaseProvider {
 			});
 			return false;
 		}
-		else if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+		else if (message.ErrorData.code == 401) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

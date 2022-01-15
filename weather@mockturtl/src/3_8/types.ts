@@ -105,7 +105,7 @@ export interface HourlyForecastData {
 	/** Kelvin */
 	temp: number | null;
 	condition: Condition;
-	precipitation?: Precipitation;
+	precipitation?: Precipitation | undefined;
 }
 
 export interface Precipitation {

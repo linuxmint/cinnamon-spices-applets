@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
@@ -274,8 +274,8 @@ export class OpenWeatherMap extends BaseProvider {
 		return (!!json?.cod);
 	}
 
-	public HandleError = (error: HttpError): boolean => {
-		if (error.code == 404) {
+	public HandleError = (error: ErrorResponse): boolean => {
+		if (error.ErrorData.code == 404) {
 			this.app.ShowError({
 				detail: "location not found",
 				message: _("Location not found, make sure location is available or it is in the correct format"),

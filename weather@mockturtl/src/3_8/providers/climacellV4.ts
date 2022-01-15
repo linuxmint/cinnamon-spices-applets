@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, _ } from "../utils";
@@ -43,8 +43,8 @@ export class ClimacellV4 extends BaseProvider {
 		return this.ParseWeather(loc, response);
 	}
 
-	private HandleHTTPError(message: HttpError): boolean {
-		if (message.code == 401) {
+	private HandleHTTPError(message: ErrorResponse): boolean {
+		if (message.ErrorData.code == 401) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

@@ -17,7 +17,7 @@ import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { USWeather } from "./providers/us_weather";
 import { Weatherbit } from "./providers/weatherbit";
 import { MetNorway } from "./providers/met_norway";
-import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders } from "./lib/httpLib";
+import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./providers/visualcrossing";
@@ -296,16 +296,16 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
-		const response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, headers, method);
+	public async LoadJsonAsync<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
+		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
+			if (!!HandleError && !HandleError(response))
 				return null;
 			else {
-				this.HandleHTTPError(<HttpError>response.ErrorData);
+				this.HandleHTTPError(response.ErrorData);
 				return null;
 			}
 		}

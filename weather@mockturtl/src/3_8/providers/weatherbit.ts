@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
@@ -278,8 +278,8 @@ export class Weatherbit extends BaseProvider {
 	* @param message Soup Message object
 	* @returns null if custom error checking does not find anything
 	*/
-	private HandleError(message: HttpError): boolean {
-		if (message.code == 403) { // bad key
+	private HandleError(message: ErrorResponse): boolean {
+		if (message.ErrorData.code == 403) { // bad key
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -291,9 +291,9 @@ export class Weatherbit extends BaseProvider {
 		return true;
 	}
 
-	private HandleHourlyError(message: HttpError): boolean {
+	private HandleHourlyError(message: ErrorResponse): boolean {
 		/// Skip Hourly forecast if it is forbidden (403)            
-		if (message.code == 403) { // bad key
+		if (message.ErrorData.code == 403) { // bad key
 			this.hourlyAccess = false;
 			Logger.Info("Hourly forecast is inaccessible, skipping")
 			/*this.app.ShowError({

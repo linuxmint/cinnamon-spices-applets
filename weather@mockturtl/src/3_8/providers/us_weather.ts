@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
@@ -136,10 +136,9 @@ export class USWeather extends BaseProvider {
 	 * 
 	 * @param message Soup Message object
 	 */
-	private OnObtainingGridData = (message: HttpError): boolean => {
-		if (message.code == 404 && message?.response?.response_body?.data != null) {
-			const data = JSON.parse(message?.response?.response_body?.data);
-			if (data.title == "Data Unavailable For Requested Point") {
+	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
+		if (message.ErrorData.code == 404 && message?.Data != null) {
+			if (message.Data.title == "Data Unavailable For Requested Point") {
 				this.app.ShowError({
 					type: "hard",
 					userError: true,
