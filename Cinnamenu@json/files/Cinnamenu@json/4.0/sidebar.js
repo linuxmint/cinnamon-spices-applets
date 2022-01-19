@@ -67,30 +67,24 @@ class SidebarButton {
     }
 
     _handleButtonRelease(actor, e) {
+        if (this.appThis.contextMenu.isOpen) {
+            this.appThis.contextMenu.close();
+            this.appThis.clearEnteredActors();
+            this.handleEnter();
+            return Clutter.EVENT_STOP;
+        }
+
         const button = e.get_button();
         if (button === 1) {//left click
-            if (this.appThis.contextMenu.isOpen) {
-                //if (this.menuIsOpen && this.menu._activeMenuItem) {
-                //    this.menu._activeMenuItem.activate();
-                this.appThis.contextMenu.close();
-                this.appThis.clearEnteredActors();
-                this.handleEnter();
-            } else {
-                this.activate();
-            }
+            this.activate();
             return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.contextMenu.close();
-                this.appThis.clearEnteredActors();
-                this.handleEnter();
-            } else {
-                if (this.app != null) {
-                    this.openContextMenu(e);
-                }
+            if (this.app != null) {
+                this.openContextMenu(e);
             }
             return Clutter.EVENT_STOP;
         }
+
         return Clutter.EVENT_PROPAGATE;
     }
 
@@ -113,7 +107,7 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this);
+        this.appThis.contextMenu.open(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {
@@ -121,7 +115,7 @@ class SidebarButton {
             return true;
         }
 
-        if (event) {
+        if (event) {//mouse event
             this.appThis.clearEnteredActors();
         } else {//key nav
             this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
@@ -175,18 +169,15 @@ class Sidebar {
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = '';
         const scroll_style = themePath.includes('Cinnamox') ? 'vfade' : 'vfade menu-favorites-scrollbox';
-        this.sidebarScrollBox = new St.ScrollView({x_fill: true, y_fill: false, x_align: St.Align.MIDDLE,
-                                                        y_align: St.Align.MIDDLE, style_class: scroll_style });
+        this.sidebarScrollBox = new St.ScrollView({ y_align: St.Align.MIDDLE, style_class: scroll_style });
 
-        //const vscroll_bar = this.sidebarScrollBox.get_vscroll_bar();
         this.sidebarScrollBox.add_actor(this.innerBox);
         this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.sidebarScrollBox.set_mouse_scrolling(true);
         const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
-        this.sidebarOuterBox.add(this.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
-                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+        this.sidebarOuterBox.add(this.sidebarScrollBox, { });
 
         this.separator = new St.BoxLayout({x_expand: false, y_expand: false});
     }

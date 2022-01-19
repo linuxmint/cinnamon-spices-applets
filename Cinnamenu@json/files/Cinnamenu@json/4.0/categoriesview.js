@@ -221,7 +221,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.contextMenu.open(this.id, e, this, true);
+        this.appThis.contextMenu.open(this.id, e, this.actor, true);
     }
 
     disable() {
@@ -258,12 +258,8 @@ class CategoriesView {
 
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
-        this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, {
-                                              x_fill: false, y_fill: true,
-                                              x_align: St.Align.START, y_align: St.Align.END,
-                                              y_expand: true, expand: false });
-        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false,
-                                    y_align: St.Align.START, style_class: 'vfade menu-categories-scrollbox' });
+        this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, { });
+        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
 
         //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);

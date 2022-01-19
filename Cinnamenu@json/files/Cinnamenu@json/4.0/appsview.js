@@ -182,12 +182,9 @@ class AppButton {
             bgColor.green = 20;
             bgColor.blue = 20;
         }
-        let addedStyle = '';
-        if (this.entered) {
-            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) + ';';
-        } else {
-            addedStyle += 'border:2px; border-color:' + toRgbaString(bgColor) +
-                        '; background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
+        let addedStyle = 'border:2px; border-color:' + toRgbaString(bgColor) + '; ';
+        if (!this.entered) {
+            addedStyle += 'background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
         }
         this.actor.set_style(addedStyle);
     }
@@ -340,7 +337,7 @@ class AppButton {
     openContextMenu(e) {
         this._setButtonSelected();
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this);
+        this.appThis.contextMenu.open(this.app, e, this.actor);
     }
 
     _resetAllAppsOpacity() {
@@ -376,14 +373,10 @@ class AppsView {
                                                                                             vertical: true});
         this.applicationsBoxWrapper.add_style_class_name('menu-applications-box'); //this is to support old themes
 
-        this.applicationsBoxWrapper.add(this.headerText, {  x_fill: false, y_fill: false,
-                                                            x_align: St.Align.MIDDLE, y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsGridBox, { x_fill: false, y_fill: false,
-                                                            x_align: St.Align.START, y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsListBox, { x_fill: true, y_fill: false,
-                                                            x_align: St.Align.START, y_align: St.Align.START });
-        this.applicationsScrollBox = new St.ScrollView({  x_fill: true, y_fill: false,
-                            y_align: St.Align.START, style_class: 'vfade menu-applications-scrollbox' });
+        this.applicationsBoxWrapper.add(this.headerText, { x_fill: false, x_align: St.Align.MIDDLE });
+        this.applicationsBoxWrapper.add(this.applicationsGridBox, { });
+        this.applicationsBoxWrapper.add(this.applicationsListBox, { });
+        this.applicationsScrollBox = new St.ScrollView({ style_class: 'vfade menu-applications-scrollbox' });
         const vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
         this.appsViewSignals.connect(vscrollApplications, 'scroll-start',
                                                                 () => { this.appThis.menu.passEvents = true; });
