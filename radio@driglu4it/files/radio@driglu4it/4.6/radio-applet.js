@@ -2564,10 +2564,11 @@ const createConfig = () => {
     appletSettings.bind('initial-volume', 'customInitVolume');
     appletSettings.bind('last-volume', 'lastVolume');
     appletSettings.bind('tree', 'userStations', (newVal) => {
-        if (lodash_es_isEqual(previousUserStations, newVal))
+        const trimmedStations = newVal.map(val => { return Object.assign(Object.assign({}, val), { url: val.url.trim() }); });
+        if (lodash_es_isEqual(previousUserStations, trimmedStations))
             return;
-        stationsHandler.forEach(changeHandler => changeHandler(newVal));
-        previousUserStations = newVal;
+        stationsHandler.forEach(changeHandler => changeHandler(trimmedStations));
+        previousUserStations = trimmedStations;
     });
     appletSettings.bind('last-url', 'lastUrl');
     appletSettings.bind('music-download-dir-select', 'musicDownloadDir');
