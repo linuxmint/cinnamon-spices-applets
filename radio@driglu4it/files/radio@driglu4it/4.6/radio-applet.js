@@ -4549,7 +4549,7 @@ function createPopupMenu(args) {
     }
     function calculateFreeSpace() {
         var _a, _b, _c, _d;
-        const monitor = __meta.monitor;
+        const monitor = layoutManager.findMonitorForActor(launcher);
         const visiblePanels = panelManager.getPanelsInMonitor(monitor.index);
         const panelSizes = new Map(visiblePanels.map(panel => {
             let width = 0, height = 0;

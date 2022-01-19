@@ -10,7 +10,6 @@ declare global {
         orientation: imports.gi.St.Side // TODO: needed??
         panel: imports.ui.panel.Panel
         locationLabel: imports.ui.appletManager.LocationLabel
-        monitor: imports.ui.layout.Monitor
     }
 }
 

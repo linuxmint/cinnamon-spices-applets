@@ -81,7 +81,7 @@ export function createPopupMenu(args: Arguments) {
 
 
     function calculateFreeSpace(): FreeSpaceBox {
-        const monitor = __meta.monitor
+        const monitor = layoutManager.findMonitorForActor(launcher)
         const visiblePanels = panelManager.getPanelsInMonitor(monitor.index)
 
         const panelSizes = new Map(visiblePanels.map(panel => {
@@ -115,7 +115,7 @@ export function createPopupMenu(args: Arguments) {
         const borderWidthBottomBIN = binThemeNode.get_border_width(Side.BOTTOM)
         const paddingTopBin = binThemeNode.get_padding(Side.TOP)
         const paddingBottomBin = binThemeNode.get_padding(Side.BOTTOM)
-        
+
         const maxHeight = freeSpaceHeight - paddingBottomBox - paddingTopBox - borderWidthTopBin - borderWidthBottomBIN - paddingTopBin - paddingBottomBin
 
         return maxHeight
