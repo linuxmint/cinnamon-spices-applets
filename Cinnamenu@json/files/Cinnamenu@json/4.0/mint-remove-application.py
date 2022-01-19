@@ -114,7 +114,7 @@ class MintRemoveWindow:
 
     def get_autoremovable_dependencies(self, package):
         #Find autoremovable packages before removal of package
-        output = subprocess.getoutput("apt-get -s autoremove | grep Remv")
+        output = subprocess.getoutput("apt-get -s -q autoremove | grep Remv")
         unreq_before = []
         if len(output) > 1:
             output = output.split("\n")
@@ -123,7 +123,7 @@ class MintRemoveWindow:
                 unreq_before.append(line.split()[0])
 
         #Find autoremovable packages after removal of package
-        output = subprocess.getoutput("apt-get -s remove " + package)
+        output = subprocess.getoutput("LC_ALL=C apt-get -s remove " + package)
         unreq_after = []
         begin = output.find("installed and are no longer required:")
         if begin > 0:
