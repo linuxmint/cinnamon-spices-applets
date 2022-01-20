@@ -209,8 +209,7 @@ export class AccuWeather extends BaseProvider {
             case 400:
                 this.app.ShowError({
                     type: "hard",
-                    detail: "bad api response",
-                    message: _("")
+                    detail: "bad api response"
                 })
                 return true;
             /** Unauthorized. API authorization failed */
@@ -218,7 +217,6 @@ export class AccuWeather extends BaseProvider {
                 this.app.ShowError({
                     type: "hard",
                     detail: "bad key",
-                    message: _("")
                 })
                 return true;
             /** Unauthorized. You do not have permission to access this endpoint */
@@ -226,7 +224,6 @@ export class AccuWeather extends BaseProvider {
                 this.app.ShowError({
                     type: "hard",
                     detail: "key blocked",
-                    message: _("")
                 })
                 return true;
         }
