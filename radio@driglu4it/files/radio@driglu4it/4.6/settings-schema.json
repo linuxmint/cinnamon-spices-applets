@@ -95,13 +95,22 @@
 		],
 		"default": [
 			{
-				"name": "Chillout",
-				"url": "http://ic7.101.ru:8000/c15_3",
+				"name": "Smooth Chill",
+				"url": "https://media-ssl.musicradio.com/ChillMP3",
 				"inc": true
 			},
 			{
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
+				"inc": true
+			},{
+				"name": "Rádio KIKS Rock", 
+				"ur": "https://stream.radiokiks.sk/kiks_rock.mp3", 
+				"inc": true
+			},
+			{
+				"name": "Radio BOB", 
+				"url": "http://live6.infonetmedia.si/Europa05", 
 				"inc": true
 			},
 			{
