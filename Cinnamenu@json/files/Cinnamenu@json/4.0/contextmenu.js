@@ -64,7 +64,7 @@ class ContextMenuItem extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
     }
 }
-
+const Cinnamon = imports.gi.Cinnamon;
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
@@ -83,9 +83,9 @@ class ContextMenu {
         this.isOpen = false;
     }
 
-    open(app, e, button, isACategoryButton = false) {
+    open(app, e, buttonActor, isACategoryButton = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
-        // e is undefined and button position is used instead.
+        // e is undefined and buttonActor position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
@@ -142,7 +142,7 @@ class ContextMenu {
         if (e) {
             [mx, my] = e.get_coords(); //get mouse position
         } else {//activated by keypress, no e supplied
-            [mx, my] = button.actor.get_transformed_position();
+            [mx, my] = buttonActor.get_transformed_position();
             mx += 20;
             my += 20;
         }
@@ -161,7 +161,7 @@ class ContextMenu {
         this.menu.actor.anchor_y = -cy;
 
         //This context menu doesn't have an St.Side and so produces errors in .xsession-errors.
-        //E nable animation here for the sole reason that it spams .xsession-errors less. Can't add an
+        //Enable animation here for the sole reason that it spams .xsession-errors less. Can't add an
         //St.Side because in some themes it looks like it should be attached to a panel but isn't.
         //Ideally, a proper floating popup menu should be coded.
         this.menu.open(true);
