@@ -69,7 +69,9 @@ const createConfig = () => {
 
     appletSettings.bind<Channel[]>('tree', 'userStations',
         (newVal) => {
-            const trimmedStations = newVal.map(val => { return { ...val, url: val.url.trim() } })
+            // temporariy solution to fix typo in settings-schema
+            // @ts-ignore
+            const trimmedStations = newVal.map(val => { return { ...val, url: val.url?.trim() || val.ur.trim() } })
             if (isEqual(previousUserStations, trimmedStations)) return
             stationsHandler.forEach(changeHandler => changeHandler(trimmedStations))
             previousUserStations = trimmedStations
