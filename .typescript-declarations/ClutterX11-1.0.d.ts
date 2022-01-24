@@ -94,35 +94,27 @@ declare namespace imports.gi.ClutterX11 {
 		 */
 		connect(signal: "update-area", callback: (owner: this, x: number, y: number, width: number, height: number) => void): number;
 
-		connect(signal: "notify::automatic_updates", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::automatic-updates", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::destroyed", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::pixmap", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pixmap_depth", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pixmap_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pixmap_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap-depth", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixmap-width", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::window", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_mapped", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_override_redirect", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_redirect_automatic", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-mapped", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-override-redirect", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-redirect-automatic", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-y", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type TexturePixmapInitOptionsMixin = Clutter.TextureInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
 	Pick<ITexturePixmap,
 		"automatic_updates" |
-		"destroyed" |
 		"pixmap" |
-		"pixmap_depth" |
-		"pixmap_height" |
-		"pixmap_width" |
 		"window" |
-		"window_mapped" |
-		"window_override_redirect" |
-		"window_redirect_automatic" |
-		"window_x" |
-		"window_y">;
+		"window_redirect_automatic">;
 
 	export interface TexturePixmapInitOptions extends TexturePixmapInitOptionsMixin {}
 

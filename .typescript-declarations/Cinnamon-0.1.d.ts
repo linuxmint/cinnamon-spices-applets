@@ -120,10 +120,7 @@ declare namespace imports.gi.Cinnamon {
 
 	}
 
-	type AppInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IApp,
-		"state">;
-
+	type AppInitOptionsMixin = GObject.ObjectInitOptions
 	export interface AppInitOptions extends AppInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -552,51 +549,33 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "xdnd-leave", callback: (owner: this) => void): number;
 		connect(signal: "xdnd-position-changed", callback: (owner: this, object: number, p0: number) => void): number;
 
-		connect(signal: "notify::background_actor", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::bottom_window_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background-actor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bottom-window-group", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::datadir", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::display", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::focus_manager", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::gdk_screen", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus-manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::gdk-screen", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::imagedir", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::overlay_group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::overlay-group", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::screen", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::screen_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::screen_width", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::session_running", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::screen-width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::session-running", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::settings", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::stage", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::stage_input_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::top_window_group", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ui_scale", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stage-input-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::top-window-group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ui-scale", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::userdatadir", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_group", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-group", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-manager", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type GlobalInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IGlobal,
-		"background_actor" |
-		"bottom_window_group" |
-		"datadir" |
-		"display" |
-		"focus_manager" |
-		"gdk_screen" |
-		"imagedir" |
-		"overlay_group" |
-		"screen" |
-		"screen_height" |
-		"screen_width" |
 		"session_running" |
-		"settings" |
-		"stage" |
-		"stage_input_mode" |
-		"top_window_group" |
-		"ui_scale" |
-		"userdatadir" |
-		"window_group" |
-		"window_manager">;
+		"stage_input_mode">;
 
 	export interface GlobalInitOptions extends GlobalInitOptionsMixin {}
 
@@ -1021,16 +1000,11 @@ declare namespace imports.gi.Cinnamon {
 		click(event: Clutter.Event): void;
 		connect(signal: "notify::pid", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::wm_class", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::wm-class", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
-	type TrayIconInitOptionsMixin = GtkEmbedInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions & 
-	Pick<ITrayIcon,
-		"pid" |
-		"title" |
-		"wm_class">;
-
+	type TrayIconInitOptionsMixin = GtkEmbedInitOptions & Atk.ImplementorIfaceInitOptions & Clutter.AnimatableInitOptions & Clutter.ContainerInitOptions & Clutter.ScriptableInitOptions
 	export interface TrayIconInitOptions extends TrayIconInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1056,7 +1030,7 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "tray-icon-added", callback: (owner: this, object: Clutter.Actor) => void): number;
 		connect(signal: "tray-icon-removed", callback: (owner: this, object: Clutter.Actor) => void): number;
 
-		connect(signal: "notify::bg_color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::bg-color", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1184,14 +1158,11 @@ declare namespace imports.gi.Cinnamon {
 		connect(signal: "startup-sequence-changed", callback: (owner: this, object: StartupSequence) => void): number;
 		connect(signal: "window-app-changed", callback: (owner: this, object: Meta.Window) => void): number;
 
-		connect(signal: "notify::focus_app", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::focus-app", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
-	type WindowTrackerInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IWindowTracker,
-		"focus_app">;
-
+	type WindowTrackerInitOptionsMixin = GObject.ObjectInitOptions
 	export interface WindowTrackerInitOptions extends WindowTrackerInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,

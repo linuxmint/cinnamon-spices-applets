@@ -69,9 +69,10 @@ const createConfig = () => {
 
     appletSettings.bind<Channel[]>('tree', 'userStations',
         (newVal) => {
-            if (isEqual(previousUserStations, newVal)) return
-            stationsHandler.forEach(changeHandler => changeHandler(newVal))
-            previousUserStations = newVal
+            const trimmedStations = newVal.map(val => { return { ...val, url: val.url.trim() } })
+            if (isEqual(previousUserStations, trimmedStations)) return
+            stationsHandler.forEach(changeHandler => changeHandler(trimmedStations))
+            previousUserStations = trimmedStations
         })
 
     appletSettings.bind('last-url', 'lastUrl')

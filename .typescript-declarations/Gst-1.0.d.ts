@@ -78,18 +78,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type AllocatorInitOptionsMixin = ObjectInitOptions & 
-	Pick<IAllocator,
-		"object" |
-		"mem_type" |
-		"mem_map" |
-		"mem_unmap" |
-		"mem_copy" |
-		"mem_share" |
-		"mem_is_span" |
-		"mem_map_full" |
-		"mem_unmap_full">;
-
+	type AllocatorInitOptionsMixin = ObjectInitOptions
 	export interface AllocatorInitOptions extends AllocatorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -464,8 +453,8 @@ declare namespace imports.gi.Gst {
 		 */
 		connect(signal: "element-removed", callback: (owner: this, element: Element) => void): number;
 
-		connect(signal: "notify::async_handling", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::message_forward", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::async-handling", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::message-forward", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::element", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::numchildren", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::children", callback: (owner: this, ...args: any) => void): number;
@@ -483,18 +472,7 @@ declare namespace imports.gi.Gst {
 	type BinInitOptionsMixin = ElementInitOptions & ChildProxyInitOptions & 
 	Pick<IBin,
 		"async_handling" |
-		"message_forward" |
-		"element" |
-		"numchildren" |
-		"children" |
-		"children_cookie" |
-		"child_bus" |
-		"messages" |
-		"polling" |
-		"state_dirty" |
-		"clock_dirty" |
-		"provided_clock" |
-		"clock_provider">;
+		"message_forward">;
 
 	export interface BinInitOptions extends BinInitOptionsMixin {}
 
@@ -740,11 +718,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type BufferPoolInitOptionsMixin = ObjectInitOptions & 
-	Pick<IBufferPool,
-		"object" |
-		"flushing">;
-
+	type BufferPoolInitOptionsMixin = ObjectInitOptions
 	export interface BufferPoolInitOptions extends BufferPoolInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1264,10 +1238,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type BusInitOptionsMixin = ObjectInitOptions & 
-	Pick<IBus,
-		"object">;
-
+	type BusInitOptionsMixin = ObjectInitOptions
 	export interface BusInitOptions extends BusInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -1651,8 +1622,8 @@ declare namespace imports.gi.Gst {
 		connect(signal: "synced", callback: (owner: this, synced: boolean) => void): number;
 
 		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_size", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-threshold", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::object", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -1661,8 +1632,7 @@ declare namespace imports.gi.Gst {
 	Pick<IClock,
 		"timeout" |
 		"window_size" |
-		"window_threshold" |
-		"object">;
+		"window_threshold">;
 
 	export interface ClockInitOptions extends ClockInitOptionsMixin {}
 
@@ -1947,9 +1917,7 @@ declare namespace imports.gi.Gst {
 	type ControlBindingInitOptionsMixin = ObjectInitOptions & 
 	Pick<IControlBinding,
 		"name" |
-		"object" |
-		"name" |
-		"pspec">;
+		"object">;
 
 	export interface ControlBindingInitOptions extends ControlBindingInitOptionsMixin {}
 
@@ -2005,11 +1973,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type ControlSourceInitOptionsMixin = ObjectInitOptions & 
-	Pick<IControlSource,
-		"get_value" |
-		"get_value_array">;
-
+	type ControlSourceInitOptionsMixin = ObjectInitOptions
 	export interface ControlSourceInitOptions extends ControlSourceInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -2108,8 +2072,8 @@ declare namespace imports.gi.Gst {
 		connect(signal: "removed", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::device_class", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::display_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::device-class", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::display-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::properties", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -2216,7 +2180,7 @@ declare namespace imports.gi.Gst {
 		 * Stops monitoring the devices.
 		 */
 		stop(): void;
-		connect(signal: "notify::show_all", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show-all", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2426,10 +2390,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type DeviceProviderInitOptionsMixin = ObjectInitOptions & 
-	Pick<IDeviceProvider,
-		"devices">;
-
+	type DeviceProviderInitOptionsMixin = ObjectInitOptions
 	export interface DeviceProviderInitOptions extends DeviceProviderInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -3585,30 +3546,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type ElementInitOptionsMixin = ObjectInitOptions & 
-	Pick<IElement,
-		"object" |
-		"state_lock" |
-		"state_cond" |
-		"state_cookie" |
-		"target_state" |
-		"current_state" |
-		"next_state" |
-		"pending_state" |
-		"last_return" |
-		"bus" |
-		"clock" |
-		"base_time" |
-		"start_time" |
-		"numpads" |
-		"pads" |
-		"numsrcpads" |
-		"srcpads" |
-		"numsinkpads" |
-		"sinkpads" |
-		"pads_cookie" |
-		"contexts">;
-
+	type ElementInitOptionsMixin = ObjectInitOptions
 	export interface ElementInitOptions extends ElementInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4015,10 +3953,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type GhostPadInitOptionsMixin = ProxyPadInitOptions & 
-	Pick<IGhostPad,
-		"pad">;
-
+	type GhostPadInitOptionsMixin = ProxyPadInitOptions
 	export interface GhostPadInitOptions extends GhostPadInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -4456,11 +4391,7 @@ declare namespace imports.gi.Gst {
 
 	type ObjectInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
 	Pick<IObject,
-		"name" |
-		"object" |
-		"lock" |
-		"name" |
-		"flags">;
+		"name">;
 
 	export interface ObjectInitOptions extends ObjectInitOptionsMixin {}
 
@@ -5575,14 +5506,9 @@ declare namespace imports.gi.Gst {
 
 	type PadInitOptionsMixin = ObjectInitOptions & 
 	Pick<IPad,
-		"caps" |
 		"direction" |
 		"offset" |
-		"template" |
-		"object" |
-		"element_private" |
-		"padtemplate" |
-		"direction">;
+		"template">;
 
 	export interface PadInitOptions extends PadInitOptionsMixin {}
 
@@ -5764,7 +5690,7 @@ declare namespace imports.gi.Gst {
 		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::gtype", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::name_template", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::name-template", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::presence", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::object", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name_template", callback: (owner: this, ...args: any) => void): number;
@@ -5780,12 +5706,7 @@ declare namespace imports.gi.Gst {
 		"direction" |
 		"gtype" |
 		"name_template" |
-		"presence" |
-		"object" |
-		"name_template" |
-		"direction" |
-		"presence" |
-		"caps">;
+		"presence">;
 
 	export interface PadTemplateInitOptions extends PadTemplateInitOptionsMixin {}
 
@@ -6103,7 +6024,7 @@ declare namespace imports.gi.Gst {
 		 * @param clock the clock to use
 		 */
 		use_clock(clock: Clock | null): void;
-		connect(signal: "notify::auto_flush_bus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auto-flush-bus", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::delay", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::latency", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::bin", callback: (owner: this, ...args: any) => void): number;
@@ -6117,11 +6038,7 @@ declare namespace imports.gi.Gst {
 	Pick<IPipeline,
 		"auto_flush_bus" |
 		"delay" |
-		"latency" |
-		"bin" |
-		"fixed_clock" |
-		"stream_time" |
-		"delay">;
+		"latency">;
 
 	export interface PipelineInitOptions extends PipelineInitOptionsMixin {}
 
@@ -6567,10 +6484,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type ProxyPadInitOptionsMixin = PadInitOptions & 
-	Pick<IProxyPad,
-		"pad">;
-
+	type ProxyPadInitOptionsMixin = PadInitOptions
 	export interface ProxyPadInitOptions extends ProxyPadInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6806,10 +6720,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type RegistryInitOptionsMixin = ObjectInitOptions & 
-	Pick<IRegistry,
-		"object">;
-
+	type RegistryInitOptionsMixin = ObjectInitOptions
 	export interface RegistryInitOptions extends RegistryInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -6981,9 +6892,9 @@ declare namespace imports.gi.Gst {
 		 */
 		set_tags(tags: TagList | null): void;
 		connect(signal: "notify::caps", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::stream_flags", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::stream_id", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::stream_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stream-flags", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stream-id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stream-type", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::tags", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::stream_id", callback: (owner: this, ...args: any) => void): number;
 
@@ -6995,8 +6906,7 @@ declare namespace imports.gi.Gst {
 		"stream_flags" |
 		"stream_id" |
 		"stream_type" |
-		"tags" |
-		"stream_id">;
+		"tags">;
 
 	export interface StreamInitOptions extends StreamInitOptionsMixin {}
 
@@ -7067,7 +6977,7 @@ declare namespace imports.gi.Gst {
 		get_upstream_id(): string | null;
 		connect(signal: "stream-notify", callback: (owner: this, object: Stream, p0: GObject.ParamSpec) => void): number;
 
-		connect(signal: "notify::upstream_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::upstream-id", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7119,15 +7029,14 @@ declare namespace imports.gi.Gst {
 		clock_type: ClockType;
 		readonly clock: Clock;
 
-		connect(signal: "notify::clock_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::clock-type", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::clock", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type SystemClockInitOptionsMixin = ClockInitOptions & 
 	Pick<ISystemClock,
-		"clock_type" |
-		"clock">;
+		"clock_type">;
 
 	export interface SystemClockInitOptions extends SystemClockInitOptionsMixin {}
 
@@ -7330,17 +7239,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type TaskInitOptionsMixin = ObjectInitOptions & 
-	Pick<ITask,
-		"object" |
-		"state" |
-		"cond" |
-		"lock" |
-		"func" |
-		"user_data" |
-		"notify" |
-		"running">;
-
+	type TaskInitOptionsMixin = ObjectInitOptions
 	export interface TaskInitOptions extends TaskInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -7459,10 +7358,7 @@ declare namespace imports.gi.Gst {
 
 	}
 
-	type TaskPoolInitOptionsMixin = ObjectInitOptions & 
-	Pick<ITaskPool,
-		"object">;
-
+	type TaskPoolInitOptionsMixin = ObjectInitOptions
 	export interface TaskPoolInitOptions extends TaskPoolInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,

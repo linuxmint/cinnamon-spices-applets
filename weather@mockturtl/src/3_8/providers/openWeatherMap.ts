@@ -12,11 +12,12 @@ import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
 import { _, IsLangSupported } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};
 
-export class OpenWeatherMap implements WeatherProvider {
+export class OpenWeatherMap extends BaseProvider {
 	//--------------------------------------------------------
 	//  Properties
 	//--------------------------------------------------------
@@ -35,9 +36,8 @@ export class OpenWeatherMap implements WeatherProvider {
 	private base_url = "https://api.openweathermap.org/data/2.5/onecall" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
 	private id_irl  = "https://api.openweathermap.org/data/2.5/weather";
 
-	private app: WeatherApplet
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------
@@ -49,15 +49,12 @@ export class OpenWeatherMap implements WeatherProvider {
 
 		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
 
-		let promises: Promise<any>[] = [];
-		promises.push(this.app.LoadJsonAsync<any>(this.base_url, params, this.HandleError));
-
-		// If we don't have the ID we push a call to get it
-		if (cachedID == null)
-			promises.push(this.app.LoadJsonAsync<any>(this.id_irl, params));
-
 		// Await both of them, if already have it idPayload will be null
-		const [ json, idPayload ] = await Promise.all(promises);
+		// If we don't have the ID we push a call to get it
+		const [ json, idPayload ] = await Promise.all([
+			this.app.LoadJsonAsync<OWMPayload>(this.base_url, params, this.HandleError),
+			(cachedID == null) ? this.app.LoadJsonAsync<any>(this.id_irl, params) : Promise.resolve()
+		]);
 
 		// We store the newly gotten ID if we got it
 		if (cachedID == null && idPayload?.id != null)
@@ -73,9 +70,9 @@ export class OpenWeatherMap implements WeatherProvider {
 		return this.ParseWeather(json, loc);
 	};
 
-	private ParseWeather(json: any, loc: LocationData): WeatherData | null {
+	private ParseWeather(json: OWMPayload, loc: LocationData): WeatherData | null {
 		try {
-			let weather: WeatherData = {
+			const weather: WeatherData = {
 				coord: {
 					lat: json.lat,
 					lon: json.lon
@@ -112,13 +109,12 @@ export class OpenWeatherMap implements WeatherProvider {
 			};
 
 			if (json.minutely != null) {
-				let immediate: ImmediatePrecipitation = {
+				const immediate: ImmediatePrecipitation = {
 					start: -1,
 					end: -1
 				}
 
-				for (let index = 0; index < json.minutely.length; index++) {
-					const element = json.minutely[index];
+				for (const [index, element] of json.minutely.entries()) {
 					if (element.precipitation > 0 && immediate.start == -1) {
 						immediate.start = index;
 						continue
@@ -131,10 +127,9 @@ export class OpenWeatherMap implements WeatherProvider {
 				weather.immediatePrecipitation = immediate;
 			}
 
-			let forecasts: ForecastData[] = [];
-			for (let i = 0; i < json.daily.length; i++) {
-				let day = json.daily[i];
-				let forecast: ForecastData = {
+			const forecasts: ForecastData[] = [];
+			for (const day of json.daily) {
+				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
 					temp_min: day.temp.min,
 					temp_max: day.temp.max,
@@ -149,10 +144,9 @@ export class OpenWeatherMap implements WeatherProvider {
 			}
 			weather.forecasts = forecasts;
 
-			let hourly: HourlyForecastData[] = [];
-			for (let index = 0; index < json.hourly.length; index++) {
-				const hour = json.hourly[index];
-				let forecast: HourlyForecastData = {
+			const hourly: HourlyForecastData[] = [];
+			for (const hour of json.hourly) {
+				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
 					temp: hour.temp,
 					condition: {
@@ -172,7 +166,7 @@ export class OpenWeatherMap implements WeatherProvider {
 				}
 
 				if (!!hour.rain && forecast.precipitation != null) {
-					forecast.precipitation.volume = hour.rain["1h"];
+					forecast.precipitation.volume = hour?.rain["1h"];
 					forecast.precipitation.type = "rain";
 				}
 
@@ -209,7 +203,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		};
 
 		// Append Language if supported and enabled
-		let locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
+		const locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
 		if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
 			params.lang = locale;
 		}
@@ -224,7 +218,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
 			return systemLocale;
 		}
-		let lang = systemLocale.split("-")[0];
+		const lang = systemLocale.split("-")[0];
 		// OWM uses different language code for Swedish, Czech, Korean, Latvian, Norwegian
 		if (lang == "sv") {
 			return "se";
@@ -242,12 +236,12 @@ export class OpenWeatherMap implements WeatherProvider {
 
 	private HadErrors(json: any): boolean {
 		if (!this.HasReturnedError(json)) return false;
-		let errorMsg = "OpenWeatherMap Response: ";
-		let error = {
+		const errorMsg = "OpenWeatherMap Response: ";
+		const error = {
 			service: "openweathermap",
 			type: "hard",
 		} as AppletError;
-		let errorPayload: OpenWeatherMapError = json;
+		const errorPayload: OpenWeatherMapError = json;
 		switch (errorPayload.cod) {
 			case ("400"):
 				error.detail = "bad location format";
@@ -424,6 +418,176 @@ export class OpenWeatherMap implements WeatherProvider {
 interface OpenWeatherMapError {
 	cod: string;
 	message: string;
+}
+
+interface OWMPayload {
+	/** Not existing in original payload, it's for injecting from other payload manually */
+	id?: number;
+	lat: number;
+	lon: number;
+	timezone: string;
+	timezone_offset: number;
+	current: CurrentPayload;
+	minutely?: MinutelyPayload[];
+	hourly: HourlyPayload[];
+	daily: DailyPayload[];
+	alerts?: AlertPayload[] 
+}
+
+interface CurrentPayload {
+	/** Unix timestamp seconds */
+	dt: number;
+	/** Unix timestamp seconds */
+	sunrise: number;
+	/** Unix timestamp seconds */
+    sunset: number;
+	/** Kelvin */
+    temp: number;
+	/** Kelvin */
+    feels_like: number;
+	/** hPa */
+    pressure: number;
+	/** % */
+    humidity: number;
+	/** Kelvin */
+    dew_point: number;
+	/** UV index */
+    uvi: number;
+	/** % */
+    clouds: number;
+	/** Average in metres */
+    visibility: number;
+	/** m/s */
+    wind_speed: number;
+	/** m/s, where available */
+	wind_gust?: number;
+	/** Meteorological degrees */
+    wind_deg: number;
+    weather: ConditionPayload[];
+    rain?: PrecipitationPayload;
+	snow?: PrecipitationPayload;
+}
+
+interface MinutelyPayload {
+	/** Unix timestamp seconds */
+	dt: number;
+	/** mm */
+	precipitation: number;
+}
+
+interface HourlyPayload {
+	/** Unix timestamp seconds */
+	dt: number;
+	/** Kelvin */
+    temp: number;
+	/** Kelvin */
+    feels_like: number;
+	/** hPa */
+    pressure: number;
+	/** % */
+    humidity: number;
+	/** Kelvin */
+    dew_point: number;
+	/** UV index */
+    uvi: number;
+	/** % */
+    clouds: number;
+	/** Average in metres */
+    visibility: number;
+	/** m/s */
+    wind_speed: number;
+	/** m/s, where available */
+	wind_gust?: number;
+	/** Meteorological degrees */
+    wind_deg: number;
+	/** Probability of precipitation, percent between 0 and 1  */
+	pop: number;
+	weather: ConditionPayload[];
+	rain?: PrecipitationPayload;
+	snow?: PrecipitationPayload;
+}
+
+interface DailyPayload {
+	/** Unix timestamp seconds */
+	dt: number;
+	/** Unix timestamp seconds */
+	sunrise: number;
+	/** Unix timestamp seconds */
+    sunset: number;
+	/** Unix timestamp seconds */
+	moonrise: number;
+	/** Unix timestamp seconds */
+    moonset: number;
+	/**  Moon phase. 0 and 1 are 'new moon', 0.25 is 'first quarter moon', 0.5 is 'full moon' and 0.75 is 'last quarter moon'. The periods in between are called 'waxing crescent', 'waxing gibous', 'waning gibous', and 'waning crescent', respectively. */
+	moon_phase: number;
+	temp: {
+		/** Morning temperature. Kelvin. */
+		morn: number; 
+		/** Day temperature. Kelvin */
+		day: number;
+		/** Evening temperature. Kelvin */
+		eve: number;
+		/** Night temperature. */
+		night: number;
+		/** Min daily temperature. */
+		min: number;
+		/** Max daily temperature. */
+		max: number;
+	}
+	feels_like: {
+		/** Morning temperature. Kelvin. */
+		morn: number; 
+		/** Day temperature. Kelvin */
+		day: number;
+		/** Evening temperature. Kelvin */
+		eve: number;
+		/** Night temperature. */
+		night: number;
+	}
+	/** hPa */
+    pressure: number;
+	/** % */
+    humidity: number;
+	/** Kelvin */
+    dew_point: number;
+	/** UV index */
+    uvi: number;
+	/** % */
+    clouds: number;
+	/** Probability of precipitation, percent between 0 and 1  */
+	pop: number;
+	/** Volume, mm */
+	rain?: number;
+	/** Volume, mm */
+	snow?: number;
+	weather: ConditionPayload[];
+}
+
+interface AlertPayload {
+	sender_name: string;
+	event: string;
+	/** Date and time of the start of the alert, Unix, UTC */
+	start: number;
+	/** Date and time of the end of the alert, Unix, UTC */
+	end: number;
+	description: string;
+	tags: string[];
+}
+
+interface ConditionPayload {
+	/** [Weather condition id](https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2) */
+	id: number;
+	/** Group of weather parameters (Rain, Snow, Extreme etc.) */
+	main: string;
+	/**  Weather condition within the group ([full list of weather conditions](https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2)).*/
+	description: string;
+	/** Weather icon id */
+	icon: string;
+}
+
+interface PrecipitationPayload {
+	/** Volume, mm */
+	"1h"?: number;
 }
 
 const openWeatherMapConditionLibrary = [

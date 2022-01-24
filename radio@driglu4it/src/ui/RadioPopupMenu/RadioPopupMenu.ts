@@ -1,4 +1,4 @@
-import { createPopupMenu } from "cinnamonpopup"
+import { createPopupMenu } from "../../lib/PopupMenu"
 import { createSeparatorMenuItem } from "../../lib/PopupSeperator"
 import { mpvHandler } from "../../services/mpv/MpvHandler"
 import { createInfoSection } from "../InfoSection"

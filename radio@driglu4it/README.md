@@ -16,7 +16,7 @@ A simple radio applet for Cinnamon. The radio-applet has been totally rewritten 
 
 ## Dependencies
 
-The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet.
+The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet. 
 
 **TLDR** Run this [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) as sudo to install `youtube-dl`
 
@@ -24,5 +24,6 @@ For the youtube download feature you can either use [youtube-dl](https://github.
 
 ## Known Issues
 
-- Special characters (e.g German Umlaute) are not shown correctly on the sound applet (when the option "Show song information on the panel" is activated). This is a limitation of the mpv player. I haven't yet found a workaround for that. Ideas are welcome.
+- Special characters (e.g German Umlaute) are not shown correctly on the sound applet (when the option "Show song information on the panel" is activated). This is a [bug](https://github.com/mpv-player/mpv/issues/8844) of the mpv player. There is an open [pull request](https://github.com/mpv-player/mpv/pull/8845) which will fix that. At the moment the only workaround is to compile mpv from the source of the mentioned pull request. 
 - For some radio stations (e.g. BBC) the metadata can't be shown
+- It is automatically downloaded the compiled version of the mpv mpris plugin which however is only suitable for 64-bit x86 architecutres (e.g. not for the raspberry pi). In that case you unfortunately have to [build the plugin](https://github.com/hoyon/mpv-mpris#build) by yourself at the moment and place the plugin at: `~/.cinnamon/configs/radio@driglu4it/.mpris.so`. 

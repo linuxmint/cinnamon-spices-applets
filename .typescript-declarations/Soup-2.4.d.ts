@@ -169,7 +169,6 @@ declare namespace imports.gi.Soup {
 	Pick<IAddress,
 		"family" |
 		"name" |
-		"physical" |
 		"port" |
 		"protocol" |
 		"sockaddr">;
@@ -323,10 +322,10 @@ declare namespace imports.gi.Soup {
 		 */
 		update(msg: Message, auth_header: string): boolean;
 		connect(signal: "notify::host", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_authenticated", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_for_proxy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-authenticated", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-for-proxy", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::realm", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scheme_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scheme-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::realm", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -334,10 +333,7 @@ declare namespace imports.gi.Soup {
 	type AuthInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IAuth,
 		"host" |
-		"is_authenticated" |
 		"is_for_proxy" |
-		"realm" |
-		"scheme_name" |
 		"realm">;
 
 	export interface AuthInitOptions extends AuthInitOptionsMixin {}
@@ -555,9 +551,9 @@ declare namespace imports.gi.Soup {
 		set_generic_auth_callback(auth_callback: AuthDomainGenericAuthCallback, auth_data: any | null, dnotify: GLib.DestroyNotify): void;
 		try_generic_auth_callback(msg: Message, username: string): boolean;
 		connect(signal: "notify::filter", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::filter_data", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::generic_auth_callback", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::generic_auth_data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::filter-data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::generic-auth-callback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::generic-auth-data", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::proxy", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::realm", callback: (owner: this, ...args: any) => void): number;
 
@@ -612,8 +608,8 @@ declare namespace imports.gi.Soup {
 		 * is destroyed
 		 */
 		set_auth_callback(callback: AuthDomainBasicAuthCallback, dnotify: GLib.DestroyNotify): void;
-		connect(signal: "notify::auth_callback", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::auth_data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auth-callback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auth-data", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -671,8 +667,8 @@ declare namespace imports.gi.Soup {
 		 * is destroyed
 		 */
 		set_auth_callback(callback: AuthDomainDigestAuthCallback, dnotify: GLib.DestroyNotify): void;
-		connect(signal: "notify::auth_callback", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::auth_data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auth-callback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auth-data", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -871,8 +867,8 @@ declare namespace imports.gi.Soup {
 		 * @param max_size the maximum size of the cache, in bytes
 		 */
 		set_max_size(max_size: number): void;
-		connect(signal: "notify::cache_dir", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cache_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cache-dir", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cache-type", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1152,8 +1148,8 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "changed", callback: (owner: this, old_cookie: Cookie, new_cookie: Cookie) => void): number;
 
-		connect(signal: "notify::accept_policy", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::read_only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accept-policy", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::read-only", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -1479,7 +1475,7 @@ declare namespace imports.gi.Soup {
 		 */
 		set_response_filter(response_filter: LoggerFilter, filter_data: any | null, destroy: GLib.DestroyNotify): void;
 		connect(signal: "notify::level", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_body_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-body-size", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -2086,24 +2082,24 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "wrote-informational", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::first_party", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::first-party", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::http_version", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_top_level_navigation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::http-version", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-top-level-navigation", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::method", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::priority", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::reason_phrase", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::request_body", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::request_body_data", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::request_headers", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::response_body", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::response_body_data", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::response_headers", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::server_side", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::site_for_cookies", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::status_code", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_certificate", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_errors", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::reason-phrase", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::request-body", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::request-body-data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::request-headers", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::response-body", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::response-body-data", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::response-headers", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::server-side", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::site-for-cookies", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::status-code", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-certificate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-errors", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::method", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::status_code", callback: (owner: this, ...args: any) => void): number;
@@ -2124,25 +2120,12 @@ declare namespace imports.gi.Soup {
 		"method" |
 		"priority" |
 		"reason_phrase" |
-		"request_body" |
-		"request_body_data" |
-		"request_headers" |
-		"response_body" |
-		"response_body_data" |
-		"response_headers" |
 		"server_side" |
 		"site_for_cookies" |
 		"status_code" |
 		"tls_certificate" |
 		"tls_errors" |
-		"uri" |
-		"method" |
-		"status_code" |
-		"reason_phrase" |
-		"request_body" |
-		"request_headers" |
-		"response_body" |
-		"response_headers">;
+		"uri">;
 
 	export interface MessageInitOptions extends MessageInitOptionsMixin {}
 
@@ -3134,16 +3117,16 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "request-started", callback: (owner: this, message: Message, client: ClientContext) => void): number;
 
-		connect(signal: "notify::async_context", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::http_aliases", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::https_aliases", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::async-context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::http-aliases", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::https-aliases", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::interface", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::port", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::raw_paths", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::server_header", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_cert_file", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_key_file", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_certificate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::raw-paths", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::server-header", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-cert-file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-key-file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-certificate", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4019,29 +4002,29 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "tunneling", callback: (owner: this, connection: GObject.Object) => void): number;
 
-		connect(signal: "notify::accept_language", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::accept_language_auto", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::add_feature", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::add_feature_by_type", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::async_context", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::http_aliases", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::https_aliases", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::idle_timeout", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::local_address", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_conns", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_conns_per_host", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::proxy_resolver", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::proxy_uri", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::remove_feature_by_type", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_ca_file", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_strict", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_use_system_ca_file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accept-language", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accept-language-auto", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::add-feature", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::add-feature-by-type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::async-context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::http-aliases", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::https-aliases", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::idle-timeout", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::local-address", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-conns", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-conns-per-host", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::proxy-resolver", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::proxy-uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::remove-feature-by-type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-ca-file", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-strict", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-use-system-ca-file", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_database", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_interaction", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_ntlm", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_thread_context", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::user_agent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-database", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-interaction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-ntlm", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-thread-context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::user-agent", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4445,21 +4428,21 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "writable", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::async_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::async-context", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::fd", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ipv6_only", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_server", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::local_address", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::non_blocking", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::remote_address", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_creds", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_fallback", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::ssl_strict", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ipv6-only", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-server", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::local-address", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::non-blocking", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::remote-address", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-creds", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-fallback", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::ssl-strict", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::timeout", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_certificate", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tls_errors", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::trusted_certificate", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_thread_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-certificate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tls-errors", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::trusted-certificate", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-thread-context", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -4468,7 +4451,6 @@ declare namespace imports.gi.Soup {
 		"async_context" |
 		"fd" |
 		"ipv6_only" |
-		"is_server" |
 		"local_address" |
 		"non_blocking" |
 		"remote_address" |
@@ -4476,9 +4458,6 @@ declare namespace imports.gi.Soup {
 		"ssl_fallback" |
 		"ssl_strict" |
 		"timeout" |
-		"tls_certificate" |
-		"tls_errors" |
-		"trusted_certificate" |
 		"use_thread_context">;
 
 	export interface SocketInitOptions extends SocketInitOptionsMixin {}
@@ -4739,11 +4718,11 @@ declare namespace imports.gi.Soup {
 		 */
 		connect(signal: "pong", callback: (owner: this, message: GLib.Bytes) => void): number;
 
-		connect(signal: "notify::connection_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::connection-type", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::extensions", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::io_stream", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::keepalive_interval", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_incoming_payload_size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::io-stream", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keepalive-interval", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-incoming-payload-size", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::origin", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::protocol", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::state", callback: (owner: this, ...args: any) => void): number;
@@ -4760,7 +4739,6 @@ declare namespace imports.gi.Soup {
 		"max_incoming_payload_size" |
 		"origin" |
 		"protocol" |
-		"state" |
 		"uri">;
 
 	export interface WebsocketConnectionInitOptions extends WebsocketConnectionInitOptionsMixin {}

@@ -71,7 +71,7 @@ export class CurrentWeather {
 			if (this.app.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
 			else this.HideLocationSelectors();
 
-			let location = GenerateLocationText(weather, config);
+			const location = GenerateLocationText(weather, config);
 			this.SetLocation(location, weather.location.url);
 			this.SetConditionText(weather.condition.description);
 			this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
@@ -115,7 +115,7 @@ export class CurrentWeather {
 		})
 
 		// Main box
-		let box = new BoxLayout({ style_class: STYLE_ICONBOX })
+		const box = new BoxLayout({ style_class: STYLE_ICONBOX })
 		box.add_actor(this.weatherIcon)
 		box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
 		box.add_actor(this.BuildRightColumn(textColorStyle, config))
@@ -127,7 +127,7 @@ export class CurrentWeather {
 	private BuildMiddleColumn(config: Config, textColorStyle: string) {
 		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
-		let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
+		const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
 		middleColumn.add_actor(this.BuildLocationSection())
 		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
 
@@ -145,7 +145,7 @@ export class CurrentWeather {
 
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
-		let textOb = {
+		const textOb = {
 			text: ELLIPSIS
 		}
 		// Current Weather Right Column
@@ -159,8 +159,8 @@ export class CurrentWeather {
 		this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
 		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
 
-		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-		let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
+		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
+		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
 		rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
 		rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
 		rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
@@ -174,20 +174,20 @@ export class CurrentWeather {
 		rb_values.add_actor(this.dewPointLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
-		let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
 		rightColumn.add_actor(rb_captions);
 		rightColumn.add_actor(rb_values);
 		return rightColumn;
 	}
 
 	private BuildWind(config: Config) {
-		let windBox = new BoxLayout({ vertical: false });
+		const windBox = new BoxLayout({ vertical: false });
 
 		// We try to make sure that icon doesn't take up more vertical space than text
 		// Also we position it close to the bottom to be perceived vertically centered
-		let iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-		let iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
-		let iconSize = Math.round(config.CurrentFontSize * 0.8);
+		const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+		const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+		const iconSize = Math.round(config.CurrentFontSize * 0.8);
 
 		this.windLabel = new Label({ text: ELLIPSIS });
 		this.windDirectionIcon = new Icon({
@@ -236,7 +236,7 @@ export class CurrentWeather {
 		});
 		this.previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
 
-		let box = new BoxLayout();
+		const box = new BoxLayout();
 		box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
 		box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
 		box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
@@ -245,21 +245,21 @@ export class CurrentWeather {
 
 	private BuildSunBox(config: Config, textColorStyle: string) {
 		// Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
-		let sunBin = new Bin();
+		const sunBin = new Bin();
 		this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
 		this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
 
-		let sunriseBox = new BoxLayout();
-		let sunsetBox = new BoxLayout();
+		const sunriseBox = new BoxLayout();
+		const sunsetBox = new BoxLayout();
 		if (config._showSunrise) {
-			let sunsetIcon = new Icon({
+			const sunsetIcon = new Icon({
 				icon_name: "sunset-symbolic",
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 25,
 				style: textColorStyle
 			});
 
-			let sunriseIcon = new Icon({
+			const sunriseIcon = new Icon({
 				icon_name: "sunrise-symbolic",
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 25,
@@ -270,7 +270,7 @@ export class CurrentWeather {
 			sunsetBox.add_actor(sunsetIcon);
 		}
 
-		let textOptions: Partial<imports.gi.St.BoxLayoutChildInitOptions> = {
+		const textOptions: Partial<imports.gi.St.BoxLayoutChildInitOptions> = {
 			x_fill: false,
 			x_align: Align.START,
 			y_align: Align.MIDDLE,
@@ -281,9 +281,9 @@ export class CurrentWeather {
 		sunriseBox.add(this.sunriseLabel, textOptions);
 		sunsetBox.add(this.sunsetLabel, textOptions);
 
-		let ab_spacerLabel = new Label({ text: BLANK })
+		const ab_spacerLabel = new Label({ text: BLANK })
 
-		let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
+		const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
 		sunBox.add_actor(sunriseBox)
 		sunBox.add_actor(ab_spacerLabel)
 		sunBox.add_actor(sunsetBox);
@@ -333,7 +333,7 @@ export class CurrentWeather {
 		this.apiUniqueCaptionLabel.text = "";
 		if (!!extra_field) {
 			this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
-			let value;
+			let value: string | null = null;
 			switch (extra_field.type) {
 				case "percent":
 					value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
@@ -350,7 +350,7 @@ export class CurrentWeather {
 	}
 
 	private SetDewPointField(dewPoint: number | null): void {
-		let temp = TempToUserConfig(dewPoint, this.app.config);
+		const temp = TempToUserConfig(dewPoint, this.app.config);
 		if (temp == null) {
 			this.dewPointCaption.set_style_class_name("weather-hidden");
 			this.dewPointLabel.set_style_class_name("weather-hidden");
@@ -368,7 +368,7 @@ export class CurrentWeather {
 			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as IconSet is symbolic
 		}
 		else {
-			let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
+			const icon = WeatherIconSafely(iconNames, this.app.config.IconType);
 			this.weatherIcon.icon_name = icon;
 			this.UpdateIconType(this.app.config.IconType); // Revert to user setting
 		}
@@ -379,7 +379,7 @@ export class CurrentWeather {
 	}
 
 	private SetTemperature(temperature: number | null) {
-		let temp = TempToUserConfig(temperature, this.app.config);
+		const temp = TempToUserConfig(temperature, this.app.config);
 		if (temp == null) return;
 		this.temperatureLabel.text = temp;
 	}
@@ -394,10 +394,10 @@ export class CurrentWeather {
 		if (windSpeed == null || windDegree == null)
 			return;
 
-		let wind_direction = CompassDirection(windDegree);
+		const wind_direction = CompassDirection(windDegree);
 		this.windDirectionIcon.icon_name = wind_direction;
 		if (this.app.config._displayWindAsText) {
-			let dirText = CompassDirectionText(windDegree);
+			const dirText = CompassDirectionText(windDegree);
 			this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
 		}
 		else {
@@ -425,12 +425,12 @@ export class CurrentWeather {
 	// Callbacks
 
 	private NextLocationClicked() {
-		let loc = this.app.config.SwitchToNextLocation();
+		const loc = this.app.config.SwitchToNextLocation();
 		this.app.RefreshAndRebuild(loc);
 	}
 
 	private PreviousLocationClicked() {
-		let loc = this.app.config.SwitchToPreviousLocation();
+		const loc = this.app.config.SwitchToPreviousLocation();
 		this.app.RefreshAndRebuild(loc);
 	}
 

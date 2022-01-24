@@ -1834,10 +1834,7 @@ declare namespace imports.gi.Pango {
 
 	}
 
-	type RendererInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IRenderer,
-		"matrix">;
-
+	type RendererInitOptionsMixin = GObject.ObjectInitOptions
 	export interface RendererInitOptions extends RendererInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,

@@ -45,7 +45,7 @@ declare namespace imports.ui.modalDialog {
         protected _activeKeys: any
         protected _backgrounddBin: imports.gi.St.Bin
         protected _dialogLayout: imports.gi.St.BoxLayout
-        protected _lightbox: imports.ui.lightbox.Lightbox
+        protected _lightbox: lightbox.Lightbox
         public stack: any
         protected _eventBlocker: any
         public contentLayout: imports.gi.St.BoxLayout

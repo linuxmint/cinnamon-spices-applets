@@ -104,7 +104,7 @@ export class UI {
 	/** Fully rebuilds UI */
 	public Rebuild(config: Config): void {
 		this.ShowLoadingUi();
-		let textColorStyle = this.GetTextColorStyle();
+		const textColorStyle = this.GetTextColorStyle();
 		this.CurrentWeather.Rebuild(config, textColorStyle);
 		this.HourlyWeather.Rebuild(config, textColorStyle);
 		this.FutureWeather.Rebuild(config, textColorStyle);
@@ -134,7 +134,7 @@ export class UI {
 	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
 		this.CurrentWeather.Display(weather, config);
 		this.FutureWeather.Display(weather, config);
-		let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+		const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
 		this.noHourlyWeather = !shouldShowToggle;
 		// Hourly weather is not shown, make sure it's closed
 		if (!shouldShowToggle)
@@ -155,7 +155,7 @@ export class UI {
 	 */
 	private OnThemeChanged(): void {
 		this.HideHourlyWeather();
-		let newThemeIsLight = this.IsLightTheme();
+		const newThemeIsLight = this.IsLightTheme();
 		// Theme changed between light and dark theme
 		if (newThemeIsLight != this.lightTheme) {
 			this.lightTheme = newThemeIsLight;
@@ -180,7 +180,7 @@ export class UI {
 	 */
 	private IsLightTheme(): boolean {
 		// using foreground color, more reliable than background color (more themes has it)
-		let color = this.menu.actor.get_theme_node().get_color("color");
+		const color = this.menu.actor.get_theme_node().get_color("color");
 		// luminance between 0 and 1
 		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
 		// Inverse, we assume the background color here
@@ -194,12 +194,12 @@ export class UI {
 	 */
 	private ForegroundColor(): string {
 		// Get hex color without alpha, because it is not supported in css
-		let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+		const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
 		return hex;
 	}
 
 	private GetTextColorStyle(): string {
-		let hexColor = null;
+		let hexColor: string | null = null;
 		if (this.lightTheme) {
 			// Darken default foreground color
 			hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
@@ -223,7 +223,7 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		let mainBox = new BoxLayout({ vertical: true })
+		const mainBox = new BoxLayout({ vertical: true })
 		mainBox.add_actor(this.CurrentWeather.actor)
 		mainBox.add_actor(this.HourlySeparator.Actor);
 		mainBox.add_actor(this.HourlyWeather.actor);

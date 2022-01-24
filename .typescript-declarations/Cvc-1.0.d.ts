@@ -61,19 +61,18 @@ declare namespace imports.gi.Cvc {
 		set_ports(ports: GLib.List): boolean;
 		set_profile(profile: string): boolean;
 		set_profiles(profiles: GLib.List): boolean;
-		connect(signal: "notify::human_profile", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::human-profile", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::id", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::index", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pa_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pa-context", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::profile", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type MixerCardInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IMixerCard,
-		"human_profile" |
 		"icon_name" |
 		"id" |
 		"index" |
@@ -346,23 +345,23 @@ declare namespace imports.gi.Cvc {
 		connect(signal: "monitor-suspend", callback: (owner: this) => void): number;
 		connect(signal: "monitor-update", callback: (owner: this, object: number) => void): number;
 
-		connect(signal: "notify::application_id", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::can_decibel", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::card_index", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::channel_map", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::application-id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::can-decibel", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::card-index", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::channel-map", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::decibel", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::form_factor", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::form-factor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::id", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::index", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_event_stream", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_muted", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::is_virtual", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-event-stream", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-muted", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::is-virtual", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pa_context", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pa-context", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::port", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::sysfs_path", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sysfs-path", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::volume", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -457,11 +456,11 @@ declare namespace imports.gi.Cvc {
 		should_profiles_be_hidden(): boolean;
 		connect(signal: "notify::card", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::icon_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::icon-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::origin", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::port_available", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::port_name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::stream_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::port-available", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::port-name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::stream-id", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::type", callback: (owner: this, ...args: any) => void): number;
 
 	}

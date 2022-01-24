@@ -45,10 +45,10 @@ export class UIHourlyForecasts {
 		);
 
 		// Stop event passing while scrolling to allow scrolling
-		let vScroll = this.actor.get_vscroll_bar();
+		const vScroll = this.actor.get_vscroll_bar();
 		vScroll.connect("scroll-start", () => { menu.passEvents = true; });
 		vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
-		let hScroll = this.actor.get_hscroll_bar();
+		const hScroll = this.actor.get_hscroll_bar();
 		hScroll.connect("scroll-start", () => { menu.passEvents = true; });
 		hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
 
@@ -71,8 +71,8 @@ export class UIHourlyForecasts {
 		if (this.hourlyForecastDates == null)
 			return;
 
-		let itemWidth = this.GetHourlyBoxItemWidth();
-		let midnightIndex = null;
+		const itemWidth = this.GetHourlyBoxItemWidth();
+		let midnightIndex: number | null = null;
 		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
 			if (OnSameDay(this.hourlyForecastDates[index], date))
 				midnightIndex = index;
@@ -95,11 +95,11 @@ export class UIHourlyForecasts {
 		if (!this.hourlyForecasts)
 			return;
 
-		for (let i = 0; i < this.hourlyForecasts.length; i++) {
-			if (!this.hourlyForecasts[i]?.Icon)
+		for (const hourly of this.hourlyForecasts) {
+			if (!hourly?.Icon)
 				continue;
 
-			this.hourlyForecasts[i].Icon.icon_type = iconType;
+			hourly.Icon.icon_type = iconType;
 		}
 	}
 
@@ -108,7 +108,7 @@ export class UIHourlyForecasts {
 			return true;
 
 		this.hourlyForecastDates = [];
-		let max = Math.min(forecasts.length, this.hourlyForecasts.length);
+		const max = Math.min(forecasts.length, this.hourlyForecasts.length);
 		for (let index = 0; index < max; index++) {
 			const hour = forecasts[index];
 			const ui = this.hourlyForecasts[index];
@@ -128,7 +128,7 @@ export class UIHourlyForecasts {
 	}
 
 	public ResetScroll() {
-		let hscroll = this.actor.get_hscroll_bar();
+		const hscroll = this.actor.get_hscroll_bar();
 		hscroll.get_adjustment().set_value(0);
 	}
 
@@ -140,12 +140,12 @@ export class UIHourlyForecasts {
 
 		this.AdjustHourlyBoxItemWidth();
 
-		let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+		const [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
 
 		if (minWidth == null)
 			return;
 
-		let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+		const [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
 
 		if (naturalHeight == null)
 			return;
@@ -164,7 +164,7 @@ export class UIHourlyForecasts {
 			if (naturalHeight == null)
 				return;
 
-			let height = naturalHeight;
+			const height = naturalHeight;
 			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
@@ -226,10 +226,9 @@ export class UIHourlyForecasts {
 	 * sure to call this whn the hourly ScrollView is shown
 	 */
 	private AdjustHourlyBoxItemWidth(): void {
-		let requiredWidth = this.GetHourlyBoxItemWidth();
+		const requiredWidth = this.GetHourlyBoxItemWidth();
 
-		for (let index = 0; index < this.hourlyContainers.length; index++) {
-			const element = this.hourlyContainers[index];
+		for (const element of this.hourlyContainers) {
 			element.set_width(requiredWidth);
 		}
 	}
@@ -244,10 +243,10 @@ export class UIHourlyForecasts {
 
 		for (let index = 0; index < this.hourlyContainers.length; index++) {
 			const ui = this.hourlyForecasts[index];
-			let hourWidth = ui.Hour.get_preferred_width(-1)[1];
-			let iconWidth = ui.Icon.get_preferred_width(-1)[1];
+			const hourWidth = ui.Hour.get_preferred_width(-1)[1];
+			const iconWidth = ui.Icon.get_preferred_width(-1)[1];
 			let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
-			let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+			const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
 			let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
 
 			if (precipitationWidth == null || temperatureWidth == null || 
@@ -277,12 +276,12 @@ export class UIHourlyForecasts {
 
 	public Rebuild(config: Config, textColorStyle: string) {
 		this.Destroy();
-		let hours = this.app.GetMaxHourlyForecasts();
+		const hours = this.app.GetMaxHourlyForecasts();
 		this.hourlyForecasts = [];
 		this.hourlyContainers = [];
 
 		for (let index = 0; index < hours; index++) {
-			let box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+			const box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
 			this.hourlyContainers.push(box);
 
 			this.hourlyForecasts.push({
@@ -347,25 +346,25 @@ export class UIHourlyForecasts {
 			const ui = this.hourlyForecasts[index];
 
 			Logger.Debug("Height requests of Hourly box Items: " + index);
-			let hourHeight = ui.Hour.get_preferred_height(-1)[1];
-			let iconHeight = ui.Icon.get_preferred_height(-1)[1];
-			let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
-			let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
-			let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+			const hourHeight = ui.Hour.get_preferred_height(-1)[1];
+			const iconHeight = ui.Icon.get_preferred_height(-1)[1];
+			const summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+			const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+			const precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
 
 			if (precipitationHeight == null || temperatureHeight == null || 
 				hourHeight == null || iconHeight == null || summaryHeight == null)
 				continue;
 
-			let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+			const itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
 			if (boxItemHeight < itemHeight) boxItemHeight = itemHeight;
 		}
 		Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
-		let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
+		const scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
 
 		Logger.Debug("Scrollbar height is " + scrollBarHeight);
-		let theme = this.container.get_theme_node();
-		let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+		const theme = this.container.get_theme_node();
+		const styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
 		Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
 
 		return (boxItemHeight + (scrollBarHeight ?? 0) + styling);

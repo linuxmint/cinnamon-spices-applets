@@ -39,7 +39,7 @@ export class WeatherLoop {
 
 	public IsDataTooOld(): boolean {
 		if (!this.lastUpdated) return true;
-		let oldDate = this.lastUpdated;
+		const oldDate = this.lastUpdated;
 		// If data is at least twice as old as refreshInterval, return true
 		oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
 		return (this.lastUpdated > oldDate);
@@ -75,7 +75,7 @@ export class WeatherLoop {
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 				// loop can skip 1 cycle if needed 
-				let state = await this.app.RefreshWeather(false);
+				const state = await this.app.RefreshWeather(false);
 				if (state == RefreshState.Error) Logger.Info("App is currently refreshing, refresh skipped in main loop");
 				if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
 			}

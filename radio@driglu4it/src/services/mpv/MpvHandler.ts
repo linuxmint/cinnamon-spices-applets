@@ -289,7 +289,7 @@ function createMpvHandler() {
                 initialVolume = 50
             }
 
-            const command = `mpv --script=${MPRIS_PLUGIN_PATH} ${url} 
+            const command = `mpv --config=no --script=${MPRIS_PLUGIN_PATH} ${url} 
                 --volume=${initialVolume}`
             spawnCommandLine(command)
             return

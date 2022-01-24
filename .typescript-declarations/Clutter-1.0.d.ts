@@ -4129,117 +4129,108 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "unrealize", callback: (owner: this) => void): number;
 
 		connect(signal: "notify::allocation", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::anchor_gravity", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::anchor_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::anchor_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::background_color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::background_color_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::child_transform", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::child_transform_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::anchor-gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::anchor-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::anchor-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background-color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::background-color-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::child-transform", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::child-transform-set", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::clip", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::clip_rect", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::clip_to_allocation", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::clip-rect", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::clip-to-allocation", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::content", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::content_box", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::content_gravity", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::content_repeat", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::content-box", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::content-gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::content-repeat", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::depth", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::first_child", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::fixed_position_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::fixed_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::fixed_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::has_clip", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::has_pointer", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::first-child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fixed-position-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fixed-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fixed-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has-clip", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has-pointer", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::last_child", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::layout_manager", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::magnification_filter", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::last-child", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::layout-manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::magnification-filter", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::mapped", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::margin_bottom", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::margin_left", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::margin_right", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::margin_top", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_height_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_width", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_width_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::minification_filter", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin-bottom", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin-left", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin-right", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::margin-top", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-height-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-width-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::minification-filter", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::natural_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::natural_height_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::natural_width", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::natural_width_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::offscreen_redirect", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural-height-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural-width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::natural-width-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::offscreen-redirect", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::opacity", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pivot_point", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pivot_point_z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pivot-point", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pivot-point-z", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::position", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::reactive", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::realized", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::request_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_angle_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_angle_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_angle_z", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_center_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_center_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_center_z", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::rotation_center_z_gravity", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_center_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_center_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_gravity", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_z", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::show_on_set_parent", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::request-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-angle-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-angle-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-angle-z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-center-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-center-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-center-z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::rotation-center-z-gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-center-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-center-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-gravity", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::show-on-set-parent", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::size", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::text_direction", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::text-direction", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::transform", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::transform_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::translation_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::translation_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::translation_z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::transform-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::translation-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::translation-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::translation-z", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::visible", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::x_align", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::x_expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-align", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-expand", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_align", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_expand", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::z_position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-align", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-expand", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::z-position", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::flags", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type ActorInitOptionsMixin = GObject.InitiallyUnownedInitOptions & Atk.ImplementorIfaceInitOptions & AnimatableInitOptions & ContainerInitOptions & ScriptableInitOptions & 
 	Pick<IActor,
-		"allocation" |
 		"anchor_gravity" |
 		"anchor_x" |
 		"anchor_y" |
 		"background_color" |
-		"background_color_set" |
 		"child_transform" |
-		"child_transform_set" |
 		"clip" |
 		"clip_rect" |
 		"clip_to_allocation" |
 		"content" |
-		"content_box" |
 		"content_gravity" |
 		"content_repeat" |
 		"depth" |
-		"first_child" |
 		"fixed_position_set" |
 		"fixed_x" |
 		"fixed_y" |
-		"has_clip" |
-		"has_pointer" |
 		"height" |
-		"last_child" |
 		"layout_manager" |
 		"magnification_filter" |
-		"mapped" |
 		"margin_bottom" |
 		"margin_left" |
 		"margin_right" |
@@ -4260,7 +4251,6 @@ declare namespace imports.gi.Clutter {
 		"pivot_point_z" |
 		"position" |
 		"reactive" |
-		"realized" |
 		"request_mode" |
 		"rotation_angle_x" |
 		"rotation_angle_y" |
@@ -4279,7 +4269,6 @@ declare namespace imports.gi.Clutter {
 		"size" |
 		"text_direction" |
 		"transform" |
-		"transform_set" |
 		"translation_x" |
 		"translation_y" |
 		"translation_z" |
@@ -4291,8 +4280,7 @@ declare namespace imports.gi.Clutter {
 		"y" |
 		"y_align" |
 		"y_expand" |
-		"z_position" |
-		"flags">;
+		"z_position">;
 
 	export interface ActorInitOptions extends ActorInitOptionsMixin {}
 
@@ -4372,7 +4360,6 @@ declare namespace imports.gi.Clutter {
 
 	type ActorMetaInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
 	Pick<IActorMeta,
-		"actor" |
 		"enabled" |
 		"name">;
 
@@ -4458,7 +4445,7 @@ declare namespace imports.gi.Clutter {
 		 * @param source a {@link Actor}, or %NULL to unset the source
 		 */
 		set_source(source: Actor | null): void;
-		connect(signal: "notify::align_axis", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::align-axis", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::factor", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::source", callback: (owner: this, ...args: any) => void): number;
 
@@ -4603,7 +4590,6 @@ declare namespace imports.gi.Clutter {
 
 	type AlphaInitOptionsMixin = GObject.InitiallyUnownedInitOptions & ScriptableInitOptions & 
 	Pick<IAlpha,
-		"alpha" |
 		"mode" |
 		"timeline">;
 
@@ -5577,8 +5563,8 @@ declare namespace imports.gi.Clutter {
 		 * @param depth_end final value of the depth
 		 */
 		set_bounds(depth_start: number, depth_end: number): void;
-		connect(signal: "notify::depth_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::depth_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::depth-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::depth-start", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -5751,11 +5737,11 @@ declare namespace imports.gi.Clutter {
 		 * @param width width of the ellipse
 		 */
 		set_width(width: number): void;
-		connect(signal: "notify::angle_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::angle_start", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::angle_tilt_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::angle_tilt_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::angle_tilt_z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-tilt-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-tilt-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-tilt-z", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::center", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
@@ -5841,8 +5827,8 @@ declare namespace imports.gi.Clutter {
 		 * @param opacity_end maximum level of opacity
 		 */
 		set_bounds(opacity_start: number, opacity_end: number): void;
-		connect(signal: "notify::opacity_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::opacity_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::opacity-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::opacity-start", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6064,12 +6050,12 @@ declare namespace imports.gi.Clutter {
 		 * @param direction the rotation direction
 		 */
 		set_direction(direction: RotateDirection): void;
-		connect(signal: "notify::angle_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::angle_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::angle-start", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::axis", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::center_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::center_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::center_z", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::center-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::center-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::center-z", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -6162,10 +6148,10 @@ declare namespace imports.gi.Clutter {
 		 * @param y_scale_end final scale factor on the Y axis
 		 */
 		set_bounds(x_scale_start: number, y_scale_start: number, x_scale_end: number, y_scale_end: number): void;
-		connect(signal: "notify::x_scale_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::x_scale_start", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_scale_end", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_scale_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-scale-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-scale-start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-scale-end", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-scale-start", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6280,8 +6266,8 @@ declare namespace imports.gi.Clutter {
 		 *   inside #container
 		 */
 		set_alignment(child: Actor | null, x_align: BinAlignment, y_align: BinAlignment): void;
-		connect(signal: "notify::x_align", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_align", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-align", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-align", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -6792,7 +6778,7 @@ declare namespace imports.gi.Clutter {
 		 */
 		set_layout_manager(manager: LayoutManager): void;
 		connect(signal: "notify::color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::color_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::color-set", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7100,13 +7086,13 @@ declare namespace imports.gi.Clutter {
 		 * @param vertical %TRUE if the layout should be vertical
 		 */
 		set_vertical(vertical: boolean): void;
-		connect(signal: "notify::easing_duration", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::easing_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::easing-duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::easing-mode", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pack_start", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pack-start", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::spacing", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_animations", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-animations", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::vertical", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -7443,9 +7429,9 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "draw", callback: (owner: this, cr: cairo.Context) => boolean): number;
 
-		connect(signal: "notify::auto_resize", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::surface_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::surface_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auto-resize", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::surface-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::surface-width", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -7576,8 +7562,8 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "draw", callback: (owner: this, cr: cairo.Context, width: number, height: number) => boolean): number;
 
 		connect(signal: "notify::height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_factor", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::scale_factor_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-factor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scale-factor-set", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::width", callback: (owner: this, ...args: any) => void): number;
 
 	}
@@ -7586,7 +7572,6 @@ declare namespace imports.gi.Clutter {
 	Pick<ICanvas,
 		"height" |
 		"scale_factor" |
-		"scale_factor_set" |
 		"width">;
 
 	export interface CanvasInitOptions extends CanvasInitOptionsMixin {}
@@ -7658,9 +7643,7 @@ declare namespace imports.gi.Clutter {
 	type ChildMetaInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IChildMeta,
 		"actor" |
-		"container" |
-		"container" |
-		"actor">;
+		"container">;
 
 	export interface ChildMetaInitOptions extends ChildMetaInitOptionsMixin {}
 
@@ -7806,18 +7789,16 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "long-press", callback: (owner: this, actor: Actor, state: LongPressState) => boolean): number;
 
 		connect(signal: "notify::held", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::long_press_duration", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::long_press_threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::long-press-duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::long-press-threshold", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::pressed", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type ClickActionInitOptionsMixin = ActionInitOptions & 
 	Pick<IClickAction,
-		"held" |
 		"long_press_duration" |
-		"long_press_threshold" |
-		"pressed">;
+		"long_press_threshold">;
 
 	export interface ClickActionInitOptions extends ClickActionInitOptionsMixin {}
 
@@ -8092,9 +8073,9 @@ declare namespace imports.gi.Clutter {
 		 * @param y_tiles number of vertical tiles
 		 */
 		set_n_tiles(x_tiles: number, y_tiles: number): void;
-		connect(signal: "notify::back_material", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::x_tiles", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_tiles", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::back-material", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-tiles", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-tiles", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -8507,19 +8488,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "drag-progress", callback: (owner: this, actor: Actor, delta_x: number, delta_y: number) => boolean): number;
 
-		connect(signal: "notify::drag_area", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::drag_area_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::drag_axis", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::drag_handle", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::x_drag_threshold", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::y_drag_threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::drag-area", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::drag-area-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::drag-axis", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::drag-handle", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::x-drag-threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::y-drag-threshold", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type DragActionInitOptionsMixin = ActionInitOptions & 
 	Pick<IDragAction,
 		"drag_area" |
-		"drag_area_set" |
 		"drag_axis" |
 		"drag_handle" |
 		"x_drag_threshold" |
@@ -8877,15 +8857,15 @@ declare namespace imports.gi.Clutter {
 		 * @param snap_to_grid %TRUE if #layout should place its children on a grid
 		 */
 		set_snap_to_grid(snap_to_grid: boolean): void;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column-spacing", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::homogeneous", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_column_width", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_row_height", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_column_width", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::min_row_height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-column-width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-row-height", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-column-width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::min-row-height", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::snap_to_grid", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row-spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::snap-to-grid", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9152,10 +9132,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "gesture-progress", callback: (owner: this, actor: Actor) => boolean): number;
 
-		connect(signal: "notify::n_touch_points", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::threshold_trigger_distance_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::threshold_trigger_distance_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::threshold_trigger_edge", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n-touch-points", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::threshold-trigger-distance-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::threshold-trigger-distance-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::threshold-trigger-edge", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9337,11 +9317,11 @@ declare namespace imports.gi.Clutter {
 		 * @param spacing the spacing between rows of the layout, in pixels
 		 */
 		set_row_spacing(spacing: number): void;
-		connect(signal: "notify::column_homogeneous", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column-homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column-spacing", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::orientation", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::row_homogeneous", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row-homogeneous", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row-spacing", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9883,16 +9863,16 @@ declare namespace imports.gi.Clutter {
 		 */
 		update_from_event(event: Event, update_stage: boolean): void;
 		connect(signal: "notify::backend", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::device_manager", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::device_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::device_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::device-manager", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::device-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::device-type", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::enabled", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::has_cursor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has-cursor", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::id", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::n_axes", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::n-axes", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::product_id", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::vendor_id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::product-id", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vendor-id", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -9905,7 +9885,6 @@ declare namespace imports.gi.Clutter {
 		"enabled" |
 		"has_cursor" |
 		"id" |
-		"n_axes" |
 		"name" |
 		"product_id" |
 		"vendor_id">;
@@ -10082,7 +10061,7 @@ declare namespace imports.gi.Clutter {
 		validate(pspec: GObject.ParamSpec): boolean;
 		connect(signal: "notify::final", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::initial", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::value_type", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::value-type", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -10525,7 +10504,6 @@ declare namespace imports.gi.Clutter {
 
 	type LayoutMetaInitOptionsMixin = ChildMetaInitOptions & 
 	Pick<ILayoutMeta,
-		"manager" |
 		"manager">;
 
 	export interface LayoutMetaInitOptions extends LayoutMetaInitOptionsMixin {}
@@ -10971,14 +10949,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "sort-changed", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::filter_set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::filter-set", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
-	type ModelInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions & 
-	Pick<IModel,
-		"filter_set">;
-
+	type ModelInitOptionsMixin = GObject.ObjectInitOptions & ScriptableInitOptions
 	export interface ModelInitOptions extends ModelInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11592,10 +11567,10 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "pan-stopped", callback: (owner: this, actor: Actor) => void): number;
 
-		connect(signal: "notify::acceleration_factor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::acceleration-factor", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::deceleration", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::interpolate", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pan_axis", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pan-axis", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -11641,10 +11616,7 @@ declare namespace imports.gi.Clutter {
 
 	}
 
-	type ParamSpecColorInitOptionsMixin = GObject.ParamSpecInitOptions & 
-	Pick<IParamSpecColor,
-		"default_value">;
-
+	type ParamSpecColorInitOptionsMixin = GObject.ParamSpecInitOptions
 	export interface ParamSpecColorInitOptions extends ParamSpecColorInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11685,12 +11657,7 @@ declare namespace imports.gi.Clutter {
 
 	}
 
-	type ParamSpecFixedInitOptionsMixin = GObject.ParamSpecInitOptions & 
-	Pick<IParamSpecFixed,
-		"minimum" |
-		"maximum" |
-		"default_value">;
-
+	type ParamSpecFixedInitOptionsMixin = GObject.ParamSpecInitOptions
 	export interface ParamSpecFixedInitOptions extends ParamSpecFixedInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -11922,8 +11889,7 @@ declare namespace imports.gi.Clutter {
 
 	type PathInitOptionsMixin = GObject.InitiallyUnownedInitOptions & 
 	Pick<IPath,
-		"description" |
-		"length">;
+		"description">;
 
 	export interface PathInitOptions extends PathInitOptionsMixin {}
 
@@ -12092,7 +12058,7 @@ declare namespace imports.gi.Clutter {
 		 * @param property_name a property name
 		 */
 		set_property_name(property_name: string | null): void;
-		connect(signal: "notify::property_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::property-name", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -12200,10 +12166,10 @@ declare namespace imports.gi.Clutter {
 		 * @param color a {@link Color}
 		 */
 		set_color(color: Color): void;
-		connect(signal: "notify::border_color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::border_width", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::border-color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::border-width", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::has_border", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::has-border", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -12672,15 +12638,13 @@ declare namespace imports.gi.Clutter {
 		 */
 		unmerge_objects(merge_id: number): void;
 		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::filename_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::translation_domain", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::filename-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::translation-domain", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type ScriptInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IScript,
-		"filename" |
-		"filename_set" |
 		"translation_domain">;
 
 	export interface ScriptInitOptions extends ScriptInitOptionsMixin {}
@@ -12744,7 +12708,7 @@ declare namespace imports.gi.Clutter {
 		 * @param mode a {@link ScrollMode}
 		 */
 		set_scroll_mode(mode: ScrollMode): void;
-		connect(signal: "notify::scroll_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::scroll-mode", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -12848,18 +12812,18 @@ declare namespace imports.gi.Clutter {
 		password_hint_time: number;
 		window_scaling_factor: number;
 
-		connect(signal: "notify::dnd_drag_threshold", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::double_click_distance", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::double_click_time", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_antialias", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_dpi", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_hint_style", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_hinting", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_subpixel_order", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::long_press_duration", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::password_hint_time", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::window_scaling_factor", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::dnd-drag-threshold", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::double-click-distance", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::double-click-time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-antialias", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-dpi", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-hint-style", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-hinting", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-subpixel-order", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::long-press-duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::password-hint-time", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::window-scaling-factor", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13065,14 +13029,13 @@ declare namespace imports.gi.Clutter {
 		set_vertex_source(data: string, length: number): void;
 		connect(signal: "notify::compiled", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::enabled", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::fragment_source", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::vertex_source", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fragment-source", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::vertex-source", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type ShaderInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<IShader,
-		"compiled" |
 		"enabled" |
 		"fragment_source" |
 		"vertex_source">;
@@ -13354,10 +13317,10 @@ declare namespace imports.gi.Clutter {
 		 * @param source a {@link Actor}, or %NULL to unset the source
 		 */
 		set_source(source: Actor | null): void;
-		connect(signal: "notify::from_edge", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::from-edge", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::offset", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::source", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::to_edge", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::to-edge", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13955,19 +13918,19 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "unfullscreen", callback: (owner: this) => void): number;
 
-		connect(signal: "notify::accept_focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::accept-focus", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-visible", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::fog", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::fullscreen_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::key_focus", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::no_clear_hint", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::fullscreen-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::key-focus", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::no-clear-hint", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::offscreen", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::perspective", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::title", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_alpha", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_fog", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::user_resizable", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-fog", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::user-resizable", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -13977,7 +13940,6 @@ declare namespace imports.gi.Clutter {
 		"color" |
 		"cursor_visible" |
 		"fog" |
-		"fullscreen_set" |
 		"key_focus" |
 		"no_clear_hint" |
 		"offscreen" |
@@ -14106,14 +14068,11 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "stage-removed", callback: (owner: this, stage: Stage) => void): number;
 
-		connect(signal: "notify::default_stage", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::default-stage", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
-	type StageManagerInitOptionsMixin = GObject.ObjectInitOptions & 
-	Pick<IStageManager,
-		"default_stage">;
-
+	type StageManagerInitOptionsMixin = GObject.ObjectInitOptions
 	export interface StageManagerInitOptions extends StageManagerInitOptionsMixin {}
 
 	/** This construct is only for enabling class multi-inheritance,
@@ -14821,11 +14780,11 @@ declare namespace imports.gi.Clutter {
 		 * @param animate %TRUE if the #layout should use animations
 		 */
 		set_use_animations(animate: boolean): void;
-		connect(signal: "notify::column_spacing", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::easing_duration", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::easing_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::row_spacing", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_animations", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::column-spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::easing-duration", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::easing-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::row-spacing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-animations", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -15695,31 +15654,31 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "notify::attributes", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::buffer", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_color_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_position", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_size", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cursor_visible", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-color-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-position", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cursor-visible", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::editable", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::ellipsize", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_description", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::font_name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-description", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::font-name", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::justify", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::line_alignment", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::line_wrap", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::line_wrap_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::password_char", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::line-alignment", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::line-wrap", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::line-wrap-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::password-char", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::position", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::selectable", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selected_text_color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selected_text_color_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selection_bound", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selection_color", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::selection_color_set", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::single_line_mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selected-text-color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selected-text-color-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection-bound", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection-color", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::selection-color-set", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::single-line-mode", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::use_markup", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::use-markup", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -15730,7 +15689,6 @@ declare namespace imports.gi.Clutter {
 		"buffer" |
 		"color" |
 		"cursor_color" |
-		"cursor_color_set" |
 		"cursor_position" |
 		"cursor_size" |
 		"cursor_visible" |
@@ -15747,10 +15705,8 @@ declare namespace imports.gi.Clutter {
 		"position" |
 		"selectable" |
 		"selected_text_color" |
-		"selected_text_color_set" |
 		"selection_bound" |
 		"selection_color" |
-		"selection_color_set" |
 		"single_line_mode" |
 		"text" |
 		"use_markup">;
@@ -15945,16 +15901,14 @@ declare namespace imports.gi.Clutter {
 		connect(signal: "inserted-text", callback: (owner: this, position: number, chars: string, n_chars: number) => void): number;
 
 		connect(signal: "notify::length", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::max_length", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::max-length", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::text", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type TextBufferInitOptionsMixin = GObject.ObjectInitOptions & 
 	Pick<ITextBuffer,
-		"length" |
-		"max_length" |
-		"text">;
+		"max_length">;
 
 	export interface TextBufferInitOptions extends TextBufferInitOptionsMixin {}
 
@@ -16428,18 +16382,18 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "size-change", callback: (owner: this, width: number, height: number) => void): number;
 
-		connect(signal: "notify::cogl_material", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::cogl_texture", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::disable_slicing", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cogl-material", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::cogl-texture", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::disable-slicing", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::filename", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::filter_quality", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::keep_aspect_ratio", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pick_with_alpha", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::pixel_format", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::repeat_x", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::repeat_y", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::sync_size", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::tile_waste", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::filter-quality", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::keep-aspect-ratio", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pick-with-alpha", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::pixel-format", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::repeat-x", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::repeat-y", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::sync-size", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::tile-waste", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -16452,11 +16406,9 @@ declare namespace imports.gi.Clutter {
 		"filter_quality" |
 		"keep_aspect_ratio" |
 		"pick_with_alpha" |
-		"pixel_format" |
 		"repeat_x" |
 		"repeat_y" |
-		"sync_size" |
-		"tile_waste">;
+		"sync_size">;
 
 	export interface TextureInitOptions extends TextureInitOptionsMixin {}
 
@@ -17107,13 +17059,13 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "stopped", callback: (owner: this, is_finished: boolean) => void): number;
 
-		connect(signal: "notify::auto_reverse", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::auto-reverse", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::delay", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::direction", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::duration", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::loop", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::progress_mode", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::repeat_count", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::progress-mode", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::repeat-count", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -17292,7 +17244,7 @@ declare namespace imports.gi.Clutter {
 		set_to_value(value: GObject.Value): void;
 		connect(signal: "notify::animatable", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::interval", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::remove_on_complete", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::remove-on-complete", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -17424,7 +17376,7 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "zoom", callback: (owner: this, actor: Actor, focal_point: Point, factor: number) => boolean): number;
 
-		connect(signal: "notify::zoom_axis", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::zoom-axis", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
@@ -20238,23 +20190,20 @@ declare namespace imports.gi.Clutter {
 		 */
 		connect(signal: "error", callback: (owner: this, error: GLib.Error) => void): number;
 
-		connect(signal: "notify::audio_volume", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::buffer_fill", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::can_seek", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::audio-volume", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::buffer-fill", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::can-seek", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::duration", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::playing", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::progress", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::subtitle_font_name", callback: (owner: this, ...args: any) => void): number;
-		connect(signal: "notify::subtitle_uri", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle-font-name", callback: (owner: this, ...args: any) => void): number;
+		connect(signal: "notify::subtitle-uri", callback: (owner: this, ...args: any) => void): number;
 		connect(signal: "notify::uri", callback: (owner: this, ...args: any) => void): number;
 
 	}
 
 	type MediaInitOptionsMixin = Pick<IMedia,
 		"audio_volume" |
-		"buffer_fill" |
-		"can_seek" |
-		"duration" |
 		"playing" |
 		"progress" |
 		"subtitle_font_name" |
