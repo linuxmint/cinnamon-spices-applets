@@ -228,7 +228,7 @@ class BookmarksManager {
             readChromiumBookmarks(bookmarks, ['vivaldi', 'Default', 'Bookmarks'], 'vivaldi-stable'),
             readChromiumBookmarks(bookmarks, ['BraveSoftware', 'Brave-Browser', 'Default', 'Bookmarks'],
                                                                                             'brave-browser'),
-            readChromiumBookmarks(bookmarks, ['microsoft-edge', 'Default', 'Bookmarks'], 'microsoft-edge'),
+            readChromiumBookmarks(bookmarks, ['microsoft-edge', 'Default', 'Bookmarks'], 'microsoft-edge')
         ]).then(() => {
             bookmarks = bookmarks.concat(readFirefoxProfiles());
 
