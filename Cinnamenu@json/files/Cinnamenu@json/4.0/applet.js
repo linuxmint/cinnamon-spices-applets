@@ -554,6 +554,8 @@ class CinnamenuApplet extends TextIconApplet {
         let menuWidth = Math.max(minMenuWidth, newWidth);
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
+        this.appsView.officialGridBoxWidth = menuWidth - leftSideWidth; //because subseqentially retrived
+        //applicationsGridBox.width is unreliable.
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.resizer.resizingInProgress) {

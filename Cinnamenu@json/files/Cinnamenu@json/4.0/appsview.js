@@ -527,7 +527,7 @@ class AppsView {
     }
 
     getGridValues() {
-        const appsBoxWidth = this.applicationsGridBox.width;
+        const appsBoxWidth = this.officialGridBoxWidth;
         const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
         const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
         const columnWidth = Math.floor(appsBoxWidth / columns);
