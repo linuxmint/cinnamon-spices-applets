@@ -9,7 +9,6 @@ const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
-const {getDocManager} = imports.misc.docInfo;
 //const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popupMenu;
@@ -47,7 +46,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.currentCategory = 'all';
         this.gpu_offload_supported = Main.gpu_offload_supported;
         this.isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
-        this.recentManager = getDocManager();
+        this.recentManagerDefault = Gtk.RecentManager.get_default();
         this.closeMenu = () => this.menu.close();
         this.orientation = orientation;
         this.menuManager = new PopupMenuManager(this);
@@ -555,6 +554,8 @@ class CinnamenuApplet extends TextIconApplet {
         let menuWidth = Math.max(minMenuWidth, newWidth);
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
+        this.appsView.officialGridBoxWidth = menuWidth - leftSideWidth; //because subseqentially retrived
+        //applicationsGridBox.width is unreliable.
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.resizer.resizingInProgress) {
@@ -727,10 +728,15 @@ class CinnamenuApplet extends TextIconApplet {
                         appButtons[0].handleEnter();
                     }
                 } else {//grid view
-                    if (appButtons[enteredAppItemIndex + this.appsView.getGridValues().columns]) {
-                        appButtons[enteredAppItemIndex + this.appsView.getGridValues().columns].handleEnter();
+                    if (appButtons[enteredAppItemIndex + 1]) {
+                        const column = appButtons[enteredAppItemIndex].actor.layout_column;
+                        let next = enteredAppItemIndex + 1;
+                        while (appButtons[next].actor.layout_column != column && appButtons[next + 1]) {
+                            next++;
+                        }
+                        appButtons[next].handleEnter();
                     } else {
-                        appButtons[appButtons.length - 1].handleEnter();
+                        appButtons[enteredAppItemIndex].handleEnter();//effectively no change
                     }
                 }
             } else if (enteredSidebarItemExists) {
@@ -768,10 +774,15 @@ class CinnamenuApplet extends TextIconApplet {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 } else {
-                    if (appButtons[enteredAppItemIndex - this.appsView.getGridValues().columns]) {
-                        appButtons[enteredAppItemIndex - this.appsView.getGridValues().columns].handleEnter();
+                    if (enteredAppItemIndex > 0) {
+                        const column = appButtons[enteredAppItemIndex].actor.layout_column;
+                        let previous = enteredAppItemIndex - 1;
+                        while (appButtons[previous].actor.layout_column != column && previous > 0) {
+                            previous--;
+                        }
+                        appButtons[previous].handleEnter();
                     } else {
-                        appButtons[0].handleEnter();
+                        appButtons[0].handleEnter();//effectively no change
                     }
                 }
             } else if (enteredSidebarItemExists) {
@@ -901,10 +912,44 @@ class CinnamenuApplet extends TextIconApplet {
             this.appsView.populate(this.listPlaces());
             break;
         case 'recents':
-            const recents = this.listRecent();
-            if (recents.length > 0) {
-                this.appsView.populate(recents);
-            } else {
+            let maxItems = 10;//show 10 items in list view
+            if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
+                const columns = this.appsView.getGridValues().columns;
+                if (columns <= 4) {
+                    maxItems = columns * 3;
+                } else {
+                    maxItems = columns * 2;
+                }
+            }
+
+            this.appsView.populate_init();
+            const recentApps = this.listRecent_apps();
+            if (recentApps.length > 0) {
+                this.appsView.populate_add(recentApps,_('Applications'));
+            }
+            const recentDocs = this.listRecentByType('documents', maxItems);
+            if (recentDocs.length > 0) {
+                this.appsView.populate_add(recentDocs,_('Documents'));
+            }
+            const recentVids = this.listRecentByType('video', maxItems);
+            if (recentVids.length > 0) {
+                this.appsView.populate_add(recentVids,_('Videos'));
+            }
+            const recentPics = this.listRecentByType('image', maxItems);
+            if (recentPics.length > 0) {
+                this.appsView.populate_add(recentPics,_('Images'));
+            }
+            const recentAudio = this.listRecentByType('audio', maxItems);
+            if (recentAudio.length > 0) {
+                this.appsView.populate_add(recentAudio,_('Music'));
+            }
+            const totalItems = recentApps.length + recentDocs.length + recentVids.length +
+                                                                recentPics.length + recentAudio.length;
+            if (totalItems > 0) {
+                this.appsView.populate_add(this.getClearRecentsButton());
+            }
+            this.appsView.populate_finish();
+            if (totalItems == 0) {
                 this.appsView.populate([], _('No recent Items'));
             }
             break;
@@ -981,7 +1026,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         let primaryResults = this.apps.listApplications('all', pattern)
                         .concat(this.listFavoriteFiles(pattern))
-                        .concat(this.recentsEnabled ? this.listRecent(pattern) : [])
+                        .concat(this.recentsEnabled ? this.searchRecent(pattern) : [])
                         .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
         let otherResults = [];
 
@@ -1071,7 +1116,14 @@ class CinnamenuApplet extends TextIconApplet {
             }
 
             //Display results
-            this.appsView.populate(primaryResults.concat(otherResults), calculatorResult);
+            this.appsView.populate_init(calculatorResult);
+            if (primaryResults.length > 0) {
+                this.appsView.populate_add(primaryResults, _('Applications and files'));
+            }
+            if (otherResults.length > 0) {
+                this.appsView.populate_add(otherResults, _('Other search results'));
+            }
+            this.appsView.populate_finish();
             this.appsView.highlightFirstItem();
 
             //In case mouse is hovering a different item (thus selecting it) ensure first result
@@ -1463,68 +1515,85 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listRecent(pattern) {
-        let res = [];
-        //------add recent apps (but not when searching)
-        if (!pattern) {
-            this.recentApps.getApps().forEach(recentId => {
-                const app = this.apps.listApplications('all').find(app => app.id === recentId);
-                if (app) {//Check because app may have been uninstalled
-                    res.push(app);
-                }
-            });
-        }
+    searchRecent(pattern) {
+        const res = [];
 
-        //-----add recent files
-        let {_infosByTimestamp} = this.recentManager;
-        //_infosByTimestamp doesn't update synchronously so _infosByTimestamp may not be cleared even
-        //if user has just cleared them.
-        if (this.recentsJustCleared) {
-            _infosByTimestamp = [];
-            this.recentsJustCleared = false;
-        }
-        _infosByTimestamp.forEach(recentInfo => {
-            const file = Gio.File.new_for_uri(recentInfo.uri);
-            if (!file || !file.query_exists(null)) {
-                return;
-            }
-            const found = this.appsView.buttonStore.find(button =>
-                                            button.app.isRecentFile && button.app.uri === recentInfo.uri);
-            if (found) {
-                res.push(found.app);
-            } else {
-                recentInfo.description = Gio.File.new_for_uri(recentInfo.uri).get_path();
-                recentInfo.isRecentFile = true;
-                res.push(recentInfo);
+        this.listRecentByType('all', 100).forEach(recentItem => {
+            const match = searchStr(pattern, recentItem.name);
+            if (recentItem.name && match.score > SEARCH_THRESHOLD) {
+                recentItem.score = match.score;
+                recentItem.nameWithSearchMarkup = match.result;
+                res.push(recentItem);
             }
         });
-        //----add "Clear list" button
-        if (res.length > 0  && !pattern) {
-            const clearRecentsButton = this.appsView.buttonStore.find(button => button.app.isClearRecentsButton);
-            if (clearRecentsButton) {
-                res.push(clearRecentsButton.app);
-            } else {
-                res.push( { name: _('Clear List'),
-                            description: '',
-                            icon: new St.Icon({ icon_name: 'edit-clear',
-                                                icon_type: St.IconType.SYMBOLIC,
-                                                icon_size: this.getAppIconSize()}),
-                            isClearRecentsButton: true });
+
+        return res;
+    }
+
+    listRecent_apps() {
+        const res = [];
+
+        this.recentApps.getApps().forEach(recentId => {
+            const app = this.apps.listApplications('all').find(app => app.id === recentId);
+            if (app) {//Check because app may have been uninstalled
+                res.push(app);
             }
+        });
+
+        return res;
+    }
+
+    listRecentByType(type, maxItems) {
+        //param "type" is one of all|documents|video|image|audio.
+        const res = [];
+        this.recentManagerDefault.get_items().forEach(recentInfo => {
+            if (type === 'documents' && !(  recentInfo.get_mime_type().startsWith('application') ||
+                                            recentInfo.get_mime_type().startsWith('text') ||
+                                            recentInfo.get_mime_type().startsWith('inode'))) {
+                return;
+            }
+            if ((type === 'video' || type === 'image' || type === 'audio') &&
+                                                        !recentInfo.get_mime_type().startsWith(type)) {
+                return;
+            }
+            if (!recentInfo.exists()) {
+                return;
+            }
+
+            const new_recent = {
+                name: recentInfo.get_display_name(),
+                gicon: recentInfo.get_gicon(),
+                uri: recentInfo.get_uri(),
+                mimeType: recentInfo.get_mime_type(),
+                description: recentInfo.get_uri_display(),
+                modifiedTime: recentInfo.get_modified(),//only used for sorting below
+                isRecentFile: true,
+                deleteAfterUse: true
+            };
+            res.push(new_recent);
+        });
+        res.sort((a, b) =>  a.modifiedTime < b.modifiedTime);
+        if (res.length > maxItems) {
+            res.length = maxItems;
+        }
+        return res;
+    }
+
+    getClearRecentsButton() {
+        let res = [];
+
+        const clearRecentsButton = this.appsView.buttonStore.find(button => button.app.isClearRecentsButton);
+        if (clearRecentsButton) {
+            res.push(clearRecentsButton.app);
+        } else {
+            res.push( { name: _('Clear List'),
+                        description: '',
+                        icon: new St.Icon({ icon_name: 'edit-clear',
+                                            icon_type: St.IconType.SYMBOLIC,
+                                            icon_size: this.getAppIconSize()}),
+                        isClearRecentsButton: true });
         }
 
-        if (pattern) {
-            const _res = [];
-            res.forEach(recentItem => {
-                const match = searchStr(pattern, recentItem.name);
-                if (recentItem.name && match.score > SEARCH_THRESHOLD) {
-                    recentItem.score = match.score;
-                    recentItem.nameWithSearchMarkup = match.result;
-                    _res.push(recentItem);
-                }
-            });
-            res = _res;
-        }
         return res;
     }
 
@@ -1820,8 +1889,8 @@ class RecentApps {// simple class to remember the last 3 used apps which are sho
             recentApps.splice(duplicate,1);
         }
         recentApps.unshift(appId);
-        if (recentApps.length > 3) {
-            recentApps.length = 3;
+        if (recentApps.length > 4) {
+            recentApps.length = 4;
         }
         this.appThis.settings.recentApps = recentApps;
     }

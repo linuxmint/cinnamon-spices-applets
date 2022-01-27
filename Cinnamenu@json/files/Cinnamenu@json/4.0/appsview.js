@@ -307,8 +307,7 @@ class AppButton {
             }
         } else if (this.app.isClearRecentsButton) {
             this.appThis.recentApps.clear();
-            Gtk.RecentManager.get_default().purge_items();
-            this.appThis.recentsJustCleared = true;
+            this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
             //don't closeMenu
         } else if (this.app.isSearchResult) {
@@ -389,16 +388,21 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
-        this.applicationsListBox.hide();//hide while populating for performance.
-        this.applicationsGridBox.hide();//
-
-        this.clearApps();
-
         //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
         if (appList.length > 1000) {
             appList.length = 1000; //truncate array
             headerText = _('Too many entries - showing first 1000 entries only');
         }
+        this.populate_init(headerText);
+        this.populate_add(appList, null);
+        this.populate_finish();
+    }
+
+    populate_init(headerText = null) {
+        this.applicationsListBox.hide();//hide while populating for performance.
+        this.applicationsGridBox.hide();//
+
+        this.clearApps();
 
         if (headerText) {
             this.headerText.set_text(headerText);
@@ -407,8 +411,30 @@ class AppsView {
             this.headerText.hide();
         }
 
-        let column = 0;
-        let rownum = 0;
+        this.column = 0;
+        this.rownum = 0;
+    }
+
+    populate_add(appList, subheadingText = null) {
+        if (subheadingText) {
+            if (this.column !== 0) {
+                this.column = 0;
+                this.rownum++;
+            }
+            const subheading = new St.Label({ x_expand: true, style_class: 'menu-applications-subheading' });
+            const subheadingBox = new St.BoxLayout({});
+            subheadingBox.add(subheading, { });
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                this.applicationsListBox.add(subheadingBox);
+            } else {
+                const gridLayout = this.applicationsGridBox.layout_manager;
+                gridLayout.attach(subheadingBox, this.column, this.rownum, this.getGridValues().columns, 1);
+                this.rownum++;
+            }
+            subheading.set_text(subheadingText);
+            subheadingBox.show();
+        }
+
         appList.forEach(app => {
             let appButton = this.buttonStore.find(button => button.app === app);
 
@@ -421,16 +447,19 @@ class AppsView {
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
                 appButton.setGridButtonWidth();// In case menu has been resized.
-                gridLayout.attach(appButton.actor, column, rownum, 1, 1);
-                column++;
+                gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
+                appButton.actor.layout_column = this.column;//used for key navigation
+                this.column++;
 
-                if (column > this.getGridValues().columns - 1) {
-                    column = 0;
-                    rownum++;
+                if (this.column > this.getGridValues().columns - 1) {
+                    this.column = 0;
+                    this.rownum++;
                 }
             }
         });
+    }
 
+    populate_finish() {
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.applicationsListBox.show();
         } else {
@@ -456,9 +485,14 @@ class AppsView {
         const newcolumnCount = this.getGridValues().columns;
         if (this.currentGridViewColumnCount === newcolumnCount) {
             //Number of columns are the same so just adjust button widths only.
-            this.applicationsGridBox.get_children().forEach(actor =>
-                                                    actor.width = this.getGridValues().columnWidth );
+            this.applicationsGridBox.get_children().forEach(actor => {
+                            if (actor.has_style_class_name('menu-application-button') ||
+                                actor.has_style_class_name('menu-application-button-selected')) {
+                                actor.width = this.getGridValues().columnWidth;
+                            }
+                         });
         } else {//Rearrange buttons to fit new number of columns.
+            this.applicationsGridBox.hide();//
             const buttons = this.applicationsGridBox.get_children();
             this.applicationsGridBox.remove_all_children();
             let column = 0;
@@ -466,14 +500,26 @@ class AppsView {
             const gridLayout = this.applicationsGridBox.layout_manager;
             const newColumnWidth = this.getGridValues().columnWidth;
             buttons.forEach(actor => {
-                actor.width = newColumnWidth;
-                gridLayout.attach(actor, column, rownum, 1, 1);
-                column++;
-                if (column > newcolumnCount - 1) {
-                    column = 0;
+                if (actor.has_style_class_name('menu-application-button') ||
+                    actor.has_style_class_name('menu-application-button-selected')) {
+                    actor.width = newColumnWidth;
+                    gridLayout.attach(actor, column, rownum, 1, 1);
+                    actor.layout_column = column;//used for key navigation
+                    column++;
+                    if (column > newcolumnCount - 1) {
+                        column = 0;
+                        rownum++;
+                    }
+                } else { //subheading label
+                    if (column !== 0) {
+                        column = 0;
+                        rownum++;
+                    }
+                    gridLayout.attach(actor, column, rownum, newcolumnCount, 1);
                     rownum++;
                 }
             });
+            this.applicationsGridBox.show();
         }
 
         this.applicationsGridBox.show();
@@ -481,7 +527,7 @@ class AppsView {
     }
 
     getGridValues() {
-        const appsBoxWidth = this.applicationsGridBox.width;
+        const appsBoxWidth = this.officialGridBoxWidth;
         const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
         const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
         const columnWidth = Math.floor(appsBoxWidth / columns);
@@ -490,14 +536,27 @@ class AppsView {
     }
 
     getActiveButtons() {
-        const buttons = [];
-        this.getActiveContainer().get_children().forEach(child =>
-            buttons.push(this.buttonStore.find(button => button.actor === child) ));
-        return buttons;
+        const activeButtons = [];
+        this.getActiveContainer().get_children().forEach(child => {
+            const foundButton = this.buttonStore.find(button => button.actor === child);
+            if (foundButton) {
+                activeButtons.push(foundButton);
+            }
+        });
+        return activeButtons;
     }
 
     clearApps() {
         this.clearAppsViewEnteredActors();
+
+        //destroy subheading labels
+        this.getActiveContainer().get_children().forEach(actor => {
+                    if (!(  actor.has_style_class_name('menu-application-button') ||
+                            actor.has_style_class_name('menu-application-button-selected'))) {
+                        actor.destroy();
+                    }
+                 });
+
         this.getActiveContainer().remove_all_children();
     }
 

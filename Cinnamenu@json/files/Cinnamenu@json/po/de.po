@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-22 07:17+0100\n"
-"PO-Revision-Date: 2021-08-25 20:45+0200\n"
+"POT-Creation-Date: 2021-12-18 21:43+0000\n"
+"PO-Revision-Date: 2022-01-20 15:42+0000\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -17,98 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 
-msgid "Type to search..."
-msgstr "Suchbegriff eingeben …"
-
 msgid "Initializing"
 msgstr "Initialisiere"
-
-msgid "No description available"
-msgstr "Keine Beschreibung verfügbar"
-
-msgid "All applications"
-msgstr "Alle Apps"
-
-msgid "Places"
-msgstr "Orte"
-
-msgid "Recent files"
-msgstr "Kürzlich verwendete Dateien oder Apps"
-
-msgid "Bookmarks"
-msgstr "Lesezeichen"
-
-msgid "Favorite apps"
-msgstr "Bevorzugte Apps"
-
-msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich."
-
-msgid "Clear List"
-msgstr "Liste leeren"
-
-msgid "No recent files"
-msgstr "Keine kürzlich verwendeten Dateien oder Apps"
-
-msgid "Account details"
-msgstr "Kontodetails"
-
-msgid "Grid View"
-msgstr "Rasteransicht"
-
-msgid "List View"
-msgstr "Listenansicht"
-
-msgid "Switch to grid view"
-msgstr "Zur Rasteransicht wechseln"
-
-msgid "Switch to list view"
-msgstr "Zur Listenansicht wechseln"
-
-msgid "Lock screen"
-msgstr "Bildschirmsperre"
-
-msgid "Lock the screen"
-msgstr "Den Bildschirm sperren"
-
-msgid "Logout"
-msgstr "Abmelden"
-
-msgid "Leave the session"
-msgstr "Die Sitzung verlassen"
-
-msgid "Quit"
-msgstr "Beenden"
-
-msgid "Shutdown the computer"
-msgstr "Den PC herunterfahren"
-
-msgid "Run with NVIDIA GPU"
-msgstr "Mit NVIDIA-Grafikkarte ausführen"
-
-msgid "Add to panel"
-msgstr "Zur Leiste hinzufügen"
-
-msgid "Add to desktop"
-msgstr "Zum Schreibtisch hinzufügen"
-
-msgid "Remove from favorites"
-msgstr "Von den Favoriten entfernen"
-
-msgid "Add to favorites"
-msgstr "Zu den Favoriten hinzufügen"
-
-msgid "Uninstall"
-msgstr "Deinstallieren"
-
-msgid "Home"
-msgstr "Persönlicher Ordner"
-
-msgid "Computer"
-msgstr "Computer"
-
-msgid "Browse network"
-msgstr "Im Netz suchen"
 
 msgid "Find files..."
 msgstr "Dateien finden …"
@@ -122,20 +32,50 @@ msgstr "Keine kürzlich verwendeten Dateien oder Apps"
 msgid "Click to copy"
 msgstr "Linksklick zum Kopieren"
 
+msgid "Clear List"
+msgstr "Liste leeren"
+
 msgid "Trash"
 msgstr "Papierkorb"
+
+msgid "All applications"
+msgstr "Alle Apps"
 
 msgid "Favorites"
 msgstr "Favoriten"
 
+msgid "Places"
+msgstr "Orte"
+
 msgid "Recent"
 msgstr "Kürzlich"
+
+msgid "Favorite apps"
+msgstr "Bevorzugte Apps"
 
 msgid "Home folder"
 msgstr "Persönlicher Ordner"
 
 msgid "Too many entries - showing first 1000 entries only"
 msgstr "Zu viele Ergebnisse - nur die ersten 1.000 Einträge werden angezeigt"
+
+msgid "Quit"
+msgstr "Beenden"
+
+msgid "Shutdown the computer"
+msgstr "Den PC herunterfahren"
+
+msgid "Logout"
+msgstr "Abmelden"
+
+msgid "Leave the session"
+msgstr "Die Sitzung verlassen"
+
+msgid "Lock screen"
+msgstr "Bildschirmsperre"
+
+msgid "Lock the screen"
+msgstr "Den Bildschirm sperren"
 
 msgid "Reset category order"
 msgstr "Kategorie-Reihenfolge zurücksetzen"
@@ -154,6 +94,24 @@ msgstr "Mitteldunkler Ton"
 
 msgid "dark skin tone"
 msgstr "Dunkler Ton"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Mit NVIDIA-Grafikkarte ausführen"
+
+msgid "Add to panel"
+msgstr "Zur Leiste hinzufügen"
+
+msgid "Add to desktop"
+msgstr "Zum Schreibtisch hinzufügen"
+
+msgid "Remove from favorites"
+msgstr "Von den Favoriten entfernen"
+
+msgid "Add to favorites"
+msgstr "Zu den Favoriten hinzufügen"
+
+msgid "Uninstall"
+msgstr "Deinstallieren"
 
 msgid "This file is no longer available"
 msgstr "Diese Datei ist nicht mehr verfügbar"
@@ -175,6 +133,67 @@ msgstr "Fehler beim Verschieben der Datei in den Papierkorb:"
 
 msgid "Error while opening file:"
 msgstr "Fehler beim Öffnen der Datei:"
+
+msgid "Type to search..."
+msgstr "Suchbegriff eingeben …"
+
+msgid "No description available"
+msgstr "Keine Beschreibung verfügbar"
+
+msgid "Recent files"
+msgstr "Kürzlich verwendete Dateien oder Apps"
+
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich."
+
+msgid "No recent files"
+msgstr "Keine kürzlich verwendeten Dateien oder Apps"
+
+msgid "Account details"
+msgstr "Kontodetails"
+
+msgid "Grid View"
+msgstr "Rasteransicht"
+
+msgid "List View"
+msgstr "Listenansicht"
+
+msgid "Switch to grid view"
+msgstr "Zur Rasteransicht wechseln"
+
+msgid "Switch to list view"
+msgstr "Zur Listenansicht wechseln"
+
+msgid "Home"
+msgstr "Persönlicher Ordner"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Browse network"
+msgstr "Im Netz suchen"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr ""
 
 msgid "Open"
 msgstr "Öffnen"
@@ -237,26 +256,14 @@ msgstr ""
 "Ein flexibles Menü mit zahlreichen Formatierungsoptionen, Datei-Browser, "
 "Zugang zu Suchmaschinen sowie Suche unter ähnlichen Begriffen."
 
+msgid "Layout and Content"
+msgstr "Layout und Inhalte"
+
 msgid "Behavior"
 msgstr "Verhalten"
 
 msgid "Appearance"
 msgstr "Erscheinungsbild"
-
-msgid "Layout and Content"
-msgstr "Layout und Inhalte"
-
-msgid "Search Providers"
-msgstr "Suchmaschinen-Anbieter"
-
-msgid "No search provider extensions found"
-msgstr "Keine Erweiterungen für Suchmaschinen-Anbieter gefunden"
-
-msgid "Panel"
-msgstr "Leiste"
-
-msgid "Menu"
-msgstr "Menü"
 
 msgid "Layout"
 msgstr "Layout"
@@ -264,140 +271,20 @@ msgstr "Layout"
 msgid "Content"
 msgstr "Inhalte"
 
-msgid "Recent files settings"
-msgstr "Einstellungen für kürzlich verwendete Dateien und Apps"
+msgid "Panel"
+msgstr "Leiste"
 
-msgid "Open the menu editor"
-msgstr "Menüeditor öffnen"
+msgid "Menu"
+msgstr "Menü"
 
-msgid "Use a custom icon"
-msgstr "Ein benutzerdefiniertes Symbol verwenden"
-
-msgid "Use a custom icon in the panel"
-msgstr "Ein benutzerdefiniertes Symbol für Cinnamenu verwenden"
-
-msgid "Panel icon"
-msgstr "Symbol für Cinnamenu"
-
-msgid "Panel text"
-msgstr "Text neben der Menü-Schaltfläche"
-
-msgid "Text to show beside the panel icon"
-msgstr "Text neben dem Symbol von Cinnamenu"
-
-msgid "Category icon size (pixels)"
-msgstr "Symbolgröße für die Kategorien (Pixel)"
-
-msgid "Applications list icon size (pixels)"
-msgstr "Symbolgröße bei Anzeige der Apps in einer Liste (Pixel)"
-
-msgid "Applications grid icon size (pixels)"
-msgstr "Symbolgröße bei Anzeige der Apps in einem Raster (Pixel)"
-
-msgid "Keyboard shortcut to open and close the menu"
-msgstr "Tastenkombination zum Öffnen und Schließen des Menüs"
-
-msgid "Open menu on hover"
-msgstr "Menü durch Mausbewegung öffnen"
-
-msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Das Menü öffnen, wenn der Mauszeiger das Symbol von Cinnamenu berührt"
-
-msgid "milliseconds"
-msgstr "Millisekunden"
-
-msgid "Menu hover delay"
-msgstr "Verzögerung bis zum Öffnen des Menüs"
-
-msgid "Use menu animations"
-msgstr "Menü animieren"
-
-msgid "Animate the menu on open and close"
-msgstr "Das Menü beim Öffnen und Schließen animieren"
-
-msgid "Activate categories on click"
-msgstr "Kategorien durch Linksklick öffnen"
-
-msgid "Activate categories on click instead of on hover"
-msgstr ""
-"Kategorien durch Linksklick statt durch Berührung mit dem Mauszeiger öffnen"
-
-msgid "Enable autoscrolling"
-msgstr "Automatischer Bildlauf"
-
-msgid "Enable autoscrolling in application list"
-msgstr "Automatischen Bildlauf in der Listen- bzw. Rasteransicht aktivieren"
-
-msgid "Show web bookmarks"
-msgstr "Web-Lesezeichen als Kategorie anzeigen"
-
-msgid ""
-"Show your browser's web bookmarks in the menu.\n"
-"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
-msgstr ""
-"Die Web-Lesezeichen des Browsers im Menü anzeigen.\n"
-"Hinweis: Das Paket »gir1.2-gda-5.0« installieren, um Firefox-Lesezeichen "
-"anzuzeigen."
-
-msgid "Enable searching of open windows"
-msgstr "Suche in offenen Fenstern ermöglichen"
-
-msgid "Enable search providers"
-msgstr "Suchmaschinen anzeigen"
-
-msgid "Include search provider results in searches"
-msgstr "Ergebnisse der Internetsuche zu den Suchergebnissen hinzufügen"
-
-msgid "Example Search Providers"
-msgstr "Beispiel zur Einbindung eines Suchmaschinenanbieters"
-
-msgid "Open menu on category:"
-msgstr "Menü öffnen mit Kategorie"
+msgid "Applications view mode"
+msgstr "Art der Anzeige für App-Symbole"
 
 msgid "List"
 msgstr "Liste"
 
 msgid "Grid"
 msgstr "Raster"
-
-msgid "Always open the menu with this category selected"
-msgstr "Beim Öffnen des Menüs die Apps der gewählten Kategorie anzeigen"
-
-msgid "columns"
-msgstr "Spalten"
-
-msgid "Number of columns in apps grid"
-msgstr "Anzahl an Spalten bei Anzeige der Apps in einem Raster"
-
-msgid "Show bookmarks and places"
-msgstr "Kategorie »Orte« anzeigen"
-
-msgid "Show bookmarks and places category in the menu"
-msgstr "Orte als Kategorie anzeigen"
-
-msgid "Show application icons"
-msgstr "App-Symbole anzeigen"
-
-msgid "Show category icons"
-msgstr "Kategoriesymbole anzeigen"
-
-msgid "Show application descriptions under titles"
-msgstr "App-Beschreibungen unter den App-Namen anzeigen"
-
-msgid "Show tooltips"
-msgstr "Tipps zu Funktionalitäten anzeigen"
-
-msgid "Tooltip delay"
-msgstr "Verzögerung der Anzeige eines Tipps"
-
-msgid "Use a custom menu height"
-msgstr "Benutzerdefinierte Menü-Höhe einstellen"
-
-msgid "Custom menu height (pixels)"
-msgstr "Benutzerdefinierte Menü-Höhe (Pixel)"
-
-msgid "Applications view mode"
-msgstr "Art der Anzeige für App-Symbole"
 
 msgid "View applications as list or grid"
 msgstr "App-Symbole in einer Liste oder einem Raster anzeigen"
@@ -450,6 +337,12 @@ msgstr "Favoriten zur Seitenleiste hinzufügen"
 msgid "Show your favorite app and file icons on the sidebar"
 msgstr "Favoriten in der Seitenleiste anzeigen"
 
+msgid "Show bookmarks and places"
+msgstr "Kategorie »Orte« anzeigen"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Orte als Kategorie anzeigen"
+
 msgid "Show recent items"
 msgstr "Kategorie »Kürzlich« anzeigen"
 
@@ -469,8 +362,48 @@ msgstr "Kategorie »Persönlicher Ordner« anzeigen"
 msgid "Show home folder category in the menu"
 msgstr "Kategorie »Persönlicher Ordner« im Menü anzeigen"
 
+msgid "Open the menu editor"
+msgstr "Menüeditor öffnen"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastenkombination zum Öffnen und Schließen des Menüs"
+
+msgid "Open menu on hover"
+msgstr "Menü durch Mausbewegung öffnen"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Das Menü öffnen, wenn der Mauszeiger das Symbol von Cinnamenu berührt"
+
+msgid "milliseconds"
+msgstr "Millisekunden"
+
+msgid "Menu hover delay"
+msgstr "Verzögerung bis zum Öffnen des Menüs"
+
+msgid "Use menu animations"
+msgstr "Menü animieren"
+
+msgid "Animate the menu on open and close"
+msgstr "Das Menü beim Öffnen und Schließen animieren"
+
+msgid "Activate categories on click"
+msgstr "Kategorien durch Linksklick öffnen"
+
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+"Kategorien durch Linksklick statt durch Berührung mit dem Mauszeiger öffnen"
+
+msgid "Open menu on category:"
+msgstr "Menü öffnen mit Kategorie"
+
+msgid "Always open the menu with this category selected"
+msgstr "Beim Öffnen des Menüs die Apps der gewählten Kategorie anzeigen"
+
 msgid "Last used category"
 msgstr "Vorherige Kategorie"
+
+msgid "Enable autoscrolling"
+msgstr "Automatischer Bildlauf"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatischen Bildlauf im Bereich mit den Apps aktivieren"
@@ -525,6 +458,15 @@ msgstr "Ergebnisse der Wikipedia-Suche anzeigen"
 msgid "Wikipedia language"
 msgstr "Wikipedia-Sprache"
 
+msgid "Use a custom icon"
+msgstr "Ein benutzerdefiniertes Symbol verwenden"
+
+msgid "Use a custom icon in the panel"
+msgstr "Ein benutzerdefiniertes Symbol für Cinnamenu verwenden"
+
+msgid "Panel icon"
+msgstr "Symbol für Cinnamenu"
+
 msgid "Use a custom icon size"
 msgstr "Eine benutzerdefinierte Symbolgröße verwenden"
 
@@ -538,6 +480,21 @@ msgstr "Größe des Leistensymbols (Pixel)"
 msgid "Choose a custom size for the panel icon"
 msgstr ""
 "Eine benutzerdefinierte Größe für das Leistensymbol von Cinnamenu auswählen"
+
+msgid "Panel text"
+msgstr "Text neben der Menü-Schaltfläche"
+
+msgid "Text to show beside the panel icon"
+msgstr "Text neben dem Symbol von Cinnamenu"
+
+msgid "Category icon size (pixels)"
+msgstr "Symbolgröße für die Kategorien (Pixel)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Symbolgröße bei Anzeige der Apps in einer Liste (Pixel)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Symbolgröße bei Anzeige der Apps in einem Raster (Pixel)"
 
 msgid "Sidebar icon size (pixels)"
 msgstr "Größe der Symbole in der Seitenleiste (Pixel)"
@@ -558,44 +515,64 @@ msgstr ""
 "App-Symbole in Kacheln anzeigen (Hinweis: Kann bei manchen Themen nicht "
 "funktionieren)"
 
-#~ msgid "Google"
-#~ msgstr "Google"
+msgid "Search Providers"
+msgstr "Suchmaschinen-Anbieter"
 
-#~ msgid "Bing"
-#~ msgstr "Bing"
+msgid "No search provider extensions found"
+msgstr "Keine Erweiterungen für Suchmaschinen-Anbieter gefunden"
 
-#~ msgid "Baidu"
-#~ msgstr "Baidu"
+msgid "Recent files settings"
+msgstr "Einstellungen für kürzlich verwendete Dateien und Apps"
 
-#~ msgid "Yahoo"
-#~ msgstr "Yahoo"
+msgid "Enable autoscrolling in application list"
+msgstr "Automatischen Bildlauf in der Listen- bzw. Rasteransicht aktivieren"
 
-#~ msgid "Yandex"
-#~ msgstr "Yandex"
+msgid "Show web bookmarks"
+msgstr "Web-Lesezeichen als Kategorie anzeigen"
 
-#~ msgid "DuckDuckGo"
-#~ msgstr "DuckDuckGo"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Die Web-Lesezeichen des Browsers im Menü anzeigen.\n"
+"Hinweis: Das Paket »gir1.2-gda-5.0« installieren, um Firefox-Lesezeichen "
+"anzuzeigen."
 
-#~ msgid "Ask"
-#~ msgstr "\"Ask\""
+msgid "Enable searching of open windows"
+msgstr "Suche in offenen Fenstern ermöglichen"
 
-#~ msgid "Ecosia"
-#~ msgstr "Ecosia"
+msgid "Enable search providers"
+msgstr "Suchmaschinen anzeigen"
 
-#~ msgid "AOL"
-#~ msgstr "AOL"
+msgid "Include search provider results in searches"
+msgstr "Ergebnisse der Internetsuche zu den Suchergebnissen hinzufügen"
 
-#~ msgid "Startpage"
-#~ msgstr "Startpage"
+msgid "Example Search Providers"
+msgstr "Beispiel zur Einbindung eines Suchmaschinenanbieters"
 
-#~ msgid "pixels"
-#~ msgstr "Pixel"
+msgid "columns"
+msgstr "Spalten"
 
-#~ msgid "Session buttons icon size"
-#~ msgstr "Symbolgröße für die Sitzungsschaltflächen"
+msgid "Number of columns in apps grid"
+msgstr "Anzahl an Spalten bei Anzeige der Apps in einem Raster"
 
-#~ msgid "Use session buttons box style"
-#~ msgstr "Sitzungsschaltflächen in einen viereckigen Bereich einbetten"
+msgid "Show application icons"
+msgstr "App-Symbole anzeigen"
 
-#~ msgid "Sidebar icon size"
-#~ msgstr "Größe der Icons in der Seitenleiste einstellen"
+msgid "Show category icons"
+msgstr "Kategoriesymbole anzeigen"
+
+msgid "Show application descriptions under titles"
+msgstr "App-Beschreibungen unter den App-Namen anzeigen"
+
+msgid "Show tooltips"
+msgstr "Tipps zu Funktionalitäten anzeigen"
+
+msgid "Tooltip delay"
+msgstr "Verzögerung der Anzeige eines Tipps"
+
+msgid "Use a custom menu height"
+msgstr "Benutzerdefinierte Menü-Höhe einstellen"
+
+msgid "Custom menu height (pixels)"
+msgstr "Benutzerdefinierte Menü-Höhe (Pixel)"
