@@ -71,7 +71,7 @@ export class AccuWeather extends BaseProvider {
         }
 
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails<CurrentPayload>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails<CurrentPayload[]>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
             this.app.LoadJsonAsyncWithDetails<DailyPayload>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
             this.app.LoadJsonAsyncWithDetails<HourlyPayload[]>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
         ])
@@ -87,7 +87,7 @@ export class AccuWeather extends BaseProvider {
 
         // Base 
         this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
-        return this.ParseWeather(current.Data, forecast.Data, hourly.Data, location);
+        return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
 
     public constructor(app: WeatherApplet) {

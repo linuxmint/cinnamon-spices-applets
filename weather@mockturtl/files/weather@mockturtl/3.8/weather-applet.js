@@ -13525,7 +13525,7 @@ class AccuWeather extends BaseProvider {
             return null;
         this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
         this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
-        return this.ParseWeather(current.Data, forecast.Data, hourly.Data, location);
+        return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
     SetTier(limit) {
         if (limit > 1800000)
@@ -14739,6 +14739,8 @@ class UIForecasts {
         try {
             if (!weather.forecasts)
                 return false;
+            if (this.forecasts.length > weather.forecasts.length)
+                this.Rebuild(this.app.config, this.app.config.textColorStyle, weather.forecasts.length);
             const len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
                 const forecastData = weather.forecasts[i];
@@ -14788,7 +14790,7 @@ class UIForecasts {
         }
     }
     ;
-    Rebuild(config, textColorStyle) {
+    Rebuild(config, textColorStyle, availableHours = null) {
         this.Destroy();
         this.forecasts = [];
         this.grid = new GridLayout({
@@ -14800,7 +14802,7 @@ class UIForecasts {
             style_class: STYLE_FORECAST_CONTAINER
         });
         this.actor.set_child(table);
-        const maxDays = this.app.GetMaxForecastDays();
+        const maxDays = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxForecastDays();
         let maxRow = config._forecastRows;
         let maxCol = config._forecastColumns;
         if (config._verticalOrientation) {
@@ -15172,7 +15174,11 @@ class UIBar {
         this._timestamp.text = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
+        let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+        if (provider.remainingCalls != null) {
+            creditLabel += ` (${provider.remainingCalls})`;
+        }
+        this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
