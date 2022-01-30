@@ -10281,7 +10281,7 @@ class DarkSky extends BaseProvider {
         };
     }
     get remainingCalls() {
-        return this.remainingQuota;
+        return null;
     }
     ;
     async GetWeather(loc) {
@@ -13549,15 +13549,16 @@ class AccuWeather extends BaseProvider {
             this.tier = "free";
     }
     ParseWeather(current, daily, hourly, loc) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         return {
             date: DateTime.fromISO(current.LocalObservationDateTime),
             coord: {
                 lat: loc.GeoPosition.Latitude,
                 lon: loc.GeoPosition.Longitude
             },
-            dewPoint: CelsiusToKelvin(current.DewPoint.Metric.Value),
+            dewPoint: CelsiusToKelvin((_b = (_a = current.DewPoint) === null || _a === void 0 ? void 0 : _a.Metric) === null || _b === void 0 ? void 0 : _b.Value),
             humidity: current.RelativeHumidity,
-            pressure: current.Pressure.Metric.Value,
+            pressure: (_d = (_c = current.Pressure) === null || _c === void 0 ? void 0 : _c.Metric) === null || _d === void 0 ? void 0 : _d.Value,
             location: {
                 city: loc.LocalizedName,
                 country: loc.Country.LocalizedName,
@@ -13566,10 +13567,10 @@ class AccuWeather extends BaseProvider {
             },
             sunrise: DateTime.fromISO(daily.DailyForecasts[0].Sun.Rise),
             sunset: DateTime.fromISO(daily.DailyForecasts[0].Sun.Set),
-            temperature: CelsiusToKelvin(current.Temperature.Metric.Value),
+            temperature: CelsiusToKelvin((_f = (_e = current.Temperature) === null || _e === void 0 ? void 0 : _e.Metric) === null || _f === void 0 ? void 0 : _f.Value),
             wind: {
-                degree: current.Wind.Direction.Degrees,
-                speed: KPHtoMPS(current.Wind.Speed.Metric.Value),
+                degree: (_h = (_g = current.Wind) === null || _g === void 0 ? void 0 : _g.Direction) === null || _h === void 0 ? void 0 : _h.Degrees,
+                speed: KPHtoMPS((_l = (_k = (_j = current.Wind) === null || _j === void 0 ? void 0 : _j.Speed) === null || _k === void 0 ? void 0 : _k.Metric) === null || _l === void 0 ? void 0 : _l.Value),
             },
             condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
             hourlyForecasts: this.ParseHourly(hourly),
@@ -13577,7 +13578,7 @@ class AccuWeather extends BaseProvider {
         };
     }
     ParseHourly(hourly) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g;
         const hours = [];
         for (const hour of hourly) {
             let precipitation = undefined;
@@ -13587,21 +13588,21 @@ class AccuWeather extends BaseProvider {
                         precipitation = {
                             type: "rain",
                             chance: hour.RainProbability,
-                            volume: (_b = hour.Rain.Value) !== null && _b !== void 0 ? _b : undefined
+                            volume: (_c = (_b = hour === null || hour === void 0 ? void 0 : hour.Rain) === null || _b === void 0 ? void 0 : _b.Value) !== null && _c !== void 0 ? _c : undefined
                         };
                         break;
                     case "Snow":
                         precipitation = {
                             type: "snow",
                             chance: hour.SnowProbability,
-                            volume: (_c = hour.Snow.Value) !== null && _c !== void 0 ? _c : undefined
+                            volume: (_e = (_d = hour === null || hour === void 0 ? void 0 : hour.Snow) === null || _d === void 0 ? void 0 : _d.Value) !== null && _e !== void 0 ? _e : undefined
                         };
                         break;
                     case "Ice":
                         precipitation = {
                             type: "ice pellets",
                             chance: hour.IceProbability,
-                            volume: (_d = hour.Ice.Value) !== null && _d !== void 0 ? _d : undefined
+                            volume: (_g = (_f = hour === null || hour === void 0 ? void 0 : hour.Ice) === null || _f === void 0 ? void 0 : _f.Value) !== null && _g !== void 0 ? _g : undefined
                         };
                         break;
                 }
