@@ -30,6 +30,7 @@ You can also save locations what you entered manually and switch between them in
 | **Visual Crossing**     | Yes           | 15                    | 336                    | --                            |
 | **Tomorrow.io**         | Yes           | 15                    | 108                    | Previously known as Climacell |
 | **DarkSky**             | Yes           | 8                     | 168                    | Signups closed, will end 2022 |
+| **AccuWeather**         | Yes           | 5***                  | 12                     |                               |
 
 ### OpenWeatherMap
 
@@ -100,6 +101,14 @@ Meteorological data from American weather technology company with headquarters i
 Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/)
 
 * **[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).**
+
+### AccuWeather
+
+Online Service from AccuWeather is a global weather source. [AccuWeather Website](https://www.accuweather.com/)
+
+* With the free plan, there are only a very limited number of calls for a day, which will be displayed in the applet menu. 
+- ***Number of available hours and days are specified for the free plan, paid plans allow more.
+- API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you mus add a new App. When it's created Click on the App and the key will be displayed.
 
 ## Usage of "Override label on panel" setting
 
