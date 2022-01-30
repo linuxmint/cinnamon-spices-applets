@@ -115,9 +115,9 @@ export class AccuWeather extends BaseProvider {
                 lat: loc.GeoPosition.Latitude,
                 lon: loc.GeoPosition.Longitude
             },
-            dewPoint: CelsiusToKelvin(current.DewPoint.Metric.Value),
+            dewPoint: CelsiusToKelvin(current.DewPoint?.Metric?.Value),
             humidity: current.RelativeHumidity,
-            pressure: current.Pressure.Metric.Value,
+            pressure: current.Pressure?.Metric?.Value,
             location: {
                 city: loc.LocalizedName,
                 country: loc.Country.LocalizedName,
@@ -126,10 +126,10 @@ export class AccuWeather extends BaseProvider {
             },
             sunrise: DateTime.fromISO(daily.DailyForecasts[0].Sun.Rise),
             sunset: DateTime.fromISO(daily.DailyForecasts[0].Sun.Set),
-            temperature: CelsiusToKelvin(current.Temperature.Metric.Value),
+            temperature: CelsiusToKelvin(current.Temperature?.Metric?.Value),
             wind: {
-                degree: current.Wind.Direction.Degrees,
-                speed: KPHtoMPS(current.Wind.Speed.Metric.Value),
+                degree: current.Wind?.Direction?.Degrees,
+                speed: KPHtoMPS(current.Wind?.Speed?.Metric?.Value),
             },
             condition: {
                 ...this.ResolveIcons(current.WeatherIcon, current.IsDayTime),
@@ -151,21 +151,21 @@ export class AccuWeather extends BaseProvider {
                         precipitation = {
                             type: "rain",
                             chance: hour.RainProbability!,
-                            volume: hour.Rain.Value ?? undefined
+                            volume: hour?.Rain?.Value ?? undefined
                         }
                         break;
                     case "Snow":
                         precipitation = {
                             type: "snow",
                             chance: hour.SnowProbability!,
-                            volume: hour.Snow.Value ?? undefined
+                            volume: hour?.Snow?.Value ?? undefined
                         }
                         break;
                     case "Ice":
                         precipitation = {
                             type: "ice pellets",
                             chance: hour.IceProbability!,
-                            volume: hour.Ice.Value ?? undefined
+                            volume: hour?.Ice?.Value ?? undefined
                         }
                         break;
                 }
