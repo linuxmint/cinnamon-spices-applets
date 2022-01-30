@@ -103,22 +103,22 @@ Online Service from The Dark Sky Company in the US that specializes in weather f
 
 ## Usage of "Override label on panel" setting
 
-The setting allows you to make the applet display basically anything in the form of text. In addition, it exposes a number of values for you to use as you like. These will be replaced with the actual values when typed. The full text-to-value mapping can be found below.
+The setting allows you to make the applet display basically anything in the form of text in the panel. In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
 
-| Text to enter     | Mapped value                                          |
-| ----------------- | ----------------------------------------------------- |
-| `{t}`             | Temperature value                                     |
-| `{u}`             | Temperature unit                                      |
-| `{c}`             | Short condition text                                  |
-| `{c_long}`        | Long condition text (same as short if not available)  |
-| `{dew_point}`     | Dew point value                                       |
-| `{humidity}`      | Humidity value (always as percent)                    |
-| `{pressure}`      | Pressure value                                        |
-| `{pressure_unit}` | Pressure unit                                         |
-| `{extra_value}`   | API specific value (usually Feels Like or Cloudiness) |
-| `{extra_name}`    | API specific value's name                             |
-| `{wind_speed}`    | Wind speed with unit                                  |
-| `{wind_dir}`      | Wind direction in text format (NW, etc)               |
+| Text to enter     | Mapped value                                              |
+| ----------------- | --------------------------------------------------------- |
+| `{t}`             | Temperature value                                         |
+| `{u}`             | Temperature unit                                          |
+| `{c}`             | Short condition text                                      |
+| `{c_long}`        | Long condition text (same as short if not available)      |
+| `{dew_point}`     | Dew point value                                           |
+| `{humidity}`      | Humidity value (always as percent)                        |
+| `{pressure}`      | Pressure value                                            |
+| `{pressure_unit}` | Pressure unit                                             |
+| `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") |
+| `{extra_name}`    | API specific value's name                                 |
+| `{wind_speed}`    | Wind speed with unit                                      |
+| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
 
 ## Versions
 
