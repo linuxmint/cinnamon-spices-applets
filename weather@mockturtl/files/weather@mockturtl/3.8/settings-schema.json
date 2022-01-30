@@ -334,7 +334,7 @@
 		"type": "entry",
 		"default": "",
 		"description": "Override label on panel",
-		"tooltip": "Available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
 	},
 	"useCustomAppletIcons": {
 		"type": "checkbox",

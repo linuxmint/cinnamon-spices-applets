@@ -78,7 +78,7 @@ const Keys = {
 	TRANSLATE_CONDITION: "translateCondition",
 	VERTICAL_ORIENTATION: "verticalOrientation",
 	SHOW_TEXT_IN_PANEL: "showTextInPanel",
-	TEMP_TEXT_OVERRIDE: "tempTextOverride",
+	//TEMP_TEXT_OVERRIDE: "tempTextOverride",
 	SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
 	SHOW_SUNRISE: "showSunrise",
 	SHOW_24HOURS: "show24Hours",
@@ -222,6 +222,9 @@ export class Config {
 		// Settings what need special care
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+
+		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
+			this.app.RefreshLabel)
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);

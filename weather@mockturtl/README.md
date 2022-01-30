@@ -19,17 +19,17 @@ You can also save locations what you entered manually and switch between them in
 
 ## Weather providers to choose from
 
-| Weather Providers       | Needs API key | Maximum Forecast Days     | Maximum Forecast Hours | Other information             |
-| ----------------------- | ------------- | ------------------------- | ---------------------- | ----------------------------- |
-| **OpenWeatherMap**      | No            | 8                         | 48                     | Default provider              |
-| **MET Norway**          | No            | 10                        | 48                     | --                            |
-| **DMI Denmark**         | No            | 10                        | 48                     | --                            |
-| **Met Office UK**       | No            | 5                         | 36                     | --                            |
-| **US National Weather** | No            | 7                         | 156                    | --                            |
-| **WeatherBit**          | Yes           | 16                        | 0**                    | --                            |
-| **Visual Crossing**     | Yes           | 15                        | 336                    | --                            |
-| **Tomorrow.io**         | Yes           | 15                        | 108                    | Previously known as Climacell |
-| **DarkSky**             | Yes           | 8                         | 168                    | Signups closed, will end 2022 |
+| Weather Providers       | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Other information             |
+| ----------------------- | ------------- | --------------------- | ---------------------- | ----------------------------- |
+| **OpenWeatherMap**      | No            | 8                     | 48                     | Default provider              |
+| **MET Norway**          | No            | 10                    | 48                     | --                            |
+| **DMI Denmark**         | No            | 10                    | 48                     | --                            |
+| **Met Office UK**       | No            | 5                     | 36                     | --                            |
+| **US National Weather** | No            | 7                     | 156                    | --                            |
+| **WeatherBit**          | Yes           | 16                    | 0**                    | --                            |
+| **Visual Crossing**     | Yes           | 15                    | 336                    | --                            |
+| **Tomorrow.io**         | Yes           | 15                    | 108                    | Previously known as Climacell |
+| **DarkSky**             | Yes           | 8                     | 168                    | Signups closed, will end 2022 |
 
 ### OpenWeatherMap
 
@@ -101,6 +101,25 @@ Online Service from The Dark Sky Company in the US that specializes in weather f
 
 * **[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).**
 
+## Usage of "Override label on panel" setting
+
+The setting allows you to make the applet display basically anything in the form of text. In addition, it exposes a number of values for you to use as you like. These will be replaced with the actual values when typed. The full text-to-value mapping can be found below.
+
+| Text to enter     | Mapped value                                          |
+| ----------------- | ----------------------------------------------------- |
+| `{t}`             | Temperature value                                     |
+| `{u}`             | Temperature unit                                      |
+| `{c}`             | Short condition text                                  |
+| `{c_long}`        | Long condition text (same as short if not available)  |
+| `{dew_point}`     | Dew point value                                       |
+| `{humidity}`      | Humidity value (always as percent)                    |
+| `{pressure}`      | Pressure value                                        |
+| `{pressure_unit}` | Pressure unit                                         |
+| `{extra_value}`   | API specific value (usually Feels Like or Cloudiness) |
+| `{extra_name}`    | API specific value's name                             |
+| `{wind_speed}`    | Wind speed with unit                                  |
+| `{wind_dir}`      | Wind direction in text format (NW, etc)               |
+
 ## Versions
 
 *Versions are automatically selected based on you Cinnamon's version*
@@ -118,7 +137,7 @@ http://groups.google.com/group/cinnamon-weather
 
 ## Future Plans
 
-* None at the moment, I can take requests for provider integrations or for new features
+* Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 
 
 ## Language Translations
 

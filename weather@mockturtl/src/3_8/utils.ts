@@ -1,6 +1,6 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -202,14 +202,28 @@ export function LocalizedColon(locale: string | null): string {
 	return ":"
 }
 
-export function PercentToLocale(humidity: number, locale: string | null): string {
-	return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
+export function PercentToLocale(humidity: number, locale: string | null, withUnit: boolean = true): string {
+	if (withUnit)
+		return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
+	else
+		return Math.round(humidity).toString();
 }
 
 // Conversion Factors
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629
 const WEATHER_CONV_KPH_IN_MPS = 3.6
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
+
+export function ExtraFieldToUserUnits(extra_field: APIUniqueField, config: Config, withUnit: boolean = false): string {
+	switch (extra_field.type) {
+		case "percent":
+			return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+		case "temperature":
+			return TempToUserConfig(extra_field.value, config, withUnit);
+		default:
+			return _(extra_field.value);
+	}
+}
 
 export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): string {
 	// Override wind units with our preference, takes Meter/Second wind speed
@@ -271,6 +285,8 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 }
 
 // Conversion from Kelvin
+export function TempToUserConfig(kelvin: number, config: Config, withUnit?: boolean): string;
+export function TempToUserConfig(kelvin: number | null, config: Config, withUnit?: boolean): string | null;
 export function TempToUserConfig(kelvin: number | null, config: Config, withUnit: boolean = true): string | null {
 	if (kelvin == null)
 		return null;
@@ -376,17 +392,23 @@ export function KPHtoMPS(speed: number | null): number {
 	return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 
+export function CelsiusToKelvin(celsius: number): number;
+export function CelsiusToKelvin(celsius: number | null): number | null;
 export function CelsiusToKelvin(celsius: number | null): number | null {
 	if (celsius == null) return null;
 	return (celsius + 273.15);
 }
 
+export function FahrenheitToKelvin(fahrenheit: number): number;
+export function FahrenheitToKelvin(fahrenheit: number | null): number | null;
 export function FahrenheitToKelvin(fahrenheit: number | null): number | null {
 	if (fahrenheit == null) return null;
 	return ((fahrenheit - 32) / 1.8 + 273.15);
 };
 
-export function MPHtoMPS(speed: number): number | null {
+export function MPHtoMPS(speed: number): number;
+export function MPHtoMPS(speed: number | null): number | null;
+export function MPHtoMPS(speed: number | null): number | null {
 	if (speed == null || speed == undefined) return null;
 	return speed * 0.44704;
 }
@@ -395,7 +417,9 @@ export function KmToM(km: number): number {
 	return km * 0.6213712;
 }
 
-export function CompassToDeg(compass: string): number | null {
+export function CompassToDeg(compass: string): number;
+export function CompassToDeg(compass: string | null): number | null;
+export function CompassToDeg(compass: string | null): number | null {
 	if (!compass) return null;
 	compass = compass.toUpperCase();
 	switch (compass) {
@@ -433,9 +457,7 @@ export function CompassDirection(deg: number): ArrowIcons {
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
-export function CompassDirectionText(deg: number): string | null {
-	if (!deg)
-		return null;
+export function CompassDirectionText(deg: number): string {
 	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }

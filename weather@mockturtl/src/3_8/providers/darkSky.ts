@@ -357,7 +357,7 @@ export class DarkSky extends BaseProvider {
 		}
 	};
 
-	private ToKelvin(temp: number): number | null {
+	private ToKelvin(temp: number): number {
 		if (this.unit == 'us') {
 			return FahrenheitToKelvin(temp);
 		}
@@ -367,7 +367,7 @@ export class DarkSky extends BaseProvider {
 
 	};
 
-	private ToMPS(speed: number): number | null {
+	private ToMPS(speed: number): number {
 		if (this.unit == 'si') {
 			return speed;
 		}

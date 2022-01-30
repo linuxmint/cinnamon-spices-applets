@@ -8645,12 +8645,25 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PercentToLocale(humidity, locale) {
-    return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+function PercentToLocale(humidity, locale, withUnit = true) {
+    if (withUnit)
+        return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+    else
+        return Math.round(humidity).toString();
 }
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
+function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
+    switch (extra_field.type) {
+        case "percent":
+            return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+        case "temperature":
+            return TempToUserConfig(extra_field.value, config, withUnit);
+        default:
+            return _(extra_field.value);
+    }
+}
 function MPStoUserUnits(mps, units) {
     switch (units) {
         case "mph":
@@ -8846,8 +8859,6 @@ function CompassDirection(deg) {
     return directions[Math.round(deg / 45) % directions.length];
 }
 function CompassDirectionText(deg) {
-    if (!deg)
-        return null;
     const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 }
@@ -13826,7 +13837,6 @@ const Keys = {
     TRANSLATE_CONDITION: "translateCondition",
     VERTICAL_ORIENTATION: "verticalOrientation",
     SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    TEMP_TEXT_OVERRIDE: "tempTextOverride",
     SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
     SHOW_SUNRISE: "showSunrise",
     SHOW_24HOURS: "show24Hours",
@@ -13919,6 +13929,7 @@ class Config {
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bind("tempTextOverride", "_" + "tempTextOverride", this.app.RefreshLabel);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
@@ -15601,6 +15612,7 @@ class WeatherApplet extends TextIconApplet {
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
         this.online = null;
+        this.currentWeatherInfo = null;
         this.OnNetworkConnectivityChanged = () => {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
@@ -15620,6 +15632,11 @@ class WeatherApplet extends TextIconApplet {
                     this.online = false;
                     break;
             }
+        };
+        this.RefreshLabel = () => {
+            if (this.currentWeatherInfo == null)
+                return;
+            this.DisplayWeatherOnLabel(this.currentWeatherInfo);
         };
         this.saveLog = async () => {
             var _a;
@@ -15759,6 +15776,7 @@ class WeatherApplet extends TextIconApplet {
             }
             logger_Logger.Info("Weather Information refreshed");
             this.loop.ResetErrorCount();
+            this.currentWeatherInfo = weatherInfo;
             this.Unlock();
             return "success";
         }
@@ -15774,13 +15792,14 @@ class WeatherApplet extends TextIconApplet {
         const location = GenerateLocationText(weather, this.config);
         const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
         this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
-        this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+        this.DisplayWeatherOnLabel(weather);
         this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
         return true;
     }
-    DisplayWeatherOnLabel(temperature, mainCondition) {
-        var _a, _b;
-        mainCondition = CapitalizeFirstLetter(mainCondition);
+    DisplayWeatherOnLabel(weather) {
+        var _a, _b, _c, _d, _e;
+        const temperature = weather.temperature;
+        const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
         if (this.Orientation != main_Side.LEFT && this.Orientation != main_Side.RIGHT) {
             if (this.config._showCommentInPanel) {
@@ -15803,9 +15822,18 @@ class WeatherApplet extends TextIconApplet {
         }
         if (NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
-                .replace("{t}", (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
-                .replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
-                .replace("{c}", mainCondition);
+                .replace(/{t}/g, (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
+                .replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
+                .replace(/{c}/g, mainCondition)
+                .replace(/{c_long}/g, weather.condition.description)
+                .replace(/{dew_point}/g, (_c = TempToUserConfig(weather.dewPoint, this.config, false)) !== null && _c !== void 0 ? _c : "")
+                .replace(/{humidity}/g, (_e = (_d = weather.humidity) === null || _d === void 0 ? void 0 : _d.toString()) !== null && _e !== void 0 ? _e : "")
+                .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
+                .replace(/{pressure_unit}/g, this.config._pressureUnit)
+                .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
+                .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+                .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
+                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
         }
         this.SetAppletLabel(label);
     }
