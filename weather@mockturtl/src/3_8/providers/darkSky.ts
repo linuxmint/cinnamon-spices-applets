@@ -30,7 +30,10 @@ export class DarkSky extends BaseProvider {
 
 	private remainingQuota: number | null = null;
 	public get remainingCalls(): number | null {
-		return this.remainingQuota;
+		// Disable this for now, this feature is only really useful for AccuWeather
+		// TODO: when a better place is found for this value add this back 
+		return null;
+		//return this.remainingQuota;
 	};
 
 	private descriptionLineLength = 25;
