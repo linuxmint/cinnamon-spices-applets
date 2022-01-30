@@ -3,9 +3,10 @@
 ## 3.2.0
 
 * Add requested AccuWeather as a provider
-* Add ability to display remaining number of calls in the UI
+* Add ability to display remaining number of calls in the UI (where applicable)
 * Fix issue where the applet would display more hourly boxes than available data
 * Improve HttpLib flexibility and type checking
+* Add better support for "Override label on panel" setting
 
 ## 3.1.9
 
